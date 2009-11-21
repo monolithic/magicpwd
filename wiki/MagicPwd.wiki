@@ -1,0 +1,15 @@
+#summary One-sentence summary of this page.
+#labels Featured
+
+= Introduction =
+
+开放源代码的跨平台密码管理软件。
+
+
+= Details =
+    魔方密码是一款开放源代码的跨平台密码管理软件，100%纯Java语言开发，其主要目标是在充分保障用户数据安全的基础上，做到同一数据能够方便的在多种操作平台上使用，软件采用目前国际上通用的标准商用加密算法保证您的数据机密性，支持随机密码生成，支持完全用户自定义数据，您可以根据自己的喜好及习惯定义密码类别及属性。
+
+Add your content here.  Format your content with:
+  * Text in *bold* or _italic_
+  * Headings, paragraphs, and lists
+  * Automatic links to other wiki pages
