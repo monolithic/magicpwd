@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Main-Class: com.magicpwd.MagicPwd
+SplashScreen-Image: startup.png
+Created-By: 1.6.0_03-b05 (Sun Microsystems Inc.)
+Class-Path: lib/hsqldb.jar
+Sealed: true
+
