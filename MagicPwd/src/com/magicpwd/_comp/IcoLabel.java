@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.KeyStroke;
 
 /**
- * @author amon
+ * @author Amon
  * 
  */
 public class IcoLabel extends JLabel

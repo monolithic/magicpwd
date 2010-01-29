@@ -22,7 +22,7 @@ import com.magicpwd._util.Util;
 import com.magicpwd.d.DBA3000;
 
 /**
- * @author amon
+ * @author Amon
  * 
  */
 public class GridMdl extends DefaultTableModel

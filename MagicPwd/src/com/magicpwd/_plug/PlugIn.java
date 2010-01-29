@@ -6,7 +6,7 @@ package com.magicpwd._plug;
 
 /**
  *
- * @author amon
+ * @author Amon
  */
 public interface PlugIn
 {

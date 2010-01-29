@@ -1,9 +1,4 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * Data.java
  *
  * Created on 2009-11-17, 9:39:19
@@ -13,7 +8,7 @@ package test.draw.v;
 
 /**
  *
- * @author yihaodian
+ * @author Amon
  */
 public class Edit extends javax.swing.JPanel {
 

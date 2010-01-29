@@ -14,7 +14,7 @@ import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 /**
- * @author amon
+ * @author Amon
  * 
  */
 public class Jzip

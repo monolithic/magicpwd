@@ -29,7 +29,7 @@ import java.util.List;
 
 /**
  *
- * @author amon
+ * @author Amon
  */
 public class DBA3000 {
 

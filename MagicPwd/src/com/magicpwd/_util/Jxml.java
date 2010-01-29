@@ -21,7 +21,7 @@ import org.dom4j.io.XMLWriter;
 
 /**
  *
- * @author yihaodian
+ * @author Amon
  */
 public class Jxml
 {

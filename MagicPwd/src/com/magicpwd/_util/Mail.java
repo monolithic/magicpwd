@@ -34,7 +34,7 @@ import javax.mail.internet.MimeMultipart;
 
 /**
  *
- * @author Administrator
+ * @author Amon
  */
 public class Mail
 {

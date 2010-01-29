@@ -1,9 +1,4 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * Main.java
  *
  * Created on 2009-11-16, 13:57:42
@@ -13,7 +8,7 @@ package test.draw.v;
 
 /**
  *
- * @author yihaodian
+ * @author Amon
  */
 public class Main extends javax.swing.JFrame {
 

@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author yihaodian
+ * @author Amon
  */
 public class Area extends javax.swing.JPanel {
     private javax.swing.JLabel lb_PropName;

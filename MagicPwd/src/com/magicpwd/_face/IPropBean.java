@@ -6,7 +6,7 @@ package com.magicpwd._face;
 
 /**
  *
- * @author amon
+ * @author Amon
  */
 public interface IPropBean
 {

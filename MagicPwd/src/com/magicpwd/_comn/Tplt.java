@@ -6,7 +6,7 @@ package com.magicpwd._comn;
 
 /**
  *
- * @author amon
+ * @author Amon
  */
 public class Tplt
 {

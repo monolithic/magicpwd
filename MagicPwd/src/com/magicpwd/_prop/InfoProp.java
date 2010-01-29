@@ -14,7 +14,7 @@ import java.util.Calendar;
 
 /**
  *
- * @author amon
+ * @author Amon
  */
 public class InfoProp extends javax.swing.JPanel implements IPropBean
 {

@@ -18,7 +18,7 @@ import com.magicpwd.v.EditBox;
 /**
  * 属性：日期
  * 键值：ConsEnv.INDX_DATE
- * @author amon
+ * @author Amon
  */
 public class DateBean extends javax.swing.JPanel implements IEditBean {
 

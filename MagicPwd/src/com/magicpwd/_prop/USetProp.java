@@ -19,7 +19,7 @@ import com.magicpwd._util.Util;
 import com.magicpwd.m.UserMdl;
 
 /**
- * @author amon
+ * @author Amon
  * 
  */
 public class USetProp extends JPanel implements IPropBean

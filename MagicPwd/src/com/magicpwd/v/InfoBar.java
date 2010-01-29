@@ -12,7 +12,6 @@ import java.util.List;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-import com.magicpwd._comn.S1SD;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
@@ -25,7 +24,7 @@ import java.util.Calendar;
 import javax.swing.Timer;
 
 /**
- * @author amon
+ * @author Amon
  */
 public class InfoBar extends JPanel
 {

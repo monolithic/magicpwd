@@ -5,7 +5,7 @@
 package com.magicpwd._cons;
 
 /**
- * @author amon
+ * @author Amon
  * 
  */
 public interface ConsDat

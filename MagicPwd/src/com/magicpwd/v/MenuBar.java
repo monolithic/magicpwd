@@ -18,7 +18,7 @@ import com.magicpwd.m.UserMdl;
 import com.magicpwd.x.MdiDialog;
 
 /**
- * @author amon
+ * @author Amon
  * 
  */
 public class MenuBar extends JMenuBar

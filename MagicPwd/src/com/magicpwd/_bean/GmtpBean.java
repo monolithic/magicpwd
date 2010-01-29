@@ -19,7 +19,7 @@ import com.magicpwd.v.EditBox;
 
 /**
  *
- * @author amon
+ * @author Amon
  */
 public class GmtpBean extends javax.swing.JPanel implements IEditBean {
 

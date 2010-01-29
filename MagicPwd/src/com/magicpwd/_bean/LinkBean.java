@@ -19,7 +19,7 @@ import com.magicpwd.v.EditBox;
 /**
  * 属性：链接
  * 键值：ConsEnv.INDX_LINK
- * @author amon
+ * @author Amon
  * 
  */
 public class LinkBean extends javax.swing.JPanel implements IEditBean

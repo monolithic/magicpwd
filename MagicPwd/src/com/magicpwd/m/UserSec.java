@@ -24,7 +24,7 @@ import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 
 /**
- * @author amon
+ * @author Amon
  * 
  */
 final class UserSec implements Key

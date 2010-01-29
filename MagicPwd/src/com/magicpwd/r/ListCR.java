@@ -14,7 +14,7 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 
 /**
- * @author amon
+ * @author Amon
  * 
  */
 public class ListCR extends JLabel implements javax.swing.ListCellRenderer

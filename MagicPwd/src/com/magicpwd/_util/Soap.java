@@ -6,7 +6,7 @@ package com.magicpwd._util;
 
 /**
  *
- * @author Administrator
+ * @author Amon
  */
 public class Soap
 {

@@ -11,7 +11,7 @@ import javax.crypto.Cipher;
 
 /**
  * 口令信息
- * @author amon
+ * @author Amon
  */
 public final class Keys implements Serializable
 {

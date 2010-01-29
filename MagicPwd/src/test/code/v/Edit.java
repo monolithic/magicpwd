@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author yihaodian
+ * @author Amon
  */
 public class Edit extends JPanel {
 

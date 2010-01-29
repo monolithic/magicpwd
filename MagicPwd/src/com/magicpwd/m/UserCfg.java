@@ -17,7 +17,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Logs;
 
 /**
- * @author amon
+ * @author Amon
  * 
  */
 public final class UserCfg

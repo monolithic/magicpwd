@@ -19,7 +19,7 @@ import com.magicpwd.v.EditBox;
 /**
  * 属性：邮件
  * 键值：ConsEnv.INDX_MAIL
- * @author amon
+ * @author Amon
  */
 public class MailBean extends javax.swing.JPanel implements IEditBean
 {

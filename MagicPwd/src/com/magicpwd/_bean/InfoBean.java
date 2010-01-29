@@ -13,7 +13,7 @@ import com.magicpwd._util.Util;
 /**
  * 属性：信息
  * 键值：ConsEnv.INDX_INFO
- * @author amon
+ * @author Amon
  */
 public class InfoBean extends javax.swing.JPanel implements IEditBean {
 

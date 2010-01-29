@@ -9,7 +9,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author yihaodian
+ * @author Amon
  */
 public class View extends javax.swing.JPanel {
 

@@ -42,11 +42,10 @@ import com.magicpwd.r.AmonFF;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd.c.MenuEvt;
 import com.magicpwd.m.UserMdl;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * @author amon
+ * @author Amon
  * 
  */
 public final class Util

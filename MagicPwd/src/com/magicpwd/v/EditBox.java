@@ -13,7 +13,7 @@ import com.magicpwd._util.Util;
 
 /**
  *
- * @author yihaodian
+ * @author Amon
  */
 public class EditBox extends javax.swing.JPanel {
 
