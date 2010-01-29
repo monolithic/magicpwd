@@ -39,7 +39,7 @@ public class Mail extends javax.swing.JPanel {
         tb_MailMsgs = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         ta_MailBody = new javax.swing.JTextArea();
-        lp_Operate = new javax.swing.JPanel();
+        load1 = new test.draw.v.Load();
 
         sp1.setDividerLocation(120);
         sp1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
@@ -75,17 +75,6 @@ public class Mail extends javax.swing.JPanel {
 
         sp1.setRightComponent(jScrollPane3);
 
-        javax.swing.GroupLayout lp_OperateLayout = new javax.swing.GroupLayout(lp_Operate);
-        lp_Operate.setLayout(lp_OperateLayout);
-        lp_OperateLayout.setHorizontalGroup(
-            lp_OperateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 380, Short.MAX_VALUE)
-        );
-        lp_OperateLayout.setVerticalGroup(
-            lp_OperateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,17 +82,17 @@ public class Mail extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(sp1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
-                    .addComponent(lp_Operate, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(sp1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+                    .addComponent(load1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(sp1, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lp_Operate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(sp1, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(load1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -113,7 +102,7 @@ public class Mail extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JPanel lp_Operate;
+    private test.draw.v.Load load1;
     private javax.swing.JTextArea ta_MailBody;
     private javax.swing.JTable tb_MailMsgs;
     private javax.swing.JTree tr_MailBoxs;
