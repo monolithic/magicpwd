@@ -4,7 +4,7 @@
 package com.magicpwd.m;
 
 /**
- * @author amon
+ * @author Amon
  * 
  */
 public class UserDat

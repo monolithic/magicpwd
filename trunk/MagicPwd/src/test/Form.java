@@ -1,9 +1,4 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * Form.java
  *
  * Created on 2009-11-7, 9:46:10
@@ -13,7 +8,7 @@ package test;
 
 /**
  *
- * @author amon
+ * @author Amon
  */
 public class Form extends javax.swing.JPanel {
 

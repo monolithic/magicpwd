@@ -10,7 +10,7 @@ import com.magicpwd._util.Lang;
 import com.magicpwd.c.ToolEvt;
 
 /**
- * @author amon
+ * @author Amon
  * 
  */
 public class MenuPop extends JPopupMenu

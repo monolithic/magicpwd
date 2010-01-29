@@ -15,7 +15,7 @@ import com.magicpwd.v.EditBox;
 /**
  * 属性：关键搜索
  * 键值：ConsEnv.INDX_META
- * @author amon
+ * @author Amon
  * 
  */
 public class MetaBean extends javax.swing.JPanel implements IEditBean {

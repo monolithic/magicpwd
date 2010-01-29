@@ -6,7 +6,7 @@ package com.magicpwd._face;
 import java.util.EventListener;
 
 /**
- * @author amon
+ * @author Amon
  * 
  */
 public interface IBackCall

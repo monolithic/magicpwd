@@ -13,7 +13,7 @@ import com.magicpwd.v.EditBox;
 /**
  * 属性：附注
  * 键值：ConsEnv.INDX_AREA
- * @author amon
+ * @author Amon
  */
 public class AreaBean extends javax.swing.JPanel implements IEditBean {
 

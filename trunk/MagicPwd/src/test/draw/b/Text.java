@@ -1,9 +1,4 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * Text.java
  *
  * Created on 2009-11-17, 10:39:04
@@ -13,7 +8,7 @@ package test.draw.b;
 
 /**
  *
- * @author yihaodian
+ * @author Amon
  */
 public class Text extends javax.swing.JPanel {
 

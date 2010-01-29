@@ -6,7 +6,7 @@ package com.magicpwd.u;
 
 /**
  *
- * @author amon
+ * @author Amon
  */
 public class DBU3000
 {

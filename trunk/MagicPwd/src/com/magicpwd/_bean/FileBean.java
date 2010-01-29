@@ -20,7 +20,7 @@ import com.magicpwd.v.EditBox;
 /**
  * 属性：附件
  * 键值：ConsEnv.INDX_FILE
- * @author amon
+ * @author Amon
  */
 public class FileBean extends javax.swing.JPanel implements IEditBean {
 

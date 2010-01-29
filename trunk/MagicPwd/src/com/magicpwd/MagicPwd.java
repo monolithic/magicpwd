@@ -21,7 +21,7 @@ import com.magicpwd.v.MiniPtn;
 import com.magicpwd.v.ToolBar;
 
 /**
- * @author amon
+ * @author Amon
  * 
  */
 public class MagicPwd extends javax.swing.JFrame

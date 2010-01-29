@@ -12,7 +12,7 @@ import com.magicpwd._cons.ConsDat;
 import com.magicpwd.d.DBA3000;
 
 /**
- * @author amon
+ * @author Amon
  * 
  */
 public class TreeMdl extends DefaultTreeModel

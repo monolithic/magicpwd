@@ -10,7 +10,7 @@ import java.net.URI;
 
 /**
  *
- * @author amon
+ * @author Amon
  */
 public class Desk
 {

@@ -10,7 +10,7 @@ import com.magicpwd._util.Lang;
 import com.magicpwd.c.FindEvt;
 
 /**
- * @author amon
+ * @author Amon
  * 
  */
 public class FindBar extends JPanel

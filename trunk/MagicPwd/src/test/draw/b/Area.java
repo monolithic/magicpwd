@@ -1,9 +1,4 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * Area.java
  *
  * Created on 2009-11-17, 9:50:18
@@ -13,7 +8,7 @@ package test.draw.b;
 
 /**
  *
- * @author yihaodian
+ * @author Amon
  */
 public class Area extends javax.swing.JPanel {
 

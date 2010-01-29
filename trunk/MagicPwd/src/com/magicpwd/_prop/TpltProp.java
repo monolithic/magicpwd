@@ -23,7 +23,7 @@ import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.UserMdl;
 
 /**
- * @author amon
+ * @author Amon
  * 
  */
 public class TpltProp extends javax.swing.JPanel implements IPropBean

@@ -14,7 +14,7 @@ import com.magicpwd.c.ToolEvt;
 import com.magicpwd.m.UserMdl;
 
 /**
- * @author amon
+ * @author Amon
  * 
  */
 public class ToolBar extends JToolBar

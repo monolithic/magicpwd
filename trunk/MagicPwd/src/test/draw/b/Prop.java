@@ -1,9 +1,4 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
  * Prop.java
  *
  * Created on 2009-11-17, 9:49:43
@@ -13,7 +8,7 @@ package test.draw.b;
 
 /**
  *
- * @author yihaodian
+ * @author Amon
  */
 public class Prop extends javax.swing.JPanel {
 

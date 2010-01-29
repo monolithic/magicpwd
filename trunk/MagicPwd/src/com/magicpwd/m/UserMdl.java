@@ -25,7 +25,7 @@ import com.magicpwd.d.DBA3000;
 import javax.crypto.Cipher;
 
 /**
- * @author amon
+ * @author Amon
  * 
  */
 public final class UserMdl

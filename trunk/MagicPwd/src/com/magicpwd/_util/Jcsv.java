@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import com.magicpwd._cons.ConsEnv;
 
 /**
- * @author amon
+ * @author Amon
  * 
  */
 public class Jcsv

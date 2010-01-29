@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 
 /**
- * @author amon
+ * @author Amon
  * 
  */
 public class ListMdl extends DefaultListModel

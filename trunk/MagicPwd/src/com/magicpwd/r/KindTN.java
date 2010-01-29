@@ -11,7 +11,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import com.magicpwd.d.DBA3000;
 
 /**
- * @author amon
+ * @author Amon
  * 
  */
 public class KindTN extends DefaultMutableTreeNode

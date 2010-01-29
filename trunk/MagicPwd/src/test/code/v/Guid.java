@@ -6,7 +6,7 @@ package test.code.v;
 
 /**
  *
- * @author yihaodian
+ * @author Amon
  */
 public class Guid extends javax.swing.JPanel {
 

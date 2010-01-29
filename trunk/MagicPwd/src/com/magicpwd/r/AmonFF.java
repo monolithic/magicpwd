@@ -6,11 +6,12 @@ package com.magicpwd.r;
 import java.io.File;
 
 /**
- * @author amon
+ * @author Amon
  * 
  */
 public class AmonFF implements java.io.FileFilter
 {
+    @Override
     public boolean accept(File pathname)
     {
         if (pathname.isDirectory())

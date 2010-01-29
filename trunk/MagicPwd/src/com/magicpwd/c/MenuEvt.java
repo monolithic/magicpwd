@@ -4,7 +4,7 @@
 package com.magicpwd.c;
 
 /**
- * @author amon
+ * @author Amon
  * 
  */
 public interface MenuEvt

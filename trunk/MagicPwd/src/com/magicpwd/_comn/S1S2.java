@@ -4,7 +4,7 @@
 package com.magicpwd._comn;
 
 /**
- * @author amon
+ * @author Amon
  * 
  */
 public class S1S2

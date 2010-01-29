@@ -20,7 +20,7 @@ import com.magicpwd.v.MenuPwd;
 /**
  * 属性：口令
  * 键值：ConsEnv.INDX_PWDS
- * @author amon
+ * @author Amon
  */
 public class PwdsBean extends javax.swing.JPanel implements IEditBean {
 

@@ -16,7 +16,7 @@ import com.magicpwd.v.EditBox;
 /**
  * 属性：文本
  * 键值：ConsEnv.INDX_TEXT
- * @author amon
+ * @author Amon
  */
 public class TextBean extends javax.swing.JPanel implements IEditBean {
 

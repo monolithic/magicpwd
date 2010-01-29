@@ -17,7 +17,7 @@ import java.awt.event.MouseEvent;
 
 /**
  *
- * @author Administrator
+ * @author Amon
  */
 public class TrayPtn
 {
