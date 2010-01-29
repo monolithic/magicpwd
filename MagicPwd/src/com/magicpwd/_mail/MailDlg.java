@@ -16,195 +16,209 @@ import javax.swing.tree.TreeModel;
  * 
  * @author Amon
  */
-public class MailDlg extends javax.swing.JFrame {
-	private TreeModel treeModel;
-	private DefaultMutableTreeNode rootNode;
-	private MailMdl tableMode;
+public class MailDlg extends javax.swing.JFrame
+{
 
-	public void initView() {
-		initCtrlView();
-		initEditView();
-		initBaseView();
-	}
+    private TreeModel treeModel;
+    private DefaultMutableTreeNode rootNode;
+    private MailMdl tableMode;
 
-	public void initLang() {
-		lb_MailHead.setText("Subject:");
-		lb_MailUser.setText("From:");
-		bt_Delete.setText("Delete");
-		bt_Download.setText("DownLoad");
-		bt_Replay.setText("Replay");
-	}
+    public void initView()
+    {
+        initCtrlView();
+        initEditView();
+        initBaseView();
+    }
 
-	public void initData() {
-		rootNode = new DefaultMutableTreeNode("邮箱列表");
-		treeModel = new DefaultTreeModel(rootNode);
-		tr_MailBoxs.setModel(treeModel);
-		tableMode = new MailMdl();
-		tb_MailMsgs.setModel(tableMode);
-	}
+    public void initLang()
+    {
+        lb_MailHead.setText("Subject:");
+        lb_MailUser.setText("From:");
+        bt_Delete.setText("Delete");
+        bt_Download.setText("DownLoad");
+        bt_Replay.setText("Replay");
+    }
 
-	public boolean append(Connect connect) {
-		try {
-			Session session = Session.getDefaultInstance(connect.getProperties(), null);
-			Store store = session.getStore(connect.getURLName());
-			store.connect();
+    public void initData()
+    {
+        rootNode = new DefaultMutableTreeNode("邮箱列表");
+        treeModel = new DefaultTreeModel(rootNode);
+        tr_MailBoxs.setModel(treeModel);
+        tableMode = new MailMdl();
+        tb_MailMsgs.setModel(tableMode);
+    }
 
-			Folder folder = store.getDefaultFolder();
-			rootNode.add(new NodeMdl(folder));
-			listFolders(rootNode, folder);
+    public boolean append(Connect connect)
+    {
+        try
+        {
+            Session session = Session.getDefaultInstance(connect.getProperties(), null);
+            Store store = session.getStore(connect.getURLName());
+            store.connect();
 
-			return true;
-		} catch (Exception exp) {
-			return false;
-		}
-	}
+            Folder folder = store.getDefaultFolder();
+            rootNode.add(new NodeMdl(folder));
+            listFolders(rootNode, folder);
 
-	private static void listFolders(DefaultMutableTreeNode node, Folder folder) throws Exception {
-		for (Folder sub : folder.list()) {
-			NodeMdl temp = new NodeMdl(sub);
-			node.add(temp);
-			if ((sub.getType() & Folder.HOLDS_FOLDERS) != 0) {
-				listFolders(temp, sub);
-			}
-		}
-	}
+            return true;
+        }
+        catch (Exception exp)
+        {
+            return false;
+        }
+    }
 
-	private void initCtrlView() {
-		pl_MailCtrl = new javax.swing.JPanel();
-		bt_Download = new javax.swing.JButton();
-		bt_Replay = new javax.swing.JButton();
-		bt_Delete = new javax.swing.JButton();
-		lb_MailInfo = new javax.swing.JLabel();
+    private static void listFolders(DefaultMutableTreeNode node, Folder folder) throws Exception
+    {
+        for (Folder sub : folder.list())
+        {
+            NodeMdl temp = new NodeMdl(sub);
+            node.add(temp);
+            if ((sub.getType() & Folder.HOLDS_FOLDERS) != 0)
+            {
+                listFolders(temp, sub);
+            }
+        }
+    }
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_MailCtrl);
-		pl_MailCtrl.setLayout(layout);
-		javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
-		hsg.addComponent(lb_MailInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE);
-		hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-		hsg.addComponent(bt_Delete);
-		hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-		hsg.addComponent(bt_Replay);
-		hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-		hsg.addComponent(bt_Download);
-		layout.setHorizontalGroup(hsg);
+    private void initCtrlView()
+    {
+        pl_MailCtrl = new javax.swing.JPanel();
+        bt_Download = new javax.swing.JButton();
+        bt_Replay = new javax.swing.JButton();
+        bt_Delete = new javax.swing.JButton();
+        lb_MailInfo = new javax.swing.JLabel();
 
-		javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
-		vpg.addComponent(bt_Download);
-		vpg.addComponent(bt_Replay);
-		vpg.addComponent(bt_Delete);
-		vpg.addComponent(lb_MailInfo);
-		layout.setVerticalGroup(vpg);
-	}
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_MailCtrl);
+        pl_MailCtrl.setLayout(layout);
+        javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
+        hsg.addComponent(lb_MailInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE);
+        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg.addComponent(bt_Delete);
+        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg.addComponent(bt_Replay);
+        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg.addComponent(bt_Download);
+        layout.setHorizontalGroup(hsg);
 
-	private void initEditView() {
-		pl_MailEdit = new javax.swing.JPanel();
-		lb_MailHead = new javax.swing.JLabel();
-		lb_MailUser = new javax.swing.JLabel();
-		tf_MailHead = new javax.swing.JTextField();
-		tf_MailUser = new javax.swing.JTextField();
-		javax.swing.JScrollPane sp1 = new javax.swing.JScrollPane();
-		ta_MailBody = new javax.swing.JTextArea();
+        javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg.addComponent(bt_Download);
+        vpg.addComponent(bt_Replay);
+        vpg.addComponent(bt_Delete);
+        vpg.addComponent(lb_MailInfo);
+        layout.setVerticalGroup(vpg);
+    }
 
-		ta_MailBody.setRows(5);
-		sp1.setViewportView(ta_MailBody);
+    private void initEditView()
+    {
+        pl_MailEdit = new javax.swing.JPanel();
+        lb_MailHead = new javax.swing.JLabel();
+        lb_MailUser = new javax.swing.JLabel();
+        tf_MailHead = new javax.swing.JTextField();
+        tf_MailUser = new javax.swing.JTextField();
+        javax.swing.JScrollPane sp1 = new javax.swing.JScrollPane();
+        ta_MailBody = new javax.swing.JTextArea();
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_MailEdit);
-		pl_MailEdit.setLayout(layout);
-		javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
-		hsg1.addComponent(lb_MailHead);
-		hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-		hsg1.addComponent(tf_MailHead, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE);
-		javax.swing.GroupLayout.SequentialGroup hsg2 = layout.createSequentialGroup();
-		hsg2.addComponent(lb_MailUser);
-		hsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-		hsg2.addComponent(tf_MailUser, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE);
-		javax.swing.GroupLayout.ParallelGroup hvg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
-		hvg.addGroup(javax.swing.GroupLayout.Alignment.LEADING, hsg1);
-		hvg.addGroup(javax.swing.GroupLayout.Alignment.LEADING, hsg2);
-		hvg.addComponent(sp1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE);
-		layout.setHorizontalGroup(hvg);
+        ta_MailBody.setRows(5);
+        sp1.setViewportView(ta_MailBody);
 
-		javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
-		vpg1.addComponent(lb_MailHead);
-		vpg1.addComponent(tf_MailHead, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-		javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
-		vpg2.addComponent(lb_MailUser);
-		vpg2.addComponent(tf_MailUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-		javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
-		vsg.addContainerGap();
-		vsg.addGroup(vpg1);
-		vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-		vsg.addGroup(vpg2);
-		vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-		vsg.addComponent(sp1, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE);
-		layout.setVerticalGroup(vsg);
-	}
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_MailEdit);
+        pl_MailEdit.setLayout(layout);
+        javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        hpg1.addComponent(lb_MailHead);
+        hpg1.addComponent(lb_MailUser);
+        javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        hpg2.addComponent(tf_MailHead, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE);
+        hpg2.addComponent(tf_MailUser, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE);
+        javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
+        hsg.addGroup(hpg1);
+        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg.addGroup(hpg2);
+        javax.swing.GroupLayout.ParallelGroup hvg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
+        hvg.addGroup(javax.swing.GroupLayout.Alignment.LEADING, hsg);
+        hvg.addComponent(sp1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE);
+        layout.setHorizontalGroup(hvg);
 
-	private void initBaseView() {
-		tr_MailBoxs = new javax.swing.JTree();
-		tb_MailMsgs = new javax.swing.JTable();
+        javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg1.addComponent(lb_MailHead);
+        vpg1.addComponent(tf_MailHead, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg2.addComponent(lb_MailUser);
+        vpg2.addComponent(tf_MailUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
+        vsg.addContainerGap();
+        vsg.addGroup(vpg1);
+        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg.addGroup(vpg2);
+        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg.addComponent(sp1, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE);
+        layout.setVerticalGroup(vsg);
+    }
 
-		javax.swing.JSplitPane sp1 = new javax.swing.JSplitPane();
-		sp1.setBorder(BorderFactory.createEmptyBorder());
-		sp1.setDividerLocation(120);
-		sp1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-		sp1.setOneTouchExpandable(true);
+    private void initBaseView()
+    {
+        tr_MailBoxs = new javax.swing.JTree();
+        tb_MailMsgs = new javax.swing.JTable();
 
-		javax.swing.JSplitPane sp2 = new javax.swing.JSplitPane();
-		sp2.setBorder(BorderFactory.createEmptyBorder());
-		sp2.setDividerLocation(120);
-		sp2.setOneTouchExpandable(true);
+        javax.swing.JSplitPane sp1 = new javax.swing.JSplitPane();
+        sp1.setBorder(BorderFactory.createEmptyBorder());
+        sp1.setDividerLocation(120);
+        sp1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        sp1.setOneTouchExpandable(true);
 
-		sp2.setLeftComponent(new javax.swing.JScrollPane(tr_MailBoxs));
-		sp2.setRightComponent(new javax.swing.JScrollPane(tb_MailMsgs));
+        javax.swing.JSplitPane sp2 = new javax.swing.JSplitPane();
+        sp2.setBorder(BorderFactory.createEmptyBorder());
+        sp2.setDividerLocation(120);
+        sp2.setOneTouchExpandable(true);
 
-		sp1.setTopComponent(sp2);
-		sp1.setBottomComponent(pl_MailEdit);
+        sp2.setLeftComponent(new javax.swing.JScrollPane(tr_MailBoxs));
+        sp2.setRightComponent(new javax.swing.JScrollPane(tb_MailMsgs));
 
-		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this.getContentPane());
-		this.getContentPane().setLayout(layout);
-		javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
-		hpg.addComponent(sp1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE);
-		hpg.addComponent(pl_MailCtrl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE);
-		javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
-		hsg.addContainerGap();
-		hsg.addGroup(hpg);
-		hsg.addContainerGap();
-		layout.setHorizontalGroup(hsg);
+        sp1.setTopComponent(sp2);
+        sp1.setBottomComponent(pl_MailEdit);
 
-		javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
-		vsg.addContainerGap();
-		vsg.addComponent(sp1, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE);
-		vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED);
-		vsg.addComponent(pl_MailCtrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-		vsg.addContainerGap();
-		layout.setVerticalGroup(vsg);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this.getContentPane());
+        this.getContentPane().setLayout(layout);
+        javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
+        hpg.addComponent(sp1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE);
+        hpg.addComponent(pl_MailCtrl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE);
+        javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
+        hsg.addContainerGap();
+        hsg.addGroup(hpg);
+        hsg.addContainerGap();
+        layout.setHorizontalGroup(hsg);
 
-		this.pack();
-		this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-	}
+        javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
+        vsg.addContainerGap();
+        vsg.addComponent(sp1, javax.swing.GroupLayout.DEFAULT_SIZE, 318, Short.MAX_VALUE);
+        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED);
+        vsg.addComponent(pl_MailCtrl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg.addContainerGap();
+        layout.setVerticalGroup(vsg);
 
-	public static void main(String[] args) {
-		MailDlg md = new MailDlg();
-		md.initView();
-		md.initLang();
-		md.initData();
-		md.setVisible(true);
-	}
+        this.pack();
+        this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+    }
 
-	private javax.swing.JTextArea ta_MailBody;
-	private javax.swing.JTable tb_MailMsgs;
-	private javax.swing.JTree tr_MailBoxs;
-
-	private javax.swing.JPanel pl_MailEdit;
-	private javax.swing.JLabel lb_MailHead;
-	private javax.swing.JLabel lb_MailUser;
-	private javax.swing.JTextField tf_MailHead;
-	private javax.swing.JTextField tf_MailUser;
-
-	private javax.swing.JPanel pl_MailCtrl;
-	private javax.swing.JButton bt_Delete;
-	private javax.swing.JButton bt_Download;
-	private javax.swing.JButton bt_Replay;
-	private javax.swing.JLabel lb_MailInfo;
+    public static void main(String[] args)
+    {
+        MailDlg md = new MailDlg();
+        md.initView();
+        md.initLang();
+        md.initData();
+        md.setVisible(true);
+    }
+    private javax.swing.JTextArea ta_MailBody;
+    private javax.swing.JTable tb_MailMsgs;
+    private javax.swing.JTree tr_MailBoxs;
+    private javax.swing.JPanel pl_MailEdit;
+    private javax.swing.JLabel lb_MailHead;
+    private javax.swing.JLabel lb_MailUser;
+    private javax.swing.JTextField tf_MailHead;
+    private javax.swing.JTextField tf_MailUser;
+    private javax.swing.JPanel pl_MailCtrl;
+    private javax.swing.JButton bt_Delete;
+    private javax.swing.JButton bt_Download;
+    private javax.swing.JButton bt_Replay;
+    private javax.swing.JLabel lb_MailInfo;
 }
