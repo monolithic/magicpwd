@@ -4,13 +4,18 @@
  */
 package com.magicpwd._mail;
 
+import com.magicpwd._util.Desk;
+import com.magicpwd._util.Logs;
+import com.magicpwd._util.Util;
+import java.awt.Point;
 import javax.mail.Folder;
-import javax.mail.Session;
 import javax.mail.Store;
 import javax.swing.BorderFactory;
+import javax.swing.UIManager;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
+import javax.swing.tree.TreePath;
 
 /**
  * 
@@ -32,11 +37,14 @@ public class MailDlg extends javax.swing.JFrame
 
     public void initLang()
     {
-        lb_MailHead.setText("Subject:");
-        lb_MailUser.setText("From:");
-        bt_Delete.setText("Delete");
-        bt_Download.setText("DownLoad");
-        bt_Replay.setText("Replay");
+        lb_MailHead.setText("标题：");
+        lb_MailUser.setText("收件人：");
+        bt_Delete.setText("删除(D)");
+        bt_Delete.setEnabled(false);
+        bt_Download.setText("下载(D)");
+        bt_Download.setEnabled(false);
+        bt_Replay.setText("回复(D)");
+        bt_Replay.setEnabled(false);
     }
 
     public void initData()
@@ -48,36 +56,58 @@ public class MailDlg extends javax.swing.JFrame
         tb_MailMsgs.setModel(tableMode);
     }
 
-    public boolean append(Connect connect)
+    public boolean append(Connect connect, String folder)
     {
+        Store store = null;
         try
         {
-            Session session = Session.getDefaultInstance(connect.getProperties(), null);
-            Store store = session.getStore(connect.getURLName());
-            store.connect();
-
-            Folder folder = store.getDefaultFolder();
-            rootNode.add(new NodeMdl(folder));
-            listFolders(rootNode, folder);
-
+            store = connect.getStore();
+            Folder f = (Util.isValidate(folder) ? store.getFolder(folder) : store.getDefaultFolder());
+            NodeMdl model = new NodeMdl(connect, f);
+            rootNode.add(model);
+            listFolders(connect, model, f);
+            TreePath path = new TreePath(new DefaultMutableTreeNode[]
+                    {
+                        rootNode, model
+                    });
+            tr_MailBoxs.setSelectionPath(path);
+//            tr_MailBoxs.fireTreeExpanded(path);
             return true;
         }
         catch (Exception exp)
         {
+            Logs.exception(exp);
             return false;
+        }
+        finally
+        {
+            if (store != null)
+            {
+                try
+                {
+                    store.close();
+                }
+                catch (Exception ex)
+                {
+                    Logs.exception(ex);
+                }
+            }
         }
     }
 
-    private static void listFolders(DefaultMutableTreeNode node, Folder folder) throws Exception
+    private static void listFolders(Connect connect, DefaultMutableTreeNode node, Folder folder) throws Exception
     {
         for (Folder sub : folder.list())
         {
-            NodeMdl temp = new NodeMdl(sub);
+            sub.open(Folder.READ_ONLY);
+            NodeMdl temp = new NodeMdl(connect, sub);
             node.add(temp);
+            System.out.println(sub.getFullName());
             if ((sub.getType() & Folder.HOLDS_FOLDERS) != 0)
             {
-                listFolders(temp, sub);
+                listFolders(connect, temp, sub);
             }
+            sub.close(false);
         }
     }
 
@@ -117,19 +147,32 @@ public class MailDlg extends javax.swing.JFrame
         tf_MailHead = new javax.swing.JTextField();
         tf_MailUser = new javax.swing.JTextField();
         javax.swing.JScrollPane sp1 = new javax.swing.JScrollPane();
-        ta_MailBody = new javax.swing.JTextArea();
+        ta_MailBody = new javax.swing.JEditorPane();
 
-        ta_MailBody.setRows(5);
+        lb_MailUser.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+
+        lb_MailHead.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+
+        ta_MailBody.addHyperlinkListener(new javax.swing.event.HyperlinkListener()
+        {
+
+            @Override
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent evt)
+            {
+                ta_MailBodyHyperlinkUpdate(evt);
+            }
+        });
+        ta_MailBody.setEditable(false);
         sp1.setViewportView(ta_MailBody);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_MailEdit);
         pl_MailEdit.setLayout(layout);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg1.addComponent(lb_MailHead);
-        hpg1.addComponent(lb_MailUser);
+        hpg1.addComponent(lb_MailHead, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, 80);
+        hpg1.addComponent(lb_MailUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, 80);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg2.addComponent(tf_MailHead, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE);
-        hpg2.addComponent(tf_MailUser, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE);
+        hpg2.addComponent(tf_MailHead, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        hpg2.addComponent(tf_MailUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addGroup(hpg1);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -168,10 +211,37 @@ public class MailDlg extends javax.swing.JFrame
 
         javax.swing.JSplitPane sp2 = new javax.swing.JSplitPane();
         sp2.setBorder(BorderFactory.createEmptyBorder());
-        sp2.setDividerLocation(120);
+        sp2.setDividerLocation(180);
         sp2.setOneTouchExpandable(true);
 
+        tr_MailBoxs.getSelectionModel().setSelectionMode(javax.swing.tree.TreeSelectionModel.SINGLE_TREE_SELECTION);
+        tr_MailBoxs.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                tr_MailBoxsMouseClicked(evt);
+            }
+
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tr_MailBoxsMouseReleased(evt);
+            }
+        });
         sp2.setLeftComponent(new javax.swing.JScrollPane(tr_MailBoxs));
+
+        tb_MailMsgs.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tb_MailMsgs.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                tb_MailMsgsMouseReleased(evt);
+            }
+        });
         sp2.setRightComponent(new javax.swing.JScrollPane(tb_MailMsgs));
 
         sp1.setTopComponent(sp2);
@@ -200,15 +270,99 @@ public class MailDlg extends javax.swing.JFrame
         this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
     }
 
+    private void tr_MailBoxsMouseClicked(java.awt.event.MouseEvent evt)
+    {
+        if (evt.getClickCount() < 2)
+        {
+            return;
+        }
+
+        TreePath path = tr_MailBoxs.getSelectionPath();
+        if (path == null)
+        {
+            return;
+        }
+        Object obj = path.getLastPathComponent();
+        if (!(obj instanceof NodeMdl))
+        {
+            return;
+        }
+        NodeMdl node = (NodeMdl) obj;
+        try
+        {
+            Store store = node.getConnect().getStore();
+            tableMode.loadMsg(store.getFolder(node.getKeyWord()));
+            store.close();
+        }
+        catch (Exception ex)
+        {
+            Logs.exception(ex);
+        }
+    }
+
+    private void tr_MailBoxsMouseReleased(java.awt.event.MouseEvent evt)
+    {
+        Point p = evt.getPoint();
+        TreePath path = tr_MailBoxs.getPathForLocation(p.x, p.y);
+//        tr_MailBoxs.setSelectionPath(path);
+        if (path != null)
+        {
+            Object obj = path.getLastPathComponent();
+            if ((obj instanceof NodeMdl) && evt.isPopupTrigger())
+            {
+            }
+        }
+    }
+
+    private void tb_MailMsgsMouseReleased(java.awt.event.MouseEvent evt)
+    {
+        try
+        {
+            MailInf mail = tableMode.getMailInf(tb_MailMsgs.getSelectedRow());
+            ta_MailBody.setContentType(mail.getContentType());
+            tf_MailHead.setText(mail.getSubject());
+            tf_MailUser.setText(mail.getMailAddress("TO"));
+            ta_MailBody.setText(mail.getBodyText());
+        }
+        catch (Exception ex)
+        {
+            Logs.exception(ex);
+        }
+    }
+
+    private void ta_MailBodyHyperlinkUpdate(javax.swing.event.HyperlinkEvent evt)
+    {
+        if (evt.getEventType() == javax.swing.event.HyperlinkEvent.EventType.ACTIVATED)
+        {
+            if (evt instanceof javax.swing.text.html.HTMLFrameHyperlinkEvent)
+            {
+                javax.swing.text.html.HTMLDocument doc = (javax.swing.text.html.HTMLDocument) ta_MailBody.getDocument();
+                doc.processHTMLFrameHyperlinkEvent((javax.swing.text.html.HTMLFrameHyperlinkEvent) evt);
+            }
+            else
+            {
+                Desk.browse(evt.getURL().toString());
+            }
+        }
+    }
+
     public static void main(String[] args)
     {
+        try
+        {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        }
+        catch (Exception exp)
+        {
+        }
         MailDlg md = new MailDlg();
         md.initView();
         md.initLang();
         md.initData();
         md.setVisible(true);
+        md.append(new Connect("pop3", "amon.ct@163.com", ""), "");
     }
-    private javax.swing.JTextArea ta_MailBody;
+    private javax.swing.JEditorPane ta_MailBody;
     private javax.swing.JTable tb_MailMsgs;
     private javax.swing.JTree tr_MailBoxs;
     private javax.swing.JPanel pl_MailEdit;

@@ -3,6 +3,9 @@
  */
 package com.magicpwd._mail;
 
+import com.magicpwd._util.Logs;
+import java.util.ArrayList;
+import java.util.List;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.swing.table.AbstractTableModel;
@@ -11,75 +14,124 @@ import javax.swing.table.AbstractTableModel;
  * @author Administrator
  * 
  */
-public class MailMdl extends AbstractTableModel {
-	private Message[] messages;
+public class MailMdl extends AbstractTableModel
+{
 
-	public MailMdl() {
-	}
+    private List<MailInf> messages;
 
-	@Override
-	public int getColumnCount() {
-		return 3;
-	}
+    public MailMdl()
+    {
+        messages = new ArrayList<MailInf>();
+    }
 
-	@Override
-	public int getRowCount() {
-		return messages != null ? messages.length : 0;
-	}
+    @Override
+    public int getColumnCount()
+    {
+        return 4;
+    }
 
-	@Override
-	public Object getValueAt(int rowIndex, int columnIndex) {
-		if (messages == null || rowIndex < 0 || rowIndex >= messages.length) {
-			return "";
-		}
-		Message message = messages[rowIndex];
-		switch (columnIndex) {
-		case 0:
-			return null;
-		case 1:
-			return "";
-		case 2:
-			return "";
-		default:
-			return null;
-		}
-	}
+    @Override
+    public int getRowCount()
+    {
+        return messages.size();
+    }
 
-	@Override
-	public String getColumnName(int columnIndex) {
-		switch (columnIndex) {
-		case 0:
-			return "状态";
-		case 1:
-			return "标题";
-		case 2:
-			return "时间";
-		default:
-			return "";
-		}
-	}
+    @Override
+    public Object getValueAt(int rowIndex, int columnIndex)
+    {
+        if (rowIndex < 0 || rowIndex >= messages.size())
+        {
+            return "";
+        }
+        try
+        {
+            MailInf message = messages.get(rowIndex);
+            switch (columnIndex)
+            {
+                case 0:
+                    return "";//message.getFlags().getSystemFlags()[0];
+                case 1:
+                    return message.getSubject();
+                case 2:
+                    return message.getSentDate();
+                case 3:
+                    return "";
+                default:
+                    return null;
+            }
+        }
+        catch (Exception ex)
+        {
+            Logs.exception(ex);
+            return "";
+        }
+    }
 
-	@Override
-	public boolean isCellEditable(int row, int col) {
-		return false;
-	}
+    @Override
+    public String getColumnName(int columnIndex)
+    {
+        switch (columnIndex)
+        {
+            case 0:
+                return "状态";
+            case 1:
+                return "标题";
+            case 2:
+                return "时间";
+            case 3:
+                return "附件";
+            default:
+                return "附件";
+        }
+    }
 
-	public boolean loadMsg(Folder folder) {
-		try {
-			if (folder == null) {
-				return false;
-			}
-			if ((folder.getType() & Folder.HOLDS_MESSAGES) == 0) {
-				return false;
-			}
-			if (!folder.isOpen()) {
-				folder.open(Folder.READ_WRITE);
-			}
-			messages = folder.getMessages();
-			folder.close(false);
-			return true;
-		} catch (Exception exp) {
-			return false;
-		}
-	}
+    @Override
+    public boolean isCellEditable(int row, int col)
+    {
+        return false;
+    }
+
+    public MailInf getMailInf(int rowIndex)
+    {
+        if (rowIndex < 0 || rowIndex >= messages.size())
+        {
+            return null;
+        }
+        return messages.get(rowIndex);
+    }
+
+    public boolean loadMsg(Folder folder)
+    {
+        try
+        {
+            if (folder == null)
+            {
+                return false;
+            }
+            if ((folder.getType() & Folder.HOLDS_MESSAGES) == 0)
+            {
+                return false;
+            }
+            if (!folder.isOpen())
+            {
+                folder.open(Folder.READ_WRITE);
+            }
+            messages.clear();
+
+            MailInf mail;
+            for (Message message : folder.getMessages())
+            {
+                mail = new MailInf();
+                mail.loadMsg(message);
+                messages.add(mail);
+                fireTableDataChanged();
+            }
+            folder.close(false);
+            return true;
+        }
+        catch (Exception exp)
+        {
+            return false;
+        }
+    }
 }
