@@ -28,8 +28,7 @@ public class Connect
     {
         this.protocol = protocol;
         this.mail = mail;
-        this.username = "Amon.CT";
-        this.password = "bMjbmaG0zm";
+        this.password = pwds;
     }
 
     /**
@@ -164,7 +163,17 @@ public class Connect
     {
         Properties prop = new Properties();
         prop.put(Util.format("mail.{0}.host", getProtocol()), getHost());
+        prop.put(Util.format("mail.{0}.port", getProtocol()), getPort());
         prop.put(Util.format("mail.{0}.auth", getProtocol()), isAuth() ? "true" : "false");
+        if (isAuth())
+        {
+            prop.put(Util.format("mail.{0}.socketFactory.port", getProtocol()), getPort());//重新设定端口
+            prop.put(Util.format("mail.{0}.starttls.enable", getProtocol()), "true");// 使用SSL验证
+
+            // 非重要设置
+            prop.put(Util.format("mail.{0}.socketFactory.class", getProtocol()), "javax.net.ssl.SSLSocketFactory");
+            prop.put(Util.format("mail.{0}.socketFactory.fallback", getProtocol()), "false");
+        }
         return prop;
     }
 
@@ -182,10 +191,5 @@ public class Connect
             store.connect();
         }
         return store;
-//        if (!f.isOpen())
-//        {
-//            f.open(Folder.READ_WRITE);
-//        }
-//        return f;
     }
 }
