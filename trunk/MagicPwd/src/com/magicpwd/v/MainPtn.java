@@ -49,18 +49,15 @@ import com.magicpwd.x.MpsDialog;
 
 public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, InfoEvt, FindEvt, IGridView
 {
+
     private java.awt.CardLayout cl_CardProp;
     private MpsDialog mp_MpsDialog;
-
     private IEditBean[] editBean;
-
     private MenuPop gridMenu;
     private MenuPop treeMenu;
     private MenuPop listMenu;
-
     private int ls_LastIndx = -1;
     private int tb_LastIndx = -1;
-
     private HistProp histProp;
     private javax.swing.border.TitledBorder border;
 
@@ -113,6 +110,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         UserSign us = new UserSign(ConsEnv.SIGN_RS, MagicPwd.getFrame());
         us.setConfrmBackCall(new IBackCall()
         {
+
             @Override
             public boolean callBack(Object sender, java.util.EventListener event, String... params)
             {
@@ -142,6 +140,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         UserSign us = new UserSign(ConsEnv.SIGN_RS, MagicPwd.getFrame());
         us.setConfrmBackCall(new IBackCall()
         {
+
             @Override
             public boolean callBack(Object sender, java.util.EventListener event, String... params)
             {
@@ -277,9 +276,9 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             if (idx > ConsEnv.PWDS_ITEM_HEAD && idx < tb_KeysView.getRowCount())
             {
                 Item tplt = UserMdl.getGridMdl().getTplt(idx);
-                if (tplt.getType() != ConsDat.INDX_AREA)
+                if (tplt.getKind() != ConsDat.INDX_AREA)
                 {
-                    tplt.setType(ConsDat.INDX_AREA);
+                    tplt.setKind(ConsDat.INDX_AREA);
                     showPropEdit(tplt, true);
                     UserMdl.getGridMdl().setModified(true);
                 }
@@ -296,9 +295,9 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             if (idx > ConsEnv.PWDS_ITEM_HEAD && idx < tb_KeysView.getRowCount())
             {
                 Item tplt = UserMdl.getGridMdl().getTplt(idx);
-                if (tplt.getType() != ConsDat.INDX_DATE)
+                if (tplt.getKind() != ConsDat.INDX_DATE)
                 {
-                    tplt.setType(ConsDat.INDX_DATE);
+                    tplt.setKind(ConsDat.INDX_DATE);
                     showPropEdit(tplt, true);
                     UserMdl.getGridMdl().setModified(true);
                 }
@@ -315,9 +314,9 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             if (idx > ConsEnv.PWDS_ITEM_HEAD && idx < tb_KeysView.getRowCount())
             {
                 Item tplt = UserMdl.getGridMdl().getTplt(idx);
-                if (tplt.getType() != ConsDat.INDX_FILE)
+                if (tplt.getKind() != ConsDat.INDX_FILE)
                 {
-                    tplt.setType(ConsDat.INDX_FILE);
+                    tplt.setKind(ConsDat.INDX_FILE);
                     showPropEdit(tplt, true);
                     UserMdl.getGridMdl().setModified(true);
                 }
@@ -334,9 +333,9 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             if (idx > ConsEnv.PWDS_ITEM_HEAD && idx < tb_KeysView.getRowCount())
             {
                 Item tplt = UserMdl.getGridMdl().getTplt(idx);
-                if (tplt.getType() != ConsDat.INDX_LINK)
+                if (tplt.getKind() != ConsDat.INDX_LINK)
                 {
-                    tplt.setType(ConsDat.INDX_LINK);
+                    tplt.setKind(ConsDat.INDX_LINK);
                     showPropEdit(tplt, true);
                     UserMdl.getGridMdl().setModified(true);
                 }
@@ -353,9 +352,9 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             if (idx > ConsEnv.PWDS_ITEM_HEAD && idx < tb_KeysView.getRowCount())
             {
                 Item tplt = UserMdl.getGridMdl().getTplt(idx);
-                if (tplt.getType() != ConsDat.INDX_MAIL)
+                if (tplt.getKind() != ConsDat.INDX_MAIL)
                 {
-                    tplt.setType(ConsDat.INDX_MAIL);
+                    tplt.setKind(ConsDat.INDX_MAIL);
                     showPropEdit(tplt, true);
                     UserMdl.getGridMdl().setModified(true);
                 }
@@ -372,9 +371,9 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             if (idx > ConsEnv.PWDS_ITEM_HEAD && idx < tb_KeysView.getRowCount())
             {
                 Item tplt = UserMdl.getGridMdl().getTplt(idx);
-                if (tplt.getType() != ConsDat.INDX_PWDS)
+                if (tplt.getKind() != ConsDat.INDX_PWDS)
                 {
-                    tplt.setType(ConsDat.INDX_PWDS);
+                    tplt.setKind(ConsDat.INDX_PWDS);
                     showPropEdit(tplt, true);
                     UserMdl.getGridMdl().setModified(true);
                 }
@@ -391,9 +390,9 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             if (idx > ConsEnv.PWDS_ITEM_HEAD && idx < tb_KeysView.getRowCount())
             {
                 Item tplt = UserMdl.getGridMdl().getTplt(idx);
-                if (tplt.getType() != ConsDat.INDX_TEXT)
+                if (tplt.getKind() != ConsDat.INDX_TEXT)
                 {
-                    tplt.setType(ConsDat.INDX_TEXT);
+                    tplt.setKind(ConsDat.INDX_TEXT);
                     showPropEdit(tplt, true);
                     UserMdl.getGridMdl().setModified(true);
                 }
@@ -679,7 +678,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             return;
         }
 
-        KindTN p = (KindTN)path.getLastPathComponent();
+        KindTN p = (KindTN) path.getLastPathComponent();
         Kind c = new Kind();
         c.setC2010101(p.getChildCount());
         c.setC2010105(kindName);
@@ -707,6 +706,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
     {
         DatDialog dat = new DatDialog(new IBackCall()
         {
+
             @Override
             public boolean callBack(Object sender, java.util.EventListener event, String... params)
             {
@@ -781,6 +781,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         UserSign us = new UserSign(ConsEnv.SIGN_SK, MagicPwd.getFrame());
         us.setConfrmBackCall(new IBackCall()
         {
+
             @Override
             public boolean callBack(Object sender, java.util.EventListener event, String... params)
             {
@@ -973,6 +974,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         }
     }
 
+    @Override
     public void histViewActionPerformed(java.awt.event.ActionEvent evt)
     {
         S1S2 item = (S1S2) ls_GuidList.getSelectedValue();
@@ -1117,6 +1119,8 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         javax.swing.ToolTipManager.sharedInstance().registerComponent(tr_GuidTree);
         tr_GuidTree.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener()
         {
+
+            @Override
             public void valueChanged(javax.swing.event.TreeSelectionEvent evt)
             {
                 tr_GuidTreeValueChanged(evt);
@@ -1138,6 +1142,8 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         ls_GuidList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         ls_GuidList.addListSelectionListener(new javax.swing.event.ListSelectionListener()
         {
+
+            @Override
             public void valueChanged(javax.swing.event.ListSelectionEvent evt)
             {
                 ls_DataListValueChanged(evt);
@@ -1185,6 +1191,8 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         // 添加快捷键
         actionMap.put(ConsEnv.EVENT_EDIT_FCUS, new javax.swing.AbstractAction()
         {
+
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 tb_KeysView.requestFocus();
@@ -1194,6 +1202,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
 
         tb_KeysView.addMouseListener(new java.awt.event.MouseAdapter()
         {
+
             @Override
             public void mouseReleased(java.awt.event.MouseEvent evt)
             {
@@ -1202,6 +1211,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         });
         tb_KeysView.addKeyListener(new java.awt.event.KeyAdapter()
         {
+
             @Override
             public void keyReleased(java.awt.event.KeyEvent evt)
             {
@@ -1209,11 +1219,9 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             }
         });
 
-        javax.swing.table.TableColumn tc = tb_KeysView.getColumnModel().getColumn(0);
         int w = tb_KeysView.getFontMetrics(tb_KeysView.getFont()).stringWidth("999999");
-        tc.setPreferredWidth(w);
-        tc = tb_KeysView.getColumnModel().getColumn(1);
-        tc.setPreferredWidth(300 - w);
+        tb_KeysView.getColumnModel().getColumn(0).setPreferredWidth(w);
+        tb_KeysView.getColumnModel().getColumn(1).setPreferredWidth(365 - w);
 
         javax.swing.JScrollPane sp1 = new javax.swing.JScrollPane();
         sp1.setViewportView(tb_KeysView);
@@ -1410,19 +1418,19 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
     {
         if (UserMdl.getCfg().isEditViw())
         {
-            editBean[tplt.getType()].initData(tplt);
-            cl_CardProp.show(pl_CardProp, ConsEnv.BEAN_PROP + tplt.getType());
+            editBean[tplt.getKind()].initData(tplt);
+            cl_CardProp.show(pl_CardProp, ConsEnv.BEAN_PROP + tplt.getKind());
             if (focus)
             {
-                editBean[tplt.getType()].requestFocus();
+                editBean[tplt.getKind()].requestFocus();
             }
             if (UserMdl.getCfg().isEditWnd())
             {
-                mp_MpsDialog.setTitle(getPropName(tplt.getType()));
+                mp_MpsDialog.setTitle(getPropName(tplt.getKind()));
             }
             else
             {
-                border.setTitle(getPropName(tplt.getType()));
+                border.setTitle(getPropName(tplt.getKind()));
                 pl_KeysEdit.repaint();
             }
         }
@@ -1678,7 +1686,6 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         }
         return true;
     }
-
     /**
      * 数据导航面板，用于显示类别、口令列表等信息
      */
@@ -1695,7 +1702,6 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
      * 属性切换面板，用于显示不同属性的面板
      */
     private javax.swing.JPanel pl_CardProp;
-
     /**
      * 导航列表
      */

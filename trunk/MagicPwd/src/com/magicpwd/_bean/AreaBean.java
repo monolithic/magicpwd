@@ -15,28 +15,34 @@ import com.magicpwd.v.EditBox;
  * 键值：ConsEnv.INDX_AREA
  * @author Amon
  */
-public class AreaBean extends javax.swing.JPanel implements IEditBean {
+public class AreaBean extends javax.swing.JPanel implements IEditBean
+{
 
     private Item tpltData;
     private IGridView gridView;
     private EditBox dataEdit;
 
-    public AreaBean(IGridView view) {
+    public AreaBean(IGridView view)
+    {
         gridView = view;
     }
 
-    public void initView() {
+    @Override
+    public void initView()
+    {
         dataEdit = new EditBox(this, false);
         dataEdit.initView();
 
         lb_PropName = new javax.swing.JLabel();
 
-        tf_PropName = new javax.swing.JTextField();
+        tf_PropName = new javax.swing.JTextField(14);
         lb_PropName.setLabelFor(tf_PropName);
-        tf_PropName.addFocusListener(new java.awt.event.FocusAdapter() {
+        tf_PropName.addFocusListener(new java.awt.event.FocusAdapter()
+        {
 
             @Override
-            public void focusGained(java.awt.event.FocusEvent evt) {
+            public void focusGained(java.awt.event.FocusEvent evt)
+            {
                 tf_PropName.selectAll();
             }
         });
@@ -76,7 +82,7 @@ public class AreaBean extends javax.swing.JPanel implements IEditBean {
 
         javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         vpg2.addComponent(lb_PropData);
-        vpg2.addComponent(sp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg2.addComponent(sp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
 
         javax.swing.GroupLayout.SequentialGroup vpg3 = layout.createSequentialGroup();
         vpg3.addGroup(vpg1);
@@ -87,21 +93,24 @@ public class AreaBean extends javax.swing.JPanel implements IEditBean {
         vpg.addGroup(vpg3);
         vpg.addComponent(dataEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         layout.setVerticalGroup(vpg);
-
-        tf_PropName.setColumns(14);
     }
 
-    public void initLang() {
+    @Override
+    public void initLang()
+    {
         Lang.setWText(lb_PropName, LangRes.P30F1311, "名称");
         Lang.setWText(lb_PropData, LangRes.P30F1312, "附注");
 
         dataEdit.initLang();
     }
 
-    public void initData(Item tplt) {
+    @Override
+    public void initData(Item tplt)
+    {
         tpltData = tplt;
         String name = tpltData.getName();
-        if (Util.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS)) {
+        if (Util.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS))
+        {
             name = name.substring(1, name.length() - 1);
         }
         tf_PropName.setText(name);
@@ -109,18 +118,24 @@ public class AreaBean extends javax.swing.JPanel implements IEditBean {
     }
 
     @Override
-    public void requestFocus() {
+    public void requestFocus()
+    {
         ta_PropData.requestFocus();
     }
 
-    public void copyDataActionPerformed(java.awt.event.ActionEvent evt) {
+    @Override
+    public void copyDataActionPerformed(java.awt.event.ActionEvent evt)
+    {
         ta_PropData.selectAll();
         Util.setClipboardContents(ta_PropData.getText());
     }
 
-    public void saveDataActionPerformed(java.awt.event.ActionEvent evt) {
+    @Override
+    public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
+    {
         String name = tf_PropName.getText();
-        if (!Util.isValidate(name)) {
+        if (!Util.isValidate(name))
+        {
             Lang.showMesg(this, "", "请输入附注名称！");
             tf_PropName.requestFocus();
             return;
@@ -133,8 +148,11 @@ public class AreaBean extends javax.swing.JPanel implements IEditBean {
         gridView.selectNext(!UserMdl.getGridMdl().isUpdate());
     }
 
-    public void dropDataActionPerformed(java.awt.event.ActionEvent evt) {
-        if (Lang.showFirm(this, LangRes.P30F1A01, "") == javax.swing.JOptionPane.YES_OPTION) {
+    @Override
+    public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        if (Lang.showFirm(this, LangRes.P30F1A01, "") == javax.swing.JOptionPane.YES_OPTION)
+        {
             UserMdl.getGridMdl().wRemove(tpltData);
             gridView.selectNext(false);
         }

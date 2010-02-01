@@ -315,7 +315,7 @@ public class GridMdl extends DefaultTableModel
 
             // Guid
             tplt = new Item();
-            tplt.setType(ConsDat.INDX_GUID);
+            tplt.setKind(ConsDat.INDX_GUID);
             text = temp.get(indx++);
             tplt.setName(sdf.format(Util.stringToDate(text, '-', ':', ' ').getTime()));
             tplt.setData(ConsDat.HASH_TPLT);
@@ -323,7 +323,7 @@ public class GridMdl extends DefaultTableModel
 
             // Meta
             tplt = new Item();
-            tplt.setType(ConsDat.INDX_META);
+            tplt.setKind(ConsDat.INDX_META);
             text = temp.get(indx++);
             tplt.setName(text);
             keys.setP30F0107(text);
@@ -334,7 +334,7 @@ public class GridMdl extends DefaultTableModel
 
             // Past
             tplt = new Item();
-            tplt.setType(ConsDat.INDX_TIME);
+            tplt.setKind(ConsDat.INDX_TIME);
             text = temp.get(indx++);
             tplt.setData(text);
             keys.setP30F010A(new java.sql.Timestamp(Util.stringToDate(text, '-', ':', ' ').getTimeInMillis()));
@@ -346,7 +346,7 @@ public class GridMdl extends DefaultTableModel
             while (indx < temp.size())
             {
                 tplt = new Item();
-                tplt.setType(Integer.parseInt(temp.get(indx++)));
+                tplt.setKind(Integer.parseInt(temp.get(indx++)));
                 tplt.setName(temp.get(indx++));
                 tplt.setData(temp.get(indx++));
                 ls_ItemList.add(tplt);
@@ -411,7 +411,7 @@ public class GridMdl extends DefaultTableModel
             while (indx < ls_ItemList.size())
             {
                 tplt = ls_ItemList.get(indx++);
-                temp.add("" + tplt.getType());
+                temp.add("" + tplt.getKind());
                 temp.add(tplt.getName());
                 temp.add(tplt.getData());
             }
@@ -497,7 +497,7 @@ public class GridMdl extends DefaultTableModel
         text.delete(0, text.length());
         for (Item item : list)
         {
-            text.append(item.getType());
+            text.append(item.getKind());
             text.append(ConsDat.SP_SQL_KV);
             text.append(item.getName());
             text.append(ConsDat.SP_SQL_KV);

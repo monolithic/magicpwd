@@ -15,6 +15,7 @@ import com.magicpwd._face.IGridView;
  */
 public class IconBean extends javax.swing.JPanel implements IEditBean
 {
+
     private Item tpltData;
     private IGridView gridView;
 
@@ -23,26 +24,32 @@ public class IconBean extends javax.swing.JPanel implements IEditBean
         this.gridView = gridView;
     }
 
+    @Override
     public void initView()
     {
     }
 
+    @Override
     public void initLang()
     {
     }
 
+    @Override
     public void initData(Item tplt)
     {
     }
 
+    @Override
     public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
     {
     }
 
+    @Override
     public void copyDataActionPerformed(java.awt.event.ActionEvent evt)
     {
     }
 
+    @Override
     public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
     {
     }

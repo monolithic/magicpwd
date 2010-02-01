@@ -783,7 +783,7 @@ public class DBA3000 {
             Item kv;
             while (rest.next()) {
                 kv = new Item();
-                kv.setType(rest.getInt(DBC3000.P30F1102));
+                kv.setKind(rest.getInt(DBC3000.P30F1102));
                 kv.setName(rest.getString(DBC3000.P30F1105));
                 kv.setData(rest.getString(DBC3000.P30F1106));
                 tpltList.add(kv);

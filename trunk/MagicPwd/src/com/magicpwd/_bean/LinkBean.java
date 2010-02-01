@@ -24,6 +24,7 @@ import com.magicpwd.v.EditBox;
  */
 public class LinkBean extends javax.swing.JPanel implements IEditBean
 {
+
     private Item tpltData;
     private IGridView gridView;
     private EditBox dataEdit;
@@ -33,6 +34,7 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
         gridView = view;
     }
 
+    @Override
     public void initView()
     {
         dataEdit = new EditBox(this, false);
@@ -40,9 +42,10 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
 
         lb_PropName = new javax.swing.JLabel();
 
-        tf_PropName = new javax.swing.JTextField();
+        tf_PropName = new javax.swing.JTextField(14);
         tf_PropName.addFocusListener(new java.awt.event.FocusAdapter()
         {
+
             @Override
             public void focusGained(java.awt.event.FocusEvent evt)
             {
@@ -62,11 +65,11 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
-        javax.swing.GroupLayout.ParallelGroup hpg1=layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg1.addComponent(lb_PropEdit);
         hpg1.addComponent(lb_PropData);
         hpg1.addComponent(lb_PropName);
-        javax.swing.GroupLayout.ParallelGroup hpg2=layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg2.addComponent(tf_PropName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hpg2.addComponent(pl_PropEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         hpg2.addComponent(tf_PropData, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE);
@@ -78,13 +81,13 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
         hsg.addComponent(dataEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         layout.setHorizontalGroup(hsg);
 
-        javax.swing.GroupLayout.ParallelGroup vpg1=layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg1.addComponent(lb_PropName);
         vpg1.addComponent(tf_PropName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        javax.swing.GroupLayout.ParallelGroup vpg2=layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg2.addComponent(lb_PropData);
         vpg2.addComponent(tf_PropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        javax.swing.GroupLayout.ParallelGroup vpg3=layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         vpg3.addComponent(lb_PropEdit);
         vpg3.addComponent(pl_PropEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
@@ -93,17 +96,19 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
         vsg.addGroup(vpg2);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addGroup(vpg3);
-        javax.swing.GroupLayout.ParallelGroup vpg4=layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
+        javax.swing.GroupLayout.ParallelGroup vpg4 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
         vpg4.addComponent(dataEdit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         vpg4.addGroup(vsg);
         layout.setVerticalGroup(vpg4);
-        
+
         bt_LinkView = new BtnLabel();
 
         bt_LinkView.setMnemonic('O');
         bt_LinkView.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_LINK_OPEN)));
         bt_LinkView.addActionListener(new java.awt.event.ActionListener()
         {
+
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_LinkViewActionPerformed(evt);
@@ -111,6 +116,7 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
         });
     }
 
+    @Override
     public void initLang()
     {
         Lang.setWText(lb_PropName, LangRes.P30F130B, "名称");
@@ -120,6 +126,7 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
         dataEdit.initLang();
     }
 
+    @Override
     public void initData(Item tplt)
     {
         tpltData = tplt;
@@ -143,6 +150,7 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
         tf_PropData.requestFocus();
     }
 
+    @Override
     public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
     {
         if (Lang.showFirm(this, LangRes.P30F1A01, "") == javax.swing.JOptionPane.YES_OPTION)
@@ -152,6 +160,7 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
         }
     }
 
+    @Override
     public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
     {
         String name = tf_PropName.getText();
@@ -169,6 +178,7 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
         gridView.selectNext(!UserMdl.getGridMdl().isUpdate());
     }
 
+    @Override
     public void copyDataActionPerformed(java.awt.event.ActionEvent evt)
     {
         tf_PropData.selectAll();
@@ -189,13 +199,11 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
         }
         Desk.browse(link);
     }
-
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JLabel lb_PropEdit;
     private javax.swing.JLabel lb_PropName;
     private javax.swing.JPanel pl_PropEdit;
     private javax.swing.JTextField tf_PropData;
     private javax.swing.JTextField tf_PropName;
-
     private BtnLabel bt_LinkView;
 }

@@ -15,14 +15,18 @@ import com.magicpwd._util.Util;
  * 键值：ConsEnv.INDX_INFO
  * @author Amon
  */
-public class InfoBean extends javax.swing.JPanel implements IEditBean {
+public class InfoBean extends javax.swing.JPanel implements IEditBean
+{
 
     private int tipsSize;
 
-    public InfoBean(IGridView view) {
+    public InfoBean(IGridView view)
+    {
     }
 
-    public void initView() {
+    @Override
+    public void initView()
+    {
         ta_PropData = new javax.swing.JTextArea();
         lb_PropName = new javax.swing.JLabel();
         lb_NextTips = new javax.swing.JLabel();
@@ -34,10 +38,12 @@ public class InfoBean extends javax.swing.JPanel implements IEditBean {
 
         lb_PropName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
-        lb_NextTips.addMouseListener(new java.awt.event.MouseAdapter() {
+        lb_NextTips.addMouseListener(new java.awt.event.MouseAdapter()
+        {
 
             @Override
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
                 lb_NextTipsMouseReleased(evt);
             }
         });
@@ -59,20 +65,28 @@ public class InfoBean extends javax.swing.JPanel implements IEditBean {
         layout.setVerticalGroup(vsg);
     }
 
-    public void initLang() {
+    @Override
+    public void initLang()
+    {
         Lang.setWText(lb_PropName, LangRes.P30F1317, "每日提示");
         Lang.setWText(lb_NextTips, LangRes.P30F1318, "下一提示");
     }
 
-    public void initData(Item tplt) {
-        if (tplt != null) {
+    @Override
+    public void initData(Item tplt)
+    {
+        if (tplt != null)
+        {
             lb_PropName.setText(tplt.getName());
             ta_PropData.setText(tplt.getData());
             return;
         }
-        try {
+        try
+        {
             tipsSize = Integer.parseInt(Lang.getLang(LangRes.P30F1B00, "0"), 16);
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             tipsSize = 0;
         }
         tipsSize -= 1;
@@ -83,15 +97,19 @@ public class InfoBean extends javax.swing.JPanel implements IEditBean {
     }
 
     @Override
-    public void requestFocus() {
+    public void requestFocus()
+    {
     }
 
-    private void lb_NextTipsMouseReleased(java.awt.event.MouseEvent evt) {
+    private void lb_NextTipsMouseReleased(java.awt.event.MouseEvent evt)
+    {
         nextTips();
     }
 
-    private void nextTips() {
-        if (tipsSize <= 0) {
+    private void nextTips()
+    {
+        if (tipsSize <= 0)
+        {
             return;
         }
 
@@ -101,13 +119,19 @@ public class InfoBean extends javax.swing.JPanel implements IEditBean {
         Lang.setWText(ta_PropData, t, "");
     }
 
-    public void saveDataActionPerformed(java.awt.event.ActionEvent evt) {
+    @Override
+    public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
+    {
     }
 
-    public void copyDataActionPerformed(java.awt.event.ActionEvent evt) {
+    @Override
+    public void copyDataActionPerformed(java.awt.event.ActionEvent evt)
+    {
     }
 
-    public void dropDataActionPerformed(java.awt.event.ActionEvent evt) {
+    @Override
+    public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
+    {
     }
     private javax.swing.JLabel lb_NextTips;
     private javax.swing.JTextArea ta_PropData;

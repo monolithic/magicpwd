@@ -15,24 +15,29 @@ import com.magicpwd._util.Util;
  *
  * @author Amon
  */
-public class EditBox extends javax.swing.JPanel {
+public class EditBox extends javax.swing.JPanel
+{
 
     private IEditBean editBean;
     private boolean metaData;
 
-    public EditBox(IEditBean bean, boolean meta) {
+    public EditBox(IEditBean bean, boolean meta)
+    {
         editBean = bean;
         metaData = meta;
     }
 
-    public void initView() {
+    public void initView()
+    {
         bt_DropData = new BtnLabel();
         bt_DropData.setMnemonic('D');
         bt_DropData.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_PROP_DELT)));
-        bt_DropData.addActionListener(new java.awt.event.ActionListener() {
+        bt_DropData.addActionListener(new java.awt.event.ActionListener()
+        {
 
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 editBean.dropDataActionPerformed(evt);
             }
         });
@@ -40,10 +45,12 @@ public class EditBox extends javax.swing.JPanel {
         bt_SaveData = new BtnLabel();
         bt_SaveData.setMnemonic('U');
         bt_SaveData.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_PROP_UPDT)));
-        bt_SaveData.addActionListener(new java.awt.event.ActionListener() {
+        bt_SaveData.addActionListener(new java.awt.event.ActionListener()
+        {
 
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 editBean.saveDataActionPerformed(evt);
             }
         });
@@ -51,10 +58,12 @@ public class EditBox extends javax.swing.JPanel {
         bt_CopyData = new BtnLabel();
         bt_CopyData.setMnemonic('C');
         bt_CopyData.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_PROP_COPY)));
-        bt_CopyData.addActionListener(new java.awt.event.ActionListener() {
+        bt_CopyData.addActionListener(new java.awt.event.ActionListener()
+        {
 
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 editBean.copyDataActionPerformed(evt);
             }
         });
@@ -69,7 +78,7 @@ public class EditBox extends javax.swing.JPanel {
         layout.setHorizontalGroup(hgp);
 
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
-        vsg.addContainerGap(37, Short.MAX_VALUE);
+        vsg.addContainerGap(1, Short.MAX_VALUE);
         vsg.addComponent(bt_CopyData);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addComponent(bt_SaveData);
@@ -80,12 +89,15 @@ public class EditBox extends javax.swing.JPanel {
         layout.setVerticalGroup(vpg);
     }
 
-    public void initLang() {
-        if (!metaData) {
+    public void initLang()
+    {
+        if (!metaData)
+        {
             Lang.setWTips(bt_CopyData, LangRes.P30F1501, "复制");
         }
         Lang.setWTips(bt_SaveData, LangRes.P30F1502, "保存");
-        if (!metaData) {
+        if (!metaData)
+        {
             Lang.setWTips(bt_DropData, LangRes.P30F1503, "删除");
         }
     }

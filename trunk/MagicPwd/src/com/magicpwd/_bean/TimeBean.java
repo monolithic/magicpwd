@@ -22,6 +22,7 @@ import com.magicpwd.v.EditBox;
  */
 public class TimeBean extends javax.swing.JPanel implements IEditBean
 {
+
     private Item tpltData;
     private IGridView gridView;
     private EditBox dataEdit;
@@ -44,9 +45,10 @@ public class TimeBean extends javax.swing.JPanel implements IEditBean
 
         lb_PropName = new javax.swing.JLabel();
 
-        tf_PropName = new javax.swing.JTextField();
+        tf_PropName = new javax.swing.JTextField(14);
         tf_PropName.addFocusListener(new java.awt.event.FocusAdapter()
         {
+
             @Override
             public void focusGained(java.awt.event.FocusEvent evt)
             {
@@ -66,11 +68,11 @@ public class TimeBean extends javax.swing.JPanel implements IEditBean
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
-        javax.swing.GroupLayout.ParallelGroup hpg1=layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg1.addComponent(lb_PropEdit);
         hpg1.addComponent(lb_PropData);
         hpg1.addComponent(lb_PropName);
-        javax.swing.GroupLayout.ParallelGroup hpg2=layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg2.addComponent(tf_PropName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hpg2.addComponent(pl_PropEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         hpg2.addComponent(tf_PropData, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE);
@@ -82,13 +84,13 @@ public class TimeBean extends javax.swing.JPanel implements IEditBean
         hsg.addComponent(dataEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         layout.setHorizontalGroup(hsg);
 
-        javax.swing.GroupLayout.ParallelGroup vpg1=layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg1.addComponent(lb_PropName);
         vpg1.addComponent(tf_PropName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        javax.swing.GroupLayout.ParallelGroup vpg2=layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg2.addComponent(lb_PropData);
         vpg2.addComponent(tf_PropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        javax.swing.GroupLayout.ParallelGroup vpg3=layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         vpg3.addComponent(lb_PropEdit);
         vpg3.addComponent(pl_PropEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
@@ -97,7 +99,7 @@ public class TimeBean extends javax.swing.JPanel implements IEditBean
         vsg.addGroup(vpg2);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addGroup(vpg3);
-        javax.swing.GroupLayout.ParallelGroup vpg4=layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
+        javax.swing.GroupLayout.ParallelGroup vpg4 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
         vpg4.addComponent(dataEdit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         vpg4.addGroup(vsg);
         layout.setVerticalGroup(vpg4);
@@ -107,6 +109,8 @@ public class TimeBean extends javax.swing.JPanel implements IEditBean
         bt_DateView.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_DATE_TIME)));
         bt_DateView.addActionListener(new java.awt.event.ActionListener()
         {
+
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_DateViewActionPerformed(evt);
@@ -118,6 +122,8 @@ public class TimeBean extends javax.swing.JPanel implements IEditBean
         bt_SaveData.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_PROP_UPDT)));
         bt_SaveData.addActionListener(new java.awt.event.ActionListener()
         {
+
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 saveDataActionPerformed(evt);
@@ -125,11 +131,16 @@ public class TimeBean extends javax.swing.JPanel implements IEditBean
         });
 
         pm_DateView = new javax.swing.JPopupMenu();
-        String[] commands = { "", "half", "hour", "day", "week", "month", "year" };
+        String[] commands =
+        {
+            "", "half", "hour", "day", "week", "month", "year"
+        };
         mi_MenuItem = new javax.swing.JCheckBoxMenuItem[commands.length];
 
         java.awt.event.ActionListener al = new java.awt.event.ActionListener()
         {
+
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 mi_MenuItemActionPerformed(evt);
@@ -147,7 +158,7 @@ public class TimeBean extends javax.swing.JPanel implements IEditBean
 
         pm_DateView.addSeparator();
 
-        while(idx<commands.length)
+        while (idx < commands.length)
         {
             menuItem = new javax.swing.JCheckBoxMenuItem();
             menuItem.addActionListener(al);
@@ -163,6 +174,7 @@ public class TimeBean extends javax.swing.JPanel implements IEditBean
      * 
      * @see com.magicpwd._face.IEditBean#initLang()
      */
+    @Override
     public void initLang()
     {
         dataEdit.initLang();
@@ -182,6 +194,7 @@ public class TimeBean extends javax.swing.JPanel implements IEditBean
         }
     }
 
+    @Override
     public void initData(Item tplt)
     {
         tpltData = tplt;
@@ -200,6 +213,7 @@ public class TimeBean extends javax.swing.JPanel implements IEditBean
         tf_PropData.requestFocus();
     }
 
+    @Override
     public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
     {
         String data = tf_PropData.getText();
@@ -241,11 +255,13 @@ public class TimeBean extends javax.swing.JPanel implements IEditBean
 
         gridView.selectNext(!UserMdl.getGridMdl().isUpdate());
     }
-    
+
+    @Override
     public void copyDataActionPerformed(java.awt.event.ActionEvent evt)
     {
     }
 
+    @Override
     public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
     {
     }
@@ -312,18 +328,14 @@ public class TimeBean extends javax.swing.JPanel implements IEditBean
         }
         tf_PropData.setText(cmd);
     }
-
     private javax.swing.JPopupMenu pm_DateView;
     private javax.swing.JCheckBoxMenuItem[] mi_MenuItem;
-
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JLabel lb_PropEdit;
     private javax.swing.JLabel lb_PropName;
     private javax.swing.JPanel pl_PropEdit;
     private javax.swing.JTextField tf_PropData;
     private javax.swing.JTextField tf_PropName;
-
     private BtnLabel bt_SaveData;
-
     private BtnLabel bt_DateView;
 }
