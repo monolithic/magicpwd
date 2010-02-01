@@ -37,6 +37,24 @@ public class MailMdl extends AbstractTableModel
     }
 
     @Override
+    public String getColumnName(int columnIndex)
+    {
+        switch (columnIndex)
+        {
+            case 0:
+                return "";
+            case 1:
+                return "发送人";
+            case 2:
+                return "标题";
+            case 3:
+                return "时间";
+            default:
+                return "";
+        }
+    }
+
+    @Override
     public Object getValueAt(int rowIndex, int columnIndex)
     {
         if (rowIndex < 0 || rowIndex >= messages.size())
@@ -51,11 +69,11 @@ public class MailMdl extends AbstractTableModel
                 case 0:
                     return "";//message.getFlags().getSystemFlags()[0];
                 case 1:
-                    return message.getSubject();
-                case 2:
-                    return message.getSentDate();
-                case 3:
                     return "";
+                case 2:
+                    return message.getSubject();
+                case 3:
+                    return message.getSentDate();
                 default:
                     return null;
             }
@@ -64,24 +82,6 @@ public class MailMdl extends AbstractTableModel
         {
             Logs.exception(ex);
             return "";
-        }
-    }
-
-    @Override
-    public String getColumnName(int columnIndex)
-    {
-        switch (columnIndex)
-        {
-            case 0:
-                return "状态";
-            case 1:
-                return "标题";
-            case 2:
-                return "时间";
-            case 3:
-                return "附件";
-            default:
-                return "附件";
         }
     }
 
