@@ -59,20 +59,20 @@ public class MailInf
     {
         try
         {
-            typeSet = Pattern.compile("text\\s*/\\s*\\w*?[^;\\s];");
-            charSet = Pattern.compile("charset\\s*=\\s*\"?[\\w\\d-]+\"?[^;\\s];");
+            typeSet = Pattern.compile("text\\s*/\\s*[\\w-]+[^;\\s]", Pattern.CASE_INSENSITIVE);
+            charSet = Pattern.compile("charset\\s*=\\s*\"?[\\w-]+\"?[^;\\s]", Pattern.CASE_INSENSITIVE);
             String temp = message.getContentType();
             Matcher m = typeSet.matcher(temp);
             String t1 = "text/html;";
             if (m.find())
             {
-                t1 = m.group();
+                t1 = m.group() + ';';
             }
             m = charSet.matcher(temp);
             String t2 = "charset=UTF-8;";
             if (m.find())
             {
-                t2 = m.group();
+                t2 = m.group().replace("\"", "") + ';';
             }
             contentType = t1 + ' ' + t2;
 
