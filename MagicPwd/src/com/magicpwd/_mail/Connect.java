@@ -5,6 +5,8 @@ package com.magicpwd._mail;
 
 import com.magicpwd._util.Util;
 import java.util.Properties;
+import javax.mail.Authenticator;
+import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.URLName;
@@ -23,6 +25,10 @@ public class Connect
     private boolean auth;
     private String username;
     private String password;
+
+    public Connect()
+    {
+    }
 
     public Connect(String protocol, String mail, String pwds)
     {
@@ -167,8 +173,8 @@ public class Connect
         prop.put(Util.format("mail.{0}.auth", getProtocol()), isAuth() ? "true" : "false");
         if (isAuth())
         {
-            prop.put(Util.format("mail.{0}.socketFactory.port", getProtocol()), getPort());//重新设定端口
             prop.put(Util.format("mail.{0}.starttls.enable", getProtocol()), "true");// 使用SSL验证
+            prop.put(Util.format("mail.{0}.socketFactory.port", getProtocol()), getPort());//重新设定端口
 
             // 非重要设置
             prop.put(Util.format("mail.{0}.socketFactory.class", getProtocol()), "javax.net.ssl.SSLSocketFactory");
@@ -184,7 +190,15 @@ public class Connect
 
     public Store getStore() throws Exception
     {
-        Session session = Session.getDefaultInstance(getProperties());
+        Session session = Session.getDefaultInstance(getProperties(), new Authenticator()
+        {
+
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication()
+            {
+                return new PasswordAuthentication(getUsername(), getPassword());
+            }
+        });
         Store store = session.getStore(getURLName());
         if (!store.isConnected())
         {

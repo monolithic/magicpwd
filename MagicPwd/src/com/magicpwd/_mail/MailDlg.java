@@ -360,11 +360,12 @@ public class MailDlg extends javax.swing.JFrame
         md.initLang();
         md.initData();
         md.setVisible(true);
-        Connect connect = new Connect("pop3", "Amon.RG@gmail.com", "A_v`OVU5");
-        connect.setUsername("Amon.RG@gmail.com");
-        connect.setHost("pop.gmail.com");
+        Connect connect = new Connect("pop3", "Amon.CT@live.com", "c~9xJpa&");
+        connect.setUsername("Amon.CT");
+        connect.setHost("pop.live.com");
+        connect.setPort(995);
         connect.setAuth(true);
-        md.append(new Connect("pop3", "amon.ct@163.com", ""), "");
+        md.append(connect, "");
     }
     private javax.swing.JEditorPane ta_MailBody;
     private javax.swing.JTable tb_MailMsgs;
