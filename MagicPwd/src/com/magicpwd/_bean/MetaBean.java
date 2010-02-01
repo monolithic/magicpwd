@@ -18,23 +18,27 @@ import com.magicpwd.v.EditBox;
  * @author Amon
  * 
  */
-public class MetaBean extends javax.swing.JPanel implements IEditBean {
+public class MetaBean extends javax.swing.JPanel implements IEditBean
+{
 
     private Item tpltData;
     private IGridView gridView;
     private EditBox dataEdit;
 
-    public MetaBean(IGridView view) {
+    public MetaBean(IGridView view)
+    {
         gridView = view;
     }
 
-    public void initView() {
+    @Override
+    public void initView()
+    {
         dataEdit = new EditBox(this, true);
         dataEdit.initView();
 
         lb_PropName = new javax.swing.JLabel();
 
-        tf_PropName = new javax.swing.JTextField();
+        tf_PropName = new javax.swing.JTextField(14);
         lb_PropName.setLabelFor(tf_PropName);
 
         lb_PropData = new javax.swing.JLabel();
@@ -72,7 +76,7 @@ public class MetaBean extends javax.swing.JPanel implements IEditBean {
 
         javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         vpg2.addComponent(lb_PropData);
-        vpg2.addComponent(sp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg2.addComponent(sp1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
 
         javax.swing.GroupLayout.SequentialGroup vpg3 = layout.createSequentialGroup();
         vpg3.addGroup(vpg1);
@@ -85,28 +89,36 @@ public class MetaBean extends javax.swing.JPanel implements IEditBean {
         layout.setVerticalGroup(vpg);
     }
 
-    public void initLang() {
+    @Override
+    public void initLang()
+    {
         dataEdit.initLang();
 
         Lang.setWText(lb_PropName, LangRes.P30F1303, "名称");
         Lang.setWText(lb_PropData, LangRes.P30F1304, "搜索");
     }
 
-    public void initData(Item tplt) {
+    @Override
+    public void initData(Item tplt)
+    {
         tpltData = tplt;
         tf_PropName.setText(tpltData.getName());
         ta_PropData.setText(tpltData.getData());
     }
 
     @Override
-    public void requestFocus() {
+    public void requestFocus()
+    {
         tf_PropName.requestFocus();
     }
 
-    public void saveDataActionPerformed(java.awt.event.ActionEvent evt) {
+    @Override
+    public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
+    {
         String name = tf_PropName.getText();
-        if (!Util.isValidate(name)) {
-            Lang.showMesg(this, "", "记录标题不能为空!");
+        if (!Util.isValidate(name))
+        {
+            Lang.showMesg(this, LangRes.P30FAA1A, "记录标题不能为空!");
             tf_PropName.requestFocus();
             return;
         }
@@ -122,10 +134,14 @@ public class MetaBean extends javax.swing.JPanel implements IEditBean {
         gridView.selectNext(!UserMdl.getGridMdl().isUpdate());
     }
 
-    public void copyDataActionPerformed(java.awt.event.ActionEvent evt) {
+    @Override
+    public void copyDataActionPerformed(java.awt.event.ActionEvent evt)
+    {
     }
 
-    public void dropDataActionPerformed(java.awt.event.ActionEvent evt) {
+    @Override
+    public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
+    {
     }
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JLabel lb_PropName;

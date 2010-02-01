@@ -34,7 +34,7 @@ public class TextBean extends javax.swing.JPanel implements IEditBean {
 
         lb_PropName = new javax.swing.JLabel();
 
-        tf_PropName = new javax.swing.JTextField();
+        tf_PropName = new javax.swing.JTextField(14);
         tf_PropName.addFocusListener(new java.awt.event.FocusAdapter() {
 
             @Override

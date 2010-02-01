@@ -588,4 +588,5 @@ public interface LangRes
     String P30FAA17 = "P30FAA17";// 安全口令设定成功！
     String P30FAA18 = "P30FAA18";// 您的新口令是：{0}！\\n为了您的安全，请登录软件后尽快修改您的口令。
     String P30FAA19 = "P30FAA19";// 请选择您要移动的目标类别！
+    String P30FAA1A = "P30FAA1A";
 }

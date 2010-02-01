@@ -21,24 +21,31 @@ import com.magicpwd.v.EditBox;
  *
  * @author Amon
  */
-public class GmtpBean extends javax.swing.JPanel implements IEditBean {
+public class GmtpBean extends javax.swing.JPanel implements IEditBean
+{
 
     private Item tpltData;
     private IGridView gridView;
     private EditBox dataEdit;
 
-    public GmtpBean(IGridView view) {
+    public GmtpBean(IGridView view)
+    {
         gridView = view;
     }
 
-    public void initView() {
+    @Override
+    public void initView()
+    {
         dataEdit = new EditBox(this, false);
         dataEdit.initView();
 
         lb_PropName = new javax.swing.JLabel();
 
         tf_PropName = new javax.swing.JComboBox();
-        tf_PropName.setModel(new javax.swing.DefaultComboBoxModel(new String[]{" ", ConsDat.GMTP_SMTP, ConsDat.GMTP_POP3, ConsDat.GMTP_IMAP, ConsDat.GMTP_HTTP}));
+        tf_PropName.setModel(new javax.swing.DefaultComboBoxModel(new String[]
+                {
+                    " ", ConsDat.GMTP_SMTP, ConsDat.GMTP_POP3, ConsDat.GMTP_IMAP, ConsDat.GMTP_HTTP
+                }));
         lb_PropName.setLabelFor(tf_PropName);
 
         lb_PropData = new javax.swing.JLabel();
@@ -92,15 +99,20 @@ public class GmtpBean extends javax.swing.JPanel implements IEditBean {
 
         bt_LinkView.setMnemonic('O');
         bt_LinkView.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_LINK_OPEN)));
-        bt_LinkView.addActionListener(new java.awt.event.ActionListener() {
+        bt_LinkView.addActionListener(new java.awt.event.ActionListener()
+        {
 
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 bt_LinkViewActionPerformed(evt);
             }
         });
     }
 
-    public void initLang() {
+    @Override
+    public void initLang()
+    {
         Lang.setWText(lb_PropName, LangRes.P30F1315, "协议");
         Lang.setWText(lb_PropData, LangRes.P30F1316, "地址");
         Lang.setWTips(bt_LinkView, LangRes.P30F1508, "打开链接");
@@ -108,10 +120,13 @@ public class GmtpBean extends javax.swing.JPanel implements IEditBean {
         dataEdit.initLang();
     }
 
-    public void initData(Item tplt) {
+    @Override
+    public void initData(Item tplt)
+    {
         tpltData = tplt;
         String name = tpltData.getName();
-        if (Util.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS)) {
+        if (Util.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS))
+        {
             name = name.substring(1, name.length() - 1);
         }
         tf_PropName.setSelectedItem(name);
@@ -119,24 +134,32 @@ public class GmtpBean extends javax.swing.JPanel implements IEditBean {
     }
 
     @Override
-    public void requestFocus() {
-        if (!Util.isValidate(tf_PropName.getSelectedItem().toString())) {
+    public void requestFocus()
+    {
+        if (!Util.isValidate(tf_PropName.getSelectedItem().toString()))
+        {
             tf_PropName.requestFocus();
             return;
         }
         tf_PropData.requestFocus();
     }
 
-    public void dropDataActionPerformed(java.awt.event.ActionEvent evt) {
-        if (Lang.showFirm(this, LangRes.P30F1A01, "") == javax.swing.JOptionPane.YES_OPTION) {
+    @Override
+    public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        if (Lang.showFirm(this, LangRes.P30F1A01, "") == javax.swing.JOptionPane.YES_OPTION)
+        {
             UserMdl.getGridMdl().wRemove(tpltData);
             gridView.selectNext(false);
         }
     }
 
-    public void saveDataActionPerformed(java.awt.event.ActionEvent evt) {
+    @Override
+    public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
+    {
         String name = tf_PropName.getSelectedItem().toString();
-        if (!Util.isValidate(name)) {
+        if (!Util.isValidate(name))
+        {
             Lang.showMesg(this, "", "请输入链接名称！");
             tf_PropName.requestFocus();
             return;
@@ -149,18 +172,23 @@ public class GmtpBean extends javax.swing.JPanel implements IEditBean {
         gridView.selectNext(!UserMdl.getGridMdl().isUpdate());
     }
 
-    public void copyDataActionPerformed(java.awt.event.ActionEvent evt) {
+    @Override
+    public void copyDataActionPerformed(java.awt.event.ActionEvent evt)
+    {
         tf_PropData.selectAll();
         Util.setClipboardContents(tf_PropData.getText());
     }
 
-    private void bt_LinkViewActionPerformed(java.awt.event.ActionEvent evt) {
+    private void bt_LinkViewActionPerformed(java.awt.event.ActionEvent evt)
+    {
         String link = tf_PropData.getText();
-        if (!Util.isValidate(link)) {
+        if (!Util.isValidate(link))
+        {
             Lang.showMesg(this, "", "");
             return;
         }
-        if (link.indexOf("://") < 0) {
+        if (link.indexOf("://") < 0)
+        {
             link = "http://" + link;
         }
         Desk.browse(link);

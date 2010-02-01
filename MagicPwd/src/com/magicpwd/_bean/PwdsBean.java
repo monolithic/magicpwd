@@ -22,7 +22,8 @@ import com.magicpwd.v.MenuPwd;
  * 键值：ConsEnv.INDX_PWDS
  * @author Amon
  */
-public class PwdsBean extends javax.swing.JPanel implements IEditBean {
+public class PwdsBean extends javax.swing.JPanel implements IEditBean
+{
 
     private boolean askOverRide;
     private Item tpltData;
@@ -32,21 +33,26 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean {
     private javax.swing.Icon hidePwds;
     private EditBox dataEdit;
 
-    public PwdsBean(IGridView view) {
+    public PwdsBean(IGridView view)
+    {
         gridView = view;
     }
 
-    public void initView() {
+    @Override
+    public void initView()
+    {
         dataEdit = new EditBox(this, false);
         dataEdit.initView();
 
         lb_PropName = new javax.swing.JLabel();
 
-        tf_PropName = new javax.swing.JTextField();
-        tf_PropName.addFocusListener(new java.awt.event.FocusAdapter() {
+        tf_PropName = new javax.swing.JTextField(14);
+        tf_PropName.addFocusListener(new java.awt.event.FocusAdapter()
+        {
 
             @Override
-            public void focusGained(java.awt.event.FocusEvent evt) {
+            public void focusGained(java.awt.event.FocusEvent evt)
+            {
                 tf_PropName.selectAll();
             }
         });
@@ -103,9 +109,12 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean {
         bt_PwdsUcfg = new BtnLabel();
         bt_PwdsUcfg.setMnemonic('O');
         bt_PwdsUcfg.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_PWDS_UCFG)));
-        bt_PwdsUcfg.addActionListener(new java.awt.event.ActionListener() {
+        bt_PwdsUcfg.addActionListener(new java.awt.event.ActionListener()
+        {
 
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 bt_PwdsUcfgActionPerformed(evt);
             }
         });
@@ -113,9 +122,12 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean {
         bt_PwdsGent = new BtnLabel();
         bt_PwdsGent.setMnemonic('G');
         bt_PwdsGent.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_PWDS_GENT)));
-        bt_PwdsGent.addActionListener(new java.awt.event.ActionListener() {
+        bt_PwdsGent.addActionListener(new java.awt.event.ActionListener()
+        {
 
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 bt_PwdsGentActionPerformed(evt);
             }
         });
@@ -124,9 +136,12 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean {
         bt_PwdsView.setMnemonic('M');
         hidePwds = new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_PWDS_HIDE));
         bt_PwdsView.setIcon(hidePwds);
-        bt_PwdsView.addActionListener(new java.awt.event.ActionListener() {
+        bt_PwdsView.addActionListener(new java.awt.event.ActionListener()
+        {
 
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 bt_PwdsViewActionPerformed(evt);
             }
         });
@@ -135,9 +150,11 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean {
         menuPwd.initView();
     }
 
-    public void initLang() {
+    @Override
+    public void initLang()
+    {
         dataEdit.initLang();
-        
+
         viewPwds = new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_PWDS_VIEW));
 
         Lang.setWText(lb_PropName, LangRes.P30F1309, "名称");
@@ -149,10 +166,13 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean {
         menuPwd.initLang();
     }
 
-    public void initData(Item tplt) {
+    @Override
+    public void initData(Item tplt)
+    {
         tpltData = tplt;
         String name = tpltData.getName();
-        if (Util.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS)) {
+        if (Util.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS))
+        {
             name = name.substring(1, name.length() - 1);
         }
         tf_PropName.setText(name);
@@ -161,24 +181,32 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean {
     }
 
     @Override
-    public void requestFocus() {
-        if (!Util.isValidate(tf_PropName.getText())) {
+    public void requestFocus()
+    {
+        if (!Util.isValidate(tf_PropName.getText()))
+        {
             tf_PropName.requestFocus();
             return;
         }
         pf_PropData.requestFocus();
     }
 
-    public void dropDataActionPerformed(java.awt.event.ActionEvent evt) {
-        if (Lang.showFirm(this, LangRes.P30F1A01, "") == javax.swing.JOptionPane.YES_OPTION) {
+    @Override
+    public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        if (Lang.showFirm(this, LangRes.P30F1A01, "") == javax.swing.JOptionPane.YES_OPTION)
+        {
             UserMdl.getGridMdl().wRemove(tpltData);
             gridView.selectNext(false);
         }
     }
 
-    public void saveDataActionPerformed(java.awt.event.ActionEvent evt) {
+    @Override
+    public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
+    {
         String name = tf_PropName.getText();
-        if (!Util.isValidate(name)) {
+        if (!Util.isValidate(name))
+        {
             Lang.showMesg(this, "", "请输入口令名称！");
             tf_PropName.requestFocus();
             return;
@@ -191,39 +219,52 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean {
         gridView.selectNext(!UserMdl.getGridMdl().isUpdate());
     }
 
-    public void copyDataActionPerformed(java.awt.event.ActionEvent evt) {
+    @Override
+    public void copyDataActionPerformed(java.awt.event.ActionEvent evt)
+    {
         pf_PropData.selectAll();
         Util.setClipboardContents(new String(pf_PropData.getPassword()), UserMdl.getCfg().getClnClp());
     }
 
-    private void bt_PwdsUcfgActionPerformed(java.awt.event.ActionEvent evt) {
+    private void bt_PwdsUcfgActionPerformed(java.awt.event.ActionEvent evt)
+    {
         menuPwd.initData();
         menuPwd.show(bt_PwdsUcfg, 0, bt_PwdsUcfg.getSize().height);
     }
 
-    private void bt_PwdsGentActionPerformed(java.awt.event.ActionEvent evt) {
-        if (askOverRide && pf_PropData.getPassword().length > 1) {
-            if (Lang.showFirm(this, "", "") != javax.swing.JOptionPane.YES_OPTION) {
+    private void bt_PwdsGentActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        if (askOverRide && pf_PropData.getPassword().length > 1)
+        {
+            if (Lang.showFirm(this, "", "") != javax.swing.JOptionPane.YES_OPTION)
+            {
                 return;
             }
             askOverRide = false;
         }
 
-        try {
+        try
+        {
             char[] t = Util.nextRandomKey(menuPwd.getCharSets(), menuPwd.getCharSize(), menuPwd.isCharUrpt());
             pf_PropData.setText(new String(t));
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
             Lang.showMesg(this, exp.getMessage(), "");
         }
     }
 
-    private void bt_PwdsViewActionPerformed(java.awt.event.ActionEvent evt) {
-        if (pf_PropData.getEchoChar() == 0) {
+    private void bt_PwdsViewActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        if (pf_PropData.getEchoChar() == 0)
+        {
             bt_PwdsView.setIcon(hidePwds);
             pf_PropData.setEchoChar('*');
             Lang.setWTips(bt_PwdsView, LangRes.P30F1504, "显示口令");
-        } else {
+        }
+        else
+        {
             bt_PwdsView.setIcon(viewPwds);
             pf_PropData.setEchoChar('\0');
             Lang.setWTips(bt_PwdsView, LangRes.P30F1505, "隐藏口令");
@@ -235,7 +276,6 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean {
     private javax.swing.JPanel pl_PropEdit;
     private javax.swing.JPasswordField pf_PropData;
     private javax.swing.JTextField tf_PropName;
-
     private BtnLabel bt_PwdsUcfg;
     private BtnLabel bt_PwdsGent;
     private BtnLabel bt_PwdsView;

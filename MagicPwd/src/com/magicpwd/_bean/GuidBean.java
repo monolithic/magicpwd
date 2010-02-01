@@ -20,23 +20,27 @@ import com.magicpwd.v.EditBox;
  * 键值：ConsEnv.INDX_GUID
  * @author Amon
  */
-public class GuidBean extends javax.swing.JPanel implements IEditBean {
+public class GuidBean extends javax.swing.JPanel implements IEditBean
+{
 
     private Item tpltData;
     private IGridView gridView;
     private EditBox dataEdit;
 
-    public GuidBean(IGridView view) {
+    public GuidBean(IGridView view)
+    {
         gridView = view;
     }
 
-    public void initView() {
+    @Override
+    public void initView()
+    {
         dataEdit = new EditBox(this, false);
         dataEdit.initView();
 
         lb_PropName = new javax.swing.JLabel();
 
-        tf_PropName = new javax.swing.JTextField();
+        tf_PropName = new javax.swing.JTextField(20);
         tf_PropName.setEditable(false);
         lb_PropName.setLabelFor(tf_PropName);
 
@@ -88,14 +92,18 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean {
         layout.setVerticalGroup(vpg4);
     }
 
-    public void initLang() {
+    @Override
+    public void initLang()
+    {
         Lang.setWText(lb_PropName, LangRes.P30F1301, "时间");
         Lang.setWText(lb_PropData, LangRes.P30F1302, "模板");
 
         dataEdit.initLang();
     }
 
-    public void initData(Item tplt) {
+    @Override
+    public void initData(Item tplt)
+    {
         tpltData = tplt;
         String t = UserMdl.getGridMdl().getCurrTime().toString();
         t = t.substring(0, t.lastIndexOf('.'));
@@ -105,20 +113,25 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean {
     }
 
     @Override
-    public void requestFocus() {
+    public void requestFocus()
+    {
         cb_PropData.requestFocus();
     }
 
-    public void saveDataActionPerformed(java.awt.event.ActionEvent evt) {
+    @Override
+    public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
+    {
         Object obj = cb_PropData.getSelectedItem();
-        if (obj == null) {
+        if (obj == null)
+        {
             Lang.showMesg(this, LangRes.P30F7A29, "请选择口令模板!");
             cb_PropData.requestFocus();
             return;
         }
 
         GridMdl gm = UserMdl.getGridMdl();
-        if (gm.getRowCount() < ConsEnv.PWDS_ITEM_HEAD) {
+        if (gm.getRowCount() < ConsEnv.PWDS_ITEM_HEAD)
+        {
             gm.initMeta();
         }
         Tplt item = (Tplt) obj;
@@ -129,10 +142,14 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean {
         gridView.selectNext(!gm.isUpdate());
     }
 
-    public void copyDataActionPerformed(java.awt.event.ActionEvent evt) {
+    @Override
+    public void copyDataActionPerformed(java.awt.event.ActionEvent evt)
+    {
     }
 
-    public void dropDataActionPerformed(java.awt.event.ActionEvent evt) {
+    @Override
+    public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
+    {
     }
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JLabel lb_PropEdit;

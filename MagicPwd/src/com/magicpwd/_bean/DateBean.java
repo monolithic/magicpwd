@@ -20,27 +20,33 @@ import com.magicpwd.v.EditBox;
  * 键值：ConsEnv.INDX_DATE
  * @author Amon
  */
-public class DateBean extends javax.swing.JPanel implements IEditBean {
+public class DateBean extends javax.swing.JPanel implements IEditBean
+{
 
     private Item tpltData;
     private IGridView gridView;
     private EditBox dataEdit;
 
-    public DateBean(IGridView view) {
+    public DateBean(IGridView view)
+    {
         gridView = view;
     }
 
-    public void initView() {
+    @Override
+    public void initView()
+    {
         dataEdit = new EditBox(this, false);
         dataEdit.initView();
 
         lb_PropName = new javax.swing.JLabel();
 
-        tf_PropName = new javax.swing.JTextField();
-        tf_PropName.addFocusListener(new java.awt.event.FocusAdapter() {
+        tf_PropName = new javax.swing.JTextField(14);
+        tf_PropName.addFocusListener(new java.awt.event.FocusAdapter()
+        {
 
             @Override
-            public void focusGained(java.awt.event.FocusEvent evt) {
+            public void focusGained(java.awt.event.FocusEvent evt)
+            {
                 tf_PropName.selectAll();
             }
         });
@@ -97,15 +103,20 @@ public class DateBean extends javax.swing.JPanel implements IEditBean {
 
         bt_DateView.setMnemonic('O');
         bt_DateView.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_DATE_TIME)));
-        bt_DateView.addActionListener(new java.awt.event.ActionListener() {
+        bt_DateView.addActionListener(new java.awt.event.ActionListener()
+        {
 
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 bt_DateViewActionPerformed(evt);
             }
         });
     }
 
-    public void initLang() {
+    @Override
+    public void initLang()
+    {
         Lang.setWText(lb_PropName, LangRes.P30F130F, "名称");
         Lang.setWText(lb_PropData, LangRes.P30F1310, "时间");
         Lang.setWTips(bt_DateView, LangRes.P30F150A, "当前时间");
@@ -113,10 +124,13 @@ public class DateBean extends javax.swing.JPanel implements IEditBean {
         dataEdit.initLang();
     }
 
-    public void initData(Item tplt) {
+    @Override
+    public void initData(Item tplt)
+    {
         tpltData = tplt;
         String name = tpltData.getName();
-        if (Util.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS)) {
+        if (Util.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS))
+        {
             name = name.substring(1, name.length() - 1);
         }
         tf_PropName.setText(name);
@@ -124,24 +138,32 @@ public class DateBean extends javax.swing.JPanel implements IEditBean {
     }
 
     @Override
-    public void requestFocus() {
-        if (!Util.isValidate(tf_PropName.getText())) {
+    public void requestFocus()
+    {
+        if (!Util.isValidate(tf_PropName.getText()))
+        {
             tf_PropName.requestFocus();
             return;
         }
         tf_PropData.requestFocus();
     }
 
-    public void dropDataActionPerformed(java.awt.event.ActionEvent evt) {
-        if (Lang.showFirm(this, LangRes.P30F1A01, "") == javax.swing.JOptionPane.YES_OPTION) {
+    @Override
+    public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        if (Lang.showFirm(this, LangRes.P30F1A01, "") == javax.swing.JOptionPane.YES_OPTION)
+        {
             UserMdl.getGridMdl().wRemove(tpltData);
             gridView.selectNext(false);
         }
     }
 
-    public void saveDataActionPerformed(java.awt.event.ActionEvent evt) {
+    @Override
+    public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
+    {
         String name = tf_PropName.getText();
-        if (!Util.isValidate(name)) {
+        if (!Util.isValidate(name))
+        {
             Lang.showMesg(this, "", "请输入日期名称！");
             tf_PropName.requestFocus();
             return;
@@ -154,12 +176,15 @@ public class DateBean extends javax.swing.JPanel implements IEditBean {
         gridView.selectNext(!UserMdl.getGridMdl().isUpdate());
     }
 
-    public void copyDataActionPerformed(java.awt.event.ActionEvent evt) {
+    @Override
+    public void copyDataActionPerformed(java.awt.event.ActionEvent evt)
+    {
         tf_PropData.selectAll();
         Util.setClipboardContents(tf_PropData.getText());
     }
 
-    private void bt_DateViewActionPerformed(java.awt.event.ActionEvent evt) {
+    private void bt_DateViewActionPerformed(java.awt.event.ActionEvent evt)
+    {
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(ConsEnv.VIEW_DATE);
         tf_PropData.setText(sdf.format(new java.util.Date(System.currentTimeMillis())));
     }
