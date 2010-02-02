@@ -27,6 +27,7 @@ import com.magicpwd.d.DBA3000;
  */
 public class GridMdl extends DefaultTableModel
 {
+
     private boolean modified;
     private List<Item> ls_ItemList;
     private Keys keys;
@@ -261,6 +262,15 @@ public class GridMdl extends DefaultTableModel
         fireTableDataChanged();
     }
 
+    /**
+     * 查找特定类别且具有特定附加属性的字段
+     * @param type
+     * @param args
+     */
+    public void wSelect(int type, int args)
+    {
+    }
+
     public void wUpdate()
     {
         fireTableDataChanged();
@@ -315,7 +325,7 @@ public class GridMdl extends DefaultTableModel
 
             // Guid
             tplt = new Item();
-            tplt.setKind(ConsDat.INDX_GUID);
+            tplt.setType(ConsDat.INDX_GUID);
             text = temp.get(indx++);
             tplt.setName(sdf.format(Util.stringToDate(text, '-', ':', ' ').getTime()));
             tplt.setData(ConsDat.HASH_TPLT);
@@ -323,7 +333,7 @@ public class GridMdl extends DefaultTableModel
 
             // Meta
             tplt = new Item();
-            tplt.setKind(ConsDat.INDX_META);
+            tplt.setType(ConsDat.INDX_META);
             text = temp.get(indx++);
             tplt.setName(text);
             keys.setP30F0107(text);
@@ -334,7 +344,7 @@ public class GridMdl extends DefaultTableModel
 
             // Past
             tplt = new Item();
-            tplt.setKind(ConsDat.INDX_TIME);
+            tplt.setType(ConsDat.INDX_TIME);
             text = temp.get(indx++);
             tplt.setData(text);
             keys.setP30F010A(new java.sql.Timestamp(Util.stringToDate(text, '-', ':', ' ').getTimeInMillis()));
@@ -346,7 +356,7 @@ public class GridMdl extends DefaultTableModel
             while (indx < temp.size())
             {
                 tplt = new Item();
-                tplt.setKind(Integer.parseInt(temp.get(indx++)));
+                tplt.setType(Integer.parseInt(temp.get(indx++)));
                 tplt.setName(temp.get(indx++));
                 tplt.setData(temp.get(indx++));
                 ls_ItemList.add(tplt);
@@ -411,7 +421,7 @@ public class GridMdl extends DefaultTableModel
             while (indx < ls_ItemList.size())
             {
                 tplt = ls_ItemList.get(indx++);
-                temp.add("" + tplt.getKind());
+                temp.add("" + tplt.getType());
                 temp.add(tplt.getName());
                 temp.add(tplt.getData());
             }
@@ -497,7 +507,7 @@ public class GridMdl extends DefaultTableModel
         text.delete(0, text.length());
         for (Item item : list)
         {
-            text.append(item.getKind());
+            text.append(item.getType());
             text.append(ConsDat.SP_SQL_KV);
             text.append(item.getName());
             text.append(ConsDat.SP_SQL_KV);
