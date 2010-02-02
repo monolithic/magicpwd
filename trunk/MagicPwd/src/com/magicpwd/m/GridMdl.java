@@ -3,6 +3,7 @@
  */
 package com.magicpwd.m;
 
+import com.magicpwd._comn.I1S2;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -267,8 +268,40 @@ public class GridMdl extends DefaultTableModel
      * @param type
      * @param args
      */
-    public void wSelect(int type, int args)
+    public int wSelect(int type, int args)
     {
+        int t = (type | args);
+        int n = 0;
+        int l = 0;
+        for (int i = 0, j = ls_ItemList.size(); i < j; i += 1)
+        {
+            if (ls_ItemList.get(i).getType() == t)
+            {
+                l = i;
+                n += 1;
+            }
+        }
+        return n == 1 ? l : -1;
+    }
+
+    /**
+     * 
+     * @param type
+     * @return
+     */
+    public List<I1S2> wSelect(int type)
+    {
+        List<I1S2> list = new ArrayList<I1S2>();
+        int i = 0;
+        for (Item item : ls_ItemList)
+        {
+            if (item.getType() == type)
+            {
+                list.add(new I1S2(i, "", item.getName() + '（' + item.getData() + '）'));
+            }
+            i += 1;
+        }
+        return list;
     }
 
     public void wUpdate()
