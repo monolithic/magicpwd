@@ -9,6 +9,7 @@ import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IGridView;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
+import com.magicpwd.m.GridMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.EditBox;
 
@@ -123,13 +124,14 @@ public class MetaBean extends javax.swing.JPanel implements IEditBean
             return;
         }
 
-        UserMdl.getGridMdl().setKeysName(name);
+        GridMdl gm=UserMdl.getGridMdl();
+        gm.setKeysName(name);
         tpltData.setName(name);
 
         String meta = ta_PropData.getText();
-        UserMdl.getGridMdl().setKeysMeta(meta);
+        gm.setKeysMeta(meta);
         tpltData.setData(meta);
-        UserMdl.getGridMdl().setModified(true);
+        gm.setModified(true);
 
         gridView.selectNext(!UserMdl.getGridMdl().isUpdate());
     }

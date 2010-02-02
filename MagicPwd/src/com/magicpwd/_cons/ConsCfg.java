@@ -14,7 +14,7 @@ public interface ConsCfg
      */
     String CFG_PRE = "magicpwd";
     /**
-     * 用户信息：注册用户列表，以英文逗号分隔
+     * 用户信息：注册用户代码列表，以英文逗号分隔
      */
     String CFG_USER = CFG_PRE + ".user";
     /**

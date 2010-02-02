@@ -31,18 +31,23 @@ import java.util.List;
  *
  * @author Amon
  */
-public class DBA3000 {
+public class DBA3000
+{
 
-    public static boolean readDBVersion(DBAccess dba) {
+    public static boolean readDBVersion(DBAccess dba)
+    {
         dba.addTable(DBC3000.P30F0000);
         dba.addWhere(DBC3000.P30F0001, "versions");
         dba.addWhere(DBC3000.P30F0002, ConsDat.VERSIONS);
         boolean b = false;
-        try {
+        try
+        {
             ResultSet rest = dba.executeSelect();
             b = rest.next();
             rest.close();
-        } catch (SQLException ex) {
+        }
+        catch (SQLException ex)
+        {
             Logs.exception(ex);
         }
         return b;
@@ -52,7 +57,8 @@ public class DBA3000 {
      * 添加用户过滤条件
      * @param dba
      */
-    private static void addUserSort(DBAccess dba) {
+    private static void addUserSort(DBAccess dba)
+    {
         dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_STAT_1);
         dba.addWhere(DBC3000.P30F0104, UserMdl.getUserId());
     }
@@ -61,24 +67,28 @@ public class DBA3000 {
      * 添加显示排序
      * @param dba
      */
-    private static void addDataSort(DBAccess dba) {
+    private static void addDataSort(DBAccess dba)
+    {
         boolean asc = ConsCfg.DEF_TRUE.equals(UserMdl.getCfg().getCfg(ConsCfg.CFG_VIEW_LIST_ASC));
         String key = UserMdl.getCfg().getCfg(ConsCfg.CFG_VIEW_LIST_ASC, "");
 
         // 按访问频率排序
-        if (ConsEnv.LIST_SORT_FEQ.equals(key)) {
+        if (ConsEnv.LIST_SORT_FEQ.equals(key))
+        {
             dba.addSort(DBC3000.P30F0101, asc);
             return;
         }
 
         // 按注册时间排序
-        if (ConsEnv.LIST_SORT_REG.equals(key)) {
+        if (ConsEnv.LIST_SORT_REG.equals(key))
+        {
             dba.addSort(DBC3000.P30F0106, asc);
             return;
         }
 
         // 按到期时间排序
-        if (ConsEnv.LIST_SORT_DUE.equals(key)) {
+        if (ConsEnv.LIST_SORT_DUE.equals(key))
+        {
             dba.addSort(DBC3000.P30F010A, asc);
             return;
         }
@@ -93,9 +103,11 @@ public class DBA3000 {
      * @param list
      * @throws SQLException
      */
-    private static void getNameData(ResultSet rest, List<Keys> list) throws SQLException {
+    private static void getNameData(ResultSet rest, List<Keys> list) throws SQLException
+    {
         Keys item;
-        while (rest.next()) {
+        while (rest.next())
+        {
             item = new Keys();
             item.setP30F0101(rest.getInt(DBC3000.P30F0101));
             item.setP30F0102(rest.getInt(DBC3000.P30F0102));
@@ -120,11 +132,13 @@ public class DBA3000 {
      * @param list
      * @return
      */
-    public static boolean readKeysList(String kindHash, List<Keys> list) {
+    public static boolean readKeysList(String kindHash, List<Keys> list)
+    {
         // 数据库连接初始化
         DBAccess dba = new DBAccess();
 
-        try {
+        try
+        {
             dba.init();
 
             // 查询语句拼接
@@ -135,10 +149,14 @@ public class DBA3000 {
 
             getNameData(dba.executeSelect(), list);
             return true;
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
             return false;
-        } finally {
+        }
+        finally
+        {
             dba.close();
         }
     }
@@ -149,15 +167,18 @@ public class DBA3000 {
      * @param list
      * @return
      */
-    public static boolean findUserData(String text, List<Keys> list) {
-        if (!Util.isValidate(text)) {
+    public static boolean findUserData(String text, List<Keys> list)
+    {
+        if (!Util.isValidate(text))
+        {
             return false;
         }
 
         // 数据库连接初始化
         DBAccess dba = new DBAccess();
 
-        try {
+        try
+        {
             dba.init();
 
             text = '%' + Util.text2DB(text.trim()).replace(' ', '%').replace('+', '%') + '%';
@@ -169,10 +190,14 @@ public class DBA3000 {
 
             getNameData(dba.executeSelect(), list);
             return true;
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
             return false;
-        } finally {
+        }
+        finally
+        {
             dba.close();
         }
     }
@@ -183,10 +208,12 @@ public class DBA3000 {
      * @param list
      * @return
      */
-    public static boolean findTimeNote(Timestamp s, Timestamp e, List<Keys> list) {
+    public static boolean findTimeNote(Timestamp s, Timestamp e, List<Keys> list)
+    {
         DBAccess dba = new DBAccess();
 
-        try {
+        try
+        {
             dba.init();
 
             dba.addTable(DBC3000.P30F0100);
@@ -196,17 +223,21 @@ public class DBA3000 {
 
             getNameData(dba.executeSelect(), list);
             return true;
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
             return false;
         }
     }
 
-    public static String findUserNote(String text) {
+    public static String findUserNote(String text)
+    {
         // 数据库连接初始化
         DBAccess dba = new DBAccess();
 
-        try {
+        try
+        {
             dba.init();
 
             text = '%' + Util.text2DB(text.replace(' ', '%').replace('+', '%')) + '%';
@@ -223,23 +254,30 @@ public class DBA3000 {
             dba.addWhere(DBC3000.P30F0106, ConsDat.HASH_NOTE);
 
             ResultSet rest = dba.executeSelect();
-            if (rest.next()) {
+            if (rest.next())
+            {
                 return rest.getString(DBC3000.P30F0103);
             }
             return "";
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
             return "";
-        } finally {
+        }
+        finally
+        {
             dba.close();
         }
     }
 
-    public static boolean readPwdsData(Keys keys) {
+    public static boolean readPwdsData(Keys keys)
+    {
         // 数据库连接初始化
         DBAccess dba = new DBAccess();
 
-        try {
+        try
+        {
             dba.init();
 
             // 查询语句拼接
@@ -260,10 +298,10 @@ public class DBA3000 {
 
             ResultSet rest = dba.executeSelect();
             StringBuffer sb = new StringBuffer();
-            if (rest.next()) {
+            if (rest.next())
+            {
                 keys.setP30F0102(rest.getInt(DBC3000.P30F0102));
                 keys.setP30F0103(rest.getString(DBC3000.P30F0103));
-                keys.setCurrTime(new Timestamp(Long.parseLong(keys.getP30F0103(), 16)));
                 keys.setP30F0105(rest.getString(DBC3000.P30F0104));
                 keys.setP30F0106(rest.getTimestamp(DBC3000.P30F0106));
                 keys.setP30F0107(rest.getString(DBC3000.P30F0107));
@@ -272,28 +310,37 @@ public class DBA3000 {
                 keys.setP30F010A(rest.getTimestamp(DBC3000.P30F010A));
                 keys.setP30F010B(rest.getString(DBC3000.P30F010B));
             }
-            while (rest.next()) {
+            while (rest.next())
+            {
                 sb.append(rest.getString(DBC3000.P30F0109));
             }
             return true;
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
             return false;
-        } finally {
+        }
+        finally
+        {
             dba.close();
         }
     }
 
-    public static boolean savePwdsData(Keys keys) {
+    public static boolean savePwdsData(Keys keys)
+    {
         // 数据库连接初始化
         DBAccess dba = new DBAccess();
 
-        try {
+        try
+        {
             dba.init();
 
             // 数据更新时，首先删除已有数据，再添加数据
-            if (Util.isValidateHash(keys.getP30F0103())) {
-                if (keys.isHistBack()) {
+            if (Util.isValidateHash(keys.getP30F0103()))
+            {
+                if (keys.isHistBack())
+                {
                     backup(dba, keys);
                 }
                 remove(dba, keys);
@@ -302,18 +349,24 @@ public class DBA3000 {
             update(dba, keys);
             dba.executeBatch();
             return true;
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
             return false;
-        } finally {
+        }
+        finally
+        {
             dba.close();
         }
     }
 
-    public static boolean deletePwdsData(String hash) {
+    public static boolean deletePwdsData(String hash)
+    {
         DBAccess dba = new DBAccess();
 
-        try {
+        try
+        {
             dba.init();
 
             String DELETE = "DELETE FROM {0} WHERE {1}='{2}'";
@@ -327,10 +380,14 @@ public class DBA3000 {
             dba.addBatch(Util.format(DELETE, DBC3000.P30F0B00, DBC3000.P30F0B03, hash));
             dba.executeBatch();
             return true;
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
             return false;
-        } finally {
+        }
+        finally
+        {
             dba.close();
         }
     }
@@ -341,7 +398,8 @@ public class DBA3000 {
      * @param keys
      * @throws SQLException
      */
-    private static void backup(DBAccess dba, Keys keys) throws SQLException {
+    private static void backup(DBAccess dba, Keys keys) throws SQLException
+    {
         String hash = Hash.hash(false);
 
         dba.addParam(DBC3000.P30F0A01, hash);
@@ -375,8 +433,10 @@ public class DBA3000 {
      * @param pwds
      * @throws SQLException
      */
-    private static void remove(DBAccess dba, Keys pwds) throws SQLException {
-        if (Util.isValidateHash(pwds.getP30F0103())) {
+    private static void remove(DBAccess dba, Keys pwds) throws SQLException
+    {
+        if (Util.isValidateHash(pwds.getP30F0103()))
+        {
             return;
         }
 
@@ -392,28 +452,32 @@ public class DBA3000 {
      * @param keys
      * @throws SQLException
      */
-    private static void update(DBAccess dba, Keys keys) throws SQLException {
+    private static void update(DBAccess dba, Keys keys) throws SQLException
+    {
         dba.addTable(DBC3000.P30F0100);
         dba.addParam(DBC3000.P30F0101, keys.getP30F0101());
-        dba.addParam(DBC3000.P30F0103, keys.getP30F0103());
+        dba.addParam(DBC3000.P30F0102, keys.getP30F0102());
         dba.addParam(DBC3000.P30F0104, keys.getP30F0104());
         dba.addParam(DBC3000.P30F0105, keys.getP30F0105());
         dba.addParam(DBC3000.P30F0106, keys.getP30F0106().toString());
         dba.addParam(DBC3000.P30F0107, Util.text2DB(keys.getP30F0107()));
         dba.addParam(DBC3000.P30F0108, Util.text2DB(keys.getP30F0108()));
         dba.addParam(DBC3000.P30F0109, Util.text2DB(keys.getP30F0109()));
-        dba.addParam(DBC3000.P30F010A, keys.getP30F010A().toString());
+        dba.addParam(DBC3000.P30F010A, keys.getP30F010A() != null ? keys.getP30F010A().toString() : null);
         dba.addParam(DBC3000.P30F010B, Util.text2DB(keys.getP30F010B()));
         dba.addParam(DBC3000.P30F010C, Util.text2DB(keys.getP30F010C()));
 
-        if (Util.isValidateHash(keys.getP30F0103())) {
+        if (Util.isValidateHash(keys.getP30F0103()))
+        {
             // 数据更新
-            dba.addWhere(DBC3000.P30F0102, keys.getP30F0102());
+            dba.addWhere(DBC3000.P30F0103, keys.getP30F0103());
             dba.addUpdateBatch();
-        } else {
+        }
+        else
+        {
             // 新增数据
             keys.setP30F0103(Hash.hash(false));
-            dba.addParam(DBC3000.P30F0102, keys.getP30F0102());
+            dba.addParam(DBC3000.P30F0103, keys.getP30F0103());
             dba.addInsertBatch();
         }
 
@@ -425,7 +489,8 @@ public class DBA3000 {
         int t1 = 0;
         int t2 = t1 + ConsEnv.PWDS_DATA_SIZE;
         // 循环处理每一节段数据
-        while (t2 < len) {
+        while (t2 < len)
+        {
             dba.addTable(DBC3000.P30F0200);
             dba.addParam(DBC3000.P30F0201, idx++);
             dba.addParam(DBC3000.P30F0202, keys.getP30F0103());
@@ -448,10 +513,12 @@ public class DBA3000 {
         dba.reset();
     }
 
-    public static boolean deleteKindData(String root, Kind item, int step) {
+    public static boolean deleteKindData(String root, Kind item, int step)
+    {
         DBAccess dba = new DBAccess();
 
-        try {
+        try
+        {
             dba.init();
 
             dba.addTable(DBC3000.C2010100);
@@ -468,18 +535,24 @@ public class DBA3000 {
 
             dba.executeBatch();
             return true;
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
             return false;
-        } finally {
+        }
+        finally
+        {
             dba.close();
         }
     }
 
-    public static boolean updateKindData(Kind item) {
+    public static boolean updateKindData(Kind item)
+    {
         DBAccess dba = new DBAccess();
 
-        try {
+        try
+        {
             dba.init();
 
             dba.addTable(DBC3000.C2010100);
@@ -491,30 +564,39 @@ public class DBA3000 {
             dba.addParam(DBC3000.C2010107, Util.text2DB(item.getC2010107()));//
             dba.addParam(DBC3000.C2010108, Util.text2DB(item.getC2010108()));// 类别描述
             dba.addParam(DBC3000.C2010109, DBC3000.SQL_NOW, false);// 更新时间
-            if (Util.isValidateHash(item.getC2010103())) {
+            if (Util.isValidateHash(item.getC2010103()))
+            {
                 dba.addWhere(DBC3000.C2010103, item.getC2010103());// 类别索引
                 dba.executeUpdate();
-            } else {
+            }
+            else
+            {
                 item.setC2010103(Hash.hash(false));
                 dba.addParam(DBC3000.C2010103, item.getC2010103());// 类别索引
                 dba.addParam(DBC3000.C201010A, DBC3000.SQL_NOW, false);// 更新时间
                 dba.executeInsert();
             }
             return true;
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
             return false;
-        } finally {
+        }
+        finally
+        {
             dba.close();
         }
     }
 
-    public static List<S1S3> selectKindData() {
+    public static List<S1S3> selectKindData()
+    {
         List<S1S3> list = new ArrayList<S1S3>();
 
         DBAccess dba = new DBAccess();
 
-        try {
+        try
+        {
             dba.init();
 
             dba.addTable(DBC3000.C2010100);
@@ -526,7 +608,8 @@ public class DBA3000 {
 
             ResultSet rest = dba.executeSelect();
             S1S3 item;
-            while (rest.next()) {
+            while (rest.next())
+            {
                 item = new S1S3();
                 item.setK(rest.getString(DBC3000.C2010103));
                 item.setV1(rest.getString(DBC3000.C2010105));
@@ -535,20 +618,26 @@ public class DBA3000 {
                 list.add(item);
             }
             rest.close();
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
-        } finally {
+        }
+        finally
+        {
             dba.close();
         }
         return list;
     }
 
-    public static List<Kind> selectKindData(String typeHash) {
+    public static List<Kind> selectKindData(String typeHash)
+    {
         List<Kind> list = new ArrayList<Kind>();
 
         DBAccess dba = new DBAccess();
 
-        try {
+        try
+        {
             dba.init();
 
             dba.addTable(DBC3000.C2010100);
@@ -565,7 +654,8 @@ public class DBA3000 {
 
             ResultSet rest = dba.executeSelect();
             Kind item;
-            while (rest.next()) {
+            while (rest.next())
+            {
                 item = new Kind();
                 item.setC2010101(rest.getInt(DBC3000.C2010101));
                 item.setC2010102(rest.getInt(DBC3000.C2010102));
@@ -578,19 +668,25 @@ public class DBA3000 {
                 list.add(item);
             }
             rest.close();
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
-        } finally {
+        }
+        finally
+        {
             dba.close();
         }
         return list;
     }
 
-    public static boolean insertTpltKind(S1S2 kindItem, String kindDesp) {
+    public static boolean insertTpltKind(S1S2 kindItem, String kindDesp)
+    {
         DBAccess dba = new DBAccess();
 
         kindItem.setK(Hash.hash(false));
-        try {
+        try
+        {
             dba.init();
 
             dba.addTable(DBC3000.P30F1100);
@@ -606,18 +702,24 @@ public class DBA3000 {
 
             dba.executeInsert();
             return true;
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
             return false;
-        } finally {
+        }
+        finally
+        {
             dba.close();
         }
     }
 
-    public static boolean updateTpltKind(S1S2 kindItem, String kindDesp) {
+    public static boolean updateTpltKind(S1S2 kindItem, String kindDesp)
+    {
         DBAccess dba = new DBAccess();
 
-        try {
+        try
+        {
             dba.init();
 
             dba.addTable(DBC3000.P30F1100);
@@ -629,20 +731,26 @@ public class DBA3000 {
 
             dba.executeUpdate();
             return true;
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
             return false;
-        } finally {
+        }
+        finally
+        {
             dba.close();
         }
     }
 
-    public static List<Tplt> selectTpltData(String hash) {
+    public static List<Tplt> selectTpltData(String hash)
+    {
         List<Tplt> kindList = new ArrayList<Tplt>();
 
         DBAccess dba = new DBAccess();
 
-        try {
+        try
+        {
             dba.init();
 
             dba.addTable(DBC3000.P30F1100);
@@ -652,14 +760,16 @@ public class DBA3000 {
             dba.addColumn(DBC3000.P30F1105);
             dba.addColumn(DBC3000.P30F1106);
             dba.addColumn(DBC3000.P30F1107);
-            if (Util.isValidate(hash)) {
+            if (Util.isValidate(hash))
+            {
                 dba.addWhere(DBC3000.P30F1104, hash);
             }
             dba.addSort(DBC3000.P30F1101, true);
 
             ResultSet rest = dba.executeSelect();
             Tplt item;
-            while (rest.next()) {
+            while (rest.next())
+            {
                 item = new Tplt();
                 item.setP30F1101(rest.getInt(DBC3000.P30F1101));
                 item.setP30F1103(rest.getString(DBC3000.P30F1103));
@@ -672,18 +782,24 @@ public class DBA3000 {
             }
 
             rest.close();
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
-        } finally {
+        }
+        finally
+        {
             dba.close();
         }
         return kindList;
     }
 
-    public static boolean deleteTpltData(S1S2 tpltItem) {
+    public static boolean deleteTpltData(S1S2 tpltItem)
+    {
         DBAccess dba = new DBAccess();
 
-        try {
+        try
+        {
             dba.init();
 
             dba.addTable(DBC3000.P30F1100);
@@ -698,18 +814,24 @@ public class DBA3000 {
 
             dba.executeBatch();
             return true;
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
             return false;
-        } finally {
+        }
+        finally
+        {
             dba.close();
         }
     }
 
-    public static boolean updateTpltData(Tplt tpltItem) {
+    public static boolean updateTpltData(Tplt tpltItem)
+    {
         DBAccess dba = new DBAccess();
 
-        try {
+        try
+        {
             dba.init();
 
             dba.addTable(DBC3000.P30F1100);
@@ -721,10 +843,13 @@ public class DBA3000 {
             dba.addParam(DBC3000.P30F1107, Util.text2DB(tpltItem.getP30F1107()));
             dba.addParam(DBC3000.P30F1108, DBC3000.SQL_NOW, false);
 
-            if (Util.isValidateHash(tpltItem.getP30F1103())) {
+            if (Util.isValidateHash(tpltItem.getP30F1103()))
+            {
                 dba.addWhere(DBC3000.P30F1103, tpltItem.getP30F1103());
                 dba.executeUpdate();
-            } else {
+            }
+            else
+            {
                 tpltItem.setP30F1103(Hash.hash(false));
                 dba.addParam(DBC3000.P30F1103, tpltItem.getP30F1103());
                 dba.addParam(DBC3000.P30F1109, DBC3000.SQL_NOW, false);
@@ -733,22 +858,29 @@ public class DBA3000 {
 
             dba.executeUpdate();
             return true;
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
             return false;
-        } finally {
+        }
+        finally
+        {
             dba.close();
         }
     }
 
-    public static boolean updateTpltData(List<S1S2> list) {
+    public static boolean updateTpltData(List<S1S2> list)
+    {
         DBAccess dba = new DBAccess();
 
-        try {
+        try
+        {
             dba.init();
 
             int index = list.size();
-            while (index > 0) {
+            while (index > 0)
+            {
                 dba.addTable(DBC3000.P30F1100);
                 dba.addParam(DBC3000.P30F1101, --index);
                 dba.addWhere(DBC3000.P30F1103, list.get(index).getK());
@@ -757,19 +889,25 @@ public class DBA3000 {
             }
 
             dba.executeBatch();
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
             return false;
-        } finally {
+        }
+        finally
+        {
             dba.close();
         }
         return true;
     }
 
-    public static boolean selectTpltData(String kindHash, List<Item> tpltList) {
+    public static boolean selectTpltData(String kindHash, List<Item> tpltList)
+    {
         DBAccess dba = new DBAccess();
 
-        try {
+        try
+        {
             dba.init();
 
             dba.addTable(DBC3000.P30F1100);
@@ -781,7 +919,8 @@ public class DBA3000 {
 
             ResultSet rest = dba.executeSelect();
             Item kv;
-            while (rest.next()) {
+            while (rest.next())
+            {
                 kv = new Item();
                 kv.setType(rest.getInt(DBC3000.P30F1102));
                 kv.setName(rest.getString(DBC3000.P30F1105));
@@ -790,18 +929,24 @@ public class DBA3000 {
             }
             rest.close();
             return true;
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
             return false;
-        } finally {
+        }
+        finally
+        {
             dba.close();
         }
     }
 
-    public static boolean deleteCharData(Char charItem) {
+    public static boolean deleteCharData(Char charItem)
+    {
         DBAccess dba = new DBAccess();
 
-        try {
+        try
+        {
             dba.init();
 
             dba.addTable(DBC3000.P30F2100);
@@ -810,18 +955,24 @@ public class DBA3000 {
 
             dba.executeDelete();
             return true;
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
             return false;
-        } finally {
+        }
+        finally
+        {
             dba.close();
         }
     }
 
-    public static boolean updateCharData(Char charItem) {
+    public static boolean updateCharData(Char charItem)
+    {
         DBAccess dba = new DBAccess();
 
-        try {
+        try
+        {
             dba.init();
 
             dba.addTable(DBC3000.P30F2100);
@@ -832,20 +983,27 @@ public class DBA3000 {
             dba.addParam(DBC3000.P30F2106, Util.text2DB(charItem.getP30F2106()));// 空间字符
             dba.addParam(DBC3000.P30F2108, DBC3000.SQL_NOW, false);// 更新日期
 
-            if (Util.isValidateHash(charItem.getP30F2103())) {
+            if (Util.isValidateHash(charItem.getP30F2103()))
+            {
                 dba.addWhere(DBC3000.P30F2103, charItem.getP30F2103());// 空间索引
                 dba.executeUpdate();
-            } else {
+            }
+            else
+            {
                 charItem.setP30F2103(Hash.hash(false));
                 dba.addParam(DBC3000.P30F2103, charItem.getP30F2103());// 空间索引
                 dba.addParam(DBC3000.P30F2109, DBC3000.SQL_NOW, false);// 创建日期
                 dba.executeInsert();
             }
             return true;
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
             return false;
-        } finally {
+        }
+        finally
+        {
             dba.close();
         }
     }
@@ -854,12 +1012,14 @@ public class DBA3000 {
      * 读取字符空间列表
      * @return
      */
-    public static List<Char> selectCharData() {
+    public static List<Char> selectCharData()
+    {
         List<Char> charList = new LinkedList<Char>();
 
         DBAccess dba = new DBAccess();
 
-        try {
+        try
+        {
             dba.init();
 
             dba.addTable(DBC3000.P30F2100);
@@ -871,7 +1031,8 @@ public class DBA3000 {
 
             ResultSet rest = dba.executeSelect();
             Char charItem;
-            while (rest.next()) {
+            while (rest.next())
+            {
                 charItem = new Char();
                 charItem.setP30F2103(rest.getString(DBC3000.P30F2103));
                 charItem.setP30F2104(rest.getString(DBC3000.P30F2104));
@@ -882,18 +1043,24 @@ public class DBA3000 {
             }
 
             rest.close();
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
-        } finally {
+        }
+        finally
+        {
             dba.close();
         }
         return charList;
     }
 
-    public static boolean pickupHistData(String curr, String hist) {
+    public static boolean pickupHistData(String curr, String hist)
+    {
         DBAccess dba = new DBAccess();
 
-        try {
+        try
+        {
             dba.init();
 
             dba.addTable(DBC3000.P30F0100);
@@ -934,18 +1101,24 @@ public class DBA3000 {
 
             dba.executeBatch();
             return true;
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
             return false;
-        } finally {
+        }
+        finally
+        {
             dba.close();
         }
     }
 
-    public static boolean deleteHistData(String keysHash) {
+    public static boolean deleteHistData(String keysHash)
+    {
         DBAccess dba = new DBAccess();
 
-        try {
+        try
+        {
             dba.init();
 
             dba.addTable(DBC3000.P30F0100);
@@ -954,18 +1127,24 @@ public class DBA3000 {
 
             dba.executeDelete();
             return true;
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
             return false;
-        } finally {
+        }
+        finally
+        {
             dba.close();
         }
     }
 
-    public static boolean deleteHistData(String keysHash, String updtHash) {
+    public static boolean deleteHistData(String keysHash, String updtHash)
+    {
         DBAccess dba = new DBAccess();
 
-        try {
+        try
+        {
             dba.init();
 
             dba.addTable(DBC3000.P30F0100);
@@ -974,18 +1153,24 @@ public class DBA3000 {
 
             dba.executeDelete();
             return true;
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
             return false;
-        } finally {
+        }
+        finally
+        {
             dba.close();
         }
     }
 
-    public static boolean selectHistData(String hash, Keys pwds) {
+    public static boolean selectHistData(String hash, Keys pwds)
+    {
         DBAccess dba = new DBAccess();
 
-        try {
+        try
+        {
             dba.init();
 
             dba.addTable(DBC3000.P30F0100);
@@ -1002,25 +1187,32 @@ public class DBA3000 {
 
             ResultSet rest = dba.executeSelect();
             StringBuffer sb = new StringBuffer();
-            while (rest.next()) {
+            while (rest.next())
+            {
                 sb.append(rest.getString(DBC3000.P30F0109));
             }
             pwds.setP30F0109(sb.toString());
 
             rest.close();
             return true;
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
             return false;
-        } finally {
+        }
+        finally
+        {
             dba.close();
         }
     }
 
-    public static boolean selectHistData(String hash, List<S1S2> list) {
+    public static boolean selectHistData(String hash, List<S1S2> list)
+    {
         DBAccess dba = new DBAccess();
 
-        try {
+        try
+        {
             dba.init();
 
             dba.addTable(DBC3000.P30F0100);
@@ -1033,7 +1225,8 @@ public class DBA3000 {
             S1S2 item;
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(ConsEnv.VIEW_DATE);
             ResultSet rest = dba.executeSelect();
-            while (rest.next()) {
+            while (rest.next())
+            {
                 item = new S1S2();
                 item.setK(rest.getString(DBC3000.P30F0103));
                 item.setV1(sdf.format(new Date(Long.parseLong(item.getK(), 16))));
@@ -1044,10 +1237,14 @@ public class DBA3000 {
 
             rest.close();
             return true;
-        } catch (Exception exp) {
+        }
+        catch (Exception exp)
+        {
             Logs.exception(exp);
             return false;
-        } finally {
+        }
+        finally
+        {
             dba.close();
         }
     }

@@ -9,9 +9,10 @@ package com.magicpwd._util;
  */
 public class Logs
 {
+
     public static void log(String log)
     {
-        //System.out.println(log);
+        System.out.println(log);
     }
 
     public static void exception(Exception exp)

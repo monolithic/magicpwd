@@ -31,9 +31,9 @@ public class NoteMdl
 
     public Item initGuid()
     {
-        pwds.setP30F0104(Hash.hash(false));
+        pwds.setP30F0103(Hash.hash(false));
         java.sql.Timestamp stamp = new java.sql.Timestamp(System.currentTimeMillis());
-        pwds.setCurrTime(stamp);
+        pwds.setP30F0106(stamp);
         pwds.setP30F010A(stamp);
 
         String name = stamp.toString();
@@ -85,16 +85,16 @@ public class NoteMdl
     public void loadData(String keysHash) throws Exception
     {
         clear();
-        pwds.setP30F0104(keysHash);
+        pwds.setP30F0103(keysHash);
         DBA3000.readPwdsData(pwds);
         UserMdl.getGridMdl().deCrypt(pwds, ls_ItemList);
     }
 
     public void saveData(boolean histBack) throws Exception
     {
-        if (pwds.getP30F0104() == null)
+        if (pwds.getP30F0103() == null)
         {
-            pwds.setP30F0104(Hash.hash(false));
+            pwds.setP30F0103(Hash.hash(false));
         }
         if (pwds.getP30F0105() == null)
         {
