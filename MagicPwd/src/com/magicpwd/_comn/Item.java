@@ -23,13 +23,7 @@ public class Item
     public static final int ARGS_PWDS_HASH = 0;// 字符空间索引
     public static final int ARGS_PWDS_SIZE = 1;// 生成口令长度
     public static final int ARGS_PWDS_NRPT = 2;// 是否允许重复
-    /** 首选 */
-    public static final int TYPE_PRI9 = 9;
-    /** 备选 */
-    public static final int TYPE_PRI8 = 8;
     /** 记录类别 */
-    private int kind;
-    /** 记录级别 */
     private int type;
     /** 记录名称 */
     private String name;
@@ -46,7 +40,7 @@ public class Item
     }
 
     /**
-     * @param kind
+     * @param type
      */
     public Item(int type)
     {
@@ -54,33 +48,15 @@ public class Item
     }
 
     /**
-     * @param kind
+     * @param type
      * @param name
      * @param data
      */
     public Item(int kind, String name, String data)
     {
-        this.kind = kind;
+        this.type = kind;
         this.name = name;
         this.data = data;
-        setDefault();
-    }
-
-    /**
-     * @return the kind
-     */
-    public int getKind()
-    {
-        return kind;
-    }
-
-    /**
-     * @param kind
-     *            the type to set
-     */
-    public void setKind(int kind)
-    {
-        this.kind = kind;
         setDefault();
     }
 
@@ -99,6 +75,7 @@ public class Item
     public void setType(int type)
     {
         this.type = type;
+        setDefault();
     }
 
     /**
@@ -210,14 +187,14 @@ public class Item
 
     public void setDefault()
     {
-        if (kind == ConsDat.INDX_PWDS)
+        if (type == ConsDat.INDX_PWDS)
         {
             spec = new ArrayList<String>(3);
             spec.add(UserMdl.getCfg().getPwdsSet());
             spec.add(UserMdl.getCfg().getPwdsLen());
             spec.add(UserMdl.getCfg().getPwdsUpt());
         }
-        else if (kind == ConsDat.INDX_FILE)
+        else if (type == ConsDat.INDX_FILE)
         {
             spec = new ArrayList<String>(1);
             spec.add("");

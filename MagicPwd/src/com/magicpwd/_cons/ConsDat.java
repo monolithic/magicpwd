@@ -129,8 +129,21 @@ public interface ConsDat
      * 属性：过期提示
      */
     int INDX_TIME = INDX_ICON + 1;
-    /**属性组件个数*/
+    /**
+     * 属性：组件个数
+     */
     int INDX_SIZE = INDX_TIME + 1;
+
+    /** 邮件附加属性：邮件 */
+    int TYPE_MAIL_MAIL = 0x1100;
+    /** 邮件附加属性：用户 */
+    int TYPE_MAIL_USER = 0x1200;
+    /** 邮件附加属性：口令 */
+    int TYPE_MAIL_PWDS = 0x1300;
+    /** 即时通讯附加属性：账户*/
+    int TYPE_IM_USER = 0x2100;
+    /**即时通讯附加属性：口令*/
+    int TYPE_IM_PWDS = 0x2200;
 
     /**
      * 用户权限：所有权限
