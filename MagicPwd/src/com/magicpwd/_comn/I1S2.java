@@ -8,6 +8,7 @@ package com.magicpwd._comn;
  */
 public class I1S2
 {
+
     /** 记录类别 */
     private int i;
     /** 记录名称 */
@@ -44,6 +45,7 @@ public class I1S2
         this.v = v;
     }
 
+    @Override
     public boolean equals(Object obj)
     {
         if (obj == null)
@@ -58,11 +60,20 @@ public class I1S2
         return k.equals(obj);
     }
 
+    @Override
+    public int hashCode()
+    {
+        int hash = 3;
+        hash = 73 * hash + (this.k != null ? this.k.hashCode() : 0);
+        return hash;
+    }
+
     /*
      * (non-Javadoc)
      * 
      * @see java.lang.Object#toString()
      */
+    @Override
     public String toString()
     {
         return v;
