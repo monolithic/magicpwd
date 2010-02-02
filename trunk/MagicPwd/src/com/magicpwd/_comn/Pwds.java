@@ -79,6 +79,7 @@ public class Pwds
     }
 
     /**
+     * 口令内容
      * @return the P30F0203
      */
     public StringBuffer getP30F0203()

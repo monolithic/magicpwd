@@ -15,8 +15,8 @@ import javax.crypto.Cipher;
  */
 public final class Keys implements Serializable
 {
+
     private boolean histBack;
-    private Timestamp currTime;
     /**
      * 显示排序
      */
@@ -130,23 +130,6 @@ public final class Keys implements Serializable
     public void setHistBack(boolean histBack)
     {
         this.histBack = histBack;
-    }
-
-    /**
-     * @return the currHash
-     */
-    public Timestamp getCurrTime()
-    {
-        return currTime;
-    }
-
-    /**
-     * @param currHash
-     *            the currHash to set
-     */
-    public void setCurrTime(Timestamp currTime)
-    {
-        this.currTime = currTime;
     }
 
     /*

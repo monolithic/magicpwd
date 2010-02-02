@@ -171,7 +171,7 @@ public class GridMdl extends DefaultTableModel
     {
         if (keys.getP30F0104() == null)
         {
-            keys.setP30F0104(UserMdl.getSec().getUsid());
+            keys.setP30F0104(UserMdl.getUserId());
         }
         keys.setHistBack(histBack);
         enCrypt(keys, ls_ItemList);
@@ -195,10 +195,8 @@ public class GridMdl extends DefaultTableModel
 
     public Item initGuid()
     {
-        keys.setP30F0104(Hash.hash(false));
-        java.sql.Timestamp stamp = new java.sql.Timestamp(System.currentTimeMillis());
-        keys.setCurrTime(stamp);
-        keys.setP30F010A(stamp);
+        keys.setP30F0104(UserMdl.getUserId());
+        keys.setP30F0106(new java.sql.Timestamp(System.currentTimeMillis()));
 
         Item tplt = new Item(ConsDat.INDX_GUID);
         ls_ItemList.add(tplt);
@@ -396,7 +394,7 @@ public class GridMdl extends DefaultTableModel
             }
 
             keys.setP30F0102(ConsDat.PWDS_STAT_1);
-            keys.setP30F0104(Hash.hash(false));
+            keys.setP30F0103(Hash.hash(false));
             keys.setP30F0107(kindHash);
             keys.setP30F010A(new java.sql.Timestamp(System.currentTimeMillis()));
             enCrypt(keys, ls_ItemList);
@@ -583,7 +581,7 @@ public class GridMdl extends DefaultTableModel
      */
     public void setKeysHash(String keysHash)
     {
-        keys.setP30F0104(keysHash);
+        keys.setP30F0103(keysHash);
     }
 
     /**
@@ -605,7 +603,7 @@ public class GridMdl extends DefaultTableModel
 
     public void appendKeysNameTemp()
     {
-        keys.setP30F0107(keys.getP30F0107() + '_' + keys.getCurrTime());
+        keys.setP30F0107(keys.getP30F0107() + '_' + keys.getP30F0106());
     }
 
     /**
@@ -627,12 +625,12 @@ public class GridMdl extends DefaultTableModel
 
     public java.sql.Timestamp getCurrTime()
     {
-        return keys.getCurrTime();
+        return keys.getP30F0106();
     }
 
     public void setCurrTime(java.sql.Timestamp keysDate)
     {
-        keys.setCurrTime(keysDate);
+        keys.setP30F0106(keysDate);
     }
 
     public java.sql.Timestamp getPastDate()
