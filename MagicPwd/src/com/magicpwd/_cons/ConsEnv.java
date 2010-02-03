@@ -73,7 +73,10 @@ public interface ConsEnv
      * 按频率排序
      */
     String LIST_SORT_FEQ = "feq";
-
+    int PWDS_HEAD_GUID = 0;
+    int PWDS_HEAD_META = 1;
+    int PWDS_HEAD_LOGO = 2;
+    int PWDS_HEAD_NOTE = 3;
     /**
      * 记录头部预留属性个数
      */

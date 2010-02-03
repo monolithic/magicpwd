@@ -105,9 +105,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
     public void initData(Item tplt)
     {
         tpltData = tplt;
-        String t = UserMdl.getGridMdl().getCurrTime().toString();
-        t = t.substring(0, t.lastIndexOf('.'));
-        tf_PropName.setText(t);
+        tf_PropName.setText(tplt.getName());
         cb_PropData.setModel(UserMdl.getCboxMdl());
         cb_PropData.setSelectedItem(new S1S2(tplt.getData(), "", ""));
     }

@@ -249,8 +249,6 @@ public class TimeBean extends javax.swing.JPanel implements IEditBean
 
         tpltData.setName(name);
         tpltData.setData(tf_PropData.getText());
-        UserMdl.getGridMdl().setPastDate(time);
-        UserMdl.getGridMdl().setPastNote(name);
         UserMdl.getGridMdl().setModified(true);
 
         gridView.selectNext(!UserMdl.getGridMdl().isUpdate());
