@@ -29,6 +29,7 @@ import com.magicpwd.d.DBA3000;
 public class GridMdl extends DefaultTableModel
 {
 
+    private boolean interim;
     private boolean modified;
     private List<Item> ls_ItemList;
     private Keys keys;
@@ -195,7 +196,6 @@ public class GridMdl extends DefaultTableModel
 
     public Item initGuid()
     {
-        keys.setP30F0104(UserMdl.getUserId());
         keys.setP30F0106(new java.sql.Timestamp(System.currentTimeMillis()));
 
         Item tplt = new Item(ConsDat.INDX_GUID);
@@ -532,12 +532,37 @@ public class GridMdl extends DefaultTableModel
     public final void enCrypt(Keys keys, List<Item> list) throws Exception
     {
         Pwds pwds = keys.getPassword();
-
-        // 字符串拼接
         StringBuffer text = pwds.getP30F0203();
         text.delete(0, text.length());
-        for (Item item : list)
+
+        int i = 0;
+        Item item;
+
+        // Guid
+        item = list.get(i++);
+        keys.setP30F0106(null);
+
+        // Meta
+        item = list.get(i++);
+        keys.setP30F0107(interim ? item.getName() : item.getName() + keys.getP30F0106());
+        keys.setP30F0108(item.getData());
+
+        // Logo
+        item = list.get(i++);
+        keys.setP30F0109(item.getName());
+
+        // Time
+        item = list.get(i++);
+        keys.setP30F010A(null);
+        keys.setP30F010B(item.getData());
+
+        // Desc
+        keys.setP30F010C("");
+
+        // 字符串拼接
+        for (int j = list.size(); i < j; i += 1)
         {
+            item = list.get(i);
             text.append(item.getType());
             text.append(ConsDat.SP_SQL_KV);
             text.append(item.getName());
@@ -548,104 +573,6 @@ public class GridMdl extends DefaultTableModel
         }
 
         pwds.enCrypt(UserMdl.getECipher(), UserMdl.getSec().getMask());
-    }
-
-    /**
-     * @return the kindHash
-     */
-    public String getKindHash()
-    {
-        return keys.getP30F0105();
-    }
-
-    /**
-     * @param kindHash
-     *            the typeHash to set
-     */
-    public void setKindHash(String kindHash)
-    {
-        keys.setP30F0105(kindHash);
-    }
-
-    /**
-     * @return the keysHash
-     */
-    public String getKeysHash()
-    {
-        return keys.getP30F0104();
-    }
-
-    /**
-     * @param keysHash
-     *            the keysHash to set
-     */
-    public void setKeysHash(String keysHash)
-    {
-        keys.setP30F0103(keysHash);
-    }
-
-    /**
-     * @return the keysName
-     */
-    public String getKeysName()
-    {
-        return keys.getP30F0107();
-    }
-
-    /**
-     * @param keysName
-     *            the keysName to set
-     */
-    public void setKeysName(String keysName)
-    {
-        keys.setP30F0107(keysName);
-    }
-
-    public void appendKeysNameTemp()
-    {
-        keys.setP30F0107(keys.getP30F0107() + '_' + keys.getP30F0106());
-    }
-
-    /**
-     * @return the keysMeta
-     */
-    public String getKeysMeta()
-    {
-        return keys.getP30F0108();
-    }
-
-    /**
-     * @param keysMeta
-     *            the keysMeta to set
-     */
-    public void setKeysMeta(String keysMeta)
-    {
-        keys.setP30F0108(keysMeta);
-    }
-
-    public java.sql.Timestamp getCurrTime()
-    {
-        return keys.getP30F0106();
-    }
-
-    public void setCurrTime(java.sql.Timestamp keysDate)
-    {
-        keys.setP30F0106(keysDate);
-    }
-
-    public java.sql.Timestamp getPastDate()
-    {
-        return keys.getP30F010A();
-    }
-
-    public void setPastDate(java.sql.Timestamp stamp)
-    {
-        keys.setP30F010A(stamp);
-    }
-
-    public void setPastNote(String pastNote)
-    {
-        keys.setP30F010C(pastNote);
     }
 
     public boolean isUpdate()
@@ -662,7 +589,7 @@ public class GridMdl extends DefaultTableModel
      * @param index
      * @return
      */
-    public Item getTplt(int index)
+    public Item getItem(int index)
     {
         return ls_ItemList.get(index);
     }

@@ -19,6 +19,7 @@ import com.magicpwd.d.DBA3000;
  */
 public class NoteMdl
 {
+
     private boolean modified;
     private List<Item> ls_ItemList;
     private Keys pwds;
@@ -98,7 +99,7 @@ public class NoteMdl
         }
         if (pwds.getP30F0105() == null)
         {
-            pwds.setP30F0105(UserMdl.getSec().getUsid());
+            pwds.setP30F0105(UserMdl.getUserId());
         }
         pwds.setHistBack(histBack);
         UserMdl.getGridMdl().enCrypt(pwds, ls_ItemList);

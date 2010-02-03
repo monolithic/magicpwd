@@ -124,16 +124,12 @@ public class MetaBean extends javax.swing.JPanel implements IEditBean
             return;
         }
 
-        GridMdl gm=UserMdl.getGridMdl();
-        gm.setKeysName(name);
+        GridMdl gm = UserMdl.getGridMdl();
         tpltData.setName(name);
-
-        String meta = ta_PropData.getText();
-        gm.setKeysMeta(meta);
-        tpltData.setData(meta);
+        tpltData.setData(ta_PropData.getText());
         gm.setModified(true);
 
-        gridView.selectNext(!UserMdl.getGridMdl().isUpdate());
+        gridView.selectNext(!gm.isUpdate());
     }
 
     @Override
