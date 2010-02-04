@@ -156,7 +156,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         if (checkData())
         {
             tb_LastIndx = tb_KeysView.getSelectedRow();
-            if (tb_LastIndx < ConsEnv.PWDS_ITEM_HEAD)
+            if (tb_LastIndx < ConsEnv.PWDS_HEAD_SIZE)
             {
                 tb_LastIndx = tb_KeysView.getRowCount();
             }
@@ -171,7 +171,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         if (checkData())
         {
             tb_LastIndx = tb_KeysView.getSelectedRow();
-            if (tb_LastIndx < ConsEnv.PWDS_ITEM_HEAD)
+            if (tb_LastIndx < ConsEnv.PWDS_HEAD_SIZE)
             {
                 tb_LastIndx = tb_KeysView.getRowCount();
             }
@@ -186,7 +186,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         if (checkData())
         {
             tb_LastIndx = tb_KeysView.getSelectedRow();
-            if (tb_LastIndx < ConsEnv.PWDS_ITEM_HEAD)
+            if (tb_LastIndx < ConsEnv.PWDS_HEAD_SIZE)
             {
                 tb_LastIndx = tb_KeysView.getRowCount();
             }
@@ -201,7 +201,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         if (checkData())
         {
             tb_LastIndx = tb_KeysView.getSelectedRow();
-            if (tb_LastIndx < ConsEnv.PWDS_ITEM_HEAD)
+            if (tb_LastIndx < ConsEnv.PWDS_HEAD_SIZE)
             {
                 tb_LastIndx = tb_KeysView.getRowCount();
             }
@@ -216,7 +216,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         if (checkData())
         {
             tb_LastIndx = tb_KeysView.getSelectedRow();
-            if (tb_LastIndx < ConsEnv.PWDS_ITEM_HEAD)
+            if (tb_LastIndx < ConsEnv.PWDS_HEAD_SIZE)
             {
                 tb_LastIndx = tb_KeysView.getRowCount();
             }
@@ -231,7 +231,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         if (checkData())
         {
             tb_LastIndx = tb_KeysView.getSelectedRow();
-            if (tb_LastIndx < ConsEnv.PWDS_ITEM_HEAD)
+            if (tb_LastIndx < ConsEnv.PWDS_HEAD_SIZE)
             {
                 tb_LastIndx = tb_KeysView.getRowCount();
             }
@@ -246,7 +246,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         if (checkData())
         {
             tb_LastIndx = tb_KeysView.getSelectedRow();
-            if (tb_LastIndx < ConsEnv.PWDS_ITEM_HEAD)
+            if (tb_LastIndx < ConsEnv.PWDS_HEAD_SIZE)
             {
                 tb_LastIndx = tb_KeysView.getRowCount();
             }
@@ -273,9 +273,9 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         if (checkData())
         {
             int idx = tb_KeysView.getSelectedRow();
-            if (idx > ConsEnv.PWDS_ITEM_HEAD && idx < tb_KeysView.getRowCount())
+            if (idx > ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
-                Item tplt = UserMdl.getGridMdl().getItem(idx);
+                Item tplt = UserMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_AREA)
                 {
                     tplt.setType(ConsDat.INDX_AREA);
@@ -292,9 +292,9 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         if (checkData())
         {
             int idx = tb_KeysView.getSelectedRow();
-            if (idx > ConsEnv.PWDS_ITEM_HEAD && idx < tb_KeysView.getRowCount())
+            if (idx > ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
-                Item tplt = UserMdl.getGridMdl().getItem(idx);
+                Item tplt = UserMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_DATE)
                 {
                     tplt.setType(ConsDat.INDX_DATE);
@@ -311,9 +311,9 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         if (checkData())
         {
             int idx = tb_KeysView.getSelectedRow();
-            if (idx > ConsEnv.PWDS_ITEM_HEAD && idx < tb_KeysView.getRowCount())
+            if (idx > ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
-                Item tplt = UserMdl.getGridMdl().getItem(idx);
+                Item tplt = UserMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_FILE)
                 {
                     tplt.setType(ConsDat.INDX_FILE);
@@ -330,9 +330,9 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         if (checkData())
         {
             int idx = tb_KeysView.getSelectedRow();
-            if (idx > ConsEnv.PWDS_ITEM_HEAD && idx < tb_KeysView.getRowCount())
+            if (idx > ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
-                Item tplt = UserMdl.getGridMdl().getItem(idx);
+                Item tplt = UserMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_LINK)
                 {
                     tplt.setType(ConsDat.INDX_LINK);
@@ -349,9 +349,9 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         if (checkData())
         {
             int idx = tb_KeysView.getSelectedRow();
-            if (idx > ConsEnv.PWDS_ITEM_HEAD && idx < tb_KeysView.getRowCount())
+            if (idx > ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
-                Item tplt = UserMdl.getGridMdl().getItem(idx);
+                Item tplt = UserMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_MAIL)
                 {
                     tplt.setType(ConsDat.INDX_MAIL);
@@ -368,9 +368,9 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         if (checkData())
         {
             int idx = tb_KeysView.getSelectedRow();
-            if (idx > ConsEnv.PWDS_ITEM_HEAD && idx < tb_KeysView.getRowCount())
+            if (idx > ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
-                Item tplt = UserMdl.getGridMdl().getItem(idx);
+                Item tplt = UserMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_PWDS)
                 {
                     tplt.setType(ConsDat.INDX_PWDS);
@@ -387,9 +387,9 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         if (checkData())
         {
             int idx = tb_KeysView.getSelectedRow();
-            if (idx > ConsEnv.PWDS_ITEM_HEAD && idx < tb_KeysView.getRowCount())
+            if (idx > ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
-                Item tplt = UserMdl.getGridMdl().getItem(idx);
+                Item tplt = UserMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_TEXT)
                 {
                     tplt.setType(ConsDat.INDX_TEXT);
@@ -457,14 +457,14 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
     @Override
     public void fileSaveActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (tb_KeysView.getRowCount() < ConsEnv.PWDS_ITEM_HEAD)
+        if (tb_KeysView.getRowCount() < ConsEnv.PWDS_HEAD_SIZE)
         {
             return;
         }
 
         GridMdl gm = UserMdl.getGridMdl();
 
-        Item item = gm.getItem(ConsEnv.PWDS_HEAD_META);
+        Item item = gm.getItemAt(ConsEnv.PWDS_HEAD_META);
         if (!Util.isValidate(item.getName()))
         {
             Lang.showMesg(this, LangRes.P30F7A0C, "请输入口令标题！");
@@ -493,7 +493,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
 
             KindTN node = (KindTN) path.getLastPathComponent();
             Kind kind = (Kind) node.getUserObject();
-            gm.getItem(ConsEnv.PWDS_HEAD_GUID).setData(kind.getC2010103());
+            gm.getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(kind.getC2010103());
         }
 
         try
@@ -511,11 +511,11 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         // 数据新增的情况下，需要重新显示列表信息
         if (gm.isUpdate())
         {
-            UserMdl.getListMdl().updtName(ls_GuidList.getSelectedIndex(), gm.getItem(ConsEnv.PWDS_HEAD_META).getName());
+            UserMdl.getListMdl().updtName(ls_GuidList.getSelectedIndex(), gm.getItemAt(ConsEnv.PWDS_HEAD_META).getName());
         }
         else
         {
-            UserMdl.getListMdl().listName(gm.getItem(ConsEnv.PWDS_HEAD_GUID).getData());
+            UserMdl.getListMdl().listName(gm.getItemAt(ConsEnv.PWDS_HEAD_GUID).getData());
         }
 
         showPropEdit();
@@ -546,7 +546,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         // Save Temperary Data
         if (UserMdl.getGridMdl().isModified())
         {
-            UserMdl.getGridMdl().getItem(ConsEnv.PWDS_HEAD_GUID).setData(ConsDat.HASH_ROOT);
+            UserMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(ConsDat.HASH_ROOT);
             try
             {
                 UserMdl.getGridMdl().saveData(true, false);
@@ -954,7 +954,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         {
             return;
         }
-        Item tplt = UserMdl.getGridMdl().getItem(row);
+        Item tplt = UserMdl.getGridMdl().getItemAt(row);
         Util.setClipboardContents(tplt.getData(), UserMdl.getCfg().getClnClp());
     }
 
@@ -962,7 +962,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
     public void deltDataActionPerformed(java.awt.event.ActionEvent evt)
     {
         int row = tb_KeysView.getSelectedRow();
-        if (row < ConsEnv.PWDS_ITEM_HEAD || row > tb_KeysView.getRowCount() - 1)
+        if (row < ConsEnv.PWDS_HEAD_SIZE || row > tb_KeysView.getRowCount() - 1)
         {
             return;
         }
@@ -999,7 +999,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             }
             tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
 
-            Item tplt = UserMdl.getGridMdl().getItem(tb_LastIndx);
+            Item tplt = UserMdl.getGridMdl().getItemAt(tb_LastIndx);
             showPropEdit(tplt, true);
         }
         else
@@ -1014,7 +1014,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         }
 
         Util.scrollToVisible(tb_KeysView, tb_LastIndx, 0, true);
-        showPropEdit(UserMdl.getGridMdl().getItem(tb_LastIndx), true);
+        showPropEdit(UserMdl.getGridMdl().getItemAt(tb_LastIndx), true);
     }
 
     private void initPropView()
@@ -1388,7 +1388,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         else
         {
             tb_LastIndx = row;
-            showPropEdit(UserMdl.getGridMdl().getItem(row), true);
+            showPropEdit(UserMdl.getGridMdl().getItemAt(row), true);
         }
     }
 
@@ -1400,7 +1400,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             return;
         }
         tb_LastIndx = row;
-        showPropEdit(UserMdl.getGridMdl().getItem(row), false);
+        showPropEdit(UserMdl.getGridMdl().getItemAt(row), false);
     }
 
     private void showPropEdit()
@@ -1479,11 +1479,11 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             {
                 return Lang.getLang(LangRes.P30F110A, "标题");
             }
-            case ConsDat.INDX_ICON:
+            case ConsDat.INDX_LOGO:
             {
                 return Lang.getLang(LangRes.P30F1112, "徽标");
             }
-            case ConsDat.INDX_TIME:
+            case ConsDat.INDX_NOTE:
             {
                 return Lang.getLang(LangRes.P30F110B, "提醒");
             }
@@ -1533,12 +1533,12 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
     private boolean changeKind(String hash)
     {
         GridMdl gm = UserMdl.getGridMdl();
-        if (hash == null || hash.equals(gm.getItem(ConsEnv.PWDS_HEAD_GUID).getData()))
+        if (hash == null || hash.equals(gm.getItemAt(ConsEnv.PWDS_HEAD_GUID).getData()))
         {
             return true;
         }
 
-        gm.getItem(ConsEnv.PWDS_HEAD_GUID).setData(hash);
+        gm.getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(hash);
         try
         {
             gm.saveData(true, true);

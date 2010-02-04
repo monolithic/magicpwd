@@ -124,15 +124,19 @@ public interface ConsDat
     /**
      * 属性：口令图标
      */
-    int INDX_ICON = INDX_META + 1;
+    int INDX_LOGO = INDX_META + 1;
     /**
      * 属性：过期提示
      */
-    int INDX_TIME = INDX_ICON + 1;
+    int INDX_NOTE = INDX_LOGO + 1;
+    /**
+     * 属性：相关说明
+     */
+    int INDX_MARK = INDX_NOTE + 1;
     /**
      * 属性：组件个数
      */
-    int INDX_SIZE = INDX_TIME + 1;
+    int INDX_SIZE = INDX_MARK + 1;
 
     /** 邮件附加属性：邮件 */
     int TYPE_MAIL_MAIL = 0x1100;
