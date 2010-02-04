@@ -52,9 +52,9 @@ public class Item
      * @param name
      * @param data
      */
-    public Item(int kind, String name, String data)
+    public Item(int type, String name, String data)
     {
-        this.type = kind;
+        this.type = type;
         this.name = name;
         this.data = data;
         setDefault();

@@ -42,29 +42,7 @@ public class GridMdl extends DefaultTableModel
 
     /*
      * (non-Javadoc)
-     * 
-     * @see javax.swing.table.AbstractTableModel#getColumnClass(int)
-     */
-    @Override
-    public Class<?> getColumnClass(int columnIndex)
-    {
-        return columnIndex == 0 ? Integer.class : String.class;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see javax.swing.table.DefaultTableModel#getRowCount()
-     */
-    @Override
-    public int getRowCount()
-    {
-        return ls_ItemList != null ? ls_ItemList.size() : 0;
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
+     *
      * @see javax.swing.table.DefaultTableModel#getColumnCount()
      */
     @Override
@@ -76,23 +54,34 @@ public class GridMdl extends DefaultTableModel
     /*
      * (non-Javadoc)
      * 
+     * @see javax.swing.table.AbstractTableModel#getColumnClass(int)
+     */
+    @Override
+    public Class<?> getColumnClass(int columnIndex)
+    {
+        return String.class;
+    }
+
+    /*
+     * (non-Javadoc)
+     *
      * @see javax.swing.table.DefaultTableModel#getColumnName(int)
      */
     @Override
-    public String getColumnName(int column)
+    public String getColumnName(int columnIndex)
     {
-        return column == 1 ? Lang.getLang(LangRes.P30F7304, "属性(T)") : Lang.getLang(LangRes.P30F7303, "");
+        return columnIndex == 1 ? Lang.getLang(LangRes.P30F7304, "属性(T)") : Lang.getLang(LangRes.P30F7303, "");
     }
 
     /*
      * (non-Javadoc)
      * 
-     * @see javax.swing.table.DefaultTableModel#isCellEditable(int, int)
+     * @see javax.swing.table.DefaultTableModel#getRowCount()
      */
     @Override
-    public boolean isCellEditable(int row, int column)
+    public int getRowCount()
     {
-        return false;
+        return ls_ItemList != null ? ls_ItemList.size() : 0;
     }
 
     /*
@@ -112,9 +101,9 @@ public class GridMdl extends DefaultTableModel
                     return Lang.getLang(LangRes.P30F1106, "日期");
                 case ConsDat.INDX_META - ConsDat.INDX_GUID:
                     return Lang.getLang(LangRes.P30F110A, "标题");
-                case ConsDat.INDX_ICON - ConsDat.INDX_GUID:
+                case ConsDat.INDX_LOGO - ConsDat.INDX_GUID:
                     return Lang.getLang(LangRes.P30F1112, "徽标");
-                case ConsDat.INDX_TIME - ConsDat.INDX_GUID:
+                case ConsDat.INDX_NOTE - ConsDat.INDX_GUID:
                     return Lang.getLang(LangRes.P30F110B, "提醒");
                 default:
                     return row - 3;
@@ -129,9 +118,38 @@ public class GridMdl extends DefaultTableModel
         return ls_ItemList.get(row);
     }
 
+    /*
+     * (non-Javadoc)
+     *
+     * @see javax.swing.table.DefaultTableModel#isCellEditable(int, int)
+     */
+    @Override
+    public boolean isCellEditable(int row, int column)
+    {
+        return false;
+    }
+
+    /**
+     * 是否使用临时口令名称
+     *
+     * @return
+     */
+    public boolean isInterim()
+    {
+        return interim;
+    }
+
+    /**
+     * @param interim
+     */
+    public void setInterim(boolean interim)
+    {
+        this.interim = interim;
+    }
+
     /**
      * 数据是否被修改过
-     * 
+     *
      * @return
      */
     public boolean isModified()
@@ -170,10 +188,6 @@ public class GridMdl extends DefaultTableModel
      */
     public void saveData(boolean histBack, boolean repaint) throws Exception
     {
-        if (keys.getP30F0104() == null)
-        {
-            keys.setP30F0104(UserMdl.getUserId());
-        }
         keys.setHistBack(histBack);
         enCrypt(keys, ls_ItemList);
         DBA3000.savePwdsData(keys);
@@ -185,41 +199,54 @@ public class GridMdl extends DefaultTableModel
     }
 
     /**
+     * 向导初始化
+     * @return
+     */
+    public Item initGuid()
+    {
+        Item item = new Item(ConsDat.INDX_GUID);
+        item.setName(new java.sql.Timestamp(System.currentTimeMillis()).toString());
+        ls_ItemList.add(item);
+        fireTableDataChanged();
+        return item;
+    }
+
+    /**
      * 
+     */
+    public void initMeta()
+    {
+        // 关键搜索
+        ls_ItemList.add(new Item(ConsDat.INDX_META));
+
+        // 徽标
+        ls_ItemList.add(new Item(ConsDat.INDX_LOGO));
+
+        // 过时提醒
+        ls_ItemList.add(new Item(ConsDat.INDX_NOTE));
+
+        // 相关说明
+        ls_ItemList.add(new Item(ConsDat.INDX_MARK));
+        fireTableDataChanged();
+    }
+
+    /**
+     * @param index
+     * @return
+     */
+    public Item getItemAt(int index)
+    {
+        return ls_ItemList.get(index);
+    }
+
+    /**
+     *
      */
     public void clear()
     {
         ls_ItemList.clear();
         keys.setDefault();
         modified = false;
-    }
-
-    public Item initGuid()
-    {
-        keys.setP30F0106(new java.sql.Timestamp(System.currentTimeMillis()));
-
-        Item tplt = new Item(ConsDat.INDX_GUID);
-        ls_ItemList.add(tplt);
-        fireTableDataChanged();
-        return tplt;
-    }
-
-    public void initMeta()
-    {
-        // 关键搜索
-        Item tplt = new Item(ConsDat.INDX_META);
-        ls_ItemList.add(tplt);
-
-        // 徽标
-        tplt = new Item(ConsDat.INDX_ICON);
-        ls_ItemList.add(tplt);
-
-        // 过时提醒
-        tplt = new Item(ConsDat.INDX_TIME);
-        ls_ItemList.add(tplt);
-
-        keys.setP30F0102(ConsDat.PWDS_STAT_1);
-        fireTableDataChanged();
     }
 
     /**
@@ -235,21 +262,21 @@ public class GridMdl extends DefaultTableModel
     /**
      * @param pi
      */
-    public Item wAppend(int indx, Item tplt)
+    public Item wAppend(int indx, Item item)
     {
-        ls_ItemList.add(indx, tplt);
+        ls_ItemList.add(indx, item);
         fireTableDataChanged();
-        return tplt;
+        return item;
     }
 
     /**
      * @param pi
      */
-    public Item wAppend(Item tplt)
+    public Item wAppend(Item item)
     {
-        ls_ItemList.add(tplt);
+        ls_ItemList.add(item);
         fireTableDataChanged();
-        return tplt;
+        return item;
     }
 
     /**
@@ -320,9 +347,9 @@ public class GridMdl extends DefaultTableModel
         modified = true;
     }
 
-    public void wRemove(Item tplt)
+    public void wRemove(Item item)
     {
-        ls_ItemList.remove(tplt);
+        ls_ItemList.remove(item);
         fireTableDataChanged();
         modified = true;
     }
@@ -375,7 +402,7 @@ public class GridMdl extends DefaultTableModel
 
             // Past
             tplt = new Item();
-            tplt.setType(ConsDat.INDX_TIME);
+            tplt.setType(ConsDat.INDX_NOTE);
             text = temp.get(indx++);
             tplt.setData(text);
             keys.setP30F010A(new java.sql.Timestamp(Util.stringToDate(text, '-', ':', ' ').getTimeInMillis()));
@@ -494,6 +521,34 @@ public class GridMdl extends DefaultTableModel
             return;
         }
 
+        // Guid
+        Item item = new Item(ConsDat.INDX_GUID);
+        item.setName(keys.getP30F0106().toString());
+        list.add(item);
+
+        // Meta
+        item = new Item(ConsDat.INDX_META);
+        item.setName(keys.getP30F0107());
+        item.setData(keys.getP30F0108());
+        list.add(item);
+
+        // Logo
+        item = new Item(ConsDat.INDX_LOGO);
+        item.setName(keys.getP30F0109());
+        list.add(item);
+
+        // Note
+        item = new Item(ConsDat.INDX_NOTE);
+        item.setName(keys.getP30F010A().toString());
+        item.setData(keys.getP30F010B());
+        list.add(item);
+
+        // Desc
+        item = new Item(ConsDat.INDX_MARK);
+        item.setName("" + keys.getP30F0102());
+        item.setData(keys.getP30F010C());
+        list.add(item);
+
         // 处理每一个数据
         StringTokenizer st = new StringTokenizer(text.toString(), ConsDat.SP_SQL_EE);
         int type;
@@ -535,32 +590,31 @@ public class GridMdl extends DefaultTableModel
         StringBuffer text = pwds.getP30F0203();
         text.delete(0, text.length());
 
-        int i = 0;
-        Item item;
-
         // Guid
-        item = list.get(i++);
+        Item item = list.get(ConsEnv.PWDS_HEAD_GUID);
         keys.setP30F0106(null);
 
         // Meta
-        item = list.get(i++);
+        item = list.get(ConsEnv.PWDS_HEAD_META);
         keys.setP30F0107(interim ? item.getName() : item.getName() + keys.getP30F0106());
         keys.setP30F0108(item.getData());
 
         // Logo
-        item = list.get(i++);
+        item = list.get(ConsEnv.PWDS_HEAD_LOGO);
         keys.setP30F0109(item.getName());
 
-        // Time
-        item = list.get(i++);
+        // Note
+        item = list.get(ConsEnv.PWDS_HEAD_NOTE);
         keys.setP30F010A(null);
         keys.setP30F010B(item.getData());
 
         // Desc
-        keys.setP30F010C("");
+        item = list.get(ConsEnv.PWDS_HEAD_MARK);
+        keys.setP30F0102(0);
+        keys.setP30F010C(item.getData());
 
         // 字符串拼接
-        for (int j = list.size(); i < j; i += 1)
+        for (int i = ConsEnv.PWDS_HEAD_SIZE, j = list.size(); i < j; i += 1)
         {
             item = list.get(i);
             text.append(item.getType());
@@ -583,14 +637,5 @@ public class GridMdl extends DefaultTableModel
     public void setStatus(int status)
     {
         keys.setP30F0102(status);
-    }
-
-    /**
-     * @param index
-     * @return
-     */
-    public Item getItem(int index)
-    {
-        return ls_ItemList.get(index);
     }
 }

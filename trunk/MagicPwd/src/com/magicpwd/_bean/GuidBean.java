@@ -128,7 +128,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         }
 
         GridMdl gm = UserMdl.getGridMdl();
-        if (gm.getRowCount() < ConsEnv.PWDS_ITEM_HEAD)
+        if (gm.getRowCount() < ConsEnv.PWDS_HEAD_SIZE)
         {
             gm.initMeta();
         }

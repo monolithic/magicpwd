@@ -62,7 +62,7 @@ public class NoteMdl
 
     public Item initPast()
     {
-        Item tplt = new Item(ConsDat.INDX_TIME);
+        Item tplt = new Item(ConsDat.INDX_NOTE);
         ls_ItemList.add(tplt);
         return tplt;
     }
