@@ -14,8 +14,9 @@ import com.magicpwd.m.UserMdl;
  * @author shangwen.yao
  * 
  */
-public class Item
+public class Item implements IEditItem
 {
+
     /** 记录类别 */
     private int type;
     /** 记录名称 */
@@ -56,6 +57,7 @@ public class Item
     /**
      * @return the type
      */
+    @Override
     public int getType()
     {
         return type;
@@ -65,6 +67,7 @@ public class Item
      * @param type
      *            the type to set
      */
+    @Override
     public void setType(int type)
     {
         this.type = type;
@@ -74,6 +77,7 @@ public class Item
     /**
      * @return the name
      */
+    @Override
     public String getName()
     {
         return name;
@@ -83,6 +87,7 @@ public class Item
      * @param name
      *            the name to set
      */
+    @Override
     public void setName(String name)
     {
         this.name = name;
@@ -91,6 +96,7 @@ public class Item
     /**
      * @return the data
      */
+    @Override
     public String getData()
     {
         return data;
@@ -100,6 +106,7 @@ public class Item
      * @param data
      *            the data to set
      */
+    @Override
     public void setData(String data)
     {
         this.data = data;
@@ -119,6 +126,7 @@ public class Item
     /**
      * @param spec
      */
+    @Override
     public void addSpec(String spec)
     {
         this.spec.add(spec);
@@ -128,22 +136,26 @@ public class Item
      * @param index
      * @return
      */
+    @Override
     public String getSpec(int index)
     {
         return spec.get(index);
     }
 
+    @Override
     public String getSpec(int index, String defValue)
     {
         String temp = spec.get(index);
         return temp != null ? temp : defValue;
     }
 
+    @Override
     public void setSpec(int index, String spec)
     {
         this.spec.set(index, spec);
     }
 
+    @Override
     public String enCodeSpec(String c)
     {
         if (spec == null || spec.size() < 1)
@@ -159,6 +171,7 @@ public class Item
         return text.toString();
     }
 
+    @Override
     public void deCodeSpec(String text, String c)
     {
         if (text == null || text.length() < 1)
@@ -178,6 +191,7 @@ public class Item
         }
     }
 
+    @Override
     public void setDefault()
     {
         if (type == ConsDat.INDX_PWDS)
