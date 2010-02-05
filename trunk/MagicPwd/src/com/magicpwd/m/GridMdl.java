@@ -3,6 +3,8 @@
  */
 package com.magicpwd.m;
 
+import com.magicpwd._comn.Desc;
+import com.magicpwd._comn.Guid;
 import com.magicpwd._comn.I1S2;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,9 @@ import javax.swing.table.DefaultTableModel;
 import com.magicpwd._comn.Keys;
 import com.magicpwd._comn.Pwds;
 import com.magicpwd._comn.Item;
+import com.magicpwd._comn.Logo;
+import com.magicpwd._comn.Meta;
+import com.magicpwd._comn.Note;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.LangRes;
@@ -522,43 +527,44 @@ public class GridMdl extends DefaultTableModel
         }
 
         // Guid
-        Item item = new Item(ConsDat.INDX_GUID);
-        item.setName(keys.getP30F0106().toString());
-        list.add(item);
+        Guid guid = new Guid();
+        guid.setTime(keys.getP30F0106());
+        list.add(guid);
 
         // Meta
-        item = new Item(ConsDat.INDX_META);
-        item.setName(keys.getP30F0107());
-        item.setData(keys.getP30F0108());
-        list.add(item);
+        Meta meta = new Meta();
+        meta.setName(keys.getP30F0107());
+        meta.setData(keys.getP30F0108());
+        list.add(meta);
 
         // Logo
-        item = new Item(ConsDat.INDX_LOGO);
-        item.setName(keys.getP30F0109());
-        list.add(item);
+        Logo logo = new Logo();
+        logo.setName(keys.getP30F0109());
+        list.add(logo);
 
         // Note
-        item = new Item(ConsDat.INDX_NOTE);
-        item.setName(keys.getP30F010A().toString());
-        item.setData(keys.getP30F010B());
-        list.add(item);
+        Note note = new Note();
+        note.setTime(keys.getP30F010A());
+        note.setData(keys.getP30F010B());
+        list.add(note);
 
         // Desc
-        item = new Item(ConsDat.INDX_MARK);
-        item.setName("" + keys.getP30F0102());
-        item.setData(keys.getP30F010C());
-        list.add(item);
+        Desc desc = new Desc();
+        desc.setStatus(keys.getP30F0102());
+        desc.setData(keys.getP30F010C());
+        list.add(desc);
 
         // 处理每一个数据
         StringTokenizer st = new StringTokenizer(text.toString(), ConsDat.SP_SQL_EE);
-        int type;
         String name;
         String data;
         String spec;
         int dn;
         int dd;
         int ds;
+        int type;
         String t;
+        Item item;
         while (st.hasMoreTokens())
         {
             t = st.nextToken() + ConsDat.SP_SQL_KV;
@@ -570,12 +576,12 @@ public class GridMdl extends DefaultTableModel
             name = t.substring(dn + 1, dd);
             data = t.substring(dd + 1, ds);
             spec = t.substring(ds + 1, t.length());
-            Item tplt = new Item(type, name, data);
+            item = new Item(type, name, data);
             if (spec.length() > 0)
             {
-                tplt.deCodeSpec(spec, ConsDat.SP_SQL_KV);
+                item.deCodeSpec(spec, ConsDat.SP_SQL_KV);
             }
-            list.add(tplt);
+            list.add(item);
         }
     }
 
@@ -591,29 +597,30 @@ public class GridMdl extends DefaultTableModel
         text.delete(0, text.length());
 
         // Guid
-        Item item = list.get(ConsEnv.PWDS_HEAD_GUID);
-        keys.setP30F0106(null);
+        Guid guid = (Guid) list.get(ConsEnv.PWDS_HEAD_GUID);
+        keys.setP30F0106(guid.getTime());
 
         // Meta
-        item = list.get(ConsEnv.PWDS_HEAD_META);
-        keys.setP30F0107(interim ? item.getName() : item.getName() + keys.getP30F0106());
-        keys.setP30F0108(item.getData());
+        Meta meta = (Meta) list.get(ConsEnv.PWDS_HEAD_META);
+        keys.setP30F0107(interim ? meta.getName() : meta.getName() + keys.getP30F0106());
+        keys.setP30F0108(meta.getData());
 
         // Logo
-        item = list.get(ConsEnv.PWDS_HEAD_LOGO);
-        keys.setP30F0109(item.getName());
+        Logo logo = (Logo) list.get(ConsEnv.PWDS_HEAD_LOGO);
+        keys.setP30F0109(logo.getName());
 
         // Note
-        item = list.get(ConsEnv.PWDS_HEAD_NOTE);
-        keys.setP30F010A(null);
-        keys.setP30F010B(item.getData());
+        Note note = (Note) list.get(ConsEnv.PWDS_HEAD_NOTE);
+        keys.setP30F010A(note.getTime());
+        keys.setP30F010B(note.getData());
 
         // Desc
-        item = list.get(ConsEnv.PWDS_HEAD_MARK);
-        keys.setP30F0102(0);
-        keys.setP30F010C(item.getData());
+        Desc desc = (Desc) list.get(ConsEnv.PWDS_HEAD_MARK);
+        keys.setP30F0102(desc.getStatus());
+        keys.setP30F010C(desc.getData());
 
         // 字符串拼接
+        Item item;
         for (int i = ConsEnv.PWDS_HEAD_SIZE, j = list.size(); i < j; i += 1)
         {
             item = list.get(i);

@@ -67,7 +67,7 @@ public class MenuPwd extends JPopupMenu
     {
         this.tpltData = tplt;
 
-        String size = tplt.getSpec(Item.ARGS_PWDS_SIZE);
+        String size = tplt.getSpec(Item.SPEC_PWDS_SIZE);
         try
         {
             charSize = Integer.parseInt(size);
@@ -95,7 +95,7 @@ public class MenuPwd extends JPopupMenu
             }
         }
 
-        String hash = tplt.getSpec(Item.ARGS_PWDS_HASH);
+        String hash = tplt.getSpec(Item.SPEC_PWDS_HASH);
         if (!Util.isValidate(hash))
         {
             hash = ConsCfg.DEF_PWDS_HASH;
@@ -118,7 +118,7 @@ public class MenuPwd extends JPopupMenu
             }
         }
 
-        mi_UrptMenu.setSelected("1".equals(tpltData.getSpec(Item.ARGS_PWDS_NRPT)));
+        mi_UrptMenu.setSelected("1".equals(tpltData.getSpec(Item.SPEC_PWDS_NRPT)));
     }
 
     public String getCharSets()
@@ -341,12 +341,12 @@ public class MenuPwd extends JPopupMenu
             mi_SizeDef.setSelected(true);
         }
 
-        tpltData.setSpec(Item.ARGS_PWDS_SIZE, t);
+        tpltData.setSpec(Item.SPEC_PWDS_SIZE, t);
     }
 
     private void mi_SizeMoreActionPerformed(java.awt.event.ActionEvent evt)
     {
-        String s = JOptionPane.showInputDialog(MagicPwd.getFrame(), "", tpltData.getSpec(Item.ARGS_PWDS_SIZE));
+        String s = JOptionPane.showInputDialog(MagicPwd.getFrame(), "", tpltData.getSpec(Item.SPEC_PWDS_SIZE));
         if (s == null)
         {
             return;
@@ -370,7 +370,7 @@ public class MenuPwd extends JPopupMenu
             mi_SizeDef.setSelected(true);
         }
 
-        tpltData.setSpec(Item.ARGS_PWDS_SIZE, s);
+        tpltData.setSpec(Item.SPEC_PWDS_SIZE, s);
     }
 
     /**
@@ -384,7 +384,7 @@ public class MenuPwd extends JPopupMenu
             return;
         }
 
-        tpltData.setSpec(Item.ARGS_PWDS_HASH, t.substring(0, 8));
+        tpltData.setSpec(Item.SPEC_PWDS_HASH, t.substring(0, 8));
         javax.swing.JCheckBoxMenuItem item = (javax.swing.JCheckBoxMenuItem) evt.getSource();
         charSets = (String) item.getClientProperty("prop_char");
     }
@@ -394,7 +394,7 @@ public class MenuPwd extends JPopupMenu
      */
     private void mi_UrptMenuActionPerformed(java.awt.event.ActionEvent evt)
     {
-        tpltData.setSpec(Item.ARGS_PWDS_NRPT, mi_UrptMenu.isSelected() ? "1" : "0");
+        tpltData.setSpec(Item.SPEC_PWDS_NRPT, mi_UrptMenu.isSelected() ? "1" : "0");
     }
     private javax.swing.JMenu mu_SizeMenu;
     private javax.swing.JCheckBoxMenuItem mi_SizeDef;
