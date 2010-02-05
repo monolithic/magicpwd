@@ -4,6 +4,7 @@
 package com.magicpwd._comn;
 
 import com.magicpwd._cons.ConsDat;
+import com.magicpwd._face.IEditItem;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,14 +16,6 @@ import com.magicpwd.m.UserMdl;
  */
 public class Item
 {
-
-    /**
-     * 附加属性索引
-     */
-    public static final int ARGS_FILE_NAME = 0;// 附件原文件名
-    public static final int ARGS_PWDS_HASH = 0;// 字符空间索引
-    public static final int ARGS_PWDS_SIZE = 1;// 生成口令长度
-    public static final int ARGS_PWDS_NRPT = 2;// 是否允许重复
     /** 记录类别 */
     private int type;
     /** 记录名称 */
