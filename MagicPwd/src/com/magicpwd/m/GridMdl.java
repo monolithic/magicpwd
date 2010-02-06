@@ -3,7 +3,7 @@
  */
 package com.magicpwd.m;
 
-import com.magicpwd._comn.Desc;
+import com.magicpwd._comn.Mark;
 import com.magicpwd._comn.Guid;
 import com.magicpwd._comn.I1S2;
 import java.util.ArrayList;
@@ -34,6 +34,9 @@ import com.magicpwd.d.DBA3000;
 public class GridMdl extends DefaultTableModel
 {
 
+    /**
+     * 临时数据保存
+     */
     private boolean interim;
     private boolean modified;
     private List<Item> ls_ItemList;
@@ -64,7 +67,7 @@ public class GridMdl extends DefaultTableModel
     @Override
     public Class<?> getColumnClass(int columnIndex)
     {
-        return String.class;
+        return columnIndex == 0 ? Integer.class : String.class;
     }
 
     /*
@@ -110,8 +113,10 @@ public class GridMdl extends DefaultTableModel
                     return Lang.getLang(LangRes.P30F1112, "徽标");
                 case ConsDat.INDX_NOTE - ConsDat.INDX_GUID:
                     return Lang.getLang(LangRes.P30F110B, "提醒");
+                case ConsDat.INDX_MARK - ConsDat.INDX_GUID:
+                    return Lang.getLang(LangRes.P30F1113, "附注");
                 default:
-                    return row - 3;
+                    return row + 1 - ConsEnv.PWDS_HEAD_SIZE;
             }
         }
 
@@ -193,6 +198,7 @@ public class GridMdl extends DefaultTableModel
      */
     public void saveData(boolean histBack, boolean repaint) throws Exception
     {
+        keys.setP30F0104(UserMdl.getUserId());
         keys.setHistBack(histBack);
         enCrypt(keys, ls_ItemList);
         DBA3000.savePwdsData(keys);
@@ -209,11 +215,11 @@ public class GridMdl extends DefaultTableModel
      */
     public Item initGuid()
     {
-        Item item = new Item(ConsDat.INDX_GUID);
-        item.setName(new java.sql.Timestamp(System.currentTimeMillis()).toString());
-        ls_ItemList.add(item);
+        Guid guid = new Guid();
+        guid.setTime(new java.sql.Timestamp(System.currentTimeMillis()));
+        ls_ItemList.add(guid);
         fireTableDataChanged();
-        return item;
+        return guid;
     }
 
     /**
@@ -222,16 +228,13 @@ public class GridMdl extends DefaultTableModel
     public void initMeta()
     {
         // 关键搜索
-        ls_ItemList.add(new Item(ConsDat.INDX_META));
-
+        ls_ItemList.add(new Meta());
         // 徽标
-        ls_ItemList.add(new Item(ConsDat.INDX_LOGO));
-
+        ls_ItemList.add(new Logo());
         // 过时提醒
-        ls_ItemList.add(new Item(ConsDat.INDX_NOTE));
-
+        ls_ItemList.add(new Note());
         // 相关说明
-        ls_ItemList.add(new Item(ConsDat.INDX_MARK));
+        ls_ItemList.add(new Mark());
         fireTableDataChanged();
     }
 
@@ -528,6 +531,7 @@ public class GridMdl extends DefaultTableModel
 
         // Guid
         Guid guid = new Guid();
+        guid.setData(keys.getP30F0105());
         guid.setTime(keys.getP30F0106());
         list.add(guid);
 
@@ -548,8 +552,8 @@ public class GridMdl extends DefaultTableModel
         note.setData(keys.getP30F010B());
         list.add(note);
 
-        // Desc
-        Desc desc = new Desc();
+        // Mark
+        Mark desc = new Mark();
         desc.setStatus(keys.getP30F0102());
         desc.setData(keys.getP30F010C());
         list.add(desc);
@@ -598,11 +602,12 @@ public class GridMdl extends DefaultTableModel
 
         // Guid
         Guid guid = (Guid) list.get(ConsEnv.PWDS_HEAD_GUID);
+        keys.setP30F0105(guid.getData());
         keys.setP30F0106(guid.getTime());
 
         // Meta
         Meta meta = (Meta) list.get(ConsEnv.PWDS_HEAD_META);
-        keys.setP30F0107(interim ? meta.getName() : meta.getName() + keys.getP30F0106());
+        keys.setP30F0107(interim ? meta.getName() + keys.getP30F0106() : meta.getName());
         keys.setP30F0108(meta.getData());
 
         // Logo
@@ -614,8 +619,8 @@ public class GridMdl extends DefaultTableModel
         keys.setP30F010A(note.getTime());
         keys.setP30F010B(note.getData());
 
-        // Desc
-        Desc desc = (Desc) list.get(ConsEnv.PWDS_HEAD_MARK);
+        // Mark
+        Mark desc = (Mark) list.get(ConsEnv.PWDS_HEAD_MARK);
         keys.setP30F0102(desc.getStatus());
         keys.setP30F010C(desc.getData());
 

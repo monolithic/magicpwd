@@ -68,11 +68,11 @@ public final class Keys implements Serializable
     /**
      * 加密口令
      */
-    private static Pwds Password;
+    private static Pwds password;
 
     public Keys()
     {
-        Password = new Pwds();
+        password = new Pwds();
         setDefault();
     }
 
@@ -94,7 +94,7 @@ public final class Keys implements Serializable
         setP30F0109(null);
         setP30F010A(null);
         setP30F010B(null);
-        Password.setDefault();
+        password.setDefault();
     }
 
     /**
@@ -149,7 +149,7 @@ public final class Keys implements Serializable
      */
     public Pwds getPassword()
     {
-        return Password;
+        return password;
     }
 
     /**
@@ -158,7 +158,7 @@ public final class Keys implements Serializable
      */
     public void setPassword(Pwds Password)
     {
-        Keys.Password = Password;
+        Keys.password = Password;
     }
 
     /**

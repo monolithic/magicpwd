@@ -10,12 +10,12 @@ import com.magicpwd._cons.ConsDat;
  *
  * @author Administrator
  */
-public class Desc extends Item
+public class Mark extends Item
 {
 
-    private int status;
+    private int status = ConsDat.PWDS_STAT_0;
 
-    public Desc()
+    public Mark()
     {
         super(ConsDat.INDX_MARK);
     }

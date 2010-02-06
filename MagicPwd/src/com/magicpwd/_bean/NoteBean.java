@@ -20,14 +20,14 @@ import com.magicpwd.v.EditBox;
  * 键值：ConsEnv.INDX_TIME
  * @author Amon
  */
-public class TimeBean extends javax.swing.JPanel implements IEditBean
+public class NoteBean extends javax.swing.JPanel implements IEditBean
 {
 
     private Item tpltData;
     private IGridView gridView;
     private EditBox dataEdit;
 
-    public TimeBean(IGridView view)
+    public NoteBean(IGridView view)
     {
         gridView = view;
     }
@@ -216,41 +216,26 @@ public class TimeBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
     {
-        String data = tf_PropData.getText();
         String name = tf_PropName.getText();
-        java.sql.Timestamp time = null;
+        String data = tf_PropData.getText();
         if (Util.isValidate(data))
         {
-            try
-            {
-                time = new java.sql.Timestamp(Util.stringToDate(data, '-', ':', ' ').getTimeInMillis());
-            }
-            catch (Exception exp)
-            {
-                Logs.exception(exp);
-                Lang.showMesg(this, "", "无法解析您输入的日期信息，请检查您的日期格式是否符合如下格式：\nyyyy-MM-dd HH:mm:ss");
-                return;
-            }
-
-            if (time == null)
+            if (!tpltData.setData(data))
             {
                 Lang.showMesg(this, "", "您输入的日期格式无效，请重新输入！");
-                tf_PropData.requestFocus();
                 return;
             }
+            tf_PropData.setText(data);
 
             if (!Util.isValidate(name))
             {
                 Lang.showMesg(this, "", "请输入过期提示！");
-                tf_PropName.requestFocus();
-                return;
             }
         }
 
         tpltData.setName(name);
-        tpltData.setData(tf_PropData.getText());
+        tpltData.setData(data);
         UserMdl.getGridMdl().setModified(true);
-
         gridView.selectNext(!UserMdl.getGridMdl().isUpdate());
     }
 

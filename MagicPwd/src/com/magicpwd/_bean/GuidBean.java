@@ -3,7 +3,7 @@
  */
 package com.magicpwd._bean;
 
-import com.magicpwd._comn.S1S2;
+import com.magicpwd._comn.Guid;
 import com.magicpwd._comn.Item;
 import com.magicpwd._comn.Tplt;
 import com.magicpwd._cons.ConsEnv;
@@ -23,7 +23,7 @@ import com.magicpwd.v.EditBox;
 public class GuidBean extends javax.swing.JPanel implements IEditBean
 {
 
-    private Item tpltData;
+    private Guid dataItem;
     private IGridView gridView;
     private EditBox dataEdit;
 
@@ -102,12 +102,11 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
     }
 
     @Override
-    public void initData(Item tplt)
+    public void initData(Item item)
     {
-        tpltData = tplt;
-        tf_PropName.setText(tplt.getName());
+        dataItem = (Guid)item;
+        tf_PropName.setText(item.getName());
         cb_PropData.setModel(UserMdl.getCboxMdl());
-        cb_PropData.setSelectedItem(new S1S2(tplt.getData(), "", ""));
     }
 
     @Override
@@ -132,10 +131,8 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         {
             gm.initMeta();
         }
-        Tplt item = (Tplt) obj;
-        tpltData.setName(tf_PropName.getText());
-        tpltData.setData(item.getP30F1103());
-        gm.wAppend(item.getP30F1103());
+        Tplt tplt = (Tplt) obj;
+        gm.wAppend(tplt.getP30F1103());
 
         gridView.selectNext(!gm.isUpdate());
     }

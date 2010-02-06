@@ -71,23 +71,23 @@ public interface ConsEnv
      * 按频率排序
      */
     String LIST_SORT_FEQ = "feq";
-    int PWDS_HEAD_GUID = 0;
-    int PWDS_HEAD_META = 1;
-    int PWDS_HEAD_LOGO = 2;
-    int PWDS_HEAD_NOTE = 3;
-    int PWDS_HEAD_MARK = 4;
     /**
-     * 记录头部预留属性个数
+     * 记录头部预留属性
      */
-    int PWDS_HEAD_SIZE = 5;
+    int PWDS_HEAD_GUID = 0;
+    int PWDS_HEAD_META = PWDS_HEAD_GUID + 1;
+    int PWDS_HEAD_LOGO = PWDS_HEAD_META + 1;
+    int PWDS_HEAD_NOTE = PWDS_HEAD_LOGO + 1;
+    int PWDS_HEAD_MARK = PWDS_HEAD_NOTE + 1;
+    int PWDS_HEAD_SIZE = PWDS_HEAD_MARK + 1;
     /**
      * 数据保存时数据块大小
      */
     int PWDS_DATA_SIZE = 8192;
-    int BUTN_MINI_WIDH = 22;
-    int BUTN_MINI_HIGH = 20;
-    int BUTN_NORM_WIDH = 24;
-    int BUTN_NORM_HIGH = 22;
+    int BUTN_MINI_WIDH = 24;
+    int BUTN_MINI_HIGH = 22;
+    int BUTN_NORM_WIDH = 26;
+    int BUTN_NORM_HIGH = 24;
     /**
      * 用户登录
      */
@@ -133,7 +133,8 @@ public interface ConsEnv
     String BEAN_GUID = BEAN_PROP + ConsDat.INDX_GUID;// "guidbean";
     String BEAN_META = BEAN_PROP + ConsDat.INDX_META;// "metabean";
     String BEAN_ICON = BEAN_PROP + ConsDat.INDX_LOGO;// "iconbean";
-    String BEAN_TIME = BEAN_PROP + ConsDat.INDX_NOTE;// "timebean";
+    String BEAN_NOTE = BEAN_PROP + ConsDat.INDX_NOTE;// "timebean";
+    String BEAN_MARK = BEAN_PROP + ConsDat.INDX_MARK;// "timebean";
     /**
      * 图标路径
      */

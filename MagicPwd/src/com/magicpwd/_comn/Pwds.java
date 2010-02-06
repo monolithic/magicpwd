@@ -14,6 +14,7 @@ import javax.crypto.Cipher;
  */
 public class Pwds
 {
+
     /**
      * 内容索引
      */
@@ -25,7 +26,7 @@ public class Pwds
     /**
      * 口令内容
      */
-    private StringBuffer P30F0203;
+    private StringBuffer P30F0203 = new StringBuffer();
 
     public Pwds()
     {
@@ -44,6 +45,8 @@ public class Pwds
 
     public void setDefault()
     {
+        P30F0202 = "";
+        P30F0203.delete(0, P30F0203.length());
     }
 
     /**
@@ -84,9 +87,6 @@ public class Pwds
      */
     public StringBuffer getP30F0203()
     {
-        if (P30F0203 == null) {
-            P30F0203 = new StringBuffer();
-        }
         return P30F0203;
     }
 
@@ -95,7 +95,7 @@ public class Pwds
      */
     public void deCript(Cipher c, char[] m) throws Exception
     {
-        String t=P30F0203.toString();
+        String t = P30F0203.toString();
         P30F0203.delete(0, t.length()).append(new String(c.doFinal(Util.stringToBytes(t, m)), ConsEnv.FILE_ENCODING));
     }
 
@@ -104,7 +104,7 @@ public class Pwds
      */
     public void enCrypt(Cipher c, char[] m) throws Exception
     {
-        String t=P30F0203.toString();
+        String t = P30F0203.toString();
         P30F0203.delete(0, t.length()).append(Util.bytesToString(c.doFinal(t.getBytes(ConsEnv.FILE_ENCODING)), m));
     }
 }

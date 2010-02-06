@@ -10,14 +10,18 @@ import com.magicpwd._bean.IconBean;
 import com.magicpwd._bean.InfoBean;
 import com.magicpwd._bean.LinkBean;
 import com.magicpwd._bean.MailBean;
+import com.magicpwd._bean.MarkBean;
 import com.magicpwd._bean.MetaBean;
-import com.magicpwd._bean.TimeBean;
+import com.magicpwd._bean.NoteBean;
 import com.magicpwd._bean.PwdsBean;
 import com.magicpwd._bean.TextBean;
+import com.magicpwd._comn.Guid;
 import com.magicpwd._comn.Kind;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._comn.S1S3;
 import com.magicpwd._comn.Item;
+import com.magicpwd._comn.Keys;
+import com.magicpwd._comn.Meta;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
@@ -56,9 +60,14 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
     private MenuPop gridMenu;
     private MenuPop treeMenu;
     private MenuPop listMenu;
+    /**
+     * 口令列表上次选择索引
+     */
     private int ls_LastIndx = -1;
+    /**
+     * 属性列表上次选择索引
+     */
     private int tb_LastIndx = -1;
-    private HistProp histProp;
     private javax.swing.border.TitledBorder border;
 
     public MainPtn()
@@ -457,21 +466,13 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
     @Override
     public void fileSaveActionPerformed(java.awt.event.ActionEvent evt)
     {
+        // 是否需要保存
         if (tb_KeysView.getRowCount() < ConsEnv.PWDS_HEAD_SIZE)
         {
             return;
         }
 
         GridMdl gm = UserMdl.getGridMdl();
-
-        Item item = gm.getItemAt(ConsEnv.PWDS_HEAD_META);
-        if (!Util.isValidate(item.getName()))
-        {
-            Lang.showMesg(this, LangRes.P30F7A0C, "请输入口令标题！");
-            tb_KeysView.setRowSelectionInterval(1, 1);
-            showPropEdit(item, true);
-            return;
-        }
 
         // 数据未被修改
         if (!gm.isModified())
@@ -480,8 +481,9 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             return;
         }
 
-        // 数据更新的情况下，不需要修改类别信息
-        if (!gm.isUpdate())
+        // 口令类别检测
+        Guid guid = (Guid) gm.getItemAt(ConsEnv.PWDS_HEAD_GUID);
+        if (!Util.isValidate(guid.getData()))
         {
             javax.swing.tree.TreePath path = tr_GuidTree.getSelectionPath();
             if (path == null)
@@ -494,6 +496,16 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             KindTN node = (KindTN) path.getLastPathComponent();
             Kind kind = (Kind) node.getUserObject();
             gm.getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(kind.getC2010103());
+        }
+
+        // 标题为空检测
+        Meta meta = (Meta) gm.getItemAt(ConsEnv.PWDS_HEAD_META);
+        if (!Util.isValidate(meta.getName()))
+        {
+            Lang.showMesg(this, LangRes.P30F7A0C, "请输入口令标题！");
+            tb_KeysView.setRowSelectionInterval(1, 1);
+            showPropEdit(meta, true);
+            return;
         }
 
         try
@@ -515,7 +527,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         }
         else
         {
-            UserMdl.getListMdl().listName(gm.getItemAt(ConsEnv.PWDS_HEAD_GUID).getData());
+            UserMdl.getListMdl().listName(guid.getData());
         }
 
         showPropEdit();
@@ -1091,10 +1103,15 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         pl_CardProp.add(ConsEnv.BEAN_ICON, beanIcon);
         editBean[idx++] = beanIcon;
 
-        TimeBean beanPast = new TimeBean(this);
-        beanPast.initView();
-        pl_CardProp.add(ConsEnv.BEAN_TIME, beanPast);
-        editBean[idx++] = beanPast;
+        NoteBean beanNote = new NoteBean(this);
+        beanNote.initView();
+        pl_CardProp.add(ConsEnv.BEAN_NOTE, beanNote);
+        editBean[idx++] = beanNote;
+
+        MarkBean beanMark = new MarkBean(this);
+        beanMark.initView();
+        pl_CardProp.add(ConsEnv.BEAN_MARK, beanMark);
+        editBean[idx++] = beanMark;
     }
 
     private void initGuidView()
@@ -1334,7 +1351,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
 
         if (UserMdl.getGridMdl().isModified())
         {
-            if (Lang.showFirm(this, LangRes.P30F7A09, "", "") != javax.swing.JOptionPane.YES_OPTION)
+            if (Lang.showFirm(this, LangRes.P30F7A09, "") != javax.swing.JOptionPane.YES_OPTION)
             {
                 ls_GuidList.setSelectedIndex(ls_LastIndx);
                 return;
@@ -1355,16 +1372,16 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
 
         ls_LastIndx = i;
         Object obj = ls_GuidList.getSelectedValue();
-        if (!(obj instanceof S1S2))
+        if (!(obj instanceof Keys))
         {
             return;
         }
         try
         {
             tb_LastIndx = -1;
-            S1S2 item = (S1S2) obj;
+            Keys keys = (Keys) obj;
             UserMdl.getGridMdl().clear();
-            UserMdl.getGridMdl().loadData(item.getK());
+            UserMdl.getGridMdl().loadData(keys.getP30F0103());
         }
         catch (Exception exp)
         {
