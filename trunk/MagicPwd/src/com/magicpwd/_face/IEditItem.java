@@ -29,7 +29,7 @@ public interface IEditItem
 
     String getData();
 
-    void setData(String data);
+    boolean setData(String data);
 
     void addSpec(String spec);
 

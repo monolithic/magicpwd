@@ -59,7 +59,7 @@ public class DBA3000
      */
     private static void addUserSort(DBAccess dba)
     {
-        dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_STAT_1);
+//        dba.addWhere(DBC3000.P30F0102, "");
         dba.addWhere(DBC3000.P30F0104, UserMdl.getUserId());
     }
 
@@ -250,7 +250,6 @@ public class DBA3000
             dba.addWhere(DBC3000.P30F0104, UserMdl.getUserId());
             dba.addWhere(Util.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC3000.P30F0107, DBC3000.P30F0108, text.toLowerCase()));
             dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_STAT_1);
-            dba.addWhere(DBC3000.P30F0102, "0");
             dba.addWhere(DBC3000.P30F0106, ConsDat.HASH_NOTE);
 
             ResultSet rest = dba.executeSelect();
@@ -293,27 +292,39 @@ public class DBA3000
             dba.addColumn(DBC3000.P30F0109);
             dba.addColumn(DBC3000.P30F010A);
             dba.addColumn(DBC3000.P30F010B);
-            dba.addWhere(DBC3000.P30F0103, keys.getP30F0103());
+            dba.addColumn(DBC3000.P30F010C);
             dba.addWhere(DBC3000.P30F0102, keys.getP30F0102());
+            dba.addWhere(DBC3000.P30F0103, keys.getP30F0103());
+            dba.addWhere(DBC3000.P30F0104, keys.getP30F0104());
 
             ResultSet rest = dba.executeSelect();
-            StringBuffer sb = new StringBuffer();
             if (rest.next())
             {
                 keys.setP30F0102(rest.getInt(DBC3000.P30F0102));
                 keys.setP30F0103(rest.getString(DBC3000.P30F0103));
-                keys.setP30F0105(rest.getString(DBC3000.P30F0104));
+                keys.setP30F0105(rest.getString(DBC3000.P30F0105));
                 keys.setP30F0106(rest.getTimestamp(DBC3000.P30F0106));
                 keys.setP30F0107(rest.getString(DBC3000.P30F0107));
                 keys.setP30F0108(rest.getString(DBC3000.P30F0108));
                 keys.setP30F0109(rest.getString(DBC3000.P30F0109));
                 keys.setP30F010A(rest.getTimestamp(DBC3000.P30F010A));
                 keys.setP30F010B(rest.getString(DBC3000.P30F010B));
+                keys.setP30F010C(rest.getString(DBC3000.P30F010C));
             }
+
+            // 口令内容读取
+            dba.reset();
+            dba.addTable(DBC3000.P30F0200);
+            dba.addColumn(DBC3000.P30F0203);
+            dba.addWhere(DBC3000.P30F0202, keys.getP30F0103());
+            dba.addSort(DBC3000.P30F0201);
+            rest = dba.executeSelect();
+            StringBuffer sb = keys.getPassword().getP30F0203();
             while (rest.next())
             {
-                sb.append(rest.getString(DBC3000.P30F0109));
+                sb.append(rest.getString(DBC3000.P30F0203));
             }
+            keys.getPassword().setP30F0202(keys.getP30F0103());
             return true;
         }
         catch (Exception exp)
@@ -1183,7 +1194,6 @@ public class DBA3000
             dba.addColumn(DBC3000.P30F010A);
             dba.addWhere(DBC3000.P30F0103, hash);
             dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_STAT_2);
-            dba.addWhere(DBC3000.P30F0102, "0");
 
             ResultSet rest = dba.executeSelect();
             StringBuffer sb = new StringBuffer();
@@ -1219,7 +1229,6 @@ public class DBA3000
             dba.addColumn(DBC3000.P30F0103);
             dba.addWhere(DBC3000.P30F0103, hash);
             dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_STAT_2);
-            dba.addWhere(DBC3000.P30F0102, "0", false);
             dba.addSort(DBC3000.P30F0103, false);
 
             S1S2 item;

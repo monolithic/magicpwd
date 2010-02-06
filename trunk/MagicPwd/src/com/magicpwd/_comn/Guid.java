@@ -8,8 +8,12 @@ import com.magicpwd._cons.ConsDat;
 import java.sql.Timestamp;
 
 /**
- *
- * @author Administrator
+ * 使用说明：<br />
+ * name:记录创建时间<br />
+ * data:口令模板索引<br />
+ * time:
+ * 
+ * @author Amon
  */
 public class Guid extends Item
 {
@@ -24,7 +28,9 @@ public class Guid extends Item
     @Override
     public String getName()
     {
-        return time.toString();
+        String name = time.toString();
+        int dot = name.indexOf('.');
+        return (dot > 0) ? name = name.substring(0, dot) : name;
     }
 
     @Override

@@ -107,9 +107,10 @@ public class Item implements IEditItem
      *            the data to set
      */
     @Override
-    public void setData(String data)
+    public boolean setData(String data)
     {
         this.data = data;
+        return true;
     }
 
     /*
@@ -120,7 +121,7 @@ public class Item implements IEditItem
     @Override
     public String toString()
     {
-        return name;
+        return getName();
     }
 
     /**
