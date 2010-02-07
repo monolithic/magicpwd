@@ -10,6 +10,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._comn.Keys;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
+import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IGridView;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -25,9 +26,9 @@ import com.magicpwd.v.EditBox;
 public class FileBean extends javax.swing.JPanel implements IEditBean
 {
 
-    private Item tpltData;
-    private java.io.File filePath;
+    private IEditItem tpltData;
     private IGridView gridView;
+    private java.io.File filePath;
     private String fileName;
     private EditBox dataEdit;
 

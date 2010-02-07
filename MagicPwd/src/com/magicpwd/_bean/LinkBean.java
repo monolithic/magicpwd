@@ -9,6 +9,7 @@ import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
+import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IGridView;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
@@ -25,7 +26,7 @@ import com.magicpwd.v.EditBox;
 public class LinkBean extends javax.swing.JPanel implements IEditBean
 {
 
-    private Item tpltData;
+    private IEditItem tpltData;
     private IGridView gridView;
     private EditBox dataEdit;
 

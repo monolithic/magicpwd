@@ -9,6 +9,7 @@ import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
+import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IGridView;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -26,7 +27,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 {
 
     private boolean askOverRide;
-    private Item tpltData;
+    private IEditItem tpltData;
     private MenuPwd menuPwd;
     private IGridView gridView;
     private javax.swing.Icon viewPwds;

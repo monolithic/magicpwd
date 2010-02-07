@@ -6,6 +6,7 @@ package com.magicpwd._mail;
 import com.magicpwd._util.Logs;
 import java.util.ArrayList;
 import java.util.List;
+import javax.mail.FetchProfile;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.swing.table.AbstractTableModel;
@@ -118,8 +119,13 @@ public class MailMdl extends AbstractTableModel
             }
             messages.clear();
 
+            Message[] msgs = folder.getMessages();
+            FetchProfile profile = new FetchProfile();
+            profile.add(FetchProfile.Item.ENVELOPE);
+            folder.fetch(msgs, profile);
+
             MailInf mail;
-            for (Message message : folder.getMessages())
+            for (Message message : msgs)
             {
                 mail = new MailInf();
                 mail.loadMsg(message);

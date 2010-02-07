@@ -6,7 +6,7 @@ import com.magicpwd._bean.DateBean;
 import com.magicpwd._bean.FileBean;
 import com.magicpwd._bean.GmtpBean;
 import com.magicpwd._bean.GuidBean;
-import com.magicpwd._bean.IconBean;
+import com.magicpwd._bean.LogoBean;
 import com.magicpwd._bean.InfoBean;
 import com.magicpwd._bean.LinkBean;
 import com.magicpwd._bean.MailBean;
@@ -1098,7 +1098,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         pl_CardProp.add(ConsEnv.BEAN_META, beanMeta);
         editBean[idx++] = beanMeta;
 
-        IconBean beanIcon = new IconBean(this);
+        LogoBean beanIcon = new LogoBean(this);
         beanIcon.initView();
         pl_CardProp.add(ConsEnv.BEAN_ICON, beanIcon);
         editBean[idx++] = beanIcon;
