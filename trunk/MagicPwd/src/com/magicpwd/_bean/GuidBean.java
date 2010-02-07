@@ -37,6 +37,8 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
     {
         dataEdit = new EditBox(this, false);
         dataEdit.initView();
+        dataEdit.setCopyButtonVisible(false);
+        dataEdit.setDropButtonVisible(false);
 
         lb_PropName = new javax.swing.JLabel();
 
@@ -104,7 +106,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initData(Item item)
     {
-        dataItem = (Guid)item;
+        dataItem = (Guid) item;
         tf_PropName.setText(item.getName());
         cb_PropData.setModel(UserMdl.getCboxMdl());
     }

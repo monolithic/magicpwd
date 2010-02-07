@@ -6,6 +6,7 @@ package com.magicpwd._bean;
 import com.magicpwd._comn.Item;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
+import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IGridView;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
@@ -22,7 +23,7 @@ import com.magicpwd.v.EditBox;
 public class MetaBean extends javax.swing.JPanel implements IEditBean
 {
 
-    private Item tpltData;
+    private IEditItem tpltData;
     private IGridView gridView;
     private EditBox dataEdit;
 
@@ -36,6 +37,7 @@ public class MetaBean extends javax.swing.JPanel implements IEditBean
     {
         dataEdit = new EditBox(this, true);
         dataEdit.initView();
+        dataEdit.setDropButtonVisible(false);
 
         lb_PropName = new javax.swing.JLabel();
 

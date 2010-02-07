@@ -101,6 +101,36 @@ public class EditBox extends javax.swing.JPanel
             Lang.setWTips(bt_DropData, LangRes.P30F1503, "删除");
         }
     }
+
+    public void setCopyButtonEnabled(boolean enabled)
+    {
+        bt_CopyData.setEnabled(enabled);
+    }
+
+    public void setCopyButtonVisible(boolean visible)
+    {
+        bt_CopyData.setVisible(visible);
+    }
+
+    public void setSaveButtonEnabled(boolean enabled)
+    {
+        bt_SaveData.setEnabled(enabled);
+    }
+
+    public void setSaveButtonVisible(boolean visible)
+    {
+        bt_SaveData.setVisible(visible);
+    }
+
+    public void setDropButtonEnabled(boolean enabled)
+    {
+        bt_DropData.setEnabled(enabled);
+    }
+
+    public void setDropButtonVisible(boolean visible)
+    {
+        bt_DropData.setVisible(visible);
+    }
     private BtnLabel bt_CopyData;
     private BtnLabel bt_SaveData;
     private BtnLabel bt_DropData;

@@ -6,6 +6,7 @@ package com.magicpwd._bean;
 
 import com.magicpwd._comn.Item;
 import com.magicpwd._face.IEditBean;
+import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IGridView;
 
 /**
@@ -13,13 +14,13 @@ import com.magicpwd._face.IGridView;
  * 键值：ConsEnv.INDX_ICON
  * @author Amon
  */
-public class IconBean extends javax.swing.JPanel implements IEditBean
+public class LogoBean extends javax.swing.JPanel implements IEditBean
 {
 
-    private Item tpltData;
+    private IEditItem tpltData;
     private IGridView gridView;
 
-    public IconBean(IGridView gridView)
+    public LogoBean(IGridView gridView)
     {
         this.gridView = gridView;
     }

@@ -168,9 +168,13 @@ public class Connect
     public Properties getProperties()
     {
         Properties prop = new Properties();
+        prop.put(Util.format("mail.{0}.user", getProtocol()), getUsername());
         prop.put(Util.format("mail.{0}.host", getProtocol()), getHost());
         prop.put(Util.format("mail.{0}.port", getProtocol()), getPort());
         prop.put(Util.format("mail.{0}.auth", getProtocol()), isAuth() ? "true" : "false");
+        prop.put(Util.format("mail.{0}.rsetbeforequit", getProtocol()), "true");
+        prop.put("mail.store.protocol", isAuth() ? getProtocol() + 's' : getProtocol());
+
         if (isAuth())
         {
             prop.put(Util.format("mail.{0}.starttls.enable", getProtocol()), "true");// 使用SSL验证
