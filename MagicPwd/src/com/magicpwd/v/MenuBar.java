@@ -23,8 +23,6 @@ import com.magicpwd.x.MdiDialog;
  */
 public class MenuBar extends JMenuBar
 {
-    private static final long serialVersionUID = 7715460098314076087L;
-
     private MenuEvt me_MenuEvent;
 
     public MenuBar()

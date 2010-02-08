@@ -29,8 +29,6 @@ import com.magicpwd.m.UserMdl;
  */
 public class MiniPtn extends JPanel implements MenuEvt, FindEvt
 {
-    private static final long serialVersionUID = -2930558428385341386L;
-
     public MiniPtn()
     {
     }
@@ -63,6 +61,7 @@ public class MiniPtn extends JPanel implements MenuEvt, FindEvt
         bt_CrteNote.setIcon(new ImageIcon(Util.getImage(ConsEnv.ICON_DATA_APND)));
         bt_CrteNote.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_CrteNoteActionPerformed(evt);
@@ -72,6 +71,7 @@ public class MiniPtn extends JPanel implements MenuEvt, FindEvt
         bt_OpenNote.setIcon(new ImageIcon(Util.getImage(ConsEnv.ICON_FILE_OPEN)));
         bt_OpenNote.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_OpenNoteActionPerformed(evt);
@@ -81,6 +81,7 @@ public class MiniPtn extends JPanel implements MenuEvt, FindEvt
         bt_SaveNote.setIcon(new ImageIcon(Util.getImage(ConsEnv.ICON_DATA_SAVE)));
         bt_SaveNote.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_SaveNoteActionPerformed(evt);
@@ -91,6 +92,7 @@ public class MiniPtn extends JPanel implements MenuEvt, FindEvt
         bt_SrchNote.setIcon(new ImageIcon(Util.getImage(ConsEnv.ICON_DATA_SRCH)));
         bt_SrchNote.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_SrchNoteActionPerformed(evt);
@@ -103,6 +105,7 @@ public class MiniPtn extends JPanel implements MenuEvt, FindEvt
         bt_ExitNote.setIcon(new ImageIcon(Util.getImage(ConsEnv.ICON_DATA_EXIT)));
         bt_ExitNote.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_ExitNoteActionPerformed(evt);
@@ -270,11 +273,13 @@ public class MiniPtn extends JPanel implements MenuEvt, FindEvt
     {
     }
 
+    @Override
     public void fileExitActionPerformed(java.awt.event.ActionEvent evt)
     {
         MagicPwd.exit(0);
     }
 
+    @Override
     public void fileHideActionPerformed(java.awt.event.ActionEvent evt)
     {
     }
@@ -303,12 +308,12 @@ public class MiniPtn extends JPanel implements MenuEvt, FindEvt
         }
         if (!file.canRead())
         {
-            Lang.showMesg(this, LangRes.P30F7A05, "", "");
+            Lang.showMesg(this, LangRes.P30F7A05, "");
             return;
         }
         if (file.length() > 1048576)
         {
-            Lang.showMesg(this, LangRes.P30F7A06, "", "");
+            Lang.showMesg(this, LangRes.P30F7A06, "");
             return;
         }
         try
@@ -344,7 +349,7 @@ public class MiniPtn extends JPanel implements MenuEvt, FindEvt
         String data = ta_NoteData.getText();
         if (!Util.isValidate(data))
         {
-            if (Lang.showFirm(this, LangRes.P30F5A02, "", "") != JOptionPane.NO_OPTION)
+            if (Lang.showFirm(this, LangRes.P30F5A02, "") != JOptionPane.NO_OPTION)
             {
                 return;
             }
@@ -372,7 +377,7 @@ public class MiniPtn extends JPanel implements MenuEvt, FindEvt
         catch (Exception exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(this, LangRes.P30F5A04, "", "");
+            Lang.showMesg(this, LangRes.P30F5A04, "");
         }
     }
 
@@ -486,7 +491,7 @@ public class MiniPtn extends JPanel implements MenuEvt, FindEvt
         String noteHash = DBA3000.findUserNote(noteName);
         if (!Util.isValidate(noteHash))
         {
-            Lang.showMesg(this, LangRes.P30F7A1F, "", "搜索不到与标题相匹配的记事内容，请修改查询条件后重试！");
+            Lang.showMesg(this, LangRes.P30F7A1F, "搜索不到与标题相匹配的记事内容，请修改查询条件后重试！");
             tf_NoteHead.requestFocus();
             return;
         }

@@ -15,6 +15,7 @@ import com.magicpwd.c.FindEvt;
  */
 public class FindBar extends JPanel
 {
+
     private FindEvt fe_FindEvent;
 
     public FindBar()
@@ -31,6 +32,8 @@ public class FindBar extends JPanel
 
         tf_ItemFind.addActionListener(new java.awt.event.ActionListener()
         {
+
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 fe_FindEvent.findActionPerformed(evt);
@@ -39,6 +42,8 @@ public class FindBar extends JPanel
 
         bt_ItemFind.addActionListener(new java.awt.event.ActionListener()
         {
+
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 fe_FindEvent.findActionPerformed(evt);
@@ -47,22 +52,31 @@ public class FindBar extends JPanel
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addComponent(lb_ItemFind).addPreferredGap(
-                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_ItemFind,
-                        javax.swing.GroupLayout.DEFAULT_SIZE, 10, Short.MAX_VALUE).addPreferredGap(
-                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_ItemFind)));
-        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_ItemFind)
-                        .addComponent(bt_ItemFind).addComponent(tf_ItemFind, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)));
+        javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
+        hsg.addComponent(lb_ItemFind);
+        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg.addComponent(tf_ItemFind, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg.addComponent(bt_ItemFind);
+        layout.setHorizontalGroup(hsg);
+
+        javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg.addComponent(lb_ItemFind);
+        vpg.addComponent(bt_ItemFind);
+        vpg.addComponent(tf_ItemFind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        layout.setVerticalGroup(vpg);
     }
 
     public void initLang()
     {
-        Lang.setWText(lb_ItemFind,LangRes.P30F7301, "");
+        Lang.setWText(lb_ItemFind, LangRes.P30F7301, "查找(&X)");
 
-        Lang.setWText(bt_ItemFind,LangRes.P30F7302, "");
+        Lang.setWText(bt_ItemFind, LangRes.P30F7302, "查询(&Q)");
+    }
+
+    public void initData()
+    {
+        tf_ItemFind.requestFocus();
     }
 
     public void setActionEvent(FindEvt event)
@@ -80,11 +94,11 @@ public class FindBar extends JPanel
         tf_ItemFind.setText(text);
     }
 
+    @Override
     public void requestFocus()
     {
         tf_ItemFind.requestFocus();
     }
-
     private javax.swing.JButton bt_ItemFind;
     private javax.swing.JLabel lb_ItemFind;
     private javax.swing.JTextField tf_ItemFind;

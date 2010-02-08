@@ -15,8 +15,6 @@ import com.magicpwd.c.ToolEvt;
  */
 public class MenuPop extends JPopupMenu
 {
-    private static final long serialVersionUID = -4427688180617357960L;
-
     public static final int MENU_GRID = 0;
     public static final int MENU_TREE = 1;
     public static final int MENU_LIST = 2;
