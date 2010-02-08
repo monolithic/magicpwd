@@ -37,6 +37,7 @@ public class MarkBean extends javax.swing.JPanel implements IEditBean
     {
         dataEdit = new EditBox(this, false);
         dataEdit.initView();
+        dataEdit.setDropButtonVisible(false);
 
         lb_PropName = new javax.swing.JLabel();
 
