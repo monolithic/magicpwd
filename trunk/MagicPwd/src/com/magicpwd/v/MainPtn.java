@@ -103,6 +103,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         Util.addViewAction(getActionMap(), getInputMap(WHEN_IN_FOCUSED_WINDOW), this);
         Util.addDataAction(getActionMap(), getInputMap(WHEN_IN_FOCUSED_WINDOW), this);
         MagicPwd.getWInfoBar().initData();
+        MagicPwd.getWFindBar().initData();
     }
 
     @Override
