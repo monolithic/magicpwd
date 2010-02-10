@@ -134,6 +134,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
             gm.initMeta();
         }
         Tplt tplt = (Tplt) obj;
+        dataItem.addSpec(tplt.getP30F1103());
         gm.wAppend(tplt.getP30F1103());
 
         gridView.selectNext(!gm.isUpdate());

@@ -10,8 +10,8 @@ import java.sql.Timestamp;
 /**
  * 使用说明：<br />
  * name:记录创建时间<br />
- * data:口令模板索引<br />
- * time:
+ * data:所属类别索引<br />
+ * spec:[0]口令模板索引<br />
  * 
  * @author Amon
  */

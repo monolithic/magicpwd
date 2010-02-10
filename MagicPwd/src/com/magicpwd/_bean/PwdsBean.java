@@ -27,7 +27,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 {
 
     private boolean askOverRide;
-    private IEditItem tpltData;
+    private IEditItem dataItem;
     private MenuPwd menuPwd;
     private IGridView gridView;
     private javax.swing.Icon viewPwds;
@@ -170,14 +170,14 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initData(Item tplt)
     {
-        tpltData = tplt;
-        String name = tpltData.getName();
+        dataItem = tplt;
+        String name = dataItem.getName();
         if (Util.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS))
         {
             name = name.substring(1, name.length() - 1);
         }
         tf_PropName.setText(name);
-        pf_PropData.setText(tpltData.getData());
+        pf_PropData.setText(dataItem.getData());
         menuPwd.setTplt(tplt);
     }
 
@@ -197,7 +197,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     {
         if (Lang.showFirm(this, LangRes.P30F1A01, "") == javax.swing.JOptionPane.YES_OPTION)
         {
-            UserMdl.getGridMdl().wRemove(tpltData);
+            UserMdl.getGridMdl().wRemove(dataItem);
             gridView.selectNext(false);
         }
     }
@@ -213,8 +213,8 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
             return;
         }
 
-        tpltData.setName(name);
-        tpltData.setData(new String(pf_PropData.getPassword()));
+        dataItem.setName(name);
+        dataItem.setData(new String(pf_PropData.getPassword()));
         UserMdl.getGridMdl().setModified(true);
 
         gridView.selectNext(!UserMdl.getGridMdl().isUpdate());

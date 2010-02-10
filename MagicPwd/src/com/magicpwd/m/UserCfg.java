@@ -22,6 +22,7 @@ import com.magicpwd._util.Logs;
  */
 public final class UserCfg
 {
+
     private Properties userCfg;
     private boolean viewTop;
 
@@ -329,7 +330,7 @@ public final class UserCfg
 
     public final String getPwdsUpt()
     {
-        return userCfg.getProperty(ConsCfg.CFG_PWDS_URPT);
+        return userCfg.getProperty(ConsCfg.CFG_PWDS_URPT, "");
     }
 
     /**

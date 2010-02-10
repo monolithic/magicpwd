@@ -195,21 +195,20 @@ public class Item implements IEditItem
     @Override
     public void setDefault()
     {
-        if (type == ConsDat.INDX_PWDS)
+        switch (type)
         {
-            spec = new ArrayList<String>(3);
-            spec.add(UserMdl.getCfg().getPwdsSet());
-            spec.add(UserMdl.getCfg().getPwdsLen());
-            spec.add(UserMdl.getCfg().getPwdsUpt());
-        }
-        else if (type == ConsDat.INDX_FILE)
-        {
-            spec = new ArrayList<String>(1);
-            spec.add("");
-        }
-        else
-        {
-            spec = null;
+            case ConsDat.INDX_PWDS:
+                spec = new ArrayList<String>(3);
+                spec.add(UserMdl.getCfg().getPwdsSet());
+                spec.add(UserMdl.getCfg().getPwdsLen());
+                spec.add(UserMdl.getCfg().getPwdsUpt());
+            case ConsDat.INDX_GUID:
+            case ConsDat.INDX_FILE:
+                spec = new ArrayList<String>(1);
+                spec.add("");
+                break;
+            default:
+                spec = null;
         }
     }
 }

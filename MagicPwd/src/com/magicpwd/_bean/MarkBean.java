@@ -137,13 +137,14 @@ public class MarkBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
     {
-        String name = cb_PropName.getSelectedItem().toString();
-        if (!Util.isValidate(name))
+        Object obj=cb_PropName.getSelectedItem();
+        if(obj==null)
         {
             Lang.showMesg(this, "", "请输入附注名称！");
             cb_PropName.requestFocus();
             return;
         }
+        String name = obj.toString();
 
         tpltData.setName(name);
         tpltData.setData(ta_PropData.getText());
