@@ -47,6 +47,10 @@ public interface ConsDat
      */
     String HASH_ROOT = "sctfxrczgcywxezs";
     /**
+     * 目录信息：电子邮件
+     */
+    String HASH_MAIL = "qqqqqaacbrrtyswx";
+    /**
      * 目录信息：日记节点
      */
     String HASH_NOTE = "qqqqqaavaqddvafs";
@@ -105,13 +109,9 @@ public interface ConsDat
      */
     int INDX_FILE = INDX_AREA + 1;
     /**
-     * 属性：邮件协议
-     */
-    int INDX_GMTP = INDX_FILE + 1;
-    /**
      * 属性：模板向导
      */
-    int INDX_GUID = INDX_GMTP + 1;
+    int INDX_GUID = INDX_FILE + 1;
     /**
      * 属性：关键搜索
      */

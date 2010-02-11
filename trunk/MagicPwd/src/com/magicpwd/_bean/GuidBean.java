@@ -5,6 +5,7 @@ package com.magicpwd._bean;
 
 import com.magicpwd.MagicPwd;
 import com.magicpwd._comn.Guid;
+import com.magicpwd._comn.I1S2;
 import com.magicpwd._comn.Item;
 import com.magicpwd._comn.Tplt;
 import com.magicpwd._comp.BtnLabel;
@@ -21,6 +22,9 @@ import com.magicpwd._util.Util;
 import com.magicpwd.m.GridMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.EditBox;
+import com.magicpwd.v.MailPtn;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  * 属性：向导
@@ -83,13 +87,13 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg1.addComponent(lb_PropEdit);
-        hpg1.addComponent(lb_PropData);
         hpg1.addComponent(lb_PropName);
+        hpg1.addComponent(lb_PropData);
+        hpg1.addComponent(lb_PropEdit);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg2.addComponent(tf_PropName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        hpg2.addComponent(pl_PropEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-        hpg2.addComponent(cb_PropData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hpg2.addComponent(cb_PropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hpg2.addComponent(pl_PropEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addGroup(hpg1);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -106,13 +110,14 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         vpg2.addComponent(cb_PropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         vpg3.addComponent(lb_PropEdit);
-        vpg3.addComponent(pl_PropEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        vpg3.addComponent(pl_PropEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
         vsg.addGroup(vpg1);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addGroup(vpg2);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addGroup(vpg3);
+        vsg.addContainerGap(0, Short.MAX_VALUE);
         javax.swing.GroupLayout.ParallelGroup vpg4 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
         vpg4.addComponent(dataEdit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         vpg4.addGroup(vsg);
@@ -136,7 +141,16 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         dataItem = (Guid) item;
         tf_PropName.setText(item.getName());
         cb_PropData.setModel(UserMdl.getCboxMdl());
-        pl_PropEdit.setVisible(Util.isValidate(dataItem.getSpec(IEditItem.SPEC_GUID_TPLT)));
+
+        String kind = dataItem.getSpec(IEditItem.SPEC_GUID_TPLT);
+        boolean v = Util.isValidate(kind);
+        bl_ReadMail.setVisible(v);
+        ck_CheckAll.setVisible(v);
+
+        boolean e = ConsDat.HASH_MAIL.equals(kind);
+        bl_ReadMail.setEnabled(e);
+        ck_CheckAll.setEnabled(e);
+
         ck_CheckAll.setSelected(ConsDat.SPEC_VALUE_TRUE.equals(dataItem.getSpec(IEditItem.SPEC_GUID_CHCK)));
     }
 
@@ -163,7 +177,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
             gm.initMeta();
         }
         Tplt tplt = (Tplt) obj;
-        dataItem.addSpec(tplt.getP30F1103());
+        dataItem.setSpec(IEditItem.SPEC_GUID_TPLT, tplt.getP30F1103());
         gm.wAppend(tplt.getP30F1103());
 
         gridView.selectNext(!gm.isUpdate());
@@ -190,7 +204,6 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
             mailDlg.initData();
             MagicPwd.setMailDlg(mailDlg);
         }
-        mailDlg.setVisible(true);
 
         String mail = "";
         String user = "";
@@ -222,12 +235,62 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
 
         if (!Util.isValidateEmail(mail))
         {
+            MailPtn mailPtn = new MailPtn();
+            mailPtn.initView();
+            mailPtn.initLang();
+            List<I1S2> mailList = gm.wSelect(ConsDat.INDX_MAIL);
+            mailPtn.initMail(mailList);
+            List<I1S2> userList = gm.wSelect(ConsDat.INDX_TEXT);
+            mailPtn.initUser(userList);
+            List<I1S2> pwdsList = gm.wSelect(ConsDat.INDX_PWDS);
+            mailPtn.initPwds(pwdsList);
+            if (JOptionPane.OK_OPTION != JOptionPane.showConfirmDialog(this, mailPtn, "登录确认", JOptionPane.OK_CANCEL_OPTION))
+            {
+                return;
+            }
+
+            mail = mailList.get(mailPtn.getMail()).getK();
+            user = userList.get(mailPtn.getUser()).getK();
+            pwds = pwdsList.get(mailPtn.getPwds()).getK();
         }
-        Connect connect = new Connect("pop3", "Amon.CT@live.com", "c~9xJpa&");
-        connect.setUsername("Amon.CT");
-        connect.setHost("pop.live.com");
-        connect.setPort(995);
-        connect.setAuth(true);
+
+        String host = mail.substring(mail.indexOf('@') + 1);
+        if (!Util.isValidate(host))
+        {
+            return;
+        }
+        String type = UserMdl.getCfg().getCfg(host + ".type");
+        if (!Util.isValidate(type))
+        {
+            return;
+        }
+
+        Connect connect = new Connect(type, mail, pwds);
+        connect.setUsername(user);
+
+        // 读取服务器配置
+        String cfg = UserMdl.getCfg().getCfg(type + '.' + host);
+        if (!Util.isValidate(cfg))
+        {
+            return;
+        }
+
+        // 服务器地址
+        String[] arr = (cfg + "::").split(":");
+        connect.setHost(arr[0]);
+
+        // 服务器端口
+        cfg = arr[1].trim();
+        if (Util.isValidateInteger(cfg))
+        {
+            connect.setPort(Integer.parseInt(cfg));
+        }
+
+        // 是否需要身份认证
+        cfg = arr[1].trim().toLowerCase();
+        connect.setAuth("true".equals(cfg));
+
+        mailDlg.setVisible(true);
         mailDlg.append(connect, "");
     }
     private javax.swing.JLabel lb_PropData;

@@ -1083,11 +1083,6 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         pl_CardProp.add(ConsEnv.BEAN_FILE, beanFile);
         editBean[idx++] = beanFile;
 
-        GmtpBean beanGmtp = new GmtpBean(this);
-        beanGmtp.initView();
-        pl_CardProp.add(ConsEnv.BEAN_GMTP, beanGmtp);
-        editBean[idx++] = beanGmtp;
-
         GuidBean beanGuid = new GuidBean(this);
         beanGuid.initView();
         pl_CardProp.add(ConsEnv.BEAN_GUID, beanGuid);

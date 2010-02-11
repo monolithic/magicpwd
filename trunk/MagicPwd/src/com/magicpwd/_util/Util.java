@@ -50,6 +50,7 @@ import java.util.regex.Pattern;
  */
 public final class Util
 {
+
     private static BufferedImage bi_LogoIcon;
     private static Map<String, BufferedImage> mp_IconList;
 
@@ -75,7 +76,8 @@ public final class Util
         {
             buf[--charPos] = digits[(int) (l & 0xF)];
             l >>>= 4;
-        } while (charPos > 0);
+        }
+        while (charPos > 0);
 
         // 返回符合用户要求格式的数组字符串
         return new String(buf);
@@ -108,6 +110,11 @@ public final class Util
             return false;
         }
         return Pattern.compile("^[\\w]{16}$", Pattern.CASE_INSENSITIVE).matcher(text).matches();
+    }
+
+    public static final boolean isValidateInteger(String t)
+    {
+        return t != null ? Pattern.compile("^[+-]?\\d+$", Pattern.CASE_INSENSITIVE).matcher(t).matches() : false;
     }
 
     /**
@@ -442,6 +449,7 @@ public final class Util
     {
         actionMap.put(ConsEnv.EVENT_FILE_HIDE, new javax.swing.AbstractAction()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -456,6 +464,7 @@ public final class Util
     {
         actionMap.put(ConsEnv.EVENT_EDIT_PREV, new javax.swing.AbstractAction()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -467,6 +476,7 @@ public final class Util
 
         actionMap.put(ConsEnv.EVENT_EDIT_NEXT, new javax.swing.AbstractAction()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -478,6 +488,7 @@ public final class Util
 
         actionMap.put(ConsEnv.EVENT_EDIT_TEXT, new javax.swing.AbstractAction()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -488,6 +499,7 @@ public final class Util
 
         actionMap.put(ConsEnv.EVENT_EDIT_PWDS, new javax.swing.AbstractAction()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -498,6 +510,7 @@ public final class Util
 
         actionMap.put(ConsEnv.EVENT_EDIT_LINK, new javax.swing.AbstractAction()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -508,6 +521,7 @@ public final class Util
 
         actionMap.put(ConsEnv.EVENT_EDIT_MAIL, new javax.swing.AbstractAction()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -518,6 +532,7 @@ public final class Util
 
         actionMap.put(ConsEnv.EVENT_EDIT_DATE, new javax.swing.AbstractAction()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -528,6 +543,7 @@ public final class Util
 
         actionMap.put(ConsEnv.EVENT_EDIT_AREA, new javax.swing.AbstractAction()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -538,6 +554,7 @@ public final class Util
 
         actionMap.put(ConsEnv.EVENT_EDIT_FILE, new javax.swing.AbstractAction()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -551,6 +568,7 @@ public final class Util
     {
         actionMap.put(ConsEnv.EVENT_FILE_APND, new javax.swing.AbstractAction()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -561,6 +579,7 @@ public final class Util
 
         actionMap.put(ConsEnv.EVENT_FILE_SAVE, new javax.swing.AbstractAction()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -571,6 +590,7 @@ public final class Util
 
         actionMap.put(ConsEnv.EVENT_FILE_OPEN, new javax.swing.AbstractAction()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -584,6 +604,7 @@ public final class Util
     {
         actionMap.put(ConsEnv.EVENT_VIEW_TOP1, new javax.swing.AbstractAction()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -597,6 +618,7 @@ public final class Util
     {
         actionMap.put(ConsEnv.EVENT_VIEW_EDIT, new javax.swing.AbstractAction()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -607,6 +629,7 @@ public final class Util
 
         actionMap.put(ConsEnv.EVENT_VIEW_SIDE, new javax.swing.AbstractAction()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -617,6 +640,7 @@ public final class Util
 
         actionMap.put(ConsEnv.EVENT_VIEW_FIND, new javax.swing.AbstractAction()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -628,6 +652,7 @@ public final class Util
 
         actionMap.put(ConsEnv.EVENT_VIEW_MENU, new javax.swing.AbstractAction()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -639,6 +664,7 @@ public final class Util
 
         actionMap.put(ConsEnv.EVENT_VIEW_TOOL, new javax.swing.AbstractAction()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -650,6 +676,7 @@ public final class Util
 
         actionMap.put(ConsEnv.EVENT_VIEW_INFO, new javax.swing.AbstractAction()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -664,6 +691,7 @@ public final class Util
     {
         actionMap.put(ConsEnv.EVENT_DATA_SKEY, new javax.swing.AbstractAction()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -728,6 +756,7 @@ public final class Util
         {
             timer = new Timer(100, new AbstractAction()
             {
+
                 @Override
                 public void actionPerformed(ActionEvent e)
                 {

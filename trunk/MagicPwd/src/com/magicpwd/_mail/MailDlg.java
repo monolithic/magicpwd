@@ -12,6 +12,7 @@ import javax.mail.Folder;
 import javax.mail.Store;
 import javax.swing.BorderFactory;
 import javax.swing.UIManager;
+import javax.swing.table.TableRowSorter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
@@ -54,6 +55,7 @@ public class MailDlg extends javax.swing.JFrame
         tr_MailBoxs.setModel(treeModel);
         tableMode = new MailMdl();
         tb_MailMsgs.setModel(tableMode);
+        tb_MailMsgs.setRowSorter(new TableRowSorter(tableMode));
     }
 
     public boolean append(Connect connect, String folder)

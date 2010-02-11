@@ -13,8 +13,6 @@ import com.magicpwd.m.UserMdl;
 
 public class DatDialog extends JDialog
 {
-    private static final long serialVersionUID = -3660833685934381367L;
-
     private IBackCall backCall;
 
     public DatDialog(IBackCall backCall)
@@ -36,6 +34,7 @@ public class DatDialog extends JDialog
 
         bt_Cancel.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_CancelActionPerformed(evt);
@@ -44,6 +43,7 @@ public class DatDialog extends JDialog
 
         bt_Update.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_UpdateActionPerformed(evt);

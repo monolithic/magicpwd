@@ -137,10 +137,10 @@ public class MarkBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
     {
-        Object obj=cb_PropName.getSelectedItem();
-        if(obj==null)
+        Object obj = cb_PropName.getSelectedItem();
+        if (obj == null)
         {
-            Lang.showMesg(this, "", "请输入附注名称！");
+            Lang.showMesg(this, LangRes.P30F7A2A, "请选择记录状态！");
             cb_PropName.requestFocus();
             return;
         }
@@ -156,7 +156,7 @@ public class MarkBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (Lang.showFirm(this, LangRes.P30F1A01, "") == javax.swing.JOptionPane.YES_OPTION)
+        if (Lang.showFirm(this, LangRes.P30F1A01, "确认要删除此数据么？") == javax.swing.JOptionPane.YES_OPTION)
         {
             UserMdl.getGridMdl().wRemove(tpltData);
             gridView.selectNext(false);
