@@ -4,6 +4,7 @@
 package com.magicpwd._mail;
 
 import com.magicpwd._util.Logs;
+import com.magicpwd._util.Util;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -46,7 +47,7 @@ public class MailInf
     /**
      * 存放邮件内容
      */
-    private StringBuffer bodytext = new StringBuffer();
+    private StringBuffer content = new StringBuffer();
     private static Pattern typeSet;
     private static Pattern charSet;
 
@@ -75,6 +76,7 @@ public class MailInf
             }
             contentType = t1 + ' ' + t2;
 
+            message.isMimeType("");
             address = message.getFrom();
             to = message.getRecipients(Message.RecipientType.TO);
             cc = message.getRecipients(Message.RecipientType.CC);
@@ -129,26 +131,26 @@ public class MailInf
     {
         String mailaddr = "";
         String addtype = type.toUpperCase();
-        InternetAddress[] address = null;
+        InternetAddress[] addr = null;
         if (addtype.equals("TO") || addtype.equals("CC") || addtype.equals("BCC"))
         {
             if (addtype.equals("TO"))
             {
-                address = (InternetAddress[]) to;
+                addr = (InternetAddress[]) to;
             }
             else if (addtype.equals("CC"))
             {
-                address = (InternetAddress[]) cc;
+                addr = (InternetAddress[]) cc;
             }
             else
             {
-                address = (InternetAddress[]) bcc;
+                addr = (InternetAddress[]) bcc;
             }
-            if (address != null)
+            if (addr != null)
             {
-                for (int i = 0; i < address.length; i++)
+                for (int i = 0; i < addr.length; i++)
                 {
-                    String email = address[i].getAddress();
+                    String email = addr[i].getAddress();
                     if (email == null)
                     {
                         email = "";
@@ -157,7 +159,7 @@ public class MailInf
                     {
                         email = MimeUtility.decodeText(email);
                     }
-                    String personal = address[i].getPersonal();
+                    String personal = addr[i].getPersonal();
                     if (personal == null)
                     {
                         personal = "";
@@ -182,17 +184,9 @@ public class MailInf
     /**
      * 获得邮件主题
      */
-    public String getSubject() throws MessagingException
+    public String getSubject() throws Exception
     {
-        try
-        {
-            return MimeUtility.decodeText(subject);
-        }
-        catch (Exception exce)
-        {
-            Logs.exception(exce);
-            return null;
-        }
+        return MimeUtility.decodeText(subject);
     }
 
     /**
@@ -208,7 +202,7 @@ public class MailInf
      */
     public String getBodyText()
     {
-        return bodytext.toString();
+        return content.toString();
     }
 
     /**
@@ -217,21 +211,23 @@ public class MailInf
     public void getMailContent(Part part) throws Exception
     {
         String contenttype = part.getContentType();
-        int nameindex = contenttype.indexOf("name");
-        boolean conname = false;
-        if (nameindex != -1)
+        if (!Util.isValidate(contenttype))
         {
-            conname = true;
+            return;
         }
+
+        boolean conname = contenttype.indexOf("name") != -1;
         if (part.isMimeType("text/plain") && !conname)
         {
-            bodytext.append((String) part.getContent());
+            content.append((String) part.getContent());
+            return;
         }
-        else if (part.isMimeType("text/html") && !conname)
+        if (part.isMimeType("texl/html") && !conname)
         {
-            bodytext.append((String) part.getContent());
+            content.append((String) part.getContent());
+            return;
         }
-        else if (part.isMimeType("multipart/*"))
+        if (part.isMimeType("multipart/*"))
         {
             Multipart multipart = (Multipart) part.getContent();
             int counts = multipart.getCount();
@@ -239,13 +235,12 @@ public class MailInf
             {
                 getMailContent(multipart.getBodyPart(i));
             }
+            return;
         }
-        else if (part.isMimeType("message/rfc822"))
+        if (part.isMimeType("message/rfc822"))
         {
             getMailContent((Part) part.getContent());
-        }
-        else
-        {
+            return;
         }
     }
 
