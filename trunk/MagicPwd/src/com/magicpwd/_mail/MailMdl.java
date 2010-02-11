@@ -43,7 +43,7 @@ public class MailMdl extends AbstractTableModel
         switch (columnIndex)
         {
             case 0:
-                return String.class;
+                return javax.swing.JPanel.class;
             case 1:
                 return String.class;
             case 2:
@@ -86,7 +86,7 @@ public class MailMdl extends AbstractTableModel
             switch (columnIndex)
             {
                 case 0:
-                    return "";//message.getFlags().getSystemFlags()[0];
+                    return null;//message.getFlags().getSystemFlags()[0];
                 case 1:
                     return message.getFrom();
                 case 2:
