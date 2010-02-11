@@ -72,18 +72,18 @@ public class EditBox extends javax.swing.JPanel
         this.setLayout(layout);
         javax.swing.GroupLayout.ParallelGroup hgp = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hgp.addGap(0, 0, Short.MAX_VALUE);
-        hgp.addComponent(bt_DropData, javax.swing.GroupLayout.Alignment.TRAILING);
-        hgp.addComponent(bt_SaveData, javax.swing.GroupLayout.Alignment.TRAILING);
-        hgp.addComponent(bt_CopyData, javax.swing.GroupLayout.Alignment.TRAILING);
+        hgp.addComponent(bt_DropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hgp.addComponent(bt_SaveData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hgp.addComponent(bt_CopyData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         layout.setHorizontalGroup(hgp);
 
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
         vsg.addContainerGap(1, Short.MAX_VALUE);
-        vsg.addComponent(bt_CopyData);
+        vsg.addComponent(bt_CopyData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        vsg.addComponent(bt_SaveData);
+        vsg.addComponent(bt_SaveData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        vsg.addComponent(bt_DropData);
+        vsg.addComponent(bt_DropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         vpg.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vsg);
         layout.setVerticalGroup(vpg);

@@ -1,4 +1,3 @@
-
 /**
  * 
  */
@@ -10,11 +9,11 @@ package com.magicpwd._cons;
  */
 public interface ConsDat
 {
+
     /**
      * 数据库版本
      */
     String VERSIONS = "3";
-
     /**
      * 口令状态：默认
      */
@@ -43,7 +42,6 @@ public interface ConsDat
      * 口令状态：已删除
      */
     int PWDS_STAT_6 = 6;
-
     /**
      * 目录信息：密码节点
      */
@@ -56,7 +54,6 @@ public interface ConsDat
      * 目录信息：模块节点
      */
     String HASH_TPLT = "qqqqqaacbrrtysww";
-
     /**
      * 数据分隔：模板数据起始默认标记
      * 示例：&lt;电子邮件&gt;
@@ -75,7 +72,6 @@ public interface ConsDat
      * 不同元素间隔区分标记
      */
     String SP_SQL_EE = "\f";
-
     /**
      * 属性：信息
      */
@@ -112,7 +108,6 @@ public interface ConsDat
      * 属性：邮件协议
      */
     int INDX_GMTP = INDX_FILE + 1;
-
     /**
      * 属性：模板向导
      */
@@ -137,7 +132,6 @@ public interface ConsDat
      * 属性：组件个数
      */
     int INDX_SIZE = INDX_MARK + 1;
-
     /** 邮件附加属性：邮件 */
     int TYPE_MAIL_MAIL = 0x1100;
     /** 邮件附加属性：用户 */
@@ -148,7 +142,6 @@ public interface ConsDat
     int TYPE_IM_USER = 0x2100;
     /**即时通讯附加属性：口令*/
     int TYPE_IM_PWDS = 0x2200;
-
     /**
      * 用户权限：所有权限
      */
@@ -161,9 +154,13 @@ public interface ConsDat
      * 用户权限：仅能读取
      */
     int UR_READ = 1;
-
-    String GMTP_SMTP="SMTP";
-    String GMTP_POP3="POP3";
-    String GMTP_IMAP="IMAP";
-    String GMTP_HTTP="HTTP";
+    String GMTP_SMTP = "SMTP";
+    String GMTP_POP3 = "POP3";
+    String GMTP_IMAP = "IMAP";
+    String GMTP_HTTP = "HTTP";
+    /**
+     * 附加布尔属性
+     */
+    String SPEC_VALUE_TRUE = "1";
+    String SPEC_VALUE_FAIL = "0";
 }

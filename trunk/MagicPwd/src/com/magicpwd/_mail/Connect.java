@@ -40,7 +40,7 @@ public class Connect
     /**
      * @return the host
      */
-    String getHost()
+    public String getHost()
     {
         if (host == null)
         {
@@ -52,7 +52,7 @@ public class Connect
     /**
      * @return the mail
      */
-    String getMail()
+    public String getMail()
     {
         return mail;
     }
@@ -60,7 +60,7 @@ public class Connect
     /**
      * @return the password
      */
-    String getPassword()
+    public String getPassword()
     {
         return password;
     }
@@ -68,7 +68,7 @@ public class Connect
     /**
      * @return the port
      */
-    int getPort()
+    public int getPort()
     {
         return port;
     }
@@ -76,7 +76,7 @@ public class Connect
     /**
      * @return the protocol
      */
-    String getProtocol()
+    public String getProtocol()
     {
         return protocol;
     }
@@ -84,7 +84,7 @@ public class Connect
     /**
      * @return the username
      */
-    String getUsername()
+    public String getUsername()
     {
         if (username == null)
         {
@@ -96,7 +96,7 @@ public class Connect
     /**
      * @return the auth
      */
-    boolean isAuth()
+    public boolean isAuth()
     {
         return auth;
     }
@@ -105,7 +105,7 @@ public class Connect
      * @param auth
      *            the auth to set
      */
-    void setAuth(boolean auth)
+    public void setAuth(boolean auth)
     {
         this.auth = auth;
     }
@@ -114,7 +114,7 @@ public class Connect
      * @param host
      *            the host to set
      */
-    void setHost(String host)
+    public void setHost(String host)
     {
         this.host = host;
     }
@@ -123,7 +123,7 @@ public class Connect
      * @param password
      *            the password to set
      */
-    void setPassword(String password)
+    public void setPassword(String password)
     {
         this.password = password;
     }
@@ -132,7 +132,7 @@ public class Connect
      * @param port
      *            the port to set
      */
-    void setPort(int port)
+    public void setPort(int port)
     {
         this.port = port;
     }
@@ -141,7 +141,7 @@ public class Connect
      * @param protocol
      *            the protocol to set
      */
-    void setProtocol(String protocol)
+    public void setProtocol(String protocol)
     {
         this.protocol = protocol;
     }
@@ -150,7 +150,7 @@ public class Connect
      * @param username
      *            the username to set
      */
-    void setUsername(String username)
+    public void setUsername(String username)
     {
         this.username = username;
     }
