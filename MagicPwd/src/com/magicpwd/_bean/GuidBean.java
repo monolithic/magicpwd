@@ -3,14 +3,21 @@
  */
 package com.magicpwd._bean;
 
+import com.magicpwd.MagicPwd;
 import com.magicpwd._comn.Guid;
 import com.magicpwd._comn.Item;
 import com.magicpwd._comn.Tplt;
+import com.magicpwd._comp.BtnLabel;
+import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
+import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IGridView;
+import com.magicpwd._mail.Connect;
+import com.magicpwd._mail.MailDlg;
 import com.magicpwd._util.Lang;
+import com.magicpwd._util.Util;
 import com.magicpwd.m.GridMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.EditBox;
@@ -26,6 +33,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
     private Guid dataItem;
     private IGridView gridView;
     private EditBox dataEdit;
+    private BtnLabel bl_ReadMail;
 
     public GuidBean(IGridView view)
     {
@@ -54,6 +62,23 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         lb_PropEdit = new javax.swing.JLabel();
 
         pl_PropEdit = new javax.swing.JPanel();
+        pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
+
+        bl_ReadMail = new BtnLabel();
+        bl_ReadMail.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_PROP_UPDT)));
+        bl_ReadMail.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                readMailActionPerformed(evt);
+            }
+        });
+        pl_PropEdit.add(bl_ReadMail);
+
+        ck_CheckAll = new javax.swing.JCheckBox();
+        pl_PropEdit.add(ck_CheckAll);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -99,6 +124,8 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
     {
         Lang.setWText(lb_PropName, LangRes.P30F1301, "时间");
         Lang.setWText(lb_PropData, LangRes.P30F1302, "模板");
+        Lang.setWText(ck_CheckAll, LangRes.P30F1319, "总是提示(&R)");
+        Lang.setWTips(bl_ReadMail, LangRes.P30F150D, "检测邮件(Alt + M)");
 
         dataEdit.initLang();
     }
@@ -109,6 +136,8 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         dataItem = (Guid) item;
         tf_PropName.setText(item.getName());
         cb_PropData.setModel(UserMdl.getCboxMdl());
+        pl_PropEdit.setVisible(Util.isValidate(dataItem.getSpec(IEditItem.SPEC_GUID_TPLT)));
+        ck_CheckAll.setSelected(ConsDat.SPEC_VALUE_TRUE.equals(dataItem.getSpec(IEditItem.SPEC_GUID_CHCK)));
     }
 
     @Override
@@ -149,10 +178,63 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
     public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
     {
     }
+
+    public void readMailActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        MailDlg mailDlg = MagicPwd.getMailDlg();
+        if (mailDlg == null)
+        {
+            mailDlg = new MailDlg();
+            mailDlg.initView();
+            mailDlg.initLang();
+            mailDlg.initData();
+            MagicPwd.setMailDlg(mailDlg);
+        }
+        mailDlg.setVisible(true);
+
+        String mail = "";
+        String user = "";
+        String pwds = "";
+        GridMdl gm = UserMdl.getGridMdl();
+        if (ck_CheckAll.isSelected())
+        {
+            // 邮件账户
+            int tmp = gm.wSelect(ConsDat.INDX_MAIL, ConsDat.TYPE_MAIL_MAIL);
+            if (tmp >= ConsEnv.PWDS_HEAD_SIZE)
+            {
+                mail = gm.getItemAt(tmp).getData();
+            }
+
+            // 登录用户
+            tmp = gm.wSelect(ConsDat.INDX_TEXT, ConsDat.TYPE_MAIL_USER);
+            if (tmp >= ConsEnv.PWDS_HEAD_SIZE)
+            {
+                user = gm.getItemAt(tmp).getData();
+            }
+
+            // 认证口令
+            tmp = gm.wSelect(ConsDat.INDX_PWDS, ConsDat.TYPE_MAIL_PWDS);
+            if (tmp >= ConsEnv.PWDS_HEAD_SIZE)
+            {
+                pwds = gm.getItemAt(tmp).getData();
+            }
+        }
+
+        if (!Util.isValidateEmail(mail))
+        {
+        }
+        Connect connect = new Connect("pop3", "Amon.CT@live.com", "c~9xJpa&");
+        connect.setUsername("Amon.CT");
+        connect.setHost("pop.live.com");
+        connect.setPort(995);
+        connect.setAuth(true);
+        mailDlg.append(connect, "");
+    }
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JLabel lb_PropEdit;
     private javax.swing.JLabel lb_PropName;
     private javax.swing.JPanel pl_PropEdit;
+    private javax.swing.JCheckBox ck_CheckAll;
     private javax.swing.JComboBox cb_PropData;
     private javax.swing.JTextField tf_PropName;
 }

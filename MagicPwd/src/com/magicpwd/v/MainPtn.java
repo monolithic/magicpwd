@@ -4,7 +4,6 @@ import com.magicpwd.MagicPwd;
 import com.magicpwd._bean.AreaBean;
 import com.magicpwd._bean.DateBean;
 import com.magicpwd._bean.FileBean;
-import com.magicpwd._bean.GmtpBean;
 import com.magicpwd._bean.GuidBean;
 import com.magicpwd._bean.LogoBean;
 import com.magicpwd._bean.InfoBean;

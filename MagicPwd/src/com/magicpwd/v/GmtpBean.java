@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.magicpwd._bean;
+package com.magicpwd.v;
 
 import com.magicpwd._comn.Item;
 import com.magicpwd._comp.BtnLabel;

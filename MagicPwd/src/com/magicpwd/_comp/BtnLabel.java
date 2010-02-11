@@ -85,8 +85,6 @@ public class BtnLabel extends JLabel
         this.listener = listener;
         getActionMap().put("MagicPwdEvent", new javax.swing.AbstractAction()
         {
-            private static final long serialVersionUID = -8595221430413134451L;
-
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -137,8 +135,8 @@ public class BtnLabel extends JLabel
     public java.awt.Dimension getPreferredSize()
     {
         java.awt.Dimension size = super.getPreferredSize();
-        size.width += 8;
-        size.height += 6;
+        size.width += 4;
+        size.height += 3;
         return size;
     }
 

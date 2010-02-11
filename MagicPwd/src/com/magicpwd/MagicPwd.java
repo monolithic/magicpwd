@@ -6,6 +6,7 @@ import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
+import com.magicpwd._mail.MailDlg;
 import com.magicpwd._util.Lang;
 import com.magicpwd._user.UserSign;
 import com.magicpwd._util.Jzip;
@@ -26,6 +27,7 @@ import com.magicpwd.v.ToolBar;
  */
 public class MagicPwd extends javax.swing.JFrame
 {
+
     private static javax.swing.JFrame mf_MainForm;
     private static javax.swing.JDialog md_UcfgForm;
     private static java.awt.Dimension mf_LastSize;
@@ -53,6 +55,16 @@ public class MagicPwd extends javax.swing.JFrame
     public static ToolBar getWToolBar()
     {
         return tb_ToolBar;
+    }
+
+    public static MailDlg getMailDlg()
+    {
+        return md_MailDlg;
+    }
+
+    public static void setMailDlg(MailDlg mailDlg)
+    {
+        md_MailDlg = mailDlg;
     }
 
     public static InfoBar getWInfoBar()
@@ -245,6 +257,7 @@ public class MagicPwd extends javax.swing.JFrame
         UserSign us = new UserSign(UserMdl.getCfg().getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.SIGN_IN : ConsEnv.SIGN_UP);
         us.setConfrmBackCall(new IBackCall()
         {
+
             @Override
             public boolean callBack(Object sender, EventListener event, String... params)
             {
@@ -256,6 +269,7 @@ public class MagicPwd extends javax.swing.JFrame
         // 启动后台预加载线程
         Thread t = new Thread()
         {
+
             @Override
             public void run()
             {
@@ -363,6 +377,7 @@ public class MagicPwd extends javax.swing.JFrame
     private static FindBar fb_FindBar;
     private static MiniPtn mp_MiniPtn;
     private static MainPtn mp_MainPtn;
+    private static MailDlg md_MailDlg;
     private static final int VIEW_MAIN = 0;
     private static final int VIEW_NORM = 1;
     private static final int VIEW_MINI = 2;
