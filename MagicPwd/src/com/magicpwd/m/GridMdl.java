@@ -331,7 +331,7 @@ public class GridMdl extends DefaultTableModel
         {
             if (item.getType() == type)
             {
-                list.add(new I1S2(i, "", item.getName() + '（' + item.getData() + '）'));
+                list.add(new I1S2(i, item.getData(), item.getName() + '（' + item.getData() + '）'));
             }
             i += 1;
         }
@@ -589,6 +589,16 @@ public class GridMdl extends DefaultTableModel
             }
             list.add(item);
         }
+
+        // 特殊配置处理
+        item = list.remove(list.size() - 1);
+        if (item.getType() != ConsDat.INDX_GUID)
+        {
+            list.add(item);
+            return;
+        }
+        guid.setSpec(IEditItem.SPEC_GUID_TPLT, item.getSpec(IEditItem.SPEC_GUID_TPLT));
+        guid.setSpec(IEditItem.SPEC_GUID_CHCK, item.getSpec(IEditItem.SPEC_GUID_CHCK));
     }
 
     /**
@@ -639,6 +649,15 @@ public class GridMdl extends DefaultTableModel
             text.append(item.enCodeSpec(ConsDat.SP_SQL_KV));
             text.append(ConsDat.SP_SQL_EE);
         }
+
+        // 特殊配置对象
+        text.append(ConsDat.INDX_GUID);
+        text.append(ConsDat.SP_SQL_KV);
+        text.append("");
+        text.append(ConsDat.SP_SQL_KV);
+        text.append("");
+        text.append(guid.enCodeSpec(ConsDat.SP_SQL_KV));
+        text.append(ConsDat.SP_SQL_EE);
 
         pwds.enCrypt(UserMdl.getECipher(), UserMdl.getSec().getMask());
     }

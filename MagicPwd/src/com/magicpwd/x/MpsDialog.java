@@ -21,7 +21,6 @@ import com.magicpwd.c.MenuEvt;
  */
 public class MpsDialog extends JDialog
 {
-    private static final long serialVersionUID = -3988953832739799697L;
     private MenuEvt menuEvt;
 
     public MpsDialog(JFrame frame, MenuEvt menuEvt)
@@ -46,6 +45,7 @@ public class MpsDialog extends JDialog
 
         addWindowListener(new WindowAdapter()
         {
+            @Override
             public void windowClosing(WindowEvent e)
             {
                 windowClosingEvent(e);

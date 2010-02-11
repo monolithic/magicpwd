@@ -38,6 +38,24 @@ public class MailMdl extends AbstractTableModel
     }
 
     @Override
+    public Class getColumnClass(int columnIndex)
+    {
+        switch (columnIndex)
+        {
+            case 0:
+                return String.class;
+            case 1:
+                return String.class;
+            case 2:
+                return String.class;
+            case 3:
+                return java.util.Date.class;
+            default:
+                return String.class;
+        }
+    }
+
+    @Override
     public String getColumnName(int columnIndex)
     {
         switch (columnIndex)
@@ -70,7 +88,7 @@ public class MailMdl extends AbstractTableModel
                 case 0:
                     return "";//message.getFlags().getSystemFlags()[0];
                 case 1:
-                    return "";
+                    return message.getFrom();
                 case 2:
                     return message.getSubject();
                 case 3:

@@ -9,7 +9,6 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -199,9 +198,9 @@ public class MailInf
     /**
      * 获得邮件发送日期
      */
-    public String getSentDate() throws Exception
+    public Date getSentDate()
     {
-        return SimpleDateFormat.getDateTimeInstance().format(sendDate);
+        return sendDate;
     }
 
     /**
