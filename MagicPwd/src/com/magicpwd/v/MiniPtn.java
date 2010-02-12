@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 
 import com.magicpwd.MagicPwd;
 import com.magicpwd._comp.BtnLabel;
-import com.magicpwd._comn.Item;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
@@ -30,6 +29,7 @@ import com.magicpwd.m.UserMdl;
  */
 public class MiniPtn extends JPanel implements MenuEvt, FindEvt
 {
+
     public MiniPtn()
     {
     }
@@ -52,6 +52,7 @@ public class MiniPtn extends JPanel implements MenuEvt, FindEvt
 
         tf_NoteHead.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -62,6 +63,7 @@ public class MiniPtn extends JPanel implements MenuEvt, FindEvt
         bt_CrteNote.setIcon(new ImageIcon(Util.getImage(ConsEnv.ICON_DATA_APND)));
         bt_CrteNote.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -72,6 +74,7 @@ public class MiniPtn extends JPanel implements MenuEvt, FindEvt
         bt_OpenNote.setIcon(new ImageIcon(Util.getImage(ConsEnv.ICON_FILE_OPEN)));
         bt_OpenNote.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -82,6 +85,7 @@ public class MiniPtn extends JPanel implements MenuEvt, FindEvt
         bt_SaveNote.setIcon(new ImageIcon(Util.getImage(ConsEnv.ICON_DATA_SAVE)));
         bt_SaveNote.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -93,6 +97,7 @@ public class MiniPtn extends JPanel implements MenuEvt, FindEvt
         bt_SrchNote.setIcon(new ImageIcon(Util.getImage(ConsEnv.ICON_DATA_SRCH)));
         bt_SrchNote.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -106,6 +111,7 @@ public class MiniPtn extends JPanel implements MenuEvt, FindEvt
         bt_ExitNote.setIcon(new ImageIcon(Util.getImage(ConsEnv.ICON_DATA_EXIT)));
         bt_ExitNote.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -115,6 +121,7 @@ public class MiniPtn extends JPanel implements MenuEvt, FindEvt
 
         ck_NoteWrap.addChangeListener(new javax.swing.event.ChangeListener()
         {
+
             @Override
             public void stateChanged(javax.swing.event.ChangeEvent evt)
             {
@@ -127,43 +134,39 @@ public class MiniPtn extends JPanel implements MenuEvt, FindEvt
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 javax.swing.GroupLayout.Alignment.TRAILING,
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(sp1,
-                                javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300,
-                                Short.MAX_VALUE).addGroup(
-                                javax.swing.GroupLayout.Alignment.LEADING,
-                                layout.createSequentialGroup().addComponent(lb_NoteHead).addPreferredGap(
-                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_NoteHead,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE).addPreferredGap(
-                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_SrchNote,
-                                        ConsEnv.BUTN_MINI_WIDH, ConsEnv.BUTN_MINI_WIDH, ConsEnv.BUTN_MINI_WIDH).addGap(
-                                        2).addComponent(bt_SaveNote, ConsEnv.BUTN_MINI_WIDH, ConsEnv.BUTN_MINI_WIDH,
-                                        ConsEnv.BUTN_MINI_WIDH).addGap(2).addComponent(bt_OpenNote,
-                                        ConsEnv.BUTN_MINI_WIDH, ConsEnv.BUTN_MINI_WIDH, ConsEnv.BUTN_MINI_WIDH).addGap(
-                                        2).addComponent(bt_CrteNote, ConsEnv.BUTN_MINI_WIDH, ConsEnv.BUTN_MINI_WIDH,
-                                        ConsEnv.BUTN_MINI_WIDH)).addGroup(
-                                layout.createSequentialGroup().addComponent(lb_NoteInfo,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE).addPreferredGap(
-                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(ck_NoteWrap)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(bt_ExitNote, ConsEnv.BUTN_NORM_WIDH, ConsEnv.BUTN_NORM_WIDH,
-                                                ConsEnv.BUTN_NORM_WIDH))).addContainerGap()));
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(sp1,
+                javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300,
+                Short.MAX_VALUE).addGroup(
+                javax.swing.GroupLayout.Alignment.LEADING,
+                layout.createSequentialGroup().addComponent(lb_NoteHead).addPreferredGap(
+                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_NoteHead,
+                javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE).addPreferredGap(
+                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_SrchNote,
+                ConsEnv.BUTN_MINI_WIDH, ConsEnv.BUTN_MINI_WIDH, ConsEnv.BUTN_MINI_WIDH).addGap(
+                2).addComponent(bt_SaveNote, ConsEnv.BUTN_MINI_WIDH, ConsEnv.BUTN_MINI_WIDH,
+                ConsEnv.BUTN_MINI_WIDH).addGap(2).addComponent(bt_OpenNote,
+                ConsEnv.BUTN_MINI_WIDH, ConsEnv.BUTN_MINI_WIDH, ConsEnv.BUTN_MINI_WIDH).addGap(
+                2).addComponent(bt_CrteNote, ConsEnv.BUTN_MINI_WIDH, ConsEnv.BUTN_MINI_WIDH,
+                ConsEnv.BUTN_MINI_WIDH)).addGroup(
+                layout.createSequentialGroup().addComponent(lb_NoteInfo,
+                javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE).addPreferredGap(
+                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(ck_NoteWrap).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_ExitNote, ConsEnv.BUTN_NORM_WIDH, ConsEnv.BUTN_NORM_WIDH,
+                ConsEnv.BUTN_NORM_WIDH))).addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER).addComponent(lb_NoteHead)
-                                .addComponent(bt_CrteNote, ConsEnv.BUTN_MINI_HIGH, ConsEnv.BUTN_MINI_HIGH,
-                                        ConsEnv.BUTN_MINI_HIGH).addComponent(bt_OpenNote, ConsEnv.BUTN_MINI_HIGH,
-                                        ConsEnv.BUTN_MINI_HIGH, ConsEnv.BUTN_MINI_HIGH).addComponent(bt_SaveNote,
-                                        ConsEnv.BUTN_MINI_HIGH, ConsEnv.BUTN_MINI_HIGH, ConsEnv.BUTN_MINI_HIGH)
-                                .addComponent(bt_SrchNote, ConsEnv.BUTN_MINI_HIGH, ConsEnv.BUTN_MINI_HIGH,
-                                        ConsEnv.BUTN_MINI_HIGH).addComponent(tf_NoteHead,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp1,
-                        javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE).addPreferredGap(
-                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER).addComponent(bt_ExitNote,
-                                ConsEnv.BUTN_NORM_HIGH, ConsEnv.BUTN_NORM_HIGH, ConsEnv.BUTN_NORM_HIGH).addComponent(
-                                ck_NoteWrap).addComponent(lb_NoteInfo)).addContainerGap()));
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER).addComponent(lb_NoteHead).addComponent(bt_CrteNote, ConsEnv.BUTN_MINI_HIGH, ConsEnv.BUTN_MINI_HIGH,
+                ConsEnv.BUTN_MINI_HIGH).addComponent(bt_OpenNote, ConsEnv.BUTN_MINI_HIGH,
+                ConsEnv.BUTN_MINI_HIGH, ConsEnv.BUTN_MINI_HIGH).addComponent(bt_SaveNote,
+                ConsEnv.BUTN_MINI_HIGH, ConsEnv.BUTN_MINI_HIGH, ConsEnv.BUTN_MINI_HIGH).addComponent(bt_SrchNote, ConsEnv.BUTN_MINI_HIGH, ConsEnv.BUTN_MINI_HIGH,
+                ConsEnv.BUTN_MINI_HIGH).addComponent(tf_NoteHead,
+                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
+                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp1,
+                javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE).addPreferredGap(
+                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER).addComponent(bt_ExitNote,
+                ConsEnv.BUTN_NORM_HIGH, ConsEnv.BUTN_NORM_HIGH, ConsEnv.BUTN_NORM_HIGH).addComponent(
+                ck_NoteWrap).addComponent(lb_NoteInfo)).addContainerGap()));
     }
 
     public void initLang()
@@ -521,6 +524,7 @@ public class MiniPtn extends JPanel implements MenuEvt, FindEvt
         UserSign us = new UserSign(ConsEnv.SIGN_RS, MagicPwd.getFrame());
         us.setConfrmBackCall(new IBackCall()
         {
+
             @Override
             public boolean callBack(Object sender, EventListener event, String... params)
             {
@@ -570,15 +574,12 @@ public class MiniPtn extends JPanel implements MenuEvt, FindEvt
         MagicPwd.initMainPtn();
         return true;
     }
-
     private javax.swing.JCheckBox ck_NoteWrap;
     private javax.swing.JLabel lb_NoteHead;
     private javax.swing.JLabel lb_NoteInfo;
     private javax.swing.JTextArea ta_NoteData;
     private javax.swing.JTextField tf_NoteHead;
-
     private BtnLabel bt_ExitNote;
-
     private BtnLabel bt_CrteNote;
     private BtnLabel bt_OpenNote;
     private BtnLabel bt_SaveNote;
