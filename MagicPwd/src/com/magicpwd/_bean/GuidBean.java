@@ -6,7 +6,6 @@ package com.magicpwd._bean;
 import com.magicpwd.MagicPwd;
 import com.magicpwd._comn.Guid;
 import com.magicpwd._comn.I1S2;
-import com.magicpwd._comn.Item;
 import com.magicpwd._comn.Tplt;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsDat;
@@ -136,7 +135,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
     }
 
     @Override
-    public void initData(Item item)
+    public void initData(IEditItem item)
     {
         dataItem = (Guid) item;
         tf_PropName.setText(item.getName());
@@ -202,6 +201,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
             mailDlg.initView();
             mailDlg.initLang();
             mailDlg.initData();
+            Util.centerForm(mailDlg.getWindow(), MagicPwd.getFrame());
             MagicPwd.setMailDlg(mailDlg);
         }
 

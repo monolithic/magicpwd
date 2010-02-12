@@ -78,8 +78,7 @@ public interface ConsEnv
     int PWDS_HEAD_META = PWDS_HEAD_GUID + 1;
     int PWDS_HEAD_LOGO = PWDS_HEAD_META + 1;
     int PWDS_HEAD_NOTE = PWDS_HEAD_LOGO + 1;
-    int PWDS_HEAD_MARK = PWDS_HEAD_NOTE + 1;
-    int PWDS_HEAD_SIZE = PWDS_HEAD_MARK + 1;
+    int PWDS_HEAD_SIZE = PWDS_HEAD_NOTE + 1;
     /**
      * 数据保存时数据块大小
      */
@@ -133,7 +132,6 @@ public interface ConsEnv
     String BEAN_META = BEAN_PROP + ConsDat.INDX_META;// "metabean";
     String BEAN_ICON = BEAN_PROP + ConsDat.INDX_LOGO;// "iconbean";
     String BEAN_NOTE = BEAN_PROP + ConsDat.INDX_NOTE;// "timebean";
-    String BEAN_MARK = BEAN_PROP + ConsDat.INDX_MARK;// "timebean";
     /**
      * 图标路径
      */

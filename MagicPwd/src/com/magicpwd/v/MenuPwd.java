@@ -13,6 +13,7 @@ import com.magicpwd._comn.Char;
 import com.magicpwd._comn.Item;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._face.IEditItem;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
@@ -24,7 +25,7 @@ import com.magicpwd.m.UserMdl;
  */
 public class MenuPwd extends JPopupMenu
 {
-    private Item tpltData;
+    private IEditItem tpltData;
     private int charSize;
     private String charSets;
 
@@ -63,7 +64,7 @@ public class MenuPwd extends JPopupMenu
         }
     }
 
-    public void setTplt(Item tplt)
+    public void setTplt(IEditItem tplt)
     {
         this.tpltData = tplt;
 

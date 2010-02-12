@@ -4,7 +4,6 @@
 package com.magicpwd._bean;
 
 import com.magicpwd._comp.BtnLabel;
-import com.magicpwd._comn.Item;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
@@ -196,7 +195,7 @@ public class NoteBean extends javax.swing.JPanel implements IEditBean
     }
 
     @Override
-    public void initData(Item tplt)
+    public void initData(IEditItem tplt)
     {
         tpltData = tplt;
         tf_PropName.setText(tplt.getName());

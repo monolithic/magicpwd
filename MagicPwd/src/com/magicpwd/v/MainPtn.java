@@ -9,7 +9,6 @@ import com.magicpwd._bean.LogoBean;
 import com.magicpwd._bean.InfoBean;
 import com.magicpwd._bean.LinkBean;
 import com.magicpwd._bean.MailBean;
-import com.magicpwd._bean.MarkBean;
 import com.magicpwd._bean.MetaBean;
 import com.magicpwd._bean.NoteBean;
 import com.magicpwd._bean.PwdsBean;
@@ -27,9 +26,9 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
 import com.magicpwd._face.IEditBean;
+import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IGridView;
 import com.magicpwd._util.Lang;
-import com.magicpwd._prop.HistProp;
 import com.magicpwd._user.UserSign;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Jcsv;
@@ -284,7 +283,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             int idx = tb_KeysView.getSelectedRow();
             if (idx > ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
-                Item tplt = UserMdl.getGridMdl().getItemAt(idx);
+                IEditItem tplt = UserMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_AREA)
                 {
                     tplt.setType(ConsDat.INDX_AREA);
@@ -303,7 +302,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             int idx = tb_KeysView.getSelectedRow();
             if (idx > ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
-                Item tplt = UserMdl.getGridMdl().getItemAt(idx);
+                IEditItem tplt = UserMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_DATE)
                 {
                     tplt.setType(ConsDat.INDX_DATE);
@@ -322,7 +321,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             int idx = tb_KeysView.getSelectedRow();
             if (idx > ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
-                Item tplt = UserMdl.getGridMdl().getItemAt(idx);
+                IEditItem tplt = UserMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_FILE)
                 {
                     tplt.setType(ConsDat.INDX_FILE);
@@ -341,7 +340,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             int idx = tb_KeysView.getSelectedRow();
             if (idx > ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
-                Item tplt = UserMdl.getGridMdl().getItemAt(idx);
+                IEditItem tplt = UserMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_LINK)
                 {
                     tplt.setType(ConsDat.INDX_LINK);
@@ -360,7 +359,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             int idx = tb_KeysView.getSelectedRow();
             if (idx > ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
-                Item tplt = UserMdl.getGridMdl().getItemAt(idx);
+                IEditItem tplt = UserMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_MAIL)
                 {
                     tplt.setType(ConsDat.INDX_MAIL);
@@ -379,7 +378,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             int idx = tb_KeysView.getSelectedRow();
             if (idx > ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
-                Item tplt = UserMdl.getGridMdl().getItemAt(idx);
+                IEditItem tplt = UserMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_PWDS)
                 {
                     tplt.setType(ConsDat.INDX_PWDS);
@@ -398,7 +397,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             int idx = tb_KeysView.getSelectedRow();
             if (idx > ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
-                Item tplt = UserMdl.getGridMdl().getItemAt(idx);
+                IEditItem tplt = UserMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_TEXT)
                 {
                     tplt.setType(ConsDat.INDX_TEXT);
@@ -966,7 +965,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         {
             return;
         }
-        Item tplt = UserMdl.getGridMdl().getItemAt(row);
+        IEditItem tplt = UserMdl.getGridMdl().getItemAt(row);
         Util.setClipboardContents(tplt.getData(), UserMdl.getCfg().getClnClp());
     }
 
@@ -1011,7 +1010,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             }
             tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
 
-            Item tplt = UserMdl.getGridMdl().getItemAt(tb_LastIndx);
+            IEditItem tplt = UserMdl.getGridMdl().getItemAt(tb_LastIndx);
             showPropEdit(tplt, true);
         }
         else
@@ -1103,10 +1102,10 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         pl_CardProp.add(ConsEnv.BEAN_NOTE, beanNote);
         editBean[idx++] = beanNote;
 
-        MarkBean beanMark = new MarkBean(this);
-        beanMark.initView();
-        pl_CardProp.add(ConsEnv.BEAN_MARK, beanMark);
-        editBean[idx++] = beanMark;
+//        MarkBean beanMark = new MarkBean(this);
+//        beanMark.initView();
+//        pl_CardProp.add(ConsEnv.BEAN_MARK, beanMark);
+//        editBean[idx++] = beanMark;
     }
 
     private void initGuidView()
@@ -1425,7 +1424,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         }
     }
 
-    private void showPropEdit(Item tplt, boolean focus)
+    private void showPropEdit(IEditItem tplt, boolean focus)
     {
         if (UserMdl.getCfg().isEditViw())
         {
