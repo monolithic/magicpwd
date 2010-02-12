@@ -15,6 +15,7 @@ import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.DBC3000;
+import com.magicpwd._face.IEditItem;
 import com.magicpwd._util.Hash;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
@@ -913,7 +914,7 @@ public class DBA3000
         return true;
     }
 
-    public static boolean selectTpltData(String kindHash, List<Item> tpltList)
+    public static boolean selectTpltData(String kindHash, List<IEditItem> tpltList)
     {
         DBAccess dba = new DBAccess();
 

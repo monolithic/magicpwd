@@ -25,7 +25,7 @@ public interface IEditBean
      * 界面数据初始化
      * @param tplt
      */
-    void initData(Item tplt);
+    void initData(IEditItem tplt);
 
     /**
      * 界面焦点初始化

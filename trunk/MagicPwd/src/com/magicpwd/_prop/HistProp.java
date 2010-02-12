@@ -12,8 +12,8 @@ import javax.swing.JPanel;
 
 import com.magicpwd._comn.Keys;
 import com.magicpwd._comn.S1S2;
-import com.magicpwd._comn.Item;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IPropBean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -30,7 +30,7 @@ public class HistProp extends JPanel implements IPropBean
     private Keys pwds;
     private S1S2 item;
     private List<S1S2> hist;
-    private List<Item> tplt;
+    private List<IEditItem> tplt;
     private DefaultListModel lm_HistList;
 
     public HistProp()
@@ -38,6 +38,7 @@ public class HistProp extends JPanel implements IPropBean
         pwds = new Keys();
     }
 
+    @Override
     public void initView()
     {
         javax.swing.JScrollPane sp1 = new javax.swing.JScrollPane();
@@ -51,6 +52,7 @@ public class HistProp extends JPanel implements IPropBean
         ls_HistList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         ls_HistList.addListSelectionListener(new javax.swing.event.ListSelectionListener()
         {
+            @Override
             public void valueChanged(javax.swing.event.ListSelectionEvent evt)
             {
                 ls_HistListValueChanged(evt);
@@ -60,6 +62,7 @@ public class HistProp extends JPanel implements IPropBean
 
         bt_PickupCur.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_PickupCurActionPerformed(evt);
@@ -68,6 +71,7 @@ public class HistProp extends JPanel implements IPropBean
 
         bt_DeleteAll.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_DeleteAllActionPerformed(evt);
@@ -79,6 +83,7 @@ public class HistProp extends JPanel implements IPropBean
 
         bt_DeleteCur.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_DeleteCurActionPerformed(evt);
@@ -106,6 +111,7 @@ public class HistProp extends JPanel implements IPropBean
                                 bt_PickupCur).addComponent(bt_DeleteAll).addComponent(bt_DeleteCur))));
     }
 
+    @Override
     public void initLang()
     {
         Lang.setWText(bt_PickupCur, LangRes.P30F8507, "恢复");
@@ -113,6 +119,7 @@ public class HistProp extends JPanel implements IPropBean
         Lang.setWText(bt_DeleteAll, LangRes.P30F8509, "删除所有");
     }
 
+    @Override
     public void initData()
     {
     }
@@ -129,7 +136,7 @@ public class HistProp extends JPanel implements IPropBean
         {
             pwds = new Keys();
             hist = new ArrayList<S1S2>();
-            tplt = new ArrayList<Item>();
+            tplt = new ArrayList<IEditItem>();
 
             lm_HistList = new DefaultListModel();
             ls_HistList.setModel(lm_HistList);
@@ -144,6 +151,7 @@ public class HistProp extends JPanel implements IPropBean
         indx = -1;
     }
 
+    @Override
     public JPanel getPanel()
     {
         return this;
@@ -172,7 +180,7 @@ public class HistProp extends JPanel implements IPropBean
             StringBuffer sb = new StringBuffer();
             idx = 0;
             String t = Lang.getLang(LangRes.P30FA101, "：");
-            Item temp = tplt.get(idx++);
+            IEditItem temp = tplt.get(idx++);
             sb.append(Lang.getLang(LangRes.P30FA102, "创建时间")).append(t).append(temp.getName()).append('\n');
             temp = tplt.get(idx++);
             sb.append(Lang.getLang(LangRes.P30FA102, "口令名称")).append(t).append(temp.getName()).append('\n');

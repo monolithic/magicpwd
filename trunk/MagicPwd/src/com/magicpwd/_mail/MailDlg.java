@@ -13,7 +13,6 @@ import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.Store;
 import javax.swing.BorderFactory;
-import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.table.TableRowSorter;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -452,6 +451,11 @@ public class MailDlg implements Runnable
     private synchronized void showNotice(String notice)
     {
         lb_MailInfo.setText(notice);
+    }
+
+    public java.awt.Window getWindow()
+    {
+        return window;
     }
 
     public void setVisible(boolean visible)

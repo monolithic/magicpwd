@@ -4,7 +4,6 @@
 package com.magicpwd._bean;
 
 import com.magicpwd._comp.BtnLabel;
-import com.magicpwd._comn.Item;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
@@ -128,7 +127,7 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
     }
 
     @Override
-    public void initData(Item tplt)
+    public void initData(IEditItem tplt)
     {
         tpltData = tplt;
         String name = tpltData.getName();

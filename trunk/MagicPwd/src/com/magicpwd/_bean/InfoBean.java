@@ -3,9 +3,9 @@
  */
 package com.magicpwd._bean;
 
-import com.magicpwd._comn.Item;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
+import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IGridView;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
@@ -73,7 +73,7 @@ public class InfoBean extends javax.swing.JPanel implements IEditBean
     }
 
     @Override
-    public void initData(Item tplt)
+    public void initData(IEditItem tplt)
     {
         if (tplt != null)
         {

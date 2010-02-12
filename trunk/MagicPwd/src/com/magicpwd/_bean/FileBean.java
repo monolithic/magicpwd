@@ -136,7 +136,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
     }
 
     @Override
-    public void initData(Item tplt)
+    public void initData(IEditItem tplt)
     {
         tpltData = tplt;
         String name = tpltData.getName();

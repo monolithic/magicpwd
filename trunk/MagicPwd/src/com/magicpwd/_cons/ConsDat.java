@@ -125,13 +125,9 @@ public interface ConsDat
      */
     int INDX_NOTE = INDX_LOGO + 1;
     /**
-     * 属性：相关说明
-     */
-    int INDX_MARK = INDX_NOTE + 1;
-    /**
      * 属性：组件个数
      */
-    int INDX_SIZE = INDX_MARK + 1;
+    int INDX_SIZE = INDX_NOTE + 1;
     /** 邮件附加属性：邮件 */
     int TYPE_MAIL_MAIL = 0x1100;
     /** 邮件附加属性：用户 */

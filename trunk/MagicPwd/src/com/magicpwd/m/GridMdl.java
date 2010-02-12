@@ -3,7 +3,6 @@
  */
 package com.magicpwd.m;
 
-import com.magicpwd._comn.Mark;
 import com.magicpwd._comn.Guid;
 import com.magicpwd._comn.I1S2;
 import java.util.ArrayList;
@@ -40,12 +39,12 @@ public class GridMdl extends DefaultTableModel
      */
     private boolean interim;
     private boolean modified;
-    private List<Item> ls_ItemList;
+    private List<IEditItem> ls_ItemList;
     private Keys keys;
 
     GridMdl()
     {
-        ls_ItemList = new ArrayList<Item>();
+        ls_ItemList = new ArrayList<IEditItem>();
         keys = new Keys();
     }
 
@@ -114,8 +113,6 @@ public class GridMdl extends DefaultTableModel
                     return Lang.getLang(LangRes.P30F1112, "徽标");
                 case ConsDat.INDX_NOTE - ConsDat.INDX_GUID:
                     return Lang.getLang(LangRes.P30F110B, "提醒");
-                case ConsDat.INDX_MARK - ConsDat.INDX_GUID:
-                    return Lang.getLang(LangRes.P30F1113, "附注");
                 default:
                     return row + 1 - ConsEnv.PWDS_HEAD_SIZE;
             }
@@ -234,8 +231,6 @@ public class GridMdl extends DefaultTableModel
         ls_ItemList.add(new Logo());
         // 过时提醒
         ls_ItemList.add(new Note());
-        // 相关说明
-        ls_ItemList.add(new Mark());
         fireTableDataChanged();
     }
 
@@ -243,7 +238,7 @@ public class GridMdl extends DefaultTableModel
      * @param index
      * @return
      */
-    public Item getItemAt(int index)
+    public IEditItem getItemAt(int index)
     {
         return ls_ItemList.get(index);
     }
@@ -327,7 +322,7 @@ public class GridMdl extends DefaultTableModel
     {
         List<I1S2> list = new ArrayList<I1S2>();
         int i = 0;
-        for (Item item : ls_ItemList)
+        for (IEditItem item : ls_ItemList)
         {
             if (item.getType() == type)
             {
@@ -453,7 +448,7 @@ public class GridMdl extends DefaultTableModel
         int size = 0;
         ArrayList<String> temp;
         int indx;
-        Item tplt;
+        IEditItem tplt;
 
         for (Keys item : dataList)
         {
@@ -510,7 +505,7 @@ public class GridMdl extends DefaultTableModel
             return;
         }
 
-        Item p = ls_ItemList.remove(row);
+        IEditItem p = ls_ItemList.remove(row);
         ls_ItemList.add(to, p);
     }
 
@@ -519,7 +514,7 @@ public class GridMdl extends DefaultTableModel
      * 
      * @param dba
      */
-    public final void deCrypt(Keys keys, List<Item> list) throws Exception
+    public final void deCrypt(Keys keys, List<IEditItem> list) throws Exception
     {
         // 查询数据是否为空
         Pwds pwds = keys.getPassword();
@@ -535,6 +530,7 @@ public class GridMdl extends DefaultTableModel
         Guid guid = new Guid();
         guid.setData(keys.getP30F0105());
         guid.setTime(keys.getP30F0106());
+        guid.deCodeSpec(keys.getP30F010C(), ";");
         list.add(guid);
 
         // Meta
@@ -553,12 +549,6 @@ public class GridMdl extends DefaultTableModel
         note.setTime(keys.getP30F010A());
         note.setData(keys.getP30F010B());
         list.add(note);
-
-        // Mark
-        Mark desc = new Mark();
-        desc.setStatus(keys.getP30F0102());
-        desc.setData(keys.getP30F010C());
-        list.add(desc);
 
         // 处理每一个数据
         StringTokenizer st = new StringTokenizer(text.toString(), ConsDat.SP_SQL_EE);
@@ -589,16 +579,6 @@ public class GridMdl extends DefaultTableModel
             }
             list.add(item);
         }
-
-        // 特殊配置处理
-        item = list.remove(list.size() - 1);
-        if (item.getType() != ConsDat.INDX_GUID)
-        {
-            list.add(item);
-            return;
-        }
-        guid.setSpec(IEditItem.SPEC_GUID_TPLT, item.getSpec(IEditItem.SPEC_GUID_TPLT));
-        guid.setSpec(IEditItem.SPEC_GUID_CHCK, item.getSpec(IEditItem.SPEC_GUID_CHCK));
     }
 
     /**
@@ -606,7 +586,7 @@ public class GridMdl extends DefaultTableModel
      * 
      * @param dba
      */
-    public final void enCrypt(Keys keys, List<Item> list) throws Exception
+    public final void enCrypt(Keys keys, List<IEditItem> list) throws Exception
     {
         Pwds pwds = keys.getPassword();
         StringBuffer text = pwds.getP30F0203();
@@ -616,6 +596,7 @@ public class GridMdl extends DefaultTableModel
         Guid guid = (Guid) list.get(ConsEnv.PWDS_HEAD_GUID);
         keys.setP30F0105(guid.getData());
         keys.setP30F0106(guid.getTime());
+        keys.setP30F010C(guid.enCodeSpec(";"));
 
         // Meta
         Meta meta = (Meta) list.get(ConsEnv.PWDS_HEAD_META);
@@ -631,13 +612,8 @@ public class GridMdl extends DefaultTableModel
         keys.setP30F010A(note.getTime());
         keys.setP30F010B(note.getData());
 
-        // Mark
-        Mark desc = (Mark) list.get(ConsEnv.PWDS_HEAD_MARK);
-        keys.setP30F0102(desc.getStatus());
-        keys.setP30F010C(desc.getData());
-
         // 字符串拼接
-        Item item;
+        IEditItem item;
         for (int i = ConsEnv.PWDS_HEAD_SIZE, j = list.size(); i < j; i += 1)
         {
             item = list.get(i);
@@ -649,15 +625,6 @@ public class GridMdl extends DefaultTableModel
             text.append(item.enCodeSpec(ConsDat.SP_SQL_KV));
             text.append(ConsDat.SP_SQL_EE);
         }
-
-        // 特殊配置对象
-        text.append(ConsDat.INDX_GUID);
-        text.append(ConsDat.SP_SQL_KV);
-        text.append("");
-        text.append(ConsDat.SP_SQL_KV);
-        text.append("");
-        text.append(guid.enCodeSpec(ConsDat.SP_SQL_KV));
-        text.append(ConsDat.SP_SQL_EE);
 
         pwds.enCrypt(UserMdl.getECipher(), UserMdl.getSec().getMask());
     }

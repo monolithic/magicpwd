@@ -12,6 +12,7 @@ import com.magicpwd._comn.Item;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
+import com.magicpwd._face.IEditItem;
 import com.magicpwd._util.Lang;
 import com.magicpwd._user.UserSign;
 import com.magicpwd._util.Logs;
@@ -500,7 +501,7 @@ public class MiniPtn extends JPanel implements MenuEvt, FindEvt
         {
             UserMdl.getNoteMdl().clear();
             UserMdl.getNoteMdl().loadData(noteHash);
-            Item tplt = UserMdl.getNoteMdl().getTplt(3);
+            IEditItem tplt = UserMdl.getNoteMdl().getTplt(3);
             if (tplt != null)
             {
                 tf_NoteHead.setText(tplt.getName());

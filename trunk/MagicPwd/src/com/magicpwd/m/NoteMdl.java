@@ -9,6 +9,7 @@ import java.util.List;
 import com.magicpwd._comn.Keys;
 import com.magicpwd._comn.Item;
 import com.magicpwd._cons.ConsDat;
+import com.magicpwd._face.IEditItem;
 import com.magicpwd._util.Hash;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.DBA3000;
@@ -21,12 +22,12 @@ public class NoteMdl
 {
 
     private boolean modified;
-    private List<Item> ls_ItemList;
+    private List<IEditItem> ls_ItemList;
     private Keys pwds;
 
     NoteMdl()
     {
-        ls_ItemList = new ArrayList<Item>();
+        ls_ItemList = new ArrayList<IEditItem>();
         pwds = new Keys();
     }
 
@@ -119,7 +120,7 @@ public class NoteMdl
         return ls_ItemList.size();
     }
 
-    public Item getTplt(int index)
+    public IEditItem getTplt(int index)
     {
         return ls_ItemList.get(index);
     }
