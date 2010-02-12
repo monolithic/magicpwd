@@ -1334,13 +1334,13 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
     private void ls_DataListValueChanged(javax.swing.event.ListSelectionEvent evt)
     {
         int i = ls_GuidList.getSelectedIndex();
+        if (i == ls_LastIndx)
+        {
+            return;
+        }
         if (i < 0)
         {
             ls_LastIndx = i;
-            return;
-        }
-        if (i == ls_LastIndx)
-        {
             return;
         }
 

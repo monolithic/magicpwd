@@ -8,9 +8,12 @@ import com.magicpwd._util.Desk;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import java.awt.Point;
+import javax.mail.FetchProfile;
 import javax.mail.Folder;
+import javax.mail.Message;
 import javax.mail.Store;
 import javax.swing.BorderFactory;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.table.TableRowSorter;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -22,12 +25,30 @@ import javax.swing.tree.TreePath;
  * 
  * @author Amon
  */
-public class MailDlg extends javax.swing.JFrame
+public class MailDlg implements Runnable
 {
 
+    private java.awt.Window window;
     private TreeModel treeModel;
     private DefaultMutableTreeNode rootNode;
     private MailMdl tableMode;
+    private Folder folder;
+
+    public MailDlg()
+    {
+        window = new javax.swing.JFrame();
+    }
+
+    public MailDlg(javax.swing.JFrame frame)
+    {
+        window = new javax.swing.JDialog(frame);
+    }
+
+    @Override
+    public void run()
+    {
+        loadMsg();
+    }
 
     public void initView()
     {
@@ -249,8 +270,23 @@ public class MailDlg extends javax.swing.JFrame
         sp1.setTopComponent(sp2);
         sp1.setBottomComponent(pl_MailEdit);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this.getContentPane());
-        this.getContentPane().setLayout(layout);
+        java.awt.Container container;
+        if (window instanceof javax.swing.JFrame)
+        {
+            javax.swing.JFrame frame = (javax.swing.JFrame) window;
+            container = frame.getContentPane();
+            frame.setTitle("邮件检测");
+            frame.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
+        }
+        else
+        {
+            javax.swing.JDialog dialog = (javax.swing.JDialog) window;
+            container = dialog.getContentPane();
+            dialog.setTitle("邮件检测");
+            dialog.setDefaultCloseOperation(javax.swing.JDialog.DISPOSE_ON_CLOSE);
+        }
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(container);
+        container.setLayout(layout);
         javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
         hpg.addComponent(sp1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE);
         hpg.addComponent(pl_MailCtrl, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE);
@@ -268,8 +304,47 @@ public class MailDlg extends javax.swing.JFrame
         vsg.addContainerGap();
         layout.setVerticalGroup(vsg);
 
-        this.pack();
-        this.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
+        window.pack();
+        window.setIconImage(Util.getLogo());
+    }
+
+    /**
+     * 消息加载线程专用
+     * @return
+     */
+    private boolean loadMsg()
+    {
+        try
+        {
+            if (folder != null)
+            {
+                showNotice("正在读取邮件…");
+                Message[] msgs = folder.getMessages();
+                FetchProfile profile = new FetchProfile();
+                profile.add(FetchProfile.Item.ENVELOPE);
+                folder.fetch(msgs, profile);
+
+                MailInf mail;
+                int i = 1;
+                for (Message message : msgs)
+                {
+                    showNotice("正处理第" + i + "封邮件……");
+                    mail = new MailInf();
+                    mail.loadMsg(message);
+                    tableMode.append(mail);
+                    i += 1;
+                }
+                showNotice("邮件读取完毕！");
+                folder.close(false);
+                folder = null;
+                return true;
+            }
+            return false;
+        }
+        catch (Exception exp)
+        {
+            return false;
+        }
     }
 
     private void tr_MailBoxsMouseClicked(java.awt.event.MouseEvent evt)
@@ -289,16 +364,39 @@ public class MailDlg extends javax.swing.JFrame
         {
             return;
         }
+
         NodeMdl node = (NodeMdl) obj;
+        String name = node.getKeyWord();
+        if (!Util.isValidate(name))
+        {
+            return;
+        }
+
         try
         {
             Store store = node.getConnect().getStore();
-            tableMode.loadMsg(store.getFolder(node.getKeyWord()));
-            store.close();
+            folder = store.getFolder(node.getKeyWord());
+            if (folder == null)
+            {
+                return;
+            }
+            if ((folder.getType() & Folder.HOLDS_MESSAGES) == 0)
+            {
+                return;
+            }
+            if (!folder.isOpen())
+            {
+                folder.open(Folder.READ_WRITE);
+            }
+            tableMode.clear();
+
+            Thread thread = new Thread(this);
+            thread.start();
+//            SwingUtilities.invokeLater(thread);
         }
-        catch (Exception ex)
+        catch (Exception exp)
         {
-            Logs.exception(ex);
+            Logs.exception(exp);
         }
     }
 
@@ -320,11 +418,14 @@ public class MailDlg extends javax.swing.JFrame
     {
         try
         {
+            showNotice("正在加载邮件内容…");
             MailInf mail = tableMode.getMailInf(tb_MailMsgs.getSelectedRow());
+            System.out.println(mail.getContentType());
             ta_MailBody.setContentType(mail.getContentType());
             tf_MailHead.setText(mail.getSubject());
             tf_MailUser.setText(mail.getMailAddress("TO"));
             ta_MailBody.setText(mail.getBodyText());
+            showNotice("邮件内容加载完毕！");
         }
         catch (Exception ex)
         {
@@ -348,6 +449,16 @@ public class MailDlg extends javax.swing.JFrame
         }
     }
 
+    private synchronized void showNotice(String notice)
+    {
+        lb_MailInfo.setText(notice);
+    }
+
+    public void setVisible(boolean visible)
+    {
+        window.setVisible(visible);
+    }
+
     public static void main(String[] args)
     {
         try
@@ -362,10 +473,10 @@ public class MailDlg extends javax.swing.JFrame
         md.initLang();
         md.initData();
         md.setVisible(true);
-        Connect connect = new Connect("pop3", "Amon.CT@live.com", "c~9xJpa&");
-        connect.setUsername("Amon.CT");
-        connect.setHost("pop.live.com");
-        connect.setPort(995);
+        Connect connect = new Connect("pop3", "Amon.WK@163.com", "mugua3000");
+        connect.setUsername("Amon.WK");
+        connect.setHost("pop.163.com");
+        connect.setPort(-1);
         connect.setAuth(true);
         md.append(connect, "");
     }
@@ -375,11 +486,11 @@ public class MailDlg extends javax.swing.JFrame
     private javax.swing.JPanel pl_MailEdit;
     private javax.swing.JLabel lb_MailHead;
     private javax.swing.JLabel lb_MailUser;
+    private javax.swing.JLabel lb_MailInfo;
     private javax.swing.JTextField tf_MailHead;
     private javax.swing.JTextField tf_MailUser;
     private javax.swing.JPanel pl_MailCtrl;
     private javax.swing.JButton bt_Delete;
     private javax.swing.JButton bt_Download;
     private javax.swing.JButton bt_Replay;
-    private javax.swing.JLabel lb_MailInfo;
 }

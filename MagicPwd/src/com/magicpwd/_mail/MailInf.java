@@ -11,8 +11,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.mail.Address;
 import javax.mail.BodyPart;
@@ -21,6 +19,7 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.Part;
+import javax.mail.internet.ContentType;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeUtility;
 
@@ -31,7 +30,7 @@ import javax.mail.internet.MimeUtility;
 public class MailInf
 {
 
-    private String contentType;
+    private String contentType = "text/html;charset=UTF-8";
     private Address[] address;
     private Address[] to;
     private Address[] cc;
@@ -48,8 +47,6 @@ public class MailInf
      * 存放邮件内容
      */
     private StringBuffer content = new StringBuffer();
-    private static Pattern typeSet;
-    private static Pattern charSet;
 
     public MailInf()
     {
@@ -59,24 +56,6 @@ public class MailInf
     {
         try
         {
-            typeSet = Pattern.compile("text\\s*/\\s*[\\w-]+[^;\\s]", Pattern.CASE_INSENSITIVE);
-            charSet = Pattern.compile("charset\\s*=\\s*\"?[\\w-]+\"?[^;\\s]", Pattern.CASE_INSENSITIVE);
-            String temp = message.getContentType();
-            Matcher m = typeSet.matcher(temp);
-            String t1 = "text/html;";
-            if (m.find())
-            {
-                t1 = m.group() + ';';
-            }
-            m = charSet.matcher(temp);
-            String t2 = "charset=UTF-8;";
-            if (m.find())
-            {
-                t2 = m.group().replace("\"", "") + ';';
-            }
-            contentType = t1 + ' ' + t2;
-
-            message.isMimeType("");
             address = message.getFrom();
             to = message.getRecipients(Message.RecipientType.TO);
             cc = message.getRecipients(Message.RecipientType.CC);
@@ -210,20 +189,30 @@ public class MailInf
      */
     public void getMailContent(Part part) throws Exception
     {
-        String contenttype = part.getContentType();
-        if (!Util.isValidate(contenttype))
+        String sType = part.getContentType();
+        if (!Util.isValidate(sType))
         {
             return;
         }
+        ContentType cType = new ContentType(sType);
+        String p = cType.getParameter("charset");
 
-        boolean conname = contenttype.indexOf("name") != -1;
+        sType = cType.getParameter("charset");
+        if (!Util.isValidate(sType))
+        {
+            sType = "UTF-8";
+        }
+
+        boolean conname = sType.indexOf("name") != -1;
         if (part.isMimeType("text/plain") && !conname)
         {
+            contentType = "text/plain;charset=" + sType;
             content.append((String) part.getContent());
             return;
         }
         if (part.isMimeType("texl/html") && !conname)
         {
+            contentType = "text/html;charset=" + sType;
             content.append((String) part.getContent());
             return;
         }
@@ -242,6 +231,7 @@ public class MailInf
             getMailContent((Part) part.getContent());
             return;
         }
+        content.append((String) part.getContent());
     }
 
     /**
@@ -274,7 +264,6 @@ public class MailInf
     public boolean isContainAttach(Part part) throws Exception
     {
         boolean attachflag = false;
-        String contentType = part.getContentType();
         if (part.isMimeType("multipart/*"))
         {
             Multipart mp = (Multipart) part.getContent();

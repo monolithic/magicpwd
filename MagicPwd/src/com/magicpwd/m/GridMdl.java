@@ -331,7 +331,7 @@ public class GridMdl extends DefaultTableModel
         {
             if (item.getType() == type)
             {
-                list.add(new I1S2(i, item.getData(), item.getName() + '（' + item.getData() + '）'));
+                list.add(new I1S2(i, item.getData(), item.getName()));
             }
             i += 1;
         }
