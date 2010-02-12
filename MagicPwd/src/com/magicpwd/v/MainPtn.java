@@ -17,7 +17,6 @@ import com.magicpwd._comn.Guid;
 import com.magicpwd._comn.Kind;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._comn.S1S3;
-import com.magicpwd._comn.Item;
 import com.magicpwd._comn.Keys;
 import com.magicpwd._comn.Meta;
 import com.magicpwd._cons.ConsCfg;
@@ -1195,6 +1194,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         tb_KeysView = new javax.swing.JTable();
         tb_KeysView.setModel(UserMdl.getGridMdl());
         tb_KeysView.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tb_KeysView.getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         javax.swing.ActionMap actionMap = tb_KeysView.getActionMap();
         javax.swing.InputMap inputMap = tb_KeysView.getInputMap(WHEN_IN_FOCUSED_WINDOW);
         Util.addSortAction(actionMap, inputMap, this);
@@ -1387,20 +1387,23 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
 
     private void tb_ItemListMouseReleased(java.awt.event.MouseEvent evt)
     {
+        // 右键事件处理
+        if (evt.isPopupTrigger())
+        {
+            int row = tb_KeysView.rowAtPoint(evt.getPoint());
+            tb_KeysView.setRowSelectionInterval(row, row);
+            gridMenu.show(tb_KeysView, evt.getX(), evt.getY());
+            return;
+        }
+
+        // 左键事件处理
         int row = tb_KeysView.getSelectedRow();
         if (row < 0 || row > tb_KeysView.getRowCount() || row == tb_LastIndx)
         {
             return;
         }
-        if (evt.isPopupTrigger())
-        {
-            gridMenu.show(tb_KeysView, evt.getX(), evt.getY());
-        }
-        else
-        {
-            tb_LastIndx = row;
-            showPropEdit(UserMdl.getGridMdl().getItemAt(row), true);
-        }
+        tb_LastIndx = row;
+        showPropEdit(UserMdl.getGridMdl().getItemAt(row), true);
     }
 
     private void tb_ItemListKeyReleased(java.awt.event.KeyEvent evt)
