@@ -410,16 +410,18 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
     @Override
     public void fileApndActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (UserMdl.getGridMdl().isModified())
+        GridMdl gm = UserMdl.getGridMdl();
+        if (gm.isModified())
         {
-            if (Lang.showFirm(this, LangRes.P30F7A09, "", "") != javax.swing.JOptionPane.YES_OPTION)
+            if (Lang.showFirm(this, LangRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", gm.getItemAt(ConsEnv.PWDS_HEAD_META).getName())
+                    != javax.swing.JOptionPane.YES_OPTION)
             {
                 return;
             }
         }
 
         tb_LastIndx = 0;
-        UserMdl.getGridMdl().clear();
+        gm.clear();
         if (!UserMdl.getCfg().isEditViw())
         {
             MagicPwd.getWMenuBar().setViewPropSelected(true);
@@ -428,7 +430,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             UserMdl.getCfg().setEditWnd(true);
             showPropEdit(true);
         }
-        showPropEdit(UserMdl.getGridMdl().initGuid(), true);
+        showPropEdit(gm.initGuid(), true);
     }
 
     @Override
@@ -1343,9 +1345,11 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             return;
         }
 
-        if (UserMdl.getGridMdl().isModified())
+        GridMdl gm = UserMdl.getGridMdl();
+        if (gm.isModified())
         {
-            if (Lang.showFirm(this, LangRes.P30F7A09, "") != javax.swing.JOptionPane.YES_OPTION)
+            if (Lang.showFirm(this, LangRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", gm.getItemAt(ConsEnv.PWDS_HEAD_META).getName())
+                    != javax.swing.JOptionPane.YES_OPTION)
             {
                 ls_GuidList.setSelectedIndex(ls_LastIndx);
                 return;
@@ -1374,8 +1378,8 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         {
             tb_LastIndx = -1;
             Keys keys = (Keys) obj;
-            UserMdl.getGridMdl().clear();
-            UserMdl.getGridMdl().loadData(keys.getP30F0103());
+            gm.clear();
+            gm.loadData(keys.getP30F0103());
         }
         catch (Exception exp)
         {

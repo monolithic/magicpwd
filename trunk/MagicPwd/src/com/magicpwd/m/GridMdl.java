@@ -183,9 +183,11 @@ public class GridMdl extends DefaultTableModel
         keys.setDefault();
         keys.setP30F0103(keysHash);
         keys.setP30F0104(UserMdl.getUserId());
-        DBA3000.readPwdsData(keys);
-        deCrypt(keys, ls_ItemList);
-        fireTableDataChanged();
+        if (DBA3000.readPwdsData(keys))
+        {
+            deCrypt(keys, ls_ItemList);
+            fireTableDataChanged();
+        }
     }
 
     /**

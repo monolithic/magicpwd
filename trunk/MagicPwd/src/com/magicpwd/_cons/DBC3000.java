@@ -230,6 +230,7 @@ public interface DBC3000
      * 日志索引
      */
     String P30F0A01 = "P30F0A01";
+    int P30F0A01_SIZE = 16;
     /**
      * 使用状态
      */
