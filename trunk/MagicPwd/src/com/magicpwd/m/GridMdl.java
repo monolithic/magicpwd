@@ -637,5 +637,6 @@ public class GridMdl extends DefaultTableModel
     public void setStatus(int status)
     {
         keys.setP30F0102(status);
+        modified = true;
     }
 }
