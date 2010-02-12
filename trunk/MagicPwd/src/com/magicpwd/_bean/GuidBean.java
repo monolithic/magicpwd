@@ -198,7 +198,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         MailDlg mailDlg = MagicPwd.getMailDlg();
         if (mailDlg == null)
         {
-            mailDlg = new MailDlg();
+            mailDlg = new MailDlg(MagicPwd.getFrame());
             mailDlg.initView();
             mailDlg.initLang();
             mailDlg.initData();
@@ -244,7 +244,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
             mailPtn.initUser(userList);
             List<I1S2> pwdsList = gm.wSelect(ConsDat.INDX_PWDS);
             mailPtn.initPwds(pwdsList);
-            if (JOptionPane.OK_OPTION != JOptionPane.showConfirmDialog(this, mailPtn, "登录确认", JOptionPane.OK_CANCEL_OPTION))
+            if (JOptionPane.OK_OPTION != JOptionPane.showConfirmDialog(MagicPwd.getFrame(), mailPtn, "登录确认", JOptionPane.OK_CANCEL_OPTION))
             {
                 return;
             }

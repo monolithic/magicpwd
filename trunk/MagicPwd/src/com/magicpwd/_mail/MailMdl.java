@@ -119,43 +119,14 @@ public class MailMdl extends AbstractTableModel
         return messages.get(rowIndex);
     }
 
-    public boolean loadMsg(Folder folder)
+    public void clear()
     {
-        try
-        {
-            if (folder == null)
-            {
-                return false;
-            }
-            if ((folder.getType() & Folder.HOLDS_MESSAGES) == 0)
-            {
-                return false;
-            }
-            if (!folder.isOpen())
-            {
-                folder.open(Folder.READ_WRITE);
-            }
-            messages.clear();
+        messages.clear();
+    }
 
-            Message[] msgs = folder.getMessages();
-            FetchProfile profile = new FetchProfile();
-            profile.add(FetchProfile.Item.ENVELOPE);
-            folder.fetch(msgs, profile);
-
-            MailInf mail;
-            for (Message message : msgs)
-            {
-                mail = new MailInf();
-                mail.loadMsg(message);
-                messages.add(mail);
-                fireTableDataChanged();
-            }
-            folder.close(false);
-            return true;
-        }
-        catch (Exception exp)
-        {
-            return false;
-        }
+    public void append(MailInf mailInf)
+    {
+        messages.add(mailInf);
+        fireTableDataChanged();
     }
 }
