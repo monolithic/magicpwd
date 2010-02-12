@@ -522,7 +522,6 @@ public class GridMdl extends DefaultTableModel
         Pwds pwds = keys.getPassword();
         pwds.deCript(UserMdl.getDCipher(), UserMdl.getSec().getMask());
         StringBuffer text = pwds.getP30F0203();
-        Logs.log(text.toString());
         if (text.length() < 16)
         {
             return;
