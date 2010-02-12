@@ -294,24 +294,26 @@ public class DBA3000
             dba.addColumn(DBC3000.P30F010A);
             dba.addColumn(DBC3000.P30F010B);
             dba.addColumn(DBC3000.P30F010C);
-            dba.addWhere(DBC3000.P30F0102, keys.getP30F0102());
+            //dba.addWhere(DBC3000.P30F0102, keys.getP30F0102());
             dba.addWhere(DBC3000.P30F0103, keys.getP30F0103());
             dba.addWhere(DBC3000.P30F0104, keys.getP30F0104());
 
             ResultSet rest = dba.executeSelect();
-            if (rest.next())
+            if (!rest.next())
             {
-                keys.setP30F0102(rest.getInt(DBC3000.P30F0102));
-                keys.setP30F0103(rest.getString(DBC3000.P30F0103));
-                keys.setP30F0105(rest.getString(DBC3000.P30F0105));
-                keys.setP30F0106(rest.getTimestamp(DBC3000.P30F0106));
-                keys.setP30F0107(rest.getString(DBC3000.P30F0107));
-                keys.setP30F0108(rest.getString(DBC3000.P30F0108));
-                keys.setP30F0109(rest.getString(DBC3000.P30F0109));
-                keys.setP30F010A(rest.getTimestamp(DBC3000.P30F010A));
-                keys.setP30F010B(rest.getString(DBC3000.P30F010B));
-                keys.setP30F010C(rest.getString(DBC3000.P30F010C));
+                return false;
             }
+
+            keys.setP30F0102(rest.getInt(DBC3000.P30F0102));
+            keys.setP30F0103(rest.getString(DBC3000.P30F0103));
+            keys.setP30F0105(rest.getString(DBC3000.P30F0105));
+            keys.setP30F0106(rest.getTimestamp(DBC3000.P30F0106));
+            keys.setP30F0107(rest.getString(DBC3000.P30F0107));
+            keys.setP30F0108(rest.getString(DBC3000.P30F0108));
+            keys.setP30F0109(rest.getString(DBC3000.P30F0109));
+            keys.setP30F010A(rest.getTimestamp(DBC3000.P30F010A));
+            keys.setP30F010B(rest.getString(DBC3000.P30F010B));
+            keys.setP30F010C(rest.getString(DBC3000.P30F010C));
 
             // 口令内容读取
             dba.reset();
@@ -447,13 +449,13 @@ public class DBA3000
      */
     private static void remove(DBAccess dba, Keys pwds) throws SQLException
     {
-        if (Util.isValidateHash(pwds.getP30F0103()))
+        if (!Util.isValidateHash(pwds.getP30F0103()))
         {
             return;
         }
 
         dba.addTable(DBC3000.P30F0200);
-        dba.addParam(DBC3000.P30F0202, pwds.getP30F0103());
+        dba.addWhere(DBC3000.P30F0202, pwds.getP30F0103());
         dba.addDeleteBatch();
         dba.reset();
     }

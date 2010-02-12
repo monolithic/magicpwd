@@ -21,6 +21,7 @@ import com.magicpwd._util.Util;
  */
 public class DBAccess
 {
+
     /**
      * 默认构造函数，事务默认自动提交
      */
@@ -445,6 +446,8 @@ public class DBAccess
      */
     public void addBatch(String sql) throws SQLException
     {
+        Logs.log(sql);
+
         stat.addBatch(sql);
     }
 
@@ -532,6 +535,8 @@ public class DBAccess
      */
     public ResultSet executeSelect(String sql) throws SQLException
     {
+        Logs.log(sql);
+
         ResultSet rest = null;
         if (stat != null)
         {
@@ -560,6 +565,8 @@ public class DBAccess
      */
     public int executeUpdate(String sql) throws SQLException
     {
+        Logs.log(sql);
+
         int recSize = -1;
         if (stat != null && Util.isValidate(sql))
         {
@@ -586,6 +593,8 @@ public class DBAccess
      */
     public int executeInsert(String sql) throws SQLException
     {
+        Logs.log(sql);
+
         int recSize = -1;
         if (stat != null && Util.isValidate(sql))
         {
@@ -612,6 +621,8 @@ public class DBAccess
      */
     public int executeDelete(String sql) throws SQLException
     {
+        Logs.log(sql);
+
         int recSize = -1;
         if (stat != null && Util.isValidate(sql))
         {
@@ -642,7 +653,7 @@ public class DBAccess
         }
         sqlBuf.append(valueList.get(j));
 
-        sqlBuf.append("FROM ").append(f);
+        sqlBuf.append(" FROM ").append(f);
         // 查寻关联条件拼接
         if (whereList.length() > 0)
         {
@@ -693,7 +704,6 @@ public class DBAccess
             sqlBuf.append(" ORDER BY ").append(orderList.substring(2));
         }
 
-        Logs.log(sqlBuf.toString());
         return sqlBuf.toString();
     }
 
@@ -733,7 +743,7 @@ public class DBAccess
         {
             sqlBuf.append(" WHERE ").append(whereList.substring(5));
         }
-        Logs.log(sqlBuf.toString());
+
         return sqlBuf.toString();
     }
 
@@ -777,7 +787,6 @@ public class DBAccess
         sqlBuf.append(valueList.get(idx));
         sqlBuf.append(")");
 
-        Logs.log(sqlBuf.toString());
         return sqlBuf.toString();
     }
 
@@ -802,7 +811,6 @@ public class DBAccess
         // 关联条件拼接
         sqlBuf.append(" WHERE ").append(whereList.substring(5));
 
-        Logs.log(sqlBuf.toString());
         return sqlBuf.toString();
     }
     // ////////////////////////////////////////////////////////////////////////
