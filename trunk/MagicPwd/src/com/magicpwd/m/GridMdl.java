@@ -530,7 +530,7 @@ public class GridMdl extends DefaultTableModel
         Guid guid = new Guid();
         guid.setData(keys.getP30F0105());
         guid.setTime(keys.getP30F0106());
-        guid.deCodeSpec(keys.getP30F010C(), ";");
+        guid.deCodeSpec(keys.getP30F010C().substring(1) + ";", ";");
         list.add(guid);
 
         // Meta
