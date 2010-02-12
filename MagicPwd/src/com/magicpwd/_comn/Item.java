@@ -165,9 +165,9 @@ public class Item implements IEditItem
         }
 
         StringBuffer text = new StringBuffer();
-        for (String temp : spec)
+        for (int i = 0, j = spec.size(); i < j; i += 1)
         {
-            text.append(c).append(temp);
+            text.append(c).append(spec.get(i));
         }
         return text.toString();
     }
