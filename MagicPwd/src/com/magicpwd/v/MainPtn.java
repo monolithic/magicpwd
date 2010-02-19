@@ -47,6 +47,7 @@ import com.magicpwd.r.TreeCR;
 import com.magicpwd.x.DatDialog;
 import com.magicpwd.x.MdiDialog;
 import com.magicpwd.x.MpsDialog;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, InfoEvt, FindEvt, IGridView
 {
@@ -1260,27 +1261,24 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         sp.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         sp.setDividerLocation(160);
         sp.setOneTouchExpandable(true);
-
         sp.setLeftComponent(pl_KeysGuid);
-
         sp.setRightComponent(pl_KeysInfo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
-
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addContainerGap();
         hsg.addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE);
         hsg.addContainerGap();
-
         javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg.addGroup(hsg);
         hpg.addComponent(ib, javax.swing.GroupLayout.PREFERRED_SIZE, 560, Short.MAX_VALUE);
-
         layout.setHorizontalGroup(hpg);
 
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
+        vsg.addContainerGap();
         vsg.addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE);
+        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 10, 20);
         vsg.addComponent(ib, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE);
         layout.setVerticalGroup(vsg);
     }

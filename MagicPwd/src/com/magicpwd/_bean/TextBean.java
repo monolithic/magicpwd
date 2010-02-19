@@ -55,7 +55,7 @@ public class TextBean extends javax.swing.JPanel implements IEditBean
 
         lb_PropEdit = new javax.swing.JLabel();
         pl_PropEdit = new javax.swing.JPanel();
-        pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0));
+        pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
