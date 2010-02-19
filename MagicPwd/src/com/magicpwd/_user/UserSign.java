@@ -687,7 +687,7 @@ public class UserSign extends JPanel
                 signIn();
                 break;
             case ConsEnv.SIGN_RS:
-                signRs();
+                signIn();
                 break;
             case ConsEnv.SIGN_UP:
                 signUp();

@@ -47,14 +47,17 @@ import com.magicpwd.r.TreeCR;
 import com.magicpwd.x.DatDialog;
 import com.magicpwd.x.MdiDialog;
 import com.magicpwd.x.MpsDialog;
-import javax.swing.LayoutStyle.ComponentPlacement;
 
-public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, InfoEvt, FindEvt, IGridView
+public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, InfoEvt, FindEvt, IGridView
 {
 
     private java.awt.CardLayout cl_CardProp;
     private MpsDialog mp_MpsDialog;
     private IEditBean[] editBean;
+    private FindBar mainFind;
+    private InfoBar mainInfo;
+    private MenuBar mainMenu;
+    private ToolBar mainTool;
     private MenuPop gridMenu;
     private MenuPop treeMenu;
     private MenuPop listMenu;
@@ -95,13 +98,17 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             showPropEdit(UserMdl.getCfg().isEditWnd());
         }
 
-        Util.addHideAction(getActionMap(), getInputMap(WHEN_IN_FOCUSED_WINDOW), this);
-        Util.addEditAction(getActionMap(), getInputMap(WHEN_IN_FOCUSED_WINDOW), this);
-        Util.addFileAction(getActionMap(), getInputMap(WHEN_IN_FOCUSED_WINDOW), this);
-        Util.addViewAction(getActionMap(), getInputMap(WHEN_IN_FOCUSED_WINDOW), this);
-        Util.addDataAction(getActionMap(), getInputMap(WHEN_IN_FOCUSED_WINDOW), this);
-        MagicPwd.getWInfoBar().initData();
-        MagicPwd.getWFindBar().initData();
+        javax.swing.JPanel panel = (javax.swing.JPanel) this.getContentPane();
+        Util.addHideAction(panel.getActionMap(), panel.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
+        Util.addEditAction(panel.getActionMap(), panel.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
+        Util.addFileAction(panel.getActionMap(), panel.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
+        Util.addViewAction(panel.getActionMap(), panel.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
+        Util.addDataAction(panel.getActionMap(), panel.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
+
+        mainMenu.initData();
+        mainTool.initData();
+        mainInfo.initData();
+        mainFind.initData();
     }
 
     @Override
@@ -115,7 +122,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             return;
         }
 
-        UserSign us = new UserSign(ConsEnv.SIGN_RS, MagicPwd.getFrame());
+        UserSign us = new UserSign(ConsEnv.SIGN_RS, MagicPwd.getForm());
         us.setConfrmBackCall(new IBackCall()
         {
 
@@ -145,7 +152,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             return;
         }
 
-        UserSign us = new UserSign(ConsEnv.SIGN_RS, MagicPwd.getFrame());
+        UserSign us = new UserSign(ConsEnv.SIGN_RS, MagicPwd.getForm());
         us.setConfrmBackCall(new IBackCall()
         {
 
@@ -268,11 +275,11 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
     {
         if (!UserMdl.getCfg().isFindViw())
         {
-            MagicPwd.getWFindBar().setVisible(true);
-            MagicPwd.getWMenuBar().setViewFindSelected(true);
+            mainFind.setVisible(true);
+            mainMenu.setViewFindSelected(true);
             UserMdl.getCfg().setFindViw(true);
         }
-        MagicPwd.getWFindBar().requestFocus();
+        mainFind.requestFocus();
     }
 
     @Override
@@ -425,8 +432,8 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         gm.clear();
         if (!UserMdl.getCfg().isEditViw())
         {
-            MagicPwd.getWMenuBar().setViewPropSelected(true);
-            MagicPwd.getWMenuBar().setViewSideSelected(true);
+            mainMenu.setViewPropSelected(true);
+            mainMenu.setViewSideSelected(true);
             UserMdl.getCfg().setEditViw(true);
             UserMdl.getCfg().setEditWnd(true);
             showPropEdit(true);
@@ -513,7 +520,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         {
             ls_LastIndx = -1;
             tb_LastIndx = -1;
-            gm.saveData(MagicPwd.getWToolBar().isHistBackSelected(), true);
+            gm.saveData(mainTool.isHistBackSelected(), true);
         }
         catch (Exception exp)
         {
@@ -545,7 +552,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
     @Override
     public void fileHideActionPerformed(java.awt.event.ActionEvent evt)
     {
-        MagicPwd.showMiniPtn();
+        MagicPwd.showNormPtn();
         MdiDialog md = MdiDialog.getInstance(this);
         if (md != null && md.isVisible())
         {
@@ -776,7 +783,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
     @Override
     public void userUpdateActionPerformed(java.awt.event.ActionEvent evt)
     {
-        UserSign us = new UserSign(ConsEnv.SIGN_PK, MagicPwd.getFrame());
+        UserSign us = new UserSign(ConsEnv.SIGN_PK, MagicPwd.getForm());
         us.init();
     }
 
@@ -790,14 +797,14 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             return;
         }
 
-        UserSign us = new UserSign(ConsEnv.SIGN_SK, MagicPwd.getFrame());
+        UserSign us = new UserSign(ConsEnv.SIGN_SK, MagicPwd.getForm());
         us.setConfrmBackCall(new IBackCall()
         {
 
             @Override
             public boolean callBack(Object sender, java.util.EventListener event, String... params)
             {
-                MagicPwd.getWMenuBar().setUserSecretEnabled();
+                mainMenu.setUserSecretEnabled();
                 return true;
             }
         });
@@ -808,10 +815,10 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
     public void viewFindActionPerformed(java.awt.event.ActionEvent evt)
     {
         boolean b = !UserMdl.getCfg().isFindViw();
-        MagicPwd.getWFindBar().setVisible(b);
-        MagicPwd.getFrame().pack();
+        mainFind.setVisible(b);
+        MagicPwd.getForm().pack();
 
-        MagicPwd.getWMenuBar().setViewFindSelected(b);
+        mainMenu.setViewFindSelected(b);
         UserMdl.getCfg().setFindViw(b);
     }
 
@@ -819,10 +826,10 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
     public void viewInfoActionPerformed(java.awt.event.ActionEvent evt)
     {
         boolean b = !UserMdl.getCfg().isInfoViw();
-        MagicPwd.getWInfoBar().setVisible(b);
-        MagicPwd.getFrame().pack();
+        mainInfo.setVisible(b);
+        MagicPwd.getForm().pack();
 
-        MagicPwd.getWMenuBar().setViewInfoSelected(b);
+        mainMenu.setViewInfoSelected(b);
         UserMdl.getCfg().setInfoViw(b);
     }
 
@@ -830,10 +837,10 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
     public void viewMenuActionPerformed(java.awt.event.ActionEvent evt)
     {
         boolean b = !UserMdl.getCfg().isMenuViw();
-        MagicPwd.getWMenuBar().setVisible(b);
-        MagicPwd.getFrame().pack();
+        mainMenu.setVisible(b);
+        MagicPwd.getForm().pack();
 
-        MagicPwd.getWMenuBar().setViewMenuSelected(b);
+        mainMenu.setViewMenuSelected(b);
         UserMdl.getCfg().setMenuViw(b);
     }
 
@@ -863,8 +870,8 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
 
         // if (!UserMdl.getCfg().isEditViw())
         // {
-        // MagicPwd.getWMenuBar().setViewSideSelected(false);
-        // MagicPwd.getWToolBar().setPropSideSelected(false);
+        // mainMenu.setViewSideSelected(false);
+        // mainTool.setPropSideSelected(false);
         // return;
         // }
 
@@ -872,10 +879,10 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         {
             showPropEdit(b);
         }
-        // MagicPwd.getFrame().pack();
+        // MagicPwd.getForm().pack();
 
-        MagicPwd.getWMenuBar().setViewSideSelected(b);
-        MagicPwd.getWToolBar().setPropSideSelected(b);
+        mainMenu.setViewSideSelected(b);
+        mainTool.setPropSideSelected(b);
 
         UserMdl.getCfg().setEditWnd(b);
     }
@@ -884,10 +891,10 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
     public void viewToolActionPerformed(java.awt.event.ActionEvent evt)
     {
         boolean b = !UserMdl.getCfg().isToolViw();
-        MagicPwd.getWToolBar().setVisible(b);
-        MagicPwd.getFrame().pack();
+        mainTool.setVisible(b);
+        MagicPwd.getForm().pack();
 
-        MagicPwd.getWMenuBar().setViewToolSelected(b);
+        mainMenu.setViewToolSelected(b);
         UserMdl.getCfg().setToolViw(b);
     }
 
@@ -895,7 +902,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
     public void viewTop1ActionPerformed(java.awt.event.ActionEvent evt)
     {
         boolean b = !UserMdl.getCfg().isViewTop();
-        MagicPwd.getFrame().setAlwaysOnTop(b);
+        MagicPwd.getForm().setAlwaysOnTop(b);
 
         UserMdl.getCfg().setViewTop(b);
     }
@@ -941,11 +948,11 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
     @Override
     public void findActionPerformed(java.awt.event.ActionEvent evt)
     {
-        String text = MagicPwd.getWFindBar().getSearchText();
+        String text = mainFind.getSearchText();
         if (!Util.isValidate(text))
         {
             Lang.showMesg(this, LangRes.P30F7A18, "");
-            MagicPwd.getWFindBar().requestFocus();
+            mainFind.requestFocus();
             return;
         }
 
@@ -953,7 +960,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         if (!b)
         {
             Lang.showMesg(this, LangRes.P30F7A19, "");
-            MagicPwd.getWFindBar().requestFocus();
+            mainFind.requestFocus();
         }
 
         tr_GuidTree.setSelectionPath(null);
@@ -1183,7 +1190,9 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
     private void initUserView()
     {
         pl_KeysInfo = new javax.swing.JPanel();
-        FindBar fb = MagicPwd.getWFindBar();
+
+        mainFind = new FindBar();
+        mainFind.initView();
 
         gridMenu = new MenuPop(MenuPop.MENU_GRID);
         gridMenu.initView();
@@ -1194,7 +1203,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         tb_KeysView.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tb_KeysView.getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         javax.swing.ActionMap actionMap = tb_KeysView.getActionMap();
-        javax.swing.InputMap inputMap = tb_KeysView.getInputMap(WHEN_IN_FOCUSED_WINDOW);
+        javax.swing.InputMap inputMap = tb_KeysView.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
         Util.addSortAction(actionMap, inputMap, this);
         // 添加快捷键
         actionMap.put(ConsEnv.EVENT_EDIT_FCUS, new javax.swing.AbstractAction()
@@ -1237,7 +1246,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg.addComponent(sp_KeysView, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE);
         hpg.addComponent(pl_KeysEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-        hpg.addComponent(fb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        hpg.addComponent(mainFind, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
 
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addGap(5);
@@ -1245,7 +1254,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         layout.setHorizontalGroup(hsg);
 
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
-        vsg.addComponent(fb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg.addComponent(mainFind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addComponent(sp_KeysView, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -1255,32 +1264,44 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
 
     private void initBaseView()
     {
-        javax.swing.JSplitPane sp = new javax.swing.JSplitPane();
-        InfoBar ib = MagicPwd.getWInfoBar();
+        mainMenu = new MenuBar();
+        mainMenu.initView();
 
+        mainTool = new ToolBar();
+        mainTool.initView();
+
+        mainInfo = new InfoBar();
+        mainInfo.initView();
+
+        javax.swing.JSplitPane sp = new javax.swing.JSplitPane();
         sp.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         sp.setDividerLocation(160);
         sp.setOneTouchExpandable(true);
         sp.setLeftComponent(pl_KeysGuid);
         sp.setRightComponent(pl_KeysInfo);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this.getContentPane());
+        this.getContentPane().setLayout(layout);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addContainerGap();
         hsg.addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE);
         hsg.addContainerGap();
         javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg.addGroup(hsg);
-        hpg.addComponent(ib, javax.swing.GroupLayout.PREFERRED_SIZE, 560, Short.MAX_VALUE);
+        hpg.addComponent(mainInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 560, Short.MAX_VALUE);
         layout.setHorizontalGroup(hpg);
 
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
         vsg.addContainerGap();
         vsg.addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 10, 20);
-        vsg.addComponent(ib, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg.addComponent(mainInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE);
         layout.setVerticalGroup(vsg);
+
+        this.pack();
+        this.setIconImage(Util.getLogo());
+        this.setTitle(Lang.getLang(LangRes.P30F7201, "魔方密码"));
+        Util.centerForm(this, null);
     }
 
     private void initGuidLang()
@@ -1302,8 +1323,27 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
 
     private void initBaseLang()
     {
+        mainMenu.initLang();
+        mainTool.initLang();
+        mainInfo.initLang();
+        mainFind.initLang();
         treeMenu.initLang();
         listMenu.initLang();
+    }
+
+    @Override
+    protected void processWindowEvent(java.awt.event.WindowEvent e)
+    {
+        if (e.getID() == java.awt.event.WindowEvent.WINDOW_CLOSING)
+        {
+            fileExitActionPerformed(null);
+            return;
+        }
+        else if (e.getID() == java.awt.event.WindowEvent.WINDOW_ICONIFIED)
+        {
+            fileHideActionPerformed(null);
+        }
+        super.processWindowEvent(e);
     }
 
     private void tr_GuidTreeValueChanged(javax.swing.event.TreeSelectionEvent evt)
@@ -1513,15 +1553,15 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
             }
             else
             {
-                mp_MpsDialog = new MpsDialog(MagicPwd.getFrame(), this);
+                mp_MpsDialog = new MpsDialog(MagicPwd.getForm(), this);
                 mp_MpsDialog.initView();
                 mp_MpsDialog.initLang();
                 mp_MpsDialog.setPropView(pl_CardProp);
                 mp_MpsDialog.pack();
                 mp_MpsDialog.setResizable(false);
                 java.awt.Dimension a = mp_MpsDialog.getSize();
-                java.awt.Dimension b = MagicPwd.getFrame().getSize();
-                java.awt.Point p = MagicPwd.getFrame().getLocation();
+                java.awt.Dimension b = MagicPwd.getForm().getSize();
+                java.awt.Point p = MagicPwd.getForm().getLocation();
                 mp_MpsDialog.setLocation(p.x + b.width, p.y + b.height - a.height);
             }
             if (!mp_MpsDialog.isVisible())
@@ -1576,8 +1616,8 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
 
         if (!UserMdl.getCfg().isEditViw())
         {
-            MagicPwd.getWMenuBar().setViewPropSelected(true);
-            MagicPwd.getWMenuBar().setViewSideSelected(true);
+            mainMenu.setViewPropSelected(true);
+            mainMenu.setViewSideSelected(true);
             UserMdl.getCfg().setEditViw(true);
             UserMdl.getCfg().setEditWnd(true);
             showPropEdit(true);

@@ -29,7 +29,7 @@ public class MdiDialog extends JDialog
 
     private MdiDialog()
     {
-        super(MagicPwd.getFrame());
+        super(MagicPwd.getForm());
         lm_PropList = new DefaultListModel();
         cl_CardLayout = new CardLayout();
         setDefaultCloseOperation(MdiDialog.DISPOSE_ON_CLOSE);

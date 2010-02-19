@@ -49,6 +49,10 @@ public class MenuBar extends JMenuBar
         initHelpLang();
     }
 
+    public void initData()
+    {
+    }
+
     public void setActionEvent(MenuEvt event)
     {
         me_MenuEvent = event;
