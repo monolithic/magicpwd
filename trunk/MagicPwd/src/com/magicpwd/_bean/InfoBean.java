@@ -27,17 +27,17 @@ public class InfoBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initView()
     {
-        ta_PropData = new javax.swing.JTextArea();
         lb_PropName = new javax.swing.JLabel();
-        lb_NextTips = new javax.swing.JLabel();
-
-        ta_PropData.setEditable(false);
-        ta_PropData.setLineWrap(true);
-        ta_PropData.setEnabled(false);
-        ta_PropData.setOpaque(false);
-
         lb_PropName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        ta_PropData = new javax.swing.JTextArea();
+        ta_PropData.setEditable(false);
+        ta_PropData.setEnabled(false);
+        ta_PropData.setLineWrap(true);
+        ta_PropData.setOpaque(false);
+        ta_PropData.setTabSize(4);
+
+        lb_NextTips = new javax.swing.JLabel();
         lb_NextTips.addMouseListener(new java.awt.event.MouseAdapter()
         {
 
@@ -51,15 +51,15 @@ public class InfoBean extends javax.swing.JPanel implements IEditBean
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg.addComponent(lb_PropName, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE);
+        hpg.addComponent(lb_PropName, javax.swing.GroupLayout.PREFERRED_SIZE, 260, Short.MAX_VALUE);
         hpg.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup().addContainerGap().addComponent(lb_NextTips));
-        hpg.addComponent(ta_PropData, 280, 280, Short.MAX_VALUE);
+        hpg.addComponent(ta_PropData, javax.swing.GroupLayout.PREFERRED_SIZE, 260, Short.MAX_VALUE);
         layout.setHorizontalGroup(hpg);
 
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
         vsg.addComponent(lb_PropName);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        vsg.addComponent(ta_PropData, 0, 48, Short.MAX_VALUE);
+        vsg.addComponent(ta_PropData, javax.swing.GroupLayout.PREFERRED_SIZE, 49, Short.MAX_VALUE);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addComponent(lb_NextTips);
         layout.setVerticalGroup(vsg);
@@ -134,6 +134,6 @@ public class InfoBean extends javax.swing.JPanel implements IEditBean
     {
     }
     private javax.swing.JLabel lb_NextTips;
-    private javax.swing.JTextArea ta_PropData;
     private javax.swing.JLabel lb_PropName;
+    private javax.swing.JTextArea ta_PropData;
 }

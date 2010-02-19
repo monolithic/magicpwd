@@ -25,96 +25,83 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="tf_PropName" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="pl_PropEdit" alignment="0" max="32767" attributes="1"/>
-                  <Component id="tf_PropData" alignment="0" pref="248" max="32767" attributes="1"/>
+                  <Component id="tf_PropData" alignment="0" pref="169" max="32767" attributes="0"/>
+                  <Component id="pl_PropEdit" alignment="0" pref="169" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="pl_ItemEdit" min="-2" max="-2" attributes="0"/>
+              <Component id="edit1" min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="pl_ItemEdit" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lb_PropName" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tf_PropName" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="lb_PropData" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="tf_PropData" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="pl_PropEdit" max="32767" attributes="1"/>
-                          <Component id="lb_PropEdit" alignment="0" min="-2" max="-2" attributes="1"/>
-                      </Group>
-                  </Group>
+          <Group type="102" attributes="0">
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lb_PropName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tf_PropName" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lb_PropData" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tf_PropData" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lb_PropEdit" min="-2" max="-2" attributes="0"/>
+                  <Component id="pl_PropEdit" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace pref="14" max="32767" attributes="0"/>
           </Group>
+          <Component id="edit1" alignment="0" pref="91" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JLabel" name="lb_PropName">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel1"/>
+        <Property name="text" type="java.lang.String" value="&#x5c5e;&#x6027;(P)"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tf_PropName">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField1"/>
+        <Property name="columns" type="int" value="14"/>
       </Properties>
+      <Events>
+        <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="tf_PropNameFocusGained"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="lb_PropData">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel2"/>
+        <Property name="text" type="java.lang.String" value="&#x6570;&#x636e;(D)"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="tf_PropData">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="jTextField2"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lb_PropEdit">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jLabel3"/>
+        <Property name="text" type="java.lang.String" value="&#x64cd;&#x4f5c;(D)"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="pl_PropEdit">
 
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="248" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="15" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
+      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
+        <Property name="verticalGap" type="int" value="0"/>
+        <Property name="alignment" type="int" value="0"/>
+        <Property name="horizontalGap" type="int" value="0"/>
       </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jRadioButton1"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
+          </AuxValues>
+        </Component>
+      </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="pl_ItemEdit">
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="69" max="32767" attributes="0"/>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-    </Container>
+    <Component class="test.draw.b.Edit" name="edit1">
+    </Component>
   </SubComponents>
 </Form>

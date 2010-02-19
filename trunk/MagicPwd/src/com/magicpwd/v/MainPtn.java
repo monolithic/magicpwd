@@ -1102,11 +1102,6 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         beanNote.initView();
         pl_CardProp.add(ConsEnv.BEAN_NOTE, beanNote);
         editBean[idx++] = beanNote;
-
-//        MarkBean beanMark = new MarkBean(this);
-//        beanMark.initView();
-//        pl_CardProp.add(ConsEnv.BEAN_MARK, beanMark);
-//        editBean[idx++] = beanMark;
     }
 
     private void initGuidView()
@@ -1234,15 +1229,13 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         int w = tb_KeysView.getFontMetrics(tb_KeysView.getFont()).stringWidth("999999");
         tb_KeysView.getColumnModel().getColumn(0).setPreferredWidth(w);
         tb_KeysView.getColumnModel().getColumn(1).setPreferredWidth(365 - w);
-
-        javax.swing.JScrollPane sp1 = new javax.swing.JScrollPane();
-        sp1.setViewportView(tb_KeysView);
+        javax.swing.JScrollPane sp_KeysView = new javax.swing.JScrollPane(tb_KeysView);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_KeysInfo);
         pl_KeysInfo.setLayout(layout);
         javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg.addComponent(sp1, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE);
-        hpg.addComponent(pl_KeysEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        hpg.addComponent(sp_KeysView, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE);
+        hpg.addComponent(pl_KeysEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         hpg.addComponent(fb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
 
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
@@ -1253,7 +1246,7 @@ public class MainPtn extends javax.swing.JPanel implements MenuEvt, ToolEvt, Inf
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
         vsg.addComponent(fb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        vsg.addComponent(sp1, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE);
+        vsg.addComponent(sp_KeysView, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addComponent(pl_KeysEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         layout.setVerticalGroup(vsg);
