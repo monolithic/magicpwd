@@ -136,6 +136,10 @@ public class ToolBar extends JToolBar
         Lang.setWTips(bt_HelpHelp, LangRes.P30F7B07, "帮助");
     }
 
+    public void initData()
+    {
+    }
+
     public void setActionEvent(ToolEvt event)
     {
         te_ToolEvent = event;
