@@ -64,35 +64,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 
         lb_PropEdit = new javax.swing.JLabel();
         pl_PropEdit = new javax.swing.JPanel();
-        pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0));
-
-        bt_PwdsUcfg = new BtnLabel();
-        bt_PwdsUcfg.setMnemonic('O');
-        bt_PwdsUcfg.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_PWDS_UCFG)));
-        bt_PwdsUcfg.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                bt_PwdsUcfgActionPerformed(evt);
-            }
-        });
-        pl_PropEdit.add(bt_PwdsUcfg);
-
-        bt_PwdsGent = new BtnLabel();
-        bt_PwdsGent.setMnemonic('G');
-        bt_PwdsGent.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_PWDS_GENT)));
-        bt_PwdsGent.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                bt_PwdsGentActionPerformed(evt);
-            }
-        });
-        pl_PropEdit.add(bt_PwdsGent);
+        pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_PwdsView = new BtnLabel();
         bt_PwdsView.setMnemonic('M');
@@ -109,9 +81,36 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         });
         pl_PropEdit.add(bt_PwdsView);
 
+        bt_PwdsGent = new BtnLabel();
+        bt_PwdsGent.setMnemonic('G');
+        bt_PwdsGent.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_PWDS_GENT)));
+        bt_PwdsGent.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                bt_PwdsGentActionPerformed(evt);
+            }
+        });
+        pl_PropEdit.add(bt_PwdsGent);
+
+        bt_PwdsUcfg = new BtnLabel();
+        bt_PwdsUcfg.setMnemonic('O');
+        bt_PwdsUcfg.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_PWDS_UCFG)));
+        bt_PwdsUcfg.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                bt_PwdsUcfgActionPerformed(evt);
+            }
+        });
+        pl_PropEdit.add(bt_PwdsUcfg);
+
         menuPwd = new MenuPwd();
         menuPwd.initView();
-
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

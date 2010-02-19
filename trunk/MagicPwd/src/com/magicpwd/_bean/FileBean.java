@@ -62,7 +62,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
 
         lb_PropEdit = new javax.swing.JLabel();
         pl_PropEdit = new javax.swing.JPanel();
-        pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0));
+        pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_FileView = new BtnLabel();
         bt_FileView.setMnemonic('O');
@@ -77,6 +77,20 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
             }
         });
         pl_PropEdit.add(bt_FileView);
+
+        bt_FileApnd = new BtnLabel();
+        bt_FileApnd.setMnemonic('A');
+        bt_FileApnd.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_FILE_OPEN)));
+        bt_FileApnd.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                bt_FileApndActionPerformed(evt);
+            }
+        });
+        pl_PropEdit.add(bt_FileApnd);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -123,7 +137,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
     {
         Lang.setWText(lb_PropName, LangRes.P30F1313, "名称");
         Lang.setWText(lb_PropData, LangRes.P30F1314, "文件");
-        Lang.setWTips(bt_FileView, LangRes.P30F150B, "添加附件");
+        Lang.setWTips(bt_FileApnd, LangRes.P30F150B, "添加附件");
 
         dataEdit.initLang();
     }
@@ -297,6 +311,10 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
 
     private void bt_FileViewActionPerformed(java.awt.event.ActionEvent evt)
     {
+    }
+
+    private void bt_FileApndActionPerformed(java.awt.event.ActionEvent evt)
+    {
         javax.swing.JFileChooser jfc = new javax.swing.JFileChooser();
         jfc.setMultiSelectionEnabled(false);
         jfc.setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);
@@ -318,5 +336,6 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
     private javax.swing.JPanel pl_PropEdit;
     private javax.swing.JTextField tf_PropData;
     private javax.swing.JTextField tf_PropName;
+    private BtnLabel bt_FileApnd;
     private BtnLabel bt_FileView;
 }
