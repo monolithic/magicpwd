@@ -44,7 +44,6 @@ public class NoteBean extends javax.swing.JPanel implements IEditBean
         dataEdit.setDropButtonVisible(false);
 
         lb_PropName = new javax.swing.JLabel();
-
         tf_PropName = new javax.swing.JTextField(14);
         tf_PropName.addFocusListener(new java.awt.event.FocusAdapter()
         {
@@ -58,51 +57,12 @@ public class NoteBean extends javax.swing.JPanel implements IEditBean
         lb_PropName.setLabelFor(tf_PropName);
 
         lb_PropData = new javax.swing.JLabel();
-
         tf_PropData = new javax.swing.JTextField();
         lb_PropData.setLabelFor(tf_PropData);
 
         lb_PropEdit = new javax.swing.JLabel();
-
         pl_PropEdit = new javax.swing.JPanel();
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg1.addComponent(lb_PropEdit);
-        hpg1.addComponent(lb_PropData);
-        hpg1.addComponent(lb_PropName);
-        javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg2.addComponent(tf_PropName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        hpg2.addComponent(pl_PropEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-        hpg2.addComponent(tf_PropData, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE);
-        javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
-        hsg.addGroup(hpg1);
-        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg.addGroup(hpg2);
-        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg.addComponent(dataEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        layout.setHorizontalGroup(hsg);
-
-        javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
-        vpg1.addComponent(lb_PropName);
-        vpg1.addComponent(tf_PropName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
-        vpg2.addComponent(lb_PropData);
-        vpg2.addComponent(tf_PropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        vpg3.addComponent(lb_PropEdit);
-        vpg3.addComponent(pl_PropEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-        javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
-        vsg.addGroup(vpg1);
-        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        vsg.addGroup(vpg2);
-        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        vsg.addGroup(vpg3);
-        javax.swing.GroupLayout.ParallelGroup vpg4 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
-        vpg4.addComponent(dataEdit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-        vpg4.addGroup(vsg);
-        layout.setVerticalGroup(vpg4);
+        pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0));
 
         bt_DateView = new BtnLabel();
         bt_DateView.setMnemonic('O');
@@ -116,6 +76,7 @@ public class NoteBean extends javax.swing.JPanel implements IEditBean
                 bt_DateViewActionPerformed(evt);
             }
         });
+        pl_PropEdit.add(bt_DateView);
 
         bt_SaveData = new BtnLabel();
         bt_SaveData.setMnemonic('U');
@@ -129,6 +90,7 @@ public class NoteBean extends javax.swing.JPanel implements IEditBean
                 saveDataActionPerformed(evt);
             }
         });
+        pl_PropEdit.add(bt_SaveData);
 
         pm_DateView = new javax.swing.JPopupMenu();
         String[] commands =
@@ -167,6 +129,45 @@ public class NoteBean extends javax.swing.JPanel implements IEditBean
             bg.add(menuItem);
             mi_MenuItem[idx++] = menuItem;
         }
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        hpg1.addComponent(lb_PropEdit);
+        hpg1.addComponent(lb_PropData);
+        hpg1.addComponent(lb_PropName);
+        javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        hpg2.addComponent(tf_PropName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hpg2.addComponent(tf_PropData, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
+        hpg2.addComponent(pl_PropEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
+        javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
+        hsg.addGroup(hpg1);
+        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg.addGroup(hpg2);
+        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg.addComponent(dataEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        layout.setHorizontalGroup(hsg);
+
+        javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg1.addComponent(lb_PropName);
+        vpg1.addComponent(tf_PropName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg2.addComponent(lb_PropData);
+        vpg2.addComponent(tf_PropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        vpg3.addComponent(lb_PropEdit);
+        vpg3.addComponent(pl_PropEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
+        vsg1.addGroup(vpg1);
+        vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg1.addGroup(vpg2);
+        vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg1.addGroup(vpg3);
+        vsg1.addContainerGap(14, Short.MAX_VALUE);
+        javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
+        vpg.addGroup(vsg1);
+        vpg.addComponent(dataEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        layout.setVerticalGroup(vpg);
     }
 
     /*

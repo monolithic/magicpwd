@@ -45,7 +45,6 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         dataEdit.initView();
 
         lb_PropName = new javax.swing.JLabel();
-
         tf_PropName = new javax.swing.JTextField(14);
         tf_PropName.addFocusListener(new java.awt.event.FocusAdapter()
         {
@@ -59,14 +58,60 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         lb_PropName.setLabelFor(tf_PropName);
 
         lb_PropData = new javax.swing.JLabel();
-
         pf_PropData = new javax.swing.JPasswordField();
         pf_PropData.setEchoChar('*');
         lb_PropData.setLabelFor(pf_PropData);
 
         lb_PropEdit = new javax.swing.JLabel();
-
         pl_PropEdit = new javax.swing.JPanel();
+        pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0));
+
+        bt_PwdsUcfg = new BtnLabel();
+        bt_PwdsUcfg.setMnemonic('O');
+        bt_PwdsUcfg.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_PWDS_UCFG)));
+        bt_PwdsUcfg.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                bt_PwdsUcfgActionPerformed(evt);
+            }
+        });
+        pl_PropEdit.add(bt_PwdsUcfg);
+
+        bt_PwdsGent = new BtnLabel();
+        bt_PwdsGent.setMnemonic('G');
+        bt_PwdsGent.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_PWDS_GENT)));
+        bt_PwdsGent.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                bt_PwdsGentActionPerformed(evt);
+            }
+        });
+        pl_PropEdit.add(bt_PwdsGent);
+
+        bt_PwdsView = new BtnLabel();
+        bt_PwdsView.setMnemonic('M');
+        hidePwds = new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_PWDS_HIDE));
+        bt_PwdsView.setIcon(hidePwds);
+        bt_PwdsView.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                bt_PwdsViewActionPerformed(evt);
+            }
+        });
+        pl_PropEdit.add(bt_PwdsView);
+
+        menuPwd = new MenuPwd();
+        menuPwd.initView();
+
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -76,8 +121,8 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         hpg1.addComponent(lb_PropName);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg2.addComponent(tf_PropName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        hpg2.addComponent(pl_PropEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-        hpg2.addComponent(pf_PropData, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE);
+        hpg2.addComponent(pf_PropData, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
+        hpg2.addComponent(pl_PropEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addGroup(hpg1);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -94,60 +139,18 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         vpg2.addComponent(pf_PropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         vpg3.addComponent(lb_PropEdit);
-        vpg3.addComponent(pl_PropEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-        javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
-        vsg.addGroup(vpg1);
-        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        vsg.addGroup(vpg2);
-        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        vsg.addGroup(vpg3);
-        javax.swing.GroupLayout.ParallelGroup vpg4 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
-        vpg4.addComponent(dataEdit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-        vpg4.addGroup(vsg);
-        layout.setVerticalGroup(vpg4);
-
-        bt_PwdsUcfg = new BtnLabel();
-        bt_PwdsUcfg.setMnemonic('O');
-        bt_PwdsUcfg.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_PWDS_UCFG)));
-        bt_PwdsUcfg.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                bt_PwdsUcfgActionPerformed(evt);
-            }
-        });
-
-        bt_PwdsGent = new BtnLabel();
-        bt_PwdsGent.setMnemonic('G');
-        bt_PwdsGent.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_PWDS_GENT)));
-        bt_PwdsGent.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                bt_PwdsGentActionPerformed(evt);
-            }
-        });
-
-        bt_PwdsView = new BtnLabel();
-        bt_PwdsView.setMnemonic('M');
-        hidePwds = new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_PWDS_HIDE));
-        bt_PwdsView.setIcon(hidePwds);
-        bt_PwdsView.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                bt_PwdsViewActionPerformed(evt);
-            }
-        });
-
-        menuPwd = new MenuPwd();
-        menuPwd.initView();
+        vpg3.addComponent(pl_PropEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
+        vsg1.addGroup(vpg1);
+        vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg1.addGroup(vpg2);
+        vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg1.addGroup(vpg3);
+        vsg1.addContainerGap(14, Short.MAX_VALUE);
+        javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
+        vpg.addGroup(vsg1);
+        vpg.addComponent(dataEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        layout.setVerticalGroup(vpg);
     }
 
     @Override

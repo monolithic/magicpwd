@@ -52,20 +52,17 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         dataEdit.setDropButtonVisible(false);
 
         lb_PropName = new javax.swing.JLabel();
-
         tf_PropName = new javax.swing.JTextField(20);
         tf_PropName.setEditable(false);
         lb_PropName.setLabelFor(tf_PropName);
 
         lb_PropData = new javax.swing.JLabel();
-
         cb_PropData = new javax.swing.JComboBox();
         lb_PropData.setLabelFor(cb_PropData);
 
         lb_PropEdit = new javax.swing.JLabel();
-
         pl_PropEdit = new javax.swing.JPanel();
-        pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
+        pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0));
 
         bl_ReadMail = new BtnLabel();
         bl_ReadMail.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_PROP_UPDT)));
@@ -86,13 +83,13 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg1.addComponent(lb_PropName);
-        hpg1.addComponent(lb_PropData);
         hpg1.addComponent(lb_PropEdit);
+        hpg1.addComponent(lb_PropData);
+        hpg1.addComponent(lb_PropName);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg2.addComponent(tf_PropName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hpg2.addComponent(cb_PropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        hpg2.addComponent(pl_PropEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        hpg2.addComponent(pl_PropEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addGroup(hpg1);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -109,18 +106,18 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         vpg2.addComponent(cb_PropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         vpg3.addComponent(lb_PropEdit);
-        vpg3.addComponent(pl_PropEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-        javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
-        vsg.addGroup(vpg1);
-        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        vsg.addGroup(vpg2);
-        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        vsg.addGroup(vpg3);
-        vsg.addContainerGap(0, Short.MAX_VALUE);
-        javax.swing.GroupLayout.ParallelGroup vpg4 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
-        vpg4.addComponent(dataEdit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-        vpg4.addGroup(vsg);
-        layout.setVerticalGroup(vpg4);
+        vpg3.addComponent(pl_PropEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
+        vsg1.addGroup(vpg1);
+        vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg1.addGroup(vpg2);
+        vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg1.addGroup(vpg3);
+        vsg1.addContainerGap(14, Short.MAX_VALUE);
+        javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
+        vpg.addGroup(vsg1);
+        vpg.addComponent(dataEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        layout.setVerticalGroup(vpg);
     }
 
     @Override
