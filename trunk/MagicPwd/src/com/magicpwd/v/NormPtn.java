@@ -371,9 +371,9 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
             // Meta
             UserMdl.getNoteMdl().initMeta();
             // Past;
-            UserMdl.getNoteMdl().initPast();
+            UserMdl.getNoteMdl().initLogo();
             // Note
-            UserMdl.getNoteMdl().initNote();
+            UserMdl.getNoteMdl().initHint();
         }
 
         UserMdl.getNoteMdl().setNote(head, data);
@@ -509,7 +509,7 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
         {
             UserMdl.getNoteMdl().clear();
             UserMdl.getNoteMdl().loadData(noteHash);
-            IEditItem tplt = UserMdl.getNoteMdl().getTplt(3);
+            IEditItem tplt = UserMdl.getNoteMdl().getItemAt(3);
             if (tplt != null)
             {
                 tf_NoteHead.setText(tplt.getName());

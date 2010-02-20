@@ -12,7 +12,7 @@ import java.sql.Timestamp;
  * name:记录创建时间<br />
  * data:所属类别索引<br />
  * spec:[0]口令模板索引<br />
- * 
+ *
  * @author Amon
  */
 public class Guid extends Item

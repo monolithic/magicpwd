@@ -16,7 +16,7 @@ import com.magicpwd._comn.Pwds;
 import com.magicpwd._comn.Item;
 import com.magicpwd._comn.Logo;
 import com.magicpwd._comn.Meta;
-import com.magicpwd._comn.Note;
+import com.magicpwd._comn.Hint;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.LangRes;
@@ -111,7 +111,7 @@ public class GridMdl extends DefaultTableModel
                     return Lang.getLang(LangRes.P30F110A, "标题");
                 case ConsDat.INDX_LOGO - ConsDat.INDX_GUID:
                     return Lang.getLang(LangRes.P30F1112, "徽标");
-                case ConsDat.INDX_NOTE - ConsDat.INDX_GUID:
+                case ConsDat.INDX_HINT - ConsDat.INDX_GUID:
                     return Lang.getLang(LangRes.P30F110B, "提醒");
                 default:
                     return row + 1 - ConsEnv.PWDS_HEAD_SIZE;
@@ -232,7 +232,7 @@ public class GridMdl extends DefaultTableModel
         // 徽标
         ls_ItemList.add(new Logo());
         // 过时提醒
-        ls_ItemList.add(new Note());
+        ls_ItemList.add(new Hint());
         fireTableDataChanged();
     }
 
@@ -408,7 +408,7 @@ public class GridMdl extends DefaultTableModel
 
             // Past
             tplt = new Item();
-            tplt.setType(ConsDat.INDX_NOTE);
+            tplt.setType(ConsDat.INDX_HINT);
             text = temp.get(indx++);
             tplt.setData(text);
             keys.setP30F010A(new java.sql.Timestamp(Util.stringToDate(text, '-', ':', ' ').getTimeInMillis()));
@@ -545,8 +545,8 @@ public class GridMdl extends DefaultTableModel
         logo.setName(keys.getP30F0109());
         list.add(logo);
 
-        // Note
-        Note note = new Note();
+        // Hint
+        Hint note = new Hint();
         note.setTime(keys.getP30F010A());
         note.setData(keys.getP30F010B());
         list.add(note);
@@ -608,8 +608,8 @@ public class GridMdl extends DefaultTableModel
         Logo logo = (Logo) list.get(ConsEnv.PWDS_HEAD_LOGO);
         keys.setP30F0109(logo.getName());
 
-        // Note
-        Note note = (Note) list.get(ConsEnv.PWDS_HEAD_NOTE);
+        // Hint
+        Hint note = (Hint) list.get(ConsEnv.PWDS_HEAD_HINT);
         keys.setP30F010A(note.getTime());
         keys.setP30F010B(note.getData());
 

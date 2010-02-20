@@ -11,16 +11,16 @@ import java.sql.Timestamp;
 
 /**
  *
- * @author Administrator
+ * @author Amonsoft
  */
-public class Note extends Item
+public class Hint extends Item
 {
 
     private Timestamp time;
 
-    public Note()
+    public Hint()
     {
-        super(ConsDat.INDX_NOTE);
+        super(ConsDat.INDX_HINT);
     }
 
     @Override

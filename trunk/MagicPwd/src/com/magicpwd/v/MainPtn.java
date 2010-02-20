@@ -1532,7 +1532,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             {
                 return Lang.getLang(LangRes.P30F1112, "徽标");
             }
-            case ConsDat.INDX_NOTE:
+            case ConsDat.INDX_HINT:
             {
                 return Lang.getLang(LangRes.P30F110B, "提醒");
             }
