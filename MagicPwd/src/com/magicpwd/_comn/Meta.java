@@ -8,7 +8,7 @@ import com.magicpwd._cons.ConsDat;
 
 /**
  *
- * @author Administrator
+ * @author Amonsoft
  */
 public class Meta extends Item
 {

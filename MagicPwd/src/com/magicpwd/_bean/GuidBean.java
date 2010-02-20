@@ -77,9 +77,6 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         });
         pl_PropEdit.add(bl_ReadMail);
 
-        ck_CheckAll = new javax.swing.JCheckBox();
-        pl_PropEdit.add(ck_CheckAll);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
@@ -125,7 +122,6 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
     {
         Lang.setWText(lb_PropName, LangRes.P30F1301, "时间");
         Lang.setWText(lb_PropData, LangRes.P30F1302, "模板");
-        Lang.setWText(ck_CheckAll, LangRes.P30F1319, "总是提示(&R)");
         Lang.setWTips(bl_ReadMail, LangRes.P30F150D, "检测邮件(Alt + M)");
 
         dataEdit.initLang();
@@ -141,13 +137,9 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         String kind = dataItem.getSpec(IEditItem.SPEC_GUID_TPLT);
         boolean v = Util.isValidate(kind);
         bl_ReadMail.setVisible(v);
-        ck_CheckAll.setVisible(v);
 
         boolean e = ConsDat.HASH_MAIL.equals(kind);
         bl_ReadMail.setEnabled(e);
-        ck_CheckAll.setEnabled(e);
-
-        ck_CheckAll.setSelected(ConsDat.SPEC_VALUE_TRUE.equals(dataItem.getSpec(IEditItem.SPEC_GUID_CHCK)));
     }
 
     @Override
@@ -202,54 +194,25 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
             MagicPwd.setMailDlg(mailDlg);
         }
 
-        String mail = "";
-        String user = "";
-        String pwds = "";
         GridMdl gm = UserMdl.getGridMdl();
-        if (ck_CheckAll.isSelected())
+
+        MailPtn mailPtn = new MailPtn();
+        mailPtn.initView();
+        mailPtn.initLang();
+        List<I1S2> mailList = gm.wSelect(ConsDat.INDX_MAIL);
+        mailPtn.initMail(mailList);
+        List<I1S2> userList = gm.wSelect(ConsDat.INDX_TEXT);
+        mailPtn.initUser(userList);
+        List<I1S2> pwdsList = gm.wSelect(ConsDat.INDX_PWDS);
+        mailPtn.initPwds(pwdsList);
+        if (JOptionPane.OK_OPTION != JOptionPane.showConfirmDialog(MagicPwd.getForm(), mailPtn, "登录确认", JOptionPane.OK_CANCEL_OPTION))
         {
-            // 邮件账户
-            int tmp = gm.wSelect(ConsDat.INDX_MAIL, ConsDat.TYPE_MAIL_MAIL);
-            if (tmp >= ConsEnv.PWDS_HEAD_SIZE)
-            {
-                mail = gm.getItemAt(tmp).getData();
-            }
-
-            // 登录用户
-            tmp = gm.wSelect(ConsDat.INDX_TEXT, ConsDat.TYPE_MAIL_USER);
-            if (tmp >= ConsEnv.PWDS_HEAD_SIZE)
-            {
-                user = gm.getItemAt(tmp).getData();
-            }
-
-            // 认证口令
-            tmp = gm.wSelect(ConsDat.INDX_PWDS, ConsDat.TYPE_MAIL_PWDS);
-            if (tmp >= ConsEnv.PWDS_HEAD_SIZE)
-            {
-                pwds = gm.getItemAt(tmp).getData();
-            }
+            return;
         }
 
-        if (!Util.isValidateEmail(mail))
-        {
-            MailPtn mailPtn = new MailPtn();
-            mailPtn.initView();
-            mailPtn.initLang();
-            List<I1S2> mailList = gm.wSelect(ConsDat.INDX_MAIL);
-            mailPtn.initMail(mailList);
-            List<I1S2> userList = gm.wSelect(ConsDat.INDX_TEXT);
-            mailPtn.initUser(userList);
-            List<I1S2> pwdsList = gm.wSelect(ConsDat.INDX_PWDS);
-            mailPtn.initPwds(pwdsList);
-            if (JOptionPane.OK_OPTION != JOptionPane.showConfirmDialog(MagicPwd.getForm(), mailPtn, "登录确认", JOptionPane.OK_CANCEL_OPTION))
-            {
-                return;
-            }
-
-            mail = mailList.get(mailPtn.getMail()).getK();
-            user = userList.get(mailPtn.getUser()).getK();
-            pwds = pwdsList.get(mailPtn.getPwds()).getK();
-        }
+        String mail = mailList.get(mailPtn.getMail()).getK();
+        String user = userList.get(mailPtn.getUser()).getK();
+        String pwds = pwdsList.get(mailPtn.getPwds()).getK();
 
         String host = mail.substring(mail.indexOf('@') + 1);
         if (!Util.isValidate(host))
@@ -294,7 +257,6 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
     private javax.swing.JLabel lb_PropEdit;
     private javax.swing.JLabel lb_PropName;
     private javax.swing.JPanel pl_PropEdit;
-    private javax.swing.JCheckBox ck_CheckAll;
     private javax.swing.JComboBox cb_PropData;
     private javax.swing.JTextField tf_PropName;
 }

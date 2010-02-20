@@ -15,7 +15,6 @@ public interface IEditItem
      * 附加属性索引
      */
     int SPEC_GUID_TPLT = 0;// 口令模板索引
-    int SPEC_GUID_CHCK = 1;// 是否总是提示
     int SPEC_FILE_NAME = 0;// 附件原文件名
     int SPEC_PWDS_HASH = 0;// 字符空间索引
     int SPEC_PWDS_SIZE = 1;// 生成口令长度

@@ -3,115 +3,93 @@
  */
 package com.magicpwd.m;
 
+import com.magicpwd._comn.Guid;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.magicpwd._comn.Keys;
-import com.magicpwd._comn.Item;
+import com.magicpwd._comn.Meta;
+import com.magicpwd._comn.Hint;
 import com.magicpwd._cons.ConsDat;
+import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._face.IEditItem;
-import com.magicpwd._util.Hash;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.DBA3000;
 
 /**
  * @author Amonsoft
- * 
  */
 public class NoteMdl
 {
 
     private boolean modified;
     private List<IEditItem> ls_ItemList;
-    private Keys pwds;
+    private Keys keys;
 
     NoteMdl()
     {
         ls_ItemList = new ArrayList<IEditItem>();
-        pwds = new Keys();
+        keys = new Keys();
     }
 
-    public Item initGuid()
+    public IEditItem initGuid()
     {
-        pwds.setP30F0103(Hash.hash(false));
-        java.sql.Timestamp stamp = new java.sql.Timestamp(System.currentTimeMillis());
-        pwds.setP30F0106(stamp);
-        pwds.setP30F010A(stamp);
-
-        String name = stamp.toString();
-        int i = name.lastIndexOf('.');
-        if (i > 0)
-        {
-            name = name.substring(0, i);
-        }
-
-        Item tplt = new Item(ConsDat.INDX_GUID);
-        tplt.setName(name);
-        tplt.setData(ConsDat.HASH_NOTE);
-        pwds.setP30F0105(ConsDat.HASH_NOTE);
-        ls_ItemList.add(tplt);
-        return tplt;
+        Guid guid = new Guid();
+        guid.setData(ConsDat.HASH_NOTE);
+        ls_ItemList.add(guid);
+        return guid;
     }
 
-    public Item initMeta()
+    public IEditItem initMeta()
     {
-        Item tplt = new Item(ConsDat.INDX_META);
-        ls_ItemList.add(tplt);
-        pwds.setP30F0102(ConsDat.PWDS_STAT_1);
-        return tplt;
+        Meta meta = new Meta();
+        ls_ItemList.add(meta);
+        return meta;
     }
 
-    public Item initPast()
+    public IEditItem initLogo()
     {
-        Item tplt = new Item(ConsDat.INDX_NOTE);
-        ls_ItemList.add(tplt);
-        return tplt;
+        Hint note = new Hint();
+        ls_ItemList.add(note);
+        return note;
     }
 
-    public Item initNote()
+    public IEditItem initHint()
     {
-        Item tplt = new Item(ConsDat.INDX_AREA);
-        ls_ItemList.add(tplt);
-        return tplt;
+        Hint note = new Hint();
+        ls_ItemList.add(note);
+        return note;
     }
 
     public void setNote(String name, String note)
     {
-        ls_ItemList.get(1).setName(name);
-        pwds.setP30F0107(name);
-
-        ls_ItemList.get(3).setName(name);
-        ls_ItemList.get(3).setData(note);
+        ls_ItemList.get(ConsEnv.PWDS_HEAD_META).setName(name);
+        ls_ItemList.get(ConsEnv.PWDS_HEAD_SIZE).setName(name);
+        ls_ItemList.get(ConsEnv.PWDS_HEAD_SIZE).setData(note);
     }
 
     public void loadData(String keysHash) throws Exception
     {
         clear();
-        pwds.setP30F0103(keysHash);
-        DBA3000.readPwdsData(pwds);
-        UserMdl.getGridMdl().deCrypt(pwds, ls_ItemList);
+        keys.setP30F0103(keysHash);
+        DBA3000.readPwdsData(keys);
+        UserMdl.getGridMdl().deCrypt(keys, ls_ItemList);
     }
 
     public void saveData(boolean histBack) throws Exception
     {
-        if (pwds.getP30F0103() == null)
-        {
-            pwds.setP30F0103(Hash.hash(false));
-        }
-        if (pwds.getP30F0105() == null)
-        {
-            pwds.setP30F0105(UserMdl.getUserId());
-        }
-        pwds.setHistBack(histBack);
-        UserMdl.getGridMdl().enCrypt(pwds, ls_ItemList);
-        DBA3000.savePwdsData(pwds);
-        //pwds.setUpdate(true);
+        keys.setP30F0102(ConsDat.PWDS_STAT_1);
+        keys.setP30F0104(UserMdl.getUserId());
+        keys.setP30F0105(ConsDat.HASH_NOTE);
+        keys.setHistBack(histBack);
+        UserMdl.getGridMdl().enCrypt(keys, ls_ItemList);
+        DBA3000.savePwdsData(keys);
     }
 
     public void clear()
     {
         ls_ItemList.clear();
-        pwds.setDefault();
+        keys.setDefault();
         modified = false;
     }
 
@@ -120,9 +98,15 @@ public class NoteMdl
         return ls_ItemList.size();
     }
 
-    public IEditItem getTplt(int index)
+    public IEditItem getItemAt(int index)
     {
         return ls_ItemList.get(index);
+    }
+
+    public void setStatus(int status)
+    {
+        keys.setP30F0102(status);
+        modified = true;
     }
 
     /**
@@ -135,8 +119,12 @@ public class NoteMdl
         return modified;
     }
 
+    /**
+     * 
+     * @return
+     */
     public boolean isUpdate()
     {
-        return Util.isValidateHash(pwds.getP30F0103());
+        return Util.isValidateHash(keys.getP30F0103());
     }
 }

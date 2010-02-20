@@ -123,11 +123,11 @@ public interface ConsDat
     /**
      * 属性：过期提示
      */
-    int INDX_NOTE = INDX_LOGO + 1;
+    int INDX_HINT = INDX_LOGO + 1;
     /**
      * 属性：组件个数
      */
-    int INDX_SIZE = INDX_NOTE + 1;
+    int INDX_SIZE = INDX_HINT + 1;
     /** 邮件附加属性：邮件 */
     int TYPE_MAIL_MAIL = 0x1100;
     /** 邮件附加属性：用户 */
