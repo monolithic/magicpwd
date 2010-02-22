@@ -26,7 +26,7 @@ public final class Keys implements Serializable
      */
     private int P30F0102;
     /**
-     * 重要程度
+     * 紧要程度
      */
     private int P30F0103;
     /**
@@ -206,6 +206,7 @@ public final class Keys implements Serializable
     }
 
     /**
+     * 紧要程度
      * @return the P30F0103
      */
     public int getP30F0103()
@@ -214,6 +215,7 @@ public final class Keys implements Serializable
     }
 
     /**
+     * 紧要程度
      * @param P30F0103 the P30F0103 to set
      */
     public void setP30F0103(int P30F0103)
@@ -294,6 +296,7 @@ public final class Keys implements Serializable
     }
 
     /**
+     * 模板索引
      * @return the P30F0108
      */
     public String getP30F0108()
@@ -302,6 +305,7 @@ public final class Keys implements Serializable
     }
 
     /**
+     * 模板索引
      * @param P30F0108 the P30F0108 to set
      */
     public void setP30F0108(String P30F0108)
