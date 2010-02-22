@@ -112,7 +112,7 @@ public class InfoBar extends JPanel
         int size = lp_PastNote.size();
         if (size > 0)
         {
-            UserMdl.getListMdl().findName(lp_PastNote.remove(--size).getP30F0107());
+            UserMdl.getListMdl().findName(lp_PastNote.remove(--size).getP30F0109());
             showNote();
         }
     }

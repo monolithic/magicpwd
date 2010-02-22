@@ -63,9 +63,9 @@ public class ListCR extends JLabel implements javax.swing.ListCellRenderer
         if (value instanceof Keys)
         {
             Keys keys = (Keys) value;
-            setText(keys.getP30F0107());
-            setToolTipText(Util.isValidate(keys.getP30F0108()) ? keys.getP30F0108() : keys.getP30F0107());
-            setIcon(new ImageIcon(keys.getP30F0109()));
+            setText(keys.getP30F0109());
+            setToolTipText(Util.isValidate(keys.getP30F010A()) ? keys.getP30F010A() : keys.getP30F0109());
+            setIcon(new ImageIcon(keys.getP30F010B()));
         }
         else if (value instanceof S1S2)
         {

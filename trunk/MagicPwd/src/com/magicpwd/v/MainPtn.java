@@ -1410,7 +1410,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             tb_LastIndx = -1;
             Keys keys = (Keys) obj;
             gm.clear();
-            gm.loadData(keys.getP30F0103());
+            gm.loadData(keys.getP30F0104());
         }
         catch (Exception exp)
         {

@@ -61,7 +61,7 @@ public class DBA3000
     private static void addUserSort(DBAccess dba)
     {
 //        dba.addWhere(DBC3000.P30F0102, "");
-        dba.addWhere(DBC3000.P30F0104, UserMdl.getUserId());
+        dba.addWhere(DBC3000.P30F0105, UserMdl.getUserId());
     }
 
     /**
@@ -83,19 +83,19 @@ public class DBA3000
         // 按注册时间排序
         if (ConsEnv.LIST_SORT_REG.equals(key))
         {
-            dba.addSort(DBC3000.P30F0106, asc);
+            dba.addSort(DBC3000.P30F0107, asc);
             return;
         }
 
         // 按到期时间排序
         if (ConsEnv.LIST_SORT_DUE.equals(key))
         {
-            dba.addSort(DBC3000.P30F010A, asc);
+            dba.addSort(DBC3000.P30F010C, asc);
             return;
         }
 
         // 按显示名称排序
-        dba.addSort(DBC3000.P30F0107, asc);
+        dba.addSort(DBC3000.P30F0109, asc);
     }
 
     /**
@@ -112,16 +112,16 @@ public class DBA3000
             item = new Keys();
             item.setP30F0101(rest.getInt(DBC3000.P30F0101));
             item.setP30F0102(rest.getInt(DBC3000.P30F0102));
-            item.setP30F0103(rest.getString(DBC3000.P30F0103));
             item.setP30F0104(rest.getString(DBC3000.P30F0104));
             item.setP30F0105(rest.getString(DBC3000.P30F0105));
-            item.setP30F0106(rest.getTimestamp(DBC3000.P30F0106));
-            item.setP30F0107(rest.getString(DBC3000.P30F0107));
-            item.setP30F0108(rest.getString(DBC3000.P30F0108));
+            item.setP30F0106(rest.getString(DBC3000.P30F0106));
+            item.setP30F0107(rest.getTimestamp(DBC3000.P30F0107));
             item.setP30F0109(rest.getString(DBC3000.P30F0109));
-            item.setP30F010A(rest.getTimestamp(DBC3000.P30F010A));
+            item.setP30F010A(rest.getString(DBC3000.P30F010A));
             item.setP30F010B(rest.getString(DBC3000.P30F010B));
-            item.setP30F010C(rest.getString(DBC3000.P30F010C));
+            item.setP30F010C(rest.getTimestamp(DBC3000.P30F010C));
+            item.setP30F010D(rest.getString(DBC3000.P30F010D));
+            item.setP30F010E(rest.getString(DBC3000.P30F010E));
             list.add(item);
         }
         rest.close();
@@ -145,7 +145,7 @@ public class DBA3000
             // 查询语句拼接
             dba.addTable(DBC3000.P30F0100);
             addUserSort(dba);
-            dba.addWhere(DBC3000.P30F0105, kindHash);
+            dba.addWhere(DBC3000.P30F0106, kindHash);
             addDataSort(dba);
 
             getNameData(dba.executeSelect(), list);
@@ -186,7 +186,7 @@ public class DBA3000
             // 查询语句拼接
             dba.addTable(DBC3000.P30F0100);
             addUserSort(dba);
-            dba.addWhere(Util.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC3000.P30F0107, DBC3000.P30F0108, text.toLowerCase()));
+            dba.addWhere(Util.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC3000.P30F0109, DBC3000.P30F010A, text.toLowerCase()));
             addDataSort(dba);
 
             getNameData(dba.executeSelect(), list);
@@ -219,7 +219,7 @@ public class DBA3000
 
             dba.addTable(DBC3000.P30F0100);
             addUserSort(dba);
-            dba.addWhere(DBC3000.P30F0109, "BETWEEN " + s.toString() + " AND " + e.toString(), true);
+            dba.addWhere(DBC3000.P30F010B, "BETWEEN " + s.toString() + " AND " + e.toString(), true);
             addDataSort(dba);
 
             getNameData(dba.executeSelect(), list);
@@ -245,18 +245,18 @@ public class DBA3000
 
             // 查询语句拼接
             dba.addTable(DBC3000.P30F0100);
-            dba.addColumn(DBC3000.P30F0103);
-            dba.addColumn(DBC3000.P30F0107);
-            dba.addColumn(DBC3000.P30F0108);
-            dba.addWhere(DBC3000.P30F0104, UserMdl.getUserId());
-            dba.addWhere(Util.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC3000.P30F0107, DBC3000.P30F0108, text.toLowerCase()));
+            dba.addColumn(DBC3000.P30F0104);
+            dba.addColumn(DBC3000.P30F0109);
+            dba.addColumn(DBC3000.P30F010A);
+            dba.addWhere(DBC3000.P30F0105, UserMdl.getUserId());
+            dba.addWhere(Util.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC3000.P30F0109, DBC3000.P30F010A, text.toLowerCase()));
             dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_STAT_1);
-            dba.addWhere(DBC3000.P30F0106, ConsDat.HASH_NOTE);
+            dba.addWhere(DBC3000.P30F0107, ConsDat.HASH_NOTE);
 
             ResultSet rest = dba.executeSelect();
             if (rest.next())
             {
-                return rest.getString(DBC3000.P30F0103);
+                return rest.getString(DBC3000.P30F0104);
             }
             return "";
         }
@@ -284,19 +284,19 @@ public class DBA3000
             dba.addTable(DBC3000.P30F0100);
             dba.addColumn(DBC3000.P30F0101);
             dba.addColumn(DBC3000.P30F0102);
-            dba.addColumn(DBC3000.P30F0103);
             dba.addColumn(DBC3000.P30F0104);
             dba.addColumn(DBC3000.P30F0105);
             dba.addColumn(DBC3000.P30F0106);
             dba.addColumn(DBC3000.P30F0107);
-            dba.addColumn(DBC3000.P30F0108);
             dba.addColumn(DBC3000.P30F0109);
             dba.addColumn(DBC3000.P30F010A);
             dba.addColumn(DBC3000.P30F010B);
             dba.addColumn(DBC3000.P30F010C);
+            dba.addColumn(DBC3000.P30F010D);
+            dba.addColumn(DBC3000.P30F010E);
             //dba.addWhere(DBC3000.P30F0102, keys.getP30F0102());
-            dba.addWhere(DBC3000.P30F0103, keys.getP30F0103());
             dba.addWhere(DBC3000.P30F0104, keys.getP30F0104());
+            dba.addWhere(DBC3000.P30F0105, keys.getP30F0105());
 
             ResultSet rest = dba.executeSelect();
             if (!rest.next())
@@ -305,21 +305,21 @@ public class DBA3000
             }
 
             keys.setP30F0102(rest.getInt(DBC3000.P30F0102));
-            keys.setP30F0103(rest.getString(DBC3000.P30F0103));
-            keys.setP30F0105(rest.getString(DBC3000.P30F0105));
-            keys.setP30F0106(rest.getTimestamp(DBC3000.P30F0106));
-            keys.setP30F0107(rest.getString(DBC3000.P30F0107));
-            keys.setP30F0108(rest.getString(DBC3000.P30F0108));
+            keys.setP30F0104(rest.getString(DBC3000.P30F0104));
+            keys.setP30F0106(rest.getString(DBC3000.P30F0106));
+            keys.setP30F0107(rest.getTimestamp(DBC3000.P30F0107));
             keys.setP30F0109(rest.getString(DBC3000.P30F0109));
-            keys.setP30F010A(rest.getTimestamp(DBC3000.P30F010A));
+            keys.setP30F010A(rest.getString(DBC3000.P30F010A));
             keys.setP30F010B(rest.getString(DBC3000.P30F010B));
-            keys.setP30F010C(rest.getString(DBC3000.P30F010C));
+            keys.setP30F010C(rest.getTimestamp(DBC3000.P30F010C));
+            keys.setP30F010D(rest.getString(DBC3000.P30F010D));
+            keys.setP30F010E(rest.getString(DBC3000.P30F010E));
 
             // 口令内容读取
             dba.reset();
             dba.addTable(DBC3000.P30F0200);
             dba.addColumn(DBC3000.P30F0203);
-            dba.addWhere(DBC3000.P30F0202, keys.getP30F0103());
+            dba.addWhere(DBC3000.P30F0202, keys.getP30F0104());
             dba.addSort(DBC3000.P30F0201);
             rest = dba.executeSelect();
             StringBuffer sb = keys.getPassword().getP30F0203();
@@ -327,7 +327,7 @@ public class DBA3000
             {
                 sb.append(rest.getString(DBC3000.P30F0203));
             }
-            keys.getPassword().setP30F0202(keys.getP30F0103());
+            keys.getPassword().setP30F0202(keys.getP30F0104());
             return true;
         }
         catch (Exception exp)
@@ -351,7 +351,7 @@ public class DBA3000
             dba.init();
 
             // 数据更新时，首先删除已有数据，再添加数据
-            if (Util.isValidateHash(keys.getP30F0103()))
+            if (Util.isValidateHash(keys.getP30F0104()))
             {
                 if (keys.isHistBack())
                 {
@@ -385,11 +385,11 @@ public class DBA3000
 
             String DELETE = "DELETE FROM {0} WHERE {1}='{2}'";
             // 删除信息数据
-            dba.addBatch(Util.format(DELETE, DBC3000.P30F0100, DBC3000.P30F0103, hash));
+            dba.addBatch(Util.format(DELETE, DBC3000.P30F0100, DBC3000.P30F0104, hash));
             // 删除内容数据
             dba.addBatch(Util.format(DELETE, DBC3000.P30F0200, DBC3000.P30F0202, hash));
             // 删除信息备份
-            dba.addBatch(Util.format(DELETE, DBC3000.P30F0A00, DBC3000.P30F0A03, hash));
+            dba.addBatch(Util.format(DELETE, DBC3000.P30F0A00, DBC3000.P30F0A04, hash));
             // 删除内容备份
             dba.addBatch(Util.format(DELETE, DBC3000.P30F0B00, DBC3000.P30F0B03, hash));
             dba.executeBatch();
@@ -418,17 +418,17 @@ public class DBA3000
 
         dba.addParam(DBC3000.P30F0A01, hash);
         dba.addParam(DBC3000.P30F0A02, DBC3000.P30F0102, false);
-        dba.addParam(DBC3000.P30F0A03, DBC3000.P30F0103, false);
         dba.addParam(DBC3000.P30F0A04, DBC3000.P30F0104, false);
         dba.addParam(DBC3000.P30F0A05, DBC3000.P30F0105, false);
         dba.addParam(DBC3000.P30F0A06, DBC3000.P30F0106, false);
         dba.addParam(DBC3000.P30F0A07, DBC3000.P30F0107, false);
-        dba.addParam(DBC3000.P30F0A08, DBC3000.P30F0108, false);
         dba.addParam(DBC3000.P30F0A09, DBC3000.P30F0109, false);
         dba.addParam(DBC3000.P30F0A0A, DBC3000.P30F010A, false);
         dba.addParam(DBC3000.P30F0A0B, DBC3000.P30F010B, false);
         dba.addParam(DBC3000.P30F0A0C, DBC3000.P30F010C, false);
-        dba.addWhere(DBC3000.P30F0103, keys.getP30F0103());
+        dba.addParam(DBC3000.P30F0A0D, DBC3000.P30F010D, false);
+        dba.addParam(DBC3000.P30F0A0E, DBC3000.P30F010E, false);
+        dba.addWhere(DBC3000.P30F0104, keys.getP30F0104());
         dba.addCopyBatch(DBC3000.P30F0A00, DBC3000.P30F0100);
         dba.reset();
 
@@ -436,7 +436,7 @@ public class DBA3000
         dba.addParam(DBC3000.P30F0B02, DBC3000.P30F0201, false);
         dba.addParam(DBC3000.P30F0B03, DBC3000.P30F0202, false);
         dba.addParam(DBC3000.P30F0B04, DBC3000.P30F0203, false);
-        dba.addWhere(DBC3000.P30F0202, keys.getP30F0103());
+        dba.addWhere(DBC3000.P30F0202, keys.getP30F0104());
         dba.addCopyBatch(DBC3000.P30F0B00, DBC3000.P30F0200);
         dba.reset();
     }
@@ -449,13 +449,13 @@ public class DBA3000
      */
     private static void remove(DBAccess dba, Keys pwds) throws SQLException
     {
-        if (!Util.isValidateHash(pwds.getP30F0103()))
+        if (!Util.isValidateHash(pwds.getP30F0104()))
         {
             return;
         }
 
         dba.addTable(DBC3000.P30F0200);
-        dba.addWhere(DBC3000.P30F0202, pwds.getP30F0103());
+        dba.addWhere(DBC3000.P30F0202, pwds.getP30F0104());
         dba.addDeleteBatch();
         dba.reset();
     }
@@ -471,27 +471,27 @@ public class DBA3000
         dba.addTable(DBC3000.P30F0100);
         dba.addParam(DBC3000.P30F0101, keys.getP30F0101());
         dba.addParam(DBC3000.P30F0102, keys.getP30F0102());
-        dba.addParam(DBC3000.P30F0104, keys.getP30F0104());
         dba.addParam(DBC3000.P30F0105, keys.getP30F0105());
-        dba.addParam(DBC3000.P30F0106, keys.getP30F0106().toString());
-        dba.addParam(DBC3000.P30F0107, Util.text2DB(keys.getP30F0107()));
-        dba.addParam(DBC3000.P30F0108, Util.text2DB(keys.getP30F0108()));
+        dba.addParam(DBC3000.P30F0106, keys.getP30F0106());
+        dba.addParam(DBC3000.P30F0107, keys.getP30F0107().toString());
         dba.addParam(DBC3000.P30F0109, Util.text2DB(keys.getP30F0109()));
-        dba.addParam(DBC3000.P30F010A, keys.getP30F010A() != null ? keys.getP30F010A().toString() : null);
+        dba.addParam(DBC3000.P30F010A, Util.text2DB(keys.getP30F010A()));
         dba.addParam(DBC3000.P30F010B, Util.text2DB(keys.getP30F010B()));
-        dba.addParam(DBC3000.P30F010C, Util.text2DB(keys.getP30F010C()));
+        dba.addParam(DBC3000.P30F010C, keys.getP30F010C() != null ? keys.getP30F010C().toString() : null);
+        dba.addParam(DBC3000.P30F010D, Util.text2DB(keys.getP30F010D()));
+        dba.addParam(DBC3000.P30F010E, Util.text2DB(keys.getP30F010E()));
 
-        if (Util.isValidateHash(keys.getP30F0103()))
+        if (Util.isValidateHash(keys.getP30F0104()))
         {
             // 数据更新
-            dba.addWhere(DBC3000.P30F0103, keys.getP30F0103());
+            dba.addWhere(DBC3000.P30F0104, keys.getP30F0104());
             dba.addUpdateBatch();
         }
         else
         {
             // 新增数据
-            keys.setP30F0103(Hash.hash(false));
-            dba.addParam(DBC3000.P30F0103, keys.getP30F0103());
+            keys.setP30F0104(Hash.hash(false));
+            dba.addParam(DBC3000.P30F0104, keys.getP30F0104());
             dba.addInsertBatch();
         }
 
@@ -507,7 +507,7 @@ public class DBA3000
         {
             dba.addTable(DBC3000.P30F0200);
             dba.addParam(DBC3000.P30F0201, idx++);
-            dba.addParam(DBC3000.P30F0202, keys.getP30F0103());
+            dba.addParam(DBC3000.P30F0202, keys.getP30F0104());
             dba.addParam(DBC3000.P30F0203, pwd.substring(t1, t2));
 
             dba.addInsertBatch();
@@ -520,7 +520,7 @@ public class DBA3000
         // 处理剩余节段数据
         dba.addTable(DBC3000.P30F0200);
         dba.addParam(DBC3000.P30F0201, idx);
-        dba.addParam(DBC3000.P30F0202, keys.getP30F0103());
+        dba.addParam(DBC3000.P30F0202, keys.getP30F0104());
         dba.addParam(DBC3000.P30F0203, pwd.substring(t1));
 
         dba.addInsertBatch();
@@ -1079,7 +1079,7 @@ public class DBA3000
 
             dba.addTable(DBC3000.P30F0100);
             dba.addParam(DBC3000.P30F0102, ConsDat.PWDS_STAT_2);
-            dba.addWhere(DBC3000.P30F0103, curr);
+            dba.addWhere(DBC3000.P30F0104, curr);
             dba.addUpdateBatch();
 
             StringBuffer sql = new StringBuffer();
@@ -1136,7 +1136,7 @@ public class DBA3000
             dba.init();
 
             dba.addTable(DBC3000.P30F0100);
-            dba.addWhere(DBC3000.P30F0103, keysHash);
+            dba.addWhere(DBC3000.P30F0104, keysHash);
             dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_STAT_2);
 
             dba.executeDelete();
@@ -1162,8 +1162,8 @@ public class DBA3000
             dba.init();
 
             dba.addTable(DBC3000.P30F0100);
-            dba.addParam(DBC3000.P30F0103, keysHash);
-            dba.addWhere(DBC3000.P30F0103, updtHash);// 类别索引
+            dba.addParam(DBC3000.P30F0104, keysHash);
+            dba.addWhere(DBC3000.P30F0104, updtHash);// 类别索引
 
             dba.executeDelete();
             return true;
@@ -1188,23 +1188,23 @@ public class DBA3000
             dba.init();
 
             dba.addTable(DBC3000.P30F0100);
-            dba.addColumn(DBC3000.P30F0107);
-            dba.addColumn(DBC3000.P30F0108);
             dba.addColumn(DBC3000.P30F0109);
             dba.addColumn(DBC3000.P30F010A);
             dba.addColumn(DBC3000.P30F010B);
-            dba.addColumn(DBC3000.P30F0109);
-            dba.addColumn(DBC3000.P30F010A);
-            dba.addWhere(DBC3000.P30F0103, hash);
+            dba.addColumn(DBC3000.P30F010C);
+            dba.addColumn(DBC3000.P30F010D);
+            dba.addColumn(DBC3000.P30F010B);
+            dba.addColumn(DBC3000.P30F010C);
+            dba.addWhere(DBC3000.P30F0104, hash);
             dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_STAT_2);
 
             ResultSet rest = dba.executeSelect();
             StringBuffer sb = new StringBuffer();
             while (rest.next())
             {
-                sb.append(rest.getString(DBC3000.P30F0109));
+                sb.append(rest.getString(DBC3000.P30F010B));
             }
-            pwds.setP30F0109(sb.toString());
+            pwds.setP30F010B(sb.toString());
 
             rest.close();
             return true;
@@ -1229,10 +1229,10 @@ public class DBA3000
             dba.init();
 
             dba.addTable(DBC3000.P30F0100);
-            dba.addColumn(DBC3000.P30F0103);
-            dba.addWhere(DBC3000.P30F0103, hash);
+            dba.addColumn(DBC3000.P30F0104);
+            dba.addWhere(DBC3000.P30F0104, hash);
             dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_STAT_2);
-            dba.addSort(DBC3000.P30F0103, false);
+            dba.addSort(DBC3000.P30F0104, false);
 
             S1S2 item;
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(ConsEnv.VIEW_DATE);
@@ -1240,7 +1240,7 @@ public class DBA3000
             while (rest.next())
             {
                 item = new S1S2();
-                item.setK(rest.getString(DBC3000.P30F0103));
+                item.setK(rest.getString(DBC3000.P30F0104));
                 item.setV1(sdf.format(new Date(Long.parseLong(item.getK(), 16))));
                 item.setV2(item.getV1());
 
