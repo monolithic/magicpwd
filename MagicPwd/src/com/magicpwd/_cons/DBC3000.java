@@ -153,53 +153,62 @@ public interface DBC3000
      */
     String P30F0102 = "P30F0102";
     /**
-     * 口令索引
+     * 紧要程度
      */
     String P30F0103 = "P30F0103";
-    int P30F0103_SIZE = 16;
+    /**
+     * 口令索引
+     */
+    String P30F0104 = "P30F0104";
+    int P30F0104_SIZE = 16;
     /**
      * 用户索引
      */
-    String P30F0104 = "P30F0104";
-    int P30F0104_SIZE = 8;
+    String P30F0105 = "P30F0105";
+    int P30F0105_SIZE = 8;
     /**
      * 所属类别
      */
-    String P30F0105 = "P30F0105";
-    int P30F0105_SIZE = 16;
+    String P30F0106 = "P30F0106";
+    int P30F0106_SIZE = 16;
     /**
      * 注册日期
      */
-    String P30F0106 = "P30F0106";
+    String P30F0107 = "P30F0107";
     /**
      * 口令标题
      */
-    String P30F0107 = "P30F0107";
-    int P30F0107_SIZE = 256;
+    String P30F0108 = "P30F0108";
+    int P30F0108_SIZE = 16;
+    /**
+     * 口令标题
+     */
+    String P30F0109 = "P30F0109";
+    int P30F0109_SIZE = 256;
     /**
      * 关键搜索
      */
-    String P30F0108 = "P30F0108";
-    int P30F0108_SIZE = 1024;
+    String P30F010A = "P30F010A";
+    int P30F010A_SIZE = 1024;
     /**
      * 口令图标
      */
-    String P30F0109 = "P30F0109";
-    int P30F0109_SIZE = 16;
+    String P30F010B = "P30F010B";
+    int P30F010B_SIZE = 16;
     /**
      * 到期日期
      */
-    String P30F010A = "P30F010A";
+    String P30F010C = "P30F010C";
     /**
      * 到期提示
      */
-    String P30F010B = "P30F010B";
-    int P30F010B_SIZE = 1024;
+    String P30F010D = "P30F010D";
+    int P30F010D_SIZE = 1024;
     /**
      * 相关说明
      */
-    String P30F010C = "P30F010C";
-    int P30F010C_SIZE = 2048;
+    String P30F010E = "P30F010E";
+    int P30F010E_SIZE = 2048;
     /**
      * ////////////////////////////////////////////////////
      * 口令内容表格
@@ -236,53 +245,62 @@ public interface DBC3000
      */
     String P30F0A02 = "P30F0A02";
     /**
-     * 口令索引
+     * 紧要程度
      */
     String P30F0A03 = "P30F0A03";
-    int P30F0A03_SIZE = 16;
+    /**
+     * 口令索引
+     */
+    String P30F0A04 = "P30F0A04";
+    int P30F0A04_SIZE = 16;
     /**
      * 用户索引
      */
-    String P30F0A04 = "P30F0A04";
-    int P30F0A04_SIZE = 8;
+    String P30F0A05 = "P30F0A05";
+    int P30F0A05_SIZE = 8;
     /**
      * 所属类别
      */
-    String P30F0A05 = "P30F0A05";
-    int P30F0A05_SIZE = 16;
+    String P30F0A06 = "P30F0A06";
+    int P30F0A06_SIZE = 16;
     /**
      * 注册日期
      */
-    String P30F0A06 = "P30F0A06";
+    String P30F0A07 = "P30F0A07";
+    /**
+     * 模板索引
+     */
+    String P30F0A08 = "P30F0A08";
+    int P30F0A08_SIZE = 16;
     /**
      * 口令标题
      */
-    String P30F0A07 = "P30F0A07";
-    int P30F0A07_SIZE = 256;
+    String P30F0A09 = "P30F0A09";
+    int P30F0A09_SIZE = 256;
     /**
      * 关键搜索
      */
-    String P30F0A08 = "P30F0A08";
-    int P30F0A08_SIZE = 1024;
+    String P30F0A0A = "P30F0A0A";
+    int P30F0A0A_SIZE = 1024;
     /**
      * 口令图标
      */
-    String P30F0A09 = "P30F0A09";
-    int P30F0A09_SIZE = 16;
+    String P30F0A0B = "P30F0A0B";
+    int P30F0A0B_SIZE = 16;
     /**
      * 到期日期
      */
-    String P30F0A0A = "P30F0A0A";
+    String P30F0A0C = "P30F0A0C";
     /**
      * 到期提示
      */
-    String P30F0A0B = "P30F0A0B";
-    int P30F0A0B_SIZE = 1024;
+    String P30F0A0D = "P30F0A0B";
+    int P30F0A0D_SIZE = 1024;
     /**
      * 相关说明
      */
-    String P30F0A0C = "P30F0A0C";
-    int P30F0A0C_SIZE = 2048;
+    String P30F0A0E = "P30F0A0E";
+    int P30F0A0E_SIZE = 2048;
     /**
      * ////////////////////////////////////////////////////
      * 历史数据表格

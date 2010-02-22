@@ -93,7 +93,7 @@ public class ListMdl extends DefaultListModel
     public boolean updtName(int indx, String name)
     {
         Keys item = dataList.get(indx);
-        item.setP30F0107(name);
+        item.setP30F0109(name);
         //item.setV2(name);
         fireContentsChanged(this, indx, indx);
         return true;
@@ -116,7 +116,7 @@ public class ListMdl extends DefaultListModel
 
     public void wDelete(int index)
     {
-        DBA3000.deletePwdsData(dataList.get(index).getP30F0103());
+        DBA3000.deletePwdsData(dataList.get(index).getP30F0104());
         dataList.remove(index);
         fireIntervalRemoved(this, 0, index);
     }

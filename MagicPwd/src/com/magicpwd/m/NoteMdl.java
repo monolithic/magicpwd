@@ -71,7 +71,7 @@ public class NoteMdl
     public void loadData(String keysHash) throws Exception
     {
         clear();
-        keys.setP30F0103(keysHash);
+        keys.setP30F0104(keysHash);
         DBA3000.readPwdsData(keys);
         UserMdl.getGridMdl().deCrypt(keys, ls_ItemList);
     }
@@ -79,8 +79,8 @@ public class NoteMdl
     public void saveData(boolean histBack) throws Exception
     {
         keys.setP30F0102(ConsDat.PWDS_STAT_1);
-        keys.setP30F0104(UserMdl.getUserId());
-        keys.setP30F0105(ConsDat.HASH_NOTE);
+        keys.setP30F0105(UserMdl.getUserId());
+        keys.setP30F0106(ConsDat.HASH_NOTE);
         keys.setHistBack(histBack);
         UserMdl.getGridMdl().enCrypt(keys, ls_ItemList);
         DBA3000.savePwdsData(keys);
@@ -125,6 +125,6 @@ public class NoteMdl
      */
     public boolean isUpdate()
     {
-        return Util.isValidateHash(keys.getP30F0103());
+        return Util.isValidateHash(keys.getP30F0104());
     }
 }

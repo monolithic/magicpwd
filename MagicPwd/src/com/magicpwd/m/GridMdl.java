@@ -181,8 +181,8 @@ public class GridMdl extends DefaultTableModel
     public void loadData(String keysHash) throws Exception
     {
         keys.setDefault();
-        keys.setP30F0103(keysHash);
-        keys.setP30F0104(UserMdl.getUserId());
+        keys.setP30F0104(keysHash);
+        keys.setP30F0105(UserMdl.getUserId());
         if (DBA3000.readPwdsData(keys))
         {
             deCrypt(keys, ls_ItemList);
@@ -198,7 +198,7 @@ public class GridMdl extends DefaultTableModel
      */
     public void saveData(boolean histBack, boolean repaint) throws Exception
     {
-        keys.setP30F0104(UserMdl.getUserId());
+        keys.setP30F0105(UserMdl.getUserId());
         keys.setHistBack(histBack);
         enCrypt(keys, ls_ItemList);
         DBA3000.savePwdsData(keys);
@@ -400,10 +400,10 @@ public class GridMdl extends DefaultTableModel
             tplt.setType(ConsDat.INDX_META);
             text = temp.get(indx++);
             tplt.setName(text);
-            keys.setP30F0107(text);
+            keys.setP30F0109(text);
             text = temp.get(indx++);
             tplt.setData(text);
-            keys.setP30F0108(text);
+            keys.setP30F010A(text);
             ls_ItemList.add(tplt);
 
             // Past
@@ -411,10 +411,10 @@ public class GridMdl extends DefaultTableModel
             tplt.setType(ConsDat.INDX_HINT);
             text = temp.get(indx++);
             tplt.setData(text);
-            keys.setP30F010A(new java.sql.Timestamp(Util.stringToDate(text, '-', ':', ' ').getTimeInMillis()));
+            keys.setP30F010C(new java.sql.Timestamp(Util.stringToDate(text, '-', ':', ' ').getTimeInMillis()));
             text = temp.get(indx++);
             tplt.setName(text);
-            keys.setP30F010C(text);
+            keys.setP30F010E(text);
             ls_ItemList.add(tplt);
 
             while (indx < temp.size())
@@ -427,9 +427,9 @@ public class GridMdl extends DefaultTableModel
             }
 
             keys.setP30F0102(ConsDat.PWDS_STAT_1);
-            keys.setP30F0103(Hash.hash(false));
-            keys.setP30F0107(kindHash);
-            keys.setP30F010A(new java.sql.Timestamp(System.currentTimeMillis()));
+            keys.setP30F0104(Hash.hash(false));
+            keys.setP30F0109(kindHash);
+            keys.setP30F010C(new java.sql.Timestamp(System.currentTimeMillis()));
             enCrypt(keys, ls_ItemList);
             DBA3000.savePwdsData(keys);
             size += 1;
@@ -459,7 +459,7 @@ public class GridMdl extends DefaultTableModel
             try
             {
                 clear();
-                loadData(item.getP30F0103());
+                loadData(item.getP30F0104());
             }
             catch (Exception exp)
             {
@@ -529,26 +529,26 @@ public class GridMdl extends DefaultTableModel
 
         // Guid
         Guid guid = new Guid();
-        guid.setData(keys.getP30F0105());
-        guid.setTime(keys.getP30F0106());
-        guid.deCodeSpec(keys.getP30F010C().substring(1) + ";", ";");
+        guid.setData(keys.getP30F0106());
+        guid.setTime(keys.getP30F0107());
+        guid.deCodeSpec(keys.getP30F010E().substring(1) + ";", ";");
         list.add(guid);
 
         // Meta
         Meta meta = new Meta();
-        meta.setName(keys.getP30F0107());
-        meta.setData(keys.getP30F0108());
+        meta.setName(keys.getP30F0109());
+        meta.setData(keys.getP30F010A());
         list.add(meta);
 
         // Logo
         Logo logo = new Logo();
-        logo.setName(keys.getP30F0109());
+        logo.setName(keys.getP30F010B());
         list.add(logo);
 
         // Hint
         Hint note = new Hint();
-        note.setTime(keys.getP30F010A());
-        note.setData(keys.getP30F010B());
+        note.setTime(keys.getP30F010C());
+        note.setData(keys.getP30F010D());
         list.add(note);
 
         // 处理每一个数据
@@ -595,23 +595,23 @@ public class GridMdl extends DefaultTableModel
 
         // Guid
         Guid guid = (Guid) list.get(ConsEnv.PWDS_HEAD_GUID);
-        keys.setP30F0105(guid.getData());
-        keys.setP30F0106(guid.getTime());
-        keys.setP30F010C(guid.enCodeSpec(";"));
+        keys.setP30F0106(guid.getData());
+        keys.setP30F0107(guid.getTime());
+        keys.setP30F010E(guid.enCodeSpec(";"));
 
         // Meta
         Meta meta = (Meta) list.get(ConsEnv.PWDS_HEAD_META);
-        keys.setP30F0107(interim ? meta.getName() + keys.getP30F0106() : meta.getName());
-        keys.setP30F0108(meta.getData());
+        keys.setP30F0109(interim ? meta.getName() + keys.getP30F0107() : meta.getName());
+        keys.setP30F010A(meta.getData());
 
         // Logo
         Logo logo = (Logo) list.get(ConsEnv.PWDS_HEAD_LOGO);
-        keys.setP30F0109(logo.getName());
+        keys.setP30F010B(logo.getName());
 
         // Hint
         Hint note = (Hint) list.get(ConsEnv.PWDS_HEAD_HINT);
-        keys.setP30F010A(note.getTime());
-        keys.setP30F010B(note.getData());
+        keys.setP30F010C(note.getTime());
+        keys.setP30F010D(note.getData());
 
         // 字符串拼接
         IEditItem item;
@@ -632,7 +632,7 @@ public class GridMdl extends DefaultTableModel
 
     public boolean isUpdate()
     {
-        return Util.isValidateHash(keys.getP30F0103());
+        return Util.isValidateHash(keys.getP30F0104());
     }
 
     public void setStatus(int status)
