@@ -531,7 +531,7 @@ public class GridMdl extends DefaultTableModel
         Guid guid = new Guid();
         guid.setData(keys.getP30F0106());
         guid.setTime(keys.getP30F0107());
-        guid.deCodeSpec(keys.getP30F010E().substring(1) + ";", ";");
+        guid.setSpec(IEditItem.SPEC_GUID_TPLT, keys.getP30F0108());
         list.add(guid);
 
         // Meta
@@ -597,7 +597,7 @@ public class GridMdl extends DefaultTableModel
         Guid guid = (Guid) list.get(ConsEnv.PWDS_HEAD_GUID);
         keys.setP30F0106(guid.getData());
         keys.setP30F0107(guid.getTime());
-        keys.setP30F010E(guid.enCodeSpec(";"));
+        keys.setP30F0108(guid.getSpec(IEditItem.SPEC_GUID_TPLT));
 
         // Meta
         Meta meta = (Meta) list.get(ConsEnv.PWDS_HEAD_META);
