@@ -284,10 +284,12 @@ public class DBA3000
             dba.addTable(DBC3000.P30F0100);
             dba.addColumn(DBC3000.P30F0101);
             dba.addColumn(DBC3000.P30F0102);
+            dba.addColumn(DBC3000.P30F0103);
             dba.addColumn(DBC3000.P30F0104);
             dba.addColumn(DBC3000.P30F0105);
             dba.addColumn(DBC3000.P30F0106);
             dba.addColumn(DBC3000.P30F0107);
+            dba.addColumn(DBC3000.P30F0108);
             dba.addColumn(DBC3000.P30F0109);
             dba.addColumn(DBC3000.P30F010A);
             dba.addColumn(DBC3000.P30F010B);
@@ -305,9 +307,11 @@ public class DBA3000
             }
 
             keys.setP30F0102(rest.getInt(DBC3000.P30F0102));
+            keys.setP30F0103(rest.getInt(DBC3000.P30F0103));
             keys.setP30F0104(rest.getString(DBC3000.P30F0104));
             keys.setP30F0106(rest.getString(DBC3000.P30F0106));
             keys.setP30F0107(rest.getTimestamp(DBC3000.P30F0107));
+            keys.setP30F0108(rest.getString(DBC3000.P30F0108));
             keys.setP30F0109(rest.getString(DBC3000.P30F0109));
             keys.setP30F010A(rest.getString(DBC3000.P30F010A));
             keys.setP30F010B(rest.getString(DBC3000.P30F010B));
@@ -418,10 +422,12 @@ public class DBA3000
 
         dba.addParam(DBC3000.P30F0A01, hash);
         dba.addParam(DBC3000.P30F0A02, DBC3000.P30F0102, false);
+        dba.addParam(DBC3000.P30F0A03, DBC3000.P30F0103, false);
         dba.addParam(DBC3000.P30F0A04, DBC3000.P30F0104, false);
         dba.addParam(DBC3000.P30F0A05, DBC3000.P30F0105, false);
         dba.addParam(DBC3000.P30F0A06, DBC3000.P30F0106, false);
         dba.addParam(DBC3000.P30F0A07, DBC3000.P30F0107, false);
+        dba.addParam(DBC3000.P30F0A08, DBC3000.P30F0108, false);
         dba.addParam(DBC3000.P30F0A09, DBC3000.P30F0109, false);
         dba.addParam(DBC3000.P30F0A0A, DBC3000.P30F010A, false);
         dba.addParam(DBC3000.P30F0A0B, DBC3000.P30F010B, false);
@@ -471,9 +477,11 @@ public class DBA3000
         dba.addTable(DBC3000.P30F0100);
         dba.addParam(DBC3000.P30F0101, keys.getP30F0101());
         dba.addParam(DBC3000.P30F0102, keys.getP30F0102());
+        dba.addParam(DBC3000.P30F0103, keys.getP30F0103());
         dba.addParam(DBC3000.P30F0105, keys.getP30F0105());
         dba.addParam(DBC3000.P30F0106, keys.getP30F0106());
         dba.addParam(DBC3000.P30F0107, keys.getP30F0107().toString());
+        dba.addParam(DBC3000.P30F0108, keys.getP30F0108());
         dba.addParam(DBC3000.P30F0109, Util.text2DB(keys.getP30F0109()));
         dba.addParam(DBC3000.P30F010A, Util.text2DB(keys.getP30F010A()));
         dba.addParam(DBC3000.P30F010B, Util.text2DB(keys.getP30F010B()));

@@ -52,6 +52,7 @@ public final class Util
 {
 
     private static BufferedImage bi_LogoIcon;
+    private static BufferedImage bi_NoneIcon;
     private static Map<String, BufferedImage> mp_IconList;
 
     public static final void loadRes()
@@ -181,6 +182,15 @@ public final class Util
                 Logs.exception(exp);
             }
         }
+    }
+
+    public static BufferedImage getNone()
+    {
+        if (bi_NoneIcon == null)
+        {
+            bi_NoneIcon = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+        }
+        return bi_NoneIcon;
     }
 
     public static BufferedImage getLogo()
