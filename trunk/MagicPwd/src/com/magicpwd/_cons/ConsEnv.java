@@ -144,7 +144,7 @@ public interface ConsEnv
     int ICON_SOFT_UCFG = ICON_SOFT_EXIT + 1;// 设定
     int ICON_KIND_CLPS = ICON_SOFT_UCFG + 1;// 折叠
     int ICON_KIND_XPND = ICON_KIND_CLPS + 1;// 展开
-    int ICON_KEYS_APND = ICON_SOFT_UCFG + 1;// 新建
+    int ICON_KEYS_APND = ICON_KIND_XPND + 1;// 新建
     int ICON_KEYS_SAVE = ICON_KEYS_APND + 1;// 保存
     int ICON_KEYS_DELT = ICON_KEYS_SAVE + 1;// 删除
     int ICON_KEYS_SRCH = ICON_KEYS_DELT + 1;// 搜索
