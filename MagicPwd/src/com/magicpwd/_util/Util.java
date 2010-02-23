@@ -52,8 +52,7 @@ public final class Util
 {
 
     private static BufferedImage bi_LogoIcon;
-    private static BufferedImage bi_NoneIcon;
-    private static Map<String, BufferedImage> mp_IconList;
+    private static Map<Integer, BufferedImage> mp_IconList;
 
     public static final void loadRes()
     {
@@ -132,6 +131,19 @@ public final class Util
         return Pattern.compile("[\\w\\.\\-]+@([\\w\\-]+\\.)+[\\w\\-]+", Pattern.CASE_INSENSITIVE).matcher(mail).matches();
     }
 
+    public static BufferedImage getIcon(int name)
+    {
+        if (mp_IconList != null)
+        {
+            return mp_IconList.get(name);
+        }
+        if (bi_LogoIcon == null)
+        {
+            bi_LogoIcon = createLogo();
+        }
+        return bi_LogoIcon;
+    }
+
     public static BufferedImage getImage(String name)
     {
         if (mp_IconList != null)
@@ -152,45 +164,40 @@ public final class Util
     {
         if (mp_IconList == null)
         {
-            mp_IconList = new HashMap<String, BufferedImage>();
+            mp_IconList = new HashMap<Integer, BufferedImage>();
         }
 
-        String[] icon =
+        try
         {
-            ConsEnv.ICON_LOGO_0032, ConsEnv.ICON_TREE_CLPS, ConsEnv.ICON_TREE_XPND, ConsEnv.ICON_DATA_APND,
-            ConsEnv.ICON_DATA_SAVE, ConsEnv.ICON_DATA_DELT, ConsEnv.ICON_DATA_EXIT, ConsEnv.ICON_DATA_SRCH,
-            ConsEnv.ICON_ITEM_PREV, ConsEnv.ICON_ITEM_NEXT, ConsEnv.ICON_ITEM_LEFT, ConsEnv.ICON_ITEM_RGHT,
-            ConsEnv.ICON_HIST_BACK, ConsEnv.ICON_PROP_SIDE, ConsEnv.ICON_TOOL_UCFG, ConsEnv.ICON_TOOL_HELP,
-            ConsEnv.ICON_PROP_COPY, ConsEnv.ICON_PROP_UPDT, ConsEnv.ICON_PROP_DELT, ConsEnv.ICON_PWDS_VIEW,
-            ConsEnv.ICON_PWDS_HIDE, ConsEnv.ICON_PWDS_GENT, ConsEnv.ICON_PWDS_UCFG, ConsEnv.ICON_LINK_OPEN,
-            ConsEnv.ICON_MAIL_OPEN, ConsEnv.ICON_DATE_TIME, ConsEnv.ICON_FILE_OPEN,
-        };
+            bi_LogoIcon = ImageIO.read(Util.class.getResourceAsStream(ConsEnv.ICON_PATH + ConsEnv.ICON_LOGO_0016));
+        }
+        catch (Exception exp)
+        {
+            bi_LogoIcon = createLogo();
+        }
 
-        for (String temp : icon)
+        BufferedImage bufImg = null;
+        try
         {
-            try
-            {
-                mp_IconList.put(temp, ImageIO.read(Util.class.getResourceAsStream(ConsEnv.ICON_PATH + temp)));
-            }
-            catch (Exception exp)
-            {
-                if (bi_LogoIcon == null)
-                {
-                    bi_LogoIcon = createLogo();
-                }
-                mp_IconList.put(temp, bi_LogoIcon);
-                Logs.exception(exp);
-            }
+            bufImg = ImageIO.read(Util.class.getResourceAsStream(ConsEnv.ICON_PATH + "icon.png"));
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+
+        int x = 0;
+        System.out.println(ConsEnv.ICON_SIZE);
+        for (int i = 0; i < ConsEnv.ICON_SIZE; i += 1)
+        {
+            mp_IconList.put(i, bufImg.getSubimage(x, 0, 16, 16));
+            x += 16;
         }
     }
 
     public static BufferedImage getNone()
     {
-        if (bi_NoneIcon == null)
-        {
-            bi_NoneIcon = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
-        }
-        return bi_NoneIcon;
+        return mp_IconList.get(0);
     }
 
     public static BufferedImage getLogo()

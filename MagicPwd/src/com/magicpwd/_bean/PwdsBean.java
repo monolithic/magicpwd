@@ -68,7 +68,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 
         bt_PwdsView = new BtnLabel();
         bt_PwdsView.setMnemonic('M');
-        hidePwds = new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_PWDS_HIDE));
+        hidePwds = new javax.swing.ImageIcon(Util.getIcon(ConsEnv.ICON_PWDS_HIDE));
         bt_PwdsView.setIcon(hidePwds);
         bt_PwdsView.addActionListener(new java.awt.event.ActionListener()
         {
@@ -83,7 +83,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 
         bt_PwdsGent = new BtnLabel();
         bt_PwdsGent.setMnemonic('G');
-        bt_PwdsGent.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_PWDS_GENT)));
+        bt_PwdsGent.setIcon(new javax.swing.ImageIcon(Util.getIcon(ConsEnv.ICON_PWDS_GENT)));
         bt_PwdsGent.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -97,7 +97,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 
         bt_PwdsUcfg = new BtnLabel();
         bt_PwdsUcfg.setMnemonic('O');
-        bt_PwdsUcfg.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_PWDS_UCFG)));
+        bt_PwdsUcfg.setIcon(new javax.swing.ImageIcon(Util.getIcon(ConsEnv.ICON_PWDS_UCFG)));
         bt_PwdsUcfg.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -157,7 +157,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     {
         dataEdit.initLang();
 
-        viewPwds = new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_PWDS_VIEW));
+        viewPwds = new javax.swing.ImageIcon(Util.getIcon(ConsEnv.ICON_PWDS_VIEW));
 
         Lang.setWText(lb_PropName, LangRes.P30F1309, "名称");
         Lang.setWText(lb_PropData, LangRes.P30F130A, "口令");

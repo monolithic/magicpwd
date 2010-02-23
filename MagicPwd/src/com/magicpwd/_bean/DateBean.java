@@ -61,7 +61,7 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
 
         bt_DateView = new BtnLabel();
         bt_DateView.setMnemonic('O');
-        bt_DateView.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_DATE_TIME)));
+        bt_DateView.setIcon(new javax.swing.ImageIcon(Util.getIcon(ConsEnv.ICON_DATE_TIME)));
         bt_DateView.addActionListener(new java.awt.event.ActionListener()
         {
 

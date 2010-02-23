@@ -43,6 +43,18 @@ public interface ConsDat
      */
     int PWDS_STAT_6 = 6;
     /**
+     *
+     */
+    int PWDS_STAT_7 = 6;
+    /**
+     *
+     */
+    int PWDS_STAT_8 = 6;
+    /**
+     *
+     */
+    int PWDS_STAT_9 = 6;
+    /**
      * 目录信息：密码节点
      */
     String HASH_ROOT = "sctfxrczgcywxezs";

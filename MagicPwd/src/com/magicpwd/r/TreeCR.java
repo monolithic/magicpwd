@@ -31,8 +31,8 @@ public class TreeCR extends JLabel implements javax.swing.tree.TreeCellRenderer
     public TreeCR(int horizontalAlignment)
     {
         setHorizontalAlignment(horizontalAlignment);
-        expandedIcon = new ImageIcon(Util.getImage(ConsEnv.ICON_TREE_XPND));
-        collapsedIcon = new ImageIcon(Util.getImage(ConsEnv.ICON_TREE_CLPS));
+        expandedIcon = new ImageIcon(Util.getIcon(ConsEnv.ICON_KIND_XPND));
+        collapsedIcon = new ImageIcon(Util.getIcon(ConsEnv.ICON_KIND_CLPS));
         setOpaque(true);
     }
 

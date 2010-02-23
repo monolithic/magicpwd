@@ -36,6 +36,7 @@ public class KindProp extends JPanel implements IPropBean
     {
     }
 
+    @Override
     public void initView()
     {
         initInfoView();
@@ -43,6 +44,7 @@ public class KindProp extends JPanel implements IPropBean
         initBaseView();
     }
 
+    @Override
     public void initLang()
     {
         initInfoLang();
@@ -50,11 +52,13 @@ public class KindProp extends JPanel implements IPropBean
         initBaseLang();
     }
 
+    @Override
     public void initData()
     {
         tr_KindList.setModel(UserMdl.getTreeMdl());
     }
 
+    @Override
     public JPanel getPanel()
     {
         return this;
@@ -89,6 +93,7 @@ public class KindProp extends JPanel implements IPropBean
 
         bt_Delete.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_DeleteActionPerformed(evt);
@@ -97,6 +102,7 @@ public class KindProp extends JPanel implements IPropBean
 
         bt_Update.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_UpdateActionPerformed(evt);
@@ -105,6 +111,7 @@ public class KindProp extends JPanel implements IPropBean
 
         bt_Create.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_CreateActionPerformed(evt);
@@ -167,9 +174,10 @@ public class KindProp extends JPanel implements IPropBean
         pl_SortItem.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
         bt_SortLeft = new IcoLabel();
-        bt_SortLeft.setIcon(new ImageIcon(Util.getImage(ConsEnv.ICON_ITEM_LEFT)));
+        bt_SortLeft.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_ITEM_LEFT)));
         bt_SortLeft.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_SortLeftActionPerformed(evt);
@@ -178,9 +186,10 @@ public class KindProp extends JPanel implements IPropBean
         pl_SortItem.add(bt_SortLeft);
 
         bt_SortUp = new IcoLabel();
-        bt_SortUp.setIcon(new ImageIcon(Util.getImage(ConsEnv.ICON_ITEM_PREV)));
+        bt_SortUp.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_ITEM_PREV)));
         bt_SortUp.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_SortUpActionPerformed(evt);
@@ -189,9 +198,10 @@ public class KindProp extends JPanel implements IPropBean
         pl_SortItem.add(bt_SortUp);
 
         bt_SortDown = new IcoLabel();
-        bt_SortDown.setIcon(new ImageIcon(Util.getImage(ConsEnv.ICON_ITEM_NEXT)));
+        bt_SortDown.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_ITEM_NEXT)));
         bt_SortDown.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_SortDownActionPerformed(evt);
@@ -200,9 +210,10 @@ public class KindProp extends JPanel implements IPropBean
         pl_SortItem.add(bt_SortDown);
 
         bt_SortRight = new IcoLabel();
-        bt_SortRight.setIcon(new ImageIcon(Util.getImage(ConsEnv.ICON_ITEM_RGHT)));
+        bt_SortRight.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_ITEM_RGHT)));
         bt_SortRight.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_SortRightActionPerformed(evt);
