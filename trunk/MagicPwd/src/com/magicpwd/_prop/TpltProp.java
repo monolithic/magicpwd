@@ -38,6 +38,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
     {
     }
 
+    @Override
     public void initView()
     {
         initInfoView();
@@ -45,6 +46,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         initBaseView();
     }
 
+    @Override
     public void initLang()
     {
         initInfoLang();
@@ -52,6 +54,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         initBaseLang();
     }
 
+    @Override
     public void initData()
     {
         rootNode = new javax.swing.tree.DefaultMutableTreeNode("/");
@@ -76,6 +79,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         tr_TpltList.setModel(tm_TpltList);
     }
 
+    @Override
     public javax.swing.JPanel getPanel()
     {
         return this;
@@ -106,6 +110,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
 
         bt_Delete.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_DeleteActionPerformed(evt);
@@ -114,6 +119,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
 
         bt_Update.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_UpdateActionPerformed(evt);
@@ -122,6 +128,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
 
         bt_Create.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_CreateActionPerformed(evt);
@@ -184,9 +191,10 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         pl_SortItem.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
         bt_SortUp = new IcoLabel();
-        bt_SortUp.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_ITEM_PREV)));
+        bt_SortUp.setIcon(new javax.swing.ImageIcon(Util.getIcon(ConsEnv.ICON_ITEM_PREV)));
         bt_SortUp.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_SortUpActionPerformed(evt);
@@ -195,9 +203,10 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         pl_SortItem.add(bt_SortUp);
 
         bt_SortDown = new IcoLabel();
-        bt_SortDown.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_ITEM_NEXT)));
+        bt_SortDown.setIcon(new javax.swing.ImageIcon(Util.getIcon(ConsEnv.ICON_ITEM_NEXT)));
         bt_SortDown.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_SortDownActionPerformed(evt);
@@ -215,6 +224,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         tr_TpltList.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         tr_TpltList.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener()
         {
+            @Override
             public void valueChanged(TreeSelectionEvent arg0)
             {
                 tr_TpltListValueChanged(arg0);

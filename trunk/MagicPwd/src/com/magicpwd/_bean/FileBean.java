@@ -66,7 +66,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
 
         bt_FileView = new BtnLabel();
         bt_FileView.setMnemonic('O');
-        bt_FileView.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_FILE_OPEN)));
+        bt_FileView.setIcon(new javax.swing.ImageIcon(Util.getIcon(ConsEnv.ICON_FILE_OPEN)));
         bt_FileView.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -79,8 +79,8 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.add(bt_FileView);
 
         bt_FileApnd = new BtnLabel();
-        bt_FileApnd.setMnemonic('A');
-        bt_FileApnd.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_FILE_OPEN)));
+        bt_FileApnd.setMnemonic('P');
+        bt_FileApnd.setIcon(new javax.swing.ImageIcon(Util.getIcon(ConsEnv.ICON_FILE_PICK)));
         bt_FileApnd.addActionListener(new java.awt.event.ActionListener()
         {
 

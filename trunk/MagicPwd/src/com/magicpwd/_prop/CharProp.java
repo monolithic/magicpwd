@@ -45,6 +45,7 @@ public class CharProp extends JPanel implements IPropBean
     {
     }
 
+    @Override
     public void initView()
     {
         initInfoView();
@@ -52,6 +53,7 @@ public class CharProp extends JPanel implements IPropBean
         initBaseView();
     }
 
+    @Override
     public void initLang()
     {
         initInfoLang();
@@ -59,6 +61,7 @@ public class CharProp extends JPanel implements IPropBean
         initBaseLang();
     }
 
+    @Override
     public void initData()
     {
         DefaultComboBoxModel cm_CharTplt = new DefaultComboBoxModel();
@@ -81,6 +84,7 @@ public class CharProp extends JPanel implements IPropBean
         ls_CharList.setModel(lm_CharList);
     }
 
+    @Override
     public JPanel getPanel()
     {
         return this;
@@ -121,6 +125,7 @@ public class CharProp extends JPanel implements IPropBean
 
         bt_Delete.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_DeleteActionPerformed(evt);
@@ -129,6 +134,7 @@ public class CharProp extends JPanel implements IPropBean
 
         bt_Update.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_UpdateActionPerformed(evt);
@@ -137,6 +143,7 @@ public class CharProp extends JPanel implements IPropBean
 
         bt_Create.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_CreateActionPerformed(evt);
@@ -203,9 +210,10 @@ public class CharProp extends JPanel implements IPropBean
         pl_SortItem.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
         bt_SortUp = new IcoLabel();
-        bt_SortUp.setIcon(new ImageIcon(Util.getImage(ConsEnv.ICON_ITEM_PREV)));
+        bt_SortUp.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_ITEM_PREV)));
         bt_SortUp.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_SortUpActionPerformed(evt);
@@ -214,9 +222,10 @@ public class CharProp extends JPanel implements IPropBean
         pl_SortItem.add(bt_SortUp);
 
         bt_SortDown = new IcoLabel();
-        bt_SortDown.setIcon(new ImageIcon(Util.getImage(ConsEnv.ICON_ITEM_NEXT)));
+        bt_SortDown.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_ITEM_NEXT)));
         bt_SortDown.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_SortDownActionPerformed(evt);
@@ -234,6 +243,7 @@ public class CharProp extends JPanel implements IPropBean
         sp_ItemList.setViewportView(ls_CharList);
         ls_CharList.addListSelectionListener(new javax.swing.event.ListSelectionListener()
         {
+            @Override
             public void valueChanged(javax.swing.event.ListSelectionEvent evt)
             {
                 ls_CharListValueChanged(evt);

@@ -62,7 +62,7 @@ public class MailBean extends javax.swing.JPanel implements IEditBean
 
         bt_MailView = new BtnLabel();
         bt_MailView.setMnemonic('O');
-        bt_MailView.setIcon(new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_MAIL_OPEN)));
+        bt_MailView.setIcon(new javax.swing.ImageIcon(Util.getIcon(ConsEnv.ICON_MAIL_OPEN)));
         bt_MailView.addActionListener(new java.awt.event.ActionListener()
         {
 
