@@ -187,7 +187,6 @@ public final class Util
         }
 
         int x = 0;
-        System.out.println(ConsEnv.ICON_SIZE);
         for (int i = 0; i < ConsEnv.ICON_SIZE; i += 1)
         {
             mp_IconList.put(i, bufImg.getSubimage(x, 0, 16, 16));
