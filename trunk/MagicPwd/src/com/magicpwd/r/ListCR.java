@@ -4,6 +4,7 @@
 package com.magicpwd.r;
 
 import com.magicpwd._comn.*;
+import com.magicpwd._cons.ConsEnv;
 import java.awt.Component;
 
 import javax.swing.JList;
@@ -28,6 +29,8 @@ public class ListCR extends javax.swing.JPanel implements javax.swing.ListCellRe
 
         lb_Image.setIcon(new ImageIcon(Util.getNone()));
 
+        lb_Title.setOpaque(true);
+
         lb_State.setIcon(new ImageIcon(Util.getNone()));
 
         lb_Major.setIcon(new ImageIcon(Util.getNone()));
@@ -36,6 +39,7 @@ public class ListCR extends javax.swing.JPanel implements javax.swing.ListCellRe
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
+        this.setOpaque(false);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addComponent(lb_Image);
         hsg.addComponent(lb_Title, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE);
@@ -65,12 +69,12 @@ public class ListCR extends javax.swing.JPanel implements javax.swing.ListCellRe
         // 前景及背景颜色设置
         if (isSelected)
         {
-            setBackground(list.getSelectionBackground());
+            lb_Title.setBackground(list.getSelectionBackground());
             lb_Title.setForeground(list.getSelectionForeground());
         }
         else
         {
-            setBackground(list.getBackground());
+            lb_Title.setBackground(list.getBackground());
             lb_Title.setForeground(list.getForeground());
         }
 
@@ -84,6 +88,7 @@ public class ListCR extends javax.swing.JPanel implements javax.swing.ListCellRe
         if (value instanceof Keys)
         {
             Keys keys = (Keys) value;
+            lb_State.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_KEYS_STA0 + keys.getP30F0102())));
             lb_Title.setText(keys.getP30F0109());
             setToolTipText(Util.isValidate(keys.getP30F010A()) ? keys.getP30F010A() : keys.getP30F0109());
             if (Util.isValidateHash(keys.getP30F010B()))
