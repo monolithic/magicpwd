@@ -7,7 +7,6 @@ package com.magicpwd.v;
 import com.magicpwd._comn.I1S2;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
-import com.magicpwd._util.Util;
 import java.util.List;
 
 /**
