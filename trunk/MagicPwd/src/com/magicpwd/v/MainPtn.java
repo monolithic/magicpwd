@@ -678,6 +678,36 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     }
 
     @Override
+    public void keysModeActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        javax.swing.JMenuItem item = (javax.swing.JMenuItem) evt.getSource();
+        Object obj = item.getClientProperty("keysmode");
+        Integer val = obj instanceof Integer ? (Integer) obj : 0;
+
+        obj = ls_GuidList.getSelectedValue();
+        if (obj instanceof Keys)
+        {
+            ((Keys) obj).setP30F0102(val);
+        }
+        UserMdl.getGridMdl().setKeysMode(val);
+    }
+
+    @Override
+    public void keysNoteActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        javax.swing.JMenuItem item = (javax.swing.JMenuItem) evt.getSource();
+        Object obj = item.getClientProperty("keysnote");
+        Integer val = obj instanceof Integer ? (Integer) obj : 0;
+
+        obj = ls_GuidList.getSelectedValue();
+        if (obj instanceof Keys)
+        {
+            ((Keys) obj).setP30F0103(val);
+        }
+        UserMdl.getGridMdl().setKeysNote(val);
+    }
+
+    @Override
     public void kindApndActionPerformed(java.awt.event.ActionEvent evt)
     {
         javax.swing.tree.TreePath path = tr_GuidTree.getSelectionPath();
@@ -1123,7 +1153,8 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
 
         treeMenu = new MenuPop(MenuPop.MENU_TREE);
         treeMenu.initView();
-        treeMenu.setActionEvent(this);
+        treeMenu.setToolEvent(this);
+        treeMenu.setMenuEvent(this);
 
         tr_GuidTree = new javax.swing.JTree();
         tr_GuidTree.setComponentPopupMenu(treeMenu);
@@ -1147,7 +1178,8 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
 
         listMenu = new MenuPop(MenuPop.MENU_LIST);
         listMenu.initView();
-        listMenu.setActionEvent(this);
+        listMenu.setToolEvent(this);
+        listMenu.setMenuEvent(this);
 
         ls_GuidList = new javax.swing.JList();
         ls_GuidList.setComponentPopupMenu(listMenu);
@@ -1175,16 +1207,10 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         hsg.addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE);
         hsg.addGap(3);
         layout.setHorizontalGroup(hsg);
-//        javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-//        hpg.addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
-//        layout.setHorizontalGroup(hpg);
 
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
         vsg.addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE);
         layout.setVerticalGroup(vsg);
-//        javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-//        vpg.addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 336, Short.MAX_VALUE);
-//        layout.setVerticalGroup(vpg);
     }
 
     private void initUserView()
@@ -1196,7 +1222,8 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
 
         gridMenu = new MenuPop(MenuPop.MENU_GRID);
         gridMenu.initView();
-        gridMenu.setActionEvent(this);
+        gridMenu.setToolEvent(this);
+        gridMenu.setMenuEvent(this);
 
         tb_KeysView = new javax.swing.JTable();
         tb_KeysView.setModel(UserMdl.getGridMdl());

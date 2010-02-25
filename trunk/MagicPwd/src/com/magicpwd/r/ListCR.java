@@ -27,15 +27,7 @@ public class ListCR extends javax.swing.JPanel implements javax.swing.ListCellRe
         lb_State = new javax.swing.JLabel();
         lb_Other = new javax.swing.JLabel();
 
-        lb_Image.setIcon(new ImageIcon(Util.getNone()));
-
         lb_Title.setOpaque(true);
-
-        lb_State.setIcon(new ImageIcon(Util.getNone()));
-
-        lb_Major.setIcon(new ImageIcon(Util.getNone()));
-
-        lb_Other.setIcon(new ImageIcon(Util.getNone()));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -81,6 +73,11 @@ public class ListCR extends javax.swing.JPanel implements javax.swing.ListCellRe
         // 文字属性设置
         lb_Title.setFont(list.getFont());
 
+        lb_Image.setIcon(Util.getNone());
+        lb_State.setIcon(Util.getNone());
+        lb_Major.setIcon(Util.getNone());
+        lb_Other.setIcon(Util.getNone());
+
         // 可编辑状态设置
         setEnabled(list.isEnabled());
 
@@ -88,7 +85,7 @@ public class ListCR extends javax.swing.JPanel implements javax.swing.ListCellRe
         if (value instanceof Keys)
         {
             Keys keys = (Keys) value;
-            lb_State.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_KEYS_STA0 + keys.getP30F0102())));
+            lb_State.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_MOD0 + keys.getP30F0102()));
             lb_Title.setText(keys.getP30F0109());
             setToolTipText(Util.isValidate(keys.getP30F010A()) ? keys.getP30F010A() : keys.getP30F0109());
             if (Util.isValidateHash(keys.getP30F010B()))

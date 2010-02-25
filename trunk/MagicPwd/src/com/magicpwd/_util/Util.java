@@ -43,6 +43,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd.c.MenuEvt;
 import com.magicpwd.m.UserMdl;
 import java.util.regex.Pattern;
+import javax.swing.ImageIcon;
 
 /**
  * @author Amon
@@ -51,8 +52,10 @@ import java.util.regex.Pattern;
 public final class Util
 {
 
+    private static ImageIcon bi_NoneIcon;
     private static BufferedImage bi_LogoIcon;
-    private static Map<Integer, BufferedImage> mp_IconList;
+    private static Map<String, BufferedImage> mp_ImgList;
+    private static Map<Integer, ImageIcon> mp_IcoList;
 
     public static final void loadRes()
     {
@@ -131,24 +134,24 @@ public final class Util
         return Pattern.compile("[\\w\\.\\-]+@([\\w\\-]+\\.)+[\\w\\-]+", Pattern.CASE_INSENSITIVE).matcher(mail).matches();
     }
 
-    public static BufferedImage getIcon(int name)
+    public static ImageIcon getIcon(int name)
     {
-        if (mp_IconList != null)
+        if (mp_IcoList != null)
         {
-            return mp_IconList.get(name);
+            return mp_IcoList.get(name);
         }
-        if (bi_LogoIcon == null)
+        if (bi_NoneIcon == null)
         {
-            bi_LogoIcon = createLogo();
+//            bi_NoneIcon = createNone();
         }
-        return bi_LogoIcon;
+        return bi_NoneIcon;
     }
 
     public static BufferedImage getImage(String name)
     {
-        if (mp_IconList != null)
+        if (mp_ImgList != null)
         {
-            return mp_IconList.get(name);
+            return mp_ImgList.get(name);
         }
         if (bi_LogoIcon == null)
         {
@@ -162,9 +165,10 @@ public final class Util
      */
     public static void preLoad()
     {
-        if (mp_IconList == null)
+        if (mp_ImgList == null)
         {
-            mp_IconList = new HashMap<Integer, BufferedImage>();
+            mp_ImgList = new HashMap<String, BufferedImage>();
+            mp_IcoList = new HashMap<Integer, ImageIcon>();
         }
 
         try
@@ -189,14 +193,14 @@ public final class Util
         int x = 0;
         for (int i = 0; i < ConsEnv.ICON_SIZE; i += 1)
         {
-            mp_IconList.put(i, bufImg.getSubimage(x, 0, 16, 16));
+            mp_IcoList.put(i, new ImageIcon(bufImg.getSubimage(x, 0, 16, 16)));
             x += 16;
         }
     }
 
-    public static BufferedImage getNone()
+    public static ImageIcon getNone()
     {
-        return mp_IconList.get(0);
+        return mp_IcoList.get(0);
     }
 
     public static BufferedImage getLogo()

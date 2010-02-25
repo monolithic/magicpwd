@@ -8,7 +8,6 @@ import java.awt.FlowLayout;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import com.magicpwd._comp.IcoLabel;
@@ -210,7 +209,7 @@ public class CharProp extends JPanel implements IPropBean
         pl_SortItem.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
         bt_SortUp = new IcoLabel();
-        bt_SortUp.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_ITEM_PREV)));
+        bt_SortUp.setIcon(Util.getIcon(ConsEnv.ICON_ITEM_PREV));
         bt_SortUp.addActionListener(new java.awt.event.ActionListener()
         {
             @Override
@@ -222,7 +221,7 @@ public class CharProp extends JPanel implements IPropBean
         pl_SortItem.add(bt_SortUp);
 
         bt_SortDown = new IcoLabel();
-        bt_SortDown.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_ITEM_NEXT)));
+        bt_SortDown.setIcon(Util.getIcon(ConsEnv.ICON_ITEM_NEXT));
         bt_SortDown.addActionListener(new java.awt.event.ActionListener()
         {
             @Override

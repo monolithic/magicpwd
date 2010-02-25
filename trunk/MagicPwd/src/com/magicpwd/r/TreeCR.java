@@ -7,7 +7,6 @@ import com.magicpwd._comn.*;
 import java.awt.Color;
 import java.awt.Component;
 
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JTree;
 
@@ -20,8 +19,6 @@ import com.magicpwd._util.Util;
  */
 public class TreeCR extends JLabel implements javax.swing.tree.TreeCellRenderer
 {
-    private ImageIcon expandedIcon;
-    private ImageIcon collapsedIcon;
 
     public TreeCR()
     {
@@ -31,8 +28,6 @@ public class TreeCR extends JLabel implements javax.swing.tree.TreeCellRenderer
     public TreeCR(int horizontalAlignment)
     {
         setHorizontalAlignment(horizontalAlignment);
-        expandedIcon = new ImageIcon(Util.getIcon(ConsEnv.ICON_KIND_XPND));
-        collapsedIcon = new ImageIcon(Util.getIcon(ConsEnv.ICON_KIND_CLPS));
         setOpaque(true);
     }
 
@@ -59,7 +54,7 @@ public class TreeCR extends JLabel implements javax.swing.tree.TreeCellRenderer
         }
 
         setFocusable(hasFocus);
-        setIcon(expanded ? expandedIcon : collapsedIcon);
+        setIcon(expanded ? Util.getIcon(ConsEnv.ICON_KIND_XPND) : Util.getIcon(ConsEnv.ICON_KIND_CLPS));
 
         if (value instanceof KindTN)
         {

@@ -138,6 +138,16 @@ public class MiniPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
     }
 
     @Override
+    public void keysModeActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    }
+
+    @Override
+    public void keysNoteActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    }
+
+    @Override
     public void kindApndActionPerformed(ActionEvent evt)
     {
         throw new UnsupportedOperationException("Not supported yet.");

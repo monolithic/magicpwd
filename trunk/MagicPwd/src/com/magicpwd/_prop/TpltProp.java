@@ -191,7 +191,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         pl_SortItem.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
         bt_SortUp = new IcoLabel();
-        bt_SortUp.setIcon(new javax.swing.ImageIcon(Util.getIcon(ConsEnv.ICON_ITEM_PREV)));
+        bt_SortUp.setIcon(Util.getIcon(ConsEnv.ICON_ITEM_PREV));
         bt_SortUp.addActionListener(new java.awt.event.ActionListener()
         {
             @Override
@@ -203,7 +203,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         pl_SortItem.add(bt_SortUp);
 
         bt_SortDown = new IcoLabel();
-        bt_SortDown.setIcon(new javax.swing.ImageIcon(Util.getIcon(ConsEnv.ICON_ITEM_NEXT)));
+        bt_SortDown.setIcon(Util.getIcon(ConsEnv.ICON_ITEM_NEXT));
         bt_SortDown.addActionListener(new java.awt.event.ActionListener()
         {
             @Override

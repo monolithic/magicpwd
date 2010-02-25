@@ -2,7 +2,6 @@ package com.magicpwd.v;
 
 import java.util.EventListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import com.magicpwd.MagicPwd;
@@ -59,7 +58,7 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
             }
         });
 
-        bt_CrteNote.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_KEYS_APND)));
+        bt_CrteNote.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_APND));
         bt_CrteNote.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -70,7 +69,7 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
             }
         });
 
-        bt_OpenNote.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_FILE_PICK)));
+        bt_OpenNote.setIcon(Util.getIcon(ConsEnv.ICON_FILE_PICK));
         bt_OpenNote.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -81,7 +80,7 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
             }
         });
 
-        bt_SaveNote.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_KEYS_SAVE)));
+        bt_SaveNote.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_SAVE));
         bt_SaveNote.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -93,7 +92,7 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
         });
 
         bt_SrchNote.setMnemonic('F');
-        bt_SrchNote.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_KEYS_SRCH)));
+        bt_SrchNote.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_SRCH));
         bt_SrchNote.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -107,7 +106,7 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
         sp1.setViewportView(ta_NoteData);
 
         bt_ExitNote.setMnemonic('X');
-        bt_ExitNote.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_SOFT_EXIT)));
+        bt_ExitNote.setIcon(Util.getIcon(ConsEnv.ICON_SOFT_EXIT));
         bt_ExitNote.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -413,6 +412,16 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
 
     @Override
     public void helpUpdtActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    }
+
+    @Override
+    public void keysModeActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    }
+
+    @Override
+    public void keysNoteActionPerformed(java.awt.event.ActionEvent evt)
     {
     }
 

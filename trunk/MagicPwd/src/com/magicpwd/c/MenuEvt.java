@@ -9,6 +9,7 @@ package com.magicpwd.c;
  */
 public interface MenuEvt
 {
+
     void fileCopyActionPerformed(java.awt.event.ActionEvent evt);
 
     void fileApndActionPerformed(java.awt.event.ActionEvent evt);
@@ -42,6 +43,10 @@ public interface MenuEvt
     void editPrevActionPerformed(java.awt.event.ActionEvent evt);
 
     void editNextActionPerformed(java.awt.event.ActionEvent evt);
+
+    void keysNoteActionPerformed(java.awt.event.ActionEvent evt);
+
+    void keysModeActionPerformed(java.awt.event.ActionEvent evt);
 
     void kindApndActionPerformed(java.awt.event.ActionEvent evt);
 

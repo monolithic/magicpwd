@@ -5,7 +5,6 @@ package com.magicpwd._prop;
 
 import java.awt.FlowLayout;
 
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -174,7 +173,7 @@ public class KindProp extends JPanel implements IPropBean
         pl_SortItem.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
         bt_SortLeft = new IcoLabel();
-        bt_SortLeft.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_ITEM_LEFT)));
+        bt_SortLeft.setIcon(Util.getIcon(ConsEnv.ICON_ITEM_LEFT));
         bt_SortLeft.addActionListener(new java.awt.event.ActionListener()
         {
             @Override
@@ -186,7 +185,7 @@ public class KindProp extends JPanel implements IPropBean
         pl_SortItem.add(bt_SortLeft);
 
         bt_SortUp = new IcoLabel();
-        bt_SortUp.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_ITEM_PREV)));
+        bt_SortUp.setIcon(Util.getIcon(ConsEnv.ICON_ITEM_PREV));
         bt_SortUp.addActionListener(new java.awt.event.ActionListener()
         {
             @Override
@@ -198,7 +197,7 @@ public class KindProp extends JPanel implements IPropBean
         pl_SortItem.add(bt_SortUp);
 
         bt_SortDown = new IcoLabel();
-        bt_SortDown.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_ITEM_NEXT)));
+        bt_SortDown.setIcon(Util.getIcon(ConsEnv.ICON_ITEM_NEXT));
         bt_SortDown.addActionListener(new java.awt.event.ActionListener()
         {
             @Override
@@ -210,7 +209,7 @@ public class KindProp extends JPanel implements IPropBean
         pl_SortItem.add(bt_SortDown);
 
         bt_SortRight = new IcoLabel();
-        bt_SortRight.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_ITEM_RGHT)));
+        bt_SortRight.setIcon(Util.getIcon(ConsEnv.ICON_ITEM_RGHT));
         bt_SortRight.addActionListener(new java.awt.event.ActionListener()
         {
             @Override

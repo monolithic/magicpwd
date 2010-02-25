@@ -29,8 +29,6 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     private IEditItem dataItem;
     private MenuPwd menuPwd;
     private IGridView gridView;
-    private javax.swing.Icon viewPwds;
-    private javax.swing.Icon hidePwds;
     private EditBox dataEdit;
 
     public PwdsBean(IGridView view)
@@ -68,8 +66,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 
         bt_PwdsView = new BtnLabel();
         bt_PwdsView.setMnemonic('M');
-        hidePwds = new javax.swing.ImageIcon(Util.getIcon(ConsEnv.ICON_PWDS_HIDE));
-        bt_PwdsView.setIcon(hidePwds);
+        bt_PwdsView.setIcon(Util.getIcon(ConsEnv.ICON_PWDS_HIDE));
         bt_PwdsView.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -83,7 +80,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 
         bt_PwdsGent = new BtnLabel();
         bt_PwdsGent.setMnemonic('G');
-        bt_PwdsGent.setIcon(new javax.swing.ImageIcon(Util.getIcon(ConsEnv.ICON_PWDS_GENT)));
+        bt_PwdsGent.setIcon(Util.getIcon(ConsEnv.ICON_PWDS_GENT));
         bt_PwdsGent.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -97,7 +94,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 
         bt_PwdsUcfg = new BtnLabel();
         bt_PwdsUcfg.setMnemonic('O');
-        bt_PwdsUcfg.setIcon(new javax.swing.ImageIcon(Util.getIcon(ConsEnv.ICON_PWDS_UCFG)));
+        bt_PwdsUcfg.setIcon(Util.getIcon(ConsEnv.ICON_PWDS_UCFG));
         bt_PwdsUcfg.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -156,8 +153,6 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     public void initLang()
     {
         dataEdit.initLang();
-
-        viewPwds = new javax.swing.ImageIcon(Util.getIcon(ConsEnv.ICON_PWDS_VIEW));
 
         Lang.setWText(lb_PropName, LangRes.P30F1309, "名称");
         Lang.setWText(lb_PropData, LangRes.P30F130A, "口令");
@@ -261,13 +256,13 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     {
         if (pf_PropData.getEchoChar() == 0)
         {
-            bt_PwdsView.setIcon(hidePwds);
+            bt_PwdsView.setIcon(Util.getIcon(ConsEnv.ICON_PWDS_HIDE));
             pf_PropData.setEchoChar('*');
             Lang.setWTips(bt_PwdsView, LangRes.P30F1504, "显示口令");
         }
         else
         {
-            bt_PwdsView.setIcon(viewPwds);
+            bt_PwdsView.setIcon(Util.getIcon(ConsEnv.ICON_PWDS_VIEW));
             pf_PropData.setEchoChar('\0');
             Lang.setWTips(bt_PwdsView, LangRes.P30F1505, "隐藏口令");
         }

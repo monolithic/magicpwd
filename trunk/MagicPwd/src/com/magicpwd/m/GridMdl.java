@@ -426,7 +426,7 @@ public class GridMdl extends DefaultTableModel
                 ls_ItemList.add(tplt);
             }
 
-            keys.setP30F0102(ConsDat.PWDS_STAT_1);
+            keys.setP30F0102(ConsDat.PWDS_MODE_1);
             keys.setP30F0104(Hash.hash(false));
             keys.setP30F0109(kindHash);
             keys.setP30F010C(new java.sql.Timestamp(System.currentTimeMillis()));
@@ -635,9 +635,15 @@ public class GridMdl extends DefaultTableModel
         return Util.isValidateHash(keys.getP30F0104());
     }
 
-    public void setStatus(int status)
+    public void setKeysMode(int mode)
     {
-        keys.setP30F0102(status);
+        keys.setP30F0102(mode);
+        modified = true;
+    }
+
+    public void setKeysNote(int note)
+    {
+        keys.setP30F0103(note);
         modified = true;
     }
 }

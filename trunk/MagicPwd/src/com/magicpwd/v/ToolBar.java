@@ -3,7 +3,6 @@
  */
 package com.magicpwd.v;
 
-import javax.swing.ImageIcon;
 import javax.swing.JToolBar;
 
 import com.magicpwd._cons.ConsEnv;
@@ -30,7 +29,7 @@ public class ToolBar extends JToolBar
     public void initView()
     {
         bt_ApndData = new javax.swing.JButton();
-        bt_ApndData.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_KEYS_APND)));
+        bt_ApndData.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_APND));
         bt_ApndData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -43,7 +42,7 @@ public class ToolBar extends JToolBar
         add(bt_ApndData);
 
         bt_SaveData = new javax.swing.JButton();
-        bt_SaveData.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_KEYS_SAVE)));
+        bt_SaveData.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_SAVE));
         bt_SaveData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -58,7 +57,7 @@ public class ToolBar extends JToolBar
         addSeparator();
 
         bt_MovePrev = new javax.swing.JButton();
-        bt_MovePrev.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_ITEM_PREV)));
+        bt_MovePrev.setIcon(Util.getIcon(ConsEnv.ICON_ITEM_PREV));
         bt_MovePrev.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -71,7 +70,7 @@ public class ToolBar extends JToolBar
         add(bt_MovePrev);
 
         bt_MoveNext = new javax.swing.JButton();
-        bt_MoveNext.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_ITEM_NEXT)));
+        bt_MoveNext.setIcon(Util.getIcon(ConsEnv.ICON_ITEM_NEXT));
         bt_MoveNext.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -86,7 +85,7 @@ public class ToolBar extends JToolBar
         addSeparator();
 
         bt_HistBack = new javax.swing.JToggleButton();
-        bt_HistBack.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_TOOL_HIST)));
+        bt_HistBack.setIcon(Util.getIcon(ConsEnv.ICON_TOOL_HIST));
         bt_HistBack.setSelected(true);
         bt_HistBack.addActionListener(new java.awt.event.ActionListener()
         {
@@ -100,7 +99,7 @@ public class ToolBar extends JToolBar
         add(bt_HistBack);
 
         bt_PropSide = new javax.swing.JToggleButton();
-        bt_PropSide.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_TOOL_TAIL)));
+        bt_PropSide.setIcon(Util.getIcon(ConsEnv.ICON_TOOL_TAIL));
         bt_PropSide.setSelected(UserMdl.getCfg().isEditWnd());
         bt_PropSide.addActionListener(new java.awt.event.ActionListener()
         {
@@ -116,7 +115,7 @@ public class ToolBar extends JToolBar
         addSeparator();
 
         bt_HelpHelp = new javax.swing.JButton();
-        bt_HelpHelp.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_SOFT_HELP)));
+        bt_HelpHelp.setIcon(Util.getIcon(ConsEnv.ICON_SOFT_HELP));
         bt_HelpHelp.addActionListener(new java.awt.event.ActionListener()
         {
 

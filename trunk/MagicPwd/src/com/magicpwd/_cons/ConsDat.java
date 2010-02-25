@@ -17,43 +17,63 @@ public interface ConsDat
     /**
      * 口令状态：默认
      */
-    int PWDS_STAT_0 = 0;
+    int PWDS_MODE_0 = 0;
     /**
      * 口令状态：使用中
      */
-    int PWDS_STAT_1 = 1;
+    int PWDS_MODE_1 = 1;
     /**
      * 口令状态：待注册
      */
-    int PWDS_STAT_2 = 2;
+    int PWDS_MODE_2 = 2;
     /**
      * 口令状态：待认证
      */
-    int PWDS_STAT_3 = 3;
+    int PWDS_MODE_3 = 3;
     /**
      * 口令状态：待激活
      */
-    int PWDS_STAT_4 = 4;
+    int PWDS_MODE_4 = 4;
     /**
      * 口令状态：仅测试
      */
-    int PWDS_STAT_5 = 5;
+    int PWDS_MODE_5 = 5;
     /**
      * 口令状态：已过期
      */
-    int PWDS_STAT_6 = 6;
+    int PWDS_MODE_6 = 6;
     /**
      * 口令状态：已丢失
      */
-    int PWDS_STAT_7 = 7;
+    int PWDS_MODE_7 = 7;
     /**
      * 口令状态：已禁用
      */
-    int PWDS_STAT_8 = 8;
+    int PWDS_MODE_8 = 8;
     /**
      * 口令状态：已删除
      */
-    int PWDS_STAT_9 = 6;
+    int PWDS_MODE_9 = 6;
+    /**
+     * 重要程度：最高
+     */
+    int PWDS_NOTEP2 = +2;
+    /**
+     * 重要程度：高
+     */
+    int PWDS_NOTEP1 = +1;
+    /**
+     * 重要程度：正常
+     */
+    int PWDS_NOTE_0 = 0;
+    /**
+     * 重要程度：最低
+     */
+    int PWDS_NOTEN1 = -1;
+    /**
+     * 重要程度：低
+     */
+    int PWDS_NOTEN2 = -2;
     /**
      * 目录信息：密码节点
      */

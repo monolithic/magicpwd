@@ -78,7 +78,7 @@ public class NoteMdl
 
     public void saveData(boolean histBack) throws Exception
     {
-        keys.setP30F0102(ConsDat.PWDS_STAT_1);
+        keys.setP30F0102(ConsDat.PWDS_MODE_1);
         keys.setP30F0105(UserMdl.getUserId());
         keys.setP30F0106(ConsDat.HASH_NOTE);
         keys.setHistBack(histBack);

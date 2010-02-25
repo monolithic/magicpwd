@@ -66,7 +66,7 @@ public class NoteBean extends javax.swing.JPanel implements IEditBean
 
         bt_DateView = new BtnLabel();
         bt_DateView.setMnemonic('O');
-        bt_DateView.setIcon(new javax.swing.ImageIcon(Util.getIcon(ConsEnv.ICON_DATE_TIME)));
+        bt_DateView.setIcon(Util.getIcon(ConsEnv.ICON_DATE_TIME));
         bt_DateView.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -80,7 +80,7 @@ public class NoteBean extends javax.swing.JPanel implements IEditBean
 
         bt_SaveData = new BtnLabel();
         bt_SaveData.setMnemonic('U');
-        bt_SaveData.setIcon(new javax.swing.ImageIcon(Util.getIcon(ConsEnv.ICON_PROP_UPDT)));
+        bt_SaveData.setIcon(Util.getIcon(ConsEnv.ICON_PROP_UPDT));
         bt_SaveData.addActionListener(new java.awt.event.ActionListener()
         {
 
