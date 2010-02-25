@@ -31,7 +31,7 @@ public class EditBox extends javax.swing.JPanel
     {
         bt_DropData = new BtnLabel();
         bt_DropData.setMnemonic('D');
-        bt_DropData.setIcon(new javax.swing.ImageIcon(Util.getIcon(ConsEnv.ICON_PROP_DELT)));
+        bt_DropData.setIcon(Util.getIcon(ConsEnv.ICON_PROP_DELT));
         bt_DropData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -44,7 +44,7 @@ public class EditBox extends javax.swing.JPanel
 
         bt_SaveData = new BtnLabel();
         bt_SaveData.setMnemonic('U');
-        bt_SaveData.setIcon(new javax.swing.ImageIcon(Util.getIcon(ConsEnv.ICON_PROP_UPDT)));
+        bt_SaveData.setIcon(Util.getIcon(ConsEnv.ICON_PROP_UPDT));
         bt_SaveData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -57,7 +57,7 @@ public class EditBox extends javax.swing.JPanel
 
         bt_CopyData = new BtnLabel();
         bt_CopyData.setMnemonic('C');
-        bt_CopyData.setIcon(new javax.swing.ImageIcon(Util.getIcon(ConsEnv.ICON_PROP_COPY)));
+        bt_CopyData.setIcon(Util.getIcon(ConsEnv.ICON_PROP_COPY));
         bt_CopyData.addActionListener(new java.awt.event.ActionListener()
         {
 

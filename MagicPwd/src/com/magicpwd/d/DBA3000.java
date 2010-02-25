@@ -250,7 +250,7 @@ public class DBA3000
             dba.addColumn(DBC3000.P30F010A);
             dba.addWhere(DBC3000.P30F0105, UserMdl.getUserId());
             dba.addWhere(Util.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC3000.P30F0109, DBC3000.P30F010A, text.toLowerCase()));
-            dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_STAT_1);
+            dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_MODE_1);
             dba.addWhere(DBC3000.P30F0107, ConsDat.HASH_NOTE);
 
             ResultSet rest = dba.executeSelect();
@@ -972,7 +972,7 @@ public class DBA3000
             dba.init();
 
             dba.addTable(DBC3000.P30F2100);
-            dba.addParam(DBC3000.P30F2102, ConsDat.PWDS_STAT_3);
+            dba.addParam(DBC3000.P30F2102, ConsDat.PWDS_MODE_3);
             dba.addWhere(DBC3000.P30F2103, charItem.getP30F2103());// 类别索引
 
             dba.executeDelete();
@@ -1086,7 +1086,7 @@ public class DBA3000
             dba.init();
 
             dba.addTable(DBC3000.P30F0100);
-            dba.addParam(DBC3000.P30F0102, ConsDat.PWDS_STAT_2);
+            dba.addParam(DBC3000.P30F0102, ConsDat.PWDS_MODE_2);
             dba.addWhere(DBC3000.P30F0104, curr);
             dba.addUpdateBatch();
 
@@ -1104,7 +1104,7 @@ public class DBA3000
             sql.append("    P30F010B,");
             sql.append("    P30F010C,");
             sql.append("    P30F010D)");
-            sql.append(" (select " + ConsDat.PWDS_STAT_1 + ",");
+            sql.append(" (select " + ConsDat.PWDS_MODE_1 + ",");
             sql.append("           P30F0102,");
             sql.append(Util.format("   '{0}',", com.magicpwd._util.Date.curTime()));
             sql.append("           P30F0104,");
@@ -1145,7 +1145,7 @@ public class DBA3000
 
             dba.addTable(DBC3000.P30F0100);
             dba.addWhere(DBC3000.P30F0104, keysHash);
-            dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_STAT_2);
+            dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_MODE_2);
 
             dba.executeDelete();
             return true;
@@ -1204,7 +1204,7 @@ public class DBA3000
             dba.addColumn(DBC3000.P30F010B);
             dba.addColumn(DBC3000.P30F010C);
             dba.addWhere(DBC3000.P30F0104, hash);
-            dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_STAT_2);
+            dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_MODE_2);
 
             ResultSet rest = dba.executeSelect();
             StringBuffer sb = new StringBuffer();
@@ -1239,7 +1239,7 @@ public class DBA3000
             dba.addTable(DBC3000.P30F0100);
             dba.addColumn(DBC3000.P30F0104);
             dba.addWhere(DBC3000.P30F0104, hash);
-            dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_STAT_2);
+            dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_MODE_2);
             dba.addSort(DBC3000.P30F0104, false);
 
             S1S2 item;

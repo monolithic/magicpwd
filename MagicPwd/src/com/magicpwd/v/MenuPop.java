@@ -3,16 +3,14 @@
  */
 package com.magicpwd.v;
 
-import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import javax.swing.JPopupMenu;
 
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
+import com.magicpwd.c.MenuEvt;
 import com.magicpwd.c.ToolEvt;
-import com.magicpwd.m.UserMdl;
-import javax.swing.ImageIcon;
 
 /**
  * @author Amon
@@ -26,6 +24,7 @@ public class MenuPop extends JPopupMenu
     public static final int MENU_LIST = 2;
     private int menuType;
     private ToolEvt toolEvt;
+    private MenuEvt menuEvt;
 
     public MenuPop(int menuType)
     {
@@ -68,9 +67,14 @@ public class MenuPop extends JPopupMenu
         }
     }
 
-    public void setActionEvent(ToolEvt event)
+    public void setToolEvent(ToolEvt event)
     {
         toolEvt = event;
+    }
+
+    public void setMenuEvent(MenuEvt event)
+    {
+        menuEvt = event;
     }
 
     private void initTreeView()
@@ -165,46 +169,49 @@ public class MenuPop extends JPopupMenu
 
         addSeparator();
 
+        mu_ListMode = new javax.swing.JMenu();
+        add(mu_ListMode);
+
+        javax.swing.JMenuItem menuItem;
+        mi_ListMode = new javax.swing.JMenuItem[10];
+        for (int i = 0; i < mi_ListMode.length; i += 1)
+        {
+            menuItem = new javax.swing.JMenuItem();
+            menuItem.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_MOD0 + i));
+            menuItem.putClientProperty("keysmode", i);
+            menuItem.addActionListener(new java.awt.event.ActionListener()
+            {
+
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent evt)
+                {
+                    menuEvt.keysModeActionPerformed(evt);
+                }
+            });
+            mu_ListMode.add(menuItem);
+            mi_ListMode[i] = menuItem;
+        }
+
         mu_ListNote = new javax.swing.JMenu();
         add(mu_ListNote);
 
         mi_ListNote = new javax.swing.JMenuItem[5];
-        javax.swing.JMenuItem menuItem;
         for (int i = 0; i < mi_ListNote.length; i += 1)
         {
             menuItem = new javax.swing.JMenuItem();
+            menuItem.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_MOD0 + i));
+            menuItem.putClientProperty("keysmode", i);
             menuItem.addActionListener(new java.awt.event.ActionListener()
             {
 
                 @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt)
                 {
-                    UserMdl.getGridMdl().setStatus(ConsDat.PWDS_STAT_1);
+                    menuEvt.keysNoteActionPerformed(evt);
                 }
             });
             mu_ListNote.add(menuItem);
             mi_ListNote[i] = menuItem;
-        }
-
-        mu_ListStat = new javax.swing.JMenu();
-        add(mu_ListStat);
-
-        mi_ListStat = new javax.swing.JMenuItem[10];
-        for (int i = 0; i < mi_ListStat.length; i += 1)
-        {
-            menuItem = new javax.swing.JMenuItem();
-            menuItem.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_KEYS_STA0 + i)));
-            menuItem.addActionListener(new java.awt.event.ActionListener()
-            {
-
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt)
-                {
-                    UserMdl.getGridMdl().setStatus(ConsDat.PWDS_STAT_1);
-                }
-            });
-            mu_ListStat.add(menuItem);
-            mi_ListStat[i] = menuItem;
         }
 
         addSeparator();
@@ -251,17 +258,17 @@ public class MenuPop extends JPopupMenu
         Lang.setWText(mi_ListNote[i++], LangRes.P30F7D2B, "最低");
 
         i = 0;
-        Lang.setWText(mu_ListStat, LangRes.P30F7D1B, "标记为：");
-        Lang.setWText(mi_ListStat[i++], LangRes.P30F7D1C, "默认");
-        Lang.setWText(mi_ListStat[i++], LangRes.P30F7D1D, "使用中");
-        Lang.setWText(mi_ListStat[i++], LangRes.P30F7D1E, "待注册");
-        Lang.setWText(mi_ListStat[i++], LangRes.P30F7D1F, "待认证");
-        Lang.setWText(mi_ListStat[i++], LangRes.P30F7D20, "待激活");
-        Lang.setWText(mi_ListStat[i++], LangRes.P30F7D21, "仅测试");
-        Lang.setWText(mi_ListStat[i++], LangRes.P30F7D22, "已过期");
-        Lang.setWText(mi_ListStat[i++], LangRes.P30F7D23, "已丢失");
-        Lang.setWText(mi_ListStat[i++], LangRes.P30F7D24, "被禁用");
-        Lang.setWText(mi_ListStat[i++], LangRes.P30F7D25, "已删除");
+        Lang.setWText(mu_ListMode, LangRes.P30F7D1B, "标记为：");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D1C, "默认");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D1D, "使用中");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D1E, "待注册");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D1F, "待认证");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D20, "待激活");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D21, "仅测试");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D22, "已过期");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D23, "已丢失");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D24, "被禁用");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D25, "已删除");
 
         Lang.setWText(mi_KindMove, LangRes.P30F7D1A, "把数据迁移到...(&M)");
 
@@ -503,8 +510,8 @@ public class MenuPop extends JPopupMenu
     private javax.swing.JMenuItem mi_ListDrop;// 删除
     private javax.swing.JMenu mu_ListNote;
     private javax.swing.JMenuItem[] mi_ListNote;
-    private javax.swing.JMenu mu_ListStat;
-    private javax.swing.JMenuItem[] mi_ListStat;
+    private javax.swing.JMenu mu_ListMode;
+    private javax.swing.JMenuItem[] mi_ListMode;
     private javax.swing.JMenuItem mi_KindMove;
     private javax.swing.JMenuItem mi_HistView;
     private javax.swing.JMenuItem mi_GridCopy;

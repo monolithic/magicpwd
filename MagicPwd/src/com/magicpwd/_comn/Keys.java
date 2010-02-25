@@ -92,7 +92,7 @@ public final class Keys implements Serializable
         histBack = true;
 
         P30F0101 = 0;
-        P30F0102 = ConsDat.PWDS_STAT_0;
+        P30F0102 = ConsDat.PWDS_MODE_0;
         setP30F0104(null);
         setP30F0105(null);
         setP30F0106(null);
