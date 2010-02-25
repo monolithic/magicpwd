@@ -27,31 +27,31 @@ public interface ConsDat
      */
     int PWDS_STAT_2 = 2;
     /**
-     * 口令状态：已过期
+     * 口令状态：待认证
      */
     int PWDS_STAT_3 = 3;
     /**
-     * 口令状态：已丢失
+     * 口令状态：待激活
      */
     int PWDS_STAT_4 = 4;
     /**
-     * 口令状态：已禁用
+     * 口令状态：仅测试
      */
     int PWDS_STAT_5 = 5;
     /**
-     * 口令状态：已删除
+     * 口令状态：已过期
      */
     int PWDS_STAT_6 = 6;
     /**
-     *
+     * 口令状态：已丢失
      */
-    int PWDS_STAT_7 = 6;
+    int PWDS_STAT_7 = 7;
     /**
-     *
+     * 口令状态：已禁用
      */
-    int PWDS_STAT_8 = 6;
+    int PWDS_STAT_8 = 8;
     /**
-     *
+     * 口令状态：已删除
      */
     int PWDS_STAT_9 = 6;
     /**

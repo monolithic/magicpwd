@@ -4,12 +4,15 @@
 package com.magicpwd.v;
 
 import com.magicpwd._cons.ConsDat;
+import com.magicpwd._cons.ConsEnv;
 import javax.swing.JPopupMenu;
 
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
+import com.magicpwd._util.Util;
 import com.magicpwd.c.ToolEvt;
 import com.magicpwd.m.UserMdl;
+import javax.swing.ImageIcon;
 
 /**
  * @author Amon
@@ -148,8 +151,8 @@ public class MenuPop extends JPopupMenu
         });
         add(mi_ListApnd);
 
-        mi_ListDelt = new javax.swing.JMenuItem();
-        mi_ListDelt.addActionListener(new java.awt.event.ActionListener()
+        mi_ListDrop = new javax.swing.JMenuItem();
+        mi_ListDrop.addActionListener(new java.awt.event.ActionListener()
         {
 
             @Override
@@ -158,75 +161,51 @@ public class MenuPop extends JPopupMenu
                 toolEvt.fileDeltActionPerformed(evt);
             }
         });
-        add(mi_ListDelt);
+        add(mi_ListDrop);
 
         addSeparator();
 
         mu_ListNote = new javax.swing.JMenu();
         add(mu_ListNote);
 
+        mi_ListNote = new javax.swing.JMenuItem[5];
+        javax.swing.JMenuItem menuItem;
+        for (int i = 0; i < mi_ListNote.length; i += 1)
+        {
+            menuItem = new javax.swing.JMenuItem();
+            menuItem.addActionListener(new java.awt.event.ActionListener()
+            {
+
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent evt)
+                {
+                    UserMdl.getGridMdl().setStatus(ConsDat.PWDS_STAT_1);
+                }
+            });
+            mu_ListNote.add(menuItem);
+            mi_ListNote[i] = menuItem;
+        }
+
         mu_ListStat = new javax.swing.JMenu();
         add(mu_ListStat);
 
-        mi_ListNorm = new javax.swing.JMenuItem();
-        mi_ListNorm.addActionListener(new java.awt.event.ActionListener()
+        mi_ListStat = new javax.swing.JMenuItem[10];
+        for (int i = 0; i < mi_ListStat.length; i += 1)
         {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
+            menuItem = new javax.swing.JMenuItem();
+            menuItem.setIcon(new ImageIcon(Util.getIcon(ConsEnv.ICON_KEYS_STA0 + i)));
+            menuItem.addActionListener(new java.awt.event.ActionListener()
             {
-                UserMdl.getGridMdl().setStatus(ConsDat.PWDS_STAT_1);
-            }
-        });
-        mu_ListStat.add(mi_ListNorm);
 
-        mi_ListTodo = new javax.swing.JMenuItem();
-        mi_ListTodo.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                UserMdl.getGridMdl().setStatus(ConsDat.PWDS_STAT_2);
-            }
-        });
-        mu_ListStat.add(mi_ListTodo);
-
-        mi_ListPast = new javax.swing.JMenuItem();
-        mi_ListPast.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                UserMdl.getGridMdl().setStatus(ConsDat.PWDS_STAT_3);
-            }
-        });
-        mu_ListStat.add(mi_ListPast);
-
-        mi_ListLost = new javax.swing.JMenuItem();
-        mi_ListLost.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                UserMdl.getGridMdl().setStatus(ConsDat.PWDS_STAT_4);
-            }
-        });
-        mu_ListStat.add(mi_ListLost);
-
-        mi_ListHalt = new javax.swing.JMenuItem();
-        mi_ListHalt.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                UserMdl.getGridMdl().setStatus(ConsDat.PWDS_STAT_5);
-            }
-        });
-        mu_ListStat.add(mi_ListHalt);
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent evt)
+                {
+                    UserMdl.getGridMdl().setStatus(ConsDat.PWDS_STAT_1);
+                }
+            });
+            mu_ListStat.add(menuItem);
+            mi_ListStat[i] = menuItem;
+        }
 
         addSeparator();
 
@@ -261,21 +240,28 @@ public class MenuPop extends JPopupMenu
     {
         Lang.setWText(mi_ListApnd, LangRes.P30F7D05, "添加记录 ");
 
-        Lang.setWText(mi_ListDelt, LangRes.P30F7D06, "删除记录");
+        Lang.setWText(mi_ListDrop, LangRes.P30F7D06, "删除记录");
 
+        int i = 0;
         Lang.setWText(mu_ListNote, LangRes.P30F7D26, "重要性：");
+        Lang.setWText(mi_ListNote[i++], LangRes.P30F7D27, "最高");
+        Lang.setWText(mi_ListNote[i++], LangRes.P30F7D28, "高");
+        Lang.setWText(mi_ListNote[i++], LangRes.P30F7D29, "正常");
+        Lang.setWText(mi_ListNote[i++], LangRes.P30F7D2A, "低");
+        Lang.setWText(mi_ListNote[i++], LangRes.P30F7D2B, "最低");
 
+        i = 0;
         Lang.setWText(mu_ListStat, LangRes.P30F7D1B, "标记为：");
-
-        Lang.setWText(mi_ListNorm, LangRes.P30F7D1C, "使用中");
-
-        Lang.setWText(mi_ListTodo, LangRes.P30F7D1D, "待注册");
-
-        Lang.setWText(mi_ListPast, LangRes.P30F7D1E, "已过期");
-
-        Lang.setWText(mi_ListLost, LangRes.P30F7D1F, "已丢失");
-
-        Lang.setWText(mi_ListHalt, LangRes.P30F7D20, "被禁用");
+        Lang.setWText(mi_ListStat[i++], LangRes.P30F7D1C, "默认");
+        Lang.setWText(mi_ListStat[i++], LangRes.P30F7D1D, "使用中");
+        Lang.setWText(mi_ListStat[i++], LangRes.P30F7D1E, "待注册");
+        Lang.setWText(mi_ListStat[i++], LangRes.P30F7D1F, "待认证");
+        Lang.setWText(mi_ListStat[i++], LangRes.P30F7D20, "待激活");
+        Lang.setWText(mi_ListStat[i++], LangRes.P30F7D21, "仅测试");
+        Lang.setWText(mi_ListStat[i++], LangRes.P30F7D22, "已过期");
+        Lang.setWText(mi_ListStat[i++], LangRes.P30F7D23, "已丢失");
+        Lang.setWText(mi_ListStat[i++], LangRes.P30F7D24, "被禁用");
+        Lang.setWText(mi_ListStat[i++], LangRes.P30F7D25, "已删除");
 
         Lang.setWText(mi_KindMove, LangRes.P30F7D1A, "把数据迁移到...(&M)");
 
@@ -514,19 +500,11 @@ public class MenuPop extends JPopupMenu
     private javax.swing.JMenuItem mi_TreeDelt;
     private javax.swing.JMenuItem mi_TreeImpt;
     private javax.swing.JMenuItem mi_ListApnd;// 新增
-    private javax.swing.JMenuItem mi_ListNorm;// 使用中
+    private javax.swing.JMenuItem mi_ListDrop;// 删除
     private javax.swing.JMenu mu_ListNote;
-    private javax.swing.JMenuItem mi_NoteSta0;// 最高
-    private javax.swing.JMenuItem mi_NoteSta1;// 高
-    private javax.swing.JMenuItem mi_NoteSta2;// 一般
-    private javax.swing.JMenuItem mi_NoteSta3;// 低
-    private javax.swing.JMenuItem mi_NoteSta4;// 最低
-    private javax.swing.JMenuItem mi_ListDelt;// 已删除
-    private javax.swing.JMenuItem mi_ListTodo;// 待注册
-    private javax.swing.JMenuItem mi_ListPast;// 已过期
-    private javax.swing.JMenuItem mi_ListLost;// 已丢失
-    private javax.swing.JMenuItem mi_ListHalt;// 被禁用
+    private javax.swing.JMenuItem[] mi_ListNote;
     private javax.swing.JMenu mu_ListStat;
+    private javax.swing.JMenuItem[] mi_ListStat;
     private javax.swing.JMenuItem mi_KindMove;
     private javax.swing.JMenuItem mi_HistView;
     private javax.swing.JMenuItem mi_GridCopy;
