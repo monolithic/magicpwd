@@ -102,7 +102,7 @@ public class InfoBar extends JPanel
         }
     }
 
-    public void setActionEvent(InfoEvt event)
+    public void setInfoEvent(InfoEvt event)
     {
         //ie_InfoEvent = event;
     }
@@ -149,7 +149,7 @@ public class InfoBar extends JPanel
         int size = lp_PastNote.size();
         if (size > 0)
         {
-            lb_InfoLabel.setText(Util.format("您有 {0} 条提醒数据！", "" + size));
+            lb_InfoLabel.setText(Util.format("您有 {0} 条提醒数据！", Integer.toString(size)));
             lb_InfoLabel.setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
             lb_InfoLabel.setToolTipText("点击查看详细信息！");
         }

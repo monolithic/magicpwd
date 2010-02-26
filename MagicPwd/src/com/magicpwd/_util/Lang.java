@@ -21,6 +21,7 @@ import javax.swing.text.JTextComponent;
  */
 public class Lang
 {
+
     private static ResourceBundle lang;
     private static String tips;
 
@@ -47,7 +48,7 @@ public class Lang
 
     public static String getLang(String key, String def)
     {
-        key = lang.getString(key);
+        key = key != null ? lang.getString(key) : def;
         return key != null ? key : def;
     }
 

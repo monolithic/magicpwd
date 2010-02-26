@@ -258,8 +258,8 @@ public class NoteBean extends javax.swing.JPanel implements IEditBean
         cal.set(java.util.Calendar.SECOND, 0);
 
         String t = cal.get(java.util.Calendar.HOUR_OF_DAY) + "点";
-        Lang.setWText(mi_MenuItem[0], "", t);
-        Lang.setWTips(mi_MenuItem[0], "", t + "提醒");
+        Lang.setWText(mi_MenuItem[0], null, t);
+        Lang.setWTips(mi_MenuItem[0], null, t + "提醒");
         mi_MenuItem[0].setActionCommand(new java.text.SimpleDateFormat(ConsEnv.VIEW_DATE).format(cal.getTime()));
         pm_DateView.show(bt_DateView, 0, bt_DateView.getHeight());
     }

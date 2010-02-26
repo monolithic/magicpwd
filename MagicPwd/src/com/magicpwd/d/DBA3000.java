@@ -220,7 +220,7 @@ public class DBA3000
 
             dba.addTable(DBC3000.P30F0100);
             addUserSort(dba);
-            dba.addWhere(DBC3000.P30F010B, "BETWEEN " + s.toString() + " AND " + e.toString(), true);
+            dba.addWhere(DBC3000.P30F010C + " BETWEEN '" + s.toString() + "' AND '" + e.toString() + '\'');
             addDataSort(dba);
 
             getNameData(dba.executeSelect(), list);
