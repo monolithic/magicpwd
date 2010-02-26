@@ -8,13 +8,13 @@ import com.magicpwd._cons.ConsDat;
 
 /**
  *
- * @author Amonsoft
+ * @author Administrator
  */
-public class Meta extends Item
+public class LogoItem extends Item
 {
 
-    public Meta()
+    public LogoItem()
     {
-        super(ConsDat.INDX_META);
+        super(ConsDat.INDX_LOGO);
     }
 }

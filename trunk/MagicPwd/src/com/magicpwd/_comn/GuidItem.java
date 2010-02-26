@@ -15,12 +15,12 @@ import java.sql.Timestamp;
  *
  * @author Amon
  */
-public class Guid extends Item
+public class GuidItem extends Item
 {
 
     private Timestamp time;
 
-    public Guid()
+    public GuidItem()
     {
         super(ConsDat.INDX_GUID);
     }
