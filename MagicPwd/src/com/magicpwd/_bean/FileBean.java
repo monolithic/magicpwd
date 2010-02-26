@@ -4,7 +4,7 @@
 package com.magicpwd._bean;
 
 import com.magicpwd._comp.BtnLabel;
-import com.magicpwd._comn.Item;
+import com.magicpwd._comn.EditItem;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._comn.Keys;
@@ -153,7 +153,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
         }
         tf_PropName.setText(name);
         tf_PropData.setText(tpltData.getData());
-        fileName = tpltData.getSpec(Item.SPEC_FILE_NAME);
+        fileName = tpltData.getSpec(EditItem.SPEC_FILE_NAME);
     }
 
     @Override
@@ -176,7 +176,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
             gridView.selectNext(false);
             try
             {
-                new java.io.File(tpltData.getSpec(Item.SPEC_FILE_NAME)).delete();
+                new java.io.File(tpltData.getSpec(EditItem.SPEC_FILE_NAME)).delete();
             }
             catch (Exception exp)
             {
@@ -249,7 +249,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
 
         tpltData.setName(name);
         tpltData.setData(tf_PropData.getText());
-        tpltData.setSpec(Item.SPEC_FILE_NAME, fileName);
+        tpltData.setSpec(EditItem.SPEC_FILE_NAME, fileName);
         UserMdl.getGridMdl().setModified(true);
 
         gridView.selectNext(!UserMdl.getGridMdl().isUpdate());
@@ -297,7 +297,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
         {
             filePath = new java.io.File(filePath, tpltData.getData());
         }
-        java.io.File tempFile = new java.io.File(ConsEnv.DIR_DAT, tpltData.getSpec(Item.SPEC_FILE_NAME));
+        java.io.File tempFile = new java.io.File(ConsEnv.DIR_DAT, tpltData.getSpec(EditItem.SPEC_FILE_NAME));
         try
         {
             Keys.doCrypt(UserMdl.getDCipher(), tempFile, filePath);

@@ -13,7 +13,7 @@ import java.sql.Timestamp;
  *
  * @author Amonsoft
  */
-public class Hint extends Item
+public class Hint extends EditItem
 {
 
     private Timestamp time;

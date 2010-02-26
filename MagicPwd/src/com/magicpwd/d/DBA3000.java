@@ -9,7 +9,7 @@ import com.magicpwd._comn.Keys;
 import com.magicpwd._comn.Kind;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._comn.S1S3;
-import com.magicpwd._comn.Item;
+import com.magicpwd._comn.EditItem;
 import com.magicpwd._comn.Tplt;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
@@ -940,10 +940,10 @@ public class DBA3000
             dba.addSort(DBC3000.P30F1101, true);
 
             ResultSet rest = dba.executeSelect();
-            Item kv;
+            EditItem kv;
             while (rest.next())
             {
-                kv = new Item();
+                kv = new EditItem();
                 kv.setType(rest.getInt(DBC3000.P30F1102));
                 kv.setName(rest.getString(DBC3000.P30F1105));
                 kv.setData(rest.getString(DBC3000.P30F1106));

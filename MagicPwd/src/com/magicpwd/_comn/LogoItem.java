@@ -10,7 +10,7 @@ import com.magicpwd._cons.ConsDat;
  *
  * @author Administrator
  */
-public class LogoItem extends Item
+public class LogoItem extends EditItem
 {
 
     public LogoItem()
