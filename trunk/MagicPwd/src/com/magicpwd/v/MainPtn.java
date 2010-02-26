@@ -997,7 +997,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         String text = mainFind.getSearchText();
         if (!Util.isValidate(text))
         {
-            Lang.showMesg(this, LangRes.P30F7A18, "");
+            Lang.showMesg(this, LangRes.P30F7A18, "请输入您要查询的关键字，多个关键字可以使用空格或加号进行分隔！");
             mainFind.requestFocus();
             return;
         }
@@ -1005,7 +1005,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         boolean b = UserMdl.getListMdl().findName(text);
         if (!b)
         {
-            Lang.showMesg(this, LangRes.P30F7A19, "");
+            Lang.showMesg(this, LangRes.P30F7A19, "查询不到符合您条件的数据，请用空格或加号分隔您的搜索关键字后重试！");
             mainFind.requestFocus();
         }
 
