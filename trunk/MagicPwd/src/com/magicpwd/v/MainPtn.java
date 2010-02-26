@@ -13,12 +13,12 @@ import com.magicpwd._bean.MetaBean;
 import com.magicpwd._bean.NoteBean;
 import com.magicpwd._bean.PwdsBean;
 import com.magicpwd._bean.TextBean;
-import com.magicpwd._comn.Guid;
+import com.magicpwd._comn.GuidItem;
 import com.magicpwd._comn.Kind;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._comn.S1S3;
 import com.magicpwd._comn.Keys;
-import com.magicpwd._comn.Meta;
+import com.magicpwd._comn.MetaItem;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
@@ -506,7 +506,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         }
 
         // 口令类别检测
-        Guid guid = (Guid) gm.getItemAt(ConsEnv.PWDS_HEAD_GUID);
+        GuidItem guid = (GuidItem) gm.getItemAt(ConsEnv.PWDS_HEAD_GUID);
         if (!Util.isValidate(guid.getData()))
         {
             javax.swing.tree.TreePath path = tr_GuidTree.getSelectionPath();
@@ -523,7 +523,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         }
 
         // 标题为空检测
-        Meta meta = (Meta) gm.getItemAt(ConsEnv.PWDS_HEAD_META);
+        MetaItem meta = (MetaItem) gm.getItemAt(ConsEnv.PWDS_HEAD_META);
         if (!Util.isValidate(meta.getName()))
         {
             Lang.showMesg(this, LangRes.P30F7A0C, "请输入口令标题！");
@@ -1235,6 +1235,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
 
         mainFind = new FindBar();
         mainFind.initView();
+        mainFind.setFindEvent(this);
 
         gridMenu = new MenuPop(MenuPop.MENU_GRID);
         gridMenu.initView();
