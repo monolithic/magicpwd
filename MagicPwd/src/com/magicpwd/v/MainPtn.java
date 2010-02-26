@@ -81,6 +81,23 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         initPropView();
         initUserView();
         initBaseView();
+
+        this.getContentPane().add(pl_KeysBase);
+
+        mainMenu = new MenuBar();
+        mainMenu.initView();
+        mainMenu.setVisible(UserMdl.getCfg().isMenuViw());
+        this.setJMenuBar(mainMenu);
+
+        mainTool = new ToolBar();
+        mainTool.initView();
+        mainTool.setVisible(UserMdl.getCfg().isToolViw());
+        this.getContentPane().add(mainTool, UserMdl.getCfg().getToolLoc());
+
+        this.pack();
+        this.setIconImage(Util.getLogo());
+        this.setTitle(Lang.getLang(LangRes.P30F7201, "魔方密码"));
+        Util.centerForm(this, null);
     }
 
     public void initLang()
@@ -98,12 +115,11 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             showPropEdit(UserMdl.getCfg().isEditWnd());
         }
 
-        javax.swing.JPanel panel = (javax.swing.JPanel) this.getContentPane();
-        Util.addHideAction(panel.getActionMap(), panel.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
-        Util.addEditAction(panel.getActionMap(), panel.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
-        Util.addFileAction(panel.getActionMap(), panel.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
-        Util.addViewAction(panel.getActionMap(), panel.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
-        Util.addDataAction(panel.getActionMap(), panel.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
+        Util.addHideAction(pl_KeysBase.getActionMap(), pl_KeysBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
+        Util.addEditAction(pl_KeysBase.getActionMap(), pl_KeysBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
+        Util.addFileAction(pl_KeysBase.getActionMap(), pl_KeysBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
+        Util.addViewAction(pl_KeysBase.getActionMap(), pl_KeysBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
+        Util.addDataAction(pl_KeysBase.getActionMap(), pl_KeysBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
 
         mainMenu.initData();
         mainTool.initData();
@@ -1291,11 +1307,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
 
     private void initBaseView()
     {
-        mainMenu = new MenuBar();
-        mainMenu.initView();
-
-        mainTool = new ToolBar();
-        mainTool.initView();
+        pl_KeysBase = new javax.swing.JPanel();
 
         mainInfo = new InfoBar();
         mainInfo.initView();
@@ -1307,8 +1319,8 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         sp.setLeftComponent(pl_KeysGuid);
         sp.setRightComponent(pl_KeysInfo);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this.getContentPane());
-        this.getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_KeysBase);
+        pl_KeysBase.setLayout(layout);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addContainerGap();
         hsg.addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE);
@@ -1324,11 +1336,6 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 10, 20);
         vsg.addComponent(mainInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE);
         layout.setVerticalGroup(vsg);
-
-        this.pack();
-        this.setIconImage(Util.getLogo());
-        this.setTitle(Lang.getLang(LangRes.P30F7201, "魔方密码"));
-        Util.centerForm(this, null);
     }
 
     private void initGuidLang()
@@ -1762,6 +1769,10 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         }
         return true;
     }
+    /**
+     * 
+     */
+    private javax.swing.JPanel pl_KeysBase;
     /**
      * 数据导航面板，用于显示类别、口令列表等信息
      */

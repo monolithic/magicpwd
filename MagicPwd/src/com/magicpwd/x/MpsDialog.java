@@ -21,6 +21,7 @@ import com.magicpwd.c.MenuEvt;
  */
 public class MpsDialog extends JDialog
 {
+
     private MenuEvt menuEvt;
 
     public MpsDialog(JFrame frame, MenuEvt menuEvt)
@@ -34,17 +35,14 @@ public class MpsDialog extends JDialog
         pl_PropEdit = new javax.swing.JPanel();
         pl_PropEdit.setLayout(new BorderLayout());
 
-        Util.addHideAction(pl_PropEdit.getActionMap(), pl_PropEdit
-                .getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), menuEvt);
-        Util.addViewAction(pl_PropEdit.getActionMap(), pl_PropEdit
-                .getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), menuEvt);
-        Util.addFileAction(pl_PropEdit.getActionMap(), pl_PropEdit
-                .getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), menuEvt);
-        Util.addDataAction(pl_PropEdit.getActionMap(), pl_PropEdit
-                .getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), menuEvt);
+        Util.addHideAction(pl_PropEdit.getActionMap(), pl_PropEdit.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), menuEvt);
+        Util.addViewAction(pl_PropEdit.getActionMap(), pl_PropEdit.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), menuEvt);
+        Util.addFileAction(pl_PropEdit.getActionMap(), pl_PropEdit.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), menuEvt);
+        Util.addDataAction(pl_PropEdit.getActionMap(), pl_PropEdit.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), menuEvt);
 
         addWindowListener(new WindowAdapter()
         {
+
             @Override
             public void windowClosing(WindowEvent e)
             {
@@ -56,14 +54,14 @@ public class MpsDialog extends JDialog
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addComponent(pl_PropEdit,
-                        javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                        javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,
-                        Short.MAX_VALUE)));
+                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,
+                Short.MAX_VALUE)));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addComponent(pl_PropEdit,
-                        javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                        javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,
-                        Short.MAX_VALUE)));
+                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE,
+                Short.MAX_VALUE)));
     }
 
     public void initLang()
@@ -80,6 +78,5 @@ public class MpsDialog extends JDialog
     {
         menuEvt.viewSideActionPerformed(null);
     }
-
     private javax.swing.JPanel pl_PropEdit;
 }
