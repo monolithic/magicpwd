@@ -182,11 +182,12 @@ public class DBA3000
         {
             dba.init();
 
-            text = Util.text2DB(text.trim()).replaceFirst("^[+\\s]*", "%").replaceFirst("[+\\s]*$", "%").replaceAll("[+%\\s]+", "%");
+            text = Util.text2DB(text.toLowerCase().replace('　', ' ').replace('＋', '+'));
+            text = text.replaceFirst("^[+\\s]*", "%").replaceFirst("[+\\s]*$", "%").replaceAll("[+%\\s]+", "%");
             // 查询语句拼接
             dba.addTable(DBC3000.P30F0100);
             addUserSort(dba);
-            dba.addWhere(Util.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC3000.P30F0109, DBC3000.P30F010A, text.toLowerCase()));
+            dba.addWhere(Util.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC3000.P30F0109, DBC3000.P30F010A, text));
             addDataSort(dba);
 
             getNameData(dba.executeSelect(), list);

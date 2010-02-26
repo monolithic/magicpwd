@@ -82,13 +82,13 @@ public class ListMdl extends DefaultListModel
         dataList.clear();
         fireIntervalRemoved(this, 0, s);
         boolean b = DBA3000.findUserData(keysName, dataList);
-        if (!b)
-        {
-            return false;
-        }
         s = dataList.size();
-        fireIntervalAdded(this, 0, s);
-        return true;
+        b &= s > 0;
+        if (b)
+        {
+            fireIntervalAdded(this, 0, s);
+        }
+        return b;
     }
 
     public boolean updtName(int indx, String name)
