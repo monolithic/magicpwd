@@ -15,7 +15,7 @@ import java.sql.Timestamp;
  *
  * @author Amon
  */
-public class GuidItem extends Item
+public class GuidItem extends EditItem
 {
 
     private Timestamp time;

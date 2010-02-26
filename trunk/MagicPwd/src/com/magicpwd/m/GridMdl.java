@@ -13,7 +13,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.magicpwd._comn.Keys;
 import com.magicpwd._comn.PwdsItem;
-import com.magicpwd._comn.Item;
+import com.magicpwd._comn.EditItem;
 import com.magicpwd._comn.LogoItem;
 import com.magicpwd._comn.MetaItem;
 import com.magicpwd._comn.Hint;
@@ -213,7 +213,7 @@ public class GridMdl extends DefaultTableModel
      * 向导初始化
      * @return
      */
-    public Item initGuid()
+    public EditItem initGuid()
     {
         GuidItem guid = new GuidItem();
         guid.setTime(new java.sql.Timestamp(System.currentTimeMillis()));
@@ -260,15 +260,15 @@ public class GridMdl extends DefaultTableModel
      * 
      * @param type
      */
-    public Item wAppend(int indx, int type)
+    public EditItem wAppend(int indx, int type)
     {
-        return wAppend(indx, new Item(type));
+        return wAppend(indx, new EditItem(type));
     }
 
     /**
      * @param pi
      */
-    public Item wAppend(int indx, Item item)
+    public EditItem wAppend(int indx, EditItem item)
     {
         ls_ItemList.add(indx, item);
         fireTableDataChanged();
@@ -278,7 +278,7 @@ public class GridMdl extends DefaultTableModel
     /**
      * @param pi
      */
-    public Item wAppend(Item item)
+    public EditItem wAppend(EditItem item)
     {
         ls_ItemList.add(item);
         fireTableDataChanged();
@@ -340,7 +340,7 @@ public class GridMdl extends DefaultTableModel
         fireTableDataChanged();
     }
 
-    public void wUpdate(int indx, Item tplt)
+    public void wUpdate(int indx, EditItem tplt)
     {
         ls_ItemList.set(indx, tplt);
         fireTableDataChanged();
@@ -364,7 +364,7 @@ public class GridMdl extends DefaultTableModel
     {
         int size = 0;
         int indx = 0;
-        Item tplt;
+        EditItem tplt;
         String text;
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(ConsEnv.VIEW_DATE);
         for (ArrayList<String> temp : data)
@@ -388,7 +388,7 @@ public class GridMdl extends DefaultTableModel
             ls_ItemList.clear();
 
             // Guid
-            tplt = new Item();
+            tplt = new EditItem();
             tplt.setType(ConsDat.INDX_GUID);
             text = temp.get(indx++);
             tplt.setName(sdf.format(Util.stringToDate(text, '-', ':', ' ').getTime()));
@@ -396,7 +396,7 @@ public class GridMdl extends DefaultTableModel
             ls_ItemList.add(tplt);
 
             // MetaItem
-            tplt = new Item();
+            tplt = new EditItem();
             tplt.setType(ConsDat.INDX_META);
             text = temp.get(indx++);
             tplt.setName(text);
@@ -407,7 +407,7 @@ public class GridMdl extends DefaultTableModel
             ls_ItemList.add(tplt);
 
             // Past
-            tplt = new Item();
+            tplt = new EditItem();
             tplt.setType(ConsDat.INDX_HINT);
             text = temp.get(indx++);
             tplt.setData(text);
@@ -419,7 +419,7 @@ public class GridMdl extends DefaultTableModel
 
             while (indx < temp.size())
             {
-                tplt = new Item();
+                tplt = new EditItem();
                 tplt.setType(Integer.parseInt(temp.get(indx++)));
                 tplt.setName(temp.get(indx++));
                 tplt.setData(temp.get(indx++));
@@ -561,7 +561,7 @@ public class GridMdl extends DefaultTableModel
         int ds;
         int type;
         String t;
-        Item item;
+        EditItem item;
         while (st.hasMoreTokens())
         {
             t = st.nextToken() + ConsDat.SP_SQL_KV;
@@ -573,7 +573,7 @@ public class GridMdl extends DefaultTableModel
             name = t.substring(dn + 1, dd);
             data = t.substring(dd + 1, ds);
             spec = t.substring(ds + 1, t.length());
-            item = new Item(type, name, data);
+            item = new EditItem(type, name, data);
             if (spec.length() > 0)
             {
                 item.deCodeSpec(spec, ConsDat.SP_SQL_KV);

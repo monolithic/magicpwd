@@ -10,7 +10,7 @@ import com.magicpwd._cons.ConsDat;
  *
  * @author Amonsoft
  */
-public class MetaItem extends Item
+public class MetaItem extends EditItem
 {
 
     public MetaItem()

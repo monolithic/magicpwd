@@ -14,7 +14,7 @@ import com.magicpwd.m.UserMdl;
  * @author shangwen.yao
  * 
  */
-public class Item implements IEditItem
+public class EditItem implements IEditItem
 {
 
     /** 记录类别 */
@@ -29,14 +29,14 @@ public class Item implements IEditItem
     /**
      * 
      */
-    public Item()
+    public EditItem()
     {
     }
 
     /**
      * @param type
      */
-    public Item(int type)
+    public EditItem(int type)
     {
         this(type, "", "");
     }
@@ -46,7 +46,7 @@ public class Item implements IEditItem
      * @param name
      * @param data
      */
-    public Item(int type, String name, String data)
+    public EditItem(int type, String name, String data)
     {
         this.type = type;
         this.name = name;
