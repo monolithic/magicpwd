@@ -862,7 +862,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     {
         boolean b = !UserMdl.getCfg().isFindViw();
         mainFind.setVisible(b);
-        MagicPwd.getForm().pack();
+        this.pack();
 
         mainMenu.setViewFindSelected(b);
         UserMdl.getCfg().setFindViw(b);
@@ -873,7 +873,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     {
         boolean b = !UserMdl.getCfg().isInfoViw();
         mainInfo.setVisible(b);
-        MagicPwd.getForm().pack();
+        this.pack();
 
         mainMenu.setViewInfoSelected(b);
         UserMdl.getCfg().setInfoViw(b);
@@ -884,7 +884,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     {
         boolean b = !UserMdl.getCfg().isMenuViw();
         mainMenu.setVisible(b);
-        MagicPwd.getForm().pack();
+        this.pack();
 
         mainMenu.setViewMenuSelected(b);
         UserMdl.getCfg().setMenuViw(b);
@@ -925,7 +925,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         {
             showPropEdit(b);
         }
-        // MagicPwd.getForm().pack();
+        this.pack();
 
         mainMenu.setViewSideSelected(b);
         mainTool.setPropSideSelected(b);
@@ -938,7 +938,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     {
         boolean b = !UserMdl.getCfg().isToolViw();
         mainTool.setVisible(b);
-        MagicPwd.getForm().pack();
+        this.pack();
 
         mainMenu.setViewToolSelected(b);
         UserMdl.getCfg().setToolViw(b);
