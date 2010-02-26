@@ -3,7 +3,7 @@
  */
 package com.magicpwd.m;
 
-import com.magicpwd._comn.Guid;
+import com.magicpwd._comn.GuidItem;
 import com.magicpwd._comn.I1S2;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +12,10 @@ import java.util.StringTokenizer;
 import javax.swing.table.DefaultTableModel;
 
 import com.magicpwd._comn.Keys;
-import com.magicpwd._comn.Pwds;
+import com.magicpwd._comn.PwdsItem;
 import com.magicpwd._comn.Item;
-import com.magicpwd._comn.Logo;
-import com.magicpwd._comn.Meta;
+import com.magicpwd._comn.LogoItem;
+import com.magicpwd._comn.MetaItem;
 import com.magicpwd._comn.Hint;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.ConsDat;
@@ -215,7 +215,7 @@ public class GridMdl extends DefaultTableModel
      */
     public Item initGuid()
     {
-        Guid guid = new Guid();
+        GuidItem guid = new GuidItem();
         guid.setTime(new java.sql.Timestamp(System.currentTimeMillis()));
         ls_ItemList.add(guid);
         fireTableDataChanged();
@@ -228,9 +228,9 @@ public class GridMdl extends DefaultTableModel
     public void initMeta()
     {
         // 关键搜索
-        ls_ItemList.add(new Meta());
+        ls_ItemList.add(new MetaItem());
         // 徽标
-        ls_ItemList.add(new Logo());
+        ls_ItemList.add(new LogoItem());
         // 过时提醒
         ls_ItemList.add(new Hint());
         fireTableDataChanged();
@@ -395,7 +395,7 @@ public class GridMdl extends DefaultTableModel
             tplt.setData(ConsDat.HASH_TPLT);
             ls_ItemList.add(tplt);
 
-            // Meta
+            // MetaItem
             tplt = new Item();
             tplt.setType(ConsDat.INDX_META);
             text = temp.get(indx++);
@@ -471,7 +471,7 @@ public class GridMdl extends DefaultTableModel
             tplt = ls_ItemList.get(indx++);
             temp.add(tplt.getName());
 
-            // Meta
+            // MetaItem
             tplt = ls_ItemList.get(indx++);
             temp.add(tplt.getName());
             temp.add(tplt.getData());
@@ -519,7 +519,7 @@ public class GridMdl extends DefaultTableModel
     public final void deCrypt(Keys keys, List<IEditItem> list) throws Exception
     {
         // 查询数据是否为空
-        Pwds pwds = keys.getPassword();
+        PwdsItem pwds = keys.getPassword();
         pwds.deCript(UserMdl.getDCipher(), UserMdl.getSec().getMask());
         StringBuffer text = pwds.getP30F0203();
         if (text.length() < 16)
@@ -528,20 +528,20 @@ public class GridMdl extends DefaultTableModel
         }
 
         // Guid
-        Guid guid = new Guid();
+        GuidItem guid = new GuidItem();
         guid.setData(keys.getP30F0106());
         guid.setTime(keys.getP30F0107());
         guid.setSpec(IEditItem.SPEC_GUID_TPLT, keys.getP30F0108());
         list.add(guid);
 
-        // Meta
-        Meta meta = new Meta();
+        // MetaItem
+        MetaItem meta = new MetaItem();
         meta.setName(keys.getP30F0109());
         meta.setData(keys.getP30F010A());
         list.add(meta);
 
-        // Logo
-        Logo logo = new Logo();
+        // LogoItem
+        LogoItem logo = new LogoItem();
         logo.setName(keys.getP30F010B());
         list.add(logo);
 
@@ -589,23 +589,23 @@ public class GridMdl extends DefaultTableModel
      */
     public final void enCrypt(Keys keys, List<IEditItem> list) throws Exception
     {
-        Pwds pwds = keys.getPassword();
+        PwdsItem pwds = keys.getPassword();
         StringBuffer text = pwds.getP30F0203();
         text.delete(0, text.length());
 
         // Guid
-        Guid guid = (Guid) list.get(ConsEnv.PWDS_HEAD_GUID);
+        GuidItem guid = (GuidItem) list.get(ConsEnv.PWDS_HEAD_GUID);
         keys.setP30F0106(guid.getData());
         keys.setP30F0107(guid.getTime());
         keys.setP30F0108(guid.getSpec(IEditItem.SPEC_GUID_TPLT));
 
-        // Meta
-        Meta meta = (Meta) list.get(ConsEnv.PWDS_HEAD_META);
+        // MetaItem
+        MetaItem meta = (MetaItem) list.get(ConsEnv.PWDS_HEAD_META);
         keys.setP30F0109(interim ? meta.getName() + keys.getP30F0107() : meta.getName());
         keys.setP30F010A(meta.getData());
 
-        // Logo
-        Logo logo = (Logo) list.get(ConsEnv.PWDS_HEAD_LOGO);
+        // LogoItem
+        LogoItem logo = (LogoItem) list.get(ConsEnv.PWDS_HEAD_LOGO);
         keys.setP30F010B(logo.getName());
 
         // Hint

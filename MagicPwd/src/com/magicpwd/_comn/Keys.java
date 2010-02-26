@@ -76,11 +76,11 @@ public final class Keys implements Serializable
     /**
      * 加密口令
      */
-    private static Pwds password;
+    private static PwdsItem password;
 
     public Keys()
     {
-        password = new Pwds();
+        password = new PwdsItem();
         setDefault();
     }
 
@@ -155,7 +155,7 @@ public final class Keys implements Serializable
      * 口令数据
      * @return the Password
      */
-    public Pwds getPassword()
+    public PwdsItem getPassword()
     {
         return password;
     }
@@ -164,7 +164,7 @@ public final class Keys implements Serializable
      * 口令数据
      * @param Password the Password to set
      */
-    public void setPassword(Pwds Password)
+    public void setPassword(PwdsItem Password)
     {
         Keys.password = Password;
     }

@@ -4,7 +4,7 @@
 package com.magicpwd._bean;
 
 import com.magicpwd.MagicPwd;
-import com.magicpwd._comn.Guid;
+import com.magicpwd._comn.GuidItem;
 import com.magicpwd._comn.I1S2;
 import com.magicpwd._comn.Tplt;
 import com.magicpwd._comp.BtnLabel;
@@ -33,7 +33,7 @@ import javax.swing.JOptionPane;
 public class GuidBean extends javax.swing.JPanel implements IEditBean
 {
 
-    private Guid dataItem;
+    private GuidItem dataItem;
     private IGridView gridView;
     private EditBox dataEdit;
     private BtnLabel bl_ReadMail;
@@ -130,7 +130,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initData(IEditItem item)
     {
-        dataItem = (Guid) item;
+        dataItem = (GuidItem) item;
         tf_PropName.setText(item.getName());
         cb_PropData.setModel(UserMdl.getCboxMdl());
 

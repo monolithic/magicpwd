@@ -3,12 +3,12 @@
  */
 package com.magicpwd.m;
 
-import com.magicpwd._comn.Guid;
+import com.magicpwd._comn.GuidItem;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.magicpwd._comn.Keys;
-import com.magicpwd._comn.Meta;
+import com.magicpwd._comn.MetaItem;
 import com.magicpwd._comn.Hint;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
@@ -34,7 +34,7 @@ public class NoteMdl
 
     public IEditItem initGuid()
     {
-        Guid guid = new Guid();
+        GuidItem guid = new GuidItem();
         guid.setData(ConsDat.HASH_NOTE);
         ls_ItemList.add(guid);
         return guid;
@@ -42,7 +42,7 @@ public class NoteMdl
 
     public IEditItem initMeta()
     {
-        Meta meta = new Meta();
+        MetaItem meta = new MetaItem();
         ls_ItemList.add(meta);
         return meta;
     }

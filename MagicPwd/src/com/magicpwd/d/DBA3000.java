@@ -182,7 +182,7 @@ public class DBA3000
         {
             dba.init();
 
-            text = '%' + Util.text2DB(text.trim()).replace(' ', '%').replace('+', '%') + '%';
+            text = Util.text2DB(text.trim()).replaceFirst("^[+\\s]*", "%").replaceFirst("[+\\s]*$", "%").replaceAll("[+%\\s]+", "%");
             // 查询语句拼接
             dba.addTable(DBC3000.P30F0100);
             addUserSort(dba);

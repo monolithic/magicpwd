@@ -3,8 +3,6 @@
  */
 package com.magicpwd.v;
 
-import javax.swing.JPanel;
-
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.c.FindEvt;
@@ -13,7 +11,7 @@ import com.magicpwd.c.FindEvt;
  * @author Amon
  * 
  */
-public class FindBar extends JPanel
+public class FindBar extends javax.swing.JPanel
 {
 
     private FindEvt fe_FindEvent;
@@ -79,7 +77,7 @@ public class FindBar extends JPanel
         tf_ItemFind.requestFocus();
     }
 
-    public void setActionEvent(FindEvt event)
+    public void setFindEvent(FindEvt event)
     {
         fe_FindEvent = event;
     }
