@@ -34,6 +34,7 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
 
     public void initView()
     {
+        pl_NoteBase = new javax.swing.JPanel();
         lb_NoteHead = new javax.swing.JLabel();
         tf_NoteHead = new javax.swing.JTextField();
         bt_CrteNote = new BtnLabel();
@@ -127,8 +128,8 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this.getContentPane());
-        this.getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_NoteBase);
+        pl_NoteBase.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 javax.swing.GroupLayout.Alignment.TRAILING,
                 layout.createSequentialGroup().addContainerGap().addGroup(
@@ -166,6 +167,7 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
                 ConsEnv.BUTN_NORM_HIGH, ConsEnv.BUTN_NORM_HIGH, ConsEnv.BUTN_NORM_HIGH).addComponent(
                 ck_NoteWrap).addComponent(lb_NoteInfo)).addContainerGap()));
 
+        this.getContentPane().add(pl_NoteBase);
         this.pack();
         this.setIconImage(Util.getLogo());
         this.setTitle(Lang.getLang(LangRes.P30F5201, "记事便签"));
@@ -191,9 +193,8 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
 
     public void initData()
     {
-        javax.swing.JPanel panel = (javax.swing.JPanel) this.getContentPane();
-        Util.addEditAction(panel.getActionMap(), panel.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
-        Util.addFileAction(panel.getActionMap(), panel.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
+        Util.addEditAction(pl_NoteBase.getActionMap(), pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
+        Util.addFileAction(pl_NoteBase.getActionMap(), pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
     }
 
     @Override
@@ -588,6 +589,7 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
         }
         return true;
     }
+    private javax.swing.JPanel pl_NoteBase;
     private javax.swing.JCheckBox ck_NoteWrap;
     private javax.swing.JLabel lb_NoteHead;
     private javax.swing.JLabel lb_NoteInfo;
