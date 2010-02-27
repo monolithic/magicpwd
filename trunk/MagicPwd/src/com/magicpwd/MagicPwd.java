@@ -136,6 +136,18 @@ public class MagicPwd
             UserMdl.setRunMode(ConsEnv.MODE_RUN_WEB);
         }
 
+        // 启动后台预加载线程
+        Thread t = new Thread()
+        {
+
+            @Override
+            public void run()
+            {
+                preLoad();
+            }
+        };
+        t.start();
+
         // 显示登录或注册界面
         UserSign us = new UserSign(UserMdl.getCfg().getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.SIGN_IN : ConsEnv.SIGN_UP);
         us.setConfrmBackCall(new IBackCall()
@@ -148,18 +160,6 @@ public class MagicPwd
             }
         });
         us.init();
-
-        // 启动后台预加载线程
-        Thread t = new Thread()
-        {
-
-            @Override
-            public void run()
-            {
-                preLoad();
-            }
-        };
-        t.start();
     }
 
     public static void exit(int status)
@@ -185,6 +185,8 @@ public class MagicPwd
         {
             Logs.exception(exp);
         }
+
+        showMainPtn();
     }
 
     private static void endSave()

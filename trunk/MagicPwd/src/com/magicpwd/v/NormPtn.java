@@ -15,6 +15,7 @@ import com.magicpwd.c.FindEvt;
 import com.magicpwd.c.MenuEvt;
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.UserMdl;
+import com.magicpwd.r.ListCR;
 
 /**
  * 正常模式：记事便签
@@ -25,6 +26,8 @@ import com.magicpwd.m.UserMdl;
 public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
 {
 
+    private String lastHash;
+    private java.awt.CardLayout infoLayout;
     private java.util.List<S1S2> noteList;
 
     public NormPtn()
@@ -44,8 +47,9 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
         ta_NoteData = new javax.swing.JTextArea();
         bt_ExitNote = new BtnLabel();
         ck_NoteWrap = new javax.swing.JCheckBox();
-        cb_NoteList = new javax.swing.JComboBox();
+        pl_NoteInfo = new javax.swing.JPanel();
         lb_NoteInfo = new javax.swing.JLabel();
+        cb_NoteInfo = new javax.swing.JComboBox();
 
         lb_NoteHead.setLabelFor(tf_NoteHead);
 
@@ -128,6 +132,22 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
             }
         });
 
+        infoLayout = new java.awt.CardLayout();
+        pl_NoteInfo.setLayout(infoLayout);
+        pl_NoteInfo.add("info", lb_NoteInfo);
+
+        cb_NoteInfo.setRenderer(new ListCR());
+        cb_NoteInfo.addItemListener(new java.awt.event.ItemListener()
+        {
+
+            @Override
+            public void itemStateChanged(java.awt.event.ItemEvent evt)
+            {
+                cb_NoteInfoItemStateChanged(evt);
+            }
+        });
+        pl_NoteInfo.add("list", cb_NoteInfo);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_NoteBase);
         pl_NoteBase.setLayout(layout);
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
@@ -143,7 +163,7 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
         hsg1.addGap(2);
         hsg1.addComponent(bt_CrteNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.SequentialGroup hsg2 = layout.createSequentialGroup();
-        hsg2.addComponent(lb_NoteInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE);
+        hsg2.addComponent(pl_NoteInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE);
         hsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg2.addComponent(ck_NoteWrap);
         hsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -168,7 +188,7 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
         javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER);
         vpg2.addComponent(bt_ExitNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         vpg2.addComponent(ck_NoteWrap);
-        vpg2.addComponent(lb_NoteInfo);
+        vpg2.addComponent(pl_NoteInfo);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
         vsg.addContainerGap();
         vsg.addGroup(vpg1);
@@ -280,6 +300,7 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
     {
         tf_NoteHead.setText("");
         ta_NoteData.setText("");
+        infoLayout.show(pl_NoteInfo, "info");
         lb_NoteInfo.setText("");
         tf_NoteHead.requestFocus();
         UserMdl.getNoteMdl().clear();
@@ -350,6 +371,7 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
             {
                 path = "..." + path.substring(path.length() - 12);
             }
+            infoLayout.show(pl_NoteInfo, "info");
             lb_NoteInfo.setText(path);
         }
         catch (Exception exp)
@@ -397,6 +419,7 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
         try
         {
             UserMdl.getNoteMdl().saveData(true);
+            infoLayout.show(pl_NoteInfo, "info");
             Lang.setWText(lb_NoteInfo, LangRes.P30F5A03, "");
         }
         catch (Exception exp)
@@ -534,22 +557,12 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
             return;
         }
 
-        try
+        lastHash = "";
+        infoLayout.show(pl_NoteInfo, "list");
+        cb_NoteInfo.removeAllItems();
+        for (S1S2 item : noteList)
         {
-            UserMdl.getNoteMdl().clear();
-            UserMdl.getNoteMdl().loadData(noteList.get(0).getK());
-            IEditItem note = UserMdl.getNoteMdl().getNote();
-            if (note != null)
-            {
-                tf_NoteHead.setText(note.getName());
-                ta_NoteData.setText(note.getData());
-            }
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-            Lang.showMesg(this, null, exp.getMessage());
-            return;
+            cb_NoteInfo.addItem(item);
         }
     }
 
@@ -588,6 +601,34 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
         fileApndActionPerformed(evt);
     }
 
+    private void cb_NoteInfoItemStateChanged(java.awt.event.ItemEvent evt)
+    {
+        S1S2 item = (S1S2) cb_NoteInfo.getSelectedItem();
+        if (item == null || item.getK().equals(lastHash))
+        {
+            return;
+        }
+        lastHash = item.getK();
+
+        try
+        {
+            UserMdl.getNoteMdl().clear();
+            UserMdl.getNoteMdl().loadData(lastHash);
+            IEditItem note = UserMdl.getNoteMdl().getNote();
+            if (note != null)
+            {
+                tf_NoteHead.setText(note.getName());
+                ta_NoteData.setText(note.getData());
+            }
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            Lang.showMesg(this, null, exp.getMessage());
+            return;
+        }
+    }
+
     private void ck_NoteWrapStateChanged(javax.swing.event.ChangeEvent evt)
     {
         ta_NoteData.setLineWrap(ck_NoteWrap.isSelected());
@@ -608,8 +649,9 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
         return true;
     }
     private javax.swing.JPanel pl_NoteBase;
+    private javax.swing.JPanel pl_NoteInfo;
     private javax.swing.JCheckBox ck_NoteWrap;
-    private javax.swing.JComboBox cb_NoteList;
+    private javax.swing.JComboBox cb_NoteInfo;
     private javax.swing.JLabel lb_NoteHead;
     private javax.swing.JLabel lb_NoteInfo;
     private javax.swing.JTextArea ta_NoteData;
