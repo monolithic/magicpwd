@@ -1,10 +1,7 @@
 package com.magicpwd.v;
 
-import java.util.EventListener;
-
-import javax.swing.JOptionPane;
-
 import com.magicpwd.MagicPwd;
+import com.magicpwd._comn.S1S2;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
@@ -28,6 +25,8 @@ import com.magicpwd.m.UserMdl;
 public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
 {
 
+    private java.util.List<S1S2> noteList;
+
     public NormPtn()
     {
     }
@@ -41,10 +40,11 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
         bt_OpenNote = new BtnLabel();
         bt_SaveNote = new BtnLabel();
         bt_SrchNote = new BtnLabel();
-        javax.swing.JScrollPane sp1 = new javax.swing.JScrollPane();
+        javax.swing.JScrollPane sp_NoteData = new javax.swing.JScrollPane();
         ta_NoteData = new javax.swing.JTextArea();
         bt_ExitNote = new BtnLabel();
         ck_NoteWrap = new javax.swing.JCheckBox();
+        cb_NoteList = new javax.swing.JComboBox();
         lb_NoteInfo = new javax.swing.JLabel();
 
         lb_NoteHead.setLabelFor(tf_NoteHead);
@@ -104,7 +104,7 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
             }
         });
 
-        sp1.setViewportView(ta_NoteData);
+        sp_NoteData.setViewportView(ta_NoteData);
 
         bt_ExitNote.setMnemonic('X');
         bt_ExitNote.setIcon(Util.getIcon(ConsEnv.ICON_SOFT_EXIT));
@@ -130,42 +130,54 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_NoteBase);
         pl_NoteBase.setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(sp1,
-                javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300,
-                Short.MAX_VALUE).addGroup(
-                javax.swing.GroupLayout.Alignment.LEADING,
-                layout.createSequentialGroup().addComponent(lb_NoteHead).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_NoteHead,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_SrchNote,
-                ConsEnv.BUTN_MINI_WIDH, ConsEnv.BUTN_MINI_WIDH, ConsEnv.BUTN_MINI_WIDH).addGap(
-                2).addComponent(bt_SaveNote, ConsEnv.BUTN_MINI_WIDH, ConsEnv.BUTN_MINI_WIDH,
-                ConsEnv.BUTN_MINI_WIDH).addGap(2).addComponent(bt_OpenNote,
-                ConsEnv.BUTN_MINI_WIDH, ConsEnv.BUTN_MINI_WIDH, ConsEnv.BUTN_MINI_WIDH).addGap(
-                2).addComponent(bt_CrteNote, ConsEnv.BUTN_MINI_WIDH, ConsEnv.BUTN_MINI_WIDH,
-                ConsEnv.BUTN_MINI_WIDH)).addGroup(
-                layout.createSequentialGroup().addComponent(lb_NoteInfo,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(ck_NoteWrap).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_ExitNote, ConsEnv.BUTN_NORM_WIDH, ConsEnv.BUTN_NORM_WIDH,
-                ConsEnv.BUTN_NORM_WIDH))).addContainerGap()));
-        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addContainerGap().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER).addComponent(lb_NoteHead).addComponent(bt_CrteNote, ConsEnv.BUTN_MINI_HIGH, ConsEnv.BUTN_MINI_HIGH,
-                ConsEnv.BUTN_MINI_HIGH).addComponent(bt_OpenNote, ConsEnv.BUTN_MINI_HIGH,
-                ConsEnv.BUTN_MINI_HIGH, ConsEnv.BUTN_MINI_HIGH).addComponent(bt_SaveNote,
-                ConsEnv.BUTN_MINI_HIGH, ConsEnv.BUTN_MINI_HIGH, ConsEnv.BUTN_MINI_HIGH).addComponent(bt_SrchNote, ConsEnv.BUTN_MINI_HIGH, ConsEnv.BUTN_MINI_HIGH,
-                ConsEnv.BUTN_MINI_HIGH).addComponent(tf_NoteHead,
-                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp1,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER).addComponent(bt_ExitNote,
-                ConsEnv.BUTN_NORM_HIGH, ConsEnv.BUTN_NORM_HIGH, ConsEnv.BUTN_NORM_HIGH).addComponent(
-                ck_NoteWrap).addComponent(lb_NoteInfo)).addContainerGap()));
+        javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
+        hsg1.addComponent(lb_NoteHead);
+        hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg1.addComponent(tf_NoteHead, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE);
+        hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg1.addComponent(bt_SrchNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hsg1.addGap(2);
+        hsg1.addComponent(bt_SaveNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hsg1.addGap(2);
+        hsg1.addComponent(bt_OpenNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hsg1.addGap(2);
+        hsg1.addComponent(bt_CrteNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.SequentialGroup hsg2 = layout.createSequentialGroup();
+        hsg2.addComponent(lb_NoteInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE);
+        hsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg2.addComponent(ck_NoteWrap);
+        hsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg2.addComponent(bt_ExitNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
+        hpg.addGroup(hsg1);
+        hpg.addComponent(sp_NoteData, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE);
+        hpg.addGroup(hsg2);
+        javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
+        hsg.addContainerGap();
+        hsg.addGroup(hpg);
+        hsg.addContainerGap();
+        layout.setHorizontalGroup(hsg);
+
+        javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER);
+        vpg1.addComponent(lb_NoteHead);
+        vpg1.addComponent(bt_CrteNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg1.addComponent(bt_OpenNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg1.addComponent(bt_SaveNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg1.addComponent(bt_SrchNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg1.addComponent(tf_NoteHead, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER);
+        vpg2.addComponent(bt_ExitNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg2.addComponent(ck_NoteWrap);
+        vpg2.addComponent(lb_NoteInfo);
+        javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
+        vsg.addContainerGap();
+        vsg.addGroup(vpg1);
+        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg.addComponent(sp_NoteData, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE);
+        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg.addGroup(vpg2);
+        vsg.addContainerGap();
+        layout.setVerticalGroup(vsg);
 
         this.getContentPane().add(pl_NoteBase);
         this.pack();
@@ -193,6 +205,7 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
 
     public void initData()
     {
+        noteList = new java.util.ArrayList<S1S2>();
         Util.addEditAction(pl_NoteBase.getActionMap(), pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
         Util.addFileAction(pl_NoteBase.getActionMap(), pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
     }
@@ -359,7 +372,7 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
         String data = ta_NoteData.getText();
         if (!Util.isValidate(data))
         {
-            if (Lang.showFirm(this, LangRes.P30F5A02, "记事内容并没有实际意义的文字，确认要保存么？") != JOptionPane.NO_OPTION)
+            if (Lang.showFirm(this, LangRes.P30F5A02, "记事内容并没有实际意义的文字，确认要保存么？") != javax.swing.JOptionPane.NO_OPTION)
             {
                 return;
             }
@@ -371,10 +384,12 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
             UserMdl.getNoteMdl().initGuid();
             // Meta
             UserMdl.getNoteMdl().initMeta();
-            // Past;
+            // Logo
             UserMdl.getNoteMdl().initLogo();
-            // Note
+            // Hint
             UserMdl.getNoteMdl().initHint();
+            // Note
+            UserMdl.getNoteMdl().initNote();
         }
 
         UserMdl.getNoteMdl().setNote(head, data);
@@ -495,7 +510,7 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
     public void viewTop1ActionPerformed(java.awt.event.ActionEvent evt)
     {
         boolean b = !UserMdl.getCfg().isViewTop();
-        MagicPwd.getForm().setAlwaysOnTop(b);
+        MagicPwd.getCurrForm().setAlwaysOnTop(b);
 
         UserMdl.getCfg().setViewTop(b);
     }
@@ -508,8 +523,11 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
         {
             return;
         }
-        String noteHash = DBA3000.findUserNote(noteName);
-        if (!Util.isValidate(noteHash))
+
+        noteList.clear();
+        boolean b = DBA3000.findUserNote(noteName, noteList);
+        b &= noteList.size() > 0;
+        if (!b || noteList.size() < 1)
         {
             Lang.showMesg(this, LangRes.P30F7A1F, "搜索不到与标题相匹配的记事内容，请修改查询条件后重试！");
             tf_NoteHead.requestFocus();
@@ -519,30 +537,30 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
         try
         {
             UserMdl.getNoteMdl().clear();
-            UserMdl.getNoteMdl().loadData(noteHash);
-            IEditItem tplt = UserMdl.getNoteMdl().getItemAt(3);
-            if (tplt != null)
+            UserMdl.getNoteMdl().loadData(noteList.get(0).getK());
+            IEditItem note = UserMdl.getNoteMdl().getNote();
+            if (note != null)
             {
-                tf_NoteHead.setText(tplt.getName());
-                ta_NoteData.setText(tplt.getData());
+                tf_NoteHead.setText(note.getName());
+                ta_NoteData.setText(note.getData());
             }
         }
         catch (Exception exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(this, exp.getMessage(), "");
+            Lang.showMesg(this, null, exp.getMessage());
             return;
         }
     }
 
     private void bt_ExitNoteActionPerformed(java.awt.event.ActionEvent evt)
     {
-        UserSign us = new UserSign(ConsEnv.SIGN_RS, MagicPwd.getForm());
+        UserSign us = new UserSign(ConsEnv.SIGN_RS, MagicPwd.getCurrForm());
         us.setConfrmBackCall(new IBackCall()
         {
 
             @Override
-            public boolean callBack(Object sender, EventListener event, String... params)
+            public boolean callBack(Object sender, java.util.EventListener event, String... params)
             {
                 return showFrm();
             }
@@ -583,14 +601,15 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
     private boolean showFrm()
     {
         MagicPwd.showMainPtn();
-        if (!MagicPwd.getForm().isVisible())
+        if (!MagicPwd.getCurrForm().isVisible())
         {
-            MagicPwd.getForm().setVisible(true);
+            MagicPwd.getCurrForm().setVisible(true);
         }
         return true;
     }
     private javax.swing.JPanel pl_NoteBase;
     private javax.swing.JCheckBox ck_NoteWrap;
+    private javax.swing.JComboBox cb_NoteList;
     private javax.swing.JLabel lb_NoteHead;
     private javax.swing.JLabel lb_NoteInfo;
     private javax.swing.JTextArea ta_NoteData;

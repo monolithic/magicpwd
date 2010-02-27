@@ -16,7 +16,7 @@ import com.magicpwd._comn.PwdsItem;
 import com.magicpwd._comn.EditItem;
 import com.magicpwd._comn.LogoItem;
 import com.magicpwd._comn.MetaItem;
-import com.magicpwd._comn.Hint;
+import com.magicpwd._comn.HintItem;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.LangRes;
@@ -232,7 +232,7 @@ public class GridMdl extends DefaultTableModel
         // 徽标
         ls_ItemList.add(new LogoItem());
         // 过时提醒
-        ls_ItemList.add(new Hint());
+        ls_ItemList.add(new HintItem());
         fireTableDataChanged();
     }
 
@@ -522,7 +522,7 @@ public class GridMdl extends DefaultTableModel
         PwdsItem pwds = keys.getPassword();
         pwds.deCript(UserMdl.getDCipher(), UserMdl.getSec().getMask());
         StringBuffer text = pwds.getP30F0203();
-        if (text.length() < 16)
+        if (text.length() < 1)
         {
             return;
         }
@@ -545,11 +545,11 @@ public class GridMdl extends DefaultTableModel
         logo.setName(keys.getP30F010B());
         list.add(logo);
 
-        // Hint
-        Hint note = new Hint();
-        note.setTime(keys.getP30F010C());
-        note.setData(keys.getP30F010D());
-        list.add(note);
+        // HintItem
+        HintItem hint = new HintItem();
+        hint.setTime(keys.getP30F010C());
+        hint.setData(keys.getP30F010D());
+        list.add(hint);
 
         // 处理每一个数据
         StringTokenizer st = new StringTokenizer(text.toString(), ConsDat.SP_SQL_EE);
@@ -608,8 +608,8 @@ public class GridMdl extends DefaultTableModel
         LogoItem logo = (LogoItem) list.get(ConsEnv.PWDS_HEAD_LOGO);
         keys.setP30F010B(logo.getName());
 
-        // Hint
-        Hint note = (Hint) list.get(ConsEnv.PWDS_HEAD_HINT);
+        // HintItem
+        HintItem note = (HintItem) list.get(ConsEnv.PWDS_HEAD_HINT);
         keys.setP30F010C(note.getTime());
         keys.setP30F010D(note.getData());
 

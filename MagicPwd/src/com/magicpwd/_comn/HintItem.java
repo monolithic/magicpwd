@@ -13,12 +13,12 @@ import java.sql.Timestamp;
  *
  * @author Amonsoft
  */
-public class Hint extends EditItem
+public class HintItem extends EditItem
 {
 
     private Timestamp time;
 
-    public Hint()
+    public HintItem()
     {
         super(ConsDat.INDX_HINT);
     }

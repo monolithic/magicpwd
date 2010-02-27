@@ -347,7 +347,7 @@ public class MenuPwd extends JPopupMenu
 
     private void mi_SizeMoreActionPerformed(java.awt.event.ActionEvent evt)
     {
-        String s = JOptionPane.showInputDialog(MagicPwd.getForm(), "", tpltData.getSpec(EditItem.SPEC_PWDS_SIZE));
+        String s = JOptionPane.showInputDialog(MagicPwd.getCurrForm(), "", tpltData.getSpec(EditItem.SPEC_PWDS_SIZE));
         if (s == null)
         {
             return;
@@ -355,7 +355,7 @@ public class MenuPwd extends JPopupMenu
         s = s.trim();
         if (s.length() < 1)
         {
-            Lang.showMesg(MagicPwd.getForm(), "", "");
+            Lang.showMesg(MagicPwd.getCurrForm(), "", "");
             return;
         }
 
