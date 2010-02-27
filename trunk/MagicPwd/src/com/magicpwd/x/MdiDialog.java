@@ -1,11 +1,5 @@
 package com.magicpwd.x;
 
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
-
-import javax.swing.DefaultListModel;
-import javax.swing.JDialog;
-
 import com.magicpwd.MagicPwd;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._cons.ConsEnv;
@@ -21,17 +15,18 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.c.MenuEvt;
 
-public class MdiDialog extends JDialog
+public class MdiDialog extends javax.swing.JDialog
 {
+
     private static MdiDialog md_Dialog;
-    private DefaultListModel lm_PropList;
-    private CardLayout cl_CardLayout;
+    private java.awt.CardLayout cl_CardLayout;
+    private javax.swing.DefaultListModel lm_PropList;
 
     private MdiDialog()
     {
-        super(MagicPwd.getForm());
-        lm_PropList = new DefaultListModel();
-        cl_CardLayout = new CardLayout();
+        super(MagicPwd.getCurrForm());
+        lm_PropList = new javax.swing.DefaultListModel();
+        cl_CardLayout = new java.awt.CardLayout();
         setDefaultCloseOperation(MdiDialog.DISPOSE_ON_CLOSE);
     }
 
@@ -54,13 +49,14 @@ public class MdiDialog extends JDialog
         pl_PropPanel = new javax.swing.JPanel();
         pl_CardPanel = new javax.swing.JPanel();
 
-        pl_PropPanel.setLayout(new BorderLayout());
+        pl_PropPanel.setLayout(new java.awt.BorderLayout());
 
         ls_PropList = new javax.swing.JList();
         ls_PropList.setModel(lm_PropList);
         pl_PropPanel.add(new javax.swing.JScrollPane(ls_PropList));
         ls_PropList.addListSelectionListener(new javax.swing.event.ListSelectionListener()
         {
+
             @Override
             public void valueChanged(javax.swing.event.ListSelectionEvent evt)
             {
@@ -75,19 +71,18 @@ public class MdiDialog extends JDialog
         this.getContentPane().setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 layout.createSequentialGroup().addContainerGap().addComponent(pl_PropPanel,
-                        javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(
-                                pl_CardPanel, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addContainerGap()));
+                javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED).addComponent(
+                pl_CardPanel, javax.swing.GroupLayout.DEFAULT_SIZE,
+                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addContainerGap()));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
                 javax.swing.GroupLayout.Alignment.TRAILING,
                 layout.createSequentialGroup().addContainerGap().addGroup(
-                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(
-                                pl_CardPanel, javax.swing.GroupLayout.Alignment.LEADING,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                Short.MAX_VALUE).addComponent(pl_PropPanel, javax.swing.GroupLayout.Alignment.LEADING,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                Short.MAX_VALUE)).addContainerGap()));
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(
+                pl_CardPanel, javax.swing.GroupLayout.Alignment.LEADING,
+                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                Short.MAX_VALUE).addComponent(pl_PropPanel, javax.swing.GroupLayout.Alignment.LEADING,
+                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
+                Short.MAX_VALUE)).addContainerGap()));
 
         pack();
     }
@@ -100,21 +95,21 @@ public class MdiDialog extends JDialog
     {
         String t;
 
-        t= Lang.getLang(LangRes.P30F1202, "常规设置");
+        t = Lang.getLang(LangRes.P30F1202, "常规设置");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_USET, t, t));
         USetProp up = new USetProp();
         up.initView();
         up.initLang();
         pl_CardPanel.add(ConsEnv.PROP_USET, up);
 
-        t= Lang.getLang(LangRes.P30F1203, "口令管理");
+        t = Lang.getLang(LangRes.P30F1203, "口令管理");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_CHAR, t, t));
         CharProp cp = new CharProp();
         cp.initView();
         cp.initLang();
         pl_CardPanel.add(ConsEnv.PROP_CHAR, cp);
 
-        t= Lang.getLang(LangRes.P30F1204, "模板管理");
+        t = Lang.getLang(LangRes.P30F1204, "模板管理");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_TPLT, t, t));
         TpltProp tp = new TpltProp();
         tp.initView();
@@ -128,21 +123,21 @@ public class MdiDialog extends JDialog
         kp.initLang();
         pl_CardPanel.add(ConsEnv.PROP_KIND, kp);
 
-        t= Lang.getLang(LangRes.P30F1206, "键盘快捷");
+        t = Lang.getLang(LangRes.P30F1206, "键盘快捷");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_SKEY, t, t));
         SKeyProp sp = new SKeyProp();
         sp.initView();
         sp.initLang();
         pl_CardPanel.add(ConsEnv.PROP_SKEY, sp);
 
-        t= Lang.getLang(LangRes.P30F1207, "历史查看");
+        t = Lang.getLang(LangRes.P30F1207, "历史查看");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_HIST, t, t));
         HistProp hp = new HistProp();
         hp.initView();
         hp.initLang();
         pl_CardPanel.add(ConsEnv.PROP_HIST, hp);
 
-        t= Lang.getLang(LangRes.P30F1208, "关于软件");
+        t = Lang.getLang(LangRes.P30F1208, "关于软件");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_INFO, t, t));
         InfoProp ip = new InfoProp();
         ip.initView();
@@ -197,7 +192,6 @@ public class MdiDialog extends JDialog
         cl_CardLayout.show(pl_CardPanel, kvItem.getK());
         setTitle(kvItem.getV1());
     }
-
     private javax.swing.JList ls_PropList;
     private javax.swing.JPanel pl_CardPanel;
     private javax.swing.JPanel pl_PropPanel;

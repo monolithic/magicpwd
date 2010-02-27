@@ -35,7 +35,7 @@ public class MagicPwd
     {
     }
 
-    public static javax.swing.JFrame getForm()
+    public static javax.swing.JFrame getCurrForm()
     {
         return mf_CurrForm;
     }
@@ -207,9 +207,9 @@ public class MagicPwd
     private static boolean viewFrm()
     {
         showMainPtn();
-        if (!getForm().isVisible())
+        if (!getCurrForm().isVisible())
         {
-            getForm().setVisible(true);
+            getCurrForm().setVisible(true);
         }
         return true;
     }

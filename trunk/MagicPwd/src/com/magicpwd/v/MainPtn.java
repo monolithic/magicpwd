@@ -138,7 +138,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             return;
         }
 
-        UserSign us = new UserSign(ConsEnv.SIGN_RS, MagicPwd.getForm());
+        UserSign us = new UserSign(ConsEnv.SIGN_RS, MagicPwd.getCurrForm());
         us.setConfrmBackCall(new IBackCall()
         {
 
@@ -168,7 +168,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             return;
         }
 
-        UserSign us = new UserSign(ConsEnv.SIGN_RS, MagicPwd.getForm());
+        UserSign us = new UserSign(ConsEnv.SIGN_RS, MagicPwd.getCurrForm());
         us.setConfrmBackCall(new IBackCall()
         {
 
@@ -568,7 +568,6 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     @Override
     public void fileHideActionPerformed(java.awt.event.ActionEvent evt)
     {
-        MagicPwd.showNormPtn();
         MdiDialog md = MdiDialog.getInstance(this);
         if (md != null && md.isVisible())
         {
@@ -578,10 +577,15 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         {
             mp_MpsDialog.setVisible(false);
         }
+        this.setVisible(false);
+
+        MagicPwd.showNormPtn();
+        MagicPwd.getCurrForm().setVisible(true);
 
         // Save Temperary Data
         if (UserMdl.getGridMdl().isModified())
         {
+            UserMdl.getGridMdl().setInterim(true);
             UserMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(ConsDat.HASH_ROOT);
             try
             {
@@ -592,7 +596,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                 Logs.exception(exp);
             }
         }
-        showPropEdit();
+//        showPropEdit();
     }
 
     @Override
@@ -829,7 +833,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     @Override
     public void userUpdateActionPerformed(java.awt.event.ActionEvent evt)
     {
-        UserSign us = new UserSign(ConsEnv.SIGN_PK, MagicPwd.getForm());
+        UserSign us = new UserSign(ConsEnv.SIGN_PK, MagicPwd.getCurrForm());
         us.init();
     }
 
@@ -843,7 +847,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             return;
         }
 
-        UserSign us = new UserSign(ConsEnv.SIGN_SK, MagicPwd.getForm());
+        UserSign us = new UserSign(ConsEnv.SIGN_SK, MagicPwd.getCurrForm());
         us.setConfrmBackCall(new IBackCall()
         {
 
@@ -948,7 +952,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     public void viewTop1ActionPerformed(java.awt.event.ActionEvent evt)
     {
         boolean b = !UserMdl.getCfg().isViewTop();
-        MagicPwd.getForm().setAlwaysOnTop(b);
+        MagicPwd.getCurrForm().setAlwaysOnTop(b);
 
         UserMdl.getCfg().setViewTop(b);
     }
@@ -1588,15 +1592,15 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             }
             else
             {
-                mp_MpsDialog = new MpsDialog(MagicPwd.getForm(), this);
+                mp_MpsDialog = new MpsDialog(MagicPwd.getCurrForm(), this);
                 mp_MpsDialog.initView();
                 mp_MpsDialog.initLang();
                 mp_MpsDialog.setPropView(pl_CardProp);
                 mp_MpsDialog.pack();
                 mp_MpsDialog.setResizable(false);
                 java.awt.Dimension a = mp_MpsDialog.getSize();
-                java.awt.Dimension b = MagicPwd.getForm().getSize();
-                java.awt.Point p = MagicPwd.getForm().getLocation();
+                java.awt.Dimension b = MagicPwd.getCurrForm().getSize();
+                java.awt.Point p = MagicPwd.getCurrForm().getLocation();
                 mp_MpsDialog.setLocation(p.x + b.width, p.y + b.height - a.height);
             }
             if (!mp_MpsDialog.isVisible())

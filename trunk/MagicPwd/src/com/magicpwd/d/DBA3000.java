@@ -162,6 +162,12 @@ public class DBA3000
         }
     }
 
+    private static String text2Query(String text)
+    {
+        text = Util.text2DB(text.toLowerCase().replace('　', ' ').replace('＋', '+'));
+        return text.replaceFirst("^[+\\s]*", "%").replaceFirst("[+\\s]*$", "%").replaceAll("[+%\\s]+", "%");
+    }
+
     /**
      * 查询标题或关键搜索中含有指定字符的口令数据
      * @param text
@@ -182,12 +188,10 @@ public class DBA3000
         {
             dba.init();
 
-            text = Util.text2DB(text.toLowerCase().replace('　', ' ').replace('＋', '+'));
-            text = text.replaceFirst("^[+\\s]*", "%").replaceFirst("[+\\s]*$", "%").replaceAll("[+%\\s]+", "%");
             // 查询语句拼接
             dba.addTable(DBC3000.P30F0100);
             addUserSort(dba);
-            dba.addWhere(Util.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC3000.P30F0109, DBC3000.P30F010A, text));
+            dba.addWhere(Util.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC3000.P30F0109, DBC3000.P30F010A, text2Query(text)));
             addDataSort(dba);
 
             getNameData(dba.executeSelect(), list);
@@ -233,8 +237,13 @@ public class DBA3000
         }
     }
 
-    public static String findUserNote(String text)
+    public static boolean findUserNote(String text, java.util.List<S1S2> list)
     {
+        if (!Util.isValidate(text))
+        {
+            return false;
+        }
+
         // 数据库连接初始化
         DBAccess dba = new DBAccess();
 
@@ -242,29 +251,28 @@ public class DBA3000
         {
             dba.init();
 
-            text = '%' + Util.text2DB(text.replace(' ', '%').replace('+', '%')) + '%';
-
             // 查询语句拼接
             dba.addTable(DBC3000.P30F0100);
             dba.addColumn(DBC3000.P30F0104);
             dba.addColumn(DBC3000.P30F0109);
             dba.addColumn(DBC3000.P30F010A);
             dba.addWhere(DBC3000.P30F0105, UserMdl.getUserId());
-            dba.addWhere(Util.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC3000.P30F0109, DBC3000.P30F010A, text.toLowerCase()));
+            dba.addWhere(Util.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC3000.P30F0109, DBC3000.P30F010A, text2Query(text)));
             dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_MODE_1);
-            dba.addWhere(DBC3000.P30F0107, ConsDat.HASH_NOTE);
+            dba.addWhere(DBC3000.P30F0106, ConsDat.HASH_NOTE);
 
             ResultSet rest = dba.executeSelect();
-            if (rest.next())
+            while (rest.next())
             {
-                return rest.getString(DBC3000.P30F0104);
+                list.add(new S1S2(rest.getString(DBC3000.P30F0104), rest.getString(DBC3000.P30F0109), rest.getString(DBC3000.P30F010A)));
             }
-            return "";
+            rest.close();
+            return true;
         }
         catch (Exception exp)
         {
             Logs.exception(exp);
-            return "";
+            return false;
         }
         finally
         {

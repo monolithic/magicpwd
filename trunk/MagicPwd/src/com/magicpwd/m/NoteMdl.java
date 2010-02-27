@@ -3,13 +3,15 @@
  */
 package com.magicpwd.m;
 
+import com.magicpwd._comn.EditItem;
 import com.magicpwd._comn.GuidItem;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.magicpwd._comn.Keys;
 import com.magicpwd._comn.MetaItem;
-import com.magicpwd._comn.Hint;
+import com.magicpwd._comn.HintItem;
+import com.magicpwd._comn.LogoItem;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._face.IEditItem;
@@ -36,6 +38,7 @@ public class NoteMdl
     {
         GuidItem guid = new GuidItem();
         guid.setData(ConsDat.HASH_NOTE);
+        guid.setTime(new java.sql.Timestamp(System.currentTimeMillis()));
         ls_ItemList.add(guid);
         return guid;
     }
@@ -49,14 +52,22 @@ public class NoteMdl
 
     public IEditItem initLogo()
     {
-        Hint note = new Hint();
-        ls_ItemList.add(note);
-        return note;
+        LogoItem logo = new LogoItem();
+        ls_ItemList.add(logo);
+        return logo;
     }
 
     public IEditItem initHint()
     {
-        Hint note = new Hint();
+        HintItem hint = new HintItem();
+        ls_ItemList.add(hint);
+        return hint;
+    }
+
+    public IEditItem initNote()
+    {
+        EditItem note = new EditItem();
+        note.setType(ConsDat.INDX_AREA);
         ls_ItemList.add(note);
         return note;
     }
@@ -68,10 +79,16 @@ public class NoteMdl
         ls_ItemList.get(ConsEnv.PWDS_HEAD_SIZE).setData(note);
     }
 
+    public IEditItem getNote()
+    {
+        return ls_ItemList.get(ConsEnv.PWDS_HEAD_SIZE);
+    }
+
     public void loadData(String keysHash) throws Exception
     {
         clear();
         keys.setP30F0104(keysHash);
+        keys.setP30F0105(UserMdl.getUserId());
         DBA3000.readPwdsData(keys);
         UserMdl.getGridMdl().deCrypt(keys, ls_ItemList);
     }

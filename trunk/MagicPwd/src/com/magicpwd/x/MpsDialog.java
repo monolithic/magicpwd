@@ -3,28 +3,22 @@
  */
 package com.magicpwd.x;
 
-import java.awt.BorderLayout;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
-import javax.swing.JDialog;
-import javax.swing.JFrame;
-
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.c.MenuEvt;
 
 /**
+ * 属性编辑独立窗口
  * @author Amon
  * 
  */
-public class MpsDialog extends JDialog
+public class MpsDialog extends javax.swing.JDialog
 {
 
     private MenuEvt menuEvt;
 
-    public MpsDialog(JFrame frame, MenuEvt menuEvt)
+    public MpsDialog(javax.swing.JFrame frame, MenuEvt menuEvt)
     {
         super(frame);
         this.menuEvt = menuEvt;
@@ -33,18 +27,18 @@ public class MpsDialog extends JDialog
     public void initView()
     {
         pl_PropEdit = new javax.swing.JPanel();
-        pl_PropEdit.setLayout(new BorderLayout());
+        pl_PropEdit.setLayout(new java.awt.BorderLayout());
 
         Util.addHideAction(pl_PropEdit.getActionMap(), pl_PropEdit.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), menuEvt);
         Util.addViewAction(pl_PropEdit.getActionMap(), pl_PropEdit.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), menuEvt);
         Util.addFileAction(pl_PropEdit.getActionMap(), pl_PropEdit.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), menuEvt);
         Util.addDataAction(pl_PropEdit.getActionMap(), pl_PropEdit.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), menuEvt);
 
-        addWindowListener(new WindowAdapter()
+        addWindowListener(new java.awt.event.WindowAdapter()
         {
 
             @Override
-            public void windowClosing(WindowEvent e)
+            public void windowClosing(java.awt.event.WindowEvent e)
             {
                 windowClosingEvent(e);
             }
@@ -74,7 +68,7 @@ public class MpsDialog extends JDialog
         pl_PropEdit.add(prop);
     }
 
-    private void windowClosingEvent(WindowEvent evt)
+    private void windowClosingEvent(java.awt.event.WindowEvent evt)
     {
         menuEvt.viewSideActionPerformed(null);
     }

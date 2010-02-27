@@ -1,18 +1,20 @@
 package com.magicpwd.x;
 
-import javax.swing.JDialog;
-import javax.swing.tree.TreePath;
-
-import com.magicpwd.r.KindTN;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.m.UserMdl;
+import com.magicpwd.r.KindTN;
 
-public class DatDialog extends JDialog
+/**
+ * 数据迁移对话窗口
+ * @author Amon
+ */
+public class DatDialog extends javax.swing.JDialog
 {
+
     private IBackCall backCall;
 
     public DatDialog(IBackCall backCall)
@@ -26,14 +28,13 @@ public class DatDialog extends JDialog
         bt_Cancel = new javax.swing.JButton();
         bt_Update = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        javax.swing.JScrollPane sp1 = new javax.swing.JScrollPane();
+        javax.swing.JScrollPane sp_KindList = new javax.swing.JScrollPane();
         tr_KindList.setModel(UserMdl.getTreeMdl());
-        sp1.setViewportView(tr_KindList);
+        sp_KindList.setViewportView(tr_KindList);
 
         bt_Cancel.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -43,6 +44,7 @@ public class DatDialog extends JDialog
 
         bt_Update.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -52,27 +54,35 @@ public class DatDialog extends JDialog
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addContainerGap().addGroup(
-                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING).addComponent(sp1,
-                                javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 220,
-                                Short.MAX_VALUE).addGroup(
-                                layout.createSequentialGroup().addComponent(bt_Update).addPreferredGap(
-                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_Cancel)))
-                        .addContainerGap()));
-        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addContainerGap().addComponent(sp1,
-                        javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE).addPreferredGap(
-                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(bt_Cancel)
-                                .addComponent(bt_Update)).addContainerGap()));
+        javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
+        hsg1.addComponent(bt_Update);
+        hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg1.addComponent(bt_Cancel);
+        javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
+        hpg.addComponent(sp_KindList, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE);
+        hpg.addGroup(hsg1);
+        javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
+        hsg.addContainerGap();
+        hsg.addGroup(hpg);
+        hsg.addContainerGap();
+        layout.setHorizontalGroup(hsg);
 
-        setIconImage(Util.getLogo());
-        pack();
+        javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg1.addComponent(bt_Cancel);
+        vpg1.addComponent(bt_Update);
+        javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
+        vsg.addContainerGap();
+        vsg.addComponent(sp_KindList, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE);
+        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg.addGroup(vpg1);
+        vsg.addContainerGap();
+        layout.setVerticalGroup(vsg);
+
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        this.setIconImage(Util.getLogo());
+        this.pack();
         Util.centerForm(this, null);
-        setVisible(true);
+        this.setVisible(true);
     }
 
     public void initLang()
@@ -84,10 +94,10 @@ public class DatDialog extends JDialog
 
     void bt_UpdateActionPerformed(java.awt.event.ActionEvent evt)
     {
-        TreePath tp = tr_KindList.getSelectionPath();
+        javax.swing.tree.TreePath tp = tr_KindList.getSelectionPath();
         if (tp == null)
         {
-            Lang.showMesg(this, LangRes.P30FAA19, "", "请选择您要移动的目标类别！");
+            Lang.showMesg(this, LangRes.P30FAA19, "请选择您要移动的目标类别！");
             return;
         }
 
@@ -107,7 +117,6 @@ public class DatDialog extends JDialog
         this.setVisible(false);
         this.dispose();
     }
-
     private javax.swing.JTree tr_KindList;
     private javax.swing.JButton bt_Update;
     private javax.swing.JButton bt_Cancel;
