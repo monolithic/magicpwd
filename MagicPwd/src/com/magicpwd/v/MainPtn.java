@@ -1,3 +1,6 @@
+/**
+ *
+ */
 package com.magicpwd.v;
 
 import com.magicpwd.MagicPwd;
@@ -41,8 +44,8 @@ import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.GridMdl;
 import com.magicpwd.m.TimeOut;
 import com.magicpwd.m.UserMdl;
+import com.magicpwd.r.KeysCR;
 import com.magicpwd.r.KindTN;
-import com.magicpwd.r.ListCR;
 import com.magicpwd.r.TreeCR;
 import com.magicpwd.x.DatDialog;
 import com.magicpwd.x.MdiDialog;
@@ -1203,7 +1206,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
 
         ls_GuidList = new javax.swing.JList();
         ls_GuidList.setComponentPopupMenu(listMenu);
-        ls_GuidList.setCellRenderer(new ListCR());
+        ls_GuidList.setCellRenderer(new KeysCR());
         ls_GuidList.setModel(UserMdl.getListMdl());
         ls_GuidList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         ls_GuidList.addListSelectionListener(new javax.swing.event.ListSelectionListener()
