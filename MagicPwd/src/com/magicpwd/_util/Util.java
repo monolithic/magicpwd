@@ -222,7 +222,7 @@ public final class Util
             bak.mkdir();
         }
 
-        File[] list = bak.listFiles(new AmonFF("^amon_[.]+\\.backup$", false));
+        File[] list = bak.listFiles(new AmonFF("^amon_[^.]+\\.backup$", false));
 
         File backup;
         if (list != null)
