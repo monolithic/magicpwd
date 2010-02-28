@@ -33,7 +33,7 @@ import javax.swing.JOptionPane;
 public class GuidBean extends javax.swing.JPanel implements IEditBean
 {
 
-    private GuidItem dataItem;
+    private GuidItem itemData;
     private IGridView gridView;
     private EditBox dataEdit;
     private BtnLabel bl_ReadMail;
@@ -122,7 +122,9 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
     {
         Lang.setWText(lb_PropName, LangRes.P30F1301, "时间");
         Lang.setWText(lb_PropData, LangRes.P30F1302, "模板");
-        Lang.setWTips(bl_ReadMail, LangRes.P30F150D, "检测邮件(Alt + M)");
+
+        Lang.setWText(bl_ReadMail, LangRes.P30F1519, "&M");
+        Lang.setWTips(bl_ReadMail, LangRes.P30F151A, "检测邮件(Alt + M)");
 
         dataEdit.initLang();
     }
@@ -130,16 +132,13 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initData(IEditItem item)
     {
-        dataItem = (GuidItem) item;
+        itemData = (GuidItem) item;
         tf_PropName.setText(item.getName());
         cb_PropData.setModel(UserMdl.getCboxMdl());
 
-        String kind = dataItem.getSpec(IEditItem.SPEC_GUID_TPLT);
-        boolean v = Util.isValidate(kind);
-        bl_ReadMail.setVisible(v);
-
-        boolean e = ConsDat.HASH_MAIL.equals(kind);
-        bl_ReadMail.setEnabled(e);
+        String kind = itemData.getSpec(IEditItem.SPEC_GUID_TPLT);
+        bl_ReadMail.setVisible(Util.isValidate(kind));
+        bl_ReadMail.setEnabled(ConsDat.HASH_MAIL.equals(kind));
     }
 
     @Override
@@ -165,7 +164,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
             gm.initMeta();
         }
         Tplt tplt = (Tplt) obj;
-        dataItem.setSpec(IEditItem.SPEC_GUID_TPLT, tplt.getP30F1103());
+        itemData.setSpec(IEditItem.SPEC_GUID_TPLT, tplt.getP30F1103());
         gm.wAppend(tplt.getP30F1103());
 
         gridView.selectNext(!gm.isUpdate());

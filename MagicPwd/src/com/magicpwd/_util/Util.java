@@ -136,28 +136,12 @@ public final class Util
 
     public static ImageIcon getIcon(int name)
     {
-        if (mp_IcoList != null)
-        {
-            return mp_IcoList.get(name);
-        }
-        if (bi_NoneIcon == null)
-        {
-//            bi_NoneIcon = createNone();
-        }
-        return bi_NoneIcon;
+        return mp_IcoList != null ? mp_IcoList.get(name) : bi_NoneIcon;
     }
 
     public static BufferedImage getImage(String name)
     {
-        if (mp_ImgList != null)
-        {
-            return mp_ImgList.get(name);
-        }
-        if (bi_LogoIcon == null)
-        {
-            bi_LogoIcon = createLogo();
-        }
-        return bi_LogoIcon;
+        return mp_ImgList != null ? mp_ImgList.get(name) : bi_LogoIcon;
     }
 
     /**
@@ -168,12 +152,19 @@ public final class Util
         if (mp_ImgList == null)
         {
             mp_ImgList = new HashMap<String, BufferedImage>();
+        }
+        if (mp_IcoList == null)
+        {
             mp_IcoList = new HashMap<Integer, ImageIcon>();
         }
 
+        bi_NoneIcon = new ImageIcon(createNone());
+
         try
         {
-            bi_LogoIcon = ImageIO.read(Util.class.getResourceAsStream(ConsEnv.ICON_PATH + ConsEnv.ICON_LOGO_0016));
+            java.io.InputStream stream = Util.class.getResourceAsStream(ConsEnv.ICON_PATH + ConsEnv.ICON_LOGO_0016);
+            bi_LogoIcon = ImageIO.read(stream);
+            stream.close();
         }
         catch (Exception exp)
         {
@@ -183,7 +174,9 @@ public final class Util
         BufferedImage bufImg = null;
         try
         {
-            bufImg = ImageIO.read(Util.class.getResourceAsStream(ConsEnv.ICON_PATH + "icon.png"));
+            java.io.InputStream stream = Util.class.getResourceAsStream(ConsEnv.ICON_PATH + "icon.png");
+            bufImg = ImageIO.read(stream);
+            stream.close();
         }
         catch (Exception exp)
         {
@@ -205,25 +198,18 @@ public final class Util
 
     public static BufferedImage getLogo()
     {
-        if (bi_LogoIcon != null)
-        {
-            return bi_LogoIcon;
-        }
-
-        try
-        {
-            bi_LogoIcon = ImageIO.read(Util.class.getResourceAsStream(ConsEnv.ICON_PATH + ConsEnv.ICON_LOGO_0016));
-        }
-        catch (IOException e)
-        {
-            bi_LogoIcon = createLogo();
-        }
         return bi_LogoIcon;
+    }
+
+    private static BufferedImage createNone()
+    {
+        BufferedImage bi = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+        return bi;
     }
 
     private static BufferedImage createLogo()
     {
-        BufferedImage bi = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage bi = createNone();
         return bi;
     }
 
@@ -236,7 +222,7 @@ public final class Util
             bak.mkdir();
         }
 
-        File[] list = bak.listFiles(new AmonFF());
+        File[] list = bak.listFiles(new AmonFF("^amon_[.]+\\.backup$", false));
 
         File backup;
         if (list != null)

@@ -3,6 +3,7 @@
  */
 package com.magicpwd._prop;
 
+import com.magicpwd.MagicPwd;
 import com.magicpwd._comn.S1S2;
 import java.awt.FlowLayout;
 
@@ -428,12 +429,12 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         javax.swing.tree.TreePath path = tr_TpltList.getSelectionPath();
         if (path == null)
         {
-            Lang.showMesg(this, "", "请选择您要删除的类别数据！");
+            Lang.showMesg(MagicPwd.getCurrForm(), "", "请选择您要删除的类别数据！");
             tr_TpltList.requestFocus();
             return;
         }
 
-        if (Lang.showFirm(this, "", "确认要删除此数据吗，此操作将不可恢复？") == JOptionPane.YES_OPTION)
+        if (Lang.showFirm(MagicPwd.getCurrForm(), "", "确认要删除此数据吗，此操作将不可恢复？") == JOptionPane.YES_OPTION)
         {
             javax.swing.tree.DefaultMutableTreeNode node = (javax.swing.tree.DefaultMutableTreeNode) path.getLastPathComponent();
             DBA3000.deleteTpltData((S1S2) node.getUserObject());

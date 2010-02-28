@@ -3,6 +3,7 @@
  */
 package com.magicpwd._bean;
 
+import com.magicpwd.MagicPwd;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
@@ -21,7 +22,7 @@ import com.magicpwd.v.EditBox;
 public class TextBean extends javax.swing.JPanel implements IEditBean
 {
 
-    private IEditItem tpltData;
+    private IEditItem itemData;
     private IGridView gridView;
     private EditBox dataEdit;
 
@@ -109,14 +110,14 @@ public class TextBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initData(IEditItem tplt)
     {
-        tpltData = tplt;
-        String name = tpltData.getName();
+        itemData = tplt;
+        String name = itemData.getName();
         if (Util.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS))
         {
             name = name.substring(1, name.length() - 1);
         }
         tf_PropName.setText(name);
-        tf_PropData.setText(tpltData.getData());
+        tf_PropData.setText(itemData.getData());
     }
 
     @Override
@@ -133,9 +134,9 @@ public class TextBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (Lang.showFirm(this, LangRes.P30F1A01, "") == javax.swing.JOptionPane.YES_OPTION)
+        if (Lang.showFirm(MagicPwd.getCurrForm(), LangRes.P30F1A01, "") == javax.swing.JOptionPane.YES_OPTION)
         {
-            UserMdl.getGridMdl().wRemove(tpltData);
+            UserMdl.getGridMdl().wRemove(itemData);
             gridView.selectNext(false);
         }
     }
@@ -151,8 +152,8 @@ public class TextBean extends javax.swing.JPanel implements IEditBean
             return;
         }
 
-        tpltData.setName(name);
-        tpltData.setData(tf_PropData.getText());
+        itemData.setName(name);
+        itemData.setData(tf_PropData.getText());
         UserMdl.getGridMdl().setModified(true);
 
         gridView.selectNext(!UserMdl.getGridMdl().isUpdate());

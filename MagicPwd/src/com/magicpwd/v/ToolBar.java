@@ -146,7 +146,7 @@ public class ToolBar extends JToolBar
     {
     }
 
-    public void setActionEvent(ToolEvt event)
+    public void setToolEvent(ToolEvt event)
     {
         te_ToolEvent = event;
     }

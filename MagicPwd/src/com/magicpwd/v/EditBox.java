@@ -30,7 +30,6 @@ public class EditBox extends javax.swing.JPanel
     public void initView()
     {
         bt_DropData = new BtnLabel();
-        bt_DropData.setMnemonic('D');
         bt_DropData.setIcon(Util.getIcon(ConsEnv.ICON_PROP_DELT));
         bt_DropData.addActionListener(new java.awt.event.ActionListener()
         {
@@ -43,7 +42,6 @@ public class EditBox extends javax.swing.JPanel
         });
 
         bt_SaveData = new BtnLabel();
-        bt_SaveData.setMnemonic('U');
         bt_SaveData.setIcon(Util.getIcon(ConsEnv.ICON_PROP_UPDT));
         bt_SaveData.addActionListener(new java.awt.event.ActionListener()
         {
@@ -56,7 +54,6 @@ public class EditBox extends javax.swing.JPanel
         });
 
         bt_CopyData = new BtnLabel();
-        bt_CopyData.setMnemonic('C');
         bt_CopyData.setIcon(Util.getIcon(ConsEnv.ICON_PROP_COPY));
         bt_CopyData.addActionListener(new java.awt.event.ActionListener()
         {
@@ -93,12 +90,15 @@ public class EditBox extends javax.swing.JPanel
     {
         if (!metaData)
         {
-            Lang.setWTips(bt_CopyData, LangRes.P30F1501, "复制");
+            Lang.setWText(bt_CopyData, LangRes.P30F1501, "&C");
+            Lang.setWTips(bt_CopyData, LangRes.P30F1502, "复制属性数据(Alt + C)");
         }
-        Lang.setWTips(bt_SaveData, LangRes.P30F1502, "保存");
+        Lang.setWText(bt_SaveData, LangRes.P30F1503, "&U");
+        Lang.setWTips(bt_SaveData, LangRes.P30F1504, "应用属性变更(Alt + U)");
         if (!metaData)
         {
-            Lang.setWTips(bt_DropData, LangRes.P30F1503, "删除");
+            Lang.setWText(bt_DropData, LangRes.P30F1505, "&D");
+            Lang.setWTips(bt_DropData, LangRes.P30F1506, "删除属性数据(Alt + D)");
         }
     }
 

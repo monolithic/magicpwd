@@ -22,7 +22,7 @@ import com.magicpwd.v.EditBox;
 public class NoteBean extends javax.swing.JPanel implements IEditBean
 {
 
-    private IEditItem tpltData;
+    private IEditItem itemData;
     private IGridView gridView;
     private EditBox dataEdit;
 
@@ -65,7 +65,6 @@ public class NoteBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_DateView = new BtnLabel();
-        bt_DateView.setMnemonic('O');
         bt_DateView.setIcon(Util.getIcon(ConsEnv.ICON_DATE_TIME));
         bt_DateView.addActionListener(new java.awt.event.ActionListener()
         {
@@ -77,20 +76,6 @@ public class NoteBean extends javax.swing.JPanel implements IEditBean
             }
         });
         pl_PropEdit.add(bt_DateView);
-
-        bt_SaveData = new BtnLabel();
-        bt_SaveData.setMnemonic('U');
-        bt_SaveData.setIcon(Util.getIcon(ConsEnv.ICON_PROP_UPDT));
-        bt_SaveData.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                saveDataActionPerformed(evt);
-            }
-        });
-        pl_PropEdit.add(bt_SaveData);
 
         pm_DateView = new javax.swing.JPopupMenu();
         String[] commands =
@@ -182,8 +167,9 @@ public class NoteBean extends javax.swing.JPanel implements IEditBean
 
         Lang.setWText(lb_PropName, LangRes.P30F1305, "提示");
         Lang.setWText(lb_PropData, LangRes.P30F1306, "时间");
-        Lang.setWTips(bt_SaveData, LangRes.P30F1502, "保存");
-        Lang.setWTips(bt_DateView, LangRes.P30F150C, "当前时间");
+
+        Lang.setWText(bt_DateView, LangRes.P30F151B, "&O");
+        Lang.setWTips(bt_DateView, LangRes.P30F151C, "提醒时间(Alt + O)");
 
         javax.swing.JCheckBoxMenuItem item;
         int k = 1;
@@ -198,7 +184,7 @@ public class NoteBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initData(IEditItem tplt)
     {
-        tpltData = tplt;
+        itemData = tplt;
         tf_PropName.setText(tplt.getName());
         tf_PropData.setText(tplt.getData());
     }
@@ -221,7 +207,7 @@ public class NoteBean extends javax.swing.JPanel implements IEditBean
         String data = tf_PropData.getText();
         if (Util.isValidate(data))
         {
-            if (!tpltData.setData(data))
+            if (!itemData.setData(data))
             {
                 Lang.showMesg(this, "", "您输入的日期格式无效，请重新输入！");
                 return;
@@ -234,8 +220,8 @@ public class NoteBean extends javax.swing.JPanel implements IEditBean
             }
         }
 
-        tpltData.setName(name);
-        tpltData.setData(data);
+        itemData.setName(name);
+        itemData.setData(data);
         UserMdl.getGridMdl().setModified(true);
         gridView.selectNext(!UserMdl.getGridMdl().isUpdate());
     }
@@ -320,6 +306,5 @@ public class NoteBean extends javax.swing.JPanel implements IEditBean
     private javax.swing.JPanel pl_PropEdit;
     private javax.swing.JTextField tf_PropData;
     private javax.swing.JTextField tf_PropName;
-    private BtnLabel bt_SaveData;
     private BtnLabel bt_DateView;
 }

@@ -4,9 +4,8 @@
  */
 package com.magicpwd._util;
 
+import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd._util.Logs;
-import com.magicpwd._util.Util;
 import java.awt.Component;
 import java.util.ResourceBundle;
 import javax.swing.AbstractButton;
@@ -75,7 +74,40 @@ public class Lang
             }
         }
 
-        c.setText(txt);
+        if (txt.length() != 1)
+        {
+            c.setText(txt);
+        }
+    }
+
+    /**
+     * 设置标签的显示文本
+     * @param c
+     * @param wText
+     * @param isHash
+     */
+    public static void setWText(BtnLabel c, String sid, String def)
+    {
+        String txt = getLang(sid, def);
+
+        // 快捷字符替换
+        if (txt.length() > 0)
+        {
+            int si = txt.indexOf('&');
+            if (si >= 0)
+            {
+                txt = txt.replace("&", "");
+                if (txt.length() > si)
+                {
+                    c.setMnemonic(txt.charAt(si));
+                }
+            }
+        }
+
+        if (txt.length() != 1)
+        {
+            c.setText(txt);
+        }
     }
 
     /**
@@ -113,7 +145,10 @@ public class Lang
             }
         }
 
-        c.setText(txt);
+        if (txt.length() != 1)
+        {
+            c.setText(txt);
+        }
     }
 
     /**

@@ -12,7 +12,6 @@ import com.magicpwd._util.Util;
  */
 public class ListCR extends javax.swing.JLabel implements javax.swing.ListCellRenderer
 {
-
     public ListCR()
     {
         setOpaque(true);
@@ -49,8 +48,8 @@ public class ListCR extends javax.swing.JLabel implements javax.swing.ListCellRe
         if (value instanceof S1S2)
         {
             S1S2 item = (S1S2) value;
-            setText(item.getV1());
-            setToolTipText(Util.isValidate(item.getV2()) ? item.getV2() : item.getV1());
+            setText(item.getV());
+            setToolTipText(Util.isValidate(item.getV2()) ? item.getV2() : item.getV());
         }
         // 其它
         else if (value != null)

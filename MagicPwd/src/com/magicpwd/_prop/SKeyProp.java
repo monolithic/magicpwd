@@ -21,12 +21,14 @@ import com.magicpwd._util.Lang;
  */
 public class SKeyProp extends JPanel implements IPropBean
 {
+
     private List<S1S2> skeyList;
 
     public SKeyProp()
     {
     }
 
+    @Override
     public void initView()
     {
         javax.swing.JScrollPane sp_SkeyList = new javax.swing.JScrollPane();
@@ -41,10 +43,12 @@ public class SKeyProp extends JPanel implements IPropBean
                 sp_SkeyList, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE));
     }
 
+    @Override
     public void initLang()
     {
     }
 
+    @Override
     public void initData()
     {
         skeyList = new ArrayList<S1S2>();
@@ -54,7 +58,7 @@ public class SKeyProp extends JPanel implements IPropBean
         while (indx < size)
         {
             item = new S1S2();
-            item.setV1(Lang.getLang("P30F" + Integer.toHexString(11008 + (indx++)).toUpperCase(), ""));
+            item.setV(Lang.getLang("P30F" + Integer.toHexString(11008 + (indx++)).toUpperCase(), ""));
             item.setV2(Lang.getLang("P30F" + Integer.toHexString(11008 + (indx++)).toUpperCase(), ""));
             skeyList.add(item);
         }
@@ -62,6 +66,7 @@ public class SKeyProp extends JPanel implements IPropBean
         tb_SkeyList.setModel(sm);
     }
 
+    @Override
     public JPanel getPanel()
     {
         return this;
@@ -69,6 +74,7 @@ public class SKeyProp extends JPanel implements IPropBean
 
     private class SkeyModel implements TableModel
     {
+
         @Override
         public void addTableModelListener(TableModelListener l)
         {
@@ -102,7 +108,7 @@ public class SKeyProp extends JPanel implements IPropBean
         public Object getValueAt(int rowIndex, int columnIndex)
         {
             S1S2 item = skeyList.get(rowIndex);
-            return columnIndex == 0 ? item.getV1() : item.getV2();
+            return columnIndex == 0 ? item.getV() : item.getV2();
         }
 
         @Override
@@ -121,6 +127,5 @@ public class SKeyProp extends JPanel implements IPropBean
         {
         }
     }
-
     private javax.swing.JTable tb_SkeyList;
 }

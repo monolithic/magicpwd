@@ -22,7 +22,7 @@ import com.magicpwd.v.EditBox;
 public class MetaBean extends javax.swing.JPanel implements IEditBean
 {
 
-    private IEditItem tpltData;
+    private IEditItem itemData;
     private IGridView gridView;
     private EditBox dataEdit;
 
@@ -96,9 +96,9 @@ public class MetaBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initData(IEditItem tplt)
     {
-        tpltData = tplt;
-        tf_PropName.setText(tpltData.getName());
-        ta_PropData.setText(tpltData.getData());
+        itemData = tplt;
+        tf_PropName.setText(itemData.getName());
+        ta_PropData.setText(itemData.getData());
     }
 
     @Override
@@ -119,8 +119,8 @@ public class MetaBean extends javax.swing.JPanel implements IEditBean
         }
 
         GridMdl gm = UserMdl.getGridMdl();
-        tpltData.setName(name);
-        tpltData.setData(ta_PropData.getText());
+        itemData.setName(name);
+        itemData.setData(ta_PropData.getText());
         gm.setModified(true);
 
         gridView.selectNext(!gm.isUpdate());

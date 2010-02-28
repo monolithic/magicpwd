@@ -96,7 +96,6 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
             }
         });
 
-        bt_SrchNote.setMnemonic('F');
         bt_SrchNote.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_SRCH));
         bt_SrchNote.addActionListener(new java.awt.event.ActionListener()
         {
@@ -110,7 +109,6 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
 
         sp_NoteData.setViewportView(ta_NoteData);
 
-        bt_ExitNote.setMnemonic('X');
         bt_ExitNote.setIcon(Util.getIcon(ConsEnv.ICON_SOFT_EXIT));
         bt_ExitNote.addActionListener(new java.awt.event.ActionListener()
         {
@@ -212,15 +210,21 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
 
         Lang.setWText(ck_NoteWrap, LangRes.P30F5302, "自动换行");
 
-        Lang.setWTips(bt_SaveNote, LangRes.P30F5502, "保存");
+        Lang.setWText(bt_SrchNote, LangRes.P30F5501, "&F");
+        Lang.setWTips(bt_SrchNote, LangRes.P30F5502, "搜索(Alt + F)");
 
-        Lang.setWTips(bt_OpenNote, LangRes.P30F5503, "打开");
+        Lang.setWText(bt_SaveNote, LangRes.P30F5503, "&S");
+        Lang.setWTips(bt_SaveNote, LangRes.P30F5504, "保存(Alt + S)");
 
-        Lang.setWTips(bt_CrteNote, LangRes.P30F5504, "新建");
+        Lang.setWText(bt_OpenNote, LangRes.P30F5505, "&O");
+        Lang.setWTips(bt_OpenNote, LangRes.P30F5506, "打开(Alt + O)");
 
-        Lang.setWTips(bt_ExitNote, LangRes.P30F5505, "退出");
+        Lang.setWText(bt_CrteNote, LangRes.P30F5507, "&N");
+        Lang.setWTips(bt_CrteNote, LangRes.P30F5508, "新建(Alt + N)");
 
-        Lang.setWTips(bt_SrchNote, LangRes.P30F5501, "搜索");
+        Lang.setWText(bt_ExitNote, LangRes.P30F5509, "&X");
+        Lang.setWTips(bt_ExitNote, LangRes.P30F550A, "退出(Alt + X)");
+
     }
 
     public void initData()

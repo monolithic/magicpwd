@@ -3,6 +3,7 @@
  */
 package com.magicpwd._bean;
 
+import com.magicpwd.MagicPwd;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
@@ -24,7 +25,7 @@ import com.magicpwd.v.EditBox;
 public class MailBean extends javax.swing.JPanel implements IEditBean
 {
 
-    private IEditItem tpltData;
+    private IEditItem itemData;
     private IGridView gridView;
     private EditBox dataEdit;
 
@@ -61,7 +62,6 @@ public class MailBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_MailView = new BtnLabel();
-        bt_MailView.setMnemonic('O');
         bt_MailView.setIcon(Util.getIcon(ConsEnv.ICON_MAIL_OPEN));
         bt_MailView.addActionListener(new java.awt.event.ActionListener()
         {
@@ -119,7 +119,9 @@ public class MailBean extends javax.swing.JPanel implements IEditBean
     {
         Lang.setWText(lb_PropName, LangRes.P30F130D, "名称");
         Lang.setWText(lb_PropData, LangRes.P30F130E, "邮件");
-        Lang.setWTips(bt_MailView, LangRes.P30F1509, "发送邮件");
+
+        Lang.setWText(bt_MailView, LangRes.P30F1511, "&O");
+        Lang.setWTips(bt_MailView, LangRes.P30F1512, "发送邮件(Alt + O)");
 
         dataEdit.initLang();
     }
@@ -127,14 +129,14 @@ public class MailBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initData(IEditItem tplt)
     {
-        tpltData = tplt;
-        String name = tpltData.getName();
+        itemData = tplt;
+        String name = itemData.getName();
         if (Util.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS))
         {
             name = name.substring(1, name.length() - 1);
         }
         tf_PropName.setText(name);
-        tf_PropData.setText(tpltData.getData());
+        tf_PropData.setText(itemData.getData());
     }
 
     @Override
@@ -151,9 +153,9 @@ public class MailBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (Lang.showFirm(this, LangRes.P30F1A01, "") == javax.swing.JOptionPane.YES_OPTION)
+        if (Lang.showFirm(MagicPwd.getCurrForm(), LangRes.P30F1A01, "") == javax.swing.JOptionPane.YES_OPTION)
         {
-            UserMdl.getGridMdl().wRemove(tpltData);
+            UserMdl.getGridMdl().wRemove(itemData);
             gridView.selectNext(false);
         }
     }
@@ -169,8 +171,8 @@ public class MailBean extends javax.swing.JPanel implements IEditBean
             return;
         }
 
-        tpltData.setName(name);
-        tpltData.setData(tf_PropData.getText());
+        itemData.setName(name);
+        itemData.setData(tf_PropData.getText());
         UserMdl.getGridMdl().setModified(true);
 
         gridView.selectNext(!UserMdl.getGridMdl().isUpdate());

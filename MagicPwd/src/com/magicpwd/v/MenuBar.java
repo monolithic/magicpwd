@@ -53,7 +53,7 @@ public class MenuBar extends JMenuBar
     {
     }
 
-    public void setActionEvent(MenuEvt event)
+    public void setMenuEvent(MenuEvt event)
     {
         me_MenuEvent = event;
     }

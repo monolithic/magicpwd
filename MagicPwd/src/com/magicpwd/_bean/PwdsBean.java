@@ -3,6 +3,7 @@
  */
 package com.magicpwd._bean;
 
+import com.magicpwd.MagicPwd;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
@@ -26,7 +27,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 {
 
     private boolean askOverRide;
-    private IEditItem dataItem;
+    private IEditItem itemData;
     private MenuPwd menuPwd;
     private IGridView gridView;
     private EditBox dataEdit;
@@ -57,7 +58,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 
         lb_PropData = new javax.swing.JLabel();
         pf_PropData = new javax.swing.JPasswordField();
-        pf_PropData.setEchoChar('*');
+        pf_PropData.setEchoChar(ConsEnv.PWDS_MASK);
         lb_PropData.setLabelFor(pf_PropData);
 
         lb_PropEdit = new javax.swing.JLabel();
@@ -65,7 +66,6 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_PwdsView = new BtnLabel();
-        bt_PwdsView.setMnemonic('M');
         bt_PwdsView.setIcon(Util.getIcon(ConsEnv.ICON_PWDS_HIDE));
         bt_PwdsView.addActionListener(new java.awt.event.ActionListener()
         {
@@ -79,7 +79,6 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.add(bt_PwdsView);
 
         bt_PwdsGent = new BtnLabel();
-        bt_PwdsGent.setMnemonic('G');
         bt_PwdsGent.setIcon(Util.getIcon(ConsEnv.ICON_PWDS_GENT));
         bt_PwdsGent.addActionListener(new java.awt.event.ActionListener()
         {
@@ -93,7 +92,6 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.add(bt_PwdsGent);
 
         bt_PwdsUcfg = new BtnLabel();
-        bt_PwdsUcfg.setMnemonic('O');
         bt_PwdsUcfg.setIcon(Util.getIcon(ConsEnv.ICON_PWDS_UCFG));
         bt_PwdsUcfg.addActionListener(new java.awt.event.ActionListener()
         {
@@ -156,9 +154,15 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 
         Lang.setWText(lb_PropName, LangRes.P30F1309, "名称");
         Lang.setWText(lb_PropData, LangRes.P30F130A, "口令");
-        Lang.setWTips(bt_PwdsView, LangRes.P30F1504, "显示口令");
-        Lang.setWTips(bt_PwdsGent, LangRes.P30F1506, "生成口令");
-        Lang.setWTips(bt_PwdsUcfg, LangRes.P30F1507, "口令设置");
+
+        Lang.setWText(bt_PwdsView, LangRes.P30F1507, "&M");
+        Lang.setWTips(bt_PwdsView, LangRes.P30F1508, "点击显示口令(Alt + M)");
+
+        Lang.setWText(bt_PwdsGent, LangRes.P30F150B, "&G");
+        Lang.setWTips(bt_PwdsGent, LangRes.P30F150C, "生成口令(Alt + G)");
+
+        Lang.setWText(bt_PwdsUcfg, LangRes.P30F150D, "&O");
+        Lang.setWTips(bt_PwdsUcfg, LangRes.P30F150E, "口令设置(Alt + O)");
 
         menuPwd.initLang();
     }
@@ -166,14 +170,14 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initData(IEditItem tplt)
     {
-        dataItem = tplt;
-        String name = dataItem.getName();
+        itemData = tplt;
+        String name = itemData.getName();
         if (Util.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS))
         {
             name = name.substring(1, name.length() - 1);
         }
         tf_PropName.setText(name);
-        pf_PropData.setText(dataItem.getData());
+        pf_PropData.setText(itemData.getData());
         menuPwd.setTplt(tplt);
     }
 
@@ -191,9 +195,9 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (Lang.showFirm(this, LangRes.P30F1A01, "") == javax.swing.JOptionPane.YES_OPTION)
+        if (Lang.showFirm(MagicPwd.getCurrForm(), LangRes.P30F1A01, "") == javax.swing.JOptionPane.YES_OPTION)
         {
-            UserMdl.getGridMdl().wRemove(dataItem);
+            UserMdl.getGridMdl().wRemove(itemData);
             gridView.selectNext(false);
         }
     }
@@ -209,8 +213,8 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
             return;
         }
 
-        dataItem.setName(name);
-        dataItem.setData(new String(pf_PropData.getPassword()));
+        itemData.setName(name);
+        itemData.setData(new String(pf_PropData.getPassword()));
         UserMdl.getGridMdl().setModified(true);
 
         gridView.selectNext(!UserMdl.getGridMdl().isUpdate());
@@ -233,7 +237,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     {
         if (askOverRide && pf_PropData.getPassword().length > 1)
         {
-            if (Lang.showFirm(this, "", "") != javax.swing.JOptionPane.YES_OPTION)
+            if (Lang.showFirm(MagicPwd.getCurrForm(), "", "") != javax.swing.JOptionPane.YES_OPTION)
             {
                 return;
             }
@@ -248,7 +252,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         catch (Exception exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(this, exp.getMessage(), "");
+            Lang.showMesg(this, null, exp.getLocalizedMessage());
         }
     }
 
@@ -257,14 +261,16 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         if (pf_PropData.getEchoChar() == 0)
         {
             bt_PwdsView.setIcon(Util.getIcon(ConsEnv.ICON_PWDS_HIDE));
-            pf_PropData.setEchoChar('*');
-            Lang.setWTips(bt_PwdsView, LangRes.P30F1504, "显示口令");
+            pf_PropData.setEchoChar(ConsEnv.PWDS_MASK);
+            Lang.setWText(bt_PwdsView, LangRes.P30F1507, "&M");
+            Lang.setWTips(bt_PwdsView, LangRes.P30F1508, "点击显示口令(Alt + M)");
         }
         else
         {
             bt_PwdsView.setIcon(Util.getIcon(ConsEnv.ICON_PWDS_VIEW));
             pf_PropData.setEchoChar('\0');
-            Lang.setWTips(bt_PwdsView, LangRes.P30F1505, "隐藏口令");
+            Lang.setWText(bt_PwdsView, LangRes.P30F1509, "&M");
+            Lang.setWTips(bt_PwdsView, LangRes.P30F150A, "点击隐藏口令(Alt + M)");
         }
     }
     private javax.swing.JLabel lb_PropData;
