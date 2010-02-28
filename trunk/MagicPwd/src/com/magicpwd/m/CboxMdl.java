@@ -24,6 +24,7 @@ public class CboxMdl extends javax.swing.AbstractListModel implements javax.swin
         itemList = DBA3000.selectTpltData("0");
     }
 
+    @Override
     public void setSelectedItem(Object anObject)
     {
         if ((selectedObject != null && !selectedObject.equals(anObject)) || (selectedObject == null && anObject != null))
@@ -33,16 +34,19 @@ public class CboxMdl extends javax.swing.AbstractListModel implements javax.swin
         }
     }
 
+    @Override
     public Object getSelectedItem()
     {
         return selectedObject;
     }
 
+    @Override
     public int getSize()
     {
         return itemList.size();
     }
 
+    @Override
     public Tplt getElementAt(int index)
     {
         if (index >= 0 && index < itemList.size())
@@ -55,6 +59,7 @@ public class CboxMdl extends javax.swing.AbstractListModel implements javax.swin
         }
     }
 
+    @Override
     public void addElement(Object anObject)
     {
         if (anObject instanceof Tplt)
@@ -68,6 +73,7 @@ public class CboxMdl extends javax.swing.AbstractListModel implements javax.swin
         }
     }
 
+    @Override
     public void insertElementAt(Object anObject, int index)
     {
         if (anObject instanceof Tplt)
@@ -77,6 +83,7 @@ public class CboxMdl extends javax.swing.AbstractListModel implements javax.swin
         }
     }
 
+    @Override
     public void removeElementAt(int index)
     {
         if (getElementAt(index) == selectedObject)
@@ -96,6 +103,7 @@ public class CboxMdl extends javax.swing.AbstractListModel implements javax.swin
         fireIntervalRemoved(this, index, index);
     }
 
+    @Override
     public void removeElement(Object anObject)
     {
         int index = itemList.indexOf(anObject);

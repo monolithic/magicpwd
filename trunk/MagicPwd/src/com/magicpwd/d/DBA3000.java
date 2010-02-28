@@ -643,7 +643,7 @@ public class DBA3000
             {
                 item = new S1S3();
                 item.setK(rest.getString(DBC3000.C2010103));
-                item.setV1(rest.getString(DBC3000.C2010105));
+                item.setV(rest.getString(DBC3000.C2010105));
                 item.setV2(rest.getString(DBC3000.C2010106));
                 item.setV3(rest.getString(DBC3000.C2010108));
                 list.add(item);
@@ -725,7 +725,7 @@ public class DBA3000
             dba.addParam(DBC3000.P30F1102, "-1", false);
             dba.addParam(DBC3000.P30F1103, kindItem.getK());
             dba.addParam(DBC3000.P30F1104, "");
-            dba.addParam(DBC3000.P30F1105, Util.text2DB(kindItem.getV1()));
+            dba.addParam(DBC3000.P30F1105, Util.text2DB(kindItem.getV()));
             dba.addParam(DBC3000.P30F1106, Util.text2DB(kindItem.getV2()));
             dba.addParam(DBC3000.P30F1107, Util.text2DB(kindDesp));
             dba.addParam(DBC3000.P30F1108, DBC3000.SQL_NOW, false);
@@ -754,7 +754,7 @@ public class DBA3000
             dba.init();
 
             dba.addTable(DBC3000.P30F1100);
-            dba.addParam(DBC3000.P30F1105, Util.text2DB(kindItem.getV1()));
+            dba.addParam(DBC3000.P30F1105, Util.text2DB(kindItem.getV()));
             dba.addParam(DBC3000.P30F1106, Util.text2DB(kindItem.getV2()));
             dba.addParam(DBC3000.P30F1107, Util.text2DB(kindDesp));
             dba.addParam(DBC3000.P30F1108, DBC3000.SQL_NOW, false);
@@ -1258,8 +1258,8 @@ public class DBA3000
             {
                 item = new S1S2();
                 item.setK(rest.getString(DBC3000.P30F0104));
-                item.setV1(sdf.format(new Date(Long.parseLong(item.getK(), 16))));
-                item.setV2(item.getV1());
+                item.setV(sdf.format(new Date(Long.parseLong(item.getK(), 16))));
+                item.setV2(item.getV());
 
                 list.add(item);
             }

@@ -46,15 +46,19 @@ public interface ConsEnv
      * 安全信息：文本编码
      */
     String FILE_ENCODING = "UTF-8";
-    String DIR_BAK = "bak";
-    String DIR_DAT = "dat";
+    String FILE_ATTACHMENT = ".wma";
     String FILE_DATA = "amon";
     String FILE_BACK = FILE_DATA + "_{0}.backup";
     String FILE_DATE = "yyyyMMdd-HHmmss";
     String VIEW_DATE = "yyyy-MM-dd HH:mm:ss";
-    /**
-     * 类别数据显示排序
-     */
+    char PWDS_MASK = '*';
+    String DIR_BAK = "bak";
+    String DIR_DAT = "dat";
+    String DIR_WMA = "wma";
+    String DIR_ICO = "ico";
+    ///////////////////////////////////////////////////////
+    // 类别数据显示排序
+    ///////////////////////////////////////////////////////
     /**
      * 按名称排序
      */

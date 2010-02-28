@@ -3,6 +3,7 @@
  */
 package com.magicpwd._prop;
 
+import com.magicpwd.MagicPwd;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -211,7 +212,7 @@ public class HistProp extends JPanel implements IPropBean
             return;
         }
 
-        if (Lang.showFirm(this, LangRes.P30FAA11, "") != JOptionPane.YES_OPTION)
+        if (Lang.showFirm(MagicPwd.getCurrForm(), LangRes.P30FAA11, "") != JOptionPane.YES_OPTION)
         {
             return;
         }
@@ -226,7 +227,7 @@ public class HistProp extends JPanel implements IPropBean
         {
             return;
         }
-        if (Lang.showFirm(this, LangRes.P30FAA12, "") != JOptionPane.YES_OPTION)
+        if (Lang.showFirm(MagicPwd.getCurrForm(), LangRes.P30FAA12, "") != JOptionPane.YES_OPTION)
         {
             return;
         }
@@ -243,7 +244,7 @@ public class HistProp extends JPanel implements IPropBean
             return;
         }
 
-        if (Lang.showFirm(this, LangRes.P30FAA13, "") != JOptionPane.YES_OPTION)
+        if (Lang.showFirm(MagicPwd.getCurrForm(), LangRes.P30FAA13, "") != JOptionPane.YES_OPTION)
         {
             return;
         }

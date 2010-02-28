@@ -190,7 +190,7 @@ public class MdiDialog extends javax.swing.JDialog
 
         S1S2 kvItem = (S1S2) obj;
         cl_CardLayout.show(pl_CardPanel, kvItem.getK());
-        setTitle(kvItem.getV1());
+        setTitle(kvItem.getV());
     }
     private javax.swing.JList ls_PropList;
     private javax.swing.JPanel pl_CardPanel;

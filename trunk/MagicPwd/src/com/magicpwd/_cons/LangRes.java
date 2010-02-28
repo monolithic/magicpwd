@@ -80,23 +80,40 @@ public interface LangRes
     String P30F131A = "P30F131A";// 电子邮件(&M)
     String P30F131B = "P30F131B";// 登录用户(&U)
     String P30F131C = "P30F131C";// 认证口令(&P)
+    String P30F131D = "P30F131D";// 名称(&N)
+    String P30F131E = "P30F131E";// 徽标(&P)
     // ----------------------------------------------------
     // 5 按钮语言资源
     // ----------------------------------------------------
     String P30F1500 = "P30F1500";// d
-    String P30F1501 = "P30F1501";// 复制(Alt + C)
-    String P30F1502 = "P30F1502";// 保存(Alt + U)
-    String P30F1503 = "P30F1503";// 删除(Alt + D)
-    String P30F1504 = "P30F1504";// 显示/隐藏口令
-    String P30F1505 = "P30F1505";//
-    String P30F1506 = "P30F1506";// 生成口令
-    String P30F1507 = "P30F1507";// 口令设置
-    String P30F1508 = "P30F1508";// 打开链接
-    String P30F1509 = "P30F1509";// 发送邮件
-    String P30F150A = "P30F150A";// 当前时间
-    String P30F150B = "P30F150B";// 添加附件
-    String P30F150C = "P30F150C";// 提醒时间
-    String P30F150D = "P30F150D";// 检测邮件(Alt + M)
+    String P30F1501 = "P30F1501";// &C
+    String P30F1502 = "P30F1502";// 复制属性数据(Alt + C)
+    String P30F1503 = "P30F1503";// &U
+    String P30F1504 = "P30F1504";// 应用属性变更(Alt + U)
+    String P30F1505 = "P30F1505";// &D
+    String P30F1506 = "P30F1506";// 删除属性数据(Alt + D)
+    String P30F1507 = "P30F1507";// &M
+    String P30F1508 = "P30F1508";// 点击显示口令(Alt + M)
+    String P30F1509 = "P30F1509";// &M
+    String P30F150A = "P30F150A";// 点击隐藏口令(Alt + M)
+    String P30F150B = "P30F150B";// &G
+    String P30F150C = "P30F150C";// 生成口令(Alt + G)
+    String P30F150D = "P30F150D";// &O
+    String P30F150E = "P30F150E";// 口令设置(Alt + O)
+    String P30F150F = "P30F150F";// &O
+    String P30F1510 = "P30F1510";// 打开链接(Alt + O)
+    String P30F1511 = "P30F1511";// &O
+    String P30F1512 = "P30F1512";// 发送邮件(Alt + O)
+    String P30F1513 = "P30F1514";// &O
+    String P30F1514 = "P30F1514";// 当前时间(Alt + O)
+    String P30F1515 = "P30F1515";// &V
+    String P30F1516 = "P30F1516";// 打开附件(Alt + O)
+    String P30F1517 = "P30F1517";// &P
+    String P30F1518 = "P30F1518";// 添加附件(Alt + P)
+    String P30F1519 = "P30F1519";// &M
+    String P30F151A = "P30F151A";// 检测邮件(Alt + M)
+    String P30F151B = "P30F151B";// &O
+    String P30F151C = "P30F151C";// 提醒时间(Alt + O)
     // ----------------------------------------------------
     // A 消息提示语言资源
     // ----------------------------------------------------
@@ -251,11 +268,16 @@ public interface LangRes
     // 5 按钮语言资源
     // ----------------------------------------------------
     String P30F5500 = "P30F5500";// 5
-    String P30F5501 = "P30F5501";// 搜索
-    String P30F5502 = "P30F5502";// 保存(Ctrl + S)
-    String P30F5503 = "P30F5503";// 打开(Ctrl + O)
-    String P30F5504 = "P30F5504";// 新建(Ctrl + N)
-    String P30F5505 = "P30F5505";// 退出
+    String P30F5501 = "P30F5501";// &F
+    String P30F5502 = "P30F5502";// 搜索
+    String P30F5503 = "P30F5503";// &S
+    String P30F5504 = "P30F5504";// 保存(Ctrl + S)
+    String P30F5505 = "P30F5505";// &O
+    String P30F5506 = "P30F5506";// 打开(Ctrl + O)
+    String P30F5507 = "P30F5507";// &N
+    String P30F5508 = "P30F5508";// 新建(Ctrl + N)
+    String P30F5509 = "P30F5509";// &X
+    String P30F550A = "P30F550A";// 退出
     // ----------------------------------------------------
     // A 消息提示语言资源
     // ----------------------------------------------------
@@ -377,6 +399,11 @@ public interface LangRes
     String P30F7A28 = "P30F7A28";// 您已经设置过安全口令！
     String P30F7A29 = "P30F7A29";// 请选择口令模板！
     String P30F7A2A = "P30F7A2A";// 请选择记录状态！
+    String P30F7A2B = "P30F7A2B";
+    String P30F7A2C = "P30F7A2C";
+    String P30F7A2D = "P30F7A2D";
+    String P30F7A2E = "P30F7A2E";
+    String P30F7A2F = "P30F7A2F";
     // ----------------------------------------------------
     // B 自定义语言资源
     // ----------------------------------------------------

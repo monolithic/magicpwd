@@ -3,6 +3,7 @@
  */
 package com.magicpwd._bean;
 
+import com.magicpwd.MagicPwd;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comn.EditItem;
 import com.magicpwd._cons.ConsDat;
@@ -12,6 +13,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IGridView;
+import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
@@ -26,10 +28,14 @@ import com.magicpwd.v.EditBox;
 public class FileBean extends javax.swing.JPanel implements IEditBean
 {
 
-    private IEditItem tpltData;
+    private IEditItem itemData;
     private IGridView gridView;
+    /**
+     * 用户文件对象
+     */
     private java.io.File filePath;
-    private String fileName;
+    private java.io.File wmaPath;
+    private String wmaName;
     private EditBox dataEdit;
 
     public FileBean(IGridView view)
@@ -65,7 +71,6 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_FileView = new BtnLabel();
-        bt_FileView.setMnemonic('O');
         bt_FileView.setIcon(Util.getIcon(ConsEnv.ICON_FILE_OPEN));
         bt_FileView.addActionListener(new java.awt.event.ActionListener()
         {
@@ -79,7 +84,6 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.add(bt_FileView);
 
         bt_FileApnd = new BtnLabel();
-        bt_FileApnd.setMnemonic('P');
         bt_FileApnd.setIcon(Util.getIcon(ConsEnv.ICON_FILE_PICK));
         bt_FileApnd.addActionListener(new java.awt.event.ActionListener()
         {
@@ -137,7 +141,12 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
     {
         Lang.setWText(lb_PropName, LangRes.P30F1313, "名称");
         Lang.setWText(lb_PropData, LangRes.P30F1314, "文件");
-        Lang.setWTips(bt_FileApnd, LangRes.P30F150B, "添加附件");
+
+        Lang.setWText(bt_FileView, LangRes.P30F1515, "&V");
+        Lang.setWTips(bt_FileView, LangRes.P30F1516, "打开附件(Alt + V)");
+
+        Lang.setWText(bt_FileApnd, LangRes.P30F1517, "&P");
+        Lang.setWTips(bt_FileApnd, LangRes.P30F1518, "添加附件(Alt + P)");
 
         dataEdit.initLang();
     }
@@ -145,15 +154,24 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initData(IEditItem tplt)
     {
-        tpltData = tplt;
-        String name = tpltData.getName();
+        itemData = tplt;
+        String name = itemData.getName();
         if (Util.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS))
         {
             name = name.substring(1, name.length() - 1);
         }
         tf_PropName.setText(name);
-        tf_PropData.setText(tpltData.getData());
-        fileName = tpltData.getSpec(EditItem.SPEC_FILE_NAME);
+        tf_PropData.setText(itemData.getData());
+        wmaName = itemData.getSpec(EditItem.SPEC_FILE_NAME);
+
+        if (wmaPath == null)
+        {
+            wmaPath = new java.io.File(ConsEnv.DIR_DAT, ConsEnv.DIR_WMA);
+            if (!wmaPath.exists())
+            {
+                wmaPath.mkdirs();
+            }
+        }
     }
 
     @Override
@@ -170,17 +188,21 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (Lang.showFirm(this, LangRes.P30F1A01, "") == javax.swing.JOptionPane.YES_OPTION)
+        if (Lang.showFirm(MagicPwd.getCurrForm(), LangRes.P30F1A01, "") == javax.swing.JOptionPane.YES_OPTION)
         {
-            UserMdl.getGridMdl().wRemove(tpltData);
+            return;
+        }
+
+        try
+        {
+            new java.io.File(itemData.getSpec(EditItem.SPEC_FILE_NAME) + ConsEnv.FILE_ATTACHMENT).delete();
+            UserMdl.getGridMdl().wRemove(itemData);
             gridView.selectNext(false);
-            try
-            {
-                new java.io.File(tpltData.getSpec(EditItem.SPEC_FILE_NAME)).delete();
-            }
-            catch (Exception exp)
-            {
-            }
+        }
+        catch (Exception exp)
+        {
+            Lang.showMesg(MagicPwd.getCurrForm(), null, exp.getLocalizedMessage());
+            Logs.exception(exp);
         }
     }
 
@@ -190,7 +212,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
         String name = tf_PropName.getText();
         if (!Util.isValidate(name))
         {
-            Lang.showMesg(this, "", "请输入文件名称！");
+            Lang.showMesg(this, LangRes.P30F7A2B, "请输入文件名称！");
             tf_PropName.requestFocus();
             return;
         }
@@ -222,34 +244,34 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
                 return;
             }
 
-            if (!Util.isValidate(fileName))
+            if (!Util.isValidate(wmaName))
             {
-                fileName = Util.lPad(Long.toHexString(System.currentTimeMillis()), 16, '0');
+                wmaName = Util.lPad(Long.toHexString(System.currentTimeMillis()), 16, '0');
             }
             try
             {
-                java.io.File tempFile = new java.io.File(ConsEnv.DIR_DAT, fileName);
-                if (!tempFile.exists())
+                java.io.File wmaFile = new java.io.File(wmaPath, wmaName + ConsEnv.FILE_ATTACHMENT);
+                if (!wmaFile.exists())
                 {
-                    if (!tempFile.createNewFile())
+                    if (!wmaFile.createNewFile())
                     {
-                        Lang.showMesg(this, "", "文件上传保存出错，请重试！");
+                        Lang.showMesg(this, LangRes.P30F7A2C, "文件上传保存出错，请重试！");
                         return;
                     }
                 }
-                Keys.doCrypt(UserMdl.getECipher(), filePath, tempFile);
+                Keys.doCrypt(UserMdl.getECipher(), filePath, wmaFile);
             }
             catch (Exception exp)
             {
                 Logs.exception(exp);
-                Lang.showMesg(this, "", "文件上传保存出错，请重试！");
+                Lang.showMesg(this, LangRes.P30F7A2C, "文件上传保存出错，请重试！");
                 return;
             }
         }
 
-        tpltData.setName(name);
-        tpltData.setData(tf_PropData.getText());
-        tpltData.setSpec(EditItem.SPEC_FILE_NAME, fileName);
+        itemData.setName(name);
+        itemData.setData(tf_PropData.getText());
+        itemData.setSpec(EditItem.SPEC_FILE_NAME, wmaName);
         UserMdl.getGridMdl().setModified(true);
 
         gridView.selectNext(!UserMdl.getGridMdl().isUpdate());
@@ -284,20 +306,20 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
             catch (java.io.IOException exp)
             {
                 Logs.exception(exp);
-                Lang.showMesg(this, "", "无法创建文件 {0}, 请确认您是否有足够的访问权限！", filePath.getPath());
+                Lang.showMesg(this, LangRes.P30F7A2E, "无法创建文件 {0}, 请确认您是否有足够的访问权限！", filePath.getPath());
                 return;
             }
         }
         if (!filePath.canWrite())
         {
-            Lang.showMesg(this, "", "无法保存数据到您指定的路径，请确认您是否有足够的权限！");
+            Lang.showMesg(this, LangRes.P30F7A2F, "无法保存数据到您指定的路径，请确认您是否有足够的权限！");
             return;
         }
         if (filePath.isDirectory())
         {
-            filePath = new java.io.File(filePath, tpltData.getData());
+            filePath = new java.io.File(filePath, itemData.getData());
         }
-        java.io.File tempFile = new java.io.File(ConsEnv.DIR_DAT, tpltData.getSpec(EditItem.SPEC_FILE_NAME));
+        java.io.File tempFile = new java.io.File(wmaPath, itemData.getSpec(EditItem.SPEC_FILE_NAME) + ConsEnv.FILE_ATTACHMENT);
         try
         {
             Keys.doCrypt(UserMdl.getDCipher(), tempFile, filePath);
@@ -305,12 +327,34 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
         catch (Exception exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(this, "", "文件下载保存出错，请重试！");
+            Lang.showMesg(this, LangRes.P30F7A2D, "文件下载保存出错，请重试！");
         }
     }
 
     private void bt_FileViewActionPerformed(java.awt.event.ActionEvent evt)
     {
+        try
+        {
+            java.io.File tmpPath = new java.io.File(System.getProperty("java.io.tmpdir"));
+            if (!tmpPath.exists() || !tmpPath.canWrite())
+            {
+                tmpPath = new java.io.File("./tmp/");
+                if (!tmpPath.exists())
+                {
+                    tmpPath.mkdir();
+                }
+            }
+
+            java.io.File srcFile = new java.io.File(wmaPath, itemData.getSpec(IEditItem.SPEC_FILE_NAME) + ConsEnv.FILE_ATTACHMENT);
+            java.io.File tmpFile = new java.io.File(tmpPath, itemData.getData());
+            Keys.doCrypt(UserMdl.getDCipher(), srcFile, tmpFile);
+            Desk.open(tmpFile);
+        }
+        catch (Exception exp)
+        {
+            Lang.showMesg(this, null, exp.getLocalizedMessage());
+            Logs.exception(exp);
+        }
     }
 
     private void bt_FileApndActionPerformed(java.awt.event.ActionEvent evt)

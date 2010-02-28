@@ -17,7 +17,7 @@ import java.awt.event.ActionEvent;
 public class ListBean extends javax.swing.JPanel implements IEditBean
 {
 
-    private IEditItem tpltData;
+    private IEditItem itemData;
     private IGridView gridView;
     private EditBox dataEdit;
 

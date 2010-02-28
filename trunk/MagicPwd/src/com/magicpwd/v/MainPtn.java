@@ -89,11 +89,13 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
 
         mainMenu = new MenuBar();
         mainMenu.initView();
+        mainMenu.setMenuEvent(this);
         mainMenu.setVisible(UserMdl.getCfg().isMenuViw());
         this.setJMenuBar(mainMenu);
 
         mainTool = new ToolBar();
         mainTool.initView();
+        mainTool.setToolEvent(this);
         mainTool.setVisible(UserMdl.getCfg().isToolViw());
         this.getContentPane().add(mainTool, UserMdl.getCfg().getToolLoc());
 

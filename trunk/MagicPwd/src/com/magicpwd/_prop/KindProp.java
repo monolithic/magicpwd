@@ -3,6 +3,7 @@
  */
 package com.magicpwd._prop;
 
+import com.magicpwd.MagicPwd;
 import java.awt.FlowLayout;
 
 import javax.swing.JOptionPane;
@@ -471,12 +472,12 @@ public class KindProp extends JPanel implements IPropBean
     {
         if (tr_KindList.getSelectionPath() == null)
         {
-            Lang.showMesg(this, "", "请选择您要删除的类别数据！");
+            Lang.showMesg(MagicPwd.getCurrForm(), "", "请选择您要删除的类别数据！");
             tr_KindList.requestFocus();
             return;
         }
 
-        if (Lang.showFirm(this, LangRes.P30F7A1A, "") == JOptionPane.YES_OPTION)
+        if (Lang.showFirm(MagicPwd.getCurrForm(), LangRes.P30F7A1A, "") == JOptionPane.YES_OPTION)
         {
             UserMdl.getTreeMdl().wRemove(tr_KindList.getSelectionPath());
         }
