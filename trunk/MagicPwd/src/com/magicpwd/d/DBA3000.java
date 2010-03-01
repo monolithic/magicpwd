@@ -354,6 +354,29 @@ public class DBA3000
         }
     }
 
+    public static boolean saveKeysData(Keys keys)
+    {
+        // 数据库连接初始化
+        DBAccess dba = new DBAccess();
+
+        try
+        {
+            dba.init();
+            updateKeys(dba, keys);
+            dba.executeBatch();
+            return true;
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            return false;
+        }
+        finally
+        {
+            dba.close();
+        }
+    }
+
     public static boolean savePwdsData(Keys keys)
     {
         // 数据库连接初始化
@@ -373,7 +396,8 @@ public class DBA3000
                 remove(dba, keys);
             }
 
-            update(dba, keys);
+            updateKeys(dba, keys);
+            updatePwds(dba, keys);
             dba.executeBatch();
             return true;
         }
@@ -481,7 +505,7 @@ public class DBA3000
      * @param keys
      * @throws SQLException
      */
-    private static void update(DBAccess dba, Keys keys) throws SQLException
+    private static void updateKeys(DBAccess dba, Keys keys) throws SQLException
     {
         dba.addTable(DBC3000.P30F0100);
         dba.addParam(DBC3000.P30F0101, keys.getP30F0101());
@@ -513,7 +537,10 @@ public class DBA3000
         }
 
         dba.reset();
+    }
 
+    private static void updatePwds(DBAccess dba, Keys keys) throws SQLException
+    {
         StringBuffer pwd = keys.getPassword().getP30F0203();
         int len = pwd.length();
         int idx = 0;

@@ -96,7 +96,7 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
             }
         });
 
-        bt_SrchNote.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_SRCH));
+        bt_SrchNote.setIcon(Util.getIcon(ConsEnv.ICON_NOTE_SRCH));
         bt_SrchNote.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -646,10 +646,8 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
     private boolean showFrm()
     {
         MagicPwd.showMainPtn();
-        if (!MagicPwd.getCurrForm().isVisible())
-        {
-            MagicPwd.getCurrForm().setVisible(true);
-        }
+        MagicPwd.getCurrForm().setVisible(true);
+        this.setVisible(false);
         return true;
     }
     private javax.swing.JPanel pl_NoteBase;

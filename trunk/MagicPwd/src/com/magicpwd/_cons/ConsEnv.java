@@ -151,8 +151,7 @@ public interface ConsEnv
     int ICON_KEYS_APND = ICON_KIND_XPND + 1;// 新建
     int ICON_KEYS_SAVE = ICON_KEYS_APND + 1;// 保存
     int ICON_KEYS_DELT = ICON_KEYS_SAVE + 1;// 删除
-    int ICON_KEYS_SRCH = ICON_KEYS_DELT + 1;// 搜索
-    int ICON_KEYS_MOD0 = ICON_KEYS_SRCH + 1;
+    int ICON_KEYS_MOD0 = ICON_KEYS_DELT + 1;
     int ICON_KEYS_MOD1 = ICON_KEYS_MOD0 + 1;
     int ICON_KEYS_MOD2 = ICON_KEYS_MOD1 + 1;
     int ICON_KEYS_MOD3 = ICON_KEYS_MOD2 + 1;
@@ -186,7 +185,9 @@ public interface ConsEnv
     int ICON_DATE_TIME = ICON_MAIL_OPEN + 1;// 时间
     int ICON_FILE_OPEN = ICON_DATE_TIME + 1;// 打开
     int ICON_FILE_PICK = ICON_FILE_OPEN + 1;// 选择
-    int ICON_SIZE = ICON_FILE_PICK + 1;
+    int ICON_NOTE_OPEN = ICON_FILE_PICK + 1;// 选择
+    int ICON_NOTE_SRCH = ICON_NOTE_OPEN + 1;// 选择
+    int ICON_SIZE = ICON_NOTE_SRCH + 1;
     String EVENT_FILE_HIDE = "130F_FILE_HIDE";
     String EVENT_FILE_APND = "130F_FILE_APND";
     String EVENT_FILE_SAVE = "130F_FILE_SAVE";
