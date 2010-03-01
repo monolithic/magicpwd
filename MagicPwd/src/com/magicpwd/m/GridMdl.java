@@ -638,12 +638,12 @@ public class GridMdl extends DefaultTableModel
     public void setKeysMode(int mode)
     {
         keys.setP30F0102(mode);
-        modified = true;
+        DBA3000.saveKeysData(keys);
     }
 
     public void setKeysNote(int note)
     {
         keys.setP30F0103(note);
-        modified = true;
+        DBA3000.saveKeysData(keys);
     }
 }

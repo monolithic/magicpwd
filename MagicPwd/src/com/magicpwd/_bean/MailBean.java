@@ -166,7 +166,7 @@ public class MailBean extends javax.swing.JPanel implements IEditBean
         String name = tf_PropName.getText();
         if (!Util.isValidate(name))
         {
-            Lang.showMesg(this, "", "请输入邮件名称！");
+            Lang.showMesg(this, LangRes.P30F7A31, "请输入邮件名称！");
             tf_PropName.requestFocus();
             return;
         }
@@ -188,8 +188,9 @@ public class MailBean extends javax.swing.JPanel implements IEditBean
     private void bt_MailViewActionPerformed(java.awt.event.ActionEvent evt)
     {
         String url = tf_PropData.getText();
-        if (!Util.isValidate(url))
+        if (!Util.isValidateEmail(url))
         {
+            Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F7A32, "您输入的不是一个合适的邮件地址！");
             return;
         }
 

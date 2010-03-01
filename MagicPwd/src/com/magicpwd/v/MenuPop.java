@@ -199,8 +199,8 @@ public class MenuPop extends JPopupMenu
         for (int i = 0; i < mi_ListNote.length; i += 1)
         {
             menuItem = new javax.swing.JMenuItem();
-            menuItem.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_MOD0 + i));
-            menuItem.putClientProperty("keysmode", i);
+            menuItem.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_NTN2 + i));
+            menuItem.putClientProperty("keysnote", i - 2);
             menuItem.addActionListener(new java.awt.event.ActionListener()
             {
 

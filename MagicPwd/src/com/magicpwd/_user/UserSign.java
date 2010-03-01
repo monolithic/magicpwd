@@ -16,6 +16,7 @@ import com.magicpwd.u.DBU3000;
 
 public class UserSign extends JPanel
 {
+
     /**
      * 登录模式
      */
@@ -183,12 +184,30 @@ public class UserSign extends JPanel
 
     private void initSignInView()
     {
-        lb_UserName = new javax.swing.JLabel();
-        tf_UserName = new javax.swing.JTextField();
-        lb_UserKeys = new javax.swing.JLabel();
-        pf_UserKeys = new javax.swing.JPasswordField();
-        bt_Cancel = new javax.swing.JButton();
-        bt_Confrm = new javax.swing.JButton();
+        if (lb_UserName == null)
+        {
+            lb_UserName = new javax.swing.JLabel();
+        }
+        if (tf_UserName == null)
+        {
+            tf_UserName = new javax.swing.JTextField();
+        }
+        if (lb_UserKeys == null)
+        {
+            lb_UserKeys = new javax.swing.JLabel();
+        }
+        if (pf_UserKeys == null)
+        {
+            pf_UserKeys = new javax.swing.JPasswordField();
+        }
+        if (bt_Cancel == null)
+        {
+            bt_Cancel = new javax.swing.JButton();
+        }
+        if (bt_Confrm == null)
+        {
+            bt_Confrm = new javax.swing.JButton();
+        }
         lb_KeyLabel = new javax.swing.JLabel();
 
         lb_UserName.setDisplayedMnemonic('U');
@@ -201,6 +220,8 @@ public class UserSign extends JPanel
 
         pf_UserKeys.addActionListener(new java.awt.event.ActionListener()
         {
+
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_ConfrmActionPerformed(evt);
@@ -211,6 +232,8 @@ public class UserSign extends JPanel
         bt_Cancel.setText("取消(C)");
         bt_Cancel.addActionListener(new java.awt.event.ActionListener()
         {
+
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_CancelActionPerformed(evt);
@@ -221,6 +244,8 @@ public class UserSign extends JPanel
         bt_Confrm.setText("登录(S)");
         bt_Confrm.addActionListener(new java.awt.event.ActionListener()
         {
+
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_ConfrmActionPerformed(evt);
@@ -230,6 +255,7 @@ public class UserSign extends JPanel
         lb_KeyLabel.setText("口令找回");
         lb_KeyLabel.addMouseListener(new java.awt.event.MouseAdapter()
         {
+
             @Override
             public void mouseReleased(java.awt.event.MouseEvent evt)
             {
@@ -268,12 +294,30 @@ public class UserSign extends JPanel
 
     private void initSignRsView()
     {
-        lb_UserName = new javax.swing.JLabel();
-        tf_UserName = new javax.swing.JTextField();
-        lb_UserKeys = new javax.swing.JLabel();
-        pf_UserKeys = new javax.swing.JPasswordField();
-        bt_Cancel = new javax.swing.JButton();
-        bt_Confrm = new javax.swing.JButton();
+        if (lb_UserName == null)
+        {
+            lb_UserName = new javax.swing.JLabel();
+        }
+        if (tf_UserName == null)
+        {
+            tf_UserName = new javax.swing.JTextField();
+        }
+        if (lb_UserKeys == null)
+        {
+            lb_UserKeys = new javax.swing.JLabel();
+        }
+        if (pf_UserKeys == null)
+        {
+            pf_UserKeys = new javax.swing.JPasswordField();
+        }
+        if (bt_Cancel == null)
+        {
+            bt_Cancel = new javax.swing.JButton();
+        }
+        if (bt_Confrm == null)
+        {
+            bt_Confrm = new javax.swing.JButton();
+        }
 
         lb_UserName.setLabelFor(tf_UserName);
 
@@ -281,6 +325,8 @@ public class UserSign extends JPanel
 
         bt_Cancel.addActionListener(new java.awt.event.ActionListener()
         {
+
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_CancelActionPerformed(evt);
@@ -289,6 +335,8 @@ public class UserSign extends JPanel
 
         bt_Confrm.addActionListener(new java.awt.event.ActionListener()
         {
+
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_ConfrmActionPerformed(evt);
@@ -297,6 +345,7 @@ public class UserSign extends JPanel
 
         pf_UserKeys.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -333,15 +382,42 @@ public class UserSign extends JPanel
 
     private void initSignUpView()
     {
-        lb_UserName = new javax.swing.JLabel();
-        tf_UserName = new javax.swing.JTextField();
-        lb_UserKeys = new javax.swing.JLabel();
-        pf_UserKeys = new javax.swing.JPasswordField();
-        lb_FirmPwds = new javax.swing.JLabel();
-        pf_FirmPwds = new javax.swing.JPasswordField();
-        bt_Cancel = new javax.swing.JButton();
-        bt_Confrm = new javax.swing.JButton();
-        lb_KeyLabel = new javax.swing.JLabel();
+        if (lb_UserName == null)
+        {
+            lb_UserName = new javax.swing.JLabel();
+        }
+        if (tf_UserName == null)
+        {
+            tf_UserName = new javax.swing.JTextField();
+        }
+        if (lb_UserKeys == null)
+        {
+            lb_UserKeys = new javax.swing.JLabel();
+        }
+        if (pf_UserKeys == null)
+        {
+            pf_UserKeys = new javax.swing.JPasswordField();
+        }
+        if (lb_FirmPwds == null)
+        {
+            lb_FirmPwds = new javax.swing.JLabel();
+        }
+        if (pf_FirmPwds == null)
+        {
+            pf_FirmPwds = new javax.swing.JPasswordField();
+        }
+        if (bt_Cancel == null)
+        {
+            bt_Cancel = new javax.swing.JButton();
+        }
+        if (bt_Confrm == null)
+        {
+            bt_Confrm = new javax.swing.JButton();
+        }
+        if (lb_KeyLabel == null)
+        {
+            lb_KeyLabel = new javax.swing.JLabel();
+        }
 
         lb_UserName.setDisplayedMnemonic('U');
         lb_UserName.setLabelFor(tf_UserName);
@@ -359,6 +435,8 @@ public class UserSign extends JPanel
         bt_Cancel.setText("取消(C)");
         bt_Cancel.addActionListener(new java.awt.event.ActionListener()
         {
+
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_CancelActionPerformed(evt);
@@ -369,6 +447,8 @@ public class UserSign extends JPanel
         bt_Confrm.setText("注册(S)");
         bt_Confrm.addActionListener(new java.awt.event.ActionListener()
         {
+
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_ConfrmActionPerformed(evt);
@@ -378,6 +458,7 @@ public class UserSign extends JPanel
         lb_KeyLabel.setText("数据升级");
         lb_KeyLabel.addMouseListener(new java.awt.event.MouseAdapter()
         {
+
             @Override
             public void mouseReleased(java.awt.event.MouseEvent evt)
             {
@@ -423,14 +504,38 @@ public class UserSign extends JPanel
 
     private void initSignPkView()
     {
-        lb_CurrPwds = new javax.swing.JLabel();
-        pf_CurrPwds = new javax.swing.JPasswordField();
-        lb_UserKeys = new javax.swing.JLabel();
-        pf_UserKeys = new javax.swing.JPasswordField();
-        lb_FirmPwds = new javax.swing.JLabel();
-        pf_FirmPwds = new javax.swing.JPasswordField();
-        bt_Cancel = new javax.swing.JButton();
-        bt_Confrm = new javax.swing.JButton();
+        if (lb_CurrPwds == null)
+        {
+            lb_CurrPwds = new javax.swing.JLabel();
+        }
+        if (pf_CurrPwds == null)
+        {
+            pf_CurrPwds = new javax.swing.JPasswordField();
+        }
+        if (lb_UserKeys == null)
+        {
+            lb_UserKeys = new javax.swing.JLabel();
+        }
+        if (pf_UserKeys == null)
+        {
+            pf_UserKeys = new javax.swing.JPasswordField();
+        }
+        if (lb_FirmPwds == null)
+        {
+            lb_FirmPwds = new javax.swing.JLabel();
+        }
+        if (pf_FirmPwds == null)
+        {
+            pf_FirmPwds = new javax.swing.JPasswordField();
+        }
+        if (bt_Cancel == null)
+        {
+            bt_Cancel = new javax.swing.JButton();
+        }
+        if (bt_Confrm == null)
+        {
+            bt_Confrm = new javax.swing.JButton();
+        }
 
         lb_CurrPwds.setLabelFor(pf_CurrPwds);
 
@@ -440,6 +545,8 @@ public class UserSign extends JPanel
 
         bt_Cancel.addActionListener(new java.awt.event.ActionListener()
         {
+
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_CancelActionPerformed(evt);
@@ -448,6 +555,8 @@ public class UserSign extends JPanel
 
         bt_Confrm.addActionListener(new java.awt.event.ActionListener()
         {
+
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_ConfrmActionPerformed(evt);
@@ -492,12 +601,39 @@ public class UserSign extends JPanel
 
     private void initSignSkView()
     {
+        if (lb_UserKeys == null)
+        {
+            lb_UserKeys = new javax.swing.JLabel();
+        }
+        if (pf_UserKeys == null)
+        {
+            pf_UserKeys = new javax.swing.JPasswordField();
+        }
+        if (lb_FirmPwds == null)
+        {
+            lb_FirmPwds = new javax.swing.JLabel();
+        }
+        if (pf_FirmPwds == null)
+        {
+            pf_FirmPwds = new javax.swing.JPasswordField();
+        }
+        if (bt_Cancel == null)
+        {
+            bt_Cancel = new javax.swing.JButton();
+        }
+        if (bt_Confrm == null)
+        {
+            bt_Confrm = new javax.swing.JButton();
+        }
+
         lb_UserKeys.setLabelFor(pf_UserKeys);
 
         lb_FirmPwds.setLabelFor(pf_FirmPwds);
 
         bt_Cancel.addActionListener(new java.awt.event.ActionListener()
         {
+
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_CancelActionPerformed(evt);
@@ -506,6 +642,8 @@ public class UserSign extends JPanel
 
         bt_Confrm.addActionListener(new java.awt.event.ActionListener()
         {
+
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_ConfrmActionPerformed(evt);
@@ -514,6 +652,7 @@ public class UserSign extends JPanel
 
         pf_FirmPwds.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -1054,7 +1193,6 @@ public class UserSign extends JPanel
             Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
         }
     }
-
     /**
      * 登录用户
      */

@@ -60,6 +60,7 @@ public class Lang
     public static void setWText(AbstractButton c, String sid, String def)
     {
         String txt = getLang(sid, def);
+        boolean key = false;
         // 快捷字符替换
         if (txt.length() > 0)
         {
@@ -70,11 +71,12 @@ public class Lang
                 if (txt.length() > si)
                 {
                     c.setMnemonic(txt.charAt(si));
+                    key = true;
                 }
             }
         }
 
-        if (txt.length() != 1)
+        if (!key || txt.length() != 1)
         {
             c.setText(txt);
         }
@@ -89,7 +91,7 @@ public class Lang
     public static void setWText(BtnLabel c, String sid, String def)
     {
         String txt = getLang(sid, def);
-
+        boolean key = false;
         // 快捷字符替换
         if (txt.length() > 0)
         {
@@ -100,11 +102,12 @@ public class Lang
                 if (txt.length() > si)
                 {
                     c.setMnemonic(txt.charAt(si));
+                    key = true;
                 }
             }
         }
 
-        if (txt.length() != 1)
+        if (!key || txt.length() != 1)
         {
             c.setText(txt);
         }
@@ -130,7 +133,7 @@ public class Lang
     public static void setWText(JLabel c, String sid, String def)
     {
         String txt = getLang(sid, def);
-
+        boolean key = false;
         // 快捷字符替换
         if (txt.length() > 0)
         {
@@ -141,11 +144,12 @@ public class Lang
                 if (txt.length() > si)
                 {
                     c.setDisplayedMnemonic(txt.charAt(si));
+                    key = true;
                 }
             }
         }
 
-        if (txt.length() != 1)
+        if (!key || txt.length() != 1)
         {
             c.setText(txt);
         }

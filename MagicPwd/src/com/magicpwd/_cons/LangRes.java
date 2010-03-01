@@ -404,6 +404,9 @@ public interface LangRes
     String P30F7A2D = "P30F7A2D";
     String P30F7A2E = "P30F7A2E";
     String P30F7A2F = "P30F7A2F";
+    String P30F7A30 = "P30F7A30";
+    String P30F7A31 = "P30F7A31";
+    String P30F7A32 = "P30F7A32";
     // ----------------------------------------------------
     // B 自定义语言资源
     // ----------------------------------------------------
