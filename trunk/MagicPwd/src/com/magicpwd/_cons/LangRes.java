@@ -104,7 +104,7 @@ public interface LangRes
     String P30F1510 = "P30F1510";// 打开链接(Alt + O)
     String P30F1511 = "P30F1511";// &O
     String P30F1512 = "P30F1512";// 发送邮件(Alt + O)
-    String P30F1513 = "P30F1514";// &O
+    String P30F1513 = "P30F1513";// &O
     String P30F1514 = "P30F1514";// 当前时间(Alt + O)
     String P30F1515 = "P30F1515";// &V
     String P30F1516 = "P30F1516";// 打开附件(Alt + O)

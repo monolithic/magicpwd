@@ -13,7 +13,7 @@ import com.magicpwd._bean.InfoBean;
 import com.magicpwd._bean.LinkBean;
 import com.magicpwd._bean.MailBean;
 import com.magicpwd._bean.MetaBean;
-import com.magicpwd._bean.NoteBean;
+import com.magicpwd._bean.HintBean;
 import com.magicpwd._bean.PwdsBean;
 import com.magicpwd._bean.TextBean;
 import com.magicpwd._comn.GuidItem;
@@ -1161,7 +1161,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         pl_CardProp.add(ConsEnv.BEAN_ICON, beanIcon);
         editBean[idx++] = beanIcon;
 
-        NoteBean beanNote = new NoteBean(this);
+        HintBean beanNote = new HintBean(this);
         beanNote.initView();
         pl_CardProp.add(ConsEnv.BEAN_NOTE, beanNote);
         editBean[idx++] = beanNote;

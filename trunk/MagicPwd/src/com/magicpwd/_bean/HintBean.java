@@ -19,14 +19,14 @@ import com.magicpwd.v.EditBox;
  * 键值：ConsEnv.INDX_TIME
  * @author Amon
  */
-public class NoteBean extends javax.swing.JPanel implements IEditBean
+public class HintBean extends javax.swing.JPanel implements IEditBean
 {
 
     private IEditItem itemData;
     private IGridView gridView;
     private EditBox dataEdit;
 
-    public NoteBean(IGridView view)
+    public HintBean(IGridView view)
     {
         gridView = view;
     }
