@@ -5,9 +5,7 @@
 package com.magicpwd._bean;
 
 import com.magicpwd._comn.LogoItem;
-import com.magicpwd._comn.S1S1;
 import com.magicpwd._comp.BtnLabel;
-import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
@@ -15,8 +13,6 @@ import com.magicpwd._face.IGridView;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.m.UserMdl;
-import com.magicpwd.r.AmonFF;
-import com.magicpwd.r.LogoCR;
 import com.magicpwd.v.EditBox;
 
 /**
@@ -29,7 +25,6 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean
 
     private IEditItem itemData;
     private IGridView gridView;
-    private java.io.File icoPath;
     private EditBox dataEdit;
     private BtnLabel bt_LogoView;
 
@@ -60,9 +55,7 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean
         lb_PropName.setLabelFor(tf_PropName);
 
         lb_PropData = new javax.swing.JLabel();
-        cb_PropData = new javax.swing.JComboBox();
-        cb_PropData.setRenderer(new LogoCR());
-        lb_PropData.setLabelFor(cb_PropData);
+        jl_PropData = new javax.swing.JLabel();
 
         lb_PropEdit = new javax.swing.JLabel();
         pl_PropEdit = new javax.swing.JPanel();
@@ -88,7 +81,7 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean
         hpg1.addComponent(lb_PropName);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg2.addComponent(tf_PropName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        hpg2.addComponent(cb_PropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hpg2.addComponent(jl_PropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hpg2.addComponent(pl_PropEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addGroup(hpg1);
@@ -103,7 +96,7 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean
         vpg1.addComponent(tf_PropName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg2.addComponent(lb_PropData);
-        vpg2.addComponent(cb_PropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg2.addComponent(jl_PropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         vpg3.addComponent(lb_PropEdit);
         vpg3.addComponent(pl_PropEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
@@ -133,28 +126,6 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean
     {
         itemData = (LogoItem) item;
         tf_PropName.setText(item.getName());
-
-        if (icoPath == null)
-        {
-            icoPath = new java.io.File(ConsEnv.DIR_DAT, ConsEnv.DIR_ICO);
-            if (!icoPath.exists())
-            {
-                icoPath.mkdirs();
-            }
-
-            java.io.File[] fileList = icoPath.listFiles(new AmonFF("[0-9a-z]{16}\\.png", false));
-            if (fileList == null)
-            {
-                return;
-            }
-//            cb_PropData.addItem(new S1S1("", "0000000000000000"));
-            for (java.io.File file : fileList)
-            {
-                cb_PropData.addItem(new S1S1(file.getName().split("\\.")[0], file.getAbsolutePath()));
-            }
-        }
-
-        cb_PropData.setSelectedItem(itemData.getData());
     }
 
     @Override
@@ -184,6 +155,6 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean
     private javax.swing.JLabel lb_PropEdit;
     private javax.swing.JLabel lb_PropName;
     private javax.swing.JPanel pl_PropEdit;
-    private javax.swing.JComboBox cb_PropData;
+    private javax.swing.JLabel jl_PropData;
     private javax.swing.JTextField tf_PropName;
 }

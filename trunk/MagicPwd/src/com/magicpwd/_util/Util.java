@@ -54,12 +54,7 @@ public final class Util
 
     private static ImageIcon bi_NoneIcon;
     private static BufferedImage bi_LogoIcon;
-    private static Map<String, BufferedImage> mp_ImgList;
     private static Map<Integer, ImageIcon> mp_IcoList;
-
-    public static final void loadRes()
-    {
-    }
 
     /**
      * 长整形数据加密
@@ -136,68 +131,75 @@ public final class Util
 
     public static ImageIcon getIcon(int name)
     {
-        return mp_IcoList != null ? mp_IcoList.get(name) : bi_NoneIcon;
-    }
-
-    public static BufferedImage getImage(String name)
-    {
-        return mp_ImgList != null ? mp_ImgList.get(name) : bi_LogoIcon;
-    }
-
-    /**
-     * 资源预加载
-     */
-    public static void preLoad()
-    {
-        if (mp_ImgList == null)
-        {
-            mp_ImgList = new HashMap<String, BufferedImage>();
-        }
         if (mp_IcoList == null)
         {
             mp_IcoList = new HashMap<Integer, ImageIcon>();
+            initIco();
         }
+        return mp_IcoList.get(name);
+    }
 
-        bi_NoneIcon = new ImageIcon(createNone());
-
-        try
-        {
-            java.io.InputStream stream = Util.class.getResourceAsStream(ConsEnv.ICON_PATH + ConsEnv.ICON_LOGO_0016);
-            bi_LogoIcon = ImageIO.read(stream);
-            stream.close();
-        }
-        catch (Exception exp)
-        {
-            bi_LogoIcon = createLogo();
-        }
-
-        BufferedImage bufImg = null;
+    private static synchronized void initIco()
+    {
         try
         {
             java.io.InputStream stream = Util.class.getResourceAsStream(ConsEnv.ICON_PATH + "icon.png");
-            bufImg = ImageIO.read(stream);
+            BufferedImage bufImg = ImageIO.read(stream);
             stream.close();
+
+            for (int i = 0, j = 0; i < ConsEnv.ICON_SIZE; i += 1)
+            {
+                mp_IcoList.put(i, new ImageIcon(bufImg.getSubimage(j, 0, 16, 16)));
+                j += 16;
+            }
         }
         catch (Exception exp)
         {
             Logs.exception(exp);
         }
+    }
 
-        int x = 0;
-        for (int i = 0; i < ConsEnv.ICON_SIZE; i += 1)
+    public static BufferedImage getImage(String name)
+    {
+        BufferedImage img = null;
+        try
         {
-            mp_IcoList.put(i, new ImageIcon(bufImg.getSubimage(x, 0, 16, 16)));
-            x += 16;
+            java.io.InputStream stream = new java.io.FileInputStream(name);
+            img = ImageIO.read(stream);
+            stream.close();
         }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            img = null;
+        }
+        return img;
     }
 
     public static ImageIcon getNone()
     {
-        return mp_IcoList.get(0);
+        if (bi_NoneIcon == null)
+        {
+            bi_NoneIcon = new ImageIcon(createNone());
+        }
+        return bi_NoneIcon;
     }
 
     public static BufferedImage getLogo()
     {
+        if (bi_LogoIcon == null)
+        {
+            try
+            {
+                java.io.InputStream stream = Util.class.getResourceAsStream(ConsEnv.ICON_PATH + ConsEnv.ICON_LOGO_0016);
+                bi_LogoIcon = ImageIO.read(stream);
+                stream.close();
+            }
+            catch (Exception exp)
+            {
+                bi_LogoIcon = createLogo();
+            }
+        }
         return bi_LogoIcon;
     }
 
