@@ -52,9 +52,11 @@ import javax.swing.ImageIcon;
 public final class Util
 {
 
+    public static final File icoPath = new File(ConsEnv.DIR_DAT, ConsEnv.DIR_ICO);
     private static ImageIcon bi_NoneIcon;
     private static BufferedImage bi_LogoIcon;
     private static Map<Integer, ImageIcon> mp_IcoList;
+    private static Map<String, ImageIcon> mp_ImgList;
 
     /**
      * 长整形数据加密
@@ -134,47 +136,93 @@ public final class Util
         if (mp_IcoList == null)
         {
             mp_IcoList = new HashMap<Integer, ImageIcon>();
-            initIco();
+            synchronized (icoPath)
+            {
+                try
+                {
+                    java.io.InputStream stream = Util.class.getResourceAsStream(ConsEnv.ICON_PATH + "icon.png");
+                    BufferedImage bufImg = ImageIO.read(stream);
+                    stream.close();
+
+                    for (int i = 0, j = 0; i < ConsEnv.ICON_SIZE; i += 1)
+                    {
+                        mp_IcoList.put(i, new ImageIcon(bufImg.getSubimage(j, 0, 16, 16)));
+                        j += 16;
+                    }
+                }
+                catch (Exception exp)
+                {
+                    Logs.exception(exp);
+                }
+            }
         }
         return mp_IcoList.get(name);
     }
 
-    private static synchronized void initIco()
+    public static ImageIcon getIcon(String name)
     {
-        try
+        if (!isValidateHash(name))
         {
-            java.io.InputStream stream = Util.class.getResourceAsStream(ConsEnv.ICON_PATH + "icon.png");
-            BufferedImage bufImg = ImageIO.read(stream);
-            stream.close();
-
-            for (int i = 0, j = 0; i < ConsEnv.ICON_SIZE; i += 1)
+            return null;
+        }
+        if (mp_ImgList == null)
+        {
+            mp_ImgList = new HashMap<String, ImageIcon>();
+        }
+        if (!mp_ImgList.containsKey(name))
+        {
+            synchronized (icoPath)
             {
-                mp_IcoList.put(i, new ImageIcon(bufImg.getSubimage(j, 0, 16, 16)));
-                j += 16;
+                BufferedImage image = getImage(new File(icoPath, name + ".png"));
+                mp_ImgList.put(name, image != null ? new ImageIcon(image) : bi_NoneIcon);
             }
         }
-        catch (Exception exp)
+        return mp_ImgList.get(name);
+    }
+
+    public static ImageIcon getIcon(File file)
+    {
+        if (mp_ImgList == null)
         {
-            Logs.exception(exp);
+            mp_ImgList = new HashMap<String, ImageIcon>();
         }
+        String name = file.getName().split("\\.")[0];
+        if (!mp_ImgList.containsKey(name))
+        {
+            synchronized (icoPath)
+            {
+                BufferedImage image = getImage(file);
+                mp_ImgList.put(name, image != null ? new ImageIcon(image) : bi_NoneIcon);
+            }
+        }
+        return mp_ImgList.get(name);
     }
 
     public static BufferedImage getImage(String name)
     {
-        BufferedImage img = null;
+        return getImage(new File(name));
+    }
+
+    public static BufferedImage getImage(File file)
+    {
+        if (file == null || !file.exists() || !file.isFile() || !file.canRead())
+        {
+            return null;
+        }
+
         try
         {
-            java.io.InputStream stream = new java.io.FileInputStream(name);
-            img = ImageIO.read(stream);
+            java.io.InputStream stream = new java.io.FileInputStream(file);
+            BufferedImage img = ImageIO.read(stream);
             stream.close();
+            return img;
         }
         catch (Exception exp)
         {
-            Logs.log(name);
+            Logs.log(file.getName());
             Logs.exception(exp);
-            img = null;
+            return null;
         }
-        return img;
     }
 
     public static ImageIcon getNone()
