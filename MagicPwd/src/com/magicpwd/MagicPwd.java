@@ -15,6 +15,7 @@ import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.MainPtn;
 import com.magicpwd.v.MiniPtn;
 import com.magicpwd.v.NormPtn;
+import com.magicpwd.x.IcoDialog;
 
 /**
  * @author Amon
@@ -174,7 +175,9 @@ public class MagicPwd
 
     private static void preLoad()
     {
-        Util.preLoad();
+        Util.getNone();
+        Util.getLogo();
+        Util.getIcon(0);
         UserMdl.preLoad();
 
         try
@@ -187,6 +190,8 @@ public class MagicPwd
         }
 
         showMainPtn();
+
+        IcoDialog.getLogo("");
     }
 
     private static void endSave()

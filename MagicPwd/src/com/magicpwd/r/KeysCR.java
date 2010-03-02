@@ -16,31 +16,31 @@ public class KeysCR extends javax.swing.JPanel implements javax.swing.ListCellRe
 
     public KeysCR()
     {
-        lb_Image = new javax.swing.JLabel();
-        lb_Title = new javax.swing.JLabel();
-        lb_Major = new javax.swing.JLabel();
-        lb_State = new javax.swing.JLabel();
-        lb_Other = new javax.swing.JLabel();
+        lb_Icon = new javax.swing.JLabel();
+        lb_Text = new javax.swing.JLabel();
+        lb_Note = new javax.swing.JLabel();
+        lb_Mode = new javax.swing.JLabel();
+        lb_Rest = new javax.swing.JLabel();
 
-        lb_Title.setOpaque(true);
+//        lb_Test.setOpaque(true);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
-        this.setOpaque(false);
+//        this.setOpaque(true);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
-        hsg.addComponent(lb_Image);
-        hsg.addComponent(lb_Title, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE);
-        hsg.addComponent(lb_Major);
-        hsg.addComponent(lb_State);
-        hsg.addComponent(lb_Other);
+        hsg.addComponent(lb_Icon);
+        hsg.addComponent(lb_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE);
+        hsg.addComponent(lb_Note);
+        hsg.addComponent(lb_Mode);
+        hsg.addComponent(lb_Rest);
         layout.setHorizontalGroup(hsg);
 
         javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
-        vpg.addComponent(lb_Image);
-        vpg.addComponent(lb_Title);
-        vpg.addComponent(lb_Major);
-        vpg.addComponent(lb_State);
-        vpg.addComponent(lb_Other);
+        vpg.addComponent(lb_Icon);
+        vpg.addComponent(lb_Text);
+        vpg.addComponent(lb_Note);
+        vpg.addComponent(lb_Mode);
+        vpg.addComponent(lb_Rest);
         layout.setVerticalGroup(vpg);
     }
 
@@ -56,49 +56,51 @@ public class KeysCR extends javax.swing.JPanel implements javax.swing.ListCellRe
         // 前景及背景颜色设置
         if (isSelected)
         {
-            lb_Title.setBackground(list.getSelectionBackground());
-            lb_Title.setForeground(list.getSelectionForeground());
+            this.setBackground(list.getSelectionBackground());
+            lb_Text.setForeground(list.getSelectionForeground());
         }
         else
         {
-            lb_Title.setBackground(list.getBackground());
-            lb_Title.setForeground(list.getForeground());
+            this.setBackground(list.getBackground());
+            lb_Text.setForeground(list.getForeground());
         }
-
-        // 文字属性设置
-        lb_Title.setFont(list.getFont());
-
-        lb_Image.setIcon(Util.getNone());
-        lb_State.setIcon(Util.getNone());
-        lb_Major.setIcon(Util.getNone());
-        lb_Other.setIcon(Util.getNone());
 
         // 可编辑状态设置
         setEnabled(list.isEnabled());
+
+        // 文字属性设置
+        lb_Text.setFont(list.getFont());
+
+        lb_Icon.setIcon(Util.getNone());
 
         // 口令列表专用
         if (value instanceof Keys)
         {
             Keys keys = (Keys) value;
-            lb_State.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_MOD0 + keys.getP30F0102()));
-            lb_Title.setText(keys.getP30F0109());
+            lb_Note.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_NOTE + keys.getP30F0103()));
+            lb_Mode.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_MOD0 + keys.getP30F0102()));
+            lb_Text.setText(keys.getP30F0109());
             setToolTipText(Util.isValidate(keys.getP30F010A()) ? keys.getP30F010A() : keys.getP30F0109());
             if (Util.isValidateHash(keys.getP30F010B()))
             {
-                lb_Title.setIcon(new javax.swing.ImageIcon(Util.format("ico/{0}.png", keys.getP30F010B())));
+                lb_Text.setIcon(new javax.swing.ImageIcon(Util.format("ico/{0}.png", keys.getP30F010B())));
             }
         }
         // 其它
         else if (value != null)
         {
-            lb_Title.setText(value.toString());
+            lb_Text.setText(value.toString());
+            lb_Mode.setIcon(Util.getNone());
+            lb_Note.setIcon(Util.getNone());
         }
+
+        lb_Rest.setIcon(Util.getNone());
 
         return this;
     }
-    private javax.swing.JLabel lb_Image;
-    private javax.swing.JLabel lb_Major;
-    private javax.swing.JLabel lb_Other;
-    private javax.swing.JLabel lb_State;
-    private javax.swing.JLabel lb_Title;
+    private javax.swing.JLabel lb_Icon;
+    private javax.swing.JLabel lb_Note;
+    private javax.swing.JLabel lb_Rest;
+    private javax.swing.JLabel lb_Mode;
+    private javax.swing.JLabel lb_Text;
 }
