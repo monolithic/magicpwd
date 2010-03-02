@@ -170,6 +170,7 @@ public final class Util
         }
         catch (Exception exp)
         {
+            Logs.log(name);
             Logs.exception(exp);
             img = null;
         }

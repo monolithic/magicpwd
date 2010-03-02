@@ -4,29 +4,30 @@
  */
 package com.magicpwd._bean;
 
+import com.magicpwd.MagicPwd;
 import com.magicpwd._comn.LogoItem;
-import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._face.IBackCall;
 import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IGridView;
 import com.magicpwd._util.Lang;
-import com.magicpwd._util.Util;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.EditBox;
+import com.magicpwd.x.IcoDialog;
+import java.util.EventListener;
 
 /**
  * 属性：图标
  * 键值：ConsEnv.INDX_ICON
  * @author Amon
  */
-public class LogoBean extends javax.swing.JPanel implements IEditBean
+public class LogoBean extends javax.swing.JPanel implements IEditBean, IBackCall
 {
 
     private IEditItem itemData;
     private IGridView gridView;
     private EditBox dataEdit;
-    private BtnLabel bt_LogoView;
 
     public LogoBean(IGridView gridView)
     {
@@ -60,18 +61,6 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean
         lb_PropEdit = new javax.swing.JLabel();
         pl_PropEdit = new javax.swing.JPanel();
         pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
-
-        bt_LogoView = new BtnLabel();
-        bt_LogoView.setIcon(Util.getNone());
-        bt_LogoView.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                bt_LogoViewActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -133,9 +122,14 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean
     {
 //        tpltData.setName(name);
 //        tpltData.setData(tf_PropData.getText());
-        UserMdl.getGridMdl().setModified(true);
+//        UserMdl.getGridMdl().setModified(true);
 
-        gridView.selectNext(!UserMdl.getGridMdl().isUpdate());
+//        gridView.selectNext(!UserMdl.getGridMdl().isUpdate());
+        IcoDialog id = new IcoDialog(this);
+        id.initView();
+        id.initLang();
+        id.initData();
+        id.setVisible(true);
     }
 
     @Override
@@ -148,7 +142,13 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean
     {
     }
 
-    public void bt_LogoViewActionPerformed(java.awt.event.ActionEvent evt)
+    @Override
+    public boolean callBack(Object sender, EventListener event, String... params)
+    {
+        return true;
+    }
+
+    public void jl_PropDataActionPerformed(java.awt.event.ActionEvent evt)
     {
     }
     private javax.swing.JLabel lb_PropData;
