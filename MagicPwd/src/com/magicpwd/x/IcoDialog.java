@@ -5,11 +5,9 @@
 package com.magicpwd.x;
 
 import com.magicpwd.MagicPwd;
-import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._face.IBackCall;
 import com.magicpwd._util.Util;
 import com.magicpwd.r.AmonFF;
-import java.util.ArrayList;
 
 /**
  *
@@ -19,7 +17,6 @@ public class IcoDialog extends javax.swing.JDialog
 {
 
     private java.io.File icoPath;
-    private java.util.List<javax.swing.JLabel> iconList;
     private IBackCall backCall;
 
     public IcoDialog(IBackCall backCall)
@@ -99,42 +96,30 @@ public class IcoDialog extends javax.swing.JDialog
 
     public void initData()
     {
-        if (iconList == null)
+        if (icoPath == null)
         {
-            if (icoPath == null)
+            icoPath = Util.icoPath;
+            if (!icoPath.exists())
             {
-                icoPath = new java.io.File(ConsEnv.DIR_DAT, ConsEnv.DIR_ICO);
-                if (!icoPath.exists())
-                {
-                    icoPath.mkdirs();
-                }
-            }
-
-            java.io.File[] fileList = icoPath.listFiles(new AmonFF("[0-9a-z]{16}\\.png", false));
-            if (fileList == null)
-            {
-                return;
-            }
-
-            javax.swing.JLabel label;
-            iconList = new java.util.ArrayList<javax.swing.JLabel>(fileList.length);
-            for (java.io.File file : fileList)
-            {
-                if (!file.isFile())
-                {
-                    continue;
-                }
-                label = new javax.swing.JLabel(new javax.swing.ImageIcon(Util.getImage(file.getAbsolutePath())));
-                iconList.add(label);
-                pl_IconList.add(label);
+                icoPath.mkdirs();
             }
         }
-        else
+
+        java.io.File[] fileList = icoPath.listFiles(new AmonFF("[0-9a-z]{16}\\.png", false));
+        if (fileList == null)
         {
-            for (int i = 0; i < iconList.size(); i += 1)
+            return;
+        }
+
+        javax.swing.JLabel label;
+        for (java.io.File file : fileList)
+        {
+            if (!file.isFile())
             {
-                pl_IconList.add(iconList.get(i));
+                continue;
             }
+            label = new javax.swing.JLabel(Util.getIcon(file));
+            pl_IconList.add(label);
         }
     }
 
