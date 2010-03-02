@@ -16,8 +16,8 @@ import com.magicpwd.r.AmonFF;
 public class IcoDialog extends javax.swing.JDialog
 {
 
-    private static java.io.File icoPath;
-    private static java.util.Map<String, javax.swing.ImageIcon> iconList;
+    private java.io.File icoPath;
+    private java.util.Map<String, javax.swing.ImageIcon> iconList;
     private IBackCall backCall;
 
     public IcoDialog(IBackCall backCall)
@@ -37,7 +37,7 @@ public class IcoDialog extends javax.swing.JDialog
     {
     }
 
-    private static synchronized void getIcon()
+    private synchronized void getIcon()
     {
         icoPath = new java.io.File(ConsEnv.DIR_DAT, ConsEnv.DIR_ICO);
         if (!icoPath.exists())
@@ -57,7 +57,7 @@ public class IcoDialog extends javax.swing.JDialog
         }
     }
 
-    public static javax.swing.ImageIcon getLogo(String name)
+    public javax.swing.ImageIcon getLogo(String name)
     {
         if (iconList == null)
         {
