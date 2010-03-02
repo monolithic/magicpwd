@@ -15,7 +15,6 @@ import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.MainPtn;
 import com.magicpwd.v.MiniPtn;
 import com.magicpwd.v.NormPtn;
-import com.magicpwd.x.IcoDialog;
 
 /**
  * @author Amon
@@ -190,8 +189,6 @@ public class MagicPwd
         }
 
         showMainPtn();
-
-        IcoDialog.getLogo("");
     }
 
     private static void endSave()
