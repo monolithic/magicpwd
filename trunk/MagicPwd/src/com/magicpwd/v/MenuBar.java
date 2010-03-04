@@ -13,6 +13,7 @@ import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
+import com.magicpwd._util.Logs;
 import com.magicpwd.c.MenuEvt;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.x.MdiDialog;
@@ -23,7 +24,9 @@ import com.magicpwd.x.MdiDialog;
  */
 public class MenuBar extends JMenuBar
 {
+
     private MenuEvt me_MenuEvent;
+    private javax.swing.JMenuItem mi_lastItem;
 
     public MenuBar()
     {
@@ -36,6 +39,7 @@ public class MenuBar extends JMenuBar
         initViewMenu();
         initDataMenu();
         initUserMenu();
+        initSkinMenu();
         initHelpMenu();
     }
 
@@ -46,6 +50,7 @@ public class MenuBar extends JMenuBar
         initViewLang();
         initDataLang();
         initUserLang();
+        initSkinLang();
         initHelpLang();
     }
 
@@ -123,6 +128,7 @@ public class MenuBar extends JMenuBar
         mi_FileApnd.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK));
         mi_FileApnd.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -135,6 +141,7 @@ public class MenuBar extends JMenuBar
         mi_FileSave.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK));
         mi_FileSave.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -149,6 +156,7 @@ public class MenuBar extends JMenuBar
         mi_FileHide.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, InputEvent.CTRL_MASK));
         mi_FileHide.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -162,6 +170,7 @@ public class MenuBar extends JMenuBar
         mi_FileExit = new javax.swing.JMenuItem();
         mi_FileExit.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -180,6 +189,7 @@ public class MenuBar extends JMenuBar
         mi_EditFind.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK));
         mi_EditFind.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -194,6 +204,7 @@ public class MenuBar extends JMenuBar
         mi_EditText.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, InputEvent.CTRL_MASK));
         mi_EditText.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -206,6 +217,7 @@ public class MenuBar extends JMenuBar
         mi_EditPwds.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.CTRL_MASK));
         mi_EditPwds.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -218,6 +230,7 @@ public class MenuBar extends JMenuBar
         mi_EditLink.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_3, InputEvent.CTRL_MASK));
         mi_EditLink.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -230,6 +243,7 @@ public class MenuBar extends JMenuBar
         mi_EditMail.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_4, InputEvent.CTRL_MASK));
         mi_EditMail.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -242,6 +256,7 @@ public class MenuBar extends JMenuBar
         mi_EditDate.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_5, InputEvent.CTRL_MASK));
         mi_EditDate.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -254,6 +269,7 @@ public class MenuBar extends JMenuBar
         mi_EditArea.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_6, InputEvent.CTRL_MASK));
         mi_EditArea.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -266,6 +282,7 @@ public class MenuBar extends JMenuBar
         mi_EditFile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_7, InputEvent.CTRL_MASK));
         mi_EditFile.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -280,6 +297,7 @@ public class MenuBar extends JMenuBar
         mi_EditPrev.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_UP, InputEvent.CTRL_MASK));
         mi_EditPrev.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -292,6 +310,7 @@ public class MenuBar extends JMenuBar
         mi_EditNext.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, InputEvent.CTRL_MASK));
         mi_EditNext.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -305,6 +324,7 @@ public class MenuBar extends JMenuBar
         mi_KindApnd = new javax.swing.JMenuItem();
         mi_KindApnd.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -316,6 +336,7 @@ public class MenuBar extends JMenuBar
         mi_KindUpdt = new javax.swing.JMenuItem();
         mi_KindUpdt.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -327,6 +348,7 @@ public class MenuBar extends JMenuBar
         mi_KindDelt = new javax.swing.JMenuItem();
         mi_KindDelt.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -345,6 +367,7 @@ public class MenuBar extends JMenuBar
         mi_ViewTop1.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0));
         mi_ViewTop1.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -359,6 +382,7 @@ public class MenuBar extends JMenuBar
         mi_ViewProp.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F7, InputEvent.ALT_MASK));
         mi_ViewProp.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -372,6 +396,7 @@ public class MenuBar extends JMenuBar
         mi_ViewSide.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F8, InputEvent.ALT_MASK));
         mi_ViewSide.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -387,6 +412,7 @@ public class MenuBar extends JMenuBar
         mi_ViewFind.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F9, InputEvent.ALT_MASK));
         mi_ViewFind.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -400,6 +426,7 @@ public class MenuBar extends JMenuBar
         mi_ViewMenu.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F10, InputEvent.ALT_MASK));
         mi_ViewMenu.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -413,6 +440,7 @@ public class MenuBar extends JMenuBar
         mi_ViewTool.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F11, InputEvent.ALT_MASK));
         mi_ViewTool.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -426,6 +454,7 @@ public class MenuBar extends JMenuBar
         mi_ViewInfo.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F12, InputEvent.ALT_MASK));
         mi_ViewInfo.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -444,6 +473,7 @@ public class MenuBar extends JMenuBar
         mi_DataImpt = new javax.swing.JMenuItem();
         mi_DataImpt.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -455,6 +485,7 @@ public class MenuBar extends JMenuBar
         mi_DataExpt = new javax.swing.JMenuItem();
         mi_DataExpt.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -468,6 +499,7 @@ public class MenuBar extends JMenuBar
         mi_DataUSet = new javax.swing.JMenuItem();
         mi_DataUSet.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -479,6 +511,7 @@ public class MenuBar extends JMenuBar
         mi_DataChar = new javax.swing.JMenuItem();
         mi_DataChar.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -490,6 +523,7 @@ public class MenuBar extends JMenuBar
         mi_DataTplt = new javax.swing.JMenuItem();
         mi_DataTplt.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -501,6 +535,7 @@ public class MenuBar extends JMenuBar
         mi_DataKind = new javax.swing.JMenuItem();
         mi_DataKind.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -513,6 +548,7 @@ public class MenuBar extends JMenuBar
         mi_DataSKey.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0));
         mi_DataSKey.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -530,6 +566,7 @@ public class MenuBar extends JMenuBar
         mi_UserSwitch = new javax.swing.JMenuItem();
         mi_UserSwitch.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -541,6 +578,7 @@ public class MenuBar extends JMenuBar
         mi_UserCreate = new javax.swing.JMenuItem();
         mi_UserCreate.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -554,6 +592,7 @@ public class MenuBar extends JMenuBar
         mi_UserUpdate = new javax.swing.JMenuItem();
         mi_UserUpdate.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -565,6 +604,7 @@ public class MenuBar extends JMenuBar
         mi_UserSecret = new javax.swing.JMenuItem();
         mi_UserSecret.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -572,6 +612,106 @@ public class MenuBar extends JMenuBar
             }
         });
         mu_UserMenu.add(mi_UserSecret);
+    }
+
+    private void initSkinMenu()
+    {
+        mu_SkinMenu = new javax.swing.JMenu();
+        add(mu_SkinMenu);
+
+        String userSkin = UserMdl.getCfg().getCfg(ConsCfg.CFG_SKIN, ConsCfg.DEF_SKIN);
+        boolean checked = ConsCfg.DEF_SKIN.equalsIgnoreCase(userSkin);
+        java.awt.event.ActionListener listener = new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                if (mi_lastItem != null)
+                {
+                    mi_lastItem.setSelected(false);
+                }
+                mi_lastItem = (javax.swing.JMenuItem) evt.getSource();
+                me_MenuEvent.skinChangeActionPerformed(evt);
+            }
+        };
+
+        mi_SkinSystem = new javax.swing.JCheckBoxMenuItem();
+        mi_SkinSystem.setActionCommand(ConsCfg.DEF_SKIN);
+        mi_SkinSystem.addActionListener(listener);
+        mu_SkinMenu.add(mi_SkinSystem);
+
+        java.io.File skinFile = new java.io.File(ConsEnv.DIR_DAT, "skin.config");
+        if (skinFile.isFile() && skinFile.canRead())
+        {
+            try
+            {
+                javax.swing.JMenu lastMenu = null;
+                java.util.regex.Pattern family = java.util.regex.Pattern.compile("^skin_[^._]+$");
+                java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader(skinFile));
+                String line;
+                String[] arr;
+                while ((line = reader.readLine()) != null)
+                {
+                    arr = line.split("=");
+                    if (arr == null || arr.length != 2)
+                    {
+                        continue;
+                    }
+                    String k = arr[0];
+                    String v = arr[1];
+                    if (family.matcher(k).matches())
+                    {
+                        lastMenu = new javax.swing.JMenu(v);
+                        mu_SkinMenu.add(lastMenu);
+                        continue;
+                    }
+
+                    if (lastMenu == null)
+                    {
+                        continue;
+                    }
+
+                    if ("-".equals(v))
+                    {
+                        lastMenu.addSeparator();
+                        continue;
+                    }
+
+                    arr = v.split(":");
+                    if (arr == null || arr.length != 2)
+                    {
+                        continue;
+                    }
+
+                    k = arr[0];
+                    v = arr[1];
+                    javax.swing.JCheckBoxMenuItem item = new javax.swing.JCheckBoxMenuItem(k);
+                    if (!checked)
+                    {
+                        checked = userSkin.equalsIgnoreCase(v);
+                        if (checked)
+                        {
+                            item.setSelected(true);
+                            mi_lastItem = item;
+                        }
+                    }
+                    item.setActionCommand(v);
+                    item.addActionListener(listener);
+                    lastMenu.add(item);
+                }
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+        }
+
+        if (!checked)
+        {
+            mi_SkinSystem.setSelected(true);
+            mi_lastItem = mi_SkinSystem;
+        }
     }
 
     private void initHelpMenu()
@@ -583,6 +723,7 @@ public class MenuBar extends JMenuBar
         mi_HelpHelp.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
         mi_HelpHelp.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -595,6 +736,7 @@ public class MenuBar extends JMenuBar
         mi_HelpSite.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0));
         mi_HelpSite.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -607,6 +749,7 @@ public class MenuBar extends JMenuBar
         mi_HelpMail.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0));
         mi_HelpMail.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -619,6 +762,7 @@ public class MenuBar extends JMenuBar
         mi_HelpUpdt.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0));
         mi_HelpUpdt.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -630,6 +774,7 @@ public class MenuBar extends JMenuBar
         mi_HelpInfo = new javax.swing.JMenuItem();
         mi_HelpInfo.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -723,6 +868,13 @@ public class MenuBar extends JMenuBar
         Lang.setWText(mi_UserSecret, LangRes.P30F7628, "设置安全口令");
     }
 
+    private void initSkinLang()
+    {
+        Lang.setWText(mu_SkinMenu, LangRes.P30F762F, "风格(&L)");
+
+        Lang.setWText(mi_SkinSystem, LangRes.P30F7630, "系统风格(&S)");
+    }
+
     private void initHelpLang()
     {
         Lang.setWText(mu_HelpMenu, LangRes.P30F7629, "帮助");
@@ -762,13 +914,11 @@ public class MenuBar extends JMenuBar
     {
         me_MenuEvent.dataSKeyActionPerformed(evt);
     }
-
     private javax.swing.JMenu mu_FileMenu;
     private javax.swing.JMenuItem mi_FileApnd;
     private javax.swing.JMenuItem mi_FileSave;
     private javax.swing.JMenuItem mi_FileHide;
     private javax.swing.JMenuItem mi_FileExit;
-
     private javax.swing.JMenu mu_EditMenu;
     private javax.swing.JMenuItem mi_EditText;
     private javax.swing.JMenuItem mi_EditPwds;
@@ -783,7 +933,6 @@ public class MenuBar extends JMenuBar
     private javax.swing.JMenuItem mi_KindDelt;
     private javax.swing.JMenuItem mi_EditNext;
     private javax.swing.JMenuItem mi_EditFind;
-
     private javax.swing.JMenu mu_ViewMenu;
     private javax.swing.JCheckBoxMenuItem mi_ViewTop1;
     private javax.swing.JCheckBoxMenuItem mi_ViewProp;
@@ -792,7 +941,6 @@ public class MenuBar extends JMenuBar
     private javax.swing.JCheckBoxMenuItem mi_ViewTool;
     private javax.swing.JCheckBoxMenuItem mi_ViewFind;
     private javax.swing.JCheckBoxMenuItem mi_ViewInfo;
-
     private javax.swing.JMenu mu_DataMenu;
     private javax.swing.JMenuItem mi_DataImpt;
     private javax.swing.JMenuItem mi_DataExpt;
@@ -801,13 +949,13 @@ public class MenuBar extends JMenuBar
     private javax.swing.JMenuItem mi_DataTplt;
     private javax.swing.JMenuItem mi_DataKind;
     private javax.swing.JMenuItem mi_DataSKey;
-
     private javax.swing.JMenu mu_UserMenu;
     private javax.swing.JMenuItem mi_UserSwitch;
     private javax.swing.JMenuItem mi_UserCreate;
     private javax.swing.JMenuItem mi_UserUpdate;
     private javax.swing.JMenuItem mi_UserSecret;
-
+    private javax.swing.JMenu mu_SkinMenu;
+    private javax.swing.JCheckBoxMenuItem mi_SkinSystem;
     private javax.swing.JMenu mu_HelpMenu;
     private javax.swing.JMenuItem mi_HelpHelp;
     private javax.swing.JMenuItem mi_HelpSite;

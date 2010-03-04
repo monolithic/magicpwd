@@ -167,7 +167,7 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
         String name = tf_PropName.getText();
         if (!Util.isValidate(name))
         {
-            Lang.showMesg(this, "", "请输入链接名称！");
+            Lang.showMesg(this, LangRes.P30F7A33, "请输入链接名称！");
             tf_PropName.requestFocus();
             return;
         }

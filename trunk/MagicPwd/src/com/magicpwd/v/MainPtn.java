@@ -304,6 +304,21 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     }
 
     @Override
+    public void skinChangeActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        final String lafClass = evt.getActionCommand();
+        javax.swing.SwingUtilities.invokeLater(new Runnable()
+        {
+
+            @Override
+            public void run()
+            {
+                Util.changeSkin(lafClass);
+            }
+        });
+    }
+
+    @Override
     public void updtAreaActionPerformed(java.awt.event.ActionEvent evt)
     {
         if (checkData())

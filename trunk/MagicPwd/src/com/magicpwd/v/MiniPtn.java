@@ -9,7 +9,6 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.c.FindEvt;
 import com.magicpwd.c.MenuEvt;
-import java.awt.event.ActionEvent;
 
 /**
  * 迷你模式：全能搜索
@@ -36,105 +35,88 @@ public class MiniPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
     }
 
     @Override
-    public void fileCopyActionPerformed(ActionEvent evt)
+    public void fileCopyActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void fileApndActionPerformed(ActionEvent evt)
+    public void fileApndActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void fileSaveActionPerformed(ActionEvent evt)
+    public void fileSaveActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void fileOpenActionPerformed(ActionEvent evt)
+    public void fileOpenActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void fileDeltActionPerformed(ActionEvent evt)
+    public void fileDeltActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void fileHideActionPerformed(ActionEvent evt)
+    public void fileHideActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void fileExitActionPerformed(ActionEvent evt)
+    public void fileExitActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void editFindActionPerformed(ActionEvent evt)
+    public void editFindActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void editTextActionPerformed(ActionEvent evt)
+    public void editTextActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void editPwdsActionPerformed(ActionEvent evt)
+    public void editPwdsActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void editLinkActionPerformed(ActionEvent evt)
+    public void editLinkActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void editMailActionPerformed(ActionEvent evt)
+    public void editMailActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void editDateActionPerformed(ActionEvent evt)
+    public void editDateActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void editAreaActionPerformed(ActionEvent evt)
+    public void editAreaActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void editFileActionPerformed(ActionEvent evt)
+    public void editFileActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void editPrevActionPerformed(ActionEvent evt)
+    public void editPrevActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void editNextActionPerformed(ActionEvent evt)
+    public void editNextActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -148,140 +130,122 @@ public class MiniPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
     }
 
     @Override
-    public void kindApndActionPerformed(ActionEvent evt)
+    public void kindApndActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void kindUpdtActionPerformed(ActionEvent evt)
+    public void kindUpdtActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void kindDeltActionPerformed(ActionEvent evt)
+    public void kindDeltActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void viewTop1ActionPerformed(ActionEvent evt)
+    public void viewTop1ActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void viewEditActionPerformed(ActionEvent evt)
+    public void viewEditActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void viewSideActionPerformed(ActionEvent evt)
+    public void viewSideActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void viewFindActionPerformed(ActionEvent evt)
+    public void viewFindActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void viewMenuActionPerformed(ActionEvent evt)
+    public void viewMenuActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void viewToolActionPerformed(ActionEvent evt)
+    public void viewToolActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void viewInfoActionPerformed(ActionEvent evt)
+    public void viewInfoActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void dataImptActionPerformed(ActionEvent evt)
+    public void dataImptActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void dataExptActionPerformed(ActionEvent evt)
+    public void dataExptActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void dataSKeyActionPerformed(ActionEvent evt)
+    public void dataSKeyActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void userSwitchActionPerformed(ActionEvent evt)
+    public void skinChangeActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void userCreateActionPerformed(ActionEvent evt)
+    public void userSwitchActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void userUpdateActionPerformed(ActionEvent evt)
+    public void userCreateActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void userSecretActionPerformed(ActionEvent evt)
+    public void userUpdateActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void helpHelpActionPerformed(ActionEvent evt)
+    public void userSecretActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void helpSiteActionPerformed(ActionEvent evt)
+    public void helpHelpActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void helpMailActionPerformed(ActionEvent evt)
+    public void helpSiteActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void helpUpdtActionPerformed(ActionEvent evt)
+    public void helpMailActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void helpInfoActionPerformed(ActionEvent evt)
+    public void helpUpdtActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void findActionPerformed(ActionEvent evt)
+    public void helpInfoActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void findActionPerformed(java.awt.event.ActionEvent evt)
+    {
     }
 }
