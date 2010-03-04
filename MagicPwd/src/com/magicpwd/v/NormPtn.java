@@ -484,6 +484,11 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
     }
 
     @Override
+    public void skinChangeActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    }
+
+    @Override
     public void userCreateActionPerformed(java.awt.event.ActionEvent evt)
     {
     }

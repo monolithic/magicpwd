@@ -26,52 +26,90 @@ public class Form extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox();
-        jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        sp_IconList = new javax.swing.JScrollPane();
+        tb_IconList = new javax.swing.JTable();
+        bt_Append = new javax.swing.JButton();
+        bt_Select = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        tb_IconList.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "标题 2", "标题 3", "标题 4", "Title 2"
+            }
+        ));
+        tb_IconList.setRowSelectionAllowed(false);
+        tb_IconList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tb_IconList.setShowHorizontalLines(false);
+        tb_IconList.setShowVerticalLines(false);
+        sp_IconList.setViewportView(tb_IconList);
 
-        jPanel1.setLayout(new java.awt.BorderLayout());
+        bt_Append.setText("jButton1");
+        bt_Append.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_AppendActionPerformed(evt);
+            }
+        });
 
-        jButton1.setText("jButton1");
-        jPanel1.add(jButton1, java.awt.BorderLayout.CENTER);
+        bt_Select.setText("jButton2");
+        bt_Select.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_SelectActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("jButton2");
-        jPanel1.add(jButton2, java.awt.BorderLayout.PAGE_START);
+        jLabel1.setText("jLabel1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(174, 174, 174)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 137, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(sp_IconList, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 193, Short.MAX_VALUE)
+                        .addComponent(bt_Select)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bt_Append)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(sp_IconList, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_Append)
+                    .addComponent(bt_Select)
+                    .addComponent(jLabel1))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void bt_SelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_SelectActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_SelectActionPerformed
+
+    private void bt_AppendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_AppendActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_AppendActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton bt_Append;
+    private javax.swing.JButton bt_Select;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane sp_IconList;
+    private javax.swing.JTable tb_IconList;
     // End of variables declaration//GEN-END:variables
 
 }

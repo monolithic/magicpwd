@@ -353,6 +353,8 @@ public interface LangRes
     String P30F762C = "P30F762C";// 联系作者(&C)
     String P30F762D = "P30F762D";// 检测更新(&U)
     String P30F762E = "P30F762E";// 关于(&A)
+    String P30F762F = "P30F762F";// 风格(&L)
+    String P30F7630 = "P30F7630";// 系统风格(&S)
     // ----------------------------------------------------
     // A 消息提示语言资源
     // ----------------------------------------------------
@@ -407,6 +409,13 @@ public interface LangRes
     String P30F7A30 = "P30F7A30";
     String P30F7A31 = "P30F7A31";
     String P30F7A32 = "P30F7A32";
+    String P30F7A33 = "P30F7A33";
+    String P30F7A34 = "P30F7A34";
+    String P30F7A35 = "P30F7A35";
+    String P30F7A36 = "P30F7A36";
+    String P30F7A37 = "P30F7A37";
+    String P30F7A38 = "P30F7A38";
+    String P30F7A39 = "P30F7A39";
     // ----------------------------------------------------
     // B 自定义语言资源
     // ----------------------------------------------------

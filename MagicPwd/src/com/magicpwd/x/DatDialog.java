@@ -1,5 +1,6 @@
 package com.magicpwd.x;
 
+import com.magicpwd.MagicPwd;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
@@ -19,6 +20,7 @@ public class DatDialog extends javax.swing.JDialog
 
     public DatDialog(IBackCall backCall)
     {
+        super(MagicPwd.getCurrForm(), true);
         this.backCall = backCall;
     }
 
@@ -90,6 +92,10 @@ public class DatDialog extends javax.swing.JDialog
         Lang.setWText(bt_Update, LangRes.P30FA50A, "确定(&O)");
 
         Lang.setWText(bt_Cancel, LangRes.P30FA50B, "取消(&C)");
+    }
+
+    public void initData()
+    {
     }
 
     void bt_UpdateActionPerformed(java.awt.event.ActionEvent evt)

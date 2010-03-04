@@ -105,30 +105,38 @@ public class MagicPwd
      */
     public static void main(String[] args)
     {
+        // 用户配置文件加载
+        UserMdl.loadCfg();
+
+        javax.swing.JFrame.setDefaultLookAndFeelDecorated(true);
+
         // 设置软件界面风格
         String osnm = System.getProperty("os.name").toLowerCase();
         if (Util.isValidate(osnm))
         {
             try
             {
-                if (osnm.indexOf("windows") >= 0)
+//                if (osnm.indexOf("windows") >= 0)
+//                {
+//                    javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+//                }
+//                else if (osnm.indexOf("linux") >= 0)
+//                {
+//                    javax.swing.UIManager.installLookAndFeel("GTK+", "com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
+//                    javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+//                }
+                String skin = UserMdl.getCfg().getCfg(ConsCfg.CFG_SKIN, ConsCfg.DEF_SKIN);
+                if (ConsCfg.DEF_SKIN.equalsIgnoreCase(skin))
                 {
-                    javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+                    skin = javax.swing.UIManager.getSystemLookAndFeelClassName();
                 }
-                else if (osnm.indexOf("linux") >= 0)
-                {
-                    javax.swing.UIManager.installLookAndFeel("GTK+", "com.sun.java.swing.plaf.gtk.GTKLookAndFeel");
-                    javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-                }
+                javax.swing.UIManager.setLookAndFeel(skin);
             }
             catch (Exception exp)
             {
                 Logs.exception(exp);
             }
         }
-
-        // 用户配置文件加载
-        UserMdl.loadCfg();
 
         // 界面启动参数读取
         if (args != null && args.length > 1 && "webstart".equalsIgnoreCase(args[1]))

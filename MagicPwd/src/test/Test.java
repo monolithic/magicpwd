@@ -4,11 +4,13 @@
  */
 package test;
 
+import java.util.regex.Pattern;
+
 public class Test
 {
 
     public static void main(String[] args)
     {
-        System.out.println("11+2 　1%2+%%%  3".replaceFirst("^[+\\s]*", "%").replaceFirst("[+\\s]*$", "%").replaceAll("[+%\\s]+", "%"));
+        System.out.println(Pattern.matches("^amon_[^.]+\\.backup$", "amon_20100228-184007.backup"));
     }
 }

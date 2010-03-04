@@ -7,6 +7,8 @@
  */
 package com.magicpwd._util;
 
+import com.magicpwd.MagicPwd;
+import com.magicpwd._cons.ConsCfg;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
@@ -1056,5 +1058,54 @@ public final class Util
     public static String db2Text(String text)
     {
         return "";
+    }
+
+    public static void changeSkin(String lafClass)
+    {
+        boolean wasDecoratedByOS = !(MagicPwd.getCurrForm().isUndecorated());
+        try
+        {
+            boolean isSystem = ConsCfg.DEF_SKIN.equalsIgnoreCase(lafClass);
+            if (isSystem)
+            {
+                lafClass = javax.swing.UIManager.getSystemLookAndFeelClassName();
+            }
+            javax.swing.UIManager.setLookAndFeel(lafClass);
+            for (java.awt.Window window : java.awt.Window.getWindows())
+            {
+                javax.swing.SwingUtilities.updateComponentTreeUI(window);
+            }
+
+            boolean canBeDecoratedByLAF = javax.swing.UIManager.getLookAndFeel().getSupportsWindowDecorations();
+
+            if (canBeDecoratedByLAF == wasDecoratedByOS)
+            {
+                boolean wasVisible = MagicPwd.getCurrForm().isVisible();
+
+                MagicPwd.getCurrForm().setVisible(false);
+                MagicPwd.getCurrForm().dispose();
+                if (!canBeDecoratedByLAF || wasDecoratedByOS)
+                {
+                    MagicPwd.getCurrForm().setUndecorated(false);
+                    MagicPwd.getCurrForm().getRootPane().setWindowDecorationStyle(0);
+                }
+                else
+                {
+                    MagicPwd.getCurrForm().setUndecorated(true);
+                    MagicPwd.getCurrForm().getRootPane().setWindowDecorationStyle(1);
+                }
+
+                MagicPwd.getCurrForm().setVisible(wasVisible);
+            }
+            UserMdl.getCfg().setCfg(ConsCfg.CFG_SKIN, isSystem ? ConsCfg.DEF_SKIN : lafClass);
+        }
+        catch (ClassNotFoundException exp)
+        {
+            Logs.exception(exp);
+        }
+        catch (Exception exc)
+        {
+            Lang.showMesg(MagicPwd.getCurrForm(), null, exc.getLocalizedMessage());
+        }
     }
 }

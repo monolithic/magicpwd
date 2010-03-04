@@ -208,7 +208,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         String name = tf_PropName.getText();
         if (!Util.isValidate(name))
         {
-            Lang.showMesg(this, "", "请输入口令名称！");
+            Lang.showMesg(this, LangRes.P30F7A35, "请输入口令名称！");
             tf_PropName.requestFocus();
             return;
         }

@@ -12,6 +12,7 @@ import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IGridView;
 import com.magicpwd._util.Lang;
+import com.magicpwd._util.Util;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.EditBox;
 import com.magicpwd.x.IcoDialog;
@@ -57,6 +58,17 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean, IBackCall
 
         lb_PropData = new javax.swing.JLabel();
         jl_PropData = new javax.swing.JLabel();
+        jl_PropData.setIcon(Util.getNone());
+        jl_PropData.setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
+        jl_PropData.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                jl_PropDataActionPerformed(evt);
+            }
+        });
 
         lb_PropEdit = new javax.swing.JLabel();
         pl_PropEdit = new javax.swing.JPanel();
@@ -120,16 +132,15 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean, IBackCall
     @Override
     public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
     {
-//        tpltData.setName(name);
-//        tpltData.setData(tf_PropData.getText());
-//        UserMdl.getGridMdl().setModified(true);
-
-//        gridView.selectNext(!UserMdl.getGridMdl().isUpdate());
-        IcoDialog id = new IcoDialog(this);
-        id.initView();
-        id.initLang();
-        id.initData();
-        id.setVisible(true);
+        String name = tf_PropName.getText();
+        if (Util.isValidateHash(itemData.getData()) && !Util.isValidate(name))
+        {
+            Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F7A39, "请输入徽标名称！");
+            return;
+        }
+        itemData.setName(name);
+        UserMdl.getGridMdl().setModified(true);
+        gridView.selectNext(!UserMdl.getGridMdl().isUpdate());
     }
 
     @Override
@@ -145,11 +156,27 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean, IBackCall
     @Override
     public boolean callBack(Object sender, EventListener event, String... params)
     {
+        if (params.length < 1)
+        {
+            return false;
+        }
+        String key = params[0];
+        if (!Util.isValidateHash(key))
+        {
+            return false;
+        }
+        jl_PropData.setIcon(Util.getIcon(key));
+        itemData.setData(params[0]);
         return true;
     }
 
-    public void jl_PropDataActionPerformed(java.awt.event.ActionEvent evt)
+    public void jl_PropDataActionPerformed(java.awt.event.MouseEvent evt)
     {
+        IcoDialog id = new IcoDialog(this);
+        id.initView();
+        id.initLang();
+        id.initData(itemData.getData());
+        id.setVisible(true);
     }
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JLabel lb_PropEdit;

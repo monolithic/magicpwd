@@ -82,6 +82,8 @@ public interface MenuEvt
 
     void userSecretActionPerformed(java.awt.event.ActionEvent evt);
 
+    void skinChangeActionPerformed(java.awt.event.ActionEvent evt);
+
     void helpHelpActionPerformed(java.awt.event.ActionEvent evt);
 
     void helpSiteActionPerformed(java.awt.event.ActionEvent evt);

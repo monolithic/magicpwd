@@ -259,16 +259,16 @@ public class MenuPop extends JPopupMenu
 
         i = 0;
         Lang.setWText(mu_ListMode, LangRes.P30F7D1B, "标记为：");
-        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D1C, "默认");
-        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D1D, "使用中");
-        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D1E, "待注册");
-        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D1F, "待认证");
-        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D20, "待激活");
-        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D21, "仅测试");
-        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D22, "已过期");
-        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D23, "已丢失");
-        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D24, "被禁用");
-        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D25, "已删除");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D1C, "默认(&0)");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D1D, "常使用(&1)");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D1E, "待注册(&2)");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D1F, "待认证(&3)");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D20, "待激活(&4)");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D21, "仅测试(&5)");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D22, "已过期(&6)");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D23, "已丢失(&7)");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D24, "被禁用(&8)");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D25, "已删除(&9)");
 
         Lang.setWText(mi_KindMove, LangRes.P30F7D1A, "把数据迁移到...(&M)");
 
