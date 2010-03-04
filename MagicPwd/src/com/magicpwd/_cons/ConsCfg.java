@@ -9,6 +9,7 @@ package com.magicpwd._cons;
  */
 public interface ConsCfg
 {
+
     /**
      * 配置数据：区分前缀
      */
@@ -96,6 +97,10 @@ public interface ConsCfg
     /**
      * 
      */
+    String CFG_SKIN = CFG_PRE + ".skin";
+    /**
+     * 
+     */
     String CFG_PWDS = CFG_PRE + ".pwds";
     /**
      * 系统默认口令字符集
@@ -133,6 +138,10 @@ public interface ConsCfg
      * 默认数据：否
      */
     String DEF_FAIL = "false";
+    /**
+     * 默认风格：系统风格
+     */
+    String DEF_SKIN = "System";
     /**
      * 默认数据：剪贴板数据保留时长
      */
