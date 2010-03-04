@@ -170,6 +170,12 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean, IBackCall
         return true;
     }
 
+    @Override
+    public void requestFocus()
+    {
+        tf_PropName.requestFocus();
+    }
+
     public void jl_PropDataActionPerformed(java.awt.event.MouseEvent evt)
     {
         IcoDialog id = new IcoDialog(this);
