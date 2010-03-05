@@ -976,6 +976,7 @@ public final class Util
         Dimension d = (root != null ? root.getSize() : java.awt.Toolkit.getDefaultToolkit().getScreenSize());
         Dimension s = form.getSize();
         form.setLocation((d.width - s.width) >> 1, (d.height - s.height) >> 1);
+        form.setLocationRelativeTo(root);
     }
 
     public static void scrollToVisible(JTable table, int rowIndex, int vColIndex, boolean center)
