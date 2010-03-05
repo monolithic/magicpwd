@@ -805,6 +805,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         dat.initView();
         dat.initLang();
         dat.setTitle(Lang.getLang(LangRes.P30F4206, "把记录迁移到..."));
+        dat.setVisible(true);
     }
 
     @Override

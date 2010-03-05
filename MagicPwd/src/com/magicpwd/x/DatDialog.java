@@ -83,8 +83,7 @@ public class DatDialog extends javax.swing.JDialog
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         this.setIconImage(Util.getLogo());
         this.pack();
-        Util.centerForm(this, null);
-        this.setVisible(true);
+        Util.centerForm(this, MagicPwd.getCurrForm());
     }
 
     public void initLang()

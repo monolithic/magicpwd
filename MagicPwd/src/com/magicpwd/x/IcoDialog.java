@@ -91,8 +91,10 @@ public class IcoDialog extends javax.swing.JDialog
         vsg.addContainerGap();
         layout.setVerticalGroup(vsg);
 
-        this.pack();
+        this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        this.setIconImage(Util.getLogo());
         this.setResizable(false);
+        this.pack();
         Util.centerForm(this, MagicPwd.getCurrForm());
     }
 
@@ -188,6 +190,12 @@ public class IcoDialog extends javax.swing.JDialog
 
     private void bt_SelectActionPerformed(java.awt.event.ActionEvent evt)
     {
+        if (lb_LastIcon == null)
+        {
+            Lang.showMesg(this, null, "");
+            return;
+        }
+        backCall.callBack(null, null, (String) lb_LastIcon.getClientProperty("key"));
     }
 
     private void bt_AppendActionPerformed(java.awt.event.ActionEvent evt)

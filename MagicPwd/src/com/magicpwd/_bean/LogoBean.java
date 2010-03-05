@@ -117,6 +117,8 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean, IBackCall
     @Override
     public void initLang()
     {
+        dataEdit.initLang();
+
         Lang.setWText(lb_PropName, LangRes.P30F131D, "名称(&N)");
 
         Lang.setWText(lb_PropData, LangRes.P30F131E, "徽标(&P)");
@@ -178,11 +180,11 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean, IBackCall
 
     public void jl_PropDataActionPerformed(java.awt.event.MouseEvent evt)
     {
-        IcoDialog id = new IcoDialog(this);
-        id.initView();
-        id.initLang();
-        id.initData(itemData.getData());
-        id.setVisible(true);
+        IcoDialog ico = new IcoDialog(this);
+        ico.initView();
+        ico.initLang();
+        ico.initData(itemData.getData());
+        ico.setVisible(true);
     }
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JLabel lb_PropEdit;
