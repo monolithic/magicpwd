@@ -10,7 +10,6 @@ import com.magicpwd._face.IBackCall;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.r.AmonFF;
-import java.awt.Color;
 
 /**
  *
@@ -37,13 +36,24 @@ public class IcoDialog extends javax.swing.JDialog
         bt_Append = new javax.swing.JButton();
         bt_Select = new javax.swing.JButton();
 
-        pl_IconList.setBackground(java.awt.Color.WHITE);
+        pl_IconList.setBackground(javax.swing.UIManager.getDefaults().getColor("Table.background"));
         pl_IconList.setLayout(new javax.swing.BoxLayout(pl_IconList, javax.swing.BoxLayout.Y_AXIS));
         sp_IconList.setViewportView(pl_IconList);
 
         pl_IconGrid.setLayout(new java.awt.GridLayout(0, 10));
-        pl_IconList.add(pl_IconGrid);
-        pl_IconGrid.setBackground(Color.yellow);
+        pl_IconGrid.setOpaque(false);
+        javax.swing.GroupLayout pl_IconListLayout = new javax.swing.GroupLayout(pl_IconList);
+        pl_IconList.setLayout(pl_IconListLayout);
+        pl_IconListLayout.setHorizontalGroup(
+            pl_IconListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(pl_IconGrid, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+        );
+        pl_IconListLayout.setVerticalGroup(
+            pl_IconListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pl_IconListLayout.createSequentialGroup()
+                .addComponent(pl_IconGrid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(251, Short.MAX_VALUE))
+        );
 
         bt_Append.addActionListener(new java.awt.event.ActionListener()
         {
@@ -72,7 +82,7 @@ public class IcoDialog extends javax.swing.JDialog
         hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg1.addComponent(bt_Append);
         javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
-        hpg.addComponent(sp_IconList, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE);
+        hpg.addComponent(sp_IconList, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE);
         hpg.addGroup(hsg1);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addContainerGap();
@@ -85,12 +95,12 @@ public class IcoDialog extends javax.swing.JDialog
         vpg.addComponent(bt_Select);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
         vsg.addContainerGap();
-        vsg.addComponent(sp_IconList, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE);
+        vsg.addComponent(sp_IconList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addGroup(vpg);
         vsg.addContainerGap();
         layout.setVerticalGroup(vsg);
-
+        
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         this.setIconImage(Util.getLogo());
         this.setResizable(false);
