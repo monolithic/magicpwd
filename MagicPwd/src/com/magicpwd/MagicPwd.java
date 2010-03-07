@@ -111,26 +111,20 @@ public class MagicPwd
             UserMdl.setRunMode(ConsEnv.MODE_RUN_WEB);
         }
 
+        // 用户配置文件加载
+        UserMdl.loadCfg();
+
         // 界面风格设置
-        if (System.getProperty("os.name").toLowerCase().indexOf("windows") >= 0)
-        {
-            try
-            {
-                javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-            }
-            catch (Exception exp)
-            {
-                Logs.exception(exp);
-            }
-        }
-        else
+        try
         {
             javax.swing.JFrame.setDefaultLookAndFeelDecorated(true);
             javax.swing.JDialog.setDefaultLookAndFeelDecorated(true);
+//            Util.changeSkin(UserMdl.getCfg().getCfg(ConsCfg.CFG_SKIN, ConsCfg.DEF_SKIN));
         }
-
-        // 用户配置文件加载
-        UserMdl.loadCfg();
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
 
         // 启动后台预加载线程
         Thread t = new Thread()
@@ -207,15 +201,6 @@ public class MagicPwd
     private static boolean viewFrm()
     {
         // 设置软件界面风格
-        try
-        {
-            Util.changeSkin(UserMdl.getCfg().getCfg(ConsCfg.CFG_SKIN, ConsCfg.DEF_SKIN));
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-        }
-
         if (!getCurrForm().isVisible())
         {
             getCurrForm().setVisible(true);

@@ -38,9 +38,9 @@ public class SKeyProp extends JPanel implements IPropBean
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-                sp_SkeyList, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE));
+                sp_SkeyList, javax.swing.GroupLayout.PREFERRED_SIZE, 300, Short.MAX_VALUE));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-                sp_SkeyList, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE));
+                sp_SkeyList, javax.swing.GroupLayout.PREFERRED_SIZE, 200, Short.MAX_VALUE));
     }
 
     @Override
@@ -52,7 +52,7 @@ public class SKeyProp extends JPanel implements IPropBean
     public void initData()
     {
         skeyList = new ArrayList<S1S2>();
-        int size = Integer.parseInt(Lang.getLang(LangRes.P30F2B00, ""), 16);
+        int size = Integer.parseInt(Lang.getLang(LangRes.P30F2B00, "0"), 16);
         int indx = 3;
         S1S2 item;
         while (indx < size)

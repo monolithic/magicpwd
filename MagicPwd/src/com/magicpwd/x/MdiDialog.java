@@ -4,8 +4,12 @@ import com.magicpwd.MagicPwd;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._face.IPropBean;
 import com.magicpwd._prop.CharProp;
+import com.magicpwd._prop.InfoProp;
 import com.magicpwd._prop.KindProp;
+import com.magicpwd._prop.SKeyProp;
+import com.magicpwd._prop.TpltProp;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.c.MenuEvt;
@@ -20,6 +24,7 @@ public class MdiDialog extends javax.swing.JDialog
     private static MdiDialog md_Dialog;
     private java.awt.CardLayout cl_CardLayout;
     private javax.swing.DefaultListModel lm_PropList;
+    private java.util.HashMap<String, IPropBean> hm_PropList;
 
     private MdiDialog()
     {
@@ -110,10 +115,14 @@ public class MdiDialog extends javax.swing.JDialog
 
     public void initLang()
     {
+        bt_Confirm.setText("确定(O)");
+        bt_Discard.setText("取消(C)");
     }
 
     public void initData()
     {
+        hm_PropList = new java.util.HashMap<String, IPropBean>();
+
         String t;
 
 //        t = Lang.getLang(LangRes.P30F1202, "常规设置");
@@ -122,6 +131,7 @@ public class MdiDialog extends javax.swing.JDialog
 //        up.initView();
 //        up.initLang();
 //        pl_CardPanel.add(ConsEnv.PROP_USET, up);
+//        hm_PropList.put(ConsEnv.PROP_USET, up);
 
         t = Lang.getLang(LangRes.P30F1203, "口令管理");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_CHAR, t, t));
@@ -129,13 +139,15 @@ public class MdiDialog extends javax.swing.JDialog
         cp.initView();
         cp.initLang();
         pl_CardPanel.add(ConsEnv.PROP_CHAR, cp);
+        hm_PropList.put(ConsEnv.PROP_CHAR, cp);
 
-//        t = Lang.getLang(LangRes.P30F1204, "模板管理");
-//        lm_PropList.addElement(new S1S2(ConsEnv.PROP_TPLT, t, t));
-//        TpltProp tp = new TpltProp();
-//        tp.initView();
-//        tp.initLang();
-//        pl_CardPanel.add(ConsEnv.PROP_TPLT, tp);
+        t = Lang.getLang(LangRes.P30F1204, "模板管理");
+        lm_PropList.addElement(new S1S2(ConsEnv.PROP_TPLT, t, t));
+        TpltProp tp = new TpltProp();
+        tp.initView();
+        tp.initLang();
+        pl_CardPanel.add(ConsEnv.PROP_TPLT, tp);
+        hm_PropList.put(ConsEnv.PROP_TPLT, tp);
 
         t = Lang.getLang(LangRes.P30F1205, "类别管理");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_KIND, t, t));
@@ -143,27 +155,31 @@ public class MdiDialog extends javax.swing.JDialog
         kp.initView();
         kp.initLang();
         pl_CardPanel.add(ConsEnv.PROP_KIND, kp);
+        hm_PropList.put(ConsEnv.PROP_KIND, kp);
 
-//        t = Lang.getLang(LangRes.P30F1206, "键盘快捷");
-//        lm_PropList.addElement(new S1S2(ConsEnv.PROP_SKEY, t, t));
-//        SKeyProp sp = new SKeyProp();
-//        sp.initView();
-//        sp.initLang();
-//        pl_CardPanel.add(ConsEnv.PROP_SKEY, sp);
-//
+        t = Lang.getLang(LangRes.P30F1206, "键盘快捷");
+        lm_PropList.addElement(new S1S2(ConsEnv.PROP_SKEY, t, t));
+        SKeyProp sp = new SKeyProp();
+        sp.initView();
+        sp.initLang();
+        pl_CardPanel.add(ConsEnv.PROP_SKEY, sp);
+        hm_PropList.put(ConsEnv.PROP_SKEY, sp);
+
 //        t = Lang.getLang(LangRes.P30F1207, "历史查看");
 //        lm_PropList.addElement(new S1S2(ConsEnv.PROP_HIST, t, t));
 //        HistProp hp = new HistProp();
 //        hp.initView();
 //        hp.initLang();
 //        pl_CardPanel.add(ConsEnv.PROP_HIST, hp);
-//
-//        t = Lang.getLang(LangRes.P30F1208, "关于软件");
-//        lm_PropList.addElement(new S1S2(ConsEnv.PROP_INFO, t, t));
-//        InfoProp ip = new InfoProp();
-//        ip.initView();
-//        ip.initLang();
-//        pl_CardPanel.add(ConsEnv.PROP_INFO, ip);
+//        hm_PropList.put(ConsEnv.PROP_HIST, hp);
+
+        t = Lang.getLang(LangRes.P30F1208, "关于软件");
+        lm_PropList.addElement(new S1S2(ConsEnv.PROP_INFO, t, t));
+        InfoProp ip = new InfoProp();
+        ip.initView();
+        ip.initLang();
+        pl_CardPanel.add(ConsEnv.PROP_INFO, ip);
+        hm_PropList.put(ConsEnv.PROP_INFO, ip);
     }
 
     /**
@@ -190,6 +206,7 @@ public class MdiDialog extends javax.swing.JDialog
 
         cl_CardLayout.show(pl_CardPanel, panelKey);
         ls_PropList.setSelectedIndex(idx);
+        hm_PropList.get(panelKey).initData();
         if (!md_Dialog.isVisible())
         {
             md_Dialog.setVisible(true);
@@ -211,7 +228,9 @@ public class MdiDialog extends javax.swing.JDialog
 
         S1S2 kvItem = (S1S2) obj;
         cl_CardLayout.show(pl_CardPanel, kvItem.getK());
+        lb_HeadPanel.setText(kvItem.getV());
         setTitle(kvItem.getV());
+        hm_PropList.get(kvItem.getK()).initData();
     }
     private javax.swing.JList ls_PropList;
     private javax.swing.JPanel pl_CardPanel;

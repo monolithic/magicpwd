@@ -19,6 +19,7 @@ import java.util.Calendar;
 public class InfoProp extends javax.swing.JPanel implements IPropBean
 {
 
+    @Override
     public void initView()
     {
         lt_Soft = new javax.swing.JLabel();
@@ -44,52 +45,52 @@ public class InfoProp extends javax.swing.JPanel implements IPropBean
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lt_Site)
-                    .addComponent(lt_Copy)
-                    .addComponent(lt_Plat)
-                    .addComponent(lt_Vers)
-                    .addComponent(lt_Soft))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lc_Soft)
-                    .addComponent(lc_Vers)
-                    .addComponent(lc_Plat)
-                    .addComponent(lc_Site)
-                    .addComponent(lc_Copy))
-                .addContainerGap(250, Short.MAX_VALUE))
-            .addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lt_Soft)
-                    .addComponent(lc_Soft))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lt_Vers)
-                    .addComponent(lc_Vers))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lt_Plat)
-                    .addComponent(lc_Plat))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lt_Site)
-                    .addComponent(lc_Site))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lt_Copy)
-                    .addComponent(lc_Copy))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE))
-        );
+        javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        hpg1.addComponent(lt_Site);
+        hpg1.addComponent(lt_Copy);
+        hpg1.addComponent(lt_Vers);
+        hpg1.addComponent(lt_Soft);
+        javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        hpg2.addComponent(lc_Soft);
+        hpg2.addComponent(lc_Vers);
+        hpg2.addComponent(lc_Site);
+        hpg2.addComponent(lc_Copy);
+        javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
+        hsg1.addGroup(hpg1);
+        hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg1.addGroup(hpg2);
+        hsg1.addContainerGap(1, Short.MAX_VALUE);
+        javax.swing.GroupLayout.ParallelGroup hpg3=layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        hpg3.addGroup(hsg1);
+        hpg3.addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE);
+        layout.setHorizontalGroup(hpg3);
+
+        javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg1.addComponent(lt_Soft);
+        vpg1.addComponent(lc_Soft);
+        javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg2.addComponent(lt_Vers);
+        vpg2.addComponent(lc_Vers);
+        javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg3.addComponent(lt_Site);
+        vpg3.addComponent(lc_Site);
+        javax.swing.GroupLayout.ParallelGroup vpg4 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg4.addComponent(lt_Copy);
+        vpg4.addComponent(lc_Copy);
+        javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
+        vsg1.addGroup(vpg1);
+        vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg1.addGroup(vpg2);
+        vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg1.addGroup(vpg3);
+        vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg1.addGroup(vpg4);
+        vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg1.addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE);
+        layout.setVerticalGroup(vsg1);
     }
 
+    @Override
     public void initLang()
     {
         Lang.setWText(lt_Soft, LangRes.P30F83D1, "软件：");
@@ -105,6 +106,7 @@ public class InfoProp extends javax.swing.JPanel implements IPropBean
         //Lang.setWText(null, LangRes.P30FA50A, "确定(&O)");
     }
 
+    @Override
     public void initData()
     {
         lc_Soft.setText(ConsEnv.SOFTNAME);
@@ -117,14 +119,14 @@ public class InfoProp extends javax.swing.JPanel implements IPropBean
 
         lc_Copy.setText(Util.format(ConsEnv.SOFTCOPY, "" + Calendar.getInstance().get(Calendar.YEAR)));
 
-        ta_Note.setText(Lang.getLang("", ""));
+//        ta_Note.setText(Lang.getLang("", ""));
     }
 
+    @Override
     public javax.swing.JPanel getPanel()
     {
         return this;
     }
-
     private javax.swing.JLabel lc_Copy;
     private javax.swing.JLabel lc_Plat;
     private LnkLabel lc_Site;

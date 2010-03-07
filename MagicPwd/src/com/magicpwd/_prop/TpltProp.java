@@ -5,7 +5,6 @@ package com.magicpwd._prop;
 
 import com.magicpwd.MagicPwd;
 import com.magicpwd._comn.S1S2;
-import java.awt.FlowLayout;
 
 import javax.swing.JOptionPane;
 import javax.swing.event.TreeSelectionEvent;
@@ -42,16 +41,16 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
     @Override
     public void initView()
     {
-        initInfoView();
         initSortView();
+        initInfoView();
         initBaseView();
     }
 
     @Override
     public void initLang()
     {
-        initInfoLang();
         initSortLang();
+        initInfoLang();
         initBaseLang();
     }
 
@@ -99,9 +98,6 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         lb_TpltDesp = new javax.swing.JLabel();
         javax.swing.JScrollPane sp_ItemDesp = new javax.swing.JScrollPane();
         ta_TpltDesp = new javax.swing.JTextArea();
-        bt_Delete = new javax.swing.JButton();
-        bt_Update = new javax.swing.JButton();
-        bt_Create = new javax.swing.JButton();
 
         tf_TpltName.setColumns(16);
 
@@ -109,111 +105,148 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
 
         sp_ItemDesp.setViewportView(ta_TpltDesp);
 
-        bt_Delete.addActionListener(new java.awt.event.ActionListener()
-        {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                bt_DeleteActionPerformed(evt);
-            }
-        });
-
-        bt_Update.addActionListener(new java.awt.event.ActionListener()
-        {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                bt_UpdateActionPerformed(evt);
-            }
-        });
-
-        bt_Create.addActionListener(new java.awt.event.ActionListener()
-        {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                bt_CreateActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_ItemInfo);
         pl_ItemInfo.setLayout(layout);
-        layout
-                .setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                        layout.createSequentialGroup().addGroup(
-                                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-                                        lb_TpltKind).addComponent(lb_TpltName).addComponent(lb_TpltTips))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(cb_TpltKind, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(
-                                                        tf_TpltName, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(
-                                                        tf_TpltTips, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)).addContainerGap(102,
-                                        Short.MAX_VALUE)).addGroup(
-                        javax.swing.GroupLayout.Alignment.TRAILING,
-                        layout.createSequentialGroup().addContainerGap(67, Short.MAX_VALUE).addComponent(bt_Create)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(
-                                        bt_Update).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(bt_Delete)).addComponent(sp_ItemDesp,
-                        javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE).addGroup(
-                        layout.createSequentialGroup().addComponent(lb_TpltDesp).addContainerGap(208, Short.MAX_VALUE)));
-        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addGroup(
-                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lb_TpltKind).addComponent(cb_TpltKind,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lb_TpltName).addComponent(tf_TpltName,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(lb_TpltTips).addComponent(tf_TpltTips,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(lb_TpltDesp).addPreferredGap(
-                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp_ItemDesp,
-                        javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE).addPreferredGap(
-                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(bt_Delete)
-                                .addComponent(bt_Update).addComponent(bt_Create))));
+        javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        hpg1.addComponent(lb_TpltDesp);
+        hpg1.addComponent(lb_TpltTips);
+        hpg1.addComponent(lb_TpltName);
+        hpg1.addComponent(lb_TpltKind);
+        hpg1.addComponent(pl_ItemSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        hpg2.addComponent(cb_TpltKind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hpg2.addComponent(tf_TpltName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hpg2.addComponent(tf_TpltTips, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hpg2.addComponent(sp_ItemDesp, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE);
+        javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
+        hsg.addGroup(hpg1);
+        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg.addGroup(hpg2);
+        layout.setHorizontalGroup(hsg);
+
+        javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg1.addComponent(lb_TpltKind);
+        vpg1.addComponent(cb_TpltKind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg2.addComponent(lb_TpltName);
+        vpg2.addComponent(tf_TpltName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg3.addComponent(lb_TpltTips);
+        vpg3.addComponent(tf_TpltTips, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
+        vsg1.addComponent(lb_TpltDesp);
+        vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg1.addComponent(pl_ItemSort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        javax.swing.GroupLayout.ParallelGroup vpg4 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg4.addGroup(vsg1);
+        vpg4.addComponent(sp_ItemDesp, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE);
+        javax.swing.GroupLayout.SequentialGroup vsg2 = layout.createSequentialGroup();
+        vsg2.addGroup(vpg1);
+        vsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg2.addGroup(vpg2);
+        vsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg2.addGroup(vpg3);
+        vsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg2.addGroup(vpg4);
+        layout.setVerticalGroup(vsg2);
     }
 
     private void initSortView()
     {
-        pl_SortItem = new javax.swing.JPanel();
-        pl_SortItem.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        pl_ItemSort = new javax.swing.JPanel();
 
-        bt_SortUp = new IcoLabel();
-        bt_SortUp.setIcon(Util.getIcon(ConsEnv.ICON_ITEM_PREV));
-        bt_SortUp.addActionListener(new java.awt.event.ActionListener()
+        bt_DropData = new IcoLabel();
+        bt_DropData.setIcon(Util.getIcon(ConsEnv.ICON_PROP_DELT));
+        bt_DropData.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                bt_SortUpActionPerformed(evt);
+                dropDataActionPerformed(evt);
             }
         });
-        pl_SortItem.add(bt_SortUp);
 
-        bt_SortDown = new IcoLabel();
-        bt_SortDown.setIcon(Util.getIcon(ConsEnv.ICON_ITEM_NEXT));
-        bt_SortDown.addActionListener(new java.awt.event.ActionListener()
+        bt_SaveData = new IcoLabel();
+        bt_SaveData.setIcon(Util.getIcon(ConsEnv.ICON_PROP_UPDT));
+        bt_SaveData.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                bt_SortDownActionPerformed(evt);
+                saveDataActionPerformed(evt);
             }
         });
-        pl_SortItem.add(bt_SortDown);
+
+        bt_ApndData = new IcoLabel();
+        bt_ApndData.setIcon(Util.getIcon(ConsEnv.ICON_PROP_COPY));
+        bt_ApndData.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                apndDataActionPerformed(evt);
+            }
+        });
+        bt_SortU = new IcoLabel();
+        bt_SortU.setIcon(Util.getIcon(ConsEnv.ICON_ITEM_PREV));
+        bt_SortU.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                sortUActionPerformed(evt);
+            }
+        });
+        add(bt_SortU);
+
+        bt_SortD = new IcoLabel();
+        bt_SortD.setIcon(Util.getIcon(ConsEnv.ICON_ITEM_NEXT));
+        bt_SortD.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                sortDActionPerformed(evt);
+            }
+        });
+        add(bt_SortD);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_ItemSort);
+        pl_ItemSort.setLayout(layout);
+        javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        hpg1.addComponent(bt_SortU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hpg1.addComponent(bt_SortD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        hpg2.addComponent(bt_ApndData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hpg2.addComponent(bt_SaveData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hpg2.addComponent(bt_DropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
+        hsg.addGroup(hpg1);
+        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg.addGroup(hpg2);
+        layout.setHorizontalGroup(hsg);
+
+        javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
+        vsg1.addContainerGap(1, Short.MAX_VALUE);
+        vsg1.addComponent(bt_ApndData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg1.addComponent(bt_SaveData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg1.addComponent(bt_DropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.SequentialGroup vsg2 = layout.createSequentialGroup();
+        vsg2.addContainerGap(1, Short.MAX_VALUE);
+        vsg2.addComponent(bt_SortU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg2.addComponent(bt_SortD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        vpg.addGroup(vsg1);
+        vpg.addGroup(vsg2);
+        layout.setVerticalGroup(vpg);
     }
 
     private void initBaseView()
@@ -236,23 +269,17 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addGroup(
-                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false).addComponent(
-                                pl_SortItem, javax.swing.GroupLayout.Alignment.LEADING,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                Short.MAX_VALUE).addComponent(sp_ItemList, javax.swing.GroupLayout.Alignment.LEADING,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)).addPreferredGap(
-                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(pl_ItemInfo,
-                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)));
-        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addComponent(sp_ItemList, javax.swing.GroupLayout.DEFAULT_SIZE, 174,
-                        Short.MAX_VALUE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pl_SortItem, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addComponent(pl_ItemInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                        Short.MAX_VALUE));
+        javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
+        hsg.addComponent(sp_ItemList, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hsg.addComponent(pl_ItemSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg.addComponent(pl_ItemInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        layout.setHorizontalGroup(hsg);
+        javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        vpg.addComponent(sp_ItemList, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE);
+        vpg.addComponent(pl_ItemSort, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE);
+        vpg.addComponent(pl_ItemInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE);
+        layout.setVerticalGroup(vpg);
     }
 
     private void initInfoLang()
@@ -261,20 +288,20 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         Lang.setWText(lb_TpltName, LangRes.P30F8342, "属性名称");
         Lang.setWText(lb_TpltTips, LangRes.P30F8343, "默认数据");
         Lang.setWText(lb_TpltDesp, LangRes.P30F8344, "相关说明");
-        Lang.setWText(bt_Update, LangRes.P30F8504, "保存(&S)");
-        Lang.setWText(bt_Create, LangRes.P30F8505, "新增(&N)");
-        Lang.setWText(bt_Delete, LangRes.P30F8506, "删除(&D)");
     }
 
     private void initSortLang()
     {
+//        Lang.setWText(bt_Update, LangRes.P30F8504, "保存(&S)");
+//        Lang.setWText(bt_Create, LangRes.P30F8505, "新增(&N)");
+//        Lang.setWText(bt_Delete, LangRes.P30F8506, "删除(&D)");
     }
 
     private void initBaseLang()
     {
     }
 
-    private void bt_SortUpActionPerformed(java.awt.event.ActionEvent evt)
+    private void sortUActionPerformed(java.awt.event.ActionEvent evt)
     {
         if (currNode == null)
         {
@@ -310,7 +337,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         DBA3000.updateTpltData(c);
     }
 
-    private void bt_SortDownActionPerformed(java.awt.event.ActionEvent evt)
+    private void sortDActionPerformed(java.awt.event.ActionEvent evt)
     {
         javax.swing.tree.TreePath path = tr_TpltList.getSelectionPath();
         if (path == null)
@@ -345,14 +372,14 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         DBA3000.updateTpltData(c);
     }
 
-    private void bt_CreateActionPerformed(java.awt.event.ActionEvent evt)
+    private void apndDataActionPerformed(java.awt.event.ActionEvent evt)
     {
         currTplt = new Tplt();
         viewInfo(currTplt);
         isUpdate = false;
     }
 
-    private void bt_UpdateActionPerformed(java.awt.event.ActionEvent evt)
+    private void saveDataActionPerformed(java.awt.event.ActionEvent evt)
     {
         int indx = cb_TpltKind.getSelectedIndex();
         if (indx < 0)
@@ -424,7 +451,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         ta_TpltDesp.setText("");
     }
 
-    private void bt_DeleteActionPerformed(java.awt.event.ActionEvent evt)
+    private void dropDataActionPerformed(java.awt.event.ActionEvent evt)
     {
         javax.swing.tree.TreePath path = tr_TpltList.getSelectionPath();
         if (path == null)
@@ -495,9 +522,6 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
     }
 
     private javax.swing.JPanel pl_ItemInfo;
-    private javax.swing.JButton bt_Create;
-    private javax.swing.JButton bt_Delete;
-    private javax.swing.JButton bt_Update;
     private javax.swing.JLabel lb_TpltKind;
     private javax.swing.JComboBox cb_TpltKind;
     private javax.swing.JLabel lb_TpltName;
@@ -507,9 +531,12 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
     private javax.swing.JLabel lb_TpltDesp;
     private javax.swing.JTextArea ta_TpltDesp;
 
-    private IcoLabel bt_SortUp;
-    private IcoLabel bt_SortDown;
+    private IcoLabel bt_ApndData;
+    private IcoLabel bt_SaveData;
+    private IcoLabel bt_DropData;
+    private IcoLabel bt_SortU;
+    private IcoLabel bt_SortD;
 
     private javax.swing.JTree tr_TpltList;
-    private javax.swing.JPanel pl_SortItem;
+    private javax.swing.JPanel pl_ItemSort;
 }
