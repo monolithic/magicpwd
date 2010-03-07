@@ -62,17 +62,21 @@ public final class Keys implements Serializable
      */
     private String P30F010B;
     /**
+     * 图标说明
+     */
+    private String P30F010C;
+    /**
      * 到期日期
      */
-    private Timestamp P30F010C;
+    private Timestamp P30F010D;
     /**
      * 到期提示
      */
-    private String P30F010D;
+    private String P30F010E;
     /**
      * 相关说明
      */
-    private String P30F010E;
+    private String P30F010F;
     /**
      * 加密口令
      */
@@ -100,8 +104,8 @@ public final class Keys implements Serializable
         setP30F0109(null);
         setP30F010A(null);
         setP30F010B(null);
-        setP30F010C(null);
         setP30F010D(null);
+        setP30F010E(null);
         password.setDefault();
     }
 
@@ -368,43 +372,43 @@ public final class Keys implements Serializable
     }
 
     /**
-     * 到期日期
+     * 图标说明
      * @return the P30F010C
      */
-    public Timestamp getP30F010C()
+    public String getP30F010C()
     {
         return P30F010C;
     }
 
     /**
-     * 到期日期
+     * 图标说明
      * @param P30F010C the P30F010C to set
      */
-    public void setP30F010C(Timestamp P30F010C)
+    public void setP30F010C(String P30F010C)
     {
         this.P30F010C = P30F010C;
     }
 
     /**
-     * 到期提示
+     * 到期日期
      * @return the P30F010D
      */
-    public String getP30F010D()
+    public Timestamp getP30F010D()
     {
         return P30F010D;
     }
 
     /**
-     * 到期提示
+     * 到期日期
      * @param P30F010D the P30F010D to set
      */
-    public void setP30F010D(String P30F010D)
+    public void setP30F010D(Timestamp P30F010D)
     {
         this.P30F010D = P30F010D;
     }
 
     /**
-     * 相关说明
+     * 到期提示
      * @return the P30F010E
      */
     public String getP30F010E()
@@ -413,12 +417,30 @@ public final class Keys implements Serializable
     }
 
     /**
-     * 相关说明
+     * 到期提示
      * @param P30F010E the P30F010E to set
      */
     public void setP30F010E(String P30F010E)
     {
         this.P30F010E = P30F010E;
+    }
+
+    /**
+     * 相关说明
+     * @return the P30F010F
+     */
+    public String getP30F010F()
+    {
+        return P30F010F;
+    }
+
+    /**
+     * 相关说明
+     * @param P30F010F the P30F010F to set
+     */
+    public void setP30F010F(String P30F010F)
+    {
+        this.P30F010F = P30F010F;
     }
 
     /**

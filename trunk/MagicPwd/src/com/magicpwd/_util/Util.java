@@ -182,6 +182,19 @@ public final class Util
         return mp_ImgList.get(name);
     }
 
+    public static void setIcon(String name, ImageIcon icon)
+    {
+        if (!isValidateHash(name))
+        {
+            return;
+        }
+        if (mp_ImgList == null)
+        {
+            mp_ImgList = new HashMap<String, ImageIcon>();
+        }
+        mp_ImgList.put(name, icon);
+    }
+
     public static ImageIcon getIcon(File file)
     {
         if (mp_ImgList == null)

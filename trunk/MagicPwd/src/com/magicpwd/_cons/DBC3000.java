@@ -12,11 +12,11 @@ package com.magicpwd._cons;
  */
 public interface DBC3000
 {
+
     /**
      * 数据库常量：日期
      */
     String SQL_NOW = "NOW";
-
     /**
      * ////////////////////////////////////////////////////
      * 一级类别
@@ -65,7 +65,6 @@ public interface DBC3000
      * 创建时间
      */
     String C2010009 = "C2010109";
-
     /**
      * ////////////////////////////////////////////////////
      * 多级类别
@@ -196,19 +195,24 @@ public interface DBC3000
     String P30F010B = "P30F010B";
     int P30F010B_SIZE = 16;
     /**
-     * 到期日期
+     * 图标说明
      */
     String P30F010C = "P30F010C";
+    int P30F010C_SIZE = 512;
+    /**
+     * 到期日期
+     */
+    String P30F010D = "P30F010D";
     /**
      * 到期提示
      */
-    String P30F010D = "P30F010D";
-    int P30F010D_SIZE = 1024;
+    String P30F010E = "P30F010E";
+    int P30F010E_SIZE = 1024;
     /**
      * 相关说明
      */
-    String P30F010E = "P30F010E";
-    int P30F010E_SIZE = 2048;
+    String P30F010F = "P30F010F";
+    int P30F010F_SIZE = 2048;
     /**
      * ////////////////////////////////////////////////////
      * 口令内容表格
@@ -288,19 +292,24 @@ public interface DBC3000
     String P30F0A0B = "P30F0A0B";
     int P30F0A0B_SIZE = 16;
     /**
-     * 到期日期
+     * 图标说明
      */
     String P30F0A0C = "P30F0A0C";
+    int P30F0A0C_SIZE = 512;
+    /**
+     * 到期日期
+     */
+    String P30F0A0D = "P30F0A0D";
     /**
      * 到期提示
      */
-    String P30F0A0D = "P30F0A0B";
-    int P30F0A0D_SIZE = 1024;
+    String P30F0A0E = "P30F0A0E";
+    int P30F0A0E_SIZE = 1024;
     /**
      * 相关说明
      */
-    String P30F0A0E = "P30F0A0E";
-    int P30F0A0E_SIZE = 2048;
+    String P30F0A0F = "P30F0A0F";
+    int P30F0A0F_SIZE = 2048;
     /**
      * ////////////////////////////////////////////////////
      * 历史数据表格

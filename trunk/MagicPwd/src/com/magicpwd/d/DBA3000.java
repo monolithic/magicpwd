@@ -90,7 +90,7 @@ public class DBA3000
         // 按到期时间排序
         if (ConsEnv.LIST_SORT_DUE.equals(key))
         {
-            dba.addSort(DBC3000.P30F010C, asc);
+            dba.addSort(DBC3000.P30F010D, asc);
             return;
         }
 
@@ -119,9 +119,10 @@ public class DBA3000
             item.setP30F0109(rest.getString(DBC3000.P30F0109));
             item.setP30F010A(rest.getString(DBC3000.P30F010A));
             item.setP30F010B(rest.getString(DBC3000.P30F010B));
-            item.setP30F010C(rest.getTimestamp(DBC3000.P30F010C));
-            item.setP30F010D(rest.getString(DBC3000.P30F010D));
+            item.setP30F010C(rest.getString(DBC3000.P30F010C));
+            item.setP30F010D(rest.getTimestamp(DBC3000.P30F010D));
             item.setP30F010E(rest.getString(DBC3000.P30F010E));
+            item.setP30F010F(rest.getString(DBC3000.P30F010F));
             list.add(item);
         }
         rest.close();
@@ -224,7 +225,7 @@ public class DBA3000
 
             dba.addTable(DBC3000.P30F0100);
             addUserSort(dba);
-            dba.addWhere(DBC3000.P30F010C + " BETWEEN '" + s.toString() + "' AND '" + e.toString() + '\'');
+            dba.addWhere(DBC3000.P30F010D + " BETWEEN '" + s.toString() + "' AND '" + e.toString() + '\'');
             addDataSort(dba);
 
             getNameData(dba.executeSelect(), list);
@@ -305,6 +306,7 @@ public class DBA3000
             dba.addColumn(DBC3000.P30F010C);
             dba.addColumn(DBC3000.P30F010D);
             dba.addColumn(DBC3000.P30F010E);
+            dba.addColumn(DBC3000.P30F010F);
             //dba.addWhere(DBC3000.P30F0102, keys.getP30F0102());
             dba.addWhere(DBC3000.P30F0104, keys.getP30F0104());
             dba.addWhere(DBC3000.P30F0105, keys.getP30F0105());
@@ -324,9 +326,10 @@ public class DBA3000
             keys.setP30F0109(rest.getString(DBC3000.P30F0109));
             keys.setP30F010A(rest.getString(DBC3000.P30F010A));
             keys.setP30F010B(rest.getString(DBC3000.P30F010B));
-            keys.setP30F010C(rest.getTimestamp(DBC3000.P30F010C));
-            keys.setP30F010D(rest.getString(DBC3000.P30F010D));
+            keys.setP30F010C(rest.getString(DBC3000.P30F010C));
+            keys.setP30F010D(rest.getTimestamp(DBC3000.P30F010D));
             keys.setP30F010E(rest.getString(DBC3000.P30F010E));
+            keys.setP30F010F(rest.getString(DBC3000.P30F010F));
 
             // 口令内容读取
             dba.reset();
@@ -467,6 +470,7 @@ public class DBA3000
         dba.addParam(DBC3000.P30F0A0C, DBC3000.P30F010C, false);
         dba.addParam(DBC3000.P30F0A0D, DBC3000.P30F010D, false);
         dba.addParam(DBC3000.P30F0A0E, DBC3000.P30F010E, false);
+        dba.addParam(DBC3000.P30F0A0F, DBC3000.P30F010F, false);
         dba.addWhere(DBC3000.P30F0104, keys.getP30F0104());
         dba.addCopyBatch(DBC3000.P30F0A00, DBC3000.P30F0100);
         dba.reset();
@@ -518,9 +522,10 @@ public class DBA3000
         dba.addParam(DBC3000.P30F0109, Util.text2DB(keys.getP30F0109()));
         dba.addParam(DBC3000.P30F010A, Util.text2DB(keys.getP30F010A()));
         dba.addParam(DBC3000.P30F010B, Util.text2DB(keys.getP30F010B()));
-        dba.addParam(DBC3000.P30F010C, keys.getP30F010C() != null ? keys.getP30F010C().toString() : null);
-        dba.addParam(DBC3000.P30F010D, Util.text2DB(keys.getP30F010D()));
+        dba.addParam(DBC3000.P30F010C, Util.text2DB(keys.getP30F010C()));
+        dba.addParam(DBC3000.P30F010D, keys.getP30F010D() != null ? keys.getP30F010D().toString() : null);
         dba.addParam(DBC3000.P30F010E, Util.text2DB(keys.getP30F010E()));
+        dba.addParam(DBC3000.P30F010F, Util.text2DB(keys.getP30F010F()));
 
         if (Util.isValidateHash(keys.getP30F0104()))
         {
@@ -1235,10 +1240,10 @@ public class DBA3000
             dba.addColumn(DBC3000.P30F0109);
             dba.addColumn(DBC3000.P30F010A);
             dba.addColumn(DBC3000.P30F010B);
-            dba.addColumn(DBC3000.P30F010C);
             dba.addColumn(DBC3000.P30F010D);
+            dba.addColumn(DBC3000.P30F010E);
             dba.addColumn(DBC3000.P30F010B);
-            dba.addColumn(DBC3000.P30F010C);
+            dba.addColumn(DBC3000.P30F010D);
             dba.addWhere(DBC3000.P30F0104, hash);
             dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_MODE_2);
 

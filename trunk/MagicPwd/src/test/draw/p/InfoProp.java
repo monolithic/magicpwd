@@ -85,8 +85,8 @@ public class InfoProp extends javax.swing.JPanel {
                     .addComponent(lc_Vers)
                     .addComponent(lc_Site)
                     .addComponent(lc_Copy))
-                .addContainerGap(250, Short.MAX_VALUE))
-            .addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 340, Short.MAX_VALUE)
+                .addContainerGap(266, Short.MAX_VALUE))
+            .addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,7 +107,7 @@ public class InfoProp extends javax.swing.JPanel {
                     .addComponent(lt_Copy)
                     .addComponent(lc_Copy))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))
+                .addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

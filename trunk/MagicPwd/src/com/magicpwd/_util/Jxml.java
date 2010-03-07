@@ -53,9 +53,9 @@ public class Jxml
         node.addElement(Lang.getLang(LangRes.P30F1C07, "title")).addAttribute("name", Lang.getLang(LangRes.P30F1C08, "口令标题")).setText(keys.getP30F0109());
         node.addElement(Lang.getLang(LangRes.P30F1C09, "meta")).addAttribute("name", Lang.getLang(LangRes.P30F1C0A, "关键搜索")).setText(keys.getP30F010A());
         node.addElement(Lang.getLang(LangRes.P30F1C0B, "logo")).addAttribute("name", Lang.getLang(LangRes.P30F1C0C, "口令徽标")).setText(keys.getP30F010B());
-        node.addElement(Lang.getLang(LangRes.P30F1C0D, "limit")).addAttribute("name", Lang.getLang(LangRes.P30F1C0E, "到期日期")).setText(keys.getP30F010C().toString());
-        node.addElement(Lang.getLang(LangRes.P30F1C0F, "hint")).addAttribute("name", Lang.getLang(LangRes.P30F1C10, "到期提示")).setText(keys.getP30F010D());
-        node.addElement(Lang.getLang(LangRes.P30F1C11, "memo")).addAttribute("name", Lang.getLang(LangRes.P30F1C12, "相关说明")).setText(keys.getP30F010E());
+        node.addElement(Lang.getLang(LangRes.P30F1C0D, "limit")).addAttribute("name", Lang.getLang(LangRes.P30F1C0E, "到期日期")).setText(keys.getP30F010D().toString());
+        node.addElement(Lang.getLang(LangRes.P30F1C0F, "hint")).addAttribute("name", Lang.getLang(LangRes.P30F1C10, "到期提示")).setText(keys.getP30F010E());
+        node.addElement(Lang.getLang(LangRes.P30F1C11, "memo")).addAttribute("name", Lang.getLang(LangRes.P30F1C12, "相关说明")).setText(keys.getP30F010F());
     }
 
     public static void save(String file, Keys keys)
@@ -70,7 +70,7 @@ public class Jxml
         node.addElement(Lang.getLang(LangRes.P30F1C07, "title")).addAttribute("name", Lang.getLang(LangRes.P30F1C08, "口令标题")).setText(keys.getP30F0109());
         node.addElement(Lang.getLang(LangRes.P30F1C09, "meta")).addAttribute("name", Lang.getLang(LangRes.P30F1C0A, "关键搜索")).setText(keys.getP30F010A());
         node.addElement(Lang.getLang(LangRes.P30F1C0B, "logo")).addAttribute("name", Lang.getLang(LangRes.P30F1C0C, "口令徽标")).setText(keys.getP30F010B());
-        node.addElement(Lang.getLang(LangRes.P30F1C11, "memo")).addAttribute("name", Lang.getLang(LangRes.P30F1C12, "相关说明")).setText(keys.getP30F010E());
+        node.addElement(Lang.getLang(LangRes.P30F1C11, "memo")).addAttribute("name", Lang.getLang(LangRes.P30F1C12, "相关说明")).setText(keys.getP30F010F());
         node.addElement(Lang.getLang(LangRes.P30F1C11, "content")).addAttribute("name", Lang.getLang(LangRes.P30F1C12, "记事内容")).setText(keys.getPassword().getP30F0203().toString());
     }
 
