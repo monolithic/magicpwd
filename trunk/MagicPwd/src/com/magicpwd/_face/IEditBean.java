@@ -3,8 +3,6 @@
  */
 package com.magicpwd._face;
 
-import com.magicpwd._comn.EditItem;
-
 /**
  * @author Amon
  * 

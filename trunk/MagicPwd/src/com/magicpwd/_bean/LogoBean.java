@@ -27,7 +27,7 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean, IBackCall
 
     private IEditItem itemData;
     private IGridView gridView;
-    private EditBox dataEdit;
+    private EditBean dataEdit;
 
     public LogoBean(IGridView gridView)
     {
@@ -37,7 +37,7 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean, IBackCall
     @Override
     public void initView()
     {
-        dataEdit = new EditBox(this, false);
+        dataEdit = new EditBean(this, false);
         dataEdit.initView();
         dataEdit.setCopyButtonVisible(false);
         dataEdit.setDropButtonVisible(false);

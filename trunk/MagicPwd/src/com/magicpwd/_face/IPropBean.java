@@ -10,11 +10,27 @@ package com.magicpwd._face;
  */
 public interface IPropBean
 {
+
+    /**
+     * 界面布局初始化
+     */
     void initView();
 
+    /**
+     * 界面语言初始化
+     */
     void initLang();
 
+    /**
+     * 界面数据初始化
+     * @param tplt
+     */
     void initData();
+
+    /**
+     * 界面焦点初始化
+     */
+    void requestFocus();
 
     javax.swing.JPanel getPanel();
 }
