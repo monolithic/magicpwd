@@ -74,7 +74,7 @@ public interface LangRes
     String P30F1314 = "P30F1314";// 附件(&P)
     String P30F1315 = "P30F1315";// 协议(&N)
     String P30F1316 = "P30F1316";// 地址(&P)
-    String P30F1317 = "P30F1315";// 提示
+    String P30F1317 = "P30F1317";// 提示
     String P30F1318 = "P30F1318";// 下一提示
     String P30F1319 = "P30F1319";// 总是提示(&R)
     String P30F131A = "P30F131A";// 电子邮件(&M)

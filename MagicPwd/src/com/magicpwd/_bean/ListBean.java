@@ -7,7 +7,6 @@ package com.magicpwd._bean;
 import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IGridView;
-import com.magicpwd.v.EditBox;
 import java.awt.event.ActionEvent;
 
 /**

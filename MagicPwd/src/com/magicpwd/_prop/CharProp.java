@@ -26,6 +26,7 @@ import com.magicpwd.m.UserMdl;
  */
 public class CharProp extends JPanel implements IPropBean
 {
+
     private DefaultListModel lm_CharList;
     /**
      * 当前编辑的字符空间
@@ -93,37 +94,38 @@ public class CharProp extends JPanel implements IPropBean
     {
         pl_ItemInfo = new javax.swing.JPanel();
 
-        lb_CharTplt = new javax.swing.JLabel();
         cb_CharTplt = new javax.swing.JComboBox();
         cb_CharTplt.setRenderer(new ListCR());
         cb_CharTplt.addItemListener(new java.awt.event.ItemListener()
         {
+
             @Override
             public void itemStateChanged(java.awt.event.ItemEvent evt)
             {
                 cb_CharTpltItemStateChanged(evt);
             }
         });
+        lb_CharTplt = new javax.swing.JLabel();
+        lb_CharTplt.setLabelFor(cb_CharTplt);
+
+        tf_CharName = new javax.swing.JTextField(16);
         lb_CharName = new javax.swing.JLabel();
-        tf_CharName = new javax.swing.JTextField();
+        lb_CharName.setLabelFor(tf_CharName);
+
+        tf_CharTips = new javax.swing.JTextField(16);
         lb_CharTips = new javax.swing.JLabel();
-        tf_CharTips = new javax.swing.JTextField();
-        lb_CharSets = new javax.swing.JLabel();
-        javax.swing.JScrollPane sp_ItemDesp = new javax.swing.JScrollPane();
+        lb_CharTips.setLabelFor(tf_CharTips);
+
         ta_CharSets = new javax.swing.JTextArea();
-        bt_Delete = new javax.swing.JButton();
-        bt_Update = new javax.swing.JButton();
-        bt_Create = new javax.swing.JButton();
-
-        tf_CharName.setColumns(16);
-
-        tf_CharTips.setColumns(16);
-
         ta_CharSets.setLineWrap(true);
-        sp_ItemDesp.setViewportView(ta_CharSets);
+        javax.swing.JScrollPane sp_ItemDesp = new javax.swing.JScrollPane(ta_CharSets);
+        lb_CharSets = new javax.swing.JLabel();
+        lb_CharSets.setLabelFor(ta_CharSets);
 
+        bt_Delete = new javax.swing.JButton();
         bt_Delete.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -131,8 +133,10 @@ public class CharProp extends JPanel implements IPropBean
             }
         });
 
+        bt_Update = new javax.swing.JButton();
         bt_Update.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -140,8 +144,10 @@ public class CharProp extends JPanel implements IPropBean
             }
         });
 
+        bt_Create = new javax.swing.JButton();
         bt_Create.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -149,58 +155,54 @@ public class CharProp extends JPanel implements IPropBean
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_ItemInfo);
-        pl_ItemInfo.setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-                lb_CharTplt).addComponent(lb_CharName).addComponent(lb_CharTips)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(cb_CharTplt,
-                                                                                                   javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                                                                   javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                                   javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(
-                tf_CharName, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(
-                tf_CharTips, javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addContainerGap(102,
-                                                                         Short.MAX_VALUE)).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addContainerGap(67, Short.MAX_VALUE).addComponent(bt_Create).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(
-                bt_Update).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_Delete)).addComponent(
-                sp_ItemDesp,
-                javax.swing.GroupLayout.DEFAULT_SIZE,
-                250,
-                Short.MAX_VALUE).addGroup(
-                layout.createSequentialGroup().addComponent(lb_CharSets).addContainerGap(208, Short.MAX_VALUE)));
-        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_CharTplt).addComponent(
-                cb_CharTplt,
-                javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_CharName).addComponent(
-                tf_CharName,
-                javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_CharTips).addComponent(
-                tf_CharTips,
-                javax.swing.GroupLayout.PREFERRED_SIZE,
-                javax.swing.GroupLayout.DEFAULT_SIZE,
-                javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(lb_CharSets).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp_ItemDesp,
-                                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                                 129, Short.MAX_VALUE).addPreferredGap(
-                javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(bt_Delete).addComponent(
-                bt_Update).addComponent(bt_Create))));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        hpg1.addComponent(lb_CharSets);
+        hpg1.addComponent(lb_CharTips);
+        hpg1.addComponent(lb_CharName);
+        hpg1.addComponent(lb_CharTplt);
+        hpg1.addComponent(pl_EditInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        hpg2.addComponent(cb_CharTplt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hpg2.addComponent(tf_CharName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hpg2.addComponent(tf_CharTips, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hpg2.addComponent(sp_ItemDesp, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE);
+        javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
+        hsg.addContainerGap();
+        hsg.addGroup(hpg1);
+        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg.addGroup(hpg2);
+        hsg.addContainerGap();
+        layout.setHorizontalGroup(hsg);
+
+        javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg1.addComponent(lb_CharTplt);
+        vpg1.addComponent(cb_CharTplt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg2.addComponent(lb_CharName);
+        vpg2.addComponent(tf_CharName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg3.addComponent(lb_CharTips);
+        vpg3.addComponent(tf_CharTips, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
+        vsg1.addComponent(lb_CharSets);
+        vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg1.addComponent(pl_EditInfo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        javax.swing.GroupLayout.ParallelGroup vpg4 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg4.addGroup(vsg1);
+        vpg4.addComponent(sp_ItemDesp, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE);
+        javax.swing.GroupLayout.SequentialGroup vsg2 = layout.createSequentialGroup();
+        vsg2.addContainerGap();
+        vsg2.addGroup(vpg1);
+        vsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg2.addGroup(vpg2);
+        vsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg2.addGroup(vpg3);
+        vsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg2.addGroup(vpg4);
+        vsg2.addContainerGap();
+        layout.setVerticalGroup(vsg2);
     }
 
     private void initSortView()
@@ -212,6 +214,7 @@ public class CharProp extends JPanel implements IPropBean
         bt_SortUp.setIcon(Util.getIcon(ConsEnv.ICON_ITEM_PREV));
         bt_SortUp.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -224,6 +227,7 @@ public class CharProp extends JPanel implements IPropBean
         bt_SortDown.setIcon(Util.getIcon(ConsEnv.ICON_ITEM_NEXT));
         bt_SortDown.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -242,6 +246,7 @@ public class CharProp extends JPanel implements IPropBean
         sp_ItemList.setViewportView(ls_CharList);
         ls_CharList.addListSelectionListener(new javax.swing.event.ListSelectionListener()
         {
+
             @Override
             public void valueChanged(javax.swing.event.ListSelectionEvent evt)
             {
@@ -432,6 +437,7 @@ public class CharProp extends JPanel implements IPropBean
         //ta_CharDesp.setText(item.getP30F2107());
     }
     private javax.swing.JPanel pl_ItemInfo;
+    private javax.swing.JPanel pl_EditInfo;
     private javax.swing.JButton bt_Create;
     private javax.swing.JButton bt_Delete;
     private javax.swing.JButton bt_Update;

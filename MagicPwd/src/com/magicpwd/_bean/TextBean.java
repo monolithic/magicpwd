@@ -12,7 +12,6 @@ import com.magicpwd._face.IGridView;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.m.UserMdl;
-import com.magicpwd.v.EditBox;
 
 /**
  * 属性：文本

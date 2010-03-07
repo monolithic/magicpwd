@@ -15,6 +15,10 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.c.MenuEvt;
 
+/**
+ * 软件设置对话框
+ * @author Amon
+ */
 public class MdiDialog extends javax.swing.JDialog
 {
 
