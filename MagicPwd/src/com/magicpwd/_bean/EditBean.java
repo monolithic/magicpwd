@@ -15,13 +15,13 @@ import com.magicpwd._util.Util;
  *
  * @author Amon
  */
-public class EditBox extends javax.swing.JPanel
+public class EditBean extends javax.swing.JPanel
 {
 
     private IEditBean editBean;
     private boolean metaData;
 
-    public EditBox(IEditBean bean, boolean meta)
+    public EditBean(IEditBean bean, boolean meta)
     {
         editBean = bean;
         metaData = meta;

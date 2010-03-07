@@ -35,7 +35,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
     private java.io.File filePath;
     private java.io.File wmaPath;
     private String wmaName;
-    private EditBox dataEdit;
+    private EditBean dataEdit;
 
     public FileBean(IGridView view)
     {
@@ -45,7 +45,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initView()
     {
-        dataEdit = new EditBox(this, false);
+        dataEdit = new EditBean(this, false);
         dataEdit.initView();
 
         lb_PropName = new javax.swing.JLabel();

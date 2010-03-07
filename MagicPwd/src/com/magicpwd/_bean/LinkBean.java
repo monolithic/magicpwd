@@ -27,7 +27,7 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
 
     private IEditItem itemData;
     private IGridView gridView;
-    private EditBox dataEdit;
+    private EditBean dataEdit;
 
     public LinkBean(IGridView view)
     {
@@ -37,7 +37,7 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initView()
     {
-        dataEdit = new EditBox(this, false);
+        dataEdit = new EditBean(this, false);
         dataEdit.initView();
 
         lb_PropName = new javax.swing.JLabel();

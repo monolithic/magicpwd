@@ -204,7 +204,7 @@ public class HistProp extends JPanel implements IPropBean
         }
     }
 
-    private void bt_DeleteCurActionPerformed(java.awt.event.ActionEvent evt)
+    public void bt_DeleteCurActionPerformed(java.awt.event.ActionEvent evt)
     {
         S1S2 temp = (S1S2) ls_HistList.getSelectedValue();
         if (temp == null)

@@ -34,7 +34,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
 
     private GuidItem itemData;
     private IGridView gridView;
-    private EditBox dataEdit;
+    private EditBean dataEdit;
     private BtnLabel bl_ReadMail;
 
     public GuidBean(IGridView view)
@@ -45,7 +45,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initView()
     {
-        dataEdit = new EditBox(this, false);
+        dataEdit = new EditBean(this, false);
         dataEdit.initView();
         dataEdit.setCopyButtonVisible(false);
         dataEdit.setDropButtonVisible(false);

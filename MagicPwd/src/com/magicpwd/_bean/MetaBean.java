@@ -23,7 +23,7 @@ public class MetaBean extends javax.swing.JPanel implements IEditBean
 
     private IEditItem itemData;
     private IGridView gridView;
-    private EditBox dataEdit;
+    private EditBean dataEdit;
 
     public MetaBean(IGridView view)
     {
@@ -33,7 +33,7 @@ public class MetaBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initView()
     {
-        dataEdit = new EditBox(this, true);
+        dataEdit = new EditBean(this, true);
         dataEdit.initView();
         dataEdit.setDropButtonVisible(false);
 
