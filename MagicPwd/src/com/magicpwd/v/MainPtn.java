@@ -1275,16 +1275,37 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         javax.swing.InputMap inputMap = tb_KeysView.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
         Util.addSortAction(actionMap, inputMap, this);
         // 添加快捷键
-        actionMap.put(ConsEnv.EVENT_EDIT_FCUS, new javax.swing.AbstractAction()
+        actionMap.put(ConsEnv.EVENT_EDIT_GUID, new javax.swing.AbstractAction()
         {
 
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
+                tr_GuidTree.requestFocus();
+            }
+        });
+        inputMap.put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.ALT_MASK), ConsEnv.EVENT_EDIT_GUID);
+        actionMap.put(ConsEnv.EVENT_EDIT_KEYS, new javax.swing.AbstractAction()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                ls_GuidList.requestFocus();
+            }
+        });
+        inputMap.put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.ALT_MASK), ConsEnv.EVENT_EDIT_KEYS);
+        actionMap.put(ConsEnv.EVENT_EDIT_ITEM, new javax.swing.AbstractAction()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                System.out.println(evt.getActionCommand());
                 tb_KeysView.requestFocus();
             }
         });
-        inputMap.put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK), ConsEnv.EVENT_EDIT_FCUS);
+        inputMap.put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK), ConsEnv.EVENT_EDIT_ITEM);
 
         tb_KeysView.addMouseListener(new java.awt.event.MouseAdapter()
         {
@@ -1308,7 +1329,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         int w = tb_KeysView.getFontMetrics(tb_KeysView.getFont()).stringWidth("999999");
         tb_KeysView.getColumnModel().getColumn(0).setPreferredWidth(w);
         tb_KeysView.getColumnModel().getColumn(1).setPreferredWidth(365 - w);
-        javax.swing.JScrollPane sp_KeysView = new javax.swing.JScrollPane(tb_KeysView);
+        sp_KeysView = new javax.swing.JScrollPane(tb_KeysView);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_KeysInfo);
         pl_KeysInfo.setLayout(layout);
@@ -1367,6 +1388,10 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     private void initGuidLang()
     {
         gridMenu.initLang();
+
+        Lang.setWTips(tr_GuidTree, LangRes.P30F7B08, "类别列表(Alt + G)");
+        Lang.setWTips(ls_GuidList, LangRes.P30F7B09, "口令列表(Alt + K)");
+        Lang.setWTips(sp_KeysView, LangRes.P30F7B0A, "属性列表(Alt + T)");
     }
 
     private void initPropLang()
@@ -1827,4 +1852,5 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
      * 口令列表
      */
     private javax.swing.JTable tb_KeysView;
+    private javax.swing.JScrollPane sp_KeysView;
 }

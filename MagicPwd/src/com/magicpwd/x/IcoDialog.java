@@ -5,9 +5,13 @@
 package com.magicpwd.x;
 
 import com.magicpwd.MagicPwd;
+import com.magicpwd._comp.IcoLabel;
+import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
+import com.magicpwd._util.Hash;
 import com.magicpwd._util.Lang;
+import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.r.AmonFF;
 
@@ -22,9 +26,11 @@ public class IcoDialog extends javax.swing.JDialog
     private java.awt.Color bsColor;
     private java.awt.Color fdColor;
     private java.awt.Color fsColor;
+    private java.io.File filePath;
     private java.io.File icoPath;
     private IBackCall backCall;
-    private javax.swing.JLabel lb_LastIcon;
+    private IcoLabel lb_LastIcon;
+    private java.awt.event.ActionListener listener;
 
     public IcoDialog(IBackCall backCall)
     {
@@ -113,9 +119,9 @@ public class IcoDialog extends javax.swing.JDialog
 
     public void initLang()
     {
-        Lang.setWText(bt_Select, LangRes.P30FA50A, "确定(&O)");
+        Lang.setWText(bt_Select, LangRes.P30FA50C, "选择(&C)");
 
-        Lang.setWText(bt_Append, LangRes.P30FA50B, "取消(&C)");
+        Lang.setWText(bt_Append, LangRes.P30FA50D, "追加(&A)");
     }
 
     public void initData(final String lastIcon)
@@ -143,29 +149,21 @@ public class IcoDialog extends javax.swing.JDialog
             }
         }
 
-        java.awt.event.MouseAdapter listener = new java.awt.event.MouseAdapter()
+        if (listener == null)
         {
-
-            @Override
-            public void mouseReleased(java.awt.event.MouseEvent evt)
+            listener = new java.awt.event.ActionListener()
             {
-                lb_LastIcon.setBackground(bdColor);
-                lb_LastIcon.setForeground(fdColor);
-                lb_LastIcon = (javax.swing.JLabel) evt.getSource();
-                lb_LastIcon.setBackground(bsColor);
-                lb_LastIcon.setForeground(fsColor);
-            }
-        };
+
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent evt)
+                {
+                    selectIcoLabel((IcoLabel) evt.getSource());
+                }
+            };
+        }
 
         boolean checked = !Util.isValidate(lastIcon) || "0".equals(lastIcon);
-        javax.swing.JLabel label = new javax.swing.JLabel(Util.getNone());
-        label.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        label.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        label.setBackground(bdColor);
-        label.setOpaque(true);
-        label.setText("0");
-        label.putClientProperty("key", "0");
-        label.addMouseListener(listener);
+        IcoLabel label = createIcoLabel("0", "0", Util.getNone(), listener);
         pl_IconGrid.add(label);
         if (checked)
         {
@@ -195,15 +193,7 @@ public class IcoDialog extends javax.swing.JDialog
             }
 
             String key = matcher.group();
-            label = new javax.swing.JLabel(Util.getIcon(file));
-            label.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-            label.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-            label.setText(Integer.toString(i++));
-            label.setBackground(bdColor);
-            label.setForeground(fdColor);
-            label.setOpaque(true);
-            label.putClientProperty("key", key);
-            label.addMouseListener(listener);
+            label = createIcoLabel(key, Integer.toString(i++), Util.getIcon(key), listener);
             pl_IconGrid.add(label);
             if (!checked)
             {
@@ -225,11 +215,109 @@ public class IcoDialog extends javax.swing.JDialog
             Lang.showMesg(this, null, "");
             return;
         }
-        backCall.callBack(null, null, (String) lb_LastIcon.getClientProperty("key"));
+        if (backCall.callBack(null, null, (String) lb_LastIcon.getClientProperty("key")))
+        {
+            this.setVisible(false);
+            this.dispose();
+        }
     }
 
     private void bt_AppendActionPerformed(java.awt.event.ActionEvent evt)
     {
+        javax.swing.JFileChooser jfc = new javax.swing.JFileChooser();
+        AmonFF ff = new AmonFF("[^\\.]+\\." + ConsEnv.IMAGE_FORMAT + "$", false);
+        ff.setHasFolder(true);
+        ff.setDescription('.' + ConsEnv.IMAGE_FORMAT);
+        jfc.setFileFilter(ff);
+        jfc.setMultiSelectionEnabled(false);
+        jfc.setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);
+        if (filePath != null)
+        {
+            jfc.setSelectedFile(filePath);
+        }
+        if (jfc.showOpenDialog(this) != javax.swing.JFileChooser.APPROVE_OPTION)
+        {
+            return;
+        }
+        filePath = jfc.getSelectedFile();
+        if (!filePath.exists())
+        {
+            Lang.showMesg(this, LangRes.P30F7A03, "您选取的文件不存在！");
+            return;
+        }
+        if (!filePath.isFile() || !filePath.canRead())
+        {
+            Lang.showMesg(this, LangRes.P30F7A05, "无法读取您选择的文件，请确认您是否有足够的权限！");
+            return;
+        }
+        try
+        {
+            java.io.FileInputStream fis = new java.io.FileInputStream(filePath);
+            java.awt.image.BufferedImage img = javax.imageio.ImageIO.read(fis);
+            fis.close();
+
+            final int S = 16;
+            int w = img.getWidth();
+            int h = img.getHeight();
+            if (w != S || h != S)
+            {
+                double dw = 16.0 / w;
+                double dh = 16.0 / h;
+                double d = dw <= dh ? dw : dh;
+                w *= d;
+                h *= d;
+                java.awt.Image tmp = img.getScaledInstance(w, h, java.awt.Image.SCALE_DEFAULT);
+                img = new java.awt.image.BufferedImage(S, S, java.awt.image.BufferedImage.TYPE_INT_ARGB);
+                img.createGraphics().drawImage(tmp, (S - w) >> 1, (S - h) >> 1, w, h, null);
+            }
+
+            String hash = Hash.hash(false);
+            java.io.FileOutputStream fos = new java.io.FileOutputStream(new java.io.File(icoPath, hash + '.' + ConsEnv.IMAGE_FORMAT));
+            javax.imageio.ImageIO.write(img, ConsEnv.IMAGE_FORMAT, fos);
+            fos.flush();
+            fos.close();
+
+            javax.swing.ImageIcon icon = new javax.swing.ImageIcon(img);
+            IcoLabel label = createIcoLabel(hash, Integer.toString(pl_IconGrid.getComponents().length), icon, listener);
+            pl_IconGrid.add(label);
+            pl_IconGrid.revalidate();
+            selectIcoLabel(label);
+            Util.setIcon(hash, icon);
+        }
+        catch (Exception exp)
+        {
+            Lang.showMesg(this, null, exp.getLocalizedMessage());
+            Logs.exception(exp);
+            return;
+        }
+    }
+
+    private IcoLabel createIcoLabel(String key, String txt, javax.swing.ImageIcon ico, java.awt.event.ActionListener listener)
+    {
+        IcoLabel label = new IcoLabel();
+        label.setIcon(ico);
+        label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        label.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        label.setText(txt);
+        label.setBackground(bdColor);
+        label.setForeground(fdColor);
+        label.setOpaque(true);
+        label.putClientProperty("key", key);
+        label.addActionListener(listener);
+        return label;
+    }
+
+    private void selectIcoLabel(IcoLabel label)
+    {
+        if (lb_LastIcon != null)
+        {
+            lb_LastIcon.setBackground(bdColor);
+            lb_LastIcon.setForeground(fdColor);
+        }
+        lb_LastIcon = label;
+        lb_LastIcon.setBackground(bsColor);
+        lb_LastIcon.setForeground(fsColor);
     }
     private javax.swing.JButton bt_Append;
     private javax.swing.JButton bt_Select;

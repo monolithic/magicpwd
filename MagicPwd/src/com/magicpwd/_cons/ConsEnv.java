@@ -51,6 +51,7 @@ public interface ConsEnv
     String FILE_BACK = FILE_DATA + "_{0}.backup";
     String FILE_DATE = "yyyyMMdd-HHmmss";
     String VIEW_DATE = "yyyy-MM-dd HH:mm:ss";
+    String IMAGE_FORMAT = "png";
     char PWDS_MASK = '*';
     String DIR_BAK = "bak";
     String DIR_DAT = "dat";
@@ -202,7 +203,9 @@ public interface ConsEnv
     String EVENT_EDIT_FILE = "130F_EDIT_FILE";
     String EVENT_EDIT_PREV = "130F_EDIT_PREV";
     String EVENT_EDIT_NEXT = "130F_EDIT_NEXT";
-    String EVENT_EDIT_FCUS = "130F_EDIT_FCUS";
+    String EVENT_EDIT_GUID = "130F_EDIT_GUID";
+    String EVENT_EDIT_KEYS = "130F_EDIT_KEYS";
+    String EVENT_EDIT_ITEM = "130F_EDIT_ITEM";
     String EVENT_VIEW_TOP1 = "130F_VIEW_TOP1";
     String EVENT_VIEW_EDIT = "130F_VIEW_EDIT";
     String EVENT_VIEW_SIDE = "130F_VIEW_SIDE";

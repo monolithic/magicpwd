@@ -411,10 +411,10 @@ public class GridMdl extends DefaultTableModel
             tplt.setType(ConsDat.INDX_HINT);
             text = temp.get(indx++);
             tplt.setData(text);
-            keys.setP30F010C(new java.sql.Timestamp(Util.stringToDate(text, '-', ':', ' ').getTimeInMillis()));
+            keys.setP30F010D(new java.sql.Timestamp(Util.stringToDate(text, '-', ':', ' ').getTimeInMillis()));
             text = temp.get(indx++);
             tplt.setName(text);
-            keys.setP30F010E(text);
+            keys.setP30F010F(text);
             ls_ItemList.add(tplt);
 
             while (indx < temp.size())
@@ -429,7 +429,7 @@ public class GridMdl extends DefaultTableModel
             keys.setP30F0102(ConsDat.PWDS_MODE_1);
             keys.setP30F0104(Hash.hash(false));
             keys.setP30F0109(kindHash);
-            keys.setP30F010C(new java.sql.Timestamp(System.currentTimeMillis()));
+            keys.setP30F010D(new java.sql.Timestamp(System.currentTimeMillis()));
             enCrypt(keys, ls_ItemList);
             DBA3000.savePwdsData(keys);
             size += 1;
@@ -543,12 +543,13 @@ public class GridMdl extends DefaultTableModel
         // LogoItem
         LogoItem logo = new LogoItem();
         logo.setName(keys.getP30F010B());
+        logo.setData(keys.getP30F010C());
         list.add(logo);
 
         // HintItem
         HintItem hint = new HintItem();
-        hint.setTime(keys.getP30F010C());
-        hint.setData(keys.getP30F010D());
+        hint.setTime(keys.getP30F010D());
+        hint.setName(keys.getP30F010E());
         list.add(hint);
 
         // 处理每一个数据
@@ -607,11 +608,12 @@ public class GridMdl extends DefaultTableModel
         // LogoItem
         LogoItem logo = (LogoItem) list.get(ConsEnv.PWDS_HEAD_LOGO);
         keys.setP30F010B(logo.getName());
+        keys.setP30F010C(logo.getData());
 
         // HintItem
         HintItem note = (HintItem) list.get(ConsEnv.PWDS_HEAD_HINT);
-        keys.setP30F010C(note.getTime());
-        keys.setP30F010D(note.getData());
+        keys.setP30F010D(note.getTime());
+        keys.setP30F010E(note.getName());
 
         // 字符串拼接
         IEditItem item;

@@ -30,9 +30,9 @@
                   <Component id="lc_Site" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="lc_Copy" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="250" max="32767" attributes="0"/>
+              <EmptySpace pref="266" max="32767" attributes="0"/>
           </Group>
-          <Component id="sp" alignment="0" pref="340" max="32767" attributes="0"/>
+          <Component id="sp" alignment="0" pref="350" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -58,7 +58,7 @@
                   <Component id="lc_Copy" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="sp" pref="138" max="32767" attributes="0"/>
+              <Component id="sp" pref="146" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

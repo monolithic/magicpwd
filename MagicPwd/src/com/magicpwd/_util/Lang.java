@@ -5,6 +5,7 @@
 package com.magicpwd._util;
 
 import com.magicpwd._comp.BtnLabel;
+import com.magicpwd._comp.IcoLabel;
 import com.magicpwd._cons.LangRes;
 import java.awt.Component;
 import java.util.ResourceBundle;
@@ -60,25 +61,25 @@ public class Lang
     public static void setWText(AbstractButton c, String sid, String def)
     {
         String txt = getLang(sid, def);
-        boolean key = false;
+        int idx = -1;
         // 快捷字符替换
         if (txt.length() > 0)
         {
-            int si = txt.indexOf('&');
-            if (si >= 0)
+            idx = txt.indexOf('&');
+            if (idx >= 0)
             {
                 txt = txt.replace("&", "");
-                if (txt.length() > si)
+                if (txt.length() > idx)
                 {
-                    c.setMnemonic(txt.charAt(si));
-                    key = true;
+                    c.setMnemonic(txt.charAt(idx));
                 }
             }
         }
 
-        if (!key || txt.length() != 1)
+        if (!(idx == 0 && txt.length() == 1))
         {
             c.setText(txt);
+            c.setDisplayedMnemonicIndex(idx);
         }
     }
 
@@ -91,25 +92,50 @@ public class Lang
     public static void setWText(BtnLabel c, String sid, String def)
     {
         String txt = getLang(sid, def);
-        boolean key = false;
+        int idx = -1;
         // 快捷字符替换
         if (txt.length() > 0)
         {
-            int si = txt.indexOf('&');
-            if (si >= 0)
+            idx = txt.indexOf('&');
+            if (idx >= 0)
             {
                 txt = txt.replace("&", "");
-                if (txt.length() > si)
+                if (txt.length() > idx)
                 {
-                    c.setMnemonic(txt.charAt(si));
-                    key = true;
+                    c.setMnemonic(txt.charAt(idx));
                 }
             }
         }
 
-        if (!key || txt.length() != 1)
+        if (!(idx == 0 && txt.length() == 1))
         {
             c.setText(txt);
+            c.setDisplayedMnemonicIndex(idx);
+        }
+    }
+
+    public static void setWText(IcoLabel c, String sid, String def)
+    {
+        String txt = getLang(sid, def);
+        int idx = -1;
+        // 快捷字符替换
+        if (txt.length() > 0)
+        {
+            idx = txt.indexOf('&');
+            if (idx >= 0)
+            {
+                txt = txt.replace("&", "");
+                if (txt.length() > idx)
+                {
+                    c.setMnemonic(txt.charAt(idx));
+                }
+            }
+        }
+
+        if (!(idx == 0 && txt.length() == 1))
+        {
+            c.setText(txt);
+            c.setDisplayedMnemonicIndex(idx);
         }
     }
 
@@ -133,25 +159,25 @@ public class Lang
     public static void setWText(JLabel c, String sid, String def)
     {
         String txt = getLang(sid, def);
-        boolean key = false;
+        int idx = -1;
         // 快捷字符替换
         if (txt.length() > 0)
         {
-            int si = txt.indexOf('&');
-            if (si >= 0)
+            idx = txt.indexOf('&');
+            if (idx >= 0)
             {
                 txt = txt.replace("&", "");
-                if (txt.length() > si)
+                if (txt.length() > idx)
                 {
-                    c.setDisplayedMnemonic(txt.charAt(si));
-                    key = true;
+                    c.setDisplayedMnemonic(txt.charAt(idx));
                 }
             }
         }
 
-        if (!key || txt.length() != 1)
+        if (!(idx == 0 && txt.length() == 1))
         {
             c.setText(txt);
+            c.setDisplayedMnemonicIndex(idx);
         }
     }
 
