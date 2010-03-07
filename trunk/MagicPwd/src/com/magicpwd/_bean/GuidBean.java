@@ -20,7 +20,6 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.m.GridMdl;
 import com.magicpwd.m.UserMdl;
-import com.magicpwd.v.EditBox;
 import com.magicpwd.v.MailPtn;
 import java.util.List;
 import javax.swing.JOptionPane;
