@@ -16,18 +16,22 @@ public class ImptProp extends JPanel implements IPropBean
     {
     }
 
+    @Override
     public void initView()
     {
     }
 
+    @Override
     public void initLang()
     {
     }
     
+    @Override
     public void initData()
     {
     }
 
+    @Override
     public JPanel getPanel()
     {
         return this;

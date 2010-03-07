@@ -30,6 +30,7 @@ public class USetProp extends JPanel implements IPropBean
     {
     }
 
+    @Override
     public void initView()
     {
         initPwdsView();
@@ -38,6 +39,7 @@ public class USetProp extends JPanel implements IPropBean
         initBaseView();
     }
 
+    @Override
     public void initLang()
     {
         initPwdsLang();
@@ -46,6 +48,7 @@ public class USetProp extends JPanel implements IPropBean
         initBaseLang();
     }
 
+    @Override
     public void initData()
     {
         DefaultComboBoxModel cm = new DefaultComboBoxModel();
@@ -73,6 +76,7 @@ public class USetProp extends JPanel implements IPropBean
         tf_SafeTime.setText("" + UserMdl.getCfg().getClnClp());
     }
 
+    @Override
     public JPanel getPanel()
     {
         return this;
@@ -204,6 +208,7 @@ public class USetProp extends JPanel implements IPropBean
 
         bt_Update.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_UpdateActionPerformed(evt);
@@ -211,6 +216,7 @@ public class USetProp extends JPanel implements IPropBean
         });
         bt_Default.addActionListener(new java.awt.event.ActionListener()
         {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_DefaultActionPerformed(evt);
