@@ -292,9 +292,9 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
 
     private void initSortLang()
     {
-//        Lang.setWText(bt_Update, LangRes.P30F8504, "保存(&S)");
-//        Lang.setWText(bt_Create, LangRes.P30F8505, "新增(&N)");
-//        Lang.setWText(bt_Delete, LangRes.P30F8506, "删除(&D)");
+//        Lang.setWText(bt_Update, LangRes.P30F8507, "保存(&S)");
+//        Lang.setWText(bt_Create, LangRes.P30F8509, "新增(&N)");
+//        Lang.setWText(bt_Delete, LangRes.P30F850B, "删除(&D)");
     }
 
     private void initBaseLang()

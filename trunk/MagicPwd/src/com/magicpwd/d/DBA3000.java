@@ -1030,7 +1030,7 @@ public class DBA3000
         }
     }
 
-    public static boolean updateCharData(Char charItem)
+    public static boolean saveCharData(Char charItem)
     {
         DBAccess dba = new DBAccess();
 
