@@ -5,7 +5,6 @@ package com.magicpwd._prop;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
-import javax.swing.JPanel;
 
 import com.magicpwd.r.ListCR;
 import com.magicpwd._comn.Char;
@@ -22,7 +21,7 @@ import com.magicpwd.m.UserMdl;
  * @author Amon
  * 
  */
-public class CharProp extends JPanel implements IPropBean
+public class CharProp extends javax.swing.JPanel implements IPropBean
 {
 
     private DefaultListModel lm_CharList;
@@ -65,9 +64,10 @@ public class CharProp extends JPanel implements IPropBean
         DefaultComboBoxModel cm_CharTplt = new DefaultComboBoxModel();
         Char c = new Char();
         c.setP30F2103("0");
-        c.setP30F2104("请选择");
-        c.setP30F2105("请选择");
-        cm_CharTplt.addElement(new Char());
+        c.setP30F2104(Lang.getLang(LangRes.P30F1114, "请选择"));
+        c.setP30F2105(Lang.getLang(LangRes.P30F1114, "请选择"));
+
+        cm_CharTplt.addElement(c);
         for (Char item : UserMdl.getCharDef())
         {
             cm_CharTplt.addElement(item);
@@ -83,7 +83,7 @@ public class CharProp extends JPanel implements IPropBean
     }
 
     @Override
-    public JPanel getPanel()
+    public javax.swing.JPanel getPanel()
     {
         return this;
     }
@@ -171,7 +171,7 @@ public class CharProp extends JPanel implements IPropBean
         pl_ItemSort = new javax.swing.JPanel();
 
         bt_DropData = new IcoLabel();
-        bt_DropData.setIcon(Util.getIcon(ConsEnv.ICON_PROP_DELT));
+        bt_DropData.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_DELT));
         bt_DropData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -183,7 +183,7 @@ public class CharProp extends JPanel implements IPropBean
         });
 
         bt_SaveData = new IcoLabel();
-        bt_SaveData.setIcon(Util.getIcon(ConsEnv.ICON_PROP_UPDT));
+        bt_SaveData.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_SAVE));
         bt_SaveData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -195,7 +195,7 @@ public class CharProp extends JPanel implements IPropBean
         });
 
         bt_ApndData = new IcoLabel();
-        bt_ApndData.setIcon(Util.getIcon(ConsEnv.ICON_PROP_COPY));
+        bt_ApndData.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_APND));
         bt_ApndData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -347,14 +347,6 @@ public class CharProp extends JPanel implements IPropBean
         ls_CharList.setSelectedIndex(indx + 1);
         UserMdl.getCharMdl().add(indx + 1, UserMdl.getCharMdl().remove(indx));
         UserMdl.setCharUpd(true);
-    }
-
-    private void sortLActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    private void sortRActionPerformed(java.awt.event.ActionEvent evt)
-    {
     }
 
     private void apndDataActionPerformed(java.awt.event.ActionEvent evt)
