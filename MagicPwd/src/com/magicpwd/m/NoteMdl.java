@@ -88,14 +88,14 @@ public class NoteMdl
     {
         clear();
         keys.setP30F0104(keysHash);
-        keys.setP30F0105(UserMdl.getUserId());
+        keys.setP30F0105(UserMdl.getUserCode());
         DBA3000.readPwdsData(keys);
         UserMdl.getGridMdl().deCrypt(keys, ls_ItemList);
     }
 
     public void saveData(boolean histBack) throws Exception
     {
-        keys.setP30F0105(UserMdl.getUserId());
+        keys.setP30F0105(UserMdl.getUserCode());
         keys.setP30F0106(ConsDat.HASH_NOTE);
         keys.setHistBack(histBack);
         UserMdl.getGridMdl().enCrypt(keys, ls_ItemList);

@@ -23,7 +23,7 @@ public interface ConsCfg
      */
     String CFG_USER_LAST = CFG_USER + ".last";
     /**
-     * 
+     * 用户信息：用户偏好配置
      */
     String CFG_USER_NAME = CFG_USER + ".{0}";
     /**
@@ -31,7 +31,7 @@ public interface ConsCfg
      */
     String CFG_USER_CODE = CFG_USER_NAME + ".code";
     /**
-     * 用户信息：用户安全信息，用户口令数据的加密解密
+     * 用户信息：用户安全信息
      */
     String CFG_USER_INFO = CFG_USER_NAME + ".info";
     /**

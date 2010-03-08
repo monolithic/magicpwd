@@ -29,6 +29,7 @@ import com.magicpwd._util.Util;
  */
 final class UserSec implements Key
 {
+
     /**
      * 用户名称
      */
@@ -84,9 +85,9 @@ final class UserSec implements Key
     /**
      * @return the usid
      */
-    public final String getUsid()
+    public final String getCode()
     {
-        return UserMdl.getCfg().getCfg(ConsCfg.CFG_USER);
+        return UserMdl.getCfg().getCfg(user(ConsCfg.CFG_USER_CODE));
     }
 
     final char[] getMask()
@@ -304,9 +305,15 @@ final class UserSec implements Key
     final boolean signUp() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
             IllegalBlockSizeException, BadPaddingException
     {
+        UserCfg uc = UserMdl.getCfg();
+        if (!Util.isValidate(uc.getCfg(user(ConsCfg.CFG_USER_INFO))))
+        {
+            return false;
+        }
+
         // 摘要用户登录信息
         byte[] temp = signInDigest();
-        UserMdl.getCfg().setCfg(user(ConsCfg.CFG_USER_INFO), Util.bytesToString(temp, true));
+        uc.setCfg(user(ConsCfg.CFG_USER_INFO), Util.bytesToString(temp, true));
 
         // 摘要用户加密信息
         keys = cipherDigest();
@@ -325,10 +332,14 @@ final class UserSec implements Key
         aes.init(Cipher.ENCRYPT_MODE, this);
         keys = temp;
         temp = aes.doFinal(t);
-        UserMdl.getCfg().setCfg(user(ConsCfg.CFG_USER_PKEY), Util.bytesToString(temp, true));
+        uc.setCfg(user(ConsCfg.CFG_USER_PKEY), Util.bytesToString(temp, true));
 
-        // 用户ID
-        UserMdl.getCfg().setCfg(ConsCfg.CFG_USER, name + ',');
+        // 用户列表
+        uc.setCfg(ConsCfg.CFG_USER, uc.getCfg(ConsCfg.CFG_USER, "") + name + ',');
+        // 用户编码
+        uc.setCfg(user(ConsCfg.CFG_USER_CODE), "00000000");
+        // 用户名称
+        uc.setCfg(user(ConsCfg.CFG_USER_NAME), name);
         return true;
     }
 
