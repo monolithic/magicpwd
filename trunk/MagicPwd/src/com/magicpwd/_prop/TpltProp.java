@@ -156,7 +156,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         pl_ItemSort = new javax.swing.JPanel();
 
         bt_DropData = new IcoLabel();
-        bt_DropData.setIcon(Util.getIcon(ConsEnv.ICON_PROP_DELT));
+        bt_DropData.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_DELT));
         bt_DropData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -168,7 +168,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         });
 
         bt_SaveData = new IcoLabel();
-        bt_SaveData.setIcon(Util.getIcon(ConsEnv.ICON_PROP_UPDT));
+        bt_SaveData.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_SAVE));
         bt_SaveData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -180,7 +180,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         });
 
         bt_ApndData = new IcoLabel();
-        bt_ApndData.setIcon(Util.getIcon(ConsEnv.ICON_PROP_COPY));
+        bt_ApndData.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_APND));
         bt_ApndData.addActionListener(new java.awt.event.ActionListener()
         {
 
