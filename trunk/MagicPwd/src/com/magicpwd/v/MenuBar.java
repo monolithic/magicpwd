@@ -648,7 +648,7 @@ public class MenuBar extends JMenuBar
             {
                 javax.swing.JMenu lastMenu = null;
                 java.util.regex.Pattern family = java.util.regex.Pattern.compile("^skin_[^._]+$");
-                java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.FileReader(skinFile));
+                java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.InputStreamReader(new java.io.FileInputStream(skinFile), ConsEnv.FILE_ENCODING));
                 String line;
                 String[] arr;
                 while ((line = reader.readLine()) != null)
