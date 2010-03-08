@@ -115,9 +115,9 @@ public class HistProp extends JPanel implements IPropBean
     @Override
     public void initLang()
     {
-        Lang.setWText(bt_PickupCur, LangRes.P30F8507, "恢复");
-        Lang.setWText(bt_DeleteCur, LangRes.P30F8508, "删除当前");
-        Lang.setWText(bt_DeleteAll, LangRes.P30F8509, "删除所有");
+        Lang.setWText(bt_PickupCur, LangRes.P30F850D, "恢复");
+        Lang.setWText(bt_DeleteCur, LangRes.P30F850F, "删除当前");
+        Lang.setWText(bt_DeleteAll, LangRes.P30F8511, "删除所有");
     }
 
     @Override

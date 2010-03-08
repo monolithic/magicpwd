@@ -29,14 +29,6 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
      * 当前编辑的字符空间
      */
     private Char charItem;
-    /**
-     * 当前操作是否为更新
-     */
-    private boolean isUpdate;
-    /**
-     * 判断是否为默认字符空间，以确认在用户切换默认字符空间里，是否需要清空已输入文本
-     */
-    private String defText = "";
 
     public CharProp()
     {
@@ -66,6 +58,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         c.setP30F2103("0");
         c.setP30F2104(Lang.getLang(LangRes.P30F1114, "请选择"));
         c.setP30F2105(Lang.getLang(LangRes.P30F1114, "请选择"));
+        c.setP30F2106("");
 
         cm_CharTplt.addElement(c);
         for (Char item : UserMdl.getCharDef())
@@ -304,9 +297,14 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
 
     public void initSortLang()
     {
-//        Lang.setWText(bt_ApndData, LangRes.P30F8505, "新增(&N)");
-//        Lang.setWText(bt_SaveData, LangRes.P30F8504, "保存(&S)");
-//        Lang.setWText(bt_DropData, LangRes.P30F8506, "删除(&D)");
+        Lang.setWText(bt_ApndData, LangRes.P30F8509, "&N");
+        Lang.setWTips(bt_ApndData, LangRes.P30F850A, "新增(Alt + N)");
+
+        Lang.setWText(bt_SaveData, LangRes.P30F8507, "&S");
+        Lang.setWTips(bt_SaveData, LangRes.P30F8507, "保存(Alt + S)");
+
+        Lang.setWText(bt_DropData, LangRes.P30F850B, "&D");
+        Lang.setWTips(bt_DropData, LangRes.P30F850B, "删除(Alt + D)");
     }
 
     private void initBaseLang()
@@ -324,8 +322,8 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         Char s = (Char) lm_CharList.remove(indx);
         lm_CharList.insertElementAt(s, indx - 1);
 
-        DBA3000.updateCharData(s);
-        DBA3000.updateCharData((Char) lm_CharList.get(indx));
+        DBA3000.saveCharData(s);
+        DBA3000.saveCharData((Char) lm_CharList.get(indx));
         ls_CharList.setSelectedIndex(indx - 1);
         UserMdl.getCharMdl().add(indx - 1, UserMdl.getCharMdl().remove(indx));
         UserMdl.setCharUpd(true);
@@ -342,8 +340,8 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         Char s = (Char) lm_CharList.remove(indx);
         lm_CharList.insertElementAt(s, indx + 1);
 
-        DBA3000.updateCharData(s);
-        DBA3000.updateCharData((Char) lm_CharList.get(indx));
+        DBA3000.saveCharData(s);
+        DBA3000.saveCharData((Char) lm_CharList.get(indx));
         ls_CharList.setSelectedIndex(indx + 1);
         UserMdl.getCharMdl().add(indx + 1, UserMdl.getCharMdl().remove(indx));
         UserMdl.setCharUpd(true);
@@ -352,8 +350,6 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
     private void apndDataActionPerformed(java.awt.event.ActionEvent evt)
     {
         charItem = new Char();
-        isUpdate = false;
-
         cb_CharTplt.setSelectedIndex(0);
         showInfo(charItem);
     }
@@ -363,7 +359,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         String name = tf_CharName.getText();
         if (!Util.isValidate(name))
         {
-            Lang.showMesg(this, "", "空间名称不能为空！");
+            Lang.showMesg(this, LangRes.P30F8A02, "空间名称不能为空！");
             tf_CharName.requestFocus();
             return;
         }
@@ -371,23 +367,26 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         String sets = ta_CharSets.getText();
         if (!Util.isValidate(sets))
         {
-            Lang.showMesg(this, "", "空间内容不能为空！");
+            Lang.showMesg(this, LangRes.P30F8A03, "空间内容不能为空！");
             ta_CharSets.requestFocus();
             return;
         }
 
+        if (charItem == null)
+        {
+            charItem = new Char();
+        }
         charItem.setP30F2104(name);
         charItem.setP30F2105(tf_CharTips.getText());
         charItem.setP30F2106(sets);
-        charItem.setP30F2107(ta_CharSets.getText());
-        DBA3000.updateCharData(charItem);
+        DBA3000.saveCharData(charItem);
 
-        if (isUpdate)
+        //if (isUpdate)
         {
             lm_CharList.set(ls_CharList.getSelectedIndex(), charItem);
             UserMdl.getCharMdl().set(ls_CharList.getSelectedIndex(), charItem);
         }
-        else
+        //else
         {
             lm_CharList.addElement(charItem);
             UserMdl.getCharMdl().add(charItem);
@@ -405,7 +404,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
     {
         if (charItem == null)
         {
-            Lang.showMesg(this, "", "请选择您要删除的类别数据！");
+            Lang.showMesg(this, LangRes.P30F8A04, "请选择您要删除的类别数据！");
             ls_CharList.requestFocus();
             return;
         }
@@ -426,17 +425,12 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         }
 
         cb_CharTplt.setSelectedIndex(0);
-        defText = "";
     }
 
     private void cb_CharTpltItemStateChanged(java.awt.event.ItemEvent evt)
     {
-        if (defText.equals(ta_CharSets.getText()) || !Util.isValidate(ta_CharSets.getText()))
-        {
-            Char item = (Char) cb_CharTplt.getSelectedItem();
-            defText = item.getP30F2106();
-            ta_CharSets.setText(defText);
-        }
+        Char item = (Char) cb_CharTplt.getSelectedItem();
+        ta_CharSets.setText(item.getP30F2106());
     }
 
     /**
@@ -448,7 +442,6 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         tf_CharName.setText(item.getP30F2104());
         tf_CharTips.setText(item.getP30F2105());
         ta_CharSets.setText(item.getP30F2106());
-        //ta_CharDesp.setText(item.getP30F2107());
     }
     private javax.swing.JList ls_CharList;
     private javax.swing.JPanel pl_ItemInfo;
