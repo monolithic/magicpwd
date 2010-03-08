@@ -306,7 +306,7 @@ final class UserSec implements Key
             IllegalBlockSizeException, BadPaddingException
     {
         UserCfg uc = UserMdl.getCfg();
-        if (!Util.isValidate(uc.getCfg(user(ConsCfg.CFG_USER_INFO))))
+        if (Util.isValidate(uc.getCfg(user(ConsCfg.CFG_USER_INFO))))
         {
             return false;
         }
