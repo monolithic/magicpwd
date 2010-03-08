@@ -64,6 +64,9 @@ public class SKeyProp extends JPanel implements IPropBean
         }
         SkeyModel sm = new SkeyModel();
         tb_SkeyList.setModel(sm);
+        int w = tb_SkeyList.getFontMetrics(tb_SkeyList.getFont()).stringWidth("Ctrl + Enter");
+        tb_SkeyList.getColumnModel().getColumn(0).setPreferredWidth(w);
+        tb_SkeyList.getColumnModel().getColumn(1).setPreferredWidth(300-w);
     }
 
     @Override
