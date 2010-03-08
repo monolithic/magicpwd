@@ -1301,7 +1301,6 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                System.out.println(evt.getActionCommand());
                 tb_KeysView.requestFocus();
             }
         });
