@@ -296,9 +296,14 @@ public class KindProp extends JPanel implements IPropBean
 
     private void initSortLang()
     {
-//        Lang.setWText(bt_ApndData, LangRes.P30F8509, "新增(&N)");
-//        Lang.setWText(bt_SaveData, LangRes.P30F8507, "保存(&S)");
-//        Lang.setWText(bt_DropData, LangRes.P30F850B, "删除(&D)");
+        Lang.setWText(bt_ApndData, LangRes.P30F8509, "&N");
+        Lang.setWTips(bt_ApndData, LangRes.P30F850A, "新增(Alt + N)");
+
+        Lang.setWText(bt_SaveData, LangRes.P30F8507, "&S");
+        Lang.setWTips(bt_SaveData, LangRes.P30F8507, "保存(Alt + S)");
+
+        Lang.setWText(bt_DropData, LangRes.P30F850B, "&D");
+        Lang.setWTips(bt_DropData, LangRes.P30F850B, "删除(Alt + D)");
     }
 
     private void initBaseLang()

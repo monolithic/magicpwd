@@ -292,9 +292,14 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
 
     private void initSortLang()
     {
-//        Lang.setWText(bt_Update, LangRes.P30F8507, "保存(&S)");
-//        Lang.setWText(bt_Create, LangRes.P30F8509, "新增(&N)");
-//        Lang.setWText(bt_Delete, LangRes.P30F850B, "删除(&D)");
+        Lang.setWText(bt_ApndData, LangRes.P30F8509, "&N");
+        Lang.setWTips(bt_ApndData, LangRes.P30F850A, "新增(Alt + N)");
+
+        Lang.setWText(bt_SaveData, LangRes.P30F8507, "&S");
+        Lang.setWTips(bt_SaveData, LangRes.P30F8507, "保存(Alt + S)");
+
+        Lang.setWText(bt_DropData, LangRes.P30F850B, "&D");
+        Lang.setWTips(bt_DropData, LangRes.P30F850B, "删除(Alt + D)");
     }
 
     private void initBaseLang()
@@ -384,7 +389,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         int indx = cb_TpltKind.getSelectedIndex();
         if (indx < 0)
         {
-            Lang.showMesg(this, "", "请选择属性类别！");
+            Lang.showMesg(this, LangRes.P30F8A05, "请选择属性类别！");
             cb_TpltKind.requestFocus();
             return;
         }
@@ -392,7 +397,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         String name = tf_TpltName.getText();
         if (!Util.isValidate(name))
         {
-            Lang.showMesg(this, "", "类别名称不能为空！");
+            Lang.showMesg(this, LangRes.P30F8A06, "类别名称不能为空！");
             tf_TpltName.requestFocus();
             return;
         }
@@ -408,7 +413,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         javax.swing.tree.TreePath path = tr_TpltList.getSelectionPath();
         if (path == null)
         {
-            Lang.showMesg(this, "", "请选择属性对应的模板！");
+            Lang.showMesg(this, LangRes.P30F8A07, "请选择属性对应的模板！");
             tr_TpltList.requestFocus();
             return;
         }
@@ -456,12 +461,12 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         javax.swing.tree.TreePath path = tr_TpltList.getSelectionPath();
         if (path == null)
         {
-            Lang.showMesg(MagicPwd.getCurrForm(), "", "请选择您要删除的类别数据！");
+            Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F8A08, "请选择您要删除的数据！");
             tr_TpltList.requestFocus();
             return;
         }
 
-        if (Lang.showFirm(MagicPwd.getCurrForm(), "", "确认要删除此数据吗，此操作将不可恢复？") == JOptionPane.YES_OPTION)
+        if (Lang.showFirm(MagicPwd.getCurrForm(), LangRes.P30F8A09, "确认要删除此数据吗，此操作将不可恢复？") == JOptionPane.YES_OPTION)
         {
             javax.swing.tree.DefaultMutableTreeNode node = (javax.swing.tree.DefaultMutableTreeNode) path.getLastPathComponent();
             DBA3000.deleteTpltData((S1S2) node.getUserObject());

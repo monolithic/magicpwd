@@ -30,6 +30,7 @@ import javax.crypto.Cipher;
  */
 public final class UserMdl
 {
+
     /**
      * 程序运行模式
      */
@@ -387,8 +388,7 @@ public final class UserMdl
             c.setP30F2103("10000007");
             c.setP30F2104("可输入字符");
             c.setP30F2105("可输入字符");
-            c.setP30F2106(
-                    "!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
+            c.setP30F2106("!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
             charDef.add(c);
         }
         return charDef;

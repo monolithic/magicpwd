@@ -375,22 +375,13 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         if (charItem == null)
         {
             charItem = new Char();
+            lm_CharList.addElement(charItem);
+            UserMdl.getCharMdl().add(charItem);
         }
         charItem.setP30F2104(name);
         charItem.setP30F2105(tf_CharTips.getText());
         charItem.setP30F2106(sets);
         DBA3000.saveCharData(charItem);
-
-        //if (isUpdate)
-        {
-            lm_CharList.set(ls_CharList.getSelectedIndex(), charItem);
-            UserMdl.getCharMdl().set(ls_CharList.getSelectedIndex(), charItem);
-        }
-        //else
-        {
-            lm_CharList.addElement(charItem);
-            UserMdl.getCharMdl().add(charItem);
-        }
 
         charItem = null;
         cb_CharTplt.setSelectedIndex(0);
@@ -425,6 +416,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         }
 
         cb_CharTplt.setSelectedIndex(0);
+        showInfo(charItem);
     }
 
     private void cb_CharTpltItemStateChanged(java.awt.event.ItemEvent evt)
