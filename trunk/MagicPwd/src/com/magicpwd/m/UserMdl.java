@@ -313,9 +313,9 @@ public final class UserMdl
         return us_UserSec;
     }
 
-    public static String getUserId()
+    public static String getUserCode()
     {
-        return us_UserSec.getUsid();
+        return us_UserSec.getCode();
     }
 
     public static String getUserName()

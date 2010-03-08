@@ -182,7 +182,7 @@ public class GridMdl extends DefaultTableModel
     {
         keys.setDefault();
         keys.setP30F0104(keysHash);
-        keys.setP30F0105(UserMdl.getUserId());
+        keys.setP30F0105(UserMdl.getUserCode());
         if (DBA3000.readPwdsData(keys))
         {
             deCrypt(keys, ls_ItemList);
@@ -198,7 +198,7 @@ public class GridMdl extends DefaultTableModel
      */
     public void saveData(boolean histBack, boolean repaint) throws Exception
     {
-        keys.setP30F0105(UserMdl.getUserId());
+        keys.setP30F0105(UserMdl.getUserCode());
         keys.setHistBack(histBack);
         enCrypt(keys, ls_ItemList);
         DBA3000.savePwdsData(keys);
