@@ -10,6 +10,7 @@ package com.magicpwd._comn;
  */
 public class Char
 {
+
     /**
      * 显示排序
      */
@@ -172,5 +173,11 @@ public class Char
     public void setP30F2107(String P30F2107)
     {
         this.P30F2107 = P30F2107;
+    }
+
+    @Override
+    public String toString()
+    {
+        return P30F2104;
     }
 }
