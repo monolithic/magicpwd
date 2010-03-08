@@ -1079,7 +1079,7 @@ public final class Util
         boolean wasDecoratedByOS = !(MagicPwd.getCurrForm().isUndecorated());
         try
         {
-            boolean isSystem = ConsCfg.DEF_SKIN.equalsIgnoreCase(lafClass);
+            boolean isSystem = !isValidate(lafClass) || ConsCfg.DEF_SKIN.equalsIgnoreCase(lafClass);
             if (isSystem)
             {
                 lafClass = javax.swing.UIManager.getSystemLookAndFeelClassName();

@@ -1,7 +1,5 @@
 package com.magicpwd;
 
-import java.util.EventListener;
-
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._face.IBackCall;
@@ -119,7 +117,41 @@ public class MagicPwd
         {
             javax.swing.JFrame.setDefaultLookAndFeelDecorated(true);
             javax.swing.JDialog.setDefaultLookAndFeelDecorated(true);
-//            Util.changeSkin(UserMdl.getCfg().getCfg(ConsCfg.CFG_SKIN, ConsCfg.DEF_SKIN));
+            javax.swing.SwingUtilities.invokeLater(new Runnable()
+            {
+
+                @Override
+                public void run()
+                {
+                    // 用户偏好风格设置
+                    try
+                    {
+                        String lafClass = UserMdl.getCfg().getCfg(ConsCfg.CFG_SKIN, ConsCfg.DEF_SKIN).trim();
+                        if (lafClass.length() < 1 || ConsCfg.DEF_SKIN.equalsIgnoreCase(lafClass))
+                        {
+                            lafClass = javax.swing.UIManager.getSystemLookAndFeelClassName();
+                        }
+                        javax.swing.UIManager.setLookAndFeel(lafClass);
+                    }
+                    catch (Exception e)
+                    {
+                        Logs.exception(e);
+                    }
+
+                    // 显示登录或注册界面
+                    UserSign us = new UserSign(UserMdl.getCfg().getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.SIGN_IN : ConsEnv.SIGN_UP);
+                    us.setConfrmBackCall(new IBackCall()
+                    {
+
+                        @Override
+                        public boolean callBack(Object sender, java.util.EventListener event, String... params)
+                        {
+                            return viewFrm();
+                        }
+                    });
+                    us.init();
+                }
+            });
         }
         catch (Exception exp)
         {
@@ -127,29 +159,7 @@ public class MagicPwd
         }
 
         // 启动后台预加载线程
-        Thread t = new Thread()
-        {
-
-            @Override
-            public void run()
-            {
-                preLoad();
-            }
-        };
-        t.start();
-
-        // 显示登录或注册界面
-        UserSign us = new UserSign(UserMdl.getCfg().getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.SIGN_IN : ConsEnv.SIGN_UP);
-        us.setConfrmBackCall(new IBackCall()
-        {
-
-            @Override
-            public boolean callBack(Object sender, EventListener event, String... params)
-            {
-                return viewFrm();
-            }
-        });
-        us.init();
+        preLoad();
     }
 
     public static void exit(int status)
@@ -173,12 +183,10 @@ public class MagicPwd
         {
             Class.forName("org.hsqldb.jdbcDriver");
         }
-        catch (ClassNotFoundException exp)
+        catch (Exception exp)
         {
             Logs.exception(exp);
         }
-
-        showMainPtn();
     }
 
     private static void endSave()
@@ -201,6 +209,7 @@ public class MagicPwd
     private static boolean viewFrm()
     {
         // 设置软件界面风格
+        showMainPtn();
         if (!getCurrForm().isVisible())
         {
             getCurrForm().setVisible(true);
