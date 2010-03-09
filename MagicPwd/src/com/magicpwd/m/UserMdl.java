@@ -4,7 +4,6 @@
 package com.magicpwd.m;
 
 import com.magicpwd.MagicPwd;
-import com.magicpwd._comn.Char;
 import com.magicpwd._comn.Kind;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
@@ -13,15 +12,12 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 
 import com.magicpwd.r.KindTN;
-import com.magicpwd.d.DBA3000;
 import javax.crypto.Cipher;
 
 /**
@@ -44,8 +40,7 @@ public final class UserMdl
     private static TreeMdl treeMdl;
     private static CboxMdl cboxMdl;
     private static boolean charUpd;
-    private static List<Char> charMdl;
-    private static List<Char> charDef;
+    private static CharMdl charMdl;
     private static Cipher dCipher;
     private static Cipher eCipher;
 
@@ -327,71 +322,13 @@ public final class UserMdl
     /**
      * @return the charMdl
      */
-    public static List<Char> getCharMdl()
+    public static CharMdl getCharMdl()
     {
         if (charMdl == null)
         {
-            charMdl = DBA3000.selectCharData();
+            charMdl = new CharMdl();
         }
         return charMdl;
-    }
-
-    public static List<Char> getCharDef()
-    {
-        if (charDef == null)
-        {
-            charDef = new ArrayList<Char>(7);
-
-            Char c = new Char();
-            c.setP30F2103("10000001");
-            c.setP30F2104("数字");
-            c.setP30F2105("数字");
-            c.setP30F2106("0123456789");
-            charDef.add(c);
-
-            c = new Char();
-            c.setP30F2103("10000002");
-            c.setP30F2104("小写字母");
-            c.setP30F2105("小写字母");
-            c.setP30F2106("abcdefghijklmnopqrstuvwxyz");
-            charDef.add(c);
-
-            c = new Char();
-            c.setP30F2103("10000003");
-            c.setP30F2104("大写字母");
-            c.setP30F2105("大写字母");
-            c.setP30F2106("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-            charDef.add(c);
-
-            c = new Char();
-            c.setP30F2103("10000004");
-            c.setP30F2104("特殊字符");
-            c.setP30F2105("特殊字符");
-            c.setP30F2106("!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~");
-            charDef.add(c);
-
-            c = new Char();
-            c.setP30F2103("10000005");
-            c.setP30F2104("大小写字母");
-            c.setP30F2105("大小写字母");
-            c.setP30F2106("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
-            charDef.add(c);
-
-            c = new Char();
-            c.setP30F2103("10000006");
-            c.setP30F2104("字母及数字");
-            c.setP30F2105("字母及数字");
-            c.setP30F2106("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
-            charDef.add(c);
-
-            c = new Char();
-            c.setP30F2103("10000007");
-            c.setP30F2104("可输入字符");
-            c.setP30F2105("可输入字符");
-            c.setP30F2106("!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
-            charDef.add(c);
-        }
-        return charDef;
     }
 
     /**

@@ -4,7 +4,6 @@
 package com.magicpwd._prop;
 
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
 
 import com.magicpwd.r.ListCR;
 import com.magicpwd._comn.Char;
@@ -15,6 +14,7 @@ import com.magicpwd._face.IPropBean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.DBA3000;
+import com.magicpwd.m.CharMdl;
 import com.magicpwd.m.UserMdl;
 
 /**
@@ -24,7 +24,6 @@ import com.magicpwd.m.UserMdl;
 public class CharProp extends javax.swing.JPanel implements IPropBean
 {
 
-    private DefaultListModel lm_CharList;
     /**
      * 当前编辑的字符空间
      */
@@ -61,18 +60,14 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         c.setP30F2106("");
 
         cm_CharTplt.addElement(c);
-        for (Char item : UserMdl.getCharDef())
+        CharMdl cm=UserMdl.getCharMdl();
+        for (Char item : cm.getCharSys())
         {
             cm_CharTplt.addElement(item);
         }
         cb_CharTplt.setModel(cm_CharTplt);
 
-        lm_CharList = new DefaultListModel();
-        for (Char item : UserMdl.getCharMdl())
-        {
-            lm_CharList.addElement(item);
-        }
-        ls_CharList.setModel(lm_CharList);
+        ls_CharList.setModel(cm);
     }
 
     @Override
@@ -402,8 +397,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
 
         DBA3000.deleteCharData(charItem);
         int idx = ls_CharList.getSelectedIndex();
-        lm_CharList.remove(idx);
-        UserMdl.getCharMdl().remove(idx);
+        UserMdl.getCharMdl().removeItemAt(idx);
         UserMdl.setCharUpd(true);
     }
 
