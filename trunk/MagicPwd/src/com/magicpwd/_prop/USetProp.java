@@ -4,9 +4,7 @@
 package com.magicpwd._prop;
 
 import com.magicpwd._comn.Char;
-import java.util.List;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JPanel;
 
 import com.magicpwd._comn.S1S3;
@@ -52,21 +50,14 @@ public class USetProp extends JPanel implements IPropBean
     @Override
     public void initData()
     {
-        DefaultComboBoxModel cm = new DefaultComboBoxModel();
-        int indx = 0;
-        List<Char> list = UserMdl.getCharDef();
-        Char item;
-        for (int i = 0, j = list.size(); i < j; i += 1)
+        for (Char item : UserMdl.getCharMdl().getCharSys())
         {
-            item = list.get(i);
-            cm.addElement(item);
-            if (item.equals(UserMdl.getCfg().getPwdsSet()))
+            cb_PwdsChar.addItem(item);
+            if (item.getP30F2103().equals(UserMdl.getCfg().getPwdsSet()))
             {
-                indx = i;
+                cb_PwdsChar.setSelectedItem(item);
             }
         }
-        cb_PwdsChar.setModel(cm);
-        cb_PwdsChar.setSelectedIndex(indx);
 
         tf_PwdsSize.setText(UserMdl.getCfg().getPwdsLen());
         ck_PwdsUrpt.setSelected(UserMdl.getCfg().isPwdsUpt());
