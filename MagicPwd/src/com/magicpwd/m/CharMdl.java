@@ -18,13 +18,11 @@ public class CharMdl extends AbstractListModel
 {
 
     private static boolean withSys;
-    private List<Char> charSys;
-    private List<Char> charUsr;
+    private List<Char> charSys = new ArrayList<Char>(7);
+    private List<Char> charUsr = new ArrayList<Char>();
 
     public CharMdl()
     {
-        charSys = new ArrayList<Char>(7);
-
         Char c = new Char();
         c.setP30F2103("10000001");
         c.setP30F2104("数字");
@@ -104,6 +102,16 @@ public class CharMdl extends AbstractListModel
     public void appendItem(Char data)
     {
         charUsr.add(data);
+        DBA3000.saveCharData(data);
+    }
+
+    public void updateItemAt(int index, Char data)
+    {
+        if (withSys)
+        {
+            index -= charSys.size();
+        }
+        charUsr.set(index, data);
     }
 
     public Char removeItemAt(int index)
@@ -117,6 +125,32 @@ public class CharMdl extends AbstractListModel
             return null;
         }
         return charUsr.remove(index);
+    }
+
+    public void changeItemAt(int index, int toward)
+    {
+        if (withSys)
+        {
+            index -= charSys.size();
+        }
+        if (toward == 0 || index < 0 || index >= charUsr.size())
+        {
+            return;
+        }
+        Char src = charUsr.get(index);
+
+        toward += index;
+        if (toward < 0)
+        {
+            toward = 0;
+        }
+        if (toward >= charUsr.size())
+        {
+            toward = charUsr.size() - 1;
+        }
+        Char dst = charUsr.get(toward);
+        charUsr.set(index, dst);
+        charUsr.set(toward, src);
     }
 
     public List<Char> getCharSys()

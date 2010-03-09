@@ -60,7 +60,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         c.setP30F2106("");
 
         cm_CharTplt.addElement(c);
-        CharMdl cm=UserMdl.getCharMdl();
+        CharMdl cm = UserMdl.getCharMdl();
         for (Char item : cm.getCharSys())
         {
             cm_CharTplt.addElement(item);
@@ -309,36 +309,26 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
     private void sortUActionPerformed(java.awt.event.ActionEvent evt)
     {
         int indx = ls_CharList.getSelectedIndex();
-        if (indx < 1 || indx >= lm_CharList.getSize())
+        if (indx < 1 || indx >= UserMdl.getCharMdl().getCharUsr().size())
         {
             return;
         }
 
-        Char s = (Char) lm_CharList.remove(indx);
-        lm_CharList.insertElementAt(s, indx - 1);
-
-        DBA3000.saveCharData(s);
-        DBA3000.saveCharData((Char) lm_CharList.get(indx));
+        UserMdl.getCharMdl().changeItemAt(indx, -1);
         ls_CharList.setSelectedIndex(indx - 1);
-        UserMdl.getCharMdl().add(indx - 1, UserMdl.getCharMdl().remove(indx));
         UserMdl.setCharUpd(true);
     }
 
     private void sortDActionPerformed(java.awt.event.ActionEvent evt)
     {
         int indx = ls_CharList.getSelectedIndex();
-        if (indx < 0 || indx >= lm_CharList.getSize() - 1)
+        if (indx < 0 || indx >= UserMdl.getCharMdl().getCharUsr().size() - 1)
         {
             return;
         }
 
-        Char s = (Char) lm_CharList.remove(indx);
-        lm_CharList.insertElementAt(s, indx + 1);
-
-        DBA3000.saveCharData(s);
-        DBA3000.saveCharData((Char) lm_CharList.get(indx));
+        UserMdl.getCharMdl().changeItemAt(indx, 1);
         ls_CharList.setSelectedIndex(indx + 1);
-        UserMdl.getCharMdl().add(indx + 1, UserMdl.getCharMdl().remove(indx));
         UserMdl.setCharUpd(true);
     }
 
@@ -370,13 +360,17 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         if (charItem == null)
         {
             charItem = new Char();
-            lm_CharList.addElement(charItem);
-            UserMdl.getCharMdl().add(charItem);
+            charItem.setP30F2104(name);
+            charItem.setP30F2105(tf_CharTips.getText());
+            charItem.setP30F2106(sets);
+            UserMdl.getCharMdl().appendItem(charItem);
         }
-        charItem.setP30F2104(name);
-        charItem.setP30F2105(tf_CharTips.getText());
-        charItem.setP30F2106(sets);
-        DBA3000.saveCharData(charItem);
+        else
+        {
+            charItem.setP30F2104(name);
+            charItem.setP30F2105(tf_CharTips.getText());
+            charItem.setP30F2106(sets);
+        }
 
         charItem = null;
         cb_CharTplt.setSelectedIndex(0);

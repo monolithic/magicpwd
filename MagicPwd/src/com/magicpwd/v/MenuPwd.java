@@ -25,6 +25,7 @@ import com.magicpwd.m.UserMdl;
  */
 public class MenuPwd extends JPopupMenu
 {
+
     private IEditItem tpltData;
     private int charSize;
     private String charSets;
@@ -142,6 +143,7 @@ public class MenuPwd extends JPopupMenu
         javax.swing.ButtonGroup bg = new javax.swing.ButtonGroup();
         java.awt.event.ActionListener al = new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -174,6 +176,7 @@ public class MenuPwd extends JPopupMenu
         mi_SizeMore = new javax.swing.JCheckBoxMenuItem();
         mi_SizeMore.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -189,6 +192,7 @@ public class MenuPwd extends JPopupMenu
         javax.swing.ButtonGroup bg = new javax.swing.ButtonGroup();
         java.awt.event.ActionListener al = new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -203,12 +207,12 @@ public class MenuPwd extends JPopupMenu
 
         mu_CharMenu.addSeparator();
 
-        int defSize = UserMdl.getCharDef().size();
-        int mdlSize = UserMdl.getCharMdl().size();
-        mi_CharPre = new javax.swing.JCheckBoxMenuItem[defSize + mdlSize];
+        int sysSize = UserMdl.getCharMdl().getCharSys().size();
+        int usrSize = UserMdl.getCharMdl().getCharUsr().size();
+        mi_CharPre = new javax.swing.JCheckBoxMenuItem[sysSize + usrSize];
 
         javax.swing.JCheckBoxMenuItem menuItem;
-        for (int i = 0; i < defSize; i += 1)
+        for (int i = 0; i < sysSize; i += 1)
         {
             menuItem = new javax.swing.JCheckBoxMenuItem();
             bg.add(menuItem);
@@ -218,21 +222,21 @@ public class MenuPwd extends JPopupMenu
             mi_CharPre[i] = menuItem;
         }
 
-        if (mdlSize < 1)
+        if (usrSize < 1)
         {
             return;
         }
 
         mu_CharMenu.addSeparator();
 
-        for (int i = 0; i < mdlSize; i += 1)
+        for (int i = 0; i < usrSize; i += 1)
         {
             menuItem = new javax.swing.JCheckBoxMenuItem();
             bg.add(menuItem);
             mu_CharMenu.add(menuItem);
             menuItem.addActionListener(al);
             bg.add(menuItem);
-            mi_CharPre[defSize + i] = menuItem;
+            mi_CharPre[sysSize + i] = menuItem;
         }
     }
 
@@ -241,6 +245,7 @@ public class MenuPwd extends JPopupMenu
         mi_UrptMenu = new javax.swing.JCheckBoxMenuItem();
         mi_UrptMenu.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -288,25 +293,21 @@ public class MenuPwd extends JPopupMenu
         mi_CharDef.setActionCommand(ConsCfg.DEF_PWDS_HASH);
         mi_CharDef.putClientProperty("prop_char", ConsCfg.DEF_PWDS_CHAR);
 
-        List<Char> list = UserMdl.getCharDef();
-        Char item;
+        List<Char> list = UserMdl.getCharMdl().getCharSys();
         javax.swing.JCheckBoxMenuItem menu;
-        for (int i = 0, j = list.size(); i < j; i += 1)
+        int i = 0;
+        for (Char item : UserMdl.getCharMdl().getCharSys())
         {
-            item = list.get(i);
-            menu = mi_CharPre[i];
+            menu = mi_CharPre[i++];
             menu.setText(item.getP30F2104());
             menu.setToolTipText(item.getP30F2105());
             menu.setActionCommand(item.getP30F2103());
             menu.putClientProperty("prop_char", item.getP30F2106());
         }
 
-        int pre = list.size();
-        list = UserMdl.getCharMdl();
-        for (int i = 0, j = list.size(); i < j; i += 1)
+        for (Char item : UserMdl.getCharMdl().getCharUsr())
         {
-            item = list.get(i);
-            menu = mi_CharPre[pre + i];
+            menu = mi_CharPre[i++];
             menu.setText(item.getP30F2104());
             menu.setToolTipText(item.getP30F2105());
             menu.setActionCommand(item.getP30F2103());
