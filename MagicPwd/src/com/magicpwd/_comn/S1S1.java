@@ -8,7 +8,7 @@ package com.magicpwd._comn;
  *
  * @author amon
  */
-public class S1S1
+public class S1S1 implements java.io.Serializable, Comparable<S1S1>
 {
 
     private String _k;
@@ -91,4 +91,14 @@ public class S1S1
     {
         return getV();
     }
+
+	@Override
+	public int compareTo(S1S1 o)
+    {
+		if (o == null)
+        {
+			return 1;
+		}
+		return this.getK().compareTo(o.getK());
+	}
 }
