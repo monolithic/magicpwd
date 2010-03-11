@@ -55,18 +55,26 @@ public class SKeyProp extends JPanel implements IPropBean
         int size = Integer.parseInt(Lang.getLang(LangRes.P30F2B00, "0"), 16);
         int indx = 3;
         S1S2 item;
+        String[] value = {"", ""};
         while (indx < size)
         {
             item = new S1S2();
             item.setV(Lang.getLang("P30F" + Integer.toHexString(11008 + (indx++)).toUpperCase(), ""));
             item.setV2(Lang.getLang("P30F" + Integer.toHexString(11008 + (indx++)).toUpperCase(), ""));
             skeyList.add(item);
+
+            if(item.getV().length() > value[0].length())
+            {
+                value[0] = item.getV();
+            }
+            if(item.getV2().length() > value[1].length())
+            {
+                value[1] = item.getV2();
+            }
         }
         SkeyModel sm = new SkeyModel();
         tb_SkeyList.setModel(sm);
-        int w = tb_SkeyList.getFontMetrics(tb_SkeyList.getFont()).stringWidth("Ctrl + Enter");
-        tb_SkeyList.getColumnModel().getColumn(0).setPreferredWidth(w);
-        tb_SkeyList.getColumnModel().getColumn(1).setPreferredWidth(300-w);
+        reSize(sm, value);
     }
 
     @Override
@@ -74,6 +82,26 @@ public class SKeyProp extends JPanel implements IPropBean
     {
         return this;
     }
+
+	private void reSize(SkeyModel model, Object[] value)
+    {
+		javax.swing.table.TableColumn column = null;
+		int headerWidth;
+		int columnWidth;
+		javax.swing.table.TableCellRenderer headerRenderer = tb_SkeyList.getTableHeader().getDefaultRenderer();
+		javax.swing.table.TableCellRenderer columnRenderer;
+		TableColumnModel columnModel = tb_SkeyList.getColumnModel();
+		for (int i = 0, j = columnModel.getColumnCount(); i < j; i++)
+        {
+			column = columnModel.getColumn(i);
+
+			headerWidth = headerRenderer.getTableCellRendererComponent(tb_SkeyList, column.getHeaderValue(), false, false, 0, i).getPreferredSize().width;
+			columnRenderer = tb_SkeyList.getDefaultRenderer(model.getColumnClass(i));
+			columnWidth = columnRenderer.getTableCellRendererComponent(tb_SkeyList, value[i], false, false, 0, i).getPreferredSize().width;
+
+			column.setPreferredWidth(Math.max(headerWidth, columnWidth));
+		}
+	}
 
     private class SkeyModel implements TableModel
     {
