@@ -50,6 +50,16 @@ public class USetProp extends JPanel implements IPropBean
     @Override
     public void initData()
     {
+        java.util.Locale[] locales = java.util.Locale.getAvailableLocales();
+		S1S2[] names = new S1S2[locales.length];
+        java.util.Locale local;
+		for (int i = 0; i < locales.length; i += 1) {
+			local = locales[i];
+			names[i] = new S1S2(local.getLanguage(), local.getDisplayName(l), local.getCountry());
+		}
+		java.util.Arrays.sort(names);
+		javax.swing.JComboBox cb = new javax.swing.JComboBox(names);
+
         for (Char item : UserMdl.getCharMdl().getCharSys())
         {
             cb_PwdsChar.addItem(item);
