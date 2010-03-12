@@ -2,10 +2,14 @@ Set oFso = CreateObject("Scripting.FileSystemObject")
 strCurPath = oFso.GetParentFolderName(Wscript.ScriptFullName)
 
 Set WshShell = WScript.CreateObject("WScript.Shell")
-WshShell.Environment("user").Item("CLASSPATH")=strCurPath & "\lib\;" & WshShell.Environment("user").Item("CLASSPATH")
-strDesktop = WshShell.SpecialFolders("Desktop")
+StrPath = "" & WshShell.Environment("user").Item("CLASSPATH")
+if InStr(LCase(StrPath), LCase(strCurPath)) < 1 Then
+WshShell.Environment("user").Item("CLASSPATH") = strCurPath & "\lib\;" & StrPath
+End If
 
-set oLnk = WshShell.CreateShortcut(strDesktop & "\Ä§·½ÃÜÂë.lnk")
+StrDesktop = WshShell.SpecialFolders("Desktop")
+
+Set oLnk = WshShell.CreateShortcut(StrDesktop & "\Ä§·½ÃÜÂë.lnk")
 oLnk.TargetPath = strCurPath & "\magicpwd.jar"
 oLnk.WindowStyle = 1
 oLnk.Hotkey = "Ctrl+Alt+M"
@@ -14,6 +18,6 @@ oLnk.Description = "Ä§·½ÃÜÂë£¬¿çÆ½Ì¨ÃÜÂë¹ÜÀíÈí¼þ£¡"
 oLnk.WorkingDirectory = strCurPath & "\"
 oLnk.Save
 
-set oUrl = WshShell.CreateShortcut(strDesktop & "\Ä§·½ÃÜÂëÊ×Ò³.url")
+Set oUrl = WshShell.CreateShortcut(StrDesktop & "\Ä§·½ÃÜÂëÊ×Ò³.url")
 oUrl.TargetPath = "http://magicpwd.com/"
 oUrl.Save
