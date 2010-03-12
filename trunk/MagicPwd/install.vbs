@@ -2,6 +2,7 @@ Set oFso = CreateObject("Scripting.FileSystemObject")
 strCurPath = oFso.GetParentFolderName(Wscript.ScriptFullName)
 
 Set WshShell = WScript.CreateObject("WScript.Shell")
+WshShell.Environment("user").Item("CLASSPATH")=strCurPath & "\lib\;" & WshShell.Environment("user").Item("CLASSPATH")
 strDesktop = WshShell.SpecialFolders("Desktop")
 
 set oLnk = WshShell.CreateShortcut(strDesktop & "\Ä§·½ÃÜÂë.lnk")
@@ -15,5 +16,4 @@ oLnk.Save
 
 set oUrl = WshShell.CreateShortcut(strDesktop & "\Ä§·½ÃÜÂëÊ×Ò³.url")
 oUrl.TargetPath = "http://magicpwd.com/"
-oUrl.Hotkey = "Ctrl+Alt+H"
 oUrl.Save
