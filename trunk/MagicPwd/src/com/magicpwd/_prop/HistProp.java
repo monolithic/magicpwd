@@ -125,6 +125,11 @@ public class HistProp extends JPanel implements IPropBean
     {
     }
 
+    @Override
+    public void saveData()
+    {
+    }
+
     public void initData(S1S2 item)
     {
         this.item = item;

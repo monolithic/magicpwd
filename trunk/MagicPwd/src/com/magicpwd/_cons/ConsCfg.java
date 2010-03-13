@@ -97,6 +97,10 @@ public interface ConsCfg
     /**
      * 
      */
+    String CFG_LANG = CFG_PRE + ".lang";
+    /**
+     * 
+     */
     String CFG_SKIN = CFG_PRE + ".skin";
     /**
      * 
@@ -129,7 +133,7 @@ public interface ConsCfg
     /**
      * 界面默认等等时间
      */
-    String CFG_SAFE_TIME = CFG_PRE + ".safe.time";
+    String CFG_STAY_TIME = CFG_PRE + ".safe.time";
     /**
      * 默认数据：是
      */
@@ -145,7 +149,7 @@ public interface ConsCfg
     /**
      * 默认数据：剪贴板数据保留时长
      */
-    String DEF_SAFE_TIME = "60";
+    String DEF_STAY_TIME = "60";
     /**
      * 
      */

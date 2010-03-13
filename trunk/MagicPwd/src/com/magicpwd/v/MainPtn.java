@@ -1046,7 +1046,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             return;
         }
         IEditItem tplt = UserMdl.getGridMdl().getItemAt(row);
-        Util.setClipboardContents(tplt.getData(), UserMdl.getCfg().getClnClp());
+        Util.setClipboardContents(tplt.getData(), UserMdl.getCfg().getStayTime());
     }
 
     @Override

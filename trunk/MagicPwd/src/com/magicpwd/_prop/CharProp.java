@@ -52,22 +52,32 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
     @Override
     public void initData()
     {
-        DefaultComboBoxModel cm_CharTplt = new DefaultComboBoxModel();
-        Char c = new Char();
-        c.setP30F2103("0");
-        c.setP30F2104(Lang.getLang(LangRes.P30F1114, "请选择"));
-        c.setP30F2105(Lang.getLang(LangRes.P30F1114, "请选择"));
-        c.setP30F2106("");
-
-        cm_CharTplt.addElement(c);
-        CharMdl cm = UserMdl.getCharMdl();
-        for (Char item : cm.getCharSys())
+        if (cb_CharTplt.getItemCount() < 1)
         {
-            cm_CharTplt.addElement(item);
-        }
-        cb_CharTplt.setModel(cm_CharTplt);
+            CharMdl cm = UserMdl.getCharMdl();
+            ls_CharList.setModel(cm);
 
-        ls_CharList.setModel(cm);
+            DefaultComboBoxModel cm_CharTplt = new DefaultComboBoxModel();
+            Char c = new Char();
+            c.setP30F2103("0");
+            c.setP30F2104(Lang.getLang(LangRes.P30F1114, "请选择"));
+            c.setP30F2105(Lang.getLang(LangRes.P30F1114, "请选择"));
+            c.setP30F2106("");
+            cm_CharTplt.addElement(c);
+            for (Char item : cm.getCharSys())
+            {
+                cm_CharTplt.addElement(item);
+            }
+            cb_CharTplt.setModel(cm_CharTplt);
+        }
+
+        charItem = new Char();
+        showInfo(charItem);
+    }
+
+    @Override
+    public void saveData()
+    {
     }
 
     @Override
@@ -336,6 +346,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
     {
         charItem = new Char();
         cb_CharTplt.setSelectedIndex(0);
+        ls_CharList.setSelectedIndex(-1);
         showInfo(charItem);
     }
 
@@ -360,23 +371,23 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         if (charItem == null)
         {
             charItem = new Char();
-            charItem.setP30F2104(name);
-            charItem.setP30F2105(tf_CharTips.getText());
-            charItem.setP30F2106(sets);
+        }
+        charItem.setP30F2104(name);
+        charItem.setP30F2105(tf_CharTips.getText());
+        charItem.setP30F2106(sets);
+        int index = ls_CharList.getSelectedIndex();
+        if (index < 0)
+        {
             UserMdl.getCharMdl().appendItem(charItem);
         }
         else
         {
-            charItem.setP30F2104(name);
-            charItem.setP30F2105(tf_CharTips.getText());
-            charItem.setP30F2106(sets);
+            UserMdl.getCharMdl().updateItemAt(index, charItem);
         }
 
-        charItem = null;
+        charItem = new Char();
         cb_CharTplt.setSelectedIndex(0);
-        tf_CharName.setText("");
-        tf_CharTips.setText("");
-        ta_CharSets.setText("");
+        showInfo(charItem);
         UserMdl.setCharUpd(true);
     }
 
@@ -389,9 +400,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
             return;
         }
 
-        DBA3000.deleteCharData(charItem);
-        int idx = ls_CharList.getSelectedIndex();
-        UserMdl.getCharMdl().removeItemAt(idx);
+        UserMdl.getCharMdl().removeItemAt(ls_CharList.getSelectedIndex());
         UserMdl.setCharUpd(true);
     }
 

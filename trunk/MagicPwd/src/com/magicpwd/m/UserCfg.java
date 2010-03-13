@@ -73,7 +73,7 @@ public final class UserCfg
         userCfg.setProperty(ConsCfg.CFG_VIEW_FIND, ConsCfg.DEF_TRUE);
         userCfg.setProperty(ConsCfg.CFG_VIEW_TOOL_LOC, "North");
 
-        userCfg.setProperty(ConsCfg.CFG_SAFE_TIME, ConsCfg.DEF_SAFE_TIME);
+        userCfg.setProperty(ConsCfg.CFG_STAY_TIME, ConsCfg.DEF_STAY_TIME);
 
         userCfg.setProperty(ConsCfg.CFG_PWDS_SIZE, ConsCfg.DEF_PWDS_SIZE);
         userCfg.setProperty(ConsCfg.CFG_PWDS_CHAR, ConsCfg.DEF_PWDS_HASH);
@@ -202,18 +202,18 @@ public final class UserCfg
     /**
      * @return the clnClp
      */
-    public final int getClnClp()
+    public final int getStayTime()
     {
-        return Integer.parseInt(userCfg.getProperty(ConsCfg.CFG_SAFE_TIME, ConsCfg.DEF_SAFE_TIME));
+        return Integer.parseInt(userCfg.getProperty(ConsCfg.CFG_STAY_TIME, ConsCfg.DEF_STAY_TIME));
     }
 
     /**
      * @param clnClp
      *            the clnClp to set
      */
-    public final void setClnClp(int clnClp)
+    public final void setStayTime(int clnClp)
     {
-        userCfg.setProperty(ConsCfg.CFG_SAFE_TIME, Integer.toString(clnClp));
+        userCfg.setProperty(ConsCfg.CFG_STAY_TIME, Integer.toString(clnClp));
     }
 
     /**
@@ -348,5 +348,15 @@ public final class UserCfg
     public final void setPwdsUpt(boolean pwdsUpt)
     {
         userCfg.setProperty(ConsCfg.CFG_PWDS_URPT, pwdsUpt ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FAIL);
+    }
+
+    public final void setUserLang(String lang)
+    {
+        userCfg.setProperty(ConsCfg.CFG_LANG, lang);
+    }
+
+    public final String getUserLang()
+    {
+        return userCfg.getProperty(ConsCfg.CFG_LANG, System.getProperty("user.language") + '_' + System.getProperty("user.country"));
     }
 }

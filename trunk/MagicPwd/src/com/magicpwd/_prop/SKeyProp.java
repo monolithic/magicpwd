@@ -78,6 +78,11 @@ public class SKeyProp extends JPanel implements IPropBean
     }
 
     @Override
+    public void saveData()
+    {
+    }
+
+    @Override
     public JPanel getPanel()
     {
         return this;
