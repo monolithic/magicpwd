@@ -10,6 +10,7 @@ import com.magicpwd._prop.InfoProp;
 import com.magicpwd._prop.KindProp;
 import com.magicpwd._prop.SKeyProp;
 import com.magicpwd._prop.TpltProp;
+import com.magicpwd._prop.USetProp;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.c.MenuEvt;
@@ -125,13 +126,13 @@ public class MdiDialog extends javax.swing.JDialog
 
         String t;
 
-//        t = Lang.getLang(LangRes.P30F1202, "常规设置");
-//        lm_PropList.addElement(new S1S2(ConsEnv.PROP_USET, t, t));
-//        USetProp up = new USetProp();
-//        up.initView();
-//        up.initLang();
-//        pl_CardPanel.add(ConsEnv.PROP_USET, up);
-//        hm_PropList.put(ConsEnv.PROP_USET, up);
+        t = Lang.getLang(LangRes.P30F1202, "常规设置");
+        lm_PropList.addElement(new S1S2(ConsEnv.PROP_USET, t, t));
+        USetProp up = new USetProp();
+        up.initView();
+        up.initLang();
+        pl_CardPanel.add(ConsEnv.PROP_USET, up);
+        hm_PropList.put(ConsEnv.PROP_USET, up);
 
         t = Lang.getLang(LangRes.P30F1203, "口令管理");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_CHAR, t, t));

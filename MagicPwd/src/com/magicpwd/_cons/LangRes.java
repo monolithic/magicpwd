@@ -505,6 +505,7 @@ public interface LangRes
     String P30F8304 = "P30F8304";// 备份数量(&N)
     String P30F8305 = "P30F8305";// 备份路径(&P)
     String P30F8306 = "P30F8306";// 剪贴板口令驻留时间（秒）
+    String P30F8307 = "P30F8307";// 语言区域
     /*口令管理*/
     String P30F8321 = "P30F8321";// 基本字符
     String P30F8322 = "P30F8322";// 显示名称

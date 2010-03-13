@@ -90,7 +90,7 @@ public class SKeyProp extends JPanel implements IPropBean
 		int columnWidth;
 		javax.swing.table.TableCellRenderer headerRenderer = tb_SkeyList.getTableHeader().getDefaultRenderer();
 		javax.swing.table.TableCellRenderer columnRenderer;
-		TableColumnModel columnModel = tb_SkeyList.getColumnModel();
+		javax.swing.table.TableColumnModel columnModel = tb_SkeyList.getColumnModel();
 		for (int i = 0, j = columnModel.getColumnCount(); i < j; i++)
         {
 			column = columnModel.getColumn(i);
