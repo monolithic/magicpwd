@@ -28,6 +28,11 @@ public interface IPropBean
     void initData();
 
     /**
+     * 界面数据保存
+     */
+    void saveData();
+
+    /**
      * 界面焦点初始化
      */
     void requestFocus();

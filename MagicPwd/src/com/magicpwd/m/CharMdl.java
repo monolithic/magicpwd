@@ -18,11 +18,13 @@ public class CharMdl extends AbstractListModel
 {
 
     private static boolean withSys;
-    private List<Char> charSys = new ArrayList<Char>(7);
-    private List<Char> charUsr = new ArrayList<Char>();
+    private List<Char> charSys;
+    private List<Char> charUsr;
 
     public CharMdl()
     {
+        charSys = new ArrayList<Char>(7);
+
         Char c = new Char();
         c.setP30F2103("10000001");
         c.setP30F2104("数字");
@@ -71,6 +73,8 @@ public class CharMdl extends AbstractListModel
         c.setP30F2105("可输入字符");
         c.setP30F2106("!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
         charSys.add(c);
+
+        charUsr = DBA3000.selectCharData();
     }
 
     @Override
@@ -101,8 +105,11 @@ public class CharMdl extends AbstractListModel
 
     public void appendItem(Char data)
     {
+        int index = charUsr.size();
+        data.setP30F2101(index);
         charUsr.add(data);
         DBA3000.saveCharData(data);
+        fireIntervalAdded(this, index, index);
     }
 
     public void updateItemAt(int index, Char data)
@@ -112,9 +119,11 @@ public class CharMdl extends AbstractListModel
             index -= charSys.size();
         }
         charUsr.set(index, data);
+        DBA3000.saveCharData(data);
+        fireContentsChanged(this, index, index);
     }
 
-    public Char removeItemAt(int index)
+    public void removeItemAt(int index)
     {
         if (withSys)
         {
@@ -122,9 +131,11 @@ public class CharMdl extends AbstractListModel
         }
         if (index < 0 || index >= charUsr.size())
         {
-            return null;
+            return;
         }
-        return charUsr.remove(index);
+        DBA3000.deleteCharData(charUsr.get(index));
+        charUsr.remove(index);
+        fireIntervalRemoved(this, index, index);
     }
 
     public void changeItemAt(int index, int toward)
@@ -149,6 +160,10 @@ public class CharMdl extends AbstractListModel
             toward = charUsr.size() - 1;
         }
         Char dst = charUsr.get(toward);
+        dst.setP30F2101(index);
+        DBA3000.saveCharData(dst);
+        src.setP30F2101(toward);
+        DBA3000.saveCharData(src);
         charUsr.set(index, dst);
         charUsr.set(toward, src);
     }

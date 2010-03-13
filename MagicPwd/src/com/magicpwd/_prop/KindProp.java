@@ -59,6 +59,11 @@ public class KindProp extends JPanel implements IPropBean
     }
 
     @Override
+    public void saveData()
+    {
+    }
+
+    @Override
     public JPanel getPanel()
     {
         return this;

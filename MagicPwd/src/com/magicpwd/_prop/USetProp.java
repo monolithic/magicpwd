@@ -15,6 +15,7 @@ import com.magicpwd._face.IPropBean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
+import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.UserMdl;
 
 /**
@@ -144,6 +145,7 @@ public class USetProp extends JPanel implements IPropBean
     @Override
     public void initData()
     {
+        UserCfg uc = UserMdl.getCfg();
         if (cb_UserLang.getItemCount() < 1)
         {
             java.util.Locale[] locales = java.util.Locale.getAvailableLocales();
@@ -157,34 +159,76 @@ public class USetProp extends JPanel implements IPropBean
             java.util.Arrays.sort(names);
             cb_UserLang.setModel(new javax.swing.DefaultComboBoxModel(names));
         }
+        cb_UserLang.setSelectedItem(uc.getUserLang());
 
-        if (cb_PwdsChar.getItemCount() < 1)
+        cb_PwdsChar.removeAllItems();
+        for (Char item : UserMdl.getCharMdl().getCharSys())
         {
-            for (Char item : UserMdl.getCharMdl().getCharSys())
+            cb_PwdsChar.addItem(item);
+            if (item.getP30F2103().equals(uc.getPwdsSet()))
             {
-                cb_PwdsChar.addItem(item);
-                if (item.getP30F2103().equals(UserMdl.getCfg().getPwdsSet()))
-                {
-                    cb_PwdsChar.setSelectedItem(item);
-                }
+                cb_PwdsChar.setSelectedItem(item);
             }
-            for (Char item : UserMdl.getCharMdl().getCharUsr())
+        }
+        for (Char item : UserMdl.getCharMdl().getCharUsr())
+        {
+            cb_PwdsChar.addItem(item);
+            if (item.getP30F2103().equals(uc.getPwdsSet()))
             {
-                cb_PwdsChar.addItem(item);
-                if (item.getP30F2103().equals(UserMdl.getCfg().getPwdsSet()))
-                {
-                    cb_PwdsChar.setSelectedItem(item);
-                }
+                cb_PwdsChar.setSelectedItem(item);
             }
         }
 
-        tf_PwdsSize.setText(UserMdl.getCfg().getPwdsLen());
-        ck_PwdsUrpt.setSelected(UserMdl.getCfg().isPwdsUpt());
+        tf_PwdsSize.setText(uc.getPwdsLen());
+        ck_PwdsUrpt.setSelected(uc.isPwdsUpt());
 
-        tf_BackCount.setText("" + UserMdl.getCfg().getBackNum());
-        tf_BackPath.setText(UserMdl.getCfg().getBackDir());
+        tf_BackCount.setText("" + uc.getBackNum());
+        tf_BackPath.setText(uc.getBackDir());
 
-        tf_StayTime.setText("" + UserMdl.getCfg().getClnClp());
+        tf_StayTime.setText("" + uc.getStayTime());
+    }
+
+    @Override
+    public void saveData()
+    {
+        UserCfg uc = UserMdl.getCfg();
+        Object obj = cb_UserLang.getSelectedItem();
+        if (obj != null && obj instanceof S1S1)
+        {
+            uc.setUserLang(((S1S1) obj).getK());
+        }
+
+        obj = cb_PwdsChar.getSelectedItem();
+        if (obj != null && obj instanceof Char)
+        {
+            uc.setPwdsSet(((Char) obj).getP30F2106());
+        }
+
+        String txt = tf_PwdsSize.getText().trim();
+        if (Util.isValidateInteger(txt))
+        {
+            uc.setPwdsLen(Integer.parseInt(txt));
+        }
+        uc.setPwdsUpt(ck_PwdsUrpt.isSelected());
+
+        txt = tf_BackCount.getText().trim();
+        if (Util.isValidateInteger(txt))
+        {
+            uc.setBackNum(Integer.parseInt(txt));
+        }
+
+        txt = tf_BackPath.getText();
+        java.io.File file = new java.io.File(txt);
+        if (file.exists() && file.isDirectory() && file.canWrite())
+        {
+            uc.setBackDir(txt);
+        }
+
+        txt = tf_StayTime.getText().trim();
+        if (Util.isValidateInteger(txt))
+        {
+            uc.setStayTime(Integer.parseInt(txt));
+        }
     }
 
     @Override
@@ -318,13 +362,13 @@ public class USetProp extends JPanel implements IPropBean
         catch (NumberFormatException exp)
         {
             Logs.exception(exp);
-            size = Integer.parseInt(ConsCfg.DEF_SAFE_TIME);
+            size = Integer.parseInt(ConsCfg.DEF_STAY_TIME);
         }
         if (size < 1 || size > 3600)
         {
             size = 60;
         }
-        UserMdl.getCfg().setClnClp(size);
+        UserMdl.getCfg().setStayTime(size);
     }
 
     private void bt_DefaultActionPerformed(java.awt.event.ActionEvent evt)
@@ -336,7 +380,7 @@ public class USetProp extends JPanel implements IPropBean
         tf_BackCount.setText(ConsCfg.DEF_BACK_SIZE);
         tf_BackPath.setText(ConsCfg.DEF_BACK_PATH);
 
-        tf_StayTime.setText(ConsCfg.DEF_SAFE_TIME);
+        tf_StayTime.setText(ConsCfg.DEF_STAY_TIME);
     }
     private javax.swing.JButton bt_BackPath;
     private javax.swing.JComboBox cb_PwdsChar;
