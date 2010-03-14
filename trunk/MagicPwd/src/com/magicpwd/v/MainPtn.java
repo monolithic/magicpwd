@@ -157,7 +157,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     }
 
     @Override
-    public void dataSKeyActionPerformed(java.awt.event.ActionEvent evt)
+    public void helpSKeyActionPerformed(java.awt.event.ActionEvent evt)
     {
         MdiDialog.getInstance(this).showProp(ConsEnv.PROP_SKEY, false);
     }
@@ -491,11 +491,11 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             return;
         }
 
-        if (Lang.showFirm(this, LangRes.P30F7A0A, "") != javax.swing.JOptionPane.YES_OPTION)
+        if (Lang.showFirm(this, LangRes.P30F7A0A, "您正在进行的操作是删除记录数据及其所有历史信息，确认继续么？") != javax.swing.JOptionPane.YES_OPTION)
         {
             return;
         }
-        if (Lang.showFirm(this, LangRes.P30F7A0B, "") != javax.swing.JOptionPane.NO_OPTION)
+        if (Lang.showFirm(this, LangRes.P30F7A0B, "确认一下您操作的正确性，要返回么？") != javax.swing.JOptionPane.NO_OPTION)
         {
             return;
         }
@@ -644,6 +644,12 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     }
 
     @Override
+    public void helpJavaActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        MdiDialog.getInstance(this).showProp(ConsEnv.PROP_JAVA, false);
+    }
+
+    @Override
     public void helpInfoActionPerformed(java.awt.event.ActionEvent evt)
     {
         StringBuffer text = new StringBuffer();
@@ -700,14 +706,14 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             boolean b = Util.checkUpdate(ConsEnv.SOFTHASH, ConsEnv.VERSIONS);
             if (b)
             {
-                if (Lang.showFirm(this, LangRes.P30F7A12, "") == javax.swing.JOptionPane.YES_OPTION)
+                if (Lang.showFirm(this, LangRes.P30F7A12, "检测到新版本，现在要下载吗？") == javax.swing.JOptionPane.YES_OPTION)
                 {
                     Desk.browse(ConsEnv.HOMEPAGE);
                 }
             }
             else
             {
-                Lang.showMesg(this, LangRes.P30F7A13, "");
+                Lang.showMesg(this, LangRes.P30F7A13, "您使用的已是最新版本。");
             }
         }
         catch (Exception exp)
@@ -784,7 +790,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             return;
         }
 
-        if (Lang.showFirm(this, LangRes.P30F7A1A, "") == javax.swing.JOptionPane.YES_OPTION)
+        if (Lang.showFirm(this, LangRes.P30F7A1A, "执行此操作后，此类别下的其它类别将会移动到根类别下，\n确认要删除此类别么？") == javax.swing.JOptionPane.YES_OPTION)
         {
             UserMdl.getTreeMdl().wRemove(path);
         }
@@ -1057,7 +1063,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         {
             return;
         }
-        if (Lang.showFirm(this, LangRes.P30F1A01, "") == javax.swing.JOptionPane.YES_OPTION)
+        if (Lang.showFirm(this, LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
         {
             UserMdl.getGridMdl().wRemove(row);
             selectNext(false);

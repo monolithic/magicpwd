@@ -28,11 +28,13 @@ import com.magicpwd.m.UserMdl;
  */
 public class TpltProp extends javax.swing.JPanel implements IPropBean
 {
+
+    private javax.swing.DefaultComboBoxModel cm_TpltList;
     private javax.swing.tree.DefaultTreeModel tm_TpltList;
     private javax.swing.tree.DefaultMutableTreeNode rootNode;
     private javax.swing.tree.DefaultMutableTreeNode currNode;
     private Tplt currTplt;
-    private boolean isUpdate = true;
+    private boolean isUpdate;
 
     public TpltProp()
     {
@@ -57,26 +59,41 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
     @Override
     public void initData()
     {
-        rootNode = new javax.swing.tree.DefaultMutableTreeNode("/");
-        java.util.List<Tplt> kindList = UserMdl.getCboxMdl().getAllItems();
-
-        java.util.List<Tplt> dataList;
-        javax.swing.tree.DefaultMutableTreeNode node;
-        for (Tplt kind : kindList)
+        if (tm_TpltList == null)
         {
-            node = new javax.swing.tree.DefaultMutableTreeNode(kind);
+            rootNode = new javax.swing.tree.DefaultMutableTreeNode("/");
 
-            dataList = DBA3000.selectTpltData(kind.getP30F1103());
-            for (Tplt item : dataList)
+            java.util.List<Tplt> dataList;
+            javax.swing.tree.DefaultMutableTreeNode node;
+            for (Tplt kind : UserMdl.getCboxMdl().getAllItems())
             {
-                node.add(new javax.swing.tree.DefaultMutableTreeNode(item));
+                node = new javax.swing.tree.DefaultMutableTreeNode(kind);
+
+                dataList = DBA3000.selectTpltData(kind.getP30F1103());
+                for (Tplt item : dataList)
+                {
+                    node.add(new javax.swing.tree.DefaultMutableTreeNode(item));
+                }
+
+                rootNode.add(node);
             }
 
-            rootNode.add(node);
+            tm_TpltList = new javax.swing.tree.DefaultTreeModel(rootNode);
+            tr_TpltList.setModel(tm_TpltList);
         }
-
-        tm_TpltList = new javax.swing.tree.DefaultTreeModel(rootNode);
-        tr_TpltList.setModel(tm_TpltList);
+        if (cm_TpltList == null)
+        {
+            cm_TpltList = new javax.swing.DefaultComboBoxModel();
+            cm_TpltList.addElement("类别");
+            cm_TpltList.addElement("文本");
+            cm_TpltList.addElement("口令");
+            cm_TpltList.addElement("链接");
+            cm_TpltList.addElement("邮件");
+            cm_TpltList.addElement("日期");
+            cm_TpltList.addElement("附注");
+            cm_TpltList.addElement("附件");
+            cb_TpltKind.setModel(cm_TpltList);
+        }
     }
 
     @Override
@@ -95,7 +112,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         pl_ItemInfo = new javax.swing.JPanel();
 
         lb_TpltKind = new javax.swing.JLabel();
-        cb_TpltKind = new javax.swing.JComboBox(new String[]{"类别", "文本", "口令", "链接", "邮件", "日期", "附注", "附件"});
+        cb_TpltKind = new javax.swing.JComboBox();
         lb_TpltName = new javax.swing.JLabel();
         tf_TpltName = new javax.swing.JTextField();
         lb_TpltTips = new javax.swing.JLabel();
@@ -263,6 +280,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         tr_TpltList.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
         tr_TpltList.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener()
         {
+
             @Override
             public void valueChanged(TreeSelectionEvent arg0)
             {
@@ -318,44 +336,44 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
             return;
         }
 
-        javax.swing.tree.DefaultMutableTreeNode n = currNode.getPreviousSibling();
+        javax.swing.tree.DefaultMutableTreeNode p = currNode;
+        javax.swing.tree.DefaultMutableTreeNode n = p.getPreviousSibling();
         if (n == null)
         {
             return;
         }
-        javax.swing.tree.DefaultMutableTreeNode o = (javax.swing.tree.DefaultMutableTreeNode) currNode.getParent();
+        javax.swing.tree.DefaultMutableTreeNode o = (javax.swing.tree.DefaultMutableTreeNode) p.getParent();
         if (o == null)
         {
             return;
         }
 
-        int i = o.getIndex(currNode);
+        int i = o.getIndex(p);
         o.remove(i--);
-        o.insert(currNode, i);
+        o.insert(p, i);
         tm_TpltList.nodeStructureChanged(o);
 
-        //tr_TpltList.setSelectionPath(currNode.get);
+        tr_TpltList.setSelectionPath(new javax.swing.tree.TreePath(p.getPath()));
 
         // 上移
-        Tplt c = (Tplt) currNode.getUserObject();
+        Tplt c = (Tplt) p.getUserObject();
         c.addP30F1101(-1);
-        DBA3000.updateTpltData(c);
+        DBA3000.saveTpltData(c);
 
         // 下移
         c = (Tplt) n.getUserObject();
         c.addP30F1101(1);
-        DBA3000.updateTpltData(c);
+        DBA3000.saveTpltData(c);
     }
 
     private void sortDActionPerformed(java.awt.event.ActionEvent evt)
     {
-        javax.swing.tree.TreePath path = tr_TpltList.getSelectionPath();
-        if (path == null)
+        if (currNode == null)
         {
             return;
         }
 
-        javax.swing.tree.DefaultMutableTreeNode p = (javax.swing.tree.DefaultMutableTreeNode) path.getLastPathComponent();
+        javax.swing.tree.DefaultMutableTreeNode p = currNode;
         javax.swing.tree.DefaultMutableTreeNode n = p.getNextSibling();
         if (n == null)
         {
@@ -372,14 +390,14 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         o.insert(p, i);
         tm_TpltList.nodeStructureChanged(o);
 
-        tr_TpltList.setSelectionPath(path);
+        tr_TpltList.setSelectionPath(new javax.swing.tree.TreePath(p.getPath()));
 
         Tplt c = (Tplt) p.getUserObject();
-        c.addP30F1101(-1);
-        DBA3000.updateTpltData(c);
-        c = (Tplt) n.getUserObject();
         c.addP30F1101(1);
-        DBA3000.updateTpltData(c);
+        DBA3000.saveTpltData(c);
+        c = (Tplt) n.getUserObject();
+        c.addP30F1101(-1);
+        DBA3000.saveTpltData(c);
     }
 
     private void apndDataActionPerformed(java.awt.event.ActionEvent evt)
@@ -415,38 +433,46 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         {
             name = name + ConsDat.SP_TPL_RS;
         }
-        javax.swing.tree.TreePath path = tr_TpltList.getSelectionPath();
-        if (path == null)
+
+        if (currTplt == null)
         {
-            Lang.showMesg(this, LangRes.P30F8A07, "请选择属性对应的模板！");
-            tr_TpltList.requestFocus();
-            return;
+            currTplt = new Tplt();
         }
-        javax.swing.tree.DefaultMutableTreeNode node = (javax.swing.tree.DefaultMutableTreeNode) path.getLastPathComponent();
+
+        currTplt.setP30F1102(indx);
+        currTplt.setP30F1105(name);
+        currTplt.setP30F1106(tf_TpltTips.getText());
+        currTplt.setP30F1107(ta_TpltDesp.getText());
 
         if (isUpdate)
         {
-            currTplt.setP30F1102(indx);
-            currTplt.setP30F1105(name);
-            currTplt.setP30F1106(tf_TpltTips.getText());
-            currTplt.setP30F1107(ta_TpltDesp.getText());
-            DBA3000.updateTpltData(currTplt);
-            tm_TpltList.nodeChanged(node);
+            DBA3000.saveTpltData(currTplt);
+            tm_TpltList.nodeChanged(currNode);
             UserMdl.getCboxMdl().wUpdate();
 
             isUpdate = false;
         }
         else
         {
-            Tplt kind = (Tplt) node.getUserObject();
-
+            javax.swing.tree.DefaultMutableTreeNode node;
+            if (indx == 0)
+            {
+                node = rootNode;
+                currTplt.setP30F1104("0");
+            }
+            else
+            {
+                if (currNode == null)
+                {
+                    Lang.showMesg(this, LangRes.P30F8A07, "请选择属性对应的模板！");
+                    tr_TpltList.requestFocus();
+                    return;
+                }
+                node = (javax.swing.tree.DefaultMutableTreeNode) tr_TpltList.getSelectionPath().getPath()[1];
+                currTplt.setP30F1104(((Tplt) node.getUserObject()).getP30F1103());
+            }
             currTplt.setP30F1101(node.getChildCount());
-            currTplt.setP30F1102(indx);
-            currTplt.setP30F1104(indx == 0 ? "0" : kind.getP30F1103());
-            currTplt.setP30F1105(name);
-            currTplt.setP30F1106(tf_TpltTips.getText());
-            currTplt.setP30F1107(ta_TpltDesp.getText());
-            DBA3000.updateTpltData(currTplt);
+            DBA3000.saveTpltData(currTplt);
             node.add(new javax.swing.tree.DefaultMutableTreeNode(currTplt));
             tm_TpltList.nodeStructureChanged(node);
 
@@ -456,9 +482,9 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
             }
         }
 
-        tf_TpltName.setText("");
-        tf_TpltTips.setText("");
-        ta_TpltDesp.setText("");
+        currTplt = new Tplt();
+        viewInfo(currTplt);
+        isUpdate = false;
     }
 
     private void dropDataActionPerformed(java.awt.event.ActionEvent evt)
@@ -481,10 +507,6 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
 
     public void tr_TpltListValueChanged(javax.swing.event.TreeSelectionEvent evt)
     {
-        if (!isUpdate)
-        {
-            return;
-        }
         javax.swing.tree.TreePath path = tr_TpltList.getSelectionPath();
         if (path == null)
         {
@@ -496,41 +518,36 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
             return;
         }
         Object obj = currNode.getUserObject();
-        if (obj instanceof Tplt)
+        if (!(obj instanceof Tplt))
         {
-            currTplt = (Tplt) currNode.getUserObject();
-            viewInfo(currTplt);
-            isUpdate = true;
+            return;
         }
+        currTplt = (Tplt) currNode.getUserObject();
+        viewInfo(currTplt);
+        isUpdate = true;
     }
 
     private void viewInfo(Tplt item)
     {
+        cb_TpltKind.setSelectedIndex(item.getP30F1102());
+        cb_TpltKind.setEnabled(item.getP30F1102() != 0);
+
         String text = item.getP30F1105();
-        if (text.startsWith(ConsDat.SP_TPL_LS))
+        if (text != null)
         {
-            text = text.substring(1);
-        }
-        if (text.endsWith(ConsDat.SP_TPL_RS))
-        {
-            text = text.substring(0, text.length() - 1);
+            text = text.replaceAll('^' + ConsDat.SP_TPL_LS + '|' + ConsDat.SP_TPL_RS + '$', "");
         }
         tf_TpltName.setText(text);
 
         text = item.getP30F1106();
-        if (text.startsWith(ConsDat.SP_TPL_LS))
+        if (text != null)
         {
-            text = text.substring(1);
-        }
-        if (text.endsWith(ConsDat.SP_TPL_RS))
-        {
-            text = text.substring(0, text.length() - 1);
+            text = text.replaceAll('^' + ConsDat.SP_TPL_LS + '|' + ConsDat.SP_TPL_RS + '$', "");
         }
         tf_TpltTips.setText(text);
 
         ta_TpltDesp.setText(item.getP30F1107());
     }
-
     private javax.swing.JPanel pl_ItemInfo;
     private javax.swing.JLabel lb_TpltKind;
     private javax.swing.JComboBox cb_TpltKind;
@@ -540,13 +557,11 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
     private javax.swing.JTextField tf_TpltTips;
     private javax.swing.JLabel lb_TpltDesp;
     private javax.swing.JTextArea ta_TpltDesp;
-
     private IcoLabel bt_ApndData;
     private IcoLabel bt_SaveData;
     private IcoLabel bt_DropData;
     private IcoLabel bt_SortU;
     private IcoLabel bt_SortD;
-
     private javax.swing.JTree tr_TpltList;
     private javax.swing.JPanel pl_ItemSort;
 }

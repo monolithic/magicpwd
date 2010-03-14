@@ -190,7 +190,7 @@ public class MiniPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
     }
 
     @Override
-    public void dataSKeyActionPerformed(java.awt.event.ActionEvent evt)
+    public void helpSKeyActionPerformed(java.awt.event.ActionEvent evt)
     {
     }
 
@@ -236,6 +236,11 @@ public class MiniPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
 
     @Override
     public void helpUpdtActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    }
+
+    @Override
+    public void helpJavaActionPerformed(java.awt.event.ActionEvent evt)
     {
     }
 

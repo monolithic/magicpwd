@@ -12,7 +12,6 @@ import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
 
 import com.magicpwd._comp.IcoLabel;
-import com.magicpwd.r.KindTN;
 import com.magicpwd._comn.Kind;
 import com.magicpwd.r.TreeCR;
 import com.magicpwd._cons.ConsEnv;
@@ -30,6 +29,8 @@ import com.magicpwd.m.UserMdl;
 public class KindProp extends JPanel implements IPropBean
 {
 
+    private javax.swing.tree.DefaultMutableTreeNode treeNode;
+    private Kind kindItem;
     private boolean isUpdate;
 
     public KindProp()
@@ -56,6 +57,9 @@ public class KindProp extends JPanel implements IPropBean
     public void initData()
     {
         tr_KindList.setModel(UserMdl.getTreeMdl());
+
+        kindItem = new Kind();
+        viewInfo(kindItem);
     }
 
     @Override
@@ -73,7 +77,7 @@ public class KindProp extends JPanel implements IPropBean
     {
         pl_ItemInfo = new javax.swing.JPanel();
 
-        tf_KindKind = new javax.swing.JTextField();
+        tf_KindKind = new javax.swing.JTextField(16);
         lb_KindKind = new javax.swing.JLabel();
         lb_KindKind.setLabelFor(tf_KindKind);
 
@@ -100,9 +104,9 @@ public class KindProp extends JPanel implements IPropBean
         hpg1.addComponent(lb_KindKind);
         hpg1.addComponent(pl_ItemSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg2.addComponent(tf_KindKind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hpg2.addComponent(tf_KindName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hpg2.addComponent(tf_KindTips, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hpg2.addComponent(tf_KindKind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hpg2.addComponent(sp_ItemDesp, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addGroup(hpg1);
@@ -111,14 +115,14 @@ public class KindProp extends JPanel implements IPropBean
         layout.setHorizontalGroup(hsg);
 
         javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
-        vpg1.addComponent(lb_KindKind);
-        vpg1.addComponent(tf_KindKind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg1.addComponent(lb_KindName);
+        vpg1.addComponent(tf_KindName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
-        vpg2.addComponent(lb_KindName);
-        vpg2.addComponent(tf_KindName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg2.addComponent(lb_KindTips);
+        vpg2.addComponent(tf_KindTips, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
-        vpg3.addComponent(lb_KindTips);
-        vpg3.addComponent(tf_KindTips, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg3.addComponent(lb_KindKind);
+        vpg3.addComponent(tf_KindKind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
         vsg1.addComponent(lb_KindDesp);
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -273,6 +277,15 @@ public class KindProp extends JPanel implements IPropBean
         tr_KindList = new javax.swing.JTree();
         tr_KindList.setCellRenderer(new TreeCR());
         tr_KindList.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        tr_KindList.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener()
+        {
+
+            @Override
+            public void valueChanged(javax.swing.event.TreeSelectionEvent evt)
+            {
+                tr_KindListValueChanged(evt);
+            }
+        });
         javax.swing.ToolTipManager.sharedInstance().registerComponent(tr_KindList);
         sp_ItemList.setViewportView(tr_KindList);
 
@@ -350,13 +363,14 @@ public class KindProp extends JPanel implements IPropBean
 
     private void sortUActionPerformed(java.awt.event.ActionEvent evt)
     {
-        TreePath path = tr_KindList.getSelectionPath();
+        javax.swing.tree.TreePath path = tr_KindList.getSelectionPath();
         if (path == null)
         {
             return;
         }
 
-        DefaultMutableTreeNode p = (DefaultMutableTreeNode) path.getLastPathComponent();
+        treeNode = (DefaultMutableTreeNode) path.getLastPathComponent();
+        DefaultMutableTreeNode p = treeNode;
         DefaultMutableTreeNode n = p.getPreviousSibling();
         if (n == null)
         {
@@ -376,10 +390,10 @@ public class KindProp extends JPanel implements IPropBean
         tr_KindList.setSelectionPath(path);
 
         Kind c = (Kind) p.getUserObject();
-        c.addC2010101(1);
+        c.addC2010101(-1);
         DBA3000.updateKindData(c);
         c = (Kind) n.getUserObject();
-        c.addC2010101(-1);
+        c.addC2010101(1);
         DBA3000.updateKindData(c);
     }
 
@@ -411,10 +425,10 @@ public class KindProp extends JPanel implements IPropBean
         tr_KindList.setSelectionPath(path);
 
         Kind c = (Kind) p.getUserObject();
-        c.addC2010101(-1);
+        c.addC2010101(1);
         DBA3000.updateKindData(c);
         c = (Kind) n.getUserObject();
-        c.addC2010101(1);
+        c.addC2010101(-1);
         DBA3000.updateKindData(c);
     }
 
@@ -448,66 +462,43 @@ public class KindProp extends JPanel implements IPropBean
 
     private void apndDataActionPerformed(java.awt.event.ActionEvent evt)
     {
+        kindItem = new Kind();
+        viewInfo(kindItem);
         isUpdate = false;
-        TreePath path = tr_KindList.getSelectionPath();
-        if (path == null)
-        {
-            return;
-        }
-        KindTN node = (KindTN) path.getLastPathComponent();
-        Kind item = (Kind) node.getUserObject();
-
-        if (item == null)
-        {
-            Lang.showMesg(this, "", "请选择您要更新的类别数据！");
-            return;
-        }
-
-        tf_KindName.setText(item.getC2010105());
-        tf_KindTips.setText(item.getC2010106());
-        ta_KindDesp.setText(item.getC2010108());
-        isUpdate = true;
     }
 
     private void saveDataActionPerformed(java.awt.event.ActionEvent evt)
     {
-        TreePath path = tr_KindList.getSelectionPath();
-        if (path == null)
-        {
-            Lang.showMesg(this, "", "请选择更新类别名称！");
-            return;
-        }
-
         String name = tf_KindName.getText();
         if (!Util.isValidate(name))
         {
-            Lang.showMesg(this, "", "类别名称不能为空！");
+            Lang.showMesg(this, LangRes.P30F8A06, "类别名称不能为空！");
             tf_KindName.requestFocus();
             return;
         }
 
-        Kind item;
+        TreePath path = tr_KindList.getSelectionPath();
+        javax.swing.tree.DefaultMutableTreeNode node = (javax.swing.tree.DefaultMutableTreeNode) (path != null ? path.getLastPathComponent() : UserMdl.getTreeMdl().getRoot());
+
+        if (kindItem == null)
+        {
+            kindItem = new Kind();
+        }
+        kindItem.setC2010105(name);
+        kindItem.setC2010106(tf_KindTips.getText());
+        kindItem.setC2010107(tf_KindKind.getText());
+        kindItem.setC2010108(ta_KindDesp.getText());
         if (isUpdate)
         {
-            KindTN node = (KindTN) path.getLastPathComponent();
-            item = (Kind) node.getUserObject();
-            item.setC2010105(name);
-            item.setC2010106(tf_KindTips.getText());
-            item.setC2010108(ta_KindDesp.getText());
-            UserMdl.getTreeMdl().wUpdate(path, item);
+            UserMdl.getTreeMdl().wUpdate(path, kindItem);
         }
         else
         {
-            item = new Kind();
-            item.setC2010105(name);
-            item.setC2010106(tf_KindTips.getText());
-            item.setC2010108(ta_KindDesp.getText());
-            UserMdl.getTreeMdl().wAppend(path, item);
+            UserMdl.getTreeMdl().wAppend(path, kindItem);
         }
 
-        tf_KindName.setText("");
-        tf_KindTips.setText("");
-        ta_KindDesp.setText("");
+        kindItem = new Kind();
+        viewInfo(kindItem);
         isUpdate = false;
     }
 
@@ -515,15 +506,35 @@ public class KindProp extends JPanel implements IPropBean
     {
         if (tr_KindList.getSelectionPath() == null)
         {
-            Lang.showMesg(MagicPwd.getCurrForm(), "", "请选择您要删除的类别数据！");
+            Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F8A04, "请选择您要删除的类别数据！");
             tr_KindList.requestFocus();
             return;
         }
 
-        if (Lang.showFirm(MagicPwd.getCurrForm(), LangRes.P30F7A1A, "") == JOptionPane.YES_OPTION)
+        if (Lang.showFirm(MagicPwd.getCurrForm(), LangRes.P30F7A1A, "执行此操作后，此类别下的其它类别将会移动到根类别下，\n确认要删除此类别么？") == JOptionPane.YES_OPTION)
         {
             UserMdl.getTreeMdl().wRemove(tr_KindList.getSelectionPath());
         }
+    }
+
+    private void tr_KindListValueChanged(javax.swing.event.TreeSelectionEvent evt)
+    {
+        javax.swing.tree.TreePath treePath = tr_KindList.getSelectionPath();
+        if (treePath == null)
+        {
+            return;
+        }
+        treeNode = (javax.swing.tree.DefaultMutableTreeNode) treePath.getLastPathComponent();
+        viewInfo((Kind) treeNode.getUserObject());
+        isUpdate = true;
+    }
+
+    private void viewInfo(Kind node)
+    {
+        tf_KindName.setText(node.getC2010105());
+        tf_KindTips.setText(node.getC2010106());
+        tf_KindKind.setText(node.getC2010107());
+        ta_KindDesp.setText(node.getC2010108());
     }
     private javax.swing.JPanel pl_ItemInfo;
     private javax.swing.JLabel lb_KindName;
