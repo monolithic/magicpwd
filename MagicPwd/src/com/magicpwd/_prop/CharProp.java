@@ -13,7 +13,6 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IPropBean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
-import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.CharMdl;
 import com.magicpwd.m.UserMdl;
 
@@ -28,6 +27,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
      * 当前编辑的字符空间
      */
     private Char charItem;
+    private boolean isUpdate;
 
     public CharProp()
     {
@@ -70,9 +70,6 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
             }
             cb_CharTplt.setModel(cm_CharTplt);
         }
-
-        charItem = new Char();
-        showInfo(charItem);
     }
 
     @Override
@@ -348,6 +345,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         cb_CharTplt.setSelectedIndex(0);
         ls_CharList.setSelectedIndex(-1);
         showInfo(charItem);
+        isUpdate = false;
     }
 
     private void saveDataActionPerformed(java.awt.event.ActionEvent evt)
@@ -375,20 +373,20 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         charItem.setP30F2104(name);
         charItem.setP30F2105(tf_CharTips.getText());
         charItem.setP30F2106(sets);
-        int index = ls_CharList.getSelectedIndex();
-        if (index < 0)
+        if (isUpdate)
         {
-            UserMdl.getCharMdl().appendItem(charItem);
+            UserMdl.getCharMdl().updateItemAt(ls_CharList.getSelectedIndex(), charItem);
         }
         else
         {
-            UserMdl.getCharMdl().updateItemAt(index, charItem);
+            UserMdl.getCharMdl().appendItem(charItem);
         }
 
         charItem = new Char();
         cb_CharTplt.setSelectedIndex(0);
         showInfo(charItem);
         UserMdl.setCharUpd(true);
+        isUpdate = false;
     }
 
     private void dropDataActionPerformed(java.awt.event.ActionEvent evt)
@@ -399,9 +397,16 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
             ls_CharList.requestFocus();
             return;
         }
+        if (Lang.showFirm(this, LangRes.P30F8A09, "确认要删除此数据吗，此操作将不可恢复？") != javax.swing.JOptionPane.YES_OPTION)
+        {
+            return;
+        }
 
         UserMdl.getCharMdl().removeItemAt(ls_CharList.getSelectedIndex());
+        charItem = new Char();
+        showInfo(charItem);
         UserMdl.setCharUpd(true);
+        isUpdate = false;
     }
 
     private void ls_CharListValueChanged(javax.swing.event.ListSelectionEvent evt)
@@ -414,6 +419,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
 
         cb_CharTplt.setSelectedIndex(0);
         showInfo(charItem);
+        isUpdate = true;
     }
 
     private void cb_CharTpltItemStateChanged(java.awt.event.ItemEvent evt)

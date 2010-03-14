@@ -72,7 +72,7 @@ public interface MenuEvt
 
     void dataExptActionPerformed(java.awt.event.ActionEvent evt);
 
-    void dataSKeyActionPerformed(java.awt.event.ActionEvent evt);
+    void helpSKeyActionPerformed(java.awt.event.ActionEvent evt);
 
     void userSwitchActionPerformed(java.awt.event.ActionEvent evt);
 
@@ -91,6 +91,8 @@ public interface MenuEvt
     void helpMailActionPerformed(java.awt.event.ActionEvent evt);
 
     void helpUpdtActionPerformed(java.awt.event.ActionEvent evt);
+
+    void helpJavaActionPerformed(java.awt.event.ActionEvent evt);
 
     void helpInfoActionPerformed(java.awt.event.ActionEvent evt);
 }

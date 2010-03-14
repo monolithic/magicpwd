@@ -217,7 +217,7 @@ public class HistProp extends JPanel implements IPropBean
             return;
         }
 
-        if (Lang.showFirm(MagicPwd.getCurrForm(), LangRes.P30FAA11, "") != JOptionPane.YES_OPTION)
+        if (Lang.showFirm(MagicPwd.getCurrForm(), LangRes.P30FAA11, "确认要删除选中的历史信息么，此操作不可恢复？") != JOptionPane.YES_OPTION)
         {
             return;
         }
@@ -232,7 +232,7 @@ public class HistProp extends JPanel implements IPropBean
         {
             return;
         }
-        if (Lang.showFirm(MagicPwd.getCurrForm(), LangRes.P30FAA12, "") != JOptionPane.YES_OPTION)
+        if (Lang.showFirm(MagicPwd.getCurrForm(), LangRes.P30FAA12, "确认要删除此记录的所有历史信息吗，此操作将不可恢复？") != JOptionPane.YES_OPTION)
         {
             return;
         }
@@ -249,7 +249,7 @@ public class HistProp extends JPanel implements IPropBean
             return;
         }
 
-        if (Lang.showFirm(MagicPwd.getCurrForm(), LangRes.P30FAA13, "") != JOptionPane.YES_OPTION)
+        if (Lang.showFirm(MagicPwd.getCurrForm(), LangRes.P30FAA13, "为了确保您的数据安全，此操作仅复制一份选中的数据为最新数据，\n确认要执行此操作么？") != JOptionPane.YES_OPTION)
         {
             return;
         }

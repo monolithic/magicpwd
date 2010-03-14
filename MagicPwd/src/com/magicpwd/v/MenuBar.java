@@ -543,19 +543,6 @@ public class MenuBar extends JMenuBar
             }
         });
         mu_DataMenu.add(mi_DataKind);
-
-        mi_DataSKey = new javax.swing.JMenuItem();
-        mi_DataSKey.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0));
-        mi_DataSKey.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                mi_DataSKeyActionPerformed(evt);
-            }
-        });
-        mu_DataMenu.add(mi_DataSKey);
     }
 
     private void initUserMenu()
@@ -732,6 +719,8 @@ public class MenuBar extends JMenuBar
         });
         mu_HelpMenu.add(mi_HelpHelp);
 
+        mu_HelpMenu.addSeparator();
+
         mi_HelpSite = new javax.swing.JMenuItem();
         mi_HelpSite.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0));
         mi_HelpSite.addActionListener(new java.awt.event.ActionListener()
@@ -770,6 +759,35 @@ public class MenuBar extends JMenuBar
             }
         });
         mu_HelpMenu.add(mi_HelpUpdt);
+
+        mu_HelpMenu.addSeparator();
+
+        mi_HelpSKey = new javax.swing.JMenuItem();
+        mi_HelpSKey.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0));
+        mi_HelpSKey.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                mi_DataSKeyActionPerformed(evt);
+            }
+        });
+        mu_HelpMenu.add(mi_HelpSKey);
+
+        mi_HelpJava = new javax.swing.JMenuItem();
+        mi_HelpJava.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                mi_DataJavaActionPerformed(evt);
+            }
+        });
+        mu_HelpMenu.add(mi_HelpJava);
+
+        mu_HelpMenu.addSeparator();
 
         mi_HelpInfo = new javax.swing.JMenuItem();
         mi_HelpInfo.addActionListener(new java.awt.event.ActionListener()
@@ -848,7 +866,7 @@ public class MenuBar extends JMenuBar
 
         Lang.setWText(mi_DataKind, LangRes.P30F7622, "类别管理");
 
-        Lang.setWText(mi_DataSKey, LangRes.P30F7623, "快捷键");
+        Lang.setWText(mi_HelpSKey, LangRes.P30F7623, "快捷键");
     }
 
     private void initUserLang()
@@ -887,6 +905,8 @@ public class MenuBar extends JMenuBar
 
         Lang.setWText(mi_HelpUpdt, LangRes.P30F762D, "检测更新");
 
+        Lang.setWText(mi_HelpJava, LangRes.P30F7631, "Java环境");
+
         Lang.setWText(mi_HelpInfo, LangRes.P30F762E, "关于");
     }
 
@@ -912,7 +932,12 @@ public class MenuBar extends JMenuBar
 
     private void mi_DataSKeyActionPerformed(java.awt.event.ActionEvent evt)
     {
-        me_MenuEvent.dataSKeyActionPerformed(evt);
+        me_MenuEvent.helpSKeyActionPerformed(evt);
+    }
+
+    private void mi_DataJavaActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        me_MenuEvent.helpJavaActionPerformed(evt);
     }
     private javax.swing.JMenu mu_FileMenu;
     private javax.swing.JMenuItem mi_FileApnd;
@@ -948,7 +973,6 @@ public class MenuBar extends JMenuBar
     private javax.swing.JMenuItem mi_DataChar;
     private javax.swing.JMenuItem mi_DataTplt;
     private javax.swing.JMenuItem mi_DataKind;
-    private javax.swing.JMenuItem mi_DataSKey;
     private javax.swing.JMenu mu_UserMenu;
     private javax.swing.JMenuItem mi_UserSwitch;
     private javax.swing.JMenuItem mi_UserCreate;
@@ -961,5 +985,7 @@ public class MenuBar extends JMenuBar
     private javax.swing.JMenuItem mi_HelpSite;
     private javax.swing.JMenuItem mi_HelpMail;
     private javax.swing.JMenuItem mi_HelpUpdt;
+    private javax.swing.JMenuItem mi_HelpSKey;
+    private javax.swing.JMenuItem mi_HelpJava;
     private javax.swing.JMenuItem mi_HelpInfo;
 }

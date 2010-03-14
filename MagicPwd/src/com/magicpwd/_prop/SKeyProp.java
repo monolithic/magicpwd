@@ -3,13 +3,6 @@
  */
 package com.magicpwd._prop;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.JPanel;
-import javax.swing.event.TableModelListener;
-import javax.swing.table.TableModel;
-
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IPropBean;
@@ -19,10 +12,10 @@ import com.magicpwd._util.Lang;
  * @author Amon
  * 
  */
-public class SKeyProp extends JPanel implements IPropBean
+public class SKeyProp extends javax.swing.JPanel implements IPropBean
 {
 
-    private List<S1S2> skeyList;
+    private java.util.List<S1S2> skeyList;
 
     public SKeyProp()
     {
@@ -51,30 +44,37 @@ public class SKeyProp extends JPanel implements IPropBean
     @Override
     public void initData()
     {
-        skeyList = new ArrayList<S1S2>();
-        int size = Integer.parseInt(Lang.getLang(LangRes.P30F2B00, "0"), 16);
-        int indx = 3;
-        S1S2 item;
-        String[] value = {"", ""};
-        while (indx < size)
+        if (skeyList == null)
         {
-            item = new S1S2();
-            item.setV(Lang.getLang("P30F" + Integer.toHexString(11008 + (indx++)).toUpperCase(), ""));
-            item.setV2(Lang.getLang("P30F" + Integer.toHexString(11008 + (indx++)).toUpperCase(), ""));
-            skeyList.add(item);
+            skeyList = new java.util.ArrayList<S1S2>();
+            int size = Integer.parseInt(Lang.getLang(LangRes.P30F2B00, "0"), 16);
+            int indx = 3;
+            S1S2 item;
+            String[] value =
+            {
+                "", ""
+            };
+            while (indx < size)
+            {
+                item = new S1S2();
+                item.setV(Lang.getLang("P30F" + Integer.toHexString(11008 + (indx++)).toUpperCase(), ""));
+                item.setV2(Lang.getLang("P30F" + Integer.toHexString(11008 + (indx++)).toUpperCase(), ""));
+                skeyList.add(item);
 
-            if(item.getV().length() > value[0].length())
-            {
-                value[0] = item.getV();
+                if (item.getV().length() > value[0].length())
+                {
+                    value[0] = item.getV();
+                }
+                if (item.getV2().length() > value[1].length())
+                {
+                    value[1] = item.getV2();
+                }
             }
-            if(item.getV2().length() > value[1].length())
-            {
-                value[1] = item.getV2();
-            }
+            SkeyModel sm = new SkeyModel();
+            tb_SkeyList.setModel(sm);
+            tb_SkeyList.setRowSorter(new javax.swing.table.TableRowSorter<SkeyModel>(sm));
+            reSize(sm, value);
         }
-        SkeyModel sm = new SkeyModel();
-        tb_SkeyList.setModel(sm);
-        reSize(sm, value);
     }
 
     @Override
@@ -83,36 +83,36 @@ public class SKeyProp extends JPanel implements IPropBean
     }
 
     @Override
-    public JPanel getPanel()
+    public javax.swing.JPanel getPanel()
     {
         return this;
     }
 
-	private void reSize(SkeyModel model, Object[] value)
+    private void reSize(SkeyModel model, Object[] value)
     {
-		javax.swing.table.TableColumn column = null;
-		int headerWidth;
-		int columnWidth;
-		javax.swing.table.TableCellRenderer headerRenderer = tb_SkeyList.getTableHeader().getDefaultRenderer();
-		javax.swing.table.TableCellRenderer columnRenderer;
-		javax.swing.table.TableColumnModel columnModel = tb_SkeyList.getColumnModel();
-		for (int i = 0, j = columnModel.getColumnCount(); i < j; i++)
+        javax.swing.table.TableColumn column = null;
+        int headerWidth;
+        int columnWidth;
+        javax.swing.table.TableCellRenderer headerRenderer = tb_SkeyList.getTableHeader().getDefaultRenderer();
+        javax.swing.table.TableCellRenderer columnRenderer;
+        javax.swing.table.TableColumnModel columnModel = tb_SkeyList.getColumnModel();
+        for (int i = 0, j = columnModel.getColumnCount(); i < j; i++)
         {
-			column = columnModel.getColumn(i);
+            column = columnModel.getColumn(i);
 
-			headerWidth = headerRenderer.getTableCellRendererComponent(tb_SkeyList, column.getHeaderValue(), false, false, 0, i).getPreferredSize().width;
-			columnRenderer = tb_SkeyList.getDefaultRenderer(model.getColumnClass(i));
-			columnWidth = columnRenderer.getTableCellRendererComponent(tb_SkeyList, value[i], false, false, 0, i).getPreferredSize().width;
+            headerWidth = headerRenderer.getTableCellRendererComponent(tb_SkeyList, column.getHeaderValue(), false, false, 0, i).getPreferredSize().width;
+            columnRenderer = tb_SkeyList.getDefaultRenderer(model.getColumnClass(i));
+            columnWidth = columnRenderer.getTableCellRendererComponent(tb_SkeyList, value[i], false, false, 0, i).getPreferredSize().width;
 
-			column.setPreferredWidth(Math.max(headerWidth, columnWidth));
-		}
-	}
+            column.setPreferredWidth(Math.max(headerWidth, columnWidth));
+        }
+    }
 
-    private class SkeyModel implements TableModel
+    private class SkeyModel implements javax.swing.table.TableModel
     {
 
         @Override
-        public void addTableModelListener(TableModelListener l)
+        public void addTableModelListener(javax.swing.event.TableModelListener l)
         {
         }
 
@@ -154,7 +154,7 @@ public class SKeyProp extends JPanel implements IPropBean
         }
 
         @Override
-        public void removeTableModelListener(TableModelListener l)
+        public void removeTableModelListener(javax.swing.event.TableModelListener l)
         {
         }
 

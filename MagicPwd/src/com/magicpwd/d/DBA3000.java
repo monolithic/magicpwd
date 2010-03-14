@@ -818,6 +818,7 @@ public class DBA3000
 
             dba.addTable(DBC3000.P30F1100);
             dba.addColumn(DBC3000.P30F1101);
+            dba.addColumn(DBC3000.P30F1102);
             dba.addColumn(DBC3000.P30F1103);
             dba.addColumn(DBC3000.P30F1104);
             dba.addColumn(DBC3000.P30F1105);
@@ -835,6 +836,7 @@ public class DBA3000
             {
                 item = new Tplt();
                 item.setP30F1101(rest.getInt(DBC3000.P30F1101));
+                item.setP30F1102(rest.getInt(DBC3000.P30F1102));
                 item.setP30F1103(rest.getString(DBC3000.P30F1103));
                 item.setP30F1104(rest.getString(DBC3000.P30F1104));
                 item.setP30F1105(rest.getString(DBC3000.P30F1105));
@@ -889,7 +891,7 @@ public class DBA3000
         }
     }
 
-    public static boolean updateTpltData(Tplt tpltItem)
+    public static boolean saveTpltData(Tplt tpltItem)
     {
         DBAccess dba = new DBAccess();
 
@@ -918,8 +920,6 @@ public class DBA3000
                 dba.addParam(DBC3000.P30F1109, DBC3000.SQL_NOW, false);
                 dba.executeInsert();
             }
-
-            dba.executeUpdate();
             return true;
         }
         catch (Exception exp)

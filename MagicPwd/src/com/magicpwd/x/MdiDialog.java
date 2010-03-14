@@ -7,6 +7,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IPropBean;
 import com.magicpwd._prop.CharProp;
 import com.magicpwd._prop.InfoProp;
+import com.magicpwd._prop.JavaProp;
 import com.magicpwd._prop.KindProp;
 import com.magicpwd._prop.SKeyProp;
 import com.magicpwd._prop.TpltProp;
@@ -14,6 +15,7 @@ import com.magicpwd._prop.USetProp;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.c.MenuEvt;
+import com.magicpwd.m.UserMdl;
 
 /**
  * 软件设置对话框
@@ -72,7 +74,25 @@ public class MdiDialog extends javax.swing.JDialog
         pl_CardPanel.setLayout(cl_CardLayout);
 
         bt_Discard = new javax.swing.JButton();
+        bt_Discard.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                bt_DiscardActionPerformed(evt);
+            }
+        });
         bt_Confirm = new javax.swing.JButton();
+        bt_Confirm.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                bt_ConfirmActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this.getContentPane());
         this.getContentPane().setLayout(layout);
@@ -166,6 +186,14 @@ public class MdiDialog extends javax.swing.JDialog
         pl_CardPanel.add(ConsEnv.PROP_SKEY, sp);
         hm_PropList.put(ConsEnv.PROP_SKEY, sp);
 
+        t = Lang.getLang(LangRes.P30F1209, "Java环境");
+        lm_PropList.addElement(new S1S2(ConsEnv.PROP_JAVA, t, t));
+        JavaProp jp = new JavaProp();
+        jp.initView();
+        jp.initLang();
+        pl_CardPanel.add(ConsEnv.PROP_JAVA, jp);
+        hm_PropList.put(ConsEnv.PROP_JAVA, jp);
+
 //        t = Lang.getLang(LangRes.P30F1207, "历史查看");
 //        lm_PropList.addElement(new S1S2(ConsEnv.PROP_HIST, t, t));
 //        HistProp hp = new HistProp();
@@ -198,7 +226,7 @@ public class MdiDialog extends javax.swing.JDialog
         int idx = 0;
         for (int i = 0, j = lm_PropList.getSize(); i < j; i += 1)
         {
-            if (panelKey.equals(lm_PropList.get(i)))
+            if (lm_PropList.get(i).equals(panelKey))
             {
                 idx = i;
                 break;
@@ -210,6 +238,7 @@ public class MdiDialog extends javax.swing.JDialog
         hm_PropList.get(panelKey).initData();
         if (!md_Dialog.isVisible())
         {
+            Util.centerForm(this, MagicPwd.getCurrForm());
             md_Dialog.setVisible(true);
         }
     }
@@ -232,6 +261,19 @@ public class MdiDialog extends javax.swing.JDialog
         lb_HeadPanel.setText(kvItem.getV());
         setTitle(kvItem.getV());
         hm_PropList.get(kvItem.getK()).initData();
+    }
+
+    private void bt_ConfirmActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        setVisible(false);
+        dispose();
+        UserMdl.getCfg().saveCfg();
+    }
+
+    private void bt_DiscardActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        setVisible(false);
+        dispose();
     }
     private javax.swing.JList ls_PropList;
     private javax.swing.JPanel pl_CardPanel;

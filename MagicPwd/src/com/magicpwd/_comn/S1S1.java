@@ -65,7 +65,6 @@ public class S1S1 implements java.io.Serializable, Comparable<S1S1>
             return false;
         }
 
-        System.out.println(getK()+".equals("+o+")="+getK().equals(o));
         if (o instanceof S1S1)
         {
             S1S1 t = (S1S1) o;

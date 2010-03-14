@@ -767,7 +767,7 @@ public final class Util
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                menuEvt.dataSKeyActionPerformed(evt);
+                menuEvt.helpSKeyActionPerformed(evt);
             }
         });
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0), ConsEnv.EVENT_DATA_SKEY);
