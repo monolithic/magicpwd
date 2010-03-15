@@ -546,10 +546,10 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
     @Override
     public void viewTop1ActionPerformed(java.awt.event.ActionEvent evt)
     {
-        boolean b = !UserMdl.getCfg().isViewTop();
+        boolean b = !UserMdl.getUserCfg().isViewTop();
         MagicPwd.getCurrForm().setAlwaysOnTop(b);
 
-        UserMdl.getCfg().setViewTop(b);
+        UserMdl.getUserCfg().setViewTop(b);
     }
 
     @Override

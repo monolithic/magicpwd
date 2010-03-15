@@ -124,7 +124,6 @@ public class MailDlg implements Runnable
             sub.open(Folder.READ_ONLY);
             NodeMdl temp = new NodeMdl(connect, sub);
             node.add(temp);
-            System.out.println(sub.getFullName());
             if ((sub.getType() & Folder.HOLDS_FOLDERS) != 0)
             {
                 listFolders(connect, temp, sub);
@@ -419,7 +418,6 @@ public class MailDlg implements Runnable
         {
             showNotice("正在加载邮件内容…");
             MailInf mail = tableMode.getMailInf(tb_MailMsgs.getSelectedRow());
-            System.out.println(mail.getContentType());
             ta_MailBody.setContentType(mail.getContentType());
             tf_MailHead.setText(mail.getSubject());
             tf_MailUser.setText(mail.getMailAddress("TO"));

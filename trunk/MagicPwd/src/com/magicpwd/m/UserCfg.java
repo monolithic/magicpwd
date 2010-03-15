@@ -55,7 +55,7 @@ public final class UserCfg
         try
         {
             FileOutputStream fos = new FileOutputStream(new File(ConsEnv.DIR_DAT, ConsEnv.FILE_DATA + ".config"));
-            userCfg.store(fos, "MagicPwd Configure File!");
+            userCfg.store(fos, "MagicPwd User Configure File!");
             fos.close();
         }
         catch (Exception exp)

@@ -6,9 +6,6 @@ package com.magicpwd._mail;
 import com.magicpwd._util.Logs;
 import java.util.ArrayList;
 import java.util.List;
-import javax.mail.FetchProfile;
-import javax.mail.Folder;
-import javax.mail.Message;
 import javax.swing.table.AbstractTableModel;
 
 /**

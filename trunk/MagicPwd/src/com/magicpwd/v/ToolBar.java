@@ -100,7 +100,7 @@ public class ToolBar extends JToolBar
 
         bt_PropSide = new javax.swing.JToggleButton();
         bt_PropSide.setIcon(Util.getIcon(ConsEnv.ICON_TOOL_TAIL));
-        bt_PropSide.setSelected(UserMdl.getCfg().isEditWnd());
+        bt_PropSide.setSelected(UserMdl.getUserCfg().isEditWnd());
         bt_PropSide.addActionListener(new java.awt.event.ActionListener()
         {
 

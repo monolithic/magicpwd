@@ -35,7 +35,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
     private GuidItem itemData;
     private IGridView gridView;
     private EditBean dataEdit;
-    private BtnLabel bl_ReadMail;
+    private BtnLabel bt_ReadMail;
 
     public GuidBean(IGridView view)
     {
@@ -63,9 +63,9 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit = new javax.swing.JPanel();
         pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
-        bl_ReadMail = new BtnLabel();
-        bl_ReadMail.setIcon(Util.getIcon(ConsEnv.ICON_PROP_UPDT));
-        bl_ReadMail.addActionListener(new java.awt.event.ActionListener()
+        bt_ReadMail = new BtnLabel();
+        bt_ReadMail.setIcon(Util.getIcon(ConsEnv.ICON_MAIL_OPEN));
+        bt_ReadMail.addActionListener(new java.awt.event.ActionListener()
         {
 
             @Override
@@ -74,7 +74,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
                 readMailActionPerformed(evt);
             }
         });
-        pl_PropEdit.add(bl_ReadMail);
+        pl_PropEdit.add(bt_ReadMail);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -122,8 +122,8 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         Lang.setWText(lb_PropName, LangRes.P30F1301, "时间");
         Lang.setWText(lb_PropData, LangRes.P30F1302, "模板");
 
-        Lang.setWText(bl_ReadMail, LangRes.P30F1519, "&M");
-        Lang.setWTips(bl_ReadMail, LangRes.P30F151A, "检测邮件(Alt + M)");
+        Lang.setWText(bt_ReadMail, LangRes.P30F1519, "&M");
+        Lang.setWTips(bt_ReadMail, LangRes.P30F151A, "检测邮件(Alt + M)");
 
         dataEdit.initLang();
     }
@@ -136,8 +136,8 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         cb_PropData.setModel(UserMdl.getCboxMdl());
 
         String kind = itemData.getSpec(IEditItem.SPEC_GUID_TPLT);
-        bl_ReadMail.setVisible(Util.isValidate(kind));
-        bl_ReadMail.setEnabled(ConsDat.HASH_MAIL.equals(kind));
+        bt_ReadMail.setVisible(Util.isValidate(kind));
+        bt_ReadMail.setEnabled(ConsDat.HASH_MAIL.equals(kind));
     }
 
     @Override
@@ -217,7 +217,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         {
             return;
         }
-        String type = UserMdl.getCfg().getCfg(host + ".type");
+        String type = UserMdl.getMailCfg().getCfg(host + ".type");
         if (!Util.isValidate(type))
         {
             return;
@@ -227,14 +227,14 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         connect.setUsername(user);
 
         // 读取服务器配置
-        String cfg = UserMdl.getCfg().getCfg(type + '.' + host);
+        String cfg = UserMdl.getMailCfg().getCfg(type + '.' + host);
         if (!Util.isValidate(cfg))
         {
             return;
         }
 
         // 服务器地址
-        String[] arr = (cfg + "::").split(":");
+        String[] arr = (cfg + ":::").split(":");
         connect.setHost(arr[0]);
 
         // 服务器端口
@@ -245,8 +245,9 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         }
 
         // 是否需要身份认证
-        cfg = arr[1].trim().toLowerCase();
-        connect.setAuth("true".equals(cfg));
+        connect.setAuth("true".equalsIgnoreCase(arr[2].trim().toLowerCase()));
+        // 是否需要安全认证
+        connect.setJssl("true".equalsIgnoreCase(arr[3].trim().toLowerCase()));
 
         mailDlg.setVisible(true);
         mailDlg.append(connect, "");

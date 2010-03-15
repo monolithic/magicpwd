@@ -223,7 +223,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     public void copyDataActionPerformed(java.awt.event.ActionEvent evt)
     {
         pf_PropData.selectAll();
-        Util.setClipboardContents(new String(pf_PropData.getPassword()), UserMdl.getCfg().getStayTime());
+        Util.setClipboardContents(new String(pf_PropData.getPassword()), UserMdl.getUserCfg().getStayTime());
     }
 
     private void bt_PwdsUcfgActionPerformed(java.awt.event.ActionEvent evt)

@@ -110,7 +110,7 @@ public class MagicPwd
         }
 
         // 用户配置文件加载
-        UserMdl.loadCfg();
+        UserMdl.loadUserCfg();
 
         // 界面风格设置
         try
@@ -126,7 +126,7 @@ public class MagicPwd
                     // 用户偏好风格设置
                     try
                     {
-                        String lafClass = UserMdl.getCfg().getCfg(ConsCfg.CFG_SKIN, ConsCfg.DEF_SKIN).trim();
+                        String lafClass = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN, ConsCfg.DEF_SKIN).trim();
                         if (lafClass.length() < 1 || ConsCfg.DEF_SKIN.equalsIgnoreCase(lafClass))
                         {
                             lafClass = javax.swing.UIManager.getSystemLookAndFeelClassName();
@@ -139,7 +139,7 @@ public class MagicPwd
                     }
 
                     // 显示登录或注册界面
-                    UserSign us = new UserSign(UserMdl.getCfg().getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.SIGN_IN : ConsEnv.SIGN_UP);
+                    UserSign us = new UserSign(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.SIGN_IN : ConsEnv.SIGN_UP);
                     us.setConfrmBackCall(new IBackCall()
                     {
 
@@ -197,7 +197,7 @@ public class MagicPwd
 
             DBAccess.exit();
 
-            java.io.File backFile = Util.nextBackupFile(UserMdl.getCfg().getBackNum());
+            java.io.File backFile = Util.nextBackupFile(UserMdl.getUserCfg().getBackNum());
             Jzip.zip(backFile, new java.io.File(ConsEnv.DIR_DAT));
         }
         catch (Exception exp)

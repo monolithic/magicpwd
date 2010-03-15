@@ -131,7 +131,7 @@ public class UserSign extends JPanel
                 initSignInView();
                 initSignInLang();
                 // 显示上次登录用户
-                String name = UserMdl.getCfg().getCfg(ConsCfg.CFG_USER_LAST);
+                String name = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_USER_LAST);
                 if (Util.isValidate(name))
                 {
                     tf_UserName.setText(name);
@@ -1187,7 +1187,7 @@ public class UserSign extends JPanel
             tf_UserName.requestFocus();
             return;
         }
-        String ul = UserMdl.getCfg().getCfg(ConsCfg.CFG_USER, "");
+        String ul = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_USER, "");
         if (ul.indexOf(un + ',') >= 0)
         {
             Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");

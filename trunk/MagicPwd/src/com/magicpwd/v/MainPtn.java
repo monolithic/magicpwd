@@ -90,14 +90,14 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         mainMenu = new MenuBar();
         mainMenu.initView();
         mainMenu.setMenuEvent(this);
-        mainMenu.setVisible(UserMdl.getCfg().isMenuViw());
+        mainMenu.setVisible(UserMdl.getUserCfg().isMenuViw());
         this.setJMenuBar(mainMenu);
 
         mainTool = new ToolBar();
         mainTool.initView();
         mainTool.setToolEvent(this);
-        mainTool.setVisible(UserMdl.getCfg().isToolViw());
-        this.getContentPane().add(mainTool, UserMdl.getCfg().getToolLoc());
+        mainTool.setVisible(UserMdl.getUserCfg().isToolViw());
+        this.getContentPane().add(mainTool, UserMdl.getUserCfg().getToolLoc());
 
         this.pack();
         this.setIconImage(Util.getLogo());
@@ -115,9 +115,9 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
 
     public void initData()
     {
-        if (UserMdl.getCfg().isEditViw())
+        if (UserMdl.getUserCfg().isEditViw())
         {
-            showPropEdit(UserMdl.getCfg().isEditWnd());
+            showPropEdit(UserMdl.getUserCfg().isEditWnd());
         }
 
         Util.addHideAction(pl_KeysBase.getActionMap(), pl_KeysBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
@@ -294,11 +294,11 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     @Override
     public void editFindActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (!UserMdl.getCfg().isFindViw())
+        if (!UserMdl.getUserCfg().isFindViw())
         {
             mainFind.setVisible(true);
             mainMenu.setViewFindSelected(true);
-            UserMdl.getCfg().setFindViw(true);
+            UserMdl.getUserCfg().setFindViw(true);
         }
         mainFind.requestFocus();
     }
@@ -466,12 +466,12 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
 
         tb_LastIndx = 0;
         gm.clear();
-        if (!UserMdl.getCfg().isEditViw())
+        if (!UserMdl.getUserCfg().isEditViw())
         {
             mainMenu.setViewPropSelected(true);
             mainMenu.setViewSideSelected(true);
-            UserMdl.getCfg().setEditViw(true);
-            UserMdl.getCfg().setEditWnd(true);
+            UserMdl.getUserCfg().setEditViw(true);
+            UserMdl.getUserCfg().setEditWnd(true);
             showPropEdit(true);
         }
         showPropEdit(gm.initGuid(), true);
@@ -867,7 +867,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     @Override
     public void userSecretActionPerformed(java.awt.event.ActionEvent evt)
     {
-        String skey = UserMdl.getCfg().getCfg(ConsCfg.CFG_USER_SKEY);
+        String skey = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_USER_SKEY);
         if (skey != null && skey.length() == 224)
         {
             Lang.showMesg(this, LangRes.P30F7A28, "您已经设置过安全口令！");
@@ -891,43 +891,43 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     @Override
     public void viewFindActionPerformed(java.awt.event.ActionEvent evt)
     {
-        boolean b = !UserMdl.getCfg().isFindViw();
+        boolean b = !UserMdl.getUserCfg().isFindViw();
         mainFind.setVisible(b);
         this.pack();
 
         mainMenu.setViewFindSelected(b);
-        UserMdl.getCfg().setFindViw(b);
+        UserMdl.getUserCfg().setFindViw(b);
     }
 
     @Override
     public void viewInfoActionPerformed(java.awt.event.ActionEvent evt)
     {
-        boolean b = !UserMdl.getCfg().isInfoViw();
+        boolean b = !UserMdl.getUserCfg().isInfoViw();
         mainInfo.setVisible(b);
         this.pack();
 
         mainMenu.setViewInfoSelected(b);
-        UserMdl.getCfg().setInfoViw(b);
+        UserMdl.getUserCfg().setInfoViw(b);
     }
 
     @Override
     public void viewMenuActionPerformed(java.awt.event.ActionEvent evt)
     {
-        boolean b = !UserMdl.getCfg().isMenuViw();
+        boolean b = !UserMdl.getUserCfg().isMenuViw();
         mainMenu.setVisible(b);
         this.pack();
 
         mainMenu.setViewMenuSelected(b);
-        UserMdl.getCfg().setMenuViw(b);
+        UserMdl.getUserCfg().setMenuViw(b);
     }
 
     @Override
     public void viewEditActionPerformed(java.awt.event.ActionEvent evt)
     {
-        boolean b = !UserMdl.getCfg().isEditViw();
+        boolean b = !UserMdl.getUserCfg().isEditViw();
         if (b)
         {
-            showPropEdit(UserMdl.getCfg().isEditWnd());
+            showPropEdit(UserMdl.getUserCfg().isEditWnd());
         }
         else
         {
@@ -937,22 +937,22 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                 mp_MpsDialog.setVisible(b);
             }
         }
-        UserMdl.getCfg().setEditViw(b);
+        UserMdl.getUserCfg().setEditViw(b);
     }
 
     @Override
     public void viewSideActionPerformed(java.awt.event.ActionEvent evt)
     {
-        boolean b = !UserMdl.getCfg().isEditWnd();
+        boolean b = !UserMdl.getUserCfg().isEditWnd();
 
-        // if (!UserMdl.getCfg().isEditViw())
+        // if (!UserMdl.getUserCfg().isEditViw())
         // {
         // mainMenu.setViewSideSelected(false);
         // mainTool.setPropSideSelected(false);
         // return;
         // }
 
-        if (UserMdl.getCfg().isEditViw())
+        if (UserMdl.getUserCfg().isEditViw())
         {
             showPropEdit(b);
         }
@@ -961,27 +961,27 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         mainMenu.setViewSideSelected(b);
         mainTool.setPropSideSelected(b);
 
-        UserMdl.getCfg().setEditWnd(b);
+        UserMdl.getUserCfg().setEditWnd(b);
     }
 
     @Override
     public void viewToolActionPerformed(java.awt.event.ActionEvent evt)
     {
-        boolean b = !UserMdl.getCfg().isToolViw();
+        boolean b = !UserMdl.getUserCfg().isToolViw();
         mainTool.setVisible(b);
         this.pack();
 
         mainMenu.setViewToolSelected(b);
-        UserMdl.getCfg().setToolViw(b);
+        UserMdl.getUserCfg().setToolViw(b);
     }
 
     @Override
     public void viewTop1ActionPerformed(java.awt.event.ActionEvent evt)
     {
-        boolean b = !UserMdl.getCfg().isViewTop();
+        boolean b = !UserMdl.getUserCfg().isViewTop();
         MagicPwd.getCurrForm().setAlwaysOnTop(b);
 
-        UserMdl.getCfg().setViewTop(b);
+        UserMdl.getUserCfg().setViewTop(b);
     }
 
     @Override
@@ -1052,7 +1052,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             return;
         }
         IEditItem tplt = UserMdl.getGridMdl().getItemAt(row);
-        Util.setClipboardContents(tplt.getData(), UserMdl.getCfg().getStayTime());
+        Util.setClipboardContents(tplt.getData(), UserMdl.getUserCfg().getStayTime());
     }
 
     @Override
@@ -1544,7 +1544,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
 
     private void showPropEdit()
     {
-        if (UserMdl.getCfg().isEditViw())
+        if (UserMdl.getUserCfg().isEditViw())
         {
             editBean[ConsDat.INDX_INFO].initData(null);
             cl_CardProp.show(pl_CardProp, ConsEnv.BEAN_INFO);
@@ -1554,7 +1554,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
 
     private void showPropEdit(IEditItem tplt, boolean focus)
     {
-        if (UserMdl.getCfg().isEditViw())
+        if (UserMdl.getUserCfg().isEditViw())
         {
             editBean[tplt.getType()].initData(tplt);
             cl_CardProp.show(pl_CardProp, ConsEnv.BEAN_PROP + tplt.getType());
@@ -1562,7 +1562,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             {
                 editBean[tplt.getType()].requestFocus();
             }
-            if (UserMdl.getCfg().isEditWnd())
+            if (UserMdl.getUserCfg().isEditWnd())
             {
                 mp_MpsDialog.setTitle(getPropName(tplt.getType()));
             }
@@ -1704,12 +1704,12 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             return true;
         }
 
-        if (!UserMdl.getCfg().isEditViw())
+        if (!UserMdl.getUserCfg().isEditViw())
         {
             mainMenu.setViewPropSelected(true);
             mainMenu.setViewSideSelected(true);
-            UserMdl.getCfg().setEditViw(true);
-            UserMdl.getCfg().setEditWnd(true);
+            UserMdl.getUserCfg().setEditViw(true);
+            UserMdl.getUserCfg().setEditWnd(true);
             showPropEdit(true);
         }
 

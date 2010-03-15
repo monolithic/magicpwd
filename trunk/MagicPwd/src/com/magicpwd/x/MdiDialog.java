@@ -267,7 +267,7 @@ public class MdiDialog extends javax.swing.JDialog
     {
         setVisible(false);
         dispose();
-        UserMdl.getCfg().saveCfg();
+        UserMdl.getUserCfg().saveCfg();
     }
 
     private void bt_DiscardActionPerformed(java.awt.event.ActionEvent evt)
