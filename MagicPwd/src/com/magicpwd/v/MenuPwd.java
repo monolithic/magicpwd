@@ -253,7 +253,7 @@ public class MenuPwd extends JPopupMenu
             }
         });
         add(mi_UrptMenu);
-        mi_UrptMenu.setSelected(UserMdl.getCfg().isPwdsUpt());
+        mi_UrptMenu.setSelected(UserMdl.getUserCfg().isPwdsUpt());
     }
 
     private void initSizeLang()

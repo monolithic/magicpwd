@@ -87,7 +87,7 @@ final class UserSec implements Key
      */
     public final String getCode()
     {
-        return UserMdl.getCfg().getCfg(user(ConsCfg.CFG_USER_CODE));
+        return UserMdl.getUserCfg().getCfg(user(ConsCfg.CFG_USER_CODE));
     }
 
     final char[] getMask()
@@ -107,7 +107,7 @@ final class UserSec implements Key
     final boolean signIn() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
             IllegalBlockSizeException, BadPaddingException
     {
-        UserCfg ui = UserMdl.getCfg();
+        UserCfg ui = UserMdl.getUserCfg();
 
         // 用户登录身份认证
         String text = ui.getCfg(user(ConsCfg.CFG_USER_INFO));
@@ -167,7 +167,7 @@ final class UserSec implements Key
     final boolean signPk(String oldPwds, String newPwds) throws NoSuchAlgorithmException, NoSuchPaddingException,
             InvalidKeyException, IllegalBlockSizeException, BadPaddingException
     {
-        UserCfg ui = UserMdl.getCfg();
+        UserCfg ui = UserMdl.getUserCfg();
 
         // 已有口令校验
         pwds = oldPwds;
@@ -212,7 +212,7 @@ final class UserSec implements Key
      */
     final boolean signFp(String usrName, StringBuffer secPwds) throws Exception
     {
-        UserCfg ui = UserMdl.getCfg();
+        UserCfg ui = UserMdl.getUserCfg();
 
         // 用户登录身份认证
         String text = ui.getCfg(user(ConsCfg.CFG_USER_SKEY));
@@ -243,12 +243,12 @@ final class UserSec implements Key
         this.name = usrName;
         this.pwds = new String(generateUserChar());
         byte[] t = signInDigest();
-        UserMdl.getCfg().setCfg(user(ConsCfg.CFG_USER_INFO), Util.bytesToString(t, true));
+        UserMdl.getUserCfg().setCfg(user(ConsCfg.CFG_USER_INFO), Util.bytesToString(t, true));
 
         this.keys = cipherDigest();
         aes.init(Cipher.ENCRYPT_MODE, this);
         t = aes.doFinal(temp);
-        UserMdl.getCfg().setCfg(user(ConsCfg.CFG_USER_PKEY), Util.bytesToString(t, true));
+        UserMdl.getUserCfg().setCfg(user(ConsCfg.CFG_USER_PKEY), Util.bytesToString(t, true));
 
         System.arraycopy(temp, 16, keys, 0, temp.length - 16);
         mask = new String(temp, 0, 16).toCharArray();
@@ -285,7 +285,7 @@ final class UserSec implements Key
         Cipher aes = Cipher.getInstance(ConsEnv.NAME_CIPHER);
         aes.init(Cipher.ENCRYPT_MODE, this);
         t = aes.doFinal(t);
-        UserMdl.getCfg().setCfg(user(ConsCfg.CFG_USER_SKEY), sKey + Util.bytesToString(t, true));
+        UserMdl.getUserCfg().setCfg(user(ConsCfg.CFG_USER_SKEY), sKey + Util.bytesToString(t, true));
 
         this.keys = temp;
         this.pwds = null;
@@ -305,7 +305,7 @@ final class UserSec implements Key
     final boolean signUp() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
             IllegalBlockSizeException, BadPaddingException
     {
-        UserCfg uc = UserMdl.getCfg();
+        UserCfg uc = UserMdl.getUserCfg();
         if (Util.isValidate(uc.getCfg(user(ConsCfg.CFG_USER_INFO))))
         {
             return false;

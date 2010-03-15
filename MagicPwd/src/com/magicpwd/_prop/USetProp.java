@@ -145,7 +145,7 @@ public class USetProp extends JPanel implements IPropBean
     @Override
     public void initData()
     {
-        UserCfg uc = UserMdl.getCfg();
+        UserCfg uc = UserMdl.getUserCfg();
         if (cb_UserLang.getItemCount() < 1)
         {
             java.util.Locale[] locales = java.util.Locale.getAvailableLocales();
@@ -191,7 +191,7 @@ public class USetProp extends JPanel implements IPropBean
     @Override
     public void saveData()
     {
-        UserCfg uc = UserMdl.getCfg();
+        UserCfg uc = UserMdl.getUserCfg();
         Object obj = cb_UserLang.getSelectedItem();
         if (obj != null && obj instanceof S1S1)
         {
@@ -283,7 +283,7 @@ public class USetProp extends JPanel implements IPropBean
     {
         // 口令空间
         S1S3 item = (S1S3) cb_PwdsChar.getSelectedItem();
-        UserMdl.getCfg().setPwdsSet(item != null ? item.getK() : ConsCfg.DEF_PWDS_CHAR);
+        UserMdl.getUserCfg().setPwdsSet(item != null ? item.getK() : ConsCfg.DEF_PWDS_CHAR);
 
         // 口令长度
         String text = tf_PwdsSize.getText();
@@ -301,10 +301,10 @@ public class USetProp extends JPanel implements IPropBean
         {
             size = 8;
         }
-        UserMdl.getCfg().setPwdsLen(size);
+        UserMdl.getUserCfg().setPwdsLen(size);
 
         // 可否重复
-        UserMdl.getCfg().setPwdsUpt(ck_PwdsUrpt.isSelected());
+        UserMdl.getUserCfg().setPwdsUpt(ck_PwdsUrpt.isSelected());
 
         // 备份数量
         text = tf_BackCount.getText();
@@ -321,7 +321,7 @@ public class USetProp extends JPanel implements IPropBean
         {
             size = 3;
         }
-        UserMdl.getCfg().setBackNum(size);
+        UserMdl.getUserCfg().setBackNum(size);
 
         // 备份路径
         if (backPath == null)
@@ -351,7 +351,7 @@ public class USetProp extends JPanel implements IPropBean
         {
             backPath = new java.io.File(ConsCfg.DEF_BACK_PATH);
         }
-        UserMdl.getCfg().setBackDir(backPath.getPath());
+        UserMdl.getUserCfg().setBackDir(backPath.getPath());
 
         // 安全时间
         text = tf_StayTime.getText();
@@ -368,7 +368,7 @@ public class USetProp extends JPanel implements IPropBean
         {
             size = 60;
         }
-        UserMdl.getCfg().setStayTime(size);
+        UserMdl.getUserCfg().setStayTime(size);
     }
 
     private void bt_DefaultActionPerformed(java.awt.event.ActionEvent evt)

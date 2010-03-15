@@ -281,7 +281,7 @@ public final class Util
 
     public static File nextBackupFile(int size) throws Exception
     {
-        String dir = UserMdl.getCfg().getBackDir();
+        String dir = UserMdl.getUserCfg().getBackDir();
         File bak = new File(dir);
         if (!bak.isDirectory())
         {
@@ -1111,7 +1111,7 @@ public final class Util
 
                 MagicPwd.getCurrForm().setVisible(wasVisible);
             }
-            UserMdl.getCfg().setCfg(ConsCfg.CFG_SKIN, isSystem ? ConsCfg.DEF_SKIN : lafClass);
+            UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN, isSystem ? ConsCfg.DEF_SKIN : lafClass);
         }
         catch (ClassNotFoundException exp)
         {

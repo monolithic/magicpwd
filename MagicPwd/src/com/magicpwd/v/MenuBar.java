@@ -115,7 +115,7 @@ public class MenuBar extends JMenuBar
 
     public void setUserSecretEnabled()
     {
-        String skey = UserMdl.getCfg().getCfg(ConsCfg.CFG_USER_SKEY);
+        String skey = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_USER_SKEY);
         mi_UserSecret.setEnabled(skey == null || skey.length() != 224);
     }
 
@@ -389,7 +389,7 @@ public class MenuBar extends JMenuBar
                 me_MenuEvent.viewEditActionPerformed(evt);
             }
         });
-        mi_ViewProp.setSelected(UserMdl.getCfg().isEditViw());
+        mi_ViewProp.setSelected(UserMdl.getUserCfg().isEditViw());
         mu_ViewMenu.add(mi_ViewProp);
 
         mi_ViewSide = new javax.swing.JCheckBoxMenuItem();
@@ -403,7 +403,7 @@ public class MenuBar extends JMenuBar
                 me_MenuEvent.viewSideActionPerformed(evt);
             }
         });
-        mi_ViewSide.setSelected(UserMdl.getCfg().isEditWnd());
+        mi_ViewSide.setSelected(UserMdl.getUserCfg().isEditWnd());
         mu_ViewMenu.add(mi_ViewSide);
 
         mu_ViewMenu.addSeparator();
@@ -419,7 +419,7 @@ public class MenuBar extends JMenuBar
                 me_MenuEvent.viewFindActionPerformed(evt);
             }
         });
-        mi_ViewFind.setSelected(UserMdl.getCfg().isFindViw());
+        mi_ViewFind.setSelected(UserMdl.getUserCfg().isFindViw());
         mu_ViewMenu.add(mi_ViewFind);
 
         mi_ViewMenu = new javax.swing.JCheckBoxMenuItem();
@@ -433,7 +433,7 @@ public class MenuBar extends JMenuBar
                 me_MenuEvent.viewMenuActionPerformed(evt);
             }
         });
-        mi_ViewMenu.setSelected(UserMdl.getCfg().isMenuViw());
+        mi_ViewMenu.setSelected(UserMdl.getUserCfg().isMenuViw());
         mu_ViewMenu.add(mi_ViewMenu);
 
         mi_ViewTool = new javax.swing.JCheckBoxMenuItem();
@@ -447,7 +447,7 @@ public class MenuBar extends JMenuBar
                 me_MenuEvent.viewToolActionPerformed(evt);
             }
         });
-        mi_ViewTool.setSelected(UserMdl.getCfg().isToolViw());
+        mi_ViewTool.setSelected(UserMdl.getUserCfg().isToolViw());
         mu_ViewMenu.add(mi_ViewTool);
 
         mi_ViewInfo = new javax.swing.JCheckBoxMenuItem();
@@ -461,7 +461,7 @@ public class MenuBar extends JMenuBar
                 me_MenuEvent.viewInfoActionPerformed(evt);
             }
         });
-        mi_ViewInfo.setSelected(UserMdl.getCfg().isInfoViw());
+        mi_ViewInfo.setSelected(UserMdl.getUserCfg().isInfoViw());
         mu_ViewMenu.add(mi_ViewInfo);
     }
 
@@ -606,7 +606,7 @@ public class MenuBar extends JMenuBar
         mu_SkinMenu = new javax.swing.JMenu();
         add(mu_SkinMenu);
 
-        String userSkin = UserMdl.getCfg().getCfg(ConsCfg.CFG_SKIN, ConsCfg.DEF_SKIN);
+        String userSkin = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN, ConsCfg.DEF_SKIN);
         boolean checked = ConsCfg.DEF_SKIN.equalsIgnoreCase(userSkin);
         java.awt.event.ActionListener listener = new java.awt.event.ActionListener()
         {

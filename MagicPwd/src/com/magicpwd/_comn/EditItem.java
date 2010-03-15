@@ -204,9 +204,9 @@ public class EditItem implements IEditItem
                 break;
             case ConsDat.INDX_PWDS:
                 spec = new ArrayList<String>(3);
-                spec.add(UserMdl.getCfg().getPwdsSet());
-                spec.add(UserMdl.getCfg().getPwdsLen());
-                spec.add(UserMdl.getCfg().getPwdsUpt());
+                spec.add(UserMdl.getUserCfg().getPwdsSet());
+                spec.add(UserMdl.getUserCfg().getPwdsLen());
+                spec.add(UserMdl.getUserCfg().getPwdsUpt());
                 break;
             case ConsDat.INDX_FILE:
                 spec = new ArrayList<String>(1);

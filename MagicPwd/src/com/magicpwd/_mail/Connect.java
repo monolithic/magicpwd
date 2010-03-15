@@ -4,6 +4,7 @@
 package com.magicpwd._mail;
 
 import com.magicpwd._util.Util;
+import java.security.Security;
 import java.util.Properties;
 import javax.mail.Authenticator;
 import javax.mail.PasswordAuthentication;
@@ -23,8 +24,14 @@ public class Connect
     private String host;
     private int port = -1;
     private boolean auth;
+    private boolean jssl;
     private String username;
     private String password;
+
+    static
+    {
+        Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+    }
 
     public Connect()
     {
@@ -175,7 +182,7 @@ public class Connect
         prop.put(Util.format("mail.{0}.rsetbeforequit", getProtocol()), "true");
         prop.put("mail.store.protocol", isAuth() ? getProtocol() + 's' : getProtocol());
 
-        if (isAuth())
+        if (isJssl())
         {
             prop.put(Util.format("mail.{0}.starttls.enable", getProtocol()), "true");// 使用SSL验证
             prop.put(Util.format("mail.{0}.socketFactory.port", getProtocol()), getPort());//重新设定端口
@@ -194,7 +201,7 @@ public class Connect
 
     public Store getStore() throws Exception
     {
-        Session session = Session.getDefaultInstance(getProperties(), new Authenticator()
+        Session session = Session.getDefaultInstance(getProperties(), isAuth() ? new Authenticator()
         {
 
             @Override
@@ -202,12 +209,28 @@ public class Connect
             {
                 return new PasswordAuthentication(getUsername(), getPassword());
             }
-        });
+        } : null);
         Store store = session.getStore(getURLName());
         if (!store.isConnected())
         {
             store.connect();
         }
         return store;
+    }
+
+    /**
+     * @return the jssl
+     */
+    public boolean isJssl()
+    {
+        return jssl;
+    }
+
+    /**
+     * @param jssl the jssl to set
+     */
+    public void setJssl(boolean jssl)
+    {
+        this.jssl = jssl;
     }
 }
