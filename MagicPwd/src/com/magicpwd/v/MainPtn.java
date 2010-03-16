@@ -19,7 +19,6 @@ import com.magicpwd._bean.TextBean;
 import com.magicpwd._comn.GuidItem;
 import com.magicpwd._comn.Kind;
 import com.magicpwd._comn.S1S2;
-import com.magicpwd._comn.S1S3;
 import com.magicpwd._comn.Keys;
 import com.magicpwd._comn.MetaItem;
 import com.magicpwd._cons.ConsCfg;
@@ -1721,7 +1720,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     {
         javax.swing.tree.TreePath path = tr_GuidTree.getSelectionPath();
         KindTN node = (KindTN) path.getLastPathComponent();
-        S1S3 item = (S1S3) node.getUserObject();
+        Kind kind = (Kind) node.getUserObject();
 
         javax.swing.JFileChooser jfc = new javax.swing.JFileChooser();
         jfc.setMultiSelectionEnabled(false);
@@ -1747,6 +1746,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             }
             catch (Exception exp)
             {
+                Logs.exception(exp);
                 Lang.showMesg(this, LangRes.P30F7A22, "数据导出失败，无法在指定文件创建文档！");
                 return false;
             }
@@ -1766,7 +1766,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         {
             Jcsv csv = new Jcsv(file);
             java.util.ArrayList<java.util.ArrayList<String>> data = new java.util.ArrayList<java.util.ArrayList<String>>();
-            int size = UserMdl.getGridMdl().wExport(data, item.getK());
+            int size = UserMdl.getGridMdl().wExport(data, kind.getC2010103());
             csv.saveFile(data);
             Lang.showMesg(this, LangRes.P30F7A25, "成功导出数据个数：{0}", size + "");
         }
@@ -1782,7 +1782,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     {
         javax.swing.tree.TreePath path = tr_GuidTree.getSelectionPath();
         KindTN node = (KindTN) path.getLastPathComponent();
-        S1S3 item = (S1S3) node.getUserObject();
+        Kind kind = (Kind) node.getUserObject();
 
         javax.swing.JFileChooser jfc = new javax.swing.JFileChooser();
         jfc.setMultiSelectionEnabled(false);
@@ -1814,14 +1814,15 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             Jcsv csv = new Jcsv(file);
             csv.setEe("");
             java.util.ArrayList<java.util.ArrayList<String>> data = csv.readFile();
-            int size = UserMdl.getGridMdl().wImport(data, item.getK());
-            UserMdl.getListMdl().listName(item.getK());
-            Lang.showMesg(this, LangRes.P30F7A07, "", "" + size);
+            int size = UserMdl.getGridMdl().wImport(data, kind.getC2010103());
+            UserMdl.getListMdl().listName(kind.getC2010103());
+            Lang.showMesg(this, LangRes.P30F7A07, "成功导入数据个数：{0}", "" + size);
+
         }
         catch (Exception exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(this, LangRes.P30F7A08, "");
+            Lang.showMesg(this, LangRes.P30F7A08, "TXT文档格式解析出错，数据导入失败！");
         }
         return true;
     }
