@@ -22,7 +22,6 @@ import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditItem;
 import com.magicpwd._util.Lang;
-import com.magicpwd._util.Hash;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.DBA3000;
@@ -365,7 +364,6 @@ public class GridMdl extends DefaultTableModel
         int size = 0;
         int indx = 0;
         EditItem tplt;
-        String text;
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(ConsEnv.VIEW_DATE);
         for (ArrayList<String> temp : data)
         {
@@ -386,36 +384,28 @@ public class GridMdl extends DefaultTableModel
             indx = 0;
             keys.setDefault();
             ls_ItemList.clear();
+            keys.setP30F0105(UserMdl.getUserCode());
 
             // Guid
-            tplt = new EditItem();
-            tplt.setType(ConsDat.INDX_GUID);
-            text = temp.get(indx++);
-            tplt.setName(sdf.format(Util.stringToDate(text, '-', ':', ' ').getTime()));
-            tplt.setData(ConsDat.HASH_TPLT);
-            ls_ItemList.add(tplt);
+            GuidItem guid = new GuidItem();
+            guid.setTime(new java.sql.Timestamp(Util.stringToDate(temp.get(indx++), '-', ':', ' ').getTimeInMillis()));
+            guid.setData(kindHash);
+            ls_ItemList.add(guid);
 
-            // MetaItem
-            tplt = new EditItem();
-            tplt.setType(ConsDat.INDX_META);
-            text = temp.get(indx++);
-            tplt.setName(text);
-            keys.setP30F0109(text);
-            text = temp.get(indx++);
-            tplt.setData(text);
-            keys.setP30F010A(text);
-            ls_ItemList.add(tplt);
+            // Meta
+            MetaItem meta = new MetaItem();
+            meta.setName(temp.get(indx++));
+            meta.setData(temp.get(indx++));
+            ls_ItemList.add(meta);
 
-            // Past
-            tplt = new EditItem();
-            tplt.setType(ConsDat.INDX_HINT);
-            text = temp.get(indx++);
-            tplt.setData(text);
-            keys.setP30F010D(new java.sql.Timestamp(Util.stringToDate(text, '-', ':', ' ').getTimeInMillis()));
-            text = temp.get(indx++);
-            tplt.setName(text);
-            keys.setP30F010F(text);
-            ls_ItemList.add(tplt);
+            // Logo
+            ls_ItemList.add(new LogoItem());
+
+            // Hint
+            HintItem hint = new HintItem();
+            hint.setTime(new java.sql.Timestamp(Util.stringToDate(temp.get(indx++), '-', ':', ' ').getTimeInMillis()));
+            hint.setName(temp.get(indx++));
+            ls_ItemList.add(hint);
 
             while (indx < temp.size())
             {
@@ -426,10 +416,6 @@ public class GridMdl extends DefaultTableModel
                 ls_ItemList.add(tplt);
             }
 
-            keys.setP30F0102(ConsDat.PWDS_MODE_1);
-            keys.setP30F0104(Hash.hash(false));
-            keys.setP30F0109(kindHash);
-            keys.setP30F010D(new java.sql.Timestamp(System.currentTimeMillis()));
             enCrypt(keys, ls_ItemList);
             DBA3000.savePwdsData(keys);
             size += 1;
@@ -471,13 +457,16 @@ public class GridMdl extends DefaultTableModel
             tplt = ls_ItemList.get(indx++);
             temp.add(tplt.getName());
 
-            // MetaItem
+            // Meta
             tplt = ls_ItemList.get(indx++);
             temp.add(tplt.getName());
             temp.add(tplt.getData());
             ls_ItemList.add(tplt);
 
-            // Past
+            // Logo
+            tplt = ls_ItemList.get(indx++);
+
+            // Hint
             tplt = ls_ItemList.get(indx++);
             temp.add(tplt.getData());
             temp.add(tplt.getName());

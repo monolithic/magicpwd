@@ -87,7 +87,7 @@ public interface ConsDat
      */
     String HASH_NOTE = "qqqqqaavaqddvafs";
     /**
-     * 目录信息：模块节点
+     * 目录信息：模板节点
      */
     String HASH_TPLT = "qqqqqaacbrrtysww";
     /**
