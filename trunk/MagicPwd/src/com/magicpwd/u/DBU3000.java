@@ -37,6 +37,8 @@ public class DBU3000
 
             Connection connDst = DriverManager.getConnection("jdbc:hsqldb:file:" + ConsEnv.DIR_DAT + "/amon");
             Statement statDst = connDst.createStatement();
+
+            copyPwds(statSrc1, statSrc2, statDst);
         }
         catch (Exception exp)
         {
@@ -47,9 +49,12 @@ public class DBU3000
     private void copyPwds(Statement statSrc1, Statement statSrc2, Statement statDst) throws Exception
     {
         ResultSet result = statSrc1.executeQuery("");
+        String lastHash = "";
         while (result.next())
         {
+            
         }
+        result.close();
     }
 
     public static void main(String[] args)
