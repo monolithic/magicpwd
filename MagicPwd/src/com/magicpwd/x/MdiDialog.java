@@ -6,6 +6,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IPropBean;
 import com.magicpwd._prop.CharProp;
+import com.magicpwd._prop.HistProp;
 import com.magicpwd._prop.InfoProp;
 import com.magicpwd._prop.JavaProp;
 import com.magicpwd._prop.KindProp;
@@ -25,6 +26,7 @@ public class MdiDialog extends javax.swing.JDialog
 {
 
     private static MdiDialog md_Dialog;
+    private String lastPanel;
     private java.awt.CardLayout cl_CardLayout;
     private javax.swing.DefaultListModel lm_PropList;
     private java.util.HashMap<String, IPropBean> hm_PropList;
@@ -93,11 +95,21 @@ public class MdiDialog extends javax.swing.JDialog
                 bt_ConfirmActionPerformed(evt);
             }
         });
+        bt_Applied = new javax.swing.JButton();
+        bt_Applied.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                bt_AppliedActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this.getContentPane());
         this.getContentPane().setLayout(layout);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg1.addComponent(pl_CardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        hpg1.addComponent(pl_CardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         hpg1.addComponent(lb_HeadPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
         hsg1.addComponent(sp_PropList, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE);
@@ -115,7 +127,7 @@ public class MdiDialog extends javax.swing.JDialog
         javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
         vsg1.addComponent(lb_HeadPanel);
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        vsg1.addComponent(pl_CardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        vsg1.addComponent(pl_CardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
         vpg1.addComponent(sp_PropList, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE);
         vpg1.addGroup(javax.swing.GroupLayout.Alignment.LEADING, vsg1);
@@ -194,13 +206,13 @@ public class MdiDialog extends javax.swing.JDialog
         pl_CardPanel.add(ConsEnv.PROP_JAVA, jp);
         hm_PropList.put(ConsEnv.PROP_JAVA, jp);
 
-//        t = Lang.getLang(LangRes.P30F1207, "历史查看");
-//        lm_PropList.addElement(new S1S2(ConsEnv.PROP_HIST, t, t));
-//        HistProp hp = new HistProp();
-//        hp.initView();
-//        hp.initLang();
-//        pl_CardPanel.add(ConsEnv.PROP_HIST, hp);
-//        hm_PropList.put(ConsEnv.PROP_HIST, hp);
+        t = Lang.getLang(LangRes.P30F1207, "历史查看");
+        lm_PropList.addElement(new S1S2(ConsEnv.PROP_HIST, t, t));
+        HistProp hp = new HistProp();
+        hp.initView();
+        hp.initLang();
+        pl_CardPanel.add(ConsEnv.PROP_HIST, hp);
+        hm_PropList.put(ConsEnv.PROP_HIST, hp);
 
         t = Lang.getLang(LangRes.P30F1208, "关于软件");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_INFO, t, t));
@@ -236,6 +248,13 @@ public class MdiDialog extends javax.swing.JDialog
         cl_CardLayout.show(pl_CardPanel, panelKey);
         ls_PropList.setSelectedIndex(idx);
         hm_PropList.get(panelKey).initData();
+
+        if (lastPanel != null)
+        {
+            hm_PropList.get(lastPanel).saveData();
+        }
+        lastPanel = panelKey;
+
         if (!md_Dialog.isVisible())
         {
             Util.centerForm(this, MagicPwd.getCurrForm());
@@ -261,6 +280,16 @@ public class MdiDialog extends javax.swing.JDialog
         lb_HeadPanel.setText(kvItem.getV());
         setTitle(kvItem.getV());
         hm_PropList.get(kvItem.getK()).initData();
+        if (lastPanel != null)
+        {
+            hm_PropList.get(lastPanel).saveData();
+        }
+        lastPanel = kvItem.getK();
+    }
+
+    private void bt_AppliedActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        hm_PropList.get(lastPanel).saveData();
     }
 
     private void bt_ConfirmActionPerformed(java.awt.event.ActionEvent evt)
@@ -277,6 +306,7 @@ public class MdiDialog extends javax.swing.JDialog
     }
     private javax.swing.JList ls_PropList;
     private javax.swing.JPanel pl_CardPanel;
+    private javax.swing.JButton bt_Applied;
     private javax.swing.JButton bt_Confirm;
     private javax.swing.JButton bt_Discard;
     private javax.swing.JLabel lb_HeadPanel;
