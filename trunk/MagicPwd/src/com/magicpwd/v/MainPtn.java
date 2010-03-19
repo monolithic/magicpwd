@@ -1072,7 +1072,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     @Override
     public void histViewActionPerformed(java.awt.event.ActionEvent evt)
     {
-        S1S2 item = (S1S2) ls_GuidList.getSelectedValue();
+        Keys item = (Keys) ls_GuidList.getSelectedValue();
         if (item == null)
         {
             return;
