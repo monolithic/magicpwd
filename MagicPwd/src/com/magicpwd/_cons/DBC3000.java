@@ -175,7 +175,7 @@ public interface DBC3000
      */
     String P30F0107 = "P30F0107";
     /**
-     * 口令标题
+     * 模板索引
      */
     String P30F0108 = "P30F0108";
     int P30F0108_SIZE = 16;

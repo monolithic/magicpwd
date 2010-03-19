@@ -46,7 +46,7 @@ public interface ConsEnv
      * 安全信息：文本编码
      */
     String FILE_ENCODING = "UTF-8";
-    String FILE_ATTACHMENT = ".wma";
+    String FILE_ATTACHMENT = ".ama";
     String FILE_DATA = "amon";
     String FILE_BACK = FILE_DATA + "_{0}.backup";
     String FILE_DATE = "yyyyMMdd-HHmmss";
