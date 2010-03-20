@@ -24,10 +24,9 @@ import javax.swing.tree.TreePath;
  * 
  * @author Amon
  */
-public class MailDlg implements Runnable
+public class MailDlg extends javax.swing.JFrame implements Runnable
 {
 
-    private java.awt.Window window;
     private TreeModel treeModel;
     private DefaultMutableTreeNode rootNode;
     private MailMdl tableMode;
@@ -35,12 +34,6 @@ public class MailDlg implements Runnable
 
     public MailDlg()
     {
-        window = new javax.swing.JFrame();
-    }
-
-    public MailDlg(javax.swing.JFrame frame)
-    {
-        window = new javax.swing.JDialog(frame);
     }
 
     @Override
@@ -78,7 +71,7 @@ public class MailDlg implements Runnable
         tb_MailMsgs.setRowSorter(new TableRowSorter(tableMode));
     }
 
-    public boolean append(Connect connect, String folder)
+    public void append(Connect connect, String folder)
     {
         Store store = null;
         try
@@ -88,18 +81,11 @@ public class MailDlg implements Runnable
             NodeMdl model = new NodeMdl(connect, f);
             rootNode.add(model);
             listFolders(connect, model, f);
-            TreePath path = new TreePath(new DefaultMutableTreeNode[]
-                    {
-                        rootNode, model
-                    });
-            tr_MailBoxs.setSelectionPath(path);
-//            tr_MailBoxs.fireTreeExpanded(path);
-            return true;
+            selectPath(model);
         }
         catch (Exception exp)
         {
             Logs.exception(exp);
-            return false;
         }
         finally
         {
@@ -115,6 +101,17 @@ public class MailDlg implements Runnable
                 }
             }
         }
+    }
+
+    private synchronized void selectPath(NodeMdl mdl)
+    {
+        TreePath path = new TreePath(new DefaultMutableTreeNode[]
+                {
+                    rootNode, mdl
+                });
+        tr_MailBoxs.setSelectionPath(path);
+        tr_MailBoxs.expandPath(path);
+        tr_MailBoxs.revalidate();
     }
 
     private static void listFolders(Connect connect, DefaultMutableTreeNode node, Folder folder) throws Exception
@@ -268,21 +265,9 @@ public class MailDlg implements Runnable
         sp1.setTopComponent(sp2);
         sp1.setBottomComponent(pl_MailEdit);
 
-        java.awt.Container container;
-        if (window instanceof javax.swing.JFrame)
-        {
-            javax.swing.JFrame frame = (javax.swing.JFrame) window;
-            container = frame.getContentPane();
-            frame.setTitle("邮件检测");
-            frame.setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
-        }
-        else
-        {
-            javax.swing.JDialog dialog = (javax.swing.JDialog) window;
-            container = dialog.getContentPane();
-            dialog.setTitle("邮件检测");
-            dialog.setDefaultCloseOperation(javax.swing.JDialog.DISPOSE_ON_CLOSE);
-        }
+        java.awt.Container container = getContentPane();
+        setTitle("邮件检测");
+        setDefaultCloseOperation(javax.swing.JFrame.DISPOSE_ON_CLOSE);
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(container);
         container.setLayout(layout);
         javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
@@ -302,8 +287,8 @@ public class MailDlg implements Runnable
         vsg.addContainerGap();
         layout.setVerticalGroup(vsg);
 
-        window.pack();
-        window.setIconImage(Util.getLogo());
+        pack();
+        setIconImage(Util.getLogo());
     }
 
     /**
@@ -451,16 +436,6 @@ public class MailDlg implements Runnable
         lb_MailInfo.setText(notice);
     }
 
-    public java.awt.Window getWindow()
-    {
-        return window;
-    }
-
-    public void setVisible(boolean visible)
-    {
-        window.setVisible(visible);
-    }
-
     public static void main(String[] args)
     {
         try
@@ -480,7 +455,14 @@ public class MailDlg implements Runnable
         connect.setHost("pop.163.com");
         connect.setPort(-1);
         connect.setAuth(true);
-        md.append(connect, "");
+        try
+        {
+            md.append(connect, "");
+        }
+        catch (Exception ex)
+        {
+            Logs.exception(ex);
+        }
     }
     private javax.swing.JEditorPane ta_MailBody;
     private javax.swing.JTable tb_MailMsgs;

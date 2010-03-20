@@ -231,7 +231,11 @@ public class MailInf
             getMailContent((Part) part.getContent());
             return;
         }
-        content.append((String) part.getContent());
+        Object obj = part.getContent();
+        if (obj instanceof String)
+        {
+            content.append((String) obj);
+        }
     }
 
     /**

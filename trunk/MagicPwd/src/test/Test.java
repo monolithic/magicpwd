@@ -4,13 +4,17 @@
  */
 package test;
 
-import java.util.regex.Pattern;
-
 public class Test
 {
 
     public static void main(String[] args)
     {
-        System.out.println(Pattern.matches("^amon_[^.]+\\.backup$", "amon_20100228-184007.backup"));
+        System.out.println("==================================");
+        String[] arr = "pop.yeah.net:::: ".split(":");
+        for (String s : arr)
+        {
+            System.out.println(s);
+        }
+        System.out.println("==================================");
     }
 }

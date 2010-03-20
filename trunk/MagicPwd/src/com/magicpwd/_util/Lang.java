@@ -191,7 +191,7 @@ public class Lang
         c.setToolTipText(getLang(sid, tip));
     }
 
-    public static void showMesg(Component c, String t, java.lang.String d, String... z)
+    public static void showMesg(Component c, String t, String d, String... z)
     {
         t = getLang(t, d);
         if (z != null)
@@ -201,7 +201,7 @@ public class Lang
         JOptionPane.showMessageDialog(c, t, tips, JOptionPane.INFORMATION_MESSAGE);
     }
 
-    public static int showFirm(Component c, String t, java.lang.String d, String... z)
+    public static int showFirm(Component c, String t, String d, String... z)
     {
         t = getLang(t, d);
         if (z != null)

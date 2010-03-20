@@ -102,8 +102,6 @@ public class InfoProp extends javax.swing.JPanel implements IPropBean
         Lang.setWText(lt_Site, LangRes.P30F83D4, "首页：");
 
         Lang.setWText(lt_Copy, LangRes.P30F83D5, "版权：");
-
-        //Lang.setWText(null, LangRes.P30FA50A, "确定(&O)");
     }
 
     @Override
