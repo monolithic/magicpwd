@@ -33,8 +33,8 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
      * 用户文件对象
      */
     private java.io.File filePath;
-    private java.io.File wmaPath;
-    private String wmaName;
+    private java.io.File amaPath;
+    private String amaName;
     private EditBean dataEdit;
 
     public FileBean(IGridView view)
@@ -161,14 +161,14 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
         }
         tf_PropName.setText(name);
         tf_PropData.setText(itemData.getData());
-        wmaName = itemData.getSpec(EditItem.SPEC_FILE_NAME);
+        amaName = itemData.getSpec(EditItem.SPEC_FILE_NAME);
 
-        if (wmaPath == null)
+        if (amaPath == null)
         {
-            wmaPath = new java.io.File(ConsEnv.DIR_DAT, ConsEnv.DIR_WMA);
-            if (!wmaPath.exists())
+            amaPath = new java.io.File(ConsEnv.DIR_DAT, ConsEnv.DIR_AMA);
+            if (!amaPath.exists())
             {
-                wmaPath.mkdirs();
+                amaPath.mkdirs();
             }
         }
     }
@@ -243,22 +243,22 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
                 return;
             }
 
-            if (!Util.isValidate(wmaName))
+            if (!Util.isValidate(amaName))
             {
-                wmaName = Util.lPad(Long.toHexString(System.currentTimeMillis()), 16, '0');
+                amaName = Util.lPad(Long.toHexString(System.currentTimeMillis()), 16, '0');
             }
             try
             {
-                java.io.File wmaFile = new java.io.File(wmaPath, wmaName + ConsEnv.FILE_ATTACHMENT);
-                if (!wmaFile.exists())
+                java.io.File amaFile = new java.io.File(amaPath, amaName + ConsEnv.FILE_ATTACHMENT);
+                if (!amaFile.exists())
                 {
-                    if (!wmaFile.createNewFile())
+                    if (!amaFile.createNewFile())
                     {
                         Lang.showMesg(this, LangRes.P30F7A2C, "文件上传保存出错，请重试！");
                         return;
                     }
                 }
-                Keys.doCrypt(UserMdl.getECipher(), filePath, wmaFile);
+                Keys.doCrypt(UserMdl.getECipher(), filePath, amaFile);
             }
             catch (Exception exp)
             {
@@ -270,7 +270,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
 
         itemData.setName(name);
         itemData.setData(tf_PropData.getText());
-        itemData.setSpec(EditItem.SPEC_FILE_NAME, wmaName);
+        itemData.setSpec(EditItem.SPEC_FILE_NAME, amaName);
         UserMdl.getGridMdl().setModified(true);
 
         gridView.selectNext(!UserMdl.getGridMdl().isUpdate());
@@ -318,7 +318,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
         {
             filePath = new java.io.File(filePath, itemData.getData());
         }
-        java.io.File tempFile = new java.io.File(wmaPath, itemData.getSpec(EditItem.SPEC_FILE_NAME) + ConsEnv.FILE_ATTACHMENT);
+        java.io.File tempFile = new java.io.File(amaPath, itemData.getSpec(EditItem.SPEC_FILE_NAME) + ConsEnv.FILE_ATTACHMENT);
         try
         {
             Keys.doCrypt(UserMdl.getDCipher(), tempFile, filePath);
@@ -344,7 +344,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
                 }
             }
 
-            java.io.File srcFile = new java.io.File(wmaPath, itemData.getSpec(IEditItem.SPEC_FILE_NAME) + ConsEnv.FILE_ATTACHMENT);
+            java.io.File srcFile = new java.io.File(amaPath, itemData.getSpec(IEditItem.SPEC_FILE_NAME) + ConsEnv.FILE_ATTACHMENT);
             java.io.File tmpFile = new java.io.File(tmpPath, itemData.getData());
             Keys.doCrypt(UserMdl.getDCipher(), srcFile, tmpFile);
             Desk.open(tmpFile);

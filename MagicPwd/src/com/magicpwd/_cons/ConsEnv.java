@@ -56,7 +56,7 @@ public interface ConsEnv
     char PWDS_MASK = '*';
     String DIR_BAK = "bak";
     String DIR_DAT = "dat";
-    String DIR_WMA = "wma";
+    String DIR_AMA = "ama";
     String DIR_ICO = "ico";
     ///////////////////////////////////////////////////////
     // 类别数据显示排序
