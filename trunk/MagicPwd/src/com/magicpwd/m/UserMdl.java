@@ -368,4 +368,9 @@ public final class UserMdl
     {
         UserMdl.charUpd = charUpd;
     }
+
+    public static boolean hasSkey()
+    {
+        return us_UserSec.hasSkey();
+    }
 }

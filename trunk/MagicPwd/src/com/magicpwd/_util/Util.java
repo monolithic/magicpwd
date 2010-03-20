@@ -3,7 +3,7 @@
  * CopyRight: MagicPwd.com
  * Homepage:http://magicpwd.com/
  * Project:http://magicpwd.dev.java.net/
- * Email:Amonsoft@gmail.com
+ * Email:Amon@amonsoft.cn
  */
 package com.magicpwd._util;
 
@@ -720,7 +720,7 @@ public final class Util
             }
         });
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F9, InputEvent.ALT_MASK), ConsEnv.EVENT_VIEW_FIND);
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_MASK), ConsEnv.EVENT_VIEW_FIND);
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK), ConsEnv.EVENT_VIEW_FIND);
 
         actionMap.put(ConsEnv.EVENT_VIEW_MENU, new javax.swing.AbstractAction()
         {

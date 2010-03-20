@@ -1,16 +1,15 @@
 package com.magicpwd.m;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 import com.magicpwd._comn.S1SD;
 import com.magicpwd._face.IBackCall;
-import com.magicpwd.d.DBA3000;
 
 public class TimeOut implements Runnable
 {
+
     private IBackCall callBack;
     private static List<S1SD> noteList = new ArrayList<S1SD>();
     private static boolean stopWork;

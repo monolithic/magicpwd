@@ -17,6 +17,8 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.c.MenuEvt;
 import com.magicpwd.m.UserMdl;
+import com.magicpwd.r.ListCR;
+import java.awt.Color;
 
 /**
  * 软件设置对话框
@@ -57,6 +59,7 @@ public class MdiDialog extends javax.swing.JDialog
     {
         ls_PropList = new javax.swing.JList();
         ls_PropList.setModel(lm_PropList);
+        ls_PropList.setCellRenderer(new ListCR(javax.swing.SwingConstants.CENTER));
         ls_PropList.addListSelectionListener(new javax.swing.event.ListSelectionListener()
         {
 
@@ -69,7 +72,22 @@ public class MdiDialog extends javax.swing.JDialog
         javax.swing.JScrollPane sp_PropList = new javax.swing.JScrollPane();
         sp_PropList.setViewportView(ls_PropList);
 
-        lb_HeadPanel = new javax.swing.JLabel();
+        lb_HeadPanel = new javax.swing.JLabel()
+        {
+
+            @Override
+            protected void paintComponent(java.awt.Graphics g)
+            {
+                java.awt.Graphics2D g2d = (java.awt.Graphics2D) g;
+                java.awt.Dimension size = getSize();
+                g2d.setPaint(new java.awt.GradientPaint(0f, 0f, Color.lightGray, size.width, size.height, Color.white));
+                g2d.fillRect(0, 0, size.width, size.height);
+
+                super.paintComponent(g);
+            }
+        };
+        lb_HeadPanel.setIcon(Util.getNone());
+        lb_HeadPanel.setFont(lb_HeadPanel.getFont().deriveFont(java.awt.Font.BOLD));
 
         pl_CardPanel = new javax.swing.JPanel();
         cl_CardLayout = new java.awt.CardLayout();
@@ -109,13 +127,15 @@ public class MdiDialog extends javax.swing.JDialog
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this.getContentPane());
         this.getContentPane().setLayout(layout);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg1.addComponent(pl_CardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-        hpg1.addComponent(lb_HeadPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE);
+        hpg1.addComponent(pl_CardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        hpg1.addComponent(lb_HeadPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
         hsg1.addComponent(sp_PropList, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg1.addGroup(hpg1);
         javax.swing.GroupLayout.SequentialGroup hsg2 = layout.createSequentialGroup();
+        hsg2.addComponent(bt_Applied);
+        hsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg2.addComponent(bt_Confirm);
         hsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg2.addComponent(bt_Discard);
@@ -125,15 +145,16 @@ public class MdiDialog extends javax.swing.JDialog
         layout.setHorizontalGroup(layout.createSequentialGroup().addContainerGap().addGroup(hpg2).addContainerGap());
 
         javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
-        vsg1.addComponent(lb_HeadPanel);
+        vsg1.addComponent(lb_HeadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, Short.MAX_VALUE);
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        vsg1.addComponent(pl_CardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        vsg1.addComponent(pl_CardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
         vpg1.addComponent(sp_PropList, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE);
         vpg1.addGroup(javax.swing.GroupLayout.Alignment.LEADING, vsg1);
         javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg2.addComponent(bt_Discard);
         vpg2.addComponent(bt_Confirm);
+        vpg2.addComponent(bt_Applied);
         javax.swing.GroupLayout.SequentialGroup vsg2 = layout.createSequentialGroup();
         vsg2.addContainerGap();
         vsg2.addGroup(vpg1);
@@ -148,8 +169,9 @@ public class MdiDialog extends javax.swing.JDialog
 
     public void initLang()
     {
-        bt_Confirm.setText("确定(O)");
-        bt_Discard.setText("取消(C)");
+        Lang.setWText(bt_Applied, LangRes.P30FA50E, "应用(&A)");
+        Lang.setWText(bt_Confirm, LangRes.P30FA50A, "确定(&O)");
+        Lang.setWText(bt_Discard, LangRes.P30FA50B, "取消(&C)");
     }
 
     public void initData()
@@ -190,6 +212,14 @@ public class MdiDialog extends javax.swing.JDialog
         pl_CardPanel.add(ConsEnv.PROP_KIND, kp);
         hm_PropList.put(ConsEnv.PROP_KIND, kp);
 
+        t = Lang.getLang(LangRes.P30F1207, "历史查看");
+        lm_PropList.addElement(new S1S2(ConsEnv.PROP_HIST, t, t));
+        HistProp hp = new HistProp();
+        hp.initView();
+        hp.initLang();
+        pl_CardPanel.add(ConsEnv.PROP_HIST, hp);
+        hm_PropList.put(ConsEnv.PROP_HIST, hp);
+
         t = Lang.getLang(LangRes.P30F1206, "键盘快捷");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_SKEY, t, t));
         SKeyProp sp = new SKeyProp();
@@ -205,14 +235,6 @@ public class MdiDialog extends javax.swing.JDialog
         jp.initLang();
         pl_CardPanel.add(ConsEnv.PROP_JAVA, jp);
         hm_PropList.put(ConsEnv.PROP_JAVA, jp);
-
-        t = Lang.getLang(LangRes.P30F1207, "历史查看");
-        lm_PropList.addElement(new S1S2(ConsEnv.PROP_HIST, t, t));
-        HistProp hp = new HistProp();
-        hp.initView();
-        hp.initLang();
-        pl_CardPanel.add(ConsEnv.PROP_HIST, hp);
-        hm_PropList.put(ConsEnv.PROP_HIST, hp);
 
         t = Lang.getLang(LangRes.P30F1208, "关于软件");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_INFO, t, t));

@@ -37,6 +37,7 @@ public class Ucfg extends javax.swing.JPanel {
         bt_Discard = new javax.swing.JButton();
         bt_Confirm = new javax.swing.JButton();
         lb_HeadPanel = new javax.swing.JLabel();
+        bt_Applied = new javax.swing.JButton();
 
         ls_PropList.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "关于作者", "Item 5" };
@@ -49,7 +50,7 @@ public class Ucfg extends javax.swing.JPanel {
         pl_CardPanel.setLayout(pl_CardPanelLayout);
         pl_CardPanelLayout.setHorizontalGroup(
             pl_CardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 354, Short.MAX_VALUE)
+            .addGap(0, 394, Short.MAX_VALUE)
         );
         pl_CardPanelLayout.setVerticalGroup(
             pl_CardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -61,6 +62,13 @@ public class Ucfg extends javax.swing.JPanel {
         bt_Confirm.setText("jButton2");
 
         lb_HeadPanel.setText("jLabel1");
+
+        bt_Applied.setText("jButton1");
+        bt_Applied.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_AppliedActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -74,8 +82,10 @@ public class Ucfg extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(pl_CardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lb_HeadPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)))
+                            .addComponent(lb_HeadPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(bt_Applied)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bt_Confirm)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bt_Discard)))
@@ -94,13 +104,19 @@ public class Ucfg extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bt_Discard)
-                    .addComponent(bt_Confirm))
+                    .addComponent(bt_Confirm)
+                    .addComponent(bt_Applied))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void bt_AppliedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_AppliedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_AppliedActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bt_Applied;
     private javax.swing.JButton bt_Confirm;
     private javax.swing.JButton bt_Discard;
     private javax.swing.JLabel lb_HeadPanel;

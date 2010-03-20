@@ -3,7 +3,7 @@
  * CopyRight: MagicPwd.com
  * Homepage:http://magicpwd.com/
  * Project:http://magicpwd.dev.java.net/
- * Email:Amonsoft@gmail.com
+ * Email:Amon@amonsoft.cn
  */
 package com.magicpwd.m;
 
@@ -213,6 +213,7 @@ final class UserSec implements Key
     final boolean signFp(String usrName, StringBuffer secPwds) throws Exception
     {
         UserCfg ui = UserMdl.getUserCfg();
+        name = usrName;
 
         // 用户登录身份认证
         String text = ui.getCfg(user(ConsCfg.CFG_USER_SKEY));
@@ -220,11 +221,10 @@ final class UserSec implements Key
         {
             return false;
         }
-        text = text.substring(128);
 
         pwds = secPwds.toString();
         byte[] temp = signSkDigest();
-        if (!text.equals(Util.bytesToString(temp, true)))
+        if (text.indexOf(Util.bytesToString(temp, true)) != 0)
         {
             return false;
         }
@@ -232,6 +232,7 @@ final class UserSec implements Key
         // 获取用户配置密文
         keys = cipherDigest();
 
+        text = text.substring(128);
         temp = Util.stringToBytes(text, true);
 
         // 解密用户配置密文获得解密数据
@@ -489,6 +490,11 @@ final class UserSec implements Key
             Logs.exception(exp);
             return null;
         }
+    }
+
+    public boolean hasSkey()
+    {
+        return Util.isValidate(UserMdl.getUserCfg().getCfg(user(ConsCfg.CFG_USER_SKEY)), 224);
     }
 
     public final String user(String key)

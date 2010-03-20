@@ -115,8 +115,7 @@ public class MenuBar extends JMenuBar
 
     public void setUserSecretEnabled()
     {
-        String skey = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_USER_SKEY);
-        mi_UserSecret.setEnabled(skey == null || skey.length() != 224);
+        mi_UserSecret.setEnabled(!UserMdl.hasSkey());
     }
 
     private void initFileMenu()

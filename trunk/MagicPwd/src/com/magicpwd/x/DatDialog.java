@@ -1,7 +1,7 @@
 package com.magicpwd.x;
 
 import com.magicpwd.MagicPwd;
-import com.magicpwd._comn.S1S2;
+import com.magicpwd._comn.Kind;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
 import com.magicpwd._util.Lang;
@@ -110,8 +110,8 @@ public class DatDialog extends javax.swing.JDialog
         if (obj instanceof KindTN)
         {
             KindTN item = (KindTN) obj;
-            S1S2 kv = (S1S2) item.getUserObject();
-            backCall.callBack(null, null, kv.getK());
+            Kind kind = (Kind) item.getUserObject();
+            backCall.callBack(null, null, kind.getC2010103());
         }
         this.setVisible(false);
         this.dispose();

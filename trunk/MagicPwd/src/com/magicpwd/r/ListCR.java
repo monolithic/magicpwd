@@ -12,8 +12,15 @@ import com.magicpwd._util.Util;
  */
 public class ListCR extends javax.swing.JLabel implements javax.swing.ListCellRenderer
 {
+
     public ListCR()
     {
+        setOpaque(true);
+    }
+
+    public ListCR(int alignment)
+    {
+        setHorizontalAlignment(alignment);
         setOpaque(true);
     }
 

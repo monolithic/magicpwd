@@ -20,7 +20,7 @@ import com.magicpwd.r.ListCR;
 /**
  * 正常模式：记事便签
  * 
- * @author Amonsoft
+ * @author Amon
  * 
  */
 public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt

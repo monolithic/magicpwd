@@ -2,7 +2,7 @@
  * CopyRight: MagicPwd.com
  * Homepage:http://magicpwd.com/
  * Project:http://magicpwd.dev.java.net/
- * Email:Amonsoft@gmail.com
+ * Email:Amon@amonsoft.cn
  */
 package com.magicpwd._cons;
 
