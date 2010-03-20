@@ -66,7 +66,7 @@ public class HistProp extends JPanel implements IPropBean
         });
         sp_HistList.setViewportView(ls_HistList);
 
-        bt_PickupCur.setIcon(Util.getIcon(ConsEnv.ICON_DATE_TIME));
+        bt_PickupCur.setIcon(Util.getIcon(ConsEnv.ICON_HIST_PICK));
         bt_PickupCur.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -77,18 +77,7 @@ public class HistProp extends JPanel implements IPropBean
             }
         });
 
-        bt_DeleteAll.setIcon(Util.getIcon(ConsEnv.ICON_DATE_TIME));
-        bt_DeleteAll.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                bt_DeleteAllActionPerformed(evt);
-            }
-        });
-
-        bt_DeleteCur.setIcon(Util.getIcon(ConsEnv.ICON_DATE_TIME));
+        bt_DeleteCur.setIcon(Util.getIcon(ConsEnv.ICON_PROP_DELT));
         bt_DeleteCur.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -96,6 +85,17 @@ public class HistProp extends JPanel implements IPropBean
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 bt_DeleteCurActionPerformed(evt);
+            }
+        });
+
+        bt_DeleteAll.setIcon(Util.getIcon(ConsEnv.ICON_HIST_DROP));
+        bt_DeleteAll.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                bt_DeleteAllActionPerformed(evt);
             }
         });
 
@@ -113,7 +113,9 @@ public class HistProp extends JPanel implements IPropBean
         javax.swing.GroupLayout.SequentialGroup vsg = editLayout.createSequentialGroup();
         vsg.addContainerGap(1, Short.MAX_VALUE);
         vsg.addComponent(bt_PickupCur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addComponent(bt_DeleteCur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addComponent(bt_DeleteAll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         editLayout.setVerticalGroup(vsg);
 

@@ -29,7 +29,7 @@ public interface ConsEnv
     /**
      * 软件信息：构建日期
      */
-    String BUILDER = "2009-03-15";
+    String BUILDER = "2010-03-21";
     /**
      * 软件信息：软件版权
      */
@@ -182,7 +182,9 @@ public interface ConsEnv
     int ICON_PWDS_VIEW = ICON_PWDS_HIDE + 1;// 显示
     int ICON_PWDS_GENT = ICON_PWDS_VIEW + 1;// 生成
     int ICON_PWDS_UCFG = ICON_PWDS_GENT + 1;// 选项
-    int ICON_LINK_OPEN = ICON_PWDS_UCFG + 1;// 链接
+    int ICON_HIST_PICK = ICON_PWDS_UCFG + 1;// 恢复
+    int ICON_HIST_DROP = ICON_HIST_PICK + 1;// 恢复
+    int ICON_LINK_OPEN = ICON_HIST_DROP + 1;// 链接
     int ICON_MAIL_OPEN = ICON_LINK_OPEN + 1;// 邮件
     int ICON_DATE_TIME = ICON_MAIL_OPEN + 1;// 时间
     int ICON_FILE_OPEN = ICON_DATE_TIME + 1;// 打开

@@ -85,7 +85,7 @@ public interface ConsCfg
     /**
      * 界面配置：口令列表显示风格
      */
-    String CFG_VIEW_LIST = CFG_PRE + "";
+    String CFG_VIEW_LIST = CFG_PRE + ".list";
     /**
      * 界面配置：口令列表数据排序依据
      */

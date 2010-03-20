@@ -68,7 +68,7 @@ public class KeysCR extends javax.swing.JPanel implements javax.swing.ListCellRe
         // 文字属性设置
         lb_Text.setFont(list.getFont());
 
-        lb_Icon.setIcon(Util.getNone());
+//        lb_Icon.setIcon(Util.getNone());
 
         // 口令列表专用
         if (value instanceof Keys)
@@ -88,7 +88,7 @@ public class KeysCR extends javax.swing.JPanel implements javax.swing.ListCellRe
             lb_Note.setIcon(Util.getNone());
         }
 
-        lb_Rest.setIcon(Util.getNone());
+//        lb_Rest.setIcon(Util.getNone());
 
         return this;
     }

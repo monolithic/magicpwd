@@ -235,10 +235,10 @@ public class KindProp extends JPanel implements IPropBean
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_ItemSort);
         pl_ItemSort.setLayout(layout);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg1.addComponent(bt_SortL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hpg1.addComponent(bt_SortU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        hpg1.addComponent(bt_SortR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hpg1.addComponent(bt_SortD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hpg1.addComponent(bt_SortL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hpg1.addComponent(bt_SortR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg2.addComponent(bt_ApndData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hpg2.addComponent(bt_SaveData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
@@ -258,13 +258,13 @@ public class KindProp extends JPanel implements IPropBean
         vsg1.addComponent(bt_DropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.SequentialGroup vsg2 = layout.createSequentialGroup();
         vsg2.addContainerGap(1, Short.MAX_VALUE);
-        vsg2.addComponent(bt_SortL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg2.addComponent(bt_SortU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         vsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        vsg2.addComponent(bt_SortR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg2.addComponent(bt_SortD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg2.addComponent(bt_SortL, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg2.addComponent(bt_SortR, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         vpg.addGroup(vsg1);
         vpg.addGroup(vsg2);
@@ -318,10 +318,10 @@ public class KindProp extends JPanel implements IPropBean
         Lang.setWTips(bt_ApndData, LangRes.P30F850A, "新增(Alt + N)");
 
         Lang.setWText(bt_SaveData, LangRes.P30F8507, "&S");
-        Lang.setWTips(bt_SaveData, LangRes.P30F8507, "保存(Alt + S)");
+        Lang.setWTips(bt_SaveData, LangRes.P30F8508, "保存(Alt + S)");
 
         Lang.setWText(bt_DropData, LangRes.P30F850B, "&D");
-        Lang.setWTips(bt_DropData, LangRes.P30F850B, "删除(Alt + D)");
+        Lang.setWTips(bt_DropData, LangRes.P30F850C, "删除(Alt + D)");
     }
 
     private void initBaseLang()
