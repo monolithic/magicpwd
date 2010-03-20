@@ -328,7 +328,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         if (checkData())
         {
             int idx = tb_KeysView.getSelectedRow();
-            if (idx > ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
+            if (idx >= ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
                 IEditItem tplt = UserMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_AREA)
@@ -347,7 +347,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         if (checkData())
         {
             int idx = tb_KeysView.getSelectedRow();
-            if (idx > ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
+            if (idx >= ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
                 IEditItem tplt = UserMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_DATE)
@@ -366,7 +366,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         if (checkData())
         {
             int idx = tb_KeysView.getSelectedRow();
-            if (idx > ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
+            if (idx >= ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
                 IEditItem tplt = UserMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_FILE)
@@ -385,7 +385,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         if (checkData())
         {
             int idx = tb_KeysView.getSelectedRow();
-            if (idx > ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
+            if (idx >= ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
                 IEditItem tplt = UserMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_LINK)
@@ -404,7 +404,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         if (checkData())
         {
             int idx = tb_KeysView.getSelectedRow();
-            if (idx > ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
+            if (idx >= ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
                 IEditItem tplt = UserMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_MAIL)
@@ -423,7 +423,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         if (checkData())
         {
             int idx = tb_KeysView.getSelectedRow();
-            if (idx > ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
+            if (idx >= ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
                 IEditItem tplt = UserMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_PWDS)
@@ -442,7 +442,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         if (checkData())
         {
             int idx = tb_KeysView.getSelectedRow();
-            if (idx > ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
+            if (idx >= ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
                 IEditItem tplt = UserMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_TEXT)

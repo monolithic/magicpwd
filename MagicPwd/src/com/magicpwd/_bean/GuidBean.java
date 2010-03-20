@@ -57,6 +57,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
 
         lb_PropData = new javax.swing.JLabel();
         cb_PropData = new javax.swing.JComboBox();
+        cb_PropData.setModel(UserMdl.getCboxMdl());
         lb_PropData.setLabelFor(cb_PropData);
 
         lb_PropEdit = new javax.swing.JLabel();
@@ -133,9 +134,18 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
     {
         itemData = (GuidItem) item;
         tf_PropName.setText(item.getName());
-        cb_PropData.setModel(UserMdl.getCboxMdl());
 
         String kind = itemData.getSpec(IEditItem.SPEC_GUID_TPLT);
+        if (Util.isValidate(kind))
+        {
+            for (Tplt tplt : UserMdl.getCboxMdl().getAllItems())
+            {
+                if (kind.equals(tplt.getP30F1103()))
+                {
+                    cb_PropData.setSelectedItem(tplt);
+                }
+            }
+        }
         bt_ReadMail.setVisible(Util.isValidate(kind));
         bt_ReadMail.setEnabled(ConsDat.HASH_MAIL.equals(kind));
     }
@@ -158,13 +168,15 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         }
 
         GridMdl gm = UserMdl.getGridMdl();
+        Tplt tplt = (Tplt) obj;
+        itemData.setSpec(IEditItem.SPEC_GUID_TPLT, tplt.getP30F1103());
+        gm.setModified(true);
+
         if (gm.getRowCount() < ConsEnv.PWDS_HEAD_SIZE)
         {
             gm.initMeta();
+            gm.wAppend(tplt.getP30F1103());
         }
-        Tplt tplt = (Tplt) obj;
-        itemData.setSpec(IEditItem.SPEC_GUID_TPLT, tplt.getP30F1103());
-        gm.wAppend(tplt.getP30F1103());
 
         gridView.selectNext(!gm.isUpdate());
     }
@@ -184,11 +196,11 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         MailDlg mailDlg = MagicPwd.getMailDlg();
         if (mailDlg == null)
         {
-            mailDlg = new MailDlg(MagicPwd.getCurrForm());
+            mailDlg = new MailDlg();
             mailDlg.initView();
             mailDlg.initLang();
             mailDlg.initData();
-            Util.centerForm(mailDlg.getWindow(), MagicPwd.getCurrForm());
+            Util.centerForm(mailDlg, MagicPwd.getCurrForm());
             MagicPwd.setMailDlg(mailDlg);
         }
 
@@ -199,10 +211,25 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         mailPtn.initLang();
         List<I1S2> mailList = gm.wSelect(ConsDat.INDX_MAIL);
         mailPtn.initMail(mailList);
+        if (mailList.size() < 1)
+        {
+            Lang.showMesg(mailDlg, null, "没有可用的邮件类型数据！");
+            return;
+        }
         List<I1S2> userList = gm.wSelect(ConsDat.INDX_TEXT);
         mailPtn.initUser(userList);
+        if (userList.size() < 1)
+        {
+            Lang.showMesg(mailDlg, null, "没有可用的文本类型数据！");
+            return;
+        }
         List<I1S2> pwdsList = gm.wSelect(ConsDat.INDX_PWDS);
         mailPtn.initPwds(pwdsList);
+        if (pwdsList.size() < 1)
+        {
+            Lang.showMesg(mailDlg, null, "没有可用的口令类型数据！");
+            return;
+        }
         if (JOptionPane.OK_OPTION != JOptionPane.showConfirmDialog(MagicPwd.getCurrForm(), mailPtn, "登录确认", JOptionPane.OK_CANCEL_OPTION))
         {
             return;
@@ -220,10 +247,11 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         String type = UserMdl.getMailCfg().getCfg(host + ".type");
         if (!Util.isValidate(type))
         {
+            Lang.showMesg(mailDlg, null, "查找不到对应的服务信息，如有疑问请与作者联系！");
             return;
         }
 
-        Connect connect = new Connect(type, mail, pwds);
+        final Connect connect = new Connect(type, mail, pwds);
         connect.setUsername(user);
 
         // 读取服务器配置
@@ -234,7 +262,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         }
 
         // 服务器地址
-        String[] arr = (cfg + ":::").split(":");
+        String[] arr = (cfg + ":::false").split("[:]");
         connect.setHost(arr[0]);
 
         // 服务器端口
@@ -250,7 +278,15 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         connect.setJssl("true".equalsIgnoreCase(arr[3].trim().toLowerCase()));
 
         mailDlg.setVisible(true);
-        mailDlg.append(connect, "");
+        new Thread()
+        {
+
+            @Override
+            public void run()
+            {
+                MagicPwd.getMailDlg().append(connect, "");
+            }
+        }.start();
     }
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JLabel lb_PropEdit;

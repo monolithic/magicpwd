@@ -10,6 +10,7 @@ package com.magicpwd._comn;
  */
 public class Tplt
 {
+
     /**排序依据*/
     private int P30F1101;
     /**属性类别*/
