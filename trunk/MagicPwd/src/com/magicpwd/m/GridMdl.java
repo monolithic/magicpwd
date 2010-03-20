@@ -403,7 +403,11 @@ public class GridMdl extends DefaultTableModel
 
             // Hint
             HintItem hint = new HintItem();
-            hint.setTime(new java.sql.Timestamp(Util.stringToDate(temp.get(indx++), '-', ':', ' ').getTimeInMillis()));
+            String text = temp.get(indx++);
+            if (Util.isValidate(text))
+            {
+                hint.setTime(new java.sql.Timestamp(Util.stringToDate(text, '-', ':', ' ').getTimeInMillis()));
+            }
             hint.setName(temp.get(indx++));
             ls_ItemList.add(hint);
 
@@ -461,7 +465,6 @@ public class GridMdl extends DefaultTableModel
             tplt = ls_ItemList.get(indx++);
             temp.add(tplt.getName());
             temp.add(tplt.getData());
-            ls_ItemList.add(tplt);
 
             // Logo
             tplt = ls_ItemList.get(indx++);
