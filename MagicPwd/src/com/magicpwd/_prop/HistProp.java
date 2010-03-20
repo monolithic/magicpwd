@@ -13,11 +13,14 @@ import javax.swing.JPanel;
 
 import com.magicpwd._comn.Keys;
 import com.magicpwd._comn.S1S2;
+import com.magicpwd._comp.IcoLabel;
+import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IPropBean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
+import com.magicpwd._util.Util;
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.UserMdl;
 
@@ -27,42 +30,46 @@ import com.magicpwd.m.UserMdl;
  */
 public class HistProp extends JPanel implements IPropBean
 {
+
     private int indx;
-    private Keys pwds;
-    private S1S2 item;
+    private Keys keys;
     private List<S1S2> hist;
-    private List<IEditItem> tplt;
+    private List<IEditItem> ls_ItemList;
     private DefaultListModel lm_HistList;
 
     public HistProp()
     {
-        pwds = new Keys();
+        keys = new Keys();
     }
 
     @Override
     public void initView()
     {
-        javax.swing.JScrollPane sp1 = new javax.swing.JScrollPane();
+        javax.swing.JScrollPane sp_HistList = new javax.swing.JScrollPane();
         ls_HistList = new javax.swing.JList();
-        bt_PickupCur = new javax.swing.JButton();
-        bt_DeleteAll = new javax.swing.JButton();
-        javax.swing.JScrollPane sp2 = new javax.swing.JScrollPane();
+        pl_ItemEdit = new javax.swing.JPanel();
+        bt_PickupCur = new IcoLabel();
+        bt_DeleteCur = new IcoLabel();
+        bt_DeleteAll = new IcoLabel();
+        javax.swing.JScrollPane sp_HistInfo = new javax.swing.JScrollPane();
         ta_HistInfo = new javax.swing.JTextArea();
-        bt_DeleteCur = new javax.swing.JButton();
 
         ls_HistList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         ls_HistList.addListSelectionListener(new javax.swing.event.ListSelectionListener()
         {
+
             @Override
             public void valueChanged(javax.swing.event.ListSelectionEvent evt)
             {
                 ls_HistListValueChanged(evt);
             }
         });
-        sp1.setViewportView(ls_HistList);
+        sp_HistList.setViewportView(ls_HistList);
 
+        bt_PickupCur.setIcon(Util.getIcon(ConsEnv.ICON_DATE_TIME));
         bt_PickupCur.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -70,8 +77,10 @@ public class HistProp extends JPanel implements IPropBean
             }
         });
 
+        bt_DeleteAll.setIcon(Util.getIcon(ConsEnv.ICON_DATE_TIME));
         bt_DeleteAll.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -79,11 +88,10 @@ public class HistProp extends JPanel implements IPropBean
             }
         });
 
-        ta_HistInfo.setLineWrap(true);
-        sp2.setViewportView(ta_HistInfo);
-
+        bt_DeleteCur.setIcon(Util.getIcon(ConsEnv.ICON_DATE_TIME));
         bt_DeleteCur.addActionListener(new java.awt.event.ActionListener()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -91,48 +99,48 @@ public class HistProp extends JPanel implements IPropBean
             }
         });
 
+        ta_HistInfo.setLineWrap(true);
+        sp_HistInfo.setViewportView(ta_HistInfo);
+
+        javax.swing.GroupLayout editLayout = new javax.swing.GroupLayout(pl_ItemEdit);
+        pl_ItemEdit.setLayout(editLayout);
+        javax.swing.GroupLayout.ParallelGroup hpg = editLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        hpg.addComponent(bt_PickupCur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hpg.addComponent(bt_DeleteCur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hpg.addComponent(bt_DeleteAll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        editLayout.setHorizontalGroup(hpg);
+
+        javax.swing.GroupLayout.SequentialGroup vsg = editLayout.createSequentialGroup();
+        vsg.addContainerGap(1, Short.MAX_VALUE);
+        vsg.addComponent(bt_PickupCur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg.addComponent(bt_DeleteCur, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg.addComponent(bt_DeleteAll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        editLayout.setVerticalGroup(vsg);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                layout.createSequentialGroup().addComponent(sp1, javax.swing.GroupLayout.PREFERRED_SIZE, 127,
-                        javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(
-                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(
-                                javax.swing.GroupLayout.Alignment.TRAILING,
-                                layout.createSequentialGroup().addComponent(bt_DeleteCur).addPreferredGap(
-                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_DeleteAll)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(bt_PickupCur)).addComponent(sp2))));
-        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(sp1,
-                javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE).addGroup(
-                javax.swing.GroupLayout.Alignment.TRAILING,
-                layout.createSequentialGroup().addComponent(sp2, javax.swing.GroupLayout.DEFAULT_SIZE, 211,
-                        Short.MAX_VALUE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(
-                        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(
-                                bt_PickupCur).addComponent(bt_DeleteAll).addComponent(bt_DeleteCur))));
+        layout.setHorizontalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addComponent(sp_HistList, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(pl_ItemEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(sp_HistInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)));
+        layout.setVerticalGroup(
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(sp_HistList, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE).addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup().addContainerGap().addComponent(pl_ItemEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addComponent(sp_HistInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 230, Short.MAX_VALUE));
     }
 
     @Override
     public void initLang()
     {
-        Lang.setWText(bt_PickupCur, LangRes.P30F850D, "恢复");
-        Lang.setWText(bt_DeleteCur, LangRes.P30F850F, "删除当前");
-        Lang.setWText(bt_DeleteAll, LangRes.P30F8511, "删除所有");
+        Lang.setWText(bt_PickupCur, LangRes.P30F850D, "&R");
+        Lang.setWTips(bt_PickupCur, LangRes.P30F850E, "恢复(Alt + R)");
+
+        Lang.setWText(bt_DeleteCur, LangRes.P30F850F, "&C");
+        Lang.setWTips(bt_DeleteCur, LangRes.P30F8510, "删除当前(Alt + C)");
+
+        Lang.setWText(bt_DeleteAll, LangRes.P30F8511, "&D");
+        Lang.setWTips(bt_DeleteAll, LangRes.P30F8512, "删除所有(Alt + D)");
     }
 
     @Override
     public void initData()
     {
-    }
-
-    @Override
-    public void saveData()
-    {
-    }
-
-    public void initData(S1S2 item)
-    {
-        this.item = item;
         if (lm_HistList != null)
         {
             lm_HistList.clear();
@@ -140,21 +148,26 @@ public class HistProp extends JPanel implements IPropBean
         }
         else
         {
-            pwds = new Keys();
+            keys = new Keys();
             hist = new ArrayList<S1S2>();
-            tplt = new ArrayList<IEditItem>();
+            ls_ItemList = new ArrayList<IEditItem>();
 
             lm_HistList = new DefaultListModel();
             ls_HistList.setModel(lm_HistList);
         }
 
-        DBA3000.selectHistData(item.getK(), hist);
+        DBA3000.selectHistData(UserMdl.getGridMdl().getKeysHash(), hist);
         for (S1S2 temp : hist)
         {
             lm_HistList.addElement(temp);
         }
         ta_HistInfo.setText("");
         indx = -1;
+    }
+
+    @Override
+    public void saveData()
+    {
     }
 
     @Override
@@ -180,27 +193,28 @@ public class HistProp extends JPanel implements IPropBean
 
         try
         {
-            DBA3000.selectHistData(item.getK(), pwds);
-            UserMdl.getGridMdl().deCrypt(pwds, tplt);
+            keys.setDefault();
+            DBA3000.selectHistData(item.getK(), keys);
+            UserMdl.getGridMdl().deCrypt(keys, ls_ItemList);
 
             StringBuffer sb = new StringBuffer();
             idx = 0;
             String t = Lang.getLang(LangRes.P30FA101, "：");
-            IEditItem temp = tplt.get(idx++);
+            IEditItem temp = ls_ItemList.get(idx++);
             sb.append(Lang.getLang(LangRes.P30FA102, "创建时间")).append(t).append(temp.getName()).append('\n');
-            temp = tplt.get(idx++);
-            sb.append(Lang.getLang(LangRes.P30FA102, "口令名称")).append(t).append(temp.getName()).append('\n');
-            sb.append(Lang.getLang(LangRes.P30FA102, "关键搜索")).append(t).append(temp.getData()).append('\n');
-            temp = tplt.get(idx++);
-            sb.append(Lang.getLang(LangRes.P30FA102, "过期日期")).append(t).append(temp.getData()).append('\n');
-            sb.append(Lang.getLang(LangRes.P30FA102, "过期提示")).append(t).append(temp.getName()).append('\n');
-            for (int j = tplt.size(); idx < j; idx += 1)
+            temp = ls_ItemList.get(idx++);
+            sb.append(Lang.getLang(LangRes.P30FA103, "口令名称")).append(t).append(temp.getName()).append('\n');
+            sb.append(Lang.getLang(LangRes.P30FA104, "关键搜索")).append(t).append(temp.getData()).append('\n');
+            temp = ls_ItemList.get(idx++);
+            sb.append(Lang.getLang(LangRes.P30FA105, "过期日期")).append(t).append(temp.getData()).append('\n');
+            sb.append(Lang.getLang(LangRes.P30FA106, "过期提示")).append(t).append(temp.getName()).append('\n');
+            for (int j = ls_ItemList.size(); idx < j; idx += 1)
             {
-                temp = tplt.get(idx);
+                temp = ls_ItemList.get(idx);
                 sb.append(temp.getName()).append(t).append(temp.getData()).append('\n');
             }
             ta_HistInfo.setText(sb.toString());
-            tplt.clear();
+            ls_ItemList.clear();
         }
         catch (Exception exp)
         {
@@ -221,7 +235,7 @@ public class HistProp extends JPanel implements IPropBean
         {
             return;
         }
-        DBA3000.deleteHistData(item.getK(), temp.getK());
+        DBA3000.deleteHistData(UserMdl.getGridMdl().getKeysHash(), temp.getK());
         lm_HistList.removeElement(temp);
         ta_HistInfo.setText("");
     }
@@ -236,7 +250,7 @@ public class HistProp extends JPanel implements IPropBean
         {
             return;
         }
-        DBA3000.deleteHistData(item.getK());
+        DBA3000.deleteHistData(UserMdl.getGridMdl().getKeysHash(), null);
         lm_HistList.clear();
         ta_HistInfo.setText("");
     }
@@ -253,11 +267,11 @@ public class HistProp extends JPanel implements IPropBean
         {
             return;
         }
-        DBA3000.pickupHistData(item.getK(), temp.getK());
+        DBA3000.pickupHistData(UserMdl.getGridMdl().getKeysHash(), temp.getK());
         lm_HistList.clear();
         hist.clear();
 
-        DBA3000.selectHistData(item.getK(), hist);
+        DBA3000.selectHistData(UserMdl.getGridMdl().getKeysHash(), hist);
         for (int i = 0, j = hist.size(); i < j; i += 1)
         {
             lm_HistList.addElement(hist.get(i));
@@ -265,10 +279,10 @@ public class HistProp extends JPanel implements IPropBean
         indx = -1;
         ta_HistInfo.setText("");
     }
-
     private javax.swing.JList ls_HistList;
     private javax.swing.JTextArea ta_HistInfo;
-    private javax.swing.JButton bt_DeleteCur;
-    private javax.swing.JButton bt_DeleteAll;
-    private javax.swing.JButton bt_PickupCur;
+    private javax.swing.JPanel pl_ItemEdit;
+    private IcoLabel bt_DeleteCur;
+    private IcoLabel bt_DeleteAll;
+    private IcoLabel bt_PickupCur;
 }

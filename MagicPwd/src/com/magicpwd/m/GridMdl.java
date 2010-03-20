@@ -637,4 +637,14 @@ public class GridMdl extends DefaultTableModel
         keys.setP30F0103(note);
         DBA3000.saveKeysData(keys);
     }
+
+    public int getSequence()
+    {
+        return keys.getP30F0101();
+    }
+
+    public String getKeysHash()
+    {
+        return keys.getP30F0104();
+    }
 }

@@ -18,7 +18,6 @@ import com.magicpwd._bean.PwdsBean;
 import com.magicpwd._bean.TextBean;
 import com.magicpwd._comn.GuidItem;
 import com.magicpwd._comn.Kind;
-import com.magicpwd._comn.S1S2;
 import com.magicpwd._comn.Keys;
 import com.magicpwd._comn.MetaItem;
 import com.magicpwd._cons.ConsCfg;
@@ -98,6 +97,10 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         mainTool.setVisible(UserMdl.getUserCfg().isToolViw());
         this.getContentPane().add(mainTool, UserMdl.getUserCfg().getToolLoc());
 
+        mainFind.setVisible(UserMdl.getUserCfg().isFindViw());
+
+        mainInfo.setVisible(UserMdl.getUserCfg().isInfoViw());
+
         this.pack();
         this.setIconImage(Util.getLogo());
         this.setTitle(Lang.getLang(LangRes.P30F7201, "魔方密码"));
@@ -129,6 +132,8 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         mainTool.initData();
         mainInfo.initData();
         mainFind.initData();
+
+        showPropEdit();
     }
 
     @Override
@@ -499,6 +504,8 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             return;
         }
         UserMdl.getListMdl().wDelete(index);
+        UserMdl.getGridMdl().clear();
+        showPropEdit();
     }
 
     @Override
@@ -651,14 +658,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     @Override
     public void helpInfoActionPerformed(java.awt.event.ActionEvent evt)
     {
-        StringBuffer text = new StringBuffer();
-        text.append("<html><body>");
-        text.append(ConsEnv.SOFTNAME).append(" ").append(ConsEnv.VERSIONS).append("<br />");
-        text.append("Build ").append(ConsEnv.BUILDER).append("<br />");
-        text.append("<a href=\"").append(ConsEnv.HOMEPAGE).append("\">").append(ConsEnv.HOMEPAGE).append("</a>");
-        text.append("</body></html>");
-        javax.swing.ImageIcon icon = new javax.swing.ImageIcon(Util.getImage(ConsEnv.ICON_LOGO_0032));
-        javax.swing.JOptionPane.showMessageDialog(this, text.toString(), "关于", javax.swing.JOptionPane.OK_OPTION, icon);
+        MdiDialog.getInstance(this).showProp(ConsEnv.PROP_INFO, true);
     }
 
     @Override
@@ -689,7 +689,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
 
         try
         {
-            java.awt.Desktop.getDesktop().mail(new java.net.URI("mailto:Amonsoft@163.com"));
+            java.awt.Desktop.getDesktop().mail(new java.net.URI("mailto:" + ConsEnv.SOFTMAIL));
         }
         catch (Exception exp)
         {

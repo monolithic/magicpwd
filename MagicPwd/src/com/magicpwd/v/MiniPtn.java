@@ -13,7 +13,7 @@ import com.magicpwd.c.MenuEvt;
 /**
  * 迷你模式：全能搜索
  *
- * @author Amonsoft
+ * @author Amon
  */
 public class MiniPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
 {

@@ -8,7 +8,7 @@ import com.magicpwd._cons.ConsDat;
 
 /**
  *
- * @author Amonsoft
+ * @author Amon
  */
 public class MetaItem extends EditItem
 {

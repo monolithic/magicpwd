@@ -144,13 +144,14 @@ public interface LangRes
     String P30F1B0E = "P30F1B0E";// 您可以使用Ctrl+M或者Alt+F10打开或隐藏菜单栏。
     String P30F1B0F = "P30F1B0F";// 您可以使用Ctrl+T或者Alt+F11打开或隐藏工具栏。
     String P30F1B10 = "P30F1B10";// 您可以使用Ctrl+I或者Alt+F12打开或隐藏信息栏。
-    String P30F1B11 = "P30F1B11";// 如果您有什么意见或建议，欢迎与作者联系：登录作者网站（http://magicpwd.com）或者给作者发邮件（Amonsoft@163.com）！
+    String P30F1B11 = "P30F1B11";// 如果您有什么意见或建议，欢迎与作者联系：登录作者网站（http://magicpwd.com/）或者给作者发邮件（Amon@amonsoft.cn）！
     String P30F1B12 = "P30F1B12";// 当您编辑您的口令数据时，可以使用Ctrl+Down或者Ctrl+D向下移动选中的单元行。
     String P30F1B13 = "P30F1B13";
     String P30F1B14 = "P30F1B14";
     String P30F1B15 = "P30F1B15";
     String P30F1B16 = "P30F1B16";
     String P30F1B17 = "P30F1B17";
+    String P30F1B18 = "P30F1B18";
     // ----------------------------------------------------
     // C 数据导出
     // ----------------------------------------------------
@@ -380,7 +381,7 @@ public interface LangRes
     String P30F7A0E = "P30F7A0E";// 记录数据保存失败，请重新启动本程序后再次尝试！
     String P30F7A0F = "P30F7A0F";// 无法打开您系统中的网络浏览器！\n请手动登录软件网站：http://MagicPwd.com
     String P30F7A10 = "P30F7A10";// 帮助文件丢失或已损坏，要获取帮助请手动登录网站：http://MagicPwd.com
-    String P30F7A11 = "P30F7A11";// 无法打开您系统中的邮件客户端！\n请手动编写邮件到：Amonsoft@163.com
+    String P30F7A11 = "P30F7A11";// 无法打开您系统中的邮件客户端！\n请手动编写邮件到：Amon@amonsoft.cn
     String P30F7A12 = "P30F7A12";// 检测到新版本，现在要下载吗？
     String P30F7A13 = "P30F7A13";// 您使用的已是最新版本。
     String P30F7A14 = "P30F7A14";// 网络连接出错，无法检测软件升级信息。
@@ -642,6 +643,7 @@ public interface LangRes
     String P30FA50B = "P30FA50B";// 取消(&C)
     String P30FA50C = "P30FA50C";// 选择(&C)
     String P30FA50D = "P30FA50D";// 追加(&A)
+    String P30FA50E = "P30FA50E";//
     // ----------------------------------------------------
     // 6 菜单语言资源
     // ----------------------------------------------------

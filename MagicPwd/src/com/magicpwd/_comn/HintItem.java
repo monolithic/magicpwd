@@ -11,7 +11,7 @@ import java.sql.Timestamp;
 
 /**
  *
- * @author Amonsoft
+ * @author Amon
  */
 public class HintItem extends EditItem
 {

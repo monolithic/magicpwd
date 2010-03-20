@@ -259,7 +259,7 @@ public class DBA3000
             dba.addColumn(DBC3000.P30F010A);
             dba.addWhere(DBC3000.P30F0105, UserMdl.getUserCode());
             dba.addWhere(Util.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC3000.P30F0109, DBC3000.P30F010A, text2Query(text)));
-            dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_MODE_1);
+            //dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_MODE_1);
             dba.addWhere(DBC3000.P30F0106, ConsDat.HASH_NOTE);
 
             ResultSet rest = dba.executeSelect();
@@ -317,6 +317,7 @@ public class DBA3000
                 return false;
             }
 
+            keys.setP30F0101(rest.getInt(DBC3000.P30F0101));
             keys.setP30F0102(rest.getInt(DBC3000.P30F0102));
             keys.setP30F0103(rest.getInt(DBC3000.P30F0103));
             keys.setP30F0104(rest.getString(DBC3000.P30F0104));
@@ -394,7 +395,7 @@ public class DBA3000
             {
                 if (keys.isHistBack())
                 {
-                    backup(dba, keys);
+                    backup(dba, keys.getP30F0104());
                 }
                 remove(dba, keys);
             }
@@ -452,9 +453,9 @@ public class DBA3000
      * @param keys
      * @throws SQLException
      */
-    private static void backup(DBAccess dba, Keys keys) throws SQLException
+    private static void backup(DBAccess dba, String keysHash) throws SQLException
     {
-        String hash = Hash.hash(false);
+        String hash = com.magicpwd._util.Date.curTime();
 
         dba.addParam(DBC3000.P30F0A01, hash);
         dba.addParam(DBC3000.P30F0A02, DBC3000.P30F0102, false);
@@ -471,7 +472,7 @@ public class DBA3000
         dba.addParam(DBC3000.P30F0A0D, DBC3000.P30F010D, false);
         dba.addParam(DBC3000.P30F0A0E, DBC3000.P30F010E, false);
         dba.addParam(DBC3000.P30F0A0F, DBC3000.P30F010F, false);
-        dba.addWhere(DBC3000.P30F0104, keys.getP30F0104());
+        dba.addWhere(DBC3000.P30F0104, keysHash);
         dba.addCopyBatch(DBC3000.P30F0A00, DBC3000.P30F0100);
         dba.reset();
 
@@ -479,7 +480,7 @@ public class DBA3000
         dba.addParam(DBC3000.P30F0B02, DBC3000.P30F0201, false);
         dba.addParam(DBC3000.P30F0B03, DBC3000.P30F0202, false);
         dba.addParam(DBC3000.P30F0B04, DBC3000.P30F0203, false);
-        dba.addWhere(DBC3000.P30F0202, keys.getP30F0104());
+        dba.addWhere(DBC3000.P30F0202, keysHash);
         dba.addCopyBatch(DBC3000.P30F0B00, DBC3000.P30F0200);
         dba.reset();
     }
@@ -1118,7 +1119,7 @@ public class DBA3000
         return charList;
     }
 
-    public static boolean pickupHistData(String curr, String hist)
+    public static boolean pickupHistData(String keysHash, String logsHash)
     {
         DBAccess dba = new DBAccess();
 
@@ -1126,41 +1127,39 @@ public class DBA3000
         {
             dba.init();
 
-            dba.addTable(DBC3000.P30F0100);
-            dba.addParam(DBC3000.P30F0102, ConsDat.PWDS_MODE_2);
-            dba.addWhere(DBC3000.P30F0104, curr);
-            dba.addUpdateBatch();
+            backup(dba, keysHash);
 
-            StringBuffer sql = new StringBuffer();
-            sql.append("insert into P30F0100 (P30F0101,");
-            sql.append("    P30F0102,");
-            sql.append("    P30F0103,");
-            sql.append("    P30F0104,");
-            sql.append("    P30F0105,");
-            sql.append("    P30F0106,");
-            sql.append("    P30F0107,");
-            sql.append("    P30F0108,");
-            sql.append("    P30F0109,");
-            sql.append("    P30F010A,");
-            sql.append("    P30F010B,");
-            sql.append("    P30F010C,");
-            sql.append("    P30F010D)");
-            sql.append(" (select " + ConsDat.PWDS_MODE_1 + ",");
-            sql.append("           P30F0102,");
-            sql.append(Util.format("   '{0}',", com.magicpwd._util.Date.curTime()));
-            sql.append("           P30F0104,");
-            sql.append("           P30F0105,");
-            sql.append("           P30F0106,");
-            sql.append("           P30F0107,");
-            sql.append("           P30F0108,");
-            sql.append("           P30F0109,");
-            sql.append("           P30F010A,");
-            sql.append("           P30F010B,");
-            sql.append("           P30F010C,");
-            sql.append("           P30F010D");
-            sql.append("      from P30F0100");
-            sql.append(Util.format(" where P30F0103='{0}')", hist));
-            dba.addBatch(sql.toString());
+            String DELETE = "DELETE FROM {0} WHERE {1}='{2}'";
+            // 删除信息数据
+            dba.addBatch(Util.format(DELETE, DBC3000.P30F0100, DBC3000.P30F0104, keysHash));
+            // 删除内容数据
+            dba.addBatch(Util.format(DELETE, DBC3000.P30F0200, DBC3000.P30F0202, keysHash));
+
+            dba.addParam(DBC3000.P30F0101, UserMdl.getGridMdl().getSequence());
+            dba.addParam(DBC3000.P30F0102, DBC3000.P30F0A02, false);
+            dba.addParam(DBC3000.P30F0103, DBC3000.P30F0A03, false);
+            dba.addParam(DBC3000.P30F0104, DBC3000.P30F0A04, false);
+            dba.addParam(DBC3000.P30F0105, DBC3000.P30F0A05, false);
+            dba.addParam(DBC3000.P30F0106, DBC3000.P30F0A06, false);
+            dba.addParam(DBC3000.P30F0107, DBC3000.P30F0A07, false);
+            dba.addParam(DBC3000.P30F0108, DBC3000.P30F0A08, false);
+            dba.addParam(DBC3000.P30F0109, DBC3000.P30F0A09, false);
+            dba.addParam(DBC3000.P30F010A, DBC3000.P30F0A0A, false);
+            dba.addParam(DBC3000.P30F010B, DBC3000.P30F0A0B, false);
+            dba.addParam(DBC3000.P30F010C, DBC3000.P30F0A0C, false);
+            dba.addParam(DBC3000.P30F010D, DBC3000.P30F0A0D, false);
+            dba.addParam(DBC3000.P30F010E, DBC3000.P30F0A0E, false);
+            dba.addParam(DBC3000.P30F010F, DBC3000.P30F0A0F, false);
+            dba.addWhere(DBC3000.P30F0A01, logsHash);
+            dba.addCopyBatch(DBC3000.P30F0100, DBC3000.P30F0A00);
+            dba.reset();
+
+            dba.addParam(DBC3000.P30F0201, DBC3000.P30F0B02, false);
+            dba.addParam(DBC3000.P30F0202, DBC3000.P30F0B03, false);
+            dba.addParam(DBC3000.P30F0203, DBC3000.P30F0B04, false);
+            dba.addWhere(DBC3000.P30F0B01, logsHash);
+            dba.addCopyBatch(DBC3000.P30F0200, DBC3000.P30F0B00);
+            dba.reset();
 
             dba.executeBatch();
             return true;
@@ -1176,7 +1175,7 @@ public class DBA3000
         }
     }
 
-    public static boolean deleteHistData(String keysHash)
+    public static boolean deleteHistData(String keysHash, String logsHash)
     {
         DBAccess dba = new DBAccess();
 
@@ -1184,9 +1183,24 @@ public class DBA3000
         {
             dba.init();
 
-            dba.addTable(DBC3000.P30F0100);
-            dba.addWhere(DBC3000.P30F0104, keysHash);
-            dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_MODE_2);
+            boolean b = Util.isValidateHash(logsHash);
+
+            dba.addTable(DBC3000.P30F0A00);
+            dba.addWhere(DBC3000.P30F0A04, keysHash);
+            if (b)
+            {
+                dba.addWhere(DBC3000.P30F0A01, logsHash);
+            }
+            dba.addDeleteBatch();
+
+            dba.reset();
+            dba.addTable(DBC3000.P30F0B00);
+            dba.addWhere(DBC3000.P30F0B03, keysHash);
+            if (b)
+            {
+                dba.addWhere(DBC3000.P30F0B01, logsHash);
+            }
+            dba.addDeleteBatch();
 
             dba.executeDelete();
             return true;
@@ -1202,7 +1216,7 @@ public class DBA3000
         }
     }
 
-    public static boolean deleteHistData(String keysHash, String updtHash)
+    public static boolean selectHistData(String logsHash, Keys keys)
     {
         DBAccess dba = new DBAccess();
 
@@ -1210,50 +1224,40 @@ public class DBA3000
         {
             dba.init();
 
-            dba.addTable(DBC3000.P30F0100);
-            dba.addParam(DBC3000.P30F0104, keysHash);
-            dba.addWhere(DBC3000.P30F0104, updtHash);// 类别索引
-
-            dba.executeDelete();
-            return true;
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-            return false;
-        }
-        finally
-        {
-            dba.close();
-        }
-    }
-
-    public static boolean selectHistData(String hash, Keys pwds)
-    {
-        DBAccess dba = new DBAccess();
-
-        try
-        {
-            dba.init();
-
-            dba.addTable(DBC3000.P30F0100);
-            dba.addColumn(DBC3000.P30F0109);
-            dba.addColumn(DBC3000.P30F010A);
-            dba.addColumn(DBC3000.P30F010B);
-            dba.addColumn(DBC3000.P30F010D);
-            dba.addColumn(DBC3000.P30F010E);
-            dba.addColumn(DBC3000.P30F010B);
-            dba.addColumn(DBC3000.P30F010D);
-            dba.addWhere(DBC3000.P30F0104, hash);
-            dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_MODE_2);
-
+            dba.addTable(DBC3000.P30F0A00);
+            dba.addWhere(DBC3000.P30F0A01, logsHash);
             ResultSet rest = dba.executeSelect();
-            StringBuffer sb = new StringBuffer();
+            if (!rest.next())
+            {
+                return false;
+            }
+
+            keys.setP30F0102(rest.getInt(DBC3000.P30F0A02));
+            keys.setP30F0103(rest.getInt(DBC3000.P30F0A03));
+            keys.setP30F0104(rest.getString(DBC3000.P30F0A04));
+            keys.setP30F0106(rest.getString(DBC3000.P30F0A06));
+            keys.setP30F0107(rest.getTimestamp(DBC3000.P30F0A07));
+            keys.setP30F0108(rest.getString(DBC3000.P30F0A08));
+            keys.setP30F0109(rest.getString(DBC3000.P30F0A09));
+            keys.setP30F010A(rest.getString(DBC3000.P30F0A0A));
+            keys.setP30F010B(rest.getString(DBC3000.P30F0A0B));
+            keys.setP30F010C(rest.getString(DBC3000.P30F0A0C));
+            keys.setP30F010D(rest.getTimestamp(DBC3000.P30F0A0D));
+            keys.setP30F010E(rest.getString(DBC3000.P30F0A0E));
+            keys.setP30F010F(rest.getString(DBC3000.P30F0A0F));
+
+            dba.reset();
+            dba.addTable(DBC3000.P30F0B00);
+            dba.addColumn(DBC3000.P30F0B04);
+            dba.addWhere(DBC3000.P30F0B01, logsHash);
+            dba.addSort(DBC3000.P30F0B02);
+            rest = dba.executeSelect();
+            StringBuffer sb = keys.getPassword().getP30F0203();
             while (rest.next())
             {
-                sb.append(rest.getString(DBC3000.P30F010B));
+                sb.append(rest.getString(DBC3000.P30F0B04));
             }
-            pwds.setP30F010B(sb.toString());
+            keys.getPassword().setP30F0202(keys.getP30F0104());
 
             rest.close();
             return true;
@@ -1271,17 +1275,21 @@ public class DBA3000
 
     public static boolean selectHistData(String hash, List<S1S2> list)
     {
+        if (!Util.isValidateHash(hash))
+        {
+            return false;
+        }
+
         DBAccess dba = new DBAccess();
 
         try
         {
             dba.init();
 
-            dba.addTable(DBC3000.P30F0100);
-            dba.addColumn(DBC3000.P30F0104);
-            dba.addWhere(DBC3000.P30F0104, hash);
-            dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_MODE_2);
-            dba.addSort(DBC3000.P30F0104, false);
+            dba.addTable(DBC3000.P30F0A00);
+            dba.addColumn(DBC3000.P30F0A01);
+            dba.addWhere(DBC3000.P30F0A04, hash);
+            dba.addSort(DBC3000.P30F0A01, false);
 
             S1S2 item;
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(ConsEnv.VIEW_DATE);
@@ -1289,7 +1297,7 @@ public class DBA3000
             while (rest.next())
             {
                 item = new S1S2();
-                item.setK(rest.getString(DBC3000.P30F0104));
+                item.setK(rest.getString(DBC3000.P30F0A01));
                 item.setV(sdf.format(new Date(Long.parseLong(item.getK(), 16))));
                 item.setV2(item.getV());
 

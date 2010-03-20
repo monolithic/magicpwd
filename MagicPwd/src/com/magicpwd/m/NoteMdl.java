@@ -19,7 +19,7 @@ import com.magicpwd._util.Util;
 import com.magicpwd.d.DBA3000;
 
 /**
- * @author Amonsoft
+ * @author Amon
  */
 public class NoteMdl
 {

@@ -25,7 +25,7 @@ public interface ConsEnv
     /**
      * 软件信息：软件首页
      */
-    String HOMEPAGE = "http://magicpwd.com/";
+    String HOMEPAGE = "http://www.magicpwd.com/";
     /**
      * 软件信息：构建日期
      */
@@ -34,6 +34,7 @@ public interface ConsEnv
      * 软件信息：软件版权
      */
     String SOFTCOPY = "© {0} MagicPwd.com";
+    String SOFTMAIL = "Amon@amonsoft.cn";
     /**
      * 安全信息：摘要算法
      */
