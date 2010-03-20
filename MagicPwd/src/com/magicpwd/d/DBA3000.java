@@ -70,7 +70,7 @@ public class DBA3000
      */
     private static void addDataSort(DBAccess dba)
     {
-        boolean asc = ConsCfg.DEF_TRUE.equals(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_VIEW_LIST_ASC));
+        boolean asc = ConsCfg.DEF_TRUE.equals(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_VIEW_LIST_ASC, ConsCfg.DEF_TRUE));
         String key = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_VIEW_LIST_ASC, "");
 
         // 按访问频率排序
@@ -112,6 +112,7 @@ public class DBA3000
             item = new Keys();
             item.setP30F0101(rest.getInt(DBC3000.P30F0101));
             item.setP30F0102(rest.getInt(DBC3000.P30F0102));
+            item.setP30F0103(rest.getInt(DBC3000.P30F0103));
             item.setP30F0104(rest.getString(DBC3000.P30F0104));
             item.setP30F0105(rest.getString(DBC3000.P30F0105));
             item.setP30F0106(rest.getString(DBC3000.P30F0106));

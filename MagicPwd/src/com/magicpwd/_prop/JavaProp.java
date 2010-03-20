@@ -48,28 +48,14 @@ public class JavaProp extends javax.swing.JPanel implements IPropBean
             javaList = new java.util.ArrayList<S1S1>();
             java.util.Properties prop = System.getProperties();
             S1S1 item;
-            String[] value =
-            {
-                "", ""
-            };
             for (String key : prop.stringPropertyNames())
             {
                 item = new S1S1(key, prop.getProperty(key));
                 javaList.add(item);
-
-                if (item.getK().length() > value[0].length())
-                {
-                    value[0] = item.getV();
-                }
-                if (item.getV().length() > value[1].length())
-                {
-                    value[1] = item.getV();
-                }
             }
             JavaModel jm = new JavaModel();
             tb_JavaList.setModel(jm);
             tb_JavaList.setRowSorter(new javax.swing.table.TableRowSorter<JavaModel>(jm));
-            reSize(jm, value);
         }
     }
 
@@ -82,26 +68,6 @@ public class JavaProp extends javax.swing.JPanel implements IPropBean
     public javax.swing.JPanel getPanel()
     {
         return this;
-    }
-
-    private void reSize(JavaModel model, Object[] value)
-    {
-        javax.swing.table.TableColumn column = null;
-        int headerWidth;
-        int columnWidth;
-        javax.swing.table.TableCellRenderer headerRenderer = tb_JavaList.getTableHeader().getDefaultRenderer();
-        javax.swing.table.TableCellRenderer columnRenderer;
-        javax.swing.table.TableColumnModel columnModel = tb_JavaList.getColumnModel();
-        for (int i = 0, j = columnModel.getColumnCount(); i < j; i++)
-        {
-            column = columnModel.getColumn(i);
-
-            headerWidth = headerRenderer.getTableCellRendererComponent(tb_JavaList, column.getHeaderValue(), false, false, 0, i).getPreferredSize().width;
-            columnRenderer = tb_JavaList.getDefaultRenderer(model.getColumnClass(i));
-            columnWidth = columnRenderer.getTableCellRendererComponent(tb_JavaList, value[i], false, false, 0, i).getPreferredSize().width;
-
-            column.setPreferredWidth(Math.max(headerWidth, columnWidth));
-        }
     }
 
     private class JavaModel implements javax.swing.table.TableModel

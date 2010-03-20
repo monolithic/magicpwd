@@ -303,10 +303,10 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         Lang.setWTips(bt_ApndData, LangRes.P30F850A, "新增(Alt + N)");
 
         Lang.setWText(bt_SaveData, LangRes.P30F8507, "&S");
-        Lang.setWTips(bt_SaveData, LangRes.P30F8507, "保存(Alt + S)");
+        Lang.setWTips(bt_SaveData, LangRes.P30F8508, "保存(Alt + S)");
 
         Lang.setWText(bt_DropData, LangRes.P30F850B, "&D");
-        Lang.setWTips(bt_DropData, LangRes.P30F850B, "删除(Alt + D)");
+        Lang.setWTips(bt_DropData, LangRes.P30F850C, "删除(Alt + D)");
     }
 
     private void initBaseLang()
