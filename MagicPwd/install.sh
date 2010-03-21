@@ -14,10 +14,10 @@ echo "Terminal=false" >> magicpwd.desktop
 echo "Icon[zh_CN]=evince" >> magicpwd.desktop
 echo "Exec=$(pwd)/magicpwd.jar" >> magicpwd.desktop
 echo "Name[zh_CN]=魔方密码" >> magicpwd.desktop
-echo "Comment[zh_CN]=魔方密码" >> magicpwd.desktop
+echo "Comment[zh_CN]=跨平台密码管理软件！" >> magicpwd.desktop
 echo "Name=魔方密码" >> magicpwd.desktop
-echo "Comment=魔方密码" >> magicpwd.desktop
-echo "Icon=evince" >> magicpwd.desktop
+echo "Comment=跨平台密码管理软件！" >> magicpwd.desktop
+echo "Icon=$(pwd)/logo/logo.svg" >> magicpwd.desktop
 echo "" >> magicpwd.desktop
 
 if [ -d ~/desktop/ ]
