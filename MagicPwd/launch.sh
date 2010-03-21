@@ -32,9 +32,9 @@ esac
 
 # MagicPwd home.
 if $macosx ; then
-	MAGICPWD_HOME='./tmp/magicpwd-sql-3.1/Contents/Resources/Java'
+	MAGICPWD_HOME='./tmp/magicpwd/Contents/Resources/Java'
 else 
-	MAGICPWD_HOME='./tmp/magicpwd-sql-3.1'
+	MAGICPWD_HOME='./tmp/magicpwd'
 fi
 
 # MagicPwd home in Unix format.
@@ -57,7 +57,7 @@ if [ "$?" = "1" ]; then
 fi
 
 # First entry in classpath is the MagicPwd application.
-TMP_CP="$UNIX_STYLE_HOME/magicpwd-sql.jar"
+TMP_CP="$UNIX_STYLE_HOME/magicpwd.jar"
 
 # Then add all library jars to the classpath.
 for a in "$UNIX_STYLE_HOME"/lib/*; do
@@ -91,8 +91,8 @@ if $macosx ; then
 fi
 
 # Check for updates and prompt to apply if any are available
-if [ -f "$UNIX_STYLE_HOME/update/downloads/core/magicpwd-sql.jar" -a -f "$UNIX_STYLE_HOME/update/changeList.xml" ]; then
-	$JAVACMD -cp "$UPDATE_CP" $MACOSX_UPDATER_PROPS -Dlog4j.defaultInitOverride=true -Dprompt=true net.sourceforge.magicpwd_sql.client.update.gui.installer.PreLaunchUpdateApplication -l "$UNIX_STYLE_HOME/update-log4j.properties"
+if [ -f "$UNIX_STYLE_HOME/update/downloads/core/magicpwd.jar" -a -f "$UNIX_STYLE_HOME/update/changeList.xml" ]; then
+	#$JAVACMD -cp "$UPDATE_CP" $MACOSX_UPDATER_PROPS -Dlog4j.defaultInitOverride=true -Dprompt=true net.sourceforge.magicpwd_sql.client.update.gui.installer.PreLaunchUpdateApplication -l "$UNIX_STYLE_HOME/update-log4j.properties"
 fi
 
 if $macosx ; then
@@ -103,4 +103,4 @@ else
 fi
 
 # Launch MagicPwd application
-$JAVACMD -Xmx256m -cp "$TMP_CP" $MACOSX_MAGICPWD_PROPS net.sourceforge.magicpwd_sql.client.Main --log-config-file "$UNIX_STYLE_HOME"/log4j.properties --magicpwd-home "$UNIX_STYLE_HOME" $NATIVE_LAF_PROP $SCRIPT_ARGS
+$JAVACMD -Xmx256m -cp "$TMP_CP" $MACOSX_MAGICPWD_PROPS com.magicpwd.MagicPwd --log-config-file "$UNIX_STYLE_HOME"/log4j.properties --magicpwd-home "$UNIX_STYLE_HOME" $NATIVE_LAF_PROP $SCRIPT_ARGS
