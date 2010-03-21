@@ -38,10 +38,10 @@
 使用说明：
         在您的机器已安装最新版本的Java运行环境（JRE 6.0及以上）的情况下，可以通过以下三种方式启动软件：
 
-        方式一：双击install.vbs（Windows平台）或install.sh（Linux平台）执行程序安装；
-        方式二：双击magicpwd.jar文件，本地启动应用程序，适用于任何操作平台；
-        方式三：双击magicpwd.jnlp文件，网络加载应用程序，适用于任何操作平台；
-        方式四：双击magicpwd.bat（Windows平台）或magicpwd.sh（Linux平台）文件。
+        方式一：双击magicpwd.jar文件，本地启动应用程序，适用于任何操作平台；
+        方式二：双击launch.jnlp文件，网络加载应用程序，适用于任何操作平台；
+        方式三：双击launch.bat（Windows平台）或launch.sh（Linux平台）文件；
+        方式四：双击install.vbs（Windows平台）或install.sh（Linux平台）执行程序安装。
 
 软件升级：
 ■2010-03-21：V3.0.0.0
