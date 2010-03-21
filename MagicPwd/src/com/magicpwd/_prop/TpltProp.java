@@ -4,7 +4,6 @@
 package com.magicpwd._prop;
 
 import com.magicpwd.MagicPwd;
-import com.magicpwd._comn.S1S2;
 
 import javax.swing.JOptionPane;
 import javax.swing.event.TreeSelectionEvent;
@@ -500,7 +499,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         if (Lang.showFirm(MagicPwd.getCurrForm(), LangRes.P30F8A09, "确认要删除此数据吗，此操作将不可恢复？") == JOptionPane.YES_OPTION)
         {
             javax.swing.tree.DefaultMutableTreeNode node = (javax.swing.tree.DefaultMutableTreeNode) path.getLastPathComponent();
-            DBA3000.deleteTpltData((S1S2) node.getUserObject());
+            DBA3000.deleteTpltData((Tplt) node.getUserObject());
             tm_TpltList.removeNodeFromParent((javax.swing.tree.DefaultMutableTreeNode) path.getLastPathComponent());
         }
     }

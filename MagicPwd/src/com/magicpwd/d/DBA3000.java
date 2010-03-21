@@ -861,7 +861,7 @@ public class DBA3000
         return kindList;
     }
 
-    public static boolean deleteTpltData(S1S2 tpltItem)
+    public static boolean deleteTpltData(Tplt tpltItem)
     {
         DBAccess dba = new DBAccess();
 
@@ -870,16 +870,8 @@ public class DBA3000
             dba.init();
 
             dba.addTable(DBC3000.P30F1100);
-            dba.addWhere(DBC3000.P30F1104, tpltItem.getK());
-            dba.addDeleteBatch();
-
-            dba.reset();
-
-            dba.addTable(DBC3000.P30F1100);
-            dba.addWhere(DBC3000.P30F1103, tpltItem.getK());
-            dba.addDeleteBatch();
-
-            dba.executeBatch();
+            dba.addWhere(Util.format("{1}='{0}' OR {2}='{0}'", tpltItem.getP30F1103(), DBC3000.P30F1103, DBC3000.P30F1104));
+            dba.executeDelete();
             return true;
         }
         catch (Exception exp)
