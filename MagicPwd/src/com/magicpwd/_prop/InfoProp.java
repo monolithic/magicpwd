@@ -38,9 +38,9 @@ public class InfoProp extends javax.swing.JPanel implements IPropBean
         lc_Site.setLinkUrl(ConsEnv.HOMEPAGE);
         lc_Site.setAutoOpenLink(true);
 
-        ta_Note.setColumns(20);
         ta_Note.setEditable(false);
-        ta_Note.setRows(5);
+        ta_Note.setLineWrap(true);
+        ta_Note.setWrapStyleWord(true);
         sp.setViewportView(ta_Note);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -60,7 +60,7 @@ public class InfoProp extends javax.swing.JPanel implements IPropBean
         hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg1.addGroup(hpg2);
         hsg1.addContainerGap(1, Short.MAX_VALUE);
-        javax.swing.GroupLayout.ParallelGroup hpg3=layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        javax.swing.GroupLayout.ParallelGroup hpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg3.addGroup(hsg1);
         hpg3.addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE);
         layout.setHorizontalGroup(hpg3);
@@ -117,7 +117,7 @@ public class InfoProp extends javax.swing.JPanel implements IPropBean
 
         lc_Copy.setText(Util.format(ConsEnv.SOFTCOPY, "" + Calendar.getInstance().get(Calendar.YEAR)));
 
-//        ta_Note.setText(Lang.getLang("", ""));
+        ta_Note.setText(Lang.getLang(LangRes.P30F2F01, ""));
     }
 
     @Override
