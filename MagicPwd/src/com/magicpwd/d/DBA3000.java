@@ -70,32 +70,32 @@ public class DBA3000
      */
     private static void addDataSort(DBAccess dba)
     {
-        boolean asc = ConsCfg.DEF_TRUE.equals(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_VIEW_LIST_ASC, ConsCfg.DEF_TRUE));
+        boolean desc = ConsCfg.DEF_FAIL.equals(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_VIEW_LIST_ASC, ConsCfg.DEF_FAIL));
         String key = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_VIEW_LIST_ASC, "");
 
         // 按访问频率排序
         if (ConsEnv.LIST_SORT_FEQ.equals(key))
         {
-            dba.addSort(DBC3000.P30F0101, asc);
+            dba.addSort(DBC3000.P30F0101, desc);
             return;
         }
 
         // 按注册时间排序
         if (ConsEnv.LIST_SORT_REG.equals(key))
         {
-            dba.addSort(DBC3000.P30F0107, asc);
+            dba.addSort(DBC3000.P30F0107, desc);
             return;
         }
 
         // 按到期时间排序
         if (ConsEnv.LIST_SORT_DUE.equals(key))
         {
-            dba.addSort(DBC3000.P30F010D, asc);
+            dba.addSort(DBC3000.P30F010D, desc);
             return;
         }
 
         // 按显示名称排序
-        dba.addSort(DBC3000.P30F0109, asc);
+        dba.addSort(DBC3000.P30F0109, desc);
     }
 
     /**
