@@ -1,9 +1,6 @@
 #! /bin/sh
 
 
-# IZPACK_JAVA_HOME is filtered in by the IzPack installer when this script is installed
-IZPACK_JAVA_HOME=C:\Program Files\Java\jre6
-
 # We detect the java executable to use according to the following algorithm:
 #
 # 1. If it is located in JAVA_HOME, then we use that; or
@@ -12,8 +9,6 @@ IZPACK_JAVA_HOME=C:\Program Files\Java\jre6
 # 
 if [ -d "$JAVA_HOME" -a -x "$JAVA_HOME/bin/java" ]; then
 	JAVACMD="$JAVA_HOME/bin/java"
-elif [ -d "$IZPACK_JAVA_HOME" -a -x "$IZPACK_JAVA_HOME/bin/java" ]; then
-	JAVACMD="$IZPACK_JAVA_HOME/bin/java"
 else
 	JAVACMD=java
 fi
@@ -32,9 +27,9 @@ esac
 
 # MagicPwd home.
 if $macosx ; then
-	MAGICPWD_HOME='./tmp/magicpwd/Contents/Resources/Java'
+	MAGICPWD_HOME='./Contents/Resources/Java'
 else 
-	MAGICPWD_HOME='./tmp/magicpwd'
+	MAGICPWD_HOME='./'
 fi
 
 # MagicPwd home in Unix format.
@@ -88,11 +83,6 @@ if $macosx ; then
 	MACOSX_UPDATER_PROPS="-Dapple.laf.useScreenMenuBar=true -Dcom.apple.mrj.application.apple.menu.about.name=MagicPwd"
 	MACOSX_MAGICPWD_PROPS="-Dapple.laf.useScreenMenuBar=true -Dcom.apple.mrj.application.apple.menu.about.name=MagicPwd"
 	NATIVE_LAF_PROP="--native-laf"
-fi
-
-# Check for updates and prompt to apply if any are available
-if [ -f "$UNIX_STYLE_HOME/update/downloads/core/magicpwd.jar" -a -f "$UNIX_STYLE_HOME/update/changeList.xml" ]; then
-	#$JAVACMD -cp "$UPDATE_CP" $MACOSX_UPDATER_PROPS -Dlog4j.defaultInitOverride=true -Dprompt=true net.sourceforge.magicpwd_sql.client.update.gui.installer.PreLaunchUpdateApplication -l "$UNIX_STYLE_HOME/update-log4j.properties"
 fi
 
 if $macosx ; then
