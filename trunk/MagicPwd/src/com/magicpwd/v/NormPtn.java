@@ -185,8 +185,8 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
         vpg1.addComponent(tf_NoteHead, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER);
         vpg2.addComponent(bt_ExitNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vpg2.addComponent(ck_NoteWrap);
-        vpg2.addComponent(pl_NoteInfo);
+        vpg2.addComponent(ck_NoteWrap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg2.addComponent(pl_NoteInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
         vsg.addContainerGap();
         vsg.addGroup(vpg1);
@@ -651,6 +651,16 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
     private void tf_SrchNoteActionPerformed(java.awt.event.ActionEvent evt)
     {
         findActionPerformed(evt);
+    }
+
+    @Override
+    protected void processWindowEvent(java.awt.event.WindowEvent e)
+    {
+        if (e.getID() == java.awt.event.WindowEvent.WINDOW_CLOSING)
+        {
+            fileExitActionPerformed(null);
+        }
+        super.processWindowEvent(e);
     }
 
     private boolean showFrm()
