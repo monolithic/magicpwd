@@ -622,7 +622,6 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                 Logs.exception(exp);
             }
         }
-//        showPropEdit();
     }
 
     @Override

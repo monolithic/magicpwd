@@ -1,6 +1,7 @@
 package com.magicpwd._user;
 
 import com.magicpwd._cons.ConsCfg;
+import java.awt.event.FocusEvent;
 import java.security.NoSuchAlgorithmException;
 
 import javax.crypto.NoSuchPaddingException;
@@ -191,6 +192,15 @@ public class UserSign extends JPanel
         if (tf_UserName == null)
         {
             tf_UserName = new javax.swing.JTextField();
+            tf_UserName.addFocusListener(new java.awt.event.FocusAdapter()
+            {
+
+                @Override
+                public void focusGained(FocusEvent e)
+                {
+                    tf_UserName.selectAll();
+                }
+            });
         }
         if (lb_UserKeys == null)
         {
@@ -199,6 +209,15 @@ public class UserSign extends JPanel
         if (pf_UserKeys == null)
         {
             pf_UserKeys = new javax.swing.JPasswordField();
+            pf_UserKeys.addFocusListener(new java.awt.event.FocusAdapter()
+            {
+
+                @Override
+                public void focusGained(FocusEvent e)
+                {
+                    pf_UserKeys.selectAll();
+                }
+            });
         }
         if (bt_Cancel == null)
         {
@@ -301,6 +320,15 @@ public class UserSign extends JPanel
         if (tf_UserName == null)
         {
             tf_UserName = new javax.swing.JTextField();
+            tf_UserName.addFocusListener(new java.awt.event.FocusAdapter()
+            {
+
+                @Override
+                public void focusGained(FocusEvent e)
+                {
+                    tf_UserName.selectAll();
+                }
+            });
         }
         if (lb_UserKeys == null)
         {
@@ -309,6 +337,15 @@ public class UserSign extends JPanel
         if (pf_UserKeys == null)
         {
             pf_UserKeys = new javax.swing.JPasswordField();
+            pf_UserKeys.addFocusListener(new java.awt.event.FocusAdapter()
+            {
+
+                @Override
+                public void focusGained(FocusEvent e)
+                {
+                    pf_UserKeys.selectAll();
+                }
+            });
         }
         if (bt_Cancel == null)
         {
@@ -389,6 +426,15 @@ public class UserSign extends JPanel
         if (tf_UserName == null)
         {
             tf_UserName = new javax.swing.JTextField();
+            tf_UserName.addFocusListener(new java.awt.event.FocusAdapter()
+            {
+
+                @Override
+                public void focusGained(FocusEvent e)
+                {
+                    tf_UserName.selectAll();
+                }
+            });
         }
         if (lb_UserKeys == null)
         {
@@ -397,6 +443,15 @@ public class UserSign extends JPanel
         if (pf_UserKeys == null)
         {
             pf_UserKeys = new javax.swing.JPasswordField();
+            pf_UserKeys.addFocusListener(new java.awt.event.FocusAdapter()
+            {
+
+                @Override
+                public void focusGained(FocusEvent e)
+                {
+                    pf_UserKeys.selectAll();
+                }
+            });
         }
         if (lb_FirmPwds == null)
         {
@@ -405,6 +460,15 @@ public class UserSign extends JPanel
         if (pf_FirmPwds == null)
         {
             pf_FirmPwds = new javax.swing.JPasswordField();
+            pf_FirmPwds.addFocusListener(new java.awt.event.FocusAdapter()
+            {
+
+                @Override
+                public void focusGained(FocusEvent e)
+                {
+                    pf_FirmPwds.selectAll();
+                }
+            });
         }
         if (bt_Cancel == null)
         {
@@ -511,6 +575,15 @@ public class UserSign extends JPanel
         if (pf_CurrPwds == null)
         {
             pf_CurrPwds = new javax.swing.JPasswordField();
+            pf_CurrPwds.addFocusListener(new java.awt.event.FocusAdapter()
+            {
+
+                @Override
+                public void focusGained(FocusEvent e)
+                {
+                    pf_CurrPwds.selectAll();
+                }
+            });
         }
         if (lb_UserKeys == null)
         {
@@ -519,6 +592,15 @@ public class UserSign extends JPanel
         if (pf_UserKeys == null)
         {
             pf_UserKeys = new javax.swing.JPasswordField();
+            pf_UserKeys.addFocusListener(new java.awt.event.FocusAdapter()
+            {
+
+                @Override
+                public void focusGained(FocusEvent e)
+                {
+                    pf_UserKeys.selectAll();
+                }
+            });
         }
         if (lb_FirmPwds == null)
         {
@@ -608,6 +690,15 @@ public class UserSign extends JPanel
         if (pf_UserKeys == null)
         {
             pf_UserKeys = new javax.swing.JPasswordField();
+            pf_UserKeys.addFocusListener(new java.awt.event.FocusAdapter()
+            {
+
+                @Override
+                public void focusGained(FocusEvent e)
+                {
+                    pf_UserKeys.selectAll();
+                }
+            });
         }
         if (lb_FirmPwds == null)
         {
@@ -616,6 +707,15 @@ public class UserSign extends JPanel
         if (pf_FirmPwds == null)
         {
             pf_FirmPwds = new javax.swing.JPasswordField();
+            pf_FirmPwds.addFocusListener(new java.awt.event.FocusAdapter()
+            {
+
+                @Override
+                public void focusGained(FocusEvent e)
+                {
+                    pf_FirmPwds.selectAll();
+                }
+            });
         }
         if (bt_Cancel == null)
         {

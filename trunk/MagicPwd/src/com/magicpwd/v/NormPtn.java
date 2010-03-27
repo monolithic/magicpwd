@@ -667,6 +667,7 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
     {
         MagicPwd.showMainPtn();
         MagicPwd.getCurrForm().setVisible(true);
+        MagicPwd.getCurrForm().setState(NORMAL);
         this.setVisible(false);
         return true;
     }
