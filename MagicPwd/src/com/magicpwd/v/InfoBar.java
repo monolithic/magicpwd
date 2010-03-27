@@ -59,9 +59,9 @@ public class InfoBar extends JPanel
         this.setLayout(layout);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addContainerGap();
-        hsg.addComponent(lb_InfoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE);
+        hsg.addComponent(lb_InfoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg.addComponent(lb_DateLabel,javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hsg.addComponent(lb_DateLabel,javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg.addContainerGap();
         layout.setHorizontalGroup(hsg);
 
