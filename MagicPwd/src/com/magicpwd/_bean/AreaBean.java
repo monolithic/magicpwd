@@ -50,7 +50,6 @@ public class AreaBean extends javax.swing.JPanel implements IEditBean
         ta_PropData = new javax.swing.JTextArea();
         lb_PropData.setLabelFor(ta_PropData);
         ta_PropData.setLineWrap(true);
-        ta_PropData.setRows(3);
         javax.swing.JScrollPane sp_PropData = new javax.swing.JScrollPane(ta_PropData);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

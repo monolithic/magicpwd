@@ -44,7 +44,6 @@ public class MetaBean extends javax.swing.JPanel implements IEditBean
         lb_PropData = new javax.swing.JLabel();
         ta_PropData = new javax.swing.JTextArea();
         ta_PropData.setLineWrap(true);
-        ta_PropData.setRows(3);
         lb_PropData.setLabelFor(ta_PropData);
         javax.swing.JScrollPane sp_PropData = new javax.swing.JScrollPane(ta_PropData);
 
