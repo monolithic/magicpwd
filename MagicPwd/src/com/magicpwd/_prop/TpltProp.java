@@ -424,13 +424,16 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
             return;
         }
 
-        if (!name.startsWith(ConsDat.SP_TPL_LS))
+        if (indx != 0)
         {
-            name = ConsDat.SP_TPL_LS + name;
-        }
-        if (!name.endsWith(ConsDat.SP_TPL_RS))
-        {
-            name = name + ConsDat.SP_TPL_RS;
+            if (!name.startsWith(ConsDat.SP_TPL_LS))
+            {
+                name = ConsDat.SP_TPL_LS + name;
+            }
+            if (!name.endsWith(ConsDat.SP_TPL_RS))
+            {
+                name = name + ConsDat.SP_TPL_RS;
+            }
         }
 
         if (currTplt == null)
