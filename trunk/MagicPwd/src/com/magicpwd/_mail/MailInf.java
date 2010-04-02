@@ -10,7 +10,10 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.mail.Address;
 import javax.mail.BodyPart;
@@ -30,13 +33,13 @@ import javax.mail.internet.MimeUtility;
 public class MailInf
 {
 
-    private String contentType = "text/html;charset=UTF-8";
-    private Address[] address;
-    private Address[] to;
-    private Address[] cc;
-    private Address[] bcc;
+    private String contentType = ConsEnv.TEXT_HTML + ';' + ConsEnv.CHARSET + "=UTF-8";
+    private String from;
+    private String to;
+    private String cc;
+    private String bcc;
     private String subject;
-    private Date sendDate;
+    private Date sentDate;
     private boolean needReply;
     private boolean unReaded;
     /**
@@ -56,12 +59,12 @@ public class MailInf
     {
         try
         {
-            address = message.getFrom();
-            to = message.getRecipients(Message.RecipientType.TO);
-            cc = message.getRecipients(Message.RecipientType.CC);
-            bcc = message.getRecipients(Message.RecipientType.BCC);
-            subject = message.getSubject();
-            sendDate = message.getSentDate();
+            from = getAddress(message.getFrom());
+            to = getAddress(message.getRecipients(Message.RecipientType.TO));
+            cc = getAddress(message.getRecipients(Message.RecipientType.CC));
+            bcc = getAddress(message.getRecipients(Message.RecipientType.BCC));
+            subject = MimeUtility.decodeText(message.getSubject());
+            sentDate = message.getSentDate();
             needReply = message.getHeader("Disposition-Notification-To") != null;
             getMailContent(message);
             for (Flags.Flag flag : message.getFlags().getSystemFlags())
@@ -72,6 +75,7 @@ public class MailInf
                     break;
                 }
             }
+            message.setFlag(Flags.Flag.SEEN, true);
             return true;
         }
         catch (Exception ex)
@@ -89,83 +93,67 @@ public class MailInf
     /**
      * 获得发件人的地址和姓名
      */
-    public String getFrom() throws Exception
+    public String getFrom()
     {
-        if (address != null && address.length > 0)
-        {
-            Address addr = address[0];
-            if (addr instanceof InternetAddress)
-            {
-                InternetAddress temp = (InternetAddress) addr;
-                return temp.getPersonal() + "<" + temp.getAddress() + ">";
-            }
-        }
-        return "";
+        return from;
     }
 
     /**
-     * 获得邮件的收件人，抄送，和密送的地址和姓名，根据所传递的参数的不同 "to"----收件人 "cc"---抄送人地址 "bcc"---密送人地址
+     * 获取收件人的地址和姓名
+     * @return
      */
-    public String getMailAddress(String type) throws Exception
+    public String getTo()
     {
-        String mailaddr = "";
-        String addtype = type.toUpperCase();
-        InternetAddress[] addr = null;
-        if (addtype.equals("TO") || addtype.equals("CC") || addtype.equals("BCC"))
+        return to;
+    }
+
+    /**
+     * 获取抄送人的地址和姓名
+     * @return
+     */
+    public String getCc()
+    {
+        return cc;
+    }
+
+    /**
+     * 获取密抄人的地址和姓名
+     * @return
+     */
+    public String getBcc()
+    {
+        return bcc;
+    }
+
+    private String getAddress(Address[] addresses) throws UnsupportedEncodingException
+    {
+        if (addresses == null || addresses.length < 1)
         {
-            if (addtype.equals("TO"))
-            {
-                addr = (InternetAddress[]) to;
-            }
-            else if (addtype.equals("CC"))
-            {
-                addr = (InternetAddress[]) cc;
-            }
-            else
-            {
-                addr = (InternetAddress[]) bcc;
-            }
-            if (addr != null)
-            {
-                for (int i = 0; i < addr.length; i++)
-                {
-                    String email = addr[i].getAddress();
-                    if (email == null)
-                    {
-                        email = "";
-                    }
-                    else
-                    {
-                        email = MimeUtility.decodeText(email);
-                    }
-                    String personal = addr[i].getPersonal();
-                    if (personal == null)
-                    {
-                        personal = "";
-                    }
-                    else
-                    {
-                        personal = MimeUtility.decodeText(personal);
-                    }
-                    String compositeto = personal + "<" + email + ">";
-                    mailaddr += "," + compositeto;
-                }
-                mailaddr = mailaddr.substring(1);
-            }
+            return "";
         }
-        else
+        StringBuffer buffer = new StringBuffer();
+        for (Address addr : addresses)
         {
-            throw new Exception("Error emailaddr type!");
+            if (addr instanceof InternetAddress)
+            {
+                InternetAddress temp = (InternetAddress) addr;
+                String personal = temp.getPersonal();
+                String address = temp.getAddress();
+                buffer.append(personal != null ? MimeUtility.decodeText(personal) : "");
+                buffer.append('<').append(address != null ? MimeUtility.decodeText(address) : "").append(">,");
+                continue;
+            }
+            buffer.append(addr.toString()).append(',');
         }
-        return mailaddr;
+        return buffer.toString();
     }
 
     /**
      * 获得邮件主题
      */
-    public String getSubject() throws Exception
+    public String getSubject()
     {
-        return MimeUtility.decodeText(subject);
+        return subject;
     }
 
     /**
@@ -173,7 +161,7 @@ public class MailInf
      */
     public Date getSentDate()
     {
-        return sendDate;
+        return sentDate;
     }
 
     /**
@@ -195,28 +183,48 @@ public class MailInf
             return;
         }
         ContentType cType = new ContentType(sType);
-        String p = cType.getParameter("charset");
-
-        sType = cType.getParameter("charset");
+        sType = cType.getParameter(ConsEnv.CHARSET);
         if (!Util.isValidate(sType))
         {
-            sType = "UTF-8";
+            String[] sTemp = part.getHeader("from");
+            if (sTemp != null && sTemp.length > 0)
+            {
+                sType = sTemp[0];
+            }
+            if (Util.isValidate(sType))
+            {
+                Matcher matcher = Pattern.compile("=\\?\\w+\\?", Pattern.CASE_INSENSITIVE).matcher(sType);
+                if (matcher.find())
+                {
+                    sType = matcher.group();
+                    sType = sType.substring(2, sType.length() - 1);
+                }
+                else
+                {
+                    sType = "UTF-8";
+                }
+            }
+            else
+            {
+                sType = "UTF-8";
+            }
         }
 
         boolean conname = sType.indexOf("name") != -1;
-        if (part.isMimeType("text/plain") && !conname)
+        if (part.isMimeType(ConsEnv.TEXT_PLAIN) && !conname)
         {
-            contentType = "text/plain;charset=" + sType;
+            contentType = ConsEnv.TEXT_PLAIN + ';' + ConsEnv.CHARSET + '=' + sType;
+
             content.append((String) part.getContent());
             return;
         }
-        if (part.isMimeType("texl/html") && !conname)
+        if (part.isMimeType(ConsEnv.TEXT_HTML) && !conname)
         {
-            contentType = "text/html;charset=" + sType;
+            contentType = ConsEnv.TEXT_HTML + ';' + ConsEnv.CHARSET + '=' + sType;
             content.append((String) part.getContent());
             return;
         }
-        if (part.isMimeType("multipart/*"))
+        if (part.isMimeType(ConsEnv.MULTIPART))
         {
             Multipart multipart = (Multipart) part.getContent();
             int counts = multipart.getCount();
@@ -226,7 +234,7 @@ public class MailInf
             }
             return;
         }
-        if (part.isMimeType("message/rfc822"))
+        if (part.isMimeType(ConsEnv.MESSAGE))
         {
             getMailContent((Part) part.getContent());
             return;
@@ -249,7 +257,7 @@ public class MailInf
     /**
      * 获得此邮件的Message-ID
      */
-    public String getMessageId() throws MessagingException
+    public String getMessageId()
     {
         return "";//mimeMessage.getMessageID();
     }
@@ -257,7 +265,7 @@ public class MailInf
     /**
      * 【判断此邮件是否已读，如果未读返回返回 false,反之返回true】
      */
-    public boolean isNew() throws MessagingException
+    public boolean isNew()
     {
         return unReaded;
     }
@@ -268,7 +276,7 @@ public class MailInf
     public boolean isContainAttach(Part part) throws Exception
     {
         boolean attachflag = false;
-        if (part.isMimeType("multipart/*"))
+        if (part.isMimeType(ConsEnv.MULTIPART))
         {
             Multipart mp = (Multipart) part.getContent();
             for (int i = 0; i < mp.getCount(); i++)
@@ -279,7 +287,7 @@ public class MailInf
                 {
                     attachflag = true;
                 }
-                else if (mpart.isMimeType("multipart/*"))
+                else if (mpart.isMimeType(ConsEnv.MULTIPART))
                 {
                     attachflag = isContainAttach((Part) mpart);
                 }
@@ -297,7 +305,7 @@ public class MailInf
                 }
             }
         }
-        else if (part.isMimeType("message/rfc822"))
+        else if (part.isMimeType(ConsEnv.MESSAGE))
         {
             attachflag = isContainAttach((Part) part.getContent());
         }
@@ -310,7 +318,7 @@ public class MailInf
     public void saveAttachMent(Part part) throws Exception
     {
         String fileName = "";
-        if (part.isMimeType("multipart/*"))
+        if (part.isMimeType(ConsEnv.MULTIPART))
         {
             Multipart mp = (Multipart) part.getContent();
             for (int i = 0; i < mp.getCount(); i++)
@@ -326,14 +334,14 @@ public class MailInf
                     }
                     saveFile(fileName, mpart.getInputStream());
                 }
-                else if (mpart.isMimeType("multipart/*"))
+                else if (mpart.isMimeType(ConsEnv.MULTIPART))
                 {
                     saveAttachMent(mpart);
                 }
                 else
                 {
                     fileName = mpart.getFileName();
-                    if ((fileName != null) && (fileName.toLowerCase().indexOf("GB2312") != -1))
+                    if ((fileName != null) && (fileName.toLowerCase().indexOf("gb2312") != -1))
                     {
                         fileName = MimeUtility.decodeText(fileName);
                         saveFile(fileName, mpart.getInputStream());
@@ -341,7 +349,7 @@ public class MailInf
                 }
             }
         }
-        else if (part.isMimeType("message/rfc822"))
+        else if (part.isMimeType(ConsEnv.MESSAGE))
         {
             saveAttachMent((Part) part.getContent());
         }

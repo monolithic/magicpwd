@@ -8,7 +8,6 @@ import com.magicpwd._util.Desk;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import java.awt.Point;
-import javax.mail.FetchProfile;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.Store;
@@ -17,7 +16,6 @@ import javax.swing.UIManager;
 import javax.swing.table.TableRowSorter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
 /**
@@ -27,7 +25,7 @@ import javax.swing.tree.TreePath;
 public class MailDlg extends javax.swing.JFrame implements Runnable
 {
 
-    private TreeModel treeModel;
+    private DefaultTreeModel treeModel;
     private DefaultMutableTreeNode rootNode;
     private MailMdl tableMode;
     private Folder folder;
@@ -73,19 +71,27 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
 
     public void append(Connect connect, String folder)
     {
+        showNotice("正在检测邮件信息，请稍候……");
         Store store = null;
         try
         {
             store = connect.getStore();
             Folder f = (Util.isValidate(folder) ? store.getFolder(folder) : store.getDefaultFolder());
             NodeMdl model = new NodeMdl(connect, f);
-            rootNode.add(model);
             listFolders(connect, model, f);
-            selectPath(model);
+            TreePath path = new TreePath(new DefaultMutableTreeNode[]
+                    {
+                        rootNode, model
+                    });
+            rootNode.add(model);
+            treeModel.nodeStructureChanged(rootNode);
+            tr_MailBoxs.setSelectionPath(path);
+            showNotice("邮件信息检测完毕！");
         }
         catch (Exception exp)
         {
             Logs.exception(exp);
+            showNotice("邮件信息检测异常:(");
         }
         finally
         {
@@ -101,17 +107,6 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
                 }
             }
         }
-    }
-
-    private synchronized void selectPath(NodeMdl mdl)
-    {
-        TreePath path = new TreePath(new DefaultMutableTreeNode[]
-                {
-                    rootNode, mdl
-                });
-        tr_MailBoxs.setSelectionPath(path);
-        tr_MailBoxs.expandPath(path);
-        tr_MailBoxs.revalidate();
     }
 
     private static void listFolders(Connect connect, DefaultMutableTreeNode node, Folder folder) throws Exception
@@ -301,11 +296,11 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
         {
             if (folder != null)
             {
-                showNotice("正在读取邮件…");
+                showNotice("正在获取邮件列表信息……");
                 Message[] msgs = folder.getMessages();
-                FetchProfile profile = new FetchProfile();
-                profile.add(FetchProfile.Item.ENVELOPE);
-                folder.fetch(msgs, profile);
+//                FetchProfile profile = new FetchProfile();
+//                profile.add(FetchProfile.Item.ENVELOPE);
+//                folder.fetch(msgs, profile);
 
                 MailInf mail;
                 int i = 1;
@@ -317,15 +312,16 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
                     tableMode.append(mail);
                     i += 1;
                 }
-                showNotice("邮件读取完毕！");
                 folder.close(false);
                 folder = null;
+                showNotice("邮件列表读取完毕！");
                 return true;
             }
             return false;
         }
         catch (Exception exp)
         {
+            Logs.exception(exp);
             return false;
         }
     }
@@ -357,6 +353,7 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
 
         try
         {
+            showNotice("正在处理与服务器通讯……");
             Store store = node.getConnect().getStore();
             folder = store.getFolder(node.getKeyWord());
             if (folder == null)
@@ -367,6 +364,7 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
             {
                 return;
             }
+            showNotice("正在读取邮件列表，请稍候……");
             if (!folder.isOpen())
             {
                 folder.open(Folder.READ_WRITE);
@@ -380,6 +378,7 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
         catch (Exception exp)
         {
             Logs.exception(exp);
+            showNotice("邮件列表读取异常:(");
         }
     }
 
@@ -405,7 +404,7 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
             MailInf mail = tableMode.getMailInf(tb_MailMsgs.getSelectedRow());
             ta_MailBody.setContentType(mail.getContentType());
             tf_MailHead.setText(mail.getSubject());
-            tf_MailUser.setText(mail.getMailAddress("TO"));
+            tf_MailUser.setText(mail.getTo());
             ta_MailBody.setText(mail.getBodyText());
             showNotice("邮件内容加载完毕！");
         }
@@ -444,13 +443,14 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
         }
         catch (Exception exp)
         {
+            exp.printStackTrace();
         }
         MailDlg md = new MailDlg();
         md.initView();
         md.initLang();
         md.initData();
         md.setVisible(true);
-        Connect connect = new Connect("pop3", "Amon.WK@163.com", "mugua3000");
+        Connect connect = new Connect("pop3", "Amon.WK@163.com", "iv7I7UuG");
         connect.setUsername("Amon.WK");
         connect.setHost("pop.163.com");
         connect.setPort(-1);
