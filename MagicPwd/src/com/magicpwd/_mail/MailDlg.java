@@ -351,6 +351,7 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
             return;
         }
 
+        showNotice("");
         TreePath path = tr_MailBoxs.getSelectionPath();
         if (path == null)
         {
