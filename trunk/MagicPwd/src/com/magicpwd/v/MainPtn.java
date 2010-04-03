@@ -991,7 +991,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     public void editNextActionPerformed(java.awt.event.ActionEvent evt)
     {
         int t = tb_LastIndx + 1;
-        if (t <= 3 || t >= tb_KeysView.getRowCount())
+        if (t <= ConsEnv.PWDS_HEAD_SIZE || t >= tb_KeysView.getRowCount())
         {
             return;
         }
@@ -1005,7 +1005,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     public void editPrevActionPerformed(java.awt.event.ActionEvent evt)
     {
         int t = tb_LastIndx - 1;
-        if (t < 3)
+        if (t < ConsEnv.PWDS_HEAD_SIZE)
         {
             return;
         }
