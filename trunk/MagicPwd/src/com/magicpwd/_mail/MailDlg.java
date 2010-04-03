@@ -79,13 +79,31 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
             Folder f = (Util.isValidate(folder) ? store.getFolder(folder) : store.getDefaultFolder());
             NodeMdl model = new NodeMdl(connect, f);
             listFolders(connect, model, f);
-            TreePath path = new TreePath(new DefaultMutableTreeNode[]
+
+            // 已有节点
+            String display = model.toString();
+            boolean exists = false;
+            for (int i = 0, j = rootNode.getChildCount(); i < j; i += 1)
+            {
+                if (display.equalsIgnoreCase(rootNode.getChildAt(i).toString()))
+                {
+                    model = (NodeMdl) rootNode.getChildAt(i);
+                    treeModel.nodeChanged(model);
+                    exists = true;
+                    break;
+                }
+            }
+
+            // 新增节点
+            if (!exists)
+            {
+                rootNode.add(model);
+                treeModel.nodeStructureChanged(rootNode);
+            }
+            tr_MailBoxs.setSelectionPath(new TreePath(new DefaultMutableTreeNode[]
                     {
                         rootNode, model
-                    });
-            rootNode.add(model);
-            treeModel.nodeStructureChanged(rootNode);
-            tr_MailBoxs.setSelectionPath(path);
+                    }));
             showNotice("邮件信息检测完毕！");
         }
         catch (Exception exp)
@@ -303,17 +321,17 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
 //                folder.fetch(msgs, profile);
 
                 MailInf mail;
-                int i = 1;
-                for (Message message : msgs)
+                for (int i = 1, j = msgs.length; i <= j; i += 1)
                 {
                     showNotice("正处理第" + i + "封邮件……");
                     mail = new MailInf();
-                    mail.loadMsg(message);
+                    mail.loadMsg(msgs[i - 1]);
                     tableMode.append(mail);
-                    i += 1;
                 }
-                folder.close(false);
+
+                folder.close(true);
                 folder = null;
+
                 showNotice("邮件列表读取完毕！");
                 return true;
             }
@@ -400,7 +418,7 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
     {
         try
         {
-            showNotice("正在加载邮件内容…");
+            showNotice("正在加载邮件内容……");
             MailInf mail = tableMode.getMailInf(tb_MailMsgs.getSelectedRow());
             ta_MailBody.setContentType(mail.getContentType());
             tf_MailHead.setText(mail.getSubject());
@@ -411,6 +429,7 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
         catch (Exception ex)
         {
             Logs.exception(ex);
+            showNotice("邮件内容加载异常:(");
         }
     }
 
