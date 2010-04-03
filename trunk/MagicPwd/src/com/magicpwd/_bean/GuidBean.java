@@ -65,7 +65,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_ReadMail = new BtnLabel();
-        bt_ReadMail.setIcon(Util.getIcon(ConsEnv.ICON_MAIL_OPEN));
+        bt_ReadMail.setIcon(Util.getIcon(ConsEnv.ICON_GUID_MAIL));
         bt_ReadMail.addActionListener(new java.awt.event.ActionListener()
         {
 
