@@ -130,6 +130,16 @@ public class MiniPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
     }
 
     @Override
+    public void listSkeyActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    }
+
+    @Override
+    public void listSascActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    }
+
+    @Override
     public void kindApndActionPerformed(java.awt.event.ActionEvent evt)
     {
     }

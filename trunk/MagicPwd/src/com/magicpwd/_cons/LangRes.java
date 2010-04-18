@@ -495,6 +495,14 @@ public interface LangRes
     String P30F7D29 = "P30F7D29";
     String P30F7D2A = "P30F7D2A";
     String P30F7D2B = "P30F7D2B";
+    String P30F7D2C = "P30F7D2C";
+    String P30F7D2D = "P30F7D2D";
+    String P30F7D2E = "P30F7D2E";
+    String P30F7D2F = "P30F7D2F";
+    String P30F7D30 = "P30F7D30";
+    String P30F7D31 = "P30F7D31";
+    String P30F7D32 = "P30F7D32";
+    String P30F7D33 = "P30F7D33";
     // ========================================================================
     // 8 设置窗口语言资源
     // ========================================================================

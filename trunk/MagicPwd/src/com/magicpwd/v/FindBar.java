@@ -6,6 +6,7 @@ package com.magicpwd.v;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.c.FindEvt;
+import java.awt.event.FocusEvent;
 
 /**
  * @author Amon
@@ -28,6 +29,20 @@ public class FindBar extends javax.swing.JPanel
 
         lb_ItemFind.setLabelFor(tf_ItemFind);
 
+        tf_ItemFind.addFocusListener(new java.awt.event.FocusListener()
+        {
+
+            @Override
+            public void focusGained(FocusEvent e)
+            {
+                tf_ItemFind.selectAll();
+            }
+
+            @Override
+            public void focusLost(FocusEvent e)
+            {
+            }
+        });
         tf_ItemFind.addActionListener(new java.awt.event.ActionListener()
         {
 
