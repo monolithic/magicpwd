@@ -3,6 +3,7 @@
  */
 package com.magicpwd.v;
 
+import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import javax.swing.JPopupMenu;
 
@@ -11,6 +12,8 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.c.MenuEvt;
 import com.magicpwd.c.ToolEvt;
+import com.magicpwd.m.UserMdl;
+import javax.swing.ButtonGroup;
 
 /**
  * @author Amon
@@ -178,7 +181,7 @@ public class MenuPop extends JPopupMenu
         {
             menuItem = new javax.swing.JMenuItem();
             menuItem.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_MOD0 + i));
-            menuItem.putClientProperty("keysmode", i);
+            menuItem.setActionCommand(Integer.toString(i));
             menuItem.addActionListener(new java.awt.event.ActionListener()
             {
 
@@ -198,9 +201,9 @@ public class MenuPop extends JPopupMenu
         mi_ListNote = new javax.swing.JMenuItem[5];
         for (int i = 0; i < mi_ListNote.length; i += 1)
         {
-            menuItem = new javax.swing.JMenuItem();
+            menuItem = new javax.swing.JCheckBoxMenuItem();
             menuItem.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_NTN2 + i));
-            menuItem.putClientProperty("keysnote", i - 2);
+            menuItem.setActionCommand(Integer.toString(i - 2));
             menuItem.addActionListener(new java.awt.event.ActionListener()
             {
 
@@ -212,6 +215,65 @@ public class MenuPop extends JPopupMenu
             });
             mu_ListNote.add(menuItem);
             mi_ListNote[i] = menuItem;
+        }
+
+        addSeparator();
+
+        mu_ListSasc = new javax.swing.JMenu();
+        add(mu_ListSasc);
+
+        javax.swing.JCheckBoxMenuItem cboxItem;
+        mi_ListSasc = new javax.swing.JCheckBoxMenuItem[2];
+        ButtonGroup bg = new ButtonGroup();
+        String[] prop = new String[]
+        {
+            ConsCfg.DEF_TRUE, ConsCfg.DEF_FAIL
+        };
+        for (int i = 0; i < mi_ListSasc.length; i += 1)
+        {
+            cboxItem = new javax.swing.JCheckBoxMenuItem();
+            cboxItem.setActionCommand(prop[i]);
+            cboxItem.setSelected(prop[i].equals(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_VIEW_LIST_ASC, ConsCfg.DEF_FAIL)));
+            cboxItem.addActionListener(new java.awt.event.ActionListener()
+            {
+
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent evt)
+                {
+                    menuEvt.listSascActionPerformed(evt);
+                }
+            });
+            mu_ListSasc.add(cboxItem);
+            bg.add(cboxItem);
+            mi_ListSasc[i] = cboxItem;
+        }
+
+        mu_ListSkey = new javax.swing.JMenu();
+        add(mu_ListSkey);
+
+        mi_ListSkey = new javax.swing.JCheckBoxMenuItem[4];
+        bg = new ButtonGroup();
+        prop = new String[]
+                {
+                    "01", "09", "07", "0D"
+                };
+        for (int i = 0; i < mi_ListSkey.length; i += 1)
+        {
+            cboxItem = new javax.swing.JCheckBoxMenuItem();
+            cboxItem.setActionCommand(prop[i]);
+            cboxItem.setSelected(prop[i].equals(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_VIEW_LIST_KEY, "01")));
+            cboxItem.addActionListener(new java.awt.event.ActionListener()
+            {
+
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent evt)
+                {
+                    menuEvt.listSkeyActionPerformed(evt);
+                }
+            });
+            mu_ListSkey.add(cboxItem);
+            mi_ListSkey[i] = cboxItem;
+            bg.add(cboxItem);
         }
 
         addSeparator();
@@ -250,14 +312,6 @@ public class MenuPop extends JPopupMenu
         Lang.setWText(mi_ListDrop, LangRes.P30F7D06, "删除记录");
 
         int i = 0;
-        Lang.setWText(mu_ListNote, LangRes.P30F7D26, "重要性：");
-        Lang.setWText(mi_ListNote[i++], LangRes.P30F7D27, "最高");
-        Lang.setWText(mi_ListNote[i++], LangRes.P30F7D28, "高");
-        Lang.setWText(mi_ListNote[i++], LangRes.P30F7D29, "正常");
-        Lang.setWText(mi_ListNote[i++], LangRes.P30F7D2A, "低");
-        Lang.setWText(mi_ListNote[i++], LangRes.P30F7D2B, "最低");
-
-        i = 0;
         Lang.setWText(mu_ListMode, LangRes.P30F7D1B, "标记为：");
         Lang.setWText(mi_ListMode[i++], LangRes.P30F7D1C, "默认(&0)");
         Lang.setWText(mi_ListMode[i++], LangRes.P30F7D1D, "常使用(&1)");
@@ -269,6 +323,26 @@ public class MenuPop extends JPopupMenu
         Lang.setWText(mi_ListMode[i++], LangRes.P30F7D23, "已丢失(&7)");
         Lang.setWText(mi_ListMode[i++], LangRes.P30F7D24, "被禁用(&8)");
         Lang.setWText(mi_ListMode[i++], LangRes.P30F7D25, "已删除(&9)");
+
+        i = 0;
+        Lang.setWText(mu_ListNote, LangRes.P30F7D26, "重要性：");
+        Lang.setWText(mi_ListNote[i++], LangRes.P30F7D27, "最高");
+        Lang.setWText(mi_ListNote[i++], LangRes.P30F7D28, "高");
+        Lang.setWText(mi_ListNote[i++], LangRes.P30F7D29, "正常");
+        Lang.setWText(mi_ListNote[i++], LangRes.P30F7D2A, "低");
+        Lang.setWText(mi_ListNote[i++], LangRes.P30F7D2B, "最低");
+
+        i = 0;
+        Lang.setWText(mu_ListSasc, LangRes.P30F7D2C, "排序方式");
+        Lang.setWText(mi_ListSasc[i++], LangRes.P30F7D2D, "升序");
+        Lang.setWText(mi_ListSasc[i++], LangRes.P30F7D2E, "降序");
+
+        i = 0;
+        Lang.setWText(mu_ListSkey, LangRes.P30F7D2F, "排序依据");
+        Lang.setWText(mi_ListSkey[i++], LangRes.P30F7D30, "使用频率");
+        Lang.setWText(mi_ListSkey[i++], LangRes.P30F7D31, "口令名称");
+        Lang.setWText(mi_ListSkey[i++], LangRes.P30F7D32, "注册时间");
+        Lang.setWText(mi_ListSkey[i++], LangRes.P30F7D33, "到期时间");
 
         Lang.setWText(mi_KindMove, LangRes.P30F7D1A, "把数据迁移到...(&M)");
 
@@ -508,10 +582,14 @@ public class MenuPop extends JPopupMenu
     private javax.swing.JMenuItem mi_TreeImpt;
     private javax.swing.JMenuItem mi_ListApnd;// 新增
     private javax.swing.JMenuItem mi_ListDrop;// 删除
-    private javax.swing.JMenu mu_ListNote;
-    private javax.swing.JMenuItem[] mi_ListNote;
-    private javax.swing.JMenu mu_ListMode;
+    private javax.swing.JMenu mu_ListMode;// 标记为
     private javax.swing.JMenuItem[] mi_ListMode;
+    private javax.swing.JMenu mu_ListNote;// 重要性
+    private javax.swing.JMenuItem[] mi_ListNote;
+    private javax.swing.JMenu mu_ListSasc; // 排序方式
+    private javax.swing.JCheckBoxMenuItem[] mi_ListSasc;
+    private javax.swing.JMenu mu_ListSkey;// 排序依据
+    private javax.swing.JCheckBoxMenuItem[] mi_ListSkey;// 排序依据
     private javax.swing.JMenuItem mi_KindMove;
     private javax.swing.JMenuItem mi_HistView;
     private javax.swing.JMenuItem mi_GridCopy;

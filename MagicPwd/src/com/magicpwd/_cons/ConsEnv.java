@@ -62,22 +62,6 @@ public interface ConsEnv
     // 类别数据显示排序
     ///////////////////////////////////////////////////////
     /**
-     * 按名称排序
-     */
-    String LIST_SORT_KEY = "key";
-    /**
-     * 按注册时间排序
-     */
-    String LIST_SORT_REG = "reg";
-    /**
-     * 按到期日期排序
-     */
-    String LIST_SORT_DUE = "due";
-    /**
-     * 按频率排序
-     */
-    String LIST_SORT_FEQ = "feq";
-    /**
      * 记录头部预留属性
      */
     int PWDS_HEAD_GUID = 0;

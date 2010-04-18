@@ -48,6 +48,7 @@ import com.magicpwd.r.TreeCR;
 import com.magicpwd.x.DatDialog;
 import com.magicpwd.x.MdiDialog;
 import com.magicpwd.x.MpsDialog;
+import java.util.regex.Pattern;
 
 public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, InfoEvt, FindEvt, IGridView
 {
@@ -70,6 +71,14 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
      * 属性列表上次选择索引
      */
     private int tb_LastIndx = -1;
+    /**
+     * 用户上一次的操作方式
+     */
+    private boolean isSearch;
+    /**
+     * 用户查找字符串
+     */
+    private String queryKey;
     private javax.swing.border.TitledBorder border;
 
     public MainPtn()
@@ -724,11 +733,10 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     @Override
     public void keysModeActionPerformed(java.awt.event.ActionEvent evt)
     {
-        javax.swing.JMenuItem item = (javax.swing.JMenuItem) evt.getSource();
-        Object obj = item.getClientProperty("keysmode");
-        Integer val = obj instanceof Integer ? (Integer) obj : 0;
+        String command = evt.getActionCommand();
+        int val = Pattern.matches("^[+-]?\\d+$", command) ? Integer.parseInt(command) : 0;
 
-        obj = ls_GuidList.getSelectedValue();
+        Object obj = ls_GuidList.getSelectedValue();
         if (obj instanceof Keys)
         {
             ((Keys) obj).setP30F0102(val);
@@ -739,16 +747,43 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     @Override
     public void keysNoteActionPerformed(java.awt.event.ActionEvent evt)
     {
-        javax.swing.JMenuItem item = (javax.swing.JMenuItem) evt.getSource();
-        Object obj = item.getClientProperty("keysnote");
-        Integer val = obj instanceof Integer ? (Integer) obj : 0;
+        String command = evt.getActionCommand();
+        int val = Pattern.matches("^[+-]?\\d+$", command) ? Integer.parseInt(command) : 0;
 
-        obj = ls_GuidList.getSelectedValue();
+        Object obj = ls_GuidList.getSelectedValue();
         if (obj instanceof Keys)
         {
             ((Keys) obj).setP30F0103(val);
         }
         UserMdl.getGridMdl().setKeysNote(val);
+    }
+
+    @Override
+    public void listSascActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        UserMdl.getUserCfg().setCfg(ConsCfg.CFG_VIEW_LIST_ASC, evt.getActionCommand());
+        if (isSearch)
+        {
+            UserMdl.getListMdl().findName(queryKey);
+        }
+        else if (Util.isValidateHash(queryKey))
+        {
+            UserMdl.getListMdl().listName(queryKey);
+        }
+    }
+
+    @Override
+    public void listSkeyActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        UserMdl.getUserCfg().setCfg(ConsCfg.CFG_VIEW_LIST_KEY, evt.getActionCommand());
+        if (isSearch)
+        {
+            UserMdl.getListMdl().findName(queryKey);
+        }
+        else if (Util.isValidateHash(queryKey))
+        {
+            UserMdl.getListMdl().listName(queryKey);
+        }
     }
 
     @Override
@@ -1038,7 +1073,8 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             mainFind.requestFocus();
         }
 
-        tr_GuidTree.setSelectionPath(null);
+        queryKey = text;
+        isSearch = true;
     }
 
     @Override
@@ -1447,8 +1483,10 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         {
             KindTN item = (KindTN) obj;
             Kind kv = (Kind) item.getUserObject();
-            UserMdl.getListMdl().listName(kv.getC2010103());
+            queryKey = kv.getC2010103();
+            UserMdl.getListMdl().listName(queryKey);
         }
+        isSearch = false;
     }
 
     private void ls_DataListValueChanged(javax.swing.event.ListSelectionEvent evt)
