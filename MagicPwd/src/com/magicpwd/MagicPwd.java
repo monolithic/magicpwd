@@ -112,10 +112,7 @@ public class MagicPwd
             UserMdl.setRunMode(ConsEnv.MODE_RUN_WEB);
             try
             {
-                new File("log").mkdir();
-                InputStream stream = MagicPwd.class.getResourceAsStream("/dat");
-                Lang.showMesg(null, null, "" + stream);
-                Jzip.unZip(stream, new File(ConsEnv.DIR_DAT), false);
+                Jzip.unZip(MagicPwd.class.getResourceAsStream("/res/dat.zip"), new File(ConsEnv.DIR_DAT), false);
             }
             catch (Exception exp)
             {
