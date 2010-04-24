@@ -1113,10 +1113,6 @@ public final class Util
             }
             UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN, isSystem ? ConsCfg.DEF_SKIN : lafClass);
         }
-        catch (ClassNotFoundException exp)
-        {
-            Logs.exception(exp);
-        }
         catch (Exception exc)
         {
             Lang.showMesg(MagicPwd.getCurrForm(), null, exc.getLocalizedMessage());

@@ -61,7 +61,7 @@ public class InfoBar extends JPanel
         hsg.addContainerGap();
         hsg.addComponent(lb_InfoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg.addComponent(lb_DateLabel,javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hsg.addComponent(lb_DateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg.addContainerGap();
         layout.setHorizontalGroup(hsg);
 
@@ -78,11 +78,12 @@ public class InfoBar extends JPanel
     public void initLang()
     {
         dateTplt = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.SHORT);
-        showNote();
     }
 
     public void initData()
     {
+        showNote();
+
         if (tm_TimeNote == null)
         {
             tm_TimeNote = new Timer(600, new ActionListener()

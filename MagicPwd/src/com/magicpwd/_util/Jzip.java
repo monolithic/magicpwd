@@ -9,17 +9,16 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import java.util.zip.ZipOutputStream;
 
 /**
  * @author Amon
- * 
  */
 public class Jzip
 {
-    private static byte[] buff;
 
     public static void zip(String zipFileName, String... srcFileList) throws IOException
     {
@@ -46,12 +45,10 @@ public class Jzip
 
         BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(zipFile));
         ZipOutputStream zos = new ZipOutputStream(bos);
-        buff = new byte[2048];
         for (String name : srcFileList)
         {
             zip(zos, new File(name), "");
         }
-        buff = null;
         zos.flush();
         bos.flush();
         zos.close();
@@ -81,12 +78,10 @@ public class Jzip
 
         BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(zipFilePath));
         ZipOutputStream zos = new ZipOutputStream(bos);
-        buff = new byte[2048];
         for (File file : srcFileList)
         {
             zip(zos, file, "");
         }
-        buff = null;
         zos.flush();
         bos.flush();
         zos.close();
@@ -95,6 +90,8 @@ public class Jzip
 
     private static void zip(ZipOutputStream zos, File file, String base) throws IOException
     {
+        byte[] buff = new byte[2048];
+
         base += file.getName();
 
         if (file.isDirectory())
@@ -115,12 +112,12 @@ public class Jzip
         else
         {
             zos.putNextEntry(new ZipEntry(base));
-            saveEntry(zos, file);
+            saveEntry(zos, file, buff);
             zos.closeEntry();
         }
     }
 
-    private static void saveEntry(ZipOutputStream zos, File file) throws IOException
+    private static void saveEntry(ZipOutputStream zos, File file, byte[] buff) throws IOException
     {
         BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
         int size = bis.read(buff);
@@ -134,10 +131,20 @@ public class Jzip
 
     public static void unZip(String zipFileName, String dstFileName) throws IOException
     {
+        unZip(zipFileName, dstFileName, true);
+    }
+
+    public static void unZip(String zipFileName, String dstFileName, boolean overWrite) throws IOException
+    {
         unZip(new File(zipFileName), new File(dstFileName));
     }
 
     public static void unZip(File zipFileName, File dstFilePath) throws IOException
+    {
+        unZip(zipFileName, dstFilePath, true);
+    }
+
+    public static void unZip(File zipFileName, File dstFilePath, boolean overWrite) throws IOException
     {
         // 文件是否存在
         if (!dstFilePath.exists())
@@ -157,17 +164,15 @@ public class Jzip
             return;
         }
 
-        BufferedInputStream bis = new BufferedInputStream(new FileInputStream(zipFileName));
-        ZipInputStream zis = new ZipInputStream(bis);
-        buff = new byte[2048];
-        unZip(zis, dstFilePath);
-        buff = null;
-        zis.close();
-        bis.close();
+        unZip(new FileInputStream(zipFileName), dstFilePath, overWrite);
     }
 
-    private static void unZip(ZipInputStream zis, File dstFilePath) throws IOException
+    public static void unZip(InputStream inputStream, File dstFilePath, boolean overWrite) throws IOException
     {
+        BufferedInputStream bis = new BufferedInputStream(inputStream);
+        ZipInputStream zis = new ZipInputStream(bis);
+        byte[] buff = new byte[2048];
+
         ZipEntry zip = zis.getNextEntry();
         while (zip != null)
         {
@@ -185,14 +190,21 @@ public class Jzip
                 if (!file.exists())
                 {
                     file.createNewFile();
+                    readEntry(zis, file, buff);
                 }
-                readEntry(zis, file);
+                else if (overWrite)
+                {
+                    readEntry(zis, file, buff);
+                }
             }
             zip = zis.getNextEntry();
         }
+
+        zis.close();
+        bis.close();
     }
 
-    private static void readEntry(ZipInputStream zis, File file) throws IOException
+    private static void readEntry(ZipInputStream zis, File file, byte[] buff) throws IOException
     {
         BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
         int size = zis.read(buff);
