@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jnlp codebase="http://magicpwd.com/jnlp/mpwd/" href="launch.jnlp" spec="1.0+">
+    <information>
+        <title>MagicPwd</title>
+        <vendor>Amon</vendor>
+        <homepage href="http://magicpwd.com/"/>
+        <description>魔方密码是一款开放源代码的跨平台密码管理软件，100%纯Java语言开发，其主要目标是在充分保障用户数据安全的基础上，做到同一数据能够方便的在多种操作平台上使用，软件采用目前国际上通用的标准商用加密算法保证您的数据机密性，支持随机密码生成，支持完全用户自定义数据，您可以根据自己的喜好及习惯定义密码类别及属性。</description>
+        <description kind="short">MagicPwd</description>
+        <offline-allowed/>
+    </information>
+    <security>
+        <all-permissions/>
+    </security>
+    <resources>
+        <j2se version="1.6+"/>
+        <jar eager="true" href="MagicPwd.jar" main="true"/>
+
+        <jar href="lib/dom4j-1.6.1.jar"/>
+        <jar href="lib/hsqldb-1.8.0.jar"/>
+        <jar href="lib/javamail-1.4.3.jar"/>
+        <jar href="lib/looks-2.3.1.jar"/>
+        <jar href="lib/JavaGPE_3DLF-2.5.jar"/>
+        <jar href="lib/JTattoo.jar"/>
+        <jar href="lib/liquidlnf.jar"/>
+        <jar href="lib/looks-2.3.1.jar"/>
+        <jar href="lib/OfficeLnFs_2.7.jar"/>
+        <jar href="lib/quaqua.jar"/>
+        <jar href="lib/substance.jar"/>
+        <jar href="lib/trident.jar"/>
+
+        <jar href="dat.jar"/>
+    </resources>
+    <application-desc main-class="com.magicpwd.MagicPwd">
+        <argument>webstart</argument>
+    </application-desc>
+</jnlp>
