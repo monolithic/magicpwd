@@ -66,7 +66,7 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
         tr_MailBoxs.setModel(treeModel);
         tableMode = new MailMdl();
         tb_MailMsgs.setModel(tableMode);
-        tb_MailMsgs.setRowSorter(new TableRowSorter(tableMode));
+        tb_MailMsgs.setRowSorter(new TableRowSorter<MailMdl>(tableMode));
     }
 
     public void append(Connect connect, String folder)
