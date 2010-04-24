@@ -56,6 +56,7 @@ public class MenuBar extends JMenuBar
 
     public void initData()
     {
+        setUserSecretEnabled();
     }
 
     public void setMenuEvent(MenuEvt event)
@@ -872,7 +873,6 @@ public class MenuBar extends JMenuBar
     {
         mi_UserSwitch.setEnabled(false);
         mi_UserCreate.setEnabled(false);
-        setUserSecretEnabled();
 
         Lang.setWText(mu_UserMenu, LangRes.P30F7624, "用户");
 

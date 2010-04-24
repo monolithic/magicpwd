@@ -6,6 +6,7 @@ import com.magicpwd._face.IBackCall;
 import com.magicpwd._mail.MailDlg;
 import com.magicpwd._user.UserSign;
 import com.magicpwd._util.Jzip;
+import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.DBAccess;
@@ -13,6 +14,8 @@ import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.MainPtn;
 import com.magicpwd.v.MiniPtn;
 import com.magicpwd.v.NormPtn;
+import java.io.File;
+import java.io.InputStream;
 
 /**
  * @author Amon
@@ -104,9 +107,21 @@ public class MagicPwd
     public static void main(String[] args)
     {
         // 界面启动参数读取
-        if (args != null && args.length > 1 && "webstart".equalsIgnoreCase(args[1]))
+        if (args != null && args.length > 0 && "webstart".equalsIgnoreCase(args[0]))
         {
             UserMdl.setRunMode(ConsEnv.MODE_RUN_WEB);
+            try
+            {
+                new File("log").mkdir();
+                InputStream stream = MagicPwd.class.getResourceAsStream("/dat");
+                Lang.showMesg(null, null, "" + stream);
+                Jzip.unZip(stream, new File(ConsEnv.DIR_DAT), false);
+            }
+            catch (Exception exp)
+            {
+                Lang.showMesg(null, null, exp.getLocalizedMessage());
+                Logs.exception(exp);
+            }
         }
 
         // 用户配置文件加载

@@ -320,6 +320,8 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     public void skinChangeActionPerformed(java.awt.event.ActionEvent evt)
     {
         final String lafClass = evt.getActionCommand();
+        boolean isSystem = !Util.isValidate(lafClass) || ConsCfg.DEF_SKIN.equalsIgnoreCase(lafClass);
+        UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN, isSystem ? ConsCfg.DEF_SKIN : lafClass);
         javax.swing.SwingUtilities.invokeLater(new Runnable()
         {
 
@@ -329,6 +331,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                 Util.changeSkin(lafClass);
             }
         });
+        Lang.showMesg(this, LangRes.P30FAA1B, "系统不能保证风格切换正常，请重新启动程序以使用新的界面风格！");
     }
 
     @Override
