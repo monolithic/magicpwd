@@ -8,7 +8,7 @@ package com.magicpwd._mail;
  *
  * @author Amon
  */
-public interface ConsEnv
+public interface MailEnv
 {
 
     String TEXT_PLAIN = "text/plain";
