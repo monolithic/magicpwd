@@ -33,7 +33,7 @@ import javax.mail.internet.MimeUtility;
 public class MailInf
 {
 
-    private String contentType = ConsEnv.TEXT_HTML + ';' + ConsEnv.CHARSET + "=UTF-8";
+    private String contentType = MailEnv.TEXT_HTML + ';' + MailEnv.CHARSET + "=UTF-8";
     private String from;
     private String to;
     private String cc;
@@ -183,7 +183,7 @@ public class MailInf
             return;
         }
         ContentType cType = new ContentType(sType);
-        sType = cType.getParameter(ConsEnv.CHARSET);
+        sType = cType.getParameter(MailEnv.CHARSET);
         if (!Util.isValidate(sType))
         {
             String[] sTemp = part.getHeader("from");
@@ -211,20 +211,20 @@ public class MailInf
         }
 
         boolean conname = sType.indexOf("name") != -1;
-        if (part.isMimeType(ConsEnv.TEXT_PLAIN) && !conname)
+        if (part.isMimeType(MailEnv.TEXT_PLAIN) && !conname)
         {
-            contentType = ConsEnv.TEXT_PLAIN + ';' + ConsEnv.CHARSET + '=' + sType;
+            contentType = MailEnv.TEXT_PLAIN + ';' + MailEnv.CHARSET + '=' + sType;
 
             content.append((String) part.getContent());
             return;
         }
-        if (part.isMimeType(ConsEnv.TEXT_HTML) && !conname)
+        if (part.isMimeType(MailEnv.TEXT_HTML) && !conname)
         {
-            contentType = ConsEnv.TEXT_HTML + ';' + ConsEnv.CHARSET + '=' + sType;
+            contentType = MailEnv.TEXT_HTML + ';' + MailEnv.CHARSET + '=' + sType;
             content.append((String) part.getContent());
             return;
         }
-        if (part.isMimeType(ConsEnv.MULTIPART))
+        if (part.isMimeType(MailEnv.MULTIPART))
         {
             Multipart multipart = (Multipart) part.getContent();
             int counts = multipart.getCount();
@@ -234,7 +234,7 @@ public class MailInf
             }
             return;
         }
-        if (part.isMimeType(ConsEnv.MESSAGE))
+        if (part.isMimeType(MailEnv.MESSAGE))
         {
             getMailContent((Part) part.getContent());
             return;
@@ -276,7 +276,7 @@ public class MailInf
     public boolean isContainAttach(Part part) throws Exception
     {
         boolean attachflag = false;
-        if (part.isMimeType(ConsEnv.MULTIPART))
+        if (part.isMimeType(MailEnv.MULTIPART))
         {
             Multipart mp = (Multipart) part.getContent();
             for (int i = 0; i < mp.getCount(); i++)
@@ -287,7 +287,7 @@ public class MailInf
                 {
                     attachflag = true;
                 }
-                else if (mpart.isMimeType(ConsEnv.MULTIPART))
+                else if (mpart.isMimeType(MailEnv.MULTIPART))
                 {
                     attachflag = isContainAttach((Part) mpart);
                 }
@@ -305,7 +305,7 @@ public class MailInf
                 }
             }
         }
-        else if (part.isMimeType(ConsEnv.MESSAGE))
+        else if (part.isMimeType(MailEnv.MESSAGE))
         {
             attachflag = isContainAttach((Part) part.getContent());
         }
@@ -318,7 +318,7 @@ public class MailInf
     public void saveAttachMent(Part part) throws Exception
     {
         String fileName = "";
-        if (part.isMimeType(ConsEnv.MULTIPART))
+        if (part.isMimeType(MailEnv.MULTIPART))
         {
             Multipart mp = (Multipart) part.getContent();
             for (int i = 0; i < mp.getCount(); i++)
@@ -334,7 +334,7 @@ public class MailInf
                     }
                     saveFile(fileName, mpart.getInputStream());
                 }
-                else if (mpart.isMimeType(ConsEnv.MULTIPART))
+                else if (mpart.isMimeType(MailEnv.MULTIPART))
                 {
                     saveAttachMent(mpart);
                 }
@@ -349,7 +349,7 @@ public class MailInf
                 }
             }
         }
-        else if (part.isMimeType(ConsEnv.MESSAGE))
+        else if (part.isMimeType(MailEnv.MESSAGE))
         {
             saveAttachMent((Part) part.getContent());
         }
