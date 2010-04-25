@@ -459,7 +459,7 @@ public class DBAccess
      */
     public void addCopyBatch(String t, String f) throws SQLException
     {
-        stat.addBatch(getCopySQL(t, f));
+        addBatch(getCopySQL(t, f));
     }
 
     /**
@@ -468,7 +468,7 @@ public class DBAccess
      */
     public void addDeleteBatch() throws SQLException
     {
-        stat.addBatch(getDeleteSQL());
+        addBatch(getDeleteSQL());
     }
 
     /**
@@ -477,12 +477,12 @@ public class DBAccess
      */
     public void addInsertBatch() throws SQLException
     {
-        stat.addBatch(getInsertSQL());
+        addBatch(getInsertSQL());
     }
 
     public void addUpdateBatch() throws SQLException
     {
-        stat.addBatch(getUpdateSQL());
+        addBatch(getUpdateSQL());
     }
 
     /**
@@ -645,7 +645,7 @@ public class DBAccess
         sqlBuf.append(paramList.get(j)).append(") ");
 
         // 复制来源
-        sqlBuf.append("SELECT");
+        sqlBuf.append(" SELECT ");
         j = valueList.size() - 1;
         for (int i = 0; i < j; i += 1)
         {

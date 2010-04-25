@@ -23,11 +23,11 @@ echo "" >> magicpwd.desktop
 if [ -d ~/desktop/ ]
 then
 mv magicpwd.desktop ~/desktop/magicpwd.desktop
-chmod 711 ~/desktop/magicpwd.desktop
+chmod 777 ~/desktop/magicpwd.desktop
 fi
 
 if [ -d ~/桌面/ ]
 then
 mv magicpwd.desktop ~/桌面/magicpwd.desktop
-chmod 711 ~/桌面/magicpwd.desktop
+chmod 777 ~/桌面/magicpwd.desktop
 fi
