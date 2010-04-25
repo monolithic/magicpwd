@@ -1178,7 +1178,7 @@ public class DBA3000
             }
             dba.addDeleteBatch();
 
-            dba.executeDelete();
+            dba.executeBatch();
             return true;
         }
         catch (Exception exp)
