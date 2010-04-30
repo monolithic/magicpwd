@@ -594,8 +594,9 @@ public class GridMdl extends DefaultTableModel
 
         // MetaItem
         MetaItem meta = (MetaItem) list.get(ConsEnv.PWDS_HEAD_META);
-        keys.setP30F0109(interim ? meta.getName() + keys.getP30F0107() : meta.getName());
+        keys.setP30F0109(interim ? '<' + meta.getName() + '_' + keys.getP30F0107() + '>' : meta.getName());
         keys.setP30F010A(meta.getData());
+        interim = false;
 
         // LogoItem
         LogoItem logo = (LogoItem) list.get(ConsEnv.PWDS_HEAD_LOGO);
