@@ -39,6 +39,15 @@ public class MetaBean extends javax.swing.JPanel implements IEditBean
 
         lb_PropName = new javax.swing.JLabel();
         tf_PropName = new javax.swing.JTextField(14);
+        tf_PropName.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt)
+            {
+                tf_PropName.selectAll();
+            }
+        });
         lb_PropName.setLabelFor(tf_PropName);
 
         lb_PropData = new javax.swing.JLabel();

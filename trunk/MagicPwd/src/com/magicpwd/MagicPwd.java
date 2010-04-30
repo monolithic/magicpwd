@@ -15,7 +15,6 @@ import com.magicpwd.v.MainPtn;
 import com.magicpwd.v.MiniPtn;
 import com.magicpwd.v.NormPtn;
 import java.io.File;
-import java.io.InputStream;
 
 /**
  * @author Amon
