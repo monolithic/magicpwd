@@ -28,6 +28,7 @@
         <jar href="lib/quaqua.jar"/>
         <jar href="lib/substance.jar"/>
         <jar href="lib/trident.jar"/>
+        <jar href="lib/versioncheck.jar"/>
     </resources>
     <application-desc main-class="com.magicpwd.MagicPwd">
         <argument>webstart</argument>
