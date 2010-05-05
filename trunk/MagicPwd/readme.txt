@@ -41,8 +41,8 @@
 
         方式一：双击magicpwd.jar文件，本地启动应用程序，适用于任何操作平台；
         方式二：双击launch.jnlp文件，网络加载应用程序，适用于任何操作平台；
-        方式三：双击launch.bat（Windows平台）或launch.sh（Linux平台）以动态加载扩展文件方式启动；
-        方式四：双击install.vbs（Windows平台）或install.sh（Linux平台）执行程序安装，从桌面快捷方式启动。
+        方式三：双击launch.bat（Windows平台）或launch.sh（Linux平台）以动态加载扩展方式启动；
+        方式四：双击install.vbs（Windows平台）或install.sh（Linux平台）执行程序安装，以桌面快捷方式启动。
 
 软件升级：
 ■2010-05-01：V3.1.3.6
