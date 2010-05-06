@@ -14,7 +14,7 @@ oLnk.TargetPath = strCurPath & "\magicpwd.jar"
 oLnk.WindowStyle = 1
 oLnk.Hotkey = "Ctrl+Alt+M"
 oLnk.IconLocation = strCurPath & "\logo\logo.ico, 0"
-oLnk.Description = "魔方密码，跨平台密码管理软件！"
+oLnk.Description = "开源的跨平台密码管理软件！"
 oLnk.WorkingDirectory = strCurPath & "\"
 oLnk.Save
 
