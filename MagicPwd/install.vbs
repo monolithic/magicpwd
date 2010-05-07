@@ -21,3 +21,5 @@ oLnk.Save
 Set oUrl = WshShell.CreateShortcut(StrDesktop & "\魔方密码首页.url")
 oUrl.TargetPath = "http://magicpwd.com/"
 oUrl.Save
+
+oVar = MsgBox ("魔方密码安装成功！", 0, "友情提示")
