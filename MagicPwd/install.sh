@@ -31,3 +31,5 @@ then
 mv magicpwd.desktop ~/桌面/magicpwd.desktop
 chmod 777 ~/桌面/magicpwd.desktop
 fi
+
+echo "魔方密码安装成功！"
