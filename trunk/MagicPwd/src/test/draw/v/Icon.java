@@ -31,31 +31,30 @@ public class Icon extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        pl_IconList = new javax.swing.JPanel();
-        pl_IconGrid = new javax.swing.JPanel();
+        bt_Append = new javax.swing.JButton();
+        bt_Select = new javax.swing.JButton();
+        javax.swing.JScrollPane sp_IconGrid = new javax.swing.JScrollPane();
+        tb_IconGrid = new javax.swing.JTable();
 
-        jButton1.setText("A");
+        bt_Append.setText("A");
 
-        jButton2.setText("S");
+        bt_Select.setText("S");
 
-        pl_IconList.setBackground(javax.swing.UIManager.getDefaults().getColor("Table.background"));
-
-        pl_IconGrid.setLayout(new java.awt.GridLayout(0, 10));
-
-        javax.swing.GroupLayout pl_IconListLayout = new javax.swing.GroupLayout(pl_IconList);
-        pl_IconList.setLayout(pl_IconListLayout);
-        pl_IconListLayout.setHorizontalGroup(
-            pl_IconListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(pl_IconGrid, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
-        );
-        pl_IconListLayout.setVerticalGroup(
-            pl_IconListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pl_IconListLayout.createSequentialGroup()
-                .addComponent(pl_IconGrid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(251, Short.MAX_VALUE))
-        );
+        tb_IconGrid.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tb_IconGrid.setCellSelectionEnabled(true);
+        tb_IconGrid.setShowHorizontalLines(false);
+        tb_IconGrid.setShowVerticalLines(false);
+        sp_IconGrid.setViewportView(tb_IconGrid);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -64,32 +63,31 @@ public class Icon extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(pl_IconList, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(sp_IconGrid, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(bt_Select)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(bt_Append)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pl_IconList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(sp_IconGrid, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(bt_Append)
+                    .addComponent(bt_Select))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JPanel pl_IconGrid;
-    private javax.swing.JPanel pl_IconList;
+    private javax.swing.JButton bt_Append;
+    private javax.swing.JButton bt_Select;
+    private javax.swing.JTable tb_IconGrid;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -45,24 +45,17 @@ public class IcoDialog extends javax.swing.JDialog
 
     public void initView()
     {
-        javax.swing.JScrollPane sp_IconList = new javax.swing.JScrollPane();
-        pl_IconList = new javax.swing.JPanel();
-        pl_IconGrid = new javax.swing.JPanel();
         bt_Append = new javax.swing.JButton();
         bt_Select = new javax.swing.JButton();
+        javax.swing.JScrollPane sp_IconGrid = new javax.swing.JScrollPane();
+        tb_IconGrid = new javax.swing.JTable();
 
-        pl_IconList.setBackground(bdColor);
-        pl_IconList.setLayout(new javax.swing.BoxLayout(pl_IconList, javax.swing.BoxLayout.Y_AXIS));
-        sp_IconList.setViewportView(pl_IconList);
-
-        pl_IconGrid.setLayout(new java.awt.GridLayout(0, 10, 4, 4));
-        pl_IconGrid.setOpaque(false);
-        javax.swing.GroupLayout pl_IconListLayout = new javax.swing.GroupLayout(pl_IconList);
-        pl_IconList.setLayout(pl_IconListLayout);
-        pl_IconListLayout.setHorizontalGroup(
-                pl_IconListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(pl_IconGrid, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE));
-        pl_IconListLayout.setVerticalGroup(
-                pl_IconListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(pl_IconListLayout.createSequentialGroup().addComponent(pl_IconGrid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addContainerGap(251, Short.MAX_VALUE)));
+        tb_IconGrid.setModel(null);
+        tb_IconGrid.getTableHeader().setVisible(false);
+        tb_IconGrid.setCellSelectionEnabled(true);
+        tb_IconGrid.setShowHorizontalLines(false);
+        tb_IconGrid.setShowVerticalLines(false);
+        sp_IconGrid.setViewportView(tb_IconGrid);
 
         bt_Append.addActionListener(new java.awt.event.ActionListener()
         {
@@ -84,31 +77,31 @@ public class IcoDialog extends javax.swing.JDialog
             }
         });
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this.getContentPane());
-        this.getContentPane().setLayout(layout);
-        javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
-        hsg1.addComponent(bt_Select);
-        hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg1.addComponent(bt_Append);
-        javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
-        hpg.addComponent(sp_IconList, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE);
-        hpg.addGroup(hsg1);
-        javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
-        hsg.addContainerGap();
-        hsg.addGroup(hpg);
-        hsg.addContainerGap();
-        layout.setHorizontalGroup(hsg);
-
-        javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
-        vpg.addComponent(bt_Append);
-        vpg.addComponent(bt_Select);
-        javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
-        vsg.addContainerGap();
-        vsg.addComponent(sp_IconList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        vsg.addGroup(vpg);
-        vsg.addContainerGap();
-        layout.setVerticalGroup(vsg);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(sp_IconGrid, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(bt_Select)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bt_Append)))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(sp_IconGrid, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_Append)
+                    .addComponent(bt_Select))
+                .addContainerGap())
+        );
 
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         this.setIconImage(Util.getLogo());
@@ -132,7 +125,7 @@ public class IcoDialog extends javax.swing.JDialog
             @Override
             public void run()
             {
-                pl_IconGrid.removeAll();
+                tb_IconGrid.removeAll();
                 initIcon(lastIcon);
             }
         });
@@ -164,7 +157,7 @@ public class IcoDialog extends javax.swing.JDialog
 
         boolean checked = !Util.isValidate(lastIcon) || "0".equals(lastIcon);
         IcoLabel label = createIcoLabel("0", "0", Util.getNone(), listener);
-        pl_IconGrid.add(label);
+        tb_IconGrid.add(label);
         if (checked)
         {
             lb_LastIcon = label;
@@ -194,7 +187,7 @@ public class IcoDialog extends javax.swing.JDialog
 
             String key = matcher.group();
             label = createIcoLabel(key, Integer.toString(i++), Util.getIcon(key), listener);
-            pl_IconGrid.add(label);
+            tb_IconGrid.add(label);
             if (!checked)
             {
                 checked = key.equalsIgnoreCase(lastIcon);
@@ -278,9 +271,9 @@ public class IcoDialog extends javax.swing.JDialog
             fos.close();
 
             javax.swing.ImageIcon icon = new javax.swing.ImageIcon(img);
-            IcoLabel label = createIcoLabel(hash, Integer.toString(pl_IconGrid.getComponents().length), icon, listener);
-            pl_IconGrid.add(label);
-            pl_IconGrid.revalidate();
+            IcoLabel label = createIcoLabel(hash, Integer.toString(tb_IconGrid.getComponents().length), icon, listener);
+            tb_IconGrid.add(label);
+            tb_IconGrid.revalidate();
             selectIcoLabel(label);
             Util.setIcon(hash, icon);
         }
@@ -321,6 +314,5 @@ public class IcoDialog extends javax.swing.JDialog
     }
     private javax.swing.JButton bt_Append;
     private javax.swing.JButton bt_Select;
-    private javax.swing.JPanel pl_IconList;
-    private javax.swing.JPanel pl_IconGrid;
+    private javax.swing.JTable tb_IconGrid;
 }
