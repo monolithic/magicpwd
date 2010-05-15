@@ -14,6 +14,8 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.r.AmonFF;
+import java.awt.Component;
+import javax.swing.JTable;
 
 /**
  *
@@ -60,7 +62,7 @@ public class IcoDialog extends javax.swing.JDialog
 
         javax.swing.JScrollPane sp_IconGrid = new javax.swing.JScrollPane();
         tb_IconGrid = new javax.swing.JTable();
-        tb_IconGrid.getTableHeader().setVisible(false);
+        tb_IconGrid.setTableHeader(null);
         tb_IconGrid.setCellSelectionEnabled(true);
         tb_IconGrid.setShowHorizontalLines(false);
         tb_IconGrid.setShowVerticalLines(false);
@@ -113,6 +115,44 @@ public class IcoDialog extends javax.swing.JDialog
         {
             icoModel = new IcoModel();
             tb_IconGrid.setModel(icoModel);
+            tb_IconGrid.setRowHeight(icoModel.getRowHeight());
+
+            javax.swing.table.TableCellRenderer renderer = new javax.swing.table.TableCellRenderer()
+            {
+
+                @Override
+                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
+                {
+                    if (!(value instanceof javax.swing.JLabel))
+                    {
+                        return null;
+                    }
+
+                    javax.swing.JLabel label = (javax.swing.JLabel) value;
+                    // 前景及背景颜色设置
+                    if (isSelected)
+                    {
+                        label.setBackground(table.getSelectionBackground());
+                        label.setForeground(table.getSelectionForeground());
+                    }
+                    else
+                    {
+                        label.setBackground(table.getBackground());
+                        label.setForeground(table.getForeground());
+                    }
+
+                    // 文字属性设置
+                    label.setFont(table.getFont());
+                    // 可编辑状态设置
+                    label.setEnabled(table.isEnabled());
+                    return label;
+                }
+            };
+            java.util.Enumeration<javax.swing.table.TableColumn> columns = tb_IconGrid.getColumnModel().getColumns();
+            while (columns.hasMoreElements())
+            {
+                columns.nextElement().setCellRenderer(renderer);
+            }
         }
         javax.swing.SwingUtilities.invokeLater(new Runnable()
         {
@@ -121,8 +161,8 @@ public class IcoDialog extends javax.swing.JDialog
             public void run()
             {
                 icoModel.initIcon(iconPath, lastIcon);
-                tb_IconGrid.setRowSelectionInterval(0, 0);
-                tb_IconGrid.setColumnSelectionInterval(0, 0);
+                tb_IconGrid.setRowSelectionInterval(icoModel.getSelectedRow(), icoModel.getSelectedRow());
+                tb_IconGrid.setColumnSelectionInterval(icoModel.getSelectedColumn(), icoModel.getSelectedColumn());
             }
         });
     }
@@ -173,6 +213,8 @@ public class IcoDialog extends javax.swing.JDialog
         try
         {
             icoModel.appendIcon(filePath, iconPath);
+            tb_IconGrid.setRowSelectionInterval(icoModel.getSelectedRow(), icoModel.getSelectedRow());
+            tb_IconGrid.setColumnSelectionInterval(icoModel.getSelectedColumn(), icoModel.getSelectedColumn());
         }
         catch (Exception exp)
         {
@@ -191,13 +233,16 @@ class IcoModel extends javax.swing.table.AbstractTableModel
 
     private java.util.List<javax.swing.JLabel> iconList;
     private int columnCount;
-    private int checked;
+    private int rowHeight;
+    private int selected;
 
     IcoModel()
     {
         iconList = new java.util.ArrayList<javax.swing.JLabel>();
-        iconList.add(newLabel(0, Util.getNone()));
+        javax.swing.JLabel label = newLabel(0, Util.getNone());
+        iconList.add(label);
         columnCount = 5;
+        rowHeight = label.getPreferredSize().height;
     }
 
     @Override
@@ -257,9 +302,9 @@ class IcoModel extends javax.swing.table.AbstractTableModel
         }
 
         java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("[0-9a-z]{16}");
-        int i = 1;
-        for (java.io.File file : fileList)
+        for (int i = 0, j = fileList.length; i < j; i += 1)
         {
+            java.io.File file = fileList[i];
             if (!file.isFile())
             {
                 continue;
@@ -274,9 +319,8 @@ class IcoModel extends javax.swing.table.AbstractTableModel
             iconList.add(newLabel(i, Util.getIcon(key)));
             if (key.equalsIgnoreCase(lastIcon))
             {
-                checked = i;
+                selected = i;
             }
-            i += 1;
         }
     }
 
@@ -310,6 +354,8 @@ class IcoModel extends javax.swing.table.AbstractTableModel
         javax.swing.ImageIcon icon = new javax.swing.ImageIcon(img);
         Util.setIcon(hash, icon);
         iconList.add(newLabel(iconList.size(), icon));
+
+//        fireTableDataChanged();
     }
 
     /**
@@ -326,11 +372,38 @@ class IcoModel extends javax.swing.table.AbstractTableModel
     private javax.swing.JLabel newLabel(int num, javax.swing.Icon ico)
     {
         javax.swing.JLabel label = new javax.swing.JLabel();
-        label.setIcon(ico);
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         label.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         label.setText(Integer.toString(num));
+        label.setOpaque(true);
+        label.setIcon(ico);
         return label;
+    }
+
+    /**
+     * @return the rowHeight
+     */
+    public int getRowHeight()
+    {
+        return rowHeight;
+    }
+
+    /**
+     * @param rowHeight the rowHeight to set
+     */
+    public void setRowHeight(int rowHeight)
+    {
+        this.rowHeight = rowHeight;
+    }
+
+    public int getSelectedRow()
+    {
+        return selected / columnCount;
+    }
+
+    public int getSelectedColumn()
+    {
+        return selected % columnCount;
     }
 }
