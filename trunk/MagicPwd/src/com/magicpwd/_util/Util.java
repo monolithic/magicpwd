@@ -165,7 +165,7 @@ public final class Util
     {
         if (!isValidateHash(name))
         {
-            return null;
+            return getNone();
         }
         if (mp_ImgList == null)
         {

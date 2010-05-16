@@ -52,6 +52,7 @@ public class Icon extends javax.swing.JPanel {
             }
         ));
         tb_IconGrid.setCellSelectionEnabled(true);
+        tb_IconGrid.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tb_IconGrid.setShowHorizontalLines(false);
         tb_IconGrid.setShowVerticalLines(false);
         sp_IconGrid.setViewportView(tb_IconGrid);

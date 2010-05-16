@@ -5,7 +5,6 @@
 package com.magicpwd.x;
 
 import com.magicpwd.MagicPwd;
-import com.magicpwd._comp.IcoLabel;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
@@ -28,7 +27,6 @@ public class IcoDialog extends javax.swing.JDialog
     private java.io.File filePath;
     private java.io.File iconPath;
     private IBackCall backCall;
-    private IcoLabel lb_LastIcon;
 
     public IcoDialog(IBackCall backCall)
     {
@@ -67,6 +65,7 @@ public class IcoDialog extends javax.swing.JDialog
         tb_IconGrid.setCellSelectionEnabled(true);
         tb_IconGrid.setShowHorizontalLines(false);
         tb_IconGrid.setShowVerticalLines(false);
+        tb_IconGrid.getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         sp_IconGrid.setViewportView(tb_IconGrid);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this.getContentPane());
@@ -108,6 +107,8 @@ public class IcoDialog extends javax.swing.JDialog
         Lang.setWText(bt_Select, LangRes.P30FA50C, "选择(&C)");
 
         Lang.setWText(bt_Append, LangRes.P30FA50D, "追加(&A)");
+
+        this.setTitle(Lang.getLang(LangRes.P30FA50F, "徽标"));
     }
 
     public void initData(final String lastIcon)
@@ -170,12 +171,7 @@ public class IcoDialog extends javax.swing.JDialog
 
     private void bt_SelectActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (lb_LastIcon == null)
-        {
-            Lang.showMesg(this, null, "");
-            return;
-        }
-        if (backCall.callBack(null, null, (String) lb_LastIcon.getClientProperty("key")))
+        if (backCall.callBack(null, null, icoModel.getSelectedKey(tb_IconGrid.getSelectedRow(), tb_IconGrid.getSelectedColumn())))
         {
             this.setVisible(false);
             this.dispose();
@@ -240,10 +236,10 @@ class IcoModel extends javax.swing.table.AbstractTableModel
     IcoModel()
     {
         iconList = new java.util.ArrayList<javax.swing.JLabel>();
-        javax.swing.JLabel label = newLabel(0, Util.getNone());
+        javax.swing.JLabel label = newLabel(0, Util.getNone(), "0");
         iconList.add(label);
         columnCount = 5;
-        rowHeight = label.getPreferredSize().height;
+        rowHeight = label.getPreferredSize().height + 6;
     }
 
     @Override
@@ -303,9 +299,9 @@ class IcoModel extends javax.swing.table.AbstractTableModel
         }
 
         java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("[0-9a-z]{16}");
-        for (int i = 0, j = fileList.length; i < j; i += 1)
+        int i = 1;
+        for (java.io.File file : fileList)
         {
-            java.io.File file = fileList[i];
             if (!file.isFile())
             {
                 continue;
@@ -317,11 +313,12 @@ class IcoModel extends javax.swing.table.AbstractTableModel
             }
 
             String key = matcher.group();
-            iconList.add(newLabel(i + 1, Util.getIcon(key)));
+            iconList.add(newLabel(i, Util.getIcon(key), key));
             if (key.equalsIgnoreCase(lastIcon))
             {
                 selected = i;
             }
+            i += 1;
         }
     }
 
@@ -352,10 +349,10 @@ class IcoModel extends javax.swing.table.AbstractTableModel
         fos.flush();
         fos.close();
 
-        javax.swing.ImageIcon icon = new javax.swing.ImageIcon(img);
-        Util.setIcon(hash, icon);
+        javax.swing.ImageIcon ico = new javax.swing.ImageIcon(img);
+        Util.setIcon(hash, ico);
         int i = iconList.size();
-        iconList.add(newLabel(i, icon));
+        iconList.add(newLabel(i, ico, hash));
 
         selected = i;
         fireTableDataChanged();
@@ -372,12 +369,13 @@ class IcoModel extends javax.swing.table.AbstractTableModel
         }
     }
 
-    private javax.swing.JLabel newLabel(int num, javax.swing.Icon ico)
+    private javax.swing.JLabel newLabel(int num, javax.swing.Icon ico, String key)
     {
         javax.swing.JLabel label = new javax.swing.JLabel();
         label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         label.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         label.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        label.putClientProperty("hash", key);
         label.setText(Integer.toString(num));
         label.setOpaque(true);
         label.setIcon(ico);
@@ -408,5 +406,16 @@ class IcoModel extends javax.swing.table.AbstractTableModel
     public int getSelectedColumn()
     {
         return selected % columnCount;
+    }
+
+    public String getSelectedKey(int row, int column)
+    {
+        int index = row * columnCount + column;
+        if (index < 0 || index >= iconList.size())
+        {
+            return "";
+        }
+
+        return (String) iconList.get(index).getClientProperty("hash");
     }
 }
