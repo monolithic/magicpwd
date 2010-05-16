@@ -34,6 +34,7 @@ public class IcoDialog extends javax.swing.JDialog
     {
         super(MagicPwd.getCurrForm(), true);
         this.backCall = backCall;
+        this.iconPath = Util.icoPath;
     }
 
     public void initView()
@@ -248,7 +249,7 @@ class IcoModel extends javax.swing.table.AbstractTableModel
     @Override
     public int getRowCount()
     {
-        return iconList.size() / columnCount;
+        return iconList.size() / columnCount + 1;
     }
 
     @Override
@@ -316,7 +317,7 @@ class IcoModel extends javax.swing.table.AbstractTableModel
             }
 
             String key = matcher.group();
-            iconList.add(newLabel(i, Util.getIcon(key)));
+            iconList.add(newLabel(i + 1, Util.getIcon(key)));
             if (key.equalsIgnoreCase(lastIcon))
             {
                 selected = i;
@@ -353,9 +354,11 @@ class IcoModel extends javax.swing.table.AbstractTableModel
 
         javax.swing.ImageIcon icon = new javax.swing.ImageIcon(img);
         Util.setIcon(hash, icon);
-        iconList.add(newLabel(iconList.size(), icon));
+        int i = iconList.size();
+        iconList.add(newLabel(i, icon));
 
-//        fireTableDataChanged();
+        selected = i;
+        fireTableDataChanged();
     }
 
     /**
