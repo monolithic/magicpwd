@@ -82,8 +82,8 @@ public interface LangRes
     String P30F131A = "P30F131A";// 电子邮件(&M)
     String P30F131B = "P30F131B";// 登录用户(&U)
     String P30F131C = "P30F131C";// 认证口令(&P)
-    String P30F131D = "P30F131D";// 名称(&N)
-    String P30F131E = "P30F131E";// 徽标(&P)
+    String P30F131D = "P30F131D";// 徽标(&P)
+    String P30F131E = "P30F131E";// 名称(&N)
     String P30F131F = "P30F131F";// 徽标(&P)
     String P30F1320 = "P30F1320";// 徽标(&P)
     // ----------------------------------------------------
