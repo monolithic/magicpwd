@@ -293,7 +293,6 @@ public class MenuPwd extends JPopupMenu
         mi_CharDef.setActionCommand(ConsCfg.DEF_PWDS_HASH);
         mi_CharDef.putClientProperty("prop_char", ConsCfg.DEF_PWDS_CHAR);
 
-        List<Char> list = UserMdl.getCharMdl().getCharSys();
         javax.swing.JCheckBoxMenuItem menu;
         int i = 0;
         for (Char item : UserMdl.getCharMdl().getCharSys())
