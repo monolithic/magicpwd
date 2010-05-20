@@ -589,7 +589,14 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         }
         else
         {
-            UserMdl.getListMdl().listName(guid.getData());
+            if (isSearch)
+            {
+                UserMdl.getListMdl().findName(queryKey);
+            }
+            else if (Util.isValidateHash(queryKey))
+            {
+                UserMdl.getListMdl().listName(queryKey);
+            }
         }
 
         showPropEdit();
