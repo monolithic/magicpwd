@@ -496,6 +496,32 @@ public class MenuBar extends JMenuBar
 
         mu_DataMenu.addSeparator();
 
+        mi_DataSync = new javax.swing.JMenuItem();
+        mi_DataSync.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                me_MenuEvent.dataExptActionPerformed(evt);
+            }
+        });
+        mu_DataMenu.add(mi_DataSync);
+
+        mi_DataBack = new javax.swing.JMenuItem();
+        mi_DataBack.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                me_MenuEvent.dataExptActionPerformed(evt);
+            }
+        });
+        mu_DataMenu.add(mi_DataBack);
+
+        mu_DataMenu.addSeparator();
+
         mi_DataUSet = new javax.swing.JMenuItem();
         mi_DataUSet.addActionListener(new java.awt.event.ActionListener()
         {
@@ -968,6 +994,8 @@ public class MenuBar extends JMenuBar
     private javax.swing.JMenu mu_DataMenu;
     private javax.swing.JMenuItem mi_DataImpt;
     private javax.swing.JMenuItem mi_DataExpt;
+    private javax.swing.JMenuItem mi_DataSync;
+    private javax.swing.JMenuItem mi_DataBack;
     private javax.swing.JMenuItem mi_DataUSet;
     private javax.swing.JMenuItem mi_DataChar;
     private javax.swing.JMenuItem mi_DataTplt;
