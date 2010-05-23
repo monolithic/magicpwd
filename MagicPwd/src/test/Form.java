@@ -26,31 +26,54 @@ public class Form extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lb_UserName = new javax.swing.JLabel();
+        tf_UserName = new javax.swing.JTextField();
+        lb_UserKey0 = new javax.swing.JLabel();
+        pf_UserKey0 = new javax.swing.JPasswordField();
+        lb_UserKey1 = new javax.swing.JLabel();
+        pf_UserKey1 = new javax.swing.JPasswordField();
+        lb_UserKey2 = new javax.swing.JLabel();
+        pf_UserKey2 = new javax.swing.JPasswordField();
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
+        lb_UserName.setText("用户：");
 
-        jButton1.setText("jButton1");
+        tf_UserName.setColumns(16);
+        tf_UserName.setText("jTextField1");
+        tf_UserName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tf_UserNameActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("jButton2");
+        lb_UserKey0.setText("口令：");
 
-        jLabel1.setBackground(javax.swing.UIManager.getDefaults().getColor("TextField.background"));
-        jLabel1.setForeground(javax.swing.UIManager.getDefaults().getColor("Table.selectionBackground"));
-        jLabel1.setText("jLabel1");
-        jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jLabel1.setOpaque(true);
+        pf_UserKey0.setColumns(16);
+        pf_UserKey0.setText("jPasswordField1");
+        pf_UserKey0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pf_UserKey0ActionPerformed(evt);
+            }
+        });
+
+        lb_UserKey1.setText("新口令：");
+
+        pf_UserKey1.setColumns(16);
+        pf_UserKey1.setText("jPasswordField2");
+        pf_UserKey1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pf_UserKey1ActionPerformed(evt);
+            }
+        });
+
+        lb_UserKey2.setText("口令确认：");
+
+        pf_UserKey2.setColumns(16);
+        pf_UserKey2.setText("jPasswordField1");
+        pf_UserKey2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pf_UserKey2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -58,38 +81,68 @@ public class Form extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
-                .addContainerGap(234, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(222, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lb_UserKey0, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lb_UserName, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lb_UserKey1, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lb_UserKey2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tf_UserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pf_UserKey0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pf_UserKey1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pf_UserKey2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 113, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap())
+                    .addComponent(lb_UserName)
+                    .addComponent(tf_UserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lb_UserKey0)
+                    .addComponent(pf_UserKey0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lb_UserKey1)
+                    .addComponent(pf_UserKey1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lb_UserKey2)
+                    .addComponent(pf_UserKey2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void tf_UserNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tf_UserNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tf_UserNameActionPerformed
+
+    private void pf_UserKey0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pf_UserKey0ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pf_UserKey0ActionPerformed
+
+    private void pf_UserKey1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pf_UserKey1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pf_UserKey1ActionPerformed
+
+    private void pf_UserKey2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pf_UserKey2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pf_UserKey2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lb_UserKey0;
+    private javax.swing.JLabel lb_UserKey1;
+    private javax.swing.JLabel lb_UserKey2;
+    private javax.swing.JLabel lb_UserName;
+    private javax.swing.JPasswordField pf_UserKey0;
+    private javax.swing.JPasswordField pf_UserKey1;
+    private javax.swing.JPasswordField pf_UserKey2;
+    private javax.swing.JTextField tf_UserName;
     // End of variables declaration//GEN-END:variables
 
 }
