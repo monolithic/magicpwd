@@ -509,6 +509,7 @@ public class MenuBar extends JMenuBar
         mu_DataMenu.add(mi_DataDocs);
 
         mi_DataSync = new javax.swing.JMenuItem();
+        mi_DataSync.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_B, InputEvent.CTRL_MASK));
         mi_DataSync.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -521,6 +522,7 @@ public class MenuBar extends JMenuBar
         mu_DataMenu.add(mi_DataSync);
 
         mi_DataBack = new javax.swing.JMenuItem();
+        mi_DataBack.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_R, InputEvent.CTRL_MASK));
         mi_DataBack.addActionListener(new java.awt.event.ActionListener()
         {
 
