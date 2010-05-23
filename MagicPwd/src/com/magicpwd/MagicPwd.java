@@ -160,7 +160,9 @@ public class MagicPwd
                             return viewFrm();
                         }
                     });
-                    us.init();
+                    us.initView();
+                    us.initLang();
+                    us.initData();
                 }
             });
         }
@@ -200,7 +202,7 @@ public class MagicPwd
         }
     }
 
-    private static void endSave()
+    public static java.io.File endSave()
     {
         try
         {
@@ -210,10 +212,12 @@ public class MagicPwd
 
             java.io.File backFile = Util.nextBackupFile(UserMdl.getUserCfg().getBackNum());
             Jzip.zip(backFile, new java.io.File(ConsEnv.DIR_DAT));
+            return backFile;
         }
         catch (Exception exp)
         {
             Logs.exception(exp);
+            return null;
         }
     }
 

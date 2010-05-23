@@ -503,6 +503,12 @@ public class GridMdl extends DefaultTableModel
         ls_ItemList.add(to, p);
     }
 
+    public final StringBuffer deCrypt(PwdsItem pwds) throws Exception
+    {
+        pwds.deCript(UserMdl.getDCipher(), UserMdl.getSec().getMask());
+        return pwds.getP30F0203();
+    }
+
     /**
      * 数据解密处理
      * 
@@ -511,9 +517,7 @@ public class GridMdl extends DefaultTableModel
     public final void deCrypt(Keys keys, List<IEditItem> list) throws Exception
     {
         // 查询数据是否为空
-        PwdsItem pwds = keys.getPassword();
-        pwds.deCript(UserMdl.getDCipher(), UserMdl.getSec().getMask());
-        StringBuffer text = pwds.getP30F0203();
+        StringBuffer text = deCrypt(keys.getPassword());
         if (text.length() < 1)
         {
             return;
@@ -575,6 +579,12 @@ public class GridMdl extends DefaultTableModel
         }
     }
 
+    public final StringBuffer enCrypt(PwdsItem pwds) throws Exception
+    {
+        pwds.enCrypt(UserMdl.getECipher(), UserMdl.getSec().getMask());
+        return pwds.getP30F0203();
+    }
+
     /**
      * 数据加密处理
      * 
@@ -622,7 +632,7 @@ public class GridMdl extends DefaultTableModel
             text.append(ConsDat.SP_SQL_EE);
         }
 
-        pwds.enCrypt(UserMdl.getECipher(), UserMdl.getSec().getMask());
+        enCrypt(pwds);
     }
 
     public boolean isUpdate()

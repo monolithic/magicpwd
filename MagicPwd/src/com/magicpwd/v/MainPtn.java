@@ -3,6 +3,9 @@
  */
 package com.magicpwd.v;
 
+import com.google.gdata.data.MediaContent;
+import com.google.gdata.data.docs.DocumentListEntry;
+import com.google.gdata.data.docs.DocumentListFeed;
 import com.magicpwd.MagicPwd;
 import com.magicpwd._bean.AreaBean;
 import com.magicpwd._bean.DateBean;
@@ -20,10 +23,12 @@ import com.magicpwd._comn.GuidItem;
 import com.magicpwd._comn.Kind;
 import com.magicpwd._comn.Keys;
 import com.magicpwd._comn.MetaItem;
+import com.magicpwd._comn.PwdsItem;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._docs.Google;
 import com.magicpwd._face.IBackCall;
 import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
@@ -32,6 +37,7 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._user.UserSign;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Jcsv;
+import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.c.FindEvt;
@@ -166,7 +172,126 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                 return exportData();
             }
         });
-        us.init();
+        us.initView();
+        us.initLang();
+        us.initData();
+    }
+
+    @Override
+    public void dataSyncActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        try
+        {
+            String docs = DBA3000.readConfig("google_docs");
+            if (!Util.isValidate(docs))
+            {
+                Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30FAA1C, "您还没有配置您的Google Docs账户信息！");
+                return;
+            }
+
+            PwdsItem pwds = new PwdsItem();
+            pwds.getP30F0203().append(docs);
+            docs = UserMdl.getGridMdl().deCrypt(pwds).toString();
+            String[] data = docs.split("\n");
+
+            Google google = new Google("MagicPwd");
+            google.login(data[0], data[1]);
+
+            java.io.File bakFile = MagicPwd.endSave();
+            if (bakFile == null || !bakFile.exists() || !bakFile.canRead())
+            {
+                return;
+            }
+            google.upload(bakFile.getAbsolutePath(), ConsEnv.FILE_SYNC, "application/zip");
+        }
+        catch (Exception ex)
+        {
+            Logs.exception(ex);
+            Lang.showMesg(MagicPwd.getCurrForm(), null, ex.getLocalizedMessage());
+        }
+    }
+
+    @Override
+    public void dataBackActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        try
+        {
+            String docs = DBA3000.readConfig("google_docs");
+            if (!Util.isValidate(docs))
+            {
+                Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30FAA1C, "您还没有配置您的Google Docs账户信息！");
+                return;
+            }
+
+            PwdsItem pwds = new PwdsItem();
+            pwds.getP30F0203().append(docs);
+            docs = UserMdl.getGridMdl().deCrypt(pwds).toString();
+            String[] data = docs.split("\n");
+
+            Google google = new Google("MagicPwd");
+            google.login(data[0], data[1]);
+
+            DocumentListFeed feed = google.getDocsListFeed(ConsEnv.FILE_SYNC);
+            if (feed == null)
+            {
+                Lang.showMesg(MagicPwd.getCurrForm(), null, "无法在Google Docs找到备份文件！");
+                return;
+            }
+
+            java.net.URL uri = null;
+            for (DocumentListEntry entry : feed.getEntries())
+            {
+                if (ConsEnv.FILE_SYNC.equalsIgnoreCase(entry.getTitle().getPlainText()))
+                {
+                    uri = new java.net.URL(((MediaContent) entry.getContent()).getUri());
+                    break;
+                }
+            }
+            if (uri == null)
+            {
+                Lang.showMesg(MagicPwd.getCurrForm(), null, "请确认您的Google Docs是否存魔方密码的备份文件！");
+                return;
+            }
+
+            java.io.File bakFile = new java.io.File(UserMdl.getUserCfg().getBackDir(), ConsEnv.FILE_SYNC);
+            google.downloadFile(uri, bakFile.getAbsolutePath());
+            if (!bakFile.exists() || !bakFile.canRead())
+            {
+                Lang.showMesg(MagicPwd.getCurrForm(), null, "从Google Docs下载备份文件失败！");
+                return;
+            }
+
+            MagicPwd.endSave();
+
+            java.io.File datFile = new java.io.File(ConsEnv.DIR_DAT);
+            datFile.delete();
+            Jzip.unZip(bakFile, datFile);
+            Lang.showMesg(MagicPwd.getCurrForm(), null, "数据恢复成功，您需要重新启动本程序！");
+            System.exit(0);
+        }
+        catch (Exception ex)
+        {
+            Logs.exception(ex);
+            Lang.showMesg(MagicPwd.getCurrForm(), null, ex.getLocalizedMessage());
+        }
+    }
+
+    @Override
+    public void dataDocsActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        UserSign us = new UserSign(ConsEnv.SIGN_CS, MagicPwd.getCurrForm());
+        us.setConfrmBackCall(new IBackCall()
+        {
+
+            @Override
+            public boolean callBack(Object sender, java.util.EventListener event, String... params)
+            {
+                return configDocs(params);
+            }
+        });
+        us.initView();
+        us.initLang();
+        us.initData();
     }
 
     @Override
@@ -196,7 +321,9 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                 return importData();
             }
         });
-        us.init();
+        us.initView();
+        us.initLang();
+        us.initData();
     }
 
     @Override
@@ -904,7 +1031,9 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     public void userUpdateActionPerformed(java.awt.event.ActionEvent evt)
     {
         UserSign us = new UserSign(ConsEnv.SIGN_PK, MagicPwd.getCurrForm());
-        us.init();
+        us.initView();
+        us.initLang();
+        us.initData();
     }
 
     @Override
@@ -928,7 +1057,9 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                 return true;
             }
         });
-        us.init();
+        us.initView();
+        us.initLang();
+        us.initData();
     }
 
     @Override
@@ -1515,8 +1646,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         GridMdl gm = UserMdl.getGridMdl();
         if (gm.isModified())
         {
-            if (Lang.showFirm(this, LangRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", gm.getItemAt(ConsEnv.PWDS_HEAD_META).getName())
-                    != javax.swing.JOptionPane.YES_OPTION)
+            if (Lang.showFirm(this, LangRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", gm.getItemAt(ConsEnv.PWDS_HEAD_META).getName()) != javax.swing.JOptionPane.YES_OPTION)
             {
                 ls_GuidList.setSelectedIndex(ls_LastIndx);
                 return;
@@ -1870,6 +2000,27 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         {
             Logs.exception(exp);
             Lang.showMesg(this, LangRes.P30F7A08, "TXT文档格式解析出错，数据导入失败！");
+        }
+        return true;
+    }
+
+    private boolean configDocs(String... params)
+    {
+        if (params == null || params.length < 2)
+        {
+            return false;
+        }
+
+        try
+        {
+            PwdsItem pwds = new PwdsItem();
+            pwds.getP30F0203().append(params[0]).append('\n').append(params[1]);
+            UserMdl.getGridMdl().enCrypt(pwds);
+            DBA3000.saveConfig("google_docs", pwds.getP30F0203().toString());
+        }
+        catch (Exception ex)
+        {
+            Logs.exception(ex);
         }
         return true;
     }

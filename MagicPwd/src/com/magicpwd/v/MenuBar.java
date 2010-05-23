@@ -496,6 +496,18 @@ public class MenuBar extends JMenuBar
 
         mu_DataMenu.addSeparator();
 
+        mi_DataDocs = new javax.swing.JMenuItem();
+        mi_DataDocs.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                me_MenuEvent.dataDocsActionPerformed(evt);
+            }
+        });
+        mu_DataMenu.add(mi_DataDocs);
+
         mi_DataSync = new javax.swing.JMenuItem();
         mi_DataSync.addActionListener(new java.awt.event.ActionListener()
         {
@@ -503,7 +515,7 @@ public class MenuBar extends JMenuBar
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                me_MenuEvent.dataExptActionPerformed(evt);
+                me_MenuEvent.dataSyncActionPerformed(evt);
             }
         });
         mu_DataMenu.add(mi_DataSync);
@@ -515,7 +527,7 @@ public class MenuBar extends JMenuBar
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                me_MenuEvent.dataExptActionPerformed(evt);
+                me_MenuEvent.dataBackActionPerformed(evt);
             }
         });
         mu_DataMenu.add(mi_DataBack);
@@ -884,6 +896,12 @@ public class MenuBar extends JMenuBar
 
         Lang.setWText(mi_DataExpt, LangRes.P30F761E, "导出数据");
 
+        Lang.setWText(mi_DataSync, LangRes.P30F7632, "备份到Google Docs");
+
+        Lang.setWText(mi_DataBack, LangRes.P30F7633, "从Google Docs恢复");
+
+        Lang.setWText(mi_DataDocs, LangRes.P30F7634, "配置Google Docs账户");
+
         Lang.setWText(mi_DataUSet, LangRes.P30F761F, "常规设置");
 
         Lang.setWText(mi_DataChar, LangRes.P30F7620, "口令设置");
@@ -996,6 +1014,7 @@ public class MenuBar extends JMenuBar
     private javax.swing.JMenuItem mi_DataExpt;
     private javax.swing.JMenuItem mi_DataSync;
     private javax.swing.JMenuItem mi_DataBack;
+    private javax.swing.JMenuItem mi_DataDocs;
     private javax.swing.JMenuItem mi_DataUSet;
     private javax.swing.JMenuItem mi_DataChar;
     private javax.swing.JMenuItem mi_DataTplt;

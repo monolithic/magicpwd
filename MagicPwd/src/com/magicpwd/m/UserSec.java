@@ -131,7 +131,6 @@ final class UserSec implements Key
         Cipher aes = Cipher.getInstance(ConsEnv.NAME_CIPHER);
         aes.init(Cipher.DECRYPT_MODE, this);
         temp = aes.doFinal(temp);
-        int a = temp[temp.length - 1];// 用户权限
         System.arraycopy(temp, 16, keys, 0, 16);
         mask = new String(temp, 0, 16).toCharArray();
         pwds = null;
