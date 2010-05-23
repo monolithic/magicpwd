@@ -362,6 +362,9 @@ public interface LangRes
     String P30F762F = "P30F762F";// 风格(&L)
     String P30F7630 = "P30F7630";// 系统风格(&S)
     String P30F7631 = "P30F7631";
+    String P30F7632 = "P30F7632";
+    String P30F7633 = "P30F7633";
+    String P30F7634 = "P30F7634";
     // ----------------------------------------------------
     // A 消息提示语言资源
     // ----------------------------------------------------
@@ -616,6 +619,8 @@ public interface LangRes
     String P30FA207 = "P30FA207";// 添加从属用户
     String P30FA208 = "P30FA208";// 友情提示
     String P30FA209 = "P30FA209";// 数据升级
+    String P30FA20A = "P30FA20A";// 在线用户登录
+    String P30FA20B = "P30FA20B";// 配置Google Docs用户
     // ----------------------------------------------------
     // 3 标签语言资源
     // ----------------------------------------------------
@@ -635,6 +640,8 @@ public interface LangRes
     String P30FA30D = "P30FA30D";// 设定(&S)
     String P30FA30E = "P30FA30E";// 设定(&S)
     String P30FA30F = "P30FA30F";// 设定(&S)
+    String P30FA310 = "P30FA310";// 设定(&S)
+    String P30FA311 = "P30FA311";// 设定(&S)
     // ----------------------------------------------------
     // 5 按钮语言资源
     // ----------------------------------------------------
@@ -700,4 +707,5 @@ public interface LangRes
     String P30FAA19 = "P30FAA19";// 请选择您要移动的目标类别！
     String P30FAA1A = "P30FAA1A";
     String P30FAA1B = "P30FAA1B";
+    String P30FAA1C = "P30FAA1C";
 }

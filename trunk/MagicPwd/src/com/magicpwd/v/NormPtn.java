@@ -235,17 +235,32 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
     }
 
     @Override
+    public void dataImptActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    }
+
+    @Override
     public void dataExptActionPerformed(java.awt.event.ActionEvent evt)
     {
     }
 
     @Override
-    public void helpSKeyActionPerformed(java.awt.event.ActionEvent evt)
+    public void dataSyncActionPerformed(java.awt.event.ActionEvent evt)
     {
     }
 
     @Override
-    public void dataImptActionPerformed(java.awt.event.ActionEvent evt)
+    public void dataBackActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    }
+
+    @Override
+    public void dataDocsActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    }
+
+    @Override
+    public void helpSKeyActionPerformed(java.awt.event.ActionEvent evt)
     {
     }
 
@@ -602,7 +617,9 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
                 return showFrm();
             }
         });
-        us.init();
+        us.initView();
+        us.initLang();
+        us.initData();
     }
 
     private void bt_SaveNoteActionPerformed(java.awt.event.ActionEvent evt)
