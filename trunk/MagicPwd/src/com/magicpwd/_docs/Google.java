@@ -1010,7 +1010,6 @@ public class Google
             }
         }
 
-        System.out.println(url.toString());
         return new URL(url.toString());
     }
 
