@@ -36,23 +36,80 @@ import java.util.regex.Pattern;
 public class DBA3000
 {
 
-    public static boolean readDBVersion(DBAccess dba)
+    public static String readConfig(String key)
     {
-        dba.addTable(DBC3000.P30F0000);
-        dba.addWhere(DBC3000.P30F0001, "versions");
-        dba.addWhere(DBC3000.P30F0002, ConsDat.VERSIONS);
-        boolean b = false;
+        DBAccess dba = new DBAccess();
+
+        String result = null;
         try
         {
-            ResultSet rest = dba.executeSelect();
-            b = rest.next();
-            rest.close();
+            dba.init();
+            dba.addTable(DBC3000.P30F0000);
+            dba.addColumn(DBC3000.P30F0002);
+            dba.addWhere(DBC3000.P30F0001, Util.text2DB(key));
+
+            ResultSet resultSet = dba.executeSelect();
+            if (resultSet.next())
+            {
+                result = resultSet.getString(DBC3000.P30F0002);
+            }
+            resultSet.close();
         }
         catch (SQLException ex)
         {
             Logs.exception(ex);
+            result = null;
         }
-        return b;
+
+        dba.close();
+        return result;
+    }
+
+    public static boolean saveConfig(String key, String value)
+    {
+        key = Util.text2DB(key);
+        if (!Util.isValidate(key, 1, DBC3000.P30F0001_SIZE))
+        {
+            return false;
+        }
+
+        DBAccess dba = new DBAccess();
+
+        boolean isOK = false;
+        try
+        {
+            dba.init();
+            dba.addTable(DBC3000.P30F0000);
+            dba.addWhere(DBC3000.P30F0001, key);
+
+            ResultSet resultSet = dba.executeSelect();
+            boolean isUpdate = resultSet.next();
+            resultSet.close();
+
+            dba.reset();
+            dba.addTable(DBC3000.P30F0000);
+            dba.addParam(DBC3000.P30F0002, Util.text2DB(value));
+            dba.addParam(DBC3000.P30F0003, DBC3000.SQL_NOW, false);
+            if (isUpdate)
+            {
+                dba.addWhere(DBC3000.P30F0001, key);
+                dba.executeUpdate();
+            }
+            else
+            {
+                dba.addParam(DBC3000.P30F0001, key);
+                dba.executeInsert();
+            }
+            isOK = true;
+        }
+        catch (SQLException ex)
+        {
+            Logs.exception(ex);
+            isOK = false;
+        }
+
+        dba.close();
+        return isOK;
     }
 
     /**

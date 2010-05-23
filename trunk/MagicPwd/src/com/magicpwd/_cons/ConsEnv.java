@@ -50,6 +50,7 @@ public interface ConsEnv
     String FILE_ATTACHMENT = ".ama";
     String FILE_DATA = "amon";
     String FILE_BACK = FILE_DATA + "_{0}.backup";
+    String FILE_SYNC = "magicpwd.amb";
     String FILE_DATE = "yyyyMMdd-HHmmss";
     String VIEW_DATE = "yyyy-MM-dd HH:mm:ss";
     String IMAGE_FORMAT = "png";
@@ -109,6 +110,10 @@ public interface ConsEnv
      * 在线用户登录
      */
     int SIGN_NW = SIGN_SU + 1;
+    /**
+     * 设置云存储用户
+     */
+    int SIGN_CS = SIGN_NW + 1;
     String BEAN_PROP = "beanprop";
     String BEAN_INFO = BEAN_PROP + ConsDat.INDX_INFO;// "infobean";
     String BEAN_TEXT = BEAN_PROP + ConsDat.INDX_TEXT;// "textbean";
