@@ -150,7 +150,7 @@ public class MagicPwd
                     }
 
                     // 显示登录或注册界面
-                    UserSign us = new UserSign(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.SIGN_IN : ConsEnv.SIGN_UP);
+                    UserSign us = new UserSign();
                     us.setConfrmBackCall(new IBackCall()
                     {
 
@@ -160,7 +160,7 @@ public class MagicPwd
                             return viewFrm();
                         }
                     });
-                    us.initView();
+                    us.initView(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.SIGN_IN : ConsEnv.SIGN_UP);
                     us.initLang();
                     us.initData();
                 }

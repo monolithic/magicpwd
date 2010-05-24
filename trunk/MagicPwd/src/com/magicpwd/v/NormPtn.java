@@ -607,7 +607,7 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
 
     private void bt_ExitNoteActionPerformed(java.awt.event.ActionEvent evt)
     {
-        UserSign us = new UserSign(ConsEnv.SIGN_RS, MagicPwd.getCurrForm());
+        UserSign us = new UserSign(MagicPwd.getCurrForm());
         us.setConfrmBackCall(new IBackCall()
         {
 
@@ -617,7 +617,7 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
                 return showFrm();
             }
         });
-        us.initView();
+        us.initView(ConsEnv.SIGN_RS);
         us.initLang();
         us.initData();
     }

@@ -234,13 +234,13 @@ public final class UserMdl
      * @return
      * @throws java.lang.Exception
      */
-    public static final boolean signSk(String secPwds) throws Exception
+    public static final boolean signSk(String oldPwds, String secPwds) throws Exception
     {
         if (us_UserSec == null)
         {
             return false;
         }
-        return us_UserSec.signSk(secPwds);
+        return us_UserSec.signSk(oldPwds, secPwds);
     }
 
     /**
