@@ -176,8 +176,11 @@ public class UserSign extends javax.swing.JPanel
 
     private void initInfoView()
     {
-        pl_InfoPane = new javax.swing.JPanel();
-        pl_InfoPane.setLayout(new java.awt.FlowLayout());
+        if (pl_InfoPane == null)
+        {
+            pl_InfoPane = new javax.swing.JPanel();
+            pl_InfoPane.setLayout(new java.awt.FlowLayout());
+        }
 
         tf_UserName = new javax.swing.JTextField(20);
         tf_UserName.addActionListener(new java.awt.event.ActionListener()
@@ -388,6 +391,7 @@ public class UserSign extends javax.swing.JPanel
         vsg.addContainerGap();
         layout.setVerticalGroup(vsg);
 
+        pl_InfoPane.removeAll();
         pl_InfoPane.add(panel);
     }
 
@@ -421,6 +425,8 @@ public class UserSign extends javax.swing.JPanel
                 Lang.setWText(bt_Cancel, LangRes.P30FA504, "取消(&C)");
 
                 setTitle(Lang.getLang(LangRes.P30FA201, "用户登录"));
+
+                lb_UsrLabel.setVisible(true);
                 break;
             case ConsEnv.SIGN_RS:
                 Lang.setWText(lb_UserName, LangRes.P30FA301, "用户(&U)");
@@ -432,6 +438,8 @@ public class UserSign extends javax.swing.JPanel
                 Lang.setWText(bt_Cancel, LangRes.P30FA504, "取消(&C)");
 
                 setTitle(Lang.getLang(LangRes.P30FA202, "身份验证"));
+
+                lb_UsrLabel.setVisible(false);
                 break;
             case ConsEnv.SIGN_UP:
                 Lang.setWText(lb_UserName, LangRes.P30FA301, "用户(&U)");
@@ -448,6 +456,8 @@ public class UserSign extends javax.swing.JPanel
                 Lang.setWText(bt_Cancel, LangRes.P30FA504, "取消(&C)");
 
                 setTitle(Lang.getLang(LangRes.P30FA203, "用户注册"));
+
+                lb_UsrLabel.setVisible(false);
                 break;
             case ConsEnv.SIGN_PK:
                 Lang.setWText(lb_UserKey0, LangRes.P30FA304, "现有口令(&O)");
@@ -461,6 +471,8 @@ public class UserSign extends javax.swing.JPanel
                 Lang.setWText(bt_Cancel, LangRes.P30FA504, "取消(&C)");
 
                 setTitle(Lang.getLang(LangRes.P30FA205, "登录口令修改"));
+
+                lb_UsrLabel.setVisible(false);
                 break;
             case ConsEnv.SIGN_FP:
                 Lang.setWText(lb_UserName, LangRes.P30FA30C, "登录用户(&U)");
@@ -472,6 +484,8 @@ public class UserSign extends javax.swing.JPanel
                 Lang.setWText(bt_Cancel, LangRes.P30FA504, "取消(&C)");
 
                 setTitle(Lang.getLang(LangRes.P30FA204, "口令找回"));
+
+                lb_UsrLabel.setVisible(false);
                 break;
             case ConsEnv.SIGN_SK:
                 Lang.setWText(lb_UserKey0, LangRes.P30FA304, "现有口令(&O)");
@@ -485,9 +499,13 @@ public class UserSign extends javax.swing.JPanel
                 Lang.setWText(bt_Cancel, LangRes.P30FA504, "取消(&C)");
 
                 setTitle(Lang.getLang(LangRes.P30FA206, "安全口令修改"));
+
+                lb_UsrLabel.setVisible(false);
                 break;
             case ConsEnv.SIGN_SU:
                 setTitle(Lang.getLang(LangRes.P30FA207, "添加从属用户"));
+
+                lb_UsrLabel.setVisible(false);
                 break;
             case ConsEnv.SIGN_CS:
                 Lang.setWText(lb_UserName, LangRes.P30FA301, "用户(&U)");
@@ -499,6 +517,8 @@ public class UserSign extends javax.swing.JPanel
                 Lang.setWText(bt_Cancel, LangRes.P30FA504, "取消(&C)");
 
                 setTitle(Lang.getLang(LangRes.P30FA207, "配置Google Docs用户"));
+
+                lb_UsrLabel.setVisible(false);
                 break;
             default:
                 break;
@@ -607,9 +627,9 @@ public class UserSign extends javax.swing.JPanel
                 dispoze();
                 break;
             case ConsEnv.SIGN_FP:
-                lb_UsrLabel.setVisible(true);
-                signType = ConsEnv.SIGN_IN;
+                initView(ConsEnv.SIGN_IN);
                 initLang();
+                initData();
                 break;
             default:
                 break;
@@ -678,6 +698,9 @@ public class UserSign extends javax.swing.JPanel
 
     private void lb_UsrLabelMouseReleased(java.awt.event.MouseEvent evt)
     {
+        initView(ConsEnv.SIGN_FP);
+        initLang();
+        initData();
     }
 
     private void lb_KeyLabelMouseReleased(java.awt.event.MouseEvent evt)
@@ -752,11 +775,11 @@ public class UserSign extends javax.swing.JPanel
             return;
         }
 
-        dispoze();
         if (confrm != null)
         {
             confrm.callBack(null, null, "");
         }
+        dispoze();
     }
 
     private void signRs()
