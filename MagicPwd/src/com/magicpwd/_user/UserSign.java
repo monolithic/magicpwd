@@ -73,6 +73,8 @@ public class UserSign extends javax.swing.JPanel
         if (lb_UsrLabel == null)
         {
             lb_UsrLabel = new javax.swing.JLabel();
+            lb_UsrLabel.setForeground(java.awt.Color.blue);
+            lb_UsrLabel.setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
             lb_UsrLabel.addMouseListener(new java.awt.event.MouseAdapter()
             {
 
@@ -86,6 +88,8 @@ public class UserSign extends javax.swing.JPanel
         if (lb_KeyLabel == null)
         {
             lb_KeyLabel = new javax.swing.JLabel();
+            lb_UsrLabel.setForeground(java.awt.Color.blue);
+            lb_UsrLabel.setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
             lb_KeyLabel.addMouseListener(new java.awt.event.MouseAdapter()
             {
 
@@ -182,7 +186,7 @@ public class UserSign extends javax.swing.JPanel
             pl_InfoPane.setLayout(new java.awt.FlowLayout());
         }
 
-        tf_UserName = new javax.swing.JTextField(20);
+        tf_UserName = new javax.swing.JTextField(22);
         tf_UserName.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -205,7 +209,7 @@ public class UserSign extends javax.swing.JPanel
         lb_UserName = new javax.swing.JLabel();
         lb_UserName.setLabelFor(tf_UserName);
 
-        pf_UserKey0 = new javax.swing.JPasswordField(20);
+        pf_UserKey0 = new javax.swing.JPasswordField(22);
         pf_UserKey0.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -228,7 +232,7 @@ public class UserSign extends javax.swing.JPanel
         lb_UserKey0 = new javax.swing.JLabel();
         lb_UserKey0.setLabelFor(pf_UserKey0);
 
-        pf_UserKey1 = new javax.swing.JPasswordField(20);
+        pf_UserKey1 = new javax.swing.JPasswordField(22);
         pf_UserKey1.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -251,7 +255,7 @@ public class UserSign extends javax.swing.JPanel
         lb_UserKey1 = new javax.swing.JLabel();
         lb_UserKey1.setLabelFor(pf_UserKey1);
 
-        pf_UserKey2 = new javax.swing.JPasswordField(20);
+        pf_UserKey2 = new javax.swing.JPasswordField(22);
         pf_UserKey2.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -286,32 +290,40 @@ public class UserSign extends javax.swing.JPanel
             case ConsEnv.SIGN_FP:// 口令找回
             case ConsEnv.SIGN_CS:// 在线存储
                 hpg1.addComponent(lb_UserName, javax.swing.GroupLayout.Alignment.TRAILING);
-                hpg2.addComponent(tf_UserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+                //hpg2.addComponent(tf_UserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+                hpg2.addComponent(tf_UserName, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
 
                 hpg1.addComponent(lb_UserKey0, javax.swing.GroupLayout.Alignment.TRAILING);
-                hpg2.addComponent(pf_UserKey0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+                //hpg2.addComponent(pf_UserKey0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+                hpg2.addComponent(pf_UserKey0, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
                 break;
             case ConsEnv.SIGN_UP:// 用户注册
             case ConsEnv.SIGN_SU:// 从属用户
                 hpg1.addComponent(lb_UserName, javax.swing.GroupLayout.Alignment.TRAILING);
-                hpg2.addComponent(tf_UserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+                //hpg2.addComponent(tf_UserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+                hpg2.addComponent(tf_UserName, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
 
                 hpg1.addComponent(lb_UserKey0, javax.swing.GroupLayout.Alignment.TRAILING);
-                hpg2.addComponent(pf_UserKey0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+                //hpg2.addComponent(pf_UserKey0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+                hpg2.addComponent(pf_UserKey0, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
 
                 hpg1.addComponent(lb_UserKey1, javax.swing.GroupLayout.Alignment.TRAILING);
-                hpg2.addComponent(pf_UserKey1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+                //hpg2.addComponent(pf_UserKey1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+                hpg2.addComponent(pf_UserKey1, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
                 break;
             case ConsEnv.SIGN_PK:// 修改登录口令
             case ConsEnv.SIGN_SK:// 修改安全口令
                 hpg1.addComponent(lb_UserKey0, javax.swing.GroupLayout.Alignment.TRAILING);
-                hpg2.addComponent(pf_UserKey0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+                //hpg2.addComponent(pf_UserKey0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+                hpg2.addComponent(pf_UserKey0, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
 
                 hpg1.addComponent(lb_UserKey1, javax.swing.GroupLayout.Alignment.TRAILING);
-                hpg2.addComponent(pf_UserKey1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+                //hpg2.addComponent(pf_UserKey1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+                hpg2.addComponent(pf_UserKey1, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
 
                 hpg1.addComponent(lb_UserKey2, javax.swing.GroupLayout.Alignment.TRAILING);
-                hpg2.addComponent(pf_UserKey2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+                //hpg2.addComponent(pf_UserKey2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+                hpg2.addComponent(pf_UserKey2, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
                 break;
             case ConsEnv.SIGN_NW:
                 break;
@@ -319,11 +331,11 @@ public class UserSign extends javax.swing.JPanel
                 break;
         }
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
-        hsg.addContainerGap();
+        //hsg.addContainerGap();
         hsg.addGroup(hpg1);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg.addGroup(hpg2);
-        hsg.addContainerGap();
+        //hsg.addContainerGap();
         layout.setHorizontalGroup(hsg);
 
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
@@ -590,10 +602,13 @@ public class UserSign extends javax.swing.JPanel
         }
 
         window.pack();
-        java.awt.Dimension windowsize = window.getSize();
-        java.awt.Dimension screensize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        window.setLocation((screensize.width - windowsize.width) >> 1, (screensize.height - windowsize.height) >> 1);
-        window.setVisible(true);
+        if (!window.isVisible())
+        {
+            java.awt.Dimension windowsize = window.getSize();
+            java.awt.Dimension screensize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+            window.setLocation((screensize.width - windowsize.width) >> 1, (screensize.height - windowsize.height) >> 1);
+            window.setVisible(true);
+        }
         return true;
     }
 
