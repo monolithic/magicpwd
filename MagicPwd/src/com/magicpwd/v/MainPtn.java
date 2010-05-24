@@ -984,7 +984,13 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             return;
         }
 
-        String kindName = javax.swing.JOptionPane.showInputDialog(Lang.getLang(LangRes.P30F7A15, ""));
+        Object obj = path.getLastPathComponent();
+        if (obj == null || !(obj instanceof KindTN))
+        {
+            return;
+        }
+
+        String kindName = javax.swing.JOptionPane.showInputDialog(Lang.getLang(LangRes.P30F7A15, "请输入类别名称："));
         if (kindName == null)
         {
             return;
@@ -995,7 +1001,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             return;
         }
 
-        KindTN p = (KindTN) path.getLastPathComponent();
+        KindTN p = (KindTN) obj;
         Kind c = new Kind();
         c.setC2010101(p.getChildCount());
         c.setC2010105(kindName);
@@ -1008,6 +1014,18 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     {
         javax.swing.tree.TreePath path = tr_GuidTree.getSelectionPath();
         if (path == null)
+        {
+            return;
+        }
+
+        Object obj = path.getLastPathComponent();
+        if (obj == null || !(obj instanceof KindTN))
+        {
+            return;
+        }
+
+        KindTN node = (KindTN) obj;
+        if (node.isRoot())
         {
             return;
         }
@@ -1039,29 +1057,34 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     @Override
     public void kindUpdtActionPerformed(java.awt.event.ActionEvent evt)
     {
-        javax.swing.tree.TreePath tp = tr_GuidTree.getSelectionPath();
-        if (tp == null)
+        javax.swing.tree.TreePath path = tr_GuidTree.getSelectionPath();
+        if (path == null)
         {
             return;
         }
 
-        Object obj = tp.getLastPathComponent();
+        Object obj = path.getLastPathComponent();
         if (obj == null || !(obj instanceof KindTN))
         {
             return;
         }
 
         KindTN node = (KindTN) obj;
+        if (node.isRoot())
+        {
+            return;
+        }
+
         Kind c = (Kind) node.getUserObject();
 
-        String name = javax.swing.JOptionPane.showInputDialog(Lang.getLang(LangRes.P30F7A15, ""), c.getC2010105());
+        String name = javax.swing.JOptionPane.showInputDialog(Lang.getLang(LangRes.P30F7A15, "请输入类别名称："), c.getC2010105());
         if (name == null)
         {
             return;
         }
         if (!Util.isValidate(name))
         {
-            Lang.showMesg(this, LangRes.P30F7A17, "");
+            Lang.showMesg(this, LangRes.P30F7A17, "更新失败：您输入的类别名称无任何意义！");
             return;
         }
         c.setC2010105(name);
