@@ -40,6 +40,7 @@ public class HintBean extends javax.swing.JPanel implements IEditBean
     {
         dataEdit = new EditBean(this, true);
         dataEdit.initView();
+        dataEdit.setCopyButtonVisible(false);
         dataEdit.setDropButtonVisible(false);
 
         lb_PropName = new javax.swing.JLabel();

@@ -35,6 +35,7 @@ public class MetaBean extends javax.swing.JPanel implements IEditBean
     {
         dataEdit = new EditBean(this, true);
         dataEdit.initView();
+        dataEdit.setCopyButtonVisible(false);
         dataEdit.setDropButtonVisible(false);
 
         lb_PropName = new javax.swing.JLabel();
@@ -96,7 +97,7 @@ public class MetaBean extends javax.swing.JPanel implements IEditBean
     {
         dataEdit.initLang();
 
-        Lang.setWText(lb_PropName, LangRes.P30F1303, "名称");
+        Lang.setWText(lb_PropName, LangRes.P30F1303, "标题");
         Lang.setWText(lb_PropData, LangRes.P30F1304, "搜索");
     }
 
