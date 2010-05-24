@@ -849,14 +849,7 @@ public class UserSign extends javax.swing.JPanel
     {
         // 登录名称检测
         String un = tf_UserName.getText();
-        if (un == null)
-        {
-            Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
-            tf_UserName.requestFocus();
-            return;
-        }
-        un = un.trim();
-        if (un.length() < 1)
+        if (!Util.isValidate(un))
         {
             Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
             tf_UserName.requestFocus();
@@ -865,7 +858,7 @@ public class UserSign extends javax.swing.JPanel
 
         // 口令为空检测
         String p1 = new String(pf_UserKey0.getPassword());
-        if (p1.length() < 1)
+        if (!Util.isValidate(p1))
         {
             Lang.showMesg(this, LangRes.P30FAA02, "请输入登录口令！");
             pf_UserKey0.requestFocus();
