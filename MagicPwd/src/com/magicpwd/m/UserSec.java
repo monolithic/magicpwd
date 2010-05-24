@@ -264,13 +264,23 @@ final class UserSec implements Key
      * @return
      * @throws Exception
      */
-    final boolean signSk(String secPwds) throws Exception
+    final boolean signSk(String oldPwds, String secPwds) throws Exception
     {
+        UserCfg ui = UserMdl.getUserCfg();
+
+        // 已有口令校验
+        pwds = oldPwds;
+        byte[] temp = signInDigest();
+        if (!Util.bytesToString(temp, true).equals(ui.getCfg(user(ConsCfg.CFG_USER_INFO))))
+        {
+            return false;
+        }
+
         // 认证信息
         this.pwds = secPwds;
         String sKey = Util.bytesToString(signSkDigest(), true);
 
-        byte[] temp = new String(mask).getBytes();
+        temp = new String(mask).getBytes();
 
         // 生成加密密钥及字符空间
         byte[] t = new byte[32];

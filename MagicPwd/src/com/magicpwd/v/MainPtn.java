@@ -163,7 +163,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             return;
         }
 
-        UserSign us = new UserSign(ConsEnv.SIGN_RS, MagicPwd.getCurrForm());
+        UserSign us = new UserSign(MagicPwd.getCurrForm());
         us.setConfrmBackCall(new IBackCall()
         {
 
@@ -173,7 +173,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                 return exportData();
             }
         });
-        us.initView();
+        us.initView(ConsEnv.SIGN_RS);
         us.initLang();
         us.initData();
     }
@@ -331,7 +331,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     @Override
     public void dataDocsActionPerformed(java.awt.event.ActionEvent evt)
     {
-        UserSign us = new UserSign(ConsEnv.SIGN_CS, MagicPwd.getCurrForm());
+        UserSign us = new UserSign(MagicPwd.getCurrForm());
         us.setConfrmBackCall(new IBackCall()
         {
 
@@ -341,7 +341,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                 return configDocs(params);
             }
         });
-        us.initView();
+        us.initView(ConsEnv.SIGN_CS);
         us.initLang();
         us.initData();
     }
@@ -363,7 +363,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             return;
         }
 
-        UserSign us = new UserSign(ConsEnv.SIGN_RS, MagicPwd.getCurrForm());
+        UserSign us = new UserSign(MagicPwd.getCurrForm());
         us.setConfrmBackCall(new IBackCall()
         {
 
@@ -373,7 +373,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                 return importData();
             }
         });
-        us.initView();
+        us.initView(ConsEnv.SIGN_RS);
         us.initLang();
         us.initData();
     }
@@ -1082,8 +1082,8 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     @Override
     public void userUpdateActionPerformed(java.awt.event.ActionEvent evt)
     {
-        UserSign us = new UserSign(ConsEnv.SIGN_PK, MagicPwd.getCurrForm());
-        us.initView();
+        UserSign us = new UserSign(MagicPwd.getCurrForm());
+        us.initView(ConsEnv.SIGN_PK);
         us.initLang();
         us.initData();
     }
@@ -1098,7 +1098,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             return;
         }
 
-        UserSign us = new UserSign(ConsEnv.SIGN_SK, MagicPwd.getCurrForm());
+        UserSign us = new UserSign(MagicPwd.getCurrForm());
         us.setConfrmBackCall(new IBackCall()
         {
 
@@ -1109,7 +1109,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                 return true;
             }
         });
-        us.initView();
+        us.initView(ConsEnv.SIGN_SK);
         us.initLang();
         us.initData();
     }
