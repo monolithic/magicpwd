@@ -27,7 +27,7 @@ public class LckDialog extends javax.swing.JDialog
         lb_BusyIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lb_BusyIcon.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         getContentPane().add(lb_BusyIcon, java.awt.BorderLayout.CENTER);
-        setPreferredSize(new java.awt.Dimension(200, 52));
+        setPreferredSize(new java.awt.Dimension(200, 82));
         pack();
         return true;
     }
