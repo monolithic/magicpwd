@@ -5,7 +5,7 @@
         <vendor>Amon</vendor>
         <homepage href="http://magicpwd.com/"/>
         <description>魔方密码是一款开放源代码的跨平台密码管理软件，100%纯Java语言开发，其主要目标是在充分保障用户数据安全的基础上，做到同一数据能够方便的在多种操作平台上使用。软件采用目前国际上通用的标准商用加密算法保证您的数据机密性，支持用户自定义数据、支持随机密码生成、支持邮件检测及记事提醒等功能。</description>
-        <description kind="short">魔方密码是一款开放源代码的跨平台密码管理软件！</description>
+        <description kind="short">魔方密码，开放源代码的跨平台密码管理软件！</description>
         <icon href="splash.png" kind="splash"/>
         <offline-allowed/>
     </information>
@@ -19,16 +19,16 @@
         <jar href="lib/dom4j-1.6.1.jar"/>
         <jar href="lib/hsqldb-1.8.0.jar"/>
         <jar href="lib/javamail-1.4.3.jar"/>
-        <jar href="lib/looks-2.3.1.jar"/>
-        <jar href="lib/JavaGPE_3DLF-2.5.jar"/>
-        <jar href="lib/JTattoo.jar"/>
-        <jar href="lib/liquidlnf.jar"/>
-        <jar href="lib/looks-2.3.1.jar"/>
-        <jar href="lib/OfficeLnFs_2.7.jar"/>
-        <jar href="lib/quaqua.jar"/>
-        <jar href="lib/substance.jar"/>
+        <jar href="lib/google-collect-1.0.jar"/>
+        <jar href="lib/gdata-core-1.0.jar"/>
+        <jar href="lib/gdata-media-1.0.jar"/>
+        <jar href="lib/gdata-client-1.0.jar"/>
+        <jar href="lib/gdata-client-meta-1.0.jar"/>
+        <jar href="lib/gdata-docs-3.0.jar"/>
+        <jar href="lib/gdata-docs-meta-3.0.jar"/>
         <jar href="lib/trident.jar"/>
-        <jar href="lib/versioncheck.jar"/>
+        <jar href="lib/substance-6.0.jar"/>
+        <jar href="lib/looks-2.3.1.jar"/>
     </resources>
     <application-desc main-class="com.magicpwd.MagicPwd">
         <argument>webstart</argument>
