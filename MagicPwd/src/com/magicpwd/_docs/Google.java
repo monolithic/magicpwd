@@ -511,7 +511,8 @@ public class Google
             mimeType = DocumentListEntry.MediaType.fromFileName(file.getName()).getMimeType();
         }
 
-        DocumentEntry newDocument = new DocumentEntry();
+        DocumentListEntry newDocument = new DocumentListEntry();
+        //DocumentEntry newDocument = new DocumentEntry();
         newDocument.setFile(file, mimeType);
         newDocument.setTitle(new PlainTextConstruct(title));
 
