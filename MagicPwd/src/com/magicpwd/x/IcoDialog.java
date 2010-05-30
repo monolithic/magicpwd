@@ -344,7 +344,12 @@ class IcoModel extends javax.swing.table.AbstractTableModel
         }
 
         String hash = Hash.hash(false);
-        java.io.FileOutputStream fos = new java.io.FileOutputStream(new java.io.File(icoPath, hash + '.' + ConsEnv.IMAGE_FORMAT));
+        java.io.File pngFile = new java.io.File(icoPath.getAbsolutePath(), hash + '.' + ConsEnv.IMAGE_FORMAT);
+        if (!pngFile.exists())
+        {
+            pngFile.createNewFile();
+        }
+        java.io.FileOutputStream fos = new java.io.FileOutputStream(pngFile);
         javax.imageio.ImageIO.write(img, ConsEnv.IMAGE_FORMAT, fos);
         fos.flush();
         fos.close();
