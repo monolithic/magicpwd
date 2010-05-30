@@ -13,7 +13,7 @@ public interface ConsEnv
     /**
      * 软件信息：当前版本
      */
-    String VERSIONS = "V3.1.4.7";
+    String VERSIONS = "V3.1.4.8";
     /**
      * 软件信息：软件代码
      */
@@ -29,7 +29,7 @@ public interface ConsEnv
     /**
      * 软件信息：构建日期
      */
-    String BUILDER = "2010-05-25";
+    String BUILDER = "2010-05-31";
     /**
      * 软件信息：软件版权
      */
