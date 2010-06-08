@@ -1052,11 +1052,11 @@ public final class Util
         Properties updtProp = new Properties();
 
         // 属性读取
-        java.io.InputStream is = new URL(ConsEnv.HOMEPAGE + "down/amon.xml").openStream();
+        java.io.InputStream is = new URL(ConsEnv.HOMEPAGE + "soft/soft0001.ashx?sid=" + sid).openStream();
         updtProp.loadFromXML(is);
         is.close();
 
-        return ver.compareToIgnoreCase(updtProp.getProperty(sid, "")) < 0;
+        return ver.compareToIgnoreCase(updtProp.getProperty("version", "")) < 0;
     }
 
     /**

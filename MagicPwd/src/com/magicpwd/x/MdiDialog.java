@@ -46,11 +46,13 @@ public class MdiDialog extends javax.swing.JDialog
         if (md_Dialog == null)
         {
             md_Dialog = new MdiDialog();
-            md_Dialog = new MdiDialog();
             md_Dialog.initView();
             md_Dialog.initLang();
             md_Dialog.initData();
-            md_Dialog.addHideAction(menuEvt);
+            if (menuEvt != null)
+            {
+                md_Dialog.addHideAction(menuEvt);
+            }
         }
         return md_Dialog;
     }
