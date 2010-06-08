@@ -23,13 +23,26 @@ import java.awt.TrayIcon;
 public class TrayPtn extends TrayIcon
 {
 
+    private static TrayPtn trayPtn;
     private static boolean isOsTray;
     private static javax.swing.JDialog trayForm;
     private static javax.swing.event.PopupMenuListener listener;
 
-    public TrayPtn()
+    private TrayPtn()
     {
         super(Util.getLogo());
+    }
+
+    public static TrayPtn getInstance()
+    {
+        if (trayPtn == null)
+        {
+            trayPtn = new TrayPtn();
+            trayPtn.initView();
+            trayPtn.initLang();
+            trayPtn.initData();
+        }
+        return trayPtn;
     }
 
     public boolean initView()
