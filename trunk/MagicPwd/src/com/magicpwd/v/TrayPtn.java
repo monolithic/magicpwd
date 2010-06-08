@@ -456,21 +456,6 @@ public class TrayPtn extends TrayIcon
             Logs.exception(exp);
         }
     }
-
-    public static void main(String[] args)
-    {
-        try
-        {
-            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-        }
-        catch (Exception exp)
-        {
-            exp.printStackTrace();
-        }
-        TrayPtn tp = new TrayPtn();
-        tp.initView();
-        tp.initLang();
-    }
     private javax.swing.JPopupMenu trayMenu;
     private javax.swing.JMenuItem infoItem;
     private javax.swing.JMenuItem siteItem;
