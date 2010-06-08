@@ -283,7 +283,7 @@ public class TrayPtn extends TrayIcon
 
         Lang.setWText(exitItem, LangRes.P30F9609, "");
 
-        setToolTip("哈哈");
+        setToolTip(ConsEnv.SOFTNAME + ' ' + ConsEnv.VERSIONS);
         return true;
     }
 
@@ -416,7 +416,7 @@ public class TrayPtn extends TrayIcon
     {
         try
         {
-            boolean b = Util.checkUpdate(ConsEnv.SOFTHASH, ConsEnv.VERSIONS);
+            boolean b = Util.checkUpdate(ConsEnv.SOFTCODE, ConsEnv.VERSIONS);
             if (b)
             {
                 if (Lang.showFirm(null, LangRes.P30F7A12, "检测到新版本，现在要下载吗？") == javax.swing.JOptionPane.YES_OPTION)

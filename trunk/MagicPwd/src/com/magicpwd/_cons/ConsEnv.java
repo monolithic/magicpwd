@@ -17,7 +17,7 @@ public interface ConsEnv
     /**
      * 软件信息：软件代码
      */
-    String SOFTHASH = "130F0000";
+    String SOFTCODE = "130F0000";
     /**
      * 软件信息：软件名称
      */
