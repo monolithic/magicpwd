@@ -4,129 +4,249 @@
  */
 package com.magicpwd.v;
 
+import com.magicpwd.MagicPwd;
+import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._face.IBackCall;
+import com.magicpwd._user.UserSign;
+import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
-import java.awt.MenuItem;
-import java.awt.PopupMenu;
+import com.magicpwd.x.MdiDialog;
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import javax.swing.UIManager;
 
 /**
  * @author Amon
  */
-public class TrayPtn
+public class TrayPtn extends TrayIcon
 {
 
-    private TrayIcon trayIcon;
-    private PopupMenu trayMenu;
-    private MenuItem infoItem;
-    private MenuItem siteItem;
-    private MenuItem helpItem;
-    private MenuItem mailItem;
-    private MenuItem updtItem;
-    private MenuItem mainItem;
-    private MenuItem normItem;
-    private MenuItem miniItem;
-    private MenuItem exitItem;
+    private static boolean isOsTray;
+    private static javax.swing.JDialog trayForm;
+    private static javax.swing.event.PopupMenuListener listener;
 
     public TrayPtn()
     {
+        super(Util.getLogo());
     }
 
     public boolean initView()
     {
-        //检查当前系统是否支持系统托盘
-        if (!SystemTray.isSupported())
+        if (trayForm == null)
         {
-            return false;
+            trayForm = new javax.swing.JDialog();
+            trayForm.setUndecorated(true);
+            trayForm.setAlwaysOnTop(true);
+            //trayForm.addWindowListener(new java.awt.event.WindowAdapter()
+//            {
+//                @Override
+//                public void windowDeactivated(java.awt.event.WindowEvent evt)
+//                {
+//                      dialog.setVisible(false);
+//                }
+//            });
+        }
+        if (listener == null)
+        {
+            listener = new javax.swing.event.PopupMenuListener()
+            {
+
+                @Override
+                public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt)
+                {
+                }
+
+                @Override
+                public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt)
+                {
+                    trayForm.setVisible(false);
+                }
+
+                @Override
+                public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt)
+                {
+                    trayForm.setVisible(false);
+                }
+            };
         }
 
-        //获取表示桌面托盘区的 SystemTray 实例。
-        SystemTray tray = SystemTray.getSystemTray();
-        trayMenu = new PopupMenu();
+        //检查当前系统是否支持系统托盘
+        if (SystemTray.isSupported())
+        {
+            try
+            {
+                //获取表示桌面托盘区的 SystemTray 实例。
+                SystemTray.getSystemTray().add(this);
+                isOsTray = true;
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+                isOsTray = false;
+            }
+        }
+        else
+        {
+            isOsTray = false;
+        }
 
-        infoItem = new MenuItem("关于");
+        java.awt.event.MouseListener ml = new java.awt.event.MouseAdapter()
+        {
+
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                if (evt.getClickCount() == 2)
+                {
+                }
+            }
+
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                showJPopupMenu(evt);
+            }
+        };
+        if (isOsTray)
+        {
+            addMouseListener(ml);
+        }
+        else
+        {
+            javax.swing.JLabel iconLbl = new javax.swing.JLabel();
+            iconLbl.setIcon(Util.getIcon(0));
+            iconLbl.addMouseListener(ml);
+            iconLbl.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.darkGray));
+            trayForm.getContentPane().setLayout(new java.awt.BorderLayout());
+            trayForm.getContentPane().add(iconLbl);
+            trayForm.pack();
+
+            java.awt.Dimension size = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+            trayForm.setLocation(size.width - 120 - trayForm.getWidth(), 80);
+            trayForm.setVisible(true);
+        }
+
+        trayMenu = new javax.swing.JPopupMenu();
+
+        infoItem = new javax.swing.JMenuItem();
+        infoItem.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                infoItemActionPerformed(evt);
+            }
+        });
         trayMenu.add(infoItem);
 
-        try
+        helpItem = new javax.swing.JMenuItem();
+        helpItem.addActionListener(new java.awt.event.ActionListener()
         {
-            helpItem = new MenuItem(new String("使用帮助".getBytes("utf-8"),"GB18030"));
-            trayMenu.add(helpItem);
-        }
-        catch (Exception exp)
-        {
-        }
 
-        mailItem = new MenuItem("联系作者");
-        trayMenu.add(mailItem);
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                helpItemActionPerformed(evt);
+            }
+        });
+        trayMenu.add(helpItem);
 
         trayMenu.addSeparator();
 
-        mainItem = new MenuItem();
+        mainItem = new javax.swing.JMenuItem();
+        mainItem.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                mainItemActionPerformed(evt);
+            }
+        });
         trayMenu.add(mainItem);
 
-        normItem = new MenuItem();
+        normItem = new javax.swing.JMenuItem();
+        normItem.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                normItemActionPerformed(evt);
+            }
+        });
         trayMenu.add(normItem);
 
-        miniItem = new MenuItem("\u2035\u2999\u2411\u2116");
+        miniItem = new javax.swing.JMenuItem();
+        miniItem.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                miniItemActionPerformed(evt);
+            }
+        });
         trayMenu.add(miniItem);
 
         trayMenu.addSeparator();
 
-        updtItem = new MenuItem("检测更新");
-        trayMenu.add(updtItem);
-
-        trayMenu.addSeparator();
-
-        exitItem = new MenuItem();
-        exitItem.addActionListener(new ActionListener()
+        updtItem = new javax.swing.JMenuItem();
+        updtItem.addActionListener(new java.awt.event.ActionListener()
         {
 
             @Override
-            public void actionPerformed(ActionEvent e)
+            public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                try
-                {
-                    System.exit(0);
-                }
-                catch (Exception ex)
-                {
-                    ex.printStackTrace();
-                }
+                updtItemActionPerformed(evt);
+            }
+        });
+        trayMenu.add(updtItem);
+
+        mailItem = new javax.swing.JMenuItem();
+        mailItem.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                mailItemActionPerformed(evt);
+            }
+        });
+        trayMenu.add(mailItem);
+
+        trayMenu.addSeparator();
+
+        siteItem = new javax.swing.JMenuItem();
+        siteItem.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                siteItemActionPerformed(evt);
+            }
+        });
+        trayMenu.add(siteItem);
+
+        trayMenu.addSeparator();
+
+        exitItem = new javax.swing.JMenuItem();
+        exitItem.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                //MagicPwd.exit(0);
+                System.exit(0);
             }
         });
         trayMenu.add(exitItem);
 
-        trayIcon = new TrayIcon(Util.getLogo());
-        trayIcon.setPopupMenu(trayMenu);
-        trayIcon.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-
-            @Override
-            public void mouseClicked(MouseEvent e)
-            {
-                if (e.getClickCount() == 2)
-                {
-                }
-            }
-        });
-
-        try
-        {
-            // 将 TrayIcon 添加到 SystemTray。
-            tray.add(trayIcon);
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-            return false;
-        }
         return true;
     }
 
@@ -137,26 +257,211 @@ public class TrayPtn
 
     public boolean initLang()
     {
+        Lang.setWText(infoItem, LangRes.P30F9601, "");
+        Lang.setWText(helpItem, LangRes.P30F9602, "");
+
+        Lang.setWText(mainItem, LangRes.P30F9603, "");
+        Lang.setWText(normItem, LangRes.P30F9604, "");
+        Lang.setWText(miniItem, LangRes.P30F9605, "");
+
+        Lang.setWText(updtItem, LangRes.P30F9606, "");
+        Lang.setWText(mailItem, LangRes.P30F9607, "");
+        Lang.setWText(siteItem, LangRes.P30F9608, "");
+
+        Lang.setWText(exitItem, LangRes.P30F9609, "");
+
+        setToolTip("哈哈");
+        return true;
+    }
+
+    public javax.swing.JPopupMenu getJPopupMenu()
+    {
+        return trayMenu;
+    }
+
+    public void setJPopupMenu(javax.swing.JPopupMenu menu)
+    {
+        if (trayMenu != null)
+        {
+            trayMenu.removePopupMenuListener(listener);
+        }
+        trayMenu = menu;
+        trayMenu.addPopupMenuListener(listener);
+    }
+
+    private void showJPopupMenu(java.awt.event.MouseEvent evt)
+    {
+        if (!evt.isPopupTrigger() || trayMenu == null)
+        {
+            return;
+        }
+
+        if (isOsTray)
+        {
+            java.awt.Dimension size = trayMenu.getPreferredSize();
+            trayForm.setLocation(evt.getX() - size.width, evt.getY() - size.height);
+            // trayMenu.setInvoker(trayMenu);
+            trayForm.setVisible(true);
+            trayMenu.show(trayForm.getContentPane(), 0, 0);
+            trayForm.toFront();
+        }
+        else
+        {
+            trayMenu.show(trayForm, 0, trayForm.getHeight());
+        }
+    }
+
+    private void infoItemActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        MdiDialog.getInstance(null).showProp(ConsEnv.PROP_INFO, true);
+    }
+
+    private void helpItemActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        if (!java.awt.Desktop.isDesktopSupported())
+        {
+            Lang.showMesg(null, LangRes.P30F7A0F, "");
+        }
+
+        java.io.File help = new java.io.File("help", "index.html");
+        if (!help.exists())
+        {
+            Lang.showMesg(null, LangRes.P30F7A10, "");
+            return;
+        }
         try
         {
-        mainItem.setLabel(new String(Lang.getLang(LangRes.P30F9601, "iso-8859-1").getBytes(),"gbk"));
-        }catch(Exception exp)
-        {
-            exp.printStackTrace();
+            java.awt.Desktop.getDesktop().browse(help.toURI());
         }
-//        normItem.setLabel(Lang.getLang("", ""));
-//        miniItem.setLabel(Lang.getLang("", ""));
-//
-//        exitItem.setLabel(Lang.getLang("", ""));
-        trayIcon.setToolTip("哈哈");
-        return true;
+        catch (java.io.IOException exp)
+        {
+            Logs.exception(exp);
+        }
+    }
+
+    private void mainItemActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        UserSign us = new UserSign(MagicPwd.getCurrForm());
+        us.setConfrmBackCall(new IBackCall()
+        {
+
+            @Override
+            public boolean callBack(Object sender, java.util.EventListener event, String... params)
+            {
+                MagicPwd.showMainPtn();
+                MagicPwd.getCurrForm().setVisible(true);
+                MagicPwd.getCurrForm().setState(javax.swing.JFrame.NORMAL);
+                return true;
+            }
+        });
+        us.initView(ConsEnv.SIGN_RS);
+        us.initLang();
+        us.initData();
+    }
+
+    private void normItemActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        UserSign us = new UserSign(MagicPwd.getCurrForm());
+        us.setConfrmBackCall(new IBackCall()
+        {
+
+            @Override
+            public boolean callBack(Object sender, java.util.EventListener event, String... params)
+            {
+                MagicPwd.showNormPtn();
+                MagicPwd.getCurrForm().setVisible(true);
+                MagicPwd.getCurrForm().setState(javax.swing.JFrame.NORMAL);
+                return true;
+            }
+        });
+        us.initView(ConsEnv.SIGN_RS);
+        us.initLang();
+        us.initData();
+    }
+
+    private void miniItemActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        UserSign us = new UserSign(MagicPwd.getCurrForm());
+        us.setConfrmBackCall(new IBackCall()
+        {
+
+            @Override
+            public boolean callBack(Object sender, java.util.EventListener event, String... params)
+            {
+                MagicPwd.showMiniPtn();
+                MagicPwd.getCurrForm().setVisible(true);
+                MagicPwd.getCurrForm().setState(javax.swing.JFrame.NORMAL);
+                return true;
+            }
+        });
+        us.initView(ConsEnv.SIGN_RS);
+        us.initLang();
+        us.initData();
+    }
+
+    private void updtItemActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        try
+        {
+            boolean b = Util.checkUpdate(ConsEnv.SOFTHASH, ConsEnv.VERSIONS);
+            if (b)
+            {
+                if (Lang.showFirm(null, LangRes.P30F7A12, "检测到新版本，现在要下载吗？") == javax.swing.JOptionPane.YES_OPTION)
+                {
+                    Desk.browse(ConsEnv.HOMEPAGE);
+                }
+            }
+            else
+            {
+                Lang.showMesg(null, LangRes.P30F7A13, "您使用的已是最新版本。");
+            }
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            Lang.showMesg(null, LangRes.P30F7A14, "");
+        }
+    }
+
+    private void mailItemActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        if (!java.awt.Desktop.isDesktopSupported())
+        {
+            Lang.showMesg(null, LangRes.P30F7A11, "");
+        }
+
+        try
+        {
+            java.awt.Desktop.getDesktop().mail(new java.net.URI("mailto:" + ConsEnv.SOFTMAIL));
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+    }
+
+    private void siteItemActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        if (!java.awt.Desktop.isDesktopSupported())
+        {
+            Lang.showMesg(null, LangRes.P30F7A0F, "");
+        }
+
+        try
+        {
+            java.awt.Desktop.getDesktop().browse(new java.net.URI(ConsEnv.HOMEPAGE));
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
     }
 
     public static void main(String[] args)
     {
         try
         {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
         }
         catch (Exception exp)
         {
@@ -166,4 +471,14 @@ public class TrayPtn
         tp.initView();
         tp.initLang();
     }
+    private javax.swing.JPopupMenu trayMenu;
+    private javax.swing.JMenuItem infoItem;
+    private javax.swing.JMenuItem siteItem;
+    private javax.swing.JMenuItem helpItem;
+    private javax.swing.JMenuItem mailItem;
+    private javax.swing.JMenuItem updtItem;
+    private javax.swing.JMenuItem mainItem;
+    private javax.swing.JMenuItem normItem;
+    private javax.swing.JMenuItem miniItem;
+    private javax.swing.JMenuItem exitItem;
 }
