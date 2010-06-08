@@ -803,8 +803,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         }
         this.setVisible(false);
 
-        MagicPwd.showNormPtn();
-        MagicPwd.getCurrForm().setVisible(true);
+        TrayPtn.getInstance().displayMessage(Lang.getLang(LangRes.P30F9A01, "友情提示"), Lang.getLang(LangRes.P30F9A01, ""), java.awt.TrayIcon.MessageType.INFO);
 
         // Save Temperary Data
         if (UserMdl.getGridMdl().isModified())

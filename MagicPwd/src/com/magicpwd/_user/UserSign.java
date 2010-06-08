@@ -8,6 +8,7 @@ import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.u.DBU3000;
+import com.magicpwd.v.TrayPtn;
 
 public class UserSign extends javax.swing.JPanel
 {
@@ -795,6 +796,8 @@ public class UserSign extends javax.swing.JPanel
             confrm.callBack(null, null, "");
         }
         dispoze();
+
+        TrayPtn.getInstance();
     }
 
     private void signRs()
@@ -911,11 +914,13 @@ public class UserSign extends javax.swing.JPanel
             return;
         }
 
-        dispoze();
         if (confrm != null)
         {
             confrm.callBack(null, null, "");
         }
+        dispoze();
+
+        TrayPtn.getInstance();
     }
 
     private void signPk()
