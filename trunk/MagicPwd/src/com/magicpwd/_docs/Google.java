@@ -953,10 +953,7 @@ public class Google
             throw new Exception("null path");
         }
 
-        return buildUrl(path, new String[]
-                {
-                    "convert=false"
-                });
+        return buildUrl(path, null);
     }
 
     /**

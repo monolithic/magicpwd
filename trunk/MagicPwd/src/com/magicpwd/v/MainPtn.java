@@ -36,6 +36,7 @@ import com.magicpwd._face.IGridView;
 import com.magicpwd._util.Lang;
 import com.magicpwd._user.UserSign;
 import com.magicpwd._util.Desk;
+import com.magicpwd._util.File;
 import com.magicpwd._util.Jcsv;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Logs;
@@ -55,7 +56,6 @@ import com.magicpwd.x.DatDialog;
 import com.magicpwd.x.LckDialog;
 import com.magicpwd.x.MdiDialog;
 import com.magicpwd.x.MpsDialog;
-import java.util.regex.Pattern;
 
 public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, InfoEvt, FindEvt, IGridView
 {
@@ -219,7 +219,17 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                         Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F7A3B, "压缩用户数据文件出错，请重启软件后重试！");
                         return;
                     }
-                    google.upload(bakFile.getAbsolutePath(), ConsEnv.FILE_SYNC, "application/zip");
+                    java.io.File txtFile = new java.io.File(bakFile.getParentFile(), "magicpwd.amb.txt");
+                    txtFile.createNewFile();
+                    txtFile.deleteOnExit();
+                    if (!File.byte2Text(bakFile, txtFile))
+                    {
+                        dialog.setVisible(false);
+                        dialog.dispose();
+                        Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F7A40, "创建临时备份文件文件失败，请重启程序后重新尝试！");
+                        return;
+                    }
+                    google.upload(txtFile.getAbsolutePath(), ConsEnv.FILE_SYNC, "text/plain");
                 }
                 catch (Exception ex)
                 {
@@ -922,7 +932,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     public void keysModeActionPerformed(java.awt.event.ActionEvent evt)
     {
         String command = evt.getActionCommand();
-        int val = Pattern.matches("^[+-]?\\d+$", command) ? Integer.parseInt(command) : 0;
+        int val = java.util.regex.Pattern.matches("^[+-]?\\d+$", command) ? Integer.parseInt(command) : 0;
 
         Object obj = ls_GuidList.getSelectedValue();
         if (obj instanceof Keys)
@@ -936,7 +946,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     public void keysNoteActionPerformed(java.awt.event.ActionEvent evt)
     {
         String command = evt.getActionCommand();
-        int val = Pattern.matches("^[+-]?\\d+$", command) ? Integer.parseInt(command) : 0;
+        int val = java.util.regex.Pattern.matches("^[+-]?\\d+$", command) ? Integer.parseInt(command) : 0;
 
         Object obj = ls_GuidList.getSelectedValue();
         if (obj instanceof Keys)
