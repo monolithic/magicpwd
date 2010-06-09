@@ -20,7 +20,7 @@ import java.util.zip.ZipOutputStream;
 public class Jzip
 {
 
-    public static void zip(String zipFileName, String... srcFileList) throws IOException
+    public static void doZip(String zipFileName, String... srcFileList) throws IOException
     {
         File zipFile = new File(zipFileName);
 
@@ -47,7 +47,7 @@ public class Jzip
         ZipOutputStream zos = new ZipOutputStream(bos);
         for (String name : srcFileList)
         {
-            zip(zos, new File(name), "");
+            doZip(zos, new File(name), "");
         }
         zos.flush();
         bos.flush();
@@ -55,7 +55,7 @@ public class Jzip
         bos.close();
     }
 
-    public static void zip(File zipFilePath, File... srcFileList) throws IOException
+    public static void doZip(File zipFilePath, File... srcFileList) throws IOException
     {
         // 文件是否存在
         if (!zipFilePath.exists())
@@ -80,7 +80,7 @@ public class Jzip
         ZipOutputStream zos = new ZipOutputStream(bos);
         for (File file : srcFileList)
         {
-            zip(zos, file, "");
+            doZip(zos, file, "");
         }
         zos.flush();
         bos.flush();
@@ -88,7 +88,7 @@ public class Jzip
         bos.close();
     }
 
-    private static void zip(ZipOutputStream zos, File file, String base) throws IOException
+    private static void doZip(ZipOutputStream zos, File file, String base) throws IOException
     {
         byte[] buff = new byte[2048];
 
@@ -106,7 +106,7 @@ public class Jzip
             File[] list = file.listFiles();
             for (File temp : list)
             {
-                zip(zos, temp, base);
+                doZip(zos, temp, base);
             }
         }
         else

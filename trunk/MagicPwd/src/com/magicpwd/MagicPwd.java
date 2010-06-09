@@ -211,7 +211,7 @@ public class MagicPwd
             DBAccess.exit();
 
             java.io.File backFile = Util.nextBackupFile(UserMdl.getUserCfg().getBackNum());
-            Jzip.zip(backFile, new java.io.File(ConsEnv.DIR_DAT));
+            Jzip.doZip(backFile, new java.io.File(ConsEnv.DIR_DAT));
             return backFile;
         }
         catch (Exception exp)
