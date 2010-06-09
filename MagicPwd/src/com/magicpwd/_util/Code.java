@@ -39,7 +39,7 @@ public class Code
             map1[i++] = c;
         }
         map1[i++] = '+';
-        map1[i++] = '/';
+        map1[i++] = '-';
 
         for (int j = 0; j < map2.length; j++)
         {

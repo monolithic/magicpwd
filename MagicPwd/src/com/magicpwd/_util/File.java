@@ -183,7 +183,7 @@ public class File
             int len = bi.read(buf);
             while (len >= 0)
             {
-                bw.write(Code.encodeLines(buf, 0, len, 128, "\n"));
+                bw.write(Code.encodeLines(buf, 0, len, 128, System.getProperty("line.separator")));
                 len = bi.read(buf);
             }
         }
