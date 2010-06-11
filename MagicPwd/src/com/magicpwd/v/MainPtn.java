@@ -209,7 +209,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                     String[] data = docs.split("\n");
 
                     Google google = new Google("MagicPwd");
-                    google.login(data[0], data[1]);
+                    google.signin(data[0], data[1]);
 
                     java.io.File bakFile = MagicPwd.endSave();
                     if (bakFile == null || !bakFile.exists() || !bakFile.canRead())
@@ -229,7 +229,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                         Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F7A40, "创建临时备份文件文件失败，请重启程序后重新尝试！");
                         return;
                     }
-                    google.upload(txtFile.getAbsolutePath(), ConsEnv.FILE_SYNC, "text/plain");
+                    //google.upload(txtFile.getAbsolutePath(), ConsEnv.FILE_SYNC, "text/plain");
                 }
                 catch (Exception ex)
                 {
@@ -276,7 +276,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                     String[] data = docs.split("\n");
 
                     Google google = new Google("MagicPwd");
-                    google.login(data[0], data[1]);
+                    google.signin(data[0], data[1]);
 
                     DocumentListFeed feed = google.getDocsListFeed(ConsEnv.FILE_SYNC);
                     if (feed == null)
