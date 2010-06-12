@@ -5,6 +5,7 @@
 package com.magicpwd.v;
 
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._face.IFormView;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.c.FindEvt;
@@ -15,7 +16,7 @@ import com.magicpwd.c.MenuEvt;
  *
  * @author Amon
  */
-public class MiniPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
+public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, FindEvt
 {
 
     public void initView()
@@ -32,6 +33,18 @@ public class MiniPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
 
     public void initData()
     {
+    }
+
+    @Override
+    public void setVisible(boolean visible)
+    {
+        super.setVisible(visible);
+    }
+
+    @Override
+    public javax.swing.JFrame getForm()
+    {
+        return this;
     }
 
     @Override

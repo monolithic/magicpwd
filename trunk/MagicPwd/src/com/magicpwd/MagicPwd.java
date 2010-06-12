@@ -3,7 +3,6 @@ package com.magicpwd;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._face.IBackCall;
-import com.magicpwd._mail.MailDlg;
 import com.magicpwd._user.UserSign;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
@@ -11,9 +10,6 @@ import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.DBAccess;
 import com.magicpwd.m.UserMdl;
-import com.magicpwd.v.MainPtn;
-import com.magicpwd.v.MiniPtn;
-import com.magicpwd.v.NormPtn;
 import java.io.File;
 
 /**
@@ -22,82 +18,12 @@ import java.io.File;
  */
 public class MagicPwd
 {
-
-    private static javax.swing.JFrame mf_CurrForm;
-    private static javax.swing.JDialog md_UcfgForm;
-    private static int viewPtn;
-
     private MagicPwd()
     {
     }
 
     public void init()
     {
-    }
-
-    public static javax.swing.JFrame getCurrForm()
-    {
-        return mf_CurrForm;
-    }
-
-    public static MailDlg getMailDlg()
-    {
-        return md_MailDlg;
-    }
-
-    public static void setMailDlg(MailDlg mailDlg)
-    {
-        md_MailDlg = mailDlg;
-    }
-
-    public static void showCfgDlg()
-    {
-        if (md_UcfgForm == null || !md_UcfgForm.isVisible())
-        {
-            md_UcfgForm = new javax.swing.JDialog(mf_CurrForm);
-        }
-    }
-
-    public static void showMainPtn()
-    {
-        if (mp_MainPtn == null)
-        {
-            mp_MainPtn = new MainPtn();
-            mp_MainPtn.initView();
-            mp_MainPtn.initLang();
-            mp_MainPtn.initData();
-        }
-
-        mf_CurrForm = mp_MainPtn;
-        viewPtn = VIEW_MAIN;
-    }
-
-    public static void showNormPtn()
-    {
-        if (mp_NormPtn == null)
-        {
-            mp_NormPtn = new NormPtn();
-            mp_NormPtn.initView();
-            mp_NormPtn.initLang();
-            mp_NormPtn.initData();
-        }
-
-        mf_CurrForm = mp_NormPtn;
-        viewPtn = VIEW_NORM;
-    }
-
-    public static void showMiniPtn()
-    {
-        if (mp_MiniPtn == null)
-        {
-            mp_MiniPtn = new MiniPtn();
-            mp_MiniPtn.initView();
-            mp_MiniPtn.initLang();
-            mp_MiniPtn.initData();
-        }
-
-        mf_CurrForm = mp_MiniPtn;
-        viewPtn = VIEW_MINI;
     }
 
     /**
@@ -231,11 +157,4 @@ public class MagicPwd
         }
         return true;
     }
-    private static MiniPtn mp_MiniPtn;
-    private static NormPtn mp_NormPtn;
-    private static MainPtn mp_MainPtn;
-    private static MailDlg md_MailDlg;
-    private static final int VIEW_MAIN = 0;
-    private static final int VIEW_NORM = 1;
-    private static final int VIEW_MINI = 2;
 }

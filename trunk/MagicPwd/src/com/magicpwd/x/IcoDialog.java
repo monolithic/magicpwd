@@ -4,7 +4,6 @@
  */
 package com.magicpwd.x;
 
-import com.magicpwd.MagicPwd;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
@@ -13,6 +12,7 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.r.AmonFF;
+import com.magicpwd.v.TrayPtn;
 import java.awt.Component;
 import javax.swing.JTable;
 
@@ -30,7 +30,7 @@ public class IcoDialog extends javax.swing.JDialog
 
     public IcoDialog(IBackCall backCall)
     {
-        super(MagicPwd.getCurrForm(), true);
+        super(TrayPtn.getCurrForm(), true);
         this.backCall = backCall;
         this.iconPath = Util.icoPath;
     }
@@ -99,7 +99,7 @@ public class IcoDialog extends javax.swing.JDialog
         this.setIconImage(Util.getLogo());
         this.setResizable(false);
         this.pack();
-        Util.centerForm(this, MagicPwd.getCurrForm());
+        Util.centerForm(this, TrayPtn.getCurrForm());
     }
 
     public void initLang()

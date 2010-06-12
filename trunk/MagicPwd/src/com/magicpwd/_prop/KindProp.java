@@ -3,8 +3,6 @@
  */
 package com.magicpwd._prop;
 
-import com.magicpwd.MagicPwd;
-
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -21,6 +19,7 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.UserMdl;
+import com.magicpwd.v.TrayPtn;
 
 /**
  * @author Amon
@@ -506,12 +505,12 @@ public class KindProp extends JPanel implements IPropBean
     {
         if (tr_KindList.getSelectionPath() == null)
         {
-            Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F8A04, "请选择您要删除的类别数据！");
+            Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F8A04, "请选择您要删除的类别数据！");
             tr_KindList.requestFocus();
             return;
         }
 
-        if (Lang.showFirm(MagicPwd.getCurrForm(), LangRes.P30F7A1A, "执行此操作后，此类别下的其它类别将会移动到根类别下，\n确认要删除此类别么？") == JOptionPane.YES_OPTION)
+        if (Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F7A1A, "执行此操作后，此类别下的其它类别将会移动到根类别下，\n确认要删除此类别么？") == JOptionPane.YES_OPTION)
         {
             UserMdl.getTreeMdl().wRemove(tr_KindList.getSelectionPath());
         }

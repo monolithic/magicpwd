@@ -1,6 +1,5 @@
 package com.magicpwd.x;
 
-import com.magicpwd.MagicPwd;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
@@ -18,6 +17,7 @@ import com.magicpwd._util.Util;
 import com.magicpwd.c.MenuEvt;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.ListCR;
+import com.magicpwd.v.TrayPtn;
 import java.awt.Color;
 
 /**
@@ -35,7 +35,7 @@ public class MdiDialog extends javax.swing.JDialog
 
     private MdiDialog()
     {
-        super(MagicPwd.getCurrForm());
+        super(TrayPtn.getCurrForm());
         lm_PropList = new javax.swing.DefaultListModel();
         cl_CardLayout = new java.awt.CardLayout();
         setDefaultCloseOperation(MdiDialog.DISPOSE_ON_CLOSE);
@@ -281,7 +281,7 @@ public class MdiDialog extends javax.swing.JDialog
 
         if (!md_Dialog.isVisible())
         {
-            Util.centerForm(this, MagicPwd.getCurrForm());
+            Util.centerForm(this, TrayPtn.getCurrForm());
             md_Dialog.setVisible(true);
         }
     }

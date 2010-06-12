@@ -29,7 +29,9 @@ import com.magicpwd._docs.Google;
 import com.magicpwd._face.IBackCall;
 import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
+import com.magicpwd._face.IFormView;
 import com.magicpwd._face.IGridView;
+import com.magicpwd._mail.MailDlg;
 import com.magicpwd._util.Lang;
 import com.magicpwd._user.UserSign;
 import com.magicpwd._util.Desk;
@@ -53,11 +55,13 @@ import com.magicpwd.x.LckDialog;
 import com.magicpwd.x.MdiDialog;
 import com.magicpwd.x.MpsDialog;
 
-public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, InfoEvt, FindEvt, IGridView
+public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, ToolEvt, InfoEvt, FindEvt, IGridView
 {
 
     private java.awt.CardLayout cl_CardProp;
-    private MpsDialog mp_MpsDialog;
+    private MailDlg mailForm;
+    private MpsDialog md_MpsDialog;
+    private MdiDialog md_MdiDialog;
     private IEditBean[] editBean;
     private FindBar mainFind;
     private InfoBar mainInfo;
@@ -149,6 +153,25 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     }
 
     @Override
+    public void setVisible(boolean visible)
+    {
+        if (!visible)
+        {
+            if (mailForm != null && mailForm.isVisible())
+            {
+                mailForm.setVisible(false);
+            }
+        }
+        super.setVisible(visible);
+    }
+
+    @Override
+    public javax.swing.JFrame getForm()
+    {
+        return this;
+    }
+
+    @Override
     public void dataExptActionPerformed(java.awt.event.ActionEvent evt)
     {
         javax.swing.tree.TreePath path = tr_GuidTree.getSelectionPath();
@@ -159,7 +182,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             return;
         }
 
-        UserSign us = new UserSign(MagicPwd.getCurrForm());
+        UserSign us = new UserSign(TrayPtn.getCurrForm());
         us.setConfrmBackCall(new IBackCall()
         {
 
@@ -177,7 +200,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     @Override
     public void dataSyncActionPerformed(java.awt.event.ActionEvent evt)
     {
-        final LckDialog dialog = new LckDialog(MagicPwd.getCurrForm());
+        final LckDialog dialog = new LckDialog(TrayPtn.getCurrForm());
         dialog.initView();
         dialog.initLang();
         dialog.initData();
@@ -195,7 +218,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                     {
                         dialog.setVisible(false);
                         dialog.dispose();
-                        Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F7A3A, "您还没有配置您的Google Docs账户信息！");
+                        Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A3A, "您还没有配置您的Google Docs账户信息！");
                         return;
                     }
 
@@ -209,7 +232,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                     {
                         dialog.setVisible(false);
                         dialog.dispose();
-                        Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F7A3B, "压缩用户数据文件出错，请重启软件后重试！");
+                        Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A3B, "压缩用户数据文件出错，请重启软件后重试！");
                         return;
                     }
 
@@ -217,13 +240,13 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                     {
                         dialog.setVisible(false);
                         dialog.dispose();
-                        Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F7A3C, "系统无法备份您的数据到云端！");
+                        Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A3C, "系统无法备份您的数据到云端！");
                         return;
                     }
 
                     dialog.setVisible(false);
                     dialog.dispose();
-                    Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F7A3D, "数据成功备份到云端！");
+                    Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A3D, "数据成功备份到云端！");
                     return;
                 }
                 catch (Exception ex)
@@ -231,19 +254,19 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                     Logs.exception(ex);
                     dialog.setVisible(false);
                     dialog.dispose();
-                    Lang.showMesg(MagicPwd.getCurrForm(), null, ex.getLocalizedMessage());
+                    Lang.showMesg(TrayPtn.getCurrForm(), null, ex.getLocalizedMessage());
                 }
             }
         }.start();
 
-        Util.centerForm(dialog, MagicPwd.getCurrForm());
+        Util.centerForm(dialog, TrayPtn.getCurrForm());
         dialog.setVisible(true);
     }
 
     @Override
     public void dataBackActionPerformed(java.awt.event.ActionEvent evt)
     {
-        final LckDialog dialog = new LckDialog(MagicPwd.getCurrForm());
+        final LckDialog dialog = new LckDialog(TrayPtn.getCurrForm());
         dialog.initView();
         dialog.initLang();
         dialog.initData();
@@ -261,7 +284,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                     {
                         dialog.setVisible(false);
                         dialog.dispose();
-                        Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F7A3A, "您还没有配置您的Google Docs账户信息！");
+                        Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A3A, "您还没有配置您的Google Docs账户信息！");
                         return;
                     }
 
@@ -278,7 +301,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                     {
                         dialog.setVisible(false);
                         dialog.dispose();
-                        Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F7A3E, "无法从Google Docs读取备份数据！");
+                        Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A3E, "无法从Google Docs读取备份数据！");
                     }
 
                     java.io.File datFile = new java.io.File(ConsEnv.DIR_DAT);
@@ -287,7 +310,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
 
                     dialog.setVisible(false);
                     dialog.dispose();
-                    Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F7A3F, "数据恢复成功，您需要重新启动本程序！");
+                    Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A3F, "数据恢复成功，您需要重新启动本程序！");
                     System.exit(0);
                 }
                 catch (Exception ex)
@@ -295,19 +318,19 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                     Logs.exception(ex);
                     dialog.setVisible(false);
                     dialog.dispose();
-                    Lang.showMesg(MagicPwd.getCurrForm(), null, ex.getLocalizedMessage());
+                    Lang.showMesg(TrayPtn.getCurrForm(), null, ex.getLocalizedMessage());
                 }
             }
         }.start();
 
-        Util.centerForm(dialog, MagicPwd.getCurrForm());
+        Util.centerForm(dialog, TrayPtn.getCurrForm());
         dialog.setVisible(true);
     }
 
     @Override
     public void dataDocsActionPerformed(java.awt.event.ActionEvent evt)
     {
-        UserSign us = new UserSign(MagicPwd.getCurrForm());
+        UserSign us = new UserSign(TrayPtn.getCurrForm());
         us.setConfrmBackCall(new IBackCall()
         {
 
@@ -339,7 +362,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             return;
         }
 
-        UserSign us = new UserSign(MagicPwd.getCurrForm());
+        UserSign us = new UserSign(TrayPtn.getCurrForm());
         us.setConfrmBackCall(new IBackCall()
         {
 
@@ -483,7 +506,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             @Override
             public void run()
             {
-                Util.changeSkin(lafClass);
+                TrayPtn.changeSkin(lafClass);
             }
         });
         Lang.showMesg(this, LangRes.P30FAA1B, "系统不能保证风格切换正常，请重新启动程序以使用新的界面风格！");
@@ -773,9 +796,9 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         {
             md.setVisible(false);
         }
-        if (mp_MpsDialog != null && mp_MpsDialog.isVisible())
+        if (md_MpsDialog != null && md_MpsDialog.isVisible())
         {
-            mp_MpsDialog.setVisible(false);
+            md_MpsDialog.setVisible(false);
         }
         this.setVisible(false);
 
@@ -1080,7 +1103,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     @Override
     public void userUpdateActionPerformed(java.awt.event.ActionEvent evt)
     {
-        UserSign us = new UserSign(MagicPwd.getCurrForm());
+        UserSign us = new UserSign(TrayPtn.getCurrForm());
         us.initView(ConsEnv.SIGN_PK);
         us.initLang();
         us.initData();
@@ -1096,7 +1119,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             return;
         }
 
-        UserSign us = new UserSign(MagicPwd.getCurrForm());
+        UserSign us = new UserSign(TrayPtn.getCurrForm());
         us.setConfrmBackCall(new IBackCall()
         {
 
@@ -1156,9 +1179,9 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         else
         {
             pl_KeysEdit.setVisible(b);
-            if (mp_MpsDialog != null)
+            if (md_MpsDialog != null)
             {
-                mp_MpsDialog.setVisible(b);
+                md_MpsDialog.setVisible(b);
             }
         }
         UserMdl.getUserCfg().setEditViw(b);
@@ -1203,7 +1226,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
     public void viewTop1ActionPerformed(java.awt.event.ActionEvent evt)
     {
         boolean b = !UserMdl.getUserCfg().isViewTop();
-        MagicPwd.getCurrForm().setAlwaysOnTop(b);
+        TrayPtn.getCurrForm().setAlwaysOnTop(b);
 
         UserMdl.getUserCfg().setViewTop(b);
     }
@@ -1790,7 +1813,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
             }
             if (UserMdl.getUserCfg().isEditWnd())
             {
-                mp_MpsDialog.setTitle(getPropName(tplt.getType()));
+                md_MpsDialog.setTitle(getPropName(tplt.getType()));
             }
             else
             {
@@ -1863,34 +1886,34 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
 
         if (editWnd)
         {
-            if (mp_MpsDialog != null)
+            if (md_MpsDialog != null)
             {
-                mp_MpsDialog.setPropView(pl_CardProp);
+                md_MpsDialog.setPropView(pl_CardProp);
             }
             else
             {
-                mp_MpsDialog = new MpsDialog(MagicPwd.getCurrForm(), this);
-                mp_MpsDialog.initView();
-                mp_MpsDialog.initLang();
-                mp_MpsDialog.setPropView(pl_CardProp);
-                mp_MpsDialog.pack();
-                mp_MpsDialog.setResizable(false);
-                java.awt.Dimension a = mp_MpsDialog.getSize();
-                java.awt.Dimension b = MagicPwd.getCurrForm().getSize();
-                java.awt.Point p = MagicPwd.getCurrForm().getLocation();
-                mp_MpsDialog.setLocation(p.x + b.width, p.y + b.height - a.height);
+                md_MpsDialog = new MpsDialog(TrayPtn.getCurrForm(), this);
+                md_MpsDialog.initView();
+                md_MpsDialog.initLang();
+                md_MpsDialog.setPropView(pl_CardProp);
+                md_MpsDialog.pack();
+                md_MpsDialog.setResizable(false);
+                java.awt.Dimension a = md_MpsDialog.getSize();
+                java.awt.Dimension b = TrayPtn.getCurrForm().getSize();
+                java.awt.Point p = TrayPtn.getCurrForm().getLocation();
+                md_MpsDialog.setLocation(p.x + b.width, p.y + b.height - a.height);
             }
-            if (!mp_MpsDialog.isVisible())
+            if (!md_MpsDialog.isVisible())
             {
-                mp_MpsDialog.setVisible(true);
+                md_MpsDialog.setVisible(true);
             }
         }
         else
         {
             pl_KeysEdit.add(pl_CardProp);
-            if (mp_MpsDialog != null && mp_MpsDialog.isVisible())
+            if (md_MpsDialog != null && md_MpsDialog.isVisible())
             {
-                mp_MpsDialog.setVisible(false);
+                md_MpsDialog.setVisible(false);
             }
         }
     }
@@ -2071,7 +2094,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
         catch (Exception ex)
         {
             Logs.exception(ex);
-            Lang.showMesg(MagicPwd.getCurrForm(), null, ex.getLocalizedMessage());
+            Lang.showMesg(TrayPtn.getCurrForm(), null, ex.getLocalizedMessage());
         }
         return true;
     }

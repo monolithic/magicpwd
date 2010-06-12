@@ -21,6 +21,7 @@ import com.magicpwd._util.Util;
 import com.magicpwd.m.GridMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.MailPtn;
+import com.magicpwd.v.TrayPtn;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -200,7 +201,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
             mailDlg.initView();
             mailDlg.initLang();
             mailDlg.initData();
-            Util.centerForm(mailDlg, MagicPwd.getCurrForm());
+            Util.centerForm(mailDlg, TrayPtn.getCurrForm());
             MagicPwd.setMailDlg(mailDlg);
         }
 
@@ -230,7 +231,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
             Lang.showMesg(mailDlg, null, "没有可用的口令类型数据！");
             return;
         }
-        if (JOptionPane.OK_OPTION != JOptionPane.showConfirmDialog(MagicPwd.getCurrForm(), mailPtn, "登录确认", JOptionPane.OK_CANCEL_OPTION))
+        if (JOptionPane.OK_OPTION != JOptionPane.showConfirmDialog(TrayPtn.getCurrForm(), mailPtn, "登录确认", JOptionPane.OK_CANCEL_OPTION))
         {
             return;
         }

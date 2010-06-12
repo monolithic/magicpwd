@@ -3,8 +3,6 @@
  */
 package com.magicpwd._prop;
 
-import com.magicpwd.MagicPwd;
-
 import javax.swing.JOptionPane;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.tree.TreeSelectionModel;
@@ -20,6 +18,7 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.UserMdl;
+import com.magicpwd.v.TrayPtn;
 
 /**
  * @author Amon
@@ -494,12 +493,12 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         javax.swing.tree.TreePath path = tr_TpltList.getSelectionPath();
         if (path == null)
         {
-            Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F8A08, "请选择您要删除的数据！");
+            Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F8A08, "请选择您要删除的数据！");
             tr_TpltList.requestFocus();
             return;
         }
 
-        if (Lang.showFirm(MagicPwd.getCurrForm(), LangRes.P30F8A09, "确认要删除此数据吗，此操作将不可恢复？") == JOptionPane.YES_OPTION)
+        if (Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F8A09, "确认要删除此数据吗，此操作将不可恢复？") == JOptionPane.YES_OPTION)
         {
             javax.swing.tree.DefaultMutableTreeNode node = (javax.swing.tree.DefaultMutableTreeNode) path.getLastPathComponent();
             DBA3000.deleteTpltData((Tplt) node.getUserObject());

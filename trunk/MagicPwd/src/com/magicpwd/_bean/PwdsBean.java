@@ -3,7 +3,6 @@
  */
 package com.magicpwd._bean;
 
-import com.magicpwd.MagicPwd;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
@@ -16,6 +15,7 @@ import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.MenuPwd;
+import com.magicpwd.v.TrayPtn;
 
 /**
  * 属性：口令
@@ -194,7 +194,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (Lang.showFirm(MagicPwd.getCurrForm(), LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
+        if (Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
         {
             UserMdl.getGridMdl().wRemove(itemData);
             gridView.selectNext(false);
@@ -236,7 +236,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     {
         if (askOverRide && pf_PropData.getPassword().length > 1)
         {
-            if (Lang.showFirm(MagicPwd.getCurrForm(), "", "") != javax.swing.JOptionPane.YES_OPTION)
+            if (Lang.showFirm(TrayPtn.getCurrForm(), "", "") != javax.swing.JOptionPane.YES_OPTION)
             {
                 return;
             }
