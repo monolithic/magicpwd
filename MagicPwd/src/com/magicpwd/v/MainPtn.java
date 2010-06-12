@@ -283,7 +283,7 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
 
                     java.io.File datFile = new java.io.File(ConsEnv.DIR_DAT);
                     datFile.delete();
-                    Jzip.unZip(bakFile, datFile);
+                    Jzip.unZip(bakFile, datFile.getParentFile());
 
                     dialog.setVisible(false);
                     dialog.dispose();
