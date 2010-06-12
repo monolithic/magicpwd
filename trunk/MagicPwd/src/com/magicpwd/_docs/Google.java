@@ -4,8 +4,7 @@
  */
 package com.magicpwd._docs;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
+import com.google.gdata.client.spreadsheet.CellQuery;
 import java.net.URL;
 import java.util.Iterator;
 import java.util.Map;
@@ -14,14 +13,18 @@ import java.util.Set;
 import com.google.gdata.client.spreadsheet.FeedURLFactory;
 import com.google.gdata.client.spreadsheet.SpreadsheetService;
 import com.google.gdata.data.PlainTextConstruct;
+import com.google.gdata.data.spreadsheet.Cell;
 import com.google.gdata.data.spreadsheet.CellEntry;
 import com.google.gdata.data.spreadsheet.CellFeed;
 import com.google.gdata.data.spreadsheet.SpreadsheetEntry;
 import com.google.gdata.data.spreadsheet.SpreadsheetFeed;
 import com.google.gdata.data.spreadsheet.WorksheetEntry;
-import com.google.gdata.util.ServiceException;
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._util.Code;
+import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
+import java.io.File;
+import java.net.MalformedURLException;
 
 /**
  *
@@ -31,24 +34,12 @@ public class Google
 {
 
     private SpreadsheetService service;
-    private SpreadsheetEntry spreadsheetEntry;
-    private WorksheetEntry worksheetEntry;
 
     public Google()
     {
     }
 
-    public boolean backup(String user, String pass, String name)
-    {
-        return true;
-    }
-
-    public boolean resume(String user, String pass, String name)
-    {
-        return true;
-    }
-
-    public boolean chooseSpreadsheet(String user, String pass, String name) throws Exception
+    public boolean backup(String user, String pass, String name, File file) throws Exception
     {
         if (!Util.isValidate(user) || pass == null || !Util.isValidate(name))
         {
@@ -57,56 +48,181 @@ public class Google
 
         service = new SpreadsheetService("MagicPwd");
         service.setUserCredentials(user, pass);
+        SpreadsheetEntry spreadsheet = listSpreadsheetFeed(name);
+        java.net.URL cellFeedUrl = null;
+        if (spreadsheet == null)
+        {
+            com.google.gdata.data.docs.SpreadsheetEntry entry = new com.google.gdata.data.docs.SpreadsheetEntry();
+            entry.setTitle(new PlainTextConstruct(name));
+            com.google.gdata.client.docs.DocsService docs = new com.google.gdata.client.docs.DocsService("MagicPwd");
+            docs.setUserCredentials(user, pass);
+            docs.insert(buildUrl(URL_DEFAULT + URL_DOCLIST_FEED), entry);
+            spreadsheet = listSpreadsheetFeed(name);
+            if (spreadsheet == null)
+            {
+                return false;
+            }
+
+            java.util.List<WorksheetEntry> list = spreadsheet.getWorksheets();
+            WorksheetEntry worksheet;
+            if (list.size() > 0)
+            {
+                worksheet = list.get(0);
+                worksheet.setColCount(2);
+                worksheet.setRowCount(100000);
+                worksheet.setTitle(new PlainTextConstruct(name));
+                worksheet.update();
+            }
+            else
+            {
+                worksheet = new WorksheetEntry();
+                worksheet.setTitle(new PlainTextConstruct(name));
+                worksheet.setRowCount(65536);
+                worksheet.setColCount(2);
+                service.insert(entry.getWorksheetFeedUrl(), worksheet);
+            }
+            int s = worksheet.getRowCount();
+            cellFeedUrl = worksheet.getCellFeedUrl();
+        }
+
+        java.io.BufferedInputStream bi = null;
+
+        try
+        {
+            bi = new java.io.BufferedInputStream(new java.io.FileInputStream(file));
+
+            byte[] buf = new byte[19200];
+            int len = bi.read(buf);
+            int row = 2;
+
+            while (len >= 0)
+            {
+                service.insert(cellFeedUrl, new CellEntry(row++, 2, new String(Code.encode(buf, 0, len))));
+                len = bi.read(buf);
+            }
+
+            service.insert(cellFeedUrl, new CellEntry(1, 2, file.getName()));
+        }
+        finally
+        {
+            if (bi != null)
+            {
+                try
+                {
+                    bi.close();
+                }
+                catch (Exception exp)
+                {
+                    Logs.exception(exp);
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public boolean resume(String user, String pass, String name, File file) throws Exception
+    {
+        if (!Util.isValidate(user) || pass == null || !Util.isValidate(name))
+        {
+            return false;
+        }
+
+        service = new SpreadsheetService("MagicPwd");
+        service.setUserCredentials(user, pass);
+        SpreadsheetEntry spreadsheet = listSpreadsheetFeed(name);
+        if (spreadsheet == null)
+        {
+            return false;
+        }
+
+        WorksheetEntry worksheet = null;
+        for (WorksheetEntry entry : spreadsheet.getWorksheets())
+        {
+            if (name.equalsIgnoreCase(entry.getTitle().getPlainText()))
+            {
+                worksheet = entry;
+                break;
+            }
+        }
+        if (worksheet == null)
+        {
+            return false;
+        }
+
+        CellQuery query = new CellQuery(worksheet.getCellFeedUrl());
+        query.setMinimumRow(1);
+        query.setMaximumRow(1);
+        query.setMinimumCol(1);
+        query.setMaximumCol(2);
+        CellFeed feed = service.query(query, CellFeed.class);
+        int maxRow = 0;
+        String fileName = null;
+        for (CellEntry entry : feed.getEntries())
+        {
+            Cell cell = entry.getCell();
+            if (cell.getCol() == 1)
+            {
+                maxRow = Integer.parseInt(cell.getValue(), 16);
+            }
+            else if (cell.getCol() == 2)
+            {
+                fileName = cell.getValue();
+            }
+        }
+
+        java.io.BufferedOutputStream bo = null;
+        try
+        {
+            bo = new java.io.BufferedOutputStream(new java.io.FileOutputStream(file));
+
+            query.setMinimumRow(2);
+            query.setMaximumRow(maxRow);
+            query.setMinimumCol(2);
+            query.setMaximumCol(2);
+            feed = service.query(query, CellFeed.class);
+            for (CellEntry entry : feed.getEntries())
+            {
+                bo.write(Code.decode(entry.getCell().getValue().toCharArray()));
+            }
+        }
+        finally
+        {
+            if (bo != null)
+            {
+                try
+                {
+                    bo.flush();
+                }
+                catch (Exception exp)
+                {
+                    Logs.exception(exp);
+                }
+                try
+                {
+                    bo.close();
+                }
+                catch (Exception exp)
+                {
+                    Logs.exception(exp);
+                }
+            }
+        }
+        return true;
+    }
+
+    private SpreadsheetEntry listSpreadsheetFeed(String name) throws Exception
+    {
         SpreadsheetFeed feed = service.getFeed(FeedURLFactory.getDefault().getSpreadsheetsFeedUrl(), SpreadsheetFeed.class);
         for (SpreadsheetEntry entry : feed.getEntries())
         {
             if (name.equalsIgnoreCase(entry.getTitle().getPlainText()))
             {
-                spreadsheetEntry = entry;
-                worksheetEntry = spreadsheetEntry.getDefaultWorksheet();
-                return true;
+                return entry;
             }
         }
-
-        com.google.gdata.data.docs.SpreadsheetEntry entry = new com.google.gdata.data.docs.SpreadsheetEntry();
-        entry.setTitle(new PlainTextConstruct(name));
-        com.google.gdata.client.docs.DocsService docs = new com.google.gdata.client.docs.DocsService("MagicPwd");
-        docs.setUserCredentials(user, pass);
-        docs.insert(buildUrl(URL_DEFAULT + URL_DOCLIST_FEED), entry);
-        worksheetEntry = entry.getDefaultWorksheet();
-
-        return true;
-    }
-
-    private void createWorksheet(String title, int rowCount, int colCount) throws Exception
-    {
-        WorksheetEntry worksheet = new WorksheetEntry();
-        worksheet.setTitle(new PlainTextConstruct(title));
-        worksheet.setRowCount(rowCount);
-        worksheet.setColCount(colCount);
-        service.insert(spreadsheetEntry.getWorksheetFeedUrl(), worksheet);
-    }
-
-    public void updateWorksheet(String oldTitle, String newTitle, int rowCount, int colCount) throws Exception
-    {
-        worksheetEntry.setTitle(new PlainTextConstruct(newTitle));
-        worksheetEntry.setRowCount(rowCount);
-        worksheetEntry.setColCount(colCount);
-        worksheetEntry.update();
-    }
-
-    public void dd() throws Exception
-    {
-        CellFeed feed = service.getFeed(worksheetEntry.getCellFeedUrl(), CellFeed.class);
-        for (CellEntry entry : feed.getEntries())
-        {
-            entry.getCell().getValue();
-        }
-    }
-
-    public void setCell(int row, int col, String formulaOrValue) throws IOException, ServiceException
-    {
-        service.insert(worksheetEntry.getCellFeedUrl(), new CellEntry(row, col, formulaOrValue));
+        return null;
     }
 
     /**
@@ -118,7 +234,7 @@ public class Google
      * @throws MalformedURLException
      * @throws Exception
      */
-    protected URL buildUrl(String path) throws MalformedURLException, Exception
+    protected URL buildUrl(String path) throws Exception
     {
         if (path == null)
         {
@@ -139,7 +255,7 @@ public class Google
      * @throws MalformedURLException
      * @throws Exception
      */
-    protected URL buildUrl(String path, String[] parameters) throws MalformedURLException, Exception
+    protected URL buildUrl(String path, String[] parameters) throws Exception
     {
         if (path == null)
         {
@@ -162,7 +278,7 @@ public class Google
      * @throws MalformedURLException
      * @throws Exception
      */
-    protected URL buildUrl(String domain, String path, String[] parameters) throws MalformedURLException, Exception
+    protected URL buildUrl(String domain, String path, String[] parameters) throws Exception
     {
         if (path == null)
         {
@@ -202,7 +318,7 @@ public class Google
      * @throws MalformedURLException
      * @throws Exception
      */
-    protected URL buildUrl(String domain, String path, Map<String, String> parameters) throws MalformedURLException, Exception
+    protected URL buildUrl(String domain, String path, Map<String, String> parameters) throws Exception
     {
         if (path == null)
         {
@@ -231,35 +347,27 @@ public class Google
 
         return new URL(url.toString());
     }
-    public static final String DEFAULT_AUTH_PROTOCOL = "https";
-    public static final String DEFAULT_AUTH_HOST = "docs.google.com";
-    public static final String DEFAULT_PROTOCOL = "http";
-    public static final String DEFAULT_HOST = "docs.google.com";
-    public static final String SPREADSHEETS_SERVICE_NAME = "wise";
-    public static final String SPREADSHEETS_HOST = "spreadsheets.google.com";
-    protected final String URL_FEED = "/feeds";
-    protected final String URL_DOWNLOAD = "/download";
-    protected final String URL_DOCLIST_FEED = "/private/full";
-    protected final String URL_DEFAULT = "/default";
-    protected final String URL_FOLDERS = "/contents";
-    protected final String URL_ACL = "/acl";
-    protected final String URL_REVISIONS = "/revisions";
-    protected final String URL_CATEGORY_DOCUMENT = "/-/document";
-    protected final String URL_CATEGORY_SPREADSHEET = "/-/spreadsheet";
-    protected final String URL_CATEGORY_PDF = "/-/pdf";
-    protected final String URL_CATEGORY_PRESENTATION = "/-/presentation";
-    protected final String URL_CATEGORY_STARRED = "/-/starred";
-    protected final String URL_CATEGORY_TRASHED = "/-/trashed";
-    protected final String URL_CATEGORY_FOLDER = "/-/folder";
-    protected final String URL_CATEGORY_EXPORT = "/Export";
-    protected final String PARAMETER_SHOW_FOLDERS = "showfolders=true";
+    private static final String DEFAULT_AUTH_PROTOCOL = "https";
+    private static final String DEFAULT_AUTH_HOST = "docs.google.com";
+    private static final String DEFAULT_PROTOCOL = "http";
+    private static final String DEFAULT_HOST = "docs.google.com";
+    private static final String SPREADSHEETS_SERVICE_NAME = "wise";
+    private static final String SPREADSHEETS_HOST = "spreadsheets.google.com";
+    private final String URL_FEED = "/feeds";
+    private final String URL_DOWNLOAD = "/download";
+    private final String URL_DOCLIST_FEED = "/private/full";
+    private final String URL_DEFAULT = "/default";
+    private final String URL_FOLDERS = "/contents";
+    private final String URL_ACL = "/acl";
+    private final String URL_REVISIONS = "/revisions";
+    private final String URL_CATEGORY_DOCUMENT = "/-/document";
 
     public static void main(String[] args)
     {
         try
         {
             Google gss = new Google();
-            gss.chooseSpreadsheet("Amon.CT@gmail.com", "qTrH2e3oXk", ConsEnv.FILE_SYNC);
+            gss.backup("Amon.CT@gmail.com", "qTrH2e3oXk", ConsEnv.FILE_SYNC, null);
             // if (!gss.listSpreadsheet("magicpwd")) {
             // gss.create("magicpwd", "spreadsheet");
             // gss.listSpreadsheet("magicpwd");

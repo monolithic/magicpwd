@@ -3,9 +3,6 @@
  */
 package com.magicpwd.v;
 
-import com.google.gdata.data.MediaContent;
-import com.google.gdata.data.docs.DocumentListEntry;
-import com.google.gdata.data.docs.DocumentListFeed;
 import com.magicpwd.MagicPwd;
 import com.magicpwd._bean.AreaBean;
 import com.magicpwd._bean.DateBean;
@@ -36,7 +33,6 @@ import com.magicpwd._face.IGridView;
 import com.magicpwd._util.Lang;
 import com.magicpwd._user.UserSign;
 import com.magicpwd._util.Desk;
-import com.magicpwd._util.File;
 import com.magicpwd._util.Jcsv;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Logs;
@@ -208,9 +204,6 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                     docs = UserMdl.getGridMdl().deCrypt(pwds).toString();
                     String[] data = docs.split("\n");
 
-                    Google google = new Google();
-                    google.backup(data[0], data[1], ConsEnv.FILE_SYNC);
-
                     java.io.File bakFile = MagicPwd.endSave();
                     if (bakFile == null || !bakFile.exists() || !bakFile.canRead())
                     {
@@ -219,17 +212,19 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                         Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F7A3B, "压缩用户数据文件出错，请重启软件后重试！");
                         return;
                     }
-                    java.io.File txtFile = new java.io.File(bakFile.getParentFile(), "magicpwd.amb.txt");
-                    txtFile.createNewFile();
-                    txtFile.deleteOnExit();
-                    if (!File.byte2Text(bakFile, txtFile))
+
+                    if (!new Google().backup(data[0], data[1], ConsEnv.FILE_SYNC, MagicPwd.endSave()))
                     {
                         dialog.setVisible(false);
                         dialog.dispose();
-                        Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F7A40, "创建临时备份文件文件失败，请重启程序后重新尝试！");
+                        Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F7A3C, "系统无法备份您的数据到云端！");
                         return;
                     }
-                    //google.upload(txtFile.getAbsolutePath(), ConsEnv.FILE_SYNC, "text/plain");
+
+                    dialog.setVisible(false);
+                    dialog.dispose();
+                    Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F7A3D, "数据成功备份到云端！");
+                    return;
                 }
                 catch (Exception ex)
                 {
@@ -275,51 +270,21 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                     docs = UserMdl.getGridMdl().deCrypt(pwds).toString();
                     String[] data = docs.split("\n");
 
-                    Google google = new Google();
-                    google.resume(data[0], data[1], "");
-
-
-                    DocumentListFeed feed = null;//google.listSpreadsheet("");
-                    if (feed == null)
-                    {
-                        dialog.setVisible(false);
-                        dialog.dispose();
-                        Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F7A3C, "无法在Google Docs找到备份文件！");
-                        return;
-                    }
-
-                    java.net.URL uri = null;
-                    for (DocumentListEntry entry : feed.getEntries())
-                    {
-                        if (ConsEnv.FILE_SYNC.equalsIgnoreCase(entry.getTitle().getPlainText()))
-                        {
-                            uri = new java.net.URL(((MediaContent) entry.getContent()).getUri());
-                            break;
-                        }
-                    }
-                    if (uri == null)
-                    {
-                        dialog.setVisible(false);
-                        dialog.dispose();
-                        Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F7A3D, "请确认您的Google Docs是否存魔方密码的备份文件！");
-                        return;
-                    }
-
-                    java.io.File bakFile = new java.io.File(UserMdl.getUserCfg().getBackDir(), ConsEnv.FILE_SYNC);
-//                    google.downloadFile(uri, bakFile.getAbsolutePath());
-//                    if (!bakFile.exists() || !bakFile.canRead())
-//                    {
-//                        dialog.setVisible(false);
-//                        dialog.dispose();
-//                        Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F7A3E, "从Google Docs下载备份文件失败！");
-//                        return;
-//                    }
-
                     MagicPwd.endSave();
+
+                    java.io.File bakFile = java.io.File.createTempFile("magicpwd", ".amb");
+                    bakFile.deleteOnExit();
+                    if (!new Google().resume(data[0], data[1], ConsEnv.FILE_SYNC, bakFile))
+                    {
+                        dialog.setVisible(false);
+                        dialog.dispose();
+                        Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F7A3E, "无法从Google Docs读取备份数据！");
+                    }
 
                     java.io.File datFile = new java.io.File(ConsEnv.DIR_DAT);
                     datFile.delete();
                     Jzip.unZip(bakFile, datFile);
+
                     dialog.setVisible(false);
                     dialog.dispose();
                     Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F7A3F, "数据恢复成功，您需要重新启动本程序！");
