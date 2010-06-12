@@ -23,8 +23,6 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Code;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
-import java.io.File;
-import java.net.MalformedURLException;
 
 /**
  *
@@ -39,7 +37,7 @@ public class Google
     {
     }
 
-    public boolean backup(String user, String pass, String name, File file) throws Exception
+    public boolean backup(String user, String pass, String name, java.io.File file) throws Exception
     {
         if (!Util.isValidate(user) || pass == null || !Util.isValidate(name))
         {
@@ -126,7 +124,7 @@ public class Google
         return true;
     }
 
-    public boolean resume(String user, String pass, String name, File file) throws Exception
+    public boolean resume(String user, String pass, String name, java.io.File file) throws Exception
     {
         if (!Util.isValidate(user) || pass == null || !Util.isValidate(name))
         {
@@ -235,7 +233,6 @@ public class Google
      * @param path
      *            the path to add to the protocol/host
      *
-     * @throws MalformedURLException
      * @throws Exception
      */
     protected URL buildUrl(String path) throws Exception
@@ -256,7 +253,6 @@ public class Google
      * @param parameters
      *            parameters to be added to the URL.
      *
-     * @throws MalformedURLException
      * @throws Exception
      */
     protected URL buildUrl(String path, String[] parameters) throws Exception
@@ -279,7 +275,6 @@ public class Google
      * @param parameters
      *            parameters to be added to the URL.
      *
-     * @throws MalformedURLException
      * @throws Exception
      */
     protected URL buildUrl(String domain, String path, String[] parameters) throws Exception
@@ -319,7 +314,6 @@ public class Google
      * @param parameters
      *            parameters to be added to the URL as key value pairs.
      *
-     * @throws MalformedURLException
      * @throws Exception
      */
     protected URL buildUrl(String domain, String path, Map<String, String> parameters) throws Exception

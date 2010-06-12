@@ -4,7 +4,7 @@
  */
 package com.magicpwd.v;
 
-import com.magicpwd.MagicPwd;
+import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
@@ -13,7 +13,7 @@ import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
-import com.magicpwd.x.MdiDialog;
+import com.magicpwd.m.UserMdl;
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
 
@@ -23,9 +23,12 @@ import java.awt.TrayIcon;
 public class TrayPtn extends TrayIcon
 {
 
-    private static TrayPtn trayPtn;
     private static boolean isOsTray;
-    private static javax.swing.JDialog trayForm;
+    private static int viewPtn;
+    private static TrayPtn trayPtn;
+    private static javax.swing.JFrame mf_CurrForm;
+    private static javax.swing.JDialog md_TrayForm;
+    private static java.util.HashMap<String, javax.swing.JDialog> hm_FormList;
     private static javax.swing.event.PopupMenuListener listener;
 
     private TrayPtn()
@@ -47,11 +50,11 @@ public class TrayPtn extends TrayIcon
 
     public boolean initView()
     {
-        if (trayForm == null)
+        if (md_TrayForm == null)
         {
-            trayForm = new javax.swing.JDialog();
-            trayForm.setUndecorated(true);
-            trayForm.setAlwaysOnTop(true);
+            md_TrayForm = new javax.swing.JDialog();
+            md_TrayForm.setUndecorated(true);
+            md_TrayForm.setAlwaysOnTop(true);
             //trayForm.addWindowListener(new java.awt.event.WindowAdapter()
 //            {
 //                @Override
@@ -74,13 +77,13 @@ public class TrayPtn extends TrayIcon
                 @Override
                 public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt)
                 {
-                    trayForm.setVisible(false);
+                    md_TrayForm.setVisible(false);
                 }
 
                 @Override
                 public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt)
                 {
-                    trayForm.setVisible(false);
+                    md_TrayForm.setVisible(false);
                 }
             };
         }
@@ -111,9 +114,7 @@ public class TrayPtn extends TrayIcon
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt)
             {
-                if (evt.getClickCount() == 2)
-                {
-                }
+                showLastActionPerformed(evt);
             }
 
             @Override
@@ -132,13 +133,13 @@ public class TrayPtn extends TrayIcon
             iconLbl.setIcon(Util.getIcon(0));
             iconLbl.addMouseListener(ml);
             iconLbl.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.darkGray));
-            trayForm.getContentPane().setLayout(new java.awt.BorderLayout());
-            trayForm.getContentPane().add(iconLbl);
-            trayForm.pack();
+            md_TrayForm.getContentPane().setLayout(new java.awt.BorderLayout());
+            md_TrayForm.getContentPane().add(iconLbl);
+            md_TrayForm.pack();
 
             java.awt.Dimension size = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-            trayForm.setLocation(size.width - 120 - trayForm.getWidth(), 80);
-            trayForm.setVisible(true);
+            md_TrayForm.setLocation(size.width - 120 - md_TrayForm.getWidth(), 80);
+            md_TrayForm.setVisible(true);
         }
 
         trayMenu = new javax.swing.JPopupMenu();
@@ -287,6 +288,70 @@ public class TrayPtn extends TrayIcon
         return true;
     }
 
+    public static javax.swing.JFrame getCurrForm()
+    {
+        return mf_CurrForm;
+    }
+
+    public static void showMainPtn()
+    {
+        if (mp_MainPtn == null)
+        {
+            mp_MainPtn = new MainPtn();
+            mp_MainPtn.initView();
+            mp_MainPtn.initLang();
+            mp_MainPtn.initData();
+        }
+
+        mf_CurrForm = mp_MainPtn;
+        viewPtn = VIEW_MAIN;
+    }
+
+    public static void showNormPtn()
+    {
+        if (mp_NormPtn == null)
+        {
+            mp_NormPtn = new NormPtn();
+            mp_NormPtn.initView();
+            mp_NormPtn.initLang();
+            mp_NormPtn.initData();
+        }
+
+        mf_CurrForm = mp_NormPtn;
+        viewPtn = VIEW_NORM;
+    }
+
+    public static void showMiniPtn()
+    {
+        if (mp_MiniPtn == null)
+        {
+            mp_MiniPtn = new MiniPtn();
+            mp_MiniPtn.initView();
+            mp_MiniPtn.initLang();
+            mp_MiniPtn.initData();
+        }
+
+        mf_CurrForm = mp_MiniPtn;
+        viewPtn = VIEW_MINI;
+    }
+
+    public static void regForm(String key, javax.swing.JDialog dlg)
+    {
+        hm_FormList.put(key, dlg);
+    }
+
+    public static javax.swing.JDialog getForm(String key)
+    {
+        return hm_FormList.get(key);
+    }
+
+//    public static void showCfgDlg()
+//    {
+//        if (md_UcfgDlg == null || !md_UcfgDlg.isVisible())
+//        {
+//            //md_UcfgDlg = new MdiDialog(mf_CurrForm);
+//        }
+//    }
     public javax.swing.JPopupMenu getJPopupMenu()
     {
         return trayMenu;
@@ -323,22 +388,22 @@ public class TrayPtn extends TrayIcon
             {
                 y -= window.height;
             }
-            trayForm.setLocation(x, y);
+            md_TrayForm.setLocation(x, y);
 
             // trayMenu.setInvoker(trayMenu);
-            trayForm.setVisible(true);
-            trayMenu.show(trayForm.getContentPane(), 0, 0);
-            trayForm.toFront();
+            md_TrayForm.setVisible(true);
+            trayMenu.show(md_TrayForm.getContentPane(), 0, 0);
+            md_TrayForm.toFront();
         }
         else
         {
-            trayMenu.show(trayForm, 0, trayForm.getHeight());
+            trayMenu.show(md_TrayForm, 0, md_TrayForm.getHeight());
         }
     }
 
     private void infoItemActionPerformed(java.awt.event.ActionEvent evt)
     {
-        MdiDialog.getInstance(null).showProp(ConsEnv.PROP_INFO, true);
+        Lang.showMesg(null, "", "");
     }
 
     private void helpItemActionPerformed(java.awt.event.ActionEvent evt)
@@ -366,16 +431,16 @@ public class TrayPtn extends TrayIcon
 
     private void mainItemActionPerformed(java.awt.event.ActionEvent evt)
     {
-        UserSign us = new UserSign(MagicPwd.getCurrForm());
+        UserSign us = new UserSign(getCurrForm());
         us.setConfrmBackCall(new IBackCall()
         {
 
             @Override
             public boolean callBack(Object sender, java.util.EventListener event, String... params)
             {
-                MagicPwd.showMainPtn();
-                MagicPwd.getCurrForm().setVisible(true);
-                MagicPwd.getCurrForm().setState(javax.swing.JFrame.NORMAL);
+                showMainPtn();
+                getCurrForm().setVisible(true);
+                getCurrForm().setState(javax.swing.JFrame.NORMAL);
                 return true;
             }
         });
@@ -386,16 +451,16 @@ public class TrayPtn extends TrayIcon
 
     private void normItemActionPerformed(java.awt.event.ActionEvent evt)
     {
-        UserSign us = new UserSign(MagicPwd.getCurrForm());
+        UserSign us = new UserSign(getCurrForm());
         us.setConfrmBackCall(new IBackCall()
         {
 
             @Override
             public boolean callBack(Object sender, java.util.EventListener event, String... params)
             {
-                MagicPwd.showNormPtn();
-                MagicPwd.getCurrForm().setVisible(true);
-                MagicPwd.getCurrForm().setState(javax.swing.JFrame.NORMAL);
+                showNormPtn();
+                getCurrForm().setVisible(true);
+                getCurrForm().setState(javax.swing.JFrame.NORMAL);
                 return true;
             }
         });
@@ -406,16 +471,16 @@ public class TrayPtn extends TrayIcon
 
     private void miniItemActionPerformed(java.awt.event.ActionEvent evt)
     {
-        UserSign us = new UserSign(MagicPwd.getCurrForm());
+        UserSign us = new UserSign(getCurrForm());
         us.setConfrmBackCall(new IBackCall()
         {
 
             @Override
             public boolean callBack(Object sender, java.util.EventListener event, String... params)
             {
-                MagicPwd.showMiniPtn();
-                MagicPwd.getCurrForm().setVisible(true);
-                MagicPwd.getCurrForm().setState(javax.swing.JFrame.NORMAL);
+                showMiniPtn();
+                getCurrForm().setVisible(true);
+                getCurrForm().setState(javax.swing.JFrame.NORMAL);
                 return true;
             }
         });
@@ -481,6 +546,75 @@ public class TrayPtn extends TrayIcon
             Logs.exception(exp);
         }
     }
+
+    private void showLastActionPerformed(java.awt.event.MouseEvent evt)
+    {
+        if (evt.getClickCount() < 2)
+        {
+            return;
+        }
+
+        UserSign us = new UserSign(getCurrForm());
+        us.setConfrmBackCall(new IBackCall()
+        {
+
+            @Override
+            public boolean callBack(Object sender, java.util.EventListener event, String... params)
+            {
+                getCurrForm().setVisible(true);
+                getCurrForm().setState(javax.swing.JFrame.NORMAL);
+                return true;
+            }
+        });
+        us.initView(ConsEnv.SIGN_RS);
+        us.initLang();
+        us.initData();
+    }
+
+    public static void changeSkin(String lafClass)
+    {
+        boolean wasDecoratedByOS = !(TrayPtn.getCurrForm().isUndecorated());
+        try
+        {
+            boolean isSystem = !Util.isValidate(lafClass) || ConsCfg.DEF_SKIN.equalsIgnoreCase(lafClass);
+            if (isSystem)
+            {
+                lafClass = javax.swing.UIManager.getSystemLookAndFeelClassName();
+            }
+            javax.swing.UIManager.setLookAndFeel(lafClass);
+            for (java.awt.Window window : java.awt.Window.getWindows())
+            {
+                javax.swing.SwingUtilities.updateComponentTreeUI(window);
+            }
+
+            boolean canBeDecoratedByLAF = javax.swing.UIManager.getLookAndFeel().getSupportsWindowDecorations();
+
+            if (canBeDecoratedByLAF == wasDecoratedByOS)
+            {
+                boolean wasVisible = TrayPtn.getCurrForm().isVisible();
+
+                TrayPtn.getCurrForm().setVisible(false);
+                TrayPtn.getCurrForm().dispose();
+                if (!canBeDecoratedByLAF || wasDecoratedByOS)
+                {
+                    TrayPtn.getCurrForm().setUndecorated(false);
+                    TrayPtn.getCurrForm().getRootPane().setWindowDecorationStyle(0);
+                }
+                else
+                {
+                    TrayPtn.getCurrForm().setUndecorated(true);
+                    TrayPtn.getCurrForm().getRootPane().setWindowDecorationStyle(1);
+                }
+
+                TrayPtn.getCurrForm().setVisible(wasVisible);
+            }
+            UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN, isSystem ? ConsCfg.DEF_SKIN : lafClass);
+        }
+        catch (Exception exc)
+        {
+            Lang.showMesg(TrayPtn.getCurrForm(), null, exc.getLocalizedMessage());
+        }
+    }
     private javax.swing.JPopupMenu trayMenu;
     private javax.swing.JMenuItem infoItem;
     private javax.swing.JMenuItem siteItem;
@@ -491,4 +625,10 @@ public class TrayPtn extends TrayIcon
     private javax.swing.JMenuItem normItem;
     private javax.swing.JMenuItem miniItem;
     private javax.swing.JMenuItem exitItem;
+    private static MiniPtn mp_MiniPtn;
+    private static NormPtn mp_NormPtn;
+    private static MainPtn mp_MainPtn;
+    private static final int VIEW_MAIN = 0;
+    private static final int VIEW_NORM = 1;
+    private static final int VIEW_MINI = 2;
 }

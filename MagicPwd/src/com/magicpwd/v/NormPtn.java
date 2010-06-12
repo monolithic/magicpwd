@@ -7,6 +7,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
 import com.magicpwd._face.IEditItem;
+import com.magicpwd._face.IFormView;
 import com.magicpwd._util.Lang;
 import com.magicpwd._user.UserSign;
 import com.magicpwd._util.Logs;
@@ -23,7 +24,7 @@ import com.magicpwd.r.ListCR;
  * @author Amon
  * 
  */
-public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
+public class NormPtn extends javax.swing.JFrame implements IFormView, MenuEvt, FindEvt
 {
 
     private String lastHash;
@@ -241,6 +242,18 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
         noteList = new java.util.ArrayList<S1S2>();
         Util.addEditAction(pl_NoteBase.getActionMap(), pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
         Util.addFileAction(pl_NoteBase.getActionMap(), pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
+    }
+
+    @Override
+    public void setVisible(boolean visible)
+    {
+        super.setVisible(visible);
+    }
+
+    @Override
+    public javax.swing.JFrame getForm()
+    {
+        return this;
     }
 
     @Override
@@ -581,7 +594,7 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
     public void viewTop1ActionPerformed(java.awt.event.ActionEvent evt)
     {
         boolean b = !UserMdl.getUserCfg().isViewTop();
-        MagicPwd.getCurrForm().setAlwaysOnTop(b);
+        TrayPtn.getCurrForm().setAlwaysOnTop(b);
 
         UserMdl.getUserCfg().setViewTop(b);
     }
@@ -616,7 +629,7 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
 
     private void bt_ExitNoteActionPerformed(java.awt.event.ActionEvent evt)
     {
-        UserSign us = new UserSign(MagicPwd.getCurrForm());
+        UserSign us = new UserSign(TrayPtn.getCurrForm());
         us.setConfrmBackCall(new IBackCall()
         {
 
@@ -701,9 +714,9 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
 
     private boolean showFrm()
     {
-        MagicPwd.showMainPtn();
-        MagicPwd.getCurrForm().setVisible(true);
-        MagicPwd.getCurrForm().setState(NORMAL);
+        TrayPtn.showMainPtn();
+        TrayPtn.getCurrForm().setVisible(true);
+        TrayPtn.getCurrForm().setState(NORMAL);
         this.setVisible(false);
         return true;
     }

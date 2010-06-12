@@ -3,12 +3,10 @@
  */
 package com.magicpwd.v;
 
-import java.util.List;
 
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 
-import com.magicpwd.MagicPwd;
 import com.magicpwd._comn.Char;
 import com.magicpwd._comn.EditItem;
 import com.magicpwd._cons.ConsCfg;
@@ -347,7 +345,7 @@ public class MenuPwd extends JPopupMenu
 
     private void mi_SizeMoreActionPerformed(java.awt.event.ActionEvent evt)
     {
-        String s = JOptionPane.showInputDialog(MagicPwd.getCurrForm(), "", tpltData.getSpec(EditItem.SPEC_PWDS_SIZE));
+        String s = JOptionPane.showInputDialog(TrayPtn.getCurrForm(), "", tpltData.getSpec(EditItem.SPEC_PWDS_SIZE));
         if (s == null)
         {
             return;
@@ -355,7 +353,7 @@ public class MenuPwd extends JPopupMenu
         s = s.trim();
         if (s.length() < 1)
         {
-            Lang.showMesg(MagicPwd.getCurrForm(), "", "");
+            Lang.showMesg(TrayPtn.getCurrForm(), "", "");
             return;
         }
 

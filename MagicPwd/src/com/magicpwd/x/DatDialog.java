@@ -1,6 +1,5 @@
 package com.magicpwd.x;
 
-import com.magicpwd.MagicPwd;
 import com.magicpwd._comn.Kind;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
@@ -8,6 +7,7 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.KindTN;
+import com.magicpwd.v.TrayPtn;
 
 /**
  * 数据迁移对话窗口
@@ -20,7 +20,7 @@ public class DatDialog extends javax.swing.JDialog
 
     public DatDialog(IBackCall backCall)
     {
-        super(MagicPwd.getCurrForm(), true);
+        super(TrayPtn.getCurrForm(), true);
         this.backCall = backCall;
     }
 
@@ -83,7 +83,7 @@ public class DatDialog extends javax.swing.JDialog
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         this.setIconImage(Util.getLogo());
         this.pack();
-        Util.centerForm(this, MagicPwd.getCurrForm());
+        Util.centerForm(this, TrayPtn.getCurrForm());
     }
 
     public void initLang()
