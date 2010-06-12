@@ -208,8 +208,8 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                     docs = UserMdl.getGridMdl().deCrypt(pwds).toString();
                     String[] data = docs.split("\n");
 
-                    Google google = new Google("MagicPwd");
-                    google.signin(data[0], data[1]);
+                    Google google = new Google();
+                    google.backup(data[0], data[1], ConsEnv.FILE_SYNC);
 
                     java.io.File bakFile = MagicPwd.endSave();
                     if (bakFile == null || !bakFile.exists() || !bakFile.canRead())
@@ -275,10 +275,11 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                     docs = UserMdl.getGridMdl().deCrypt(pwds).toString();
                     String[] data = docs.split("\n");
 
-                    Google google = new Google("MagicPwd");
-                    google.signin(data[0], data[1]);
+                    Google google = new Google();
+                    google.resume(data[0], data[1], "");
 
-                    DocumentListFeed feed = google.getDocsListFeed(ConsEnv.FILE_SYNC);
+
+                    DocumentListFeed feed = null;//google.listSpreadsheet("");
                     if (feed == null)
                     {
                         dialog.setVisible(false);
@@ -305,14 +306,14 @@ public class MainPtn extends javax.swing.JFrame implements MenuEvt, ToolEvt, Inf
                     }
 
                     java.io.File bakFile = new java.io.File(UserMdl.getUserCfg().getBackDir(), ConsEnv.FILE_SYNC);
-                    google.downloadFile(uri, bakFile.getAbsolutePath());
-                    if (!bakFile.exists() || !bakFile.canRead())
-                    {
-                        dialog.setVisible(false);
-                        dialog.dispose();
-                        Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F7A3E, "从Google Docs下载备份文件失败！");
-                        return;
-                    }
+//                    google.downloadFile(uri, bakFile.getAbsolutePath());
+//                    if (!bakFile.exists() || !bakFile.canRead())
+//                    {
+//                        dialog.setVisible(false);
+//                        dialog.dispose();
+//                        Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F7A3E, "从Google Docs下载备份文件失败！");
+//                        return;
+//                    }
 
                     MagicPwd.endSave();
 

@@ -20,6 +20,8 @@ import com.google.gdata.data.spreadsheet.SpreadsheetEntry;
 import com.google.gdata.data.spreadsheet.SpreadsheetFeed;
 import com.google.gdata.data.spreadsheet.WorksheetEntry;
 import com.google.gdata.util.ServiceException;
+import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._util.Util;
 
 /**
  *
@@ -32,26 +34,48 @@ public class Google
     private SpreadsheetEntry spreadsheetEntry;
     private WorksheetEntry worksheetEntry;
 
-    public Google(String name)
+    public Google()
     {
-        service = new SpreadsheetService(name);
     }
 
-    public void signin(String user, String pass) throws Exception
+    public boolean backup(String user, String pass, String name)
     {
-        if (user == null || pass == null)
+        return true;
+    }
+
+    public boolean resume(String user, String pass, String name)
+    {
+        return true;
+    }
+
+    public boolean chooseSpreadsheet(String user, String pass, String name) throws Exception
+    {
+        if (!Util.isValidate(user) || pass == null || !Util.isValidate(name))
         {
-            throw new Exception("null login credentials");
+            return false;
         }
-        service.setUserCredentials(user, pass);
-    }
 
-    private void createSpreadsheet(String title) throws Exception
-    {
-        spreadsheetEntry = new SpreadsheetEntry();
-        spreadsheetEntry.setTitle(new PlainTextConstruct(title));
-        service.insert(buildUrl(URL_DEFAULT + URL_DOCLIST_FEED), spreadsheetEntry);
-        worksheetEntry = spreadsheetEntry.getDefaultWorksheet();
+        service = new SpreadsheetService("MagicPwd");
+        service.setUserCredentials(user, pass);
+        SpreadsheetFeed feed = service.getFeed(FeedURLFactory.getDefault().getSpreadsheetsFeedUrl(), SpreadsheetFeed.class);
+        for (SpreadsheetEntry entry : feed.getEntries())
+        {
+            if (name.equalsIgnoreCase(entry.getTitle().getPlainText()))
+            {
+                spreadsheetEntry = entry;
+                worksheetEntry = spreadsheetEntry.getDefaultWorksheet();
+                return true;
+            }
+        }
+
+        com.google.gdata.data.docs.SpreadsheetEntry entry = new com.google.gdata.data.docs.SpreadsheetEntry();
+        entry.setTitle(new PlainTextConstruct(name));
+        com.google.gdata.client.docs.DocsService docs = new com.google.gdata.client.docs.DocsService("MagicPwd");
+        docs.setUserCredentials(user, pass);
+        docs.insert(buildUrl(URL_DEFAULT + URL_DOCLIST_FEED), entry);
+        worksheetEntry = entry.getDefaultWorksheet();
+
+        return true;
     }
 
     private void createWorksheet(String title, int rowCount, int colCount) throws Exception
@@ -63,26 +87,12 @@ public class Google
         service.insert(spreadsheetEntry.getWorksheetFeedUrl(), worksheet);
     }
 
-    public void deleteWorksheet(String title) throws Exception
-    {
-        for (WorksheetEntry worksheet : spreadsheetEntry.getWorksheets())
-        {
-            String currTitle = worksheet.getTitle().getPlainText();
-            if (currTitle.equals(title))
-            {
-                worksheet.delete();
-                return;
-            }
-        }
-    }
-
     public void updateWorksheet(String oldTitle, String newTitle, int rowCount, int colCount) throws Exception
     {
         worksheetEntry.setTitle(new PlainTextConstruct(newTitle));
         worksheetEntry.setRowCount(rowCount);
         worksheetEntry.setColCount(colCount);
         worksheetEntry.update();
-        System.out.println("Worksheet updated.");
     }
 
     public void dd() throws Exception
@@ -96,39 +106,7 @@ public class Google
 
     public void setCell(int row, int col, String formulaOrValue) throws IOException, ServiceException
     {
-        CellEntry newEntry = new CellEntry(row, col, formulaOrValue);
-        service.insert(worksheetEntry.getCellFeedUrl(), newEntry);
-    }
-
-    public boolean listWorksheets(String name) throws Exception
-    {
-        for (WorksheetEntry entry : spreadsheetEntry.getWorksheets())
-        {
-            if (name.equalsIgnoreCase(entry.getTitle().getPlainText()))
-            {
-                worksheetEntry = entry;
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public boolean listSpreadsheet(String name) throws Exception
-    {
-        if (name == null)
-        {
-            return false;
-        }
-        SpreadsheetFeed feed = service.getFeed(FeedURLFactory.getDefault().getSpreadsheetsFeedUrl(), SpreadsheetFeed.class);
-        for (SpreadsheetEntry entry : feed.getEntries())
-        {
-            if (name.equalsIgnoreCase(entry.getTitle().getPlainText()))
-            {
-                spreadsheetEntry = entry;
-                return true;
-            }
-        }
-        return false;
+        service.insert(worksheetEntry.getCellFeedUrl(), new CellEntry(row, col, formulaOrValue));
     }
 
     /**
@@ -280,9 +258,8 @@ public class Google
     {
         try
         {
-            Google gss = new Google("amonsoft");
-            gss.signin("Amon.RG@gmail.com", "aaa");
-            gss.createSpreadsheet("wokao");
+            Google gss = new Google();
+            gss.chooseSpreadsheet("Amon.CT@gmail.com", "qTrH2e3oXk", ConsEnv.FILE_SYNC);
             // if (!gss.listSpreadsheet("magicpwd")) {
             // gss.create("magicpwd", "spreadsheet");
             // gss.listSpreadsheet("magicpwd");
