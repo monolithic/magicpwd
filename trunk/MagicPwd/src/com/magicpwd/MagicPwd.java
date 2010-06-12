@@ -10,6 +10,7 @@ import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.DBAccess;
 import com.magicpwd.m.UserMdl;
+import com.magicpwd.v.TrayPtn;
 import java.io.File;
 
 /**
@@ -18,6 +19,7 @@ import java.io.File;
  */
 public class MagicPwd
 {
+
     private MagicPwd()
     {
     }
@@ -103,9 +105,9 @@ public class MagicPwd
 
     public static void exit(int status)
     {
-        if (mf_CurrForm != null)
+        if (TrayPtn.getCurrForm() != null)
         {
-            mf_CurrForm.setVisible(false);
+            TrayPtn.getCurrForm().setVisible(false);
         }
         endSave();
         System.exit(status);
@@ -150,10 +152,10 @@ public class MagicPwd
     private static boolean viewFrm()
     {
         // 设置软件界面风格
-        showMainPtn();
-        if (!getCurrForm().isVisible())
+        TrayPtn.showMainPtn();
+        if (!TrayPtn.getCurrForm().isVisible())
         {
-            getCurrForm().setVisible(true);
+            TrayPtn.getCurrForm().setVisible(true);
         }
         return true;
     }

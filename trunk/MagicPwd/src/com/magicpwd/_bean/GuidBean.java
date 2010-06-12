@@ -3,9 +3,7 @@
  */
 package com.magicpwd._bean;
 
-import com.magicpwd.MagicPwd;
 import com.magicpwd._comn.GuidItem;
-import com.magicpwd._comn.I1S2;
 import com.magicpwd._comn.Tplt;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsDat;
@@ -14,16 +12,11 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IGridView;
-import com.magicpwd._mail.Connect;
-import com.magicpwd._mail.MailDlg;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.m.GridMdl;
 import com.magicpwd.m.UserMdl;
-import com.magicpwd.v.MailPtn;
 import com.magicpwd.v.TrayPtn;
-import java.util.List;
-import javax.swing.JOptionPane;
 
 /**
  * 属性：向导
@@ -194,100 +187,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
 
     public void readMailActionPerformed(java.awt.event.ActionEvent evt)
     {
-        MailDlg mailDlg = MagicPwd.getMailDlg();
-        if (mailDlg == null)
-        {
-            mailDlg = new MailDlg();
-            mailDlg.initView();
-            mailDlg.initLang();
-            mailDlg.initData();
-            Util.centerForm(mailDlg, TrayPtn.getCurrForm());
-            MagicPwd.setMailDlg(mailDlg);
-        }
-
-        GridMdl gm = UserMdl.getGridMdl();
-
-        MailPtn mailPtn = new MailPtn();
-        mailPtn.initView();
-        mailPtn.initLang();
-        List<I1S2> mailList = gm.wSelect(ConsDat.INDX_MAIL);
-        mailPtn.initMail(mailList);
-        if (mailList.size() < 1)
-        {
-            Lang.showMesg(mailDlg, null, "没有可用的邮件类型数据！");
-            return;
-        }
-        List<I1S2> userList = gm.wSelect(ConsDat.INDX_TEXT);
-        mailPtn.initUser(userList);
-        if (userList.size() < 1)
-        {
-            Lang.showMesg(mailDlg, null, "没有可用的文本类型数据！");
-            return;
-        }
-        List<I1S2> pwdsList = gm.wSelect(ConsDat.INDX_PWDS);
-        mailPtn.initPwds(pwdsList);
-        if (pwdsList.size() < 1)
-        {
-            Lang.showMesg(mailDlg, null, "没有可用的口令类型数据！");
-            return;
-        }
-        if (JOptionPane.OK_OPTION != JOptionPane.showConfirmDialog(TrayPtn.getCurrForm(), mailPtn, "登录确认", JOptionPane.OK_CANCEL_OPTION))
-        {
-            return;
-        }
-
-        String mail = mailList.get(mailPtn.getMail()).getK();
-        String user = userList.get(mailPtn.getUser()).getK();
-        String pwds = pwdsList.get(mailPtn.getPwds()).getK();
-
-        String host = mail.substring(mail.indexOf('@') + 1);
-        if (!Util.isValidate(host))
-        {
-            return;
-        }
-        String type = UserMdl.getMailCfg().getCfg(host + ".type");
-        if (!Util.isValidate(type))
-        {
-            Lang.showMesg(mailDlg, null, "查找不到对应的服务信息，如有疑问请与作者联系！");
-            return;
-        }
-
-        final Connect connect = new Connect(type, mail, pwds);
-        connect.setUsername(user);
-
-        // 读取服务器配置
-        String cfg = UserMdl.getMailCfg().getCfg(type + '.' + host);
-        if (!Util.isValidate(cfg))
-        {
-            return;
-        }
-
-        // 服务器地址
-        String[] arr = (cfg + ":::false").split("[:]");
-        connect.setHost(arr[0]);
-
-        // 服务器端口
-        cfg = arr[1].trim();
-        if (Util.isValidateInteger(cfg))
-        {
-            connect.setPort(Integer.parseInt(cfg));
-        }
-
-        // 是否需要身份认证
-        connect.setAuth("true".equalsIgnoreCase(arr[2].trim().toLowerCase()));
-        // 是否需要安全认证
-        connect.setJssl("true".equalsIgnoreCase(arr[3].trim().toLowerCase()));
-
-        mailDlg.setVisible(true);
-        new Thread()
-        {
-
-            @Override
-            public void run()
-            {
-                MagicPwd.getMailDlg().append(connect, "");
-            }
-        }.start();
+        TrayPtn.showMailPtn();
     }
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JLabel lb_PropEdit;

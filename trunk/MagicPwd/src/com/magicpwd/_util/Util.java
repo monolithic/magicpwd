@@ -7,7 +7,6 @@
  */
 package com.magicpwd._util;
 
-import com.magicpwd._cons.ConsCfg;
 import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
@@ -43,7 +42,6 @@ import com.magicpwd.r.AmonFF;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd.c.MenuEvt;
 import com.magicpwd.m.UserMdl;
-import com.magicpwd.v.TrayPtn;
 import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 

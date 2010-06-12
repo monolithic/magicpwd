@@ -957,22 +957,46 @@ public class MenuBar extends JMenuBar
 
     private void mi_DataUSetActionPerformed(java.awt.event.ActionEvent evt)
     {
-        MdiDialog.getInstance(me_MenuEvent).showProp(ConsEnv.PROP_USET, true);
+        MdiDialog mdiDialog = MdiDialog.getInstance();
+        if (mdiDialog == null)
+        {
+            MdiDialog.newInstance(me_MenuEvent);
+            mdiDialog = MdiDialog.getInstance();
+        }
+        mdiDialog.showProp(ConsEnv.PROP_USET, true);
     }
 
     private void mi_DataCharActionPerformed(java.awt.event.ActionEvent evt)
     {
-        MdiDialog.getInstance(me_MenuEvent).showProp(ConsEnv.PROP_CHAR, true);
+        MdiDialog mdiDialog = MdiDialog.getInstance();
+        if (mdiDialog == null)
+        {
+            MdiDialog.newInstance(me_MenuEvent);
+            mdiDialog = MdiDialog.getInstance();
+        }
+        mdiDialog.showProp(ConsEnv.PROP_CHAR, true);
     }
 
     private void mi_DataTpltActionPerformed(java.awt.event.ActionEvent evt)
     {
-        MdiDialog.getInstance(me_MenuEvent).showProp(ConsEnv.PROP_TPLT, true);
+        MdiDialog mdiDialog = MdiDialog.getInstance();
+        if (mdiDialog == null)
+        {
+            MdiDialog.newInstance(me_MenuEvent);
+            mdiDialog = MdiDialog.getInstance();
+        }
+        mdiDialog.showProp(ConsEnv.PROP_TPLT, true);
     }
 
     private void mi_DataKindActionPerformed(java.awt.event.ActionEvent evt)
     {
-        MdiDialog.getInstance(me_MenuEvent).showProp(ConsEnv.PROP_KIND, true);
+        MdiDialog mdiDialog = MdiDialog.getInstance();
+        if (mdiDialog == null)
+        {
+            MdiDialog.newInstance(me_MenuEvent);
+            mdiDialog = MdiDialog.getInstance();
+        }
+        mdiDialog.showProp(ConsEnv.PROP_KIND, true);
     }
 
     private void mi_DataSKeyActionPerformed(java.awt.event.ActionEvent evt)

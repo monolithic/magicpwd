@@ -41,7 +41,12 @@ public class MdiDialog extends javax.swing.JDialog
         setDefaultCloseOperation(MdiDialog.DISPOSE_ON_CLOSE);
     }
 
-    public static MdiDialog getInstance(MenuEvt menuEvt)
+    public static MdiDialog getInstance()
+    {
+        return md_Dialog;
+    }
+
+    public static void newInstance(MenuEvt menuEvt)
     {
         if (md_Dialog == null)
         {
@@ -54,7 +59,6 @@ public class MdiDialog extends javax.swing.JDialog
                 md_Dialog.addHideAction(menuEvt);
             }
         }
-        return md_Dialog;
     }
 
     public void initView()
