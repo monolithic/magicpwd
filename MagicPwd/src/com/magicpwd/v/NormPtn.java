@@ -62,6 +62,15 @@ public class NormPtn extends javax.swing.JFrame implements MenuEvt, FindEvt
                 tf_SrchNoteActionPerformed(evt);
             }
         });
+        tf_NoteHead.addFocusListener(new java.awt.event.FocusAdapter()
+        {
+
+            @Override
+            public void focusGained(java.awt.event.FocusEvent evt)
+            {
+                tf_NoteHead.selectAll();
+            }
+        });
 
         bt_CrteNote.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_APND));
         bt_CrteNote.addActionListener(new java.awt.event.ActionListener()
