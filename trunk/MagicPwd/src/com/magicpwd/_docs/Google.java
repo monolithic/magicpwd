@@ -4,8 +4,6 @@
  */
 package com.magicpwd._docs;
 
-import com.google.gdata.client.spreadsheet.FeedURLFactory;
-import com.google.gdata.client.spreadsheet.SpreadsheetService;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -13,10 +11,12 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.gdata.client.spreadsheet.FeedURLFactory;
+import com.google.gdata.client.spreadsheet.SpreadsheetService;
 import com.google.gdata.data.PlainTextConstruct;
-import com.google.gdata.data.docs.SpreadsheetEntry;
 import com.google.gdata.data.spreadsheet.CellEntry;
 import com.google.gdata.data.spreadsheet.CellFeed;
+import com.google.gdata.data.spreadsheet.SpreadsheetEntry;
 import com.google.gdata.data.spreadsheet.SpreadsheetFeed;
 import com.google.gdata.data.spreadsheet.WorksheetEntry;
 import com.google.gdata.util.ServiceException;
@@ -120,7 +120,7 @@ public class Google
             return false;
         }
         SpreadsheetFeed feed = service.getFeed(FeedURLFactory.getDefault().getSpreadsheetsFeedUrl(), SpreadsheetFeed.class);
-        for (com.google.gdata.data.docs.SpreadsheetEntry entry : feed.getEntries())
+        for (SpreadsheetEntry entry : feed.getEntries())
         {
             if (name.equalsIgnoreCase(entry.getTitle().getPlainText()))
             {

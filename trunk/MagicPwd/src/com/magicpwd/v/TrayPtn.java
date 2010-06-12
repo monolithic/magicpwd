@@ -311,8 +311,20 @@ public class TrayPtn extends TrayIcon
 
         if (isOsTray)
         {
-            java.awt.Dimension size = trayMenu.getPreferredSize();
-            trayForm.setLocation(evt.getX() - size.width, evt.getY() - size.height);
+            java.awt.Dimension window = trayMenu.getPreferredSize();
+            java.awt.Dimension screan = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+            int x = evt.getX();
+            if (x + window.width > screan.width && x > window.width)
+            {
+                x -= window.width;
+            }
+            int y = evt.getY();
+            if (y + window.height > screan.height && y > window.height)
+            {
+                y -= window.height;
+            }
+            trayForm.setLocation(x, y);
+
             // trayMenu.setInvoker(trayMenu);
             trayForm.setVisible(true);
             trayMenu.show(trayForm.getContentPane(), 0, 0);
