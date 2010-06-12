@@ -61,7 +61,6 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
     private java.awt.CardLayout cl_CardProp;
     private MailDlg mailForm;
     private MpsDialog md_MpsDialog;
-    private MdiDialog md_MdiDialog;
     private IEditBean[] editBean;
     private FindBar mainFind;
     private InfoBar mainInfo;
@@ -160,6 +159,15 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
             if (mailForm != null && mailForm.isVisible())
             {
                 mailForm.setVisible(false);
+            }
+            if (md_MpsDialog != null && md_MpsDialog.isVisible())
+            {
+                md_MpsDialog.setVisible(false);
+            }
+            MdiDialog mdiDialog = MdiDialog.getInstance();
+            if (mdiDialog != null && mdiDialog.isVisible())
+            {
+                mdiDialog.setVisible(false);
             }
         }
         super.setVisible(visible);
@@ -348,7 +356,13 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
     @Override
     public void helpSKeyActionPerformed(java.awt.event.ActionEvent evt)
     {
-        MdiDialog.getInstance(this).showProp(ConsEnv.PROP_SKEY, false);
+        MdiDialog mdiDialog = MdiDialog.getInstance();
+        if (mdiDialog == null)
+        {
+            MdiDialog.newInstance(this);
+            mdiDialog = MdiDialog.getInstance();
+        }
+        mdiDialog.showProp(ConsEnv.PROP_SKEY, false);
     }
 
     @Override
@@ -791,15 +805,6 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
     @Override
     public void fileHideActionPerformed(java.awt.event.ActionEvent evt)
     {
-        MdiDialog md = MdiDialog.getInstance(this);
-        if (md != null && md.isVisible())
-        {
-            md.setVisible(false);
-        }
-        if (md_MpsDialog != null && md_MpsDialog.isVisible())
-        {
-            md_MpsDialog.setVisible(false);
-        }
         this.setVisible(false);
 
         TrayPtn.getInstance().displayMessage(Lang.getLang(LangRes.P30F9A01, "友情提示"), Lang.getLang(LangRes.P30F9A01, ""), java.awt.TrayIcon.MessageType.INFO);
@@ -847,13 +852,25 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
     @Override
     public void helpJavaActionPerformed(java.awt.event.ActionEvent evt)
     {
-        MdiDialog.getInstance(this).showProp(ConsEnv.PROP_JAVA, false);
+        MdiDialog mdiDialog = MdiDialog.getInstance();
+        if (mdiDialog == null)
+        {
+            MdiDialog.newInstance(this);
+            mdiDialog = MdiDialog.getInstance();
+        }
+        mdiDialog.showProp(ConsEnv.PROP_JAVA, false);
     }
 
     @Override
     public void helpInfoActionPerformed(java.awt.event.ActionEvent evt)
     {
-        MdiDialog.getInstance(this).showProp(ConsEnv.PROP_INFO, true);
+        MdiDialog mdiDialog = MdiDialog.getInstance();
+        if (mdiDialog == null)
+        {
+            MdiDialog.newInstance(this);
+            mdiDialog = MdiDialog.getInstance();
+        }
+        mdiDialog.showProp(ConsEnv.PROP_INFO, true);
     }
 
     @Override
@@ -1327,7 +1344,13 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
             return;
         }
 
-        MdiDialog.getInstance(this).showProp(ConsEnv.PROP_HIST, false);
+        MdiDialog mdiDialog = MdiDialog.getInstance();
+        if (mdiDialog == null)
+        {
+            MdiDialog.newInstance(this);
+            mdiDialog = MdiDialog.getInstance();
+        }
+        mdiDialog.showProp(ConsEnv.PROP_HIST, false);
     }
 
     @Override
