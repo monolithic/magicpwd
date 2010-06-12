@@ -18,7 +18,6 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -1030,7 +1029,7 @@ public final class Util
         return nextRandomKey(sets.toCharArray(), size, unRepeat);
     }
 
-    public static boolean checkUpdate(String sid, String ver) throws MalformedURLException, IOException
+    public static boolean checkUpdate(String sid, String ver) throws Exception
     {
         if (sid == null)
         {
