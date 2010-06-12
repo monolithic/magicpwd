@@ -34,6 +34,7 @@ public class TrayPtn extends TrayIcon
     private TrayPtn()
     {
         super(Util.getLogo());
+        setImageAutoSize(true);
     }
 
     public static TrayPtn getInstance()
