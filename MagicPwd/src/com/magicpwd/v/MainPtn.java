@@ -260,9 +260,12 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
                 catch (Exception ex)
                 {
                     Logs.exception(ex);
+                    Lang.showMesg(TrayPtn.getCurrForm(), null, ex.getLocalizedMessage());
+                }
+                finally
+                {
                     dialog.setVisible(false);
                     dialog.dispose();
-                    Lang.showMesg(TrayPtn.getCurrForm(), null, ex.getLocalizedMessage());
                 }
             }
         }.start();
