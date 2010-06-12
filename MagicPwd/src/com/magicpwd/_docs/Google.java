@@ -49,7 +49,7 @@ public class Google
         service = new SpreadsheetService("MagicPwd");
         service.setUserCredentials(user, pass);
         SpreadsheetEntry spreadsheet = listSpreadsheetFeed(name);
-        WorksheetEntry worksheet;
+        
         java.net.URL cellFeedUrl = null;
         if (spreadsheet == null)
         {
@@ -65,6 +65,7 @@ public class Google
             }
 
             java.util.List<WorksheetEntry> list = spreadsheet.getWorksheets();
+            WorksheetEntry worksheet;
             if (list.size() > 0)
             {
                 worksheet = list.get(0);
@@ -85,8 +86,7 @@ public class Google
         }
         else
         {
-            worksheet = spreadsheet.getWorksheets().get(0);
-            cellFeedUrl = worksheet.getCellFeedUrl();
+            cellFeedUrl = spreadsheet.getWorksheets().get(0).getCellFeedUrl();
         }
 
         java.io.BufferedInputStream bi = null;
