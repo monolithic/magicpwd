@@ -27,13 +27,15 @@ import javax.swing.JOptionPane;
 /**
  * @author Amon
  */
-public class TrayPtn extends TrayIcon
+public class TrayPtn extends TrayIcon implements IBackCall
 {
 
     private static boolean isOsTray;
-    private static int viewPtn;
-    private static TrayPtn trayPtn;
+    private static int currPtn;
+    private static int nextPtn;
     private static MailDlg mailDlg;
+    private static TrayPtn trayPtn;
+    private static UserSign userSign;
     private static javax.swing.JFrame mf_CurrForm;
     private static javax.swing.JDialog md_TrayForm;
     private static javax.swing.event.PopupMenuListener listener;
@@ -296,6 +298,27 @@ public class TrayPtn extends TrayIcon
         return true;
     }
 
+    @Override
+    public boolean callBack(Object sender, java.util.EventListener event, String... params)
+    {
+        switch (nextPtn)
+        {
+            case VIEW_MAIN:
+                showMainPtn();
+                break;
+            case VIEW_NORM:
+                showNormPtn();
+                break;
+            case VIEW_MINI:
+                showMiniPtn();
+                break;
+            default:
+                break;
+        }
+        getCurrForm().setVisible(true);
+        return true;
+    }
+
     public static javax.swing.JFrame getCurrForm()
     {
         return mf_CurrForm;
@@ -312,7 +335,7 @@ public class TrayPtn extends TrayIcon
         }
 
         mf_CurrForm = mp_MainPtn;
-        viewPtn = VIEW_MAIN;
+        currPtn = VIEW_MAIN;
     }
 
     public static void showNormPtn()
@@ -326,7 +349,7 @@ public class TrayPtn extends TrayIcon
         }
 
         mf_CurrForm = mp_NormPtn;
-        viewPtn = VIEW_NORM;
+        currPtn = VIEW_NORM;
     }
 
     public static void showMiniPtn()
@@ -340,7 +363,7 @@ public class TrayPtn extends TrayIcon
         }
 
         mf_CurrForm = mp_MiniPtn;
-        viewPtn = VIEW_MINI;
+        currPtn = VIEW_MINI;
     }
 
     public static void showMailPtn()
@@ -523,62 +546,20 @@ public class TrayPtn extends TrayIcon
 
     private void mainItemActionPerformed(java.awt.event.ActionEvent evt)
     {
-        UserSign us = new UserSign(getCurrForm());
-        us.setConfrmBackCall(new IBackCall()
-        {
-
-            @Override
-            public boolean callBack(Object sender, java.util.EventListener event, String... params)
-            {
-                showMainPtn();
-                getCurrForm().setVisible(true);
-                getCurrForm().setState(javax.swing.JFrame.NORMAL);
-                return true;
-            }
-        });
-        us.initView(ConsEnv.SIGN_RS);
-        us.initLang();
-        us.initData();
+        nextPtn = VIEW_MAIN;
+        showViewPtn();
     }
 
     private void normItemActionPerformed(java.awt.event.ActionEvent evt)
     {
-        UserSign us = new UserSign(getCurrForm());
-        us.setConfrmBackCall(new IBackCall()
-        {
-
-            @Override
-            public boolean callBack(Object sender, java.util.EventListener event, String... params)
-            {
-                showNormPtn();
-                getCurrForm().setVisible(true);
-                getCurrForm().setState(javax.swing.JFrame.NORMAL);
-                return true;
-            }
-        });
-        us.initView(ConsEnv.SIGN_RS);
-        us.initLang();
-        us.initData();
+        nextPtn = VIEW_NORM;
+        showViewPtn();
     }
 
     private void miniItemActionPerformed(java.awt.event.ActionEvent evt)
     {
-        UserSign us = new UserSign(getCurrForm());
-        us.setConfrmBackCall(new IBackCall()
-        {
-
-            @Override
-            public boolean callBack(Object sender, java.util.EventListener event, String... params)
-            {
-                showMiniPtn();
-                getCurrForm().setVisible(true);
-                getCurrForm().setState(javax.swing.JFrame.NORMAL);
-                return true;
-            }
-        });
-        us.initView(ConsEnv.SIGN_RS);
-        us.initLang();
-        us.initData();
+        nextPtn = VIEW_MINI;
+        showViewPtn();
     }
 
     private void updtItemActionPerformed(java.awt.event.ActionEvent evt)
@@ -646,21 +627,33 @@ public class TrayPtn extends TrayIcon
             return;
         }
 
-        UserSign us = new UserSign(getCurrForm());
-        us.setConfrmBackCall(new IBackCall()
-        {
+        showViewPtn();
+    }
 
-            @Override
-            public boolean callBack(Object sender, java.util.EventListener event, String... params)
-            {
-                getCurrForm().setVisible(true);
-                getCurrForm().setState(javax.swing.JFrame.NORMAL);
-                return true;
-            }
-        });
-        us.initView(ConsEnv.SIGN_RS);
-        us.initLang();
-        us.initData();
+    private void showViewPtn()
+    {
+        // 当前窗口置前
+        if (mf_CurrForm.isVisible())
+        {
+            mf_CurrForm.toFront();
+            return;
+        }
+
+        // 登录状态不作处理
+        if (userSign != null && userSign.isVisible())
+        {
+            return;
+        }
+
+        if (userSign == null)
+        {
+            userSign = new UserSign(getCurrForm());
+            userSign.setConfrmBackCall(this);
+            userSign.initView(ConsEnv.SIGN_RS);
+            userSign.initLang();
+            userSign.initData();
+        }
+        userSign.setVisible(true);
     }
 
     public static void changeSkin(String lafClass)
