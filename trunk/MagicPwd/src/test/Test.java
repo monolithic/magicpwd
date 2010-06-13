@@ -4,17 +4,23 @@
  */
 package test;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Test
 {
 
     public static void main(String[] args)
     {
-        System.out.println("==================================");
-        String[] arr = "pop.yeah.net:::: ".split(":");
-        for (String s : arr)
+        try
         {
-            System.out.println(s);
+            System.getProperties().storeToXML(new FileOutputStream("a.txt"), "");
         }
-        System.out.println("==================================");
+        catch (IOException ex)
+        {
+            Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
