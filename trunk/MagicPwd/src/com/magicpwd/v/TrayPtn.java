@@ -641,21 +641,19 @@ public class TrayPtn extends TrayIcon implements IBackCall
             return;
         }
 
-        // 登录状态不作处理
-        if (userSign != null && userSign.isVisible())
-        {
-            return;
-        }
-
         if (userSign == null)
         {
-            userSign = new UserSign(getCurrForm());
+            userSign = new UserSign();
             userSign.setConfrmBackCall(this);
             userSign.initView(ConsEnv.SIGN_RS);
             userSign.initLang();
             userSign.initData();
         }
-        userSign.setVisible(true);
+        if (!userSign.isVisible())
+        {
+            userSign.setVisible(true);
+        }
+        userSign.toFront();
     }
 
     public static void changeSkin(String lafClass)
