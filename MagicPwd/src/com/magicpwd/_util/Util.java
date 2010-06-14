@@ -1057,7 +1057,7 @@ public final class Util
 
         // 属性读取
         Document document = new SAXReader().read(new URL(ConsEnv.HOMEPAGE + "soft/soft0001.ashx?sid=" + sid));
-        Node node = document.selectSingleNode("/amonsoft/" + sid + "/version");
+        Node node = document.selectSingleNode("/amonsoft/version");
         if (node == null)
         {
             throw new Exception("读取软件版本信息出错！");
