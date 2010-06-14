@@ -10,7 +10,8 @@
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
             <name>MagicPwd</name>
             <source-roots>
-                <root id="src.dir"/>
+                <root id="src.dir" name="源码包"/>
+                <root id="src.dev.dir" name="设计包"/>
             </source-roots>
             <test-roots>
                 <root id="test.src.dir"/>
