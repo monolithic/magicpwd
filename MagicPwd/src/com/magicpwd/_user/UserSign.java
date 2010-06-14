@@ -542,6 +542,18 @@ public class UserSign extends javax.swing.JPanel
         return true;
     }
 
+    public void toFront()
+    {
+        if (frame != null)
+        {
+            frame.toFront();
+        }
+        if (dialog != null)
+        {
+            dialog.toFront();
+        }
+    }
+
     private void setTitle(String title)
     {
         if (frame != null)
