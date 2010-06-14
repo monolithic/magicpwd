@@ -17,7 +17,7 @@ public class Code
     /**
      * Mapping table from 6-bit nibbles to Base64 characters.
      */
-    private static char[] map1 = new char[64];
+    private static char[] map1 = "S9WTlxdscaDnPEJHyzNo1jOR2uV75vU,iL6mrF4QfXtgG8q3bMYCeIpKkBwA0hZ.".toCharArray();
     /**
      * Mapping table from Base64 characters to 6-bit nibbles.
      */
@@ -25,22 +25,6 @@ public class Code
 
     static
     {
-        int i = 0;
-        for (char c = 'A'; c <= 'Z'; c++)
-        {
-            map1[i++] = c;
-        }
-        for (char c = 'a'; c <= 'z'; c++)
-        {
-            map1[i++] = c;
-        }
-        for (char c = '0'; c <= '9'; c++)
-        {
-            map1[i++] = c;
-        }
-        map1[i++] = ',';
-        map1[i++] = '.';
-
         for (int j = 0; j < map2.length; j++)
         {
             map2[j] = -1;

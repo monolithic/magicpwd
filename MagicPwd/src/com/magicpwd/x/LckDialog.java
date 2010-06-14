@@ -6,7 +6,6 @@ package com.magicpwd.x;
 
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Logs;
-import java.awt.Color;
 import java.awt.event.ActionListener;
 
 /**
@@ -24,10 +23,16 @@ public class LckDialog extends javax.swing.JDialog
 
     public boolean initView()
     {
+        javax.swing.JPanel panel = new javax.swing.JPanel();
+        panel.setLayout(new java.awt.BorderLayout());
+        panel.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.lightGray));
+
         lb_BusyIcon = new javax.swing.JLabel();
         lb_BusyIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_BusyIcon.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.darkGray));
-        getContentPane().add(lb_BusyIcon, java.awt.BorderLayout.CENTER);
+        lb_BusyIcon.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.gray));
+        panel.add(lb_BusyIcon, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(panel, java.awt.BorderLayout.CENTER);
         setPreferredSize(new java.awt.Dimension(200, 82));
         pack();
         return true;
@@ -79,6 +84,16 @@ public class LckDialog extends javax.swing.JDialog
     {
         waitTimer.stop();
         super.dispose();
+    }
+
+    @Override
+    protected void processWindowEvent(java.awt.event.WindowEvent evt)
+    {
+        if (evt.getID() == java.awt.event.WindowEvent.WINDOW_CLOSING)
+        {
+            return;
+        }
+        super.processWindowEvent(evt);
     }
     private javax.swing.Timer waitTimer;
     private int waitIndex = 0;

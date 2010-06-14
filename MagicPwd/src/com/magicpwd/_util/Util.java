@@ -1073,7 +1073,7 @@ public final class Util
      */
     public static String text2DB(String text)
     {
-        return text != null ? text.replace("\\", "\\\\").replace("'", "\\'") : "";
+        return text != null ? text.replace("\\", "\\\\").replace("'", "''") : "";
     }
 
     public static String db2Text(String text)
