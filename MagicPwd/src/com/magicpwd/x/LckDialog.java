@@ -6,6 +6,7 @@ package com.magicpwd.x;
 
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Logs;
+import java.awt.Color;
 import java.awt.event.ActionListener;
 
 /**
@@ -25,7 +26,7 @@ public class LckDialog extends javax.swing.JDialog
     {
         lb_BusyIcon = new javax.swing.JLabel();
         lb_BusyIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lb_BusyIcon.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lb_BusyIcon.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.darkGray));
         getContentPane().add(lb_BusyIcon, java.awt.BorderLayout.CENTER);
         setPreferredSize(new java.awt.Dimension(200, 82));
         pack();
