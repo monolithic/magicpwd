@@ -19,7 +19,7 @@ public class NormPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
     public void initView()
     {
         this.pack();
-        this.setIconImage(Util.getLogo());
+        this.setIconImage(Util.getLogo(16));
         Util.centerForm(this, null);
     }
 

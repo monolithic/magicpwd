@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.magicpwd.v;
 
 import com.magicpwd.MagicPwd;
@@ -212,7 +208,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
 
         this.getContentPane().add(pl_NoteBase);
         this.pack();
-        this.setIconImage(Util.getLogo());
+        this.setIconImage(Util.getLogo(16));
         Util.centerForm(this, null);
     }
 

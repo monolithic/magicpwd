@@ -116,7 +116,7 @@ public class MagicPwd
     private static void preLoad()
     {
         Util.getNone();
-        Util.getLogo();
+        Util.getLogo(16);
         Util.getIcon(0);
         UserMdl.preLoad();
 

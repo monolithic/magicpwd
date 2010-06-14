@@ -301,7 +301,7 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
         layout.setVerticalGroup(vsg);
 
         pack();
-        setIconImage(Util.getLogo());
+        setIconImage(Util.getLogo(16));
     }
 
     /**

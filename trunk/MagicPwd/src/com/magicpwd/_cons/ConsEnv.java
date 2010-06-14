@@ -131,8 +131,6 @@ public interface ConsEnv
      * 图标路径
      */
     String ICON_PATH = "/res/icon/";
-    String ICON_LOGO_0016 = "1001.png";
-    String ICON_LOGO_0032 = "1002.png";
     int ICON_NONE = 0;// 空白
     int ICON_SOFT_HELP = ICON_NONE + 1;// 帮助
     int ICON_SOFT_EXIT = ICON_SOFT_HELP + 1;// 退出

@@ -55,7 +55,7 @@ public final class Util
 
     public static final File icoPath = new File(ConsEnv.DIR_DAT, ConsEnv.DIR_ICO);
     private static ImageIcon bi_NoneIcon;
-    private static BufferedImage bi_LogoIcon;
+    private static Map<Integer, BufferedImage> mp_LogoIcon;
     private static Map<Integer, ImageIcon> mp_IcoList;
     private static Map<String, ImageIcon> mp_ImgList;
 
@@ -243,38 +243,45 @@ public final class Util
     {
         if (bi_NoneIcon == null)
         {
-            bi_NoneIcon = new ImageIcon(createNone());
+            bi_NoneIcon = new ImageIcon(createNone(16));
         }
         return bi_NoneIcon;
     }
 
-    public static BufferedImage getLogo()
+    public static BufferedImage getLogo(int size)
     {
-        if (bi_LogoIcon == null)
+        if (mp_LogoIcon == null)
+        {
+            mp_LogoIcon = new HashMap<Integer, BufferedImage>();
+        }
+
+        BufferedImage logo = mp_LogoIcon.get(size);
+        if (logo == null)
         {
             try
             {
-                java.io.InputStream stream = Util.class.getResourceAsStream(ConsEnv.ICON_PATH + ConsEnv.ICON_LOGO_0016);
-                bi_LogoIcon = ImageIO.read(stream);
+                java.io.InputStream stream = Util.class.getResourceAsStream(ConsEnv.ICON_PATH + Util.lPad(Integer.toHexString(size), 4, '0') + ".png");
+                logo = ImageIO.read(stream);
                 stream.close();
             }
             catch (Exception exp)
             {
-                bi_LogoIcon = createLogo();
+                logo = createLogo(size);
             }
+            mp_LogoIcon.put(size, logo);
         }
-        return bi_LogoIcon;
+        return logo;
     }
 
-    private static BufferedImage createNone()
+    private static BufferedImage createNone(int size)
     {
-        BufferedImage bi = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+        BufferedImage bi = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
         return bi;
     }
 
-    private static BufferedImage createLogo()
+    private static BufferedImage createLogo(int size)
     {
-        BufferedImage bi = createNone();
+        BufferedImage bi = createNone(size);
         return bi;
     }
 

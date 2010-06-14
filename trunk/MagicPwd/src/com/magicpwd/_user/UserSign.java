@@ -43,7 +43,7 @@ public class UserSign extends javax.swing.JPanel
     {
         frame = new javax.swing.JFrame();
         frame.setResizable(false);
-        frame.setIconImage(Util.getLogo());
+        frame.setIconImage(Util.getLogo(16));
         frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().add(this);
     }
@@ -57,7 +57,7 @@ public class UserSign extends javax.swing.JPanel
     {
         dialog = new javax.swing.JDialog(frame, true);
         dialog.setResizable(false);
-        dialog.setIconImage(Util.getLogo());
+        dialog.setIconImage(Util.getLogo(16));
         dialog.setDefaultCloseOperation(javax.swing.JDialog.DISPOSE_ON_CLOSE);
         dialog.getContentPane().add(this);
     }

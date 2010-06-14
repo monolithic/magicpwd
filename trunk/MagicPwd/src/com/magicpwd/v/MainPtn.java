@@ -117,7 +117,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
         mainInfo.setVisible(UserMdl.getUserCfg().isInfoViw());
 
         this.pack();
-        this.setIconImage(Util.getLogo());
+        this.setIconImage(Util.getLogo(16));
         this.setTitle(Lang.getLang(LangRes.P30F7201, "魔方密码"));
         Util.centerForm(this, null);
     }

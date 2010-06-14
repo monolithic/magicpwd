@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.magicpwd.x;
 
 import com.magicpwd._cons.ConsEnv;
@@ -17,8 +13,8 @@ import java.awt.Component;
 import javax.swing.JTable;
 
 /**
- *
- * @author amon
+ * 图标管理对话窗口
+ * @author Amon
  */
 public class IcoDialog extends javax.swing.JDialog
 {
@@ -96,7 +92,7 @@ public class IcoDialog extends javax.swing.JDialog
         layout.setVerticalGroup(vsg1);
 
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        this.setIconImage(Util.getLogo());
+        this.setIconImage(Util.getLogo(16));
         this.setResizable(false);
         this.pack();
         Util.centerForm(this, TrayPtn.getCurrForm());
