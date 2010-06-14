@@ -316,8 +316,9 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
                     }
 
                     java.io.File datFile = new java.io.File(ConsEnv.DIR_DAT);
+                    java.io.File dirFile = datFile.getAbsoluteFile().getParentFile();
                     datFile.delete();
-                    Jzip.unZip(bakFile, datFile.getParentFile());
+                    Jzip.unZip(bakFile, dirFile);
 
                     dialog.setVisible(false);
                     dialog.dispose();
