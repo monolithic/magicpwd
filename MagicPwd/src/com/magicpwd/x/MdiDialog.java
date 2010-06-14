@@ -169,7 +169,7 @@ public class MdiDialog extends javax.swing.JDialog
         vsg2.addContainerGap();
         layout.setVerticalGroup(vsg2);
 
-        this.setIconImage(Util.getLogo());
+        this.setIconImage(Util.getLogo(16));
         this.pack();
     }
 

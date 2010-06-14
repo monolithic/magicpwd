@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.magicpwd.v;
 
 import com.magicpwd._comn.I1S2;
@@ -25,6 +21,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
+ * 系统托盘
  * @author Amon
  */
 public class TrayPtn extends TrayIcon implements IBackCall
@@ -42,7 +39,12 @@ public class TrayPtn extends TrayIcon implements IBackCall
 
     private TrayPtn()
     {
-        super(Util.getLogo());
+        super(Util.getLogo(16));
+        int size = getSize().height;
+        if (size != 16)
+        {
+            setImage(Util.getLogo(size));
+        }
         setImageAutoSize(true);
     }
 

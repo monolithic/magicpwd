@@ -81,7 +81,7 @@ public class DatDialog extends javax.swing.JDialog
         layout.setVerticalGroup(vsg);
 
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        this.setIconImage(Util.getLogo());
+        this.setIconImage(Util.getLogo(16));
         this.pack();
         Util.centerForm(this, TrayPtn.getCurrForm());
     }
