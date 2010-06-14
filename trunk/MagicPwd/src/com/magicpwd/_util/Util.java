@@ -25,7 +25,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -43,6 +42,9 @@ import com.magicpwd.c.MenuEvt;
 import com.magicpwd.m.UserMdl;
 import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
+import org.dom4j.Document;
+import org.dom4j.Node;
+import org.dom4j.io.SAXReader;
 
 /**
  * @author Amon
@@ -1046,14 +1048,15 @@ public final class Util
             ver = 'V' + ver;
         }
 
-        Properties updtProp = new Properties();
-
         // 属性读取
-        java.io.InputStream is = new URL(ConsEnv.HOMEPAGE + "soft/soft0001.ashx?sid=" + sid).openStream();
-        updtProp.loadFromXML(is);
-        is.close();
+        Document document = new SAXReader().read(new URL(ConsEnv.HOMEPAGE + "soft/soft0001.ashx?sid=" + sid));
+        Node node = document.selectSingleNode("/amonsoft/" + sid + "/version");
+        if (node == null)
+        {
+            throw new Exception("读取软件版本信息出错！");
+        }
 
-        return ver.compareToIgnoreCase(updtProp.getProperty("version", "")) < 0;
+        return ver.compareToIgnoreCase(node.getText()) < 0;
     }
 
     /**
