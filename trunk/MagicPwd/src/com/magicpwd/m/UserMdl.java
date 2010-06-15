@@ -3,7 +3,6 @@
  */
 package com.magicpwd.m;
 
-import com.magicpwd.MagicPwd;
 import com.magicpwd._comn.Kind;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
@@ -61,7 +60,7 @@ public final class UserMdl
             {
                 Logs.exception(exp);
                 Lang.showMesg(null, LangRes.P30FAA04, "系统错误：系统无法加载密码算法！");
-                MagicPwd.exit(0);
+                System.exit(0);
             }
         }
         return dCipher;
@@ -83,7 +82,7 @@ public final class UserMdl
             {
                 Logs.exception(exp);
                 Lang.showMesg(null, LangRes.P30FAA04, "系统错误：系统无法加载密码算法！");
-                MagicPwd.exit(0);
+                System.exit(0);
             }
         }
         return eCipher;

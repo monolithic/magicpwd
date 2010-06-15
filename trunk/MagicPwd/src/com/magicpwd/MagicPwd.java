@@ -103,16 +103,6 @@ public class MagicPwd
         preLoad();
     }
 
-    public static void exit(int status)
-    {
-        if (TrayPtn.getCurrForm() != null)
-        {
-            TrayPtn.getCurrForm().setVisible(false);
-        }
-        endSave();
-        System.exit(status);
-    }
-
     private static void preLoad()
     {
         Util.getNone();

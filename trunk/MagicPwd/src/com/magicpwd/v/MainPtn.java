@@ -1610,6 +1610,8 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
             {
                 return;
             }
+            setVisible(false);
+            MagicPwd.endSave();
         }
         else if (e.getID() == java.awt.event.WindowEvent.WINDOW_ICONIFIED)
         {

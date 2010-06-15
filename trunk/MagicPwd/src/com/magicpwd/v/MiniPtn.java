@@ -360,7 +360,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
     @Override
     public void fileExitActionPerformed(java.awt.event.ActionEvent evt)
     {
-        MagicPwd.exit(0);
+        MagicPwd.endSave();
     }
 
     @Override
@@ -707,7 +707,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
     {
         if (e.getID() == java.awt.event.WindowEvent.WINDOW_CLOSING)
         {
-            fileExitActionPerformed(null);
+            MagicPwd.endSave();
         }
         super.processWindowEvent(e);
     }
