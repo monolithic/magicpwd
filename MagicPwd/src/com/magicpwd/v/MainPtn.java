@@ -124,12 +124,12 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
 
     public void initLang()
     {
+        setTitle(Lang.getLang(LangRes.P30F7201, "魔方密码"));
+
         initGuidLang();
         initPropLang();
         initUserLang();
         initBaseLang();
-
-        this.setTitle(Lang.getLang(LangRes.P30F7201, "魔方密码"));
     }
 
     public void initData()
@@ -729,8 +729,6 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
     @Override
     public void fileHideActionPerformed(java.awt.event.ActionEvent evt)
     {
-        this.setVisible(false);
-
         hideWindow();
     }
 
@@ -1729,6 +1727,8 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
 
     private void hideWindow()
     {
+        this.setVisible(false);
+
         TrayPtn.getInstance().displayMessage(Lang.getLang(LangRes.P30F9A01, "友情提示"), Lang.getLang(LangRes.P30F7A43, "魔方密码仍在运行中，您可以通过双击此处显示主窗口！"), java.awt.TrayIcon.MessageType.INFO);
 
         // Save Temperary Data
