@@ -647,12 +647,8 @@ public class TrayPtn extends TrayIcon implements IBackCall
             userSign.setConfrmBackCall(this);
             userSign.initView(ConsEnv.SIGN_RS);
             userSign.initLang();
-            userSign.initData();
         }
-        if (!userSign.isVisible())
-        {
-            userSign.setVisible(true);
-        }
+        userSign.initData();
         userSign.toFront();
     }
 

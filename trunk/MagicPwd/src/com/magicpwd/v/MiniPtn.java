@@ -209,6 +209,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
         this.getContentPane().add(pl_NoteBase);
         this.pack();
         this.setIconImage(Util.getLogo(16));
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         Util.centerForm(this, null);
     }
 
@@ -366,6 +367,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
     @Override
     public void fileHideActionPerformed(java.awt.event.ActionEvent evt)
     {
+        hideWindow();
     }
 
     @Override
@@ -636,7 +638,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
             @Override
             public boolean callBack(Object sender, java.util.EventListener event, String... params)
             {
-                return showFrm();
+                return showMain();
             }
         });
         us.initView(ConsEnv.SIGN_RS);
@@ -707,12 +709,22 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
     {
         if (e.getID() == java.awt.event.WindowEvent.WINDOW_CLOSING)
         {
+            setVisible(false);
             MagicPwd.endSave();
+        }
+        else if (e.getID() == java.awt.event.WindowEvent.WINDOW_ICONIFIED)
+        {
+            hideWindow();
         }
         super.processWindowEvent(e);
     }
 
-    private boolean showFrm()
+    private void hideWindow()
+    {
+        this.setVisible(false);
+    }
+
+    private boolean showMain()
     {
         TrayPtn.showMainPtn();
         TrayPtn.getCurrForm().setVisible(true);
