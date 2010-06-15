@@ -118,7 +118,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
 
         this.pack();
         this.setIconImage(Util.getLogo(16));
-        this.setTitle(Lang.getLang(LangRes.P30F7201, "魔方密码"));
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         Util.centerForm(this, null);
     }
 
@@ -128,6 +128,8 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
         initPropLang();
         initUserLang();
         initBaseLang();
+
+        this.setTitle(Lang.getLang(LangRes.P30F7201, "魔方密码"));
     }
 
     public void initData()
@@ -722,8 +724,6 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
     @Override
     public void fileExitActionPerformed(java.awt.event.ActionEvent evt)
     {
-        TimeOut.setStopWork(true);
-        MagicPwd.exit(0);
     }
 
     @Override
@@ -731,22 +731,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
     {
         this.setVisible(false);
 
-        TrayPtn.getInstance().displayMessage(Lang.getLang(LangRes.P30F9A01, "友情提示"), Lang.getLang(LangRes.P30F9A01, ""), java.awt.TrayIcon.MessageType.INFO);
-
-        // Save Temperary Data
-        if (UserMdl.getGridMdl().isModified())
-        {
-            UserMdl.getGridMdl().setInterim(true);
-            UserMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(ConsDat.HASH_ROOT);
-            try
-            {
-                UserMdl.getGridMdl().saveData(true, false);
-            }
-            catch (Exception exp)
-            {
-                Logs.exception(exp);
-            }
-        }
+        hideWindow();
     }
 
     @Override
@@ -1621,12 +1606,14 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
     {
         if (e.getID() == java.awt.event.WindowEvent.WINDOW_CLOSING)
         {
-            fileExitActionPerformed(null);
-            return;
+            if (UserMdl.getGridMdl().isModified() && javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(this, LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
+            {
+                return;
+            }
         }
         else if (e.getID() == java.awt.event.WindowEvent.WINDOW_ICONIFIED)
         {
-            fileHideActionPerformed(null);
+            hideWindow();
         }
         super.processWindowEvent(e);
     }
@@ -1736,6 +1723,26 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
         }
         tb_LastIndx = row;
         showPropEdit(UserMdl.getGridMdl().getItemAt(row), false);
+    }
+
+    private void hideWindow()
+    {
+        TrayPtn.getInstance().displayMessage(Lang.getLang(LangRes.P30F9A01, "友情提示"), Lang.getLang(LangRes.P30F7A43, "魔方密码仍在运行中，您可以通过双击此处显示主窗口！"), java.awt.TrayIcon.MessageType.INFO);
+
+        // Save Temperary Data
+        if (UserMdl.getGridMdl().isModified())
+        {
+            UserMdl.getGridMdl().setInterim(true);
+            UserMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(ConsDat.HASH_ROOT);
+            try
+            {
+                UserMdl.getGridMdl().saveData(true, false);
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+        }
     }
 
     private void showPropEdit()
