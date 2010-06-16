@@ -318,6 +318,11 @@ public class TrayPtn extends TrayIcon implements IBackCall
                 break;
         }
         getCurrForm().setVisible(true);
+        if (getCurrForm().getState() != java.awt.Frame.NORMAL)
+        {
+            getCurrForm().setState(java.awt.Frame.NORMAL);
+        }
+        //getCurrForm().toFront();
         return true;
     }
 

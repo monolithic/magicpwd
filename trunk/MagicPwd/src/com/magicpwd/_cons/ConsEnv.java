@@ -81,7 +81,7 @@ public interface ConsEnv
     /**
      * 用户登录
      */
-    int SIGN_IN = 0;
+    int SIGN_IN = 1;
     /**
      * 权限验证
      */
