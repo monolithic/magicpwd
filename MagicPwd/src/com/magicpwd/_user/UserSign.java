@@ -64,8 +64,14 @@ public class UserSign extends javax.swing.JPanel
 
     public boolean initView(int type)
     {
-        this.signType = type;
         this.errCount = 0;
+
+        if (type == signType)
+        {
+            return true;
+        }
+
+        this.signType = type;
 
         initGuidView();
         initInfoView();
@@ -542,6 +548,55 @@ public class UserSign extends javax.swing.JPanel
         return true;
     }
 
+    public boolean initData()
+    {
+        switch (signType)
+        {
+            case ConsEnv.SIGN_IN:
+                // 显示上次登录用户
+                String name = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_USER_LAST);
+                if (Util.isValidate(name))
+                {
+                    tf_UserName.setText(name);
+                }
+                break;
+            case ConsEnv.SIGN_RS:
+                tf_UserName.setText("");
+                pf_UserKey0.setText("");
+                break;
+            case ConsEnv.SIGN_UP:
+                break;
+            case ConsEnv.SIGN_PK:
+                break;
+            case ConsEnv.SIGN_FP:
+                break;
+            case ConsEnv.SIGN_SK:
+                break;
+            case ConsEnv.SIGN_SU:
+                break;
+            case ConsEnv.SIGN_CS:
+                break;
+            default:
+                break;
+        }
+
+        java.awt.Window window = frame != null ? frame : (dialog != null ? dialog : null);
+        if (window == null)
+        {
+            return false;
+        }
+
+        window.pack();
+        if (!window.isVisible())
+        {
+            java.awt.Dimension windowsize = window.getSize();
+            java.awt.Dimension screensize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+            window.setLocation((screensize.width - windowsize.width) >> 1, (screensize.height - windowsize.height) >> 1);
+            window.setVisible(true);
+        }
+        return true;
+    }
+
     public void toFront()
     {
         if (frame != null)
@@ -576,53 +631,6 @@ public class UserSign extends javax.swing.JPanel
         {
             dialog.dispose();
         }
-    }
-
-    public boolean initData()
-    {
-        switch (signType)
-        {
-            case ConsEnv.SIGN_IN:
-                // 显示上次登录用户
-                String name = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_USER_LAST);
-                if (Util.isValidate(name))
-                {
-                    tf_UserName.setText(name);
-                }
-                break;
-            case ConsEnv.SIGN_RS:
-                break;
-            case ConsEnv.SIGN_UP:
-                break;
-            case ConsEnv.SIGN_PK:
-                break;
-            case ConsEnv.SIGN_FP:
-                break;
-            case ConsEnv.SIGN_SK:
-                break;
-            case ConsEnv.SIGN_SU:
-                break;
-            case ConsEnv.SIGN_CS:
-                break;
-            default:
-                break;
-        }
-
-        java.awt.Window window = frame != null ? frame : (dialog != null ? dialog : null);
-        if (window == null)
-        {
-            return false;
-        }
-
-        window.pack();
-        if (!window.isVisible())
-        {
-            java.awt.Dimension windowsize = window.getSize();
-            java.awt.Dimension screensize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-            window.setLocation((screensize.width - windowsize.width) >> 1, (screensize.height - windowsize.height) >> 1);
-            window.setVisible(true);
-        }
-        return true;
     }
 
     public void setConfrmBackCall(com.magicpwd._face.IBackCall backCall)
