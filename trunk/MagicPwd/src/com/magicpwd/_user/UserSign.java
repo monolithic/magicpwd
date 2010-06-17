@@ -930,7 +930,11 @@ public class UserSign extends javax.swing.JPanel
 
         if (backCall != null)
         {
-            backCall.callBack(null, null, ConsEnv.STR_SIGN_UP);
+            if (!backCall.callBack(null, null, ConsEnv.STR_SIGN_UP))
+            {
+                System.exit(0);
+                return;
+            }
         }
         dispoze();
 
