@@ -89,7 +89,11 @@ public class MagicPwd
                             {
                                 return false;
                             }
-                            return "signin".equalsIgnoreCase(params[0]) ? viewFrm() : false;
+                            if (ConsEnv.STR_SIGN_IN.equalsIgnoreCase(params[0]) || ConsEnv.STR_SIGN_UP.equalsIgnoreCase(params[0]))
+                            {
+                                return viewFrm();
+                            }
+                            return false;
                         }
                     });
                     us.initView(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.INT_SIGN_IN : ConsEnv.INT_SIGN_UP);

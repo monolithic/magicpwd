@@ -308,11 +308,6 @@ public class TrayPtn extends TrayIcon implements IBackCall
             return false;
         }
 
-        if ("cancel".equalsIgnoreCase(params[0]))
-        {
-            userSign = null;
-            return false;
-        }
         if (!ConsEnv.STR_SIGN_RS.equalsIgnoreCase(params[0]))
         {
             return false;
@@ -657,13 +652,14 @@ public class TrayPtn extends TrayIcon implements IBackCall
 
     private void showViewPtn()
     {
-        if (currPtn == nextPtn)
-        {
-            getCurrForm().toFront();
-            return;
-        }
         if (getCurrForm().isVisible())
         {
+            if (currPtn == nextPtn)
+            {
+                getCurrForm().toFront();
+                return;
+            }
+
             getCurrForm().setVisible(false);
             switch (nextPtn)
             {
@@ -684,10 +680,13 @@ public class TrayPtn extends TrayIcon implements IBackCall
             return;
         }
 
-        userSign = new UserSign();
-        userSign.setBackCall(this);
-        userSign.initView(ConsEnv.INT_SIGN_RS);
-        userSign.initLang();
+        if (userSign == null)
+        {
+            userSign = new UserSign();
+            userSign.setBackCall(this);
+            userSign.initView(ConsEnv.INT_SIGN_RS);
+            userSign.initLang();
+        }
         userSign.initData();
         userSign.toFront();
     }
