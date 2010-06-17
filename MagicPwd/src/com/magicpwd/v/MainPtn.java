@@ -193,7 +193,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
         }
 
         UserSign us = new UserSign(TrayPtn.getCurrForm());
-        us.setConfrmBackCall(new IBackCall()
+        us.setBackCall(new IBackCall()
         {
 
             @Override
@@ -202,7 +202,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
                 return exportData();
             }
         });
-        us.initView(ConsEnv.SIGN_RS);
+        us.initView(ConsEnv.INT_SIGN_RS);
         us.initLang();
         us.initData();
     }
@@ -265,7 +265,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
     public void dataDocsActionPerformed(java.awt.event.ActionEvent evt)
     {
         UserSign us = new UserSign(TrayPtn.getCurrForm());
-        us.setConfrmBackCall(new IBackCall()
+        us.setBackCall(new IBackCall()
         {
 
             @Override
@@ -274,7 +274,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
                 return configDocs(params);
             }
         });
-        us.initView(ConsEnv.SIGN_CS);
+        us.initView(ConsEnv.INT_SIGN_CS);
         us.initLang();
         us.initData();
     }
@@ -303,7 +303,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
         }
 
         UserSign us = new UserSign(TrayPtn.getCurrForm());
-        us.setConfrmBackCall(new IBackCall()
+        us.setBackCall(new IBackCall()
         {
 
             @Override
@@ -312,7 +312,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
                 return importData();
             }
         });
-        us.initView(ConsEnv.SIGN_RS);
+        us.initView(ConsEnv.INT_SIGN_RS);
         us.initLang();
         us.initData();
     }
@@ -1028,7 +1028,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
     public void userUpdateActionPerformed(java.awt.event.ActionEvent evt)
     {
         UserSign us = new UserSign(TrayPtn.getCurrForm());
-        us.initView(ConsEnv.SIGN_PK);
+        us.initView(ConsEnv.INT_SIGN_PK);
         us.initLang();
         us.initData();
     }
@@ -1044,7 +1044,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
         }
 
         UserSign us = new UserSign(TrayPtn.getCurrForm());
-        us.setConfrmBackCall(new IBackCall()
+        us.setBackCall(new IBackCall()
         {
 
             @Override
@@ -1054,7 +1054,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
                 return true;
             }
         });
-        us.initView(ConsEnv.SIGN_SK);
+        us.initView(ConsEnv.INT_SIGN_SK);
         us.initLang();
         us.initData();
     }
@@ -2146,7 +2146,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
 
     private boolean configDocs(String... params)
     {
-        if (params == null || params.length < 2)
+        if (params == null || params.length < 3)
         {
             return false;
         }
@@ -2154,7 +2154,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
         try
         {
             PwdsItem pwds = new PwdsItem();
-            pwds.getP30F0203().append(params[0]).append('\n').append(params[1]);
+            pwds.getP30F0203().append(params[1]).append('\n').append(params[2]);
             UserMdl.getGridMdl().enCrypt(pwds);
             DBA3000.saveConfig("google_docs", pwds.getP30F0203().toString());
         }

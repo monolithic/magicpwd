@@ -79,16 +79,20 @@ public class MagicPwd
 
                     // 显示登录或注册界面
                     UserSign us = new UserSign();
-                    us.setConfrmBackCall(new IBackCall()
+                    us.setBackCall(new IBackCall()
                     {
 
                         @Override
                         public boolean callBack(Object sender, java.util.EventListener event, String... params)
                         {
-                            return viewFrm();
+                            if (params == null || params.length != 1)
+                            {
+                                return false;
+                            }
+                            return "signin".equalsIgnoreCase(params[0]) ? viewFrm() : false;
                         }
                     });
-                    us.initView(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.SIGN_IN : ConsEnv.SIGN_UP);
+                    us.initView(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.INT_SIGN_IN : ConsEnv.INT_SIGN_UP);
                     us.initLang();
                     us.initData();
                 }

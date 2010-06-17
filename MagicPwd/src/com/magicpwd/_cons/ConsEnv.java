@@ -81,39 +81,48 @@ public interface ConsEnv
     /**
      * 用户登录
      */
-    int SIGN_IN = 1;
+    int INT_SIGN_IN = 1;
+    String STR_SIGN_IN = "signIn";
     /**
      * 权限验证
      */
-    int SIGN_RS = SIGN_IN + 1;
+    int INT_SIGN_RS = INT_SIGN_IN + 1;
+    String STR_SIGN_RS = "signRs";
     /**
      * 用户注册
      */
-    int SIGN_UP = SIGN_RS + 1;
+    int INT_SIGN_UP = INT_SIGN_RS + 1;
+    String STR_SIGN_UP = "signUp";
     /**
      * 口令找回
      */
-    int SIGN_FP = SIGN_UP + 1;
+    int INT_SIGN_FP = INT_SIGN_UP + 1;
+    String STR_SIGN_FP = "signFp";
     /**
      * 更改登录口令
      */
-    int SIGN_PK = SIGN_FP + 1;
+    int INT_SIGN_PK = INT_SIGN_FP + 1;
+    String STR_SIGN_PK = "signPk";
     /**
      * 更改安全口令
      */
-    int SIGN_SK = SIGN_PK + 1;
+    int INT_SIGN_SK = INT_SIGN_PK + 1;
+    String STR_SIGN_SK = "signSk";
     /**
      * 添加附属用户
      */
-    int SIGN_SU = SIGN_SK + 1;
+    int INT_SIGN_SU = INT_SIGN_SK + 1;
+    String STR_SIGN_SU = "signSu";
     /**
      * 在线用户登录
      */
-    int SIGN_NW = SIGN_SU + 1;
+    int INT_SIGN_NW = INT_SIGN_SU + 1;
+    String STR_SIGN_NW = "signNw";
     /**
      * 设置云存储用户
      */
-    int SIGN_CS = SIGN_NW + 1;
+    int INT_SIGN_CS = INT_SIGN_NW + 1;
+    String STR_SIGN_CS = "signCs";
     String BEAN_PROP = "beanprop";
     String BEAN_INFO = BEAN_PROP + ConsDat.INDX_INFO;// "infobean";
     String BEAN_TEXT = BEAN_PROP + ConsDat.INDX_TEXT;// "textbean";

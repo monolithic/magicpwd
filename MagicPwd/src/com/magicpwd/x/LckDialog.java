@@ -34,6 +34,7 @@ public class LckDialog extends javax.swing.JDialog
 
         getContentPane().add(panel, java.awt.BorderLayout.CENTER);
         setPreferredSize(new java.awt.Dimension(200, 82));
+        setResizable(false);
         pack();
         return true;
     }

@@ -633,7 +633,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
     private void bt_ExitNoteActionPerformed(java.awt.event.ActionEvent evt)
     {
         UserSign us = new UserSign(TrayPtn.getCurrForm());
-        us.setConfrmBackCall(new IBackCall()
+        us.setBackCall(new IBackCall()
         {
 
             @Override
@@ -642,7 +642,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
                 return showMain();
             }
         });
-        us.initView(ConsEnv.SIGN_RS);
+        us.initView(ConsEnv.INT_SIGN_RS);
         us.initLang();
         us.initData();
     }
@@ -728,8 +728,8 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
     private boolean showMain()
     {
         TrayPtn.showMainPtn();
-        TrayPtn.getCurrForm().setVisible(true);
         this.setVisible(false);
+        TrayPtn.getCurrForm().setVisible(true);
         return true;
     }
     private javax.swing.JPanel pl_NoteBase;
