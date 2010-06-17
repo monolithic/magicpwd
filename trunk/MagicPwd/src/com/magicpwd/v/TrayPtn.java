@@ -303,6 +303,22 @@ public class TrayPtn extends TrayIcon implements IBackCall
     @Override
     public boolean callBack(Object sender, java.util.EventListener event, String... params)
     {
+        if (params == null || params.length != 1)
+        {
+            return false;
+        }
+
+        if ("cancel".equalsIgnoreCase(params[0]))
+        {
+            userSign = null;
+            return false;
+        }
+        if (!ConsEnv.STR_SIGN_RS.equalsIgnoreCase(params[0]))
+        {
+            return false;
+        }
+
+        javax.swing.JFrame currForm = getCurrForm();
         switch (nextPtn)
         {
             case VIEW_MAIN:
@@ -317,6 +333,8 @@ public class TrayPtn extends TrayIcon implements IBackCall
             default:
                 break;
         }
+
+        currForm.setVisible(false);
         getCurrForm().setVisible(true);
         if (getCurrForm().getState() != java.awt.Frame.NORMAL)
         {
@@ -639,20 +657,37 @@ public class TrayPtn extends TrayIcon implements IBackCall
 
     private void showViewPtn()
     {
-        // 当前窗口置前
-        if (mf_CurrForm.isVisible())
+        if (currPtn == nextPtn)
         {
-            mf_CurrForm.toFront();
+            getCurrForm().toFront();
+            return;
+        }
+        if (getCurrForm().isVisible())
+        {
+            getCurrForm().setVisible(false);
+            switch (nextPtn)
+            {
+                case VIEW_MAIN:
+                    showMainPtn();
+                    break;
+                case VIEW_NORM:
+                    showNormPtn();
+                    break;
+                case VIEW_MINI:
+                    showMiniPtn();
+                    break;
+                default:
+                    break;
+            }
+            getCurrForm().setVisible(true);
+            currPtn = nextPtn;
             return;
         }
 
-        if (userSign == null)
-        {
-            userSign = new UserSign();
-            userSign.setConfrmBackCall(this);
-            userSign.initView(ConsEnv.SIGN_RS);
-            userSign.initLang();
-        }
+        userSign = new UserSign();
+        userSign.setBackCall(this);
+        userSign.initView(ConsEnv.INT_SIGN_RS);
+        userSign.initLang();
         userSign.initData();
         userSign.toFront();
     }
