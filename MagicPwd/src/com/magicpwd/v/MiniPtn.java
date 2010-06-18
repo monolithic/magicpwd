@@ -59,7 +59,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                tf_SrchNoteActionPerformed(evt);
+                tf_NoteHeadActionPerformed(evt);
             }
         });
         tf_NoteHead.addFocusListener(new java.awt.event.FocusAdapter()
@@ -700,7 +700,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
         ta_NoteData.setLineWrap(ck_NoteWrap.isSelected());
     }
 
-    private void tf_SrchNoteActionPerformed(java.awt.event.ActionEvent evt)
+    private void tf_NoteHeadActionPerformed(java.awt.event.ActionEvent evt)
     {
         findActionPerformed(evt);
     }
