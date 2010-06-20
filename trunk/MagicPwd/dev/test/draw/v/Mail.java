@@ -39,7 +39,7 @@ public class Mail extends javax.swing.JPanel {
         tb_MailMsgs = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         ta_MailBody = new javax.swing.JTextArea();
-        load1 = new draw.v.Load();
+        load1 = new test.draw.v.Load();
 
         sp1.setDividerLocation(120);
         sp1.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
@@ -102,7 +102,7 @@ public class Mail extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private draw.v.Load load1;
+    private test.draw.v.Load load1;
     private javax.swing.JTextArea ta_MailBody;
     private javax.swing.JTable tb_MailMsgs;
     private javax.swing.JTree tr_MailBoxs;

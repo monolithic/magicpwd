@@ -38,7 +38,7 @@ public class Text extends javax.swing.JPanel {
         lb_PropEdit = new javax.swing.JLabel();
         pl_PropEdit = new javax.swing.JPanel();
         javax.swing.JRadioButton jRadioButton1 = new javax.swing.JRadioButton();
-        edit1 = new draw.b.Edit();
+        edit1 = new test.draw.b.Edit();
 
         lb_PropName.setText("属性(P)");
 
@@ -100,7 +100,7 @@ public class Text extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private draw.b.Edit edit1;
+    private test.draw.b.Edit edit1;
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JLabel lb_PropEdit;
     private javax.swing.JLabel lb_PropName;
