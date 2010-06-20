@@ -36,7 +36,7 @@ public class Area extends javax.swing.JPanel {
         lb_PropData = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         ta_PropData = new javax.swing.JTextArea();
-        edit1 = new draw.b.Edit();
+        edit1 = new test.draw.b.Edit();
 
         lb_PropName.setText("属性(P)");
 
@@ -81,7 +81,7 @@ public class Area extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private draw.b.Edit edit1;
+    private test.draw.b.Edit edit1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JLabel lb_PropName;
