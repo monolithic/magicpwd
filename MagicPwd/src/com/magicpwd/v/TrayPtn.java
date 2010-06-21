@@ -540,7 +540,15 @@ public class TrayPtn extends TrayIcon implements IBackCall
 
     private void infoItemActionPerformed(java.awt.event.ActionEvent evt)
     {
-        Lang.showMesg(null, "", "");
+        StringBuffer buf = new StringBuffer();
+        buf.append(Lang.getLang(LangRes.P30F7201, "魔方密码")).append("\n");
+        buf.append(ConsEnv.VERSIONS).append(" Build ").append(ConsEnv.BUILDER);
+        javax.swing.JFrame form = null;
+        if (getCurrForm().isVisible())
+        {
+            form = getCurrForm();
+        }
+        javax.swing.JOptionPane.showMessageDialog(form, buf.toString(), Lang.getLang(LangRes.P30F1208, "关于软件"), javax.swing.JOptionPane.INFORMATION_MESSAGE, new javax.swing.ImageIcon(Util.getLogo(32)));
     }
 
     private void helpItemActionPerformed(java.awt.event.ActionEvent evt)
@@ -586,19 +594,24 @@ public class TrayPtn extends TrayIcon implements IBackCall
 
     private void updtItemActionPerformed(java.awt.event.ActionEvent evt)
     {
+        javax.swing.JFrame form = null;
+        if (getCurrForm().isVisible())
+        {
+            form = getCurrForm();
+        }
         try
         {
             boolean b = Util.checkUpdate(ConsEnv.SOFTCODE, ConsEnv.VERSIONS);
             if (b)
             {
-                if (Lang.showFirm(null, LangRes.P30F7A12, "检测到新版本，现在要下载吗？") == javax.swing.JOptionPane.YES_OPTION)
+                if (Lang.showFirm(form, LangRes.P30F7A12, "检测到新版本，现在要下载吗？") == javax.swing.JOptionPane.YES_OPTION)
                 {
                     Desk.browse(ConsEnv.HOMEPAGE);
                 }
             }
             else
             {
-                Lang.showMesg(null, LangRes.P30F7A13, "您使用的已是最新版本。");
+                Lang.showMesg(form, LangRes.P30F7A13, "您使用的已是最新版本。");
             }
         }
         catch (Exception exp)
