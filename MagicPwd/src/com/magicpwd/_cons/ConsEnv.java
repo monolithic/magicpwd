@@ -13,7 +13,7 @@ public interface ConsEnv
     /**
      * 软件信息：当前版本
      */
-    String VERSIONS = "V3.2.5.9";
+    String VERSIONS = "V3.2.5.10";
     /**
      * 软件信息：软件代码
      */
@@ -29,12 +29,12 @@ public interface ConsEnv
     /**
      * 软件信息：构建日期
      */
-    String BUILDER = "2010-06-20";
+    String BUILDER = "2010-06-21";
     /**
      * 软件信息：软件版权
      */
     String SOFTCOPY = "© {0} MagicPwd.com";
-    String SOFTMAIL = "Amon@amonsoft.com";
+    String SOFTMAIL = "Amon@magicpwd.com";
     /**
      * 安全信息：摘要算法
      */
