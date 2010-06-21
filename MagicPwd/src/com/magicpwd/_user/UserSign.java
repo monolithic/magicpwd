@@ -531,7 +531,7 @@ public class UserSign extends javax.swing.JPanel
 
                 Lang.setWText(bt_Cancel, LangRes.P30FA504, "取消(&C)");
 
-                setTitle(Lang.getLang(LangRes.P30FA207, "配置Google Docs用户"));
+                setTitle(Lang.getLang(LangRes.P30FA20B, "配置Google Docs账户"));
 
                 lb_UsrLabel.setVisible(false);
                 break;

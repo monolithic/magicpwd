@@ -283,18 +283,20 @@ public class TrayPtn extends TrayIcon implements IBackCall
 
     public boolean initLang()
     {
-        Lang.setWText(infoItem, LangRes.P30F9601, "");
-        Lang.setWText(helpItem, LangRes.P30F9602, "");
+        normItem.setVisible(false);
 
-        Lang.setWText(mainItem, LangRes.P30F9603, "");
-        Lang.setWText(normItem, LangRes.P30F9604, "");
-        Lang.setWText(miniItem, LangRes.P30F9605, "");
+        Lang.setWText(infoItem, LangRes.P30F9601, "关于软件");
+        Lang.setWText(helpItem, LangRes.P30F9602, "使用帮助");
 
-        Lang.setWText(updtItem, LangRes.P30F9606, "");
-        Lang.setWText(mailItem, LangRes.P30F9607, "");
-        Lang.setWText(siteItem, LangRes.P30F9608, "");
+        Lang.setWText(mainItem, LangRes.P30F9603, "魔方密码");
+        Lang.setWText(normItem, LangRes.P30F9604, "迷你账簿");
+        Lang.setWText(miniItem, LangRes.P30F9605, "记事便签");
 
-        Lang.setWText(exitItem, LangRes.P30F9609, "");
+        Lang.setWText(updtItem, LangRes.P30F9606, "检测更新");
+        Lang.setWText(mailItem, LangRes.P30F9607, "联系作者");
+        Lang.setWText(siteItem, LangRes.P30F9608, "软件首页");
+
+        Lang.setWText(exitItem, LangRes.P30F9609, "退出");
 
         setToolTip(ConsEnv.SOFTNAME + ' ' + ConsEnv.VERSIONS);
         return true;
