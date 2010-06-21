@@ -1040,19 +1040,13 @@ public final class Util
 
     public static boolean checkUpdate(String sid, String ver) throws Exception
     {
-        if (sid == null)
+        if (!isValidate(sid, 8))
         {
             throw new IOException("未知软件标记信息！");
         }
-        if (ver == null)
+        if (!isValidate(ver))
         {
             throw new IOException("未知软件版本信息！");
-        }
-
-        ver = ver.toUpperCase();
-        if (ver.charAt(0) != 'V')
-        {
-            ver = 'V' + ver;
         }
 
         // 属性读取
@@ -1063,7 +1057,45 @@ public final class Util
             throw new Exception("读取软件版本信息出错！");
         }
 
-        return ver.compareToIgnoreCase(node.getText()) < 0;
+        // 新版本标记处理
+        String tmp = node.getText();
+        if (!isValidate(tmp))
+        {
+            return false;
+        }
+        tmp = tmp.toUpperCase().replaceAll("\\s+", "");
+        if (tmp.charAt(0) == 'V')
+        {
+            tmp = tmp.substring(1);
+        }
+        String[] newVer = tmp.split("\\.");
+
+        // 老版本标记处理
+        ver = ver.toUpperCase().replaceAll("\\s+", "");
+        if (ver.charAt(0) == 'V')
+        {
+            ver = ver.substring(1);
+        }
+        String[] oldVer = ver.split("\\.");
+
+        if (newVer == null || newVer.length != 4 || newVer.length != oldVer.length)
+        {
+            return false;
+        }
+
+        for (int i = 0; i < newVer.length; i += 1)
+        {
+            if (oldVer[i].length() < newVer[i].length())
+            {
+                return true;
+            }
+            if (oldVer[i].compareTo(newVer[i]) < 0)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
