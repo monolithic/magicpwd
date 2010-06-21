@@ -2,7 +2,7 @@
  * 数据库连接池管理类
  * CopyRight: MagicPwd.com
  * Homepage:http://magicpwd.com/
- * Email:Amon@amonsoft.cn
+ * Email:Amon@magicpwd.com
  */
 package com.magicpwd.d;
 
