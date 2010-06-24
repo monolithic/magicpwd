@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    Document   : card.xml
+    Created on : 2010年6月24日, 上午9:35
+    Author     : Amon
+    Description: 数据导出卡片信息格式模板。
+-->
+<?xml version="1.0" encoding="UTF-8"?>
+<magicpwd>
+    <base>
+        <name>测试卡片</name>
+        <type>htm/txt/png/*</type>
+    </base>
+    <!--txt-->
+    <card>
+        <template-uri></template-uri>
+    </card>
+    <!--htm-->
+    <card>
+        <template-uri></template-uri>
+        <template-res></template-res>
+    </card>
+    <!--png-->
+    <card>
+        <background></background>
+        <text x="" y="" color="" font-name="" font-size=""></text>
+        <image x="" y="" width="" height=""></image>
+    </card>
+</magicpwd>
