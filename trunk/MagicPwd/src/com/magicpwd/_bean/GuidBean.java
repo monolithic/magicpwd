@@ -130,17 +130,29 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         tf_PropName.setText(item.getName());
 
         String kind = itemData.getSpec(IEditItem.SPEC_GUID_TPLT);
-        if (Util.isValidate(kind))
+        boolean hash = Util.isValidateHash(kind);
+        if (!hash)
         {
-            for (Tplt tplt : UserMdl.getCboxMdl().getAllItems())
+            bt_ReadMail.setVisible(hash);
+            return;
+        }
+
+        Tplt tplt = null;
+        for (Tplt temp : UserMdl.getCboxMdl().getAllItems())
+        {
+            if (kind.equals(temp.getP30F1103()))
             {
-                if (kind.equals(tplt.getP30F1103()))
-                {
-                    cb_PropData.setSelectedItem(tplt);
-                }
+                tplt = temp;
+                cb_PropData.setSelectedItem(temp);
+                break;
             }
         }
-        bt_ReadMail.setVisible(Util.isValidate(kind));
+        if (tplt == null)
+        {
+            return;
+        }
+
+        kind = tplt.getP30F1107();
         bt_ReadMail.setEnabled(ConsDat.HASH_MAIL.equals(kind));
     }
 

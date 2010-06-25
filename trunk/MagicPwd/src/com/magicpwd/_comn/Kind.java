@@ -1,11 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.magicpwd._comn;
 
 /**
- *
+ * 属性：类别
  * @author Amon
  */
 public class Kind
