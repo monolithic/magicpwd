@@ -12,11 +12,18 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IGridView;
+import com.magicpwd._util.Card;
 import com.magicpwd._util.Lang;
+import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.m.GridMdl;
 import com.magicpwd.m.UserMdl;
+import com.magicpwd.r.FileTM;
 import com.magicpwd.v.TrayPtn;
+import java.util.regex.Pattern;
+import org.dom4j.Document;
+import org.dom4j.Node;
+import org.dom4j.io.SAXReader;
 
 /**
  * 属性：向导
@@ -30,6 +37,8 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
     private IGridView gridView;
     private EditBean dataEdit;
     private BtnLabel bt_ReadMail;
+    private BtnLabel bt_ExptCard;
+    private FileTM fileTM;
 
     public GuidBean(IGridView view)
     {
@@ -70,6 +79,19 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
             }
         });
         pl_PropEdit.add(bt_ReadMail);
+
+        bt_ExptCard = new BtnLabel();
+        bt_ExptCard.setIcon(Util.getIcon(ConsEnv.ICON_GUID_MAIL));
+        bt_ExptCard.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                exptCardActionPerformed(evt);
+            }
+        });
+        pl_PropEdit.add(bt_ExptCard);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -131,9 +153,11 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
 
         String kind = itemData.getSpec(IEditItem.SPEC_GUID_TPLT);
         boolean hash = Util.isValidateHash(kind);
+
+        bt_ReadMail.setVisible(hash);
+        bt_ExptCard.setVisible(hash);
         if (!hash)
         {
-            bt_ReadMail.setVisible(hash);
             return;
         }
 
@@ -152,8 +176,9 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
             return;
         }
 
-        kind = tplt.getP30F1107();
-        bt_ReadMail.setEnabled(ConsDat.HASH_MAIL.equals(kind));
+        kind = ' ' + tplt.getP30F1106() + ' ';
+        bt_ReadMail.setVisible(kind.indexOf(ConsDat.TEXT_MAIL) > -1);
+        bt_ExptCard.setVisible(kind.indexOf(ConsDat.TEXT_CARD) > -1);
     }
 
     @Override
@@ -201,10 +226,166 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
     {
         TrayPtn.showMailPtn();
     }
+
+    public void exptCardActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        if (fileTM == null)
+        {
+            fileTM = new FileTM("card", Pattern.compile("[^.]+[.]amc$", Pattern.CASE_INSENSITIVE), false);
+
+            pm_CardMenu = new javax.swing.JPopupMenu();
+            mu_HtmMenu = new javax.swing.JMenu("HTM");
+            mu_TxtMenu = new javax.swing.JMenu("TXT");
+            mu_PngMenu = new javax.swing.JMenu("PNG");
+            mu_SvgMenu = new javax.swing.JMenu("SVG");
+
+            al_Listener = new java.awt.event.ActionListener()
+            {
+
+                @Override
+                public void actionPerformed(java.awt.event.ActionEvent evt)
+                {
+                    cardItemActionPerformed(evt);
+                }
+            };
+        }
+        if (fileTM.checkModified())
+        {
+            pm_CardMenu.removeAll();
+
+            mu_HtmMenu.removeAll();
+            pm_CardMenu.add(mu_HtmMenu);
+
+            mu_TxtMenu.removeAll();
+            pm_CardMenu.add(mu_TxtMenu);
+
+            mu_PngMenu.removeAll();
+            pm_CardMenu.add(mu_PngMenu);
+
+            mu_SvgMenu.removeAll();
+            pm_CardMenu.add(mu_SvgMenu);
+
+            SAXReader reader = new SAXReader();
+            javax.swing.JMenuItem item;
+            for (java.io.File cardFile : fileTM.getFileList())
+            {
+                try
+                {
+                    Document doc = reader.read(cardFile);
+
+                    Node name = doc.selectSingleNode("/magicpwd/base/name");
+                    item = new javax.swing.JMenuItem();
+                    item.addActionListener(al_Listener);
+                    item.setText(name != null ? name.getText() : cardFile.getName());
+
+                    Node type = doc.selectSingleNode("/magicpwd/base/type");
+                    if (type != null)
+                    {
+                        String text = (type.getText() + "").trim().toLowerCase();
+                        if (ConsEnv.CARD_HTM.equals(text))
+                        {
+                            item.setActionCommand(ConsEnv.CARD_HTM + '/' + cardFile.getPath());
+                            mu_HtmMenu.add(item);
+                            continue;
+                        }
+                        if (ConsEnv.CARD_TXT.equals(text))
+                        {
+                            item.setActionCommand(ConsEnv.CARD_HTM + '/' + cardFile.getPath());
+                            mu_TxtMenu.add(item);
+                            continue;
+                        }
+                        if (ConsEnv.CARD_PNG.equals(text))
+                        {
+                            item.setActionCommand(ConsEnv.CARD_PNG + '/' + cardFile.getPath());
+                            mu_PngMenu.add(item);
+                            continue;
+                        }
+                        if (ConsEnv.CARD_SVG.equals(text))
+                        {
+                            item.setActionCommand(ConsEnv.CARD_SVG + '/' + cardFile.getPath());
+                            mu_SvgMenu.add(item);
+                            continue;
+                        }
+                    }
+                    item.setActionCommand(ConsEnv.CARD_ALL + '/' + cardFile.getPath());
+                    pm_CardMenu.add(item);
+                }
+                catch (Exception exp)
+                {
+                    Logs.exception(exp);
+                }
+            }
+        }
+        pm_CardMenu.show(bt_ExptCard, 0, bt_ExptCard.getPreferredSize().height);
+    }
+
+    private void cardItemActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        javax.swing.JMenuItem item = (javax.swing.JMenuItem) evt.getSource();
+        if (item == null)
+        {
+            return;
+        }
+
+        String command = item.getActionCommand();
+        if (!Util.isValidate(command))
+        {
+            return;
+        }
+
+        String[] arr = command.toLowerCase().split("/");
+        if (arr == null || arr.length != 2)
+        {
+            return;
+        }
+
+        String key = arr[0];
+        String src = arr[1];
+        if (!Util.isValidate(key) || !Util.isValidate(src))
+        {
+            return;
+        }
+        java.io.File srcFile = new java.io.File(src);
+        if (!srcFile.exists() || !srcFile.isFile() || !srcFile.canRead())
+        {
+            return;
+        }
+
+        java.io.File dstFile = null;
+
+        if (ConsEnv.CARD_HTM.equals(key))
+        {
+            Card.exportHtm(srcFile, dstFile);
+            return;
+        }
+        if (ConsEnv.CARD_TXT.equals(key))
+        {
+            Card.exportTxt(srcFile, dstFile);
+            return;
+        }
+        if (ConsEnv.CARD_PNG.equals(key))
+        {
+            Card.exportPng(srcFile, dstFile);
+            return;
+        }
+        if (ConsEnv.CARD_SVG.equals(key))
+        {
+            Card.exportSvg(srcFile, dstFile);
+            return;
+        }
+
+        Card.exportAll(srcFile, dstFile);
+    }
+    private java.awt.event.ActionListener al_Listener;
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JLabel lb_PropEdit;
     private javax.swing.JLabel lb_PropName;
     private javax.swing.JPanel pl_PropEdit;
     private javax.swing.JComboBox cb_PropData;
     private javax.swing.JTextField tf_PropName;
+    private javax.swing.JPopupMenu pm_CardMenu;
+    private javax.swing.JMenu mu_HtmMenu;
+    private javax.swing.JMenu mu_TxtMenu;
+    private javax.swing.JMenu mu_SvgMenu;
+    private javax.swing.JMenu mu_PngMenu;
 }
