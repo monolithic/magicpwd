@@ -11,8 +11,8 @@ import java.util.List;
 import com.magicpwd.m.UserMdl;
 
 /**
- * @author shangwen.yao
- * 
+ * 口令属性
+ * @author Amon
  */
 public class EditItem implements IEditItem
 {
