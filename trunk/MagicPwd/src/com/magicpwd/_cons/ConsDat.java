@@ -79,10 +79,6 @@ public interface ConsDat
      */
     String HASH_ROOT = "sctfxrczgcywxezs";
     /**
-     * 目录信息：电子邮件
-     */
-    String HASH_MAIL = "qqqqqaacbrrtyswx";
-    /**
      * 目录信息：日记节点
      */
     String HASH_NOTE = "qqqqqaavaqddvafs";
@@ -90,6 +86,14 @@ public interface ConsDat
      * 目录信息：模板节点
      */
     String HASH_TPLT = "qqqqqaacbrrtysww";
+    /**
+     * 目录信息：电子邮件
+     */
+    String TEXT_MAIL = "mail";
+    /**
+     * 目录信息：电子卡片
+     */
+    String TEXT_CARD = "card";
     /**
      * 数据分隔：模板数据起始默认标记
      * 示例：&lt;电子邮件&gt;

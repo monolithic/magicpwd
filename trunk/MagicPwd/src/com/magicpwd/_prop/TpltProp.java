@@ -112,18 +112,22 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         lb_TpltKind = new javax.swing.JLabel();
         cb_TpltKind = new javax.swing.JComboBox();
         lb_TpltName = new javax.swing.JLabel();
-        tf_TpltName = new javax.swing.JTextField();
+        tf_TpltName = new javax.swing.JTextField(16);
         lb_TpltTips = new javax.swing.JLabel();
-        tf_TpltTips = new javax.swing.JTextField();
+        tf_TpltTips = new javax.swing.JTextField(16);
         lb_TpltDesp = new javax.swing.JLabel();
-        javax.swing.JScrollPane sp_ItemDesp = new javax.swing.JScrollPane();
         ta_TpltDesp = new javax.swing.JTextArea();
+        javax.swing.JScrollPane sp_ItemDesp = new javax.swing.JScrollPane(ta_TpltDesp);
 
-        tf_TpltName.setColumns(16);
+        cb_TpltKind.addItemListener(new java.awt.event.ItemListener()
+        {
 
-        tf_TpltTips.setColumns(16);
-
-        sp_ItemDesp.setViewportView(ta_TpltDesp);
+            @Override
+            public void itemStateChanged(java.awt.event.ItemEvent evt)
+            {
+                cb_TpltKindItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_ItemInfo);
         pl_ItemInfo.setLayout(layout);
@@ -307,8 +311,8 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
     {
         Lang.setWText(lb_TpltKind, LangRes.P30F8341, "属性类型");
         Lang.setWText(lb_TpltName, LangRes.P30F8342, "属性名称");
-        Lang.setWText(lb_TpltTips, LangRes.P30F8343, "默认数据");
-        Lang.setWText(lb_TpltDesp, LangRes.P30F8344, "相关说明");
+        Lang.setWText(lb_TpltTips, LangRes.P30F8343, "类别键值");
+        Lang.setWText(lb_TpltDesp, LangRes.P30F8345, "相关说明");
     }
 
     private void initSortLang()
@@ -325,6 +329,18 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
 
     private void initBaseLang()
     {
+    }
+
+    private void cb_TpltKindItemStateChanged(java.awt.event.ItemEvent evt)
+    {
+        if (cb_TpltKind.getSelectedIndex() < 1)
+        {
+            Lang.setWText(lb_TpltTips, LangRes.P30F8343, "类别键值");
+        }
+        else
+        {
+            Lang.setWText(lb_TpltTips, LangRes.P30F8344, "默认数据");
+        }
     }
 
     private void sortUActionPerformed(java.awt.event.ActionEvent evt)

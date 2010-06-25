@@ -539,8 +539,9 @@ public interface LangRes
     /*模板管理*/
     String P30F8341 = "P30F8341";// 属性类型
     String P30F8342 = "P30F8342";// 属性名称
-    String P30F8343 = "P30F8343";// 默认数据
-    String P30F8344 = "P30F8344";// 相关说明
+    String P30F8343 = "P30F8343";// 类别键值
+    String P30F8344 = "P30F8344";// 默认数据
+    String P30F8345 = "P30F8345";// 相关说明
     /*类别管理*/
     String P30F8361 = "P30F8361";// 默认键值
     String P30F8362 = "P30F8362";// 显示名称
