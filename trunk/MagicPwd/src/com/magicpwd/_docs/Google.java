@@ -47,7 +47,7 @@ public class Google
         service = new SpreadsheetService("MagicPwd");
         service.setUserCredentials(user, pass);
         SpreadsheetEntry spreadsheet = listSpreadsheetFeed(name);
-        
+
         java.net.URL cellFeedUrl = null;
         if (spreadsheet == null)
         {
@@ -359,36 +359,4 @@ public class Google
     private final String URL_ACL = "/acl";
     private final String URL_REVISIONS = "/revisions";
     private final String URL_CATEGORY_DOCUMENT = "/-/document";
-
-    public static void main(String[] args)
-    {
-        try
-        {
-            Google gss = new Google();
-            gss.backup("Amon.CT@gmail.com", "qTrH2e3oXk", ConsEnv.FILE_SYNC, null);
-            // if (!gss.listSpreadsheet("magicpwd")) {
-            // gss.create("magicpwd", "spreadsheet");
-            // gss.listSpreadsheet("magicpwd");
-            // }
-            // if (!gss.listWorksheets("magicpwd")) {
-            // gss.createWorksheet("magicpwd", 65535, 2);
-            // gss.listWorksheets("magicpwd");
-            // }
-            //
-            // java.io.BufferedReader bis = new java.io.BufferedReader(new
-            // FileReader("F:\\Rmps\\MagicPwd\\bak\\magicpwd.amb"));
-            // String line = bis.readLine();
-            // int i = 1;
-            // while (line != null) {
-            // System.out.println(line);
-            // gss.setCell(i++, 1, line);
-            // line = bis.readLine();
-            // }
-            // bis.close();
-        }
-        catch (Exception exp)
-        {
-            exp.printStackTrace();
-        }
-    }
 }

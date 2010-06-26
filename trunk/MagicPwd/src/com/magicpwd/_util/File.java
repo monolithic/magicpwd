@@ -4,6 +4,8 @@
  */
 package com.magicpwd._util;
 
+import java.util.regex.Pattern;
+
 /**
  *
  * @author Administrator
@@ -302,5 +304,20 @@ public class File
         }
 
         return true;
+    }
+
+    public static java.io.InputStream open4Read(String uri) throws Exception
+    {
+        java.io.File file = new java.io.File(uri).getAbsoluteFile();
+        if (file.exists())
+        {
+            return file.canRead() ? new java.io.FileInputStream(file) : null;
+        }
+
+        if (!Pattern.matches("^[a-zA-z]+://[^\\s]+", uri))
+        {
+            uri = "http://" + uri;
+        }
+        return new java.net.URI(uri).toURL().openStream();
     }
 }
