@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <magicpwd>
     <base>
-        <name>33333</name>
+        <name>文本格式</name>
         <type>txt</type>
     </base>
     <card>
-        <template-uri>card/test.txt</template-uri>
+        <template-uri>card/amon.txt</template-uri>
     </card>
 </magicpwd>

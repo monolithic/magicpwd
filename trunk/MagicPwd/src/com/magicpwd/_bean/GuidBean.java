@@ -13,6 +13,7 @@ import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IGridView;
 import com.magicpwd._util.Card;
+import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
@@ -384,26 +385,33 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         {
             if (ConsEnv.CARD_HTM.equals(key))
             {
-                Card.exportHtm(srcFile, dstFile);
-                return;
+                dstFile = Card.exportHtm(srcFile, dstFile);
             }
-            if (ConsEnv.CARD_TXT.equals(key))
+            else if (ConsEnv.CARD_TXT.equals(key))
             {
-                Card.exportTxt(srcFile, dstFile);
-                return;
+                dstFile = Card.exportTxt(srcFile, dstFile);
             }
-            if (ConsEnv.CARD_PNG.equals(key))
+            else if (ConsEnv.CARD_PNG.equals(key))
             {
-                Card.exportPng(srcFile, dstFile);
-                return;
+                dstFile = Card.exportPng(srcFile, dstFile);
             }
-            if (ConsEnv.CARD_SVG.equals(key))
+            else if (ConsEnv.CARD_SVG.equals(key))
             {
-                Card.exportSvg(srcFile, dstFile);
-                return;
+                dstFile = Card.exportSvg(srcFile, dstFile);
+            }
+            else
+            {
+                dstFile = Card.exportAll(srcFile, dstFile);
             }
 
-            Card.exportAll(srcFile, dstFile);
+            if (dstFile == null || !dstFile.exists())
+            {
+                Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A46, "生成卡片文件失败，请稍后重试！");
+            }
+            else if (javax.swing.JOptionPane.YES_OPTION == Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F7A47, "生成卡片文件成功，要打开卡片文件吗？"))
+            {
+                Desk.open(dstFile);
+            }
         }
         catch (Exception ex)
         {
