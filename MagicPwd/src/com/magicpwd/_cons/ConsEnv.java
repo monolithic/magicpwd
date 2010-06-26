@@ -181,7 +181,8 @@ public interface ConsEnv
     int ICON_PROP_UPDT = ICON_PROP_COPY + 1;// 更新
     int ICON_PROP_DELT = ICON_PROP_UPDT + 1;// 删除
     int ICON_GUID_MAIL = ICON_PROP_DELT + 1;// 邮件
-    int ICON_HINT_DATE = ICON_GUID_MAIL + 1;// 提醒
+    int ICON_GUID_CARD = ICON_GUID_MAIL + 1;// 卡片
+    int ICON_HINT_DATE = ICON_GUID_CARD + 1;// 提醒
     int ICON_PWDS_HIDE = ICON_HINT_DATE + 1;// 隐藏
     int ICON_PWDS_VIEW = ICON_PWDS_HIDE + 1;// 显示
     int ICON_PWDS_GENT = ICON_PWDS_VIEW + 1;// 生成

@@ -724,6 +724,13 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
     @Override
     public void fileExitActionPerformed(java.awt.event.ActionEvent evt)
     {
+        if (UserMdl.getGridMdl().isModified() && javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(this, LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
+        {
+            return;
+        }
+        setVisible(false);
+        MagicPwd.endSave();
+        System.exit(0);
     }
 
     @Override

@@ -81,7 +81,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.add(bt_ReadMail);
 
         bt_ExptCard = new BtnLabel();
-        bt_ExptCard.setIcon(Util.getIcon(ConsEnv.ICON_GUID_MAIL));
+        bt_ExptCard.setIcon(Util.getIcon(ConsEnv.ICON_GUID_CARD));
         bt_ExptCard.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -141,6 +141,9 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
 
         Lang.setWText(bt_ReadMail, LangRes.P30F1519, "&M");
         Lang.setWTips(bt_ReadMail, LangRes.P30F151A, "检测邮件(Alt + M)");
+
+        Lang.setWText(bt_ExptCard, LangRes.P30F151D, "&C");
+        Lang.setWTips(bt_ExptCard, LangRes.P30F151E, "生成卡片(Alt + C)");
 
         dataEdit.initLang();
     }
@@ -290,7 +293,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
                         }
                         if (ConsEnv.CARD_TXT.equals(text))
                         {
-                            item.setActionCommand(ConsEnv.CARD_HTM + '/' + cardFile.getPath());
+                            item.setActionCommand(ConsEnv.CARD_TXT + '/' + cardFile.getPath());
                             mu_TxtMenu.add(item);
                             continue;
                         }
@@ -333,48 +336,80 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
             return;
         }
 
-        String[] arr = command.toLowerCase().split("/");
-        if (arr == null || arr.length != 2)
+        command = command.toLowerCase();
+        int dot = command.indexOf('/');
+        if (dot < 0)
         {
             return;
         }
 
-        String key = arr[0];
-        String src = arr[1];
+        String key = command.substring(0, dot);
+        String src = command.substring(dot + 1);
         if (!Util.isValidate(key) || !Util.isValidate(src))
         {
             return;
         }
-        java.io.File srcFile = new java.io.File(src);
+        java.io.File srcFile = new java.io.File(src).getAbsoluteFile();
         if (!srcFile.exists() || !srcFile.isFile() || !srcFile.canRead())
         {
+            Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A44, "无法读取卡片模板文件：{0}", src);
             return;
         }
 
-        java.io.File dstFile = null;
-
-        if (ConsEnv.CARD_HTM.equals(key))
+        javax.swing.JFileChooser fc = new javax.swing.JFileChooser();
+        fc.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
+        fc.setMultiSelectionEnabled(false);
+        if (fc.showOpenDialog(TrayPtn.getCurrForm()) != javax.swing.JFileChooser.APPROVE_OPTION)
         {
-            Card.exportHtm(srcFile, dstFile);
-            return;
-        }
-        if (ConsEnv.CARD_TXT.equals(key))
-        {
-            Card.exportTxt(srcFile, dstFile);
-            return;
-        }
-        if (ConsEnv.CARD_PNG.equals(key))
-        {
-            Card.exportPng(srcFile, dstFile);
-            return;
-        }
-        if (ConsEnv.CARD_SVG.equals(key))
-        {
-            Card.exportSvg(srcFile, dstFile);
             return;
         }
 
-        Card.exportAll(srcFile, dstFile);
+        java.io.File dstFile = fc.getSelectedFile();
+        if (dstFile == null)
+        {
+            Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A1B, "您选择的目录不存在！");
+            return;
+        }
+        if (!dstFile.exists())
+        {
+            dstFile.mkdirs();
+        }
+        if (!dstFile.canWrite())
+        {
+            Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A45, "无法访问您选择的路径：{0}", dstFile.getPath());
+            return;
+        }
+
+        try
+        {
+            if (ConsEnv.CARD_HTM.equals(key))
+            {
+                Card.exportHtm(srcFile, dstFile);
+                return;
+            }
+            if (ConsEnv.CARD_TXT.equals(key))
+            {
+                Card.exportTxt(srcFile, dstFile);
+                return;
+            }
+            if (ConsEnv.CARD_PNG.equals(key))
+            {
+                Card.exportPng(srcFile, dstFile);
+                return;
+            }
+            if (ConsEnv.CARD_SVG.equals(key))
+            {
+                Card.exportSvg(srcFile, dstFile);
+                return;
+            }
+
+            Card.exportAll(srcFile, dstFile);
+        }
+        catch (Exception ex)
+        {
+            Logs.exception(ex);
+            Lang.showMesg(TrayPtn.getCurrForm(), null, ex.getLocalizedMessage());
+        }
     }
     private java.awt.event.ActionListener al_Listener;
     private javax.swing.JLabel lb_PropData;

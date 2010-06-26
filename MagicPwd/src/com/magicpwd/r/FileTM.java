@@ -20,7 +20,7 @@ public class FileTM implements java.io.FileFilter
 
     public FileTM(String path, Pattern pattern, boolean hasFolder)
     {
-        this(new java.io.File(path), pattern, hasFolder);
+        this(new java.io.File(path).getAbsoluteFile(), pattern, hasFolder);
     }
 
     public FileTM(java.io.File file, Pattern pattern, boolean hasFolder)
