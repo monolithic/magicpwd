@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <magicpwd>
     <base>
-        <name>测试卡片</name>
+        <name>33333</name>
         <type>txt</type>
     </base>
+    <card>
+        <template-uri>card/test.txt</template-uri>
+    </card>
 </magicpwd>
