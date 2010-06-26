@@ -7,6 +7,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._face.IEditItem;
 import com.magicpwd.m.GridMdl;
 import com.magicpwd.m.UserMdl;
+import java.awt.Graphics2D;
 import org.dom4j.Document;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
@@ -133,6 +134,17 @@ public class Card
         writer.close();
 
         return dst;
+    }
+
+    public static void draw(Document doc)
+    {
+        Node node = doc.selectSingleNode("/magicpwd/card/background");
+        if (node != null)
+        {
+        }
+
+        node = doc.selectSingleNode("/magicpwd/card/background");
+        Graphics2D g2d;
     }
 
     private static void replace(StringBuffer buf, String src, String dst)

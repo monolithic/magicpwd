@@ -22,8 +22,14 @@
     <!--png-->
     <card>
         <background></background>
-        <text x="" y="" color="" font-name="" font-size=""></text>
-        <image x="" y="" width="" height=""></image>
+        <draw method="text" x="" y="" color="" font-name="" font-size=""></draw>
+        <draw method="image" x="" y="" width="" height=""></draw>
+        <draw method="rect" x="" y="" width="" height=""></draw>
+        <draw method="3drect" x="" y="" width="" height=""></draw>
+        <draw method="round-rect" x="" y="" width="" height=""></draw>
+        <draw method="arc" x="" y="" width="" height=""></draw>
+        <draw method="polygon" x="" y="" width="" height=""></draw>
+        <draw method="line" x="" y="" width="" height=""></draw>
     </card>
     <!--svg-->
     <card>
