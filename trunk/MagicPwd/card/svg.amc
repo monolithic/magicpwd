@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <magicpwd>
     <base>
-        <name>测试卡片</name>
+        <name>矢量格式</name>
         <type>svg</type>
     </base>
+    <card>
+        <template-uri></template-uri>
+    </card>
 </magicpwd>

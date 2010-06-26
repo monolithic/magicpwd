@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <magicpwd>
     <base>
-        <name>测试卡片</name>
+        <name>点阵格式</name>
         <type>png</type>
     </base>
+    <card>
+        <background></background>
+        <draw method="text" x="" y="" color="" font-name="" font-size=""></draw>
+        <draw method="image" x="" y="" width="" height=""></draw>
+    </card>
 </magicpwd>
