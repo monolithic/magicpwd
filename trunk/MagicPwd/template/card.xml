@@ -21,6 +21,7 @@
     </card>
     <!--png-->
     <card>
+        <size width="" height=""></size>
         <background></background>
         <draw method="text" x="" y="" color="" font-name="" font-size=""></draw>
         <draw method="image" x="" y="" width="" height=""></draw>
