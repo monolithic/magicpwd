@@ -8,7 +8,7 @@
 <magicpwd>
     <base>
         <name>测试卡片</name>
-        <type>htm/txt/png/*</type>
+        <type>htm/txt/png/svg/*</type>
     </base>
     <!--txt-->
     <card>
