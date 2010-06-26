@@ -25,4 +25,8 @@
         <text x="" y="" color="" font-name="" font-size=""></text>
         <image x="" y="" width="" height=""></image>
     </card>
+    <!--svg-->
+    <card>
+        <template-uri></template-uri>
+    </card>
 </magicpwd>
