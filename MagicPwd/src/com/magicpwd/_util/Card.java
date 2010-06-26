@@ -8,6 +8,7 @@ import com.magicpwd._face.IEditItem;
 import com.magicpwd.m.GridMdl;
 import com.magicpwd.m.UserMdl;
 import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import org.dom4j.Document;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
@@ -136,15 +137,19 @@ public class Card
         return dst;
     }
 
-    public static void draw(Document doc)
+    public static void draw(Document doc) throws Exception
     {
-        Node node = doc.selectSingleNode("/magicpwd/card/background");
+        BufferedImage image = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = image.createGraphics();
+
+        int w = 400;
+        int h = 240;
+        Node node = doc.selectSingleNode("/magicpwd/card/size");
         if (node != null)
         {
         }
 
         node = doc.selectSingleNode("/magicpwd/card/background");
-        Graphics2D g2d;
     }
 
     private static void replace(StringBuffer buf, String src, String dst)
