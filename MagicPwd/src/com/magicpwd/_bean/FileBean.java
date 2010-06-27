@@ -196,7 +196,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
         {
             new java.io.File(itemData.getSpec(EditItem.SPEC_FILE_NAME) + ConsEnv.FILE_ATTACHMENT).delete();
             UserMdl.getGridMdl().wRemove(itemData);
-            gridView.selectNext(false);
+            gridView.selectNext(0, true);
         }
         catch (Exception exp)
         {
@@ -273,7 +273,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
         itemData.setSpec(EditItem.SPEC_FILE_NAME, amaName);
         UserMdl.getGridMdl().setModified(true);
 
-        gridView.selectNext(!UserMdl.getGridMdl().isUpdate());
+        gridView.selectNext(UserMdl.getGridMdl().isUpdate() ? 0 : 1, true);
     }
 
     @Override

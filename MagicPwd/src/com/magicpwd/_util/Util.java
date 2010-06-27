@@ -538,7 +538,7 @@ public final class Util
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_H, InputEvent.CTRL_MASK), ConsEnv.EVENT_FILE_HIDE);
     }
 
-    public static void addSortAction(ActionMap actionMap, InputMap inputMap, final MenuEvt menuEvt)
+    public static void addEditAction(ActionMap actionMap, InputMap inputMap, final MenuEvt menuEvt)
     {
         actionMap.put(ConsEnv.EVENT_EDIT_PREV, new javax.swing.AbstractAction()
         {
@@ -549,7 +549,6 @@ public final class Util
                 menuEvt.editPrevActionPerformed(evt);
             }
         });
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, InputEvent.CTRL_MASK), ConsEnv.EVENT_EDIT_PREV);
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_U, InputEvent.CTRL_MASK), ConsEnv.EVENT_EDIT_PREV);
 
         actionMap.put(ConsEnv.EVENT_EDIT_NEXT, new javax.swing.AbstractAction()
@@ -561,8 +560,29 @@ public final class Util
                 menuEvt.editNextActionPerformed(evt);
             }
         });
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, InputEvent.CTRL_MASK), ConsEnv.EVENT_EDIT_NEXT);
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_MASK), ConsEnv.EVENT_EDIT_NEXT);
+
+        actionMap.put(ConsEnv.EVENT_VIEW_PREV, new javax.swing.AbstractAction()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                menuEvt.viewPrevActionPerformed(evt);
+            }
+        });
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, InputEvent.CTRL_MASK), ConsEnv.EVENT_VIEW_PREV);
+
+        actionMap.put(ConsEnv.EVENT_VIEW_NEXT, new javax.swing.AbstractAction()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                menuEvt.viewNextActionPerformed(evt);
+            }
+        });
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, InputEvent.CTRL_MASK), ConsEnv.EVENT_VIEW_NEXT);
 
         actionMap.put(ConsEnv.EVENT_EDIT_TEXT, new javax.swing.AbstractAction()
         {
@@ -678,7 +698,7 @@ public final class Util
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK), ConsEnv.EVENT_FILE_OPEN);
     }
 
-    public static void addEditAction(ActionMap actionMap, InputMap inputMap, final MenuEvt menuEvt)
+    public static void addFormAction(ActionMap actionMap, InputMap inputMap, final MenuEvt menuEvt)
     {
         actionMap.put(ConsEnv.EVENT_VIEW_TOP1, new javax.swing.AbstractAction()
         {

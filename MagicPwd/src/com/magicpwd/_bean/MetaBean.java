@@ -131,7 +131,7 @@ public class MetaBean extends javax.swing.JPanel implements IEditBean
         itemData.setData(ta_PropData.getText());
         gm.setModified(true);
 
-        gridView.selectNext(!gm.isUpdate());
+        gridView.selectNext(gm.isUpdate() ? 0 : 1, true);
     }
 
     @Override

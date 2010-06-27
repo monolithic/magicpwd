@@ -123,6 +123,16 @@ public class AreaBean extends javax.swing.JPanel implements IEditBean
     }
 
     @Override
+    public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        if (Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
+        {
+            UserMdl.getGridMdl().wRemove(itemData);
+            gridView.selectNext(0, true);
+        }
+    }
+
+    @Override
     public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
     {
         String name = tf_PropName.getText();
@@ -137,17 +147,7 @@ public class AreaBean extends javax.swing.JPanel implements IEditBean
         itemData.setData(ta_PropData.getText());
         UserMdl.getGridMdl().setModified(true);
 
-        gridView.selectNext(!UserMdl.getGridMdl().isUpdate());
-    }
-
-    @Override
-    public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        if (Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
-        {
-            UserMdl.getGridMdl().wRemove(itemData);
-            gridView.selectNext(false);
-        }
+        gridView.selectNext(UserMdl.getGridMdl().isUpdate() ? 0 : 1, true);
     }
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JLabel lb_PropName;

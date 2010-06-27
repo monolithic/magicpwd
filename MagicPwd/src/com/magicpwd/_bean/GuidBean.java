@@ -213,7 +213,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
             gm.wAppend(tplt.getP30F1103());
         }
 
-        gridView.selectNext(!gm.isUpdate());
+        gridView.selectNext(gm.isUpdate() ? 0 : 1, true);
     }
 
     @Override

@@ -155,7 +155,7 @@ public class MailBean extends javax.swing.JPanel implements IEditBean
         if (Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
         {
             UserMdl.getGridMdl().wRemove(itemData);
-            gridView.selectNext(false);
+            gridView.selectNext(0, true);
         }
     }
 
@@ -174,7 +174,7 @@ public class MailBean extends javax.swing.JPanel implements IEditBean
         itemData.setData(tf_PropData.getText());
         UserMdl.getGridMdl().setModified(true);
 
-        gridView.selectNext(!UserMdl.getGridMdl().isUpdate());
+        gridView.selectNext(UserMdl.getGridMdl().isUpdate() ? 0 : 1, true);
     }
 
     @Override

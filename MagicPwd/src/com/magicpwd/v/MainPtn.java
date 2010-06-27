@@ -140,7 +140,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
         }
 
         Util.addDataAction(pl_KeysBase.getActionMap(), pl_KeysBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
-        Util.addEditAction(pl_KeysBase.getActionMap(), pl_KeysBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
+        Util.addFormAction(pl_KeysBase.getActionMap(), pl_KeysBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
         Util.addFileAction(pl_KeysBase.getActionMap(), pl_KeysBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
         Util.addHideAction(pl_KeysBase.getActionMap(), pl_KeysBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
         Util.addViewAction(pl_KeysBase.getActionMap(), pl_KeysBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
@@ -1119,6 +1119,18 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
     }
 
     @Override
+    public void viewPrevActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        selectNext(-1, false);
+    }
+
+    @Override
+    public void viewNextActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        selectNext(1, false);
+    }
+
+    @Override
     public void viewSideActionPerformed(java.awt.event.ActionEvent evt)
     {
         boolean b = !UserMdl.getUserCfg().isEditWnd();
@@ -1245,7 +1257,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
         if (Lang.showFirm(this, LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
         {
             UserMdl.getGridMdl().wRemove(row);
-            selectNext(false);
+            selectNext(0, true);
         }
     }
 
@@ -1268,35 +1280,54 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
     }
 
     @Override
-    public void selectNext(boolean next)
+    public void selectNext(int step, boolean updt)
     {
-        int t = tb_KeysView.getRowCount() - 1;
-        if (next)
+        if (updt)
         {
-            tb_LastIndx += 1;
-            if (tb_LastIndx > t)
-            {
-                tb_LastIndx = t;
-                UserMdl.getGridMdl().fireTableDataChanged();
-            }
-            tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
-
-            IEditItem tplt = UserMdl.getGridMdl().getItemAt(tb_LastIndx);
-            showPropEdit(tplt, true);
-        }
-        else
-        {
-            if (tb_LastIndx < 0 || tb_LastIndx > t)
-            {
-                tb_LastIndx = t;
-            }
             UserMdl.getGridMdl().fireTableDataChanged();
-            tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
-            tb_KeysView.requestFocus();
         }
 
+        int c = tb_KeysView.getRowCount() - 1;
+        int n = tb_LastIndx + step;
+        if (n < 0)
+        {
+            n = 0;
+        }
+        if (n > c)
+        {
+            n = c;
+        }
+        tb_LastIndx = n;
+        tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
         Util.scrollToVisible(tb_KeysView, tb_LastIndx, 0, true);
         showPropEdit(UserMdl.getGridMdl().getItemAt(tb_LastIndx), true);
+
+//        if (updt)
+//        {
+//            tb_LastIndx += 1;
+//            if (tb_LastIndx > c)
+//            {
+//                tb_LastIndx = c;
+//                UserMdl.getGridMdl().fireTableDataChanged();
+//            }
+//            tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
+//
+//            IEditItem tplt = UserMdl.getGridMdl().getItemAt(tb_LastIndx);
+//            showPropEdit(tplt, true);
+//        }
+//        else
+//        {
+//            if (tb_LastIndx < 0 || tb_LastIndx > c)
+//            {
+//                tb_LastIndx = c;
+//            }
+//            UserMdl.getGridMdl().fireTableDataChanged();
+//            tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
+//            tb_KeysView.requestFocus();
+//        }
+//
+//        Util.scrollToVisible(tb_KeysView, tb_LastIndx, 0, true);
+//        showPropEdit(UserMdl.getGridMdl().getItemAt(tb_LastIndx), true);
     }
 
     private void initPropView()
@@ -1464,7 +1495,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
         tb_KeysView.getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         javax.swing.ActionMap actionMap = tb_KeysView.getActionMap();
         javax.swing.InputMap inputMap = tb_KeysView.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
-        Util.addSortAction(actionMap, inputMap, this);
+        Util.addEditAction(actionMap, inputMap, this);
         // 添加快捷键
         actionMap.put(ConsEnv.EVENT_EDIT_GUID, new javax.swing.AbstractAction()
         {

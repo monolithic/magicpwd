@@ -1,6 +1,5 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * 
  */
 package com.magicpwd._bean;
 
@@ -140,7 +139,7 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean, IBackCall
 //        }
         itemData.setData(ta_PropData.getText());
         UserMdl.getGridMdl().setModified(true);
-        gridView.selectNext(!UserMdl.getGridMdl().isUpdate());
+        gridView.selectNext(UserMdl.getGridMdl().isUpdate() ? 0 : 1, true);
     }
 
     @Override
