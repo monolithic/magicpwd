@@ -22,15 +22,21 @@
     <!--png-->
     <card>
         <size width="" height=""></size>
-        <background></background>
-        <draw method="text" x="" y="" color="" font-name="" font-size=""></draw>
-        <draw method="image" x="" y="" width="" height=""></draw>
-        <draw method="rect" x="" y="" width="" height=""></draw>
-        <draw method="3drect" x="" y="" width="" height=""></draw>
-        <draw method="round-rect" x="" y="" width="" height=""></draw>
-        <draw method="arc" x="" y="" width="" height=""></draw>
-        <draw method="polygon" x="" y="" width="" height=""></draw>
-        <draw method="line" x="" y="" width="" height=""></draw>
+        <background type="repeat/stretch/fixed"></background>
+        <!--
+        说明：
+            1、坐标及长宽均以像素为单位；
+            2、字体风格：0表示正常，1表示粗体，2表示斜体，3表示粗斜休；
+            3、draw元素中除method属性必需外，其它均可省略；
+        -->
+        <draw method="text" x="1" y="1" color="#0000FF" font-name="Dialog" font-size="12" font-style="0">固定文本 #可替换文本#</draw>
+        <draw method="image" x="1" y="1" width="16" height="16" />
+        <draw method="line" x1="1" y1="1" x2="100" y2="1" color="#FF0000" />
+        <draw method="rect" x="1" y="1" width="" height="" color="" border-width="" border-color="" />
+        <draw method="round-rect" x="" y="" width="" height="" />
+        <draw method="arc" x="" y="" width="" height="" />
+        <draw method="polygon" x="" y="" width="" height="" />
+        <draw method="3drect" x="" y="" width="" height="" />
     </card>
     <!--svg-->
     <card>

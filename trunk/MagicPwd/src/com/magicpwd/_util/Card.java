@@ -7,9 +7,18 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._face.IEditItem;
 import com.magicpwd.m.GridMdl;
 import com.magicpwd.m.UserMdl;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Paint;
 import java.awt.image.BufferedImage;
+import java.util.List;
+import java.util.regex.Pattern;
+import javax.imageio.ImageIO;
 import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
@@ -66,9 +75,11 @@ public class Card
         return text(text, dst, ".txt");
     }
 
-    public static java.io.File exportPng(java.io.File src, java.io.File dst)
+    public static java.io.File exportPng(java.io.File src, java.io.File dst) throws Exception
     {
-        return null;
+        java.io.InputStream stream = new java.io.FileInputStream(src);
+        StringBuffer buffer = trim(stream);
+        return draw(DocumentHelper.parseText(buffer.toString()), dst);
     }
 
     public static java.io.File exportSvg(java.io.File src, java.io.File dst) throws Exception
@@ -93,14 +104,8 @@ public class Card
         return null;
     }
 
-    private static java.io.File text(String src, java.io.File dst, String ext) throws Exception
+    private static StringBuffer trim(java.io.InputStream stream) throws Exception
     {
-        java.io.InputStream stream = File.open4Read(src);
-        if (stream == null)
-        {
-            return null;
-        }
-
         java.io.InputStreamReader reader = new java.io.InputStreamReader(stream);
 
         StringBuffer buffer = new StringBuffer();
@@ -116,17 +121,31 @@ public class Card
         stream.close();
 
         GridMdl gm = UserMdl.getGridMdl();
-        IEditItem item = gm.getItemAt(ConsEnv.PWDS_HEAD_META);
-        dst = new java.io.File(dst, item.getName() + ext);
-        if (!dst.exists())
-        {
-            dst.createNewFile();
-        }
-
+        IEditItem item;
         for (int i = ConsEnv.PWDS_HEAD_SIZE, j = gm.getRowCount(); i < j; i += 1)
         {
             item = gm.getItemAt(i);
             replace(buffer, '#' + item.getName() + '#', item.getData());
+        }
+
+        return buffer;
+    }
+
+    private static java.io.File text(String src, java.io.File dst, String ext) throws Exception
+    {
+        java.io.InputStream stream = File.open4Read(src);
+        if (stream == null)
+        {
+            return null;
+        }
+
+        StringBuffer buffer = trim(stream);
+
+        IEditItem item = UserMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_META);
+        dst = new java.io.File(dst, item.getName() + ext);
+        if (!dst.exists())
+        {
+            dst.createNewFile();
         }
 
         java.io.BufferedWriter writer = new java.io.BufferedWriter(new java.io.FileWriter(dst));
@@ -137,19 +156,174 @@ public class Card
         return dst;
     }
 
-    public static void draw(Document doc) throws Exception
+    private static java.io.File draw(Document doc, java.io.File dst) throws Exception
     {
-        BufferedImage image = new BufferedImage(10, 10, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2d = image.createGraphics();
-
         int w = 400;
         int h = 240;
         Node node = doc.selectSingleNode("/magicpwd/card/size");
         if (node != null)
         {
+            w = getInteger(node, "width", w);
+            h = getInteger(node, "height", h);
         }
 
+        BufferedImage image = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = image.createGraphics();
+
         node = doc.selectSingleNode("/magicpwd/card/background");
+        String text;
+        if (node != null)
+        {
+            text = node.getText();
+            if (Util.isValidate(text))
+            {
+                BufferedImage img = ImageIO.read(File.open4Read(text));
+                text = getString(node, "type", "stretch");
+                g2d.drawImage(img, 0, 0, w, h, null);
+            }
+        }
+
+        List list = doc.selectNodes("/magicpwd/card/draw");
+        if (list != null)
+        {
+            for (int i = 0, j = list.size(); i < j; i += 1)
+            {
+                node = (Node) list.get(i);
+                text = getString(node, "method", "").toLowerCase();
+                if (!Util.isValidate(text))
+                {
+                    continue;
+                }
+                if ("text".equals(text))
+                {
+                    drawString(node, g2d);
+                    continue;
+                }
+                if ("image".equals(text))
+                {
+                    drawImage(node, g2d);
+                    continue;
+                }
+                if ("line".equals(text))
+                {
+                    drawLine(node, g2d);
+                    continue;
+                }
+                if ("rect".equals(text))
+                {
+                    drawRect(node, g2d);
+                    continue;
+                }
+                if ("round-rect".equals(text))
+                {
+                    drawRoundRect(node, g2d);
+                    continue;
+                }
+                if ("arc".equals(text))
+                {
+                    drawArc(node, g2d);
+                    continue;
+                }
+                if ("polygon".equals(text))
+                {
+                    continue;
+                }
+                if ("3drect".equals(text))
+                {
+                    continue;
+                }
+            }
+        }
+
+        IEditItem item = UserMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_META);
+        dst = new java.io.File(dst, item.getName() + ".png");
+        if (!dst.exists())
+        {
+            dst.createNewFile();
+        }
+
+        ImageIO.write(image, "png", dst);
+
+        return dst;
+    }
+
+    private static void drawString(Node node, Graphics2D g2d) throws Exception
+    {
+        if (node == null)
+        {
+            return;
+        }
+        String text = node.getText();
+        if (!Util.isValidate(text))
+        {
+            return;
+        }
+
+        g2d.setFont(getFont(node));
+        g2d.setPaint(getPaint(node));
+        g2d.drawString(text, getInteger(node, "x", 0), getInteger(node, "y", 0));
+    }
+
+    private static void drawImage(Node node, Graphics2D g2d) throws Exception
+    {
+        if (node == null)
+        {
+            return;
+        }
+        String text = node.getText();
+        if (!Util.isValidate(text))
+        {
+            return;
+        }
+
+        BufferedImage img = ImageIO.read(File.open4Read(text));
+        g2d.drawImage(img, getInteger(node, "x", 0), getInteger(node, "y", 0), getInteger(node, "width", img.getWidth()), getInteger(node, "height", img.getHeight()), null);
+    }
+
+    private static void drawLine(Node node, Graphics2D g2d)
+    {
+        if (node == null)
+        {
+            return;
+        }
+
+        g2d.setPaint(getPaint(node));
+        g2d.drawLine(getInteger(node, "x1", 0), getInteger(node, "y1", 0), getInteger(node, "x2", 0), getInteger(node, "y2", 0));
+    }
+
+    private static void drawRect(Node node, Graphics2D g2d)
+    {
+        if (node == null)
+        {
+            return;
+        }
+
+        int x = getInteger(node, "x", 0);
+        int y = getInteger(node, "y", 0);
+        int w = getInteger(node, "width", 2);
+        int h = getInteger(node, "height", 2);
+        Color c = getColor(node, "color", null);
+        if (c != null)
+        {
+            g2d.setPaint(c);
+            g2d.fillRect(x, y, w, h);
+        }
+
+        g2d.setPaint(getColor(node, "border-color", Color.black));
+        g2d.setStroke(new BasicStroke(getInteger(node, "border-width", 1)));
+        g2d.drawRect(x, y, w, h);
+    }
+
+    private static void drawRoundRect(Node node, Graphics2D g2d)
+    {
+    }
+
+    private static void drawArc(Node node, Graphics2D g2d)
+    {
+    }
+
+    private static void drawPolygon(Node node, Graphics2D g2d)
+    {
     }
 
     private static void replace(StringBuffer buf, String src, String dst)
@@ -161,5 +335,73 @@ public class Card
             buf.replace(i, i + k, dst);
             i = buf.indexOf(src, i + k);
         }
+    }
+
+    private static int getInteger(Node node, String prop, int dval)
+    {
+        int v = dval;
+        if (node != null)
+        {
+            if (node instanceof Element)
+            {
+                Element element = (Element) node;
+                prop = (element.attributeValue(prop) + "").trim();
+                if (Pattern.matches("^\\d+$", prop))
+                {
+                    v = Integer.parseInt(prop);
+                }
+            }
+        }
+        return v;
+    }
+
+    private static String getString(Node node, String prop, String dval)
+    {
+        String t = dval;
+        if (node != null)
+        {
+            if (node instanceof Element)
+            {
+                Element element = (Element) node;
+                prop = element.attributeValue(prop);
+                if (Util.isValidate(prop))
+                {
+                    t = prop;
+                }
+            }
+        }
+        return t;
+    }
+
+    private static Color getColor(Node node, String prop, Color dval)
+    {
+        Color t = dval;
+        if (node != null)
+        {
+            if (node instanceof Element)
+            {
+                Element element = (Element) node;
+                prop = (element.attributeValue(prop) + "").toLowerCase();
+                if (Pattern.matches("^[#]?[0123456789abcdef]{6}$", prop));
+                {
+                    if (prop.charAt(0) == '#')
+                    {
+                        prop = prop.substring(1);
+                    }
+                    t = new Color(Integer.parseInt(prop, 16));
+                }
+            }
+        }
+        return t;
+    }
+
+    public static Paint getPaint(Node node)
+    {
+        return getColor(node, "color", Color.black);
+    }
+
+    private static Font getFont(Node node)
+    {
+        return new Font(getString(node, "font-name", "Dialog"), getInteger(node, "font-style", 0), getInteger(node, "font-size", 12));
     }
 }
