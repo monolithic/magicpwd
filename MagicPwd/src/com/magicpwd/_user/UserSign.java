@@ -60,8 +60,6 @@ public class UserSign extends javax.swing.JPanel
 
     public boolean initView(int type)
     {
-        this.errCount = 0;
-
         if (type == signType)
         {
             return true;
@@ -546,6 +544,8 @@ public class UserSign extends javax.swing.JPanel
 
     public boolean initData()
     {
+        this.errCount = 0;
+
         switch (signType)
         {
             case ConsEnv.INT_SIGN_IN:
