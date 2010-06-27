@@ -9,6 +9,6 @@
         <draw method="text" x="10" y="20" color="FF0000" font-name="行楷" font-size="16">#姓##名#</draw>
         <draw method="image" x="30" y="30" width="" height="">http://magicpwd.com/logo/logo20.png</draw>
         <draw method="line" x1="40" y1="40" x2="160" y2="40" color="#0000ff"></draw>
-        <draw method="rect" x="1" y="1" width="200" height="100" color="dddddd" border-width="5" border-color="123456" />
+        <draw method="rect" x="1" y="1" width="200" height="100" border-width="5" border-color="abcdef" />
     </card>
 </magicpwd>

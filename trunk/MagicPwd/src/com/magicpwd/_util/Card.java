@@ -382,7 +382,7 @@ public class Card
             {
                 Element element = (Element) node;
                 prop = (element.attributeValue(prop) + "").toLowerCase();
-                if (Pattern.matches("^[#]?[0123456789abcdef]{6}$", prop));
+                if (Pattern.matches("^[#]?[0123456789abcdef]{6}$", prop))
                 {
                     if (prop.charAt(0) == '#')
                     {
