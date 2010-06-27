@@ -4,10 +4,11 @@
 package com.magicpwd._face;
 
 /**
- * @author shangwen.yao
+ * @author Amon
  * 
  */
 public interface IGridView
 {
-    void selectNext(boolean next);
+
+    void selectNext(int step, boolean updt);
 }

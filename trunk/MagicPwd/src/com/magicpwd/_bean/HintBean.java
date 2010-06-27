@@ -223,7 +223,7 @@ public class HintBean extends javax.swing.JPanel implements IEditBean
         itemData.setName(name);
         itemData.setData(data);
         UserMdl.getGridMdl().setModified(true);
-        gridView.selectNext(!UserMdl.getGridMdl().isUpdate());
+        gridView.selectNext(UserMdl.getGridMdl().isUpdate() ? 0 : 1, true);
     }
 
     @Override

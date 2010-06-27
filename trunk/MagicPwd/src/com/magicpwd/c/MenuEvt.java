@@ -72,6 +72,10 @@ public interface MenuEvt
 
     void viewInfoActionPerformed(java.awt.event.ActionEvent evt);
 
+    void viewPrevActionPerformed(java.awt.event.ActionEvent evt);
+
+    void viewNextActionPerformed(java.awt.event.ActionEvent evt);
+
     void dataImptActionPerformed(java.awt.event.ActionEvent evt);
 
     void dataExptActionPerformed(java.awt.event.ActionEvent evt);

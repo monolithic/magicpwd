@@ -501,6 +501,7 @@ public class GridMdl extends DefaultTableModel
 
         IEditItem p = ls_ItemList.remove(row);
         ls_ItemList.add(to, p);
+        modified = true;
     }
 
     public final StringBuffer deCrypt(PwdsItem pwds) throws Exception

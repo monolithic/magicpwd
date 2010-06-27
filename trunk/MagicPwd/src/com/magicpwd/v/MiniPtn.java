@@ -241,7 +241,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
     public void initData()
     {
         noteList = new java.util.ArrayList<S1S2>();
-        Util.addEditAction(pl_NoteBase.getActionMap(), pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
+        Util.addFormAction(pl_NoteBase.getActionMap(), pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
         Util.addFileAction(pl_NoteBase.getActionMap(), pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
         Util.addHideAction(pl_NoteBase.getActionMap(), pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
     }
@@ -575,6 +575,16 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
 
     @Override
     public void viewInfoActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    }
+
+    @Override
+    public void viewPrevActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    }
+
+    @Override
+    public void viewNextActionPerformed(java.awt.event.ActionEvent evt)
     {
     }
 
