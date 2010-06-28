@@ -233,6 +233,12 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
 
     public void exptCardActionPerformed(java.awt.event.ActionEvent evt)
     {
+        if (processing)
+        {
+            return;
+        }
+
+        processing = true;
         if (fileTM == null)
         {
             fileTM = new FileTM("card", Pattern.compile("[^.]+[.]amc$", Pattern.CASE_INSENSITIVE), false);
@@ -316,11 +322,16 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
                 }
                 catch (Exception exp)
                 {
+                    processing = false;
                     Logs.exception(exp);
+                    Lang.showMesg(TrayPtn.getCurrForm(), null, exp.getLocalizedMessage());
+                    return;
                 }
             }
         }
         pm_CardMenu.show(bt_ExptCard, 0, bt_ExptCard.getPreferredSize().height);
+
+        processing = false;
     }
 
     private void cardItemActionPerformed(java.awt.event.ActionEvent evt)
@@ -337,14 +348,13 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
             return;
         }
 
-        command = command.toLowerCase();
         int dot = command.indexOf('/');
         if (dot < 0)
         {
             return;
         }
 
-        String key = command.substring(0, dot);
+        String key = command.substring(0, dot).toLowerCase();
         String src = command.substring(dot + 1);
         if (!Util.isValidate(key) || !Util.isValidate(src))
         {
@@ -419,6 +429,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
             Lang.showMesg(TrayPtn.getCurrForm(), null, ex.getLocalizedMessage());
         }
     }
+    private boolean processing;
     private java.awt.event.ActionListener al_Listener;
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JLabel lb_PropEdit;

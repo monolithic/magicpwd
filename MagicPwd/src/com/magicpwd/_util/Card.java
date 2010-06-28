@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Paint;
+import java.awt.Polygon;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -174,12 +175,51 @@ public class Card
         String text;
         if (node != null)
         {
-            text = node.getText();
+            Color paint = getColor(node, "color", null);
+            if (paint != null)
+            {
+                g2d.setPaint(paint);
+                g2d.fillRect(0, 0, w, h);
+            }
+
+            text = getString(node, "image", "");
             if (Util.isValidate(text))
             {
                 BufferedImage img = ImageIO.read(File.open4Read(text));
                 text = getString(node, "type", "stretch");
-                g2d.drawImage(img, 0, 0, w, h, null);
+                if ("stretch".equalsIgnoreCase(text))
+                {
+                    g2d.drawImage(img, 0, 0, w, h, null);
+                }
+                else if ("scale".equalsIgnoreCase(text))
+                {
+                    int w1 = img.getWidth();
+                    int h1 = img.getHeight();
+                    double dw = w / (double) w1;
+                    double dh = h / (double) h1;
+                    double d = dw < dh ? dw : dh;
+                    w1 *= d;
+                    h1 *= d;
+                    g2d.drawImage(img, (w - w1) >> 1, (h - h1) >> 1, w1, h1, null);
+                }
+                else if ("fixed".equalsIgnoreCase(text))
+                {
+                    int w1 = img.getWidth();
+                    int h1 = img.getHeight();
+                    g2d.drawImage(img, (w - w1) >> 1, (h - h1) >> 1, w1, h1, null);
+                }
+                else if ("repeat".equalsIgnoreCase(text))
+                {
+                    int w1 = img.getWidth();
+                    int h1 = img.getHeight();
+                    for (int y1 = 0; y1 < h; y1 += h1)
+                    {
+                        for (int x1 = 0; x1 < w; x1 += w1)
+                        {
+                            g2d.drawImage(img, x1, y1, w1, h1, null);
+                        }
+                    }
+                }
             }
         }
 
@@ -226,10 +266,7 @@ public class Card
                 }
                 if ("polygon".equals(text))
                 {
-                    continue;
-                }
-                if ("3drect".equals(text))
-                {
+                    drawPolygon(node, g2d);
                     continue;
                 }
             }
@@ -316,14 +353,91 @@ public class Card
 
     private static void drawRoundRect(Node node, Graphics2D g2d)
     {
+        if (node == null)
+        {
+            return;
+        }
+
+        int x = getInteger(node, "x", 0);
+        int y = getInteger(node, "y", 0);
+        int w = getInteger(node, "width", 2);
+        int h = getInteger(node, "height", 2);
+        int aw = getInteger(node, "arc-width", 1);
+        int ah = getInteger(node, "arc-height", 1);
+        Color c = getColor(node, "color", null);
+        if (c != null)
+        {
+            g2d.setPaint(c);
+            g2d.fillRoundRect(x, y, w, h, aw, ah);
+        }
+
+        g2d.setPaint(getColor(node, "border-color", Color.black));
+        g2d.setStroke(new BasicStroke(getInteger(node, "border-width", 1)));
+        g2d.drawRoundRect(x, y, w, h, aw, ah);
     }
 
     private static void drawArc(Node node, Graphics2D g2d)
     {
+        if (node == null)
+        {
+            return;
+        }
+
+        int x = getInteger(node, "x", 0);
+        int y = getInteger(node, "y", 0);
+        int w = getInteger(node, "width", 2);
+        int h = getInteger(node, "height", 2);
+        int sa = getInteger(node, "start-angle", 1);
+        int aa = getInteger(node, "arc-angle", 1);
+        Color c = getColor(node, "color", null);
+        if (c != null)
+        {
+            g2d.setPaint(c);
+            g2d.fillArc(x, y, w, h, sa, aa);
+        }
+
+        g2d.setPaint(getColor(node, "border-color", Color.black));
+        g2d.setStroke(new BasicStroke(getInteger(node, "border-width", 1)));
+        g2d.drawArc(x, y, w, h, sa, aa);
     }
 
     private static void drawPolygon(Node node, Graphics2D g2d)
     {
+        if (node == null)
+        {
+            return;
+        }
+
+        String sx = getString(node, "x-array", "");
+        String sy = getString(node, "y-array", "");
+        if (!Util.isValidate(sx) || !Util.isValidate(sy))
+        {
+            return;
+        }
+
+        String[] ax = sx.split("[^\\d]");
+        String[] ay = sy.split("[^\\d]");
+        if (ax == null || ay == null || ax.length < 1 || ax.length != ay.length)
+        {
+            return;
+        }
+
+        Polygon p = new Polygon();
+        for (int i = 0; i < ax.length; i += 1)
+        {
+            p.addPoint(Integer.parseInt(ax[i]), Integer.parseInt(ay[i]));
+        }
+
+        Color c = getColor(node, "color", null);
+        if (c != null)
+        {
+            g2d.setPaint(c);
+            g2d.fillPolygon(p);
+        }
+
+        g2d.setPaint(getColor(node, "border-color", Color.black));
+        g2d.setStroke(new BasicStroke(getInteger(node, "border-width", 1)));
+        g2d.drawPolygon(p);
     }
 
     private static void replace(StringBuffer buf, String src, String dst)
