@@ -32,11 +32,11 @@
         -->
         <draw method="text" x="1" y="1" color="#0000FF" font-name="Dialog" font-size="12" font-style="0">固定文本 #可替换文本#</draw>
         <draw method="image" x="1" y="1" width="16" height="16" />
-        <draw method="line" x1="1" y1="1" x2="100" y2="1" color="#FF0000" />
-        <draw method="rect" x="1" y="1" width="" height="" color="" border-width="" border-color="" />
-        <draw method="round-rect" x="1" y="1" width="" height="" arc-width="" arc-height="" color="" border-width="" border-color="" />
-        <draw method="arc" x="1" y="1" width="1" height="1" start-angle="0" arc-angle="0" color="" border-width="" border-color="" />
-        <draw method="polygon" x-array="1,2,3,4" y-array="1,1,1,1" color="" border-width="" border-color="" />
+        <draw method="line" x1="1" y1="1" x2="100" y2="1" width="2" color="#FF0000" />
+        <draw method="rect" x="1" y="1" width="" height="" color="" border-color="" border-width="" />
+        <draw method="round-rect" x="1" y="1" width="" height="" arc-width="" arc-height="" color="" border-color="" border-width="" />
+        <draw method="arc" x="1" y="1" width="1" height="1" start-angle="0" arc-angle="0" color="" border-color="" border-width="" />
+        <draw method="polygon" x-array="1,2,3,4" y-array="1,1,1,1" color="" border-color="" border-width="" />
     </card>
     <!--svg-->
     <card>

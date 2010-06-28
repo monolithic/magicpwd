@@ -325,6 +325,7 @@ public class Card
         }
 
         g2d.setPaint(getPaint(node));
+        g2d.setStroke(new BasicStroke(getInteger(node, "width", 1)));
         g2d.drawLine(getInteger(node, "x1", 0), getInteger(node, "y1", 0), getInteger(node, "x2", 0), getInteger(node, "y2", 0));
     }
 

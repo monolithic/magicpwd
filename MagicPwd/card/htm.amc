@@ -6,6 +6,6 @@
     </base>
     <card>
         <template-uri>card/amon.htm</template-uri>
-        <template-res></template-res>
+        <template-res>card/amon</template-res>
     </card>
 </magicpwd>
