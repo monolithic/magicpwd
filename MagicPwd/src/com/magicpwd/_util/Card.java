@@ -41,7 +41,8 @@ public class Card
             text = node.getText();
             if (Util.isValidate(text))
             {
-                File.copy(new java.io.File(text), dst, true);
+                java.io.File tmp = new java.io.File(text);
+                File.copy(tmp, new java.io.File(dst, tmp.getName()), true);
             }
         }
 

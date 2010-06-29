@@ -64,6 +64,7 @@ public class File
         {
             if (srcFile.isDirectory())
             {
+                //dstFile = new java.io.File(dstFile, srcFile.getName());
                 dstFile.mkdirs();
             }
             else if (srcFile.isFile())
