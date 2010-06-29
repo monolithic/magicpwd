@@ -348,9 +348,13 @@ public class Card
             g2d.fillRect(x, y, w, h);
         }
 
-        g2d.setPaint(getColor(node, "border-color", Color.black));
-        g2d.setStroke(new BasicStroke(getInteger(node, "border-width", 1)));
-        g2d.drawRect(x, y, w, h);
+        c = getColor(node, "border-color", null);
+        if (c != null)
+        {
+            g2d.setPaint(c);
+            g2d.setStroke(new BasicStroke(getInteger(node, "border-width", 1)));
+            g2d.drawRect(x, y, w, h);
+        }
     }
 
     private static void drawRoundRect(Node node, Graphics2D g2d)
@@ -373,9 +377,13 @@ public class Card
             g2d.fillRoundRect(x, y, w, h, aw, ah);
         }
 
-        g2d.setPaint(getColor(node, "border-color", Color.black));
-        g2d.setStroke(new BasicStroke(getInteger(node, "border-width", 1)));
-        g2d.drawRoundRect(x, y, w, h, aw, ah);
+        c = getColor(node, "border-color", null);
+        if (c != null)
+        {
+            g2d.setPaint(c);
+            g2d.setStroke(new BasicStroke(getInteger(node, "border-width", 1)));
+            g2d.drawRoundRect(x, y, w, h, aw, ah);
+        }
     }
 
     private static void drawArc(Node node, Graphics2D g2d)
@@ -398,9 +406,13 @@ public class Card
             g2d.fillArc(x, y, w, h, sa, aa);
         }
 
-        g2d.setPaint(getColor(node, "border-color", Color.black));
-        g2d.setStroke(new BasicStroke(getInteger(node, "border-width", 1)));
-        g2d.drawArc(x, y, w, h, sa, aa);
+        c = getColor(node, "border-color", null);
+        if (c != null)
+        {
+            g2d.setPaint(c);
+            g2d.setStroke(new BasicStroke(getInteger(node, "border-width", 1)));
+            g2d.drawArc(x, y, w, h, sa, aa);
+        }
     }
 
     private static void drawPolygon(Node node, Graphics2D g2d)
@@ -437,9 +449,13 @@ public class Card
             g2d.fillPolygon(p);
         }
 
-        g2d.setPaint(getColor(node, "border-color", Color.black));
-        g2d.setStroke(new BasicStroke(getInteger(node, "border-width", 1)));
-        g2d.drawPolygon(p);
+        c = getColor(node, "border-color", null);
+        if (c != null)
+        {
+            g2d.setPaint(c);
+            g2d.setStroke(new BasicStroke(getInteger(node, "border-width", 1)));
+            g2d.drawPolygon(p);
+        }
     }
 
     private static void replace(StringBuffer buf, String src, String dst)
