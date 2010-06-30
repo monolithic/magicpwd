@@ -75,13 +75,17 @@ public interface ConsCfg
      */
     String CFG_VIEW_FIND = CFG_VIEW + ".find";
     /**
-     * 界面配置：是否显示编辑板块
+     * 界面配置：
      */
     String CFG_VIEW_EDIT = CFG_VIEW + ".edit";
     /**
+     * 界面配置：是否显示编辑板块
+     */
+    String CFG_VIEW_EDIT_VIW = CFG_VIEW_EDIT + ".viw";
+    /**
      * 界面配置：编辑板块显示风格
      */
-    String CFG_VIEW_EDIT_WND = CFG_VIEW + ".edit.wnd";
+    String CFG_VIEW_EDIT_WND = CFG_VIEW_EDIT + ".wnd";
     /**
      * 界面配置：口令列表显示风格
      */
