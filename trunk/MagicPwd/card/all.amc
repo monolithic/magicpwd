@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <magicpwd>
     <base>
-        <name>测试卡片</name>
+        <name>其它格式</name>
+        <type>*</type>
     </base>
+    <card>
+        <template-uri>card/amon.htm</template-uri>
+        <template-res>card/amon</template-res>
+    </card>
 </magicpwd>
