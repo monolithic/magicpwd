@@ -21,7 +21,7 @@
     </card>
     <!--png-->
     <card>
-        <size width="" height=""></size>
+        <size width="400" height="240"></size>
         <background color="#FFFFFF" image="" type="repeat/stretch/scale/fixed"></background>
         <!--
         说明：

@@ -101,9 +101,41 @@ public class Card
         return text(text, dst, ".svg");
     }
 
-    public static java.io.File exportAll(java.io.File src, java.io.File dst)
+    public static java.io.File exportAll(java.io.File src, java.io.File dst) throws Exception
     {
-        return null;
+        Document doc = new SAXReader().read(src);
+
+        Node node = doc.selectSingleNode("/magicpwd/card/template-res");
+        String text;
+        if (node != null)
+        {
+            text = node.getText();
+            if (Util.isValidate(text))
+            {
+                java.io.File tmp = new java.io.File(text);
+                File.copy(tmp, new java.io.File(dst, tmp.getName()), true);
+            }
+        }
+
+        node = doc.selectSingleNode("/magicpwd/card/template-uri");
+        if (node == null)
+        {
+            return null;
+        }
+        text = node.getText();
+        if (!Util.isValidate(text))
+        {
+            return null;
+        }
+
+        int si = text.lastIndexOf('/');
+        int di = text.lastIndexOf('.');
+        String ext = "";
+        if (di > si)
+        {
+            ext = text.substring(di);
+        }
+        return text(text, dst, ext);
     }
 
     private static StringBuffer trim(java.io.InputStream stream) throws Exception
