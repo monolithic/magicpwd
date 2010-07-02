@@ -13,6 +13,7 @@ import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.Paint;
 import java.awt.Polygon;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -203,6 +204,8 @@ public class Card
 
         BufferedImage image = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = image.createGraphics();
+        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
         node = doc.selectSingleNode("/magicpwd/card/background");
         String text;
