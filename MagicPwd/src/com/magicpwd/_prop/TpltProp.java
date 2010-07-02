@@ -439,7 +439,12 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
             return;
         }
 
-        if (indx != 0)
+        String tips = tf_TpltTips.getText();
+        if (indx == 0)
+        {
+            tips = tips.replaceAll("[^\\w]+", " ").trim();
+        }
+        else
         {
             if (!name.startsWith(ConsDat.SP_TPL_LS))
             {
@@ -458,7 +463,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
 
         currTplt.setP30F1102(indx);
         currTplt.setP30F1105(name);
-        currTplt.setP30F1106(tf_TpltTips.getText());
+        currTplt.setP30F1106(tips);
         currTplt.setP30F1107(ta_TpltDesp.getText());
 
         if (isUpdate)
