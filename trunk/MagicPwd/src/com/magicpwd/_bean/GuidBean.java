@@ -387,7 +387,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         }
         if (!dstFile.canWrite())
         {
-            Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A45, "无法访问您选择的路径：{0}", dstFile.getPath());
+            Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A45, "您不具有保存文件到{0}的权限！", dstFile.getPath());
             return;
         }
 
