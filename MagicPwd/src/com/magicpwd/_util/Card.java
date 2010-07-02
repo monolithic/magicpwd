@@ -195,11 +195,17 @@ public class Card
     {
         int w = 400;
         int h = 240;
-        Node node = doc.selectSingleNode("/magicpwd/card/size");
+        Color c = null;
+        String p = "";
+        String s = "";
+        Node node = doc.selectSingleNode("/magicpwd/card/base");
         if (node != null)
         {
             w = getInteger(node, "width", w);
             h = getInteger(node, "height", h);
+            c = getColor(node, "background-color", null);
+            p = getString(node, "background-image", "");
+            s = getString(node, "background-image-style", "stretch");
         }
 
         BufferedImage image = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
@@ -207,58 +213,51 @@ public class Card
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        node = doc.selectSingleNode("/magicpwd/card/background");
-        String text;
-        if (node != null)
+        if (c != null)
         {
-            Color paint = getColor(node, "color", null);
-            if (paint != null)
-            {
-                g2d.setPaint(paint);
-                g2d.fillRect(0, 0, w, h);
-            }
+            g2d.setPaint(c);
+            g2d.fillRect(0, 0, w, h);
+        }
 
-            text = getString(node, "image", "");
-            if (Util.isValidate(text))
+        if (Util.isValidate(p))
+        {
+            BufferedImage img = ImageIO.read(File.open4Read(p));
+            if ("stretch".equalsIgnoreCase(s))
             {
-                BufferedImage img = ImageIO.read(File.open4Read(text));
-                text = getString(node, "type", "stretch");
-                if ("stretch".equalsIgnoreCase(text))
+                g2d.drawImage(img, 0, 0, w, h, null);
+            }
+            else if ("scale".equalsIgnoreCase(s))
+            {
+                int w1 = img.getWidth();
+                int h1 = img.getHeight();
+                double dw = w / (double) w1;
+                double dh = h / (double) h1;
+                double d = dw < dh ? dw : dh;
+                w1 *= d;
+                h1 *= d;
+                g2d.drawImage(img, (w - w1) >> 1, (h - h1) >> 1, w1, h1, null);
+            }
+            else if ("fixed".equalsIgnoreCase(s))
+            {
+                int w1 = img.getWidth();
+                int h1 = img.getHeight();
+                g2d.drawImage(img, (w - w1) >> 1, (h - h1) >> 1, w1, h1, null);
+            }
+            else if ("repeat".equalsIgnoreCase(s))
+            {
+                int w1 = img.getWidth();
+                int h1 = img.getHeight();
+                for (int y1 = 0; y1 < h; y1 += h1)
                 {
-                    g2d.drawImage(img, 0, 0, w, h, null);
-                }
-                else if ("scale".equalsIgnoreCase(text))
-                {
-                    int w1 = img.getWidth();
-                    int h1 = img.getHeight();
-                    double dw = w / (double) w1;
-                    double dh = h / (double) h1;
-                    double d = dw < dh ? dw : dh;
-                    w1 *= d;
-                    h1 *= d;
-                    g2d.drawImage(img, (w - w1) >> 1, (h - h1) >> 1, w1, h1, null);
-                }
-                else if ("fixed".equalsIgnoreCase(text))
-                {
-                    int w1 = img.getWidth();
-                    int h1 = img.getHeight();
-                    g2d.drawImage(img, (w - w1) >> 1, (h - h1) >> 1, w1, h1, null);
-                }
-                else if ("repeat".equalsIgnoreCase(text))
-                {
-                    int w1 = img.getWidth();
-                    int h1 = img.getHeight();
-                    for (int y1 = 0; y1 < h; y1 += h1)
+                    for (int x1 = 0; x1 < w; x1 += w1)
                     {
-                        for (int x1 = 0; x1 < w; x1 += w1)
-                        {
-                            g2d.drawImage(img, x1, y1, w1, h1, null);
-                        }
+                        g2d.drawImage(img, x1, y1, w1, h1, null);
                     }
                 }
             }
         }
 
+        String text;
         List list = doc.selectNodes("/magicpwd/card/draw");
         if (list != null)
         {

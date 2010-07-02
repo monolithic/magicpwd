@@ -21,8 +21,7 @@
     </card>
     <!--png-->
     <card>
-        <size width="400" height="240"></size>
-        <background color="#FFFFFF" image="" type="repeat/stretch/scale/fixed"></background>
+        <base width="400" height="240" background-color="#FFFFFF" background-image="demo.png" background-image-style="repeat/stretch/scale/fixed" />
         <!--
         说明：
             1、坐标及长宽均以像素为单位；
