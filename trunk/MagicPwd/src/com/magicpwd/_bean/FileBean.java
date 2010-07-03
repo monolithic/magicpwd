@@ -347,7 +347,10 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
             java.io.File srcFile = new java.io.File(amaPath, itemData.getSpec(IEditItem.SPEC_FILE_NAME) + ConsEnv.FILE_ATTACHMENT);
             java.io.File tmpFile = new java.io.File(tmpPath, itemData.getData());
             Keys.doCrypt(UserMdl.getDCipher(), srcFile, tmpFile);
-            Desk.open(tmpFile);
+            if (!Desk.open(tmpFile))
+            {
+                Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F1A03, "打开文件错误，请尝试手动方式查看！");
+            }
         }
         catch (Exception exp)
         {

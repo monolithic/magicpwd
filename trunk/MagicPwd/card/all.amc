@@ -5,7 +5,6 @@
         <type>*</type>
     </base>
     <card>
-        <template-uri>card/amon.htm</template-uri>
-        <template-res>card/amon</template-res>
+        <template-uri>card/amon.csv</template-uri>
     </card>
 </magicpwd>

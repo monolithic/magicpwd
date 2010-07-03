@@ -420,7 +420,10 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
             }
             else if (javax.swing.JOptionPane.YES_OPTION == Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F7A47, "生成卡片文件成功，要打开卡片文件吗？"))
             {
-                Desk.open(dstFile);
+                if (!Desk.open(dstFile))
+                {
+                    Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F1A03, "打开文件错误，请尝试手动方式查看！");
+                }
             }
         }
         catch (Exception ex)
