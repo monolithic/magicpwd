@@ -11,11 +11,20 @@
  */
 package com.magicpwd._util;
 
-import java.net.*;
-import java.io.*;
-import java.util.*;
-import java.awt.*;
-import java.awt.image.*;
+import java.awt.AlphaComposite;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class GifDecoder - Decodes a GIF file into one or more frames. <br>
@@ -55,45 +64,45 @@ public class Jgif
      * File read status: Unable to open source.
      */
     public static final int STATUS_OPEN_ERROR = 2;
-    protected BufferedInputStream in;
-    protected int status;
-    protected int width; // full image width
-    protected int height; // full image height
-    protected boolean gctFlag; // global color table used
-    protected int gctSize; // size of global color table
-    protected int loopCount = 1; // iterations; 0 = repeat forever
-    protected int[] gct; // global color table
-    protected int[] lct; // local color table
-    protected int[] act; // active color table
-    protected int bgIndex; // background color index
-    protected int bgColor; // background color
-    protected int lastBgColor; // previous bg color
-    protected int pixelAspect; // pixel aspect ratio
-    protected boolean lctFlag; // local color table flag
-    protected boolean interlace; // interlace flag
-    protected int lctSize; // local color table size
-    protected int ix, iy, iw, ih; // current image rectangle
-    protected Rectangle lastRect; // last image rect
-    protected BufferedImage image; // current frame
-    protected BufferedImage lastImage; // previous frame
-    protected byte[] block = new byte[256]; // current data block
-    protected int blockSize = 0; // block size
+    private BufferedInputStream in;
+    private int status;
+    private int width; // full image width
+    private int height; // full image height
+    private boolean gctFlag; // global color table used
+    private int gctSize; // size of global color table
+    private int loopCount = 1; // iterations; 0 = repeat forever
+    private int[] gct; // global color table
+    private int[] lct; // local color table
+    private int[] act; // active color table
+    private int bgIndex; // background color index
+    private int bgColor; // background color
+    private int lastBgColor; // previous bg color
+    private int pixelAspect; // pixel aspect ratio
+    private boolean lctFlag; // local color table flag
+    private boolean interlace; // interlace flag
+    private int lctSize; // local color table size
+    private int ix, iy, iw, ih; // current image rectangle
+    private Rectangle lastRect; // last image rect
+    private BufferedImage image; // current frame
+    private BufferedImage lastImage; // previous frame
+    private byte[] block = new byte[256]; // current data block
+    private int blockSize = 0; // block size
     // last graphic control extension info
-    protected int dispose = 0;
+    private int dispose = 0;
     // 0=no action; 1=leave in place; 2=restore to bg; 3=restore to prev
-    protected int lastDispose = 0;
-    protected boolean transparency = false; // use transparent color
-    protected int delay = 0; // delay in milliseconds
-    protected int transIndex; // transparent color index
-    protected static final int MaxStackSize = 4096;
+    private int lastDispose = 0;
+    private boolean transparency = false; // use transparent color
+    private int delay = 0; // delay in milliseconds
+    private int transIndex; // transparent color index
+    private static final int MaxStackSize = 4096;
     // max decoder pixel stack size
     // LZW decoder working arrays
-    protected short[] prefix;
-    protected byte[] suffix;
-    protected byte[] pixelStack;
-    protected byte[] pixels;
-    protected ArrayList frames; // frames read from current file
-    protected int frameCount;
+    private short[] prefix;
+    private byte[] suffix;
+    private byte[] pixelStack;
+    private byte[] pixels;
+    private List<GifFrame> frames; // frames read from current file
+    private int frameCount;
 
     static class GifFrame
     {
@@ -120,7 +129,7 @@ public class Jgif
         delay = -1;
         if ((n >= 0) && (n < frameCount))
         {
-            delay = ((GifFrame) frames.get(n)).delay;
+            delay = frames.get(n).delay;
         }
         return delay;
     }
@@ -274,7 +283,7 @@ public class Jgif
         BufferedImage im = null;
         if ((n >= 0) && (n < frameCount))
         {
-            im = ((GifFrame) frames.get(n)).image;
+            im = frames.get(n).image;
         }
         return im;
     }
@@ -542,7 +551,7 @@ public class Jgif
     {
         status = STATUS_OK;
         frameCount = 0;
-        frames = new ArrayList();
+        frames = new ArrayList<GifFrame>();
         gct = null;
         lct = null;
     }
