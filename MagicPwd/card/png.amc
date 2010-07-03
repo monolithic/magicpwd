@@ -6,7 +6,7 @@
     </base>
     <card>
         <base width="400" height="240" background-color="#00ffff" background-image="card/amon/line.png" background-image-style="repeat" />
-        <draw method="image" x="15" y="15" width="" height="">http://magicpwd.com/logo/logo20.png</draw>
+        <draw method="image" x="15" y="15" width="" height="">http://magicpwd.com/logo/corp/logo64.png</draw>
         <draw method="text" x="55" y="32" font-name="宋体" font-size="20" font-style="1">#公司#</draw>
         <draw method="text" x="55" y="45" color="#000000" font-name="宋体" font-size="12" font-style="0">#Corporation#</draw>
         <draw method="text" x="160" y="105" color="#000000" font-name="黑体" font-size="32" font-style="1">#姓##名#</draw>
