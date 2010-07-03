@@ -5,6 +5,6 @@
         <type>svg</type>
     </base>
     <card>
-        <template-uri></template-uri>
+        <template-uri>card/amon.svg</template-uri>
     </card>
 </magicpwd>
