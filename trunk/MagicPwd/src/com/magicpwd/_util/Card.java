@@ -141,7 +141,7 @@ public class Card
 
     private static StringBuffer trim(java.io.InputStream stream) throws Exception
     {
-        java.io.InputStreamReader reader = new java.io.InputStreamReader(stream);
+        java.io.InputStreamReader reader = new java.io.InputStreamReader(stream, ConsEnv.FILE_ENCODING);
 
         StringBuffer buffer = new StringBuffer();
         char[] buf = new char[1024];
@@ -183,7 +183,7 @@ public class Card
             dst.createNewFile();
         }
 
-        java.io.BufferedWriter writer = new java.io.BufferedWriter(new java.io.FileWriter(dst));
+        java.io.PrintWriter writer = new java.io.PrintWriter(dst, ConsEnv.FILE_ENCODING);
         writer.write(buffer.toString());
         writer.flush();
         writer.close();
