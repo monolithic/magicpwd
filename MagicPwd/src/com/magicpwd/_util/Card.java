@@ -155,6 +155,8 @@ public class Card
         reader.close();
         stream.close();
 
+        System.out.println(buffer.toString());
+
         GridMdl gm = UserMdl.getGridMdl();
         IEditItem item;
         for (int i = ConsEnv.PWDS_HEAD_SIZE, j = gm.getRowCount(); i < j; i += 1)
