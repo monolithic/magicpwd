@@ -14,7 +14,9 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.m.GridMdl;
+import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.UserMdl;
+import java.awt.AWTException;
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
 import java.util.List;
@@ -100,14 +102,50 @@ public class TrayPtn extends TrayIcon implements IBackCall
             };
         }
 
+        java.awt.event.MouseListener ml = new java.awt.event.MouseAdapter()
+        {
+
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                if (evt.isPopupTrigger())
+                {
+                    showJPopupMenu(evt);
+                }
+                else
+                {
+                    showLastActionPerformed(evt);
+                }
+            }
+
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                if (evt.isPopupTrigger())
+                {
+                    showJPopupMenu(evt);
+                }
+            }
+
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent evt)
+            {
+                if (evt.isPopupTrigger())
+                {
+                    showJPopupMenu(evt);
+                }
+            }
+        };
+
+        isOsTray = ConsCfg.DEF_TRAY.equalsIgnoreCase(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_TRAY, "guid")) && SystemTray.isSupported();
         //检查当前系统是否支持系统托盘
-        if (SystemTray.isSupported())
+        if (isOsTray)
         {
             try
             {
                 //获取表示桌面托盘区的 SystemTray 实例。
                 SystemTray.getSystemTray().add(this);
-                isOsTray = true;
+                addMouseListener(ml);
             }
             catch (Exception exp)
             {
@@ -115,44 +153,18 @@ public class TrayPtn extends TrayIcon implements IBackCall
                 isOsTray = false;
             }
         }
-        else
-        {
-            isOsTray = false;
-        }
 
-        java.awt.event.MouseListener ml = new java.awt.event.MouseAdapter()
-        {
+        javax.swing.JLabel iconLbl = new javax.swing.JLabel();
+        iconLbl.setIcon(new javax.swing.ImageIcon(Util.getLogo(24)));
+        iconLbl.addMouseListener(ml);
+        iconLbl.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.darkGray));
+        md_TrayForm.getContentPane().setLayout(new java.awt.BorderLayout());
+        md_TrayForm.getContentPane().add(iconLbl);
+        md_TrayForm.pack();
 
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                showLastActionPerformed(evt);
-            }
-
-            @Override
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
-                showJPopupMenu(evt);
-            }
-        };
-        if (isOsTray)
-        {
-            addMouseListener(ml);
-        }
-        else
-        {
-            javax.swing.JLabel iconLbl = new javax.swing.JLabel();
-            iconLbl.setIcon(Util.getIcon(0));
-            iconLbl.addMouseListener(ml);
-            iconLbl.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.darkGray));
-            md_TrayForm.getContentPane().setLayout(new java.awt.BorderLayout());
-            md_TrayForm.getContentPane().add(iconLbl);
-            md_TrayForm.pack();
-
-            java.awt.Dimension size = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-            md_TrayForm.setLocation(size.width - 120 - md_TrayForm.getWidth(), 80);
-            md_TrayForm.setVisible(true);
-        }
+        java.awt.Dimension size = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        md_TrayForm.setLocation(size.width - 120 - md_TrayForm.getWidth(), 80);
+        md_TrayForm.setVisible(!isOsTray);
 
         trayMenu = new javax.swing.JPopupMenu();
 
@@ -179,6 +191,20 @@ public class TrayPtn extends TrayIcon implements IBackCall
             }
         });
         trayMenu.add(helpItem);
+
+        trayMenu.addSeparator();
+
+        viewItem = new javax.swing.JMenuItem();
+        viewItem.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                viewItemActionPerformed(evt);
+            }
+        });
+        trayMenu.add(viewItem);
 
         trayMenu.addSeparator();
 
@@ -287,6 +313,8 @@ public class TrayPtn extends TrayIcon implements IBackCall
 
         Lang.setWText(infoItem, LangRes.P30F9601, "关于软件");
         Lang.setWText(helpItem, LangRes.P30F9602, "使用帮助");
+
+        Lang.setWText(viewItem, LangRes.P30F960A, "显示为托盘图标");
 
         Lang.setWText(mainItem, LangRes.P30F9603, "魔方密码");
         Lang.setWText(normItem, LangRes.P30F9604, "迷你账簿");
@@ -506,7 +534,7 @@ public class TrayPtn extends TrayIcon implements IBackCall
 
     private void showJPopupMenu(java.awt.event.MouseEvent evt)
     {
-        if (!evt.isPopupTrigger() || trayMenu == null)
+        if (trayMenu == null)
         {
             return;
         }
@@ -540,7 +568,7 @@ public class TrayPtn extends TrayIcon implements IBackCall
 
     private void infoItemActionPerformed(java.awt.event.ActionEvent evt)
     {
-        StringBuffer buf = new StringBuffer();
+        StringBuilder buf = new StringBuilder();
         buf.append(Lang.getLang(LangRes.P30F7201, "魔方密码")).append("\n");
         buf.append(ConsEnv.VERSIONS).append(" Build ").append(ConsEnv.BUILDER);
         javax.swing.JFrame form = null;
@@ -571,6 +599,35 @@ public class TrayPtn extends TrayIcon implements IBackCall
         catch (java.io.IOException exp)
         {
             Logs.exception(exp);
+        }
+    }
+
+    private void viewItemActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        System.out.println("OK");
+        UserCfg uc = UserMdl.getUserCfg();
+        // 显示为导航罗盘
+        if (ConsCfg.DEF_TRAY.equalsIgnoreCase(uc.getCfg(ConsCfg.CFG_TRAY, "guid")))
+        {
+            md_TrayForm.setVisible(true);
+            SystemTray.getSystemTray().remove(this);
+            Lang.setWText(viewItem, LangRes.P30F960A, "显示为托盘图标");
+            uc.setCfg(ConsCfg.CFG_TRAY, "guid");
+        }
+        // 显示为托盘图标
+        else
+        {
+            try
+            {
+                SystemTray.getSystemTray().add(this);
+                md_TrayForm.setVisible(false);
+                Lang.setWText(viewItem, LangRes.P30F960B, "显示为导航罗盘");
+                uc.setCfg(ConsCfg.CFG_TRAY, "icon");
+            }
+            catch (AWTException ex)
+            {
+                Logs.exception(ex);
+            }
         }
     }
 
@@ -760,6 +817,7 @@ public class TrayPtn extends TrayIcon implements IBackCall
     private javax.swing.JMenuItem normItem;
     private javax.swing.JMenuItem miniItem;
     private javax.swing.JMenuItem exitItem;
+    private javax.swing.JMenuItem viewItem;
     private static MiniPtn mp_MiniPtn;
     private static NormPtn mp_NormPtn;
     private static MainPtn mp_MainPtn;

@@ -45,7 +45,6 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
         bt_SrchNote = new BtnLabel();
         javax.swing.JScrollPane sp_NoteData = new javax.swing.JScrollPane();
         ta_NoteData = new javax.swing.JTextArea();
-        bt_ExitNote = new BtnLabel();
         ck_NoteWrap = new javax.swing.JCheckBox();
         pl_NoteInfo = new javax.swing.JPanel();
         lb_NoteInfo = new javax.swing.JLabel();
@@ -118,17 +117,6 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
 
         sp_NoteData.setViewportView(ta_NoteData);
 
-        bt_ExitNote.setIcon(Util.getIcon(ConsEnv.ICON_SOFT_EXIT));
-        bt_ExitNote.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                bt_ExitNoteActionPerformed(evt);
-            }
-        });
-
         ck_NoteWrap.addChangeListener(new javax.swing.event.ChangeListener()
         {
 
@@ -173,8 +161,6 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
         hsg2.addComponent(pl_NoteInfo, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE);
         hsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg2.addComponent(ck_NoteWrap);
-        hsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg2.addComponent(bt_ExitNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
         hpg.addGroup(hsg1);
         hpg.addComponent(sp_NoteData, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE);
@@ -193,7 +179,6 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
         vpg1.addComponent(bt_SrchNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         vpg1.addComponent(tf_NoteHead, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER);
-        vpg2.addComponent(bt_ExitNote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         vpg2.addComponent(ck_NoteWrap, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         vpg2.addComponent(pl_NoteInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
@@ -232,10 +217,6 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
 
         Lang.setWText(bt_CrteNote, LangRes.P30F5507, "&N");
         Lang.setWTips(bt_CrteNote, LangRes.P30F5508, "新建(Alt + N)");
-
-        Lang.setWText(bt_ExitNote, LangRes.P30F5509, "&X");
-        Lang.setWTips(bt_ExitNote, LangRes.P30F550A, "退出(Alt + X)");
-
     }
 
     public void initData()
@@ -750,7 +731,6 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
     private javax.swing.JLabel lb_NoteInfo;
     private javax.swing.JTextArea ta_NoteData;
     private javax.swing.JTextField tf_NoteHead;
-    private BtnLabel bt_ExitNote;
     private BtnLabel bt_CrteNote;
     private BtnLabel bt_OpenNote;
     private BtnLabel bt_SaveNote;
