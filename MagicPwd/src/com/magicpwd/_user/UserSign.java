@@ -9,6 +9,8 @@ import com.magicpwd._util.Util;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.u.DBU3000;
 import com.magicpwd.v.TrayPtn;
+import java.awt.Color;
+import javax.imageio.ImageIO;
 
 public class UserSign extends javax.swing.JPanel
 {
@@ -30,6 +32,10 @@ public class UserSign extends javax.swing.JPanel
      * 成功回调函数
      */
     private com.magicpwd._face.IBackCall backCall;
+    /**
+     * 导航图标
+     */
+    private static javax.swing.Icon guidIcon;
 
     /**
      * 独立窗口
@@ -140,7 +146,7 @@ public class UserSign extends javax.swing.JPanel
         hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg1.addComponent(bt_Cancel);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg1.addComponent(pl_GuidPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hpg1.addComponent(pl_GuidPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         hpg1.addComponent(pl_InfoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         hpg1.addComponent(pl_SafePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         hpg1.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hsg1);
@@ -177,6 +183,24 @@ public class UserSign extends javax.swing.JPanel
             return;
         }
         pl_GuidPane = new javax.swing.JPanel();
+
+        lb_GuidIcon = new javax.swing.JLabel();
+        pl_GuidPane.add(java.awt.BorderLayout.CENTER, lb_GuidIcon);
+
+        try
+        {
+            java.io.InputStream stream = this.getClass().getResourceAsStream("/res/icon/guid.png");
+            guidIcon = new javax.swing.ImageIcon(ImageIO.read(stream));
+            stream.close();
+            lb_GuidIcon.setIcon(guidIcon);
+        }
+        catch (Exception ex)
+        {
+            Logs.exception(ex);
+        }
+
+        lb_GuidIcon.setOpaque(true);
+        lb_GuidIcon.setBackground(Color.yellow);
     }
 
     private void initInfoView()
@@ -419,7 +443,7 @@ public class UserSign extends javax.swing.JPanel
 
     public boolean initLang()
     {
-        pl_GuidPane.setVisible(false);
+        //pl_GuidPane.setVisible(false);
 
         switch (signType)
         {
@@ -702,6 +726,10 @@ public class UserSign extends javax.swing.JPanel
             default:
                 break;
         }
+        pl_GuidPane.setOpaque(true);
+        pl_GuidPane.setBackground(Color.yellow);
+        System.out.println(pl_GuidPane.getSize());
+        System.out.println(pl_GuidPane.getPreferredSize());
     }
 
     private void tf_UserNameActionPerformed(java.awt.event.ActionEvent evt)
@@ -1185,6 +1213,7 @@ public class UserSign extends javax.swing.JPanel
     private javax.swing.JButton bt_Confrm;
     private javax.swing.JLabel lb_UsrLabel;
     private javax.swing.JLabel lb_KeyLabel;
+    private javax.swing.JLabel lb_GuidIcon;
     private javax.swing.JPanel pl_GuidPane;
     private javax.swing.JPanel pl_InfoPane;
     private javax.swing.JPanel pl_SafePane;
