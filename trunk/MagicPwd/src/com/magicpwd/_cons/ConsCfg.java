@@ -107,6 +107,10 @@ public interface ConsCfg
      */
     String CFG_SKIN = CFG_PRE + ".skin";
     /**
+     * 系统托盘显示方式
+     */
+    String CFG_TRAY = CFG_PRE + ".tray";
+    /**
      * 
      */
     String CFG_PWDS = CFG_PRE + ".pwds";
@@ -150,6 +154,7 @@ public interface ConsCfg
      * 默认风格：系统风格
      */
     String DEF_SKIN = "System";
+    String DEF_TRAY = "icon";
     /**
      * 默认数据：剪贴板数据保留时长
      */
