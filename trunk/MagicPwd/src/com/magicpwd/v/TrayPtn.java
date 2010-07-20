@@ -17,6 +17,7 @@ import com.magicpwd.m.GridMdl;
 import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.UserMdl;
 import java.awt.AWTException;
+import java.awt.Point;
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
 import java.util.List;
@@ -32,6 +33,7 @@ public class TrayPtn extends TrayIcon implements IBackCall
     private static boolean isOsTray;
     private static int currPtn;
     private static int nextPtn;
+    private static Point trayLoc;
     private static MailDlg mailDlg;
     private static TrayPtn trayPtn;
     private static UserSign userSign;
@@ -74,10 +76,11 @@ public class TrayPtn extends TrayIcon implements IBackCall
 //                @Override
 //                public void windowDeactivated(java.awt.event.WindowEvent evt)
 //                {
-//                      dialog.setVisible(false);
+//                      md_TrayForm.setVisible(false);
 //                }
 //            });
         }
+
         if (listener == null)
         {
             listener = new javax.swing.event.PopupMenuListener()
@@ -137,7 +140,7 @@ public class TrayPtn extends TrayIcon implements IBackCall
             }
         };
 
-        isOsTray = ConsCfg.DEF_TRAY.equalsIgnoreCase(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_TRAY, "guid")) && SystemTray.isSupported();
+        isOsTray = ConsCfg.DEF_TRAY.equalsIgnoreCase(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_TRAY_PTN, "guid")) && SystemTray.isSupported();
         //检查当前系统是否支持系统托盘
         if (isOsTray)
         {
@@ -160,11 +163,6 @@ public class TrayPtn extends TrayIcon implements IBackCall
         iconLbl.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.darkGray));
         md_TrayForm.getContentPane().setLayout(new java.awt.BorderLayout());
         md_TrayForm.getContentPane().add(iconLbl);
-        md_TrayForm.pack();
-
-        java.awt.Dimension size = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        md_TrayForm.setLocation(size.width - 120 - md_TrayForm.getWidth(), 80);
-        md_TrayForm.setVisible(!isOsTray);
 
         trayMenu = new javax.swing.JPopupMenu();
 
@@ -304,6 +302,8 @@ public class TrayPtn extends TrayIcon implements IBackCall
 
     public boolean initData()
     {
+        changeView();
+
         return true;
     }
 
@@ -604,31 +604,7 @@ public class TrayPtn extends TrayIcon implements IBackCall
 
     private void viewItemActionPerformed(java.awt.event.ActionEvent evt)
     {
-        System.out.println("OK");
-        UserCfg uc = UserMdl.getUserCfg();
-        // 显示为导航罗盘
-        if (ConsCfg.DEF_TRAY.equalsIgnoreCase(uc.getCfg(ConsCfg.CFG_TRAY, "guid")))
-        {
-            md_TrayForm.setVisible(true);
-            SystemTray.getSystemTray().remove(this);
-            Lang.setWText(viewItem, LangRes.P30F960A, "显示为托盘图标");
-            uc.setCfg(ConsCfg.CFG_TRAY, "guid");
-        }
-        // 显示为托盘图标
-        else
-        {
-            try
-            {
-                SystemTray.getSystemTray().add(this);
-                md_TrayForm.setVisible(false);
-                Lang.setWText(viewItem, LangRes.P30F960B, "显示为导航罗盘");
-                uc.setCfg(ConsCfg.CFG_TRAY, "icon");
-            }
-            catch (AWTException ex)
-            {
-                Logs.exception(ex);
-            }
-        }
+        changeView();
     }
 
     private void mainItemActionPerformed(java.awt.event.ActionEvent evt)
@@ -761,6 +737,43 @@ public class TrayPtn extends TrayIcon implements IBackCall
         }
         userSign.initData();
         userSign.toFront();
+    }
+
+    private void changeView()
+    {
+        UserCfg uc = UserMdl.getUserCfg();
+        // 显示为导航罗盘
+        if (ConsCfg.DEF_TRAY.equalsIgnoreCase(uc.getCfg(ConsCfg.CFG_TRAY_PTN, "guid")))
+        {
+            md_TrayForm.pack();
+            SystemTray.getSystemTray().remove(this);
+            Lang.setWText(viewItem, LangRes.P30F960A, "显示为托盘图标");
+            uc.setCfg(ConsCfg.CFG_TRAY_PTN, "guid");
+        }
+        // 显示为托盘图标
+        else
+        {
+            try
+            {
+                SystemTray.getSystemTray().add(this);
+                md_TrayForm.setSize(0, 0);
+                Lang.setWText(viewItem, LangRes.P30F960B, "显示为导航罗盘");
+                uc.setCfg(ConsCfg.CFG_TRAY_PTN, "icon");
+            }
+            catch (AWTException ex)
+            {
+                Logs.exception(ex);
+            }
+        }
+
+        if (trayLoc == null)
+        {
+            java.awt.Dimension size = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+            trayLoc = new Point(size.width - 120 - md_TrayForm.getWidth(), 80);
+            md_TrayForm.setLocation(trayLoc);
+        }
+
+        md_TrayForm.setVisible(!isOsTray);
     }
 
     public static void changeSkin(String lafClass)
