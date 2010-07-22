@@ -611,21 +611,6 @@ public class UserSign extends javax.swing.JPanel
                 break;
         }
 
-        java.awt.Window window = frame != null ? frame : (dialog != null ? dialog : null);
-        if (window == null)
-        {
-            return false;
-        }
-
-        window.pack();
-        if (!window.isVisible())
-        {
-            java.awt.Dimension windowsize = window.getSize();
-            java.awt.Dimension screensize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-            window.setLocation((screensize.width - windowsize.width) >> 1, (screensize.height - windowsize.height) >> 1);
-            window.setVisible(true);
-        }
-
         if (jpng == null)
         {
             jpng = new Jpng();
@@ -640,6 +625,21 @@ public class UserSign extends javax.swing.JPanel
             {
                 Logs.exception(exp);
             }
+        }
+
+        java.awt.Window window = frame != null ? frame : (dialog != null ? dialog : null);
+        if (window == null)
+        {
+            return false;
+        }
+
+        window.pack();
+        if (!window.isVisible())
+        {
+            java.awt.Dimension windowsize = window.getSize();
+            java.awt.Dimension screensize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+            window.setLocation((screensize.width - windowsize.width) >> 1, (screensize.height - windowsize.height) >> 1);
+            window.setVisible(true);
         }
         return true;
     }
