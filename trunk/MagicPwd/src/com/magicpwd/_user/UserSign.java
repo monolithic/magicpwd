@@ -3,13 +3,13 @@ package com.magicpwd._user;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._util.Jpng;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.u.DBU3000;
 import com.magicpwd.v.TrayPtn;
-import java.awt.Color;
 import javax.imageio.ImageIO;
 
 public class UserSign extends javax.swing.JPanel
@@ -23,6 +23,7 @@ public class UserSign extends javax.swing.JPanel
      * 登录错误次数
      */
     private int errCount;
+    private Jpng jpng;
     /**
      * 
      */
@@ -138,23 +139,33 @@ public class UserSign extends javax.swing.JPanel
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
-        hsg1.addComponent(lb_UsrLabel);
-        hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg1.addComponent(lb_KeyLabel);
-        hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE);
-        hsg1.addComponent(bt_Confrm);
-        hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg1.addComponent(bt_Cancel);
+        hsg1.addContainerGap();
+        hsg1.addComponent(pl_InfoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        hsg1.addContainerGap();
+        javax.swing.GroupLayout.SequentialGroup hsg2 = layout.createSequentialGroup();
+        hsg2.addContainerGap();
+        hsg2.addComponent(pl_SafePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        hsg2.addContainerGap();
+        javax.swing.GroupLayout.SequentialGroup hsg3 = layout.createSequentialGroup();
+        hsg3.addContainerGap();
+        hsg3.addComponent(lb_UsrLabel);
+        hsg3.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg3.addComponent(lb_KeyLabel);
+        hsg3.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE);
+        hsg3.addComponent(bt_Confrm);
+        hsg3.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg3.addComponent(bt_Cancel);
+        hsg3.addContainerGap();
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg1.addComponent(pl_GuidPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-        hpg1.addComponent(pl_InfoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-        hpg1.addComponent(pl_SafePane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-        hpg1.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hsg1);
-        javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
-        hsg.addContainerGap();
-        hsg.addGroup(hpg1);
-        hsg.addContainerGap();
-        layout.setHorizontalGroup(hsg);
+        hpg1.addGroup(hsg1);
+        hpg1.addGroup(hsg2);
+        hpg1.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hsg3);
+//        javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
+//        hsg.addContainerGap();
+//        hsg.addGroup(hpg1);
+//        hsg.addContainerGap();
+        layout.setHorizontalGroup(hpg1);
 
         javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg1.addComponent(bt_Cancel);
@@ -162,7 +173,7 @@ public class UserSign extends javax.swing.JPanel
         vpg1.addComponent(lb_KeyLabel);
         vpg1.addComponent(lb_UsrLabel);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
-        vsg.addContainerGap();
+        //vsg.addContainerGap();
         vsg.addComponent(pl_GuidPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addComponent(pl_InfoPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
@@ -183,6 +194,9 @@ public class UserSign extends javax.swing.JPanel
             return;
         }
         pl_GuidPane = new javax.swing.JPanel();
+        pl_GuidPane.setOpaque(true);
+        pl_GuidPane.setBackground(java.awt.Color.white);
+        pl_GuidPane.setLayout(new java.awt.BorderLayout(0, 0));
 
         lb_GuidIcon = new javax.swing.JLabel();
         pl_GuidPane.add(java.awt.BorderLayout.CENTER, lb_GuidIcon);
@@ -198,9 +212,6 @@ public class UserSign extends javax.swing.JPanel
         {
             Logs.exception(ex);
         }
-
-        lb_GuidIcon.setOpaque(true);
-        lb_GuidIcon.setBackground(Color.yellow);
     }
 
     private void initInfoView()
@@ -364,7 +375,7 @@ public class UserSign extends javax.swing.JPanel
         layout.setHorizontalGroup(hsg);
 
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
-        vsg.addContainerGap();
+        //vsg.addContainerGap();
         switch (signType)
         {
             case ConsEnv.INT_SIGN_IN:// 用户登录
@@ -425,7 +436,7 @@ public class UserSign extends javax.swing.JPanel
             default:
                 break;
         }
-        vsg.addContainerGap();
+        //vsg.addContainerGap();
         layout.setVerticalGroup(vsg);
 
         pl_InfoPane.removeAll();
@@ -614,6 +625,22 @@ public class UserSign extends javax.swing.JPanel
             window.setLocation((screensize.width - windowsize.width) >> 1, (screensize.height - windowsize.height) >> 1);
             window.setVisible(true);
         }
+
+        if (jpng == null)
+        {
+            jpng = new Jpng();
+            try
+            {
+                java.io.InputStream stream = Jpng.class.getResourceAsStream(ConsEnv.ICON_PATH + "wait.png");
+                jpng.readIcons(stream, 16, 16);
+                stream.close();
+                jpng.setButton(bt_Confrm);
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+        }
         return true;
     }
 
@@ -697,6 +724,8 @@ public class UserSign extends javax.swing.JPanel
      */
     private void bt_ConfrmActionPerformed(java.awt.event.ActionEvent evt)
     {
+        bt_Confrm.setEnabled(false);
+        jpng.start();
         switch (signType)
         {
             case ConsEnv.INT_SIGN_IN:
@@ -726,10 +755,8 @@ public class UserSign extends javax.swing.JPanel
             default:
                 break;
         }
-        pl_GuidPane.setOpaque(true);
-        pl_GuidPane.setBackground(Color.yellow);
-        System.out.println(pl_GuidPane.getSize());
-        System.out.println(pl_GuidPane.getPreferredSize());
+        jpng.stop();
+        bt_Confrm.setEnabled(true);
     }
 
     private void tf_UserNameActionPerformed(java.awt.event.ActionEvent evt)
