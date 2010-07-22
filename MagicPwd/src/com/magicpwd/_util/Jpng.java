@@ -14,12 +14,15 @@ public class Jpng
 {
 
     private int dt = 30;
+    private int it;
     private int fi;
     private int ti;
     private int ci;
     private javax.swing.Timer timer;
     private javax.swing.JLabel label;
+    private javax.swing.JButton button;
     private List<javax.swing.Icon> icons;
+    private static Jpng jpng;
 
     public Jpng()
     {
@@ -29,6 +32,15 @@ public class Jpng
     public Jpng(List<javax.swing.Icon> icons)
     {
         this.icons = icons;
+    }
+
+    public static Jpng getInstance()
+    {
+        if (jpng == null)
+        {
+            jpng = new Jpng();
+        }
+        return jpng;
     }
 
     public boolean readIcons(String filePath, int iconWidth, int iconHeight) throws Exception
@@ -90,14 +102,22 @@ public class Jpng
                     showIcon();
                 }
             });
-            timer.start();
         }
-        if (ti < fi)
+        if (ti <= fi)
         {
             ti = icons.size() - 1;
         }
+        timer.setInitialDelay(it);
         timer.setDelay(dt);
-        timer.setInitialDelay(dt);
+        if (label != null)
+        {
+            label.putClientProperty("amon-icon", label.getIcon());
+        }
+        if (button != null)
+        {
+            button.putClientProperty("amon-icon", button.getIcon());
+        }
+        timer.start();
     }
 
     public void stop()
@@ -107,6 +127,14 @@ public class Jpng
             timer.stop();
         }
         ci = fi;
+        if (label != null)
+        {
+            label.setIcon((javax.swing.Icon) label.getClientProperty("amon-icon"));
+        }
+        if (button != null)
+        {
+            button.setIcon((javax.swing.Icon) button.getClientProperty("amon-icon"));
+        }
     }
 
     public void suspend()
@@ -143,6 +171,22 @@ public class Jpng
             dt = 1;
         }
         this.dt = dt;
+    }
+
+    /**
+     * @return the it
+     */
+    public int getIt()
+    {
+        return it;
+    }
+
+    /**
+     * @param it the it to set
+     */
+    public void setIt(int it)
+    {
+        this.it = it;
     }
 
     /**
@@ -201,12 +245,33 @@ public class Jpng
         this.label = label;
     }
 
+    /**
+     * @return the button
+     */
+    public javax.swing.JButton getButton()
+    {
+        return button;
+    }
+
+    /**
+     * @param button the button to set
+     */
+    public void setButton(javax.swing.JButton button)
+    {
+        this.button = button;
+    }
+
     private void showIcon()
     {
         if (label != null)
         {
             ci = (ci + 1) % icons.size();
             label.setIcon(icons.get(ci));
+        }
+        if (button != null)
+        {
+            ci = (ci + 1) % icons.size();
+            button.setIcon(icons.get(ci));
         }
     }
 }
