@@ -5,8 +5,8 @@
 package com.magicpwd.x;
 
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._util.Jpng;
 import com.magicpwd._util.Logs;
-import java.awt.event.ActionListener;
 
 /**
  *
@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
  */
 public class LckDialog extends javax.swing.JDialog
 {
+
+    private Jpng jpng;
 
     public LckDialog(javax.swing.JFrame form)
     {
@@ -46,44 +48,29 @@ public class LckDialog extends javax.swing.JDialog
 
     public boolean initData()
     {
-        try
+        if (jpng == null)
         {
-            java.io.InputStream stream = LckDialog.class.getResourceAsStream(ConsEnv.ICON_PATH + "wait.png");
-            java.awt.image.BufferedImage image = javax.imageio.ImageIO.read(stream);
-            stream.close();
-            waitIcons = new javax.swing.Icon[15];
-
-            int x = 0;
-            for (int i = 0; i < waitIcons.length; i++)
+            jpng = new Jpng();
+            try
             {
-                waitIcons[i] = new javax.swing.ImageIcon(image.getSubimage(x, 0, 16, 16));
-                x += 16;
+                java.io.InputStream stream = LckDialog.class.getResourceAsStream(ConsEnv.ICON_PATH + "wait.png");
+                jpng.readIcons(stream, 16, 16);
+                stream.close();
+                jpng.setLabel(lb_BusyIcon);
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
             }
         }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-        }
-        lb_BusyIcon.setIcon(waitIcons[waitIndex]);
-
-        waitTimer = new javax.swing.Timer(30, new ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e)
-            {
-                waitIndex = (waitIndex + 1) % waitIcons.length;
-                lb_BusyIcon.setIcon(waitIcons[waitIndex]);
-            }
-        });
-        waitTimer.start();
+        jpng.start();
         return true;
     }
 
     @Override
     public void dispose()
     {
-        waitTimer.stop();
+        jpng.stop();
         super.dispose();
     }
 
@@ -96,8 +83,5 @@ public class LckDialog extends javax.swing.JDialog
         }
         super.processWindowEvent(evt);
     }
-    private javax.swing.Timer waitTimer;
-    private int waitIndex = 0;
-    private javax.swing.Icon waitIcons[];
     private javax.swing.JLabel lb_BusyIcon;
 }
