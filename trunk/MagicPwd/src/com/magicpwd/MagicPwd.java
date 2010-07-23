@@ -54,14 +54,15 @@ public class MagicPwd
         // 界面风格设置
         try
         {
-            javax.swing.JFrame.setDefaultLookAndFeelDecorated(true);
-            javax.swing.JDialog.setDefaultLookAndFeelDecorated(true);
             javax.swing.SwingUtilities.invokeLater(new Runnable()
             {
 
                 @Override
                 public void run()
                 {
+                    javax.swing.JFrame.setDefaultLookAndFeelDecorated(true);
+                    javax.swing.JDialog.setDefaultLookAndFeelDecorated(true);
+
                     // 用户偏好风格设置
                     try
                     {

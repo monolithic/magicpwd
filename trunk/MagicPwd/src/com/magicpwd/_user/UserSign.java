@@ -611,24 +611,7 @@ public class UserSign extends javax.swing.JPanel
                 break;
         }
 
-        if (jpng == null)
-        {
-            jpng = new Jpng();
-            try
-            {
-                java.io.InputStream stream = Jpng.class.getResourceAsStream(ConsEnv.ICON_PATH + "wait.png");
-                jpng.readIcons(stream, 16, 16);
-                stream.close();
-                jpng.setIt(0);
-                jpng.setButton(bt_Confrm);
-            }
-            catch (Exception exp)
-            {
-                Logs.exception(exp);
-            }
-        }
-
-        java.awt.Window window = frame != null ? frame : (dialog != null ? dialog : null);
+        java.awt.Window window = frame != null ? frame : dialog;
         if (window == null)
         {
             return false;
@@ -642,6 +625,58 @@ public class UserSign extends javax.swing.JPanel
             window.setLocation((screensize.width - windowsize.width) >> 1, (screensize.height - windowsize.height) >> 1);
             window.setVisible(true);
         }
+
+        if (jpng == null)
+        {
+            new Thread()
+            {
+
+                public void run()
+                {
+                    jpng = new Jpng();
+                    try
+                    {
+                        java.io.InputStream stream = Jpng.class.getResourceAsStream(ConsEnv.ICON_PATH + "wait.png");
+                        jpng.readIcons(stream, 16, 16);
+                        stream.close();
+                        jpng.setIt(0);
+                        jpng.setButton(bt_Confrm);
+                    }
+                    catch (Exception exp)
+                    {
+                        Logs.exception(exp);
+                    }
+
+                    javax.swing.Icon icon = null;
+                    try
+                    {
+                        String addr = java.net.InetAddress.getLocalHost().getHostAddress();
+                        java.net.URL url = new java.net.URL(ConsEnv.HOMEPAGE + "mpwd/mpwd0001.ashx?uri=" + addr);
+                        java.io.InputStream stream = url.openStream();
+                        icon = new javax.swing.ImageIcon(ImageIO.read(stream));
+                        stream.close();
+                    }
+                    catch (Exception ex)
+                    {
+                        Logs.exception(ex);
+                        icon = null;
+                    }
+                    if (icon != null)
+                    {
+                        guidIcon = icon;
+                        if (lb_GuidIcon != null)
+                        {
+                            final String tgi="";
+                            synchronized (tgi)
+                            {
+                                lb_GuidIcon.setIcon(guidIcon);
+                            }
+                        }
+                    }
+                }
+            }.start();
+        }
+
         return true;
     }
 
@@ -725,11 +760,13 @@ public class UserSign extends javax.swing.JPanel
      */
     private void bt_ConfrmActionPerformed(java.awt.event.ActionEvent evt)
     {
-        jpng.start();
         bt_Confrm.setEnabled(false);
+        jpng.start();
+        lb_UsrLabel.setEnabled(false);
         new Thread()
         {
 
+            @Override
             public void run()
             {
                 switch (signType)
@@ -761,8 +798,9 @@ public class UserSign extends javax.swing.JPanel
                     default:
                         break;
                 }
-                bt_Confrm.setEnabled(true);
                 jpng.stop();
+                bt_Confrm.setEnabled(true);
+                lb_UsrLabel.setEnabled(true);
             }
         }.start();
     }
@@ -789,6 +827,11 @@ public class UserSign extends javax.swing.JPanel
 
     private void lb_UsrLabelMouseReleased(java.awt.event.MouseEvent evt)
     {
+        if (!lb_UsrLabel.isEnabled())
+        {
+            return;
+        }
+
         initView(ConsEnv.INT_SIGN_FP);
         initLang();
         initData();
@@ -798,6 +841,11 @@ public class UserSign extends javax.swing.JPanel
 
     private void lb_KeyLabelMouseReleased(java.awt.event.MouseEvent evt)
     {
+        if (!lb_KeyLabel.isEnabled())
+        {
+            return;
+        }
+
         if (signType == ConsEnv.INT_SIGN_IN)
         {
             signType = ConsEnv.INT_SIGN_FP;
