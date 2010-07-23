@@ -84,17 +84,17 @@ public final class Util
         return new String(buf);
     }
 
-    public static final boolean isValidate(String t)
+    public static boolean isValidate(String t)
     {
         return t != null ? t.trim().length() > 0 : false;
     }
 
-    public static final boolean isValidate(String t, int size)
+    public static boolean isValidate(String t, int size)
     {
         return t != null ? t.trim().length() == size : false;
     }
 
-    public static final boolean isValidate(String t, int min, int max)
+    public static boolean isValidate(String t, int min, int max)
     {
         if (t == null)
         {
@@ -104,7 +104,7 @@ public final class Util
         return (l >= min && l <= max);
     }
 
-    public static final boolean isValidateHash(String text)
+    public static boolean isValidateHash(String text)
     {
         if (text == null)
         {
@@ -113,7 +113,7 @@ public final class Util
         return Pattern.compile("^[\\w]{16}$", Pattern.CASE_INSENSITIVE).matcher(text).matches();
     }
 
-    public static final boolean isValidateInteger(String t)
+    public static boolean isValidateInteger(String t)
     {
         return t != null ? Pattern.compile("^[+-]?\\d+$", Pattern.CASE_INSENSITIVE).matcher(t).matches() : false;
     }
@@ -123,7 +123,7 @@ public final class Util
      * @param mail
      * @return
      */
-    public static final boolean isValidateEmail(String mail)
+    public static boolean isValidateEmail(String mail)
     {
         if (mail == null)
         {
@@ -136,7 +136,7 @@ public final class Util
     {
         if (mp_IcoList == null)
         {
-            mp_IcoList = new HashMap<Integer, ImageIcon>();
+            mp_IcoList = new HashMap<Integer, ImageIcon>(ConsEnv.ICON_SIZE + 1);
             synchronized (icoPath)
             {
                 try
@@ -239,7 +239,7 @@ public final class Util
         }
     }
 
-    public static ImageIcon getNone()
+    public static synchronized ImageIcon getNone()
     {
         if (bi_NoneIcon == null)
         {
@@ -248,7 +248,7 @@ public final class Util
         return bi_NoneIcon;
     }
 
-    public static BufferedImage getLogo(int size)
+    public static synchronized BufferedImage getLogo(int size)
     {
         if (mp_LogoIcon == null)
         {
@@ -266,6 +266,7 @@ public final class Util
             }
             catch (Exception exp)
             {
+                Logs.exception(exp);
                 logo = createLogo(size);
             }
             mp_LogoIcon.put(size, logo);
@@ -461,7 +462,7 @@ public final class Util
 
         // 缓冲字符串大小判断及创建
         int len = v.length;
-        StringBuffer strBuf = new StringBuffer(len << 1);
+        StringBuilder strBuf = new StringBuilder(len << 1);
 
         // 字节数据转换为可显示字符串数据
         byte tmp;
