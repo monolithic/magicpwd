@@ -43,8 +43,8 @@ public class MagicPwd
             }
             catch (Exception exp)
             {
-                Lang.showMesg(null, null, exp.getLocalizedMessage());
                 Logs.exception(exp);
+                Lang.showMesg(null, null, exp.getLocalizedMessage());
             }
         }
 
@@ -108,14 +108,6 @@ public class MagicPwd
         }
 
         // 启动后台预加载线程
-        preLoad();
-    }
-
-    private static void preLoad()
-    {
-        Util.getNone();
-        Util.getLogo(16);
-        Util.getIcon(0);
         UserMdl.preLoad();
 
         try
@@ -126,6 +118,10 @@ public class MagicPwd
         {
             Logs.exception(exp);
         }
+
+        Util.getIcon(0);
+        Util.getNone();
+        Util.getLogo(16);
     }
 
     public static java.io.File endSave()

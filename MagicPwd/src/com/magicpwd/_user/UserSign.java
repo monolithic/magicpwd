@@ -619,6 +619,7 @@ public class UserSign extends javax.swing.JPanel
                 java.io.InputStream stream = Jpng.class.getResourceAsStream(ConsEnv.ICON_PATH + "wait.png");
                 jpng.readIcons(stream, 16, 16);
                 stream.close();
+                jpng.setIt(0);
                 jpng.setButton(bt_Confrm);
             }
             catch (Exception exp)
@@ -668,7 +669,7 @@ public class UserSign extends javax.swing.JPanel
         }
     }
 
-    private void dispoze()
+    private synchronized void dispoze()
     {
         if (frame != null)
         {
@@ -724,39 +725,46 @@ public class UserSign extends javax.swing.JPanel
      */
     private void bt_ConfrmActionPerformed(java.awt.event.ActionEvent evt)
     {
-        bt_Confrm.setEnabled(false);
         jpng.start();
-        switch (signType)
+        bt_Confrm.setEnabled(false);
+        new Thread()
         {
-            case ConsEnv.INT_SIGN_IN:
-                signIn();
-                break;
-            case ConsEnv.INT_SIGN_RS:
-                signRs();
-                break;
-            case ConsEnv.INT_SIGN_UP:
-                signUp();
-                break;
-            case ConsEnv.INT_SIGN_PK:
-                signPk();
-                break;
-            case ConsEnv.INT_SIGN_FP:
-                signFp();
-                break;
-            case ConsEnv.INT_SIGN_SK:
-                signSk();
-                break;
-            case ConsEnv.INT_SIGN_SU:
-                signSu();
-                break;
-            case ConsEnv.INT_SIGN_CS:
-                signCs();
-                break;
-            default:
-                break;
-        }
-        jpng.stop();
-        bt_Confrm.setEnabled(true);
+
+            public void run()
+            {
+                switch (signType)
+                {
+                    case ConsEnv.INT_SIGN_IN:
+                        signIn();
+                        break;
+                    case ConsEnv.INT_SIGN_RS:
+                        signRs();
+                        break;
+                    case ConsEnv.INT_SIGN_UP:
+                        signUp();
+                        break;
+                    case ConsEnv.INT_SIGN_PK:
+                        signPk();
+                        break;
+                    case ConsEnv.INT_SIGN_FP:
+                        signFp();
+                        break;
+                    case ConsEnv.INT_SIGN_SK:
+                        signSk();
+                        break;
+                    case ConsEnv.INT_SIGN_SU:
+                        signSu();
+                        break;
+                    case ConsEnv.INT_SIGN_CS:
+                        signCs();
+                        break;
+                    default:
+                        break;
+                }
+                bt_Confrm.setEnabled(true);
+                jpng.stop();
+            }
+        }.start();
     }
 
     private void tf_UserNameActionPerformed(java.awt.event.ActionEvent evt)
@@ -864,9 +872,8 @@ public class UserSign extends javax.swing.JPanel
         {
             backCall.callBack(null, null, ConsEnv.STR_SIGN_IN);
         }
-        dispoze();
-
         TrayPtn.getInstance();
+        dispoze();
     }
 
     private void signRs()
