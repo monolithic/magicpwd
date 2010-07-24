@@ -41,7 +41,7 @@ import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.c.FindEvt;
 import com.magicpwd.c.InfoEvt;
-import com.magicpwd.c.MenuEvt;
+import com.magicpwd.c.MPwdEvt;
 import com.magicpwd.c.ToolEvt;
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.GridMdl;
@@ -55,7 +55,7 @@ import com.magicpwd.x.LckDialog;
 import com.magicpwd.x.MdiDialog;
 import com.magicpwd.x.MpsDialog;
 
-public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, ToolEvt, InfoEvt, FindEvt, IGridView
+public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, ToolEvt, InfoEvt, FindEvt, IGridView
 {
 
     private java.awt.CardLayout cl_CardProp;

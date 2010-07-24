@@ -14,7 +14,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd.c.MenuEvt;
+import com.magicpwd.c.MPwdEvt;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.x.MdiDialog;
 
@@ -25,7 +25,7 @@ import com.magicpwd.x.MdiDialog;
 public class MenuBar extends JMenuBar
 {
 
-    private MenuEvt me_MenuEvent;
+    private MPwdEvt me_MenuEvent;
     private javax.swing.JMenuItem mi_lastItem;
 
     public MenuBar()
@@ -59,7 +59,7 @@ public class MenuBar extends JMenuBar
         setUserSecretEnabled();
     }
 
-    public void setMenuEvent(MenuEvt event)
+    public void setMenuEvent(MPwdEvt event)
     {
         me_MenuEvent = event;
     }

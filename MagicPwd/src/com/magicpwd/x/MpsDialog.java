@@ -6,7 +6,7 @@ package com.magicpwd.x;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
-import com.magicpwd.c.MenuEvt;
+import com.magicpwd.c.MPwdEvt;
 
 /**
  * 属性编辑独立窗口
@@ -16,9 +16,9 @@ import com.magicpwd.c.MenuEvt;
 public class MpsDialog extends javax.swing.JDialog
 {
 
-    private MenuEvt menuEvt;
+    private MPwdEvt menuEvt;
 
-    public MpsDialog(javax.swing.JFrame frame, MenuEvt menuEvt)
+    public MpsDialog(javax.swing.JFrame frame, MPwdEvt menuEvt)
     {
         super(frame);
         this.menuEvt = menuEvt;
