@@ -570,6 +570,11 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
     }
 
     @Override
+    public void viewHideActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    }
+
+    @Override
     public void viewMenuActionPerformed(java.awt.event.ActionEvent evt)
     {
     }

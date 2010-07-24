@@ -210,6 +210,11 @@ public class NormPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
     }
 
     @Override
+    public void viewHideActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    }
+
+    @Override
     public void dataImptActionPerformed(java.awt.event.ActionEvent evt)
     {
     }

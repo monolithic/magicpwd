@@ -110,7 +110,7 @@ public interface ConsCfg
      * 系统托盘显示方式
      */
     String CFG_TRAY = CFG_PRE + ".tray";
-    String CFG_TRAY_PTN = CFG_TRAY + ".png";
+    String CFG_TRAY_PTN = CFG_TRAY + ".ptn";
     String CFG_TRAY_LOC = CFG_TRAY + ".loc";
     /**
      * 

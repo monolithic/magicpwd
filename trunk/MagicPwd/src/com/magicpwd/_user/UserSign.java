@@ -199,6 +199,7 @@ public class UserSign extends javax.swing.JPanel
         pl_GuidPane.setLayout(new java.awt.BorderLayout(0, 0));
 
         lb_GuidIcon = new javax.swing.JLabel();
+        lb_GuidIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         pl_GuidPane.add(java.awt.BorderLayout.CENTER, lb_GuidIcon);
 
         try
@@ -436,7 +437,7 @@ public class UserSign extends javax.swing.JPanel
             default:
                 break;
         }
-        //vsg.addContainerGap();
+        vsg.addContainerGap();
         layout.setVerticalGroup(vsg);
 
         pl_InfoPane.removeAll();
@@ -617,20 +618,12 @@ public class UserSign extends javax.swing.JPanel
             return false;
         }
 
-        window.pack();
-        if (!window.isVisible())
-        {
-            java.awt.Dimension windowsize = window.getSize();
-            java.awt.Dimension screensize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-            window.setLocation((screensize.width - windowsize.width) >> 1, (screensize.height - windowsize.height) >> 1);
-            window.setVisible(true);
-        }
-
         if (jpng == null)
         {
             new Thread()
             {
 
+                @Override
                 public void run()
                 {
                     jpng = new Jpng();
@@ -666,7 +659,7 @@ public class UserSign extends javax.swing.JPanel
                         guidIcon = icon;
                         if (lb_GuidIcon != null)
                         {
-                            final String tgi="";
+                            final String tgi = "";
                             synchronized (tgi)
                             {
                                 lb_GuidIcon.setIcon(guidIcon);
@@ -675,6 +668,15 @@ public class UserSign extends javax.swing.JPanel
                     }
                 }
             }.start();
+        }
+
+        window.pack();
+        if (!window.isVisible())
+        {
+            java.awt.Dimension windowsize = window.getSize();
+            java.awt.Dimension screensize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+            window.setLocation((screensize.width - windowsize.width) >> 1, (screensize.height - windowsize.height) >> 1);
+            window.setVisible(true);
         }
 
         return true;
