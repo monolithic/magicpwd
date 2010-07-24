@@ -39,6 +39,7 @@ import javax.swing.Timer;
 import com.magicpwd.r.AmonFF;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd.c.MenuEvt;
+import com.magicpwd.c.MPwdEvt;
 import com.magicpwd.m.UserMdl;
 import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
@@ -539,7 +540,7 @@ public final class Util
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_H, InputEvent.CTRL_MASK), ConsEnv.EVENT_FILE_HIDE);
     }
 
-    public static void addEditAction(ActionMap actionMap, InputMap inputMap, final MenuEvt menuEvt)
+    public static void addEditAction(ActionMap actionMap, InputMap inputMap, final MPwdEvt menuEvt)
     {
         actionMap.put(ConsEnv.EVENT_EDIT_PREV, new javax.swing.AbstractAction()
         {
@@ -713,7 +714,7 @@ public final class Util
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0), ConsEnv.EVENT_VIEW_TOP1);
     }
 
-    public static void addViewAction(ActionMap actionMap, InputMap inputMap, final MenuEvt menuEvt)
+    public static void addViewAction(ActionMap actionMap, InputMap inputMap, final MPwdEvt menuEvt)
     {
         actionMap.put(ConsEnv.EVENT_VIEW_EDIT, new javax.swing.AbstractAction()
         {
@@ -786,7 +787,7 @@ public final class Util
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_I, InputEvent.CTRL_MASK), ConsEnv.EVENT_VIEW_INFO);
     }
 
-    public static void addDataAction(ActionMap actionMap, InputMap inputMap, final MenuEvt menuEvt)
+    public static void addDataAction(ActionMap actionMap, InputMap inputMap, final MPwdEvt menuEvt)
     {
         actionMap.put(ConsEnv.EVENT_DATA_SKEY, new javax.swing.AbstractAction()
         {

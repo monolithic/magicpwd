@@ -5,30 +5,34 @@ import com.magicpwd._comn.S1S2;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd._face.IBackCall;
 import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IFormView;
 import com.magicpwd._util.Lang;
-import com.magicpwd._user.UserSign;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.c.FindEvt;
-import com.magicpwd.c.MenuEvt;
+import com.magicpwd.c.MPadEvt;
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.ListCR;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.Transferable;
+import java.awt.event.ActionEvent;
+import javax.swing.undo.UndoManager;
 
 /**
  * 迷你模式：记事便签
  *
  * @author Amon
  */
-public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, FindEvt
+public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, FindEvt, java.awt.datatransfer.ClipboardOwner
 {
 
     private String lastHash;
     private java.awt.CardLayout infoLayout;
     private java.util.List<S1S2> noteList;
+    private MenuPop noteMenu;
+    private UndoManager undo = new UndoManager();
 
     public MiniPtn()
     {
@@ -43,14 +47,13 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
         bt_OpenNote = new BtnLabel();
         bt_SaveNote = new BtnLabel();
         bt_SrchNote = new BtnLabel();
-        pl_TALayout = new javax.swing.JPanel();
-        cl_TALayout = new java.awt.CardLayout();
-        ta_Pad1Data = new java.awt.TextArea("", 15, 50, java.awt.TextArea.SCROLLBARS_BOTH);
-        ta_Pad2Data = new java.awt.TextArea("", 15, 50, java.awt.TextArea.SCROLLBARS_VERTICAL_ONLY);
+        javax.swing.JScrollPane sp_NoteData = new javax.swing.JScrollPane();
+        ta_NoteData = new javax.swing.JTextArea();
         ck_NoteWrap = new javax.swing.JCheckBox();
         pl_NoteInfo = new javax.swing.JPanel();
         lb_NoteInfo = new javax.swing.JLabel();
         cb_NoteInfo = new javax.swing.JComboBox();
+        noteMenu = new MenuPop(MenuPop.MENU_NOTE);
 
         lb_NoteHead.setLabelFor(tf_NoteHead);
 
@@ -117,15 +120,13 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
             }
         });
 
-        pl_TALayout.setLayout(cl_TALayout);
-        pl_TALayout.add("pad1", ta_Pad1Data);
-        pl_TALayout.add("pad2", ta_Pad2Data);
+        sp_NoteData.setViewportView(ta_NoteData);
 
-        ck_NoteWrap.addActionListener(new java.awt.event.ActionListener()
+        ck_NoteWrap.addChangeListener(new javax.swing.event.ChangeListener()
         {
 
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
+            public void stateChanged(javax.swing.event.ChangeEvent evt)
             {
                 ck_NoteWrapStateChanged(evt);
             }
@@ -147,6 +148,10 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
         });
         pl_NoteInfo.add("list", cb_NoteInfo);
 
+        noteMenu.initView();
+        noteMenu.setMenuEvent(this);
+        ta_NoteData.setComponentPopupMenu(noteMenu);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_NoteBase);
         pl_NoteBase.setLayout(layout);
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
@@ -167,7 +172,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
         hsg2.addComponent(ck_NoteWrap);
         javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
         hpg.addGroup(hsg1);
-        hpg.addComponent(pl_TALayout, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE);
+        hpg.addComponent(sp_NoteData, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE);
         hpg.addGroup(hsg2);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addContainerGap();
@@ -189,7 +194,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
         vsg.addContainerGap();
         vsg.addGroup(vpg1);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        vsg.addComponent(pl_TALayout, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE);
+        vsg.addComponent(sp_NoteData, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addGroup(vpg2);
         vsg.addContainerGap();
@@ -202,14 +207,10 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
         Util.centerForm(this, null);
     }
 
-    private java.awt.TextArea getTextArea()
-    {
-        return ck_NoteWrap.isSelected() ? ta_Pad2Data : ta_Pad1Data;
-    }
-
     public void initLang()
     {
         setTitle(Lang.getLang(LangRes.P30F5201, "记事便签"));
+
 
         Lang.setWText(lb_NoteHead, LangRes.P30F5301, "标题");
 
@@ -226,14 +227,91 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
 
         Lang.setWText(bt_CrteNote, LangRes.P30F5507, "&N");
         Lang.setWTips(bt_CrteNote, LangRes.P30F5508, "新建(Alt + N)");
+
+        noteMenu.initLang();
     }
 
     public void initData()
     {
+        ta_NoteData.getDocument().addUndoableEditListener(new javax.swing.event.UndoableEditListener()
+        {
+
+            @Override
+            public void undoableEditHappened(javax.swing.event.UndoableEditEvent evt)
+            {
+                undo.addEdit(evt.getEdit());
+            }
+        });
         noteList = new java.util.ArrayList<S1S2>();
         Util.addFormAction(pl_NoteBase.getActionMap(), pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
         Util.addFileAction(pl_NoteBase.getActionMap(), pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
         Util.addHideAction(pl_NoteBase.getActionMap(), pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
+
+        ta_NoteData.getActionMap().put(ConsEnv.EVENT_NOTE_ALLS, new javax.swing.AbstractAction()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                editAllsActionPerformed(evt);
+            }
+        });
+        ta_NoteData.getInputMap(javax.swing.JComponent.WHEN_FOCUSED).put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_DOWN_MASK), ConsEnv.EVENT_NOTE_ALLS);
+
+        ta_NoteData.getActionMap().put(ConsEnv.EVENT_NOTE_CUTS, new javax.swing.AbstractAction()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                editCutsActionPerformed(evt);
+            }
+        });
+        ta_NoteData.getInputMap(javax.swing.JComponent.WHEN_FOCUSED).put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_DOWN_MASK), ConsEnv.EVENT_NOTE_CUTS);
+
+        ta_NoteData.getActionMap().put(ConsEnv.EVENT_NOTE_COPY, new javax.swing.AbstractAction()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                editCopyActionPerformed(evt);
+            }
+        });
+        ta_NoteData.getInputMap(javax.swing.JComponent.WHEN_FOCUSED).put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_DOWN_MASK), ConsEnv.EVENT_NOTE_COPY);
+
+        ta_NoteData.getActionMap().put(ConsEnv.EVENT_NOTE_PAST, new javax.swing.AbstractAction()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                editPastActionPerformed(evt);
+            }
+        });
+        ta_NoteData.getInputMap(javax.swing.JComponent.WHEN_FOCUSED).put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_DOWN_MASK), ConsEnv.EVENT_NOTE_PAST);
+
+        ta_NoteData.getActionMap().put(ConsEnv.EVENT_NOTE_UNDO, new javax.swing.AbstractAction()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                editUndoActionPerformed(evt);
+            }
+        });
+        ta_NoteData.getInputMap(javax.swing.JComponent.WHEN_FOCUSED).put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_DOWN_MASK), ConsEnv.EVENT_NOTE_UNDO);
+
+        ta_NoteData.getActionMap().put(ConsEnv.EVENT_NOTE_REDO, new javax.swing.AbstractAction()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                editRedoActionPerformed(evt);
+            }
+        });
+        ta_NoteData.getInputMap(javax.swing.JComponent.WHEN_FOCUSED).put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_R, java.awt.event.InputEvent.CTRL_DOWN_MASK), ConsEnv.EVENT_NOTE_REDO);
     }
 
     @Override
@@ -249,94 +327,18 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
     }
 
     @Override
-    public void dataImptActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void dataExptActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void dataSyncActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void dataBackActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void dataDocsActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void helpSKeyActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void editAreaActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void editDateActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void editFileActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void editFindActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void editLinkActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void editMailActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void editNextActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void editPrevActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void editPwdsActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void editTextActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
     public void fileApndActionPerformed(java.awt.event.ActionEvent evt)
     {
         tf_NoteHead.setText("");
-        getTextArea().setText("");
+        ta_NoteData.setText("");
         infoLayout.show(pl_NoteInfo, "info");
         lb_NoteInfo.setText("");
         tf_NoteHead.requestFocus();
         UserMdl.getNoteMdl().clear();
+
+        undo.discardAllEdits();
+        noteMenu.setNoteUndoEnabled(undo.canUndo());
+        noteMenu.setNoteRedoEnabled(undo.canRedo());
     }
 
     @Override
@@ -399,7 +401,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
             java.io.FileInputStream fis = new java.io.FileInputStream(file);
             int len = fis.read(buf);
             fis.close();
-            getTextArea().setText(new String(buf, 0, len));
+            ta_NoteData.setText(new String(buf, 0, len));
             String path = file.getPath();
             if (path.length() > 20)
             {
@@ -425,7 +427,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
             return;
         }
 
-        String data = getTextArea().getText();
+        String data = ta_NoteData.getText();
         if (!Util.isValidate(data))
         {
             if (Lang.showFirm(this, LangRes.P30F5A02, "记事内容并没有实际意义的文字，确认要保存么？") != javax.swing.JOptionPane.NO_OPTION)
@@ -461,6 +463,10 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
             Logs.exception(exp);
             Lang.showMesg(this, LangRes.P30F5A04, "");
         }
+
+        undo.discardAllEdits();
+        noteMenu.setNoteUndoEnabled(undo.canUndo());
+        noteMenu.setNoteRedoEnabled(undo.canRedo());
     }
 
     @Override
@@ -494,111 +500,6 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
     }
 
     @Override
-    public void keysModeActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void keysNoteActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void listSkeyActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void listSascActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void kindApndActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void kindDeltActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void kindUpdtActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void skinChangeActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void userCreateActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void userSwitchActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void userUpdateActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void userSecretActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void viewEditActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void viewFindActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void viewInfoActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void viewPrevActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void viewNextActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void viewHideActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void viewMenuActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void viewSideActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void viewToolActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
     public void viewTop1ActionPerformed(java.awt.event.ActionEvent evt)
     {
         boolean b = !UserMdl.getUserCfg().isViewTop();
@@ -615,6 +516,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
         {
             return;
         }
+
 
         noteList.clear();
         boolean b = DBA3000.findUserNote(noteName, noteList);
@@ -635,21 +537,101 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
         }
     }
 
-    private void bt_ExitNoteActionPerformed(java.awt.event.ActionEvent evt)
+    @Override
+    public void editAllsActionPerformed(java.awt.event.ActionEvent evt)
     {
-        UserSign us = new UserSign(TrayPtn.getCurrForm());
-        us.setBackCall(new IBackCall()
-        {
+        ta_NoteData.selectAll();
+    }
 
-            @Override
-            public boolean callBack(Object sender, java.util.EventListener event, String... params)
+    @Override
+    public void editCutsActionPerformed(ActionEvent evt)
+    {
+        String copy = ta_NoteData.getSelectedText();
+        if (copy != null)
+        {
+            java.awt.datatransfer.StringSelection sSelection = new java.awt.datatransfer.StringSelection(copy);
+            getToolkit().getSystemClipboard().setContents(sSelection, this);
+            ta_NoteData.replaceSelection("");
+        }
+        noteMenu.setNoteUndoEnabled(undo.canUndo());
+        noteMenu.setNoteRedoEnabled(undo.canRedo());
+    }
+
+    @Override
+    public void editCopyActionPerformed(ActionEvent evt)
+    {
+        String copy = ta_NoteData.getSelectedText();
+        if (copy != null)
+        {
+            java.awt.datatransfer.StringSelection sSelection = new java.awt.datatransfer.StringSelection(copy);
+            getToolkit().getSystemClipboard().setContents(sSelection, this);
+        }
+        noteMenu.setNoteUndoEnabled(undo.canUndo());
+        noteMenu.setNoteRedoEnabled(undo.canRedo());
+    }
+
+    @Override
+    public void editPastActionPerformed(ActionEvent evt)
+    {
+        java.awt.datatransfer.Transferable transfer = getToolkit().getSystemClipboard().getContents(this);
+        if (transfer != null)
+        {
+            try
             {
-                return showMain();
+                Object data = transfer.getTransferData(java.awt.datatransfer.DataFlavor.stringFlavor);
+                if (data != null)
+                {
+                    ta_NoteData.replaceSelection(data.toString());
+                }
             }
-        });
-        us.initView(ConsEnv.INT_SIGN_RS);
-        us.initLang();
-        us.initData();
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+        }
+        noteMenu.setNoteUndoEnabled(undo.canUndo());
+        noteMenu.setNoteRedoEnabled(undo.canRedo());
+    }
+
+    @Override
+    public void editUndoActionPerformed(ActionEvent evt)
+    {
+        if (undo.canUndo())
+        {
+            try
+            {
+                undo.undo();
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+            noteMenu.setNoteUndoEnabled(undo.canUndo());
+            noteMenu.setNoteRedoEnabled(undo.canRedo());
+        }
+    }
+
+    @Override
+    public void editRedoActionPerformed(ActionEvent evt)
+    {
+        if (undo.canRedo())
+        {
+            try
+            {
+                undo.redo();
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+            noteMenu.setNoteUndoEnabled(undo.canUndo());
+            noteMenu.setNoteRedoEnabled(undo.canRedo());
+        }
+    }
+
+    @Override
+    public void lostOwnership(Clipboard clpbrd, Transferable t)
+    {
     }
 
     private void bt_SaveNoteActionPerformed(java.awt.event.ActionEvent evt)
@@ -689,7 +671,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
             if (note != null)
             {
                 tf_NoteHead.setText(note.getName());
-                getTextArea().setText(note.getData());
+                ta_NoteData.setText(note.getData());
             }
         }
         catch (Exception exp)
@@ -700,19 +682,9 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
         }
     }
 
-    private void ck_NoteWrapStateChanged(java.awt.event.ActionEvent evt)
+    private void ck_NoteWrapStateChanged(javax.swing.event.ChangeEvent evt)
     {
-        boolean selected = ck_NoteWrap.isSelected();
-        if (selected)
-        {
-            cl_TALayout.show(pl_TALayout, "pad2");
-            ta_Pad2Data.setText(ta_Pad1Data.getText());
-        }
-        else
-        {
-            cl_TALayout.show(pl_TALayout, "pad1");
-            ta_Pad1Data.setText(ta_Pad2Data.getText());
-        }
+        ta_NoteData.setLineWrap(ck_NoteWrap.isSelected());
     }
 
     private void tf_NoteHeadActionPerformed(java.awt.event.ActionEvent evt)
@@ -753,10 +725,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
     private javax.swing.JComboBox cb_NoteInfo;
     private javax.swing.JLabel lb_NoteHead;
     private javax.swing.JLabel lb_NoteInfo;
-    private java.awt.TextArea ta_Pad1Data;
-    private java.awt.TextArea ta_Pad2Data;
-    private java.awt.CardLayout cl_TALayout;
-    private javax.swing.JPanel pl_TALayout;
+    private javax.swing.JTextArea ta_NoteData;
     private javax.swing.JTextField tf_NoteHead;
     private BtnLabel bt_CrteNote;
     private BtnLabel bt_OpenNote;
