@@ -463,6 +463,40 @@ public class MenuBar extends JMenuBar
         });
         mi_ViewInfo.setSelected(UserMdl.getUserCfg().isInfoViw());
         mu_ViewMenu.add(mi_ViewInfo);
+
+        mu_ViewMenu.addSeparator();
+
+        mi_ViewMPay = new javax.swing.JMenuItem();
+        mi_ViewMPay.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F, InputEvent.CTRL_DOWN_MASK | InputEvent.ALT_DOWN_MASK));
+        mi_ViewMPay.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                TrayPtn.getCurrForm().setVisible(false);
+                TrayPtn.showNormPtn();
+                TrayPtn.getCurrForm().setVisible(true);
+                me_MenuEvent.viewHideActionPerformed(evt);
+            }
+        });
+        //mu_ViewMenu.add(mi_ViewMPay);
+
+        mi_ViewMPad = new javax.swing.JMenuItem();
+        mi_ViewMPad.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK | InputEvent.ALT_DOWN_MASK));
+        mi_ViewMPad.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                TrayPtn.getCurrForm().setVisible(false);
+                TrayPtn.showMiniPtn();
+                TrayPtn.getCurrForm().setVisible(true);
+                me_MenuEvent.viewHideActionPerformed(evt);
+            }
+        });
+        mu_ViewMenu.add(mi_ViewMPad);
     }
 
     private void initDataMenu()
@@ -888,6 +922,9 @@ public class MenuBar extends JMenuBar
         Lang.setWText(mi_ViewMenu, LangRes.P30F7619, "显示菜单栏");
         Lang.setWText(mi_ViewTool, LangRes.P30F761A, "显示工具栏");
         Lang.setWText(mi_ViewInfo, LangRes.P30F761B, "显示状态栏");
+        Lang.setWText(mi_ViewMPay, LangRes.P30F7635, "切换到《迷你账簿》");
+        Lang.setWText(mi_ViewMPad, LangRes.P30F7636, "切换到《记事便签》");
+
     }
 
     private void initDataLang()
@@ -1035,6 +1072,8 @@ public class MenuBar extends JMenuBar
     private javax.swing.JCheckBoxMenuItem mi_ViewTool;
     private javax.swing.JCheckBoxMenuItem mi_ViewFind;
     private javax.swing.JCheckBoxMenuItem mi_ViewInfo;
+    private javax.swing.JMenuItem mi_ViewMPay;
+    private javax.swing.JMenuItem mi_ViewMPad;
     private javax.swing.JMenu mu_DataMenu;
     private javax.swing.JMenuItem mi_DataImpt;
     private javax.swing.JMenuItem mi_DataExpt;

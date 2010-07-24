@@ -1,5 +1,6 @@
 package com.magicpwd.v;
 
+import com.magicpwd.MagicPwd;
 import com.magicpwd._comn.I1S2;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
@@ -16,26 +17,17 @@ import com.magicpwd._util.Util;
 import com.magicpwd.m.GridMdl;
 import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.UserMdl;
-import java.awt.AWTException;
-import java.awt.Point;
-import java.awt.SystemTray;
-import java.awt.TrayIcon;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import javax.swing.JOptionPane;
 
 /**
  * 系统托盘
  * @author Amon
  */
-public class TrayPtn extends TrayIcon implements IBackCall
+public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.event.MouseListener, java.awt.event.MouseMotionListener
 {
 
     private static boolean isOsTray;
     private static int currPtn;
     private static int nextPtn;
-    private static Point trayLoc;
     private static MailDlg mailDlg;
     private static TrayPtn trayPtn;
     private static UserSign userSign;
@@ -107,47 +99,13 @@ public class TrayPtn extends TrayIcon implements IBackCall
             };
         }
 
-        java.awt.event.MouseListener ml = new java.awt.event.MouseAdapter()
-        {
-
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                if (evt.isPopupTrigger())
-                {
-                    showJPopupMenu(evt);
-                }
-                else
-                {
-                    showLastActionPerformed(evt);
-                }
-            }
-
-            @Override
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
-                if (evt.isPopupTrigger())
-                {
-                    showJPopupMenu(evt);
-                }
-            }
-
-            @Override
-            public void mousePressed(java.awt.event.MouseEvent evt)
-            {
-                if (evt.isPopupTrigger())
-                {
-                    showJPopupMenu(evt);
-                }
-            }
-        };
-
-        addMouseListener(ml);
+        addMouseListener(this);
 
         javax.swing.JLabel iconLbl = new javax.swing.JLabel();
         iconLbl.setIcon(new javax.swing.ImageIcon(Util.getLogo(24)));
-        iconLbl.addMouseListener(ml);
-        iconLbl.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.darkGray));
+        iconLbl.addMouseListener(this);
+        iconLbl.addMouseMotionListener(this);
+        //iconLbl.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.cyan));
         md_TrayForm.getContentPane().setLayout(new java.awt.BorderLayout());
         md_TrayForm.getContentPane().add(iconLbl);
 
@@ -269,6 +227,18 @@ public class TrayPtn extends TrayIcon implements IBackCall
         });
         trayMenu.add(siteItem);
 
+        mlogItem = new javax.swing.JMenuItem();
+        mlogItem.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                mlogItemActionPerformed(evt);
+            }
+        });
+        trayMenu.add(mlogItem);
+
         trayMenu.addSeparator();
 
         exitItem = new javax.swing.JMenuItem();
@@ -278,7 +248,8 @@ public class TrayPtn extends TrayIcon implements IBackCall
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                //MagicPwd.exit(0);
+                TrayPtn.getCurrForm().setVisible(false);
+                MagicPwd.endSave();
                 System.exit(0);
             }
         });
@@ -289,9 +260,9 @@ public class TrayPtn extends TrayIcon implements IBackCall
 
     public boolean initData()
     {
-        viewItem.setEnabled(SystemTray.isSupported());
+        viewItem.setEnabled(java.awt.SystemTray.isSupported());
 
-        changeView();
+        changeView(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_TRAY_PTN, "guid"));
 
         return true;
     }
@@ -303,7 +274,7 @@ public class TrayPtn extends TrayIcon implements IBackCall
         Lang.setWText(infoItem, LangRes.P30F9601, "关于软件");
         Lang.setWText(helpItem, LangRes.P30F9602, "使用帮助");
 
-        Lang.setWText(viewItem, LangRes.P30F960A, "显示为托盘图标");
+        Lang.setWText(viewItem, LangRes.P30F960D, "显示为托盘图标");
 
         Lang.setWText(mainItem, LangRes.P30F9603, "魔方密码");
         Lang.setWText(normItem, LangRes.P30F9604, "迷你账簿");
@@ -311,9 +282,10 @@ public class TrayPtn extends TrayIcon implements IBackCall
 
         Lang.setWText(updtItem, LangRes.P30F9606, "检测更新");
         Lang.setWText(mailItem, LangRes.P30F9607, "联系作者");
-        Lang.setWText(siteItem, LangRes.P30F9608, "软件首页");
+        Lang.setWText(siteItem, LangRes.P30F9608, "网站");
+        Lang.setWText(mlogItem, LangRes.P30F960B, "微博");
 
-        Lang.setWText(exitItem, LangRes.P30F9609, "退出");
+        Lang.setWText(exitItem, LangRes.P30F960C, "退出");
 
         setToolTip(ConsEnv.SOFTNAME + ' ' + ConsEnv.VERSIONS);
         return true;
@@ -335,13 +307,13 @@ public class TrayPtn extends TrayIcon implements IBackCall
         javax.swing.JFrame currForm = getCurrForm();
         switch (nextPtn)
         {
-            case VIEW_MAIN:
+            case ConsEnv.VIEW_MAIN:
                 showMainPtn();
                 break;
-            case VIEW_NORM:
+            case ConsEnv.VIEW_NORM:
                 showNormPtn();
                 break;
-            case VIEW_MINI:
+            case ConsEnv.VIEW_MINI:
                 showMiniPtn();
                 break;
             default:
@@ -374,7 +346,7 @@ public class TrayPtn extends TrayIcon implements IBackCall
         }
 
         mf_CurrForm = mp_MainPtn;
-        currPtn = VIEW_MAIN;
+        currPtn = ConsEnv.VIEW_MAIN;
     }
 
     public static void showNormPtn()
@@ -388,7 +360,7 @@ public class TrayPtn extends TrayIcon implements IBackCall
         }
 
         mf_CurrForm = mp_NormPtn;
-        currPtn = VIEW_NORM;
+        currPtn = ConsEnv.VIEW_NORM;
     }
 
     public static void showMiniPtn()
@@ -402,7 +374,7 @@ public class TrayPtn extends TrayIcon implements IBackCall
         }
 
         mf_CurrForm = mp_MiniPtn;
-        currPtn = VIEW_MINI;
+        currPtn = ConsEnv.VIEW_MINI;
     }
 
     public static void showMailPtn()
@@ -421,28 +393,28 @@ public class TrayPtn extends TrayIcon implements IBackCall
         MailPtn mailPtn = new MailPtn();
         mailPtn.initView();
         mailPtn.initLang();
-        List<I1S2> mailList = gm.wSelect(ConsDat.INDX_MAIL);
+        java.util.List<I1S2> mailList = gm.wSelect(ConsDat.INDX_MAIL);
         mailPtn.initMail(mailList);
         if (mailList.size() < 1)
         {
             Lang.showMesg(mailDlg, null, "没有可用的邮件类型数据！");
             return;
         }
-        List<I1S2> userList = gm.wSelect(ConsDat.INDX_TEXT);
+        java.util.List<I1S2> userList = gm.wSelect(ConsDat.INDX_TEXT);
         mailPtn.initUser(userList);
         if (userList.size() < 1)
         {
             Lang.showMesg(mailDlg, null, "没有可用的文本类型数据！");
             return;
         }
-        List<I1S2> pwdsList = gm.wSelect(ConsDat.INDX_PWDS);
+        java.util.List<I1S2> pwdsList = gm.wSelect(ConsDat.INDX_PWDS);
         mailPtn.initPwds(pwdsList);
         if (pwdsList.size() < 1)
         {
             Lang.showMesg(mailDlg, null, "没有可用的口令类型数据！");
             return;
         }
-        if (JOptionPane.OK_OPTION != JOptionPane.showConfirmDialog(TrayPtn.getCurrForm(), mailPtn, "登录确认", JOptionPane.OK_CANCEL_OPTION))
+        if (javax.swing.JOptionPane.OK_OPTION != javax.swing.JOptionPane.showConfirmDialog(TrayPtn.getCurrForm(), mailPtn, "登录确认", javax.swing.JOptionPane.OK_CANCEL_OPTION))
         {
             return;
         }
@@ -521,14 +493,96 @@ public class TrayPtn extends TrayIcon implements IBackCall
         trayMenu.addPopupMenuListener(listener);
     }
 
+    @Override
+    public void mouseClicked(java.awt.event.MouseEvent evt)
+    {
+        if (evt.isPopupTrigger())
+        {
+            showJPopupMenu(evt);
+        }
+        else
+        {
+            showLastActionPerformed(evt);
+        }
+    }
+
+    @Override
+    public void mousePressed(java.awt.event.MouseEvent evt)
+    {
+        if (evt.isPopupTrigger())
+        {
+            showJPopupMenu(evt);
+        }
+        if (!isOsTray)
+        {
+            dragLoc = getScreenLocation(evt);
+            formLoc = md_TrayForm.getLocation();
+        }
+    }
+
+    @Override
+    public void mouseReleased(java.awt.event.MouseEvent evt)
+    {
+        if (evt.isPopupTrigger())
+        {
+            showJPopupMenu(evt);
+        }
+    }
+
+    @Override
+    public void mouseEntered(java.awt.event.MouseEvent evt)
+    {
+    }
+
+    @Override
+    public void mouseExited(java.awt.event.MouseEvent evt)
+    {
+    }
+
+    @Override
+    public void mouseDragged(java.awt.event.MouseEvent evt)
+    {
+        if (!isOsTray)
+        {
+            java.awt.Point tmp = getScreenLocation(evt);
+            tmp.x += formLoc.x - dragLoc.x;
+            tmp.y += formLoc.y - dragLoc.y;
+            java.awt.Dimension scrSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+            java.awt.Dimension dlgSize = md_TrayForm.getSize();
+            if (tmp.x < 10)
+            {
+                tmp.x = 1;
+            }
+            if (tmp.y < 10)
+            {
+                tmp.y = 1;
+            }
+            int x = scrSize.width - dlgSize.width;
+            if (tmp.x + 10 > x)
+            {
+                tmp.x = x;
+            }
+            int y = scrSize.height - dlgSize.height;
+            if (tmp.y + 10 > y)
+            {
+                tmp.y = y;
+            }
+            md_TrayForm.setLocation(tmp);
+            UserMdl.getUserCfg().setCfg(ConsCfg.CFG_TRAY_LOC, "[" + tmp.x + "," + tmp.y + "]");
+        }
+    }
+
+    @Override
+    public void mouseMoved(java.awt.event.MouseEvent evt)
+    {
+    }
+
     private void showJPopupMenu(java.awt.event.MouseEvent evt)
     {
-        System.out.println("showJPopupMenu>>");
         if (trayMenu == null)
         {
             return;
         }
-        System.out.println("showJPopupMenu=====");
 
         if (isOsTray)
         {
@@ -595,25 +649,22 @@ public class TrayPtn extends TrayIcon implements IBackCall
 
     private void viewItemActionPerformed(java.awt.event.ActionEvent evt)
     {
-        changeView();
+        changeView(isOsTray ? "guid" : "icon");
     }
 
     private void mainItemActionPerformed(java.awt.event.ActionEvent evt)
     {
-        nextPtn = VIEW_MAIN;
-        showViewPtn();
+        showViewPtn(ConsEnv.VIEW_MAIN);
     }
 
     private void normItemActionPerformed(java.awt.event.ActionEvent evt)
     {
-        nextPtn = VIEW_NORM;
-        showViewPtn();
+        showViewPtn(ConsEnv.VIEW_NORM);
     }
 
     private void miniItemActionPerformed(java.awt.event.ActionEvent evt)
     {
-        nextPtn = VIEW_MINI;
-        showViewPtn();
+        showViewPtn(ConsEnv.VIEW_MINI);
     }
 
     private void updtItemActionPerformed(java.awt.event.ActionEvent evt)
@@ -679,6 +730,23 @@ public class TrayPtn extends TrayIcon implements IBackCall
         }
     }
 
+    private void mlogItemActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        if (!java.awt.Desktop.isDesktopSupported())
+        {
+            Lang.showMesg(null, LangRes.P30F7A0F, "");
+        }
+
+        try
+        {
+            java.awt.Desktop.getDesktop().browse(new java.net.URI("http://t.163.com/mpwd"));
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+    }
+
     private void showLastActionPerformed(java.awt.event.MouseEvent evt)
     {
         if (evt.getClickCount() < 2)
@@ -686,10 +754,10 @@ public class TrayPtn extends TrayIcon implements IBackCall
             return;
         }
 
-        showViewPtn();
+        showViewPtn(currPtn);
     }
 
-    private void showViewPtn()
+    public void showViewPtn(int nextPtn)
     {
         if (getCurrForm().isVisible())
         {
@@ -702,13 +770,13 @@ public class TrayPtn extends TrayIcon implements IBackCall
             getCurrForm().setVisible(false);
             switch (nextPtn)
             {
-                case VIEW_MAIN:
+                case ConsEnv.VIEW_MAIN:
                     showMainPtn();
                     break;
-                case VIEW_NORM:
+                case ConsEnv.VIEW_NORM:
                     showNormPtn();
                     break;
-                case VIEW_MINI:
+                case ConsEnv.VIEW_MINI:
                     showMiniPtn();
                     break;
                 default:
@@ -719,6 +787,7 @@ public class TrayPtn extends TrayIcon implements IBackCall
             return;
         }
 
+        TrayPtn.nextPtn = nextPtn;
         if (userSign == null)
         {
             userSign = new UserSign();
@@ -730,22 +799,23 @@ public class TrayPtn extends TrayIcon implements IBackCall
         userSign.toFront();
     }
 
-    private void changeView()
+    private void changeView(String ptn)
     {
+        System.out.println(ptn);
         UserCfg uc = UserMdl.getUserCfg();
         // 下一步：显示为托盘图标
-        if (!ConsCfg.DEF_TRAY.equalsIgnoreCase(uc.getCfg(ConsCfg.CFG_TRAY_PTN, "guid")))
+        if (ConsCfg.DEF_TRAY.equalsIgnoreCase(ptn))
         {
             try
             {
-                SystemTray.getSystemTray().add(this);
+                java.awt.SystemTray.getSystemTray().add(this);
                 md_TrayForm.setSize(0, 0);
-                Lang.setWText(viewItem, LangRes.P30F960B, "显示为导航罗盘");
+                Lang.setWText(viewItem, LangRes.P30F960E, "显示为导航罗盘");
                 uc.setCfg(ConsCfg.CFG_TRAY_PTN, "icon");
                 isOsTray = true;
                 return;
             }
-            catch (AWTException ex)
+            catch (java.awt.AWTException ex)
             {
                 Logs.exception(ex);
             }
@@ -753,16 +823,16 @@ public class TrayPtn extends TrayIcon implements IBackCall
 
         // 下一步：显示为导航罗盘
         md_TrayForm.pack();
-        SystemTray.getSystemTray().remove(this);
-        Lang.setWText(viewItem, LangRes.P30F960A, "显示为托盘图标");
+        java.awt.SystemTray.getSystemTray().remove(this);
+        Lang.setWText(viewItem, LangRes.P30F960D, "显示为托盘图标");
         uc.setCfg(ConsCfg.CFG_TRAY_PTN, "guid");
 
-        if (trayLoc == null)
+        if (formLoc == null)
         {
             String loc = uc.getCfg(ConsCfg.CFG_TRAY_LOC);
             if (Util.isValidate(loc))
             {
-                Matcher matcher = Pattern.compile("\\d+").matcher(loc);
+                java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("\\d+").matcher(loc);
                 int x = -1;
                 if (matcher.find())
                 {
@@ -775,18 +845,18 @@ public class TrayPtn extends TrayIcon implements IBackCall
                 }
                 if (x >= 0 && y >= 0)
                 {
-                    trayLoc = new Point(x, y);
+                    formLoc = new java.awt.Point(x, y);
                 }
             }
 
-            if (trayLoc == null)
+            if (formLoc == null)
             {
                 java.awt.Dimension size = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-                trayLoc = new Point(size.width - 120 - md_TrayForm.getWidth(), 80);
+                formLoc = new java.awt.Point(size.width - 120 - md_TrayForm.getWidth(), 80);
             }
         }
 
-        md_TrayForm.setLocation(trayLoc);
+        md_TrayForm.setLocation(formLoc);
         md_TrayForm.setVisible(true);
         isOsTray = false;
     }
@@ -835,9 +905,19 @@ public class TrayPtn extends TrayIcon implements IBackCall
             Lang.showMesg(TrayPtn.getCurrForm(), null, exc.getLocalizedMessage());
         }
     }
+
+    private static java.awt.Point getScreenLocation(java.awt.event.MouseEvent evt)
+    {
+        java.awt.Point cur = evt.getPoint();
+        java.awt.Point dlg = md_TrayForm.getLocationOnScreen();
+        return new java.awt.Point(dlg.x + cur.x, dlg.y + cur.y);
+    }
+    private java.awt.Point dragLoc;
+    private java.awt.Point formLoc;
     private javax.swing.JPopupMenu trayMenu;
     private javax.swing.JMenuItem infoItem;
     private javax.swing.JMenuItem siteItem;
+    private javax.swing.JMenuItem mlogItem;
     private javax.swing.JMenuItem helpItem;
     private javax.swing.JMenuItem mailItem;
     private javax.swing.JMenuItem updtItem;
@@ -849,7 +929,4 @@ public class TrayPtn extends TrayIcon implements IBackCall
     private static MiniPtn mp_MiniPtn;
     private static NormPtn mp_NormPtn;
     private static MainPtn mp_MainPtn;
-    private static final int VIEW_MAIN = 0;
-    private static final int VIEW_NORM = 1;
-    private static final int VIEW_MINI = 2;
 }

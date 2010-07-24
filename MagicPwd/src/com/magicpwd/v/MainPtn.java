@@ -736,6 +736,10 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
     @Override
     public void fileHideActionPerformed(java.awt.event.ActionEvent evt)
     {
+        this.setVisible(false);
+
+        TrayPtn.getInstance().displayMessage(Lang.getLang(LangRes.P30F9A01, "友情提示"), Lang.getLang(LangRes.P30F7A43, "魔方密码仍在运行中，您可以通过双击此处显示主窗口！"), java.awt.TrayIcon.MessageType.INFO);
+
         hideWindow();
     }
 
@@ -1128,6 +1132,12 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
     public void viewNextActionPerformed(java.awt.event.ActionEvent evt)
     {
         selectNext(1, false);
+    }
+
+    @Override
+    public void viewHideActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        hideWindow();
     }
 
     @Override
@@ -1651,6 +1661,10 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
         }
         else if (e.getID() == java.awt.event.WindowEvent.WINDOW_ICONIFIED)
         {
+            this.setVisible(false);
+
+            TrayPtn.getInstance().displayMessage(Lang.getLang(LangRes.P30F9A01, "友情提示"), Lang.getLang(LangRes.P30F7A43, "魔方密码仍在运行中，您可以通过双击此处显示主窗口！"), java.awt.TrayIcon.MessageType.INFO);
+
             hideWindow();
         }
         super.processWindowEvent(e);
@@ -1765,10 +1779,6 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MenuEvt, T
 
     private void hideWindow()
     {
-        this.setVisible(false);
-
-        TrayPtn.getInstance().displayMessage(Lang.getLang(LangRes.P30F9A01, "友情提示"), Lang.getLang(LangRes.P30F7A43, "魔方密码仍在运行中，您可以通过双击此处显示主窗口！"), java.awt.TrayIcon.MessageType.INFO);
-
         // Save Temperary Data
         if (UserMdl.getGridMdl().isModified())
         {

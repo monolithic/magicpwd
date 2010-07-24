@@ -257,6 +257,11 @@ public interface ConsEnv
      * 程序运行模式：网络加载
      */
     int MODE_RUN_WEB = 1;
+
+    int VIEW_MAIN = 0;
+    int VIEW_NORM = 1;
+    int VIEW_MINI = 2;
+
     String[] USER_SALT =
     {
         "Winshine.biz", "Amonsoft.com", "Magicpwd.com", "MyIM.im"
