@@ -43,8 +43,10 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
         bt_OpenNote = new BtnLabel();
         bt_SaveNote = new BtnLabel();
         bt_SrchNote = new BtnLabel();
-        javax.swing.JScrollPane sp_NoteData = new javax.swing.JScrollPane();
-        ta_NoteData = new javax.swing.JTextArea();
+        pl_TALayout = new javax.swing.JPanel();
+        cl_TALayout = new java.awt.CardLayout();
+        ta_Pad1Data = new java.awt.TextArea("", 15, 50, java.awt.TextArea.SCROLLBARS_BOTH);
+        ta_Pad2Data = new java.awt.TextArea("", 15, 50, java.awt.TextArea.SCROLLBARS_VERTICAL_ONLY);
         ck_NoteWrap = new javax.swing.JCheckBox();
         pl_NoteInfo = new javax.swing.JPanel();
         lb_NoteInfo = new javax.swing.JLabel();
@@ -115,13 +117,15 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
             }
         });
 
-        sp_NoteData.setViewportView(ta_NoteData);
+        pl_TALayout.setLayout(cl_TALayout);
+        pl_TALayout.add("pad1", ta_Pad1Data);
+        pl_TALayout.add("pad2", ta_Pad2Data);
 
-        ck_NoteWrap.addChangeListener(new javax.swing.event.ChangeListener()
+        ck_NoteWrap.addActionListener(new java.awt.event.ActionListener()
         {
 
             @Override
-            public void stateChanged(javax.swing.event.ChangeEvent evt)
+            public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 ck_NoteWrapStateChanged(evt);
             }
@@ -163,7 +167,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
         hsg2.addComponent(ck_NoteWrap);
         javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
         hpg.addGroup(hsg1);
-        hpg.addComponent(sp_NoteData, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE);
+        hpg.addComponent(pl_TALayout, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE);
         hpg.addGroup(hsg2);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addContainerGap();
@@ -185,7 +189,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
         vsg.addContainerGap();
         vsg.addGroup(vpg1);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        vsg.addComponent(sp_NoteData, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE);
+        vsg.addComponent(pl_TALayout, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addGroup(vpg2);
         vsg.addContainerGap();
@@ -196,6 +200,11 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
         this.setIconImage(Util.getLogo(16));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         Util.centerForm(this, null);
+    }
+
+    private java.awt.TextArea getTextArea()
+    {
+        return ck_NoteWrap.isSelected() ? ta_Pad2Data : ta_Pad1Data;
     }
 
     public void initLang()
@@ -323,7 +332,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
     public void fileApndActionPerformed(java.awt.event.ActionEvent evt)
     {
         tf_NoteHead.setText("");
-        ta_NoteData.setText("");
+        getTextArea().setText("");
         infoLayout.show(pl_NoteInfo, "info");
         lb_NoteInfo.setText("");
         tf_NoteHead.requestFocus();
@@ -390,7 +399,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
             java.io.FileInputStream fis = new java.io.FileInputStream(file);
             int len = fis.read(buf);
             fis.close();
-            ta_NoteData.setText(new String(buf, 0, len));
+            getTextArea().setText(new String(buf, 0, len));
             String path = file.getPath();
             if (path.length() > 20)
             {
@@ -416,7 +425,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
             return;
         }
 
-        String data = ta_NoteData.getText();
+        String data = getTextArea().getText();
         if (!Util.isValidate(data))
         {
             if (Lang.showFirm(this, LangRes.P30F5A02, "记事内容并没有实际意义的文字，确认要保存么？") != javax.swing.JOptionPane.NO_OPTION)
@@ -680,7 +689,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
             if (note != null)
             {
                 tf_NoteHead.setText(note.getName());
-                ta_NoteData.setText(note.getData());
+                getTextArea().setText(note.getData());
             }
         }
         catch (Exception exp)
@@ -691,9 +700,19 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
         }
     }
 
-    private void ck_NoteWrapStateChanged(javax.swing.event.ChangeEvent evt)
+    private void ck_NoteWrapStateChanged(java.awt.event.ActionEvent evt)
     {
-        ta_NoteData.setLineWrap(ck_NoteWrap.isSelected());
+        boolean selected = ck_NoteWrap.isSelected();
+        if (selected)
+        {
+            cl_TALayout.show(pl_TALayout, "pad2");
+            ta_Pad2Data.setText(ta_Pad1Data.getText());
+        }
+        else
+        {
+            cl_TALayout.show(pl_TALayout, "pad1");
+            ta_Pad1Data.setText(ta_Pad2Data.getText());
+        }
     }
 
     private void tf_NoteHeadActionPerformed(java.awt.event.ActionEvent evt)
@@ -734,7 +753,10 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MenuEvt, F
     private javax.swing.JComboBox cb_NoteInfo;
     private javax.swing.JLabel lb_NoteHead;
     private javax.swing.JLabel lb_NoteInfo;
-    private javax.swing.JTextArea ta_NoteData;
+    private java.awt.TextArea ta_Pad1Data;
+    private java.awt.TextArea ta_Pad2Data;
+    private java.awt.CardLayout cl_TALayout;
+    private javax.swing.JPanel pl_TALayout;
     private javax.swing.JTextField tf_NoteHead;
     private BtnLabel bt_CrteNote;
     private BtnLabel bt_OpenNote;
