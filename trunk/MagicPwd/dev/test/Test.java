@@ -9,7 +9,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 
 public class Test
@@ -20,7 +20,7 @@ public class Test
 
     public static void main(String[] args)
     {
-        JFrame f = new JFrame();
+        JDialog f = new JDialog();
         JLabel l = new JLabel();
         f.getContentPane().add(l);
         JButton b = new JButton();
@@ -42,7 +42,7 @@ public class Test
         });
         f.getContentPane().add(BorderLayout.SOUTH, b);
         f.setSize(400, 300);
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         f.setVisible(true);
         try
         {

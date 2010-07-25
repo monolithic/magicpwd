@@ -474,10 +474,10 @@ public class MenuBar extends JMenuBar
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                TrayPtn.getCurrForm().setVisible(false);
-                TrayPtn.showNormPtn();
-                TrayPtn.getCurrForm().setVisible(true);
-                me_MenuEvent.viewHideActionPerformed(evt);
+//                TrayPtn.getCurrForm().setVisible(false);
+//                TrayPtn.showNormPtn();
+//                TrayPtn.getCurrForm().setVisible(true);
+//                me_MenuEvent.viewHideActionPerformed(evt);
             }
         });
         //mu_ViewMenu.add(mi_ViewMPay);
