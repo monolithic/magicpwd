@@ -88,13 +88,13 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
                 @Override
                 public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt)
                 {
-                    md_TrayForm.setVisible(false);
+                    //md_TrayForm.setVisible(false);
                 }
 
                 @Override
                 public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt)
                 {
-                    md_TrayForm.setVisible(false);
+                    //md_TrayForm.setVisible(false);
                 }
             };
         }
@@ -108,6 +108,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         //iconLbl.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.cyan));
         md_TrayForm.getContentPane().setLayout(new java.awt.BorderLayout());
         md_TrayForm.getContentPane().add(iconLbl);
+        md_TrayForm.setVisible(true);
 
         trayMenu = new javax.swing.JPopupMenu();
 
@@ -601,7 +602,6 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
             md_TrayForm.setLocation(x, y);
 
             // trayMenu.setInvoker(trayMenu);
-            md_TrayForm.setVisible(true);
             trayMenu.show(md_TrayForm.getContentPane(), 0, 0);
             md_TrayForm.toFront();
         }
@@ -801,7 +801,6 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
 
     private void changeView(String ptn)
     {
-        System.out.println(ptn);
         UserCfg uc = UserMdl.getUserCfg();
         // 下一步：显示为托盘图标
         if (ConsCfg.DEF_TRAY.equalsIgnoreCase(ptn))
@@ -809,7 +808,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
             try
             {
                 java.awt.SystemTray.getSystemTray().add(this);
-                md_TrayForm.setSize(0, 0);
+                md_TrayForm.setSize(1, 1);
                 Lang.setWText(viewItem, LangRes.P30F960E, "显示为导航罗盘");
                 uc.setCfg(ConsCfg.CFG_TRAY_PTN, "icon");
                 isOsTray = true;
@@ -857,7 +856,6 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         }
 
         md_TrayForm.setLocation(formLoc);
-        md_TrayForm.setVisible(true);
         isOsTray = false;
     }
 

@@ -120,6 +120,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
             }
         });
 
+        ta_NoteData.setDragEnabled(true);
         sp_NoteData.setViewportView(ta_NoteData);
 
         ck_NoteWrap.addChangeListener(new javax.swing.event.ChangeListener()
@@ -240,12 +241,41 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
             public void undoableEditHappened(javax.swing.event.UndoableEditEvent evt)
             {
                 undo.addEdit(evt.getEdit());
+                noteMenu.setNoteUndoEnabled(undo.canUndo());
+                noteMenu.setNoteRedoEnabled(undo.canRedo());
             }
         });
+
+        noteMenu.setNoteUndoEnabled(undo.canUndo());
+        noteMenu.setNoteRedoEnabled(undo.canRedo());
+
         noteList = new java.util.ArrayList<S1S2>();
         Util.addFormAction(pl_NoteBase.getActionMap(), pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
         Util.addFileAction(pl_NoteBase.getActionMap(), pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
         Util.addHideAction(pl_NoteBase.getActionMap(), pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
+
+        pl_NoteBase.getActionMap().put("showMainPtn", new javax.swing.AbstractAction()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                TrayPtn.getCurrForm().setVisible(false);
+                TrayPtn.showMainPtn();
+                TrayPtn.getCurrForm().setVisible(true);
+            }
+        });
+        pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW).put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK | java.awt.event.InputEvent.ALT_DOWN_MASK), "showMainPtn");
+
+        pl_NoteBase.getActionMap().put("showNormPtn", new javax.swing.AbstractAction()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+            }
+        });
+        pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW).put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_DOWN_MASK | java.awt.event.InputEvent.ALT_DOWN_MASK), "showNormPtn");
 
         ta_NoteData.getActionMap().put(ConsEnv.EVENT_NOTE_ALLS, new javax.swing.AbstractAction()
         {
@@ -414,6 +444,10 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
         {
             Logs.exception(exp);
         }
+
+        undo.discardAllEdits();
+        noteMenu.setNoteUndoEnabled(undo.canUndo());
+        noteMenu.setNoteRedoEnabled(undo.canRedo());
     }
 
     @Override
@@ -463,10 +497,6 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
             Logs.exception(exp);
             Lang.showMesg(this, LangRes.P30F5A04, "");
         }
-
-        undo.discardAllEdits();
-        noteMenu.setNoteUndoEnabled(undo.canUndo());
-        noteMenu.setNoteRedoEnabled(undo.canRedo());
     }
 
     @Override
@@ -517,7 +547,6 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
             return;
         }
 
-
         noteList.clear();
         boolean b = DBA3000.findUserNote(noteName, noteList);
         b &= noteList.size() > 0;
@@ -535,6 +564,10 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
         {
             cb_NoteInfo.addItem(item);
         }
+
+        undo.discardAllEdits();
+        noteMenu.setNoteUndoEnabled(undo.canUndo());
+        noteMenu.setNoteRedoEnabled(undo.canRedo());
     }
 
     @Override
@@ -680,6 +713,10 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
             Lang.showMesg(this, null, exp.getMessage());
             return;
         }
+
+        undo.discardAllEdits();
+        noteMenu.setNoteUndoEnabled(undo.canUndo());
+        noteMenu.setNoteRedoEnabled(undo.canRedo());
     }
 
     private void ck_NoteWrapStateChanged(javax.swing.event.ChangeEvent evt)
