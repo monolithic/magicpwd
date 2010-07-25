@@ -600,6 +600,8 @@ public class MenuPop extends JPopupMenu
         });
         add(mi_NoteAlls);
 
+        addSeparator();
+
         mi_NoteCuts = new javax.swing.JMenuItem();
         mi_NoteCuts.addActionListener(new java.awt.event.ActionListener()
         {
