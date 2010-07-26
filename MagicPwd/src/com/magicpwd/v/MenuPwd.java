@@ -3,7 +3,6 @@
  */
 package com.magicpwd.v;
 
-
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 
@@ -68,44 +67,39 @@ public class MenuPwd extends JPopupMenu
         this.tpltData = tplt;
 
         String size = tplt.getSpec(EditItem.SPEC_PWDS_SIZE);
-        try
+        boolean checked = true;
+        if (Util.isValidateInteger(size))
         {
             charSize = Integer.parseInt(size);
-        }
-        catch (NumberFormatException exp)
-        {
-            Logs.exception(exp);
-            size = ConsCfg.DEF_PWDS_SIZE;
-            charSize = Integer.parseInt(size);
-        }
-
-        if (size.equals(mi_SizeDef.getActionCommand()))
-        {
-            mi_SizeDef.setSelected(true);
-        }
-        else
-        {
             for (javax.swing.JCheckBoxMenuItem item : mi_SizeNum)
             {
                 if (size.equals(item.getActionCommand()))
                 {
                     item.setSelected(true);
+                    checked = false;
                     break;
                 }
             }
         }
+        else
+        {
+            // 取用户默认配置数据
+            size = UserMdl.getUserCfg().getPwdsLen();
+            if (!Util.isValidate(size))
+            {
+                size = ConsCfg.DEF_PWDS_SIZE;
+            }
+            charSize = Integer.parseInt(size);
+        }
+        mi_SizeDef.setSelected(checked);
 
         String hash = tplt.getSpec(EditItem.SPEC_PWDS_HASH);
+        checked = true;
         if (!Util.isValidate(hash))
         {
-            hash = ConsCfg.DEF_PWDS_HASH;
+            hash = UserMdl.getUserCfg().getPwdsKey();
         }
-        if (hash.equals(mi_CharDef.getActionCommand()))
-        {
-            mi_CharDef.setSelected(true);
-            charSets = (String) mi_CharDef.getClientProperty("prop_char");
-        }
-        else
+        if (Util.isValidate(hash))
         {
             for (javax.swing.JCheckBoxMenuItem item : mi_CharPre)
             {
@@ -113,10 +107,17 @@ public class MenuPwd extends JPopupMenu
                 {
                     item.setSelected(true);
                     charSets = (String) item.getClientProperty("prop_char");
+                    checked = false;
                     break;
                 }
             }
         }
+        else
+        {
+            hash = ConsCfg.DEF_PWDS_HASH;
+            charSets = ConsCfg.DEF_PWDS_CHAR;
+        }
+        mi_CharDef.setSelected(true);
 
         mi_UrptMenu.setSelected("1".equals(tpltData.getSpec(EditItem.SPEC_PWDS_NRPT)));
     }

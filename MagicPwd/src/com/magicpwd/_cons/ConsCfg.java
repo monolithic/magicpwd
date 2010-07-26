@@ -119,7 +119,7 @@ public interface ConsCfg
     /**
      * 系统默认口令字符集
      */
-    String CFG_PWDS_CHAR = CFG_PWDS + ".char";
+    String CFG_PWDS_HASH = CFG_PWDS + ".hash";
     /**
      * 系统默认口令长度
      */

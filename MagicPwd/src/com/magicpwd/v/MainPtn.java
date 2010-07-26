@@ -1544,7 +1544,41 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             @Override
             public void mouseReleased(java.awt.event.MouseEvent evt)
             {
-                tb_ItemListMouseReleased(evt);
+                // 右键事件处理
+                if (evt.isPopupTrigger())
+                {
+                    int row = tb_KeysView.rowAtPoint(evt.getPoint());
+                    tb_KeysView.setRowSelectionInterval(row, row);
+                    gridMenu.show(tb_KeysView, evt.getX(), evt.getY());
+                }
+                else
+                {
+                    tb_ItemListMouseReleased(evt);
+                }
+            }
+
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent evt)
+            {
+                // 右键事件处理
+                if (evt.isPopupTrigger())
+                {
+                    int row = tb_KeysView.rowAtPoint(evt.getPoint());
+                    tb_KeysView.setRowSelectionInterval(row, row);
+                    gridMenu.show(tb_KeysView, evt.getX(), evt.getY());
+                }
+            }
+
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                // 右键事件处理
+                if (evt.isPopupTrigger())
+                {
+                    int row = tb_KeysView.rowAtPoint(evt.getPoint());
+                    tb_KeysView.setRowSelectionInterval(row, row);
+                    gridMenu.show(tb_KeysView, evt.getX(), evt.getY());
+                }
             }
         });
         tb_KeysView.addKeyListener(new java.awt.event.KeyAdapter()
@@ -1747,15 +1781,6 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
 
     private void tb_ItemListMouseReleased(java.awt.event.MouseEvent evt)
     {
-        // 右键事件处理
-        if (evt.isPopupTrigger())
-        {
-            int row = tb_KeysView.rowAtPoint(evt.getPoint());
-            tb_KeysView.setRowSelectionInterval(row, row);
-            gridMenu.show(tb_KeysView, evt.getX(), evt.getY());
-            return;
-        }
-
         // 左键事件处理
         int row = tb_KeysView.getSelectedRow();
         if (row < 0 || row > tb_KeysView.getRowCount() || row == tb_LastIndx)
@@ -1936,9 +1961,9 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             gm.saveData(true, true);
             UserMdl.getListMdl().wRemove(ls_LastIndx);
         }
-        catch (Exception e)
+        catch (Exception exp)
         {
-            e.printStackTrace();
+            Logs.exception(exp);
             return false;
         }
         return true;

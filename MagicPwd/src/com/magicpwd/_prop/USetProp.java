@@ -113,7 +113,7 @@ public class USetProp extends JPanel implements IPropBean
         for (Char item : UserMdl.getCharMdl().getCharSys())
         {
             cb_PwdsChar.addItem(item);
-            if (item.getP30F2103().equals(uc.getPwdsSet()))
+            if (item.getP30F2103().equals(uc.getPwdsKey()))
             {
                 cb_PwdsChar.setSelectedItem(item);
             }
@@ -121,7 +121,7 @@ public class USetProp extends JPanel implements IPropBean
         for (Char item : UserMdl.getCharMdl().getCharUsr())
         {
             cb_PwdsChar.addItem(item);
-            if (item.getP30F2103().equals(uc.getPwdsSet()))
+            if (item.getP30F2103().equals(uc.getPwdsKey()))
             {
                 cb_PwdsChar.setSelectedItem(item);
             }
@@ -149,7 +149,7 @@ public class USetProp extends JPanel implements IPropBean
         obj = cb_PwdsChar.getSelectedItem();
         if (obj != null && obj instanceof Char)
         {
-            uc.setPwdsSet(((Char) obj).getP30F2106());
+            uc.setPwdsKey(((Char) obj).getP30F2103());
         }
 
         String txt = tf_PwdsSize.getText().trim();
@@ -231,7 +231,7 @@ public class USetProp extends JPanel implements IPropBean
     {
         // 口令空间
         S1S3 item = (S1S3) cb_PwdsChar.getSelectedItem();
-        UserMdl.getUserCfg().setPwdsSet(item != null ? item.getK() : ConsCfg.DEF_PWDS_CHAR);
+        UserMdl.getUserCfg().setPwdsKey(item != null ? item.getK() : ConsCfg.DEF_PWDS_CHAR);
 
         // 口令长度
         String text = tf_PwdsSize.getText();
