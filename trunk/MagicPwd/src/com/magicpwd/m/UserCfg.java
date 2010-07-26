@@ -76,7 +76,7 @@ public final class UserCfg
         userCfg.setProperty(ConsCfg.CFG_STAY_TIME, ConsCfg.DEF_STAY_TIME);
 
         userCfg.setProperty(ConsCfg.CFG_PWDS_SIZE, ConsCfg.DEF_PWDS_SIZE);
-        userCfg.setProperty(ConsCfg.CFG_PWDS_CHAR, ConsCfg.DEF_PWDS_HASH);
+        userCfg.setProperty(ConsCfg.CFG_PWDS_HASH, ConsCfg.DEF_PWDS_HASH);
 
         userCfg.setProperty(ConsCfg.CFG_BACK_SIZE, "3");
         userCfg.setProperty(ConsCfg.CFG_BACK_PATH, ConsEnv.DIR_BAK);
@@ -234,20 +234,20 @@ public final class UserCfg
     }
 
     /**
-     * @return the pwdsSet
+     * @return the pwdsKey
      */
-    public final String getPwdsSet()
+    public final String getPwdsKey()
     {
-        return userCfg.getProperty(ConsCfg.CFG_PWDS_CHAR, ConsCfg.DEF_PWDS_HASH);
+        return userCfg.getProperty(ConsCfg.CFG_PWDS_HASH, ConsCfg.DEF_PWDS_HASH);
     }
 
     /**
-     * @param pwdsSet
-     *            the pwdsSet to set
+     * @param pwdsKey
+     *            the pwdsKey to set
      */
-    public final void setPwdsSet(String pwdsSet)
+    public final void setPwdsKey(String pwdsKey)
     {
-        userCfg.setProperty(ConsCfg.CFG_PWDS_CHAR, pwdsSet);
+        userCfg.setProperty(ConsCfg.CFG_PWDS_HASH, pwdsKey);
     }
 
     /**
