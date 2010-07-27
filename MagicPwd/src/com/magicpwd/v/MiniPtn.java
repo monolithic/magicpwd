@@ -525,6 +525,16 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
     }
 
     @Override
+    public void helpBlogActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    }
+
+    @Override
+    public void helpMlogActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    }
+
+    @Override
     public void helpUpdtActionPerformed(java.awt.event.ActionEvent evt)
     {
     }

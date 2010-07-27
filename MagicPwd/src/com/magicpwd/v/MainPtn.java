@@ -810,6 +810,42 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
     }
 
     @Override
+    public void helpBlogActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        if (!java.awt.Desktop.isDesktopSupported())
+        {
+            Lang.showMesg(this, LangRes.P30F7A0F, "");
+        }
+
+        try
+        {
+            java.awt.Desktop.getDesktop().browse(new java.net.URI(ConsEnv.BLOGSITE));
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+    }
+
+    @Override
+    public void helpMlogActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        if (!java.awt.Desktop.isDesktopSupported())
+        {
+            Lang.showMesg(this, LangRes.P30F7A0F, "");
+        }
+
+        try
+        {
+            java.awt.Desktop.getDesktop().browse(new java.net.URI(ConsEnv.MLOGSITE));
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+    }
+
+    @Override
     public void helpMailActionPerformed(java.awt.event.ActionEvent evt)
     {
         if (!java.awt.Desktop.isDesktopSupported())

@@ -808,6 +808,32 @@ public class MenuBar extends JMenuBar
         });
         mu_HelpMenu.add(mi_HelpSite);
 
+        mi_HelpBlog = new javax.swing.JMenuItem();
+        mi_HelpBlog.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0));
+        mi_HelpBlog.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                me_MenuEvent.helpBlogActionPerformed(evt);
+            }
+        });
+        //mu_HelpMenu.add(mi_HelpBlog);
+
+        mi_HelpMlog = new javax.swing.JMenuItem();
+        mi_HelpMlog.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0));
+        mi_HelpMlog.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                me_MenuEvent.helpMlogActionPerformed(evt);
+            }
+        });
+        mu_HelpMenu.add(mi_HelpMlog);
+
         mi_HelpMail = new javax.swing.JMenuItem();
         mi_HelpMail.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F3, 0));
         mi_HelpMail.addActionListener(new java.awt.event.ActionListener()
@@ -922,8 +948,8 @@ public class MenuBar extends JMenuBar
         Lang.setWText(mi_ViewMenu, LangRes.P30F7619, "显示菜单栏");
         Lang.setWText(mi_ViewTool, LangRes.P30F761A, "显示工具栏");
         Lang.setWText(mi_ViewInfo, LangRes.P30F761B, "显示状态栏");
-        Lang.setWText(mi_ViewMPay, LangRes.P30F7635, "切换到《迷你账簿》");
-        Lang.setWText(mi_ViewMPad, LangRes.P30F7636, "切换到《记事便签》");
+        Lang.setWText(mi_ViewMPay, LangRes.P30F7637, "切换到《迷你账簿》");
+        Lang.setWText(mi_ViewMPad, LangRes.P30F7638, "切换到《记事便签》");
 
     }
 
@@ -935,11 +961,11 @@ public class MenuBar extends JMenuBar
 
         Lang.setWText(mi_DataExpt, LangRes.P30F761E, "导出数据");
 
-        Lang.setWText(mi_DataSync, LangRes.P30F7632, "备份到Google Docs");
+        Lang.setWText(mi_DataSync, LangRes.P30F7634, "备份到Google Docs");
 
-        Lang.setWText(mi_DataBack, LangRes.P30F7633, "从Google Docs恢复");
+        Lang.setWText(mi_DataBack, LangRes.P30F7635, "从Google Docs恢复");
 
-        Lang.setWText(mi_DataDocs, LangRes.P30F7634, "配置Google Docs账户");
+        Lang.setWText(mi_DataDocs, LangRes.P30F7636, "配置Google Docs账户");
 
         Lang.setWText(mi_DataUSet, LangRes.P30F761F, "常规设置");
 
@@ -970,9 +996,9 @@ public class MenuBar extends JMenuBar
 
     private void initSkinLang()
     {
-        Lang.setWText(mu_SkinMenu, LangRes.P30F762F, "风格(&L)");
+        Lang.setWText(mu_SkinMenu, LangRes.P30F7631, "风格(&L)");
 
-        Lang.setWText(mi_SkinSystem, LangRes.P30F7630, "系统风格(&S)");
+        Lang.setWText(mi_SkinSystem, LangRes.P30F7632, "系统风格(&S)");
     }
 
     private void initHelpLang()
@@ -983,13 +1009,17 @@ public class MenuBar extends JMenuBar
 
         Lang.setWText(mi_HelpSite, LangRes.P30F762B, "软件首页");
 
-        Lang.setWText(mi_HelpMail, LangRes.P30F762C, "联系作者");
+        Lang.setWText(mi_HelpBlog, LangRes.P30F762C, "软件首页");
 
-        Lang.setWText(mi_HelpUpdt, LangRes.P30F762D, "检测更新");
+        Lang.setWText(mi_HelpMlog, LangRes.P30F762D, "软件首页");
 
-        Lang.setWText(mi_HelpJava, LangRes.P30F7631, "Java环境");
+        Lang.setWText(mi_HelpMail, LangRes.P30F762E, "联系作者");
 
-        Lang.setWText(mi_HelpInfo, LangRes.P30F762E, "关于");
+        Lang.setWText(mi_HelpUpdt, LangRes.P30F762F, "检测更新");
+
+        Lang.setWText(mi_HelpJava, LangRes.P30F7633, "Java环境");
+
+        Lang.setWText(mi_HelpInfo, LangRes.P30F7630, "关于");
     }
 
     private void mi_DataUSetActionPerformed(java.awt.event.ActionEvent evt)
@@ -1094,6 +1124,8 @@ public class MenuBar extends JMenuBar
     private javax.swing.JMenu mu_HelpMenu;
     private javax.swing.JMenuItem mi_HelpHelp;
     private javax.swing.JMenuItem mi_HelpSite;
+    private javax.swing.JMenuItem mi_HelpBlog;
+    private javax.swing.JMenuItem mi_HelpMlog;
     private javax.swing.JMenuItem mi_HelpMail;
     private javax.swing.JMenuItem mi_HelpUpdt;
     private javax.swing.JMenuItem mi_HelpSKey;

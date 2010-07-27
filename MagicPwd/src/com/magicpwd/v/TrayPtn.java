@@ -739,7 +739,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
 
         try
         {
-            java.awt.Desktop.getDesktop().browse(new java.net.URI("http://t.163.com/mpwd"));
+            java.awt.Desktop.getDesktop().browse(new java.net.URI(ConsEnv.MLOGSITE));
         }
         catch (Exception exp)
         {
