@@ -359,17 +359,19 @@ public interface LangRes
     String P30F7629 = "P30F7629";// 帮助(&H)
     String P30F762A = "P30F762A";// 帮助(&H)
     String P30F762B = "P30F762B";// 软件首页(&S)
-    String P30F762C = "P30F762C";// 联系作者(&C)
-    String P30F762D = "P30F762D";// 检测更新(&U)
-    String P30F762E = "P30F762E";// 关于(&A)
-    String P30F762F = "P30F762F";// 风格(&L)
-    String P30F7630 = "P30F7630";// 系统风格(&S)
-    String P30F7631 = "P30F7631";
-    String P30F7632 = "P30F7632";
+    String P30F762C = "P30F762C";// 软件首页(&S)
+    String P30F762D = "P30F762D";// 软件首页(&S)
+    String P30F762E = "P30F762E";// 联系作者(&C)
+    String P30F762F = "P30F762F";// 检测更新(&U)
+    String P30F7630 = "P30F7630";// 关于(&A)
+    String P30F7631 = "P30F7631";// 风格(&L)
+    String P30F7632 = "P30F7632";// 系统风格(&S)
     String P30F7633 = "P30F7633";
     String P30F7634 = "P30F7634";
     String P30F7635 = "P30F7635";
     String P30F7636 = "P30F7636";
+    String P30F7637 = "P30F7637";
+    String P30F7638 = "P30F7638";
     // ----------------------------------------------------
     // A 消息提示语言资源
     // ----------------------------------------------------

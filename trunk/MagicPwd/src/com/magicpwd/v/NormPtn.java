@@ -95,6 +95,16 @@ public class NormPtn extends javax.swing.JFrame implements IFormView, MPayEvt, F
     }
 
     @Override
+    public void helpBlogActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    }
+
+    @Override
+    public void helpMlogActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    }
+
+    @Override
     public void helpMailActionPerformed(java.awt.event.ActionEvent evt)
     {
     }

@@ -30,6 +30,10 @@ public interface MenuEvt
 
     void helpSiteActionPerformed(java.awt.event.ActionEvent evt);
 
+    void helpBlogActionPerformed(java.awt.event.ActionEvent evt);
+
+    void helpMlogActionPerformed(java.awt.event.ActionEvent evt);
+
     void helpMailActionPerformed(java.awt.event.ActionEvent evt);
 
     void helpUpdtActionPerformed(java.awt.event.ActionEvent evt);
