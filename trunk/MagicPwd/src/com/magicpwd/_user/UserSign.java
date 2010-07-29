@@ -920,9 +920,9 @@ public class UserSign extends javax.swing.JPanel
 
         if (backCall != null)
         {
+            TrayPtn.getInstance();
             backCall.callBack(null, null, ConsEnv.STR_SIGN_IN);
         }
-        TrayPtn.getInstance();
         dispoze();
     }
 
@@ -1042,6 +1042,7 @@ public class UserSign extends javax.swing.JPanel
 
         if (backCall != null)
         {
+            TrayPtn.getInstance();
             if (!backCall.callBack(null, null, ConsEnv.STR_SIGN_UP))
             {
                 System.exit(0);
@@ -1049,8 +1050,6 @@ public class UserSign extends javax.swing.JPanel
             }
         }
         dispoze();
-
-        TrayPtn.getInstance();
     }
 
     private void signPk()

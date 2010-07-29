@@ -807,13 +807,13 @@ public final class Util
         inputMap.remove(KeyStroke.getKeyStroke(KeyEvent.VK_F10, InputEvent.ALT_MASK));
     }
 
-    public static char[] nextRandomKey(char[] sets, int size, boolean unRepeat) throws Exception
+    public static char[] nextRandomKey(char[] sets, int size, boolean loop) throws Exception
     {
         if (sets == null)
         {
             throw new Exception("随机口令生成异常：口令字符空间不能为空！");
         }
-        if (unRepeat && sets.length < size)
+        if (!loop && sets.length < size)
         {
             throw new Exception("随机口令生成异常：口令长度 " + size + " 大于口令字符空间长度 " + sets.length + " ，无法正确生成不可重复口令！");
         }
@@ -824,7 +824,7 @@ public final class Util
         {
             t = random.nextInt(l);
             r[i] = sets[t];
-            if (unRepeat)
+            if (!loop)
             {
                 l -= 1;
                 sets[t] = sets[l];
@@ -1051,13 +1051,13 @@ public final class Util
         viewport.scrollRectToVisible(rect);
     }
 
-    public static char[] nextRandomKey(String sets, int size, boolean unRepeat) throws Exception
+    public static char[] nextRandomKey(String sets, int size, boolean loop) throws Exception
     {
         if (sets == null)
         {
             throw new Exception("随机口令生成异常：口令字符空间不能为空！");
         }
-        return nextRandomKey(sets.toCharArray(), size, unRepeat);
+        return nextRandomKey(sets.toCharArray(), size, loop);
     }
 
     public static boolean checkUpdate(String sid, String ver) throws Exception

@@ -8,12 +8,10 @@ import com.magicpwd._comn.S1S1;
 
 import javax.swing.JPanel;
 
-import com.magicpwd._comn.S1S3;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IPropBean;
 import com.magicpwd._util.Lang;
-import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.UserMdl;
@@ -40,7 +38,7 @@ public class USetProp extends JPanel implements IPropBean
         cb_PwdsChar = new javax.swing.JComboBox();
         lb_PwdsSize = new javax.swing.JLabel();
         tf_PwdsSize = new javax.swing.JTextField(6);
-        ck_PwdsUrpt = new javax.swing.JCheckBox();
+        ck_PwdsLoop = new javax.swing.JCheckBox();
         lb_BackCount = new javax.swing.JLabel();
         tf_BackCount = new javax.swing.JTextField(6);
         lb_BackPath = new javax.swing.JLabel();
@@ -62,9 +60,9 @@ public class USetProp extends JPanel implements IPropBean
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addComponent(lb_UserLang).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(cb_UserLang, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)).addGroup(layout.createSequentialGroup().addComponent(lb_PwdsChar).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(cb_PwdsChar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addGroup(layout.createSequentialGroup().addComponent(lb_PwdsSize).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_PwdsSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(ck_PwdsUrpt)).addGroup(layout.createSequentialGroup().addComponent(lb_BackCount).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_BackCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addGroup(layout.createSequentialGroup().addComponent(lb_BackPath).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_BackPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_BackPath)).addGroup(layout.createSequentialGroup().addComponent(lb_StayTime).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_StayTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))).addContainerGap(97, Short.MAX_VALUE)));
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addComponent(lb_UserLang).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(cb_UserLang, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)).addGroup(layout.createSequentialGroup().addComponent(lb_PwdsChar).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(cb_PwdsChar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addGroup(layout.createSequentialGroup().addComponent(lb_PwdsSize).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_PwdsSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(ck_PwdsLoop)).addGroup(layout.createSequentialGroup().addComponent(lb_BackCount).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_BackCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addGroup(layout.createSequentialGroup().addComponent(lb_BackPath).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_BackPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(bt_BackPath)).addGroup(layout.createSequentialGroup().addComponent(lb_StayTime).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addComponent(tf_StayTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))).addContainerGap(97, Short.MAX_VALUE)));
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_UserLang).addComponent(cb_UserLang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addGap(18, 18, 18).addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_PwdsChar).addComponent(cb_PwdsChar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_PwdsSize).addComponent(tf_PwdsSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(ck_PwdsUrpt)).addGap(18, 18, 18).addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_BackCount).addComponent(tf_BackCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_BackPath).addComponent(tf_BackPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(bt_BackPath)).addGap(18, 18, 18).addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_StayTime).addComponent(tf_StayTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addContainerGap(59, Short.MAX_VALUE)));
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_UserLang).addComponent(cb_UserLang, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addGap(18, 18, 18).addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_PwdsChar).addComponent(cb_PwdsChar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_PwdsSize).addComponent(tf_PwdsSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(ck_PwdsLoop)).addGap(18, 18, 18).addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_BackCount).addComponent(tf_BackCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED).addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_BackPath).addComponent(tf_BackPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE).addComponent(bt_BackPath)).addGap(18, 18, 18).addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_StayTime).addComponent(tf_StayTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)).addContainerGap(59, Short.MAX_VALUE)));
     }
 
     @Override
@@ -72,7 +70,7 @@ public class USetProp extends JPanel implements IPropBean
     {
         Lang.setWText(lb_PwdsChar, LangRes.P30F8301, "字符空间");
         Lang.setWText(lb_PwdsSize, LangRes.P30F8302, "口令长度");
-        Lang.setWText(ck_PwdsUrpt, LangRes.P30F8303, "不可重复");
+        Lang.setWText(ck_PwdsLoop, LangRes.P30F8303, "允许重复");
 
         Lang.setWText(lb_BackCount, LangRes.P30F8304, "备份数量");
         Lang.setWText(lb_BackPath, LangRes.P30F8305, "备份路径");
@@ -128,7 +126,7 @@ public class USetProp extends JPanel implements IPropBean
         }
 
         tf_PwdsSize.setText(uc.getPwdsLen());
-        ck_PwdsUrpt.setSelected(uc.isPwdsUpt());
+        ck_PwdsLoop.setSelected(uc.isPwdsLoop());
 
         tf_BackCount.setText("" + uc.getBackNum());
         tf_BackPath.setText(uc.getBackDir());
@@ -157,7 +155,7 @@ public class USetProp extends JPanel implements IPropBean
         {
             uc.setPwdsLen(Integer.parseInt(txt));
         }
-        uc.setPwdsUpt(ck_PwdsUrpt.isSelected());
+        uc.setPwdsLoop(ck_PwdsLoop.isSelected());
 
         txt = tf_BackCount.getText().trim();
         if (Util.isValidateInteger(txt))
@@ -227,113 +225,10 @@ public class USetProp extends JPanel implements IPropBean
         tf_BackPath.setText(backPath.getPath());
     }
 
-    private void bt_UpdateActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        // 口令空间
-        S1S3 item = (S1S3) cb_PwdsChar.getSelectedItem();
-        UserMdl.getUserCfg().setPwdsKey(item != null ? item.getK() : ConsCfg.DEF_PWDS_CHAR);
-
-        // 口令长度
-        String text = tf_PwdsSize.getText();
-        int size;
-        try
-        {
-            size = Integer.parseInt(text);
-        }
-        catch (NumberFormatException exp)
-        {
-            Logs.exception(exp);
-            size = Integer.parseInt(ConsCfg.DEF_PWDS_SIZE);
-        }
-        if (size < 1 || size > 1024)
-        {
-            size = 8;
-        }
-        UserMdl.getUserCfg().setPwdsLen(size);
-
-        // 可否重复
-        UserMdl.getUserCfg().setPwdsUpt(ck_PwdsUrpt.isSelected());
-
-        // 备份数量
-        text = tf_BackCount.getText();
-        try
-        {
-            size = Integer.parseInt(text);
-        }
-        catch (NumberFormatException exp)
-        {
-            Logs.exception(exp);
-            size = Integer.parseInt(ConsCfg.DEF_BACK_SIZE);
-        }
-        if (size < 1 || size > 16)
-        {
-            size = 3;
-        }
-        UserMdl.getUserCfg().setBackNum(size);
-
-        // 备份路径
-        if (backPath == null)
-        {
-            if (Util.isValidate(tf_BackPath.getText()))
-            {
-                backPath = new java.io.File(tf_BackPath.getText());
-            }
-            else
-            {
-                backPath = new java.io.File(ConsCfg.DEF_BACK_PATH);
-            }
-        }
-        if (!backPath.exists())
-        {
-            try
-            {
-                backPath.mkdirs();
-            }
-            catch (Exception exp)
-            {
-                Lang.showMesg(this, LangRes.P30F8A01, "创建数据备份目录失败！");
-                return;
-            }
-        }
-        if (!backPath.canWrite())
-        {
-            backPath = new java.io.File(ConsCfg.DEF_BACK_PATH);
-        }
-        UserMdl.getUserCfg().setBackDir(backPath.getPath());
-
-        // 安全时间
-        text = tf_StayTime.getText();
-        try
-        {
-            size = Integer.parseInt(text);
-        }
-        catch (NumberFormatException exp)
-        {
-            Logs.exception(exp);
-            size = Integer.parseInt(ConsCfg.DEF_STAY_TIME);
-        }
-        if (size < 1 || size > 3600)
-        {
-            size = 60;
-        }
-        UserMdl.getUserCfg().setStayTime(size);
-    }
-
-    private void bt_DefaultActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        cb_PwdsChar.setSelectedItem(new S1S3(ConsCfg.DEF_PWDS_HASH, "", "", ""));
-        tf_PwdsSize.setText(ConsCfg.DEF_PWDS_SIZE);
-        ck_PwdsUrpt.setSelected(false);
-
-        tf_BackCount.setText(ConsCfg.DEF_BACK_SIZE);
-        tf_BackPath.setText(ConsCfg.DEF_BACK_PATH);
-
-        tf_StayTime.setText(ConsCfg.DEF_STAY_TIME);
-    }
     private javax.swing.JButton bt_BackPath;
     private javax.swing.JComboBox cb_PwdsChar;
+    private javax.swing.JCheckBox ck_PwdsLoop;
     private javax.swing.JComboBox cb_UserLang;
-    private javax.swing.JCheckBox ck_PwdsUrpt;
     private javax.swing.JLabel lb_BackCount;
     private javax.swing.JLabel lb_BackPath;
     private javax.swing.JLabel lb_PwdsChar;

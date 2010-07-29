@@ -32,7 +32,7 @@ public interface IEditItem
     int SPEC_FILE_NAME = 0;// 附件原文件名
     int SPEC_PWDS_HASH = 0;// 字符空间索引
     int SPEC_PWDS_SIZE = 1;// 生成口令长度
-    int SPEC_PWDS_NRPT = 2;// 是否允许重复
+    int SPEC_PWDS_LOOP = 2;// 是否允许重复
 
     /**
      * 

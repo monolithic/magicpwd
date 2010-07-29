@@ -127,7 +127,7 @@ public interface ConsCfg
     /**
      * 生成口令时系统默认是否可以生出重复字符
      */
-    String CFG_PWDS_URPT = CFG_PWDS + ".urpt";
+    String CFG_PWDS_LOOP = CFG_PWDS + ".loop";
     /**
      * 数据备份：默认备份文件数量
      */
