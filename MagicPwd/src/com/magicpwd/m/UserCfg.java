@@ -328,26 +328,26 @@ public final class UserCfg
         userCfg.setProperty(ConsCfg.CFG_VIEW_EDIT_WND, editWnd ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FAIL);
     }
 
-    public final String getPwdsUpt()
+    public final String getPwdsLoop()
     {
-        return userCfg.getProperty(ConsCfg.CFG_PWDS_URPT, "");
+        return userCfg.getProperty(ConsCfg.CFG_PWDS_LOOP, ConsCfg.DEF_TRUE);
     }
 
     /**
      * @return the pwdUpt
      */
-    public final boolean isPwdsUpt()
+    public final boolean isPwdsLoop()
     {
-        return ConsCfg.DEF_TRUE.equalsIgnoreCase(userCfg.getProperty(ConsCfg.CFG_PWDS_URPT));
+        return ConsCfg.DEF_TRUE.equalsIgnoreCase(getPwdsLoop());
     }
 
     /**
-     * @param pwdsUpt
+     * @param pwdsLoop
      *            the pwdsUpt to set
      */
-    public final void setPwdsUpt(boolean pwdsUpt)
+    public final void setPwdsLoop(boolean pwdsLoop)
     {
-        userCfg.setProperty(ConsCfg.CFG_PWDS_URPT, pwdsUpt ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FAIL);
+        userCfg.setProperty(ConsCfg.CFG_PWDS_LOOP, pwdsLoop ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FAIL);
     }
 
     public final void setUserLang(String lang)

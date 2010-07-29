@@ -409,7 +409,7 @@ final class UserSec implements Key
      * @return
      * @throws java.security.NoSuchAlgorithmException
      */
-    private final byte[] signInDigest() throws NoSuchAlgorithmException
+    private byte[] signInDigest() throws NoSuchAlgorithmException
     {
         MessageDigest md = MessageDigest.getInstance(ConsEnv.NAME_DIGEST);
         String s = new StringBuffer(name).append('@').append(pwds).append('/').toString();
@@ -421,7 +421,7 @@ final class UserSec implements Key
      * @return
      * @throws NoSuchAlgorithmException
      */
-    private final byte[] signSkDigest() throws NoSuchAlgorithmException
+    private byte[] signSkDigest() throws NoSuchAlgorithmException
     {
         MessageDigest md = MessageDigest.getInstance(ConsEnv.NAME_DIGEST);
         String s = new StringBuffer(name).append('$').append(pwds).append('#').toString();
@@ -433,7 +433,7 @@ final class UserSec implements Key
      * @return
      * @throws java.security.NoSuchAlgorithmException
      */
-    private final byte[] cipherDigest() throws NoSuchAlgorithmException
+    private byte[] cipherDigest() throws NoSuchAlgorithmException
     {
         MessageDigest md = MessageDigest.getInstance("MD5");
         String s = new StringBuffer(name).append('&').append(pwds).append('!').toString();
@@ -444,7 +444,7 @@ final class UserSec implements Key
      * 获取可用于数据库存储的掩码
      * @return
      */
-    private final char[] generateDataChar()
+    private char[] generateDataChar()
     {
         char[] c = new char[93];
         for (char i = 0; i < 6; i += 1)
@@ -458,7 +458,7 @@ final class UserSec implements Key
 
         try
         {
-            return Util.nextRandomKey(c, 16, true);
+            return Util.nextRandomKey(c, 16, false);
         }
         catch (Exception exp)
         {
@@ -467,7 +467,7 @@ final class UserSec implements Key
         }
     }
 
-    private final byte[] generateDataKeys()
+    private byte[] generateDataKeys()
     {
         byte[] b = new byte[16];
         new Random().nextBytes(b);
@@ -478,7 +478,7 @@ final class UserSec implements Key
      * 
      * @return
      */
-    private final char[] generateUserChar()
+    private char[] generateUserChar()
     {
         char[] c = new char[93];
         for (char i = 0; i < 6; i += 1)
@@ -492,7 +492,7 @@ final class UserSec implements Key
 
         try
         {
-            return Util.nextRandomKey(c, 8, true);
+            return Util.nextRandomKey(c, 8, false);
         }
         catch (Exception exp)
         {

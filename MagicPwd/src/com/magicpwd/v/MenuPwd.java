@@ -17,7 +17,7 @@ import com.magicpwd._util.Util;
 import com.magicpwd.m.UserMdl;
 
 /**
- * @author shangwen.yao
+ * @author Amon
  * 
  */
 public class MenuPwd extends JPopupMenu
@@ -119,7 +119,12 @@ public class MenuPwd extends JPopupMenu
         }
         mi_CharDef.setSelected(true);
 
-        mi_UrptMenu.setSelected("1".equals(tpltData.getSpec(EditItem.SPEC_PWDS_NRPT)));
+        String loop = tpltData.getSpec(EditItem.SPEC_PWDS_LOOP);
+        if (!Util.isValidate(loop))
+        {
+            loop = UserMdl.getUserCfg().getPwdsLoop();
+        }
+        mi_LoopMenu.setSelected(ConsCfg.DEF_TRUE.equalsIgnoreCase(loop));
     }
 
     public String getCharSets()
@@ -132,9 +137,9 @@ public class MenuPwd extends JPopupMenu
         return charSize;
     }
 
-    public boolean isCharUrpt()
+    public boolean isCharLoop()
     {
-        return mi_UrptMenu.isSelected();
+        return mi_LoopMenu.isSelected();
     }
 
     private void initSizeView()
@@ -241,8 +246,8 @@ public class MenuPwd extends JPopupMenu
 
     private void initUrptView()
     {
-        mi_UrptMenu = new javax.swing.JCheckBoxMenuItem();
-        mi_UrptMenu.addActionListener(new java.awt.event.ActionListener()
+        mi_LoopMenu = new javax.swing.JCheckBoxMenuItem();
+        mi_LoopMenu.addActionListener(new java.awt.event.ActionListener()
         {
 
             @Override
@@ -251,8 +256,8 @@ public class MenuPwd extends JPopupMenu
                 mi_UrptMenuActionPerformed(evt);
             }
         });
-        add(mi_UrptMenu);
-        mi_UrptMenu.setSelected(UserMdl.getUserCfg().isPwdsUpt());
+        add(mi_LoopMenu);
+        mi_LoopMenu.setSelected(UserMdl.getUserCfg().isPwdsLoop());
     }
 
     private void initSizeLang()
@@ -315,7 +320,7 @@ public class MenuPwd extends JPopupMenu
 
     private void initNrptLang()
     {
-        Lang.setWText(mi_UrptMenu, LangRes.P30F7C07, "不可重复");
+        Lang.setWText(mi_LoopMenu, LangRes.P30F7C07, "允许重复");
     }
 
     /**
@@ -394,7 +399,7 @@ public class MenuPwd extends JPopupMenu
      */
     private void mi_UrptMenuActionPerformed(java.awt.event.ActionEvent evt)
     {
-        tpltData.setSpec(EditItem.SPEC_PWDS_NRPT, mi_UrptMenu.isSelected() ? "1" : "0");
+        tpltData.setSpec(EditItem.SPEC_PWDS_LOOP, mi_LoopMenu.isSelected() ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FAIL);
     }
     private javax.swing.JMenu mu_SizeMenu;
     private javax.swing.JCheckBoxMenuItem mi_SizeDef;
@@ -403,5 +408,5 @@ public class MenuPwd extends JPopupMenu
     private javax.swing.JMenu mu_CharMenu;
     private javax.swing.JCheckBoxMenuItem mi_CharDef;
     private javax.swing.JCheckBoxMenuItem[] mi_CharPre;
-    private javax.swing.JCheckBoxMenuItem mi_UrptMenu;
+    private javax.swing.JCheckBoxMenuItem mi_LoopMenu;
 }

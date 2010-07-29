@@ -245,7 +245,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 
         try
         {
-            char[] t = Util.nextRandomKey(menuPwd.getCharSets(), menuPwd.getCharSize(), menuPwd.isCharUrpt());
+            char[] t = Util.nextRandomKey(menuPwd.getCharSets(), menuPwd.getCharSize(), menuPwd.isCharLoop());
             pf_PropData.setText(new String(t));
         }
         catch (Exception exp)

@@ -164,7 +164,7 @@ public class EditItem implements IEditItem
             return "";
         }
 
-        StringBuffer text = new StringBuffer();
+        StringBuilder text = new StringBuilder();
         for (int i = 0, j = spec.size(); i < j; i += 1)
         {
             text.append(c).append(spec.get(i));
@@ -206,7 +206,7 @@ public class EditItem implements IEditItem
                 spec = new ArrayList<String>(3);
                 spec.add(UserMdl.getUserCfg().getPwdsKey());
                 spec.add(UserMdl.getUserCfg().getPwdsLen());
-                spec.add(UserMdl.getUserCfg().getPwdsUpt());
+                spec.add(UserMdl.getUserCfg().getPwdsLoop());
                 break;
             case ConsDat.INDX_FILE:
                 spec = new ArrayList<String>(1);
