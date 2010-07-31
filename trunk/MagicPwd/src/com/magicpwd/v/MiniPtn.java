@@ -432,10 +432,10 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
             int len = fis.read(buf);
             fis.close();
             ta_NoteData.setText(new String(buf, 0, len));
-            String path = file.getPath();
+            String path = file.getName();
             if (path.length() > 20)
             {
-                path = "..." + path.substring(path.length() - 12);
+                path = "..." + path.substring(path.length() - 20);
             }
             infoLayout.show(pl_NoteInfo, "info");
             lb_NoteInfo.setText(path);

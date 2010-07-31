@@ -643,8 +643,14 @@ public class UserSign extends javax.swing.JPanel
                     javax.swing.Icon icon = null;
                     try
                     {
-                        String addr = java.net.InetAddress.getLocalHost().getHostAddress();
-                        java.net.URL url = new java.net.URL(ConsEnv.HOMEPAGE + "mpwd/mpwd0001.ashx?uri=" + addr);
+                        StringBuilder buf =new StringBuilder();
+                        buf.append(ConsEnv.HOMEPAGE);
+                        buf.append("mpwd/mpwd0001.ashx?uri=");
+                        buf.append(java.net.InetAddress.getLocalHost().getHostAddress());
+                        buf.append("&opt=").append(System.getProperty("os.name"));
+                        buf.append("_").append(System.getProperty("os.arch"));
+                        buf.append("_").append(System.getProperty("os.version"));
+                        java.net.URL url = new java.net.URL(buf.toString());
                         java.io.InputStream stream = url.openStream();
                         icon = new javax.swing.ImageIcon(ImageIO.read(stream));
                         stream.close();
