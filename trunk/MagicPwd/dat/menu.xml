@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : menu.xml
+    Created on : 2010年8月1日, 下午8:21
+    Author     : aven
+    Description:
+        《魔方密码》系统菜单配置文档。
+-->
+<magicpwd>
+    <menubar id="">
+        <menu text="文件(&F)" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
+            <item type="normal" text="退出(&X)" tips="" icon="" action="" strokes="">
+
+            </item>
+            <item type="checkbox" text="退出(&X)" tips="" icon="" action="" strokes="" group="">
+
+            </item>
+            <item type="radiobox" text="退出(&X)" tips="" icon="" action="" strokes="" group="">
+
+            </item>
+            <item type="seperator">
+
+            </item>
+        </menu>
+    </menubar>
+    <menupop id="">
+
+    </menupop>
+</magicpwd>
