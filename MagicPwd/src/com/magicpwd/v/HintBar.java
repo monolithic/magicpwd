@@ -4,12 +4,12 @@
 package com.magicpwd.v;
 
 import com.magicpwd._comn.Keys;
+import com.magicpwd._util.Char;
 import java.awt.event.ActionEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-import com.magicpwd._util.Util;
 import com.magicpwd.c.InfoEvt;
 import com.magicpwd.m.UserMdl;
 import java.awt.event.ActionListener;
@@ -137,7 +137,7 @@ public class HintBar extends JPanel
         int size = UserMdl.getHintMdl().getUnreadCount();
         if (size > 0)
         {
-            lb_InfoLabel.setText(Util.format("您有 {0} 条提醒数据！", Integer.toString(size)));
+            lb_InfoLabel.setText(Char.format("您有 {0} 条提醒数据！", Integer.toString(size)));
             lb_InfoLabel.setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
             lb_InfoLabel.setToolTipText("点击查看详细信息！");
         }

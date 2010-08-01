@@ -115,7 +115,7 @@ public class InfoBean extends javax.swing.JPanel implements IEditBean
 
         // 显示提示信息
         String t = Integer.toHexString(new java.util.Random().nextInt(tipsSize) + 1);
-        t = "P30F1B" + Util.lPad(t, 2, '0').toUpperCase();
+        t = "P30F1B" + com.magicpwd._util.Char.lPad(t, 2, '0').toUpperCase();
         Lang.setWText(ta_PropData, t, "");
     }
 

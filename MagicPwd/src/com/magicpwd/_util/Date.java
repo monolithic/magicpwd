@@ -158,6 +158,6 @@ public class Date
 
     public static String curTime()
     {
-        return Util.lPad(Long.toHexString(System.currentTimeMillis()), 16, '0');
+        return Char.lPad(Long.toHexString(System.currentTimeMillis()), 16, '0');
     }
 }

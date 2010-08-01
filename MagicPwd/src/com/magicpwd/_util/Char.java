@@ -4,6 +4,7 @@
  */
 package com.magicpwd._util;
 
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 /**
@@ -12,6 +13,83 @@ import java.util.regex.Pattern;
  */
 public class Char
 {
+
+    public static String format(String src, String... arg)
+    {
+        if (src != null)
+        {
+            int i = 0;
+            for (String tmp : arg)
+            {
+                src = src.replace("{" + (i++) + "}", tmp);
+            }
+        }
+        return src;
+    }
+
+    public static String lPad(String s, int length, char c)
+    {
+        if (length <= s.length())
+        {
+            return s;
+        }
+
+        char[] pad = new char[length - s.length()];
+        Arrays.fill(pad, c);
+        return new String(pad) + s;
+    }
+
+    /**
+     * 去除左空白
+     *
+     * @param s
+     * @return
+     */
+    public static String lTrim(String s)
+    {
+        return lTrim(s, " ");
+    }
+
+    /**
+     * @param s
+     * @param c
+     * @return
+     */
+    public static String lTrim(String s, String c)
+    {
+        return (s != null) ? s.replaceAll("^[\\s" + c + "]+", c) : s;
+    }
+
+    /**
+     * 右填充指定字符，使原字符串达到指定的长度
+     *
+     * @param s
+     * @param length
+     * @param c
+     * @return
+     */
+    public static String rPad(String s, int length, char c)
+    {
+        if (length <= s.length())
+        {
+            return s;
+        }
+
+        char[] pad = new char[length - s.length()];
+        Arrays.fill(pad, c);
+        return s + new String(pad);
+    }
+
+    /**
+     * 去除右空白
+     *
+     * @param s
+     * @return
+     */
+    public static String rTrim(String s)
+    {
+        return (s != null) ? s.replaceAll("[\\s　]+$", "") : s;
+    }
 
     public static boolean isValidate(String t)
     {

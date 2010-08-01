@@ -245,7 +245,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
 
             if (!com.magicpwd._util.Char.isValidate(amaName))
             {
-                amaName = Util.lPad(Long.toHexString(System.currentTimeMillis()), 16, '0');
+                amaName = com.magicpwd._util.Char.lPad(Long.toHexString(System.currentTimeMillis()), 16, '0');
             }
             try
             {
