@@ -258,7 +258,7 @@ public class MdiDialog extends javax.swing.JDialog
      */
     public void showProp(String panelKey, boolean showList)
     {
-        if (!Util.isValidate(panelKey))
+        if (!com.magicpwd._util.Char.isValidate(panelKey))
         {
             return;
         }

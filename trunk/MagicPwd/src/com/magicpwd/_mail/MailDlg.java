@@ -76,7 +76,7 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
         try
         {
             store = connect.getStore();
-            Folder f = (Util.isValidate(folder) ? store.getFolder(folder) : store.getDefaultFolder());
+            Folder f = (com.magicpwd._util.Char.isValidate(folder) ? store.getFolder(folder) : store.getDefaultFolder());
             NodeMdl model = new NodeMdl(connect, f);
             listFolders(connect, model, f);
 
@@ -365,7 +365,7 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
 
         NodeMdl node = (NodeMdl) obj;
         String name = node.getKeyWord();
-        if (!Util.isValidate(name))
+        if (!com.magicpwd._util.Char.isValidate(name))
         {
             return;
         }

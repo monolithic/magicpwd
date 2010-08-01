@@ -195,7 +195,7 @@ public class Mail
         MimeMessage msg = new MimeMessage(session);
 
         // 邮件发送人
-        if (!Util.isValidate(mailFrom))
+        if (!Char.isValidate(mailFrom))
         {
             return false;
         }
@@ -312,7 +312,7 @@ public class Mail
             inbox.fetch(msgs, profile);
 
             // 读取指定标题的邮件
-            if (Util.isValidate(mailFrom) && Util.isValidate(subject))
+            if (Char.isValidate(mailFrom) && Char.isValidate(subject))
             {
                 for (int i = 0; i < msgs.length; i++)
                 {
@@ -352,7 +352,7 @@ public class Mail
         //String fileName = base64Decoder(s);
 
         String fileName = part.getFileName();
-        if (!Util.isValidate(fileName))
+        if (!Char.isValidate(fileName))
         {
             return;
         }
@@ -442,7 +442,7 @@ public class Mail
      */
     public void setMailFrom(String from)
     {
-        if (Util.isValidateEmail(from))
+        if (Char.isValidateEmail(from))
         {
             mailFrom = from;
         }
@@ -455,7 +455,7 @@ public class Mail
      */
     public void addMailTO(String to)
     {
-        if (Util.isValidateEmail(to))
+        if (Char.isValidateEmail(to))
         {
             mailTO.add(to);
         }
@@ -467,7 +467,7 @@ public class Mail
      */
     public void addMailCC(String cc)
     {
-        if (Util.isValidateEmail(cc))
+        if (Char.isValidateEmail(cc))
         {
             mailCC.add(cc);
         }
@@ -480,7 +480,7 @@ public class Mail
      */
     public void addMailBCC(String bcc)
     {
-        if (Util.isValidateEmail(bcc))
+        if (Char.isValidateEmail(bcc))
         {
             mailBCC.add(bcc);
         }

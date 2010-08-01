@@ -3,6 +3,7 @@ package com.magicpwd._user;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Jpng;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -587,7 +588,7 @@ public class UserSign extends javax.swing.JPanel
             case ConsEnv.INT_SIGN_IN:
                 // 显示上次登录用户
                 String name = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_USER_LAST);
-                if (Util.isValidate(name))
+                if (com.magicpwd._util.Char.isValidate(name))
                 {
                     tf_UserName.setText(name);
                 }
@@ -643,13 +644,13 @@ public class UserSign extends javax.swing.JPanel
                     javax.swing.Icon icon = null;
                     try
                     {
-                        StringBuilder buf =new StringBuilder();
+                        StringBuilder buf = new StringBuilder();
                         buf.append(ConsEnv.HOMEPAGE);
                         buf.append("mpwd/mpwd0001.ashx?uri=");
                         buf.append(java.net.InetAddress.getLocalHost().getHostAddress());
-                        buf.append("&opt=").append(System.getProperty("os.name"));
-                        buf.append("_").append(System.getProperty("os.arch"));
-                        buf.append("_").append(System.getProperty("os.version"));
+                        buf.append("&opt=").append(Char.escape(System.getProperty("os.name")));
+                        buf.append("_").append(Char.escape(System.getProperty("os.arch")));
+                        buf.append("_").append(Char.escape(System.getProperty("os.version")));
                         java.net.URL url = new java.net.URL(buf.toString());
                         java.io.InputStream stream = url.openStream();
                         icon = new javax.swing.ImageIcon(ImageIO.read(stream));
@@ -871,14 +872,14 @@ public class UserSign extends javax.swing.JPanel
     private void signIn()
     {
         String name = tf_UserName.getText();
-        if (!Util.isValidate(name))
+        if (!com.magicpwd._util.Char.isValidate(name))
         {
             Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
             tf_UserName.requestFocus();
             return;
         }
         String pwds = new String(pf_UserKey0.getPassword());
-        if (!Util.isValidate(pwds))
+        if (!com.magicpwd._util.Char.isValidate(pwds))
         {
             Lang.showMesg(this, LangRes.P30FAA02, "请输入登录口令！");
             pf_UserKey0.requestFocus();
@@ -935,14 +936,14 @@ public class UserSign extends javax.swing.JPanel
     private void signRs()
     {
         String name = tf_UserName.getText();
-        if (!Util.isValidate(name))
+        if (!com.magicpwd._util.Char.isValidate(name))
         {
             Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
             tf_UserName.requestFocus();
             return;
         }
         String pwds = new String(pf_UserKey0.getPassword());
-        if (!Util.isValidate(pwds))
+        if (!com.magicpwd._util.Char.isValidate(pwds))
         {
             Lang.showMesg(this, LangRes.P30FAA02, "请输入登录口令！");
             pf_UserKey0.requestFocus();
@@ -999,7 +1000,7 @@ public class UserSign extends javax.swing.JPanel
     {
         // 登录名称检测
         String un = tf_UserName.getText();
-        if (!Util.isValidate(un))
+        if (!com.magicpwd._util.Char.isValidate(un))
         {
             Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
             tf_UserName.requestFocus();
@@ -1008,7 +1009,7 @@ public class UserSign extends javax.swing.JPanel
 
         // 口令为空检测
         String p1 = new String(pf_UserKey0.getPassword());
-        if (!Util.isValidate(p1))
+        if (!com.magicpwd._util.Char.isValidate(p1))
         {
             Lang.showMesg(this, LangRes.P30FAA02, "请输入登录口令！");
             pf_UserKey0.requestFocus();
@@ -1072,7 +1073,7 @@ public class UserSign extends javax.swing.JPanel
         }
 
         String p0 = new String(pf_UserKey0.getPassword());
-        if (!Util.isValidate(p0))
+        if (!com.magicpwd._util.Char.isValidate(p0))
         {
             Lang.showMesg(this, LangRes.P30FAA02, "请输入登录口令！");
             pf_UserKey0.requestFocus();
@@ -1109,14 +1110,14 @@ public class UserSign extends javax.swing.JPanel
     private void signFp()
     {
         String name = tf_UserName.getText();
-        if (!Util.isValidate(name))
+        if (!com.magicpwd._util.Char.isValidate(name))
         {
             Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
             tf_UserName.requestFocus();
             return;
         }
         String pwds = new String(pf_UserKey0.getPassword());
-        if (!Util.isValidate(pwds))
+        if (!com.magicpwd._util.Char.isValidate(pwds))
         {
             Lang.showMesg(this, LangRes.P30FAA14, "请输入安全口令！");
             pf_UserKey0.requestFocus();
@@ -1185,7 +1186,7 @@ public class UserSign extends javax.swing.JPanel
     private void signSk()
     {
         String p1 = new String(pf_UserKey1.getPassword());
-        if (!Util.isValidate(p1))
+        if (!com.magicpwd._util.Char.isValidate(p1))
         {
             Lang.showMesg(this, LangRes.P30FAA14, "请输入安全口令！");
             pf_UserKey1.setText("");
@@ -1204,7 +1205,7 @@ public class UserSign extends javax.swing.JPanel
         }
 
         String p0 = new String(pf_UserKey0.getPassword());
-        if (!Util.isValidate(p0))
+        if (!com.magicpwd._util.Char.isValidate(p0))
         {
             Lang.showMesg(this, LangRes.P30FAA02, "请输入登录口令！");
             pf_UserKey0.requestFocus();

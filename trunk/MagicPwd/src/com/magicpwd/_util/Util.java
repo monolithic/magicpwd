@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,7 +40,6 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd.c.MenuEvt;
 import com.magicpwd.c.MPwdEvt;
 import com.magicpwd.m.UserMdl;
-import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
 import org.dom4j.Document;
 import org.dom4j.Node;
@@ -85,54 +83,6 @@ public final class Util
         return new String(buf);
     }
 
-    public static boolean isValidate(String t)
-    {
-        return t != null ? t.trim().length() > 0 : false;
-    }
-
-    public static boolean isValidate(String t, int size)
-    {
-        return t != null ? t.trim().length() == size : false;
-    }
-
-    public static boolean isValidate(String t, int min, int max)
-    {
-        if (t == null)
-        {
-            return false;
-        }
-        int l = t.trim().length();
-        return (l >= min && l <= max);
-    }
-
-    public static boolean isValidateHash(String text)
-    {
-        if (text == null)
-        {
-            return false;
-        }
-        return Pattern.compile("^[\\w]{16}$", Pattern.CASE_INSENSITIVE).matcher(text).matches();
-    }
-
-    public static boolean isValidateInteger(String t)
-    {
-        return t != null ? Pattern.compile("^[+-]?\\d+$", Pattern.CASE_INSENSITIVE).matcher(t).matches() : false;
-    }
-
-    /**
-     * 验证给定字符串是否为有效电子邮件
-     * @param mail
-     * @return
-     */
-    public static boolean isValidateEmail(String mail)
-    {
-        if (mail == null)
-        {
-            return false;
-        }
-        return Pattern.compile("[\\w\\.\\-]+@([\\w\\-]+\\.)+[\\w\\-]+", Pattern.CASE_INSENSITIVE).matcher(mail).matches();
-    }
-
     public static ImageIcon getIcon(int name)
     {
         if (mp_IcoList == null)
@@ -163,7 +113,7 @@ public final class Util
 
     public static ImageIcon getIcon(String name)
     {
-        if (!isValidateHash(name))
+        if (!Char.isValidateHash(name))
         {
             return getNone();
         }
@@ -184,7 +134,7 @@ public final class Util
 
     public static void setIcon(String name, ImageIcon icon)
     {
-        if (!isValidateHash(name))
+        if (!Char.isValidateHash(name))
         {
             return;
         }
@@ -884,134 +834,6 @@ public final class Util
         }
     }
 
-    public static Calendar stringToDate(String datetime, char datesp, char timesp, char dtsp) throws Exception
-    {
-        // 若指定日期时间字符串为空，则直接返回当前时间
-        if (!Util.isValidate(datetime))
-        {
-            return Calendar.getInstance();
-        }
-
-        // 日期时间字符串分隔
-        int dtspIndx = datetime.indexOf(dtsp);
-        String date = datetime;
-        String time = "";
-        if (dtspIndx >= 0 && dtspIndx < datetime.length())
-        {
-            date = datetime.substring(0, dtspIndx);
-            time = datetime.substring(dtspIndx + 1);
-        }
-
-        // 日期对象
-        Calendar cal = Calendar.getInstance();
-
-        // 日期信息解析
-        if (Util.isValidate(date))
-        {
-            // 读取日期分隔符在日期字符串中位置信息
-            int f = date.indexOf(datesp);
-            int e = date.lastIndexOf(datesp);
-
-            String y = null;// 年份
-            String m = null;// 月份
-            String d = null;// 日期
-            // 没有日期分隔符号的情况下，日期字符串均按年份处理
-            if (f < 0)
-            {
-                y = date;
-            }
-            // 存在日期分隔符号的情况下的处理
-            else if (f >= 0)
-            {
-                // 只存在一个日期分隔符号的情况下，日期字符串按年月格式处理
-                if (f == e)
-                {
-                    y = date.substring(0, f);
-                    m = date.substring(e + 1);
-                }
-                // 存在两个日期分隔符号的情况下，日期字符串按年月日格式处理
-                else
-                {
-                    y = date.substring(0, f);
-                    m = date.substring(f + 1, e);
-                    d = date.substring(e + 1);
-                }
-            }
-
-            // 年份信息读取
-            if (Util.isValidate(y))
-            {
-                cal.set(Calendar.YEAR, Integer.parseInt(y));
-            }
-
-            // 月份信息读取
-            if (Util.isValidate(m))
-            {
-                cal.set(Calendar.MONTH, Integer.parseInt(m) - 1);
-            }
-
-            // 日期信息读取
-            if (Util.isValidate(d))
-            {
-                cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(d));
-            }
-        }
-
-        // 时间信息解析
-        if (Util.isValidate(time))
-        {
-            // 读取日期分隔符在日期字符串中位置信息
-            int f = time.indexOf(timesp);
-            int e = time.lastIndexOf(timesp);
-
-            String h = null;// 小时
-            String m = null;// 分钟
-            String s = null;// 秒钟
-            // 没有时间分隔符号的情况下，时间字符串均按小时处理
-            if (f < 0)
-            {
-                h = time;
-            }
-            // 存在日期分隔符号的情况下的处理
-            else if (f >= 0)
-            {
-                // 只存在一个日期分隔符号的情况下，日期字符串按年月格式处理
-                if (f == e)
-                {
-                    h = time.substring(0, f);
-                    m = time.substring(e + 1);
-                }
-                // 存在两个日期分隔符号的情况下，日期字符串按年月日格式处理
-                else
-                {
-                    h = time.substring(0, f);
-                    m = time.substring(f + 1, e);
-                    s = time.substring(e + 1);
-                }
-            }
-
-            // 年份信息读取
-            if (Util.isValidate(h))
-            {
-                cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(h));
-            }
-
-            // 月份信息读取
-            if (Util.isValidate(m))
-            {
-                cal.set(Calendar.MINUTE, Integer.parseInt(m));
-            }
-
-            // 日期信息读取
-            if (Util.isValidate(s))
-            {
-                cal.set(Calendar.SECOND, Integer.parseInt(s));
-            }
-        }
-
-        return cal;
-    }
-
     public static void centerForm(java.awt.Window form, java.awt.Window root)
     {
         Dimension d = (root != null ? root.getSize() : java.awt.Toolkit.getDefaultToolkit().getScreenSize());
@@ -1062,11 +884,11 @@ public final class Util
 
     public static boolean checkUpdate(String sid, String ver) throws Exception
     {
-        if (!isValidate(sid, 8))
+        if (!Char.isValidate(sid, 8))
         {
             throw new IOException("未知软件标记信息！");
         }
-        if (!isValidate(ver))
+        if (!Char.isValidate(ver))
         {
             throw new IOException("未知软件版本信息！");
         }
@@ -1081,7 +903,7 @@ public final class Util
 
         // 新版本标记处理
         String tmp = node.getText();
-        if (!isValidate(tmp))
+        if (!Char.isValidate(tmp))
         {
             return false;
         }

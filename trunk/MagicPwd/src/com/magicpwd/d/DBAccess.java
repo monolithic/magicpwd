@@ -132,7 +132,7 @@ public class DBAccess
      */
     public void addTable(String table)
     {
-        if (Util.isValidate(table))
+        if (com.magicpwd._util.Char.isValidate(table))
         {
             tableList.append(", ").append(table);
         }
@@ -145,7 +145,7 @@ public class DBAccess
      */
     public void addTable(String table, String alias)
     {
-        if (Util.isValidate(table))
+        if (com.magicpwd._util.Char.isValidate(table))
         {
             tableList.append(", ").append(table).append(" AS ").append(alias);
         }
@@ -199,7 +199,7 @@ public class DBAccess
      */
     public void addColumn(String colname)
     {
-        if (Util.isValidate(colname))
+        if (com.magicpwd._util.Char.isValidate(colname))
         {
             columList.append(", ").append(colname);
         }
@@ -217,7 +217,7 @@ public class DBAccess
      */
     public void addColumn(String colname, String alias)
     {
-        if (Util.isValidate(colname))
+        if (com.magicpwd._util.Char.isValidate(colname))
         {
             columList.append(", ").append(colname).append(" AS ").append(alias);
         }
@@ -291,7 +291,7 @@ public class DBAccess
      */
     public void addParam(String param, String sign, String value, boolean isLiteral)
     {
-        if (Util.isValidate(param))
+        if (com.magicpwd._util.Char.isValidate(param))
         {
             paramList.add(param);
             signList.add(sign);
@@ -373,7 +373,7 @@ public class DBAccess
 
     public void addWhere(String key, String sign, long value)
     {
-        if (Util.isValidate(key))
+        if (com.magicpwd._util.Char.isValidate(key))
         {
             whereList.append(" AND ").append(key).append(" ").append(sign).append(" ").append(value);
         }
@@ -393,7 +393,7 @@ public class DBAccess
      */
     public void addWhere(String key, String sign, String value, boolean isLiteral)
     {
-        if (Util.isValidate(key) && value != null && Util.isValidate(sign))
+        if (com.magicpwd._util.Char.isValidate(key) && value != null && com.magicpwd._util.Char.isValidate(sign))
         {
             whereList.append(" AND ").append(key);
             whereList.append(" ").append(sign);
@@ -432,7 +432,7 @@ public class DBAccess
      */
     public void addSort(String key, boolean asc)
     {
-        if (Util.isValidate(key))
+        if (com.magicpwd._util.Char.isValidate(key))
         {
             orderList.append(", ").append(key);
             orderList.append(" ").append(asc ? "ASC" : "DESC");
@@ -568,7 +568,7 @@ public class DBAccess
         Logs.log(sql);
 
         int recSize = -1;
-        if (stat != null && Util.isValidate(sql))
+        if (stat != null && com.magicpwd._util.Char.isValidate(sql))
         {
             recSize = stat.executeUpdate(sql);
         }
@@ -596,7 +596,7 @@ public class DBAccess
         Logs.log(sql);
 
         int recSize = -1;
-        if (stat != null && Util.isValidate(sql))
+        if (stat != null && com.magicpwd._util.Char.isValidate(sql))
         {
             recSize = stat.executeUpdate(sql);
         }
@@ -624,7 +624,7 @@ public class DBAccess
         Logs.log(sql);
 
         int recSize = -1;
-        if (stat != null && Util.isValidate(sql))
+        if (stat != null && com.magicpwd._util.Char.isValidate(sql))
         {
             recSize = stat.executeUpdate(sql);
         }

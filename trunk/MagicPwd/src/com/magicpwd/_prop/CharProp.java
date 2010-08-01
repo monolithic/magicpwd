@@ -351,7 +351,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
     private void saveDataActionPerformed(java.awt.event.ActionEvent evt)
     {
         String name = tf_CharName.getText();
-        if (!Util.isValidate(name))
+        if (!com.magicpwd._util.Char.isValidate(name))
         {
             Lang.showMesg(this, LangRes.P30F8A02, "空间名称不能为空！");
             tf_CharName.requestFocus();
@@ -359,7 +359,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         }
 
         String sets = ta_CharSets.getText();
-        if (!Util.isValidate(sets))
+        if (!com.magicpwd._util.Char.isValidate(sets))
         {
             Lang.showMesg(this, LangRes.P30F8A03, "空间内容不能为空！");
             ta_CharSets.requestFocus();

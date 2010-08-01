@@ -39,7 +39,7 @@ public class Google
 
     public boolean backup(String user, String pass, String name, java.io.File file) throws Exception
     {
-        if (!Util.isValidate(user) || pass == null || !Util.isValidate(name))
+        if (!com.magicpwd._util.Char.isValidate(user) || pass == null || !com.magicpwd._util.Char.isValidate(name))
         {
             return false;
         }
@@ -126,7 +126,7 @@ public class Google
 
     public boolean resume(String user, String pass, String name, java.io.File file) throws Exception
     {
-        if (!Util.isValidate(user) || pass == null || !Util.isValidate(name))
+        if (!com.magicpwd._util.Char.isValidate(user) || pass == null || !com.magicpwd._util.Char.isValidate(name))
         {
             return false;
         }

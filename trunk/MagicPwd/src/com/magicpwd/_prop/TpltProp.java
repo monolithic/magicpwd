@@ -432,7 +432,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         }
 
         String name = tf_TpltName.getText();
-        if (!Util.isValidate(name))
+        if (!com.magicpwd._util.Char.isValidate(name))
         {
             Lang.showMesg(this, LangRes.P30F8A06, "类别名称不能为空！");
             tf_TpltName.requestFocus();

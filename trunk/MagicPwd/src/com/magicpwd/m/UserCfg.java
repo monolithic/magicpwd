@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Logs;
 
 /**
@@ -255,17 +256,12 @@ public final class UserCfg
      */
     public final int getBackNum()
     {
-        int size;
-        try
+        String txt = userCfg.getProperty(ConsCfg.CFG_BACK_SIZE, "3");
+        if (Char.isValidatePositiveInteger(txt))
         {
-            size = Integer.parseInt(userCfg.getProperty(ConsCfg.CFG_BACK_SIZE, "3"));
+            return Integer.parseInt(txt);
         }
-        catch (NumberFormatException exp)
-        {
-            Logs.exception(exp);
-            size = 3;
-        }
-        return size;
+        return 3;
     }
 
     /**
@@ -275,6 +271,36 @@ public final class UserCfg
     public final void setBackNum(int backNum)
     {
         userCfg.setProperty(ConsCfg.CFG_BACK_SIZE, "" + backNum);
+    }
+
+    public final int getHintInt()
+    {
+        String txt = userCfg.getProperty(ConsCfg.CFG_HINT_INT, "60");
+        if (Char.isValidatePositiveInteger(txt))
+        {
+            return Integer.parseInt(txt);
+        }
+        return 60;
+    }
+
+    public final void setHintInt(int hintInt)
+    {
+        userCfg.setProperty(ConsCfg.CFG_HINT_INT, "" + hintInt);
+    }
+
+    public final int getHintPre()
+    {
+        String txt = userCfg.getProperty(ConsCfg.CFG_HINT_PRE, "300");
+        if (Char.isValidatePositiveInteger(txt))
+        {
+            return Integer.parseInt(txt);
+        }
+        return 300;
+    }
+
+    public final void setHintPre(int hintPre)
+    {
+        userCfg.setProperty(ConsCfg.CFG_HINT_PRE, "" + hintPre);
     }
 
     /**

@@ -130,7 +130,7 @@ public class MailBean extends javax.swing.JPanel implements IEditBean
     {
         itemData = tplt;
         String name = itemData.getName();
-        if (Util.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS))
+        if (com.magicpwd._util.Char.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS))
         {
             name = name.substring(1, name.length() - 1);
         }
@@ -141,7 +141,7 @@ public class MailBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void requestFocus()
     {
-        if (!Util.isValidate(tf_PropName.getText()))
+        if (!com.magicpwd._util.Char.isValidate(tf_PropName.getText()))
         {
             tf_PropName.requestFocus();
             return;
@@ -163,7 +163,7 @@ public class MailBean extends javax.swing.JPanel implements IEditBean
     public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
     {
         String name = tf_PropName.getText();
-        if (!Util.isValidate(name))
+        if (!com.magicpwd._util.Char.isValidate(name))
         {
             Lang.showMesg(this, LangRes.P30F7A31, "请输入邮件名称！");
             tf_PropName.requestFocus();
@@ -187,7 +187,7 @@ public class MailBean extends javax.swing.JPanel implements IEditBean
     private void bt_MailViewActionPerformed(java.awt.event.ActionEvent evt)
     {
         String url = tf_PropData.getText();
-        if (!Util.isValidateEmail(url))
+        if (!com.magicpwd._util.Char.isValidateEmail(url))
         {
             Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A32, "您输入的不是一个合适的邮件地址！");
             return;

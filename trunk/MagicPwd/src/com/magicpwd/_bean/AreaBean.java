@@ -101,7 +101,7 @@ public class AreaBean extends javax.swing.JPanel implements IEditBean
     {
         itemData = tplt;
         String name = itemData.getName();
-        if (Util.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS))
+        if (com.magicpwd._util.Char.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS))
         {
             name = name.substring(1, name.length() - 1);
         }
@@ -136,7 +136,7 @@ public class AreaBean extends javax.swing.JPanel implements IEditBean
     public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
     {
         String name = tf_PropName.getText();
-        if (!Util.isValidate(name))
+        if (!com.magicpwd._util.Char.isValidate(name))
         {
             Lang.showMesg(this, LangRes.P30F7A38, "请输入附注名称！");
             tf_PropName.requestFocus();

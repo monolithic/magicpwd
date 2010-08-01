@@ -36,6 +36,7 @@ public final class UserMdl
     private static UserSec us_UserSec;
     private static GridMdl gridMdl;
     private static ListMdl listMdl;
+    private static HintMdl hintMdl;
     private static NoteMdl noteMdl;
     private static TreeMdl treeMdl;
     private static CboxMdl cboxMdl;

@@ -19,6 +19,7 @@ import com.magicpwd._util.Util;
 import com.magicpwd.d.DBA3000;
 
 /**
+ * 记事便签数据模型
  * @author Amon
  */
 public class NoteMdl
@@ -141,6 +142,6 @@ public class NoteMdl
      */
     public boolean isUpdate()
     {
-        return Util.isValidateHash(keys.getP30F0104());
+        return com.magicpwd._util.Char.isValidateHash(keys.getP30F0104());
     }
 }

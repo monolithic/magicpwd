@@ -99,6 +99,18 @@ public interface ConsCfg
      */
     String CFG_VIEW_LIST_ASC = CFG_VIEW_LIST + ".asc";
     /**
+     * 过期提示
+     */
+    String CFG_HINT = CFG_PRE + ".hint";
+    /**
+     * 过期提示：检测间隔
+     */
+    String CFG_HINT_INT = CFG_HINT + ".int";
+    /**
+     * 过期提示：提前提示时间
+     */
+    String CFG_HINT_PRE = CFG_HINT + ".pre";
+    /**
      * 
      */
     String CFG_LANG = CFG_PRE + ".lang";

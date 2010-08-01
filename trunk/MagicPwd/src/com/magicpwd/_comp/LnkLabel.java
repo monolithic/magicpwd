@@ -69,7 +69,7 @@ public class LnkLabel extends javax.swing.JLabel
      */
     public boolean openLinkUrl(String linkUrl)
     {
-        if (!Util.isValidate(linkUrl))
+        if (!com.magicpwd._util.Char.isValidate(linkUrl))
         {
             return false;
         }

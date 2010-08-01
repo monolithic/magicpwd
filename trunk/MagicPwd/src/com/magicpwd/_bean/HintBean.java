@@ -192,7 +192,7 @@ public class HintBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void requestFocus()
     {
-        if (!Util.isValidate(tf_PropName.getText()))
+        if (!com.magicpwd._util.Char.isValidate(tf_PropName.getText()))
         {
             tf_PropName.requestFocus();
             return;
@@ -205,7 +205,7 @@ public class HintBean extends javax.swing.JPanel implements IEditBean
     {
         String name = tf_PropName.getText();
         String data = tf_PropData.getText();
-        if (Util.isValidate(data))
+        if (com.magicpwd._util.Char.isValidate(data))
         {
             if (!itemData.setData(data))
             {
@@ -214,7 +214,7 @@ public class HintBean extends javax.swing.JPanel implements IEditBean
             }
             tf_PropData.setText(data);
 
-            if (!Util.isValidate(name))
+            if (!com.magicpwd._util.Char.isValidate(name))
             {
                 Lang.showMesg(this, LangRes.P30F7A36, "请输入过期提示！");
             }
@@ -253,7 +253,7 @@ public class HintBean extends javax.swing.JPanel implements IEditBean
     private void mi_MenuItemActionPerformed(java.awt.event.ActionEvent evt)
     {
         String cmd = evt.getActionCommand();
-        if (!Util.isValidate(cmd))
+        if (!com.magicpwd._util.Char.isValidate(cmd))
         {
             return;
         }
