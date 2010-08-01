@@ -71,7 +71,7 @@ public class ListMdl extends DefaultListModel
         c.set(Calendar.MILLISECOND, 0);
         Timestamp s = new Timestamp(c.getTimeInMillis());
         Timestamp e = new Timestamp(c.getTimeInMillis());
-        DBA3000.findTimeNote(s, e, dataList);
+        DBA3000.findHintList(s, e, dataList);
         n = dataList.size();
         fireIntervalAdded(this, 0, n);
     }

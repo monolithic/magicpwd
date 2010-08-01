@@ -454,7 +454,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
     public void fileSaveActionPerformed(java.awt.event.ActionEvent evt)
     {
         String head = tf_NoteHead.getText();
-        if (!Util.isValidate(head))
+        if (!com.magicpwd._util.Char.isValidate(head))
         {
             Lang.showMesg(this, LangRes.P30F5A01, "请输入记事标题！");
             tf_NoteHead.requestFocus();
@@ -462,7 +462,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
         }
 
         String data = ta_NoteData.getText();
-        if (!Util.isValidate(data))
+        if (!com.magicpwd._util.Char.isValidate(data))
         {
             if (Lang.showFirm(this, LangRes.P30F5A02, "记事内容并没有实际意义的文字，确认要保存么？") != javax.swing.JOptionPane.NO_OPTION)
             {
@@ -552,7 +552,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
     public void findActionPerformed(java.awt.event.ActionEvent evt)
     {
         String noteName = tf_NoteHead.getText();
-        if (!Util.isValidate(noteName))
+        if (!com.magicpwd._util.Char.isValidate(noteName))
         {
             return;
         }

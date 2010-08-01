@@ -45,7 +45,6 @@ import com.magicpwd.c.MPwdEvt;
 import com.magicpwd.c.ToolEvt;
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.GridMdl;
-import com.magicpwd.m.TimeOut;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.KeysCR;
 import com.magicpwd.r.KindTN;
@@ -63,7 +62,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
     private MpsDialog md_MpsDialog;
     private IEditBean[] editBean;
     private FindBar mainFind;
-    private InfoBar mainInfo;
+    private HintBar mainInfo;
     private MenuBar mainMenu;
     private ToolBar mainTool;
     private MenuPop gridMenu;
@@ -438,7 +437,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
     public void skinChangeActionPerformed(java.awt.event.ActionEvent evt)
     {
         final String lafClass = evt.getActionCommand();
-        boolean isSystem = !Util.isValidate(lafClass) || ConsCfg.DEF_SKIN.equalsIgnoreCase(lafClass);
+        boolean isSystem = !com.magicpwd._util.Char.isValidate(lafClass) || ConsCfg.DEF_SKIN.equalsIgnoreCase(lafClass);
         UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN, isSystem ? ConsCfg.DEF_SKIN : lafClass);
         javax.swing.SwingUtilities.invokeLater(new Runnable()
         {
@@ -663,7 +662,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
 
         // 口令类别检测
         GuidItem guid = (GuidItem) gm.getItemAt(ConsEnv.PWDS_HEAD_GUID);
-        if (!Util.isValidate(guid.getData()))
+        if (!com.magicpwd._util.Char.isValidate(guid.getData()))
         {
             javax.swing.tree.TreePath path = tr_GuidTree.getSelectionPath();
             if (path == null)
@@ -680,7 +679,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
 
         // 标题为空检测
         MetaItem meta = (MetaItem) gm.getItemAt(ConsEnv.PWDS_HEAD_META);
-        if (!Util.isValidate(meta.getName()))
+        if (!com.magicpwd._util.Char.isValidate(meta.getName()))
         {
             Lang.showMesg(this, LangRes.P30F7A0C, "请输入口令标题！");
             tb_KeysView.setRowSelectionInterval(1, 1);
@@ -711,14 +710,14 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             {
                 UserMdl.getListMdl().findName(queryKey);
             }
-            else if (Util.isValidateHash(queryKey))
+            else if (com.magicpwd._util.Char.isValidateHash(queryKey))
             {
                 UserMdl.getListMdl().listName(queryKey);
             }
         }
 
         showPropEdit();
-        TimeOut.readNote();
+        mainInfo.initData();
     }
 
     @Override
@@ -924,7 +923,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         {
             UserMdl.getListMdl().findName(queryKey);
         }
-        else if (Util.isValidateHash(queryKey))
+        else if (com.magicpwd._util.Char.isValidateHash(queryKey))
         {
             UserMdl.getListMdl().listName(queryKey);
         }
@@ -938,7 +937,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         {
             UserMdl.getListMdl().findName(queryKey);
         }
-        else if (Util.isValidateHash(queryKey))
+        else if (com.magicpwd._util.Char.isValidateHash(queryKey))
         {
             UserMdl.getListMdl().listName(queryKey);
         }
@@ -964,7 +963,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         {
             return;
         }
-        if (!Util.isValidate(kindName))
+        if (!com.magicpwd._util.Char.isValidate(kindName))
         {
             Lang.showMesg(this, LangRes.P30F7A16, "");
             return;
@@ -1051,7 +1050,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         {
             return;
         }
-        if (!Util.isValidate(name))
+        if (!com.magicpwd._util.Char.isValidate(name))
         {
             Lang.showMesg(this, LangRes.P30F7A17, "更新失败：您输入的类别名称无任何意义！");
             return;
@@ -1254,7 +1253,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
     }
 
     @Override
-    public void toDataActionPerformed(java.awt.event.ActionEvent evt)
+    public void hintDataActionPerformed(java.awt.event.ActionEvent evt)
     {
     }
 
@@ -1262,7 +1261,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
     public void findActionPerformed(java.awt.event.ActionEvent evt)
     {
         String text = mainFind.getSearchText();
-        if (!Util.isValidate(text))
+        if (!com.magicpwd._util.Char.isValidate(text))
         {
             Lang.showMesg(this, LangRes.P30F7A18, "请输入您要查询的关键字，多个关键字可以使用空格或加号进行分隔！");
             mainFind.requestFocus();
@@ -1657,7 +1656,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
     {
         pl_KeysBase = new javax.swing.JPanel();
 
-        mainInfo = new InfoBar();
+        mainInfo = new HintBar();
         mainInfo.initView();
 
         javax.swing.JSplitPane sp = new javax.swing.JSplitPane();
@@ -2147,7 +2146,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         try
         {
             String docs = DBA3000.readConfig("google_docs");
-            if (!Util.isValidate(docs))
+            if (!com.magicpwd._util.Char.isValidate(docs))
             {
                 dialog.setVisible(false);
                 dialog.dispose();
@@ -2202,7 +2201,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         try
         {
             String docs = DBA3000.readConfig("google_docs");
-            if (!Util.isValidate(docs))
+            if (!com.magicpwd._util.Char.isValidate(docs))
             {
                 dialog.setVisible(false);
                 dialog.dispose();

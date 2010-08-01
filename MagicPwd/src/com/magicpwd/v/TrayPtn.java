@@ -10,6 +10,7 @@ import com.magicpwd._face.IBackCall;
 import com.magicpwd._mail.Connect;
 import com.magicpwd._mail.MailDlg;
 import com.magicpwd._user.UserSign;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -25,6 +26,7 @@ import com.magicpwd.m.UserMdl;
 public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.event.MouseListener, java.awt.event.MouseMotionListener
 {
 
+    private static boolean dbLocked;
     private static boolean isOsTray;
     private static int currPtn;
     private static int nextPtn;
@@ -425,12 +427,12 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         String pwds = pwdsList.get(mailPtn.getPwds()).getK();
 
         String host = mail.substring(mail.indexOf('@') + 1);
-        if (!Util.isValidate(host))
+        if (!com.magicpwd._util.Char.isValidate(host))
         {
             return;
         }
         String type = UserMdl.getMailCfg().getCfg(host + ".type");
-        if (!Util.isValidate(type))
+        if (!com.magicpwd._util.Char.isValidate(type))
         {
             Lang.showMesg(mailDlg, null, "查找不到对应的服务信息，如有疑问请与作者联系！");
             return;
@@ -441,7 +443,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
 
         // 读取服务器配置
         String cfg = UserMdl.getMailCfg().getCfg(type + '.' + host);
-        if (!Util.isValidate(cfg))
+        if (!com.magicpwd._util.Char.isValidate(cfg))
         {
             return;
         }
@@ -452,7 +454,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
 
         // 服务器端口
         cfg = arr[1].trim();
-        if (Util.isValidateInteger(cfg))
+        if (Char.isValidatePositiveInteger(cfg))
         {
             connect.setPort(Integer.parseInt(cfg));
         }
@@ -829,7 +831,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         if (formLoc == null)
         {
             String loc = uc.getCfg(ConsCfg.CFG_TRAY_LOC);
-            if (Util.isValidate(loc))
+            if (com.magicpwd._util.Char.isValidate(loc))
             {
                 java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("\\d+").matcher(loc);
                 int x = -1;
@@ -864,7 +866,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         boolean wasDecoratedByOS = !(TrayPtn.getCurrForm().isUndecorated());
         try
         {
-            boolean isSystem = !Util.isValidate(lafClass) || ConsCfg.DEF_SKIN.equalsIgnoreCase(lafClass);
+            boolean isSystem = !com.magicpwd._util.Char.isValidate(lafClass) || ConsCfg.DEF_SKIN.equalsIgnoreCase(lafClass);
             if (isSystem)
             {
                 lafClass = javax.swing.UIManager.getSystemLookAndFeelClassName();
@@ -909,6 +911,22 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         java.awt.Point cur = evt.getPoint();
         java.awt.Point dlg = md_TrayForm.getLocationOnScreen();
         return new java.awt.Point(dlg.x + cur.x, dlg.y + cur.y);
+    }
+
+    /**
+     * @return the dbLocked
+     */
+    public static boolean isDbLocked()
+    {
+        return dbLocked;
+    }
+
+    /**
+     * @param aDbLocked the dbLocked to set
+     */
+    public static void setDbLocked(boolean aDbLocked)
+    {
+        dbLocked = aDbLocked;
     }
     private java.awt.Point dragLoc;
     private java.awt.Point formLoc;

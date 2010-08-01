@@ -111,7 +111,7 @@ final class UserSec implements Key
 
         // 用户登录身份认证
         String text = ui.getCfg(user(ConsCfg.CFG_USER_INFO));
-        if (!Util.isValidate(text))
+        if (!com.magicpwd._util.Char.isValidate(text))
         {
             return false;
         }
@@ -216,7 +216,7 @@ final class UserSec implements Key
 
         // 用户登录身份认证
         String text = ui.getCfg(user(ConsCfg.CFG_USER_SKEY));
-        if (!Util.isValidate(text))
+        if (!com.magicpwd._util.Char.isValidate(text))
         {
             return false;
         }
@@ -316,7 +316,7 @@ final class UserSec implements Key
             IllegalBlockSizeException, BadPaddingException
     {
         UserCfg uc = UserMdl.getUserCfg();
-        if (Util.isValidate(uc.getCfg(user(ConsCfg.CFG_USER_INFO))))
+        if (com.magicpwd._util.Char.isValidate(uc.getCfg(user(ConsCfg.CFG_USER_INFO))))
         {
             return false;
         }
@@ -503,7 +503,7 @@ final class UserSec implements Key
 
     public boolean hasSkey()
     {
-        return Util.isValidate(UserMdl.getUserCfg().getCfg(user(ConsCfg.CFG_USER_SKEY)), 224);
+        return com.magicpwd._util.Char.isValidate(UserMdl.getUserCfg().getCfg(user(ConsCfg.CFG_USER_SKEY)), 224);
     }
 
     public final String user(String key)

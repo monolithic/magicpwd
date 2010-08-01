@@ -6,7 +6,6 @@ package com.magicpwd._comn;
 
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._util.Logs;
-import com.magicpwd._util.Util;
 import java.sql.Timestamp;
 
 /**
@@ -38,13 +37,13 @@ public class HintItem extends EditItem
     @Override
     public boolean setData(String data)
     {
-        if (!Util.isValidate(data))
+        if (!com.magicpwd._util.Char.isValidate(data))
         {
             return false;
         }
         try
         {
-            time = new java.sql.Timestamp(Util.stringToDate(data, '-', ':', ' ').getTimeInMillis());
+            time = new java.sql.Timestamp(com.magicpwd._util.Date.stringToDate(data, '-', ':', ' ').getTimeInMillis());
             return true;
         }
         catch (Exception ex)

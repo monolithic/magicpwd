@@ -156,7 +156,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         tf_PropName.setText(item.getName());
 
         String kind = itemData.getSpec(IEditItem.SPEC_GUID_TPLT);
-        boolean hash = Util.isValidateHash(kind);
+        boolean hash = com.magicpwd._util.Char.isValidateHash(kind);
 
         bt_ReadMail.setVisible(hash);
         bt_ExptCard.setVisible(hash);
@@ -343,7 +343,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         }
 
         String command = item.getActionCommand();
-        if (!Util.isValidate(command))
+        if (!com.magicpwd._util.Char.isValidate(command))
         {
             return;
         }
@@ -356,7 +356,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
 
         String key = command.substring(0, dot).toLowerCase();
         String src = command.substring(dot + 1);
-        if (!Util.isValidate(key) || !Util.isValidate(src))
+        if (!com.magicpwd._util.Char.isValidate(key) || !com.magicpwd._util.Char.isValidate(src))
         {
             return;
         }

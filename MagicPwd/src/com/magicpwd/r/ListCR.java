@@ -56,7 +56,7 @@ public class ListCR extends javax.swing.JLabel implements javax.swing.ListCellRe
         {
             S1S2 item = (S1S2) value;
             setText(item.getV());
-            setToolTipText(Util.isValidate(item.getV2()) ? item.getV2() : item.getV());
+            setToolTipText(com.magicpwd._util.Char.isValidate(item.getV2()) ? item.getV2() : item.getV());
         }
         // 其它
         else if (value != null)

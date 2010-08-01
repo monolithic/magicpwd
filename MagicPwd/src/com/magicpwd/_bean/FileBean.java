@@ -155,7 +155,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
     {
         itemData = tplt;
         String name = itemData.getName();
-        if (Util.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS))
+        if (com.magicpwd._util.Char.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS))
         {
             name = name.substring(1, name.length() - 1);
         }
@@ -176,7 +176,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void requestFocus()
     {
-        if (!Util.isValidate(tf_PropName.getText()))
+        if (!com.magicpwd._util.Char.isValidate(tf_PropName.getText()))
         {
             tf_PropName.requestFocus();
             return;
@@ -209,7 +209,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
     public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
     {
         String name = tf_PropName.getText();
-        if (!Util.isValidate(name))
+        if (!com.magicpwd._util.Char.isValidate(name))
         {
             Lang.showMesg(this, LangRes.P30F7A2B, "请输入文件名称！");
             tf_PropName.requestFocus();
@@ -243,7 +243,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
                 return;
             }
 
-            if (!Util.isValidate(amaName))
+            if (!com.magicpwd._util.Char.isValidate(amaName))
             {
                 amaName = Util.lPad(Long.toHexString(System.currentTimeMillis()), 16, '0');
             }

@@ -40,7 +40,7 @@ public class Card
         if (node != null)
         {
             text = node.getText();
-            if (Util.isValidate(text))
+            if (Char.isValidate(text))
             {
                 java.io.File tmp = new java.io.File(text);
                 File.copy(tmp, new java.io.File(dst, tmp.getName()), true);
@@ -53,7 +53,7 @@ public class Card
             return null;
         }
         text = node.getText();
-        if (!Util.isValidate(text))
+        if (!Char.isValidate(text))
         {
             return null;
         }
@@ -70,7 +70,7 @@ public class Card
             return null;
         }
         String text = node.getText();
-        if (!Util.isValidate(text))
+        if (!Char.isValidate(text))
         {
             return null;
         }
@@ -94,7 +94,7 @@ public class Card
             return null;
         }
         String text = node.getText();
-        if (!Util.isValidate(text))
+        if (!Char.isValidate(text))
         {
             return null;
         }
@@ -111,7 +111,7 @@ public class Card
         if (node != null)
         {
             text = node.getText();
-            if (Util.isValidate(text))
+            if (Char.isValidate(text))
             {
                 java.io.File tmp = new java.io.File(text);
                 File.copy(tmp, new java.io.File(dst, tmp.getName()), true);
@@ -124,7 +124,7 @@ public class Card
             return null;
         }
         text = node.getText();
-        if (!Util.isValidate(text))
+        if (!Char.isValidate(text))
         {
             return null;
         }
@@ -221,7 +221,7 @@ public class Card
             g2d.fillRect(0, 0, w, h);
         }
 
-        if (Util.isValidate(p))
+        if (Char.isValidate(p))
         {
             BufferedImage img = ImageIO.read(File.open4Read(p));
             if ("stretch".equalsIgnoreCase(s))
@@ -267,7 +267,7 @@ public class Card
             {
                 node = (Node) list.get(i);
                 text = getString(node, "method", "").toLowerCase();
-                if (!Util.isValidate(text))
+                if (!Char.isValidate(text))
                 {
                     continue;
                 }
@@ -328,7 +328,7 @@ public class Card
             return;
         }
         String text = node.getText();
-        if (!Util.isValidate(text))
+        if (!Char.isValidate(text))
         {
             return;
         }
@@ -345,7 +345,7 @@ public class Card
             return;
         }
         String text = node.getText();
-        if (!Util.isValidate(text))
+        if (!Char.isValidate(text))
         {
             return;
         }
@@ -460,7 +460,7 @@ public class Card
 
         String sx = getString(node, "x-array", "");
         String sy = getString(node, "y-array", "");
-        if (!Util.isValidate(sx) || !Util.isValidate(sy))
+        if (!Char.isValidate(sx) || !Char.isValidate(sy))
         {
             return;
         }
@@ -532,7 +532,7 @@ public class Card
             {
                 Element element = (Element) node;
                 prop = element.attributeValue(prop);
-                if (Util.isValidate(prop))
+                if (Char.isValidate(prop))
                 {
                     t = prop;
                 }

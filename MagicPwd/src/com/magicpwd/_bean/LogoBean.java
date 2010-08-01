@@ -132,7 +132,7 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean, IBackCall
     public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
     {
 //        String name = tf_PropName.getText();
-//        if (Util.isValidateHash(itemData.getData()) && !Util.isValidate(name))
+//        if (com.magicpwd._util.Char.isValidateHash(itemData.getData()) && !com.magicpwd._util.Char.isValidate(name))
 //        {
 //            Lang.showMesg(MagicPwd.getCurrForm(), LangRes.P30F7A39, "请输入徽标名称！");
 //            return;
@@ -168,7 +168,7 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean, IBackCall
             return true;
         }
 
-        if (!Util.isValidateHash(key))
+        if (!com.magicpwd._util.Char.isValidateHash(key))
         {
             return false;
         }

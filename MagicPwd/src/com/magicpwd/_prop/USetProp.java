@@ -151,14 +151,14 @@ public class USetProp extends JPanel implements IPropBean
         }
 
         String txt = tf_PwdsSize.getText().trim();
-        if (Util.isValidateInteger(txt))
+        if (com.magicpwd._util.Char.isValidatePositiveInteger(txt))
         {
             uc.setPwdsLen(Integer.parseInt(txt));
         }
         uc.setPwdsLoop(ck_PwdsLoop.isSelected());
 
         txt = tf_BackCount.getText().trim();
-        if (Util.isValidateInteger(txt))
+        if (com.magicpwd._util.Char.isValidatePositiveInteger(txt))
         {
             uc.setBackNum(Integer.parseInt(txt));
         }
@@ -171,7 +171,7 @@ public class USetProp extends JPanel implements IPropBean
         }
 
         txt = tf_StayTime.getText().trim();
-        if (Util.isValidateInteger(txt))
+        if (com.magicpwd._util.Char.isValidatePositiveInteger(txt))
         {
             uc.setStayTime(Integer.parseInt(txt));
         }
@@ -187,7 +187,7 @@ public class USetProp extends JPanel implements IPropBean
     {
         if (backPath == null)
         {
-            if (Util.isValidate(tf_BackPath.getText()))
+            if (com.magicpwd._util.Char.isValidate(tf_BackPath.getText()))
             {
                 backPath = new java.io.File(tf_BackPath.getText());
             }
@@ -224,7 +224,6 @@ public class USetProp extends JPanel implements IPropBean
 
         tf_BackPath.setText(backPath.getPath());
     }
-
     private javax.swing.JButton bt_BackPath;
     private javax.swing.JComboBox cb_PwdsChar;
     private javax.swing.JCheckBox ck_PwdsLoop;

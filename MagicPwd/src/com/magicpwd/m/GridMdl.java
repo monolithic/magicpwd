@@ -23,7 +23,6 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditItem;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd._util.Util;
 import com.magicpwd.d.DBA3000;
 
 /**
@@ -370,7 +369,7 @@ public class GridMdl extends DefaultTableModel
             switch ((temp.size() - 5) % 3)
             {
                 case 2:
-                    if (Util.isValidate(temp.get(temp.size() - 1)))
+                    if (com.magicpwd._util.Char.isValidate(temp.get(temp.size() - 1)))
                     {
                         temp.add("");
                         break;
@@ -388,7 +387,7 @@ public class GridMdl extends DefaultTableModel
 
             // Guid
             GuidItem guid = new GuidItem();
-            guid.setTime(new java.sql.Timestamp(Util.stringToDate(temp.get(indx++), '-', ':', ' ').getTimeInMillis()));
+            guid.setTime(new java.sql.Timestamp(com.magicpwd._util.Date.stringToDate(temp.get(indx++), '-', ':', ' ').getTimeInMillis()));
             guid.setData(kindHash);
             ls_ItemList.add(guid);
 
@@ -404,9 +403,9 @@ public class GridMdl extends DefaultTableModel
             // Hint
             HintItem hint = new HintItem();
             String text = temp.get(indx++);
-            if (Util.isValidate(text))
+            if (com.magicpwd._util.Char.isValidate(text))
             {
-                hint.setTime(new java.sql.Timestamp(Util.stringToDate(text, '-', ':', ' ').getTimeInMillis()));
+                hint.setTime(new java.sql.Timestamp(com.magicpwd._util.Date.stringToDate(text, '-', ':', ' ').getTimeInMillis()));
             }
             hint.setName(temp.get(indx++));
             ls_ItemList.add(hint);
@@ -638,7 +637,7 @@ public class GridMdl extends DefaultTableModel
 
     public boolean isUpdate()
     {
-        return Util.isValidateHash(keys.getP30F0104());
+        return com.magicpwd._util.Char.isValidateHash(keys.getP30F0104());
     }
 
     public void setKeysMode(int mode)

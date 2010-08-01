@@ -68,7 +68,7 @@ public class DBA3000
     public static boolean saveConfig(String key, String value)
     {
         key = Util.text2DB(key);
-        if (!Util.isValidate(key, 1, DBC3000.P30F0001_SIZE))
+        if (!com.magicpwd._util.Char.isValidate(key, 1, DBC3000.P30F0001_SIZE))
         {
             return false;
         }
@@ -218,7 +218,7 @@ public class DBA3000
      */
     public static boolean findUserData(String text, List<Keys> list)
     {
-        if (!Util.isValidate(text))
+        if (!com.magicpwd._util.Char.isValidate(text))
         {
             return false;
         }
@@ -256,7 +256,7 @@ public class DBA3000
      * @param list
      * @return
      */
-    public static boolean findTimeNote(Timestamp s, Timestamp e, List<Keys> list)
+    public static boolean findHintList(Timestamp s, Timestamp e, List<Keys> list)
     {
         DBAccess dba = new DBAccess();
 
@@ -281,7 +281,7 @@ public class DBA3000
 
     public static boolean findUserNote(String text, java.util.List<S1S2> list)
     {
-        if (!Util.isValidate(text))
+        if (!com.magicpwd._util.Char.isValidate(text))
         {
             return false;
         }
@@ -432,7 +432,7 @@ public class DBA3000
             dba.init();
 
             // 数据更新时，首先删除已有数据，再添加数据
-            if (Util.isValidateHash(keys.getP30F0104()))
+            if (com.magicpwd._util.Char.isValidateHash(keys.getP30F0104()))
             {
                 if (keys.isHistBack())
                 {
@@ -534,7 +534,7 @@ public class DBA3000
      */
     private static void remove(DBAccess dba, Keys pwds) throws SQLException
     {
-        if (!Util.isValidateHash(pwds.getP30F0104()))
+        if (!com.magicpwd._util.Char.isValidateHash(pwds.getP30F0104()))
         {
             return;
         }
@@ -569,7 +569,7 @@ public class DBA3000
         dba.addParam(DBC3000.P30F010E, Util.text2DB(keys.getP30F010E()));
         dba.addParam(DBC3000.P30F010F, Util.text2DB(keys.getP30F010F()));
 
-        if (Util.isValidateHash(keys.getP30F0104()))
+        if (com.magicpwd._util.Char.isValidateHash(keys.getP30F0104()))
         {
             // 数据更新
             dba.addWhere(DBC3000.P30F0104, keys.getP30F0104());
@@ -669,7 +669,7 @@ public class DBA3000
             dba.addParam(DBC3000.C2010107, Util.text2DB(item.getC2010107()));//
             dba.addParam(DBC3000.C2010108, Util.text2DB(item.getC2010108()));// 类别描述
             dba.addParam(DBC3000.C2010109, DBC3000.SQL_NOW, false);// 更新时间
-            if (Util.isValidateHash(item.getC2010103()))
+            if (com.magicpwd._util.Char.isValidateHash(item.getC2010103()))
             {
                 dba.addWhere(DBC3000.C2010103, item.getC2010103());// 类别索引
                 dba.executeUpdate();
@@ -866,7 +866,7 @@ public class DBA3000
             dba.addColumn(DBC3000.P30F1105);
             dba.addColumn(DBC3000.P30F1106);
             dba.addColumn(DBC3000.P30F1107);
-            if (Util.isValidate(hash))
+            if (com.magicpwd._util.Char.isValidate(hash))
             {
                 dba.addWhere(DBC3000.P30F1104, hash);
             }
@@ -942,7 +942,7 @@ public class DBA3000
             dba.addParam(DBC3000.P30F1107, Util.text2DB(tpltItem.getP30F1107()));
             dba.addParam(DBC3000.P30F1108, DBC3000.SQL_NOW, false);
 
-            if (Util.isValidateHash(tpltItem.getP30F1103()))
+            if (com.magicpwd._util.Char.isValidateHash(tpltItem.getP30F1103()))
             {
                 dba.addWhere(DBC3000.P30F1103, tpltItem.getP30F1103());
                 dba.executeUpdate();
@@ -1080,7 +1080,7 @@ public class DBA3000
             dba.addParam(DBC3000.P30F2106, Util.text2DB(charItem.getP30F2106()));// 空间字符
             dba.addParam(DBC3000.P30F2108, DBC3000.SQL_NOW, false);// 更新日期
 
-            if (Util.isValidateHash(charItem.getP30F2103()))
+            if (com.magicpwd._util.Char.isValidateHash(charItem.getP30F2103()))
             {
                 dba.addWhere(DBC3000.P30F2103, charItem.getP30F2103());// 空间索引
                 dba.executeUpdate();
@@ -1216,7 +1216,7 @@ public class DBA3000
         {
             dba.init();
 
-            boolean b = Util.isValidateHash(logsHash);
+            boolean b = com.magicpwd._util.Char.isValidateHash(logsHash);
 
             dba.addTable(DBC3000.P30F0A00);
             dba.addWhere(DBC3000.P30F0A04, keysHash);
@@ -1308,7 +1308,7 @@ public class DBA3000
 
     public static boolean selectHistData(String hash, List<S1S2> list)
     {
-        if (!Util.isValidateHash(hash))
+        if (!com.magicpwd._util.Char.isValidateHash(hash))
         {
             return false;
         }

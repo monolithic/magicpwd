@@ -28,7 +28,7 @@ public class NodeMdl extends DefaultMutableTreeNode
             {
                 this.connect = connect;
                 keyWord = folder.getFullName();
-                if (!Util.isValidate(keyWord))
+                if (!com.magicpwd._util.Char.isValidate(keyWord))
                 {
                     display = connect.getMail();
                 }
@@ -54,7 +54,7 @@ public class NodeMdl extends DefaultMutableTreeNode
     @Override
     public String toString()
     {
-        return Util.isValidate(display) ? display : connect.getMail();
+        return com.magicpwd._util.Char.isValidate(display) ? display : connect.getMail();
     }
 
     /**

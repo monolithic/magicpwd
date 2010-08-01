@@ -131,7 +131,7 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
     {
         itemData = tplt;
         String name = itemData.getName();
-        if (Util.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS))
+        if (com.magicpwd._util.Char.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS))
         {
             name = name.substring(1, name.length() - 1);
         }
@@ -142,7 +142,7 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void requestFocus()
     {
-        if (!Util.isValidate(tf_PropName.getText()))
+        if (!com.magicpwd._util.Char.isValidate(tf_PropName.getText()))
         {
             tf_PropName.requestFocus();
             return;
@@ -164,7 +164,7 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
     public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
     {
         String name = tf_PropName.getText();
-        if (!Util.isValidate(name))
+        if (!com.magicpwd._util.Char.isValidate(name))
         {
             Lang.showMesg(this, LangRes.P30F7A33, "请输入链接名称！");
             tf_PropName.requestFocus();
@@ -188,7 +188,7 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
     private void bt_LinkViewActionPerformed(java.awt.event.ActionEvent evt)
     {
         String link = tf_PropData.getText();
-        if (!Util.isValidate(link))
+        if (!com.magicpwd._util.Char.isValidate(link))
         {
             Lang.showMesg(this, "", "");
             return;

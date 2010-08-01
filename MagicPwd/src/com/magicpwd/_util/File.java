@@ -164,7 +164,7 @@ public class File
 
     public static boolean byte2Text(String srcPath, String dstPath)
     {
-        return (Util.isValidate(srcPath) && Util.isValidate(dstPath)) ? byte2Text(new java.io.File(srcPath), new java.io.File(dstPath)) : false;
+        return (Char.isValidate(srcPath) && Char.isValidate(dstPath)) ? byte2Text(new java.io.File(srcPath), new java.io.File(dstPath)) : false;
     }
 
     public static boolean byte2Text(java.io.File srcFile, java.io.File dstFile)
@@ -237,7 +237,7 @@ public class File
 
     public static boolean text2Byte(String srcPath, String dstPath)
     {
-        return (Util.isValidate(srcPath) && Util.isValidate(dstPath)) ? text2Byte(new java.io.File(srcPath), new java.io.File(dstPath)) : false;
+        return (Char.isValidate(srcPath) && Char.isValidate(dstPath)) ? text2Byte(new java.io.File(srcPath), new java.io.File(dstPath)) : false;
     }
 
     public static boolean text2Byte(java.io.File srcFile, java.io.File dstFile)

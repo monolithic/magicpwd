@@ -178,20 +178,20 @@ public class MailInf
     public void getMailContent(Part part) throws Exception
     {
         String sType = part.getContentType();
-        if (!Util.isValidate(sType))
+        if (!com.magicpwd._util.Char.isValidate(sType))
         {
             return;
         }
         ContentType cType = new ContentType(sType);
         sType = cType.getParameter(MailEnv.CHARSET);
-        if (!Util.isValidate(sType))
+        if (!com.magicpwd._util.Char.isValidate(sType))
         {
             String[] sTemp = part.getHeader("from");
             if (sTemp != null && sTemp.length > 0)
             {
                 sType = sTemp[0];
             }
-            if (Util.isValidate(sType))
+            if (com.magicpwd._util.Char.isValidate(sType))
             {
                 Matcher matcher = Pattern.compile("=\\?\\w+\\?", Pattern.CASE_INSENSITIVE).matcher(sType);
                 if (matcher.find())

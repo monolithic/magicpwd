@@ -68,7 +68,7 @@ public class MenuPwd extends JPopupMenu
 
         String size = tplt.getSpec(EditItem.SPEC_PWDS_SIZE);
         boolean checked = true;
-        if (Util.isValidateInteger(size))
+        if (com.magicpwd._util.Char.isValidatePositiveInteger(size))
         {
             charSize = Integer.parseInt(size);
             for (javax.swing.JCheckBoxMenuItem item : mi_SizeNum)
@@ -85,7 +85,7 @@ public class MenuPwd extends JPopupMenu
         {
             // 取用户默认配置数据
             size = UserMdl.getUserCfg().getPwdsLen();
-            if (!Util.isValidate(size))
+            if (!com.magicpwd._util.Char.isValidate(size))
             {
                 size = ConsCfg.DEF_PWDS_SIZE;
             }
@@ -95,11 +95,11 @@ public class MenuPwd extends JPopupMenu
 
         String hash = tplt.getSpec(EditItem.SPEC_PWDS_HASH);
         checked = true;
-        if (!Util.isValidate(hash))
+        if (!com.magicpwd._util.Char.isValidate(hash))
         {
             hash = UserMdl.getUserCfg().getPwdsKey();
         }
-        if (Util.isValidate(hash))
+        if (com.magicpwd._util.Char.isValidate(hash))
         {
             for (javax.swing.JCheckBoxMenuItem item : mi_CharPre)
             {
@@ -120,7 +120,7 @@ public class MenuPwd extends JPopupMenu
         mi_CharDef.setSelected(true);
 
         String loop = tpltData.getSpec(EditItem.SPEC_PWDS_LOOP);
-        if (!Util.isValidate(loop))
+        if (!com.magicpwd._util.Char.isValidate(loop))
         {
             loop = UserMdl.getUserCfg().getPwdsLoop();
         }
@@ -329,7 +329,7 @@ public class MenuPwd extends JPopupMenu
     private void mi_SizeMenuActionPerformed(java.awt.event.ActionEvent evt)
     {
         String t = evt.getActionCommand();
-        if (!Util.isValidate(t))
+        if (!com.magicpwd._util.Char.isValidate(t))
         {
             return;
         }
@@ -384,7 +384,7 @@ public class MenuPwd extends JPopupMenu
     private void mi_CharMenuActionPerformed(java.awt.event.ActionEvent evt)
     {
         String t = evt.getActionCommand();
-        if (!Util.isValidate(t))
+        if (!com.magicpwd._util.Char.isValidate(t))
         {
             return;
         }
