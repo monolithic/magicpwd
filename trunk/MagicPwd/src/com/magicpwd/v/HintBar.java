@@ -3,6 +3,7 @@
  */
 package com.magicpwd.v;
 
+import com.magicpwd._comn.Keys;
 import java.awt.event.ActionEvent;
 
 import javax.swing.BorderFactory;
@@ -10,7 +11,7 @@ import javax.swing.JPanel;
 
 import com.magicpwd._util.Util;
 import com.magicpwd.c.InfoEvt;
-import com.magicpwd.m.HintMdl;
+import com.magicpwd.m.UserMdl;
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -24,10 +25,8 @@ public class HintBar extends JPanel
 {
 
     private InfoEvt ie_InfoEvent;
-    private int lastDays;
     private DateFormat dateTplt;
     private Timer tm_TimeNote;
-    private HintMdl hintMdl;
 
     public HintBar()
     {
@@ -72,12 +71,12 @@ public class HintBar extends JPanel
     public void initLang()
     {
         dateTplt = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.SHORT);
+
+        lb_InfoLabel.setText("数据处理中……");
     }
 
     public void initData()
     {
-        hintMdl = new HintMdl();
-
         if (tm_TimeNote == null)
         {
             tm_TimeNote = new Timer(600, new ActionListener()
@@ -104,9 +103,13 @@ public class HintBar extends JPanel
 
     private void lb_InfoLabelMouseClicked(java.awt.event.MouseEvent evt)
     {
-        if (hintMdl.getUnreadCount() > 0)
+        if (UserMdl.getHintMdl().getUnreadCount() > 0)
         {
-            //UserMdl.getListMdl().findName(lp_PastNote.remove(--size).getP30F0109());
+            UserMdl.getListMdl().clear();
+            for (Keys keys : UserMdl.getHintMdl().getUnread())
+            {
+                UserMdl.getListMdl().wAppend(keys);
+            }
             showNote();
         }
     }
@@ -120,32 +123,18 @@ public class HintBar extends JPanel
         lb_DateLabel.setText(text);
         lb_DateLabel.setToolTipText(text);
 
-        if (hintMdl.getHintData() != null)
+        if (UserMdl.getHintMdl().getHintData() != null)
         {
             ie_InfoEvent.hintDataActionPerformed(null);
         }
 
-        int days = cal.get(Calendar.DAY_OF_MONTH);
-        if (days == lastDays)
-        {
-            return;
-        }
-
-        // 初始化提醒数据
-        lastDays = days;
-        days = cal.get(java.util.Calendar.DAY_OF_WEEK);
-
         // 读取数据信息
-        cal.set(Calendar.HOUR_OF_DAY, 0);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        cal.set(Calendar.MILLISECOND, 0);
         Timestamp s = new Timestamp(cal.getTimeInMillis());
         cal.add(Calendar.DAY_OF_MONTH, 1);
         Timestamp e = new Timestamp(cal.getTimeInMillis());
-        hintMdl.process(s, e);
+        UserMdl.getHintMdl().process(s, e);
 
-        int size = hintMdl.getUnreadCount();
+        int size = UserMdl.getHintMdl().getUnreadCount();
         if (size > 0)
         {
             lb_InfoLabel.setText(Util.format("您有 {0} 条提醒数据！", Integer.toString(size)));

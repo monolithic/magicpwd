@@ -214,6 +214,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             return;
         }
 
+        TrayPtn.setDbLocked(true);
         final LckDialog dialog = new LckDialog(TrayPtn.getCurrForm());
         dialog.initView();
         dialog.initLang();
@@ -241,6 +242,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             return;
         }
 
+        TrayPtn.setDbLocked(true);
         final LckDialog dialog = new LckDialog(TrayPtn.getCurrForm());
         dialog.initView();
         dialog.initLang();
@@ -2193,6 +2195,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
                 dialog.setVisible(false);
                 dialog.dispose();
             }
+            TrayPtn.setDbLocked(false);
         }
     }
 
@@ -2249,6 +2252,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
                 dialog.setVisible(false);
                 dialog.dispose();
             }
+            TrayPtn.setDbLocked(false);
         }
     }
 
