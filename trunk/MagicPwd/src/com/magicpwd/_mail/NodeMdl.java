@@ -4,7 +4,6 @@
 package com.magicpwd._mail;
 
 import com.magicpwd._util.Logs;
-import com.magicpwd._util.Util;
 import javax.mail.Folder;
 import javax.swing.tree.DefaultMutableTreeNode;
 
@@ -34,7 +33,7 @@ public class NodeMdl extends DefaultMutableTreeNode
                 }
                 else
                 {
-                    display = Util.format("{0}({1}/{2})", folder.getName(), Integer.toString(folder.getUnreadMessageCount()), Integer.toString(folder.getMessageCount()));
+                    display = com.magicpwd._util.Char.format("{0}({1}/{2})", folder.getName(), Integer.toString(folder.getUnreadMessageCount()), Integer.toString(folder.getMessageCount()));
                 }
                 haveMsg = (folder.getType() & Folder.HOLDS_MESSAGES) != 0;
             }

@@ -3,7 +3,6 @@
  */
 package com.magicpwd._mail;
 
-import com.magicpwd._util.Util;
 import java.security.Security;
 import java.util.Properties;
 import javax.mail.Authenticator;
@@ -175,19 +174,19 @@ public class Connect
     public Properties getProperties()
     {
         Properties prop = new Properties();
-        prop.put(Util.format("mail.{0}.user", getProtocol()), getUsername());
-        prop.put(Util.format("mail.{0}.host", getProtocol()), getHost());
-        prop.put(Util.format("mail.{0}.port", getProtocol()), getPort());
-        prop.put(Util.format("mail.{0}.auth", getProtocol()), isAuth() ? "true" : "false");
-        prop.put(Util.format("mail.{0}.rsetbeforequit", getProtocol()), "true");
+        prop.put(com.magicpwd._util.Char.format("mail.{0}.user", getProtocol()), getUsername());
+        prop.put(com.magicpwd._util.Char.format("mail.{0}.host", getProtocol()), getHost());
+        prop.put(com.magicpwd._util.Char.format("mail.{0}.port", getProtocol()), getPort());
+        prop.put(com.magicpwd._util.Char.format("mail.{0}.auth", getProtocol()), isAuth() ? "true" : "false");
+        prop.put(com.magicpwd._util.Char.format("mail.{0}.rsetbeforequit", getProtocol()), "true");
         prop.put("mail.store.protocol", isJssl() ? getProtocol() + 's' : getProtocol());
 
         if (isJssl())
         {
-            prop.put(Util.format("mail.{0}.starttls.enable", getProtocol()), "true");// 使用SSL验证
-            prop.put(Util.format("mail.{0}.socketFactory.port", getProtocol()), getPort());//重新设定端口
-            prop.put(Util.format("mail.{0}.socketFactory.class", getProtocol()), "javax.net.ssl.SSLSocketFactory");
-            prop.put(Util.format("mail.{0}.socketFactory.fallback", getProtocol()), "false");
+            prop.put(com.magicpwd._util.Char.format("mail.{0}.starttls.enable", getProtocol()), "true");// 使用SSL验证
+            prop.put(com.magicpwd._util.Char.format("mail.{0}.socketFactory.port", getProtocol()), getPort());//重新设定端口
+            prop.put(com.magicpwd._util.Char.format("mail.{0}.socketFactory.class", getProtocol()), "javax.net.ssl.SSLSocketFactory");
+            prop.put(com.magicpwd._util.Char.format("mail.{0}.socketFactory.fallback", getProtocol()), "false");
         }
         return prop;
     }

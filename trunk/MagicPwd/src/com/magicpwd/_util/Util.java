@@ -20,7 +20,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -211,7 +210,7 @@ public final class Util
         {
             try
             {
-                java.io.InputStream stream = Util.class.getResourceAsStream(ConsEnv.ICON_PATH + Util.lPad(Integer.toHexString(size), 4, '0') + ".png");
+                java.io.InputStream stream = Util.class.getResourceAsStream(ConsEnv.ICON_PATH + Char.lPad(Integer.toHexString(size), 4, '0') + ".png");
                 logo = ImageIO.read(stream);
                 stream.close();
             }
@@ -275,7 +274,7 @@ public final class Util
             }
         }
 
-        backup = new File(dir, format(ConsEnv.FILE_BACK, currTime()));
+        backup = new File(dir, Char.format(ConsEnv.FILE_BACK, currTime()));
         backup.createNewFile();
         return backup;
     }
@@ -301,83 +300,6 @@ public final class Util
                 }
             }
         }
-    }
-
-    public static String format(String src, String... arg)
-    {
-        if (src != null)
-        {
-            int i = 0;
-            for (String tmp : arg)
-            {
-                src = src.replace("{" + (i++) + "}", tmp);
-            }
-        }
-        return src;
-    }
-
-    public static String lPad(String s, int length, char c)
-    {
-        if (length <= s.length())
-        {
-            return s;
-        }
-
-        char[] pad = new char[length - s.length()];
-        Arrays.fill(pad, c);
-        return new String(pad) + s;
-    }
-
-    /**
-     * 去除左空白
-     * 
-     * @param s
-     * @return
-     */
-    public static String lTrim(String s)
-    {
-        return lTrim(s, " ");
-    }
-
-    /**
-     * @param s
-     * @param c
-     * @return
-     */
-    public static String lTrim(String s, String c)
-    {
-        return (s != null) ? s.replaceAll("^[\\s" + c + "]+", c) : s;
-    }
-
-    /**
-     * 右填充指定字符，使原字符串达到指定的长度
-     * 
-     * @param s
-     * @param length
-     * @param c
-     * @return
-     */
-    public static String rPad(String s, int length, char c)
-    {
-        if (length <= s.length())
-        {
-            return s;
-        }
-
-        char[] pad = new char[length - s.length()];
-        Arrays.fill(pad, c);
-        return s + new String(pad);
-    }
-
-    /**
-     * 去除右空白
-     * 
-     * @param s
-     * @return
-     */
-    public static String rTrim(String s)
-    {
-        return (s != null) ? s.replaceAll("[\\s　]+$", "") : s;
     }
 
     /**

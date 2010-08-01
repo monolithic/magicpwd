@@ -233,7 +233,7 @@ public class DBA3000
             // 查询语句拼接
             dba.addTable(DBC3000.P30F0100);
             addUserSort(dba);
-            dba.addWhere(Util.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC3000.P30F0109, DBC3000.P30F010A, text2Query(text)));
+            dba.addWhere(com.magicpwd._util.Char.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC3000.P30F0109, DBC3000.P30F010A, text2Query(text)));
             addDataSort(dba);
 
             getNameData(dba.executeSelect(), list);
@@ -299,7 +299,7 @@ public class DBA3000
             dba.addColumn(DBC3000.P30F0109);
             dba.addColumn(DBC3000.P30F010A);
             dba.addWhere(DBC3000.P30F0105, UserMdl.getUserCode());
-            dba.addWhere(Util.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC3000.P30F0109, DBC3000.P30F010A, text2Query(text)));
+            dba.addWhere(com.magicpwd._util.Char.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC3000.P30F0109, DBC3000.P30F010A, text2Query(text)));
             //dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_MODE_1);
             dba.addWhere(DBC3000.P30F0106, ConsDat.HASH_NOTE);
 
@@ -467,13 +467,13 @@ public class DBA3000
 
             String DELETE = "DELETE FROM {0} WHERE {1}='{2}'";
             // 删除信息数据
-            dba.addBatch(Util.format(DELETE, DBC3000.P30F0100, DBC3000.P30F0104, hash));
+            dba.addBatch(com.magicpwd._util.Char.format(DELETE, DBC3000.P30F0100, DBC3000.P30F0104, hash));
             // 删除内容数据
-            dba.addBatch(Util.format(DELETE, DBC3000.P30F0200, DBC3000.P30F0202, hash));
+            dba.addBatch(com.magicpwd._util.Char.format(DELETE, DBC3000.P30F0200, DBC3000.P30F0202, hash));
             // 删除信息备份
-            dba.addBatch(Util.format(DELETE, DBC3000.P30F0A00, DBC3000.P30F0A04, hash));
+            dba.addBatch(com.magicpwd._util.Char.format(DELETE, DBC3000.P30F0A00, DBC3000.P30F0A04, hash));
             // 删除内容备份
-            dba.addBatch(Util.format(DELETE, DBC3000.P30F0B00, DBC3000.P30F0B03, hash));
+            dba.addBatch(com.magicpwd._util.Char.format(DELETE, DBC3000.P30F0B00, DBC3000.P30F0B03, hash));
             dba.executeBatch();
             return true;
         }
@@ -910,7 +910,7 @@ public class DBA3000
             dba.init();
 
             dba.addTable(DBC3000.P30F1100);
-            dba.addWhere(Util.format("{1}='{0}' OR {2}='{0}'", tpltItem.getP30F1103(), DBC3000.P30F1103, DBC3000.P30F1104));
+            dba.addWhere(com.magicpwd._util.Char.format("{1}='{0}' OR {2}='{0}'", tpltItem.getP30F1103(), DBC3000.P30F1103, DBC3000.P30F1104));
             dba.executeDelete();
             return true;
         }
@@ -1164,9 +1164,9 @@ public class DBA3000
 
             String DELETE = "DELETE FROM {0} WHERE {1}='{2}'";
             // 删除信息数据
-            dba.addBatch(Util.format(DELETE, DBC3000.P30F0100, DBC3000.P30F0104, keysHash));
+            dba.addBatch(com.magicpwd._util.Char.format(DELETE, DBC3000.P30F0100, DBC3000.P30F0104, keysHash));
             // 删除内容数据
-            dba.addBatch(Util.format(DELETE, DBC3000.P30F0200, DBC3000.P30F0202, keysHash));
+            dba.addBatch(com.magicpwd._util.Char.format(DELETE, DBC3000.P30F0200, DBC3000.P30F0202, keysHash));
 
             dba.addParam(DBC3000.P30F0101, UserMdl.getGridMdl().getSequence());
             dba.addParam(DBC3000.P30F0102, DBC3000.P30F0A02, false);

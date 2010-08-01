@@ -60,27 +60,7 @@ public class Lang
      */
     public static void setWText(AbstractButton c, String sid, String def)
     {
-        String txt = getLang(sid, def);
-        int idx = -1;
-        // 快捷字符替换
-        if (txt.length() > 0)
-        {
-            idx = txt.indexOf('&');
-            if (idx >= 0)
-            {
-                txt = txt.replace("&", "");
-                if (txt.length() > idx)
-                {
-                    c.setMnemonic(txt.charAt(idx));
-                }
-            }
-        }
-
-        if (!(idx == 0 && txt.length() == 1))
-        {
-            c.setText(txt);
-            c.setDisplayedMnemonicIndex(idx);
-        }
+        Bean.setText(c, getLang(sid, def));
     }
 
     /**
@@ -196,7 +176,7 @@ public class Lang
         t = getLang(t, d);
         if (z != null)
         {
-            t = Util.format(t, z);
+            t = Char.format(t, z);
         }
         JOptionPane.showMessageDialog(c, t, tips, JOptionPane.INFORMATION_MESSAGE);
     }
@@ -206,7 +186,7 @@ public class Lang
         t = getLang(t, d);
         if (z != null)
         {
-            t = Util.format(t, z);
+            t = Char.format(t, z);
         }
         return JOptionPane.showConfirmDialog(c, t, tips, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
     }

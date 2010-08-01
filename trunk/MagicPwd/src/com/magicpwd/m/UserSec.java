@@ -20,6 +20,7 @@ import javax.crypto.NoSuchPaddingException;
 
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 
@@ -508,6 +509,6 @@ final class UserSec implements Key
 
     public final String user(String key)
     {
-        return Util.format(key, name);
+        return Char.format(key, name);
     }
 }
