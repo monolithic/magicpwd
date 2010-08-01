@@ -100,8 +100,10 @@ public class ListMdl extends DefaultListModel
         return true;
     }
 
-    public void wAppend()
+    public void wAppend(Keys keys)
     {
+        dataList.add(keys);
+        this.fireIntervalAdded(this, 0, dataList.size());
     }
 
     public void wUpdate()

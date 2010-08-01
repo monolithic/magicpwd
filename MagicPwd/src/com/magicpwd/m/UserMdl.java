@@ -121,6 +121,7 @@ public final class UserMdl
         kind.setC2010106("魔方密码");
         treeMdl = new TreeMdl(new KindTN(kind));
         us_UserSec = new UserSec();
+        hintMdl = new HintMdl();
     }
 
     public static void loadUserCfg()
@@ -176,7 +177,7 @@ public final class UserMdl
      * @throws InvalidKeyException
      * @throws Exception
      */
-    public static final boolean signIn(String userName, String userPwds) throws InvalidKeyException,
+    public static boolean signIn(String userName, String userPwds) throws InvalidKeyException,
             NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException
     {
         us_UserSec.setName(userName);
@@ -184,7 +185,7 @@ public final class UserMdl
         return us_UserSec.signIn();
     }
 
-    public static final boolean signPb(String userName, String userPwds) throws Exception
+    public static boolean signPb(String userName, String userPwds) throws Exception
     {
         us_UserSec.setName(userName);
         us_UserSec.setPwds(userPwds);
@@ -202,7 +203,7 @@ public final class UserMdl
      * @throws InvalidKeyException
      * @throws Exception
      */
-    public static final boolean signPk(String oldPwds, String newPwds) throws InvalidKeyException, NoSuchAlgorithmException,
+    public static boolean signPk(String oldPwds, String newPwds) throws InvalidKeyException, NoSuchAlgorithmException,
             NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException
     {
         if (us_UserSec == null)
@@ -219,7 +220,7 @@ public final class UserMdl
      * @return
      * @throws Exception
      */
-    public static final boolean signFp(String usrName, StringBuffer secPwds) throws Exception
+    public static boolean signFp(String usrName, StringBuffer secPwds) throws Exception
     {
         if (us_UserSec == null)
         {
@@ -234,7 +235,7 @@ public final class UserMdl
      * @return
      * @throws java.lang.Exception
      */
-    public static final boolean signSk(String oldPwds, String secPwds) throws Exception
+    public static boolean signSk(String oldPwds, String secPwds) throws Exception
     {
         if (us_UserSec == null)
         {
@@ -249,7 +250,7 @@ public final class UserMdl
      * @param userPwds
      * @throws Exception
      */
-    public static final boolean signOx(String userName, String userPwds)
+    public static boolean signOx(String userName, String userPwds)
     {
         return us_UserSec.signOx();
     }
@@ -265,7 +266,7 @@ public final class UserMdl
      * @throws javax.crypto.IllegalBlockSizeException
      * @throws javax.crypto.BadPaddingException
      */
-    public static final boolean signUp(String userName, String userPwds) throws InvalidKeyException,
+    public static boolean signUp(String userName, String userPwds) throws InvalidKeyException,
             NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException
     {
         us_UserSec.setName(userName);
@@ -325,7 +326,7 @@ public final class UserMdl
     /**
      * @return the us_UserSec
      */
-    static final UserSec getSec()
+    static UserSec getSec()
     {
         return us_UserSec;
     }
@@ -372,5 +373,21 @@ public final class UserMdl
     public static boolean hasSkey()
     {
         return us_UserSec.hasSkey();
+    }
+
+    /**
+     * @return the hintMdl
+     */
+    public static HintMdl getHintMdl()
+    {
+        return hintMdl;
+    }
+
+    /**
+     * @param aHintMdl the hintMdl to set
+     */
+    public static void setHintMdl(HintMdl aHintMdl)
+    {
+        hintMdl = aHintMdl;
     }
 }
