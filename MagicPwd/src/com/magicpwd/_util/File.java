@@ -309,6 +309,10 @@ public class File
 
     public static java.io.InputStream open4Read(String uri) throws Exception
     {
+        if (!Char.isValidate(uri))
+        {
+            return null;
+        }
         java.io.File file = new java.io.File(uri).getAbsoluteFile();
         if (file.exists())
         {

@@ -6,10 +6,12 @@ package com.magicpwd.v;
 
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
+import com.magicpwd._util.File;
+import com.magicpwd._util.Logs;
 import java.util.List;
 import org.dom4j.Document;
 import org.dom4j.Element;
-import org.dom4j.Node;
+import org.dom4j.io.SAXReader;
 
 /**
  *
@@ -24,9 +26,20 @@ public class MenuPtn
     {
     }
 
-    public boolean loadData(String filePath)
+    public boolean loadData(String uri) throws Exception
     {
-        return true;
+        return loadData(File.open4Read(uri));
+    }
+
+    public boolean loadData(java.io.File file) throws Exception
+    {
+        return loadData(new java.io.FileInputStream(file));
+    }
+
+    public boolean loadData(java.io.InputStream stream) throws Exception
+    {
+        document = new SAXReader().read(stream);
+        return document != null;
     }
 
     public javax.swing.JMenuBar getMenuBar(String menuId)
@@ -40,7 +53,17 @@ public class MenuPtn
         {
             return null;
         }
-        element = element.element(Char.format("menubar[id='{0}']", menuId));
+        for(Object ele:element.elements())
+        {
+            Element obj = (Element)ele;
+            System.out.println("====");
+            System.out.println(obj.getNamespaceURI());
+            System.out.println(obj.getQualifiedName());
+            System.out.println(obj.getUniquePath());
+            System.out.println(obj.getQName());
+            System.out.println(obj);
+        }
+        element = element.element(Char.format("menubar[@id={0}]", menuId));
         if (element == null)
         {
             return null;
@@ -50,13 +73,15 @@ public class MenuPtn
         List elementList = element.elements("menu");
         if (elementList != null)
         {
+            java.util.HashMap<String, javax.swing.Action> actions = new java.util.HashMap<String, javax.swing.Action>();
+            java.util.HashMap<String, javax.swing.ButtonGroup> groups = new java.util.HashMap<String, javax.swing.ButtonGroup>();
             for (Object obj : elementList)
             {
                 if (!(obj instanceof Element))
                 {
                     continue;
                 }
-                javax.swing.JMenu menu = createMenu((Element) obj);
+                javax.swing.JMenu menu = createMenu((Element) obj, actions, groups);
                 if (menu != null)
                 {
                     menuBar.add(menu);
@@ -71,20 +96,13 @@ public class MenuPtn
         return null;
     }
 
-    private static javax.swing.JMenu createMenu(Element element)
+    private static javax.swing.JMenu createMenu(Element element, java.util.HashMap<String, javax.swing.Action> actions, java.util.HashMap<String, javax.swing.ButtonGroup> groups)
     {
         javax.swing.JMenu menu = new javax.swing.JMenu();
 
-        String text = element.attributeValue("text");
-        Bean.setText(menu, text != null ? text : "...");
-
-        String tips = element.attributeValue("tips");
-        Bean.setText(menu, tips != null ? tips : "...");
-
-        menu.setIcon(null);
-        menu.setRolloverIcon(null);
-        menu.setDisabledIcon(null);
-        menu.setPressedIcon(null);
+        processText(element, menu);
+        processTips(element, menu);
+        processIcon(element, menu);
 
         List list = element.elements();
         if (list != null)
@@ -98,21 +116,102 @@ public class MenuPtn
                 element = (Element) obj;
                 if ("menu".equals(element.getName()))
                 {
-                    menu.add(createMenu(element));
+                    menu.add(createMenu(element, actions, groups));
                     continue;
                 }
                 if ("item".equals(element.getName()))
                 {
-                    menu.add(createItem(element));
+                    menu.add(createItem(element, actions, groups));
+                }
+                if ("seperator".equals(element.getName()))
+                {
+                    menu.addSeparator();
                 }
             }
         }
         return null;
     }
 
-    private static javax.swing.JMenuItem createItem(Node node)
+    private static javax.swing.JMenuItem createItem(Element element, java.util.HashMap<String, javax.swing.Action> actions, java.util.HashMap<String, javax.swing.ButtonGroup> groups)
     {
+        javax.swing.JMenuItem item = processType(element);
+        processGroup(element, item, groups);
+        processText(element, item);
+        processTips(element, item);
+        processIcon(element, item);
+        processCommand(element, item);
+        processStrokes(element, item);
+        processAction(element, item);
         return null;
+    }
+
+    private static javax.swing.JMenuItem processText(Element element, javax.swing.JMenuItem item)
+    {
+        String text = element.attributeValue("text");
+        Bean.setText(item, text != null ? text : "...");
+        return item;
+    }
+
+    private static javax.swing.JMenuItem processTips(Element element, javax.swing.JMenuItem item)
+    {
+        String tips = element.attributeValue("tips");
+        Bean.setTips(item, tips != null ? tips : "...");
+        return item;
+    }
+
+    private static javax.swing.JMenuItem processIcon(Element element, javax.swing.JMenuItem item)
+    {
+        item.setIcon(null);
+        item.setRolloverIcon(null);
+        item.setDisabledIcon(null);
+        item.setPressedIcon(null);
+        return item;
+    }
+
+    private static javax.swing.JMenuItem processType(Element element)
+    {
+        String type = element.attributeValue("type");
+        if ("checkbox".equals(type))
+        {
+            return new javax.swing.JCheckBoxMenuItem();
+        }
+        else if ("radiobox".equals("type"))
+        {
+            return new javax.swing.JRadioButtonMenuItem();
+        }
+
+        return new javax.swing.JMenuItem();
+    }
+
+    private static javax.swing.JMenuItem processGroup(Element element, javax.swing.JMenuItem item, java.util.HashMap<String, javax.swing.ButtonGroup> groups)
+    {
+        String group = element.attributeValue("group");
+        if (Char.isValidate(group))
+        {
+            javax.swing.ButtonGroup bg = groups.get(group);
+            if (bg == null)
+            {
+                bg = new javax.swing.ButtonGroup();
+                groups.put(group, bg);
+            }
+            bg.add(item);
+        }
+        return item;
+    }
+
+    private static javax.swing.JMenuItem processCommand(Element element, javax.swing.JMenuItem item)
+    {
+        return item;
+    }
+
+    private static javax.swing.JMenuItem processStrokes(Element element, javax.swing.JMenuItem item)
+    {
+        return item;
+    }
+
+    private static javax.swing.JMenuItem processAction(Element element, javax.swing.JMenuItem item)
+    {
+        return item;
     }
 
     private javax.swing.Icon createIcon(String path)

@@ -41,6 +41,11 @@ public class Bean
         }
     }
 
+    public static void setTips(javax.swing.JComponent c, String t)
+    {
+        c.setToolTipText(t);
+    }
+
     public static void registerKeyStrokeAction(javax.swing.JComponent component, javax.swing.KeyStroke stroke, javax.swing.Action action, String command, int condition)
     {
         command = (command != null) ? command : ((action != null) ? action.getValue(javax.swing.Action.NAME).toString() : "");
