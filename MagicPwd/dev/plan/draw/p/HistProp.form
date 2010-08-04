@@ -61,7 +61,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="test.draw.b.Edit" name="pl_ItemEdit">
+    <Component class="plan.draw.b.Edit" name="pl_ItemEdit">
     </Component>
     <Container class="javax.swing.JScrollPane" name="sp_HistInfo">
       <AuxValues>

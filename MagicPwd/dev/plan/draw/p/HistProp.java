@@ -33,7 +33,7 @@ public class HistProp extends javax.swing.JPanel {
 
         javax.swing.JScrollPane sp_HistList = new javax.swing.JScrollPane();
         ls_HistList = new javax.swing.JList();
-        pl_ItemEdit = new test.draw.b.Edit();
+        pl_ItemEdit = new plan.draw.b.Edit();
         javax.swing.JScrollPane sp_HistInfo = new javax.swing.JScrollPane();
         ta_HistInfo = new javax.swing.JTextArea();
 
@@ -72,7 +72,7 @@ public class HistProp extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList ls_HistList;
-    private test.draw.b.Edit pl_ItemEdit;
+    private plan.draw.b.Edit pl_ItemEdit;
     private javax.swing.JTextArea ta_HistInfo;
     // End of variables declaration//GEN-END:variables
 
