@@ -37,15 +37,16 @@ public class MagicPwd
         if (args != null && args.length > 0 && "webstart".equalsIgnoreCase(args[0]))
         {
             UserMdl.setRunMode(ConsEnv.MODE_RUN_WEB);
-            try
-            {
-                Jzip.unZip(MagicPwd.class.getResourceAsStream("/res/dat.zip"), new File(ConsEnv.DIR_DAT), false);
-            }
-            catch (Exception exp)
-            {
-                Logs.exception(exp);
-                Lang.showMesg(null, null, exp.getLocalizedMessage());
-            }
+        }
+
+        try
+        {
+            Jzip.unZip(MagicPwd.class.getResourceAsStream("/res/dat.zip"), new File(ConsEnv.DIR_DAT), false);
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            Lang.showMesg(null, null, exp.getLocalizedMessage());
         }
 
         // 用户配置文件加载
