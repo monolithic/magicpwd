@@ -1,0 +1,124 @@
+<?xml version="1.1" encoding="UTF-8" ?>
+
+<Form version="1.6" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="lb_UserKey0" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="lb_UserName" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="lb_UserKey1" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="lb_UserKey2" alignment="1" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="tf_UserName" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="pf_UserKey0" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="pf_UserKey1" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="pf_UserKey2" alignment="0" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lb_UserName" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="tf_UserName" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lb_UserKey0" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="pf_UserKey0" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lb_UserKey1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="pf_UserKey1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="lb_UserKey2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="pf_UserKey2" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="lb_UserName">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x7528;&#x6237;&#xff1a;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="tf_UserName">
+      <Properties>
+        <Property name="columns" type="int" value="16"/>
+        <Property name="text" type="java.lang.String" value="jTextField1"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tf_UserNameActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lb_UserKey0">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x53e3;&#x4ee4;&#xff1a;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="pf_UserKey0">
+      <Properties>
+        <Property name="columns" type="int" value="16"/>
+        <Property name="text" type="java.lang.String" value="jPasswordField1"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pf_UserKey0ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lb_UserKey1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x65b0;&#x53e3;&#x4ee4;&#xff1a;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="pf_UserKey1">
+      <Properties>
+        <Property name="columns" type="int" value="16"/>
+        <Property name="text" type="java.lang.String" value="jPasswordField2"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pf_UserKey1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lb_UserKey2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&#x53e3;&#x4ee4;&#x786e;&#x8ba4;&#xff1a;"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="pf_UserKey2">
+      <Properties>
+        <Property name="columns" type="int" value="16"/>
+        <Property name="text" type="java.lang.String" value="jPasswordField1"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="pf_UserKey2ActionPerformed"/>
+      </Events>
+    </Component>
+  </SubComponents>
+</Form>
