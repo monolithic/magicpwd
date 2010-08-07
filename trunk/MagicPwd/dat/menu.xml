@@ -9,7 +9,7 @@
 -->
 <magicpwd>
     <menubar id="">
-        <menu text="文件(&F)" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
+        <menu id="file" text="文件(&F)" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
             <item type="normal" text="退出(&X)" tips="" icon="" action="" strokes="">
 
             </item>
@@ -22,6 +22,18 @@
             <item type="seperator">
 
             </item>
+        </menu>
+        <menu id="edit" text="编辑(@E)" tips="">
+        </menu>
+        <menu id="view" text="视图(@V)" tips="">
+        </menu>
+        <menu id="data" text="数据(@D)" tips="">
+        </menu>
+        <menu id="user" text="用户(@A)" tips="">
+        </menu>
+        <menu id="skin" text="皮肤(@L)" tips="">
+        </menu>
+        <menu id="help" text="帮助(@H)" tips="">
         </menu>
     </menubar>
     <menupop id="">

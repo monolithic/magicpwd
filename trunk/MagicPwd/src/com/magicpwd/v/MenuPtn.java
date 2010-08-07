@@ -8,6 +8,7 @@ import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.File;
 import com.magicpwd._util.Logs;
+import com.magicpwd.e.skin.LookAction;
 import java.util.List;
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -53,9 +54,9 @@ public class MenuPtn
         {
             return null;
         }
-        for(Object ele:element.elements())
+        for (Object ele : element.elements())
         {
-            Element obj = (Element)ele;
+            Element obj = (Element) ele;
             System.out.println("====");
             System.out.println(obj.getNamespaceURI());
             System.out.println(obj.getQualifiedName());
@@ -143,6 +144,51 @@ public class MenuPtn
         processStrokes(element, item);
         processAction(element, item);
         return null;
+    }
+
+    private static void loadSkin()
+    {
+    }
+
+    private static void loadLook()
+    {
+        java.io.File look = new java.io.File("skin", "look");
+        if (!look.exists() || !look.canRead() || !look.isDirectory())
+        {
+            return;
+        }
+        java.io.File dirs[] = look.listFiles();
+        if (dirs == null || dirs.length < 1)
+        {
+            return;
+        }
+
+        LookAction action = new LookAction();
+        for (java.io.File dir : dirs)
+        {
+            java.io.File aml = new java.io.File(dir, "look.aml");
+            if (!aml.exists() || !aml.canRead() || !aml.isFile())
+            {
+                continue;
+            }
+            try
+            {
+                java.util.Properties prop = new java.util.Properties();
+                prop.load(new java.io.FileInputStream(aml));
+                javax.swing.JCheckBoxMenuItem item = new javax.swing.JCheckBoxMenuItem();
+                Bean.setText(item, prop.getProperty("text"));
+                Bean.setTips(item, prop.getProperty("tips"));
+                item.setAction(action);
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+        }
+    }
+
+    private static void loadFeel()
+    {
     }
 
     private static javax.swing.JMenuItem processText(Element element, javax.swing.JMenuItem item)

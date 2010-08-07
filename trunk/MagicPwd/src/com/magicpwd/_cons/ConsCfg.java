@@ -118,6 +118,9 @@ public interface ConsCfg
      * 
      */
     String CFG_SKIN = CFG_PRE + ".skin";
+    String CFG_SKIN_DECO = CFG_SKIN + ".deco";
+    String CFG_SKIN_LOOK = CFG_SKIN + ".look";
+    String CFG_SKIN_FEEL = CFG_SKIN + ".feel";
     /**
      * 系统托盘显示方式
      */

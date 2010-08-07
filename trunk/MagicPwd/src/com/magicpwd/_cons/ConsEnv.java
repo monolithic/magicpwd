@@ -26,8 +26,8 @@ public interface ConsEnv
      * 软件信息：软件首页
      */
     String HOMEPAGE = "http://magicpwd.com/";
-    String BLOGSITE="";
-    String MLOGSITE="http://t.sina.com.cn/mpwd";
+    String BLOGSITE = "";
+    String MLOGSITE = "http://t.sina.com.cn/mpwd";
     /**
      * 软件信息：构建日期
      */
@@ -61,6 +61,7 @@ public interface ConsEnv
     String DIR_DAT = "dat";
     String DIR_AMA = "ama";
     String DIR_ICO = "ico";
+    String DIR_EXT = "ext";
     ///////////////////////////////////////////////////////
     // 类别数据显示排序
     ///////////////////////////////////////////////////////
@@ -265,11 +266,9 @@ public interface ConsEnv
      * 程序运行模式：网络加载
      */
     int MODE_RUN_WEB = 1;
-
     int VIEW_MAIN = 0;
     int VIEW_NORM = 1;
     int VIEW_MINI = 2;
-
     String[] USER_SALT =
     {
         "Winshine.biz", "Amonsoft.com", "Magicpwd.com", "MyIM.im"
