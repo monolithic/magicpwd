@@ -4,14 +4,15 @@ import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._face.IBackCall;
 import com.magicpwd._user.UserSign;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.DBAccess;
 import com.magicpwd.m.UserMdl;
+import com.magicpwd.r.AmonFF;
 import com.magicpwd.v.TrayPtn;
-import java.io.File;
 
 /**
  * @author Amon
@@ -21,10 +22,6 @@ public class MagicPwd
 {
 
     private MagicPwd()
-    {
-    }
-
-    public void init()
     {
     }
 
@@ -39,18 +36,18 @@ public class MagicPwd
             UserMdl.setRunMode(ConsEnv.MODE_RUN_WEB);
         }
 
-        try
-        {
-            Jzip.unZip(MagicPwd.class.getResourceAsStream("/res/dat.zip"), new File(ConsEnv.DIR_DAT), false);
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-            Lang.showMesg(null, null, exp.getLocalizedMessage());
-        }
+        // 数据完整性处理
+        zipData();
 
         // 用户配置文件加载
         UserMdl.loadUserCfg();
+
+        // 动态类库加载
+        if (!loadExt())
+        {
+            UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN_DECO, ConsCfg.DEF_FAIL);
+            UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN_LOOK, "system");
+        }
 
         // 界面风格设置
         try
@@ -61,8 +58,9 @@ public class MagicPwd
                 @Override
                 public void run()
                 {
-                    javax.swing.JFrame.setDefaultLookAndFeelDecorated(true);
-                    javax.swing.JDialog.setDefaultLookAndFeelDecorated(true);
+                    boolean deco = ConsCfg.DEF_TRUE.equalsIgnoreCase(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN_DECO, ConsCfg.DEF_FAIL));
+                    javax.swing.JFrame.setDefaultLookAndFeelDecorated(deco);
+                    javax.swing.JDialog.setDefaultLookAndFeelDecorated(deco);
 
                     // 用户偏好风格设置
                     try
@@ -124,6 +122,62 @@ public class MagicPwd
         Util.getIcon(0);
         Util.getNone();
         Util.getLogo(16);
+    }
+
+    private static boolean loadExt()
+    {
+        String skin = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN_LOOK, "");
+        if (!Char.isValidate(skin))
+        {
+            return false;
+        }
+        String look = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN_LOOK, "");
+        if (!Char.isValidate(look))
+        {
+            return false;
+        }
+
+        java.io.File file = new java.io.File("skin/look", look);
+        if (!file.exists() || !file.canRead() || !file.isDirectory())
+        {
+            return false;
+        }
+
+        java.io.File jars[] = file.listFiles(new AmonFF("*.jar", true));
+        if (jars == null && jars.length < 1)
+        {
+            return false;
+        }
+
+        try
+        {
+            java.net.URL urls[] = new java.net.URL[jars.length];
+            for (int i = 0; i < jars.length; i += 1)
+            {
+                urls[i] = jars[i].toURI().toURL();
+            }
+            java.net.URLClassLoader ucl = new java.net.URLClassLoader(urls);
+            ucl.loadClass("");
+            return true;
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            return false;
+        }
+    }
+
+    private static void zipData()
+    {
+        try
+        {
+            Jzip.unZip(MagicPwd.class.getResourceAsStream("/res/dat.zip"), new java.io.File(ConsEnv.DIR_DAT), false);
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            Lang.showMesg(null, null, exp.getLocalizedMessage());
+        }
     }
 
     public static java.io.File endSave()
