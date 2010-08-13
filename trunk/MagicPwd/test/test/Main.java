@@ -19,7 +19,7 @@ public class Main
             exp.printStackTrace();
         }
         JFrame frame = new JFrame();
-        frame.setJMenuBar(ptn.getMenuBar("Main"));
+        frame.setJMenuBar(ptn.getMenuBar("magicpwd"));
         frame.setSize(new Dimension(400, 300));
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
