@@ -4,6 +4,7 @@
  */
 package com.magicpwd.v;
 
+import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.File;
@@ -12,6 +13,7 @@ import com.magicpwd.e.skin.LookAction;
 import java.util.List;
 import org.dom4j.Document;
 import org.dom4j.Element;
+import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
 
 /**
@@ -49,28 +51,16 @@ public class MenuPtn
         {
             return null;
         }
-        Element element = document.getRootElement();
-        if (element == null || !"magicpwd".equals(element.getName()))
+        Node node = document.getRootElement().selectSingleNode(Char.format("/magicpwd/menubar[@id='{0}']", menuId));
+        if (node == null || !(node instanceof Element))
         {
             return null;
         }
-        for (Object ele : element.elements())
-        {
-            Element obj = (Element) ele;
-            System.out.println("====");
-            System.out.println(obj.getNamespaceURI());
-            System.out.println(obj.getQualifiedName());
-            System.out.println(obj.getUniquePath());
-            System.out.println(obj.getQName());
-            System.out.println(obj);
-        }
-        element = element.element(Char.format("menubar[@id={0}]", menuId));
-        if (element == null)
-        {
-            return null;
-        }
+        Element element = (Element) node;
+
         javax.swing.JMenuBar menuBar = new javax.swing.JMenuBar();
         menuBar.setName(menuId);
+
         List elementList = element.elements("menu");
         if (elementList != null)
         {
@@ -89,7 +79,7 @@ public class MenuPtn
                 }
             }
         }
-        return null;
+        return menuBar;
     }
 
     public javax.swing.JPopupMenu getMenuPop(String menuId)
@@ -123,14 +113,16 @@ public class MenuPtn
                 if ("item".equals(element.getName()))
                 {
                     menu.add(createItem(element, actions, groups));
+                    continue;
                 }
                 if ("seperator".equals(element.getName()))
                 {
                     menu.addSeparator();
+                    continue;
                 }
             }
         }
-        return null;
+        return menu;
     }
 
     private static javax.swing.JMenuItem createItem(Element element, java.util.HashMap<String, javax.swing.Action> actions, java.util.HashMap<String, javax.swing.ButtonGroup> groups)
@@ -143,7 +135,7 @@ public class MenuPtn
         processCommand(element, item);
         processStrokes(element, item);
         processAction(element, item);
-        return null;
+        return item;
     }
 
     private static void loadSkin()
@@ -219,11 +211,15 @@ public class MenuPtn
         String type = element.attributeValue("type");
         if ("checkbox".equals(type))
         {
-            return new javax.swing.JCheckBoxMenuItem();
+            javax.swing.JCheckBoxMenuItem item = new javax.swing.JCheckBoxMenuItem();
+            item.setSelected(ConsCfg.DEF_TRUE.equalsIgnoreCase(element.attributeValue("checked")));
+            return item;
         }
         else if ("radiobox".equals("type"))
         {
-            return new javax.swing.JRadioButtonMenuItem();
+            javax.swing.JRadioButtonMenuItem item = new javax.swing.JRadioButtonMenuItem();
+            item.setSelected(ConsCfg.DEF_TRUE.equalsIgnoreCase(element.attributeValue("checked")));
+            return item;
         }
 
         return new javax.swing.JMenuItem();

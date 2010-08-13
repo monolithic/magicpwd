@@ -23,10 +23,10 @@ public class Bean
         // 快捷字符替换
         if (t.length() > 0)
         {
-            i = t.indexOf('&');
+            i = t.indexOf('@');
             if (i >= 0)
             {
-                t = t.replace("&", "");
+                t = t.replace("@", "");
                 if (t.length() > i)
                 {
                     c.setMnemonic(t.charAt(i));
