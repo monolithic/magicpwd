@@ -9,11 +9,9 @@ import java.awt.event.KeyEvent;
 import javax.swing.JMenuBar;
 import javax.swing.KeyStroke;
 
-import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
-import com.magicpwd._util.Logs;
 import com.magicpwd.c.MPwdEvt;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.x.MdiDialog;
@@ -678,101 +676,9 @@ public class MenuBar extends JMenuBar
     private void initSkinMenu()
     {
         mu_SkinMenu = new javax.swing.JMenu();
-        add(mu_SkinMenu);
+        this.add(mu_SkinMenu);
 
-        String userSkin = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN, ConsCfg.DEF_SKIN);
-        boolean checked = ConsCfg.DEF_SKIN.equalsIgnoreCase(userSkin);
-        java.awt.event.ActionListener listener = new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                if (mi_lastItem != null)
-                {
-                    mi_lastItem.setSelected(false);
-                }
-                mi_lastItem = (javax.swing.JMenuItem) evt.getSource();
-                me_MenuEvent.skinChangeActionPerformed(evt);
-            }
-        };
-
-        mi_SkinSystem = new javax.swing.JCheckBoxMenuItem();
-        mi_SkinSystem.setActionCommand(ConsCfg.DEF_SKIN);
-        mi_SkinSystem.addActionListener(listener);
-        mu_SkinMenu.add(mi_SkinSystem);
-
-        java.io.File skinFile = new java.io.File(ConsEnv.DIR_DAT, "skin.config");
-        if (skinFile.isFile() && skinFile.canRead())
-        {
-            try
-            {
-                javax.swing.JMenu lastMenu = null;
-                java.util.regex.Pattern family = java.util.regex.Pattern.compile("^skin_[^._]+$");
-                java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.InputStreamReader(new java.io.FileInputStream(skinFile), ConsEnv.FILE_ENCODING));
-                String line;
-                String[] arr;
-                while ((line = reader.readLine()) != null)
-                {
-                    arr = line.split("=");
-                    if (arr == null || arr.length != 2)
-                    {
-                        continue;
-                    }
-                    String k = arr[0];
-                    String v = arr[1];
-                    if (family.matcher(k).matches())
-                    {
-                        lastMenu = new javax.swing.JMenu(v);
-                        mu_SkinMenu.add(lastMenu);
-                        continue;
-                    }
-
-                    if (lastMenu == null)
-                    {
-                        continue;
-                    }
-
-                    if ("-".equals(v))
-                    {
-                        lastMenu.addSeparator();
-                        continue;
-                    }
-
-                    arr = v.split(":");
-                    if (arr == null || arr.length != 2)
-                    {
-                        continue;
-                    }
-
-                    k = arr[0];
-                    v = arr[1];
-                    javax.swing.JCheckBoxMenuItem item = new javax.swing.JCheckBoxMenuItem(k);
-                    if (!checked)
-                    {
-                        checked = userSkin.equalsIgnoreCase(v);
-                        if (checked)
-                        {
-                            item.setSelected(true);
-                            mi_lastItem = item;
-                        }
-                    }
-                    item.setActionCommand(v);
-                    item.addActionListener(listener);
-                    lastMenu.add(item);
-                }
-            }
-            catch (Exception exp)
-            {
-                Logs.exception(exp);
-            }
-        }
-
-        if (!checked)
-        {
-            mi_SkinSystem.setSelected(true);
-            mi_lastItem = mi_SkinSystem;
-        }
+        MenuPtn.loadSkin(mu_SkinMenu);
     }
 
     private void initHelpMenu()

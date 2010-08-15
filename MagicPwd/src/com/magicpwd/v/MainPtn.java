@@ -436,24 +436,6 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
     }
 
     @Override
-    public void skinChangeActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        final String lafClass = evt.getActionCommand();
-        boolean isSystem = !com.magicpwd._util.Char.isValidate(lafClass) || ConsCfg.DEF_SKIN.equalsIgnoreCase(lafClass);
-        UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN, isSystem ? ConsCfg.DEF_SKIN : lafClass);
-        javax.swing.SwingUtilities.invokeLater(new Runnable()
-        {
-
-            @Override
-            public void run()
-            {
-                TrayPtn.changeSkin(lafClass);
-            }
-        });
-        Lang.showMesg(this, LangRes.P30FAA1B, "系统不能保证风格切换正常，请重新启动程序以使用新的界面风格！");
-    }
-
-    @Override
     public void updtAreaActionPerformed(java.awt.event.ActionEvent evt)
     {
         if (checkData())

@@ -4,9 +4,14 @@
  */
 package com.magicpwd.e.skin;
 
+import com.magicpwd._cons.ConsCfg;
+import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Char;
+import com.magicpwd._util.Lang;
+import com.magicpwd.m.UserMdl;
+import com.magicpwd.v.TrayPtn;
 import javax.swing.AbstractAction;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,17 +28,20 @@ public class LookAction extends AbstractAction
         {
             return;
         }
-        String type;
-        String name;
 
-        if ("default".equals(command))
+        String look;
+        final String name;
+
+        if (ConsEnv.SKIN_DEFAULT.equals(command))
         {
-            type = "default";
+            look = ConsEnv.SKIN_DEFAULT;
+            UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN_NAME, ConsEnv.SKIN_DEFAULT);
             name = javax.swing.UIManager.getCrossPlatformLookAndFeelClassName();
         }
-        else if ("system".equals(command))
+        else if (ConsEnv.SKIN_SYSTEM.equals(command))
         {
-            type = "system";
+            look = ConsEnv.SKIN_SYSTEM;
+            UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN_NAME, ConsEnv.SKIN_SYSTEM);
             name = javax.swing.UIManager.getSystemLookAndFeelClassName();
         }
         else
@@ -43,9 +51,21 @@ public class LookAction extends AbstractAction
             {
                 return;
             }
-            type = arr[0];
+            look = arr[0];
             name = arr[1];
+            UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN_NAME, name);
         }
-        JOptionPane.showMessageDialog(null, command);
+        UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN_LOOK, look);
+
+        javax.swing.SwingUtilities.invokeLater(new Runnable()
+        {
+
+            @Override
+            public void run()
+            {
+                TrayPtn.changeSkin(name);
+            }
+        });
+        Lang.showMesg(null, LangRes.P30FAA1B, "系统不能保证风格切换正常，请重新启动程序以使用新的界面风格！");
     }
 }

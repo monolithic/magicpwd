@@ -82,6 +82,4 @@ public interface MPwdEvt extends MenuEvt
     void userUpdateActionPerformed(java.awt.event.ActionEvent evt);
 
     void userSecretActionPerformed(java.awt.event.ActionEvent evt);
-
-    void skinChangeActionPerformed(java.awt.event.ActionEvent evt);
 }

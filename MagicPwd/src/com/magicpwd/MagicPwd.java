@@ -126,8 +126,12 @@ public class MagicPwd
 
     private static boolean loadExt()
     {
-        String skin = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN_LOOK, "");
-        if (!Char.isValidate(skin))
+        String type = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN_TYPE, "java");
+        if ("java".equals(type))
+        {
+            return true;
+        }
+        if (!"user".equals(type))
         {
             return false;
         }
@@ -136,14 +140,19 @@ public class MagicPwd
         {
             return false;
         }
+        String name = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN_NAME, "");
+        if (!Char.isValidate(name))
+        {
+            return false;
+        }
 
-        java.io.File file = new java.io.File("skin/look", look);
+        java.io.File file = new java.io.File("skin/look", name);
         if (!file.exists() || !file.canRead() || !file.isDirectory())
         {
             return false;
         }
 
-        java.io.File jars[] = file.listFiles(new AmonFF("*.jar", true));
+        java.io.File jars[] = file.listFiles(new AmonFF(".+\\.jar$", true));
         if (jars == null && jars.length < 1)
         {
             return false;
