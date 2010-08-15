@@ -178,7 +178,7 @@ public class IcoDialog extends javax.swing.JDialog
     {
         javax.swing.JFileChooser jfc = new javax.swing.JFileChooser();
         AmonFF ff = new AmonFF("[^\\.]+\\." + ConsEnv.IMAGE_FORMAT + "$", false);
-        ff.setHasFolder(true);
+        ff.setIncludeDir(true);
         ff.setDescription('.' + ConsEnv.IMAGE_FORMAT);
         jfc.setFileFilter(ff);
         jfc.setMultiSelectionEnabled(false);
