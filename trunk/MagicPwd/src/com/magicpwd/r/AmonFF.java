@@ -63,9 +63,6 @@ public class AmonFF extends javax.swing.filechooser.FileFilter implements java.i
     public boolean accept(File file)
     {
         String fileName = file.getName();
-        System.out.println(exceptFile);
-        System.out.println(fileName);
-        System.out.println(exceptFiles);
         if (exceptFile && exceptFiles.get(igoreCase ? fileName.toLowerCase() : fileName))
         {
             return false;

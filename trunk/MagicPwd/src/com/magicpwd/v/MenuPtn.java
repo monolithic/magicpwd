@@ -160,7 +160,7 @@ public class MenuPtn
         return item;
     }
 
-    private static void loadSkin(javax.swing.JMenu skinMenu)
+    public static void loadSkin(javax.swing.JMenu skinMenu)
     {
         java.io.File skinFile = new java.io.File(ConsEnv.DIR_SKIN);
         if (!skinFile.exists() || !skinFile.isDirectory() || !skinFile.canRead())
