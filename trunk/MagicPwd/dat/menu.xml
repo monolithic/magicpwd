@@ -8,15 +8,15 @@
         《魔方密码》系统菜单配置文档。
 -->
 <magicpwd>
-    <menubar id="">
-        <menu id="file" text="文件(&F)" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
-            <item type="normal" text="退出(&X)" tips="" icon="" action="" strokes="">
+    <menubar id="magicpwd">
+        <menu id="file" text="文件(@F)" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
+            <item type="normal" text="退出(@X)" tips="" icon="" action="" strokes="">
 
             </item>
-            <item type="checkbox" text="退出(&X)" tips="" icon="" action="" strokes="" group="">
+            <item type="checkbox" text="退出(@X)" tips="" icon="" action="" strokes="" group="" checked="true">
 
             </item>
-            <item type="radiobox" text="退出(&X)" tips="" icon="" action="" strokes="" group="">
+            <item type="radiobox" text="退出(@X)" tips="" icon="" action="" strokes="" group="" checked="true">
 
             </item>
             <item type="seperator">

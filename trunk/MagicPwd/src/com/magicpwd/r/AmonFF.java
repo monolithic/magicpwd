@@ -4,6 +4,7 @@
 package com.magicpwd.r;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.regex.Pattern;
 
 /**
@@ -14,22 +15,72 @@ public class AmonFF extends javax.swing.filechooser.FileFilter implements java.i
 {
 
     private Pattern pattern;
-    private boolean hasFolder;
+    private boolean dirOnly;
+    private boolean includeDir;
+    private boolean igoreCase;
+    private boolean exceptFile;
     private String description;
+    private HashMap<String, Boolean> exceptFiles;
 
-    public AmonFF(String regex, boolean igoreCase)
+    public AmonFF(boolean dirOnly, String... excepts)
     {
-        this.pattern = igoreCase ? Pattern.compile(regex, Pattern.UNICODE_CASE) : Pattern.compile(regex);
+        this.dirOnly = dirOnly;
+        if (excepts != null && excepts.length > 0)
+        {
+            exceptFile = true;
+            exceptFiles = new HashMap<String, Boolean>(excepts.length + 2);
+            for (String file : excepts)
+            {
+                exceptFiles.put(igoreCase ? file.toLowerCase() : file, true);
+            }
+        }
+        else
+        {
+            exceptFiles = new HashMap<String, Boolean>(1);
+        }
+    }
+
+    public AmonFF(String regex, boolean igoreCase, String... excepts)
+    {
+        this.igoreCase = igoreCase;
+        pattern = igoreCase ? Pattern.compile(regex, Pattern.UNICODE_CASE) : Pattern.compile(regex);
+        if (excepts != null && excepts.length > 0)
+        {
+            exceptFile = true;
+            exceptFiles = new HashMap<String, Boolean>(excepts.length + 2);
+            for (String file : excepts)
+            {
+                exceptFiles.put(igoreCase ? file.toLowerCase() : file, true);
+            }
+        }
+        else
+        {
+            exceptFiles = new HashMap<String, Boolean>(1);
+        }
     }
 
     @Override
-    public boolean accept(File pathName)
+    public boolean accept(File file)
     {
-        if (pathName.isDirectory())
+        String fileName = file.getName();
+        System.out.println(exceptFile);
+        System.out.println(fileName);
+        System.out.println(exceptFiles);
+        if (exceptFile && exceptFiles.get(igoreCase ? fileName.toLowerCase() : fileName))
         {
-            return hasFolder;
+            return false;
         }
-        String fileName = pathName.getName();
+
+        if (dirOnly)
+        {
+            return file.isDirectory();
+        }
+
+        if (file.isDirectory())
+        {
+            return includeDir;
+        }
+
         return fileName != null ? pattern.matcher(fileName).matches() : false;
     }
 
@@ -48,18 +99,18 @@ public class AmonFF extends javax.swing.filechooser.FileFilter implements java.i
     }
 
     /**
-     * @return the hasFolder
+     * @return the includeDir
      */
-    public boolean isHasFolder()
+    public boolean isIncludeDir()
     {
-        return hasFolder;
+        return includeDir;
     }
 
     /**
-     * @param hasFolder the hasFolder to set
+     * @param includeDir the includeDir to set
      */
-    public void setHasFolder(boolean hasFolder)
+    public void setIncludeDir(boolean includeDir)
     {
-        this.hasFolder = hasFolder;
+        this.includeDir = includeDir;
     }
 }

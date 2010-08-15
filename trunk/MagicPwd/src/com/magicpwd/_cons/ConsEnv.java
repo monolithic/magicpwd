@@ -62,6 +62,9 @@ public interface ConsEnv
     String DIR_AMA = "ama";
     String DIR_ICO = "ico";
     String DIR_EXT = "ext";
+    String DIR_SKIN = "skin";
+    String DIR_LOOK = "look";
+    String DIR_FEEL = "feel";
     ///////////////////////////////////////////////////////
     // 类别数据显示排序
     ///////////////////////////////////////////////////////
@@ -269,6 +272,10 @@ public interface ConsEnv
     int VIEW_MAIN = 0;
     int VIEW_NORM = 1;
     int VIEW_MINI = 2;
+    String SKIN_DEFAULT = "default";
+    String SKIN_SYSTEM = "system";
+    String SKIN_LOOK_FILE = "look.aml";
+    String SKIN_FEEL_FILE = "feel.amf";
     String[] USER_SALT =
     {
         "Winshine.biz", "Amonsoft.com", "Magicpwd.com", "MyIM.im"
