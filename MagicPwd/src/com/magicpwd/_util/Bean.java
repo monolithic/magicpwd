@@ -37,7 +37,10 @@ public class Bean
         if (!(i == 0 && t.length() == 1))
         {
             c.setText(t);
-            c.setDisplayedMnemonicIndex(i);
+            if (i >= 0)
+            {
+                c.setDisplayedMnemonicIndex(i);
+            }
         }
     }
 

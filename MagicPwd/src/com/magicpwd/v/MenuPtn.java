@@ -5,11 +5,13 @@
 package com.magicpwd.v;
 
 import com.magicpwd._cons.ConsCfg;
+import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.File;
 import com.magicpwd._util.Logs;
 import com.magicpwd.e.skin.LookAction;
+import com.magicpwd.r.AmonFF;
 import java.util.List;
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -64,19 +66,39 @@ public class MenuPtn
         List elementList = element.elements("menu");
         if (elementList != null)
         {
+            java.util.HashMap<String, javax.swing.JMenu> menus = new java.util.HashMap<String, javax.swing.JMenu>();
             java.util.HashMap<String, javax.swing.Action> actions = new java.util.HashMap<String, javax.swing.Action>();
             java.util.HashMap<String, javax.swing.ButtonGroup> groups = new java.util.HashMap<String, javax.swing.ButtonGroup>();
+            Element tmp;
             for (Object obj : elementList)
             {
                 if (!(obj instanceof Element))
                 {
                     continue;
                 }
-                javax.swing.JMenu menu = createMenu((Element) obj, actions, groups);
-                if (menu != null)
+                tmp = (Element) obj;
+                javax.swing.JMenu menu = createMenu(tmp, actions, groups);
+                if (menu == null)
                 {
-                    menuBar.add(menu);
+                    continue;
                 }
+                menuBar.add(menu);
+                if (Char.isValidate(tmp.attributeValue("id")))
+                {
+                    menus.put(tmp.attributeValue("id"), menu);
+                }
+            }
+
+            final String KEY_SKIN = "skin";
+            if (menus.containsKey(KEY_SKIN))
+            {
+                javax.swing.JMenu skin = menus.get(KEY_SKIN);
+                if (skin == null)
+                {
+                    skin = new javax.swing.JMenu();
+                    menuBar.add(skin);
+                }
+                loadSkin(skin);
             }
         }
         return menuBar;
@@ -138,39 +160,35 @@ public class MenuPtn
         return item;
     }
 
-    private static void loadSkin()
+    private static void loadSkin(javax.swing.JMenu skinMenu)
     {
-    }
-
-    private static void loadLook()
-    {
-        java.io.File look = new java.io.File("skin", "look");
-        if (!look.exists() || !look.canRead() || !look.isDirectory())
-        {
-            return;
-        }
-        java.io.File dirs[] = look.listFiles();
-        if (dirs == null || dirs.length < 1)
+        java.io.File skinFile = new java.io.File(ConsEnv.DIR_SKIN);
+        if (!skinFile.exists() || !skinFile.isDirectory() || !skinFile.canRead())
         {
             return;
         }
 
-        LookAction action = new LookAction();
-        for (java.io.File dir : dirs)
+        loadLook(skinMenu);
+        loadFeel(skinMenu);
+
+        java.io.File[] files = skinFile.listFiles(new AmonFF("[^\\s]+[.ams]$", true));
+        if (files == null || files.length < 1)
         {
-            java.io.File aml = new java.io.File(dir, "look.aml");
-            if (!aml.exists() || !aml.canRead() || !aml.isFile())
-            {
-                continue;
-            }
+            return;
+        }
+
+        // 动态扩展风格
+        java.util.Properties prop = new java.util.Properties();
+        for (java.io.File ams : files)
+        {
             try
             {
-                java.util.Properties prop = new java.util.Properties();
-                prop.load(new java.io.FileInputStream(aml));
-                javax.swing.JCheckBoxMenuItem item = new javax.swing.JCheckBoxMenuItem();
+                prop.load(new java.io.FileInputStream(ams));
+                javax.swing.JMenuItem item = new javax.swing.JMenuItem();
                 Bean.setText(item, prop.getProperty("text"));
                 Bean.setTips(item, prop.getProperty("tips"));
-                item.setAction(action);
+                skinMenu.add(item);
+                prop.clear();
             }
             catch (Exception exp)
             {
@@ -179,8 +197,85 @@ public class MenuPtn
         }
     }
 
-    private static void loadFeel()
+    private static void loadLook(javax.swing.JMenu skinMenu)
     {
+        javax.swing.JMenu lookMenu = new javax.swing.JMenu();
+        lookMenu.setText("Look");
+        skinMenu.add(lookMenu);
+
+        java.io.File lookFile = new java.io.File(ConsEnv.DIR_SKIN, ConsEnv.DIR_LOOK);
+        if (!lookFile.exists() || !lookFile.isDirectory() || !lookFile.canRead())
+        {
+            return;
+        }
+
+        javax.swing.JCheckBoxMenuItem item;
+        LookAction action = new LookAction();
+        javax.swing.ButtonGroup group = new javax.swing.ButtonGroup();
+
+        // Java默认风格
+        java.io.File defaultSkin = new java.io.File(lookFile, ConsEnv.SKIN_DEFAULT + '/' + ConsEnv.SKIN_LOOK_FILE);
+        if (defaultSkin.exists() && defaultSkin.isFile() && defaultSkin.canRead())
+        {
+            item = new javax.swing.JCheckBoxMenuItem(action);
+            Bean.setText(item, "default");
+            Bean.setTips(item, "default");
+            item.setActionCommand(ConsEnv.SKIN_DEFAULT);
+            lookMenu.add(item);
+            group.add(item);
+        }
+
+        // 系统默认风格
+        java.io.File sytemSkin = new java.io.File(lookFile, ConsEnv.SKIN_SYSTEM + '/' + ConsEnv.SKIN_LOOK_FILE);
+        if (sytemSkin.exists() && sytemSkin.isFile() && sytemSkin.canRead())
+        {
+            item = new javax.swing.JCheckBoxMenuItem(action);
+            Bean.setText(item, "system");
+            Bean.setTips(item, "system");
+            item.setActionCommand(ConsEnv.SKIN_SYSTEM);
+            lookMenu.add(item);
+            group.add(item);
+        }
+
+        java.io.File dirs[] = lookFile.listFiles(new AmonFF(true, ConsEnv.SKIN_DEFAULT, ConsEnv.SKIN_SYSTEM));
+        if (dirs == null || dirs.length < 1)
+        {
+            return;
+        }
+
+        lookMenu.addSeparator();
+
+        java.util.Properties prop = new java.util.Properties();
+        for (java.io.File dir : dirs)
+        {
+            java.io.File aml = new java.io.File(dir, ConsEnv.SKIN_LOOK_FILE);
+            if (!aml.exists() || !aml.isFile() || !aml.canRead())
+            {
+                continue;
+            }
+            try
+            {
+                prop.load(new java.io.FileInputStream(aml));
+                item = new javax.swing.JCheckBoxMenuItem(action);
+                Bean.setText(item, prop.getProperty("text"));
+                Bean.setTips(item, prop.getProperty("tips"));
+                item.setActionCommand(dir.getName() + ',' + prop.getProperty("class"));
+                lookMenu.add(item);
+                group.add(item);
+                prop.clear();
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+        }
+    }
+
+    private static void loadFeel(javax.swing.JMenu skinMenu)
+    {
+        javax.swing.JMenu feelMenu = new javax.swing.JMenu();
+        feelMenu.setText("Feel");
+        skinMenu.add(feelMenu);
     }
 
     private static javax.swing.JMenuItem processText(Element element, javax.swing.JMenuItem item)
