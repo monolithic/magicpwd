@@ -1,0 +1,6 @@
+text=Metal
+tips=Metal
+type=java
+class=javax.swing.plaf.metal.MetalLookAndFeel
+decorated=false
+group=

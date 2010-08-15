@@ -1,0 +1,6 @@
+text=Windows
+tips=Windows
+type=java
+class=com.sun.java.swing.plaf.windows.WindowsLookAndFeel
+decorated=false
+group=
