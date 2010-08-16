@@ -20,42 +20,35 @@ public class AmonFF extends javax.swing.filechooser.FileFilter implements java.i
     private boolean igoreCase;
     private boolean exceptFile;
     private String description;
-    private HashMap<String, Boolean> exceptFiles;
+    private HashMap<String, String> exceptFiles;
 
     public AmonFF(boolean dirOnly, String... excepts)
     {
         this.dirOnly = dirOnly;
-        if (excepts != null && excepts.length > 0)
-        {
-            exceptFile = true;
-            exceptFiles = new HashMap<String, Boolean>(excepts.length + 2);
-            for (String file : excepts)
-            {
-                exceptFiles.put(igoreCase ? file.toLowerCase() : file, true);
-            }
-        }
-        else
-        {
-            exceptFiles = new HashMap<String, Boolean>(1);
-        }
+        processExcepts(excepts);
     }
 
     public AmonFF(String regex, boolean igoreCase, String... excepts)
     {
         this.igoreCase = igoreCase;
         pattern = igoreCase ? Pattern.compile(regex, Pattern.UNICODE_CASE) : Pattern.compile(regex);
-        if (excepts != null && excepts.length > 0)
+        processExcepts(excepts);
+    }
+
+    private void processExcepts(String... excepts)
+    {
+        if (excepts == null || excepts.length < 1)
         {
-            exceptFile = true;
-            exceptFiles = new HashMap<String, Boolean>(excepts.length + 2);
-            for (String file : excepts)
-            {
-                exceptFiles.put(igoreCase ? file.toLowerCase() : file, true);
-            }
+            exceptFile = false;
+            exceptFiles = new HashMap<String, String>(1);
+            return;
         }
-        else
+
+        exceptFile = true;
+        exceptFiles = new HashMap<String, String>(excepts.length + 2);
+        for (String file : excepts)
         {
-            exceptFiles = new HashMap<String, Boolean>(1);
+            exceptFiles.put(igoreCase ? file.toLowerCase() : file, "");
         }
     }
 
@@ -63,7 +56,7 @@ public class AmonFF extends javax.swing.filechooser.FileFilter implements java.i
     public boolean accept(File file)
     {
         String fileName = file.getName();
-        if (exceptFile && exceptFiles.get(igoreCase ? fileName.toLowerCase() : fileName))
+        if (exceptFile && exceptFiles.containsKey(igoreCase ? fileName.toLowerCase() : fileName))
         {
             return false;
         }
