@@ -65,7 +65,7 @@ public class MagicPwd
                     // 用户偏好风格设置
                     try
                     {
-                        String lafClass = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN, ConsCfg.DEF_SKIN).trim();
+                        String lafClass = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN_LOOK, ConsCfg.DEF_SKIN).trim();
                         if (lafClass.length() < 1 || ConsCfg.DEF_SKIN.equalsIgnoreCase(lafClass))
                         {
                             lafClass = javax.swing.UIManager.getSystemLookAndFeelClassName();

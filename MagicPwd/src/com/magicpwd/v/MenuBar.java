@@ -904,7 +904,7 @@ public class MenuBar extends JMenuBar
     {
         Lang.setWText(mu_SkinMenu, LangRes.P30F7631, "风格(&L)");
 
-        Lang.setWText(mi_SkinSystem, LangRes.P30F7632, "系统风格(&S)");
+//        Lang.setWText(mi_SkinSystem, LangRes.P30F7632, "系统风格(&S)");
     }
 
     private void initHelpLang()
