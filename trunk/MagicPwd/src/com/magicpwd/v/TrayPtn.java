@@ -898,7 +898,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
 
                 TrayPtn.getCurrForm().setVisible(wasVisible);
             }
-            UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN, isSystem ? ConsCfg.DEF_SKIN : lafClass);
+            UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN_LOOK, isSystem ? ConsCfg.DEF_SKIN : lafClass);
         }
         catch (Exception exc)
         {
