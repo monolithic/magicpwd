@@ -15,11 +15,11 @@ import javax.swing.table.AbstractTableModel;
 public class MailMdl extends AbstractTableModel
 {
 
-    private List<MailInf> messages;
+    private List<Mailer> messages;
 
     public MailMdl()
     {
-        messages = new ArrayList<MailInf>();
+        messages = new ArrayList<Mailer>();
     }
 
     @Override
@@ -79,7 +79,7 @@ public class MailMdl extends AbstractTableModel
         }
         try
         {
-            MailInf message = messages.get(rowIndex);
+            Mailer message = messages.get(rowIndex);
             switch (columnIndex)
             {
                 case 0:
@@ -107,7 +107,7 @@ public class MailMdl extends AbstractTableModel
         return false;
     }
 
-    public MailInf getMailInf(int rowIndex)
+    public Mailer getMailInf(int rowIndex)
     {
         if (rowIndex < 0 || rowIndex >= messages.size())
         {
@@ -121,7 +121,7 @@ public class MailMdl extends AbstractTableModel
         messages.clear();
     }
 
-    public void append(MailInf mailInf)
+    public void append(Mailer mailInf)
     {
         messages.add(mailInf);
         fireTableDataChanged();
