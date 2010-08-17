@@ -455,35 +455,6 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
         lb_MailInfo.setText(notice);
     }
 
-    public static void main(String[] args)
-    {
-        try
-        {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        }
-        catch (Exception exp)
-        {
-            exp.printStackTrace();
-        }
-        MailDlg md = new MailDlg();
-        md.initView();
-        md.initLang();
-        md.initData();
-        md.setVisible(true);
-        Connect connect = new Connect("pop3", "Amon.WK@163.com", "iv7I7UuG");
-        connect.setUsername("Amon.WK");
-        connect.setHost("pop.163.com");
-        connect.setPort(-1);
-        connect.setAuth(true);
-        try
-        {
-            md.append(connect, "");
-        }
-        catch (Exception ex)
-        {
-            Logs.exception(ex);
-        }
-    }
     private javax.swing.JEditorPane ta_MailBody;
     private javax.swing.JTable tb_MailMsgs;
     private javax.swing.JTree tr_MailBoxs;
