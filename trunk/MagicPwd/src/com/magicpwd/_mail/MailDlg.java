@@ -11,8 +11,8 @@ import java.awt.Point;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.Store;
+import javax.mail.internet.MimeMessage;
 import javax.swing.BorderFactory;
-import javax.swing.UIManager;
 import javax.swing.table.TableRowSorter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
@@ -324,8 +324,8 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
                 for (int i = 1, j = msgs.length; i <= j; i += 1)
                 {
                     showNotice("正处理第" + i + "封邮件……");
-                    mail = new Mailer();
-                    mail.loadMsg(msgs[i - 1]);
+                    mail = new Mailer((MimeMessage)msgs[i - 1]);
+                    mail.initData();
                     tableMode.append(mail);
                 }
 
@@ -424,7 +424,7 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
             ta_MailBody.setContentType(mail.getContentType());
             tf_MailHead.setText(mail.getSubject());
             tf_MailUser.setText(mail.getTo());
-            ta_MailBody.setText(mail.getBodyText());
+            //ta_MailBody.setText(mail.getBodyText());
             showNotice("邮件内容加载完毕！");
         }
         catch (Exception ex)

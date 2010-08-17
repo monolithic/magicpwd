@@ -4,7 +4,6 @@
 package com.magicpwd.r;
 
 import com.magicpwd._comn.S1S2;
-import com.magicpwd._util.Util;
 
 /**
  * @author Amon
