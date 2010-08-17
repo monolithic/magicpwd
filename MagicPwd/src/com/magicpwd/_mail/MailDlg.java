@@ -320,11 +320,11 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
 //                profile.add(FetchProfile.Item.ENVELOPE);
 //                folder.fetch(msgs, profile);
 
-                MailInf mail;
+                Mailer mail;
                 for (int i = 1, j = msgs.length; i <= j; i += 1)
                 {
                     showNotice("正处理第" + i + "封邮件……");
-                    mail = new MailInf();
+                    mail = new Mailer();
                     mail.loadMsg(msgs[i - 1]);
                     tableMode.append(mail);
                 }
@@ -420,7 +420,7 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
         try
         {
             showNotice("正在加载邮件内容……");
-            MailInf mail = tableMode.getMailInf(tb_MailMsgs.getSelectedRow());
+            Mailer mail = tableMode.getMailInf(tb_MailMsgs.getSelectedRow());
             ta_MailBody.setContentType(mail.getContentType());
             tf_MailHead.setText(mail.getSubject());
             tf_MailUser.setText(mail.getTo());
