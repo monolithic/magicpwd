@@ -4,7 +4,6 @@
 package com.magicpwd._mail;
 
 import com.magicpwd._util.Logs;
-import com.magicpwd._util.Util;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -59,11 +58,16 @@ public class MailInf
     {
         try
         {
+            System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+            InternetAddress ia = (InternetAddress)message.getFrom()[0];
+            System.out.println(ia.getPersonal());
+            System.out.println(ia.getType());
+            System.out.println(ia.toString());
             from = getAddress(message.getFrom());
             to = getAddress(message.getRecipients(Message.RecipientType.TO));
             cc = getAddress(message.getRecipients(Message.RecipientType.CC));
             bcc = getAddress(message.getRecipients(Message.RecipientType.BCC));
-            subject = MimeUtility.decodeText(message.getSubject());
+            subject = decodeText(message.getSubject());
             sentDate = message.getSentDate();
             needReply = message.getHeader("Disposition-Notification-To") != null;
             getMailContent(message);
@@ -131,7 +135,7 @@ public class MailInf
         {
             return "";
         }
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         for (Address addr : addresses)
         {
             if (addr instanceof InternetAddress)
@@ -415,7 +419,7 @@ public class MailInf
         }
         catch (Exception exception)
         {
-            exception.printStackTrace();
+            Logs.exception(exception);
             throw new Exception("文件保存失败!");
         }
         finally
@@ -423,5 +427,19 @@ public class MailInf
             bos.close();
             bis.close();
         }
+    }
+
+    private static String decodeText(String text) throws UnsupportedEncodingException
+    {
+        System.out.println(text);
+        if (text == null)
+        {
+            return null;
+        }
+        if (text.toLowerCase().startsWith("=?gb"))
+        {
+            return MimeUtility.decodeText(text);
+        }
+        return text;//new String(text.getBytes("ISO8859_1"));
     }
 }
