@@ -8,6 +8,7 @@ import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.BodyPart;
 import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 
 /**
@@ -16,6 +17,17 @@ import javax.mail.internet.MimeUtility;
  */
 public class Sender extends Mailer
 {
+
+    public Sender(MimeMessage message)
+    {
+        super(message);
+    }
+
+    @Override
+    public boolean initData() throws Exception
+    {
+        return true;
+    }
 
     private boolean appendAttachment(String filePath) throws Exception
     {
