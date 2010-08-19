@@ -11,10 +11,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.mail.BodyPart;
+import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.Part;
@@ -31,6 +33,13 @@ import javax.mail.internet.MimeUtility;
 public class Reader extends Mailer
 {
 
+    protected MimeMessage message;
+    private String from;
+    private String to;
+    private String cc;
+    private String bcc;
+    private String subject;
+    private Date sentDate;
     private boolean needReply;
     /**
      * 附件下载后的存放目录
@@ -43,14 +52,18 @@ public class Reader extends Mailer
     private StringBuffer content = new StringBuffer();
     private List<S1S1> attachmentList = new ArrayList<S1S1>();
 
-    public Reader(MimeMessage message)
+    public Reader()
     {
-        super(message);
     }
 
-    @Override
     public boolean initData() throws Exception
     {
+        setFrom(decodeAddress(message.getFrom()));
+        setTo(decodeAddress(message.getRecipients(Message.RecipientType.TO)));
+        setCc(decodeAddress(message.getRecipients(Message.RecipientType.CC)));
+        setBcc(decodeAddress(message.getRecipients(Message.RecipientType.BCC)));
+        setSubject(decodeMessage(message.getSubject()));
+        sentDate = message.getSentDate();
         needReply = message.getHeader("Disposition-Notification-To") != null;
         Object obj = message.getContent();
         if (obj instanceof Multipart)
@@ -316,5 +329,117 @@ public class Reader extends Mailer
     public String getAttachPath()
     {
         return saveAttachPath;
+    }
+
+    /**
+     * @return the from
+     */
+    @Override
+    public String getFrom()
+    {
+        return from;
+    }
+
+    /**
+     * @param from the from to set
+     */
+    @Override
+    public boolean setFrom(String from)
+    {
+        return true;
+    }
+
+    /**
+     * @return the to
+     */
+    @Override
+    public String getTo()
+    {
+        return to;
+    }
+
+    /**
+     * @param to the to to set
+     */
+    @Override
+    public boolean setTo(String to)
+    {
+        return true;
+    }
+
+    /**
+     * @return the cc
+     */
+    @Override
+    public String getCc()
+    {
+        return cc;
+    }
+
+    /**
+     * @param cc the cc to set
+     */
+    public boolean setCc(String cc)
+    {
+        return true;
+    }
+
+    /**
+     * @return the bcc
+     */
+    @Override
+    public String getBcc()
+    {
+        return bcc;
+    }
+
+    /**
+     * @param bcc the bcc to set
+     */
+    public boolean setBcc(String bcc)
+    {
+        return true;
+    }
+
+    /**
+     * @return the subject
+     */
+    @Override
+    public String getSubject()
+    {
+        return subject;
+    }
+
+    /**
+     * @param subject the subject to set
+     */
+    @Override
+    public void setSubject(String subject)
+    {
+        this.subject = subject;
+    }
+
+    @Override
+    public boolean addCc(String cc)
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean addBcc(String bcc)
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Date getSentDate()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String getMessageId()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
