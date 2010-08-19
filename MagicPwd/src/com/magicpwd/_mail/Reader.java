@@ -18,12 +18,9 @@ import javax.mail.internet.MimeMultipart;
 public class Reader extends Mailer
 {
 
-    private String messageId;
-    private boolean needReply;
-    /**
-     * 附件下载后的存放目录
-     */
-    private String attachmentPath = "";
+    private String messageId;// 消息索引
+    private boolean needReply;//是否需要回复
+    private String attachmentPath;//附件下载目录
 
     public Reader()
     {
@@ -39,6 +36,7 @@ public class Reader extends Mailer
         if (message instanceof MimeMessage)
         {
             messageId = ((MimeMessage) message).getMessageID();
+            getConnect().appendMailInfo(messageId);
         }
 
         setFrom(decodeAddress(message.getFrom()));
@@ -202,6 +200,6 @@ public class Reader extends Mailer
 
     public boolean isNew()
     {
-        return false;
+        return getConnect().isMailExists(messageId);
     }
 }
