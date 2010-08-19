@@ -5,13 +5,10 @@
 package com.magicpwd.r;
 
 import com.magicpwd._mail.Reader;
-import java.awt.Component;
-import java.awt.Font;
-import javax.swing.JList;
 
 /**
  *
- * @author Administrator
+ * @author Amon
  */
 public class MailCR extends javax.swing.JLabel implements javax.swing.ListCellRenderer
 {
@@ -22,7 +19,7 @@ public class MailCR extends javax.swing.JLabel implements javax.swing.ListCellRe
     }
 
     @Override
-    public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus)
+    public java.awt.Component getListCellRendererComponent(javax.swing.JList list, Object value, int index, boolean isSelected, boolean cellHasFocus)
     {
         // 前景及背景颜色设置
         if (isSelected)
@@ -43,13 +40,13 @@ public class MailCR extends javax.swing.JLabel implements javax.swing.ListCellRe
         if (value instanceof Reader)
         {
             Reader item = (Reader) value;
-            setText(item.getSubject().toString());
+            setText(item.getSubject());
 
             // 文字属性设置
-            Font font = list.getFont();
+            java.awt.Font font = list.getFont();
             if (item.isNew())
             {
-                font = font.deriveFont(Font.BOLD);
+                font = font.deriveFont(java.awt.Font.BOLD);
             }
             setFont(font);
         }

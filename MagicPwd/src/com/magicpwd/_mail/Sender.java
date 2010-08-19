@@ -4,8 +4,7 @@
  */
 package com.magicpwd._mail;
 
-import com.magicpwd._cons.ConsEnv;
-import java.util.Date;
+import com.magicpwd._comn.S1S1;
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.BodyPart;
@@ -15,6 +14,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 import javax.mail.internet.MimeUtility;
 
 /**
@@ -24,8 +24,7 @@ import javax.mail.internet.MimeUtility;
 public class Sender extends Mailer
 {
 
-    private MimeMessage message; // MIME邮件对象
-    private Multipart multipart;
+    private Multipart multipart = new MimeMultipart();
 
     public Sender()
     {
@@ -37,6 +36,8 @@ public class Sender extends Mailer
         {
             return false;
         }
+
+        Message message = new MimeMessage(getConnect().getSession());
 
         message.setFrom(new InternetAddress(getFrom()));
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(getTo()));
@@ -52,55 +53,56 @@ public class Sender extends Mailer
         {
             message.setSentDate(getSentDate());
         }
+
+
+        appendBodypart(getContent());
+        for (S1S1 item : getAttachmentList())
+        {
+            appendAttachment(item.getV(), item.getK());
+        }
         message.setContent(multipart);
         message.saveChanges();
 
-        Transport transport = getConnect().getSession().getTransport();
+        //Transport transport = getConnect().getSession().getTransport();
         //transport.connect("", "", "");
 
         //transport.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
         Transport.send(message);
-        //System.out.println("发送邮件成功！");
-        transport.close();
+        //transport.close();
         return true;
     }
 
     public boolean appendBodypart(String content) throws Exception
     {
         BodyPart bp = new MimeBodyPart();
-        bp.setContent(content, "text/plain;charset=" + ConsEnv.FILE_ENCODING);
+        bp.setContent(content, getContentType());
         multipart.addBodyPart(bp);
         return true;
     }
 
-    public boolean appendAttachment(String filePath) throws Exception
+    private boolean appendAttachment(String path, String name) throws Exception
     {
-        return appendAttachment(new java.io.File(filePath));
-    }
+        if (!com.magicpwd._util.Char.isValidate(path))
+        {
+            return false;
+        }
 
-    private boolean appendAttachment(java.io.File file) throws Exception
-    {
+        java.io.File file = new java.io.File(path);
         if (file == null || !file.isFile() || !file.canRead())
         {
             return false;
         }
+
+        if (!com.magicpwd._util.Char.isValidate(name))
+        {
+            name = file.getName();
+        }
+
         BodyPart bp = new MimeBodyPart();
         FileDataSource fileds = new FileDataSource(file);
         bp.setDataHandler(new DataHandler(fileds));
-        bp.setFileName(MimeUtility.encodeText(fileds.getName()));
+        bp.setFileName(MimeUtility.encodeText(name));
         multipart.addBodyPart(bp);
         return true;
-    }
-
-    @Override
-    public Date getSentDate()
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public String getMessageId()
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

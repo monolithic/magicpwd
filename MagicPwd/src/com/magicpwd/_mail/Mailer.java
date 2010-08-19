@@ -3,8 +3,8 @@
  */
 package com.magicpwd._mail;
 
+import com.magicpwd._comn.S1S1;
 import java.io.UnsupportedEncodingException;
-import java.util.Date;
 
 import javax.mail.Address;
 import javax.mail.internet.InternetAddress;
@@ -18,20 +18,72 @@ public abstract class Mailer
 {
 
     private Connect connect;
-    private String from;
-    private String to;
-    private String cc;
-    private String bcc;
-    private Date sentDate;
-    /**
-     * 存放邮件内容
-     */
-    private StringBuffer subject;
+    private String from;//发送者
+    private String to;//接收者
+    private String cc;//明抄
+    private String bcc;//暗抄
+    private String subject;//标题
+    private java.util.Date sentDate;//日期
+    private StringBuffer content = new StringBuffer();//内容
     private String contentType = MailEnv.TEXT_HTML + ';' + MailEnv.CHARSET + "=UTF-8";
+    private java.util.ArrayList<S1S1> attachmentList = new java.util.ArrayList<S1S1>();//附件
 
     public Mailer()
     {
-        subject = new StringBuffer();
+    }
+
+    protected String decodeAddress(Address[] addresses) throws UnsupportedEncodingException
+    {
+        if (addresses == null || addresses.length < 1)
+        {
+            return "";
+        }
+        StringBuilder buffer = new StringBuilder();
+        for (Address addr : addresses)
+        {
+            if (addr instanceof InternetAddress)
+            {
+                InternetAddress temp = (InternetAddress) addr;
+                String personal = temp.getPersonal();
+                String address = temp.getAddress();
+                buffer.append(personal != null ? MimeUtility.decodeText(personal) : "");
+                buffer.append('<').append(address != null ? MimeUtility.decodeText(address) : "").append(">,");
+                continue;
+            }
+            buffer.append(addr.toString()).append(',');
+        }
+        return buffer.toString();
+    }
+
+    protected static String decodeMessage(String text) throws Exception
+    {
+        if (text == null)
+        {
+            return null;
+        }
+        if (text.startsWith("=?") && text.endsWith("?="))
+        {
+            //return MimeUtility.decodeWord(text);
+            return MimeUtility.decodeText(text);
+        }
+
+        return text;//new String(text.getBytes("ISO8859_1"));
+    }
+
+    /**
+     * @return the connect
+     */
+    public Connect getConnect()
+    {
+        return connect;
+    }
+
+    /**
+     * @param connect the connect to set
+     */
+    public void setConnect(Connect connect)
+    {
+        this.connect = connect;
     }
 
     /**
@@ -90,40 +142,64 @@ public abstract class Mailer
     }
 
     /**
-     * 获得邮件主题
-     */
-    public StringBuffer getSubject()
-    {
-        return subject;
-    }
-
-    public void setSubject(StringBuffer subject)
-    {
-        this.subject = subject;
-    }
-
-    public void appendSubject(String subject)
-    {
-        this.subject.append(subject);
-    }
-
-    /**
      * 获得邮件发送日期
      */
-    public Date getSentDate()
+    public java.util.Date getSentDate()
     {
         return sentDate;
     }
 
-    public void setSentDate(Date sentDate)
+    public void setSentDate(java.util.Date sentDate)
     {
         this.sentDate = sentDate;
     }
 
     /**
-     * 获得此邮件的Message-ID
+     * 获得邮件主题
      */
-    public abstract String getMessageId();
+    public String getSubject()
+    {
+        return subject;
+    }
+
+    public void setSubject(String subject)
+    {
+        this.subject = subject;
+    }
+
+    /**
+     * @return the content
+     */
+    public String getContent()
+    {
+        return content.toString();
+    }
+
+    /**
+     * @param content the content to set
+     */
+    public void setContent(StringBuffer content)
+    {
+        this.content = content;
+    }
+
+    public void appendContent(String content)
+    {
+        this.content.append(content);
+    }
+
+    /**
+     * @return the attachmentList
+     */
+    public java.util.ArrayList<S1S1> getAttachmentList()
+    {
+        return attachmentList;
+    }
+
+    public void addAttachment(String name, String file)
+    {
+        attachmentList.add(new S1S1(name, file));
+    }
 
     public String getContentType()
     {
@@ -131,63 +207,10 @@ public abstract class Mailer
     }
 
     /**
-     * 【判断此邮件是否已读，如果未读返回返回 false,反之返回true】
+     * @param contentType the contentType to set
      */
-    public boolean isNew()
+    public void setContentType(String contentType)
     {
-        return false;
-    }
-
-    protected String decodeAddress(Address[] addresses) throws UnsupportedEncodingException
-    {
-        if (addresses == null || addresses.length < 1)
-        {
-            return "";
-        }
-        StringBuilder buffer = new StringBuilder();
-        for (Address addr : addresses)
-        {
-            if (addr instanceof InternetAddress)
-            {
-                InternetAddress temp = (InternetAddress) addr;
-                String personal = temp.getPersonal();
-                String address = temp.getAddress();
-                buffer.append(personal != null ? MimeUtility.decodeText(personal) : "");
-                buffer.append('<').append(address != null ? MimeUtility.decodeText(address) : "").append(">,");
-                continue;
-            }
-            buffer.append(addr.toString()).append(',');
-        }
-        return buffer.toString();
-    }
-
-    protected static String decodeMessage(String text) throws UnsupportedEncodingException
-    {
-        System.out.println(text);
-        if (text == null)
-        {
-            return null;
-        }
-        if (text.toLowerCase().startsWith("=?gb"))
-        {
-            return MimeUtility.decodeText(text);
-        }
-        return text;//new String(text.getBytes("ISO8859_1"));
-    }
-
-    /**
-     * @return the connect
-     */
-    public Connect getConnect()
-    {
-        return connect;
-    }
-
-    /**
-     * @param connect the connect to set
-     */
-    public void setConnect(Connect connect)
-    {
-        this.connect = connect;
+        this.contentType = contentType;
     }
 }
