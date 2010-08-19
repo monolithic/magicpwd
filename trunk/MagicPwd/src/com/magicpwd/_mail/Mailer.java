@@ -28,8 +28,9 @@ public abstract class Mailer
     private String contentType = MailEnv.TEXT_HTML + ';' + MailEnv.CHARSET + "=UTF-8";
     private java.util.ArrayList<S1S1> attachmentList = new java.util.ArrayList<S1S1>();//附件
 
-    public Mailer()
+    public Mailer(Connect connect)
     {
+        this.connect = connect;
     }
 
     protected String decodeAddress(Address[] addresses) throws UnsupportedEncodingException

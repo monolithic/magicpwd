@@ -26,8 +26,9 @@ public class Sender extends Mailer
 
     private Multipart multipart = new MimeMultipart();
 
-    public Sender()
+    public Sender(Connect connect)
     {
+        super(connect);
     }
 
     public boolean send() throws Exception

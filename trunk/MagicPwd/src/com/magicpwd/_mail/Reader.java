@@ -22,8 +22,10 @@ public class Reader extends Mailer
     private boolean needReply;//是否需要回复
     private String attachmentPath;//附件下载目录
 
-    public Reader()
+    public Reader(Connect connect)
     {
+        super(connect);
+        attachmentPath = "D:\\Temp";
     }
 
     public boolean read(Message message) throws Exception
