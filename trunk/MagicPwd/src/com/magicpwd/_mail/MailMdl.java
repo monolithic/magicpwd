@@ -4,22 +4,19 @@
 package com.magicpwd._mail;
 
 import com.magicpwd._util.Logs;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.table.AbstractTableModel;
 
 /**
- * @author Administrator
+ * @author Amon
  * 
  */
-public class MailMdl extends AbstractTableModel
+public class MailMdl extends javax.swing.table.AbstractTableModel
 {
 
-    private List<Mailer> messages;
+    private java.util.ArrayList<Mailer> messages;
 
     public MailMdl()
     {
-        messages = new ArrayList<Mailer>();
+        messages = new java.util.ArrayList<Mailer>();
     }
 
     @Override

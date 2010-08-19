@@ -7,7 +7,7 @@ package com.magicpwd._mail;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
-import java.awt.Point;
+
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.Store;
@@ -402,7 +402,7 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
 
     private void tr_MailBoxsMouseReleased(java.awt.event.MouseEvent evt)
     {
-        Point p = evt.getPoint();
+        java.awt.Point p = evt.getPoint();
         TreePath path = tr_MailBoxs.getPathForLocation(p.x, p.y);
 //        tr_MailBoxs.setSelectionPath(path);
         if (path != null)
@@ -421,9 +421,9 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
             showNotice("正在加载邮件内容……");
             Mailer mail = tableMode.getMailInf(tb_MailMsgs.getSelectedRow());
             ta_MailBody.setContentType(mail.getContentType());
-            tf_MailHead.setText(mail.getSubject().toString());
+            tf_MailHead.setText(mail.getSubject());
             tf_MailUser.setText(mail.getTo());
-            //ta_MailBody.setText(mail.getBodyText());
+            ta_MailBody.setText(mail.getContent());
             showNotice("邮件内容加载完毕！");
         }
         catch (Exception ex)
