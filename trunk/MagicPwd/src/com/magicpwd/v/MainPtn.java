@@ -25,7 +25,6 @@ import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd._docs.Google;
 import com.magicpwd._face.IBackCall;
 import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
@@ -36,7 +35,6 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._user.UserSign;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Jcsv;
-import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.c.FindEvt;
@@ -50,7 +48,6 @@ import com.magicpwd.r.KeysCR;
 import com.magicpwd.r.KindTN;
 import com.magicpwd.r.TreeCR;
 import com.magicpwd.x.DatDialog;
-import com.magicpwd.x.LckDialog;
 import com.magicpwd.x.MdiDialog;
 import com.magicpwd.x.MpsDialog;
 
@@ -204,62 +201,6 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         us.initView(ConsEnv.INT_SIGN_RS);
         us.initLang();
         us.initData();
-    }
-
-    @Override
-    public void dataSyncActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(this, LangRes.P30F7A40, "确认要执行备份数据到云端的操作吗，此操作将需要一定的时间？"))
-        {
-            return;
-        }
-
-        TrayPtn.setDbLocked(true);
-        final LckDialog dialog = new LckDialog(TrayPtn.getCurrForm());
-        dialog.initView();
-        dialog.initLang();
-        dialog.initData();
-
-        new Thread()
-        {
-
-            @Override
-            public void run()
-            {
-                backupData(dialog);
-            }
-        }.start();
-
-        Util.centerForm(dialog, TrayPtn.getCurrForm());
-        dialog.setVisible(true);
-    }
-
-    @Override
-    public void dataBackActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(this, LangRes.P30F7A41, "确认要执行从云端数据恢复的操作吗，此操作将需要一定的时间？"))
-        {
-            return;
-        }
-
-        TrayPtn.setDbLocked(true);
-        final LckDialog dialog = new LckDialog(TrayPtn.getCurrForm());
-        dialog.initView();
-        dialog.initLang();
-        dialog.initData();
-
-        new Thread()
-        {
-
-            @Override
-            public void run()
-            {
-                resumeData(dialog);
-            }
-        }.start();
-
-        Util.centerForm(dialog, TrayPtn.getCurrForm());
-        dialog.setVisible(true);
     }
 
     @Override
@@ -2125,118 +2066,6 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         return true;
     }
 
-    private void backupData(LckDialog dialog)
-    {
-        try
-        {
-            String docs = DBA3000.readConfig("google_docs");
-            if (!com.magicpwd._util.Char.isValidate(docs))
-            {
-                dialog.setVisible(false);
-                dialog.dispose();
-                Lang.showMesg(this, LangRes.P30F7A3A, "您还没有配置您的Google Docs账户信息！");
-                return;
-            }
-
-            PwdsItem pwds = new PwdsItem();
-            pwds.getP30F0203().append(docs);
-            docs = UserMdl.getGridMdl().deCrypt(pwds).toString();
-            String[] data = docs.split("\n");
-
-            java.io.File bakFile = MagicPwd.endSave();
-            if (bakFile == null || !bakFile.exists() || !bakFile.canRead())
-            {
-                dialog.setVisible(false);
-                dialog.dispose();
-                Lang.showMesg(this, LangRes.P30F7A3B, "压缩用户数据文件出错，请重启软件后重试！");
-                return;
-            }
-
-            if (!new Google().backup(data[0], data[1], ConsEnv.FILE_SYNC, MagicPwd.endSave()))
-            {
-                dialog.setVisible(false);
-                dialog.dispose();
-                Lang.showMesg(this, LangRes.P30F7A3C, "系统无法备份您的数据到云端！");
-                return;
-            }
-
-            dialog.setVisible(false);
-            dialog.dispose();
-            Lang.showMesg(this, LangRes.P30F7A3D, "数据成功备份到云端！");
-            return;
-        }
-        catch (Exception ex)
-        {
-            Logs.exception(ex);
-            Lang.showMesg(this, null, ex.getLocalizedMessage());
-        }
-        finally
-        {
-            if (dialog.isVisible())
-            {
-                dialog.setVisible(false);
-                dialog.dispose();
-            }
-            TrayPtn.setDbLocked(false);
-        }
-    }
-
-    private void resumeData(LckDialog dialog)
-    {
-        try
-        {
-            String docs = DBA3000.readConfig("google_docs");
-            if (!com.magicpwd._util.Char.isValidate(docs))
-            {
-                dialog.setVisible(false);
-                dialog.dispose();
-                Lang.showMesg(this, LangRes.P30F7A3A, "您还没有配置您的Google Docs账户信息！");
-                return;
-            }
-
-            PwdsItem pwds = new PwdsItem();
-            pwds.getP30F0203().append(docs);
-            docs = UserMdl.getGridMdl().deCrypt(pwds).toString();
-            String[] data = docs.split("\n");
-
-            MagicPwd.endSave();
-
-            java.io.File bakFile = java.io.File.createTempFile("magicpwd", ".amb");
-            bakFile.deleteOnExit();
-            if (!new Google().resume(data[0], data[1], ConsEnv.FILE_SYNC, bakFile))
-            {
-                dialog.setVisible(false);
-                dialog.dispose();
-                Lang.showMesg(this, LangRes.P30F7A3E, "无法从Google Docs读取备份数据！");
-            }
-
-            java.io.File datFile = new java.io.File(ConsEnv.DIR_DAT);
-            java.io.File dirFile = datFile.getAbsoluteFile().getParentFile();
-            datFile.delete();
-            Jzip.unZip(bakFile, dirFile);
-
-            dialog.setVisible(false);
-            dialog.dispose();
-            Lang.showMesg(this, LangRes.P30F7A3F, "数据恢复成功，您需要重新启动本程序！");
-            System.exit(0);
-        }
-        catch (Exception ex)
-        {
-            Logs.exception(ex);
-            dialog.setVisible(false);
-            dialog.dispose();
-            Lang.showMesg(this, null, ex.getLocalizedMessage());
-        }
-        finally
-        {
-            if (dialog.isVisible())
-            {
-                dialog.setVisible(false);
-                dialog.dispose();
-            }
-            TrayPtn.setDbLocked(false);
-        }
-    }
 
     private boolean configDocs(String... params)
     {

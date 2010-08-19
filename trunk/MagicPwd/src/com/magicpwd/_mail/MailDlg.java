@@ -11,7 +11,6 @@ import java.awt.Point;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.Store;
-import javax.mail.internet.MimeMessage;
 import javax.swing.BorderFactory;
 import javax.swing.table.TableRowSorter;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -320,12 +319,12 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
 //                profile.add(FetchProfile.Item.ENVELOPE);
 //                folder.fetch(msgs, profile);
 
-                Mailer mail;
+                Reader mail;
                 for (int i = 1, j = msgs.length; i <= j; i += 1)
                 {
                     showNotice("正处理第" + i + "封邮件……");
-                    mail = new Mailer((MimeMessage)msgs[i - 1]);
-                    mail.initData();
+                    mail = new Reader();
+                    mail.read(msgs[i - 1]);
                     tableMode.append(mail);
                 }
 
@@ -422,7 +421,7 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
             showNotice("正在加载邮件内容……");
             Mailer mail = tableMode.getMailInf(tb_MailMsgs.getSelectedRow());
             ta_MailBody.setContentType(mail.getContentType());
-            tf_MailHead.setText(mail.getSubject());
+            tf_MailHead.setText(mail.getSubject().toString());
             tf_MailUser.setText(mail.getTo());
             //ta_MailBody.setText(mail.getBodyText());
             showNotice("邮件内容加载完毕！");
@@ -454,7 +453,6 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
     {
         lb_MailInfo.setText(notice);
     }
-
     private javax.swing.JEditorPane ta_MailBody;
     private javax.swing.JTable tb_MailMsgs;
     private javax.swing.JTree tr_MailBoxs;

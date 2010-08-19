@@ -17,55 +17,108 @@ import javax.mail.internet.MimeUtility;
 public abstract class Mailer
 {
 
-    private Connect connnect;
+    private Connect connect;
+    private String from;
+    private String to;
+    private String cc;
+    private String bcc;
+    private Date sentDate;
+    /**
+     * 存放邮件内容
+     */
+    private StringBuffer subject;
     private String contentType = MailEnv.TEXT_HTML + ';' + MailEnv.CHARSET + "=UTF-8";
 
     public Mailer()
     {
+        subject = new StringBuffer();
     }
 
     /**
      * 获得发件人的地址和姓名
      */
-    public abstract String getFrom();
+    public String getFrom()
+    {
+        return from;
+    }
 
-    public abstract boolean setFrom(String from);
+    public void setFrom(String from)
+    {
+        this.from = from;
+    }
 
     /**
      * 获取收件人的地址和姓名
      * @return
      */
-    public abstract String getTo();
+    public String getTo()
+    {
+        return to;
+    }
 
-    public abstract boolean setTo(String to);
+    public void setTo(String to)
+    {
+        this.to = to;
+    }
 
     /**
      * 获取抄送人的地址和姓名
      * @return
      */
-    public abstract String getCc();
+    public String getCc()
+    {
+        return cc;
+    }
 
-    public abstract boolean addCc(String cc);
+    public void setCc(String cc)
+    {
+        this.cc = cc;
+    }
 
     /**
      * 获取密抄人的地址和姓名
      * @return
      */
-    public abstract String getBcc();
+    public String getBcc()
+    {
+        return bcc;
+    }
 
-    public abstract boolean addBcc(String bcc);
+    public void setBcc(String bcc)
+    {
+        this.bcc = bcc;
+    }
 
     /**
      * 获得邮件主题
      */
-    public abstract String getSubject();
+    public StringBuffer getSubject()
+    {
+        return subject;
+    }
 
-    public abstract void setSubject(String subject);
+    public void setSubject(StringBuffer subject)
+    {
+        this.subject = subject;
+    }
+
+    public void appendSubject(String subject)
+    {
+        this.subject.append(subject);
+    }
 
     /**
      * 获得邮件发送日期
      */
-    public abstract Date getSentDate();
+    public Date getSentDate()
+    {
+        return sentDate;
+    }
+
+    public void setSentDate(Date sentDate)
+    {
+        this.sentDate = sentDate;
+    }
 
     /**
      * 获得此邮件的Message-ID
@@ -123,18 +176,18 @@ public abstract class Mailer
     }
 
     /**
-     * @return the connnect
+     * @return the connect
      */
-    public Connect getConnnect()
+    public Connect getConnect()
     {
-        return connnect;
+        return connect;
     }
 
     /**
-     * @param connnect the connnect to set
+     * @param connect the connect to set
      */
-    public void setConnnect(Connect connnect)
+    public void setConnect(Connect connect)
     {
-        this.connnect = connnect;
+        this.connect = connect;
     }
 }
