@@ -323,7 +323,7 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
                 for (int i = 1, j = msgs.length; i <= j; i += 1)
                 {
                     showNotice("正处理第" + i + "封邮件……");
-                    mail = new Reader();
+                    mail = new Reader(null);
                     mail.read(msgs[i - 1]);
                     tableMode.append(mail);
                 }
