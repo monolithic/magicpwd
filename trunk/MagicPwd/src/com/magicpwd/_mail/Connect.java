@@ -3,6 +3,8 @@
  */
 package com.magicpwd._mail;
 
+import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._util.Logs;
 import java.security.Security;
 import java.util.Properties;
 import javax.mail.Authenticator;
@@ -26,6 +28,8 @@ public class Connect
     private boolean jssl;
     private String username;
     private String password;
+    private java.util.Properties oldProp;
+    private java.util.Properties newProp;
 
     static
     {
@@ -34,6 +38,8 @@ public class Connect
 
     public Connect()
     {
+        oldProp = new java.util.Properties();
+        newProp = new java.util.Properties();
     }
 
     public Connect(String protocol, String mail, String pwds)
@@ -233,5 +239,91 @@ public class Connect
     public void setJssl(boolean jssl)
     {
         this.jssl = jssl;
+    }
+
+    public boolean loadMailInfo()
+    {
+        oldProp.clear();
+
+        java.io.File file = new java.io.File(ConsEnv.DIR_MAIL, getMail() + ".amm");
+        if (file.exists() && file.isFile() && file.canRead())
+        {
+            java.io.FileInputStream fis = null;
+            try
+            {
+                fis = new java.io.FileInputStream(file);
+                oldProp.load(fis);
+                fis.close();
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+            finally
+            {
+                if (fis != null)
+                {
+                    try
+                    {
+                        fis.close();
+                    }
+                    catch (Exception exp)
+                    {
+                        Logs.exception(exp);
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public boolean saveMailInfo()
+    {
+        java.io.File file = new java.io.File(ConsEnv.DIR_MAIL, getMail() + ".amm");
+        java.io.FileOutputStream fos = null;
+        try
+        {
+            if (!file.exists())
+            {
+                file.createNewFile();
+            }
+            if (!file.isFile() || !file.canWrite())
+            {
+                return false;
+            }
+            fos = new java.io.FileOutputStream(file);
+            newProp.store(fos, host);
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+        finally
+        {
+            if (fos != null)
+            {
+                try
+                {
+                    fos.close();
+                }
+                catch (Exception exp)
+                {
+                    Logs.exception(exp);
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean appendMailInfo(String messageId)
+    {
+        newProp.setProperty(messageId, "true");
+        return true;
+    }
+
+    public boolean isMailExists(String messageId)
+    {
+        return com.magicpwd._util.Char.isValidate(oldProp.getProperty(messageId));
     }
 }

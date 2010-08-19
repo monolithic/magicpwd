@@ -62,6 +62,7 @@ public interface ConsEnv
     String DIR_AMA = "ama";
     String DIR_ICO = "ico";
     String DIR_EXT = "ext";
+    String DIR_MAIL = "mail";
     String DIR_SKIN = "skin";
     String DIR_LOOK = "look";
     String DIR_FEEL = "feel";
