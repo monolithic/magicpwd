@@ -3,110 +3,78 @@
  */
 package com.magicpwd._mail;
 
-import com.magicpwd._util.Logs;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
 
 import javax.mail.Address;
-import javax.mail.Message;
 import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeUtility;
 
 /**
  * @author Amon
  * 
  */
-public class Mailer
+public abstract class Mailer
 {
 
-    protected MimeMessage message;
+    private Connect connnect;
     private String contentType = MailEnv.TEXT_HTML + ';' + MailEnv.CHARSET + "=UTF-8";
-    private String from;
-    private String to;
-    private String cc;
-    private String bcc;
-    private String subject;
-    private Date sentDate;
 
-    public Mailer(MimeMessage message)
+    public Mailer()
     {
-        this.message = message;
-    }
-
-    public boolean initData() throws Exception
-    {
-        from = decodeAddress(message.getFrom());
-        to = decodeAddress(message.getRecipients(Message.RecipientType.TO));
-        cc = decodeAddress(message.getRecipients(Message.RecipientType.CC));
-        bcc = decodeAddress(message.getRecipients(Message.RecipientType.BCC));
-        subject = decodeMessage(message.getSubject());
-        sentDate = message.getSentDate();
-        return true;
-    }
-
-    public String getContentType()
-    {
-        return contentType;
     }
 
     /**
      * 获得发件人的地址和姓名
      */
-    public String getFrom()
-    {
-        return from;
-    }
+    public abstract String getFrom();
+
+    public abstract boolean setFrom(String from);
 
     /**
      * 获取收件人的地址和姓名
      * @return
      */
-    public String getTo()
-    {
-        return to;
-    }
+    public abstract String getTo();
+
+    public abstract boolean setTo(String to);
 
     /**
      * 获取抄送人的地址和姓名
      * @return
      */
-    public String getCc()
-    {
-        return cc;
-    }
+    public abstract String getCc();
+
+    public abstract boolean addCc(String cc);
 
     /**
      * 获取密抄人的地址和姓名
      * @return
      */
-    public String getBcc()
-    {
-        return bcc;
-    }
+    public abstract String getBcc();
+
+    public abstract boolean addBcc(String bcc);
 
     /**
      * 获得邮件主题
      */
-    public String getSubject()
-    {
-        return subject;
-    }
+    public abstract String getSubject();
+
+    public abstract void setSubject(String subject);
 
     /**
      * 获得邮件发送日期
      */
-    public Date getSentDate()
-    {
-        return sentDate;
-    }
+    public abstract Date getSentDate();
 
     /**
      * 获得此邮件的Message-ID
      */
-    public String getMessageId()
+    public abstract String getMessageId();
+
+    public String getContentType()
     {
-        return "";//mimeMessage.getMessageID();
+        return contentType;
     }
 
     /**
@@ -152,5 +120,21 @@ public class Mailer
             return MimeUtility.decodeText(text);
         }
         return text;//new String(text.getBytes("ISO8859_1"));
+    }
+
+    /**
+     * @return the connnect
+     */
+    public Connect getConnnect()
+    {
+        return connnect;
+    }
+
+    /**
+     * @param connnect the connnect to set
+     */
+    public void setConnnect(Connect connnect)
+    {
+        this.connnect = connnect;
     }
 }
