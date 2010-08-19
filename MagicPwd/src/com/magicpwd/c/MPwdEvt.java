@@ -67,10 +67,6 @@ public interface MPwdEvt extends MenuEvt
 
     void dataExptActionPerformed(java.awt.event.ActionEvent evt);
 
-    void dataSyncActionPerformed(java.awt.event.ActionEvent evt);
-
-    void dataBackActionPerformed(java.awt.event.ActionEvent evt);
-
     void dataDocsActionPerformed(java.awt.event.ActionEvent evt);
 
     void helpSKeyActionPerformed(java.awt.event.ActionEvent evt);

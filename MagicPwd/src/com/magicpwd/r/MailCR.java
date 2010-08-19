@@ -43,7 +43,7 @@ public class MailCR extends javax.swing.JLabel implements javax.swing.ListCellRe
         if (value instanceof Reader)
         {
             Reader item = (Reader) value;
-            setText(item.getSubject());
+            setText(item.getSubject().toString());
 
             // 文字属性设置
             Font font = list.getFont();

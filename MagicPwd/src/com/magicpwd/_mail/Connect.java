@@ -196,9 +196,9 @@ public class Connect
         return new URLName(getProtocol(), getHost(), getPort(), null, getUsername(), getPassword());
     }
 
-    public Store getStore() throws Exception
+    public Session getSession()
     {
-        Session session = Session.getDefaultInstance(getProperties(), isAuth() ? new Authenticator()
+        return Session.getDefaultInstance(getProperties(), isAuth() ? new Authenticator()
         {
 
             @Override
@@ -207,7 +207,11 @@ public class Connect
                 return new PasswordAuthentication(getUsername(), getPassword());
             }
         } : null);
-        Store store = session.getStore(getURLName());
+    }
+
+    public Store getStore() throws Exception
+    {
+        Store store = getSession().getStore(getURLName());
         if (!store.isConnected())
         {
             store.connect();
