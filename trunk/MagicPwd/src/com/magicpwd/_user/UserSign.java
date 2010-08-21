@@ -646,8 +646,8 @@ public class UserSign extends javax.swing.JPanel
                     {
                         StringBuilder buf = new StringBuilder();
                         buf.append(ConsEnv.HOMEPAGE);
-                        buf.append("mpwd/mpwd0001.ashx?uri=");
-                        buf.append(java.net.InetAddress.getLocalHost().getHostAddress());
+                        buf.append("mpwd/mpwd0001.ashx?sid=").append(ConsEnv.VERSIONS);
+                        buf.append("&uri=").append(java.net.InetAddress.getLocalHost().getHostAddress());
                         buf.append("&opt=").append(Char.escape(System.getProperty("os.name")));
                         buf.append("_").append(Char.escape(System.getProperty("os.arch")));
                         buf.append("_").append(Char.escape(System.getProperty("os.version")));

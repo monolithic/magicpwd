@@ -866,7 +866,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         boolean wasDecoratedByOS = !(TrayPtn.getCurrForm().isUndecorated());
         try
         {
-            boolean isSystem = !com.magicpwd._util.Char.isValidate(lafClass) || ConsCfg.DEF_SKIN.equalsIgnoreCase(lafClass);
+            boolean isSystem = !com.magicpwd._util.Char.isValidate(lafClass) || ConsCfg.DEF_SKIN_SYS.equalsIgnoreCase(lafClass);
             if (isSystem)
             {
                 lafClass = javax.swing.UIManager.getSystemLookAndFeelClassName();
@@ -898,7 +898,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
 
                 TrayPtn.getCurrForm().setVisible(wasVisible);
             }
-            UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN_LOOK, isSystem ? ConsCfg.DEF_SKIN : lafClass);
+            UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN_LOOK, isSystem ? ConsCfg.DEF_SKIN_SYS : lafClass);
         }
         catch (Exception exc)
         {

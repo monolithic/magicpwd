@@ -179,9 +179,9 @@ public abstract class Mailer
     /**
      * @param content the content to set
      */
-    public void setContent(StringBuffer content)
+    public void setContent(String content)
     {
-        this.content = content;
+        this.content.delete(0, this.content.length()).append(content);
     }
 
     public void appendContent(String content)
@@ -200,6 +200,11 @@ public abstract class Mailer
     public void addAttachment(String name, String file)
     {
         attachmentList.add(new S1S1(name, file));
+    }
+
+    public boolean hasAttachment()
+    {
+        return attachmentList != null && attachmentList.size() > 0;
     }
 
     public String getContentType()

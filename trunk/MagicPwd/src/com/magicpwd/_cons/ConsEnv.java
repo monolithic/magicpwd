@@ -203,7 +203,8 @@ public interface ConsEnv
     int ICON_FILE_PICK = ICON_FILE_OPEN + 1;// 选择
     int ICON_NOTE_OPEN = ICON_FILE_PICK + 1;// 选择
     int ICON_NOTE_SRCH = ICON_NOTE_OPEN + 1;// 选择
-    int ICON_SIZE = ICON_NOTE_SRCH + 1;
+    int ICON_MAIL_FILE = ICON_NOTE_SRCH + 1;// 附件
+    int ICON_SIZE = ICON_MAIL_FILE + 1;
     String EVENT_FILE_HIDE = "130F_FILE_HIDE";
     String EVENT_FILE_APND = "130F_FILE_APND";
     String EVENT_FILE_SAVE = "130F_FILE_SAVE";
