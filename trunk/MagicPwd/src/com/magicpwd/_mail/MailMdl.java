@@ -15,10 +15,12 @@ public class MailMdl extends javax.swing.table.AbstractTableModel
 {
 
     private java.util.ArrayList<Reader> messages;
+    private java.text.SimpleDateFormat format;
 
     public MailMdl()
     {
         messages = new java.util.ArrayList<Reader>();
+        format = new java.text.SimpleDateFormat("yyyy-MM-dd");
     }
 
     @Override
@@ -36,19 +38,7 @@ public class MailMdl extends javax.swing.table.AbstractTableModel
     @Override
     public Class getColumnClass(int columnIndex)
     {
-        switch (columnIndex)
-        {
-            case 0:
-                return javax.swing.ImageIcon.class;
-            case 1:
-                return String.class;
-            case 2:
-                return String.class;
-            case 3:
-                return java.util.Date.class;
-            default:
-                return String.class;
-        }
+        return javax.swing.JLabel.class;
     }
 
     @Override
@@ -74,30 +64,34 @@ public class MailMdl extends javax.swing.table.AbstractTableModel
     {
         if (rowIndex < 0 || rowIndex >= messages.size())
         {
-            return "";
+            return null;
         }
-        try
+
+        javax.swing.JLabel label = new javax.swing.JLabel();
+        Reader message = messages.get(rowIndex);
+        if (!message.isReaded())
         {
-            Reader message = messages.get(rowIndex);
-            switch (columnIndex)
-            {
-                case 0:
-                    return message.hasAttachment() ? Util.getIcon(ConsEnv.ICON_MAIL_FILE) : Util.getNone();
-                case 1:
-                    return message.getFrom();
-                case 2:
-                    return message.getSubject();
-                case 3:
-                    return message.getSentDate();
-                default:
-                    return null;
-            }
+            label.setFont(label.getFont().deriveFont(java.awt.Font.BOLD));
         }
-        catch (Exception ex)
+
+        switch (columnIndex)
         {
-            Logs.exception(ex);
-            return "";
+            case 0:
+                label.setIcon(message.hasAttachment() ? Util.getIcon(ConsEnv.ICON_MAIL_FILE) : Util.getNone());
+                break;
+            case 1:
+                label.setText(message.getFrom());
+                break;
+            case 2:
+                label.setText(message.getSubject());
+                break;
+            case 3:
+                label.setText(format.format(message.getSentDate()));
+                break;
+            default:
+                break;
         }
+        return label;
     }
 
     @Override

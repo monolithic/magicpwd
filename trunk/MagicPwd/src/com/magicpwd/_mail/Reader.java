@@ -55,10 +55,11 @@ public class Reader extends Mailer
         if (message instanceof MimeMessage)
         {
             messageId = ((MimeMessage) message).getMessageID();
-            if (com.magicpwd._util.Char.isValidate(messageId))
+            if (!com.magicpwd._util.Char.isValidate(messageId))
             {
-                getConnect().appendMailInfo(messageId, getConnect().isMailReaded(messageId));
+                messageId = Long.toHexString(com.magicpwd._util.Hash.ber(getFrom() + getSubject() + getSentDate()));
             }
+            getConnect().appendMailInfo(messageId, getConnect().isMailExists(messageId));
         }
 
         return true;
@@ -206,7 +207,7 @@ public class Reader extends Mailer
         return needReply;
     }
 
-    public boolean isNew()
+    public boolean isReaded()
     {
         return getConnect().isMailReaded(messageId);
     }
