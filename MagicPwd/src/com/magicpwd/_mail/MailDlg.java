@@ -10,6 +10,7 @@ import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
+import com.magicpwd.r.MailCR;
 
 import javax.mail.Folder;
 import javax.mail.Message;
@@ -69,9 +70,15 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
         tableMode = new MailMdl();
         tb_MailMsgs.setModel(tableMode);
         tb_MailMsgs.setRowSorter(new TableRowSorter<MailMdl>(tableMode));
+
+        MailCR mailCR = new MailCR();
         javax.swing.table.TableColumnModel colModel = tb_MailMsgs.getColumnModel();
         colModel.getColumn(0).setPreferredWidth(16);
+        colModel.getColumn(0).setCellRenderer(mailCR);
+        colModel.getColumn(1).setCellRenderer(mailCR);
+        colModel.getColumn(2).setCellRenderer(mailCR);
         colModel.getColumn(3).setPreferredWidth(tb_MailMsgs.getFontMetrics(tb_MailMsgs.getFont()).stringWidth("0000-00-00"));
+        colModel.getColumn(3).setCellRenderer(mailCR);
     }
 
     public void append(Connect connect, String folder)
@@ -283,7 +290,6 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
         });
         sp2.setLeftComponent(new javax.swing.JScrollPane(tr_MailBoxs));
 
-        //tb_MailMsgs.getColumn(0).setCellRenderer(new MailCR());
         tb_MailMsgs.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tb_MailMsgs.addMouseListener(new java.awt.event.MouseAdapter()
         {
@@ -336,6 +342,7 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
             if (folder != null)
             {
                 showNotice("正在获取邮件列表信息……");
+                connect.loadMailInfo();
                 Message[] msgs = folder.getMessages();
 //                FetchProfile profile = new FetchProfile();
 //                profile.add(FetchProfile.Item.ENVELOPE);

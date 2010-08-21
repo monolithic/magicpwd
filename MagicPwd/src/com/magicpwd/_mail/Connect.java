@@ -322,15 +322,28 @@ public class Connect
 
     public boolean appendMailInfo(String messageId, boolean readed)
     {
-        newProp.setProperty(messageId, readed ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FAIL);
-        return true;
+        if (com.magicpwd._util.Char.isValidate(messageId))
+        {
+            newProp.setProperty(messageId, readed ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FAIL);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isMailExists(String messageId)
+    {
+        if (com.magicpwd._util.Char.isValidate(messageId))
+        {
+            return ConsCfg.DEF_TRUE.equals(oldProp.getProperty(messageId));
+        }
+        return false;
     }
 
     public boolean isMailReaded(String messageId)
     {
         if (com.magicpwd._util.Char.isValidate(messageId))
         {
-            return ConsCfg.DEF_TRUE.equals(oldProp.getProperty(messageId));
+            return ConsCfg.DEF_TRUE.equals(newProp.getProperty(messageId));
         }
         return false;
     }
