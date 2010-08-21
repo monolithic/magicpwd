@@ -3,6 +3,7 @@
  */
 package com.magicpwd._mail;
 
+import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Logs;
 import java.security.Security;
@@ -47,6 +48,9 @@ public class Connect
         this.protocol = protocol;
         this.mail = mail;
         this.password = pwds;
+
+        oldProp = new java.util.Properties();
+        newProp = new java.util.Properties();
     }
 
     /**
@@ -316,14 +320,18 @@ public class Connect
         return true;
     }
 
-    public boolean appendMailInfo(String messageId)
+    public boolean appendMailInfo(String messageId, boolean readed)
     {
-        newProp.setProperty(messageId, "true");
+        newProp.setProperty(messageId, readed ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FAIL);
         return true;
     }
 
-    public boolean isMailExists(String messageId)
+    public boolean isMailReaded(String messageId)
     {
-        return com.magicpwd._util.Char.isValidate(oldProp.getProperty(messageId));
+        if (com.magicpwd._util.Char.isValidate(messageId))
+        {
+            return ConsCfg.DEF_TRUE.equals(oldProp.getProperty(messageId));
+        }
+        return false;
     }
 }

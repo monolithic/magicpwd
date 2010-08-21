@@ -8,6 +8,7 @@ import com.magicpwd.MagicPwd;
 import com.magicpwd._comn.PwdsItem;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._mail.Connect;
 import com.magicpwd._mail.Reader;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
@@ -59,7 +60,7 @@ public class ResumeAction extends AbstractAction
     {
         try
         {
-            String docs = DBA3000.readConfig("google_docs");
+            String docs = DBA3000.readConfig("pop_mail");
             if (!com.magicpwd._util.Char.isValidate(docs))
             {
                 dialog.setVisible(false);
@@ -77,7 +78,7 @@ public class ResumeAction extends AbstractAction
 
             java.io.File bakFile = java.io.File.createTempFile("magicpwd", ".amb");
             bakFile.deleteOnExit();
-            Reader mail = new Reader();
+            Reader mail = new Reader(new Connect("", data[0], data[1]));
             //if (!new Google().resume(data[0], data[1], ConsEnv.FILE_SYNC, bakFile))
             if (!mail.read(null))
             {

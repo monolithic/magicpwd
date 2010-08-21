@@ -65,12 +65,15 @@ public class MagicPwd
                     // 用户偏好风格设置
                     try
                     {
-                        String lafClass = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN_LOOK, ConsCfg.DEF_SKIN).trim();
-                        if (lafClass.length() < 1 || ConsCfg.DEF_SKIN.equalsIgnoreCase(lafClass))
+                        String lafClass = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN_NAME, ConsCfg.DEF_SKIN_SYS).trim();
+                        if (lafClass.length() > 0 && !ConsCfg.DEF_SKIN_DEF.equals(lafClass))
                         {
-                            lafClass = javax.swing.UIManager.getSystemLookAndFeelClassName();
+                            if (ConsCfg.DEF_SKIN_SYS.equalsIgnoreCase(lafClass))
+                            {
+                                lafClass = javax.swing.UIManager.getSystemLookAndFeelClassName();
+                            }
+                            javax.swing.UIManager.setLookAndFeel(lafClass);
                         }
-                        javax.swing.UIManager.setLookAndFeel(lafClass);
                     }
                     catch (Exception e)
                     {

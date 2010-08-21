@@ -8,6 +8,7 @@ import com.magicpwd.MagicPwd;
 import com.magicpwd._comn.PwdsItem;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._mail.Connect;
 import com.magicpwd._mail.Sender;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -58,7 +59,7 @@ public class BackupAction extends AbstractAction
     {
         try
         {
-            String docs = DBA3000.readConfig("google_docs");
+            String docs = DBA3000.readConfig("pop_mail");
             if (!com.magicpwd._util.Char.isValidate(docs))
             {
                 dialog.setVisible(false);
@@ -81,7 +82,10 @@ public class BackupAction extends AbstractAction
                 return;
             }
 
-            Sender mail = new Sender();
+            Sender mail = new Sender(new Connect("pop3", data[0], data[1]));
+            mail.setSubject("魔方密码备份文件");
+            mail.setContent(null);
+            mail.addAttachment(ConsEnv.FILE_SYNC, MagicPwd.endSave().getAbsolutePath());
             //if (!new Google().backup(data[0], data[1], ConsEnv.FILE_SYNC, MagicPwd.endSave()))
             if (!mail.send())
             {

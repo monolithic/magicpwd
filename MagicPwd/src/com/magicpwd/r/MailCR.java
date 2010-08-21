@@ -4,14 +4,16 @@
  */
 package com.magicpwd.r;
 
-import com.magicpwd._mail.Reader;
+import java.text.SimpleDateFormat;
 
 /**
  *
  * @author Amon
  */
-public class MailCR extends javax.swing.JLabel implements javax.swing.ListCellRenderer
+public class MailCR extends javax.swing.JLabel implements javax.swing.table.TableCellRenderer
 {
+
+    private static SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
     public MailCR()
     {
@@ -19,43 +21,38 @@ public class MailCR extends javax.swing.JLabel implements javax.swing.ListCellRe
     }
 
     @Override
-    public java.awt.Component getListCellRendererComponent(javax.swing.JList list, Object value, int index, boolean isSelected, boolean cellHasFocus)
+    public java.awt.Component getTableCellRendererComponent(javax.swing.JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
     {
         // 前景及背景颜色设置
         if (isSelected)
         {
-            setBackground(list.getSelectionBackground());
-            setForeground(list.getSelectionForeground());
+            setBackground(table.getSelectionBackground());
+            setForeground(table.getSelectionForeground());
         }
         else
         {
-            setBackground(list.getBackground());
-            setForeground(list.getForeground());
+            setBackground(table.getBackground());
+            setForeground(table.getForeground());
         }
 
-        // 可编辑状态设置
-        setEnabled(list.isEnabled());
-
-        // 下拉列表专用
-        if (value instanceof Reader)
-        {
-            Reader item = (Reader) value;
-            setText(item.getSubject());
-
-            // 文字属性设置
-            java.awt.Font font = list.getFont();
-            if (item.isNew())
-            {
-                font = font.deriveFont(java.awt.Font.BOLD);
-            }
-            setFont(font);
-        }
         // 其它
-        else if (value != null)
+        if (value != null)
         {
-            setText(value.toString());
+            // 下拉列表专用
+            if (value instanceof javax.swing.Icon)
+            {
+                setIcon((javax.swing.Icon) value);
+            }
+            if (value instanceof java.util.Date)
+            {
+                setText(format.format((java.util.Date) value));
+            }
+
             // 文字属性设置
-            setFont(list.getFont());
+//            java.awt.Font font = list.getFont();
+//            font = font.deriveFont(java.awt.Font.BOLD);
+//            setFont(font);
+            setText(value.toString());
         }
 
         return this;

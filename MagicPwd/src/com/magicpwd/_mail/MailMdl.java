@@ -3,7 +3,9 @@
  */
 package com.magicpwd._mail;
 
+import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Logs;
+import com.magicpwd._util.Util;
 
 /**
  * @author Amon
@@ -12,11 +14,11 @@ import com.magicpwd._util.Logs;
 public class MailMdl extends javax.swing.table.AbstractTableModel
 {
 
-    private java.util.ArrayList<Mailer> messages;
+    private java.util.ArrayList<Reader> messages;
 
     public MailMdl()
     {
-        messages = new java.util.ArrayList<Mailer>();
+        messages = new java.util.ArrayList<Reader>();
     }
 
     @Override
@@ -37,7 +39,7 @@ public class MailMdl extends javax.swing.table.AbstractTableModel
         switch (columnIndex)
         {
             case 0:
-                return javax.swing.JPanel.class;
+                return javax.swing.ImageIcon.class;
             case 1:
                 return String.class;
             case 2:
@@ -76,11 +78,11 @@ public class MailMdl extends javax.swing.table.AbstractTableModel
         }
         try
         {
-            Mailer message = messages.get(rowIndex);
+            Reader message = messages.get(rowIndex);
             switch (columnIndex)
             {
                 case 0:
-                    return null;//message.getFlags().getSystemFlags()[0];
+                    return message.hasAttachment() ? Util.getIcon(ConsEnv.ICON_MAIL_FILE) : Util.getNone();
                 case 1:
                     return message.getFrom();
                 case 2:
@@ -104,7 +106,7 @@ public class MailMdl extends javax.swing.table.AbstractTableModel
         return false;
     }
 
-    public Mailer getMailInf(int rowIndex)
+    public Reader getMailInf(int rowIndex)
     {
         if (rowIndex < 0 || rowIndex >= messages.size())
         {
@@ -118,7 +120,7 @@ public class MailMdl extends javax.swing.table.AbstractTableModel
         messages.clear();
     }
 
-    public void append(Mailer mailInf)
+    public void append(Reader mailInf)
     {
         messages.add(mailInf);
         fireTableDataChanged();

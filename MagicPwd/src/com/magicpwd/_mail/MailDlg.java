@@ -4,7 +4,10 @@
  */
 package com.magicpwd._mail;
 
+import com.magicpwd._comn.S1S1;
+import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Desk;
+import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 
@@ -28,6 +31,9 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
     private DefaultMutableTreeNode rootNode;
     private MailMdl tableMode;
     private Folder folder;
+    private Connect connect;
+    private Reader reader;
+    private java.io.File filePath;
 
     public MailDlg()
     {
@@ -51,11 +57,8 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
         lb_MailHead.setText("标题：");
         lb_MailUser.setText("收件人：");
         bt_Delete.setText("删除(D)");
-        bt_Delete.setEnabled(false);
-        bt_Download.setText("下载(D)");
-        bt_Download.setEnabled(false);
+        bt_SaveAs.setText("下载(D)");
         bt_Replay.setText("回复(D)");
-        bt_Replay.setEnabled(false);
     }
 
     public void initData()
@@ -66,6 +69,9 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
         tableMode = new MailMdl();
         tb_MailMsgs.setModel(tableMode);
         tb_MailMsgs.setRowSorter(new TableRowSorter<MailMdl>(tableMode));
+        javax.swing.table.TableColumnModel colModel = tb_MailMsgs.getColumnModel();
+        colModel.getColumn(0).setPreferredWidth(16);
+        colModel.getColumn(3).setPreferredWidth(tb_MailMsgs.getFontMetrics(tb_MailMsgs.getFont()).stringWidth("0000-00-00"));
     }
 
     public void append(Connect connect, String folder)
@@ -144,10 +150,25 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
     private void initCtrlView()
     {
         pl_MailCtrl = new javax.swing.JPanel();
-        bt_Download = new javax.swing.JButton();
+        bt_SaveAs = new javax.swing.JButton();
         bt_Replay = new javax.swing.JButton();
         bt_Delete = new javax.swing.JButton();
         lb_MailInfo = new javax.swing.JLabel();
+
+        bt_SaveAs.setEnabled(false);
+        bt_SaveAs.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                bt_SaveAsActionPerformed(evt);
+            }
+        });
+
+        bt_Replay.setEnabled(false);
+
+        bt_Delete.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_MailCtrl);
         pl_MailCtrl.setLayout(layout);
@@ -158,11 +179,11 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg.addComponent(bt_Replay);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg.addComponent(bt_Download);
+        hsg.addComponent(bt_SaveAs);
         layout.setHorizontalGroup(hsg);
 
         javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
-        vpg.addComponent(bt_Download);
+        vpg.addComponent(bt_SaveAs);
         vpg.addComponent(bt_Replay);
         vpg.addComponent(bt_Delete);
         vpg.addComponent(lb_MailInfo);
@@ -262,6 +283,7 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
         });
         sp2.setLeftComponent(new javax.swing.JScrollPane(tr_MailBoxs));
 
+        //tb_MailMsgs.getColumn(0).setCellRenderer(new MailCR());
         tb_MailMsgs.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tb_MailMsgs.addMouseListener(new java.awt.event.MouseAdapter()
         {
@@ -323,7 +345,7 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
                 for (int i = 1, j = msgs.length; i <= j; i += 1)
                 {
                     showNotice("正处理第" + i + "封邮件……");
-                    mail = new Reader(null);
+                    mail = new Reader(connect);
                     mail.read(msgs[i - 1]);
                     tableMode.append(mail);
                 }
@@ -368,6 +390,8 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
         {
             return;
         }
+
+        connect = node.getConnect();
 
         try
         {
@@ -419,12 +443,16 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
         try
         {
             showNotice("正在加载邮件内容……");
-            Mailer mail = tableMode.getMailInf(tb_MailMsgs.getSelectedRow());
-            ta_MailBody.setContentType(mail.getContentType());
-            tf_MailHead.setText(mail.getSubject());
-            tf_MailUser.setText(mail.getTo());
-            ta_MailBody.setText(mail.getContent());
+            reader = tableMode.getMailInf(tb_MailMsgs.getSelectedRow());
+            ta_MailBody.setContentType(reader.getContentType());
+            tf_MailHead.setText(reader.getSubject());
+            tf_MailUser.setText(reader.getTo());
+            ta_MailBody.setText(reader.getContent());
+            bt_SaveAs.setEnabled(reader.hasAttachment());
             showNotice("邮件内容加载完毕！");
+
+            connect.appendMailInfo(reader.getMessageId(), true);
+            connect.saveMailInfo();
         }
         catch (Exception ex)
         {
@@ -449,6 +477,60 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
         }
     }
 
+    private void bt_SaveAsActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        if (reader == null || !reader.hasAttachment())
+        {
+            return;
+        }
+
+        javax.swing.JFileChooser jfc = new javax.swing.JFileChooser();
+        jfc.setMultiSelectionEnabled(false);
+        jfc.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
+        if (filePath != null)
+        {
+            jfc.setSelectedFile(filePath);
+        }
+        int status = jfc.showSaveDialog(this);
+        if (status != javax.swing.JFileChooser.APPROVE_OPTION)
+        {
+            return;
+        }
+        filePath = jfc.getSelectedFile();
+        if (filePath == null)
+        {
+            return;
+        }
+        if (!filePath.exists())
+        {
+            filePath.mkdirs();
+        }
+        if (!filePath.isDirectory() || !filePath.canWrite())
+        {
+            Lang.showMesg(this, LangRes.P30F7A2F, "无法保存数据到您指定的路径，请确认您是否有足够的权限！");
+            return;
+        }
+
+        try
+        {
+            java.io.File file;
+            for (S1S1 item : reader.getAttachmentList())
+            {
+                file = new java.io.File(item.getV());
+                if (!file.exists())
+                {
+                    continue;
+                }
+                file.renameTo(new java.io.File(filePath, item.getK()));
+            }
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            Lang.showMesg(this, LangRes.P30F7A2D, "文件下载保存出错，请重试！");
+        }
+    }
+
     private synchronized void showNotice(String notice)
     {
         lb_MailInfo.setText(notice);
@@ -464,6 +546,6 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
     private javax.swing.JTextField tf_MailUser;
     private javax.swing.JPanel pl_MailCtrl;
     private javax.swing.JButton bt_Delete;
-    private javax.swing.JButton bt_Download;
+    private javax.swing.JButton bt_SaveAs;
     private javax.swing.JButton bt_Replay;
 }

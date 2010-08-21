@@ -35,12 +35,6 @@ public class Reader extends Mailer
             return false;
         }
 
-        if (message instanceof MimeMessage)
-        {
-            messageId = ((MimeMessage) message).getMessageID();
-            getConnect().appendMailInfo(messageId);
-        }
-
         setFrom(decodeAddress(message.getFrom()));
         setTo(decodeAddress(message.getRecipients(Message.RecipientType.TO)));
         setCc(decodeAddress(message.getRecipients(Message.RecipientType.CC)));
@@ -57,6 +51,16 @@ public class Reader extends Mailer
                 decodePart(part.getBodyPart(i));
             }
         }
+
+        if (message instanceof MimeMessage)
+        {
+            messageId = ((MimeMessage) message).getMessageID();
+            if (com.magicpwd._util.Char.isValidate(messageId))
+            {
+                getConnect().appendMailInfo(messageId, getConnect().isMailReaded(messageId));
+            }
+        }
+
         return true;
     }
 
@@ -129,6 +133,8 @@ public class Reader extends Mailer
                 c = bis.read(b);
             }
             bos.flush();
+
+            addAttachment(fileName, file.getAbsolutePath());
         }
         finally
         {
@@ -202,6 +208,6 @@ public class Reader extends Mailer
 
     public boolean isNew()
     {
-        return getConnect().isMailExists(messageId);
+        return getConnect().isMailReaded(messageId);
     }
 }
