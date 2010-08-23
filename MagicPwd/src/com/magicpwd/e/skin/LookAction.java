@@ -31,15 +31,15 @@ public class LookAction extends AbstractAction
         String look;
         String name;
 
-        if (ConsEnv.SKIN_DEFAULT.equals(command))
+        if (ConsCfg.DEF_SKIN_DEF.equals(command))
         {
-            look = ConsEnv.SKIN_DEFAULT;
-            name = ConsEnv.SKIN_DEFAULT;
+            look = ConsCfg.DEF_SKIN_DEF;
+            name = ConsCfg.DEF_SKIN_DEF;
         }
         else if (ConsEnv.SKIN_SYSTEM.equals(command))
         {
-            look = ConsEnv.SKIN_SYSTEM;
-            name = ConsEnv.SKIN_SYSTEM;
+            look = ConsCfg.DEF_SKIN_SYS;
+            name = ConsCfg.DEF_SKIN_SYS;
         }
         else
         {

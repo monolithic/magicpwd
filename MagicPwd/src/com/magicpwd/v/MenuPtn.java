@@ -12,6 +12,7 @@ import com.magicpwd._util.File;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.e.skin.LookAction;
+import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
 import java.util.List;
 import org.dom4j.Document;
@@ -211,6 +212,7 @@ public class MenuPtn
         }
 
         javax.swing.JCheckBoxMenuItem item;
+        String skinName = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN_NAME, ConsCfg.DEF_SKIN_SYS);
         LookAction action = new LookAction();
         javax.swing.ButtonGroup group = new javax.swing.ButtonGroup();
 
@@ -221,7 +223,8 @@ public class MenuPtn
             item = new javax.swing.JCheckBoxMenuItem(action);
             Bean.setText(item, "default");
             Bean.setTips(item, "default");
-            item.setActionCommand(ConsEnv.SKIN_DEFAULT);
+            item.setActionCommand(ConsCfg.DEF_SKIN_DEF);
+            item.setSelected(skinName.equals(ConsCfg.DEF_SKIN_DEF));
             lookMenu.add(item);
             group.add(item);
         }
@@ -233,7 +236,8 @@ public class MenuPtn
             item = new javax.swing.JCheckBoxMenuItem(action);
             Bean.setText(item, "system");
             Bean.setTips(item, "system");
-            item.setActionCommand(ConsEnv.SKIN_SYSTEM);
+            item.setActionCommand(ConsCfg.DEF_SKIN_SYS);
+            item.setSelected(skinName.equals(ConsCfg.DEF_SKIN_SYS));
             lookMenu.add(item);
             group.add(item);
         }
@@ -282,6 +286,7 @@ public class MenuPtn
                     item = new javax.swing.JCheckBoxMenuItem(action);
                     Bean.setText(item, getLang(element.attributeValue("text")));
                     Bean.setTips(item, getLang(element.attributeValue("tips")));
+                    item.setSelected(skinName.equals(element.attributeValue("class")));
                     item.setActionCommand(dir.getName() + ',' + element.attributeValue("class"));
                     lookMenu.add(item);
                     group.add(item);
@@ -308,6 +313,7 @@ public class MenuPtn
                         item = new javax.swing.JCheckBoxMenuItem(action);
                         Bean.setText(item, getLang(element.attributeValue("text")));
                         Bean.setTips(item, getLang(element.attributeValue("tips")));
+                        item.setSelected(skinName.equals(element.attributeValue("class")));
                         item.setActionCommand(dir.getName() + ',' + element.attributeValue("class"));
                         subMenu.add(item);
                         group.add(item);
