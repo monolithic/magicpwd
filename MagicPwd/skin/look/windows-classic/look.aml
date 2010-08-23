@@ -1,6 +1,0 @@
-text=Windows Classic
-tips=Windows Classic
-type=java
-class=com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel
-decorated=false
-group=
