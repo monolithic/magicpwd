@@ -1,6 +1,6 @@
-text=JGoodies
-tips=JGoodies
-type=user
-class=com.jgoodies.looks.windows.WindowsLookAndFeel
-decorated=false
-group=
+<magicpwd>
+    <look group="JGoodies">
+        <item text="JGoodies" tips="JGoodies" type="user" class="com.jgoodies.looks.windows.WindowsLookAndFeel" decorated="false"/>
+        <item text="JGoodies" tips="JGoodies" type="user" class="com.jgoodies.looks.windows.WindowsLookAndFeel" decorated="false"/>
+    </look>
+</magicpwd>

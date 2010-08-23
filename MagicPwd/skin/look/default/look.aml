@@ -1,6 +1,5 @@
-text=Default
-tips=Default
-type=java
-class=default
-decorated=false
-group=
+<magicpwd>
+    <look group="Default">
+        <item text="Default" tips="Default" type="java" class="default" decorated="false" />
+    </look>
+</magicpwd>
