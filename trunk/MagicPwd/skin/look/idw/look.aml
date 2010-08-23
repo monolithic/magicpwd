@@ -1,6 +1,5 @@
-text=JGoodies
-tips=JGoodies
-type=user
-class=net.infonode.gui.laf.InfoNodeLookAndFeel
-decorated=false
-group=
+<magicpwd>
+    <look group="Default">
+        <item text="IDW" tips="IDW" type="user" class="net.infonode.gui.laf.InfoNodeLookAndFeel" decorated="false" />
+    </look>
+</magicpwd>

@@ -1,6 +1,5 @@
-text=System
-tips=System
-type=java
-class=system
-decorated=false
-group=
+<magicpwd>
+    <look>
+        <item text="System" tips="System" type="java" class="system" decorated="false" />
+    </look>
+</magicpwd>
