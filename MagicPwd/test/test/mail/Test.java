@@ -31,7 +31,7 @@ public class Test
         md.initLang();
         md.initData();
         md.setVisible(true);
-        Connect connect = new Connect("pop3", "Amon.CT@163.com", "bMjbmaG0zm");
+        Connect connect = new Connect("Amon.CT@163.com", "bMjbmaG0zm", "pop3");
         connect.setUsername("Amon.CT");
         connect.setHost("pop.163.com");
         connect.setPort(-1);

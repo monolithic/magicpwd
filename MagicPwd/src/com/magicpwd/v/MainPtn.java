@@ -204,24 +204,6 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
     }
 
     @Override
-    public void dataDocsActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        UserSign us = new UserSign(TrayPtn.getCurrForm());
-        us.setBackCall(new IBackCall()
-        {
-
-            @Override
-            public boolean callBack(Object sender, java.util.EventListener event, String... params)
-            {
-                return configDocs(params);
-            }
-        });
-        us.initView(ConsEnv.INT_SIGN_CS);
-        us.initLang();
-        us.initData();
-    }
-
-    @Override
     public void helpSKeyActionPerformed(java.awt.event.ActionEvent evt)
     {
         MdiDialog mdiDialog = MdiDialog.getInstance();
@@ -2066,28 +2048,6 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         return true;
     }
 
-
-    private boolean configDocs(String... params)
-    {
-        if (params == null || params.length < 3)
-        {
-            return false;
-        }
-
-        try
-        {
-            PwdsItem pwds = new PwdsItem();
-            pwds.getP30F0203().append(params[1]).append('\n').append(params[2]);
-            UserMdl.getGridMdl().enCrypt(pwds);
-            DBA3000.saveConfig("google_docs", pwds.getP30F0203().toString());
-        }
-        catch (Exception ex)
-        {
-            Logs.exception(ex);
-            Lang.showMesg(TrayPtn.getCurrForm(), null, ex.getLocalizedMessage());
-        }
-        return true;
-    }
     /**
      * 
      */

@@ -17,18 +17,16 @@ import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.TrayPtn;
 import com.magicpwd.x.LckDialog;
-import java.awt.event.ActionEvent;
-import javax.swing.AbstractAction;
 
 /**
  *
  * @author Administrator
  */
-public class BackupAction extends AbstractAction
+public class BackupAction extends javax.swing.AbstractAction
 {
 
     @Override
-    public void actionPerformed(ActionEvent e)
+    public void actionPerformed(java.awt.event.ActionEvent e)
     {
         if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F7A40, "确认要执行备份数据到云端的操作吗，此操作将需要一定的时间？"))
         {
@@ -82,9 +80,12 @@ public class BackupAction extends AbstractAction
                 return;
             }
 
-            Sender mail = new Sender(new Connect("pop3", data[0], data[1]));
+            Connect connect = new Connect(data[0], data[1], "smtp");
+            connect.useDefault();
+            Sender mail = new Sender(connect);
+            mail.setFrom("sync@magicpwd.com");
+            mail.setTo(data[0]);
             mail.setSubject("魔方密码备份文件");
-            mail.setContent(null);
             mail.addAttachment(ConsEnv.FILE_SYNC, MagicPwd.endSave().getAbsolutePath());
             //if (!new Google().backup(data[0], data[1], ConsEnv.FILE_SYNC, MagicPwd.endSave()))
             if (!mail.send())

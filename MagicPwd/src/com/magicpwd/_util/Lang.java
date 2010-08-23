@@ -72,26 +72,7 @@ public class Lang
     public static void setWText(BtnLabel c, String sid, String def)
     {
         String txt = getLang(sid, def);
-        int idx = -1;
-        // 快捷字符替换
-        if (txt.length() > 0)
-        {
-            idx = txt.indexOf('&');
-            if (idx >= 0)
-            {
-                txt = txt.replace("&", "");
-                if (txt.length() > idx)
-                {
-                    c.setMnemonic(txt.charAt(idx));
-                }
-            }
-        }
-
-        if (!(idx == 0 && txt.length() == 1))
-        {
-            c.setText(txt);
-            c.setDisplayedMnemonicIndex(idx);
-        }
+        Bean.setText(c, txt);
     }
 
     public static void setWText(IcoLabel c, String sid, String def)
@@ -139,26 +120,7 @@ public class Lang
     public static void setWText(JLabel c, String sid, String def)
     {
         String txt = getLang(sid, def);
-        int idx = -1;
-        // 快捷字符替换
-        if (txt.length() > 0)
-        {
-            idx = txt.indexOf('&');
-            if (idx >= 0)
-            {
-                txt = txt.replace("&", "");
-                if (txt.length() > idx)
-                {
-                    c.setDisplayedMnemonic(txt.charAt(idx));
-                }
-            }
-        }
-
-        if (!(idx == 0 && txt.length() == 1))
-        {
-            c.setText(txt);
-            c.setDisplayedMnemonicIndex(idx);
-        }
+        Bean.setText(c, txt);
     }
 
     /**

@@ -78,8 +78,9 @@ public class ResumeAction extends AbstractAction
 
             java.io.File bakFile = java.io.File.createTempFile("magicpwd", ".amb");
             bakFile.deleteOnExit();
-            Reader mail = new Reader(new Connect("", data[0], data[1]));
-            //if (!new Google().resume(data[0], data[1], ConsEnv.FILE_SYNC, bakFile))
+            Connect connect = new Connect(data[0], data[1]);
+            connect.useDefault();
+            Reader mail = new Reader(connect);
             if (!mail.read(null))
             {
                 dialog.setVisible(false);

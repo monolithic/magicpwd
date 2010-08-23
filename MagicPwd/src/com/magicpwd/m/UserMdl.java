@@ -30,7 +30,6 @@ public final class UserMdl
      * 程序运行模式
      */
     private static int runMode;
-    private static MailCfg mc_MailCfg;
     private static UserCfg uc_UserCfg;
     private static UserDat ud_UserDat;
     private static UserSec us_UserSec;
@@ -138,26 +137,6 @@ public final class UserMdl
     public static UserCfg getUserCfg()
     {
         return uc_UserCfg;
-    }
-
-    public static void loadMailCfg()
-    {
-        mc_MailCfg = new MailCfg();
-        mc_MailCfg.loadCfg();
-    }
-
-    public static void saveMailCfg()
-    {
-        mc_MailCfg.saveCfg();
-    }
-
-    public static MailCfg getMailCfg()
-    {
-        if (mc_MailCfg == null)
-        {
-            loadMailCfg();
-        }
-        return mc_MailCfg;
     }
 
     public static UserDat getDat()

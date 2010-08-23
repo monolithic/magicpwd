@@ -10,7 +10,6 @@ import com.magicpwd._face.IBackCall;
 import com.magicpwd._mail.Connect;
 import com.magicpwd._mail.MailDlg;
 import com.magicpwd._user.UserSign;
-import com.magicpwd._util.Char;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -431,38 +430,14 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         {
             return;
         }
-        String type = UserMdl.getMailCfg().getCfg(host + ".type");
-        if (!com.magicpwd._util.Char.isValidate(type))
+
+        final Connect connect = new Connect(mail, pwds);
+        connect.setUsername(user);
+        if (!connect.useDefault())
         {
             Lang.showMesg(mailDlg, null, "查找不到对应的服务信息，如有疑问请与作者联系！");
             return;
         }
-
-        final Connect connect = new Connect(type, mail, pwds);
-        connect.setUsername(user);
-
-        // 读取服务器配置
-        String cfg = UserMdl.getMailCfg().getCfg(type + '.' + host);
-        if (!com.magicpwd._util.Char.isValidate(cfg))
-        {
-            return;
-        }
-
-        // 服务器地址
-        String[] arr = (cfg + ":::false").split("[:]");
-        connect.setHost(arr[0]);
-
-        // 服务器端口
-        cfg = arr[1].trim();
-        if (Char.isValidatePositiveInteger(cfg))
-        {
-            connect.setPort(Integer.parseInt(cfg));
-        }
-
-        // 是否需要身份认证
-        connect.setAuth("true".equalsIgnoreCase(arr[2].trim().toLowerCase()));
-        // 是否需要安全认证
-        connect.setJssl("true".equalsIgnoreCase(arr[3].trim().toLowerCase()));
 
         mailDlg.setVisible(true);
         new Thread()

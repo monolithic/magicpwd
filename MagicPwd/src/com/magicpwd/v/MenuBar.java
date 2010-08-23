@@ -14,6 +14,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.c.MPwdEvt;
 import com.magicpwd.e.data.BackupAction;
+import com.magicpwd.e.data.ConfigAction;
 import com.magicpwd.e.data.ResumeAction;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.x.MdiDialog;
@@ -531,15 +532,7 @@ public class MenuBar extends JMenuBar
         mu_DataMenu.addSeparator();
 
         mi_DataDocs = new javax.swing.JMenuItem();
-        mi_DataDocs.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                me_MenuEvent.dataDocsActionPerformed(evt);
-            }
-        });
+        mi_DataDocs.addActionListener(new ConfigAction());
         mu_DataMenu.add(mi_DataDocs);
 
         mi_DataSync = new javax.swing.JMenuItem();
