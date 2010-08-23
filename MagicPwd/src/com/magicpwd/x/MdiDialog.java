@@ -175,9 +175,9 @@ public class MdiDialog extends javax.swing.JDialog
 
     public void initLang()
     {
-        Lang.setWText(bt_Applied, LangRes.P30FA50E, "应用(&A)");
-        Lang.setWText(bt_Confirm, LangRes.P30FA50A, "确定(&O)");
-        Lang.setWText(bt_Discard, LangRes.P30FA50B, "取消(&C)");
+        Lang.setWText(bt_Applied, LangRes.P30FA50E, "应用(@A)");
+        Lang.setWText(bt_Confirm, LangRes.P30FA50A, "确定(@O)");
+        Lang.setWText(bt_Discard, LangRes.P30FA50B, "取消(@C)");
     }
 
     public void initData()

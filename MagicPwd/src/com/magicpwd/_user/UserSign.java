@@ -461,8 +461,8 @@ public class UserSign extends javax.swing.JPanel
         switch (signType)
         {
             case ConsEnv.INT_SIGN_IN:
-                Lang.setWText(lb_UserName, LangRes.P30FA301, "用户(&U)");
-                Lang.setWText(lb_UserKey0, LangRes.P30FA302, "口令(&P)");
+                Lang.setWText(lb_UserName, LangRes.P30FA301, "用户(@U)");
+                Lang.setWText(lb_UserKey0, LangRes.P30FA302, "口令(@P)");
 
                 Lang.setWText(lb_UsrLabel, LangRes.P30FA30E, "口令找回");
                 Lang.setWTips(lb_UsrLabel, LangRes.P30FA30F, "找回您的登录口令");
@@ -470,83 +470,83 @@ public class UserSign extends javax.swing.JPanel
                 Lang.setWText(lb_KeyLabel, LangRes.P30FA310, "屏幕键盘");
                 Lang.setWTips(lb_KeyLabel, LangRes.P30FA311, "使用屏幕键盘输入");
 
-                Lang.setWText(bt_Confrm, LangRes.P30FA501, "登录(&S)");
+                Lang.setWText(bt_Confrm, LangRes.P30FA501, "登录(@S)");
 
-                Lang.setWText(bt_Cancel, LangRes.P30FA504, "取消(&C)");
+                Lang.setWText(bt_Cancel, LangRes.P30FA504, "取消(@C)");
 
                 setTitle(Lang.getLang(LangRes.P30FA201, "用户登录"));
 
                 lb_UsrLabel.setVisible(true);
                 break;
             case ConsEnv.INT_SIGN_RS:
-                Lang.setWText(lb_UserName, LangRes.P30FA301, "用户(&U)");
+                Lang.setWText(lb_UserName, LangRes.P30FA301, "用户(@U)");
 
-                Lang.setWText(lb_UserKey0, LangRes.P30FA302, "口令(&P)");
+                Lang.setWText(lb_UserKey0, LangRes.P30FA302, "口令(@P)");
 
-                Lang.setWText(bt_Confrm, LangRes.P30FA501, "登录(&S)");
+                Lang.setWText(bt_Confrm, LangRes.P30FA501, "登录(@S)");
 
-                Lang.setWText(bt_Cancel, LangRes.P30FA504, "取消(&C)");
+                Lang.setWText(bt_Cancel, LangRes.P30FA504, "取消(@C)");
 
                 setTitle(Lang.getLang(LangRes.P30FA202, "身份验证"));
 
                 lb_UsrLabel.setVisible(false);
                 break;
             case ConsEnv.INT_SIGN_UP:
-                Lang.setWText(lb_UserName, LangRes.P30FA301, "用户(&U)");
+                Lang.setWText(lb_UserName, LangRes.P30FA301, "用户(@U)");
 
-                Lang.setWText(lb_UserKey0, LangRes.P30FA302, "口令(&P)");
+                Lang.setWText(lb_UserKey0, LangRes.P30FA302, "口令(@P)");
 
-                Lang.setWText(lb_UserKey1, LangRes.P30FA303, "确认(&R)");
+                Lang.setWText(lb_UserKey1, LangRes.P30FA303, "确认(@R)");
 
                 Lang.setWText(lb_KeyLabel, LangRes.P30FA307, "数据升级");
                 Lang.setWTips(lb_KeyLabel, LangRes.P30FA308, "从旧版本软件升级数据");
 
-                Lang.setWText(bt_Confrm, LangRes.P30FA502, "注册(&S)");
+                Lang.setWText(bt_Confrm, LangRes.P30FA502, "注册(@S)");
 
-                Lang.setWText(bt_Cancel, LangRes.P30FA504, "取消(&C)");
+                Lang.setWText(bt_Cancel, LangRes.P30FA504, "取消(@C)");
 
                 setTitle(Lang.getLang(LangRes.P30FA203, "用户注册"));
 
                 lb_UsrLabel.setVisible(false);
                 break;
             case ConsEnv.INT_SIGN_PK:
-                Lang.setWText(lb_UserKey0, LangRes.P30FA304, "现有口令(&O)");
+                Lang.setWText(lb_UserKey0, LangRes.P30FA304, "现有口令(@O)");
 
-                Lang.setWText(lb_UserKey1, LangRes.P30FA305, "修改口令(&N)");
+                Lang.setWText(lb_UserKey1, LangRes.P30FA305, "修改口令(@N)");
 
-                Lang.setWText(lb_UserKey2, LangRes.P30FA306, "口令确认(&R)");
+                Lang.setWText(lb_UserKey2, LangRes.P30FA306, "口令确认(@R)");
 
-                Lang.setWText(bt_Confrm, LangRes.P30FA503, "修改(&S)");
+                Lang.setWText(bt_Confrm, LangRes.P30FA503, "修改(@S)");
 
-                Lang.setWText(bt_Cancel, LangRes.P30FA504, "取消(&C)");
+                Lang.setWText(bt_Cancel, LangRes.P30FA504, "取消(@C)");
 
                 setTitle(Lang.getLang(LangRes.P30FA205, "登录口令修改"));
 
                 lb_UsrLabel.setVisible(false);
                 break;
             case ConsEnv.INT_SIGN_FP:
-                Lang.setWText(lb_UserName, LangRes.P30FA30C, "登录用户(&U)");
+                Lang.setWText(lb_UserName, LangRes.P30FA30C, "登录用户(@U)");
 
-                Lang.setWText(lb_UserKey0, LangRes.P30FA30D, "安全口令(&P)");
+                Lang.setWText(lb_UserKey0, LangRes.P30FA30D, "安全口令(@P)");
 
-                Lang.setWText(bt_Confrm, LangRes.P30FA509, "找回(&F)");
+                Lang.setWText(bt_Confrm, LangRes.P30FA509, "找回(@F)");
 
-                Lang.setWText(bt_Cancel, LangRes.P30FA504, "取消(&C)");
+                Lang.setWText(bt_Cancel, LangRes.P30FA504, "取消(@C)");
 
                 setTitle(Lang.getLang(LangRes.P30FA204, "口令找回"));
 
                 lb_UsrLabel.setVisible(false);
                 break;
             case ConsEnv.INT_SIGN_SK:
-                Lang.setWText(lb_UserKey0, LangRes.P30FA304, "现有口令(&O)");
+                Lang.setWText(lb_UserKey0, LangRes.P30FA304, "现有口令(@O)");
 
-                Lang.setWText(lb_UserKey1, LangRes.P30FA30D, "安全口令(&P)");
+                Lang.setWText(lb_UserKey1, LangRes.P30FA30D, "安全口令(@P)");
 
-                Lang.setWText(lb_UserKey2, LangRes.P30FA306, "口令确认(&R)");
+                Lang.setWText(lb_UserKey2, LangRes.P30FA306, "口令确认(@R)");
 
-                Lang.setWText(bt_Confrm, LangRes.P30FA508, "设定(&S)");
+                Lang.setWText(bt_Confrm, LangRes.P30FA508, "设定(@S)");
 
-                Lang.setWText(bt_Cancel, LangRes.P30FA504, "取消(&C)");
+                Lang.setWText(bt_Cancel, LangRes.P30FA504, "取消(@C)");
 
                 setTitle(Lang.getLang(LangRes.P30FA206, "安全口令修改"));
 
@@ -558,13 +558,13 @@ public class UserSign extends javax.swing.JPanel
                 lb_UsrLabel.setVisible(false);
                 break;
             case ConsEnv.INT_SIGN_CS:
-                Lang.setWText(lb_UserName, LangRes.P30FA301, "用户(&U)");
+                Lang.setWText(lb_UserName, LangRes.P30FA301, "用户(@U)");
 
-                Lang.setWText(lb_UserKey0, LangRes.P30FA302, "口令(&P)");
+                Lang.setWText(lb_UserKey0, LangRes.P30FA302, "口令(@P)");
 
-                Lang.setWText(bt_Confrm, LangRes.P30FA508, "设定(&S)");
+                Lang.setWText(bt_Confrm, LangRes.P30FA508, "设定(@S)");
 
-                Lang.setWText(bt_Cancel, LangRes.P30FA504, "取消(&C)");
+                Lang.setWText(bt_Cancel, LangRes.P30FA504, "取消(@C)");
 
                 setTitle(Lang.getLang(LangRes.P30FA20B, "配置Google Docs账户"));
 

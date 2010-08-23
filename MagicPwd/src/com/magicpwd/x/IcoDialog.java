@@ -100,9 +100,9 @@ public class IcoDialog extends javax.swing.JDialog
 
     public void initLang()
     {
-        Lang.setWText(bt_Select, LangRes.P30FA50C, "选择(&C)");
+        Lang.setWText(bt_Select, LangRes.P30FA50C, "选择(@C)");
 
-        Lang.setWText(bt_Append, LangRes.P30FA50D, "追加(&A)");
+        Lang.setWText(bt_Append, LangRes.P30FA50D, "追加(@A)");
 
         this.setTitle(Lang.getLang(LangRes.P30FA50F, "徽标"));
     }

@@ -88,9 +88,9 @@ public class DatDialog extends javax.swing.JDialog
 
     public void initLang()
     {
-        Lang.setWText(bt_Update, LangRes.P30FA50A, "确定(&O)");
+        Lang.setWText(bt_Update, LangRes.P30FA50A, "确定(@O)");
 
-        Lang.setWText(bt_Cancel, LangRes.P30FA50B, "取消(&C)");
+        Lang.setWText(bt_Cancel, LangRes.P30FA50B, "取消(@C)");
     }
 
     public void initData()

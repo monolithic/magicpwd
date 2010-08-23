@@ -82,9 +82,9 @@ public class FindBar extends javax.swing.JPanel
 
     public void initLang()
     {
-        Lang.setWText(lb_ItemFind, LangRes.P30F7301, "查找(&X)");
+        Lang.setWText(lb_ItemFind, LangRes.P30F7301, "查找(@X)");
 
-        Lang.setWText(bt_ItemFind, LangRes.P30F7302, "查询(&Q)");
+        Lang.setWText(bt_ItemFind, LangRes.P30F7302, "查询(@Q)");
     }
 
     public void initData()
