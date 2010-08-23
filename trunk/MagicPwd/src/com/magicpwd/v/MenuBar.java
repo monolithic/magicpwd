@@ -888,7 +888,7 @@ public class MenuBar extends JMenuBar
 
     private void initSkinLang()
     {
-        Lang.setWText(mu_SkinMenu, LangRes.P30F7631, "风格(&L)");
+        Lang.setWText(mu_SkinMenu, LangRes.P30F7631, "风格(@L)");
     }
 
     private void initHelpLang()

@@ -322,16 +322,16 @@ public class MenuPop extends JPopupMenu
 
         int i = 0;
         Lang.setWText(mu_ListMode, LangRes.P30F7D1B, "标记为：");
-        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D1C, "默认(&0)");
-        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D1D, "常使用(&1)");
-        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D1E, "待注册(&2)");
-        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D1F, "待认证(&3)");
-        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D20, "待激活(&4)");
-        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D21, "仅测试(&5)");
-        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D22, "已过期(&6)");
-        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D23, "已丢失(&7)");
-        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D24, "被禁用(&8)");
-        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D25, "已删除(&9)");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D1C, "默认(@0)");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D1D, "常使用(@1)");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D1E, "待注册(@2)");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D1F, "待认证(@3)");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D20, "待激活(@4)");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D21, "仅测试(@5)");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D22, "已过期(@6)");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D23, "已丢失(@7)");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D24, "被禁用(@8)");
+        Lang.setWText(mi_ListMode[i++], LangRes.P30F7D25, "已删除(@9)");
 
         i = 0;
         Lang.setWText(mu_ListNote, LangRes.P30F7D26, "重要性：");
@@ -353,7 +353,7 @@ public class MenuPop extends JPopupMenu
         Lang.setWText(mi_ListSkey[i++], LangRes.P30F7D32, "注册时间");
         Lang.setWText(mi_ListSkey[i++], LangRes.P30F7D33, "到期时间");
 
-        Lang.setWText(mi_KindMove, LangRes.P30F7D1A, "把数据迁移到...(&M)");
+        Lang.setWText(mi_KindMove, LangRes.P30F7D1A, "把数据迁移到...(@M)");
 
         Lang.setWText(mi_HistView, LangRes.P30F7D07, "查看历史");
     }

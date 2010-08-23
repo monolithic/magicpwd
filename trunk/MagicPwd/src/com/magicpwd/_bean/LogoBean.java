@@ -112,9 +112,9 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean, IBackCall
     {
         dataEdit.initLang();
 
-        Lang.setWText(lb_PropName, LangRes.P30F131D, "徽标(&P)");
+        Lang.setWText(lb_PropName, LangRes.P30F131D, "徽标(@P)");
 
-        Lang.setWText(lb_PropData, LangRes.P30F131E, "名称(&N)");
+        Lang.setWText(lb_PropData, LangRes.P30F131E, "名称(@N)");
 
         Lang.setWText(ib_PropName, LangRes.P30F131F, "&O");
         Lang.setWTips(ib_PropName, LangRes.P30F1320, "点击选择徽标(Alt + O)");
