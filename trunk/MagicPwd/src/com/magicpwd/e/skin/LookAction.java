@@ -10,7 +10,6 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.UserMdl;
-import com.magicpwd.v.TrayPtn;
 import javax.swing.AbstractAction;
 
 /**
@@ -30,19 +29,17 @@ public class LookAction extends AbstractAction
         }
 
         String look;
-        final String name;
+        String name;
 
         if (ConsEnv.SKIN_DEFAULT.equals(command))
         {
             look = ConsEnv.SKIN_DEFAULT;
-            UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN_NAME, ConsEnv.SKIN_DEFAULT);
-            name = javax.swing.UIManager.getCrossPlatformLookAndFeelClassName();
+            name = ConsEnv.SKIN_DEFAULT;
         }
         else if (ConsEnv.SKIN_SYSTEM.equals(command))
         {
             look = ConsEnv.SKIN_SYSTEM;
-            UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN_NAME, ConsEnv.SKIN_SYSTEM);
-            name = javax.swing.UIManager.getSystemLookAndFeelClassName();
+            name = ConsEnv.SKIN_SYSTEM;
         }
         else
         {
@@ -56,16 +53,8 @@ public class LookAction extends AbstractAction
             UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN_NAME, name);
         }
         UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN_LOOK, look);
+        UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN_NAME, name);
 
-        javax.swing.SwingUtilities.invokeLater(new Runnable()
-        {
-
-            @Override
-            public void run()
-            {
-                TrayPtn.changeSkin(name);
-            }
-        });
-        Lang.showMesg(null, LangRes.P30FAA1B, "系统不能保证风格切换正常，请重新启动程序以使用新的界面风格！");
+        Lang.showMesg(null, LangRes.P30FAA1B, "新外观将在重启后生效！\n注意：一些外观可能造成性能问题，如果您觉得所选择的外观使系统运行变慢，\n　　　请选择使用“默认”或“系统”外观！");
     }
 }

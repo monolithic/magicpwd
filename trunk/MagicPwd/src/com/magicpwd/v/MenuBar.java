@@ -889,8 +889,6 @@ public class MenuBar extends JMenuBar
     private void initSkinLang()
     {
         Lang.setWText(mu_SkinMenu, LangRes.P30F7631, "风格(&L)");
-
-//        Lang.setWText(mi_SkinSystem, LangRes.P30F7632, "系统风格(&S)");
     }
 
     private void initHelpLang()
@@ -1012,7 +1010,6 @@ public class MenuBar extends JMenuBar
     private javax.swing.JMenuItem mi_UserUpdate;
     private javax.swing.JMenuItem mi_UserSecret;
     private javax.swing.JMenu mu_SkinMenu;
-    private javax.swing.JCheckBoxMenuItem mi_SkinSystem;
     private javax.swing.JMenu mu_HelpMenu;
     private javax.swing.JMenuItem mi_HelpHelp;
     private javax.swing.JMenuItem mi_HelpSite;

@@ -9,6 +9,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.File;
+import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.e.skin.LookAction;
 import com.magicpwd.r.AmonFF;
@@ -183,10 +184,10 @@ public class MenuPtn
         {
             try
             {
-                prop.load(new java.io.FileInputStream(ams));
+                prop.load(new java.io.FileReader(ams));
                 javax.swing.JMenuItem item = new javax.swing.JMenuItem();
-                Bean.setText(item, prop.getProperty("text"));
-                Bean.setTips(item, prop.getProperty("tips"));
+                Bean.setText(item, getLang(prop, "text"));
+                Bean.setTips(item, getLang(prop, "tips"));
                 skinMenu.add(item);
                 prop.clear();
             }
@@ -245,7 +246,6 @@ public class MenuPtn
 
         lookMenu.addSeparator();
 
-        java.util.Properties prop = new java.util.Properties();
         for (java.io.File dir : dirs)
         {
             java.io.File aml = new java.io.File(dir, ConsEnv.SKIN_LOOK_FILE);
@@ -255,14 +255,64 @@ public class MenuPtn
             }
             try
             {
-                prop.load(new java.io.FileInputStream(aml));
-                item = new javax.swing.JCheckBoxMenuItem(action);
-                Bean.setText(item, prop.getProperty("text"));
-                Bean.setTips(item, prop.getProperty("tips"));
-                item.setActionCommand(dir.getName() + ',' + prop.getProperty("class"));
-                lookMenu.add(item);
-                group.add(item);
-                prop.clear();
+                Document document = new SAXReader().read(new java.io.FileInputStream(aml));
+                if (document == null)
+                {
+                    continue;
+                }
+                Element root = document.getRootElement();
+                if (root == null)
+                {
+                    continue;
+                }
+                Element look = root.element("look");
+                if (look == null)
+                {
+                    continue;
+                }
+                java.util.List<?> items = look.elements("item");
+                if (items == null || items.size() < 1)
+                {
+                    continue;
+                }
+                if (items.size() == 1)
+                {
+                    Element element = look.element("item");
+
+                    item = new javax.swing.JCheckBoxMenuItem(action);
+                    Bean.setText(item, getLang(element.attributeValue("text")));
+                    Bean.setTips(item, getLang(element.attributeValue("tips")));
+                    item.setActionCommand(dir.getName() + ',' + element.attributeValue("class"));
+                    lookMenu.add(item);
+                    group.add(item);
+                }
+                else
+                {
+                    String grpText = getLang(look.attributeValue("group"));
+                    if (!com.magicpwd._util.Char.isValidate(grpText))
+                    {
+                        grpText = dir.getName();
+                    }
+                    javax.swing.JMenu subMenu = new javax.swing.JMenu();
+                    Bean.setText(subMenu, grpText);
+                    lookMenu.add(subMenu);
+
+                    for (Object object : items)
+                    {
+                        if (!(object instanceof Element))
+                        {
+                            continue;
+                        }
+                        Element element = (Element) object;
+
+                        item = new javax.swing.JCheckBoxMenuItem(action);
+                        Bean.setText(item, getLang(element.attributeValue("text")));
+                        Bean.setTips(item, getLang(element.attributeValue("tips")));
+                        item.setActionCommand(dir.getName() + ',' + element.attributeValue("class"));
+                        subMenu.add(item);
+                        group.add(item);
+                    }
+                }
             }
             catch (Exception exp)
             {
@@ -354,5 +404,20 @@ public class MenuPtn
     private javax.swing.Icon createIcon(String path)
     {
         return null;
+    }
+
+    private static String getLang(java.util.Properties prop, String text)
+    {
+        if (text == null)
+        {
+            return text;
+        }
+        text = prop.getProperty(text);
+        return java.util.regex.Pattern.matches("^[$]P30F[0123456789ABCDEF]{4}$", text) ? Lang.getLang(text, text) : text;
+    }
+
+    private static String getLang(String text)
+    {
+        return (text != null && java.util.regex.Pattern.matches("^[$]P30F[0123456789ABCDEF]{4}$", text)) ? Lang.getLang(text, text) : text;
     }
 }
