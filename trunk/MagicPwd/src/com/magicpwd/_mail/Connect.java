@@ -31,6 +31,7 @@ public class Connect
     private String password;
     private java.util.Properties oldProp;
     private java.util.Properties newProp;
+    private static java.util.Properties mailCfg;
 
     static
     {
@@ -39,11 +40,15 @@ public class Connect
 
     public Connect()
     {
-        oldProp = new java.util.Properties();
-        newProp = new java.util.Properties();
+        this(null, null);
     }
 
-    public Connect(String protocol, String mail, String pwds)
+    public Connect(String mail, String pwds)
+    {
+        this(mail, pwds, null);
+    }
+
+    public Connect(String mail, String pwds, String protocol)
     {
         this.protocol = protocol;
         this.mail = mail;
@@ -60,7 +65,7 @@ public class Connect
     {
         if (host == null)
         {
-            getDefaultUserHost();
+            getDefaultHost();
         }
         return host;
     }
@@ -104,7 +109,7 @@ public class Connect
     {
         if (username == null)
         {
-            getDefaultUserHost();
+            getDefaultHost();
         }
         return username;
     }
@@ -171,7 +176,66 @@ public class Connect
         this.username = username;
     }
 
-    private void getDefaultUserHost()
+    public boolean useDefault()
+    {
+        if (!com.magicpwd._util.Char.isValidateEmail(mail))
+        {
+            return false;
+        }
+
+        if (mailCfg == null)
+        {
+            mailCfg = new Properties();
+            try
+            {
+                java.io.File file = new java.io.File(ConsEnv.DIR_DAT, "mail.config");
+                if (!file.exists() || !file.isFile() || !file.canRead())
+                {
+                    return false;
+                }
+                java.io.FileInputStream fis = new java.io.FileInputStream(file);
+                mailCfg.load(fis);
+                fis.close();
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+        }
+
+        // 服务器地址
+        host = mail.substring(mail.indexOf('@') + 1);
+        String type = mailCfg.getProperty(host + ".type");
+        if (!com.magicpwd._util.Char.isValidate(type))
+        {
+            return false;
+        }
+        String cfg = mailCfg.getProperty(type + '.' + host);
+        if (!com.magicpwd._util.Char.isValidate(cfg))
+        {
+            return false;
+        }
+
+        // 服务器地址
+        String[] arr = (cfg + ":::false").split("[:]");
+        host = arr[0];
+
+        // 服务器端口
+        cfg = arr[1].trim();
+        if (com.magicpwd._util.Char.isValidatePositiveInteger(cfg))
+        {
+            port = Integer.parseInt(cfg);
+        }
+
+        // 是否需要身份认证
+        auth = "true".equalsIgnoreCase(arr[2].trim().toLowerCase());
+        // 是否需要安全认证
+        jssl = "true".equalsIgnoreCase(arr[3].trim().toLowerCase());
+
+        return true;
+    }
+
+    private void getDefaultHost()
     {
         int at = mail.indexOf('@');
         if (at > 0)
@@ -183,7 +247,7 @@ public class Connect
 
     public Properties getProperties()
     {
-        Properties prop = new Properties();
+        Properties prop = System.getProperties();//new Properties();
         prop.put(com.magicpwd._util.Char.format("mail.{0}.user", getProtocol()), getUsername());
         prop.put(com.magicpwd._util.Char.format("mail.{0}.host", getProtocol()), getHost());
         prop.put(com.magicpwd._util.Char.format("mail.{0}.port", getProtocol()), getPort());

@@ -4,12 +4,43 @@
  */
 package com.magicpwd._util;
 
+import com.magicpwd._comp.BtnLabel;
+import com.magicpwd._cons.ConsEnv;
+
 /**
  *
  * @author Amon
  */
 public class Bean
 {
+
+    public static void setText(BtnLabel c, String t)
+    {
+        int i = -1;
+        // 快捷字符替换
+        if (t.length() > 0)
+        {
+            i = t.indexOf(ConsEnv.CHAR_ALT_KEY);
+            if (i >= 0)
+            {
+                t = t.replace(ConsEnv.CHAR_ALT_KEY, "");
+                if (t.length() > i)
+                {
+                    c.setMnemonic(t.charAt(i));
+                }
+            }
+        }
+
+        if (!(i == 0 && t.length() == 1))
+        {
+            c.setText(t);
+            if (i >= 0)
+            {
+                c.setText(t);
+                c.setDisplayedMnemonicIndex(i);
+            }
+        }
+    }
 
     /**
      * 设置按钮的显示文本
@@ -23,13 +54,40 @@ public class Bean
         // 快捷字符替换
         if (t.length() > 0)
         {
-            i = t.indexOf('@');
+            i = t.indexOf(ConsEnv.CHAR_ALT_KEY);
             if (i >= 0)
             {
-                t = t.replace("@", "");
+                t = t.replace(ConsEnv.CHAR_ALT_KEY, "");
                 if (t.length() > i)
                 {
                     c.setMnemonic(t.charAt(i));
+                }
+            }
+        }
+
+        if (!(i == 0 && t.length() == 1))
+        {
+            c.setText(t);
+            if (i >= 0)
+            {
+                c.setDisplayedMnemonicIndex(i);
+            }
+        }
+    }
+
+    public static void setText(javax.swing.JLabel c, String t)
+    {
+        int i = -1;
+        // 快捷字符替换
+        if (t.length() > 0)
+        {
+            i = t.indexOf(ConsEnv.CHAR_ALT_KEY);
+            if (i >= 0)
+            {
+                t = t.replace(ConsEnv.CHAR_ALT_KEY, "");
+                if (t.length() > i)
+                {
+                    c.setDisplayedMnemonic(t.charAt(i));
                 }
             }
         }
