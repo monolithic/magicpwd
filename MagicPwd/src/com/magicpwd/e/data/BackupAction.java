@@ -82,10 +82,12 @@ public class BackupAction extends javax.swing.AbstractAction
 
             Connect connect = new Connect(data[0], data[1], "smtp");
             connect.useDefault();
+            connect.setUsername(data[0]);
             Sender mail = new Sender(connect);
-            mail.setFrom("sync@magicpwd.com");
+            mail.setFrom(data[0]);
             mail.setTo(data[0]);
             mail.setSubject("魔方密码备份文件");
+            mail.appendContent("魔方密码备份文件，请不要手动删除此邮件！");
             mail.addAttachment(ConsEnv.FILE_SYNC, MagicPwd.endSave().getAbsolutePath());
             //if (!new Google().backup(data[0], data[1], ConsEnv.FILE_SYNC, MagicPwd.endSave()))
             if (!mail.send())
