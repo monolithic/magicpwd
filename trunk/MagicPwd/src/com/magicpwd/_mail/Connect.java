@@ -205,12 +205,20 @@ public class Connect
 
         // 服务器地址
         host = mail.substring(mail.indexOf('@') + 1);
-        String type = mailCfg.getProperty(host + ".type");
-        if (!com.magicpwd._util.Char.isValidate(type))
+        String cfg = null;
+        if (com.magicpwd._util.Char.isValidate(protocol))
         {
-            return false;
+            cfg = mailCfg.getProperty(protocol + '.' + host);
         }
-        String cfg = mailCfg.getProperty(type + '.' + host);
+        if (!com.magicpwd._util.Char.isValidate(cfg))
+        {
+            String type = mailCfg.getProperty(host + ".type");
+            if (!com.magicpwd._util.Char.isValidate(type))
+            {
+                return false;
+            }
+            cfg = mailCfg.getProperty(type + '.' + host);
+        }
         if (!com.magicpwd._util.Char.isValidate(cfg))
         {
             return false;
@@ -247,7 +255,10 @@ public class Connect
 
     public Properties getProperties()
     {
-        Properties prop = System.getProperties();//new Properties();
+        Properties prop = new Properties();
+        //prop.put("mail.debug", "true");
+        prop.put("username", getUsername());
+        prop.put("password", getPassword());
         prop.put(com.magicpwd._util.Char.format("mail.{0}.user", getProtocol()), getUsername());
         prop.put(com.magicpwd._util.Char.format("mail.{0}.host", getProtocol()), getHost());
         prop.put(com.magicpwd._util.Char.format("mail.{0}.port", getProtocol()), getPort());

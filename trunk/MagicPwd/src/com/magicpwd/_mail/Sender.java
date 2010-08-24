@@ -10,6 +10,7 @@ import javax.activation.FileDataSource;
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.Multipart;
+import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
@@ -24,8 +25,6 @@ import javax.mail.internet.MimeUtility;
 public class Sender extends Mailer
 {
 
-    private Multipart multipart = new MimeMultipart();
-
     public Sender(Connect connect)
     {
         super(connect);
@@ -38,7 +37,8 @@ public class Sender extends Mailer
             return false;
         }
 
-        Message message = new MimeMessage(getConnect().getSession());
+        Session session = getConnect().getSession();
+        MimeMessage message = new MimeMessage(session);
 
         message.setFrom(new InternetAddress(getFrom()));
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(getTo()));
@@ -55,25 +55,23 @@ public class Sender extends Mailer
             message.setSentDate(getSentDate());
         }
 
-
-        appendBodypart(getContent());
+        Multipart multipart = new MimeMultipart();
+        appendBodypart(multipart, getContent());
         for (S1S1 item : getAttachmentList())
         {
-            appendAttachment(item.getV(), item.getK());
+            appendAttachment(multipart, item.getV(), item.getK());
         }
         message.setContent(multipart);
         message.saveChanges();
 
-        //Transport transport = getConnect().getSession().getTransport();
-        //transport.connect("", "", "");
-
-        //transport.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
-        Transport.send(message);
-        //transport.close();
+        Transport transport = session.getTransport("smtp");
+        transport.connect(getConnect().getHost(), getConnect().getUsername(), getConnect().getPassword());
+        transport.sendMessage(message, message.getRecipients(Message.RecipientType.TO));
+        transport.close();
         return true;
     }
 
-    public boolean appendBodypart(String content) throws Exception
+    private boolean appendBodypart(Multipart multipart, String content) throws Exception
     {
         BodyPart bp = new MimeBodyPart();
         bp.setContent(content, getContentType());
@@ -81,7 +79,7 @@ public class Sender extends Mailer
         return true;
     }
 
-    private boolean appendAttachment(String path, String name) throws Exception
+    private boolean appendAttachment(Multipart multipart, String path, String name) throws Exception
     {
         if (!com.magicpwd._util.Char.isValidate(path))
         {
@@ -99,9 +97,9 @@ public class Sender extends Mailer
             name = file.getName();
         }
 
-        BodyPart bp = new MimeBodyPart();
-        FileDataSource fileds = new FileDataSource(file);
-        bp.setDataHandler(new DataHandler(fileds));
+        MimeBodyPart bp = new MimeBodyPart();
+        FileDataSource fds = new FileDataSource(file);
+        bp.setDataHandler(new DataHandler(fds));
         bp.setFileName(MimeUtility.encodeText(name));
         multipart.addBodyPart(bp);
         return true;
