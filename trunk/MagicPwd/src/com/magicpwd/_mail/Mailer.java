@@ -7,6 +7,8 @@ import com.magicpwd._comn.S1S1;
 import java.io.UnsupportedEncodingException;
 
 import javax.mail.Address;
+import javax.mail.Folder;
+import javax.mail.Store;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeUtility;
 
@@ -31,6 +33,19 @@ public abstract class Mailer
     public Mailer(Connect connect)
     {
         this.connect = connect;
+    }
+
+    public boolean backup() throws Exception
+    {
+        Store store = connect.getStore();
+        Folder folder = store.getDefaultFolder();
+        folder.open(Folder.READ_WRITE);
+        return true;
+    }
+
+    public boolean resume()
+    {
+        return true;
     }
 
     protected String decodeAddress(Address[] addresses) throws UnsupportedEncodingException

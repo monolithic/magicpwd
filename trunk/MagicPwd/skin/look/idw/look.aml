@@ -1,5 +1,5 @@
 <magicpwd>
-    <look group="Default">
-        <item text="IDW" tips="IDW" type="user" class="net.infonode.gui.laf.InfoNodeLookAndFeel" decorated="false" />
+    <look group="Default" type="user">
+        <item text="IDW" tips="IDW" class="net.infonode.gui.laf.InfoNodeLookAndFeel" decorated="false" />
     </look>
 </magicpwd>

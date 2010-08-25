@@ -28,30 +28,35 @@ public class LookAction extends AbstractAction
             return;
         }
 
+        String type;
         String look;
         String name;
 
         if (ConsCfg.DEF_SKIN_DEF.equals(command))
         {
+            type = "java";
             look = ConsCfg.DEF_SKIN_DEF;
             name = ConsCfg.DEF_SKIN_DEF;
         }
         else if (ConsEnv.SKIN_SYSTEM.equals(command))
         {
+            type = "java";
             look = ConsCfg.DEF_SKIN_SYS;
             name = ConsCfg.DEF_SKIN_SYS;
         }
         else
         {
-            String[] arr = command.split(",");
-            if (arr == null || arr.length != 2)
+            String[] arr = command.split("[:,]");
+            if (arr == null || arr.length != 3)
             {
                 return;
             }
-            look = arr[0];
-            name = arr[1];
+            type = arr[0];
+            look = arr[1];
+            name = arr[2];
             UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN_NAME, name);
         }
+        UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN_TYPE, type);
         UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN_LOOK, look);
         UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN_NAME, name);
 

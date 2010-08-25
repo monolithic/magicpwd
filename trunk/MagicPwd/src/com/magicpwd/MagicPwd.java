@@ -45,7 +45,7 @@ public class MagicPwd
         // 动态类库加载
         if (!loadExt())
         {
-            UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN_DECO, ConsCfg.DEF_FAIL);
+            UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN_DECO, ConsCfg.DEF_FALSE);
             UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN_LOOK, "system");
         }
 
@@ -58,7 +58,7 @@ public class MagicPwd
                 @Override
                 public void run()
                 {
-                    boolean deco = ConsCfg.DEF_TRUE.equalsIgnoreCase(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN_DECO, ConsCfg.DEF_FAIL));
+                    boolean deco = ConsCfg.DEF_TRUE.equalsIgnoreCase(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN_DECO, ConsCfg.DEF_FALSE));
                     javax.swing.JFrame.setDefaultLookAndFeelDecorated(deco);
                     javax.swing.JDialog.setDefaultLookAndFeelDecorated(deco);
 
@@ -149,7 +149,7 @@ public class MagicPwd
             return false;
         }
 
-        java.io.File file = new java.io.File("skin/look", name);
+        java.io.File file = new java.io.File("skin/look", look);
         if (!file.exists() || !file.canRead() || !file.isDirectory())
         {
             return false;
@@ -169,7 +169,7 @@ public class MagicPwd
                 urls[i] = jars[i].toURI().toURL();
             }
             java.net.URLClassLoader ucl = new java.net.URLClassLoader(urls);
-            ucl.loadClass("");
+            ucl.loadClass(name);
             return true;
         }
         catch (Exception exp)

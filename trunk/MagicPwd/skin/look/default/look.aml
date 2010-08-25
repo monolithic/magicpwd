@@ -1,5 +1,5 @@
 <magicpwd>
-    <look group="Default">
-        <item text="Default" tips="Default" type="java" class="default" decorated="false" />
+    <look group="Default" type="java">
+        <item text="Default" tips="Default" class="default" decorated="false" />
     </look>
 </magicpwd>
