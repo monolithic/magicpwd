@@ -128,7 +128,7 @@ public class DBA3000
      */
     private static void addDataSort(DBAccess dba)
     {
-        boolean asc = ConsCfg.DEF_TRUE.equals(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_VIEW_LIST_ASC, ConsCfg.DEF_FAIL));
+        boolean asc = ConsCfg.DEF_TRUE.equals(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_VIEW_LIST_ASC, ConsCfg.DEF_FALSE));
         String key = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_VIEW_LIST_KEY, "09");
 
         if (!Pattern.matches("^[0-9A-Z]{2}$", key))

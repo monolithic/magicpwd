@@ -399,7 +399,7 @@ public class Connect
     {
         if (com.magicpwd._util.Char.isValidate(messageId))
         {
-            newProp.setProperty(messageId, readed ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FAIL);
+            newProp.setProperty(messageId, readed ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
             return true;
         }
         return false;

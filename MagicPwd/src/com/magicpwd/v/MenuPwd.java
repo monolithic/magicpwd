@@ -399,7 +399,7 @@ public class MenuPwd extends JPopupMenu
      */
     private void mi_UrptMenuActionPerformed(java.awt.event.ActionEvent evt)
     {
-        tpltData.setSpec(EditItem.SPEC_PWDS_LOOP, mi_LoopMenu.isSelected() ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FAIL);
+        tpltData.setSpec(EditItem.SPEC_PWDS_LOOP, mi_LoopMenu.isSelected() ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
     private javax.swing.JMenu mu_SizeMenu;
     private javax.swing.JCheckBoxMenuItem mi_SizeDef;

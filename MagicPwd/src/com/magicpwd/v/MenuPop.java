@@ -236,13 +236,13 @@ public class MenuPop extends JPopupMenu
         ButtonGroup bg = new ButtonGroup();
         String[] prop = new String[]
         {
-            ConsCfg.DEF_TRUE, ConsCfg.DEF_FAIL
+            ConsCfg.DEF_TRUE, ConsCfg.DEF_FALSE
         };
         for (int i = 0; i < mi_ListSasc.length; i += 1)
         {
             cboxItem = new javax.swing.JCheckBoxMenuItem();
             cboxItem.setActionCommand(prop[i]);
-            cboxItem.setSelected(prop[i].equals(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_VIEW_LIST_ASC, ConsCfg.DEF_FAIL)));
+            cboxItem.setSelected(prop[i].equals(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_VIEW_LIST_ASC, ConsCfg.DEF_FALSE)));
             cboxItem.addActionListener(new java.awt.event.ActionListener()
             {
 

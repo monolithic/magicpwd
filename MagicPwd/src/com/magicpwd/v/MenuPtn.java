@@ -279,6 +279,7 @@ public class MenuPtn
                 {
                     continue;
                 }
+                String type = look.attributeValue("type");
                 if (items.size() == 1)
                 {
                     Element element = look.element("item");
@@ -287,7 +288,7 @@ public class MenuPtn
                     Bean.setText(item, getLang(element.attributeValue("text")));
                     Bean.setTips(item, getLang(element.attributeValue("tips")));
                     item.setSelected(skinName.equals(element.attributeValue("class")));
-                    item.setActionCommand(dir.getName() + ',' + element.attributeValue("class"));
+                    item.setActionCommand(type + ":" + dir.getName() + ',' + element.attributeValue("class"));
                     lookMenu.add(item);
                     group.add(item);
                 }
@@ -314,7 +315,7 @@ public class MenuPtn
                         Bean.setText(item, getLang(element.attributeValue("text")));
                         Bean.setTips(item, getLang(element.attributeValue("tips")));
                         item.setSelected(skinName.equals(element.attributeValue("class")));
-                        item.setActionCommand(dir.getName() + ',' + element.attributeValue("class"));
+                        item.setActionCommand(type + ":" + dir.getName() + ',' + element.attributeValue("class"));
                         subMenu.add(item);
                         group.add(item);
                     }

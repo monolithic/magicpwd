@@ -67,10 +67,10 @@ public final class UserCfg
 
     public final void loadDef()
     {
-        userCfg.setProperty(ConsCfg.CFG_VIEW_TOPS, ConsCfg.DEF_FAIL);
+        userCfg.setProperty(ConsCfg.CFG_VIEW_TOPS, ConsCfg.DEF_FALSE);
         userCfg.setProperty(ConsCfg.CFG_VIEW_MENU, ConsCfg.DEF_TRUE);
-        userCfg.setProperty(ConsCfg.CFG_VIEW_TOOL, ConsCfg.DEF_FAIL);
-        userCfg.setProperty(ConsCfg.CFG_VIEW_INFO, ConsCfg.DEF_FAIL);
+        userCfg.setProperty(ConsCfg.CFG_VIEW_TOOL, ConsCfg.DEF_FALSE);
+        userCfg.setProperty(ConsCfg.CFG_VIEW_INFO, ConsCfg.DEF_FALSE);
         userCfg.setProperty(ConsCfg.CFG_VIEW_FIND, ConsCfg.DEF_TRUE);
         userCfg.setProperty(ConsCfg.CFG_VIEW_TOOL_LOC, "North");
 
@@ -129,7 +129,7 @@ public final class UserCfg
      */
     public final void setMenuViw(boolean menuViw)
     {
-        userCfg.setProperty(ConsCfg.CFG_VIEW_MENU, menuViw ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FAIL);
+        userCfg.setProperty(ConsCfg.CFG_VIEW_MENU, menuViw ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
     /**
@@ -146,7 +146,7 @@ public final class UserCfg
      */
     public final void setToolViw(boolean toolViw)
     {
-        userCfg.setProperty(ConsCfg.CFG_VIEW_TOOL, toolViw ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FAIL);
+        userCfg.setProperty(ConsCfg.CFG_VIEW_TOOL, toolViw ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
     /**
@@ -163,7 +163,7 @@ public final class UserCfg
      */
     public final void setInfoViw(boolean infoViw)
     {
-        userCfg.setProperty(ConsCfg.CFG_VIEW_INFO, infoViw ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FAIL);
+        userCfg.setProperty(ConsCfg.CFG_VIEW_INFO, infoViw ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
     /**
@@ -180,7 +180,7 @@ public final class UserCfg
      */
     public final void setFindViw(boolean findViw)
     {
-        userCfg.setProperty(ConsCfg.CFG_VIEW_FIND, findViw ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FAIL);
+        userCfg.setProperty(ConsCfg.CFG_VIEW_FIND, findViw ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
     /**
@@ -334,7 +334,7 @@ public final class UserCfg
      */
     public final void setEditViw(boolean editViw)
     {
-        userCfg.setProperty(ConsCfg.CFG_VIEW_EDIT_VIW, editViw ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FAIL);
+        userCfg.setProperty(ConsCfg.CFG_VIEW_EDIT_VIW, editViw ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
     /**
@@ -351,7 +351,7 @@ public final class UserCfg
      */
     public final void setEditWnd(boolean editWnd)
     {
-        userCfg.setProperty(ConsCfg.CFG_VIEW_EDIT_WND, editWnd ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FAIL);
+        userCfg.setProperty(ConsCfg.CFG_VIEW_EDIT_WND, editWnd ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
     public final String getPwdsLoop()
@@ -373,7 +373,7 @@ public final class UserCfg
      */
     public final void setPwdsLoop(boolean pwdsLoop)
     {
-        userCfg.setProperty(ConsCfg.CFG_PWDS_LOOP, pwdsLoop ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FAIL);
+        userCfg.setProperty(ConsCfg.CFG_PWDS_LOOP, pwdsLoop ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
     public final void setUserLang(String lang)

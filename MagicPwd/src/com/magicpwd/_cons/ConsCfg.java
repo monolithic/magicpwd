@@ -168,7 +168,7 @@ public interface ConsCfg
     /**
      * 默认数据：否
      */
-    String DEF_FAIL = "false";
+    String DEF_FALSE = "false";
     /**
      * 默认风格：系统风格
      */
