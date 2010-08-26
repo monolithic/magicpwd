@@ -4,10 +4,17 @@
 package com.magicpwd._mail;
 
 import com.magicpwd._comn.S1S1;
+import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._cons.LangRes;
+import com.magicpwd._util.Jzip;
+import com.magicpwd._util.Lang;
 import java.io.UnsupportedEncodingException;
 
 import javax.mail.Address;
+import javax.mail.Flags.Flag;
 import javax.mail.Folder;
+import javax.mail.Message;
+import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeUtility;
@@ -16,7 +23,7 @@ import javax.mail.internet.MimeUtility;
  * @author Amon
  * 
  */
-public abstract class Mailer
+public class Mailer
 {
 
     private Connect connect;
@@ -35,17 +42,59 @@ public abstract class Mailer
         this.connect = connect;
     }
 
-    public boolean backup() throws Exception
+    public Message find(Folder folder, String from, String subject, String sentDate, String header) throws Exception
     {
-        Store store = connect.getStore();
-        Folder folder = store.getDefaultFolder();
-        folder.open(Folder.READ_WRITE);
-        return true;
+        Message[] messages = folder.getMessages();
+        if (messages != null)
+        {
+            for (Message message : messages)
+            {
+                if (subject == null || !subject.equals(decodeMessage(message.getSubject())))
+                {
+                    continue;
+                }
+                if (sentDate == null || !sentDate.equals(message.getSentDate().toString()))
+                {
+                    continue;
+                }
+                if (header == null || message.getHeader("magicpwd-sign") == null || header.equals(message.getHeader("magicpwd-sign")[0]))
+                {
+                    continue;
+                }
+                return message;
+            }
+        }
+        return null;
     }
 
-    public boolean resume()
+    public boolean resume() throws Exception
     {
-        return true;
+        // 删除已有备份邮件
+        Store store = connect.getStore();
+        Folder folder = store.getDefaultFolder();
+        folder.open(Folder.READ_ONLY);
+        Message message = find(folder, null, Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"), null, null);
+        if (message != null)
+        {
+            message.setFlag(Flag.DELETED, true);
+        }
+        folder.close(true);
+
+        Reader reader = new Reader(connect);
+        //reader.setAttachmentPath(ConsEnv.DIR_BAK);
+        if (reader.read(message))
+        {
+            for (S1S1 item : reader.getAttachmentList())
+            {
+                if (ConsEnv.FILE_SYNC.equals(item.getK()))
+                {
+                    Jzip.unZip(item.getV(), ConsEnv.DIR_DAT);
+                    //Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A3F, "数据恢复成功，您需要重新启动本程序！");
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     protected String decodeAddress(Address[] addresses) throws UnsupportedEncodingException

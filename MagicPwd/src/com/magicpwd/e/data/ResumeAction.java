@@ -6,6 +6,7 @@ package com.magicpwd.e.data;
 
 import com.magicpwd.MagicPwd;
 import com.magicpwd._comn.PwdsItem;
+import com.magicpwd._comn.S1S1;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._mail.Connect;
@@ -19,6 +20,9 @@ import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.TrayPtn;
 import com.magicpwd.x.LckDialog;
 import java.awt.event.ActionEvent;
+import javax.mail.Folder;
+import javax.mail.Message;
+import javax.mail.Store;
 import javax.swing.AbstractAction;
 
 /**
@@ -65,7 +69,7 @@ public class ResumeAction extends AbstractAction
             {
                 dialog.setVisible(false);
                 dialog.dispose();
-                Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A3A, "您还没有配置您的Google Docs账户信息！");
+                Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A3A, "您还没有配置您的POP邮箱信息！");
                 return;
             }
 
@@ -75,28 +79,37 @@ public class ResumeAction extends AbstractAction
             String[] data = docs.split("\n");
 
             MagicPwd.endSave();
-
-            java.io.File bakFile = java.io.File.createTempFile("magicpwd", ".amb");
-            bakFile.deleteOnExit();
             Connect connect = new Connect(data[0], data[1]);
             connect.useDefault();
+            connect.setUsername(data[0]);
             Reader mail = new Reader(connect);
-            if (!mail.read(null))
+
+            // 读取备份文件
+            Store store = connect.getStore();
+            Folder folder = store.getDefaultFolder();
+            folder.open(Folder.READ_ONLY);
+            Message message = mail.find(folder, null, Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"), null, null);
+            if (message == null)
             {
                 dialog.setVisible(false);
                 dialog.dispose();
-                Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A3E, "无法从Google Docs读取备份数据！");
+                Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A3E, "无法从POP邮箱读取备份数据！");
             }
 
-            java.io.File datFile = new java.io.File(ConsEnv.DIR_DAT);
-            java.io.File dirFile = datFile.getAbsoluteFile().getParentFile();
-            datFile.delete();
-            Jzip.unZip(bakFile, dirFile);
-
-            dialog.setVisible(false);
-            dialog.dispose();
-            Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A3F, "数据恢复成功，您需要重新启动本程序！");
-            System.exit(0);
+            if (mail.read(message))
+            {
+                for (S1S1 item : mail.getAttachmentList())
+                {
+                    if (ConsEnv.FILE_SYNC.equals(item.getK()))
+                    {
+                        Jzip.unZip(item.getV(), ".");
+                        dialog.setVisible(false);
+                        dialog.dispose();
+                        Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A3F, "数据恢复成功，您需要重新启动本程序！");
+                        System.exit(0);
+                    }
+                }
+            }
         }
         catch (Exception ex)
         {
