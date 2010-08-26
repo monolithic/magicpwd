@@ -32,6 +32,8 @@ public class Connect
     private java.util.Properties oldProp;
     private java.util.Properties newProp;
     private static java.util.Properties mailCfg;
+    private Session session;
+    private Store store;
 
     static
     {
@@ -283,23 +285,30 @@ public class Connect
 
     public Session getSession()
     {
-        return Session.getDefaultInstance(getProperties(), isAuth() ? new Authenticator()
+        if (session == null)
         {
-
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication()
+            session = Session.getDefaultInstance(getProperties(), isAuth() ? new Authenticator()
             {
-                return new PasswordAuthentication(getUsername(), getPassword());
-            }
-        } : null);
+
+                @Override
+                protected PasswordAuthentication getPasswordAuthentication()
+                {
+                    return new PasswordAuthentication(getUsername(), getPassword());
+                }
+            } : null);
+        }
+        return session;
     }
 
     public Store getStore() throws Exception
     {
-        Store store = getSession().getStore(getURLName());
-        if (!store.isConnected())
+        if (store == null)
         {
-            store.connect();
+            store = getSession().getStore(getURLName());
+            if (!store.isConnected())
+            {
+                store.connect();
+            }
         }
         return store;
     }

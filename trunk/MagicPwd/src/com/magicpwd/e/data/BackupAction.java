@@ -17,6 +17,10 @@ import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.TrayPtn;
 import com.magicpwd.x.LckDialog;
+import javax.mail.Flags.Flag;
+import javax.mail.Folder;
+import javax.mail.Message;
+import javax.mail.Store;
 
 /**
  *
@@ -62,7 +66,7 @@ public class BackupAction extends javax.swing.AbstractAction
             {
                 dialog.setVisible(false);
                 dialog.dispose();
-                Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A3A, "您还没有配置您的Google Docs账户信息！");
+                Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A3A, "您还没有配置您的POP邮箱信息！");
                 return;
             }
 
@@ -84,10 +88,22 @@ public class BackupAction extends javax.swing.AbstractAction
             connect.useDefault();
             connect.setUsername(data[0]);
             Sender mail = new Sender(connect);
+
+            // 删除已有文件
+            Store store = connect.getStore();
+            Folder folder = store.getDefaultFolder();
+            folder.open(Folder.READ_WRITE);
+            Message message = mail.find(folder, null, Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"), null, null);
+            if (message != null)
+            {
+                message.setFlag(Flag.DELETED, true);
+            }
+            folder.close(true);
+
             mail.setFrom(data[0]);
             mail.setTo(data[0]);
-            mail.setSubject("魔方密码备份文件");
-            mail.appendContent("魔方密码备份文件，请不要手动删除此邮件！");
+            mail.setSubject(Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"));
+            mail.setContent(Lang.getLang(LangRes.P30F7A49, "此邮件为魔方密码数据备份文件，请勿手动删除！"));
             mail.addAttachment(ConsEnv.FILE_SYNC, MagicPwd.endSave().getAbsolutePath());
             //if (!new Google().backup(data[0], data[1], ConsEnv.FILE_SYNC, MagicPwd.endSave()))
             if (!mail.send())
