@@ -31,9 +31,11 @@ public class KindProp extends JPanel implements IPropBean
     private javax.swing.tree.DefaultMutableTreeNode treeNode;
     private Kind kindItem;
     private boolean isUpdate;
+    private UserMdl coreMdl;
 
-    public KindProp()
+    public KindProp(UserMdl coreMdl)
     {
+        this.coreMdl = coreMdl;
     }
 
     @Override
@@ -55,7 +57,7 @@ public class KindProp extends JPanel implements IPropBean
     @Override
     public void initData()
     {
-        tr_KindList.setModel(UserMdl.getTreeMdl());
+        tr_KindList.setModel(coreMdl.getTreeMdl());
 
         kindItem = new Kind();
         viewInfo(kindItem);
@@ -350,7 +352,7 @@ public class KindProp extends JPanel implements IPropBean
 
         p1.remove(s);
         p2.add(s);
-        UserMdl.getTreeMdl().nodeStructureChanged(p2);
+        coreMdl.getTreeMdl().nodeStructureChanged(p2);
         tr_KindList.setSelectionPath(new TreePath(s.getPath()));
 
         Kind u = (Kind) p2.getUserObject();
@@ -384,7 +386,7 @@ public class KindProp extends JPanel implements IPropBean
         int i = o.getIndex(p);
         o.remove(i--);
         o.insert(p, i);
-        UserMdl.getTreeMdl().nodeStructureChanged(o);
+        coreMdl.getTreeMdl().nodeStructureChanged(o);
 
         tr_KindList.setSelectionPath(path);
 
@@ -419,7 +421,7 @@ public class KindProp extends JPanel implements IPropBean
         int i = o.getIndex(p);
         o.remove(i++);
         o.insert(p, i);
-        UserMdl.getTreeMdl().nodeStructureChanged(o);
+        coreMdl.getTreeMdl().nodeStructureChanged(o);
 
         tr_KindList.setSelectionPath(path);
 
@@ -449,7 +451,7 @@ public class KindProp extends JPanel implements IPropBean
         DefaultMutableTreeNode o = (DefaultMutableTreeNode) p.getParent();
         o.remove(s);
         p.add(s);
-        UserMdl.getTreeMdl().nodeStructureChanged(o);
+        coreMdl.getTreeMdl().nodeStructureChanged(o);
         tr_KindList.setSelectionPath(new TreePath(s.getPath()));
 
         Kind u = (Kind) p.getUserObject();
@@ -477,7 +479,7 @@ public class KindProp extends JPanel implements IPropBean
         }
 
         TreePath path = tr_KindList.getSelectionPath();
-        javax.swing.tree.DefaultMutableTreeNode node = (javax.swing.tree.DefaultMutableTreeNode) (path != null ? path.getLastPathComponent() : UserMdl.getTreeMdl().getRoot());
+        javax.swing.tree.DefaultMutableTreeNode node = (javax.swing.tree.DefaultMutableTreeNode) (path != null ? path.getLastPathComponent() : coreMdl.getTreeMdl().getRoot());
 
         if (kindItem == null)
         {
@@ -489,11 +491,11 @@ public class KindProp extends JPanel implements IPropBean
         kindItem.setC2010108(ta_KindDesp.getText());
         if (isUpdate)
         {
-            UserMdl.getTreeMdl().wUpdate(path, kindItem);
+            coreMdl.getTreeMdl().wUpdate(path, kindItem);
         }
         else
         {
-            UserMdl.getTreeMdl().wAppend(path, kindItem);
+            coreMdl.getTreeMdl().wAppend(path, kindItem);
         }
 
         kindItem = new Kind();
@@ -512,7 +514,7 @@ public class KindProp extends JPanel implements IPropBean
 
         if (Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F7A1A, "执行此操作后，此类别下的其它类别将会移动到根类别下，\n确认要删除此类别么？") == JOptionPane.YES_OPTION)
         {
-            UserMdl.getTreeMdl().wRemove(tr_KindList.getSelectionPath());
+            coreMdl.getTreeMdl().wRemove(tr_KindList.getSelectionPath());
         }
     }
 

@@ -11,7 +11,6 @@ import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IGridView;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
-import com.magicpwd.m.UserMdl;
 
 /**
  * 属性：过期提示
@@ -222,8 +221,8 @@ public class HintBean extends javax.swing.JPanel implements IEditBean
 
         itemData.setName(name);
         itemData.setData(data);
-        UserMdl.getGridMdl().setModified(true);
-        gridView.selectNext(UserMdl.getGridMdl().isUpdate() ? 0 : 1, true);
+        gridView.getCoreMdl().getGridMdl().setModified(true);
+        gridView.selectNext(gridView.getCoreMdl().getGridMdl().isUpdate() ? 0 : 1, true);
     }
 
     @Override

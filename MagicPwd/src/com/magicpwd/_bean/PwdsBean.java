@@ -13,7 +13,6 @@ import com.magicpwd._face.IGridView;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
-import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.MenuPwd;
 import com.magicpwd.v.TrayPtn;
 
@@ -196,7 +195,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     {
         if (Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
         {
-            UserMdl.getGridMdl().wRemove(itemData);
+            gridView.getCoreMdl().getGridMdl().wRemove(itemData);
             gridView.selectNext(0, true);
         }
     }
@@ -214,16 +213,16 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 
         itemData.setName(name);
         itemData.setData(new String(pf_PropData.getPassword()));
-        UserMdl.getGridMdl().setModified(true);
+        gridView.getCoreMdl().getGridMdl().setModified(true);
 
-        gridView.selectNext(UserMdl.getGridMdl().isUpdate() ? 0 : 1, true);
+        gridView.selectNext(gridView.getCoreMdl().getGridMdl().isUpdate() ? 0 : 1, true);
     }
 
     @Override
     public void copyDataActionPerformed(java.awt.event.ActionEvent evt)
     {
         pf_PropData.selectAll();
-        Util.setClipboardContents(new String(pf_PropData.getPassword()), UserMdl.getUserCfg().getStayTime());
+        Util.setClipboardContents(new String(pf_PropData.getPassword()), gridView.getCoreMdl().getUserCfg().getStayTime());
     }
 
     private void bt_PwdsUcfgActionPerformed(java.awt.event.ActionEvent evt)

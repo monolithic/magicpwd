@@ -10,6 +10,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IPropBean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
+import com.magicpwd.m.UserMdl;
 import java.util.Calendar;
 
 /**
@@ -18,6 +19,13 @@ import java.util.Calendar;
  */
 public class InfoProp extends javax.swing.JPanel implements IPropBean
 {
+
+    private UserMdl coreMdl;
+
+    public InfoProp(UserMdl coreMdl)
+    {
+        this.coreMdl = coreMdl;
+    }
 
     @Override
     public void initView()

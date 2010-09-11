@@ -6,6 +6,7 @@ package com.magicpwd._prop;
 
 import com.magicpwd._comn.S1S1;
 import com.magicpwd._face.IPropBean;
+import com.magicpwd.m.UserMdl;
 
 /**
  *
@@ -13,11 +14,12 @@ import com.magicpwd._face.IPropBean;
  */
 public class JavaProp extends javax.swing.JPanel implements IPropBean
 {
-
+    private UserMdl coreMdl;
     private java.util.List<S1S1> javaList;
 
-    public JavaProp()
+    public JavaProp(UserMdl coreMdl)
     {
+        this.coreMdl = coreMdl;
     }
 
     @Override

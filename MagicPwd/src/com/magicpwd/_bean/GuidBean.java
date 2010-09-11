@@ -18,7 +18,6 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.m.GridMdl;
-import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.FileTM;
 import com.magicpwd.v.TrayPtn;
 import java.util.regex.Pattern;
@@ -61,7 +60,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
 
         lb_PropData = new javax.swing.JLabel();
         cb_PropData = new javax.swing.JComboBox();
-        cb_PropData.setModel(UserMdl.getCboxMdl());
+        cb_PropData.setModel(gridView.getCoreMdl().getCboxMdl());
         lb_PropData.setLabelFor(cb_PropData);
 
         lb_PropEdit = new javax.swing.JLabel();
@@ -166,7 +165,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         }
 
         Tplt tplt = null;
-        for (Tplt temp : UserMdl.getCboxMdl().getAllItems())
+        for (Tplt temp : gridView.getCoreMdl().getCboxMdl().getAllItems())
         {
             if (kind.equals(temp.getP30F1103()))
             {
@@ -202,7 +201,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
             return;
         }
 
-        GridMdl gm = UserMdl.getGridMdl();
+        GridMdl gm = gridView.getCoreMdl().getGridMdl();
         Tplt tplt = (Tplt) obj;
         itemData.setSpec(IEditItem.SPEC_GUID_TPLT, tplt.getP30F1103());
         gm.setModified(true);

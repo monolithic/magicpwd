@@ -27,6 +27,7 @@ import com.magicpwd.v.TrayPtn;
 public class TpltProp extends javax.swing.JPanel implements IPropBean
 {
 
+    private UserMdl coreMdl;
     private javax.swing.DefaultComboBoxModel cm_TpltList;
     private javax.swing.tree.DefaultTreeModel tm_TpltList;
     private javax.swing.tree.DefaultMutableTreeNode rootNode;
@@ -34,8 +35,9 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
     private Tplt currTplt;
     private boolean isUpdate;
 
-    public TpltProp()
+    public TpltProp(UserMdl coreMdl)
     {
+        this.coreMdl = coreMdl;
     }
 
     @Override
@@ -63,7 +65,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
 
             java.util.List<Tplt> dataList;
             javax.swing.tree.DefaultMutableTreeNode node;
-            for (Tplt kind : UserMdl.getCboxMdl().getAllItems())
+            for (Tplt kind : coreMdl.getCboxMdl().getAllItems())
             {
                 node = new javax.swing.tree.DefaultMutableTreeNode(kind);
 
@@ -470,7 +472,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         {
             DBA3000.saveTpltData(currTplt);
             tm_TpltList.nodeChanged(currNode);
-            UserMdl.getCboxMdl().wUpdate();
+            coreMdl.getCboxMdl().wUpdate();
 
             isUpdate = false;
         }
@@ -500,7 +502,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
 
             if (indx == 0)
             {
-                UserMdl.getCboxMdl().wAppend(currTplt);
+                coreMdl.getCboxMdl().wAppend(currTplt);
             }
         }
 

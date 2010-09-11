@@ -12,7 +12,6 @@ import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IPropBean;
 import com.magicpwd._util.Lang;
-import com.magicpwd._util.Util;
 import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.UserMdl;
 
@@ -22,11 +21,12 @@ import com.magicpwd.m.UserMdl;
  */
 public class USetProp extends JPanel implements IPropBean
 {
-
+    private UserMdl coreMdl;
     private java.io.File backPath;
 
-    public USetProp()
+    public USetProp(UserMdl coreMdl)
     {
+        this.coreMdl = coreMdl;
     }
 
     @Override
@@ -86,7 +86,7 @@ public class USetProp extends JPanel implements IPropBean
     @Override
     public void initData()
     {
-        UserCfg uc = UserMdl.getUserCfg();
+        UserCfg uc = coreMdl.getUserCfg();
         if (cb_UserLang.getItemCount() < 1)
         {
             java.util.Locale[] locales = java.util.Locale.getAvailableLocales();
@@ -108,7 +108,7 @@ public class USetProp extends JPanel implements IPropBean
         cher.setP30F2104(Lang.getLang(LangRes.P30F7C06, "默认"));
         cher.setP30F2106(ConsCfg.DEF_PWDS_CHAR);
         cb_PwdsChar.addItem(cher);
-        for (Char item : UserMdl.getCharMdl().getCharSys())
+        for (Char item : coreMdl.getCharMdl().getCharSys())
         {
             cb_PwdsChar.addItem(item);
             if (item.getP30F2103().equals(uc.getPwdsKey()))
@@ -116,7 +116,7 @@ public class USetProp extends JPanel implements IPropBean
                 cb_PwdsChar.setSelectedItem(item);
             }
         }
-        for (Char item : UserMdl.getCharMdl().getCharUsr())
+        for (Char item : coreMdl.getCharMdl().getCharUsr())
         {
             cb_PwdsChar.addItem(item);
             if (item.getP30F2103().equals(uc.getPwdsKey()))
@@ -137,7 +137,7 @@ public class USetProp extends JPanel implements IPropBean
     @Override
     public void saveData()
     {
-        UserCfg uc = UserMdl.getUserCfg();
+        UserCfg uc = coreMdl.getUserCfg();
         Object obj = cb_UserLang.getSelectedItem();
         if (obj != null && obj instanceof S1S1)
         {

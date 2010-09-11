@@ -7,11 +7,12 @@ import com.magicpwd._face.IPropBean;
 import javax.swing.JPanel;
 
 /**
- * @author shangwen.yao
+ * @author Amon
  * 
  */
 public class ImptProp extends JPanel implements IPropBean
 {
+
     public ImptProp()
     {
     }
@@ -25,7 +26,7 @@ public class ImptProp extends JPanel implements IPropBean
     public void initLang()
     {
     }
-    
+
     @Override
     public void initData()
     {

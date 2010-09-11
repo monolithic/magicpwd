@@ -12,7 +12,6 @@ import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IGridView;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
-import com.magicpwd.m.UserMdl;
 import com.magicpwd.x.IcoDialog;
 import java.util.EventListener;
 
@@ -138,8 +137,8 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean, IBackCall
 //            return;
 //        }
         itemData.setData(ta_PropData.getText());
-        UserMdl.getGridMdl().setModified(true);
-        gridView.selectNext(UserMdl.getGridMdl().isUpdate() ? 0 : 1, true);
+        gridView.getCoreMdl().getGridMdl().setModified(true);
+        gridView.selectNext(gridView.getCoreMdl().getGridMdl().isUpdate() ? 0 : 1, true);
     }
 
     @Override

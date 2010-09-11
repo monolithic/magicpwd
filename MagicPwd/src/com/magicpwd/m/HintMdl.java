@@ -21,16 +21,18 @@ public class HintMdl
 
     private static List<Keys> hintList = new ArrayList<Keys>();
     private int counter = 999999999;//TODO:需要修改
+    private UserMdl coreMdl;
 
-    public HintMdl()
+    HintMdl(UserMdl coreMdl)
     {
+        this.coreMdl = coreMdl;
     }
 
     public void process(Timestamp start, Timestamp end)
     {
         // 计数器
         counter += 1;
-        if (counter < UserMdl.getUserCfg().getHintInt())
+        if (counter < coreMdl.getUserCfg().getHintInt())
         {
             return;
         }

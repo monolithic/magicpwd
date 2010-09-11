@@ -15,7 +15,6 @@ import com.magicpwd._comn.LogoItem;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._face.IEditItem;
-import com.magicpwd._util.Util;
 import com.magicpwd.d.DBA3000;
 
 /**
@@ -28,9 +27,11 @@ public class NoteMdl
     private boolean modified;
     private List<IEditItem> ls_ItemList;
     private Keys keys;
+    private UserMdl coreMdl;
 
-    NoteMdl()
+    NoteMdl(UserMdl coreMdl)
     {
+        this.coreMdl = coreMdl;
         ls_ItemList = new ArrayList<IEditItem>();
         keys = new Keys();
     }
@@ -89,17 +90,17 @@ public class NoteMdl
     {
         clear();
         keys.setP30F0104(keysHash);
-        keys.setP30F0105(UserMdl.getUserCode());
+        keys.setP30F0105(coreMdl.getUserCode());
         DBA3000.readPwdsData(keys);
-        UserMdl.getGridMdl().deCrypt(keys, ls_ItemList);
+        coreMdl.getGridMdl().deCrypt(keys, ls_ItemList);
     }
 
     public void saveData(boolean histBack) throws Exception
     {
-        keys.setP30F0105(UserMdl.getUserCode());
+        keys.setP30F0105(coreMdl.getUserCode());
         keys.setP30F0106(ConsDat.HASH_NOTE);
         keys.setHistBack(histBack);
-        UserMdl.getGridMdl().enCrypt(keys, ls_ItemList);
+        coreMdl.getGridMdl().enCrypt(keys, ls_ItemList);
         DBA3000.savePwdsData(keys);
     }
 
