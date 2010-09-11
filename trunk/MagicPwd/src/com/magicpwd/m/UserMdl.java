@@ -47,14 +47,14 @@ public final class UserMdl
     /**
      * @return the dCipher
      */
-    public static Cipher getDCipher()
+    public Cipher getDCipher()
     {
         if (dCipher == null)
         {
             try
             {
                 dCipher = Cipher.getInstance(ConsEnv.NAME_CIPHER);
-                dCipher.init(Cipher.DECRYPT_MODE, UserMdl.getSec());
+                dCipher.init(Cipher.DECRYPT_MODE, getSec());
             }
             catch (Exception exp)
             {
@@ -69,14 +69,14 @@ public final class UserMdl
     /**
      * @return the eCipher
      */
-    public static Cipher getECipher()
+    public Cipher getECipher()
     {
         if (eCipher == null)
         {
             try
             {
                 eCipher = Cipher.getInstance(ConsEnv.NAME_CIPHER);
-                eCipher.init(Cipher.ENCRYPT_MODE, UserMdl.getSec());
+                eCipher.init(Cipher.ENCRYPT_MODE, getSec());
             }
             catch (Exception exp)
             {
@@ -96,7 +96,7 @@ public final class UserMdl
      * 获取运行模式
      * @return
      */
-    public static int getRunMode()
+    public int getRunMode()
     {
         return runMode;
     }
@@ -105,41 +105,41 @@ public final class UserMdl
      * 设置运行模式
      * @param runMode
      */
-    public static void setRunMode(int runMode)
+    public void setRunMode(int runMode)
     {
         UserMdl.runMode = runMode;
     }
 
-    public static void preLoad()
+    public void preLoad()
     {
-        gridMdl = new GridMdl();
+        gridMdl = new GridMdl(this);
         listMdl = new ListMdl();
         Kind kind = new Kind();
         kind.setC2010103(ConsDat.HASH_ROOT);
         kind.setC2010105("魔方密码");
         kind.setC2010106("魔方密码");
         treeMdl = new TreeMdl(new KindTN(kind));
-        us_UserSec = new UserSec();
-        hintMdl = new HintMdl();
+        us_UserSec = new UserSec(this);
+        hintMdl = new HintMdl(this);
     }
 
-    public static void loadUserCfg()
+    public void loadUserCfg()
     {
         uc_UserCfg = new UserCfg();
         uc_UserCfg.loadCfg();
     }
 
-    public static void saveCfg()
+    public void saveCfg()
     {
         uc_UserCfg.saveCfg();
     }
 
-    public static UserCfg getUserCfg()
+    public UserCfg getUserCfg()
     {
         return uc_UserCfg;
     }
 
-    public static UserDat getDat()
+    public UserDat getDat()
     {
         return ud_UserDat;
     }
@@ -156,7 +156,7 @@ public final class UserMdl
      * @throws InvalidKeyException
      * @throws Exception
      */
-    public static boolean signIn(String userName, String userPwds) throws InvalidKeyException,
+    public boolean signIn(String userName, String userPwds) throws InvalidKeyException,
             NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException
     {
         us_UserSec.setName(userName);
@@ -164,7 +164,7 @@ public final class UserMdl
         return us_UserSec.signIn();
     }
 
-    public static boolean signPb(String userName, String userPwds) throws Exception
+    public boolean signPb(String userName, String userPwds) throws Exception
     {
         us_UserSec.setName(userName);
         us_UserSec.setPwds(userPwds);
@@ -182,7 +182,7 @@ public final class UserMdl
      * @throws InvalidKeyException
      * @throws Exception
      */
-    public static boolean signPk(String oldPwds, String newPwds) throws InvalidKeyException, NoSuchAlgorithmException,
+    public boolean signPk(String oldPwds, String newPwds) throws InvalidKeyException, NoSuchAlgorithmException,
             NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException
     {
         if (us_UserSec == null)
@@ -199,7 +199,7 @@ public final class UserMdl
      * @return
      * @throws Exception
      */
-    public static boolean signFp(String usrName, StringBuffer secPwds) throws Exception
+    public boolean signFp(String usrName, StringBuffer secPwds) throws Exception
     {
         if (us_UserSec == null)
         {
@@ -214,7 +214,7 @@ public final class UserMdl
      * @return
      * @throws java.lang.Exception
      */
-    public static boolean signSk(String oldPwds, String secPwds) throws Exception
+    public boolean signSk(String oldPwds, String secPwds) throws Exception
     {
         if (us_UserSec == null)
         {
@@ -229,7 +229,7 @@ public final class UserMdl
      * @param userPwds
      * @throws Exception
      */
-    public static boolean signOx(String userName, String userPwds)
+    public boolean signOx(String userName, String userPwds)
     {
         return us_UserSec.signOx();
     }
@@ -245,7 +245,7 @@ public final class UserMdl
      * @throws javax.crypto.IllegalBlockSizeException
      * @throws javax.crypto.BadPaddingException
      */
-    public static boolean signUp(String userName, String userPwds) throws InvalidKeyException,
+    public boolean signUp(String userName, String userPwds) throws InvalidKeyException,
             NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException
     {
         us_UserSec.setName(userName);
@@ -256,7 +256,7 @@ public final class UserMdl
     /**
      * @return the gridMdl
      */
-    public static GridMdl getGridMdl()
+    public GridMdl getGridMdl()
     {
         return gridMdl;
     }
@@ -264,7 +264,7 @@ public final class UserMdl
     /**
      * @return the listMdl
      */
-    public static ListMdl getListMdl()
+    public ListMdl getListMdl()
     {
         return listMdl;
     }
@@ -272,11 +272,11 @@ public final class UserMdl
     /**
      * @return
      */
-    public static NoteMdl getNoteMdl()
+    public NoteMdl getNoteMdl()
     {
         if (noteMdl == null)
         {
-            noteMdl = new NoteMdl();
+            noteMdl = new NoteMdl(this);
         }
         return noteMdl;
     }
@@ -284,7 +284,7 @@ public final class UserMdl
     /**
      * @return the treeMdl
      */
-    public static TreeMdl getTreeMdl()
+    public TreeMdl getTreeMdl()
     {
         return treeMdl;
     }
@@ -292,7 +292,7 @@ public final class UserMdl
     /**
      * @return
      */
-    public static CboxMdl getCboxMdl()
+    public CboxMdl getCboxMdl()
     {
         if (cboxMdl == null)
         {
@@ -305,17 +305,17 @@ public final class UserMdl
     /**
      * @return the us_UserSec
      */
-    static UserSec getSec()
+    UserSec getSec()
     {
         return us_UserSec;
     }
 
-    public static String getUserCode()
+    public String getUserCode()
     {
         return us_UserSec.getCode();
     }
 
-    public static String getUserName()
+    public String getUserName()
     {
         return us_UserSec.getName();
     }
@@ -323,7 +323,7 @@ public final class UserMdl
     /**
      * @return the charMdl
      */
-    public static CharMdl getCharMdl()
+    public CharMdl getCharMdl()
     {
         if (charMdl == null)
         {
@@ -335,7 +335,7 @@ public final class UserMdl
     /**
      * @return the charUpd
      */
-    public static boolean isCharUpd()
+    public boolean isCharUpd()
     {
         return charUpd;
     }
@@ -344,12 +344,12 @@ public final class UserMdl
      * @param charUpd
      *            the charUpd to set
      */
-    public static void setCharUpd(boolean charUpd)
+    public void setCharUpd(boolean charUpd)
     {
         UserMdl.charUpd = charUpd;
     }
 
-    public static boolean hasSkey()
+    public boolean hasSkey()
     {
         return us_UserSec.hasSkey();
     }
@@ -357,7 +357,7 @@ public final class UserMdl
     /**
      * @return the hintMdl
      */
-    public static HintMdl getHintMdl()
+    public HintMdl getHintMdl()
     {
         return hintMdl;
     }
@@ -365,7 +365,7 @@ public final class UserMdl
     /**
      * @param aHintMdl the hintMdl to set
      */
-    public static void setHintMdl(HintMdl aHintMdl)
+    public void setHintMdl(HintMdl aHintMdl)
     {
         hintMdl = aHintMdl;
     }

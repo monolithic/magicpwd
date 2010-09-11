@@ -16,7 +16,6 @@ import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
-import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.TrayPtn;
 
 /**
@@ -195,7 +194,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
         try
         {
             new java.io.File(itemData.getSpec(EditItem.SPEC_FILE_NAME) + ConsEnv.FILE_ATTACHMENT).delete();
-            UserMdl.getGridMdl().wRemove(itemData);
+            gridView.getCoreMdl().getGridMdl().wRemove(itemData);
             gridView.selectNext(0, true);
         }
         catch (Exception exp)
@@ -258,7 +257,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
                         return;
                     }
                 }
-                Keys.doCrypt(UserMdl.getECipher(), filePath, amaFile);
+                Keys.doCrypt(gridView.getCoreMdl().getECipher(), filePath, amaFile);
             }
             catch (Exception exp)
             {
@@ -271,9 +270,9 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
         itemData.setName(name);
         itemData.setData(tf_PropData.getText());
         itemData.setSpec(EditItem.SPEC_FILE_NAME, amaName);
-        UserMdl.getGridMdl().setModified(true);
+        gridView.getCoreMdl().getGridMdl().setModified(true);
 
-        gridView.selectNext(UserMdl.getGridMdl().isUpdate() ? 0 : 1, true);
+        gridView.selectNext(gridView.getCoreMdl().getGridMdl().isUpdate() ? 0 : 1, true);
     }
 
     @Override
@@ -321,7 +320,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
         java.io.File tempFile = new java.io.File(amaPath, itemData.getSpec(EditItem.SPEC_FILE_NAME) + ConsEnv.FILE_ATTACHMENT);
         try
         {
-            Keys.doCrypt(UserMdl.getDCipher(), tempFile, filePath);
+            Keys.doCrypt(gridView.getCoreMdl().getDCipher(), tempFile, filePath);
         }
         catch (Exception exp)
         {
@@ -346,7 +345,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
 
             java.io.File srcFile = new java.io.File(amaPath, itemData.getSpec(IEditItem.SPEC_FILE_NAME) + ConsEnv.FILE_ATTACHMENT);
             java.io.File tmpFile = new java.io.File(tmpPath, itemData.getData());
-            Keys.doCrypt(UserMdl.getDCipher(), srcFile, tmpFile);
+            Keys.doCrypt(gridView.getCoreMdl().getDCipher(), srcFile, tmpFile);
             if (!Desk.open(tmpFile))
             {
                 Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F1A03, "打开文件错误，请尝试手动方式查看！");

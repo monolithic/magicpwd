@@ -39,9 +39,11 @@ public class GridMdl extends DefaultTableModel
     private boolean modified;
     private List<IEditItem> ls_ItemList;
     private Keys keys;
+    private UserMdl coreMdl;
 
-    GridMdl()
+    GridMdl(UserMdl coreMdl)
     {
+        this.coreMdl = coreMdl;
         ls_ItemList = new ArrayList<IEditItem>();
         keys = new Keys();
     }
@@ -180,7 +182,7 @@ public class GridMdl extends DefaultTableModel
     {
         keys.setDefault();
         keys.setP30F0104(keysHash);
-        keys.setP30F0105(UserMdl.getUserCode());
+        keys.setP30F0105(coreMdl.getUserCode());
         if (DBA3000.readPwdsData(keys))
         {
             deCrypt(keys, ls_ItemList);
@@ -196,7 +198,7 @@ public class GridMdl extends DefaultTableModel
      */
     public void saveData(boolean histBack, boolean repaint) throws Exception
     {
-        keys.setP30F0105(UserMdl.getUserCode());
+        keys.setP30F0105(coreMdl.getUserCode());
         keys.setHistBack(histBack);
         enCrypt(keys, ls_ItemList);
         DBA3000.savePwdsData(keys);
@@ -383,7 +385,7 @@ public class GridMdl extends DefaultTableModel
             indx = 0;
             keys.setDefault();
             ls_ItemList.clear();
-            keys.setP30F0105(UserMdl.getUserCode());
+            keys.setP30F0105(coreMdl.getUserCode());
 
             // Guid
             GuidItem guid = new GuidItem();
@@ -505,7 +507,7 @@ public class GridMdl extends DefaultTableModel
 
     public final StringBuffer deCrypt(PwdsItem pwds) throws Exception
     {
-        pwds.deCript(UserMdl.getDCipher(), UserMdl.getSec().getMask());
+        pwds.deCript(coreMdl.getDCipher(), coreMdl.getSec().getMask());
         return pwds.getP30F0203();
     }
 
@@ -581,7 +583,7 @@ public class GridMdl extends DefaultTableModel
 
     public final StringBuffer enCrypt(PwdsItem pwds) throws Exception
     {
-        pwds.enCrypt(UserMdl.getECipher(), UserMdl.getSec().getMask());
+        pwds.enCrypt(coreMdl.getECipher(), coreMdl.getSec().getMask());
         return pwds.getP30F0203();
     }
 

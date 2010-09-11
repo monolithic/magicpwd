@@ -47,12 +47,14 @@ final class UserSec implements Key
      * 口令转换字符
      */
     private char[] mask;
+    private UserMdl coreMdl;
 
     /**
      * 默认构造器
      */
-    UserSec()
+    UserSec(UserMdl coreMdl)
     {
+        this.coreMdl=coreMdl;
     }
 
     /**
@@ -88,7 +90,7 @@ final class UserSec implements Key
      */
     public final String getCode()
     {
-        return UserMdl.getUserCfg().getCfg(user(ConsCfg.CFG_USER_CODE));
+        return coreMdl.getUserCfg().getCfg(user(ConsCfg.CFG_USER_CODE));
     }
 
     final char[] getMask()
@@ -108,7 +110,7 @@ final class UserSec implements Key
     final boolean signIn() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
             IllegalBlockSizeException, BadPaddingException
     {
-        UserCfg ui = UserMdl.getUserCfg();
+        UserCfg ui = coreMdl.getUserCfg();
 
         // 用户登录身份认证
         String text = ui.getCfg(user(ConsCfg.CFG_USER_INFO));
@@ -167,7 +169,7 @@ final class UserSec implements Key
     final boolean signPk(String oldPwds, String newPwds) throws NoSuchAlgorithmException, NoSuchPaddingException,
             InvalidKeyException, IllegalBlockSizeException, BadPaddingException
     {
-        UserCfg ui = UserMdl.getUserCfg();
+        UserCfg ui = coreMdl.getUserCfg();
 
         // 已有口令校验
         pwds = oldPwds;
@@ -212,7 +214,7 @@ final class UserSec implements Key
      */
     final boolean signFp(String usrName, StringBuffer secPwds) throws Exception
     {
-        UserCfg ui = UserMdl.getUserCfg();
+        UserCfg ui = coreMdl.getUserCfg();
         name = usrName;
 
         // 用户登录身份认证
@@ -244,12 +246,12 @@ final class UserSec implements Key
         this.name = usrName;
         this.pwds = new String(generateUserChar());
         byte[] t = signInDigest();
-        UserMdl.getUserCfg().setCfg(user(ConsCfg.CFG_USER_INFO), Util.bytesToString(t, true));
+        coreMdl.getUserCfg().setCfg(user(ConsCfg.CFG_USER_INFO), Util.bytesToString(t, true));
 
         this.keys = cipherDigest();
         aes.init(Cipher.ENCRYPT_MODE, this);
         t = aes.doFinal(temp);
-        UserMdl.getUserCfg().setCfg(user(ConsCfg.CFG_USER_PKEY), Util.bytesToString(t, true));
+        coreMdl.getUserCfg().setCfg(user(ConsCfg.CFG_USER_PKEY), Util.bytesToString(t, true));
 
         System.arraycopy(temp, 16, keys, 0, temp.length - 16);
         mask = new String(temp, 0, 16).toCharArray();
@@ -267,7 +269,7 @@ final class UserSec implements Key
      */
     final boolean signSk(String oldPwds, String secPwds) throws Exception
     {
-        UserCfg ui = UserMdl.getUserCfg();
+        UserCfg ui = coreMdl.getUserCfg();
 
         // 已有口令校验
         pwds = oldPwds;
@@ -296,7 +298,7 @@ final class UserSec implements Key
         Cipher aes = Cipher.getInstance(ConsEnv.NAME_CIPHER);
         aes.init(Cipher.ENCRYPT_MODE, this);
         t = aes.doFinal(t);
-        UserMdl.getUserCfg().setCfg(user(ConsCfg.CFG_USER_SKEY), sKey + Util.bytesToString(t, true));
+        coreMdl.getUserCfg().setCfg(user(ConsCfg.CFG_USER_SKEY), sKey + Util.bytesToString(t, true));
 
         this.keys = temp;
         this.pwds = null;
@@ -316,7 +318,7 @@ final class UserSec implements Key
     final boolean signUp() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
             IllegalBlockSizeException, BadPaddingException
     {
-        UserCfg uc = UserMdl.getUserCfg();
+        UserCfg uc = coreMdl.getUserCfg();
         if (com.magicpwd._util.Char.isValidate(uc.getCfg(user(ConsCfg.CFG_USER_INFO))))
         {
             return false;
@@ -504,7 +506,7 @@ final class UserSec implements Key
 
     public boolean hasSkey()
     {
-        return com.magicpwd._util.Char.isValidate(UserMdl.getUserCfg().getCfg(user(ConsCfg.CFG_USER_SKEY)), 224);
+        return com.magicpwd._util.Char.isValidate(coreMdl.getUserCfg().getCfg(user(ConsCfg.CFG_USER_SKEY)), 224);
     }
 
     public final String user(String key)

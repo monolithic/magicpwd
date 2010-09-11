@@ -10,7 +10,6 @@ import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IGridView;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
-import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.TrayPtn;
 
 /**
@@ -135,7 +134,7 @@ public class TextBean extends javax.swing.JPanel implements IEditBean
     {
         if (Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
         {
-            UserMdl.getGridMdl().wRemove(itemData);
+            gridView.getCoreMdl().getGridMdl().wRemove(itemData);
             gridView.selectNext(0, true);
         }
     }
@@ -153,9 +152,9 @@ public class TextBean extends javax.swing.JPanel implements IEditBean
 
         itemData.setName(name);
         itemData.setData(tf_PropData.getText());
-        UserMdl.getGridMdl().setModified(true);
+        gridView.getCoreMdl().getGridMdl().setModified(true);
 
-        gridView.selectNext(UserMdl.getGridMdl().isUpdate() ? 0 : 1, true);
+        gridView.selectNext(gridView.getCoreMdl().getGridMdl().isUpdate() ? 0 : 1, true);
     }
 
     @Override

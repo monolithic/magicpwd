@@ -8,9 +8,7 @@ import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IGridView;
 import com.magicpwd._util.Lang;
-import com.magicpwd._util.Util;
 import com.magicpwd.m.GridMdl;
-import com.magicpwd.m.UserMdl;
 
 /**
  * 属性：关键搜索
@@ -126,7 +124,7 @@ public class MetaBean extends javax.swing.JPanel implements IEditBean
             return;
         }
 
-        GridMdl gm = UserMdl.getGridMdl();
+        GridMdl gm = gridView.getCoreMdl().getGridMdl();
         itemData.setName(name);
         itemData.setData(ta_PropData.getText());
         gm.setModified(true);

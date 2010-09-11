@@ -28,9 +28,11 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
      */
     private Char charItem;
     private boolean isUpdate;
+    private UserMdl coreMdl;
 
-    public CharProp()
+    public CharProp(UserMdl coreMdl)
     {
+        this.coreMdl = coreMdl;
     }
 
     @Override
@@ -54,7 +56,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
     {
         if (cb_CharTplt.getItemCount() < 1)
         {
-            CharMdl cm = UserMdl.getCharMdl();
+            CharMdl cm = coreMdl.getCharMdl();
             ls_CharList.setModel(cm);
 
             DefaultComboBoxModel cm_CharTplt = new DefaultComboBoxModel();
@@ -316,27 +318,27 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
     private void sortUActionPerformed(java.awt.event.ActionEvent evt)
     {
         int indx = ls_CharList.getSelectedIndex();
-        if (indx < 1 || indx >= UserMdl.getCharMdl().getCharUsr().size())
+        if (indx < 1 || indx >= coreMdl.getCharMdl().getCharUsr().size())
         {
             return;
         }
 
-        UserMdl.getCharMdl().changeItemAt(indx, -1);
+        coreMdl.getCharMdl().changeItemAt(indx, -1);
         ls_CharList.setSelectedIndex(indx - 1);
-        UserMdl.setCharUpd(true);
+        coreMdl.setCharUpd(true);
     }
 
     private void sortDActionPerformed(java.awt.event.ActionEvent evt)
     {
         int indx = ls_CharList.getSelectedIndex();
-        if (indx < 0 || indx >= UserMdl.getCharMdl().getCharUsr().size() - 1)
+        if (indx < 0 || indx >= coreMdl.getCharMdl().getCharUsr().size() - 1)
         {
             return;
         }
 
-        UserMdl.getCharMdl().changeItemAt(indx, 1);
+        coreMdl.getCharMdl().changeItemAt(indx, 1);
         ls_CharList.setSelectedIndex(indx + 1);
-        UserMdl.setCharUpd(true);
+        coreMdl.setCharUpd(true);
     }
 
     private void apndDataActionPerformed(java.awt.event.ActionEvent evt)
@@ -375,17 +377,17 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         charItem.setP30F2106(sets);
         if (isUpdate)
         {
-            UserMdl.getCharMdl().updateItemAt(ls_CharList.getSelectedIndex(), charItem);
+            coreMdl.getCharMdl().updateItemAt(ls_CharList.getSelectedIndex(), charItem);
         }
         else
         {
-            UserMdl.getCharMdl().appendItem(charItem);
+            coreMdl.getCharMdl().appendItem(charItem);
         }
 
         charItem = new Char();
         cb_CharTplt.setSelectedIndex(0);
         showInfo(charItem);
-        UserMdl.setCharUpd(true);
+        coreMdl.setCharUpd(true);
         isUpdate = false;
     }
 
@@ -402,10 +404,10 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
             return;
         }
 
-        UserMdl.getCharMdl().removeItemAt(ls_CharList.getSelectedIndex());
+        coreMdl.getCharMdl().removeItemAt(ls_CharList.getSelectedIndex());
         charItem = new Char();
         showInfo(charItem);
-        UserMdl.setCharUpd(true);
+        coreMdl.setCharUpd(true);
         isUpdate = false;
     }
 
