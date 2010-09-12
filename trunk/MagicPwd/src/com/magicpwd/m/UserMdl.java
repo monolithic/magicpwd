@@ -18,6 +18,7 @@ public final class UserMdl
     private static int runMode;
     // 用户配置数据模型
     private static UserCfg userCfg;
+    private static SafeMdl safeMdl;
     // 魔方密码数据模型
     private static GridMdl gridMdl;
     private static ListMdl listMdl;
@@ -27,6 +28,22 @@ public final class UserMdl
     private static CharMdl charMdl;
     // 记事便签数据模型
     private static NoteMdl noteMdl;
+
+    /**
+     * @return the safeMdl
+     */
+    public static SafeMdl getSafeMdl()
+    {
+        return safeMdl;
+    }
+
+    /**
+     * @param aSafeMdl the safeMdl to set
+     */
+    public static void setSafeMdl(SafeMdl aSafeMdl)
+    {
+        safeMdl = aSafeMdl;
+    }
 
     private UserMdl()
     {

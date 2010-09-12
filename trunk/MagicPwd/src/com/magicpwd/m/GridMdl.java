@@ -5,12 +5,6 @@ package com.magicpwd.m;
 
 import com.magicpwd._comn.GuidItem;
 import com.magicpwd._comn.I1S2;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringTokenizer;
-
-import javax.swing.table.DefaultTableModel;
-
 import com.magicpwd._comn.Keys;
 import com.magicpwd._comn.PwdsItem;
 import com.magicpwd._comn.EditItem;
@@ -29,7 +23,7 @@ import com.magicpwd.d.DBA3000;
  * @author Amon
  * 
  */
-public class GridMdl extends DefaultTableModel
+public class GridMdl extends javax.swing.table.DefaultTableModel
 {
 
     /**
@@ -37,14 +31,14 @@ public class GridMdl extends DefaultTableModel
      */
     private boolean interim;
     private boolean modified;
-    private List<IEditItem> ls_ItemList;
+    private java.util.ArrayList<IEditItem> ls_ItemList;
     private Keys keys;
     private UserMdl coreMdl;
 
     GridMdl(UserMdl coreMdl)
     {
         this.coreMdl = coreMdl;
-        ls_ItemList = new ArrayList<IEditItem>();
+        ls_ItemList = new java.util.ArrayList<IEditItem>();
         keys = new Keys();
     }
 
@@ -182,7 +176,7 @@ public class GridMdl extends DefaultTableModel
     {
         keys.setDefault();
         keys.setP30F0104(keysHash);
-        keys.setP30F0105(coreMdl.getUserCode());
+        keys.setP30F0105(coreMdl.getUserCfg().getUserCode());
         if (DBA3000.readPwdsData(keys))
         {
             deCrypt(keys, ls_ItemList);
@@ -198,7 +192,7 @@ public class GridMdl extends DefaultTableModel
      */
     public void saveData(boolean histBack, boolean repaint) throws Exception
     {
-        keys.setP30F0105(coreMdl.getUserCode());
+        keys.setP30F0105(coreMdl.getUserCfg().getUserCode());
         keys.setHistBack(histBack);
         enCrypt(keys, ls_ItemList);
         DBA3000.savePwdsData(keys);
@@ -320,9 +314,9 @@ public class GridMdl extends DefaultTableModel
      * @param type
      * @return
      */
-    public List<I1S2> wSelect(int type)
+    public java.util.List<I1S2> wSelect(int type)
     {
-        List<I1S2> list = new ArrayList<I1S2>();
+        java.util.ArrayList<I1S2> list = new java.util.ArrayList<I1S2>();
         int i = 0;
         for (IEditItem item : ls_ItemList)
         {
@@ -360,13 +354,13 @@ public class GridMdl extends DefaultTableModel
         modified = true;
     }
 
-    public int wImport(ArrayList<ArrayList<String>> data, String kindHash) throws Exception
+    public int wImport(java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash) throws Exception
     {
         int size = 0;
         int indx = 0;
         EditItem tplt;
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(ConsEnv.VIEW_DATE);
-        for (ArrayList<String> temp : data)
+        for (java.util.ArrayList<String> temp : data)
         {
             switch ((temp.size() - 5) % 3)
             {
@@ -385,7 +379,7 @@ public class GridMdl extends DefaultTableModel
             indx = 0;
             keys.setDefault();
             ls_ItemList.clear();
-            keys.setP30F0105(coreMdl.getUserCode());
+            keys.setP30F0105(coreMdl.getUserCfg().getUserCode());
 
             // Guid
             GuidItem guid = new GuidItem();
@@ -429,9 +423,9 @@ public class GridMdl extends DefaultTableModel
         return size;
     }
 
-    public int wExport(ArrayList<ArrayList<String>> data, String kindHash)
+    public int wExport(java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash)
     {
-        List<Keys> dataList = new ArrayList<Keys>();
+        java.util.ArrayList<Keys> dataList = new java.util.ArrayList<Keys>();
         DBA3000.readKeysList(kindHash, dataList);
         if (dataList == null || dataList.size() < 1)
         {
@@ -439,14 +433,14 @@ public class GridMdl extends DefaultTableModel
         }
 
         int size = 0;
-        ArrayList<String> temp;
+        java.util.ArrayList<String> temp;
         int indx;
         IEditItem tplt;
 
         for (Keys item : dataList)
         {
             indx = 0;
-            temp = new ArrayList<String>();
+            temp = new java.util.ArrayList<String>();
             try
             {
                 clear();
@@ -507,8 +501,11 @@ public class GridMdl extends DefaultTableModel
 
     public final StringBuffer deCrypt(PwdsItem pwds) throws Exception
     {
-        pwds.deCript(coreMdl.getDCipher(), coreMdl.getSec().getMask());
-        return pwds.getP30F0203();
+//        pwds.deCript(coreMdl.getDCipher(), coreMdl.getSec().getMask());
+//        return pwds.getP30F0203();
+        StringBuffer buf = pwds.getP30F0203();
+        String tmp = buf.toString();
+        return buf.delete(0, buf.length()).append(coreMdl.getSafeMdl().deCript(tmp));
     }
 
     /**
@@ -516,7 +513,7 @@ public class GridMdl extends DefaultTableModel
      * 
      * @param dba
      */
-    public final void deCrypt(Keys keys, List<IEditItem> list) throws Exception
+    public final void deCrypt(Keys keys, java.util.List<IEditItem> list) throws Exception
     {
         // 查询数据是否为空
         StringBuffer text = deCrypt(keys.getPassword());
@@ -551,7 +548,7 @@ public class GridMdl extends DefaultTableModel
         list.add(hint);
 
         // 处理每一个数据
-        StringTokenizer st = new StringTokenizer(text.toString(), ConsDat.SP_SQL_EE);
+        java.util.StringTokenizer st = new java.util.StringTokenizer(text.toString(), ConsDat.SP_SQL_EE);
         String name;
         String data;
         String spec;
@@ -583,8 +580,11 @@ public class GridMdl extends DefaultTableModel
 
     public final StringBuffer enCrypt(PwdsItem pwds) throws Exception
     {
-        pwds.enCrypt(coreMdl.getECipher(), coreMdl.getSec().getMask());
-        return pwds.getP30F0203();
+//        pwds.enCrypt(coreMdl.getECipher(), coreMdl.getSec().getMask());
+//        return pwds.getP30F0203();
+        StringBuffer buf = pwds.getP30F0203();
+        String tmp = buf.toString();
+        return buf.delete(0, buf.length()).append(coreMdl.getSafeMdl().enCrypt(tmp));
     }
 
     /**
@@ -592,7 +592,7 @@ public class GridMdl extends DefaultTableModel
      * 
      * @param dba
      */
-    public final void enCrypt(Keys keys, List<IEditItem> list) throws Exception
+    public final void enCrypt(Keys keys, java.util.List<IEditItem> list) throws Exception
     {
         PwdsItem pwds = keys.getPassword();
         StringBuffer text = pwds.getP30F0203();
