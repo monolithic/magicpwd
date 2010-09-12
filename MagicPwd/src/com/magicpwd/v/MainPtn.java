@@ -20,7 +20,6 @@ import com.magicpwd._comn.GuidItem;
 import com.magicpwd._comn.Kind;
 import com.magicpwd._comn.Keys;
 import com.magicpwd._comn.MetaItem;
-import com.magicpwd._comn.PwdsItem;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;

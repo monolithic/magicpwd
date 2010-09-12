@@ -29,6 +29,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
     private static boolean isOsTray;
     private static int currPtn;
     private static int nextPtn;
+    private static UserMdl coreMdl;
     private static MailDlg mailDlg;
     private static TrayPtn trayPtn;
     private static UserSign userSign;
@@ -264,7 +265,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
     {
         viewItem.setEnabled(java.awt.SystemTray.isSupported());
 
-        changeView(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_TRAY_PTN, "guid"));
+        changeView(coreMdl.getUserCfg().getCfg(ConsCfg.CFG_TRAY_PTN, "guid"));
 
         return true;
     }
@@ -390,7 +391,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
             Util.centerForm(mailDlg, TrayPtn.getCurrForm());
         }
 
-        GridMdl gm = UserMdl.getGridMdl();
+        GridMdl gm = coreMdl.getGridMdl();
 
         MailPtn mailPtn = new MailPtn();
         mailPtn.initView();
@@ -546,7 +547,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
                 tmp.y = y;
             }
             md_TrayForm.setLocation(tmp);
-            UserMdl.getUserCfg().setCfg(ConsCfg.CFG_TRAY_LOC, "[" + tmp.x + "," + tmp.y + "]");
+            coreMdl.getUserCfg().setCfg(ConsCfg.CFG_TRAY_LOC, "[" + tmp.x + "," + tmp.y + "]");
         }
     }
 
@@ -778,7 +779,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
 
     private void changeView(String ptn)
     {
-        UserCfg uc = UserMdl.getUserCfg();
+        UserCfg uc = coreMdl.getUserCfg();
         // 下一步：显示为托盘图标
         if (ConsCfg.DEF_TRAY.equalsIgnoreCase(ptn))
         {
@@ -873,7 +874,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
 
                 TrayPtn.getCurrForm().setVisible(wasVisible);
             }
-            UserMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN_LOOK, isSystem ? ConsCfg.DEF_SKIN_SYS : lafClass);
+            coreMdl.getUserCfg().setCfg(ConsCfg.CFG_SKIN_LOOK, isSystem ? ConsCfg.DEF_SKIN_SYS : lafClass);
         }
         catch (Exception exc)
         {
