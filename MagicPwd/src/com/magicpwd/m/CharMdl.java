@@ -11,7 +11,7 @@ import java.util.List;
 import javax.swing.AbstractListModel;
 
 /**
- *
+ * 口令字符究竟模型
  * @author Amon
  */
 public class CharMdl extends AbstractListModel
