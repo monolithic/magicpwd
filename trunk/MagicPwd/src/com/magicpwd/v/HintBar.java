@@ -11,6 +11,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import com.magicpwd.c.InfoEvt;
+import com.magicpwd.m.HintMdl;
 import com.magicpwd.m.UserMdl;
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
@@ -28,9 +29,11 @@ public class HintBar extends JPanel
     private InfoEvt ie_InfoEvent;
     private DateFormat dateTplt;
     private Timer tm_TimeNote;
+    private HintMdl hintMdl;
 
-    public HintBar()
+    public HintBar(HintMdl hintMdl)
     {
+        this.hintMdl = hintMdl;
     }
 
     public void initView()
@@ -104,10 +107,10 @@ public class HintBar extends JPanel
 
     private void lb_InfoLabelMouseClicked(java.awt.event.MouseEvent evt)
     {
-        if (UserMdl.getHintMdl().getUnreadCount() > 0)
+        if (hintMdl.getUnreadCount() > 0)
         {
             UserMdl.getListMdl().clear();
-            for (Keys keys : UserMdl.getHintMdl().getUnread())
+            for (Keys keys : hintMdl.getUnread())
             {
                 UserMdl.getListMdl().wAppend(keys);
             }
@@ -124,7 +127,7 @@ public class HintBar extends JPanel
         lb_DateLabel.setText(text);
         lb_DateLabel.setToolTipText(text);
 
-        if (UserMdl.getHintMdl().getHintData() != null)
+        if (hintMdl.getHintData() != null)
         {
             ie_InfoEvent.hintDataActionPerformed(null);
         }
@@ -133,9 +136,9 @@ public class HintBar extends JPanel
         Timestamp s = new Timestamp(cal.getTimeInMillis());
         cal.add(Calendar.DAY_OF_MONTH, 1);
         Timestamp e = new Timestamp(cal.getTimeInMillis());
-        UserMdl.getHintMdl().process(s, e);
+        hintMdl.process(s, e);
 
-        int size = UserMdl.getHintMdl().getUnreadCount();
+        int size = hintMdl.getUnreadCount();
         if (size > 0)
         {
             lb_InfoLabel.setText(Char.format("您有 {0} 条提醒数据！", Integer.toString(size)));

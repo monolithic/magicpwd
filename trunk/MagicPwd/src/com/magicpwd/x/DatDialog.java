@@ -5,9 +5,9 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
-import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.KindTN;
 import com.magicpwd.v.TrayPtn;
+import javax.swing.tree.TreeModel;
 
 /**
  * 数据迁移对话窗口
@@ -17,11 +17,13 @@ public class DatDialog extends javax.swing.JDialog
 {
 
     private IBackCall backCall;
+    private TreeModel treeModel;
 
-    public DatDialog(IBackCall backCall)
+    public DatDialog(IBackCall backCall, TreeModel treeModel)
     {
         super(TrayPtn.getCurrForm(), true);
         this.backCall = backCall;
+        this.treeModel = treeModel;
     }
 
     public void initView()
@@ -31,7 +33,7 @@ public class DatDialog extends javax.swing.JDialog
         bt_Update = new javax.swing.JButton();
 
         javax.swing.JScrollPane sp_KindList = new javax.swing.JScrollPane();
-        tr_KindList.setModel(UserMdl.getTreeMdl());
+        tr_KindList.setModel(treeModel);
         sp_KindList.setViewportView(tr_KindList);
 
         bt_Cancel.addActionListener(new java.awt.event.ActionListener()
