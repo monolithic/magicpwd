@@ -28,7 +28,7 @@ import com.magicpwd._util.Util;
  * @author Amon
  * 
  */
-final class UserSec implements Key
+final class SafeKey implements Key
 {
 
     /**
@@ -52,9 +52,9 @@ final class UserSec implements Key
     /**
      * 默认构造器
      */
-    UserSec(UserMdl coreMdl)
+    SafeKey(UserMdl coreMdl)
     {
-        this.coreMdl=coreMdl;
+        this.coreMdl = coreMdl;
     }
 
     /**
@@ -63,7 +63,7 @@ final class UserSec implements Key
      * @param pwds
      * @param salt
      */
-    UserSec(String name, String pwds, String salt)
+    SafeKey(String name, String pwds, String salt)
     {
     }
 

@@ -385,4 +385,14 @@ public final class UserCfg
     {
         return userCfg.getProperty(ConsCfg.CFG_LANG, System.getProperty("user.language") + '_' + System.getProperty("user.country"));
     }
+
+    public String getUserCode()
+    {
+        return "";//userSec.getCode();
+    }
+
+    public String getUserName()
+    {
+        return "";//userSec.getName();
+    }
 }
