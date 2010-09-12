@@ -9,15 +9,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
-
 import com.magicpwd.r.KindTN;
-import javax.crypto.Cipher;
 
 /**
  * @author Amon
@@ -30,31 +22,34 @@ public final class UserMdl
      * 程序运行模式
      */
     private static int runMode;
-    private static UserCfg uc_UserCfg;
-    private static UserDat ud_UserDat;
-    private static UserSec us_UserSec;
+    private static boolean charUpd;
+    private static UserCfg userCfg;
+    private static UserSec userSec;
     private static GridMdl gridMdl;
     private static ListMdl listMdl;
     private static HintMdl hintMdl;
     private static NoteMdl noteMdl;
     private static TreeMdl treeMdl;
     private static CboxMdl cboxMdl;
-    private static boolean charUpd;
     private static CharMdl charMdl;
-    private static Cipher dCipher;
-    private static Cipher eCipher;
+    private static javax.crypto.Cipher dCipher;
+    private static javax.crypto.Cipher eCipher;
+
+    private UserMdl()
+    {
+    }
 
     /**
      * @return the dCipher
      */
-    public Cipher getDCipher()
+    public javax.crypto.Cipher getDCipher()
     {
         if (dCipher == null)
         {
             try
             {
-                dCipher = Cipher.getInstance(ConsEnv.NAME_CIPHER);
-                dCipher.init(Cipher.DECRYPT_MODE, getSec());
+                dCipher = javax.crypto.Cipher.getInstance(ConsEnv.NAME_CIPHER);
+                dCipher.init(javax.crypto.Cipher.DECRYPT_MODE, getSec());
             }
             catch (Exception exp)
             {
@@ -69,14 +64,14 @@ public final class UserMdl
     /**
      * @return the eCipher
      */
-    public Cipher getECipher()
+    public javax.crypto.Cipher getECipher()
     {
         if (eCipher == null)
         {
             try
             {
-                eCipher = Cipher.getInstance(ConsEnv.NAME_CIPHER);
-                eCipher.init(Cipher.ENCRYPT_MODE, getSec());
+                eCipher = javax.crypto.Cipher.getInstance(ConsEnv.NAME_CIPHER);
+                eCipher.init(javax.crypto.Cipher.ENCRYPT_MODE, getSec());
             }
             catch (Exception exp)
             {
@@ -86,10 +81,6 @@ public final class UserMdl
             }
         }
         return eCipher;
-    }
-
-    private UserMdl()
-    {
     }
 
     /**
@@ -119,29 +110,24 @@ public final class UserMdl
         kind.setC2010105("魔方密码");
         kind.setC2010106("魔方密码");
         treeMdl = new TreeMdl(new KindTN(kind));
-        us_UserSec = new UserSec(this);
+        userSec = new UserSec(this);
         hintMdl = new HintMdl(this);
     }
 
     public void loadUserCfg()
     {
-        uc_UserCfg = new UserCfg();
-        uc_UserCfg.loadCfg();
+        userCfg = new UserCfg();
+        userCfg.loadCfg();
     }
 
     public void saveCfg()
     {
-        uc_UserCfg.saveCfg();
+        userCfg.saveCfg();
     }
 
     public UserCfg getUserCfg()
     {
-        return uc_UserCfg;
-    }
-
-    public UserDat getDat()
-    {
-        return ud_UserDat;
+        return userCfg;
     }
 
     /**
@@ -149,47 +135,35 @@ public final class UserMdl
      * @param userName
      * @param userPwds
      * @param userSalt
-     * @throws BadPaddingException
-     * @throws IllegalBlockSizeException
-     * @throws NoSuchPaddingException
-     * @throws NoSuchAlgorithmException
-     * @throws InvalidKeyException
      * @throws Exception
      */
-    public boolean signIn(String userName, String userPwds) throws InvalidKeyException,
-            NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException
+    public boolean signIn(String userName, String userPwds) throws Exception
     {
-        us_UserSec.setName(userName);
-        us_UserSec.setPwds(userPwds);
-        return us_UserSec.signIn();
+        userSec.setName(userName);
+        userSec.setPwds(userPwds);
+        return userSec.signIn();
     }
 
     public boolean signPb(String userName, String userPwds) throws Exception
     {
-        us_UserSec.setName(userName);
-        us_UserSec.setPwds(userPwds);
-        return us_UserSec.signPb();
+        userSec.setName(userName);
+        userSec.setPwds(userPwds);
+        return userSec.signPb();
     }
 
     /**
      * 修改登录口令
      * @param oldPwds
      * @param userPwds
-     * @throws BadPaddingException
-     * @throws IllegalBlockSizeException
-     * @throws NoSuchPaddingException
-     * @throws NoSuchAlgorithmException
-     * @throws InvalidKeyException
      * @throws Exception
      */
-    public boolean signPk(String oldPwds, String newPwds) throws InvalidKeyException, NoSuchAlgorithmException,
-            NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException
+    public boolean signPk(String oldPwds, String newPwds) throws Exception
     {
-        if (us_UserSec == null)
+        if (userSec == null)
         {
             return false;
         }
-        return us_UserSec.signPk(oldPwds, newPwds);
+        return userSec.signPk(oldPwds, newPwds);
     }
 
     /**
@@ -201,11 +175,11 @@ public final class UserMdl
      */
     public boolean signFp(String usrName, StringBuffer secPwds) throws Exception
     {
-        if (us_UserSec == null)
+        if (userSec == null)
         {
             return false;
         }
-        return us_UserSec.signFp(usrName, secPwds);
+        return userSec.signFp(usrName, secPwds);
     }
 
     /**
@@ -216,11 +190,11 @@ public final class UserMdl
      */
     public boolean signSk(String oldPwds, String secPwds) throws Exception
     {
-        if (us_UserSec == null)
+        if (userSec == null)
         {
             return false;
         }
-        return us_UserSec.signSk(oldPwds, secPwds);
+        return userSec.signSk(oldPwds, secPwds);
     }
 
     /**
@@ -231,7 +205,7 @@ public final class UserMdl
      */
     public boolean signOx(String userName, String userPwds)
     {
-        return us_UserSec.signOx();
+        return userSec.signOx();
     }
 
     /**
@@ -239,18 +213,13 @@ public final class UserMdl
      * @param userName
      * @param userPwds
      * @return
-     * @throws java.security.InvalidKeyException
-     * @throws java.security.NoSuchAlgorithmException
-     * @throws javax.crypto.NoSuchPaddingException
-     * @throws javax.crypto.IllegalBlockSizeException
-     * @throws javax.crypto.BadPaddingException
+     * @throws Exception
      */
-    public boolean signUp(String userName, String userPwds) throws InvalidKeyException,
-            NoSuchAlgorithmException, NoSuchPaddingException, IllegalBlockSizeException, BadPaddingException
+    public boolean signUp(String userName, String userPwds) throws Exception
     {
-        us_UserSec.setName(userName);
-        us_UserSec.setPwds(userPwds);
-        return us_UserSec.signUp();
+        userSec.setName(userName);
+        userSec.setPwds(userPwds);
+        return userSec.signUp();
     }
 
     /**
@@ -307,17 +276,17 @@ public final class UserMdl
      */
     UserSec getSec()
     {
-        return us_UserSec;
+        return userSec;
     }
 
     public String getUserCode()
     {
-        return us_UserSec.getCode();
+        return userSec.getCode();
     }
 
     public String getUserName()
     {
-        return us_UserSec.getName();
+        return userSec.getName();
     }
 
     /**
@@ -351,7 +320,7 @@ public final class UserMdl
 
     public boolean hasSkey()
     {
-        return us_UserSec.hasSkey();
+        return userSec.hasSkey();
     }
 
     /**
