@@ -18,6 +18,7 @@ public class CharMdl extends AbstractListModel
 {
 
     private static boolean withSys;
+    private boolean charUpd;
     private List<Char> charSys;
     private List<Char> charUsr;
 
@@ -101,6 +102,23 @@ public class CharMdl extends AbstractListModel
         }
 
         return charUsr.get(index);
+    }
+
+    /**
+     * @return the charUpd
+     */
+    public boolean isCharUpd()
+    {
+        return charUpd;
+    }
+
+    /**
+     * @param charUpd
+     *            the charUpd to set
+     */
+    public void setCharUpd(boolean charUpd)
+    {
+        this.charUpd = charUpd;
     }
 
     public void appendItem(Char data)
