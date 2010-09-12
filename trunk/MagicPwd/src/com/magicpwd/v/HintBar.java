@@ -19,6 +19,7 @@ import java.util.Calendar;
 import javax.swing.Timer;
 
 /**
+ * 主窗口状态提示工具条
  * @author Amon
  */
 public class HintBar extends JPanel
