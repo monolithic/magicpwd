@@ -13,6 +13,7 @@ import com.magicpwd._util.Util;
 import com.magicpwd.c.FindEvt;
 import com.magicpwd.c.MPadEvt;
 import com.magicpwd.d.DBA3000;
+import com.magicpwd.m.NoteMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.ListCR;
 import java.awt.datatransfer.Clipboard;
@@ -33,9 +34,11 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
     private java.util.List<S1S2> noteList;
     private MenuPop noteMenu;
     private UndoManager undo = new UndoManager();
+    private NoteMdl noteMdl;
 
-    public MiniPtn()
+    public MiniPtn(NoteMdl noteMdl)
     {
+        this.noteMdl = noteMdl;
     }
 
     public void initView()
@@ -364,7 +367,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
         infoLayout.show(pl_NoteInfo, "info");
         lb_NoteInfo.setText("");
         tf_NoteHead.requestFocus();
-        UserMdl.getNoteMdl().clear();
+        noteMdl.clear();
 
         undo.discardAllEdits();
         noteMenu.setNoteUndoEnabled(undo.canUndo());
@@ -470,25 +473,25 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
             }
         }
 
-        if (UserMdl.getNoteMdl().getSize() < 1)
+        if (noteMdl.getSize() < 1)
         {
             // Guid
-            UserMdl.getNoteMdl().initGuid();
+            noteMdl.initGuid();
             // Meta
-            UserMdl.getNoteMdl().initMeta();
+            noteMdl.initMeta();
             // Logo
-            UserMdl.getNoteMdl().initLogo();
+            noteMdl.initLogo();
             // Hint
-            UserMdl.getNoteMdl().initHint();
+            noteMdl.initHint();
             // Note
-            UserMdl.getNoteMdl().initNote();
+            noteMdl.initNote();
         }
 
-        UserMdl.getNoteMdl().setNote(head, data);
+        noteMdl.setNote(head, data);
 
         try
         {
-            UserMdl.getNoteMdl().saveData(true);
+            noteMdl.saveData(true);
             infoLayout.show(pl_NoteInfo, "info");
             Lang.setWText(lb_NoteInfo, LangRes.P30F5A03, "");
         }
@@ -708,9 +711,9 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
 
         try
         {
-            UserMdl.getNoteMdl().clear();
-            UserMdl.getNoteMdl().loadData(lastHash);
-            IEditItem note = UserMdl.getNoteMdl().getNote();
+            noteMdl.clear();
+            noteMdl.loadData(lastHash);
+            IEditItem note = noteMdl.getNote();
             if (note != null)
             {
                 tf_NoteHead.setText(note.getName());

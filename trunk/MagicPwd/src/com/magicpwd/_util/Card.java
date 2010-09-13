@@ -6,7 +6,6 @@ package com.magicpwd._util;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._face.IEditItem;
 import com.magicpwd.m.GridMdl;
-import com.magicpwd.m.UserMdl;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -31,7 +30,14 @@ import org.dom4j.io.SAXReader;
 public class Card
 {
 
-    public static java.io.File exportHtm(java.io.File src, java.io.File dst) throws Exception
+    private GridMdl gridMdl;
+
+    public Card(GridMdl gridMdl)
+    {
+        this.gridMdl = gridMdl;
+    }
+
+    public java.io.File exportHtm(java.io.File src, java.io.File dst) throws Exception
     {
         Document doc = new SAXReader().read(src);
 
@@ -61,7 +67,7 @@ public class Card
         return text(text, dst, ".htm");
     }
 
-    public static java.io.File exportTxt(java.io.File src, java.io.File dst) throws Exception
+    public java.io.File exportTxt(java.io.File src, java.io.File dst) throws Exception
     {
         Document doc = new SAXReader().read(src);
         Node node = doc.selectSingleNode("/magicpwd/card/template-uri");
@@ -78,14 +84,14 @@ public class Card
         return text(text, dst, ".txt");
     }
 
-    public static java.io.File exportPng(java.io.File src, java.io.File dst) throws Exception
+    public java.io.File exportPng(java.io.File src, java.io.File dst) throws Exception
     {
         java.io.InputStream stream = new java.io.FileInputStream(src);
         StringBuffer buffer = trim(stream);
         return draw(DocumentHelper.parseText(buffer.toString()), dst);
     }
 
-    public static java.io.File exportSvg(java.io.File src, java.io.File dst) throws Exception
+    public java.io.File exportSvg(java.io.File src, java.io.File dst) throws Exception
     {
         Document doc = new SAXReader().read(src);
         Node node = doc.selectSingleNode("/magicpwd/card/template-uri");
@@ -102,7 +108,7 @@ public class Card
         return text(text, dst, ".svg");
     }
 
-    public static java.io.File exportAll(java.io.File src, java.io.File dst) throws Exception
+    public java.io.File exportAll(java.io.File src, java.io.File dst) throws Exception
     {
         Document doc = new SAXReader().read(src);
 
@@ -139,7 +145,7 @@ public class Card
         return text(text, dst, ext);
     }
 
-    private static StringBuffer trim(java.io.InputStream stream) throws Exception
+    private StringBuffer trim(java.io.InputStream stream) throws Exception
     {
         java.io.InputStreamReader reader = new java.io.InputStreamReader(stream, ConsEnv.FILE_ENCODING);
 
@@ -157,18 +163,17 @@ public class Card
 
         System.out.println(buffer.toString());
 
-        GridMdl gm = UserMdl.getGridMdl();
         IEditItem item;
-        for (int i = ConsEnv.PWDS_HEAD_SIZE, j = gm.getRowCount(); i < j; i += 1)
+        for (int i = ConsEnv.PWDS_HEAD_SIZE, j = gridMdl.getRowCount(); i < j; i += 1)
         {
-            item = gm.getItemAt(i);
+            item = gridMdl.getItemAt(i);
             replace(buffer, '#' + item.getName() + '#', item.getData());
         }
 
         return buffer;
     }
 
-    private static java.io.File text(String src, java.io.File dst, String ext) throws Exception
+    private java.io.File text(String src, java.io.File dst, String ext) throws Exception
     {
         java.io.InputStream stream = File.open4Read(src);
         if (stream == null)
@@ -178,7 +183,7 @@ public class Card
 
         StringBuffer buffer = trim(stream);
 
-        IEditItem item = UserMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_META);
+        IEditItem item = gridMdl.getItemAt(ConsEnv.PWDS_HEAD_META);
         dst = new java.io.File(dst, item.getName() + ext);
         if (!dst.exists())
         {
@@ -193,7 +198,7 @@ public class Card
         return dst;
     }
 
-    private static java.io.File draw(Document doc, java.io.File dst) throws Exception
+    private java.io.File draw(Document doc, java.io.File dst) throws Exception
     {
         int w = 400;
         int h = 240;
@@ -309,7 +314,7 @@ public class Card
             }
         }
 
-        IEditItem item = UserMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_META);
+        IEditItem item = gridMdl.getItemAt(ConsEnv.PWDS_HEAD_META);
         dst = new java.io.File(dst, item.getName() + ".png");
         if (!dst.exists())
         {

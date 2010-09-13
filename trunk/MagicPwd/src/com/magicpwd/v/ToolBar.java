@@ -19,7 +19,6 @@ import com.magicpwd.m.UserMdl;
 public class ToolBar extends JToolBar
 {
 
-    private static final long serialVersionUID = -4431324986694039705L;
     private ToolEvt te_ToolEvent;
 
     public ToolBar()

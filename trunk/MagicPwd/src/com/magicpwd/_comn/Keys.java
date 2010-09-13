@@ -7,7 +7,6 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 import com.magicpwd._cons.ConsDat;
-import javax.crypto.Cipher;
 
 /**
  * 口令信息
@@ -441,29 +440,5 @@ public final class Keys implements Serializable
     public void setP30F010F(String P30F010F)
     {
         this.P30F010F = P30F010F;
-    }
-
-    /**
-     * 对文件进行加密或解密处理
-     * @param c 密码算法
-     * @param s 来源文件
-     * @param d 写入文件
-     * @throws Exception
-     */
-    public static final void doCrypt(Cipher c, java.io.File s, java.io.File d) throws Exception
-    {
-        byte[] buf = new byte[1024];
-        java.io.FileInputStream fis = new java.io.FileInputStream(s);
-        java.io.FileOutputStream fos = new java.io.FileOutputStream(d);
-        int len = fis.read(buf);
-        while (len >= 0)
-        {
-            fos.write(c.update(buf, 0, len));
-            len = fis.read(buf);
-        }
-        fos.write(c.doFinal());
-        fos.flush();
-        fos.close();
-        fis.close();
     }
 }

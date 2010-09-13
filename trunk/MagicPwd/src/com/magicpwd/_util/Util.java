@@ -38,7 +38,6 @@ import com.magicpwd.r.AmonFF;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd.c.MenuEvt;
 import com.magicpwd.c.MPwdEvt;
-import com.magicpwd.m.UserMdl;
 import javax.swing.ImageIcon;
 import org.dom4j.Document;
 import org.dom4j.Node;
@@ -236,10 +235,9 @@ public final class Util
         return bi;
     }
 
-    public static File nextBackupFile(int size) throws Exception
+    public static File nextBackupFile(String bakDir, int bakCnt) throws Exception
     {
-        String dir = UserMdl.getUserCfg().getBackDir();
-        File bak = new File(dir);
+        File bak = new File(bakDir);
         if (!bak.isDirectory())
         {
             bak.mkdir();
@@ -251,7 +249,7 @@ public final class Util
         if (list != null)
         {
             int len = list.length;
-            if (len == size)
+            if (len == bakCnt)
             {
                 backup = list[0];
                 for (int i = 1; i < len; i += 1)
@@ -263,10 +261,10 @@ public final class Util
                 }
                 backup.delete();
             }
-            else if (len > size)
+            else if (len > bakCnt)
             {
                 sortFileByLastModified(list);
-                len -= size;
+                len -= bakCnt;
                 while (len > -1)
                 {
                     list[len--].delete();
@@ -274,7 +272,7 @@ public final class Util
             }
         }
 
-        backup = new File(dir, Char.format(ConsEnv.FILE_BACK, currTime()));
+        backup = new File(bakDir, Char.format(ConsEnv.FILE_BACK, currTime()));
         backup.createNewFile();
         return backup;
     }
