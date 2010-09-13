@@ -6,6 +6,7 @@ package com.magicpwd._comn;
 
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._util.Logs;
+import com.magicpwd.m.UserCfg;
 import java.sql.Timestamp;
 
 /**
@@ -17,9 +18,9 @@ public class HintItem extends EditItem
 
     private Timestamp time;
 
-    public HintItem()
+    public HintItem(UserCfg userCfg)
     {
-        super(ConsDat.INDX_HINT);
+        super(userCfg, ConsDat.INDX_HINT);
     }
 
     @Override

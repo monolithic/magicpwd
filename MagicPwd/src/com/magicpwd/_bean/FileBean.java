@@ -7,7 +7,6 @@ import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comn.EditItem;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._comn.Keys;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
@@ -257,7 +256,8 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
                         return;
                     }
                 }
-                Keys.doCrypt(gridView.getCoreMdl().getECipher(), filePath, amaFile);
+                gridView.getCoreMdl().getSafeMdl().enCrypt(filePath, amaFile);
+                //Keys.doCrypt(gridView.getCoreMdl().getECipher(), filePath, amaFile);
             }
             catch (Exception exp)
             {
@@ -320,7 +320,8 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
         java.io.File tempFile = new java.io.File(amaPath, itemData.getSpec(EditItem.SPEC_FILE_NAME) + ConsEnv.FILE_ATTACHMENT);
         try
         {
-            Keys.doCrypt(gridView.getCoreMdl().getDCipher(), tempFile, filePath);
+            gridView.getCoreMdl().getSafeMdl().deCrypt(tempFile, filePath);
+            //Keys.doCrypt(gridView.getCoreMdl().getDCipher(), tempFile, filePath);
         }
         catch (Exception exp)
         {
@@ -345,7 +346,8 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
 
             java.io.File srcFile = new java.io.File(amaPath, itemData.getSpec(IEditItem.SPEC_FILE_NAME) + ConsEnv.FILE_ATTACHMENT);
             java.io.File tmpFile = new java.io.File(tmpPath, itemData.getData());
-            Keys.doCrypt(gridView.getCoreMdl().getDCipher(), srcFile, tmpFile);
+            gridView.getCoreMdl().getSafeMdl().deCrypt(srcFile, tmpFile);
+            //Keys.doCrypt(gridView.getCoreMdl().getDCipher(), srcFile, tmpFile);
             if (!Desk.open(tmpFile))
             {
                 Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F1A03, "打开文件错误，请尝试手动方式查看！");

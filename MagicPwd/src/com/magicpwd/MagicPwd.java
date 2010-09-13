@@ -9,6 +9,7 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.DBAccess;
+import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.TrayPtn;
 
@@ -29,16 +30,21 @@ public class MagicPwd
     public static void main(String[] args)
     {
         // 界面启动参数读取
-        if (args != null && args.length > 0 && "webstart".equalsIgnoreCase(args[0]))
-        {
-            UserMdl.setRunMode(ConsEnv.MODE_RUN_WEB);
-        }
+//        if (args != null && args.length > 0 && "webstart".equalsIgnoreCase(args[0]))
+//        {
+//            UserMdl.setRunMode(ConsEnv.MODE_RUN_WEB);
+//        }
 
         // 数据完整性处理
         zipData();
 
         // 用户配置文件加载
-        UserMdl.loadUserCfg();
+        final UserCfg cfg = new UserCfg();
+        cfg.loadCfg();
+        //UserMdl.loadUserCfg();
+
+        // 扩展皮肤加载
+        jarLoad(cfg);
 
         // 界面风格设置
         try
@@ -49,14 +55,14 @@ public class MagicPwd
                 @Override
                 public void run()
                 {
-                    boolean deco = ConsCfg.DEF_TRUE.equalsIgnoreCase(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN_DECO, ConsCfg.DEF_FALSE));
+                    boolean deco = ConsCfg.DEF_TRUE.equalsIgnoreCase(cfg.getCfg(ConsCfg.CFG_SKIN_DECO, ConsCfg.DEF_FALSE));
                     javax.swing.JFrame.setDefaultLookAndFeelDecorated(deco);
                     javax.swing.JDialog.setDefaultLookAndFeelDecorated(deco);
 
                     // 用户偏好风格设置
                     try
                     {
-                        String lafClass = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN_NAME, ConsCfg.DEF_SKIN_SYS).trim();
+                        String lafClass = cfg.getCfg(ConsCfg.CFG_SKIN_NAME, ConsCfg.DEF_SKIN_SYS).trim();
                         if (lafClass.length() > 0 && !ConsCfg.DEF_SKIN_DEF.equals(lafClass))
                         {
                             if (ConsCfg.DEF_SKIN_SYS.equalsIgnoreCase(lafClass))
@@ -90,7 +96,7 @@ public class MagicPwd
                             return false;
                         }
                     });
-                    us.initView(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.INT_SIGN_IN : ConsEnv.INT_SIGN_UP);
+                    us.initView(cfg.getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.INT_SIGN_IN : ConsEnv.INT_SIGN_UP);
                     us.initLang();
                     us.initData();
                 }
@@ -102,20 +108,7 @@ public class MagicPwd
         }
 
         // 启动后台预加载线程
-        UserMdl.preLoad();
-
-        try
-        {
-            Class.forName("org.hsqldb.jdbcDriver");
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-        }
-
-        Util.getIcon(0);
-        Util.getNone();
-        Util.getLogo(16);
+        preLoad();
     }
 
     private static void zipData()
@@ -129,6 +122,28 @@ public class MagicPwd
             Logs.exception(exp);
             Lang.showMesg(null, null, exp.getLocalizedMessage());
         }
+    }
+
+    private static void jarLoad(UserCfg cfg)
+    {
+    }
+
+    private static void preLoad()
+    {
+        //UserMdl.preLoad();
+
+        try
+        {
+            Class.forName("org.hsqldb.jdbcDriver");
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+
+        Util.getIcon(0);
+        Util.getNone();
+        Util.getLogo(16);
     }
 
     public static java.io.File endSave()

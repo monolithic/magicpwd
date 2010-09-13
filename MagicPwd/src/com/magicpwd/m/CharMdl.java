@@ -128,6 +128,8 @@ public class CharMdl extends AbstractListModel
         charUsr.add(data);
         DBA3000.saveCharData(data);
         fireIntervalAdded(this, index, index);
+
+        charUpd = true;
     }
 
     public void updateItemAt(int index, Char data)
@@ -139,6 +141,8 @@ public class CharMdl extends AbstractListModel
         charUsr.set(index, data);
         DBA3000.saveCharData(data);
         fireContentsChanged(this, index, index);
+
+        charUpd = true;
     }
 
     public void removeItemAt(int index)
@@ -154,6 +158,8 @@ public class CharMdl extends AbstractListModel
         DBA3000.deleteCharData(charUsr.get(index));
         charUsr.remove(index);
         fireIntervalRemoved(this, index, index);
+
+        charUpd = true;
     }
 
     public void changeItemAt(int index, int toward)
@@ -184,6 +190,8 @@ public class CharMdl extends AbstractListModel
         DBA3000.saveCharData(src);
         charUsr.set(index, dst);
         charUsr.set(toward, src);
+
+        charUpd = true;
     }
 
     public List<Char> getCharSys()

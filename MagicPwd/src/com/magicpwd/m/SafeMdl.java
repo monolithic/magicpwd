@@ -76,6 +76,30 @@ public class SafeMdl
     }
 
     /**
+     * 对文件进行加密或解密处理
+     * @param c 密码算法
+     * @param s 来源文件
+     * @param d 写入文件
+     * @throws Exception
+     */
+    public final void deCrypt(java.io.File s, java.io.File d) throws Exception
+    {
+        byte[] buf = new byte[1024];
+        java.io.FileInputStream fis = new java.io.FileInputStream(s);
+        java.io.FileOutputStream fos = new java.io.FileOutputStream(d);
+        int len = fis.read(buf);
+        while (len >= 0)
+        {
+            fos.write(dCipher.update(buf, 0, len));
+            len = fis.read(buf);
+        }
+        fos.write(dCipher.doFinal());
+        fos.flush();
+        fos.close();
+        fis.close();
+    }
+
+    /**
      * 加密处理
      * @param text
      * @throws Exception
@@ -83,6 +107,30 @@ public class SafeMdl
     public String enCrypt(String text) throws Exception
     {
         return Util.bytesToString(eCipher.doFinal(text.getBytes(ConsEnv.FILE_ENCODING)), getSafeKey().getMask());
+    }
+
+    /**
+     * 对文件进行加密或解密处理
+     * @param c 密码算法
+     * @param s 来源文件
+     * @param d 写入文件
+     * @throws Exception
+     */
+    public final void enCrypt(java.io.File s, java.io.File d) throws Exception
+    {
+        byte[] buf = new byte[1024];
+        java.io.FileInputStream fis = new java.io.FileInputStream(s);
+        java.io.FileOutputStream fos = new java.io.FileOutputStream(d);
+        int len = fis.read(buf);
+        while (len >= 0)
+        {
+            fos.write(eCipher.update(buf, 0, len));
+            len = fis.read(buf);
+        }
+        fos.write(eCipher.doFinal());
+        fos.flush();
+        fos.close();
+        fis.close();
     }
 
     /**

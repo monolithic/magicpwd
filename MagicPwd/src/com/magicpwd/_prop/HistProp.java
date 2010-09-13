@@ -271,7 +271,7 @@ public class HistProp extends JPanel implements IPropBean
         {
             return;
         }
-        DBA3000.pickupHistData(coreMdl.getGridMdl().getKeysHash(), temp.getK());
+        DBA3000.pickupHistData(coreMdl.getGridMdl().getKeysHash(), temp.getK(), 0);//TODO:数据恢复序列
         lm_HistList.clear();
         hist.clear();
 

@@ -5,6 +5,7 @@
 package com.magicpwd._comn;
 
 import com.magicpwd._cons.ConsDat;
+import com.magicpwd.m.UserCfg;
 import java.sql.Timestamp;
 
 /**
@@ -20,9 +21,9 @@ public class GuidItem extends EditItem
 
     private Timestamp time;
 
-    public GuidItem()
+    public GuidItem(UserCfg userCfg)
     {
-        super(ConsDat.INDX_GUID);
+        super(userCfg, ConsDat.INDX_GUID);
     }
 
     @Override

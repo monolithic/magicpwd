@@ -5,10 +5,9 @@ package com.magicpwd._comn;
 
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._face.IEditItem;
+import com.magicpwd.m.UserCfg;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.magicpwd.m.UserMdl;
 
 /**
  * 口令属性
@@ -25,20 +24,22 @@ public class EditItem implements IEditItem
     private String data;
     /** 专有内容 */
     private List<String> spec;
+    private UserCfg userCfg;
 
     /**
      * 
      */
-    public EditItem()
+    public EditItem(UserCfg userCfg)
     {
+        this(userCfg, 0);
     }
 
     /**
      * @param type
      */
-    public EditItem(int type)
+    public EditItem(UserCfg userCfg, int type)
     {
-        this(type, "", "");
+        this(userCfg, type, "", "");
     }
 
     /**
@@ -46,8 +47,9 @@ public class EditItem implements IEditItem
      * @param name
      * @param data
      */
-    public EditItem(int type, String name, String data)
+    public EditItem(UserCfg userCfg, int type, String name, String data)
     {
+        this.userCfg = userCfg;
         this.type = type;
         this.name = name;
         this.data = data;
@@ -204,9 +206,9 @@ public class EditItem implements IEditItem
                 break;
             case ConsDat.INDX_PWDS:
                 spec = new ArrayList<String>(3);
-                spec.add(UserMdl.getUserCfg().getPwdsKey());
-                spec.add(UserMdl.getUserCfg().getPwdsLen());
-                spec.add(UserMdl.getUserCfg().getPwdsLoop());
+                spec.add(userCfg.getPwdsKey());
+                spec.add(userCfg.getPwdsLen());
+                spec.add(userCfg.getPwdsLoop());
                 break;
             case ConsDat.INDX_FILE:
                 spec = new ArrayList<String>(1);

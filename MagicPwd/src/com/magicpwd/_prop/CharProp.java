@@ -325,7 +325,6 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
 
         coreMdl.getCharMdl().changeItemAt(indx, -1);
         ls_CharList.setSelectedIndex(indx - 1);
-        coreMdl.setCharUpd(true);
     }
 
     private void sortDActionPerformed(java.awt.event.ActionEvent evt)
@@ -338,7 +337,6 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
 
         coreMdl.getCharMdl().changeItemAt(indx, 1);
         ls_CharList.setSelectedIndex(indx + 1);
-        coreMdl.setCharUpd(true);
     }
 
     private void apndDataActionPerformed(java.awt.event.ActionEvent evt)
@@ -387,7 +385,6 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         charItem = new Char();
         cb_CharTplt.setSelectedIndex(0);
         showInfo(charItem);
-        coreMdl.setCharUpd(true);
         isUpdate = false;
     }
 
@@ -407,7 +404,6 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         coreMdl.getCharMdl().removeItemAt(ls_CharList.getSelectedIndex());
         charItem = new Char();
         showInfo(charItem);
-        coreMdl.setCharUpd(true);
         isUpdate = false;
     }
 

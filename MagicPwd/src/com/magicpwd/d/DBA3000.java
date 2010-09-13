@@ -19,7 +19,7 @@ import com.magicpwd._face.IEditItem;
 import com.magicpwd._util.Hash;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.UserCfg;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -116,20 +116,20 @@ public class DBA3000
      * 添加用户过滤条件
      * @param dba
      */
-    private static void addUserSort(DBAccess dba)
+    private static void addUserSort(DBAccess dba, UserCfg cfg)
     {
 //        dba.addWhere(DBC3000.P30F0102, "");
-        dba.addWhere(DBC3000.P30F0105, UserMdl.getUserCode());
+        dba.addWhere(DBC3000.P30F0105, cfg.getUserCode());
     }
 
     /**
      * 添加显示排序
      * @param dba
      */
-    private static void addDataSort(DBAccess dba)
+    private static void addDataSort(DBAccess dba, UserCfg cfg)
     {
-        boolean asc = ConsCfg.DEF_TRUE.equals(UserMdl.getUserCfg().getCfg(ConsCfg.CFG_VIEW_LIST_ASC, ConsCfg.DEF_FALSE));
-        String key = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_VIEW_LIST_KEY, "09");
+        boolean asc = ConsCfg.DEF_TRUE.equals(cfg.getCfg(ConsCfg.CFG_VIEW_LIST_ASC, ConsCfg.DEF_FALSE));
+        String key = cfg.getCfg(ConsCfg.CFG_VIEW_LIST_KEY, "09");
 
         if (!Pattern.matches("^[0-9A-Z]{2}$", key))
         {
@@ -175,7 +175,7 @@ public class DBA3000
      * @param list
      * @return
      */
-    public static boolean readKeysList(String kindHash, List<Keys> list)
+    public static boolean readKeysList(UserCfg cfg, String kindHash, List<Keys> list)
     {
         // 数据库连接初始化
         DBAccess dba = new DBAccess();
@@ -186,9 +186,9 @@ public class DBA3000
 
             // 查询语句拼接
             dba.addTable(DBC3000.P30F0100);
-            addUserSort(dba);
+            addUserSort(dba, cfg);
             dba.addWhere(DBC3000.P30F0106, kindHash);
-            addDataSort(dba);
+            addDataSort(dba, cfg);
 
             getNameData(dba.executeSelect(), list);
             return true;
@@ -216,7 +216,7 @@ public class DBA3000
      * @param list
      * @return
      */
-    public static boolean findUserData(String text, List<Keys> list)
+    public static boolean findUserData(UserCfg cfg, String text, List<Keys> list)
     {
         if (!com.magicpwd._util.Char.isValidate(text))
         {
@@ -232,9 +232,9 @@ public class DBA3000
 
             // 查询语句拼接
             dba.addTable(DBC3000.P30F0100);
-            addUserSort(dba);
+            addUserSort(dba, cfg);
             dba.addWhere(com.magicpwd._util.Char.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC3000.P30F0109, DBC3000.P30F010A, text2Query(text)));
-            addDataSort(dba);
+            addDataSort(dba, cfg);
 
             getNameData(dba.executeSelect(), list);
             return true;
@@ -256,7 +256,7 @@ public class DBA3000
      * @param list
      * @return
      */
-    public static boolean findHintList(Timestamp s, Timestamp e, List<Keys> list)
+    public static boolean findHintList(UserCfg cfg, Timestamp s, Timestamp e, List<Keys> list)
     {
         DBAccess dba = new DBAccess();
 
@@ -265,9 +265,9 @@ public class DBA3000
             dba.init();
 
             dba.addTable(DBC3000.P30F0100);
-            addUserSort(dba);
+            addUserSort(dba, cfg);
             dba.addWhere(DBC3000.P30F010D + " BETWEEN '" + s.toString() + "' AND '" + e.toString() + '\'');
-            addDataSort(dba);
+            addDataSort(dba, cfg);
 
             getNameData(dba.executeSelect(), list);
             return true;
@@ -279,7 +279,7 @@ public class DBA3000
         }
     }
 
-    public static boolean findUserNote(String text, java.util.List<S1S2> list)
+    public static boolean findUserNote(String code, String text, java.util.List<S1S2> list)
     {
         if (!com.magicpwd._util.Char.isValidate(text))
         {
@@ -298,7 +298,7 @@ public class DBA3000
             dba.addColumn(DBC3000.P30F0104);
             dba.addColumn(DBC3000.P30F0109);
             dba.addColumn(DBC3000.P30F010A);
-            dba.addWhere(DBC3000.P30F0105, UserMdl.getUserCode());
+            dba.addWhere(DBC3000.P30F0105, code);
             dba.addWhere(com.magicpwd._util.Char.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC3000.P30F0109, DBC3000.P30F010A, text2Query(text)));
             //dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_MODE_1);
             dba.addWhere(DBC3000.P30F0106, ConsDat.HASH_NOTE);
@@ -1152,7 +1152,7 @@ public class DBA3000
         return charList;
     }
 
-    public static boolean pickupHistData(String keysHash, String logsHash)
+    public static boolean pickupHistData(String keysHash, String logsHash, int sequence)
     {
         DBAccess dba = new DBAccess();
 
@@ -1168,7 +1168,7 @@ public class DBA3000
             // 删除内容数据
             dba.addBatch(com.magicpwd._util.Char.format(DELETE, DBC3000.P30F0200, DBC3000.P30F0202, keysHash));
 
-            dba.addParam(DBC3000.P30F0101, UserMdl.getGridMdl().getSequence());
+            dba.addParam(DBC3000.P30F0101, sequence);
             dba.addParam(DBC3000.P30F0102, DBC3000.P30F0A02, false);
             dba.addParam(DBC3000.P30F0103, DBC3000.P30F0A03, false);
             dba.addParam(DBC3000.P30F0104, DBC3000.P30F0A04, false);

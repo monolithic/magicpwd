@@ -27,7 +27,7 @@ public final class UserCfg
     private Properties userCfg;
     private boolean viewTop;
 
-    UserCfg()
+    public UserCfg()
     {
     }
 

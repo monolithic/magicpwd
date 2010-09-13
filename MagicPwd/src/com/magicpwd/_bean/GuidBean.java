@@ -392,25 +392,26 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
 
         try
         {
+            Card card = new Card(gridView.getCoreMdl().getGridMdl());
             if (ConsEnv.CARD_HTM.equals(key))
             {
-                dstFile = Card.exportHtm(srcFile, dstFile);
+                dstFile = card.exportHtm(srcFile, dstFile);
             }
             else if (ConsEnv.CARD_TXT.equals(key))
             {
-                dstFile = Card.exportTxt(srcFile, dstFile);
+                dstFile = card.exportTxt(srcFile, dstFile);
             }
             else if (ConsEnv.CARD_PNG.equals(key))
             {
-                dstFile = Card.exportPng(srcFile, dstFile);
+                dstFile = card.exportPng(srcFile, dstFile);
             }
             else if (ConsEnv.CARD_SVG.equals(key))
             {
-                dstFile = Card.exportSvg(srcFile, dstFile);
+                dstFile = card.exportSvg(srcFile, dstFile);
             }
             else
             {
-                dstFile = Card.exportAll(srcFile, dstFile);
+                dstFile = card.exportAll(srcFile, dstFile);
             }
 
             if (dstFile == null || !dstFile.exists())
