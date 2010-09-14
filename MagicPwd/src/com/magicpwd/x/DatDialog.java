@@ -19,7 +19,7 @@ public class DatDialog extends javax.swing.JDialog
     private IBackCall backCall;
     private TreeModel treeModel;
 
-    public DatDialog(IBackCall backCall, TreeModel treeModel)
+    public DatDialog(TreeModel treeModel, IBackCall backCall)
     {
         super(TrayPtn.getCurrForm(), true);
         this.backCall = backCall;

@@ -342,7 +342,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
     {
         if (mp_MainPtn == null)
         {
-            mp_MainPtn = new MainPtn();
+            mp_MainPtn = new MainPtn(coreMdl);
             mp_MainPtn.initView();
             mp_MainPtn.initLang();
             mp_MainPtn.initData();
@@ -370,7 +370,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
     {
         if (mp_MiniPtn == null)
         {
-            mp_MiniPtn = new MiniPtn();
+            mp_MiniPtn = new MiniPtn(coreMdl);
             mp_MiniPtn.initView();
             mp_MiniPtn.initLang();
             mp_MiniPtn.initData();

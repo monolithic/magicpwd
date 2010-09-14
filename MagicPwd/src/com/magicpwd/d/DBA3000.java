@@ -279,7 +279,7 @@ public class DBA3000
         }
     }
 
-    public static boolean findUserNote(String code, String text, java.util.List<S1S2> list)
+    public static boolean findUserNote(UserCfg cfg, String text, java.util.List<S1S2> list)
     {
         if (!com.magicpwd._util.Char.isValidate(text))
         {
@@ -298,7 +298,7 @@ public class DBA3000
             dba.addColumn(DBC3000.P30F0104);
             dba.addColumn(DBC3000.P30F0109);
             dba.addColumn(DBC3000.P30F010A);
-            dba.addWhere(DBC3000.P30F0105, code);
+            dba.addWhere(DBC3000.P30F0105, cfg.getUserCode());
             dba.addWhere(com.magicpwd._util.Char.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC3000.P30F0109, DBC3000.P30F010A, text2Query(text)));
             //dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_MODE_1);
             dba.addWhere(DBC3000.P30F0106, ConsDat.HASH_NOTE);
@@ -999,7 +999,7 @@ public class DBA3000
         return true;
     }
 
-    public static boolean selectTpltData(String kindHash, List<IEditItem> tpltList)
+    public static boolean selectTpltData(UserCfg cfg, String kindHash, List<IEditItem> tpltList)
     {
         DBAccess dba = new DBAccess();
 
@@ -1018,7 +1018,7 @@ public class DBA3000
             EditItem kv;
             while (rest.next())
             {
-                kv = new EditItem();
+                kv = new EditItem(cfg);
                 kv.setType(rest.getInt(DBC3000.P30F1102));
                 kv.setName(rest.getString(DBC3000.P30F1105));
                 kv.setData(rest.getString(DBC3000.P30F1106));

@@ -10,7 +10,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.c.ToolEvt;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.UserCfg;
 
 /**
  * @author Amon
@@ -20,9 +20,11 @@ public class ToolBar extends JToolBar
 {
 
     private ToolEvt te_ToolEvent;
+    private UserCfg userCfg;
 
-    public ToolBar()
+    public ToolBar(UserCfg userCfg)
     {
+        this.userCfg = userCfg;
     }
 
     public void initView()
@@ -99,7 +101,7 @@ public class ToolBar extends JToolBar
 
         bt_PropSide = new javax.swing.JToggleButton();
         bt_PropSide.setIcon(Util.getIcon(ConsEnv.ICON_TOOL_TAIL));
-        bt_PropSide.setSelected(UserMdl.getUserCfg().isEditWnd());
+        bt_PropSide.setSelected(userCfg.isEditWnd());
         bt_PropSide.addActionListener(new java.awt.event.ActionListener()
         {
 

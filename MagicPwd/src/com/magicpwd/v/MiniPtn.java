@@ -14,6 +14,7 @@ import com.magicpwd.c.FindEvt;
 import com.magicpwd.c.MPadEvt;
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.NoteMdl;
+import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.ListCR;
 import java.awt.datatransfer.Clipboard;
@@ -34,11 +35,11 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
     private java.util.List<S1S2> noteList;
     private MenuPop noteMenu;
     private UndoManager undo = new UndoManager();
-    private NoteMdl noteMdl;
+    private UserMdl coreMdl;
 
-    public MiniPtn(NoteMdl noteMdl)
+    public MiniPtn(UserMdl coreMdl)
     {
-        this.noteMdl = noteMdl;
+        this.coreMdl = coreMdl;
     }
 
     public void initView()
@@ -367,7 +368,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
         infoLayout.show(pl_NoteInfo, "info");
         lb_NoteInfo.setText("");
         tf_NoteHead.requestFocus();
-        noteMdl.clear();
+        coreMdl.getNoteMdl().clear();
 
         undo.discardAllEdits();
         noteMenu.setNoteUndoEnabled(undo.canUndo());
@@ -473,6 +474,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
             }
         }
 
+        NoteMdl noteMdl = coreMdl.getNoteMdl();
         if (noteMdl.getSize() < 1)
         {
             // Guid
@@ -545,10 +547,10 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
     @Override
     public void viewTop1ActionPerformed(java.awt.event.ActionEvent evt)
     {
-        boolean b = !UserMdl.getUserCfg().isViewTop();
+        UserCfg cfg = coreMdl.getUserCfg();
+        boolean b = !cfg.isViewTop();
         TrayPtn.getCurrForm().setAlwaysOnTop(b);
-
-        UserMdl.getUserCfg().setViewTop(b);
+        cfg.setViewTop(b);
     }
 
     @Override
@@ -561,7 +563,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
         }
 
         noteList.clear();
-        boolean b = DBA3000.findUserNote(noteName, noteList);
+        boolean b = DBA3000.findUserNote(coreMdl.getUserCfg(), noteName, noteList);
         b &= noteList.size() > 0;
         if (!b || noteList.size() < 1)
         {
@@ -711,6 +713,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
 
         try
         {
+            NoteMdl noteMdl = coreMdl.getNoteMdl();
             noteMdl.clear();
             noteMdl.loadData(lastHash);
             IEditItem note = noteMdl.getNote();
