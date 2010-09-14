@@ -209,7 +209,7 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
      */
     public EditItem initGuid()
     {
-        GuidItem guid = new GuidItem();
+        GuidItem guid = new GuidItem(coreMdl.getUserCfg());
         guid.setTime(new java.sql.Timestamp(System.currentTimeMillis()));
         ls_ItemList.add(guid);
         fireTableDataChanged();
@@ -222,11 +222,11 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
     public void initMeta()
     {
         // 关键搜索
-        ls_ItemList.add(new MetaItem());
+        ls_ItemList.add(new MetaItem(coreMdl.getUserCfg()));
         // 徽标
-        ls_ItemList.add(new LogoItem());
+        ls_ItemList.add(new LogoItem(coreMdl.getUserCfg()));
         // 过时提醒
-        ls_ItemList.add(new HintItem());
+        ls_ItemList.add(new HintItem(coreMdl.getUserCfg()));
         fireTableDataChanged();
     }
 
@@ -256,7 +256,7 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
      */
     public EditItem wAppend(int indx, int type)
     {
-        return wAppend(indx, new EditItem(type));
+        return wAppend(indx, new EditItem(coreMdl.getUserCfg(), type));
     }
 
     /**
@@ -284,7 +284,7 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
      */
     public void wAppend(String typeHash)
     {
-        DBA3000.selectTpltData(typeHash, ls_ItemList);
+        DBA3000.selectTpltData(coreMdl.getUserCfg(), typeHash, ls_ItemList);
         fireTableDataChanged();
     }
 
@@ -382,22 +382,22 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
             keys.setP30F0105(coreMdl.getUserCfg().getUserCode());
 
             // Guid
-            GuidItem guid = new GuidItem();
+            GuidItem guid = new GuidItem(coreMdl.getUserCfg());
             guid.setTime(new java.sql.Timestamp(com.magicpwd._util.Date.stringToDate(temp.get(indx++), '-', ':', ' ').getTimeInMillis()));
             guid.setData(kindHash);
             ls_ItemList.add(guid);
 
             // Meta
-            MetaItem meta = new MetaItem();
+            MetaItem meta = new MetaItem(coreMdl.getUserCfg());
             meta.setName(temp.get(indx++));
             meta.setData(temp.get(indx++));
             ls_ItemList.add(meta);
 
             // Logo
-            ls_ItemList.add(new LogoItem());
+            ls_ItemList.add(new LogoItem(coreMdl.getUserCfg()));
 
             // Hint
-            HintItem hint = new HintItem();
+            HintItem hint = new HintItem(coreMdl.getUserCfg());
             String text = temp.get(indx++);
             if (com.magicpwd._util.Char.isValidate(text))
             {
@@ -408,7 +408,7 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
 
             while (indx < temp.size())
             {
-                tplt = new EditItem();
+                tplt = new EditItem(coreMdl.getUserCfg());
                 tplt.setType(Integer.parseInt(temp.get(indx++)));
                 tplt.setName(temp.get(indx++));
                 tplt.setData(temp.get(indx++));
@@ -426,7 +426,7 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
     public int wExport(java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash)
     {
         java.util.ArrayList<Keys> dataList = new java.util.ArrayList<Keys>();
-        DBA3000.readKeysList(kindHash, dataList);
+        DBA3000.readKeysList(coreMdl.getUserCfg(), kindHash, dataList);
         if (dataList == null || dataList.size() < 1)
         {
             return 0;
@@ -523,26 +523,26 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
         }
 
         // Guid
-        GuidItem guid = new GuidItem();
+        GuidItem guid = new GuidItem(coreMdl.getUserCfg());
         guid.setData(keys.getP30F0106());
         guid.setTime(keys.getP30F0107());
         guid.setSpec(IEditItem.SPEC_GUID_TPLT, keys.getP30F0108());
         list.add(guid);
 
         // MetaItem
-        MetaItem meta = new MetaItem();
+        MetaItem meta = new MetaItem(coreMdl.getUserCfg());
         meta.setName(keys.getP30F0109());
         meta.setData(keys.getP30F010A());
         list.add(meta);
 
         // LogoItem
-        LogoItem logo = new LogoItem();
+        LogoItem logo = new LogoItem(coreMdl.getUserCfg());
         logo.setName(keys.getP30F010B());
         logo.setData(keys.getP30F010C());
         list.add(logo);
 
         // HintItem
-        HintItem hint = new HintItem();
+        HintItem hint = new HintItem(coreMdl.getUserCfg());
         hint.setTime(keys.getP30F010D());
         hint.setName(keys.getP30F010E());
         list.add(hint);
@@ -569,7 +569,7 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
             name = t.substring(dn + 1, dd);
             data = t.substring(dd + 1, ds);
             spec = t.substring(ds + 1, t.length());
-            item = new EditItem(type, name, data);
+            item = new EditItem(coreMdl.getUserCfg(), type, name, data);
             if (spec.length() > 0)
             {
                 item.deCodeSpec(spec, ConsDat.SP_SQL_KV);

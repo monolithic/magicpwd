@@ -70,7 +70,7 @@ public final class UserMdl
     public void preLoad()
     {
         gridMdl = new GridMdl(this);
-        listMdl = new ListMdl();
+        listMdl = new ListMdl(this);
         Kind kind = new Kind();
         kind.setC2010103(ConsDat.HASH_ROOT);
         kind.setC2010105("魔方密码");

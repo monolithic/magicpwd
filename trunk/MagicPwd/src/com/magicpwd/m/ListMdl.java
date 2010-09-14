@@ -21,9 +21,11 @@ public class ListMdl extends DefaultListModel
 {
 
     private List<Keys> dataList;
+    private UserMdl coreMdl;
 
-    ListMdl()
+    ListMdl(UserMdl coreMdl)
     {
+        this.coreMdl = coreMdl;
         dataList = new ArrayList<Keys>();
     }
 
@@ -54,7 +56,7 @@ public class ListMdl extends DefaultListModel
         int s = dataList.size();
         dataList.clear();
         fireIntervalRemoved(this, 0, s);
-        DBA3000.readKeysList(typeHash, dataList);
+        DBA3000.readKeysList(coreMdl.getUserCfg(), typeHash, dataList);
         s = dataList.size();
         fireIntervalAdded(this, 0, s);
     }
@@ -71,7 +73,7 @@ public class ListMdl extends DefaultListModel
         c.set(Calendar.MILLISECOND, 0);
         Timestamp s = new Timestamp(c.getTimeInMillis());
         Timestamp e = new Timestamp(c.getTimeInMillis());
-        DBA3000.findHintList(s, e, dataList);
+        DBA3000.findHintList(coreMdl.getUserCfg(), s, e, dataList);
         n = dataList.size();
         fireIntervalAdded(this, 0, n);
     }
@@ -81,7 +83,7 @@ public class ListMdl extends DefaultListModel
         int s = dataList.size();
         dataList.clear();
         fireIntervalRemoved(this, 0, s);
-        boolean b = DBA3000.findUserData(keysName, dataList);
+        boolean b = DBA3000.findUserData(coreMdl.getUserCfg(), keysName, dataList);
         s = dataList.size();
         b &= s > 0;
         if (b)

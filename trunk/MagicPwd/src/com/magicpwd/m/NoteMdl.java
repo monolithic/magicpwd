@@ -38,7 +38,7 @@ public class NoteMdl
 
     public IEditItem initGuid()
     {
-        GuidItem guid = new GuidItem();
+        GuidItem guid = new GuidItem(coreMdl.getUserCfg());
         guid.setData(ConsDat.HASH_NOTE);
         guid.setTime(new java.sql.Timestamp(System.currentTimeMillis()));
         ls_ItemList.add(guid);
@@ -47,28 +47,28 @@ public class NoteMdl
 
     public IEditItem initMeta()
     {
-        MetaItem meta = new MetaItem();
+        MetaItem meta = new MetaItem(coreMdl.getUserCfg());
         ls_ItemList.add(meta);
         return meta;
     }
 
     public IEditItem initLogo()
     {
-        LogoItem logo = new LogoItem();
+        LogoItem logo = new LogoItem(coreMdl.getUserCfg());
         ls_ItemList.add(logo);
         return logo;
     }
 
     public IEditItem initHint()
     {
-        HintItem hint = new HintItem();
+        HintItem hint = new HintItem(coreMdl.getUserCfg());
         ls_ItemList.add(hint);
         return hint;
     }
 
     public IEditItem initNote()
     {
-        EditItem note = new EditItem();
+        EditItem note = new EditItem(coreMdl.getUserCfg());
         note.setType(ConsDat.INDX_AREA);
         ls_ItemList.add(note);
         return note;

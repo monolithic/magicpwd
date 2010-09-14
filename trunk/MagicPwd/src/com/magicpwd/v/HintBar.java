@@ -109,11 +109,11 @@ public class HintBar extends JPanel
     {
         if (hintMdl.getUnreadCount() > 0)
         {
-            UserMdl.getListMdl().clear();
-            for (Keys keys : hintMdl.getUnread())
-            {
-                UserMdl.getListMdl().wAppend(keys);
-            }
+//            UserMdl.getListMdl().clear();
+//            for (Keys keys : hintMdl.getUnread())
+//            {
+//                UserMdl.getListMdl().wAppend(keys);
+//            }
             showNote();
         }
     }

@@ -42,6 +42,7 @@ import com.magicpwd.c.MPwdEvt;
 import com.magicpwd.c.ToolEvt;
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.GridMdl;
+import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.KeysCR;
 import com.magicpwd.r.KindTN;
@@ -80,14 +81,23 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
      * 用户查找字符串
      */
     private String queryKey;
+    private UserMdl coreMdl;
     private javax.swing.border.TitledBorder border;
 
-    public MainPtn()
+    public MainPtn(UserMdl coreMdl)
     {
+        this.coreMdl = coreMdl;
+    }
+
+    public UserMdl getCoreMdl()
+    {
+        return coreMdl;
     }
 
     public void initView()
     {
+        UserCfg cfg = coreMdl.getUserCfg();
+
         initGuidView();
         initPropView();
         initUserView();
@@ -98,18 +108,18 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         mainMenu = new MenuBar();
         mainMenu.initView();
         mainMenu.setMenuEvent(this);
-        mainMenu.setVisible(UserMdl.getUserCfg().isMenuViw());
+        mainMenu.setVisible(cfg.isMenuViw());
         this.setJMenuBar(mainMenu);
 
-        mainTool = new ToolBar();
+        mainTool = new ToolBar(cfg);
         mainTool.initView();
         mainTool.setToolEvent(this);
-        mainTool.setVisible(UserMdl.getUserCfg().isToolViw());
-        this.getContentPane().add(mainTool, UserMdl.getUserCfg().getToolLoc());
+        mainTool.setVisible(cfg.isToolViw());
+        this.getContentPane().add(mainTool, cfg.getToolLoc());
 
-        mainFind.setVisible(UserMdl.getUserCfg().isFindViw());
+        mainFind.setVisible(cfg.isFindViw());
 
-        mainInfo.setVisible(UserMdl.getUserCfg().isInfoViw());
+        mainInfo.setVisible(cfg.isInfoViw());
 
         this.pack();
         this.setIconImage(Util.getLogo(16));
@@ -129,9 +139,10 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
 
     public void initData()
     {
-        if (UserMdl.getUserCfg().isEditViw())
+        UserCfg cfg = coreMdl.getUserCfg();
+        if (cfg.isEditViw())
         {
-            showPropEdit(UserMdl.getUserCfg().isEditWnd());
+            showPropEdit(cfg.isEditWnd());
         }
 
         Util.addDataAction(pl_KeysBase.getActionMap(), pl_KeysBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
@@ -250,7 +261,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             {
                 tb_LastIndx = tb_KeysView.getRowCount();
             }
-            showPropEdit(UserMdl.getGridMdl().wAppend(tb_LastIndx, ConsDat.INDX_AREA), true);
+            showPropEdit(coreMdl.getGridMdl().wAppend(tb_LastIndx, ConsDat.INDX_AREA), true);
             tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
         }
     }
@@ -265,7 +276,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             {
                 tb_LastIndx = tb_KeysView.getRowCount();
             }
-            showPropEdit(UserMdl.getGridMdl().wAppend(tb_LastIndx, ConsDat.INDX_DATE), true);
+            showPropEdit(coreMdl.getGridMdl().wAppend(tb_LastIndx, ConsDat.INDX_DATE), true);
             tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
         }
     }
@@ -280,7 +291,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             {
                 tb_LastIndx = tb_KeysView.getRowCount();
             }
-            showPropEdit(UserMdl.getGridMdl().wAppend(tb_LastIndx, ConsDat.INDX_FILE), true);
+            showPropEdit(coreMdl.getGridMdl().wAppend(tb_LastIndx, ConsDat.INDX_FILE), true);
             tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
         }
     }
@@ -295,7 +306,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             {
                 tb_LastIndx = tb_KeysView.getRowCount();
             }
-            showPropEdit(UserMdl.getGridMdl().wAppend(tb_LastIndx, ConsDat.INDX_LINK), true);
+            showPropEdit(coreMdl.getGridMdl().wAppend(tb_LastIndx, ConsDat.INDX_LINK), true);
             tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
         }
     }
@@ -310,7 +321,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             {
                 tb_LastIndx = tb_KeysView.getRowCount();
             }
-            showPropEdit(UserMdl.getGridMdl().wAppend(tb_LastIndx, ConsDat.INDX_MAIL), true);
+            showPropEdit(coreMdl.getGridMdl().wAppend(tb_LastIndx, ConsDat.INDX_MAIL), true);
             tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
         }
     }
@@ -325,7 +336,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             {
                 tb_LastIndx = tb_KeysView.getRowCount();
             }
-            showPropEdit(UserMdl.getGridMdl().wAppend(tb_LastIndx, ConsDat.INDX_PWDS), true);
+            showPropEdit(coreMdl.getGridMdl().wAppend(tb_LastIndx, ConsDat.INDX_PWDS), true);
             tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
         }
     }
@@ -340,7 +351,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             {
                 tb_LastIndx = tb_KeysView.getRowCount();
             }
-            showPropEdit(UserMdl.getGridMdl().wAppend(tb_LastIndx, ConsDat.INDX_TEXT), true);
+            showPropEdit(coreMdl.getGridMdl().wAppend(tb_LastIndx, ConsDat.INDX_TEXT), true);
             tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
         }
     }
@@ -348,11 +359,11 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
     @Override
     public void editFindActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (!UserMdl.getUserCfg().isFindViw())
+        if (!coreMdl.getUserCfg().isFindViw())
         {
             mainFind.setVisible(true);
             mainMenu.setViewFindSelected(true);
-            UserMdl.getUserCfg().setFindViw(true);
+            coreMdl.getUserCfg().setFindViw(true);
         }
         mainFind.requestFocus();
     }
@@ -365,12 +376,12 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             int idx = tb_KeysView.getSelectedRow();
             if (idx >= ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
-                IEditItem tplt = UserMdl.getGridMdl().getItemAt(idx);
+                IEditItem tplt = coreMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_AREA)
                 {
                     tplt.setType(ConsDat.INDX_AREA);
                     showPropEdit(tplt, true);
-                    UserMdl.getGridMdl().setModified(true);
+                    coreMdl.getGridMdl().setModified(true);
                 }
             }
         }
@@ -384,12 +395,12 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             int idx = tb_KeysView.getSelectedRow();
             if (idx >= ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
-                IEditItem tplt = UserMdl.getGridMdl().getItemAt(idx);
+                IEditItem tplt = coreMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_DATE)
                 {
                     tplt.setType(ConsDat.INDX_DATE);
                     showPropEdit(tplt, true);
-                    UserMdl.getGridMdl().setModified(true);
+                    coreMdl.getGridMdl().setModified(true);
                 }
             }
         }
@@ -403,12 +414,12 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             int idx = tb_KeysView.getSelectedRow();
             if (idx >= ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
-                IEditItem tplt = UserMdl.getGridMdl().getItemAt(idx);
+                IEditItem tplt = coreMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_FILE)
                 {
                     tplt.setType(ConsDat.INDX_FILE);
                     showPropEdit(tplt, true);
-                    UserMdl.getGridMdl().setModified(true);
+                    coreMdl.getGridMdl().setModified(true);
                 }
             }
         }
@@ -422,12 +433,12 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             int idx = tb_KeysView.getSelectedRow();
             if (idx >= ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
-                IEditItem tplt = UserMdl.getGridMdl().getItemAt(idx);
+                IEditItem tplt = coreMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_LINK)
                 {
                     tplt.setType(ConsDat.INDX_LINK);
                     showPropEdit(tplt, true);
-                    UserMdl.getGridMdl().setModified(true);
+                    coreMdl.getGridMdl().setModified(true);
                 }
             }
         }
@@ -441,12 +452,12 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             int idx = tb_KeysView.getSelectedRow();
             if (idx >= ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
-                IEditItem tplt = UserMdl.getGridMdl().getItemAt(idx);
+                IEditItem tplt = coreMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_MAIL)
                 {
                     tplt.setType(ConsDat.INDX_MAIL);
                     showPropEdit(tplt, true);
-                    UserMdl.getGridMdl().setModified(true);
+                    coreMdl.getGridMdl().setModified(true);
                 }
             }
         }
@@ -460,12 +471,12 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             int idx = tb_KeysView.getSelectedRow();
             if (idx >= ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
-                IEditItem tplt = UserMdl.getGridMdl().getItemAt(idx);
+                IEditItem tplt = coreMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_PWDS)
                 {
                     tplt.setType(ConsDat.INDX_PWDS);
                     showPropEdit(tplt, true);
-                    UserMdl.getGridMdl().setModified(true);
+                    coreMdl.getGridMdl().setModified(true);
                 }
             }
         }
@@ -479,173 +490,15 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             int idx = tb_KeysView.getSelectedRow();
             if (idx >= ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
-                IEditItem tplt = UserMdl.getGridMdl().getItemAt(idx);
+                IEditItem tplt = coreMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != ConsDat.INDX_TEXT)
                 {
                     tplt.setType(ConsDat.INDX_TEXT);
                     showPropEdit(tplt, true);
-                    UserMdl.getGridMdl().setModified(true);
+                    coreMdl.getGridMdl().setModified(true);
                 }
             }
         }
-    }
-
-    @Override
-    public void fileApndActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        GridMdl gm = UserMdl.getGridMdl();
-        if (gm.isModified())
-        {
-            if (Lang.showFirm(this, LangRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", gm.getItemAt(ConsEnv.PWDS_HEAD_META).getName())
-                    != javax.swing.JOptionPane.YES_OPTION)
-            {
-                return;
-            }
-        }
-
-        tb_LastIndx = 0;
-        gm.clear();
-        if (!UserMdl.getUserCfg().isEditViw())
-        {
-            mainMenu.setViewPropSelected(true);
-            mainMenu.setViewSideSelected(true);
-            UserMdl.getUserCfg().setEditViw(true);
-            UserMdl.getUserCfg().setEditWnd(true);
-            showPropEdit(true);
-        }
-        showPropEdit(gm.initGuid(), true);
-    }
-
-    @Override
-    public void fileCopyActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void fileDeltActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        int index = ls_GuidList.getSelectedIndex();
-        if (index < 0 || index >= UserMdl.getListMdl().getSize())
-        {
-            return;
-        }
-
-        if (Lang.showFirm(this, LangRes.P30F7A0A, "您正在进行的操作是删除记录数据及其所有历史信息，确认继续么？") != javax.swing.JOptionPane.YES_OPTION)
-        {
-            return;
-        }
-        if (Lang.showFirm(this, LangRes.P30F7A0B, "确认一下您操作的正确性，要返回么？") != javax.swing.JOptionPane.NO_OPTION)
-        {
-            return;
-        }
-        UserMdl.getListMdl().wDelete(index);
-        UserMdl.getGridMdl().clear();
-        showPropEdit();
-    }
-
-    @Override
-    public void fileOpenActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void fileSaveActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        // 是否需要保存
-        if (tb_KeysView.getRowCount() < ConsEnv.PWDS_HEAD_SIZE)
-        {
-            return;
-        }
-
-        GridMdl gm = UserMdl.getGridMdl();
-
-        // 数据未被修改
-        if (!gm.isModified())
-        {
-            //Lang.showMesg(this, LangRes.P30F7A27, "您未曾修改过数据，不需要保存！");
-            return;
-        }
-
-        // 口令类别检测
-        GuidItem guid = (GuidItem) gm.getItemAt(ConsEnv.PWDS_HEAD_GUID);
-        if (!com.magicpwd._util.Char.isValidate(guid.getData()))
-        {
-            javax.swing.tree.TreePath path = tr_GuidTree.getSelectionPath();
-            if (path == null)
-            {
-                Lang.showMesg(this, LangRes.P30F7A0D, "请选择口令类别信息！");
-                tr_GuidTree.requestFocus();
-                return;
-            }
-
-            KindTN node = (KindTN) path.getLastPathComponent();
-            Kind kind = (Kind) node.getUserObject();
-            gm.getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(kind.getC2010103());
-        }
-
-        // 标题为空检测
-        MetaItem meta = (MetaItem) gm.getItemAt(ConsEnv.PWDS_HEAD_META);
-        if (!com.magicpwd._util.Char.isValidate(meta.getName()))
-        {
-            Lang.showMesg(this, LangRes.P30F7A0C, "请输入口令标题！");
-            tb_KeysView.setRowSelectionInterval(1, 1);
-            showPropEdit(meta, true);
-            return;
-        }
-
-        try
-        {
-            ls_LastIndx = -1;
-            tb_LastIndx = -1;
-            gm.saveData(mainTool.isHistBackSelected(), true);
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-            Lang.showMesg(this, LangRes.P30F7A0E, "口令数据保存失败，请重新启动本程序后再次尝试！");
-        }
-
-        // 数据新增的情况下，需要重新显示列表信息
-        if (gm.isUpdate())
-        {
-            UserMdl.getListMdl().updtName(ls_GuidList.getSelectedIndex(), gm.getItemAt(ConsEnv.PWDS_HEAD_META).getName());
-        }
-        else
-        {
-            if (isSearch)
-            {
-                UserMdl.getListMdl().findName(queryKey);
-            }
-            else if (com.magicpwd._util.Char.isValidateHash(queryKey))
-            {
-                UserMdl.getListMdl().listName(queryKey);
-            }
-        }
-
-        showPropEdit();
-        mainInfo.initData();
-    }
-
-    @Override
-    public void fileExitActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        if (UserMdl.getGridMdl().isModified() && javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(this, LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
-        {
-            return;
-        }
-        setVisible(false);
-        MagicPwd.endSave();
-        System.exit(0);
-    }
-
-    @Override
-    public void fileHideActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        this.setVisible(false);
-
-        TrayPtn.getInstance().displayMessage(Lang.getLang(LangRes.P30F9A01, "友情提示"), Lang.getLang(LangRes.P30F7A43, "魔方密码仍在运行中，您可以通过双击此处显示主窗口！"), java.awt.TrayIcon.MessageType.INFO);
-
-        hideWindow();
     }
 
     @Override
@@ -804,7 +657,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         {
             ((Keys) obj).setP30F0102(val);
         }
-        UserMdl.getGridMdl().setKeysMode(val);
+        coreMdl.getGridMdl().setKeysMode(val);
     }
 
     @Override
@@ -818,34 +671,34 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         {
             ((Keys) obj).setP30F0103(val);
         }
-        UserMdl.getGridMdl().setKeysNote(val);
+        coreMdl.getGridMdl().setKeysNote(val);
     }
 
     @Override
     public void listSascActionPerformed(java.awt.event.ActionEvent evt)
     {
-        UserMdl.getUserCfg().setCfg(ConsCfg.CFG_VIEW_LIST_ASC, evt.getActionCommand());
+        coreMdl.getUserCfg().setCfg(ConsCfg.CFG_VIEW_LIST_ASC, evt.getActionCommand());
         if (isSearch)
         {
-            UserMdl.getListMdl().findName(queryKey);
+            coreMdl.getListMdl().findName(queryKey);
         }
         else if (com.magicpwd._util.Char.isValidateHash(queryKey))
         {
-            UserMdl.getListMdl().listName(queryKey);
+            coreMdl.getListMdl().listName(queryKey);
         }
     }
 
     @Override
     public void listSkeyActionPerformed(java.awt.event.ActionEvent evt)
     {
-        UserMdl.getUserCfg().setCfg(ConsCfg.CFG_VIEW_LIST_KEY, evt.getActionCommand());
+        coreMdl.getUserCfg().setCfg(ConsCfg.CFG_VIEW_LIST_KEY, evt.getActionCommand());
         if (isSearch)
         {
-            UserMdl.getListMdl().findName(queryKey);
+            coreMdl.getListMdl().findName(queryKey);
         }
         else if (com.magicpwd._util.Char.isValidateHash(queryKey))
         {
-            UserMdl.getListMdl().listName(queryKey);
+            coreMdl.getListMdl().listName(queryKey);
         }
     }
 
@@ -880,7 +733,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         c.setC2010101(p.getChildCount());
         c.setC2010105(kindName);
         c.setC2010106(kindName);
-        UserMdl.getTreeMdl().wAppend(path, c);
+        coreMdl.getTreeMdl().wAppend(path, c);
     }
 
     @Override
@@ -906,14 +759,14 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
 
         if (Lang.showFirm(this, LangRes.P30F7A1A, "执行此操作后，此类别下的其它类别将会移动到根类别下，\n确认要删除此类别么？") == javax.swing.JOptionPane.YES_OPTION)
         {
-            UserMdl.getTreeMdl().wRemove(path);
+            coreMdl.getTreeMdl().wRemove(path);
         }
     }
 
     @Override
     public void kindMoveActionPerformed(java.awt.event.ActionEvent evt)
     {
-        DatDialog dat = new DatDialog(new IBackCall()
+        DatDialog dat = new DatDialog(coreMdl.getTreeMdl(), new IBackCall()
         {
 
             @Override
@@ -988,7 +841,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
     @Override
     public void userSecretActionPerformed(java.awt.event.ActionEvent evt)
     {
-        String skey = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_USER_SKEY);
+        String skey = coreMdl.getUserCfg().getCfg(ConsCfg.CFG_USER_SKEY);
         if (skey != null && skey.length() == 224)
         {
             Lang.showMesg(this, LangRes.P30F7A28, "您已经设置过安全口令！");
@@ -1014,43 +867,43 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
     @Override
     public void viewFindActionPerformed(java.awt.event.ActionEvent evt)
     {
-        boolean b = !UserMdl.getUserCfg().isFindViw();
+        boolean b = !coreMdl.getUserCfg().isFindViw();
         mainFind.setVisible(b);
         this.pack();
 
         mainMenu.setViewFindSelected(b);
-        UserMdl.getUserCfg().setFindViw(b);
+        coreMdl.getUserCfg().setFindViw(b);
     }
 
     @Override
     public void viewInfoActionPerformed(java.awt.event.ActionEvent evt)
     {
-        boolean b = !UserMdl.getUserCfg().isInfoViw();
+        boolean b = !coreMdl.getUserCfg().isInfoViw();
         mainInfo.setVisible(b);
         this.pack();
 
         mainMenu.setViewInfoSelected(b);
-        UserMdl.getUserCfg().setInfoViw(b);
+        coreMdl.getUserCfg().setInfoViw(b);
     }
 
     @Override
     public void viewMenuActionPerformed(java.awt.event.ActionEvent evt)
     {
-        boolean b = !UserMdl.getUserCfg().isMenuViw();
+        boolean b = !coreMdl.getUserCfg().isMenuViw();
         mainMenu.setVisible(b);
         this.pack();
 
         mainMenu.setViewMenuSelected(b);
-        UserMdl.getUserCfg().setMenuViw(b);
+        coreMdl.getUserCfg().setMenuViw(b);
     }
 
     @Override
     public void viewEditActionPerformed(java.awt.event.ActionEvent evt)
     {
-        boolean b = !UserMdl.getUserCfg().isEditViw();
+        boolean b = !coreMdl.getUserCfg().isEditViw();
         if (b)
         {
-            showPropEdit(UserMdl.getUserCfg().isEditWnd());
+            showPropEdit(coreMdl.getUserCfg().isEditWnd());
         }
         else
         {
@@ -1060,7 +913,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
                 md_MpsDialog.setVisible(b);
             }
         }
-        UserMdl.getUserCfg().setEditViw(b);
+        coreMdl.getUserCfg().setEditViw(b);
     }
 
     @Override
@@ -1084,7 +937,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
     @Override
     public void viewSideActionPerformed(java.awt.event.ActionEvent evt)
     {
-        boolean b = !UserMdl.getUserCfg().isEditWnd();
+        boolean b = !coreMdl.getUserCfg().isEditWnd();
 
         // if (!UserMdl.getUserCfg().isEditViw())
         // {
@@ -1093,7 +946,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         // return;
         // }
 
-        if (UserMdl.getUserCfg().isEditViw())
+        if (coreMdl.getUserCfg().isEditViw())
         {
             showPropEdit(b);
         }
@@ -1102,27 +955,27 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         mainMenu.setViewSideSelected(b);
         mainTool.setPropSideSelected(b);
 
-        UserMdl.getUserCfg().setEditWnd(b);
+        coreMdl.getUserCfg().setEditWnd(b);
     }
 
     @Override
     public void viewToolActionPerformed(java.awt.event.ActionEvent evt)
     {
-        boolean b = !UserMdl.getUserCfg().isToolViw();
+        boolean b = !coreMdl.getUserCfg().isToolViw();
         mainTool.setVisible(b);
         this.pack();
 
         mainMenu.setViewToolSelected(b);
-        UserMdl.getUserCfg().setToolViw(b);
+        coreMdl.getUserCfg().setToolViw(b);
     }
 
     @Override
     public void viewTop1ActionPerformed(java.awt.event.ActionEvent evt)
     {
-        boolean b = !UserMdl.getUserCfg().isViewTop();
+        boolean b = !coreMdl.getUserCfg().isViewTop();
         TrayPtn.getCurrForm().setAlwaysOnTop(b);
 
-        UserMdl.getUserCfg().setViewTop(b);
+        coreMdl.getUserCfg().setViewTop(b);
     }
 
     @Override
@@ -1138,7 +991,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         {
             return;
         }
-        UserMdl.getGridMdl().wMoveto(tb_LastIndx, t);
+        coreMdl.getGridMdl().wMoveto(tb_LastIndx, t);
         tb_LastIndx = t;
         Util.scrollToVisible(tb_KeysView, tb_LastIndx, 0, true);
         tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
@@ -1152,7 +1005,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         {
             return;
         }
-        UserMdl.getGridMdl().wMoveto(tb_LastIndx, t);
+        coreMdl.getGridMdl().wMoveto(tb_LastIndx, t);
         tb_LastIndx = t;
         Util.scrollToVisible(tb_KeysView, tb_LastIndx, 0, true);
         tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
@@ -1174,7 +1027,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             return;
         }
 
-        boolean b = UserMdl.getListMdl().findName(text);
+        boolean b = coreMdl.getListMdl().findName(text);
         if (!b)
         {
             Lang.showMesg(this, LangRes.P30F7A19, "查询不到符合您条件的数据，请用空格或加号分隔您的搜索关键字后重试！");
@@ -1193,8 +1046,8 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         {
             return;
         }
-        IEditItem tplt = UserMdl.getGridMdl().getItemAt(row);
-        Util.setClipboardContents(tplt.getData(), UserMdl.getUserCfg().getStayTime());
+        IEditItem tplt = coreMdl.getGridMdl().getItemAt(row);
+        Util.setClipboardContents(tplt.getData(), coreMdl.getUserCfg().getStayTime());
     }
 
     @Override
@@ -1207,7 +1060,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         }
         if (Lang.showFirm(this, LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
         {
-            UserMdl.getGridMdl().wRemove(row);
+            coreMdl.getGridMdl().wRemove(row);
             selectNext(0, true);
         }
     }
@@ -1235,7 +1088,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
     {
         if (updt)
         {
-            UserMdl.getGridMdl().fireTableDataChanged();
+            coreMdl.getGridMdl().fireTableDataChanged();
         }
 
         int c = tb_KeysView.getRowCount() - 1;
@@ -1251,7 +1104,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         tb_LastIndx = n;
         tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
         Util.scrollToVisible(tb_KeysView, tb_LastIndx, 0, true);
-        showPropEdit(UserMdl.getGridMdl().getItemAt(tb_LastIndx), true);
+        showPropEdit(coreMdl.getGridMdl().getItemAt(tb_LastIndx), true);
 
 //        if (updt)
 //        {
@@ -1373,7 +1226,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         tr_GuidTree = new javax.swing.JTree();
         tr_GuidTree.setComponentPopupMenu(treeMenu);
         tr_GuidTree.setCellRenderer(new TreeCR());
-        tr_GuidTree.setModel(UserMdl.getTreeMdl());
+        tr_GuidTree.setModel(coreMdl.getTreeMdl());
         tr_GuidTree.getSelectionModel().setSelectionMode(javax.swing.tree.TreeSelectionModel.SINGLE_TREE_SELECTION);
         javax.swing.ToolTipManager.sharedInstance().registerComponent(tr_GuidTree);
         tr_GuidTree.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener()
@@ -1398,7 +1251,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         ls_GuidList = new javax.swing.JList();
         ls_GuidList.setComponentPopupMenu(listMenu);
         ls_GuidList.setCellRenderer(new KeysCR());
-        ls_GuidList.setModel(UserMdl.getListMdl());
+        ls_GuidList.setModel(coreMdl.getListMdl());
         ls_GuidList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         ls_GuidList.addListSelectionListener(new javax.swing.event.ListSelectionListener()
         {
@@ -1441,7 +1294,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         gridMenu.setMenuEvent(this);
 
         tb_KeysView = new javax.swing.JTable();
-        tb_KeysView.setModel(UserMdl.getGridMdl());
+        tb_KeysView.setModel(coreMdl.getGridMdl());
         tb_KeysView.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tb_KeysView.getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         javax.swing.ActionMap actionMap = tb_KeysView.getActionMap();
@@ -1562,7 +1415,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
     {
         pl_KeysBase = new javax.swing.JPanel();
 
-        mainInfo = new HintBar();
+        mainInfo = new HintBar(coreMdl.getHintMdl());
         mainInfo.initView();
 
         javax.swing.JSplitPane sp = new javax.swing.JSplitPane();
@@ -1627,7 +1480,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
     {
         if (e.getID() == java.awt.event.WindowEvent.WINDOW_CLOSING)
         {
-            if (UserMdl.getGridMdl().isModified() && javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(this, LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
+            if (coreMdl.getGridMdl().isModified() && javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(this, LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
             {
                 return;
             }
@@ -1659,7 +1512,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             KindTN item = (KindTN) obj;
             Kind kv = (Kind) item.getUserObject();
             queryKey = kv.getC2010103();
-            UserMdl.getListMdl().listName(queryKey);
+            coreMdl.getListMdl().listName(queryKey);
         }
         isSearch = false;
     }
@@ -1677,7 +1530,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             return;
         }
 
-        GridMdl gm = UserMdl.getGridMdl();
+        GridMdl gm = coreMdl.getGridMdl();
         if (gm.isModified())
         {
             if (Lang.showFirm(this, LangRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", gm.getItemAt(ConsEnv.PWDS_HEAD_META).getName()) != javax.swing.JOptionPane.YES_OPTION)
@@ -1729,7 +1582,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             return;
         }
         tb_LastIndx = row;
-        showPropEdit(UserMdl.getGridMdl().getItemAt(row), true);
+        showPropEdit(coreMdl.getGridMdl().getItemAt(row), true);
     }
 
     private void tb_ItemListKeyReleased(java.awt.event.KeyEvent evt)
@@ -1740,30 +1593,12 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             return;
         }
         tb_LastIndx = row;
-        showPropEdit(UserMdl.getGridMdl().getItemAt(row), false);
+        showPropEdit(coreMdl.getGridMdl().getItemAt(row), false);
     }
 
-    private void hideWindow()
+    public void showPropEdit()
     {
-        // Save Temperary Data
-        if (UserMdl.getGridMdl().isModified())
-        {
-            UserMdl.getGridMdl().setInterim(true);
-            UserMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(ConsDat.HASH_ROOT);
-            try
-            {
-                UserMdl.getGridMdl().saveData(true, false);
-            }
-            catch (Exception exp)
-            {
-                Logs.exception(exp);
-            }
-        }
-    }
-
-    private void showPropEdit()
-    {
-        if (UserMdl.getUserCfg().isEditViw())
+        if (coreMdl.getUserCfg().isEditViw())
         {
             editBean[ConsDat.INDX_INFO].initData(null);
             cl_CardProp.show(pl_CardProp, ConsEnv.BEAN_INFO);
@@ -1771,9 +1606,9 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         }
     }
 
-    private void showPropEdit(IEditItem tplt, boolean focus)
+    public void showPropEdit(IEditItem tplt, boolean focus)
     {
-        if (UserMdl.getUserCfg().isEditViw())
+        if (coreMdl.getUserCfg().isEditViw())
         {
             editBean[tplt.getType()].initData(tplt);
             cl_CardProp.show(pl_CardProp, ConsEnv.BEAN_PROP + tplt.getType());
@@ -1781,7 +1616,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             {
                 editBean[tplt.getType()].requestFocus();
             }
-            if (UserMdl.getUserCfg().isEditWnd())
+            if (coreMdl.getUserCfg().isEditWnd())
             {
                 md_MpsDialog.setTitle(getPropName(tplt.getType()));
             }
@@ -1846,11 +1681,13 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
                 return Lang.getLang(LangRes.P30F110B, "提醒");
             }
             default:
+            {
                 return Lang.getLang(LangRes.P30F110C, "属性");
+            }
         }
     }
 
-    private void showPropEdit(boolean editWnd)
+    public void showPropEdit(boolean editWnd)
     {
         pl_KeysEdit.setVisible(!editWnd);
 
@@ -1890,7 +1727,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
 
     private boolean changeKind(String hash)
     {
-        GridMdl gm = UserMdl.getGridMdl();
+        GridMdl gm = coreMdl.getGridMdl();
         if (hash == null || hash.equals(gm.getItemAt(ConsEnv.PWDS_HEAD_GUID).getData()))
         {
             return true;
@@ -1900,7 +1737,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         try
         {
             gm.saveData(true, true);
-            UserMdl.getListMdl().wRemove(ls_LastIndx);
+            coreMdl.getListMdl().wRemove(ls_LastIndx);
         }
         catch (Exception exp)
         {
@@ -1923,16 +1760,16 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             return true;
         }
 
-        if (!UserMdl.getUserCfg().isEditViw())
+        if (!coreMdl.getUserCfg().isEditViw())
         {
             mainMenu.setViewPropSelected(true);
             mainMenu.setViewSideSelected(true);
-            UserMdl.getUserCfg().setEditViw(true);
-            UserMdl.getUserCfg().setEditWnd(true);
+            coreMdl.getUserCfg().setEditViw(true);
+            coreMdl.getUserCfg().setEditWnd(true);
             showPropEdit(true);
         }
 
-        showPropEdit(UserMdl.getGridMdl().initGuid(), true);
+        showPropEdit(coreMdl.getGridMdl().initGuid(), true);
         return false;
     }
 
@@ -1986,7 +1823,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         {
             Jcsv csv = new Jcsv(file);
             java.util.ArrayList<java.util.ArrayList<String>> data = new java.util.ArrayList<java.util.ArrayList<String>>();
-            int size = UserMdl.getGridMdl().wExport(data, kind.getC2010103());
+            int size = coreMdl.getGridMdl().wExport(data, kind.getC2010103());
             csv.saveFile(data);
             Lang.showMesg(this, LangRes.P30F7A25, "成功导出数据个数：{0}", size + "");
         }
@@ -2034,8 +1871,8 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             Jcsv csv = new Jcsv(file);
             csv.setEe("");
             java.util.ArrayList<java.util.ArrayList<String>> data = csv.readFile();
-            int size = UserMdl.getGridMdl().wImport(data, kind.getC2010103());
-            UserMdl.getListMdl().listName(kind.getC2010103());
+            int size = coreMdl.getGridMdl().wImport(data, kind.getC2010103());
+            coreMdl.getListMdl().listName(kind.getC2010103());
             Lang.showMesg(this, LangRes.P30F7A07, "成功导入数据个数：{0}", "" + size);
 
         }
@@ -2046,7 +1883,6 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
         }
         return true;
     }
-
     /**
      * 
      */

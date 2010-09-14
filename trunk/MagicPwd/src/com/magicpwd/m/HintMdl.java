@@ -43,7 +43,7 @@ public class HintMdl
         }
 
         hintList.clear();
-        DBA3000.findHintList(start, end, hintList);
+        DBA3000.findHintList(coreMdl.getUserCfg(), start, end, hintList);
     }
 
     public List<Keys> getUnread()
