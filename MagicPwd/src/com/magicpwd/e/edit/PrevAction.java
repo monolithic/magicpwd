@@ -4,6 +4,9 @@
  */
 package com.magicpwd.e.edit;
 
+import com.magicpwd.m.UserMdl;
+import com.magicpwd.v.MainPtn;
+
 /**
  *
  * @author Amon
@@ -11,17 +14,18 @@ package com.magicpwd.e.edit;
 public class PrevAction extends javax.swing.AbstractAction
 {
 
+    private MainPtn mainPtn;
+    private UserMdl coreMdl;
+
+    public PrevAction(MainPtn mainPtn, UserMdl coreMdl)
+    {
+        this.mainPtn = mainPtn;
+        this.coreMdl = coreMdl;
+    }
+
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        int t = tb_LastIndx - 1;
-        if (t < ConsEnv.PWDS_HEAD_SIZE)
-        {
-            return;
-        }
-        coreMdl.getGridMdl().wMoveto(tb_LastIndx, t);
-        tb_LastIndx = t;
-        Util.scrollToVisible(tb_KeysView, tb_LastIndx, 0, true);
-        tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
+        mainPtn.movePrev();
     }
 }

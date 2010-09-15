@@ -4,6 +4,10 @@
  */
 package com.magicpwd.e.edit;
 
+import com.magicpwd._cons.ConsDat;
+import com.magicpwd.m.UserMdl;
+import com.magicpwd.v.MainPtn;
+
 /**
  *
  * @author Amon
@@ -11,18 +15,18 @@ package com.magicpwd.e.edit;
 public class AppendMailAction extends javax.swing.AbstractAction
 {
 
+    private MainPtn mainPtn;
+    private UserMdl coreMdl;
+
+    public AppendMailAction(MainPtn mainPtn, UserMdl coreMdl)
+    {
+        this.mainPtn = mainPtn;
+        this.coreMdl = coreMdl;
+    }
+
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (checkData())
-        {
-            tb_LastIndx = tb_KeysView.getSelectedRow();
-            if (tb_LastIndx < ConsEnv.PWDS_HEAD_SIZE)
-            {
-                tb_LastIndx = tb_KeysView.getRowCount();
-            }
-            showPropEdit(coreMdl.getGridMdl().wAppend(tb_LastIndx, ConsDat.INDX_MAIL), true);
-            tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
-        }
+        mainPtn.appendBean(ConsDat.INDX_MAIL);
     }
 }
