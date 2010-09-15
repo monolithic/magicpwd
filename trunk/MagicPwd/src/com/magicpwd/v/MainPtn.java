@@ -46,8 +46,8 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
     private IEditBean[] editBean;
     private FindBar mainFind;
     private HintBar mainInfo;
-    private MenuBar mainMenu;
-    private ToolBar mainTool;
+    private javax.swing.JMenuBar mainMenu;
+    private javax.swing.JToolBar mainTool;
     private MenuPop gridMenu;
     private MenuPop treeMenu;
     private MenuPop listMenu;
@@ -91,15 +91,12 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
         this.getContentPane().add(pl_KeysBase);
 
-        mainMenu = new MenuBar();
-        mainMenu.initView();
-        mainMenu.setMenuEvent(this);
+        MenuPtn menuPtn = new MenuPtn(coreMdl.getUserCfg());
+        mainMenu = menuPtn.getMenuBar("magicpwd");
         mainMenu.setVisible(cfg.isMenuViw());
         this.setJMenuBar(mainMenu);
 
-        mainTool = new ToolBar(cfg);
-        mainTool.initView();
-        mainTool.setToolEvent(this);
+        mainTool = menuPtn.getToolBar("magicpwd");
         mainTool.setVisible(cfg.isToolViw());
         this.getContentPane().add(mainTool, cfg.getToolLoc());
 
@@ -131,14 +128,8 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
             showPropEdit(cfg.isEditWnd());
         }
 
-        Util.addDataAction(pl_KeysBase.getActionMap(), pl_KeysBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
-        Util.addFormAction(pl_KeysBase.getActionMap(), pl_KeysBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
-        Util.addFileAction(pl_KeysBase.getActionMap(), pl_KeysBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
-        Util.addHideAction(pl_KeysBase.getActionMap(), pl_KeysBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
-        Util.addViewAction(pl_KeysBase.getActionMap(), pl_KeysBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
-
-        mainMenu.initData();
-        mainTool.initData();
+//        mainMenu.initData();
+//        mainTool.initData();
         mainInfo.initData();
         mainFind.initData();
 
@@ -412,9 +403,9 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         sp.setOneTouchExpandable(true);
 
         treeMenu = new MenuPop(MenuPop.MENU_TREE);
-        treeMenu.initView();
-        treeMenu.setToolEvent(this);
-        treeMenu.setMenuEvent(this);
+//        treeMenu.initView();
+//        treeMenu.setToolEvent(this);
+//        treeMenu.setMenuEvent(this);
 
         tr_GuidTree = new javax.swing.JTree();
         tr_GuidTree.setComponentPopupMenu(treeMenu);
@@ -437,9 +428,9 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         sp.setTopComponent(sp1);
 
         listMenu = new MenuPop(MenuPop.MENU_LIST);
-        listMenu.initView();
-        listMenu.setToolEvent(this);
-        listMenu.setMenuEvent(this);
+//        listMenu.initView();
+//        listMenu.setToolEvent(this);
+//        listMenu.setMenuEvent(this);
 
         ls_GuidList = new javax.swing.JList();
         ls_GuidList.setComponentPopupMenu(listMenu);
@@ -481,9 +472,9 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         mainFind.initView();
 
         gridMenu = new MenuPop(MenuPop.MENU_GRID);
-        gridMenu.initView();
-        gridMenu.setToolEvent(this);
-        gridMenu.setMenuEvent(this);
+//        gridMenu.initView();
+//        gridMenu.setToolEvent(this);
+//        gridMenu.setMenuEvent(this);
 
         tb_KeysView = new javax.swing.JTable();
         tb_KeysView.setModel(coreMdl.getGridMdl());
@@ -491,7 +482,6 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         tb_KeysView.getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         javax.swing.ActionMap actionMap = tb_KeysView.getActionMap();
         javax.swing.InputMap inputMap = tb_KeysView.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
-        Util.addEditAction(actionMap, inputMap, this);
         // 添加快捷键
         actionMap.put(ConsEnv.EVENT_EDIT_GUID, new javax.swing.AbstractAction()
         {
@@ -638,7 +628,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
     private void initGuidLang()
     {
-        gridMenu.initLang();
+//        gridMenu.initLang();
 
         Lang.setWTips(tr_GuidTree, LangRes.P30F7B08, "类别列表(Alt + G)");
         Lang.setWTips(ls_GuidList, LangRes.P30F7B09, "口令列表(Alt + K)");
@@ -659,12 +649,12 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
     private void initBaseLang()
     {
-        mainMenu.initLang();
-        mainTool.initLang();
+//        mainMenu.initLang();
+//        mainTool.initLang();
         mainInfo.initLang();
         mainFind.initLang();
-        treeMenu.initLang();
-        listMenu.initLang();
+//        treeMenu.initLang();
+//        listMenu.initLang();
     }
 
     @Override
@@ -932,8 +922,8 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
         if (!coreMdl.getUserCfg().isEditViw())
         {
-            mainMenu.setViewPropSelected(true);
-            mainMenu.setViewSideSelected(true);
+//            mainMenu.setViewPropSelected(true);
+//            mainMenu.setViewSideSelected(true);
             coreMdl.getUserCfg().setEditViw(true);
             coreMdl.getUserCfg().setEditWnd(true);
             showPropEdit(true);

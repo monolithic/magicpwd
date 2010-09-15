@@ -36,7 +36,7 @@ public class MenuPop extends JPopupMenu
     {
         this.menuType = menuType;
     }
-
+/*
     public void initView()
     {
         switch (menuType)
@@ -735,5 +735,5 @@ public class MenuPop extends JPopupMenu
     private javax.swing.JMenuItem mi_NoteCopy;
     private javax.swing.JMenuItem mi_NotePast;
     private javax.swing.JMenuItem mi_NoteUndo;
-    private javax.swing.JMenuItem mi_NoteRedo;
+    private javax.swing.JMenuItem mi_NoteRedo;*/
 }

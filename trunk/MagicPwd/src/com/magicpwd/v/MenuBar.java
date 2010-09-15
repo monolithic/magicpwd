@@ -32,7 +32,7 @@ public class MenuBar extends JMenuBar
     public MenuBar()
     {
     }
-
+/*
     public void initView()
     {
         initFileMenu();
@@ -1012,5 +1012,5 @@ public class MenuBar extends JMenuBar
     private javax.swing.JMenuItem mi_HelpUpdt;
     private javax.swing.JMenuItem mi_HelpSKey;
     private javax.swing.JMenuItem mi_HelpJava;
-    private javax.swing.JMenuItem mi_HelpInfo;
+    private javax.swing.JMenuItem mi_HelpInfo;*/
 }

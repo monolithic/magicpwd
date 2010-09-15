@@ -24,7 +24,7 @@ public class ToolBar extends JToolBar
     {
         this.userCfg = userCfg;
     }
-
+/*
     public void initView()
     {
         bt_ApndData = new javax.swing.JButton();
@@ -170,5 +170,5 @@ public class ToolBar extends JToolBar
     private javax.swing.JButton bt_MoveNext;
     private javax.swing.JToggleButton bt_HistBack;
     private javax.swing.JToggleButton bt_PropSide;
-    private javax.swing.JButton bt_HelpHelp;
+    private javax.swing.JButton bt_HelpHelp;*/
 }
