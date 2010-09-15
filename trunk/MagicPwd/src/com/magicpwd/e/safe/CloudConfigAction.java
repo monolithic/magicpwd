@@ -4,7 +4,6 @@
  */
 package com.magicpwd.e.safe;
 
-import com.magicpwd._comn.PwdsItem;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._face.IBackCall;
 import com.magicpwd._user.UserSign;
@@ -12,6 +11,7 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.UserMdl;
+import com.magicpwd.v.MainPtn;
 import com.magicpwd.v.TrayPtn;
 
 /**
@@ -20,6 +20,15 @@ import com.magicpwd.v.TrayPtn;
  */
 public class CloudConfigAction extends javax.swing.AbstractAction
 {
+
+    private MainPtn mainPtn;
+    private UserMdl coreMdl;
+
+    public CloudConfigAction(MainPtn mainPtn, UserMdl coreMdl)
+    {
+        this.mainPtn = mainPtn;
+        this.coreMdl = coreMdl;
+    }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
@@ -48,10 +57,7 @@ public class CloudConfigAction extends javax.swing.AbstractAction
 
         try
         {
-            PwdsItem pwds = new PwdsItem();
-            pwds.getP30F0203().append(params[1]).append('\n').append(params[2]);
-            UserMdl.getGridMdl().enCrypt(pwds);
-            DBA3000.saveConfig("pop_mail", pwds.getP30F0203().toString());
+            DBA3000.saveConfig("pop_mail", coreMdl.getSafeMdl().enCrypt(params[1] + '\n' + params[2]));
         }
         catch (Exception ex)
         {

@@ -4,8 +4,6 @@
  */
 package com.magicpwd.e.safe;
 
-import com.magicpwd.MagicPwd;
-import com.magicpwd._comn.PwdsItem;
 import com.magicpwd._comn.S1S1;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
@@ -17,6 +15,7 @@ import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.UserMdl;
+import com.magicpwd.v.MainPtn;
 import com.magicpwd.v.TrayPtn;
 import com.magicpwd.x.LckDialog;
 import java.awt.event.ActionEvent;
@@ -30,6 +29,15 @@ import javax.mail.Store;
  */
 public class CloudResumeAction extends javax.swing.AbstractAction
 {
+
+    private MainPtn mainPtn;
+    private UserMdl coreMdl;
+
+    public CloudResumeAction(MainPtn mainPtn, UserMdl coreMdl)
+    {
+        this.mainPtn = mainPtn;
+        this.coreMdl = coreMdl;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e)
@@ -72,12 +80,10 @@ public class CloudResumeAction extends javax.swing.AbstractAction
                 return;
             }
 
-            PwdsItem pwds = new PwdsItem();
-            pwds.getP30F0203().append(docs);
-            docs = UserMdl.getGridMdl().deCrypt(pwds).toString();
+            docs = coreMdl.getSafeMdl().deCript(docs);
             String[] data = docs.split("\n");
 
-            MagicPwd.endSave();
+            TrayPtn.endSave();
             Connect connect = new Connect(data[0], data[1]);
             connect.useDefault();
             connect.setUsername(data[0]);

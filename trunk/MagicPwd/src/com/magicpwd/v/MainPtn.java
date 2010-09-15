@@ -201,6 +201,11 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         return tr_GuidTree.getSelectionPath();
     }
 
+    public Object getSelectedItem()
+    {
+        return ls_GuidList.getSelectedValue();
+    }
+
     @Override
     public void selectNext(int step, boolean updt)
     {
@@ -308,6 +313,18 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         tb_LastIndx = t;
         Util.scrollToVisible(tb_KeysView, tb_LastIndx, 0, true);
         tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
+    }
+
+    public void showList()
+    {
+        if (isSearch)
+        {
+            coreMdl.getListMdl().findName(queryKey);
+        }
+        else if (com.magicpwd._util.Char.isValidateHash(queryKey))
+        {
+            coreMdl.getListMdl().listName(queryKey);
+        }
     }
 
     private void initPropView()
@@ -898,28 +915,6 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
                 md_MpsDialog.setVisible(false);
             }
         }
-    }
-
-    private boolean changeKind(String hash)
-    {
-        GridMdl gm = coreMdl.getGridMdl();
-        if (hash == null || hash.equals(gm.getItemAt(ConsEnv.PWDS_HEAD_GUID).getData()))
-        {
-            return true;
-        }
-
-        gm.getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(hash);
-        try
-        {
-            gm.saveData(true, true);
-            coreMdl.getListMdl().wRemove(ls_LastIndx);
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-            return false;
-        }
-        return true;
     }
 
     private boolean checkData()
