@@ -21,15 +21,5 @@ public interface MPwdEvt extends MenuEvt
 
     void keysNoteActionPerformed(java.awt.event.ActionEvent evt);
 
-    void listSkeyActionPerformed(java.awt.event.ActionEvent evt);
-
-    void listSascActionPerformed(java.awt.event.ActionEvent evt);
-
-    void kindApndActionPerformed(java.awt.event.ActionEvent evt);
-
-    void kindUpdtActionPerformed(java.awt.event.ActionEvent evt);
-
-    void kindDeltActionPerformed(java.awt.event.ActionEvent evt);
-
     void helpSKeyActionPerformed(java.awt.event.ActionEvent evt);
 }

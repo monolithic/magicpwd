@@ -18,19 +18,15 @@ import com.magicpwd._bean.PwdsBean;
 import com.magicpwd._bean.TextBean;
 import com.magicpwd._comn.Kind;
 import com.magicpwd._comn.Keys;
-import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd._face.IBackCall;
 import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IFormView;
 import com.magicpwd._face.IGridView;
 import com.magicpwd._mail.MailDlg;
 import com.magicpwd._util.Lang;
-import com.magicpwd._user.UserSign;
-import com.magicpwd._util.Desk;
 import com.magicpwd._util.Jcsv;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
@@ -38,14 +34,12 @@ import com.magicpwd.c.FindEvt;
 import com.magicpwd.c.InfoEvt;
 import com.magicpwd.c.MPwdEvt;
 import com.magicpwd.c.ToolEvt;
-import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.GridMdl;
 import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.KeysCR;
 import com.magicpwd.r.KindTN;
 import com.magicpwd.r.TreeCR;
-import com.magicpwd.x.DatDialog;
 import com.magicpwd.x.MdiDialog;
 import com.magicpwd.x.MpsDialog;
 
@@ -238,151 +232,6 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
     }
 
     @Override
-    public void listSascActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        coreMdl.getUserCfg().setCfg(ConsCfg.CFG_VIEW_LIST_ASC, evt.getActionCommand());
-        if (isSearch)
-        {
-            coreMdl.getListMdl().findName(queryKey);
-        }
-        else if (com.magicpwd._util.Char.isValidateHash(queryKey))
-        {
-            coreMdl.getListMdl().listName(queryKey);
-        }
-    }
-
-    @Override
-    public void listSkeyActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        coreMdl.getUserCfg().setCfg(ConsCfg.CFG_VIEW_LIST_KEY, evt.getActionCommand());
-        if (isSearch)
-        {
-            coreMdl.getListMdl().findName(queryKey);
-        }
-        else if (com.magicpwd._util.Char.isValidateHash(queryKey))
-        {
-            coreMdl.getListMdl().listName(queryKey);
-        }
-    }
-
-    @Override
-    public void kindApndActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        javax.swing.tree.TreePath path = tr_GuidTree.getSelectionPath();
-        if (path == null)
-        {
-            return;
-        }
-
-        Object obj = path.getLastPathComponent();
-        if (obj == null || !(obj instanceof KindTN))
-        {
-            return;
-        }
-
-        String kindName = javax.swing.JOptionPane.showInputDialog(Lang.getLang(LangRes.P30F7A15, "请输入类别名称："));
-        if (kindName == null)
-        {
-            return;
-        }
-        if (!com.magicpwd._util.Char.isValidate(kindName))
-        {
-            Lang.showMesg(this, LangRes.P30F7A16, "");
-            return;
-        }
-
-        KindTN p = (KindTN) obj;
-        Kind c = new Kind();
-        c.setC2010101(p.getChildCount());
-        c.setC2010105(kindName);
-        c.setC2010106(kindName);
-        coreMdl.getTreeMdl().wAppend(path, c);
-    }
-
-    @Override
-    public void kindDeltActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        javax.swing.tree.TreePath path = tr_GuidTree.getSelectionPath();
-        if (path == null)
-        {
-            return;
-        }
-
-        Object obj = path.getLastPathComponent();
-        if (obj == null || !(obj instanceof KindTN))
-        {
-            return;
-        }
-
-        KindTN node = (KindTN) obj;
-        if (node.isRoot())
-        {
-            return;
-        }
-
-        if (Lang.showFirm(this, LangRes.P30F7A1A, "执行此操作后，此类别下的其它类别将会移动到根类别下，\n确认要删除此类别么？") == javax.swing.JOptionPane.YES_OPTION)
-        {
-            coreMdl.getTreeMdl().wRemove(path);
-        }
-    }
-
-    @Override
-    public void kindMoveActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        DatDialog dat = new DatDialog(coreMdl.getTreeMdl(), new IBackCall()
-        {
-
-            @Override
-            public boolean callBack(Object sender, java.util.EventListener event, String... params)
-            {
-                return changeKind(params[0]);
-            }
-        });
-        dat.initView();
-        dat.initLang();
-        dat.setTitle(Lang.getLang(LangRes.P30F4206, "把记录迁移到..."));
-        dat.setVisible(true);
-    }
-
-    @Override
-    public void kindUpdtActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        javax.swing.tree.TreePath path = tr_GuidTree.getSelectionPath();
-        if (path == null)
-        {
-            return;
-        }
-
-        Object obj = path.getLastPathComponent();
-        if (obj == null || !(obj instanceof KindTN))
-        {
-            return;
-        }
-
-        KindTN node = (KindTN) obj;
-        if (node.isRoot())
-        {
-            return;
-        }
-
-        Kind c = (Kind) node.getUserObject();
-
-        String name = javax.swing.JOptionPane.showInputDialog(Lang.getLang(LangRes.P30F7A15, "请输入类别名称："), c.getC2010105());
-        if (name == null)
-        {
-            return;
-        }
-        if (!com.magicpwd._util.Char.isValidate(name))
-        {
-            Lang.showMesg(this, LangRes.P30F7A17, "更新失败：您输入的类别名称无任何意义！");
-            return;
-        }
-        c.setC2010105(name);
-        c.setC2010106(name);
-        DBA3000.updateKindData(c);
-    }
-
-    @Override
     public void histBackActionPerformed(java.awt.event.ActionEvent evt)
     {
     }
@@ -440,51 +289,6 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
 
         queryKey = text;
         isSearch = true;
-    }
-
-    @Override
-    public void copyDataActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        int row = tb_KeysView.getSelectedRow();
-        if (row < 0 || row > tb_KeysView.getRowCount() - 1)
-        {
-            return;
-        }
-        IEditItem tplt = coreMdl.getGridMdl().getItemAt(row);
-        Util.setClipboardContents(tplt.getData(), coreMdl.getUserCfg().getStayTime());
-    }
-
-    @Override
-    public void deltDataActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        int row = tb_KeysView.getSelectedRow();
-        if (row < ConsEnv.PWDS_HEAD_SIZE || row > tb_KeysView.getRowCount() - 1)
-        {
-            return;
-        }
-        if (Lang.showFirm(this, LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
-        {
-            coreMdl.getGridMdl().wRemove(row);
-            selectNext(0, true);
-        }
-    }
-
-    @Override
-    public void histViewActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        Keys item = (Keys) ls_GuidList.getSelectedValue();
-        if (item == null)
-        {
-            return;
-        }
-
-        MdiDialog mdiDialog = MdiDialog.getInstance();
-        if (mdiDialog == null)
-        {
-            MdiDialog.newInstance(this);
-            mdiDialog = MdiDialog.getInstance();
-        }
-        mdiDialog.showProp(ConsEnv.PROP_HIST, false);
     }
 
     @Override
