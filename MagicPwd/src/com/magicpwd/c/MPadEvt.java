@@ -10,16 +10,4 @@ package com.magicpwd.c;
  */
 public interface MPadEvt extends MenuEvt
 {
-
-    void editAllsActionPerformed(java.awt.event.ActionEvent evt);
-
-    void editCutsActionPerformed(java.awt.event.ActionEvent evt);
-
-    void editCopyActionPerformed(java.awt.event.ActionEvent evt);
-
-    void editPastActionPerformed(java.awt.event.ActionEvent evt);
-
-    void editUndoActionPerformed(java.awt.event.ActionEvent evt);
-
-    void editRedoActionPerformed(java.awt.event.ActionEvent evt);
 }

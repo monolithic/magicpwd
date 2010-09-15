@@ -27,7 +27,6 @@ public class MenuPop extends JPopupMenu
     public static final int MENU_GRID = 0;
     public static final int MENU_TREE = 1;
     public static final int MENU_LIST = 2;
-    public static final int MENU_NOTE = 3;
     private int menuType;
     private ToolEvt toolEvt;
     private MenuEvt menuEvt;
@@ -586,95 +585,6 @@ public class MenuPop extends JPopupMenu
         Lang.setWText(mi_GridDelt, LangRes.P30F7D19, "删除属性");
     }
 
-    private void initNoteView()
-    {
-        mi_NoteAlls = new javax.swing.JMenuItem();
-        mi_NoteAlls.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                ((MPadEvt) menuEvt).editAllsActionPerformed(evt);
-            }
-        });
-        add(mi_NoteAlls);
-
-        addSeparator();
-
-        mi_NoteCuts = new javax.swing.JMenuItem();
-        mi_NoteCuts.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                ((MPadEvt) menuEvt).editCutsActionPerformed(evt);
-            }
-        });
-        add(mi_NoteCuts);
-
-        mi_NoteCopy = new javax.swing.JMenuItem();
-        mi_NoteCopy.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                ((MPadEvt) menuEvt).editCopyActionPerformed(evt);
-            }
-        });
-        add(mi_NoteCopy);
-
-        mi_NotePast = new javax.swing.JMenuItem();
-        mi_NotePast.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                ((MPadEvt) menuEvt).editPastActionPerformed(evt);
-            }
-        });
-        add(mi_NotePast);
-
-        addSeparator();
-
-        mi_NoteUndo = new javax.swing.JMenuItem();
-        mi_NoteUndo.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                ((MPadEvt) menuEvt).editUndoActionPerformed(evt);
-            }
-        });
-        add(mi_NoteUndo);
-
-        mi_NoteRedo = new javax.swing.JMenuItem();
-        mi_NoteRedo.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                ((MPadEvt) menuEvt).editRedoActionPerformed(evt);
-            }
-        });
-        add(mi_NoteRedo);
-    }
-
-    private void initNoteLang()
-    {
-        Lang.setWText(mi_NoteAlls, LangRes.P30F7D34, "全选");
-        Lang.setWText(mi_NoteCuts, LangRes.P30F7D35, "剪切");
-        Lang.setWText(mi_NoteCopy, LangRes.P30F7D36, "复制");
-        Lang.setWText(mi_NotePast, LangRes.P30F7D37, "粘贴");
-        Lang.setWText(mi_NoteUndo, LangRes.P30F7D38, "撤消");
-        Lang.setWText(mi_NoteRedo, LangRes.P30F7D39, "重做");
-    }
-
     public void setNoteUndoEnabled(boolean enabled)
     {
         mi_NoteUndo.setEnabled(enabled);
@@ -729,11 +639,5 @@ public class MenuPop extends JPopupMenu
     private javax.swing.JMenuItem mi_GridDelt;
     // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
     // 记事菜单
-    // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-    private javax.swing.JMenuItem mi_NoteAlls;
-    private javax.swing.JMenuItem mi_NoteCuts;
-    private javax.swing.JMenuItem mi_NoteCopy;
-    private javax.swing.JMenuItem mi_NotePast;
-    private javax.swing.JMenuItem mi_NoteUndo;
-    private javax.swing.JMenuItem mi_NoteRedo;*/
+    // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>*/
 }
