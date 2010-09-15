@@ -10,13 +10,12 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.UserMdl;
-import javax.swing.AbstractAction;
 
 /**
  *
  * @author aven
  */
-public class LookAction extends AbstractAction
+public class LookAction extends javax.swing.AbstractAction
 {
 
     @Override

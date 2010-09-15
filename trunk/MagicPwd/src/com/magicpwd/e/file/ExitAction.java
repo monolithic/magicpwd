@@ -4,7 +4,6 @@
  */
 package com.magicpwd.e.file;
 
-import com.magicpwd.MagicPwd;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.UserMdl;
@@ -36,7 +35,7 @@ public class ExitAction extends javax.swing.AbstractAction
         }
 
         TrayPtn.getCurrForm().setVisible(false);
-        MagicPwd.endSave();
+        TrayPtn.endSave();
         System.exit(0);
     }
 }
