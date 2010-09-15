@@ -17,22 +17,22 @@ public final class UserMdl
     // 程序运行模式
     private static int runMode;
     // 用户配置数据模型
-    private static UserCfg userCfg;
-    private static SafeMdl safeMdl;
+    private UserCfg userCfg;
+    private SafeMdl safeMdl;
     // 魔方密码数据模型
-    private static GridMdl gridMdl;
-    private static ListMdl listMdl;
-    private static HintMdl hintMdl;
-    private static TreeMdl treeMdl;
-    private static CboxMdl cboxMdl;
-    private static CharMdl charMdl;
+    private GridMdl gridMdl;
+    private ListMdl listMdl;
+    private HintMdl hintMdl;
+    private TreeMdl treeMdl;
+    private CboxMdl cboxMdl;
+    private CharMdl charMdl;
     // 记事便签数据模型
-    private static NoteMdl noteMdl;
+    private NoteMdl noteMdl;
 
     /**
      * @return the safeMdl
      */
-    public static SafeMdl getSafeMdl()
+    public SafeMdl getSafeMdl()
     {
         return safeMdl;
     }
@@ -40,7 +40,7 @@ public final class UserMdl
     /**
      * @param aSafeMdl the safeMdl to set
      */
-    public static void setSafeMdl(SafeMdl aSafeMdl)
+    public void setSafeMdl(SafeMdl aSafeMdl)
     {
         safeMdl = aSafeMdl;
     }
