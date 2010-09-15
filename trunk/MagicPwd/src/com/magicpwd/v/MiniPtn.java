@@ -1,6 +1,5 @@
 package com.magicpwd.v;
 
-import com.magicpwd.MagicPwd;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsEnv;
@@ -12,9 +11,7 @@ import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.c.FindEvt;
 import com.magicpwd.c.MPadEvt;
-import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.NoteMdl;
-import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.ListCR;
 import java.awt.datatransfer.Clipboard;
@@ -361,231 +358,6 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
     }
 
     @Override
-    public void fileApndActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        tf_NoteHead.setText("");
-        ta_NoteData.setText("");
-        infoLayout.show(pl_NoteInfo, "info");
-        lb_NoteInfo.setText("");
-        tf_NoteHead.requestFocus();
-        coreMdl.getNoteMdl().clear();
-
-        undo.discardAllEdits();
-        noteMenu.setNoteUndoEnabled(undo.canUndo());
-        noteMenu.setNoteRedoEnabled(undo.canRedo());
-    }
-
-    @Override
-    public void fileCopyActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void fileDeltActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void fileExitActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        MagicPwd.endSave();
-    }
-
-    @Override
-    public void fileHideActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        hideWindow();
-    }
-
-    @Override
-    public void fileOpenActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        javax.swing.JFileChooser jfc = new javax.swing.JFileChooser();
-        jfc.setMultiSelectionEnabled(false);
-        jfc.setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);
-        int status = jfc.showOpenDialog(this);
-        if (status != javax.swing.JFileChooser.APPROVE_OPTION)
-        {
-            return;
-        }
-        java.io.File file = jfc.getSelectedFile();
-        if (!file.exists())
-        {
-            Lang.showMesg(this, LangRes.P30F7A03, "", "");
-            return;
-        }
-        if (!file.isFile())
-        {
-            Lang.showMesg(this, LangRes.P30F7A04, "", "");
-            return;
-        }
-        if (!file.canRead())
-        {
-            Lang.showMesg(this, LangRes.P30F7A05, "");
-            return;
-        }
-        if (file.length() > 1048576)
-        {
-            Lang.showMesg(this, LangRes.P30F7A06, "");
-            return;
-        }
-        try
-        {
-            byte[] buf = new byte[(int) file.length()];
-            java.io.FileInputStream fis = new java.io.FileInputStream(file);
-            int len = fis.read(buf);
-            fis.close();
-            ta_NoteData.setText(new String(buf, 0, len));
-            String path = file.getName();
-            if (path.length() > 20)
-            {
-                path = "..." + path.substring(path.length() - 20);
-            }
-            infoLayout.show(pl_NoteInfo, "info");
-            lb_NoteInfo.setText(path);
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-        }
-
-        undo.discardAllEdits();
-        noteMenu.setNoteUndoEnabled(undo.canUndo());
-        noteMenu.setNoteRedoEnabled(undo.canRedo());
-    }
-
-    @Override
-    public void fileSaveActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        String head = tf_NoteHead.getText();
-        if (!com.magicpwd._util.Char.isValidate(head))
-        {
-            Lang.showMesg(this, LangRes.P30F5A01, "请输入记事标题！");
-            tf_NoteHead.requestFocus();
-            return;
-        }
-
-        String data = ta_NoteData.getText();
-        if (!com.magicpwd._util.Char.isValidate(data))
-        {
-            if (Lang.showFirm(this, LangRes.P30F5A02, "记事内容并没有实际意义的文字，确认要保存么？") != javax.swing.JOptionPane.NO_OPTION)
-            {
-                return;
-            }
-        }
-
-        NoteMdl noteMdl = coreMdl.getNoteMdl();
-        if (noteMdl.getSize() < 1)
-        {
-            // Guid
-            noteMdl.initGuid();
-            // Meta
-            noteMdl.initMeta();
-            // Logo
-            noteMdl.initLogo();
-            // Hint
-            noteMdl.initHint();
-            // Note
-            noteMdl.initNote();
-        }
-
-        noteMdl.setNote(head, data);
-
-        try
-        {
-            noteMdl.saveData(true);
-            infoLayout.show(pl_NoteInfo, "info");
-            Lang.setWText(lb_NoteInfo, LangRes.P30F5A03, "");
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-            Lang.showMesg(this, LangRes.P30F5A04, "");
-        }
-    }
-
-    @Override
-    public void helpHelpActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void helpJavaActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void helpInfoActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void helpMailActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void helpSiteActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void helpBlogActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void helpMlogActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void helpUpdtActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void viewTop1ActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        UserCfg cfg = coreMdl.getUserCfg();
-        boolean b = !cfg.isViewTop();
-        TrayPtn.getCurrForm().setAlwaysOnTop(b);
-        cfg.setViewTop(b);
-    }
-
-    @Override
-    public void findActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        String noteName = tf_NoteHead.getText();
-        if (!com.magicpwd._util.Char.isValidate(noteName))
-        {
-            return;
-        }
-
-        noteList.clear();
-        boolean b = DBA3000.findUserNote(coreMdl.getUserCfg(), noteName, noteList);
-        b &= noteList.size() > 0;
-        if (!b || noteList.size() < 1)
-        {
-            Lang.showMesg(this, LangRes.P30F7A1F, "搜索不到与标题相匹配的记事内容，请修改查询条件后重试！");
-            tf_NoteHead.requestFocus();
-            return;
-        }
-
-        lastHash = "";
-        infoLayout.show(pl_NoteInfo, "list");
-        cb_NoteInfo.removeAllItems();
-        for (S1S2 item : noteList)
-        {
-            cb_NoteInfo.addItem(item);
-        }
-
-        undo.discardAllEdits();
-        noteMenu.setNoteUndoEnabled(undo.canUndo());
-        noteMenu.setNoteRedoEnabled(undo.canRedo());
-    }
-
-    @Override
     public void editAllsActionPerformed(java.awt.event.ActionEvent evt)
     {
         ta_NoteData.selectAll();
@@ -684,22 +456,22 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
 
     private void bt_SaveNoteActionPerformed(java.awt.event.ActionEvent evt)
     {
-        fileSaveActionPerformed(evt);
+//        fileSaveActionPerformed(evt);
     }
 
     private void bt_SrchNoteActionPerformed(java.awt.event.ActionEvent evt)
     {
-        findActionPerformed(evt);
+//        findActionPerformed(evt);
     }
 
     private void bt_OpenNoteActionPerformed(java.awt.event.ActionEvent evt)
     {
-        fileOpenActionPerformed(evt);
+//        fileOpenActionPerformed(evt);
     }
 
     private void bt_CrteNoteActionPerformed(java.awt.event.ActionEvent evt)
     {
-        fileApndActionPerformed(evt);
+//        fileApndActionPerformed(evt);
     }
 
     private void cb_NoteInfoItemStateChanged(java.awt.event.ItemEvent evt)
@@ -742,7 +514,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
 
     private void tf_NoteHeadActionPerformed(java.awt.event.ActionEvent evt)
     {
-        findActionPerformed(evt);
+//        findActionPerformed(evt);
     }
 
     @Override
@@ -751,7 +523,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
         if (e.getID() == java.awt.event.WindowEvent.WINDOW_CLOSING)
         {
             setVisible(false);
-            MagicPwd.endSave();
+            TrayPtn.endSave();
         }
         else if (e.getID() == java.awt.event.WindowEvent.WINDOW_ICONIFIED)
         {
@@ -760,7 +532,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
         super.processWindowEvent(e);
     }
 
-    private void hideWindow()
+    public void hideWindow()
     {
         this.setVisible(false);
     }

@@ -4,6 +4,14 @@
  */
 package com.magicpwd.e.kind;
 
+import com.magicpwd._comn.Kind;
+import com.magicpwd._cons.LangRes;
+import com.magicpwd._util.Lang;
+import com.magicpwd.d.DBA3000;
+import com.magicpwd.m.UserMdl;
+import com.magicpwd.r.KindTN;
+import com.magicpwd.v.MainPtn;
+
 /**
  *
  * @author Amon
@@ -11,10 +19,19 @@ package com.magicpwd.e.kind;
 public class UpdateAction extends javax.swing.AbstractAction
 {
 
+    private MainPtn mainPtn;
+    private UserMdl coreMdl;
+
+    public UpdateAction(MainPtn mainPtn, UserMdl coreMdl)
+    {
+        this.mainPtn = mainPtn;
+        this.coreMdl = coreMdl;
+    }
+
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        javax.swing.tree.TreePath path = tr_GuidTree.getSelectionPath();
+        javax.swing.tree.TreePath path = mainPtn.getSelectedPath();
         if (path == null)
         {
             return;
@@ -41,7 +58,7 @@ public class UpdateAction extends javax.swing.AbstractAction
         }
         if (!com.magicpwd._util.Char.isValidate(name))
         {
-            Lang.showMesg(this, LangRes.P30F7A17, "更新失败：您输入的类别名称无任何意义！");
+            Lang.showMesg(mainPtn, LangRes.P30F7A17, "更新失败：您输入的类别名称无任何意义！");
             return;
         }
         c.setC2010105(name);

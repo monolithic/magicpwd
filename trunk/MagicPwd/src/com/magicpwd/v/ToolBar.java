@@ -14,12 +14,10 @@ import com.magicpwd.m.UserCfg;
 
 /**
  * @author Amon
- * 
  */
 public class ToolBar extends JToolBar
 {
 
-    private ToolEvt te_ToolEvent;
     private UserCfg userCfg;
 
     public ToolBar(UserCfg userCfg)
