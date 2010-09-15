@@ -394,7 +394,7 @@ public final class Util
         }
         return i;
     }
-
+/*
     public static void addHideAction(ActionMap actionMap, InputMap inputMap, final MenuEvt menuEvt)
     {
         actionMap.put(ConsEnv.EVENT_FILE_HIDE, new javax.swing.AbstractAction()
@@ -670,7 +670,7 @@ public final class Util
         });
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0), ConsEnv.EVENT_DATA_SKEY);
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_K, InputEvent.CTRL_MASK), ConsEnv.EVENT_DATA_SKEY);
-    }
+    }*/
 
     public static void removeAction(InputMap inputMap)
     {

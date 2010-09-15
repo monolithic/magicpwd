@@ -14,6 +14,6 @@ public class NextAction extends javax.swing.AbstractAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        selectNext(1, false);
+//        selectNext(1, false);
     }
 }

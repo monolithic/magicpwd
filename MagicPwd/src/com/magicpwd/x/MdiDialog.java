@@ -294,7 +294,7 @@ public class MdiDialog extends javax.swing.JDialog
 
     private void addHideAction(MenuEvt menuEvt)
     {
-        Util.addHideAction(pl_CardPanel.getActionMap(), pl_CardPanel.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), menuEvt);
+//        Util.addHideAction(pl_CardPanel.getActionMap(), pl_CardPanel.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), menuEvt);
     }
 
     private void ls_PropListValueChanged(javax.swing.event.ListSelectionEvent evt)

@@ -150,8 +150,8 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
         });
         pl_NoteInfo.add("list", cb_NoteInfo);
 
-        noteMenu.initView();
-        noteMenu.setMenuEvent(this);
+//        noteMenu.initView();
+//        noteMenu.setMenuEvent(this);
         ta_NoteData.setComponentPopupMenu(noteMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_NoteBase);
@@ -230,7 +230,7 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
         Lang.setWText(bt_CrteNote, LangRes.P30F5507, "&N");
         Lang.setWTips(bt_CrteNote, LangRes.P30F5508, "新建(Alt + N)");
 
-        noteMenu.initLang();
+//        noteMenu.initLang();
     }
 
     public void initData()
@@ -242,18 +242,18 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
             public void undoableEditHappened(javax.swing.event.UndoableEditEvent evt)
             {
                 undo.addEdit(evt.getEdit());
-                noteMenu.setNoteUndoEnabled(undo.canUndo());
-                noteMenu.setNoteRedoEnabled(undo.canRedo());
+//                noteMenu.setNoteUndoEnabled(undo.canUndo());
+//                noteMenu.setNoteRedoEnabled(undo.canRedo());
             }
         });
 
-        noteMenu.setNoteUndoEnabled(undo.canUndo());
-        noteMenu.setNoteRedoEnabled(undo.canRedo());
+//        noteMenu.setNoteUndoEnabled(undo.canUndo());
+//        noteMenu.setNoteRedoEnabled(undo.canRedo());
 
         noteList = new java.util.ArrayList<S1S2>();
-        Util.addFormAction(pl_NoteBase.getActionMap(), pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
-        Util.addFileAction(pl_NoteBase.getActionMap(), pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
-        Util.addHideAction(pl_NoteBase.getActionMap(), pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
+//        Util.addFormAction(pl_NoteBase.getActionMap(), pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
+//        Util.addFileAction(pl_NoteBase.getActionMap(), pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
+//        Util.addHideAction(pl_NoteBase.getActionMap(), pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
 
         pl_NoteBase.getActionMap().put("showMainPtn", new javax.swing.AbstractAction()
         {
@@ -373,8 +373,8 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
             getToolkit().getSystemClipboard().setContents(sSelection, this);
             ta_NoteData.replaceSelection("");
         }
-        noteMenu.setNoteUndoEnabled(undo.canUndo());
-        noteMenu.setNoteRedoEnabled(undo.canRedo());
+//        noteMenu.setNoteUndoEnabled(undo.canUndo());
+//        noteMenu.setNoteRedoEnabled(undo.canRedo());
     }
 
     @Override
@@ -386,8 +386,8 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
             java.awt.datatransfer.StringSelection sSelection = new java.awt.datatransfer.StringSelection(copy);
             getToolkit().getSystemClipboard().setContents(sSelection, this);
         }
-        noteMenu.setNoteUndoEnabled(undo.canUndo());
-        noteMenu.setNoteRedoEnabled(undo.canRedo());
+//        noteMenu.setNoteUndoEnabled(undo.canUndo());
+//        noteMenu.setNoteRedoEnabled(undo.canRedo());
     }
 
     @Override
@@ -409,8 +409,8 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
                 Logs.exception(exp);
             }
         }
-        noteMenu.setNoteUndoEnabled(undo.canUndo());
-        noteMenu.setNoteRedoEnabled(undo.canRedo());
+//        noteMenu.setNoteUndoEnabled(undo.canUndo());
+//        noteMenu.setNoteRedoEnabled(undo.canRedo());
     }
 
     @Override
@@ -426,8 +426,8 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
             {
                 Logs.exception(exp);
             }
-            noteMenu.setNoteUndoEnabled(undo.canUndo());
-            noteMenu.setNoteRedoEnabled(undo.canRedo());
+//            noteMenu.setNoteUndoEnabled(undo.canUndo());
+//            noteMenu.setNoteRedoEnabled(undo.canRedo());
         }
     }
 
@@ -444,8 +444,8 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
             {
                 Logs.exception(exp);
             }
-            noteMenu.setNoteUndoEnabled(undo.canUndo());
-            noteMenu.setNoteRedoEnabled(undo.canRedo());
+//            noteMenu.setNoteUndoEnabled(undo.canUndo());
+//            noteMenu.setNoteRedoEnabled(undo.canRedo());
         }
     }
 
@@ -503,8 +503,8 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
         }
 
         undo.discardAllEdits();
-        noteMenu.setNoteUndoEnabled(undo.canUndo());
-        noteMenu.setNoteRedoEnabled(undo.canRedo());
+//        noteMenu.setNoteUndoEnabled(undo.canUndo());
+//        noteMenu.setNoteRedoEnabled(undo.canRedo());
     }
 
     private void ck_NoteWrapStateChanged(javax.swing.event.ChangeEvent evt)

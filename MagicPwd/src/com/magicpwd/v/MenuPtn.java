@@ -12,7 +12,7 @@ import com.magicpwd._util.File;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.e.skin.LookAction;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.UserCfg;
 import com.magicpwd.r.AmonFF;
 import java.util.List;
 import org.dom4j.Document;
@@ -28,9 +28,11 @@ public class MenuPtn
 {
 
     private Document document;
+    private UserCfg userCfg;
 
-    public MenuPtn()
+    public MenuPtn(UserCfg userCfg)
     {
+        this.userCfg = userCfg;
     }
 
     public boolean loadData(String uri) throws Exception
@@ -111,6 +113,11 @@ public class MenuPtn
         return null;
     }
 
+    public javax.swing.JToolBar getToolBar(String toolId)
+    {
+        return null;
+    }
+
     private static javax.swing.JMenu createMenu(Element element, java.util.HashMap<String, javax.swing.Action> actions, java.util.HashMap<String, javax.swing.ButtonGroup> groups)
     {
         javax.swing.JMenu menu = new javax.swing.JMenu();
@@ -162,7 +169,7 @@ public class MenuPtn
         return item;
     }
 
-    public static void loadSkin(javax.swing.JMenu skinMenu)
+    public void loadSkin(javax.swing.JMenu skinMenu)
     {
         java.io.File skinFile = new java.io.File(ConsEnv.DIR_SKIN);
         if (!skinFile.exists() || !skinFile.isDirectory() || !skinFile.canRead())
@@ -199,7 +206,7 @@ public class MenuPtn
         }
     }
 
-    private static void loadLook(javax.swing.JMenu skinMenu)
+    private void loadLook(javax.swing.JMenu skinMenu)
     {
         javax.swing.JMenu lookMenu = new javax.swing.JMenu();
         lookMenu.setText("Look");
@@ -212,8 +219,8 @@ public class MenuPtn
         }
 
         javax.swing.JCheckBoxMenuItem item;
-        String skinName = UserMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN_NAME, ConsCfg.DEF_SKIN_SYS);
-        LookAction action = new LookAction();
+        String skinName = userCfg.getCfg(ConsCfg.CFG_SKIN_NAME, ConsCfg.DEF_SKIN_SYS);
+        LookAction action = new LookAction(userCfg);
         javax.swing.ButtonGroup group = new javax.swing.ButtonGroup();
 
         // Java默认风格
@@ -259,12 +266,12 @@ public class MenuPtn
             }
             try
             {
-                Document document = new SAXReader().read(new java.io.FileInputStream(aml));
-                if (document == null)
+                Document doc = new SAXReader().read(new java.io.FileInputStream(aml));
+                if (doc == null)
                 {
                     continue;
                 }
-                Element root = document.getRootElement();
+                Element root = doc.getRootElement();
                 if (root == null)
                 {
                     continue;

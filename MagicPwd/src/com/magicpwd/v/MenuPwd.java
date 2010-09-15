@@ -29,7 +29,7 @@ public class MenuPwd extends JPopupMenu
     public MenuPwd()
     {
     }
-
+/*
     public void initView()
     {
         mu_SizeMenu = new javax.swing.JMenu();
@@ -322,9 +322,6 @@ public class MenuPwd extends JPopupMenu
         Lang.setWText(mi_LoopMenu, LangRes.P30F7C07, "允许重复");
     }
 
-    /**
-     * @param evt
-     */
     private void mi_SizeMenuActionPerformed(java.awt.event.ActionEvent evt)
     {
         String t = evt.getActionCommand();
@@ -377,9 +374,6 @@ public class MenuPwd extends JPopupMenu
         tpltData.setSpec(EditItem.SPEC_PWDS_SIZE, s);
     }
 
-    /**
-     * @param evt
-     */
     private void mi_CharMenuActionPerformed(java.awt.event.ActionEvent evt)
     {
         String t = evt.getActionCommand();
@@ -393,9 +387,6 @@ public class MenuPwd extends JPopupMenu
         charSets = (String) item.getClientProperty("prop_char");
     }
 
-    /**
-     * @param evt
-     */
     private void mi_UrptMenuActionPerformed(java.awt.event.ActionEvent evt)
     {
         tpltData.setSpec(EditItem.SPEC_PWDS_LOOP, mi_LoopMenu.isSelected() ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
@@ -407,5 +398,5 @@ public class MenuPwd extends JPopupMenu
     private javax.swing.JMenu mu_CharMenu;
     private javax.swing.JCheckBoxMenuItem mi_CharDef;
     private javax.swing.JCheckBoxMenuItem[] mi_CharPre;
-    private javax.swing.JCheckBoxMenuItem mi_LoopMenu;
+    private javax.swing.JCheckBoxMenuItem mi_LoopMenu;*/
 }
