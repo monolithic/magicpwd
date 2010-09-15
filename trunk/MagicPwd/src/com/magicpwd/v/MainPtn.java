@@ -252,6 +252,64 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 //        showPropEdit(UserMdl.getGridMdl().getItemAt(tb_LastIndx), true);
     }
 
+    public void appendBean(int type)
+    {
+        if (checkData())
+        {
+            tb_LastIndx = tb_KeysView.getSelectedRow();
+            if (tb_LastIndx < ConsEnv.PWDS_HEAD_SIZE)
+            {
+                tb_LastIndx = tb_KeysView.getRowCount();
+            }
+            showPropEdit(coreMdl.getGridMdl().wAppend(tb_LastIndx, type), true);
+            tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
+        }
+    }
+
+    public void changeBean(int type)
+    {
+        if (checkData())
+        {
+            int idx = tb_KeysView.getSelectedRow();
+            if (idx >= ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
+            {
+                IEditItem tplt = coreMdl.getGridMdl().getItemAt(idx);
+                if (tplt.getType() != type)
+                {
+                    tplt.setType(type);
+                    showPropEdit(tplt, true);
+                    coreMdl.getGridMdl().setModified(true);
+                }
+            }
+        }
+    }
+
+    public void movePrev()
+    {
+        int t = tb_LastIndx - 1;
+        if (t < ConsEnv.PWDS_HEAD_SIZE)
+        {
+            return;
+        }
+        coreMdl.getGridMdl().wMoveto(tb_LastIndx, t);
+        tb_LastIndx = t;
+        Util.scrollToVisible(tb_KeysView, tb_LastIndx, 0, true);
+        tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
+    }
+
+    public void moveNext()
+    {
+        int t = tb_LastIndx + 1;
+        if (t <= ConsEnv.PWDS_HEAD_SIZE || t >= tb_KeysView.getRowCount())
+        {
+            return;
+        }
+        coreMdl.getGridMdl().wMoveto(tb_LastIndx, t);
+        tb_LastIndx = t;
+        Util.scrollToVisible(tb_KeysView, tb_LastIndx, 0, true);
+        tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
+    }
+
     private void initPropView()
     {
         pl_KeysEdit = new javax.swing.JPanel();
