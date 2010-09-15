@@ -44,8 +44,8 @@ public class NewAction extends javax.swing.AbstractAction
         gm.clear();
         if (!coreMdl.getUserCfg().isEditViw())
         {
-            mainMenu.setViewPropSelected(true);
-            mainMenu.setViewSideSelected(true);
+//            mainMenu.setViewPropSelected(true);
+//            mainMenu.setViewSideSelected(true);
             coreMdl.getUserCfg().setEditViw(true);
             coreMdl.getUserCfg().setEditWnd(true);
             mainPtn.showPropEdit(true);

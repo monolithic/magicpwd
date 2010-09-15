@@ -50,23 +50,23 @@ public class MovetoAction extends javax.swing.AbstractAction
 
     private boolean changeKind(String hash)
     {
-        GridMdl gm = coreMdl.getGridMdl();
-        if (hash == null || hash.equals(gm.getItemAt(ConsEnv.PWDS_HEAD_GUID).getData()))
-        {
-            return true;
-        }
-
-        gm.getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(hash);
-        try
-        {
-            gm.saveData(true, true);
-            coreMdl.getListMdl().wRemove(ls_LastIndx);
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-            return false;
-        }
+//        GridMdl gm = coreMdl.getGridMdl();
+//        if (hash == null || hash.equals(gm.getItemAt(ConsEnv.PWDS_HEAD_GUID).getData()))
+//        {
+//            return true;
+//        }
+//
+//        gm.getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(hash);
+//        try
+//        {
+//            gm.saveData(true, true);
+//            coreMdl.getListMdl().wRemove(ls_LastIndx);
+//        }
+//        catch (Exception exp)
+//        {
+//            Logs.exception(exp);
+//            return false;
+//        }
         return true;
     }
 }
