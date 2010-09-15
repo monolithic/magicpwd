@@ -4,18 +4,15 @@
  */
 package com.magicpwd.e.skin;
 
-import java.awt.event.ActionEvent;
-import javax.swing.AbstractAction;
-
 /**
  *
  * @author aven
  */
-public class FeelAction extends AbstractAction
+public class FeelAction extends javax.swing.AbstractAction
 {
 
     @Override
-    public void actionPerformed(ActionEvent ae)
+    public void actionPerformed(java.awt.event.ActionEvent e)
     {
     }
 }

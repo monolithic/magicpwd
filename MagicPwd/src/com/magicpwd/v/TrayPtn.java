@@ -1,6 +1,5 @@
 package com.magicpwd.v;
 
-import com.magicpwd.MagicPwd;
 import com.magicpwd._comn.I1S2;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
@@ -11,9 +10,11 @@ import com.magicpwd._mail.Connect;
 import com.magicpwd._mail.MailDlg;
 import com.magicpwd._user.UserSign;
 import com.magicpwd._util.Desk;
+import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
+import com.magicpwd.d.DBAccess;
 import com.magicpwd.m.GridMdl;
 import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.UserMdl;
@@ -252,7 +253,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 TrayPtn.getCurrForm().setVisible(false);
-                MagicPwd.endSave();
+                endSave();
                 System.exit(0);
             }
         });
@@ -554,6 +555,25 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
     @Override
     public void mouseMoved(java.awt.event.MouseEvent evt)
     {
+    }
+
+    public static java.io.File endSave()
+    {
+        try
+        {
+            coreMdl.saveCfg();
+
+            DBAccess.exit();
+
+            java.io.File backFile = Util.nextBackupFile(coreMdl.getUserCfg().getBackDir(), coreMdl.getUserCfg().getBackNum());
+            Jzip.doZip(backFile, new java.io.File(ConsEnv.DIR_DAT));
+            return backFile;
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            return null;
+        }
     }
 
     private void showJPopupMenu(java.awt.event.MouseEvent evt)

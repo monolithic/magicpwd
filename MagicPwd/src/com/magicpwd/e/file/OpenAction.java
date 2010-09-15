@@ -8,6 +8,11 @@ package com.magicpwd.e.file;
  *
  * @author Amon
  */
-public class OpenAction
+public class OpenAction extends javax.swing.AbstractAction
 {
+
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent e)
+    {
+    }
 }
