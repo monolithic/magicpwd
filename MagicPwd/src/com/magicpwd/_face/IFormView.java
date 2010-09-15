@@ -12,6 +12,4 @@ public interface IFormView
 {
 
     void setVisible(boolean visible);
-
-    javax.swing.JFrame getForm();
 }
