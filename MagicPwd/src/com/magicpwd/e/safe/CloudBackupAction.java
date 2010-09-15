@@ -4,8 +4,6 @@
  */
 package com.magicpwd.e.safe;
 
-import com.magicpwd.MagicPwd;
-import com.magicpwd._comn.PwdsItem;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._mail.Connect;
@@ -15,6 +13,7 @@ import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.UserMdl;
+import com.magicpwd.v.MainPtn;
 import com.magicpwd.v.TrayPtn;
 import com.magicpwd.x.LckDialog;
 import javax.mail.Flags.Flag;
@@ -28,6 +27,15 @@ import javax.mail.Store;
  */
 public class CloudBackupAction extends javax.swing.AbstractAction
 {
+
+    private MainPtn mainPtn;
+    private UserMdl coreMdl;
+
+    public CloudBackupAction(MainPtn mainPtn, UserMdl coreMdl)
+    {
+        this.mainPtn = mainPtn;
+        this.coreMdl = coreMdl;
+    }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
@@ -70,12 +78,10 @@ public class CloudBackupAction extends javax.swing.AbstractAction
                 return;
             }
 
-            PwdsItem pwds = new PwdsItem();
-            pwds.getP30F0203().append(docs);
-            docs = UserMdl.getGridMdl().deCrypt(pwds).toString();
+            docs = coreMdl.getSafeMdl().deCript(docs);
             String[] data = docs.split("\n");
 
-            java.io.File bakFile = MagicPwd.endSave();
+            java.io.File bakFile = TrayPtn.endSave();
             if (bakFile == null || !bakFile.exists() || !bakFile.canRead())
             {
                 dialog.setVisible(false);
@@ -104,7 +110,7 @@ public class CloudBackupAction extends javax.swing.AbstractAction
             mail.setTo(data[0]);
             mail.setSubject(Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"));
             mail.setContent(Lang.getLang(LangRes.P30F7A49, "此邮件为魔方密码数据备份文件，请勿手动删除！"));
-            mail.addAttachment(ConsEnv.FILE_SYNC, MagicPwd.endSave().getAbsolutePath());
+            mail.addAttachment(ConsEnv.FILE_SYNC, bakFile.getAbsolutePath());
             //if (!new Google().backup(data[0], data[1], ConsEnv.FILE_SYNC, MagicPwd.endSave()))
             if (!mail.send())
             {

@@ -4,6 +4,11 @@
  */
 package com.magicpwd.e.list;
 
+import com.magicpwd._comn.Keys;
+import com.magicpwd._util.Char;
+import com.magicpwd.m.UserMdl;
+import com.magicpwd.v.MainPtn;
+
 /**
  *
  * @author Amon
@@ -11,13 +16,22 @@ package com.magicpwd.e.list;
 public class ChangeNoteAction extends javax.swing.AbstractAction
 {
 
+    private MainPtn mainPtn;
+    private UserMdl coreMdl;
+
+    public ChangeNoteAction(MainPtn mainPtn, UserMdl coreMdl)
+    {
+        this.mainPtn = mainPtn;
+        this.coreMdl = coreMdl;
+    }
+
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        String command = evt.getActionCommand();
-        int val = java.util.regex.Pattern.matches("^[+-]?\\d+$", command) ? Integer.parseInt(command) : 0;
+        String command = e.getActionCommand();
+        int val = Char.isValidateInteger(command) ? Integer.parseInt(command) : 0;
 
-        Object obj = ls_GuidList.getSelectedValue();
+        Object obj = mainPtn.getSelectedItem();
         if (obj instanceof Keys)
         {
             ((Keys) obj).setP30F0103(val);
