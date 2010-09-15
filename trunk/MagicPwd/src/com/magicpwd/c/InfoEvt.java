@@ -9,5 +9,4 @@ package com.magicpwd.c;
  */
 public interface InfoEvt
 {
-    void hintDataActionPerformed(java.awt.event.ActionEvent evt);
 }
