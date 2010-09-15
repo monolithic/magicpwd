@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 /**
  *
- * @author Administrator
+ * @author Amon
  */
 public class File
 {

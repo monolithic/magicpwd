@@ -7,7 +7,7 @@ package com.magicpwd.e.kind;
 
 /**
  *
- * @author Administrator
+ * @author Amon
  */
 public class MovetoAction  extends javax.swing.AbstractAction
 {

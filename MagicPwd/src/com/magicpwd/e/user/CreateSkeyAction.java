@@ -14,7 +14,7 @@ import com.magicpwd.v.TrayPtn;
 
 /**
  *
- * @author Administrator
+ * @author Amon
  */
 public class CreateSkeyAction extends javax.swing.AbstractAction
 {

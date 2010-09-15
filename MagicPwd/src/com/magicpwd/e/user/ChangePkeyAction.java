@@ -10,7 +10,7 @@ import com.magicpwd.v.TrayPtn;
 
 /**
  *
- * @author Administrator
+ * @author Amon
  */
 public class ChangePkeyAction extends javax.swing.AbstractAction
 {

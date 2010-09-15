@@ -16,7 +16,7 @@ import com.magicpwd.v.TrayPtn;
 
 /**
  *
- * @author Administrator
+ * @author Amon
  */
 public class HideAction extends javax.swing.AbstractAction
 {

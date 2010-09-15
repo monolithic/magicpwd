@@ -6,7 +6,7 @@ package com.magicpwd.e.safe;
 
 /**
  * 备份到数据文件
- * @author Administrator
+ * @author Amon
  */
 public class LocalSaveasAction extends javax.swing.AbstractAction
 {

@@ -3,7 +3,6 @@
  */
 package com.magicpwd.v;
 
-import com.magicpwd._comn.Keys;
 import com.magicpwd._util.Char;
 import java.awt.event.ActionEvent;
 
@@ -12,7 +11,6 @@ import javax.swing.JPanel;
 
 import com.magicpwd.c.InfoEvt;
 import com.magicpwd.m.HintMdl;
-import com.magicpwd.m.UserMdl;
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
 import java.text.DateFormat;
@@ -31,7 +29,7 @@ public class HintBar extends JPanel
     private Timer tm_TimeNote;
     private HintMdl hintMdl;
 
-    public HintBar(HintMdl hintMdl)
+    public HintBar(MainPtn mainPtn, HintMdl hintMdl)
     {
         this.hintMdl = hintMdl;
     }
@@ -129,7 +127,7 @@ public class HintBar extends JPanel
 
         if (hintMdl.getHintData() != null)
         {
-            ie_InfoEvent.hintDataActionPerformed(null);
+            //ie_InfoEvent.hintDataActionPerformed(null);
         }
 
         // 读取数据信息

@@ -6,7 +6,7 @@ package com.magicpwd.e.view;
 
 /**
  *
- * @author Administrator
+ * @author Amon
  */
 public class NextAction extends javax.swing.AbstractAction
 {

@@ -6,7 +6,7 @@ package com.magicpwd.e.view;
 
 /**
  *
- * @author Administrator
+ * @author Amon
  */
 public class FindAction extends javax.swing.AbstractAction
 {
@@ -14,12 +14,12 @@ public class FindAction extends javax.swing.AbstractAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (!coreMdl.getUserCfg().isFindViw())
-        {
-            mainFind.setVisible(true);
-            mainMenu.setViewFindSelected(true);
-            coreMdl.getUserCfg().setFindViw(true);
-        }
-        mainFind.requestFocus();
+//        if (!coreMdl.getUserCfg().isFindViw())
+//        {
+//            mainFind.setVisible(true);
+//            mainMenu.setViewFindSelected(true);
+//            coreMdl.getUserCfg().setFindViw(true);
+//        }
+//        mainFind.requestFocus();
     }
 }

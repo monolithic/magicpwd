@@ -6,7 +6,7 @@ package com.magicpwd.e.safe;
 
 /**
  * 恢复单条记录
- * @author Administrator
+ * @author Amon
  */
 public class LocalPickupAction extends javax.swing.AbstractAction
 {

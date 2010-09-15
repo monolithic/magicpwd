@@ -9,7 +9,7 @@ import com.magicpwd.m.UserCfg;
 
 /**
  *
- * @author Administrator
+ * @author Amon
  */
 public class LogoItem extends EditItem
 {

@@ -6,7 +6,7 @@ package com.magicpwd._face;
 
 /**
  *
- * @author Administrator
+ * @author Amon
  */
 public interface IEditItem
 {

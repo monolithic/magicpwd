@@ -6,7 +6,7 @@ package com.magicpwd.e.prop;
 
 /**
  *
- * @author Administrator
+ * @author Amon
  */
 public class CopyAction extends javax.swing.AbstractAction
 {

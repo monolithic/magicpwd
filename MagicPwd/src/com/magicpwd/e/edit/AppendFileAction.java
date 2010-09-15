@@ -6,7 +6,7 @@ package com.magicpwd.e.edit;
 
 /**
  *
- * @author Administrator
+ * @author Amon
  */
 public class AppendFileAction extends javax.swing.AbstractAction
 {
