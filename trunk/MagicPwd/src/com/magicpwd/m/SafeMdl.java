@@ -12,7 +12,7 @@ import com.magicpwd._util.Util;
 
 /**
  *
- * @author Administrator
+ * @author Amon
  */
 public class SafeMdl
 {

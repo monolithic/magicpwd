@@ -26,7 +26,7 @@ import javax.mail.Store;
 
 /**
  *
- * @author Administrator
+ * @author Amon
  */
 public class CloudResumeAction extends javax.swing.AbstractAction
 {

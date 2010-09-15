@@ -5,7 +5,7 @@ package com.magicpwd.v;
 
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
-import com.magicpwd.c.FindEvt;
+import com.magicpwd.m.ListMdl;
 import java.awt.event.FocusEvent;
 
 /**
@@ -15,10 +15,13 @@ import java.awt.event.FocusEvent;
 public class FindBar extends javax.swing.JPanel
 {
 
-    private FindEvt fe_FindEvent;
+    private MainPtn mainPtn;
+    private ListMdl listMdl;
 
-    public FindBar()
+    public FindBar(MainPtn mainPtn, ListMdl listMdl)
     {
+        this.mainPtn = mainPtn;
+        this.listMdl = listMdl;
     }
 
     public void initView()
@@ -43,25 +46,18 @@ public class FindBar extends javax.swing.JPanel
             {
             }
         });
-        tf_ItemFind.addActionListener(new java.awt.event.ActionListener()
+
+        java.awt.event.ActionListener listener = new java.awt.event.ActionListener()
         {
 
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                fe_FindEvent.findActionPerformed(evt);
+                findActionPerformed(evt);
             }
-        });
-
-        bt_ItemFind.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                fe_FindEvent.findActionPerformed(evt);
-            }
-        });
+        };
+        tf_ItemFind.addActionListener(listener);
+        bt_ItemFind.addActionListener(listener);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -92,9 +88,10 @@ public class FindBar extends javax.swing.JPanel
         tf_ItemFind.requestFocus();
     }
 
-    public void setFindEvent(FindEvt event)
+    @Override
+    public void requestFocus()
     {
-        fe_FindEvent = event;
+        tf_ItemFind.requestFocus();
     }
 
     public String getSearchText()
@@ -107,10 +104,23 @@ public class FindBar extends javax.swing.JPanel
         tf_ItemFind.setText(text);
     }
 
-    @Override
-    public void requestFocus()
+    private void findActionPerformed(java.awt.event.ActionEvent evt)
     {
-        tf_ItemFind.requestFocus();
+
+        String text = getSearchText();
+        if (!com.magicpwd._util.Char.isValidate(text))
+        {
+            Lang.showMesg(this, LangRes.P30F7A18, "请输入您要查询的关键字，多个关键字可以使用空格或加号进行分隔！");
+            requestFocus();
+            return;
+        }
+
+        boolean b = listMdl.findName(text);
+        if (!b)
+        {
+            Lang.showMesg(this, LangRes.P30F7A19, "查询不到符合您条件的数据，请用空格或加号分隔您的搜索关键字后重试！");
+            requestFocus();
+        }
     }
     private javax.swing.JButton bt_ItemFind;
     private javax.swing.JLabel lb_ItemFind;

@@ -6,7 +6,7 @@ package com.magicpwd.e.help;
 
 /**
  *
- * @author Administrator
+ * @author Amon
  */
 public class HelpAction extends javax.swing.AbstractAction
 {

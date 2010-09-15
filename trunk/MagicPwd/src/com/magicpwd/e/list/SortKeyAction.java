@@ -6,7 +6,7 @@ package com.magicpwd.e.list;
 
 /**
  *
- * @author Administrator
+ * @author Amon
  */
 public class SortKeyAction extends javax.swing.AbstractAction
 {

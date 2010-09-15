@@ -6,7 +6,7 @@ package com.magicpwd.e.user;
 
 /**
  *
- * @author Administrator
+ * @author Amon
  */
 public class SwitchUserAction extends javax.swing.AbstractAction
 {

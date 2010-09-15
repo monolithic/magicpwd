@@ -6,7 +6,7 @@ package com.magicpwd.e.user;
 
 /**
  *
- * @author Administrator
+ * @author Amon
  */
 public class CreateUserAction extends javax.swing.AbstractAction
 {

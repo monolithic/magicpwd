@@ -6,7 +6,7 @@ package com.magicpwd.e.safe;
 
 /**
  * 从数据文件恢复
- * @author Administrator
+ * @author Amon
  */
 public class LocalResumeAction extends javax.swing.AbstractAction
 {
