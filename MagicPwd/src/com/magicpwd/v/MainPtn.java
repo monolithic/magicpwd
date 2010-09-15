@@ -3,7 +3,6 @@
  */
 package com.magicpwd.v;
 
-import com.magicpwd.MagicPwd;
 import com.magicpwd._bean.AreaBean;
 import com.magicpwd._bean.DateBean;
 import com.magicpwd._bean.FileBean;
@@ -23,15 +22,12 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
-import com.magicpwd._face.IFormView;
 import com.magicpwd._face.IGridView;
 import com.magicpwd._mail.MailDlg;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Jcsv;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
-import com.magicpwd.c.FindEvt;
-import com.magicpwd.c.InfoEvt;
 import com.magicpwd.c.MPwdEvt;
 import com.magicpwd.c.ToolEvt;
 import com.magicpwd.m.GridMdl;
@@ -43,7 +39,7 @@ import com.magicpwd.r.TreeCR;
 import com.magicpwd.x.MdiDialog;
 import com.magicpwd.x.MpsDialog;
 
-public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, ToolEvt, InfoEvt, FindEvt, IGridView
+public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGridView
 {
 
     private java.awt.CardLayout cl_CardProp;
@@ -171,124 +167,6 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
             }
         }
         super.setVisible(visible);
-    }
-
-    @Override
-    public javax.swing.JFrame getForm()
-    {
-        return this;
-    }
-
-    @Override
-    public void helpSKeyActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        MdiDialog mdiDialog = MdiDialog.getInstance();
-        if (mdiDialog == null)
-        {
-            MdiDialog.newInstance(this);
-            mdiDialog = MdiDialog.getInstance();
-        }
-        mdiDialog.showProp(ConsEnv.PROP_SKEY, false);
-    }
-
-    @Override
-    public void editFindActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        if (!coreMdl.getUserCfg().isFindViw())
-        {
-            mainFind.setVisible(true);
-            mainMenu.setViewFindSelected(true);
-            coreMdl.getUserCfg().setFindViw(true);
-        }
-        mainFind.requestFocus();
-    }
-
-    @Override
-    public void keysModeActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        String command = evt.getActionCommand();
-        int val = java.util.regex.Pattern.matches("^[+-]?\\d+$", command) ? Integer.parseInt(command) : 0;
-
-        Object obj = ls_GuidList.getSelectedValue();
-        if (obj instanceof Keys)
-        {
-            ((Keys) obj).setP30F0102(val);
-        }
-        coreMdl.getGridMdl().setKeysMode(val);
-    }
-
-    @Override
-    public void keysNoteActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        String command = evt.getActionCommand();
-        int val = java.util.regex.Pattern.matches("^[+-]?\\d+$", command) ? Integer.parseInt(command) : 0;
-
-        Object obj = ls_GuidList.getSelectedValue();
-        if (obj instanceof Keys)
-        {
-            ((Keys) obj).setP30F0103(val);
-        }
-        coreMdl.getGridMdl().setKeysNote(val);
-    }
-
-    @Override
-    public void histBackActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void editNextActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        int t = tb_LastIndx + 1;
-        if (t <= ConsEnv.PWDS_HEAD_SIZE || t >= tb_KeysView.getRowCount())
-        {
-            return;
-        }
-        coreMdl.getGridMdl().wMoveto(tb_LastIndx, t);
-        tb_LastIndx = t;
-        Util.scrollToVisible(tb_KeysView, tb_LastIndx, 0, true);
-        tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
-    }
-
-    @Override
-    public void editPrevActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        int t = tb_LastIndx - 1;
-        if (t < ConsEnv.PWDS_HEAD_SIZE)
-        {
-            return;
-        }
-        coreMdl.getGridMdl().wMoveto(tb_LastIndx, t);
-        tb_LastIndx = t;
-        Util.scrollToVisible(tb_KeysView, tb_LastIndx, 0, true);
-        tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
-    }
-
-    @Override
-    public void hintDataActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
-
-    @Override
-    public void findActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        String text = mainFind.getSearchText();
-        if (!com.magicpwd._util.Char.isValidate(text))
-        {
-            Lang.showMesg(this, LangRes.P30F7A18, "请输入您要查询的关键字，多个关键字可以使用空格或加号进行分隔！");
-            mainFind.requestFocus();
-            return;
-        }
-
-        boolean b = coreMdl.getListMdl().findName(text);
-        if (!b)
-        {
-            Lang.showMesg(this, LangRes.P30F7A19, "查询不到符合您条件的数据，请用空格或加号分隔您的搜索关键字后重试！");
-            mainFind.requestFocus();
-        }
-
-        queryKey = text;
-        isSearch = true;
     }
 
     @Override
@@ -693,7 +571,7 @@ public class MainPtn extends javax.swing.JFrame implements IFormView, MPwdEvt, T
                 return;
             }
             setVisible(false);
-            MagicPwd.endSave();
+            TrayPtn.endSave();
         }
         else if (e.getID() == java.awt.event.WindowEvent.WINDOW_ICONIFIED)
         {

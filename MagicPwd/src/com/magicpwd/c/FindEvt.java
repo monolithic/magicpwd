@@ -9,5 +9,4 @@ package com.magicpwd.c;
  */
 public interface FindEvt
 {
-    void findActionPerformed(java.awt.event.ActionEvent evt);
 }
