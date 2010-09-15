@@ -42,8 +42,8 @@ public class DropAction extends javax.swing.AbstractAction
         {
             return;
         }
-        coreMdl.getListMdl().wDelete(index);
+//        coreMdl.getListMdl().wDelete(index);
         coreMdl.getGridMdl().clear();
-        showPropEdit();
+        mainPtn.showPropEdit();
     }
 }

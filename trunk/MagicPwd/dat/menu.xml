@@ -9,21 +9,33 @@
 -->
 <magicpwd>
     <menubar id="magicpwd">
-        <menu id="file" text="文件(@F)" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
-            <item type="normal" text="退出(@X)" tips="" icon="" action="" strokes="">
+        <menu id="file" text="$P30F7601" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
+            <item type="normal" text="$P30F7602" tips="" icon="" action="" strokes="">
 
             </item>
-            <item type="checkbox" text="退出(@X)" tips="" icon="" action="" strokes="" group="" checked="true">
+            <item type="normal" text="$P30F7603" tips="" icon="" action="" strokes="">
 
             </item>
-            <item type="radiobox" text="退出(@X)" tips="" icon="" action="" strokes="" group="" checked="true">
+            <item type="normal" text="$P30F7604" tips="" icon="" action="" strokes="">
+
+            </item>
+            <item type="normal" text="$P30F7605" tips="" icon="" action="" strokes="">
+
+            </item>
+        </menu>
+        <menu id="edit" text="编辑(@E)" tips="">
+            <item type="checkbox" text="P30F7603" tips="" icon="" action="" strokes="" group="" checked="true">
+
+            </item>
+            <item type="radiobox" text="$P30F7604" tips="" icon="" action="" strokes="" group="" checked="true">
+
+            </item>
+            <item type="radiobox" text="$P30F7605" tips="" icon="" action="" strokes="" group="" checked="true">
 
             </item>
             <item type="seperator">
 
             </item>
-        </menu>
-        <menu id="edit" text="编辑(@E)" tips="">
         </menu>
         <menu id="view" text="视图(@V)" tips="">
         </menu>
@@ -39,4 +51,7 @@
     <menupop id="">
 
     </menupop>
+    <toolbar id="magicpwd">
+
+    </toolbar>
 </magicpwd>
