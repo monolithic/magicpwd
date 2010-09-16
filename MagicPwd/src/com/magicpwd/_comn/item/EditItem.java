@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.magicpwd._comn;
+package com.magicpwd._comn.item;
 
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._face.IEditItem;

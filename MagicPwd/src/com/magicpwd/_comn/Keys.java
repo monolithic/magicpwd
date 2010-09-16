@@ -3,6 +3,7 @@
  */
 package com.magicpwd._comn;
 
+import com.magicpwd._comn.item.PwdsItem;
 import java.io.Serializable;
 import java.sql.Timestamp;
 

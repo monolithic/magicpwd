@@ -3,15 +3,15 @@
  */
 package com.magicpwd.m;
 
-import com.magicpwd._comn.EditItem;
-import com.magicpwd._comn.GuidItem;
+import com.magicpwd._comn.item.EditItem;
+import com.magicpwd._comn.item.GuidItem;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.magicpwd._comn.Keys;
-import com.magicpwd._comn.MetaItem;
-import com.magicpwd._comn.HintItem;
-import com.magicpwd._comn.LogoItem;
+import com.magicpwd._comn.item.MetaItem;
+import com.magicpwd._comn.item.HintItem;
+import com.magicpwd._comn.item.LogoItem;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._face.IEditItem;

@@ -9,7 +9,7 @@ import com.magicpwd._comn.Keys;
 import com.magicpwd._comn.Kind;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._comn.S1S3;
-import com.magicpwd._comn.EditItem;
+import com.magicpwd._comn.item.EditItem;
 import com.magicpwd._comn.Tplt;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;

@@ -4,9 +4,9 @@
  */
 package com.magicpwd.e.file;
 
-import com.magicpwd._comn.GuidItem;
+import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.Kind;
-import com.magicpwd._comn.MetaItem;
+import com.magicpwd._comn.item.MetaItem;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;

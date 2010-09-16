@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.magicpwd._comn;
+package com.magicpwd._comn.item;
 
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd.m.UserCfg;

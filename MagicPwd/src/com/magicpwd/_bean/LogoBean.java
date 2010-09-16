@@ -3,7 +3,7 @@
  */
 package com.magicpwd._bean;
 
-import com.magicpwd._comn.LogoItem;
+import com.magicpwd._comn.item.LogoItem;
 import com.magicpwd._comp.IcoLabel;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
