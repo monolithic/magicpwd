@@ -70,6 +70,11 @@ public class ImportAction extends javax.swing.AbstractAction implements IPwdActi
         this.coreMdl = coreMdl;
     }
 
+    @Override
+    public void doUpdate(Object object)
+    {
+    }
+
     private boolean importData()
     {
         javax.swing.tree.TreePath path = mainPtn.getSelectedPath();

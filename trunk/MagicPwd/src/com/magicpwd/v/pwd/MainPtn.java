@@ -94,7 +94,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
         this.getContentPane().add(pl_KeysBase);
 
-        MenuPtn menuPtn = new MenuPtn(coreMdl.getUserCfg());
+        MenuPtn menuPtn = new MenuPtn(coreMdl);
         mainMenu = menuPtn.getMenuBar("magicpwd");
         mainMenu.setVisible(cfg.isMenuViw());
         this.setJMenuBar(mainMenu);

@@ -43,4 +43,9 @@ public class TopsAction extends javax.swing.AbstractAction implements IPwdAction
     {
         this.coreMdl = coreMdl;
     }
+
+    @Override
+    public void doUpdate(Object object)
+    {
+    }
 }

@@ -56,6 +56,11 @@ public class MovetoAction extends javax.swing.AbstractAction implements IPwdActi
         this.coreMdl = coreMdl;
     }
 
+    @Override
+    public void doUpdate(Object object)
+    {
+    }
+
     private boolean changeKind(String hash)
     {
 //        GridMdl gm = coreMdl.getGridMdl();

@@ -12,7 +12,7 @@ import com.magicpwd._util.File;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.e.pwd.skin.LookAction;
-import com.magicpwd.m.UserCfg;
+import com.magicpwd.m.CoreMdl;
 import com.magicpwd.r.AmonFF;
 import java.util.List;
 import org.dom4j.Document;
@@ -28,12 +28,12 @@ public class MenuPtn
 {
 
     private Document document;
-    private UserCfg userCfg;
+    private CoreMdl coreMdl;
     private java.util.regex.Pattern pattern;
 
-    public MenuPtn(UserCfg userCfg)
+    public MenuPtn(CoreMdl coreMdl)
     {
-        this.userCfg = userCfg;
+        this.coreMdl = coreMdl;
     }
 
     public boolean loadData(String uri) throws Exception
@@ -221,8 +221,9 @@ public class MenuPtn
         }
 
         javax.swing.JCheckBoxMenuItem item;
-        String skinName = userCfg.getCfg(ConsCfg.CFG_SKIN_NAME, ConsCfg.DEF_SKIN_SYS);
-        LookAction action = new LookAction(userCfg);
+        String skinName = coreMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN_NAME, ConsCfg.DEF_SKIN_SYS);
+        LookAction action = new LookAction();
+        action.setCoreMdl(coreMdl);
         javax.swing.ButtonGroup group = new javax.swing.ButtonGroup();
 
         // Java默认风格

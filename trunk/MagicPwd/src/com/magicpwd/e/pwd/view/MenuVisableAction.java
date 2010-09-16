@@ -47,4 +47,9 @@ public class MenuVisableAction extends javax.swing.AbstractAction implements IPw
     {
         this.coreMdl = coreMdl;
     }
+
+    @Override
+    public void doUpdate(Object object)
+    {
+    }
 }

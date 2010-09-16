@@ -38,4 +38,9 @@ public class SearchAction extends javax.swing.AbstractAction implements IPwdActi
     {
         this.coreMdl = coreMdl;
     }
+
+    @Override
+    public void doUpdate(Object object)
+    {
+    }
 }

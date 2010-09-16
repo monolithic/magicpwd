@@ -59,6 +59,11 @@ public class CloudConfigAction extends javax.swing.AbstractAction implements IPw
         this.coreMdl = coreMdl;
     }
 
+    @Override
+    public void doUpdate(Object object)
+    {
+    }
+
     private boolean configDocs(String... params)
     {
         if (params == null || params.length < 3)

@@ -55,4 +55,9 @@ public class HistoryAction extends javax.swing.AbstractAction implements IPwdAct
     {
         this.coreMdl = coreMdl;
     }
+
+    @Override
+    public void doUpdate(Object object)
+    {
+    }
 }

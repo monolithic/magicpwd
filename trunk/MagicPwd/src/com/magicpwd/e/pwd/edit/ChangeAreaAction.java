@@ -40,4 +40,9 @@ public class ChangeAreaAction extends javax.swing.AbstractAction implements IPwd
     {
         this.coreMdl = coreMdl;
     }
+
+    @Override
+    public void doUpdate(Object object)
+    {
+    }
 }

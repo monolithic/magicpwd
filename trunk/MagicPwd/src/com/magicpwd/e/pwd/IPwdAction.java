@@ -17,4 +17,6 @@ public interface IPwdAction
     void setMainPtn(MainPtn mainPtn);
 
     void setCoreMdl(CoreMdl coreMdl);
+
+    void doUpdate(Object object);
 }
