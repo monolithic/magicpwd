@@ -11,7 +11,7 @@ import com.magicpwd.r.KindTN;
  * @author Amon
  * 
  */
-public final class UserMdl
+public final class CoreMdl
 {
 
     // 程序运行模式
@@ -45,7 +45,7 @@ public final class UserMdl
         safeMdl = aSafeMdl;
     }
 
-    private UserMdl()
+    private CoreMdl()
     {
     }
 
@@ -64,7 +64,7 @@ public final class UserMdl
      */
     public void setRunMode(int runMode)
     {
-        UserMdl.runMode = runMode;
+        CoreMdl.runMode = runMode;
     }
 
     public void preLoad()
