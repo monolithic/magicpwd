@@ -9,7 +9,7 @@ public class Main
 
     public static void main(String args[])
     {
-        MenuPtn ptn = new MenuPtn();
+        MenuPtn ptn = new MenuPtn(null);
         try
         {
             ptn.loadData("dat/menu.xml");
