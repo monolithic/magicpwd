@@ -6,36 +6,71 @@
     Author     : aven
     Description:
         《魔方密码》系统菜单配置文档。
+        快捷替换字符说明：
         ~ shift
         # alt
-        ^ ctrl
+        ^ ctrl或者control
         ! meta
 -->
 <magicpwd>
+    <!--代码配置模板-->
+    <menubar id="template">
+        <menu id="foo" text="菜单1" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
+            <item type="normal" text="普通菜单项" tips="" icon="" strokes="^ N" command="哈哈！！">
+                <action id="" class="com.magicpwd.e.TestAction" />
+                <property name="" refId="" />
+                <property name="" refId="" />
+            </item>
+            <seperator />
+            <item type="checkbox" text="复选菜单项" tips="" icon="" strokes="" command="" group="" checked="true">
+                <action id="" class="" />
+                <property name="" refId="" />
+                <property name="" refId="" />
+            </item>
+            <item type="radiobox" text="单选菜单项" tips="" icon="" strokes="" command="" group="" checked="true">
+                <action id="" class="" />
+                <property name="" refId="" />
+                <property name="" refId="" />
+            </item>
+        </menu>
+        <menu id="bar" text="菜单2" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
+        </menu>
+    </menubar>
+
+    <!--魔方密码菜单栏-->
     <menubar id="magicpwd">
         <menu id="file" text="$P30F7601" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
             <!--新增-->
-            <item type="normal" text="$P30F7602" tips="" icon="" action-name="" action-type="com.magicpwd.e.pwd.file.NewAction" strokes="^ N" command="" />
+            <item type="normal" text="$P30F7602" tips="" icon="" strokes="^ N" command="">
+                <action id="" class="com.magicpwd.e.pwd.file.NewAction" />
+                <property name="" ref-id="" />
+            </item>
             <!--保存-->
-            <item type="normal" text="$P30F7603" tips="" icon="" action-name="" action-type="com.magicpwd.e.pwd.file.SaveAction" strokes="^ S" command="" />
+            <item type="normal" text="$P30F7603" tips="" icon="" strokes="^ S" command="">
+                <action id="" class="com.magicpwd.e.pwd.file.SaveAction" />
+                <property name="" refId="" />
+            </item>
             <!--隐藏窗口-->
-            <item type="normal" text="$P30F7604" tips="" icon="" action-name="" action-type="com.magicpwd.e.pwd.file.HideAction" strokes="^ H" command="" />
+            <item type="normal" text="$P30F7604" tips="" icon="" strokes="^ H" command="">
+                <action id="" class="com.magicpwd.e.pwd.file.HideAction" />
+                <property name="" refId="" />
+            </item>
             <!--退出-->
-            <item type="normal" text="$P30F7605" tips="" icon="" action-name="" action-type="com.magicpwd.e.pwd.file.ExitAction" strokes="^ Q" command="" />
+            <item type="normal" text="$P30F7605" tips="" icon="" strokes="^ Q" command="">
+                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+            </item>
         </menu>
         <menu id="edit" text="编辑(@E)" tips="">
-            <item type="checkbox" text="P30F7603" tips="" icon="" action="" strokes="" group="" checked="true">
+            <item type="checkbox" text="P30F7603" tips="" icon="" strokes="" group="" checked="true">
 
             </item>
-            <item type="radiobox" text="$P30F7604" tips="" icon="" action="" strokes="" group="" checked="true">
+            <item type="radiobox" text="$P30F7604" tips="" icon="" strokes="" group="" checked="true">
 
             </item>
-            <item type="radiobox" text="$P30F7605" tips="" icon="" action="" strokes="" group="" checked="true">
+            <item type="radiobox" text="$P30F7605" tips="" icon="" strokes="" group="" checked="true">
 
             </item>
-            <item type="seperator">
-
-            </item>
+            <seperator />
         </menu>
         <menu id="view" text="视图(@V)" tips="">
         </menu>
@@ -48,9 +83,13 @@
         <menu id="help" text="帮助(@H)" tips="">
         </menu>
     </menubar>
-    <menupop id="">
+
+    <!--魔方密码弹出菜单-->
+    <menupop id="magicpwd">
 
     </menupop>
+
+    <!--魔方密码工具栏-->
     <toolbar id="magicpwd">
 
     </toolbar>
