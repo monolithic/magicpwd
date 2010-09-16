@@ -4,6 +4,7 @@
  */
 package test.menu;
 
+import com.magicpwd.m.UserCfg;
 import com.magicpwd.v.MenuPtn;
 import java.awt.Dimension;
 import javax.swing.JFrame;
@@ -17,7 +18,9 @@ public class Menu
 
     public static void main(String args[])
     {
-        MenuPtn ptn = new MenuPtn(null);
+        UserCfg cfg = new UserCfg();
+        cfg.loadCfg();
+        MenuPtn ptn = new MenuPtn(cfg);
         try
         {
             ptn.loadData("dat/menu.xml");

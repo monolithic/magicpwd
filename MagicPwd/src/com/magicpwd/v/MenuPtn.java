@@ -29,6 +29,7 @@ public class MenuPtn
 
     private Document document;
     private UserCfg userCfg;
+    private java.util.regex.Pattern pattern;
 
     public MenuPtn(UserCfg userCfg)
     {
@@ -47,6 +48,7 @@ public class MenuPtn
 
     public boolean loadData(java.io.InputStream stream) throws Exception
     {
+        pattern = java.util.regex.Pattern.compile("^[$]P30F[A-F0-9]{4}$", java.util.regex.Pattern.CASE_INSENSITIVE);
         document = new SAXReader().read(stream);
         return document != null;
     }
@@ -118,7 +120,7 @@ public class MenuPtn
         return null;
     }
 
-    private static javax.swing.JMenu createMenu(Element element, java.util.HashMap<String, javax.swing.Action> actions, java.util.HashMap<String, javax.swing.ButtonGroup> groups)
+    private javax.swing.JMenu createMenu(Element element, java.util.HashMap<String, javax.swing.Action> actions, java.util.HashMap<String, javax.swing.ButtonGroup> groups)
     {
         javax.swing.JMenu menu = new javax.swing.JMenu();
 
@@ -156,7 +158,7 @@ public class MenuPtn
         return menu;
     }
 
-    private static javax.swing.JMenuItem createItem(Element element, java.util.HashMap<String, javax.swing.Action> actions, java.util.HashMap<String, javax.swing.ButtonGroup> groups)
+    private javax.swing.JMenuItem createItem(Element element, java.util.HashMap<String, javax.swing.Action> actions, java.util.HashMap<String, javax.swing.ButtonGroup> groups)
     {
         javax.swing.JMenuItem item = processType(element);
         processGroup(element, item, groups);
@@ -342,16 +344,26 @@ public class MenuPtn
         skinMenu.add(feelMenu);
     }
 
-    private static javax.swing.JMenuItem processText(Element element, javax.swing.JMenuItem item)
+    private javax.swing.JMenuItem processText(Element element, javax.swing.JMenuItem item)
     {
         String text = element.attributeValue("text");
+        if (text != null && pattern.matcher(text).matches())
+        {
+            text = text.substring(1).toUpperCase();
+            text = Lang.getLang(text, text);
+        }
         Bean.setText(item, text != null ? text : "...");
         return item;
     }
 
-    private static javax.swing.JMenuItem processTips(Element element, javax.swing.JMenuItem item)
+    private javax.swing.JMenuItem processTips(Element element, javax.swing.JMenuItem item)
     {
         String tips = element.attributeValue("tips");
+        if (tips != null && pattern.matcher(tips).matches())
+        {
+            tips = tips.substring(1).toUpperCase();
+            tips = Lang.getLang(tips, tips);
+        }
         Bean.setTips(item, tips != null ? tips : "...");
         return item;
     }
