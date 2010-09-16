@@ -4,7 +4,7 @@
  */
 package test.menu;
 
-import com.magicpwd.m.UserCfg;
+import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.MenuPtn;
 import java.awt.Dimension;
 import javax.swing.JFrame;
@@ -28,9 +28,10 @@ public class Menu
             e.printStackTrace();
         }
 
-        UserCfg cfg = new UserCfg();
-        cfg.loadCfg();
-        MenuPtn ptn = new MenuPtn(cfg);
+        CoreMdl coreMdl = new CoreMdl();
+        coreMdl.preLoad();
+        coreMdl.loadUserCfg();
+        MenuPtn ptn = new MenuPtn(coreMdl);
         try
         {
             ptn.loadData("dat/menu.xml");
@@ -40,7 +41,7 @@ public class Menu
             exp.printStackTrace();
         }
         JFrame frame = new JFrame();
-        frame.setJMenuBar(ptn.getMenuBar("magicpwd"));
+        frame.setJMenuBar(ptn.getMenuBar("template"));
         frame.setSize(new Dimension(400, 300));
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

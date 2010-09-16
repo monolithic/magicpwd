@@ -11,6 +11,8 @@ import com.magicpwd._util.Char;
 import com.magicpwd._util.File;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
+import com.magicpwd.e.pad.IPadAction;
+import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.e.pwd.skin.LookAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.r.AmonFF;
@@ -168,6 +170,7 @@ public class MenuPtn
         processCommand(element, item);
         processStrokes(element, item, component);
         processAction(element, item, actions);
+        processReference(element, item, actions);
         return item;
     }
 
@@ -437,15 +440,19 @@ public class MenuPtn
 
     private static javax.swing.JMenuItem processAction(Element element, javax.swing.JMenuItem item, java.util.HashMap<String, javax.swing.Action> actions)
     {
-        String name = element.attributeValue("action-name");
-        javax.swing.Action action = null;
-        if (Char.isValidate(name))
+        java.util.List list = element.elements("action");
+        if (list == null || list.size() < 1)
         {
-            action = actions.get(name);
+            return item;
         }
+
+        element = (Element) list.get(0);
+        String name = element.attributeValue("id");
+        boolean validate = Char.isValidate(name);
+        javax.swing.Action action = validate ? actions.get(name) : null;
         if (action == null)
         {
-            String type = element.attributeValue("action-type");
+            String type = element.attributeValue("class");
             if (Char.isValidate(type))
             {
                 try
@@ -454,7 +461,22 @@ public class MenuPtn
                     if (obj instanceof javax.swing.Action)
                     {
                         action = (javax.swing.Action) obj;
-                        actions.put(name, action);
+                        if (action instanceof IPwdAction)
+                        {
+                            IPwdAction pwdAction = (IPwdAction) action;
+                            pwdAction.setMainPtn(null);
+                            pwdAction.setCoreMdl(null);
+                        }
+                        else if (action instanceof IPadAction)
+                        {
+                            IPadAction padAction = (IPadAction) action;
+                            padAction.setMiniPtn(null);
+                            padAction.setCoreMdl(null);
+                        }
+                        if (validate)
+                        {
+                            actions.put(name, action);
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -463,9 +485,63 @@ public class MenuPtn
                 }
             }
         }
-        if (action != null)
+        item.addActionListener(action);
+        return item;
+    }
+
+    private static javax.swing.JMenuItem processReference(Element element, javax.swing.JMenuItem item, java.util.HashMap<String, javax.swing.Action> actions)
+    {
+        if (item.getAction() == null)
         {
-            item.setAction(action);
+            return item;
+        }
+
+        java.util.List list = element.elements("property");
+        if (list == null || list.size() < 1)
+        {
+            return item;
+        }
+
+        String name;
+        String refId;
+        javax.swing.Action action;
+        for (int i = 0, j = list.size(); i < j; i += 1)
+        {
+            element = (Element) list.get(i);
+
+            // 处理属性
+            name = element.attributeValue("name");
+            if (!Char.isValidate(name))
+            {
+                continue;
+            }
+
+            // 处理引用
+            refId = element.attributeValue("ref-id");
+            if (!Char.isValidate(refId))
+            {
+                continue;
+            }
+
+            // 引用对象
+            action = actions.get(refId);
+            if (action == null)
+            {
+                continue;
+            }
+
+            try
+            {
+                java.lang.reflect.Method method = item.getAction().getClass().getDeclaredMethod("set" + Char.lUpper(name), java.net.URL.class);
+                if (method != null)
+                {
+                    method.invoke(item.getAction(), action);
+                }
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
         }
         return item;
     }

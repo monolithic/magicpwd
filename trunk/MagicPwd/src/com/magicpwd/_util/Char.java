@@ -215,4 +215,9 @@ public class Char
         }
         return tmp.toString();
     }
+
+    public static String lUpper(String text)
+    {
+        return "";
+    }
 }

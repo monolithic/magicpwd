@@ -29,7 +29,7 @@ public final class CoreMdl
     // 记事便签数据模型
     private NoteMdl noteMdl;
 
-    private CoreMdl()
+    public CoreMdl()
     {
     }
 
