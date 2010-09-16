@@ -11,16 +11,14 @@ import com.magicpwd.v.pad.MiniPtn;
  *
  * @author Administrator
  */
-public class SaveAction extends javax.swing.AbstractAction
+public class SaveAction extends javax.swing.AbstractAction implements IPadAction
 {
 
     private MiniPtn miniPtn;
     private CoreMdl coreMdl;
 
-    public SaveAction(MiniPtn miniPtn, CoreMdl coreMdl)
+    public SaveAction()
     {
-        this.miniPtn = miniPtn;
-        this.coreMdl = coreMdl;
     }
 
     @Override
@@ -71,5 +69,17 @@ public class SaveAction extends javax.swing.AbstractAction
 //            Logs.exception(exp);
 //            Lang.showMesg(this, LangRes.P30F5A04, "");
 //        }
+    }
+
+    @Override
+    public void setMiniPtn(MiniPtn miniPtn)
+    {
+        this.miniPtn = miniPtn;
+    }
+
+    @Override
+    public void setCoreMdl(CoreMdl coreMdl)
+    {
+        this.coreMdl = coreMdl;
     }
 }

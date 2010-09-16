@@ -11,16 +11,14 @@ import com.magicpwd.v.pad.MiniPtn;
  *
  * @author Administrator
  */
-public class FindAction extends javax.swing.AbstractAction
+public class FindAction extends javax.swing.AbstractAction implements IPadAction
 {
 
     private MiniPtn miniPtn;
     private CoreMdl coreMdl;
 
-    public FindAction(MiniPtn miniPtn, CoreMdl coreMdl)
+    public FindAction()
     {
-        this.miniPtn = miniPtn;
-        this.coreMdl = coreMdl;
     }
 
     @Override
@@ -53,5 +51,17 @@ public class FindAction extends javax.swing.AbstractAction
 //        undo.discardAllEdits();
 //        noteMenu.setNoteUndoEnabled(undo.canUndo());
 //        noteMenu.setNoteRedoEnabled(undo.canRedo());
+    }
+
+    @Override
+    public void setMiniPtn(MiniPtn miniPtn)
+    {
+        this.miniPtn = miniPtn;
+    }
+
+    @Override
+    public void setCoreMdl(CoreMdl coreMdl)
+    {
+        this.coreMdl = coreMdl;
     }
 }

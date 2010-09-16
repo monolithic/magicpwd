@@ -11,20 +11,30 @@ import com.magicpwd.v.pad.MiniPtn;
  *
  * @author Administrator
  */
-public class DropAction extends javax.swing.AbstractAction
+public class DropAction extends javax.swing.AbstractAction implements IPadAction
 {
 
     private MiniPtn miniPtn;
     private CoreMdl coreMdl;
 
-    public DropAction(MiniPtn miniPtn, CoreMdl coreMdl)
+    public DropAction()
     {
-        this.miniPtn = miniPtn;
-        this.coreMdl = coreMdl;
     }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
+    }
+
+    @Override
+    public void setMiniPtn(MiniPtn miniPtn)
+    {
+        this.miniPtn = miniPtn;
+    }
+
+    @Override
+    public void setCoreMdl(CoreMdl coreMdl)
+    {
+        this.coreMdl = coreMdl;
     }
 }
