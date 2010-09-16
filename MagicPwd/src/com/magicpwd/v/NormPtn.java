@@ -37,10 +37,4 @@ public class NormPtn extends javax.swing.JFrame implements IFormView, MPayEvt, F
     {
         super.setVisible(visible);
     }
-
-    @Override
-    public javax.swing.JFrame getForm()
-    {
-        return this;
-    }
 }

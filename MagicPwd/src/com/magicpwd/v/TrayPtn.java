@@ -924,6 +924,11 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
     {
         dbLocked = aDbLocked;
     }
+
+    public static void setCoreMdl(UserMdl coreMdl)
+    {
+        TrayPtn.coreMdl = coreMdl;
+    }
     private java.awt.Point dragLoc;
     private java.awt.Point formLoc;
     private javax.swing.JPopupMenu trayMenu;
