@@ -12,6 +12,7 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.DBA3000;
+import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
 import com.magicpwd.v.TrayPtn;
@@ -25,16 +26,14 @@ import javax.mail.Store;
  *
  * @author Amon
  */
-public class CloudBackupAction extends javax.swing.AbstractAction
+public class CloudBackupAction extends javax.swing.AbstractAction implements IPwdAction
 {
 
     private MainPtn mainPtn;
     private CoreMdl coreMdl;
 
-    public CloudBackupAction(MainPtn mainPtn, CoreMdl coreMdl)
+    public CloudBackupAction()
     {
-        this.mainPtn = mainPtn;
-        this.coreMdl = coreMdl;
     }
 
     @Override
@@ -63,6 +62,18 @@ public class CloudBackupAction extends javax.swing.AbstractAction
 
         Util.centerForm(dialog, TrayPtn.getCurrForm());
         dialog.setVisible(true);
+    }
+
+    @Override
+    public void setMainPtn(MainPtn mainPtn)
+    {
+        this.mainPtn = mainPtn;
+    }
+
+    @Override
+    public void setCoreMdl(CoreMdl coreMdl)
+    {
+        this.coreMdl = coreMdl;
     }
 
     private void backupData(LckDialog dialog)

@@ -6,6 +6,7 @@ package com.magicpwd.e.pwd.file;
 
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
+import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
 
@@ -13,7 +14,7 @@ import com.magicpwd.v.pwd.MainPtn;
  *
  * @author Amon
  */
-public class DropAction extends javax.swing.AbstractAction
+public class DropAction extends javax.swing.AbstractAction implements IPwdAction
 {
 
     private MainPtn mainPtn;
@@ -26,52 +27,32 @@ public class DropAction extends javax.swing.AbstractAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        Object object = getMainPtn().getSelectedItem();
+        Object object = mainPtn.getSelectedItem();
         if (object == null)
         {
             return;
         }
 
-        if (Lang.showFirm(getMainPtn(), LangRes.P30F7A0A, "您正在进行的操作是删除记录数据及其所有历史信息，确认继续么？") != javax.swing.JOptionPane.YES_OPTION)
+        if (Lang.showFirm(mainPtn, LangRes.P30F7A0A, "您正在进行的操作是删除记录数据及其所有历史信息，确认继续么？") != javax.swing.JOptionPane.YES_OPTION)
         {
             return;
         }
-        if (Lang.showFirm(getMainPtn(), LangRes.P30F7A0B, "确认一下您操作的正确性，要返回么？") != javax.swing.JOptionPane.NO_OPTION)
+        if (Lang.showFirm(mainPtn, LangRes.P30F7A0B, "确认一下您操作的正确性，要返回么？") != javax.swing.JOptionPane.NO_OPTION)
         {
             return;
         }
 //        coreMdl.getListMdl().wDelete(index);
-        getCoreMdl().getGridMdl().clear();
-        getMainPtn().showPropEdit();
+        coreMdl.getGridMdl().clear();
+        mainPtn.showPropEdit();
     }
 
-    /**
-     * @return the mainPtn
-     */
-    public MainPtn getMainPtn()
-    {
-        return mainPtn;
-    }
-
-    /**
-     * @param mainPtn the mainPtn to set
-     */
+    @Override
     public void setMainPtn(MainPtn mainPtn)
     {
         this.mainPtn = mainPtn;
     }
 
-    /**
-     * @return the coreMdl
-     */
-    public CoreMdl getCoreMdl()
-    {
-        return coreMdl;
-    }
-
-    /**
-     * @param coreMdl the coreMdl to set
-     */
+    @Override
     public void setCoreMdl(CoreMdl coreMdl)
     {
         this.coreMdl = coreMdl;

@@ -10,6 +10,7 @@ import com.magicpwd._user.UserSign;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.DBA3000;
+import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
 import com.magicpwd.v.TrayPtn;
@@ -18,16 +19,14 @@ import com.magicpwd.v.TrayPtn;
  *
  * @author Amon
  */
-public class CloudConfigAction extends javax.swing.AbstractAction
+public class CloudConfigAction extends javax.swing.AbstractAction implements IPwdAction
 {
 
     private MainPtn mainPtn;
     private CoreMdl coreMdl;
 
-    public CloudConfigAction(MainPtn mainPtn, CoreMdl coreMdl)
+    public CloudConfigAction()
     {
-        this.mainPtn = mainPtn;
-        this.coreMdl = coreMdl;
     }
 
     @Override
@@ -46,6 +45,18 @@ public class CloudConfigAction extends javax.swing.AbstractAction
         us.initView(ConsEnv.INT_SIGN_CS);
         us.initLang();
         us.initData();
+    }
+
+    @Override
+    public void setMainPtn(MainPtn mainPtn)
+    {
+        this.mainPtn = mainPtn;
+    }
+
+    @Override
+    public void setCoreMdl(CoreMdl coreMdl)
+    {
+        this.coreMdl = coreMdl;
     }
 
     private boolean configDocs(String... params)

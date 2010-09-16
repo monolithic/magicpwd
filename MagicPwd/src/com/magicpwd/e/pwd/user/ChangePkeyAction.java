@@ -6,6 +6,7 @@ package com.magicpwd.e.pwd.user;
 
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._user.UserSign;
+import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
 import com.magicpwd.v.TrayPtn;
@@ -14,16 +15,14 @@ import com.magicpwd.v.TrayPtn;
  *
  * @author Amon
  */
-public class ChangePkeyAction extends javax.swing.AbstractAction
+public class ChangePkeyAction extends javax.swing.AbstractAction implements IPwdAction
 {
 
     private MainPtn mainPtn;
     private CoreMdl coreMdl;
 
-    public ChangePkeyAction(MainPtn mainPtn, CoreMdl coreMdl)
+    public ChangePkeyAction()
     {
-        this.mainPtn = mainPtn;
-        this.coreMdl = coreMdl;
     }
 
     @Override
@@ -33,5 +32,17 @@ public class ChangePkeyAction extends javax.swing.AbstractAction
         us.initView(ConsEnv.INT_SIGN_PK);
         us.initLang();
         us.initData();
+    }
+
+    @Override
+    public void setMainPtn(MainPtn mainPtn)
+    {
+        this.mainPtn = mainPtn;
+    }
+
+    @Override
+    public void setCoreMdl(CoreMdl coreMdl)
+    {
+        this.coreMdl = coreMdl;
     }
 }

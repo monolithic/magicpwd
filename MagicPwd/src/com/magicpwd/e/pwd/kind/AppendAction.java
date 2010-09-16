@@ -7,6 +7,7 @@ package com.magicpwd.e.pwd.kind;
 import com.magicpwd._comn.Kind;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
+import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.r.KindTN;
 import com.magicpwd.v.pwd.MainPtn;
@@ -15,16 +16,14 @@ import com.magicpwd.v.pwd.MainPtn;
  *
  * @author Amon
  */
-public class AppendAction extends javax.swing.AbstractAction
+public class AppendAction extends javax.swing.AbstractAction implements IPwdAction
 {
 
     private MainPtn mainPtn;
     private CoreMdl coreMdl;
 
-    public AppendAction(MainPtn mainPtn, CoreMdl coreMdl)
+    public AppendAction()
     {
-        this.mainPtn = mainPtn;
-        this.coreMdl = coreMdl;
     }
 
     @Override
@@ -59,5 +58,17 @@ public class AppendAction extends javax.swing.AbstractAction
         c.setC2010105(kindName);
         c.setC2010106(kindName);
         coreMdl.getTreeMdl().wAppend(path, c);
+    }
+
+    @Override
+    public void setMainPtn(MainPtn mainPtn)
+    {
+        this.mainPtn = mainPtn;
+    }
+
+    @Override
+    public void setCoreMdl(CoreMdl coreMdl)
+    {
+        this.coreMdl = coreMdl;
     }
 }

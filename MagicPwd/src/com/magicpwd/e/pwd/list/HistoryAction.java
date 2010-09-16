@@ -6,6 +6,7 @@ package com.magicpwd.e.pwd.list;
 
 import com.magicpwd._comn.Keys;
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
 import com.magicpwd.x.MdiDialog;
@@ -14,16 +15,14 @@ import com.magicpwd.x.MdiDialog;
  *
  * @author Amon
  */
-public class HistoryAction extends javax.swing.AbstractAction
+public class HistoryAction extends javax.swing.AbstractAction implements IPwdAction
 {
 
     private MainPtn mainPtn;
     private CoreMdl coreMdl;
 
-    public HistoryAction(MainPtn mainPtn, CoreMdl coreMdl)
+    public HistoryAction()
     {
-        this.mainPtn = mainPtn;
-        this.coreMdl = coreMdl;
     }
 
     @Override
@@ -43,5 +42,17 @@ public class HistoryAction extends javax.swing.AbstractAction
             mdiDialog = MdiDialog.getInstance();
         }
         mdiDialog.showProp(ConsEnv.PROP_HIST, false);
+    }
+
+    @Override
+    public void setMainPtn(MainPtn mainPtn)
+    {
+        this.mainPtn = mainPtn;
+    }
+
+    @Override
+    public void setCoreMdl(CoreMdl coreMdl)
+    {
+        this.coreMdl = coreMdl;
     }
 }

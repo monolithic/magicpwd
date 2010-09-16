@@ -4,23 +4,15 @@
  */
 package com.magicpwd.e.pwd.file;
 
-import com.magicpwd._comn.item.GuidItem;
-import com.magicpwd._comn.Kind;
-import com.magicpwd._comn.item.MetaItem;
-import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
-import com.magicpwd._util.Lang;
-import com.magicpwd._util.Logs;
-import com.magicpwd.m.GridMdl;
+import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.m.CoreMdl;
-import com.magicpwd.r.KindTN;
 import com.magicpwd.v.pwd.MainPtn;
 
 /**
  *
  * @author Amon
  */
-public class SaveAction extends javax.swing.AbstractAction
+public class SaveAction extends javax.swing.AbstractAction implements IPwdAction
 {
 
     private MainPtn mainPtn;
@@ -108,33 +100,13 @@ public class SaveAction extends javax.swing.AbstractAction
 //        mainInfo.initData();
     }
 
-    /**
-     * @return the mainPtn
-     */
-    public MainPtn getMainPtn()
-    {
-        return mainPtn;
-    }
-
-    /**
-     * @param mainPtn the mainPtn to set
-     */
+    @Override
     public void setMainPtn(MainPtn mainPtn)
     {
         this.mainPtn = mainPtn;
     }
 
-    /**
-     * @return the coreMdl
-     */
-    public CoreMdl getCoreMdl()
-    {
-        return coreMdl;
-    }
-
-    /**
-     * @param coreMdl the coreMdl to set
-     */
+    @Override
     public void setCoreMdl(CoreMdl coreMdl)
     {
         this.coreMdl = coreMdl;

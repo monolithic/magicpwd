@@ -5,6 +5,7 @@
 package com.magicpwd.e.pwd.list;
 
 import com.magicpwd._cons.ConsCfg;
+import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
 
@@ -12,16 +13,14 @@ import com.magicpwd.v.pwd.MainPtn;
  *
  * @author Amon
  */
-public class SortKeyAction extends javax.swing.AbstractAction
+public class SortKeyAction extends javax.swing.AbstractAction implements IPwdAction
 {
 
     private MainPtn mainPtn;
     private CoreMdl coreMdl;
 
-    public SortKeyAction(MainPtn mainPtn, CoreMdl coreMdl)
+    public SortKeyAction()
     {
-        this.mainPtn = mainPtn;
-        this.coreMdl = coreMdl;
     }
 
     @Override
@@ -29,5 +28,17 @@ public class SortKeyAction extends javax.swing.AbstractAction
     {
         coreMdl.getUserCfg().setCfg(ConsCfg.CFG_VIEW_LIST_KEY, e.getActionCommand());
         mainPtn.showList();
+    }
+
+    @Override
+    public void setMainPtn(MainPtn mainPtn)
+    {
+        this.mainPtn = mainPtn;
+    }
+
+    @Override
+    public void setCoreMdl(CoreMdl coreMdl)
+    {
+        this.coreMdl = coreMdl;
     }
 }
