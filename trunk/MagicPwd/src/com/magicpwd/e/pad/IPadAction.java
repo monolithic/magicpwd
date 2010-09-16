@@ -17,4 +17,6 @@ public interface IPadAction
     void setMiniPtn(MiniPtn miniPtn);
 
     void setCoreMdl(CoreMdl coreMdl);
+
+    void doUpdate(Object object);
 }

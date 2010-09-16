@@ -64,4 +64,9 @@ public class FindAction extends javax.swing.AbstractAction implements IPadAction
     {
         this.coreMdl = coreMdl;
     }
+
+    @Override
+    public void doUpdate(Object object)
+    {
+    }
 }
