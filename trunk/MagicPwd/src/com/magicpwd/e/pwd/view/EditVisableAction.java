@@ -4,6 +4,7 @@
  */
 package com.magicpwd.e.pwd.view;
 
+import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
@@ -12,16 +13,14 @@ import com.magicpwd.v.pwd.MainPtn;
  *
  * @author Amon
  */
-public class EditVisableAction extends javax.swing.AbstractAction
+public class EditVisableAction extends javax.swing.AbstractAction implements IPwdAction
 {
 
     private MainPtn mainPtn;
     private CoreMdl coreMdl;
 
-    public EditVisableAction(MainPtn mainPtn, CoreMdl coreMdl)
+    public EditVisableAction()
     {
-        this.mainPtn = mainPtn;
-        this.coreMdl = coreMdl;
     }
 
     @Override
@@ -38,5 +37,17 @@ public class EditVisableAction extends javax.swing.AbstractAction
             mainPtn.setEditBeanVisible(b);
         }
         cfg.setEditViw(b);
+    }
+
+    @Override
+    public void setMainPtn(MainPtn mainPtn)
+    {
+        this.mainPtn = mainPtn;
+    }
+
+    @Override
+    public void setCoreMdl(CoreMdl coreMdl)
+    {
+        this.coreMdl = coreMdl;
     }
 }

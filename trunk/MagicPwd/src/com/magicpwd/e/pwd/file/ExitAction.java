@@ -6,6 +6,7 @@ package com.magicpwd.e.pwd.file;
 
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
+import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
 import com.magicpwd.v.TrayPtn;
@@ -14,7 +15,7 @@ import com.magicpwd.v.TrayPtn;
  *
  * @author Amon
  */
-public class ExitAction extends javax.swing.AbstractAction
+public class ExitAction extends javax.swing.AbstractAction implements IPwdAction
 {
 
     private MainPtn mainPtn;
@@ -27,7 +28,7 @@ public class ExitAction extends javax.swing.AbstractAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (getCoreMdl().getGridMdl().isModified() && javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
+        if (coreMdl.getGridMdl().isModified() && javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
         {
             return;
         }
@@ -37,33 +38,13 @@ public class ExitAction extends javax.swing.AbstractAction
         System.exit(0);
     }
 
-    /**
-     * @return the mainPtn
-     */
-    public MainPtn getMainPtn()
-    {
-        return mainPtn;
-    }
-
-    /**
-     * @param mainPtn the mainPtn to set
-     */
+    @Override
     public void setMainPtn(MainPtn mainPtn)
     {
         this.mainPtn = mainPtn;
     }
 
-    /**
-     * @return the coreMdl
-     */
-    public CoreMdl getCoreMdl()
-    {
-        return coreMdl;
-    }
-
-    /**
-     * @param coreMdl the coreMdl to set
-     */
+    @Override
     public void setCoreMdl(CoreMdl coreMdl)
     {
         this.coreMdl = coreMdl;

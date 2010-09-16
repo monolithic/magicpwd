@@ -10,6 +10,7 @@ import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
+import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
 
@@ -17,16 +18,14 @@ import com.magicpwd.v.pwd.MainPtn;
  *
  * @author Amon
  */
-public class UpdtAction extends javax.swing.AbstractAction
+public class UpdtAction extends javax.swing.AbstractAction implements IPwdAction
 {
 
     private MainPtn mainPtn;
     private CoreMdl coreMdl;
 
-    public UpdtAction(MainPtn mainPtn, CoreMdl coreMdl)
+    public UpdtAction()
     {
-        this.mainPtn = mainPtn;
-        this.coreMdl = coreMdl;
     }
 
     @Override
@@ -52,5 +51,17 @@ public class UpdtAction extends javax.swing.AbstractAction
             Logs.exception(exp);
             Lang.showMesg(mainPtn, LangRes.P30F7A14, "");
         }
+    }
+
+    @Override
+    public void setMainPtn(MainPtn mainPtn)
+    {
+        this.mainPtn = mainPtn;
+    }
+
+    @Override
+    public void setCoreMdl(CoreMdl coreMdl)
+    {
+        this.coreMdl = coreMdl;
     }
 }

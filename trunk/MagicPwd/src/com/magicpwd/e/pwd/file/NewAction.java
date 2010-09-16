@@ -7,6 +7,7 @@ package com.magicpwd.e.pwd.file;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
+import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.m.GridMdl;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
@@ -16,7 +17,7 @@ import com.magicpwd.v.TrayPtn;
  *
  * @author Amon
  */
-public class NewAction extends javax.swing.AbstractAction
+public class NewAction extends javax.swing.AbstractAction implements IPwdAction
 {
 
     private MainPtn mainPtn;
@@ -29,7 +30,7 @@ public class NewAction extends javax.swing.AbstractAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        GridMdl gm = getCoreMdl().getGridMdl();
+        GridMdl gm = coreMdl.getGridMdl();
         if (gm.isModified())
         {
             if (Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", gm.getItemAt(ConsEnv.PWDS_HEAD_META).getName()) != javax.swing.JOptionPane.YES_OPTION)
@@ -44,40 +45,20 @@ public class NewAction extends javax.swing.AbstractAction
         {
 //            mainMenu.setViewPropSelected(true);
 //            mainMenu.setViewSideSelected(true);
-            getCoreMdl().getUserCfg().setEditViw(true);
-            getCoreMdl().getUserCfg().setEditWnd(true);
-            getMainPtn().showPropEdit(true);
+            coreMdl.getUserCfg().setEditViw(true);
+            coreMdl.getUserCfg().setEditWnd(true);
+            mainPtn.showPropEdit(true);
         }
-        getMainPtn().showPropEdit(gm.initGuid(), true);
+        mainPtn.showPropEdit(gm.initGuid(), true);
     }
 
-    /**
-     * @return the mainPtn
-     */
-    public MainPtn getMainPtn()
-    {
-        return mainPtn;
-    }
-
-    /**
-     * @param mainPtn the mainPtn to set
-     */
+    @Override
     public void setMainPtn(MainPtn mainPtn)
     {
         this.mainPtn = mainPtn;
     }
 
-    /**
-     * @return the coreMdl
-     */
-    public CoreMdl getCoreMdl()
-    {
-        return coreMdl;
-    }
-
-    /**
-     * @param coreMdl the coreMdl to set
-     */
+    @Override
     public void setCoreMdl(CoreMdl coreMdl)
     {
         this.coreMdl = coreMdl;
