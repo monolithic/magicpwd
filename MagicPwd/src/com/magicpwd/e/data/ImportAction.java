@@ -12,7 +12,7 @@ import com.magicpwd._user.UserSign;
 import com.magicpwd._util.Jcsv;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 import com.magicpwd.r.KindTN;
 import com.magicpwd.v.MainPtn;
 import com.magicpwd.v.TrayPtn;
@@ -25,9 +25,9 @@ public class ImportAction extends javax.swing.AbstractAction
 {
 
     private MainPtn mainPtn;
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
 
-    public ImportAction(MainPtn mainPtn, UserMdl coreMdl)
+    public ImportAction(MainPtn mainPtn, CoreMdl coreMdl)
     {
         this.mainPtn = mainPtn;
         this.coreMdl = coreMdl;

@@ -8,7 +8,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.GridMdl;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.MainPtn;
 import com.magicpwd.v.TrayPtn;
 
@@ -20,9 +20,9 @@ public class NewAction extends javax.swing.AbstractAction
 {
 
     private MainPtn mainPtn;
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
 
-    public NewAction(MainPtn mainPtn, UserMdl coreMdl)
+    public NewAction(MainPtn mainPtn, CoreMdl coreMdl)
     {
         this.mainPtn = mainPtn;
         this.coreMdl = coreMdl;

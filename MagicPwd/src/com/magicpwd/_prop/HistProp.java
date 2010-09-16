@@ -21,7 +21,7 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.DBA3000;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.TrayPtn;
 
 /**
@@ -36,9 +36,9 @@ public class HistProp extends JPanel implements IPropBean
     private List<S1S2> hist;
     private List<IEditItem> ls_ItemList;
     private DefaultListModel lm_HistList;
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
 
-    public HistProp(UserMdl coreMdl)
+    public HistProp(CoreMdl coreMdl)
     {
         this.coreMdl = coreMdl;
         keys = new Keys();

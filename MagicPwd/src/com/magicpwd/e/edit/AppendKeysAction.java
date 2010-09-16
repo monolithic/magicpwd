@@ -5,7 +5,7 @@
 package com.magicpwd.e.edit;
 
 import com.magicpwd._cons.ConsDat;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.MainPtn;
 
 /**
@@ -16,9 +16,9 @@ public class AppendKeysAction extends javax.swing.AbstractAction
 {
 
     private MainPtn mainPtn;
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
 
-    public AppendKeysAction(MainPtn mainPtn, UserMdl coreMdl)
+    public AppendKeysAction(MainPtn mainPtn, CoreMdl coreMdl)
     {
         this.mainPtn = mainPtn;
         this.coreMdl = coreMdl;

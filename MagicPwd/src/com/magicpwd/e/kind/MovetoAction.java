@@ -10,7 +10,7 @@ import com.magicpwd._face.IBackCall;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.m.GridMdl;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.MainPtn;
 import com.magicpwd.x.DatDialog;
 
@@ -22,9 +22,9 @@ public class MovetoAction extends javax.swing.AbstractAction
 {
 
     private MainPtn mainPtn;
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
 
-    public MovetoAction(MainPtn mainPtn, UserMdl coreMdl)
+    public MovetoAction(MainPtn mainPtn, CoreMdl coreMdl)
     {
         this.mainPtn = mainPtn;
         this.coreMdl = coreMdl;

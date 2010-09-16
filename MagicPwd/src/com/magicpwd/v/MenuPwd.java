@@ -13,7 +13,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditItem;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 
 /**
  * @author Amon

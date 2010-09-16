@@ -27,9 +27,9 @@ public class NoteMdl
     private boolean modified;
     private List<IEditItem> ls_ItemList;
     private Keys keys;
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
 
-    NoteMdl(UserMdl coreMdl)
+    NoteMdl(CoreMdl coreMdl)
     {
         this.coreMdl = coreMdl;
         ls_ItemList = new ArrayList<IEditItem>();

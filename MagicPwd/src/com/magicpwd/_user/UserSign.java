@@ -9,7 +9,7 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.m.UserCfg;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 import com.magicpwd.u.DBU3000;
 import com.magicpwd.v.TrayPtn;
 import javax.imageio.ImageIO;
@@ -42,7 +42,7 @@ public class UserSign extends javax.swing.JPanel
      * 导航图标
      */
     private static javax.swing.Icon guidIcon;
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
     private UserCfg userCfg;
 
     /**

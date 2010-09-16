@@ -5,7 +5,7 @@
 package com.magicpwd.e.view;
 
 import com.magicpwd.m.UserCfg;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.MainPtn;
 
 /**
@@ -16,9 +16,9 @@ public class TopsAction extends javax.swing.AbstractAction
 {
 
     private MainPtn mainPtn;
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
 
-    public TopsAction(MainPtn mainPtn, UserMdl coreMdl)
+    public TopsAction(MainPtn mainPtn, CoreMdl coreMdl)
     {
         this.mainPtn = mainPtn;
         this.coreMdl = coreMdl;

@@ -13,7 +13,7 @@ import com.magicpwd._util.Util;
 import com.magicpwd.c.FindEvt;
 import com.magicpwd.c.MPadEvt;
 import com.magicpwd.m.NoteMdl;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 import com.magicpwd.r.ListCR;
 
 /**
@@ -27,9 +27,9 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
     private String lastHash;
     private java.awt.CardLayout infoLayout;
     private java.util.List<S1S2> noteList;
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
 
-    public MiniPtn(UserMdl coreMdl)
+    public MiniPtn(CoreMdl coreMdl)
     {
         this.coreMdl = coreMdl;
     }

@@ -17,7 +17,7 @@ import com.magicpwd._util.Util;
 import com.magicpwd.d.DBAccess;
 import com.magicpwd.m.GridMdl;
 import com.magicpwd.m.UserCfg;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 
 /**
  * 系统托盘
@@ -30,7 +30,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
     private static boolean isOsTray;
     private static int currPtn;
     private static int nextPtn;
-    private static UserMdl coreMdl;
+    private static CoreMdl coreMdl;
     private static MailDlg mailDlg;
     private static TrayPtn trayPtn;
     private static UserSign userSign;
@@ -925,7 +925,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         dbLocked = aDbLocked;
     }
 
-    public static void setCoreMdl(UserMdl coreMdl)
+    public static void setCoreMdl(CoreMdl coreMdl)
     {
         TrayPtn.coreMdl = coreMdl;
     }

@@ -5,7 +5,7 @@
 package com.magicpwd.e.list;
 
 import com.magicpwd._cons.ConsCfg;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.MainPtn;
 
 /**
@@ -16,9 +16,9 @@ public class SortDirAction extends javax.swing.AbstractAction
 {
 
     private MainPtn mainPtn;
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
 
-    public SortDirAction(MainPtn mainPtn, UserMdl coreMdl)
+    public SortDirAction(MainPtn mainPtn, CoreMdl coreMdl)
     {
         this.mainPtn = mainPtn;
         this.coreMdl = coreMdl;

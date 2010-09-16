@@ -10,7 +10,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
 import com.magicpwd._user.UserSign;
 import com.magicpwd._util.Lang;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.MainPtn;
 import com.magicpwd.v.TrayPtn;
 
@@ -22,9 +22,9 @@ public class CreateSkeyAction extends javax.swing.AbstractAction
 {
 
     private MainPtn mainPtn;
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
 
-    public CreateSkeyAction(MainPtn mainPtn, UserMdl coreMdl)
+    public CreateSkeyAction(MainPtn mainPtn, CoreMdl coreMdl)
     {
         this.mainPtn = mainPtn;
         this.coreMdl = coreMdl;

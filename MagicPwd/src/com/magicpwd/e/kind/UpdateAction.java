@@ -8,7 +8,7 @@ import com.magicpwd._comn.Kind;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.d.DBA3000;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 import com.magicpwd.r.KindTN;
 import com.magicpwd.v.MainPtn;
 
@@ -20,9 +20,9 @@ public class UpdateAction extends javax.swing.AbstractAction
 {
 
     private MainPtn mainPtn;
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
 
-    public UpdateAction(MainPtn mainPtn, UserMdl coreMdl)
+    public UpdateAction(MainPtn mainPtn, CoreMdl coreMdl)
     {
         this.mainPtn = mainPtn;
         this.coreMdl = coreMdl;

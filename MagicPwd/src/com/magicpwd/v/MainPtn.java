@@ -31,7 +31,7 @@ import com.magicpwd.c.MPwdEvt;
 import com.magicpwd.c.ToolEvt;
 import com.magicpwd.m.GridMdl;
 import com.magicpwd.m.UserCfg;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 import com.magicpwd.r.KeysCR;
 import com.magicpwd.r.KindTN;
 import com.magicpwd.r.TreeCR;
@@ -67,15 +67,15 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
      * 用户查找字符串
      */
     private String queryKey;
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
 
-    public MainPtn(UserMdl coreMdl)
+    public MainPtn(CoreMdl coreMdl)
     {
         this.coreMdl = coreMdl;
     }
 
     @Override
-    public UserMdl getCoreMdl()
+    public CoreMdl getCoreMdl()
     {
         return coreMdl;
     }

@@ -21,9 +21,9 @@ public class HintMdl
 
     private static List<Keys> hintList = new ArrayList<Keys>();
     private int counter = 999999999;//TODO:需要修改
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
 
-    HintMdl(UserMdl coreMdl)
+    HintMdl(CoreMdl coreMdl)
     {
         this.coreMdl = coreMdl;
     }
