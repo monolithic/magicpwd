@@ -12,21 +12,31 @@ import com.magicpwd.v.TrayPtn;
  *
  * @author Administrator
  */
-public class ExitAction extends javax.swing.AbstractAction
+public class ExitAction extends javax.swing.AbstractAction implements IPadAction
 {
 
     private MiniPtn miniPtn;
     private CoreMdl coreMdl;
 
-    public ExitAction(MiniPtn miniPtn, CoreMdl coreMdl)
+    public ExitAction()
     {
-        this.miniPtn = miniPtn;
-        this.coreMdl = coreMdl;
     }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
         TrayPtn.endSave();
+    }
+
+    @Override
+    public void setMiniPtn(MiniPtn miniPtn)
+    {
+        this.miniPtn = miniPtn;
+    }
+
+    @Override
+    public void setCoreMdl(CoreMdl coreMdl)
+    {
+        this.coreMdl = coreMdl;
     }
 }

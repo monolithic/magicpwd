@@ -13,16 +13,14 @@ import com.magicpwd.v.TrayPtn;
  *
  * @author Administrator
  */
-public class TopAction extends javax.swing.AbstractAction
+public class TopAction extends javax.swing.AbstractAction implements IPadAction
 {
 
     private MiniPtn miniPtn;
     private CoreMdl coreMdl;
 
-    public TopAction(MiniPtn miniPtn, CoreMdl coreMdl)
+    public TopAction()
     {
-        this.miniPtn = miniPtn;
-        this.coreMdl = coreMdl;
     }
 
     @Override
@@ -32,5 +30,17 @@ public class TopAction extends javax.swing.AbstractAction
         boolean b = !cfg.isViewTop();
         TrayPtn.getCurrForm().setAlwaysOnTop(b);
         cfg.setViewTop(b);
+    }
+
+    @Override
+    public void setMiniPtn(MiniPtn miniPtn)
+    {
+        this.miniPtn = miniPtn;
+    }
+
+    @Override
+    public void setCoreMdl(CoreMdl coreMdl)
+    {
+        this.coreMdl = coreMdl;
     }
 }
