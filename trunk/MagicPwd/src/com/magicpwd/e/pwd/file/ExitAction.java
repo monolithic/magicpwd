@@ -20,16 +20,14 @@ public class ExitAction extends javax.swing.AbstractAction
     private MainPtn mainPtn;
     private CoreMdl coreMdl;
 
-    public ExitAction(MainPtn mainPtn, CoreMdl coreMdl)
+    public ExitAction()
     {
-        this.mainPtn = mainPtn;
-        this.coreMdl = coreMdl;
     }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (coreMdl.getGridMdl().isModified() && javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
+        if (getCoreMdl().getGridMdl().isModified() && javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
         {
             return;
         }
@@ -37,5 +35,37 @@ public class ExitAction extends javax.swing.AbstractAction
         TrayPtn.getCurrForm().setVisible(false);
         TrayPtn.endSave();
         System.exit(0);
+    }
+
+    /**
+     * @return the mainPtn
+     */
+    public MainPtn getMainPtn()
+    {
+        return mainPtn;
+    }
+
+    /**
+     * @param mainPtn the mainPtn to set
+     */
+    public void setMainPtn(MainPtn mainPtn)
+    {
+        this.mainPtn = mainPtn;
+    }
+
+    /**
+     * @return the coreMdl
+     */
+    public CoreMdl getCoreMdl()
+    {
+        return coreMdl;
+    }
+
+    /**
+     * @param coreMdl the coreMdl to set
+     */
+    public void setCoreMdl(CoreMdl coreMdl)
+    {
+        this.coreMdl = coreMdl;
     }
 }

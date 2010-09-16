@@ -83,7 +83,7 @@ public class MenuPtn
                     continue;
                 }
                 tmp = (Element) obj;
-                javax.swing.JMenu menu = createMenu(tmp, actions, groups);
+                javax.swing.JMenu menu = createMenu(tmp, actions, groups, null);
                 if (menu == null)
                 {
                     continue;
@@ -120,7 +120,7 @@ public class MenuPtn
         return null;
     }
 
-    private javax.swing.JMenu createMenu(Element element, java.util.HashMap<String, javax.swing.Action> actions, java.util.HashMap<String, javax.swing.ButtonGroup> groups)
+    private javax.swing.JMenu createMenu(Element element, java.util.HashMap<String, javax.swing.Action> actions, java.util.HashMap<String, javax.swing.ButtonGroup> groups, javax.swing.JComponent component)
     {
         javax.swing.JMenu menu = new javax.swing.JMenu();
 
@@ -140,12 +140,12 @@ public class MenuPtn
                 element = (Element) obj;
                 if ("menu".equals(element.getName()))
                 {
-                    menu.add(createMenu(element, actions, groups));
+                    menu.add(createMenu(element, actions, groups, component));
                     continue;
                 }
                 if ("item".equals(element.getName()))
                 {
-                    menu.add(createItem(element, actions, groups));
+                    menu.add(createItem(element, actions, groups, component));
                     continue;
                 }
                 if ("seperator".equals(element.getName()))
@@ -158,7 +158,7 @@ public class MenuPtn
         return menu;
     }
 
-    private javax.swing.JMenuItem createItem(Element element, java.util.HashMap<String, javax.swing.Action> actions, java.util.HashMap<String, javax.swing.ButtonGroup> groups)
+    private javax.swing.JMenuItem createItem(Element element, java.util.HashMap<String, javax.swing.Action> actions, java.util.HashMap<String, javax.swing.ButtonGroup> groups, javax.swing.JComponent component)
     {
         javax.swing.JMenuItem item = processType(element);
         processGroup(element, item, groups);
@@ -166,8 +166,8 @@ public class MenuPtn
         processTips(element, item);
         processIcon(element, item);
         processCommand(element, item);
-        processStrokes(element, item);
-        processAction(element, item);
+        processStrokes(element, item, component);
+        processAction(element, item, actions);
         return item;
     }
 
@@ -414,16 +414,58 @@ public class MenuPtn
 
     private static javax.swing.JMenuItem processCommand(Element element, javax.swing.JMenuItem item)
     {
+        item.setActionCommand(element.attributeValue("command"));
         return item;
     }
 
-    private static javax.swing.JMenuItem processStrokes(Element element, javax.swing.JMenuItem item)
+    private static javax.swing.JMenuItem processStrokes(Element element, javax.swing.JMenuItem item, javax.swing.JComponent component)
     {
+        String temp = element.attributeValue("strokes");
+        if (Char.isValidate(temp))
+        {
+            temp = temp.toUpperCase().replaceAll("~|SHIFT", "shift").replaceAll("\\^|CONTROL|CTRL", "control").replaceAll("#|ALT", "alt").replaceAll("!|META", "meta").replaceAll("[^-=`;',./\\[\\]a-zA-Z0-9]+", " ").trim();
+            javax.swing.KeyStroke stroke = javax.swing.KeyStroke.getKeyStroke(temp);
+            if (component != null)
+            {
+                Bean.registerKeyStrokeAction(component, stroke, item.getAction(), null, javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
+            }
+            item.setAccelerator(stroke);
+        }
         return item;
     }
 
-    private static javax.swing.JMenuItem processAction(Element element, javax.swing.JMenuItem item)
+    private static javax.swing.JMenuItem processAction(Element element, javax.swing.JMenuItem item, java.util.HashMap<String, javax.swing.Action> actions)
     {
+        String name = element.attributeValue("action-name");
+        javax.swing.Action action = null;
+        if (Char.isValidate(name))
+        {
+            action = actions.get(name);
+        }
+        if (action == null)
+        {
+            String type = element.attributeValue("action-type");
+            if (Char.isValidate(type))
+            {
+                try
+                {
+                    Object obj = Class.forName(type).newInstance();
+                    if (obj instanceof javax.swing.Action)
+                    {
+                        action = (javax.swing.Action) obj;
+                        actions.put(name, action);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logs.exception(ex);
+                }
+            }
+        }
+        if (action != null)
+        {
+            item.setAction(action);
+        }
         return item;
     }
 

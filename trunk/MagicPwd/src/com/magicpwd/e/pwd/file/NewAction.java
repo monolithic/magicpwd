@@ -22,16 +22,14 @@ public class NewAction extends javax.swing.AbstractAction
     private MainPtn mainPtn;
     private CoreMdl coreMdl;
 
-    public NewAction(MainPtn mainPtn, CoreMdl coreMdl)
+    public NewAction()
     {
-        this.mainPtn = mainPtn;
-        this.coreMdl = coreMdl;
     }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        GridMdl gm = coreMdl.getGridMdl();
+        GridMdl gm = getCoreMdl().getGridMdl();
         if (gm.isModified())
         {
             if (Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", gm.getItemAt(ConsEnv.PWDS_HEAD_META).getName()) != javax.swing.JOptionPane.YES_OPTION)
@@ -46,10 +44,42 @@ public class NewAction extends javax.swing.AbstractAction
         {
 //            mainMenu.setViewPropSelected(true);
 //            mainMenu.setViewSideSelected(true);
-            coreMdl.getUserCfg().setEditViw(true);
-            coreMdl.getUserCfg().setEditWnd(true);
-            mainPtn.showPropEdit(true);
+            getCoreMdl().getUserCfg().setEditViw(true);
+            getCoreMdl().getUserCfg().setEditWnd(true);
+            getMainPtn().showPropEdit(true);
         }
-        mainPtn.showPropEdit(gm.initGuid(), true);
+        getMainPtn().showPropEdit(gm.initGuid(), true);
+    }
+
+    /**
+     * @return the mainPtn
+     */
+    public MainPtn getMainPtn()
+    {
+        return mainPtn;
+    }
+
+    /**
+     * @param mainPtn the mainPtn to set
+     */
+    public void setMainPtn(MainPtn mainPtn)
+    {
+        this.mainPtn = mainPtn;
+    }
+
+    /**
+     * @return the coreMdl
+     */
+    public CoreMdl getCoreMdl()
+    {
+        return coreMdl;
+    }
+
+    /**
+     * @param coreMdl the coreMdl to set
+     */
+    public void setCoreMdl(CoreMdl coreMdl)
+    {
+        this.coreMdl = coreMdl;
     }
 }
