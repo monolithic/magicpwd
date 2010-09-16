@@ -7,7 +7,7 @@ package com.magicpwd.e.pwd.user;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._user.UserSign;
 import com.magicpwd.m.CoreMdl;
-import com.magicpwd.v.MainPtn;
+import com.magicpwd.v.pwd.MainPtn;
 import com.magicpwd.v.TrayPtn;
 
 /**

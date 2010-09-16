@@ -1,5 +1,8 @@
 package com.magicpwd.v;
 
+import com.magicpwd.v.pad.MiniPtn;
+import com.magicpwd.v.pwd.MailPtn;
+import com.magicpwd.v.pwd.MainPtn;
 import com.magicpwd._comn.I1S2;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;

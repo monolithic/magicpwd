@@ -6,7 +6,7 @@ package com.magicpwd.e.pwd.help;
 
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd.m.CoreMdl;
-import com.magicpwd.v.MainPtn;
+import com.magicpwd.v.pwd.MainPtn;
 import com.magicpwd.x.MdiDialog;
 
 /**

@@ -5,7 +5,7 @@
 package com.magicpwd.e.pad;
 
 import com.magicpwd.m.CoreMdl;
-import com.magicpwd.v.MiniPtn;
+import com.magicpwd.v.pad.MiniPtn;
 
 /**
  *

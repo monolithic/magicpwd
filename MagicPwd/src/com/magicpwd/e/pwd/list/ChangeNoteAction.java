@@ -7,7 +7,7 @@ package com.magicpwd.e.pwd.list;
 import com.magicpwd._comn.Keys;
 import com.magicpwd._util.Char;
 import com.magicpwd.m.CoreMdl;
-import com.magicpwd.v.MainPtn;
+import com.magicpwd.v.pwd.MainPtn;
 
 /**
  *

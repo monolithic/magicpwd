@@ -14,7 +14,7 @@ import com.magicpwd._util.Logs;
 import com.magicpwd.m.GridMdl;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.r.KindTN;
-import com.magicpwd.v.MainPtn;
+import com.magicpwd.v.pwd.MainPtn;
 
 /**
  *
