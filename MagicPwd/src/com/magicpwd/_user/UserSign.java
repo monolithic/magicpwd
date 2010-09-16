@@ -25,9 +25,12 @@ public class UserSign extends javax.swing.JPanel
      * 登录错误次数
      */
     private int errCount;
+    /**
+     * 动态图像
+     */
     private Jpng jpng;
     /**
-     * 
+     * 窗体对象引用
      */
     private javax.swing.JFrame frame;
     private javax.swing.JDialog dialog;
@@ -46,13 +49,13 @@ public class UserSign extends javax.swing.JPanel
      * 独立窗口
      * @param type
      */
-    public UserSign()
+    public UserSign(UserCfg userCfg)
     {
+        this.userCfg = userCfg;
         frame = new javax.swing.JFrame();
         frame.setResizable(false);
         frame.setIconImage(Util.getLogo(16));
         frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().add(this);
     }
 
     /**
@@ -66,7 +69,6 @@ public class UserSign extends javax.swing.JPanel
         dialog.setResizable(false);
         dialog.setIconImage(Util.getLogo(16));
         dialog.setDefaultCloseOperation(javax.swing.JDialog.DISPOSE_ON_CLOSE);
-        dialog.getContentPane().add(this);
     }
 
     public boolean initView(int type)
@@ -188,6 +190,14 @@ public class UserSign extends javax.swing.JPanel
         vsg.addContainerGap();
         layout.setVerticalGroup(vsg);
 
+        if (frame != null)
+        {
+            frame.getContentPane().add(this);
+        }
+        if (dialog != null)
+        {
+            dialog.getContentPane().add(this);
+        }
         return true;
     }
 

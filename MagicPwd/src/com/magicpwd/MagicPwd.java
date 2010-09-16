@@ -78,7 +78,7 @@ public class MagicPwd
                     }
 
                     // 显示登录或注册界面
-                    UserSign us = new UserSign();
+                    UserSign us = new UserSign(cfg);
                     us.setBackCall(new IBackCall()
                     {
 
@@ -147,6 +147,10 @@ public class MagicPwd
             }
             return;
         }
+        if ("synth".equals(type))
+        {
+            return;
+        }
         if (!"user".equals(type))
         {
             return;
@@ -175,20 +179,7 @@ public class MagicPwd
 
         try
         {
-            java.net.URL urls[] = new java.net.URL[jars.length];
-            for (int i = 0; i < jars.length; i += 1)
-            {
-                urls[i] = jars[i].toURI().toURL();
-            }
-            java.net.URLClassLoader ucl = new java.net.URLClassLoader(urls);
-            Object obj = ucl.loadClass(name).newInstance();
-            if (obj instanceof javax.swing.LookAndFeel)
-            {
-                boolean deco = ConsCfg.DEF_TRUE.equalsIgnoreCase(cfg.getCfg(ConsCfg.CFG_SKIN_DECO, ConsCfg.DEF_FALSE));
-                javax.swing.JFrame.setDefaultLookAndFeelDecorated(deco);
-                javax.swing.JDialog.setDefaultLookAndFeelDecorated(deco);
-                javax.swing.UIManager.setLookAndFeel((javax.swing.LookAndFeel) obj);
-            }
+            loadJar(jars);
         }
         catch (Exception exp)
         {

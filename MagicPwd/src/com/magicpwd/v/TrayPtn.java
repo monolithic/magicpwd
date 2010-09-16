@@ -788,7 +788,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         TrayPtn.nextPtn = nextPtn;
         if (userSign == null)
         {
-            userSign = new UserSign();
+            userSign = new UserSign(coreMdl.getUserCfg());
             userSign.setBackCall(this);
             userSign.initView(ConsEnv.INT_SIGN_RS);
             userSign.initLang();
