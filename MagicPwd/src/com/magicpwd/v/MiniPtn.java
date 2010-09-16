@@ -6,7 +6,6 @@ import com.magicpwd._comp.WTextArea;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditItem;
-import com.magicpwd._face.IFormView;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
@@ -21,7 +20,7 @@ import com.magicpwd.r.ListCR;
  *
  * @author Amon
  */
-public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, FindEvt
+public class MiniPtn extends javax.swing.JFrame implements MPadEvt, FindEvt
 {
 
     private String lastHash;
@@ -259,7 +258,6 @@ public class MiniPtn extends javax.swing.JFrame implements IFormView, MPadEvt, F
     {
         super.setVisible(visible);
     }
-
 
     private void bt_SaveNoteActionPerformed(java.awt.event.ActionEvent evt)
     {

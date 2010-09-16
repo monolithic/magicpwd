@@ -1,7 +1,6 @@
 package com.magicpwd.v;
 
 import com.magicpwd._cons.LangRes;
-import com.magicpwd._face.IFormView;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.c.FindEvt;
@@ -13,7 +12,7 @@ import com.magicpwd.c.MPayEvt;
  * @author Amon
  * 
  */
-public class NormPtn extends javax.swing.JFrame implements IFormView, MPayEvt, FindEvt
+public class NormPtn extends javax.swing.JFrame implements MPayEvt, FindEvt
 {
 
     public void initView()

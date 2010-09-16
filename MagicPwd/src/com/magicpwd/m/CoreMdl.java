@@ -29,42 +29,8 @@ public final class CoreMdl
     // 记事便签数据模型
     private NoteMdl noteMdl;
 
-    /**
-     * @return the safeMdl
-     */
-    public SafeMdl getSafeMdl()
-    {
-        return safeMdl;
-    }
-
-    /**
-     * @param aSafeMdl the safeMdl to set
-     */
-    public void setSafeMdl(SafeMdl aSafeMdl)
-    {
-        safeMdl = aSafeMdl;
-    }
-
     private CoreMdl()
     {
-    }
-
-    /**
-     * 获取运行模式
-     * @return
-     */
-    public int getRunMode()
-    {
-        return runMode;
-    }
-
-    /**
-     * 设置运行模式
-     * @param runMode
-     */
-    public void setRunMode(int runMode)
-    {
-        CoreMdl.runMode = runMode;
     }
 
     public void preLoad()
@@ -93,6 +59,24 @@ public final class CoreMdl
     public UserCfg getUserCfg()
     {
         return userCfg;
+    }
+
+    /**
+     * 获取运行模式
+     * @return
+     */
+    public int getRunMode()
+    {
+        return runMode;
+    }
+
+    /**
+     * 设置运行模式
+     * @param runMode
+     */
+    public void setRunMode(int runMode)
+    {
+        CoreMdl.runMode = runMode;
     }
 
     /**
@@ -170,5 +154,21 @@ public final class CoreMdl
     public void setHintMdl(HintMdl aHintMdl)
     {
         hintMdl = aHintMdl;
+    }
+
+    /**
+     * @return the safeMdl
+     */
+    public SafeMdl getSafeMdl()
+    {
+        return safeMdl;
+    }
+
+    /**
+     * @param aSafeMdl the safeMdl to set
+     */
+    public void setSafeMdl(SafeMdl aSafeMdl)
+    {
+        safeMdl = aSafeMdl;
     }
 }

@@ -13,9 +13,9 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.c.MPwdEvt;
-import com.magicpwd.e.data.ImportAction;
-import com.magicpwd.e.data.SearchAction;
-import com.magicpwd.e.data.ExportAction;
+import com.magicpwd.e.pwd.data.ImportAction;
+import com.magicpwd.e.pwd.data.SearchAction;
+import com.magicpwd.e.pwd.data.ExportAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.x.MdiDialog;
 
