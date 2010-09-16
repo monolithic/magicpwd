@@ -6,14 +6,22 @@
     Author     : aven
     Description:
         《魔方密码》系统菜单配置文档。
+        ~ shift
+        # alt
+        ^ ctrl
+        ! meta
 -->
 <magicpwd>
     <menubar id="magicpwd">
         <menu id="file" text="$P30F7601" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
-            <item type="normal" text="$P30F7602" tips="" icon="" action="" strokes="" />
-            <item type="normal" text="$P30F7603" tips="" icon="" action="" strokes="" />
-            <item type="normal" text="$P30F7604" tips="" icon="" action="" strokes="" />
-            <item type="normal" text="$P30F7605" tips="" icon="" action="" strokes="" />
+            <!--新增-->
+            <item type="normal" text="$P30F7602" tips="" icon="" action-name="" action-type="com.magicpwd.e.pwd.file.NewAction" strokes="^ N" command="" />
+            <!--保存-->
+            <item type="normal" text="$P30F7603" tips="" icon="" action-name="" action-type="com.magicpwd.e.pwd.file.SaveAction" strokes="^ S" command="" />
+            <!--隐藏窗口-->
+            <item type="normal" text="$P30F7604" tips="" icon="" action-name="" action-type="com.magicpwd.e.pwd.file.HideAction" strokes="^ H" command="" />
+            <!--退出-->
+            <item type="normal" text="$P30F7605" tips="" icon="" action-name="" action-type="com.magicpwd.e.pwd.file.ExitAction" strokes="^ Q" command="" />
         </menu>
         <menu id="edit" text="编辑(@E)" tips="">
             <item type="checkbox" text="P30F7603" tips="" icon="" action="" strokes="" group="" checked="true">
