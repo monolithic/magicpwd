@@ -11,7 +11,7 @@ import com.magicpwd._util.Char;
 import com.magicpwd._util.File;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd.e.skin.LookAction;
+import com.magicpwd.e.pwd.skin.LookAction;
 import com.magicpwd.m.UserCfg;
 import com.magicpwd.r.AmonFF;
 import java.util.List;
