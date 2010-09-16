@@ -9,9 +9,7 @@ import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
-import com.magicpwd.d.DBAccess;
 import com.magicpwd.m.UserCfg;
-import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
 import com.magicpwd.v.TrayPtn;
 
@@ -202,8 +200,23 @@ public class MagicPwd
     {
     }
 
-    private static void loadJar(java.net.URL[] urls)
+    private static void loadJar(java.io.File... files) throws Exception
     {
+        if (files == null || files.length < 1)
+        {
+            return;
+        }
+
+        Object[] urls = new Object[files.length];
+        for (int i = 0, j = files.length; i < j; i += 1)
+        {
+            urls[i] = files[i].toURI().toURL();
+        }
+
+        java.net.URLClassLoader loader = (java.net.URLClassLoader) ClassLoader.getSystemClassLoader();
+        java.lang.reflect.Method method = java.net.URLClassLoader.class.getDeclaredMethod("addURL", java.net.URL.class);
+        method.setAccessible(true);
+        method.invoke(loader, urls);
     }
 
     private static void preLoad()
