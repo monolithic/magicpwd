@@ -26,10 +26,8 @@ public class SaveAction extends javax.swing.AbstractAction
     private MainPtn mainPtn;
     private CoreMdl coreMdl;
 
-    public SaveAction(MainPtn mainPtn, CoreMdl coreMdl)
+    public SaveAction()
     {
-        this.mainPtn = mainPtn;
-        this.coreMdl = coreMdl;
     }
 
     @Override
@@ -108,5 +106,37 @@ public class SaveAction extends javax.swing.AbstractAction
 //
 //        mainPtn.showPropEdit();
 //        mainInfo.initData();
+    }
+
+    /**
+     * @return the mainPtn
+     */
+    public MainPtn getMainPtn()
+    {
+        return mainPtn;
+    }
+
+    /**
+     * @param mainPtn the mainPtn to set
+     */
+    public void setMainPtn(MainPtn mainPtn)
+    {
+        this.mainPtn = mainPtn;
+    }
+
+    /**
+     * @return the coreMdl
+     */
+    public CoreMdl getCoreMdl()
+    {
+        return coreMdl;
+    }
+
+    /**
+     * @param coreMdl the coreMdl to set
+     */
+    public void setCoreMdl(CoreMdl coreMdl)
+    {
+        this.coreMdl = coreMdl;
     }
 }

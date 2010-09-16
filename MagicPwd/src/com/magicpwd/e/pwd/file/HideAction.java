@@ -21,11 +21,11 @@ import com.magicpwd.v.TrayPtn;
 public class HideAction extends javax.swing.AbstractAction
 {
 
+    private MainPtn mainPtn;
     private CoreMdl coreMdl;
 
-    public HideAction(MainPtn mainPtn, CoreMdl coreMdl)
+    public HideAction()
     {
-        this.coreMdl = coreMdl;
     }
 
     @Override
@@ -40,7 +40,7 @@ public class HideAction extends javax.swing.AbstractAction
 
     private void hideWindow()
     {
-        GridMdl gridMdl = coreMdl.getGridMdl();
+        GridMdl gridMdl = getCoreMdl().getGridMdl();
         // Save Temperary Data
         if (gridMdl.isModified())
         {
@@ -55,5 +55,37 @@ public class HideAction extends javax.swing.AbstractAction
                 Logs.exception(exp);
             }
         }
+    }
+
+    /**
+     * @return the mainPtn
+     */
+    public MainPtn getMainPtn()
+    {
+        return mainPtn;
+    }
+
+    /**
+     * @param mainPtn the mainPtn to set
+     */
+    public void setMainPtn(MainPtn mainPtn)
+    {
+        this.mainPtn = mainPtn;
+    }
+
+    /**
+     * @return the coreMdl
+     */
+    public CoreMdl getCoreMdl()
+    {
+        return coreMdl;
+    }
+
+    /**
+     * @param coreMdl the coreMdl to set
+     */
+    public void setCoreMdl(CoreMdl coreMdl)
+    {
+        this.coreMdl = coreMdl;
     }
 }
