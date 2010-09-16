@@ -103,7 +103,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.add(bt_PwdsUcfg);
 
         menuPwd = new MenuPwd();
-        menuPwd.initView();
+//        menuPwd.initView();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -162,7 +162,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         Lang.setWText(bt_PwdsUcfg, LangRes.P30F150D, "&O");
         Lang.setWTips(bt_PwdsUcfg, LangRes.P30F150E, "口令设置(Alt + O)");
 
-        menuPwd.initLang();
+//        menuPwd.initLang();
     }
 
     @Override
@@ -176,7 +176,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         }
         tf_PropName.setText(name);
         pf_PropData.setText(itemData.getData());
-        menuPwd.setTplt(tplt);
+//        menuPwd.setTplt(tplt);
     }
 
     @Override
@@ -227,8 +227,8 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 
     private void bt_PwdsUcfgActionPerformed(java.awt.event.ActionEvent evt)
     {
-        menuPwd.initData();
-        menuPwd.show(bt_PwdsUcfg, 0, bt_PwdsUcfg.getSize().height);
+//        menuPwd.initData();
+//        menuPwd.show(bt_PwdsUcfg, 0, bt_PwdsUcfg.getSize().height);
     }
 
     private void bt_PwdsGentActionPerformed(java.awt.event.ActionEvent evt)
@@ -244,8 +244,8 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 
         try
         {
-            char[] t = Util.nextRandomKey(menuPwd.getCharSets(), menuPwd.getCharSize(), menuPwd.isCharLoop());
-            pf_PropData.setText(new String(t));
+//            char[] t = Util.nextRandomKey(menuPwd.getCharSets(), menuPwd.getCharSize(), menuPwd.isCharLoop());
+//            pf_PropData.setText(new String(t));
         }
         catch (Exception exp)
         {

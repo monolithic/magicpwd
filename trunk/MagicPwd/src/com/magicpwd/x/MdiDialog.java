@@ -52,7 +52,7 @@ public class MdiDialog extends javax.swing.JDialog
     {
         if (md_Dialog == null)
         {
-            md_Dialog = new MdiDialog();
+            md_Dialog = new MdiDialog(null);
             md_Dialog.initView();
             md_Dialog.initLang();
             md_Dialog.initData();
