@@ -8,6 +8,7 @@ import com.magicpwd.m.UserCfg;
 import com.magicpwd.v.MenuPtn;
 import java.awt.Dimension;
 import javax.swing.JFrame;
+import javax.swing.UIManager;
 
 /**
  *
@@ -18,6 +19,15 @@ public class Menu
 
     public static void main(String args[])
     {
+        try
+        {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
         UserCfg cfg = new UserCfg();
         cfg.loadCfg();
         MenuPtn ptn = new MenuPtn(cfg);
