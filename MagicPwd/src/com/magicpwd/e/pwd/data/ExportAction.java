@@ -70,6 +70,11 @@ public class ExportAction extends javax.swing.AbstractAction implements IPwdActi
         this.coreMdl = coreMdl;
     }
 
+    @Override
+    public void doUpdate(Object object)
+    {
+    }
+
     private boolean exportData()
     {
         javax.swing.tree.TreePath path = mainPtn.getSelectedPath();

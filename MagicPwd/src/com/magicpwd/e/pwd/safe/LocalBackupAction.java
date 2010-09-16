@@ -35,4 +35,9 @@ public class LocalBackupAction extends javax.swing.AbstractAction implements IPw
     {
 //        this.coreMdl = coreMdl;
     }
+
+    @Override
+    public void doUpdate(Object object)
+    {
+    }
 }

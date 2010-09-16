@@ -41,4 +41,9 @@ public class SortDirAction extends javax.swing.AbstractAction implements IPwdAct
     {
         this.coreMdl = coreMdl;
     }
+
+    @Override
+    public void doUpdate(Object object)
+    {
+    }
 }

@@ -71,4 +71,9 @@ public class AppendAction extends javax.swing.AbstractAction implements IPwdActi
     {
         this.coreMdl = coreMdl;
     }
+
+    @Override
+    public void doUpdate(Object object)
+    {
+    }
 }

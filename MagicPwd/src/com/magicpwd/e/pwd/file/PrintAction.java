@@ -38,4 +38,9 @@ public class PrintAction extends javax.swing.AbstractAction implements IPwdActio
     {
         this.coreMdl = coreMdl;
     }
+
+    @Override
+    public void doUpdate(Object object)
+    {
+    }
 }
