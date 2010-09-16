@@ -3,7 +3,7 @@
  */
 package com.magicpwd._bean;
 
-import com.magicpwd._comn.GuidItem;
+import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.Tplt;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsDat;
