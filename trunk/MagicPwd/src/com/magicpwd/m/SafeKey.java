@@ -47,12 +47,12 @@ final class SafeKey implements Key
      * 口令转换字符
      */
     private char[] mask;
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
 
     /**
      * 默认构造器
      */
-    SafeKey(UserMdl coreMdl)
+    SafeKey(CoreMdl coreMdl)
     {
         this.coreMdl = coreMdl;
     }

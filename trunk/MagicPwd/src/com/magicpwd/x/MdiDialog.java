@@ -15,7 +15,7 @@ import com.magicpwd._prop.USetProp;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.c.MenuEvt;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 import com.magicpwd.r.ListCR;
 import com.magicpwd.v.TrayPtn;
 import java.awt.Color;
@@ -32,9 +32,9 @@ public class MdiDialog extends javax.swing.JDialog
     private java.awt.CardLayout cl_CardLayout;
     private javax.swing.DefaultListModel lm_PropList;
     private java.util.HashMap<String, IPropBean> hm_PropList;
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
 
-    private MdiDialog(UserMdl coreMdl)
+    private MdiDialog(CoreMdl coreMdl)
     {
         super(TrayPtn.getCurrForm());
         this.coreMdl = coreMdl;

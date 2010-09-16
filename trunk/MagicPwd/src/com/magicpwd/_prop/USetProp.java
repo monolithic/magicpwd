@@ -13,7 +13,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IPropBean;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.UserCfg;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 
 /**
  * @author Amon
@@ -21,10 +21,10 @@ import com.magicpwd.m.UserMdl;
  */
 public class USetProp extends JPanel implements IPropBean
 {
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
     private java.io.File backPath;
 
-    public USetProp(UserMdl coreMdl)
+    public USetProp(CoreMdl coreMdl)
     {
         this.coreMdl = coreMdl;
     }

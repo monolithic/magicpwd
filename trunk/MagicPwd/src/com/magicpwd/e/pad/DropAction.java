@@ -4,7 +4,7 @@
  */
 package com.magicpwd.e.pad;
 
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.MiniPtn;
 
 /**
@@ -15,9 +15,9 @@ public class DropAction extends javax.swing.AbstractAction
 {
 
     private MiniPtn miniPtn;
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
 
-    public DropAction(MiniPtn miniPtn, UserMdl coreMdl)
+    public DropAction(MiniPtn miniPtn, CoreMdl coreMdl)
     {
         this.miniPtn = miniPtn;
         this.coreMdl = coreMdl;

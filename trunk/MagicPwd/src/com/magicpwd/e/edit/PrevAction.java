@@ -4,7 +4,7 @@
  */
 package com.magicpwd.e.edit;
 
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.MainPtn;
 
 /**
@@ -15,9 +15,9 @@ public class PrevAction extends javax.swing.AbstractAction
 {
 
     private MainPtn mainPtn;
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
 
-    public PrevAction(MainPtn mainPtn, UserMdl coreMdl)
+    public PrevAction(MainPtn mainPtn, CoreMdl coreMdl)
     {
         this.mainPtn = mainPtn;
         this.coreMdl = coreMdl;

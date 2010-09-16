@@ -14,7 +14,7 @@ import com.magicpwd._face.IPropBean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.m.CharMdl;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 
 /**
  * @author Amon
@@ -28,9 +28,9 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
      */
     private Char charItem;
     private boolean isUpdate;
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
 
-    public CharProp(UserMdl coreMdl)
+    public CharProp(CoreMdl coreMdl)
     {
         this.coreMdl = coreMdl;
     }

@@ -21,9 +21,9 @@ public class ListMdl extends DefaultListModel
 {
 
     private List<Keys> dataList;
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
 
-    ListMdl(UserMdl coreMdl)
+    ListMdl(CoreMdl coreMdl)
     {
         this.coreMdl = coreMdl;
         dataList = new ArrayList<Keys>();

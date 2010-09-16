@@ -14,7 +14,7 @@ import com.magicpwd.c.MPadEvt;
 import com.magicpwd.c.MPwdEvt;
 import com.magicpwd.c.MenuEvt;
 import com.magicpwd.c.ToolEvt;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 import javax.swing.ButtonGroup;
 
 /**

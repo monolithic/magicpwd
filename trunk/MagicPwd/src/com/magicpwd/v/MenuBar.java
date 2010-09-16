@@ -16,7 +16,7 @@ import com.magicpwd.c.MPwdEvt;
 import com.magicpwd.e.data.ImportAction;
 import com.magicpwd.e.data.SearchAction;
 import com.magicpwd.e.data.ExportAction;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 import com.magicpwd.x.MdiDialog;
 
 /**

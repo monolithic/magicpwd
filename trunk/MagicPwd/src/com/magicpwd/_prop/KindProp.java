@@ -18,7 +18,7 @@ import com.magicpwd._face.IPropBean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.DBA3000;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.TrayPtn;
 
 /**
@@ -31,9 +31,9 @@ public class KindProp extends JPanel implements IPropBean
     private javax.swing.tree.DefaultMutableTreeNode treeNode;
     private Kind kindItem;
     private boolean isUpdate;
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
 
-    public KindProp(UserMdl coreMdl)
+    public KindProp(CoreMdl coreMdl)
     {
         this.coreMdl = coreMdl;
     }

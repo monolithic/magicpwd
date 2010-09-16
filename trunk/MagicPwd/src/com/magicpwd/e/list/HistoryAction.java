@@ -6,7 +6,7 @@ package com.magicpwd.e.list;
 
 import com.magicpwd._comn.Keys;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.MainPtn;
 import com.magicpwd.x.MdiDialog;
 
@@ -18,9 +18,9 @@ public class HistoryAction extends javax.swing.AbstractAction
 {
 
     private MainPtn mainPtn;
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
 
-    public HistoryAction(MainPtn mainPtn, UserMdl coreMdl)
+    public HistoryAction(MainPtn mainPtn, CoreMdl coreMdl)
     {
         this.mainPtn = mainPtn;
         this.coreMdl = coreMdl;

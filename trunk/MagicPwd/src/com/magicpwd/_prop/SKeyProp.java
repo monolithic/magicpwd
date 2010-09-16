@@ -7,7 +7,7 @@ import com.magicpwd._comn.S1S2;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IPropBean;
 import com.magicpwd._util.Lang;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 
 /**
  * @author Amon
@@ -15,10 +15,10 @@ import com.magicpwd.m.UserMdl;
  */
 public class SKeyProp extends javax.swing.JPanel implements IPropBean
 {
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
     private java.util.List<S1S2> skeyList;
 
-    public SKeyProp(UserMdl coreMdl)
+    public SKeyProp(CoreMdl coreMdl)
     {
         this.coreMdl =coreMdl;
     }

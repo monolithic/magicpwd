@@ -10,7 +10,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.m.GridMdl;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.MainPtn;
 import com.magicpwd.v.TrayPtn;
 
@@ -21,9 +21,9 @@ import com.magicpwd.v.TrayPtn;
 public class HideAction extends javax.swing.AbstractAction
 {
 
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
 
-    public HideAction(MainPtn mainPtn, UserMdl coreMdl)
+    public HideAction(MainPtn mainPtn, CoreMdl coreMdl)
     {
         this.coreMdl = coreMdl;
     }

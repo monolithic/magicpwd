@@ -6,7 +6,7 @@ package com.magicpwd.e.user;
 
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._user.UserSign;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.MainPtn;
 import com.magicpwd.v.TrayPtn;
 
@@ -18,9 +18,9 @@ public class ChangePkeyAction extends javax.swing.AbstractAction
 {
 
     private MainPtn mainPtn;
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
 
-    public ChangePkeyAction(MainPtn mainPtn, UserMdl coreMdl)
+    public ChangePkeyAction(MainPtn mainPtn, CoreMdl coreMdl)
     {
         this.mainPtn = mainPtn;
         this.coreMdl = coreMdl;

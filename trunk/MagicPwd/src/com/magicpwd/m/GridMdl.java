@@ -33,9 +33,9 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
     private boolean modified;
     private java.util.ArrayList<IEditItem> ls_ItemList;
     private Keys keys;
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
 
-    GridMdl(UserMdl coreMdl)
+    GridMdl(CoreMdl coreMdl)
     {
         this.coreMdl = coreMdl;
         ls_ItemList = new java.util.ArrayList<IEditItem>();

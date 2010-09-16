@@ -5,7 +5,7 @@
 package com.magicpwd.e.help;
 
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.MainPtn;
 import com.magicpwd.x.MdiDialog;
 
@@ -17,9 +17,9 @@ public class InfoAction extends javax.swing.AbstractAction
 {
 
     private MainPtn mainPtn;
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
 
-    public InfoAction(MainPtn mainPtn, UserMdl coreMdl)
+    public InfoAction(MainPtn mainPtn, CoreMdl coreMdl)
     {
         this.mainPtn = mainPtn;
         this.coreMdl = coreMdl;

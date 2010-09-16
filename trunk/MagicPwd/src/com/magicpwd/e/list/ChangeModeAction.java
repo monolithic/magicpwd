@@ -6,7 +6,7 @@ package com.magicpwd.e.list;
 
 import com.magicpwd._comn.Keys;
 import com.magicpwd._util.Char;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.MainPtn;
 
 /**
@@ -17,9 +17,9 @@ public class ChangeModeAction extends javax.swing.AbstractAction
 {
 
     private MainPtn mainPtn;
-    private UserMdl coreMdl;
+    private CoreMdl coreMdl;
 
-    public ChangeModeAction(MainPtn mainPtn, UserMdl coreMdl)
+    public ChangeModeAction(MainPtn mainPtn, CoreMdl coreMdl)
     {
         this.mainPtn = mainPtn;
         this.coreMdl = coreMdl;
