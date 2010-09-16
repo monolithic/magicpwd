@@ -5,7 +5,7 @@
 package com.magicpwd.e.pwd.prop;
 
 import com.magicpwd.m.CoreMdl;
-import com.magicpwd.v.MainPtn;
+import com.magicpwd.v.pwd.MainPtn;
 
 /**
  *

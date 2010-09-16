@@ -11,7 +11,7 @@ import com.magicpwd._face.IBackCall;
 import com.magicpwd._user.UserSign;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.CoreMdl;
-import com.magicpwd.v.MainPtn;
+import com.magicpwd.v.pwd.MainPtn;
 import com.magicpwd.v.TrayPtn;
 
 /**

@@ -6,7 +6,7 @@ package com.magicpwd.e.pwd.list;
 
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd.m.CoreMdl;
-import com.magicpwd.v.MainPtn;
+import com.magicpwd.v.pwd.MainPtn;
 
 /**
  *
