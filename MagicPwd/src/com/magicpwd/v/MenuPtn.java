@@ -6,6 +6,7 @@ package com.magicpwd.v;
 
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.File;
@@ -234,8 +235,8 @@ public class MenuPtn
         if (defaultSkin.exists() && defaultSkin.isFile() && defaultSkin.canRead())
         {
             item = new javax.swing.JCheckBoxMenuItem(action);
-            Bean.setText(item, "default");
-            Bean.setTips(item, "default");
+            Bean.setText(item, Lang.getLang(LangRes.P30F7632, "默认界面"));
+            Bean.setTips(item, "");
             item.setActionCommand(ConsCfg.DEF_SKIN_DEF);
             item.setSelected(skinName.equals(ConsCfg.DEF_SKIN_DEF));
             lookMenu.add(item);
@@ -247,8 +248,8 @@ public class MenuPtn
         if (sytemSkin.exists() && sytemSkin.isFile() && sytemSkin.canRead())
         {
             item = new javax.swing.JCheckBoxMenuItem(action);
-            Bean.setText(item, "system");
-            Bean.setTips(item, "system");
+            Bean.setText(item, Lang.getLang(LangRes.P30F7633, "系统界面"));
+            Bean.setTips(item, "");
             item.setActionCommand(ConsCfg.DEF_SKIN_SYS);
             item.setSelected(skinName.equals(ConsCfg.DEF_SKIN_SYS));
             lookMenu.add(item);
