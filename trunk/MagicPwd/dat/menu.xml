@@ -69,142 +69,142 @@
             <seperator />
             <!--添加文本属性-->
             <item type="normal" text="$P30F7608" tips="" icon="" strokes="^ 1" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+                <action id="" class="com.magicpwd.e.pwd.edit.AppendTextAction" />
             </item>
             <!--添加口令属性-->
             <item type="normal" text="$P30F7609" tips="" icon="" strokes="^ 2" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+                <action id="" class="com.magicpwd.e.pwd.edit.AppendKeysAction" />
             </item>
             <!--添加链接属性-->
             <item type="normal" text="$P30F760A" tips="" icon="" strokes="^ 3" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+                <action id="" class="com.magicpwd.e.pwd.edit.AppendLinkAction" />
             </item>
             <!--添加邮件属性-->
             <item type="normal" text="$P30F760B" tips="" icon="" strokes="^ 4" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+                <action id="" class="com.magicpwd.e.pwd.edit.AppendMailAction" />
             </item>
             <!--添加日期属性-->
             <item type="normal" text="$P30F760C" tips="" icon="" strokes="^ 5" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+                <action id="" class="com.magicpwd.e.pwd.edit.AppendDateAction" />
             </item>
             <!--添加附注属性-->
             <item type="normal" text="$P30F760D" tips="" icon="" strokes="^ 6" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+                <action id="" class="com.magicpwd.e.pwd.edit.AppendAreaAction" />
             </item>
             <!--添加文件属性-->
             <item type="normal" text="$P30F760E" tips="" icon="" strokes="^ 7" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+                <action id="" class="com.magicpwd.e.pwd.edit.AppendFileAction" />
             </item>
             <seperator />
             <!--上移-->
             <item type="normal" text="$P30F760F" tips="" icon="" strokes="^ UP" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+                <action id="" class="com.magicpwd.e.pwd.edit.PrevAction" />
             </item>
             <!--下移-->
             <item type="normal" text="$P30F7610" tips="" icon="" strokes="^ DOWN" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+                <action id="" class="com.magicpwd.e.pwd.edit.NextAction" />
             </item>
         </menu>
         <!--视图-->
         <menu id="view" text="$P30F7614" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
             <!--总在最上-->
-            <item type="checkbox" text="$P30F7615" tips="" icon="" strokes="F5" command="" group="" checked="true">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+            <item type="checkbox" text="$P30F7615" tips="" icon="" strokes="F5" command="" group="">
+                <action id="" class="com.magicpwd.e.pwd.view.TopsAction" />
             </item>
             <seperator />
             <!--显示属性栏-->
-            <item type="checkbox" text="$P30F7616" tips="" icon="" strokes="^ P" command="" group="" checked="true">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+            <item type="checkbox" text="$P30F7616" tips="" icon="" strokes="^ P" command="" group="">
+                <action id="" class="com.magicpwd.e.pwd.view.EditVisableAction" />
             </item>
             <!--分离属性栏-->
-            <item type="checkbox" text="$P30F7617" tips="" icon="" strokes="^ W" command="" group="" checked="true">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+            <item type="checkbox" text="$P30F7617" tips="" icon="" strokes="^ W" command="" group="">
+                <action id="" class="com.magicpwd.e.pwd.view.EditRelatedAction" />
             </item>
             <!--显示搜索栏-->
-            <item type="checkbox" text="$P30F7618" tips="" icon="" strokes="^ F" command="" group="" checked="true">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+            <item type="checkbox" text="$P30F7618" tips="" icon="" strokes="^ F" command="" group="">
+                <action id="" class="com.magicpwd.e.pwd.view.FindVisableAction" />
             </item>
             <!--显示菜单栏-->
-            <item type="checkbox" text="$P30F7619" tips="" icon="" strokes="^ M" command="" group="" checked="true">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+            <item type="checkbox" text="$P30F7619" tips="" icon="" strokes="^ M" command="" group="">
+                <action id="" class="com.magicpwd.e.pwd.view.MenuVisableAction" />
             </item>
             <!--显示工具栏-->
-            <item type="checkbox" text="$P30F761A" tips="" icon="" strokes="^ T" command="" group="" checked="true">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+            <item type="checkbox" text="$P30F761A" tips="" icon="" strokes="^ T" command="" group="">
+                <action id="" class="com.magicpwd.e.pwd.view.ToolVisableAction" />
             </item>
             <!--显示状态栏-->
-            <item type="checkbox" text="$P30F761B" tips="" icon="" strokes="^ I" command="" group="" checked="true">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+            <item type="checkbox" text="$P30F761B" tips="" icon="" strokes="^ I" command="" group="">
+                <action id="" class="com.magicpwd.e.pwd.view.InfoVisableAction" />
             </item>
             <seperator />
             <!--切换到《迷你账簿》-->
-            <item type="checkbox" text="$P30F7637" tips="" icon="" strokes="^ # F" command="" group="" checked="true">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+            <item type="checkbox" text="$P30F7638" tips="" icon="" strokes="^ # F" command="" group="">
+                <action id="" class="" />
             </item>
             <!--切换到《记事便签》-->
-            <item type="checkbox" text="$P30F7638" tips="" icon="" strokes="^ # N" command="" group="" checked="true">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+            <item type="checkbox" text="$P30F7639" tips="" icon="" strokes="^ # N" command="" group="">
+                <action id="" class="" />
             </item>
         </menu>
         <!--数据-->
         <menu id="data" text="$P30F761C" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
             <!--导入数据-->
             <item type="normal" text="$P30F761D" tips="" icon="" strokes="" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+                <action id="" class="com.magicpwd.e.pwd.data.ImportAction" />
             </item>
             <!--导出数据-->
             <item type="normal" text="$P30F761E" tips="" icon="" strokes="" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+                <action id="" class="com.magicpwd.e.pwd.data.ExportAction" />
             </item>
             <seperator />
             <!--备份到云端-->
-            <item type="normal" text="$P30F7634" tips="" icon="" strokes="^ B" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+            <item type="normal" text="$P30F7635" tips="" icon="" strokes="^ B" command="">
+                <action id="" class="com.magicpwd.e.pwd.safe.CloudBackupAction" />
             </item>
             <!--从云端恢复-->
-            <item type="normal" text="$P30F7635" tips="" icon="" strokes="^ R" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+            <item type="normal" text="$P30F7636" tips="" icon="" strokes="^ R" command="">
+                <action id="" class="com.magicpwd.e.pwd.safe.CloudResumeAction" />
             </item>
             <!--配置云端帐户-->
-            <item type="normal" text="$P30F7636" tips="" icon="" strokes="" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+            <item type="normal" text="$P30F7637" tips="" icon="" strokes="" command="">
+                <action id="" class="com.magicpwd.e.pwd.safe.CloudConfigAction" />
             </item>
             <seperator />
             <!--常规设置-->
             <item type="normal" text="$P30F761F" tips="" icon="" strokes="" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+                <action id="" class="" />
             </item>
             <!--口令设置-->
             <item type="normal" text="$P30F7620" tips="" icon="" strokes="" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+                <action id="" class="" />
             </item>
             <!--模板管理-->
             <item type="normal" text="$P30F7621" tips="" icon="" strokes="" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+                <action id="" class="" />
             </item>
             <!--类别管理-->
             <item type="normal" text="$P30F7622" tips="" icon="" strokes="" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+                <action id="" class="" />
             </item>
         </menu>
         <!--用户-->
         <menu id="user" text="$P30F7624" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
             <!--切换用户-->
             <item type="normal" text="$P30F7625" tips="" icon="" strokes="" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+                <action id="" class="com.magicpwd.e.pwd.user.SwitchUserAction" />
             </item>
             <!--添加用户-->
             <item type="normal" text="$P30F7626" tips="" icon="" strokes="" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+                <action id="" class="com.magicpwd.e.pwd.user.CreateUserAction" />
             </item>
             <seperator />
             <!--更改登录口令-->
             <item type="normal" text="$P30F7627" tips="" icon="" strokes="" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+                <action id="" class="com.magicpwd.e.pwd.user.ChangePkeyAction" />
             </item>
             <!--设置安全口令-->
             <item type="normal" text="$P30F7628" tips="" icon="" strokes="" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+                <action id="" class="com.magicpwd.e.pwd.user.CreateSkeyAction" />
             </item>
         </menu>
         <!--皮肤-->
@@ -244,7 +244,7 @@
                 <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
             </item>
             <!--Java环境-->
-            <item type="normal" text="$P30F7633" tips="" icon="" strokes="F7" command="">
+            <item type="normal" text="$P30F7634" tips="" icon="" strokes="F7" command="">
                 <action id="" class="com.magicpwd.e.pwd.help.JavaAction" />
             </item>
             <seperator />

@@ -29,7 +29,7 @@ public class Lang
     {
         try
         {
-            lang = ResourceBundle.getBundle("res.lang.lang");
+            lang = ResourceBundle.getBundle("lang.lang");
             tips = lang.getString(LangRes.P30FA208);
         }
         catch (Exception exp)

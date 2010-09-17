@@ -104,6 +104,10 @@ public class Bean
 
     public static void setTips(javax.swing.JComponent c, String t)
     {
+        if (t.length() < 1)
+        {
+            t = null;
+        }
         c.setToolTipText(t);
     }
 
