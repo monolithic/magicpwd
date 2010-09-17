@@ -55,28 +55,6 @@ public class MagicPwd
                 @Override
                 public void run()
                 {
-                    boolean deco = ConsCfg.DEF_TRUE.equalsIgnoreCase(cfg.getCfg(ConsCfg.CFG_SKIN_DECO, ConsCfg.DEF_FALSE));
-                    javax.swing.JFrame.setDefaultLookAndFeelDecorated(deco);
-                    javax.swing.JDialog.setDefaultLookAndFeelDecorated(deco);
-
-                    // 用户偏好风格设置
-                    try
-                    {
-                        String lafClass = cfg.getCfg(ConsCfg.CFG_SKIN_NAME, ConsCfg.DEF_SKIN_SYS).trim();
-                        if (lafClass.length() > 0 && !ConsCfg.DEF_SKIN_DEF.equals(lafClass))
-                        {
-                            if (ConsCfg.DEF_SKIN_SYS.equalsIgnoreCase(lafClass))
-                            {
-                                lafClass = javax.swing.UIManager.getSystemLookAndFeelClassName();
-                            }
-                            javax.swing.UIManager.setLookAndFeel(lafClass);
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        Logs.exception(e);
-                    }
-
                     // 显示登录或注册界面
                     UserSign us = new UserSign(cfg);
                     us.setBackCall(new IBackCall()
@@ -124,43 +102,81 @@ public class MagicPwd
         }
     }
 
-    private static void loadLnF(UserCfg cfg)
+    public static void loadLnF(UserCfg cfg)
     {
-        String type = cfg.getCfg(ConsCfg.CFG_SKIN_TYPE, "java");
+        boolean deco = ConsCfg.DEF_TRUE.equalsIgnoreCase(cfg.getCfg(ConsCfg.CFG_SKIN_DECO, ConsCfg.DEF_FALSE));
+        javax.swing.JFrame.setDefaultLookAndFeelDecorated(deco);
+        javax.swing.JDialog.setDefaultLookAndFeelDecorated(deco);
+
         String name = cfg.getCfg(ConsCfg.CFG_SKIN_NAME, ConsCfg.DEF_SKIN_SYS).trim();
-        if ("java".equals(type))
-        {
-            if (name.length() > 0 && !ConsCfg.DEF_SKIN_DEF.equals(name))
-            {
-                if (ConsCfg.DEF_SKIN_SYS.equalsIgnoreCase(name))
-                {
-                    name = javax.swing.UIManager.getSystemLookAndFeelClassName();
-                }
-                try
-                {
-                    javax.swing.UIManager.setLookAndFeel(name);
-                }
-                catch (Exception exp)
-                {
-                    Logs.exception(exp);
-                }
-            }
-            return;
-        }
-        if ("synth".equals(type))
-        {
-            return;
-        }
-        if (!"user".equals(type))
-        {
-            return;
-        }
         if (!Char.isValidate(name))
         {
             return;
         }
+
+        String type = cfg.getCfg(ConsCfg.CFG_SKIN_TYPE, "user");
+        if ("java".equals(type))
+        {
+            // 系统默认界面
+            if (ConsCfg.DEF_SKIN_DEF.equals(name))
+            {
+                return;
+            }
+
+            // 操作系统界面
+            if (ConsCfg.DEF_SKIN_SYS.equalsIgnoreCase(name))
+            {
+                name = javax.swing.UIManager.getSystemLookAndFeelClassName();
+            }
+
+            // 使用界面
+            try
+            {
+                javax.swing.UIManager.setLookAndFeel(name);
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+            return;
+        }
+
         String look = cfg.getCfg(ConsCfg.CFG_SKIN_LOOK, "");
         if (!Char.isValidate(look))
+        {
+            return;
+        }
+
+        if ("synth".equals(type))
+        {
+            if (!Char.isValidate(look))
+            {
+                return;
+            }
+
+            // 判断目录是否存在
+            java.io.File file = new java.io.File("skin/look/" + look, name);
+            if (!file.exists() || !file.canRead() || !file.isDirectory())
+            {
+                return;
+            }
+
+            try
+            {
+                // 加载界面
+                javax.swing.plaf.synth.SynthLookAndFeel synth = new javax.swing.plaf.synth.SynthLookAndFeel();
+                synth.load(file.toURI().toURL());
+                // 使用界面
+                javax.swing.UIManager.setLookAndFeel(synth);
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+            return;
+        }
+
+        if (!"user".equals(type))
         {
             return;
         }
@@ -179,7 +195,11 @@ public class MagicPwd
 
         try
         {
+            // 加载扩展库
             loadJar(jars);
+
+            // 使用界面
+            javax.swing.UIManager.setLookAndFeel(name);
         }
         catch (Exception exp)
         {
