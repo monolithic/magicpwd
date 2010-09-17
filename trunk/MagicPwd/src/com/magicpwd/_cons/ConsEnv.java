@@ -26,7 +26,7 @@ public interface ConsEnv
      * 软件信息：软件首页
      */
     String HOMEPAGE = "http://magicpwd.com/";
-    String BLOGSITE = "";
+    String BLOGSITE = "http://magicpwd.com/blog/";
     String MLOGSITE = "http://t.sina.com.cn/mpwd";
     /**
      * 软件信息：构建日期

@@ -4,11 +4,13 @@
  */
 package test.menu;
 
+import com.magicpwd.MagicPwd;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.MenuPtn;
 import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
-import javax.swing.UIManager;
 
 /**
  *
@@ -19,18 +21,12 @@ public class Menu
 
     public static void main(String args[])
     {
-        try
-        {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
-        CoreMdl coreMdl = new CoreMdl();
+        final CoreMdl coreMdl = new CoreMdl();
         coreMdl.preLoad();
         coreMdl.loadUserCfg();
+
+        MagicPwd.loadLnF(coreMdl.getUserCfg());
+
         MenuPtn ptn = new MenuPtn(coreMdl);
         try
         {
@@ -41,9 +37,18 @@ public class Menu
             exp.printStackTrace();
         }
         JFrame frame = new JFrame();
-        frame.setJMenuBar(ptn.getMenuBar("template"));
+        frame.setJMenuBar(ptn.getMenuBar("magicpwd"));
         frame.setSize(new Dimension(400, 300));
         frame.setVisible(true);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.addWindowListener(new WindowAdapter()
+        {
+
+            @Override
+            public void windowClosing(WindowEvent e)
+            {
+                coreMdl.getUserCfg().saveCfg();
+                System.exit(0);
+            }
+        });
     }
 }
