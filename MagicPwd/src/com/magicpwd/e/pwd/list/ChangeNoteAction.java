@@ -35,7 +35,7 @@ public class ChangeNoteAction extends javax.swing.AbstractAction implements IPwd
         {
             ((Keys) obj).setP30F0103(val);
         }
-        coreMdl.getGridMdl().setKeysNote(val);
+        mainPtn.changeNote(val);
     }
 
     @Override

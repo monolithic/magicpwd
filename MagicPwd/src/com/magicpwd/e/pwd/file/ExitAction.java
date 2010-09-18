@@ -28,7 +28,7 @@ public class ExitAction extends javax.swing.AbstractAction implements IPwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (coreMdl.getGridMdl().isModified() && javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
+        if (mainPtn.gridModified() && javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
         {
             return;
         }

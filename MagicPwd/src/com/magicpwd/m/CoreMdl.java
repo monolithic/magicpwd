@@ -19,15 +19,11 @@ public final class CoreMdl
     // 用户配置数据模型
     private UserCfg userCfg;
     private SafeMdl safeMdl;
-    // 魔方密码数据模型
-    private GridMdl gridMdl;
     private ListMdl listMdl;
     private HintMdl hintMdl;
     private TreeMdl treeMdl;
     private CboxMdl cboxMdl;
     private CharMdl charMdl;
-    // 记事便签数据模型
-    private NoteMdl noteMdl;
 
     public CoreMdl()
     {
@@ -35,7 +31,6 @@ public final class CoreMdl
 
     public void preLoad()
     {
-        gridMdl = new GridMdl(this);
         listMdl = new ListMdl(this);
         Kind kind = new Kind();
         kind.setC2010103(ConsDat.HASH_ROOT);
@@ -80,31 +75,11 @@ public final class CoreMdl
     }
 
     /**
-     * @return the gridMdl
-     */
-    public GridMdl getGridMdl()
-    {
-        return gridMdl;
-    }
-
-    /**
      * @return the listMdl
      */
     public ListMdl getListMdl()
     {
         return listMdl;
-    }
-
-    /**
-     * @return
-     */
-    public NoteMdl getNoteMdl()
-    {
-        if (noteMdl == null)
-        {
-            noteMdl = new NoteMdl(this);
-        }
-        return noteMdl;
     }
 
     /**
