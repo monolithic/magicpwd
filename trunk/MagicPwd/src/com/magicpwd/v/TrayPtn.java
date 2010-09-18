@@ -395,7 +395,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
             Util.centerForm(mailDlg, TrayPtn.getCurrForm());
         }
 
-        GridMdl gm = coreMdl.getGridMdl();
+        GridMdl gm = null;//coreMdl.getGridMdl();
 
         MailPtn mailPtn = new MailPtn();
         mailPtn.initView();

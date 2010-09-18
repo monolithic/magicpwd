@@ -21,7 +21,7 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.DBA3000;
-import com.magicpwd.m.CoreMdl;
+import com.magicpwd.m.GridMdl;
 import com.magicpwd.v.TrayPtn;
 
 /**
@@ -36,11 +36,11 @@ public class HistProp extends JPanel implements IPropBean
     private List<S1S2> hist;
     private List<IEditItem> ls_ItemList;
     private DefaultListModel lm_HistList;
-    private CoreMdl coreMdl;
+    private GridMdl gridMdl;
 
-    public HistProp(CoreMdl coreMdl)
+    public HistProp(GridMdl gridMdl)
     {
-        this.coreMdl = coreMdl;
+        this.gridMdl = gridMdl;
         keys = new Keys();
     }
 
@@ -160,7 +160,7 @@ public class HistProp extends JPanel implements IPropBean
             ls_HistList.setModel(lm_HistList);
         }
 
-        DBA3000.selectHistData(coreMdl.getGridMdl().getKeysHash(), hist);
+        DBA3000.selectHistData(gridMdl.getKeysHash(), hist);
         for (S1S2 temp : hist)
         {
             lm_HistList.addElement(temp);
@@ -199,7 +199,7 @@ public class HistProp extends JPanel implements IPropBean
         {
             keys.setDefault();
             DBA3000.selectHistData(item.getK(), keys);
-            coreMdl.getGridMdl().deCrypt(keys, ls_ItemList);
+            gridMdl.deCrypt(keys, ls_ItemList);
 
             StringBuilder sb = new StringBuilder();
             idx = 0;
@@ -239,7 +239,7 @@ public class HistProp extends JPanel implements IPropBean
         {
             return;
         }
-        DBA3000.deleteHistData(coreMdl.getGridMdl().getKeysHash(), temp.getK());
+        DBA3000.deleteHistData(gridMdl.getKeysHash(), temp.getK());
         lm_HistList.removeElement(temp);
         ta_HistInfo.setText("");
     }
@@ -254,7 +254,7 @@ public class HistProp extends JPanel implements IPropBean
         {
             return;
         }
-        DBA3000.deleteHistData(coreMdl.getGridMdl().getKeysHash(), null);
+        DBA3000.deleteHistData(gridMdl.getKeysHash(), null);
         lm_HistList.clear();
         ta_HistInfo.setText("");
     }
@@ -271,11 +271,11 @@ public class HistProp extends JPanel implements IPropBean
         {
             return;
         }
-        DBA3000.pickupHistData(coreMdl.getGridMdl().getKeysHash(), temp.getK(), 0);//TODO:数据恢复序列
+        DBA3000.pickupHistData(gridMdl.getKeysHash(), temp.getK(), 0);//TODO:数据恢复序列
         lm_HistList.clear();
         hist.clear();
 
-        DBA3000.selectHistData(coreMdl.getGridMdl().getKeysHash(), hist);
+        DBA3000.selectHistData(gridMdl.getKeysHash(), hist);
         for (int i = 0, j = hist.size(); i < j; i += 1)
         {
             lm_HistList.addElement(hist.get(i));

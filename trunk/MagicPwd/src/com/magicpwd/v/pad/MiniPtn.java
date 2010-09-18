@@ -28,6 +28,7 @@ public class MiniPtn extends javax.swing.JFrame implements MPadEvt, FindEvt
     private java.awt.CardLayout infoLayout;
     private java.util.List<S1S2> noteList;
     private CoreMdl coreMdl;
+    private NoteMdl noteMdl;
 
     public MiniPtn(CoreMdl coreMdl)
     {
@@ -291,7 +292,6 @@ public class MiniPtn extends javax.swing.JFrame implements MPadEvt, FindEvt
 
         try
         {
-            NoteMdl noteMdl = coreMdl.getNoteMdl();
             noteMdl.clear();
             noteMdl.loadData(lastHash);
             IEditItem note = noteMdl.getNote();

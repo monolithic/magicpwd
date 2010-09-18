@@ -4,11 +4,9 @@
  */
 package com.magicpwd.e.pwd.file;
 
-import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.e.pwd.IPwdAction;
-import com.magicpwd.m.GridMdl;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
 import com.magicpwd.v.TrayPtn;
@@ -30,17 +28,16 @@ public class NewAction extends javax.swing.AbstractAction implements IPwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        GridMdl gm = coreMdl.getGridMdl();
-        if (gm.isModified())
+        if (mainPtn.gridModified())
         {
-            if (Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", gm.getItemAt(ConsEnv.PWDS_HEAD_META).getName()) != javax.swing.JOptionPane.YES_OPTION)
+            if (Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", mainPtn.getMeta().getName()) != javax.swing.JOptionPane.YES_OPTION)
             {
                 return;
             }
         }
 
         //tb_LastIndx = 0;
-        gm.clear();
+        mainPtn.clearGrid();
         if (!coreMdl.getUserCfg().isEditViw())
         {
 //            mainMenu.setViewPropSelected(true);
@@ -49,7 +46,7 @@ public class NewAction extends javax.swing.AbstractAction implements IPwdAction
             coreMdl.getUserCfg().setEditWnd(true);
             mainPtn.showPropEdit(true);
         }
-        mainPtn.showPropEdit(gm.initGuid(), true);
+//        mainPtn.showPropEdit(gm.initGuid(), true);
     }
 
     @Override
