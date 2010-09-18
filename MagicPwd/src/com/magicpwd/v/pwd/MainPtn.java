@@ -24,6 +24,7 @@ import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IGridView;
 import com.magicpwd._mail.MailDlg;
+import com.magicpwd._util.Jcsv;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
@@ -71,6 +72,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
      */
     private String queryKey;
     private CoreMdl coreMdl;
+    private GridMdl gridMdl;
 
     public MainPtn(CoreMdl coreMdl)
     {
@@ -205,7 +207,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
     {
         if (updt)
         {
-            coreMdl.getGridMdl().fireTableDataChanged();
+            gridMdl.fireTableDataChanged();
         }
 
         int c = tb_KeysView.getRowCount() - 1;
@@ -221,7 +223,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         tb_LastIndx = n;
         tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
         Util.scrollToVisible(tb_KeysView, tb_LastIndx, 0, true);
-        showPropEdit(coreMdl.getGridMdl().getItemAt(tb_LastIndx), true);
+        showPropEdit(gridMdl.getItemAt(tb_LastIndx), true);
 
 //        if (updt)
 //        {
@@ -260,7 +262,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
             {
                 tb_LastIndx = tb_KeysView.getRowCount();
             }
-            showPropEdit(coreMdl.getGridMdl().wAppend(tb_LastIndx, type), true);
+            showPropEdit(gridMdl.wAppend(tb_LastIndx, type), true);
             tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
         }
     }
@@ -272,12 +274,12 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
             int idx = tb_KeysView.getSelectedRow();
             if (idx >= ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
-                IEditItem tplt = coreMdl.getGridMdl().getItemAt(idx);
+                IEditItem tplt = gridMdl.getItemAt(idx);
                 if (tplt.getType() != type)
                 {
                     tplt.setType(type);
                     showPropEdit(tplt, true);
-                    coreMdl.getGridMdl().setModified(true);
+                    gridMdl.setModified(true);
                 }
             }
         }
@@ -290,7 +292,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         {
             return;
         }
-        coreMdl.getGridMdl().wMoveto(tb_LastIndx, t);
+        gridMdl.wMoveto(tb_LastIndx, t);
         tb_LastIndx = t;
         Util.scrollToVisible(tb_KeysView, tb_LastIndx, 0, true);
         tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
@@ -303,7 +305,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         {
             return;
         }
-        coreMdl.getGridMdl().wMoveto(tb_LastIndx, t);
+        gridMdl.wMoveto(tb_LastIndx, t);
         tb_LastIndx = t;
         Util.scrollToVisible(tb_KeysView, tb_LastIndx, 0, true);
         tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
@@ -480,7 +482,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 //        gridMenu.setMenuEvent(this);
 
         tb_KeysView = new javax.swing.JTable();
-        tb_KeysView.setModel(coreMdl.getGridMdl());
+        tb_KeysView.setModel(gridMdl);
         tb_KeysView.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tb_KeysView.getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         javax.swing.ActionMap actionMap = tb_KeysView.getActionMap();
@@ -665,7 +667,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
     {
         if (e.getID() == java.awt.event.WindowEvent.WINDOW_CLOSING)
         {
-            if (coreMdl.getGridMdl().isModified() && javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(this, LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
+            if (gridMdl.isModified() && javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(this, LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
             {
                 return;
             }
@@ -715,7 +717,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
             return;
         }
 
-        GridMdl gm = coreMdl.getGridMdl();
+        GridMdl gm = gridMdl;
         if (gm.isModified())
         {
             if (Lang.showFirm(this, LangRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", gm.getItemAt(ConsEnv.PWDS_HEAD_META).getName()) != javax.swing.JOptionPane.YES_OPTION)
@@ -767,7 +769,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
             return;
         }
         tb_LastIndx = row;
-        showPropEdit(coreMdl.getGridMdl().getItemAt(row), true);
+        showPropEdit(gridMdl.getItemAt(row), true);
     }
 
     private void tb_ItemListKeyReleased(java.awt.event.KeyEvent evt)
@@ -778,7 +780,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
             return;
         }
         tb_LastIndx = row;
-        showPropEdit(coreMdl.getGridMdl().getItemAt(row), false);
+        showPropEdit(gridMdl.getItemAt(row), false);
     }
 
     public void showPropEdit()
@@ -932,12 +934,162 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
             showPropEdit(true);
         }
 
-        showPropEdit(coreMdl.getGridMdl().initGuid(), true);
+        showPropEdit(gridMdl.initGuid(), true);
         return false;
     }
 
     public void hideWindow()
     {
+        // Save Temperary Data
+        if (gridMdl.isModified())
+        {
+            gridMdl.setInterim(true);
+            gridMdl.getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(ConsDat.HASH_ROOT);
+            try
+            {
+                gridMdl.saveData(true, false);
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+        }
+    }
+
+    public IEditItem getMeta()
+    {
+        return gridMdl.getItemAt(ConsEnv.PWDS_HEAD_META);
+    }
+
+    public void changeMode(int mode)
+    {
+        gridMdl.setKeysMode(mode);
+    }
+
+    public void changeNote(int note)
+    {
+        gridMdl.setKeysNote(note);
+    }
+
+    public boolean exportData()
+    {
+        javax.swing.tree.TreePath path = getSelectedPath();
+        KindTN node = (KindTN) path.getLastPathComponent();
+        Kind kind = (Kind) node.getUserObject();
+
+        javax.swing.JFileChooser jfc = new javax.swing.JFileChooser();
+        jfc.setMultiSelectionEnabled(false);
+        jfc.setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);
+        int status = jfc.showSaveDialog(this);
+        if (status != javax.swing.JFileChooser.APPROVE_OPTION)
+        {
+            return false;
+        }
+        java.io.File file = jfc.getSelectedFile();
+        if (file.exists())
+        {
+            if (Lang.showFirm(this, LangRes.P30F7A21, "目标文件已存在，确认要覆盖此文件么？") != javax.swing.JOptionPane.YES_OPTION)
+            {
+                return false;
+            }
+        }
+        else
+        {
+            try
+            {
+                file.createNewFile();
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+                Lang.showMesg(this, LangRes.P30F7A22, "数据导出失败，无法在指定文件创建文档！");
+                return false;
+            }
+        }
+        if (!file.isFile())
+        {
+            Lang.showMesg(this, LangRes.P30F7A23, "数据导出失败，您选择的对象不是一个合适的文档！");
+            return false;
+        }
+        if (!file.canWrite())
+        {
+            Lang.showMesg(this, LangRes.P30F7A24, "数据导出失败，请确认您是否拥有合适的读写权限！");
+            return false;
+        }
+
+        try
+        {
+            Jcsv csv = new Jcsv(file);
+            java.util.ArrayList<java.util.ArrayList<String>> data = new java.util.ArrayList<java.util.ArrayList<String>>();
+            int size = gridMdl.wExport(data, kind.getC2010103());
+            csv.saveFile(data);
+            Lang.showMesg(this, LangRes.P30F7A25, "成功导出数据个数：{0}", size + "");
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            Lang.showMesg(this, LangRes.P30F7A26, "数据导出失败，请确认您数据的正确性，然后重新尝试！");
+        }
+        return true;
+    }
+
+    public boolean importData()
+    {
+        javax.swing.tree.TreePath path = getSelectedPath();
+        KindTN node = (KindTN) path.getLastPathComponent();
+        Kind kind = (Kind) node.getUserObject();
+
+        javax.swing.JFileChooser jfc = new javax.swing.JFileChooser();
+        jfc.setMultiSelectionEnabled(false);
+        jfc.setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);
+        int status = jfc.showOpenDialog(this);
+        if (status != javax.swing.JFileChooser.APPROVE_OPTION)
+        {
+            return false;
+        }
+        java.io.File file = jfc.getSelectedFile();
+        if (!file.exists())
+        {
+            Lang.showMesg(this, LangRes.P30F7A03, "");
+            return false;
+        }
+        if (!file.isFile())
+        {
+            Lang.showMesg(this, LangRes.P30F7A04, "");
+            return false;
+        }
+        if (!file.canRead())
+        {
+            Lang.showMesg(this, LangRes.P30F7A05, "");
+            return false;
+        }
+
+        try
+        {
+            Jcsv csv = new Jcsv(file);
+            csv.setEe("");
+            java.util.ArrayList<java.util.ArrayList<String>> data = csv.readFile();
+            int size = gridMdl.wImport(data, kind.getC2010103());
+            coreMdl.getListMdl().listName(kind.getC2010103());
+            Lang.showMesg(this, LangRes.P30F7A07, "成功导入数据个数：{0}", "" + size);
+
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            Lang.showMesg(this, LangRes.P30F7A08, "TXT文档格式解析出错，数据导入失败！");
+        }
+        return true;
+    }
+
+    public void clearGrid()
+    {
+        gridMdl.clear();
+    }
+
+    public boolean gridModified()
+    {
+        return gridMdl.isModified();
     }
     /**
      * 

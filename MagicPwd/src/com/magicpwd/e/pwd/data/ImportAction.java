@@ -50,7 +50,7 @@ public class ImportAction extends javax.swing.AbstractAction implements IPwdActi
             @Override
             public boolean callBack(Object sender, java.util.EventListener event, String... params)
             {
-                return importData();
+                return mainPtn.importData();
             }
         });
         us.initView(ConsEnv.INT_SIGN_RS);
@@ -73,54 +73,5 @@ public class ImportAction extends javax.swing.AbstractAction implements IPwdActi
     @Override
     public void doUpdate(Object object)
     {
-    }
-
-    private boolean importData()
-    {
-        javax.swing.tree.TreePath path = mainPtn.getSelectedPath();
-        KindTN node = (KindTN) path.getLastPathComponent();
-        Kind kind = (Kind) node.getUserObject();
-
-        javax.swing.JFileChooser jfc = new javax.swing.JFileChooser();
-        jfc.setMultiSelectionEnabled(false);
-        jfc.setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);
-        int status = jfc.showOpenDialog(mainPtn);
-        if (status != javax.swing.JFileChooser.APPROVE_OPTION)
-        {
-            return false;
-        }
-        java.io.File file = jfc.getSelectedFile();
-        if (!file.exists())
-        {
-            Lang.showMesg(mainPtn, LangRes.P30F7A03, "");
-            return false;
-        }
-        if (!file.isFile())
-        {
-            Lang.showMesg(mainPtn, LangRes.P30F7A04, "");
-            return false;
-        }
-        if (!file.canRead())
-        {
-            Lang.showMesg(mainPtn, LangRes.P30F7A05, "");
-            return false;
-        }
-
-        try
-        {
-            Jcsv csv = new Jcsv(file);
-            csv.setEe("");
-            java.util.ArrayList<java.util.ArrayList<String>> data = csv.readFile();
-            int size = coreMdl.getGridMdl().wImport(data, kind.getC2010103());
-            coreMdl.getListMdl().listName(kind.getC2010103());
-            Lang.showMesg(mainPtn, LangRes.P30F7A07, "成功导入数据个数：{0}", "" + size);
-
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-            Lang.showMesg(mainPtn, LangRes.P30F7A08, "TXT文档格式解析出错，数据导入失败！");
-        }
-        return true;
     }
 }
