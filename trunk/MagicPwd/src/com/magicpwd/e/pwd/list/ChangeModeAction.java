@@ -35,7 +35,7 @@ public class ChangeModeAction extends javax.swing.AbstractAction implements IPwd
         {
             ((Keys) obj).setP30F0102(val);
         }
-        coreMdl.getGridMdl().setKeysMode(val);
+        mainPtn.changeMode(val);
     }
 
     @Override
