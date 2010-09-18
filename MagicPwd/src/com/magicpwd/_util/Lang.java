@@ -6,9 +6,12 @@ package com.magicpwd._util;
 
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.IcoLabel;
+import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd.m.UserCfg;
 import java.awt.Component;
-import java.util.ResourceBundle;
+import java.util.Locale;
+import java.util.Properties;
 import javax.swing.AbstractButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -22,15 +25,26 @@ import javax.swing.text.JTextComponent;
 public class Lang
 {
 
-    private static ResourceBundle lang;
+    private static Properties lang;
     private static String tips;
 
-    static
+    private Lang()
+    {
+    }
+
+    public static boolean loadLang(UserCfg userCfg)
     {
         try
         {
-            lang = ResourceBundle.getBundle("lang.lang");
-            tips = lang.getString(LangRes.P30FA208);
+            String name = userCfg.getCfg(ConsCfg.CFG_LANG);
+            if (!Char.isValidate(name))
+            {
+                name = Locale.getDefault().getVariant();
+            }
+            java.io.File file = new java.io.File("lang", "lang_" + name + ".properties");
+            lang = new Properties();
+            lang.load(new java.io.FileInputStream(file));
+            tips = lang.getProperty(LangRes.P30FA208);
         }
         catch (Exception exp)
         {
@@ -40,15 +54,12 @@ public class Lang
         {
             tips = "友情提示";
         }
-    }
-
-    private Lang()
-    {
+        return true;
     }
 
     public static String getLang(String key, String def)
     {
-        key = key != null ? lang.getString(key) : def;
+        key = key != null ? lang.getProperty(key) : def;
         return key != null ? key : def;
     }
 
