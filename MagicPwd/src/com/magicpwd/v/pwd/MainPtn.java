@@ -3,18 +3,18 @@
  */
 package com.magicpwd.v.pwd;
 
-import com.magicpwd._bean.AreaBean;
-import com.magicpwd._bean.DateBean;
-import com.magicpwd._bean.FileBean;
-import com.magicpwd._bean.GuidBean;
-import com.magicpwd._bean.LogoBean;
-import com.magicpwd._bean.InfoBean;
-import com.magicpwd._bean.LinkBean;
-import com.magicpwd._bean.MailBean;
-import com.magicpwd._bean.MetaBean;
-import com.magicpwd._bean.HintBean;
-import com.magicpwd._bean.PwdsBean;
-import com.magicpwd._bean.TextBean;
+import com.magicpwd._bean.pwd.AreaBean;
+import com.magicpwd._bean.pwd.DateBean;
+import com.magicpwd._bean.pwd.FileBean;
+import com.magicpwd._bean.pwd.GuidBean;
+import com.magicpwd._bean.pwd.LogoBean;
+import com.magicpwd._bean.pwd.InfoBean;
+import com.magicpwd._bean.pwd.LinkBean;
+import com.magicpwd._bean.pwd.MailBean;
+import com.magicpwd._bean.pwd.MetaBean;
+import com.magicpwd._bean.pwd.HintBean;
+import com.magicpwd._bean.pwd.PwdsBean;
+import com.magicpwd._bean.pwd.TextBean;
 import com.magicpwd._comn.Kind;
 import com.magicpwd._comn.Keys;
 import com.magicpwd._cons.ConsDat;
@@ -24,6 +24,8 @@ import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IGridView;
 import com.magicpwd._mail.MailDlg;
+import com.magicpwd._util.Card;
+import com.magicpwd._util.Desk;
 import com.magicpwd._util.Jcsv;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -33,6 +35,7 @@ import com.magicpwd.c.ToolEvt;
 import com.magicpwd.m.GridMdl;
 import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.CoreMdl;
+import com.magicpwd.m.SafeMdl;
 import com.magicpwd.r.KeysCR;
 import com.magicpwd.r.KindTN;
 import com.magicpwd.r.TreeCR;
@@ -73,6 +76,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
     private String queryKey;
     private CoreMdl coreMdl;
     private GridMdl gridMdl;
+    private SafeMdl safeMdl;
 
     public MainPtn(CoreMdl coreMdl)
     {
@@ -1090,6 +1094,78 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
     public boolean gridModified()
     {
         return gridMdl.isModified();
+    }
+
+    public void removeSelected()
+    {
+        gridMdl.wRemove(tb_KeysView.getSelectedRow());
+        selectNext(0, true);
+    }
+
+    public void updateSelected()
+    {
+        gridMdl.setModified(true);
+        if (gridMdl.getRowCount() < ConsEnv.PWDS_HEAD_SIZE)
+        {
+            gridMdl.initMeta();
+            gridMdl.wAppend(gridMdl.getItemAt(ConsDat.INDX_GUID).getSpec(IEditItem.SPEC_GUID_TPLT));
+        }
+        selectNext(gridMdl.isUpdate() ? 0 : 1, true);
+    }
+
+    public void enCrypt(java.io.File src, java.io.File dst) throws Exception
+    {
+        safeMdl.enCrypt(src, dst);
+    }
+
+    public void deCrypt(java.io.File src, java.io.File dst) throws Exception
+    {
+        safeMdl.deCrypt(src, dst);
+    }
+
+    public void exportCard(java.io.File srcFile, java.io.File dstFile, String fileExt)
+    {
+        try
+        {
+            Card card = new Card(gridMdl);
+            if (ConsEnv.CARD_HTM.equals(fileExt))
+            {
+                dstFile = card.exportHtm(srcFile, dstFile);
+            }
+            else if (ConsEnv.CARD_TXT.equals(fileExt))
+            {
+                dstFile = card.exportTxt(srcFile, dstFile);
+            }
+            else if (ConsEnv.CARD_PNG.equals(fileExt))
+            {
+                dstFile = card.exportPng(srcFile, dstFile);
+            }
+            else if (ConsEnv.CARD_SVG.equals(fileExt))
+            {
+                dstFile = card.exportSvg(srcFile, dstFile);
+            }
+            else
+            {
+                dstFile = card.exportAll(srcFile, dstFile);
+            }
+
+            if (dstFile == null || !dstFile.exists())
+            {
+                Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A46, "生成卡片文件失败，请稍后重试！");
+            }
+            else if (javax.swing.JOptionPane.YES_OPTION == Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F7A47, "生成卡片文件成功，要打开卡片文件吗？"))
+            {
+                if (!Desk.open(dstFile))
+                {
+                    Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F1A03, "打开文件错误，请尝试手动方式查看！");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logs.exception(ex);
+            Lang.showMesg(TrayPtn.getCurrForm(), null, ex.getLocalizedMessage());
+        }
     }
     /**
      * 
