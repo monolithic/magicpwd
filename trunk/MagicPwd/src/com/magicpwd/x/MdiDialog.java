@@ -222,7 +222,7 @@ public class MdiDialog extends javax.swing.JDialog
 
         t = Lang.getLang(LangRes.P30F1207, "历史查看");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_HIST, t, t));
-        HistProp hp = new HistProp(coreMdl);
+        HistProp hp = new HistProp(null);
         hp.initView();
         hp.initLang();
         pl_CardPanel.add(ConsEnv.PROP_HIST, hp);
