@@ -344,15 +344,21 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         return mf_CurrForm;
     }
 
-    public static void showMainPtn()
+    public static MainPtn getMainPtn()
     {
         if (mp_MainPtn == null)
         {
-            mp_MainPtn = new MainPtn(coreMdl);
+            mp_MainPtn = new MainPtn(coreMdl, safeMdl);
             mp_MainPtn.initView();
             mp_MainPtn.initLang();
             mp_MainPtn.initData();
         }
+        return mp_MainPtn;
+    }
+
+    public static void showMainPtn()
+    {
+        getMainPtn();
 
         mf_CurrForm = mp_MainPtn;
         currPtn = ConsEnv.VIEW_MAIN;
@@ -372,7 +378,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         currPtn = ConsEnv.VIEW_NORM;
     }
 
-    public static void showMiniPtn()
+    public static MiniPtn getMiniPtn()
     {
         if (mp_MiniPtn == null)
         {
@@ -381,6 +387,12 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
             mp_MiniPtn.initLang();
             mp_MiniPtn.initData();
         }
+        return mp_MiniPtn;
+    }
+
+    public static void showMiniPtn()
+    {
+        getMiniPtn();
 
         mf_CurrForm = mp_MiniPtn;
         currPtn = ConsEnv.VIEW_MINI;
@@ -935,14 +947,16 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         dbLocked = aDbLocked;
     }
 
-    public static void setCoreMdl(CoreMdl coreMdl)
+    public static void setUserCfg(UserCfg userCfg)
     {
-        TrayPtn.coreMdl = coreMdl;
-    }
+        if (coreMdl == null)
+        {
+            coreMdl = new CoreMdl();
+        }
+        coreMdl.setUserCfg(userCfg);
+        coreMdl.preLoad();
 
-    public static void setSafeMdl(SafeMdl safeMdl)
-    {
-        TrayPtn.safeMdl = safeMdl;
+        safeMdl = new SafeMdl(userCfg);
     }
     private java.awt.Point dragLoc;
     private java.awt.Point formLoc;

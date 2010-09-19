@@ -21,6 +21,11 @@ public class SafeMdl
     private javax.crypto.Cipher eCipher;
     private SafeKey safeKey;
 
+    public SafeMdl(UserCfg userCfg)
+    {
+        safeKey = new SafeKey(userCfg);
+    }
+
     /**
      * @return the dCipher
      */

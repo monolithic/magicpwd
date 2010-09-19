@@ -47,14 +47,14 @@ final class SafeKey implements Key
      * 口令转换字符
      */
     private char[] mask;
-    private CoreMdl coreMdl;
+    private UserCfg userCfg;
 
     /**
      * 默认构造器
      */
-    SafeKey(CoreMdl coreMdl)
+    SafeKey(UserCfg userCfg)
     {
-        this.coreMdl = coreMdl;
+        this.userCfg = userCfg;
     }
 
     /**
@@ -90,7 +90,7 @@ final class SafeKey implements Key
      */
     public final String getCode()
     {
-        return coreMdl.getUserCfg().getCfg(user(ConsCfg.CFG_USER_CODE));
+        return userCfg.getCfg(user(ConsCfg.CFG_USER_CODE));
     }
 
     final char[] getMask()
@@ -110,10 +110,8 @@ final class SafeKey implements Key
     final boolean signIn() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
             IllegalBlockSizeException, BadPaddingException
     {
-        UserCfg ui = coreMdl.getUserCfg();
-
         // 用户登录身份认证
-        String text = ui.getCfg(user(ConsCfg.CFG_USER_INFO));
+        String text = userCfg.getCfg(user(ConsCfg.CFG_USER_INFO));
         if (!com.magicpwd._util.Char.isValidate(text))
         {
             return false;
@@ -127,7 +125,7 @@ final class SafeKey implements Key
         // 获取用户配置密文
         keys = cipherDigest();
 
-        text = ui.getCfg(user(ConsCfg.CFG_USER_PKEY));
+        text = userCfg.getCfg(user(ConsCfg.CFG_USER_PKEY));
         temp = Util.stringToBytes(text, true);
 
         // 解密用户配置密文获得解密数据
@@ -169,12 +167,10 @@ final class SafeKey implements Key
     final boolean signPk(String oldPwds, String newPwds) throws NoSuchAlgorithmException, NoSuchPaddingException,
             InvalidKeyException, IllegalBlockSizeException, BadPaddingException
     {
-        UserCfg ui = coreMdl.getUserCfg();
-
         // 已有口令校验
         pwds = oldPwds;
         byte[] temp = signInDigest();
-        if (!Util.bytesToString(temp, true).equals(ui.getCfg(user(ConsCfg.CFG_USER_INFO))))
+        if (!Util.bytesToString(temp, true).equals(userCfg.getCfg(user(ConsCfg.CFG_USER_INFO))))
         {
             return false;
         }
@@ -182,7 +178,7 @@ final class SafeKey implements Key
         // 摘要用户登录信息
         pwds = newPwds;
         temp = signInDigest();
-        ui.setCfg(user(ConsCfg.CFG_USER_INFO), Util.bytesToString(temp, true));
+        userCfg.setCfg(user(ConsCfg.CFG_USER_INFO), Util.bytesToString(temp, true));
 
         // 生成加密密钥及字符空间
         byte[] t = new byte[32];
@@ -198,7 +194,7 @@ final class SafeKey implements Key
         Cipher aes = Cipher.getInstance(ConsEnv.NAME_CIPHER);
         aes.init(Cipher.ENCRYPT_MODE, this);
         keys = aes.doFinal(t);
-        ui.setCfg(user(ConsCfg.CFG_USER_PKEY), Util.bytesToString(keys, true));
+        userCfg.setCfg(user(ConsCfg.CFG_USER_PKEY), Util.bytesToString(keys, true));
 
         // 恢复原有数据加密口令
         keys = temp;
@@ -214,11 +210,10 @@ final class SafeKey implements Key
      */
     final boolean signFp(String usrName, StringBuffer secPwds) throws Exception
     {
-        UserCfg ui = coreMdl.getUserCfg();
         name = usrName;
 
         // 用户登录身份认证
-        String text = ui.getCfg(user(ConsCfg.CFG_USER_SKEY));
+        String text = userCfg.getCfg(user(ConsCfg.CFG_USER_SKEY));
         if (!com.magicpwd._util.Char.isValidate(text))
         {
             return false;
@@ -246,12 +241,12 @@ final class SafeKey implements Key
         this.name = usrName;
         this.pwds = new String(generateUserChar());
         byte[] t = signInDigest();
-        coreMdl.getUserCfg().setCfg(user(ConsCfg.CFG_USER_INFO), Util.bytesToString(t, true));
+        userCfg.setCfg(user(ConsCfg.CFG_USER_INFO), Util.bytesToString(t, true));
 
         this.keys = cipherDigest();
         aes.init(Cipher.ENCRYPT_MODE, this);
         t = aes.doFinal(temp);
-        coreMdl.getUserCfg().setCfg(user(ConsCfg.CFG_USER_PKEY), Util.bytesToString(t, true));
+        userCfg.setCfg(user(ConsCfg.CFG_USER_PKEY), Util.bytesToString(t, true));
 
         System.arraycopy(temp, 16, keys, 0, temp.length - 16);
         mask = new String(temp, 0, 16).toCharArray();
@@ -269,12 +264,10 @@ final class SafeKey implements Key
      */
     final boolean signSk(String oldPwds, String secPwds) throws Exception
     {
-        UserCfg ui = coreMdl.getUserCfg();
-
         // 已有口令校验
         pwds = oldPwds;
         byte[] temp = signInDigest();
-        if (!Util.bytesToString(temp, true).equals(ui.getCfg(user(ConsCfg.CFG_USER_INFO))))
+        if (!Util.bytesToString(temp, true).equals(userCfg.getCfg(user(ConsCfg.CFG_USER_INFO))))
         {
             return false;
         }
@@ -298,7 +291,7 @@ final class SafeKey implements Key
         Cipher aes = Cipher.getInstance(ConsEnv.NAME_CIPHER);
         aes.init(Cipher.ENCRYPT_MODE, this);
         t = aes.doFinal(t);
-        coreMdl.getUserCfg().setCfg(user(ConsCfg.CFG_USER_SKEY), sKey + Util.bytesToString(t, true));
+        userCfg.setCfg(user(ConsCfg.CFG_USER_SKEY), sKey + Util.bytesToString(t, true));
 
         this.keys = temp;
         this.pwds = null;
@@ -318,15 +311,14 @@ final class SafeKey implements Key
     final boolean signUp() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
             IllegalBlockSizeException, BadPaddingException
     {
-        UserCfg uc = coreMdl.getUserCfg();
-        if (com.magicpwd._util.Char.isValidate(uc.getCfg(user(ConsCfg.CFG_USER_INFO))))
+        if (com.magicpwd._util.Char.isValidate(userCfg.getCfg(user(ConsCfg.CFG_USER_INFO))))
         {
             return false;
         }
 
         // 摘要用户登录信息
         byte[] temp = signInDigest();
-        uc.setCfg(user(ConsCfg.CFG_USER_INFO), Util.bytesToString(temp, true));
+        userCfg.setCfg(user(ConsCfg.CFG_USER_INFO), Util.bytesToString(temp, true));
 
         // 摘要用户加密信息
         keys = cipherDigest();
@@ -345,14 +337,14 @@ final class SafeKey implements Key
         aes.init(Cipher.ENCRYPT_MODE, this);
         keys = temp;
         temp = aes.doFinal(t);
-        uc.setCfg(user(ConsCfg.CFG_USER_PKEY), Util.bytesToString(temp, true));
+        userCfg.setCfg(user(ConsCfg.CFG_USER_PKEY), Util.bytesToString(temp, true));
 
         // 用户列表
-        uc.setCfg(ConsCfg.CFG_USER, uc.getCfg(ConsCfg.CFG_USER, "") + name + ',');
+        userCfg.setCfg(ConsCfg.CFG_USER, userCfg.getCfg(ConsCfg.CFG_USER, "") + name + ',');
         // 用户编码
-        uc.setCfg(user(ConsCfg.CFG_USER_CODE), "00000000");
+        userCfg.setCfg(user(ConsCfg.CFG_USER_CODE), "00000000");
         // 用户名称
-        uc.setCfg(user(ConsCfg.CFG_USER_NAME), name);
+        userCfg.setCfg(user(ConsCfg.CFG_USER_NAME), name);
         return true;
     }
 
@@ -506,7 +498,7 @@ final class SafeKey implements Key
 
     public boolean hasSkey()
     {
-        return com.magicpwd._util.Char.isValidate(coreMdl.getUserCfg().getCfg(user(ConsCfg.CFG_USER_SKEY)), 224);
+        return com.magicpwd._util.Char.isValidate(userCfg.getCfg(user(ConsCfg.CFG_USER_SKEY)), 224);
     }
 
     public final String user(String key)

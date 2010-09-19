@@ -56,6 +56,11 @@ public final class CoreMdl
         return userCfg;
     }
 
+    public void setUserCfg(UserCfg userCfg)
+    {
+        this.userCfg = userCfg;
+    }
+
     /**
      * 获取运行模式
      * @return
