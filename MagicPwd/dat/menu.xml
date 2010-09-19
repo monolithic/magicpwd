@@ -262,6 +262,10 @@
 
     <!--魔方密码工具栏-->
     <toolbar id="magicpwd">
-
+        <item type="normal" text="普通菜单项" tips="" icon="" strokes="^ N" command="哈哈！！">
+            <action id="" class="com.magicpwd.e.TestAction" />
+            <property name="" refId="" />
+            <property name="" refId="" />
+        </item>
     </toolbar>
 </magicpwd>
