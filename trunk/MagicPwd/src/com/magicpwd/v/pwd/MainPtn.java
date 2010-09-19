@@ -78,9 +78,11 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
     private GridMdl gridMdl;
     private SafeMdl safeMdl;
 
-    public MainPtn(CoreMdl coreMdl)
+    public MainPtn(CoreMdl coreMdl, SafeMdl safeMdl)
     {
         this.coreMdl = coreMdl;
+        this.safeMdl = safeMdl;
+        gridMdl = new GridMdl(coreMdl.getUserCfg(), safeMdl);
     }
 
     @Override
@@ -100,14 +102,23 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
         this.getContentPane().add(pl_KeysBase);
 
-        MenuPtn menuPtn = new MenuPtn(coreMdl);
-        mainMenu = menuPtn.getMenuBar("magicpwd");
-        mainMenu.setVisible(cfg.isMenuViw());
-        this.setJMenuBar(mainMenu);
+        try
+        {
+            java.io.File file = new java.io.File(ConsEnv.DIR_DAT, "menu.xml");
+            MenuPtn menuPtn = new MenuPtn(coreMdl);
+            menuPtn.loadData(file);
+            mainMenu = menuPtn.getMenuBar("magicpwd");
+            mainMenu.setVisible(cfg.isMenuViw());
+            this.setJMenuBar(mainMenu);
 
-        mainTool = menuPtn.getToolBar("magicpwd");
-        mainTool.setVisible(cfg.isToolViw());
-        this.getContentPane().add(mainTool, cfg.getToolLoc());
+            mainTool = menuPtn.getToolBar("magicpwd");
+            mainTool.setVisible(cfg.isToolViw());
+            this.getContentPane().add(mainTool, cfg.getToolLoc());
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
 
         mainFind.setVisible(cfg.isFindViw());
 

@@ -15,7 +15,6 @@ import com.magicpwd.v.TrayPtn;
 
 /**
  * @author Amon
- * 
  */
 public class MagicPwd
 {
@@ -58,6 +57,8 @@ public class MagicPwd
                 @Override
                 public void run()
                 {
+                    TrayPtn.setUserCfg(cfg);
+
                     // 显示登录或注册界面
                     UserSign us = TrayPtn.getUserSign(cfg.getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.INT_SIGN_IN : ConsEnv.INT_SIGN_UP);
                     us.setBackCall(new IBackCall()

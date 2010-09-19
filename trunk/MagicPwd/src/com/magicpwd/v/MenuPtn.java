@@ -120,7 +120,47 @@ public class MenuPtn
 
     public javax.swing.JToolBar getToolBar(String toolId)
     {
-        return null;
+        if (!Char.isValidate(toolId) || document == null)
+        {
+            return null;
+        }
+        Node node = document.getRootElement().selectSingleNode(Char.format("/magicpwd/toolbar[@id='{0}']", toolId));
+        if (node == null || !(node instanceof Element))
+        {
+            return null;
+        }
+        Element element = (Element) node;
+
+        javax.swing.JToolBar toolBar = new javax.swing.JToolBar();
+        toolBar.setName(toolId);
+
+        List elementList = element.elements("item");
+        if (elementList != null)
+        {
+            java.util.HashMap<String, javax.swing.JMenu> menus = new java.util.HashMap<String, javax.swing.JMenu>();
+            java.util.HashMap<String, javax.swing.Action> actions = new java.util.HashMap<String, javax.swing.Action>();
+            java.util.HashMap<String, javax.swing.ButtonGroup> groups = new java.util.HashMap<String, javax.swing.ButtonGroup>();
+            Element tmp;
+            for (Object obj : elementList)
+            {
+                if (!(obj instanceof Element))
+                {
+                    continue;
+                }
+                tmp = (Element) obj;
+                javax.swing.JMenu menu = createMenu(tmp, actions, groups, null);
+                if (menu == null)
+                {
+                    continue;
+                }
+                toolBar.add(menu);
+                if (Char.isValidate(tmp.attributeValue("id")))
+                {
+                    menus.put(tmp.attributeValue("id"), menu);
+                }
+            }
+        }
+        return toolBar;
     }
 
     private javax.swing.JMenu createMenu(Element element, java.util.HashMap<String, javax.swing.Action> actions, java.util.HashMap<String, javax.swing.ButtonGroup> groups, javax.swing.JComponent component)
@@ -439,7 +479,7 @@ public class MenuPtn
         return item;
     }
 
-    private static javax.swing.JMenuItem processAction(Element element, javax.swing.JMenuItem item, java.util.HashMap<String, javax.swing.Action> actions)
+    private javax.swing.JMenuItem processAction(Element element, javax.swing.JMenuItem item, java.util.HashMap<String, javax.swing.Action> actions)
     {
         java.util.List list = element.elements("action");
         if (list == null || list.size() < 1)
@@ -465,14 +505,14 @@ public class MenuPtn
                         if (action instanceof IPwdAction)
                         {
                             IPwdAction pwdAction = (IPwdAction) action;
-                            pwdAction.setMainPtn(null);
-                            pwdAction.setCoreMdl(null);
+                            pwdAction.setMainPtn(TrayPtn.getMainPtn());
+                            pwdAction.setCoreMdl(coreMdl);
                         }
                         else if (action instanceof IPadAction)
                         {
                             IPadAction padAction = (IPadAction) action;
-                            padAction.setMiniPtn(null);
-                            padAction.setCoreMdl(null);
+                            padAction.setMiniPtn(TrayPtn.getMiniPtn());
+                            padAction.setCoreMdl(coreMdl);
                         }
                         if (validate)
                         {
