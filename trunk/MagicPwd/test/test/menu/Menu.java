@@ -8,10 +8,13 @@ import com.magicpwd.MagicPwd;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.MenuPtn;
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
+import javax.swing.JMenuItem;
+import javax.swing.JToolBar;
 
 /**
  *
@@ -20,7 +23,7 @@ import javax.swing.JFrame;
 public class Menu
 {
 
-    public static void main(String args[])
+    public Menu()
     {
         final CoreMdl coreMdl = new CoreMdl();
         coreMdl.preLoad();
@@ -38,8 +41,14 @@ public class Menu
         {
             exp.printStackTrace();
         }
+
         JFrame frame = new JFrame();
         frame.setJMenuBar(ptn.getMenuBar("magicpwd"));
+
+        JToolBar bar = new JToolBar();
+        bar.add(new JMenuItem("ABC"));
+        frame.getContentPane().add(bar, BorderLayout.NORTH);
+
         frame.setSize(new Dimension(400, 300));
         frame.setVisible(true);
         frame.addWindowListener(new WindowAdapter()
@@ -52,5 +61,12 @@ public class Menu
                 System.exit(0);
             }
         });
+
+        frame.setSize(400, 300);
+        frame.setVisible(true);
+    }
+
+    public static void main(String args[])
+    {
     }
 }
