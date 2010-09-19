@@ -21,6 +21,7 @@ import com.magicpwd.d.DBAccess;
 import com.magicpwd.m.GridMdl;
 import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.CoreMdl;
+import com.magicpwd.m.SafeMdl;
 
 /**
  * 系统托盘
@@ -34,6 +35,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
     private static int currPtn;
     private static int nextPtn;
     private static CoreMdl coreMdl;
+    private static SafeMdl safeMdl;
     private static MailDlg mailDlg;
     private static TrayPtn trayPtn;
     private static UserSign userSign;
@@ -789,15 +791,20 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         }
 
         TrayPtn.nextPtn = nextPtn;
+        getUserSign(ConsEnv.INT_SIGN_RS);
+    }
+
+    public static UserSign getUserSign(int view)
+    {
         if (userSign == null)
         {
-            userSign = new UserSign(coreMdl.getUserCfg());
-            userSign.setBackCall(this);
-            userSign.initView(ConsEnv.INT_SIGN_RS);
-            userSign.initLang();
+            userSign = new UserSign(coreMdl.getUserCfg(), safeMdl);
         }
+        userSign.initView(view);
+        userSign.initLang();
         userSign.initData();
         userSign.toFront();
+        return userSign;
     }
 
     private void changeView(String ptn)
@@ -931,6 +938,11 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
     public static void setCoreMdl(CoreMdl coreMdl)
     {
         TrayPtn.coreMdl = coreMdl;
+    }
+
+    public static void setSafeMdl(SafeMdl safeMdl)
+    {
+        TrayPtn.safeMdl = safeMdl;
     }
     private java.awt.Point dragLoc;
     private java.awt.Point formLoc;

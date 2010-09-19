@@ -66,6 +66,7 @@ public interface ConsEnv
     String DIR_SKIN = "skin";
     String DIR_LOOK = "look";
     String DIR_FEEL = "feel";
+    String DIR_LANG = "lang";
     ///////////////////////////////////////////////////////
     // 类别数据显示排序
     ///////////////////////////////////////////////////////
@@ -232,12 +233,6 @@ public interface ConsEnv
     String EVENT_VIEW_FIND = "130F_VIEW_FIND";
     String EVENT_VIEW_INFO = "130F_VIEW_INFO";
     String EVENT_DATA_SKEY = "130F_DATA_SKEY";
-    String EVENT_NOTE_ALLS = "130F_NOTE_ALLS";
-    String EVENT_NOTE_CUTS = "130F_NOTE_CUTS";
-    String EVENT_NOTE_COPY = "130F_NOTE_COPY";
-    String EVENT_NOTE_PAST = "130F_NOTE_PAST";
-    String EVENT_NOTE_UNDO = "130F_NOTE_UNDO";
-    String EVENT_NOTE_REDO = "130F_NOTE_REDO";
     String PROP_CHAR = "130F_CHAR";
     String PROP_IMPT = "130F_IMPT";
     String PROP_INFO = "130F_INFO";

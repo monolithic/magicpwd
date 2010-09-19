@@ -40,7 +40,7 @@ public final class CoreMdl
         hintMdl = new HintMdl(this);
     }
 
-    public void loadUserCfg()
+    public void loadCfg()
     {
         userCfg = new UserCfg();
         userCfg.loadCfg();
