@@ -2,7 +2,7 @@ package com.magicpwd.v.pad;
 
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._comp.BtnLabel;
-import com.magicpwd._comp.WTextArea;
+import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditItem;
@@ -29,6 +29,7 @@ public class MiniPtn extends javax.swing.JFrame implements MPadEvt, FindEvt
     private java.util.List<S1S2> noteList;
     private CoreMdl coreMdl;
     private NoteMdl noteMdl;
+    private WTextBox textBox;
 
     public MiniPtn(CoreMdl coreMdl)
     {
@@ -45,7 +46,7 @@ public class MiniPtn extends javax.swing.JFrame implements MPadEvt, FindEvt
         bt_SaveNote = new BtnLabel();
         bt_SrchNote = new BtnLabel();
         javax.swing.JScrollPane sp_NoteData = new javax.swing.JScrollPane();
-        ta_NoteData = new WTextArea();
+        ta_NoteData = new javax.swing.JTextArea();
         ck_NoteWrap = new javax.swing.JCheckBox();
         pl_NoteInfo = new javax.swing.JPanel();
         lb_NoteInfo = new javax.swing.JLabel();
@@ -117,6 +118,8 @@ public class MiniPtn extends javax.swing.JFrame implements MPadEvt, FindEvt
         });
 
         ta_NoteData.setDragEnabled(true);
+        textBox = new WTextBox(ta_NoteData);
+        textBox.initView();
         sp_NoteData.setViewportView(ta_NoteData);
 
         ck_NoteWrap.addChangeListener(new javax.swing.event.ChangeListener()
@@ -221,7 +224,7 @@ public class MiniPtn extends javax.swing.JFrame implements MPadEvt, FindEvt
         Lang.setWText(bt_CrteNote, LangRes.P30F5507, "&N");
         Lang.setWTips(bt_CrteNote, LangRes.P30F5508, "新建(Alt + N)");
 
-//        noteMenu.initLang();
+        textBox.initLang();
     }
 
     public void initData()
@@ -253,6 +256,8 @@ public class MiniPtn extends javax.swing.JFrame implements MPadEvt, FindEvt
             }
         });
         pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW).put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_DOWN_MASK | java.awt.event.InputEvent.ALT_DOWN_MASK), "showNormPtn");
+
+        textBox.initData();
     }
 
     @Override
@@ -308,7 +313,7 @@ public class MiniPtn extends javax.swing.JFrame implements MPadEvt, FindEvt
             return;
         }
 
-        ta_NoteData.reset();
+        textBox.reset();
     }
 
     private void ck_NoteWrapStateChanged(javax.swing.event.ChangeEvent evt)
@@ -354,7 +359,7 @@ public class MiniPtn extends javax.swing.JFrame implements MPadEvt, FindEvt
     private javax.swing.JComboBox cb_NoteInfo;
     private javax.swing.JLabel lb_NoteHead;
     private javax.swing.JLabel lb_NoteInfo;
-    private WTextArea ta_NoteData;
+    private javax.swing.JTextArea ta_NoteData;
     private javax.swing.JTextField tf_NoteHead;
     private BtnLabel bt_CrteNote;
     private BtnLabel bt_OpenNote;

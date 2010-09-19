@@ -7,6 +7,7 @@ package com.magicpwd._util;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.IcoLabel;
 import com.magicpwd._cons.ConsCfg;
+import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd.m.UserCfg;
 import java.awt.Component;
@@ -36,15 +37,30 @@ public class Lang
     {
         try
         {
-            String name = userCfg.getCfg(ConsCfg.CFG_LANG);
+            String name = userCfg.getCfg(ConsCfg.CFG_LANG, "");
             if (!Char.isValidate(name))
             {
-                name = Locale.getDefault().getVariant();
+                Locale locale = Locale.getDefault();
+                name = locale.getLanguage() + "_" + locale.getCountry();
             }
-            java.io.File file = new java.io.File("lang", "lang_" + name + ".properties");
+            name = '_' + name;
+            java.io.File file;
+            while (true)
+            {
+                file = new java.io.File(ConsEnv.DIR_LANG, "lang" + name + ".properties");
+                if (file.exists() && file.isFile() && file.canRead())
+                {
+                    break;
+                }
+                name = name.substring(0, name.lastIndexOf("_"));
+            }
+
             lang = new Properties();
-            lang.load(new java.io.FileInputStream(file));
-            tips = lang.getProperty(LangRes.P30FA208);
+            if (file != null)
+            {
+                lang.load(new java.io.FileInputStream(file));
+                tips = lang.getProperty(LangRes.P30FA208);
+            }
         }
         catch (Exception exp)
         {

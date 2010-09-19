@@ -8,8 +8,8 @@ import com.magicpwd._util.Jpng;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
+import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserCfg;
-import com.magicpwd.m.CoreMdl;
 import com.magicpwd.u.DBU3000;
 import com.magicpwd.v.TrayPtn;
 import javax.imageio.ImageIO;
@@ -42,16 +42,17 @@ public class UserSign extends javax.swing.JPanel
      * 导航图标
      */
     private static javax.swing.Icon guidIcon;
-    private CoreMdl coreMdl;
+    private SafeMdl safeMdl;
     private UserCfg userCfg;
 
     /**
      * 独立窗口
      * @param type
      */
-    public UserSign(UserCfg userCfg)
+    public UserSign(UserCfg userCfg, SafeMdl safeMdl)
     {
         this.userCfg = userCfg;
+        this.safeMdl = safeMdl;
         frame = new javax.swing.JFrame();
         frame.setResizable(false);
         frame.setIconImage(Util.getLogo(16));
@@ -901,7 +902,7 @@ public class UserSign extends javax.swing.JPanel
 
         try
         {
-            boolean b = coreMdl.getSafeMdl().signIn(name, pwds);
+            boolean b = safeMdl.signIn(name, pwds);
             if (!b)
             {
                 errCount += 1;
@@ -965,7 +966,7 @@ public class UserSign extends javax.swing.JPanel
 
         try
         {
-            boolean b = coreMdl.getSafeMdl().signIn(name, pwds);
+            boolean b = safeMdl.signIn(name, pwds);
             if (!b)
             {
                 errCount += 1;
@@ -1041,7 +1042,7 @@ public class UserSign extends javax.swing.JPanel
         }
         try
         {
-            boolean b = coreMdl.getSafeMdl().signUp(un, p1);
+            boolean b = safeMdl.signUp(un, p1);
             if (!b)
             {
                 Lang.showMesg(this, LangRes.P30FAA06, "注册用户失败，请更换用户名及口令后重试！");
@@ -1094,7 +1095,7 @@ public class UserSign extends javax.swing.JPanel
         }
         try
         {
-            boolean b = coreMdl.getSafeMdl().signPk(p0, p1);
+            boolean b = safeMdl.signPk(p0, p1);
             if (!b)
             {
                 Lang.showMesg(this, LangRes.P30FAA09, "口令更改失败，请检查您输入的口令是否与原口令相同！");
@@ -1140,7 +1141,7 @@ public class UserSign extends javax.swing.JPanel
         StringBuffer sb = new StringBuffer(pwds);
         try
         {
-            boolean b = coreMdl.getSafeMdl().signFp(name, sb);
+            boolean b = safeMdl.signFp(name, sb);
             if (!b)
             {
                 Lang.showMesg(this, LangRes.P30FAA03, "身份验证错误，请确认您的用户名及口令是否正确！");
@@ -1226,7 +1227,7 @@ public class UserSign extends javax.swing.JPanel
         }
         try
         {
-            boolean b = coreMdl.getSafeMdl().signSk(p0, p1);
+            boolean b = safeMdl.signSk(p0, p1);
             if (!b)
             {
                 Lang.showMesg(this, LangRes.P30FAA16, "安全口令设定失败，请稍后重新尝试！");

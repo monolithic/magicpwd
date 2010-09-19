@@ -46,6 +46,9 @@ public class MagicPwd
         // 扩展皮肤加载
         loadLnF(cfg);
 
+        // 语言资源加载
+        Lang.loadLang(cfg);
+
         // 界面风格设置
         try
         {
@@ -56,7 +59,7 @@ public class MagicPwd
                 public void run()
                 {
                     // 显示登录或注册界面
-                    UserSign us = new UserSign(cfg);
+                    UserSign us = TrayPtn.getUserSign(cfg.getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.INT_SIGN_IN : ConsEnv.INT_SIGN_UP);
                     us.setBackCall(new IBackCall()
                     {
 
@@ -74,9 +77,6 @@ public class MagicPwd
                             return false;
                         }
                     });
-                    us.initView(cfg.getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.INT_SIGN_IN : ConsEnv.INT_SIGN_UP);
-                    us.initLang();
-                    us.initData();
                 }
             });
         }
