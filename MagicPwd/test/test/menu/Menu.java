@@ -5,6 +5,7 @@
 package test.menu;
 
 import com.magicpwd.MagicPwd;
+import com.magicpwd._util.Lang;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.MenuPtn;
 import java.awt.Dimension;
@@ -23,9 +24,10 @@ public class Menu
     {
         final CoreMdl coreMdl = new CoreMdl();
         coreMdl.preLoad();
-        coreMdl.loadUserCfg();
+        coreMdl.loadCfg();
 
         MagicPwd.loadLnF(coreMdl.getUserCfg());
+        Lang.loadLang(coreMdl.getUserCfg());
 
         MenuPtn ptn = new MenuPtn(coreMdl);
         try
