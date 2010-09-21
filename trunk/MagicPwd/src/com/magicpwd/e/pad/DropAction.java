@@ -24,6 +24,7 @@ public class DropAction extends javax.swing.AbstractAction implements IPadAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
+        miniPtn.deleteNote();
     }
 
     @Override

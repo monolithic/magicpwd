@@ -19,7 +19,7 @@ public class NoteMdl extends GridMdl
 
     private UserCfg userCfg;
 
-    NoteMdl(UserCfg userCfg, SafeMdl safeMdl)
+    public NoteMdl(UserCfg userCfg, SafeMdl safeMdl)
     {
         super(userCfg, safeMdl);
     }
