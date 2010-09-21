@@ -72,12 +72,17 @@ public class InfoBean extends javax.swing.JPanel implements IEditBean
     }
 
     @Override
-    public void initData(IEditItem tplt)
+    public void initData()
     {
-        if (tplt != null)
+    }
+
+    @Override
+    public void showData(IEditItem item)
+    {
+        if (item != null)
         {
-            lb_PropName.setText(tplt.getName());
-            ta_PropData.setText(tplt.getData());
+            lb_PropName.setText(item.getName());
+            ta_PropData.setText(item.getData());
             return;
         }
         try

@@ -121,7 +121,12 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean, IBackCall
     }
 
     @Override
-    public void initData(IEditItem item)
+    public void initData()
+    {
+    }
+
+    @Override
+    public void showData(IEditItem item)
     {
         itemData = (LogoItem) item;
         ib_PropName.setIcon(Util.getIcon(item.getName()));

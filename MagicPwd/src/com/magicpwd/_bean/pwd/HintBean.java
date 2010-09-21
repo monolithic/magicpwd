@@ -182,11 +182,16 @@ public class HintBean extends javax.swing.JPanel implements IEditBean
     }
 
     @Override
-    public void initData(IEditItem tplt)
+    public void initData()
     {
-        itemData = tplt;
-        tf_PropName.setText(tplt.getName());
-        tf_PropData.setText(tplt.getData());
+    }
+
+    @Override
+    public void showData(IEditItem item)
+    {
+        itemData = item;
+        tf_PropName.setText(item.getName());
+        tf_PropData.setText(item.getData());
     }
 
     @Override

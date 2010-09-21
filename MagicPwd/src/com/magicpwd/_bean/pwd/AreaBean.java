@@ -1,14 +1,13 @@
 package com.magicpwd._bean.pwd;
 
 import com.magicpwd._comp.EditBox;
+import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
-import com.magicpwd._face.IGridView;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
-import com.magicpwd.m.GridMdl;
 import com.magicpwd.v.TrayPtn;
 import com.magicpwd.v.pwd.MainPtn;
 
@@ -23,6 +22,8 @@ public class AreaBean extends javax.swing.JPanel implements IEditBean
     private IEditItem itemData;
     private MainPtn mainPtn;
     private EditBox dataEdit;
+    private WTextBox nameBox;
+    private WTextBox dataBox;
 
     public AreaBean(MainPtn mainPtn)
     {
@@ -37,21 +38,16 @@ public class AreaBean extends javax.swing.JPanel implements IEditBean
 
         lb_PropName = new javax.swing.JLabel();
         tf_PropName = new javax.swing.JTextField(14);
-        tf_PropName.addFocusListener(new java.awt.event.FocusAdapter()
-        {
-
-            @Override
-            public void focusGained(java.awt.event.FocusEvent evt)
-            {
-                tf_PropName.selectAll();
-            }
-        });
+        nameBox = new WTextBox(tf_PropName, true);
+        nameBox.initView();
         lb_PropName.setLabelFor(tf_PropName);
 
         lb_PropData = new javax.swing.JLabel();
         ta_PropData = new javax.swing.JTextArea();
-        lb_PropData.setLabelFor(ta_PropData);
         ta_PropData.setLineWrap(true);
+        dataBox = new WTextBox(ta_PropData);
+        dataBox.initView();
+        lb_PropData.setLabelFor(ta_PropData);
         javax.swing.JScrollPane sp_PropData = new javax.swing.JScrollPane(ta_PropData);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -95,13 +91,20 @@ public class AreaBean extends javax.swing.JPanel implements IEditBean
         Lang.setWText(lb_PropName, LangRes.P30F1311, "名称");
         Lang.setWText(lb_PropData, LangRes.P30F1312, "附注");
 
+        nameBox.initLang();
+        dataBox.initLang();
         dataEdit.initLang();
     }
 
     @Override
-    public void initData(IEditItem tplt)
+    public void initData()
     {
-        itemData = tplt;
+    }
+
+    @Override
+    public void showData(IEditItem item)
+    {
+        itemData = item;
         String name = itemData.getName();
         if (com.magicpwd._util.Char.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS))
         {

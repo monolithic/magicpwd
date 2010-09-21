@@ -803,7 +803,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
     {
         if (coreMdl.getUserCfg().isEditViw())
         {
-            editBean[ConsDat.INDX_INFO].initData(null);
+            editBean[ConsDat.INDX_INFO].showData(null);
             cl_CardProp.show(pl_CardProp, ConsEnv.BEAN_INFO);
             editBean[ConsDat.INDX_INFO].requestFocus();
         }
@@ -813,7 +813,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
     {
         if (coreMdl.getUserCfg().isEditViw())
         {
-            editBean[tplt.getType()].initData(tplt);
+            editBean[tplt.getType()].showData(tplt);
             cl_CardProp.show(pl_CardProp, ConsEnv.BEAN_PROP + tplt.getType());
             if (focus)
             {

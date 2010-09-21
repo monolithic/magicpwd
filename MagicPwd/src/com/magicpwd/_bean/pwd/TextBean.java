@@ -107,9 +107,14 @@ public class TextBean extends javax.swing.JPanel implements IEditBean
     }
 
     @Override
-    public void initData(IEditItem tplt)
+    public void initData()
     {
-        itemData = tplt;
+    }
+
+    @Override
+    public void showData(IEditItem item)
+    {
+        itemData = item;
         String name = itemData.getName();
         if (com.magicpwd._util.Char.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS))
         {
