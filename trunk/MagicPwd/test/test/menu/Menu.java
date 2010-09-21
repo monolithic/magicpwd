@@ -13,8 +13,6 @@ import java.awt.Dimension;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
-import javax.swing.JMenuItem;
-import javax.swing.JToolBar;
 
 /**
  *
@@ -45,9 +43,7 @@ public class Menu
         JFrame frame = new JFrame();
         frame.setJMenuBar(ptn.getMenuBar("magicpwd"));
 
-        JToolBar bar = new JToolBar();
-        bar.add(new JMenuItem("ABC"));
-        frame.getContentPane().add(bar, BorderLayout.NORTH);
+        frame.getContentPane().add(ptn.getToolBar("magicpwd"), BorderLayout.NORTH);
 
         frame.setSize(new Dimension(400, 300));
         frame.setVisible(true);
@@ -68,5 +64,6 @@ public class Menu
 
     public static void main(String args[])
     {
+        new Menu();
     }
 }
