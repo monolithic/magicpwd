@@ -58,6 +58,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
     private MenuPop gridMenu;
     private MenuPop treeMenu;
     private MenuPop listMenu;
+    private MenuPtn menuPtn;
     /**
      * 口令列表上次选择索引
      */
@@ -105,7 +106,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         try
         {
             java.io.File file = new java.io.File(ConsEnv.DIR_DAT, "menu.xml");
-            MenuPtn menuPtn = new MenuPtn(coreMdl);
+            menuPtn = new MenuPtn(coreMdl);
             menuPtn.loadData(file);
             mainMenu = menuPtn.getMenuBar("magicpwd");
             mainMenu.setVisible(cfg.isMenuViw());

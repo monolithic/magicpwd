@@ -382,7 +382,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
     {
         if (mp_MiniPtn == null)
         {
-            mp_MiniPtn = new MiniPtn(coreMdl);
+            mp_MiniPtn = new MiniPtn(coreMdl, safeMdl);
             mp_MiniPtn.initView();
             mp_MiniPtn.initLang();
             mp_MiniPtn.initData();

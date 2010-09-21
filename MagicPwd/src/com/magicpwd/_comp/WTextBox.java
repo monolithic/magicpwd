@@ -20,16 +20,36 @@ import javax.swing.undo.UndoManager;
 public class WTextBox implements java.awt.datatransfer.ClipboardOwner
 {
 
+    private boolean selectAll;
     private javax.swing.text.JTextComponent textBox;
     private UndoManager undo = new UndoManager();
 
     public WTextBox(javax.swing.text.JTextComponent textBox)
     {
+        this(textBox, false);
+    }
+
+    public WTextBox(javax.swing.text.JTextComponent textBox, boolean selectAll)
+    {
         this.textBox = textBox;
+        this.selectAll = selectAll;
     }
 
     public void initView()
     {
+        if (selectAll)
+        {
+            textBox.addFocusListener(new java.awt.event.FocusAdapter()
+            {
+
+                @Override
+                public void focusGained(java.awt.event.FocusEvent fe)
+                {
+                    textBox.selectAll();
+                }
+            });
+        }
+
         popMenu = new javax.swing.JPopupMenu();
 
         undoItem = new javax.swing.JMenuItem();
