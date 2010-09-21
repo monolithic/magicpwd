@@ -99,6 +99,8 @@ public class AreaBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initData()
     {
+        nameBox.initData();
+        dataBox.initData();
     }
 
     @Override

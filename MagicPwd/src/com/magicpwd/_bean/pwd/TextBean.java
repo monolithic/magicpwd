@@ -4,6 +4,7 @@
 package com.magicpwd._bean.pwd;
 
 import com.magicpwd._comp.EditBox;
+import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
@@ -24,6 +25,8 @@ public class TextBean extends javax.swing.JPanel implements IEditBean
     private IEditItem itemData;
     private MainPtn mainPtn;
     private EditBox dataEdit;
+    private WTextBox nameBox;
+    private WTextBox dataBox;
 
     public TextBean(MainPtn mainPtn)
     {
@@ -38,19 +41,14 @@ public class TextBean extends javax.swing.JPanel implements IEditBean
 
         lb_PropName = new javax.swing.JLabel();
         tf_PropName = new javax.swing.JTextField(14);
-        tf_PropName.addFocusListener(new java.awt.event.FocusAdapter()
-        {
-
-            @Override
-            public void focusGained(java.awt.event.FocusEvent evt)
-            {
-                tf_PropName.selectAll();
-            }
-        });
+        nameBox = new WTextBox(tf_PropName, true);
+        nameBox.initView();
         lb_PropName.setLabelFor(tf_PropName);
 
         lb_PropData = new javax.swing.JLabel();
         tf_PropData = new javax.swing.JTextField();
+        dataBox = new WTextBox(tf_PropData, true);
+        dataBox.initView();
         lb_PropData.setLabelFor(tf_PropData);
 
         lb_PropEdit = new javax.swing.JLabel();
@@ -103,12 +101,16 @@ public class TextBean extends javax.swing.JPanel implements IEditBean
         Lang.setWText(lb_PropName, LangRes.P30F1307, "名称");
         Lang.setWText(lb_PropData, LangRes.P30F1308, "文本");
 
+        nameBox.initLang();
+        dataBox.initLang();
         dataEdit.initLang();
     }
 
     @Override
     public void initData()
     {
+        nameBox.initData();
+        dataBox.initData();
     }
 
     @Override

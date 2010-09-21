@@ -4,6 +4,7 @@
 package com.magicpwd._bean.pwd;
 
 import com.magicpwd._comp.EditBox;
+import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
@@ -22,6 +23,8 @@ public class MetaBean extends javax.swing.JPanel implements IEditBean
     private IEditItem itemData;
     private MainPtn mainPtn;
     private EditBox dataEdit;
+    private WTextBox nameBox;
+    private WTextBox dataBox;
 
     public MetaBean(MainPtn mainPtn)
     {
@@ -38,20 +41,15 @@ public class MetaBean extends javax.swing.JPanel implements IEditBean
 
         lb_PropName = new javax.swing.JLabel();
         tf_PropName = new javax.swing.JTextField(14);
-        tf_PropName.addFocusListener(new java.awt.event.FocusAdapter()
-        {
-
-            @Override
-            public void focusGained(java.awt.event.FocusEvent evt)
-            {
-                tf_PropName.selectAll();
-            }
-        });
+        nameBox = new WTextBox(tf_PropName, true);
+        nameBox.initView();
         lb_PropName.setLabelFor(tf_PropName);
 
         lb_PropData = new javax.swing.JLabel();
         ta_PropData = new javax.swing.JTextArea();
         ta_PropData.setLineWrap(true);
+        dataBox = new WTextBox(ta_PropData);
+        dataBox.initView();
         lb_PropData.setLabelFor(ta_PropData);
         javax.swing.JScrollPane sp_PropData = new javax.swing.JScrollPane(ta_PropData);
 
@@ -93,15 +91,19 @@ public class MetaBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initLang()
     {
-        dataEdit.initLang();
-
         Lang.setWText(lb_PropName, LangRes.P30F1303, "标题");
         Lang.setWText(lb_PropData, LangRes.P30F1304, "搜索");
+
+        nameBox.initLang();
+        dataBox.initLang();
+        dataEdit.initLang();
     }
 
     @Override
     public void initData()
     {
+        nameBox.initData();
+        dataBox.initData();
     }
 
     @Override
