@@ -623,14 +623,30 @@ public class MenuPtn
 
     private javax.swing.Icon createIcon(String path)
     {
+        java.io.InputStream stream = null;
         try
         {
-            return new javax.swing.ImageIcon(javax.imageio.ImageIO.read(File.open4Read(path)));
+            stream = File.open4Read(path);
+            return new javax.swing.ImageIcon(javax.imageio.ImageIO.read(stream));
         }
         catch (Exception exp)
         {
             Logs.exception(exp);
             return null;
+        }
+        finally
+        {
+            if (stream != null)
+            {
+                try
+                {
+                    stream.close();
+                }
+                catch (Exception exp)
+                {
+                    Logs.exception(exp);
+                }
+            }
         }
     }
 
