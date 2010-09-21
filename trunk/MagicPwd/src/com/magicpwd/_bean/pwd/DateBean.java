@@ -5,6 +5,7 @@ package com.magicpwd._bean.pwd;
 
 import com.magicpwd._comp.EditBox;
 import com.magicpwd._comp.BtnLabel;
+import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
@@ -26,6 +27,8 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
     private IEditItem itemData;
     private EditBox dataEdit;
     private MainPtn mainPtn;
+    private WTextBox nameBox;
+//    private WTextBox dataBox;
 
     public DateBean(MainPtn mainPtn)
     {
@@ -40,15 +43,8 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
 
         lb_PropName = new javax.swing.JLabel();
         tf_PropName = new javax.swing.JTextField(14);
-        tf_PropName.addFocusListener(new java.awt.event.FocusAdapter()
-        {
-
-            @Override
-            public void focusGained(java.awt.event.FocusEvent evt)
-            {
-                tf_PropName.selectAll();
-            }
-        });
+        nameBox = new WTextBox(tf_PropName, true);
+        nameBox.initView();
         lb_PropName.setLabelFor(tf_PropName);
 
         lb_PropData = new javax.swing.JLabel();
@@ -121,12 +117,14 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
         Lang.setWText(bt_DateView, LangRes.P30F1513, "&O");
         Lang.setWTips(bt_DateView, LangRes.P30F1514, "当前时间(Alt + O)");
 
+        nameBox.initLang();
         dataEdit.initLang();
     }
 
     @Override
     public void initData()
     {
+        nameBox.initData();
     }
 
     @Override

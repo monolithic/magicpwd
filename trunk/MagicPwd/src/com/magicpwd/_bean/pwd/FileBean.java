@@ -6,6 +6,7 @@ package com.magicpwd._bean.pwd;
 import com.magicpwd._comp.EditBox;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comn.item.EditItem;
+import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
@@ -35,6 +36,8 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
     private java.io.File filePath;
     private java.io.File amaPath;
     private String amaName;
+    private WTextBox nameBox;
+    private WTextBox dataBox;
 
     public FileBean(MainPtn mainPtn)
     {
@@ -49,15 +52,8 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
 
         lb_PropName = new javax.swing.JLabel();
         tf_PropName = new javax.swing.JTextField(14);
-        tf_PropName.addFocusListener(new java.awt.event.FocusAdapter()
-        {
-
-            @Override
-            public void focusGained(java.awt.event.FocusEvent evt)
-            {
-                tf_PropName.selectAll();
-            }
-        });
+        nameBox = new WTextBox(tf_PropName, true);
+        nameBox.initView();
         lb_PropName.setLabelFor(tf_PropName);
 
         lb_PropData = new javax.swing.JLabel();
@@ -146,12 +142,14 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
         Lang.setWText(bt_FileApnd, LangRes.P30F1517, "&P");
         Lang.setWTips(bt_FileApnd, LangRes.P30F1518, "添加附件(Alt + P)");
 
+        nameBox.initLang();
         dataEdit.initLang();
     }
 
     @Override
     public void initData()
     {
+        nameBox.initData();
     }
 
     @Override

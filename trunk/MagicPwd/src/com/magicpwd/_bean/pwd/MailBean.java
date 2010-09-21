@@ -5,6 +5,7 @@ package com.magicpwd._bean.pwd;
 
 import com.magicpwd._comp.EditBox;
 import com.magicpwd._comp.BtnLabel;
+import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
@@ -27,6 +28,8 @@ public class MailBean extends javax.swing.JPanel implements IEditBean
     private IEditItem itemData;
     private MainPtn mainPtn;
     private EditBox dataEdit;
+    private WTextBox nameBox;
+    private WTextBox dataBox;
 
     public MailBean(MainPtn mainPtn)
     {
@@ -41,19 +44,14 @@ public class MailBean extends javax.swing.JPanel implements IEditBean
 
         lb_PropName = new javax.swing.JLabel();
         tf_PropName = new javax.swing.JTextField(14);
-        tf_PropName.addFocusListener(new java.awt.event.FocusAdapter()
-        {
-
-            @Override
-            public void focusGained(java.awt.event.FocusEvent evt)
-            {
-                tf_PropName.selectAll();
-            }
-        });
+        nameBox = new WTextBox(tf_PropName, true);
+        nameBox.initView();
         lb_PropName.setLabelFor(tf_PropName);
 
         lb_PropData = new javax.swing.JLabel();
         tf_PropData = new javax.swing.JTextField();
+        dataBox = new WTextBox(tf_PropData, true);
+        dataBox.initView();
         lb_PropData.setLabelFor(tf_PropData);
 
         lb_PropEdit = new javax.swing.JLabel();
@@ -122,12 +120,16 @@ public class MailBean extends javax.swing.JPanel implements IEditBean
         Lang.setWText(bt_MailView, LangRes.P30F1511, "&O");
         Lang.setWTips(bt_MailView, LangRes.P30F1512, "发送邮件(Alt + O)");
 
+        nameBox.initLang();
+        dataBox.initLang();
         dataEdit.initLang();
     }
 
     @Override
     public void initData()
     {
+        nameBox.initData();
+        dataBox.initData();
     }
 
     @Override

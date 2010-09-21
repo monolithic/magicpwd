@@ -5,6 +5,7 @@ package com.magicpwd._bean.pwd;
 
 import com.magicpwd._comp.EditBox;
 import com.magicpwd._comp.BtnLabel;
+import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
@@ -24,6 +25,8 @@ public class HintBean extends javax.swing.JPanel implements IEditBean
     private EditBox dataEdit;
     private IEditItem itemData;
     private MainPtn mainPtn;
+    private WTextBox nameBox;
+    private WTextBox dataBox;
 
     public HintBean(MainPtn mainPtn)
     {
@@ -45,15 +48,8 @@ public class HintBean extends javax.swing.JPanel implements IEditBean
 
         lb_PropName = new javax.swing.JLabel();
         tf_PropName = new javax.swing.JTextField(14);
-        tf_PropName.addFocusListener(new java.awt.event.FocusAdapter()
-        {
-
-            @Override
-            public void focusGained(java.awt.event.FocusEvent evt)
-            {
-                tf_PropName.selectAll();
-            }
-        });
+        nameBox = new WTextBox(tf_PropName, true);
+        nameBox.initView();
         lb_PropName.setLabelFor(tf_PropName);
 
         lb_PropData = new javax.swing.JLabel();
@@ -163,8 +159,6 @@ public class HintBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initLang()
     {
-        dataEdit.initLang();
-
         Lang.setWText(lb_PropName, LangRes.P30F1305, "提示");
         Lang.setWText(lb_PropData, LangRes.P30F1306, "时间");
 
@@ -179,11 +173,15 @@ public class HintBean extends javax.swing.JPanel implements IEditBean
             Lang.setWText(item, "P30FA60" + Integer.toHexString(k++).toUpperCase(), "");
             Lang.setWTips(item, "P30FA60" + Integer.toHexString(k++).toUpperCase(), "");
         }
+
+        nameBox.initLang();
+        dataEdit.initLang();
     }
 
     @Override
     public void initData()
     {
+        nameBox.initData();
     }
 
     @Override

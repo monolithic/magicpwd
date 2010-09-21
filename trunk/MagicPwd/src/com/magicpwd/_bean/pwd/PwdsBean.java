@@ -5,6 +5,7 @@ package com.magicpwd._bean.pwd;
 
 import com.magicpwd._comp.EditBox;
 import com.magicpwd._comp.BtnLabel;
+import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
@@ -28,6 +29,8 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     private IEditItem itemData;
     private MainPtn mainPtn;
     private EditBox dataEdit;
+    private WTextBox nameBox;
+//    private WTextBox dataBox;
 
     public PwdsBean(MainPtn mainPtn)
     {
@@ -42,15 +45,8 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 
         lb_PropName = new javax.swing.JLabel();
         tf_PropName = new javax.swing.JTextField(14);
-        tf_PropName.addFocusListener(new java.awt.event.FocusAdapter()
-        {
-
-            @Override
-            public void focusGained(java.awt.event.FocusEvent evt)
-            {
-                tf_PropName.selectAll();
-            }
-        });
+        nameBox = new WTextBox(tf_PropName, true);
+        nameBox.initView();
         lb_PropName.setLabelFor(tf_PropName);
 
         lb_PropData = new javax.swing.JLabel();
@@ -147,8 +143,6 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initLang()
     {
-        dataEdit.initLang();
-
         Lang.setWText(lb_PropName, LangRes.P30F1309, "名称");
         Lang.setWText(lb_PropData, LangRes.P30F130A, "口令");
 
@@ -162,11 +156,15 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         Lang.setWTips(bt_PwdsUcfg, LangRes.P30F150E, "口令设置(Alt + O)");
 
 //        menuPwd.initLang();
+
+        nameBox.initLang();
+        dataEdit.initLang();
     }
 
     @Override
     public void initData()
     {
+        nameBox.initData();
     }
 
     @Override
