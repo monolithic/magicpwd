@@ -9,6 +9,7 @@ package com.magicpwd._face;
  */
 public interface IEditBean
 {
+
     /**
      * 界面布局初始化
      */
@@ -21,9 +22,14 @@ public interface IEditBean
 
     /**
      * 界面数据初始化
-     * @param tplt
      */
-    void initData(IEditItem tplt);
+    void initData();
+
+    /**
+     * 显示指定数据
+     * @param item
+     */
+    void showData(IEditItem item);
 
     /**
      * 界面焦点初始化

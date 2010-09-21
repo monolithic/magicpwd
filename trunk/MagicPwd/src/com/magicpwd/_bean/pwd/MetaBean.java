@@ -100,9 +100,14 @@ public class MetaBean extends javax.swing.JPanel implements IEditBean
     }
 
     @Override
-    public void initData(IEditItem tplt)
+    public void initData()
     {
-        itemData = tplt;
+    }
+
+    @Override
+    public void showData(IEditItem item)
+    {
+        itemData = item;
         tf_PropName.setText(itemData.getName());
         ta_PropData.setText(itemData.getData());
     }

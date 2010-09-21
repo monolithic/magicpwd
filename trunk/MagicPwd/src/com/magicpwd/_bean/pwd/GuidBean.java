@@ -147,7 +147,12 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
     }
 
     @Override
-    public void initData(IEditItem item)
+    public void initData()
+    {
+    }
+
+    @Override
+    public void showData(IEditItem item)
     {
         itemData = (GuidItem) item;
         tf_PropName.setText(item.getName());

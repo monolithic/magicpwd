@@ -91,7 +91,12 @@ public class ListBean extends javax.swing.JPanel implements IEditBean
     }
 
     @Override
-    public void initData(IEditItem tplt)
+    public void initData()
+    {
+    }
+
+    @Override
+    public void showData(IEditItem item)
     {
     }
 
