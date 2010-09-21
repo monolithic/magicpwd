@@ -33,10 +33,14 @@ public class MenuPtn
     private Document document;
     private CoreMdl coreMdl;
     private java.util.regex.Pattern pattern;
+    private java.util.HashMap<String, javax.swing.AbstractButton> buttons;
+    private java.util.HashMap<String, javax.swing.AbstractAction> actions;
 
     public MenuPtn(CoreMdl coreMdl)
     {
         this.coreMdl = coreMdl;
+        buttons = new java.util.HashMap<String, javax.swing.AbstractButton>();
+        actions = new java.util.HashMap<String, javax.swing.AbstractAction>();
     }
 
     public boolean loadData(String uri) throws Exception
@@ -75,8 +79,6 @@ public class MenuPtn
         List elementList = element.elements("menu");
         if (elementList != null)
         {
-            java.util.HashMap<String, javax.swing.JMenu> menus = new java.util.HashMap<String, javax.swing.JMenu>();
-            java.util.HashMap<String, javax.swing.Action> actions = new java.util.HashMap<String, javax.swing.Action>();
             java.util.HashMap<String, javax.swing.ButtonGroup> groups = new java.util.HashMap<String, javax.swing.ButtonGroup>();
             Element tmp;
             for (Object obj : elementList)
@@ -86,7 +88,7 @@ public class MenuPtn
                     continue;
                 }
                 tmp = (Element) obj;
-                javax.swing.JMenu menu = createMenu(tmp, actions, groups, null);
+                javax.swing.JMenu menu = createMenu(tmp, groups, null);
                 if (menu == null)
                 {
                     continue;
@@ -94,14 +96,14 @@ public class MenuPtn
                 menuBar.add(menu);
                 if (Char.isValidate(tmp.attributeValue("id")))
                 {
-                    menus.put(tmp.attributeValue("id"), menu);
+                    buttons.put(tmp.attributeValue("id"), menu);
                 }
             }
 
             final String KEY_SKIN = "skin";
-            if (menus.containsKey(KEY_SKIN))
+            if (buttons.containsKey(KEY_SKIN))
             {
-                javax.swing.JMenu skin = menus.get(KEY_SKIN);
+                javax.swing.JMenu skin = (javax.swing.JMenu) buttons.get(KEY_SKIN);
                 if (skin == null)
                 {
                     skin = new javax.swing.JMenu();
@@ -137,8 +139,6 @@ public class MenuPtn
         List elementList = element.elements("item");
         if (elementList != null)
         {
-            java.util.HashMap<String, javax.swing.JMenu> menus = new java.util.HashMap<String, javax.swing.JMenu>();
-            java.util.HashMap<String, javax.swing.Action> actions = new java.util.HashMap<String, javax.swing.Action>();
             java.util.HashMap<String, javax.swing.ButtonGroup> groups = new java.util.HashMap<String, javax.swing.ButtonGroup>();
             Element tmp;
             for (Object obj : elementList)
@@ -148,22 +148,22 @@ public class MenuPtn
                     continue;
                 }
                 tmp = (Element) obj;
-                javax.swing.JMenu menu = createMenu(tmp, actions, groups, null);
-                if (menu == null)
+                javax.swing.AbstractButton button = createButton(tmp, groups, null);
+                if (button == null)
                 {
                     continue;
                 }
-                toolBar.add(menu);
+                toolBar.add(button);
                 if (Char.isValidate(tmp.attributeValue("id")))
                 {
-                    menus.put(tmp.attributeValue("id"), menu);
+                    buttons.put(tmp.attributeValue("id"), button);
                 }
             }
         }
         return toolBar;
     }
 
-    private javax.swing.JMenu createMenu(Element element, java.util.HashMap<String, javax.swing.Action> actions, java.util.HashMap<String, javax.swing.ButtonGroup> groups, javax.swing.JComponent component)
+    private javax.swing.JMenu createMenu(Element element, java.util.HashMap<String, javax.swing.ButtonGroup> groups, javax.swing.JComponent component)
     {
         javax.swing.JMenu menu = new javax.swing.JMenu();
 
@@ -183,12 +183,12 @@ public class MenuPtn
                 element = (Element) obj;
                 if ("menu".equals(element.getName()))
                 {
-                    menu.add(createMenu(element, actions, groups, component));
+                    menu.add(createMenu(element, groups, component));
                     continue;
                 }
                 if ("item".equals(element.getName()))
                 {
-                    menu.add(createItem(element, actions, groups, component));
+                    menu.add(createItem(element, groups, component));
                     continue;
                 }
                 if ("seperator".equals(element.getName()))
@@ -201,7 +201,7 @@ public class MenuPtn
         return menu;
     }
 
-    private javax.swing.JMenuItem createItem(Element element, java.util.HashMap<String, javax.swing.Action> actions, java.util.HashMap<String, javax.swing.ButtonGroup> groups, javax.swing.JComponent component)
+    private javax.swing.JMenuItem createItem(Element element, java.util.HashMap<String, javax.swing.ButtonGroup> groups, javax.swing.JComponent component)
     {
         javax.swing.JMenuItem item = processType(element);
         processGroup(element, item, groups);
@@ -210,8 +210,8 @@ public class MenuPtn
         processIcon(element, item);
         processCommand(element, item);
         processStrokes(element, item, component);
-        processAction(element, item, actions);
-        processReference(element, item, actions);
+        processAction(element, item);
+        processReference(element, item);
         return item;
     }
 
@@ -389,7 +389,7 @@ public class MenuPtn
         skinMenu.add(feelMenu);
     }
 
-    private javax.swing.JMenuItem processText(Element element, javax.swing.JMenuItem item)
+    private javax.swing.AbstractButton processText(Element element, javax.swing.AbstractButton button)
     {
         String text = element.attributeValue("text");
         if (text != null && pattern.matcher(text).matches())
@@ -397,11 +397,11 @@ public class MenuPtn
             text = text.substring(1).toUpperCase();
             text = Lang.getLang(text, text);
         }
-        Bean.setText(item, text != null ? text : "...");
-        return item;
+        Bean.setText(button, text != null ? text : "...");
+        return button;
     }
 
-    private javax.swing.JMenuItem processTips(Element element, javax.swing.JMenuItem item)
+    private javax.swing.AbstractButton processTips(Element element, javax.swing.AbstractButton button)
     {
         String tips = element.attributeValue("tips");
         if (tips != null && pattern.matcher(tips).matches())
@@ -409,17 +409,36 @@ public class MenuPtn
             tips = tips.substring(1).toUpperCase();
             tips = Lang.getLang(tips, tips);
         }
-        Bean.setTips(item, tips != null ? tips : "...");
-        return item;
+        Bean.setTips(button, tips != null ? tips : "...");
+        return button;
     }
 
-    private static javax.swing.JMenuItem processIcon(Element element, javax.swing.JMenuItem item)
+    private javax.swing.AbstractButton processIcon(Element element, javax.swing.AbstractButton button)
     {
-        item.setIcon(null);
-        item.setRolloverIcon(null);
-        item.setDisabledIcon(null);
-        item.setPressedIcon(null);
-        return item;
+        String icon = element.attributeValue("icon");
+        if (Char.isValidate(icon))
+        {
+            button.setIcon(createIcon(icon));
+        }
+
+        icon = element.attributeValue("icon-rollover");
+        if (Char.isValidate(icon))
+        {
+            button.setRolloverIcon(createIcon(icon));
+        }
+
+        icon = element.attributeValue("icon-pressed");
+        if (Char.isValidate(icon))
+        {
+            button.setPressedIcon(createIcon(icon));
+        }
+
+        icon = element.attributeValue("icon-disabled");
+        if (Char.isValidate(icon))
+        {
+            button.setDisabledIcon(createIcon(icon));
+        }
+        return button;
     }
 
     private static javax.swing.JMenuItem processType(Element element)
@@ -441,7 +460,7 @@ public class MenuPtn
         return new javax.swing.JMenuItem();
     }
 
-    private static javax.swing.JMenuItem processGroup(Element element, javax.swing.JMenuItem item, java.util.HashMap<String, javax.swing.ButtonGroup> groups)
+    private static javax.swing.AbstractButton processGroup(Element element, javax.swing.AbstractButton button, java.util.HashMap<String, javax.swing.ButtonGroup> groups)
     {
         String group = element.attributeValue("group");
         if (Char.isValidate(group))
@@ -452,15 +471,30 @@ public class MenuPtn
                 bg = new javax.swing.ButtonGroup();
                 groups.put(group, bg);
             }
-            bg.add(item);
+            bg.add(button);
         }
-        return item;
+        return button;
     }
 
-    private static javax.swing.JMenuItem processCommand(Element element, javax.swing.JMenuItem item)
+    private static javax.swing.AbstractButton processCommand(Element element, javax.swing.AbstractButton button)
     {
-        item.setActionCommand(element.attributeValue("command"));
-        return item;
+        button.setActionCommand(element.attributeValue("command"));
+        return button;
+    }
+
+    private static javax.swing.AbstractButton processStrokes(Element element, javax.swing.AbstractButton button, javax.swing.JComponent component)
+    {
+        String temp = element.attributeValue("strokes");
+        if (Char.isValidate(temp))
+        {
+            temp = temp.toUpperCase().replaceAll("~|SHIFT", "shift").replaceAll("\\^|CONTROL|CTRL", "control").replaceAll("#|ALT", "alt").replaceAll("!|META", "meta").replaceAll("[^-=`;',./\\[\\]a-zA-Z0-9]+", " ").trim();
+            javax.swing.KeyStroke stroke = javax.swing.KeyStroke.getKeyStroke(temp);
+            if (component != null)
+            {
+                Bean.registerKeyStrokeAction(component, stroke, button.getAction(), null, javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
+            }
+        }
+        return button;
     }
 
     private static javax.swing.JMenuItem processStrokes(Element element, javax.swing.JMenuItem item, javax.swing.JComponent component)
@@ -479,7 +513,7 @@ public class MenuPtn
         return item;
     }
 
-    private javax.swing.JMenuItem processAction(Element element, javax.swing.JMenuItem item, java.util.HashMap<String, javax.swing.Action> actions)
+    private javax.swing.AbstractButton processAction(Element element, javax.swing.AbstractButton item)
     {
         java.util.List list = element.elements("action");
         if (list == null || list.size() < 1)
@@ -490,7 +524,7 @@ public class MenuPtn
         element = (Element) list.get(0);
         String name = element.attributeValue("id");
         boolean validate = Char.isValidate(name);
-        javax.swing.Action action = validate ? actions.get(name) : null;
+        javax.swing.AbstractAction action = validate ? actions.get(name) : null;
         if (action == null)
         {
             String type = element.attributeValue("class");
@@ -499,13 +533,13 @@ public class MenuPtn
                 try
                 {
                     Object obj = Class.forName(type).newInstance();
-                    if (obj instanceof javax.swing.Action)
+                    if (obj instanceof javax.swing.AbstractAction)
                     {
-                        action = (javax.swing.Action) obj;
+                        action = (javax.swing.AbstractAction) obj;
                         if (action instanceof IPwdAction)
                         {
                             IPwdAction pwdAction = (IPwdAction) action;
-                            pwdAction.setMainPtn(TrayPtn.getMainPtn());
+//                            pwdAction.setMainPtn(TrayPtn.getMainPtn());
                             pwdAction.setCoreMdl(coreMdl);
                         }
                         else if (action instanceof IPadAction)
@@ -530,17 +564,17 @@ public class MenuPtn
         return item;
     }
 
-    private static javax.swing.JMenuItem processReference(Element element, javax.swing.JMenuItem item, java.util.HashMap<String, javax.swing.Action> actions)
+    private javax.swing.AbstractButton processReference(Element element, javax.swing.AbstractButton button)
     {
-        if (item.getAction() == null)
+        if (button.getAction() == null)
         {
-            return item;
+            return button;
         }
 
         java.util.List list = element.elements("property");
         if (list == null || list.size() < 1)
         {
-            return item;
+            return button;
         }
 
         String name;
@@ -573,10 +607,10 @@ public class MenuPtn
 
             try
             {
-                java.lang.reflect.Method method = item.getAction().getClass().getDeclaredMethod("set" + Char.lUpper(name), java.net.URL.class);
+                java.lang.reflect.Method method = button.getAction().getClass().getDeclaredMethod("set" + Char.lUpper(name), java.net.URL.class);
                 if (method != null)
                 {
-                    method.invoke(item.getAction(), action);
+                    method.invoke(button.getAction(), action);
                 }
             }
             catch (Exception exp)
@@ -584,12 +618,20 @@ public class MenuPtn
                 Logs.exception(exp);
             }
         }
-        return item;
+        return button;
     }
 
     private javax.swing.Icon createIcon(String path)
     {
-        return null;
+        try
+        {
+            return new javax.swing.ImageIcon(javax.imageio.ImageIO.read(File.open4Read(path)));
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            return null;
+        }
     }
 
     private static String getLang(java.util.Properties prop, String text)
@@ -605,5 +647,28 @@ public class MenuPtn
     private static String getLang(String text)
     {
         return (text != null && java.util.regex.Pattern.matches("^[$]P30F[0123456789ABCDEF]{4}$", text)) ? Lang.getLang(text, text) : text;
+    }
+
+    private javax.swing.AbstractButton createButton(Element element, java.util.HashMap<String, javax.swing.ButtonGroup> groups, javax.swing.JComponent component)
+    {
+        javax.swing.AbstractButton button = null;
+        String type = element.attributeValue("type");
+        if ("toggle".equals(type))
+        {
+            button = new javax.swing.JToggleButton();
+        }
+        else
+        {
+            button = new javax.swing.JButton();
+        }
+        processGroup(element, button, groups);
+        processText(element, button);
+        processTips(element, button);
+        processIcon(element, button);
+        processCommand(element, button);
+        processStrokes(element, button, component);
+        processAction(element, button);
+        processReference(element, button);
+        return button;
     }
 }
