@@ -1,5 +1,6 @@
 package test;
 
+import com.magicpwd._util.Logs;
 import com.magicpwd.v.MenuPtn;
 import java.awt.Dimension;
 import javax.swing.JFrame;
@@ -16,10 +17,10 @@ public class Main
         }
         catch (Exception exp)
         {
-            exp.printStackTrace();
+            Logs.exception(exp);
         }
         JFrame frame = new JFrame();
-        frame.setJMenuBar(ptn.getMenuBar("magicpwd"));
+        frame.setJMenuBar(ptn.getMenuBar("magicpwd", frame.getRootPane()));
         frame.setSize(new Dimension(400, 300));
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

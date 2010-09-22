@@ -10,20 +10,30 @@ import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.MenuPtn;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
+import javax.swing.JMenuBar;
 
 /**
  *
  * @author Administrator
  */
-public class Menu
+public class Menu extends javax.swing.AbstractAction
 {
+
+    private JFrame frame;
+    private JMenuBar bar;
+    private CoreMdl coreMdl;
 
     public Menu()
     {
-        final CoreMdl coreMdl = new CoreMdl();
+    }
+
+    public void init()
+    {
+        coreMdl = new CoreMdl();
         coreMdl.preLoad();
         coreMdl.loadCfg();
 
@@ -40,8 +50,9 @@ public class Menu
             exp.printStackTrace();
         }
 
-        JFrame frame = new JFrame();
-        frame.setJMenuBar(ptn.getMenuBar("magicpwd"));
+        frame = new JFrame();
+        bar = ptn.getMenuBar("magicpwd", frame.getRootPane());
+        frame.setJMenuBar(bar);
 
         frame.getContentPane().add(ptn.getToolBar("magicpwd"), BorderLayout.NORTH);
 
@@ -64,6 +75,12 @@ public class Menu
 
     public static void main(String args[])
     {
-        new Menu();
+        new Menu().init();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae)
+    {
+        bar.setVisible(!bar.isVisible());
     }
 }
