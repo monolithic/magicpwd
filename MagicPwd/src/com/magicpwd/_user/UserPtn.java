@@ -14,7 +14,7 @@ import com.magicpwd.u.DBU3000;
 import com.magicpwd.v.TrayPtn;
 import javax.imageio.ImageIO;
 
-public class UserSign extends javax.swing.JPanel
+public class UserPtn extends javax.swing.JPanel
 {
 
     /**
@@ -49,7 +49,7 @@ public class UserSign extends javax.swing.JPanel
      * 独立窗口
      * @param type
      */
-    public UserSign(UserCfg userCfg, SafeMdl safeMdl)
+    public UserPtn(UserCfg userCfg, SafeMdl safeMdl)
     {
         this.userCfg = userCfg;
         this.safeMdl = safeMdl;
@@ -64,7 +64,7 @@ public class UserSign extends javax.swing.JPanel
      * @param type
      * @param frame
      */
-    public UserSign(javax.swing.JFrame frame)
+    public UserPtn(javax.swing.JFrame frame)
     {
         dialog = new javax.swing.JDialog(frame, true);
         dialog.setResizable(false);

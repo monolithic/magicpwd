@@ -8,7 +8,7 @@ import com.magicpwd._comn.Kind;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
-import com.magicpwd._user.UserSign;
+import com.magicpwd._user.UserPtn;
 import com.magicpwd._util.Jcsv;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -43,7 +43,7 @@ public class ImportAction extends javax.swing.AbstractAction implements IPwdActi
             return;
         }
 
-        UserSign us = new UserSign(TrayPtn.getCurrForm());
+        UserPtn us = new UserPtn(TrayPtn.getCurrForm());
         us.setBackCall(new IBackCall()
         {
 

@@ -21,6 +21,7 @@ public class FindVisableAction extends javax.swing.AbstractAction implements IPw
 
     public FindVisableAction()
     {
+        putValue(NAME, "com.magicpwd.e.pwd.view.FindVisableAction");
     }
 
     @Override

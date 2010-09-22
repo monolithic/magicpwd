@@ -21,6 +21,7 @@ public class InfoVisableAction extends javax.swing.AbstractAction implements IPw
 
     public InfoVisableAction()
     {
+        putValue(NAME, "com.magicpwd.e.pwd.view.InfoVisableAction");
     }
 
     @Override

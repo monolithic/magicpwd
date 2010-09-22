@@ -39,7 +39,6 @@ import com.magicpwd.m.SafeMdl;
 import com.magicpwd.r.KeysCR;
 import com.magicpwd.r.KindTN;
 import com.magicpwd.r.TreeCR;
-import com.magicpwd.v.MenuPop;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.TrayPtn;
 import com.magicpwd.x.MdiDialog;
@@ -55,9 +54,9 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
     private HintBar mainInfo;
     private javax.swing.JMenuBar mainMenu;
     private javax.swing.JToolBar mainTool;
-    private MenuPop gridMenu;
-    private MenuPop treeMenu;
-    private MenuPop listMenu;
+    private javax.swing.JPopupMenu kindMenu;
+    private javax.swing.JPopupMenu listMenu;
+    private javax.swing.JPopupMenu gridMenu;
     private MenuPtn menuPtn;
     /**
      * 口令列表上次选择索引
@@ -96,6 +95,17 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
     {
         UserCfg cfg = coreMdl.getUserCfg();
 
+        try
+        {
+            java.io.File file = new java.io.File(ConsEnv.DIR_DAT, "menu.xml");
+            menuPtn = new MenuPtn(coreMdl);
+            menuPtn.loadData(file);
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+
         initGuidView();
         initPropView();
         initUserView();
@@ -103,23 +113,13 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
         this.getContentPane().add(pl_KeysBase);
 
-        try
-        {
-            java.io.File file = new java.io.File(ConsEnv.DIR_DAT, "menu.xml");
-            menuPtn = new MenuPtn(coreMdl);
-            menuPtn.loadData(file);
-            mainMenu = menuPtn.getMenuBar("magicpwd");
-            mainMenu.setVisible(cfg.isMenuViw());
-            this.setJMenuBar(mainMenu);
+        mainMenu = menuPtn.getMenuBar("magicpwd", getRootPane());
+        mainMenu.setVisible(cfg.isMenuViw());
+        this.setJMenuBar(mainMenu);
 
-            mainTool = menuPtn.getToolBar("magicpwd");
-            mainTool.setVisible(cfg.isToolViw());
-            this.getContentPane().add(mainTool, cfg.getToolLoc());
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-        }
+        mainTool = menuPtn.getToolBar("magicpwd");
+        mainTool.setVisible(cfg.isToolViw());
+        this.getContentPane().add(mainTool, cfg.getToolLoc());
 
         mainFind.setVisible(cfg.isFindViw());
 
@@ -149,10 +149,13 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
             showPropEdit(cfg.isEditWnd());
         }
 
-//        mainMenu.initData();
-//        mainTool.initData();
         mainInfo.initData();
         mainFind.initData();
+
+        for (IEditBean bean : editBean)
+        {
+            bean.initData();
+        }
 
         showPropEdit();
     }
@@ -200,7 +203,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
     public void setMenuBeanVisible(boolean visible)
     {
-        mainInfo.setVisible(visible);
+        mainMenu.setVisible(visible);
     }
 
     public void setToolBeanVisible(boolean visible)
@@ -423,13 +426,10 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         sp.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         sp.setOneTouchExpandable(true);
 
-        treeMenu = new MenuPop(MenuPop.MENU_TREE);
-//        treeMenu.initView();
-//        treeMenu.setToolEvent(this);
-//        treeMenu.setMenuEvent(this);
+        kindMenu = menuPtn.getMenuPop("mpwdkind");
 
         tr_GuidTree = new javax.swing.JTree();
-        tr_GuidTree.setComponentPopupMenu(treeMenu);
+        tr_GuidTree.setComponentPopupMenu(kindMenu);
         tr_GuidTree.setCellRenderer(new TreeCR());
         tr_GuidTree.setModel(coreMdl.getTreeMdl());
         tr_GuidTree.getSelectionModel().setSelectionMode(javax.swing.tree.TreeSelectionModel.SINGLE_TREE_SELECTION);
@@ -448,10 +448,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         sp1.setViewportView(tr_GuidTree);
         sp.setTopComponent(sp1);
 
-        listMenu = new MenuPop(MenuPop.MENU_LIST);
-//        listMenu.initView();
-//        listMenu.setToolEvent(this);
-//        listMenu.setMenuEvent(this);
+        listMenu = menuPtn.getMenuPop("mpwdlist");
 
         ls_GuidList = new javax.swing.JList();
         ls_GuidList.setComponentPopupMenu(listMenu);
@@ -492,10 +489,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         mainFind = new FindBar(this, coreMdl.getListMdl());
         mainFind.initView();
 
-        gridMenu = new MenuPop(MenuPop.MENU_GRID);
-//        gridMenu.initView();
-//        gridMenu.setToolEvent(this);
-//        gridMenu.setMenuEvent(this);
+        gridMenu = menuPtn.getMenuPop("mpwdgrid");
 
         tb_KeysView = new javax.swing.JTable();
         tb_KeysView.setModel(gridMdl);
@@ -649,8 +643,6 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
     private void initGuidLang()
     {
-//        gridMenu.initLang();
-
         Lang.setWTips(tr_GuidTree, LangRes.P30F7B08, "类别列表(Alt + G)");
         Lang.setWTips(ls_GuidList, LangRes.P30F7B09, "口令列表(Alt + K)");
         Lang.setWTips(sp_KeysView, LangRes.P30F7B0A, "属性列表(Alt + T)");
@@ -670,12 +662,8 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
     private void initBaseLang()
     {
-//        mainMenu.initLang();
-//        mainTool.initLang();
         mainInfo.initLang();
         mainFind.initLang();
-//        treeMenu.initLang();
-//        listMenu.initLang();
     }
 
     @Override

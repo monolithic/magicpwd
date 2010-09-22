@@ -3,7 +3,7 @@ package com.magicpwd;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._face.IBackCall;
-import com.magicpwd._user.UserSign;
+import com.magicpwd._user.UserPtn;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
@@ -37,17 +37,6 @@ public class MagicPwd
         // 数据完整性处理
         zipData();
 
-        // 用户配置文件加载
-        final UserCfg cfg = new UserCfg();
-        cfg.loadCfg();
-        //UserMdl.loadUserCfg();
-
-        // 扩展皮肤加载
-        loadLnF(cfg);
-
-        // 语言资源加载
-        Lang.loadLang(cfg);
-
         // 界面风格设置
         try
         {
@@ -57,10 +46,21 @@ public class MagicPwd
                 @Override
                 public void run()
                 {
-                    TrayPtn.setUserCfg(cfg);
+                    // 用户配置文件加载
+                    UserCfg cfg = new UserCfg();
+                    cfg.loadCfg();
+                    //UserMdl.loadUserCfg();
+
+                    // 语言资源加载
+                    Lang.loadLang(cfg);
+
+                    //TrayPtn.setUserCfg(cfg);
+
+                    // 扩展皮肤加载
+                    loadLnF(cfg);
 
                     // 显示登录或注册界面
-                    UserSign us = TrayPtn.getUserSign(cfg.getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.INT_SIGN_IN : ConsEnv.INT_SIGN_UP);
+                    UserPtn us = TrayPtn.getUserPtn(cfg);
                     us.setBackCall(new IBackCall()
                     {
 
@@ -233,8 +233,6 @@ public class MagicPwd
 
     private static void preLoad()
     {
-        //UserMdl.preLoad();
-
         try
         {
             Class.forName("org.hsqldb.jdbcDriver");
