@@ -253,10 +253,7 @@ public class MenuPtn
         processIcon(element, item);
         processEnabled(element, item);
         processVisible(element, item);
-        processCommand(element, item);
-        processStrokes(element, item, component);
-        processAction(element, item);
-        processReference(element, item);
+        processAction(element, item, component);
         return item;
     }
 
@@ -454,7 +451,7 @@ public class MenuPtn
             tips = tips.substring(1).toUpperCase();
             tips = Lang.getLang(tips, tips);
         }
-        Bean.setTips(button, tips != null ? tips : "...");
+        Bean.setTips(button, tips);
         return button;
     }
 
@@ -547,43 +544,40 @@ public class MenuPtn
         return button;
     }
 
-    private static javax.swing.AbstractButton processStrokes(Element element, javax.swing.AbstractButton button, javax.swing.JComponent component)
+    private static javax.swing.AbstractButton processStrokes(Element element, javax.swing.AbstractButton button, javax.swing.AbstractAction action, javax.swing.JComponent component)
     {
-        String temp = element.attributeValue("strokes");
-        if (Char.isValidate(temp))
+        java.util.List list = element.elements("stroke");
+        if (list == null || list.size() < 1)
         {
-            temp = temp.toUpperCase().replaceAll("~|SHIFT", "shift").replaceAll("\\^|CONTROL|CTRL", "control").replaceAll("#|ALT", "alt").replaceAll("!|META", "meta").replaceAll("[^-=`;',./\\[\\]a-zA-Z0-9]+", " ").trim();
-            javax.swing.KeyStroke stroke = javax.swing.KeyStroke.getKeyStroke(temp);
-            if (component != null)
+            return button;
+        }
+
+        for (Object obj : list)
+        {
+            String temp = ((Element) obj).attributeValue("key");
+            if (Char.isValidate(temp))
             {
-                Bean.registerKeyStrokeAction(component, stroke, button.getAction(), null, javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
+                temp = temp.toUpperCase().replaceAll("~|SHIFT", "shift").replaceAll("\\^|CONTROL|CTRL", "control").replaceAll("#|ALT", "alt").replaceAll("!|META", "meta").replaceAll("[^-=`;',./\\[\\]a-zA-Z0-9]+", " ").trim();
+                javax.swing.KeyStroke stroke = javax.swing.KeyStroke.getKeyStroke(temp);
+                if (component != null)
+                {
+                    Bean.registerKeyStrokeAction(component, stroke, action, temp, javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
+                }
+                if (button instanceof javax.swing.JMenuItem)
+                {
+                    ((javax.swing.JMenuItem) button).setAccelerator(stroke);
+                }
             }
         }
         return button;
     }
 
-    private static javax.swing.JMenuItem processStrokes(Element element, javax.swing.JMenuItem item, javax.swing.JComponent component)
-    {
-        String temp = element.attributeValue("strokes");
-        if (Char.isValidate(temp))
-        {
-            temp = temp.toUpperCase().replaceAll("~|SHIFT", "shift").replaceAll("\\^|CONTROL|CTRL", "control").replaceAll("#|ALT", "alt").replaceAll("!|META", "meta").replaceAll("[^-=`;',./\\[\\]a-zA-Z0-9]+", " ").trim();
-            javax.swing.KeyStroke stroke = javax.swing.KeyStroke.getKeyStroke(temp);
-            if (component != null)
-            {
-                Bean.registerKeyStrokeAction(component, stroke, item.getAction(), temp, javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
-            }
-            item.setAccelerator(stroke);
-        }
-        return item;
-    }
-
-    private javax.swing.AbstractButton processAction(Element element, javax.swing.AbstractButton item)
+    private javax.swing.AbstractButton processAction(Element element, javax.swing.AbstractButton button, javax.swing.JComponent component)
     {
         java.util.List list = element.elements("action");
         if (list == null || list.size() < 1)
         {
-            return item;
+            return button;
         }
 
         element = (Element) list.get(0);
@@ -625,17 +619,15 @@ public class MenuPtn
                 }
             }
         }
-        item.addActionListener(action);
-        return item;
+        button.addActionListener(action);
+        processCommand(element, button);
+        processStrokes(element, button, action, component);
+        processReference(element, button, action);
+        return button;
     }
 
-    private javax.swing.AbstractButton processReference(Element element, javax.swing.AbstractButton button)
+    private javax.swing.AbstractButton processReference(Element element, javax.swing.AbstractButton button, javax.swing.AbstractAction action)
     {
-        if (button.getAction() == null)
-        {
-            return button;
-        }
-
         java.util.List list = element.elements("property");
         if (list == null || list.size() < 1)
         {
@@ -644,7 +636,6 @@ public class MenuPtn
 
         String name;
         String refId;
-        javax.swing.Action action;
         for (int i = 0, j = list.size(); i < j; i += 1)
         {
             element = (Element) list.get(i);
@@ -748,10 +739,7 @@ public class MenuPtn
         processIcon(element, button);
         processEnabled(element, button);
         processVisible(element, button);
-        processCommand(element, button);
-        processStrokes(element, button, component);
-        processAction(element, button);
-        processReference(element, button);
+        processAction(element, button, component);
         return button;
     }
 }
