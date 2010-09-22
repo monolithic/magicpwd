@@ -2,7 +2,7 @@
     Document   : card.xml
     Created on : 2010年6月24日, 上午9:35
     Author     : Amon
-    Description: 数据导出卡片信息格式模板。
+    Description: 《魔方密码》数据导出卡片信息格式模板。
 -->
 <?xml version="1.0" encoding="UTF-8"?>
 <magicpwd>
