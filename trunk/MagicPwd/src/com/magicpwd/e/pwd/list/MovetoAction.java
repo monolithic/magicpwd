@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.magicpwd.e.pwd.kind;
+package com.magicpwd.e.pwd.list;
 
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
