@@ -13,13 +13,13 @@ import com.magicpwd.v.pwd.MainPtn;
  *
  * @author Amon
  */
-public class InfoVisableAction extends javax.swing.AbstractAction implements IPwdAction
+public class InfoVisibleAction extends javax.swing.AbstractAction implements IPwdAction
 {
 
     private MainPtn mainPtn;
     private CoreMdl coreMdl;
 
-    public InfoVisableAction()
+    public InfoVisibleAction()
     {
         putValue(NAME, "com.magicpwd.e.pwd.view.InfoVisableAction");
     }

@@ -121,7 +121,6 @@ public class Bean
             javax.swing.ActionMap actionMap = component.getActionMap();
             if (actionMap != null)
             {
-                System.out.println(stroke + "  " + action);
                 actionMap.put(command, action);
             }
         }

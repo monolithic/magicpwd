@@ -13,28 +13,30 @@ import com.magicpwd.v.pwd.MainPtn;
  *
  * @author Amon
  */
-public class FindVisableAction extends javax.swing.AbstractAction implements IPwdAction
+public class EditVisibleAction extends javax.swing.AbstractAction implements IPwdAction
 {
 
     private MainPtn mainPtn;
     private CoreMdl coreMdl;
 
-    public FindVisableAction()
+    public EditVisibleAction()
     {
-        putValue(NAME, "com.magicpwd.e.pwd.view.FindVisableAction");
     }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
         UserCfg cfg = coreMdl.getUserCfg();
-
-        boolean b = !cfg.isFindViw();
-        mainPtn.setFindBeanVisible(b);
-        mainPtn.pack();
-
-        //mainMenu.setViewFindSelected(b);
-        cfg.setFindViw(b);
+        boolean b = !cfg.isEditVisible();
+        if (b)
+        {
+            mainPtn.showPropEdit();
+        }
+        else
+        {
+            mainPtn.setEditBeanVisible(b);
+        }
+        cfg.setEditViw(b);
     }
 
     @Override

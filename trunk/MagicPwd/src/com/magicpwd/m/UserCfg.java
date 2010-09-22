@@ -323,7 +323,7 @@ public final class UserCfg
     /**
      * @return the editViw
      */
-    public final boolean isEditViw()
+    public final boolean isEditVisible()
     {
         return ConsCfg.DEF_TRUE.equalsIgnoreCase(userCfg.getProperty(ConsCfg.CFG_VIEW_EDIT_VIW, ConsCfg.DEF_TRUE));
     }
@@ -335,14 +335,6 @@ public final class UserCfg
     public final void setEditViw(boolean editViw)
     {
         userCfg.setProperty(ConsCfg.CFG_VIEW_EDIT_VIW, editViw ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
-    }
-
-    /**
-     * @return the propSpt
-     */
-    public final boolean isEditWnd()
-    {
-        return ConsCfg.DEF_TRUE.equalsIgnoreCase(userCfg.getProperty(ConsCfg.CFG_VIEW_EDIT_WND));
     }
 
     /**

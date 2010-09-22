@@ -60,6 +60,16 @@ public class MenuPtn
         return document != null;
     }
 
+    public javax.swing.AbstractButton getButton(String id)
+    {
+        return buttons.get(id);
+    }
+
+    public javax.swing.AbstractAction getAction(String id)
+    {
+        return actions.get(id);
+    }
+
     public javax.swing.JMenuBar getMenuBar(String menuId, javax.swing.JComponent component)
     {
         if (!Char.isValidate(menuId) || document == null)

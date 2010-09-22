@@ -13,30 +13,27 @@ import com.magicpwd.v.pwd.MainPtn;
  *
  * @author Amon
  */
-public class EditVisableAction extends javax.swing.AbstractAction implements IPwdAction
+public class MenuVisibleAction extends javax.swing.AbstractAction implements IPwdAction
 {
 
     private MainPtn mainPtn;
     private CoreMdl coreMdl;
 
-    public EditVisableAction()
+    public MenuVisibleAction()
     {
+        putValue(NAME, "com.magicpwd.e.pwd.view.MenuVisableAction");
     }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
         UserCfg cfg = coreMdl.getUserCfg();
-        boolean b = !cfg.isEditViw();
-        if (b)
-        {
-            mainPtn.showPropEdit(cfg.isEditWnd());
-        }
-        else
-        {
-            mainPtn.setEditBeanVisible(b);
-        }
-        cfg.setEditViw(b);
+
+        boolean b = !cfg.isMenuViw();
+        mainPtn.setMenuBeanVisible(b);
+        mainPtn.pack();
+
+        cfg.setMenuViw(b);
     }
 
     @Override

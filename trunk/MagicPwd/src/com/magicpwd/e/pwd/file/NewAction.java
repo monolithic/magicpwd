@@ -38,8 +38,9 @@ public class NewAction extends javax.swing.AbstractAction implements IPwdAction
 
         //tb_LastIndx = 0;
         mainPtn.clearGrid();
-        if (!coreMdl.getUserCfg().isEditViw())
+        if (!coreMdl.getUserCfg().isEditVisible())
         {
+            mainPtn.getMenuPtn().getButton("").setSelected(true);
 //            mainMenu.setViewPropSelected(true);
 //            mainMenu.setViewSideSelected(true);
             coreMdl.getUserCfg().setEditViw(true);

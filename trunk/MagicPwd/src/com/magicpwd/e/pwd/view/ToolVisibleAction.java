@@ -13,13 +13,13 @@ import com.magicpwd.v.pwd.MainPtn;
  *
  * @author Amon
  */
-public class ToolVisableAction extends javax.swing.AbstractAction implements IPwdAction
+public class ToolVisibleAction extends javax.swing.AbstractAction implements IPwdAction
 {
 
     private MainPtn mainPtn;
     private CoreMdl coreMdl;
 
-    public ToolVisableAction()
+    public ToolVisibleAction()
     {
         putValue(NAME, "com.magicpwd.e.pwd.view.ToolVisableAction");
     }

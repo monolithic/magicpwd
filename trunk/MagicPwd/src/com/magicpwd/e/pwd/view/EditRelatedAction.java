@@ -28,7 +28,7 @@ public class EditRelatedAction extends javax.swing.AbstractAction implements IPw
     {
         UserCfg cfg = coreMdl.getUserCfg();
 
-        boolean b = !cfg.isEditWnd();
+        boolean b = false;//!cfg.isEditWnd();
 
         // if (!cfg.isEditViw())
         // {
@@ -37,7 +37,7 @@ public class EditRelatedAction extends javax.swing.AbstractAction implements IPw
         // return;
         // }
 
-        if (cfg.isEditViw())
+        if (cfg.isEditVisible())
         {
             mainPtn.showPropEdit(b);
         }
