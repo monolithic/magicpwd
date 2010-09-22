@@ -144,9 +144,9 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
     public void initData()
     {
         UserCfg cfg = coreMdl.getUserCfg();
-        if (cfg.isEditViw())
+        if (cfg.isEditVisible())
         {
-            showPropEdit(cfg.isEditWnd());
+            showPropEdit();
         }
 
         mainInfo.initData();
@@ -180,6 +180,11 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
             }
         }
         super.setVisible(visible);
+    }
+
+    public MenuPtn getMenuPtn()
+    {
+        return menuPtn;
     }
 
     public void setEditBeanVisible(boolean visible)
@@ -789,7 +794,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
     public void showPropEdit()
     {
-        if (coreMdl.getUserCfg().isEditViw())
+        if (coreMdl.getUserCfg().isEditVisible())
         {
             editBean[ConsDat.INDX_INFO].showData(null);
             cl_CardProp.show(pl_CardProp, ConsEnv.BEAN_INFO);
@@ -799,22 +804,54 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
     public void showPropEdit(IEditItem tplt, boolean focus)
     {
-        if (coreMdl.getUserCfg().isEditViw())
+        if (coreMdl.getUserCfg().isEditVisible())
         {
             editBean[tplt.getType()].showData(tplt);
             cl_CardProp.show(pl_CardProp, ConsEnv.BEAN_PROP + tplt.getType());
+
             if (focus)
             {
                 editBean[tplt.getType()].requestFocus();
             }
-            if (coreMdl.getUserCfg().isEditWnd())
+
+            border.setTitle(getPropName(tplt.getType()));
+        }
+    }
+
+    public void showPropEdit(boolean editWnd)
+    {
+        pl_KeysEdit.setVisible(!editWnd);
+
+        if (editWnd)
+        {
+            if (md_MpsDialog != null)
             {
-                md_MpsDialog.setTitle(getPropName(tplt.getType()));
+                md_MpsDialog.setPropView(pl_CardProp);
             }
             else
             {
-                border.setTitle(getPropName(tplt.getType()));
-                pl_KeysEdit.repaint();
+                md_MpsDialog = new MpsDialog(this);
+                md_MpsDialog.initView();
+                md_MpsDialog.initLang();
+                md_MpsDialog.setPropView(pl_CardProp);
+                md_MpsDialog.pack();
+                md_MpsDialog.setResizable(false);
+                java.awt.Dimension a = md_MpsDialog.getSize();
+                java.awt.Dimension b = TrayPtn.getCurrForm().getSize();
+                java.awt.Point p = TrayPtn.getCurrForm().getLocation();
+                md_MpsDialog.setLocation(p.x + b.width, p.y + b.height - a.height);
+            }
+            if (!md_MpsDialog.isVisible())
+            {
+                md_MpsDialog.setVisible(true);
+            }
+        }
+        else
+        {
+            pl_KeysEdit.add(pl_CardProp);
+            if (md_MpsDialog != null && md_MpsDialog.isVisible())
+            {
+                md_MpsDialog.setVisible(false);
             }
         }
     }
@@ -878,44 +915,6 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         }
     }
 
-    public void showPropEdit(boolean editWnd)
-    {
-        pl_KeysEdit.setVisible(!editWnd);
-
-        if (editWnd)
-        {
-            if (md_MpsDialog != null)
-            {
-                md_MpsDialog.setPropView(pl_CardProp);
-            }
-            else
-            {
-                md_MpsDialog = new MpsDialog(TrayPtn.getCurrForm(), this);
-                md_MpsDialog.initView();
-                md_MpsDialog.initLang();
-                md_MpsDialog.setPropView(pl_CardProp);
-                md_MpsDialog.pack();
-                md_MpsDialog.setResizable(false);
-                java.awt.Dimension a = md_MpsDialog.getSize();
-                java.awt.Dimension b = TrayPtn.getCurrForm().getSize();
-                java.awt.Point p = TrayPtn.getCurrForm().getLocation();
-                md_MpsDialog.setLocation(p.x + b.width, p.y + b.height - a.height);
-            }
-            if (!md_MpsDialog.isVisible())
-            {
-                md_MpsDialog.setVisible(true);
-            }
-        }
-        else
-        {
-            pl_KeysEdit.add(pl_CardProp);
-            if (md_MpsDialog != null && md_MpsDialog.isVisible())
-            {
-                md_MpsDialog.setVisible(false);
-            }
-        }
-    }
-
     private boolean checkData()
     {
         if (tb_KeysView.getRowCount() == 1)
@@ -929,7 +928,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
             return true;
         }
 
-        if (!coreMdl.getUserCfg().isEditViw())
+        if (!coreMdl.getUserCfg().isEditVisible())
         {
 //            mainMenu.setViewPropSelected(true);
 //            mainMenu.setViewSideSelected(true);

@@ -13,15 +13,15 @@ import com.magicpwd.v.pwd.MainPtn;
  *
  * @author Amon
  */
-public class MenuVisableAction extends javax.swing.AbstractAction implements IPwdAction
+public class FindVisibleAction extends javax.swing.AbstractAction implements IPwdAction
 {
 
     private MainPtn mainPtn;
     private CoreMdl coreMdl;
 
-    public MenuVisableAction()
+    public FindVisibleAction()
     {
-        putValue(NAME, "com.magicpwd.e.pwd.view.MenuVisableAction");
+        putValue(NAME, "com.magicpwd.e.pwd.view.FindVisableAction");
     }
 
     @Override
@@ -29,11 +29,12 @@ public class MenuVisableAction extends javax.swing.AbstractAction implements IPw
     {
         UserCfg cfg = coreMdl.getUserCfg();
 
-        boolean b = !cfg.isMenuViw();
-        mainPtn.setMenuBeanVisible(b);
+        boolean b = !cfg.isFindViw();
+        mainPtn.setFindBeanVisible(b);
         mainPtn.pack();
 
-        cfg.setMenuViw(b);
+        //mainMenu.setViewFindSelected(b);
+        cfg.setFindViw(b);
     }
 
     @Override

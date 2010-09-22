@@ -5,23 +5,21 @@ package com.magicpwd.x;
 
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
-import com.magicpwd._util.Util;
-import com.magicpwd.c.MPwdEvt;
+import com.magicpwd.v.pwd.MainPtn;
 
 /**
  * 属性编辑独立窗口
  * @author Amon
- * 
  */
 public class MpsDialog extends javax.swing.JDialog
 {
 
-    private MPwdEvt menuEvt;
+    private MainPtn mainPtn;
 
-    public MpsDialog(javax.swing.JFrame frame, MPwdEvt menuEvt)
+    public MpsDialog(MainPtn mainPtn)
     {
-        super(frame);
-        this.menuEvt = menuEvt;
+        super(mainPtn);
+        this.mainPtn = mainPtn;
     }
 
     public void initView()
