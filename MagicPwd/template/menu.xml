@@ -1,0 +1,87 @@
+<!--
+    Document   : menu.xml
+    Created on : 2010年8月1日, 下午8:21
+    Author     : Amon
+    Description: 《魔方密码》软件菜单配置文档格式模板。
+                 部分快捷键替换字符说明：
+                 ~ shift
+                 # alt
+                 ^ ctrl或者control
+                 ! meta
+-->
+<?xml version="1.0" encoding="UTF-8"?>
+<magicpwd>
+    <!--菜单栏配置模板-->
+    <menubar id="template">
+        <menu id="foo" text="菜单1" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true">
+            <item type="normal" text="普通菜单项" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true">
+                <action id="testAction1" class="com.magicpwd.e.TestAction" command="哈哈！！">
+                    <stroke key="^ N"/>
+                    <stroke key="ctrl M"/>
+                </action>
+            </item>
+            <seperator />
+            <item type="checkbox" text="复选菜单项" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true" group="" checked="true">
+                <action id="testAction2" class="" command="">
+                    <stroke key="^ A" />
+                    <property name="ortherAction" refId="testAction1" />
+                </action>
+            </item>
+            <item type="radiobox" text="单选菜单项" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true" group="" checked="true">
+                <action id="testAction3" class="com.magicpwd.e.TestAction" command="testAction1">
+                    <stroke key="! W" />
+                </action>
+            </item>
+        </menu>
+        <menu id="bar" text="菜单2" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true">
+            <item type="normal" text="普通菜单项" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true">
+                <action id="" class="com.magicpwd.e.TestAction" command="哈哈！！">
+                    <stroke key="^ # T"/>
+                    <property name="ortherAction" refId="testAction2" />
+                </action>
+            </item>
+        </menu>
+    </menubar>
+    <!--工具栏配置模板-->
+    <toolbar id="template">
+        <item type="normal" text="" tips="普通菜单项" icon="http://magicpwd.com/logo/logo10.png" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true">
+            <action id="" class="com.magicpwd.e.TestAction" stroke="^ N" command="哈哈！！">
+                <stroke key="^ N" />
+            </action>
+        </item>
+        <item type="toggle" text="" tips="普通菜单项" icon="logo/logo.png" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true">
+            <action id="" class="com.magicpwd.e.TestAction" />
+        </item>
+    </toolbar>
+    <!--弹出菜单配置模板-->
+    <menupop id="template">
+        <item type="normal" text="普通菜单项" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true">
+            <action id="" class="com.magicpwd.e.TestAction" command="哈哈！！">
+                <stroke key="^ N"/>
+            </action>
+        </item>
+        <menu id="foo" text="菜单1" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true">
+            <item type="normal" text="普通菜单项" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true">
+                <action id="" class="com.magicpwd.e.TestAction" command="哈哈！！">
+                    <stroke key="^ N"/>
+                    <stroke key=""/>
+                    <property name="" refId="" />
+                    <property name="" refId="" />
+                </action>
+            </item>
+            <seperator />
+            <item type="checkbox" text="复选菜单项" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true" group="" checked="true">
+                <action id="" class="" command="">
+                    <stroke key="" />
+                    <property name="" refId="" />
+                </action>
+            </item>
+            <item type="radiobox" text="单选菜单项" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true" group="" checked="true">
+                <action id="" class="" command="">
+                    <stroke key="" />
+                    <property name="" refId="" />
+                </action>
+            </item>
+        </menu>
+    </menupop>
+</magicpwd>
