@@ -15,254 +15,322 @@
 <magicpwd>
     <!--代码配置模板-->
     <menubar id="template">
-        <menu id="foo" text="菜单1" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
-            <item type="normal" text="普通菜单项" tips="" icon="" strokes="^ N" command="哈哈！！">
-                <action id="" class="com.magicpwd.e.TestAction" />
-                <property name="" refId="" />
-                <property name="" refId="" />
+        <menu id="foo" text="菜单1" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true">
+            <item type="normal" text="普通菜单项" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true">
+                <action id="" class="com.magicpwd.e.TestAction" command="哈哈！！">
+                    <stroke key="^ N"/>
+                    <stroke key=""/>
+                    <property name="" refId="" />
+                    <property name="" refId="" />
+                </action>
             </item>
             <seperator />
-            <item type="checkbox" text="复选菜单项" tips="" icon="" strokes="" command="" group="" checked="true">
-                <action id="" class="" />
-                <property name="" refId="" />
-                <property name="" refId="" />
+            <item type="checkbox" text="复选菜单项" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true" group="" checked="true">
+                <action id="" class="" command="">
+                    <stroke key="" />
+                    <property name="" refId="" />
+                </action>
             </item>
-            <item type="radiobox" text="单选菜单项" tips="" icon="" strokes="" command="" group="" checked="true">
-                <action id="" class="" />
-                <property name="" refId="" />
-                <property name="" refId="" />
+            <item type="radiobox" text="单选菜单项" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true" group="" checked="true">
+                <action id="" class="" command="">
+                    <stroke key="" />
+                    <property name="" refId="" />
+                </action>
             </item>
         </menu>
-        <menu id="bar" text="菜单2" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
+        <menu id="bar" text="菜单2" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true">
+            <item type="normal" text="普通菜单项" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true">
+                <action id="" class="com.magicpwd.e.TestAction" command="哈哈！！">
+                    <stroke key="^ T"/>
+                    <property name="" refId="" />
+                </action>
+            </item>
         </menu>
     </menubar>
 
     <toolbar id="template">
-        <item type="normal" text="" tips="普通菜单项" icon="http://magicpwd.com/logo/logo10.png" strokes="^ N" command="哈哈！！">
-            <action id="" class="com.magicpwd.e.TestAction" />
-            <property name="" refId="" />
-            <property name="" refId="" />
+        <item type="normal" text="" tips="普通菜单项" icon="http://magicpwd.com/logo/logo10.png" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true">
+            <action id="" class="com.magicpwd.e.TestAction" stroke="^ N" command="哈哈！！">
+                <stroke key="^ N" />
+            </action>
         </item>
-        <item type="toggle" text="" tips="普通菜单项" icon="http://magicpwd.com/logo/logo10.png" strokes="^ N" command="哈哈！！">
+        <item type="toggle" text="" tips="普通菜单项" icon="logo/logo.png" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true">
             <action id="" class="com.magicpwd.e.TestAction" />
-            <property name="" refId="" />
-            <property name="" refId="" />
         </item>
     </toolbar>
 
     <!--魔方密码菜单栏-->
     <menubar id="magicpwd">
-        <menu id="file" text="$P30F7601" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
+        <menu id="file" text="$P30F7601">
             <!--新增-->
-            <item type="normal" text="$P30F7602" tips="" icon="" strokes="^ N" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.NewAction" />
-                <property name="" ref-id="" />
+            <item type="normal" text="$P30F7602">
+                <action id="new-keys" class="com.magicpwd.e.pwd.file.NewAction">
+                    <stroke key="^ N" />
+                </action>
             </item>
             <!--保存-->
-            <item type="normal" text="$P30F7603" tips="" icon="" strokes="^ S" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.SaveAction" />
-                <property name="" refId="" />
+            <item type="normal" text="$P30F7603">
+                <action id="save-keys" class="com.magicpwd.e.pwd.file.SaveAction">
+                    <stroke key="^ S" />
+                </action>
             </item>
             <!--隐藏窗口-->
-            <item type="normal" text="$P30F7604" tips="" icon="" strokes="^ H" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.HideAction" />
-                <property name="" refId="" />
+            <item type="normal" text="$P30F7604">
+                <action id="hide-window" class="com.magicpwd.e.pwd.file.HideAction">
+                    <stroke key="^ H" />
+                </action>
             </item>
             <!--退出-->
-            <item type="normal" text="$P30F7605" tips="" icon="" strokes="^ Q" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+            <item type="normal" text="$P30F7605">
+                <action id="exit-system" class="com.magicpwd.e.pwd.file.ExitAction">
+                    <stroke key="^ Q" />
+                </action>
             </item>
         </menu>
         <!--编辑-->
-        <menu id="edit" text="$P30F7606" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
+        <menu id="edit" text="$P30F7606">
             <!--查找-->
-            <item type="normal" text="$P30F7607" tips="" icon="" strokes="^ F" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+            <item type="normal" text="$P30F7607">
+                <action id="" class="com.magicpwd.e.pwd.file.ExitAction">
+                    <stroke key="^ F" />
+                </action>
             </item>
             <seperator />
             <!--添加文本属性-->
-            <item type="normal" text="$P30F7608" tips="" icon="" strokes="^ 1" command="">
-                <action id="" class="com.magicpwd.e.pwd.edit.AppendTextAction" />
+            <item type="normal" text="$P30F7608">
+                <action id="" class="com.magicpwd.e.pwd.edit.AppendTextAction">
+                    <stroke key="^ 1" />
+                </action>
             </item>
             <!--添加口令属性-->
-            <item type="normal" text="$P30F7609" tips="" icon="" strokes="^ 2" command="">
-                <action id="" class="com.magicpwd.e.pwd.edit.AppendKeysAction" />
+            <item type="normal" text="$P30F7609">
+                <action id="" class="com.magicpwd.e.pwd.edit.AppendKeysAction">
+                    <stroke key="^ 2" />
+                </action>
             </item>
             <!--添加链接属性-->
-            <item type="normal" text="$P30F760A" tips="" icon="" strokes="^ 3" command="">
-                <action id="" class="com.magicpwd.e.pwd.edit.AppendLinkAction" />
+            <item type="normal" text="$P30F760A">
+                <action id="" class="com.magicpwd.e.pwd.edit.AppendLinkAction">
+                    <stroke key="^ 3" />
+                </action>
             </item>
             <!--添加邮件属性-->
-            <item type="normal" text="$P30F760B" tips="" icon="" strokes="^ 4" command="">
-                <action id="" class="com.magicpwd.e.pwd.edit.AppendMailAction" />
+            <item type="normal" text="$P30F760B">
+                <action id="" class="com.magicpwd.e.pwd.edit.AppendMailAction">
+                    <stroke key="^ 4" />
+                </action>
             </item>
             <!--添加日期属性-->
-            <item type="normal" text="$P30F760C" tips="" icon="" strokes="^ 5" command="">
-                <action id="" class="com.magicpwd.e.pwd.edit.AppendDateAction" />
+            <item type="normal" text="$P30F760C">
+                <action id="" class="com.magicpwd.e.pwd.edit.AppendDateAction">
+                    <stroke key="^ 5" />
+                </action>
             </item>
             <!--添加附注属性-->
-            <item type="normal" text="$P30F760D" tips="" icon="" strokes="^ 6" command="">
-                <action id="" class="com.magicpwd.e.pwd.edit.AppendAreaAction" />
+            <item type="normal" text="$P30F760D">
+                <action id="" class="com.magicpwd.e.pwd.edit.AppendAreaAction">
+                    <stroke key="^ 6" />
+                </action>
             </item>
             <!--添加文件属性-->
-            <item type="normal" text="$P30F760E" tips="" icon="" strokes="^ 7" command="">
-                <action id="" class="com.magicpwd.e.pwd.edit.AppendFileAction" />
+            <item type="normal" text="$P30F760E">
+                <action id="" class="com.magicpwd.e.pwd.edit.AppendFileAction">
+                    <stroke key="^ 7" />
+                </action>
             </item>
             <seperator />
             <!--上移-->
-            <item type="normal" text="$P30F760F" tips="" icon="" strokes="^ UP" command="">
-                <action id="" class="com.magicpwd.e.pwd.edit.PrevAction" />
+            <item type="normal" text="$P30F760F">
+                <action id="" class="com.magicpwd.e.pwd.edit.PrevAction">
+                    <stroke key="^ UP" />
+                </action>
             </item>
             <!--下移-->
-            <item type="normal" text="$P30F7610" tips="" icon="" strokes="^ DOWN" command="">
-                <action id="" class="com.magicpwd.e.pwd.edit.NextAction" />
+            <item type="normal" text="$P30F7610">
+                <action id="" class="com.magicpwd.e.pwd.edit.NextAction">
+                    <stroke key="^ DOWN" />
+                </action>
             </item>
         </menu>
         <!--视图-->
-        <menu id="view" text="$P30F7614" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
+        <menu id="view" text="$P30F7614">
             <!--总在最上-->
-            <item type="checkbox" text="$P30F7615" tips="" icon="" strokes="F5" command="" group="">
-                <action id="" class="com.magicpwd.e.pwd.view.TopsAction" />
+            <item type="checkbox" text="$P30F7615">
+                <action id="" class="com.magicpwd.e.pwd.view.TopsAction">
+                    <stroke key="F5" />
+                </action>
             </item>
             <seperator />
             <!--显示属性栏-->
-            <item type="checkbox" text="$P30F7616" tips="" icon="" strokes="^ P" command="" group="">
-                <action id="" class="com.magicpwd.e.pwd.view.EditVisableAction" />
+            <item type="checkbox" text="$P30F7616">
+                <action id="" class="com.magicpwd.e.pwd.view.EditVisableAction">
+                    <stroke key="^ P" />
+                </action>
             </item>
             <!--分离属性栏-->
-            <item type="checkbox" text="$P30F7617" tips="" icon="" strokes="^ W" command="" group="">
-                <action id="" class="com.magicpwd.e.pwd.view.EditRelatedAction" />
+            <item type="checkbox" text="$P30F7617">
+                <action id="" class="com.magicpwd.e.pwd.view.EditRelatedAction">
+                    <stroke key="^ W" />
+                </action>
             </item>
             <!--显示搜索栏-->
-            <item type="checkbox" text="$P30F7618" tips="" icon="" strokes="^ F" command="" group="">
-                <action id="" class="com.magicpwd.e.pwd.view.FindVisableAction" />
+            <item type="checkbox" text="$P30F7618">
+                <action id="" class="com.magicpwd.e.pwd.view.FindVisableAction">
+                    <stroke key="^ F" />
+                </action>
             </item>
             <!--显示菜单栏-->
-            <item type="checkbox" text="$P30F7619" tips="" icon="" strokes="^ M" command="" group="">
-                <action id="" class="com.magicpwd.e.pwd.view.MenuVisableAction" />
+            <item type="checkbox" text="$P30F7619">
+                <action id="" class="com.magicpwd.e.pwd.view.MenuVisableAction">
+                    <stroke key="^ M" />
+                </action>
             </item>
             <!--显示工具栏-->
-            <item type="checkbox" text="$P30F761A" tips="" icon="" strokes="^ T" command="" group="">
-                <action id="" class="com.magicpwd.e.pwd.view.ToolVisableAction" />
+            <item type="checkbox" text="$P30F761A">
+                <action id="" class="com.magicpwd.e.pwd.view.ToolVisableAction">
+                    <stroke key="^ T" />
+                </action>
             </item>
             <!--显示状态栏-->
-            <item type="checkbox" text="$P30F761B" tips="" icon="" strokes="^ I" command="" group="">
-                <action id="" class="com.magicpwd.e.pwd.view.InfoVisableAction" />
+            <item type="checkbox" text="$P30F761B">
+                <action id="" class="com.magicpwd.e.pwd.view.InfoVisableAction">
+                    <stroke key="^ I" />
+                </action>
             </item>
             <seperator />
             <!--切换到《迷你账簿》-->
-            <item type="checkbox" text="$P30F7638" tips="" icon="" strokes="^ # F" command="" group="">
-                <action id="" class="" />
+            <item type="checkbox" text="$P30F7638">
+                <action id="" class="">
+                    <stroke key="^ # F" />
+                </action>
             </item>
             <!--切换到《记事便签》-->
-            <item type="checkbox" text="$P30F7639" tips="" icon="" strokes="^ # N" command="" group="">
-                <action id="" class="" />
+            <item type="checkbox" text="$P30F7639">
+                <action id="" class="">
+                    <stroke key="^ # N" />
+                </action>
             </item>
         </menu>
         <!--数据-->
-        <menu id="data" text="$P30F761C" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
+        <menu id="data" text="$P30F761C">
             <!--导入数据-->
-            <item type="normal" text="$P30F761D" tips="" icon="" strokes="" command="">
-                <action id="" class="com.magicpwd.e.pwd.data.ImportAction" />
+            <item type="normal" text="$P30F761D">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
             </item>
             <!--导出数据-->
-            <item type="normal" text="$P30F761E" tips="" icon="" strokes="" command="">
-                <action id="" class="com.magicpwd.e.pwd.data.ExportAction" />
+            <item type="normal" text="$P30F761E">
+                <action id="export" class="com.magicpwd.e.pwd.data.ExportAction" />
             </item>
             <seperator />
             <!--备份到云端-->
-            <item type="normal" text="$P30F7635" tips="" icon="" strokes="^ B" command="">
-                <action id="" class="com.magicpwd.e.pwd.safe.CloudBackupAction" />
+            <item type="normal" text="$P30F7635">
+                <action id="" class="com.magicpwd.e.pwd.safe.CloudBackupAction">
+                    <stroke key="^ B" />
+                </action>
             </item>
             <!--从云端恢复-->
-            <item type="normal" text="$P30F7636" tips="" icon="" strokes="^ R" command="">
-                <action id="" class="com.magicpwd.e.pwd.safe.CloudResumeAction" />
+            <item type="normal" text="$P30F7636">
+                <action id="" class="com.magicpwd.e.pwd.safe.CloudResumeAction">
+                    <stroke key="^ R" />
+                </action>
             </item>
             <!--配置云端帐户-->
-            <item type="normal" text="$P30F7637" tips="" icon="" strokes="" command="">
+            <item type="normal" text="$P30F7637">
                 <action id="" class="com.magicpwd.e.pwd.safe.CloudConfigAction" />
             </item>
             <seperator />
             <!--常规设置-->
-            <item type="normal" text="$P30F761F" tips="" icon="" strokes="" command="">
+            <item type="normal" text="$P30F761F">
                 <action id="" class="" />
             </item>
             <!--口令设置-->
-            <item type="normal" text="$P30F7620" tips="" icon="" strokes="" command="">
+            <item type="normal" text="$P30F7620">
                 <action id="" class="" />
             </item>
             <!--模板管理-->
-            <item type="normal" text="$P30F7621" tips="" icon="" strokes="" command="">
+            <item type="normal" text="$P30F7621">
                 <action id="" class="" />
             </item>
             <!--类别管理-->
-            <item type="normal" text="$P30F7622" tips="" icon="" strokes="" command="">
+            <item type="normal" text="$P30F7622">
                 <action id="" class="" />
             </item>
         </menu>
         <!--用户-->
-        <menu id="user" text="$P30F7624" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
+        <menu id="user" text="$P30F7624">
             <!--切换用户-->
-            <item type="normal" text="$P30F7625" tips="" icon="" strokes="" command="">
+            <item type="normal" text="$P30F7625">
                 <action id="" class="com.magicpwd.e.pwd.user.SwitchUserAction" />
             </item>
             <!--添加用户-->
-            <item type="normal" text="$P30F7626" tips="" icon="" strokes="" command="">
+            <item type="normal" text="$P30F7626">
                 <action id="" class="com.magicpwd.e.pwd.user.CreateUserAction" />
             </item>
             <seperator />
             <!--更改登录口令-->
-            <item type="normal" text="$P30F7627" tips="" icon="" strokes="" command="">
+            <item type="normal" text="$P30F7627">
                 <action id="" class="com.magicpwd.e.pwd.user.ChangePkeyAction" />
             </item>
             <!--设置安全口令-->
-            <item type="normal" text="$P30F7628" tips="" icon="" strokes="" command="">
+            <item type="normal" text="$P30F7628">
                 <action id="" class="com.magicpwd.e.pwd.user.CreateSkeyAction" />
             </item>
         </menu>
         <!--皮肤-->
-        <menu id="skin" text="$P30F7631" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
+        <menu id="skin" text="$P30F7631">
         </menu>
         <!--帮助-->
-        <menu id="help" text="$P30F7629" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
+        <menu id="help" text="$P30F7629">
             <!--帮助-->
-            <item type="normal" text="$P30F762A" tips="" icon="" strokes="F1" command="">
-                <action id="" class="com.magicpwd.e.pwd.help.HelpAction" />
+            <item type="normal" text="$P30F762A">
+                <action id="" class="com.magicpwd.e.pwd.help.HelpAction">
+                    <stroke key="F1" />
+                </action>
             </item>
             <seperator />
             <!--软件首页-->
-            <item type="normal" text="$P30F762B" tips="" icon="" strokes="F2" command="">
-                <action id="" class="com.magicpwd.e.pwd.help.SiteAction" />
+            <item type="normal" text="$P30F762B">
+                <action id="" class="com.magicpwd.e.pwd.help.SiteAction">
+                    <stroke key="F2" />
+                </action>
             </item>
             <!--博客-->
-            <item type="normal" text="$P30F762C" tips="" icon="" strokes="" command="">
+            <item type="normal" text="$P30F762C">
                 <action id="" class="com.magicpwd.e.pwd.help.BlogAction" />
             </item>
             <!--微博-->
-            <item type="normal" text="$P30F762D" tips="" icon="" strokes="" command="">
+            <item type="normal" text="$P30F762D">
                 <action id="" class="com.magicpwd.e.pwd.help.MlogAction" />
             </item>
             <!--联系作者-->
-            <item type="normal" text="$P30F762E" tips="" icon="" strokes="F3" command="">
-                <action id="" class="com.magicpwd.e.pwd.help.MailAction" />
+            <item type="normal" text="$P30F762E">
+                <action id="" class="com.magicpwd.e.pwd.help.MailAction">
+                    <stroke key="F3" />
+                </action>
             </item>
             <seperator />
             <!--检测更新-->
-            <item type="normal" text="$P30F762F" tips="" icon="" strokes="F4" command="">
-                <action id="" class="com.magicpwd.e.pwd.help.UpdtAction" />
+            <item type="normal" text="$P30F762F">
+                <action id="" class="com.magicpwd.e.pwd.help.UpdtAction">
+                    <stroke key="F4" />
+                </action>
             </item>
             <seperator />
             <!--键盘快捷-->
-            <item type="normal" text="$P30F7623" tips="" icon="" strokes="F6" command="">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction" />
+            <item type="normal" text="$P30F7623">
+                <action id="" class="com.magicpwd.e.pwd.file.ExitAction">
+                    <stroke key="F6" />
+                </action>
             </item>
             <!--Java环境-->
-            <item type="normal" text="$P30F7634" tips="" icon="" strokes="F7" command="">
-                <action id="" class="com.magicpwd.e.pwd.help.JavaAction" />
+            <item type="normal" text="$P30F7634">
+                <action id="" class="com.magicpwd.e.pwd.help.JavaAction">
+                    <stroke key="F7" />
+                </action>
             </item>
             <seperator />
             <!--关于-->
-            <item type="normal" text="$P30F7630" tips="" icon="" strokes="" command="">
+            <item type="normal" text="$P30F7630">
                 <action id="" class="com.magicpwd.e.pwd.help.InfoAction" />
             </item>
         </menu>
@@ -270,20 +338,226 @@
 
     <!--魔方密码工具栏-->
     <toolbar id="magicpwd">
-        <item type="normal" text="" tips="普通菜单项" icon="http://magicpwd.com/logo/logo10.png" strokes="^ N" command="哈哈！！">
+        <item type="normal" tips="普通菜单项" icon="http://magicpwd.com/logo/logo10.png">
             <action id="" class="com.magicpwd.e.TestAction" />
-            <property name="" refId="" />
-            <property name="" refId="" />
         </item>
-        <item type="toggle" text="" tips="普通菜单项" icon="http://magicpwd.com/logo/logo10.png" strokes="^ N" command="哈哈！！">
+        <item type="toggle" tips="普通菜单项" icon="http://magicpwd.com/logo/logo10.png">
             <action id="" class="com.magicpwd.e.TestAction" />
-            <property name="" refId="" />
-            <property name="" refId="" />
         </item>
     </toolbar>
 
     <!--魔方密码弹出菜单-->
-    <menupop id="magicpwd">
-
+    <menupop id="mpwdkind">
+        <!--添加类别-->
+        <item type="normal" text="$P30F7D01">
+            <action id="" class="com.magicpwd.e.pwd.kind.AppendAction" />
+        </item>
+        <seperator />
+        <!--更新类别-->
+        <item type="normal" text="$P30F7D02">
+            <action id="" class="com.magicpwd.e.pwd.kind.UpdateAction" />
+        </item>
+        <seperator />
+        <!--删除类别-->
+        <item type="normal" text="$P30F7D03">
+            <action id="" class="com.magicpwd.e.pwd.kind.DeleteAction" />
+        </item>
+        <seperator />
+        <!--导入数据-->
+        <item type="normal" text="$P30F7D04">
+            <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+        </item>
+    </menupop>
+    <menupop id="mpwdlist">
+        <!--添加记录-->
+        <item type="normal" text="$P30F7D05">
+            <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+        </item>
+        <!--删除记录-->
+        <item type="normal" text="$P30F7D06">
+            <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+        </item>
+        <seperator />
+        <!--标记为：-->
+        <menu id="" text="$P30F7D1B" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
+            <!--默认(@0)-->
+            <item type="normal" text="$P30F7D1C" tips="" icon="" strokes="" command="0">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <seperator />
+            <!--常使用(@1)-->
+            <item type="normal" text="$P30F7D1D" tips="" icon="" strokes="" command="1">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--待注册(@2)-->
+            <item type="normal" text="$P30F7D1E" tips="" icon="" strokes="" command="2">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--待认证(@3)-->
+            <item type="normal" text="$P30F7D1F" tips="" icon="" strokes="" command="3">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--待激活(@4)-->
+            <item type="normal" text="$P30F7D20" tips="" icon="" strokes="" command="4">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--仅测试(@5)-->
+            <item type="normal" text="$P30F7D21" tips="" icon="" strokes="" command="5">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--已过期(@6)-->
+            <item type="normal" text="$P30F7D22" tips="" icon="" strokes="" command="6">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--已丢失(@7)-->
+            <item type="normal" text="$P30F7D23" tips="" icon="" strokes="" command="7">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--被禁用(@8)-->
+            <item type="normal" text="$P30F7D24" tips="" icon="" strokes="" command="8">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--已删除(@9)-->
+            <item type="normal" text="$P30F7D25" tips="" icon="" strokes="" command="9">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+        </menu>
+        <!--重要性：-->
+        <menu id="" text="$P30F7D26" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
+            <!--最高-->
+            <item type="normal" text="$P30F7D27">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--高-->
+            <item type="normal" text="$P30F7D28">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--正常-->
+            <item type="normal" text="$P30F7D29">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--低-->
+            <item type="normal" text="$P30F7D2A">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--最低-->
+            <item type="normal" text="$P30F7D2B">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+        </menu>
+        <!--排序方式-->
+        <menu id="" text="$P30F7D2C" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
+            <!--升序-->
+            <item type="normal" text="$P30F7D2D">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--降序-->
+            <item type="normal" text="$P30F7D2E">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+        </menu>
+        <!--排序依据-->
+        <menu id="" text="$P30F7D2F" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
+            <!--使用频率-->
+            <item type="normal" text="$P30F7D30">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--口令名称-->
+            <item type="normal" text="$P30F7D31">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--注册时间-->
+            <item type="normal" text="$P30F7D32">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--到期时间-->
+            <item type="normal" text="$P30F7D33">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+        </menu>
+        <seperator />
+        <!--把数据迁移到...(@M)-->
+        <item type="normal" text="$P30F7D1A">
+            <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+        </item>
+        <seperator />
+        <!--查看历史-->
+        <item type="normal" text="$P30F7D07">
+            <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+        </item>
+    </menupop>
+    <menupop id="mpwdlist">
+        <!--复制数据-->
+        <item type="normal" text="$P30F7D08">
+            <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+        </item>
+        <seperator />
+        <!--添加字段-->
+        <menu id="" text="$P30F7D09" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
+            <!--添加文本-->
+            <item type="normal" text="$P30F7D0A">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--添加口令-->
+            <item type="normal" text="$P30F7D0B">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--添加链接-->
+            <item type="normal" text="$P30F7D0C">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--添加邮件-->
+            <item type="normal" text="$P30F7D0D">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--添加日期-->
+            <item type="normal" text="$P30F7D0E">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--添加附注-->
+            <item type="normal" text="$P30F7D0F">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--添加附件-->
+            <item type="normal" text="$P30F7D10">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+        </menu>
+        <!--转换类型-->
+        <menu id="" text="$P30F7D11" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
+            <!--转换为文本-->
+            <item type="normal" text="$P30F7D12">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--转换为口令-->
+            <item type="normal" text="$P30F7D13">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--转换为链接-->
+            <item type="normal" text="$P30F7D14">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--转换为邮件-->
+            <item type="normal" text="$P30F7D15">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--转换为日期-->
+            <item type="normal" text="$P30F7D16">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--转换为附注-->
+            <item type="normal" text="$P30F7D17">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+            <!--转换为附件-->
+            <item type="normal" text="$P30F7D18">
+                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            </item>
+        </menu>
+        <seperator />
+        <!--查看历史-->
+        <item type="normal" text="$P30F7D07">
+            <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+        </item>
     </menupop>
 </magicpwd>
