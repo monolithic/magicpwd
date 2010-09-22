@@ -104,7 +104,7 @@ public class Bean
 
     public static void setTips(javax.swing.JComponent c, String t)
     {
-        if (t.length() < 1)
+        if ("".equals(t))
         {
             t = null;
         }
@@ -121,6 +121,7 @@ public class Bean
             javax.swing.ActionMap actionMap = component.getActionMap();
             if (actionMap != null)
             {
+                System.out.println(stroke + "  " + action);
                 actionMap.put(command, action);
             }
         }
