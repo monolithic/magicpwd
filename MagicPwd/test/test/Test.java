@@ -1,20 +1,25 @@
 package test;
 
-
-import java.util.regex.Pattern;
+import javax.swing.Action;
+import javax.swing.JTextArea;
 
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author aven
  */
-public class Test {
+public class Test
+{
+
     public static void main(String[] args)
     {
-        System.out.println(Pattern.matches("^(?!default).+$", "default"));
+        for (Action action : new JTextArea().getActions())
+        {
+            System.out.println(action.getValue(action.ACCELERATOR_KEY));
+            System.out.println(action.getValue(action.NAME));
+        }
     }
 }
