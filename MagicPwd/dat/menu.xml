@@ -39,43 +39,43 @@
             <seperator />
             <!--添加文本属性-->
             <item type="normal" text="$P30F7608">
-                <action id="" class="com.magicpwd.e.pwd.edit.AppendTextAction">
+                <action id="append-text" class="com.magicpwd.e.pwd.edit.AppendTextAction">
                     <stroke key="^ 1" />
                 </action>
             </item>
             <!--添加口令属性-->
             <item type="normal" text="$P30F7609">
-                <action id="" class="com.magicpwd.e.pwd.edit.AppendKeysAction">
+                <action id="append-keys" class="com.magicpwd.e.pwd.edit.AppendKeysAction">
                     <stroke key="^ 2" />
                 </action>
             </item>
             <!--添加链接属性-->
             <item type="normal" text="$P30F760A">
-                <action id="" class="com.magicpwd.e.pwd.edit.AppendLinkAction">
+                <action id="append-link" class="com.magicpwd.e.pwd.edit.AppendLinkAction">
                     <stroke key="^ 3" />
                 </action>
             </item>
             <!--添加邮件属性-->
             <item type="normal" text="$P30F760B">
-                <action id="" class="com.magicpwd.e.pwd.edit.AppendMailAction">
+                <action id="append-mail" class="com.magicpwd.e.pwd.edit.AppendMailAction">
                     <stroke key="^ 4" />
                 </action>
             </item>
             <!--添加日期属性-->
             <item type="normal" text="$P30F760C">
-                <action id="" class="com.magicpwd.e.pwd.edit.AppendDateAction">
+                <action id="append-date" class="com.magicpwd.e.pwd.edit.AppendDateAction">
                     <stroke key="^ 5" />
                 </action>
             </item>
             <!--添加附注属性-->
             <item type="normal" text="$P30F760D">
-                <action id="" class="com.magicpwd.e.pwd.edit.AppendAreaAction">
+                <action id="append-area" class="com.magicpwd.e.pwd.edit.AppendAreaAction">
                     <stroke key="^ 6" />
                 </action>
             </item>
             <!--添加文件属性-->
             <item type="normal" text="$P30F760E">
-                <action id="" class="com.magicpwd.e.pwd.edit.AppendFileAction">
+                <action id="append-file" class="com.magicpwd.e.pwd.edit.AppendFileAction">
                     <stroke key="^ 7" />
                 </action>
             </item>
@@ -312,193 +312,193 @@
     <menupop id="mpwdlist">
         <!--添加记录-->
         <item type="normal" text="$P30F7D05">
-            <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            <action id="new-keys" class="com.magicpwd.e.pwd.file.NewAction" />
         </item>
         <!--删除记录-->
         <item type="normal" text="$P30F7D06">
-            <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            <action id="drop-keys" class="com.magicpwd.e.pwd.file.DropAction" />
         </item>
         <seperator />
         <!--标记为：-->
-        <menu id="" text="$P30F7D1B" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
+        <menu id="" text="$P30F7D1B">
             <!--默认(@0)-->
-            <item type="normal" text="$P30F7D1C" tips="" icon="" strokes="" command="0">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            <item type="normal" text="$P30F7D1C">
+                <action id="change-mode" class="com.magicpwd.e.pwd.list.ChangeModeAction" command="0" />
             </item>
             <seperator />
             <!--常使用(@1)-->
-            <item type="normal" text="$P30F7D1D" tips="" icon="" strokes="" command="1">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            <item type="normal" text="$P30F7D1D">
+                <action id="change-mode" class="com.magicpwd.e.pwd.list.ChangeModeAction" command="1" />
             </item>
             <!--待注册(@2)-->
-            <item type="normal" text="$P30F7D1E" tips="" icon="" strokes="" command="2">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            <item type="normal" text="$P30F7D1E">
+                <action id="change-mode" class="com.magicpwd.e.pwd.list.ChangeModeAction" command="2" />
             </item>
             <!--待认证(@3)-->
-            <item type="normal" text="$P30F7D1F" tips="" icon="" strokes="" command="3">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            <item type="normal" text="$P30F7D1F">
+                <action id="change-mode" class="com.magicpwd.e.pwd.list.ChangeModeAction" command="3" />
             </item>
             <!--待激活(@4)-->
-            <item type="normal" text="$P30F7D20" tips="" icon="" strokes="" command="4">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            <item type="normal" text="$P30F7D20">
+                <action id="change-mode" class="com.magicpwd.e.pwd.list.ChangeModeAction" command="4" />
             </item>
             <!--仅测试(@5)-->
-            <item type="normal" text="$P30F7D21" tips="" icon="" strokes="" command="5">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            <item type="normal" text="$P30F7D21">
+                <action id="change-mode" class="com.magicpwd.e.pwd.list.ChangeModeAction" command="5" />
             </item>
             <!--已过期(@6)-->
-            <item type="normal" text="$P30F7D22" tips="" icon="" strokes="" command="6">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            <item type="normal" text="$P30F7D22">
+                <action id="change-mode" class="com.magicpwd.e.pwd.list.ChangeModeAction" command="6" />
             </item>
             <!--已丢失(@7)-->
-            <item type="normal" text="$P30F7D23" tips="" icon="" strokes="" command="7">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            <item type="normal" text="$P30F7D23">
+                <action id="change-mode" class="com.magicpwd.e.pwd.list.ChangeModeAction" command="7" />
             </item>
             <!--被禁用(@8)-->
-            <item type="normal" text="$P30F7D24" tips="" icon="" strokes="" command="8">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            <item type="normal" text="$P30F7D24">
+                <action id="change-mode" class="com.magicpwd.e.pwd.list.ChangeModeAction" command="8" />
             </item>
             <!--已删除(@9)-->
-            <item type="normal" text="$P30F7D25" tips="" icon="" strokes="" command="9">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            <item type="normal" text="$P30F7D25">
+                <action id="change-mode" class="com.magicpwd.e.pwd.list.ChangeModeAction" command="9" />
             </item>
         </menu>
         <!--重要性：-->
-        <menu id="" text="$P30F7D26" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
+        <menu id="" text="$P30F7D26">
             <!--最高-->
             <item type="normal" text="$P30F7D27">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+                <action id="change-note" class="com.magicpwd.e.pwd.list.ChangeNoteAction" command="-2" />
             </item>
             <!--高-->
             <item type="normal" text="$P30F7D28">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+                <action id="change-note" class="com.magicpwd.e.pwd.list.ChangeNoteAction" command="-1" />
             </item>
             <!--正常-->
             <item type="normal" text="$P30F7D29">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+                <action id="change-note" class="com.magicpwd.e.pwd.list.ChangeNoteAction" command="0" />
             </item>
             <!--低-->
             <item type="normal" text="$P30F7D2A">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+                <action id="change-note" class="com.magicpwd.e.pwd.list.ChangeNoteAction" command="1" />
             </item>
             <!--最低-->
             <item type="normal" text="$P30F7D2B">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+                <action id="change-note" class="com.magicpwd.e.pwd.list.ChangeNoteAction" command="2" />
             </item>
         </menu>
         <!--排序方式-->
-        <menu id="" text="$P30F7D2C" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
+        <menu id="" text="$P30F7D2C">
             <!--升序-->
             <item type="normal" text="$P30F7D2D">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+                <action id="sort-dir" class="com.magicpwd.e.pwd.list.SortDirAction" command="true" />
             </item>
             <!--降序-->
             <item type="normal" text="$P30F7D2E">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+                <action id="sort-dir" class="com.magicpwd.e.pwd.list.SortDirAction" command="false" />
             </item>
         </menu>
         <!--排序依据-->
-        <menu id="" text="$P30F7D2F" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
+        <menu id="" text="$P30F7D2F">
             <!--使用频率-->
             <item type="normal" text="$P30F7D30">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+                <action id="sort-key" class="com.magicpwd.e.pwd.list.SortKeyAction" command="01" />
             </item>
             <!--口令名称-->
             <item type="normal" text="$P30F7D31">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+                <action id="sort-key" class="com.magicpwd.e.pwd.list.SortKeyAction" command="09" />
             </item>
             <!--注册时间-->
             <item type="normal" text="$P30F7D32">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+                <action id="sort-key" class="com.magicpwd.e.pwd.list.SortKeyAction" command="07" />
             </item>
             <!--到期时间-->
             <item type="normal" text="$P30F7D33">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+                <action id="sort-key" class="com.magicpwd.e.pwd.list.SortKeyAction" command="0D" />
             </item>
         </menu>
         <seperator />
         <!--把数据迁移到...(@M)-->
         <item type="normal" text="$P30F7D1A">
-            <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            <action id="" class="com.magicpwd.e.pwd.list.MovetoAction" />
         </item>
         <seperator />
         <!--查看历史-->
         <item type="normal" text="$P30F7D07">
-            <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            <action id="" class="com.magicpwd.e.pwd.list.HistoryAction" />
         </item>
     </menupop>
-    <menupop id="mpwdlist">
+    <menupop id="mpwdgrid">
         <!--复制数据-->
         <item type="normal" text="$P30F7D08">
-            <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            <action id="" class="com.magicpwd.e.pwd.grid.CopyAction" />
         </item>
         <seperator />
         <!--添加字段-->
-        <menu id="" text="$P30F7D09" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
+        <menu id="" text="$P30F7D09">
             <!--添加文本-->
             <item type="normal" text="$P30F7D0A">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+                <action id="append-text" class="com.magicpwd.e.pwd.edit.AppendTextAction" />
             </item>
             <!--添加口令-->
             <item type="normal" text="$P30F7D0B">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+                <action id="append-keys" class="com.magicpwd.e.pwd.edit.AppendKeysAction" />
             </item>
             <!--添加链接-->
             <item type="normal" text="$P30F7D0C">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+                <action id="append-link" class="com.magicpwd.e.pwd.edit.AppendLinkAction" />
             </item>
             <!--添加邮件-->
             <item type="normal" text="$P30F7D0D">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+                <action id="append-mail" class="com.magicpwd.e.pwd.edit.AppendMailAction" />
             </item>
             <!--添加日期-->
             <item type="normal" text="$P30F7D0E">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+                <action id="append-date" class="com.magicpwd.e.pwd.edit.AppendDateAction" />
             </item>
             <!--添加附注-->
             <item type="normal" text="$P30F7D0F">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+                <action id="append-area" class="com.magicpwd.e.pwd.edit.AppendAreaAction" />
             </item>
             <!--添加附件-->
             <item type="normal" text="$P30F7D10">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+                <action id="append-file" class="com.magicpwd.e.pwd.edit.AppendFileAction" />
             </item>
         </menu>
         <!--转换类型-->
-        <menu id="" text="$P30F7D11" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="">
+        <menu id="" text="$P30F7D11">
             <!--转换为文本-->
             <item type="normal" text="$P30F7D12">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+                <action id="change-text" class="com.magicpwd.e.pwd.edit.ChangeTextAction" />
             </item>
             <!--转换为口令-->
             <item type="normal" text="$P30F7D13">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+                <action id="change-keys" class="com.magicpwd.e.pwd.edit.ChangeKeysAction" />
             </item>
             <!--转换为链接-->
             <item type="normal" text="$P30F7D14">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+                <action id="change-link" class="com.magicpwd.e.pwd.edit.ChangeLinkAction" />
             </item>
             <!--转换为邮件-->
             <item type="normal" text="$P30F7D15">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+                <action id="change-mail" class="com.magicpwd.e.pwd.edit.ChangeMailAction" />
             </item>
             <!--转换为日期-->
             <item type="normal" text="$P30F7D16">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+                <action id="change-date" class="com.magicpwd.e.pwd.edit.ChangeDateAction" />
             </item>
             <!--转换为附注-->
             <item type="normal" text="$P30F7D17">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+                <action id="change-area" class="com.magicpwd.e.pwd.edit.ChangeAreaAction" />
             </item>
             <!--转换为附件-->
             <item type="normal" text="$P30F7D18">
-                <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+                <action id="change-file" class="com.magicpwd.e.pwd.edit.ChangeFileAction" />
             </item>
         </menu>
         <seperator />
-        <!--查看历史-->
+        <!--删除属性-->
         <item type="normal" text="$P30F7D07">
-            <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
+            <action id="" class="com.magicpwd.e.pwd.grid.DropAction" />
         </item>
     </menupop>
 </magicpwd>
