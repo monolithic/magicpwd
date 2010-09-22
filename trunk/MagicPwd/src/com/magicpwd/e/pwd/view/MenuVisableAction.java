@@ -21,6 +21,7 @@ public class MenuVisableAction extends javax.swing.AbstractAction implements IPw
 
     public MenuVisableAction()
     {
+        putValue(NAME, "com.magicpwd.e.pwd.view.MenuVisableAction");
     }
 
     @Override
@@ -32,7 +33,6 @@ public class MenuVisableAction extends javax.swing.AbstractAction implements IPw
         mainPtn.setMenuBeanVisible(b);
         mainPtn.pack();
 
-//        mainMenu.setViewMenuSelected(b);
         cfg.setMenuViw(b);
     }
 

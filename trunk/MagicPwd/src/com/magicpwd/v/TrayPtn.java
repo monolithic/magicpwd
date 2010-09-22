@@ -11,7 +11,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
 import com.magicpwd._mail.Connect;
 import com.magicpwd._mail.MailDlg;
-import com.magicpwd._user.UserSign;
+import com.magicpwd._user.UserPtn;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
@@ -38,7 +38,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
     private static SafeMdl safeMdl;
     private static MailDlg mailDlg;
     private static TrayPtn trayPtn;
-    private static UserSign userSign;
+    private static UserPtn userSign;
     private static javax.swing.JFrame mf_CurrForm;
     private static javax.swing.JDialog md_TrayForm;
     private static javax.swing.event.PopupMenuListener listener;
@@ -803,14 +803,26 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         }
 
         TrayPtn.nextPtn = nextPtn;
-        getUserSign(ConsEnv.INT_SIGN_RS);
+        getUserPtn(ConsEnv.INT_SIGN_RS);
     }
 
-    public static UserSign getUserSign(int view)
+    public static UserPtn getUserPtn(UserCfg userCfg)
+    {
+        if (coreMdl == null)
+        {
+            coreMdl = new CoreMdl();
+            coreMdl.preLoad();
+        }
+        coreMdl.setUserCfg(userCfg);
+        safeMdl = new SafeMdl(userCfg);
+        return getUserPtn(userCfg.getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.INT_SIGN_IN : ConsEnv.INT_SIGN_UP);
+    }
+
+    public static UserPtn getUserPtn(int view)
     {
         if (userSign == null)
         {
-            userSign = new UserSign(coreMdl.getUserCfg(), safeMdl);
+            userSign = new UserPtn(coreMdl.getUserCfg(), safeMdl);
         }
         userSign.initView(view);
         userSign.initLang();

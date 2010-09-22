@@ -21,6 +21,7 @@ public class ToolVisableAction extends javax.swing.AbstractAction implements IPw
 
     public ToolVisableAction()
     {
+        putValue(NAME, "com.magicpwd.e.pwd.view.ToolVisableAction");
     }
 
     @Override

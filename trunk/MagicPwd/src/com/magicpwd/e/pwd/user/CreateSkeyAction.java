@@ -8,7 +8,7 @@ import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
-import com.magicpwd._user.UserSign;
+import com.magicpwd._user.UserPtn;
 import com.magicpwd._util.Lang;
 import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.m.CoreMdl;
@@ -39,7 +39,7 @@ public class CreateSkeyAction extends javax.swing.AbstractAction implements IPwd
             return;
         }
 
-        UserSign us = new UserSign(TrayPtn.getCurrForm());
+        UserPtn us = new UserPtn(TrayPtn.getCurrForm());
         us.setBackCall(new IBackCall()
         {
 

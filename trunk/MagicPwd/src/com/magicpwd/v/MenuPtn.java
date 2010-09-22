@@ -60,7 +60,7 @@ public class MenuPtn
         return document != null;
     }
 
-    public javax.swing.JMenuBar getMenuBar(String menuId)
+    public javax.swing.JMenuBar getMenuBar(String menuId, javax.swing.JComponent component)
     {
         if (!Char.isValidate(menuId) || document == null)
         {
@@ -88,7 +88,7 @@ public class MenuPtn
                     continue;
                 }
                 tmp = (Element) obj;
-                javax.swing.JMenu menu = createMenu(tmp, groups, null);
+                javax.swing.JMenu menu = createMenu(tmp, groups, component);
                 if (menu == null)
                 {
                     continue;
@@ -117,7 +117,50 @@ public class MenuPtn
 
     public javax.swing.JPopupMenu getMenuPop(String menuId)
     {
-        return null;
+        if (!Char.isValidate(menuId) || document == null)
+        {
+            return null;
+        }
+        Node node = document.getRootElement().selectSingleNode(Char.format("/magicpwd/menupop[@id='{0}']", menuId));
+        if (node == null || !(node instanceof Element))
+        {
+            return null;
+        }
+        Element element = (Element) node;
+
+        javax.swing.JPopupMenu menuPop = new javax.swing.JPopupMenu();
+        menuPop.setName(menuId);
+
+        List elementList = element.elements();
+        if (elementList != null)
+        {
+            java.util.HashMap<String, javax.swing.ButtonGroup> groups = new java.util.HashMap<String, javax.swing.ButtonGroup>();
+            Element tmp;
+            for (Object obj : elementList)
+            {
+                if (!(obj instanceof Element))
+                {
+                    continue;
+                }
+                tmp = (Element) obj;
+                if ("menu".equals(tmp.getName()))
+                {
+                    menuPop.add(createMenu(tmp, groups, null));
+                    continue;
+                }
+                if ("item".equals(tmp.getName()))
+                {
+                    menuPop.add(createItem(tmp, groups, null));
+                    continue;
+                }
+                if ("seperator".equals(tmp.getName()))
+                {
+                    menuPop.addSeparator();
+                    continue;
+                }
+            }
+        }
+        return menuPop;
     }
 
     public javax.swing.JToolBar getToolBar(String toolId)
@@ -208,6 +251,8 @@ public class MenuPtn
         processText(element, item);
         processTips(element, item);
         processIcon(element, item);
+        processEnabled(element, item);
+        processVisible(element, item);
         processCommand(element, item);
         processStrokes(element, item, component);
         processAction(element, item);
@@ -476,6 +521,26 @@ public class MenuPtn
         return button;
     }
 
+    private javax.swing.AbstractButton processEnabled(Element element, javax.swing.AbstractButton button)
+    {
+        String text = element.attributeValue("enabled");
+        if (Char.isValidate(text))
+        {
+            button.setEnabled("true".equals(text));
+        }
+        return button;
+    }
+
+    private javax.swing.AbstractButton processVisible(Element element, javax.swing.AbstractButton button)
+    {
+        String text = element.attributeValue("visible");
+        if (Char.isValidate(text))
+        {
+            button.setVisible("true".equals(text));
+        }
+        return button;
+    }
+
     private static javax.swing.AbstractButton processCommand(Element element, javax.swing.AbstractButton button)
     {
         button.setActionCommand(element.attributeValue("command"));
@@ -506,7 +571,7 @@ public class MenuPtn
             javax.swing.KeyStroke stroke = javax.swing.KeyStroke.getKeyStroke(temp);
             if (component != null)
             {
-                Bean.registerKeyStrokeAction(component, stroke, item.getAction(), null, javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
+                Bean.registerKeyStrokeAction(component, stroke, item.getAction(), temp, javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
             }
             item.setAccelerator(stroke);
         }
@@ -539,7 +604,7 @@ public class MenuPtn
                         if (action instanceof IPwdAction)
                         {
                             IPwdAction pwdAction = (IPwdAction) action;
-//                            pwdAction.setMainPtn(TrayPtn.getMainPtn());
+                            pwdAction.setMainPtn(TrayPtn.getMainPtn());
                             pwdAction.setCoreMdl(coreMdl);
                         }
                         else if (action instanceof IPadAction)
@@ -681,6 +746,8 @@ public class MenuPtn
         processText(element, button);
         processTips(element, button);
         processIcon(element, button);
+        processEnabled(element, button);
+        processVisible(element, button);
         processCommand(element, button);
         processStrokes(element, button, component);
         processAction(element, button);

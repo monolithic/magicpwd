@@ -5,7 +5,7 @@
 package com.magicpwd.e.pwd.user;
 
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._user.UserSign;
+import com.magicpwd._user.UserPtn;
 import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
@@ -28,7 +28,7 @@ public class ChangePkeyAction extends javax.swing.AbstractAction implements IPwd
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        UserSign us = new UserSign(TrayPtn.getCurrForm());
+        UserPtn us = new UserPtn(TrayPtn.getCurrForm());
         us.initView(ConsEnv.INT_SIGN_PK);
         us.initLang();
         us.initData();
