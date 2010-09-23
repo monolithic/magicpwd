@@ -104,7 +104,7 @@
             <seperator />
             <!--显示属性栏-->
             <item type="checkbox" text="$P30F7616">
-                <action id="" class="com.magicpwd.e.pwd.view.EditVisableAction">
+                <action id="" class="com.magicpwd.e.pwd.view.EditVisibleAction">
                     <stroke key="^ P" />
                 </action>
             </item>
@@ -116,25 +116,25 @@
             </item>
             <!--显示搜索栏-->
             <item type="checkbox" text="$P30F7618">
-                <action id="" class="com.magicpwd.e.pwd.view.FindVisableAction">
+                <action id="" class="com.magicpwd.e.pwd.view.FindVisibleAction">
                     <stroke key="^ F" />
                 </action>
             </item>
             <!--显示菜单栏-->
             <item type="checkbox" text="$P30F7619">
-                <action id="" class="com.magicpwd.e.pwd.view.MenuVisableAction">
+                <action id="" class="com.magicpwd.e.pwd.view.MenuVisibleAction">
                     <stroke key="^ M" />
                 </action>
             </item>
             <!--显示工具栏-->
             <item type="checkbox" text="$P30F761A">
-                <action id="" class="com.magicpwd.e.pwd.view.ToolVisableAction">
+                <action id="" class="com.magicpwd.e.pwd.view.ToolVisibleAction">
                     <stroke key="^ T" />
                 </action>
             </item>
             <!--显示状态栏-->
             <item type="checkbox" text="$P30F761B">
-                <action id="" class="com.magicpwd.e.pwd.view.InfoVisableAction">
+                <action id="" class="com.magicpwd.e.pwd.view.InfoVisibleAction">
                     <stroke key="^ I" />
                 </action>
             </item>
