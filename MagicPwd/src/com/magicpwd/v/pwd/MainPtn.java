@@ -17,6 +17,8 @@ import com.magicpwd._bean.pwd.PwdsBean;
 import com.magicpwd._bean.pwd.TextBean;
 import com.magicpwd._comn.Kind;
 import com.magicpwd._comn.Keys;
+import com.magicpwd._comn.item.GuidItem;
+import com.magicpwd._comn.item.MetaItem;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
@@ -175,6 +177,83 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         return true;
     }
 
+    public boolean saveKeys()
+    {
+        // 是否需要保存
+        if (gridMdl.getRowCount() < ConsEnv.PWDS_HEAD_SIZE)
+        {
+            return false;
+        }
+
+        // 数据未被修改
+        if (!gridMdl.isModified())
+        {
+            //Lang.showMesg(this, LangRes.P30F7A27, "您未曾修改过数据，不需要保存！");
+            return false;
+        }
+
+        // 口令类别检测
+        GuidItem guid = (GuidItem) gridMdl.getItemAt(ConsEnv.PWDS_HEAD_GUID);
+        if (!com.magicpwd._util.Char.isValidate(guid.getData()))
+        {
+            javax.swing.tree.TreePath path = tr_GuidTree.getSelectionPath();
+            if (path == null)
+            {
+                Lang.showMesg(this, LangRes.P30F7A0D, "请选择口令类别信息！");
+                tr_GuidTree.requestFocus();
+                return false;
+            }
+
+            KindTN node = (KindTN) path.getLastPathComponent();
+            Kind kind = (Kind) node.getUserObject();
+            gridMdl.getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(kind.getC2010103());
+        }
+
+        // 标题为空检测
+        MetaItem meta = (MetaItem) gridMdl.getItemAt(ConsEnv.PWDS_HEAD_META);
+        if (!com.magicpwd._util.Char.isValidate(meta.getName()))
+        {
+            Lang.showMesg(this, LangRes.P30F7A0C, "请输入口令标题！");
+            tb_KeysView.setRowSelectionInterval(1, 1);
+            showPropEdit(meta, true);
+            return false;
+        }
+
+        try
+        {
+            ls_LastIndx = -1;
+            tb_LastIndx = -1;
+            gridMdl.saveData(true, true);
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            Lang.showMesg(this, LangRes.P30F7A0E, "口令数据保存失败，请重新启动本程序后再次尝试！");
+        }
+
+        // 数据新增的情况下，需要重新显示列表信息
+        if (gridMdl.isUpdate())
+        {
+            coreMdl.getListMdl().updtName(ls_GuidList.getSelectedIndex(), gridMdl.getItemAt(ConsEnv.PWDS_HEAD_META).getName());
+        }
+        else
+        {
+            if (isSearch)
+            {
+                coreMdl.getListMdl().findName(queryKey);
+            }
+            else if (com.magicpwd._util.Char.isValidateHash(queryKey))
+            {
+                coreMdl.getListMdl().listName(queryKey);
+            }
+        }
+
+        showPropInfo();
+        mainInfo.initData();
+
+        return true;
+    }
+
     @Override
     public void setVisible(boolean visible)
     {
@@ -231,14 +310,24 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         mainTool.setVisible(visible);
     }
 
-    public javax.swing.tree.TreePath getSelectedPath()
+    public javax.swing.tree.TreePath getSelectedKindValue()
     {
         return tr_GuidTree.getSelectionPath();
     }
 
-    public Object getSelectedItem()
+    public int getSelectedKindIndex()
+    {
+        return 0;
+    }
+
+    public Object getSelectedListValue()
     {
         return ls_GuidList.getSelectedValue();
+    }
+
+    public int getSelectedListIndex()
+    {
+        return ls_GuidList.getSelectedIndex();
     }
 
     @Override
@@ -989,7 +1078,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
     public boolean exportData()
     {
-        javax.swing.tree.TreePath path = getSelectedPath();
+        javax.swing.tree.TreePath path = getSelectedKindValue();
         KindTN node = (KindTN) path.getLastPathComponent();
         Kind kind = (Kind) node.getUserObject();
 
@@ -1051,7 +1140,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
     public boolean importData()
     {
-        javax.swing.tree.TreePath path = getSelectedPath();
+        javax.swing.tree.TreePath path = getSelectedKindValue();
         KindTN node = (KindTN) path.getLastPathComponent();
         Kind kind = (Kind) node.getUserObject();
 
@@ -1131,7 +1220,9 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         if (gridMdl.getRowCount() < ConsEnv.PWDS_HEAD_SIZE)
         {
             gridMdl.initMeta();
-            gridMdl.wAppend(gridMdl.getItemAt(0).getSpec(IEditItem.SPEC_GUID_TPLT));
+            gridMdl.initLogo();
+            gridMdl.initHint();
+            gridMdl.wAppend(gridMdl.getItemAt(ConsEnv.PWDS_HEAD_GUID).getSpec(IEditItem.SPEC_GUID_TPLT));
         }
         selectNext(gridMdl.isUpdate() ? 0 : 1, true);
     }

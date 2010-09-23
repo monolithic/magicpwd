@@ -38,6 +38,7 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
 
     public GridMdl(UserCfg userCfg, SafeMdl safeDml)
     {
+        this.userCfg = userCfg;
         ls_ItemList = new java.util.ArrayList<IEditItem>();
         keys = new Keys();
     }

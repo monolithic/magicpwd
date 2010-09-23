@@ -28,7 +28,7 @@ public class HistoryAction extends javax.swing.AbstractAction implements IPwdAct
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        Object obj = mainPtn.getSelectedItem();
+        Object obj = mainPtn.getSelectedListValue();
         if (obj == null || !(obj instanceof Keys))
         {
             return;

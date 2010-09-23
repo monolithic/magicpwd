@@ -27,7 +27,7 @@ public class DropAction extends javax.swing.AbstractAction implements IPwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        Object object = mainPtn.getSelectedItem();
+        Object object = mainPtn.getSelectedListValue();
         if (object == null)
         {
             return;
