@@ -14,7 +14,7 @@ import com.magicpwd._util.Util;
  *
  * @author Amon
  */
-public class SafeMdl
+public final class SafeMdl
 {
 
     private javax.crypto.Cipher dCipher;
@@ -77,7 +77,7 @@ public class SafeMdl
      */
     public String deCript(String text) throws Exception
     {
-        return new String(dCipher.doFinal(Util.stringToBytes(text, getSafeKey().getMask())), ConsEnv.FILE_ENCODING);
+        return new String(getDCipher().doFinal(Util.stringToBytes(text, getSafeKey().getMask())), ConsEnv.FILE_ENCODING);
     }
 
     /**
@@ -95,10 +95,10 @@ public class SafeMdl
         int len = fis.read(buf);
         while (len >= 0)
         {
-            fos.write(dCipher.update(buf, 0, len));
+            fos.write(getDCipher().update(buf, 0, len));
             len = fis.read(buf);
         }
-        fos.write(dCipher.doFinal());
+        fos.write(getDCipher().doFinal());
         fos.flush();
         fos.close();
         fis.close();
@@ -111,7 +111,7 @@ public class SafeMdl
      */
     public String enCrypt(String text) throws Exception
     {
-        return Util.bytesToString(eCipher.doFinal(text.getBytes(ConsEnv.FILE_ENCODING)), getSafeKey().getMask());
+        return Util.bytesToString(getECipher().doFinal(text.getBytes(ConsEnv.FILE_ENCODING)), getSafeKey().getMask());
     }
 
     /**
@@ -129,10 +129,10 @@ public class SafeMdl
         int len = fis.read(buf);
         while (len >= 0)
         {
-            fos.write(eCipher.update(buf, 0, len));
+            fos.write(getECipher().update(buf, 0, len));
             len = fis.read(buf);
         }
-        fos.write(eCipher.doFinal());
+        fos.write(getECipher().doFinal());
         fos.flush();
         fos.close();
         fis.close();

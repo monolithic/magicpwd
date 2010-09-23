@@ -293,6 +293,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
     public void setFindBeanVisible(boolean visible)
     {
         mainFind.setVisible(visible);
+        mainFind.requestFocus();
     }
 
     public void setInfoBeanVisible(boolean visible)
