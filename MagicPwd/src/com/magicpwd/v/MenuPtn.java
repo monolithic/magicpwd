@@ -626,6 +626,7 @@ public class MenuPtn
                 catch (Exception ex)
                 {
                     Logs.exception(ex);
+                    Lang.showMesg(null, null, ex.getLocalizedMessage());
                 }
             }
         }

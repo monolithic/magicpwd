@@ -2,38 +2,31 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.magicpwd.e.pwd.view;
+package com.magicpwd.e.pwd.edit;
 
 import com.magicpwd.e.pwd.IPwdAction;
-import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
 
 /**
  *
- * @author Amon
+ * @author aven
  */
-public class FindVisibleAction extends javax.swing.AbstractAction implements IPwdAction
+public class FindAction extends javax.swing.AbstractAction implements IPwdAction
 {
 
     private MainPtn mainPtn;
     private CoreMdl coreMdl;
 
-    public FindVisibleAction()
+    public FindAction()
     {
-        putValue(NAME, "com.magicpwd.e.pwd.view.FindVisableAction");
     }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        UserCfg cfg = coreMdl.getUserCfg();
-
-        boolean b = !cfg.isFindViw();
-        mainPtn.setFindBeanVisible(b);
+        mainPtn.setFindBeanVisible(true);
         mainPtn.pack();
-
-        cfg.setFindViw(b);
     }
 
     @Override
