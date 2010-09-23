@@ -32,7 +32,7 @@
         <menu id="edit" text="$P30F7606">
             <!--查找-->
             <item type="normal" text="$P30F7607">
-                <action id="" class="com.magicpwd.e.pwd.file.ExitAction">
+                <action id="" class="com.magicpwd.e.pwd.edit.FindAction">
                     <stroke key="^ F" />
                 </action>
             </item>
