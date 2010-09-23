@@ -42,13 +42,12 @@ import com.magicpwd.r.TreeCR;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.TrayPtn;
 import com.magicpwd.x.MdiDialog;
-import com.magicpwd.x.MpsDialog;
 
 public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGridView
 {
 
     private MailDlg mailForm;
-    private MpsDialog md_MpsDialog;
+    private EditDlg ed_KeysEdit;
     private IEditBean[] editBean;
     private FindBar mainFind;
     private HintBar mainInfo;
@@ -146,18 +145,34 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         UserCfg cfg = coreMdl.getUserCfg();
         if (cfg.isEditVisible())
         {
-            showPropEdit();
+            showPropInfo();
         }
 
         mainInfo.initData();
         mainFind.initData();
 
+        eb_KeysEdit.initData();
+        ed_KeysEdit.initData();
         for (IEditBean bean : editBean)
         {
             bean.initData();
         }
 
-        showPropEdit();
+        setEditVisible(cfg.isEditVisible());
+        setEditRelated(cfg.isEditRelated());
+
+        showPropInfo();
+    }
+
+    public boolean newKeys()
+    {
+        if (!clearGrid())
+        {
+            return false;
+        }
+        setEditVisible(true);
+        showPropEdit(gridMdl.initGuid(), true);
+        return true;
     }
 
     @Override
@@ -169,9 +184,9 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
             {
                 mailForm.setVisible(false);
             }
-            if (md_MpsDialog != null && md_MpsDialog.isVisible())
+            if (ed_KeysEdit != null && ed_KeysEdit.isVisible())
             {
-                md_MpsDialog.setVisible(false);
+                ed_KeysEdit.setVisible(false);
             }
             MdiDialog mdiDialog = MdiDialog.getInstance();
             if (mdiDialog != null && mdiDialog.isVisible())
@@ -189,10 +204,10 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
     public void setEditBeanVisible(boolean visible)
     {
-        pl_KeysEdit.setVisible(visible);
-        if (md_MpsDialog != null)
+        eb_KeysEdit.setVisible(visible);
+        if (ed_KeysEdit != null)
         {
-            md_MpsDialog.setVisible(visible);
+            ed_KeysEdit.setVisible(visible);
         }
     }
 
@@ -349,12 +364,6 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
     private void initPropView()
     {
-        pl_KeysEdit = new javax.swing.JPanel();
-        pl_KeysEdit.setLayout(new java.awt.BorderLayout());
-        border = javax.swing.BorderFactory.createTitledBorder(Lang.getLang(LangRes.P30F7305, ""));
-        pl_KeysEdit.setBorder(border);
-        pl_KeysEdit.setVisible(false);
-
         cl_CardProp = new java.awt.CardLayout();
         pl_CardProp = new javax.swing.JPanel();
         pl_CardProp.setLayout(cl_CardProp);
@@ -420,6 +429,12 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         beanNote.initView();
         pl_CardProp.add(ConsEnv.BEAN_NOTE, beanNote);
         editBean[idx++] = beanNote;
+
+        eb_KeysEdit = new EditBar();
+        eb_KeysEdit.initView();
+
+        ed_KeysEdit = new EditDlg(this);
+        ed_KeysEdit.initView();
     }
 
     private void initGuidView()
@@ -596,7 +611,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         pl_KeysInfo.setLayout(layout);
         javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg.addComponent(sp_KeysView, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE);
-        hpg.addComponent(pl_KeysEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        hpg.addComponent(eb_KeysEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         hpg.addComponent(mainFind, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
 
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
@@ -609,7 +624,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addComponent(sp_KeysView, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        vsg.addComponent(pl_KeysEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg.addComponent(eb_KeysEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         layout.setVerticalGroup(vsg);
     }
 
@@ -655,6 +670,9 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
     private void initPropLang()
     {
+        eb_KeysEdit.initLang();
+        ed_KeysEdit.initLang();
+
         for (IEditBean bean : editBean)
         {
             bean.initLang();
@@ -766,7 +784,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
             Logs.exception(exp);
         }
 
-        showPropEdit();
+        showPropInfo();
     }
 
     private void tb_ItemListMouseReleased(java.awt.event.MouseEvent evt)
@@ -792,7 +810,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         showPropEdit(gridMdl.getItemAt(row), false);
     }
 
-    public void showPropEdit()
+    public void showPropInfo()
     {
         if (coreMdl.getUserCfg().isEditVisible())
         {
@@ -802,57 +820,52 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         }
     }
 
+    public void setEditVisible(boolean visible)
+    {
+        if (coreMdl.getUserCfg().isEditRelated())
+        {
+            eb_KeysEdit.setVisible(visible);
+        }
+        else
+        {
+            ed_KeysEdit.setVisible(visible);
+        }
+    }
+
+    public void setEditRelated(boolean related)
+    {
+        if (coreMdl.getUserCfg().isEditVisible())
+        {
+            if (related)
+            {
+                eb_KeysEdit.setVisible(true);
+                ed_KeysEdit.setVisible(false);
+                eb_KeysEdit.setPropView(pl_CardProp);
+            }
+            else
+            {
+                eb_KeysEdit.setVisible(false);
+                ed_KeysEdit.setVisible(true);
+                ed_KeysEdit.setPropView(pl_CardProp);
+            }
+        }
+    }
+
     public void showPropEdit(IEditItem tplt, boolean focus)
     {
         if (coreMdl.getUserCfg().isEditVisible())
         {
-            editBean[tplt.getType()].showData(tplt);
             cl_CardProp.show(pl_CardProp, ConsEnv.BEAN_PROP + tplt.getType());
+            editBean[tplt.getType()].showData(tplt);
 
             if (focus)
             {
                 editBean[tplt.getType()].requestFocus();
             }
 
-            border.setTitle(getPropName(tplt.getType()));
-        }
-    }
-
-    public void showPropEdit(boolean editWnd)
-    {
-        pl_KeysEdit.setVisible(!editWnd);
-
-        if (editWnd)
-        {
-            if (md_MpsDialog != null)
-            {
-                md_MpsDialog.setPropView(pl_CardProp);
-            }
-            else
-            {
-                md_MpsDialog = new MpsDialog(this);
-                md_MpsDialog.initView();
-                md_MpsDialog.initLang();
-                md_MpsDialog.setPropView(pl_CardProp);
-                md_MpsDialog.pack();
-                md_MpsDialog.setResizable(false);
-                java.awt.Dimension a = md_MpsDialog.getSize();
-                java.awt.Dimension b = TrayPtn.getCurrForm().getSize();
-                java.awt.Point p = TrayPtn.getCurrForm().getLocation();
-                md_MpsDialog.setLocation(p.x + b.width, p.y + b.height - a.height);
-            }
-            if (!md_MpsDialog.isVisible())
-            {
-                md_MpsDialog.setVisible(true);
-            }
-        }
-        else
-        {
-            pl_KeysEdit.add(pl_CardProp);
-            if (md_MpsDialog != null && md_MpsDialog.isVisible())
-            {
-                md_MpsDialog.setVisible(false);
-            }
+            String title = getPropName(tplt.getType());
+            eb_KeysEdit.setTitle(title);
+            ed_KeysEdit.setTitle(title);
         }
     }
 
@@ -934,7 +947,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 //            mainMenu.setViewSideSelected(true);
             coreMdl.getUserCfg().setEditViw(true);
             coreMdl.getUserCfg().setEditWnd(true);
-            showPropEdit(true);
+            setEditVisible(true);
         }
 
         showPropEdit(gridMdl.initGuid(), true);
@@ -1085,9 +1098,20 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         return true;
     }
 
-    public void clearGrid()
+    public boolean clearGrid()
     {
+        if (gridModified())
+        {
+            if (Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", getMeta().getName()) != javax.swing.JOptionPane.YES_OPTION)
+            {
+                return false;
+            }
+        }
+
         gridMdl.clear();
+        tb_LastIndx = 0;
+
+        return true;
     }
 
     public boolean gridModified()
@@ -1107,7 +1131,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         if (gridMdl.getRowCount() < ConsEnv.PWDS_HEAD_SIZE)
         {
             gridMdl.initMeta();
-            gridMdl.wAppend(gridMdl.getItemAt(ConsDat.INDX_GUID).getSpec(IEditItem.SPEC_GUID_TPLT));
+            gridMdl.wAppend(gridMdl.getItemAt(0).getSpec(IEditItem.SPEC_GUID_TPLT));
         }
         selectNext(gridMdl.isUpdate() ? 0 : 1, true);
     }
@@ -1181,7 +1205,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
     /**
      * 属性编辑面板，用于显示边框及相关信息
      */
-    private javax.swing.JPanel pl_KeysEdit;
+    private EditBar eb_KeysEdit;
     /**
      * 属性切换面板，用于显示不同属性的面板
      */
@@ -1199,6 +1223,5 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
      */
     private javax.swing.JTable tb_KeysView;
     private javax.swing.JScrollPane sp_KeysView;
-    private javax.swing.border.TitledBorder border;
     private java.awt.CardLayout cl_CardProp;
 }
