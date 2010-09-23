@@ -337,6 +337,11 @@ public final class UserCfg
         userCfg.setProperty(ConsCfg.CFG_VIEW_EDIT_VIW, editViw ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
+    public final boolean isEditRelated()
+    {
+        return ConsCfg.DEF_TRUE.equalsIgnoreCase(userCfg.getProperty(ConsCfg.CFG_VIEW_EDIT_VIW, ConsCfg.DEF_TRUE));
+    }
+
     /**
      * @param editWnd
      *            the editWnd to set

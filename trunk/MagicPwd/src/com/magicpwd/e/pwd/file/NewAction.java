@@ -4,12 +4,10 @@
  */
 package com.magicpwd.e.pwd.file;
 
-import com.magicpwd._cons.LangRes;
-import com.magicpwd._util.Lang;
+import com.magicpwd._util.Char;
 import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
-import com.magicpwd.v.TrayPtn;
 
 /**
  *
@@ -28,26 +26,31 @@ public class NewAction extends javax.swing.AbstractAction implements IPwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (mainPtn.gridModified())
+        if (!mainPtn.newKeys())
         {
-            if (Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", mainPtn.getMeta().getName()) != javax.swing.JOptionPane.YES_OPTION)
+            return;
+        }
+
+        if (coreMdl.getUserCfg().isEditVisible())
+        {
+            return;
+        }
+
+        String cmd = e.getActionCommand();
+        if (Char.isValidate(cmd))
+        {
+            String[] arr = cmd.split(",");
+            if (arr != null && arr.length == 2)
             {
-                return;
+                mainPtn.getMenuPtn().getButton(arr[0]).setSelected(true);
+                mainPtn.getMenuPtn().getButton(arr[1]).setSelected(true);
             }
         }
 
-        //tb_LastIndx = 0;
-        mainPtn.clearGrid();
-        if (!coreMdl.getUserCfg().isEditVisible())
-        {
-            mainPtn.getMenuPtn().getButton("").setSelected(true);
-//            mainMenu.setViewPropSelected(true);
-//            mainMenu.setViewSideSelected(true);
-            coreMdl.getUserCfg().setEditViw(true);
-            coreMdl.getUserCfg().setEditWnd(true);
-            mainPtn.showPropEdit(true);
-        }
-//        mainPtn.showPropEdit(gm.initGuid(), true);
+        coreMdl.getUserCfg().setEditViw(true);
+        coreMdl.getUserCfg().setEditWnd(true);
+
+        mainPtn.setEditVisible(true);
     }
 
     @Override

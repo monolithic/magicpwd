@@ -30,7 +30,7 @@ public class EditVisibleAction extends javax.swing.AbstractAction implements IPw
         boolean b = !cfg.isEditVisible();
         if (b)
         {
-            mainPtn.showPropEdit();
+            mainPtn.showPropInfo();
         }
         else
         {

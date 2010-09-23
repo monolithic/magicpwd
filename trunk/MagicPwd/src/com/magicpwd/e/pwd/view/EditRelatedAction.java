@@ -39,7 +39,7 @@ public class EditRelatedAction extends javax.swing.AbstractAction implements IPw
 
         if (cfg.isEditVisible())
         {
-            mainPtn.showPropEdit(b);
+            mainPtn.setEditVisible(b);
         }
         mainPtn.pack();
 
