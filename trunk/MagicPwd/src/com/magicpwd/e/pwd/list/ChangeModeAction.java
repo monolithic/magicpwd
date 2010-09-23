@@ -30,7 +30,7 @@ public class ChangeModeAction extends javax.swing.AbstractAction implements IPwd
         String command = e.getActionCommand();
         int val = Char.isValidateInteger(command) ? Integer.parseInt(command) : 0;
 
-        Object obj = mainPtn.getSelectedItem();
+        Object obj = mainPtn.getSelectedListValue();
         if (obj instanceof Keys)
         {
             ((Keys) obj).setP30F0102(val);

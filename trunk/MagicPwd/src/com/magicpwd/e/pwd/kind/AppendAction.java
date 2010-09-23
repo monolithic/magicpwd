@@ -29,7 +29,7 @@ public class AppendAction extends javax.swing.AbstractAction implements IPwdActi
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        javax.swing.tree.TreePath path = mainPtn.getSelectedPath();
+        javax.swing.tree.TreePath path = mainPtn.getSelectedKindValue();
         if (path == null)
         {
             return;

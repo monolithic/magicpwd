@@ -35,7 +35,7 @@ public class ImportAction extends javax.swing.AbstractAction implements IPwdActi
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        javax.swing.tree.TreePath path = mainPtn.getSelectedPath();
+        javax.swing.tree.TreePath path = mainPtn.getSelectedKindValue();
         if (path == null)
         {
             Lang.showMesg(mainPtn, LangRes.P30F7A02, "");
