@@ -4,8 +4,10 @@
  */
 package com.magicpwd.e.pwd.list;
 
+import com.magicpwd._comn.Keys;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.m.CoreMdl;
@@ -63,23 +65,18 @@ public class MovetoAction extends javax.swing.AbstractAction implements IPwdActi
 
     private boolean changeKind(String hash)
     {
-//        GridMdl gm = coreMdl.getGridMdl();
-//        if (hash == null || hash.equals(gm.getItemAt(ConsEnv.PWDS_HEAD_GUID).getData()))
-//        {
-//            return true;
-//        }
-//
-//        gm.getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(hash);
-//        try
-//        {
-//            gm.saveData(true, true);
-//            coreMdl.getListMdl().wRemove(ls_LastIndx);
-//        }
-//        catch (Exception exp)
-//        {
-//            Logs.exception(exp);
-//            return false;
-//        }
+        if (!Char.isValidateHash(hash))
+        {
+            return false;
+        }
+
+        Object obj = mainPtn.getSelectedListValue();
+        if (obj instanceof Keys)
+        {
+            ((Keys) obj).setP30F0106(hash);
+        }
+        mainPtn.changeKind(hash);
+
         return true;
     }
 }

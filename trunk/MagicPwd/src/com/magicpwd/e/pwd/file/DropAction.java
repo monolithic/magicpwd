@@ -41,7 +41,7 @@ public class DropAction extends javax.swing.AbstractAction implements IPwdAction
         {
             return;
         }
-//        coreMdl.getListMdl().wDelete(index);
+        coreMdl.getListMdl().wDelete(mainPtn.getSelectedListIndex());
         mainPtn.clearGrid();
         mainPtn.showPropInfo();
     }

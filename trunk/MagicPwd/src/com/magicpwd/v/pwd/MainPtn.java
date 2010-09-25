@@ -1080,6 +1080,14 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         gridMdl.setKeysNote(note);
     }
 
+    public void changeKind(String hash)
+    {
+        if(gridMdl.setKeysKind(hash))
+        {
+            coreMdl.getListMdl().wRemove(ls_LastIndx);
+        }
+    }
+
     public boolean exportData()
     {
         javax.swing.tree.TreePath path = getSelectedKindValue();

@@ -675,6 +675,14 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
         DBA3000.saveKeysData(keys);
     }
 
+    public boolean setKeysKind(String hash)
+    {
+        boolean b = keys.getP30F0106().equals(hash);
+        keys.setP30F0106(hash);
+        DBA3000.saveKeysData(keys);
+        return !b;
+    }
+
     public int getSequence()
     {
         return keys.getP30F0101();
