@@ -19,6 +19,7 @@
             <item type="normal" text="$P30F7604">
                 <action id="hide-window" class="com.magicpwd.e.pwd.file.HideAction">
                     <stroke key="^ H" />
+                    <stroke key="^ Enter" />
                 </action>
             </item>
             <!--退出-->
@@ -82,14 +83,14 @@
             <seperator />
             <!--上移-->
             <item type="normal" text="$P30F760F">
-                <action id="" class="com.magicpwd.e.pwd.edit.PrevAction">
-                    <stroke key="^ UP" />
+                <action id="edit-prev" class="com.magicpwd.e.pwd.edit.PrevAction">
+                    <stroke key="^ U" />
                 </action>
             </item>
             <!--下移-->
             <item type="normal" text="$P30F7610">
-                <action id="" class="com.magicpwd.e.pwd.edit.NextAction">
-                    <stroke key="^ DOWN" />
+                <action id="edit-next" class="com.magicpwd.e.pwd.edit.NextAction">
+                    <stroke key="^ D" />
                 </action>
             </item>
         </menu>
@@ -179,6 +180,26 @@
             <item type="normal" text="$P30F7637">
                 <action id="" class="com.magicpwd.e.pwd.safe.CloudConfigAction" />
             </item>
+        </menu>
+        <!--用户-->
+        <menu id="user" text="$P30F7624">
+            <!--切换用户-->
+            <item type="normal" text="$P30F7625" enabled="false">
+                <action id="" class="com.magicpwd.e.pwd.user.SwitchUserAction" />
+            </item>
+            <!--添加用户-->
+            <item type="normal" text="$P30F7626" enabled="false">
+                <action id="" class="com.magicpwd.e.pwd.user.CreateUserAction" />
+            </item>
+            <seperator />
+            <!--更改登录口令-->
+            <item type="normal" text="$P30F7627">
+                <action id="" class="com.magicpwd.e.pwd.user.ChangePkeyAction" />
+            </item>
+            <!--设置安全口令-->
+            <item type="normal" text="$P30F7628">
+                <action id="" class="com.magicpwd.e.pwd.user.CreateSkeyAction" />
+            </item>
             <seperator />
             <!--常规设置-->
             <item type="normal" text="$P30F761F">
@@ -195,26 +216,6 @@
             <!--类别管理-->
             <item type="normal" text="$P30F7622">
                 <action id="" class="" />
-            </item>
-        </menu>
-        <!--用户-->
-        <menu id="user" text="$P30F7624">
-            <!--切换用户-->
-            <item type="normal" text="$P30F7625">
-                <action id="" class="com.magicpwd.e.pwd.user.SwitchUserAction" />
-            </item>
-            <!--添加用户-->
-            <item type="normal" text="$P30F7626">
-                <action id="" class="com.magicpwd.e.pwd.user.CreateUserAction" />
-            </item>
-            <seperator />
-            <!--更改登录口令-->
-            <item type="normal" text="$P30F7627">
-                <action id="" class="com.magicpwd.e.pwd.user.ChangePkeyAction" />
-            </item>
-            <!--设置安全口令-->
-            <item type="normal" text="$P30F7628">
-                <action id="" class="com.magicpwd.e.pwd.user.CreateSkeyAction" />
             </item>
         </menu>
         <!--皮肤-->
@@ -496,8 +497,21 @@
             </item>
         </menu>
         <seperator />
+        <!--上移-->
+        <item type="normal" text="$P30F760F">
+            <action id="edit-prev" class="com.magicpwd.e.pwd.edit.PrevAction">
+                <stroke key="^ U" />
+            </action>
+        </item>
+        <!--下移-->
+        <item type="normal" text="$P30F7610">
+            <action id="edit-next" class="com.magicpwd.e.pwd.edit.NextAction">
+                <stroke key="^ D" />
+            </action>
+        </item>
+        <seperator />
         <!--删除属性-->
-        <item type="normal" text="$P30F7D07">
+        <item type="normal" text="$P30F7D19">
             <action id="" class="com.magicpwd.e.pwd.grid.DropAction" />
         </item>
     </menupop>
