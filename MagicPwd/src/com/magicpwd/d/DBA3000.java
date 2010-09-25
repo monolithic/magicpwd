@@ -586,6 +586,23 @@ public class DBA3000
         dba.reset();
     }
 
+    public static void updateKeys(String c, String v, String k) throws SQLException
+    {
+        // 数据库连接初始化
+        DBAccess dba = new DBAccess();
+
+        if (!com.magicpwd._util.Char.isValidateHash(k))
+        {
+            return;
+        }
+        dba.addTable(DBC3000.P30F0100);
+        dba.addParam(c, v);
+        dba.addWhere(DBC3000.P30F0104, k);
+        dba.executeUpdate();
+
+        dba.close();
+    }
+
     private static void updatePwds(DBAccess dba, Keys keys) throws SQLException
     {
         StringBuffer pwd = keys.getPassword().getP30F0203();
