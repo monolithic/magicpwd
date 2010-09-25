@@ -398,12 +398,17 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
             return;
         }
 
-        connect = node.getConnect();
+        Store store = null;
 
         try
         {
             showNotice("正在处理与服务器通讯……");
-            Store store = node.getConnect().getStore();
+            connect = node.getConnect();
+            store = connect.getStore();
+            if (!store.isConnected())
+            {
+                store.connect();
+            }
             folder = store.getFolder(node.getKeyWord());
             if (folder == null)
             {
