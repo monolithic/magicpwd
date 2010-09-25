@@ -94,7 +94,7 @@ public class CloudBackupAction extends javax.swing.AbstractAction implements IPw
                 return;
             }
 
-            docs = coreMdl.getSafeMdl().deCript(docs);
+            docs = mainPtn.deCrypt(docs);
             String[] data = docs.split("\n");
 
             java.io.File bakFile = TrayPtn.endSave();

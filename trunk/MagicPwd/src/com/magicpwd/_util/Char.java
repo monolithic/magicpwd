@@ -18,10 +18,12 @@ public class Char
     {
         if (src != null)
         {
-            int i = 0;
-            for (String tmp : arg)
+            for (int i = 0, j = arg.length; i < j; i += 1)
             {
-                src = src.replace("{" + (i++) + "}", tmp);
+                if (arg[i] != null)
+                {
+                    src = src.replace("{" + (i) + "}", arg[i]);
+                }
             }
         }
         return src;

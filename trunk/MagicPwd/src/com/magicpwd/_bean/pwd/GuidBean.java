@@ -222,7 +222,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
 
     public void readMailActionPerformed(java.awt.event.ActionEvent evt)
     {
-        TrayPtn.showMailPtn();
+        mainPtn.showMailPtn();
     }
 
     public void exptCardActionPerformed(java.awt.event.ActionEvent evt)

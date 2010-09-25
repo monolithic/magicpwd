@@ -15,6 +15,7 @@ import com.magicpwd._bean.pwd.MetaBean;
 import com.magicpwd._bean.pwd.HintBean;
 import com.magicpwd._bean.pwd.PwdsBean;
 import com.magicpwd._bean.pwd.TextBean;
+import com.magicpwd._comn.I1S2;
 import com.magicpwd._comn.Kind;
 import com.magicpwd._comn.Keys;
 import com.magicpwd._comn.item.GuidItem;
@@ -25,6 +26,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IGridView;
+import com.magicpwd._mail.Connect;
 import com.magicpwd._mail.MailDlg;
 import com.magicpwd._util.Card;
 import com.magicpwd._util.Desk;
@@ -53,6 +55,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
     private IEditBean[] editBean;
     private FindBar mainFind;
     private HintBar mainInfo;
+    private MailDlg mailDlg;
     private javax.swing.JMenuBar mainMenu;
     private javax.swing.JToolBar mainTool;
     private javax.swing.JPopupMenu kindMenu;
@@ -1228,6 +1231,16 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         selectNext(gridMdl.isUpdate() ? 0 : 1, true);
     }
 
+    public String enCrypt(String text) throws Exception
+    {
+        return safeMdl.enCrypt(text);
+    }
+
+    public String deCrypt(String text) throws Exception
+    {
+        return safeMdl.deCrypt(text);
+    }
+
     public void enCrypt(java.io.File src, java.io.File dst) throws Exception
     {
         safeMdl.enCrypt(src, dst);
@@ -1281,6 +1294,76 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
             Logs.exception(ex);
             Lang.showMesg(TrayPtn.getCurrForm(), null, ex.getLocalizedMessage());
         }
+    }
+
+    public void showMailPtn()
+    {
+        if (mailDlg == null)
+        {
+            mailDlg = new MailDlg();
+            mailDlg.initView();
+            mailDlg.initLang();
+            mailDlg.initData();
+            Util.centerForm(mailDlg, TrayPtn.getCurrForm());
+        }
+
+        MailPtn mailPtn = new MailPtn();
+        mailPtn.initView();
+        mailPtn.initLang();
+        java.util.List<I1S2> mailList = gridMdl.wSelect(ConsDat.INDX_MAIL);
+        mailPtn.initMail(mailList);
+        if (mailList.size() < 1)
+        {
+            Lang.showMesg(mailDlg, null, "没有可用的邮件类型数据！");
+            return;
+        }
+        java.util.List<I1S2> userList = gridMdl.wSelect(ConsDat.INDX_TEXT);
+        mailPtn.initUser(userList);
+        if (userList.size() < 1)
+        {
+            Lang.showMesg(mailDlg, null, "没有可用的文本类型数据！");
+            return;
+        }
+        java.util.List<I1S2> pwdsList = gridMdl.wSelect(ConsDat.INDX_PWDS);
+        mailPtn.initPwds(pwdsList);
+        if (pwdsList.size() < 1)
+        {
+            Lang.showMesg(mailDlg, null, "没有可用的口令类型数据！");
+            return;
+        }
+        if (javax.swing.JOptionPane.OK_OPTION != javax.swing.JOptionPane.showConfirmDialog(TrayPtn.getCurrForm(), mailPtn, "登录确认", javax.swing.JOptionPane.OK_CANCEL_OPTION))
+        {
+            return;
+        }
+
+        String mail = mailList.get(mailPtn.getMail()).getK();
+        String user = userList.get(mailPtn.getUser()).getK();
+        String pwds = pwdsList.get(mailPtn.getPwds()).getK();
+
+        String host = mail.substring(mail.indexOf('@') + 1);
+        if (!com.magicpwd._util.Char.isValidate(host))
+        {
+            return;
+        }
+
+        final Connect connect = new Connect(mail, pwds);
+        connect.setUsername(user);
+        if (!connect.useDefault())
+        {
+            Lang.showMesg(mailDlg, null, "查找不到对应的服务信息，如有疑问请与作者联系！");
+            return;
+        }
+
+        mailDlg.setVisible(true);
+        new Thread()
+        {
+
+            @Override
+            public void run()
+            {
+                mailDlg.append(connect, "");
+            }
+        }.start();
     }
     /**
      * 

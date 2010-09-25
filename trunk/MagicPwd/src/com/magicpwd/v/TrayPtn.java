@@ -1,16 +1,11 @@
 package com.magicpwd.v;
 
 import com.magicpwd.v.pad.MiniPtn;
-import com.magicpwd.v.pwd.MailPtn;
 import com.magicpwd.v.pwd.MainPtn;
-import com.magicpwd._comn.I1S2;
 import com.magicpwd._cons.ConsCfg;
-import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
-import com.magicpwd._mail.Connect;
-import com.magicpwd._mail.MailDlg;
 import com.magicpwd._user.UserPtn;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Jzip;
@@ -18,7 +13,6 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.DBAccess;
-import com.magicpwd.m.GridMdl;
 import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.m.SafeMdl;
@@ -36,7 +30,6 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
     private static int nextPtn;
     private static CoreMdl coreMdl;
     private static SafeMdl safeMdl;
-    private static MailDlg mailDlg;
     private static TrayPtn trayPtn;
     private static UserPtn userSign;
     private static javax.swing.JFrame mf_CurrForm;
@@ -396,83 +389,6 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
 
         mf_CurrForm = mp_MiniPtn;
         currPtn = ConsEnv.VIEW_MINI;
-    }
-
-    public static void showMailPtn()
-    {
-        if (mailDlg == null)
-        {
-            mailDlg = new MailDlg();
-            mailDlg.initView();
-            mailDlg.initLang();
-            mailDlg.initData();
-            Util.centerForm(mailDlg, TrayPtn.getCurrForm());
-        }
-
-        GridMdl gm = null;//coreMdl.getGridMdl();
-
-        MailPtn mailPtn = new MailPtn();
-        mailPtn.initView();
-        mailPtn.initLang();
-        java.util.List<I1S2> mailList = gm.wSelect(ConsDat.INDX_MAIL);
-        mailPtn.initMail(mailList);
-        if (mailList.size() < 1)
-        {
-            Lang.showMesg(mailDlg, null, "没有可用的邮件类型数据！");
-            return;
-        }
-        java.util.List<I1S2> userList = gm.wSelect(ConsDat.INDX_TEXT);
-        mailPtn.initUser(userList);
-        if (userList.size() < 1)
-        {
-            Lang.showMesg(mailDlg, null, "没有可用的文本类型数据！");
-            return;
-        }
-        java.util.List<I1S2> pwdsList = gm.wSelect(ConsDat.INDX_PWDS);
-        mailPtn.initPwds(pwdsList);
-        if (pwdsList.size() < 1)
-        {
-            Lang.showMesg(mailDlg, null, "没有可用的口令类型数据！");
-            return;
-        }
-        if (javax.swing.JOptionPane.OK_OPTION != javax.swing.JOptionPane.showConfirmDialog(TrayPtn.getCurrForm(), mailPtn, "登录确认", javax.swing.JOptionPane.OK_CANCEL_OPTION))
-        {
-            return;
-        }
-
-        String mail = mailList.get(mailPtn.getMail()).getK();
-        String user = userList.get(mailPtn.getUser()).getK();
-        String pwds = pwdsList.get(mailPtn.getPwds()).getK();
-
-        String host = mail.substring(mail.indexOf('@') + 1);
-        if (!com.magicpwd._util.Char.isValidate(host))
-        {
-            return;
-        }
-
-        final Connect connect = new Connect(mail, pwds);
-        connect.setUsername(user);
-        if (!connect.useDefault())
-        {
-            Lang.showMesg(mailDlg, null, "查找不到对应的服务信息，如有疑问请与作者联系！");
-            return;
-        }
-
-        mailDlg.setVisible(true);
-        new Thread()
-        {
-
-            @Override
-            public void run()
-            {
-                mailDlg.append(connect, "");
-            }
-        }.start();
-    }
-
-    public static void setMailDlgVisible(boolean visible)
-    {
-        mailDlg.setVisible(visible);
     }
 
     public javax.swing.JPopupMenu getJPopupMenu()

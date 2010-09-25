@@ -73,7 +73,7 @@ public class CloudConfigAction extends javax.swing.AbstractAction implements IPw
 
         try
         {
-            DBA3000.saveConfig("pop_mail", coreMdl.getSafeMdl().enCrypt(params[1] + '\n' + params[2]));
+            DBA3000.saveConfig("pop_mail", mainPtn.enCrypt(params[1] + '\n' + params[2]));
         }
         catch (Exception ex)
         {
