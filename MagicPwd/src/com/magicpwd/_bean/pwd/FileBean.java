@@ -16,7 +16,6 @@ import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
-import com.magicpwd.v.TrayPtn;
 import com.magicpwd.v.pwd.MainPtn;
 
 /**
@@ -189,7 +188,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
+        if (Lang.showFirm(mainPtn, LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
         {
             return;
         }
@@ -202,7 +201,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
         }
         catch (Exception exp)
         {
-            Lang.showMesg(TrayPtn.getCurrForm(), null, exp.getLocalizedMessage());
+            Lang.showMesg(mainPtn, null, exp.getLocalizedMessage());
             Logs.exception(exp);
         }
     }
@@ -213,7 +212,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
         String name = tf_PropName.getText();
         if (!com.magicpwd._util.Char.isValidate(name))
         {
-            Lang.showMesg(this, LangRes.P30F7A2B, "请输入文件名称！");
+            Lang.showMesg(mainPtn, LangRes.P30F7A2B, "请输入文件名称！");
             tf_PropName.requestFocus();
             return;
         }
@@ -222,25 +221,25 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
         {
             if (!filePath.exists())
             {
-                Lang.showMesg(this, LangRes.P30F7A03, "");
+                Lang.showMesg(mainPtn, LangRes.P30F7A03, "");
                 tf_PropData.requestFocus();
                 return;
             }
             if (!filePath.isFile())
             {
-                Lang.showMesg(this, LangRes.P30F7A04, "");
+                Lang.showMesg(mainPtn, LangRes.P30F7A04, "");
                 tf_PropData.requestFocus();
                 return;
             }
             if (!filePath.canRead())
             {
-                Lang.showMesg(this, LangRes.P30F7A05, "");
+                Lang.showMesg(mainPtn, LangRes.P30F7A05, "");
                 tf_PropData.requestFocus();
                 return;
             }
             if (filePath.length() > 1048576)
             {
-                Lang.showMesg(this, LangRes.P30F7A06, "");
+                Lang.showMesg(mainPtn, LangRes.P30F7A06, "");
                 tf_PropData.requestFocus();
                 return;
             }
@@ -256,7 +255,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
                 {
                     if (!amaFile.createNewFile())
                     {
-                        Lang.showMesg(this, LangRes.P30F7A2C, "文件上传保存出错，请重试！");
+                        Lang.showMesg(mainPtn, LangRes.P30F7A2C, "文件上传保存出错，请重试！");
                         return;
                     }
                 }
@@ -266,7 +265,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
             catch (Exception exp)
             {
                 Logs.exception(exp);
-                Lang.showMesg(this, LangRes.P30F7A2C, "文件上传保存出错，请重试！");
+                Lang.showMesg(mainPtn, LangRes.P30F7A2C, "文件上传保存出错，请重试！");
                 return;
             }
         }
@@ -307,13 +306,13 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
             catch (java.io.IOException exp)
             {
                 Logs.exception(exp);
-                Lang.showMesg(this, LangRes.P30F7A2E, "无法创建文件 {0}, 请确认您是否有足够的访问权限！", filePath.getPath());
+                Lang.showMesg(mainPtn, LangRes.P30F7A2E, "无法创建文件 {0}, 请确认您是否有足够的访问权限！", filePath.getPath());
                 return;
             }
         }
         if (!filePath.canWrite())
         {
-            Lang.showMesg(this, LangRes.P30F7A2F, "无法保存数据到您指定的路径，请确认您是否有足够的权限！");
+            Lang.showMesg(mainPtn, LangRes.P30F7A2F, "无法保存数据到您指定的路径，请确认您是否有足够的权限！");
             return;
         }
         if (filePath.isDirectory())
@@ -329,7 +328,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
         catch (Exception exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(this, LangRes.P30F7A2D, "文件下载保存出错，请重试！");
+            Lang.showMesg(mainPtn, LangRes.P30F7A2D, "文件下载保存出错，请重试！");
         }
     }
 
@@ -353,12 +352,12 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
             //Keys.doCrypt(gridView.getCoreMdl().getDCipher(), srcFile, tmpFile);
             if (!Desk.open(tmpFile))
             {
-                Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F1A03, "打开文件错误，请尝试手动方式查看！");
+                Lang.showMesg(mainPtn, LangRes.P30F1A03, "打开文件错误，请尝试手动方式查看！");
             }
         }
         catch (Exception exp)
         {
-            Lang.showMesg(this, null, exp.getLocalizedMessage());
+            Lang.showMesg(mainPtn, null, exp.getLocalizedMessage());
             Logs.exception(exp);
         }
     }

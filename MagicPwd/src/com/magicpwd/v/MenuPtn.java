@@ -562,9 +562,10 @@ public class MenuPtn
             return button;
         }
 
-        for (Object obj : list)
+
+        for (int i = 0, j = list.size(); i < j; i += 1)
         {
-            String temp = ((Element) obj).attributeValue("key");
+            String temp = ((Element) list.get(i)).attributeValue("key");
             if (Char.isValidate(temp))
             {
                 temp = temp.toUpperCase().replaceAll("~|SHIFT", "shift").replaceAll("\\^|CONTROL|CTRL", "control").replaceAll("#|ALT", "alt").replaceAll("!|META", "meta").replaceAll("[^-=`;',./\\[\\]a-zA-Z0-9]+", " ").trim();
@@ -573,7 +574,7 @@ public class MenuPtn
                 {
                     Bean.registerKeyStrokeAction(component, stroke, action, temp, javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
                 }
-                if (button instanceof javax.swing.JMenuItem)
+                if (i == 0 && (button instanceof javax.swing.JMenuItem))
                 {
                     ((javax.swing.JMenuItem) button).setAccelerator(stroke);
                 }
