@@ -18,7 +18,6 @@ public final class CoreMdl
     private static int runMode;
     // 用户配置数据模型
     private UserCfg userCfg;
-    private SafeMdl safeMdl;
     private ListMdl listMdl;
     private HintMdl hintMdl;
     private TreeMdl treeMdl;
@@ -134,21 +133,5 @@ public final class CoreMdl
     public void setHintMdl(HintMdl aHintMdl)
     {
         hintMdl = aHintMdl;
-    }
-
-    /**
-     * @return the safeMdl
-     */
-    public SafeMdl getSafeMdl()
-    {
-        return safeMdl;
-    }
-
-    /**
-     * @param aSafeMdl the safeMdl to set
-     */
-    public void setSafeMdl(SafeMdl aSafeMdl)
-    {
-        safeMdl = aSafeMdl;
     }
 }

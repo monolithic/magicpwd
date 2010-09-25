@@ -526,7 +526,7 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
 //        return pwds.getP30F0203();
         StringBuffer buf = pwds.getP30F0203();
         String tmp = buf.toString();
-        return buf.delete(0, buf.length()).append(safeMdl.deCript(tmp));
+        return buf.delete(0, buf.length()).append(safeMdl.deCrypt(tmp));
     }
 
     /**

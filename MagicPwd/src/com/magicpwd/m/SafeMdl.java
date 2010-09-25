@@ -75,7 +75,7 @@ public final class SafeMdl
      * @param text
      * @throws Exception
      */
-    public String deCript(String text) throws Exception
+    public String deCrypt(String text) throws Exception
     {
         return new String(getDCipher().doFinal(Util.stringToBytes(text, getSafeKey().getMask())), ConsEnv.FILE_ENCODING);
     }

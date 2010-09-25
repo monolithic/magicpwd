@@ -52,9 +52,9 @@ public class Connect
 
     public Connect(String mail, String pwds, String protocol)
     {
-        this.protocol = protocol;
         this.mail = mail;
         this.password = pwds;
+        this.protocol = protocol;
 
         oldProp = new java.util.Properties();
         newProp = new java.util.Properties();
@@ -219,7 +219,8 @@ public class Connect
             {
                 return false;
             }
-            cfg = mailCfg.getProperty(type + '.' + host);
+            protocol = type;
+            cfg = mailCfg.getProperty(protocol + '.' + host);
         }
         if (!com.magicpwd._util.Char.isValidate(cfg))
         {
