@@ -16,7 +16,6 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.r.FileTM;
-import com.magicpwd.v.TrayPtn;
 import com.magicpwd.v.pwd.MainPtn;
 import java.util.regex.Pattern;
 import org.dom4j.Document;
@@ -199,7 +198,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         Object obj = cb_PropData.getSelectedItem();
         if (obj == null)
         {
-            Lang.showMesg(this, LangRes.P30F7A29, "请选择口令模板!");
+            Lang.showMesg(mainPtn, LangRes.P30F7A29, "请选择口令模板!");
             cb_PropData.requestFocus();
             return;
         }
@@ -318,7 +317,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
                 {
                     processing = false;
                     Logs.exception(exp);
-                    Lang.showMesg(TrayPtn.getCurrForm(), null, exp.getLocalizedMessage());
+                    Lang.showMesg(mainPtn, null, exp.getLocalizedMessage());
                     return;
                 }
             }
@@ -357,14 +356,14 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         java.io.File srcFile = new java.io.File(src).getAbsoluteFile();
         if (!srcFile.exists() || !srcFile.isFile() || !srcFile.canRead())
         {
-            Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A44, "无法读取卡片模板文件：{0}", src);
+            Lang.showMesg(mainPtn, LangRes.P30F7A44, "无法读取卡片模板文件：{0}", src);
             return;
         }
 
         javax.swing.JFileChooser fc = new javax.swing.JFileChooser();
         fc.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
         fc.setMultiSelectionEnabled(false);
-        if (fc.showOpenDialog(TrayPtn.getCurrForm()) != javax.swing.JFileChooser.APPROVE_OPTION)
+        if (fc.showOpenDialog(mainPtn) != javax.swing.JFileChooser.APPROVE_OPTION)
         {
             return;
         }
@@ -372,7 +371,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         java.io.File dstFile = fc.getSelectedFile();
         if (dstFile == null)
         {
-            Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A1B, "您选择的目录不存在！");
+            Lang.showMesg(mainPtn, LangRes.P30F7A1B, "您选择的目录不存在！");
             return;
         }
         if (!dstFile.exists())
@@ -381,7 +380,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         }
         if (!dstFile.canWrite())
         {
-            Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A45, "您不具有保存文件到{0}的权限！", dstFile.getPath());
+            Lang.showMesg(mainPtn, LangRes.P30F7A45, "您不具有保存文件到{0}的权限！", dstFile.getPath());
             return;
         }
 

@@ -14,7 +14,6 @@ import com.magicpwd._face.IEditItem;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
-import com.magicpwd.v.TrayPtn;
 import com.magicpwd.v.pwd.MainPtn;
 
 /**
@@ -160,7 +159,7 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
+        if (Lang.showFirm(mainPtn, LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
         {
             mainPtn.removeSelected();
         }
@@ -172,7 +171,7 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
         String name = tf_PropName.getText();
         if (!com.magicpwd._util.Char.isValidate(name))
         {
-            Lang.showMesg(this, LangRes.P30F7A33, "请输入链接名称！");
+            Lang.showMesg(mainPtn, LangRes.P30F7A33, "请输入链接名称！");
             tf_PropName.requestFocus();
             return;
         }
@@ -195,7 +194,7 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
         String link = tf_PropData.getText();
         if (!com.magicpwd._util.Char.isValidate(link))
         {
-            Lang.showMesg(this, "", "");
+            Lang.showMesg(mainPtn, "", "");
             return;
         }
         if (link.indexOf("://") < 0)

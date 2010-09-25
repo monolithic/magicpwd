@@ -212,14 +212,14 @@ public class HintBean extends javax.swing.JPanel implements IEditBean
         {
             if (!itemData.setData(data))
             {
-                Lang.showMesg(this, LangRes.P30F7A37, "您输入的日期格式无效，请重新输入！");
+                Lang.showMesg(mainPtn, LangRes.P30F7A37, "您输入的日期格式无效，请重新输入！");
                 return;
             }
             tf_PropData.setText(data);
 
             if (!com.magicpwd._util.Char.isValidate(name))
             {
-                Lang.showMesg(this, LangRes.P30F7A36, "请输入过期提示！");
+                Lang.showMesg(mainPtn, LangRes.P30F7A36, "请输入过期提示！");
             }
         }
 

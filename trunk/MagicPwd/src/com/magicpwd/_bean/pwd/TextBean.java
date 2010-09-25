@@ -11,7 +11,6 @@ import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
-import com.magicpwd.v.TrayPtn;
 import com.magicpwd.v.pwd.MainPtn;
 
 /**
@@ -140,7 +139,7 @@ public class TextBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
+        if (Lang.showFirm(mainPtn, LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
         {
             mainPtn.removeSelected();
         }
@@ -152,7 +151,7 @@ public class TextBean extends javax.swing.JPanel implements IEditBean
         String name = tf_PropName.getText();
         if (!com.magicpwd._util.Char.isValidate(name))
         {
-            Lang.showMesg(this, LangRes.P30F7A34, "请输入文本名称！");
+            Lang.showMesg(mainPtn, LangRes.P30F7A34, "请输入文本名称！");
             tf_PropName.requestFocus();
             return;
         }

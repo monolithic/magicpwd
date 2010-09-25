@@ -126,7 +126,7 @@ public class MetaBean extends javax.swing.JPanel implements IEditBean
         String name = tf_PropName.getText();
         if (!com.magicpwd._util.Char.isValidate(name))
         {
-            Lang.showMesg(this, LangRes.P30FAA1A, "记录标题不能为空!");
+            Lang.showMesg(mainPtn, LangRes.P30FAA1A, "记录标题不能为空!");
             tf_PropName.requestFocus();
             return;
         }
