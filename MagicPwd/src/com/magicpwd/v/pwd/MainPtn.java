@@ -1309,7 +1309,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
     {
         if (mailDlg == null)
         {
-            mailDlg = new MailDlg();
+            mailDlg = new MailDlg(coreMdl.getUserCfg());
             mailDlg.initView();
             mailDlg.initLang();
             mailDlg.initData();

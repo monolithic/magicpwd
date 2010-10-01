@@ -10,7 +10,6 @@ import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JTree;
 
-import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Bean;
 
 /**
@@ -54,7 +53,7 @@ public class TreeCR extends JLabel implements javax.swing.tree.TreeCellRenderer
         }
 
         setFocusable(hasFocus);
-        setIcon(expanded ? Bean.getIcon(ConsEnv.ICON_KIND_XPND) : Bean.getIcon(ConsEnv.ICON_KIND_CLPS));
+        setIcon(Bean.getIcon(expanded ? "tree-default" : "tree-expanded"));
 
         if (value instanceof KindTN)
         {

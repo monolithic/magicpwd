@@ -5,6 +5,7 @@ package com.magicpwd._mail;
 
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Bean;
+import com.magicpwd.m.UserCfg;
 
 /**
  * @author Amon
@@ -15,9 +16,11 @@ public class MailMdl extends javax.swing.table.AbstractTableModel
 
     private java.util.ArrayList<Reader> messages;
     private java.text.SimpleDateFormat format;
+    private UserCfg userCfg;
 
-    public MailMdl()
+    public MailMdl(UserCfg userCfg)
     {
+        this.userCfg = userCfg;
         messages = new java.util.ArrayList<Reader>();
         format = new java.text.SimpleDateFormat("yyyy-MM-dd");
     }
@@ -76,7 +79,7 @@ public class MailMdl extends javax.swing.table.AbstractTableModel
         switch (columnIndex)
         {
             case 0:
-                label.setIcon(message.hasAttachment() ? Bean.getIcon(ConsEnv.ICON_MAIL_FILE) : Bean.getNone());
+                label.setIcon(message.hasAttachment() ? Bean.readIcon(userCfg, ConsEnv.DIR_FEEL + "mail-attach.png") : Bean.getNone());
                 break;
             case 1:
                 label.setText(message.getFrom());
