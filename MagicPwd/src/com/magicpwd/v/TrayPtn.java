@@ -1,5 +1,6 @@
 package com.magicpwd.v;
 
+import com.magicpwd.v.pay.NormPtn;
 import com.magicpwd.v.pad.MiniPtn;
 import com.magicpwd.v.pwd.MainPtn;
 import com.magicpwd._cons.ConsCfg;
