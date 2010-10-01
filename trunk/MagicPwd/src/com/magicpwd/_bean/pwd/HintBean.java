@@ -41,7 +41,7 @@ public class HintBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initView()
     {
-        dataEdit = new EditBox(this, true);
+        dataEdit = new EditBox(mainPtn.getCoreMdl().getUserCfg(), this, true);
         dataEdit.initView();
         dataEdit.setCopyButtonVisible(false);
         dataEdit.setDropButtonVisible(false);

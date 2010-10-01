@@ -68,16 +68,16 @@ public class MiniPtn extends javax.swing.JFrame implements MPadEvt, FindEvt
         nameBox = new WTextBox(tf_NoteName, true);
         nameBox.initView();
 
-        bt_CreateNote.setIcon(Bean.getIcon(ConsEnv.ICON_KEYS_APND));
+        bt_CreateNote.setIcon(Bean.readIcon(coreMdl.getUserCfg(), ConsEnv.DIR_FEEL + "file-new.png"));
         bt_CreateNote.addActionListener(new NewAction());
 
-        bt_OpenNote.setIcon(Bean.getIcon(ConsEnv.ICON_FILE_PICK));
+        bt_OpenNote.setIcon(Bean.readIcon(coreMdl.getUserCfg(), ConsEnv.DIR_FEEL + "file-open.png"));
         bt_OpenNote.addActionListener(new OpenAction());
 
-        bt_SaveNote.setIcon(Bean.getIcon(ConsEnv.ICON_KEYS_SAVE));
+        bt_SaveNote.setIcon(Bean.readIcon(coreMdl.getUserCfg(), ConsEnv.DIR_FEEL + "file-save.png"));
         bt_SaveNote.addActionListener(new SaveAction());
 
-        bt_SearchNote.setIcon(Bean.getIcon(ConsEnv.ICON_NOTE_SRCH));
+        bt_SearchNote.setIcon(Bean.readIcon(coreMdl.getUserCfg(), ConsEnv.DIR_FEEL + "data-search.png"));
         bt_SearchNote.addActionListener(tf_NoteName.getAction());
 
         ta_NoteData.setDragEnabled(true);

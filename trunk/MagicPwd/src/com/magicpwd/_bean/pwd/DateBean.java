@@ -38,7 +38,7 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initView()
     {
-        dataEdit = new EditBox(this, false);
+        dataEdit = new EditBox(mainPtn.getCoreMdl().getUserCfg(), this, false);
         dataEdit.initView();
 
         lb_PropName = new javax.swing.JLabel();
