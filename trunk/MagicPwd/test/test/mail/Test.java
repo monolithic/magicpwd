@@ -26,7 +26,7 @@ public class Test
         {
             exp.printStackTrace();
         }
-        MailDlg md = new MailDlg();
+        MailDlg md = new MailDlg(null);
         md.initView();
         md.initLang();
         md.initData();
