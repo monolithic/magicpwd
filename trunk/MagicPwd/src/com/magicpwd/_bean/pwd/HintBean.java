@@ -10,8 +10,8 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
+import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
-import com.magicpwd._util.Util;
 import com.magicpwd.v.pwd.MainPtn;
 
 /**
@@ -61,7 +61,7 @@ public class HintBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_DateView = new BtnLabel();
-        bt_DateView.setIcon(Util.getIcon(ConsEnv.ICON_HINT_DATE));
+        bt_DateView.setIcon(Bean.getIcon(ConsEnv.ICON_HINT_DATE));
         bt_DateView.addActionListener(new java.awt.event.ActionListener()
         {
 

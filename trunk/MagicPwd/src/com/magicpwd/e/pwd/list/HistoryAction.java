@@ -5,11 +5,9 @@
 package com.magicpwd.e.pwd.list;
 
 import com.magicpwd._comn.Keys;
-import com.magicpwd._cons.ConsEnv;
 import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
-import com.magicpwd.x.MdiDialog;
 
 /**
  *
@@ -33,15 +31,7 @@ public class HistoryAction extends javax.swing.AbstractAction implements IPwdAct
         {
             return;
         }
-        Keys item = (Keys) obj;
-
-        MdiDialog mdiDialog = MdiDialog.getInstance();
-        if (mdiDialog == null)
-        {
-            MdiDialog.newInstance(mainPtn);
-            mdiDialog = MdiDialog.getInstance();
-        }
-        mdiDialog.showProp(ConsEnv.PROP_HIST, false);
+        mainPtn.showHistory();
     }
 
     @Override

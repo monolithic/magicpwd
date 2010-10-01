@@ -3,6 +3,7 @@ package com.magicpwd.x;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
+import com.magicpwd._util.Bean;
 import com.magicpwd._util.Hash;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -92,7 +93,7 @@ public class IcoDialog extends javax.swing.JDialog
         layout.setVerticalGroup(vsg1);
 
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        this.setIconImage(Util.getLogo(16));
+        this.setIconImage(Bean.getLogo(16));
         this.setResizable(false);
         this.pack();
         Util.centerForm(this, TrayPtn.getCurrForm());
@@ -232,7 +233,7 @@ class IcoModel extends javax.swing.table.AbstractTableModel
     IcoModel()
     {
         iconList = new java.util.ArrayList<javax.swing.JLabel>();
-        javax.swing.JLabel label = newLabel(0, Util.getNone(), "0");
+        javax.swing.JLabel label = newLabel(0, Bean.getNone(), "0");
         iconList.add(label);
         columnCount = 5;
         rowHeight = label.getPreferredSize().height + 6;
@@ -309,7 +310,7 @@ class IcoModel extends javax.swing.table.AbstractTableModel
             }
 
             String key = matcher.group();
-            iconList.add(newLabel(i, Util.getIcon(key), key));
+            iconList.add(newLabel(i, Bean.getIcon(key), key));
             if (key.equalsIgnoreCase(lastIcon))
             {
                 selected = i;
@@ -351,7 +352,7 @@ class IcoModel extends javax.swing.table.AbstractTableModel
         fos.close();
 
         javax.swing.ImageIcon ico = new javax.swing.ImageIcon(img);
-        Util.setIcon(hash, ico);
+        Bean.setIcon(hash, ico);
         int i = iconList.size();
         iconList.add(newLabel(i, ico, hash));
 

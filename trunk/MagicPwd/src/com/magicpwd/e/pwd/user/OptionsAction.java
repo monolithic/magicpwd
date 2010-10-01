@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.magicpwd.e.pwd.user;
 
+import com.magicpwd._cons.ConsEnv;
 import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
@@ -26,6 +26,7 @@ public class OptionsAction extends javax.swing.AbstractAction implements IPwdAct
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
+        mainPtn.showOptions(ConsEnv.PROP_USET);
     }
 
     @Override

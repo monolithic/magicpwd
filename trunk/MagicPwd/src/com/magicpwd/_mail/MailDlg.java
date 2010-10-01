@@ -6,10 +6,10 @@ package com.magicpwd._mail;
 
 import com.magicpwd._comn.S1S1;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._util.Bean;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd._util.Util;
 import com.magicpwd.r.MailCR;
 
 import javax.mail.Folder;
@@ -328,7 +328,7 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
         layout.setVerticalGroup(vsg);
 
         pack();
-        setIconImage(Util.getLogo(16));
+        setIconImage(Bean.getLogo(16));
     }
 
     /**

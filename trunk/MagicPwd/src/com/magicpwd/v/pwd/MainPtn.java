@@ -28,6 +28,7 @@ import com.magicpwd._face.IEditItem;
 import com.magicpwd._face.IGridView;
 import com.magicpwd._mail.Connect;
 import com.magicpwd._mail.MailDlg;
+import com.magicpwd._util.Bean;
 import com.magicpwd._util.Card;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Jcsv;
@@ -49,12 +50,14 @@ import com.magicpwd.x.MdiDialog;
 
 public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGridView
 {
-    private MailDlg mailForm;
+
     private EditDlg ed_KeysEdit;
     private IEditBean[] editBean;
     private FindBar mainFind;
     private HintBar mainInfo;
     private MailDlg mailDlg;
+    private HistDlg histDlg;
+    private MdiDialog cfgForm;
     private javax.swing.JMenuBar mainMenu;
     private javax.swing.JToolBar mainTool;
     private javax.swing.JPopupMenu kindMenu;
@@ -129,7 +132,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         mainInfo.setVisible(cfg.isInfoViw());
 
         this.pack();
-        this.setIconImage(Util.getLogo(16));
+        this.setIconImage(Bean.getLogo(16));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         Util.centerForm(this, null);
     }
@@ -261,18 +264,17 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
     {
         if (!visible)
         {
-            if (mailForm != null && mailForm.isVisible())
+            if (mailDlg != null && mailDlg.isVisible())
             {
-                mailForm.setVisible(false);
+                mailDlg.setVisible(false);
             }
             if (ed_KeysEdit != null && ed_KeysEdit.isVisible())
             {
                 ed_KeysEdit.setVisible(false);
             }
-            MdiDialog mdiDialog = MdiDialog.getInstance();
-            if (mdiDialog != null && mdiDialog.isVisible())
+            if (cfgForm != null && cfgForm.isVisible())
             {
-                mdiDialog.setVisible(false);
+                cfgForm.setVisible(false);
             }
         }
         super.setVisible(visible);
@@ -1081,7 +1083,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
     public void changeKind(String hash)
     {
-        if(gridMdl.setKeysKind(hash))
+        if (gridMdl.setKeysKind(hash))
         {
             coreMdl.getListMdl().wRemove(ls_LastIndx);
         }
@@ -1371,6 +1373,34 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
                 mailDlg.append(connect, "");
             }
         }.start();
+    }
+
+    public void showHistory()
+    {
+        if (histDlg == null)
+        {
+            histDlg = new HistDlg(gridMdl, this);
+            histDlg.initView();
+            histDlg.initLang();
+            histDlg.initData();
+        }
+        histDlg.setVisible(true);
+    }
+
+    public void showOptions(String propName)
+    {
+        if (cfgForm == null)
+        {
+            cfgForm = new MdiDialog(coreMdl);
+            cfgForm.initView();
+            cfgForm.initLang();
+            cfgForm.initData();
+//            if (menuEvt != null)
+//            {
+//                cfgForm.addHideAction(menuEvt);
+//            }
+        }
+        cfgForm.showProp(propName, true);
     }
     /**
      * 

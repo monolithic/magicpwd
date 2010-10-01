@@ -11,6 +11,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
+import com.magicpwd._util.Bean;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
@@ -58,7 +59,7 @@ public class MailBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_MailView = new BtnLabel();
-        bt_MailView.setIcon(Util.getIcon(ConsEnv.ICON_MAIL_OPEN));
+        bt_MailView.setIcon(Bean.getIcon(ConsEnv.ICON_MAIL_OPEN));
         bt_MailView.addActionListener(new java.awt.event.ActionListener()
         {
 

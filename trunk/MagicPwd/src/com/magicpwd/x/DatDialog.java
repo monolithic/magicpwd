@@ -3,6 +3,7 @@ package com.magicpwd.x;
 import com.magicpwd._comn.Kind;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
+import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.r.KindTN;
@@ -83,7 +84,7 @@ public class DatDialog extends javax.swing.JDialog
         layout.setVerticalGroup(vsg);
 
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        this.setIconImage(Util.getLogo(16));
+        this.setIconImage(Bean.getLogo(16));
         this.pack();
         Util.centerForm(this, TrayPtn.getCurrForm());
     }

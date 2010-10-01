@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JTree;
 
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._util.Util;
+import com.magicpwd._util.Bean;
 
 /**
  * @author Amon
@@ -54,7 +54,7 @@ public class TreeCR extends JLabel implements javax.swing.tree.TreeCellRenderer
         }
 
         setFocusable(hasFocus);
-        setIcon(expanded ? Util.getIcon(ConsEnv.ICON_KIND_XPND) : Util.getIcon(ConsEnv.ICON_KIND_CLPS));
+        setIcon(expanded ? Bean.getIcon(ConsEnv.ICON_KIND_XPND) : Bean.getIcon(ConsEnv.ICON_KIND_CLPS));
 
         if (value instanceof KindTN)
         {

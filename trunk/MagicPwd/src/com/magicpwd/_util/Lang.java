@@ -109,10 +109,10 @@ public class Lang
         // 快捷字符替换
         if (txt.length() > 0)
         {
-            idx = txt.indexOf('&');
+            idx = txt.indexOf(ConsEnv.CHAR_ALT_KEY);
             if (idx >= 0)
             {
-                txt = txt.replace("&", "");
+                txt = txt.replace(ConsEnv.CHAR_ALT_KEY, "");
                 if (txt.length() > idx)
                 {
                     c.setMnemonic(txt.charAt(idx));

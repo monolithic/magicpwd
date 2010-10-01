@@ -9,18 +9,17 @@ import com.magicpwd._util.Jpng;
 import com.magicpwd._util.Logs;
 
 /**
- *
+ * 运行等待对话框
  * @author Awen
  */
-public class LckDialog extends javax.swing.JDialog
+public class LckDialog extends javax.swing.JWindow
 {
 
     private Jpng jpng;
 
     public LckDialog(javax.swing.JFrame form)
     {
-        super(form, true);
-        setUndecorated(true);
+        super(form);
     }
 
     public boolean initView()
@@ -36,7 +35,6 @@ public class LckDialog extends javax.swing.JDialog
 
         getContentPane().add(panel, java.awt.BorderLayout.CENTER);
         setPreferredSize(new java.awt.Dimension(200, 82));
-        setResizable(false);
         pack();
         return true;
     }

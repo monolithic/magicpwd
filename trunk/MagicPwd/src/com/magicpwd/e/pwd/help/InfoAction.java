@@ -8,7 +8,6 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
-import com.magicpwd.x.MdiDialog;
 
 /**
  *
@@ -27,13 +26,7 @@ public class InfoAction extends javax.swing.AbstractAction implements IPwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        MdiDialog mdiDialog = MdiDialog.getInstance();
-        if (mdiDialog == null)
-        {
-            MdiDialog.newInstance(mainPtn);
-            mdiDialog = MdiDialog.getInstance();
-        }
-        mdiDialog.showProp(ConsEnv.PROP_INFO, true);
+        mainPtn.showOptions(ConsEnv.PROP_INFO);
     }
 
     @Override

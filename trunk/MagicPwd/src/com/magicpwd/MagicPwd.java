@@ -4,11 +4,11 @@ import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._face.IBackCall;
 import com.magicpwd._user.UserPtn;
+import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd._util.Util;
 import com.magicpwd.m.UserCfg;
 import com.magicpwd.r.AmonFF;
 import com.magicpwd.v.TrayPtn;
@@ -109,13 +109,14 @@ public class MagicPwd
         javax.swing.JFrame.setDefaultLookAndFeelDecorated(deco);
         javax.swing.JDialog.setDefaultLookAndFeelDecorated(deco);
 
-        String name = cfg.getCfg(ConsCfg.CFG_SKIN_NAME, ConsCfg.DEF_SKIN_SYS).trim();
+        String type = cfg.getCfg(ConsCfg.CFG_SKIN_TYPE, "user");
+        String name = cfg.getCfg(ConsCfg.CFG_SKIN_NAME, "").trim();
         if (!Char.isValidate(name))
         {
-            return;
+            name = ConsCfg.DEF_SKIN_SYS;
+            type = "java";
         }
 
-        String type = cfg.getCfg(ConsCfg.CFG_SKIN_TYPE, "user");
         if ("java".equals(type))
         {
             // 系统默认界面
@@ -242,9 +243,8 @@ public class MagicPwd
             Logs.exception(exp);
         }
 
-        Util.getIcon(0);
-        Util.getNone();
-        Util.getLogo(16);
+        Bean.getNone();
+        Bean.getLogo(16);
 
         loadExt();
     }

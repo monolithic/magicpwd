@@ -4,6 +4,7 @@
  */
 package com.magicpwd.e.pwd.user;
 
+import com.magicpwd._cons.ConsEnv;
 import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
@@ -25,6 +26,7 @@ public class TemplateAction extends javax.swing.AbstractAction implements IPwdAc
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
+        mainPtn.showOptions(ConsEnv.PROP_TPLT);
     }
 
     @Override

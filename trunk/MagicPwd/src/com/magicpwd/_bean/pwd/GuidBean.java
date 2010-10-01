@@ -12,9 +12,9 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
+import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd._util.Util;
 import com.magicpwd.r.FileTM;
 import com.magicpwd.v.pwd.MainPtn;
 import java.util.regex.Pattern;
@@ -65,7 +65,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_ReadMail = new BtnLabel();
-        bt_ReadMail.setIcon(Util.getIcon(ConsEnv.ICON_GUID_MAIL));
+        bt_ReadMail.setIcon(Bean.getIcon(ConsEnv.ICON_GUID_MAIL));
         bt_ReadMail.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -78,7 +78,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.add(bt_ReadMail);
 
         bt_ExptCard = new BtnLabel();
-        bt_ExptCard.setIcon(Util.getIcon(ConsEnv.ICON_GUID_CARD));
+        bt_ExptCard.setIcon(Bean.getIcon(ConsEnv.ICON_GUID_CARD));
         bt_ExptCard.addActionListener(new java.awt.event.ActionListener()
         {
 
