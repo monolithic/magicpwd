@@ -1,4 +1,4 @@
-package com.magicpwd.v;
+package com.magicpwd.v.pay;
 
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
