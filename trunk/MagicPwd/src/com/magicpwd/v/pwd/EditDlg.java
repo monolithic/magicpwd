@@ -12,7 +12,6 @@ import com.magicpwd._util.Lang;
  */
 public class EditDlg extends javax.swing.JDialog
 {
-
     private MainPtn mainPtn;
 
     public EditDlg(MainPtn mainPtn)
