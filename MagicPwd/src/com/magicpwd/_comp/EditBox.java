@@ -9,6 +9,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
+import com.magicpwd.m.UserCfg;
 
 /**
  *
@@ -18,10 +19,12 @@ public class EditBox extends javax.swing.JPanel
 {
 
     private IEditBean editBean;
+    private UserCfg userCfg;
     private boolean metaData;
 
-    public EditBox(IEditBean bean, boolean meta)
+    public EditBox(UserCfg ucfg, IEditBean bean, boolean meta)
     {
+        userCfg = ucfg;
         editBean = bean;
         metaData = meta;
     }
@@ -29,7 +32,7 @@ public class EditBox extends javax.swing.JPanel
     public void initView()
     {
         bt_DropData = new BtnLabel();
-        bt_DropData.setIcon(Bean.getIcon(ConsEnv.ICON_PROP_DELT));
+        bt_DropData.setIcon(Bean.readIcon(userCfg, ConsEnv.FEEL_PATH + "prop-drop.png"));
         bt_DropData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -41,7 +44,7 @@ public class EditBox extends javax.swing.JPanel
         });
 
         bt_SaveData = new BtnLabel();
-        bt_SaveData.setIcon(Bean.getIcon(ConsEnv.ICON_PROP_UPDT));
+        bt_SaveData.setIcon(Bean.readIcon(userCfg, ConsEnv.FEEL_PATH + "prop-save.png"));
         bt_SaveData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -53,7 +56,7 @@ public class EditBox extends javax.swing.JPanel
         });
 
         bt_CopyData = new BtnLabel();
-        bt_CopyData.setIcon(Bean.getIcon(ConsEnv.ICON_PROP_COPY));
+        bt_CopyData.setIcon(Bean.readIcon(userCfg, ConsEnv.FEEL_PATH + "prop-copy.png"));
         bt_CopyData.addActionListener(new java.awt.event.ActionListener()
         {
 

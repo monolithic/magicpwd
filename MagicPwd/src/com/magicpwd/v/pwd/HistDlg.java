@@ -6,6 +6,7 @@ package com.magicpwd.v.pwd;
 
 import com.magicpwd._comn.Keys;
 import com.magicpwd._comn.S1S2;
+import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditItem;
 import com.magicpwd._util.Lang;
@@ -31,6 +32,7 @@ public class HistDlg extends javax.swing.JDialog
     private List<IEditItem> ls_ItemList;
     private DefaultListModel lm_HistList;
     private GridMdl gridMdl;
+    private WTextBox textBox;
 
     public HistDlg(GridMdl gridMdl, javax.swing.JFrame frame)
     {
@@ -92,8 +94,8 @@ public class HistDlg extends javax.swing.JDialog
         });
         jsp1.setViewportView(ls_HistList);
 
-        ta_HistInfo.setColumns(20);
-        ta_HistInfo.setRows(5);
+        textBox = new WTextBox(ta_HistInfo);
+        textBox.initView();
         jsp2.setViewportView(ta_HistInfo);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -140,6 +142,8 @@ public class HistDlg extends javax.swing.JDialog
     {
         setTitle(Lang.getLang(LangRes.P30F1207, "历史记录"));
 
+        textBox.initLang();
+
         Lang.setWText(bt_PickCur, LangRes.P30F850D, "@R");
         Lang.setWTips(bt_PickCur, LangRes.P30F850E, "恢复(Alt + R)");
 
@@ -152,6 +156,8 @@ public class HistDlg extends javax.swing.JDialog
 
     public void initData()
     {
+        textBox.initData();
+
         if (lm_HistList != null)
         {
             lm_HistList.clear();
