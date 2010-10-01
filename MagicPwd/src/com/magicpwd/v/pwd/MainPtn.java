@@ -49,7 +49,6 @@ import com.magicpwd.x.MdiDialog;
 
 public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGridView
 {
-
     private MailDlg mailForm;
     private EditDlg ed_KeysEdit;
     private IEditBean[] editBean;
