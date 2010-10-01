@@ -13,28 +13,40 @@
 <magicpwd>
     <!--菜单栏配置模板-->
     <menubar id="template">
-        <menu id="foo" text="菜单1" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true">
-            <item type="normal" text="普通菜单项" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true">
+        <menu id="foo" text="菜单1" tips="" enabled="true" visible="true">
+            <icon id="">
+                <default cache-id="" path="" />
+                <pressed cache-id="" path="" />
+                <rollover cache-id="" path="" />
+                <disabled cache-id="" path="" />
+            </icon>
+            <item type="normal" text="普通菜单项" tips="" enabled="true" visible="true">
+                <icon id="">
+                    <default cache-id="" path="" />
+                    <pressed cache-id="" path="" />
+                    <rollover cache-id="" path="" />
+                    <disabled cache-id="" path="" />
+                </icon>
                 <action id="testAction1" class="com.magicpwd.e.TestAction" command="哈哈！！">
                     <stroke key="^ N"/>
                     <stroke key="ctrl M"/>
                 </action>
             </item>
             <seperator />
-            <item type="checkbox" text="复选菜单项" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true" group="" checked="true">
+            <item type="checkbox" text="复选菜单项" tips="" enabled="true" visible="true" group="" checked="true">
                 <action id="testAction2" class="" command="">
                     <stroke key="^ A" />
                     <property name="ortherAction" refId="testAction1" />
                 </action>
             </item>
-            <item type="radiobox" text="单选菜单项" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true" group="" checked="true">
+            <item type="radiobox" text="单选菜单项" tips="" enabled="true" visible="true" group="" checked="true">
                 <action id="testAction3" class="com.magicpwd.e.TestAction" command="testAction1">
                     <stroke key="! W" />
                 </action>
             </item>
         </menu>
-        <menu id="bar" text="菜单2" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true">
-            <item type="normal" text="普通菜单项" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true">
+        <menu id="bar" text="菜单2" tips="" enabled="true" visible="true">
+            <item type="normal" text="普通菜单项" tips="" enabled="true" visible="true">
                 <action id="" class="com.magicpwd.e.TestAction" command="哈哈！！">
                     <stroke key="^ # T"/>
                     <property name="ortherAction" refId="testAction2" />
@@ -55,13 +67,13 @@
     </toolbar>
     <!--弹出菜单配置模板-->
     <menupop id="template">
-        <item type="normal" text="普通菜单项" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true">
+        <item type="normal" text="普通菜单项" tips="" enabled="true" visible="true">
             <action id="" class="com.magicpwd.e.TestAction" command="哈哈！！">
                 <stroke key="^ N"/>
             </action>
         </item>
-        <menu id="foo" text="菜单1" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true">
-            <item type="normal" text="普通菜单项" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true">
+        <menu id="foo" text="菜单1" tips="" enabled="true" visible="true">
+            <item type="normal" text="普通菜单项" tips="" enabled="true" visible="true">
                 <action id="" class="com.magicpwd.e.TestAction" command="哈哈！！">
                     <stroke key="^ N"/>
                     <stroke key=""/>
@@ -70,13 +82,13 @@
                 </action>
             </item>
             <seperator />
-            <item type="checkbox" text="复选菜单项" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true" group="" checked="true">
+            <item type="checkbox" text="复选菜单项" tips="" enabled="true" visible="true" group="" checked="true">
                 <action id="" class="" command="">
                     <stroke key="" />
                     <property name="" refId="" />
                 </action>
             </item>
-            <item type="radiobox" text="单选菜单项" tips="" icon="" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true" group="" checked="true">
+            <item type="radiobox" text="单选菜单项" tips="" enabled="true" visible="true" group="" checked="true">
                 <action id="" class="" command="">
                     <stroke key="" />
                     <property name="" refId="" />

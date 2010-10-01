@@ -203,19 +203,19 @@
             <seperator />
             <!--常规设置-->
             <item type="normal" text="$P30F761F">
-                <action id="" class="" />
+                <action id="" class="com.magicpwd.e.pwd.user.OptionsAction" />
             </item>
             <!--口令设置-->
             <item type="normal" text="$P30F7620">
-                <action id="" class="" />
+                <action id="" class="com.magicpwd.e.pwd.user.PasswordAction" />
             </item>
             <!--模板管理-->
             <item type="normal" text="$P30F7621">
-                <action id="" class="" />
+                <action id="" class="com.magicpwd.e.pwd.user.TemplateAction" />
             </item>
             <!--类别管理-->
             <item type="normal" text="$P30F7622">
-                <action id="" class="" />
+                <action id="" class="com.magicpwd.e.pwd.user.KindDataAction" />
             </item>
         </menu>
         <!--皮肤-->
@@ -320,71 +320,116 @@
             <action id="drop-keys" class="com.magicpwd.e.pwd.file.DropAction" />
         </item>
         <seperator />
+        <!--重要性：-->
+        <menu id="" text="$P30F7D26">
+            <!--最高-->
+            <item type="normal" text="$P30F7D27">
+                <icon>
+                    <default cache-id="major2" path="skin/feel/%feel%/major+2.png"/>
+                </icon>
+                <action id="change-note" class="com.magicpwd.e.pwd.list.ChangeNoteAction" command="2" />
+            </item>
+            <!--高-->
+            <item type="normal" text="$P30F7D28">
+                <icon>
+                    <default cache-id="major1" path="skin/feel/%feel%/major+1.png"/>
+                </icon>
+                <action id="change-note" class="com.magicpwd.e.pwd.list.ChangeNoteAction" command="1" />
+            </item>
+            <!--正常-->
+            <item type="normal" text="$P30F7D29">
+                <icon>
+                    <default cache-id="major0" path="skin/feel/%feel%/major.png"/>
+                </icon>
+                <action id="change-note" class="com.magicpwd.e.pwd.list.ChangeNoteAction" command="0" />
+            </item>
+            <!--低-->
+            <item type="normal" text="$P30F7D2A">
+                <icon>
+                    <default cache-id="major-1" path="skin/feel/%feel%/major-1.png"/>
+                </icon>
+                <action id="change-note" class="com.magicpwd.e.pwd.list.ChangeNoteAction" command="-1" />
+            </item>
+            <!--最低-->
+            <item type="normal" text="$P30F7D2B">
+                <icon>
+                    <default cache-id="major-2" path="skin/feel/%feel%/major-2.png"/>
+                </icon>
+                <action id="change-note" class="com.magicpwd.e.pwd.list.ChangeNoteAction" command="-2" />
+            </item>
+        </menu>
         <!--标记为：-->
         <menu id="" text="$P30F7D1B">
             <!--默认(@0)-->
             <item type="normal" text="$P30F7D1C">
+                <icon>
+                    <default cache-id="label0" path="skin/feel/%feel%/label.png"/>
+                </icon>
                 <action id="change-mode" class="com.magicpwd.e.pwd.list.ChangeModeAction" command="0" />
             </item>
             <seperator />
             <!--常使用(@1)-->
             <item type="normal" text="$P30F7D1D">
+                <icon>
+                    <default cache-id="label1" path="skin/feel/%feel%/label1.png"/>
+                </icon>
                 <action id="change-mode" class="com.magicpwd.e.pwd.list.ChangeModeAction" command="1" />
             </item>
             <!--待注册(@2)-->
             <item type="normal" text="$P30F7D1E">
+                <icon>
+                    <default cache-id="label2" path="skin/feel/%feel%/label2.png"/>
+                </icon>
                 <action id="change-mode" class="com.magicpwd.e.pwd.list.ChangeModeAction" command="2" />
             </item>
             <!--待认证(@3)-->
             <item type="normal" text="$P30F7D1F">
+                <icon>
+                    <default cache-id="label3" path="skin/feel/%feel%/label3.png"/>
+                </icon>
                 <action id="change-mode" class="com.magicpwd.e.pwd.list.ChangeModeAction" command="3" />
             </item>
             <!--待激活(@4)-->
             <item type="normal" text="$P30F7D20">
+                <icon>
+                    <default cache-id="label4" path="skin/feel/%feel%/label4.png"/>
+                </icon>
                 <action id="change-mode" class="com.magicpwd.e.pwd.list.ChangeModeAction" command="4" />
             </item>
             <!--仅测试(@5)-->
             <item type="normal" text="$P30F7D21">
+                <icon>
+                    <default cache-id="label5" path="skin/feel/%feel%/label5.png"/>
+                </icon>
                 <action id="change-mode" class="com.magicpwd.e.pwd.list.ChangeModeAction" command="5" />
             </item>
             <!--已过期(@6)-->
             <item type="normal" text="$P30F7D22">
+                <icon>
+                    <default cache-id="label6" path="skin/feel/%feel%/label6.png"/>
+                </icon>
                 <action id="change-mode" class="com.magicpwd.e.pwd.list.ChangeModeAction" command="6" />
             </item>
             <!--已丢失(@7)-->
             <item type="normal" text="$P30F7D23">
+                <icon>
+                    <default cache-id="label7" path="skin/feel/%feel%/label7.png"/>
+                </icon>
                 <action id="change-mode" class="com.magicpwd.e.pwd.list.ChangeModeAction" command="7" />
             </item>
             <!--被禁用(@8)-->
             <item type="normal" text="$P30F7D24">
+                <icon>
+                    <default cache-id="label8" path="skin/feel/%feel%/label8.png"/>
+                </icon>
                 <action id="change-mode" class="com.magicpwd.e.pwd.list.ChangeModeAction" command="8" />
             </item>
             <!--已删除(@9)-->
             <item type="normal" text="$P30F7D25">
+                <icon>
+                    <default cache-id="label9" path="skin/feel/%feel%/label9.png"/>
+                </icon>
                 <action id="change-mode" class="com.magicpwd.e.pwd.list.ChangeModeAction" command="9" />
-            </item>
-        </menu>
-        <!--重要性：-->
-        <menu id="" text="$P30F7D26">
-            <!--最高-->
-            <item type="normal" text="$P30F7D27">
-                <action id="change-note" class="com.magicpwd.e.pwd.list.ChangeNoteAction" command="-2" />
-            </item>
-            <!--高-->
-            <item type="normal" text="$P30F7D28">
-                <action id="change-note" class="com.magicpwd.e.pwd.list.ChangeNoteAction" command="-1" />
-            </item>
-            <!--正常-->
-            <item type="normal" text="$P30F7D29">
-                <action id="change-note" class="com.magicpwd.e.pwd.list.ChangeNoteAction" command="0" />
-            </item>
-            <!--低-->
-            <item type="normal" text="$P30F7D2A">
-                <action id="change-note" class="com.magicpwd.e.pwd.list.ChangeNoteAction" command="1" />
-            </item>
-            <!--最低-->
-            <item type="normal" text="$P30F7D2B">
-                <action id="change-note" class="com.magicpwd.e.pwd.list.ChangeNoteAction" command="2" />
             </item>
         </menu>
         <!--排序方式-->

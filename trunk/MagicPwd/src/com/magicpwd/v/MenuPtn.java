@@ -479,16 +479,16 @@ public class MenuPtn
             button.setIcon(createIcon(temp));
         }
 
-        temp = element.element("rollover");
-        if (temp != null)
-        {
-            button.setRolloverIcon(createIcon(temp));
-        }
-
         temp = element.element("pressed");
         if (temp != null)
         {
             button.setPressedIcon(createIcon(temp));
+        }
+
+        temp = element.element("rollover");
+        if (temp != null)
+        {
+            button.setRolloverIcon(createIcon(temp));
         }
 
         temp = element.element("disabled");
