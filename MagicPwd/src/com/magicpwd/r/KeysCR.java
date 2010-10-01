@@ -4,8 +4,7 @@
 package com.magicpwd.r;
 
 import com.magicpwd._comn.Keys;
-import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._util.Util;
+import com.magicpwd._util.Bean;
 
 /**
  *
@@ -76,16 +75,16 @@ public class KeysCR extends javax.swing.JPanel implements javax.swing.ListCellRe
             Keys keys = (Keys) value;
             lb_Text.setText(keys.getP30F0109());
             setToolTipText(com.magicpwd._util.Char.isValidate(keys.getP30F010A()) ? keys.getP30F010A() : keys.getP30F0109());
-            lb_Text.setIcon(Util.getIcon(keys.getP30F010B()));
-            lb_Note.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_NOTE + keys.getP30F0103()));
-            lb_Mode.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_MOD0 + keys.getP30F0102()));
+            lb_Text.setIcon(Bean.getIcon(keys.getP30F010B()));
+            lb_Note.setIcon(Bean.getIcon("major" + keys.getP30F0103()));
+            lb_Mode.setIcon(Bean.getIcon("label" + keys.getP30F0102()));
         }
         // 其它
         else if (value != null)
         {
             lb_Text.setText(value.toString());
-            lb_Mode.setIcon(Util.getNone());
-            lb_Note.setIcon(Util.getNone());
+            lb_Mode.setIcon(Bean.getNone());
+            lb_Note.setIcon(Bean.getNone());
         }
 
 //        lb_Rest.setIcon(Util.getNone());

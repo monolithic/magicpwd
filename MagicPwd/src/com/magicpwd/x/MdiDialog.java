@@ -5,15 +5,14 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IPropBean;
 import com.magicpwd._prop.CharProp;
-import com.magicpwd._prop.HistProp;
 import com.magicpwd._prop.InfoProp;
 import com.magicpwd._prop.JavaProp;
 import com.magicpwd._prop.KindProp;
 import com.magicpwd._prop.SKeyProp;
 import com.magicpwd._prop.TpltProp;
 import com.magicpwd._prop.USetProp;
+import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
-import com.magicpwd._util.Util;
 import com.magicpwd.c.MenuEvt;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.r.ListCR;
@@ -27,40 +26,19 @@ import java.awt.Color;
 public class MdiDialog extends javax.swing.JDialog
 {
 
-    private static MdiDialog md_Dialog;
     private String lastPanel;
     private java.awt.CardLayout cl_CardLayout;
     private javax.swing.DefaultListModel lm_PropList;
     private java.util.HashMap<String, IPropBean> hm_PropList;
     private CoreMdl coreMdl;
 
-    private MdiDialog(CoreMdl coreMdl)
+    public MdiDialog(CoreMdl coreMdl)
     {
         super(TrayPtn.getCurrForm());
         this.coreMdl = coreMdl;
         lm_PropList = new javax.swing.DefaultListModel();
         cl_CardLayout = new java.awt.CardLayout();
         setDefaultCloseOperation(MdiDialog.DISPOSE_ON_CLOSE);
-    }
-
-    public static MdiDialog getInstance()
-    {
-        return md_Dialog;
-    }
-
-    public static void newInstance(MenuEvt menuEvt)
-    {
-        if (md_Dialog == null)
-        {
-            md_Dialog = new MdiDialog(null);
-            md_Dialog.initView();
-            md_Dialog.initLang();
-            md_Dialog.initData();
-            if (menuEvt != null)
-            {
-                md_Dialog.addHideAction(menuEvt);
-            }
-        }
     }
 
     public void initView()
@@ -94,7 +72,7 @@ public class MdiDialog extends javax.swing.JDialog
                 super.paintComponent(g);
             }
         };
-        lb_HeadPanel.setIcon(Util.getNone());
+        lb_HeadPanel.setIcon(Bean.getNone());
         lb_HeadPanel.setFont(lb_HeadPanel.getFont().deriveFont(java.awt.Font.BOLD));
 
         pl_CardPanel = new javax.swing.JPanel();
@@ -171,7 +149,7 @@ public class MdiDialog extends javax.swing.JDialog
         vsg2.addContainerGap();
         layout.setVerticalGroup(vsg2);
 
-        this.setIconImage(Util.getLogo(16));
+        this.setIconImage(Bean.getLogo(16));
         this.pack();
     }
 
@@ -219,14 +197,6 @@ public class MdiDialog extends javax.swing.JDialog
         kp.initLang();
         pl_CardPanel.add(ConsEnv.PROP_KIND, kp);
         hm_PropList.put(ConsEnv.PROP_KIND, kp);
-
-        t = Lang.getLang(LangRes.P30F1207, "历史查看");
-        lm_PropList.addElement(new S1S2(ConsEnv.PROP_HIST, t, t));
-        HistProp hp = new HistProp(null);
-        hp.initView();
-        hp.initLang();
-        pl_CardPanel.add(ConsEnv.PROP_HIST, hp);
-        hm_PropList.put(ConsEnv.PROP_HIST, hp);
 
         t = Lang.getLang(LangRes.P30F1206, "键盘快捷");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_SKEY, t, t));
@@ -285,10 +255,9 @@ public class MdiDialog extends javax.swing.JDialog
         }
         lastPanel = panelKey;
 
-        if (!md_Dialog.isVisible())
+        if (!isVisible())
         {
-            Util.centerForm(this, TrayPtn.getCurrForm());
-            md_Dialog.setVisible(true);
+            setVisible(true);
         }
     }
 

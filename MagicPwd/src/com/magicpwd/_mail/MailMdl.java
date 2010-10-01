@@ -4,8 +4,7 @@
 package com.magicpwd._mail;
 
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._util.Logs;
-import com.magicpwd._util.Util;
+import com.magicpwd._util.Bean;
 
 /**
  * @author Amon
@@ -77,7 +76,7 @@ public class MailMdl extends javax.swing.table.AbstractTableModel
         switch (columnIndex)
         {
             case 0:
-                label.setIcon(message.hasAttachment() ? Util.getIcon(ConsEnv.ICON_MAIL_FILE) : Util.getNone());
+                label.setIcon(message.hasAttachment() ? Bean.getIcon(ConsEnv.ICON_MAIL_FILE) : Bean.getNone());
                 break;
             case 1:
                 label.setText(message.getFrom());

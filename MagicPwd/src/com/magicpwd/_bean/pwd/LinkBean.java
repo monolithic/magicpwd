@@ -11,6 +11,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
+import com.magicpwd._util.Bean;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
@@ -59,7 +60,7 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_LinkView = new BtnLabel();
-        bt_LinkView.setIcon(Util.getIcon(ConsEnv.ICON_LINK_OPEN));
+        bt_LinkView.setIcon(Bean.getIcon(ConsEnv.ICON_LINK_OPEN));
         bt_LinkView.addActionListener(new java.awt.event.ActionListener()
         {
 

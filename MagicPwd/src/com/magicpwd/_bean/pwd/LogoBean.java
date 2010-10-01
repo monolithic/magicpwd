@@ -10,8 +10,8 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
 import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
+import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
-import com.magicpwd._util.Util;
 import com.magicpwd.v.pwd.MainPtn;
 import com.magicpwd.x.IcoDialog;
 import java.util.EventListener;
@@ -43,7 +43,7 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean, IBackCall
 
         lb_PropName = new javax.swing.JLabel();
         ib_PropName = new IcoLabel();
-        ib_PropName.setIcon(Util.getNone());
+        ib_PropName.setIcon(Bean.getNone());
         ib_PropName.setOpaque(true);
         ib_PropName.setPreferredSize(new java.awt.Dimension(21, 21));
         ib_PropName.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -129,7 +129,7 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean, IBackCall
     public void showData(IEditItem item)
     {
         itemData = (LogoItem) item;
-        ib_PropName.setIcon(Util.getIcon(item.getName()));
+        ib_PropName.setIcon(Bean.getIcon(item.getName()));
         ta_PropData.setText(item.getData());
     }
 
@@ -167,7 +167,7 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean, IBackCall
         String key = params[0];
         if ("0".equals(key))
         {
-            ib_PropName.setIcon(Util.getNone());
+            ib_PropName.setIcon(Bean.getNone());
             itemData.setName(key);
             return true;
         }
@@ -176,7 +176,7 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean, IBackCall
         {
             return false;
         }
-        ib_PropName.setIcon(Util.getIcon(key));
+        ib_PropName.setIcon(Bean.getIcon(key));
         itemData.setName(key);
         return true;
     }

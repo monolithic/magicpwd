@@ -3,11 +3,11 @@ package com.magicpwd._user;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Jpng;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd._util.Util;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserCfg;
 import com.magicpwd.u.DBU3000;
@@ -55,7 +55,7 @@ public class UserPtn extends javax.swing.JPanel
         this.safeMdl = safeMdl;
         frame = new javax.swing.JFrame();
         frame.setResizable(false);
-        frame.setIconImage(Util.getLogo(16));
+        frame.setIconImage(Bean.getLogo(16));
         frame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
     }
 
@@ -68,7 +68,7 @@ public class UserPtn extends javax.swing.JPanel
     {
         dialog = new javax.swing.JDialog(frame, true);
         dialog.setResizable(false);
-        dialog.setIconImage(Util.getLogo(16));
+        dialog.setIconImage(Bean.getLogo(16));
         dialog.setDefaultCloseOperation(javax.swing.JDialog.DISPOSE_ON_CLOSE);
     }
 

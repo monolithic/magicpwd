@@ -7,8 +7,8 @@ package com.magicpwd._comp;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
+import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
-import com.magicpwd._util.Util;
 
 /**
  *
@@ -29,7 +29,7 @@ public class EditBox extends javax.swing.JPanel
     public void initView()
     {
         bt_DropData = new BtnLabel();
-        bt_DropData.setIcon(Util.getIcon(ConsEnv.ICON_PROP_DELT));
+        bt_DropData.setIcon(Bean.getIcon(ConsEnv.ICON_PROP_DELT));
         bt_DropData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -41,7 +41,7 @@ public class EditBox extends javax.swing.JPanel
         });
 
         bt_SaveData = new BtnLabel();
-        bt_SaveData.setIcon(Util.getIcon(ConsEnv.ICON_PROP_UPDT));
+        bt_SaveData.setIcon(Bean.getIcon(ConsEnv.ICON_PROP_UPDT));
         bt_SaveData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -53,7 +53,7 @@ public class EditBox extends javax.swing.JPanel
         });
 
         bt_CopyData = new BtnLabel();
-        bt_CopyData.setIcon(Util.getIcon(ConsEnv.ICON_PROP_COPY));
+        bt_CopyData.setIcon(Bean.getIcon(ConsEnv.ICON_PROP_COPY));
         bt_CopyData.addActionListener(new java.awt.event.ActionListener()
         {
 

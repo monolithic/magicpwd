@@ -68,16 +68,16 @@ public class MiniPtn extends javax.swing.JFrame implements MPadEvt, FindEvt
         nameBox = new WTextBox(tf_NoteName, true);
         nameBox.initView();
 
-        bt_CreateNote.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_APND));
+        bt_CreateNote.setIcon(Bean.getIcon(ConsEnv.ICON_KEYS_APND));
         bt_CreateNote.addActionListener(new NewAction());
 
-        bt_OpenNote.setIcon(Util.getIcon(ConsEnv.ICON_FILE_PICK));
+        bt_OpenNote.setIcon(Bean.getIcon(ConsEnv.ICON_FILE_PICK));
         bt_OpenNote.addActionListener(new OpenAction());
 
-        bt_SaveNote.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_SAVE));
+        bt_SaveNote.setIcon(Bean.getIcon(ConsEnv.ICON_KEYS_SAVE));
         bt_SaveNote.addActionListener(new SaveAction());
 
-        bt_SearchNote.setIcon(Util.getIcon(ConsEnv.ICON_NOTE_SRCH));
+        bt_SearchNote.setIcon(Bean.getIcon(ConsEnv.ICON_NOTE_SRCH));
         bt_SearchNote.addActionListener(tf_NoteName.getAction());
 
         ta_NoteData.setDragEnabled(true);
@@ -161,7 +161,7 @@ public class MiniPtn extends javax.swing.JFrame implements MPadEvt, FindEvt
 
         this.getContentPane().add(pl_NoteBase);
         this.pack();
-        this.setIconImage(Util.getLogo(16));
+        this.setIconImage(Bean.getLogo(16));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         Util.centerForm(this, null);
     }

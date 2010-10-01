@@ -467,28 +467,34 @@ public class MenuPtn
 
     private javax.swing.AbstractButton processIcon(Element element, javax.swing.AbstractButton button)
     {
-        String icon = element.attributeValue("icon");
-        if (Char.isValidate(icon))
+        java.util.List elements = element.elements("icon");
+        if (elements == null || elements.size() < 1)
         {
-            button.setIcon(createIcon(icon));
+            return button;
+        }
+        element = (Element) elements.get(0);
+        Element temp = element.element("default");
+        if (temp != null)
+        {
+            button.setIcon(createIcon(temp));
         }
 
-        icon = element.attributeValue("icon-rollover");
-        if (Char.isValidate(icon))
+        temp = element.element("rollover");
+        if (temp != null)
         {
-            button.setRolloverIcon(createIcon(icon));
+            button.setRolloverIcon(createIcon(temp));
         }
 
-        icon = element.attributeValue("icon-pressed");
-        if (Char.isValidate(icon))
+        temp = element.element("pressed");
+        if (temp != null)
         {
-            button.setPressedIcon(createIcon(icon));
+            button.setPressedIcon(createIcon(temp));
         }
 
-        icon = element.attributeValue("icon-disabled");
-        if (Char.isValidate(icon))
+        temp = element.element("disabled");
+        if (temp != null)
         {
-            button.setDisabledIcon(createIcon(icon));
+            button.setDisabledIcon(createIcon(temp));
         }
         return button;
     }
@@ -689,13 +695,36 @@ public class MenuPtn
         return button;
     }
 
-    private javax.swing.Icon createIcon(String path)
+    private javax.swing.Icon createIcon(Element element)
     {
+        String hash = element.attributeValue("cache-id");
+        boolean validate = Char.isValidate(hash);
+        if (validate)
+        {
+            javax.swing.Icon icon = Bean.getIcon(hash);
+            if (icon != null)
+            {
+                return icon;
+            }
+        }
+
+        String path = element.attributeValue("path");
+        if (!Char.isValidate(path))
+        {
+            return null;
+        }
+        path = path.replace("%feel%", coreMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN_FEEL, "default"));
+
         java.io.InputStream stream = null;
         try
         {
             stream = File.open4Read(path);
-            return new javax.swing.ImageIcon(javax.imageio.ImageIO.read(stream));
+            javax.swing.ImageIcon icon = new javax.swing.ImageIcon(javax.imageio.ImageIO.read(stream));
+            if (validate)
+            {
+                Bean.setIcon(hash, icon);
+            }
+            return icon;
         }
         catch (Exception exp)
         {
@@ -704,17 +733,7 @@ public class MenuPtn
         }
         finally
         {
-            if (stream != null)
-            {
-                try
-                {
-                    stream.close();
-                }
-                catch (Exception exp)
-                {
-                    Logs.exception(exp);
-                }
-            }
+            Bean.closeStream(stream);
         }
     }
 

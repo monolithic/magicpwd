@@ -21,13 +21,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
-import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.JTable;
 import javax.swing.JViewport;
@@ -36,9 +33,6 @@ import javax.swing.Timer;
 
 import com.magicpwd.r.AmonFF;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd.c.MenuEvt;
-import com.magicpwd.c.MPwdEvt;
-import javax.swing.ImageIcon;
 import org.dom4j.Document;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
@@ -51,10 +45,6 @@ public final class Util
 {
 
     public static final File icoPath = new File(ConsEnv.DIR_DAT, ConsEnv.DIR_ICO);
-    private static ImageIcon bi_NoneIcon;
-    private static Map<Integer, BufferedImage> mp_LogoIcon;
-    private static Map<Integer, ImageIcon> mp_IcoList;
-    private static Map<String, ImageIcon> mp_ImgList;
 
     /**
      * 长整形数据加密
@@ -79,86 +69,6 @@ public final class Util
 
         // 返回符合用户要求格式的数组字符串
         return new String(buf);
-    }
-
-    public static ImageIcon getIcon(int name)
-    {
-        if (mp_IcoList == null)
-        {
-            mp_IcoList = new HashMap<Integer, ImageIcon>(ConsEnv.ICON_SIZE + 1);
-            synchronized (icoPath)
-            {
-                try
-                {
-                    java.io.InputStream stream = Util.class.getResourceAsStream(ConsEnv.ICON_PATH + "icon.png");
-                    BufferedImage bufImg = ImageIO.read(stream);
-                    stream.close();
-
-                    for (int i = 0, j = 0; i < ConsEnv.ICON_SIZE; i += 1)
-                    {
-                        mp_IcoList.put(i, new ImageIcon(bufImg.getSubimage(j, 0, 16, 16)));
-                        j += 16;
-                    }
-                }
-                catch (Exception exp)
-                {
-                    Logs.exception(exp);
-                }
-            }
-        }
-        return mp_IcoList.get(name);
-    }
-
-    public static ImageIcon getIcon(String name)
-    {
-        if (!Char.isValidateHash(name))
-        {
-            return getNone();
-        }
-        if (mp_ImgList == null)
-        {
-            mp_ImgList = new HashMap<String, ImageIcon>();
-        }
-        if (!mp_ImgList.containsKey(name))
-        {
-            synchronized (icoPath)
-            {
-                BufferedImage image = getImage(new File(icoPath, name + ".png"));
-                mp_ImgList.put(name, image != null ? new ImageIcon(image) : bi_NoneIcon);
-            }
-        }
-        return mp_ImgList.get(name);
-    }
-
-    public static void setIcon(String name, ImageIcon icon)
-    {
-        if (!Char.isValidateHash(name))
-        {
-            return;
-        }
-        if (mp_ImgList == null)
-        {
-            mp_ImgList = new HashMap<String, ImageIcon>();
-        }
-        mp_ImgList.put(name, icon);
-    }
-
-    public static ImageIcon getIcon(File file)
-    {
-        if (mp_ImgList == null)
-        {
-            mp_ImgList = new HashMap<String, ImageIcon>();
-        }
-        String name = file.getName().split("\\.")[0];
-        if (!mp_ImgList.containsKey(name))
-        {
-            synchronized (icoPath)
-            {
-                BufferedImage image = getImage(file);
-                mp_ImgList.put(name, image != null ? new ImageIcon(image) : bi_NoneIcon);
-            }
-        }
-        return mp_ImgList.get(name);
     }
 
     public static BufferedImage getImage(String name)
@@ -186,53 +96,6 @@ public final class Util
             Logs.exception(exp);
             return null;
         }
-    }
-
-    public static synchronized ImageIcon getNone()
-    {
-        if (bi_NoneIcon == null)
-        {
-            bi_NoneIcon = new ImageIcon(createNone(16));
-        }
-        return bi_NoneIcon;
-    }
-
-    public static synchronized BufferedImage getLogo(int size)
-    {
-        if (mp_LogoIcon == null)
-        {
-            mp_LogoIcon = new HashMap<Integer, BufferedImage>();
-        }
-
-        BufferedImage logo = mp_LogoIcon.get(size);
-        if (logo == null)
-        {
-            try
-            {
-                java.io.InputStream stream = Util.class.getResourceAsStream(ConsEnv.ICON_PATH + Char.lPad(Integer.toHexString(size), 4, '0') + ".png");
-                logo = ImageIO.read(stream);
-                stream.close();
-            }
-            catch (Exception exp)
-            {
-                Logs.exception(exp);
-                logo = createLogo(size);
-            }
-            mp_LogoIcon.put(size, logo);
-        }
-        return logo;
-    }
-
-    private static BufferedImage createNone(int size)
-    {
-        BufferedImage bi = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
-        return bi;
-    }
-
-    private static BufferedImage createLogo(int size)
-    {
-        BufferedImage bi = createNone(size);
-        return bi;
     }
 
     public static File nextBackupFile(String bakDir, int bakCnt) throws Exception
@@ -394,282 +257,282 @@ public final class Util
         }
         return i;
     }
-/*
+    /*
     public static void addHideAction(ActionMap actionMap, InputMap inputMap, final MenuEvt menuEvt)
     {
-        actionMap.put(ConsEnv.EVENT_FILE_HIDE, new javax.swing.AbstractAction()
-        {
+    actionMap.put(ConsEnv.EVENT_FILE_HIDE, new javax.swing.AbstractAction()
+    {
 
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                menuEvt.fileHideActionPerformed(evt);
-            }
-        });
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, InputEvent.CTRL_MASK), ConsEnv.EVENT_FILE_HIDE);
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_H, InputEvent.CTRL_MASK), ConsEnv.EVENT_FILE_HIDE);
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent evt)
+    {
+    menuEvt.fileHideActionPerformed(evt);
+    }
+    });
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, InputEvent.CTRL_MASK), ConsEnv.EVENT_FILE_HIDE);
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_H, InputEvent.CTRL_MASK), ConsEnv.EVENT_FILE_HIDE);
     }
 
     public static void addEditAction(ActionMap actionMap, InputMap inputMap, final MPwdEvt menuEvt)
     {
-        actionMap.put(ConsEnv.EVENT_EDIT_PREV, new javax.swing.AbstractAction()
-        {
+    actionMap.put(ConsEnv.EVENT_EDIT_PREV, new javax.swing.AbstractAction()
+    {
 
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                menuEvt.editPrevActionPerformed(evt);
-            }
-        });
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_U, InputEvent.CTRL_MASK), ConsEnv.EVENT_EDIT_PREV);
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent evt)
+    {
+    menuEvt.editPrevActionPerformed(evt);
+    }
+    });
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_U, InputEvent.CTRL_MASK), ConsEnv.EVENT_EDIT_PREV);
 
-        actionMap.put(ConsEnv.EVENT_EDIT_NEXT, new javax.swing.AbstractAction()
-        {
+    actionMap.put(ConsEnv.EVENT_EDIT_NEXT, new javax.swing.AbstractAction()
+    {
 
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                menuEvt.editNextActionPerformed(evt);
-            }
-        });
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_MASK), ConsEnv.EVENT_EDIT_NEXT);
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent evt)
+    {
+    menuEvt.editNextActionPerformed(evt);
+    }
+    });
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_D, InputEvent.CTRL_MASK), ConsEnv.EVENT_EDIT_NEXT);
 
-        actionMap.put(ConsEnv.EVENT_VIEW_PREV, new javax.swing.AbstractAction()
-        {
+    actionMap.put(ConsEnv.EVENT_VIEW_PREV, new javax.swing.AbstractAction()
+    {
 
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                menuEvt.viewPrevActionPerformed(evt);
-            }
-        });
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, InputEvent.CTRL_MASK), ConsEnv.EVENT_VIEW_PREV);
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent evt)
+    {
+    menuEvt.viewPrevActionPerformed(evt);
+    }
+    });
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, InputEvent.CTRL_MASK), ConsEnv.EVENT_VIEW_PREV);
 
-        actionMap.put(ConsEnv.EVENT_VIEW_NEXT, new javax.swing.AbstractAction()
-        {
+    actionMap.put(ConsEnv.EVENT_VIEW_NEXT, new javax.swing.AbstractAction()
+    {
 
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                menuEvt.viewNextActionPerformed(evt);
-            }
-        });
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, InputEvent.CTRL_MASK), ConsEnv.EVENT_VIEW_NEXT);
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent evt)
+    {
+    menuEvt.viewNextActionPerformed(evt);
+    }
+    });
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, InputEvent.CTRL_MASK), ConsEnv.EVENT_VIEW_NEXT);
 
-        actionMap.put(ConsEnv.EVENT_EDIT_TEXT, new javax.swing.AbstractAction()
-        {
+    actionMap.put(ConsEnv.EVENT_EDIT_TEXT, new javax.swing.AbstractAction()
+    {
 
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                menuEvt.editTextActionPerformed(evt);
-            }
-        });
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_1, InputEvent.CTRL_MASK), ConsEnv.EVENT_EDIT_TEXT);
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent evt)
+    {
+    menuEvt.editTextActionPerformed(evt);
+    }
+    });
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_1, InputEvent.CTRL_MASK), ConsEnv.EVENT_EDIT_TEXT);
 
-        actionMap.put(ConsEnv.EVENT_EDIT_PWDS, new javax.swing.AbstractAction()
-        {
+    actionMap.put(ConsEnv.EVENT_EDIT_PWDS, new javax.swing.AbstractAction()
+    {
 
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                menuEvt.editPwdsActionPerformed(evt);
-            }
-        });
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.CTRL_MASK), ConsEnv.EVENT_EDIT_PWDS);
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent evt)
+    {
+    menuEvt.editPwdsActionPerformed(evt);
+    }
+    });
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_2, InputEvent.CTRL_MASK), ConsEnv.EVENT_EDIT_PWDS);
 
-        actionMap.put(ConsEnv.EVENT_EDIT_LINK, new javax.swing.AbstractAction()
-        {
+    actionMap.put(ConsEnv.EVENT_EDIT_LINK, new javax.swing.AbstractAction()
+    {
 
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                menuEvt.editLinkActionPerformed(evt);
-            }
-        });
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_3, InputEvent.CTRL_MASK), ConsEnv.EVENT_EDIT_LINK);
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent evt)
+    {
+    menuEvt.editLinkActionPerformed(evt);
+    }
+    });
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_3, InputEvent.CTRL_MASK), ConsEnv.EVENT_EDIT_LINK);
 
-        actionMap.put(ConsEnv.EVENT_EDIT_MAIL, new javax.swing.AbstractAction()
-        {
+    actionMap.put(ConsEnv.EVENT_EDIT_MAIL, new javax.swing.AbstractAction()
+    {
 
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                menuEvt.editMailActionPerformed(evt);
-            }
-        });
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_4, InputEvent.CTRL_MASK), ConsEnv.EVENT_EDIT_MAIL);
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent evt)
+    {
+    menuEvt.editMailActionPerformed(evt);
+    }
+    });
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_4, InputEvent.CTRL_MASK), ConsEnv.EVENT_EDIT_MAIL);
 
-        actionMap.put(ConsEnv.EVENT_EDIT_DATE, new javax.swing.AbstractAction()
-        {
+    actionMap.put(ConsEnv.EVENT_EDIT_DATE, new javax.swing.AbstractAction()
+    {
 
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                menuEvt.editDateActionPerformed(evt);
-            }
-        });
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_5, InputEvent.CTRL_MASK), ConsEnv.EVENT_EDIT_DATE);
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent evt)
+    {
+    menuEvt.editDateActionPerformed(evt);
+    }
+    });
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_5, InputEvent.CTRL_MASK), ConsEnv.EVENT_EDIT_DATE);
 
-        actionMap.put(ConsEnv.EVENT_EDIT_AREA, new javax.swing.AbstractAction()
-        {
+    actionMap.put(ConsEnv.EVENT_EDIT_AREA, new javax.swing.AbstractAction()
+    {
 
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                menuEvt.editAreaActionPerformed(evt);
-            }
-        });
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_6, InputEvent.CTRL_MASK), ConsEnv.EVENT_EDIT_AREA);
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent evt)
+    {
+    menuEvt.editAreaActionPerformed(evt);
+    }
+    });
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_6, InputEvent.CTRL_MASK), ConsEnv.EVENT_EDIT_AREA);
 
-        actionMap.put(ConsEnv.EVENT_EDIT_FILE, new javax.swing.AbstractAction()
-        {
+    actionMap.put(ConsEnv.EVENT_EDIT_FILE, new javax.swing.AbstractAction()
+    {
 
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                menuEvt.editFileActionPerformed(evt);
-            }
-        });
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_7, InputEvent.CTRL_MASK), ConsEnv.EVENT_EDIT_FILE);
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent evt)
+    {
+    menuEvt.editFileActionPerformed(evt);
+    }
+    });
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_7, InputEvent.CTRL_MASK), ConsEnv.EVENT_EDIT_FILE);
     }
 
     public static void addFileAction(ActionMap actionMap, InputMap inputMap, final MenuEvt menuEvt)
     {
-        actionMap.put(ConsEnv.EVENT_FILE_APND, new javax.swing.AbstractAction()
-        {
+    actionMap.put(ConsEnv.EVENT_FILE_APND, new javax.swing.AbstractAction()
+    {
 
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                menuEvt.fileApndActionPerformed(evt);
-            }
-        });
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK), ConsEnv.EVENT_FILE_APND);
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent evt)
+    {
+    menuEvt.fileApndActionPerformed(evt);
+    }
+    });
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_MASK), ConsEnv.EVENT_FILE_APND);
 
-        actionMap.put(ConsEnv.EVENT_FILE_SAVE, new javax.swing.AbstractAction()
-        {
+    actionMap.put(ConsEnv.EVENT_FILE_SAVE, new javax.swing.AbstractAction()
+    {
 
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                menuEvt.fileSaveActionPerformed(evt);
-            }
-        });
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK), ConsEnv.EVENT_FILE_SAVE);
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent evt)
+    {
+    menuEvt.fileSaveActionPerformed(evt);
+    }
+    });
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_MASK), ConsEnv.EVENT_FILE_SAVE);
 
-        actionMap.put(ConsEnv.EVENT_FILE_OPEN, new javax.swing.AbstractAction()
-        {
+    actionMap.put(ConsEnv.EVENT_FILE_OPEN, new javax.swing.AbstractAction()
+    {
 
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                menuEvt.fileOpenActionPerformed(evt);
-            }
-        });
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK), ConsEnv.EVENT_FILE_OPEN);
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent evt)
+    {
+    menuEvt.fileOpenActionPerformed(evt);
+    }
+    });
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_MASK), ConsEnv.EVENT_FILE_OPEN);
     }
 
     public static void addFormAction(ActionMap actionMap, InputMap inputMap, final MenuEvt menuEvt)
     {
-        actionMap.put(ConsEnv.EVENT_VIEW_TOP1, new javax.swing.AbstractAction()
-        {
+    actionMap.put(ConsEnv.EVENT_VIEW_TOP1, new javax.swing.AbstractAction()
+    {
 
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                menuEvt.viewTop1ActionPerformed(evt);
-            }
-        });
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0), ConsEnv.EVENT_VIEW_TOP1);
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent evt)
+    {
+    menuEvt.viewTop1ActionPerformed(evt);
+    }
+    });
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0), ConsEnv.EVENT_VIEW_TOP1);
     }
 
     public static void addViewAction(ActionMap actionMap, InputMap inputMap, final MPwdEvt menuEvt)
     {
-        actionMap.put(ConsEnv.EVENT_VIEW_EDIT, new javax.swing.AbstractAction()
-        {
+    actionMap.put(ConsEnv.EVENT_VIEW_EDIT, new javax.swing.AbstractAction()
+    {
 
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                menuEvt.viewEditActionPerformed(evt);
-            }
-        });
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F7, InputEvent.ALT_MASK), ConsEnv.EVENT_VIEW_EDIT);
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent evt)
+    {
+    menuEvt.viewEditActionPerformed(evt);
+    }
+    });
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F7, InputEvent.ALT_MASK), ConsEnv.EVENT_VIEW_EDIT);
 
-        actionMap.put(ConsEnv.EVENT_VIEW_SIDE, new javax.swing.AbstractAction()
-        {
+    actionMap.put(ConsEnv.EVENT_VIEW_SIDE, new javax.swing.AbstractAction()
+    {
 
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                menuEvt.viewSideActionPerformed(evt);
-            }
-        });
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F8, InputEvent.ALT_MASK), ConsEnv.EVENT_VIEW_SIDE);
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent evt)
+    {
+    menuEvt.viewSideActionPerformed(evt);
+    }
+    });
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F8, InputEvent.ALT_MASK), ConsEnv.EVENT_VIEW_SIDE);
 
-        actionMap.put(ConsEnv.EVENT_VIEW_FIND, new javax.swing.AbstractAction()
-        {
+    actionMap.put(ConsEnv.EVENT_VIEW_FIND, new javax.swing.AbstractAction()
+    {
 
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                menuEvt.viewFindActionPerformed(evt);
-            }
-        });
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F9, InputEvent.ALT_MASK), ConsEnv.EVENT_VIEW_FIND);
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK), ConsEnv.EVENT_VIEW_FIND);
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent evt)
+    {
+    menuEvt.viewFindActionPerformed(evt);
+    }
+    });
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F9, InputEvent.ALT_MASK), ConsEnv.EVENT_VIEW_FIND);
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_Q, InputEvent.CTRL_MASK), ConsEnv.EVENT_VIEW_FIND);
 
-        actionMap.put(ConsEnv.EVENT_VIEW_MENU, new javax.swing.AbstractAction()
-        {
+    actionMap.put(ConsEnv.EVENT_VIEW_MENU, new javax.swing.AbstractAction()
+    {
 
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                menuEvt.viewMenuActionPerformed(evt);
-            }
-        });
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F10, InputEvent.ALT_MASK), ConsEnv.EVENT_VIEW_MENU);
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_MASK), ConsEnv.EVENT_VIEW_MENU);
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent evt)
+    {
+    menuEvt.viewMenuActionPerformed(evt);
+    }
+    });
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F10, InputEvent.ALT_MASK), ConsEnv.EVENT_VIEW_MENU);
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_M, InputEvent.CTRL_MASK), ConsEnv.EVENT_VIEW_MENU);
 
-        actionMap.put(ConsEnv.EVENT_VIEW_TOOL, new javax.swing.AbstractAction()
-        {
+    actionMap.put(ConsEnv.EVENT_VIEW_TOOL, new javax.swing.AbstractAction()
+    {
 
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                menuEvt.viewToolActionPerformed(evt);
-            }
-        });
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F11, InputEvent.ALT_MASK), ConsEnv.EVENT_VIEW_TOOL);
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_T, InputEvent.CTRL_MASK), ConsEnv.EVENT_VIEW_TOOL);
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent evt)
+    {
+    menuEvt.viewToolActionPerformed(evt);
+    }
+    });
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F11, InputEvent.ALT_MASK), ConsEnv.EVENT_VIEW_TOOL);
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_T, InputEvent.CTRL_MASK), ConsEnv.EVENT_VIEW_TOOL);
 
-        actionMap.put(ConsEnv.EVENT_VIEW_INFO, new javax.swing.AbstractAction()
-        {
+    actionMap.put(ConsEnv.EVENT_VIEW_INFO, new javax.swing.AbstractAction()
+    {
 
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                menuEvt.viewInfoActionPerformed(evt);
-            }
-        });
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F12, InputEvent.ALT_MASK), ConsEnv.EVENT_VIEW_INFO);
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_I, InputEvent.CTRL_MASK), ConsEnv.EVENT_VIEW_INFO);
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent evt)
+    {
+    menuEvt.viewInfoActionPerformed(evt);
+    }
+    });
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F12, InputEvent.ALT_MASK), ConsEnv.EVENT_VIEW_INFO);
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_I, InputEvent.CTRL_MASK), ConsEnv.EVENT_VIEW_INFO);
     }
 
     public static void addDataAction(ActionMap actionMap, InputMap inputMap, final MPwdEvt menuEvt)
     {
-        actionMap.put(ConsEnv.EVENT_DATA_SKEY, new javax.swing.AbstractAction()
-        {
+    actionMap.put(ConsEnv.EVENT_DATA_SKEY, new javax.swing.AbstractAction()
+    {
 
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                menuEvt.helpSKeyActionPerformed(evt);
-            }
-        });
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0), ConsEnv.EVENT_DATA_SKEY);
-        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_K, InputEvent.CTRL_MASK), ConsEnv.EVENT_DATA_SKEY);
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent evt)
+    {
+    menuEvt.helpSKeyActionPerformed(evt);
+    }
+    });
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_F6, 0), ConsEnv.EVENT_DATA_SKEY);
+    inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_K, InputEvent.CTRL_MASK), ConsEnv.EVENT_DATA_SKEY);
     }*/
 
     public static void removeAction(InputMap inputMap)

@@ -7,6 +7,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
 import com.magicpwd._user.UserPtn;
+import com.magicpwd._util.Bean;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
@@ -38,11 +39,11 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
 
     private TrayPtn()
     {
-        super(Util.getLogo(16));
+        super(Bean.getLogo(16));
         int size = getSize().height;
         if (size != 16)
         {
-            setImage(Util.getLogo(size));
+            setImage(Bean.getLogo(size));
         }
         setImageAutoSize(true);
     }
@@ -103,7 +104,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         addMouseListener(this);
 
         javax.swing.JLabel iconLbl = new javax.swing.JLabel();
-        iconLbl.setIcon(new javax.swing.ImageIcon(Util.getLogo(24)));
+        iconLbl.setIcon(new javax.swing.ImageIcon(Bean.getLogo(24)));
         iconLbl.addMouseListener(this);
         iconLbl.addMouseMotionListener(this);
         //iconLbl.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.cyan));
@@ -552,7 +553,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         {
             form = getCurrForm();
         }
-        javax.swing.JOptionPane.showMessageDialog(form, buf.toString(), Lang.getLang(LangRes.P30F1208, "关于软件"), javax.swing.JOptionPane.INFORMATION_MESSAGE, new javax.swing.ImageIcon(Util.getLogo(32)));
+        javax.swing.JOptionPane.showMessageDialog(form, buf.toString(), Lang.getLang(LangRes.P30F1208, "关于软件"), javax.swing.JOptionPane.INFORMATION_MESSAGE, new javax.swing.ImageIcon(Bean.getLogo(32)));
     }
 
     private void helpItemActionPerformed(java.awt.event.ActionEvent evt)

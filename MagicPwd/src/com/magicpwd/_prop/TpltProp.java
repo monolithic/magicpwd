@@ -14,8 +14,8 @@ import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IPropBean;
+import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
-import com.magicpwd._util.Util;
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.TrayPtn;
@@ -182,7 +182,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         pl_ItemSort = new javax.swing.JPanel();
 
         bt_DropData = new IcoLabel();
-        bt_DropData.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_DELT));
+        bt_DropData.setIcon(Bean.getIcon(ConsEnv.ICON_KEYS_DELT));
         bt_DropData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -194,7 +194,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         });
 
         bt_SaveData = new IcoLabel();
-        bt_SaveData.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_SAVE));
+        bt_SaveData.setIcon(Bean.getIcon(ConsEnv.ICON_KEYS_SAVE));
         bt_SaveData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -206,7 +206,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         });
 
         bt_ApndData = new IcoLabel();
-        bt_ApndData.setIcon(Util.getIcon(ConsEnv.ICON_KEYS_APND));
+        bt_ApndData.setIcon(Bean.getIcon(ConsEnv.ICON_KEYS_APND));
         bt_ApndData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -217,7 +217,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
             }
         });
         bt_SortU = new IcoLabel();
-        bt_SortU.setIcon(Util.getIcon(ConsEnv.ICON_ITEM_PREV));
+        bt_SortU.setIcon(Bean.getIcon(ConsEnv.ICON_ITEM_PREV));
         bt_SortU.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -230,7 +230,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         add(bt_SortU);
 
         bt_SortD = new IcoLabel();
-        bt_SortD.setIcon(Util.getIcon(ConsEnv.ICON_ITEM_NEXT));
+        bt_SortD.setIcon(Bean.getIcon(ConsEnv.ICON_ITEM_NEXT));
         bt_SortD.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -319,13 +319,13 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
 
     private void initSortLang()
     {
-        Lang.setWText(bt_ApndData, LangRes.P30F8509, "&N");
+        Lang.setWText(bt_ApndData, LangRes.P30F8509, "@N");
         Lang.setWTips(bt_ApndData, LangRes.P30F850A, "新增(Alt + N)");
 
-        Lang.setWText(bt_SaveData, LangRes.P30F8507, "&S");
+        Lang.setWText(bt_SaveData, LangRes.P30F8507, "@S");
         Lang.setWTips(bt_SaveData, LangRes.P30F8508, "保存(Alt + S)");
 
-        Lang.setWText(bt_DropData, LangRes.P30F850B, "&D");
+        Lang.setWText(bt_DropData, LangRes.P30F850B, "@D");
         Lang.setWTips(bt_DropData, LangRes.P30F850C, "删除(Alt + D)");
     }
 

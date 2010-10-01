@@ -1,6 +1,7 @@
 package com.magicpwd.v;
 
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.c.FindEvt;
@@ -18,7 +19,7 @@ public class NormPtn extends javax.swing.JFrame implements MPayEvt, FindEvt
     public void initView()
     {
         this.pack();
-        this.setIconImage(Util.getLogo(16));
+        this.setIconImage(Bean.getLogo(16));
         Util.centerForm(this, null);
     }
 

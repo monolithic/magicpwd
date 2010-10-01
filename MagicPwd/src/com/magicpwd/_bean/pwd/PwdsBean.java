@@ -11,6 +11,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
+import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
@@ -58,7 +59,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_PwdsView = new BtnLabel();
-        bt_PwdsView.setIcon(Util.getIcon(ConsEnv.ICON_PWDS_HIDE));
+        bt_PwdsView.setIcon(Bean.getIcon(ConsEnv.ICON_PWDS_HIDE));
         bt_PwdsView.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -71,7 +72,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.add(bt_PwdsView);
 
         bt_PwdsGent = new BtnLabel();
-        bt_PwdsGent.setIcon(Util.getIcon(ConsEnv.ICON_PWDS_GENT));
+        bt_PwdsGent.setIcon(Bean.getIcon(ConsEnv.ICON_PWDS_GENT));
         bt_PwdsGent.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -84,7 +85,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.add(bt_PwdsGent);
 
         bt_PwdsUcfg = new BtnLabel();
-        bt_PwdsUcfg.setIcon(Util.getIcon(ConsEnv.ICON_PWDS_UCFG));
+        bt_PwdsUcfg.setIcon(Bean.getIcon(ConsEnv.ICON_PWDS_UCFG));
         bt_PwdsUcfg.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -257,14 +258,14 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     {
         if (pf_PropData.getEchoChar() == 0)
         {
-            bt_PwdsView.setIcon(Util.getIcon(ConsEnv.ICON_PWDS_HIDE));
+            bt_PwdsView.setIcon(Bean.getIcon(ConsEnv.ICON_PWDS_HIDE));
             pf_PropData.setEchoChar(ConsEnv.PWDS_MASK);
             Lang.setWText(bt_PwdsView, LangRes.P30F1507, "&M");
             Lang.setWTips(bt_PwdsView, LangRes.P30F1508, "点击显示口令(Alt + M)");
         }
         else
         {
-            bt_PwdsView.setIcon(Util.getIcon(ConsEnv.ICON_PWDS_VIEW));
+            bt_PwdsView.setIcon(Bean.getIcon(ConsEnv.ICON_PWDS_VIEW));
             pf_PropData.setEchoChar('\0');
             Lang.setWText(bt_PwdsView, LangRes.P30F1509, "&M");
             Lang.setWTips(bt_PwdsView, LangRes.P30F150A, "点击隐藏口令(Alt + M)");
