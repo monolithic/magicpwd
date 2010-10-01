@@ -5,7 +5,9 @@
 package com.magicpwd._util;
 
 import com.magicpwd._comp.BtnLabel;
+import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd.m.UserCfg;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
@@ -209,6 +211,31 @@ public class Bean
             mp_LogoIcon.put(size, logo);
         }
         return logo;
+    }
+
+    public static ImageIcon readIcon(UserCfg userCfg, String path)
+    {
+        if (!Char.isValidate(path))
+        {
+            return null;
+        }
+
+        path = path.replace("%feel%", userCfg.getCfg(ConsCfg.CFG_SKIN_FEEL, "default"));
+        java.io.InputStream stream = null;
+        try
+        {
+            stream = File.open4Read(path);
+            return new javax.swing.ImageIcon(javax.imageio.ImageIO.read(stream));
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            return null;
+        }
+        finally
+        {
+            closeStream(stream);
+        }
     }
 
     private static BufferedImage createNone(int size)

@@ -709,32 +709,15 @@ public class MenuPtn
         }
 
         String path = element.attributeValue("path");
-        if (!Char.isValidate(path))
+        if (Char.isValidate(path))
         {
-            return null;
-        }
-        path = path.replace("%feel%", coreMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN_FEEL, "default"));
-
-        java.io.InputStream stream = null;
-        try
-        {
-            stream = File.open4Read(path);
-            javax.swing.ImageIcon icon = new javax.swing.ImageIcon(javax.imageio.ImageIO.read(stream));
+            javax.swing.ImageIcon icon = Bean.readIcon(coreMdl.getUserCfg(), path);
             if (validate)
             {
                 Bean.setIcon(hash, icon);
             }
-            return icon;
         }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-            return null;
-        }
-        finally
-        {
-            Bean.closeStream(stream);
-        }
+        return null;
     }
 
     private static String getLang(java.util.Properties prop, String text)

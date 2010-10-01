@@ -30,6 +30,8 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     private MainPtn mainPtn;
     private EditBox dataEdit;
     private WTextBox nameBox;
+    private javax.swing.ImageIcon icoMask;
+    private javax.swing.ImageIcon icoView;
 //    private WTextBox dataBox;
 
     public PwdsBean(MainPtn mainPtn)
@@ -40,7 +42,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initView()
     {
-        dataEdit = new EditBox(this, false);
+        dataEdit = new EditBox(mainPtn.getCoreMdl().getUserCfg(), this, false);
         dataEdit.initView();
 
         lb_PropName = new javax.swing.JLabel();
@@ -59,7 +61,6 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_PwdsView = new BtnLabel();
-        bt_PwdsView.setIcon(Bean.getIcon(ConsEnv.ICON_PWDS_HIDE));
         bt_PwdsView.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -72,7 +73,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.add(bt_PwdsView);
 
         bt_PwdsGent = new BtnLabel();
-        bt_PwdsGent.setIcon(Bean.getIcon(ConsEnv.ICON_PWDS_GENT));
+        bt_PwdsGent.setIcon(Bean.readIcon(mainPtn.getCoreMdl().getUserCfg(), ConsEnv.FEEL_PATH + "pwds-generae.png"));
         bt_PwdsGent.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -85,7 +86,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.add(bt_PwdsGent);
 
         bt_PwdsUcfg = new BtnLabel();
-        bt_PwdsUcfg.setIcon(Bean.getIcon(ConsEnv.ICON_PWDS_UCFG));
+        bt_PwdsUcfg.setIcon(Bean.readIcon(mainPtn.getCoreMdl().getUserCfg(), ConsEnv.FEEL_PATH + "pwds-options.png"));
         bt_PwdsUcfg.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -165,6 +166,11 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     public void initData()
     {
         nameBox.initData();
+
+        icoMask = Bean.readIcon(mainPtn.getCoreMdl().getUserCfg(), ConsEnv.FEEL_PATH + "pwds-mask.png");
+        icoView = Bean.readIcon(mainPtn.getCoreMdl().getUserCfg(), ConsEnv.FEEL_PATH + "pwds-view.png");
+
+        changeView();
     }
 
     @Override
@@ -256,16 +262,21 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 
     private void bt_PwdsViewActionPerformed(java.awt.event.ActionEvent evt)
     {
+        changeView();
+    }
+
+    private void changeView()
+    {
         if (pf_PropData.getEchoChar() == 0)
         {
-            bt_PwdsView.setIcon(Bean.getIcon(ConsEnv.ICON_PWDS_HIDE));
+            bt_PwdsView.setIcon(icoMask);
             pf_PropData.setEchoChar(ConsEnv.PWDS_MASK);
             Lang.setWText(bt_PwdsView, LangRes.P30F1507, "&M");
             Lang.setWTips(bt_PwdsView, LangRes.P30F1508, "点击显示口令(Alt + M)");
         }
         else
         {
-            bt_PwdsView.setIcon(Bean.getIcon(ConsEnv.ICON_PWDS_VIEW));
+            bt_PwdsView.setIcon(icoView);
             pf_PropData.setEchoChar('\0');
             Lang.setWText(bt_PwdsView, LangRes.P30F1509, "&M");
             Lang.setWTips(bt_PwdsView, LangRes.P30F150A, "点击隐藏口令(Alt + M)");
