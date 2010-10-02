@@ -20,7 +20,7 @@ public class Main
             Logs.exception(exp);
         }
         JFrame frame = new JFrame();
-        frame.setJMenuBar(ptn.getMenuBar("magicpwd", frame.getRootPane()));
+        frame.setJMenuBar(ptn.getMenuBar("mpwd", frame.getRootPane()));
         frame.setSize(new Dimension(400, 300));
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
