@@ -103,7 +103,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
         try
         {
-            java.io.File file = new java.io.File(ConsEnv.DIR_DAT, "menu.xml");
+            java.io.File file = new java.io.File(ConsEnv.DIR_DAT, "mpwd.xml");
             menuPtn = new MenuPtn(coreMdl);
             menuPtn.loadData(file);
         }
@@ -119,11 +119,11 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
         this.getContentPane().add(pl_KeysBase);
 
-        mainMenu = menuPtn.getMenuBar("magicpwd", getRootPane());
+        mainMenu = menuPtn.getMenuBar("mpwd", getRootPane());
         this.setJMenuBar(mainMenu);
         mainMenu.setVisible(cfg.isMenuViw());
 
-        mainTool = menuPtn.getToolBar("magicpwd");
+        mainTool = menuPtn.getToolBar("mpwd");
         mainTool.setVisible(cfg.isToolViw());
         this.getContentPane().add(mainTool, cfg.getToolLoc());
 
@@ -540,7 +540,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         sp.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         sp.setOneTouchExpandable(true);
 
-        kindMenu = menuPtn.getMenuPop("mpwdkind");
+        kindMenu = menuPtn.getMenuPop("kind");
 
         tr_GuidTree = new javax.swing.JTree();
         tr_GuidTree.setComponentPopupMenu(kindMenu);
@@ -562,7 +562,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         sp1.setViewportView(tr_GuidTree);
         sp.setTopComponent(sp1);
 
-        listMenu = menuPtn.getMenuPop("mpwdlist");
+        listMenu = menuPtn.getMenuPop("list");
 
         ls_GuidList = new javax.swing.JList();
         ls_GuidList.setComponentPopupMenu(listMenu);
@@ -603,7 +603,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         mainFind = new FindBar(this, coreMdl.getListMdl());
         mainFind.initView();
 
-        gridMenu = menuPtn.getMenuPop("mpwdgrid");
+        gridMenu = menuPtn.getMenuPop("grid");
 
         tb_KeysView = new javax.swing.JTable();
         tb_KeysView.setModel(gridMdl);
