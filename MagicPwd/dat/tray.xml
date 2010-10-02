@@ -13,7 +13,7 @@
         <seperator />
         <!--显示为托盘图标-->
         <item id="viewPtn" type="checkbox" text="$P30F960D">
-            <action class="com.magicpwd.e.ChangeViewAction" />
+            <action class="com.magicpwd.e.ViewAction" />
         </item>
         <seperator />
         <!--魔方密码-->
