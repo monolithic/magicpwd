@@ -77,7 +77,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.add(bt_FileView);
 
         bt_FileApnd = new BtnLabel();
-        bt_FileApnd.setIcon(Bean.readIcon(mainPtn.getCoreMdl().getUserCfg(), ConsEnv.FEEL_PATH + "file-saveas.png"));
+        bt_FileApnd.setIcon(Bean.readIcon(mainPtn.getCoreMdl().getUserCfg(), ConsEnv.FEEL_PATH + "file-preview.png"));
         bt_FileApnd.addActionListener(new java.awt.event.ActionListener()
         {
 

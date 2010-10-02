@@ -2,25 +2,20 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.magicpwd.e.pwd.help;
+package com.magicpwd.e;
 
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd.e.pwd.IPwdAction;
-import com.magicpwd.m.CoreMdl;
-import com.magicpwd.v.pwd.MainPtn;
+import com.magicpwd.v.TrayPtn;
 
 /**
  *
  * @author Amon
  */
-public class MailAction extends javax.swing.AbstractAction implements IPwdAction
+public class MailAction extends javax.swing.AbstractAction
 {
-
-    private MainPtn mainPtn;
-    private CoreMdl coreMdl;
 
     public MailAction()
     {
@@ -31,7 +26,7 @@ public class MailAction extends javax.swing.AbstractAction implements IPwdAction
     {
         if (!java.awt.Desktop.isDesktopSupported())
         {
-            Lang.showMesg(mainPtn, LangRes.P30F7A11, "");
+            Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A11, "");
         }
 
         try
@@ -42,22 +37,5 @@ public class MailAction extends javax.swing.AbstractAction implements IPwdAction
         {
             Logs.exception(exp);
         }
-    }
-
-    @Override
-    public void setMainPtn(MainPtn mainPtn)
-    {
-        this.mainPtn = mainPtn;
-    }
-
-    @Override
-    public void setCoreMdl(CoreMdl coreMdl)
-    {
-        this.coreMdl = coreMdl;
-    }
-
-    @Override
-    public void doUpdate(Object object)
-    {
     }
 }

@@ -2,24 +2,19 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.magicpwd.e.pwd.help;
+package com.magicpwd.e;
 
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd.e.pwd.IPwdAction;
-import com.magicpwd.m.CoreMdl;
-import com.magicpwd.v.pwd.MainPtn;
+import com.magicpwd.v.TrayPtn;
 
 /**
  *
  * @author Amon
  */
-public class HelpAction extends javax.swing.AbstractAction implements IPwdAction
+public class HelpAction extends javax.swing.AbstractAction
 {
-
-    private MainPtn mainPtn;
-    private CoreMdl coreMdl;
 
     public HelpAction()
     {
@@ -30,13 +25,13 @@ public class HelpAction extends javax.swing.AbstractAction implements IPwdAction
     {
         if (!java.awt.Desktop.isDesktopSupported())
         {
-            Lang.showMesg(mainPtn, LangRes.P30F7A0F, "");
+            Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A0F, "");
         }
 
         java.io.File help = new java.io.File("help", "index.html");
         if (!help.exists())
         {
-            Lang.showMesg(mainPtn, LangRes.P30F7A10, "");
+            Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A10, "");
             return;
         }
         try
@@ -47,22 +42,5 @@ public class HelpAction extends javax.swing.AbstractAction implements IPwdAction
         {
             Logs.exception(exp);
         }
-    }
-
-    @Override
-    public void setMainPtn(MainPtn mainPtn)
-    {
-        this.mainPtn = mainPtn;
-    }
-
-    @Override
-    public void setCoreMdl(CoreMdl coreMdl)
-    {
-        this.coreMdl = coreMdl;
-    }
-
-    @Override
-    public void doUpdate(Object object)
-    {
     }
 }

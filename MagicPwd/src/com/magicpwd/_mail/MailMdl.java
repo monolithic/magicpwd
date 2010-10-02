@@ -79,7 +79,7 @@ public class MailMdl extends javax.swing.table.AbstractTableModel
         switch (columnIndex)
         {
             case 0:
-                label.setIcon(message.hasAttachment() ? Bean.readIcon(userCfg, ConsEnv.DIR_FEEL + "mail-attach.png") : Bean.getNone());
+                label.setIcon(message.hasAttachment() ? Bean.readIcon(userCfg, ConsEnv.FEEL_PATH + "mail-attach.png") : Bean.getNone());
                 break;
             case 1:
                 label.setText(message.getFrom());

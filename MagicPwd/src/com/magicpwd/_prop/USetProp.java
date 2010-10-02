@@ -141,7 +141,7 @@ public class USetProp extends JPanel implements IPropBean
         Object obj = cb_UserLang.getSelectedItem();
         if (obj != null && obj instanceof S1S1)
         {
-            uc.setUserLang(((S1S1) obj).getK());
+            //uc.setUserLang(((S1S1) obj).getK());
         }
 
         obj = cb_PwdsChar.getSelectedItem();

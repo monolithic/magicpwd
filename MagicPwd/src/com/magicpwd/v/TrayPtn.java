@@ -9,7 +9,6 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
 import com.magicpwd._user.UserPtn;
 import com.magicpwd._util.Bean;
-import com.magicpwd._util.Desk;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -37,6 +36,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
     private static javax.swing.JFrame mf_CurrForm;
     private static javax.swing.JDialog md_TrayForm;
     private static javax.swing.event.PopupMenuListener listener;
+    private MenuPtn menuPtn;
 
     private TrayPtn()
     {
@@ -113,158 +113,27 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         md_TrayForm.getContentPane().add(iconLbl);
         md_TrayForm.setVisible(true);
 
-        trayMenu = new javax.swing.JPopupMenu();
-
-        infoItem = new javax.swing.JMenuItem();
-        infoItem.addActionListener(new java.awt.event.ActionListener()
+        menuPtn = new MenuPtn(coreMdl);
+        try
         {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                infoItemActionPerformed(evt);
-            }
-        });
-        trayMenu.add(infoItem);
-
-        helpItem = new javax.swing.JMenuItem();
-        helpItem.addActionListener(new java.awt.event.ActionListener()
+            menuPtn.loadData(new java.io.File(ConsEnv.DIR_DAT, "tray.xml"));
+            trayMenu = menuPtn.getMenuPop("traymenu");
+        }
+        catch (Exception ex)
         {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                helpItemActionPerformed(evt);
-            }
-        });
-        trayMenu.add(helpItem);
-
-        trayMenu.addSeparator();
-
-        viewItem = new javax.swing.JMenuItem();
-        viewItem.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                viewItemActionPerformed(evt);
-            }
-        });
-        trayMenu.add(viewItem);
-
-        trayMenu.addSeparator();
-
-        mainItem = new javax.swing.JMenuItem();
-        mainItem.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                mainItemActionPerformed(evt);
-            }
-        });
-        trayMenu.add(mainItem);
-
-        normItem = new javax.swing.JMenuItem();
-        normItem.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                normItemActionPerformed(evt);
-            }
-        });
-        trayMenu.add(normItem);
-
-        miniItem = new javax.swing.JMenuItem();
-        miniItem.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                miniItemActionPerformed(evt);
-            }
-        });
-        trayMenu.add(miniItem);
-
-        trayMenu.addSeparator();
-
-        updtItem = new javax.swing.JMenuItem();
-        updtItem.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                updtItemActionPerformed(evt);
-            }
-        });
-        trayMenu.add(updtItem);
-
-        mailItem = new javax.swing.JMenuItem();
-        mailItem.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                mailItemActionPerformed(evt);
-            }
-        });
-        trayMenu.add(mailItem);
-
-        trayMenu.addSeparator();
-
-        siteItem = new javax.swing.JMenuItem();
-        siteItem.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                siteItemActionPerformed(evt);
-            }
-        });
-        trayMenu.add(siteItem);
-
-        mlogItem = new javax.swing.JMenuItem();
-        mlogItem.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                mlogItemActionPerformed(evt);
-            }
-        });
-        trayMenu.add(mlogItem);
-
-        trayMenu.addSeparator();
-
-        exitItem = new javax.swing.JMenuItem();
-        exitItem.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                TrayPtn.getCurrForm().setVisible(false);
-                endSave();
-                System.exit(0);
-            }
-        });
-        trayMenu.add(exitItem);
+            Logs.exception(ex);
+        }
 
         return true;
     }
 
     public boolean initData()
     {
-        viewItem.setEnabled(java.awt.SystemTray.isSupported());
+        javax.swing.AbstractButton button = menuPtn.getButton("viewPtn");
+        if (button != null)
+        {
+            button.setEnabled(java.awt.SystemTray.isSupported());
+        }
 
         changeView(coreMdl.getUserCfg().getCfg(ConsCfg.CFG_TRAY_PTN, "guid"));
 
@@ -273,24 +142,6 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
 
     public boolean initLang()
     {
-        normItem.setVisible(false);
-
-        Lang.setWText(infoItem, LangRes.P30F9601, "关于软件");
-        Lang.setWText(helpItem, LangRes.P30F9602, "使用帮助");
-
-        Lang.setWText(viewItem, LangRes.P30F960D, "显示为托盘图标");
-
-        Lang.setWText(mainItem, LangRes.P30F9603, "魔方密码");
-        Lang.setWText(normItem, LangRes.P30F9604, "迷你账簿");
-        Lang.setWText(miniItem, LangRes.P30F9605, "记事便签");
-
-        Lang.setWText(updtItem, LangRes.P30F9606, "检测更新");
-        Lang.setWText(mailItem, LangRes.P30F9607, "联系作者");
-        Lang.setWText(siteItem, LangRes.P30F9608, "网站");
-        Lang.setWText(mlogItem, LangRes.P30F960B, "微博");
-
-        Lang.setWText(exitItem, LangRes.P30F960C, "退出");
-
         setToolTip(ConsEnv.SOFTNAME + ' ' + ConsEnv.VERSIONS);
         return true;
     }
@@ -544,142 +395,6 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         }
     }
 
-    private void infoItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        StringBuilder buf = new StringBuilder();
-        buf.append(Lang.getLang(LangRes.P30F7201, "魔方密码")).append("\n");
-        buf.append(ConsEnv.VERSIONS).append(" Build ").append(ConsEnv.BUILDER);
-        javax.swing.JFrame form = null;
-        if (getCurrForm().isVisible())
-        {
-            form = getCurrForm();
-        }
-        javax.swing.JOptionPane.showMessageDialog(form, buf.toString(), Lang.getLang(LangRes.P30F1208, "关于软件"), javax.swing.JOptionPane.INFORMATION_MESSAGE, new javax.swing.ImageIcon(Bean.getLogo(32)));
-    }
-
-    private void helpItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        if (!java.awt.Desktop.isDesktopSupported())
-        {
-            Lang.showMesg(null, LangRes.P30F7A0F, "");
-        }
-
-        java.io.File help = new java.io.File("help", "index.html");
-        if (!help.exists())
-        {
-            Lang.showMesg(null, LangRes.P30F7A10, "");
-            return;
-        }
-        try
-        {
-            java.awt.Desktop.getDesktop().browse(help.toURI());
-        }
-        catch (java.io.IOException exp)
-        {
-            Logs.exception(exp);
-        }
-    }
-
-    private void viewItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        changeView(isOsTray ? "guid" : "icon");
-    }
-
-    private void mainItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        showViewPtn(ConsEnv.VIEW_MAIN);
-    }
-
-    private void normItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        showViewPtn(ConsEnv.VIEW_NORM);
-    }
-
-    private void miniItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        showViewPtn(ConsEnv.VIEW_MINI);
-    }
-
-    private void updtItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        javax.swing.JFrame form = null;
-        if (getCurrForm().isVisible())
-        {
-            form = getCurrForm();
-        }
-        try
-        {
-            boolean b = Util.checkUpdate(ConsEnv.SOFTCODE, ConsEnv.VERSIONS);
-            if (b)
-            {
-                if (Lang.showFirm(form, LangRes.P30F7A12, "检测到新版本，现在要下载吗？") == javax.swing.JOptionPane.YES_OPTION)
-                {
-                    Desk.browse(ConsEnv.HOMEPAGE);
-                }
-            }
-            else
-            {
-                Lang.showMesg(form, LangRes.P30F7A13, "您使用的已是最新版本。");
-            }
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-            Lang.showMesg(null, LangRes.P30F7A14, "");
-        }
-    }
-
-    private void mailItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        if (!java.awt.Desktop.isDesktopSupported())
-        {
-            Lang.showMesg(null, LangRes.P30F7A11, "");
-        }
-
-        try
-        {
-            java.awt.Desktop.getDesktop().mail(new java.net.URI("mailto:" + ConsEnv.SOFTMAIL));
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-        }
-    }
-
-    private void siteItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        if (!java.awt.Desktop.isDesktopSupported())
-        {
-            Lang.showMesg(null, LangRes.P30F7A0F, "");
-        }
-
-        try
-        {
-            java.awt.Desktop.getDesktop().browse(new java.net.URI(ConsEnv.HOMEPAGE));
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-        }
-    }
-
-    private void mlogItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        if (!java.awt.Desktop.isDesktopSupported())
-        {
-            Lang.showMesg(null, LangRes.P30F7A0F, "");
-        }
-
-        try
-        {
-            java.awt.Desktop.getDesktop().browse(new java.net.URI(ConsEnv.MLOGSITE));
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-        }
-    }
-
     private void showLastActionPerformed(java.awt.event.MouseEvent evt)
     {
         if (evt.getClickCount() < 2)
@@ -749,7 +464,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         return userSign;
     }
 
-    private void changeView(String ptn)
+    public void changeView(String ptn)
     {
         UserCfg uc = coreMdl.getUserCfg();
         // 下一步：显示为托盘图标
@@ -759,7 +474,12 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
             {
                 java.awt.SystemTray.getSystemTray().add(this);
                 md_TrayForm.setSize(1, 1);
-                Lang.setWText(viewItem, LangRes.P30F960E, "显示为导航罗盘");
+
+                javax.swing.AbstractButton button = menuPtn.getButton("viewPtn");
+                if (button != null)
+                {
+                    Lang.setWText(button, LangRes.P30F960E, "显示为导航罗盘");
+                }
                 uc.setCfg(ConsCfg.CFG_TRAY_PTN, "icon");
                 isOsTray = true;
                 return;
@@ -773,7 +493,12 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         // 下一步：显示为导航罗盘
         md_TrayForm.pack();
         java.awt.SystemTray.getSystemTray().remove(this);
-        Lang.setWText(viewItem, LangRes.P30F960D, "显示为托盘图标");
+
+        javax.swing.AbstractButton button = menuPtn.getButton("viewPtn");
+        if (button != null)
+        {
+            Lang.setWText(button, LangRes.P30F960D, "显示为托盘图标");
+        }
         uc.setCfg(ConsCfg.CFG_TRAY_PTN, "guid");
 
         if (formLoc == null)
@@ -891,17 +616,6 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
     private java.awt.Point dragLoc;
     private java.awt.Point formLoc;
     private javax.swing.JPopupMenu trayMenu;
-    private javax.swing.JMenuItem infoItem;
-    private javax.swing.JMenuItem siteItem;
-    private javax.swing.JMenuItem mlogItem;
-    private javax.swing.JMenuItem helpItem;
-    private javax.swing.JMenuItem mailItem;
-    private javax.swing.JMenuItem updtItem;
-    private javax.swing.JMenuItem mainItem;
-    private javax.swing.JMenuItem normItem;
-    private javax.swing.JMenuItem miniItem;
-    private javax.swing.JMenuItem exitItem;
-    private javax.swing.JMenuItem viewItem;
     private static MiniPtn mp_MiniPtn;
     private static NormPtn mp_NormPtn;
     private static MainPtn mp_MainPtn;

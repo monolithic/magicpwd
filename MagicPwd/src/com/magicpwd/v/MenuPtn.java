@@ -104,10 +104,6 @@ public class MenuPtn
                     continue;
                 }
                 menuBar.add(menu);
-                if (Char.isValidate(tmp.attributeValue("id")))
-                {
-                    buttons.put(tmp.attributeValue("id"), menu);
-                }
             }
 
             final String KEY_SKIN = "skin";
@@ -207,10 +203,6 @@ public class MenuPtn
                     continue;
                 }
                 toolBar.add(button);
-                if (Char.isValidate(tmp.attributeValue("id")))
-                {
-                    buttons.put(tmp.attributeValue("id"), button);
-                }
             }
         }
         return toolBar;
@@ -219,6 +211,11 @@ public class MenuPtn
     private javax.swing.JMenu createMenu(Element element, java.util.HashMap<String, javax.swing.ButtonGroup> groups, javax.swing.JComponent component)
     {
         javax.swing.JMenu menu = new javax.swing.JMenu();
+        String id = element.attributeValue("id");
+        if (Char.isValidate(id))
+        {
+            buttons.put(id, menu);
+        }
 
         processText(element, menu);
         processTips(element, menu);
@@ -257,6 +254,12 @@ public class MenuPtn
     private javax.swing.JMenuItem createItem(Element element, java.util.HashMap<String, javax.swing.ButtonGroup> groups, javax.swing.JComponent component)
     {
         javax.swing.JMenuItem item = processType(element);
+        String id = element.attributeValue("id");
+        if (Char.isValidate(id))
+        {
+            buttons.put(id, item);
+        }
+
         processGroup(element, item, groups);
         processText(element, item);
         processTips(element, item);
@@ -264,6 +267,7 @@ public class MenuPtn
         processEnabled(element, item);
         processVisible(element, item);
         processAction(element, item, component);
+        processCommand(element, item);
         return item;
     }
 
@@ -556,7 +560,11 @@ public class MenuPtn
 
     private static javax.swing.AbstractButton processCommand(Element element, javax.swing.AbstractButton button)
     {
-        button.setActionCommand(element.attributeValue("command"));
+        String command = element.attributeValue("command");
+        if (Char.isValidate(command))
+        {
+            button.setActionCommand(command);
+        }
         return button;
     }
 
@@ -638,7 +646,6 @@ public class MenuPtn
             }
         }
         button.addActionListener(action);
-        processCommand(element, button);
         processStrokes(element, button, action, component);
         processReference(element, button, action);
         return button;
@@ -716,7 +723,9 @@ public class MenuPtn
             {
                 Bean.setIcon(hash, icon);
             }
+            return icon;
         }
+
         return null;
     }
 
@@ -747,6 +756,13 @@ public class MenuPtn
         {
             button = new javax.swing.JButton();
         }
+
+        String id = element.attributeValue("id");
+        if (Char.isValidate(id))
+        {
+            buttons.put(id, button);
+        }
+
         processGroup(element, button, groups);
         processText(element, button);
         processTips(element, button);
@@ -754,6 +770,7 @@ public class MenuPtn
         processEnabled(element, button);
         processVisible(element, button);
         processAction(element, button, component);
+        processCommand(element, button);
         return button;
     }
 }

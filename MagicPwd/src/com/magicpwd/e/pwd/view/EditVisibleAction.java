@@ -28,15 +28,12 @@ public class EditVisibleAction extends javax.swing.AbstractAction implements IPw
     {
         UserCfg cfg = coreMdl.getUserCfg();
         boolean b = !cfg.isEditVisible();
+        mainPtn.setEditBeanVisible(b);
+        cfg.setEditViw(b);
         if (b)
         {
             mainPtn.showPropInfo();
         }
-        else
-        {
-            mainPtn.setEditBeanVisible(b);
-        }
-        cfg.setEditViw(b);
     }
 
     @Override
