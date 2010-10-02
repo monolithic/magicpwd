@@ -10,18 +10,18 @@ import com.magicpwd.v.TrayPtn;
  *
  * @author aven
  */
-public class ChangeViewAction extends javax.swing.AbstractAction
+public class ViewAction extends javax.swing.AbstractAction
 {
 
     private TrayPtn trayPtn;
 
-    public ChangeViewAction()
+    public ViewAction()
     {
     }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        trayPtn.changeView(true ? "guid" : "icon");
+        trayPtn.changeView();
     }
 }
