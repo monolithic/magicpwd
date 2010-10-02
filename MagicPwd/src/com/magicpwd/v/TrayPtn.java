@@ -117,7 +117,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         try
         {
             menuPtn.loadData(new java.io.File(ConsEnv.DIR_DAT, "tray.xml"));
-            trayMenu = menuPtn.getMenuPop("traymenu");
+            trayMenu = menuPtn.getMenuPop("tray");
         }
         catch (Exception ex)
         {
