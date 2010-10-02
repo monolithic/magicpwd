@@ -46,7 +46,6 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         {
             setImage(Bean.getLogo(size));
         }
-        setImageAutoSize(true);
     }
 
     public static TrayPtn getInstance()
@@ -63,17 +62,23 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
 
     public boolean initView()
     {
+        // 托盘视图初始化
+        setImageAutoSize(true);
+        addMouseListener(this);
+
+        // 罗盘视图初始化
         if (md_TrayForm == null)
         {
             md_TrayForm = new javax.swing.JDialog();
             md_TrayForm.setUndecorated(true);
             md_TrayForm.setAlwaysOnTop(true);
-//            trayForm.addWindowListener(new java.awt.event.WindowAdapter()
+//            md_TrayForm.addWindowListener(new java.awt.event.WindowAdapter()
 //            {
+//
 //                @Override
 //                public void windowDeactivated(java.awt.event.WindowEvent evt)
 //                {
-//                      md_TrayForm.setVisible(false);
+//                    md_TrayForm.setVisible(false);
 //                }
 //            });
         }
@@ -102,17 +107,15 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
             };
         }
 
-        addMouseListener(this);
-
         javax.swing.JLabel iconLbl = new javax.swing.JLabel();
         iconLbl.setIcon(new javax.swing.ImageIcon(Bean.getLogo(24)));
         iconLbl.addMouseListener(this);
         iconLbl.addMouseMotionListener(this);
-        //iconLbl.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.cyan));
         md_TrayForm.getContentPane().setLayout(new java.awt.BorderLayout());
         md_TrayForm.getContentPane().add(iconLbl);
         md_TrayForm.setVisible(true);
 
+        // 右键菜单初始化
         menuPtn = new MenuPtn(coreMdl);
         try
         {
@@ -127,22 +130,15 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         return true;
     }
 
-    public boolean initData()
-    {
-        javax.swing.AbstractButton button = menuPtn.getButton("viewPtn");
-        if (button != null)
-        {
-            button.setEnabled(java.awt.SystemTray.isSupported());
-        }
-
-        changeView(coreMdl.getUserCfg().getCfg(ConsCfg.CFG_TRAY_PTN, "guid"));
-
-        return true;
-    }
-
     public boolean initLang()
     {
         setToolTip(ConsEnv.SOFTNAME + ' ' + ConsEnv.VERSIONS);
+        return true;
+    }
+
+    public boolean initData()
+    {
+        changeView();
         return true;
     }
 
@@ -242,21 +238,6 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
 
         mf_CurrForm = mp_MiniPtn;
         currPtn = ConsEnv.VIEW_MINI;
-    }
-
-    public javax.swing.JPopupMenu getJPopupMenu()
-    {
-        return trayMenu;
-    }
-
-    public void setJPopupMenu(javax.swing.JPopupMenu menu)
-    {
-        if (trayMenu != null)
-        {
-            trayMenu.removePopupMenuListener(listener);
-        }
-        trayMenu = menu;
-        trayMenu.addPopupMenuListener(listener);
     }
 
     @Override
@@ -464,9 +445,21 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         return userSign;
     }
 
-    public void changeView(String ptn)
+    public void changeView()
     {
+        javax.swing.AbstractButton button = menuPtn.getButton("viewPtn");
+        if (!java.awt.SystemTray.isSupported())
+        {
+            if (button != null)
+            {
+                button.setEnabled(false);
+            }
+            return;
+        }
+
         UserCfg uc = coreMdl.getUserCfg();
+        String ptn = uc.getCfg(ConsCfg.CFG_TRAY_PTN, "guid");
+
         // 下一步：显示为托盘图标
         if (ConsCfg.DEF_TRAY.equalsIgnoreCase(ptn))
         {
@@ -474,8 +467,6 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
             {
                 java.awt.SystemTray.getSystemTray().add(this);
                 md_TrayForm.setSize(1, 1);
-
-                javax.swing.AbstractButton button = menuPtn.getButton("viewPtn");
                 if (button != null)
                 {
                     Lang.setWText(button, LangRes.P30F960E, "显示为导航罗盘");
@@ -493,8 +484,6 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         // 下一步：显示为导航罗盘
         md_TrayForm.pack();
         java.awt.SystemTray.getSystemTray().remove(this);
-
-        javax.swing.AbstractButton button = menuPtn.getButton("viewPtn");
         if (button != null)
         {
             Lang.setWText(button, LangRes.P30F960D, "显示为托盘图标");
@@ -503,6 +492,8 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
 
         if (formLoc == null)
         {
+            java.awt.Dimension size = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+
             String loc = uc.getCfg(ConsCfg.CFG_TRAY_LOC);
             if (com.magicpwd._util.Char.isValidate(loc))
             {
@@ -517,7 +508,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
                 {
                     y = Integer.parseInt(matcher.group());
                 }
-                if (x >= 0 && y >= 0)
+                if (x >= 0 && x < size.width && y >= 0 && y < size.height)
                 {
                     formLoc = new java.awt.Point(x, y);
                 }
@@ -525,7 +516,6 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
 
             if (formLoc == null)
             {
-                java.awt.Dimension size = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
                 formLoc = new java.awt.Point(size.width - 120 - md_TrayForm.getWidth(), 80);
             }
         }
