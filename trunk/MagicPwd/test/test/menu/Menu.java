@@ -51,10 +51,10 @@ public class Menu extends javax.swing.AbstractAction
         }
 
         frame = new JFrame();
-        bar = ptn.getMenuBar("magicpwd", frame.getRootPane());
+        bar = ptn.getMenuBar("mpwd", frame.getRootPane());
         frame.setJMenuBar(bar);
 
-        frame.getContentPane().add(ptn.getToolBar("magicpwd"), BorderLayout.NORTH);
+        frame.getContentPane().add(ptn.getToolBar("mpwd"), BorderLayout.NORTH);
 
         frame.setSize(new Dimension(400, 300));
         frame.setVisible(true);
