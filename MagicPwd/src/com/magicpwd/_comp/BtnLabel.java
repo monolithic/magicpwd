@@ -4,6 +4,7 @@
 package com.magicpwd._comp;
 
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._util.Logs;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.InputEvent;
@@ -20,6 +21,7 @@ import javax.swing.KeyStroke;
  */
 public class BtnLabel extends JLabel
 {
+
     private String command;
     private static BufferedImage defImage;
     private static BufferedImage ovrImage;
@@ -38,7 +40,7 @@ public class BtnLabel extends JLabel
         }
         catch (Exception exp)
         {
-            exp.printStackTrace();
+            Logs.exception(exp);
         }
     }
 
@@ -49,6 +51,7 @@ public class BtnLabel extends JLabel
 
         addMouseListener(new java.awt.event.MouseAdapter()
         {
+
             @Override
             public void mouseEntered(java.awt.event.MouseEvent evt)
             {
@@ -85,6 +88,7 @@ public class BtnLabel extends JLabel
         this.listener = listener;
         getActionMap().put("MagicPwdEvent", new javax.swing.AbstractAction()
         {
+
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
@@ -112,8 +116,8 @@ public class BtnLabel extends JLabel
             }
             catch (Exception exp)
             {
-                exp.printStackTrace();
                 disImage = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+                Logs.exception(exp);
             }
         }
     }
@@ -122,7 +126,9 @@ public class BtnLabel extends JLabel
     {
         int vk = (int) mnemonic;
         if (vk >= 'a' && vk <= 'z')
+        {
             vk -= ('a' - 'A');
+        }
         setMnemonic(vk);
     }
 
@@ -213,8 +219,8 @@ public class BtnLabel extends JLabel
             }
             catch (Exception exp)
             {
-                exp.printStackTrace();
                 ovrImage = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+                Logs.exception(exp);
             }
         }
         curImage = ovrImage;
@@ -232,8 +238,8 @@ public class BtnLabel extends JLabel
             }
             catch (Exception exp)
             {
-                exp.printStackTrace();
                 prsImage = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+                Logs.exception(exp);
             }
         }
         curImage = prsImage;

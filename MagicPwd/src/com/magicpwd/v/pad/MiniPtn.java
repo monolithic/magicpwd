@@ -3,6 +3,7 @@ package com.magicpwd.v.pad;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
+import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditItem;
@@ -64,21 +65,36 @@ public class MiniPtn extends javax.swing.JFrame implements MPadEvt, FindEvt
 
         lb_NoteHead.setLabelFor(tf_NoteName);
 
-        tf_NoteName.addActionListener(new FindAction());
+        FindAction findAction = new FindAction();
+        findAction.setMiniPtn(this);
+        findAction.setCoreMdl(coreMdl);
+        tf_NoteName.addActionListener(findAction);
         nameBox = new WTextBox(tf_NoteName, true);
         nameBox.initView();
 
         bt_CreateNote.setIcon(Bean.readIcon(coreMdl.getUserCfg(), ConsEnv.FEEL_PATH + "file-new.png"));
-        bt_CreateNote.addActionListener(new NewAction());
+        NewAction newAction = new NewAction();
+        newAction.setMiniPtn(this);
+        newAction.setCoreMdl(coreMdl);
+        bt_CreateNote.addActionListener(newAction);
+        Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK), newAction, "file-new", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
 
         bt_OpenNote.setIcon(Bean.readIcon(coreMdl.getUserCfg(), ConsEnv.FEEL_PATH + "file-open.png"));
-        bt_OpenNote.addActionListener(new OpenAction());
+        OpenAction openAction = new OpenAction();
+        openAction.setMiniPtn(this);
+        openAction.setCoreMdl(coreMdl);
+        bt_OpenNote.addActionListener(openAction);
+        Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK), openAction, "file-open", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
 
         bt_SaveNote.setIcon(Bean.readIcon(coreMdl.getUserCfg(), ConsEnv.FEEL_PATH + "file-save.png"));
-        bt_SaveNote.addActionListener(new SaveAction());
+        SaveAction saveAction = new SaveAction();
+        saveAction.setMiniPtn(this);
+        saveAction.setCoreMdl(coreMdl);
+        bt_SaveNote.addActionListener(saveAction);
+        Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK), saveAction, "file-save", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
 
         bt_SearchNote.setIcon(Bean.readIcon(coreMdl.getUserCfg(), ConsEnv.FEEL_PATH + "data-search.png"));
-        bt_SearchNote.addActionListener(tf_NoteName.getAction());
+        bt_SearchNote.addActionListener(findAction);
 
         ta_NoteData.setDragEnabled(true);
         dataBox = new WTextBox(ta_NoteData);
@@ -159,10 +175,10 @@ public class MiniPtn extends javax.swing.JFrame implements MPadEvt, FindEvt
         vsg.addContainerGap();
         layout.setVerticalGroup(vsg);
 
-        this.getContentPane().add(pl_NoteBase);
-        this.pack();
-        this.setIconImage(Bean.getLogo(16));
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        getContentPane().add(pl_NoteBase);
+        pack();
+        setIconImage(Bean.getLogo(16));
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
         Util.centerForm(this, null);
     }
 
@@ -395,7 +411,9 @@ public class MiniPtn extends javax.swing.JFrame implements MPadEvt, FindEvt
         if (noteMdl.getSize() < 1)
         {
             // Guid
-            noteMdl.initGuid();
+            IEditItem item = noteMdl.initGuid();
+            item.setData(ConsDat.HASH_NOTE);
+
             // Meta
             noteMdl.initMeta();
             // Logo
