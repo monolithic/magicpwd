@@ -208,7 +208,7 @@ public class MiniPtn extends javax.swing.JFrame implements MPadEvt, FindEvt
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 TrayPtn.getCurrForm().setVisible(false);
-                TrayPtn.showMainPtn();
+                TrayPtn.getInstance().showViewPtn(ConsEnv.VIEW_MAIN);
                 TrayPtn.getCurrForm().setVisible(true);
             }
         };

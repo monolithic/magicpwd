@@ -92,7 +92,7 @@ public class CloudResumeAction extends javax.swing.AbstractAction implements IPw
             {
                 dialog.setVisible(false);
                 dialog.dispose();
-                Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A3A, "您还没有配置您的POP邮箱信息！");
+                Lang.showMesg(mainPtn, LangRes.P30F7A3A, "您还没有配置您的POP邮箱信息！");
                 return;
             }
 
@@ -114,7 +114,7 @@ public class CloudResumeAction extends javax.swing.AbstractAction implements IPw
             {
                 dialog.setVisible(false);
                 dialog.dispose();
-                Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A3E, "无法从POP邮箱读取备份数据！");
+                Lang.showMesg(mainPtn, LangRes.P30F7A3E, "无法从POP邮箱读取备份数据！");
             }
 
             if (mail.read(message))
@@ -126,7 +126,7 @@ public class CloudResumeAction extends javax.swing.AbstractAction implements IPw
                         Jzip.unZip(item.getV(), ".");
                         dialog.setVisible(false);
                         dialog.dispose();
-                        Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A3F, "数据恢复成功，您需要重新启动本程序！");
+                        Lang.showMesg(mainPtn, LangRes.P30F7A3F, "数据恢复成功，您需要重新启动本程序！");
                         System.exit(0);
                     }
                 }
@@ -137,7 +137,7 @@ public class CloudResumeAction extends javax.swing.AbstractAction implements IPw
             Logs.exception(ex);
             dialog.setVisible(false);
             dialog.dispose();
-            Lang.showMesg(TrayPtn.getCurrForm(), null, ex.getLocalizedMessage());
+            Lang.showMesg(mainPtn, null, ex.getLocalizedMessage());
         }
         finally
         {

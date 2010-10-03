@@ -3,12 +3,6 @@
  */
 package com.magicpwd._prop;
 
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.TreePath;
-import javax.swing.tree.TreeSelectionModel;
-
 import com.magicpwd._comp.IcoLabel;
 import com.magicpwd._comn.Kind;
 import com.magicpwd.r.TreeCR;
@@ -25,7 +19,7 @@ import com.magicpwd.v.TrayPtn;
  * @author Amon
  * 
  */
-public class KindProp extends JPanel implements IPropBean
+public class KindProp extends javax.swing.JPanel implements IPropBean
 {
 
     private javax.swing.tree.DefaultMutableTreeNode treeNode;
@@ -69,7 +63,7 @@ public class KindProp extends JPanel implements IPropBean
     }
 
     @Override
-    public JPanel getPanel()
+    public javax.swing.JPanel getPanel()
     {
         return this;
     }
@@ -277,7 +271,7 @@ public class KindProp extends JPanel implements IPropBean
         javax.swing.JScrollPane sp_ItemList = new javax.swing.JScrollPane();
         tr_KindList = new javax.swing.JTree();
         tr_KindList.setCellRenderer(new TreeCR());
-        tr_KindList.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        tr_KindList.getSelectionModel().setSelectionMode(javax.swing.tree.TreeSelectionModel.SINGLE_TREE_SELECTION);
         tr_KindList.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener()
         {
 
@@ -331,20 +325,20 @@ public class KindProp extends JPanel implements IPropBean
 
     private void sortLActionPerformed(java.awt.event.ActionEvent evt)
     {
-        TreePath path = tr_KindList.getSelectionPath();
+        javax.swing.tree.TreePath path = tr_KindList.getSelectionPath();
         if (path == null)
         {
             return;
         }
 
-        DefaultMutableTreeNode s = (DefaultMutableTreeNode) path.getLastPathComponent();
-        DefaultMutableTreeNode p1 = (DefaultMutableTreeNode) s.getParent();
+        javax.swing.tree.DefaultMutableTreeNode s = (javax.swing.tree.DefaultMutableTreeNode) path.getLastPathComponent();
+        javax.swing.tree.DefaultMutableTreeNode p1 = (javax.swing.tree.DefaultMutableTreeNode) s.getParent();
         if (p1 == null)
         {
             return;
         }
 
-        DefaultMutableTreeNode p2 = (DefaultMutableTreeNode) p1.getParent();
+        javax.swing.tree.DefaultMutableTreeNode p2 = (javax.swing.tree.DefaultMutableTreeNode) p1.getParent();
         if (p2 == null)
         {
             return;
@@ -353,7 +347,7 @@ public class KindProp extends JPanel implements IPropBean
         p1.remove(s);
         p2.add(s);
         coreMdl.getTreeMdl().nodeStructureChanged(p2);
-        tr_KindList.setSelectionPath(new TreePath(s.getPath()));
+        tr_KindList.setSelectionPath(new javax.swing.tree.TreePath(s.getPath()));
 
         Kind u = (Kind) p2.getUserObject();
         Kind c = (Kind) s.getUserObject();
@@ -370,14 +364,14 @@ public class KindProp extends JPanel implements IPropBean
             return;
         }
 
-        treeNode = (DefaultMutableTreeNode) path.getLastPathComponent();
-        DefaultMutableTreeNode p = treeNode;
-        DefaultMutableTreeNode n = p.getPreviousSibling();
+        treeNode = (javax.swing.tree.DefaultMutableTreeNode) path.getLastPathComponent();
+        javax.swing.tree.DefaultMutableTreeNode p = treeNode;
+        javax.swing.tree.DefaultMutableTreeNode n = p.getPreviousSibling();
         if (n == null)
         {
             return;
         }
-        DefaultMutableTreeNode o = (DefaultMutableTreeNode) p.getParent();
+        javax.swing.tree.DefaultMutableTreeNode o = (javax.swing.tree.DefaultMutableTreeNode) p.getParent();
         if (o == null)
         {
             return;
@@ -400,19 +394,19 @@ public class KindProp extends JPanel implements IPropBean
 
     private void sortDActionPerformed(java.awt.event.ActionEvent evt)
     {
-        TreePath path = tr_KindList.getSelectionPath();
+        javax.swing.tree.TreePath path = tr_KindList.getSelectionPath();
         if (path == null)
         {
             return;
         }
 
-        DefaultMutableTreeNode p = (DefaultMutableTreeNode) path.getLastPathComponent();
-        DefaultMutableTreeNode n = p.getNextSibling();
+        javax.swing.tree.DefaultMutableTreeNode p = (javax.swing.tree.DefaultMutableTreeNode) path.getLastPathComponent();
+        javax.swing.tree.DefaultMutableTreeNode n = p.getNextSibling();
         if (n == null)
         {
             return;
         }
-        DefaultMutableTreeNode o = (DefaultMutableTreeNode) p.getParent();
+        javax.swing.tree.DefaultMutableTreeNode o = (javax.swing.tree.DefaultMutableTreeNode) p.getParent();
         if (o == null)
         {
             return;
@@ -435,24 +429,24 @@ public class KindProp extends JPanel implements IPropBean
 
     private void sortRActionPerformed(java.awt.event.ActionEvent evt)
     {
-        TreePath path = tr_KindList.getSelectionPath();
+        javax.swing.tree.TreePath path = tr_KindList.getSelectionPath();
         if (path == null)
         {
             return;
         }
 
-        DefaultMutableTreeNode s = (DefaultMutableTreeNode) path.getLastPathComponent();
-        DefaultMutableTreeNode p = s.getPreviousSibling();
+        javax.swing.tree.DefaultMutableTreeNode s = (javax.swing.tree.DefaultMutableTreeNode) path.getLastPathComponent();
+        javax.swing.tree.DefaultMutableTreeNode p = s.getPreviousSibling();
         if (p == null)
         {
             return;
         }
 
-        DefaultMutableTreeNode o = (DefaultMutableTreeNode) p.getParent();
+        javax.swing.tree.DefaultMutableTreeNode o = (javax.swing.tree.DefaultMutableTreeNode) p.getParent();
         o.remove(s);
         p.add(s);
         coreMdl.getTreeMdl().nodeStructureChanged(o);
-        tr_KindList.setSelectionPath(new TreePath(s.getPath()));
+        tr_KindList.setSelectionPath(new javax.swing.tree.TreePath(s.getPath()));
 
         Kind u = (Kind) p.getUserObject();
         Kind c = (Kind) s.getUserObject();
@@ -478,7 +472,7 @@ public class KindProp extends JPanel implements IPropBean
             return;
         }
 
-        TreePath path = tr_KindList.getSelectionPath();
+        javax.swing.tree.TreePath path = tr_KindList.getSelectionPath();
         javax.swing.tree.DefaultMutableTreeNode node = (javax.swing.tree.DefaultMutableTreeNode) (path != null ? path.getLastPathComponent() : coreMdl.getTreeMdl().getRoot());
 
         if (kindItem == null)
@@ -507,12 +501,12 @@ public class KindProp extends JPanel implements IPropBean
     {
         if (tr_KindList.getSelectionPath() == null)
         {
-            Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F8A04, "请选择您要删除的类别数据！");
+            Lang.showMesg(this, LangRes.P30F8A04, "请选择您要删除的类别数据！");
             tr_KindList.requestFocus();
             return;
         }
 
-        if (Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F7A1A, "执行此操作后，此类别下的其它类别将会移动到根类别下，\n确认要删除此类别么？") == JOptionPane.YES_OPTION)
+        if (Lang.showFirm(this, LangRes.P30F7A1A, "执行此操作后，此类别下的其它类别将会移动到根类别下，\n确认要删除此类别么？") == javax.swing.JOptionPane.YES_OPTION)
         {
             coreMdl.getTreeMdl().wRemove(tr_KindList.getSelectionPath());
         }
