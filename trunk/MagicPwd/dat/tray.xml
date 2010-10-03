@@ -52,7 +52,7 @@
         <seperator />
         <menu id="plug" text="$P30F763A">
             <!--测试-->
-            <item type="normal" text="$P30F763B" command="这是一个扩展测试！">
+            <item type="normal" text="测试(@T)" command="这是一个扩展测试！">
                 <action class="com.magicpwd.e.TestAction" />
             </item>
         </menu>
