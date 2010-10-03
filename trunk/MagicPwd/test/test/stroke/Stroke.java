@@ -54,7 +54,7 @@ public class Stroke
         file.add(item);
         KeyStroke stroke = KeyStroke.getKeyStroke("ctrl Q");
         item.setAccelerator(stroke);
-        Bean.registerKeyStrokeAction(c, stroke, action, "", JComponent.WHEN_IN_FOCUSED_WINDOW);
+        Bean.registerKeyStrokeAction(c, stroke, action, "q", JComponent.WHEN_IN_FOCUSED_WINDOW);
 
         item = new JMenuItem("Alert");
         action = new javax.swing.AbstractAction()
@@ -70,7 +70,7 @@ public class Stroke
         file.add(item);
         stroke = KeyStroke.getKeyStroke("ctrl M");
         item.setAccelerator(stroke);
-        Bean.registerKeyStrokeAction(c, stroke, action, "", JComponent.WHEN_IN_FOCUSED_WINDOW);
+        Bean.registerKeyStrokeAction(c, stroke, action, "m", JComponent.WHEN_IN_FOCUSED_WINDOW);
 
         bar.setVisible(false);
         frame.setJMenuBar(bar);

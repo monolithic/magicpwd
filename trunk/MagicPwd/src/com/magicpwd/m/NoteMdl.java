@@ -17,8 +17,6 @@ import com.magicpwd.d.DBA3000;
 public class NoteMdl extends GridMdl
 {
 
-    private UserCfg userCfg;
-
     public NoteMdl(UserCfg userCfg, SafeMdl safeMdl)
     {
         super(userCfg, safeMdl);
@@ -47,7 +45,6 @@ public class NoteMdl extends GridMdl
     public void saveData(boolean histBack) throws Exception
     {
         keys.setP30F0105(userCfg.getUserCode());
-        keys.setP30F0106(ConsDat.HASH_NOTE);
         keys.setHistBack(histBack);
         enCrypt(keys, ls_ItemList);
         DBA3000.savePwdsData(keys);
