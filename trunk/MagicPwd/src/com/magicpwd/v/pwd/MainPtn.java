@@ -1288,20 +1288,20 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
             if (dstFile == null || !dstFile.exists())
             {
-                Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A46, "生成卡片文件失败，请稍后重试！");
+                Lang.showMesg(this, LangRes.P30F7A46, "生成卡片文件失败，请稍后重试！");
             }
             else if (javax.swing.JOptionPane.YES_OPTION == Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F7A47, "生成卡片文件成功，要打开卡片文件吗？"))
             {
                 if (!Desk.open(dstFile))
                 {
-                    Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F1A03, "打开文件错误，请尝试手动方式查看！");
+                    Lang.showMesg(this, LangRes.P30F1A03, "打开文件错误，请尝试手动方式查看！");
                 }
             }
         }
         catch (Exception ex)
         {
             Logs.exception(ex);
-            Lang.showMesg(TrayPtn.getCurrForm(), null, ex.getLocalizedMessage());
+            Lang.showMesg(this, null, ex.getLocalizedMessage());
         }
     }
 
@@ -1323,21 +1323,21 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         mailPtn.initMail(mailList);
         if (mailList.size() < 1)
         {
-            Lang.showMesg(mailDlg, null, "没有可用的邮件类型数据！");
+            Lang.showMesg(this, null, "没有可用的邮件类型数据！");
             return;
         }
         java.util.List<I1S2> userList = gridMdl.wSelect(ConsDat.INDX_TEXT);
         mailPtn.initUser(userList);
         if (userList.size() < 1)
         {
-            Lang.showMesg(mailDlg, null, "没有可用的文本类型数据！");
+            Lang.showMesg(this, null, "没有可用的文本类型数据！");
             return;
         }
         java.util.List<I1S2> pwdsList = gridMdl.wSelect(ConsDat.INDX_PWDS);
         mailPtn.initPwds(pwdsList);
         if (pwdsList.size() < 1)
         {
-            Lang.showMesg(mailDlg, null, "没有可用的口令类型数据！");
+            Lang.showMesg(this, null, "没有可用的口令类型数据！");
             return;
         }
         if (javax.swing.JOptionPane.OK_OPTION != javax.swing.JOptionPane.showConfirmDialog(TrayPtn.getCurrForm(), mailPtn, "登录确认", javax.swing.JOptionPane.OK_CANCEL_OPTION))
@@ -1359,7 +1359,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         connect.setUsername(user);
         if (!connect.useDefault())
         {
-            Lang.showMesg(mailDlg, null, "查找不到对应的服务信息，如有疑问请与作者联系！");
+            Lang.showMesg(this, null, "查找不到对应的服务信息，如有疑问请与作者联系！");
             return;
         }
 

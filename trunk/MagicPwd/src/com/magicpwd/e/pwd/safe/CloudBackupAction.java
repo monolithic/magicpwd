@@ -90,7 +90,7 @@ public class CloudBackupAction extends javax.swing.AbstractAction implements IPw
             {
                 dialog.setVisible(false);
                 dialog.dispose();
-                Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A3A, "您还没有配置您的POP邮箱信息！");
+                Lang.showMesg(mainPtn, LangRes.P30F7A3A, "您还没有配置您的POP邮箱信息！");
                 return;
             }
 
@@ -102,7 +102,7 @@ public class CloudBackupAction extends javax.swing.AbstractAction implements IPw
             {
                 dialog.setVisible(false);
                 dialog.dispose();
-                Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A3B, "压缩用户数据文件出错，请重启软件后重试！");
+                Lang.showMesg(mainPtn, LangRes.P30F7A3B, "压缩用户数据文件出错，请重启软件后重试！");
                 return;
             }
 
@@ -132,19 +132,19 @@ public class CloudBackupAction extends javax.swing.AbstractAction implements IPw
             {
                 dialog.setVisible(false);
                 dialog.dispose();
-                Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A3C, "系统无法备份您的数据到云端！");
+                Lang.showMesg(mainPtn, LangRes.P30F7A3C, "系统无法备份您的数据到云端！");
                 return;
             }
 
             dialog.setVisible(false);
             dialog.dispose();
-            Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A3D, "数据成功备份到云端！");
+            Lang.showMesg(mainPtn, LangRes.P30F7A3D, "数据成功备份到云端！");
             return;
         }
         catch (Exception ex)
         {
             Logs.exception(ex);
-            Lang.showMesg(TrayPtn.getCurrForm(), null, ex.getLocalizedMessage());
+            Lang.showMesg(mainPtn, null, ex.getLocalizedMessage());
         }
         finally
         {

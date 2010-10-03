@@ -186,6 +186,11 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         return mf_CurrForm;
     }
 
+    public static void setCurrForm(javax.swing.JFrame frame)
+    {
+        mf_CurrForm = frame;
+    }
+
     public static MainPtn getMainPtn()
     {
         if (mp_MainPtn == null)
@@ -198,7 +203,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         return mp_MainPtn;
     }
 
-    public static void showMainPtn()
+    private void showMainPtn()
     {
         getMainPtn();
 
@@ -206,7 +211,12 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         currPtn = ConsEnv.VIEW_MAIN;
     }
 
-    public static void showNormPtn()
+    public static NormPtn getNormPtn()
+    {
+        return null;
+    }
+
+    private void showNormPtn()
     {
         if (mp_NormPtn == null)
         {
@@ -232,7 +242,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         return mp_MiniPtn;
     }
 
-    public static void showMiniPtn()
+    private void showMiniPtn()
     {
         getMiniPtn();
 
@@ -417,7 +427,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         }
 
         TrayPtn.nextPtn = nextPtn;
-        getUserPtn(ConsEnv.INT_SIGN_RS);
+        getUserPtn(ConsEnv.INT_SIGN_RS).setBackCall(this);
     }
 
     public static UserPtn getUserPtn(UserCfg userCfg)
@@ -565,7 +575,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         }
         catch (Exception exc)
         {
-            Lang.showMesg(TrayPtn.getCurrForm(), null, exc.getLocalizedMessage());
+            Lang.showMesg(getCurrForm(), null, exc.getLocalizedMessage());
         }
     }
 
@@ -590,18 +600,6 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
     public static void setDbLocked(boolean aDbLocked)
     {
         dbLocked = aDbLocked;
-    }
-
-    public static void setUserCfg(UserCfg userCfg)
-    {
-        if (coreMdl == null)
-        {
-            coreMdl = new CoreMdl();
-        }
-        coreMdl.setUserCfg(userCfg);
-        coreMdl.preLoad();
-
-        safeMdl = new SafeMdl(userCfg);
     }
     private java.awt.Point dragLoc;
     private java.awt.Point formLoc;

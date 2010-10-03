@@ -252,7 +252,8 @@ public class MagicPwd
     private static boolean viewFrm()
     {
         // 设置软件界面风格
-        TrayPtn.showMainPtn();
+        TrayPtn.setCurrForm(TrayPtn.getMainPtn());
+        TrayPtn.getInstance().showViewPtn(ConsEnv.VIEW_MAIN);
         if (!TrayPtn.getCurrForm().isVisible())
         {
             TrayPtn.getCurrForm().setVisible(true);

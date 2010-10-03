@@ -78,7 +78,7 @@ public class CloudConfigAction extends javax.swing.AbstractAction implements IPw
         catch (Exception ex)
         {
             Logs.exception(ex);
-            Lang.showMesg(TrayPtn.getCurrForm(), null, ex.getLocalizedMessage());
+            Lang.showMesg(mainPtn, null, ex.getLocalizedMessage());
         }
         return true;
     }

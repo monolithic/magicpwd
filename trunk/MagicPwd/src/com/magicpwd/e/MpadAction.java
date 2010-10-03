@@ -4,6 +4,7 @@
  */
 package com.magicpwd.e;
 
+import com.magicpwd._cons.ConsEnv;
 import com.magicpwd.v.TrayPtn;
 
 /**
@@ -13,8 +14,6 @@ import com.magicpwd.v.TrayPtn;
 public class MpadAction extends javax.swing.AbstractAction
 {
 
-    private TrayPtn trayPtn;
-
     public MpadAction()
     {
     }
@@ -22,6 +21,6 @@ public class MpadAction extends javax.swing.AbstractAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        trayPtn.showMiniPtn();
+        TrayPtn.getInstance().showViewPtn(ConsEnv.VIEW_MINI);
     }
 }
