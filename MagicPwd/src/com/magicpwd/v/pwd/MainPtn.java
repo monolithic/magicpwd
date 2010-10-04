@@ -1215,6 +1215,14 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         return true;
     }
 
+    public void backupData() throws Exception
+    {
+    }
+
+    public void resumeData() throws Exception
+    {
+    }
+
     public boolean clearGrid()
     {
         if (gridModified())

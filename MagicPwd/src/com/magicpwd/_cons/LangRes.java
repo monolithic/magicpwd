@@ -770,4 +770,5 @@ public interface LangRes
     String P30FAA1A = "P30FAA1A";
     String P30FAA1B = "P30FAA1B";
     String P30FAA1C = "P30FAA1C";
+    String P30FAA1D = "P30FAA1D";
 }
