@@ -30,7 +30,7 @@ public class FindVisibleAction extends javax.swing.AbstractAction implements IPw
         UserCfg cfg = coreMdl.getUserCfg();
 
         boolean b = !cfg.isFindViw();
-        mainPtn.setFindBeanVisible(b);
+        mainPtn.setFindVisible(b);
         mainPtn.pack();
 
         cfg.setFindViw(b);

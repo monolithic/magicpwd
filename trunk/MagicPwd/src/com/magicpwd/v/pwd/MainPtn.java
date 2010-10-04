@@ -123,20 +123,12 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
         mainMenu = menuPtn.getMenuBar("mpwd", getRootPane());
         this.setJMenuBar(mainMenu);
-        mainMenu.setVisible(cfg.isMenuViw());
 
         mainTool = menuPtn.getToolBar("mpwd");
-        mainTool.setVisible(cfg.isToolViw());
         this.getContentPane().add(mainTool, cfg.getToolLoc());
 
-        mainFind.setVisible(cfg.isFindViw());
-
-        mainInfo.setVisible(cfg.isInfoViw());
-
-        this.pack();
         this.setIconImage(Bean.getLogo(16));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        Util.centerForm(this, null);
     }
 
     public void initLang()
@@ -152,26 +144,36 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
     public void initData()
     {
         UserCfg cfg = coreMdl.getUserCfg();
-        if (cfg.isEditVisible())
-        {
-            showPropInfo();
-        }
 
-        mainInfo.initData();
+        // 菜单栏
+        setMenuVisible(cfg.isMenuViw());
+
+        // 工具栏
+        setToolVisible(cfg.isToolViw());
+
+        // 搜索栏
         mainFind.initData();
+        setFindVisible(cfg.isFindViw());
 
+        // 信息栏
+        mainInfo.initData();
+        setInfoVisible(cfg.isInfoViw());
+
+        // 属性编辑组件
         eb_KeysEdit.initData();
         ed_KeysEdit.initData();
         for (IEditBean bean : editBean)
         {
             bean.initData();
         }
-
         setEditVisible(cfg.isEditVisible());
-        setEditRelated(cfg.isEditRelated());
+        setEditIsolate(cfg.isEditIsolate());
+        if (cfg.isEditVisible())
+        {
+            showPropInfo();
+        }
 
-        showPropInfo();
-
+        // 列表菜单
         WButtonGroup group = menuPtn.getGroup("order-dir");
         if (group != null)
         {
@@ -182,6 +184,9 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         {
             group.setSelected(cfg.getCfg(ConsCfg.CFG_VIEW_LIST_KEY, "01"), true);
         }
+
+        this.pack();
+        Util.centerForm(this, null);
     }
 
     public boolean newKeys()
@@ -298,34 +303,63 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         return menuPtn;
     }
 
-    public void setEditBeanVisible(boolean visible)
+    public void setEditVisible(boolean visible)
     {
-        eb_KeysEdit.setVisible(visible);
-        if (ed_KeysEdit != null)
+        UserCfg cfg = coreMdl.getUserCfg();
+        if (cfg.isEditIsolate())
         {
             ed_KeysEdit.setVisible(visible);
         }
+        else
+        {
+            eb_KeysEdit.setVisible(visible);
+        }
+        cfg.setEditVisible(visible);
     }
 
-    public void setFindBeanVisible(boolean visible)
+    public void setEditIsolate(boolean isolate)
+    {
+        UserCfg cfg = coreMdl.getUserCfg();
+        if (cfg.isEditVisible())
+        {
+            if (isolate)
+            {
+                eb_KeysEdit.setVisible(false);
+                ed_KeysEdit.setVisible(true);
+                ed_KeysEdit.setPropView(pl_CardProp);
+            }
+            else
+            {
+                eb_KeysEdit.setVisible(true);
+                ed_KeysEdit.setVisible(false);
+                eb_KeysEdit.setPropView(pl_CardProp);
+            }
+            cfg.setEditIsolate(isolate);
+        }
+    }
+
+    public void setFindVisible(boolean visible)
     {
         mainFind.setVisible(visible);
-        mainFind.requestFocus();
+        coreMdl.getUserCfg().setFindViw(visible);
     }
 
-    public void setInfoBeanVisible(boolean visible)
+    public void setInfoVisible(boolean visible)
     {
         mainInfo.setVisible(visible);
+        coreMdl.getUserCfg().setInfoViw(visible);
     }
 
-    public void setMenuBeanVisible(boolean visible)
+    public void setMenuVisible(boolean visible)
     {
         mainMenu.setVisible(visible);
+        coreMdl.getUserCfg().setMenuViw(visible);
     }
 
-    public void setToolBeanVisible(boolean visible)
+    public void setToolVisible(boolean visible)
     {
         mainTool.setVisible(visible);
+        coreMdl.getUserCfg().setToolViw(visible);
     }
 
     public javax.swing.tree.TreePath getSelectedKindValue()
@@ -926,37 +960,6 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         }
     }
 
-    public void setEditVisible(boolean visible)
-    {
-        if (coreMdl.getUserCfg().isEditRelated())
-        {
-            eb_KeysEdit.setVisible(visible);
-        }
-        else
-        {
-            ed_KeysEdit.setVisible(visible);
-        }
-    }
-
-    public void setEditRelated(boolean related)
-    {
-        if (coreMdl.getUserCfg().isEditVisible())
-        {
-            if (related)
-            {
-                eb_KeysEdit.setVisible(true);
-                ed_KeysEdit.setVisible(false);
-                eb_KeysEdit.setPropView(pl_CardProp);
-            }
-            else
-            {
-                eb_KeysEdit.setVisible(false);
-                ed_KeysEdit.setVisible(true);
-                ed_KeysEdit.setPropView(pl_CardProp);
-            }
-        }
-    }
-
     public void showPropEdit(IEditItem tplt, boolean focus)
     {
         if (coreMdl.getUserCfg().isEditVisible())
@@ -1051,8 +1054,8 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         {
 //            mainMenu.setViewPropSelected(true);
 //            mainMenu.setViewSideSelected(true);
-            coreMdl.getUserCfg().setEditViw(true);
-            coreMdl.getUserCfg().setEditWnd(true);
+            coreMdl.getUserCfg().setEditVisible(true);
+            coreMdl.getUserCfg().setEditIsolate(true);
             setEditVisible(true);
         }
 

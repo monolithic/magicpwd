@@ -5,7 +5,6 @@
 package com.magicpwd.e.pwd.view;
 
 import com.magicpwd.e.pwd.IPwdAction;
-import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
 
@@ -26,10 +25,8 @@ public class EditVisibleAction extends javax.swing.AbstractAction implements IPw
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        UserCfg cfg = coreMdl.getUserCfg();
-        boolean b = !cfg.isEditVisible();
-        mainPtn.setEditBeanVisible(b);
-        cfg.setEditViw(b);
+        boolean b = !coreMdl.getUserCfg().isEditVisible();
+        mainPtn.setEditVisible(b);
         if (b)
         {
             mainPtn.showPropInfo();
@@ -51,5 +48,6 @@ public class EditVisibleAction extends javax.swing.AbstractAction implements IPw
     @Override
     public void doUpdate(Object object)
     {
+        putValue("selected", coreMdl.getUserCfg().isEditVisible());
     }
 }

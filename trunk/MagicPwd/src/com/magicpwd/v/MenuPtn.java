@@ -630,6 +630,7 @@ public class MenuPtn
                             IPwdAction pwdAction = (IPwdAction) action;
                             pwdAction.setMainPtn(TrayPtn.getMainPtn());
                             pwdAction.setCoreMdl(coreMdl);
+                            pwdAction.doUpdate(null);
                         }
                         else if (action instanceof IPadAction)
                         {
@@ -651,6 +652,9 @@ public class MenuPtn
             }
         }
         button.addActionListener(action);
+//        button.setEnabled(action.getValue("enabled") != null);
+        button.setSelected(action.getValue("selected") == Boolean.TRUE);
+        button.setVisible(action.getValue("visible") != Boolean.FALSE);
         processStrokes(element, button, action, component);
         processReference(element, button, action);
         return button;
@@ -773,9 +777,24 @@ public class MenuPtn
         processIcon(element, button);
         processEnabled(element, button);
         processVisible(element, button);
-        processAction(element, button, component);
         processCommand(element, button);
         processGroup(element, button);
+        processAction(element, button, component);
         return button;
+    }
+
+    public boolean isEnabled(String id)
+    {
+        return true;
+    }
+
+    public boolean isVisible(String id)
+    {
+        return true;
+    }
+
+    public boolean isd()
+    {
+        return true;
     }
 }

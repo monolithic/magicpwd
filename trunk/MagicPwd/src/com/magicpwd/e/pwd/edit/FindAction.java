@@ -25,7 +25,7 @@ public class FindAction extends javax.swing.AbstractAction implements IPwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mainPtn.setFindBeanVisible(true);
+        mainPtn.setFindVisible(true);
         mainPtn.pack();
     }
 

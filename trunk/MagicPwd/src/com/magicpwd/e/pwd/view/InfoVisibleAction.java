@@ -29,7 +29,7 @@ public class InfoVisibleAction extends javax.swing.AbstractAction implements IPw
     {
         UserCfg cfg = coreMdl.getUserCfg();
         boolean b = !cfg.isInfoViw();
-        mainPtn.setInfoBeanVisible(b);
+        mainPtn.setInfoVisible(b);
         mainPtn.pack();
 
 //        mainMenu.setViewInfoSelected(b);

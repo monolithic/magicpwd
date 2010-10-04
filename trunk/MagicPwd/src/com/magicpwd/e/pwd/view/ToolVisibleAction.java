@@ -29,7 +29,7 @@ public class ToolVisibleAction extends javax.swing.AbstractAction implements IPw
     {
         UserCfg cfg = coreMdl.getUserCfg();
         boolean b = !cfg.isToolViw();
-        mainPtn.setToolBeanVisible(b);
+        mainPtn.setToolVisible(b);
         mainPtn.pack();
 
 //        mainMenu.setViewToolSelected(b);
