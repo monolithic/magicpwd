@@ -20,6 +20,8 @@ import com.magicpwd._comn.Kind;
 import com.magicpwd._comn.Keys;
 import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.item.MetaItem;
+import com.magicpwd._comp.WButtonGroup;
+import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
@@ -169,6 +171,17 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         setEditRelated(cfg.isEditRelated());
 
         showPropInfo();
+
+        WButtonGroup group = menuPtn.getGroup("order-dir");
+        if (group != null)
+        {
+            group.setSelected(cfg.getCfg(ConsCfg.CFG_VIEW_LIST_ASC, ConsCfg.DEF_FALSE), true);
+        }
+        group = menuPtn.getGroup("order-key");
+        if (group != null)
+        {
+            group.setSelected(cfg.getCfg(ConsCfg.CFG_VIEW_LIST_KEY, "01"), true);
+        }
     }
 
     public boolean newKeys()
@@ -832,46 +845,45 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         {
             return;
         }
-        if (i < 0)
+
+        ls_LastIndx = i;
+        if (ls_LastIndx < 0)
         {
-            ls_LastIndx = i;
             return;
         }
 
-        GridMdl gm = gridMdl;
-        if (gm.isModified())
+        if (gridMdl.isModified())
         {
-            if (Lang.showFirm(this, LangRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", gm.getItemAt(ConsEnv.PWDS_HEAD_META).getName()) != javax.swing.JOptionPane.YES_OPTION)
+            if (Lang.showFirm(this, LangRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", gridMdl.getItemAt(ConsEnv.PWDS_HEAD_META).getName()) != javax.swing.JOptionPane.YES_OPTION)
             {
                 ls_GuidList.setSelectedIndex(ls_LastIndx);
                 return;
             }
-
-            // S1S2 item = UserMdl.getListMdl().getElement(ls_LastIndx);
-            // UserMdl.getGridMdl().setKindHash(item.getK());
-            // try
-            // {
-            // UserMdl.getGridMdl().saveData(true, true);
-            // }
-            // catch (Exception exp)
-            // {
-            // LogUtil.exception(exp);
-            // return;
-            // }
         }
 
-        ls_LastIndx = i;
         Object obj = ls_GuidList.getSelectedValue();
         if (!(obj instanceof Keys))
         {
             return;
         }
+
         try
         {
             tb_LastIndx = -1;
             Keys keys = (Keys) obj;
-            gm.clear();
-            gm.loadData(keys.getP30F0104());
+            gridMdl.clear();
+            gridMdl.loadData(keys.getP30F0104());
+
+            WButtonGroup group = menuPtn.getGroup("label");
+            if (group != null)
+            {
+                group.setSelected(Integer.toString(keys.getP30F0102()), true);
+            }
+            group = menuPtn.getGroup("major");
+            if (group != null)
+            {
+                group.setSelected(Integer.toString(keys.getP30F0103()), true);
+            }
         }
         catch (Exception exp)
         {

@@ -4,6 +4,7 @@
  */
 package com.magicpwd.v;
 
+import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
@@ -35,12 +36,14 @@ public class MenuPtn
     private java.util.regex.Pattern pattern;
     private java.util.HashMap<String, javax.swing.AbstractButton> buttons;
     private java.util.HashMap<String, javax.swing.AbstractAction> actions;
+    private java.util.HashMap<String, WButtonGroup> groups;
 
     public MenuPtn(CoreMdl coreMdl)
     {
         this.coreMdl = coreMdl;
         buttons = new java.util.HashMap<String, javax.swing.AbstractButton>();
         actions = new java.util.HashMap<String, javax.swing.AbstractAction>();
+        groups = new java.util.HashMap<String, WButtonGroup>();
     }
 
     public boolean loadData(String uri) throws Exception
@@ -70,6 +73,11 @@ public class MenuPtn
         return actions.get(id);
     }
 
+    public WButtonGroup getGroup(String id)
+    {
+        return groups.get(id);
+    }
+
     public javax.swing.JMenuBar getMenuBar(String menuId, javax.swing.JComponent component)
     {
         if (!Char.isValidate(menuId) || document == null)
@@ -89,7 +97,6 @@ public class MenuPtn
         List elementList = element.elements("menu");
         if (elementList != null)
         {
-            java.util.HashMap<String, javax.swing.ButtonGroup> groups = new java.util.HashMap<String, javax.swing.ButtonGroup>();
             Element tmp;
             for (Object obj : elementList)
             {
@@ -98,7 +105,7 @@ public class MenuPtn
                     continue;
                 }
                 tmp = (Element) obj;
-                javax.swing.JMenu menu = createMenu(tmp, groups, component);
+                javax.swing.JMenu menu = createMenu(tmp, component);
                 if (menu == null)
                 {
                     continue;
@@ -140,7 +147,6 @@ public class MenuPtn
         List elementList = element.elements();
         if (elementList != null)
         {
-            java.util.HashMap<String, javax.swing.ButtonGroup> groups = new java.util.HashMap<String, javax.swing.ButtonGroup>();
             Element tmp;
             for (Object obj : elementList)
             {
@@ -151,12 +157,12 @@ public class MenuPtn
                 tmp = (Element) obj;
                 if ("menu".equals(tmp.getName()))
                 {
-                    menuPop.add(createMenu(tmp, groups, null));
+                    menuPop.add(createMenu(tmp, null));
                     continue;
                 }
                 if ("item".equals(tmp.getName()))
                 {
-                    menuPop.add(createItem(tmp, groups, null));
+                    menuPop.add(createItem(tmp, null));
                     continue;
                 }
                 if ("seperator".equals(tmp.getName()))
@@ -188,7 +194,6 @@ public class MenuPtn
         List elementList = element.elements("item");
         if (elementList != null)
         {
-            java.util.HashMap<String, javax.swing.ButtonGroup> groups = new java.util.HashMap<String, javax.swing.ButtonGroup>();
             Element tmp;
             for (Object obj : elementList)
             {
@@ -197,7 +202,7 @@ public class MenuPtn
                     continue;
                 }
                 tmp = (Element) obj;
-                javax.swing.AbstractButton button = createButton(tmp, groups, null);
+                javax.swing.AbstractButton button = createButton(tmp, null);
                 if (button == null)
                 {
                     continue;
@@ -208,7 +213,7 @@ public class MenuPtn
         return toolBar;
     }
 
-    private javax.swing.JMenu createMenu(Element element, java.util.HashMap<String, javax.swing.ButtonGroup> groups, javax.swing.JComponent component)
+    private javax.swing.JMenu createMenu(Element element, javax.swing.JComponent component)
     {
         javax.swing.JMenu menu = new javax.swing.JMenu();
         String id = element.attributeValue("id");
@@ -233,12 +238,12 @@ public class MenuPtn
                 element = (Element) obj;
                 if ("menu".equals(element.getName()))
                 {
-                    menu.add(createMenu(element, groups, component));
+                    menu.add(createMenu(element, component));
                     continue;
                 }
                 if ("item".equals(element.getName()))
                 {
-                    menu.add(createItem(element, groups, component));
+                    menu.add(createItem(element, component));
                     continue;
                 }
                 if ("seperator".equals(element.getName()))
@@ -251,7 +256,7 @@ public class MenuPtn
         return menu;
     }
 
-    private javax.swing.JMenuItem createItem(Element element, java.util.HashMap<String, javax.swing.ButtonGroup> groups, javax.swing.JComponent component)
+    private javax.swing.JMenuItem createItem(Element element, javax.swing.JComponent component)
     {
         javax.swing.JMenuItem item = processType(element);
         String id = element.attributeValue("id");
@@ -260,7 +265,6 @@ public class MenuPtn
             buttons.put(id, item);
         }
 
-        processGroup(element, item, groups);
         processText(element, item);
         processTips(element, item);
         processIcon(element, item);
@@ -268,6 +272,7 @@ public class MenuPtn
         processVisible(element, item);
         processAction(element, item, component);
         processCommand(element, item);
+        processGroup(element, item);
         return item;
     }
 
@@ -324,7 +329,7 @@ public class MenuPtn
         String skinName = coreMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN_NAME, ConsCfg.DEF_SKIN_SYS);
         LookAction action = new LookAction();
         action.setCoreMdl(coreMdl);
-        javax.swing.ButtonGroup group = new javax.swing.ButtonGroup();
+        WButtonGroup group = new WButtonGroup();
 
         // Java默认风格
         java.io.File defaultSkin = new java.io.File(lookFile, ConsEnv.SKIN_DEFAULT + '/' + ConsEnv.SKIN_LOOK_FILE);
@@ -336,7 +341,7 @@ public class MenuPtn
             item.setActionCommand(ConsCfg.DEF_SKIN_DEF);
             item.setSelected(skinName.equals(ConsCfg.DEF_SKIN_DEF));
             lookMenu.add(item);
-            group.add(item);
+            group.add(item.getActionCommand(), item);
         }
 
         // 系统默认风格
@@ -349,7 +354,7 @@ public class MenuPtn
             item.setActionCommand(ConsCfg.DEF_SKIN_SYS);
             item.setSelected(skinName.equals(ConsCfg.DEF_SKIN_SYS));
             lookMenu.add(item);
-            group.add(item);
+            group.add(item.getActionCommand(), item);
         }
 
         java.io.File dirs[] = lookFile.listFiles(new AmonFF(true, ConsEnv.SKIN_DEFAULT, ConsEnv.SKIN_SYSTEM));
@@ -400,7 +405,7 @@ public class MenuPtn
                     item.setSelected(skinName.equals(element.attributeValue("class")));
                     item.setActionCommand(type + ":" + dir.getName() + ',' + element.attributeValue("class"));
                     lookMenu.add(item);
-                    group.add(item);
+                    group.add(item.getActionCommand(), item);
                 }
                 else
                 {
@@ -427,7 +432,7 @@ public class MenuPtn
                         item.setSelected(skinName.equals(element.attributeValue("class")));
                         item.setActionCommand(type + ":" + dir.getName() + ',' + element.attributeValue("class"));
                         subMenu.add(item);
-                        group.add(item);
+                        group.add(item.getActionCommand(), item);
                     }
                 }
             }
@@ -522,18 +527,18 @@ public class MenuPtn
         return new javax.swing.JMenuItem();
     }
 
-    private static javax.swing.AbstractButton processGroup(Element element, javax.swing.AbstractButton button, java.util.HashMap<String, javax.swing.ButtonGroup> groups)
+    private javax.swing.AbstractButton processGroup(Element element, javax.swing.AbstractButton button)
     {
         String group = element.attributeValue("group");
         if (Char.isValidate(group))
         {
-            javax.swing.ButtonGroup bg = groups.get(group);
+            WButtonGroup bg = groups.get(group);
             if (bg == null)
             {
-                bg = new javax.swing.ButtonGroup();
+                bg = new WButtonGroup();
                 groups.put(group, bg);
             }
-            bg.add(button);
+            bg.add(button.getActionCommand(), button);
         }
         return button;
     }
@@ -744,7 +749,7 @@ public class MenuPtn
         return (text != null && java.util.regex.Pattern.matches("^[$]P30F[0123456789ABCDEF]{4}$", text)) ? Lang.getLang(text, text) : text;
     }
 
-    private javax.swing.AbstractButton createButton(Element element, java.util.HashMap<String, javax.swing.ButtonGroup> groups, javax.swing.JComponent component)
+    private javax.swing.AbstractButton createButton(Element element, javax.swing.JComponent component)
     {
         javax.swing.AbstractButton button = null;
         String type = element.attributeValue("type");
@@ -763,7 +768,6 @@ public class MenuPtn
             buttons.put(id, button);
         }
 
-        processGroup(element, button, groups);
         processText(element, button);
         processTips(element, button);
         processIcon(element, button);
@@ -771,6 +775,7 @@ public class MenuPtn
         processVisible(element, button);
         processAction(element, button, component);
         processCommand(element, button);
+        processGroup(element, button);
         return button;
     }
 }
