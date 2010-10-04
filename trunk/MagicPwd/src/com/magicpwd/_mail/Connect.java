@@ -185,42 +185,24 @@ public class Connect
             return false;
         }
 
-        if (mailCfg == null)
-        {
-            mailCfg = new Properties();
-            try
-            {
-                java.io.File file = new java.io.File(ConsEnv.DIR_DAT, "mail.config");
-                if (!file.exists() || !file.isFile() || !file.canRead())
-                {
-                    return false;
-                }
-                java.io.FileInputStream fis = new java.io.FileInputStream(file);
-                mailCfg.load(fis);
-                fis.close();
-            }
-            catch (Exception exp)
-            {
-                Logs.exception(exp);
-            }
-        }
+        java.util.Properties prop = getMailCfg();
 
         // 服务器地址
         host = mail.substring(mail.indexOf('@') + 1);
         String cfg = null;
         if (com.magicpwd._util.Char.isValidate(protocol))
         {
-            cfg = mailCfg.getProperty(protocol + '.' + host);
+            cfg = prop.getProperty(protocol + '.' + host);
         }
         if (!com.magicpwd._util.Char.isValidate(cfg))
         {
-            String type = mailCfg.getProperty(host + ".type");
+            String type = prop.getProperty(host + ".type");
             if (!com.magicpwd._util.Char.isValidate(type))
             {
                 return false;
             }
             protocol = type;
-            cfg = mailCfg.getProperty(protocol + '.' + host);
+            cfg = prop.getProperty(protocol + '.' + host);
         }
         if (!com.magicpwd._util.Char.isValidate(cfg))
         {
@@ -431,5 +413,29 @@ public class Connect
             return ConsCfg.DEF_TRUE.equals(newProp.getProperty(messageId));
         }
         return false;
+    }
+
+    public static java.util.Properties getMailCfg()
+    {
+        if (mailCfg == null)
+        {
+            mailCfg = new Properties();
+            try
+            {
+                java.io.File file = new java.io.File(ConsEnv.DIR_DAT, "mail.config");
+                if (!file.exists() || !file.isFile() || !file.canRead())
+                {
+                    return null;
+                }
+                java.io.FileInputStream fis = new java.io.FileInputStream(file);
+                mailCfg.load(fis);
+                fis.close();
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+        }
+        return mailCfg;
     }
 }

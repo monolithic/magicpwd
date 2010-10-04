@@ -7,6 +7,7 @@ package com.magicpwd.e.pwd.safe;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._face.IBackCall;
 import com.magicpwd._user.UserPtn;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.DBA3000;
@@ -73,7 +74,11 @@ public class CloudConfigAction extends javax.swing.AbstractAction implements IPw
 
         try
         {
-            DBA3000.saveConfig("pop_mail", mainPtn.enCrypt(params[1] + '\n' + params[2]));
+            if (!Char.isValidateEmail(params[1]))
+            {
+                params[1] = params[2] + '@' + params[1];
+            }
+            DBA3000.saveConfig("pop_mail", mainPtn.enCrypt(params[1] + '\n' + params[2] + '\n' + params[3]));
         }
         catch (Exception ex)
         {

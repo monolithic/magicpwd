@@ -106,9 +106,9 @@ public class CloudBackupAction extends javax.swing.AbstractAction implements IPw
                 return;
             }
 
-            Connect connect = new Connect(data[0], data[1], "smtp");
+            Connect connect = new Connect(data[0], data[2], "smtp");
             connect.useDefault();
-            connect.setUsername(data[0]);
+            connect.setUsername(data[1]);
             Sender mail = new Sender(connect);
 
             // 删除已有文件

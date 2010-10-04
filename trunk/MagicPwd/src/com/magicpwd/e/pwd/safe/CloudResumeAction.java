@@ -100,9 +100,9 @@ public class CloudResumeAction extends javax.swing.AbstractAction implements IPw
             String[] data = docs.split("\n");
 
             TrayPtn.endSave();
-            Connect connect = new Connect(data[0], data[1]);
+            Connect connect = new Connect(data[0], data[2]);
             connect.useDefault();
-            connect.setUsername(data[0]);
+            connect.setUsername(data[1]);
             Reader mail = new Reader(connect);
 
             // 读取备份文件
