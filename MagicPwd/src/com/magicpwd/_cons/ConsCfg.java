@@ -182,7 +182,7 @@ public interface ConsCfg
     /**
      * 
      */
-    String DEF_PWDS_HASH = "10000006";
+    String DEF_PWDS_HASH = "1000000000000006";
     /**
      * 默认数据：口令字符空间
      */

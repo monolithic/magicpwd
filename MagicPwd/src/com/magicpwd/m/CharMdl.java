@@ -27,49 +27,49 @@ public class CharMdl extends AbstractListModel
         charSys = new ArrayList<Char>(7);
 
         Char c = new Char();
-        c.setP30F2103("10000001");
+        c.setP30F2103("1000000000000001");
         c.setP30F2104("数字");
         c.setP30F2105("数字");
         c.setP30F2106("0123456789");
         charSys.add(c);
 
         c = new Char();
-        c.setP30F2103("10000002");
+        c.setP30F2103("1000000000000002");
         c.setP30F2104("小写字母");
         c.setP30F2105("小写字母");
         c.setP30F2106("abcdefghijklmnopqrstuvwxyz");
         charSys.add(c);
 
         c = new Char();
-        c.setP30F2103("10000003");
+        c.setP30F2103("1000000000000003");
         c.setP30F2104("大写字母");
         c.setP30F2105("大写字母");
         c.setP30F2106("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
         charSys.add(c);
 
         c = new Char();
-        c.setP30F2103("10000004");
+        c.setP30F2103("1000000000000004");
         c.setP30F2104("特殊字符");
         c.setP30F2105("特殊字符");
         c.setP30F2106("!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~");
         charSys.add(c);
 
         c = new Char();
-        c.setP30F2103("10000005");
+        c.setP30F2103("1000000000000005");
         c.setP30F2104("大小写字母");
         c.setP30F2105("大小写字母");
         c.setP30F2106("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
         charSys.add(c);
 
         c = new Char();
-        c.setP30F2103("10000006");
+        c.setP30F2103("1000000000000006");
         c.setP30F2104("字母及数字");
         c.setP30F2105("字母及数字");
         c.setP30F2106("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
         charSys.add(c);
 
         c = new Char();
-        c.setP30F2103("10000007");
+        c.setP30F2103("1000000000000007");
         c.setP30F2104("可输入字符");
         c.setP30F2105("可输入字符");
         c.setP30F2106("!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");

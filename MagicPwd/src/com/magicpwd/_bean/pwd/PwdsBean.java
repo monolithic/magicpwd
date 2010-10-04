@@ -7,6 +7,7 @@ import com.magicpwd._comn.Char;
 import com.magicpwd._comn.item.EditItem;
 import com.magicpwd._comp.EditBox;
 import com.magicpwd._comp.BtnLabel;
+import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
@@ -30,14 +31,13 @@ import javax.swing.JOptionPane;
 public class PwdsBean extends javax.swing.JPanel implements IEditBean
 {
 
-    private boolean askOverRide;
     private IEditItem itemData;
     private MainPtn mainPtn;
     private EditBox dataEdit;
     private WTextBox nameBox;
     private javax.swing.ImageIcon icoMask;
     private javax.swing.ImageIcon icoView;
-    private int charSize;
+    private boolean askOverWrite;
 //    private WTextBox dataBox;
 
     public PwdsBean(MainPtn mainPtn)
@@ -149,8 +149,6 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initLang()
     {
-        initMenuLang();
-
         Lang.setWText(lb_PropName, LangRes.P30F1309, "名称");
         Lang.setWText(lb_PropData, LangRes.P30F130A, "口令");
 
@@ -163,7 +161,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         Lang.setWText(bt_PwdsUcfg, LangRes.P30F150D, "&O");
         Lang.setWTips(bt_PwdsUcfg, LangRes.P30F150E, "口令设置(Alt + O)");
 
-//        menuPwd.initLang();
+        initMenuLang();
 
         nameBox.initLang();
         dataEdit.initLang();
@@ -177,7 +175,9 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         icoMask = Bean.readIcon(mainPtn.getCoreMdl().getUserCfg(), ConsEnv.FEEL_PATH + "pwds-mask.png");
         icoView = Bean.readIcon(mainPtn.getCoreMdl().getUserCfg(), ConsEnv.FEEL_PATH + "pwds-view.png");
 
-        changeView();
+        initMenuData();
+
+        changeView(true);
     }
 
     @Override
@@ -191,7 +191,10 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         }
         tf_PropName.setText(name);
         pf_PropData.setText(itemData.getData());
-//        menuPwd.setTplt(tplt);
+
+        bg_SizeGroup.setSelected(itemData.getSpec(IEditItem.SPEC_PWDS_SIZE), true);
+        bg_CharGroup.setSelected(itemData.getSpec(IEditItem.SPEC_PWDS_HASH), true);
+        mi_LoopMenu.setSelected(ConsCfg.DEF_TRUE.equals(itemData.getSpec(IEditItem.SPEC_PWDS_LOOP)));
     }
 
     @Override
@@ -253,7 +256,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 
     private void initSizeView()
     {
-        javax.swing.ButtonGroup bg = new javax.swing.ButtonGroup();
+        bg_SizeGroup = new WButtonGroup();
         java.awt.event.ActionListener al = new java.awt.event.ActionListener()
         {
 
@@ -268,18 +271,17 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         mi_SizeDef = new javax.swing.JCheckBoxMenuItem();
         mi_SizeDef.addActionListener(al);
         mu_SizeMenu.add(mi_SizeDef);
-        bg.add(mi_SizeDef);
+        bg_SizeGroup.add("", mi_SizeDef);
 
         mu_SizeMenu.addSeparator();
 
         mi_SizeNum = new javax.swing.JCheckBoxMenuItem[6];
         javax.swing.JCheckBoxMenuItem menuItem;
-        for (int i = 0; i < 6; i += 1)
+        for (int i = 0, j = mi_SizeNum.length; i < j; i += 1)
         {
             menuItem = new javax.swing.JCheckBoxMenuItem();
             menuItem.addActionListener(al);
             mu_SizeMenu.add(menuItem);
-            bg.add(menuItem);
             mi_SizeNum[i] = menuItem;
         }
 
@@ -296,13 +298,12 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
                 mi_SizeMoreActionPerformed(evt);
             }
         });
-        bg.add(mi_SizeMore);
         mu_SizeMenu.add(mi_SizeMore);
     }
 
     private void initCharView()
     {
-        javax.swing.ButtonGroup bg = new javax.swing.ButtonGroup();
+        bg_CharGroup = new WButtonGroup();
         java.awt.event.ActionListener al = new java.awt.event.ActionListener()
         {
 
@@ -316,7 +317,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         mi_CharDef = new javax.swing.JCheckBoxMenuItem();
         mi_CharDef.addActionListener(al);
         mu_CharMenu.add(mi_CharDef);
-        bg.add(mi_CharDef);
+        bg_CharGroup.add("", mi_CharDef);
 
         mu_CharMenu.addSeparator();
 
@@ -328,10 +329,8 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         for (int i = 0; i < sysSize; i += 1)
         {
             menuItem = new javax.swing.JCheckBoxMenuItem();
-            bg.add(menuItem);
             mu_CharMenu.add(menuItem);
             menuItem.addActionListener(al);
-            bg.add(menuItem);
             mi_CharPre[i] = menuItem;
         }
 
@@ -345,10 +344,8 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         for (int i = 0; i < usrSize; i += 1)
         {
             menuItem = new javax.swing.JCheckBoxMenuItem();
-            bg.add(menuItem);
             mu_CharMenu.add(menuItem);
             menuItem.addActionListener(al);
-            bg.add(menuItem);
             mi_CharPre[sysSize + i] = menuItem;
         }
     }
@@ -393,6 +390,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
             menuItem.setText(text[i] + t);
             menuItem.setToolTipText(text[i] + t);
             menuItem.setActionCommand(keys[i]);
+            bg_SizeGroup.add(keys[i], menuItem);
         }
 
         Lang.setWText(mi_SizeMore, LangRes.P30F7C04, "其它...");
@@ -411,7 +409,6 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 
         Lang.setWText(mi_CharDef, LangRes.P30F7C06, "默认");
         mi_CharDef.setActionCommand(ConsCfg.DEF_PWDS_HASH);
-        mi_CharDef.putClientProperty("prop_char", ConsCfg.DEF_PWDS_CHAR);
 
         javax.swing.JCheckBoxMenuItem menu;
         int i = 0;
@@ -421,7 +418,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
             menu.setText(item.getP30F2104());
             menu.setToolTipText(item.getP30F2105());
             menu.setActionCommand(item.getP30F2103());
-            menu.putClientProperty("prop_char", item.getP30F2106());
+            bg_CharGroup.add(item.getP30F2103(), menu);
         }
 
         for (Char item : mainPtn.getCoreMdl().getCharMdl().getCharUsr())
@@ -430,7 +427,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
             menu.setText(item.getP30F2104());
             menu.setToolTipText(item.getP30F2105());
             menu.setActionCommand(item.getP30F2103());
-            menu.putClientProperty("prop_char", item.getP30F2106());
+            bg_CharGroup.add(item.getP30F2103(), menu);
         }
     }
 
@@ -450,19 +447,26 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 
     private void bt_PwdsGentActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (askOverRide && pf_PropData.getPassword().length > 1)
+        if (askOverWrite && pf_PropData.getPassword().length > 1)
         {
             if (Lang.showFirm(mainPtn, "", "") != javax.swing.JOptionPane.YES_OPTION)
             {
                 return;
             }
-            askOverRide = false;
+            askOverWrite = false;
         }
 
         try
         {
-//            char[] t = Util.nextRandomKey(menuPwd.getCharSets(), menuPwd.getCharSize(), menuPwd.isCharLoop());
-//            pf_PropData.setText(new String(t));
+            String c = bg_CharGroup.getSelection().getActionCommand();
+            c = getPwdsChar(c);
+            String s = bg_SizeGroup.getSelection().getActionCommand();
+            if (!com.magicpwd._util.Char.isValidatePositiveInteger(s))
+            {
+                s = ConsCfg.DEF_PWDS_SIZE;
+            }
+            int l = Integer.parseInt(s);
+            pf_PropData.setText(new String(Util.nextRandomKey(c, l, mi_LoopMenu.isSelected())));
         }
         catch (Exception exp)
         {
@@ -473,27 +477,17 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 
     private void bt_PwdsViewActionPerformed(java.awt.event.ActionEvent evt)
     {
-        changeView();
+        changeView(pf_PropData.getEchoChar() == 0);
     }
 
     private void mi_SizeMenuActionPerformed(java.awt.event.ActionEvent evt)
     {
         String t = evt.getActionCommand();
-        if (!com.magicpwd._util.Char.isValidate(t))
+        if (!com.magicpwd._util.Char.isValidatePositiveInteger(t))
         {
-            return;
-        }
-
-        try
-        {
-            charSize = Integer.parseInt(t);
-        }
-        catch (NumberFormatException exp)
-        {
-            Logs.exception(exp);
             t = ConsCfg.DEF_PWDS_SIZE;
-            charSize = Integer.parseInt(t);
             mi_SizeDef.setSelected(true);
+            return;
         }
 
         itemData.setSpec(EditItem.SPEC_PWDS_SIZE, t);
@@ -507,22 +501,12 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
             return;
         }
         s = s.trim();
-        if (s.length() < 1)
+        if (!com.magicpwd._util.Char.isValidatePositiveInteger(s))
         {
-            Lang.showMesg(mainPtn, "", "");
-            return;
-        }
-
-        try
-        {
-            charSize = Integer.parseInt(s);
-        }
-        catch (NumberFormatException exp)
-        {
-            Logs.exception(exp);
+            Lang.showMesg(mainPtn, "", "请输入一个有效的自然数！");
             s = ConsCfg.DEF_PWDS_SIZE;
-            charSize = Integer.parseInt(s);
             mi_SizeDef.setSelected(true);
+            return;
         }
 
         itemData.setSpec(EditItem.SPEC_PWDS_SIZE, s);
@@ -531,12 +515,12 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     private void mi_CharMenuActionPerformed(java.awt.event.ActionEvent evt)
     {
         String t = evt.getActionCommand();
-        if (!com.magicpwd._util.Char.isValidate(t))
+        if (!com.magicpwd._util.Char.isValidateHash(t))
         {
             return;
         }
 
-        itemData.setSpec(EditItem.SPEC_PWDS_HASH, t.substring(0, 8));
+        itemData.setSpec(EditItem.SPEC_PWDS_HASH, t);
     }
 
     private void mi_UrptMenuActionPerformed(java.awt.event.ActionEvent evt)
@@ -544,9 +528,9 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         itemData.setSpec(EditItem.SPEC_PWDS_LOOP, mi_LoopMenu.isSelected() ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
-    private void changeView()
+    private void changeView(boolean mask)
     {
-        if (pf_PropData.getEchoChar() == 0)
+        if (mask)
         {
             bt_PwdsView.setIcon(icoMask);
             pf_PropData.setEchoChar(ConsEnv.PWDS_MASK);
@@ -560,6 +544,29 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
             Lang.setWText(bt_PwdsView, LangRes.P30F1509, "&M");
             Lang.setWTips(bt_PwdsView, LangRes.P30F150A, "点击隐藏口令(Alt + M)");
         }
+    }
+
+    private String getPwdsChar(String hash)
+    {
+        if (!com.magicpwd._util.Char.isValidateHash(hash))
+        {
+            return ConsCfg.DEF_PWDS_CHAR;
+        }
+        for (Char item : mainPtn.getCoreMdl().getCharMdl().getCharSys())
+        {
+            if (hash.equals(item.getP30F2103()))
+            {
+                return item.getP30F2106();
+            }
+        }
+        for (Char item : mainPtn.getCoreMdl().getCharMdl().getCharUsr())
+        {
+            if (hash.equals(item.getP30F2103()))
+            {
+                return item.getP30F2106();
+            }
+        }
+        return ConsCfg.DEF_PWDS_CHAR;
     }
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JLabel lb_PropEdit;
@@ -575,8 +582,10 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     private javax.swing.JCheckBoxMenuItem mi_SizeDef;
     private javax.swing.JCheckBoxMenuItem[] mi_SizeNum;
     private javax.swing.JCheckBoxMenuItem mi_SizeMore;
+    private WButtonGroup bg_SizeGroup;
     private javax.swing.JMenu mu_CharMenu;
     private javax.swing.JCheckBoxMenuItem mi_CharDef;
     private javax.swing.JCheckBoxMenuItem[] mi_CharPre;
+    private WButtonGroup bg_CharGroup;
     private javax.swing.JCheckBoxMenuItem mi_LoopMenu;
 }

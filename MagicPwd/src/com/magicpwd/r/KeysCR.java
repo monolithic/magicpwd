@@ -26,16 +26,16 @@ public class KeysCR extends javax.swing.JPanel implements javax.swing.ListCellRe
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addComponent(lb_Icon);
         hsg.addComponent(lb_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE);
-        hsg.addComponent(lb_Note);
         hsg.addComponent(lb_Mode);
+        hsg.addComponent(lb_Note);
         hsg.addComponent(lb_Rest);
         layout.setHorizontalGroup(hsg);
 
         javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg.addComponent(lb_Icon);
         vpg.addComponent(lb_Text);
-        vpg.addComponent(lb_Note);
         vpg.addComponent(lb_Mode);
+        vpg.addComponent(lb_Note);
         vpg.addComponent(lb_Rest);
         layout.setVerticalGroup(vpg);
     }
