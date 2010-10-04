@@ -104,37 +104,37 @@
             </item>
             <seperator />
             <!--显示属性栏-->
-            <item type="checkbox" text="$P30F7616">
+            <item id="editVisible" type="checkbox" text="$P30F7616">
                 <action class="com.magicpwd.e.pwd.view.EditVisibleAction">
                     <stroke key="^ P" />
                 </action>
             </item>
             <!--分离属性栏-->
-            <item type="checkbox" text="$P30F7617">
-                <action class="com.magicpwd.e.pwd.view.EditRelatedAction">
+            <item id="editIsolate" type="checkbox" text="$P30F7617">
+                <action class="com.magicpwd.e.pwd.view.EditIsolateAction">
                     <stroke key="^ W" />
                 </action>
             </item>
             <!--显示搜索栏-->
-            <item type="checkbox" text="$P30F7618">
+            <item id="findVisible" type="checkbox" text="$P30F7618">
                 <action class="com.magicpwd.e.pwd.view.FindVisibleAction">
                     <stroke key="^ F" />
                 </action>
             </item>
             <!--显示菜单栏-->
-            <item type="checkbox" text="$P30F7619">
+            <item id="menuVisible" type="checkbox" text="$P30F7619">
                 <action class="com.magicpwd.e.pwd.view.MenuVisibleAction">
                     <stroke key="^ M" />
                 </action>
             </item>
             <!--显示工具栏-->
-            <item type="checkbox" text="$P30F761A">
+            <item id="toolVisible" type="checkbox" text="$P30F761A">
                 <action class="com.magicpwd.e.pwd.view.ToolVisibleAction">
                     <stroke key="^ T" />
                 </action>
             </item>
             <!--显示状态栏-->
-            <item type="checkbox" text="$P30F761B">
+            <item id="infoVisible" type="checkbox" text="$P30F761B">
                 <action class="com.magicpwd.e.pwd.view.InfoVisibleAction">
                     <stroke key="^ I" />
                 </action>
