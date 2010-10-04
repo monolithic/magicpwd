@@ -332,23 +332,23 @@ public final class UserCfg
      * @param editViw
      *            the editViw to set
      */
-    public final void setEditViw(boolean editViw)
+    public final void setEditVisible(boolean editViw)
     {
         userCfg.setProperty(ConsCfg.CFG_VIEW_EDIT_VIW, editViw ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
-    public final boolean isEditRelated()
+    public final boolean isEditIsolate()
     {
-        return ConsCfg.DEF_TRUE.equalsIgnoreCase(userCfg.getProperty(ConsCfg.CFG_VIEW_EDIT_VIW, ConsCfg.DEF_TRUE));
+        return ConsCfg.DEF_TRUE.equalsIgnoreCase(userCfg.getProperty(ConsCfg.CFG_VIEW_EDIT_WND, ConsCfg.DEF_TRUE));
     }
 
     /**
-     * @param editWnd
+     * @param isolate
      *            the editWnd to set
      */
-    public final void setEditWnd(boolean editWnd)
+    public final void setEditIsolate(boolean isolate)
     {
-        userCfg.setProperty(ConsCfg.CFG_VIEW_EDIT_WND, editWnd ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
+        userCfg.setProperty(ConsCfg.CFG_VIEW_EDIT_WND, isolate ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
     public final String getPwdsLoop()

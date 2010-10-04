@@ -30,7 +30,7 @@ public class MenuVisibleAction extends javax.swing.AbstractAction implements IPw
         UserCfg cfg = coreMdl.getUserCfg();
 
         boolean b = !cfg.isMenuViw();
-        mainPtn.setMenuBeanVisible(b);
+        mainPtn.setMenuVisible(b);
         mainPtn.pack();
 
         cfg.setMenuViw(b);
@@ -51,5 +51,6 @@ public class MenuVisibleAction extends javax.swing.AbstractAction implements IPw
     @Override
     public void doUpdate(Object object)
     {
+        this.putValue("selected", coreMdl.getUserCfg().isMenuViw());
     }
 }
