@@ -145,9 +145,10 @@ public class CloudBackupAction extends javax.swing.AbstractAction implements IPw
             sender.setTo(data[0]);
             sender.setSubject(Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"));
             sender.setContent(Lang.getLang(LangRes.P30F7A49, "此邮件为魔方密码数据备份文件，请勿手动删除！"));
-            sender.addAttachment(ConsEnv.FILE_SYNC, bakFile.getAbsolutePath());
             java.util.Date date = new java.util.Date();
             sender.setSentDate(date);
+//            sender.setHeader("", "");
+            sender.addAttachment(ConsEnv.FILE_SYNC, bakFile.getAbsolutePath());
             //if (!new Google().backup(data[0], data[1], ConsEnv.FILE_SYNC, MagicPwd.endSave()))
             if (!sender.send())
             {

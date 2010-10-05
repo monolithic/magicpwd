@@ -105,4 +105,8 @@ public class Sender extends Mailer
         multipart.addBodyPart(bp);
         return true;
     }
+
+    public void setHeader(String key, String value)
+    {
+    }
 }

@@ -56,9 +56,13 @@ public class Mailer
                 {
                     continue;
                 }
-                if (header == null || message.getHeader("magicpwd-sign") == null || header.equals(message.getHeader("magicpwd-sign")[0]))
+                if (header != null)
                 {
-                    continue;
+                    String[] headers = message.getHeader("magicpwd-sign");
+                    if (headers == null || headers.length != 1 || !header.equals(headers[0]))
+                    {
+                        continue;
+                    }
                 }
                 return message;
             }

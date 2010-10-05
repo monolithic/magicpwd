@@ -117,7 +117,7 @@ public class CloudResumeAction extends javax.swing.AbstractAction implements IPw
                 folder.close(false);
             }
             folder.open(Folder.READ_ONLY);
-            Message message = mail.find(folder, mainPtn.getCoreMdl().getUserCfg().getCfg("mail.date"), Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"), null, null);
+            Message message = mail.find(folder, null, Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"), mainPtn.getCoreMdl().getUserCfg().getCfg("mail.date"), null);
             if (message == null)
             {
                 dialog.setVisible(false);
