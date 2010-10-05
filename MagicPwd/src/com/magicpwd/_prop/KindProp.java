@@ -10,6 +10,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IPropBean;
 import com.magicpwd._util.Bean;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.CoreMdl;
@@ -480,7 +481,12 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
         }
         kindItem.setC2010105(name);
         kindItem.setC2010106(tf_KindTips.getText());
-        kindItem.setC2010107(tf_KindKind.getText());
+        String prop = tf_KindKind.getText();
+        if (Char.isValidate(prop))
+        {
+            prop = prop.replaceAll("[^:\\w]+", " ").trim();
+        }
+        kindItem.setC2010107(prop);
         kindItem.setC2010108(ta_KindDesp.getText());
         if (isUpdate)
         {
