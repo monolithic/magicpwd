@@ -58,6 +58,10 @@ public class TreeCR extends JLabel implements javax.swing.tree.TreeCellRenderer
         if (value instanceof KindTN)
         {
             value = ((KindTN) value).getUserObject();
+            Kind kind = (Kind) value;
+            setText(kind.getC2010105());
+            setToolTipText(kind.getC2010106());
+            return this;
         }
 
         if (value instanceof S1S2)

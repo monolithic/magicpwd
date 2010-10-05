@@ -300,12 +300,10 @@
         <item type="normal" text="$P30F7D01">
             <action class="com.magicpwd.e.pwd.kind.AppendAction" />
         </item>
-        <seperator />
         <!--更新类别-->
         <item type="normal" text="$P30F7D02">
             <action class="com.magicpwd.e.pwd.kind.UpdateAction" />
         </item>
-        <seperator />
         <!--删除类别-->
         <item type="normal" text="$P30F7D03">
             <action class="com.magicpwd.e.pwd.kind.DeleteAction" />
