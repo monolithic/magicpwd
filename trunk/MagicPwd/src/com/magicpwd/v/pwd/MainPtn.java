@@ -105,7 +105,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
         try
         {
-            java.io.File file = new java.io.File(ConsEnv.DIR_DAT, "mpwd.xml");
+            java.io.File file = new java.io.File(cfg.getDataDir(), "mpwd.xml");
             menuPtn = new MenuPtn(coreMdl);
             menuPtn.loadData(file);
         }

@@ -358,8 +358,9 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
 
             DBAccess.exit();
 
-            java.io.File backFile = Util.nextBackupFile(coreMdl.getUserCfg().getBackDir(), coreMdl.getUserCfg().getBackNum());
-            Jzip.doZip(backFile, new java.io.File(ConsEnv.DIR_DAT));
+            UserCfg userCfg = coreMdl.getUserCfg();
+            java.io.File backFile = Util.nextBackupFile(userCfg.getBackDir(), userCfg.getBackNum());
+            Jzip.doZip(backFile, new java.io.File(userCfg.getDataDir()));
             return backFile;
         }
         catch (Exception exp)

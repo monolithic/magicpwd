@@ -320,6 +320,16 @@ public final class UserCfg
         userCfg.setProperty(ConsCfg.CFG_BACK_PATH, backDir);
     }
 
+    public final String getDataDir()
+    {
+        return userCfg.getProperty(ConsCfg.CFG_DATA_PATH, ConsCfg.DEF_DATA_PATH);
+    }
+
+    public final void setDataDir(String dataDir)
+    {
+        userCfg.setProperty(ConsCfg.CFG_BACK_PATH, dataDir);
+    }
+
     /**
      * @return the editViw
      */
