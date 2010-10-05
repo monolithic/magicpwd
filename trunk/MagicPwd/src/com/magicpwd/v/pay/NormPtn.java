@@ -37,4 +37,8 @@ public class NormPtn extends javax.swing.JFrame implements MPayEvt, FindEvt
     {
         super.setVisible(visible);
     }
+
+    public void endSave()
+    {
+    }
 }

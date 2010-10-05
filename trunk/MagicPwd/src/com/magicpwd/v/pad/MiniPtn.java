@@ -281,14 +281,14 @@ public class MiniPtn extends javax.swing.JFrame implements MPadEvt, FindEvt
         }
         else if (e.getID() == java.awt.event.WindowEvent.WINDOW_ICONIFIED)
         {
-            hideWindow();
+            setVisible(false);
+            endSave();
         }
         super.processWindowEvent(e);
     }
 
-    public void hideWindow()
+    public void endSave()
     {
-        this.setVisible(false);
     }
 
     public void findNote()

@@ -3,7 +3,7 @@
  */
 package com.magicpwd.r;
 
-import com.magicpwd._comn.Kind;
+import com.magicpwd._comn.prop.Kind;
 import java.util.List;
 
 import javax.swing.tree.DefaultMutableTreeNode;

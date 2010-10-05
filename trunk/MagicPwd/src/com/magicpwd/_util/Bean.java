@@ -124,7 +124,7 @@ public class Bean
 
     public static void registerKeyStrokeAction(javax.swing.JComponent component, javax.swing.KeyStroke stroke, javax.swing.Action action, String command, int condition)
     {
-        command = (command != null) ? command : ((action != null) ? action.getValue(javax.swing.Action.NAME).toString() : "");
+        command = (command != null) ? command : ((action != null) ? action.getValue(javax.swing.Action.NAME) + "" : "");
         javax.swing.InputMap inputMap = component.getInputMap(condition);
         if (inputMap != null)
         {

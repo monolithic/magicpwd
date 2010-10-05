@@ -4,6 +4,8 @@
  */
 package com.magicpwd.e;
 
+import com.magicpwd.v.TrayPtn;
+
 /**
  *
  * @author Administrator
@@ -18,6 +20,12 @@ public class ExitAction extends javax.swing.AbstractAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        javax.swing.JOptionPane.showMessageDialog(null, e.getActionCommand());
+        javax.swing.JFrame frame = TrayPtn.getCurrForm();
+        if (frame != null)
+        {
+            frame.setVisible(false);
+        }
+        TrayPtn.endSave();
+        System.exit(0);
     }
 }

@@ -8,7 +8,7 @@ import javax.swing.event.TreeSelectionEvent;
 import javax.swing.tree.TreeSelectionModel;
 
 import com.magicpwd._comp.IcoLabel;
-import com.magicpwd._comn.Tplt;
+import com.magicpwd._comn.prop.Tplt;
 import com.magicpwd.r.TreeCR;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;

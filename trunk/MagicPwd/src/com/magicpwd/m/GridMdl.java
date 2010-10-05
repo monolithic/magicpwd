@@ -6,7 +6,7 @@ package com.magicpwd.m;
 import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.I1S2;
 import com.magicpwd._comn.Keys;
-import com.magicpwd._comn.item.PwdsItem;
+import com.magicpwd._comn.Pwds;
 import com.magicpwd._comn.item.EditItem;
 import com.magicpwd._comn.item.LogoItem;
 import com.magicpwd._comn.item.MetaItem;
@@ -520,7 +520,7 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
         modified = true;
     }
 
-    public final StringBuffer deCrypt(PwdsItem pwds) throws Exception
+    public final StringBuffer deCrypt(Pwds pwds) throws Exception
     {
 //        pwds.deCript(coreMdl.getDCipher(), coreMdl.getSec().getMask());
 //        return pwds.getP30F0203();
@@ -599,7 +599,7 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
         }
     }
 
-    public final StringBuffer enCrypt(PwdsItem pwds) throws Exception
+    public final StringBuffer enCrypt(Pwds pwds) throws Exception
     {
 //        pwds.enCrypt(coreMdl.getECipher(), coreMdl.getSec().getMask());
 //        return pwds.getP30F0203();
@@ -615,7 +615,7 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
      */
     public final void enCrypt(Keys keys, java.util.List<IEditItem> list) throws Exception
     {
-        PwdsItem pwds = keys.getPassword();
+        Pwds pwds = keys.getPassword();
         StringBuffer text = pwds.getP30F0203();
         text.delete(0, text.length());
 

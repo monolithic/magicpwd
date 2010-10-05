@@ -16,7 +16,7 @@ import com.magicpwd._bean.pwd.HintBean;
 import com.magicpwd._bean.pwd.PwdsBean;
 import com.magicpwd._bean.pwd.TextBean;
 import com.magicpwd._comn.I1S2;
-import com.magicpwd._comn.Kind;
+import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._comn.Keys;
 import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.item.MetaItem;
@@ -202,7 +202,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
     private static boolean isTaskKind(Kind kind)
     {
-        return kind != null && kind.getC2010107().indexOf("task") < 0;
+        return kind != null && kind.getC2010107() != null && kind.getC2010107().indexOf("task") >= 0;
     }
 
     public boolean saveKeys()
@@ -667,10 +667,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         tb_KeysView.setModel(gridMdl);
         tb_KeysView.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tb_KeysView.getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        javax.swing.ActionMap actionMap = tb_KeysView.getActionMap();
-        javax.swing.InputMap inputMap = tb_KeysView.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
-        // 添加快捷键
-        actionMap.put(ConsEnv.EVENT_EDIT_GUID, new javax.swing.AbstractAction()
+        javax.swing.AbstractAction action = new javax.swing.AbstractAction()
         {
 
             @Override
@@ -678,9 +675,9 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
             {
                 tr_GuidTree.requestFocus();
             }
-        });
-        inputMap.put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.ALT_MASK), ConsEnv.EVENT_EDIT_GUID);
-        actionMap.put(ConsEnv.EVENT_EDIT_KEYS, new javax.swing.AbstractAction()
+        };
+        Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.ALT_MASK), action, "guid-kind", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
+        action = new javax.swing.AbstractAction()
         {
 
             @Override
@@ -688,9 +685,9 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
             {
                 ls_GuidList.requestFocus();
             }
-        });
-        inputMap.put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.ALT_MASK), ConsEnv.EVENT_EDIT_KEYS);
-        actionMap.put(ConsEnv.EVENT_EDIT_ITEM, new javax.swing.AbstractAction()
+        };
+        Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.ALT_MASK), action, "guid-list", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
+        action = new javax.swing.AbstractAction()
         {
 
             @Override
@@ -698,8 +695,8 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
             {
                 tb_KeysView.requestFocus();
             }
-        });
-        inputMap.put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK), ConsEnv.EVENT_EDIT_ITEM);
+        };
+        Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK), action, "guid-grid", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
 
         tb_KeysView.addMouseListener(new java.awt.event.MouseAdapter()
         {
@@ -855,32 +852,101 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         }
         else if (e.getID() == java.awt.event.WindowEvent.WINDOW_ICONIFIED)
         {
-            this.setVisible(false);
-
+            setVisible(false);
             TrayPtn.getInstance().displayMessage(Lang.getLang(LangRes.P30F9A01, "友情提示"), Lang.getLang(LangRes.P30F7A43, "魔方密码仍在运行中，您可以通过双击此处显示主窗口！"), java.awt.TrayIcon.MessageType.INFO);
-
-            hideWindow();
+            endSave();
         }
         super.processWindowEvent(e);
     }
 
     private void tr_GuidTreeValueChanged(javax.swing.event.TreeSelectionEvent evt)
     {
-        javax.swing.tree.TreePath tp = tr_GuidTree.getSelectionPath();
-        if (tp == null)
+        javax.swing.tree.TreePath path = tr_GuidTree.getSelectionPath();
+        if (path == null)
         {
             return;
         }
 
-        Object obj = tp.getLastPathComponent();
+        Object obj = path.getLastPathComponent();
         if (obj instanceof KindTN)
         {
             KindTN item = (KindTN) obj;
-            Kind kv = (Kind) item.getUserObject();
-            queryKey = kv.getC2010103();
-            coreMdl.getListMdl().listName(queryKey);
+            Kind kind = (Kind) item.getUserObject();
+            if (isTaskKind(kind))
+            {
+                listTask(kind);
+            }
+            else
+            {
+                queryKey = kind.getC2010103();
+                coreMdl.getListMdl().listName(queryKey);
+            }
         }
         isSearch = false;
+    }
+
+    private void listTask(Kind kind)
+    {
+        String task = kind.getC2010107();
+        java.util.Calendar cal = java.util.Calendar.getInstance();
+        if ("task".equals(task))
+        {
+            cal.set(java.util.Calendar.HOUR_OF_DAY, 0);
+            cal.set(java.util.Calendar.MINUTE, 0);
+            cal.set(java.util.Calendar.SECOND, 0);
+            cal.set(java.util.Calendar.MILLISECOND, 0);
+            cal.add(java.util.Calendar.DAY_OF_MONTH, 1);
+            coreMdl.getListMdl().listTask(cal);
+            return;
+        }
+        java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("\\d+").matcher(task);
+        if (!matcher.find())
+        {
+            return;
+        }
+        int time = Integer.parseInt(matcher.group());
+        if (task.endsWith("second"))
+        {
+            cal.add(java.util.Calendar.SECOND, time);
+            coreMdl.getListMdl().listTask(cal);
+            return;
+        }
+        if (task.endsWith("minute"))
+        {
+            cal.add(java.util.Calendar.MINUTE, time);
+            coreMdl.getListMdl().listTask(cal);
+            return;
+        }
+        if (task.endsWith("hour"))
+        {
+            cal.add(java.util.Calendar.HOUR_OF_DAY, time);
+            coreMdl.getListMdl().listTask(cal);
+            return;
+        }
+        if (task.endsWith("day"))
+        {
+            cal.add(java.util.Calendar.DAY_OF_MONTH, time);
+            coreMdl.getListMdl().listTask(cal);
+            return;
+        }
+        if (task.endsWith("week"))
+        {
+            cal.add(java.util.Calendar.WEEK_OF_YEAR, time);
+            coreMdl.getListMdl().listTask(cal);
+            return;
+        }
+        if (task.endsWith("month"))
+        {
+            cal.add(java.util.Calendar.MONTH, time);
+            coreMdl.getListMdl().listTask(cal);
+            return;
+        }
+        if (task.endsWith("year"))
+        {
+            cal.add(java.util.Calendar.YEAR, time);
+            coreMdl.getListMdl().listTask(cal);
+            return;
+        }
     }
 
     private void ls_DataListValueChanged(javax.swing.event.ListSelectionEvent evt)
@@ -971,19 +1037,19 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         }
     }
 
-    public void showPropEdit(IEditItem tplt, boolean focus)
+    public void showPropEdit(IEditItem item, boolean focus)
     {
         if (coreMdl.getUserCfg().isEditVisible())
         {
-            cl_CardProp.show(pl_CardProp, ConsEnv.BEAN_PROP + tplt.getType());
-            editBean[tplt.getType()].showData(tplt);
+            cl_CardProp.show(pl_CardProp, ConsEnv.BEAN_PROP + item.getType());
+            editBean[item.getType()].showData(item);
 
             if (focus)
             {
-                editBean[tplt.getType()].requestFocus();
+                editBean[item.getType()].requestFocus();
             }
 
-            String title = getPropName(tplt.getType());
+            String title = getPropName(item.getType());
             eb_KeysEdit.setTitle(title);
             ed_KeysEdit.setTitle(title);
         }
@@ -1074,7 +1140,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         return false;
     }
 
-    public void hideWindow()
+    public void endSave()
     {
         // Save Temperary Data
         if (gridMdl.isModified())

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.magicpwd._comn.item;
+package com.magicpwd._comn;
 
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Util;
@@ -12,7 +12,7 @@ import javax.crypto.Cipher;
  * 口令数据
  * @author Amon
  */
-public class PwdsItem
+public class Pwds
 {
 
     /**
@@ -28,7 +28,7 @@ public class PwdsItem
      */
     private StringBuffer P30F0203 = new StringBuffer();
 
-    public PwdsItem()
+    public Pwds()
     {
         setDefault();
     }
@@ -43,7 +43,7 @@ public class PwdsItem
         return true;
     }
 
-    public void setDefault()
+    public final void setDefault()
     {
         P30F0202 = "";
         P30F0203.delete(0, P30F0203.length());

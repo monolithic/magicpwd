@@ -338,6 +338,22 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
     {
         try
         {
+            if (mp_MainPtn != null)
+            {
+                mp_MainPtn.setVisible(false);
+                mp_MainPtn.endSave();
+            }
+            if (mp_NormPtn != null)
+            {
+                mp_NormPtn.setVisible(false);
+                mp_NormPtn.endSave();
+            }
+            if (mp_MiniPtn != null)
+            {
+                mp_MiniPtn.setVisible(false);
+                mp_MiniPtn.endSave();
+            }
+
             coreMdl.saveCfg();
 
             DBAccess.exit();

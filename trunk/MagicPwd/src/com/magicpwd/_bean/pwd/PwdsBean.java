@@ -3,7 +3,7 @@
  */
 package com.magicpwd._bean.pwd;
 
-import com.magicpwd._comn.Char;
+import com.magicpwd._comn.prop.Char;
 import com.magicpwd._comn.item.EditItem;
 import com.magicpwd._comp.EditBox;
 import com.magicpwd._comp.BtnLabel;
@@ -192,7 +192,16 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         tf_PropName.setText(name);
         pf_PropData.setText(itemData.getData());
 
-        bg_SizeGroup.setSelected(itemData.getSpec(IEditItem.SPEC_PWDS_SIZE), true);
+        String size = itemData.getSpec(IEditItem.SPEC_PWDS_SIZE, "0");
+        if (!com.magicpwd._util.Char.isValidatePositiveInteger(size))
+        {
+            size = "0";
+        }
+        if (!bg_SizeGroup.setSelected(size, true))
+        {
+            mi_SizeMore.setSelected(true);
+            mi_SizeMore.setActionCommand(size);
+        }
         bg_CharGroup.setSelected(itemData.getSpec(IEditItem.SPEC_PWDS_HASH), true);
         mi_LoopMenu.setSelected(ConsCfg.DEF_TRUE.equals(itemData.getSpec(IEditItem.SPEC_PWDS_LOOP)));
     }
@@ -271,7 +280,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         mi_SizeDef = new javax.swing.JCheckBoxMenuItem();
         mi_SizeDef.addActionListener(al);
         mu_SizeMenu.add(mi_SizeDef);
-        bg_SizeGroup.add("", mi_SizeDef);
+        bg_SizeGroup.add("0", mi_SizeDef);
 
         mu_SizeMenu.addSeparator();
 
@@ -371,7 +380,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         Lang.setWText(mu_SizeMenu, LangRes.P30F7C01, "口令长度");
 
         Lang.setWText(mi_SizeDef, LangRes.P30F7C02, "默认");
-        mi_SizeDef.setActionCommand(ConsCfg.DEF_PWDS_SIZE);
+        mi_SizeDef.setActionCommand("0");
 
         String t = Lang.getLang(LangRes.P30F7C03, "位");
         String[] text =
@@ -394,6 +403,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         }
 
         Lang.setWText(mi_SizeMore, LangRes.P30F7C04, "其它...");
+        bg_SizeGroup.add("-1", mi_SizeMore);
     }
 
     private void initMenuLang()
@@ -465,8 +475,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
             {
                 s = ConsCfg.DEF_PWDS_SIZE;
             }
-            int l = Integer.parseInt(s);
-            pf_PropData.setText(new String(Util.nextRandomKey(c, l, mi_LoopMenu.isSelected())));
+            pf_PropData.setText(new String(Util.nextRandomKey(c, Integer.parseInt(s), mi_LoopMenu.isSelected())));
         }
         catch (Exception exp)
         {
@@ -485,9 +494,8 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         String t = evt.getActionCommand();
         if (!com.magicpwd._util.Char.isValidatePositiveInteger(t))
         {
-            t = ConsCfg.DEF_PWDS_SIZE;
+            t = "0";
             mi_SizeDef.setSelected(true);
-            return;
         }
 
         itemData.setSpec(EditItem.SPEC_PWDS_SIZE, t);
@@ -495,7 +503,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 
     private void mi_SizeMoreActionPerformed(java.awt.event.ActionEvent evt)
     {
-        String s = JOptionPane.showInputDialog(TrayPtn.getCurrForm(), "", itemData.getSpec(EditItem.SPEC_PWDS_SIZE));
+        String s = JOptionPane.showInputDialog(TrayPtn.getCurrForm(), "", itemData.getSpec(EditItem.SPEC_PWDS_SIZE, ConsCfg.DEF_PWDS_SIZE));
         if (s == null)
         {
             return;
@@ -509,6 +517,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
             return;
         }
 
+        mi_SizeMore.setActionCommand(s);
         itemData.setSpec(EditItem.SPEC_PWDS_SIZE, s);
     }
 

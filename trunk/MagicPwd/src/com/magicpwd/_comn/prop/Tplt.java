@@ -1,4 +1,4 @@
-package com.magicpwd._comn;
+package com.magicpwd._comn.prop;
 
 /**
  * 属性：模板

@@ -4,13 +4,13 @@
  */
 package com.magicpwd.d;
 
-import com.magicpwd._comn.Char;
+import com.magicpwd._comn.prop.Char;
 import com.magicpwd._comn.Keys;
-import com.magicpwd._comn.Kind;
+import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._comn.S1S3;
 import com.magicpwd._comn.item.EditItem;
-import com.magicpwd._comn.Tplt;
+import com.magicpwd._comn.prop.Tplt;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.ConsDat;
@@ -188,6 +188,35 @@ public class DBA3000
             dba.addTable(DBC3000.P30F0100);
             addUserSort(dba, cfg);
             dba.addWhere(DBC3000.P30F0106, kindHash);
+            addDataSort(dba, cfg);
+
+            getNameData(dba.executeSelect(), list);
+            return true;
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            return false;
+        }
+        finally
+        {
+            dba.close();
+        }
+    }
+
+    public static boolean readTaskList(UserCfg cfg, java.sql.Timestamp time, List<Keys> list)
+    {
+        // 数据库连接初始化
+        DBAccess dba = new DBAccess();
+
+        try
+        {
+            dba.init();
+
+            // 查询语句拼接
+            dba.addTable(DBC3000.P30F0100);
+            addUserSort(dba, cfg);
+            dba.addWhere(DBC3000.P30F010D + " BETWEEN " + DBC3000.SQL_NOW + " AND '" + time + '\'');
             addDataSort(dba, cfg);
 
             getNameData(dba.executeSelect(), list);

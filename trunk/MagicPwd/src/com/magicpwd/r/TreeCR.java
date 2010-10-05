@@ -3,6 +3,7 @@
  */
 package com.magicpwd.r;
 
+import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._comn.*;
 import java.awt.Color;
 import java.awt.Component;

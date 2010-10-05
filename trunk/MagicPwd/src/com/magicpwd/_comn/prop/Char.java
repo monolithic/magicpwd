@@ -1,7 +1,7 @@
 /*
  * 
  */
-package com.magicpwd._comn;
+package com.magicpwd._comn.prop;
 
 /**
  * 口令字符空间

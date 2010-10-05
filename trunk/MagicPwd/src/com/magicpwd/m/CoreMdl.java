@@ -3,7 +3,7 @@
  */
 package com.magicpwd.m;
 
-import com.magicpwd._comn.Kind;
+import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd.r.KindTN;
 

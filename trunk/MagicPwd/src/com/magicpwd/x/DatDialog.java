@@ -1,6 +1,6 @@
 package com.magicpwd.x;
 
-import com.magicpwd._comn.Kind;
+import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
 import com.magicpwd._util.Bean;
