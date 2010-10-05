@@ -200,6 +200,11 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         return true;
     }
 
+    private static boolean isTaskKind(Kind kind)
+    {
+        return kind != null && kind.getC2010107().indexOf("task") < 0;
+    }
+
     public boolean saveKeys()
     {
         // 是否需要保存
@@ -229,6 +234,12 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
             KindTN node = (KindTN) path.getLastPathComponent();
             Kind kind = (Kind) node.getUserObject();
+            if (isTaskKind(kind))
+            {
+                Lang.showMesg(this, LangRes.P30F7A4A, "不能保存到任务列表中去！");
+                tr_GuidTree.requestFocus();
+                return false;
+            }
             gridMdl.getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(kind.getC2010103());
         }
 
