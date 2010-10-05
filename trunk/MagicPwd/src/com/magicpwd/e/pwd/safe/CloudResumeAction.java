@@ -101,23 +101,30 @@ public class CloudResumeAction extends javax.swing.AbstractAction implements IPw
 
             TrayPtn.endSave();
             Connect connect = new Connect(data[0], data[2]);
-            connect.useDefault();
             connect.setUsername(data[1]);
+            if (!connect.useDefault())
+            {
+                Lang.showMesg(mainPtn, null, "查找不到对应的服务信息，如有疑问请与作者联系！");
+                return;
+            }
             Reader mail = new Reader(connect);
 
             // 读取备份文件
             Store store = connect.getStore();
-            Folder folder = store.getDefaultFolder();
+            Folder folder = store.getDefaultFolder().getFolder("inbox");
+            if (folder.isOpen())
+            {
+                folder.close(false);
+            }
             folder.open(Folder.READ_ONLY);
-            Message message = mail.find(folder, null, Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"), null, null);
+            Message message = mail.find(folder, mainPtn.getCoreMdl().getUserCfg().getCfg("mail.date"), Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"), null, null);
             if (message == null)
             {
                 dialog.setVisible(false);
                 dialog.dispose();
                 Lang.showMesg(mainPtn, LangRes.P30F7A3E, "无法从POP邮箱读取备份数据！");
             }
-
-            if (mail.read(message))
+            else if (mail.read(message))
             {
                 for (S1S1 item : mail.getAttachmentList())
                 {
@@ -131,12 +138,12 @@ public class CloudResumeAction extends javax.swing.AbstractAction implements IPw
                     }
                 }
             }
+            folder.close(false);
+            store.close();
         }
         catch (Exception ex)
         {
             Logs.exception(ex);
-            dialog.setVisible(false);
-            dialog.dispose();
             Lang.showMesg(mainPtn, null, ex.getLocalizedMessage());
         }
         finally

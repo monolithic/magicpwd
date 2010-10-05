@@ -12,14 +12,15 @@ import com.magicpwd._util.Logs;
  * 运行等待对话框
  * @author Awen
  */
-public class LckDialog extends javax.swing.JWindow
+public class LckDialog extends javax.swing.JDialog
 {
 
     private Jpng jpng;
 
     public LckDialog(javax.swing.JFrame form)
     {
-        super(form);
+        super(form, true);
+        setUndecorated(true);
     }
 
     public boolean initView()

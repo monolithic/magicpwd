@@ -104,8 +104,8 @@ public class UserPtn extends javax.swing.JPanel
         if (lb_KeyLabel == null)
         {
             lb_KeyLabel = new javax.swing.JLabel();
-            lb_UsrLabel.setForeground(java.awt.Color.blue);
-            lb_UsrLabel.setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
+            lb_KeyLabel.setForeground(java.awt.Color.blue);
+            lb_KeyLabel.setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
             lb_KeyLabel.addMouseListener(new java.awt.event.MouseAdapter()
             {
 
@@ -505,8 +505,6 @@ public class UserPtn extends javax.swing.JPanel
 
     public boolean initLang()
     {
-        //pl_GuidPane.setVisible(false);
-
         switch (signType)
         {
             case ConsEnv.INT_SIGN_IN:
@@ -797,7 +795,8 @@ public class UserPtn extends javax.swing.JPanel
     {
         if (frame != null)
         {
-            frame.dispose();
+            frame.setVisible(false);
+//            frame.dispose();
         }
         if (dialog != null)
         {
@@ -1007,7 +1006,6 @@ public class UserPtn extends javax.swing.JPanel
 
         if (backCall != null)
         {
-            TrayPtn.getInstance();
             backCall.callBack(null, null, ConsEnv.STR_SIGN_IN);
         }
         dispoze();
@@ -1129,7 +1127,6 @@ public class UserPtn extends javax.swing.JPanel
 
         if (backCall != null)
         {
-            TrayPtn.getInstance();
             if (!backCall.callBack(null, null, ConsEnv.STR_SIGN_UP))
             {
                 System.exit(0);

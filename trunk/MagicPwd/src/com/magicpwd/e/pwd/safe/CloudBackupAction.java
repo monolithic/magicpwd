@@ -7,6 +7,7 @@ package com.magicpwd.e.pwd.safe;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._mail.Connect;
+import com.magicpwd._mail.Reader;
 import com.magicpwd._mail.Sender;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -39,13 +40,13 @@ public class CloudBackupAction extends javax.swing.AbstractAction implements IPw
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F7A40, "确认要执行备份数据到云端的操作吗，此操作将需要一定的时间？"))
+        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mainPtn, LangRes.P30F7A40, "确认要执行备份数据到云端的操作吗，此操作将需要一定的时间？"))
         {
             return;
         }
 
         TrayPtn.setDbLocked(true);
-        final LckDialog dialog = new LckDialog(TrayPtn.getCurrForm());
+        final LckDialog dialog = new LckDialog(mainPtn);
         dialog.initView();
         dialog.initLang();
         dialog.initData();
@@ -60,7 +61,7 @@ public class CloudBackupAction extends javax.swing.AbstractAction implements IPw
             }
         }.start();
 
-        Util.centerForm(dialog, TrayPtn.getCurrForm());
+        Util.centerForm(dialog, mainPtn);
         dialog.setVisible(true);
     }
 
@@ -106,35 +107,57 @@ public class CloudBackupAction extends javax.swing.AbstractAction implements IPw
                 return;
             }
 
-            Connect connect = new Connect(data[0], data[2], "smtp");
-            connect.useDefault();
+            Connect connect = new Connect(data[0], data[2], "pop3");
             connect.setUsername(data[1]);
-            Sender mail = new Sender(connect);
+            if (!connect.useDefault())
+            {
+                Lang.showMesg(mainPtn, null, "查找不到对应的服务信息，如有疑问请与作者联系！");
+                return;
+            }
+            Reader reader = new Reader(connect);
 
             // 删除已有文件
             Store store = connect.getStore();
-            Folder folder = store.getDefaultFolder();
+            Folder folder = store.getDefaultFolder().getFolder("inbox");
+            if (folder.isOpen())
+            {
+                folder.close(false);
+            }
             folder.open(Folder.READ_WRITE);
-            Message message = mail.find(folder, null, Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"), null, null);
+            Message message = reader.find(folder, null, Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"), null, null);
             if (message != null)
             {
                 message.setFlag(Flag.DELETED, true);
             }
             folder.close(true);
+            store.close();
 
-            mail.setFrom(data[0]);
-            mail.setTo(data[0]);
-            mail.setSubject(Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"));
-            mail.setContent(Lang.getLang(LangRes.P30F7A49, "此邮件为魔方密码数据备份文件，请勿手动删除！"));
-            mail.addAttachment(ConsEnv.FILE_SYNC, bakFile.getAbsolutePath());
+            connect = new Connect(data[0], data[2], "smtp");
+            connect.setUsername(data[1]);
+            if (!connect.useDefault())
+            {
+                Lang.showMesg(mainPtn, null, "查找不到对应的服务信息，如有疑问请与作者联系！");
+                return;
+            }
+            Sender sender = new Sender(connect);
+
+            sender.setFrom(data[0]);
+            sender.setTo(data[0]);
+            sender.setSubject(Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"));
+            sender.setContent(Lang.getLang(LangRes.P30F7A49, "此邮件为魔方密码数据备份文件，请勿手动删除！"));
+            sender.addAttachment(ConsEnv.FILE_SYNC, bakFile.getAbsolutePath());
+            java.util.Date date = new java.util.Date();
+            sender.setSentDate(date);
             //if (!new Google().backup(data[0], data[1], ConsEnv.FILE_SYNC, MagicPwd.endSave()))
-            if (!mail.send())
+            if (!sender.send())
             {
                 dialog.setVisible(false);
                 dialog.dispose();
                 Lang.showMesg(mainPtn, LangRes.P30F7A3C, "系统无法备份您的数据到云端！");
                 return;
             }
+
+            mainPtn.getCoreMdl().getUserCfg().setCfg("mail.date", Long.toHexString(date.getTime()));
 
             dialog.setVisible(false);
             dialog.dispose();

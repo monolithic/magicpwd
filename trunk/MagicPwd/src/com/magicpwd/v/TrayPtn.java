@@ -22,7 +22,7 @@ import com.magicpwd.m.SafeMdl;
  * 系统托盘
  * @author Amon
  */
-public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.event.MouseListener, java.awt.event.MouseMotionListener
+public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.awt.event.MouseMotionListener
 {
 
     private static boolean dbLocked;
@@ -32,7 +32,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
     private static CoreMdl coreMdl;
     private static SafeMdl safeMdl;
     private static TrayPtn trayPtn;
-    private static UserPtn userSign;
+    private static UserPtn userPtn;
     private static javax.swing.JFrame mf_CurrForm;
     private static javax.swing.JDialog md_TrayForm;
     private static javax.swing.event.PopupMenuListener listener;
@@ -40,12 +40,6 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
 
     private TrayPtn()
     {
-        super(Bean.getLogo(16));
-        int size = getSize().height;
-        if (size != 16)
-        {
-            setImage(Bean.getLogo(size));
-        }
     }
 
     public static TrayPtn getInstance()
@@ -53,18 +47,19 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         if (trayPtn == null)
         {
             trayPtn = new TrayPtn();
-            trayPtn.initView();
-            trayPtn.initLang();
-            trayPtn.initData();
         }
         return trayPtn;
     }
 
     public boolean initView()
     {
-        // 托盘视图初始化
-        setImageAutoSize(true);
-        addMouseListener(this);
+        if (java.awt.SystemTray.isSupported())
+        {
+            // 托盘视图初始化
+            trayIcon = new java.awt.TrayIcon(Bean.getLogo(java.awt.SystemTray.getSystemTray().getTrayIconSize().height));
+            trayIcon.setImageAutoSize(true);
+            trayIcon.addMouseListener(this);
+        }
 
         // 罗盘视图初始化
         if (md_TrayForm == null)
@@ -132,7 +127,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
 
     public boolean initLang()
     {
-        setToolTip(ConsEnv.SOFTNAME + ' ' + ConsEnv.VERSIONS);
+        trayIcon.setToolTip(ConsEnv.SOFTNAME + ' ' + ConsEnv.VERSIONS);
         return true;
     }
 
@@ -150,6 +145,22 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
             return false;
         }
 
+        // 用户登录
+        if (ConsEnv.STR_SIGN_IN.equalsIgnoreCase(params[0]) || ConsEnv.STR_SIGN_UP.equalsIgnoreCase(params[0]))
+        {
+            // 设置软件界面风格
+            mf_CurrForm = getMainPtn();
+            currPtn = ConsEnv.VIEW_MAIN;
+            showViewPtn(ConsEnv.VIEW_MAIN);
+            mf_CurrForm.setVisible(true);
+//            initView();
+//            initLang();
+//            initData();
+//            mf_CurrForm.toFront();
+            return true;
+        }
+
+        // 身份认证
         if (!ConsEnv.STR_SIGN_RS.equalsIgnoreCase(params[0]))
         {
             return false;
@@ -340,17 +351,17 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         {
             if (mp_MainPtn != null)
             {
-                mp_MainPtn.setVisible(false);
+//                mp_MainPtn.setVisible(false);
                 mp_MainPtn.endSave();
             }
             if (mp_NormPtn != null)
             {
-                mp_NormPtn.setVisible(false);
+//                mp_NormPtn.setVisible(false);
                 mp_NormPtn.endSave();
             }
             if (mp_MiniPtn != null)
             {
-                mp_MiniPtn.setVisible(false);
+//                mp_MiniPtn.setVisible(false);
                 mp_MiniPtn.endSave();
             }
 
@@ -413,8 +424,57 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         showViewPtn(currPtn);
     }
 
+    public void loadCfg()
+    {
+        if (coreMdl == null)
+        {
+            coreMdl = new CoreMdl();
+
+            // 用户配置文件加载
+            coreMdl.loadCfg();
+
+            safeMdl = new SafeMdl(coreMdl.getUserCfg());
+
+            // 语言资源加载
+            Lang.loadLang(coreMdl.getUserCfg());
+
+            // 扩展皮肤加载
+            Bean.loadLnF(coreMdl.getUserCfg());
+        }
+    }
+
+    public void loadPre()
+    {
+        try
+        {
+            Class.forName("org.hsqldb.jdbcDriver");
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+
+        Bean.getNone();
+        Bean.getLogo(16);
+        Bean.setIcon("tree-default", Bean.readIcon(coreMdl.getUserCfg(), ConsEnv.FEEL_PATH + "folder-default.png"));
+        Bean.setIcon("tree-expanded", Bean.readIcon(coreMdl.getUserCfg(), ConsEnv.FEEL_PATH + "folder-expanded.png"));
+
+        coreMdl.loadPre();
+
+        // 扩展库加载
+    }
+
     public void showViewPtn(int nextPtn)
     {
+        // 显示登录
+        if (getCurrForm() == null)
+        {
+            getUserPtn(coreMdl.getUserCfg().getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.INT_SIGN_IN : ConsEnv.INT_SIGN_UP);
+            userPtn.setBackCall(this);
+            return;
+        }
+
+        //TrayPtn.setUserCfg(cfg);
         if (getCurrForm().isVisible())
         {
             if (currPtn == nextPtn)
@@ -447,29 +507,17 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         getUserPtn(ConsEnv.INT_SIGN_RS).setBackCall(this);
     }
 
-    public static UserPtn getUserPtn(UserCfg userCfg)
-    {
-        if (coreMdl == null)
-        {
-            coreMdl = new CoreMdl();
-            coreMdl.preLoad();
-        }
-        coreMdl.setUserCfg(userCfg);
-        safeMdl = new SafeMdl(userCfg);
-        return getUserPtn(userCfg.getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.INT_SIGN_IN : ConsEnv.INT_SIGN_UP);
-    }
-
     public static UserPtn getUserPtn(int view)
     {
-        if (userSign == null)
+        if (userPtn == null)
         {
-            userSign = new UserPtn(coreMdl.getUserCfg(), safeMdl);
+            userPtn = new UserPtn(coreMdl.getUserCfg(), safeMdl);
         }
-        userSign.initView(view);
-        userSign.initLang();
-        userSign.initData();
-        userSign.toFront();
-        return userSign;
+        userPtn.initView(view);
+        userPtn.initLang();
+        userPtn.initData();
+        userPtn.toFront();
+        return userPtn;
     }
 
     public void changeView()
@@ -492,7 +540,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
         {
             try
             {
-                java.awt.SystemTray.getSystemTray().add(this);
+                java.awt.SystemTray.getSystemTray().add(trayIcon);
                 md_TrayForm.setSize(1, 1);
                 if (button != null)
                 {
@@ -510,7 +558,7 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
 
         // 下一步：显示为导航罗盘
         md_TrayForm.pack();
-        java.awt.SystemTray.getSystemTray().remove(this);
+        java.awt.SystemTray.getSystemTray().remove(trayIcon);
         if (button != null)
         {
             Lang.setWText(button, LangRes.P30F960D, "显示为托盘图标");
@@ -618,10 +666,19 @@ public class TrayPtn extends java.awt.TrayIcon implements IBackCall, java.awt.ev
     {
         dbLocked = aDbLocked;
     }
-    private java.awt.Point dragLoc;
-    private java.awt.Point formLoc;
-    private javax.swing.JPopupMenu trayMenu;
+
+    public void showTips(String title, String tips)
+    {
+        if (trayIcon != null)
+        {
+            trayIcon.displayMessage(title, tips, java.awt.TrayIcon.MessageType.INFO);
+        }
+    }
     private static MiniPtn mp_MiniPtn;
     private static NormPtn mp_NormPtn;
     private static MainPtn mp_MainPtn;
+    private java.awt.Point dragLoc;
+    private java.awt.Point formLoc;
+    private java.awt.TrayIcon trayIcon;
+    private javax.swing.JPopupMenu trayMenu;
 }

@@ -28,7 +28,7 @@ public final class CoreMdl
     {
     }
 
-    public void preLoad()
+    public void loadPre()
     {
         listMdl = new ListMdl(this);
         Kind kind = new Kind();
