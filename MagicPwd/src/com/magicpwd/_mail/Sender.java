@@ -40,6 +40,7 @@ public class Sender extends Mailer
         Session session = getConnect().getSession();
         MimeMessage message = new MimeMessage(session);
 
+        message.setSubject(getSubject());
         message.setFrom(new InternetAddress(getFrom()));
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(getTo()));
         if (com.magicpwd._util.Char.isValidate(getCc()))

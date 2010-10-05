@@ -14,7 +14,6 @@ import javax.mail.Address;
 import javax.mail.Flags.Flag;
 import javax.mail.Folder;
 import javax.mail.Message;
-import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeUtility;
@@ -53,7 +52,7 @@ public class Mailer
                 {
                     continue;
                 }
-                if (sentDate == null || !sentDate.equals(message.getSentDate().toString()))
+                if (sentDate == null || !sentDate.equals(Long.toHexString(message.getSentDate().getTime())))
                 {
                     continue;
                 }

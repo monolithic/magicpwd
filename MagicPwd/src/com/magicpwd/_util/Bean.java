@@ -8,6 +8,7 @@ import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd.m.UserCfg;
+import com.magicpwd.r.AmonFF;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
@@ -248,5 +249,130 @@ public class Bean
     {
         BufferedImage bi = createNone(size);
         return bi;
+    }
+
+    public static void loadLnF(UserCfg cfg)
+    {
+        boolean deco = ConsCfg.DEF_TRUE.equalsIgnoreCase(cfg.getCfg(ConsCfg.CFG_SKIN_DECO, ConsCfg.DEF_FALSE));
+        javax.swing.JFrame.setDefaultLookAndFeelDecorated(deco);
+        javax.swing.JDialog.setDefaultLookAndFeelDecorated(deco);
+
+        String type = cfg.getCfg(ConsCfg.CFG_SKIN_TYPE, "user");
+        String name = cfg.getCfg(ConsCfg.CFG_SKIN_NAME, "").trim();
+        if (!Char.isValidate(name))
+        {
+            name = ConsCfg.DEF_SKIN_SYS;
+            type = "java";
+        }
+
+        if ("java".equals(type))
+        {
+            // 系统默认界面
+            if (ConsCfg.DEF_SKIN_DEF.equals(name))
+            {
+                return;
+            }
+
+            // 操作系统界面
+            if (ConsCfg.DEF_SKIN_SYS.equalsIgnoreCase(name))
+            {
+                name = javax.swing.UIManager.getSystemLookAndFeelClassName();
+            }
+
+            // 使用界面
+            try
+            {
+                javax.swing.UIManager.setLookAndFeel(name);
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+            return;
+        }
+
+        String look = cfg.getCfg(ConsCfg.CFG_SKIN_LOOK, "");
+        if (!Char.isValidate(look))
+        {
+            return;
+        }
+
+        if ("synth".equals(type))
+        {
+            if (!Char.isValidate(look))
+            {
+                return;
+            }
+
+            // 判断目录是否存在
+            java.io.File file = new java.io.File("skin/look/" + look, name);
+            if (!file.exists() || !file.canRead() || !file.isDirectory())
+            {
+                return;
+            }
+
+            try
+            {
+                // 加载界面
+                javax.swing.plaf.synth.SynthLookAndFeel synth = new javax.swing.plaf.synth.SynthLookAndFeel();
+                synth.load(file.toURI().toURL());
+                // 使用界面
+                javax.swing.UIManager.setLookAndFeel(synth);
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+            return;
+        }
+
+        if (!"user".equals(type))
+        {
+            return;
+        }
+
+        java.io.File file = new java.io.File("skin/look", look);
+        if (!file.exists() || !file.canRead() || !file.isDirectory())
+        {
+            return;
+        }
+
+        java.io.File jars[] = file.listFiles(new AmonFF(".+\\.jar$", true));
+        if (jars == null && jars.length < 1)
+        {
+            return;
+        }
+
+        try
+        {
+            // 加载扩展库
+            loadJar(jars);
+
+            // 使用界面
+            javax.swing.UIManager.setLookAndFeel(name);
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+    }
+
+    private static void loadJar(java.io.File... files) throws Exception
+    {
+        if (files == null || files.length < 1)
+        {
+            return;
+        }
+
+        Object[] urls = new Object[files.length];
+        for (int i = 0, j = files.length; i < j; i += 1)
+        {
+            urls[i] = files[i].toURI().toURL();
+        }
+
+        java.net.URLClassLoader loader = (java.net.URLClassLoader) ClassLoader.getSystemClassLoader();
+        java.lang.reflect.Method method = java.net.URLClassLoader.class.getDeclaredMethod("addURL", java.net.URL.class);
+        method.setAccessible(true);
+        method.invoke(loader, urls);
     }
 }
