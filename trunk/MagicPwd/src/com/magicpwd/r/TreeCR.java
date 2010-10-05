@@ -76,6 +76,7 @@ public class TreeCR extends JLabel implements javax.swing.tree.TreeCellRenderer
         {
             setText(value.toString());
             setToolTipText(value.toString());
+            return this;
         }
 
         return this;
