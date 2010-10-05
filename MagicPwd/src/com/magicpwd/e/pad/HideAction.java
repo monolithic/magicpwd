@@ -24,7 +24,7 @@ public class HideAction extends javax.swing.AbstractAction implements IPadAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        miniPtn.hideWindow();
+        miniPtn.endSave();
     }
 
     @Override

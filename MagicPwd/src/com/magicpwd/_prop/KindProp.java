@@ -4,7 +4,7 @@
 package com.magicpwd._prop;
 
 import com.magicpwd._comp.IcoLabel;
-import com.magicpwd._comn.Kind;
+import com.magicpwd._comn.prop.Kind;
 import com.magicpwd.r.TreeCR;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;

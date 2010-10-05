@@ -24,12 +24,19 @@ public class WButtonGroup extends javax.swing.ButtonGroup
         add(button);
     }
 
-    public void setSelected(String actionCommand, boolean selected)
+    public boolean setSelected(String actionCommand, boolean selected)
     {
         javax.swing.ButtonModel model = buttonModel.get(actionCommand);
         if (model != null)
         {
             setSelected(model, selected);
+            return true;
         }
+        return false;
+    }
+
+    public boolean contains(String actionCommand)
+    {
+        return buttonModel.containsKey(actionCommand);
     }
 }

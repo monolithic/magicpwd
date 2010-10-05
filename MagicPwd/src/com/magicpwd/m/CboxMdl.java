@@ -3,7 +3,7 @@
  */
 package com.magicpwd.m;
 
-import com.magicpwd._comn.Tplt;
+import com.magicpwd._comn.prop.Tplt;
 import com.magicpwd.d.DBA3000;
 
 /**

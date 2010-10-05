@@ -3,7 +3,7 @@
  */
 package com.magicpwd._prop;
 
-import com.magicpwd._comn.Char;
+import com.magicpwd._comn.prop.Char;
 import com.magicpwd._comn.S1S1;
 
 import javax.swing.JPanel;

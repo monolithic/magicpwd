@@ -32,7 +32,7 @@ public class HideAction extends javax.swing.AbstractAction implements IPwdAction
 
         TrayPtn.getInstance().displayMessage(Lang.getLang(LangRes.P30F9A01, "友情提示"), Lang.getLang(LangRes.P30F7A43, "魔方密码仍在运行中，您可以通过双击此处显示主窗口！"), java.awt.TrayIcon.MessageType.INFO);
 
-        mainPtn.hideWindow();
+        mainPtn.endSave();
     }
 
     @Override

@@ -6,7 +6,7 @@ package com.magicpwd._prop;
 import javax.swing.DefaultComboBoxModel;
 
 import com.magicpwd.r.ListCR;
-import com.magicpwd._comn.Char;
+import com.magicpwd._comn.prop.Char;
 import com.magicpwd._comp.IcoLabel;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;

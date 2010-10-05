@@ -4,7 +4,7 @@
  */
 package com.magicpwd.m;
 
-import com.magicpwd._comn.Char;
+import com.magicpwd._comn.prop.Char;
 import com.magicpwd.d.DBA3000;
 import java.util.ArrayList;
 import java.util.List;

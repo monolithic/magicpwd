@@ -51,6 +51,16 @@ public class ListMdl extends DefaultListModel
         return dataList != null ? dataList.size() : 0;
     }
 
+    public void listTask(java.util.Calendar c)
+    {
+        int s = dataList.size();
+        dataList.clear();
+        fireIntervalRemoved(this, 0, s);
+        DBA3000.readTaskList(coreMdl.getUserCfg(), new java.sql.Timestamp(c.getTimeInMillis()), dataList);
+        s = dataList.size();
+        fireIntervalAdded(this, 0, s);
+    }
+
     public void listName(String typeHash)
     {
         int s = dataList.size();

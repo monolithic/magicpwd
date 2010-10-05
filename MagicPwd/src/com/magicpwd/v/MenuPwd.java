@@ -6,7 +6,7 @@ package com.magicpwd.v;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 
-import com.magicpwd._comn.Char;
+import com.magicpwd._comn.prop.Char;
 import com.magicpwd._comn.item.EditItem;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;

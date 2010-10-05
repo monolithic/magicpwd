@@ -3,7 +3,6 @@
  */
 package com.magicpwd._comn;
 
-import com.magicpwd._comn.item.PwdsItem;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -80,18 +79,18 @@ public final class Keys implements Serializable
     /**
      * 加密口令
      */
-    private static PwdsItem password;
+    private static Pwds password;
 
     public Keys()
     {
-        password = new PwdsItem();
+        password = new Pwds();
         setDefault();
     }
 
     /**
      * 恢复默认值
      */
-    public void setDefault()
+    public final void setDefault()
     {
         histBack = true;
 
@@ -159,7 +158,7 @@ public final class Keys implements Serializable
      * 口令数据
      * @return the Password
      */
-    public PwdsItem getPassword()
+    public Pwds getPassword()
     {
         return password;
     }
@@ -168,7 +167,7 @@ public final class Keys implements Serializable
      * 口令数据
      * @param Password the Password to set
      */
-    public void setPassword(PwdsItem Password)
+    public void setPassword(Pwds Password)
     {
         Keys.password = Password;
     }
