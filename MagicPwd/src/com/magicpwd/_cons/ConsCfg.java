@@ -196,6 +196,10 @@ public interface ConsCfg
      */
     String DEF_BACK_PATH = ConsEnv.DIR_BAK;
     /**
+     * 默认数据：数据目录
+     */
+    String DEF_DATA_PATH = ConsEnv.DIR_DAT;
+    /**
      * 默认数据：备份数量
      */
     String DEF_BACK_SIZE = "3";
