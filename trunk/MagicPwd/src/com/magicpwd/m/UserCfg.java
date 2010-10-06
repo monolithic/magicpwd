@@ -118,7 +118,7 @@ public final class UserCfg
     /**
      * @return the menuViw
      */
-    public final boolean isMenuViw()
+    public final boolean isMenuVisible()
     {
         return ConsCfg.DEF_TRUE.equalsIgnoreCase(userCfg.getProperty(ConsCfg.CFG_VIEW_MENU, ConsCfg.DEF_TRUE));
     }
@@ -135,7 +135,7 @@ public final class UserCfg
     /**
      * @return the toolViw
      */
-    public final boolean isToolViw()
+    public final boolean isToolVisible()
     {
         return ConsCfg.DEF_TRUE.equalsIgnoreCase(userCfg.getProperty(ConsCfg.CFG_VIEW_TOOL));
     }
@@ -152,7 +152,7 @@ public final class UserCfg
     /**
      * @return the infoViw
      */
-    public final boolean isInfoViw()
+    public final boolean isInfoVisible()
     {
         return ConsCfg.DEF_TRUE.equalsIgnoreCase(userCfg.getProperty(ConsCfg.CFG_VIEW_INFO, ConsCfg.DEF_TRUE));
     }
@@ -169,7 +169,7 @@ public final class UserCfg
     /**
      * @return the findViw
      */
-    public final boolean isFindViw()
+    public final boolean isFindVisible()
     {
         return ConsCfg.DEF_TRUE.equalsIgnoreCase(userCfg.getProperty(ConsCfg.CFG_VIEW_FIND, ConsCfg.DEF_TRUE));
     }

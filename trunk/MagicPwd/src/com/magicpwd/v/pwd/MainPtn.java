@@ -147,18 +147,18 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         UserCfg cfg = coreMdl.getUserCfg();
 
         // 菜单栏
-        setMenuVisible(cfg.isMenuViw());
+        setMenuVisible(cfg.isMenuVisible());
 
         // 工具栏
-        setToolVisible(cfg.isToolViw());
+        setToolVisible(cfg.isToolVisible());
 
         // 搜索栏
         mainFind.initData();
-        setFindVisible(cfg.isFindViw());
+        setFindVisible(cfg.isFindVisible());
 
         // 信息栏
         mainInfo.initData();
-        setInfoVisible(cfg.isInfoViw());
+        setInfoVisible(cfg.isInfoVisible());
 
         // 属性编辑组件
         eb_KeysEdit.initData();
