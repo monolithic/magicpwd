@@ -12,16 +12,11 @@ import com.magicpwd._mail.Sender;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
-import com.magicpwd.d.DBA3000;
 import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
 import com.magicpwd.v.TrayPtn;
 import com.magicpwd.x.LckDialog;
-import javax.mail.Flags.Flag;
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.Store;
 
 /**
  *
@@ -86,7 +81,7 @@ public class CloudBackupAction extends javax.swing.AbstractAction implements IPw
     {
         try
         {
-            String docs = DBA3000.readConfig("pop_mail");
+            String docs = mainPtn.readCfg("pop_mail");
             if (!com.magicpwd._util.Char.isValidate(docs))
             {
                 dialog.setVisible(false);
@@ -95,7 +90,6 @@ public class CloudBackupAction extends javax.swing.AbstractAction implements IPw
                 return;
             }
 
-            docs = mainPtn.deCrypt(docs);
             String[] data = docs.split("\n");
 
             java.io.File bakFile = TrayPtn.endSave();
@@ -117,17 +111,17 @@ public class CloudBackupAction extends javax.swing.AbstractAction implements IPw
             Reader reader = new Reader(connect);
 
             // 删除已有文件
-            Store store = connect.getStore();
-            Folder folder = store.getDefaultFolder().getFolder("inbox");
+            javax.mail.Store store = connect.getStore();
+            javax.mail.Folder folder = store.getDefaultFolder().getFolder("inbox");
             if (folder.isOpen())
             {
                 folder.close(false);
             }
-            folder.open(Folder.READ_WRITE);
-            Message message = reader.find(folder, null, Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"), null, null);
+            folder.open(javax.mail.Folder.READ_WRITE);
+            javax.mail.Message message = reader.find(folder, null, Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"), null, null);
             if (message != null)
             {
-                message.setFlag(Flag.DELETED, true);
+                message.setFlag(javax.mail.Flags.Flag.DELETED, true);
             }
             folder.close(true);
             store.close();
@@ -145,9 +139,8 @@ public class CloudBackupAction extends javax.swing.AbstractAction implements IPw
             sender.setTo(data[0]);
             sender.setSubject(Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"));
             sender.setContent(Lang.getLang(LangRes.P30F7A49, "此邮件为魔方密码数据备份文件，请勿手动删除！"));
-            java.util.Date date = new java.util.Date();
-            sender.setSentDate(date);
-//            sender.setHeader("", "");
+            String sign = Long.toHexString(new java.util.Date().getTime());
+            sender.setHeader("magicpwd-sign", "http://magicpwd.com/" + sign);
             sender.addAttachment(ConsEnv.FILE_SYNC, bakFile.getAbsolutePath());
             //if (!new Google().backup(data[0], data[1], ConsEnv.FILE_SYNC, MagicPwd.endSave()))
             if (!sender.send())
@@ -158,7 +151,7 @@ public class CloudBackupAction extends javax.swing.AbstractAction implements IPw
                 return;
             }
 
-            mainPtn.getCoreMdl().getUserCfg().setCfg("mail.date", Long.toHexString(date.getTime()));
+            mainPtn.getCoreMdl().getUserCfg().setCfg("mail.date", sign);
 
             dialog.setVisible(false);
             dialog.dispose();

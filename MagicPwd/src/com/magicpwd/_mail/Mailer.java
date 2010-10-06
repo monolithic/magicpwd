@@ -52,10 +52,10 @@ public class Mailer
                 {
                     continue;
                 }
-                if (sentDate == null || !sentDate.equals(Long.toHexString(message.getSentDate().getTime())))
-                {
-                    continue;
-                }
+//                if (sentDate == null || !sentDate.equals(Long.toHexString(message.getSentDate().getTime())))
+//                {
+//                    continue;
+//                }
                 if (header != null)
                 {
                     String[] headers = message.getHeader("magicpwd-sign");
