@@ -235,8 +235,8 @@ public class MailConstructor {
 
 		if (themail.setBody("恭喜你，你中一等奖啦！！！") == false)
 			return;
-		if (themail.addFileAffix("F:\\Rmps\\MagicPwd\\bak\\amon_20100824-130014.backup") == false)
-			return;
+//		if (themail.addFileAffix("F:\\Rmps\\MagicPwd\\bak\\amon_20100824-130014.backup") == false)
+//			return;
 		// if(themail.addFileAffix("c:\\boot.ini") == false) return;
 		themail.setNamePass("Amon.CT@163.com", "bMjbmaG0zm");
 		if (themail.sendout() == false)
