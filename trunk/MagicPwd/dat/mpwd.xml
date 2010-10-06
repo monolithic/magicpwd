@@ -279,19 +279,28 @@
         <menu id="plug" text="$P30F763A">
             <!--测试-->
             <item type="normal" text="测试(@T)" command="这是一个扩展测试！">
-                <action class="com.magicpwd.e.TestAction" />
+                <action class="example.TestAction" />
             </item>
         </menu>
     </menubar>
 
     <!--魔方密码工具栏-->
     <toolbar id="mpwd">
-        <item type="normal" tips="普通菜单项" icon="http://magicpwd.com/logo/logo10.png">
-            <action class="com.magicpwd.e.TestAction" />
+        <!--新增-->
+        <item type="normal" tips="$P30F7602">
+            <icon>
+                <default id="file-new" path="http://magicpwd.com/logo/logo10.png"/>
+            </icon>
+            <action id="new-keys" class="com.magicpwd.e.pwd.file.NewAction" />
         </item>
-        <item type="toggle" tips="普通菜单项" icon="http://magicpwd.com/logo/logo10.png">
-            <action class="com.magicpwd.e.TestAction" />
+        <!--保存-->
+        <item type="normal" tips="$P30F7603">
+            <icon>
+                <default id="file-new" path="http://magicpwd.com/logo/logo10.png"/>
+            </icon>
+            <action id="save-keys" class="com.magicpwd.e.pwd.file.SaveAction" />
         </item>
+        <seperator />
     </toolbar>
 
     <!--魔方密码弹出菜单-->
