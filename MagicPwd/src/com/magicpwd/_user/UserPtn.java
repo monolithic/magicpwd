@@ -1251,10 +1251,8 @@ public class UserPtn extends javax.swing.JPanel
         {
             backCall.callBack(null, null, ConsEnv.STR_SIGN_FP, sb.toString());
         }
-        TrayPtn.getInstance().showViewPtn(ConsEnv.VIEW_MAIN);
-        TrayPtn.getCurrForm().setVisible(true);
-        dispoze();
         Lang.showMesg(null, LangRes.P30FAA18, "您的新口令是：{0}\n为了您的安全，请登录软件后尽快修改您的口令。", sb.toString());
+        TrayPtn.getInstance().showViewPtn(ConsEnv.VIEW_MAIN);
     }
 
     /**

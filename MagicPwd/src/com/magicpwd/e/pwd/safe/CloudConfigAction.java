@@ -6,7 +6,6 @@ package com.magicpwd.e.pwd.safe;
 
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._face.IBackCall;
-import com.magicpwd._user.UserPtn;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -32,19 +31,22 @@ public class CloudConfigAction extends javax.swing.AbstractAction implements IPw
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        UserPtn us = new UserPtn(TrayPtn.getCurrForm());
-        us.setBackCall(new IBackCall()
+        TrayPtn.getUserPtn(ConsEnv.INT_SIGN_CS).setBackCall(new IBackCall()
         {
 
             @Override
             public boolean callBack(Object sender, java.util.EventListener event, String... params)
             {
-                return configDocs(params);
+                if (params != null && params.length > 0)
+                {
+                    if (ConsEnv.STR_SIGN_CS.equals(params[0]))
+                    {
+                        return configDocs(params);
+                    }
+                }
+                return false;
             }
         });
-        us.initView(ConsEnv.INT_SIGN_CS);
-        us.initLang();
-        us.initData();
     }
 
     @Override

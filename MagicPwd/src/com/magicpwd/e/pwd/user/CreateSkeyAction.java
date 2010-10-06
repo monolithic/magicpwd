@@ -8,7 +8,7 @@ import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
-import com.magicpwd._user.UserPtn;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.m.CoreMdl;
@@ -32,27 +32,28 @@ public class CreateSkeyAction extends javax.swing.AbstractAction implements IPwd
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        String skey = coreMdl.getUserCfg().getCfg(ConsCfg.CFG_USER_SKEY);
-        if (skey != null && skey.length() == 224)
+        if (Char.isValidate(coreMdl.getUserCfg().getCfg(ConsCfg.CFG_USER_SKEY), 224))
         {
             Lang.showMesg(mainPtn, LangRes.P30F7A28, "您已经设置过安全口令！");
             return;
         }
 
-        UserPtn us = new UserPtn(TrayPtn.getCurrForm());
-        us.setBackCall(new IBackCall()
+        TrayPtn.getUserPtn(ConsEnv.INT_SIGN_SK).setBackCall(new IBackCall()
         {
 
             @Override
             public boolean callBack(Object sender, java.util.EventListener event, String... params)
             {
-                //mainMenu.setUserSecretEnabled();
+                if (params != null && params.length > 0)
+                {
+                    if (ConsEnv.STR_SIGN_SK.equals(params[0]))
+                    {
+                        setEnabled(false);
+                    }
+                }
                 return true;
             }
         });
-        us.initView(ConsEnv.INT_SIGN_SK);
-        us.initLang();
-        us.initData();
     }
 
     @Override
@@ -70,5 +71,6 @@ public class CreateSkeyAction extends javax.swing.AbstractAction implements IPwd
     @Override
     public void doUpdate(Object object)
     {
+        setEnabled(!Char.isValidate(coreMdl.getUserCfg().getCfg(ConsCfg.CFG_USER_SKEY), 224));
     }
 }

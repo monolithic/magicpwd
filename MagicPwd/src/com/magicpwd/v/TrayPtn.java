@@ -149,14 +149,12 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         if (ConsEnv.STR_SIGN_IN.equalsIgnoreCase(params[0]) || ConsEnv.STR_SIGN_UP.equalsIgnoreCase(params[0]))
         {
             // 设置软件界面风格
-            mf_CurrForm = getMainPtn();
-            currPtn = ConsEnv.VIEW_MAIN;
-            showViewPtn(ConsEnv.VIEW_MAIN);
+            showMainPtn();
             mf_CurrForm.setVisible(true);
-//            initView();
-//            initLang();
-//            initData();
-//            mf_CurrForm.toFront();
+            initView();
+            initLang();
+            initData();
+            mf_CurrForm.toFront();
             return true;
         }
 
