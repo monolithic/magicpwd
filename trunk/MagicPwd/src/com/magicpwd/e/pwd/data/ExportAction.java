@@ -7,7 +7,6 @@ package com.magicpwd.e.pwd.data;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IBackCall;
-import com.magicpwd._user.UserPtn;
 import com.magicpwd._util.Lang;
 import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.m.CoreMdl;
@@ -38,8 +37,7 @@ public class ExportAction extends javax.swing.AbstractAction implements IPwdActi
             return;
         }
 
-        UserPtn up = TrayPtn.getUserPtn(ConsEnv.INT_SIGN_RS);
-        up.setBackCall(new IBackCall()
+        TrayPtn.getUserPtn(ConsEnv.INT_SIGN_RS).setBackCall(new IBackCall()
         {
 
             @Override

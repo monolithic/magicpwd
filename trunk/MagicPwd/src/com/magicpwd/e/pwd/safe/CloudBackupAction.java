@@ -142,7 +142,6 @@ public class CloudBackupAction extends javax.swing.AbstractAction implements IPw
             String sign = Long.toHexString(new java.util.Date().getTime());
             sender.setHeader("magicpwd-sign", "http://magicpwd.com/" + sign);
             sender.addAttachment(ConsEnv.FILE_SYNC, bakFile.getAbsolutePath());
-            //if (!new Google().backup(data[0], data[1], ConsEnv.FILE_SYNC, MagicPwd.endSave()))
             if (!sender.send())
             {
                 dialog.setVisible(false);

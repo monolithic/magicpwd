@@ -5,11 +5,12 @@
 package com.magicpwd.e.pwd.user;
 
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._user.UserPtn;
+import com.magicpwd._face.IBackCall;
 import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
 import com.magicpwd.v.TrayPtn;
+import java.util.EventListener;
 
 /**
  *
@@ -28,10 +29,15 @@ public class ChangePkeyAction extends javax.swing.AbstractAction implements IPwd
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        UserPtn us = new UserPtn(TrayPtn.getCurrForm());
-        us.initView(ConsEnv.INT_SIGN_PK);
-        us.initLang();
-        us.initData();
+        TrayPtn.getUserPtn(ConsEnv.INT_SIGN_PK).setBackCall(new IBackCall()
+        {
+
+            @Override
+            public boolean callBack(Object sender, EventListener event, String... params)
+            {
+                return true;
+            }
+        });
     }
 
     @Override

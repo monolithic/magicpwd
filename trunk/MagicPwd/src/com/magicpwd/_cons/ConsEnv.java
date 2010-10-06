@@ -130,6 +130,7 @@ public interface ConsEnv
      * 设置云存储用户
      */
     int INT_SIGN_CS = INT_SIGN_NW + 1;
+    String STR_SIGN_CS = "signCs";
     /////////////////////////////////////////////////////////////////
     String CARD_HTM = "htm";
     String CARD_TXT = "txt";
@@ -137,7 +138,6 @@ public interface ConsEnv
     String CARD_SVG = "svg";
     String CARD_ALL = "*";
     /////////////////////////////////////////////////////////////////
-    String STR_SIGN_CS = "signCs";
     String BEAN_PROP = "beanprop";
     String BEAN_INFO = BEAN_PROP + ConsDat.INDX_INFO;// "infobean";
     String BEAN_TEXT = BEAN_PROP + ConsDat.INDX_TEXT;// "textbean";
