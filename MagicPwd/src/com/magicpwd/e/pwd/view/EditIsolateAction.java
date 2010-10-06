@@ -27,6 +27,8 @@ public class EditIsolateAction extends javax.swing.AbstractAction implements IPw
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
         boolean b = !coreMdl.getUserCfg().isEditIsolate();
+        mainPtn.setEditIsolate(b);
+        mainPtn.pack();
 
         String cmd = e.getActionCommand();
         if (Char.isValidate(cmd))
@@ -37,9 +39,6 @@ public class EditIsolateAction extends javax.swing.AbstractAction implements IPw
                 button.setSelected(b);
             }
         }
-
-        mainPtn.setEditIsolate(b);
-        //mainPtn.pack();
     }
 
     @Override
@@ -57,13 +56,7 @@ public class EditIsolateAction extends javax.swing.AbstractAction implements IPw
     @Override
     public void doUpdate(Object object)
     {
-//        if (coreMdl.getUserCfg().isEditVisible())
-//        {
+        putValue("enabled", coreMdl.getUserCfg().isEditVisible());
         putValue("selected", coreMdl.getUserCfg().isEditIsolate());
-//        }
-//        else
-//        {
-//            putValue("enabled", false);
-//        }
     }
 }

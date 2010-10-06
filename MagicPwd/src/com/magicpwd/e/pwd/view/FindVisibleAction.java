@@ -5,7 +5,6 @@
 package com.magicpwd.e.pwd.view;
 
 import com.magicpwd.e.pwd.IPwdAction;
-import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
 
@@ -21,19 +20,14 @@ public class FindVisibleAction extends javax.swing.AbstractAction implements IPw
 
     public FindVisibleAction()
     {
-        putValue(NAME, "com.magicpwd.e.pwd.view.FindVisableAction");
     }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        UserCfg cfg = coreMdl.getUserCfg();
-
-        boolean b = !cfg.isFindViw();
+        boolean b = !coreMdl.getUserCfg().isFindVisible();
         mainPtn.setFindVisible(b);
         mainPtn.pack();
-
-        cfg.setFindViw(b);
     }
 
     @Override
@@ -51,5 +45,6 @@ public class FindVisibleAction extends javax.swing.AbstractAction implements IPw
     @Override
     public void doUpdate(Object object)
     {
+        putValue("selected", coreMdl.getUserCfg().isFindVisible());
     }
 }

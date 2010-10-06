@@ -659,7 +659,7 @@ public class MenuPtn
             }
         }
         button.addActionListener(action);
-//        button.setEnabled(action.getValue("enabled") != null);
+        button.setEnabled(action.getValue("enabled") != Boolean.FALSE);
         button.setSelected(action.getValue("selected") == Boolean.TRUE);
         button.setVisible(action.getValue("visible") != Boolean.FALSE);
         processStrokes(element, button, action, component);

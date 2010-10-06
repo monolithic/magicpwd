@@ -4,6 +4,7 @@
  */
 package com.magicpwd.e.pwd.view;
 
+import com.magicpwd._util.Char;
 import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
@@ -30,6 +31,21 @@ public class EditVisibleAction extends javax.swing.AbstractAction implements IPw
         if (b)
         {
             mainPtn.showPropInfo();
+        }
+        mainPtn.pack();
+
+        String cmd = e.getActionCommand();
+        if (Char.isValidate(cmd))
+        {
+            javax.swing.AbstractButton button;
+            for (String tmp : cmd.split(","))
+            {
+                button = mainPtn.getMenuPtn().getButton(tmp);
+                if (button != null)
+                {
+                    button.setEnabled(b);
+                }
+            }
         }
     }
 
