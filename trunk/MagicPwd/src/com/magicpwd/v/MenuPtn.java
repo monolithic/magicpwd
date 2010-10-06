@@ -191,7 +191,7 @@ public class MenuPtn
         javax.swing.JToolBar toolBar = new javax.swing.JToolBar();
         toolBar.setName(toolId);
 
-        List elementList = element.elements("item");
+        List elementList = element.elements();
         if (elementList != null)
         {
             Element tmp;
@@ -202,12 +202,16 @@ public class MenuPtn
                     continue;
                 }
                 tmp = (Element) obj;
-                javax.swing.AbstractButton button = createButton(tmp, null);
-                if (button == null)
+                if ("item".equals(tmp.getName()))
                 {
+                    toolBar.add(createButton(tmp, null));
                     continue;
                 }
-                toolBar.add(button);
+                if ("seperator".equals(tmp.getName()))
+                {
+                    toolBar.addSeparator();
+                    continue;
+                }
             }
         }
         return toolBar;
@@ -458,7 +462,10 @@ public class MenuPtn
             text = text.substring(1).toUpperCase();
             text = Lang.getLang(text, text);
         }
-        Bean.setText(button, text != null ? text : "...");
+        if (text != null)
+        {
+            Bean.setText(button, text.length() > 0 ? text : "...");
+        }
         return button;
     }
 

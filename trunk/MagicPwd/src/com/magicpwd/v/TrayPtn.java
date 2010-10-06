@@ -17,6 +17,7 @@ import com.magicpwd.d.DBAccess;
 import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.m.SafeMdl;
+import com.magicpwd.r.AmonFF;
 
 /**
  * 系统托盘
@@ -460,6 +461,23 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         coreMdl.loadPre();
 
         // 扩展库加载
+        java.io.File file = new java.io.File(ConsEnv.DIR_EXT);
+        if (file != null && file.exists() && file.isDirectory() && file.canRead())
+        {
+            java.io.File jars[] = file.listFiles(new AmonFF(".+\\.jar$", true));
+            if (jars != null && jars.length > 0)
+            {
+                try
+                {
+                    // 加载扩展库
+                    Bean.loadJar(jars);
+                }
+                catch (Exception exp)
+                {
+                    Logs.exception(exp);
+                }
+            }
+        }
     }
 
     public void showViewPtn(int nextPtn)
