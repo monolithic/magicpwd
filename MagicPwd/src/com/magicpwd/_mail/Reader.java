@@ -4,6 +4,7 @@
  */
 package com.magicpwd._mail;
 
+import com.magicpwd._cons.ConsEnv;
 import javax.mail.Message;
 import javax.mail.Multipart;
 import javax.mail.Part;
@@ -25,7 +26,7 @@ public class Reader extends Mailer
     public Reader(Connect connect)
     {
         super(connect);
-        attachmentPath = "D:\\Temp";
+        attachmentPath = ConsEnv.DIR_MAIL;
     }
 
     public boolean read(Message message) throws Exception
