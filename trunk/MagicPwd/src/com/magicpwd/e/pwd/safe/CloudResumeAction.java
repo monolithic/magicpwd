@@ -13,16 +13,11 @@ import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
-import com.magicpwd.d.DBA3000;
 import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
 import com.magicpwd.v.TrayPtn;
 import com.magicpwd.x.LckDialog;
-import java.awt.event.ActionEvent;
-import javax.mail.Folder;
-import javax.mail.Message;
-import javax.mail.Store;
 
 /**
  *
@@ -39,7 +34,7 @@ public class CloudResumeAction extends javax.swing.AbstractAction implements IPw
     }
 
     @Override
-    public void actionPerformed(ActionEvent e)
+    public void actionPerformed(java.awt.event.ActionEvent e)
     {
         if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F7A41, "确认要执行从云端数据恢复的操作吗，此操作将需要一定的时间？"))
         {
@@ -87,7 +82,7 @@ public class CloudResumeAction extends javax.swing.AbstractAction implements IPw
     {
         try
         {
-            String docs = DBA3000.readConfig("pop_mail");
+            String docs = mainPtn.readCfg("pop_mail");
             if (!com.magicpwd._util.Char.isValidate(docs))
             {
                 dialog.setVisible(false);
@@ -96,7 +91,6 @@ public class CloudResumeAction extends javax.swing.AbstractAction implements IPw
                 return;
             }
 
-            docs = mainPtn.deCrypt(docs);
             String[] data = docs.split("\n");
 
             TrayPtn.endSave();
@@ -110,14 +104,14 @@ public class CloudResumeAction extends javax.swing.AbstractAction implements IPw
             Reader mail = new Reader(connect);
 
             // 读取备份文件
-            Store store = connect.getStore();
-            Folder folder = store.getDefaultFolder().getFolder("inbox");
+            javax.mail.Store store = connect.getStore();
+            javax.mail.Folder folder = store.getDefaultFolder().getFolder("inbox");
             if (folder.isOpen())
             {
                 folder.close(false);
             }
-            folder.open(Folder.READ_ONLY);
-            Message message = mail.find(folder, null, Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"), mainPtn.getCoreMdl().getUserCfg().getCfg("mail.date"), null);
+            folder.open(javax.mail.Folder.READ_ONLY);
+            javax.mail.Message message = mail.find(folder, null, Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"), null, "http://magicpwd.com/" + mainPtn.getCoreMdl().getUserCfg().getCfg("mail.date"));
             if (message == null)
             {
                 dialog.setVisible(false);

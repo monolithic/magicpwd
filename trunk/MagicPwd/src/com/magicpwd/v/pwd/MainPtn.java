@@ -39,6 +39,7 @@ import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.c.MPwdEvt;
 import com.magicpwd.c.ToolEvt;
+import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.GridMdl;
 import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.CoreMdl;
@@ -1340,14 +1341,19 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         selectNext(gridMdl.isUpdate() ? 0 : 1, true);
     }
 
-    public String enCrypt(String text) throws Exception
+    public void saveCfg(String key, String text) throws Exception
     {
-        return safeMdl.enCrypt(text);
+        DBA3000.saveConfig(key, safeMdl.enCrypt(text));
     }
 
-    public String deCrypt(String text) throws Exception
+    public String readCfg(String key) throws Exception
     {
-        return safeMdl.deCrypt(text);
+        String text = DBA3000.readConfig(key);
+        if (com.magicpwd._util.Char.isValidate(text))
+        {
+            text = safeMdl.deCrypt(text);
+        }
+        return text;
     }
 
     public void enCrypt(java.io.File src, java.io.File dst) throws Exception

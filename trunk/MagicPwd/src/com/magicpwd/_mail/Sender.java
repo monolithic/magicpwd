@@ -25,9 +25,12 @@ import javax.mail.internet.MimeUtility;
 public class Sender extends Mailer
 {
 
+    private java.util.HashMap<String, String> headers;
+
     public Sender(Connect connect)
     {
         super(connect);
+        headers = new java.util.HashMap<String, String>();
     }
 
     public boolean send() throws Exception
@@ -54,6 +57,13 @@ public class Sender extends Mailer
         if (getSentDate() != null)
         {
             message.setSentDate(getSentDate());
+        }
+        if (headers != null)
+        {
+            for (String key : headers.keySet())
+            {
+                message.setHeader(key, headers.get(key));
+            }
         }
 
         Multipart multipart = new MimeMultipart();
@@ -108,5 +118,10 @@ public class Sender extends Mailer
 
     public void setHeader(String key, String value)
     {
+        if (headers == null)
+        {
+            headers = new java.util.HashMap<String, String>();
+        }
+        headers.put(key, value);
     }
 }
