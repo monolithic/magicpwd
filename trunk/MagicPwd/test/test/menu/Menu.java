@@ -4,7 +4,7 @@
  */
 package test.menu;
 
-import com.magicpwd.MagicPwd;
+import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.MenuPtn;
@@ -34,10 +34,10 @@ public class Menu extends javax.swing.AbstractAction
     public void init()
     {
         coreMdl = new CoreMdl();
-        coreMdl.preLoad();
+        coreMdl.loadPre();
         coreMdl.loadCfg();
 
-        MagicPwd.loadLnF(coreMdl.getUserCfg());
+        Bean.loadLnF(coreMdl.getUserCfg());
         Lang.loadLang(coreMdl.getUserCfg());
 
         MenuPtn ptn = new MenuPtn(coreMdl);
