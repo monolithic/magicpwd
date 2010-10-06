@@ -7,7 +7,6 @@ package com.magicpwd.e.pwd.safe;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._mail.Connect;
-import com.magicpwd._mail.Reader;
 import com.magicpwd._mail.Sender;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -101,6 +100,7 @@ public class CloudBackupAction extends javax.swing.AbstractAction implements IPw
                 return;
             }
 
+            /*
             Connect connect = new Connect(data[0], data[2], "pop3");
             connect.setUsername(data[1]);
             if (!connect.useDefault())
@@ -125,8 +125,9 @@ public class CloudBackupAction extends javax.swing.AbstractAction implements IPw
             }
             folder.close(true);
             store.close();
+            */
 
-            connect = new Connect(data[0], data[2], "smtp");
+            Connect connect = new Connect(data[0], data[2], "smtp");
             connect.setUsername(data[1]);
             if (!connect.useDefault())
             {
@@ -140,7 +141,7 @@ public class CloudBackupAction extends javax.swing.AbstractAction implements IPw
             sender.setSubject(Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"));
             sender.setContent(Lang.getLang(LangRes.P30F7A49, "此邮件为魔方密码数据备份文件，请勿手动删除！"));
             String sign = Long.toHexString(new java.util.Date().getTime());
-            sender.setHeader("magicpwd-sign", "http://magicpwd.com/" + sign);
+            sender.setHeader("magicpwd-sign", "http://magicpwd.com/?*" + sign);
             sender.addAttachment(ConsEnv.FILE_SYNC, bakFile.getAbsolutePath());
             if (!sender.send())
             {

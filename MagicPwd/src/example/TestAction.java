@@ -2,7 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.magicpwd.e;
+package example;
+
+import com.magicpwd.v.TrayPtn;
 
 /**
  *
@@ -18,6 +20,6 @@ public class TestAction extends javax.swing.AbstractAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        javax.swing.JOptionPane.showMessageDialog(null, e.getActionCommand());
+        javax.swing.JOptionPane.showMessageDialog(TrayPtn.getCurrForm(), e.getActionCommand());
     }
 }

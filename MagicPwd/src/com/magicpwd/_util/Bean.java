@@ -338,7 +338,7 @@ public class Bean
         }
 
         java.io.File jars[] = file.listFiles(new AmonFF(".+\\.jar$", true));
-        if (jars == null && jars.length < 1)
+        if (jars == null || jars.length < 1)
         {
             return;
         }
@@ -357,7 +357,7 @@ public class Bean
         }
     }
 
-    private static void loadJar(java.io.File... files) throws Exception
+    public static void loadJar(java.io.File... files) throws Exception
     {
         if (files == null || files.length < 1)
         {
