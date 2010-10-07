@@ -99,7 +99,6 @@ INSERT INTO C2010200 VALUES(25,0,'qqqqqazqbbdgdbqr','sctfxrcwcecbyarb','\u521b\u
 INSERT INTO C2010200 VALUES(24,0,'qqqqqazqxwgteqgf','sctfxrcwcecbyarb','\u9910\u996e','\u9910\u996e','','','2010-05-25 23:01:50.093000000','2009-03-30 12:12:12.921000000')
 INSERT INTO C2010200 VALUES(26,0,'qqqqqazsvasfszew','sctfxrcwcecbyarb','\u8bb0\u4e8b','\u8bb0\u4e8b','','','2010-05-25 23:01:50.500000000','2009-11-02 11:48:04.334000000')
 INSERT INTO C2010200 VALUES(8,0,'qqqqqazsvasvtaqv','sctfxrcwrqygwvxb','jabber','jabber','','','2010-03-20 13:16:49.046000000','2009-11-02 11:49:42.318000000')
-INSERT INTO C2010200 VALUES(0,0,'qqqqqazvdccerbds','sctfxrczgcywxezs','\u9ed8\u8ba4\u7c7b\u522b','\u9ed8\u8ba4\u7c7b\u522b','','','2010-10-05 10:36:20.828000000','2010-10-05 10:35:09.812000000')
 INSERT INTO C2010200 VALUES(8,0,'qqqqqazvdcdbsfqz','qqqqqazvdcdrqygy','1\u5e74\u5185','1\u5e74\u4ee5\u5185\u7684\u8ba1\u5212\u4efb\u52a1','task:1year','','2010-10-05 10:46:49.265000000','2010-10-05 10:26:03.906000000')
 INSERT INTO C2010200 VALUES(1,0,'qqqqqazvdcdfvqdq','qqqqqazvdcdrqygy','30\u5206\u949f\u5185','30\u5206\u949f\u4ee5\u5185\u7684\u8ba1\u5212\u4efb\u52a1','task:30minute','','2010-10-05 10:46:42.968000000','2010-10-05 10:22:07.984000000')
 INSERT INTO C2010200 VALUES(6,0,'qqqqqazvdcdgfzre','qqqqqazvdcdrqygy','1\u5468\u5185','1\u5468\u4ee5\u5185\u7684\u8ba1\u5212\u4efb\u52a1','task:1week','','2010-10-05 10:46:47.859000000','2010-10-05 10:25:21.046000000')
