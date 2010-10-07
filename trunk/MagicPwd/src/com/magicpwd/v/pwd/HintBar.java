@@ -9,7 +9,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-import com.magicpwd.c.InfoEvt;
 import com.magicpwd.m.HintMdl;
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
@@ -24,7 +23,6 @@ import javax.swing.Timer;
 public class HintBar extends JPanel
 {
 
-    private InfoEvt ie_InfoEvent;
     private DateFormat dateTplt;
     private Timer tm_TimeNote;
     private HintMdl hintMdl;
@@ -96,11 +94,6 @@ public class HintBar extends JPanel
         {
             tm_TimeNote.start();
         }
-    }
-
-    public void setInfoEvent(InfoEvt event)
-    {
-        ie_InfoEvent = event;
     }
 
     private void lb_InfoLabelMouseClicked(java.awt.event.MouseEvent evt)

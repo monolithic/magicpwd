@@ -48,7 +48,7 @@ public class LookAction extends javax.swing.AbstractAction implements IPwdAction
             look = ConsCfg.DEF_SKIN_DEF;
             name = ConsCfg.DEF_SKIN_DEF;
         }
-        else if (ConsEnv.SKIN_SYSTEM.equals(command))
+        else if (ConsEnv.SKIN_LOOK_SYSTEM.equals(command))
         {
             type = "java";
             look = ConsCfg.DEF_SKIN_SYS;

@@ -37,8 +37,6 @@ import com.magicpwd._util.Jcsv;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
-import com.magicpwd.c.MPwdEvt;
-import com.magicpwd.c.ToolEvt;
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.GridMdl;
 import com.magicpwd.m.UserCfg;
@@ -51,7 +49,7 @@ import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.TrayPtn;
 import com.magicpwd.x.MdiDialog;
 
-public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGridView
+public class MainPtn extends javax.swing.JFrame implements IGridView
 {
 
     private EditDlg ed_KeysEdit;

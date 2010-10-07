@@ -13,7 +13,6 @@ import com.magicpwd._prop.TpltProp;
 import com.magicpwd._prop.USetProp;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
-import com.magicpwd.c.MenuEvt;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.r.ListCR;
 import com.magicpwd.v.TrayPtn;
@@ -259,11 +258,6 @@ public class MdiDialog extends javax.swing.JDialog
         {
             setVisible(true);
         }
-    }
-
-    private void addHideAction(MenuEvt menuEvt)
-    {
-//        Util.addHideAction(pl_CardPanel.getActionMap(), pl_CardPanel.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), menuEvt);
     }
 
     private void ls_PropListValueChanged(javax.swing.event.ListSelectionEvent evt)

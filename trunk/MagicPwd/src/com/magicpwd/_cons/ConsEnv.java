@@ -192,8 +192,8 @@ public interface ConsEnv
     int VIEW_NORM = 1;
     int VIEW_MINI = 2;
     String CHAR_ALT_KEY = "@";
-    String SKIN_DEFAULT = "default";
-    String SKIN_SYSTEM = "system";
+    String SKIN_LOOK_DEFAULT = "default";
+    String SKIN_LOOK_SYSTEM = "system";
     String SKIN_LOOK_FILE = "look.aml";
     String SKIN_FEEL_FILE = "feel.amf";
     String[] USER_SALT =
