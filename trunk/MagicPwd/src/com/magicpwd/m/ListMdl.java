@@ -51,14 +51,14 @@ public class ListMdl extends DefaultListModel
         return dataList != null ? dataList.size() : 0;
     }
 
-    public void listTask(java.util.Calendar c)
+    public void listTask(java.util.Date s, java.util.Date t)
     {
-        int s = dataList.size();
+        int c = dataList.size();
         dataList.clear();
-        fireIntervalRemoved(this, 0, s);
-        DBA3000.readTaskList(coreMdl.getUserCfg(), new java.sql.Timestamp(c.getTimeInMillis()), dataList);
-        s = dataList.size();
-        fireIntervalAdded(this, 0, s);
+        fireIntervalRemoved(this, 0, c);
+        DBA3000.readTaskList(coreMdl.getUserCfg(), new java.sql.Timestamp(s.getTime()), new java.sql.Timestamp(t.getTime()), dataList);
+        c = dataList.size();
+        fireIntervalAdded(this, 0, c);
     }
 
     public void listName(String typeHash)
@@ -103,10 +103,11 @@ public class ListMdl extends DefaultListModel
         return b;
     }
 
-    public boolean updtName(int indx, String name)
+    public boolean updtName(int indx, String name, String icon)
     {
         Keys item = dataList.get(indx);
         item.setP30F0109(name);
+        item.setP30F010B(icon);
         //item.setV2(name);
         fireContentsChanged(this, indx, indx);
         return true;

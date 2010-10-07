@@ -32,7 +32,7 @@ public class EditBox extends javax.swing.JPanel
     public void initView()
     {
         bt_DropData = new BtnLabel();
-        bt_DropData.setIcon(Bean.readIcon(userCfg, ConsEnv.FEEL_PATH + "prop-drop.png"));
+        bt_DropData.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "prop-drop.png", userCfg));
         bt_DropData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -44,7 +44,7 @@ public class EditBox extends javax.swing.JPanel
         });
 
         bt_SaveData = new BtnLabel();
-        bt_SaveData.setIcon(Bean.readIcon(userCfg, ConsEnv.FEEL_PATH + "prop-save.png"));
+        bt_SaveData.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "prop-save.png", userCfg));
         bt_SaveData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -56,7 +56,7 @@ public class EditBox extends javax.swing.JPanel
         });
 
         bt_CopyData = new BtnLabel();
-        bt_CopyData.setIcon(Bean.readIcon(userCfg, ConsEnv.FEEL_PATH + "prop-copy.png"));
+        bt_CopyData.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "prop-copy.png", userCfg));
         bt_CopyData.addActionListener(new java.awt.event.ActionListener()
         {
 

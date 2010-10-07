@@ -155,7 +155,8 @@ public interface ConsEnv
      * 图标路径
      */
     String ICON_PATH = "/res/icon/";
-    String FEEL_PATH = "skin/feel/%feel%/";
+    String FEEL_ARGS = "%feel%";
+    String FEEL_PATH = "skin/feel/" + FEEL_ARGS + "/";
     String PROP_CHAR = "130F_CHAR";
     String PROP_IMPT = "130F_IMPT";
     String PROP_INFO = "130F_INFO";
@@ -192,6 +193,7 @@ public interface ConsEnv
     int VIEW_NORM = 1;
     int VIEW_MINI = 2;
     String CHAR_ALT_KEY = "@";
+    String SKIN_FEEL_DEFAULT = "default";
     String SKIN_LOOK_DEFAULT = "default";
     String SKIN_LOOK_SYSTEM = "system";
     String SKIN_LOOK_FILE = "look.aml";

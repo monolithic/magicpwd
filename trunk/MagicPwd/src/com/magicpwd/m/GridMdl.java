@@ -520,7 +520,7 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
         modified = true;
     }
 
-    public final StringBuffer deCrypt(Pwds pwds) throws Exception
+    private StringBuffer deCrypt(Pwds pwds) throws Exception
     {
 //        pwds.deCript(coreMdl.getDCipher(), coreMdl.getSec().getMask());
 //        return pwds.getP30F0203();
@@ -599,7 +599,7 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
         }
     }
 
-    public final StringBuffer enCrypt(Pwds pwds) throws Exception
+    private StringBuffer enCrypt(Pwds pwds) throws Exception
     {
 //        pwds.enCrypt(coreMdl.getECipher(), coreMdl.getSec().getMask());
 //        return pwds.getP30F0203();

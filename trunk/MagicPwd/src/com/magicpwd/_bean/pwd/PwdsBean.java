@@ -81,7 +81,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.add(bt_PwdsView);
 
         bt_PwdsGent = new BtnLabel();
-        bt_PwdsGent.setIcon(Bean.readIcon(mainPtn.getCoreMdl().getUserCfg(), ConsEnv.FEEL_PATH + "pwds-generate.png"));
+        bt_PwdsGent.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "pwds-generate.png", mainPtn.getCoreMdl().getUserCfg()));
         bt_PwdsGent.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -94,7 +94,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.add(bt_PwdsGent);
 
         bt_PwdsUcfg = new BtnLabel();
-        bt_PwdsUcfg.setIcon(Bean.readIcon(mainPtn.getCoreMdl().getUserCfg(), ConsEnv.FEEL_PATH + "pwds-options.png"));
+        bt_PwdsUcfg.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "pwds-options.png", mainPtn.getCoreMdl().getUserCfg()));
         bt_PwdsUcfg.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -172,8 +172,8 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     {
         nameBox.initData();
 
-        icoMask = Bean.readIcon(mainPtn.getCoreMdl().getUserCfg(), ConsEnv.FEEL_PATH + "pwds-mask.png");
-        icoView = Bean.readIcon(mainPtn.getCoreMdl().getUserCfg(), ConsEnv.FEEL_PATH + "pwds-view.png");
+        icoMask = Bean.readIcon(ConsEnv.FEEL_PATH + "pwds-mask.png", mainPtn.getCoreMdl().getUserCfg());
+        icoView = Bean.readIcon(ConsEnv.FEEL_PATH + "pwds-view.png", mainPtn.getCoreMdl().getUserCfg());
 
         initMenuData();
 

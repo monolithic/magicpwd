@@ -60,7 +60,7 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_LinkView = new BtnLabel();
-        bt_LinkView.setIcon(Bean.readIcon(mainPtn.getCoreMdl().getUserCfg(), ConsEnv.FEEL_PATH + "link.png"));
+        bt_LinkView.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "link.png", mainPtn.getCoreMdl().getUserCfg()));
         bt_LinkView.addActionListener(new java.awt.event.ActionListener()
         {
 

@@ -461,8 +461,8 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
 
         Bean.getNone();
         Bean.getLogo(16);
-        Bean.setIcon("tree-default", Bean.readIcon(coreMdl.getUserCfg(), ConsEnv.FEEL_PATH + "folder-default.png"));
-        Bean.setIcon("tree-expanded", Bean.readIcon(coreMdl.getUserCfg(), ConsEnv.FEEL_PATH + "folder-expanded.png"));
+        Bean.setSkinIcon("tree-default", Bean.readIcon(ConsEnv.FEEL_PATH + "folder-default.png", coreMdl.getUserCfg()));
+        Bean.setSkinIcon("tree-expanded", Bean.readIcon(ConsEnv.FEEL_PATH + "folder-expanded.png", coreMdl.getUserCfg()));
 
         coreMdl.loadPre();
 

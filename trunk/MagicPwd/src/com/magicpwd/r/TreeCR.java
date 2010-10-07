@@ -54,7 +54,7 @@ public class TreeCR extends JLabel implements javax.swing.tree.TreeCellRenderer
         }
 
         setFocusable(hasFocus);
-        setIcon(Bean.getIcon(expanded ? "tree-default" : "tree-expanded"));
+        setIcon(Bean.getSkinIcon(expanded ? "tree-default" : "tree-expanded"));
 
         if (value instanceof KindTN)
         {

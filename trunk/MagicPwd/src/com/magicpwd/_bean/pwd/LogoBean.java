@@ -129,7 +129,7 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean, IBackCall
     public void showData(IEditItem item)
     {
         itemData = (LogoItem) item;
-        ib_PropName.setIcon(Bean.getIcon(item.getName()));
+        ib_PropName.setIcon(Bean.getDataIcon(item.getName()));
         ta_PropData.setText(item.getData());
     }
 
@@ -176,7 +176,7 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean, IBackCall
         {
             return false;
         }
-        ib_PropName.setIcon(Bean.getIcon(key));
+        ib_PropName.setIcon(Bean.getDataIcon(key));
         itemData.setName(key);
         return true;
     }
