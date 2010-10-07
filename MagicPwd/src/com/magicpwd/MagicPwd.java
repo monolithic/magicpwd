@@ -57,7 +57,7 @@ public class MagicPwd
     {
         try
         {
-            Jzip.unZip(MagicPwd.class.getResourceAsStream("/res/dat.zip"), new java.io.File(ConsEnv.DIR_DAT), false);
+            Jzip.unZip(MagicPwd.class.getResourceAsStream("/res/res.zip"), new java.io.File("."), false);
         }
         catch (Exception exp)
         {
