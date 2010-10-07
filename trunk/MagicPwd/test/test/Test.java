@@ -3,6 +3,7 @@ package test;
 import javax.swing.Action;
 import javax.swing.ButtonGroup;
 import javax.swing.JCheckBox;
+import javax.swing.JFrame;
 import javax.swing.JTextArea;
 
 /*
@@ -18,6 +19,7 @@ public class Test
 
     public static void main(String[] args)
     {
+        new JFrame().setUndecorated(true);
         for (Action action : new JTextArea().getActions())
         {
             ButtonGroup bg = new ButtonGroup();
