@@ -61,11 +61,6 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
     private MailDlg mailDlg;
     private HistDlg histDlg;
     private MdiDialog cfgForm;
-    private javax.swing.JMenuBar mainMenu;
-    private javax.swing.JToolBar mainTool;
-    private javax.swing.JPopupMenu kindMenu;
-    private javax.swing.JPopupMenu listMenu;
-    private javax.swing.JPopupMenu gridMenu;
     private MenuPtn menuPtn;
     /**
      * 口令列表上次选择索引
@@ -122,11 +117,11 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
         this.getContentPane().add(pl_KeysBase);
 
-        mainMenu = menuPtn.getMenuBar("mpwd", getRootPane());
-        this.setJMenuBar(mainMenu);
+        menuBar = menuPtn.getMenuBar("mpwd", getRootPane());
+        this.setJMenuBar(menuBar);
 
-        mainTool = menuPtn.getToolBar("mpwd");
-        this.getContentPane().add(mainTool, cfg.getToolLoc());
+        toolBar = menuPtn.getToolBar("mpwd");
+        this.getContentPane().add(toolBar, cfg.getToolLoc());
 
         this.setIconImage(Bean.getLogo(16));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -166,12 +161,6 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         for (IEditBean bean : editBean)
         {
             bean.initData();
-        }
-        setEditVisible(cfg.isEditVisible());
-        setEditIsolate(cfg.isEditIsolate());
-        if (cfg.isEditVisible())
-        {
-            showPropInfo();
         }
 
         // 列表菜单
@@ -337,14 +326,14 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
             if (isolate)
             {
                 eb_KeysEdit.setVisible(false);
-                ed_KeysEdit.setVisible(true);
                 ed_KeysEdit.setPropView(pl_CardProp);
+                ed_KeysEdit.setVisible(true);
             }
             else
             {
+                eb_KeysEdit.setPropView(pl_CardProp);
                 eb_KeysEdit.setVisible(true);
                 ed_KeysEdit.setVisible(false);
-                eb_KeysEdit.setPropView(pl_CardProp);
             }
             cfg.setEditIsolate(isolate);
         }
@@ -364,13 +353,13 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
     public void setMenuVisible(boolean visible)
     {
-        mainMenu.setVisible(visible);
+        menuBar.setVisible(visible);
         coreMdl.getUserCfg().setMenuViw(visible);
     }
 
     public void setToolVisible(boolean visible)
     {
-        mainTool.setVisible(visible);
+        toolBar.setVisible(visible);
         coreMdl.getUserCfg().setToolViw(visible);
     }
 
@@ -599,10 +588,10 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         sp.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         sp.setOneTouchExpandable(true);
 
-        kindMenu = menuPtn.getMenuPop("kind");
+        kindPop = menuPtn.getMenuPop("kind");
 
         tr_GuidTree = new javax.swing.JTree();
-        tr_GuidTree.setComponentPopupMenu(kindMenu);
+        tr_GuidTree.setComponentPopupMenu(kindPop);
         tr_GuidTree.setCellRenderer(new TreeCR());
         tr_GuidTree.setModel(coreMdl.getTreeMdl());
         tr_GuidTree.getSelectionModel().setSelectionMode(javax.swing.tree.TreeSelectionModel.SINGLE_TREE_SELECTION);
@@ -621,10 +610,10 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         sp1.setViewportView(tr_GuidTree);
         sp.setTopComponent(sp1);
 
-        listMenu = menuPtn.getMenuPop("list");
+        listPop = menuPtn.getMenuPop("list");
 
         ls_GuidList = new javax.swing.JList();
-        ls_GuidList.setComponentPopupMenu(listMenu);
+        ls_GuidList.setComponentPopupMenu(listPop);
         ls_GuidList.setCellRenderer(new KeysCR());
         ls_GuidList.setModel(coreMdl.getListMdl());
         ls_GuidList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -662,7 +651,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
         mainFind = new FindBar(this, coreMdl.getListMdl());
         mainFind.initView();
 
-        gridMenu = menuPtn.getMenuPop("grid");
+        gridPop = menuPtn.getMenuPop("grid");
 
         tb_KeysView = new javax.swing.JTable();
         tb_KeysView.setModel(gridMdl);
@@ -710,7 +699,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
                 {
                     int row = tb_KeysView.rowAtPoint(evt.getPoint());
                     tb_KeysView.setRowSelectionInterval(row, row);
-                    gridMenu.show(tb_KeysView, evt.getX(), evt.getY());
+                    gridPop.show(tb_KeysView, evt.getX(), evt.getY());
                 }
                 else
                 {
@@ -726,7 +715,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
                 {
                     int row = tb_KeysView.rowAtPoint(evt.getPoint());
                     tb_KeysView.setRowSelectionInterval(row, row);
-                    gridMenu.show(tb_KeysView, evt.getX(), evt.getY());
+                    gridPop.show(tb_KeysView, evt.getX(), evt.getY());
                 }
             }
 
@@ -738,7 +727,7 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
                 {
                     int row = tb_KeysView.rowAtPoint(evt.getPoint());
                     tb_KeysView.setRowSelectionInterval(row, row);
-                    gridMenu.show(tb_KeysView, evt.getX(), evt.getY());
+                    gridPop.show(tb_KeysView, evt.getX(), evt.getY());
                 }
             }
         });
@@ -1130,8 +1119,6 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
 
         if (!coreMdl.getUserCfg().isEditVisible())
         {
-//            mainMenu.setViewPropSelected(true);
-//            mainMenu.setViewSideSelected(true);
             coreMdl.getUserCfg().setEditVisible(true);
             coreMdl.getUserCfg().setEditIsolate(true);
             setEditVisible(true);
@@ -1501,10 +1488,6 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
             cfgForm.initView();
             cfgForm.initLang();
             cfgForm.initData();
-//            if (menuEvt != null)
-//            {
-//                cfgForm.addHideAction(menuEvt);
-//            }
         }
         cfgForm.showProp(propName, true);
     }
@@ -1542,4 +1525,9 @@ public class MainPtn extends javax.swing.JFrame implements MPwdEvt, ToolEvt, IGr
     private javax.swing.JTable tb_KeysView;
     private javax.swing.JScrollPane sp_KeysView;
     private java.awt.CardLayout cl_CardProp;
+    private javax.swing.JMenuBar menuBar;
+    private javax.swing.JToolBar toolBar;
+    private javax.swing.JPopupMenu kindPop;
+    private javax.swing.JPopupMenu listPop;
+    private javax.swing.JPopupMenu gridPop;
 }

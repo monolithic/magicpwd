@@ -25,11 +25,6 @@ public class EditDlg extends javax.swing.JDialog
         pl_PropEdit = new javax.swing.JPanel();
         pl_PropEdit.setLayout(new java.awt.BorderLayout());
 
-//        Util.addHideAction(pl_PropEdit.getActionMap(), pl_PropEdit.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), menuEvt);
-//        Util.addViewAction(pl_PropEdit.getActionMap(), pl_PropEdit.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), menuEvt);
-//        Util.addFileAction(pl_PropEdit.getActionMap(), pl_PropEdit.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), menuEvt);
-//        Util.addDataAction(pl_PropEdit.getActionMap(), pl_PropEdit.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), menuEvt);
-
         addWindowListener(new java.awt.event.WindowAdapter()
         {
 
