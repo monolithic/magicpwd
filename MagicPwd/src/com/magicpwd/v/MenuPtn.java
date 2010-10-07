@@ -344,7 +344,8 @@ public class MenuPtn
         java.io.File defaultSkin = new java.io.File(lookFile, ConsEnv.SKIN_LOOK_DEFAULT + '/' + ConsEnv.SKIN_LOOK_FILE);
         if (defaultSkin.exists() && defaultSkin.isFile() && defaultSkin.canRead())
         {
-            item = new javax.swing.JCheckBoxMenuItem(action);
+            item = new javax.swing.JCheckBoxMenuItem();
+            item.addActionListener(action);
             Bean.setText(item, Lang.getLang(LangRes.P30F7632, "默认界面"));
             Bean.setTips(item, "");
             item.setActionCommand(ConsCfg.DEF_SKIN_DEF);
@@ -357,7 +358,8 @@ public class MenuPtn
         java.io.File sytemSkin = new java.io.File(lookFile, ConsEnv.SKIN_LOOK_SYSTEM + '/' + ConsEnv.SKIN_LOOK_FILE);
         if (sytemSkin.exists() && sytemSkin.isFile() && sytemSkin.canRead())
         {
-            item = new javax.swing.JCheckBoxMenuItem(action);
+            item = new javax.swing.JCheckBoxMenuItem();
+            item.addActionListener(action);
             Bean.setText(item, Lang.getLang(LangRes.P30F7633, "系统界面"));
             Bean.setTips(item, "");
             item.setActionCommand(ConsCfg.DEF_SKIN_SYS);
@@ -408,11 +410,13 @@ public class MenuPtn
                 {
                     Element element = look.element("item");
 
-                    item = new javax.swing.JCheckBoxMenuItem(action);
+                    item = new javax.swing.JCheckBoxMenuItem();
+                    item.addActionListener(action);
                     Bean.setText(item, getLang(element.attributeValue("text")));
                     Bean.setTips(item, getLang(element.attributeValue("tips")));
-                    item.setSelected(lookName.equals(element.attributeValue("class")));
-                    item.setActionCommand(type + ":" + dir.getName() + ',' + element.attributeValue("class"));
+                    String clazz = element.attributeValue("class");
+                    item.setSelected(lookName.equals(clazz));
+                    item.setActionCommand(type + ":" + dir.getName() + ',' + clazz + ',' + element.attributeValue("decorated"));
                     lookMenu.add(item);
                     group.add(item.getActionCommand(), item);
                 }
@@ -435,12 +439,13 @@ public class MenuPtn
                         }
                         Element element = (Element) object;
 
-                        item = new javax.swing.JCheckBoxMenuItem(action);
+                        item = new javax.swing.JCheckBoxMenuItem();
+                        item.addActionListener(action);
                         Bean.setText(item, getLang(element.attributeValue("text")));
                         Bean.setTips(item, getLang(element.attributeValue("tips")));
                         String clazz = element.attributeValue("class");
                         item.setSelected(lookName.equals(clazz));
-                        item.setActionCommand(type + ":" + dir.getName() + ',' + clazz);
+                        item.setActionCommand(type + ":" + dir.getName() + ',' + clazz + ',' + element.attributeValue("decorated"));
                         subMenu.add(item);
                         group.add(item.getActionCommand(), item);
                     }

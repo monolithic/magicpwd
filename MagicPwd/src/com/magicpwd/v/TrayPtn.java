@@ -65,14 +65,31 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         // 罗盘视图初始化
         if (md_TrayForm == null)
         {
-            md_TrayForm = new javax.swing.JDialog();
+            md_TrayForm = new javax.swing.JDialog()
+            {
+
+                @Override
+                protected void processWindowEvent(java.awt.event.WindowEvent evt)
+                {
+                    if (evt.getID() == java.awt.event.WindowEvent.WINDOW_CLOSING)
+                    {
+                        return;
+                    }
+                    super.processWindowEvent(evt);
+                }
+            };
             md_TrayForm.setUndecorated(true);
             md_TrayForm.setAlwaysOnTop(true);
 //            md_TrayForm.addWindowListener(new java.awt.event.WindowAdapter()
 //            {
 //
 //                @Override
-//                public void windowDeactivated(java.awt.event.WindowEvent evt)
+//                public void windowClosing(java.awt.event.WindowEvent e)
+//                {
+//                }
+//
+//                @Override
+//                public void windowDeactivated(java.awt.event.WindowEvent e)
 //                {
 //                    md_TrayForm.setVisible(false);
 //                }
