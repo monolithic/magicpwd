@@ -93,7 +93,7 @@ public class MiniPtn extends javax.swing.JFrame implements MPadEvt, FindEvt
         bt_SaveNote.addActionListener(saveAction);
         Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK), saveAction, "file-save", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
 
-        bt_SearchNote.setIcon(Bean.readIcon(coreMdl.getUserCfg(), ConsEnv.FEEL_PATH + "data-search.png"));
+        bt_SearchNote.setIcon(Bean.readIcon(coreMdl.getUserCfg(), ConsEnv.FEEL_PATH + "find.png"));
         bt_SearchNote.addActionListener(findAction);
 
         ta_NoteData.setDragEnabled(true);
