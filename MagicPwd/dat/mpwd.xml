@@ -104,37 +104,37 @@
             </item>
             <seperator />
             <!--显示属性栏-->
-            <item id="editVisible" type="checkbox" text="$P30F7616">
+            <item id="menu-edit-visible" type="checkbox" text="$P30F7616" command="menu-edit-isolate,tool-edit-isolate">
                 <action class="com.magicpwd.e.pwd.view.EditVisibleAction">
                     <stroke key="^ P" />
                 </action>
             </item>
             <!--分离属性栏-->
-            <item id="editIsolate" type="checkbox" text="$P30F7617">
-                <action class="com.magicpwd.e.pwd.view.EditIsolateAction">
+            <item id="menu-edit-isolate" type="checkbox" text="$P30F7617" command="tool-edit-isolate">
+                <action id="edit-isolate" class="com.magicpwd.e.pwd.view.EditIsolateAction">
                     <stroke key="^ W" />
                 </action>
             </item>
             <!--显示搜索栏-->
-            <item id="findVisible" type="checkbox" text="$P30F7618">
+            <item id="menu-find-visible" type="checkbox" text="$P30F7618">
                 <action class="com.magicpwd.e.pwd.view.FindVisibleAction">
                     <stroke key="^ F" />
                 </action>
             </item>
             <!--显示菜单栏-->
-            <item id="menuVisible" type="checkbox" text="$P30F7619">
+            <item id="menu-menu-visible" type="checkbox" text="$P30F7619">
                 <action class="com.magicpwd.e.pwd.view.MenuVisibleAction">
                     <stroke key="^ M" />
                 </action>
             </item>
             <!--显示工具栏-->
-            <item id="toolVisible" type="checkbox" text="$P30F761A">
+            <item id="menu-tool-visible" type="checkbox" text="$P30F761A">
                 <action class="com.magicpwd.e.pwd.view.ToolVisibleAction">
                     <stroke key="^ T" />
                 </action>
             </item>
             <!--显示状态栏-->
-            <item id="infoVisible" type="checkbox" text="$P30F761B">
+            <item id="menu-info-visible" type="checkbox" text="$P30F761B">
                 <action class="com.magicpwd.e.pwd.view.InfoVisibleAction">
                     <stroke key="^ I" />
                 </action>
@@ -287,20 +287,57 @@
     <!--魔方密码工具栏-->
     <toolbar id="mpwd">
         <!--新增-->
-        <item type="normal" tips="$P30F7602">
+        <item type="normal" tips="$P30F7B01">
             <icon>
-                <default id="file-new" path="http://magicpwd.com/logo/logo10.png"/>
+                <default id="file-new" path="skin/feel/%feel%/file-new.png"/>
             </icon>
             <action id="new-keys" class="com.magicpwd.e.pwd.file.NewAction" />
         </item>
         <!--保存-->
-        <item type="normal" tips="$P30F7603">
+        <item type="normal" tips="$P30F7B02">
             <icon>
-                <default id="file-new" path="http://magicpwd.com/logo/logo10.png"/>
+                <default id="file-save" path="skin/feel/%feel%/file-save.png"/>
             </icon>
             <action id="save-keys" class="com.magicpwd.e.pwd.file.SaveAction" />
         </item>
         <seperator />
+        <!--上移-->
+        <item type="normal" tips="$P30F7B03">
+            <icon>
+                <default id="file-save" path="skin/feel/%feel%/edit-move-up.png"/>
+            </icon>
+            <action id="edit-prev" class="com.magicpwd.e.pwd.edit.PrevAction" />
+        </item>
+        <!--下移-->
+        <item type="normal" tips="$P30F7B04">
+            <icon>
+                <default id="file-save" path="skin/feel/%feel%/edit-move-down.png"/>
+            </icon>
+            <action id="edit-next" class="com.magicpwd.e.pwd.edit.NextAction" />
+        </item>
+        <seperator />
+        <!--历史记录-->
+        <item id="tool-edit-history" type="toggle" tips="$P30F7B05">
+            <icon>
+                <default id="edit-history" path="skin/feel/%feel%/edit-history.png"/>
+            </icon>
+            <action id="edit-history" class="com.magicpwd.e.pwd.edit.PrevAction" />
+        </item>
+        <!--属性编辑-->
+        <item id="tool-edit-isolate" type="toggle" tips="$P30F7B06" command="menu-edit-isolate">
+            <icon>
+                <default id="edit-isolate" path="skin/feel/%feel%/edit-isolate.png"/>
+            </icon>
+            <action id="edit-isolate" class="com.magicpwd.e.pwd.view.EditIsolateAction" />
+        </item>
+        <seperator />
+        <!--帮助-->
+        <item type="normal" tips="$P30F7B07">
+            <icon>
+                <default id="file-help" path="skin/feel/%feel%/help.png"/>
+            </icon>
+            <action class="com.magicpwd.e.HelpAction" />
+        </item>
     </toolbar>
 
     <!--魔方密码弹出菜单-->
