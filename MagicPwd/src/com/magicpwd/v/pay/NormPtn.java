@@ -4,8 +4,6 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
-import com.magicpwd.c.FindEvt;
-import com.magicpwd.c.MPayEvt;
 
 /**
  * 正常模式：账簿
@@ -13,7 +11,7 @@ import com.magicpwd.c.MPayEvt;
  * @author Amon
  * 
  */
-public class NormPtn extends javax.swing.JFrame implements MPayEvt, FindEvt
+public class NormPtn extends javax.swing.JFrame
 {
 
     public void initView()

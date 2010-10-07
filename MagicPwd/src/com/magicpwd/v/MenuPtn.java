@@ -15,6 +15,7 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.e.pad.IPadAction;
 import com.magicpwd.e.pwd.IPwdAction;
+import com.magicpwd.e.pwd.skin.FeelAction;
 import com.magicpwd.e.pwd.skin.LookAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.r.AmonFF;
@@ -299,15 +300,19 @@ public class MenuPtn
 
         // 动态扩展风格
         java.util.Properties prop = new java.util.Properties();
+        javax.swing.JCheckBoxMenuItem item;
+        WButtonGroup group = new WButtonGroup();
         for (java.io.File ams : files)
         {
             try
             {
                 prop.load(new java.io.FileReader(ams));
-                javax.swing.JMenuItem item = new javax.swing.JMenuItem();
+                item = new javax.swing.JCheckBoxMenuItem();
                 Bean.setText(item, getLang(prop, "text"));
                 Bean.setTips(item, getLang(prop, "tips"));
+                item.setSelected(coreMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN, "default").equals(prop.getProperty("name")));
                 skinMenu.add(item);
+                group.add(item);
                 prop.clear();
             }
             catch (Exception exp)
@@ -330,38 +335,38 @@ public class MenuPtn
         }
 
         javax.swing.JCheckBoxMenuItem item;
-        String skinName = coreMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN_NAME, ConsCfg.DEF_SKIN_SYS);
+        String lookName = coreMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN_NAME, ConsCfg.DEF_SKIN_SYS);
         LookAction action = new LookAction();
         action.setCoreMdl(coreMdl);
         WButtonGroup group = new WButtonGroup();
 
         // Java默认风格
-        java.io.File defaultSkin = new java.io.File(lookFile, ConsEnv.SKIN_DEFAULT + '/' + ConsEnv.SKIN_LOOK_FILE);
+        java.io.File defaultSkin = new java.io.File(lookFile, ConsEnv.SKIN_LOOK_DEFAULT + '/' + ConsEnv.SKIN_LOOK_FILE);
         if (defaultSkin.exists() && defaultSkin.isFile() && defaultSkin.canRead())
         {
             item = new javax.swing.JCheckBoxMenuItem(action);
             Bean.setText(item, Lang.getLang(LangRes.P30F7632, "默认界面"));
             Bean.setTips(item, "");
             item.setActionCommand(ConsCfg.DEF_SKIN_DEF);
-            item.setSelected(skinName.equals(ConsCfg.DEF_SKIN_DEF));
+            item.setSelected(lookName.equals(ConsCfg.DEF_SKIN_DEF));
             lookMenu.add(item);
             group.add(item.getActionCommand(), item);
         }
 
         // 系统默认风格
-        java.io.File sytemSkin = new java.io.File(lookFile, ConsEnv.SKIN_SYSTEM + '/' + ConsEnv.SKIN_LOOK_FILE);
+        java.io.File sytemSkin = new java.io.File(lookFile, ConsEnv.SKIN_LOOK_SYSTEM + '/' + ConsEnv.SKIN_LOOK_FILE);
         if (sytemSkin.exists() && sytemSkin.isFile() && sytemSkin.canRead())
         {
             item = new javax.swing.JCheckBoxMenuItem(action);
             Bean.setText(item, Lang.getLang(LangRes.P30F7633, "系统界面"));
             Bean.setTips(item, "");
             item.setActionCommand(ConsCfg.DEF_SKIN_SYS);
-            item.setSelected(skinName.equals(ConsCfg.DEF_SKIN_SYS));
+            item.setSelected(lookName.equals(ConsCfg.DEF_SKIN_SYS));
             lookMenu.add(item);
             group.add(item.getActionCommand(), item);
         }
 
-        java.io.File dirs[] = lookFile.listFiles(new AmonFF(true, ConsEnv.SKIN_DEFAULT, ConsEnv.SKIN_SYSTEM));
+        java.io.File dirs[] = lookFile.listFiles(new AmonFF(true, ConsEnv.SKIN_LOOK_DEFAULT, ConsEnv.SKIN_LOOK_SYSTEM));
         if (dirs == null || dirs.length < 1)
         {
             return;
@@ -406,7 +411,7 @@ public class MenuPtn
                     item = new javax.swing.JCheckBoxMenuItem(action);
                     Bean.setText(item, getLang(element.attributeValue("text")));
                     Bean.setTips(item, getLang(element.attributeValue("tips")));
-                    item.setSelected(skinName.equals(element.attributeValue("class")));
+                    item.setSelected(lookName.equals(element.attributeValue("class")));
                     item.setActionCommand(type + ":" + dir.getName() + ',' + element.attributeValue("class"));
                     lookMenu.add(item);
                     group.add(item.getActionCommand(), item);
@@ -433,8 +438,9 @@ public class MenuPtn
                         item = new javax.swing.JCheckBoxMenuItem(action);
                         Bean.setText(item, getLang(element.attributeValue("text")));
                         Bean.setTips(item, getLang(element.attributeValue("tips")));
-                        item.setSelected(skinName.equals(element.attributeValue("class")));
-                        item.setActionCommand(type + ":" + dir.getName() + ',' + element.attributeValue("class"));
+                        String clazz = element.attributeValue("class");
+                        item.setSelected(lookName.equals(clazz));
+                        item.setActionCommand(type + ":" + dir.getName() + ',' + clazz);
                         subMenu.add(item);
                         group.add(item.getActionCommand(), item);
                     }
@@ -447,11 +453,64 @@ public class MenuPtn
         }
     }
 
-    private static void loadFeel(javax.swing.JMenu skinMenu)
+    private void loadFeel(javax.swing.JMenu skinMenu)
     {
         javax.swing.JMenu feelMenu = new javax.swing.JMenu();
         feelMenu.setText("Feel");
         skinMenu.add(feelMenu);
+
+        java.io.File feelFile = new java.io.File(ConsEnv.DIR_SKIN, ConsEnv.DIR_FEEL);
+        if (!feelFile.exists() || !feelFile.isDirectory() || !feelFile.canRead())
+        {
+            return;
+        }
+
+        java.io.File dirs[] = feelFile.listFiles(new AmonFF(true));
+        if (dirs == null || dirs.length < 1)
+        {
+            return;
+        }
+
+        javax.swing.JCheckBoxMenuItem item;
+        String feelName = coreMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN_FEEL, ConsCfg.DEF_FEEL_DEF);
+        FeelAction action = new FeelAction();
+        action.setCoreMdl(coreMdl);
+        WButtonGroup group = new WButtonGroup();
+
+        java.util.Properties prop = new java.util.Properties();
+        java.io.InputStreamReader reader = null;
+        for (java.io.File dir : dirs)
+        {
+            java.io.File amf = new java.io.File(dir, ConsEnv.SKIN_FEEL_FILE);
+            if (!amf.exists() || !amf.isFile() || !amf.canRead())
+            {
+                continue;
+            }
+            try
+            {
+                reader = new java.io.InputStreamReader(new java.io.FileInputStream(amf));
+                prop.load(reader);
+
+                item = new javax.swing.JCheckBoxMenuItem(action);
+                Bean.setText(item, getLang(prop, "text"));
+                Bean.setTips(item, getLang(prop, "tips"));
+                String name = dir.getName();
+                item.setSelected(feelName.equals(name));
+                item.setActionCommand(name);
+                feelMenu.add(item);
+                group.add(name, item);
+
+                prop.clear();
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+            finally
+            {
+                Bean.closeReader(reader);
+            }
+        }
     }
 
     private javax.swing.AbstractButton processText(Element element, javax.swing.AbstractButton button)

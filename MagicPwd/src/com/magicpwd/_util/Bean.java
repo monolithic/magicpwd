@@ -138,6 +138,21 @@ public class Bean
         }
     }
 
+    public static void closeReader(java.io.Reader reader)
+    {
+        if (reader != null)
+        {
+            try
+            {
+                reader.close();
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+        }
+    }
+
     public static void closeStream(java.io.InputStream stream)
     {
         if (stream != null)

@@ -174,6 +174,7 @@ public interface ConsCfg
      */
     String DEF_SKIN_SYS = "system";
     String DEF_SKIN_DEF = "default";
+    String DEF_FEEL_DEF = "default";
     String DEF_TRAY = "icon";
     /**
      * 默认数据：剪贴板数据保留时长

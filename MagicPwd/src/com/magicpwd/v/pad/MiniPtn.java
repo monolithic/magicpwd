@@ -11,8 +11,6 @@ import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
-import com.magicpwd.c.FindEvt;
-import com.magicpwd.c.MPadEvt;
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.e.pad.FindAction;
 import com.magicpwd.e.pad.NewAction;
@@ -29,7 +27,7 @@ import com.magicpwd.v.TrayPtn;
  *
  * @author Amon
  */
-public class MiniPtn extends javax.swing.JFrame implements MPadEvt, FindEvt
+public class MiniPtn extends javax.swing.JFrame
 {
 
     private String lastHash;
