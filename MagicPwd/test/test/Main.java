@@ -10,10 +10,11 @@ public class Main
 
     public static void main(String args[])
     {
+        JFrame.setDefaultLookAndFeelDecorated(true);
         MenuPtn ptn = new MenuPtn(null);
         try
         {
-            ptn.loadData("dat/menu.xml");
+            ptn.loadData("dat/mpay.xml");
         }
         catch (Exception exp)
         {
