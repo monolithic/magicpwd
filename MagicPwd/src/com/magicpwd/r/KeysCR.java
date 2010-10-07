@@ -75,9 +75,9 @@ public class KeysCR extends javax.swing.JPanel implements javax.swing.ListCellRe
             Keys keys = (Keys) value;
             lb_Text.setText(keys.getP30F0109());
             setToolTipText(com.magicpwd._util.Char.isValidate(keys.getP30F010A()) ? keys.getP30F010A() : keys.getP30F0109());
-            lb_Text.setIcon(Bean.getIcon(keys.getP30F010B()));
-            lb_Note.setIcon(Bean.getIcon("major" + keys.getP30F0103()));
-            lb_Mode.setIcon(Bean.getIcon("label" + keys.getP30F0102()));
+            lb_Text.setIcon(Bean.getDataIcon(keys.getP30F010B()));
+            lb_Note.setIcon(Bean.getSkinIcon("major" + keys.getP30F0103()));
+            lb_Mode.setIcon(Bean.getSkinIcon("label" + keys.getP30F0102()));
         }
         // 其它
         else if (value != null)

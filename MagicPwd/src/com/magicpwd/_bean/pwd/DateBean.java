@@ -56,7 +56,7 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_DateView = new BtnLabel();
-        bt_DateView.setIcon(Bean.readIcon(mainPtn.getCoreMdl().getUserCfg(), ConsEnv.FEEL_PATH + "date.png"));
+        bt_DateView.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "date.png", mainPtn.getCoreMdl().getUserCfg()));
         bt_DateView.addActionListener(new java.awt.event.ActionListener()
         {
 

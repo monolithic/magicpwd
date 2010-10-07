@@ -795,7 +795,7 @@ public class MenuPtn
         boolean validate = Char.isValidate(hash);
         if (validate)
         {
-            javax.swing.Icon icon = Bean.getIcon(hash);
+            javax.swing.Icon icon = Bean.getSkinIcon(hash);
             if (icon != null)
             {
                 return icon;
@@ -805,10 +805,10 @@ public class MenuPtn
         String path = element.attributeValue("path");
         if (Char.isValidate(path))
         {
-            javax.swing.ImageIcon icon = Bean.readIcon(coreMdl.getUserCfg(), path);
+            javax.swing.ImageIcon icon = Bean.readIcon(path, coreMdl.getUserCfg());
             if (validate)
             {
-                Bean.setIcon(hash, icon);
+                Bean.setSkinIcon(hash, icon);
             }
             return icon;
         }

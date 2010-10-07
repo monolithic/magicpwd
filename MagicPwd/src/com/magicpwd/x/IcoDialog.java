@@ -310,7 +310,7 @@ class IcoModel extends javax.swing.table.AbstractTableModel
             }
 
             String key = matcher.group();
-            iconList.add(newLabel(i, Bean.getIcon(key), key));
+            iconList.add(newLabel(i, new javax.swing.ImageIcon(file.getAbsolutePath()), key));
             if (key.equalsIgnoreCase(lastIcon))
             {
                 selected = i;
@@ -351,10 +351,8 @@ class IcoModel extends javax.swing.table.AbstractTableModel
         fos.flush();
         fos.close();
 
-        javax.swing.ImageIcon ico = new javax.swing.ImageIcon(img);
-        Bean.setIcon(hash, ico);
         int i = iconList.size();
-        iconList.add(newLabel(i, ico, hash));
+        iconList.add(newLabel(i, new javax.swing.ImageIcon(img), hash));
 
         selected = i;
         fireTableDataChanged();
@@ -418,6 +416,9 @@ class IcoModel extends javax.swing.table.AbstractTableModel
             return "";
         }
 
-        return (String) iconList.get(index).getClientProperty("hash");
+        javax.swing.JLabel label = iconList.get(index);
+        String hash = (String) label.getClientProperty("hash");
+        Bean.setDataIcon(hash, label.getIcon());
+        return hash;
     }
 }

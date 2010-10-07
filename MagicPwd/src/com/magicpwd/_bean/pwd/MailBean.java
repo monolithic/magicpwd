@@ -59,7 +59,7 @@ public class MailBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_MailView = new BtnLabel();
-        bt_MailView.setIcon(Bean.readIcon(mainPtn.getCoreMdl().getUserCfg(), ConsEnv.FEEL_PATH + "mail-send.png"));
+        bt_MailView.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "mail-send.png", mainPtn.getCoreMdl().getUserCfg()));
         bt_MailView.addActionListener(new java.awt.event.ActionListener()
         {
 

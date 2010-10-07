@@ -204,7 +204,7 @@ public class DBA3000
         }
     }
 
-    public static boolean readTaskList(UserCfg cfg, java.sql.Timestamp time, List<Keys> list)
+    public static boolean readTaskList(UserCfg cfg, java.sql.Timestamp s, java.sql.Timestamp t, List<Keys> list)
     {
         // 数据库连接初始化
         DBAccess dba = new DBAccess();
@@ -216,7 +216,7 @@ public class DBA3000
             // 查询语句拼接
             dba.addTable(DBC3000.P30F0100);
             addUserSort(dba, cfg);
-            dba.addWhere(DBC3000.P30F010D + " BETWEEN " + DBC3000.SQL_NOW + " AND '" + time + '\'');
+            dba.addWhere(DBC3000.P30F010D + " BETWEEN '" + s + "' AND '" + t + '\'');
             addDataSort(dba, cfg);
 
             getNameData(dba.executeSelect(), list);

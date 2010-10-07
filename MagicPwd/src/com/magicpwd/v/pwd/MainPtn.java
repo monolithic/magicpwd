@@ -19,6 +19,7 @@ import com.magicpwd._comn.I1S2;
 import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._comn.Keys;
 import com.magicpwd._comn.item.GuidItem;
+import com.magicpwd._comn.item.LogoItem;
 import com.magicpwd._comn.item.MetaItem;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.ConsCfg;
@@ -232,14 +233,21 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         }
 
         // 标题为空检测
-        MetaItem meta = (MetaItem) gridMdl.getItemAt(ConsEnv.PWDS_HEAD_META);
-        if (!com.magicpwd._util.Char.isValidate(meta.getName()))
+        MetaItem metaItem = (MetaItem) gridMdl.getItemAt(ConsEnv.PWDS_HEAD_META);
+        String name = metaItem.getName();
+        if (!com.magicpwd._util.Char.isValidate(name))
         {
             Lang.showMesg(this, LangRes.P30F7A0C, "请输入口令标题！");
             tb_KeysView.setRowSelectionInterval(1, 1);
-            showPropEdit(meta, true);
+            showPropEdit(metaItem, true);
             return false;
         }
+
+        // 徽标
+        LogoItem logoItem = (LogoItem) gridMdl.getItemAt(ConsEnv.PWDS_HEAD_LOGO);
+        String logo = logoItem.getName();
+
+        boolean isUpdate = gridMdl.isUpdate();
 
         try
         {
@@ -254,9 +262,9 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         }
 
         // 数据新增的情况下，需要重新显示列表信息
-        if (gridMdl.isUpdate())
+        if (isUpdate)
         {
-            coreMdl.getListMdl().updtName(ls_GuidList.getSelectedIndex(), gridMdl.getItemAt(ConsEnv.PWDS_HEAD_META).getName());
+            coreMdl.getListMdl().updtName(ls_GuidList.getSelectedIndex(), name, logo);
         }
         else
         {
@@ -387,6 +395,11 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         if (updt)
         {
             gridMdl.fireTableDataChanged();
+        }
+
+        if (step == 0)
+        {
+            return;
         }
 
         int c = tb_KeysView.getRowCount() - 1;
@@ -876,15 +889,16 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
     private void listTask(Kind kind)
     {
         String task = kind.getC2010107();
-        java.util.Calendar cal = java.util.Calendar.getInstance();
+        java.util.Calendar c = java.util.Calendar.getInstance();
+        java.util.Date s = c.getTime();
         if ("task".equals(task))
         {
-            cal.set(java.util.Calendar.HOUR_OF_DAY, 0);
-            cal.set(java.util.Calendar.MINUTE, 0);
-            cal.set(java.util.Calendar.SECOND, 0);
-            cal.set(java.util.Calendar.MILLISECOND, 0);
-            cal.add(java.util.Calendar.DAY_OF_MONTH, 1);
-            coreMdl.getListMdl().listTask(cal);
+            c.set(java.util.Calendar.HOUR_OF_DAY, 0);
+            c.set(java.util.Calendar.MINUTE, 0);
+            c.set(java.util.Calendar.SECOND, 0);
+            c.set(java.util.Calendar.MILLISECOND, 0);
+            c.add(java.util.Calendar.DAY_OF_MONTH, 1);
+            coreMdl.getListMdl().listTask(s, c.getTime());
             return;
         }
         java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("\\d+").matcher(task);
@@ -895,44 +909,44 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         int time = Integer.parseInt(matcher.group());
         if (task.endsWith("second"))
         {
-            cal.add(java.util.Calendar.SECOND, time);
-            coreMdl.getListMdl().listTask(cal);
+            c.add(java.util.Calendar.SECOND, time);
+            coreMdl.getListMdl().listTask(s, c.getTime());
             return;
         }
         if (task.endsWith("minute"))
         {
-            cal.add(java.util.Calendar.MINUTE, time);
-            coreMdl.getListMdl().listTask(cal);
+            c.add(java.util.Calendar.MINUTE, time);
+            coreMdl.getListMdl().listTask(s, c.getTime());
             return;
         }
         if (task.endsWith("hour"))
         {
-            cal.add(java.util.Calendar.HOUR_OF_DAY, time);
-            coreMdl.getListMdl().listTask(cal);
+            c.add(java.util.Calendar.HOUR_OF_DAY, time);
+            coreMdl.getListMdl().listTask(s, c.getTime());
             return;
         }
         if (task.endsWith("day"))
         {
-            cal.add(java.util.Calendar.DAY_OF_MONTH, time);
-            coreMdl.getListMdl().listTask(cal);
+            c.add(java.util.Calendar.DAY_OF_MONTH, time);
+            coreMdl.getListMdl().listTask(s, c.getTime());
             return;
         }
         if (task.endsWith("week"))
         {
-            cal.add(java.util.Calendar.WEEK_OF_YEAR, time);
-            coreMdl.getListMdl().listTask(cal);
+            c.add(java.util.Calendar.WEEK_OF_YEAR, time);
+            coreMdl.getListMdl().listTask(s, c.getTime());
             return;
         }
         if (task.endsWith("month"))
         {
-            cal.add(java.util.Calendar.MONTH, time);
-            coreMdl.getListMdl().listTask(cal);
+            c.add(java.util.Calendar.MONTH, time);
+            coreMdl.getListMdl().listTask(s, c.getTime());
             return;
         }
         if (task.endsWith("year"))
         {
-            cal.add(java.util.Calendar.YEAR, time);
-            coreMdl.getListMdl().listTask(cal);
+            c.add(java.util.Calendar.YEAR, time);
+            coreMdl.getListMdl().listTask(s, c.getTime());
             return;
         }
     }

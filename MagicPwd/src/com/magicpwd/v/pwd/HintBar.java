@@ -25,10 +25,12 @@ public class HintBar extends JPanel
 
     private DateFormat dateTplt;
     private Timer tm_TimeNote;
+    private MainPtn mainPtn;
     private HintMdl hintMdl;
 
     public HintBar(MainPtn mainPtn, HintMdl hintMdl)
     {
+        this.mainPtn = mainPtn;
         this.hintMdl = hintMdl;
     }
 
@@ -100,12 +102,11 @@ public class HintBar extends JPanel
     {
         if (hintMdl.getUnreadCount() > 0)
         {
-//            UserMdl.getListMdl().clear();
-//            for (Keys keys : hintMdl.getUnread())
-//            {
-//                UserMdl.getListMdl().wAppend(keys);
-//            }
-            showNote();
+            java.util.Calendar c = java.util.Calendar.getInstance();
+            java.util.Date s = c.getTime();
+            c.add(java.util.Calendar.DAY_OF_MONTH, 1);
+            java.util.Date t = c.getTime();
+            mainPtn.getCoreMdl().getListMdl().listTask(s, t);
         }
     }
 

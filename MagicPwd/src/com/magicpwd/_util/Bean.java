@@ -24,7 +24,8 @@ public class Bean
 
     private static ImageIcon bi_NoneIcon;
     private static Map<Integer, BufferedImage> mp_LogoIcon;
-    private static Map<String, ImageIcon> mp_ImgList;
+    private static Map<String, javax.swing.Icon> mp_SkinIcon;
+    private static Map<String, javax.swing.Icon> mp_DataIcon;
 
     public static void setText(BtnLabel c, String t)
     {
@@ -168,33 +169,63 @@ public class Bean
         }
     }
 
-    public static ImageIcon getIcon(String name)
+    public static javax.swing.Icon getSkinIcon(String name)
     {
         if (!Char.isValidate(name))
         {
             return getNone();
         }
-        if (mp_ImgList == null)
+        if (mp_SkinIcon == null)
         {
-            mp_ImgList = new HashMap<String, ImageIcon>();
+            mp_SkinIcon = new HashMap<String, javax.swing.Icon>();
         }
-        return mp_ImgList.get(name);
+        return mp_SkinIcon.get(name);
     }
 
-    public static void setIcon(String name, ImageIcon icon)
+    public static void setSkinIcon(String name, javax.swing.Icon icon)
     {
         if (!Char.isValidate(name))
         {
             return;
         }
-        if (mp_ImgList == null)
+        if (mp_SkinIcon == null)
         {
-            mp_ImgList = new HashMap<String, ImageIcon>();
+            mp_SkinIcon = new HashMap<String, javax.swing.Icon>();
         }
-        mp_ImgList.put(name, icon);
+        mp_SkinIcon.put(name, icon);
     }
 
-    public static synchronized ImageIcon getNone()
+    public static javax.swing.Icon getDataIcon(String hash)
+    {
+        if (!Char.isValidateHash(hash))
+        {
+            return getNone();
+        }
+        if (mp_DataIcon == null)
+        {
+            mp_DataIcon = new HashMap<String, javax.swing.Icon>();
+        }
+        if (!mp_DataIcon.containsKey(hash))
+        {
+            mp_DataIcon.put(hash, new javax.swing.ImageIcon(Char.format("{0}/{1}/{2}.png", ConsEnv.DIR_DAT, ConsEnv.DIR_ICO, hash)));
+        }
+        return mp_DataIcon.get(hash);
+    }
+
+    public static void setDataIcon(String hash, javax.swing.Icon icon)
+    {
+        if (!Char.isValidateHash(hash))
+        {
+            return;
+        }
+        if (mp_DataIcon == null)
+        {
+            mp_DataIcon = new HashMap<String, javax.swing.Icon>();
+        }
+        mp_DataIcon.put(hash, icon);
+    }
+
+    public static synchronized javax.swing.Icon getNone()
     {
         if (bi_NoneIcon == null)
         {
@@ -229,18 +260,17 @@ public class Bean
         return logo;
     }
 
-    public static ImageIcon readIcon(UserCfg userCfg, String path)
+    public static ImageIcon readIcon(String path, UserCfg userCfg)
     {
         if (!Char.isValidate(path))
         {
             return null;
         }
 
-        path = path.replace("%feel%", userCfg.getCfg(ConsCfg.CFG_SKIN_FEEL, "default"));
         java.io.InputStream stream = null;
         try
         {
-            stream = File.open4Read(path);
+            stream = File.open4Read(path.replace(ConsEnv.FEEL_ARGS, userCfg.getCfg(ConsCfg.CFG_SKIN_FEEL, ConsEnv.SKIN_FEEL_DEFAULT)));
             return new javax.swing.ImageIcon(javax.imageio.ImageIO.read(stream));
         }
         catch (Exception exp)
