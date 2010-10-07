@@ -659,9 +659,21 @@ public class MenuPtn
             }
         }
         button.addActionListener(action);
-        button.setEnabled(action.getValue("enabled") != Boolean.FALSE);
-        button.setSelected(action.getValue("selected") == Boolean.TRUE);
-        button.setVisible(action.getValue("visible") != Boolean.FALSE);
+        Object obj = action.getValue("enabled");
+        if (obj != null)
+        {
+            button.setEnabled(obj != Boolean.FALSE);
+        }
+        obj = action.getValue("selected");
+        if (obj != null)
+        {
+            button.setSelected(obj == Boolean.TRUE);
+        }
+        obj = action.getValue("visible");
+        if (obj != null)
+        {
+            button.setVisible(obj != Boolean.FALSE);
+        }
         processStrokes(element, button, action, component);
         processReference(element, button, action);
         return button;
