@@ -290,7 +290,7 @@ class IcoModel extends javax.swing.table.AbstractTableModel
         }
 
         java.io.File[] fileList = icoPath.listFiles(new AmonFF("[0-9a-z]{16}\\.png", false));
-        if (fileList == null)
+        if (fileList == null || fileList.length < 1)
         {
             return;
         }
