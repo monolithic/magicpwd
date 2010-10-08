@@ -5,6 +5,7 @@
 package com.magicpwd._mail;
 
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._util.Char;
 import javax.mail.Message;
 import javax.mail.Multipart;
 import javax.mail.Part;
@@ -119,6 +120,10 @@ public class Reader extends Mailer
      */
     private void saveAttach(String fileName, java.io.InputStream inStream) throws Exception
     {
+        if (!Char.isValidate(fileName))
+        {
+            return;
+        }
         java.io.File file = new java.io.File(getAttachmentPath(), fileName);
 
         java.io.BufferedOutputStream bos = null;
