@@ -19,13 +19,6 @@ public class Test
 
     public static void main(String[] args)
     {
-        new JFrame().setUndecorated(true);
-        for (Action action : new JTextArea().getActions())
-        {
-            ButtonGroup bg = new ButtonGroup();
-            bg.setSelected(new JCheckBox().getModel(), true);
-            System.out.println(action.getValue(action.ACCELERATOR_KEY));
-            System.out.println(action.getValue(action.NAME));
-        }
+        System.out.println("\"\"\"adf\"\"".replaceAll("[\"]{2}+", ""));
     }
 }
