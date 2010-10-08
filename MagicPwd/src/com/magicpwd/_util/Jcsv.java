@@ -20,10 +20,12 @@ import com.magicpwd._cons.ConsEnv;
  */
 public class Jcsv
 {
+
     private java.io.File fn;
-
+    /**
+     * 是否包含头部
+     */
     private boolean hd = true;
-
     private String es = "\"";
     private String ee = "\"";
     private String sp = ",";
@@ -64,15 +66,45 @@ public class Jcsv
     {
         ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fn), fe));
-        String line = br.readLine();
+
+        String row = null;
+        String tmp1;
+        String tmp2;
+        String line;
         if (hd)
         {
             line = br.readLine();
         }
-        while (line != null)
+        while (true)
         {
-            data.add(deCode(line));
             line = br.readLine();
+            // 最后一行存在错误的情况下，不做处理
+            if (line == null)
+            {
+                break;
+            }
+
+            // 已有换行
+            if (row != null)
+            {
+                // 中间换行
+                row += sl + line;
+            }
+            else
+            {
+                row = line;
+            }
+
+            tmp1 = line.replaceAll("[" + es + "]{2}+", "").replaceAll("[" + ee + "]{2}+", "").replaceAll("(" + es + "\\s+" + sp + "\\s+" + ee + ")", es + sp + ee);
+            tmp2 = tmp1.replaceAll(ee + "\\s*" + sp + "\\s*$", "");
+            // 结束换行
+            if (tmp1.equals(tmp2) && tmp2.lastIndexOf(ee) >= tmp2.lastIndexOf(es + sp + ee))
+            {
+                continue;
+            }
+
+            data.add(deCode(row));
+            row = null;
         }
         br.close();
 
@@ -119,7 +151,7 @@ public class Jcsv
         int s = 0;
         int e = text.indexOf(sp, s);
         String temp;
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         while (e >= s)
         {
             temp = text.substring(s, e);
@@ -188,7 +220,7 @@ public class Jcsv
             return sp;
         }
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         boolean b = false;
         for (String temp : data)

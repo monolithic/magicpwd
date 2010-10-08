@@ -1277,7 +1277,6 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         try
         {
             Jcsv csv = new Jcsv(file);
-            csv.setEe("");
             java.util.ArrayList<java.util.ArrayList<String>> data = csv.readFile();
             int size = gridMdl.wImport(data, kind.getC2010103());
             coreMdl.getListMdl().listName(kind.getC2010103());
