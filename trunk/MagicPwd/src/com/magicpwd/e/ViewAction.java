@@ -13,8 +13,6 @@ import com.magicpwd.v.TrayPtn;
 public class ViewAction extends javax.swing.AbstractAction
 {
 
-    private TrayPtn trayPtn;
-
     public ViewAction()
     {
     }
@@ -22,6 +20,6 @@ public class ViewAction extends javax.swing.AbstractAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        trayPtn.changeView();
+        TrayPtn.getInstance().changeView();
     }
 }

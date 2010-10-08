@@ -151,7 +151,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
 
     public boolean initData()
     {
-        changeView();
+        changeView(coreMdl.getUserCfg().getCfg(ConsCfg.CFG_TRAY_PTN, "guid"));
         return true;
     }
 
@@ -561,6 +561,12 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
 
     public void changeView()
     {
+        String view = coreMdl.getUserCfg().getCfg(ConsCfg.CFG_TRAY_PTN, "guid");
+        changeView(ConsCfg.DEF_TRAY.equals(view) ? "guid" : ConsCfg.DEF_TRAY);
+    }
+
+    public void changeView(String view)
+    {
         javax.swing.AbstractButton button = menuPtn.getButton("viewPtn");
         if (!java.awt.SystemTray.isSupported())
         {
@@ -572,10 +578,9 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         }
 
         UserCfg uc = coreMdl.getUserCfg();
-        String ptn = uc.getCfg(ConsCfg.CFG_TRAY_PTN, "guid");
 
         // 下一步：显示为托盘图标
-        if (ConsCfg.DEF_TRAY.equalsIgnoreCase(ptn))
+        if (ConsCfg.DEF_TRAY.equalsIgnoreCase(view))
         {
             try
             {
