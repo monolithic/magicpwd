@@ -395,11 +395,11 @@ public final class UserCfg
 
     public String getUserCode()
     {
-        return "";//userSec.getCode();
+        return userCfg.getProperty(ConsCfg.CFG_USER_CODE, "");
     }
 
     public String getUserName()
     {
-        return "";//userSec.getName();
+        return userCfg.getProperty(ConsCfg.CFG_USER_NAME, "");
     }
 }
