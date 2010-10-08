@@ -306,7 +306,7 @@ public class MenuPtn
         {
             try
             {
-                prop.load(new java.io.FileReader(ams));
+                prop.load(new java.io.InputStreamReader(new java.io.FileInputStream(ams), ConsEnv.FILE_ENCODING));
                 item = new javax.swing.JCheckBoxMenuItem();
                 Bean.setText(item, getLang(prop, "text"));
                 Bean.setTips(item, getLang(prop, "tips"));
@@ -483,7 +483,7 @@ public class MenuPtn
         WButtonGroup group = new WButtonGroup();
 
         java.util.Properties prop = new java.util.Properties();
-        java.io.FileReader reader = null;
+        java.io.InputStreamReader reader = null;
         for (java.io.File dir : dirs)
         {
             java.io.File amf = new java.io.File(dir, ConsEnv.SKIN_FEEL_FILE);
@@ -493,7 +493,7 @@ public class MenuPtn
             }
             try
             {
-                reader = new java.io.FileReader(amf);
+                reader = new java.io.InputStreamReader(new java.io.FileInputStream(amf), ConsEnv.FILE_ENCODING);
                 prop.load(reader);
 
                 item = new javax.swing.JCheckBoxMenuItem(action);
