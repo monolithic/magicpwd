@@ -483,7 +483,7 @@ public class MenuPtn
         WButtonGroup group = new WButtonGroup();
 
         java.util.Properties prop = new java.util.Properties();
-        java.io.InputStreamReader reader = null;
+        java.io.FileReader reader = null;
         for (java.io.File dir : dirs)
         {
             java.io.File amf = new java.io.File(dir, ConsEnv.SKIN_FEEL_FILE);
@@ -493,7 +493,7 @@ public class MenuPtn
             }
             try
             {
-                reader = new java.io.InputStreamReader(new java.io.FileInputStream(amf));
+                reader = new java.io.FileReader(amf);
                 prop.load(reader);
 
                 item = new javax.swing.JCheckBoxMenuItem(action);
