@@ -12,7 +12,7 @@
         </item>
         <seperator />
         <!--显示为托盘图标-->
-        <item id="viewPtn" type="checkbox" text="$P30F960D">
+        <item id="viewPtn" type="normal" text="$P30F960D">
             <action class="com.magicpwd.e.ViewAction" />
         </item>
         <seperator />
