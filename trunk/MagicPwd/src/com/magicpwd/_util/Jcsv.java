@@ -68,8 +68,6 @@ public class Jcsv
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fn), fe));
 
         String row = null;
-        String tmp1;
-        String tmp2;
         String line;
         if (hd)
         {
@@ -84,6 +82,7 @@ public class Jcsv
                 break;
             }
 
+            line = line.replaceAll("\r\n?", "\n").replaceAll("[" + es + "]{2}+", "\r").replaceAll("[" + ee + "]{2}+", "\b");
             // 已有换行
             if (row != null)
             {
@@ -95,10 +94,11 @@ public class Jcsv
                 row = line;
             }
 
-            tmp1 = line.replaceAll("[" + es + "]{2}+", "").replaceAll("[" + ee + "]{2}+", "").replaceAll("(" + es + "\\s+" + sp + "\\s+" + ee + ")", es + sp + ee);
-            tmp2 = tmp1.replaceAll(ee + "\\s*" + sp + "\\s*$", "");
+            line = line.replaceAll("(" + es + "\\s+" + sp + "\\s+" + ee + ")", es + sp + ee);
             // 结束换行
-            if (tmp1.equals(tmp2) && tmp2.lastIndexOf(ee) >= tmp2.lastIndexOf(es + sp + ee))
+            int ie = line.lastIndexOf(ee);
+            int is = line.lastIndexOf(sp + ee);
+            if (is > -1 && ie > is || ie == is)
             {
                 continue;
             }
@@ -125,6 +125,11 @@ public class Jcsv
         }
         bw.flush();
         bw.close();
+    }
+
+    private void append(ArrayList<String> data, String text)
+    {
+        data.add(text.replace("\r", es).replace("\b", ee));
     }
 
     private ArrayList<String> deCode(String text)
@@ -169,7 +174,7 @@ public class Jcsv
                         {
                             temp = temp.replace(ee + ee, ee);
                         }
-                        data.add(temp);
+                        append(data, temp);
                     }
                     else
                     {
@@ -179,7 +184,7 @@ public class Jcsv
                 }
                 else
                 {
-                    data.add(temp);
+                    append(data, temp);
                 }
             }
             else
@@ -192,7 +197,7 @@ public class Jcsv
                     {
                         temp = temp.replace(ee + ee, ee);
                     }
-                    data.add(temp);
+                    append(data, temp);
                     sb.delete(0, sb.length());
                     b = false;
                 }
