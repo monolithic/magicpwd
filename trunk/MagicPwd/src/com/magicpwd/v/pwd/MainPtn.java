@@ -396,8 +396,7 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         {
             gridMdl.fireTableDataChanged();
         }
-
-        if (step == 0)
+        else if (step == 0)
         {
             return;
         }
