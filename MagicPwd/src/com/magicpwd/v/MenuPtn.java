@@ -17,6 +17,7 @@ import com.magicpwd.e.pad.IPadAction;
 import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.e.pwd.skin.FeelAction;
 import com.magicpwd.e.pwd.skin.LookAction;
+import com.magicpwd.e.pwd.skin.ThemeAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.r.AmonFF;
 import java.util.List;
@@ -290,6 +291,7 @@ public class MenuPtn
         }
 
         loadLook(skinMenu);
+        loadTheme(skinMenu);
         loadFeel(skinMenu);
 
         java.io.File[] files = skinFile.listFiles(new AmonFF("[^\\s]+[.ams]$", true));
@@ -325,7 +327,7 @@ public class MenuPtn
     private void loadLook(javax.swing.JMenu skinMenu)
     {
         javax.swing.JMenu lookMenu = new javax.swing.JMenu();
-        lookMenu.setText("Look");
+        Bean.setText(lookMenu, Lang.getLang(LangRes.P30F763B, "外观"));
         skinMenu.add(lookMenu);
 
         java.io.File lookFile = new java.io.File(ConsEnv.DIR_SKIN, ConsEnv.DIR_LOOK);
@@ -458,10 +460,36 @@ public class MenuPtn
         }
     }
 
+    private void loadTheme(javax.swing.JMenu skinMenu)
+    {
+        javax.swing.JMenu themeMenu = new javax.swing.JMenu();
+        Bean.setText(themeMenu, Lang.getLang(LangRes.P30F763C, "主题"));
+        skinMenu.add(themeMenu);
+
+        javax.swing.JCheckBoxMenuItem item;
+        ThemeAction action = new ThemeAction();
+        action.setCoreMdl(coreMdl);
+        WButtonGroup group = new WButtonGroup();
+
+        // Java默认风格
+//        java.io.File defaultSkin = new java.io.File(lookFile, ConsEnv.SKIN_LOOK_DEFAULT + '/' + ConsEnv.SKIN_LOOK_FILE);
+//        if (defaultSkin.exists() && defaultSkin.isFile() && defaultSkin.canRead())
+//        {
+            item = new javax.swing.JCheckBoxMenuItem();
+            item.addActionListener(action);
+            Bean.setText(item, Lang.getLang(LangRes.P30F763E, "默认主题"));
+            Bean.setTips(item, "");
+            item.setActionCommand(ConsCfg.DEF_SKIN_DEF);
+            item.setSelected(true);
+            themeMenu.add(item);
+            group.add(item.getActionCommand(), item);
+//        }
+    }
+
     private void loadFeel(javax.swing.JMenu skinMenu)
     {
         javax.swing.JMenu feelMenu = new javax.swing.JMenu();
-        feelMenu.setText("Feel");
+        Bean.setText(feelMenu, Lang.getLang(LangRes.P30F763D, "图标"));
         skinMenu.add(feelMenu);
 
         java.io.File feelFile = new java.io.File(ConsEnv.DIR_SKIN, ConsEnv.DIR_FEEL);

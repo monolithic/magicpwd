@@ -4,7 +4,7 @@
     <menupop id="tray">
         <!--关于-->
         <item type="normal" text="$P30F9601">
-            <action class="com.magicpwd.e.pwd.help.InfoAction" />
+            <action class="com.magicpwd.e.InfoAction" />
         </item>
         <!--帮助-->
         <item type="normal" text="$P30F9602">
