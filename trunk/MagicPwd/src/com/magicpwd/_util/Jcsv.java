@@ -67,6 +67,7 @@ public class Jcsv
         ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
         BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fn), fe));
 
+        boolean wrap = false;
         String row = null;
         String line;
         if (hd)
@@ -94,17 +95,35 @@ public class Jcsv
                 row = line;
             }
 
-            line = line.replaceAll("(" + es + "\\s+" + sp + "\\s+" + ee + ")", es + sp + ee);
-            // 结束换行
-            int ie = line.lastIndexOf(ee);
-            int is = line.lastIndexOf(sp + ee);
-            if (is > -1 && ie > is || ie == is)
+            if (!line.endsWith(sp))
             {
-                continue;
+                line += sp;
+            }
+            line = line.replaceAll(sp + "\\s+" + es, sp + es);//,  "
+            line = line.replaceAll(ee + "\\s+" + sp, ee + sp);//"  ,
+            if (wrap)
+            {
+                int ie = line.indexOf(ee + sp);
+                int is = line.indexOf(sp + es);
+                if (ie < is || ie < 0)
+                {
+                    continue;
+                }
+            }
+            else
+            {
+                int ie = line.lastIndexOf(ee + sp);//",
+                int is = line.lastIndexOf(sp + es);//,"
+                if (ie < is)
+                {
+                    wrap = true;
+                    continue;
+                }
             }
 
             data.add(deCode(row));
             row = null;
+            wrap = false;
         }
         br.close();
 
