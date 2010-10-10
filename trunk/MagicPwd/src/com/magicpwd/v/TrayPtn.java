@@ -35,7 +35,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
     private static TrayPtn trayPtn;
     private static UserPtn userPtn;
     private static javax.swing.JFrame mf_CurrForm;
-    private static javax.swing.JDialog md_TrayForm;
+    private static javax.swing.JWindow md_TrayForm;
     private static javax.swing.event.PopupMenuListener listener;
     private MenuPtn menuPtn;
 
@@ -65,7 +65,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         // 罗盘视图初始化
         if (md_TrayForm == null)
         {
-            md_TrayForm = new javax.swing.JDialog()
+            md_TrayForm = new javax.swing.JWindow()
             {
 
                 @Override
@@ -78,7 +78,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
                     super.processWindowEvent(evt);
                 }
             };
-            md_TrayForm.setUndecorated(true);
+//            md_TrayForm.setUndecorated(false);
             md_TrayForm.setAlwaysOnTop(true);
 //            md_TrayForm.addWindowListener(new java.awt.event.WindowAdapter()
 //            {
