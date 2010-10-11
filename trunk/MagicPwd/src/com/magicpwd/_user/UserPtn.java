@@ -1011,9 +1011,9 @@ public class UserPtn extends javax.swing.JPanel
         {
             backCall.callBack(null, null, ConsEnv.STR_SIGN_IN);
         }
-        dispoze();
         tf_UserName.setText("");
         pf_UserKey0.setText("");
+        dispoze();
     }
 
     private void signRs()

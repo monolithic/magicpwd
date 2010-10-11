@@ -175,6 +175,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
             }
             mp_MainPtn.setEditIsolate(coreMdl.getUserCfg().isEditIsolate());
             mp_MainPtn.setEditVisible(coreMdl.getUserCfg().isEditVisible());
+            mp_MainPtn.requestFocus();
             initView();
             initLang();
             initData();
