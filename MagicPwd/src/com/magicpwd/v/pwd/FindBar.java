@@ -85,7 +85,6 @@ public class FindBar extends javax.swing.JPanel
 
     public void initData()
     {
-        tf_ItemFind.requestFocus();
     }
 
     @Override

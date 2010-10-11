@@ -859,6 +859,12 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         super.processWindowEvent(e);
     }
 
+    @Override
+    public void requestFocus()
+    {
+        mainFind.requestFocus();
+    }
+
     private void tr_GuidTreeValueChanged(javax.swing.event.TreeSelectionEvent evt)
     {
         javax.swing.tree.TreePath path = tr_GuidTree.getSelectionPath();
