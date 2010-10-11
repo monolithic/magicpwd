@@ -647,6 +647,7 @@ public class UserPtn extends javax.swing.JPanel
             case ConsEnv.INT_SIGN_RS:
                 tf_UserName.setText("");
                 pf_UserKey0.setText("");
+                tf_UserName.requestFocus();
                 break;
             case ConsEnv.INT_SIGN_UP:
                 break;
@@ -1011,6 +1012,8 @@ public class UserPtn extends javax.swing.JPanel
             backCall.callBack(null, null, ConsEnv.STR_SIGN_IN);
         }
         dispoze();
+        tf_UserName.setText("");
+        pf_UserKey0.setText("");
     }
 
     private void signRs()
@@ -1074,6 +1077,8 @@ public class UserPtn extends javax.swing.JPanel
         {
             backCall.callBack(null, null, ConsEnv.STR_SIGN_RS);
         }
+        tf_UserName.setText("");
+        pf_UserKey0.setText("");
     }
 
     private void signUp()
@@ -1262,6 +1267,14 @@ public class UserPtn extends javax.swing.JPanel
      */
     private void signSk()
     {
+        String p0 = new String(pf_UserKey0.getPassword());
+        if (!com.magicpwd._util.Char.isValidate(p0))
+        {
+            Lang.showMesg(this, LangRes.P30FAA02, "请输入登录口令！");
+            pf_UserKey0.requestFocus();
+            return;
+        }
+
         String p1 = new String(pf_UserKey1.getPassword());
         if (!com.magicpwd._util.Char.isValidate(p1))
         {
@@ -1281,13 +1294,6 @@ public class UserPtn extends javax.swing.JPanel
             return;
         }
 
-        String p0 = new String(pf_UserKey0.getPassword());
-        if (!com.magicpwd._util.Char.isValidate(p0))
-        {
-            Lang.showMesg(this, LangRes.P30FAA02, "请输入登录口令！");
-            pf_UserKey0.requestFocus();
-            return;
-        }
         try
         {
             boolean b = safeMdl.signSk(p0, p1);
@@ -1313,6 +1319,9 @@ public class UserPtn extends javax.swing.JPanel
         {
             backCall.callBack(null, null, ConsEnv.STR_SIGN_SK);
         }
+        pf_UserKey0.setText("");
+        pf_UserKey1.setText("");
+        pf_UserKey2.setText("");
         Lang.showMesg(this, LangRes.P30FAA17, "安全口令设定成功！");
     }
 

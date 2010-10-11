@@ -42,5 +42,6 @@ public class CreateUserAction extends javax.swing.AbstractAction implements IPwd
     @Override
     public void doUpdate(Object object)
     {
+        putValue("enabled", false);
     }
 }
