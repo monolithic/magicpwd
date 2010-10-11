@@ -251,8 +251,6 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
 
         try
         {
-            ls_LastIndx = -1;
-            tb_LastIndx = -1;
             gridMdl.saveData(true, true);
         }
         catch (Exception exp)
@@ -281,6 +279,8 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         showPropInfo();
         mainInfo.initData();
 
+        ls_LastIndx = -1;
+        tb_LastIndx = -1;
         return true;
     }
 
@@ -1491,8 +1491,9 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
             histDlg = new HistDlg(gridMdl, this);
             histDlg.initView();
             histDlg.initLang();
-            histDlg.initData();
+            Util.centerForm(histDlg, this);
         }
+        histDlg.initData();
         histDlg.setVisible(true);
     }
 
