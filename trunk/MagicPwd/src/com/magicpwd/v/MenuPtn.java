@@ -475,14 +475,14 @@ public class MenuPtn
 //        java.io.File defaultSkin = new java.io.File(lookFile, ConsEnv.SKIN_LOOK_DEFAULT + '/' + ConsEnv.SKIN_LOOK_FILE);
 //        if (defaultSkin.exists() && defaultSkin.isFile() && defaultSkin.canRead())
 //        {
-            item = new javax.swing.JCheckBoxMenuItem();
-            item.addActionListener(action);
-            Bean.setText(item, Lang.getLang(LangRes.P30F763E, "默认主题"));
-            Bean.setTips(item, "");
-            item.setActionCommand(ConsCfg.DEF_SKIN_DEF);
-            item.setSelected(true);
-            themeMenu.add(item);
-            group.add(item.getActionCommand(), item);
+        item = new javax.swing.JCheckBoxMenuItem();
+        item.addActionListener(action);
+        Bean.setText(item, Lang.getLang(LangRes.P30F763E, "默认主题"));
+        Bean.setTips(item, "");
+        item.setActionCommand(ConsCfg.DEF_SKIN_DEF);
+        item.setSelected(true);
+        themeMenu.add(item);
+        group.add(item.getActionCommand(), item);
 //        }
     }
 
