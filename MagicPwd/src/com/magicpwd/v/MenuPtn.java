@@ -329,7 +329,7 @@ public class MenuPtn
         javax.swing.JMenuItem moreSkin = new javax.swing.JMenuItem();
         Bean.setText(moreSkin, Lang.getLang(LangRes.P30F7642, "更多皮肤"));
 //        Bean.setTips(moreSkin, Lang.getLang("", "tips"));
-        moreSkin.setActionCommand(ConsEnv.HOMEPAGE + "/mpwd/mpwd0100.aspx?sid=" + ConsEnv.VERSIONS);
+        moreSkin.setActionCommand(ConsEnv.HOMEPAGE + "mpwd/mpwd0100.aspx?sid=" + ConsEnv.VERSIONS);
         moreSkin.addActionListener(new MoreAction());
         skinMenu.add(moreSkin);
     }
@@ -472,7 +472,7 @@ public class MenuPtn
         javax.swing.JMenuItem moreLook = new javax.swing.JMenuItem();
         Bean.setText(moreLook, Lang.getLang(LangRes.P30F763C, "更多外观"));
 //        Bean.setTips(moreSkin, Lang.getLang("", "tips"));
-        moreLook.setActionCommand(ConsEnv.HOMEPAGE + "/mpwd/mpwd0101.aspx?sid=" + ConsEnv.VERSIONS);
+        moreLook.setActionCommand(ConsEnv.HOMEPAGE + "mpwd/mpwd0101.aspx?sid=" + ConsEnv.VERSIONS);
         moreLook.addActionListener(new MoreAction());
         lookMenu.add(moreLook);
     }
@@ -507,7 +507,7 @@ public class MenuPtn
         javax.swing.JMenuItem moreTheme = new javax.swing.JMenuItem();
         Bean.setText(moreTheme, Lang.getLang(LangRes.P30F763E, "更多主题"));
 //        Bean.setTips(moreSkin, Lang.getLang("", "tips"));
-        moreTheme.setActionCommand(ConsEnv.HOMEPAGE + "/mpwd/mpwd0102.aspx?sid=" + ConsEnv.VERSIONS);
+        moreTheme.setActionCommand(ConsEnv.HOMEPAGE + "mpwd/mpwd0102.aspx?sid=" + ConsEnv.VERSIONS);
         moreTheme.addActionListener(new MoreAction());
         themeMenu.add(moreTheme);
     }
@@ -576,7 +576,7 @@ public class MenuPtn
         javax.swing.JMenuItem morefeel = new javax.swing.JMenuItem();
         Bean.setText(morefeel, Lang.getLang(LangRes.P30F7640, "更多风格"));
 //        Bean.setTips(moreSkin, Lang.getLang("", "tips"));
-        morefeel.setActionCommand(ConsEnv.HOMEPAGE + "/mpwd/mpwd0103.aspx?sid=" + ConsEnv.VERSIONS);
+        morefeel.setActionCommand(ConsEnv.HOMEPAGE + "mpwd/mpwd0103.aspx?sid=" + ConsEnv.VERSIONS);
         morefeel.addActionListener(new MoreAction());
         feelMenu.add(morefeel);
     }
