@@ -65,8 +65,10 @@ public class UserPtn extends javax.swing.JPanel
      * @param type
      * @param frame
      */
-    public UserPtn(javax.swing.JFrame frame)
+    public UserPtn(UserCfg userCfg, SafeMdl safeMdl, javax.swing.JFrame frame)
     {
+        this.userCfg = userCfg;
+        this.safeMdl = safeMdl;
         dialog = new javax.swing.JDialog(frame, true);
         dialog.setResizable(false);
         dialog.setIconImage(Bean.getLogo(16));
