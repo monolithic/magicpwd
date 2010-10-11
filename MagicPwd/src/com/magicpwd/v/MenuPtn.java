@@ -17,6 +17,7 @@ import com.magicpwd.e.pad.IPadAction;
 import com.magicpwd.e.pwd.IPwdAction;
 import com.magicpwd.e.pwd.skin.FeelAction;
 import com.magicpwd.e.pwd.skin.LookAction;
+import com.magicpwd.e.pwd.skin.MoreAction;
 import com.magicpwd.e.pwd.skin.ThemeAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.r.AmonFF;
@@ -295,33 +296,42 @@ public class MenuPtn
         loadFeel(skinMenu);
 
         java.io.File[] files = skinFile.listFiles(new AmonFF("[^\\s]+[.ams]$", true));
-        if (files == null || files.length < 1)
+        if (files != null && files.length > 0)
         {
-            return;
+            skinMenu.addSeparator();
+
+            // 动态扩展风格
+            java.util.Properties prop = new java.util.Properties();
+            javax.swing.JCheckBoxMenuItem item;
+            WButtonGroup group = new WButtonGroup();
+            for (java.io.File ams : files)
+            {
+                try
+                {
+                    prop.load(new java.io.InputStreamReader(new java.io.FileInputStream(ams), ConsEnv.FILE_ENCODING));
+                    item = new javax.swing.JCheckBoxMenuItem();
+                    Bean.setText(item, getLang(prop, "text"));
+                    Bean.setTips(item, getLang(prop, "tips"));
+                    item.setSelected(coreMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN, "default").equals(prop.getProperty("name")));
+                    skinMenu.add(item);
+                    group.add(item);
+                    prop.clear();
+                }
+                catch (Exception exp)
+                {
+                    Logs.exception(exp);
+                }
+            }
         }
 
-        // 动态扩展风格
-        java.util.Properties prop = new java.util.Properties();
-        javax.swing.JCheckBoxMenuItem item;
-        WButtonGroup group = new WButtonGroup();
-        for (java.io.File ams : files)
-        {
-            try
-            {
-                prop.load(new java.io.InputStreamReader(new java.io.FileInputStream(ams), ConsEnv.FILE_ENCODING));
-                item = new javax.swing.JCheckBoxMenuItem();
-                Bean.setText(item, getLang(prop, "text"));
-                Bean.setTips(item, getLang(prop, "tips"));
-                item.setSelected(coreMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN, "default").equals(prop.getProperty("name")));
-                skinMenu.add(item);
-                group.add(item);
-                prop.clear();
-            }
-            catch (Exception exp)
-            {
-                Logs.exception(exp);
-            }
-        }
+        skinMenu.addSeparator();
+
+        javax.swing.JMenuItem moreSkin = new javax.swing.JMenuItem();
+        Bean.setText(moreSkin, Lang.getLang(LangRes.P30F7642, "更多皮肤"));
+//        Bean.setTips(moreSkin, Lang.getLang("", "tips"));
+        moreSkin.setActionCommand(ConsEnv.HOMEPAGE + "/mpwd/mpwd0100.aspx?sid=" + ConsEnv.VERSIONS);
+        moreSkin.addActionListener(new MoreAction());
+        skinMenu.add(moreSkin);
     }
 
     private void loadLook(javax.swing.JMenu skinMenu)
@@ -371,75 +381,43 @@ public class MenuPtn
         }
 
         java.io.File dirs[] = lookFile.listFiles(new AmonFF(true, ConsEnv.SKIN_LOOK_DEFAULT, ConsEnv.SKIN_LOOK_SYSTEM));
-        if (dirs == null || dirs.length < 1)
+        if (dirs != null && dirs.length > 0)
         {
-            return;
-        }
+            lookMenu.addSeparator();
 
-        lookMenu.addSeparator();
-
-        for (java.io.File dir : dirs)
-        {
-            java.io.File aml = new java.io.File(dir, ConsEnv.SKIN_LOOK_FILE);
-            if (!aml.exists() || !aml.isFile() || !aml.canRead())
+            for (java.io.File dir : dirs)
             {
-                continue;
-            }
-            try
-            {
-                Document doc = new SAXReader().read(new java.io.FileInputStream(aml));
-                if (doc == null)
+                java.io.File aml = new java.io.File(dir, ConsEnv.SKIN_LOOK_FILE);
+                if (!aml.exists() || !aml.isFile() || !aml.canRead())
                 {
                     continue;
                 }
-                Element root = doc.getRootElement();
-                if (root == null)
+                try
                 {
-                    continue;
-                }
-                Element look = root.element("look");
-                if (look == null)
-                {
-                    continue;
-                }
-                java.util.List<?> items = look.elements("item");
-                if (items == null || items.size() < 1)
-                {
-                    continue;
-                }
-                String type = look.attributeValue("type");
-                if (items.size() == 1)
-                {
-                    Element element = look.element("item");
-
-                    item = new javax.swing.JCheckBoxMenuItem();
-                    item.addActionListener(action);
-                    Bean.setText(item, getLang(element.attributeValue("text")));
-                    Bean.setTips(item, getLang(element.attributeValue("tips")));
-                    String clazz = element.attributeValue("class");
-                    item.setSelected(lookName.equals(clazz));
-                    item.setActionCommand(type + ":" + dir.getName() + ',' + clazz + ',' + element.attributeValue("decorated"));
-                    lookMenu.add(item);
-                    group.add(item.getActionCommand(), item);
-                }
-                else
-                {
-                    String grpText = getLang(look.attributeValue("group"));
-                    if (!com.magicpwd._util.Char.isValidate(grpText))
+                    Document doc = new SAXReader().read(new java.io.FileInputStream(aml));
+                    if (doc == null)
                     {
-                        grpText = dir.getName();
+                        continue;
                     }
-                    javax.swing.JMenu subMenu = new javax.swing.JMenu();
-                    Bean.setText(subMenu, grpText);
-                    lookMenu.add(subMenu);
-
-                    for (Object object : items)
+                    Element root = doc.getRootElement();
+                    if (root == null)
                     {
-                        if (!(object instanceof Element))
-                        {
-                            continue;
-                        }
-                        Element element = (Element) object;
+                        continue;
+                    }
+                    Element look = root.element("look");
+                    if (look == null)
+                    {
+                        continue;
+                    }
+                    java.util.List<?> items = look.elements("item");
+                    if (items == null || items.size() < 1)
+                    {
+                        continue;
+                    }
+                    String type = look.attributeValue("type");
+                    if (items.size() == 1)
+                    {
+                        Element element = look.element("item");
 
                         item = new javax.swing.JCheckBoxMenuItem();
                         item.addActionListener(action);
@@ -448,22 +426,61 @@ public class MenuPtn
                         String clazz = element.attributeValue("class");
                         item.setSelected(lookName.equals(clazz));
                         item.setActionCommand(type + ":" + dir.getName() + ',' + clazz + ',' + element.attributeValue("decorated"));
-                        subMenu.add(item);
+                        lookMenu.add(item);
                         group.add(item.getActionCommand(), item);
                     }
+                    else
+                    {
+                        String grpText = getLang(look.attributeValue("group"));
+                        if (!com.magicpwd._util.Char.isValidate(grpText))
+                        {
+                            grpText = dir.getName();
+                        }
+                        javax.swing.JMenu subMenu = new javax.swing.JMenu();
+                        Bean.setText(subMenu, grpText);
+                        lookMenu.add(subMenu);
+
+                        for (Object object : items)
+                        {
+                            if (!(object instanceof Element))
+                            {
+                                continue;
+                            }
+                            Element element = (Element) object;
+
+                            item = new javax.swing.JCheckBoxMenuItem();
+                            item.addActionListener(action);
+                            Bean.setText(item, getLang(element.attributeValue("text")));
+                            Bean.setTips(item, getLang(element.attributeValue("tips")));
+                            String clazz = element.attributeValue("class");
+                            item.setSelected(lookName.equals(clazz));
+                            item.setActionCommand(type + ":" + dir.getName() + ',' + clazz + ',' + element.attributeValue("decorated"));
+                            subMenu.add(item);
+                            group.add(item.getActionCommand(), item);
+                        }
+                    }
+                }
+                catch (Exception exp)
+                {
+                    Logs.exception(exp);
                 }
             }
-            catch (Exception exp)
-            {
-                Logs.exception(exp);
-            }
         }
+
+        lookMenu.addSeparator();
+
+        javax.swing.JMenuItem moreLook = new javax.swing.JMenuItem();
+        Bean.setText(moreLook, Lang.getLang(LangRes.P30F763C, "更多外观"));
+//        Bean.setTips(moreSkin, Lang.getLang("", "tips"));
+        moreLook.setActionCommand(ConsEnv.HOMEPAGE + "/mpwd/mpwd0101.aspx?sid=" + ConsEnv.VERSIONS);
+        moreLook.addActionListener(new MoreAction());
+        lookMenu.add(moreLook);
     }
 
     private void loadTheme(javax.swing.JMenu skinMenu)
     {
         javax.swing.JMenu themeMenu = new javax.swing.JMenu();
-        Bean.setText(themeMenu, Lang.getLang(LangRes.P30F763C, "主题"));
+        Bean.setText(themeMenu, Lang.getLang(LangRes.P30F763D, "主题"));
         skinMenu.add(themeMenu);
 
         javax.swing.JCheckBoxMenuItem item;
@@ -477,19 +494,28 @@ public class MenuPtn
 //        {
         item = new javax.swing.JCheckBoxMenuItem();
         item.addActionListener(action);
-        Bean.setText(item, Lang.getLang(LangRes.P30F763E, "默认主题"));
+        Bean.setText(item, Lang.getLang(LangRes.P30F7641, "默认主题"));
         Bean.setTips(item, "");
         item.setActionCommand(ConsCfg.DEF_SKIN_DEF);
         item.setSelected(true);
         themeMenu.add(item);
         group.add(item.getActionCommand(), item);
 //        }
+
+        themeMenu.addSeparator();
+
+        javax.swing.JMenuItem moreTheme = new javax.swing.JMenuItem();
+        Bean.setText(moreTheme, Lang.getLang(LangRes.P30F763E, "更多主题"));
+//        Bean.setTips(moreSkin, Lang.getLang("", "tips"));
+        moreTheme.setActionCommand(ConsEnv.HOMEPAGE + "/mpwd/mpwd0102.aspx?sid=" + ConsEnv.VERSIONS);
+        moreTheme.addActionListener(new MoreAction());
+        themeMenu.add(moreTheme);
     }
 
     private void loadFeel(javax.swing.JMenu skinMenu)
     {
         javax.swing.JMenu feelMenu = new javax.swing.JMenu();
-        Bean.setText(feelMenu, Lang.getLang(LangRes.P30F763D, "图标"));
+        Bean.setText(feelMenu, Lang.getLang(LangRes.P30F763F, "图标"));
         skinMenu.add(feelMenu);
 
         java.io.File feelFile = new java.io.File(ConsEnv.DIR_SKIN, ConsEnv.DIR_FEEL);
@@ -499,51 +525,60 @@ public class MenuPtn
         }
 
         java.io.File dirs[] = feelFile.listFiles(new AmonFF(true));
-        if (dirs == null || dirs.length < 1)
+        if (dirs != null && dirs.length > 0)
         {
-            return;
+            feelMenu.addSeparator();
+
+            javax.swing.JCheckBoxMenuItem item;
+            String feelName = coreMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN_FEEL, ConsCfg.DEF_FEEL_DEF);
+            FeelAction action = new FeelAction();
+            action.setCoreMdl(coreMdl);
+            WButtonGroup group = new WButtonGroup();
+
+            java.util.Properties prop = new java.util.Properties();
+            java.io.InputStreamReader reader = null;
+            for (java.io.File dir : dirs)
+            {
+                java.io.File amf = new java.io.File(dir, ConsEnv.SKIN_FEEL_FILE);
+                if (!amf.exists() || !amf.isFile() || !amf.canRead())
+                {
+                    continue;
+                }
+                try
+                {
+                    reader = new java.io.InputStreamReader(new java.io.FileInputStream(amf), ConsEnv.FILE_ENCODING);
+                    prop.load(reader);
+
+                    item = new javax.swing.JCheckBoxMenuItem(action);
+                    Bean.setText(item, getLang(prop, "text"));
+                    Bean.setTips(item, getLang(prop, "tips"));
+                    String name = dir.getName();
+                    item.setSelected(feelName.equals(name));
+                    item.setActionCommand(name);
+                    feelMenu.add(item);
+                    group.add(name, item);
+
+                    prop.clear();
+                }
+                catch (Exception exp)
+                {
+                    Logs.exception(exp);
+                }
+                finally
+                {
+                    Bean.closeReader(reader);
+                }
+            }
         }
 
-        javax.swing.JCheckBoxMenuItem item;
-        String feelName = coreMdl.getUserCfg().getCfg(ConsCfg.CFG_SKIN_FEEL, ConsCfg.DEF_FEEL_DEF);
-        FeelAction action = new FeelAction();
-        action.setCoreMdl(coreMdl);
-        WButtonGroup group = new WButtonGroup();
+        feelMenu.addSeparator();
 
-        java.util.Properties prop = new java.util.Properties();
-        java.io.InputStreamReader reader = null;
-        for (java.io.File dir : dirs)
-        {
-            java.io.File amf = new java.io.File(dir, ConsEnv.SKIN_FEEL_FILE);
-            if (!amf.exists() || !amf.isFile() || !amf.canRead())
-            {
-                continue;
-            }
-            try
-            {
-                reader = new java.io.InputStreamReader(new java.io.FileInputStream(amf), ConsEnv.FILE_ENCODING);
-                prop.load(reader);
-
-                item = new javax.swing.JCheckBoxMenuItem(action);
-                Bean.setText(item, getLang(prop, "text"));
-                Bean.setTips(item, getLang(prop, "tips"));
-                String name = dir.getName();
-                item.setSelected(feelName.equals(name));
-                item.setActionCommand(name);
-                feelMenu.add(item);
-                group.add(name, item);
-
-                prop.clear();
-            }
-            catch (Exception exp)
-            {
-                Logs.exception(exp);
-            }
-            finally
-            {
-                Bean.closeReader(reader);
-            }
-        }
+        javax.swing.JMenuItem morefeel = new javax.swing.JMenuItem();
+        Bean.setText(morefeel, Lang.getLang(LangRes.P30F7640, "更多风格"));
+//        Bean.setTips(moreSkin, Lang.getLang("", "tips"));
+        morefeel.setActionCommand(ConsEnv.HOMEPAGE + "/mpwd/mpwd0103.aspx?sid=" + ConsEnv.VERSIONS);
+        morefeel.addActionListener(new MoreAction());
+        feelMenu.add(morefeel);
     }
 
     private javax.swing.AbstractButton processText(Element element, javax.swing.AbstractButton button)
