@@ -1,0 +1,6 @@
+<magicpwd>
+    <look group="Synthetica" type="user">
+        <item text="Synthetica Standard" tips="Synthetica Standard" class="de.javasoft.plaf.synthetica.SyntheticaStandardLookAndFeel" decorated="true" />
+        <item text="Synthetica Simple 2D" tips="Synthetica Simple 2D" class="de.javasoft.plaf.synthetica.SyntheticaSimple2DLookAndFeel" decorated="true" />
+    </look>
+</magicpwd>
