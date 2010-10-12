@@ -41,6 +41,7 @@ public class MagicPwd
                 @Override
                 public void run()
                 {
+                    TrayPtn.getInstance().loadLnf();
                     TrayPtn.getInstance().showViewPtn(ConsEnv.VIEW_MAIN);
                 }
             });

@@ -460,10 +460,13 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
 
             // 语言资源加载
             Lang.loadLang(coreMdl.getUserCfg());
-
-            // 扩展皮肤加载
-            Bean.loadLnF(coreMdl.getUserCfg());
         }
+    }
+
+    public void loadLnf()
+    {
+        // 扩展皮肤加载
+        Bean.loadLnF(coreMdl.getUserCfg());
     }
 
     public void loadPre()
@@ -550,13 +553,19 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         getUserPtn(ConsEnv.INT_SIGN_RS).setBackCall(this);
     }
 
-    public static UserPtn getUserPtn(int view)
+    public UserPtn getUserPtn(int view)
+    {
+        return getUserPtn(view, this);
+    }
+
+    public UserPtn getUserPtn(int view, IBackCall call)
     {
         if (userPtn == null)
         {
             userPtn = new UserPtn(coreMdl.getUserCfg(), safeMdl);
         }
         UserPtn ptn = (getCurrForm() != null && getCurrForm().isVisible()) ? new UserPtn(coreMdl.getUserCfg(), safeMdl, getCurrForm()) : userPtn;
+        ptn.setBackCall(call);
         ptn.initView(view);
         ptn.initLang();
         ptn.initData();
