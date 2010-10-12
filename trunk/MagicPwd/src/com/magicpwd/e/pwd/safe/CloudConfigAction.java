@@ -31,7 +31,7 @@ public class CloudConfigAction extends javax.swing.AbstractAction implements IPw
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        TrayPtn.getUserPtn(ConsEnv.INT_SIGN_CS).setBackCall(new IBackCall()
+        TrayPtn.getInstance().getUserPtn(ConsEnv.INT_SIGN_CS).setBackCall(new IBackCall()
         {
 
             @Override

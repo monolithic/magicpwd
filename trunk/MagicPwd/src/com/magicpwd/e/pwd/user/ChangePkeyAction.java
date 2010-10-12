@@ -29,7 +29,7 @@ public class ChangePkeyAction extends javax.swing.AbstractAction implements IPwd
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        TrayPtn.getUserPtn(ConsEnv.INT_SIGN_PK).setBackCall(new IBackCall()
+        TrayPtn.getInstance().getUserPtn(ConsEnv.INT_SIGN_PK).setBackCall(new IBackCall()
         {
 
             @Override

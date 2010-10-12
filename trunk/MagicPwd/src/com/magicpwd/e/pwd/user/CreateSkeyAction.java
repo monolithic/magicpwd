@@ -38,7 +38,7 @@ public class CreateSkeyAction extends javax.swing.AbstractAction implements IPwd
             return;
         }
 
-        TrayPtn.getUserPtn(ConsEnv.INT_SIGN_SK).setBackCall(new IBackCall()
+        TrayPtn.getInstance().getUserPtn(ConsEnv.INT_SIGN_SK).setBackCall(new IBackCall()
         {
 
             @Override

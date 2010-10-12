@@ -409,15 +409,13 @@ public class Bean
             return;
         }
 
-        Object[] urls = new Object[files.length];
-        for (int i = 0, j = files.length; i < j; i += 1)
-        {
-            urls[i] = files[i].toURI().toURL();
-        }
-
         java.net.URLClassLoader loader = (java.net.URLClassLoader) ClassLoader.getSystemClassLoader();
         java.lang.reflect.Method method = java.net.URLClassLoader.class.getDeclaredMethod("addURL", java.net.URL.class);
         method.setAccessible(true);
-        method.invoke(loader, urls);
+
+        for (java.io.File file : files)
+        {
+            method.invoke(loader, file.toURI().toURL());
+        }
     }
 }
