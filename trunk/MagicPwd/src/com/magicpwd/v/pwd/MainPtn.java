@@ -245,7 +245,6 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         // 徽标
         LogoItem logoItem = (LogoItem) gridMdl.getItemAt(ConsEnv.PWDS_HEAD_LOGO);
 
-        boolean isUpdate = gridMdl.isUpdate();
         String keysHash = gridMdl.getKeysHash();
 
         try
@@ -259,7 +258,7 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         }
 
         // 数据新增的情况下，需要重新显示列表信息
-        if (isUpdate)
+        if (com.magicpwd._util.Char.isValidateHash(keysHash))
         {
             coreMdl.getListMdl().updtName(keysHash, metaItem.getName(), logoItem.getName());
         }

@@ -4,11 +4,11 @@
 package com.magicpwd._comn;
 
 /**
- * @author shangwen.yao
- * 
+ * @author Amon
  */
 public class C1C1
 {
+
     private char k;
     private char v;
 

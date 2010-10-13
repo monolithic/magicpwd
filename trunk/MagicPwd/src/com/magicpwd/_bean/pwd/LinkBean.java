@@ -3,7 +3,7 @@
  */
 package com.magicpwd._bean.pwd;
 
-import com.magicpwd._comp.EditBox;
+import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsDat;
@@ -28,7 +28,7 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
 
     private IEditItem itemData;
     private MainPtn mainPtn;
-    private EditBox dataEdit;
+    private WEditBox dataEdit;
     private WTextBox nameBox;
     private WTextBox dataBox;
 
@@ -40,7 +40,7 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initView()
     {
-        dataEdit = new EditBox(mainPtn.getCoreMdl().getUserCfg(), this, false);
+        dataEdit = new WEditBox(mainPtn.getCoreMdl().getUserCfg(), this, false);
         dataEdit.initView();
 
         lb_PropName = new javax.swing.JLabel();

@@ -5,7 +5,7 @@ package com.magicpwd._bean.pwd;
 
 import com.magicpwd._comn.prop.Char;
 import com.magicpwd._comn.item.EditItem;
-import com.magicpwd._comp.EditBox;
+import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._comp.WTextBox;
@@ -33,7 +33,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 
     private IEditItem itemData;
     private MainPtn mainPtn;
-    private EditBox dataEdit;
+    private WEditBox dataEdit;
     private WTextBox nameBox;
     private javax.swing.ImageIcon icoMask;
     private javax.swing.ImageIcon icoView;
@@ -50,7 +50,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     {
         initMenuView();
 
-        dataEdit = new EditBox(mainPtn.getCoreMdl().getUserCfg(), this, false);
+        dataEdit = new WEditBox(mainPtn.getCoreMdl().getUserCfg(), this, false);
         dataEdit.initView();
 
         lb_PropName = new javax.swing.JLabel();
