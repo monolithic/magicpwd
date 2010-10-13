@@ -37,7 +37,7 @@ public class ImportAction extends javax.swing.AbstractAction implements IPwdActi
             return;
         }
 
-        TrayPtn.getInstance().getUserPtn(ConsEnv.INT_SIGN_RS, new IBackCall()
+        TrayPtn.getUserPtn(ConsEnv.INT_SIGN_RS, new IBackCall()
         {
 
             @Override

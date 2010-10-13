@@ -103,14 +103,21 @@ public class ListMdl extends DefaultListModel
         return b;
     }
 
-    public boolean updtName(int indx, String name, String icon)
+    public boolean updtName(String hash, String name, String icon)
     {
-        Keys item = dataList.get(indx);
-        item.setP30F0109(name);
-        item.setP30F010B(icon);
-        //item.setV2(name);
-        fireContentsChanged(this, indx, indx);
-        return true;
+        Keys keys;
+        for (int i = 0, j = dataList.size(); i < j; i += 1)
+        {
+            keys = dataList.get(i);
+            if (keys.getP30F0104().equals(hash))
+            {
+                keys.setP30F0109(name);
+                keys.setP30F010B(icon);
+                fireContentsChanged(this, i, i);
+                return true;
+            }
+        }
+        return false;
     }
 
     public void wAppend(Keys keys)

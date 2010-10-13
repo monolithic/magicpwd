@@ -34,8 +34,8 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
     private static SafeMdl safeMdl;
     private static TrayPtn trayPtn;
     private static UserPtn userPtn;
-    private static javax.swing.JFrame mf_CurrForm;
-    private static javax.swing.JWindow md_TrayForm;
+    private static javax.swing.JFrame mfCurrForm;
+    private static javax.swing.JWindow mwTrayForm;
     private static javax.swing.event.PopupMenuListener listener;
     private MenuPtn menuPtn;
 
@@ -63,9 +63,9 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         }
 
         // 罗盘视图初始化
-        if (md_TrayForm == null)
+        if (mwTrayForm == null)
         {
-            md_TrayForm = new javax.swing.JWindow()
+            mwTrayForm = new javax.swing.JWindow()
             {
 
                 @Override
@@ -75,25 +75,14 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
                     {
                         return;
                     }
+                    if (evt.getID() == java.awt.event.WindowEvent.WINDOW_DEACTIVATED)
+                    {
+                        trayPtn.setVisible(false);
+                    }
                     super.processWindowEvent(evt);
                 }
             };
-//            md_TrayForm.setUndecorated(false);
-            md_TrayForm.setAlwaysOnTop(true);
-//            md_TrayForm.addWindowListener(new java.awt.event.WindowAdapter()
-//            {
-//
-//                @Override
-//                public void windowClosing(java.awt.event.WindowEvent e)
-//                {
-//                }
-//
-//                @Override
-//                public void windowDeactivated(java.awt.event.WindowEvent e)
-//                {
-//                    md_TrayForm.setVisible(false);
-//                }
-//            });
+            mwTrayForm.setAlwaysOnTop(true);
         }
 
         if (listener == null)
@@ -109,13 +98,13 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
                 @Override
                 public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt)
                 {
-                    //md_TrayForm.setVisible(false);
+                    trayPtn.setVisible(false);
                 }
 
                 @Override
                 public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt)
                 {
-                    //md_TrayForm.setVisible(false);
+                    trayPtn.setVisible(false);
                 }
             };
         }
@@ -124,9 +113,9 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         iconLbl.setIcon(new javax.swing.ImageIcon(Bean.getLogo(24)));
         iconLbl.addMouseListener(this);
         iconLbl.addMouseMotionListener(this);
-        md_TrayForm.getContentPane().setLayout(new java.awt.BorderLayout());
-        md_TrayForm.getContentPane().add(iconLbl);
-        md_TrayForm.setVisible(true);
+        mwTrayForm.getContentPane().setLayout(new java.awt.BorderLayout());
+        mwTrayForm.getContentPane().add(iconLbl);
+        mwTrayForm.setVisible(true);
 
         // 右键菜单初始化
         menuPtn = new MenuPtn(coreMdl);
@@ -168,7 +157,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         {
             // 设置软件界面风格
             showMainPtn();
-            mf_CurrForm.setVisible(true);
+            mfCurrForm.setVisible(true);
             if (coreMdl.getUserCfg().isEditVisible())
             {
                 mp_MainPtn.showPropInfo();
@@ -179,7 +168,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
             initView();
             initLang();
             initData();
-            mf_CurrForm.toFront();
+            mfCurrForm.toFront();
             return true;
         }
 
@@ -211,18 +200,26 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         {
             getCurrForm().setState(java.awt.Frame.NORMAL);
         }
-        //getCurrForm().toFront();
+        getCurrForm().toFront();
         return true;
+    }
+
+    public void setVisible(boolean visible)
+    {
+        if (isOsTray)
+        {
+            mwTrayForm.setVisible(visible);
+        }
     }
 
     public static javax.swing.JFrame getCurrForm()
     {
-        return mf_CurrForm;
+        return mfCurrForm;
     }
 
     public static void setCurrForm(javax.swing.JFrame frame)
     {
-        mf_CurrForm = frame;
+        mfCurrForm = frame;
     }
 
     public static MainPtn getMainPtn()
@@ -241,7 +238,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
     {
         getMainPtn();
 
-        mf_CurrForm = mp_MainPtn;
+        mfCurrForm = mp_MainPtn;
         currPtn = ConsEnv.VIEW_MAIN;
     }
 
@@ -260,7 +257,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
             mp_NormPtn.initData();
         }
 
-        mf_CurrForm = mp_NormPtn;
+        mfCurrForm = mp_NormPtn;
         currPtn = ConsEnv.VIEW_NORM;
     }
 
@@ -280,7 +277,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
     {
         getMiniPtn();
 
-        mf_CurrForm = mp_MiniPtn;
+        mfCurrForm = mp_MiniPtn;
         currPtn = ConsEnv.VIEW_MINI;
     }
 
@@ -307,7 +304,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         if (!isOsTray)
         {
             dragLoc = getScreenLocation(evt);
-            formLoc = md_TrayForm.getLocation();
+            formLoc = mwTrayForm.getLocation();
         }
     }
 
@@ -339,7 +336,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
             tmp.x += formLoc.x - dragLoc.x;
             tmp.y += formLoc.y - dragLoc.y;
             java.awt.Dimension scrSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-            java.awt.Dimension dlgSize = md_TrayForm.getSize();
+            java.awt.Dimension dlgSize = mwTrayForm.getSize();
             if (tmp.x < 10)
             {
                 tmp.x = 1;
@@ -358,7 +355,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
             {
                 tmp.y = y;
             }
-            md_TrayForm.setLocation(tmp);
+            mwTrayForm.setLocation(tmp);
             coreMdl.getUserCfg().setCfg(ConsCfg.CFG_TRAY_LOC, "[" + tmp.x + "," + tmp.y + "]");
         }
     }
@@ -425,15 +422,15 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
             {
                 y -= window.height;
             }
-            md_TrayForm.setLocation(x, y);
+            mwTrayForm.setLocation(x, y);
 
             // trayMenu.setInvoker(trayMenu);
-            trayMenu.show(md_TrayForm.getContentPane(), 0, 0);
-            md_TrayForm.toFront();
+            trayMenu.show(mwTrayForm.getContentPane(), 0, 0);
+            mwTrayForm.toFront();
         }
         else
         {
-            trayMenu.show(md_TrayForm, 0, md_TrayForm.getHeight());
+            trayMenu.show(mwTrayForm, 0, mwTrayForm.getHeight());
         }
     }
 
@@ -550,15 +547,10 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         }
 
         TrayPtn.nextPtn = nextPtn;
-        getUserPtn(ConsEnv.INT_SIGN_RS).setBackCall(this);
+        getUserPtn(ConsEnv.INT_SIGN_RS, this);
     }
 
-    public UserPtn getUserPtn(int view)
-    {
-        return getUserPtn(view, this);
-    }
-
-    public UserPtn getUserPtn(int view, IBackCall call)
+    public static UserPtn getUserPtn(int view, IBackCall call)
     {
         if (userPtn == null)
         {
@@ -599,7 +591,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
             try
             {
                 java.awt.SystemTray.getSystemTray().add(trayIcon);
-                md_TrayForm.setSize(1, 1);
+                mwTrayForm.setSize(1, 1);
                 if (button != null)
                 {
                     Lang.setWText(button, LangRes.P30F960E, "显示为导航罗盘");
@@ -615,7 +607,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         }
 
         // 下一步：显示为导航罗盘
-        md_TrayForm.pack();
+        mwTrayForm.pack();
         java.awt.SystemTray.getSystemTray().remove(trayIcon);
         if (button != null)
         {
@@ -649,11 +641,11 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
 
             if (formLoc == null)
             {
-                formLoc = new java.awt.Point(size.width - 120 - md_TrayForm.getWidth(), 80);
+                formLoc = new java.awt.Point(size.width - 120 - mwTrayForm.getWidth(), 80);
             }
         }
 
-        md_TrayForm.setLocation(formLoc);
+        mwTrayForm.setLocation(formLoc);
         isOsTray = false;
     }
 
@@ -705,7 +697,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
     private static java.awt.Point getScreenLocation(java.awt.event.MouseEvent evt)
     {
         java.awt.Point cur = evt.getPoint();
-        java.awt.Point dlg = md_TrayForm.getLocationOnScreen();
+        java.awt.Point dlg = mwTrayForm.getLocationOnScreen();
         return new java.awt.Point(dlg.x + cur.x, dlg.y + cur.y);
     }
 
