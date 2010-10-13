@@ -1,0 +1,5 @@
+<magicpwd>
+    <look group="Tiny" type="user">
+        <item text="Tiny" tips="Tiny" class="de.muntjak.tinylookandfeel.TinyLookAndFeel" decorated="true" />
+    </look>
+</magicpwd>
