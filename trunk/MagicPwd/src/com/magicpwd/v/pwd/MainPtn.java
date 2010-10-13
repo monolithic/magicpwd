@@ -174,7 +174,7 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
             group.setSelected(cfg.getCfg(ConsCfg.CFG_VIEW_LIST_KEY, "01"), true);
         }
 
-        this.pack();
+        pack();
         Util.centerForm(this, null);
     }
 
@@ -234,8 +234,7 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
 
         // 标题为空检测
         MetaItem metaItem = (MetaItem) gridMdl.getItemAt(ConsEnv.PWDS_HEAD_META);
-        String name = metaItem.getName();
-        if (!com.magicpwd._util.Char.isValidate(name))
+        if (!com.magicpwd._util.Char.isValidate(metaItem.getName()))
         {
             Lang.showMesg(this, LangRes.P30F7A0C, "请输入口令标题！");
             tb_KeysView.setRowSelectionInterval(1, 1);
@@ -245,9 +244,9 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
 
         // 徽标
         LogoItem logoItem = (LogoItem) gridMdl.getItemAt(ConsEnv.PWDS_HEAD_LOGO);
-        String logo = logoItem.getName();
 
         boolean isUpdate = gridMdl.isUpdate();
+        String keysHash = gridMdl.getKeysHash();
 
         try
         {
@@ -262,7 +261,7 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         // 数据新增的情况下，需要重新显示列表信息
         if (isUpdate)
         {
-            coreMdl.getListMdl().updtName(ls_GuidList.getSelectedIndex(), name, logo);
+            coreMdl.getListMdl().updtName(keysHash, metaItem.getName(), logoItem.getName());
         }
         else
         {
