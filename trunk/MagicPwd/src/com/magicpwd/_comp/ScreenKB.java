@@ -3,7 +3,6 @@
  */
 package com.magicpwd._comp;
 
-import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comn.C1C1;
 
 /**
@@ -12,76 +11,27 @@ import com.magicpwd._comn.C1C1;
 public final class ScreenKB extends javax.swing.JPanel
 {
 
+    private int currPage;
+    private int currCase;
+
     public ScreenKB()
     {
     }
 
     public void initView()
     {
-        setLayout(new java.awt.GridBagLayout());
+        javax.swing.JPanel jPanel1 = new javax.swing.JPanel();
+        jPanel1.setLayout(new java.awt.GridLayout(3, 9, 1, 2));
 
-        int SIZE = 26;
-        lb_CharButn = new BtnLabel[SIZE];
-
-        int idx = 0;
-        BtnLabel label;
-        java.awt.GridBagConstraints gbc = new java.awt.GridBagConstraints();
-        gbc.fill = java.awt.GridBagConstraints.HORIZONTAL;
-        gbc.ipadx = 10;
-        gbc.ipady = 2;
-        gbc.insets = new java.awt.Insets(1, 1, 1, 1);
-
-        gbc.gridy = 0;
-        while (idx < 9)
+        lb_CharButn = new BtnLabel[26];
+        BtnLabel button;
+        for (int i = 0, j = lb_CharButn.length; i < j; i += 1)
         {
-            gbc.gridx = idx;
-
-            label = new BtnLabel();
-            label.setActionCommand("");
-            add(label, gbc);
-            lb_CharButn[idx++] = label;
+            button = new BtnLabel();
+            jPanel1.add(button);
+            lb_CharButn[i] = button;
         }
-
-        gbc.gridx = 9;
-        lb_BackButn = new BtnLabel();
-        add(lb_BackButn, gbc);
-
-        gbc.gridy = 1;
-        while (idx < 18)
-        {
-            gbc.gridx = idx - 9;
-
-            label = new BtnLabel();
-            label.setActionCommand("");
-            add(label, gbc);
-            lb_CharButn[idx++] = label;
-        }
-
-        gbc.gridx = 9;
-        lb_CapsButn = new BtnLabel();
-        lb_CapsButn.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e)
-            {
-                nextV(getKeyA(), lb_CharButn);
-            }
-        });
-        add(lb_CapsButn, gbc);
-
-        gbc.gridy = 2;
-        while (idx < 26)
-        {
-            gbc.gridx = idx - 18;
-
-            label = new BtnLabel();
-            label.setActionCommand("");
-            add(label, gbc);
-            lb_CharButn[idx++] = label;
-        }
-
-        gbc.gridx = 8;
+        // 换页键
         lb_NextPage = new BtnLabel();
         lb_NextPage.addActionListener(new java.awt.event.ActionListener()
         {
@@ -89,22 +39,56 @@ public final class ScreenKB extends javax.swing.JPanel
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e)
             {
-                nextK(getKeyB(), lb_CharButn);
+                nextK(currPage == 0 ? getKeyB() : getKeyA(), lb_CharButn);
+                currPage = 1 - currPage;
             }
         });
-        add(lb_NextPage, gbc);
+        jPanel1.add(lb_NextPage);
 
-        gbc.gridx = 9;
+        javax.swing.JPanel jPanel2 = new javax.swing.JPanel();
+        jPanel2.setLayout(new java.awt.GridLayout(3, 1));
+
+        // 退格键
+        lb_BackButn = new BtnLabel();
+        jPanel2.add(lb_BackButn);
+
+        // 大写键
+        lb_CapsButn = new BtnLabel();
+        lb_CapsButn.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                nextV(currCase == 0 ? getKeyA() : getKeyB(), lb_CharButn);
+                currCase = 1 - currCase;
+            }
+        });
+        jPanel2.add(lb_CapsButn);
+
+        // 上档键
         lb_ShiftBtn = new BtnLabel();
-        add(lb_ShiftBtn, gbc);
+        jPanel2.add(lb_ShiftBtn);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
+        hsg.addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        hsg.addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        layout.setHorizontalGroup(hsg);
+
+        javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        vpg.addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        vpg.addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        layout.setVerticalGroup(vpg);
     }
 
     public void initLang()
     {
-        lb_BackButn.setText("Back");
-        lb_CapsButn.setText("Caps");
+        lb_BackButn.setText(" Back ");
+        lb_CapsButn.setText(" Caps ");
         lb_NextPage.setText("#");
-        lb_ShiftBtn.setText("Shift");
+        lb_ShiftBtn.setText(" Shift ");
 
         nextK(getKeyA(), lb_CharButn);
     }
