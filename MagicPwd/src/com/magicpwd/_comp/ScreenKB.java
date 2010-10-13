@@ -1,22 +1,16 @@
 /**
  * 
  */
-package com.magicpwd._user;
-
-import java.awt.event.ActionEvent;
-
-import javax.swing.JPanel;
+package com.magicpwd._comp;
 
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comn.C1C1;
 
 /**
- * @author shangwen.yao
- * 
+ * @author Amon
  */
-public final class ScreenKB extends JPanel
+public final class ScreenKB extends javax.swing.JPanel
 {
-    private static final long serialVersionUID = 5394771781997937430L;
 
     public ScreenKB()
     {
@@ -67,7 +61,9 @@ public final class ScreenKB extends JPanel
         lb_CapsButn = new BtnLabel();
         lb_CapsButn.addActionListener(new java.awt.event.ActionListener()
         {
-            public void actionPerformed(ActionEvent e)
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
             {
                 nextV(getKeyA(), lb_CharButn);
             }
@@ -89,7 +85,9 @@ public final class ScreenKB extends JPanel
         lb_NextPage = new BtnLabel();
         lb_NextPage.addActionListener(new java.awt.event.ActionListener()
         {
-            public void actionPerformed(ActionEvent e)
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
             {
                 nextK(getKeyB(), lb_CharButn);
             }

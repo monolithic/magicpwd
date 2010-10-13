@@ -3,7 +3,7 @@
  */
 package com.magicpwd._bean.pwd;
 
-import com.magicpwd._comp.EditBox;
+import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsEnv;
@@ -22,7 +22,7 @@ import com.magicpwd.v.pwd.MainPtn;
 public class HintBean extends javax.swing.JPanel implements IEditBean
 {
 
-    private EditBox dataEdit;
+    private WEditBox dataEdit;
     private IEditItem itemData;
     private MainPtn mainPtn;
     private WTextBox nameBox;
@@ -41,7 +41,7 @@ public class HintBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initView()
     {
-        dataEdit = new EditBox(mainPtn.getCoreMdl().getUserCfg(), this, true);
+        dataEdit = new WEditBox(mainPtn.getCoreMdl().getUserCfg(), this, true);
         dataEdit.initView();
         dataEdit.setCopyButtonVisible(false);
         dataEdit.setDropButtonVisible(false);

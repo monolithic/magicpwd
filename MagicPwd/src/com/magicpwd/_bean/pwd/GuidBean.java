@@ -3,7 +3,7 @@
  */
 package com.magicpwd._bean.pwd;
 
-import com.magicpwd._comp.EditBox;
+import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.prop.Tplt;
 import com.magicpwd._comp.BtnLabel;
@@ -30,7 +30,7 @@ import org.dom4j.io.SAXReader;
 public class GuidBean extends javax.swing.JPanel implements IEditBean
 {
 
-    private EditBox dataEdit;
+    private WEditBox dataEdit;
     private GuidItem itemData;
     private MainPtn mainPtn;
     private BtnLabel bt_ReadMail;
@@ -45,7 +45,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initView()
     {
-        dataEdit = new EditBox(mainPtn.getCoreMdl().getUserCfg(), this, false);
+        dataEdit = new WEditBox(mainPtn.getCoreMdl().getUserCfg(), this, false);
         dataEdit.initView();
         dataEdit.setCopyButtonVisible(false);
         dataEdit.setDropButtonVisible(false);

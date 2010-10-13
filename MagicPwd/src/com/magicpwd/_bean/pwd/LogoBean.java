@@ -3,7 +3,7 @@
  */
 package com.magicpwd._bean.pwd;
 
-import com.magicpwd._comp.EditBox;
+import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comn.item.LogoItem;
 import com.magicpwd._comp.IcoLabel;
 import com.magicpwd._cons.LangRes;
@@ -26,7 +26,7 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean, IBackCall
 
     private IEditItem itemData;
     private MainPtn mainPtn;
-    private EditBox dataEdit;
+    private WEditBox dataEdit;
 
     public LogoBean(MainPtn mainPtn)
     {
@@ -36,7 +36,7 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean, IBackCall
     @Override
     public void initView()
     {
-        dataEdit = new EditBox(mainPtn.getCoreMdl().getUserCfg(), this, false);
+        dataEdit = new WEditBox(mainPtn.getCoreMdl().getUserCfg(), this, false);
         dataEdit.initView();
         dataEdit.setCopyButtonVisible(false);
         dataEdit.setDropButtonVisible(false);

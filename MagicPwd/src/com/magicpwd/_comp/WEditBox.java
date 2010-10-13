@@ -15,14 +15,14 @@ import com.magicpwd.m.UserCfg;
  *
  * @author Amon
  */
-public class EditBox extends javax.swing.JPanel
+public class WEditBox extends javax.swing.JPanel
 {
 
     private IEditBean editBean;
     private UserCfg userCfg;
     private boolean metaData;
 
-    public EditBox(UserCfg ucfg, IEditBean bean, boolean meta)
+    public WEditBox(UserCfg ucfg, IEditBean bean, boolean meta)
     {
         userCfg = ucfg;
         editBean = bean;
