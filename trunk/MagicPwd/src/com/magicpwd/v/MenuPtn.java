@@ -179,7 +179,7 @@ public class MenuPtn
         {
             return null;
         }
-        Node node = document.getRootElement().selectSingleNode(Char.format("/magicpwd/menupop[@id='{0}']", menuId));
+        Node node = document.getRootElement().selectSingleNode(Char.format("/magicpwd/popmenu[@id='{0}']", menuId));
         if (node == null || !(node instanceof Element))
         {
             return null;

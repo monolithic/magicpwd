@@ -54,7 +54,7 @@ public interface ConsEnv
     String FILE_BACK = FILE_DATA + "_{0}.backup";
     String FILE_SYNC = "magicpwd.amb";
     String FILE_DATE = "yyyyMMdd-HHmmss";
-    String VIEW_DATE = "yyyy-MM-dd HH:mm:ss";
+    String HINT_DATE = "yyyy-MM-dd HH:mm:ss";
     String IMAGE_FORMAT = "png";
     char PWDS_MASK = '*';
     String DIR_BAK = "bak";

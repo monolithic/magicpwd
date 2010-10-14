@@ -210,6 +210,10 @@ public class EditItem implements IEditItem
                 spec.add(userCfg.getPwdsLen());
                 spec.add(userCfg.getPwdsLoop());
                 break;
+            case ConsDat.INDX_DATE:
+                spec = new ArrayList<String>(1);
+                spec.add("");
+                break;
             case ConsDat.INDX_FILE:
                 spec = new ArrayList<String>(1);
                 spec.add("");

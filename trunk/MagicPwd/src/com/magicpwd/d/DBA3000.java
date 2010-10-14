@@ -525,7 +525,7 @@ public class DBA3000
      */
     private static void backup(DBAccess dba, String keysHash) throws SQLException
     {
-        String hash = com.magicpwd._util.Date.curTime();
+        String hash = com.magicpwd._util.Date.nowTime();
 
         dba.addParam(DBC3000.P30F0A01, hash);
         dba.addParam(DBC3000.P30F0A02, DBC3000.P30F0102, false);
@@ -1371,7 +1371,7 @@ public class DBA3000
             dba.addSort(DBC3000.P30F0A01, false);
 
             S1S2 item;
-            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(ConsEnv.VIEW_DATE);
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(ConsEnv.HINT_DATE);
             ResultSet rest = dba.executeSelect();
             while (rest.next())
             {

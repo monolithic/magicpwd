@@ -380,7 +380,7 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
         int size = 0;
         int indx = 0;
         EditItem tplt;
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(ConsEnv.VIEW_DATE);
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(ConsEnv.HINT_DATE);
         for (java.util.ArrayList<String> temp : data)
         {
             switch ((temp.size() - 5) % 3)
