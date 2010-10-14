@@ -93,18 +93,18 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         });
         pl_PropEdit.add(bt_PwdsGent);
 
-        bt_PwdsUcfg = new BtnLabel();
-        bt_PwdsUcfg.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "pwds-options.png", mainPtn.getCoreMdl().getUserCfg()));
-        bt_PwdsUcfg.addActionListener(new java.awt.event.ActionListener()
+        bt_PwdsConf = new BtnLabel();
+        bt_PwdsConf.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "pwds-options.png", mainPtn.getCoreMdl().getUserCfg()));
+        bt_PwdsConf.addActionListener(new java.awt.event.ActionListener()
         {
 
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                bt_PwdsUcfgActionPerformed(evt);
+                bt_PwdsConfActionPerformed(evt);
             }
         });
-        pl_PropEdit.add(bt_PwdsUcfg);
+        pl_PropEdit.add(bt_PwdsConf);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -158,8 +158,8 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         Lang.setWText(bt_PwdsGent, LangRes.P30F150B, "&G");
         Lang.setWTips(bt_PwdsGent, LangRes.P30F150C, "生成口令(Alt + G)");
 
-        Lang.setWText(bt_PwdsUcfg, LangRes.P30F150D, "&O");
-        Lang.setWTips(bt_PwdsUcfg, LangRes.P30F150E, "口令设置(Alt + O)");
+        Lang.setWText(bt_PwdsConf, LangRes.P30F150D, "&O");
+        Lang.setWTips(bt_PwdsConf, LangRes.P30F150E, "口令设置(Alt + O)");
 
         initMenuLang();
 
@@ -252,11 +252,11 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 
     private void initMenuView()
     {
-        pm_UcfgMenu = new javax.swing.JPopupMenu();
+        pm_ConfMenu = new javax.swing.JPopupMenu();
         mu_SizeMenu = new javax.swing.JMenu();
-        pm_UcfgMenu.add(mu_SizeMenu);
+        pm_ConfMenu.add(mu_SizeMenu);
         mu_CharMenu = new javax.swing.JMenu();
-        pm_UcfgMenu.add(mu_CharMenu);
+        pm_ConfMenu.add(mu_CharMenu);
 
         initSizeView();
         initCharView();
@@ -371,7 +371,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
                 mi_UrptMenuActionPerformed(evt);
             }
         });
-        pm_UcfgMenu.add(mi_LoopMenu);
+        pm_ConfMenu.add(mi_LoopMenu);
         mi_LoopMenu.setSelected(mainPtn.getCoreMdl().getUserCfg().isPwdsLoop());
     }
 
@@ -450,9 +450,9 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     {
     }
 
-    private void bt_PwdsUcfgActionPerformed(java.awt.event.ActionEvent evt)
+    private void bt_PwdsConfActionPerformed(java.awt.event.ActionEvent evt)
     {
-        pm_UcfgMenu.show(bt_PwdsUcfg, 0, bt_PwdsUcfg.getSize().height);
+        pm_ConfMenu.show(bt_PwdsConf, 0, bt_PwdsConf.getSize().height);
     }
 
     private void bt_PwdsGentActionPerformed(java.awt.event.ActionEvent evt)
@@ -583,10 +583,10 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     private javax.swing.JPanel pl_PropEdit;
     private javax.swing.JPasswordField pf_PropData;
     private javax.swing.JTextField tf_PropName;
-    private BtnLabel bt_PwdsUcfg;
+    private BtnLabel bt_PwdsConf;
     private BtnLabel bt_PwdsGent;
     private BtnLabel bt_PwdsView;
-    private javax.swing.JPopupMenu pm_UcfgMenu;
+    private javax.swing.JPopupMenu pm_ConfMenu;
     private javax.swing.JMenu mu_SizeMenu;
     private javax.swing.JCheckBoxMenuItem mi_SizeDef;
     private javax.swing.JCheckBoxMenuItem[] mi_SizeNum;

@@ -33,6 +33,7 @@ public interface IEditItem
     int SPEC_PWDS_HASH = 0;// 字符空间索引
     int SPEC_PWDS_SIZE = 1;// 生成口令长度
     int SPEC_PWDS_LOOP = 2;// 是否允许重复
+    int SPEC_DATE_FORM = 0;// 日期显示格式
 
     /**
      * 

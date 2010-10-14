@@ -348,7 +348,7 @@
     </toolbar>
 
     <!--魔方密码弹出菜单-->
-    <menupop id="kind">
+    <popmenu id="kind">
         <!--添加类别-->
         <item type="normal" text="$P30F7D01">
             <action class="com.magicpwd.e.pwd.kind.AppendAction" />
@@ -366,8 +366,8 @@
         <item type="normal" text="$P30F7D04">
             <action id="import" class="com.magicpwd.e.pwd.data.ImportAction" />
         </item>
-    </menupop>
-    <menupop id="list">
+    </popmenu>
+    <popmenu id="list">
         <!--添加记录-->
         <item type="normal" text="$P30F7D05">
             <action id="new-keys" class="com.magicpwd.e.pwd.file.NewAction" />
@@ -529,8 +529,8 @@
         <item type="normal" text="$P30F7D07">
             <action class="com.magicpwd.e.pwd.list.HistoryAction" />
         </item>
-    </menupop>
-    <menupop id="grid">
+    </popmenu>
+    <popmenu id="grid">
         <!--复制数据-->
         <item type="normal" text="$P30F7D08">
             <action class="com.magicpwd.e.pwd.grid.CopyAction" />
@@ -616,9 +616,35 @@
         <item type="normal" text="$P30F7D19">
             <action class="com.magicpwd.e.pwd.grid.DropAction" />
         </item>
-    </menupop>
+    </popmenu>
     <!--日期弹出菜单选项-->
-    <menupop id="date">
-
-    </menupop>
+    <submenu id="date-template">
+        <!--日期-->
+        <menu text="$P30F7D11">
+            <!--日期1-->
+            <item type="checkbox" text="yyyyMMdd" group="date-template" command="yyyyMMdd" />
+			<item type="checkbox" text="yyyy-MM-dd" group="date-template" command="yyyy-MM-dd" />
+			<item type="checkbox" text="yyyy/MM/dd" group="date-template" command="yyyy/MM/dd" />
+			<item type="checkbox" text="yyyy.MM.dd" group="date-template" command="yyyy.MM.dd" />
+			<item type="checkbox" text="yyyy MM dd" group="date-template" command="yyyy MM dd" />
+			<item type="checkbox" text="yyyy年MM月dd日" group="date-template" command="yyyy年MM月dd日" />
+        </menu>
+        <!--时间-->
+        <menu text="$P30F7D11">
+			<item type="checkbox" text="HHmmss" group="date-template" command="HHmmss" />
+            <item type="checkbox" text="HH:mm:ss" group="date-template" command="HH:mm:ss" />
+			<item type="checkbox" text="HH.mm.ss" group="date-template" command="HH.mm.ss" />
+			<item type="checkbox" text="HH mm ss" group="date-template" command="HH mm ss" />
+			<item type="checkbox" text="HH时mm分ss秒" group="date-template" command="HH时mm分ss秒" />
+        </menu>
+        <!--日期及时间-->
+        <menu text="$P30F7D11">
+            <item type="checkbox" text="yyyyMMdd HHmmss" group="date-template" command="yyyyMMdd HHmmss" />
+			<item type="checkbox" text="yyyy-MM-dd HH:mm:ss" group="date-template" command="yyyy-MM-dd HH:mm:ss" />
+			<item type="checkbox" text="yyyy.MM.dd HH.mm.ss" group="date-template" command="yyyy.MM.dd HH.mm.ss" />
+			<item type="checkbox" text="yyyy年MM月dd日 HH时mm分ss秒" group="date-template" command="yyyy年MM月dd日 HH时mm分ss秒" />
+        </menu>
+    </submenu>
+	<submenu id="date-interval">
+	</submenu>
 </magicpwd>

@@ -122,7 +122,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         try
         {
             menuPtn.loadData(new java.io.File(ConsEnv.DIR_DAT, "tray.xml"));
-            trayMenu = menuPtn.getMenuPop("tray");
+            trayMenu = menuPtn.getPopMenu("tray");
         }
         catch (Exception ex)
         {
