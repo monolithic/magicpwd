@@ -12,6 +12,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
 import com.magicpwd._util.Bean;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.v.pwd.MainPtn;
@@ -67,6 +68,34 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
             }
         });
         pl_PropEdit.add(bt_DateView);
+
+        bt_DateConf = new BtnLabel();
+        bt_DateConf.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "date.png", mainPtn.getCoreMdl().getUserCfg()));
+        bt_DateConf.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                bt_DateConfActionPerformed(evt);
+            }
+        });
+        pl_PropEdit.add(bt_DateConf);
+
+        pm_ConfMenu = new javax.swing.JPopupMenu();
+        javax.swing.JCheckBoxMenuItem item = new javax.swing.JCheckBoxMenuItem();
+        pm_ConfMenu.add(item);
+        javax.swing.AbstractAction action = new javax.swing.AbstractAction()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                mi_DateConfActionPerformed(e);
+            }
+        };
+        mainPtn.getMenuPtn().getSubMenu("date-template", pm_ConfMenu, action);
+        pm_ConfMenu.addSeparator();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -189,6 +218,21 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(ConsEnv.VIEW_DATE);
         tf_PropData.setText(sdf.format(new java.util.Date(System.currentTimeMillis())));
     }
+
+    private void bt_DateConfActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        pm_ConfMenu.show(bt_DateConf, 0, bt_DateConf.getSize().height);
+    }
+
+    private void mi_DateConfActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        String cmd = evt.getActionCommand();
+        if (!Char.isValidate(cmd))
+        {
+            return;
+        }
+        itemData.setSpec(IEditItem.SPEC_DATE_FORM, cmd);
+    }
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JLabel lb_PropEdit;
     private javax.swing.JLabel lb_PropName;
@@ -196,4 +240,8 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
     private javax.swing.JTextField tf_PropData;
     private javax.swing.JTextField tf_PropName;
     private BtnLabel bt_DateView;
+    private BtnLabel bt_DateConf;
+    private javax.swing.JPopupMenu pm_ConfMenu;
+    private javax.swing.JCheckBoxMenuItem mi_DefFormat;
+    private javax.swing.JCheckBoxMenuItem mi_Now;
 }

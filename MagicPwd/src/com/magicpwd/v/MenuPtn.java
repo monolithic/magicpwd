@@ -108,7 +108,7 @@ public class MenuPtn
                     continue;
                 }
                 tmp = (Element) obj;
-                javax.swing.JMenu menu = createMenu(tmp, component);
+                javax.swing.JMenu menu = createMenu(tmp, component, null);
                 if (menu == null)
                 {
                     continue;
@@ -129,53 +129,6 @@ public class MenuPtn
             }
         }
         return menuBar;
-    }
-
-    public javax.swing.JPopupMenu getMenuPop(String menuId)
-    {
-        if (!Char.isValidate(menuId) || document == null)
-        {
-            return null;
-        }
-        Node node = document.getRootElement().selectSingleNode(Char.format("/magicpwd/menupop[@id='{0}']", menuId));
-        if (node == null || !(node instanceof Element))
-        {
-            return null;
-        }
-        Element element = (Element) node;
-
-        javax.swing.JPopupMenu menuPop = new javax.swing.JPopupMenu();
-        menuPop.setName(menuId);
-
-        List elementList = element.elements();
-        if (elementList != null)
-        {
-            Element tmp;
-            for (Object obj : elementList)
-            {
-                if (!(obj instanceof Element))
-                {
-                    continue;
-                }
-                tmp = (Element) obj;
-                if ("menu".equals(tmp.getName()))
-                {
-                    menuPop.add(createMenu(tmp, null));
-                    continue;
-                }
-                if ("item".equals(tmp.getName()))
-                {
-                    menuPop.add(createItem(tmp, null));
-                    continue;
-                }
-                if ("seperator".equals(tmp.getName()))
-                {
-                    menuPop.addSeparator();
-                    continue;
-                }
-            }
-        }
-        return menuPop;
     }
 
     public javax.swing.JToolBar getToolBar(String toolId)
@@ -220,7 +173,144 @@ public class MenuPtn
         return toolBar;
     }
 
-    private javax.swing.JMenu createMenu(Element element, javax.swing.JComponent component)
+    public javax.swing.JPopupMenu getPopMenu(String menuId)
+    {
+        if (!Char.isValidate(menuId) || document == null)
+        {
+            return null;
+        }
+        Node node = document.getRootElement().selectSingleNode(Char.format("/magicpwd/menupop[@id='{0}']", menuId));
+        if (node == null || !(node instanceof Element))
+        {
+            return null;
+        }
+        Element element = (Element) node;
+
+        javax.swing.JPopupMenu menuPop = new javax.swing.JPopupMenu();
+        menuPop.setName(menuId);
+
+        List elementList = element.elements();
+        if (elementList != null)
+        {
+            Element tmp;
+            for (Object obj : elementList)
+            {
+                if (!(obj instanceof Element))
+                {
+                    continue;
+                }
+                tmp = (Element) obj;
+                if ("menu".equals(tmp.getName()))
+                {
+                    menuPop.add(createMenu(tmp, null, null));
+                    continue;
+                }
+                if ("item".equals(tmp.getName()))
+                {
+                    menuPop.add(createItem(tmp, null, null));
+                    continue;
+                }
+                if ("seperator".equals(tmp.getName()))
+                {
+                    menuPop.addSeparator();
+                    continue;
+                }
+            }
+        }
+        return menuPop;
+    }
+
+    public boolean getSubMenu(String partId, javax.swing.JPopupMenu menu, javax.swing.AbstractAction action)
+    {
+        if (!Char.isValidate(partId) || document == null)
+        {
+            return false;
+        }
+
+        Node node = document.getRootElement().selectSingleNode(Char.format("/magicpwd/submenu[@id='{0}']", partId));
+        if (node == null || !(node instanceof Element))
+        {
+            return false;
+        }
+        Element element = (Element) node;
+
+        List elementList = element.elements();
+        if (elementList != null)
+        {
+            Element tmp;
+            for (Object obj : elementList)
+            {
+                if (!(obj instanceof Element))
+                {
+                    continue;
+                }
+                tmp = (Element) obj;
+                if ("menu".equals(tmp.getName()))
+                {
+                    menu.add(createMenu(tmp, null, action));
+                    continue;
+                }
+                if ("item".equals(tmp.getName()))
+                {
+                    menu.add(createItem(tmp, null, action));
+                    continue;
+                }
+                if ("seperator".equals(tmp.getName()))
+                {
+                    menu.addSeparator();
+                    continue;
+                }
+            }
+        }
+        return true;
+    }
+
+    public boolean getSubMenu(String partId, javax.swing.JMenu menu, javax.swing.AbstractAction action)
+    {
+        if (!Char.isValidate(partId) || document == null)
+        {
+            return false;
+        }
+
+        Node node = document.getRootElement().selectSingleNode(Char.format("/magicpwd/submenu[@id='{0}']", partId));
+        if (node == null || !(node instanceof Element))
+        {
+            return false;
+        }
+        Element element = (Element) node;
+
+        List elementList = element.elements();
+        if (elementList != null)
+        {
+            Element tmp;
+            for (Object obj : elementList)
+            {
+                if (!(obj instanceof Element))
+                {
+                    continue;
+                }
+                tmp = (Element) obj;
+                if ("menu".equals(tmp.getName()))
+                {
+                    menu.add(createMenu(tmp, null, action));
+                    continue;
+                }
+                if ("item".equals(tmp.getName()))
+                {
+                    menu.add(createItem(tmp, null, action));
+                    continue;
+                }
+                if ("seperator".equals(tmp.getName()))
+                {
+                    menu.addSeparator();
+                    continue;
+                }
+            }
+        }
+        return true;
+    }
+
+    private javax.swing.JMenu createMenu(Element element, javax.swing.JComponent component, javax.swing.AbstractAction action)
     {
         javax.swing.JMenu menu = new javax.swing.JMenu();
         String id = element.attributeValue("id");
@@ -245,12 +335,12 @@ public class MenuPtn
                 element = (Element) obj;
                 if ("menu".equals(element.getName()))
                 {
-                    menu.add(createMenu(element, component));
+                    menu.add(createMenu(element, component, action));
                     continue;
                 }
                 if ("item".equals(element.getName()))
                 {
-                    menu.add(createItem(element, component));
+                    menu.add(createItem(element, component, action));
                     continue;
                 }
                 if ("seperator".equals(element.getName()))
@@ -263,7 +353,7 @@ public class MenuPtn
         return menu;
     }
 
-    private javax.swing.JMenuItem createItem(Element element, javax.swing.JComponent component)
+    private javax.swing.JMenuItem createItem(Element element, javax.swing.JComponent component, javax.swing.AbstractAction action)
     {
         javax.swing.JMenuItem item = processType(element);
         String id = element.attributeValue("id");
@@ -277,7 +367,14 @@ public class MenuPtn
         processIcon(element, item);
         processEnabled(element, item);
         processVisible(element, item);
-        processAction(element, item, component);
+        if (action == null)
+        {
+            processAction(element, item, component);
+        }
+        else
+        {
+            item.addActionListener(action);
+        }
         processCommand(element, item);
         processGroup(element, item);
         return item;

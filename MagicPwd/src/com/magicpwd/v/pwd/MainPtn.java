@@ -596,7 +596,7 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         sp.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         sp.setOneTouchExpandable(true);
 
-        kindPop = menuPtn.getMenuPop("kind");
+        kindPop = menuPtn.getPopMenu("kind");
 
         tr_GuidTree = new javax.swing.JTree();
         tr_GuidTree.setComponentPopupMenu(kindPop);
@@ -618,7 +618,7 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         sp1.setViewportView(tr_GuidTree);
         sp.setTopComponent(sp1);
 
-        listPop = menuPtn.getMenuPop("list");
+        listPop = menuPtn.getPopMenu("list");
 
         ls_GuidList = new javax.swing.JList();
         ls_GuidList.setComponentPopupMenu(listPop);
@@ -659,7 +659,7 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         mainFind = new FindBar(this, coreMdl.getListMdl());
         mainFind.initView();
 
-        gridPop = menuPtn.getMenuPop("grid");
+        gridPop = menuPtn.getPopMenu("grid");
 
         tb_KeysView = new javax.swing.JTable();
         tb_KeysView.setModel(gridMdl);
