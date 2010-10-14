@@ -65,7 +65,7 @@ public class MovetoAction extends javax.swing.AbstractAction implements IPwdActi
 
     private boolean changeKind(String hash)
     {
-        if (!Char.isValidateHash(hash))
+        if (!"0".equals(hash) && !Char.isValidateHash(hash))
         {
             return false;
         }
