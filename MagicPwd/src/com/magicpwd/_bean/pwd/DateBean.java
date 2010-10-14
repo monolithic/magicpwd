@@ -13,9 +13,11 @@ import com.magicpwd._face.IEditBean;
 import com.magicpwd._face.IEditItem;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
+import com.magicpwd._util.Date;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.v.pwd.MainPtn;
+import java.text.DateFormat;
 
 /**
  * 属性：日期
@@ -30,6 +32,7 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
     private MainPtn mainPtn;
     private WTextBox nameBox;
 //    private WTextBox dataBox;
+    private DateFormat format;
 
     public DateBean(MainPtn mainPtn)
     {
@@ -56,9 +59,9 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit = new javax.swing.JPanel();
         pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
-        bt_DateView = new BtnLabel();
-        bt_DateView.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "date.png", mainPtn.getCoreMdl().getUserCfg()));
-        bt_DateView.addActionListener(new java.awt.event.ActionListener()
+        bt_DateTime = new BtnLabel();
+        bt_DateTime.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "date.png", mainPtn.getCoreMdl().getUserCfg()));
+        bt_DateTime.addActionListener(new java.awt.event.ActionListener()
         {
 
             @Override
@@ -67,7 +70,7 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
                 bt_DateViewActionPerformed(evt);
             }
         });
-        pl_PropEdit.add(bt_DateView);
+        pl_PropEdit.add(bt_DateTime);
 
         bt_DateConf = new BtnLabel();
         bt_DateConf.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "date.png", mainPtn.getCoreMdl().getUserCfg()));
@@ -82,20 +85,35 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
         });
         pl_PropEdit.add(bt_DateConf);
 
-        pm_ConfMenu = new javax.swing.JPopupMenu();
-        javax.swing.JCheckBoxMenuItem item = new javax.swing.JCheckBoxMenuItem();
-        pm_ConfMenu.add(item);
+        pm_MenuTime = new javax.swing.JPopupMenu();
+        mi_TimeDef = new javax.swing.JMenuItem();
         javax.swing.AbstractAction action = new javax.swing.AbstractAction()
         {
 
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e)
             {
-                mi_DateConfActionPerformed(e);
+                mi_DateTimeActionPerformed(e);
             }
         };
-        mainPtn.getMenuPtn().getSubMenu("date-template", pm_ConfMenu, action);
-        pm_ConfMenu.addSeparator();
+        mi_TimeDef.addActionListener(action);
+        pm_MenuTime.add(mi_TimeDef);
+        pm_MenuTime.addSeparator();
+        mainPtn.getMenuPtn().getSubMenu("date-interval", pm_MenuTime, action);
+
+        pm_MenuConf = new javax.swing.JPopupMenu();
+        mi_ConfDef = new javax.swing.JCheckBoxMenuItem();
+        pm_MenuConf.add(mi_ConfDef);
+        pm_MenuTime.addSeparator();
+        mainPtn.getMenuPtn().getSubMenu("date-template", pm_MenuConf, new javax.swing.AbstractAction()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                mi_DateTpltActionPerformed(e);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -143,8 +161,11 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
         Lang.setWText(lb_PropName, LangRes.P30F130F, "名称");
         Lang.setWText(lb_PropData, LangRes.P30F1310, "时间");
 
-        Lang.setWText(bt_DateView, LangRes.P30F1513, "&O");
-        Lang.setWTips(bt_DateView, LangRes.P30F1514, "当前时间(Alt + O)");
+        Lang.setWText(bt_DateTime, LangRes.P30F1513, "&O");
+        Lang.setWTips(bt_DateTime, LangRes.P30F1514, "当前时间(Alt + O)");
+
+        Bean.setText(mi_TimeDef, "当前时间");
+        Bean.setText(mi_ConfDef, "默认格式");
 
         nameBox.initLang();
         dataEdit.initLang();
@@ -215,16 +236,24 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
 
     private void bt_DateViewActionPerformed(java.awt.event.ActionEvent evt)
     {
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(ConsEnv.VIEW_DATE);
-        tf_PropData.setText(sdf.format(new java.util.Date(System.currentTimeMillis())));
+        pm_MenuTime.show(bt_DateTime, 0, bt_DateTime.getSize().height);
     }
 
     private void bt_DateConfActionPerformed(java.awt.event.ActionEvent evt)
     {
-        pm_ConfMenu.show(bt_DateConf, 0, bt_DateConf.getSize().height);
+        pm_MenuConf.show(bt_DateConf, 0, bt_DateConf.getSize().height);
     }
 
-    private void mi_DateConfActionPerformed(java.awt.event.ActionEvent evt)
+    private void mi_DateTimeActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        if (format == null)
+        {
+            getFormat();
+        }
+        tf_PropData.setText(format.format(Date.parseDate(evt.getActionCommand()).getTime()));
+    }
+
+    private void mi_DateTpltActionPerformed(java.awt.event.ActionEvent evt)
     {
         String cmd = evt.getActionCommand();
         if (!Char.isValidate(cmd))
@@ -232,6 +261,50 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
             return;
         }
         itemData.setSpec(IEditItem.SPEC_DATE_FORM, cmd);
+        getFormat();
+    }
+
+    private DateFormat getFormat()
+    {
+        String t = itemData.getSpec(IEditItem.SPEC_DATE_FORM);
+        if (!Char.isValidate(t))
+        {
+            format = DateFormat.getDateTimeInstance();
+        }
+        if (t.startsWith("java:"))
+        {
+            java.util.regex.Matcher dm = java.util.regex.Pattern.compile("\\d+d").matcher(t);
+            String date = dm.find() ? dm.group().replace("d", "") : null;
+            java.util.regex.Matcher tm = java.util.regex.Pattern.compile("\\d+t").matcher(t);
+            String time = tm.find() ? tm.group().replace("t", "") : null;
+            if (date != null && time != null)
+            {
+                format = DateFormat.getDateTimeInstance(Integer.parseInt(date), Integer.parseInt(time));
+                return format;
+            }
+            if (date != null)
+            {
+                format = DateFormat.getDateInstance(Integer.parseInt(date));
+                return format;
+            }
+            if (time != null)
+            {
+                format = DateFormat.getDateInstance(Integer.parseInt(time));
+                return format;
+            }
+
+            format = DateFormat.getDateTimeInstance();
+            return format;
+        }
+
+        if (t.startsWith("user:"))
+        {
+            format = new java.text.SimpleDateFormat(t.substring(5));
+            return format;
+        }
+
+        format = DateFormat.getDateTimeInstance();
+        return format;
     }
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JLabel lb_PropEdit;
@@ -239,9 +312,10 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
     private javax.swing.JPanel pl_PropEdit;
     private javax.swing.JTextField tf_PropData;
     private javax.swing.JTextField tf_PropName;
-    private BtnLabel bt_DateView;
+    private BtnLabel bt_DateTime;
     private BtnLabel bt_DateConf;
-    private javax.swing.JPopupMenu pm_ConfMenu;
-    private javax.swing.JCheckBoxMenuItem mi_DefFormat;
-    private javax.swing.JCheckBoxMenuItem mi_Now;
+    private javax.swing.JPopupMenu pm_MenuTime;
+    private javax.swing.JPopupMenu pm_MenuConf;
+    private javax.swing.JMenuItem mi_TimeDef;
+    private javax.swing.JCheckBoxMenuItem mi_ConfDef;
 }

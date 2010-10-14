@@ -249,7 +249,7 @@ public class HintBean extends javax.swing.JPanel implements IEditBean
         String t = cal.get(java.util.Calendar.HOUR_OF_DAY) + "点";
         Lang.setWText(mi_MenuItem[0], null, t);
         Lang.setWTips(mi_MenuItem[0], null, t + "提醒");
-        mi_MenuItem[0].setActionCommand(new java.text.SimpleDateFormat(ConsEnv.VIEW_DATE).format(cal.getTime()));
+        mi_MenuItem[0].setActionCommand(new java.text.SimpleDateFormat(ConsEnv.HINT_DATE).format(cal.getTime()));
         pm_DateView.show(bt_DateView, 0, bt_DateView.getHeight());
     }
 
@@ -262,7 +262,7 @@ public class HintBean extends javax.swing.JPanel implements IEditBean
         }
 
         java.util.Calendar cal = java.util.Calendar.getInstance();
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(ConsEnv.VIEW_DATE);
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(ConsEnv.HINT_DATE);
         if ("half".equalsIgnoreCase(cmd))
         {
             cal.add(java.util.Calendar.MINUTE, 30);
