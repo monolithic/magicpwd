@@ -6,10 +6,10 @@ package com.magicpwd.e.pwd.list;
 
 import com.magicpwd._comn.Keys;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd._face.IBackCall;
+import com.magicpwd.$i.IBackCall;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
-import com.magicpwd.e.pwd.IPwdAction;
+import com.magicpwd.$i.IPwdAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
 import com.magicpwd.x.DatDialog;

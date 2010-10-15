@@ -14,7 +14,7 @@ import com.magicpwd._util.File;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.e.pad.IPadAction;
-import com.magicpwd.e.pwd.IPwdAction;
+import com.magicpwd.$i.IPwdAction;
 import com.magicpwd.e.pwd.skin.FeelAction;
 import com.magicpwd.e.pwd.skin.LookAction;
 import com.magicpwd.e.pwd.skin.MoreAction;
