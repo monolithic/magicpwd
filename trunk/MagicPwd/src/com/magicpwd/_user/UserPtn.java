@@ -38,7 +38,7 @@ public class UserPtn extends javax.swing.JPanel
     /**
      * 成功回调函数
      */
-    private com.magicpwd._face.IBackCall backCall;
+    private com.magicpwd.$i.IBackCall backCall;
     /**
      * 导航图标
      */
@@ -807,7 +807,7 @@ public class UserPtn extends javax.swing.JPanel
         }
     }
 
-    public void setBackCall(com.magicpwd._face.IBackCall backCall)
+    public void setBackCall(com.magicpwd.$i.IBackCall backCall)
     {
         this.backCall = backCall;
     }
