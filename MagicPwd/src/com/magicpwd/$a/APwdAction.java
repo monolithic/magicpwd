@@ -17,9 +17,26 @@ public abstract class APwdAction implements IPwdAction
 
     protected MainPtn mainPtn;
     protected CoreMdl coreMdl;
-    protected boolean enabled;
-    protected boolean visible;
-    protected boolean selected;
+    protected boolean enabled = true;
+    protected boolean visible = true;
+    protected boolean selected = false;
+
+    public void addPropertyChangeListener(java.beans.PropertyChangeListener listener)
+    {
+    }
+
+    public void removePropertyChangeListener(java.beans.PropertyChangeListener listener)
+    {
+    }
+
+    public Object getValue(String key)
+    {
+        return null;
+    }
+
+    public void putValue(String key, Object value)
+    {
+    }
 
     @Override
     public void setMainPtn(MainPtn mainPtn)
@@ -36,19 +53,19 @@ public abstract class APwdAction implements IPwdAction
     @Override
     public boolean isEnabled()
     {
-        return isEnabled();
+        return enabled;
     }
 
     @Override
     public boolean isVisible()
     {
-        return isVisible();
+        return visible;
     }
 
     @Override
     public boolean isSelected()
     {
-        return isSelected();
+        return selected;
     }
 
     /**

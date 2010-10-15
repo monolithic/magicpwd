@@ -11,7 +11,7 @@ import com.magicpwd.v.pwd.MainPtn;
  *
  * @author aven
  */
-public interface IPwdAction extends java.awt.event.ActionListener
+public interface IPwdAction extends javax.swing.Action
 {
 
     void setMainPtn(MainPtn mainPtn);

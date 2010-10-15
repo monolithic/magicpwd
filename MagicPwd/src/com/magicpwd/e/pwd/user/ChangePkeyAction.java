@@ -4,11 +4,9 @@
  */
 package com.magicpwd.e.pwd.user;
 
-import com.magicpwd._cons.ConsEnv;
+import com.magicpwd.$a.APwdAction;
 import com.magicpwd.$i.IBackCall;
-import com.magicpwd.$i.IPwdAction;
-import com.magicpwd.m.CoreMdl;
-import com.magicpwd.v.pwd.MainPtn;
+import com.magicpwd._cons.ConsEnv;
 import com.magicpwd.v.TrayPtn;
 import java.util.EventListener;
 
@@ -16,11 +14,8 @@ import java.util.EventListener;
  *
  * @author Amon
  */
-public class ChangePkeyAction extends javax.swing.AbstractAction implements IPwdAction
+public class ChangePkeyAction extends APwdAction
 {
-
-    private MainPtn mainPtn;
-    private CoreMdl coreMdl;
 
     public ChangePkeyAction()
     {
@@ -41,19 +36,12 @@ public class ChangePkeyAction extends javax.swing.AbstractAction implements IPwd
     }
 
     @Override
-    public void setMainPtn(MainPtn mainPtn)
+    public void doInit(Object object)
     {
-        this.mainPtn = mainPtn;
     }
 
     @Override
-    public void setCoreMdl(CoreMdl coreMdl)
-    {
-        this.coreMdl = coreMdl;
-    }
-
-    @Override
-    public void doUpdate(Object object)
+    public void reInit(Object object)
     {
     }
 }

@@ -4,6 +4,7 @@
  */
 package com.magicpwd.e.pwd.safe;
 
+import com.magicpwd.$a.APwdAction;
 import com.magicpwd._comn.S1S1;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
@@ -13,9 +14,6 @@ import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
-import com.magicpwd.$i.IPwdAction;
-import com.magicpwd.m.CoreMdl;
-import com.magicpwd.v.pwd.MainPtn;
 import com.magicpwd.v.TrayPtn;
 import com.magicpwd.x.LckDialog;
 
@@ -23,11 +21,8 @@ import com.magicpwd.x.LckDialog;
  *
  * @author Amon
  */
-public class CloudResumeAction extends javax.swing.AbstractAction implements IPwdAction
+public class CloudResumeAction extends APwdAction
 {
-
-    private MainPtn mainPtn;
-    private CoreMdl coreMdl;
 
     public CloudResumeAction()
     {
@@ -62,19 +57,12 @@ public class CloudResumeAction extends javax.swing.AbstractAction implements IPw
     }
 
     @Override
-    public void setMainPtn(MainPtn mainPtn)
+    public void doInit(Object object)
     {
-        this.mainPtn = mainPtn;
     }
 
     @Override
-    public void setCoreMdl(CoreMdl coreMdl)
-    {
-        this.coreMdl = coreMdl;
-    }
-
-    @Override
-    public void doUpdate(Object object)
+    public void reInit(Object object)
     {
     }
 
