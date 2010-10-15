@@ -7,7 +7,7 @@ package com.magicpwd.v.pwd;
 import com.magicpwd._comn.Keys;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd._face.IEditItem;
+import com.magicpwd.$i.IEditItem;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.DBA3000;

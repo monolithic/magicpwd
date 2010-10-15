@@ -10,7 +10,7 @@ import com.magicpwd._comn.prop.Char;
 import com.magicpwd._comp.IcoLabel;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd._face.IPropBean;
+import com.magicpwd.$i.IPropBean;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.CharMdl;
