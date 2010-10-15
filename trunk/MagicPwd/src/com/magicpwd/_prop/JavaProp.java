@@ -5,7 +5,7 @@
 package com.magicpwd._prop;
 
 import com.magicpwd._comn.S1S1;
-import com.magicpwd._face.IPropBean;
+import com.magicpwd.$i.IPropBean;
 import com.magicpwd.m.CoreMdl;
 
 /**
