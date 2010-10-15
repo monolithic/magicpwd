@@ -4,8 +4,8 @@
 package com.magicpwd._bean.pwd;
 
 import com.magicpwd._cons.LangRes;
-import com.magicpwd._face.IEditBean;
-import com.magicpwd._face.IEditItem;
+import com.magicpwd.$i.IEditBean;
+import com.magicpwd.$i.IEditItem;
 import com.magicpwd._util.Lang;
 import com.magicpwd.v.pwd.MainPtn;
 
