@@ -7,7 +7,7 @@ import com.magicpwd._comn.item.EditItem;
 
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._face.IEditItem;
+import com.magicpwd.$i.IEditItem;
 import com.magicpwd.d.DBA3000;
 
 /**

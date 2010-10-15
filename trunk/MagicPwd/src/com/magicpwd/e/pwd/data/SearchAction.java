@@ -4,19 +4,14 @@
  */
 package com.magicpwd.e.pwd.data;
 
-import com.magicpwd.e.pwd.IPwdAction;
-import com.magicpwd.m.CoreMdl;
-import com.magicpwd.v.pwd.MainPtn;
+import com.magicpwd.$a.APwdAction;
 
 /**
  *
  * @author Amon
  */
-public class SearchAction extends javax.swing.AbstractAction implements IPwdAction
+public class SearchAction extends APwdAction
 {
-
-    private MainPtn mainPtn;
-    private CoreMdl coreMdl;
 
     public SearchAction()
     {
@@ -28,19 +23,12 @@ public class SearchAction extends javax.swing.AbstractAction implements IPwdActi
     }
 
     @Override
-    public void setMainPtn(MainPtn mainPtn)
+    public void doInit(Object object)
     {
-        this.mainPtn = mainPtn;
     }
 
     @Override
-    public void setCoreMdl(CoreMdl coreMdl)
-    {
-        this.coreMdl = coreMdl;
-    }
-
-    @Override
-    public void doUpdate(Object object)
+    public void reInit(Object object)
     {
     }
 }
