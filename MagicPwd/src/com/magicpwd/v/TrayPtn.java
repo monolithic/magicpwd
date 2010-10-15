@@ -6,7 +6,7 @@ import com.magicpwd.v.pwd.MainPtn;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd._face.IBackCall;
+import com.magicpwd.$i.IBackCall;
 import com.magicpwd._user.UserPtn;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Jzip;
