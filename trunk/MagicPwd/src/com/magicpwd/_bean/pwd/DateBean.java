@@ -3,14 +3,15 @@
  */
 package com.magicpwd._bean.pwd;
 
+import com.magicpwd.$a.APwdAction;
+import com.magicpwd.$i.IEditBean;
+import com.magicpwd.$i.IEditItem;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd.$i.IEditBean;
-import com.magicpwd.$i.IEditItem;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Date;
@@ -87,13 +88,23 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
 
         pm_MenuTime = new javax.swing.JPopupMenu();
         mi_TimeDef = new javax.swing.JMenuItem();
-        javax.swing.AbstractAction action = new javax.swing.AbstractAction()
+        APwdAction action = new APwdAction()
         {
 
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e)
             {
                 mi_DateTimeActionPerformed(e);
+            }
+
+            @Override
+            public void doInit(Object object)
+            {
+            }
+
+            @Override
+            public void reInit(Object object)
+            {
             }
         };
         mi_TimeDef.addActionListener(action);
@@ -105,13 +116,23 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
         mi_ConfDef = new javax.swing.JCheckBoxMenuItem();
         pm_MenuConf.add(mi_ConfDef);
         pm_MenuTime.addSeparator();
-        mainPtn.getMenuPtn().getSubMenu("date-template", pm_MenuConf, new javax.swing.AbstractAction()
+        mainPtn.getMenuPtn().getSubMenu("date-template", pm_MenuConf, new APwdAction()
         {
 
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e)
             {
                 mi_DateTpltActionPerformed(e);
+            }
+
+            @Override
+            public void doInit(Object object)
+            {
+            }
+
+            @Override
+            public void reInit(Object object)
+            {
             }
         });
 

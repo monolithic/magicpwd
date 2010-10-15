@@ -4,6 +4,7 @@
  */
 package com.magicpwd.v;
 
+import com.magicpwd.$i.IPwdAction;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
@@ -14,7 +15,6 @@ import com.magicpwd._util.File;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.e.pad.IPadAction;
-import com.magicpwd.$i.IPwdAction;
 import com.magicpwd.e.pwd.skin.FeelAction;
 import com.magicpwd.e.pwd.skin.LookAction;
 import com.magicpwd.e.pwd.skin.MoreAction;
@@ -38,14 +38,14 @@ public class MenuPtn
     private CoreMdl coreMdl;
     private java.util.regex.Pattern pattern;
     private java.util.HashMap<String, javax.swing.AbstractButton> buttons;
-    private java.util.HashMap<String, javax.swing.AbstractAction> actions;
+    private java.util.HashMap<String, IPwdAction> actions;
     private java.util.HashMap<String, WButtonGroup> groups;
 
     public MenuPtn(CoreMdl coreMdl)
     {
         this.coreMdl = coreMdl;
         buttons = new java.util.HashMap<String, javax.swing.AbstractButton>();
-        actions = new java.util.HashMap<String, javax.swing.AbstractAction>();
+        actions = new java.util.HashMap<String, IPwdAction>();
         groups = new java.util.HashMap<String, WButtonGroup>();
     }
 
@@ -71,7 +71,7 @@ public class MenuPtn
         return buttons.get(id);
     }
 
-    public javax.swing.AbstractAction getAction(String id)
+    public java.awt.event.ActionListener getAction(String id)
     {
         return actions.get(id);
     }
@@ -220,7 +220,7 @@ public class MenuPtn
         return menuPop;
     }
 
-    public boolean getSubMenu(String partId, javax.swing.JPopupMenu menu, javax.swing.AbstractAction action)
+    public boolean getSubMenu(String partId, javax.swing.JPopupMenu menu, IPwdAction action)
     {
         if (!Char.isValidate(partId) || document == null)
         {
@@ -265,7 +265,7 @@ public class MenuPtn
         return true;
     }
 
-    public boolean getSubMenu(String partId, javax.swing.JMenu menu, javax.swing.AbstractAction action)
+    public boolean getSubMenu(String partId, javax.swing.JMenu menu, IPwdAction action)
     {
         if (!Char.isValidate(partId) || document == null)
         {
@@ -310,7 +310,7 @@ public class MenuPtn
         return true;
     }
 
-    private javax.swing.JMenu createMenu(Element element, javax.swing.JComponent component, javax.swing.AbstractAction action)
+    private javax.swing.JMenu createMenu(Element element, javax.swing.JComponent component, IPwdAction action)
     {
         javax.swing.JMenu menu = new javax.swing.JMenu();
         String id = element.attributeValue("id");
@@ -353,7 +353,7 @@ public class MenuPtn
         return menu;
     }
 
-    private javax.swing.JMenuItem createItem(Element element, javax.swing.JComponent component, javax.swing.AbstractAction action)
+    private javax.swing.JMenuItem createItem(Element element, javax.swing.JComponent component, IPwdAction action)
     {
         javax.swing.JMenuItem item = processType(element);
         String id = element.attributeValue("id");
@@ -646,7 +646,8 @@ public class MenuPtn
                     reader = new java.io.InputStreamReader(new java.io.FileInputStream(amf), ConsEnv.FILE_ENCODING);
                     prop.load(reader);
 
-                    item = new javax.swing.JCheckBoxMenuItem(action);
+                    item = new javax.swing.JCheckBoxMenuItem();
+                    item.addActionListener(action);
                     Bean.setText(item, getLang(prop, "text"));
                     Bean.setTips(item, getLang(prop, "tips"));
                     String name = dir.getName();
@@ -804,7 +805,7 @@ public class MenuPtn
         return button;
     }
 
-    private static javax.swing.AbstractButton processStrokes(Element element, javax.swing.AbstractButton button, javax.swing.AbstractAction action, javax.swing.JComponent component)
+    private static javax.swing.AbstractButton processStrokes(Element element, javax.swing.AbstractButton button, IPwdAction action, javax.swing.JComponent component)
     {
         java.util.List list = element.elements("stroke");
         if (list == null || list.size() < 1)
@@ -844,7 +845,7 @@ public class MenuPtn
         element = (Element) list.get(0);
         String name = element.attributeValue("id");
         boolean validate = Char.isValidate(name);
-        javax.swing.AbstractAction action = validate ? actions.get(name) : null;
+        IPwdAction action = validate ? actions.get(name) : null;
         if (action == null)
         {
             String type = element.attributeValue("class");
@@ -853,15 +854,15 @@ public class MenuPtn
                 try
                 {
                     Object obj = Class.forName(type).newInstance();
-                    if (obj instanceof javax.swing.AbstractAction)
+                    if (obj instanceof IPwdAction)
                     {
-                        action = (javax.swing.AbstractAction) obj;
+                        action = (IPwdAction) obj;
                         if (action instanceof IPwdAction)
                         {
                             IPwdAction pwdAction = (IPwdAction) action;
                             pwdAction.setMainPtn(TrayPtn.getMainPtn());
                             pwdAction.setCoreMdl(coreMdl);
-                            pwdAction.doUpdate(null);
+                            pwdAction.doInit(null);
                         }
                         else if (action instanceof IPadAction)
                         {
@@ -883,27 +884,18 @@ public class MenuPtn
             }
         }
         button.addActionListener(action);
-        Object obj = action.getValue("enabled");
-        if (obj != null)
+        if (action != null)
         {
-            button.setEnabled(obj != Boolean.FALSE);
-        }
-        obj = action.getValue("selected");
-        if (obj != null)
-        {
-            button.setSelected(obj == Boolean.TRUE);
-        }
-        obj = action.getValue("visible");
-        if (obj != null)
-        {
-            button.setVisible(obj != Boolean.FALSE);
+            button.setEnabled(action.isEnabled());
+            button.setSelected(action.isSelected());
+            button.setVisible(action.isVisible());
         }
         processStrokes(element, button, action, component);
         processReference(element, button, action);
         return button;
     }
 
-    private javax.swing.AbstractButton processReference(Element element, javax.swing.AbstractButton button, javax.swing.AbstractAction action)
+    private javax.swing.AbstractButton processReference(Element element, javax.swing.AbstractButton button, IPwdAction action)
     {
         java.util.List list = element.elements("property");
         if (list == null || list.size() < 1)

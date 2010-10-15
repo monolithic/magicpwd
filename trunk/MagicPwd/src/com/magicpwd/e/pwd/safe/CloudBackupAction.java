@@ -4,6 +4,7 @@
  */
 package com.magicpwd.e.pwd.safe;
 
+import com.magicpwd.$a.APwdAction;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._mail.Connect;
@@ -11,9 +12,6 @@ import com.magicpwd._mail.Sender;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
-import com.magicpwd.$i.IPwdAction;
-import com.magicpwd.m.CoreMdl;
-import com.magicpwd.v.pwd.MainPtn;
 import com.magicpwd.v.TrayPtn;
 import com.magicpwd.x.LckDialog;
 
@@ -21,11 +19,8 @@ import com.magicpwd.x.LckDialog;
  *
  * @author Amon
  */
-public class CloudBackupAction extends javax.swing.AbstractAction implements IPwdAction
+public class CloudBackupAction extends APwdAction
 {
-
-    private MainPtn mainPtn;
-    private CoreMdl coreMdl;
 
     public CloudBackupAction()
     {
@@ -60,19 +55,12 @@ public class CloudBackupAction extends javax.swing.AbstractAction implements IPw
     }
 
     @Override
-    public void setMainPtn(MainPtn mainPtn)
+    public void doInit(Object object)
     {
-        this.mainPtn = mainPtn;
     }
 
     @Override
-    public void setCoreMdl(CoreMdl coreMdl)
-    {
-        this.coreMdl = coreMdl;
-    }
-
-    @Override
-    public void doUpdate(Object object)
+    public void reInit(Object object)
     {
     }
 
@@ -105,8 +93,8 @@ public class CloudBackupAction extends javax.swing.AbstractAction implements IPw
             connect.setUsername(data[1]);
             if (!connect.useDefault())
             {
-                Lang.showMesg(mainPtn, null, "查找不到对应的服务信息，如有疑问请与作者联系！");
-                return;
+            Lang.showMesg(mainPtn, null, "查找不到对应的服务信息，如有疑问请与作者联系！");
+            return;
             }
             Reader reader = new Reader(connect);
 
@@ -115,17 +103,17 @@ public class CloudBackupAction extends javax.swing.AbstractAction implements IPw
             javax.mail.Folder folder = store.getDefaultFolder().getFolder("inbox");
             if (folder.isOpen())
             {
-                folder.close(false);
+            folder.close(false);
             }
             folder.open(javax.mail.Folder.READ_WRITE);
             javax.mail.Message message = reader.find(folder, null, Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"), null, null);
             if (message != null)
             {
-                message.setFlag(javax.mail.Flags.Flag.DELETED, true);
+            message.setFlag(javax.mail.Flags.Flag.DELETED, true);
             }
             folder.close(true);
             store.close();
-            */
+             */
 
             Connect connect = new Connect(data[0], data[2], "smtp");
             connect.setUsername(data[1]);

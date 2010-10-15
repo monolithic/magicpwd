@@ -4,26 +4,21 @@
  */
 package com.magicpwd.e.pwd.user;
 
+import com.magicpwd.$a.APwdAction;
+import com.magicpwd.$i.IBackCall;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd.$i.IBackCall;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
-import com.magicpwd.$i.IPwdAction;
-import com.magicpwd.m.CoreMdl;
-import com.magicpwd.v.pwd.MainPtn;
 import com.magicpwd.v.TrayPtn;
 
 /**
  *
  * @author Amon
  */
-public class CreateSkeyAction extends javax.swing.AbstractAction implements IPwdAction
+public class CreateSkeyAction extends APwdAction
 {
-
-    private MainPtn mainPtn;
-    private CoreMdl coreMdl;
 
     public CreateSkeyAction()
     {
@@ -57,20 +52,13 @@ public class CreateSkeyAction extends javax.swing.AbstractAction implements IPwd
     }
 
     @Override
-    public void setMainPtn(MainPtn mainPtn)
-    {
-        this.mainPtn = mainPtn;
-    }
-
-    @Override
-    public void setCoreMdl(CoreMdl coreMdl)
-    {
-        this.coreMdl = coreMdl;
-    }
-
-    @Override
-    public void doUpdate(Object object)
+    public void doInit(Object object)
     {
         setEnabled(!Char.isValidate(coreMdl.getUserCfg().getCfg(ConsCfg.CFG_USER_SKEY), 224));
+    }
+
+    @Override
+    public void reInit(Object object)
+    {
     }
 }

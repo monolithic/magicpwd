@@ -4,15 +4,13 @@
  */
 package com.magicpwd.e.pwd.safe;
 
-import com.magicpwd.$i.IPwdAction;
-import com.magicpwd.m.CoreMdl;
-import com.magicpwd.v.pwd.MainPtn;
+import com.magicpwd.$a.APwdAction;
 
 /**
  * 备份到数据文件
  * @author Amon
  */
-public class LocalSaveasAction extends javax.swing.AbstractAction implements IPwdAction
+public class LocalSaveasAction extends APwdAction
 {
 
     public LocalSaveasAction()
@@ -25,19 +23,12 @@ public class LocalSaveasAction extends javax.swing.AbstractAction implements IPw
     }
 
     @Override
-    public void setMainPtn(MainPtn mainPtn)
+    public void doInit(Object object)
     {
-//        this.mainPtn = mainPtn;
     }
 
     @Override
-    public void setCoreMdl(CoreMdl coreMdl)
-    {
-//        this.coreMdl = coreMdl;
-    }
-
-    @Override
-    public void doUpdate(Object object)
+    public void reInit(Object object)
     {
     }
 }

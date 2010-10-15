@@ -4,22 +4,17 @@
  */
 package com.magicpwd.e.pwd.kind;
 
+import com.magicpwd.$a.APwdAction;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
-import com.magicpwd.$i.IPwdAction;
-import com.magicpwd.m.CoreMdl;
 import com.magicpwd.r.KindTN;
-import com.magicpwd.v.pwd.MainPtn;
 
 /**
  *
  * @author Amon
  */
-public class DeleteAction extends javax.swing.AbstractAction implements IPwdAction
+public class DeleteAction extends APwdAction
 {
-
-    private MainPtn mainPtn;
-    private CoreMdl coreMdl;
 
     public DeleteAction()
     {
@@ -53,19 +48,12 @@ public class DeleteAction extends javax.swing.AbstractAction implements IPwdActi
     }
 
     @Override
-    public void setMainPtn(MainPtn mainPtn)
+    public void doInit(Object object)
     {
-        this.mainPtn = mainPtn;
     }
 
     @Override
-    public void setCoreMdl(CoreMdl coreMdl)
-    {
-        this.coreMdl = coreMdl;
-    }
-
-    @Override
-    public void doUpdate(Object object)
+    public void reInit(Object object)
     {
     }
 }

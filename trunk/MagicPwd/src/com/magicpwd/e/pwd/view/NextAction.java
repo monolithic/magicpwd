@@ -4,19 +4,14 @@
  */
 package com.magicpwd.e.pwd.view;
 
-import com.magicpwd.$i.IPwdAction;
-import com.magicpwd.m.CoreMdl;
-import com.magicpwd.v.pwd.MainPtn;
+import com.magicpwd.$a.APwdAction;
 
 /**
  *
  * @author Amon
  */
-public class NextAction extends javax.swing.AbstractAction implements IPwdAction
+public class NextAction extends APwdAction
 {
-
-    private MainPtn mainPtn;
-    private CoreMdl coreMdl;
 
     public NextAction()
     {
@@ -29,19 +24,12 @@ public class NextAction extends javax.swing.AbstractAction implements IPwdAction
     }
 
     @Override
-    public void setMainPtn(MainPtn mainPtn)
+    public void doInit(Object object)
     {
-        this.mainPtn = mainPtn;
     }
 
     @Override
-    public void setCoreMdl(CoreMdl coreMdl)
-    {
-        this.coreMdl = coreMdl;
-    }
-
-    @Override
-    public void doUpdate(Object object)
+    public void reInit(Object object)
     {
     }
 }

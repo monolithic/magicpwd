@@ -9,20 +9,16 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
-import com.magicpwd.$i.IPwdAction;
-import com.magicpwd.m.CoreMdl;
+import com.magicpwd.$a.APwdAction;
 import com.magicpwd.m.UserCfg;
 import com.magicpwd.v.TrayPtn;
-import com.magicpwd.v.pwd.MainPtn;
 
 /**
  *
  * @author aven
  */
-public class LookAction extends javax.swing.AbstractAction implements IPwdAction
+public class LookAction extends APwdAction
 {
-
-    private CoreMdl coreMdl;
 
     public LookAction()
     {
@@ -78,19 +74,12 @@ public class LookAction extends javax.swing.AbstractAction implements IPwdAction
     }
 
     @Override
-    public void setMainPtn(MainPtn mainPtn)
+    public void doInit(Object object)
     {
-//        this.mainPtn = mainPtn;
     }
 
     @Override
-    public void setCoreMdl(CoreMdl coreMdl)
-    {
-        this.coreMdl = coreMdl;
-    }
-
-    @Override
-    public void doUpdate(Object object)
+    public void reInit(Object object)
     {
     }
 }
