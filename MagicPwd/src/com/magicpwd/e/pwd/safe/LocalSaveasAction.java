@@ -4,7 +4,7 @@
  */
 package com.magicpwd.e.pwd.safe;
 
-import com.magicpwd.e.pwd.IPwdAction;
+import com.magicpwd.$i.IPwdAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
 
