@@ -5,8 +5,8 @@
 package com.magicpwd.e.pwd.user;
 
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._face.IBackCall;
-import com.magicpwd.e.pwd.IPwdAction;
+import com.magicpwd.$i.IBackCall;
+import com.magicpwd.$i.IPwdAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
 import com.magicpwd.v.TrayPtn;

@@ -6,7 +6,7 @@ package com.magicpwd.e.pwd.file;
 
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
-import com.magicpwd.e.pwd.IPwdAction;
+import com.magicpwd.$i.IPwdAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
 import com.magicpwd.v.TrayPtn;

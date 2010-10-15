@@ -5,7 +5,7 @@
 package com.magicpwd.e.pwd.list;
 
 import com.magicpwd._comn.Keys;
-import com.magicpwd.e.pwd.IPwdAction;
+import com.magicpwd.$i.IPwdAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.pwd.MainPtn;
 
