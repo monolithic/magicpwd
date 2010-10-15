@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <magicpwd>
     <!--魔方密码菜单栏-->
-    <menupop id="tray">
+    <popmenu id="tray">
         <!--关于-->
         <item type="normal" text="$P30F9601">
             <action class="com.magicpwd.e.InfoAction" />
@@ -61,5 +61,5 @@
         <item type="normal" text="$P30F960C">
             <action class="com.magicpwd.e.ExitAction" />
         </item>
-    </menupop>
+    </popmenu>
 </magicpwd>
