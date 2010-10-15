@@ -2,7 +2,7 @@ package com.magicpwd.x;
 
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd._face.IBackCall;
+import com.magicpwd.$i.IBackCall;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Hash;
 import com.magicpwd._util.Lang;
