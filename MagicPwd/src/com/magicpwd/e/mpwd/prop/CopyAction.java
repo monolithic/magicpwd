@@ -35,7 +35,7 @@ public class CopyAction extends AMpwdAction
     }
 
     @Override
-    public void reInit(Object object)
+    public void reInit(javax.swing.AbstractButton button)
     {
     }
 }

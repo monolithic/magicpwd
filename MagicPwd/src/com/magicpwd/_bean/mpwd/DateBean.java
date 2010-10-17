@@ -102,7 +102,7 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
             }
 
             @Override
-            public void reInit(Object object)
+            public void reInit(javax.swing.AbstractButton button)
             {
             }
         };
@@ -130,7 +130,7 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
             }
 
             @Override
-            public void reInit(Object object)
+            public void reInit(javax.swing.AbstractButton button)
             {
             }
         });

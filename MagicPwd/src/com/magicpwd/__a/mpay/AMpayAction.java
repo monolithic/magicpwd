@@ -4,12 +4,13 @@
  */
 package com.magicpwd.__a.mpay;
 
+import com.magicpwd.__a.AAction;
 import com.magicpwd.__i.mpay.IMpayAction;
 
 /**
  *
  * @author Amon
  */
-public abstract class AMpayAction implements IMpayAction
+public abstract class AMpayAction extends AAction implements IMpayAction
 {
 }

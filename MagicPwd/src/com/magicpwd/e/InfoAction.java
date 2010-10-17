@@ -4,6 +4,7 @@
  */
 package com.magicpwd.e;
 
+import com.magicpwd.__a.AAction;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
@@ -14,7 +15,7 @@ import com.magicpwd.v.TrayPtn;
  *
  * @author Administrator
  */
-public class InfoAction extends javax.swing.AbstractAction
+public class InfoAction extends AAction
 {
 
     public InfoAction()
@@ -33,5 +34,15 @@ public class InfoAction extends javax.swing.AbstractAction
             form = TrayPtn.getCurrForm();
         }
         javax.swing.JOptionPane.showMessageDialog(form, buf.toString(), Lang.getLang(LangRes.P30F1208, "关于软件"), javax.swing.JOptionPane.INFORMATION_MESSAGE, new javax.swing.ImageIcon(Bean.getLogo(32)));
+    }
+
+    @Override
+    public void doInit(Object object)
+    {
+    }
+
+    @Override
+    public void reInit(javax.swing.AbstractButton button)
+    {
     }
 }

@@ -4,6 +4,7 @@
  */
 package com.magicpwd.e;
 
+import com.magicpwd.__a.AAction;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Desk;
@@ -16,7 +17,7 @@ import com.magicpwd.v.TrayPtn;
  *
  * @author Amon
  */
-public class UpdtAction extends javax.swing.AbstractAction
+public class UpdtAction extends AAction
 {
 
     public UpdtAction()
@@ -51,5 +52,15 @@ public class UpdtAction extends javax.swing.AbstractAction
             Logs.exception(exp);
             Lang.showMesg(form, LangRes.P30F7A14, "");
         }
+    }
+
+    @Override
+    public void doInit(Object object)
+    {
+    }
+
+    @Override
+    public void reInit(javax.swing.AbstractButton button)
+    {
     }
 }

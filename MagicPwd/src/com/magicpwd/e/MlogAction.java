@@ -4,6 +4,7 @@
  */
 package com.magicpwd.e;
 
+import com.magicpwd.__a.AAction;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
@@ -14,7 +15,7 @@ import com.magicpwd.v.TrayPtn;
  *
  * @author Amon
  */
-public class MlogAction extends javax.swing.AbstractAction
+public class MlogAction extends AAction
 {
 
     public MlogAction()
@@ -37,5 +38,15 @@ public class MlogAction extends javax.swing.AbstractAction
         {
             Logs.exception(exp);
         }
+    }
+
+    @Override
+    public void doInit(Object object)
+    {
+    }
+
+    @Override
+    public void reInit(javax.swing.AbstractButton button)
+    {
     }
 }
