@@ -4,7 +4,7 @@
  */
 package com.magicpwd.e.pwd.user;
 
-import com.magicpwd.__a.APwdAction;
+import com.magicpwd.__a.mpwd.APwdAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
