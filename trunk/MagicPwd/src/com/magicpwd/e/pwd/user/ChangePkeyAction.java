@@ -4,8 +4,8 @@
  */
 package com.magicpwd.e.pwd.user;
 
-import com.magicpwd.$a.APwdAction;
-import com.magicpwd.$i.IBackCall;
+import com.magicpwd.__a.APwdAction;
+import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd.v.TrayPtn;
 import java.util.EventListener;

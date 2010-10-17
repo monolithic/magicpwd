@@ -3,8 +3,8 @@
  */
 package com.magicpwd._comn.item;
 
+import com.magicpwd.__i.IEditItem;
 import com.magicpwd._cons.ConsDat;
-import com.magicpwd.$i.IEditItem;
 import com.magicpwd.m.UserCfg;
 import java.util.ArrayList;
 import java.util.List;

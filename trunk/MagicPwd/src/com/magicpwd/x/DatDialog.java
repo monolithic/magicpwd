@@ -1,14 +1,13 @@
 package com.magicpwd.x;
 
+import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd.$i.IBackCall;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.r.KindTN;
 import com.magicpwd.v.TrayPtn;
-import javax.swing.tree.TreeModel;
 
 /**
  * 数据迁移对话窗口
@@ -18,9 +17,9 @@ public class DatDialog extends javax.swing.JDialog
 {
 
     private IBackCall backCall;
-    private TreeModel treeModel;
+    private javax.swing.tree.TreeModel treeModel;
 
-    public DatDialog(TreeModel treeModel, IBackCall backCall)
+    public DatDialog(javax.swing.tree.TreeModel treeModel, IBackCall backCall)
     {
         super(TrayPtn.getCurrForm(), true);
         this.backCall = backCall;

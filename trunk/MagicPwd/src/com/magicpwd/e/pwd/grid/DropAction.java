@@ -4,7 +4,7 @@
  */
 package com.magicpwd.e.pwd.grid;
 
-import com.magicpwd.$a.APwdAction;
+import com.magicpwd.__a.APwdAction;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.v.TrayPtn;
