@@ -3,7 +3,7 @@
  */
 package com.magicpwd._prop;
 
-import com.magicpwd.$i.IPropBean;
+import com.magicpwd.__i.IPropBean;
 import javax.swing.JPanel;
 
 /**

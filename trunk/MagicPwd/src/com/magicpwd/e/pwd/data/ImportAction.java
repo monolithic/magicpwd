@@ -4,8 +4,8 @@
  */
 package com.magicpwd.e.pwd.data;
 
-import com.magicpwd.$a.APwdAction;
-import com.magicpwd.$i.IBackCall;
+import com.magicpwd.__a.APwdAction;
+import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
