@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.magicpwd.v.pwd;
+package com.magicpwd.v.mpwd;
 
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;

@@ -17,7 +17,7 @@ import com.magicpwd.m.SafeMdl;
 import com.magicpwd.r.AmonFF;
 import com.magicpwd.v.mpay.NormPtn;
 import com.magicpwd.v.mpad.MiniPtn;
-import com.magicpwd.v.pwd.MainPtn;
+import com.magicpwd.v.mpwd.MainPtn;
 
 /**
  * 系统托盘
