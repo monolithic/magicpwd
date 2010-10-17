@@ -3,17 +3,17 @@
  */
 package com.magicpwd._prop;
 
+import com.magicpwd.__i.IPropBean;
 import com.magicpwd._comp.IcoLabel;
 import com.magicpwd._comn.prop.Kind;
-import com.magicpwd.r.TreeCR;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd.$i.IPropBean;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.CoreMdl;
+import com.magicpwd.r.TreeCR;
 
 /**
  * @author Amon

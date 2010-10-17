@@ -3,13 +3,13 @@
  */
 package com.magicpwd._bean.pwd;
 
+import com.magicpwd.__i.IBackCall;
+import com.magicpwd.__i.IEditBean;
+import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comn.item.LogoItem;
 import com.magicpwd._comp.IcoLabel;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd.$i.IBackCall;
-import com.magicpwd.$i.IEditBean;
-import com.magicpwd.$i.IEditItem;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd.v.pwd.MainPtn;

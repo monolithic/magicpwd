@@ -4,7 +4,7 @@
  */
 package com.magicpwd.e.pwd.safe;
 
-import com.magicpwd.$a.APwdAction;
+import com.magicpwd.__a.APwdAction;
 
 /**
  * 从数据文件恢复
