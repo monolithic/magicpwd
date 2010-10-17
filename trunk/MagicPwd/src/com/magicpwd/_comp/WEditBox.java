@@ -4,9 +4,9 @@
  */
 package com.magicpwd._comp;
 
+import com.magicpwd.__i.IEditBean;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd.$i.IEditBean;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.UserCfg;

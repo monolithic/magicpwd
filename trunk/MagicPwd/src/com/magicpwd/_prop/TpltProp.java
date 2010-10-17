@@ -3,21 +3,17 @@
  */
 package com.magicpwd._prop;
 
-import javax.swing.JOptionPane;
-import javax.swing.event.TreeSelectionEvent;
-import javax.swing.tree.TreeSelectionModel;
-
+import com.magicpwd.__i.IPropBean;
 import com.magicpwd._comp.IcoLabel;
 import com.magicpwd._comn.prop.Tplt;
-import com.magicpwd.r.TreeCR;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd.$i.IPropBean;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.CoreMdl;
+import com.magicpwd.r.TreeCR;
 
 /**
  * @author Amon
@@ -280,14 +276,14 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         tr_TpltList = new javax.swing.JTree();
         tr_TpltList.setRootVisible(false);
         tr_TpltList.setCellRenderer(new TreeCR());
-        tr_TpltList.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        tr_TpltList.getSelectionModel().setSelectionMode(javax.swing.tree.TreeSelectionModel.SINGLE_TREE_SELECTION);
         tr_TpltList.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener()
         {
 
             @Override
-            public void valueChanged(TreeSelectionEvent arg0)
+            public void valueChanged(javax.swing.event.TreeSelectionEvent e)
             {
-                tr_TpltListValueChanged(arg0);
+                tr_TpltListValueChanged(e);
             }
         });
         javax.swing.ToolTipManager.sharedInstance().registerComponent(tr_TpltList);
@@ -520,7 +516,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
             return;
         }
 
-        if (Lang.showFirm(this, LangRes.P30F8A09, "确认要删除此数据吗，此操作将不可恢复？") == JOptionPane.YES_OPTION)
+        if (Lang.showFirm(this, LangRes.P30F8A09, "确认要删除此数据吗，此操作将不可恢复？") == javax.swing.JOptionPane.YES_OPTION)
         {
             javax.swing.tree.DefaultMutableTreeNode node = (javax.swing.tree.DefaultMutableTreeNode) path.getLastPathComponent();
             DBA3000.deleteTpltData((Tplt) node.getUserObject());
