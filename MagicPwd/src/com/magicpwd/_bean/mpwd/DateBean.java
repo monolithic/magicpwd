@@ -3,7 +3,7 @@
  */
 package com.magicpwd._bean.mpwd;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IEditBean;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comp.WEditBox;
@@ -87,7 +87,7 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
 
         pm_MenuTime = new javax.swing.JPopupMenu();
         mi_TimeDef = new javax.swing.JMenuItem();
-        APwdAction action = new APwdAction()
+        AMpwdAction action = new AMpwdAction()
         {
 
             @Override
@@ -115,7 +115,7 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
         mi_ConfDef = new javax.swing.JCheckBoxMenuItem();
         pm_MenuConf.add(mi_ConfDef);
         pm_MenuTime.addSeparator();
-        mainPtn.getMenuPtn().getSubMenu("date-template", pm_MenuConf, new APwdAction()
+        mainPtn.getMenuPtn().getSubMenu("date-template", pm_MenuConf, new AMpwdAction()
         {
 
             @Override

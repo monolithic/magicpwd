@@ -4,7 +4,7 @@
  */
 package com.magicpwd.e.mpwd.user;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd.v.TrayPtn;
@@ -14,7 +14,7 @@ import java.util.EventListener;
  *
  * @author Amon
  */
-public class ChangePkeyAction extends APwdAction
+public class ChangePkeyAction extends AMpwdAction
 {
 
     public ChangePkeyAction()

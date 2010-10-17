@@ -4,7 +4,7 @@
  */
 package com.magicpwd.e.mpwd.kind;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.r.KindTN;
@@ -13,7 +13,7 @@ import com.magicpwd.r.KindTN;
  *
  * @author Amon
  */
-public class DeleteAction extends APwdAction
+public class DeleteAction extends AMpwdAction
 {
 
     public DeleteAction()

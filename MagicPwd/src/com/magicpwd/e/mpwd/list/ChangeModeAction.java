@@ -4,7 +4,7 @@
  */
 package com.magicpwd.e.mpwd.list;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd._comn.Keys;
 import com.magicpwd._util.Char;
 
@@ -12,7 +12,7 @@ import com.magicpwd._util.Char;
  *
  * @author Amon
  */
-public class ChangeModeAction extends APwdAction
+public class ChangeModeAction extends AMpwdAction
 {
 
     public ChangeModeAction()

@@ -11,7 +11,7 @@ import com.magicpwd.v.mpwd.MainPtn;
  *
  * @author aven
  */
-public interface IPwdAction extends IAction
+public interface IMpwdAction extends IAction
 {
 
     void setMainPtn(MainPtn mainPtn);

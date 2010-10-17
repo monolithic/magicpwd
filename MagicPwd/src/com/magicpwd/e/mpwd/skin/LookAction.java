@@ -9,7 +9,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.m.UserCfg;
 import com.magicpwd.v.TrayPtn;
 
@@ -17,7 +17,7 @@ import com.magicpwd.v.TrayPtn;
  *
  * @author aven
  */
-public class LookAction extends APwdAction
+public class LookAction extends AMpwdAction
 {
 
     public LookAction()

@@ -4,13 +4,13 @@
  */
 package com.magicpwd.e.mpad;
 
-import com.magicpwd.__a.mpad.APadAction;
+import com.magicpwd.__a.mpad.AMpadAction;
 
 /**
  *
  * @author Amon
  */
-public class FindAction extends APadAction
+public class FindAction extends AMpadAction
 {
 
     public FindAction()

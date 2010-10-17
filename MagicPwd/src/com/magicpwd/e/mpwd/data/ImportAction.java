@@ -4,7 +4,7 @@
  */
 package com.magicpwd.e.mpwd.data;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
@@ -15,7 +15,7 @@ import com.magicpwd.v.TrayPtn;
  *
  * @author Amon
  */
-public class ImportAction extends APwdAction
+public class ImportAction extends AMpwdAction
 {
 
     public ImportAction()

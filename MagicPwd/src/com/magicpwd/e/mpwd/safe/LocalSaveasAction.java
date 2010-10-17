@@ -4,13 +4,13 @@
  */
 package com.magicpwd.e.mpwd.safe;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 
 /**
  * 备份到数据文件
  * @author Amon
  */
-public class LocalSaveasAction extends APwdAction
+public class LocalSaveasAction extends AMpwdAction
 {
 
     public LocalSaveasAction()

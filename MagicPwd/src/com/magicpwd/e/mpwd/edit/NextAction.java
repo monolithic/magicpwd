@@ -4,13 +4,13 @@
  */
 package com.magicpwd.e.mpwd.edit;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 
 /**
  *
  * @author Amon
  */
-public class NextAction extends APwdAction
+public class NextAction extends AMpwdAction
 {
 
     public NextAction()

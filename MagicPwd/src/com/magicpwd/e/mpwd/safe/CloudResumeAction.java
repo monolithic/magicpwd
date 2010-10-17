@@ -4,7 +4,7 @@
  */
 package com.magicpwd.e.mpwd.safe;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd._comn.S1S1;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
@@ -21,7 +21,7 @@ import com.magicpwd.x.LckDialog;
  *
  * @author Amon
  */
-public class CloudResumeAction extends APwdAction
+public class CloudResumeAction extends AMpwdAction
 {
 
     public CloudResumeAction()

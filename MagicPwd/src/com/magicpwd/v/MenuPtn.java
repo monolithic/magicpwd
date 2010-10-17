@@ -4,7 +4,7 @@
  */
 package com.magicpwd.v;
 
-import com.magicpwd.__i.mpwd.IPwdAction;
+import com.magicpwd.__i.mpwd.IMpwdAction;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
@@ -14,7 +14,7 @@ import com.magicpwd._util.Char;
 import com.magicpwd._util.File;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd.__i.mpad.IPadAction;
+import com.magicpwd.__i.mpad.IMpadAction;
 import com.magicpwd.e.mpwd.skin.FeelAction;
 import com.magicpwd.e.mpwd.skin.LookAction;
 import com.magicpwd.e.mpwd.skin.MoreAction;
@@ -220,7 +220,7 @@ public class MenuPtn
         return menuPop;
     }
 
-    public boolean getSubMenu(String partId, javax.swing.JPopupMenu menu, IPwdAction action)
+    public boolean getSubMenu(String partId, javax.swing.JPopupMenu menu, IMpwdAction action)
     {
         if (!Char.isValidate(partId) || document == null)
         {
@@ -265,7 +265,7 @@ public class MenuPtn
         return true;
     }
 
-    public boolean getSubMenu(String partId, javax.swing.JMenu menu, IPwdAction action)
+    public boolean getSubMenu(String partId, javax.swing.JMenu menu, IMpwdAction action)
     {
         if (!Char.isValidate(partId) || document == null)
         {
@@ -310,7 +310,7 @@ public class MenuPtn
         return true;
     }
 
-    private javax.swing.JMenu createMenu(Element element, javax.swing.JComponent component, IPwdAction action)
+    private javax.swing.JMenu createMenu(Element element, javax.swing.JComponent component, IMpwdAction action)
     {
         javax.swing.JMenu menu = new javax.swing.JMenu();
         String id = element.attributeValue("id");
@@ -353,7 +353,7 @@ public class MenuPtn
         return menu;
     }
 
-    private javax.swing.JMenuItem createItem(Element element, javax.swing.JComponent component, IPwdAction action)
+    private javax.swing.JMenuItem createItem(Element element, javax.swing.JComponent component, IMpwdAction action)
     {
         javax.swing.JMenuItem item = processType(element);
         String id = element.attributeValue("id");
@@ -854,11 +854,12 @@ public class MenuPtn
                 try
                 {
                     Object obj = Class.forName(type).newInstance();
-                    if (obj instanceof IPwdAction)
+                    if (obj instanceof javax.swing.AbstractAction)
                     {
-                        if (action instanceof IPwdAction)
+                        action = (javax.swing.AbstractAction) obj;
+                        if (action instanceof IMpwdAction)
                         {
-                            IPwdAction pwdAction = (IPwdAction) action;
+                            IMpwdAction pwdAction = (IMpwdAction) action;
                             pwdAction.setMainPtn(TrayPtn.getMainPtn());
                             pwdAction.setCoreMdl(coreMdl);
                             pwdAction.doInit(null);
@@ -867,9 +868,9 @@ public class MenuPtn
                             button.setSelected(pwdAction.isSelected());
                             button.setVisible(pwdAction.isVisible());
                         }
-                        else if (action instanceof IPadAction)
+                        else if (action instanceof IMpadAction)
                         {
-                            IPadAction padAction = (IPadAction) action;
+                            IMpadAction padAction = (IMpadAction) action;
                             padAction.setMiniPtn(TrayPtn.getMiniPtn());
                             padAction.setCoreMdl(coreMdl);
                         }

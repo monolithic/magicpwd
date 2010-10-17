@@ -4,13 +4,13 @@
  */
 package com.magicpwd.e.mpwd.safe;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 
 /**
  * 恢复单条记录
  * @author Amon
  */
-public class LocalPickupAction extends APwdAction
+public class LocalPickupAction extends AMpwdAction
 {
 
     public LocalPickupAction()

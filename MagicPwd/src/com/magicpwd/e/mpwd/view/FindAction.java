@@ -4,13 +4,13 @@
  */
 package com.magicpwd.e.mpwd.view;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 
 /**
  *
  * @author Amon
  */
-public class FindAction extends APwdAction
+public class FindAction extends AMpwdAction
 {
 
     public FindAction()

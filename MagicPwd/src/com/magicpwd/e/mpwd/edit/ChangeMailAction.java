@@ -4,14 +4,14 @@
  */
 package com.magicpwd.e.mpwd.edit;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd._cons.ConsDat;
 
 /**
  *
  * @author Amon
  */
-public class ChangeMailAction extends APwdAction
+public class ChangeMailAction extends AMpwdAction
 {
 
     public ChangeMailAction()

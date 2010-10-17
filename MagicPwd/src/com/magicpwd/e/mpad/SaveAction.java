@@ -4,13 +4,13 @@
  */
 package com.magicpwd.e.mpad;
 
-import com.magicpwd.__a.mpad.APadAction;
+import com.magicpwd.__a.mpad.AMpadAction;
 
 /**
  *
  * @author Amon
  */
-public class SaveAction extends APadAction
+public class SaveAction extends AMpadAction
 {
 
     public SaveAction()

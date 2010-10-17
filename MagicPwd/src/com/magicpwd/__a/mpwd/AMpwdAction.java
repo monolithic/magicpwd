@@ -4,7 +4,7 @@
  */
 package com.magicpwd.__a.mpwd;
 
-import com.magicpwd.__i.mpwd.IPwdAction;
+import com.magicpwd.__i.mpwd.IMpwdAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.mpwd.MainPtn;
 
@@ -12,7 +12,7 @@ import com.magicpwd.v.mpwd.MainPtn;
  *
  * @author Amon
  */
-public abstract class APwdAction implements IPwdAction
+public abstract class AMpwdAction implements IMpwdAction
 {
 
     protected MainPtn mainPtn;

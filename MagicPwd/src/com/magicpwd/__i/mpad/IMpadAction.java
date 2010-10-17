@@ -11,7 +11,7 @@ import com.magicpwd.v.mpad.MiniPtn;
  *
  * @author Amon
  */
-public interface IPadAction extends IAction
+public interface IMpadAction extends IAction
 {
 
     void setMiniPtn(MiniPtn miniPtn);

@@ -4,14 +4,14 @@
  */
 package com.magicpwd.e.mpwd.view;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd._util.Char;
 
 /**
  *
  * @author Amon
  */
-public class EditVisibleAction extends APwdAction
+public class EditVisibleAction extends AMpwdAction
 {
 
     public EditVisibleAction()

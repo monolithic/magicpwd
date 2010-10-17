@@ -10,6 +10,6 @@ import com.magicpwd.__i.IAction;
  *
  * @author Administrator
  */
-public interface IPayAction extends IAction
+public interface IMpayAction extends IAction
 {
 }

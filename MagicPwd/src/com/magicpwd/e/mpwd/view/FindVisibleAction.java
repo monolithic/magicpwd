@@ -4,13 +4,13 @@
  */
 package com.magicpwd.e.mpwd.view;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 
 /**
  *
  * @author Amon
  */
-public class FindVisibleAction extends APwdAction
+public class FindVisibleAction extends AMpwdAction
 {
 
     public FindVisibleAction()
