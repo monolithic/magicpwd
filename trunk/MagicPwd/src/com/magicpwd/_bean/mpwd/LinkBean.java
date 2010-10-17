@@ -15,7 +15,7 @@ import com.magicpwd._util.Bean;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
-import com.magicpwd.v.pwd.MainPtn;
+import com.magicpwd.v.mpwd.MainPtn;
 
 /**
  * 属性：链接

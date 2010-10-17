@@ -6,7 +6,7 @@ package com.magicpwd.__a.mpwd;
 
 import com.magicpwd.__i.mpwd.IPwdAction;
 import com.magicpwd.m.CoreMdl;
-import com.magicpwd.v.pwd.MainPtn;
+import com.magicpwd.v.mpwd.MainPtn;
 
 /**
  *

@@ -20,7 +20,7 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.v.TrayPtn;
-import com.magicpwd.v.pwd.MainPtn;
+import com.magicpwd.v.mpwd.MainPtn;
 import javax.swing.JOptionPane;
 
 /**
