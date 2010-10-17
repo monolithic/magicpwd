@@ -16,7 +16,7 @@ import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.r.FileTM;
-import com.magicpwd.v.pwd.MainPtn;
+import com.magicpwd.v.mpwd.MainPtn;
 import java.util.regex.Pattern;
 import org.dom4j.Document;
 import org.dom4j.Node;

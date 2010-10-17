@@ -7,7 +7,7 @@ import com.magicpwd.__i.IEditBean;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
-import com.magicpwd.v.pwd.MainPtn;
+import com.magicpwd.v.mpwd.MainPtn;
 
 /**
  * 属性：信息

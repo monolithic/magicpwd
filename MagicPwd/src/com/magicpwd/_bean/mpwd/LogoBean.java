@@ -12,7 +12,7 @@ import com.magicpwd._comp.IcoLabel;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
-import com.magicpwd.v.pwd.MainPtn;
+import com.magicpwd.v.mpwd.MainPtn;
 import com.magicpwd.x.IcoDialog;
 import java.util.EventListener;
 

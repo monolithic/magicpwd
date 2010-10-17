@@ -7,7 +7,7 @@ package com.magicpwd._bean.mpwd;
 import com.magicpwd.__i.IEditBean;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comp.WEditBox;
-import com.magicpwd.v.pwd.MainPtn;
+import com.magicpwd.v.mpwd.MainPtn;
 import java.awt.event.ActionEvent;
 
 /**
