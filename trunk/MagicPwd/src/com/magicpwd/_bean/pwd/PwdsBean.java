@@ -3,6 +3,8 @@
  */
 package com.magicpwd._bean.pwd;
 
+import com.magicpwd.__i.IEditBean;
+import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.prop.Char;
 import com.magicpwd._comn.item.EditItem;
 import com.magicpwd._comp.WEditBox;
@@ -13,8 +15,6 @@ import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd.$i.IEditBean;
-import com.magicpwd.$i.IEditItem;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;

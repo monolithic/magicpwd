@@ -4,10 +4,10 @@
  */
 package com.magicpwd.e.pwd.list;
 
-import com.magicpwd.$a.APwdAction;
+import com.magicpwd.__a.APwdAction;
+import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.Keys;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd.$i.IBackCall;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd.x.DatDialog;

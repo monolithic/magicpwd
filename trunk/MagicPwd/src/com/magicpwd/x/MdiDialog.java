@@ -1,9 +1,9 @@
 package com.magicpwd.x;
 
+import com.magicpwd.__i.IPropBean;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd.$i.IPropBean;
 import com.magicpwd._prop.CharProp;
 import com.magicpwd._prop.InfoProp;
 import com.magicpwd._prop.JavaProp;
@@ -16,7 +16,6 @@ import com.magicpwd._util.Lang;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.r.ListCR;
 import com.magicpwd.v.TrayPtn;
-import java.awt.Color;
 
 /**
  * 软件设置对话框
@@ -65,7 +64,7 @@ public class MdiDialog extends javax.swing.JDialog
             {
                 java.awt.Graphics2D g2d = (java.awt.Graphics2D) g;
                 java.awt.Dimension size = getSize();
-                g2d.setPaint(new java.awt.GradientPaint(0f, 0f, Color.lightGray, size.width, size.height, Color.white));
+                g2d.setPaint(new java.awt.GradientPaint(0f, 0f, java.awt.Color.lightGray, size.width, size.height, java.awt.Color.white));
                 g2d.fillRect(0, 0, size.width, size.height);
 
                 super.paintComponent(g);

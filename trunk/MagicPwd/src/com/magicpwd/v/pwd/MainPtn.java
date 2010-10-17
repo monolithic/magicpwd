@@ -3,6 +3,9 @@
  */
 package com.magicpwd.v.pwd;
 
+import com.magicpwd.__i.IEditBean;
+import com.magicpwd.__i.IEditItem;
+import com.magicpwd.__i.IGridView;
 import com.magicpwd._bean.pwd.AreaBean;
 import com.magicpwd._bean.pwd.DateBean;
 import com.magicpwd._bean.pwd.FileBean;
@@ -16,19 +19,16 @@ import com.magicpwd._bean.pwd.HintBean;
 import com.magicpwd._bean.pwd.PwdsBean;
 import com.magicpwd._bean.pwd.TextBean;
 import com.magicpwd._comn.I1S2;
-import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._comn.Keys;
+import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.item.LogoItem;
 import com.magicpwd._comn.item.MetaItem;
-import com.magicpwd._comp.WButtonGroup;
+import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd.$i.IEditBean;
-import com.magicpwd.$i.IEditItem;
-import com.magicpwd.$i.IGridView;
 import com.magicpwd._mail.Connect;
 import com.magicpwd._mail.MailDlg;
 import com.magicpwd._util.Bean;

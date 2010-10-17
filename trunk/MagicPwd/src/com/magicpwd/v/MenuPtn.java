@@ -4,7 +4,7 @@
  */
 package com.magicpwd.v;
 
-import com.magicpwd.$i.IPwdAction;
+import com.magicpwd.__i.IPwdAction;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
