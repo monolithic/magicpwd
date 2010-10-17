@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.magicpwd.v.cmd;
+package com.magicpwd.v.mcmd;
 
 /**
  * 命令行模式
