@@ -1,8 +1,8 @@
 package com.magicpwd.x;
 
+import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd.$i.IBackCall;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Hash;
 import com.magicpwd._util.Lang;
@@ -10,8 +10,6 @@ import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.r.AmonFF;
 import com.magicpwd.v.TrayPtn;
-import java.awt.Component;
-import javax.swing.JTable;
 
 /**
  * 图标管理对话窗口
@@ -120,7 +118,7 @@ public class IcoDialog extends javax.swing.JDialog
             {
 
                 @Override
-                public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
+                public java.awt.Component getTableCellRendererComponent(javax.swing.JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
                 {
                     if (!(value instanceof javax.swing.JLabel))
                     {

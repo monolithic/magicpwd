@@ -4,14 +4,13 @@
  */
 package com.magicpwd._prop;
 
+import com.magicpwd.__i.IPropBean;
 import com.magicpwd._comp.LnkLabel;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd.$i.IPropBean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.CoreMdl;
-import java.util.Calendar;
 
 /**
  *
@@ -123,7 +122,7 @@ public class InfoProp extends javax.swing.JPanel implements IPropBean
 
         lc_Site.setText(ConsEnv.HOMEPAGE);
 
-        lc_Copy.setText(Char.format(ConsEnv.SOFTCOPY, "" + Calendar.getInstance().get(Calendar.YEAR)));
+        lc_Copy.setText(Char.format(ConsEnv.SOFTCOPY, "" + java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)));
 
         ta_Note.setText(Lang.getLang(LangRes.P30F2F01, ""));
     }
