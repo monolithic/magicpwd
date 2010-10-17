@@ -4,7 +4,7 @@
  */
 package com.magicpwd.e.pwd.list;
 
-import com.magicpwd.$a.APwdAction;
+import com.magicpwd.__a.APwdAction;
 import com.magicpwd._cons.ConsCfg;
 
 /**

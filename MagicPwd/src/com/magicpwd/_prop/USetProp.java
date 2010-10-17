@@ -3,14 +3,11 @@
  */
 package com.magicpwd._prop;
 
+import com.magicpwd.__i.IPropBean;
 import com.magicpwd._comn.prop.Char;
 import com.magicpwd._comn.S1S1;
-
-import javax.swing.JPanel;
-
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd.$i.IPropBean;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.CoreMdl;
@@ -19,8 +16,9 @@ import com.magicpwd.m.CoreMdl;
  * @author Amon
  * 
  */
-public class USetProp extends JPanel implements IPropBean
+public class USetProp extends javax.swing.JPanel implements IPropBean
 {
+
     private CoreMdl coreMdl;
     private java.io.File backPath;
 
@@ -178,7 +176,7 @@ public class USetProp extends JPanel implements IPropBean
     }
 
     @Override
-    public JPanel getPanel()
+    public javax.swing.JPanel getPanel()
     {
         return this;
     }
