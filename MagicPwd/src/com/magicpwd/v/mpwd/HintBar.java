@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.magicpwd.v.pwd;
+package com.magicpwd.v.mpwd;
 
 import com.magicpwd._util.Char;
 import java.awt.event.ActionEvent;

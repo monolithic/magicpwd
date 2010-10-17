@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.magicpwd.v.pwd;
+package com.magicpwd.v.mpwd;
 
 import com.magicpwd.__i.IEditBean;
 import com.magicpwd.__i.IEditItem;
