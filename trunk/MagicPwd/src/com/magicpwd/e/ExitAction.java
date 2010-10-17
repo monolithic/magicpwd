@@ -4,13 +4,14 @@
  */
 package com.magicpwd.e;
 
+import com.magicpwd.__a.AAction;
 import com.magicpwd.v.TrayPtn;
 
 /**
  *
  * @author Administrator
  */
-public class ExitAction extends javax.swing.AbstractAction
+public class ExitAction extends AAction
 {
 
     public ExitAction()
@@ -27,5 +28,15 @@ public class ExitAction extends javax.swing.AbstractAction
         }
         TrayPtn.endSave();
         System.exit(0);
+    }
+
+    @Override
+    public void doInit(Object object)
+    {
+    }
+
+    @Override
+    public void reInit(javax.swing.AbstractButton button)
+    {
     }
 }

@@ -30,7 +30,7 @@ public class ExitAction extends AMpadAction
     }
 
     @Override
-    public void reInit(Object object)
+    public void reInit(javax.swing.AbstractButton button)
     {
     }
 }

@@ -4,41 +4,22 @@
  */
 package com.magicpwd.__a.mpad;
 
+import com.magicpwd.__a.AAction;
 import com.magicpwd.__i.mpad.IMpadAction;
-import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.mpad.MiniPtn;
 
 /**
  *
  * @author Amon
  */
-public abstract class AMpadAction extends javax.swing.AbstractAction implements IMpadAction
+public abstract class AMpadAction extends AAction implements IMpadAction
 {
 
     protected MiniPtn miniPtn;
-    protected CoreMdl coreMdl;
 
     @Override
     public void setMiniPtn(MiniPtn miniPtn)
     {
         this.miniPtn = miniPtn;
-    }
-
-    @Override
-    public void setCoreMdl(CoreMdl coreMdl)
-    {
-        this.coreMdl = coreMdl;
-    }
-
-    @Override
-    public boolean isVisible()
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public boolean isSelected()
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

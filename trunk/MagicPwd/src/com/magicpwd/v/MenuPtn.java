@@ -4,6 +4,7 @@
  */
 package com.magicpwd.v;
 
+import com.magicpwd.__i.IAction;
 import com.magicpwd.__i.mpwd.IMpwdAction;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.ConsCfg;
@@ -863,16 +864,13 @@ public class MenuPtn
                             pwdAction.setMainPtn(TrayPtn.getMainPtn());
                             pwdAction.setCoreMdl(coreMdl);
                             pwdAction.doInit(null);
-
-                            button.setEnabled(pwdAction.isEnabled());
-                            button.setSelected(pwdAction.isSelected());
-                            button.setVisible(pwdAction.isVisible());
                         }
                         else if (action instanceof IMpadAction)
                         {
                             IMpadAction padAction = (IMpadAction) action;
                             padAction.setMiniPtn(TrayPtn.getMiniPtn());
                             padAction.setCoreMdl(coreMdl);
+                            padAction.doInit(null);
                         }
                         if (validate)
                         {
@@ -888,6 +886,10 @@ public class MenuPtn
             }
         }
         button.addActionListener(action);
+        if (action instanceof IAction)
+        {
+            ((IAction) action).reInit(button);
+        }
         processStrokes(element, button, action, component);
         processReference(element, button, action);
         return button;

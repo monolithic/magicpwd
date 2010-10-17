@@ -44,7 +44,9 @@ public class EditIsolateAction extends AMpwdAction
     }
 
     @Override
-    public void reInit(Object object)
+    public void reInit(javax.swing.AbstractButton button)
     {
+        button.setEnabled(isEnabled());
+        button.setSelected(isSelected());
     }
 }

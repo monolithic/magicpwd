@@ -17,7 +17,7 @@ public interface IAction extends javax.swing.Action
 
     void doInit(Object object);
 
-    void reInit(Object object);
+    void reInit(javax.swing.AbstractButton button);
 
     boolean isVisible();
 
