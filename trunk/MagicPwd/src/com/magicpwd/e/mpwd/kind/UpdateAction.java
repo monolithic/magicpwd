@@ -4,7 +4,7 @@
  */
 package com.magicpwd.e.mpwd.kind;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
@@ -15,7 +15,7 @@ import com.magicpwd.r.KindTN;
  *
  * @author Amon
  */
-public class UpdateAction extends APwdAction
+public class UpdateAction extends AMpwdAction
 {
 
     public UpdateAction()

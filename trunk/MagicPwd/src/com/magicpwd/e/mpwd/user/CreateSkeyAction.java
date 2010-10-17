@@ -4,7 +4,7 @@
  */
 package com.magicpwd.e.mpwd.user;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
@@ -17,7 +17,7 @@ import com.magicpwd.v.TrayPtn;
  *
  * @author Amon
  */
-public class CreateSkeyAction extends APwdAction
+public class CreateSkeyAction extends AMpwdAction
 {
 
     public CreateSkeyAction()

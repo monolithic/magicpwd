@@ -4,7 +4,7 @@
  */
 package com.magicpwd.e.mpwd.list;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.Keys;
 import com.magicpwd._cons.LangRes;
@@ -16,7 +16,7 @@ import com.magicpwd.x.DatDialog;
  *
  * @author Amon
  */
-public class MovetoAction extends APwdAction
+public class MovetoAction extends AMpwdAction
 {
 
     public MovetoAction()

@@ -4,14 +4,14 @@
  */
 package com.magicpwd.e.mpwd.view;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.m.UserCfg;
 
 /**
  *
  * @author Amon
  */
-public class TopsAction extends APwdAction
+public class TopsAction extends AMpwdAction
 {
 
     public TopsAction()

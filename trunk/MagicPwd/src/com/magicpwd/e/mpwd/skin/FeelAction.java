@@ -4,13 +4,13 @@
  */
 package com.magicpwd.e.mpwd.skin;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 
 /**
  *
  * @author aven
  */
-public class FeelAction extends APwdAction
+public class FeelAction extends AMpwdAction
 {
 
     public FeelAction()

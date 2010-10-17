@@ -4,7 +4,7 @@
  */
 package com.magicpwd.e.mpwd.file;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 
@@ -12,7 +12,7 @@ import com.magicpwd._util.Lang;
  *
  * @author Amon
  */
-public class DropAction extends APwdAction
+public class DropAction extends AMpwdAction
 {
 
     public DropAction()

@@ -4,14 +4,14 @@
  */
 package com.magicpwd.e.mpwd.help;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd._cons.ConsEnv;
 
 /**
  *
  * @author Amon
  */
-public class InfoAction extends APwdAction
+public class InfoAction extends AMpwdAction
 {
 
     public InfoAction()

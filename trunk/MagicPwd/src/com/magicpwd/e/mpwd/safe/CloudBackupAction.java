@@ -4,7 +4,7 @@
  */
 package com.magicpwd.e.mpwd.safe;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._mail.Connect;
@@ -19,7 +19,7 @@ import com.magicpwd.x.LckDialog;
  *
  * @author Amon
  */
-public class CloudBackupAction extends APwdAction
+public class CloudBackupAction extends AMpwdAction
 {
 
     public CloudBackupAction()

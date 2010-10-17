@@ -4,14 +4,14 @@
  */
 package com.magicpwd.e.mpwd.list;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd._comn.Keys;
 
 /**
  *
  * @author Amon
  */
-public class HistoryAction extends APwdAction
+public class HistoryAction extends AMpwdAction
 {
 
     public HistoryAction()

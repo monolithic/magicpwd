@@ -4,14 +4,14 @@
  */
 package com.magicpwd.e.mpwd.edit;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd._cons.ConsDat;
 
 /**
  *
  * @author Amon
  */
-public class ChangeKeysAction extends APwdAction
+public class ChangeKeysAction extends AMpwdAction
 {
 
     public ChangeKeysAction()

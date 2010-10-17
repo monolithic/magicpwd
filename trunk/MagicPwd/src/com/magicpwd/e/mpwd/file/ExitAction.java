@@ -4,7 +4,7 @@
  */
 package com.magicpwd.e.mpwd.file;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.v.TrayPtn;
@@ -13,7 +13,7 @@ import com.magicpwd.v.TrayPtn;
  *
  * @author Amon
  */
-public class ExitAction extends APwdAction
+public class ExitAction extends AMpwdAction
 {
 
     public ExitAction()

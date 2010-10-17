@@ -4,13 +4,13 @@
  */
 package com.magicpwd.e.mpwd.data;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 
 /**
  *
  * @author Amon
  */
-public class SearchAction extends APwdAction
+public class SearchAction extends AMpwdAction
 {
 
     public SearchAction()

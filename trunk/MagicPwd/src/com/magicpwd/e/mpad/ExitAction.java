@@ -4,14 +4,14 @@
  */
 package com.magicpwd.e.mpad;
 
-import com.magicpwd.__a.mpad.APadAction;
+import com.magicpwd.__a.mpad.AMpadAction;
 import com.magicpwd.v.TrayPtn;
 
 /**
  *
  * @author Amon
  */
-public class ExitAction extends APadAction
+public class ExitAction extends AMpadAction
 {
 
     public ExitAction()

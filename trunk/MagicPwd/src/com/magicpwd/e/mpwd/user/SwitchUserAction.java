@@ -4,13 +4,13 @@
  */
 package com.magicpwd.e.mpwd.user;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 
 /**
  *
  * @author Amon
  */
-public class SwitchUserAction extends APwdAction
+public class SwitchUserAction extends AMpwdAction
 {
 
     public SwitchUserAction()

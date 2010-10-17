@@ -4,7 +4,7 @@
  */
 package com.magicpwd.__a.mpad;
 
-import com.magicpwd.__i.mpad.IPadAction;
+import com.magicpwd.__i.mpad.IMpadAction;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.v.mpad.MiniPtn;
 
@@ -12,7 +12,7 @@ import com.magicpwd.v.mpad.MiniPtn;
  *
  * @author Amon
  */
-public abstract class APadAction extends javax.swing.AbstractAction implements IPadAction
+public abstract class AMpadAction extends javax.swing.AbstractAction implements IMpadAction
 {
 
     protected MiniPtn miniPtn;

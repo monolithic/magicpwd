@@ -4,14 +4,14 @@
  */
 package com.magicpwd.e.mpwd.skin;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd._util.Desk;
 
 /**
  *
  * @author Administrator
  */
-public class MoreAction extends APwdAction
+public class MoreAction extends AMpwdAction
 {
 
     public MoreAction()

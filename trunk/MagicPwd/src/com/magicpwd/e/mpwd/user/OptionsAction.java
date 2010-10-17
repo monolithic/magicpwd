@@ -4,14 +4,14 @@
  */
 package com.magicpwd.e.mpwd.user;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd._cons.ConsEnv;
 
 /**
  *
  * @author aven
  */
-public class OptionsAction extends APwdAction
+public class OptionsAction extends AMpwdAction
 {
 
     public OptionsAction()

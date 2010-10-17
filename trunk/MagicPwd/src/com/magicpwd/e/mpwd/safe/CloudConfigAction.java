@@ -4,7 +4,7 @@
  */
 package com.magicpwd.e.mpwd.safe;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Char;
@@ -16,7 +16,7 @@ import com.magicpwd.v.TrayPtn;
  *
  * @author Amon
  */
-public class CloudConfigAction extends APwdAction
+public class CloudConfigAction extends AMpwdAction
 {
 
     public CloudConfigAction()

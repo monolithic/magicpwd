@@ -4,13 +4,13 @@
  */
 package com.magicpwd.e.mpwd.view;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 
 /**
  *
  * @author Amon
  */
-public class ToolVisibleAction extends APwdAction
+public class ToolVisibleAction extends AMpwdAction
 {
 
     public ToolVisibleAction()

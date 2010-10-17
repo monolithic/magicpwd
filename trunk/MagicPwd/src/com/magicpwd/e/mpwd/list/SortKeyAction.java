@@ -4,14 +4,14 @@
  */
 package com.magicpwd.e.mpwd.list;
 
-import com.magicpwd.__a.mpwd.APwdAction;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd._cons.ConsCfg;
 
 /**
  *
  * @author Amon
  */
-public class SortKeyAction extends APwdAction
+public class SortKeyAction extends AMpwdAction
 {
 
     public SortKeyAction()
