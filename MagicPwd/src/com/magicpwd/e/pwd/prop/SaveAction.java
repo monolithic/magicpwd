@@ -4,7 +4,7 @@
  */
 package com.magicpwd.e.pwd.prop;
 
-import com.magicpwd.$a.APwdAction;
+import com.magicpwd.__a.APwdAction;
 
 /**
  *
