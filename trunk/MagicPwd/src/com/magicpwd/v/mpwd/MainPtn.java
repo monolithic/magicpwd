@@ -1251,6 +1251,12 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         javax.swing.tree.TreePath path = getSelectedKindValue();
         KindTN node = (KindTN) path.getLastPathComponent();
         Kind kind = (Kind) node.getUserObject();
+        if (isTaskKind(kind))
+        {
+            Lang.showMesg(this, LangRes.P30F7A4A, "不能保存到任务列表中去！");
+            tr_GuidTree.requestFocus();
+            return false;
+        }
 
         javax.swing.JFileChooser jfc = new javax.swing.JFileChooser();
         jfc.setMultiSelectionEnabled(false);

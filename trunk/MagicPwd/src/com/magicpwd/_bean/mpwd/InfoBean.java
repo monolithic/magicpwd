@@ -46,6 +46,7 @@ public class InfoBean extends javax.swing.JPanel implements IEditBean
                 lb_NextTipsMouseReleased(evt);
             }
         });
+        lb_NextTips.setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

@@ -39,14 +39,14 @@ public class MenuPtn
     private CoreMdl coreMdl;
     private java.util.regex.Pattern pattern;
     private java.util.HashMap<String, javax.swing.AbstractButton> buttons;
-    private java.util.HashMap<String, javax.swing.AbstractAction> actions;
+    private java.util.HashMap<String, javax.swing.Action> actions;
     private java.util.HashMap<String, WButtonGroup> groups;
 
     public MenuPtn(CoreMdl coreMdl)
     {
         this.coreMdl = coreMdl;
         buttons = new java.util.HashMap<String, javax.swing.AbstractButton>();
-        actions = new java.util.HashMap<String, javax.swing.AbstractAction>();
+        actions = new java.util.HashMap<String, javax.swing.Action>();
         groups = new java.util.HashMap<String, WButtonGroup>();
     }
 
@@ -806,7 +806,7 @@ public class MenuPtn
         return button;
     }
 
-    private static javax.swing.AbstractButton processStrokes(Element element, javax.swing.AbstractButton button, javax.swing.AbstractAction action, javax.swing.JComponent component)
+    private static javax.swing.AbstractButton processStrokes(Element element, javax.swing.AbstractButton button, javax.swing.Action action, javax.swing.JComponent component)
     {
         java.util.List list = element.elements("stroke");
         if (list == null || list.size() < 1)
@@ -846,7 +846,7 @@ public class MenuPtn
         element = (Element) list.get(0);
         String name = element.attributeValue("id");
         boolean validate = Char.isValidate(name);
-        javax.swing.AbstractAction action = validate ? actions.get(name) : null;
+        javax.swing.Action action = validate ? actions.get(name) : null;
         if (action == null)
         {
             String type = element.attributeValue("class");
@@ -855,9 +855,9 @@ public class MenuPtn
                 try
                 {
                     Object obj = Class.forName(type).newInstance();
-                    if (obj instanceof javax.swing.AbstractAction)
+                    if (obj instanceof javax.swing.Action)
                     {
-                        action = (javax.swing.AbstractAction) obj;
+                        action = (javax.swing.Action) obj;
                         if (action instanceof IMpwdAction)
                         {
                             IMpwdAction pwdAction = (IMpwdAction) action;
@@ -895,7 +895,7 @@ public class MenuPtn
         return button;
     }
 
-    private javax.swing.AbstractButton processReference(Element element, javax.swing.AbstractButton button, javax.swing.AbstractAction action)
+    private javax.swing.AbstractButton processReference(Element element, javax.swing.AbstractButton button, javax.swing.Action action)
     {
         java.util.List list = element.elements("property");
         if (list == null || list.size() < 1)
