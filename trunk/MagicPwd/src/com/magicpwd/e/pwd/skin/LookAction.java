@@ -9,7 +9,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
-import com.magicpwd.$a.APwdAction;
+import com.magicpwd.__a.APwdAction;
 import com.magicpwd.m.UserCfg;
 import com.magicpwd.v.TrayPtn;
 
