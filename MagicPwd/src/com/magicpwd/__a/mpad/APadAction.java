@@ -6,7 +6,7 @@ package com.magicpwd.__a.mpad;
 
 import com.magicpwd.__i.mpad.IPadAction;
 import com.magicpwd.m.CoreMdl;
-import com.magicpwd.v.pad.MiniPtn;
+import com.magicpwd.v.mpad.MiniPtn;
 
 /**
  *
