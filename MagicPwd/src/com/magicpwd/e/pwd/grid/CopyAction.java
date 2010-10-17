@@ -4,7 +4,7 @@
  */
 package com.magicpwd.e.pwd.grid;
 
-import com.magicpwd.__a.APwdAction;
+import com.magicpwd.__a.mpwd.APwdAction;
 
 /**
  *

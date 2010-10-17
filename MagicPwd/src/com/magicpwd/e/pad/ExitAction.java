@@ -4,19 +4,15 @@
  */
 package com.magicpwd.e.pad;
 
-import com.magicpwd.m.CoreMdl;
-import com.magicpwd.v.pad.MiniPtn;
+import com.magicpwd.__a.mpad.APadAction;
 import com.magicpwd.v.TrayPtn;
 
 /**
  *
- * @author Administrator
+ * @author Amon
  */
-public class ExitAction extends javax.swing.AbstractAction implements IPadAction
+public class ExitAction extends APadAction
 {
-
-    private MiniPtn miniPtn;
-    private CoreMdl coreMdl;
 
     public ExitAction()
     {
@@ -29,19 +25,12 @@ public class ExitAction extends javax.swing.AbstractAction implements IPadAction
     }
 
     @Override
-    public void setMiniPtn(MiniPtn miniPtn)
+    public void doInit(Object object)
     {
-        this.miniPtn = miniPtn;
     }
 
     @Override
-    public void setCoreMdl(CoreMdl coreMdl)
-    {
-        this.coreMdl = coreMdl;
-    }
-
-    @Override
-    public void doUpdate(Object object)
+    public void reInit(Object object)
     {
     }
 }
