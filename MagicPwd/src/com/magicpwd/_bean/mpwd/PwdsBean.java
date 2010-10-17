@@ -94,7 +94,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.add(bt_PwdsGent);
 
         bt_PwdsConf = new BtnLabel();
-        bt_PwdsConf.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "pwds-options.png", mainPtn.getCoreMdl().getUserCfg()));
+        bt_PwdsConf.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "options.png", mainPtn.getCoreMdl().getUserCfg()));
         bt_PwdsConf.addActionListener(new java.awt.event.ActionListener()
         {
 

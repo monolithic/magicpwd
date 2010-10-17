@@ -73,7 +73,7 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.add(bt_DateTime);
 
         bt_DateConf = new BtnLabel();
-        bt_DateConf.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "date.png", mainPtn.getCoreMdl().getUserCfg()));
+        bt_DateConf.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "options.png", mainPtn.getCoreMdl().getUserCfg()));
         bt_DateConf.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -114,7 +114,7 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
         pm_MenuConf = new javax.swing.JPopupMenu();
         mi_ConfDef = new javax.swing.JCheckBoxMenuItem();
         pm_MenuConf.add(mi_ConfDef);
-        pm_MenuTime.addSeparator();
+        pm_MenuConf.addSeparator();
         mainPtn.getMenuPtn().getSubMenu("date-template", pm_MenuConf, new AMpwdAction()
         {
 
@@ -181,8 +181,11 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
         Lang.setWText(lb_PropName, LangRes.P30F130F, "名称");
         Lang.setWText(lb_PropData, LangRes.P30F1310, "时间");
 
-        Lang.setWText(bt_DateTime, LangRes.P30F1513, "&O");
-        Lang.setWTips(bt_DateTime, LangRes.P30F1514, "当前时间(Alt + O)");
+        Lang.setWText(bt_DateTime, LangRes.P30F1513, "@T");
+        Lang.setWTips(bt_DateTime, LangRes.P30F1514, "选择时间(Alt + T)");
+
+        Lang.setWText(bt_DateConf, LangRes.P30F151F, "@O");
+        Lang.setWTips(bt_DateConf, LangRes.P30F1520, "当前时间(Alt + O)");
 
         Bean.setText(mi_TimeDef, "当前时间");
         Bean.setText(mi_ConfDef, "默认格式");
