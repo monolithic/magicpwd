@@ -4,7 +4,7 @@
  */
 package com.magicpwd.v;
 
-import com.magicpwd.__i.IPwdAction;
+import com.magicpwd.__i.mpwd.IPwdAction;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
@@ -14,7 +14,7 @@ import com.magicpwd._util.Char;
 import com.magicpwd._util.File;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd.e.pad.IPadAction;
+import com.magicpwd.__i.mpad.IPadAction;
 import com.magicpwd.e.pwd.skin.FeelAction;
 import com.magicpwd.e.pwd.skin.LookAction;
 import com.magicpwd.e.pwd.skin.MoreAction;
@@ -38,14 +38,14 @@ public class MenuPtn
     private CoreMdl coreMdl;
     private java.util.regex.Pattern pattern;
     private java.util.HashMap<String, javax.swing.AbstractButton> buttons;
-    private java.util.HashMap<String, IPwdAction> actions;
+    private java.util.HashMap<String, javax.swing.AbstractAction> actions;
     private java.util.HashMap<String, WButtonGroup> groups;
 
     public MenuPtn(CoreMdl coreMdl)
     {
         this.coreMdl = coreMdl;
         buttons = new java.util.HashMap<String, javax.swing.AbstractButton>();
-        actions = new java.util.HashMap<String, IPwdAction>();
+        actions = new java.util.HashMap<String, javax.swing.AbstractAction>();
         groups = new java.util.HashMap<String, WButtonGroup>();
     }
 
@@ -805,7 +805,7 @@ public class MenuPtn
         return button;
     }
 
-    private static javax.swing.AbstractButton processStrokes(Element element, javax.swing.AbstractButton button, IPwdAction action, javax.swing.JComponent component)
+    private static javax.swing.AbstractButton processStrokes(Element element, javax.swing.AbstractButton button, javax.swing.AbstractAction action, javax.swing.JComponent component)
     {
         java.util.List list = element.elements("stroke");
         if (list == null || list.size() < 1)
@@ -845,7 +845,7 @@ public class MenuPtn
         element = (Element) list.get(0);
         String name = element.attributeValue("id");
         boolean validate = Char.isValidate(name);
-        IPwdAction action = validate ? actions.get(name) : null;
+        javax.swing.AbstractAction action = validate ? actions.get(name) : null;
         if (action == null)
         {
             String type = element.attributeValue("class");
@@ -856,13 +856,16 @@ public class MenuPtn
                     Object obj = Class.forName(type).newInstance();
                     if (obj instanceof IPwdAction)
                     {
-                        action = (IPwdAction) obj;
                         if (action instanceof IPwdAction)
                         {
                             IPwdAction pwdAction = (IPwdAction) action;
                             pwdAction.setMainPtn(TrayPtn.getMainPtn());
                             pwdAction.setCoreMdl(coreMdl);
                             pwdAction.doInit(null);
+
+                            button.setEnabled(pwdAction.isEnabled());
+                            button.setSelected(pwdAction.isSelected());
+                            button.setVisible(pwdAction.isVisible());
                         }
                         else if (action instanceof IPadAction)
                         {
@@ -884,18 +887,12 @@ public class MenuPtn
             }
         }
         button.addActionListener(action);
-        if (action != null)
-        {
-            button.setEnabled(action.isEnabled());
-            button.setSelected(action.isSelected());
-            button.setVisible(action.isVisible());
-        }
         processStrokes(element, button, action, component);
         processReference(element, button, action);
         return button;
     }
 
-    private javax.swing.AbstractButton processReference(Element element, javax.swing.AbstractButton button, IPwdAction action)
+    private javax.swing.AbstractButton processReference(Element element, javax.swing.AbstractButton button, javax.swing.AbstractAction action)
     {
         java.util.List list = element.elements("property");
         if (list == null || list.size() < 1)

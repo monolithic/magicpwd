@@ -1,8 +1,8 @@
 package test;
 
+import com.magicpwd._comp.ScreenKB;
 import com.magicpwd._util.Logs;
 import com.magicpwd.v.MenuPtn;
-import java.awt.Dimension;
 import javax.swing.JFrame;
 
 public class Main
@@ -22,7 +22,11 @@ public class Main
         }
         JFrame frame = new JFrame();
         frame.setJMenuBar(ptn.getMenuBar("mpwd", frame.getRootPane()));
-        frame.setSize(new Dimension(400, 300));
+        ScreenKB skb = new ScreenKB();
+        skb.initView();
+        skb.initLang();
+        frame.getContentPane().add(skb);
+        frame.pack();
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

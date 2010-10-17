@@ -619,46 +619,46 @@
     </popmenu>
     <!--日期弹出菜单选项-->
     <submenu id="date-template">
+        <!--日期及时间-->
+        <menu text="日期时间型">
+            <item type="checkbox" text="完整格式" group="date-template" command="java:0d0t" />
+            <item type="checkbox" text="长格式" group="date-template" command="java:1d1t" />
+            <item type="checkbox" text="标准格式" group="date-template" command="java:2d2t" />
+            <item type="checkbox" text="短格式" group="date-template" command="java:3d3t" />
+            <seperator />
+            <item type="checkbox" text="yyyyMMdd HHmmss 格式" group="date-template" command="user:yyyyMMdd HHmmss" />
+            <item type="checkbox" text="yyyy-MM-dd HH:mm:ss 格式" group="date-template" command="user:yyyy-MM-dd HH:mm:ss" />
+            <item type="checkbox" text="yyyy.MM.dd HH.mm.ss 格式" group="date-template" command="user:yyyy.MM.dd HH.mm.ss" />
+            <item type="checkbox" text="yyyy年MM月dd日 HH时mm分ss秒 格式" group="date-template" command="user:yyyy年MM月dd日 HH时mm分ss秒" />
+        </menu>
         <!--日期-->
         <menu text="日期型">
             <!--系统定义-->
-            <item type="checkbox" text="FULL" group="date-template" command="java:0d" />
-            <item type="checkbox" text="LONG" group="date-template" command="java:1d" />
-            <item type="checkbox" text="MEDIUM" group="date-template" command="java:2d" />
-            <item type="checkbox" text="SHORT" group="date-template" command="java:3d" />
+            <item type="checkbox" text="完整格式" group="date-template" command="java:0d" />
+            <item type="checkbox" text="长格式" group="date-template" command="java:1d" />
+            <item type="checkbox" text="标准格式" group="date-template" command="java:2d" />
+            <item type="checkbox" text="短格式" group="date-template" command="java:3d" />
             <seperator />
             <!--用户定义-->
-            <item type="checkbox" text="yyyyMMdd" group="date-template" command="user:yyyyMMdd" />
-            <item type="checkbox" text="yyyy-MM-dd" group="date-template" command="user:yyyy-MM-dd" />
-            <item type="checkbox" text="yyyy/MM/dd" group="date-template" command="user:yyyy/MM/dd" />
-            <item type="checkbox" text="yyyy.MM.dd" group="date-template" command="user:yyyy.MM.dd" />
-            <item type="checkbox" text="yyyy MM dd" group="date-template" command="user:yyyy MM dd" />
-            <item type="checkbox" text="yyyy年MM月dd日" group="date-template" command="user:yyyy年MM月dd日" />
+            <item type="checkbox" text="yyyyMMdd 格式" group="date-template" command="user:yyyyMMdd" />
+            <item type="checkbox" text="yyyy-MM-dd 格式" group="date-template" command="user:yyyy-MM-dd" />
+            <item type="checkbox" text="yyyy/MM/dd 格式" group="date-template" command="user:yyyy/MM/dd" />
+            <item type="checkbox" text="yyyy.MM.dd 格式" group="date-template" command="user:yyyy.MM.dd" />
+            <item type="checkbox" text="yyyy MM dd 格式" group="date-template" command="user:yyyy MM dd" />
+            <item type="checkbox" text="yyyy年MM月dd日 格式" group="date-template" command="user:yyyy年MM月dd日" />
         </menu>
         <!--时间-->
         <menu text="时间型">
-            <item type="checkbox" text="FULL" group="date-template" command="java:0t" />
-            <item type="checkbox" text="LONG" group="date-template" command="java:1t" />
-            <item type="checkbox" text="MEDIUM" group="date-template" command="java:2t" />
-            <item type="checkbox" text="SHORT" group="date-template" command="java:3t" />
+            <item type="checkbox" text="完整格式" group="date-template" command="java:0t" />
+            <item type="checkbox" text="长格式" group="date-template" command="java:1t" />
+            <item type="checkbox" text="标准格式" group="date-template" command="java:2t" />
+            <item type="checkbox" text="短格式" group="date-template" command="java:3t" />
             <seperator />
-            <item type="checkbox" text="HHmmss" group="date-template" command="user:HHmmss" />
-            <item type="checkbox" text="HH:mm:ss" group="date-template" command="user:HH:mm:ss" />
-            <item type="checkbox" text="HH.mm.ss" group="date-template" command="user:HH.mm.ss" />
-            <item type="checkbox" text="HH mm ss" group="date-template" command="user:HH mm ss" />
-            <item type="checkbox" text="HH时mm分ss秒" group="date-template" command="user:HH时mm分ss秒" />
-        </menu>
-        <!--日期及时间-->
-        <menu text="日期时间型">
-            <item type="checkbox" text="FULL" group="date-template" command="java:0d0t" />
-            <item type="checkbox" text="LONG" group="date-template" command="java:1d1t" />
-            <item type="checkbox" text="MEDIUM" group="date-template" command="java:2d2t" />
-            <item type="checkbox" text="SHORT" group="date-template" command="java:3d3t" />
-            <seperator />
-            <item type="checkbox" text="yyyyMMdd HHmmss" group="date-template" command="user:yyyyMMdd HHmmss" />
-            <item type="checkbox" text="yyyy-MM-dd HH:mm:ss" group="date-template" command="user:yyyy-MM-dd HH:mm:ss" />
-            <item type="checkbox" text="yyyy.MM.dd HH.mm.ss" group="date-template" command="user:yyyy.MM.dd HH.mm.ss" />
-            <item type="checkbox" text="yyyy年MM月dd日 HH时mm分ss秒" group="date-template" command="user:yyyy年MM月dd日 HH时mm分ss秒" />
+            <item type="checkbox" text="HHmmss 格式" group="date-template" command="user:HHmmss" />
+            <item type="checkbox" text="HH:mm:ss 格式" group="date-template" command="user:HH:mm:ss" />
+            <item type="checkbox" text="HH.mm.ss 格式" group="date-template" command="user:HH.mm.ss" />
+            <item type="checkbox" text="HH mm ss 格式" group="date-template" command="user:HH mm ss" />
+            <item type="checkbox" text="HH时mm分ss秒 格式" group="date-template" command="user:HH时mm分ss秒" />
         </menu>
     </submenu>
     <submenu id="date-interval">

@@ -4,7 +4,7 @@
  */
 package com.magicpwd.e.pwd.view;
 
-import com.magicpwd.__a.APwdAction;
+import com.magicpwd.__a.mpwd.APwdAction;
 
 /**
  *
