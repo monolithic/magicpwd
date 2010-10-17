@@ -2,25 +2,26 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.magicpwd.e.pad;
+package com.magicpwd.e.mpad;
 
 import com.magicpwd.__a.mpad.APadAction;
+import com.magicpwd.v.TrayPtn;
 
 /**
  *
  * @author Amon
  */
-public class SaveAction extends APadAction
+public class ExitAction extends APadAction
 {
 
-    public SaveAction()
+    public ExitAction()
     {
     }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        miniPtn.saveNote();
+        TrayPtn.endSave();
     }
 
     @Override
