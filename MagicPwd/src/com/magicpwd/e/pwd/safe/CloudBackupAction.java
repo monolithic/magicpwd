@@ -4,7 +4,7 @@
  */
 package com.magicpwd.e.pwd.safe;
 
-import com.magicpwd.$a.APwdAction;
+import com.magicpwd.__a.APwdAction;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._mail.Connect;

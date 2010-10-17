@@ -5,16 +5,16 @@ package com.magicpwd._prop;
 
 import javax.swing.DefaultComboBoxModel;
 
-import com.magicpwd.r.ListCR;
+import com.magicpwd.__i.IPropBean;
 import com.magicpwd._comn.prop.Char;
 import com.magicpwd._comp.IcoLabel;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd.$i.IPropBean;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.CharMdl;
 import com.magicpwd.m.CoreMdl;
+import com.magicpwd.r.ListCR;
 
 /**
  * @author Amon

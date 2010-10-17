@@ -3,9 +3,9 @@
  */
 package com.magicpwd._bean.pwd;
 
-import com.magicpwd.$a.APwdAction;
-import com.magicpwd.$i.IEditBean;
-import com.magicpwd.$i.IEditItem;
+import com.magicpwd.__a.APwdAction;
+import com.magicpwd.__i.IEditBean;
+import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
@@ -18,7 +18,6 @@ import com.magicpwd._util.Date;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.v.pwd.MainPtn;
-import java.text.DateFormat;
 
 /**
  * 属性：日期
@@ -33,7 +32,7 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
     private MainPtn mainPtn;
     private WTextBox nameBox;
 //    private WTextBox dataBox;
-    private DateFormat format;
+    private java.text.DateFormat format;
 
     public DateBean(MainPtn mainPtn)
     {
@@ -285,12 +284,12 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
         getFormat();
     }
 
-    private DateFormat getFormat()
+    private java.text.DateFormat getFormat()
     {
         String t = itemData.getSpec(IEditItem.SPEC_DATE_FORM);
         if (!Char.isValidate(t))
         {
-            format = DateFormat.getDateTimeInstance();
+            format = java.text.DateFormat.getDateTimeInstance();
         }
         if (t.startsWith("java:"))
         {
@@ -300,21 +299,21 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
             String time = tm.find() ? tm.group().replace("t", "") : null;
             if (date != null && time != null)
             {
-                format = DateFormat.getDateTimeInstance(Integer.parseInt(date), Integer.parseInt(time));
+                format = java.text.DateFormat.getDateTimeInstance(Integer.parseInt(date), Integer.parseInt(time));
                 return format;
             }
             if (date != null)
             {
-                format = DateFormat.getDateInstance(Integer.parseInt(date));
+                format = java.text.DateFormat.getDateInstance(Integer.parseInt(date));
                 return format;
             }
             if (time != null)
             {
-                format = DateFormat.getDateInstance(Integer.parseInt(time));
+                format = java.text.DateFormat.getDateInstance(Integer.parseInt(time));
                 return format;
             }
 
-            format = DateFormat.getDateTimeInstance();
+            format = java.text.DateFormat.getDateTimeInstance();
             return format;
         }
 
@@ -324,7 +323,7 @@ public class DateBean extends javax.swing.JPanel implements IEditBean
             return format;
         }
 
-        format = DateFormat.getDateTimeInstance();
+        format = java.text.DateFormat.getDateTimeInstance();
         return format;
     }
     private javax.swing.JLabel lb_PropData;
