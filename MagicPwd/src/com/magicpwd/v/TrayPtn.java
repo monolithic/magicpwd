@@ -15,7 +15,7 @@ import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.CoreMdl;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.r.AmonFF;
-import com.magicpwd.v.pay.NormPtn;
+import com.magicpwd.v.mpay.NormPtn;
 import com.magicpwd.v.pad.MiniPtn;
 import com.magicpwd.v.pwd.MainPtn;
 
