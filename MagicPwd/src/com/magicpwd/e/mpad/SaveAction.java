@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.magicpwd.e.pad;
+package com.magicpwd.e.mpad;
 
 import com.magicpwd.__a.mpad.APadAction;
 
@@ -10,17 +10,17 @@ import com.magicpwd.__a.mpad.APadAction;
  *
  * @author Amon
  */
-public class OpenAction extends APadAction
+public class SaveAction extends APadAction
 {
 
-    public OpenAction()
+    public SaveAction()
     {
     }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        miniPtn.openNote();
+        miniPtn.saveNote();
     }
 
     @Override
