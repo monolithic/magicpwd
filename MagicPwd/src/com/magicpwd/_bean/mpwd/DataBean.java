@@ -6,7 +6,6 @@ package com.magicpwd._bean.mpwd;
 
 import com.magicpwd.__i.IEditBean;
 import com.magicpwd.__i.IEditItem;
-import java.awt.event.ActionEvent;
 
 /**
  *
@@ -18,42 +17,35 @@ public class DataBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initView()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void initLang()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void initData()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public void showData(IEditItem item)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void copyDataActionPerformed(ActionEvent evt)
+    public void copyDataActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void saveDataActionPerformed(ActionEvent evt)
+    public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public void dropDataActionPerformed(ActionEvent evt)
+    public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 }
