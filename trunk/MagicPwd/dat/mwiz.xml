@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<magicpwd>
+    <!--魔方密码工具栏-->
+    <toolbar id="mwiz">
+        <!--新增-->
+        <item type="normal" tips="$P30F7B01">
+            <icon>
+                <default id="file-new" path="skin/feel/%feel%/file-new.png"/>
+            </icon>
+            <action id="new-keys" class="com.magicpwd.e.mwiz.file.NewAction" />
+        </item>
+        <!--编辑-->
+        <item type="normal" tips="$P30F7B02">
+            <icon>
+                <default id="file-save" path="skin/feel/%feel%/file-save.png"/>
+            </icon>
+            <action id="save-keys" class="com.magicpwd.e.mwiz.file.SaveAction" />
+        </item>
+        <!--删除-->
+        <item type="normal" tips="$P30F7B02">
+            <icon>
+                <default id="file-save" path="skin/feel/%feel%/file-save.png"/>
+            </icon>
+            <action id="save-keys" class="com.magicpwd.e.mwiz.file.SaveAction" />
+        </item>
+    </toolbar>
+</magicpwd>
