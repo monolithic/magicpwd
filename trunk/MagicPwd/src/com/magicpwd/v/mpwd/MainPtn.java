@@ -621,17 +621,28 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         listPop = menuPtn.getPopMenu("list");
 
         ls_GuidList = new javax.swing.JList();
-        ls_GuidList.setComponentPopupMenu(listPop);
         ls_GuidList.setCellRenderer(new KeysCR());
         ls_GuidList.setModel(coreMdl.getListMdl());
         ls_GuidList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        ls_GuidList.addListSelectionListener(new javax.swing.event.ListSelectionListener()
+        ls_GuidList.addMouseListener(new java.awt.event.MouseAdapter()
         {
 
             @Override
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt)
+            public void mouseClicked(java.awt.event.MouseEvent e)
             {
-                ls_DataListValueChanged(evt);
+                ls_GuidListMouseClicked(e);
+            }
+
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent e)
+            {
+                ls_GuidListMousePressed(e);
+            }
+
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent e)
+            {
+                ls_GuidListMouseReleased(e);
             }
         });
 
@@ -954,14 +965,16 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         }
     }
 
-    private void ls_DataListValueChanged(javax.swing.event.ListSelectionEvent evt)
+    private void ls_GuidListMouseClicked(java.awt.event.MouseEvent e)
     {
         int i = ls_GuidList.getSelectedIndex();
+        // 重复事件判断
         if (i == ls_LastIndx)
         {
             return;
         }
 
+        // 记录上次索引
         ls_LastIndx = i;
         if (ls_LastIndx < 0)
         {
@@ -983,10 +996,11 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
             return;
         }
 
+        Keys keys = (Keys) obj;
+
         try
         {
             tb_LastIndx = -1;
-            Keys keys = (Keys) obj;
             gridMdl.clear();
             gridMdl.loadData(keys.getP30F0104());
 
@@ -1007,6 +1021,42 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         }
 
         showPropInfo();
+    }
+
+    private void ls_GuidListMousePressed(java.awt.event.MouseEvent e)
+    {
+        if (e.isPopupTrigger())
+        {
+            int i = ls_GuidList.locationToIndex(e.getPoint());
+            if (i > -1)
+            {
+                if (i != ls_LastIndx)
+                {
+                    ls_LastIndx = i;
+                    ls_GuidList.setSelectedIndex(i);
+                }
+                listPop.show(ls_GuidList, e.getX(), e.getY());
+            }
+            return;
+        }
+    }
+
+    private void ls_GuidListMouseReleased(java.awt.event.MouseEvent e)
+    {
+        if (e.isPopupTrigger())
+        {
+            int i = ls_GuidList.locationToIndex(e.getPoint());
+            if (i > -1)
+            {
+                if (i != ls_LastIndx)
+                {
+                    ls_LastIndx = i;
+                    ls_GuidList.setSelectedIndex(i);
+                }
+                listPop.show(ls_GuidList, e.getX(), e.getY());
+            }
+            return;
+        }
     }
 
     private void tb_ItemListMouseReleased(java.awt.event.MouseEvent evt)
