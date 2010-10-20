@@ -11,7 +11,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.DBA3000;
-import com.magicpwd.m.GridMdl;
+import com.magicpwd.m.mpwd.GridMdl;
 import com.magicpwd.v.TrayPtn;
 import java.util.ArrayList;
 import java.util.List;

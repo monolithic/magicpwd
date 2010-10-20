@@ -40,10 +40,10 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.DBA3000;
-import com.magicpwd.m.GridMdl;
+import com.magicpwd.m.mpwd.GridMdl;
 import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.CoreMdl;
-import com.magicpwd.m.SafeMdl;
+import com.magicpwd.m.mpwd.MpwdMdl;
 import com.magicpwd.r.KeysCR;
 import com.magicpwd.r.KindTN;
 import com.magicpwd.r.TreeCR;
@@ -80,13 +80,12 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
     private String queryKey;
     private CoreMdl coreMdl;
     private GridMdl gridMdl;
-    private SafeMdl safeMdl;
+    private MpwdMdl mpwdMdl;
 
-    public MainPtn(CoreMdl coreMdl, SafeMdl safeMdl)
+    public MainPtn(CoreMdl coreMdl)
     {
         this.coreMdl = coreMdl;
-        this.safeMdl = safeMdl;
-        gridMdl = new GridMdl(coreMdl.getUserCfg(), safeMdl);
+        gridMdl = new GridMdl(coreMdl.getUserCfg());
     }
 
     @Override
@@ -261,17 +260,17 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         // 数据新增的情况下，需要重新显示列表信息
         if (com.magicpwd._util.Char.isValidateHash(keysHash))
         {
-            coreMdl.getListMdl().updtName(keysHash, metaItem.getName(), logoItem.getName());
+            mpwdMdl.getListMdl().updtName(keysHash, metaItem.getName(), logoItem.getName());
         }
         else
         {
             if (isSearch)
             {
-                coreMdl.getListMdl().findName(queryKey);
+                mpwdMdl.getListMdl().findName(queryKey);
             }
             else if (com.magicpwd._util.Char.isValidateHash(queryKey))
             {
-                coreMdl.getListMdl().listName(queryKey);
+                mpwdMdl.getListMdl().listName(queryKey);
             }
         }
 
@@ -505,11 +504,11 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
     {
         if (isSearch)
         {
-            coreMdl.getListMdl().findName(queryKey);
+            mpwdMdl.getListMdl().findName(queryKey);
         }
         else if (com.magicpwd._util.Char.isValidateHash(queryKey))
         {
-            coreMdl.getListMdl().listName(queryKey);
+            mpwdMdl.getListMdl().listName(queryKey);
         }
     }
 
@@ -607,7 +606,7 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         tr_GuidTree = new javax.swing.JTree();
         tr_GuidTree.setComponentPopupMenu(kindPop);
         tr_GuidTree.setCellRenderer(new TreeCR());
-        tr_GuidTree.setModel(coreMdl.getTreeMdl());
+        tr_GuidTree.setModel(mpwdMdl.getTreeMdl());
         tr_GuidTree.getSelectionModel().setSelectionMode(javax.swing.tree.TreeSelectionModel.SINGLE_TREE_SELECTION);
         javax.swing.ToolTipManager.sharedInstance().registerComponent(tr_GuidTree);
         tr_GuidTree.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener()
@@ -628,7 +627,7 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
 
         ls_GuidList = new javax.swing.JList();
         ls_GuidList.setCellRenderer(new KeysCR());
-        ls_GuidList.setModel(coreMdl.getListMdl());
+        ls_GuidList.setModel(mpwdMdl.getListMdl());
         ls_GuidList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         ls_GuidList.addMouseListener(new java.awt.event.MouseAdapter()
         {
@@ -673,7 +672,7 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
     {
         pl_KeysInfo = new javax.swing.JPanel();
 
-        mainFind = new FindBar(this, coreMdl.getListMdl());
+        mainFind = new FindBar(this, mpwdMdl.getListMdl());
         mainFind.initView();
 
         gridPop = menuPtn.getPopMenu("grid");
@@ -900,7 +899,7 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
             else
             {
                 queryKey = kind.getC2010103();
-                coreMdl.getListMdl().listName(queryKey);
+                mpwdMdl.getListMdl().listName(queryKey);
             }
         }
         isSearch = false;
@@ -918,7 +917,7 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
             c.set(java.util.Calendar.SECOND, 0);
             c.set(java.util.Calendar.MILLISECOND, 0);
             c.add(java.util.Calendar.DAY_OF_MONTH, 1);
-            coreMdl.getListMdl().listTask(s, c.getTime());
+            mpwdMdl.getListMdl().listTask(s, c.getTime());
             return;
         }
         java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("\\d+").matcher(task);
@@ -930,43 +929,43 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         if (task.endsWith("second"))
         {
             c.add(java.util.Calendar.SECOND, time);
-            coreMdl.getListMdl().listTask(s, c.getTime());
+            mpwdMdl.getListMdl().listTask(s, c.getTime());
             return;
         }
         if (task.endsWith("minute"))
         {
             c.add(java.util.Calendar.MINUTE, time);
-            coreMdl.getListMdl().listTask(s, c.getTime());
+            mpwdMdl.getListMdl().listTask(s, c.getTime());
             return;
         }
         if (task.endsWith("hour"))
         {
             c.add(java.util.Calendar.HOUR_OF_DAY, time);
-            coreMdl.getListMdl().listTask(s, c.getTime());
+            mpwdMdl.getListMdl().listTask(s, c.getTime());
             return;
         }
         if (task.endsWith("day"))
         {
             c.add(java.util.Calendar.DAY_OF_MONTH, time);
-            coreMdl.getListMdl().listTask(s, c.getTime());
+            mpwdMdl.getListMdl().listTask(s, c.getTime());
             return;
         }
         if (task.endsWith("week"))
         {
             c.add(java.util.Calendar.WEEK_OF_YEAR, time);
-            coreMdl.getListMdl().listTask(s, c.getTime());
+            mpwdMdl.getListMdl().listTask(s, c.getTime());
             return;
         }
         if (task.endsWith("month"))
         {
             c.add(java.util.Calendar.MONTH, time);
-            coreMdl.getListMdl().listTask(s, c.getTime());
+            mpwdMdl.getListMdl().listTask(s, c.getTime());
             return;
         }
         if (task.endsWith("year"))
         {
             c.add(java.util.Calendar.YEAR, time);
-            coreMdl.getListMdl().listTask(s, c.getTime());
+            mpwdMdl.getListMdl().listTask(s, c.getTime());
             return;
         }
     }
@@ -1224,19 +1223,19 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
 
     public void changeMode(int mode)
     {
-        gridMdl.setKeysMode(mode);
+        gridMdl.setKeysMajor(mode);
     }
 
     public void changeNote(int note)
     {
-        gridMdl.setKeysNote(note);
+        gridMdl.setKeysLabel(note);
     }
 
     public void changeKind(String hash)
     {
         if (gridMdl.setKeysKind(hash))
         {
-            coreMdl.getListMdl().wRemove(ls_LastIndx);
+            mpwdMdl.getListMdl().wRemove(ls_LastIndx);
         }
     }
 
@@ -1344,7 +1343,7 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
             Jcsv csv = new Jcsv(file);
             java.util.ArrayList<java.util.ArrayList<String>> data = csv.readFile();
             int size = gridMdl.wImport(data, kind.getC2010103());
-            coreMdl.getListMdl().listName(kind.getC2010103());
+            mpwdMdl.getListMdl().listName(kind.getC2010103());
             Lang.showMesg(this, LangRes.P30F7A07, "成功导入数据个数：{0}", "" + size);
 
         }
@@ -1401,12 +1400,12 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
             gridMdl.initHint();
             gridMdl.wAppend(gridMdl.getItemAt(ConsEnv.PWDS_HEAD_GUID).getSpec(IEditItem.SPEC_GUID_TPLT));
         }
-        selectNext(gridMdl.isUpdate() ? 0 : 1, true);
+        selectNext(com.magicpwd._util.Char.isValidateHash(gridMdl.getKeysHash()) ? 0 : 1, true);
     }
 
     public void saveCfg(String key, String text) throws Exception
     {
-        DBA3000.saveConfig(key, safeMdl.enCrypt(text));
+        DBA3000.saveConfig(key, gridMdl.enCrypt(text));
     }
 
     public String readCfg(String key) throws Exception
@@ -1414,19 +1413,19 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         String text = DBA3000.readConfig(key);
         if (com.magicpwd._util.Char.isValidate(text))
         {
-            text = safeMdl.deCrypt(text);
+            text = gridMdl.deCrypt(text);
         }
         return text;
     }
 
     public void enCrypt(java.io.File src, java.io.File dst) throws Exception
     {
-        safeMdl.enCrypt(src, dst);
+        gridMdl.enCrypt(src, dst);
     }
 
     public void deCrypt(java.io.File src, java.io.File dst) throws Exception
     {
-        safeMdl.deCrypt(src, dst);
+        gridMdl.deCrypt(src, dst);
     }
 
     public void exportCard(java.io.File srcFile, java.io.File dstFile, String fileExt)

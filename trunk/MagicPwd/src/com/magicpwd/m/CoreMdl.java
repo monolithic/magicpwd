@@ -3,26 +3,19 @@
  */
 package com.magicpwd.m;
 
-import com.magicpwd._comn.prop.Kind;
-import com.magicpwd._cons.ConsDat;
-import com.magicpwd.r.KindTN;
-
 /**
  * @author Amon
- * 
  */
-public final class CoreMdl
+public class CoreMdl
 {
 
     // 程序运行模式
     private static int runMode;
     // 用户配置数据模型
     private UserCfg userCfg;
-    private ListMdl listMdl;
-    private HintMdl hintMdl;
-    private TreeMdl treeMdl;
     private CboxMdl cboxMdl;
     private CharMdl charMdl;
+    private HintMdl hintMdl;
 
     public CoreMdl()
     {
@@ -30,12 +23,6 @@ public final class CoreMdl
 
     public void loadPre()
     {
-        listMdl = new ListMdl(this);
-        Kind kind = new Kind();
-        kind.setC2010103(ConsDat.HASH_ROOT);
-        kind.setC2010105("魔方密码");
-        kind.setC2010106("魔方密码");
-        treeMdl = new TreeMdl(new KindTN(kind));
         hintMdl = new HintMdl(this);
     }
 
@@ -76,22 +63,6 @@ public final class CoreMdl
     public void setRunMode(int runMode)
     {
         CoreMdl.runMode = runMode;
-    }
-
-    /**
-     * @return the listMdl
-     */
-    public ListMdl getListMdl()
-    {
-        return listMdl;
-    }
-
-    /**
-     * @return the treeMdl
-     */
-    public TreeMdl getTreeMdl()
-    {
-        return treeMdl;
     }
 
     /**

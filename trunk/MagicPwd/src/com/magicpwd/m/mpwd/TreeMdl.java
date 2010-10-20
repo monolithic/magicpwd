@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.magicpwd.m;
+package com.magicpwd.m.mpwd;
 
 import com.magicpwd._comn.prop.Kind;
 import javax.swing.tree.DefaultTreeModel;

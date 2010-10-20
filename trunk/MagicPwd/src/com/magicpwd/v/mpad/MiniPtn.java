@@ -16,9 +16,9 @@ import com.magicpwd.e.mpad.FindAction;
 import com.magicpwd.e.mpad.NewAction;
 import com.magicpwd.e.mpad.OpenAction;
 import com.magicpwd.e.mpad.SaveAction;
-import com.magicpwd.m.NoteMdl;
+import com.magicpwd.m.mpad.NoteMdl;
 import com.magicpwd.m.CoreMdl;
-import com.magicpwd.m.SafeMdl;
+import com.magicpwd.m.mpad.MpadMdl;
 import com.magicpwd.r.ListCR;
 import com.magicpwd.v.TrayPtn;
 
@@ -34,15 +34,14 @@ public class MiniPtn extends javax.swing.JFrame
     private java.awt.CardLayout infoLayout;
     private java.util.List<S1S2> noteList;
     private CoreMdl coreMdl;
-    private SafeMdl safeMdl;
+    private MpadMdl safeMdl;
     private NoteMdl noteMdl;
     private WTextBox nameBox;
     private WTextBox dataBox;
 
-    public MiniPtn(CoreMdl coreMdl, SafeMdl safeMdl)
+    public MiniPtn(CoreMdl coreMdl)
     {
         this.coreMdl = coreMdl;
-        this.safeMdl = safeMdl;
     }
 
     public void initView()

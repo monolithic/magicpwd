@@ -31,7 +31,6 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
     private static int currPtn;
     private static int nextPtn;
     private static CoreMdl coreMdl;
-    private static SafeMdl safeMdl;
     private static TrayPtn trayPtn;
     private static UserPtn userPtn;
     private static javax.swing.JFrame mfCurrForm;
@@ -226,7 +225,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
     {
         if (mp_MainPtn == null)
         {
-            mp_MainPtn = new MainPtn(coreMdl, safeMdl);
+            mp_MainPtn = new MainPtn(coreMdl);
             mp_MainPtn.initView();
             mp_MainPtn.initLang();
             mp_MainPtn.initData();
@@ -265,7 +264,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
     {
         if (mp_MiniPtn == null)
         {
-            mp_MiniPtn = new MiniPtn(coreMdl, safeMdl);
+            mp_MiniPtn = new MiniPtn(coreMdl);
             mp_MiniPtn.initView();
             mp_MiniPtn.initLang();
             mp_MiniPtn.initData();
@@ -453,8 +452,6 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
             // 用户配置文件加载
             coreMdl.loadCfg();
 
-            safeMdl = new SafeMdl(coreMdl.getUserCfg());
-
             // 语言资源加载
             Lang.loadLang(coreMdl.getUserCfg());
         }
@@ -509,7 +506,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         // 显示登录
         if (getCurrForm() == null)
         {
-            userPtn = new UserPtn(coreMdl.getUserCfg(), safeMdl);
+            userPtn = new UserPtn(coreMdl.getUserCfg());
             userPtn.setBackCall(this);
             userPtn.initView(coreMdl.getUserCfg().getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.INT_SIGN_IN : ConsEnv.INT_SIGN_UP);
             userPtn.initLang();
@@ -554,9 +551,9 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
     {
         if (userPtn == null)
         {
-            userPtn = new UserPtn(coreMdl.getUserCfg(), safeMdl);
+            userPtn = new UserPtn(coreMdl.getUserCfg());
         }
-        UserPtn ptn = (getCurrForm() != null && getCurrForm().isVisible()) ? new UserPtn(coreMdl.getUserCfg(), safeMdl, getCurrForm()) : userPtn;
+        UserPtn ptn = (getCurrForm() != null && getCurrForm().isVisible()) ? new UserPtn(coreMdl.getUserCfg(), getCurrForm()) : userPtn;
         ptn.setBackCall(call);
         ptn.initView(view);
         ptn.initLang();
