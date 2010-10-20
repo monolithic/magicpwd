@@ -23,7 +23,23 @@
             </icon>
             <action id="save-keys" class="com.magicpwd.e.mwiz.DeleteAction" />
         </item>
+        <seperator />
         <!--查询-->
+        <item type="normal" tips="$P30F7B02">
+            <icon>
+                <default id="file-save" path="skin/feel/default/mwiz-search.png"/>
+            </icon>
+            <action id="save-keys" class="com.magicpwd.e.mwiz.SearchAction" />
+        </item>
+        <seperator />
+        <!--高级模式-->
+        <item type="normal" tips="$P30F7B02">
+            <icon>
+                <default id="file-save" path="skin/feel/default/mwiz-search.png"/>
+            </icon>
+            <action id="save-keys" class="com.magicpwd.e.mwiz.SearchAction" />
+        </item>
+        <!--记事模式-->
         <item type="normal" tips="$P30F7B02">
             <icon>
                 <default id="file-save" path="skin/feel/default/mwiz-search.png"/>
