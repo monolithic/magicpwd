@@ -198,7 +198,7 @@ public class Bean
         mp_DataIcon.put(hash, icon);
     }
 
-    public static synchronized javax.swing.Icon getNone()
+    public static synchronized javax.swing.ImageIcon getNone()
     {
         if (bi_NoneIcon == null)
         {
@@ -233,7 +233,7 @@ public class Bean
         return logo;
     }
 
-    public static ImageIcon readIcon(String path, UserCfg userCfg)
+    public static ImageIcon readIcon(String path)
     {
         if (!Char.isValidate(path))
         {
@@ -243,7 +243,7 @@ public class Bean
         java.io.InputStream stream = null;
         try
         {
-            stream = File.open4Read(path.replace(ConsEnv.FEEL_ARGS, userCfg.getCfg(ConsCfg.CFG_SKIN_FEEL, ConsEnv.SKIN_FEEL_DEFAULT)));
+            stream = File.open4Read(path);
             return new javax.swing.ImageIcon(javax.imageio.ImageIO.read(stream));
         }
         catch (Exception exp)

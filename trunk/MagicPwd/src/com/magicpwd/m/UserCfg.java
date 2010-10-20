@@ -25,7 +25,7 @@ import com.magicpwd._util.Logs;
 public final class UserCfg
 {
 
-    private java.util.Map<String, javax.swing.Icon> mp_SkinIcon;
+    private java.util.Map<String, javax.swing.ImageIcon> mp_SkinIcon;
     private Properties userCfg;
     private boolean viewTop;
 
@@ -405,7 +405,7 @@ public final class UserCfg
         return userCfg.getProperty(ConsCfg.CFG_USER_NAME, "");
     }
 
-    public javax.swing.Icon getIcon(String name)
+    public javax.swing.ImageIcon getIcon(String name)
     {
         if (!Char.isValidate(name))
         {
@@ -414,7 +414,7 @@ public final class UserCfg
         return getIconMap().get(name);
     }
 
-    public void setIcon(String name, javax.swing.Icon icon)
+    public void setIcon(String name, javax.swing.ImageIcon icon)
     {
         if (!Char.isValidate(name))
         {
@@ -423,11 +423,16 @@ public final class UserCfg
         getIconMap().put(name, icon);
     }
 
-    private java.util.Map<String, javax.swing.Icon> getIconMap()
+    public javax.swing.ImageIcon readIcon(String path)
+    {
+        return Bean.readIcon(path.replace(ConsEnv.FEEL_ARGS, getCfg(ConsCfg.CFG_SKIN_FEEL, ConsEnv.SKIN_FEEL_DEFAULT)));
+    }
+
+    private java.util.Map<String, javax.swing.ImageIcon> getIconMap()
     {
         if (mp_SkinIcon == null)
         {
-            mp_SkinIcon = new java.util.HashMap<String, javax.swing.Icon>();
+            mp_SkinIcon = new java.util.HashMap<String, javax.swing.ImageIcon>();
         }
         return mp_SkinIcon;
     }

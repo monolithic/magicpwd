@@ -12,7 +12,6 @@ import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd._util.Bean;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -64,7 +63,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_FileView = new BtnLabel();
-        bt_FileView.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "file-preview.png", mainPtn.getCoreMdl().getUserCfg()));
+        bt_FileView.setIcon(mainPtn.getCoreMdl().getUserCfg().readIcon(ConsEnv.FEEL_PATH + "file-preview.png"));
         bt_FileView.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -77,7 +76,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.add(bt_FileView);
 
         bt_FileApnd = new BtnLabel();
-        bt_FileApnd.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "file-upload.png", mainPtn.getCoreMdl().getUserCfg()));
+        bt_FileApnd.setIcon(mainPtn.getCoreMdl().getUserCfg().readIcon(ConsEnv.FEEL_PATH + "file-upload.png"));
         bt_FileApnd.addActionListener(new java.awt.event.ActionListener()
         {
 

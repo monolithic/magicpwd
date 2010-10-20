@@ -56,7 +56,7 @@ public class DataBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_DateConf = new BtnLabel();
-        bt_DateConf.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "options.png", mainPtn.getCoreMdl().getUserCfg()));
+        bt_DateConf.setIcon(mainPtn.getCoreMdl().getUserCfg().readIcon(ConsEnv.FEEL_PATH + "options.png"));
         bt_DateConf.addActionListener(new java.awt.event.ActionListener()
         {
 
