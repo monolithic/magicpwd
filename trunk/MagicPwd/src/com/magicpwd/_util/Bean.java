@@ -9,11 +9,6 @@ import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd.m.UserCfg;
 import com.magicpwd.r.AmonFF;
-import java.awt.image.BufferedImage;
-import java.util.HashMap;
-import java.util.Map;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
 /**
  *
@@ -22,9 +17,10 @@ import javax.swing.ImageIcon;
 public class Bean
 {
 
-    private static ImageIcon bi_NoneIcon;
-    private static Map<Integer, BufferedImage> mp_LogoIcon;
-    private static Map<String, javax.swing.Icon> mp_DataIcon;
+    private static javax.swing.ImageIcon bi_NoneIcon;
+    private static java.util.Map<Integer, java.awt.image.BufferedImage> mp_LogoIcon;
+    private static java.util.Map<String, javax.swing.Icon> mp_DataIcon;
+    private static java.util.Map<String, javax.swing.Icon> mp_SkinIcon;
 
     public static void setText(BtnLabel c, String t)
     {
@@ -176,7 +172,7 @@ public class Bean
         }
         if (mp_DataIcon == null)
         {
-            mp_DataIcon = new HashMap<String, javax.swing.Icon>();
+            mp_DataIcon = new java.util.HashMap<String, javax.swing.Icon>();
         }
         if (!mp_DataIcon.containsKey(hash))
         {
@@ -193,7 +189,7 @@ public class Bean
         }
         if (mp_DataIcon == null)
         {
-            mp_DataIcon = new HashMap<String, javax.swing.Icon>();
+            mp_DataIcon = new java.util.HashMap<String, javax.swing.Icon>();
         }
         mp_DataIcon.put(hash, icon);
     }
@@ -202,25 +198,25 @@ public class Bean
     {
         if (bi_NoneIcon == null)
         {
-            bi_NoneIcon = new ImageIcon(createNone(16));
+            bi_NoneIcon = new javax.swing.ImageIcon(createNone(16));
         }
         return bi_NoneIcon;
     }
 
-    public static synchronized BufferedImage getLogo(int size)
+    public static synchronized java.awt.image.BufferedImage getLogo(int size)
     {
         if (mp_LogoIcon == null)
         {
-            mp_LogoIcon = new HashMap<Integer, BufferedImage>();
+            mp_LogoIcon = new java.util.HashMap<Integer, java.awt.image.BufferedImage>();
         }
 
-        BufferedImage logo = mp_LogoIcon.get(size);
+        java.awt.image.BufferedImage logo = mp_LogoIcon.get(size);
         if (logo == null)
         {
             try
             {
                 java.io.InputStream stream = Util.class.getResourceAsStream(ConsEnv.ICON_PATH + Char.lPad(Integer.toHexString(size), 4, '0') + ".png");
-                logo = ImageIO.read(stream);
+                logo = javax.imageio.ImageIO.read(stream);
                 stream.close();
             }
             catch (Exception exp)
@@ -233,7 +229,38 @@ public class Bean
         return logo;
     }
 
-    public static ImageIcon readIcon(String path)
+    public static boolean readIcon(final java.io.InputStream stream)
+    {
+        if (mp_SkinIcon == null)
+        {
+            mp_SkinIcon = new java.util.HashMap<String, javax.swing.Icon>();
+        }
+
+        try
+        {
+            java.awt.image.BufferedImage bufImg = javax.imageio.ImageIO.read(stream);
+
+            int w = bufImg.getWidth();
+            int h = bufImg.getHeight();
+            for (int i = 0, j = 0; i < w; i += 1)
+            {
+                mp_SkinIcon.put(Integer.toString(i), new javax.swing.ImageIcon(bufImg.getSubimage(j, 0, h, h)));
+                j += h;
+            }
+            return true;
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            return false;
+        }
+        finally
+        {
+            closeStream(stream);
+        }
+    }
+
+    public static javax.swing.ImageIcon readIcon(String path)
     {
         if (!Char.isValidate(path))
         {
@@ -257,15 +284,15 @@ public class Bean
         }
     }
 
-    private static BufferedImage createNone(int size)
+    private static java.awt.image.BufferedImage createNone(int size)
     {
-        BufferedImage bi = new BufferedImage(size, size, BufferedImage.TYPE_INT_ARGB);
+        java.awt.image.BufferedImage bi = new java.awt.image.BufferedImage(size, size, java.awt.image.BufferedImage.TYPE_INT_ARGB);
         return bi;
     }
 
-    private static BufferedImage createLogo(int size)
+    private static java.awt.image.BufferedImage createLogo(int size)
     {
-        BufferedImage bi = createNone(size);
+        java.awt.image.BufferedImage bi = createNone(size);
         return bi;
     }
 
