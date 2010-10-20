@@ -218,6 +218,14 @@ public class EditItem implements IEditItem
                 spec = new ArrayList<String>(1);
                 spec.add("");
                 break;
+            case ConsDat.INDX_DATA:
+                spec = new ArrayList<String>(5);
+                spec.add("");
+                spec.add("");
+                spec.add("");
+                spec.add("");
+                spec.add("");
+                break;
             default:
                 spec = null;
                 break;

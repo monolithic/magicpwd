@@ -7,6 +7,7 @@ import com.magicpwd.__i.IEditBean;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.IGridView;
 import com.magicpwd._bean.mpwd.AreaBean;
+import com.magicpwd._bean.mpwd.DataBean;
 import com.magicpwd._bean.mpwd.DateBean;
 import com.magicpwd._bean.mpwd.FileBean;
 import com.magicpwd._bean.mpwd.GuidBean;
@@ -559,6 +560,11 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         beanFile.initView();
         pl_CardProp.add(ConsEnv.BEAN_FILE, beanFile);
         editBean[idx++] = beanFile;
+
+        DataBean beanData = new DataBean(this);
+        beanData.initView();
+        pl_CardProp.add(ConsEnv.BEAN_DATA, beanData);
+        editBean[idx++] = beanData;
 
         GuidBean beanGuid = new GuidBean(this);
         beanGuid.initView();

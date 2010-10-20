@@ -11,17 +11,17 @@ import com.magicpwd._cons.ConsDat;
  *
  * @author Amon
  */
-public class ChangeAreaAction extends AMpwdAction
+public class ChangeDataAction extends AMpwdAction
 {
 
-    public ChangeAreaAction()
+    public ChangeDataAction()
     {
     }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mainPtn.changeBean(ConsDat.INDX_AREA);
+        mainPtn.changeBean(ConsDat.INDX_DATA);
     }
 
     @Override
