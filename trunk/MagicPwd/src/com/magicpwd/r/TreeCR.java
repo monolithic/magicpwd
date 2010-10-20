@@ -11,7 +11,6 @@ import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JTree;
 
-import com.magicpwd._util.Bean;
 
 /**
  * @author Amon
@@ -54,7 +53,6 @@ public class TreeCR extends JLabel implements javax.swing.tree.TreeCellRenderer
         }
 
         setFocusable(hasFocus);
-        setIcon(Bean.getSkinIcon(expanded ? "tree-default" : "tree-expanded"));
 
         if (value instanceof KindTN)
         {

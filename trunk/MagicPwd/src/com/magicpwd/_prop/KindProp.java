@@ -12,8 +12,8 @@ import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd.d.DBA3000;
-import com.magicpwd.m.CoreMdl;
 import com.magicpwd.r.TreeCR;
+import com.magicpwd.v.mpwd.MainPtn;
 
 /**
  * @author Amon
@@ -25,11 +25,11 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
     private javax.swing.tree.DefaultMutableTreeNode treeNode;
     private Kind kindItem;
     private boolean isUpdate;
-    private CoreMdl coreMdl;
+    private MainPtn mainPtn;
 
-    public KindProp(CoreMdl coreMdl)
+    public KindProp(MainPtn mainPtn)
     {
-        this.coreMdl = coreMdl;
+        this.mainPtn = mainPtn;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
     @Override
     public void initData()
     {
-        tr_KindList.setModel(coreMdl.getTreeMdl());
+        tr_KindList.setModel(mainPtn.getTreeMdl());
 
         kindItem = new Kind();
         viewInfo(kindItem);
@@ -141,7 +141,7 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
         pl_ItemSort = new javax.swing.JPanel();
 
         bt_DropData = new IcoLabel();
-        bt_DropData.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "file-delete.png", coreMdl.getUserCfg()));
+        bt_DropData.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "file-delete.png", mainPtn.getUserCfg()));
         bt_DropData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -346,7 +346,7 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
 
         p1.remove(s);
         p2.add(s);
-        coreMdl.getTreeMdl().nodeStructureChanged(p2);
+        mainPtn.getTreeMdl().nodeStructureChanged(p2);
         tr_KindList.setSelectionPath(new javax.swing.tree.TreePath(s.getPath()));
 
         Kind u = (Kind) p2.getUserObject();
@@ -380,7 +380,7 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
         int i = o.getIndex(p);
         o.remove(i--);
         o.insert(p, i);
-        coreMdl.getTreeMdl().nodeStructureChanged(o);
+        mainPtn.getTreeMdl().nodeStructureChanged(o);
 
         tr_KindList.setSelectionPath(path);
 
@@ -415,7 +415,7 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
         int i = o.getIndex(p);
         o.remove(i++);
         o.insert(p, i);
-        coreMdl.getTreeMdl().nodeStructureChanged(o);
+        mainPtn.getTreeMdl().nodeStructureChanged(o);
 
         tr_KindList.setSelectionPath(path);
 
@@ -445,7 +445,7 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
         javax.swing.tree.DefaultMutableTreeNode o = (javax.swing.tree.DefaultMutableTreeNode) p.getParent();
         o.remove(s);
         p.add(s);
-        coreMdl.getTreeMdl().nodeStructureChanged(o);
+        mainPtn.getTreeMdl().nodeStructureChanged(o);
         tr_KindList.setSelectionPath(new javax.swing.tree.TreePath(s.getPath()));
 
         Kind u = (Kind) p.getUserObject();
@@ -473,7 +473,7 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
         }
 
         javax.swing.tree.TreePath path = tr_KindList.getSelectionPath();
-        javax.swing.tree.DefaultMutableTreeNode node = (javax.swing.tree.DefaultMutableTreeNode) (path != null ? path.getLastPathComponent() : coreMdl.getTreeMdl().getRoot());
+        javax.swing.tree.DefaultMutableTreeNode node = (javax.swing.tree.DefaultMutableTreeNode) (path != null ? path.getLastPathComponent() : mainPtn.getTreeMdl().getRoot());
 
         if (kindItem == null)
         {
@@ -490,11 +490,11 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
         kindItem.setC2010108(ta_KindDesp.getText());
         if (isUpdate)
         {
-            coreMdl.getTreeMdl().wUpdate(path, kindItem);
+            mainPtn.getTreeMdl().wUpdate(path, kindItem);
         }
         else
         {
-            coreMdl.getTreeMdl().wAppend(path, kindItem);
+            mainPtn.getTreeMdl().wAppend(path, kindItem);
         }
 
         kindItem = new Kind();
@@ -513,7 +513,7 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
 
         if (Lang.showFirm(this, LangRes.P30F7A1A, "执行此操作后，此类别下的其它类别将会移动到根类别下，\n确认要删除此类别么？") == javax.swing.JOptionPane.YES_OPTION)
         {
-            coreMdl.getTreeMdl().wRemove(tr_KindList.getSelectionPath());
+            mainPtn.getTreeMdl().wRemove(tr_KindList.getSelectionPath());
         }
     }
 

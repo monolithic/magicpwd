@@ -43,7 +43,9 @@ import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.mpwd.GridMdl;
 import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.CoreMdl;
+import com.magicpwd.m.mpwd.ListMdl;
 import com.magicpwd.m.mpwd.MpwdMdl;
+import com.magicpwd.m.mpwd.TreeMdl;
 import com.magicpwd.r.KeysCR;
 import com.magicpwd.r.KindTN;
 import com.magicpwd.r.TreeCR;
@@ -1554,6 +1556,16 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         }
         histDlg.initData();
         histDlg.setVisible(true);
+    }
+
+    public TreeMdl getTreeMdl()
+    {
+        return mpwdMdl.getTreeMdl();
+    }
+
+    public ListMdl getListMdl()
+    {
+        return mpwdMdl.getListMdl();
     }
 
     public void showOptions(String propName)

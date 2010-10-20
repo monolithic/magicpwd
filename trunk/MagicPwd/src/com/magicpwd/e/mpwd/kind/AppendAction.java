@@ -52,7 +52,7 @@ public class AppendAction extends AMpwdAction
         c.setC2010101(p.getChildCount());
         c.setC2010105(kindName);
         c.setC2010106(kindName);
-        coreMdl.getTreeMdl().wAppend(path, c);
+        mainPtn.getTreeMdl().wAppend(path, c);
     }
 
     @Override

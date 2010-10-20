@@ -24,7 +24,6 @@ public class Bean
 
     private static ImageIcon bi_NoneIcon;
     private static Map<Integer, BufferedImage> mp_LogoIcon;
-    private static Map<String, javax.swing.Icon> mp_SkinIcon;
     private static Map<String, javax.swing.Icon> mp_DataIcon;
 
     public static void setText(BtnLabel c, String t)
@@ -167,32 +166,6 @@ public class Bean
                 Logs.exception(exp);
             }
         }
-    }
-
-    public static javax.swing.Icon getSkinIcon(String name)
-    {
-        if (!Char.isValidate(name))
-        {
-            return getNone();
-        }
-        if (mp_SkinIcon == null)
-        {
-            mp_SkinIcon = new HashMap<String, javax.swing.Icon>();
-        }
-        return mp_SkinIcon.get(name);
-    }
-
-    public static void setSkinIcon(String name, javax.swing.Icon icon)
-    {
-        if (!Char.isValidate(name))
-        {
-            return;
-        }
-        if (mp_SkinIcon == null)
-        {
-            mp_SkinIcon = new HashMap<String, javax.swing.Icon>();
-        }
-        mp_SkinIcon.put(name, icon);
     }
 
     public static javax.swing.Icon getDataIcon(String hash)

@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Logs;
 
@@ -24,6 +25,7 @@ import com.magicpwd._util.Logs;
 public final class UserCfg
 {
 
+    private java.util.Map<String, javax.swing.Icon> mp_SkinIcon;
     private Properties userCfg;
     private boolean viewTop;
 
@@ -401,5 +403,32 @@ public final class UserCfg
     public String getUserName()
     {
         return userCfg.getProperty(ConsCfg.CFG_USER_NAME, "");
+    }
+
+    public javax.swing.Icon getIcon(String name)
+    {
+        if (!Char.isValidate(name))
+        {
+            return Bean.getNone();
+        }
+        return getIconMap().get(name);
+    }
+
+    public void setIcon(String name, javax.swing.Icon icon)
+    {
+        if (!Char.isValidate(name))
+        {
+            return;
+        }
+        getIconMap().put(name, icon);
+    }
+
+    private java.util.Map<String, javax.swing.Icon> getIconMap()
+    {
+        if (mp_SkinIcon == null)
+        {
+            mp_SkinIcon = new java.util.HashMap<String, javax.swing.Icon>();
+        }
+        return mp_SkinIcon;
     }
 }

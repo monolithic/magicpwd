@@ -337,6 +337,18 @@ public abstract class SafeMdl
     }
 
     /**
+     * 向导初始化
+     * @return
+     */
+    public IEditItem initGuid()
+    {
+        GuidItem guid = new GuidItem(userCfg);
+        guid.setTime(new java.sql.Timestamp(System.currentTimeMillis()));
+        ls_ItemList.add(guid);
+        return guid;
+    }
+
+    /**
      * 关键搜索
      * @return
      */

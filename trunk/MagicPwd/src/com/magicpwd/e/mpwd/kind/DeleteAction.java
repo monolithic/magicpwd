@@ -43,7 +43,7 @@ public class DeleteAction extends AMpwdAction
 
         if (Lang.showFirm(mainPtn, LangRes.P30F7A1A, "执行此操作后，此类别下的其它类别将会移动到根类别下，\n确认要删除此类别么？") == javax.swing.JOptionPane.YES_OPTION)
         {
-            coreMdl.getTreeMdl().wRemove(path);
+            mainPtn.getTreeMdl().wRemove(path);
         }
     }
 
