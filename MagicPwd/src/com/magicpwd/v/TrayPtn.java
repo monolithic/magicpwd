@@ -476,8 +476,6 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
 
         Bean.getNone();
         Bean.getLogo(16);
-        Bean.setSkinIcon("tree-default", Bean.readIcon(ConsEnv.FEEL_PATH + "folder-default.png", coreMdl.getUserCfg()));
-        Bean.setSkinIcon("tree-expanded", Bean.readIcon(ConsEnv.FEEL_PATH + "folder-expanded.png", coreMdl.getUserCfg()));
 
         coreMdl.loadPre();
 
@@ -506,7 +504,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         // 显示登录
         if (getCurrForm() == null)
         {
-            userPtn = new UserPtn(coreMdl.getUserCfg());
+            userPtn = new UserPtn(coreMdl.getUserCfg(), null);
             userPtn.setBackCall(this);
             userPtn.initView(coreMdl.getUserCfg().getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.INT_SIGN_IN : ConsEnv.INT_SIGN_UP);
             userPtn.initLang();
@@ -551,9 +549,9 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
     {
         if (userPtn == null)
         {
-            userPtn = new UserPtn(coreMdl.getUserCfg());
+            userPtn = new UserPtn(coreMdl.getUserCfg(), null);
         }
-        UserPtn ptn = (getCurrForm() != null && getCurrForm().isVisible()) ? new UserPtn(coreMdl.getUserCfg(), getCurrForm()) : userPtn;
+        UserPtn ptn = (getCurrForm() != null && getCurrForm().isVisible()) ? new UserPtn(coreMdl.getUserCfg(), null, getCurrForm()) : userPtn;
         ptn.setBackCall(call);
         ptn.initView(view);
         ptn.initLang();

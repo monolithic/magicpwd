@@ -190,7 +190,7 @@ public class MdiDialog extends javax.swing.JDialog
 
         t = Lang.getLang(LangRes.P30F1205, "类别管理");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_KIND, t, t));
-        KindProp kp = new KindProp(coreMdl);
+        KindProp kp = new KindProp(null, coreMdl);
         kp.initView();
         kp.initLang();
         pl_CardPanel.add(ConsEnv.PROP_KIND, kp);

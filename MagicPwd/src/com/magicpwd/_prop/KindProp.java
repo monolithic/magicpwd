@@ -12,6 +12,7 @@ import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd.d.DBA3000;
+import com.magicpwd.m.CoreMdl;
 import com.magicpwd.r.TreeCR;
 import com.magicpwd.v.mpwd.MainPtn;
 
@@ -26,10 +27,12 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
     private Kind kindItem;
     private boolean isUpdate;
     private MainPtn mainPtn;
+    private CoreMdl coreMdl;
 
-    public KindProp(MainPtn mainPtn)
+    public KindProp(MainPtn mainPtn, CoreMdl coreMdl)
     {
         this.mainPtn = mainPtn;
+        this.coreMdl = coreMdl;
     }
 
     @Override
@@ -141,7 +144,7 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
         pl_ItemSort = new javax.swing.JPanel();
 
         bt_DropData = new IcoLabel();
-        bt_DropData.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "file-delete.png", mainPtn.getUserCfg()));
+        bt_DropData.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "file-delete.png", coreMdl.getUserCfg()));
         bt_DropData.addActionListener(new java.awt.event.ActionListener()
         {
 

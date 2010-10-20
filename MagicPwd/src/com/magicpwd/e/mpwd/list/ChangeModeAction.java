@@ -30,7 +30,7 @@ public class ChangeModeAction extends AMpwdAction
         {
             ((Keys) obj).setP30F0102(val);
         }
-        mainPtn.changeMode(val);
+        mainPtn.changeLabel(val);
     }
 
     @Override

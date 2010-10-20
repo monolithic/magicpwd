@@ -30,7 +30,7 @@ public class ChangeNoteAction extends AMpwdAction
         {
             ((Keys) obj).setP30F0103(val);
         }
-        mainPtn.changeNote(val);
+        mainPtn.changeMajor(val);
     }
 
     @Override

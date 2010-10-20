@@ -5,6 +5,7 @@ package com.magicpwd.r;
 
 import com.magicpwd._comn.Keys;
 import com.magicpwd._util.Bean;
+import com.magicpwd.m.UserCfg;
 
 /**
  *
@@ -13,12 +14,16 @@ import com.magicpwd._util.Bean;
 public class KeysCR extends javax.swing.JPanel implements javax.swing.ListCellRenderer
 {
 
-    public KeysCR()
+    private UserCfg userCfg;
+
+    public KeysCR(UserCfg userCfg)
     {
+        this.userCfg = userCfg;
+
         lb_Icon = new javax.swing.JLabel();
         lb_Text = new javax.swing.JLabel();
-        lb_Note = new javax.swing.JLabel();
-        lb_Mode = new javax.swing.JLabel();
+        lb_Major = new javax.swing.JLabel();
+        lb_Label = new javax.swing.JLabel();
         lb_Rest = new javax.swing.JLabel();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -26,16 +31,16 @@ public class KeysCR extends javax.swing.JPanel implements javax.swing.ListCellRe
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addComponent(lb_Icon);
         hsg.addComponent(lb_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE);
-        hsg.addComponent(lb_Mode);
-        hsg.addComponent(lb_Note);
+        hsg.addComponent(lb_Label);
+        hsg.addComponent(lb_Major);
         hsg.addComponent(lb_Rest);
         layout.setHorizontalGroup(hsg);
 
         javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg.addComponent(lb_Icon);
         vpg.addComponent(lb_Text);
-        vpg.addComponent(lb_Mode);
-        vpg.addComponent(lb_Note);
+        vpg.addComponent(lb_Label);
+        vpg.addComponent(lb_Major);
         vpg.addComponent(lb_Rest);
         layout.setVerticalGroup(vpg);
     }
@@ -76,15 +81,15 @@ public class KeysCR extends javax.swing.JPanel implements javax.swing.ListCellRe
             lb_Text.setText(keys.getP30F0109());
             setToolTipText(com.magicpwd._util.Char.isValidate(keys.getP30F010A()) ? keys.getP30F010A() : keys.getP30F0109());
             lb_Text.setIcon(Bean.getDataIcon(keys.getP30F010B()));
-            lb_Note.setIcon(Bean.getSkinIcon("major" + keys.getP30F0103()));
-            lb_Mode.setIcon(Bean.getSkinIcon("label" + keys.getP30F0102()));
+            lb_Major.setIcon(userCfg.getIcon("major" + keys.getP30F0103()));
+            lb_Label.setIcon(userCfg.getIcon("label" + keys.getP30F0102()));
         }
         // 其它
         else if (value != null)
         {
             lb_Text.setText(value.toString());
-            lb_Mode.setIcon(Bean.getNone());
-            lb_Note.setIcon(Bean.getNone());
+            lb_Label.setIcon(Bean.getNone());
+            lb_Major.setIcon(Bean.getNone());
         }
 
 //        lb_Rest.setIcon(Util.getNone());
@@ -92,8 +97,8 @@ public class KeysCR extends javax.swing.JPanel implements javax.swing.ListCellRe
         return this;
     }
     private javax.swing.JLabel lb_Icon;
-    private javax.swing.JLabel lb_Note;
+    private javax.swing.JLabel lb_Major;
     private javax.swing.JLabel lb_Rest;
-    private javax.swing.JLabel lb_Mode;
+    private javax.swing.JLabel lb_Label;
     private javax.swing.JLabel lb_Text;
 }

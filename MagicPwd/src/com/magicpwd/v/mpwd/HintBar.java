@@ -106,7 +106,7 @@ public class HintBar extends JPanel
             java.util.Date s = c.getTime();
             c.add(java.util.Calendar.DAY_OF_MONTH, 1);
             java.util.Date t = c.getTime();
-            mainPtn.getCoreMdl().getListMdl().listTask(s, t);
+            mainPtn.getListMdl().listTask(s, t);
         }
     }
 
