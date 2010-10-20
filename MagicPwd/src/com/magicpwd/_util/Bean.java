@@ -229,7 +229,12 @@ public class Bean
         return logo;
     }
 
-    public static boolean readIcon(final java.io.InputStream stream)
+    public static javax.swing.Icon getIcon(String name)
+    {
+        return mp_SkinIcon != null ? mp_SkinIcon.get(name) : getNone();
+    }
+
+    public static boolean readIcon(java.io.InputStream stream, String prefix)
     {
         if (mp_SkinIcon == null)
         {
@@ -242,9 +247,9 @@ public class Bean
 
             int w = bufImg.getWidth();
             int h = bufImg.getHeight();
-            for (int i = 0, j = 0; i < w; i += 1)
+            for (int i = 0, j = 0; j < w; i += 1)
             {
-                mp_SkinIcon.put(Integer.toString(i), new javax.swing.ImageIcon(bufImg.getSubimage(j, 0, h, h)));
+                mp_SkinIcon.put(prefix + i, new javax.swing.ImageIcon(bufImg.getSubimage(j, 0, h, h)));
                 j += h;
             }
             return true;
