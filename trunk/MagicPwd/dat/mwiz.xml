@@ -5,21 +5,28 @@
         <!--新增-->
         <item type="normal" tips="$P30F7B01">
             <icon>
-                <default id="file-new" path="skin/feel/%feel%/file-new.png"/>
+                <default id="file-new" path="skin/feel/%feel%/mwiz-add.png"/>
             </icon>
             <action id="new-keys" class="com.magicpwd.e.mwiz.file.NewAction" />
         </item>
         <!--编辑-->
         <item type="normal" tips="$P30F7B02">
             <icon>
-                <default id="file-save" path="skin/feel/%feel%/file-save.png"/>
+                <default id="file-save" path="skin/feel/%feel%/mwiz-eidt.png"/>
             </icon>
             <action id="save-keys" class="com.magicpwd.e.mwiz.file.SaveAction" />
         </item>
         <!--删除-->
         <item type="normal" tips="$P30F7B02">
             <icon>
-                <default id="file-save" path="skin/feel/%feel%/file-save.png"/>
+                <default id="file-save" path="skin/feel/%feel%/mwiz-delete.png"/>
+            </icon>
+            <action id="save-keys" class="com.magicpwd.e.mwiz.file.SaveAction" />
+        </item>
+        <!--查询-->
+        <item type="normal" tips="$P30F7B02">
+            <icon>
+                <default id="file-save" path="skin/feel/%feel%/mwiz-search.png"/>
             </icon>
             <action id="save-keys" class="com.magicpwd.e.mwiz.file.SaveAction" />
         </item>
