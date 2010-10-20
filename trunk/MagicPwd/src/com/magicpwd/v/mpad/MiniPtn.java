@@ -36,6 +36,7 @@ public class MiniPtn extends javax.swing.JFrame
     private MpadMdl mpadMdl;
     private WTextBox nameBox;
     private WTextBox dataBox;
+    private java.util.HashMap<String, javax.swing.Icon> iconMap;
 
     public MiniPtn(CoreMdl coreMdl)
     {
@@ -44,6 +45,9 @@ public class MiniPtn extends javax.swing.JFrame
 
     public void initView()
     {
+        iconMap = new java.util.HashMap<String, javax.swing.Icon>();
+//        Bean.readIcon(MiniPtn.class.getResourceAsStream(ConsEnv.ICON_PATH + "mpad.png"), iconMap);
+
         pl_NoteBase = new javax.swing.JPanel();
         lb_NoteHead = new javax.swing.JLabel();
         tf_NoteName = new javax.swing.JTextField();
@@ -233,6 +237,16 @@ public class MiniPtn extends javax.swing.JFrame
             }
         };
         Bean.registerKeyStrokeAction(getRootPane(), javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_DOWN_MASK | java.awt.event.InputEvent.ALT_DOWN_MASK), action, "showNormPtn", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
+    }
+
+    public javax.swing.Icon getIcon(String hash)
+    {
+        javax.swing.Icon icon = iconMap.get(hash);
+        if (icon == null)
+        {
+            icon = Bean.getIcon(hash);
+        }
+        return icon;
     }
 
     private void cb_NoteInfoItemStateChanged(java.awt.event.ItemEvent evt)

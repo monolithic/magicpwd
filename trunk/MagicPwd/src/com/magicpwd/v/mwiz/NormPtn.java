@@ -17,9 +17,17 @@ public class NormPtn extends javax.swing.JFrame
 
     private MenuPtn menuPtn;
     private CoreMdl coreMdl;
+    private java.util.HashMap<String, javax.swing.Icon> iconMap;
+
+    public NormPtn()
+    {
+    }
 
     public void initView()
     {
+        iconMap = new java.util.HashMap<String, javax.swing.Icon>();
+//        Bean.readIcon(NormPtn.class.getResourceAsStream(ConsEnv.ICON_PATH + "mwiz16.png"), iconMap);
+
         menuPtn = new MenuPtn(coreMdl);
         try
         {
@@ -79,6 +87,16 @@ public class NormPtn extends javax.swing.JFrame
 
     public void initData()
     {
+    }
+
+    public javax.swing.Icon getIcon(String hash)
+    {
+        javax.swing.Icon icon = iconMap.get(hash);
+        if (icon == null)
+        {
+            icon = Bean.getIcon(hash);
+        }
+        return icon;
     }
 
     private void tbKeysListMouseClicked(java.awt.event.MouseEvent e)
