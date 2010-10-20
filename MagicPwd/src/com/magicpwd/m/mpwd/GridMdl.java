@@ -38,6 +38,18 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     public void initHead()
     {
         initGuid();
+        fireTableDataChanged();
+    }
+
+    @Override
+    public void initBody(String tpltHash)
+    {
+        initMeta();
+        initLogo();
+        initHint();
+
+        DBA3000.selectTpltData(userCfg, tpltHash, ls_ItemList);
+        fireTableDataChanged();
     }
 
     /**
@@ -194,15 +206,6 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
         ls_ItemList.add(item);
         fireTableDataChanged();
         return item;
-    }
-
-    /**
-     * 初始化指定类型的数据
-     */
-    public void wAppend(String typeHash)
-    {
-        DBA3000.selectTpltData(userCfg, typeHash, ls_ItemList);
-        fireTableDataChanged();
     }
 
     /**

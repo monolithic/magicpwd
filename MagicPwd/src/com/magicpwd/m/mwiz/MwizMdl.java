@@ -26,6 +26,11 @@ public class MwizMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     }
 
     @Override
+    public void initBody(String tpltHash)
+    {
+    }
+
+    @Override
     public void clear()
     {
     }
