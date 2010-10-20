@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.magicpwd.m;
+package com.magicpwd.m.mpwd;
 
 import com.magicpwd._comn.Keys;
 import java.util.ArrayList;
@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 
 import com.magicpwd.d.DBA3000;
+import com.magicpwd.m.CoreMdl;
 import java.sql.Timestamp;
 import java.util.Calendar;
 

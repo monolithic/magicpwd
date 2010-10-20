@@ -5,7 +5,7 @@ package com.magicpwd._util;
 
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd.m.GridMdl;
+import com.magicpwd.m.mpwd.GridMdl;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;

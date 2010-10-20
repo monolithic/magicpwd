@@ -5,7 +5,7 @@ package com.magicpwd.v.mpwd;
 
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
-import com.magicpwd.m.ListMdl;
+import com.magicpwd.m.mpwd.ListMdl;
 import java.awt.event.FocusEvent;
 
 /**

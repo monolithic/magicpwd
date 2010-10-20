@@ -1,25 +1,42 @@
 /**
  * 
  */
-package com.magicpwd.m;
+package com.magicpwd.m.mpad;
 
 import com.magicpwd._comn.item.EditItem;
 
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd.d.DBA3000;
+import com.magicpwd.m.SafeMdl;
+import com.magicpwd.m.UserCfg;
 
 /**
  * 记事便签数据模型
  * @author Amon
  */
-public class NoteMdl extends GridMdl
+public class NoteMdl extends SafeMdl
 {
 
-    public NoteMdl(UserCfg userCfg, SafeMdl safeMdl)
+    public NoteMdl(UserCfg userCfg)
     {
-        super(userCfg, safeMdl);
+        super(userCfg);
+    }
+
+    @Override
+    public void initHead()
+    {
+        //initGuid();
+        initMeta();
+        initLogo();
+        initHint();
+    }
+
+    @Override
+    public void clear()
+    {
+        ls_ItemList.clear();
+        setModified(false);
     }
 
     public IEditItem initNote()
@@ -42,16 +59,8 @@ public class NoteMdl extends GridMdl
         return ls_ItemList.get(ConsEnv.PWDS_HEAD_SIZE);
     }
 
-    public void saveData(boolean histBack) throws Exception
-    {
-        keys.setP30F0105(userCfg.getUserCode());
-        keys.setHistBack(histBack);
-        enCrypt(keys, ls_ItemList);
-        DBA3000.savePwdsData(keys);
-    }
-
     public int getSize()
     {
-        return getRowCount();
+        return ls_ItemList.size();
     }
 }
