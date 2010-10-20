@@ -628,7 +628,7 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         listPop = menuPtn.getPopMenu("list");
 
         ls_GuidList = new javax.swing.JList();
-        ls_GuidList.setCellRenderer(new KeysCR());
+        ls_GuidList.setCellRenderer(new KeysCR(coreMdl.getUserCfg()));
         ls_GuidList.setModel(mpwdMdl.getListMdl());
         ls_GuidList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         ls_GuidList.addMouseListener(new java.awt.event.MouseAdapter()
@@ -1223,14 +1223,14 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         return gridMdl.getItemAt(ConsEnv.PWDS_HEAD_META);
     }
 
-    public void changeMode(int mode)
+    public void changeLabel(int mode)
     {
-        gridMdl.setKeysMajor(mode);
+        gridMdl.setKeysLabel(mode);
     }
 
-    public void changeNote(int note)
+    public void changeMajor(int note)
     {
-        gridMdl.setKeysLabel(note);
+        gridMdl.setKeysMajor(note);
     }
 
     public void changeKind(String hash)
