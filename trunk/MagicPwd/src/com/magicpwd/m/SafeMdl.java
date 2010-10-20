@@ -48,6 +48,8 @@ public abstract class SafeMdl
 
     public abstract void initHead();
 
+    public abstract void initBody(String tpltHash);
+
     public abstract void clear();
 
     /**

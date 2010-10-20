@@ -26,10 +26,23 @@ public class NoteMdl extends SafeMdl
     @Override
     public void initHead()
     {
-        //initGuid();
+        // Guid
+        initGuid().setData(ConsDat.HASH_NOTE);
+
+        // Meta
         initMeta();
+        // Logo
         initLogo();
+        // Hint
         initHint();
+    }
+
+    @Override
+    public void initBody(String tpltHash)
+    {
+        EditItem note = new EditItem(userCfg);
+        note.setType(ConsDat.INDX_AREA);
+        ls_ItemList.add(note);
     }
 
     @Override
@@ -37,14 +50,6 @@ public class NoteMdl extends SafeMdl
     {
         ls_ItemList.clear();
         setModified(false);
-    }
-
-    public IEditItem initNote()
-    {
-        EditItem note = new EditItem(userCfg);
-        note.setType(ConsDat.INDX_AREA);
-        ls_ItemList.add(note);
-        return note;
     }
 
     public void setNote(String name, String note)

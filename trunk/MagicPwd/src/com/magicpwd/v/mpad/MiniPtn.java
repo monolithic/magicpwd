@@ -407,18 +407,8 @@ public class MiniPtn extends javax.swing.JFrame
         NoteMdl noteMdl = mpadMdl.getNoteMdl();
         if (noteMdl.getSize() < 1)
         {
-            // Guid
-            IEditItem item = noteMdl.initGuid();
-            item.setData(ConsDat.HASH_NOTE);
-
-            // Meta
-            noteMdl.initMeta();
-            // Logo
-            noteMdl.initLogo();
-            // Hint
-            noteMdl.initHint();
-            // Note
-            noteMdl.initNote();
+            noteMdl.initHead();
+            noteMdl.initBody(null);
         }
 
         noteMdl.setNote(name, data);

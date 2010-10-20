@@ -99,10 +99,10 @@ public class CoreMdl
     }
 
     /**
-     * @param aHintMdl the hintMdl to set
+     * @param hintMdl the hintMdl to set
      */
-    public void setHintMdl(HintMdl aHintMdl)
+    public void setHintMdl(HintMdl hintMdl)
     {
-        hintMdl = aHintMdl;
+        this.hintMdl = hintMdl;
     }
 }

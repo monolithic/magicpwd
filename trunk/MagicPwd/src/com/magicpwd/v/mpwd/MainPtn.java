@@ -1397,10 +1397,7 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         gridMdl.setModified(true);
         if (gridMdl.getRowCount() < ConsEnv.PWDS_HEAD_SIZE)
         {
-            gridMdl.initMeta();
-            gridMdl.initLogo();
-            gridMdl.initHint();
-            gridMdl.wAppend(gridMdl.getItemAt(ConsEnv.PWDS_HEAD_GUID).getSpec(IEditItem.SPEC_GUID_TPLT));
+            gridMdl.initBody(gridMdl.getItemAt(ConsEnv.PWDS_HEAD_GUID).getSpec(IEditItem.SPEC_GUID_TPLT));
         }
         selectNext(com.magicpwd._util.Char.isValidateHash(gridMdl.getKeysHash()) ? 0 : 1, true);
     }
