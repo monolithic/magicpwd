@@ -4,7 +4,6 @@ import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
-import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
@@ -68,28 +67,28 @@ public class MiniPtn extends javax.swing.JFrame
         nameBox = new WTextBox(tf_NoteName, true);
         nameBox.initView();
 
-        bt_CreateNote.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "file-new.png", coreMdl.getUserCfg()));
+        bt_CreateNote.setIcon(coreMdl.getUserCfg().readIcon(ConsEnv.FEEL_PATH + "file-new.png"));
         NewAction newAction = new NewAction();
         newAction.setMiniPtn(this);
         newAction.setCoreMdl(coreMdl);
         bt_CreateNote.addActionListener(newAction);
         Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK), newAction, "file-new", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
 
-        bt_OpenNote.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "file-open.png", coreMdl.getUserCfg()));
+        bt_OpenNote.setIcon(coreMdl.getUserCfg().readIcon(ConsEnv.FEEL_PATH + "file-open.png"));
         OpenAction openAction = new OpenAction();
         openAction.setMiniPtn(this);
         openAction.setCoreMdl(coreMdl);
         bt_OpenNote.addActionListener(openAction);
         Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK), openAction, "file-open", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
 
-        bt_SaveNote.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "file-save.png", coreMdl.getUserCfg()));
+        bt_SaveNote.setIcon(coreMdl.getUserCfg().readIcon(ConsEnv.FEEL_PATH + "file-save.png"));
         SaveAction saveAction = new SaveAction();
         saveAction.setMiniPtn(this);
         saveAction.setCoreMdl(coreMdl);
         bt_SaveNote.addActionListener(saveAction);
         Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK), saveAction, "file-save", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
 
-        bt_SearchNote.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "find.png", coreMdl.getUserCfg()));
+        bt_SearchNote.setIcon(coreMdl.getUserCfg().readIcon(ConsEnv.FEEL_PATH + "find.png"));
         bt_SearchNote.addActionListener(findAction);
 
         ta_NoteData.setDragEnabled(true);

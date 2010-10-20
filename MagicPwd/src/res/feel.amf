@@ -15,133 +15,134 @@ file-open=1
 file-save=2
 file-saveas=3
 file-print=4
-file-exit=5
+file-close=5
+file-exit=6
 
 #######################################
 # 编辑图标
 #######################################
-edit-undo=6
-edit-redo=7
-edit-delete-cur=8
-edit-delete-all=9
-edit-move-up=10
-edit-move-down=11
-edit-move-left=12
-edit-move-right=13
-edit-history=14
+edit-undo=7
+edit-redo=8
+edit-delete-cur=9
+edit-delete-all=10
+edit-move-up=11
+edit-move-down=12
+edit-move-left=13
+edit-move-right=14
+edit-history=15
 
 #######################################
 # 导航图标
 #######################################
-guid-select-prev=15
-guid-select-next=16
+guid-select-prev=16
+guid-select-next=17
 
 #######################################
 # 视图图标
 #######################################
-view-menubar=17
-view-toolbar=18
-view-infobar=19
-view-findbar=20
-view-prop-isolate=21
-view-prop-visable=22
+view-menubar=18
+view-toolbar=19
+view-infobar=20
+view-findbar=21
+view-prop-isolate=22
+view-prop-visable=23
 
 #######################################
 # 工具图标
 #######################################
-data-search=60
+data-search=61
 
 #######################################
 # 工具图标
 #######################################
-tool-options=23
+tool-options=24
 
 #######################################
 # 帮助图标
 #######################################
-help-topic=24
+help-topic=25
 
 #######################################
 # 标记为
 #######################################
-keys-label=25
-keys-label1=26
-keys-label2=27
-keys-label3=28
-keys-label4=29
-keys-label5=30
-keys-label6=31
-keys-label7=32
-keys-label8=33
-keys-label9=34
+keys-label=26
+keys-label1=27
+keys-label2=28
+keys-label3=29
+keys-label4=30
+keys-label5=31
+keys-label6=32
+keys-label7=33
+keys-label8=34
+keys-label9=35
 
 #######################################
 # 重要性
 #######################################
-keys-major-2=35
-keys-major-1=36
-keys-major0=37
-keys-major+1=38
-keys-major+2=39
+keys-major-2=36
+keys-major-1=37
+keys-major0=38
+keys-major+1=39
+keys-major+2=40
 
 #######################################
 # 排序方式
 #######################################
-keys-sort-asc=40
-keys-sort-desc=41
+keys-sort-asc=41
+keys-sort-desc=42
 
 #######################################
 # 属性编辑图标
 #######################################
-prop-copy=42
-prop-save=43
-prop-drop=44
+prop-copy=43
+prop-save=44
+prop-drop=45
 
 #######################################
 # 信息图标
 #######################################
-info-mail=45
-info-card=46
+info-mail=46
+info-card=47
 
 #######################################
 # 提醒图标
 #######################################
-hint-time=47
+hint-time=48
 
 #######################################
 #口令编辑图标
 #######################################
-pwds-mask=48
-pwds-view=49
-pwds-generate=50
-pwds-options=51
+pwds-mask=49
+pwds-view=50
+pwds-generate=51
+pwds-options=52
 
 #######################################
 # 链接图标
 #######################################
-link-open=52
+link-open=53
 
 #######################################
 # 邮件图标
 #######################################
-mail-open=53
-mail-attachment=54
-mail-unread=55
-mail-readed=56
+mail-open=54
+mail-attachment=55
+mail-unread=56
+mail-readed=57
 
 #######################################
 # 日期图标
 #######################################
-date-time=57
-date-options=51
+date-time=58
+date-options=52
 
 #######################################
 # 附件图标
 #######################################
-file-preview=58
-file-append=59
+file-preview=59
+file-append=60
 
 #######################################
 # 数值图标
 #######################################
-data-options=46
+data-options=47

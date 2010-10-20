@@ -15,7 +15,6 @@ import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
@@ -81,7 +80,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.add(bt_PwdsView);
 
         bt_PwdsGent = new BtnLabel();
-        bt_PwdsGent.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "pwds-generate.png", mainPtn.getCoreMdl().getUserCfg()));
+        bt_PwdsGent.setIcon(mainPtn.getCoreMdl().getUserCfg().readIcon(ConsEnv.FEEL_PATH + "pwds-generate.png"));
         bt_PwdsGent.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -94,7 +93,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.add(bt_PwdsGent);
 
         bt_PwdsConf = new BtnLabel();
-        bt_PwdsConf.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "options.png", mainPtn.getCoreMdl().getUserCfg()));
+        bt_PwdsConf.setIcon(mainPtn.getCoreMdl().getUserCfg().readIcon(ConsEnv.FEEL_PATH + "options.png"));
         bt_PwdsConf.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -172,8 +171,8 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     {
         nameBox.initData();
 
-        icoMask = Bean.readIcon(ConsEnv.FEEL_PATH + "pwds-mask.png", mainPtn.getCoreMdl().getUserCfg());
-        icoView = Bean.readIcon(ConsEnv.FEEL_PATH + "pwds-view.png", mainPtn.getCoreMdl().getUserCfg());
+        icoMask = mainPtn.getCoreMdl().getUserCfg().readIcon(ConsEnv.FEEL_PATH + "pwds-mask.png");
+        icoView = mainPtn.getCoreMdl().getUserCfg().readIcon(ConsEnv.FEEL_PATH + "pwds-view.png");
 
         initMenuData();
 

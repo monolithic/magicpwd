@@ -962,7 +962,7 @@ public class MenuPtn
         String path = element.attributeValue("path");
         if (Char.isValidate(path))
         {
-            javax.swing.ImageIcon icon = Bean.readIcon(path, coreMdl.getUserCfg());
+            javax.swing.ImageIcon icon = coreMdl.getUserCfg().readIcon(path);
             if (validate)
             {
                 coreMdl.getUserCfg().setIcon(hash, icon);

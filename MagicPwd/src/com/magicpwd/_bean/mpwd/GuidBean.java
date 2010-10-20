@@ -12,7 +12,6 @@ import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.r.FileTM;
@@ -65,7 +64,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_ReadMail = new BtnLabel();
-        bt_ReadMail.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "mail-receive.png", mainPtn.getCoreMdl().getUserCfg()));
+        bt_ReadMail.setIcon(mainPtn.getCoreMdl().getUserCfg().readIcon(ConsEnv.FEEL_PATH + "mail-receive.png"));
         bt_ReadMail.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -78,7 +77,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.add(bt_ReadMail);
 
         bt_ExptCard = new BtnLabel();
-        bt_ExptCard.setIcon(Bean.readIcon(ConsEnv.FEEL_PATH + "card.png", mainPtn.getCoreMdl().getUserCfg()));
+        bt_ExptCard.setIcon(mainPtn.getCoreMdl().getUserCfg().readIcon(ConsEnv.FEEL_PATH + "card.png"));
         bt_ExptCard.addActionListener(new java.awt.event.ActionListener()
         {
 
