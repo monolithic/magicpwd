@@ -83,11 +83,11 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
     private CoreMdl coreMdl;
     private GridMdl gridMdl;
     private MpwdMdl mpwdMdl;
+    private java.util.HashMap<String, javax.swing.Icon> iconMap;
 
     public MainPtn(CoreMdl coreMdl)
     {
         this.coreMdl = coreMdl;
-        gridMdl = new GridMdl(coreMdl.getUserCfg());
     }
 
     @Override
@@ -99,6 +99,9 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
     public void initView()
     {
         UserCfg cfg = coreMdl.getUserCfg();
+        iconMap = new java.util.HashMap<String, javax.swing.Icon>();
+//        Bean.readIcon(MainPtn.class.getResourceAsStream(ConsEnv.ICON_PATH + "mpwd.png"), iconMap);
+        gridMdl = new GridMdl(coreMdl.getUserCfg());
 
         try
         {
@@ -178,6 +181,16 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
 
         pack();
         Util.centerForm(this, null);
+    }
+
+    public javax.swing.Icon getIcon(String hash)
+    {
+        javax.swing.Icon icon = iconMap.get(hash);
+        if (icon == null)
+        {
+            icon = Bean.getIcon(hash);
+        }
+        return icon;
     }
 
     public boolean newKeys()
