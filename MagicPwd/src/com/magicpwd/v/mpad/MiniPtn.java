@@ -34,8 +34,7 @@ public class MiniPtn extends javax.swing.JFrame
     private java.awt.CardLayout infoLayout;
     private java.util.List<S1S2> noteList;
     private CoreMdl coreMdl;
-    private MpadMdl safeMdl;
-    private NoteMdl noteMdl;
+    private MpadMdl mpadMdl;
     private WTextBox nameBox;
     private WTextBox dataBox;
 
@@ -206,7 +205,6 @@ public class MiniPtn extends javax.swing.JFrame
     public void initData()
     {
         noteList = new java.util.ArrayList<S1S2>();
-        noteMdl = new NoteMdl(coreMdl.getUserCfg(), safeMdl);
         nameBox.initData();
         dataBox.initData();
 
@@ -249,6 +247,7 @@ public class MiniPtn extends javax.swing.JFrame
 
         try
         {
+            NoteMdl noteMdl = mpadMdl.getNoteMdl();
             noteMdl.clear();
             noteMdl.loadData(lastHash);
             IEditItem note = noteMdl.getNote();
@@ -325,7 +324,7 @@ public class MiniPtn extends javax.swing.JFrame
         infoLayout.show(pl_NoteInfo, "info");
         lb_NoteInfo.setText("");
         tf_NoteName.requestFocus();
-        noteMdl.clear();
+        mpadMdl.getNoteMdl().clear();
 
         nameBox.reset();
         dataBox.reset();
@@ -405,6 +404,7 @@ public class MiniPtn extends javax.swing.JFrame
             }
         }
 
+        NoteMdl noteMdl = mpadMdl.getNoteMdl();
         if (noteMdl.getSize() < 1)
         {
             // Guid

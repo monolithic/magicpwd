@@ -26,7 +26,7 @@ public class MovetoAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        DatDialog dat = new DatDialog(coreMdl.getTreeMdl(), new IBackCall()
+        DatDialog dat = new DatDialog(mainPtn.getTreeMdl(), new IBackCall()
         {
 
             @Override

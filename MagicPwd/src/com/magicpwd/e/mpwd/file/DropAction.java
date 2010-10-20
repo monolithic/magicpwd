@@ -36,7 +36,7 @@ public class DropAction extends AMpwdAction
         {
             return;
         }
-        coreMdl.getListMdl().wDelete(mainPtn.getSelectedListIndex());
+        mainPtn.getListMdl().wDelete(mainPtn.getSelectedListIndex());
         mainPtn.clearGrid();
         mainPtn.showPropInfo();
     }

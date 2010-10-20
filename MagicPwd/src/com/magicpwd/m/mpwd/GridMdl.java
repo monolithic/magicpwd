@@ -19,7 +19,6 @@ import com.magicpwd._util.Logs;
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserCfg;
-import javax.swing.event.TableModelListener;
 
 /**
  * @author Amon
@@ -27,9 +26,29 @@ import javax.swing.event.TableModelListener;
 public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, java.io.Serializable
 {
 
+    private javax.swing.event.EventListenerList listenerList;
+
     public GridMdl(UserCfg userCfg)
     {
         super(userCfg);
+        listenerList = new javax.swing.event.EventListenerList();
+    }
+
+    @Override
+    public void initHead()
+    {
+        initGuid();
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void clear()
+    {
+        ls_ItemList.clear();
+        keys.setDefault();
+        setModified(false);
     }
 
     /*
@@ -110,6 +129,23 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
         return ls_ItemList.get(row);
     }
 
+    @Override
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex)
+    {
+    }
+
+    @Override
+    public void addTableModelListener(javax.swing.event.TableModelListener l)
+    {
+        listenerList.add(javax.swing.event.TableModelListener.class, l);
+    }
+
+    @Override
+    public void removeTableModelListener(javax.swing.event.TableModelListener l)
+    {
+        listenerList.remove(javax.swing.event.TableModelListener.class, l);
+    }
+
     /*
      * (non-Javadoc)
      *
@@ -128,16 +164,6 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     public IEditItem getItemAt(int index)
     {
         return ls_ItemList.get(index);
-    }
-
-    /**
-     *
-     */
-    public void clear()
-    {
-        ls_ItemList.clear();
-        keys.setDefault();
-        setModified(false);
     }
 
     /**
@@ -398,39 +424,23 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
         return !b;
     }
 
+    public void saveData(boolean histBack, boolean repaint) throws Exception
+    {
+    }
+
     public int getSequence()
     {
         return keys.getP30F0101();
     }
 
-    @Override
-    public void setValueAt(Object aValue, int rowIndex, int columnIndex)
-    {
-    }
-
-    @Override
-    public void addTableModelListener(TableModelListener l)
-    {
-        listenerList.add(TableModelListener.class, l);
-    }
-
-    @Override
-    public void removeTableModelListener(TableModelListener l)
-    {
-        listenerList.remove(TableModelListener.class, l);
-    }
-
     public void fireTableChanged(javax.swing.event.TableModelEvent e)
     {
-        // Guaranteed to return a non-null array
         Object[] listeners = listenerList.getListenerList();
-        // Process the listeners last to first, notifying
-        // those that are interested in this event
         for (int i = listeners.length - 2; i >= 0; i -= 2)
         {
-            if (listeners[i] == TableModelListener.class)
+            if (listeners[i] == javax.swing.event.TableModelListener.class)
             {
-                ((TableModelListener) listeners[i + 1]).tableChanged(e);
+                ((javax.swing.event.TableModelListener) listeners[i + 1]).tableChanged(e);
             }
         }
     }
@@ -442,20 +452,17 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
 
     public void fireTableRowsDeleted(int firstRow, int lastRow)
     {
-        fireTableChanged(new javax.swing.event.TableModelEvent(this, firstRow, lastRow,
-                javax.swing.event.TableModelEvent.ALL_COLUMNS, javax.swing.event.TableModelEvent.DELETE));
+        fireTableChanged(new javax.swing.event.TableModelEvent(this, firstRow, lastRow, javax.swing.event.TableModelEvent.ALL_COLUMNS, javax.swing.event.TableModelEvent.DELETE));
     }
 
     public void fireTableRowsUpdated(int firstRow, int lastRow)
     {
-        fireTableChanged(new javax.swing.event.TableModelEvent(this, firstRow, lastRow,
-                javax.swing.event.TableModelEvent.ALL_COLUMNS, javax.swing.event.TableModelEvent.UPDATE));
+        fireTableChanged(new javax.swing.event.TableModelEvent(this, firstRow, lastRow, javax.swing.event.TableModelEvent.ALL_COLUMNS, javax.swing.event.TableModelEvent.UPDATE));
     }
 
     public void fireTableRowsInserted(int firstRow, int lastRow)
     {
-        fireTableChanged(new javax.swing.event.TableModelEvent(this, firstRow, lastRow,
-                javax.swing.event.TableModelEvent.ALL_COLUMNS, javax.swing.event.TableModelEvent.INSERT));
+        fireTableChanged(new javax.swing.event.TableModelEvent(this, firstRow, lastRow, javax.swing.event.TableModelEvent.ALL_COLUMNS, javax.swing.event.TableModelEvent.INSERT));
     }
 
     public void fireTableStructureChanged()
@@ -467,27 +474,4 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     {
         fireTableChanged(new javax.swing.event.TableModelEvent(this));
     }
-
-    @Override
-    public void initHead()
-    {
-    }
-
-    /**
-     * 向导初始化
-     * @return
-     */
-    public IEditItem initGuid()
-    {
-        GuidItem guid = new GuidItem(userCfg);
-        guid.setTime(new java.sql.Timestamp(System.currentTimeMillis()));
-        ls_ItemList.add(guid);
-        fireTableDataChanged();
-        return guid;
-    }
-
-    public void saveData(boolean histBack, boolean repaint) throws Exception
-    {
-    }
-    private javax.swing.event.EventListenerList listenerList = new javax.swing.event.EventListenerList();
 }
