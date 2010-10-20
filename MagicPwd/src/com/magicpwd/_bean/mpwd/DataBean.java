@@ -8,6 +8,7 @@ import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IEditBean;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comp.BtnLabel;
+import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsEnv;
@@ -28,6 +29,11 @@ public class DataBean extends javax.swing.JPanel implements IEditBean
     private WTextBox nameBox;
 //    private WTextBox dataBox;
     private java.text.DateFormat format;
+
+    public DataBean(MainPtn mainPtn)
+    {
+        this.mainPtn = mainPtn;
+    }
 
     @Override
     public void initView()
@@ -129,6 +135,8 @@ public class DataBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initLang()
     {
+        Bean.setText(lb_PropName, "属性(@P)");
+        Bean.setText(lb_PropData, "数值(@D)");
     }
 
     @Override
@@ -139,6 +147,20 @@ public class DataBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void showData(IEditItem item)
     {
+        itemData = item;
+        // 数据类型
+        WButtonGroup group = mainPtn.getMenuPtn().getGroup("data-template");
+        if (group != null)
+        {
+            group.setSelected("", true);
+        }
+
+        // 符号位置
+        group = mainPtn.getMenuPtn().getGroup("data-position");
+        if (group != null)
+        {
+            group.setSelected("", true);
+        }
     }
 
     @Override
