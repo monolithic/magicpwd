@@ -1,16 +1,11 @@
 /**
  * 用户配置信息
  * CopyRight: MagicPwd.com
- * Homepage:http://magicpwd.com/
- * Project:http://magicpwd.dev.java.net/
- * Email:Amon@magicpwd.com
+ * Homepage: http://magicpwd.com/
+ * Project: http://magicpwd.googlecode.com/
+ * Email: Amon@magicpwd.com
  */
 package com.magicpwd.m;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.util.Properties;
 
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
@@ -26,7 +21,7 @@ public final class UserCfg
 {
 
     private java.util.Map<String, javax.swing.ImageIcon> mp_SkinIcon;
-    private Properties userCfg;
+    private java.util.Properties userCfg;
     private boolean viewTop;
 
     public UserCfg()
@@ -35,35 +30,42 @@ public final class UserCfg
 
     public final void loadCfg()
     {
-        userCfg = new Properties();
+        userCfg = new java.util.Properties();
+        java.io.FileInputStream fis = null;
         try
         {
-            File file = new File(ConsEnv.DIR_DAT, ConsEnv.FILE_DATA + ".config");
-            if (!file.exists() || !file.canRead())
+            java.io.File file = new java.io.File(ConsEnv.DIR_DAT, ConsEnv.FILE_DATA + ".config");
+            if (file.exists() && file.canRead())
             {
-                return;
+                fis = new java.io.FileInputStream(file);
+                userCfg.load(fis);
             }
-            FileInputStream fis = new FileInputStream(file);
-            userCfg.load(fis);
-            fis.close();
         }
         catch (Exception exp)
         {
             Logs.exception(exp);
+        }
+        finally
+        {
+            Bean.closeStream(fis);
         }
     }
 
     public final void saveCfg()
     {
+        java.io.FileOutputStream fos = null;
         try
         {
-            FileOutputStream fos = new FileOutputStream(new File(ConsEnv.DIR_DAT, ConsEnv.FILE_DATA + ".config"));
+            fos = new java.io.FileOutputStream(new java.io.File(ConsEnv.DIR_DAT, ConsEnv.FILE_DATA + ".config"));
             userCfg.store(fos, "MagicPwd User Configure File!");
-            fos.close();
         }
         catch (Exception exp)
         {
             Logs.exception(exp);
+        }
+        finally
+        {
+            Bean.closeStream(fos);
         }
     }
 
