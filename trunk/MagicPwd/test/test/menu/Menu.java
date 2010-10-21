@@ -6,7 +6,7 @@ package test.menu;
 
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
-import com.magicpwd.m.CoreMdl;
+import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.MenuPtn;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -25,7 +25,7 @@ public class Menu extends javax.swing.AbstractAction
 
     private JFrame frame;
     private JMenuBar bar;
-    private CoreMdl coreMdl;
+    private UserMdl coreMdl;
 
     public Menu()
     {
@@ -33,14 +33,14 @@ public class Menu extends javax.swing.AbstractAction
 
     public void init()
     {
-        coreMdl = new CoreMdl();
+        coreMdl = new UserMdl();
         coreMdl.loadPre();
         coreMdl.loadCfg();
 
         Bean.loadLnF(coreMdl.getUserCfg());
         Lang.loadLang(coreMdl.getUserCfg());
 
-        MenuPtn ptn = new MenuPtn(coreMdl);
+        MenuPtn ptn = new MenuPtn(coreMdl, null);
         try
         {
             ptn.loadData("dat/menu.xml");

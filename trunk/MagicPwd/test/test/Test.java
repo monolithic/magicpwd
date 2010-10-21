@@ -22,11 +22,11 @@ public class Test
     {
         try
         {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             UserCfg cfg = new UserCfg();
             cfg.loadCfg();
             Lang.loadLang(cfg);
-            Bean.readIcon(new FileInputStream("src/res/icon/mwiz32.png"), "mwiz");
+            Bean.readIcon(new FileInputStream("src/res/icon/mwiz16.png"), "mwiz");
             NormPtn p = new NormPtn();
             p.initView();
             p.initLang();
