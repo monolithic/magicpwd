@@ -12,7 +12,7 @@ import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.DBAccess;
 import com.magicpwd.m.UserCfg;
-import com.magicpwd.m.CoreMdl;
+import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
 import com.magicpwd.v.mpay.NormPtn;
 import com.magicpwd.v.mpad.MiniPtn;
@@ -29,7 +29,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
     private static boolean isOsTray;
     private static int currPtn;
     private static int nextPtn;
-    private static CoreMdl coreMdl;
+    private static UserMdl coreMdl;
     private static TrayPtn trayPtn;
     private static UserPtn userPtn;
     private static javax.swing.JFrame mfCurrForm;
@@ -446,7 +446,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
     {
         if (coreMdl == null)
         {
-            coreMdl = new CoreMdl();
+            coreMdl = new UserMdl();
 
             // 用户配置文件加载
             coreMdl.loadCfg();

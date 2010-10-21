@@ -6,14 +6,14 @@ package com.magicpwd.m.mpwd;
 
 import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._cons.ConsDat;
-import com.magicpwd.m.CoreMdl;
+import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.KindTN;
 
 /**
  *
  * @author Amon
  */
-public class MpwdMdl extends CoreMdl
+public class MpwdMdl extends UserMdl
 {
 
     private ListMdl listMdl;

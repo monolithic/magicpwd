@@ -19,7 +19,7 @@ import com.magicpwd._cons.DBC3000;
 import com.magicpwd._util.Hash;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
-import com.magicpwd.m.UserCfg;
+import com.magicpwd.m.UserMdl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -116,7 +116,7 @@ public class DBA3000
      * 添加用户过滤条件
      * @param dba
      */
-    private static void addUserSort(DBAccess dba, UserCfg cfg)
+    private static void addUserSort(DBAccess dba, UserMdl cfg)
     {
 //        dba.addWhere(DBC3000.P30F0102, "");
         dba.addWhere(DBC3000.P30F0105, cfg.getCode());
@@ -126,7 +126,7 @@ public class DBA3000
      * 添加显示排序
      * @param dba
      */
-    private static void addDataSort(DBAccess dba, UserCfg cfg)
+    private static void addDataSort(DBAccess dba, UserMdl cfg)
     {
         boolean asc = ConsCfg.DEF_TRUE.equals(cfg.getCfg(ConsCfg.CFG_VIEW_LIST_ASC, ConsCfg.DEF_FALSE));
         String key = cfg.getCfg(ConsCfg.CFG_VIEW_LIST_KEY, "09");
@@ -175,7 +175,7 @@ public class DBA3000
      * @param list
      * @return
      */
-    public static boolean readKeysList(UserCfg cfg, String kindHash, List<Keys> list)
+    public static boolean readKeysList(UserMdl cfg, String kindHash, List<Keys> list)
     {
         // 数据库连接初始化
         DBAccess dba = new DBAccess();
@@ -204,7 +204,7 @@ public class DBA3000
         }
     }
 
-    public static boolean readTaskList(UserCfg cfg, java.sql.Timestamp s, java.sql.Timestamp t, List<Keys> list)
+    public static boolean readTaskList(UserMdl cfg, java.sql.Timestamp s, java.sql.Timestamp t, List<Keys> list)
     {
         // 数据库连接初始化
         DBAccess dba = new DBAccess();
@@ -245,7 +245,7 @@ public class DBA3000
      * @param list
      * @return
      */
-    public static boolean findUserData(UserCfg cfg, String text, List<Keys> list)
+    public static boolean findUserData(UserMdl cfg, String text, List<Keys> list)
     {
         if (!com.magicpwd._util.Char.isValidate(text))
         {
@@ -285,7 +285,7 @@ public class DBA3000
      * @param list
      * @return
      */
-    public static boolean findHintList(UserCfg cfg, Timestamp s, Timestamp e, List<Keys> list)
+    public static boolean findHintList(UserMdl cfg, Timestamp s, Timestamp e, List<Keys> list)
     {
         DBAccess dba = new DBAccess();
 
@@ -308,7 +308,7 @@ public class DBA3000
         }
     }
 
-    public static boolean findUserNote(UserCfg cfg, String text, java.util.List<S1S2> list)
+    public static boolean findUserNote(UserMdl cfg, String text, java.util.List<S1S2> list)
     {
         if (!com.magicpwd._util.Char.isValidate(text))
         {
@@ -1045,7 +1045,7 @@ public class DBA3000
         return true;
     }
 
-    public static boolean selectTpltData(UserCfg cfg, String kindHash, List<IEditItem> tpltList)
+    public static boolean selectTpltData(UserMdl cfg, String kindHash, List<IEditItem> tpltList)
     {
         DBAccess dba = new DBAccess();
 

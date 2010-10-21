@@ -21,9 +21,9 @@ public class HintMdl
 
     private static List<Keys> hintList = new ArrayList<Keys>();
     private int counter = 999999999;//TODO:需要修改
-    private CoreMdl coreMdl;
+    private UserMdl coreMdl;
 
-    HintMdl(CoreMdl coreMdl)
+    HintMdl(UserMdl coreMdl)
     {
         this.coreMdl = coreMdl;
     }
@@ -32,7 +32,7 @@ public class HintMdl
     {
         // 计数器
         counter += 1;
-        if (counter < coreMdl.getUserCfg().getHintInt())
+        if (counter < coreMdl.getHintInt())
         {
             return;
         }
@@ -43,7 +43,7 @@ public class HintMdl
         }
 
         hintList.clear();
-        DBA3000.findHintList(coreMdl.getUserCfg(), start, end, hintList);
+        DBA3000.findHintList(coreMdl, start, end, hintList);
     }
 
     public List<Keys> getUnread()

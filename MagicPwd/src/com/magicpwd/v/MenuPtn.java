@@ -21,7 +21,7 @@ import com.magicpwd.e.mpwd.skin.FeelAction;
 import com.magicpwd.e.mpwd.skin.LookAction;
 import com.magicpwd.e.mpwd.skin.MoreAction;
 import com.magicpwd.e.mpwd.skin.ThemeAction;
-import com.magicpwd.m.CoreMdl;
+import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
 import java.util.List;
 import org.dom4j.Document;
@@ -37,14 +37,14 @@ public class MenuPtn
 {
 
     private Document document;
-    private CoreMdl coreMdl;
+    private UserMdl coreMdl;
     private IFavIcon favIcon;
     private java.util.regex.Pattern pattern;
     private java.util.HashMap<String, javax.swing.AbstractButton> buttons;
     private java.util.HashMap<String, javax.swing.Action> actions;
     private java.util.HashMap<String, WButtonGroup> groups;
 
-    public MenuPtn(CoreMdl coreMdl, IFavIcon favIcon)
+    public MenuPtn(UserMdl coreMdl, IFavIcon favIcon)
     {
         this.coreMdl = coreMdl;
         this.favIcon = favIcon;

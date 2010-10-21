@@ -11,7 +11,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd.d.DBA3000;
-import com.magicpwd.m.CoreMdl;
+import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.TreeCR;
 import com.magicpwd.v.mpwd.MainPtn;
 
@@ -26,9 +26,9 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
     private Kind kindItem;
     private boolean isUpdate;
     private MainPtn mainPtn;
-    private CoreMdl coreMdl;
+    private UserMdl coreMdl;
 
-    public KindProp(MainPtn mainPtn, CoreMdl coreMdl)
+    public KindProp(MainPtn mainPtn, UserMdl coreMdl)
     {
         this.mainPtn = mainPtn;
         this.coreMdl = coreMdl;
