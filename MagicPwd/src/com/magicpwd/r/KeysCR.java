@@ -5,7 +5,7 @@ package com.magicpwd.r;
 
 import com.magicpwd._comn.Keys;
 import com.magicpwd._util.Bean;
-import com.magicpwd.m.UserCfg;
+import com.magicpwd.v.mpwd.MainPtn;
 
 /**
  *
@@ -14,11 +14,11 @@ import com.magicpwd.m.UserCfg;
 public class KeysCR extends javax.swing.JPanel implements javax.swing.ListCellRenderer
 {
 
-    private UserCfg userCfg;
+    private MainPtn mainPtn;
 
-    public KeysCR(UserCfg userCfg)
+    public KeysCR(MainPtn mainPtn)
     {
-        this.userCfg = userCfg;
+        this.mainPtn = mainPtn;
 
         lb_Icon = new javax.swing.JLabel();
         lb_Text = new javax.swing.JLabel();
@@ -81,8 +81,8 @@ public class KeysCR extends javax.swing.JPanel implements javax.swing.ListCellRe
             lb_Text.setText(keys.getP30F0109());
             setToolTipText(com.magicpwd._util.Char.isValidate(keys.getP30F010A()) ? keys.getP30F010A() : keys.getP30F0109());
             lb_Text.setIcon(Bean.getDataIcon(keys.getP30F010B()));
-            lb_Major.setIcon(userCfg.getIcon("major" + keys.getP30F0103()));
-            lb_Label.setIcon(userCfg.getIcon("label" + keys.getP30F0102()));
+            lb_Major.setIcon(mainPtn.getIcon("major" + keys.getP30F0103()));
+            lb_Label.setIcon(mainPtn.getIcon("label" + keys.getP30F0102()));
         }
         // 其它
         else if (value != null)

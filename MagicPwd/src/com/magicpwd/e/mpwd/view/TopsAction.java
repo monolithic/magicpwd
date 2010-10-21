@@ -22,9 +22,9 @@ public class TopsAction extends AMpwdAction
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
         UserCfg cfg = coreMdl.getUserCfg();
-        boolean b = !cfg.isViewTop();
+        boolean b = !cfg.isTopMost();
         mainPtn.setAlwaysOnTop(b);
-        cfg.setViewTop(b);
+        cfg.setTopMost(b);
     }
 
     @Override

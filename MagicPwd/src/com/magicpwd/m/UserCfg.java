@@ -15,14 +15,14 @@ import com.magicpwd._util.Logs;
 
 /**
  * @author Amon
- * 
  */
 public final class UserCfg
 {
 
-    private java.util.Map<String, javax.swing.ImageIcon> mp_SkinIcon;
     private java.util.Properties userCfg;
-    private boolean viewTop;
+    private boolean topMost;
+    private byte runMode;
+    private byte appMode;
 
     public UserCfg()
     {
@@ -103,23 +103,6 @@ public final class UserCfg
     }
 
     /**
-     * @return the viewTop
-     */
-    public final boolean isViewTop()
-    {
-        return viewTop;
-    }
-
-    /**
-     * @param viewTop
-     *            the viewTop to set
-     */
-    public final void setViewTop(boolean viewTop)
-    {
-        this.viewTop = viewTop;
-    }
-
-    /**
      * @return the menuViw
      */
     public final boolean isMenuVisible()
@@ -128,12 +111,12 @@ public final class UserCfg
     }
 
     /**
-     * @param menuViw
+     * @param visible
      *            the menuViw to set
      */
-    public final void setMenuViw(boolean menuViw)
+    public final void setMenuVisible(boolean visible)
     {
-        userCfg.setProperty(ConsCfg.CFG_VIEW_MENU, menuViw ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
+        userCfg.setProperty(ConsCfg.CFG_VIEW_MENU, visible ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
     /**
@@ -145,12 +128,12 @@ public final class UserCfg
     }
 
     /**
-     * @param toolViw
+     * @param visible
      *            the toolViw to set
      */
-    public final void setToolViw(boolean toolViw)
+    public final void setToolVisible(boolean visible)
     {
-        userCfg.setProperty(ConsCfg.CFG_VIEW_TOOL, toolViw ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
+        userCfg.setProperty(ConsCfg.CFG_VIEW_TOOL, visible ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
     /**
@@ -162,12 +145,12 @@ public final class UserCfg
     }
 
     /**
-     * @param infoViw
+     * @param visible
      *            the infoViw to set
      */
-    public final void setInfoViw(boolean infoViw)
+    public final void setInfoVisible(boolean visible)
     {
-        userCfg.setProperty(ConsCfg.CFG_VIEW_INFO, infoViw ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
+        userCfg.setProperty(ConsCfg.CFG_VIEW_INFO, visible ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
     /**
@@ -179,12 +162,12 @@ public final class UserCfg
     }
 
     /**
-     * @param findViw
+     * @param visible
      *            the findViw to set
      */
-    public final void setFindViw(boolean findViw)
+    public final void setFindVisible(boolean visible)
     {
-        userCfg.setProperty(ConsCfg.CFG_VIEW_FIND, findViw ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
+        userCfg.setProperty(ConsCfg.CFG_VIEW_FIND, visible ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
     /**
@@ -387,42 +370,61 @@ public final class UserCfg
         userCfg.setProperty(ConsCfg.CFG_PWDS_LOOP, pwdsLoop ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
-    public final void setUserLang(String lang)
+    public String getSkin()
+    {
+        return "";
+    }
+
+    public void setSkin(String skin)
+    {
+    }
+
+    public String getLook()
+    {
+        return "";
+    }
+
+    public void setLook(String look)
+    {
+    }
+
+    public String getFeel()
+    {
+        return "";
+    }
+
+    public void setFeel(String feel)
+    {
+    }
+
+    public final String getLang()
+    {
+        String lang = userCfg.getProperty(ConsCfg.CFG_LANG);
+        if (!Char.isValidate(lang))
+        {
+            lang = System.getProperty("user.language");
+            String country = System.getProperty("user.country");
+            if (Char.isValidate(country))
+            {
+                lang += '_' + country;
+            }
+        }
+        return lang;
+    }
+
+    public final void setLang(String lang)
     {
         userCfg.setProperty(ConsCfg.CFG_LANG, lang);
     }
 
-    public final String getUserLang()
-    {
-        return userCfg.getProperty(ConsCfg.CFG_LANG, System.getProperty("user.language") + '_' + System.getProperty("user.country"));
-    }
-
-    public String getUserCode()
+    public String getCode()
     {
         return userCfg.getProperty(ConsCfg.CFG_USER_CODE, "");
     }
 
-    public String getUserName()
+    public String getName()
     {
         return userCfg.getProperty(ConsCfg.CFG_USER_NAME, "");
-    }
-
-    public javax.swing.ImageIcon getIcon(String name)
-    {
-        if (!Char.isValidate(name))
-        {
-            return Bean.getNone();
-        }
-        return getIconMap().get(name);
-    }
-
-    public void setIcon(String name, javax.swing.ImageIcon icon)
-    {
-        if (!Char.isValidate(name))
-        {
-            return;
-        }
-        getIconMap().put(name, icon);
     }
 
     public javax.swing.ImageIcon readIcon(String path)
@@ -430,12 +432,52 @@ public final class UserCfg
         return Bean.readIcon(path.replace(ConsEnv.FEEL_ARGS, getCfg(ConsCfg.CFG_SKIN_FEEL, ConsEnv.SKIN_FEEL_DEFAULT)));
     }
 
-    private java.util.Map<String, javax.swing.ImageIcon> getIconMap()
+    /**
+     * @return the runMode
+     */
+    public byte getRunMode()
     {
-        if (mp_SkinIcon == null)
-        {
-            mp_SkinIcon = new java.util.HashMap<String, javax.swing.ImageIcon>();
-        }
-        return mp_SkinIcon;
+        return runMode;
+    }
+
+    /**
+     * @param runMode the runMode to set
+     */
+    public void setRunMode(byte runMode)
+    {
+        this.runMode = runMode;
+    }
+
+    /**
+     * @return the appMode
+     */
+    public byte getAppMode()
+    {
+        return appMode;
+    }
+
+    /**
+     * @param appMode the appMode to set
+     */
+    public void setAppMode(byte appMode)
+    {
+        this.appMode = appMode;
+    }
+
+    /**
+     * @return the viewTop
+     */
+    public final boolean isTopMost()
+    {
+        return topMost;
+    }
+
+    /**
+     * @param topMost
+     *            the viewTop to set
+     */
+    public final void setTopMost(boolean topMost)
+    {
+        this.topMost = topMost;
     }
 }

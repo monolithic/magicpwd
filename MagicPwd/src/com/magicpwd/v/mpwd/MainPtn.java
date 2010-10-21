@@ -5,6 +5,7 @@ package com.magicpwd.v.mpwd;
 
 import com.magicpwd.__i.IEditBean;
 import com.magicpwd.__i.IEditItem;
+import com.magicpwd.__i.IFavIcon;
 import com.magicpwd.__i.IGridView;
 import com.magicpwd._bean.mpwd.AreaBean;
 import com.magicpwd._bean.mpwd.DataBean;
@@ -53,7 +54,7 @@ import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.TrayPtn;
 import com.magicpwd.x.MdiDialog;
 
-public class MainPtn extends javax.swing.JFrame implements IGridView
+public class MainPtn extends javax.swing.JFrame implements IFavIcon, IGridView
 {
 
     private EditDlg ed_KeysEdit;
@@ -106,7 +107,7 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         try
         {
             java.io.File file = new java.io.File(cfg.getDataDir(), "mpwd.xml");
-            menuPtn = new MenuPtn(coreMdl);
+            menuPtn = new MenuPtn(coreMdl, this);
             menuPtn.loadData(file);
         }
         catch (Exception exp)
@@ -183,6 +184,7 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         Util.centerForm(this, null);
     }
 
+    @Override
     public javax.swing.Icon getIcon(String hash)
     {
         javax.swing.Icon icon = iconMap.get(hash);
@@ -191,6 +193,11 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
             icon = Bean.getIcon(hash);
         }
         return icon;
+    }
+
+    @Override
+    public void setIcon(String hash, javax.swing.Icon icon)
+    {
     }
 
     public boolean newKeys()
@@ -361,25 +368,25 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
     public void setFindVisible(boolean visible)
     {
         mainFind.setVisible(visible);
-        coreMdl.getUserCfg().setFindViw(visible);
+        coreMdl.getUserCfg().setFindVisible(visible);
     }
 
     public void setInfoVisible(boolean visible)
     {
         mainInfo.setVisible(visible);
-        coreMdl.getUserCfg().setInfoViw(visible);
+        coreMdl.getUserCfg().setInfoVisible(visible);
     }
 
     public void setMenuVisible(boolean visible)
     {
         menuBar.setVisible(visible);
-        coreMdl.getUserCfg().setMenuViw(visible);
+        coreMdl.getUserCfg().setMenuVisible(visible);
     }
 
     public void setToolVisible(boolean visible)
     {
         toolBar.setVisible(visible);
-        coreMdl.getUserCfg().setToolViw(visible);
+        coreMdl.getUserCfg().setToolVisible(visible);
     }
 
     public javax.swing.tree.TreePath getSelectedKindValue()
@@ -641,7 +648,7 @@ public class MainPtn extends javax.swing.JFrame implements IGridView
         listPop = menuPtn.getPopMenu("list");
 
         ls_GuidList = new javax.swing.JList();
-        ls_GuidList.setCellRenderer(new KeysCR(coreMdl.getUserCfg()));
+        ls_GuidList.setCellRenderer(new KeysCR(this));
         ls_GuidList.setModel(mpwdMdl.getListMdl());
         ls_GuidList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         ls_GuidList.addMouseListener(new java.awt.event.MouseAdapter()
