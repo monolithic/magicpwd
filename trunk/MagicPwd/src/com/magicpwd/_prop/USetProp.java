@@ -98,7 +98,7 @@ public class USetProp extends javax.swing.JPanel implements IPropBean
             java.util.Arrays.sort(names);
             cb_UserLang.setModel(new javax.swing.DefaultComboBoxModel(names));
         }
-        cb_UserLang.setSelectedItem(uc.getUserLang());
+        cb_UserLang.setSelectedItem(uc.getLang());
 
         cb_PwdsChar.removeAllItems();
         Char cher = new Char();

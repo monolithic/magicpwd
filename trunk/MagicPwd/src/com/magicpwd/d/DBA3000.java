@@ -119,7 +119,7 @@ public class DBA3000
     private static void addUserSort(DBAccess dba, UserCfg cfg)
     {
 //        dba.addWhere(DBC3000.P30F0102, "");
-        dba.addWhere(DBC3000.P30F0105, cfg.getUserCode());
+        dba.addWhere(DBC3000.P30F0105, cfg.getCode());
     }
 
     /**
@@ -327,7 +327,7 @@ public class DBA3000
             dba.addColumn(DBC3000.P30F0104);
             dba.addColumn(DBC3000.P30F0109);
             dba.addColumn(DBC3000.P30F010A);
-            dba.addWhere(DBC3000.P30F0105, cfg.getUserCode());
+            dba.addWhere(DBC3000.P30F0105, cfg.getCode());
             dba.addWhere(com.magicpwd._util.Char.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC3000.P30F0109, DBC3000.P30F010A, text2Query(text)));
             //dba.addWhere(DBC3000.P30F0102, ConsDat.PWDS_MODE_1);
             dba.addWhere(DBC3000.P30F0106, ConsDat.HASH_NOTE);

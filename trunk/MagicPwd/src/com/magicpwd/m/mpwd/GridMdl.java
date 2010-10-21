@@ -299,7 +299,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
             indx = 0;
             keys.setDefault();
             ls_ItemList.clear();
-            keys.setP30F0105(userCfg.getUserCode());
+            keys.setP30F0105(userCfg.getCode());
 
             // Guid
             GuidItem guid = new GuidItem(userCfg);

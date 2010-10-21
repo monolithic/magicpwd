@@ -107,8 +107,7 @@ final class SafeKey implements Key
      * @throws BadPaddingException
      * @throws IllegalBlockSizeException
      */
-    final boolean signIn() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
-            IllegalBlockSizeException, BadPaddingException
+    final boolean signIn() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException
     {
         // 用户登录身份认证
         String text = userCfg.getCfg(user(ConsCfg.CFG_USER_INFO));
@@ -164,8 +163,7 @@ final class SafeKey implements Key
      * @throws BadPaddingException
      * @throws IllegalBlockSizeException
      */
-    final boolean signPk(String oldPwds, String newPwds) throws NoSuchAlgorithmException, NoSuchPaddingException,
-            InvalidKeyException, IllegalBlockSizeException, BadPaddingException
+    final boolean signPk(String oldPwds, String newPwds) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException
     {
         // 已有口令校验
         pwds = oldPwds;
@@ -308,8 +306,7 @@ final class SafeKey implements Key
      * @throws BadPaddingException
      * @throws IllegalBlockSizeException
      */
-    final boolean signUp() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException,
-            IllegalBlockSizeException, BadPaddingException
+    final boolean signUp() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException
     {
         if (com.magicpwd._util.Char.isValidate(userCfg.getCfg(user(ConsCfg.CFG_USER_INFO))))
         {

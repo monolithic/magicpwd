@@ -5,6 +5,7 @@
 package com.magicpwd.v;
 
 import com.magicpwd.__i.IAction;
+import com.magicpwd.__i.IFavIcon;
 import com.magicpwd.__i.mpwd.IMpwdAction;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.ConsCfg;
@@ -37,14 +38,16 @@ public class MenuPtn
 
     private Document document;
     private CoreMdl coreMdl;
+    private IFavIcon favIcon;
     private java.util.regex.Pattern pattern;
     private java.util.HashMap<String, javax.swing.AbstractButton> buttons;
     private java.util.HashMap<String, javax.swing.Action> actions;
     private java.util.HashMap<String, WButtonGroup> groups;
 
-    public MenuPtn(CoreMdl coreMdl)
+    public MenuPtn(CoreMdl coreMdl, IFavIcon favIcon)
     {
         this.coreMdl = coreMdl;
+        this.favIcon = favIcon;
         buttons = new java.util.HashMap<String, javax.swing.AbstractButton>();
         actions = new java.util.HashMap<String, javax.swing.Action>();
         groups = new java.util.HashMap<String, WButtonGroup>();
@@ -952,7 +955,7 @@ public class MenuPtn
         boolean validate = Char.isValidate(hash);
         if (validate)
         {
-            javax.swing.Icon icon = coreMdl.getUserCfg().getIcon(hash);
+            javax.swing.Icon icon = favIcon.getIcon(hash);
             if (icon != null)
             {
                 return icon;
@@ -965,7 +968,7 @@ public class MenuPtn
             javax.swing.ImageIcon icon = coreMdl.getUserCfg().readIcon(path);
             if (validate)
             {
-                coreMdl.getUserCfg().setIcon(hash, icon);
+                favIcon.setIcon(hash, icon);
             }
             return icon;
         }

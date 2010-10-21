@@ -311,7 +311,7 @@ public abstract class SafeMdl
     {
         clear();
         keys.setP30F0104(keysHash);
-        keys.setP30F0105(userCfg.getUserCode());
+        keys.setP30F0105(userCfg.getCode());
         if (DBA3000.readPwdsData(keys))
         {
             deCrypt(keys, ls_ItemList);
@@ -326,7 +326,7 @@ public abstract class SafeMdl
      */
     public void saveData(boolean histBack) throws Exception
     {
-        keys.setP30F0105(userCfg.getUserCode());
+        keys.setP30F0105(userCfg.getCode());
         keys.setHistBack(histBack);
         enCrypt(keys, ls_ItemList);
         DBA3000.savePwdsData(keys);

@@ -23,9 +23,9 @@ public class TopAction extends AMpadAction
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
         UserCfg cfg = coreMdl.getUserCfg();
-        boolean b = !cfg.isViewTop();
+        boolean b = !cfg.isTopMost();
         TrayPtn.getCurrForm().setAlwaysOnTop(b);
-        cfg.setViewTop(b);
+        cfg.setTopMost(b);
     }
 
     @Override

@@ -13,7 +13,6 @@ import com.magicpwd._util.Util;
 import com.magicpwd.d.DBAccess;
 import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.CoreMdl;
-import com.magicpwd.m.SafeMdl;
 import com.magicpwd.r.AmonFF;
 import com.magicpwd.v.mpay.NormPtn;
 import com.magicpwd.v.mpad.MiniPtn;
@@ -117,7 +116,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         mwTrayForm.setVisible(true);
 
         // 右键菜单初始化
-        menuPtn = new MenuPtn(coreMdl);
+        menuPtn = new MenuPtn(coreMdl, null);
         try
         {
             menuPtn.loadData(new java.io.File(ConsEnv.DIR_DAT, "tray.xml"));
