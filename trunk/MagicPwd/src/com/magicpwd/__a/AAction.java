@@ -5,7 +5,7 @@
 package com.magicpwd.__a;
 
 import com.magicpwd.__i.IAction;
-import com.magicpwd.m.CoreMdl;
+import com.magicpwd.m.UserMdl;
 import java.beans.PropertyChangeListener;
 
 /**
@@ -15,13 +15,13 @@ import java.beans.PropertyChangeListener;
 public abstract class AAction implements IAction
 {
 
-    protected CoreMdl coreMdl;
+    protected UserMdl coreMdl;
     protected boolean enabled = true;
     protected boolean visible = true;
     protected boolean selected = false;
 
     @Override
-    public void setCoreMdl(CoreMdl coreMdl)
+    public void setCoreMdl(UserMdl coreMdl)
     {
         this.coreMdl = coreMdl;
     }

@@ -3,7 +3,7 @@
  */
 package com.magicpwd.__i;
 
-import com.magicpwd.m.CoreMdl;
+import com.magicpwd.m.UserMdl;
 
 /**
  * @author Amon
@@ -11,7 +11,7 @@ import com.magicpwd.m.CoreMdl;
 public interface IGridView
 {
 
-    CoreMdl getCoreMdl();
+    UserMdl getCoreMdl();
 
     void selectNext(int step, boolean updt);
 }

@@ -6,7 +6,7 @@ package com.magicpwd.v.mwiz;
 
 import com.magicpwd.__i.IFavIcon;
 import com.magicpwd._util.Bean;
-import com.magicpwd.m.CoreMdl;
+import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.MenuPtn;
 import javax.swing.Icon;
 
@@ -18,7 +18,7 @@ public class NormPtn extends javax.swing.JFrame implements IFavIcon
 {
 
     private MenuPtn menuPtn;
-    private CoreMdl coreMdl;
+    private UserMdl coreMdl;
     private java.util.HashMap<String, javax.swing.Icon> iconMap;
 
     public NormPtn()

@@ -12,7 +12,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.CharMdl;
-import com.magicpwd.m.CoreMdl;
+import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.ListCR;
 
 /**
@@ -27,9 +27,9 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
      */
     private Char charItem;
     private boolean isUpdate;
-    private CoreMdl coreMdl;
+    private UserMdl coreMdl;
 
-    public CharProp(CoreMdl coreMdl)
+    public CharProp(UserMdl coreMdl)
     {
         this.coreMdl = coreMdl;
     }

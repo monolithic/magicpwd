@@ -10,7 +10,7 @@ import java.util.List;
 import javax.swing.DefaultListModel;
 
 import com.magicpwd.d.DBA3000;
-import com.magicpwd.m.CoreMdl;
+import com.magicpwd.m.UserMdl;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
@@ -22,9 +22,9 @@ public class ListMdl extends DefaultListModel
 {
 
     private List<Keys> dataList;
-    private CoreMdl coreMdl;
+    private UserMdl coreMdl;
 
-    ListMdl(CoreMdl coreMdl)
+    ListMdl(UserMdl coreMdl)
     {
         this.coreMdl = coreMdl;
         dataList = new ArrayList<Keys>();

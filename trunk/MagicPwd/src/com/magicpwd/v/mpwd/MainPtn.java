@@ -43,7 +43,7 @@ import com.magicpwd._util.Util;
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.mpwd.GridMdl;
 import com.magicpwd.m.UserCfg;
-import com.magicpwd.m.CoreMdl;
+import com.magicpwd.m.UserMdl;
 import com.magicpwd.m.mpwd.ListMdl;
 import com.magicpwd.m.mpwd.MpwdMdl;
 import com.magicpwd.m.mpwd.TreeMdl;
@@ -81,18 +81,18 @@ public class MainPtn extends javax.swing.JFrame implements IFavIcon, IGridView
      * 用户查找字符串
      */
     private String queryKey;
-    private CoreMdl coreMdl;
+    private UserMdl coreMdl;
     private GridMdl gridMdl;
     private MpwdMdl mpwdMdl;
     private java.util.HashMap<String, javax.swing.Icon> iconMap;
 
-    public MainPtn(CoreMdl coreMdl)
+    public MainPtn(UserMdl coreMdl)
     {
         this.coreMdl = coreMdl;
     }
 
     @Override
-    public CoreMdl getCoreMdl()
+    public UserMdl getCoreMdl()
     {
         return coreMdl;
     }

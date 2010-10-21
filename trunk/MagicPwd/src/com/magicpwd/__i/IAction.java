@@ -4,7 +4,7 @@
  */
 package com.magicpwd.__i;
 
-import com.magicpwd.m.CoreMdl;
+import com.magicpwd.m.UserMdl;
 
 /**
  *
@@ -13,7 +13,7 @@ import com.magicpwd.m.CoreMdl;
 public interface IAction extends javax.swing.Action
 {
 
-    void setCoreMdl(CoreMdl coreMdl);
+    void setCoreMdl(UserMdl coreMdl);
 
     void doInit(Object object);
 

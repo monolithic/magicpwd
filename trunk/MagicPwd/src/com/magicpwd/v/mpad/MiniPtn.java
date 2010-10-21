@@ -16,7 +16,7 @@ import com.magicpwd.e.mpad.NewAction;
 import com.magicpwd.e.mpad.OpenAction;
 import com.magicpwd.e.mpad.SaveAction;
 import com.magicpwd.m.mpad.NoteMdl;
-import com.magicpwd.m.CoreMdl;
+import com.magicpwd.m.UserMdl;
 import com.magicpwd.m.mpad.MpadMdl;
 import com.magicpwd.r.ListCR;
 import com.magicpwd.v.TrayPtn;
@@ -32,13 +32,13 @@ public class MiniPtn extends javax.swing.JFrame
     private String lastHash;
     private java.awt.CardLayout infoLayout;
     private java.util.List<S1S2> noteList;
-    private CoreMdl coreMdl;
+    private UserMdl coreMdl;
     private MpadMdl mpadMdl;
     private WTextBox nameBox;
     private WTextBox dataBox;
     private java.util.HashMap<String, javax.swing.Icon> iconMap;
 
-    public MiniPtn(CoreMdl coreMdl)
+    public MiniPtn(UserMdl coreMdl)
     {
         this.coreMdl = coreMdl;
     }

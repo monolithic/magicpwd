@@ -5,7 +5,7 @@ package com.magicpwd._comn.item;
 
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._cons.ConsDat;
-import com.magicpwd.m.UserCfg;
+import com.magicpwd.m.UserMdl;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,12 +24,12 @@ public class EditItem implements IEditItem
     private String data;
     /** 专有内容 */
     private List<String> spec;
-    private UserCfg userCfg;
+    private UserMdl userCfg;
 
     /**
      * 
      */
-    public EditItem(UserCfg userCfg)
+    public EditItem(UserMdl userCfg)
     {
         this(userCfg, 0);
     }
@@ -37,7 +37,7 @@ public class EditItem implements IEditItem
     /**
      * @param type
      */
-    public EditItem(UserCfg userCfg, int type)
+    public EditItem(UserMdl userCfg, int type)
     {
         this(userCfg, type, "", "");
     }
@@ -47,7 +47,7 @@ public class EditItem implements IEditItem
      * @param name
      * @param data
      */
-    public EditItem(UserCfg userCfg, int type, String name, String data)
+    public EditItem(UserMdl userCfg, int type, String name, String data)
     {
         this.userCfg = userCfg;
         this.type = type;
