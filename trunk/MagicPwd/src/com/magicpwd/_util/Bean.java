@@ -164,6 +164,30 @@ public class Bean
         }
     }
 
+    public static void closeStream(java.io.OutputStream stream)
+    {
+        if (stream != null)
+        {
+            try
+            {
+                stream.flush();
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+
+            try
+            {
+                stream.close();
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+        }
+    }
+
     public static javax.swing.Icon getDataIcon(String hash)
     {
         if (!Char.isValidateHash(hash))
