@@ -329,8 +329,8 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 
         mu_CharMenu.addSeparator();
 
-        int sysSize = mainPtn.getCoreMdl().getCharMdl().getCharSys().size();
-        int usrSize = mainPtn.getCoreMdl().getCharMdl().getCharUsr().size();
+        int sysSize = mainPtn.getUserMdl().getCharMdl().getCharSys().size();
+        int usrSize = mainPtn.getUserMdl().getCharMdl().getCharUsr().size();
         mi_CharPre = new javax.swing.JCheckBoxMenuItem[sysSize + usrSize];
 
         javax.swing.JCheckBoxMenuItem menuItem;
@@ -421,7 +421,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 
         javax.swing.JCheckBoxMenuItem menu;
         int i = 0;
-        for (Char item : mainPtn.getCoreMdl().getCharMdl().getCharSys())
+        for (Char item : mainPtn.getUserMdl().getCharMdl().getCharSys())
         {
             menu = mi_CharPre[i++];
             menu.setText(item.getP30F2104());
@@ -430,7 +430,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
             bg_CharGroup.add(item.getP30F2103(), menu);
         }
 
-        for (Char item : mainPtn.getCoreMdl().getCharMdl().getCharUsr())
+        for (Char item : mainPtn.getUserMdl().getCharMdl().getCharUsr())
         {
             menu = mi_CharPre[i++];
             menu.setText(item.getP30F2104());
@@ -560,14 +560,14 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         {
             return ConsCfg.DEF_PWDS_CHAR;
         }
-        for (Char item : mainPtn.getCoreMdl().getCharMdl().getCharSys())
+        for (Char item : mainPtn.getUserMdl().getCharMdl().getCharSys())
         {
             if (hash.equals(item.getP30F2103()))
             {
                 return item.getP30F2106();
             }
         }
-        for (Char item : mainPtn.getCoreMdl().getCharMdl().getCharUsr())
+        for (Char item : mainPtn.getUserMdl().getCharMdl().getCharUsr())
         {
             if (hash.equals(item.getP30F2103()))
             {

@@ -139,7 +139,7 @@ public class CloudBackupAction extends AMpwdAction
                 return;
             }
 
-            coreMdl.setCfg("mail.date", sign);
+            mainPtn.getUserMdl().setCfg("mail.date", sign);
 
             dialog.setVisible(false);
             dialog.dispose();

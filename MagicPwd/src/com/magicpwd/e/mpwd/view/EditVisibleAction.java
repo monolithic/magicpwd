@@ -21,7 +21,7 @@ public class EditVisibleAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !coreMdl.isEditVisible();
+        boolean b = !mainPtn.getUserMdl().isEditVisible();
         mainPtn.setEditVisible(b);
         if (b)
         {
@@ -47,7 +47,7 @@ public class EditVisibleAction extends AMpwdAction
     @Override
     public void doInit(Object object)
     {
-        setSelected(coreMdl.isEditVisible());
+        setSelected(mainPtn.getUserMdl().isEditVisible());
     }
 
     @Override

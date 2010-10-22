@@ -21,7 +21,7 @@ public class MenuVisibleAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !coreMdl.isMenuVisible();
+        boolean b = !mainPtn.getUserMdl().isMenuVisible();
         mainPtn.setMenuVisible(b);
         mainPtn.pack();
 
@@ -43,7 +43,7 @@ public class MenuVisibleAction extends AMpwdAction
     @Override
     public void doInit(Object object)
     {
-        setSelected(coreMdl.isMenuVisible());
+        setSelected(mainPtn.getUserMdl().isMenuVisible());
     }
 
     @Override

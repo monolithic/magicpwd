@@ -21,9 +21,9 @@ public class TopAction extends AMpadAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !coreMdl.isTopMost();
+        boolean b = !miniPtn.getUserMdl().isTopMost();
         TrayPtn.getCurrForm().setAlwaysOnTop(b);
-        coreMdl.setTopMost(b);
+        miniPtn.getUserMdl().setTopMost(b);
     }
 
     @Override

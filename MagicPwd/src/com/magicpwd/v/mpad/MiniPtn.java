@@ -64,7 +64,6 @@ public class MiniPtn extends AFrame
 
         FindAction findAction = new FindAction();
         findAction.setMiniPtn(this);
-        findAction.setCoreMdl(userMdl);
         tf_NoteName.addActionListener(findAction);
         nameBox = new WTextBox(tf_NoteName, true);
         nameBox.initView();
@@ -72,21 +71,18 @@ public class MiniPtn extends AFrame
         bt_CreateNote.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "file-new.png"));
         NewAction newAction = new NewAction();
         newAction.setMiniPtn(this);
-        newAction.setCoreMdl(userMdl);
         bt_CreateNote.addActionListener(newAction);
         Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK), newAction, "file-new", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
 
         bt_OpenNote.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "file-open.png"));
         OpenAction openAction = new OpenAction();
         openAction.setMiniPtn(this);
-        openAction.setCoreMdl(userMdl);
         bt_OpenNote.addActionListener(openAction);
         Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK), openAction, "file-open", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
 
         bt_SaveNote.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "file-save.png"));
         SaveAction saveAction = new SaveAction();
         saveAction.setMiniPtn(this);
-        saveAction.setCoreMdl(userMdl);
         bt_SaveNote.addActionListener(saveAction);
         Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK), saveAction, "file-save", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
 

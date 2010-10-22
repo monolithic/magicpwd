@@ -447,7 +447,6 @@ public class MenuPtn
         javax.swing.JCheckBoxMenuItem item;
         String lookName = formPtn.getUserMdl().getCfg(ConsCfg.CFG_SKIN_NAME, ConsCfg.DEF_SKIN_SYS);
         LookAction action = new LookAction();
-        action.setCoreMdl(coreMdl);
         WButtonGroup group = new WButtonGroup();
 
         // Java默认风格
@@ -583,7 +582,6 @@ public class MenuPtn
 
         javax.swing.JCheckBoxMenuItem item;
         ThemeAction action = new ThemeAction();
-        action.setCoreMdl(coreMdl);
         WButtonGroup group = new WButtonGroup();
 
         // Java默认风格
@@ -630,7 +628,6 @@ public class MenuPtn
             javax.swing.JCheckBoxMenuItem item;
             String feelName = formPtn.getUserMdl().getCfg(ConsCfg.CFG_SKIN_FEEL, ConsCfg.DEF_FEEL_DEF);
             FeelAction action = new FeelAction();
-            action.setCoreMdl(coreMdl);
             WButtonGroup group = new WButtonGroup();
 
             java.util.Properties prop = new java.util.Properties();
@@ -862,14 +859,12 @@ public class MenuPtn
                         {
                             IMpwdAction pwdAction = (IMpwdAction) action;
                             pwdAction.setMainPtn(TrayPtn.getMainPtn());
-                            pwdAction.setCoreMdl(coreMdl);
                             pwdAction.doInit(null);
                         }
                         else if (action instanceof IMpadAction)
                         {
                             IMpadAction padAction = (IMpadAction) action;
                             padAction.setMiniPtn(TrayPtn.getMiniPtn());
-                            padAction.setCoreMdl(coreMdl);
                             padAction.doInit(null);
                         }
                         if (validate)
