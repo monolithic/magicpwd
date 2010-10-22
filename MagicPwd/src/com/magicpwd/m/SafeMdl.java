@@ -36,10 +36,10 @@ public abstract class SafeMdl
     private javax.crypto.Cipher dCipher;
     private javax.crypto.Cipher eCipher;
     private SafeKey safeKey;
-    protected UserCfg userCfg;
+    protected UserMdl userCfg;
     protected java.util.ArrayList<IEditItem> ls_ItemList;
 
-    public SafeMdl(UserCfg userCfg)
+    public SafeMdl(UserMdl userMdl)
     {
         safeKey = new SafeKey(userCfg);
         keys = new Keys();

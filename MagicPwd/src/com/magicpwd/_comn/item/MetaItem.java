@@ -5,7 +5,7 @@
 package com.magicpwd._comn.item;
 
 import com.magicpwd._cons.ConsDat;
-import com.magicpwd.m.UserCfg;
+import com.magicpwd.m.UserMdl;
 
 /**
  *
@@ -14,8 +14,8 @@ import com.magicpwd.m.UserCfg;
 public class MetaItem extends EditItem
 {
 
-    public MetaItem(UserCfg userCfg)
+    public MetaItem(UserMdl userMdl)
     {
-        super(userCfg, ConsDat.INDX_META);
+        super(userMdl, ConsDat.INDX_META);
     }
 }

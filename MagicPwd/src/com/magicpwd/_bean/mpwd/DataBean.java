@@ -38,7 +38,7 @@ public class DataBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initView()
     {
-        dataEdit = new WEditBox(mainPtn.getCoreMdl().getUserCfg(), this, false);
+        dataEdit = new WEditBox(mainPtn.getUserMdl(), this, false);
         dataEdit.initView();
 
         lb_PropName = new javax.swing.JLabel();
@@ -56,7 +56,7 @@ public class DataBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_DateConf = new BtnLabel();
-        bt_DateConf.setIcon(mainPtn.getCoreMdl().getUserCfg().readIcon(ConsEnv.FEEL_PATH + "options.png"));
+        bt_DateConf.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "options.png"));
         bt_DateConf.addActionListener(new java.awt.event.ActionListener()
         {
 

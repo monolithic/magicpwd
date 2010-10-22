@@ -39,7 +39,7 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initView()
     {
-        dataEdit = new WEditBox(mainPtn.getCoreMdl().getUserCfg(), this, false);
+        dataEdit = new WEditBox(mainPtn.getUserMdl(), this, false);
         dataEdit.initView();
 
         lb_PropName = new javax.swing.JLabel();
@@ -59,7 +59,7 @@ public class LinkBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_LinkView = new BtnLabel();
-        bt_LinkView.setIcon(mainPtn.getCoreMdl().getUserCfg().readIcon(ConsEnv.FEEL_PATH + "link.png"));
+        bt_LinkView.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "link.png"));
         bt_LinkView.addActionListener(new java.awt.event.ActionListener()
         {
 

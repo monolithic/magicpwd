@@ -36,7 +36,7 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean, IBackCall
     @Override
     public void initView()
     {
-        dataEdit = new WEditBox(mainPtn.getCoreMdl().getUserCfg(), this, false);
+        dataEdit = new WEditBox(mainPtn.getUserMdl(), this, false);
         dataEdit.initView();
         dataEdit.setCopyButtonVisible(false);
         dataEdit.setDropButtonVisible(false);

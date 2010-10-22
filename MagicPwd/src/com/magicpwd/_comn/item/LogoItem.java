@@ -5,7 +5,7 @@
 package com.magicpwd._comn.item;
 
 import com.magicpwd._cons.ConsDat;
-import com.magicpwd.m.UserCfg;
+import com.magicpwd.m.UserMdl;
 
 /**
  *
@@ -14,9 +14,9 @@ import com.magicpwd.m.UserCfg;
 public class LogoItem extends EditItem
 {
 
-    public LogoItem(UserCfg userCfg)
+    public LogoItem(UserMdl userMdl)
     {
-        super(userCfg, ConsDat.INDX_LOGO);
+        super(userMdl, ConsDat.INDX_LOGO);
     }
 
     /*

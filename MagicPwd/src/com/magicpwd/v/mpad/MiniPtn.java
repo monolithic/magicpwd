@@ -1,5 +1,6 @@
 package com.magicpwd.v.mpad;
 
+import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._comp.BtnLabel;
@@ -26,26 +27,23 @@ import com.magicpwd.v.TrayPtn;
  *
  * @author Amon
  */
-public class MiniPtn extends javax.swing.JFrame
+public class MiniPtn extends AFrame
 {
 
     private String lastHash;
     private java.awt.CardLayout infoLayout;
     private java.util.List<S1S2> noteList;
-    private UserMdl coreMdl;
     private MpadMdl mpadMdl;
     private WTextBox nameBox;
     private WTextBox dataBox;
-    private java.util.HashMap<String, javax.swing.Icon> iconMap;
 
     public MiniPtn(UserMdl coreMdl)
     {
-        this.coreMdl = coreMdl;
+        this.userMdl = coreMdl;
     }
 
     public void initView()
     {
-        iconMap = new java.util.HashMap<String, javax.swing.Icon>();
 //        Bean.readIcon(MiniPtn.class.getResourceAsStream(ConsEnv.ICON_PATH + "mpad.png"), iconMap);
 
         pl_NoteBase = new javax.swing.JPanel();
@@ -66,33 +64,33 @@ public class MiniPtn extends javax.swing.JFrame
 
         FindAction findAction = new FindAction();
         findAction.setMiniPtn(this);
-        findAction.setCoreMdl(coreMdl);
+        findAction.setCoreMdl(userMdl);
         tf_NoteName.addActionListener(findAction);
         nameBox = new WTextBox(tf_NoteName, true);
         nameBox.initView();
 
-        bt_CreateNote.setIcon(coreMdl.getUserCfg().readIcon(ConsEnv.FEEL_PATH + "file-new.png"));
+        bt_CreateNote.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "file-new.png"));
         NewAction newAction = new NewAction();
         newAction.setMiniPtn(this);
-        newAction.setCoreMdl(coreMdl);
+        newAction.setCoreMdl(userMdl);
         bt_CreateNote.addActionListener(newAction);
         Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK), newAction, "file-new", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
 
-        bt_OpenNote.setIcon(coreMdl.getUserCfg().readIcon(ConsEnv.FEEL_PATH + "file-open.png"));
+        bt_OpenNote.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "file-open.png"));
         OpenAction openAction = new OpenAction();
         openAction.setMiniPtn(this);
-        openAction.setCoreMdl(coreMdl);
+        openAction.setCoreMdl(userMdl);
         bt_OpenNote.addActionListener(openAction);
         Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK), openAction, "file-open", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
 
-        bt_SaveNote.setIcon(coreMdl.getUserCfg().readIcon(ConsEnv.FEEL_PATH + "file-save.png"));
+        bt_SaveNote.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "file-save.png"));
         SaveAction saveAction = new SaveAction();
         saveAction.setMiniPtn(this);
-        saveAction.setCoreMdl(coreMdl);
+        saveAction.setCoreMdl(userMdl);
         bt_SaveNote.addActionListener(saveAction);
         Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK), saveAction, "file-save", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
 
-        bt_SearchNote.setIcon(coreMdl.getUserCfg().readIcon(ConsEnv.FEEL_PATH + "find.png"));
+        bt_SearchNote.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "find.png"));
         bt_SearchNote.addActionListener(findAction);
 
         ta_NoteData.setDragEnabled(true);
@@ -239,16 +237,6 @@ public class MiniPtn extends javax.swing.JFrame
         Bean.registerKeyStrokeAction(getRootPane(), javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_DOWN_MASK | java.awt.event.InputEvent.ALT_DOWN_MASK), action, "showNormPtn", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
     }
 
-    public javax.swing.Icon getIcon(String hash)
-    {
-        javax.swing.Icon icon = iconMap.get(hash);
-        if (icon == null)
-        {
-            icon = Bean.getIcon(hash);
-        }
-        return icon;
-    }
-
     private void cb_NoteInfoItemStateChanged(java.awt.event.ItemEvent evt)
     {
         S1S2 item = (S1S2) cb_NoteInfo.getSelectedItem();
@@ -281,23 +269,9 @@ public class MiniPtn extends javax.swing.JFrame
     }
 
     @Override
-    protected void processWindowEvent(java.awt.event.WindowEvent e)
+    public boolean endSave()
     {
-        if (e.getID() == java.awt.event.WindowEvent.WINDOW_CLOSING)
-        {
-            setVisible(false);
-            TrayPtn.endSave();
-        }
-        else if (e.getID() == java.awt.event.WindowEvent.WINDOW_ICONIFIED)
-        {
-            setVisible(false);
-            endSave();
-        }
-        super.processWindowEvent(e);
-    }
-
-    public void endSave()
-    {
+        return true;
     }
 
     public void findNote()
@@ -309,7 +283,7 @@ public class MiniPtn extends javax.swing.JFrame
         }
 
         noteList.clear();
-        boolean b = DBA3000.findUserNote(coreMdl.getUserCfg(), name, noteList);
+        boolean b = DBA3000.findUserNote(userMdl, name, noteList);
         b &= noteList.size() > 0;
         if (!b || noteList.size() < 1)
         {
