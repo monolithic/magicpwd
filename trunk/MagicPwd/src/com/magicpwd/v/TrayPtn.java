@@ -209,7 +209,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         }
     }
 
-    private javax.swing.JFrame getCurrForm()
+    private static javax.swing.JFrame getCurrForm()
     {
         return mfCurrForm;
     }

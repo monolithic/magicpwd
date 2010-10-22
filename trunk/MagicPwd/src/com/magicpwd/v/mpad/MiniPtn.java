@@ -205,22 +205,17 @@ public class MiniPtn extends AFrame
         nameBox.initData();
         dataBox.initData();
 
-//        Util.addFormAction(pl_NoteBase.getActionMap(), pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
-//        Util.addFileAction(pl_NoteBase.getActionMap(), pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
-//        Util.addHideAction(pl_NoteBase.getActionMap(), pl_NoteBase.getInputMap(javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW), this);
-
         javax.swing.Action action = new javax.swing.AbstractAction()
         {
 
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                TrayPtn.getCurrForm().setVisible(false);
+                setVisible(false);
                 TrayPtn.getInstance().showViewPtn(ConsEnv.VIEW_MAIN);
-                TrayPtn.getCurrForm().setVisible(true);
             }
         };
-        Bean.registerKeyStrokeAction(getRootPane(), javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK | java.awt.event.InputEvent.ALT_DOWN_MASK), action, "showMainPtn", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
+        Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK | java.awt.event.InputEvent.ALT_DOWN_MASK), action, "showMainPtn", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
 
         action = new javax.swing.AbstractAction()
         {
