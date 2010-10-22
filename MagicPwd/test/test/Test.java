@@ -2,10 +2,9 @@ package test;
 
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
-import com.magicpwd.m.UserCfg;
+import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.mwiz.NormPtn;
 import java.io.FileInputStream;
-import javax.swing.UIManager;
 
 /*
  * To change this template, choose Tools | Templates
@@ -23,7 +22,7 @@ public class Test
         try
         {
 //            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            UserCfg cfg = new UserCfg();
+            UserMdl cfg = new UserMdl();
             cfg.loadCfg();
             Lang.loadLang(cfg);
             Bean.readIcon(new FileInputStream("src/res/icon/mwiz16.png"), "mwiz");

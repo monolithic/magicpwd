@@ -6,7 +6,7 @@ package test.text;
 
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._util.Lang;
-import com.magicpwd.m.UserCfg;
+import com.magicpwd.m.UserMdl;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 
@@ -19,7 +19,7 @@ public class Text
 
     public Text()
     {
-        UserCfg cfg = new UserCfg();
+        UserMdl cfg = new UserMdl();
         cfg.loadCfg();
 
         Lang.loadLang(cfg);
