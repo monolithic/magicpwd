@@ -376,7 +376,6 @@ public class MainPtn extends AFrame
         return ls_GuidList.getSelectedIndex();
     }
 
-    @Override
     public void selectNext(int step, boolean updt)
     {
         if (updt)
@@ -1187,6 +1186,7 @@ public class MainPtn extends AFrame
         return false;
     }
 
+    @Override
     public boolean endSave()
     {
         // Save Temperary Data

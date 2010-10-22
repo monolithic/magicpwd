@@ -56,7 +56,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
 
         lb_PropData = new javax.swing.JLabel();
         cb_PropData = new javax.swing.JComboBox();
-        cb_PropData.setModel(mainPtn.getCoreMdl().getCboxMdl());
+        cb_PropData.setModel(mainPtn.getUserMdl().getCboxMdl());
         lb_PropData.setLabelFor(cb_PropData);
 
         lb_PropEdit = new javax.swing.JLabel();
@@ -166,7 +166,7 @@ public class GuidBean extends javax.swing.JPanel implements IEditBean
         }
 
         Tplt tplt = null;
-        for (Tplt temp : mainPtn.getCoreMdl().getCboxMdl().getAllItems())
+        for (Tplt temp : mainPtn.getUserMdl().getCboxMdl().getAllItems())
         {
             if (kind.equals(temp.getP30F1103()))
             {
