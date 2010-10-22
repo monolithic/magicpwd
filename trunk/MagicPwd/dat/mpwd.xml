@@ -19,7 +19,12 @@
             <item type="normal" text="$P30F7604">
                 <action id="hide-window" class="com.magicpwd.e.mpwd.file.HideAction">
                     <stroke key="^ H" />
-                    <stroke key="^ Enter" />
+                </action>
+            </item>
+            <!--锁定窗口-->
+            <item type="normal" text="$P30F7604">
+                <action id="lock-window" class="com.magicpwd.e.mpwd.file.LockAction">
+                    <stroke key="^ L" />
                 </action>
             </item>
             <!--退出-->
