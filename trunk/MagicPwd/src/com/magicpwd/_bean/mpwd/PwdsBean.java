@@ -18,7 +18,6 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
-import com.magicpwd.v.TrayPtn;
 import com.magicpwd.v.mpwd.MainPtn;
 import javax.swing.JOptionPane;
 
@@ -502,7 +501,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
 
     private void mi_SizeMoreActionPerformed(java.awt.event.ActionEvent evt)
     {
-        String s = JOptionPane.showInputDialog(TrayPtn.getCurrForm(), "", itemData.getSpec(EditItem.SPEC_PWDS_SIZE, ConsCfg.DEF_PWDS_SIZE));
+        String s = JOptionPane.showInputDialog(mainPtn, "", itemData.getSpec(EditItem.SPEC_PWDS_SIZE, ConsCfg.DEF_PWDS_SIZE));
         if (s == null)
         {
             return;
