@@ -28,12 +28,12 @@ public class MdiDialog extends javax.swing.JDialog
     private java.awt.CardLayout cl_CardLayout;
     private javax.swing.DefaultListModel lm_PropList;
     private java.util.HashMap<String, IPropBean> hm_PropList;
-    private UserMdl coreMdl;
+    private UserMdl userMdl;
 
-    public MdiDialog(UserMdl coreMdl)
+    public MdiDialog(UserMdl userMdl)
     {
         super(TrayPtn.getCurrForm());
-        this.coreMdl = coreMdl;
+        this.userMdl = userMdl;
         lm_PropList = new javax.swing.DefaultListModel();
         cl_CardLayout = new java.awt.CardLayout();
         setDefaultCloseOperation(MdiDialog.DISPOSE_ON_CLOSE);
@@ -166,7 +166,7 @@ public class MdiDialog extends javax.swing.JDialog
 
         t = Lang.getLang(LangRes.P30F1202, "常规设置");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_USET, t, t));
-        USetProp up = new USetProp(coreMdl);
+        USetProp up = new USetProp(userMdl);
         up.initView();
         up.initLang();
         pl_CardPanel.add(ConsEnv.PROP_USET, up);
@@ -174,7 +174,7 @@ public class MdiDialog extends javax.swing.JDialog
 
         t = Lang.getLang(LangRes.P30F1203, "口令管理");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_CHAR, t, t));
-        CharProp cp = new CharProp(coreMdl);
+        CharProp cp = new CharProp(userMdl);
         cp.initView();
         cp.initLang();
         pl_CardPanel.add(ConsEnv.PROP_CHAR, cp);
@@ -182,7 +182,7 @@ public class MdiDialog extends javax.swing.JDialog
 
         t = Lang.getLang(LangRes.P30F1204, "模板管理");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_TPLT, t, t));
-        TpltProp tp = new TpltProp(coreMdl);
+        TpltProp tp = new TpltProp(userMdl);
         tp.initView();
         tp.initLang();
         pl_CardPanel.add(ConsEnv.PROP_TPLT, tp);
@@ -190,7 +190,7 @@ public class MdiDialog extends javax.swing.JDialog
 
         t = Lang.getLang(LangRes.P30F1205, "类别管理");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_KIND, t, t));
-        KindProp kp = new KindProp(null, coreMdl);
+        KindProp kp = new KindProp(null, userMdl);
         kp.initView();
         kp.initLang();
         pl_CardPanel.add(ConsEnv.PROP_KIND, kp);
@@ -198,7 +198,7 @@ public class MdiDialog extends javax.swing.JDialog
 
         t = Lang.getLang(LangRes.P30F1206, "键盘快捷");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_SKEY, t, t));
-        SKeyProp sp = new SKeyProp(coreMdl);
+        SKeyProp sp = new SKeyProp(userMdl);
         sp.initView();
         sp.initLang();
         pl_CardPanel.add(ConsEnv.PROP_SKEY, sp);
@@ -206,7 +206,7 @@ public class MdiDialog extends javax.swing.JDialog
 
         t = Lang.getLang(LangRes.P30F1209, "Java环境");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_JAVA, t, t));
-        JavaProp jp = new JavaProp(coreMdl);
+        JavaProp jp = new JavaProp(userMdl);
         jp.initView();
         jp.initLang();
         pl_CardPanel.add(ConsEnv.PROP_JAVA, jp);
@@ -214,7 +214,7 @@ public class MdiDialog extends javax.swing.JDialog
 
         t = Lang.getLang(LangRes.P30F1208, "关于软件");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_INFO, t, t));
-        InfoProp ip = new InfoProp(coreMdl);
+        InfoProp ip = new InfoProp(userMdl);
         ip.initView();
         ip.initLang();
         pl_CardPanel.add(ConsEnv.PROP_INFO, ip);
@@ -288,7 +288,7 @@ public class MdiDialog extends javax.swing.JDialog
     {
         setVisible(false);
         dispose();
-        coreMdl.getUserCfg().saveCfg();
+        userMdl.saveCfg();
     }
 
     private void bt_DiscardActionPerformed(java.awt.event.ActionEvent evt)

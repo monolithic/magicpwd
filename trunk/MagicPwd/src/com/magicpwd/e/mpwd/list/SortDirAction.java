@@ -21,7 +21,7 @@ public class SortDirAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        coreMdl.getUserCfg().setCfg(ConsCfg.CFG_VIEW_LIST_ASC, e.getActionCommand());
+        coreMdl.setCfg(ConsCfg.CFG_VIEW_LIST_ASC, e.getActionCommand());
         mainPtn.showList();
     }
 

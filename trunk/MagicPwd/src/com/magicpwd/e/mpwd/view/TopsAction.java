@@ -5,7 +5,6 @@
 package com.magicpwd.e.mpwd.view;
 
 import com.magicpwd.__a.mpwd.AMpwdAction;
-import com.magicpwd.m.UserCfg;
 
 /**
  *
@@ -21,10 +20,9 @@ public class TopsAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        UserCfg cfg = coreMdl.getUserCfg();
-        boolean b = !cfg.isTopMost();
+        boolean b = !coreMdl.isTopMost();
         mainPtn.setAlwaysOnTop(b);
-        cfg.setTopMost(b);
+        coreMdl.setTopMost(b);
     }
 
     @Override

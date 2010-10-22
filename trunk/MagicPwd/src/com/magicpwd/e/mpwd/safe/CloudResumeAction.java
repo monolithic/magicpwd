@@ -99,7 +99,7 @@ public class CloudResumeAction extends AMpwdAction
                 folder.close(false);
             }
             folder.open(javax.mail.Folder.READ_ONLY);
-            javax.mail.Message message = mail.find(folder, null, Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"), null, "http://magicpwd.com/?*" + mainPtn.getCoreMdl().getUserCfg().getCfg("mail.date"));
+            javax.mail.Message message = mail.find(folder, null, Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"), null, "http://magicpwd.com/?*" + coreMdl.getCfg("mail.date"));
             if (message == null)
             {
                 dialog.setVisible(false);

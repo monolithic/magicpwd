@@ -26,7 +26,7 @@ public class NewAction extends AMpwdAction
             return;
         }
 
-        if (coreMdl.getUserCfg().isEditVisible())
+        if (coreMdl.isEditVisible())
         {
             return;
         }
@@ -42,8 +42,8 @@ public class NewAction extends AMpwdAction
             }
         }
 
-        coreMdl.getUserCfg().setEditVisible(true);
-        coreMdl.getUserCfg().setEditIsolate(true);
+        coreMdl.setEditVisible(true);
+        coreMdl.setEditIsolate(true);
 
         mainPtn.setEditVisible(true);
     }

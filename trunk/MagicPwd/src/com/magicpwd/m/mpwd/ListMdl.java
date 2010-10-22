@@ -57,7 +57,7 @@ public class ListMdl extends DefaultListModel
         int c = dataList.size();
         dataList.clear();
         fireIntervalRemoved(this, 0, c);
-        DBA3000.readTaskList(coreMdl.getUserCfg(), new java.sql.Timestamp(s.getTime()), new java.sql.Timestamp(t.getTime()), dataList);
+        DBA3000.readTaskList(coreMdl, new java.sql.Timestamp(s.getTime()), new java.sql.Timestamp(t.getTime()), dataList);
         c = dataList.size();
         fireIntervalAdded(this, 0, c);
     }
@@ -67,7 +67,7 @@ public class ListMdl extends DefaultListModel
         int s = dataList.size();
         dataList.clear();
         fireIntervalRemoved(this, 0, s);
-        DBA3000.readKeysList(coreMdl.getUserCfg(), typeHash, dataList);
+        DBA3000.readKeysList(coreMdl, typeHash, dataList);
         s = dataList.size();
         fireIntervalAdded(this, 0, s);
     }
@@ -84,7 +84,7 @@ public class ListMdl extends DefaultListModel
         c.set(Calendar.MILLISECOND, 0);
         Timestamp s = new Timestamp(c.getTimeInMillis());
         Timestamp e = new Timestamp(c.getTimeInMillis());
-        DBA3000.findHintList(coreMdl.getUserCfg(), s, e, dataList);
+        DBA3000.findHintList(coreMdl, s, e, dataList);
         n = dataList.size();
         fireIntervalAdded(this, 0, n);
     }
@@ -94,7 +94,7 @@ public class ListMdl extends DefaultListModel
         int s = dataList.size();
         dataList.clear();
         fireIntervalRemoved(this, 0, s);
-        boolean b = DBA3000.findUserData(coreMdl.getUserCfg(), keysName, dataList);
+        boolean b = DBA3000.findUserData(coreMdl, keysName, dataList);
         s = dataList.size();
         b &= s > 0;
         if (b)

@@ -11,7 +11,7 @@ import com.magicpwd._util.Jpng;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.m.SafeMdl;
-import com.magicpwd.m.UserCfg;
+import com.magicpwd.m.UserMdl;
 import com.magicpwd.u.DBU3000;
 import com.magicpwd.v.TrayPtn;
 import javax.imageio.ImageIO;
@@ -45,15 +45,15 @@ public class UserPtn extends javax.swing.JPanel
      */
     private static javax.swing.Icon guidIcon;
     private SafeMdl safeMdl;
-    private UserCfg userCfg;
+    private UserMdl userMdl;
 
     /**
      * 独立窗口
      * @param type
      */
-    public UserPtn(UserCfg userCfg, SafeMdl safeMdl)
+    public UserPtn(UserMdl userMdl, SafeMdl safeMdl)
     {
-        this.userCfg = userCfg;
+        this.userMdl = userMdl;
         this.safeMdl = safeMdl;
         frame = new javax.swing.JFrame();
         frame.setResizable(false);
@@ -66,9 +66,9 @@ public class UserPtn extends javax.swing.JPanel
      * @param type
      * @param frame
      */
-    public UserPtn(UserCfg userCfg, SafeMdl safeMdl, javax.swing.JFrame frame)
+    public UserPtn(UserMdl userMdl, SafeMdl safeMdl, javax.swing.JFrame frame)
     {
-        this.userCfg = userCfg;
+        this.userMdl = userMdl;
         this.safeMdl = safeMdl;
         dialog = new javax.swing.JDialog(frame, true);
         dialog.setResizable(false);
@@ -668,7 +668,7 @@ public class UserPtn extends javax.swing.JPanel
         {
             case ConsEnv.INT_SIGN_IN:
                 // 显示上次登录用户
-                String name = userCfg.getCfg(ConsCfg.CFG_USER_LAST);
+                String name = userMdl.getCfg(ConsCfg.CFG_USER_LAST);
                 if (com.magicpwd._util.Char.isValidate(name))
                 {
                     tf_UserName.setText(name);
@@ -1372,7 +1372,7 @@ public class UserPtn extends javax.swing.JPanel
             tf_UserName.requestFocus();
             return;
         }
-        String ul = userCfg.getCfg(ConsCfg.CFG_USER, "");
+        String ul = userMdl.getCfg(ConsCfg.CFG_USER, "");
         if (ul.indexOf(un + ',') >= 0)
         {
             Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");

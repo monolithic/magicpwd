@@ -28,7 +28,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
     private static boolean isOsTray;
     private static int currPtn;
     private static int nextPtn;
-    private static UserMdl coreMdl;
+    private static UserMdl userMdl;
     private static TrayPtn trayPtn;
     private static UserPtn userPtn;
     private static javax.swing.JFrame mfCurrForm;
@@ -137,7 +137,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
 
     public boolean initData()
     {
-        changeView(coreMdl.getCfg(ConsCfg.CFG_TRAY_PTN, "guid"));
+        changeView(userMdl.getCfg(ConsCfg.CFG_TRAY_PTN, "guid"));
         return true;
     }
 
@@ -155,12 +155,12 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
             // 设置软件界面风格
             showMainPtn();
             mfCurrForm.setVisible(true);
-            if (coreMdl.isEditVisible())
+            if (userMdl.isEditVisible())
             {
                 mp_MainPtn.showPropInfo();
             }
-            mp_MainPtn.setEditIsolate(coreMdl.isEditIsolate());
-            mp_MainPtn.setEditVisible(coreMdl.isEditVisible());
+            mp_MainPtn.setEditIsolate(userMdl.isEditIsolate());
+            mp_MainPtn.setEditVisible(userMdl.isEditVisible());
             mp_MainPtn.requestFocus();
             initView();
             initLang();
@@ -223,7 +223,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
     {
         if (mp_MainPtn == null)
         {
-            mp_MainPtn = new MainPtn(coreMdl);
+            mp_MainPtn = new MainPtn(userMdl);
             mp_MainPtn.initView();
             mp_MainPtn.initLang();
             mp_MainPtn.initData();
@@ -262,7 +262,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
     {
         if (mp_MiniPtn == null)
         {
-            mp_MiniPtn = new MiniPtn(coreMdl);
+            mp_MiniPtn = new MiniPtn(userMdl);
             mp_MiniPtn.initView();
             mp_MiniPtn.initLang();
             mp_MiniPtn.initData();
@@ -353,7 +353,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
                 tmp.y = y;
             }
             mwTrayForm.setLocation(tmp);
-            coreMdl.setCfg(ConsCfg.CFG_TRAY_LOC, "[" + tmp.x + "," + tmp.y + "]");
+            userMdl.setCfg(ConsCfg.CFG_TRAY_LOC, "[" + tmp.x + "," + tmp.y + "]");
         }
     }
 
@@ -382,12 +382,12 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
                 mp_MiniPtn.endSave();
             }
 
-            coreMdl.saveCfg();
+            userMdl.saveCfg();
 
             DBAccess.exit();
 
-            java.io.File backFile = Util.nextBackupFile(coreMdl.getBackDir(), coreMdl.getBackNum());
-            Jzip.doZip(backFile, new java.io.File(coreMdl.getDataDir()));
+            java.io.File backFile = Util.nextBackupFile(userMdl.getBackDir(), userMdl.getBackNum());
+            Jzip.doZip(backFile, new java.io.File(userMdl.getDataDir()));
             return backFile;
         }
         catch (Exception exp)
@@ -442,22 +442,22 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
 
     public void loadCfg()
     {
-        if (coreMdl == null)
+        if (userMdl == null)
         {
-            coreMdl = new UserMdl();
+            userMdl = new UserMdl();
 
             // 用户配置文件加载
-            coreMdl.loadCfg();
+            userMdl.loadCfg();
 
             // 语言资源加载
-            Lang.loadLang(coreMdl);
+            Lang.loadLang(userMdl);
         }
     }
 
     public void loadLnf()
     {
         // 扩展皮肤加载
-        Bean.loadLnF(coreMdl);
+        Bean.loadLnF(userMdl);
     }
 
     public void loadPre()
@@ -474,7 +474,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         Bean.getNone();
         Bean.getLogo(16);
 
-        coreMdl.loadPre();
+        userMdl.loadPre();
 
         // 扩展库加载
         java.io.File file = new java.io.File(ConsEnv.DIR_EXT);
@@ -501,9 +501,9 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         // 显示登录
         if (getCurrForm() == null)
         {
-            userPtn = new UserPtn(coreMdl, null);
+            userPtn = new UserPtn(userMdl, null);
             userPtn.setBackCall(this);
-            userPtn.initView(coreMdl.getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.INT_SIGN_IN : ConsEnv.INT_SIGN_UP);
+            userPtn.initView(userMdl.getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.INT_SIGN_IN : ConsEnv.INT_SIGN_UP);
             userPtn.initLang();
             userPtn.initData();
             return;
@@ -546,9 +546,9 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
     {
         if (userPtn == null)
         {
-            userPtn = new UserPtn(coreMdl, null);
+            userPtn = new UserPtn(userMdl, null);
         }
-        UserPtn ptn = (getCurrForm() != null && getCurrForm().isVisible()) ? new UserPtn(coreMdl, null, getCurrForm()) : userPtn;
+        UserPtn ptn = (getCurrForm() != null && getCurrForm().isVisible()) ? new UserPtn(userMdl, null, getCurrForm()) : userPtn;
         ptn.setBackCall(call);
         ptn.initView(view);
         ptn.initLang();
@@ -559,7 +559,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
 
     public void changeView()
     {
-        String view = coreMdl.getCfg(ConsCfg.CFG_TRAY_PTN, "guid");
+        String view = userMdl.getCfg(ConsCfg.CFG_TRAY_PTN, "guid");
         changeView(ConsCfg.DEF_TRAY.equals(view) ? "guid" : ConsCfg.DEF_TRAY);
     }
 
@@ -586,7 +586,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
                 {
                     Lang.setWText(button, LangRes.P30F960E, "显示为导航罗盘");
                 }
-                coreMdl.setCfg(ConsCfg.CFG_TRAY_PTN, "icon");
+                userMdl.setCfg(ConsCfg.CFG_TRAY_PTN, "icon");
                 isOsTray = true;
                 return;
             }
@@ -603,13 +603,13 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         {
             Lang.setWText(button, LangRes.P30F960D, "显示为托盘图标");
         }
-        coreMdl.setCfg(ConsCfg.CFG_TRAY_PTN, "guid");
+        userMdl.setCfg(ConsCfg.CFG_TRAY_PTN, "guid");
 
         if (formLoc == null)
         {
             java.awt.Dimension size = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 
-            String loc = coreMdl.getCfg(ConsCfg.CFG_TRAY_LOC);
+            String loc = userMdl.getCfg(ConsCfg.CFG_TRAY_LOC);
             if (com.magicpwd._util.Char.isValidate(loc))
             {
                 java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("\\d+").matcher(loc);
@@ -676,7 +676,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
 
                 TrayPtn.getCurrForm().setVisible(wasVisible);
             }
-            coreMdl.setCfg(ConsCfg.CFG_SKIN_LOOK, isSystem ? ConsCfg.DEF_SKIN_SYS : lafClass);
+            userMdl.setCfg(ConsCfg.CFG_SKIN_LOOK, isSystem ? ConsCfg.DEF_SKIN_SYS : lafClass);
         }
         catch (Exception exc)
         {

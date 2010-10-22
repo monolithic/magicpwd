@@ -9,7 +9,6 @@ import com.magicpwd._comn.S1S1;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
-import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.UserMdl;
 
 /**
@@ -84,7 +83,6 @@ public class USetProp extends javax.swing.JPanel implements IPropBean
     @Override
     public void initData()
     {
-        UserCfg uc = coreMdl.getUserCfg();
         if (cb_UserLang.getItemCount() < 1)
         {
             java.util.Locale[] locales = java.util.Locale.getAvailableLocales();
@@ -98,7 +96,7 @@ public class USetProp extends javax.swing.JPanel implements IPropBean
             java.util.Arrays.sort(names);
             cb_UserLang.setModel(new javax.swing.DefaultComboBoxModel(names));
         }
-        cb_UserLang.setSelectedItem(uc.getLang());
+        cb_UserLang.setSelectedItem(coreMdl.getLang());
 
         cb_PwdsChar.removeAllItems();
         Char cher = new Char();
@@ -109,7 +107,7 @@ public class USetProp extends javax.swing.JPanel implements IPropBean
         for (Char item : coreMdl.getCharMdl().getCharSys())
         {
             cb_PwdsChar.addItem(item);
-            if (item.getP30F2103().equals(uc.getPwdsKey()))
+            if (item.getP30F2103().equals(coreMdl.getPwdsKey()))
             {
                 cb_PwdsChar.setSelectedItem(item);
             }
@@ -117,25 +115,24 @@ public class USetProp extends javax.swing.JPanel implements IPropBean
         for (Char item : coreMdl.getCharMdl().getCharUsr())
         {
             cb_PwdsChar.addItem(item);
-            if (item.getP30F2103().equals(uc.getPwdsKey()))
+            if (item.getP30F2103().equals(coreMdl.getPwdsKey()))
             {
                 cb_PwdsChar.setSelectedItem(item);
             }
         }
 
-        tf_PwdsSize.setText(uc.getPwdsLen());
-        ck_PwdsLoop.setSelected(uc.isPwdsLoop());
+        tf_PwdsSize.setText(coreMdl.getPwdsLen());
+        ck_PwdsLoop.setSelected(coreMdl.isPwdsLoop());
 
-        tf_BackCount.setText("" + uc.getBackNum());
-        tf_BackPath.setText(uc.getBackDir());
+        tf_BackCount.setText("" + coreMdl.getBackNum());
+        tf_BackPath.setText(coreMdl.getBackDir());
 
-        tf_StayTime.setText("" + uc.getStayTime());
+        tf_StayTime.setText("" + coreMdl.getStayTime());
     }
 
     @Override
     public void saveData()
     {
-        UserCfg uc = coreMdl.getUserCfg();
         Object obj = cb_UserLang.getSelectedItem();
         if (obj != null && obj instanceof S1S1)
         {
@@ -145,33 +142,33 @@ public class USetProp extends javax.swing.JPanel implements IPropBean
         obj = cb_PwdsChar.getSelectedItem();
         if (obj != null && obj instanceof Char)
         {
-            uc.setPwdsKey(((Char) obj).getP30F2103());
+            coreMdl.setPwdsKey(((Char) obj).getP30F2103());
         }
 
         String txt = tf_PwdsSize.getText().trim();
         if (com.magicpwd._util.Char.isValidatePositiveInteger(txt))
         {
-            uc.setPwdsLen(Integer.parseInt(txt));
+            coreMdl.setPwdsLen(Integer.parseInt(txt));
         }
-        uc.setPwdsLoop(ck_PwdsLoop.isSelected());
+        coreMdl.setPwdsLoop(ck_PwdsLoop.isSelected());
 
         txt = tf_BackCount.getText().trim();
         if (com.magicpwd._util.Char.isValidatePositiveInteger(txt))
         {
-            uc.setBackNum(Integer.parseInt(txt));
+            coreMdl.setBackNum(Integer.parseInt(txt));
         }
 
         txt = tf_BackPath.getText();
         java.io.File file = new java.io.File(txt);
         if (file.exists() && file.isDirectory() && file.canWrite())
         {
-            uc.setBackDir(txt);
+            coreMdl.setBackDir(txt);
         }
 
         txt = tf_StayTime.getText().trim();
         if (com.magicpwd._util.Char.isValidatePositiveInteger(txt))
         {
-            uc.setStayTime(Integer.parseInt(txt));
+            coreMdl.setStayTime(Integer.parseInt(txt));
         }
     }
 

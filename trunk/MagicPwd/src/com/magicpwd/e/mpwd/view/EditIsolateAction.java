@@ -21,7 +21,7 @@ public class EditIsolateAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !coreMdl.getUserCfg().isEditIsolate();
+        boolean b = !coreMdl.isEditIsolate();
         mainPtn.setEditIsolate(b);
         mainPtn.pack();
 
@@ -39,8 +39,8 @@ public class EditIsolateAction extends AMpwdAction
     @Override
     public void doInit(Object object)
     {
-        setEnabled(coreMdl.getUserCfg().isEditVisible());
-        setSelected(coreMdl.getUserCfg().isEditIsolate());
+        setEnabled(coreMdl.isEditVisible());
+        setSelected(coreMdl.isEditIsolate());
     }
 
     @Override

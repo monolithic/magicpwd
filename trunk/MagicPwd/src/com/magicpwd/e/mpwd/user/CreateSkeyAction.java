@@ -27,7 +27,7 @@ public class CreateSkeyAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (Char.isValidate(coreMdl.getUserCfg().getCfg(ConsCfg.CFG_USER_SKEY), 224))
+        if (Char.isValidate(coreMdl.getCfg(ConsCfg.CFG_USER_SKEY), 224))
         {
             Lang.showMesg(mainPtn, LangRes.P30F7A28, "您已经设置过安全口令！");
             return;
@@ -54,7 +54,7 @@ public class CreateSkeyAction extends AMpwdAction
     @Override
     public void doInit(Object object)
     {
-        setEnabled(!Char.isValidate(coreMdl.getUserCfg().getCfg(ConsCfg.CFG_USER_SKEY), 224));
+        setEnabled(!Char.isValidate(coreMdl.getCfg(ConsCfg.CFG_USER_SKEY), 224));
     }
 
     @Override
