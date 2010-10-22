@@ -10,17 +10,17 @@ import com.magicpwd.__a.mpwd.AMpwdAction;
  *
  * @author Amon
  */
-public class HideAction extends AMpwdAction
+public class LockAction extends AMpwdAction
 {
 
-    public HideAction()
+    public LockAction()
     {
     }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mainPtn.hideFrame();
+        mainPtn.lockFrame();
     }
 
     @Override
