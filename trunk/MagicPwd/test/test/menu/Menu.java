@@ -25,7 +25,7 @@ public class Menu extends javax.swing.AbstractAction
 
     private JFrame frame;
     private JMenuBar bar;
-    private UserMdl coreMdl;
+    private UserMdl userMdl;
 
     public Menu()
     {
@@ -33,14 +33,14 @@ public class Menu extends javax.swing.AbstractAction
 
     public void init()
     {
-        coreMdl = new UserMdl();
-        coreMdl.loadPre();
-        coreMdl.loadCfg();
+        userMdl = new UserMdl();
+        userMdl.loadPre();
+        userMdl.loadCfg();
 
-        Bean.loadLnF(coreMdl.getUserCfg());
-        Lang.loadLang(coreMdl.getUserCfg());
+        Bean.loadLnF(userMdl);
+        Lang.loadLang(userMdl);
 
-        MenuPtn ptn = new MenuPtn(coreMdl, null);
+        MenuPtn ptn = new MenuPtn(null);
         try
         {
             ptn.loadData("dat/menu.xml");
@@ -64,7 +64,7 @@ public class Menu extends javax.swing.AbstractAction
             @Override
             public void windowClosing(WindowEvent e)
             {
-                coreMdl.getUserCfg().saveCfg();
+                userMdl.saveCfg();
                 System.exit(0);
             }
         });
