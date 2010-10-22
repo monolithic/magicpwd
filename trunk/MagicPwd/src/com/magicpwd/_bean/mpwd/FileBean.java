@@ -45,7 +45,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initView()
     {
-        dataEdit = new WEditBox(mainPtn.getCoreMdl().getUserCfg(), this, false);
+        dataEdit = new WEditBox(mainPtn.getUserMdl(), this, false);
         dataEdit.initView();
 
         lb_PropName = new javax.swing.JLabel();
@@ -63,7 +63,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_FileView = new BtnLabel();
-        bt_FileView.setIcon(mainPtn.getCoreMdl().getUserCfg().readIcon(ConsEnv.FEEL_PATH + "file-preview.png"));
+        bt_FileView.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "file-preview.png"));
         bt_FileView.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -76,7 +76,7 @@ public class FileBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.add(bt_FileView);
 
         bt_FileApnd = new BtnLabel();
-        bt_FileApnd.setIcon(mainPtn.getCoreMdl().getUserCfg().readIcon(ConsEnv.FEEL_PATH + "file-upload.png"));
+        bt_FileApnd.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "file-upload.png"));
         bt_FileApnd.addActionListener(new java.awt.event.ActionListener()
         {
 

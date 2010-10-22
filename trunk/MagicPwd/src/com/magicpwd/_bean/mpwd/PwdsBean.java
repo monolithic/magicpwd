@@ -49,7 +49,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     {
         initMenuView();
 
-        dataEdit = new WEditBox(mainPtn.getCoreMdl().getUserCfg(), this, false);
+        dataEdit = new WEditBox(mainPtn.getUserMdl(), this, false);
         dataEdit.initView();
 
         lb_PropName = new javax.swing.JLabel();
@@ -80,7 +80,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.add(bt_PwdsView);
 
         bt_PwdsGent = new BtnLabel();
-        bt_PwdsGent.setIcon(mainPtn.getCoreMdl().getUserCfg().readIcon(ConsEnv.FEEL_PATH + "pwds-generate.png"));
+        bt_PwdsGent.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "pwds-generate.png"));
         bt_PwdsGent.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -93,7 +93,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.add(bt_PwdsGent);
 
         bt_PwdsConf = new BtnLabel();
-        bt_PwdsConf.setIcon(mainPtn.getCoreMdl().getUserCfg().readIcon(ConsEnv.FEEL_PATH + "options.png"));
+        bt_PwdsConf.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "options.png"));
         bt_PwdsConf.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -171,8 +171,8 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     {
         nameBox.initData();
 
-        icoMask = mainPtn.getCoreMdl().getUserCfg().readIcon(ConsEnv.FEEL_PATH + "pwds-mask.png");
-        icoView = mainPtn.getCoreMdl().getUserCfg().readIcon(ConsEnv.FEEL_PATH + "pwds-view.png");
+        icoMask = mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "pwds-mask.png");
+        icoView = mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "pwds-view.png");
 
         initMenuData();
 
@@ -246,7 +246,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
     public void copyDataActionPerformed(java.awt.event.ActionEvent evt)
     {
         pf_PropData.selectAll();
-        Util.setClipboardContents(new String(pf_PropData.getPassword()), mainPtn.getCoreMdl().getUserCfg().getStayTime());
+        Util.setClipboardContents(new String(pf_PropData.getPassword()), mainPtn.getUserMdl().getStayTime());
     }
 
     private void initMenuView()
@@ -371,7 +371,7 @@ public class PwdsBean extends javax.swing.JPanel implements IEditBean
             }
         });
         pm_ConfMenu.add(mi_LoopMenu);
-        mi_LoopMenu.setSelected(mainPtn.getCoreMdl().getUserCfg().isPwdsLoop());
+        mi_LoopMenu.setSelected(mainPtn.getUserMdl().isPwdsLoop());
     }
 
     private void initSizeLang()

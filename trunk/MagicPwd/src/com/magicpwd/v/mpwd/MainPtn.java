@@ -3,9 +3,9 @@
  */
 package com.magicpwd.v.mpwd;
 
+import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IEditBean;
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd.__i.IFavIcon;
 import com.magicpwd.__i.IGridView;
 import com.magicpwd._bean.mpwd.AreaBean;
 import com.magicpwd._bean.mpwd.DataBean;
@@ -42,7 +42,6 @@ import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.mpwd.GridMdl;
-import com.magicpwd.m.UserCfg;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.m.mpwd.ListMdl;
 import com.magicpwd.m.mpwd.MpwdMdl;
@@ -54,7 +53,7 @@ import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.TrayPtn;
 import com.magicpwd.x.MdiDialog;
 
-public class MainPtn extends javax.swing.JFrame implements IFavIcon, IGridView
+public class MainPtn extends AFrame implements IGridView
 {
 
     private EditDlg ed_KeysEdit;
@@ -81,33 +80,23 @@ public class MainPtn extends javax.swing.JFrame implements IFavIcon, IGridView
      * 用户查找字符串
      */
     private String queryKey;
-    private UserMdl coreMdl;
     private GridMdl gridMdl;
     private MpwdMdl mpwdMdl;
-    private java.util.HashMap<String, javax.swing.Icon> iconMap;
 
-    public MainPtn(UserMdl coreMdl)
+    public MainPtn(UserMdl userMdl)
     {
-        this.coreMdl = coreMdl;
-    }
-
-    @Override
-    public UserMdl getCoreMdl()
-    {
-        return coreMdl;
+        this.userMdl = userMdl;
     }
 
     public void initView()
     {
-        UserCfg cfg = coreMdl.getUserCfg();
-        iconMap = new java.util.HashMap<String, javax.swing.Icon>();
 //        Bean.readIcon(MainPtn.class.getResourceAsStream(ConsEnv.ICON_PATH + "mpwd.png"), iconMap);
-        gridMdl = new GridMdl(coreMdl.getUserCfg());
+        gridMdl = new GridMdl(userMdl);
 
         try
         {
-            java.io.File file = new java.io.File(cfg.getDataDir(), "mpwd.xml");
-            menuPtn = new MenuPtn(coreMdl, this);
+            java.io.File file = new java.io.File(userMdl.getDataDir(), "mpwd.xml");
+            menuPtn = new MenuPtn(this);
             menuPtn.loadData(file);
         }
         catch (Exception exp)
@@ -126,7 +115,7 @@ public class MainPtn extends javax.swing.JFrame implements IFavIcon, IGridView
         this.setJMenuBar(menuBar);
 
         toolBar = menuPtn.getToolBar("mpwd");
-        this.getContentPane().add(toolBar, cfg.getToolLoc());
+        this.getContentPane().add(toolBar, userMdl.getToolLoc());
 
         this.setIconImage(Bean.getLogo(16));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -143,22 +132,19 @@ public class MainPtn extends javax.swing.JFrame implements IFavIcon, IGridView
     }
 
     public void initData()
-    {
-        UserCfg cfg = coreMdl.getUserCfg();
-
-        // 菜单栏
-        setMenuVisible(cfg.isMenuVisible());
+    {        // 菜单栏
+        setMenuVisible(userMdl.isMenuVisible());
 
         // 工具栏
-        setToolVisible(cfg.isToolVisible());
+        setToolVisible(userMdl.isToolVisible());
 
         // 搜索栏
         mainFind.initData();
-        setFindVisible(cfg.isFindVisible());
+        setFindVisible(userMdl.isFindVisible());
 
         // 信息栏
         mainInfo.initData();
-        setInfoVisible(cfg.isInfoVisible());
+        setInfoVisible(userMdl.isInfoVisible());
 
         // 属性编辑组件
         eb_KeysEdit.initData();
@@ -172,32 +158,16 @@ public class MainPtn extends javax.swing.JFrame implements IFavIcon, IGridView
         WButtonGroup group = menuPtn.getGroup("order-dir");
         if (group != null)
         {
-            group.setSelected(cfg.getCfg(ConsCfg.CFG_VIEW_LIST_ASC, ConsCfg.DEF_FALSE), true);
+            group.setSelected(userMdl.getCfg(ConsCfg.CFG_VIEW_LIST_ASC, ConsCfg.DEF_FALSE), true);
         }
         group = menuPtn.getGroup("order-key");
         if (group != null)
         {
-            group.setSelected(cfg.getCfg(ConsCfg.CFG_VIEW_LIST_KEY, "01"), true);
+            group.setSelected(userMdl.getCfg(ConsCfg.CFG_VIEW_LIST_KEY, "01"), true);
         }
 
         pack();
         Util.centerForm(this, null);
-    }
-
-    @Override
-    public javax.swing.Icon getIcon(String hash)
-    {
-        javax.swing.Icon icon = iconMap.get(hash);
-        if (icon == null)
-        {
-            icon = Bean.getIcon(hash);
-        }
-        return icon;
-    }
-
-    @Override
-    public void setIcon(String hash, javax.swing.Icon icon)
-    {
     }
 
     public boolean newKeys()
@@ -332,8 +302,7 @@ public class MainPtn extends javax.swing.JFrame implements IFavIcon, IGridView
 
     public void setEditVisible(boolean visible)
     {
-        UserCfg cfg = coreMdl.getUserCfg();
-        if (cfg.isEditIsolate())
+        if (userMdl.isEditIsolate())
         {
             ed_KeysEdit.setVisible(visible);
         }
@@ -341,13 +310,12 @@ public class MainPtn extends javax.swing.JFrame implements IFavIcon, IGridView
         {
             eb_KeysEdit.setVisible(visible);
         }
-        cfg.setEditVisible(visible);
+        userMdl.setEditVisible(visible);
     }
 
     public void setEditIsolate(boolean isolate)
     {
-        UserCfg cfg = coreMdl.getUserCfg();
-        if (cfg.isEditVisible())
+        if (userMdl.isEditVisible())
         {
             if (isolate)
             {
@@ -361,32 +329,32 @@ public class MainPtn extends javax.swing.JFrame implements IFavIcon, IGridView
                 eb_KeysEdit.setVisible(true);
                 ed_KeysEdit.setVisible(false);
             }
-            cfg.setEditIsolate(isolate);
+            userMdl.setEditIsolate(isolate);
         }
     }
 
     public void setFindVisible(boolean visible)
     {
         mainFind.setVisible(visible);
-        coreMdl.getUserCfg().setFindVisible(visible);
+        userMdl.setFindVisible(visible);
     }
 
     public void setInfoVisible(boolean visible)
     {
         mainInfo.setVisible(visible);
-        coreMdl.getUserCfg().setInfoVisible(visible);
+        userMdl.setInfoVisible(visible);
     }
 
     public void setMenuVisible(boolean visible)
     {
         menuBar.setVisible(visible);
-        coreMdl.getUserCfg().setMenuVisible(visible);
+        userMdl.setMenuVisible(visible);
     }
 
     public void setToolVisible(boolean visible)
     {
         toolBar.setVisible(visible);
-        coreMdl.getUserCfg().setToolVisible(visible);
+        userMdl.setToolVisible(visible);
     }
 
     public javax.swing.tree.TreePath getSelectedKindValue()
@@ -817,7 +785,7 @@ public class MainPtn extends javax.swing.JFrame implements IFavIcon, IGridView
     {
         pl_KeysBase = new javax.swing.JPanel();
 
-        mainInfo = new HintBar(this, coreMdl.getHintMdl());
+        mainInfo = new HintBar(this, userMdl.getHintMdl());
         mainInfo.initView();
 
         javax.swing.JSplitPane sp = new javax.swing.JSplitPane();
@@ -1111,7 +1079,7 @@ public class MainPtn extends javax.swing.JFrame implements IFavIcon, IGridView
 
     public void showPropInfo()
     {
-        if (coreMdl.getUserCfg().isEditVisible())
+        if (userMdl.isEditVisible())
         {
             editBean[ConsDat.INDX_INFO].showData(null);
             cl_CardProp.show(pl_CardProp, ConsEnv.BEAN_INFO);
@@ -1121,7 +1089,7 @@ public class MainPtn extends javax.swing.JFrame implements IFavIcon, IGridView
 
     public void showPropEdit(IEditItem item, boolean focus)
     {
-        if (coreMdl.getUserCfg().isEditVisible())
+        if (userMdl.isEditVisible())
         {
             cl_CardProp.show(pl_CardProp, ConsEnv.BEAN_PROP + item.getType());
             editBean[item.getType()].showData(item);
@@ -1209,10 +1177,10 @@ public class MainPtn extends javax.swing.JFrame implements IFavIcon, IGridView
             return true;
         }
 
-        if (!coreMdl.getUserCfg().isEditVisible())
+        if (!userMdl.isEditVisible())
         {
-            coreMdl.getUserCfg().setEditVisible(true);
-            coreMdl.getUserCfg().setEditIsolate(true);
+            userMdl.setEditVisible(true);
+            userMdl.setEditIsolate(true);
             setEditVisible(true);
         }
 
@@ -1220,7 +1188,7 @@ public class MainPtn extends javax.swing.JFrame implements IFavIcon, IGridView
         return false;
     }
 
-    public void endSave()
+    public boolean endSave()
     {
         // Save Temperary Data
         if (gridMdl.isModified())
@@ -1236,6 +1204,7 @@ public class MainPtn extends javax.swing.JFrame implements IFavIcon, IGridView
                 Logs.exception(exp);
             }
         }
+        return true;
     }
 
     public IEditItem getMeta()
@@ -1496,7 +1465,7 @@ public class MainPtn extends javax.swing.JFrame implements IFavIcon, IGridView
     {
         if (mailDlg == null)
         {
-            mailDlg = new MailDlg(coreMdl.getUserCfg());
+            mailDlg = new MailDlg(userMdl);
             mailDlg.initView();
             mailDlg.initLang();
             mailDlg.initData();
@@ -1589,7 +1558,7 @@ public class MainPtn extends javax.swing.JFrame implements IFavIcon, IGridView
     {
         if (cfgForm == null)
         {
-            cfgForm = new MdiDialog(coreMdl);
+            cfgForm = new MdiDialog(userMdl);
             cfgForm.initView();
             cfgForm.initLang();
             cfgForm.initData();

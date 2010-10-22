@@ -4,22 +4,18 @@
  */
 package com.magicpwd.v.mwiz;
 
-import com.magicpwd.__i.IFavIcon;
+import com.magicpwd.__a.AFrame;
 import com.magicpwd._util.Bean;
-import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.MenuPtn;
-import javax.swing.Icon;
 
 /**
  * 向导模式
  * @author Amon
  */
-public class NormPtn extends javax.swing.JFrame implements IFavIcon
+public class NormPtn extends AFrame
 {
 
     private MenuPtn menuPtn;
-    private UserMdl coreMdl;
-    private java.util.HashMap<String, javax.swing.Icon> iconMap;
 
     public NormPtn()
     {
@@ -27,10 +23,9 @@ public class NormPtn extends javax.swing.JFrame implements IFavIcon
 
     public void initView()
     {
-        iconMap = new java.util.HashMap<String, javax.swing.Icon>();
 //        Bean.readIcon(NormPtn.class.getResourceAsStream(ConsEnv.ICON_PATH + "mwiz16.png"), iconMap);
 
-        menuPtn = new MenuPtn(coreMdl, this);
+        menuPtn = new MenuPtn(this);
         try
         {
             menuPtn.loadData(new java.io.File("dat/mwiz.xml"));
@@ -92,19 +87,9 @@ public class NormPtn extends javax.swing.JFrame implements IFavIcon
     }
 
     @Override
-    public javax.swing.Icon getIcon(String hash)
+    public boolean endSave()
     {
-        javax.swing.Icon icon = iconMap.get(hash);
-        if (icon == null)
-        {
-            icon = Bean.getIcon(hash);
-        }
-        return icon;
-    }
-
-    @Override
-    public void setIcon(String hash, Icon icon)
-    {
+        return true;
     }
 
     private void tbKeysListMouseClicked(java.awt.event.MouseEvent e)

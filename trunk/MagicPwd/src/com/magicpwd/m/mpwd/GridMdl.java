@@ -18,7 +18,7 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.SafeMdl;
-import com.magicpwd.m.UserCfg;
+import com.magicpwd.m.UserMdl;
 
 /**
  * @author Amon
@@ -28,9 +28,9 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
 
     private javax.swing.event.EventListenerList listenerList;
 
-    public GridMdl(UserCfg userCfg)
+    public GridMdl(UserMdl userMdl)
     {
-        super(userCfg);
+        super(userMdl);
         listenerList = new javax.swing.event.EventListenerList();
     }
 

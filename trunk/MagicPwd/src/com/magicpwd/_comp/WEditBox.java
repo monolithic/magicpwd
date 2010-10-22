@@ -8,7 +8,7 @@ import com.magicpwd.__i.IEditBean;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
-import com.magicpwd.m.UserCfg;
+import com.magicpwd.m.UserMdl;
 
 /**
  *
@@ -18,12 +18,12 @@ public class WEditBox extends javax.swing.JPanel
 {
 
     private IEditBean editBean;
-    private UserCfg userCfg;
+    private UserMdl userCfg;
     private boolean metaData;
 
-    public WEditBox(UserCfg ucfg, IEditBean bean, boolean meta)
+    public WEditBox(UserMdl umdl, IEditBean bean, boolean meta)
     {
-        userCfg = ucfg;
+        userCfg = umdl;
         editBean = bean;
         metaData = meta;
     }

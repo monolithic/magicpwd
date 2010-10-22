@@ -38,7 +38,7 @@ public class MailBean extends javax.swing.JPanel implements IEditBean
     @Override
     public void initView()
     {
-        dataEdit = new WEditBox(mainPtn.getCoreMdl().getUserCfg(), this, false);
+        dataEdit = new WEditBox(mainPtn.getUserMdl(), this, false);
         dataEdit.initView();
 
         lb_PropName = new javax.swing.JLabel();
@@ -58,7 +58,7 @@ public class MailBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_MailView = new BtnLabel();
-        bt_MailView.setIcon(mainPtn.getCoreMdl().getUserCfg().readIcon(ConsEnv.FEEL_PATH + "mail-send.png"));
+        bt_MailView.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "mail-send.png"));
         bt_MailView.addActionListener(new java.awt.event.ActionListener()
         {
 

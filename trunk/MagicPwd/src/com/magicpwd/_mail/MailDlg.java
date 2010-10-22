@@ -10,7 +10,7 @@ import com.magicpwd._util.Bean;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd.m.UserCfg;
+import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.MailCR;
 
 import javax.mail.Folder;
@@ -36,11 +36,11 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
     private Connect connect;
     private Reader reader;
     private java.io.File filePath;
-    private UserCfg userCfg;
+    private UserMdl userMdl;
 
-    public MailDlg(UserCfg userCfg)
+    public MailDlg(UserMdl userMdl)
     {
-        this.userCfg = userCfg;
+        this.userMdl = userMdl;
     }
 
     @Override
@@ -70,7 +70,7 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
         rootNode = new DefaultMutableTreeNode("邮箱列表");
         treeModel = new DefaultTreeModel(rootNode);
         tr_MailBoxs.setModel(treeModel);
-        tableMode = new MailMdl(userCfg);
+        tableMode = new MailMdl(userMdl);
         tb_MailMsgs.setModel(tableMode);
         tb_MailMsgs.setRowSorter(new TableRowSorter<MailMdl>(tableMode));
 
