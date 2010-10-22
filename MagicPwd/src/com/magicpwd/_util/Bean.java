@@ -7,7 +7,7 @@ package com.magicpwd._util;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd.m.UserCfg;
+import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
 
 /**
@@ -325,14 +325,14 @@ public class Bean
         return bi;
     }
 
-    public static void loadLnF(UserCfg cfg)
+    public static void loadLnF(UserMdl userMdl)
     {
-        boolean deco = ConsCfg.DEF_TRUE.equalsIgnoreCase(cfg.getCfg(ConsCfg.CFG_SKIN_DECO, ConsCfg.DEF_FALSE));
+        boolean deco = ConsCfg.DEF_TRUE.equalsIgnoreCase(userMdl.getCfg(ConsCfg.CFG_SKIN_DECO, ConsCfg.DEF_FALSE));
         javax.swing.JFrame.setDefaultLookAndFeelDecorated(deco);
         javax.swing.JDialog.setDefaultLookAndFeelDecorated(deco);
 
-        String type = cfg.getCfg(ConsCfg.CFG_SKIN_TYPE, "user");
-        String name = cfg.getCfg(ConsCfg.CFG_SKIN_NAME, "").trim();
+        String type = userMdl.getCfg(ConsCfg.CFG_SKIN_TYPE, "user");
+        String name = userMdl.getCfg(ConsCfg.CFG_SKIN_NAME, "").trim();
         if (!Char.isValidate(name))
         {
             name = ConsCfg.DEF_SKIN_SYS;
@@ -365,7 +365,7 @@ public class Bean
             return;
         }
 
-        String look = cfg.getCfg(ConsCfg.CFG_SKIN_LOOK, "");
+        String look = userMdl.getCfg(ConsCfg.CFG_SKIN_LOOK, "");
         if (!Char.isValidate(look))
         {
             return;

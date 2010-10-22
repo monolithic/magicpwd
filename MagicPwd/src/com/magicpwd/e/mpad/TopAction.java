@@ -5,7 +5,6 @@
 package com.magicpwd.e.mpad;
 
 import com.magicpwd.__a.mpad.AMpadAction;
-import com.magicpwd.m.UserCfg;
 import com.magicpwd.v.TrayPtn;
 
 /**
@@ -22,10 +21,9 @@ public class TopAction extends AMpadAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        UserCfg cfg = coreMdl.getUserCfg();
-        boolean b = !cfg.isTopMost();
+        boolean b = !coreMdl.isTopMost();
         TrayPtn.getCurrForm().setAlwaysOnTop(b);
-        cfg.setTopMost(b);
+        coreMdl.setTopMost(b);
     }
 
     @Override

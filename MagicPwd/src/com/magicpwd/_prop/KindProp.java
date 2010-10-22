@@ -143,7 +143,7 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
         pl_ItemSort = new javax.swing.JPanel();
 
         bt_DropData = new IcoLabel();
-        bt_DropData.setIcon(coreMdl.getUserCfg().readIcon(ConsEnv.FEEL_PATH + "file-delete.png"));
+        bt_DropData.setIcon(coreMdl.readIcon(ConsEnv.FEEL_PATH + "file-delete.png"));
         bt_DropData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -155,7 +155,7 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
         });
 
         bt_SaveData = new IcoLabel();
-        bt_SaveData.setIcon(coreMdl.getUserCfg().readIcon(ConsEnv.FEEL_PATH + "file-save.png"));
+        bt_SaveData.setIcon(coreMdl.readIcon(ConsEnv.FEEL_PATH + "file-save.png"));
         bt_SaveData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -167,7 +167,7 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
         });
 
         bt_ApndData = new IcoLabel();
-        bt_ApndData.setIcon(coreMdl.getUserCfg().readIcon(ConsEnv.FEEL_PATH + "file-new.png"));
+        bt_ApndData.setIcon(coreMdl.readIcon(ConsEnv.FEEL_PATH + "file-new.png"));
         bt_ApndData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -178,7 +178,7 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
             }
         });
         bt_SortU = new IcoLabel();
-        bt_SortU.setIcon(coreMdl.getUserCfg().readIcon(ConsEnv.FEEL_PATH + "edit-move-up.png"));
+        bt_SortU.setIcon(coreMdl.readIcon(ConsEnv.FEEL_PATH + "edit-move-up.png"));
         bt_SortU.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -191,7 +191,7 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
         add(bt_SortU);
 
         bt_SortD = new IcoLabel();
-        bt_SortD.setIcon(coreMdl.getUserCfg().readIcon(ConsEnv.FEEL_PATH + "edit-move-down.png"));
+        bt_SortD.setIcon(coreMdl.readIcon(ConsEnv.FEEL_PATH + "edit-move-down.png"));
         bt_SortD.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -204,7 +204,7 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
         add(bt_SortD);
 
         bt_SortL = new IcoLabel();
-        bt_SortL.setIcon(coreMdl.getUserCfg().readIcon(ConsEnv.FEEL_PATH + "edit-move-left.png"));
+        bt_SortL.setIcon(coreMdl.readIcon(ConsEnv.FEEL_PATH + "edit-move-left.png"));
         bt_SortL.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -217,7 +217,7 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
         add(bt_SortL);
 
         bt_SortR = new IcoLabel();
-        bt_SortR.setIcon(coreMdl.getUserCfg().readIcon(ConsEnv.FEEL_PATH + "edit-move-right.png"));
+        bt_SortR.setIcon(coreMdl.readIcon(ConsEnv.FEEL_PATH + "edit-move-right.png"));
         bt_SortR.addActionListener(new java.awt.event.ActionListener()
         {
 

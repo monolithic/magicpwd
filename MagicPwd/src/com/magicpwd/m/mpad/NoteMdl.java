@@ -9,7 +9,7 @@ import com.magicpwd.__i.IEditItem;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd.m.SafeMdl;
-import com.magicpwd.m.UserCfg;
+import com.magicpwd.m.UserMdl;
 
 /**
  * 记事便签数据模型
@@ -18,9 +18,9 @@ import com.magicpwd.m.UserCfg;
 public class NoteMdl extends SafeMdl
 {
 
-    public NoteMdl(UserCfg userCfg)
+    public NoteMdl(UserMdl userMdl)
     {
-        super(userCfg);
+        super(userMdl);
     }
 
     @Override

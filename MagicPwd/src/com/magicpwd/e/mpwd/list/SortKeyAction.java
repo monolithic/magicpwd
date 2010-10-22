@@ -21,7 +21,7 @@ public class SortKeyAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        coreMdl.getUserCfg().setCfg(ConsCfg.CFG_VIEW_LIST_KEY, e.getActionCommand());
+        coreMdl.setCfg(ConsCfg.CFG_VIEW_LIST_KEY, e.getActionCommand());
         mainPtn.showList();
     }
 

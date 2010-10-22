@@ -9,7 +9,7 @@ import com.magicpwd._comp.IcoLabel;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd.m.UserCfg;
+import com.magicpwd.m.UserMdl;
 import java.awt.Component;
 import java.util.Locale;
 import java.util.Properties;
@@ -33,11 +33,11 @@ public class Lang
     {
     }
 
-    public static boolean loadLang(UserCfg userCfg)
+    public static boolean loadLang(UserMdl userMdl)
     {
         try
         {
-            String name = userCfg.getCfg(ConsCfg.CFG_LANG, "");
+            String name = userMdl.getCfg(ConsCfg.CFG_LANG, "");
             if (!Char.isValidate(name))
             {
                 Locale locale = Locale.getDefault();

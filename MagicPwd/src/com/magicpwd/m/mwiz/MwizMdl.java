@@ -5,7 +5,7 @@
 package com.magicpwd.m.mwiz;
 
 import com.magicpwd.m.SafeMdl;
-import com.magicpwd.m.UserCfg;
+import com.magicpwd.m.UserMdl;
 import javax.swing.event.TableModelListener;
 
 /**
@@ -15,9 +15,9 @@ import javax.swing.event.TableModelListener;
 public class MwizMdl extends SafeMdl implements javax.swing.table.TableModel, java.io.Serializable
 {
 
-    public MwizMdl(UserCfg userCfg)
+    public MwizMdl(UserMdl userMdl)
     {
-        super(userCfg);
+        super(userMdl);
     }
 
     @Override

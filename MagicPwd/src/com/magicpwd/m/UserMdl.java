@@ -61,6 +61,10 @@ public class UserMdl
         UserMdl.appMode = appMode;
     }
 
+    public void loadPre()
+    {
+    }
+
     public final void loadCfg()
     {
         userCfg = new java.util.Properties();

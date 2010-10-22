@@ -6,7 +6,6 @@ package com.magicpwd.v.mpwd;
 import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IEditBean;
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd.__i.IGridView;
 import com.magicpwd._bean.mpwd.AreaBean;
 import com.magicpwd._bean.mpwd.DataBean;
 import com.magicpwd._bean.mpwd.DateBean;
@@ -53,7 +52,7 @@ import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.TrayPtn;
 import com.magicpwd.x.MdiDialog;
 
-public class MainPtn extends AFrame implements IGridView
+public class MainPtn extends AFrame
 {
 
     private EditDlg ed_KeysEdit;
