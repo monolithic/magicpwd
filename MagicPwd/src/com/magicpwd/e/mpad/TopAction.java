@@ -5,7 +5,6 @@
 package com.magicpwd.e.mpad;
 
 import com.magicpwd.__a.mpad.AMpadAction;
-import com.magicpwd.v.TrayPtn;
 
 /**
  *
@@ -22,7 +21,7 @@ public class TopAction extends AMpadAction
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
         boolean b = !miniPtn.getUserMdl().isTopMost();
-        TrayPtn.getCurrForm().setAlwaysOnTop(b);
+        miniPtn.setAlwaysOnTop(b);
         miniPtn.getUserMdl().setTopMost(b);
     }
 

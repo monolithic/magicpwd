@@ -31,13 +31,13 @@ public class CloudResumeAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F7A41, "确认要执行从云端数据恢复的操作吗，此操作将需要一定的时间？"))
+        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mainPtn, LangRes.P30F7A41, "确认要执行从云端数据恢复的操作吗，此操作将需要一定的时间？"))
         {
             return;
         }
 
         TrayPtn.setDbLocked(true);
-        final LckDialog dialog = new LckDialog(TrayPtn.getCurrForm());
+        final LckDialog dialog = new LckDialog(mainPtn);
         dialog.initView();
         dialog.initLang();
         dialog.initData();
@@ -52,7 +52,7 @@ public class CloudResumeAction extends AMpwdAction
             }
         }.start();
 
-        Util.centerForm(dialog, TrayPtn.getCurrForm());
+        Util.centerForm(dialog, mainPtn);
         dialog.setVisible(true);
     }
 

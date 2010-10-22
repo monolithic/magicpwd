@@ -1357,7 +1357,7 @@ public class MainPtn extends AFrame
     {
         if (gridModified())
         {
-            if (Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", getMeta().getName()) != javax.swing.JOptionPane.YES_OPTION)
+            if (Lang.showFirm(this, LangRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", getMeta().getName()) != javax.swing.JOptionPane.YES_OPTION)
             {
                 return false;
             }
@@ -1445,7 +1445,7 @@ public class MainPtn extends AFrame
             {
                 Lang.showMesg(this, LangRes.P30F7A46, "生成卡片文件失败，请稍后重试！");
             }
-            else if (javax.swing.JOptionPane.YES_OPTION == Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F7A47, "生成卡片文件成功，要打开卡片文件吗？"))
+            else if (javax.swing.JOptionPane.YES_OPTION == Lang.showFirm(this, LangRes.P30F7A47, "生成卡片文件成功，要打开卡片文件吗？"))
             {
                 if (!Desk.open(dstFile))
                 {
@@ -1468,7 +1468,7 @@ public class MainPtn extends AFrame
             mailDlg.initView();
             mailDlg.initLang();
             mailDlg.initData();
-            Util.centerForm(mailDlg, TrayPtn.getCurrForm());
+            Util.centerForm(mailDlg, this);
         }
 
         MailPtn mailPtn = new MailPtn();
@@ -1495,7 +1495,7 @@ public class MainPtn extends AFrame
             Lang.showMesg(this, null, "没有可用的口令类型数据！");
             return;
         }
-        if (javax.swing.JOptionPane.OK_OPTION != javax.swing.JOptionPane.showConfirmDialog(TrayPtn.getCurrForm(), mailPtn, "登录确认", javax.swing.JOptionPane.OK_CANCEL_OPTION))
+        if (javax.swing.JOptionPane.OK_OPTION != javax.swing.JOptionPane.showConfirmDialog(this, mailPtn, "登录确认", javax.swing.JOptionPane.OK_CANCEL_OPTION))
         {
             return;
         }

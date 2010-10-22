@@ -23,12 +23,12 @@ public class ExitAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (mainPtn.gridModified() && javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(TrayPtn.getCurrForm(), LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
+        if (mainPtn.gridModified() && javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mainPtn, LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
         {
             return;
         }
 
-        TrayPtn.getCurrForm().setVisible(false);
+        mainPtn.setVisible(false);
         TrayPtn.endSave();
         System.exit(0);
     }

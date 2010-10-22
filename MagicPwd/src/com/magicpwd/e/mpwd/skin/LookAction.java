@@ -10,7 +10,6 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd.__a.mpwd.AMpwdAction;
-import com.magicpwd.v.TrayPtn;
 
 /**
  *
@@ -68,7 +67,7 @@ public class LookAction extends AMpwdAction
         mainPtn.getUserMdl().setCfg(ConsCfg.CFG_SKIN_NAME, name);
         mainPtn.getUserMdl().setCfg(ConsCfg.CFG_SKIN_DECO, deco);
 
-        Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30FAA1B, "新外观将在重启后生效！\n注意：一些外观可能造成性能问题，如果您觉得所选择的外观使系统运行变慢，\n　　　请选择使用“默认”或“系统”外观！");
+        Lang.showMesg(mainPtn, LangRes.P30FAA1B, "新外观将在重启后生效！\n注意：一些外观可能造成性能问题，如果您觉得所选择的外观使系统运行变慢，\n　　　请选择使用“默认”或“系统”外观！");
     }
 
     @Override
