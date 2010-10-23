@@ -15,7 +15,7 @@ import com.magicpwd.v.TrayPtn;
 public abstract class ATrayAction extends AAction implements ITrayAction
 {
 
-    private TrayPtn trayPtn;
+    protected TrayPtn trayPtn;
 
     @Override
     public void setTrayPtn(TrayPtn trayPtn)

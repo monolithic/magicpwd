@@ -4,7 +4,7 @@
  */
 package com.magicpwd.e;
 
-import com.magicpwd.__a.AAction;
+import com.magicpwd.__a.tray.ATrayAction;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd.v.TrayPtn;
 
@@ -12,7 +12,7 @@ import com.magicpwd.v.TrayPtn;
  *
  * @author aven
  */
-public class MpayAction extends AAction
+public class MpayAction extends ATrayAction
 {
 
     public MpayAction()

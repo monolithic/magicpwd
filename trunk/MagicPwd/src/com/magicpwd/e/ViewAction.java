@@ -4,14 +4,14 @@
  */
 package com.magicpwd.e;
 
-import com.magicpwd.__a.AAction;
+import com.magicpwd.__a.tray.ATrayAction;
 import com.magicpwd.v.TrayPtn;
 
 /**
  *
  * @author aven
  */
-public class ViewAction extends AAction
+public class ViewAction extends ATrayAction
 {
 
     public ViewAction()
