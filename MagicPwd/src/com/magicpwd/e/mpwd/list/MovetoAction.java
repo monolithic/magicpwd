@@ -26,7 +26,7 @@ public class MovetoAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        DatDialog dat = new DatDialog(mainPtn.getTreeMdl(), new IBackCall()
+        DatDialog dat = new DatDialog(mainPtn, new IBackCall()
         {
 
             @Override
@@ -37,7 +37,7 @@ public class MovetoAction extends AMpwdAction
         });
         dat.initView();
         dat.initLang();
-        dat.setTitle(Lang.getLang(LangRes.P30F4206, "把记录迁移到..."));
+        dat.initData();
         dat.setVisible(true);
     }
 

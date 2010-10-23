@@ -92,6 +92,8 @@ public class DatDialog extends javax.swing.JDialog
         Lang.setWText(bt_Update, LangRes.P30FA50A, "确定(@O)");
 
         Lang.setWText(bt_Cancel, LangRes.P30FA50B, "取消(@C)");
+
+        setTitle(Lang.getLang(LangRes.P30F4206, "把记录迁移到..."));
     }
 
     public void initData()

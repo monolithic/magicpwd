@@ -189,10 +189,11 @@ public class LogoBean extends javax.swing.JPanel implements IEditBean, IBackCall
 
     private void ib_PropDataActionPerformed(java.awt.event.ActionEvent evt)
     {
-        IcoDialog ico = new IcoDialog(this);
+        IcoDialog ico = new IcoDialog(mainPtn, this);
         ico.initView();
         ico.initLang();
-        ico.initData(itemData.getName());
+        ico.initData();
+        ico.showData(itemData.getName());
         ico.setVisible(true);
     }
     private javax.swing.JLabel lb_PropEdit;
