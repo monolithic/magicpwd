@@ -4,18 +4,17 @@
  */
 package com.magicpwd.e;
 
-import com.magicpwd.__a.AAction;
+import com.magicpwd.__a.tray.ATrayAction;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd.v.TrayPtn;
 
 /**
  *
  * @author Amon
  */
-public class MlogAction extends AAction
+public class MlogAction extends ATrayAction
 {
 
     public MlogAction()
@@ -27,7 +26,7 @@ public class MlogAction extends AAction
     {
         if (!java.awt.Desktop.isDesktopSupported())
         {
-            Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A0F, "");
+            Lang.showMesg(trayPtn.getCurrForm(), LangRes.P30F7A0F, "");
         }
 
         try

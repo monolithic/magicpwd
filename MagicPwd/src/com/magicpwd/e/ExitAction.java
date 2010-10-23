@@ -4,14 +4,14 @@
  */
 package com.magicpwd.e;
 
-import com.magicpwd.__a.AAction;
+import com.magicpwd.__a.tray.ATrayAction;
 import com.magicpwd.v.TrayPtn;
 
 /**
  *
- * @author Administrator
+ * @author Amon
  */
-public class ExitAction extends AAction
+public class ExitAction extends ATrayAction
 {
 
     public ExitAction()
@@ -21,10 +21,9 @@ public class ExitAction extends AAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        javax.swing.JFrame frame = TrayPtn.getCurrForm();
-        if (frame != null)
+        if (trayPtn.getCurrForm() != null)
         {
-            frame.setVisible(false);
+            trayPtn.getCurrForm().setVisible(false);
         }
         TrayPtn.endSave();
         System.exit(0);
