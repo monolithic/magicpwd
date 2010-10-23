@@ -1,5 +1,6 @@
 package com.magicpwd.x;
 
+import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
@@ -9,7 +10,6 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.r.AmonFF;
-import com.magicpwd.v.TrayPtn;
 
 /**
  * 图标管理对话窗口
@@ -21,11 +21,13 @@ public class IcoDialog extends javax.swing.JDialog
     private IcoModel icoModel;
     private java.io.File filePath;
     private java.io.File iconPath;
+    private AFrame formPtn;
     private IBackCall backCall;
 
-    public IcoDialog(IBackCall backCall)
+    public IcoDialog(AFrame formPtn, IBackCall backCall)
     {
-        super(TrayPtn.getCurrForm(), true);
+        super(formPtn, true);
+        this.formPtn = formPtn;
         this.backCall = backCall;
         this.iconPath = Util.icoPath;
     }
@@ -94,7 +96,7 @@ public class IcoDialog extends javax.swing.JDialog
         this.setIconImage(Bean.getLogo(16));
         this.setResizable(false);
         this.pack();
-        Util.centerForm(this, TrayPtn.getCurrForm());
+        Util.centerForm(this, formPtn);
     }
 
     public void initLang()

@@ -7,7 +7,7 @@ import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.r.KindTN;
-import com.magicpwd.v.TrayPtn;
+import com.magicpwd.v.mpwd.MainPtn;
 
 /**
  * 数据迁移对话窗口
@@ -16,14 +16,13 @@ import com.magicpwd.v.TrayPtn;
 public class DatDialog extends javax.swing.JDialog
 {
 
+    private MainPtn mainPtn;
     private IBackCall backCall;
-    private javax.swing.tree.TreeModel treeModel;
 
-    public DatDialog(javax.swing.tree.TreeModel treeModel, IBackCall backCall)
+    public DatDialog(MainPtn mainPtn, IBackCall backCall)
     {
-        super(TrayPtn.getCurrForm(), true);
+        super(mainPtn, true);
         this.backCall = backCall;
-        this.treeModel = treeModel;
     }
 
     public void initView()
@@ -33,7 +32,7 @@ public class DatDialog extends javax.swing.JDialog
         bt_Update = new javax.swing.JButton();
 
         javax.swing.JScrollPane sp_KindList = new javax.swing.JScrollPane();
-        tr_KindList.setModel(treeModel);
+        tr_KindList.setModel(mainPtn.getTreeMdl());
         sp_KindList.setViewportView(tr_KindList);
 
         bt_Cancel.addActionListener(new java.awt.event.ActionListener()
@@ -85,7 +84,7 @@ public class DatDialog extends javax.swing.JDialog
         this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         this.setIconImage(Bean.getLogo(16));
         this.pack();
-        Util.centerForm(this, TrayPtn.getCurrForm());
+        Util.centerForm(this, mainPtn);
     }
 
     public void initLang()
