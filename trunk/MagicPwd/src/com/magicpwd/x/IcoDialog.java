@@ -108,7 +108,7 @@ public class IcoDialog extends javax.swing.JDialog
         this.setTitle(Lang.getLang(LangRes.P30FA50F, "徽标"));
     }
 
-    public void initData(final String lastIcon)
+    public void initData()
     {
         if (icoModel == null)
         {
@@ -153,6 +153,10 @@ public class IcoDialog extends javax.swing.JDialog
                 columns.nextElement().setCellRenderer(renderer);
             }
         }
+    }
+
+    public void showData(final String lastIcon)
+    {
         javax.swing.SwingUtilities.invokeLater(new Runnable()
         {
 
