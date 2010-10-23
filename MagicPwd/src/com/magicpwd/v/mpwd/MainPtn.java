@@ -1557,7 +1557,7 @@ public class MainPtn extends AFrame
     {
         if (cfgForm == null)
         {
-            cfgForm = new MdiDialog(userMdl);
+            cfgForm = new MdiDialog(this);
             cfgForm.initView();
             cfgForm.initLang();
             cfgForm.initData();
