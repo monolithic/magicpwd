@@ -5,7 +5,6 @@
 package com.magicpwd.e;
 
 import com.magicpwd.__a.tray.ATrayAction;
-import com.magicpwd.v.TrayPtn;
 
 /**
  *
@@ -21,7 +20,7 @@ public class ViewAction extends ATrayAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        TrayPtn.getInstance().changeView();
+        trayPtn.changeView();
     }
 
     @Override

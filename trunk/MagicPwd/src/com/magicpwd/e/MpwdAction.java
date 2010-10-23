@@ -6,7 +6,6 @@ package com.magicpwd.e;
 
 import com.magicpwd.__a.tray.ATrayAction;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd.v.TrayPtn;
 
 /**
  *
@@ -22,7 +21,7 @@ public class MpwdAction extends ATrayAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        TrayPtn.getInstance().showViewPtn(ConsEnv.VIEW_MAIN);
+        trayPtn.showViewPtn(ConsEnv.VIEW_MAIN);
     }
 
     @Override

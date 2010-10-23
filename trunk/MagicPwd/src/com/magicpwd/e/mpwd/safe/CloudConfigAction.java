@@ -10,7 +10,6 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd.v.TrayPtn;
 
 /**
  *
@@ -26,7 +25,7 @@ public class CloudConfigAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        TrayPtn.getUserPtn(ConsEnv.INT_SIGN_CS, new IBackCall()
+        trayPtn.getUserPtn(ConsEnv.INT_SIGN_CS, new IBackCall()
         {
 
             @Override

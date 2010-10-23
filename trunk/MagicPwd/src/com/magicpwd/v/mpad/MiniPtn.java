@@ -37,9 +37,10 @@ public class MiniPtn extends AFrame
     private WTextBox nameBox;
     private WTextBox dataBox;
 
-    public MiniPtn(UserMdl coreMdl)
+    public MiniPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
-        this.userMdl = coreMdl;
+        super(trayPtn);
+        this.userMdl = userMdl;
     }
 
     public void initView()
@@ -212,7 +213,7 @@ public class MiniPtn extends AFrame
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 setVisible(false);
-                TrayPtn.getInstance().showViewPtn(ConsEnv.VIEW_MAIN);
+                trayPtn.showViewPtn(ConsEnv.VIEW_MAIN);
             }
         };
         Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK | java.awt.event.InputEvent.ALT_DOWN_MASK), action, "showMainPtn", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);

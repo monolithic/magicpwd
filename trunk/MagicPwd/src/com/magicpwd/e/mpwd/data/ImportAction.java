@@ -9,7 +9,6 @@ import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
-import com.magicpwd.v.TrayPtn;
 
 /**
  *
@@ -32,7 +31,7 @@ public class ImportAction extends AMpwdAction
             return;
         }
 
-        TrayPtn.getUserPtn(ConsEnv.INT_SIGN_RS, new IBackCall()
+        trayPtn.getUserPtn(ConsEnv.INT_SIGN_RS, new IBackCall()
         {
 
             @Override
