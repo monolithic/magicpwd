@@ -62,7 +62,7 @@ public abstract class SafeMdl
             try
             {
                 dCipher = javax.crypto.Cipher.getInstance(ConsEnv.NAME_CIPHER);
-                dCipher.init(javax.crypto.Cipher.DECRYPT_MODE, getSafeKey());
+                dCipher.init(javax.crypto.Cipher.DECRYPT_MODE, safeKey);
             }
             catch (Exception exp)
             {
@@ -84,7 +84,7 @@ public abstract class SafeMdl
             try
             {
                 eCipher = javax.crypto.Cipher.getInstance(ConsEnv.NAME_CIPHER);
-                eCipher.init(javax.crypto.Cipher.ENCRYPT_MODE, getSafeKey());
+                eCipher.init(javax.crypto.Cipher.ENCRYPT_MODE, safeKey);
             }
             catch (Exception exp)
             {
@@ -103,7 +103,7 @@ public abstract class SafeMdl
      */
     public String deCrypt(String text) throws Exception
     {
-        return new String(getDCipher().doFinal(Util.stringToBytes(text, getSafeKey().getMask())), ConsEnv.FILE_ENCODING);
+        return new String(getDCipher().doFinal(Util.stringToBytes(text, safeKey.getMask())), ConsEnv.FILE_ENCODING);
     }
 
     /**
@@ -137,7 +137,7 @@ public abstract class SafeMdl
      */
     public String enCrypt(String text) throws Exception
     {
-        return Util.bytesToString(getECipher().doFinal(text.getBytes(ConsEnv.FILE_ENCODING)), getSafeKey().getMask());
+        return Util.bytesToString(getECipher().doFinal(text.getBytes(ConsEnv.FILE_ENCODING)), safeKey.getMask());
     }
 
     /**
@@ -254,11 +254,6 @@ public abstract class SafeMdl
         safeKey.setName(userName);
         safeKey.setPwds(userPwds);
         return safeKey.signUp();
-    }
-
-    public SafeKey getSafeKey()
-    {
-        return safeKey;
     }
 
     public boolean hasSkey()

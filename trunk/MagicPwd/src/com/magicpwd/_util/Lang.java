@@ -6,12 +6,10 @@ package com.magicpwd._util;
 
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.IcoLabel;
-import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd.m.UserMdl;
 import java.awt.Component;
-import java.util.Locale;
 import java.util.Properties;
 import javax.swing.AbstractButton;
 import javax.swing.JComponent;
@@ -35,37 +33,44 @@ public class Lang
 
     public static boolean loadLang(UserMdl userMdl)
     {
-        try
+        if (lang == null)
         {
-            String name = userMdl.getCfg(ConsCfg.CFG_LANG, "");
-            if (!Char.isValidate(name))
-            {
-                Locale locale = Locale.getDefault();
-                name = locale.getLanguage() + "_" + locale.getCountry();
-            }
-            name = '_' + name;
-            java.io.File file;
-            while (true)
-            {
-                file = new java.io.File(ConsEnv.DIR_LANG, "lang" + name + ".properties");
-                if (file.exists() && file.isFile() && file.canRead())
-                {
-                    break;
-                }
-                name = name.substring(0, name.lastIndexOf("_"));
-            }
-
             lang = new Properties();
-            if (file != null)
+        }
+
+        if (UserMdl.getRunMode() != ConsEnv.RUN_MODE_WEB)
+        {
+            java.io.FileInputStream fis = null;
+            try
             {
-                lang.load(new java.io.FileInputStream(file));
-                tips = lang.getProperty(LangRes.P30FA208);
+                String name = '_' + userMdl.getLang();
+                java.io.File file = null;
+                while (name.length() > 0)
+                {
+                    file = new java.io.File(ConsEnv.DIR_LANG, "lang" + name + ".properties");
+                    if (file.exists() && file.isFile() && file.canRead())
+                    {
+                        break;
+                    }
+                    name = name.substring(0, name.lastIndexOf("_"));
+                }
+
+                if (file != null)
+                {
+                    fis = new java.io.FileInputStream(file);
+                    lang.load(fis);
+                }
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+            finally
+            {
+                Bean.closeStream(fis);
             }
         }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-        }
+        tips = lang.getProperty(LangRes.P30FA208);
         if (tips == null)
         {
             tips = "友情提示";

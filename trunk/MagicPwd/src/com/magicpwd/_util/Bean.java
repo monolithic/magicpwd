@@ -327,6 +327,11 @@ public class Bean
 
     public static void loadLnF(UserMdl userMdl)
     {
+        if (UserMdl.getRunMode() == ConsEnv.RUN_MODE_CMD)
+        {
+            return;
+        }
+
         boolean deco = ConsCfg.DEF_TRUE.equalsIgnoreCase(userMdl.getCfg(ConsCfg.CFG_SKIN_DECO, ConsCfg.DEF_FALSE));
         javax.swing.JFrame.setDefaultLookAndFeelDecorated(deco);
         javax.swing.JDialog.setDefaultLookAndFeelDecorated(deco);

@@ -20,6 +20,7 @@ public class UserMdl
     private static byte runMode;
     private static byte appMode;
     private boolean topMost;
+    private String userName;
     private java.util.Properties userCfg;
     private CboxMdl cboxMdl;
     private CharMdl charMdl;
@@ -59,10 +60,6 @@ public class UserMdl
     public static void setAppMode(byte appMode)
     {
         UserMdl.appMode = appMode;
-    }
-
-    public void loadPre()
-    {
     }
 
     public final void loadCfg()
@@ -126,17 +123,24 @@ public class UserMdl
 
     public final String getCfg(String key)
     {
-        return userCfg.getProperty(key);
+        return getCfg(key, null);
     }
 
     public final String getCfg(String key, String def)
     {
-        return userCfg.getProperty(key, def);
+        if (!Char.isValidate(key))
+        {
+            return def;
+        }
+        return userCfg.getProperty(Char.format(key, userName), def);
     }
 
     public final void setCfg(String key, String value)
     {
-        userCfg.setProperty(key, value);
+        if (Char.isValidate(key))
+        {
+            userCfg.setProperty(Char.format(key, userName), value);
+        }
     }
 
     /**
@@ -439,8 +443,8 @@ public class UserMdl
         String lang = userCfg.getProperty(ConsCfg.CFG_LANG);
         if (!Char.isValidate(lang))
         {
-            lang = System.getProperty("user.language");
-            String country = System.getProperty("user.country");
+            lang = System.getProperty("user.language");//Locale.getDefault().getLanguage();
+            String country = System.getProperty("user.country");//Locale.getDefault().getCountry();
             if (Char.isValidate(country))
             {
                 lang += '_' + country;
@@ -532,5 +536,21 @@ public class UserMdl
     public void setHintMdl(HintMdl hintMdl)
     {
         this.hintMdl = hintMdl;
+    }
+
+    /**
+     * @return the userName
+     */
+    public String getUserName()
+    {
+        return userName;
+    }
+
+    /**
+     * @param userName the userName to set
+     */
+    public void setUserName(String userName)
+    {
+        this.userName = userName;
     }
 }

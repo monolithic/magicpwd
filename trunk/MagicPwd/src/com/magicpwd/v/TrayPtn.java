@@ -448,14 +448,11 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
 
             // 用户配置文件加载
             userMdl.loadCfg();
-
-            // 语言资源加载
-            Lang.loadLang(userMdl);
         }
-    }
 
-    public void loadLnf()
-    {
+        // 语言资源加载
+        Lang.loadLang(userMdl);
+
         // 扩展皮肤加载
         Bean.loadLnF(userMdl);
     }
@@ -473,8 +470,6 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
 
         Bean.getNone();
         Bean.getLogo(16);
-
-        userMdl.loadPre();
 
         // 扩展库加载
         java.io.File file = new java.io.File(ConsEnv.DIR_EXT);

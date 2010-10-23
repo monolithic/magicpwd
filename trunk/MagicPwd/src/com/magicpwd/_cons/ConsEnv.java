@@ -185,11 +185,15 @@ public interface ConsEnv
     /**
      * 程序运行模式：独立程序
      */
-    int MODE_RUN_APP = 0;
+    byte RUN_MODE_APP = 0;
     /**
      * 程序运行模式：网络加载
      */
-    int MODE_RUN_WEB = 1;
+    byte RUN_MODE_WEB = 1;
+    /**
+     * 程序运行模式：命令模式
+     */
+    byte RUN_MODE_CMD = 2;
     int VIEW_MAIN = 0;
     int VIEW_NORM = 1;
     int VIEW_MINI = 2;
