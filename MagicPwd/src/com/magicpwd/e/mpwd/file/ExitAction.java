@@ -7,7 +7,6 @@ package com.magicpwd.e.mpwd.file;
 import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
-import com.magicpwd.v.TrayPtn;
 
 /**
  *
@@ -29,7 +28,7 @@ public class ExitAction extends AMpwdAction
         }
 
         mainPtn.setVisible(false);
-        TrayPtn.endSave();
+        trayPtn.endSave();
         System.exit(0);
     }
 

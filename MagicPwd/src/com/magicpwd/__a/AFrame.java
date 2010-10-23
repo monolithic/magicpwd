@@ -19,12 +19,14 @@ import com.magicpwd.v.TrayPtn;
 public abstract class AFrame extends javax.swing.JFrame
 {
 
+    protected TrayPtn trayPtn;
     protected UserMdl userMdl;
     protected SafeMdl safeMdl;
     private java.util.HashMap<String, javax.swing.Icon> iconMap;
 
-    public AFrame()
+    public AFrame(TrayPtn trayPtn)
     {
+        this.trayPtn = trayPtn;
         Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ENTER, java.awt.event.InputEvent.CTRL_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK), null, "safe", javax.swing.JComponent.WHEN_FOCUSED);
     }
 
@@ -74,7 +76,7 @@ public abstract class AFrame extends javax.swing.JFrame
     {
         setExtendedState(ICONIFIED);
         setVisible(false);
-        TrayPtn.getInstance().showTips(Lang.getLang(LangRes.P30F9A01, "友情提示"), Lang.getLang(LangRes.P30F7A43, "魔方密码仍在运行中，您可以通过双击此处显示主窗口！"));
+        trayPtn.showTips(Lang.getLang(LangRes.P30F9A01, "友情提示"), Lang.getLang(LangRes.P30F7A43, "魔方密码仍在运行中，您可以通过双击此处显示主窗口！"));
         endSave();
     }
 
@@ -94,7 +96,7 @@ public abstract class AFrame extends javax.swing.JFrame
             {
                 return;
             }
-            TrayPtn.endSave();
+            trayPtn.endSave();
         }
         super.processWindowEvent(e);
     }

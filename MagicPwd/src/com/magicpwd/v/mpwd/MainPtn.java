@@ -82,8 +82,9 @@ public class MainPtn extends AFrame
     private GridMdl gridMdl;
     private MpwdMdl mpwdMdl;
 
-    public MainPtn(UserMdl userMdl)
+    public MainPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
+        super(trayPtn);
         this.userMdl = userMdl;
     }
 
@@ -850,12 +851,12 @@ public class MainPtn extends AFrame
                 return;
             }
             setVisible(false);
-            TrayPtn.endSave();
+            trayPtn.endSave();
         }
         else if (e.getID() == java.awt.event.WindowEvent.WINDOW_ICONIFIED)
         {
             setVisible(false);
-            TrayPtn.getInstance().showTips(Lang.getLang(LangRes.P30F9A01, "友情提示"), Lang.getLang(LangRes.P30F7A43, "魔方密码仍在运行中，您可以通过双击此处显示主窗口！"));
+            trayPtn.showTips(Lang.getLang(LangRes.P30F9A01, "友情提示"), Lang.getLang(LangRes.P30F7A43, "魔方密码仍在运行中，您可以通过双击此处显示主窗口！"));
             endSave();
         }
         super.processWindowEvent(e);

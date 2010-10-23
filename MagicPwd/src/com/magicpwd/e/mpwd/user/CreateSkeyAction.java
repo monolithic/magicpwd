@@ -11,7 +11,6 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
-import com.magicpwd.v.TrayPtn;
 
 /**
  *
@@ -33,7 +32,7 @@ public class CreateSkeyAction extends AMpwdAction
             return;
         }
 
-        TrayPtn.getUserPtn(ConsEnv.INT_SIGN_SK, new IBackCall()
+        trayPtn.getUserPtn(ConsEnv.INT_SIGN_SK, new IBackCall()
         {
 
             @Override

@@ -44,6 +44,7 @@ public class UserPtn extends javax.swing.JPanel
      * 导航图标
      */
     private static javax.swing.Icon guidIcon;
+    private TrayPtn trayPtn;
     private SafeMdl safeMdl;
     private UserMdl userMdl;
 
@@ -51,8 +52,9 @@ public class UserPtn extends javax.swing.JPanel
      * 独立窗口
      * @param type
      */
-    public UserPtn(UserMdl userMdl, SafeMdl safeMdl)
+    public UserPtn(TrayPtn trayPtn, UserMdl userMdl, SafeMdl safeMdl)
     {
+        this.trayPtn = trayPtn;
         this.userMdl = userMdl;
         this.safeMdl = safeMdl;
         frame = new javax.swing.JFrame();
@@ -1289,7 +1291,7 @@ public class UserPtn extends javax.swing.JPanel
             backCall.callBack(null, null, ConsEnv.STR_SIGN_FP, sb.toString());
         }
         Lang.showMesg(null, LangRes.P30FAA18, "您的新口令是：{0}\n为了您的安全，请登录软件后尽快修改您的口令。", sb.toString());
-        TrayPtn.getInstance().showViewPtn(ConsEnv.VIEW_MAIN);
+        trayPtn.showViewPtn(ConsEnv.VIEW_MAIN);
     }
 
     /**

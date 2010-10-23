@@ -5,7 +5,6 @@
 package com.magicpwd.e.mpad;
 
 import com.magicpwd.__a.mpad.AMpadAction;
-import com.magicpwd.v.TrayPtn;
 
 /**
  *
@@ -21,7 +20,7 @@ public class ExitAction extends AMpadAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        TrayPtn.endSave();
+        trayPtn.endSave();
     }
 
     @Override

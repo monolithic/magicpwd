@@ -5,6 +5,7 @@
 package com.magicpwd.__a;
 
 import com.magicpwd.__i.IAction;
+import com.magicpwd.v.TrayPtn;
 import java.beans.PropertyChangeListener;
 
 /**
@@ -14,9 +15,16 @@ import java.beans.PropertyChangeListener;
 public abstract class AAction implements IAction
 {
 
+    protected TrayPtn trayPtn;
     protected boolean enabled = true;
     protected boolean visible = true;
     protected boolean selected = false;
+
+    @Override
+    public void setTrayPtn(TrayPtn trayPtn)
+    {
+        this.trayPtn = trayPtn;
+    }
 
     @Override
     public boolean isEnabled()

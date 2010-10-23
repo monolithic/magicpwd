@@ -81,7 +81,7 @@ public class CloudResumeAction extends AMpwdAction
 
             String[] data = docs.split("\n");
 
-            TrayPtn.endSave();
+            trayPtn.endSave();
             Connect connect = new Connect(data[0], data[2]);
             connect.setUsername(data[1]);
             if (!connect.useDefault())

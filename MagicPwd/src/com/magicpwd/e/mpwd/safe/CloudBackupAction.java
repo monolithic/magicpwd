@@ -79,7 +79,7 @@ public class CloudBackupAction extends AMpwdAction
 
             String[] data = docs.split("\n");
 
-            java.io.File bakFile = TrayPtn.endSave();
+            java.io.File bakFile = trayPtn.endSave();
             if (bakFile == null || !bakFile.exists() || !bakFile.canRead())
             {
                 dialog.setVisible(false);

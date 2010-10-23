@@ -7,7 +7,6 @@ package com.magicpwd.e.mpwd.user;
 import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd.v.TrayPtn;
 import java.util.EventListener;
 
 /**
@@ -24,7 +23,7 @@ public class ChangePkeyAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        TrayPtn.getUserPtn(ConsEnv.INT_SIGN_PK, new IBackCall()
+        trayPtn.getUserPtn(ConsEnv.INT_SIGN_PK, new IBackCall()
         {
 
             @Override

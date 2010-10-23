@@ -39,6 +39,8 @@ public class MagicPwd
         // 数据完整性处理
         zipData();
 
+        final TrayPtn trayPtn = new TrayPtn();
+
         try
         {
             javax.swing.SwingUtilities.invokeLater(new Runnable()
@@ -48,9 +50,9 @@ public class MagicPwd
                 public void run()
                 {
                     // 加载用户配置
-                    TrayPtn.getInstance().loadCfg();
+                    trayPtn.loadCfg();
 
-                    TrayPtn.getInstance().showViewPtn(ConsEnv.VIEW_MAIN);
+                    trayPtn.showViewPtn(ConsEnv.VIEW_MAIN);
                 }
             });
         }
@@ -59,7 +61,7 @@ public class MagicPwd
             Logs.exception(exp);
         }
 
-        TrayPtn.getInstance().loadPre();
+        trayPtn.loadPre();
     }
 
     private static void zipData()

@@ -6,7 +6,9 @@ package com.magicpwd.v.mwiz;
 
 import com.magicpwd.__a.AFrame;
 import com.magicpwd._util.Bean;
+import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.MenuPtn;
+import com.magicpwd.v.TrayPtn;
 
 /**
  * 向导模式
@@ -17,8 +19,9 @@ public class NormPtn extends AFrame
 
     private MenuPtn menuPtn;
 
-    public NormPtn()
+    public NormPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
+        super(trayPtn);
     }
 
     public void initView()
