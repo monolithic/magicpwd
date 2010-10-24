@@ -213,7 +213,7 @@ public class MiniPtn extends AFrame
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 setVisible(false);
-                trayPtn.showViewPtn(ConsEnv.VIEW_MAIN);
+                trayPtn.showViewPtn(ConsEnv.APP_MODE_MPWD);
             }
         };
         Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK | java.awt.event.InputEvent.ALT_DOWN_MASK), action, "showMainPtn", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);

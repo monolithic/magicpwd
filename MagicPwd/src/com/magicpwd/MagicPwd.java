@@ -1,10 +1,12 @@
 package com.magicpwd;
 
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._util.Bean;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.m.UserMdl;
+import com.magicpwd.r.AmonFF;
 import com.magicpwd.v.TrayPtn;
 
 /**
@@ -39,7 +41,11 @@ public class MagicPwd
         // 数据完整性处理
         zipData();
 
-        final TrayPtn trayPtn = new TrayPtn();
+        // 用户配置文件加载
+        final UserMdl userMdl = new UserMdl();
+        userMdl.loadCfg();
+
+        final TrayPtn trayPtn = new TrayPtn(userMdl);
 
         try
         {
@@ -49,10 +55,13 @@ public class MagicPwd
                 @Override
                 public void run()
                 {
-                    // 加载用户配置
-                    trayPtn.loadCfg();
+                    // 语言资源加载
+                    Lang.loadLang(userMdl);
 
-                    trayPtn.showViewPtn(ConsEnv.VIEW_MAIN);
+                    // 扩展皮肤加载
+                    Bean.loadLnF(userMdl);
+
+                    trayPtn.showViewPtn(ConsEnv.APP_MODE_MPWD);
                 }
             });
         }
@@ -61,7 +70,7 @@ public class MagicPwd
             Logs.exception(exp);
         }
 
-        trayPtn.loadPre();
+        loadPre();
     }
 
     private static void zipData()
@@ -74,6 +83,40 @@ public class MagicPwd
         {
             Logs.exception(exp);
             Lang.showMesg(null, null, exp.getLocalizedMessage());
+        }
+    }
+
+    private static void loadPre()
+    {
+        try
+        {
+            Class.forName("org.hsqldb.jdbcDriver");
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+
+        Bean.getNone();
+        Bean.getLogo(16);
+
+        // 扩展库加载
+        java.io.File file = new java.io.File(ConsEnv.DIR_EXT);
+        if (file != null && file.exists() && file.isDirectory() && file.canRead())
+        {
+            java.io.File jars[] = file.listFiles(new AmonFF(".+\\.jar$", true));
+            if (jars != null && jars.length > 0)
+            {
+                try
+                {
+                    // 加载扩展库
+                    Bean.loadJar(jars);
+                }
+                catch (Exception exp)
+                {
+                    Logs.exception(exp);
+                }
+            }
         }
     }
 }

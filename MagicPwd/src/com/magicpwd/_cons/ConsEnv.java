@@ -185,18 +185,18 @@ public interface ConsEnv
     /**
      * 程序运行模式：独立程序
      */
-    byte RUN_MODE_APP = 0;
+    int RUN_MODE_APP = 0;
     /**
      * 程序运行模式：网络加载
      */
-    byte RUN_MODE_WEB = 1;
+    int RUN_MODE_WEB = 1;
     /**
      * 程序运行模式：命令模式
      */
-    byte RUN_MODE_CMD = 2;
-    int VIEW_MAIN = 0;
-    int VIEW_NORM = 1;
-    int VIEW_MINI = 2;
+    int RUN_MODE_CMD = 2;
+    int APP_MODE_MPWD = 0;
+    int APP_MODE_MWIZ = 1;
+    int APP_MODE_MPAD = 2;
     String CHAR_ALT_KEY = "@";
     String SKIN_FEEL_DEFAULT = "default";
     String SKIN_LOOK_DEFAULT = "default";

@@ -25,7 +25,6 @@ import com.magicpwd._util.Util;
 
 /**
  * @author Amon
- * 
  */
 final class SafeKey implements Key
 {

@@ -8,7 +8,7 @@ package com.magicpwd.m.mpad;
  *
  * @author Amon
  */
-public class MpadMdl
+public final class MpadMdl
 {
 
     private NoteMdl noteMdl;

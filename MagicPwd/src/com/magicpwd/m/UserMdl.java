@@ -17,14 +17,15 @@ import com.magicpwd._util.Logs;
 public class UserMdl
 {
 
-    private static byte runMode;
-    private static byte appMode;
+    private static int runMode = 0;
+    private static int appMode = 1;
     private boolean topMost;
     private String userName;
     private java.util.Properties userCfg;
     private CboxMdl cboxMdl;
     private CharMdl charMdl;
     private HintMdl hintMdl;
+    SafeKey safeKey;
 
     public UserMdl()
     {
@@ -33,7 +34,7 @@ public class UserMdl
     /**
      * @return the runMode
      */
-    public static byte getRunMode()
+    public static int getRunMode()
     {
         return runMode;
     }
@@ -41,7 +42,7 @@ public class UserMdl
     /**
      * @param runMode the runMode to set
      */
-    public static void setRunMode(byte runMode)
+    public static void setRunMode(int runMode)
     {
         UserMdl.runMode = runMode;
     }
@@ -49,7 +50,7 @@ public class UserMdl
     /**
      * @return the appMode
      */
-    public static byte getAppMode()
+    public static int getAppMode()
     {
         return appMode;
     }
@@ -57,7 +58,7 @@ public class UserMdl
     /**
      * @param appMode the appMode to set
      */
-    public static void setAppMode(byte appMode)
+    public static void setAppMode(int appMode)
     {
         UserMdl.appMode = appMode;
     }
@@ -83,6 +84,8 @@ public class UserMdl
         {
             Bean.closeStream(fis);
         }
+
+        safeKey = new SafeKey(this);
     }
 
     public final void saveCfg()
@@ -552,5 +555,102 @@ public class UserMdl
     public void setUserName(String userName)
     {
         this.userName = userName;
+    }
+
+    /**
+     * 用户登录
+     * @param userName
+     * @param userPwds
+     * @param userSalt
+     * @throws Exception
+     */
+    public boolean signIn(String userName, String userPwds) throws Exception
+    {
+        safeKey.setName(userName);
+        safeKey.setPwds(userPwds);
+        return safeKey.signIn();
+    }
+
+    public boolean signPb(String userName, String userPwds) throws Exception
+    {
+        safeKey.setName(userName);
+        safeKey.setPwds(userPwds);
+        return safeKey.signPb();
+    }
+
+    /**
+     * 修改登录口令
+     * @param oldPwds
+     * @param userPwds
+     * @throws Exception
+     */
+    public boolean signPk(String oldPwds, String newPwds) throws Exception
+    {
+        if (safeKey == null)
+        {
+            return false;
+        }
+        return safeKey.signPk(oldPwds, newPwds);
+    }
+
+    /**
+     * 口令找回
+     *
+     * @param secPwds
+     * @return
+     * @throws Exception
+     */
+    public boolean signFp(String usrName, StringBuffer secPwds) throws Exception
+    {
+        if (safeKey == null)
+        {
+            return false;
+        }
+        return safeKey.signFp(usrName, secPwds);
+    }
+
+    /**
+     * 设置安全口令
+     * @param secPwds
+     * @return
+     * @throws java.lang.Exception
+     */
+    public boolean signSk(String oldPwds, String secPwds) throws Exception
+    {
+        if (safeKey == null)
+        {
+            return false;
+        }
+        return safeKey.signSk(oldPwds, secPwds);
+    }
+
+    /**
+     * 用户注销
+     * @param userName
+     * @param userPwds
+     * @throws Exception
+     */
+    public boolean signOx(String userName, String userPwds)
+    {
+        return safeKey.signOx();
+    }
+
+    /**
+     * 用户注册
+     * @param userName
+     * @param userPwds
+     * @return
+     * @throws Exception
+     */
+    public boolean signUp(String userName, String userPwds) throws Exception
+    {
+        safeKey.setName(userName);
+        safeKey.setPwds(userPwds);
+        return safeKey.signUp();
+    }
+
+    public boolean hasSkey()
+    {
+        return safeKey.hasSkey();
     }
 }

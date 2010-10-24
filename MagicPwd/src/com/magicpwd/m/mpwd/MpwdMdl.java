@@ -13,7 +13,7 @@ import com.magicpwd.r.KindTN;
  *
  * @author Amon
  */
-public class MpwdMdl extends UserMdl
+public final class MpwdMdl extends UserMdl
 {
 
     private ListMdl listMdl;
