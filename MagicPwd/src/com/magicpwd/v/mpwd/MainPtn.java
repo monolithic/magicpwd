@@ -96,7 +96,7 @@ public class MainPtn extends AFrame
         try
         {
             java.io.File file = new java.io.File(userMdl.getDataDir(), "mpwd.xml");
-            menuPtn = new MenuPtn(this);
+            menuPtn = new MenuPtn(trayPtn);
             menuPtn.loadData(file);
         }
         catch (Exception exp)

@@ -4,7 +4,6 @@
  */
 package com.magicpwd.v;
 
-import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IAction;
 import com.magicpwd.__i.mpwd.IMpwdAction;
 import com.magicpwd._comp.WButtonGroup;
@@ -17,6 +16,7 @@ import com.magicpwd._util.File;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.__i.mpad.IMpadAction;
+import com.magicpwd.__i.tray.ITrayAction;
 import com.magicpwd.e.mpwd.skin.FeelAction;
 import com.magicpwd.e.mpwd.skin.LookAction;
 import com.magicpwd.e.mpwd.skin.MoreAction;
@@ -36,15 +36,15 @@ public class MenuPtn
 {
 
     private Document document;
-    private AFrame formPtn;
+    private TrayPtn trayPtn;
     private java.util.regex.Pattern pattern;
     private java.util.HashMap<String, javax.swing.AbstractButton> buttons;
     private java.util.HashMap<String, javax.swing.Action> actions;
     private java.util.HashMap<String, WButtonGroup> groups;
 
-    public MenuPtn(AFrame frame)
+    public MenuPtn(TrayPtn trayPtn)
     {
-        formPtn = frame;
+        this.trayPtn = trayPtn;
         buttons = new java.util.HashMap<String, javax.swing.AbstractButton>();
         actions = new java.util.HashMap<String, javax.swing.Action>();
         groups = new java.util.HashMap<String, WButtonGroup>();
@@ -410,7 +410,7 @@ public class MenuPtn
                     item = new javax.swing.JCheckBoxMenuItem();
                     Bean.setText(item, getLang(prop, "text"));
                     Bean.setTips(item, getLang(prop, "tips"));
-                    item.setSelected(formPtn.getUserMdl().getCfg(ConsCfg.CFG_SKIN, "default").equals(prop.getProperty("name")));
+                    item.setSelected(trayPtn.getCurrForm().getUserMdl().getCfg(ConsCfg.CFG_SKIN, "default").equals(prop.getProperty("name")));
                     skinMenu.add(item);
                     group.add(item);
                     prop.clear();
@@ -445,7 +445,7 @@ public class MenuPtn
         }
 
         javax.swing.JCheckBoxMenuItem item;
-        String lookName = formPtn.getUserMdl().getCfg(ConsCfg.CFG_SKIN_NAME, ConsCfg.DEF_SKIN_SYS);
+        String lookName = trayPtn.getCurrForm().getUserMdl().getCfg(ConsCfg.CFG_SKIN_NAME, ConsCfg.DEF_SKIN_SYS);
         LookAction action = new LookAction();
         WButtonGroup group = new WButtonGroup();
 
@@ -626,7 +626,7 @@ public class MenuPtn
             feelMenu.addSeparator();
 
             javax.swing.JCheckBoxMenuItem item;
-            String feelName = formPtn.getUserMdl().getCfg(ConsCfg.CFG_SKIN_FEEL, ConsCfg.DEF_FEEL_DEF);
+            String feelName = trayPtn.getCurrForm().getUserMdl().getCfg(ConsCfg.CFG_SKIN_FEEL, ConsCfg.DEF_FEEL_DEF);
             FeelAction action = new FeelAction();
             WButtonGroup group = new WButtonGroup();
 
@@ -855,17 +855,23 @@ public class MenuPtn
                     if (obj instanceof javax.swing.Action)
                     {
                         action = (javax.swing.Action) obj;
-                        if (action instanceof IMpwdAction)
+                        if (action instanceof ITrayAction)
                         {
-                            IMpwdAction pwdAction = (IMpwdAction) action;
-//                            pwdAction.setMainPtn(TrayPtn.getMainPtn());
-                            pwdAction.doInit(null);
+                            ITrayAction trayAction = (ITrayAction) action;
+                            trayAction.setTrayPtn(trayPtn);
+                            trayAction.doInit(null);
+                        }
+                        else if (action instanceof IMpwdAction)
+                        {
+                            IMpwdAction mpwdAction = (IMpwdAction) action;
+                            mpwdAction.setMainPtn(trayPtn.getMainPtn());
+                            mpwdAction.doInit(null);
                         }
                         else if (action instanceof IMpadAction)
                         {
-                            IMpadAction padAction = (IMpadAction) action;
-//                            padAction.setMiniPtn(TrayPtn.getMiniPtn());
-                            padAction.doInit(null);
+                            IMpadAction mpadAction = (IMpadAction) action;
+                            mpadAction.setMiniPtn(trayPtn.getMiniPtn());
+                            mpadAction.doInit(null);
                         }
                         if (validate)
                         {
@@ -947,7 +953,7 @@ public class MenuPtn
         boolean validate = Char.isValidate(hash);
         if (validate)
         {
-            javax.swing.Icon icon = formPtn.getFavIcon(hash);
+            javax.swing.Icon icon = trayPtn.getCurrForm().getFavIcon(hash);
             if (icon != null)
             {
                 return icon;
@@ -957,10 +963,10 @@ public class MenuPtn
         String path = element.attributeValue("path");
         if (Char.isValidate(path))
         {
-            javax.swing.ImageIcon icon = formPtn.getUserMdl().readIcon(path);
+            javax.swing.ImageIcon icon = trayPtn.getCurrForm().getUserMdl().readIcon(path);
             if (validate)
             {
-                formPtn.setFavIcon(hash, icon);
+                trayPtn.getCurrForm().setFavIcon(hash, icon);
             }
             return icon;
         }

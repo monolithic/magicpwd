@@ -26,7 +26,7 @@ public class Test
             cfg.loadCfg();
             Lang.loadLang(cfg);
             Bean.readIcon(new FileInputStream("src/res/icon/mwiz16.png"), "mwiz");
-            NormPtn p = new NormPtn();
+            NormPtn p = new NormPtn(null, cfg);
             p.initView();
             p.initLang();
             p.initData();

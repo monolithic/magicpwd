@@ -5,7 +5,6 @@
 package example;
 
 import com.magicpwd.__a.AAction;
-import com.magicpwd.v.TrayPtn;
 
 /**
  *
@@ -21,7 +20,7 @@ public class TestAction extends AAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        javax.swing.JOptionPane.showMessageDialog(TrayPtn.getCurrForm(), e.getActionCommand());
+        javax.swing.JOptionPane.showMessageDialog(trayPtn.getCurrForm(), e.getActionCommand());
     }
 
     @Override
