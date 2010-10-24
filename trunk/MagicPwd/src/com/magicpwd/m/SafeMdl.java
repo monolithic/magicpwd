@@ -293,7 +293,7 @@ public abstract class SafeMdl
 
     private StringBuffer deCrypt(Pwds pwds) throws Exception
     {
-//        pwds.deCript(coreMdl.getDCipher(), coreMdl.getSec().getMask());
+//        pwds.deCript(userMdl.getDCipher(), userMdl.getSec().getMask());
 //        return pwds.getP30F0203();
         StringBuffer buf = pwds.getP30F0203();
         String tmp = buf.toString();
@@ -372,7 +372,7 @@ public abstract class SafeMdl
 
     private StringBuffer enCrypt(Pwds pwds) throws Exception
     {
-//        pwds.enCrypt(coreMdl.getECipher(), coreMdl.getSec().getMask());
+//        pwds.enCrypt(userMdl.getECipher(), userMdl.getSec().getMask());
 //        return pwds.getP30F0203();
         StringBuffer buf = pwds.getP30F0203();
         String tmp = buf.toString();

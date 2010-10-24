@@ -97,6 +97,7 @@ public class MagicPwd
             Logs.exception(exp);
         }
 
+        Bean.readIcon(MagicPwd.class.getResourceAsStream(ConsEnv.ICON_PATH + "icon.png"), "");
         Bean.getNone();
         Bean.getLogo(16);
 

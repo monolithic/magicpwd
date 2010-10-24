@@ -18,12 +18,12 @@ import com.magicpwd.m.UserMdl;
 public class USetProp extends javax.swing.JPanel implements IPropBean
 {
 
-    private UserMdl coreMdl;
+    private UserMdl userMdl;
     private java.io.File backPath;
 
-    public USetProp(UserMdl coreMdl)
+    public USetProp(UserMdl userMdl)
     {
-        this.coreMdl = coreMdl;
+        this.userMdl = userMdl;
     }
 
     @Override
@@ -96,7 +96,7 @@ public class USetProp extends javax.swing.JPanel implements IPropBean
             java.util.Arrays.sort(names);
             cb_UserLang.setModel(new javax.swing.DefaultComboBoxModel(names));
         }
-        cb_UserLang.setSelectedItem(coreMdl.getLang());
+        cb_UserLang.setSelectedItem(userMdl.getLang());
 
         cb_PwdsChar.removeAllItems();
         Char cher = new Char();
@@ -104,30 +104,30 @@ public class USetProp extends javax.swing.JPanel implements IPropBean
         cher.setP30F2104(Lang.getLang(LangRes.P30F7C06, "默认"));
         cher.setP30F2106(ConsCfg.DEF_PWDS_CHAR);
         cb_PwdsChar.addItem(cher);
-        for (Char item : coreMdl.getCharMdl().getCharSys())
+        for (Char item : userMdl.getCharMdl().getCharSys())
         {
             cb_PwdsChar.addItem(item);
-            if (item.getP30F2103().equals(coreMdl.getPwdsKey()))
+            if (item.getP30F2103().equals(userMdl.getPwdsKey()))
             {
                 cb_PwdsChar.setSelectedItem(item);
             }
         }
-        for (Char item : coreMdl.getCharMdl().getCharUsr())
+        for (Char item : userMdl.getCharMdl().getCharUsr())
         {
             cb_PwdsChar.addItem(item);
-            if (item.getP30F2103().equals(coreMdl.getPwdsKey()))
+            if (item.getP30F2103().equals(userMdl.getPwdsKey()))
             {
                 cb_PwdsChar.setSelectedItem(item);
             }
         }
 
-        tf_PwdsSize.setText(coreMdl.getPwdsLen());
-        ck_PwdsLoop.setSelected(coreMdl.isPwdsLoop());
+        tf_PwdsSize.setText(userMdl.getPwdsLen());
+        ck_PwdsLoop.setSelected(userMdl.isPwdsLoop());
 
-        tf_BackCount.setText("" + coreMdl.getBackNum());
-        tf_BackPath.setText(coreMdl.getBackDir());
+        tf_BackCount.setText("" + userMdl.getBackNum());
+        tf_BackPath.setText(userMdl.getBackDir());
 
-        tf_StayTime.setText("" + coreMdl.getStayTime());
+        tf_StayTime.setText("" + userMdl.getStayTime());
     }
 
     @Override
@@ -142,33 +142,33 @@ public class USetProp extends javax.swing.JPanel implements IPropBean
         obj = cb_PwdsChar.getSelectedItem();
         if (obj != null && obj instanceof Char)
         {
-            coreMdl.setPwdsKey(((Char) obj).getP30F2103());
+            userMdl.setPwdsKey(((Char) obj).getP30F2103());
         }
 
         String txt = tf_PwdsSize.getText().trim();
         if (com.magicpwd._util.Char.isValidatePositiveInteger(txt))
         {
-            coreMdl.setPwdsLen(Integer.parseInt(txt));
+            userMdl.setPwdsLen(Integer.parseInt(txt));
         }
-        coreMdl.setPwdsLoop(ck_PwdsLoop.isSelected());
+        userMdl.setPwdsLoop(ck_PwdsLoop.isSelected());
 
         txt = tf_BackCount.getText().trim();
         if (com.magicpwd._util.Char.isValidatePositiveInteger(txt))
         {
-            coreMdl.setBackNum(Integer.parseInt(txt));
+            userMdl.setBackNum(Integer.parseInt(txt));
         }
 
         txt = tf_BackPath.getText();
         java.io.File file = new java.io.File(txt);
         if (file.exists() && file.isDirectory() && file.canWrite())
         {
-            coreMdl.setBackDir(txt);
+            userMdl.setBackDir(txt);
         }
 
         txt = tf_StayTime.getText().trim();
         if (com.magicpwd._util.Char.isValidatePositiveInteger(txt))
         {
-            coreMdl.setStayTime(Integer.parseInt(txt));
+            userMdl.setStayTime(Integer.parseInt(txt));
         }
     }
 

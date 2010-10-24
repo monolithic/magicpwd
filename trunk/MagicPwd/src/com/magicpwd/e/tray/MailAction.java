@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.magicpwd.e;
+package com.magicpwd.e.tray;
 
 import com.magicpwd.__a.tray.ATrayAction;
 import com.magicpwd._cons.ConsEnv;
@@ -14,10 +14,10 @@ import com.magicpwd._util.Logs;
  *
  * @author Amon
  */
-public class BlogAction extends ATrayAction
+public class MailAction extends ATrayAction
 {
 
-    public BlogAction()
+    public MailAction()
     {
     }
 
@@ -26,12 +26,12 @@ public class BlogAction extends ATrayAction
     {
         if (!java.awt.Desktop.isDesktopSupported())
         {
-            Lang.showMesg(trayPtn.getCurrForm(), LangRes.P30F7A0F, "");
+            Lang.showMesg(trayPtn.getCurrForm(), LangRes.P30F7A11, "");
         }
 
         try
         {
-            java.awt.Desktop.getDesktop().browse(new java.net.URI(ConsEnv.BLOGSITE));
+            java.awt.Desktop.getDesktop().mail(new java.net.URI("mailto:" + ConsEnv.SOFTMAIL));
         }
         catch (Exception exp)
         {

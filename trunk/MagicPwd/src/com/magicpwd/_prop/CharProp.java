@@ -27,11 +27,11 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
      */
     private Char charItem;
     private boolean isUpdate;
-    private UserMdl coreMdl;
+    private UserMdl userMdl;
 
-    public CharProp(UserMdl coreMdl)
+    public CharProp(UserMdl userMdl)
     {
-        this.coreMdl = coreMdl;
+        this.userMdl = userMdl;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
     {
         if (cb_CharTplt.getItemCount() < 1)
         {
-            CharMdl cm = coreMdl.getCharMdl();
+            CharMdl cm = userMdl.getCharMdl();
             ls_CharList.setModel(cm);
 
             DefaultComboBoxModel cm_CharTplt = new DefaultComboBoxModel();
@@ -167,7 +167,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         pl_ItemSort = new javax.swing.JPanel();
 
         bt_DropData = new IcoLabel();
-        bt_DropData.setIcon(coreMdl.readIcon(ConsEnv.FEEL_PATH + "file-delete.png"));
+        bt_DropData.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "file-delete.png"));
         bt_DropData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -179,7 +179,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         });
 
         bt_SaveData = new IcoLabel();
-        bt_SaveData.setIcon(coreMdl.readIcon(ConsEnv.FEEL_PATH + "file-save.png"));
+        bt_SaveData.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "file-save.png"));
         bt_SaveData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -191,7 +191,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         });
 
         bt_ApndData = new IcoLabel();
-        bt_ApndData.setIcon(coreMdl.readIcon(ConsEnv.FEEL_PATH + "file-new.png"));
+        bt_ApndData.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "file-new.png"));
         bt_ApndData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -202,7 +202,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
             }
         });
         bt_SortU = new IcoLabel();
-        bt_SortU.setIcon(coreMdl.readIcon(ConsEnv.FEEL_PATH + "edit-move-up.png"));
+        bt_SortU.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "edit-move-up.png"));
         bt_SortU.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -215,7 +215,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         add(bt_SortU);
 
         bt_SortD = new IcoLabel();
-        bt_SortD.setIcon(coreMdl.readIcon(ConsEnv.FEEL_PATH + "edit-move-down.png"));
+        bt_SortD.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "edit-move-down.png"));
         bt_SortD.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -317,24 +317,24 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
     private void sortUActionPerformed(java.awt.event.ActionEvent evt)
     {
         int indx = ls_CharList.getSelectedIndex();
-        if (indx < 1 || indx >= coreMdl.getCharMdl().getCharUsr().size())
+        if (indx < 1 || indx >= userMdl.getCharMdl().getCharUsr().size())
         {
             return;
         }
 
-        coreMdl.getCharMdl().changeItemAt(indx, -1);
+        userMdl.getCharMdl().changeItemAt(indx, -1);
         ls_CharList.setSelectedIndex(indx - 1);
     }
 
     private void sortDActionPerformed(java.awt.event.ActionEvent evt)
     {
         int indx = ls_CharList.getSelectedIndex();
-        if (indx < 0 || indx >= coreMdl.getCharMdl().getCharUsr().size() - 1)
+        if (indx < 0 || indx >= userMdl.getCharMdl().getCharUsr().size() - 1)
         {
             return;
         }
 
-        coreMdl.getCharMdl().changeItemAt(indx, 1);
+        userMdl.getCharMdl().changeItemAt(indx, 1);
         ls_CharList.setSelectedIndex(indx + 1);
     }
 
@@ -374,11 +374,11 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         charItem.setP30F2106(sets);
         if (isUpdate)
         {
-            coreMdl.getCharMdl().updateItemAt(ls_CharList.getSelectedIndex(), charItem);
+            userMdl.getCharMdl().updateItemAt(ls_CharList.getSelectedIndex(), charItem);
         }
         else
         {
-            coreMdl.getCharMdl().appendItem(charItem);
+            userMdl.getCharMdl().appendItem(charItem);
         }
 
         charItem = new Char();
@@ -400,7 +400,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
             return;
         }
 
-        coreMdl.getCharMdl().removeItemAt(ls_CharList.getSelectedIndex());
+        userMdl.getCharMdl().removeItemAt(ls_CharList.getSelectedIndex());
         charItem = new Char();
         showInfo(charItem);
         isUpdate = false;

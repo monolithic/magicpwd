@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.magicpwd.e;
+package com.magicpwd.e.tray;
 
 import com.magicpwd.__a.tray.ATrayAction;
 import com.magicpwd._cons.LangRes;

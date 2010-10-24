@@ -2,30 +2,26 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.magicpwd.e;
+package com.magicpwd.e.tray;
 
 import com.magicpwd.__a.tray.ATrayAction;
+import com.magicpwd._cons.ConsEnv;
 
 /**
  *
- * @author Amon
+ * @author aven
  */
-public class ExitAction extends ATrayAction
+public class MpadAction extends ATrayAction
 {
 
-    public ExitAction()
+    public MpadAction()
     {
     }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (trayPtn.getCurrForm() != null)
-        {
-            trayPtn.getCurrForm().setVisible(false);
-        }
-        trayPtn.endSave();
-        System.exit(0);
+        trayPtn.showViewPtn(ConsEnv.APP_MODE_MPAD);
     }
 
     @Override

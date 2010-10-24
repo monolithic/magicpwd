@@ -27,7 +27,7 @@ public class DropAction extends AMpwdAction
 //        }
 //        if (Lang.showFirm(this, LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
 //        {
-//            coreMdl.getGridMdl().wRemove(row);
+//            userMdl.getGridMdl().wRemove(row);
 //            selectNext(0, true);
 //        }
     }

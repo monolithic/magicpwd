@@ -19,11 +19,11 @@ import com.magicpwd.m.UserMdl;
 public class InfoProp extends javax.swing.JPanel implements IPropBean
 {
 
-    private UserMdl coreMdl;
+    private UserMdl userMdl;
 
-    public InfoProp(UserMdl coreMdl)
+    public InfoProp(UserMdl userMdl)
     {
-        this.coreMdl = coreMdl;
+        this.userMdl = userMdl;
     }
 
     @Override

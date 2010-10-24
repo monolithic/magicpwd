@@ -14,12 +14,12 @@ import com.magicpwd.m.UserMdl;
  */
 public class JavaProp extends javax.swing.JPanel implements IPropBean
 {
-    private UserMdl coreMdl;
+    private UserMdl userMdl;
     private java.util.List<S1S1> javaList;
 
-    public JavaProp(UserMdl coreMdl)
+    public JavaProp(UserMdl userMdl)
     {
-        this.coreMdl = coreMdl;
+        this.userMdl = userMdl;
     }
 
     @Override

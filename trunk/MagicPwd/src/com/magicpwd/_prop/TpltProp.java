@@ -21,7 +21,7 @@ import com.magicpwd.r.TreeCR;
 public class TpltProp extends javax.swing.JPanel implements IPropBean
 {
 
-    private UserMdl coreMdl;
+    private UserMdl userMdl;
     private javax.swing.DefaultComboBoxModel cm_TpltList;
     private javax.swing.tree.DefaultTreeModel tm_TpltList;
     private javax.swing.tree.DefaultMutableTreeNode rootNode;
@@ -29,9 +29,9 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
     private Tplt currTplt;
     private boolean isUpdate;
 
-    public TpltProp(UserMdl coreMdl)
+    public TpltProp(UserMdl userMdl)
     {
-        this.coreMdl = coreMdl;
+        this.userMdl = userMdl;
     }
 
     @Override
@@ -59,7 +59,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
 
             java.util.List<Tplt> dataList;
             javax.swing.tree.DefaultMutableTreeNode node;
-            for (Tplt kind : coreMdl.getCboxMdl().getAllItems())
+            for (Tplt kind : userMdl.getCboxMdl().getAllItems())
             {
                 node = new javax.swing.tree.DefaultMutableTreeNode(kind);
 
@@ -176,7 +176,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         pl_ItemSort = new javax.swing.JPanel();
 
         bt_DropData = new IcoLabel();
-        bt_DropData.setIcon(coreMdl.readIcon(ConsEnv.FEEL_PATH + "file-delete.png"));
+        bt_DropData.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "file-delete.png"));
         bt_DropData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -188,7 +188,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         });
 
         bt_SaveData = new IcoLabel();
-        bt_SaveData.setIcon(coreMdl.readIcon(ConsEnv.FEEL_PATH + "file-save.png"));
+        bt_SaveData.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "file-save.png"));
         bt_SaveData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -200,7 +200,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         });
 
         bt_ApndData = new IcoLabel();
-        bt_ApndData.setIcon(coreMdl.readIcon(ConsEnv.FEEL_PATH + "file-new.png"));
+        bt_ApndData.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "file-new.png"));
         bt_ApndData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -211,7 +211,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
             }
         });
         bt_SortU = new IcoLabel();
-        bt_SortU.setIcon(coreMdl.readIcon(ConsEnv.FEEL_PATH + "edit-move-up.png"));
+        bt_SortU.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "edit-move-up.png"));
         bt_SortU.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -224,7 +224,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         add(bt_SortU);
 
         bt_SortD = new IcoLabel();
-        bt_SortD.setIcon(coreMdl.readIcon(ConsEnv.FEEL_PATH + "edit-move-down.png"));
+        bt_SortD.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "edit-move-down.png"));
         bt_SortD.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -466,7 +466,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         {
             DBA3000.saveTpltData(currTplt);
             tm_TpltList.nodeChanged(currNode);
-            coreMdl.getCboxMdl().wUpdate();
+            userMdl.getCboxMdl().wUpdate();
 
             isUpdate = false;
         }
@@ -496,7 +496,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
 
             if (indx == 0)
             {
-                coreMdl.getCboxMdl().wAppend(currTplt);
+                userMdl.getCboxMdl().wAppend(currTplt);
             }
         }
 

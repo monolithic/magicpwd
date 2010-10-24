@@ -39,14 +39,11 @@ public class MiniPtn extends AFrame
 
     public MiniPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
-        super(trayPtn);
-        this.userMdl = userMdl;
+        super(trayPtn, userMdl);
     }
 
     public void initView()
     {
-//        Bean.readIcon(MiniPtn.class.getResourceAsStream(ConsEnv.ICON_PATH + "mpad.png"), iconMap);
-
         pl_NoteBase = new javax.swing.JPanel();
         lb_NoteHead = new javax.swing.JLabel();
         tf_NoteName = new javax.swing.JTextField();
@@ -172,7 +169,6 @@ public class MiniPtn extends AFrame
         getContentPane().add(pl_NoteBase);
         pack();
         setIconImage(Bean.getLogo(16));
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         Util.centerForm(this, null);
     }
 

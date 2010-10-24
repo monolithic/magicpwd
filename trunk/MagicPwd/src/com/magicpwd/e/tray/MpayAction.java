@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.magicpwd.e;
+package com.magicpwd.e.tray;
 
 import com.magicpwd.__a.tray.ATrayAction;
 import com.magicpwd._cons.ConsEnv;
@@ -11,17 +11,17 @@ import com.magicpwd._cons.ConsEnv;
  *
  * @author aven
  */
-public class MpadAction extends ATrayAction
+public class MpayAction extends ATrayAction
 {
 
-    public MpadAction()
+    public MpayAction()
     {
     }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        trayPtn.showViewPtn(ConsEnv.APP_MODE_MPAD);
+        trayPtn.showViewPtn(ConsEnv.APP_MODE_MWIZ);
     }
 
     @Override

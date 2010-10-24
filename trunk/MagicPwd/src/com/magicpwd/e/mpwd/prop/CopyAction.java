@@ -25,8 +25,8 @@ public class CopyAction extends AMpwdAction
 //        {
 //            return;
 //        }
-//        IEditItem tplt = coreMdl.getGridMdl().getItemAt(row);
-//        Util.setClipboardContents(tplt.getData(), coreMdl.getUserCfg().getStayTime());
+//        IEditItem tplt = userMdl.getGridMdl().getItemAt(row);
+//        Util.setClipboardContents(tplt.getData(), userMdl.getUserCfg().getStayTime());
     }
 
     @Override
