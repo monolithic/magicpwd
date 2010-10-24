@@ -6,7 +6,6 @@ package com.magicpwd.v.mwiz;
 
 import com.magicpwd.__a.AFrame;
 import com.magicpwd._util.Bean;
-import com.magicpwd._util.Util;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.m.mwiz.MwizMdl;
 import com.magicpwd.v.MenuPtn;
