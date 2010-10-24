@@ -5,6 +5,7 @@
 package com.magicpwd.__i.mwiz;
 
 import com.magicpwd.__i.IAction;
+import com.magicpwd.v.mwiz.NormPtn;
 
 /**
  *
@@ -12,4 +13,6 @@ import com.magicpwd.__i.IAction;
  */
 public interface IMwizAction extends IAction
 {
+
+    void setNormPtn(NormPtn normPtn);
 }

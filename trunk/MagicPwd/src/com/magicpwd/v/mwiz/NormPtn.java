@@ -77,7 +77,7 @@ public class NormPtn extends AFrame
 
         setIconImage(Bean.getLogo(16));
         pack();
-        Util.centerForm(this, null);
+        Bean.centerForm(this, null);
     }
 
     public void initLang()
@@ -97,6 +97,18 @@ public class NormPtn extends AFrame
     public boolean endSave()
     {
         return true;
+    }
+
+    public void newKeys()
+    {
+        EditPtn editPtn = new EditPtn(this);
+        editPtn.initView();
+        editPtn.initLang();
+        editPtn.initData();
+    }
+
+    public void editSelected()
+    {
     }
 
     private void tbKeysListMouseClicked(java.awt.event.MouseEvent e)

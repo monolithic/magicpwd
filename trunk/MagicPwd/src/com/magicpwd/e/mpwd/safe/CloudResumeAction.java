@@ -10,10 +10,10 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._mail.Connect;
 import com.magicpwd._mail.Reader;
+import com.magicpwd._util.Bean;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd._util.Util;
 import com.magicpwd.v.TrayPtn;
 import com.magicpwd.x.LckDialog;
 
@@ -52,7 +52,7 @@ public class CloudResumeAction extends AMpwdAction
             }
         }.start();
 
-        Util.centerForm(dialog, mainPtn);
+        Bean.centerForm(dialog, mainPtn);
         dialog.setVisible(true);
     }
 

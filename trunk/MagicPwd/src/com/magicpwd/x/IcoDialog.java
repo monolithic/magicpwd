@@ -92,11 +92,11 @@ public class IcoDialog extends javax.swing.JDialog
         vsg1.addContainerGap();
         layout.setVerticalGroup(vsg1);
 
-        this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        this.setIconImage(Bean.getLogo(16));
-        this.setResizable(false);
-        this.pack();
-        Util.centerForm(this, formPtn);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(Bean.getLogo(16));
+        setResizable(false);
+        pack();
+        Bean.centerForm(this, formPtn);
     }
 
     public void initLang()

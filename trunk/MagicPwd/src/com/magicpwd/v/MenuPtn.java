@@ -16,6 +16,7 @@ import com.magicpwd._util.File;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.__i.mpad.IMpadAction;
+import com.magicpwd.__i.mwiz.IMwizAction;
 import com.magicpwd.__i.tray.ITrayAction;
 import com.magicpwd.e.mpwd.skin.FeelAction;
 import com.magicpwd.e.mpwd.skin.LookAction;
@@ -23,7 +24,6 @@ import com.magicpwd.e.mpwd.skin.MoreAction;
 import com.magicpwd.e.mpwd.skin.ThemeAction;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
-import java.util.List;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.Node;
@@ -101,7 +101,7 @@ public class MenuPtn
         javax.swing.JMenuBar menuBar = new javax.swing.JMenuBar();
         menuBar.setName(menuId);
 
-        List elementList = element.elements("menu");
+        java.util.List elementList = element.elements("menu");
         if (elementList != null)
         {
             Element tmp;
@@ -151,7 +151,7 @@ public class MenuPtn
         javax.swing.JToolBar toolBar = new javax.swing.JToolBar();
         toolBar.setName(toolId);
 
-        List elementList = element.elements();
+        java.util.List elementList = element.elements();
         if (elementList != null)
         {
             Element tmp;
@@ -193,7 +193,7 @@ public class MenuPtn
         javax.swing.JPopupMenu menuPop = new javax.swing.JPopupMenu();
         menuPop.setName(menuId);
 
-        List elementList = element.elements();
+        java.util.List elementList = element.elements();
         if (elementList != null)
         {
             Element tmp;
@@ -238,7 +238,7 @@ public class MenuPtn
         }
         Element element = (Element) node;
 
-        List elementList = element.elements();
+        java.util.List elementList = element.elements();
         if (elementList != null)
         {
             Element tmp;
@@ -283,7 +283,7 @@ public class MenuPtn
         }
         Element element = (Element) node;
 
-        List elementList = element.elements();
+        java.util.List elementList = element.elements();
         if (elementList != null)
         {
             Element tmp;
@@ -327,7 +327,7 @@ public class MenuPtn
         processTips(element, menu);
         processIcon(element, menu);
 
-        List list = element.elements();
+        java.util.List list = element.elements();
         if (list != null)
         {
             for (Object obj : list)
@@ -869,6 +869,12 @@ public class MenuPtn
                             IMpwdAction mpwdAction = (IMpwdAction) action;
                             mpwdAction.setMainPtn(trayPtn.getMainPtn());
                             mpwdAction.doInit(null);
+                        }
+                        else if (action instanceof IMwizAction)
+                        {
+                            IMwizAction mwizAction = (IMwizAction) action;
+                            mwizAction.setNormPtn(trayPtn.getNormPtn());
+                            mwizAction.doInit(null);
                         }
                         else if (action instanceof IMpadAction)
                         {
