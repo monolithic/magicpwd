@@ -5,21 +5,21 @@
         <!--新增-->
         <item type="normal" tips="$P30F7B01">
             <icon>
-                <default id="file-new" path="skin/feel/default/mwiz-add.png"/>
+                <default id="file-new" path="skin/feel/%feel%/mwiz-add.png"/>
             </icon>
             <action id="new-keys" class="com.magicpwd.e.mwiz.NewAction" />
         </item>
         <!--编辑-->
         <item type="normal" tips="$P30F7B02">
             <icon>
-                <default id="file-save" path="skin/feel/default/mwiz-eidt.png"/>
+                <default id="file-save" path="skin/feel/%feel%/mwiz-edit.png"/>
             </icon>
             <action id="save-keys" class="com.magicpwd.e.mwiz.EditAction" />
         </item>
         <!--删除-->
         <item type="normal" tips="$P30F7B02">
             <icon>
-                <default id="file-save" path="skin/feel/default/mwiz-delete.png"/>
+                <default id="file-save" path="skin/feel/%feel%/mwiz-delete.png"/>
             </icon>
             <action id="save-keys" class="com.magicpwd.e.mwiz.DeleteAction" />
         </item>
@@ -27,7 +27,7 @@
         <!--查询-->
         <item type="normal" tips="$P30F7B02">
             <icon>
-                <default id="file-save" path="skin/feel/default/mwiz-search.png"/>
+                <default id="file-save" path="skin/feel/%feel%/mwiz-search.png"/>
             </icon>
             <action id="save-keys" class="com.magicpwd.e.mwiz.SearchAction" />
         </item>
@@ -35,14 +35,14 @@
         <!--高级模式-->
         <item type="normal" tips="$P30F7B02">
             <icon>
-                <default id="file-save" path="skin/feel/default/mwiz-search.png"/>
+                <default id="file-save" path="skin/feel/%feel%/mwiz-search.png"/>
             </icon>
             <action id="save-keys" class="com.magicpwd.e.mwiz.SearchAction" />
         </item>
         <!--记事模式-->
         <item type="normal" tips="$P30F7B02">
             <icon>
-                <default id="file-save" path="skin/feel/default/mwiz-search.png"/>
+                <default id="file-save" path="skin/feel/%feel%/mwiz-search.png"/>
             </icon>
             <action id="save-keys" class="com.magicpwd.e.mwiz.SearchAction" />
         </item>

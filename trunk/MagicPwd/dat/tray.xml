@@ -4,50 +4,50 @@
     <popmenu id="tray">
         <!--关于-->
         <item type="normal" text="$P30F9601">
-            <action class="com.magicpwd.e.InfoAction" />
+            <action class="com.magicpwd.e.tray.InfoAction" />
         </item>
         <!--帮助-->
         <item type="normal" text="$P30F9602">
-            <action class="com.magicpwd.e.HelpAction" />
+            <action class="com.magicpwd.e.tray.HelpAction" />
         </item>
         <seperator />
         <!--显示为托盘图标-->
         <item id="viewPtn" type="normal" text="$P30F960D">
-            <action class="com.magicpwd.e.ViewAction" />
+            <action class="com.magicpwd.e.tray.ViewAction" />
         </item>
         <seperator />
         <!--魔方密码-->
         <item type="normal" text="$P30F9603">
-            <action class="com.magicpwd.e.MpwdAction" />
+            <action class="com.magicpwd.e.tray.MpwdAction" />
         </item>
         <!--迷你账簿-->
-        <item type="normal" text="$P30F9604" visible="false">
-            <action class="com.magicpwd.e.MpayAction" />
+        <item type="normal" text="$P30F9604">
+            <action class="com.magicpwd.e.tray.MwizAction" />
         </item>
         <!--记事便签-->
         <item type="normal" text="$P30F9605">
-            <action class="com.magicpwd.e.MpadAction" />
+            <action class="com.magicpwd.e.tray.MpadAction" />
         </item>
         <seperator />
         <!--检测更新-->
         <item type="normal" text="$P30F9606">
-            <action class="com.magicpwd.e.UpdtAction" />
+            <action class="com.magicpwd.e.tray.UpdtAction" />
         </item>
         <!--联系作者-->
         <item type="normal" text="$P30F9607">
-            <action class="com.magicpwd.e.MailAction" />
+            <action class="com.magicpwd.e.tray.MailAction" />
         </item>
         <!--网站-->
         <item type="normal" text="$P30F9608">
-            <action class="com.magicpwd.e.SiteAction" />
+            <action class="com.magicpwd.e.tray.SiteAction" />
         </item>
         <!--博客-->
         <item type="normal" text="$P30F762C">
-            <action class="com.magicpwd.e.BlogAction" />
+            <action class="com.magicpwd.e.tray.BlogAction" />
         </item>
         <!--微博-->
         <item type="normal" text="$P30F960B">
-            <action class="com.magicpwd.e.MlogAction" />
+            <action class="com.magicpwd.e.tray.MlogAction" />
         </item>
         <seperator />
         <menu id="plug" text="$P30F763A">
@@ -59,7 +59,7 @@
         <seperator />
         <!--退出-->
         <item type="normal" text="$P30F960C">
-            <action class="com.magicpwd.e.ExitAction" />
+            <action class="com.magicpwd.e.tray.ExitAction" />
         </item>
     </popmenu>
 </magicpwd>
