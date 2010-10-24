@@ -9,7 +9,7 @@
  * Created on 2010-10-19, 19:37:55
  */
 
-package plan.draw.v;
+package plan.draw.v.norm;
 
 /**
  *
