@@ -6,7 +6,9 @@ package com.magicpwd.v.mwiz;
 
 import com.magicpwd.__a.AFrame;
 import com.magicpwd._util.Bean;
+import com.magicpwd._util.Util;
 import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.mwiz.MwizMdl;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.TrayPtn;
 
@@ -18,30 +20,25 @@ public class NormPtn extends AFrame
 {
 
     private MenuPtn menuPtn;
+    private MwizMdl mwizMdl;
 
     public NormPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
-        super(trayPtn);
+        super(trayPtn, userMdl);
     }
 
     public void initView()
     {
-//        Bean.readIcon(NormPtn.class.getResourceAsStream(ConsEnv.ICON_PATH + "mwiz16.png"), iconMap);
-
-        menuPtn = new MenuPtn(trayPtn);
+        menuPtn = new MenuPtn(trayPtn, userMdl);
         try
         {
             menuPtn.loadData(new java.io.File("dat/mwiz.xml"));
-            tbToolBar = menuPtn.getToolBar("mwiz");
+            tbToolBar = menuPtn.getToolBar("mwiz", rootPane);
         }
         catch (Exception e)
         {
             tbToolBar = new javax.swing.JToolBar();
         }
-        tbToolBar.add(new javax.swing.JButton(Bean.getIcon("mwiz0")));
-        tbToolBar.add(new javax.swing.JButton(Bean.getIcon("mwiz1")));
-        tbToolBar.add(new javax.swing.JButton(Bean.getIcon("mwiz2")));
-        tbToolBar.add(new javax.swing.JButton(Bean.getIcon("mwiz3")));
 
         tbToolBar.setFloatable(false);
         tbToolBar.setRollover(true);
@@ -78,7 +75,9 @@ public class NormPtn extends AFrame
         vsg.addContainerGap();
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(vsg));
 
+        setIconImage(Bean.getLogo(16));
         pack();
+        Util.centerForm(this, null);
     }
 
     public void initLang()
@@ -87,6 +86,11 @@ public class NormPtn extends AFrame
 
     public void initData()
     {
+        mwizMdl = new MwizMdl(userMdl);
+        mwizMdl.init();
+        tbKeysList.setModel(mwizMdl);
+
+        safeMdl = mwizMdl.getKeysMdl();
     }
 
     @Override

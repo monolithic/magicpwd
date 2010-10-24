@@ -20,11 +20,11 @@ public class FindAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-//        if (!coreMdl.getUserCfg().isFindViw())
+//        if (!userMdl.getUserCfg().isFindViw())
 //        {
 //            mainFind.setVisible(true);
 //            mainMenu.setViewFindSelected(true);
-//            coreMdl.getUserCfg().setFindViw(true);
+//            userMdl.getUserCfg().setFindViw(true);
 //        }
 //        mainFind.requestFocus();
     }

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.magicpwd.e;
+package com.magicpwd.e.tray;
 
 import com.magicpwd.__a.tray.ATrayAction;
 import com.magicpwd._cons.ConsEnv;
@@ -14,10 +14,10 @@ import com.magicpwd._util.Logs;
  *
  * @author Amon
  */
-public class SiteAction extends ATrayAction
+public class BlogAction extends ATrayAction
 {
 
-    public SiteAction()
+    public BlogAction()
     {
     }
 
@@ -31,7 +31,7 @@ public class SiteAction extends ATrayAction
 
         try
         {
-            java.awt.Desktop.getDesktop().browse(new java.net.URI(ConsEnv.HOMEPAGE));
+            java.awt.Desktop.getDesktop().browse(new java.net.URI(ConsEnv.BLOGSITE));
         }
         catch (Exception exp)
         {

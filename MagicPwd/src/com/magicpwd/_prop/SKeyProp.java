@@ -15,12 +15,12 @@ import com.magicpwd.m.UserMdl;
  */
 public class SKeyProp extends javax.swing.JPanel implements IPropBean
 {
-    private UserMdl coreMdl;
+    private UserMdl userMdl;
     private java.util.List<S1S2> skeyList;
 
-    public SKeyProp(UserMdl coreMdl)
+    public SKeyProp(UserMdl userMdl)
     {
-        this.coreMdl =coreMdl;
+        this.userMdl =userMdl;
     }
 
     @Override

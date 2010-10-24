@@ -40,7 +40,6 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.DBA3000;
-import com.magicpwd.m.mpwd.GridMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.m.mpwd.ListMdl;
 import com.magicpwd.m.mpwd.MpwdMdl;
@@ -79,24 +78,21 @@ public class MainPtn extends AFrame
      * 用户查找字符串
      */
     private String queryKey;
-    private GridMdl gridMdl;
     private MpwdMdl mpwdMdl;
 
     public MainPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
-        super(trayPtn);
-        this.userMdl = userMdl;
+        super(trayPtn, userMdl);
     }
 
     public void initView()
     {
 //        Bean.readIcon(MainPtn.class.getResourceAsStream(ConsEnv.ICON_PATH + "mpwd.png"), iconMap);
-        gridMdl = new GridMdl(userMdl);
 
         try
         {
             java.io.File file = new java.io.File(userMdl.getDataDir(), "mpwd.xml");
-            menuPtn = new MenuPtn(trayPtn);
+            menuPtn = new MenuPtn(trayPtn, userMdl);
             menuPtn.loadData(file);
         }
         catch (Exception exp)
@@ -111,10 +107,10 @@ public class MainPtn extends AFrame
 
         this.getContentPane().add(pl_KeysBase);
 
-        menuBar = menuPtn.getMenuBar("mpwd", getRootPane());
+        menuBar = menuPtn.getMenuBar("mpwd", rootPane);
         this.setJMenuBar(menuBar);
 
-        toolBar = menuPtn.getToolBar("mpwd");
+        toolBar = menuPtn.getToolBar("mpwd", rootPane);
         this.getContentPane().add(toolBar, userMdl.getToolLoc());
 
         this.setIconImage(Bean.getLogo(16));
@@ -166,6 +162,8 @@ public class MainPtn extends AFrame
             group.setSelected(userMdl.getCfg(ConsCfg.CFG_VIEW_LIST_KEY, "01"), true);
         }
 
+        mpwdMdl = new MpwdMdl(userMdl);
+        safeMdl = mpwdMdl.getGridMdl();
         pack();
         Util.centerForm(this, null);
     }
@@ -177,7 +175,7 @@ public class MainPtn extends AFrame
             return false;
         }
         setEditVisible(true);
-        showPropEdit(gridMdl.initGuid(), true);
+        showPropEdit(mpwdMdl.getGridMdl().initGuid(), true);
         return true;
     }
 
@@ -189,20 +187,20 @@ public class MainPtn extends AFrame
     public boolean saveKeys()
     {
         // 是否需要保存
-        if (gridMdl.getRowCount() < ConsEnv.PWDS_HEAD_SIZE)
+        if (mpwdMdl.getGridMdl().getRowCount() < ConsEnv.PWDS_HEAD_SIZE)
         {
             return false;
         }
 
         // 数据未被修改
-        if (!gridMdl.isModified())
+        if (!mpwdMdl.getGridMdl().isModified())
         {
             //Lang.showMesg(this, LangRes.P30F7A27, "您未曾修改过数据，不需要保存！");
             return false;
         }
 
         // 口令类别检测
-        GuidItem guid = (GuidItem) gridMdl.getItemAt(ConsEnv.PWDS_HEAD_GUID);
+        GuidItem guid = (GuidItem) mpwdMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_GUID);
         if (!com.magicpwd._util.Char.isValidate(guid.getData()))
         {
             javax.swing.tree.TreePath path = tr_GuidTree.getSelectionPath();
@@ -221,11 +219,11 @@ public class MainPtn extends AFrame
                 tr_GuidTree.requestFocus();
                 return false;
             }
-            gridMdl.getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(kind.getC2010103());
+            mpwdMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(kind.getC2010103());
         }
 
         // 标题为空检测
-        MetaItem metaItem = (MetaItem) gridMdl.getItemAt(ConsEnv.PWDS_HEAD_META);
+        MetaItem metaItem = (MetaItem) mpwdMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_META);
         if (!com.magicpwd._util.Char.isValidate(metaItem.getName()))
         {
             Lang.showMesg(this, LangRes.P30F7A0C, "请输入口令标题！");
@@ -235,13 +233,13 @@ public class MainPtn extends AFrame
         }
 
         // 徽标
-        LogoItem logoItem = (LogoItem) gridMdl.getItemAt(ConsEnv.PWDS_HEAD_LOGO);
+        LogoItem logoItem = (LogoItem) mpwdMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_LOGO);
 
-        String keysHash = gridMdl.getKeysHash();
+        String keysHash = mpwdMdl.getGridMdl().getKeysHash();
 
         try
         {
-            gridMdl.saveData(true, true);
+            mpwdMdl.getGridMdl().saveData(true, true);
         }
         catch (Exception exp)
         {
@@ -381,7 +379,7 @@ public class MainPtn extends AFrame
     {
         if (updt)
         {
-            gridMdl.fireTableDataChanged();
+            mpwdMdl.getGridMdl().fireTableDataChanged();
         }
         else if (step == 0)
         {
@@ -401,7 +399,7 @@ public class MainPtn extends AFrame
         tb_LastIndx = n;
         tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
         Util.scrollToVisible(tb_KeysView, tb_LastIndx, 0, true);
-        showPropEdit(gridMdl.getItemAt(tb_LastIndx), true);
+        showPropEdit(mpwdMdl.getGridMdl().getItemAt(tb_LastIndx), true);
 
 //        if (updt)
 //        {
@@ -440,7 +438,7 @@ public class MainPtn extends AFrame
             {
                 tb_LastIndx = tb_KeysView.getRowCount();
             }
-            showPropEdit(gridMdl.wAppend(tb_LastIndx, type), true);
+            showPropEdit(mpwdMdl.getGridMdl().wAppend(tb_LastIndx, type), true);
             tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
         }
     }
@@ -452,12 +450,12 @@ public class MainPtn extends AFrame
             int idx = tb_KeysView.getSelectedRow();
             if (idx >= ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
-                IEditItem tplt = gridMdl.getItemAt(idx);
+                IEditItem tplt = mpwdMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != type)
                 {
                     tplt.setType(type);
                     showPropEdit(tplt, true);
-                    gridMdl.setModified(true);
+                    mpwdMdl.getGridMdl().setModified(true);
                 }
             }
         }
@@ -470,7 +468,7 @@ public class MainPtn extends AFrame
         {
             return;
         }
-        gridMdl.wMoveto(tb_LastIndx, t);
+        mpwdMdl.getGridMdl().wMoveto(tb_LastIndx, t);
         tb_LastIndx = t;
         Util.scrollToVisible(tb_KeysView, tb_LastIndx, 0, true);
         tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
@@ -483,7 +481,7 @@ public class MainPtn extends AFrame
         {
             return;
         }
-        gridMdl.wMoveto(tb_LastIndx, t);
+        mpwdMdl.getGridMdl().wMoveto(tb_LastIndx, t);
         tb_LastIndx = t;
         Util.scrollToVisible(tb_KeysView, tb_LastIndx, 0, true);
         tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
@@ -667,7 +665,7 @@ public class MainPtn extends AFrame
         gridPop = menuPtn.getPopMenu("grid");
 
         tb_KeysView = new javax.swing.JTable();
-        tb_KeysView.setModel(gridMdl);
+        tb_KeysView.setModel(mpwdMdl.getGridMdl());
         tb_KeysView.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tb_KeysView.getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         javax.swing.AbstractAction action = new javax.swing.AbstractAction()
@@ -846,7 +844,7 @@ public class MainPtn extends AFrame
     {
         if (e.getID() == java.awt.event.WindowEvent.WINDOW_CLOSING)
         {
-            if (gridMdl.isModified() && javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(this, LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
+            if (mpwdMdl.getGridMdl().isModified() && javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(this, LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
             {
                 return;
             }
@@ -975,9 +973,9 @@ public class MainPtn extends AFrame
             return;
         }
 
-        if (gridMdl.isModified())
+        if (mpwdMdl.getGridMdl().isModified())
         {
-            if (Lang.showFirm(this, LangRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", gridMdl.getItemAt(ConsEnv.PWDS_HEAD_META).getName()) != javax.swing.JOptionPane.YES_OPTION)
+            if (Lang.showFirm(this, LangRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", mpwdMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_META).getName()) != javax.swing.JOptionPane.YES_OPTION)
             {
                 ls_GuidList.setSelectedIndex(ls_LastIndx);
                 return;
@@ -995,8 +993,8 @@ public class MainPtn extends AFrame
         try
         {
             tb_LastIndx = -1;
-            gridMdl.clear();
-            gridMdl.loadData(keys.getP30F0104());
+            mpwdMdl.getGridMdl().clear();
+            mpwdMdl.getGridMdl().loadData(keys.getP30F0104());
 
             WButtonGroup group = menuPtn.getGroup("label");
             if (group != null)
@@ -1062,7 +1060,7 @@ public class MainPtn extends AFrame
             return;
         }
         tb_LastIndx = row;
-        showPropEdit(gridMdl.getItemAt(row), true);
+        showPropEdit(mpwdMdl.getGridMdl().getItemAt(row), true);
     }
 
     private void tb_ItemListKeyReleased(java.awt.event.KeyEvent evt)
@@ -1073,7 +1071,7 @@ public class MainPtn extends AFrame
             return;
         }
         tb_LastIndx = row;
-        showPropEdit(gridMdl.getItemAt(row), false);
+        showPropEdit(mpwdMdl.getGridMdl().getItemAt(row), false);
     }
 
     public void showPropInfo()
@@ -1183,7 +1181,7 @@ public class MainPtn extends AFrame
             setEditVisible(true);
         }
 
-        showPropEdit(gridMdl.initGuid(), true);
+        showPropEdit(mpwdMdl.getGridMdl().initGuid(), true);
         return false;
     }
 
@@ -1191,13 +1189,13 @@ public class MainPtn extends AFrame
     public boolean endSave()
     {
         // Save Temperary Data
-        if (gridMdl.isModified())
+        if (mpwdMdl.getGridMdl().isModified())
         {
-            gridMdl.setInterim(true);
-            gridMdl.getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(ConsDat.HASH_ROOT);
+            mpwdMdl.getGridMdl().setInterim(true);
+            mpwdMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(ConsDat.HASH_ROOT);
             try
             {
-                gridMdl.saveData(true, false);
+                mpwdMdl.getGridMdl().saveData(true, false);
             }
             catch (Exception exp)
             {
@@ -1209,22 +1207,22 @@ public class MainPtn extends AFrame
 
     public IEditItem getMeta()
     {
-        return gridMdl.getItemAt(ConsEnv.PWDS_HEAD_META);
+        return mpwdMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_META);
     }
 
     public void changeLabel(int mode)
     {
-        gridMdl.setKeysLabel(mode);
+        mpwdMdl.getGridMdl().setKeysLabel(mode);
     }
 
     public void changeMajor(int note)
     {
-        gridMdl.setKeysMajor(note);
+        mpwdMdl.getGridMdl().setKeysMajor(note);
     }
 
     public void changeKind(String hash)
     {
-        if (gridMdl.setKeysKind(hash))
+        if (mpwdMdl.getGridMdl().setKeysKind(hash))
         {
             mpwdMdl.getListMdl().wRemove(ls_LastIndx);
         }
@@ -1280,7 +1278,7 @@ public class MainPtn extends AFrame
         {
             Jcsv csv = new Jcsv(file);
             java.util.ArrayList<java.util.ArrayList<String>> data = new java.util.ArrayList<java.util.ArrayList<String>>();
-            int size = gridMdl.wExport(data, kind.getC2010103());
+            int size = mpwdMdl.getGridMdl().wExport(data, kind.getC2010103());
             csv.saveFile(data);
             Lang.showMesg(this, LangRes.P30F7A25, "成功导出数据个数：{0}", size + "");
         }
@@ -1333,7 +1331,7 @@ public class MainPtn extends AFrame
         {
             Jcsv csv = new Jcsv(file);
             java.util.ArrayList<java.util.ArrayList<String>> data = csv.readFile();
-            int size = gridMdl.wImport(data, kind.getC2010103());
+            int size = mpwdMdl.getGridMdl().wImport(data, kind.getC2010103());
             mpwdMdl.getListMdl().listName(kind.getC2010103());
             Lang.showMesg(this, LangRes.P30F7A07, "成功导入数据个数：{0}", "" + size);
 
@@ -1364,7 +1362,7 @@ public class MainPtn extends AFrame
             }
         }
 
-        gridMdl.clear();
+        mpwdMdl.getGridMdl().clear();
         tb_LastIndx = 0;
 
         return true;
@@ -1372,28 +1370,28 @@ public class MainPtn extends AFrame
 
     public boolean gridModified()
     {
-        return gridMdl.isModified();
+        return mpwdMdl.getGridMdl().isModified();
     }
 
     public void removeSelected()
     {
-        gridMdl.wRemove(tb_KeysView.getSelectedRow());
+        mpwdMdl.getGridMdl().wRemove(tb_KeysView.getSelectedRow());
         selectNext(0, true);
     }
 
     public void updateSelected()
     {
-        gridMdl.setModified(true);
-        if (gridMdl.getRowCount() < ConsEnv.PWDS_HEAD_SIZE)
+        mpwdMdl.getGridMdl().setModified(true);
+        if (mpwdMdl.getGridMdl().getRowCount() < ConsEnv.PWDS_HEAD_SIZE)
         {
-            gridMdl.initBody(gridMdl.getItemAt(ConsEnv.PWDS_HEAD_GUID).getSpec(IEditItem.SPEC_GUID_TPLT));
+            mpwdMdl.getGridMdl().initBody(mpwdMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_GUID).getSpec(IEditItem.SPEC_GUID_TPLT));
         }
-        selectNext(com.magicpwd._util.Char.isValidateHash(gridMdl.getKeysHash()) ? 0 : 1, true);
+        selectNext(com.magicpwd._util.Char.isValidateHash(mpwdMdl.getGridMdl().getKeysHash()) ? 0 : 1, true);
     }
 
     public void saveCfg(String key, String text) throws Exception
     {
-        DBA3000.saveConfig(key, gridMdl.enCrypt(text));
+        DBA3000.saveConfig(key, mpwdMdl.getGridMdl().enCrypt(text));
     }
 
     public String readCfg(String key) throws Exception
@@ -1401,26 +1399,26 @@ public class MainPtn extends AFrame
         String text = DBA3000.readConfig(key);
         if (com.magicpwd._util.Char.isValidate(text))
         {
-            text = gridMdl.deCrypt(text);
+            text = mpwdMdl.getGridMdl().deCrypt(text);
         }
         return text;
     }
 
     public void enCrypt(java.io.File src, java.io.File dst) throws Exception
     {
-        gridMdl.enCrypt(src, dst);
+        mpwdMdl.getGridMdl().enCrypt(src, dst);
     }
 
     public void deCrypt(java.io.File src, java.io.File dst) throws Exception
     {
-        gridMdl.deCrypt(src, dst);
+        mpwdMdl.getGridMdl().deCrypt(src, dst);
     }
 
     public void exportCard(java.io.File srcFile, java.io.File dstFile, String fileExt)
     {
         try
         {
-            Card card = new Card(gridMdl);
+            Card card = new Card(mpwdMdl.getGridMdl());
             if (ConsEnv.CARD_HTM.equals(fileExt))
             {
                 dstFile = card.exportHtm(srcFile, dstFile);
@@ -1475,21 +1473,21 @@ public class MainPtn extends AFrame
         MailPtn mailPtn = new MailPtn();
         mailPtn.initView();
         mailPtn.initLang();
-        java.util.List<I1S2> mailList = gridMdl.wSelect(ConsDat.INDX_MAIL);
+        java.util.List<I1S2> mailList = mpwdMdl.getGridMdl().wSelect(ConsDat.INDX_MAIL);
         mailPtn.initMail(mailList);
         if (mailList.size() < 1)
         {
             Lang.showMesg(this, null, "没有可用的邮件类型数据！");
             return;
         }
-        java.util.List<I1S2> userList = gridMdl.wSelect(ConsDat.INDX_TEXT);
+        java.util.List<I1S2> userList = mpwdMdl.getGridMdl().wSelect(ConsDat.INDX_TEXT);
         mailPtn.initUser(userList);
         if (userList.size() < 1)
         {
             Lang.showMesg(this, null, "没有可用的文本类型数据！");
             return;
         }
-        java.util.List<I1S2> pwdsList = gridMdl.wSelect(ConsDat.INDX_PWDS);
+        java.util.List<I1S2> pwdsList = mpwdMdl.getGridMdl().wSelect(ConsDat.INDX_PWDS);
         mailPtn.initPwds(pwdsList);
         if (pwdsList.size() < 1)
         {
@@ -1535,7 +1533,7 @@ public class MainPtn extends AFrame
     {
         if (histDlg == null)
         {
-            histDlg = new HistDlg(gridMdl, this);
+            histDlg = new HistDlg(mpwdMdl.getGridMdl(), this);
             histDlg.initView();
             histDlg.initLang();
             Util.centerForm(histDlg, this);

@@ -106,7 +106,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         mwTrayForm.setVisible(true);
 
         // 右键菜单初始化
-        menuPtn = new MenuPtn(null);
+        menuPtn = new MenuPtn(this, userMdl);
         try
         {
             menuPtn.loadData(new java.io.File(ConsEnv.DIR_DAT, "tray.xml"));
@@ -231,6 +231,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         if (mp_NormPtn == null)
         {
             mp_NormPtn = new NormPtn(this, userMdl);
+            mfCurrForm = mp_NormPtn;
             mp_NormPtn.initView();
             mp_NormPtn.initLang();
             mp_NormPtn.initData();

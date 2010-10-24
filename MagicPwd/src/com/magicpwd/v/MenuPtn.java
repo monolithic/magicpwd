@@ -21,6 +21,7 @@ import com.magicpwd.e.mpwd.skin.FeelAction;
 import com.magicpwd.e.mpwd.skin.LookAction;
 import com.magicpwd.e.mpwd.skin.MoreAction;
 import com.magicpwd.e.mpwd.skin.ThemeAction;
+import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
 import java.util.List;
 import org.dom4j.Document;
@@ -37,14 +38,16 @@ public class MenuPtn
 
     private Document document;
     private TrayPtn trayPtn;
+    private UserMdl userMdl;
     private java.util.regex.Pattern pattern;
     private java.util.HashMap<String, javax.swing.AbstractButton> buttons;
     private java.util.HashMap<String, javax.swing.Action> actions;
     private java.util.HashMap<String, WButtonGroup> groups;
 
-    public MenuPtn(TrayPtn trayPtn)
+    public MenuPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
         this.trayPtn = trayPtn;
+        this.userMdl = userMdl;
         buttons = new java.util.HashMap<String, javax.swing.AbstractButton>();
         actions = new java.util.HashMap<String, javax.swing.Action>();
         groups = new java.util.HashMap<String, WButtonGroup>();
@@ -132,7 +135,7 @@ public class MenuPtn
         return menuBar;
     }
 
-    public javax.swing.JToolBar getToolBar(String toolId)
+    public javax.swing.JToolBar getToolBar(String toolId, javax.swing.JComponent component)
     {
         if (!Char.isValidate(toolId) || document == null)
         {
@@ -161,7 +164,7 @@ public class MenuPtn
                 tmp = (Element) obj;
                 if ("item".equals(tmp.getName()))
                 {
-                    toolBar.add(createButton(tmp, null));
+                    toolBar.add(createButton(tmp, component));
                     continue;
                 }
                 if ("seperator".equals(tmp.getName()))
@@ -410,7 +413,7 @@ public class MenuPtn
                     item = new javax.swing.JCheckBoxMenuItem();
                     Bean.setText(item, getLang(prop, "text"));
                     Bean.setTips(item, getLang(prop, "tips"));
-                    item.setSelected(trayPtn.getCurrForm().getUserMdl().getCfg(ConsCfg.CFG_SKIN, "default").equals(prop.getProperty("name")));
+                    item.setSelected(userMdl.getCfg(ConsCfg.CFG_SKIN, "default").equals(prop.getProperty("name")));
                     skinMenu.add(item);
                     group.add(item);
                     prop.clear();
@@ -445,7 +448,7 @@ public class MenuPtn
         }
 
         javax.swing.JCheckBoxMenuItem item;
-        String lookName = trayPtn.getCurrForm().getUserMdl().getCfg(ConsCfg.CFG_SKIN_NAME, ConsCfg.DEF_SKIN_SYS);
+        String lookName = userMdl.getCfg(ConsCfg.CFG_SKIN_NAME, ConsCfg.DEF_SKIN_SYS);
         LookAction action = new LookAction();
         WButtonGroup group = new WButtonGroup();
 
@@ -626,7 +629,7 @@ public class MenuPtn
             feelMenu.addSeparator();
 
             javax.swing.JCheckBoxMenuItem item;
-            String feelName = trayPtn.getCurrForm().getUserMdl().getCfg(ConsCfg.CFG_SKIN_FEEL, ConsCfg.DEF_FEEL_DEF);
+            String feelName = userMdl.getCfg(ConsCfg.CFG_SKIN_FEEL, ConsCfg.DEF_FEEL_DEF);
             FeelAction action = new FeelAction();
             WButtonGroup group = new WButtonGroup();
 
@@ -963,7 +966,7 @@ public class MenuPtn
         String path = element.attributeValue("path");
         if (Char.isValidate(path))
         {
-            javax.swing.ImageIcon icon = trayPtn.getCurrForm().getUserMdl().readIcon(path);
+            javax.swing.ImageIcon icon = userMdl.readIcon(path);
             if (validate)
             {
                 trayPtn.getCurrForm().setFavIcon(hash, icon);
@@ -1025,11 +1028,6 @@ public class MenuPtn
     }
 
     public boolean isVisible(String id)
-    {
-        return true;
-    }
-
-    public boolean isd()
     {
         return true;
     }
