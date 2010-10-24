@@ -35,7 +35,6 @@ public class HeadBean extends javax.swing.JPanel
         lb_MetaName = new javax.swing.JLabel();
         tf_MetaName = new javax.swing.JTextField();
         lb_MetaData = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
         ta_MetaData = new javax.swing.JTextArea();
         lb_HintName = new javax.swing.JLabel();
         tf_HintName = new javax.swing.JTextField();
@@ -44,7 +43,7 @@ public class HeadBean extends javax.swing.JPanel
         ib_KeysIcon = new javax.swing.JLabel();
         ib_HintDate = new javax.swing.JLabel();
 
-        jScrollPane1.setViewportView(ta_MetaData);
+        javax.swing.JScrollPane jsp = new javax.swing.JScrollPane(ta_MetaData);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -63,7 +62,7 @@ public class HeadBean extends javax.swing.JPanel
         hpg1.addComponent(lb_HintDate, javax.swing.GroupLayout.Alignment.TRAILING);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg2.addGroup(hsg1);
-        hpg2.addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE);
+        hpg2.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE);
         hpg2.addGroup(hsg2);
         hpg2.addComponent(tf_HintName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.SequentialGroup hsg3 = layout.createSequentialGroup();
@@ -80,7 +79,7 @@ public class HeadBean extends javax.swing.JPanel
         vpg1.addComponent(ib_KeysIcon);
         javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         vpg2.addComponent(lb_MetaData);
-        vpg2.addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE);
+        vpg2.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE);
         javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg3.addComponent(lb_HintName);
         vpg3.addComponent(tf_HintName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
@@ -127,7 +126,6 @@ public class HeadBean extends javax.swing.JPanel
     }
     private javax.swing.JLabel ib_HintDate;
     private javax.swing.JLabel ib_KeysIcon;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lb_HintDate;
     private javax.swing.JLabel lb_HintName;
     private javax.swing.JLabel lb_MetaData;

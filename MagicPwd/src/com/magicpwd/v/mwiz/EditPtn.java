@@ -19,6 +19,7 @@ package com.magicpwd.v.mwiz;
 import com.magicpwd._bean.mwiz.GuidBean;
 import com.magicpwd._bean.mwiz.HeadBean;
 import com.magicpwd._util.Bean;
+import com.magicpwd._util.Lang;
 
 /**
  * Application: MagicPwd
@@ -41,7 +42,7 @@ public class EditPtn extends javax.swing.JDialog
 
     public EditPtn(NormPtn normPtn)
     {
-        super(normPtn, true);
+        super(normPtn, false);
         this.normPtn = normPtn;
     }
 
@@ -67,6 +68,9 @@ public class EditPtn extends javax.swing.JDialog
 
     public void initLang()
     {
+        guidBean.initLang();
+        headBean.initLang();
+
         bt_Cancel.setText("取消(C)");
         bt_Update.setText("保存(S)");
         bt_NextStep.setText("下一步(N)");
@@ -76,6 +80,12 @@ public class EditPtn extends javax.swing.JDialog
 
     public void initData()
     {
+        guidBean.initData();
+        headBean.initData();
+
+        currStep = -1;
+        bt_Update.setVisible(false);
+        bt_PrevStep.setVisible(false);
         setVisible(true);
     }
 
@@ -84,7 +94,7 @@ public class EditPtn extends javax.swing.JDialog
         pl_NoteArea = new javax.swing.JPanel();
         ta_NoteArea = new javax.swing.JTextArea();
 
-        ta_NoteArea.setColumns(20);
+        ta_NoteArea.setEditable(false);
         ta_NoteArea.setRows(3);
         javax.swing.JScrollPane jsp = new javax.swing.JScrollPane(ta_NoteArea);
 
@@ -124,7 +134,6 @@ public class EditPtn extends javax.swing.JDialog
             }
         });
 
-        bt_Update.setVisible(false);
         bt_Update.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -145,7 +154,6 @@ public class EditPtn extends javax.swing.JDialog
             }
         });
 
-        bt_PrevStep.setVisible(false);
         bt_PrevStep.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -168,11 +176,11 @@ public class EditPtn extends javax.swing.JDialog
         javax.swing.GroupLayout.SequentialGroup hsg2 = layout.createSequentialGroup();
         hsg2.addContainerGap(1, Short.MAX_VALUE);
         hsg2.addComponent(bt_PrevStep);
-        hsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        //hsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg2.addComponent(bt_NextStep);
-        hsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        //hsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg2.addComponent(bt_Update);
-        hsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        //hsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg2.addComponent(bt_Cancel);
         hsg2.addContainerGap();
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(hpg1).addGroup(hsg2));
@@ -200,11 +208,12 @@ public class EditPtn extends javax.swing.JDialog
 
     private void initHeadView()
     {
-        cl_Layout.show(pl_EditArea, "body");
+        cl_Layout.show(pl_EditArea, "head");
     }
 
     private void prevBodyView()
     {
+        cl_Layout.show(pl_EditArea, "body");
     }
 
     private void nextBodyView()
@@ -214,14 +223,16 @@ public class EditPtn extends javax.swing.JDialog
     private void bt_PrevStepActionPerformed(java.awt.event.ActionEvent evt)
     {
         currStep -= 1;
+        if (currStep < 0)
+        {
+            initGuidView();
+            bt_Update.setVisible(false);
+            bt_PrevStep.setVisible(false);
+            return;
+        }
         if (currStep == 0)
         {
             initHeadView();
-            return;
-        }
-        if (currStep == -1)
-        {
-            initGuidView();
             return;
         }
         prevBodyView();
@@ -230,6 +241,7 @@ public class EditPtn extends javax.swing.JDialog
     private void bt_NextStepActionPerformed(java.awt.event.ActionEvent evt)
     {
         currStep += 1;
+        bt_PrevStep.setVisible(true);
         if (currStep == 0)
         {
             initHeadView();
@@ -244,6 +256,14 @@ public class EditPtn extends javax.swing.JDialog
 
     private void bt_CancelActionPerformed(java.awt.event.ActionEvent evt)
     {
+        if (currStep > -1)
+        {
+            if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(this, null, null))
+            {
+                return;
+            }
+        }
+        setVisible(false);
     }
     private java.awt.CardLayout cl_Layout;
     private javax.swing.JButton bt_Cancel;
