@@ -11,7 +11,7 @@ public class Main
     public static void main(String args[])
     {
         JFrame.setDefaultLookAndFeelDecorated(true);
-        MenuPtn ptn = new MenuPtn(null);
+        MenuPtn ptn = new MenuPtn(null, null);
         try
         {
             ptn.loadData("dat/mpay.xml");

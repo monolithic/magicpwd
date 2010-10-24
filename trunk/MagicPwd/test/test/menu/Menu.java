@@ -39,7 +39,7 @@ public class Menu extends javax.swing.AbstractAction
         Bean.loadLnF(userMdl);
         Lang.loadLang(userMdl);
 
-        MenuPtn ptn = new MenuPtn(null);
+        MenuPtn ptn = new MenuPtn(null, userMdl);
         try
         {
             ptn.loadData("dat/menu.xml");
@@ -53,7 +53,7 @@ public class Menu extends javax.swing.AbstractAction
         bar = ptn.getMenuBar("mpwd", frame.getRootPane());
         frame.setJMenuBar(bar);
 
-        frame.getContentPane().add(ptn.getToolBar("mpwd"), BorderLayout.NORTH);
+        frame.getContentPane().add(ptn.getToolBar("mpwd", null), BorderLayout.NORTH);
 
         frame.setSize(new Dimension(400, 300));
         frame.setVisible(true);
