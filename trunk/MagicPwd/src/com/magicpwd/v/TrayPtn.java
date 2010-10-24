@@ -12,7 +12,6 @@ import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.DBAccess;
 import com.magicpwd.m.UserMdl;
-import com.magicpwd.r.AmonFF;
 import com.magicpwd.v.mpay.NormPtn;
 import com.magicpwd.v.mpad.MiniPtn;
 import com.magicpwd.v.mpwd.MainPtn;
@@ -35,8 +34,9 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
     private javax.swing.event.PopupMenuListener listener;
     private MenuPtn menuPtn;
 
-    public TrayPtn()
+    public TrayPtn(UserMdl userMdl)
     {
+        this.userMdl = userMdl;
     }
 
     public boolean initView()
@@ -168,13 +168,13 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         javax.swing.JFrame currForm = getCurrForm();
         switch (nextPtn)
         {
-            case ConsEnv.VIEW_MAIN:
+            case ConsEnv.APP_MODE_MPWD:
                 showMainPtn();
                 break;
-            case ConsEnv.VIEW_NORM:
+            case ConsEnv.APP_MODE_MWIZ:
                 showNormPtn();
                 break;
-            case ConsEnv.VIEW_MINI:
+            case ConsEnv.APP_MODE_MPAD:
                 showMiniPtn();
                 break;
             default:
@@ -221,7 +221,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         getMainPtn();
 
         mfCurrForm = mp_MainPtn;
-        currPtn = ConsEnv.VIEW_MAIN;
+        currPtn = ConsEnv.APP_MODE_MPWD;
     }
 
     public static NormPtn getNormPtn()
@@ -240,7 +240,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         }
 
         mfCurrForm = mp_NormPtn;
-        currPtn = ConsEnv.VIEW_NORM;
+        currPtn = ConsEnv.APP_MODE_MWIZ;
     }
 
     public MiniPtn getMiniPtn()
@@ -260,7 +260,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         getMiniPtn();
 
         mfCurrForm = mp_MiniPtn;
-        currPtn = ConsEnv.VIEW_MINI;
+        currPtn = ConsEnv.APP_MODE_MPAD;
     }
 
     @Override
@@ -425,57 +425,6 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         showViewPtn(currPtn);
     }
 
-    public void loadCfg()
-    {
-        if (userMdl == null)
-        {
-            userMdl = new UserMdl();
-
-            // 用户配置文件加载
-            userMdl.loadCfg();
-        }
-
-        // 语言资源加载
-        Lang.loadLang(userMdl);
-
-        // 扩展皮肤加载
-        Bean.loadLnF(userMdl);
-    }
-
-    public void loadPre()
-    {
-        try
-        {
-            Class.forName("org.hsqldb.jdbcDriver");
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-        }
-
-        Bean.getNone();
-        Bean.getLogo(16);
-
-        // 扩展库加载
-        java.io.File file = new java.io.File(ConsEnv.DIR_EXT);
-        if (file != null && file.exists() && file.isDirectory() && file.canRead())
-        {
-            java.io.File jars[] = file.listFiles(new AmonFF(".+\\.jar$", true));
-            if (jars != null && jars.length > 0)
-            {
-                try
-                {
-                    // 加载扩展库
-                    Bean.loadJar(jars);
-                }
-                catch (Exception exp)
-                {
-                    Logs.exception(exp);
-                }
-            }
-        }
-    }
-
     public void showViewPtn(int nextPtn)
     {
         // 显示登录
@@ -501,13 +450,13 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
             getCurrForm().setVisible(false);
             switch (nextPtn)
             {
-                case ConsEnv.VIEW_MAIN:
+                case ConsEnv.APP_MODE_MPWD:
                     showMainPtn();
                     break;
-                case ConsEnv.VIEW_NORM:
+                case ConsEnv.APP_MODE_MWIZ:
                     showNormPtn();
                     break;
-                case ConsEnv.VIEW_MINI:
+                case ConsEnv.APP_MODE_MPAD:
                     showMiniPtn();
                     break;
                 default:

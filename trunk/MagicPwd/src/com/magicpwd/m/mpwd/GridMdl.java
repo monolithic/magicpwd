@@ -48,7 +48,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
         initLogo();
         initHint();
 
-        DBA3000.selectTpltData(userCfg, tpltHash, ls_ItemList);
+        DBA3000.selectTpltData(userMdl, tpltHash, ls_ItemList);
         fireTableDataChanged();
     }
 
@@ -185,7 +185,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
      */
     public EditItem wAppend(int indx, int type)
     {
-        return wAppend(indx, new EditItem(userCfg, type));
+        return wAppend(indx, new EditItem(userMdl, type));
     }
 
     /**
@@ -299,25 +299,25 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
             indx = 0;
             keys.setDefault();
             ls_ItemList.clear();
-            keys.setP30F0105(userCfg.getCode());
+            keys.setP30F0105(userMdl.getCode());
 
             // Guid
-            GuidItem guid = new GuidItem(userCfg);
+            GuidItem guid = new GuidItem(userMdl);
             guid.setTime(new java.sql.Timestamp(com.magicpwd._util.Date.stringToDate(temp.get(indx++), '-', ':', ' ').getTimeInMillis()));
             guid.setData(kindHash);
             ls_ItemList.add(guid);
 
             // Meta
-            MetaItem meta = new MetaItem(userCfg);
+            MetaItem meta = new MetaItem(userMdl);
             meta.setName(temp.get(indx++));
             meta.setData(temp.get(indx++));
             ls_ItemList.add(meta);
 
             // Logo
-            ls_ItemList.add(new LogoItem(userCfg));
+            ls_ItemList.add(new LogoItem(userMdl));
 
             // Hint
-            HintItem hint = new HintItem(userCfg);
+            HintItem hint = new HintItem(userMdl);
             String text = temp.get(indx++);
             if (com.magicpwd._util.Char.isValidate(text))
             {
@@ -328,7 +328,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
 
             while (indx < temp.size())
             {
-                tplt = new EditItem(userCfg);
+                tplt = new EditItem(userMdl);
                 tplt.setType(Integer.parseInt(temp.get(indx++)));
                 tplt.setName(temp.get(indx++));
                 tplt.setData(temp.get(indx++));
@@ -346,7 +346,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     public int wExport(java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash)
     {
         java.util.ArrayList<Keys> dataList = new java.util.ArrayList<Keys>();
-        DBA3000.readKeysList(userCfg, kindHash, dataList);
+        DBA3000.readKeysList(userMdl, kindHash, dataList);
         if (dataList == null || dataList.size() < 1)
         {
             return 0;

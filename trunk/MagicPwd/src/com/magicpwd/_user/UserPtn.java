@@ -1,6 +1,7 @@
 package com.magicpwd._user;
 
 import com.magicpwd.__i.IBackCall;
+import com.magicpwd._comn.S1S1;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
@@ -670,6 +671,10 @@ public class UserPtn extends javax.swing.JPanel
         {
             case ConsEnv.INT_SIGN_IN:
                 // 显示上次登录用户
+                cb_UserType.addItem(new S1S1("mpwd", "高级模式"));
+                cb_UserType.addItem(new S1S1("mwiz", "向导模式"));
+                cb_UserType.addItem(new S1S1("mpad", "记事模式"));
+                cb_UserType.setSelectedIndex(UserMdl.getAppMode());
                 String name = userMdl.getCfg(ConsCfg.CFG_USER_LAST);
                 if (com.magicpwd._util.Char.isValidate(name))
                 {
@@ -1002,7 +1007,7 @@ public class UserPtn extends javax.swing.JPanel
 
         try
         {
-            boolean b = safeMdl.signIn(name, pwds);
+            boolean b = userMdl.signIn(name, pwds);
             if (!b)
             {
                 errCount += 1;
@@ -1067,7 +1072,7 @@ public class UserPtn extends javax.swing.JPanel
 
         try
         {
-            boolean b = safeMdl.signIn(name, pwds);
+            boolean b = userMdl.signIn(name, pwds);
             if (!b)
             {
                 errCount += 1;
@@ -1145,7 +1150,7 @@ public class UserPtn extends javax.swing.JPanel
         }
         try
         {
-            boolean b = safeMdl.signUp(un, p1);
+            boolean b = userMdl.signUp(un, p1);
             if (!b)
             {
                 Lang.showMesg(this, LangRes.P30FAA06, "注册用户失败，请更换用户名及口令后重试！");
@@ -1197,7 +1202,7 @@ public class UserPtn extends javax.swing.JPanel
         }
         try
         {
-            boolean b = safeMdl.signPk(p0, p1);
+            boolean b = userMdl.signPk(p0, p1);
             if (!b)
             {
                 Lang.showMesg(this, LangRes.P30FAA09, "口令更改失败，请检查您输入的口令是否与原口令相同！");
@@ -1243,7 +1248,7 @@ public class UserPtn extends javax.swing.JPanel
         StringBuffer sb = new StringBuffer(pwds);
         try
         {
-            boolean b = safeMdl.signFp(name, sb);
+            boolean b = userMdl.signFp(name, sb);
             if (!b)
             {
                 Lang.showMesg(this, LangRes.P30FAA03, "身份验证错误，请确认您的用户名及口令是否正确！");
@@ -1291,7 +1296,7 @@ public class UserPtn extends javax.swing.JPanel
             backCall.callBack(null, null, ConsEnv.STR_SIGN_FP, sb.toString());
         }
         Lang.showMesg(null, LangRes.P30FAA18, "您的新口令是：{0}\n为了您的安全，请登录软件后尽快修改您的口令。", sb.toString());
-        trayPtn.showViewPtn(ConsEnv.VIEW_MAIN);
+        trayPtn.showViewPtn(ConsEnv.APP_MODE_MPWD);
     }
 
     /**
@@ -1328,7 +1333,7 @@ public class UserPtn extends javax.swing.JPanel
 
         try
         {
-            boolean b = safeMdl.signSk(p0, p1);
+            boolean b = userMdl.signSk(p0, p1);
             if (!b)
             {
                 Lang.showMesg(this, LangRes.P30FAA16, "安全口令设定失败，请稍后重新尝试！");

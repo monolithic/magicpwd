@@ -12,7 +12,7 @@ import javax.swing.event.TableModelListener;
  *
  * @author Amon
  */
-public class MwizMdl extends SafeMdl implements javax.swing.table.TableModel, java.io.Serializable
+public final class MwizMdl extends SafeMdl implements javax.swing.table.TableModel, java.io.Serializable
 {
 
     public MwizMdl(UserMdl userMdl)

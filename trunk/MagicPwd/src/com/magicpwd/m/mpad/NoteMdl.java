@@ -40,7 +40,7 @@ public class NoteMdl extends SafeMdl
     @Override
     public void initBody(String tpltHash)
     {
-        EditItem note = new EditItem(userCfg);
+        EditItem note = new EditItem(userMdl);
         note.setType(ConsDat.INDX_AREA);
         ls_ItemList.add(note);
     }

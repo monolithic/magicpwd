@@ -27,21 +27,19 @@ import com.magicpwd.d.DBA3000;
 public abstract class SafeMdl
 {
 
+    protected Keys keys;
+    protected UserMdl userMdl;
+    protected java.util.ArrayList<IEditItem> ls_ItemList;
     /**
      * 临时数据保存
      */
     private boolean interim;
     private boolean modified;
-    protected Keys keys;
     private javax.crypto.Cipher dCipher;
     private javax.crypto.Cipher eCipher;
-    private SafeKey safeKey;
-    protected UserMdl userCfg;
-    protected java.util.ArrayList<IEditItem> ls_ItemList;
 
     public SafeMdl(UserMdl userMdl)
     {
-        safeKey = new SafeKey(userCfg);
         keys = new Keys();
         ls_ItemList = new java.util.ArrayList<IEditItem>();
     }
@@ -62,7 +60,7 @@ public abstract class SafeMdl
             try
             {
                 dCipher = javax.crypto.Cipher.getInstance(ConsEnv.NAME_CIPHER);
-                dCipher.init(javax.crypto.Cipher.DECRYPT_MODE, safeKey);
+                dCipher.init(javax.crypto.Cipher.DECRYPT_MODE, userMdl.safeKey);
             }
             catch (Exception exp)
             {
@@ -84,7 +82,7 @@ public abstract class SafeMdl
             try
             {
                 eCipher = javax.crypto.Cipher.getInstance(ConsEnv.NAME_CIPHER);
-                eCipher.init(javax.crypto.Cipher.ENCRYPT_MODE, safeKey);
+                eCipher.init(javax.crypto.Cipher.ENCRYPT_MODE, userMdl.safeKey);
             }
             catch (Exception exp)
             {
@@ -103,7 +101,7 @@ public abstract class SafeMdl
      */
     public String deCrypt(String text) throws Exception
     {
-        return new String(getDCipher().doFinal(Util.stringToBytes(text, safeKey.getMask())), ConsEnv.FILE_ENCODING);
+        return new String(getDCipher().doFinal(Util.stringToBytes(text, userMdl.safeKey.getMask())), ConsEnv.FILE_ENCODING);
     }
 
     /**
@@ -137,7 +135,7 @@ public abstract class SafeMdl
      */
     public String enCrypt(String text) throws Exception
     {
-        return Util.bytesToString(getECipher().doFinal(text.getBytes(ConsEnv.FILE_ENCODING)), safeKey.getMask());
+        return Util.bytesToString(getECipher().doFinal(text.getBytes(ConsEnv.FILE_ENCODING)), userMdl.safeKey.getMask());
     }
 
     /**
@@ -162,103 +160,6 @@ public abstract class SafeMdl
         fos.flush();
         fos.close();
         fis.close();
-    }
-
-    /**
-     * 用户登录
-     * @param userName
-     * @param userPwds
-     * @param userSalt
-     * @throws Exception
-     */
-    public boolean signIn(String userName, String userPwds) throws Exception
-    {
-        safeKey.setName(userName);
-        safeKey.setPwds(userPwds);
-        return safeKey.signIn();
-    }
-
-    public boolean signPb(String userName, String userPwds) throws Exception
-    {
-        safeKey.setName(userName);
-        safeKey.setPwds(userPwds);
-        return safeKey.signPb();
-    }
-
-    /**
-     * 修改登录口令
-     * @param oldPwds
-     * @param userPwds
-     * @throws Exception
-     */
-    public boolean signPk(String oldPwds, String newPwds) throws Exception
-    {
-        if (safeKey == null)
-        {
-            return false;
-        }
-        return safeKey.signPk(oldPwds, newPwds);
-    }
-
-    /**
-     * 口令找回
-     *
-     * @param secPwds
-     * @return
-     * @throws Exception
-     */
-    public boolean signFp(String usrName, StringBuffer secPwds) throws Exception
-    {
-        if (safeKey == null)
-        {
-            return false;
-        }
-        return safeKey.signFp(usrName, secPwds);
-    }
-
-    /**
-     * 设置安全口令
-     * @param secPwds
-     * @return
-     * @throws java.lang.Exception
-     */
-    public boolean signSk(String oldPwds, String secPwds) throws Exception
-    {
-        if (safeKey == null)
-        {
-            return false;
-        }
-        return safeKey.signSk(oldPwds, secPwds);
-    }
-
-    /**
-     * 用户注销
-     * @param userName
-     * @param userPwds
-     * @throws Exception
-     */
-    public boolean signOx(String userName, String userPwds)
-    {
-        return safeKey.signOx();
-    }
-
-    /**
-     * 用户注册
-     * @param userName
-     * @param userPwds
-     * @return
-     * @throws Exception
-     */
-    public boolean signUp(String userName, String userPwds) throws Exception
-    {
-        safeKey.setName(userName);
-        safeKey.setPwds(userPwds);
-        return safeKey.signUp();
-    }
-
-    public boolean hasSkey()
-    {
-        return safeKey.hasSkey();
     }
 
     /**
@@ -306,7 +207,7 @@ public abstract class SafeMdl
     {
         clear();
         keys.setP30F0104(keysHash);
-        keys.setP30F0105(userCfg.getCode());
+        keys.setP30F0105(userMdl.getCode());
         if (DBA3000.readPwdsData(keys))
         {
             deCrypt(keys, ls_ItemList);
@@ -321,7 +222,7 @@ public abstract class SafeMdl
      */
     public void saveData(boolean histBack) throws Exception
     {
-        keys.setP30F0105(userCfg.getCode());
+        keys.setP30F0105(userMdl.getCode());
         keys.setHistBack(histBack);
         enCrypt(keys, ls_ItemList);
         DBA3000.savePwdsData(keys);
@@ -339,7 +240,7 @@ public abstract class SafeMdl
      */
     public IEditItem initGuid()
     {
-        GuidItem guid = new GuidItem(userCfg);
+        GuidItem guid = new GuidItem(userMdl);
         guid.setTime(new java.sql.Timestamp(System.currentTimeMillis()));
         ls_ItemList.add(guid);
         return guid;
@@ -351,7 +252,7 @@ public abstract class SafeMdl
      */
     public IEditItem initMeta()
     {
-        MetaItem meta = new MetaItem(userCfg);
+        MetaItem meta = new MetaItem(userMdl);
         ls_ItemList.add(meta);
         return meta;
     }
@@ -362,7 +263,7 @@ public abstract class SafeMdl
      */
     public IEditItem initLogo()
     {
-        LogoItem logo = new LogoItem(userCfg);
+        LogoItem logo = new LogoItem(userMdl);
         ls_ItemList.add(logo);
         return logo;
     }
@@ -373,7 +274,7 @@ public abstract class SafeMdl
      */
     public IEditItem initHint()
     {
-        HintItem hint = new HintItem(userCfg);
+        HintItem hint = new HintItem(userMdl);
         ls_ItemList.add(hint);
         return hint;
     }
@@ -414,26 +315,26 @@ public abstract class SafeMdl
         }
 
         // Guid
-        GuidItem guid = new GuidItem(userCfg);
+        GuidItem guid = new GuidItem(userMdl);
         guid.setData(keys.getP30F0106());
         guid.setTime(keys.getP30F0107());
         guid.setSpec(IEditItem.SPEC_GUID_TPLT, keys.getP30F0108());
         list.add(guid);
 
         // MetaItem
-        MetaItem meta = new MetaItem(userCfg);
+        MetaItem meta = new MetaItem(userMdl);
         meta.setName(keys.getP30F0109());
         meta.setData(keys.getP30F010A());
         list.add(meta);
 
         // LogoItem
-        LogoItem logo = new LogoItem(userCfg);
+        LogoItem logo = new LogoItem(userMdl);
         logo.setName(keys.getP30F010B());
         logo.setData(keys.getP30F010C());
         list.add(logo);
 
         // HintItem
-        HintItem hint = new HintItem(userCfg);
+        HintItem hint = new HintItem(userMdl);
         hint.setTime(keys.getP30F010D());
         hint.setName(keys.getP30F010E());
         list.add(hint);
@@ -460,7 +361,7 @@ public abstract class SafeMdl
             name = t.substring(dn + 1, dd);
             data = t.substring(dd + 1, ds);
             spec = t.substring(ds + 1, t.length());
-            item = new EditItem(userCfg, type, name, data);
+            item = new EditItem(userMdl, type, name, data);
             if (spec.length() > 0)
             {
                 item.deCodeSpec(spec, ConsDat.SP_SQL_KV);

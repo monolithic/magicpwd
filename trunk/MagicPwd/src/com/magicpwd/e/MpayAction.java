@@ -21,7 +21,7 @@ public class MpayAction extends ATrayAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        trayPtn.showViewPtn(ConsEnv.VIEW_NORM);
+        trayPtn.showViewPtn(ConsEnv.APP_MODE_MWIZ);
     }
 
     @Override
