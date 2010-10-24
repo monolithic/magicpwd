@@ -3,7 +3,6 @@ package com.magicpwd.v.mpay;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
-import com.magicpwd._util.Util;
 
 /**
  * 正常模式：账簿
@@ -18,7 +17,7 @@ public class NormPtn extends javax.swing.JFrame
     {
         this.pack();
         this.setIconImage(Bean.getLogo(16));
-        Util.centerForm(this, null);
+        Bean.centerForm(this, null);
     }
 
     public void initLang()

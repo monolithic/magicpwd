@@ -5,7 +5,6 @@ import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
-import com.magicpwd._util.Util;
 import com.magicpwd.r.KindTN;
 import com.magicpwd.v.mpwd.MainPtn;
 
@@ -81,10 +80,10 @@ public class DatDialog extends javax.swing.JDialog
         vsg.addContainerGap();
         layout.setVerticalGroup(vsg);
 
-        this.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        this.setIconImage(Bean.getLogo(16));
-        this.pack();
-        Util.centerForm(this, mainPtn);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setIconImage(Bean.getLogo(16));
+        pack();
+        Bean.centerForm(this, mainPtn);
     }
 
     public void initLang()

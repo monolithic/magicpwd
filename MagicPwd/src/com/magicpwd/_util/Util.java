@@ -7,7 +7,6 @@
  */
 package com.magicpwd._util;
 
-import java.awt.Dimension;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -615,14 +614,6 @@ public final class Util
             Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(null), null);
             timer.stop();
         }
-    }
-
-    public static void centerForm(java.awt.Window form, java.awt.Window root)
-    {
-        Dimension d = (root != null ? root.getSize() : java.awt.Toolkit.getDefaultToolkit().getScreenSize());
-        Dimension s = form.getSize();
-        form.setLocation((d.width - s.width) >> 1, (d.height - s.height) >> 1);
-        form.setLocationRelativeTo(root);
     }
 
     public static void scrollToVisible(JTable table, int rowIndex, int vColIndex, boolean center)

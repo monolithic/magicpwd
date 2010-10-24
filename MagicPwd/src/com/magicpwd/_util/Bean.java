@@ -9,6 +9,7 @@ import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
+import java.awt.Dimension;
 
 /**
  *
@@ -451,5 +452,13 @@ public class Bean
         {
             method.invoke(loader, file.toURI().toURL());
         }
+    }
+
+    public static void centerForm(java.awt.Window form, java.awt.Window root)
+    {
+        Dimension d = (root != null ? root.getSize() : java.awt.Toolkit.getDefaultToolkit().getScreenSize());
+        Dimension s = form.getSize();
+        form.setLocation((d.width - s.width) >> 1, (d.height - s.height) >> 1);
+        form.setLocationRelativeTo(root);
     }
 }

@@ -10,7 +10,6 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd._util.Util;
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.e.mpad.FindAction;
 import com.magicpwd.e.mpad.NewAction;
@@ -167,9 +166,10 @@ public class MiniPtn extends AFrame
         layout.setVerticalGroup(vsg);
 
         getContentPane().add(pl_NoteBase);
-        pack();
+
         setIconImage(Bean.getLogo(16));
-        Util.centerForm(this, null);
+        pack();
+        Bean.centerForm(this, null);
     }
 
     public void initLang()

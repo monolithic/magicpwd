@@ -165,7 +165,7 @@ public class MainPtn extends AFrame
         mpwdMdl = new MpwdMdl(userMdl);
         safeMdl = mpwdMdl.getGridMdl();
         pack();
-        Util.centerForm(this, null);
+        Bean.centerForm(this, null);
     }
 
     public boolean newKeys()
@@ -1467,7 +1467,7 @@ public class MainPtn extends AFrame
             mailDlg.initView();
             mailDlg.initLang();
             mailDlg.initData();
-            Util.centerForm(mailDlg, this);
+            Bean.centerForm(mailDlg, this);
         }
 
         MailPtn mailPtn = new MailPtn();
@@ -1536,7 +1536,7 @@ public class MainPtn extends AFrame
             histDlg = new HistDlg(mpwdMdl.getGridMdl(), this);
             histDlg.initView();
             histDlg.initLang();
-            Util.centerForm(histDlg, this);
+            Bean.centerForm(histDlg, this);
         }
         histDlg.initData();
         histDlg.setVisible(true);
