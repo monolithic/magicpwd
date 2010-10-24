@@ -34,7 +34,6 @@ public class Menu extends javax.swing.AbstractAction
     public void init()
     {
         userMdl = new UserMdl();
-        userMdl.loadPre();
         userMdl.loadCfg();
 
         Bean.loadLnF(userMdl);

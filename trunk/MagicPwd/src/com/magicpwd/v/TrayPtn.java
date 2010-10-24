@@ -1,5 +1,6 @@
 package com.magicpwd.v;
 
+import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
@@ -12,9 +13,9 @@ import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.DBAccess;
 import com.magicpwd.m.UserMdl;
-import com.magicpwd.v.mpay.NormPtn;
 import com.magicpwd.v.mpad.MiniPtn;
 import com.magicpwd.v.mpwd.MainPtn;
+import com.magicpwd.v.mwiz.NormPtn;
 
 /**
  * 系统托盘
@@ -29,7 +30,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
     private static int nextPtn;
     private UserMdl userMdl;
     private UserPtn userPtn;
-    private javax.swing.JFrame mfCurrForm;
+    private AFrame mfCurrForm;
     private javax.swing.JWindow mwTrayForm;
     private javax.swing.event.PopupMenuListener listener;
     private MenuPtn menuPtn;
@@ -143,15 +144,16 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         if (ConsEnv.STR_SIGN_IN.equalsIgnoreCase(params[0]) || ConsEnv.STR_SIGN_UP.equalsIgnoreCase(params[0]))
         {
             // 设置软件界面风格
-            showMainPtn();
-            mfCurrForm.setVisible(true);
-            if (userMdl.isEditVisible())
-            {
-                mp_MainPtn.showPropInfo();
-            }
-            mp_MainPtn.setEditIsolate(userMdl.isEditIsolate());
-            mp_MainPtn.setEditVisible(userMdl.isEditVisible());
-            mp_MainPtn.requestFocus();
+//            showMainPtn();
+//            mfCurrForm.setVisible(true);
+//            if (userMdl.isEditVisible())
+//            {
+//                mp_MainPtn.showPropInfo();
+//            }
+//            mp_MainPtn.setEditIsolate(userMdl.isEditIsolate());
+//            mp_MainPtn.setEditVisible(userMdl.isEditVisible());
+//            mp_MainPtn.requestFocus();
+            showNormPtn();
             initView();
             initLang();
             initData();
@@ -199,7 +201,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         }
     }
 
-    public javax.swing.JFrame getCurrForm()
+    public AFrame getCurrForm()
     {
         return mfCurrForm;
     }
@@ -224,20 +226,21 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         currPtn = ConsEnv.APP_MODE_MPWD;
     }
 
-    public static NormPtn getNormPtn()
-    {
-        return null;
-    }
-
-    private void showNormPtn()
+    public NormPtn getNormPtn()
     {
         if (mp_NormPtn == null)
         {
-            mp_NormPtn = new NormPtn();
+            mp_NormPtn = new NormPtn(this, userMdl);
             mp_NormPtn.initView();
             mp_NormPtn.initLang();
             mp_NormPtn.initData();
         }
+        return mp_NormPtn;
+    }
+
+    private void showNormPtn()
+    {
+        getNormPtn().setVisible(true);
 
         mfCurrForm = mp_NormPtn;
         currPtn = ConsEnv.APP_MODE_MWIZ;

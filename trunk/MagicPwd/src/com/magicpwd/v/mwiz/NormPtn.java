@@ -28,7 +28,7 @@ public class NormPtn extends AFrame
     {
 //        Bean.readIcon(NormPtn.class.getResourceAsStream(ConsEnv.ICON_PATH + "mwiz16.png"), iconMap);
 
-        menuPtn = new MenuPtn(this);
+        menuPtn = new MenuPtn(trayPtn);
         try
         {
             menuPtn.loadData(new java.io.File("dat/mwiz.xml"));

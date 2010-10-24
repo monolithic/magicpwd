@@ -23,7 +23,7 @@ public class Test
         {
             Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
         }
-        NormPtn norm = new NormPtn();
+        NormPtn norm = new NormPtn(null, null);
         norm.initView();
         norm.initLang();
         norm.initData();
