@@ -21,6 +21,7 @@ import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
+import com.magicpwd.m.mwiz.KeysMdl;
 
 /**
  * Application: MagicPwd
@@ -137,6 +138,11 @@ public class HeadBean extends javax.swing.JPanel implements IMwizBean
 
     @Override
     public void initData()
+    {
+    }
+
+    @Override
+    public void showData(KeysMdl keysMdl)
     {
     }
     private BtnLabel ib_HintDate;

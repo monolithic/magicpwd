@@ -22,7 +22,7 @@ public class UserMdl
     private boolean topMost;
     private String userName;
     private java.util.Properties userCfg;
-    private CboxMdl cboxMdl;
+    private TpltMdl tpltMdl;
     private CharMdl charMdl;
     private HintMdl hintMdl;
     SafeKey safeKey;
@@ -88,24 +88,6 @@ public class UserMdl
         safeKey = new SafeKey(this);
     }
 
-    public final void saveCfg()
-    {
-        java.io.FileOutputStream fos = null;
-        try
-        {
-            fos = new java.io.FileOutputStream(new java.io.File(ConsEnv.DIR_DAT, ConsEnv.FILE_DATA + ".config"));
-            userCfg.store(fos, "MagicPwd User Configure File!");
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-        }
-        finally
-        {
-            Bean.closeStream(fos);
-        }
-    }
-
     public final void loadDef()
     {
         userCfg.setProperty(ConsCfg.CFG_VIEW_TOPS, ConsCfg.DEF_FALSE);
@@ -122,6 +104,24 @@ public class UserMdl
 
         userCfg.setProperty(ConsCfg.CFG_BACK_SIZE, "3");
         userCfg.setProperty(ConsCfg.CFG_BACK_PATH, ConsEnv.DIR_BAK);
+    }
+
+    public final void saveCfg()
+    {
+        java.io.FileOutputStream fos = null;
+        try
+        {
+            fos = new java.io.FileOutputStream(new java.io.File(ConsEnv.DIR_DAT, ConsEnv.FILE_DATA + ".config"));
+            userCfg.store(fos, "MagicPwd User Configure File!");
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+        finally
+        {
+            Bean.closeStream(fos);
+        }
     }
 
     public final String getCfg(String key)
@@ -494,19 +494,16 @@ public class UserMdl
     }
 
     /**
-     * @return the cboxMdl
+     * @return the tpltMdl
      */
-    public CboxMdl getCboxMdl()
+    public TpltMdl getTpltMdl()
     {
-        return cboxMdl;
-    }
-
-    /**
-     * @param cboxMdl the cboxMdl to set
-     */
-    public void setCboxMdl(CboxMdl cboxMdl)
-    {
-        this.cboxMdl = cboxMdl;
+        if (tpltMdl == null)
+        {
+            tpltMdl = new TpltMdl();
+            tpltMdl.initData();
+        }
+        return tpltMdl;
     }
 
     /**
@@ -514,15 +511,12 @@ public class UserMdl
      */
     public CharMdl getCharMdl()
     {
+        if (charMdl == null)
+        {
+            charMdl = new CharMdl();
+            charMdl.initData();
+        }
         return charMdl;
-    }
-
-    /**
-     * @param charMdl the charMdl to set
-     */
-    public void setCharMdl(CharMdl charMdl)
-    {
-        this.charMdl = charMdl;
     }
 
     /**
@@ -530,15 +524,12 @@ public class UserMdl
      */
     public HintMdl getHintMdl()
     {
+        if (hintMdl == null)
+        {
+            hintMdl = new HintMdl(this);
+            hintMdl.initData();
+        }
         return hintMdl;
-    }
-
-    /**
-     * @param hintMdl the hintMdl to set
-     */
-    public void setHintMdl(HintMdl hintMdl)
-    {
-        this.hintMdl = hintMdl;
     }
 
     /**

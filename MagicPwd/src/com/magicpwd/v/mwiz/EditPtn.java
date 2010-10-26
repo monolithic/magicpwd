@@ -20,6 +20,7 @@ import com.magicpwd._bean.mwiz.GuidBean;
 import com.magicpwd._bean.mwiz.HeadBean;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
+import com.magicpwd.m.mwiz.KeysMdl;
 
 /**
  * Application: MagicPwd
@@ -36,6 +37,7 @@ public class EditPtn extends javax.swing.JDialog
 {
 
     private int currStep;
+    private KeysMdl keysMdl;
     private NormPtn normPtn;
     private GuidBean guidBean;
     private HeadBean headBean;
@@ -87,6 +89,12 @@ public class EditPtn extends javax.swing.JDialog
         bt_Update.setVisible(false);
         bt_PrevStep.setVisible(false);
         setVisible(true);
+    }
+
+    public void showData(KeysMdl keysMdl)
+    {
+        this.keysMdl = keysMdl;
+        initGuidView();
     }
 
     private void initNoteView()
@@ -204,11 +212,13 @@ public class EditPtn extends javax.swing.JDialog
     private void initGuidView()
     {
         cl_Layout.show(pl_EditArea, "guid");
+        guidBean.showData(keysMdl);
     }
 
     private void initHeadView()
     {
         cl_Layout.show(pl_EditArea, "head");
+        headBean.showData(keysMdl);
     }
 
     private void prevBodyView()

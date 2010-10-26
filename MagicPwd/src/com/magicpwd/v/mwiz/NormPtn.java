@@ -104,6 +104,7 @@ public class NormPtn extends AFrame
         editPtn.initView();
         editPtn.initLang();
         editPtn.initData();
+        editPtn.showData(mwizMdl.getKeysMdl());
     }
 
     public void editSelected()

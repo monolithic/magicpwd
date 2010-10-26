@@ -41,6 +41,7 @@ public class KeysMdl extends SafeMdl
     @Override
     public void initHead()
     {
+        initGuid();
     }
 
     @Override

@@ -17,6 +17,7 @@
 package com.magicpwd.__i.mwiz;
 
 import com.magicpwd.__i.IEditBean;
+import com.magicpwd.m.mwiz.KeysMdl;
 
 /**
  *
@@ -24,4 +25,6 @@ import com.magicpwd.__i.IEditBean;
  */
 public interface IMwizBean extends IEditBean
 {
+
+    void showData(KeysMdl keysMdl);
 }
