@@ -16,6 +16,11 @@
  */
 package com.magicpwd._bean.mwiz;
 
+import com.magicpwd._comp.BtnLabel;
+import com.magicpwd._cons.LangRes;
+import com.magicpwd._util.Bean;
+import com.magicpwd._util.Lang;
+
 /**
  * Application: MagicPwd
  * Author     : Administrator
@@ -33,15 +38,15 @@ public class HeadBean extends javax.swing.JPanel
     public void initView()
     {
         lb_MetaName = new javax.swing.JLabel();
-        tf_MetaName = new javax.swing.JTextField();
+        tf_MetaName = new javax.swing.JTextField(14);
         lb_MetaData = new javax.swing.JLabel();
         ta_MetaData = new javax.swing.JTextArea();
         lb_HintName = new javax.swing.JLabel();
-        tf_HintName = new javax.swing.JTextField();
+        tf_HintName = new javax.swing.JTextField(14);
         lb_HintDate = new javax.swing.JLabel();
-        tf_HintDate = new javax.swing.JTextField();
-        ib_KeysIcon = new javax.swing.JLabel();
-        ib_HintDate = new javax.swing.JLabel();
+        tf_HintDate = new javax.swing.JTextField(14);
+        ib_KeysIcon = new BtnLabel();
+        ib_HintDate = new BtnLabel();
 
         javax.swing.JScrollPane jsp = new javax.swing.JScrollPane(ta_MetaData);
 
@@ -70,7 +75,7 @@ public class HeadBean extends javax.swing.JPanel
         hsg3.addGroup(hpg1);
         hsg3.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg3.addGroup(hpg2);
-        hsg3.addContainerGap();
+        hsg3.addContainerGap(14, Short.MAX_VALUE);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(hsg3));
 
         javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
@@ -96,36 +101,42 @@ public class HeadBean extends javax.swing.JPanel
         vsg1.addGroup(vpg3);
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg1.addGroup(vpg4);
-        vsg1.addContainerGap();
+        vsg1.addContainerGap(14, Short.MAX_VALUE);
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(vsg1));
     }
 
     public void initLang()
     {
-        lb_MetaName.setText("jLabel1");
+        Bean.setText(lb_MetaName, Lang.getLang(LangRes.P30F1303, "标题"));
 
-        tf_MetaName.setText("jTextField1");
+        Lang.setWText(ib_KeysIcon, LangRes.P30F151B, "&O");
+        Lang.setWTips(ib_KeysIcon, LangRes.P30F151C, "提醒时间(Alt + O)");
 
-        lb_MetaData.setText("jLabel2");
+        Bean.setText(lb_MetaName, Lang.getLang(LangRes.P30F1304, "搜索"));
 
-        lb_HintName.setText("jLabel3");
+        Lang.setWText(lb_HintName, LangRes.P30F1305, "提示");
+        Lang.setWText(lb_HintDate, LangRes.P30F1306, "时间");
 
-        tf_HintName.setText("jTextField2");
+        Lang.setWText(ib_HintDate, LangRes.P30F151B, "&O");
+        Lang.setWTips(ib_HintDate, LangRes.P30F151C, "提醒时间(Alt + O)");
 
-        lb_HintDate.setText("jLabel4");
+//        javax.swing.JCheckBoxMenuItem item;
+//        int k = 1;
+//        for (int i = 1, j = mi_MenuItem.length; i < j; i += 1)
+//        {
+//            item = mi_MenuItem[i];
+//            Lang.setWText(item, "P30FA60" + Integer.toHexString(k++).toUpperCase(), "");
+//            Lang.setWTips(item, "P30FA60" + Integer.toHexString(k++).toUpperCase(), "");
+//        }
 
-        tf_HintDate.setText("jTextField3");
-
-        ib_KeysIcon.setText("jLabel5");
-
-        ib_HintDate.setText("jLabel1");
+        //nameBox.initLang();
     }
 
     public void initData()
     {
     }
-    private javax.swing.JLabel ib_HintDate;
-    private javax.swing.JLabel ib_KeysIcon;
+    private BtnLabel ib_HintDate;
+    private BtnLabel ib_KeysIcon;
     private javax.swing.JLabel lb_HintDate;
     private javax.swing.JLabel lb_HintName;
     private javax.swing.JLabel lb_MetaData;
