@@ -14,13 +14,29 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package com.magicpwd._bean.mwiz;
+
+import com.magicpwd.__i.mwiz.IMwizBean;
 
 /**
  *
  * @author Amon
  */
-public class DateBean {
+public class DateBean extends javax.swing.JPanel implements IMwizBean
+{
 
+    @Override
+    public void initView()
+    {
+    }
+
+    @Override
+    public void initLang()
+    {
+    }
+
+    @Override
+    public void initData()
+    {
+    }
 }

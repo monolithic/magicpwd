@@ -3,8 +3,8 @@
  */
 package com.magicpwd._bean.mpwd;
 
-import com.magicpwd.__i.IEditBean;
 import com.magicpwd.__i.IEditItem;
+import com.magicpwd.__i.mpwd.IMpwdBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comn.item.EditItem;
@@ -22,7 +22,7 @@ import com.magicpwd.v.mpwd.MainPtn;
  * 键值：ConsEnv.INDX_FILE
  * @author Amon
  */
-public class FileBean extends javax.swing.JPanel implements IEditBean
+public class FileBean extends javax.swing.JPanel implements IMpwdBean
 {
 
     private WEditBox dataEdit;

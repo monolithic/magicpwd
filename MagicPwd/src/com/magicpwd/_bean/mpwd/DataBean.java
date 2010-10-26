@@ -5,8 +5,8 @@
 package com.magicpwd._bean.mpwd;
 
 import com.magicpwd.__a.mpwd.AMpwdAction;
-import com.magicpwd.__i.IEditBean;
 import com.magicpwd.__i.IEditItem;
+import com.magicpwd.__i.mpwd.IMpwdBean;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._comp.WEditBox;
@@ -20,7 +20,7 @@ import com.magicpwd.v.mpwd.MainPtn;
  *
  * @author Amon
  */
-public class DataBean extends javax.swing.JPanel implements IEditBean
+public class DataBean extends javax.swing.JPanel implements IMpwdBean
 {
 
     private IEditItem itemData;

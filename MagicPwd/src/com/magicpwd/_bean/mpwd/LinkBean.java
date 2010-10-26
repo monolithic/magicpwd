@@ -3,8 +3,8 @@
  */
 package com.magicpwd._bean.mpwd;
 
-import com.magicpwd.__i.IEditBean;
 import com.magicpwd.__i.IEditItem;
+import com.magicpwd.__i.mpwd.IMpwdBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
@@ -22,7 +22,7 @@ import com.magicpwd.v.mpwd.MainPtn;
  * @author Amon
  * 
  */
-public class LinkBean extends javax.swing.JPanel implements IEditBean
+public class LinkBean extends javax.swing.JPanel implements IMpwdBean
 {
 
     private IEditItem itemData;

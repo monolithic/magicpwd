@@ -14,29 +14,32 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd._bean.mwiz;
+package com.magicpwd.__i.mpwd;
 
-import com.magicpwd.__i.mwiz.IMwizBean;
+import com.magicpwd.__i.IEditBean;
+import com.magicpwd.__i.IEditItem;
 
 /**
  *
  * @author Amon
  */
-public class DataBean extends javax.swing.JPanel implements IMwizBean
+public interface IMpwdBean extends IEditBean
 {
 
-    @Override
-    public void initView()
-    {
-    }
+    /**
+     * 显示指定数据
+     * @param item
+     */
+    void showData(IEditItem item);
 
-    @Override
-    public void initLang()
-    {
-    }
+    /**
+     * 界面焦点初始化
+     */
+    void requestFocus();
 
-    @Override
-    public void initData()
-    {
-    }
+    void copyDataActionPerformed(java.awt.event.ActionEvent evt);
+
+    void saveDataActionPerformed(java.awt.event.ActionEvent evt);
+
+    void dropDataActionPerformed(java.awt.event.ActionEvent evt);
 }

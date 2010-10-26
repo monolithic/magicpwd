@@ -4,13 +4,16 @@
  */
 package com.magicpwd._bean.mwiz;
 
+import com.magicpwd.__i.mwiz.IMwizBean;
+
 /**
  *
  * @author Amon
  */
-public class AreaBean extends javax.swing.JPanel
+public class AreaBean extends javax.swing.JPanel implements IMwizBean
 {
 
+    @Override
     public void initView()
     {
         ta_PropData = new javax.swing.JTextArea();
@@ -25,10 +28,12 @@ public class AreaBean extends javax.swing.JPanel
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jsp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE));
     }
 
+    @Override
     public void initLang()
     {
     }
 
+    @Override
     public void initData()
     {
     }

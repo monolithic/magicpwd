@@ -3,22 +3,25 @@
  */
 package com.magicpwd._bean.mpwd;
 
-import com.magicpwd.__i.IEditBean;
+import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IEditItem;
+import com.magicpwd.__i.mpwd.IMpwdBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd.v.mpwd.MainPtn;
+import javax.swing.AbstractButton;
 
 /**
  * 属性：过期提示
  * 键值：ConsEnv.INDX_TIME
  * @author Amon
  */
-public class HintBean extends javax.swing.JPanel implements IEditBean
+public class HintBean extends javax.swing.JPanel implements IMpwdBean
 {
 
     private WEditBox dataEdit;
@@ -73,13 +76,7 @@ public class HintBean extends javax.swing.JPanel implements IEditBean
         pl_PropEdit.add(bt_DateView);
 
         pm_DateView = new javax.swing.JPopupMenu();
-        String[] commands =
-        {
-            "", "half", "hour", "day", "week", "month", "year"
-        };
-        mi_MenuItem = new javax.swing.JCheckBoxMenuItem[commands.length];
-
-        java.awt.event.ActionListener al = new java.awt.event.ActionListener()
+        AMpwdAction action = new AMpwdAction()
         {
 
             @Override
@@ -87,28 +84,28 @@ public class HintBean extends javax.swing.JPanel implements IEditBean
             {
                 mi_MenuItemActionPerformed(evt);
             }
-        };
-        javax.swing.ButtonGroup bg = new javax.swing.ButtonGroup();
-        int idx = 0;
 
-        javax.swing.JCheckBoxMenuItem menuItem = new javax.swing.JCheckBoxMenuItem();
-        menuItem.addActionListener(al);
-        menuItem.setActionCommand("fixed");
-        pm_DateView.add(menuItem);
-        bg.add(menuItem);
-        mi_MenuItem[idx++] = menuItem;
+            @Override
+            public void doInit(Object object)
+            {
+            }
+
+            @Override
+            public void reInit(AbstractButton button)
+            {
+            }
+        };
+        mi_HalfHour = new javax.swing.JMenuItem();
+        mi_HalfHour.addActionListener(action);
+        pm_DateView.add(mi_HalfHour);
+
+        mi_FullHour = new javax.swing.JMenuItem();
+        mi_FullHour.addActionListener(action);
+        pm_DateView.add(mi_FullHour);
 
         pm_DateView.addSeparator();
 
-        while (idx < commands.length)
-        {
-            menuItem = new javax.swing.JCheckBoxMenuItem();
-            menuItem.addActionListener(al);
-            menuItem.setActionCommand(commands[idx]);
-            pm_DateView.add(menuItem);
-            bg.add(menuItem);
-            mi_MenuItem[idx++] = menuItem;
-        }
+        mainPtn.getMenuPtn().getSubMenu("date-interval", pm_DateView, action);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -163,15 +160,6 @@ public class HintBean extends javax.swing.JPanel implements IEditBean
 
         Lang.setWText(bt_DateView, LangRes.P30F151B, "&O");
         Lang.setWTips(bt_DateView, LangRes.P30F151C, "提醒时间(Alt + O)");
-
-        javax.swing.JCheckBoxMenuItem item;
-        int k = 1;
-        for (int i = 1, j = mi_MenuItem.length; i < j; i += 1)
-        {
-            item = mi_MenuItem[i];
-            Lang.setWText(item, "P30FA60" + Integer.toHexString(k++).toUpperCase(), "");
-            Lang.setWTips(item, "P30FA60" + Integer.toHexString(k++).toUpperCase(), "");
-        }
 
         nameBox.initLang();
         dataEdit.initLang();
@@ -240,15 +228,40 @@ public class HintBean extends javax.swing.JPanel implements IEditBean
 
     private void bt_DateViewActionPerformed(java.awt.event.ActionEvent evt)
     {
-        java.util.Calendar cal = java.util.Calendar.getInstance();
-        cal.add(java.util.Calendar.HOUR, 1);
-        cal.set(java.util.Calendar.MINUTE, 0);
-        cal.set(java.util.Calendar.SECOND, 0);
+        java.util.Calendar c = java.util.Calendar.getInstance();
+        c.set(java.util.Calendar.SECOND, 0);
+        c.set(java.util.Calendar.MILLISECOND, 0);
 
-        String t = cal.get(java.util.Calendar.HOUR_OF_DAY) + "点";
-        Lang.setWText(mi_MenuItem[0], null, t);
-        Lang.setWTips(mi_MenuItem[0], null, t + "提醒");
-        mi_MenuItem[0].setActionCommand(new java.text.SimpleDateFormat(ConsEnv.HINT_DATE).format(cal.getTime()));
+        java.util.Date d1;
+        java.util.Date d2;
+        String t1;
+        String t2;
+        if (c.get(java.util.Calendar.MINUTE) < 30)
+        {
+            c.set(java.util.Calendar.MINUTE, 30);
+            d1 = c.getTime();
+            t1 = c.get(java.util.Calendar.HOUR_OF_DAY) + ":30";
+            c.add(java.util.Calendar.MINUTE, 30);
+            d2 = c.getTime();
+            t2 = c.get(java.util.Calendar.HOUR_OF_DAY) + ":00";
+        }
+        else
+        {
+            c.set(java.util.Calendar.MINUTE, 0);
+            c.add(java.util.Calendar.HOUR_OF_DAY, 1);
+            d1 = c.getTime();
+            t1 = c.get(java.util.Calendar.HOUR_OF_DAY) + ":00";
+
+            c.add(java.util.Calendar.MINUTE, 30);
+            d2 = c.getTime();
+            t2 = c.get(java.util.Calendar.HOUR_OF_DAY) + ":30";
+        }
+
+        java.text.DateFormat format = new java.text.SimpleDateFormat(ConsEnv.HINT_DATE);
+        Bean.setText(mi_HalfHour, t1);
+        mi_HalfHour.setActionCommand(format.format(d1));
+        Bean.setText(mi_FullHour, t2);
+        mi_FullHour.setActionCommand(format.format(d2));
         pm_DateView.show(bt_DateView, 0, bt_DateView.getHeight());
     }
 
@@ -301,7 +314,8 @@ public class HintBean extends javax.swing.JPanel implements IEditBean
         tf_PropData.setText(cmd);
     }
     private javax.swing.JPopupMenu pm_DateView;
-    private javax.swing.JCheckBoxMenuItem[] mi_MenuItem;
+    private javax.swing.JMenuItem mi_HalfHour;
+    private javax.swing.JMenuItem mi_FullHour;
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JLabel lb_PropEdit;
     private javax.swing.JLabel lb_PropName;

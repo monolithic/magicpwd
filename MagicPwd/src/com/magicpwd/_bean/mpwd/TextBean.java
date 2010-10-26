@@ -3,8 +3,8 @@
  */
 package com.magicpwd._bean.mpwd;
 
-import com.magicpwd.__i.IEditBean;
 import com.magicpwd.__i.IEditItem;
+import com.magicpwd.__i.mpwd.IMpwdBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsDat;
@@ -18,7 +18,7 @@ import com.magicpwd.v.mpwd.MainPtn;
  * 键值：ConsEnv.INDX_TEXT
  * @author Amon
  */
-public class TextBean extends javax.swing.JPanel implements IEditBean
+public class TextBean extends javax.swing.JPanel implements IMpwdBean
 {
 
     private IEditItem itemData;

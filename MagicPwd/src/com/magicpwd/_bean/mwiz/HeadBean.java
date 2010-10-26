@@ -16,6 +16,7 @@
  */
 package com.magicpwd._bean.mwiz;
 
+import com.magicpwd.__i.mwiz.IMwizBean;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
@@ -32,9 +33,10 @@ import com.magicpwd._util.Lang;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public class HeadBean extends javax.swing.JPanel
+public class HeadBean extends javax.swing.JPanel implements IMwizBean
 {
 
+    @Override
     public void initView()
     {
         lb_MetaName = new javax.swing.JLabel();
@@ -105,6 +107,7 @@ public class HeadBean extends javax.swing.JPanel
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(vsg1));
     }
 
+    @Override
     public void initLang()
     {
         Bean.setText(lb_MetaName, Lang.getLang(LangRes.P30F1303, "标题"));
@@ -132,6 +135,7 @@ public class HeadBean extends javax.swing.JPanel
         //nameBox.initLang();
     }
 
+    @Override
     public void initData()
     {
     }

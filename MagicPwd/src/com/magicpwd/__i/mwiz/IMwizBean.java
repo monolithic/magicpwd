@@ -14,29 +14,14 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd._bean.mwiz;
+package com.magicpwd.__i.mwiz;
 
-import com.magicpwd.__i.mwiz.IMwizBean;
+import com.magicpwd.__i.IEditBean;
 
 /**
  *
  * @author Amon
  */
-public class DataBean extends javax.swing.JPanel implements IMwizBean
+public interface IMwizBean extends IEditBean
 {
-
-    @Override
-    public void initView()
-    {
-    }
-
-    @Override
-    public void initLang()
-    {
-    }
-
-    @Override
-    public void initData()
-    {
-    }
 }

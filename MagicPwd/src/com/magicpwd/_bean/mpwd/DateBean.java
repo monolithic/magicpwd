@@ -4,8 +4,8 @@
 package com.magicpwd._bean.mpwd;
 
 import com.magicpwd.__a.mpwd.AMpwdAction;
-import com.magicpwd.__i.IEditBean;
 import com.magicpwd.__i.IEditItem;
+import com.magicpwd.__i.mpwd.IMpwdBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
@@ -24,7 +24,7 @@ import com.magicpwd.v.mpwd.MainPtn;
  * 键值：ConsEnv.INDX_DATE
  * @author Amon
  */
-public class DateBean extends javax.swing.JPanel implements IEditBean
+public class DateBean extends javax.swing.JPanel implements IMpwdBean
 {
 
     private IEditItem itemData;
