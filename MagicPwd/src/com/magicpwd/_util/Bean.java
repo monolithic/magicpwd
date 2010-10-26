@@ -21,7 +21,6 @@ public class Bean
     private static javax.swing.ImageIcon bi_NoneIcon;
     private static java.util.Map<Integer, java.awt.image.BufferedImage> mp_LogoIcon;
     private static java.util.Map<String, javax.swing.Icon> mp_DataIcon;
-    private static java.util.Map<String, javax.swing.Icon> mp_SkinIcon;
 
     public static void setText(BtnLabel c, String t)
     {
@@ -252,42 +251,6 @@ public class Bean
             mp_LogoIcon.put(size, logo);
         }
         return logo;
-    }
-
-    public static javax.swing.Icon getIcon(String name)
-    {
-        return mp_SkinIcon != null ? mp_SkinIcon.get(name) : getNone();
-    }
-
-    public static boolean readIcon(java.io.InputStream stream, String prefix)
-    {
-        if (mp_SkinIcon == null)
-        {
-            mp_SkinIcon = new java.util.HashMap<String, javax.swing.Icon>();
-        }
-
-        try
-        {
-            java.awt.image.BufferedImage bufImg = javax.imageio.ImageIO.read(stream);
-
-            int w = bufImg.getWidth();
-            int h = bufImg.getHeight();
-            for (int i = 0, j = 0; j < w; i += 1)
-            {
-                mp_SkinIcon.put(prefix + i, new javax.swing.ImageIcon(bufImg.getSubimage(j, 0, h, h)));
-                j += h;
-            }
-            return true;
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-            return false;
-        }
-        finally
-        {
-            closeStream(stream);
-        }
     }
 
     public static javax.swing.ImageIcon readIcon(String path)

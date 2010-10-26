@@ -1,5 +1,6 @@
 package com.magicpwd;
 
+import com.magicpwd.__a.AFrame;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Jzip;
@@ -97,9 +98,9 @@ public class MagicPwd
             Logs.exception(exp);
         }
 
-        Bean.readIcon(MagicPwd.class.getResourceAsStream(ConsEnv.ICON_PATH + "icon.png"), "");
         Bean.getNone();
         Bean.getLogo(16);
+        AFrame.loadPre();
 
         // 扩展库加载
         java.io.File file = new java.io.File(ConsEnv.DIR_EXT);

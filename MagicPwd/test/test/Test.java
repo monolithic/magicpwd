@@ -1,10 +1,8 @@
 package test;
 
-import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.mwiz.NormPtn;
-import java.io.FileInputStream;
 
 /*
  * To change this template, choose Tools | Templates
@@ -25,7 +23,7 @@ public class Test
             UserMdl cfg = new UserMdl();
             cfg.loadCfg();
             Lang.loadLang(cfg);
-            Bean.readIcon(new FileInputStream("src/res/icon/mwiz16.png"), "mwiz");
+            //Bean.readIcon(new FileInputStream("src/res/icon/mwiz16.png"), "mwiz");
             NormPtn p = new NormPtn(null, cfg);
             p.initView();
             p.initLang();
