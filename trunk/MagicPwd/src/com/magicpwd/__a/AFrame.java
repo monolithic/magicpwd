@@ -4,13 +4,16 @@
  */
 package com.magicpwd.__a;
 
+import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
+import com.magicpwd._util.Logs;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.TrayPtn;
+import java.io.IOException;
 
 /**
  *
@@ -22,13 +25,57 @@ public abstract class AFrame extends javax.swing.JFrame
     protected TrayPtn trayPtn;
     protected UserMdl userMdl;
     protected SafeMdl safeMdl;
-    private java.util.HashMap<String, javax.swing.Icon> iconMap;
+    protected static java.util.HashMap<String, javax.swing.Icon> defIcon;
+    private static java.util.Properties defProp;
+    private java.util.Properties favProp;
 
     public AFrame(TrayPtn trayPtn, UserMdl userMdl)
     {
         this.trayPtn = trayPtn;
         this.userMdl = userMdl;
         Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ENTER, java.awt.event.InputEvent.CTRL_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK), null, "safe", javax.swing.JComponent.WHEN_FOCUSED);
+    }
+
+    public static void loadPre()
+    {
+        defProp = new java.util.Properties();
+        java.io.InputStream stream = null;
+        try
+        {
+            stream = AFrame.class.getResourceAsStream(ConsEnv.ICON_PATH + "feel.amf");
+            defProp.load(stream);
+        }
+        catch (IOException ex)
+        {
+            Logs.exception(ex);
+        }
+        finally
+        {
+            Bean.closeStream(stream);
+        }
+
+        defIcon = new java.util.HashMap<String, javax.swing.Icon>();
+        try
+        {
+            stream = AFrame.class.getResourceAsStream(ConsEnv.ICON_PATH + "icon.png");
+            java.awt.image.BufferedImage bufImg = javax.imageio.ImageIO.read(stream);
+
+            int w = bufImg.getWidth();
+            int h = bufImg.getHeight();
+            for (int i = 0, j = 0; j < w; i += 1)
+            {
+                defIcon.put(Integer.toString(i), new javax.swing.ImageIcon(bufImg.getSubimage(j, 0, h, h)));
+                j += h;
+            }
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+        finally
+        {
+            Bean.closeStream(stream);
+        }
     }
 
     /**
@@ -46,15 +93,15 @@ public abstract class AFrame extends javax.swing.JFrame
     {
         if (!Char.isValidate(favHash))
         {
-            return Bean.getIcon(favHash);
+            return Bean.getNone();
         }
 
-        javax.swing.Icon icon = getIconMap().get(favHash);
-        if (icon == null)
+        if (defProp.containsKey(favHash))
         {
-            icon = Bean.getIcon(favHash);
+            favHash = defProp.getProperty(favHash);
         }
-        return icon;
+        javax.swing.Icon icon = defIcon.get(favHash);
+        return icon != null ? icon : Bean.getNone();
     }
 
     /**
@@ -66,8 +113,40 @@ public abstract class AFrame extends javax.swing.JFrame
     {
         if (Char.isValidate(favHash))
         {
-            getIconMap().put(favHash, favIcon);
+            if (defProp.containsKey(favHash))
+            {
+                favHash = defProp.getProperty(favHash);
+            }
+            defIcon.put(favHash, favIcon);
         }
+    }
+
+    public javax.swing.Icon readFavIcon(String favHash, boolean chache)
+    {
+        if (!Char.isValidate(favHash))
+        {
+            return Bean.getNone();
+        }
+
+        javax.swing.Icon icon;
+        if (!chache)
+        {
+            icon = favProp.containsKey(favHash) ? userMdl.readIcon(favHash) : getFavIcon(favHash);
+            if (icon == null)
+            {
+                icon = Bean.getNone();
+            }
+            return icon;
+        }
+
+        icon = getFavIcon(favHash);
+        if (icon == null)
+        {
+            icon = favProp.containsKey(favHash) ? userMdl.readIcon(favHash) : Bean.getNone();
+            //favProp.remove(favHash);
+            setFavIcon(favHash, icon);
+        }
+        return icon;
     }
 
     /**
@@ -101,15 +180,6 @@ public abstract class AFrame extends javax.swing.JFrame
             trayPtn.endSave();
         }
         super.processWindowEvent(e);
-    }
-
-    protected java.util.HashMap<String, javax.swing.Icon> getIconMap()
-    {
-        if (iconMap == null)
-        {
-            iconMap = new java.util.HashMap<String, javax.swing.Icon>();
-        }
-        return iconMap;
     }
 
     /**
