@@ -14,7 +14,7 @@ import javax.swing.AbstractListModel;
  * 口令字符究竟模型
  * @author Amon
  */
-public class CharMdl extends AbstractListModel
+public final class CharMdl extends AbstractListModel
 {
 
     private static boolean withSys;
@@ -22,7 +22,11 @@ public class CharMdl extends AbstractListModel
     private List<Char> charSys;
     private List<Char> charUsr;
 
-    public CharMdl()
+    CharMdl()
+    {
+    }
+
+    void initData()
     {
         charSys = new ArrayList<Char>(7);
 

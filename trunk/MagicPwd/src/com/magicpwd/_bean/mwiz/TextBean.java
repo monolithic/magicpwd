@@ -5,6 +5,7 @@
 package com.magicpwd._bean.mwiz;
 
 import com.magicpwd.__i.mwiz.IMwizBean;
+import com.magicpwd.m.mwiz.KeysMdl;
 
 /**
  *
@@ -45,6 +46,11 @@ public class TextBean extends javax.swing.JPanel implements IMwizBean
 
     @Override
     public void initData()
+    {
+    }
+
+    @Override
+    public void showData(KeysMdl keysMdl)
     {
     }
 

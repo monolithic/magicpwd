@@ -13,6 +13,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
+import com.magicpwd.m.mwiz.KeysMdl;
 import com.magicpwd.r.FileTM;
 import com.magicpwd.v.mwiz.NormPtn;
 import java.util.regex.Pattern;
@@ -49,7 +50,7 @@ public class GuidBean extends javax.swing.JPanel implements IMwizBean
 
         lb_PropData = new javax.swing.JLabel();
         cb_PropData = new javax.swing.JComboBox();
-//        cb_PropData.setModel(normPtn.getUserMdl().getCboxMdl());
+        cb_PropData.setModel(normPtn.getUserMdl().getTpltMdl());
         lb_PropData.setLabelFor(cb_PropData);
 
         lb_PropEdit = new javax.swing.JLabel();
@@ -138,23 +139,34 @@ public class GuidBean extends javax.swing.JPanel implements IMwizBean
     {
     }
 
-    public void showData(IEditItem item)
+    @Override
+    public void showData(KeysMdl keysMdl)
     {
-        itemData = (GuidItem) item;
-        tf_PropName.setText(item.getName());
-
-        String kind = itemData.getSpec(IEditItem.SPEC_GUID_TPLT);
-        boolean hash = com.magicpwd._util.Char.isValidateHash(kind);
-
-        bt_ReadMail.setVisible(hash);
-        bt_ExptCard.setVisible(hash);
-        if (!hash)
+        if (keysMdl == null)
         {
             return;
         }
 
+        if (keysMdl.getItemSize() < 1)
+        {
+            keysMdl.initHead();
+        }
+
+        IEditItem item = keysMdl.getItemAt(ConsEnv.PWDS_HEAD_GUID);
+        tf_PropName.setText(item.getName());
+
+        String kind = item.getSpec(IEditItem.SPEC_GUID_TPLT);
+        boolean hash = com.magicpwd._util.Char.isValidateHash(kind);
+        if (!hash)
+        {
+            cb_PropData.setSelectedIndex(-1);
+            bt_ReadMail.setVisible(false);
+            bt_ExptCard.setVisible(false);
+            return;
+        }
+
         Tplt tplt = null;
-        for (Tplt temp : normPtn.getUserMdl().getCboxMdl().getAllItems())
+        for (Tplt temp : normPtn.getUserMdl().getTpltMdl().getAllItems())
         {
             if (kind.equals(temp.getP30F1103()))
             {
@@ -165,6 +177,7 @@ public class GuidBean extends javax.swing.JPanel implements IMwizBean
         }
         if (tplt == null)
         {
+            cb_PropData.setSelectedIndex(-1);
             return;
         }
 

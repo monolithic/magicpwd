@@ -59,7 +59,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
 
             java.util.List<Tplt> dataList;
             javax.swing.tree.DefaultMutableTreeNode node;
-            for (Tplt kind : userMdl.getCboxMdl().getAllItems())
+            for (Tplt kind : userMdl.getTpltMdl().getAllItems())
             {
                 node = new javax.swing.tree.DefaultMutableTreeNode(kind);
 
@@ -466,7 +466,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         {
             DBA3000.saveTpltData(currTplt);
             tm_TpltList.nodeChanged(currNode);
-            userMdl.getCboxMdl().wUpdate();
+            userMdl.getTpltMdl().wUpdate();
 
             isUpdate = false;
         }
@@ -496,7 +496,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
 
             if (indx == 0)
             {
-                userMdl.getCboxMdl().wAppend(currTplt);
+                userMdl.getTpltMdl().wAppend(currTplt);
             }
         }
 

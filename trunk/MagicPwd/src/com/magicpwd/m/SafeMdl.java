@@ -229,6 +229,11 @@ public abstract class SafeMdl
         clear();
     }
 
+    public int getItemSize()
+    {
+        return ls_ItemList.size();
+    }
+
     public String getKeysHash()
     {
         return keys.getP30F0104();
@@ -277,6 +282,11 @@ public abstract class SafeMdl
         HintItem hint = new HintItem(userMdl);
         ls_ItemList.add(hint);
         return hint;
+    }
+
+    public IEditItem getItemAt(int index)
+    {
+        return ls_ItemList.get(index);
     }
 
     public void setKeysLabel(int label)

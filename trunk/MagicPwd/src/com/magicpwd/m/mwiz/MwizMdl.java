@@ -99,6 +99,11 @@ public final class MwizMdl implements javax.swing.table.TableModel, java.io.Seri
         }
     }
 
+    public Keys getSelectedKeys()
+    {
+        return null;
+    }
+
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex)
     {

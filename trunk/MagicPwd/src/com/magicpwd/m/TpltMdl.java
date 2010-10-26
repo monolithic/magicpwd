@@ -10,13 +10,13 @@ import com.magicpwd.d.DBA3000;
  * 魔方密码：口令模板下拉列表模型
  * @author Amon
  */
-public class CboxMdl extends javax.swing.AbstractListModel implements javax.swing.MutableComboBoxModel, java.io.Serializable
+public class TpltMdl extends javax.swing.AbstractListModel implements javax.swing.MutableComboBoxModel, java.io.Serializable
 {
 
     private java.util.List<Tplt> itemList;
     private Object selectedObject;
 
-    CboxMdl()
+    TpltMdl()
     {
     }
 

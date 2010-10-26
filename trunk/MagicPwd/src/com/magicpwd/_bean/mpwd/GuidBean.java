@@ -56,7 +56,7 @@ public class GuidBean extends javax.swing.JPanel implements IMpwdBean
 
         lb_PropData = new javax.swing.JLabel();
         cb_PropData = new javax.swing.JComboBox();
-        cb_PropData.setModel(mainPtn.getUserMdl().getCboxMdl());
+        cb_PropData.setModel(mainPtn.getUserMdl().getTpltMdl());
         lb_PropData.setLabelFor(cb_PropData);
 
         lb_PropEdit = new javax.swing.JLabel();
@@ -162,11 +162,12 @@ public class GuidBean extends javax.swing.JPanel implements IMpwdBean
         bt_ExptCard.setVisible(hash);
         if (!hash)
         {
+            cb_PropData.setSelectedIndex(-1);
             return;
         }
 
         Tplt tplt = null;
-        for (Tplt temp : mainPtn.getUserMdl().getCboxMdl().getAllItems())
+        for (Tplt temp : mainPtn.getUserMdl().getTpltMdl().getAllItems())
         {
             if (kind.equals(temp.getP30F1103()))
             {
@@ -177,6 +178,7 @@ public class GuidBean extends javax.swing.JPanel implements IMpwdBean
         }
         if (tplt == null)
         {
+            cb_PropData.setSelectedIndex(-1);
             return;
         }
 

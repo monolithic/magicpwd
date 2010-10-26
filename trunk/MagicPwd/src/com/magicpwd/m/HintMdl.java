@@ -16,7 +16,7 @@ import java.sql.Timestamp;
  * 3、到达提醒时间后，能够以某种方式进行提醒。
  * @author Amon
  */
-public class HintMdl
+public final class HintMdl
 {
 
     private static List<Keys> hintList = new ArrayList<Keys>();
@@ -26,6 +26,10 @@ public class HintMdl
     HintMdl(UserMdl userMdl)
     {
         this.userMdl = userMdl;
+    }
+
+    void initData()
+    {
     }
 
     public void process(Timestamp start, Timestamp end)
