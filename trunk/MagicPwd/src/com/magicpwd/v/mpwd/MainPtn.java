@@ -6,6 +6,7 @@ package com.magicpwd.v.mpwd;
 import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IEditBean;
 import com.magicpwd.__i.IEditItem;
+import com.magicpwd.__i.mpwd.IMpwdBean;
 import com.magicpwd._bean.mpwd.AreaBean;
 import com.magicpwd._bean.mpwd.DataBean;
 import com.magicpwd._bean.mpwd.DateBean;
@@ -55,7 +56,7 @@ public class MainPtn extends AFrame
 {
 
     private EditDlg ed_KeysEdit;
-    private IEditBean[] editBean;
+    private IMpwdBean[] mpwdBean;
     private FindBar mainFind;
     private HintBar mainInfo;
     private MailDlg mailDlg;
@@ -145,7 +146,7 @@ public class MainPtn extends AFrame
         // 属性编辑组件
         eb_KeysEdit.initData();
         ed_KeysEdit.initData();
-        for (IEditBean bean : editBean)
+        for (IEditBean bean : mpwdBean)
         {
             bean.initData();
         }
@@ -504,73 +505,73 @@ public class MainPtn extends AFrame
         cl_CardProp = new java.awt.CardLayout();
         pl_CardProp = new javax.swing.JPanel();
         pl_CardProp.setLayout(cl_CardProp);
-        editBean = new IEditBean[ConsDat.INDX_SIZE];
+        mpwdBean = new IMpwdBean[ConsDat.INDX_SIZE];
         int idx = 0;
 
         InfoBean beanInfo = new InfoBean(this);
         beanInfo.initView();
         pl_CardProp.add(ConsEnv.BEAN_INFO, beanInfo);
-        editBean[idx++] = beanInfo;
+        mpwdBean[idx++] = beanInfo;
 
         TextBean beanText = new TextBean(this);
         beanText.initView();
         pl_CardProp.add(ConsEnv.BEAN_TEXT, beanText);
-        editBean[idx++] = beanText;
+        mpwdBean[idx++] = beanText;
 
         PwdsBean beanPwds = new PwdsBean(this);
         beanPwds.initView();
         pl_CardProp.add(ConsEnv.BEAN_PWDS, beanPwds);
-        editBean[idx++] = beanPwds;
+        mpwdBean[idx++] = beanPwds;
 
         LinkBean beanLink = new LinkBean(this);
         beanLink.initView();
         pl_CardProp.add(ConsEnv.BEAN_LINK, beanLink);
-        editBean[idx++] = beanLink;
+        mpwdBean[idx++] = beanLink;
 
         MailBean beanMail = new MailBean(this);
         beanMail.initView();
         pl_CardProp.add(ConsEnv.BEAN_MAIL, beanMail);
-        editBean[idx++] = beanMail;
+        mpwdBean[idx++] = beanMail;
 
         DateBean beanDate = new DateBean(this);
         beanDate.initView();
         pl_CardProp.add(ConsEnv.BEAN_DATE, beanDate);
-        editBean[idx++] = beanDate;
+        mpwdBean[idx++] = beanDate;
 
         AreaBean beanArea = new AreaBean(this);
         beanArea.initView();
         pl_CardProp.add(ConsEnv.BEAN_AREA, beanArea);
-        editBean[idx++] = beanArea;
+        mpwdBean[idx++] = beanArea;
 
         FileBean beanFile = new FileBean(this);
         beanFile.initView();
         pl_CardProp.add(ConsEnv.BEAN_FILE, beanFile);
-        editBean[idx++] = beanFile;
+        mpwdBean[idx++] = beanFile;
 
         DataBean beanData = new DataBean(this);
         beanData.initView();
         pl_CardProp.add(ConsEnv.BEAN_DATA, beanData);
-        editBean[idx++] = beanData;
+        mpwdBean[idx++] = beanData;
 
         GuidBean beanGuid = new GuidBean(this);
         beanGuid.initView();
         pl_CardProp.add(ConsEnv.BEAN_GUID, beanGuid);
-        editBean[idx++] = beanGuid;
+        mpwdBean[idx++] = beanGuid;
 
         MetaBean beanMeta = new MetaBean(this);
         beanMeta.initView();
         pl_CardProp.add(ConsEnv.BEAN_META, beanMeta);
-        editBean[idx++] = beanMeta;
+        mpwdBean[idx++] = beanMeta;
 
         LogoBean beanIcon = new LogoBean(this);
         beanIcon.initView();
         pl_CardProp.add(ConsEnv.BEAN_ICON, beanIcon);
-        editBean[idx++] = beanIcon;
+        mpwdBean[idx++] = beanIcon;
 
         HintBean beanNote = new HintBean(this);
         beanNote.initView();
         pl_CardProp.add(ConsEnv.BEAN_NOTE, beanNote);
-        editBean[idx++] = beanNote;
+        mpwdBean[idx++] = beanNote;
 
         eb_KeysEdit = new EditBar();
         eb_KeysEdit.initView();
@@ -823,7 +824,7 @@ public class MainPtn extends AFrame
         eb_KeysEdit.initLang();
         ed_KeysEdit.initLang();
 
-        for (IEditBean bean : editBean)
+        for (IEditBean bean : mpwdBean)
         {
             bean.initLang();
         }
@@ -1078,9 +1079,9 @@ public class MainPtn extends AFrame
     {
         if (userMdl.isEditVisible())
         {
-            editBean[ConsDat.INDX_INFO].showData(null);
+            mpwdBean[ConsDat.INDX_INFO].showData(null);
             cl_CardProp.show(pl_CardProp, ConsEnv.BEAN_INFO);
-            editBean[ConsDat.INDX_INFO].requestFocus();
+            mpwdBean[ConsDat.INDX_INFO].requestFocus();
         }
     }
 
@@ -1089,11 +1090,11 @@ public class MainPtn extends AFrame
         if (userMdl.isEditVisible())
         {
             cl_CardProp.show(pl_CardProp, ConsEnv.BEAN_PROP + item.getType());
-            editBean[item.getType()].showData(item);
+            mpwdBean[item.getType()].showData(item);
 
             if (focus)
             {
-                editBean[item.getType()].requestFocus();
+                mpwdBean[item.getType()].requestFocus();
             }
 
             String title = getPropName(item.getType());
@@ -1166,7 +1167,7 @@ public class MainPtn extends AFrame
         if (tb_KeysView.getRowCount() == 1)
         {
             Lang.showMesg(this, LangRes.P30F7A01, "");
-            editBean[ConsDat.INDX_GUID].requestFocus();
+            mpwdBean[ConsDat.INDX_GUID].requestFocus();
             return false;
         }
         if (tb_KeysView.getRowCount() > 1)

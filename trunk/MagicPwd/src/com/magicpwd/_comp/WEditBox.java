@@ -4,7 +4,7 @@
  */
 package com.magicpwd._comp;
 
-import com.magicpwd.__i.IEditBean;
+import com.magicpwd.__i.mpwd.IMpwdBean;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
@@ -17,14 +17,14 @@ import com.magicpwd.m.UserMdl;
 public class WEditBox extends javax.swing.JPanel
 {
 
-    private IEditBean editBean;
+    private IMpwdBean mpwdBean;
     private UserMdl userCfg;
     private boolean metaData;
 
-    public WEditBox(UserMdl umdl, IEditBean bean, boolean meta)
+    public WEditBox(UserMdl umdl, IMpwdBean bean, boolean meta)
     {
         userCfg = umdl;
-        editBean = bean;
+        mpwdBean = bean;
         metaData = meta;
     }
 
@@ -38,7 +38,7 @@ public class WEditBox extends javax.swing.JPanel
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                editBean.dropDataActionPerformed(evt);
+                mpwdBean.dropDataActionPerformed(evt);
             }
         });
 
@@ -50,7 +50,7 @@ public class WEditBox extends javax.swing.JPanel
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                editBean.saveDataActionPerformed(evt);
+                mpwdBean.saveDataActionPerformed(evt);
             }
         });
 
@@ -62,7 +62,7 @@ public class WEditBox extends javax.swing.JPanel
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                editBean.copyDataActionPerformed(evt);
+                mpwdBean.copyDataActionPerformed(evt);
             }
         });
 

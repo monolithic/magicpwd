@@ -3,8 +3,8 @@
  */
 package com.magicpwd._bean.mpwd;
 
-import com.magicpwd.__i.IEditBean;
 import com.magicpwd.__i.IEditItem;
+import com.magicpwd.__i.mpwd.IMpwdBean;
 import com.magicpwd._comn.prop.Char;
 import com.magicpwd._comn.item.EditItem;
 import com.magicpwd._comp.WEditBox;
@@ -26,7 +26,7 @@ import javax.swing.JOptionPane;
  * 键值：ConsEnv.INDX_PWDS
  * @author Amon
  */
-public class PwdsBean extends javax.swing.JPanel implements IEditBean
+public class PwdsBean extends javax.swing.JPanel implements IMpwdBean
 {
 
     private IEditItem itemData;

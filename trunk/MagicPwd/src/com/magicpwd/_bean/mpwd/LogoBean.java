@@ -4,8 +4,8 @@
 package com.magicpwd._bean.mpwd;
 
 import com.magicpwd.__i.IBackCall;
-import com.magicpwd.__i.IEditBean;
 import com.magicpwd.__i.IEditItem;
+import com.magicpwd.__i.mpwd.IMpwdBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comn.item.LogoItem;
 import com.magicpwd._comp.IcoLabel;
@@ -21,7 +21,7 @@ import java.util.EventListener;
  * 键值：ConsEnv.INDX_ICON
  * @author Amon
  */
-public class LogoBean extends javax.swing.JPanel implements IEditBean, IBackCall
+public class LogoBean extends javax.swing.JPanel implements IMpwdBean, IBackCall
 {
 
     private IEditItem itemData;

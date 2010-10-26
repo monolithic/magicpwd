@@ -3,8 +3,8 @@
  */
 package com.magicpwd._bean.mpwd;
 
-import com.magicpwd.__i.IEditBean;
 import com.magicpwd.__i.IEditItem;
+import com.magicpwd.__i.mpwd.IMpwdBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.prop.Tplt;
@@ -26,7 +26,7 @@ import org.dom4j.io.SAXReader;
  * 键值：ConsEnv.INDX_GUID
  * @author Amon
  */
-public class GuidBean extends javax.swing.JPanel implements IEditBean
+public class GuidBean extends javax.swing.JPanel implements IMpwdBean
 {
 
     private WEditBox dataEdit;

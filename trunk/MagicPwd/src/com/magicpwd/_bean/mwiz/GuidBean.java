@@ -4,6 +4,7 @@
 package com.magicpwd._bean.mwiz;
 
 import com.magicpwd.__i.IEditItem;
+import com.magicpwd.__i.mwiz.IMwizBean;
 import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.prop.Tplt;
 import com.magicpwd._comp.BtnLabel;
@@ -24,7 +25,7 @@ import org.dom4j.io.SAXReader;
  * 键值：ConsEnv.INDX_GUID
  * @author Amon
  */
-public class GuidBean extends javax.swing.JPanel
+public class GuidBean extends javax.swing.JPanel implements IMwizBean
 {
 
     private GuidItem itemData;
@@ -38,6 +39,7 @@ public class GuidBean extends javax.swing.JPanel
         this.normPtn = normPtn;
     }
 
+    @Override
     public void initView()
     {
         lb_PropName = new javax.swing.JLabel();
@@ -118,6 +120,7 @@ public class GuidBean extends javax.swing.JPanel
         layout.setVerticalGroup(vsg1);
     }
 
+    @Override
     public void initLang()
     {
         Lang.setWText(lb_PropName, LangRes.P30F1301, "时间");
@@ -130,6 +133,7 @@ public class GuidBean extends javax.swing.JPanel
         Lang.setWTips(bt_ExptCard, LangRes.P30F151E, "生成卡片(Alt + C)");
     }
 
+    @Override
     public void initData()
     {
     }

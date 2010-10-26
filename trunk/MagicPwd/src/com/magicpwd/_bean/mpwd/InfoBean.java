@@ -3,8 +3,8 @@
  */
 package com.magicpwd._bean.mpwd;
 
-import com.magicpwd.__i.IEditBean;
 import com.magicpwd.__i.IEditItem;
+import com.magicpwd.__i.mpwd.IMpwdBean;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.v.mpwd.MainPtn;
@@ -14,7 +14,7 @@ import com.magicpwd.v.mpwd.MainPtn;
  * 键值：ConsEnv.INDX_INFO
  * @author Amon
  */
-public class InfoBean extends javax.swing.JPanel implements IEditBean
+public class InfoBean extends javax.swing.JPanel implements IMpwdBean
 {
 
     private int tipsSize;

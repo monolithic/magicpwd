@@ -4,13 +4,16 @@
  */
 package com.magicpwd._bean.mwiz;
 
+import com.magicpwd.__i.mwiz.IMwizBean;
+
 /**
  *
  * @author Amon
  */
-public class TextBean extends javax.swing.JPanel
+public class TextBean extends javax.swing.JPanel implements IMwizBean
 {
 
+    @Override
     public void initView()
     {
 
@@ -35,15 +38,13 @@ public class TextBean extends javax.swing.JPanel
         layout.setVerticalGroup(vpg);
     }
 
+    @Override
     public void initLang()
     {
     }
 
+    @Override
     public void initData()
-    {
-    }
-
-    public void showData()
     {
     }
 
