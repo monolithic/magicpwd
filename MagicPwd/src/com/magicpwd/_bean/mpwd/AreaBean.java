@@ -49,6 +49,8 @@ public class AreaBean extends javax.swing.JPanel implements IMpwdBean
         lb_PropData.setLabelFor(ta_PropData);
         javax.swing.JScrollPane sp_PropData = new javax.swing.JScrollPane(ta_PropData);
 
+        initConf();
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
@@ -153,8 +155,13 @@ public class AreaBean extends javax.swing.JPanel implements IMpwdBean
 
         mainPtn.updateSelected();
     }
+
+    private void initConf()
+    {
+    }
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JLabel lb_PropName;
     private javax.swing.JTextArea ta_PropData;
     private javax.swing.JTextField tf_PropName;
+    // 配置信息
 }

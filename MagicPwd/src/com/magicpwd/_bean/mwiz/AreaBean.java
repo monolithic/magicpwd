@@ -23,6 +23,8 @@ public class AreaBean extends javax.swing.JPanel implements IMwizBean
         ta_PropData.setRows(4);
         javax.swing.JScrollPane jsp = new javax.swing.JScrollPane(ta_PropData);
 
+        initConf();
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE));
@@ -41,6 +43,15 @@ public class AreaBean extends javax.swing.JPanel implements IMwizBean
 
     @Override
     public void showData(KeysMdl keysMdl)
+    {
+    }
+
+    @Override
+    public void setLabelFor(javax.swing.JLabel label)
+    {
+    }
+
+    private void initConf()
     {
     }
     private javax.swing.JTextArea ta_PropData;

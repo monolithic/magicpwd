@@ -45,4 +45,9 @@ public class LinkBean extends javax.swing.JPanel implements IMwizBean
     public void showData(KeysMdl keysMdl)
     {
     }
+
+    @Override
+    public void setLabelFor(javax.swing.JLabel label)
+    {
+    }
 }

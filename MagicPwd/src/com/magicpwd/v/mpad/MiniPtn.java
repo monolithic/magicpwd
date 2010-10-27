@@ -19,6 +19,7 @@ import com.magicpwd.m.mpad.NoteMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.m.mpad.MpadMdl;
 import com.magicpwd.r.ListCR;
+import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.TrayPtn;
 
 /**
@@ -260,6 +261,12 @@ public class MiniPtn extends AFrame
     public boolean endSave()
     {
         return true;
+    }
+
+    @Override
+    public MenuPtn getMenuPtn()
+    {
+        return null;
     }
 
     public void findNote()
