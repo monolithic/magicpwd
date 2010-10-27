@@ -38,6 +38,11 @@ public abstract class ADateBean extends javax.swing.JPanel
     protected IEditItem itemData;
     private java.text.DateFormat format;
 
+    public ADateBean(AFrame formPtn)
+    {
+        this.formPtn = formPtn;
+    }
+
     protected void initConfView()
     {
         tf_PropData = new javax.swing.JTextField();

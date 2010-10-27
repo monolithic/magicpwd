@@ -18,6 +18,7 @@ package com.magicpwd._bean;
 
 import com.magicpwd.__a.AFrame;
 import com.magicpwd.__a.mpwd.AMpwdAction;
+import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsEnv;
 
@@ -25,10 +26,16 @@ import com.magicpwd._cons.ConsEnv;
  *
  * @author Amon
  */
-public class ADataBean extends javax.swing.JPanel
+public abstract class ADataBean extends javax.swing.JPanel
 {
 
     protected AFrame formPtn;
+    protected IEditItem itemData;
+
+    public ADataBean(AFrame formPtn)
+    {
+        this.formPtn = formPtn;
+    }
 
     protected void initConfView()
     {

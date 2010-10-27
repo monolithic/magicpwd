@@ -107,9 +107,18 @@ public class NormPtn extends AFrame
         editPtn.showData(mwizMdl.getKeysMdl());
     }
 
+    @Override
     public MenuPtn getMenuPtn()
     {
         return menuPtn;
+    }
+
+    public void deCrypt(java.io.File src, java.io.File dst) throws Exception
+    {
+    }
+
+    public void enCrypt(java.io.File src, java.io.File dst) throws Exception
+    {
     }
 
     public void editSelected()

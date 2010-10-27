@@ -19,7 +19,6 @@ import com.magicpwd.v.mpwd.MainPtn;
 public class AreaBean extends AAreaBean implements IMpwdBean
 {
 
-    private IEditItem itemData;
     private MainPtn mainPtn;
     private WEditBox dataEdit;
     private WTextBox nameBox;
@@ -27,6 +26,7 @@ public class AreaBean extends AAreaBean implements IMpwdBean
 
     public AreaBean(MainPtn mainPtn)
     {
+        super(mainPtn);
         this.mainPtn = mainPtn;
     }
 

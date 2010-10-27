@@ -28,6 +28,7 @@ public class DataBean extends ADataBean implements IMpwdBean
 
     public DataBean(MainPtn mainPtn)
     {
+        super(mainPtn);
         this.mainPtn = mainPtn;
     }
 

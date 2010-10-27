@@ -7,6 +7,7 @@ package com.magicpwd._bean.mwiz;
 import com.magicpwd.__i.mwiz.IMwizBean;
 import com.magicpwd._bean.AAreaBean;
 import com.magicpwd.m.mwiz.KeysMdl;
+import com.magicpwd.v.mwiz.NormPtn;
 
 /**
  *
@@ -14,6 +15,11 @@ import com.magicpwd.m.mwiz.KeysMdl;
  */
 public class AreaBean extends AAreaBean implements IMwizBean
 {
+
+    public AreaBean(NormPtn normPtn)
+    {
+        super(normPtn);
+    }
 
     @Override
     public void initView()

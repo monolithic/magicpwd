@@ -17,20 +17,38 @@
 package com.magicpwd._bean.mwiz;
 
 import com.magicpwd.__i.mwiz.IMwizBean;
-import com.magicpwd._bean.ADataBean;
+import com.magicpwd._bean.AListBean;
 import com.magicpwd.m.mwiz.KeysMdl;
 import com.magicpwd.v.mwiz.NormPtn;
+import javax.swing.JLabel;
 
 /**
- *
- * @author Amon
+ * Application: MagicPwd
+ * Author     : Amon
+ * Encoding   : UTF-8
+ * Created    : 2010-10-27 21:28:18
+ * Website    : http://magicpwd.com/
+ * Project    : http://magicpwd.googlecode.com/
+ * Contact    : Amon@magicpwd.com
+ * CopyRight  : Winshine.biz
+ * Description:
  */
-public class DataBean extends ADataBean implements IMwizBean
+public class ListBean extends AListBean implements IMwizBean
 {
 
-    public DataBean(NormPtn normPtn)
+    public ListBean(NormPtn normPtn)
     {
         super(normPtn);
+    }
+
+    @Override
+    public void showData(KeysMdl keysMdl)
+    {
+    }
+
+    @Override
+    public void setLabelFor(JLabel label)
+    {
     }
 
     @Override
@@ -45,16 +63,6 @@ public class DataBean extends ADataBean implements IMwizBean
 
     @Override
     public void initData()
-    {
-    }
-
-    @Override
-    public void showData(KeysMdl keysMdl)
-    {
-    }
-
-    @Override
-    public void setLabelFor(javax.swing.JLabel label)
     {
     }
 }

@@ -22,13 +22,13 @@ import com.magicpwd.v.mpwd.MainPtn;
 public class TextBean extends ATextBean implements IMpwdBean
 {
 
-    private IEditItem itemData;
     private MainPtn mainPtn;
     private WEditBox dataEdit;
     private WTextBox nameBox;
 
     public TextBean(MainPtn mainPtn)
     {
+        super(mainPtn);
         this.mainPtn = mainPtn;
     }
 
@@ -38,6 +38,7 @@ public class TextBean extends ATextBean implements IMpwdBean
         dataEdit = new WEditBox(mainPtn.getUserMdl(), this, false);
         dataEdit.initView();
 
+        lb_PropConf = new javax.swing.JLabel();
         initConfView();
 
         lb_PropName = new javax.swing.JLabel();

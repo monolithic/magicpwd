@@ -6,6 +6,7 @@ package com.magicpwd._bean.mpwd;
 
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mpwd.IMpwdBean;
+import com.magicpwd._bean.AListBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd.v.mpwd.MainPtn;
 import java.awt.event.ActionEvent;
@@ -14,15 +15,15 @@ import java.awt.event.ActionEvent;
  *
  * @author Amon
  */
-public class ListBean extends javax.swing.JPanel implements IMpwdBean
+public class ListBean extends AListBean implements IMpwdBean
 {
 
-    private IEditItem itemData;
     private MainPtn mainPtn;
     private WEditBox dataEdit;
 
     public ListBean(MainPtn mainPtn)
     {
+        super(mainPtn);
         this.mainPtn = mainPtn;
     }
 
