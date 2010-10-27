@@ -187,9 +187,8 @@ public class GuidBean extends javax.swing.JPanel implements IMwizBean
     }
 
     @Override
-    public void requestFocus()
+    public void setLabelFor(javax.swing.JLabel label)
     {
-        cb_PropData.requestFocus();
     }
 
     public void saveDataActionPerformed(java.awt.event.ActionEvent evt)

@@ -12,6 +12,7 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
+import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.TrayPtn;
 import java.io.IOException;
 
@@ -77,6 +78,8 @@ public abstract class AFrame extends javax.swing.JFrame
             Bean.closeStream(stream);
         }
     }
+
+    public abstract MenuPtn getMenuPtn();
 
     /**
      * 用户数据保存

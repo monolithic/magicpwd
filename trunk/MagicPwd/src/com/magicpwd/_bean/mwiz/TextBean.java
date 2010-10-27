@@ -54,6 +54,11 @@ public class TextBean extends javax.swing.JPanel implements IMwizBean
     {
     }
 
+    @Override
+    public void setLabelFor(javax.swing.JLabel label)
+    {
+    }
+
     private void initConf()
     {
     }

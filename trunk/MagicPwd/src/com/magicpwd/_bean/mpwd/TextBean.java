@@ -50,20 +50,18 @@ public class TextBean extends javax.swing.JPanel implements IMpwdBean
         dataBox.initView();
         lb_PropData.setLabelFor(tf_PropData);
 
-        lb_PropEdit = new javax.swing.JLabel();
-        pl_PropEdit = new javax.swing.JPanel();
-        pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
+        initConf();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg1.addComponent(lb_PropEdit);
+        hpg1.addComponent(lb_PropConf);
         hpg1.addComponent(lb_PropData);
         hpg1.addComponent(lb_PropName);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg2.addComponent(tf_PropName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hpg2.addComponent(tf_PropData, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
-        hpg2.addComponent(pl_PropEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
+        hpg2.addComponent(pl_PropConf, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addGroup(hpg1);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -79,8 +77,8 @@ public class TextBean extends javax.swing.JPanel implements IMpwdBean
         vpg2.addComponent(lb_PropData);
         vpg2.addComponent(tf_PropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        vpg3.addComponent(lb_PropEdit);
-        vpg3.addComponent(pl_PropEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg3.addComponent(lb_PropConf);
+        vpg3.addComponent(pl_PropConf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
         vsg1.addGroup(vpg1);
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -168,10 +166,18 @@ public class TextBean extends javax.swing.JPanel implements IMpwdBean
         tf_PropData.selectAll();
         Util.setClipboardContents(tf_PropData.getText());
     }
-    private javax.swing.JLabel lb_PropData;
-    private javax.swing.JLabel lb_PropEdit;
+
+    private void initConf()
+    {
+        lb_PropConf = new javax.swing.JLabel();
+        pl_PropConf = new javax.swing.JPanel();
+        pl_PropConf.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
+    }
     private javax.swing.JLabel lb_PropName;
-    private javax.swing.JPanel pl_PropEdit;
-    private javax.swing.JTextField tf_PropData;
+    private javax.swing.JLabel lb_PropData;
     private javax.swing.JTextField tf_PropName;
+    private javax.swing.JTextField tf_PropData;
+    // 配置信息
+    private javax.swing.JLabel lb_PropConf;
+    private javax.swing.JPanel pl_PropConf;
 }

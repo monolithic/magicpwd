@@ -107,6 +107,11 @@ public class NormPtn extends AFrame
         editPtn.showData(mwizMdl.getKeysMdl());
     }
 
+    public MenuPtn getMenuPtn()
+    {
+        return menuPtn;
+    }
+
     public void editSelected()
     {
     }

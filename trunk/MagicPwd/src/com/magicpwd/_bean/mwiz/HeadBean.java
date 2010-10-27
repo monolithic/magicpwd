@@ -145,6 +145,11 @@ public class HeadBean extends javax.swing.JPanel implements IMwizBean
     public void showData(KeysMdl keysMdl)
     {
     }
+
+    @Override
+    public void setLabelFor(javax.swing.JLabel label)
+    {
+    }
     private BtnLabel ib_HintDate;
     private BtnLabel ib_KeysIcon;
     private javax.swing.JLabel lb_HintDate;
