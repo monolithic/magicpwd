@@ -14,41 +14,26 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd._bean.mwiz;
-
-import com.magicpwd.__i.mwiz.IMwizBean;
-import com.magicpwd._bean.ADataBean;
-import com.magicpwd.m.mwiz.KeysMdl;
+package com.magicpwd._bean;
 
 /**
  *
  * @author Amon
  */
-public class DataBean extends ADataBean implements IMwizBean
+public abstract class AAreaBean extends javax.swing.JPanel
 {
 
-    @Override
-    public void initView()
+    protected void initConfView()
+    {
+        ta_PropData = new javax.swing.JTextArea();
+    }
+
+    protected void initConfLang()
     {
     }
 
-    @Override
-    public void initLang()
+    protected void initConfData()
     {
     }
-
-    @Override
-    public void initData()
-    {
-    }
-
-    @Override
-    public void showData(KeysMdl keysMdl)
-    {
-    }
-
-    @Override
-    public void setLabelFor(javax.swing.JLabel label)
-    {
-    }
+    protected javax.swing.JTextArea ta_PropData;
 }

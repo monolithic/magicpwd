@@ -5,25 +5,20 @@
 package com.magicpwd._bean.mwiz;
 
 import com.magicpwd.__i.mwiz.IMwizBean;
+import com.magicpwd._bean.ATextBean;
 import com.magicpwd.m.mwiz.KeysMdl;
 
 /**
  *
  * @author Amon
  */
-public class TextBean extends javax.swing.JPanel implements IMwizBean
+public class TextBean extends ATextBean implements IMwizBean
 {
 
     @Override
     public void initView()
     {
-
-        tf_PropData = new javax.swing.JTextField();
-
-        pl_PropConf = new javax.swing.JPanel();
-        pl_PropConf.setLayout(new java.awt.FlowLayout());
-
-        initConf();
+        initConfView();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -58,10 +53,4 @@ public class TextBean extends javax.swing.JPanel implements IMwizBean
     public void setLabelFor(javax.swing.JLabel label)
     {
     }
-
-    private void initConf()
-    {
-    }
-    private javax.swing.JPanel pl_PropConf;
-    private javax.swing.JTextField tf_PropData;
 }

@@ -4,14 +4,12 @@
  */
 package com.magicpwd._bean.mpwd;
 
-import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mpwd.IMpwdBean;
-import com.magicpwd._comp.BtnLabel;
+import com.magicpwd._bean.ADataBean;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
-import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd.v.mpwd.MainPtn;
@@ -20,15 +18,13 @@ import com.magicpwd.v.mpwd.MainPtn;
  *
  * @author Amon
  */
-public class DataBean extends javax.swing.JPanel implements IMpwdBean
+public class DataBean extends ADataBean implements IMpwdBean
 {
 
     private IEditItem itemData;
     private WEditBox dataEdit;
     private MainPtn mainPtn;
     private WTextBox nameBox;
-//    private WTextBox dataBox;
-    private java.text.DateFormat format;
 
     public DataBean(MainPtn mainPtn)
     {
@@ -41,17 +37,17 @@ public class DataBean extends javax.swing.JPanel implements IMpwdBean
         dataEdit = new WEditBox(mainPtn.getUserMdl(), this, false);
         dataEdit.initView();
 
+        lb_PropConf = new javax.swing.JLabel();
+        initConfView();
+
         lb_PropName = new javax.swing.JLabel();
         tf_PropName = new javax.swing.JTextField(14);
+        lb_PropName.setLabelFor(tf_PropName);
         nameBox = new WTextBox(tf_PropName, true);
         nameBox.initView();
-        lb_PropName.setLabelFor(tf_PropName);
 
         lb_PropData = new javax.swing.JLabel();
-        tf_PropData = new javax.swing.JTextField();
         lb_PropData.setLabelFor(tf_PropData);
-
-        initConf();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -98,11 +94,14 @@ public class DataBean extends javax.swing.JPanel implements IMpwdBean
     {
         Bean.setText(lb_PropName, "属性(@P)");
         Bean.setText(lb_PropData, "数值(@D)");
+
+        initConfLang();
     }
 
     @Override
     public void initData()
     {
+        initConfData();
     }
 
     @Override
@@ -228,69 +227,9 @@ public class DataBean extends javax.swing.JPanel implements IMpwdBean
     public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
     {
     }
-
-    private void initConf()
-    {
-        lb_PropConf = new javax.swing.JLabel();
-        pl_PropConf = new javax.swing.JPanel();
-        pl_PropConf.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
-
-        bt_DateConf = new BtnLabel();
-        bt_DateConf.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "options.png"));
-        bt_DateConf.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                bt_DateConfActionPerformed(evt);
-            }
-        });
-        pl_PropConf.add(bt_DateConf);
-
-        AMpwdAction action = new AMpwdAction()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e)
-            {
-                mi_DataConfActionPerformed(e);
-            }
-
-            @Override
-            public void doInit(Object object)
-            {
-            }
-
-            @Override
-            public void reInit(javax.swing.AbstractButton button)
-            {
-            }
-        };
-
-        pm_DataConf = new javax.swing.JPopupMenu();
-        mi_DataDef = new javax.swing.JCheckBoxMenuItem();
-        pm_DataConf.add(mi_DataDef);
-        pm_DataConf.addSeparator();
-        mainPtn.getMenuPtn().getSubMenu("data-options", pm_DataConf, action);
-    }
-
-    private void bt_DateConfActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        pm_DataConf.show(bt_DateConf, 0, bt_DateConf.getSize().height);
-    }
-
-    private void mi_DataConfActionPerformed(java.awt.event.ActionEvent evt)
-    {
-    }
     private javax.swing.JLabel lb_PropName;
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JTextField tf_PropName;
-    private javax.swing.JTextField tf_PropData;
     // 配置信息
     private javax.swing.JLabel lb_PropConf;
-    private javax.swing.JPanel pl_PropConf;
-    private BtnLabel bt_DateConf;
-    private javax.swing.JPopupMenu pm_DataConf;
-    private javax.swing.JCheckBoxMenuItem mi_DataDef;
 }

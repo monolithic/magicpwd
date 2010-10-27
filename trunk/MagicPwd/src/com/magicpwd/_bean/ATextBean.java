@@ -14,41 +14,41 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd._bean.mwiz;
+package com.magicpwd._bean;
 
-import com.magicpwd.__i.mwiz.IMwizBean;
-import com.magicpwd._bean.ADataBean;
-import com.magicpwd.m.mwiz.KeysMdl;
+import com.magicpwd._comp.WTextBox;
 
 /**
  *
  * @author Amon
  */
-public class DataBean extends ADataBean implements IMwizBean
+public class ATextBean extends javax.swing.JPanel
 {
 
-    @Override
-    public void initView()
+    private WTextBox dataBox;
+
+    protected void initConfView()
     {
+        tf_PropData = new javax.swing.JTextField();
+
+        dataBox = new WTextBox(tf_PropData, true);
+        dataBox.initView();
+
+        pl_PropConf = new javax.swing.JPanel();
+        pl_PropConf.setLayout(new java.awt.FlowLayout());
+
     }
 
-    @Override
-    public void initLang()
+    protected void initConfLang()
     {
+        dataBox.initLang();
     }
 
-    @Override
-    public void initData()
+    protected void initConfData()
     {
+        dataBox.initData();
     }
-
-    @Override
-    public void showData(KeysMdl keysMdl)
-    {
-    }
-
-    @Override
-    public void setLabelFor(javax.swing.JLabel label)
-    {
-    }
+    protected javax.swing.JTextField tf_PropData;
+    // 配置信息
+    protected javax.swing.JPanel pl_PropConf;
 }
