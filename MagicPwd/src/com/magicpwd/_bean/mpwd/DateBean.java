@@ -39,18 +39,17 @@ public class DateBean extends ADateBean implements IMpwdBean
         dataEdit = new WEditBox(mainPtn.getUserMdl(), this, false);
         dataEdit.initView();
 
-        lb_PropName = new javax.swing.JLabel();
-        tf_PropName = new javax.swing.JTextField(14);
-        nameBox = new WTextBox(tf_PropName, true);
-        nameBox.initView();
-        lb_PropName.setLabelFor(tf_PropName);
-
-        lb_PropData = new javax.swing.JLabel();
-        tf_PropData = new javax.swing.JTextField();
-        lb_PropData.setLabelFor(tf_PropData);
-
         lb_PropConf = new javax.swing.JLabel();
         initConfView();
+
+        lb_PropName = new javax.swing.JLabel();
+        tf_PropName = new javax.swing.JTextField(14);
+        lb_PropName.setLabelFor(tf_PropName);
+        nameBox = new WTextBox(tf_PropName, true);
+        nameBox.initView();
+
+        lb_PropData = new javax.swing.JLabel();
+        lb_PropData.setLabelFor(tf_PropData);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);

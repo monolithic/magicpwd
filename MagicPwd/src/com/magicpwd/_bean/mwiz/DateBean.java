@@ -38,11 +38,6 @@ public class DateBean extends ADateBean implements IMwizBean
     @Override
     public void initView()
     {
-        tf_PropData = new javax.swing.JTextField();
-
-        pl_PropConf = new javax.swing.JPanel();
-        pl_PropConf.setLayout(new java.awt.FlowLayout());
-
         initConfView();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

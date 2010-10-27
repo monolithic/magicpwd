@@ -2,6 +2,7 @@ package com.magicpwd._bean.mpwd;
 
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mpwd.IMpwdBean;
+import com.magicpwd._bean.AAreaBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsDat;
@@ -15,7 +16,7 @@ import com.magicpwd.v.mpwd.MainPtn;
  * 键值：ConsEnv.INDX_AREA
  * @author Amon
  */
-public class AreaBean extends javax.swing.JPanel implements IMpwdBean
+public class AreaBean extends AAreaBean implements IMpwdBean
 {
 
     private IEditItem itemData;
@@ -35,21 +36,20 @@ public class AreaBean extends javax.swing.JPanel implements IMpwdBean
         dataEdit = new WEditBox(mainPtn.getUserMdl(), this, false);
         dataEdit.initView();
 
+        initConfView();
+
         lb_PropName = new javax.swing.JLabel();
         tf_PropName = new javax.swing.JTextField(14);
+        lb_PropName.setLabelFor(tf_PropName);
         nameBox = new WTextBox(tf_PropName, true);
         nameBox.initView();
-        lb_PropName.setLabelFor(tf_PropName);
 
         lb_PropData = new javax.swing.JLabel();
-        ta_PropData = new javax.swing.JTextArea();
+        lb_PropData.setLabelFor(ta_PropData);
         ta_PropData.setLineWrap(true);
         dataBox = new WTextBox(ta_PropData);
         dataBox.initView();
-        lb_PropData.setLabelFor(ta_PropData);
-        javax.swing.JScrollPane sp_PropData = new javax.swing.JScrollPane(ta_PropData);
-
-        initConf();
+        javax.swing.JScrollPane jsp = new javax.swing.JScrollPane(ta_PropData);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -58,7 +58,7 @@ public class AreaBean extends javax.swing.JPanel implements IMpwdBean
         hpg1.addComponent(lb_PropData);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg2.addComponent(tf_PropName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        hpg2.addComponent(sp_PropData, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
+        hpg2.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addGroup(hpg1);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -75,7 +75,7 @@ public class AreaBean extends javax.swing.JPanel implements IMpwdBean
         vsg1.addContainerGap(49, Short.MAX_VALUE);
         javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         vpg2.addGroup(vsg1);
-        vpg2.addComponent(sp_PropData, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE);
+        vpg2.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup vsg2 = layout.createSequentialGroup();
         vsg2.addGroup(vpg1);
         vsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -92,6 +92,8 @@ public class AreaBean extends javax.swing.JPanel implements IMpwdBean
         Lang.setWText(lb_PropName, LangRes.P30F1311, "名称");
         Lang.setWText(lb_PropData, LangRes.P30F1312, "附注");
 
+        initConfLang();
+
         nameBox.initLang();
         dataBox.initLang();
         dataEdit.initLang();
@@ -100,6 +102,8 @@ public class AreaBean extends javax.swing.JPanel implements IMpwdBean
     @Override
     public void initData()
     {
+        initConfData();
+
         nameBox.initData();
         dataBox.initData();
     }
@@ -155,13 +159,8 @@ public class AreaBean extends javax.swing.JPanel implements IMpwdBean
 
         mainPtn.updateSelected();
     }
-
-    private void initConf()
-    {
-    }
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JLabel lb_PropName;
-    private javax.swing.JTextArea ta_PropData;
     private javax.swing.JTextField tf_PropName;
     // 配置信息
 }

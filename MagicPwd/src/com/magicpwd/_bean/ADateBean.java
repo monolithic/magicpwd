@@ -18,7 +18,6 @@ package com.magicpwd._bean;
 
 import com.magicpwd.__a.AFrame;
 import com.magicpwd.__a.mpwd.AMpwdAction;
-import com.magicpwd.__i.IEditBean;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsEnv;
@@ -32,7 +31,7 @@ import com.magicpwd._util.Lang;
  *
  * @author Amon
  */
-public abstract class ADateBean extends javax.swing.JPanel implements IEditBean
+public abstract class ADateBean extends javax.swing.JPanel
 {
 
     protected AFrame formPtn;
@@ -41,6 +40,8 @@ public abstract class ADateBean extends javax.swing.JPanel implements IEditBean
 
     protected void initConfView()
     {
+        tf_PropData = new javax.swing.JTextField();
+
         pl_PropConf = new javax.swing.JPanel();
         pl_PropConf.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 

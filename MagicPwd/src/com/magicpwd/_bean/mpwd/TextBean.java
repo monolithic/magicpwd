@@ -5,6 +5,7 @@ package com.magicpwd._bean.mpwd;
 
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mpwd.IMpwdBean;
+import com.magicpwd._bean.ATextBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsDat;
@@ -18,14 +19,13 @@ import com.magicpwd.v.mpwd.MainPtn;
  * 键值：ConsEnv.INDX_TEXT
  * @author Amon
  */
-public class TextBean extends javax.swing.JPanel implements IMpwdBean
+public class TextBean extends ATextBean implements IMpwdBean
 {
 
     private IEditItem itemData;
     private MainPtn mainPtn;
     private WEditBox dataEdit;
     private WTextBox nameBox;
-    private WTextBox dataBox;
 
     public TextBean(MainPtn mainPtn)
     {
@@ -38,19 +38,16 @@ public class TextBean extends javax.swing.JPanel implements IMpwdBean
         dataEdit = new WEditBox(mainPtn.getUserMdl(), this, false);
         dataEdit.initView();
 
+        initConfView();
+
         lb_PropName = new javax.swing.JLabel();
         tf_PropName = new javax.swing.JTextField(14);
+        lb_PropName.setLabelFor(tf_PropName);
         nameBox = new WTextBox(tf_PropName, true);
         nameBox.initView();
-        lb_PropName.setLabelFor(tf_PropName);
 
         lb_PropData = new javax.swing.JLabel();
-        tf_PropData = new javax.swing.JTextField();
-        dataBox = new WTextBox(tf_PropData, true);
-        dataBox.initView();
         lb_PropData.setLabelFor(tf_PropData);
-
-        initConf();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -99,7 +96,6 @@ public class TextBean extends javax.swing.JPanel implements IMpwdBean
         Lang.setWText(lb_PropData, LangRes.P30F1308, "文本");
 
         nameBox.initLang();
-        dataBox.initLang();
         dataEdit.initLang();
     }
 
@@ -107,7 +103,6 @@ public class TextBean extends javax.swing.JPanel implements IMpwdBean
     public void initData()
     {
         nameBox.initData();
-        dataBox.initData();
     }
 
     @Override
@@ -166,18 +161,9 @@ public class TextBean extends javax.swing.JPanel implements IMpwdBean
         tf_PropData.selectAll();
         Util.setClipboardContents(tf_PropData.getText());
     }
-
-    private void initConf()
-    {
-        lb_PropConf = new javax.swing.JLabel();
-        pl_PropConf = new javax.swing.JPanel();
-        pl_PropConf.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
-    }
     private javax.swing.JLabel lb_PropName;
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JTextField tf_PropName;
-    private javax.swing.JTextField tf_PropData;
     // 配置信息
     private javax.swing.JLabel lb_PropConf;
-    private javax.swing.JPanel pl_PropConf;
 }

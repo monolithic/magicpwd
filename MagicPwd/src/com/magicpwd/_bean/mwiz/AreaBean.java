@@ -5,25 +5,24 @@
 package com.magicpwd._bean.mwiz;
 
 import com.magicpwd.__i.mwiz.IMwizBean;
+import com.magicpwd._bean.AAreaBean;
 import com.magicpwd.m.mwiz.KeysMdl;
 
 /**
  *
  * @author Amon
  */
-public class AreaBean extends javax.swing.JPanel implements IMwizBean
+public class AreaBean extends AAreaBean implements IMwizBean
 {
 
     @Override
     public void initView()
     {
-        ta_PropData = new javax.swing.JTextArea();
+        initConfView();
 
         ta_PropData.setColumns(20);
         ta_PropData.setRows(4);
         javax.swing.JScrollPane jsp = new javax.swing.JScrollPane(ta_PropData);
-
-        initConf();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -34,11 +33,13 @@ public class AreaBean extends javax.swing.JPanel implements IMwizBean
     @Override
     public void initLang()
     {
+        initConfLang();
     }
 
     @Override
     public void initData()
     {
+        initConfData();
     }
 
     @Override
@@ -50,9 +51,4 @@ public class AreaBean extends javax.swing.JPanel implements IMwizBean
     public void setLabelFor(javax.swing.JLabel label)
     {
     }
-
-    private void initConf()
-    {
-    }
-    private javax.swing.JTextArea ta_PropData;
 }
