@@ -5,14 +5,13 @@ package com.magicpwd._bean.mpwd;
 
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mpwd.IMpwdBean;
+import com.magicpwd._bean.AFileBean;
 import com.magicpwd._comp.WEditBox;
-import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comn.item.EditItem;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.v.mpwd.MainPtn;
@@ -22,23 +21,20 @@ import com.magicpwd.v.mpwd.MainPtn;
  * 键值：ConsEnv.INDX_FILE
  * @author Amon
  */
-public class FileBean extends javax.swing.JPanel implements IMpwdBean
+public class FileBean extends AFileBean implements IMpwdBean
 {
 
-    private WEditBox dataEdit;
-    private IEditItem itemData;
     private MainPtn mainPtn;
+    private WEditBox dataEdit;
     /**
      * 用户文件对象
      */
-    private java.io.File filePath;
-    private java.io.File amaPath;
     private String amaName;
     private WTextBox nameBox;
-    private WTextBox dataBox;
 
     public FileBean(MainPtn mainPtn)
     {
+        super(mainPtn);
         this.mainPtn = mainPtn;
     }
 
@@ -48,6 +44,9 @@ public class FileBean extends javax.swing.JPanel implements IMpwdBean
         dataEdit = new WEditBox(mainPtn.getUserMdl(), this, false);
         dataEdit.initView();
 
+        lb_PropConf = new javax.swing.JLabel();
+        initConfView();
+
         lb_PropName = new javax.swing.JLabel();
         tf_PropName = new javax.swing.JTextField(14);
         nameBox = new WTextBox(tf_PropName, true);
@@ -55,49 +54,18 @@ public class FileBean extends javax.swing.JPanel implements IMpwdBean
         lb_PropName.setLabelFor(tf_PropName);
 
         lb_PropData = new javax.swing.JLabel();
-        tf_PropData = new javax.swing.JTextField();
         lb_PropData.setLabelFor(tf_PropData);
-
-        lb_PropEdit = new javax.swing.JLabel();
-        pl_PropEdit = new javax.swing.JPanel();
-        pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
-
-        bt_FileView = new BtnLabel();
-        bt_FileView.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "file-preview.png"));
-        bt_FileView.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                bt_FileViewActionPerformed(evt);
-            }
-        });
-        pl_PropEdit.add(bt_FileView);
-
-        bt_FileApnd = new BtnLabel();
-        bt_FileApnd.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "file-upload.png"));
-        bt_FileApnd.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                bt_FileApndActionPerformed(evt);
-            }
-        });
-        pl_PropEdit.add(bt_FileApnd);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg1.addComponent(lb_PropEdit);
+        hpg1.addComponent(lb_PropConf);
         hpg1.addComponent(lb_PropData);
         hpg1.addComponent(lb_PropName);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg2.addComponent(tf_PropName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hpg2.addComponent(tf_PropData, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
-        hpg2.addComponent(pl_PropEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
+        hpg2.addComponent(pl_PropConf, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addGroup(hpg1);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -113,8 +81,8 @@ public class FileBean extends javax.swing.JPanel implements IMpwdBean
         vpg2.addComponent(lb_PropData);
         vpg2.addComponent(tf_PropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        vpg3.addComponent(lb_PropEdit);
-        vpg3.addComponent(pl_PropEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg3.addComponent(lb_PropConf);
+        vpg3.addComponent(pl_PropConf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
         vsg1.addGroup(vpg1);
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -134,11 +102,7 @@ public class FileBean extends javax.swing.JPanel implements IMpwdBean
         Lang.setWText(lb_PropName, LangRes.P30F1313, "名称");
         Lang.setWText(lb_PropData, LangRes.P30F1314, "文件");
 
-        Lang.setWText(bt_FileView, LangRes.P30F1515, "&V");
-        Lang.setWTips(bt_FileView, LangRes.P30F1516, "打开附件(Alt + V)");
-
-        Lang.setWText(bt_FileApnd, LangRes.P30F1517, "&P");
-        Lang.setWTips(bt_FileApnd, LangRes.P30F1518, "添加附件(Alt + P)");
+        initConfLang();
 
         nameBox.initLang();
         dataEdit.initLang();
@@ -147,6 +111,8 @@ public class FileBean extends javax.swing.JPanel implements IMpwdBean
     @Override
     public void initData()
     {
+        initConfData();
+
         nameBox.initData();
     }
 
@@ -331,59 +297,20 @@ public class FileBean extends javax.swing.JPanel implements IMpwdBean
         }
     }
 
-    private void bt_FileViewActionPerformed(java.awt.event.ActionEvent evt)
+    @Override
+    protected void deCrypt(java.io.File src, java.io.File dst) throws Exception
     {
-        try
-        {
-            java.io.File tmpPath = new java.io.File(System.getProperty("java.io.tmpdir"));
-            if (!tmpPath.exists() || !tmpPath.canWrite())
-            {
-                tmpPath = new java.io.File("./tmp/");
-                if (!tmpPath.exists())
-                {
-                    tmpPath.mkdir();
-                }
-            }
-
-            java.io.File srcFile = new java.io.File(amaPath, itemData.getSpec(IEditItem.SPEC_FILE_NAME) + ConsEnv.FILE_ATTACHMENT);
-            java.io.File tmpFile = new java.io.File(tmpPath, itemData.getData());
-            mainPtn.deCrypt(srcFile, tmpFile);
-            //Keys.doCrypt(gridView.getCoreMdl().getDCipher(), srcFile, tmpFile);
-            if (!Desk.open(tmpFile))
-            {
-                Lang.showMesg(mainPtn, LangRes.P30F1A03, "打开文件错误，请尝试手动方式查看！");
-            }
-        }
-        catch (Exception exp)
-        {
-            Lang.showMesg(mainPtn, null, exp.getLocalizedMessage());
-            Logs.exception(exp);
-        }
+        mainPtn.deCrypt(src, dst);
     }
 
-    private void bt_FileApndActionPerformed(java.awt.event.ActionEvent evt)
+    @Override
+    protected void enCrypt(java.io.File src, java.io.File dst) throws Exception
     {
-        javax.swing.JFileChooser jfc = new javax.swing.JFileChooser();
-        jfc.setMultiSelectionEnabled(false);
-        jfc.setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);
-        if (filePath != null)
-        {
-            jfc.setSelectedFile(filePath);
-        }
-        int status = jfc.showOpenDialog(this);
-        if (status != javax.swing.JFileChooser.APPROVE_OPTION)
-        {
-            return;
-        }
-        filePath = jfc.getSelectedFile();
-        tf_PropData.setText(filePath.getName());
+        mainPtn.enCrypt(src, dst);
     }
     private javax.swing.JLabel lb_PropData;
-    private javax.swing.JLabel lb_PropEdit;
     private javax.swing.JLabel lb_PropName;
-    private javax.swing.JPanel pl_PropEdit;
-    private javax.swing.JTextField tf_PropData;
     private javax.swing.JTextField tf_PropName;
-    private BtnLabel bt_FileApnd;
-    private BtnLabel bt_FileView;
+    // 配置信息
+    private javax.swing.JLabel lb_PropConf;
 }

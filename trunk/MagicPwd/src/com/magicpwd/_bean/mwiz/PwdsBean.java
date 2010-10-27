@@ -17,28 +17,51 @@
 package com.magicpwd._bean.mwiz;
 
 import com.magicpwd.__i.mwiz.IMwizBean;
+import com.magicpwd._bean.APwdsBean;
 import com.magicpwd.m.mwiz.KeysMdl;
+import com.magicpwd.v.mwiz.NormPtn;
 
 /**
  *
  * @author Amon
  */
-public class PwdsBean extends javax.swing.JPanel implements IMwizBean
+public class PwdsBean extends APwdsBean implements IMwizBean
 {
+
+    public PwdsBean(NormPtn normPtn)
+    {
+        super(normPtn);
+    }
 
     @Override
     public void initView()
     {
+        initConfView();
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
+        hsg.addComponent(pf_PropData, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE);
+        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg.addComponent(pl_PropConf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hsg));
+
+        javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        vpg.addComponent(pl_PropConf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg.addComponent(pf_PropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        layout.setVerticalGroup(vpg);
     }
 
     @Override
     public void initLang()
     {
+        initConfLang();
     }
 
     @Override
     public void initData()
     {
+        initConfData();
     }
 
     @Override

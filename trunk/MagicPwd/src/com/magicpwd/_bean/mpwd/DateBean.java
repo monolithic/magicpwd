@@ -22,14 +22,13 @@ import com.magicpwd.v.mpwd.MainPtn;
 public class DateBean extends ADateBean implements IMpwdBean
 {
 
-    private IEditItem itemData;
     private WEditBox dataEdit;
     private MainPtn mainPtn;
     private WTextBox nameBox;
-//    private WTextBox dataBox;
 
     public DateBean(MainPtn mainPtn)
     {
+        super(mainPtn);
         this.mainPtn = mainPtn;
     }
 

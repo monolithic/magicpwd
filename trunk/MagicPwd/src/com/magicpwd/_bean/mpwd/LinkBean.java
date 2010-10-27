@@ -5,13 +5,11 @@ package com.magicpwd._bean.mpwd;
 
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mpwd.IMpwdBean;
+import com.magicpwd._bean.ALinkBean;
 import com.magicpwd._comp.WEditBox;
-import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsDat;
-import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.v.mpwd.MainPtn;
@@ -22,17 +20,16 @@ import com.magicpwd.v.mpwd.MainPtn;
  * @author Amon
  * 
  */
-public class LinkBean extends javax.swing.JPanel implements IMpwdBean
+public class LinkBean extends ALinkBean implements IMpwdBean
 {
 
-    private IEditItem itemData;
     private MainPtn mainPtn;
     private WEditBox dataEdit;
     private WTextBox nameBox;
-    private WTextBox dataBox;
 
     public LinkBean(MainPtn mainPtn)
     {
+        super(mainPtn);
         this.mainPtn = mainPtn;
     }
 
@@ -42,6 +39,9 @@ public class LinkBean extends javax.swing.JPanel implements IMpwdBean
         dataEdit = new WEditBox(mainPtn.getUserMdl(), this, false);
         dataEdit.initView();
 
+        lb_PropConf = new javax.swing.JLabel();
+        initConfView();
+
         lb_PropName = new javax.swing.JLabel();
         tf_PropName = new javax.swing.JTextField(14);
         nameBox = new WTextBox(tf_PropName, true);
@@ -49,38 +49,18 @@ public class LinkBean extends javax.swing.JPanel implements IMpwdBean
         lb_PropName.setLabelFor(tf_PropName);
 
         lb_PropData = new javax.swing.JLabel();
-        tf_PropData = new javax.swing.JTextField();
-        dataBox = new WTextBox(tf_PropData, true);
-        dataBox.initView();
         lb_PropData.setLabelFor(tf_PropData);
-
-        lb_PropEdit = new javax.swing.JLabel();
-        pl_PropEdit = new javax.swing.JPanel();
-        pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
-
-        bt_LinkView = new BtnLabel();
-        bt_LinkView.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "link.png"));
-        bt_LinkView.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                bt_LinkViewActionPerformed(evt);
-            }
-        });
-        pl_PropEdit.add(bt_LinkView);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg1.addComponent(lb_PropEdit);
+        hpg1.addComponent(lb_PropConf);
         hpg1.addComponent(lb_PropData);
         hpg1.addComponent(lb_PropName);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg2.addComponent(tf_PropName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hpg2.addComponent(tf_PropData, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
-        hpg2.addComponent(pl_PropEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
+        hpg2.addComponent(pl_PropConf, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addGroup(hpg1);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -96,8 +76,8 @@ public class LinkBean extends javax.swing.JPanel implements IMpwdBean
         vpg2.addComponent(lb_PropData);
         vpg2.addComponent(tf_PropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        vpg3.addComponent(lb_PropEdit);
-        vpg3.addComponent(pl_PropEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg3.addComponent(lb_PropConf);
+        vpg3.addComponent(pl_PropConf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
         vsg1.addGroup(vpg1);
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -117,11 +97,9 @@ public class LinkBean extends javax.swing.JPanel implements IMpwdBean
         Lang.setWText(lb_PropName, LangRes.P30F130B, "名称");
         Lang.setWText(lb_PropData, LangRes.P30F130C, "地址");
 
-        Lang.setWText(bt_LinkView, LangRes.P30F150F, "&O");
-        Lang.setWTips(bt_LinkView, LangRes.P30F1510, "打开链接(Alt + O)");
+        initConfLang();
 
         nameBox.initLang();
-        dataBox.initLang();
         dataEdit.initLang();
     }
 
@@ -129,7 +107,6 @@ public class LinkBean extends javax.swing.JPanel implements IMpwdBean
     public void initData()
     {
         nameBox.initData();
-        dataBox.initData();
     }
 
     @Override
@@ -188,26 +165,9 @@ public class LinkBean extends javax.swing.JPanel implements IMpwdBean
         tf_PropData.selectAll();
         Util.setClipboardContents(tf_PropData.getText());
     }
-
-    private void bt_LinkViewActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        String link = tf_PropData.getText();
-        if (!com.magicpwd._util.Char.isValidate(link))
-        {
-            Lang.showMesg(mainPtn, "", "");
-            return;
-        }
-        if (link.indexOf("://") < 0)
-        {
-            link = "http://" + link;
-        }
-        Desk.browse(link);
-    }
     private javax.swing.JLabel lb_PropData;
-    private javax.swing.JLabel lb_PropEdit;
     private javax.swing.JLabel lb_PropName;
-    private javax.swing.JPanel pl_PropEdit;
-    private javax.swing.JTextField tf_PropData;
     private javax.swing.JTextField tf_PropName;
-    private BtnLabel bt_LinkView;
+    // 配置信息
+    private javax.swing.JLabel lb_PropConf;
 }

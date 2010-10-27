@@ -16,16 +16,25 @@
  */
 package com.magicpwd._bean;
 
+import com.magicpwd.__a.AFrame;
+import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comp.WTextBox;
 
 /**
  *
  * @author Amon
  */
-public class ATextBean extends javax.swing.JPanel
+public abstract class ATextBean extends javax.swing.JPanel
 {
 
+    protected AFrame formPtn;
+    protected IEditItem itemData;
     private WTextBox dataBox;
+
+    public ATextBean(AFrame formPtn)
+    {
+        this.formPtn = formPtn;
+    }
 
     protected void initConfView()
     {

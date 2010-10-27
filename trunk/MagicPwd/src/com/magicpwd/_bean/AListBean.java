@@ -20,23 +20,29 @@ import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IEditItem;
 
 /**
- *
- * @author Amon
+ * Application: MagicPwd
+ * Author     : Amon
+ * Encoding   : UTF-8
+ * Created    : 2010-10-27 20:23:24
+ * Website    : http://magicpwd.com/
+ * Project    : http://magicpwd.googlecode.com/
+ * Contact    : Amon@magicpwd.com
+ * CopyRight  : Winshine.biz
+ * Description:
  */
-public abstract class AAreaBean extends javax.swing.JPanel
+public abstract class AListBean extends javax.swing.JPanel
 {
 
     protected AFrame formPtn;
     protected IEditItem itemData;
 
-    public AAreaBean(AFrame formPtn)
+    public AListBean(AFrame formPtn)
     {
         this.formPtn = formPtn;
     }
 
     protected void initConfView()
     {
-        ta_PropData = new javax.swing.JTextArea();
     }
 
     protected void initConfLang()
@@ -46,6 +52,4 @@ public abstract class AAreaBean extends javax.swing.JPanel
     protected void initConfData()
     {
     }
-    protected javax.swing.JTextArea ta_PropData;
-    // 配置信息
 }

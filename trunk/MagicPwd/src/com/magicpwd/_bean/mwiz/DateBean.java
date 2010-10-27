@@ -28,11 +28,9 @@ import com.magicpwd.v.mwiz.NormPtn;
 public class DateBean extends ADateBean implements IMwizBean
 {
 
-    private NormPtn normPtn;
-
     public DateBean(NormPtn normPtn)
     {
-        this.normPtn = normPtn;
+        super(normPtn);
     }
 
     @Override
