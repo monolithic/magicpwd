@@ -66,11 +66,8 @@ public class LogoBean extends javax.swing.JPanel implements IMpwdBean, IBackCall
         lb_PropData.setLabelFor(ta_PropData);
         ta_PropData.setLineWrap(true);
         ta_PropData.setRows(3);
-        javax.swing.JScrollPane sp_PropData = new javax.swing.JScrollPane(ta_PropData);
 
-        lb_PropEdit = new javax.swing.JLabel();
-        pl_PropEdit = new javax.swing.JPanel();
-        pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
+        javax.swing.JScrollPane sp_PropData = new javax.swing.JScrollPane(ta_PropData);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -196,10 +193,8 @@ public class LogoBean extends javax.swing.JPanel implements IMpwdBean, IBackCall
         ico.showData(itemData.getName());
         ico.setVisible(true);
     }
-    private javax.swing.JLabel lb_PropEdit;
     private javax.swing.JLabel lb_PropName;
     private IcoLabel ib_PropName;
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JTextArea ta_PropData;
-    private javax.swing.JPanel pl_PropEdit;
 }

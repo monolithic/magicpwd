@@ -28,7 +28,7 @@ public class HintBean extends javax.swing.JPanel implements IMpwdBean
     private IEditItem itemData;
     private MainPtn mainPtn;
     private WTextBox nameBox;
-    private WTextBox dataBox;
+    //private WTextBox dataBox;
 
     public HintBean(MainPtn mainPtn)
     {
@@ -58,9 +58,9 @@ public class HintBean extends javax.swing.JPanel implements IMpwdBean
         tf_PropData = new javax.swing.JTextField();
         lb_PropData.setLabelFor(tf_PropData);
 
-        lb_PropEdit = new javax.swing.JLabel();
-        pl_PropEdit = new javax.swing.JPanel();
-        pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
+        lb_PropConf = new javax.swing.JLabel();
+        pl_PropConf = new javax.swing.JPanel();
+        pl_PropConf.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_DateView = new BtnLabel();
         bt_DateView.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "hint.png"));
@@ -73,7 +73,7 @@ public class HintBean extends javax.swing.JPanel implements IMpwdBean
                 bt_DateViewActionPerformed(evt);
             }
         });
-        pl_PropEdit.add(bt_DateView);
+        pl_PropConf.add(bt_DateView);
 
         pm_DateView = new javax.swing.JPopupMenu();
         AMpwdAction action = new AMpwdAction()
@@ -110,13 +110,13 @@ public class HintBean extends javax.swing.JPanel implements IMpwdBean
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg1.addComponent(lb_PropEdit);
+        hpg1.addComponent(lb_PropConf);
         hpg1.addComponent(lb_PropData);
         hpg1.addComponent(lb_PropName);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg2.addComponent(tf_PropName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hpg2.addComponent(tf_PropData, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
-        hpg2.addComponent(pl_PropEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
+        hpg2.addComponent(pl_PropConf, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addGroup(hpg1);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -132,8 +132,8 @@ public class HintBean extends javax.swing.JPanel implements IMpwdBean
         vpg2.addComponent(lb_PropData);
         vpg2.addComponent(tf_PropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        vpg3.addComponent(lb_PropEdit);
-        vpg3.addComponent(pl_PropEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg3.addComponent(lb_PropConf);
+        vpg3.addComponent(pl_PropConf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
         vsg1.addGroup(vpg1);
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -313,14 +313,15 @@ public class HintBean extends javax.swing.JPanel implements IMpwdBean
         }
         tf_PropData.setText(cmd);
     }
+    private javax.swing.JLabel lb_PropName;
+    private javax.swing.JLabel lb_PropData;
+    private javax.swing.JTextField tf_PropData;
+    private javax.swing.JTextField tf_PropName;
+    // 配置信息
+    private javax.swing.JLabel lb_PropConf;
+    private javax.swing.JPanel pl_PropConf;
+    private BtnLabel bt_DateView;
     private javax.swing.JPopupMenu pm_DateView;
     private javax.swing.JMenuItem mi_HalfHour;
     private javax.swing.JMenuItem mi_FullHour;
-    private javax.swing.JLabel lb_PropData;
-    private javax.swing.JLabel lb_PropEdit;
-    private javax.swing.JLabel lb_PropName;
-    private javax.swing.JPanel pl_PropEdit;
-    private javax.swing.JTextField tf_PropData;
-    private javax.swing.JTextField tf_PropName;
-    private BtnLabel bt_DateView;
 }

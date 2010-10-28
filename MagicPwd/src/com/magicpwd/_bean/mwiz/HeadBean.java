@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2010 Administrator
+ *  Copyright (C) 2010 Amon
  * 
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -16,16 +16,23 @@
  */
 package com.magicpwd._bean.mwiz;
 
+import com.magicpwd.__a.mpwd.AMpwdAction;
+import com.magicpwd.__i.IBackCall;
 import com.magicpwd.__i.mwiz.IMwizBean;
 import com.magicpwd._comp.BtnLabel;
+import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.mwiz.KeysMdl;
+import com.magicpwd.v.mwiz.NormPtn;
+import com.magicpwd.x.IcoDialog;
+import java.util.EventListener;
+import javax.swing.AbstractButton;
 
 /**
  * Application: MagicPwd
- * Author     : Administrator
+ * Author     : Amon
  * Encoding   : UTF-8
  * Created    : 2010-10-24 23:52:16
  * Website    : http://magicpwd.com/
@@ -34,8 +41,15 @@ import com.magicpwd.m.mwiz.KeysMdl;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public class HeadBean extends javax.swing.JPanel implements IMwizBean
+public class HeadBean extends javax.swing.JPanel implements IMwizBean, IBackCall
 {
+
+    private NormPtn normPtn;
+
+    public HeadBean(NormPtn normPtn)
+    {
+        this.normPtn = normPtn;
+    }
 
     @Override
     public void initView()
@@ -48,8 +62,68 @@ public class HeadBean extends javax.swing.JPanel implements IMwizBean
         tf_HintName = new javax.swing.JTextField(14);
         lb_HintDate = new javax.swing.JLabel();
         tf_HintDate = new javax.swing.JTextField(14);
+
         ib_KeysIcon = new BtnLabel();
+        ib_KeysIcon.setIcon(Bean.getNone());
+        ib_KeysIcon.setOpaque(true);
+        ib_KeysIcon.setPreferredSize(new java.awt.Dimension(21, 21));
+        ib_KeysIcon.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        ib_KeysIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ib_KeysIcon.setBackground(javax.swing.UIManager.getDefaults().getColor("TextField.background"));
+        ib_KeysIcon.setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
+        ib_KeysIcon.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                ib_KeysIconActionPerformed(evt);
+            }
+        });
+
         ib_HintDate = new BtnLabel();
+        ib_HintDate.setIcon(normPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "hint.png"));
+        ib_HintDate.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                ib_HintDateActionPerformed(evt);
+            }
+        });
+
+        pm_HintDate = new javax.swing.JPopupMenu();
+        AMpwdAction action = new AMpwdAction()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                mi_MenuItemActionPerformed(evt);
+            }
+
+            @Override
+            public void doInit(Object object)
+            {
+            }
+
+            @Override
+            public void reInit(AbstractButton button)
+            {
+            }
+        };
+        mi_HalfHour = new javax.swing.JMenuItem();
+        mi_HalfHour.addActionListener(action);
+        pm_HintDate.add(mi_HalfHour);
+
+        mi_FullHour = new javax.swing.JMenuItem();
+        mi_FullHour.addActionListener(action);
+        pm_HintDate.add(mi_FullHour);
+
+        pm_HintDate.addSeparator();
+
+        normPtn.getMenuPtn().getSubMenu("date-interval", pm_HintDate, action);
 
         javax.swing.JScrollPane jsp = new javax.swing.JScrollPane(ta_MetaData);
 
@@ -116,24 +190,13 @@ public class HeadBean extends javax.swing.JPanel implements IMwizBean
         Lang.setWText(ib_KeysIcon, LangRes.P30F151B, "&O");
         Lang.setWTips(ib_KeysIcon, LangRes.P30F151C, "提醒时间(Alt + O)");
 
-        Bean.setText(lb_MetaName, Lang.getLang(LangRes.P30F1304, "搜索"));
+        Bean.setText(lb_MetaData, Lang.getLang(LangRes.P30F1304, "搜索"));
 
         Lang.setWText(lb_HintName, LangRes.P30F1305, "提示");
         Lang.setWText(lb_HintDate, LangRes.P30F1306, "时间");
 
         Lang.setWText(ib_HintDate, LangRes.P30F151B, "&O");
         Lang.setWTips(ib_HintDate, LangRes.P30F151C, "提醒时间(Alt + O)");
-
-//        javax.swing.JCheckBoxMenuItem item;
-//        int k = 1;
-//        for (int i = 1, j = mi_MenuItem.length; i < j; i += 1)
-//        {
-//            item = mi_MenuItem[i];
-//            Lang.setWText(item, "P30FA60" + Integer.toHexString(k++).toUpperCase(), "");
-//            Lang.setWTips(item, "P30FA60" + Integer.toHexString(k++).toUpperCase(), "");
-//        }
-
-        //nameBox.initLang();
     }
 
     @Override
@@ -150,6 +213,110 @@ public class HeadBean extends javax.swing.JPanel implements IMwizBean
     public void setLabelFor(javax.swing.JLabel label)
     {
     }
+
+    @Override
+    public boolean callBack(Object sender, EventListener event, String... params)
+    {
+        return true;
+    }
+
+    private void ib_KeysIconActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        IcoDialog ico = new IcoDialog(normPtn, this);
+        ico.initView();
+        ico.initLang();
+        ico.initData();
+        //ico.showData(itemData.getName());
+        ico.setVisible(true);
+    }
+
+    private void ib_HintDateActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        java.util.Calendar c = java.util.Calendar.getInstance();
+        c.set(java.util.Calendar.SECOND, 0);
+        c.set(java.util.Calendar.MILLISECOND, 0);
+
+        java.util.Date d1;
+        java.util.Date d2;
+        String t1;
+        String t2;
+        if (c.get(java.util.Calendar.MINUTE) < 30)
+        {
+            c.set(java.util.Calendar.MINUTE, 30);
+            d1 = c.getTime();
+            t1 = c.get(java.util.Calendar.HOUR_OF_DAY) + ":30";
+            c.add(java.util.Calendar.MINUTE, 30);
+            d2 = c.getTime();
+            t2 = c.get(java.util.Calendar.HOUR_OF_DAY) + ":00";
+        }
+        else
+        {
+            c.set(java.util.Calendar.MINUTE, 0);
+            c.add(java.util.Calendar.HOUR_OF_DAY, 1);
+            d1 = c.getTime();
+            t1 = c.get(java.util.Calendar.HOUR_OF_DAY) + ":00";
+
+            c.add(java.util.Calendar.MINUTE, 30);
+            d2 = c.getTime();
+            t2 = c.get(java.util.Calendar.HOUR_OF_DAY) + ":30";
+        }
+
+        java.text.DateFormat format = new java.text.SimpleDateFormat(ConsEnv.HINT_DATE);
+        Bean.setText(mi_HalfHour, t1);
+        mi_HalfHour.setActionCommand(format.format(d1));
+        Bean.setText(mi_FullHour, t2);
+        mi_FullHour.setActionCommand(format.format(d2));
+        pm_HintDate.show(ib_HintDate, 0, ib_HintDate.getHeight());
+    }
+
+    private void mi_MenuItemActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        String cmd = evt.getActionCommand();
+        if (!com.magicpwd._util.Char.isValidate(cmd))
+        {
+            return;
+        }
+
+        java.util.Calendar cal = java.util.Calendar.getInstance();
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(ConsEnv.HINT_DATE);
+        if ("half".equalsIgnoreCase(cmd))
+        {
+            cal.add(java.util.Calendar.MINUTE, 30);
+            tf_HintDate.setText(sdf.format(cal.getTime()));
+            return;
+        }
+        if ("hour".equalsIgnoreCase(cmd))
+        {
+            cal.add(java.util.Calendar.HOUR_OF_DAY, 1);
+            tf_HintDate.setText(sdf.format(cal.getTime()));
+            return;
+        }
+        if ("day".equalsIgnoreCase(cmd))
+        {
+            cal.add(java.util.Calendar.DAY_OF_MONTH, 1);
+            tf_HintDate.setText(sdf.format(cal.getTime()));
+            return;
+        }
+        if ("week".equalsIgnoreCase(cmd))
+        {
+            cal.add(java.util.Calendar.WEEK_OF_MONTH, 1);
+            tf_HintDate.setText(sdf.format(cal.getTime()));
+            return;
+        }
+        if ("month".equalsIgnoreCase(cmd))
+        {
+            cal.add(java.util.Calendar.MONTH, 1);
+            tf_HintDate.setText(sdf.format(cal.getTime()));
+            return;
+        }
+        if ("year".equalsIgnoreCase(cmd))
+        {
+            cal.add(java.util.Calendar.YEAR, 1);
+            tf_HintDate.setText(sdf.format(cal.getTime()));
+            return;
+        }
+        tf_HintDate.setText(cmd);
+    }
     private BtnLabel ib_HintDate;
     private BtnLabel ib_KeysIcon;
     private javax.swing.JLabel lb_HintDate;
@@ -160,4 +327,7 @@ public class HeadBean extends javax.swing.JPanel implements IMwizBean
     private javax.swing.JTextField tf_HintDate;
     private javax.swing.JTextField tf_HintName;
     private javax.swing.JTextField tf_MetaName;
+    private javax.swing.JPopupMenu pm_HintDate;
+    private javax.swing.JMenuItem mi_HalfHour;
+    private javax.swing.JMenuItem mi_FullHour;
 }
