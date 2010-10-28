@@ -57,7 +57,7 @@ public class EditPtn extends javax.swing.JDialog
         guidBean.initView();
         pl_EditArea.add("guid", guidBean);
 
-        headBean = new HeadBean();
+        headBean = new HeadBean(normPtn);
         headBean.initView();
         pl_EditArea.add("head", headBean);
 
