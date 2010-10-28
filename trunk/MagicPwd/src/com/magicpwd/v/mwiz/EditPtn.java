@@ -36,6 +36,7 @@ import com.magicpwd.m.mwiz.KeysMdl;
 public class EditPtn extends javax.swing.JDialog
 {
 
+    private static final int MAX_ROW = 5;
     private int currStep;
     private KeysMdl keysMdl;
     private NormPtn normPtn;
@@ -91,7 +92,7 @@ public class EditPtn extends javax.swing.JDialog
         setVisible(true);
     }
 
-    public void showData(KeysMdl keysMdl)
+    public final void showData(KeysMdl keysMdl)
     {
         this.keysMdl = keysMdl;
         initGuidView();
@@ -224,10 +225,104 @@ public class EditPtn extends javax.swing.JDialog
     private void prevBodyView()
     {
         cl_Layout.show(pl_EditArea, "body");
+
+        pl_EditBody.removeAll();
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        javax.swing.GroupLayout.ParallelGroup hpg0 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
+        javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+
+        hpg0.addComponent(getLabel(0));
+        hpg1.addComponent(getPanel(0), javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE);
+
+        hpg0.addComponent(lb_EditLbl1);
+        hpg1.addComponent(pl_EditPnl1, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE);
+
+        hpg0.addComponent(lb_EditLbl2);
+        hpg1.addComponent(pl_EditPnl2, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE);
+
+        hpg0.addComponent(lb_EditLbl3);
+        hpg1.addComponent(pl_EditPnl3, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE);
+
+        hpg0.addComponent(lb_EditLbl4);
+        hpg1.addComponent(pl_EditPnl4, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE);
+
+        javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
+        hsg.addContainerGap();
+        hsg.addGroup(hpg0);
+        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg.addGroup(hpg1);
+        hsg.addContainerGap();
+        layout.setHorizontalGroup(hsg);
+
+        javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
+        vsg.addContainerGap();
+
+        javax.swing.GroupLayout.ParallelGroup vpg0 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg0.addComponent(getLabel(0));
+        vpg0.addComponent(getPanel(0), javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg.addGroup(vpg0);
+        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+
+        javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg1.addComponent(lb_EditLbl1);
+        vpg1.addComponent(pl_EditPnl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg.addGroup(vpg1);
+        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+
+        javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg2.addComponent(lb_EditLbl2);
+        vpg2.addComponent(pl_EditPnl2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg.addGroup(vpg2);
+        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+
+        javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg3.addComponent(lb_EditLbl3);
+        vpg3.addComponent(pl_EditPnl3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg.addGroup(vpg3);
+
+        javax.swing.GroupLayout.ParallelGroup vpg4 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg4.addComponent(lb_EditLbl4);
+        vpg4.addComponent(pl_EditPnl4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg.addGroup(vpg4);
+
+        vsg.addContainerGap(0, Short.MAX_VALUE);
+        layout.setVerticalGroup(vsg);
     }
 
     private void nextBodyView()
     {
+    }
+
+    private javax.swing.JLabel getLabel(int index)
+    {
+        if (lb_EditList == null)
+        {
+            lb_EditList = new javax.swing.JLabel[MAX_ROW];
+        }
+        javax.swing.JLabel label = lb_EditList[index];
+        if (label == null)
+        {
+            label = new javax.swing.JLabel();
+            lb_EditList[index] = label;
+        }
+        return label;
+    }
+
+    private javax.swing.JPanel getPanel(int index)
+    {
+        if (pl_EditList == null)
+        {
+            pl_EditList = new javax.swing.JPanel[MAX_ROW];
+        }
+        javax.swing.JPanel panel = pl_EditList[index];
+        if (panel == null)
+        {
+            panel = new javax.swing.JPanel();
+            pl_EditList[index] = panel;
+        }
+        return panel;
     }
 
     private void bt_PrevStepActionPerformed(java.awt.event.ActionEvent evt)
@@ -282,5 +377,17 @@ public class EditPtn extends javax.swing.JDialog
     private javax.swing.JButton bt_Update;
     private javax.swing.JPanel pl_EditArea;
     private javax.swing.JPanel pl_NoteArea;
+    private javax.swing.JPanel pl_EditBody;
     private javax.swing.JTextArea ta_NoteArea;
+    // 动态组件
+    private javax.swing.JLabel[] lb_EditList;
+    private javax.swing.JPanel[] pl_EditList;
+    private javax.swing.JLabel lb_EditLbl1;
+    private javax.swing.JLabel lb_EditLbl2;
+    private javax.swing.JLabel lb_EditLbl3;
+    private javax.swing.JLabel lb_EditLbl4;
+    private javax.swing.JPanel pl_EditPnl1;
+    private javax.swing.JPanel pl_EditPnl2;
+    private javax.swing.JPanel pl_EditPnl3;
+    private javax.swing.JPanel pl_EditPnl4;
 }

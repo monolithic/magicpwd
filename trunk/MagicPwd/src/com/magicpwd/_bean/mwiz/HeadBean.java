@@ -20,6 +20,7 @@ import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd.__i.mwiz.IMwizBean;
 import com.magicpwd._comp.BtnLabel;
+import com.magicpwd._comp.IcoLabel;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
@@ -45,6 +46,7 @@ public class HeadBean extends javax.swing.JPanel implements IMwizBean, IBackCall
 {
 
     private NormPtn normPtn;
+    private KeysMdl keysMdl;
 
     public HeadBean(NormPtn normPtn)
     {
@@ -63,10 +65,9 @@ public class HeadBean extends javax.swing.JPanel implements IMwizBean, IBackCall
         lb_HintDate = new javax.swing.JLabel();
         tf_HintDate = new javax.swing.JTextField(14);
 
-        ib_KeysIcon = new BtnLabel();
+        ib_KeysIcon = new IcoLabel();
         ib_KeysIcon.setIcon(Bean.getNone());
         ib_KeysIcon.setOpaque(true);
-        ib_KeysIcon.setPreferredSize(new java.awt.Dimension(21, 21));
         ib_KeysIcon.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         ib_KeysIcon.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ib_KeysIcon.setBackground(javax.swing.UIManager.getDefaults().getColor("TextField.background"));
@@ -132,11 +133,11 @@ public class HeadBean extends javax.swing.JPanel implements IMwizBean, IBackCall
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
         hsg1.addComponent(tf_MetaName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg1.addComponent(ib_KeysIcon);
+        hsg1.addComponent(ib_KeysIcon, 22, 22, 22);
         javax.swing.GroupLayout.SequentialGroup hsg2 = layout.createSequentialGroup();
         hsg2.addComponent(tf_HintDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg2.addComponent(ib_HintDate);
+        hsg2.addComponent(ib_HintDate, 20, 20, 20);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg1.addComponent(lb_MetaName, javax.swing.GroupLayout.Alignment.TRAILING);
         hpg1.addComponent(lb_MetaData, javax.swing.GroupLayout.Alignment.TRAILING);
@@ -158,7 +159,7 @@ public class HeadBean extends javax.swing.JPanel implements IMwizBean, IBackCall
         javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg1.addComponent(lb_MetaName);
         vpg1.addComponent(tf_MetaName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vpg1.addComponent(ib_KeysIcon);
+        vpg1.addComponent(ib_KeysIcon, 22, 22, 22);
         javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         vpg2.addComponent(lb_MetaData);
         vpg2.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE);
@@ -168,7 +169,7 @@ public class HeadBean extends javax.swing.JPanel implements IMwizBean, IBackCall
         javax.swing.GroupLayout.ParallelGroup vpg4 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg4.addComponent(lb_HintDate);
         vpg4.addComponent(tf_HintDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vpg4.addComponent(ib_HintDate);
+        vpg4.addComponent(ib_HintDate, 20, 20, 20);
         javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
         vsg1.addContainerGap();
         vsg1.addGroup(vpg1);
@@ -187,8 +188,8 @@ public class HeadBean extends javax.swing.JPanel implements IMwizBean, IBackCall
     {
         Bean.setText(lb_MetaName, Lang.getLang(LangRes.P30F1303, "标题"));
 
-        Lang.setWText(ib_KeysIcon, LangRes.P30F151B, "&O");
-        Lang.setWTips(ib_KeysIcon, LangRes.P30F151C, "提醒时间(Alt + O)");
+        Lang.setWText(ib_KeysIcon, LangRes.P30F131F, "&O");
+        Lang.setWTips(ib_KeysIcon, LangRes.P30F1320, "点击选择徽标(Alt + O)");
 
         Bean.setText(lb_MetaData, Lang.getLang(LangRes.P30F1304, "搜索"));
 
@@ -205,8 +206,9 @@ public class HeadBean extends javax.swing.JPanel implements IMwizBean, IBackCall
     }
 
     @Override
-    public void showData(KeysMdl keysMdl)
+    public final void showData(KeysMdl keysMdl)
     {
+        this.keysMdl = keysMdl;
     }
 
     @Override
@@ -318,7 +320,7 @@ public class HeadBean extends javax.swing.JPanel implements IMwizBean, IBackCall
         tf_HintDate.setText(cmd);
     }
     private BtnLabel ib_HintDate;
-    private BtnLabel ib_KeysIcon;
+    private IcoLabel ib_KeysIcon;
     private javax.swing.JLabel lb_HintDate;
     private javax.swing.JLabel lb_HintName;
     private javax.swing.JLabel lb_MetaData;
