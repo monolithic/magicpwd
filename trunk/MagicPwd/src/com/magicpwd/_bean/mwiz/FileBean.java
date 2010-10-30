@@ -82,6 +82,18 @@ public class FileBean extends AFileBean implements IMwizBean
     }
 
     @Override
+    public javax.swing.JComponent getComponent()
+    {
+        return this;
+    }
+
+    @Override
+    public boolean saveData()
+    {
+        return true;
+    }
+
+    @Override
     protected void deCrypt(java.io.File src, java.io.File dst) throws Exception
     {
         normPtn.deCrypt(src, dst);

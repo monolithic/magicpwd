@@ -73,4 +73,16 @@ public class PwdsBean extends APwdsBean implements IMwizBean
     public void setLabelFor(javax.swing.JLabel label)
     {
     }
+
+    @Override
+    public javax.swing.JComponent getComponent()
+    {
+        return this;
+    }
+
+    @Override
+    public boolean saveData()
+    {
+        return true;
+    }
 }

@@ -16,6 +16,7 @@
  */
 package com.magicpwd._bean;
 
+import com.magicpwd.__a.AEditBean;
 import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comp.BtnLabel;
@@ -37,7 +38,7 @@ import com.magicpwd._util.Logs;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public abstract class AFileBean extends javax.swing.JPanel
+public abstract class AFileBean extends AEditBean
 {
 
     protected AFrame formPtn;
@@ -145,7 +146,7 @@ public abstract class AFileBean extends javax.swing.JPanel
         {
             jfc.setSelectedFile(filePath);
         }
-        int status = jfc.showOpenDialog(this);
+        int status = jfc.showOpenDialog(formPtn);
         if (status != javax.swing.JFileChooser.APPROVE_OPTION)
         {
             return;

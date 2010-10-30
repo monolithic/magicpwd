@@ -42,13 +42,13 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     }
 
     @Override
-    public void initBody(String tpltHash)
+    public void initBody()
     {
         initMeta();
         initLogo();
         initHint();
 
-        DBA3000.selectTpltData(userMdl, tpltHash, ls_ItemList);
+        DBA3000.selectTpltData(userMdl, ls_ItemList.get(ConsEnv.PWDS_HEAD_GUID).getSpec(IEditItem.SPEC_GUID_TPLT), ls_ItemList);
         fireTableDataChanged();
     }
 
@@ -173,6 +173,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
      * @param index
      * @return
      */
+    @Override
     public IEditItem getItemAt(int index)
     {
         return ls_ItemList.get(index);

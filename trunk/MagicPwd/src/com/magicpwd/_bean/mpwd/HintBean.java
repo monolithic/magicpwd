@@ -207,6 +207,7 @@ public class HintBean extends javax.swing.JPanel implements IMpwdBean
             if (!com.magicpwd._util.Char.isValidate(name))
             {
                 Lang.showMesg(mainPtn, LangRes.P30F7A36, "请输入过期提示！");
+                return;
             }
         }
 

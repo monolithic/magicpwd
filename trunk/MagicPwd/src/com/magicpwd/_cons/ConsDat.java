@@ -149,9 +149,13 @@ public interface ConsDat
      */
     int INDX_DATA = INDX_FILE + 1;
     /**
+     * 属性：列表
+     */
+    int INDX_LIST = INDX_DATA + 1;
+    /**
      * 属性：模板向导
      */
-    int INDX_GUID = INDX_DATA + 1;
+    int INDX_GUID = INDX_LIST + 1;
     /**
      * 属性：关键搜索
      */

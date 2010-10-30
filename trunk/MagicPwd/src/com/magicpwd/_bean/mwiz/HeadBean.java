@@ -18,6 +18,7 @@ package com.magicpwd._bean.mwiz;
 
 import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IBackCall;
+import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mwiz.IMwizBean;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.IcoLabel;
@@ -65,6 +66,8 @@ public class HeadBean extends javax.swing.JPanel implements IMwizBean, IBackCall
         lb_HintDate = new javax.swing.JLabel();
         tf_HintDate = new javax.swing.JTextField(14);
 
+        lb_MetaName.setLabelFor(tf_MetaName);
+
         ib_KeysIcon = new IcoLabel();
         ib_KeysIcon.setIcon(Bean.getNone());
         ib_KeysIcon.setOpaque(true);
@@ -81,6 +84,12 @@ public class HeadBean extends javax.swing.JPanel implements IMwizBean, IBackCall
                 ib_KeysIconActionPerformed(evt);
             }
         });
+
+        lb_MetaData.setLabelFor(ta_MetaData);
+
+        lb_HintName.setLabelFor(tf_HintName);
+
+        lb_HintDate.setLabelFor(tf_HintDate);
 
         ib_HintDate = new BtnLabel();
         ib_HintDate.setIcon(normPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "hint.png"));
@@ -189,7 +198,7 @@ public class HeadBean extends javax.swing.JPanel implements IMwizBean, IBackCall
         Bean.setText(lb_MetaName, Lang.getLang(LangRes.P30F1303, "标题"));
 
         Lang.setWText(ib_KeysIcon, LangRes.P30F131F, "&O");
-        Lang.setWTips(ib_KeysIcon, LangRes.P30F1320, "点击选择徽标(Alt + O)");
+        Lang.setWTips(ib_KeysIcon, LangRes.P30F1320, "点击选择徽标(Alt + L)");
 
         Bean.setText(lb_MetaData, Lang.getLang(LangRes.P30F1304, "搜索"));
 
@@ -197,7 +206,7 @@ public class HeadBean extends javax.swing.JPanel implements IMwizBean, IBackCall
         Lang.setWText(lb_HintDate, LangRes.P30F1306, "时间");
 
         Lang.setWText(ib_HintDate, LangRes.P30F151B, "&O");
-        Lang.setWTips(ib_HintDate, LangRes.P30F151C, "提醒时间(Alt + O)");
+        Lang.setWTips(ib_HintDate, LangRes.P30F151C, "提醒时间(Alt + T)");
     }
 
     @Override
@@ -217,8 +226,79 @@ public class HeadBean extends javax.swing.JPanel implements IMwizBean, IBackCall
     }
 
     @Override
+    public javax.swing.JComponent getComponent()
+    {
+        return this;
+    }
+
+    @Override
+    public boolean saveData()
+    {
+        String metaName = tf_MetaName.getText();
+        if (!com.magicpwd._util.Char.isValidate(metaName))
+        {
+            Lang.showMesg(normPtn, LangRes.P30FAA1A, "记录标题不能为空!");
+            tf_MetaName.requestFocus();
+            return false;
+        }
+        if (keysMdl == null)
+        {
+            return false;
+        }
+
+        IEditItem meta = keysMdl.getItemAt(ConsEnv.PWDS_HEAD_META);
+        meta.setName(metaName);
+        meta.setData(ta_MetaData.getText());
+
+        IEditItem hint = keysMdl.getItemAt(ConsEnv.PWDS_HEAD_HINT);
+        String hintName = tf_HintName.getText();
+        String hintDate = tf_HintDate.getText();
+        if (com.magicpwd._util.Char.isValidate(hintDate))
+        {
+            if (!hint.setData(hintDate))
+            {
+                Lang.showMesg(normPtn, LangRes.P30F7A37, "您输入的日期格式无效，请重新输入！");
+                return false;
+            }
+            tf_HintDate.setText(hintDate);
+
+            if (!com.magicpwd._util.Char.isValidate(hintName))
+            {
+                Lang.showMesg(normPtn, LangRes.P30F7A36, "请输入过期提示！");
+                return false;
+            }
+        }
+        hint.setName(hintName);
+        hint.setData(hintDate);
+
+        keysMdl.setModified(true);
+        return true;
+    }
+
+    @Override
     public boolean callBack(Object sender, EventListener event, String... params)
     {
+        if (params.length < 1)
+        {
+            return false;
+        }
+
+        IEditItem logo = keysMdl.getItemAt(ConsEnv.PWDS_HEAD_LOGO);
+
+        String key = params[0];
+        if ("0".equals(key))
+        {
+            ib_KeysIcon.setIcon(Bean.getNone());
+            logo.setName(key);
+            return true;
+        }
+
+        if (!com.magicpwd._util.Char.isValidateHash(key))
+        {
+            return false;
+        }
+        ib_KeysIcon.setIcon(Bean.getDataIcon(key));
+        logo.setName(key);
         return true;
     }
 

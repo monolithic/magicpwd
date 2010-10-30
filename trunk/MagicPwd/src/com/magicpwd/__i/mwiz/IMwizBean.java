@@ -29,4 +29,8 @@ public interface IMwizBean extends IEditBean
     void showData(KeysMdl keysMdl);
 
     void setLabelFor(javax.swing.JLabel label);
+
+    javax.swing.JComponent getComponent();
+
+    boolean saveData();
 }

@@ -40,13 +40,14 @@ public abstract class SafeMdl
 
     public SafeMdl(UserMdl userMdl)
     {
+        this.userMdl = userMdl;
         keys = new Keys();
         ls_ItemList = new java.util.ArrayList<IEditItem>();
     }
 
     public abstract void initHead();
 
-    public abstract void initBody(String tpltHash);
+    public abstract void initBody();
 
     public abstract void clear();
 
