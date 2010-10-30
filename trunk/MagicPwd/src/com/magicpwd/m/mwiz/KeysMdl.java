@@ -18,6 +18,7 @@ package com.magicpwd.m.mwiz;
 
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._util.Char;
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
@@ -60,5 +61,10 @@ public class KeysMdl extends SafeMdl
     @Override
     public void clear()
     {
+    }
+
+    public boolean isUpdate()
+    {
+        return Char.isValidateHash(keys.getP30F0104());
     }
 }

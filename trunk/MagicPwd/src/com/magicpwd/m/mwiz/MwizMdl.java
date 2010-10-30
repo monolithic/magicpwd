@@ -6,6 +6,8 @@ package com.magicpwd.m.mwiz;
 
 import com.magicpwd._comn.Keys;
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._util.Bean;
+import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.UserMdl;
 
 /**
@@ -15,25 +17,27 @@ import com.magicpwd.m.UserMdl;
 public final class MwizMdl implements javax.swing.table.TableModel, java.io.Serializable
 {
 
+    private UserMdl userMdl;
     private KeysMdl keysMdl;
-    private java.util.List<Keys> ls_KeysList;
+    private java.util.List<Keys> keysList;
     private javax.swing.event.EventListenerList listenerList;
 
     public MwizMdl(UserMdl userMdl)
     {
         keysMdl = new KeysMdl(userMdl);
+        this.userMdl = userMdl;
     }
 
     public void init()
     {
-        ls_KeysList = new java.util.ArrayList<Keys>();
+        keysList = new java.util.ArrayList<Keys>();
         listenerList = new javax.swing.event.EventListenerList();
     }
 
     @Override
     public int getRowCount()
     {
-        return ls_KeysList != null ? ls_KeysList.size() : 0;
+        return keysList != null ? keysList.size() : 0;
     }
 
     @Override
@@ -47,13 +51,13 @@ public final class MwizMdl implements javax.swing.table.TableModel, java.io.Seri
     {
         switch (columnIndex)
         {
-            case ConsEnv.PWDS_HEAD_GUID:
+            case 0:
                 return "";
-            case ConsEnv.PWDS_HEAD_META:
-                return "标题";
-            case ConsEnv.PWDS_HEAD_LOGO:
+            case 1:
                 return "徽标";
-            case ConsEnv.PWDS_HEAD_HINT:
+            case 2:
+                return "标题";
+            case 3:
                 return "提示";
             default:
                 return "";
@@ -63,6 +67,14 @@ public final class MwizMdl implements javax.swing.table.TableModel, java.io.Seri
     @Override
     public Class<?> getColumnClass(int columnIndex)
     {
+        if (columnIndex == 0)
+        {
+            return Integer.class;
+        }
+        if (columnIndex == 1)
+        {
+            return javax.swing.Icon.class;
+        }
         return String.class;
     }
 
@@ -76,22 +88,22 @@ public final class MwizMdl implements javax.swing.table.TableModel, java.io.Seri
     public Object getValueAt(int rowIndex, int columnIndex)
     {
         // 公共属性
-        if (ls_KeysList == null || rowIndex < -1 || rowIndex >= ls_KeysList.size())
+        if (keysList == null || rowIndex < -1 || rowIndex >= keysList.size())
         {
             return null;
         }
 
-        Keys keys = ls_KeysList.get(rowIndex);
+        Keys keys = keysList.get(rowIndex);
         switch (columnIndex)
         {
             case 0:
-                return "";
+                return Integer.toString(rowIndex + 1);
             case 1:
-                return keys.getP30F0109();
+                return Bean.getDataIcon(keys.getP30F010B());
             case 2:
-                return keys.getP30F010D();
+                return keys.getP30F0109();
             case 3:
-                return keys.getP30F010E();
+                return keys.getP30F010D();
             case 4:
                 return keys.getP30F010E();
             default:
@@ -99,14 +111,45 @@ public final class MwizMdl implements javax.swing.table.TableModel, java.io.Seri
         }
     }
 
-    public Keys getSelectedKeys()
-    {
-        return null;
-    }
-
     @Override
     public void setValueAt(Object aValue, int rowIndex, int columnIndex)
     {
+    }
+
+    public boolean listKeysByKind(String kindHash)
+    {
+        keysList.size();
+        keysList.clear();
+        boolean b = DBA3000.readKeysList(userMdl, kindHash, keysList);
+        int s = keysList.size();
+        fireTableDataChanged();
+        return b & (s > 0);
+    }
+
+    public boolean listKeysByMeta(String keysMeta)
+    {
+        int s = keysList.size();
+        keysList.clear();
+        boolean b = DBA3000.findUserData(userMdl, keysMeta, keysList);
+        s = keysList.size();
+        fireTableDataChanged();
+        return b & (s > 0);
+    }
+
+    /**
+     * @return the keysMdl
+     */
+    public KeysMdl getKeysMdl()
+    {
+        return keysMdl;
+    }
+
+    /**
+     * @param keysMdl the keysMdl to set
+     */
+    public void setKeysMdl(KeysMdl keysMdl)
+    {
+        this.keysMdl = keysMdl;
     }
 
     @Override
@@ -161,21 +204,5 @@ public final class MwizMdl implements javax.swing.table.TableModel, java.io.Seri
     public void fireTableDataChanged()
     {
         fireTableChanged(new javax.swing.event.TableModelEvent(this));
-    }
-
-    /**
-     * @return the keysMdl
-     */
-    public KeysMdl getKeysMdl()
-    {
-        return keysMdl;
-    }
-
-    /**
-     * @param keysMdl the keysMdl to set
-     */
-    public void setKeysMdl(KeysMdl keysMdl)
-    {
-        this.keysMdl = keysMdl;
     }
 }

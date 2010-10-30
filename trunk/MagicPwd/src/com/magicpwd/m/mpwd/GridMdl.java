@@ -430,6 +430,11 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
 
     public void saveData(boolean histBack, boolean repaint) throws Exception
     {
+        saveData(histBack);
+        if (repaint)
+        {
+            fireTableDataChanged();
+        }
     }
 
     public int getSequence()

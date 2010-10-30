@@ -29,6 +29,7 @@ public class FileBean extends AFileBean implements IMwizBean
 {
 
     private NormPtn normPtn;
+    private IEditItem itemData;
 
     public FileBean(NormPtn normPtn)
     {
@@ -70,6 +71,8 @@ public class FileBean extends AFileBean implements IMwizBean
     @Override
     public void showData(IEditItem itemData)
     {
+        this.itemData = itemData;
+        tf_PropData.setText(itemData.getData());
     }
 
     @Override

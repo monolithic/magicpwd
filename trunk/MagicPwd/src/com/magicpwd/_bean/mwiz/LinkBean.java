@@ -28,6 +28,8 @@ import com.magicpwd.v.mwiz.NormPtn;
 public class LinkBean extends ALinkBean implements IMwizBean
 {
 
+    private IEditItem itemData;
+
     public LinkBean(NormPtn normPtn)
     {
         super(normPtn);
@@ -65,6 +67,8 @@ public class LinkBean extends ALinkBean implements IMwizBean
     @Override
     public void showData(IEditItem itemData)
     {
+        this.itemData = itemData;
+        tf_PropData.setText(itemData.getData());
     }
 
     @Override

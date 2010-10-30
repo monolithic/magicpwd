@@ -28,6 +28,8 @@ import com.magicpwd.v.mwiz.NormPtn;
 public class PwdsBean extends APwdsBean implements IMwizBean
 {
 
+    private IEditItem itemData;
+
     public PwdsBean(NormPtn normPtn)
     {
         super(normPtn);
@@ -67,6 +69,8 @@ public class PwdsBean extends APwdsBean implements IMwizBean
     @Override
     public void showData(IEditItem itemData)
     {
+        this.itemData = itemData;
+        pf_PropData.setText(itemData.getData());
     }
 
     @Override

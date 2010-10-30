@@ -32,19 +32,25 @@ public class NormPtn extends AFrame
         try
         {
             menuPtn.loadData(new java.io.File("dat/mwiz.xml"));
-            tbToolBar = menuPtn.getToolBar("mwiz", rootPane);
+            tb_ToolBar = menuPtn.getToolBar("mwiz", rootPane);
         }
         catch (Exception e)
         {
-            tbToolBar = new javax.swing.JToolBar();
+            tb_ToolBar = new javax.swing.JToolBar();
         }
 
-        tbToolBar.setFloatable(false);
-        tbToolBar.setRollover(true);
+        tb_ToolBar.setFloatable(false);
+        tb_ToolBar.setRollover(true);
 
-        tbKeysList = new javax.swing.JTable();
+        tb_KeysList = new javax.swing.JTable();
+        mwizMdl = new MwizMdl(userMdl);
+        mwizMdl.init();
+        tb_KeysList.setModel(mwizMdl);
+        int w = tb_KeysList.getFontMetrics(tb_KeysList.getFont()).stringWidth("9999");
+        tb_KeysList.getColumnModel().getColumn(0).setMaxWidth(w);
+        tb_KeysList.getColumnModel().getColumn(1).setMaxWidth(40);
 
-        tbKeysList.addMouseListener(new java.awt.event.MouseAdapter()
+        tb_KeysList.addMouseListener(new java.awt.event.MouseAdapter()
         {
 
             @Override
@@ -53,13 +59,13 @@ public class NormPtn extends AFrame
                 tbKeysListMouseClicked(evt);
             }
         });
-        javax.swing.JScrollPane jsp = new javax.swing.JScrollPane(tbKeysList);
+        javax.swing.JScrollPane jsp = new javax.swing.JScrollPane(tb_KeysList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
         hsg1.addContainerGap();
-        hsg1.addComponent(tbToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE);
+        hsg1.addComponent(tb_ToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE);
         hsg1.addContainerGap();
         javax.swing.GroupLayout.SequentialGroup hsg2 = layout.createSequentialGroup();
         hsg2.addContainerGap();
@@ -68,7 +74,7 @@ public class NormPtn extends AFrame
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(hsg1).addGroup(hsg2));
 
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
-        vsg.addComponent(tbToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg.addComponent(tb_ToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE);
         vsg.addContainerGap();
@@ -85,11 +91,9 @@ public class NormPtn extends AFrame
 
     public void initData()
     {
-        mwizMdl = new MwizMdl(userMdl);
-        mwizMdl.init();
-        tbKeysList.setModel(mwizMdl);
-
         safeMdl = mwizMdl.getKeysMdl();
+
+        mwizMdl.listKeysByKind("0");
     }
 
     @Override
@@ -105,6 +109,11 @@ public class NormPtn extends AFrame
         editPtn.initLang();
         editPtn.initData();
         editPtn.showData(mwizMdl.getKeysMdl());
+    }
+
+    public void endKeys()
+    {
+        mwizMdl.listKeysByKind("0");
     }
 
     @Override
@@ -128,6 +137,6 @@ public class NormPtn extends AFrame
     private void tbKeysListMouseClicked(java.awt.event.MouseEvent e)
     {
     }
-    private javax.swing.JTable tbKeysList;
-    private javax.swing.JToolBar tbToolBar;
+    private javax.swing.JTable tb_KeysList;
+    private javax.swing.JToolBar tb_ToolBar;
 }

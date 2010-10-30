@@ -21,6 +21,7 @@ import com.magicpwd._bean.mwiz.HeadBean;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
+import com.magicpwd._util.Logs;
 import com.magicpwd.m.mwiz.KeysMdl;
 
 /**
@@ -260,7 +261,9 @@ public class EditPtn extends javax.swing.JDialog
         currStep -= 1;
         cl_Layout.show(pl_EditArea, "body" + currStep);
         ls_BodyList.get(currStep).showData();
-        bt_NextStep.setVisible(ls_BodyList.size() - 1 > currStep);
+        boolean end = ls_BodyList.size() >= currStep + 1;
+        bt_NextStep.setVisible(!end);
+        bt_Update.setVisible(keysMdl.isUpdate() || end);
     }
 
     private void nextBodyView()
@@ -268,7 +271,9 @@ public class EditPtn extends javax.swing.JDialog
         currStep += 1;
         cl_Layout.show(pl_EditArea, "body" + currStep);
         ls_BodyList.get(currStep).showData();
-        bt_NextStep.setVisible(ls_BodyList.size() - 1 > currStep + 1);
+        boolean end = ls_BodyList.size() >= currStep + 1;
+        bt_NextStep.setVisible(!end);
+        bt_Update.setVisible(keysMdl.isUpdate() || end);
     }
 
     private void bt_PrevStepActionPerformed(java.awt.event.ActionEvent evt)
@@ -303,7 +308,16 @@ public class EditPtn extends javax.swing.JDialog
             return;
         }
 
-        if (headBean.saveData())
+        if (currStep == -1)
+        {
+            if (headBean.saveData())
+            {
+                nextBodyView();
+            }
+            return;
+        }
+
+        if (ls_BodyList.get(currStep).saveData())
         {
             nextBodyView();
         }
@@ -311,6 +325,21 @@ public class EditPtn extends javax.swing.JDialog
 
     private void bt_UpdateActionPerformed(java.awt.event.ActionEvent evt)
     {
+        if (!ls_BodyList.get(currStep).saveData())
+        {
+            return;
+        }
+
+        try
+        {
+            keysMdl.saveData(true);
+            setVisible(false);
+            normPtn.endKeys();
+        }
+        catch (Exception ex)
+        {
+            Logs.exception(ex);
+        }
     }
 
     private void bt_CancelActionPerformed(java.awt.event.ActionEvent evt)
