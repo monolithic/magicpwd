@@ -16,6 +16,9 @@
  */
 package com.magicpwd.m.mwiz;
 
+import com.magicpwd.__i.IEditItem;
+import com.magicpwd._cons.ConsEnv;
+import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
 
@@ -45,8 +48,13 @@ public class KeysMdl extends SafeMdl
     }
 
     @Override
-    public void initBody(String tpltHash)
+    public void initBody()
     {
+        initMeta();
+        initLogo();
+        initHint();
+
+        DBA3000.selectTpltData(userMdl, ls_ItemList.get(ConsEnv.PWDS_HEAD_GUID).getSpec(IEditItem.SPEC_GUID_TPLT), ls_ItemList);
     }
 
     @Override

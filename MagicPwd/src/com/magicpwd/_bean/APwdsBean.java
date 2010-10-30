@@ -16,6 +16,7 @@
  */
 package com.magicpwd._bean;
 
+import com.magicpwd.__a.AEditBean;
 import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.item.EditItem;
@@ -41,7 +42,7 @@ import javax.swing.JOptionPane;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public abstract class APwdsBean extends javax.swing.JPanel
+public abstract class APwdsBean extends AEditBean
 {
 
     protected AFrame formPtn;

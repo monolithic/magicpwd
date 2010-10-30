@@ -390,7 +390,7 @@ public class MiniPtn extends AFrame
         if (noteMdl.getSize() < 1)
         {
             noteMdl.initHead();
-            noteMdl.initBody(null);
+            noteMdl.initBody();
         }
 
         noteMdl.setNote(name, data);

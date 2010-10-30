@@ -294,6 +294,7 @@ public class MainPtn extends AFrame
         super.setVisible(visible);
     }
 
+    @Override
     public MenuPtn getMenuPtn()
     {
         return menuPtn;
@@ -1385,7 +1386,7 @@ public class MainPtn extends AFrame
         mpwdMdl.getGridMdl().setModified(true);
         if (mpwdMdl.getGridMdl().getRowCount() < ConsEnv.PWDS_HEAD_SIZE)
         {
-            mpwdMdl.getGridMdl().initBody(mpwdMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_GUID).getSpec(IEditItem.SPEC_GUID_TPLT));
+            mpwdMdl.getGridMdl().initBody();
         }
         selectNext(com.magicpwd._util.Char.isValidateHash(mpwdMdl.getGridMdl().getKeysHash()) ? 0 : 1, true);
     }

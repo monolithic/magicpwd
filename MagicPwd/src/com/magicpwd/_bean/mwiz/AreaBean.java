@@ -57,4 +57,16 @@ public class AreaBean extends AAreaBean implements IMwizBean
     public void setLabelFor(javax.swing.JLabel label)
     {
     }
+
+    @Override
+    public javax.swing.JComponent getComponent()
+    {
+        return this;
+    }
+
+    @Override
+    public boolean saveData()
+    {
+        return true;
+    }
 }

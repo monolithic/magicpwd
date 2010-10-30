@@ -16,6 +16,7 @@
  */
 package com.magicpwd._bean;
 
+import com.magicpwd.__a.AEditBean;
 import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IEditItem;
 
@@ -23,7 +24,7 @@ import com.magicpwd.__i.IEditItem;
  *
  * @author Amon
  */
-public abstract class AAreaBean extends javax.swing.JPanel
+public abstract class AAreaBean extends AEditBean
 {
 
     protected AFrame formPtn;

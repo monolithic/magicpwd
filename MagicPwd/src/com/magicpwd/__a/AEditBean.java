@@ -14,67 +14,21 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd._bean.mwiz;
+package com.magicpwd.__a;
 
-import com.magicpwd.__i.mwiz.IMwizBean;
-import com.magicpwd._bean.AListBean;
-import com.magicpwd.m.mwiz.KeysMdl;
-import com.magicpwd.v.mwiz.NormPtn;
-import javax.swing.JLabel;
+import com.magicpwd.__i.IEditBean;
 
 /**
  * Application: MagicPwd
  * Author     : Amon
  * Encoding   : UTF-8
- * Created    : 2010-10-27 21:28:18
+ * Created    : 2010-10-30 11:24:38
  * Website    : http://magicpwd.com/
  * Project    : http://magicpwd.googlecode.com/
  * Contact    : Amon@magicpwd.com
  * CopyRight  : Winshine.biz
  * Description:
  */
-public class ListBean extends AListBean implements IMwizBean
+public abstract class AEditBean extends javax.swing.JPanel implements IEditBean
 {
-
-    public ListBean(NormPtn normPtn)
-    {
-        super(normPtn);
-    }
-
-    @Override
-    public void initView()
-    {
-    }
-
-    @Override
-    public void initLang()
-    {
-    }
-
-    @Override
-    public void initData()
-    {
-    }
-
-    @Override
-    public void showData(KeysMdl keysMdl)
-    {
-    }
-
-    @Override
-    public void setLabelFor(JLabel label)
-    {
-    }
-
-    @Override
-    public javax.swing.JComponent getComponent()
-    {
-        return this;
-    }
-
-    @Override
-    public boolean saveData()
-    {
-        return true;
-    }
 }

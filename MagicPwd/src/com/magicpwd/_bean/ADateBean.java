@@ -16,6 +16,7 @@
  */
 package com.magicpwd._bean;
 
+import com.magicpwd.__a.AEditBean;
 import com.magicpwd.__a.AFrame;
 import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IEditItem;
@@ -31,7 +32,7 @@ import com.magicpwd._util.Lang;
  *
  * @author Amon
  */
-public abstract class ADateBean extends javax.swing.JPanel
+public abstract class ADateBean extends AEditBean
 {
 
     protected AFrame formPtn;

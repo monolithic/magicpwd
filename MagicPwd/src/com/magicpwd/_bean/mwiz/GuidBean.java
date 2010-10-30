@@ -5,7 +5,6 @@ package com.magicpwd._bean.mwiz;
 
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mwiz.IMwizBean;
-import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.prop.Tplt;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsDat;
@@ -29,7 +28,7 @@ import org.dom4j.io.SAXReader;
 public class GuidBean extends javax.swing.JPanel implements IMwizBean
 {
 
-    private GuidItem itemData;
+    private KeysMdl keysMdl;
     private NormPtn normPtn;
     private BtnLabel bt_ReadMail;
     private BtnLabel bt_ExptCard;
@@ -142,6 +141,7 @@ public class GuidBean extends javax.swing.JPanel implements IMwizBean
     @Override
     public void showData(KeysMdl keysMdl)
     {
+        this.keysMdl = keysMdl;
         if (keysMdl == null)
         {
             return;
@@ -191,18 +191,35 @@ public class GuidBean extends javax.swing.JPanel implements IMwizBean
     {
     }
 
-    public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
+    @Override
+    public javax.swing.JComponent getComponent()
+    {
+        return this;
+    }
+
+    @Override
+    public boolean saveData()
     {
         Object obj = cb_PropData.getSelectedItem();
         if (obj == null)
         {
             Lang.showMesg(normPtn, LangRes.P30F7A29, "请选择口令模板!");
             cb_PropData.requestFocus();
-            return;
+            return false;
+        }
+
+        if (keysMdl == null)
+        {
+            return false;
         }
 
         Tplt tplt = (Tplt) obj;
-        itemData.setSpec(IEditItem.SPEC_GUID_TPLT, tplt.getP30F1103());
+        keysMdl.getItemAt(ConsEnv.PWDS_HEAD_GUID).setSpec(IEditItem.SPEC_GUID_TPLT, tplt.getP30F1103());
+        if (keysMdl.getItemSize() <= ConsEnv.PWDS_HEAD_SIZE)
+        {
+            keysMdl.initBody();
+        }
+        return true;
     }
 
     public void readMailActionPerformed(java.awt.event.ActionEvent evt)

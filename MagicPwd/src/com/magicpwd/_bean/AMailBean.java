@@ -16,6 +16,7 @@
  */
 package com.magicpwd._bean;
 
+import com.magicpwd.__a.AEditBean;
 import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comp.BtnLabel;
@@ -36,7 +37,7 @@ import com.magicpwd._util.Lang;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public abstract class AMailBean extends javax.swing.JPanel
+public abstract class AMailBean extends AEditBean
 {
 
     protected AFrame formPtn;
