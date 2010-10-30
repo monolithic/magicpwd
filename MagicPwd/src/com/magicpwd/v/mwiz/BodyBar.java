@@ -148,6 +148,11 @@ public class BodyBar extends javax.swing.JPanel
     {
     }
 
+    public boolean saveData()
+    {
+        return true;
+    }
+
     private javax.swing.JLabel getLabel(int index)
     {
         if (lb_EditList == null)

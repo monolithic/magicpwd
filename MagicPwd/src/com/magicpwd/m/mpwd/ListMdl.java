@@ -5,7 +5,6 @@ package com.magicpwd.m.mpwd;
 
 import com.magicpwd._comn.Keys;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.DefaultListModel;
 
@@ -21,13 +20,13 @@ import java.util.Calendar;
 public class ListMdl extends DefaultListModel
 {
 
-    private List<Keys> dataList;
+    private java.util.List<Keys> keysList;
     private UserMdl userMdl;
 
     ListMdl(UserMdl userMdl)
     {
         this.userMdl = userMdl;
-        dataList = new ArrayList<Keys>();
+        keysList = new ArrayList<Keys>();
     }
 
     /*
@@ -38,7 +37,7 @@ public class ListMdl extends DefaultListModel
     @Override
     public Object getElementAt(int index)
     {
-        return dataList.get(index);
+        return keysList.get(index);
     }
 
     /*
@@ -49,53 +48,38 @@ public class ListMdl extends DefaultListModel
     @Override
     public int getSize()
     {
-        return dataList != null ? dataList.size() : 0;
+        return keysList != null ? keysList.size() : 0;
     }
 
     public void listTask(java.util.Date s, java.util.Date t)
     {
-        int c = dataList.size();
-        dataList.clear();
+        int c = keysList.size();
+        keysList.clear();
         fireIntervalRemoved(this, 0, c);
-        DBA3000.readTaskList(userMdl, new java.sql.Timestamp(s.getTime()), new java.sql.Timestamp(t.getTime()), dataList);
-        c = dataList.size();
+        DBA3000.readTaskList(userMdl, new java.sql.Timestamp(s.getTime()), new java.sql.Timestamp(t.getTime()), keysList);
+        c = keysList.size();
         fireIntervalAdded(this, 0, c);
     }
 
-    public void listName(String typeHash)
+    public boolean listKeysByHash(String typeHash)
     {
-        int s = dataList.size();
-        dataList.clear();
+        int s = keysList.size();
+        keysList.clear();
         fireIntervalRemoved(this, 0, s);
-        DBA3000.readKeysList(userMdl, typeHash, dataList);
-        s = dataList.size();
+        boolean b = DBA3000.readKeysList(userMdl, typeHash, keysList);
+        s = keysList.size();
+        b &= s > 0;
         fireIntervalAdded(this, 0, s);
+        return b;
     }
 
-    public void listPast()
+    public boolean listKeysByMeta(String keysMeta)
     {
-        int n = dataList.size();
-        dataList.clear();
-        fireIntervalRemoved(this, 0, n);
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.HOUR_OF_DAY, 0);
-        c.set(Calendar.MINUTE, 0);
-        c.set(Calendar.SECOND, 0);
-        c.set(Calendar.MILLISECOND, 0);
-        Timestamp s = new Timestamp(c.getTimeInMillis());
-        Timestamp e = new Timestamp(c.getTimeInMillis());
-        DBA3000.findHintList(userMdl, s, e, dataList);
-        n = dataList.size();
-        fireIntervalAdded(this, 0, n);
-    }
-
-    public boolean findName(String keysName)
-    {
-        int s = dataList.size();
-        dataList.clear();
+        int s = keysList.size();
+        keysList.clear();
         fireIntervalRemoved(this, 0, s);
-        boolean b = DBA3000.findUserData(userMdl, keysName, dataList);
-        s = dataList.size();
+        boolean b = DBA3000.findUserData(userMdl, keysMeta, keysList);
+        s = keysList.size();
         b &= s > 0;
         if (b)
         {
@@ -104,12 +88,29 @@ public class ListMdl extends DefaultListModel
         return b;
     }
 
+    public void listPast()
+    {
+        int n = keysList.size();
+        keysList.clear();
+        fireIntervalRemoved(this, 0, n);
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.HOUR_OF_DAY, 0);
+        c.set(Calendar.MINUTE, 0);
+        c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
+        Timestamp s = new Timestamp(c.getTimeInMillis());
+        Timestamp e = new Timestamp(c.getTimeInMillis());
+        DBA3000.findHintList(userMdl, s, e, keysList);
+        n = keysList.size();
+        fireIntervalAdded(this, 0, n);
+    }
+
     public boolean updtName(String hash, String name, String icon)
     {
         Keys keys;
-        for (int i = 0, j = dataList.size(); i < j; i += 1)
+        for (int i = 0, j = keysList.size(); i < j; i += 1)
         {
-            keys = dataList.get(i);
+            keys = keysList.get(i);
             if (keys.getP30F0104().equals(hash))
             {
                 keys.setP30F0109(name);
@@ -123,36 +124,36 @@ public class ListMdl extends DefaultListModel
 
     public void wAppend(Keys keys)
     {
-        dataList.add(keys);
-        this.fireIntervalAdded(this, 0, dataList.size());
+        keysList.add(keys);
+        this.fireIntervalAdded(this, 0, keysList.size());
     }
 
     public void wUpdate()
     {
-        fireIntervalRemoved(this, 0, dataList.size());
+        fireIntervalRemoved(this, 0, keysList.size());
     }
 
     public void wRemove(int index)
     {
-        dataList.remove(index);
+        keysList.remove(index);
         fireIntervalRemoved(this, 0, index);
     }
 
     public void wRemove(Keys keys)
     {
-        dataList.remove(keys);
-        fireIntervalRemoved(this, 0, dataList.size());
+        keysList.remove(keys);
+        fireIntervalRemoved(this, 0, keysList.size());
     }
 
     public void wDelete(int index)
     {
-        DBA3000.deletePwdsData(dataList.get(index).getP30F0104());
-        dataList.remove(index);
+        DBA3000.deletePwdsData(keysList.get(index).getP30F0104());
+        keysList.remove(index);
         fireIntervalRemoved(this, 0, index);
     }
 
     public Keys getElement(int index)
     {
-        return dataList.get(index);
+        return keysList.get(index);
     }
 }

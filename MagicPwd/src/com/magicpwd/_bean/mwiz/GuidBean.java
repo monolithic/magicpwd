@@ -197,7 +197,9 @@ public class GuidBean extends javax.swing.JPanel
         }
 
         Tplt tplt = (Tplt) obj;
-        keysMdl.getItemAt(ConsEnv.PWDS_HEAD_GUID).setSpec(IEditItem.SPEC_GUID_TPLT, tplt.getP30F1103());
+        IEditItem guidItem = keysMdl.getItemAt(ConsEnv.PWDS_HEAD_GUID);
+        guidItem.setData("0");
+        guidItem.setSpec(IEditItem.SPEC_GUID_TPLT, tplt.getP30F1103());
         if (keysMdl.getItemSize() <= ConsEnv.PWDS_HEAD_SIZE)
         {
             keysMdl.initBody();

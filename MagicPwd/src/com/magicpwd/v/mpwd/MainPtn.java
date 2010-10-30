@@ -257,11 +257,11 @@ public class MainPtn extends AFrame
         {
             if (isSearch)
             {
-                mpwdMdl.getListMdl().findName(queryKey);
+                mpwdMdl.getListMdl().listKeysByMeta(queryKey);
             }
             else if (com.magicpwd._util.Char.isValidateHash(queryKey))
             {
-                mpwdMdl.getListMdl().listName(queryKey);
+                mpwdMdl.getListMdl().listKeysByHash(queryKey);
             }
         }
 
@@ -493,11 +493,11 @@ public class MainPtn extends AFrame
     {
         if (isSearch)
         {
-            mpwdMdl.getListMdl().findName(queryKey);
+            mpwdMdl.getListMdl().listKeysByMeta(queryKey);
         }
         else if (com.magicpwd._util.Char.isValidateHash(queryKey))
         {
-            mpwdMdl.getListMdl().listName(queryKey);
+            mpwdMdl.getListMdl().listKeysByHash(queryKey);
         }
     }
 
@@ -888,7 +888,7 @@ public class MainPtn extends AFrame
             else
             {
                 queryKey = kind.getC2010103();
-                mpwdMdl.getListMdl().listName(queryKey);
+                mpwdMdl.getListMdl().listKeysByHash(queryKey);
             }
         }
         isSearch = false;
@@ -1334,7 +1334,7 @@ public class MainPtn extends AFrame
             Jcsv csv = new Jcsv(file);
             java.util.ArrayList<java.util.ArrayList<String>> data = csv.readFile();
             int size = mpwdMdl.getGridMdl().wImport(data, kind.getC2010103());
-            mpwdMdl.getListMdl().listName(kind.getC2010103());
+            mpwdMdl.getListMdl().listKeysByHash(kind.getC2010103());
             Lang.showMesg(this, LangRes.P30F7A07, "成功导入数据个数：{0}", "" + size);
 
         }

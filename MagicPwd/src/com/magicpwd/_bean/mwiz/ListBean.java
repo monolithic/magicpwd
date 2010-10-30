@@ -35,6 +35,8 @@ import com.magicpwd.v.mwiz.NormPtn;
 public class ListBean extends AListBean implements IMwizBean
 {
 
+    private IEditItem itemData;
+
     public ListBean(NormPtn normPtn)
     {
         super(normPtn);
@@ -58,6 +60,8 @@ public class ListBean extends AListBean implements IMwizBean
     @Override
     public void showData(IEditItem itemData)
     {
+        this.itemData = itemData;
+//        tf_PropData.setText(itemData.getData());
     }
 
     @Override
