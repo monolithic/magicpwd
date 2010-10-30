@@ -4,7 +4,6 @@
 package com.magicpwd._bean.mwiz;
 
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd.__i.mwiz.IMwizBean;
 import com.magicpwd._comn.prop.Tplt;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsDat;
@@ -25,7 +24,7 @@ import org.dom4j.io.SAXReader;
  * 键值：ConsEnv.INDX_GUID
  * @author Amon
  */
-public class GuidBean extends javax.swing.JPanel implements IMwizBean
+public class GuidBean extends javax.swing.JPanel
 {
 
     private KeysMdl keysMdl;
@@ -39,7 +38,6 @@ public class GuidBean extends javax.swing.JPanel implements IMwizBean
         this.normPtn = normPtn;
     }
 
-    @Override
     public void initView()
     {
         lb_PropName = new javax.swing.JLabel();
@@ -120,7 +118,6 @@ public class GuidBean extends javax.swing.JPanel implements IMwizBean
         layout.setVerticalGroup(vsg1);
     }
 
-    @Override
     public void initLang()
     {
         Lang.setWText(lb_PropName, LangRes.P30F1301, "时间");
@@ -133,12 +130,10 @@ public class GuidBean extends javax.swing.JPanel implements IMwizBean
         Lang.setWTips(bt_ExptCard, LangRes.P30F151E, "生成卡片(Alt + C)");
     }
 
-    @Override
     public void initData()
     {
     }
 
-    @Override
     public void showData(KeysMdl keysMdl)
     {
         this.keysMdl = keysMdl;
@@ -186,18 +181,6 @@ public class GuidBean extends javax.swing.JPanel implements IMwizBean
         bt_ExptCard.setVisible(kind.indexOf(ConsDat.TEXT_CARD) > -1);
     }
 
-    @Override
-    public void setLabelFor(javax.swing.JLabel label)
-    {
-    }
-
-    @Override
-    public javax.swing.JComponent getComponent()
-    {
-        return this;
-    }
-
-    @Override
     public boolean saveData()
     {
         Object obj = cb_PropData.getSelectedItem();

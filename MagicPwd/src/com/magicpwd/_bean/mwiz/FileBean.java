@@ -16,9 +16,9 @@
  */
 package com.magicpwd._bean.mwiz;
 
+import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mwiz.IMwizBean;
 import com.magicpwd._bean.AFileBean;
-import com.magicpwd.m.mwiz.KeysMdl;
 import com.magicpwd.v.mwiz.NormPtn;
 
 /**
@@ -68,7 +68,7 @@ public class FileBean extends AFileBean implements IMwizBean
     }
 
     @Override
-    public void showData(KeysMdl keysMdl)
+    public void showData(IEditItem itemData)
     {
     }
 

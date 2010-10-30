@@ -4,9 +4,9 @@
  */
 package com.magicpwd._bean.mwiz;
 
+import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mwiz.IMwizBean;
 import com.magicpwd._bean.ATextBean;
-import com.magicpwd.m.mwiz.KeysMdl;
 import com.magicpwd.v.mwiz.NormPtn;
 
 /**
@@ -51,13 +51,17 @@ public class TextBean extends ATextBean implements IMwizBean
     }
 
     @Override
-    public void showData(KeysMdl keysMdl)
+    public void showData(IEditItem itemData)
     {
     }
 
     @Override
     public void setLabelFor(javax.swing.JLabel label)
     {
+        if (label != null)
+        {
+            label.setLabelFor(tf_PropData);
+        }
     }
 
     @Override
