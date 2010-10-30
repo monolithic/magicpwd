@@ -17,6 +17,7 @@
 package com.magicpwd.v.mwiz;
 
 import com.magicpwd.__a.AEditBean;
+import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mwiz.IMwizBean;
 import com.magicpwd._bean.mwiz.AreaBean;
 import com.magicpwd._bean.mwiz.DataBean;
@@ -29,6 +30,7 @@ import com.magicpwd._bean.mwiz.PwdsBean;
 import com.magicpwd._bean.mwiz.TextBean;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._util.Bean;
 import com.magicpwd.m.mwiz.KeysMdl;
 
 /**
@@ -47,6 +49,7 @@ public class BodyBar extends javax.swing.JPanel
 
     private NormPtn normPtn;
     private KeysMdl keysMdl;
+    private int currStep;
 
     public BodyBar(NormPtn normPtn, KeysMdl keysMdl)
     {
@@ -56,6 +59,8 @@ public class BodyBar extends javax.swing.JPanel
 
     public int initView(int step)
     {
+        currStep = step;
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
 
@@ -75,9 +80,8 @@ public class BodyBar extends javax.swing.JPanel
         {
             int type = keysMdl.getItemAt(step++).getType();
             label = getLabel(tmp);
-            panel = getPanel(tmp, type);
+            panel = getPanel(tmp++, type);
             panel.initView();
-            ((IMwizBean) panel).setLabelFor(label);
 
             hpg0.addComponent(label);
             hpg1.addComponent(panel, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE);
@@ -111,10 +115,33 @@ public class BodyBar extends javax.swing.JPanel
 
     public void initLang()
     {
+        IEditItem item;
+        javax.swing.JLabel label;
+        for (int i = 0, j = currStep; i < ConsEnv.MWIZ_MAX_ROW; i += 1)
+        {
+            label = lb_EditList[i];
+            if (label == null)
+            {
+                break;
+            }
+            item = keysMdl.getItemAt(j++);
+            Bean.setText(label, item.getName() + "(@" + i + ')');
+            ((IMwizBean) pl_EditList[i]).setLabelFor(label);
+        }
     }
 
     public void initData()
     {
+        AEditBean panel;
+        for (int i = 0, j = currStep; i < ConsEnv.MWIZ_MAX_ROW; i += 1)
+        {
+            panel = pl_EditList[i];
+            if (panel == null)
+            {
+                break;
+            }
+            ((IMwizBean) panel).showData(keysMdl.getItemAt(j++));
+        }
     }
 
     public void showData()

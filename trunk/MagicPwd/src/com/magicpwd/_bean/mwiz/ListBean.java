@@ -16,11 +16,10 @@
  */
 package com.magicpwd._bean.mwiz;
 
+import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mwiz.IMwizBean;
 import com.magicpwd._bean.AListBean;
-import com.magicpwd.m.mwiz.KeysMdl;
 import com.magicpwd.v.mwiz.NormPtn;
-import javax.swing.JLabel;
 
 /**
  * Application: MagicPwd
@@ -57,12 +56,12 @@ public class ListBean extends AListBean implements IMwizBean
     }
 
     @Override
-    public void showData(KeysMdl keysMdl)
+    public void showData(IEditItem itemData)
     {
     }
 
     @Override
-    public void setLabelFor(JLabel label)
+    public void setLabelFor(javax.swing.JLabel label)
     {
     }
 

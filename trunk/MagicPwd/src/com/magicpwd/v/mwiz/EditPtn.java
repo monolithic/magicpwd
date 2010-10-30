@@ -242,6 +242,7 @@ public class EditPtn extends javax.swing.JDialog
         currStep = -2;
         cl_Layout.show(pl_EditArea, "guid");
         guidBean.showData(keysMdl);
+        bt_PrevStep.setVisible(false);
         bt_NextStep.setVisible(true);
     }
 
@@ -250,6 +251,7 @@ public class EditPtn extends javax.swing.JDialog
         currStep = -1;
         cl_Layout.show(pl_EditArea, "head");
         headBean.showData(keysMdl);
+        bt_PrevStep.setVisible(true);
         bt_NextStep.setVisible(ls_BodyList.size() > 0);
     }
 
@@ -290,7 +292,6 @@ public class EditPtn extends javax.swing.JDialog
 
     private void bt_NextStepActionPerformed(java.awt.event.ActionEvent evt)
     {
-        bt_PrevStep.setVisible(true);
         if (currStep == -2)
         {
             if (guidBean.saveData())

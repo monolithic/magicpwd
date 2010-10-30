@@ -19,7 +19,6 @@ package com.magicpwd._bean.mwiz;
 import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd.__i.mwiz.IMwizBean;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.IcoLabel;
 import com.magicpwd._cons.ConsEnv;
@@ -43,7 +42,7 @@ import javax.swing.AbstractButton;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public class HeadBean extends javax.swing.JPanel implements IMwizBean, IBackCall
+public class HeadBean extends javax.swing.JPanel implements IBackCall
 {
 
     private NormPtn normPtn;
@@ -54,7 +53,6 @@ public class HeadBean extends javax.swing.JPanel implements IMwizBean, IBackCall
         this.normPtn = normPtn;
     }
 
-    @Override
     public void initView()
     {
         lb_MetaName = new javax.swing.JLabel();
@@ -192,7 +190,6 @@ public class HeadBean extends javax.swing.JPanel implements IMwizBean, IBackCall
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(vsg1));
     }
 
-    @Override
     public void initLang()
     {
         Bean.setText(lb_MetaName, Lang.getLang(LangRes.P30F1303, "标题"));
@@ -209,29 +206,15 @@ public class HeadBean extends javax.swing.JPanel implements IMwizBean, IBackCall
         Lang.setWTips(ib_HintDate, LangRes.P30F151C, "提醒时间(Alt + T)");
     }
 
-    @Override
     public void initData()
     {
     }
 
-    @Override
     public final void showData(KeysMdl keysMdl)
     {
         this.keysMdl = keysMdl;
     }
 
-    @Override
-    public void setLabelFor(javax.swing.JLabel label)
-    {
-    }
-
-    @Override
-    public javax.swing.JComponent getComponent()
-    {
-        return this;
-    }
-
-    @Override
     public boolean saveData()
     {
         String metaName = tf_MetaName.getText();
