@@ -113,6 +113,37 @@ public class Char
         return (l >= min && l <= max);
     }
 
+    public static boolean isValidateDate(String text, boolean formatOnly)
+    {
+        if (text == null)
+        {
+            return false;
+        }
+        if (formatOnly)
+        {
+            return Pattern.matches("(^[1-9][0-9]{0,3}[-\\/\\._](0[1-9]|1[012])[-\\/\\._](0[1-9]|[12][0-9]|3[01])$)", text);
+        }
+        return Pattern.matches("((^((1[8-9]\\d{2})|([2-9]\\d{3}))([-\\/\\._])(10|12|0?[13578])([-\\/\\._])(3[01]|[12][0-9]|0?[1-9])$)|(^((1[8-9]\\d{2})|([2-9]\\d{3}))([-\\/\\._])(11|0?[469])([-\\/\\._])(30|[12][0-9]|0?[1-9])$)|(^((1[8-9]\\d{2})|([2-9]\\d{3}))([-\\/\\._])(0?2)([-\\/\\._])(2[0-8]|1[0-9]|0?[1-9])$)|(^([2468][048]00)([-\\/\\._])(0?2)([-\\/\\._])(29)$)|(^([3579][26]00)([-\\/\\._])(0?2)([-\\/\\._])(29)$)|(^([1][89][0][48])([-\\/\\._])(0?2)([-\\/\\._])(29)$)|(^([2-9][0-9][0][48])([-\\/\\._])(0?2)([-\\/\\._])(29)$)|(^([1][89][2468][048])([-\\/\\._])(0?2)([-\\/\\._])(29)$)|(^([2-9][0-9][2468][048])([-\\/\\._])(0?2)([-\\/\\._])(29)$)|(^([1][89][13579][26])([-\\/\\._])(0?2)([-\\/\\._])(29)$)|(^([2-9][0-9][13579][26])([-\\/\\._])(0?2)([-\\/\\._])(29)$))", text);
+    }
+
+    public static boolean isValidateTime(String text)
+    {
+        if (text == null)
+        {
+            return false;
+        }
+        return Pattern.matches("(^([01][0-9]|2[0-3])[:\\.]([0-5][0-9])[:\\.]([0-5][0-9])$)", text);
+    }
+
+    public static boolean isValidateDateTime(String text)
+    {
+        if (text == null)
+        {
+            return false;
+        }
+        return Pattern.matches("^[1-9][0-9]{0,3}[-\\/\\._](0[1-9]|1[012])[-\\/\\._](0[1-9]|[12][0-9]|3[01]) ([01][0-9]|2[0-3])[:\\.]([0-5][0-9])[:\\.]([0-5][0-9])$", text);
+    }
+
     public static boolean isValidateHash(String text)
     {
         if (text == null)
@@ -127,7 +158,7 @@ public class Char
      * @param mail
      * @return
      */
-    public static boolean isValidateEmail(String mail)
+    public static boolean isValidateMail(String mail)
     {
         if (mail == null)
         {

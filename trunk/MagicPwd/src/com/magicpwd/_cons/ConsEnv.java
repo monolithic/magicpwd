@@ -92,9 +92,14 @@ public interface ConsEnv
     int INT_SIGN_IN = 1;
     String STR_SIGN_IN = "signIn";
     /**
+     * 锁定用户屏幕
+     */
+    int INT_SIGN_LS = INT_SIGN_IN + 1;
+    String STR_SIGN_LS = "signLs";
+    /**
      * 权限验证
      */
-    int INT_SIGN_RS = INT_SIGN_IN + 1;
+    int INT_SIGN_RS = INT_SIGN_LS + 1;
     String STR_SIGN_RS = "signRs";
     /**
      * 用户注册

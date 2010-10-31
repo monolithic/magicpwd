@@ -35,8 +35,6 @@ import com.magicpwd.v.mwiz.NormPtn;
 public class ListBean extends AListBean implements IMwizBean
 {
 
-    private IEditItem itemData;
-
     public ListBean(NormPtn normPtn)
     {
         super(normPtn);

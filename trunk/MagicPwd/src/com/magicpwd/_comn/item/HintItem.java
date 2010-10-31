@@ -38,7 +38,7 @@ public class HintItem extends EditItem
     @Override
     public boolean setData(String data)
     {
-        if (!com.magicpwd._util.Char.isValidate(data))
+        if (!com.magicpwd._util.Char.isValidateDateTime(data))
         {
             return false;
         }

@@ -28,8 +28,6 @@ import com.magicpwd.v.mwiz.NormPtn;
 public class DateBean extends ADateBean implements IMwizBean
 {
 
-    private IEditItem itemData;
-
     public DateBean(NormPtn normPtn)
     {
         super(normPtn);
@@ -89,6 +87,7 @@ public class DateBean extends ADateBean implements IMwizBean
     @Override
     public boolean saveData()
     {
+        itemData.setData(tf_PropData.getText());
         return true;
     }
 }

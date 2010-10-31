@@ -6,7 +6,9 @@ package com.magicpwd.v.mwiz;
 
 import com.magicpwd.__a.AFrame;
 import com.magicpwd._util.Bean;
+import com.magicpwd._util.Logs;
 import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.mwiz.KeysMdl;
 import com.magicpwd.m.mwiz.MwizMdl;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.TrayPtn;
@@ -43,10 +45,11 @@ public class NormPtn extends AFrame
         tb_ToolBar.setRollover(true);
 
         tb_KeysList = new javax.swing.JTable();
+        tb_KeysList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         mwizMdl = new MwizMdl(userMdl);
         mwizMdl.init();
         tb_KeysList.setModel(mwizMdl);
-        int w = tb_KeysList.getFontMetrics(tb_KeysList.getFont()).stringWidth("9999");
+        int w = tb_KeysList.getFontMetrics(tb_KeysList.getFont()).stringWidth("99999");
         tb_KeysList.getColumnModel().getColumn(0).setMaxWidth(w);
         tb_KeysList.getColumnModel().getColumn(1).setMaxWidth(40);
 
@@ -102,13 +105,37 @@ public class NormPtn extends AFrame
         return true;
     }
 
-    public void newKeys()
+    public void appendKeys()
     {
         EditPtn editPtn = new EditPtn(this);
         editPtn.initView();
         editPtn.initLang();
         editPtn.initData();
-        editPtn.showData(mwizMdl.getKeysMdl());
+        KeysMdl keysMdl = mwizMdl.getKeysMdl();
+        keysMdl.clear();
+        editPtn.showData(keysMdl);
+    }
+
+    public void updateKeys()
+    {
+        EditPtn editPtn = new EditPtn(this);
+        editPtn.initView();
+        editPtn.initLang();
+        editPtn.initData();
+        KeysMdl keysMdl = mwizMdl.getKeysMdl();
+        try
+        {
+            keysMdl.loadData(mwizMdl.getKeysAt(tb_KeysList.getSelectedRow()));
+            editPtn.showData(keysMdl);
+        }
+        catch (Exception ex)
+        {
+            Logs.exception(ex);
+        }
+    }
+
+    public void deleteKeys()
+    {
     }
 
     public void endKeys()

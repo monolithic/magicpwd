@@ -28,8 +28,6 @@ import com.magicpwd.v.mwiz.NormPtn;
 public class PwdsBean extends APwdsBean implements IMwizBean
 {
 
-    private IEditItem itemData;
-
     public PwdsBean(NormPtn normPtn)
     {
         super(normPtn);
@@ -91,6 +89,7 @@ public class PwdsBean extends APwdsBean implements IMwizBean
     @Override
     public boolean saveData()
     {
+        itemData.setData(new String(pf_PropData.getPassword()));
         return true;
     }
 }

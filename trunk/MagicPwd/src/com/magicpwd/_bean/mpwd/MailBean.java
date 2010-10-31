@@ -154,8 +154,12 @@ public class MailBean extends AMailBean implements IMpwdBean
             return;
         }
 
+        if (!processData())
+        {
+            return;
+        }
+
         itemData.setName(name);
-        itemData.setData(tf_PropData.getText());
 
         mainPtn.updateSelected();
     }

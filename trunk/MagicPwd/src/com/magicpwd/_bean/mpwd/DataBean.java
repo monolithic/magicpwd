@@ -11,7 +11,6 @@ import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._util.Bean;
-import com.magicpwd._util.Char;
 import com.magicpwd.v.mpwd.MainPtn;
 
 /**
@@ -132,96 +131,12 @@ public class DataBean extends ADataBean implements IMpwdBean
     @Override
     public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
     {
-        // 去除多余空格
-        String data = tf_PropData.getText().trim();
-        if (data.length() < 1)
+        if (!processData())
         {
-            System.out.println("请输入具体的数据！");
             return;
         }
 
-        // 数据格式合法化
-        if (data.startsWith("."))
-        {
-            data = '0' + data;
-        }
-        if (data.endsWith("."))
-        {
-            data += '0';
-        }
-
-        // 起始限制
-        StringBuilder regex = new StringBuilder("^");
-
-        // 数据集合
-        String ss = itemData.getSpec(IEditItem.SPEC_DATA_SET, "");
-        if (Char.isValidate(ss))
-        {
-            // 非0
-            if (ss.indexOf("0") < 0)
-            {
-                if (java.util.regex.Pattern.matches("^[+-]?0*(\\.0*)?$", data))
-                {
-                    System.out.println("请输入一个不为0的数值！");
-                    return;
-                }
-            }
-            // 仅负数
-            if ("-".equals(ss))
-            {
-                regex.append("-");
-            }
-            else
-            {
-                regex.append("[+-]?");
-            }
-        }
-
-        // 整数部分
-        regex.append("\\d+");
-
-        // 小数部分
-        String sd = itemData.getSpec(IEditItem.SPEC_DATA_DEC, "");
-        int id = java.util.regex.Pattern.matches("^\\d+$", sd) ? Integer.parseInt(sd) : 0;
-        if (id > 0)
-        {
-            regex.append("\\.").append("\\d{1,").append(id).append("}");
-        }
-
-        // 特殊符号
-        String sc = itemData.getSpec(IEditItem.SPEC_DATA_CHAR, "");
-        if (Char.isValidate(sc))
-        {
-            sc = '[' + sc + ']';
-
-            // 是否可选
-            String so = itemData.getSpec(IEditItem.SPEC_DATA_CHAR_OPT, "?");
-            if ("?".equals(so))
-            {
-                sc += so;
-            }
-            // 符号位置
-            String sp = itemData.getSpec(IEditItem.SPEC_DATA_CHAR_POS, "^");
-            if ("$".equals(sp))
-            {
-                regex.append(sc);
-            }
-            else
-            {
-                regex.insert(1, sc);
-            }
-        }
-
-        // 结束限制
-        regex.append('$');
-
-        if (!java.util.regex.Pattern.matches(regex.toString(), data))
-        {
-            System.out.println("您输入的数据有误！");
-            return;
-        }
-
-        itemData.setData(data);
+        mainPtn.updateSelected();
     }
 
     @Override

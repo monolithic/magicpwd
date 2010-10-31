@@ -68,7 +68,6 @@ public class BodyBar extends javax.swing.JPanel
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
 
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
-        vsg.addContainerGap();
 
         int tmp = 0;
         int max = keysMdl.getItemSize();
@@ -79,6 +78,21 @@ public class BodyBar extends javax.swing.JPanel
         while (true)
         {
             int type = keysMdl.getItemAt(step++).getType();
+            row -= (type == ConsDat.INDX_AREA || type == ConsDat.INDX_LIST) ? 4 : 1;
+            if (row < 0 || step >= max)
+            {
+                break;
+            }
+
+            if (tmp == 0)
+            {
+                vsg.addContainerGap();
+            }
+            else
+            {
+                vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+            }
+
             label = getLabel(tmp);
             panel = getPanel(tmp++, type);
             panel.initView();
@@ -90,13 +104,6 @@ public class BodyBar extends javax.swing.JPanel
             vpg.addComponent(label);
             vpg.addComponent(panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
             vsg.addGroup(vpg);
-
-            row -= (type == ConsDat.INDX_AREA || type == ConsDat.INDX_LIST) ? 4 : 1;
-            if (row < 1 || step >= max)
-            {
-                break;
-            }
-            vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         }
 
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();

@@ -29,7 +29,6 @@ public class FileBean extends AFileBean implements IMwizBean
 {
 
     private NormPtn normPtn;
-    private IEditItem itemData;
 
     public FileBean(NormPtn normPtn)
     {
@@ -93,7 +92,7 @@ public class FileBean extends AFileBean implements IMwizBean
     @Override
     public boolean saveData()
     {
-        return true;
+        return processData();
     }
 
     @Override

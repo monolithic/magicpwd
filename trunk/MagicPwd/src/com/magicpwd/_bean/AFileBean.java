@@ -19,6 +19,7 @@ package com.magicpwd._bean;
 import com.magicpwd.__a.AEditBean;
 import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IEditItem;
+import com.magicpwd._comn.item.EditItem;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsEnv;
@@ -153,6 +154,66 @@ public abstract class AFileBean extends AEditBean
         }
         filePath = jfc.getSelectedFile();
         tf_PropData.setText(filePath.getName());
+    }
+
+    protected boolean processData()
+    {
+        String file = itemData.getSpec(EditItem.SPEC_FILE_NAME);
+        if (filePath != null)
+        {
+            if (!filePath.exists())
+            {
+                Lang.showMesg(formPtn, LangRes.P30F7A03, "");
+                tf_PropData.requestFocus();
+                return false;
+            }
+            if (!filePath.isFile())
+            {
+                Lang.showMesg(formPtn, LangRes.P30F7A04, "");
+                tf_PropData.requestFocus();
+                return false;
+            }
+            if (!filePath.canRead())
+            {
+                Lang.showMesg(formPtn, LangRes.P30F7A05, "");
+                tf_PropData.requestFocus();
+                return false;
+            }
+            if (filePath.length() > 1048576)
+            {
+                Lang.showMesg(formPtn, LangRes.P30F7A06, "");
+                tf_PropData.requestFocus();
+                return false;
+            }
+
+            if (!com.magicpwd._util.Char.isValidate(file))
+            {
+                file = com.magicpwd._util.Char.lPad(Long.toHexString(System.currentTimeMillis()), 16, '0');
+            }
+            try
+            {
+                java.io.File amaFile = new java.io.File(amaPath, file + ConsEnv.FILE_ATTACHMENT);
+                if (!amaFile.exists())
+                {
+                    if (!amaFile.createNewFile())
+                    {
+                        Lang.showMesg(formPtn, LangRes.P30F7A2C, "文件上传保存出错，请重试！");
+                        return false;
+                    }
+                }
+                enCrypt(filePath, amaFile);
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+                Lang.showMesg(formPtn, LangRes.P30F7A2C, "文件上传保存出错，请重试！");
+                return false;
+            }
+        }
+
+        itemData.setData(tf_PropData.getText());
+        itemData.setSpec(EditItem.SPEC_FILE_NAME, file);
+        return true;
     }
     protected javax.swing.JTextField tf_PropData;
     // 配置信息

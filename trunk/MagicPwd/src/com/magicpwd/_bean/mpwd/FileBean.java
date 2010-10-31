@@ -26,10 +26,6 @@ public class FileBean extends AFileBean implements IMpwdBean
 
     private MainPtn mainPtn;
     private WEditBox dataEdit;
-    /**
-     * 用户文件对象
-     */
-    private String amaName;
     private WTextBox nameBox;
 
     public FileBean(MainPtn mainPtn)
@@ -127,7 +123,6 @@ public class FileBean extends AFileBean implements IMpwdBean
         }
         tf_PropName.setText(name);
         tf_PropData.setText(itemData.getData());
-        amaName = itemData.getSpec(EditItem.SPEC_FILE_NAME);
 
         if (amaPath == null)
         {
@@ -160,7 +155,11 @@ public class FileBean extends AFileBean implements IMpwdBean
 
         try
         {
-            new java.io.File(itemData.getSpec(EditItem.SPEC_FILE_NAME) + ConsEnv.FILE_ATTACHMENT).delete();
+            java.io.File file = new java.io.File(amaPath, itemData.getSpec(EditItem.SPEC_FILE_NAME) + ConsEnv.FILE_ATTACHMENT);
+            if (file.exists())
+            {
+                file.delete();
+            }
 
             mainPtn.removeSelected();
         }
@@ -182,62 +181,12 @@ public class FileBean extends AFileBean implements IMpwdBean
             return;
         }
 
-        if (filePath != null)
+        if (!processData())
         {
-            if (!filePath.exists())
-            {
-                Lang.showMesg(mainPtn, LangRes.P30F7A03, "");
-                tf_PropData.requestFocus();
-                return;
-            }
-            if (!filePath.isFile())
-            {
-                Lang.showMesg(mainPtn, LangRes.P30F7A04, "");
-                tf_PropData.requestFocus();
-                return;
-            }
-            if (!filePath.canRead())
-            {
-                Lang.showMesg(mainPtn, LangRes.P30F7A05, "");
-                tf_PropData.requestFocus();
-                return;
-            }
-            if (filePath.length() > 1048576)
-            {
-                Lang.showMesg(mainPtn, LangRes.P30F7A06, "");
-                tf_PropData.requestFocus();
-                return;
-            }
-
-            if (!com.magicpwd._util.Char.isValidate(amaName))
-            {
-                amaName = com.magicpwd._util.Char.lPad(Long.toHexString(System.currentTimeMillis()), 16, '0');
-            }
-            try
-            {
-                java.io.File amaFile = new java.io.File(amaPath, amaName + ConsEnv.FILE_ATTACHMENT);
-                if (!amaFile.exists())
-                {
-                    if (!amaFile.createNewFile())
-                    {
-                        Lang.showMesg(mainPtn, LangRes.P30F7A2C, "文件上传保存出错，请重试！");
-                        return;
-                    }
-                }
-                mainPtn.enCrypt(filePath, amaFile);
-                //Keys.doCrypt(gridView.getCoreMdl().getECipher(), filePath, amaFile);
-            }
-            catch (Exception exp)
-            {
-                Logs.exception(exp);
-                Lang.showMesg(mainPtn, LangRes.P30F7A2C, "文件上传保存出错，请重试！");
-                return;
-            }
+            return;
         }
 
         itemData.setName(name);
-        itemData.setData(tf_PropData.getText());
-        itemData.setSpec(EditItem.SPEC_FILE_NAME, amaName);
 
         mainPtn.updateSelected();
     }

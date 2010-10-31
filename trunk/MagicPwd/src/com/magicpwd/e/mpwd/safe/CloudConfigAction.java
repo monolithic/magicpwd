@@ -62,7 +62,7 @@ public class CloudConfigAction extends AMpwdAction
 
         try
         {
-            if (!Char.isValidateEmail(params[1]))
+            if (!Char.isValidateMail(params[1]))
             {
                 params[1] = params[2] + '@' + params[1];
             }
