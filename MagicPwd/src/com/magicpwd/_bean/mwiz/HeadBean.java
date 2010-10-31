@@ -252,6 +252,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
             if (!hint.setData(hintDate))
             {
                 Lang.showMesg(normPtn, LangRes.P30F7A37, "您输入的日期格式无效，请重新输入！");
+                tf_HintDate.requestFocus();
                 return false;
             }
             tf_HintDate.setText(hintDate);
@@ -259,6 +260,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
             if (!com.magicpwd._util.Char.isValidate(hintName))
             {
                 Lang.showMesg(normPtn, LangRes.P30F7A36, "请输入过期提示！");
+                tf_HintName.requestFocus();
                 return false;
             }
         }
