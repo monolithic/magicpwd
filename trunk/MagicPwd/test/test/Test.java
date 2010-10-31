@@ -1,8 +1,6 @@
 package test;
 
-import com.magicpwd._util.Lang;
-import com.magicpwd.m.UserMdl;
-import com.magicpwd.v.mwiz.NormPtn;
+import com.magicpwd._util.Char;
 
 /*
  * To change this template, choose Tools | Templates
@@ -17,22 +15,6 @@ public class Test
 
     public static void main(String[] args)
     {
-        try
-        {
-//            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            UserMdl cfg = new UserMdl();
-            cfg.loadCfg();
-            Lang.loadLang(cfg);
-            //Bean.readIcon(new FileInputStream("src/res/icon/mwiz16.png"), "mwiz");
-            NormPtn p = new NormPtn(null, cfg);
-            p.initView();
-            p.initLang();
-            p.initData();
-            p.setVisible(true);
-        }
-        catch (Exception exp)
-        {
-            exp.printStackTrace();
-        }
+        System.out.println(Char.isValidateDateTime("1-00-30 23:00:00"));
     }
 }
