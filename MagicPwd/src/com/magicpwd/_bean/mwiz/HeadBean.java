@@ -213,6 +213,17 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
     public final void showData(KeysMdl keysMdl)
     {
         this.keysMdl = keysMdl;
+
+        IEditItem meta = keysMdl.getItemAt(ConsEnv.PWDS_HEAD_META);
+        tf_MetaName.setText(meta.getName());
+        ta_MetaData.setText(meta.getData());
+
+        IEditItem logo = keysMdl.getItemAt(ConsEnv.PWDS_HEAD_LOGO);
+        ib_KeysIcon.setIcon(Bean.getDataIcon(logo.getSpec(0)));
+
+        IEditItem hint = keysMdl.getItemAt(ConsEnv.PWDS_HEAD_HINT);
+        tf_HintName.setText(hint.getName());
+        tf_HintDate.setText(hint.getData());
     }
 
     public boolean saveData()
@@ -254,7 +265,6 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
         hint.setName(hintName);
         hint.setData(hintDate);
 
-        keysMdl.setModified(true);
         return true;
     }
 
@@ -291,7 +301,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
         ico.initView();
         ico.initLang();
         ico.initData();
-        //ico.showData(itemData.getName());
+        ico.showData(keysMdl.getItemAt(ConsEnv.PWDS_HEAD_LOGO).getName());
         ico.setVisible(true);
     }
 

@@ -16,6 +16,7 @@ public class EditAction extends AMwizAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
+        normPtn.updateKeys();
     }
 
     @Override

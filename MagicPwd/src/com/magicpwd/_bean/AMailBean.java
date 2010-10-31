@@ -23,6 +23,7 @@ import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
 
@@ -88,7 +89,7 @@ public abstract class AMailBean extends AEditBean
     private void bt_MailViewActionPerformed(java.awt.event.ActionEvent evt)
     {
         String url = tf_PropData.getText();
-        if (!com.magicpwd._util.Char.isValidateEmail(url))
+        if (!com.magicpwd._util.Char.isValidateMail(url))
         {
             Lang.showMesg(formPtn, LangRes.P30F7A32, "您输入的不是一个合适的邮件地址！");
             return;
@@ -99,6 +100,21 @@ public abstract class AMailBean extends AEditBean
             url = "mailto:" + url;
         }
         Desk.mail(url);
+    }
+
+    protected boolean processData()
+    {
+        String data = tf_PropData.getText();
+        if (Char.isValidate(data))
+        {
+            data = data.trim();
+            if (!Char.isValidateMail(data))
+            {
+                Lang.showMesg(formPtn, LangRes.P30F7A31, "邮件格式应为：someone@hostname.com");
+                return false;
+            }
+        }
+        return true;
     }
     protected javax.swing.JTextField tf_PropData;
     // 配置信息

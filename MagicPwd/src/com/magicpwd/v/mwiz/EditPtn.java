@@ -261,7 +261,7 @@ public class EditPtn extends javax.swing.JDialog
         currStep -= 1;
         cl_Layout.show(pl_EditArea, "body" + currStep);
         ls_BodyList.get(currStep).showData();
-        boolean end = ls_BodyList.size() >= currStep + 1;
+        boolean end = ls_BodyList.size() - 1 <= currStep;
         bt_NextStep.setVisible(!end);
         bt_Update.setVisible(keysMdl.isUpdate() || end);
     }
@@ -271,7 +271,7 @@ public class EditPtn extends javax.swing.JDialog
         currStep += 1;
         cl_Layout.show(pl_EditArea, "body" + currStep);
         ls_BodyList.get(currStep).showData();
-        boolean end = ls_BodyList.size() >= currStep + 1;
+        boolean end = ls_BodyList.size() - 1 <= currStep;
         bt_NextStep.setVisible(!end);
         bt_Update.setVisible(keysMdl.isUpdate() || end);
     }

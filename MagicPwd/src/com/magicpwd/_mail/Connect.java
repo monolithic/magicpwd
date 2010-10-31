@@ -180,7 +180,7 @@ public class Connect
 
     public boolean useDefault()
     {
-        if (!com.magicpwd._util.Char.isValidateEmail(mail))
+        if (!com.magicpwd._util.Char.isValidateMail(mail))
         {
             return false;
         }

@@ -16,8 +16,6 @@ import com.magicpwd.v.mwiz.NormPtn;
 public class AreaBean extends AAreaBean implements IMwizBean
 {
 
-    private IEditItem itemData;
-
     public AreaBean(NormPtn normPtn)
     {
         super(normPtn);
@@ -75,6 +73,7 @@ public class AreaBean extends AAreaBean implements IMwizBean
     @Override
     public boolean saveData()
     {
+        itemData.setData(ta_PropData.getText());
         return true;
     }
 }

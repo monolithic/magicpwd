@@ -16,7 +16,7 @@ public class NewAction extends AMwizAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        normPtn.newKeys();
+        normPtn.appendKeys();
     }
 
     @Override

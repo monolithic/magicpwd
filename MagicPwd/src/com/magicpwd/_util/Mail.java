@@ -442,7 +442,7 @@ public class Mail
      */
     public void setMailFrom(String from)
     {
-        if (Char.isValidateEmail(from))
+        if (Char.isValidateMail(from))
         {
             mailFrom = from;
         }
@@ -455,7 +455,7 @@ public class Mail
      */
     public void addMailTO(String to)
     {
-        if (Char.isValidateEmail(to))
+        if (Char.isValidateMail(to))
         {
             mailTO.add(to);
         }
@@ -467,7 +467,7 @@ public class Mail
      */
     public void addMailCC(String cc)
     {
-        if (Char.isValidateEmail(cc))
+        if (Char.isValidateMail(cc))
         {
             mailCC.add(cc);
         }
@@ -480,7 +480,7 @@ public class Mail
      */
     public void addMailBCC(String bcc)
     {
-        if (Char.isValidateEmail(bcc))
+        if (Char.isValidateMail(bcc))
         {
             mailBCC.add(bcc);
         }

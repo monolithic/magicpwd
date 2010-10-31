@@ -28,8 +28,6 @@ import com.magicpwd.v.mwiz.NormPtn;
 public class MailBean extends AMailBean implements IMwizBean
 {
 
-    private IEditItem itemData;
-
     public MailBean(NormPtn normPtn)
     {
         super(normPtn);
@@ -89,6 +87,6 @@ public class MailBean extends AMailBean implements IMwizBean
     @Override
     public boolean saveData()
     {
-        return true;
+        return processData();
     }
 }

@@ -28,8 +28,6 @@ import com.magicpwd.v.mwiz.NormPtn;
 public class DataBean extends ADataBean implements IMwizBean
 {
 
-    private IEditItem itemData;
-
     public DataBean(NormPtn normPtn)
     {
         super(normPtn);
@@ -75,6 +73,6 @@ public class DataBean extends ADataBean implements IMwizBean
     @Override
     public boolean saveData()
     {
-        return true;
+        return processData();
     }
 }

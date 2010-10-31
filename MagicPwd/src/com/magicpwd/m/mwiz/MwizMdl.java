@@ -19,7 +19,7 @@ public final class MwizMdl implements javax.swing.table.TableModel, java.io.Seri
 
     private UserMdl userMdl;
     private KeysMdl keysMdl;
-    private java.util.List<Keys> keysList;
+    private java.util.List<Keys> ls_KeysList;
     private javax.swing.event.EventListenerList listenerList;
 
     public MwizMdl(UserMdl userMdl)
@@ -30,14 +30,14 @@ public final class MwizMdl implements javax.swing.table.TableModel, java.io.Seri
 
     public void init()
     {
-        keysList = new java.util.ArrayList<Keys>();
+        ls_KeysList = new java.util.ArrayList<Keys>();
         listenerList = new javax.swing.event.EventListenerList();
     }
 
     @Override
     public int getRowCount()
     {
-        return keysList != null ? keysList.size() : 0;
+        return ls_KeysList != null ? ls_KeysList.size() : 0;
     }
 
     @Override
@@ -52,7 +52,7 @@ public final class MwizMdl implements javax.swing.table.TableModel, java.io.Seri
         switch (columnIndex)
         {
             case 0:
-                return "";
+                return "..";
             case 1:
                 return "徽标";
             case 2:
@@ -88,12 +88,12 @@ public final class MwizMdl implements javax.swing.table.TableModel, java.io.Seri
     public Object getValueAt(int rowIndex, int columnIndex)
     {
         // 公共属性
-        if (keysList == null || rowIndex < -1 || rowIndex >= keysList.size())
+        if (ls_KeysList == null || rowIndex < -1 || rowIndex >= ls_KeysList.size())
         {
             return null;
         }
 
-        Keys keys = keysList.get(rowIndex);
+        Keys keys = ls_KeysList.get(rowIndex);
         switch (columnIndex)
         {
             case 0:
@@ -118,22 +118,27 @@ public final class MwizMdl implements javax.swing.table.TableModel, java.io.Seri
 
     public boolean listKeysByKind(String kindHash)
     {
-        keysList.size();
-        keysList.clear();
-        boolean b = DBA3000.readKeysList(userMdl, kindHash, keysList);
-        int s = keysList.size();
+        ls_KeysList.size();
+        ls_KeysList.clear();
+        boolean b = DBA3000.readKeysList(userMdl, kindHash, ls_KeysList);
+        int s = ls_KeysList.size();
         fireTableDataChanged();
         return b & (s > 0);
     }
 
     public boolean listKeysByMeta(String keysMeta)
     {
-        int s = keysList.size();
-        keysList.clear();
-        boolean b = DBA3000.findUserData(userMdl, keysMeta, keysList);
-        s = keysList.size();
+        int s = ls_KeysList.size();
+        ls_KeysList.clear();
+        boolean b = DBA3000.findUserData(userMdl, keysMeta, ls_KeysList);
+        s = ls_KeysList.size();
         fireTableDataChanged();
         return b & (s > 0);
+    }
+
+    public Keys getKeysAt(int index)
+    {
+        return ls_KeysList.get(index);
     }
 
     /**
