@@ -208,10 +208,5 @@
                 <action id="sort-key" class="com.magicpwd.e.mwiz.SortKeyAction" />
             </item>
         </menu>
-        <seperator />
-        <!--查看历史-->
-        <item type="normal" text="$P30F7D07">
-            <action class="com.magicpwd.e.mwiz.HistoryAction" />
-        </item>
     </popmenu>
 </magicpwd>

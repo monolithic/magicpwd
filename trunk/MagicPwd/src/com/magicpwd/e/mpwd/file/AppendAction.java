@@ -11,10 +11,10 @@ import com.magicpwd._util.Char;
  *
  * @author Amon
  */
-public class NewAction extends AMpwdAction
+public class AppendAction extends AMpwdAction
 {
 
-    public NewAction()
+    public AppendAction()
     {
     }
 
