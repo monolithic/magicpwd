@@ -705,6 +705,18 @@ public class MainPtn extends AFrame
         {
 
             @Override
+            public void mousePressed(java.awt.event.MouseEvent evt)
+            {
+                // 右键事件处理
+                if (evt.isPopupTrigger())
+                {
+                    int row = tb_KeysView.rowAtPoint(evt.getPoint());
+                    tb_KeysView.setRowSelectionInterval(row, row);
+                    gridPop.show(tb_KeysView, evt.getX(), evt.getY());
+                }
+            }
+
+            @Override
             public void mouseReleased(java.awt.event.MouseEvent evt)
             {
                 // 右键事件处理
@@ -717,18 +729,6 @@ public class MainPtn extends AFrame
                 else
                 {
                     tb_ItemListMouseReleased(evt);
-                }
-            }
-
-            @Override
-            public void mousePressed(java.awt.event.MouseEvent evt)
-            {
-                // 右键事件处理
-                if (evt.isPopupTrigger())
-                {
-                    int row = tb_KeysView.rowAtPoint(evt.getPoint());
-                    tb_KeysView.setRowSelectionInterval(row, row);
-                    gridPop.show(tb_KeysView, evt.getX(), evt.getY());
                 }
             }
 

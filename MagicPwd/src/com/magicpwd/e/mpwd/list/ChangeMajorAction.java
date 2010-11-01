@@ -12,10 +12,10 @@ import com.magicpwd._util.Char;
  *
  * @author Amon
  */
-public class ChangeModeAction extends AMpwdAction
+public class ChangeMajorAction extends AMpwdAction
 {
 
-    public ChangeModeAction()
+    public ChangeMajorAction()
     {
     }
 
@@ -28,9 +28,9 @@ public class ChangeModeAction extends AMpwdAction
         Object obj = mainPtn.getSelectedListValue();
         if (obj instanceof Keys)
         {
-            ((Keys) obj).setP30F0102(val);
+            ((Keys) obj).setP30F0103(val);
         }
-        mainPtn.changeLabel(val);
+        mainPtn.changeMajor(val);
     }
 
     @Override

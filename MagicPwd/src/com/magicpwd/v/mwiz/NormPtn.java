@@ -35,6 +35,7 @@ public class NormPtn extends AFrame
         {
             menuPtn.loadData(new java.io.File("dat/mwiz.xml"));
             tb_ToolBar = menuPtn.getToolBar("mwiz", rootPane);
+            pm_MenuPop = menuPtn.getPopMenu("mwiz");
         }
         catch (Exception e)
         {
@@ -55,6 +56,30 @@ public class NormPtn extends AFrame
 
         tb_KeysList.addMouseListener(new java.awt.event.MouseAdapter()
         {
+
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent evt)
+            {
+                // 右键事件处理
+                if (evt.isPopupTrigger())
+                {
+                    int row = tb_KeysList.rowAtPoint(evt.getPoint());
+                    tb_KeysList.setRowSelectionInterval(row, row);
+                    pm_MenuPop.show(tb_KeysList, evt.getX(), evt.getY());
+                }
+            }
+
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                // 右键事件处理
+                if (evt.isPopupTrigger())
+                {
+                    int row = tb_KeysList.rowAtPoint(evt.getPoint());
+                    tb_KeysList.setRowSelectionInterval(row, row);
+                    pm_MenuPop.show(tb_KeysList, evt.getX(), evt.getY());
+                }
+            }
 
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt)
@@ -79,7 +104,7 @@ public class NormPtn extends AFrame
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
         vsg.addComponent(tb_ToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        vsg.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE);
+        vsg.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE);
         vsg.addContainerGap();
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(vsg));
 
@@ -166,4 +191,5 @@ public class NormPtn extends AFrame
     }
     private javax.swing.JTable tb_KeysList;
     private javax.swing.JToolBar tb_ToolBar;
+    private javax.swing.JPopupMenu pm_MenuPop;
 }
