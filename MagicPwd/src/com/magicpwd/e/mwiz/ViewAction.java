@@ -28,6 +28,7 @@ public class ViewAction extends AMwizAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
+        normPtn.viewKeys();
     }
 
     @Override
