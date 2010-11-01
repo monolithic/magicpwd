@@ -14,7 +14,7 @@
             <icon>
                 <default id="file-edit" path="skin/feel/%feel%/mwiz-edit.png"/>
             </icon>
-            <action id="save-keys" class="com.magicpwd.e.mwiz.EditAction" />
+            <action id="edit-keys" class="com.magicpwd.e.mwiz.EditAction" />
         </item>
         <!--删除-->
         <item type="normal" tips="$P30F7B02">
@@ -47,4 +47,171 @@
             <action id="save-keys" class="com.magicpwd.e.mwiz.SearchAction" />
         </item>
     </toolbar>
+    <popmenu id="mwiz">
+        <!--查看记录-->
+        <item type="normal" text="$P30F7D05">
+            <action id="view-keys" class="com.magicpwd.e.mwiz.ViewAction" />
+        </item>
+        <seperator />
+        <!--添加记录-->
+        <item type="normal" text="$P30F7D05">
+            <action id="new-keys" class="com.magicpwd.e.mwiz.NewAction" />
+        </item>
+        <!--更新记录-->
+        <item type="normal" text="$P30F7D05">
+            <action id="edit-keys" class="com.magicpwd.e.mwiz.EditAction" />
+        </item>
+        <!--删除记录-->
+        <item type="normal" text="$P30F7D06">
+            <action id="delete-keys" class="com.magicpwd.e.mwiz.DeleteAction" />
+        </item>
+        <seperator />
+        <!--标记为：-->
+        <menu text="$P30F7D1B">
+            <!--默认(@0)-->
+            <item type="checkbox" text="$P30F7D1C" group="label" command="0">
+                <icon>
+                    <default cache-id="label0" path="skin/feel/%feel%/label.png"/>
+                </icon>
+                <action id="change-mode" class="com.magicpwd.e.mwiz.ChangeLabelAction" />
+            </item>
+            <seperator />
+            <!--常使用(@1)-->
+            <item type="checkbox" text="$P30F7D1D" group="label" command="1">
+                <icon>
+                    <default cache-id="label1" path="skin/feel/%feel%/label1.png"/>
+                </icon>
+                <action id="change-mode" class="com.magicpwd.e.mwiz.ChangeLabelAction" />
+            </item>
+            <!--待注册(@2)-->
+            <item type="checkbox" text="$P30F7D1E" group="label" command="2">
+                <icon>
+                    <default cache-id="label2" path="skin/feel/%feel%/label2.png"/>
+                </icon>
+                <action id="change-mode" class="com.magicpwd.e.mwiz.ChangeLabelAction" />
+            </item>
+            <!--待认证(@3)-->
+            <item type="checkbox" text="$P30F7D1F" group="label" command="3">
+                <icon>
+                    <default cache-id="label3" path="skin/feel/%feel%/label3.png"/>
+                </icon>
+                <action id="change-mode" class="com.magicpwd.e.mwiz.ChangeLabelAction" />
+            </item>
+            <!--待激活(@4)-->
+            <item type="checkbox" text="$P30F7D20" group="label" command="4">
+                <icon>
+                    <default cache-id="label4" path="skin/feel/%feel%/label4.png"/>
+                </icon>
+                <action id="change-mode" class="com.magicpwd.e.mwiz.ChangeLabelAction" />
+            </item>
+            <!--仅测试(@5)-->
+            <item type="checkbox" text="$P30F7D21" group="label" command="5">
+                <icon>
+                    <default cache-id="label5" path="skin/feel/%feel%/label5.png"/>
+                </icon>
+                <action id="change-mode" class="com.magicpwd.e.mwiz.ChangeLabelAction" />
+            </item>
+            <!--已过期(@6)-->
+            <item type="checkbox" text="$P30F7D22" group="label" command="6">
+                <icon>
+                    <default cache-id="label6" path="skin/feel/%feel%/label6.png"/>
+                </icon>
+                <action id="change-mode" class="com.magicpwd.e.mwiz.ChangeLabelAction" />
+            </item>
+            <!--已丢失(@7)-->
+            <item type="checkbox" text="$P30F7D23" group="label" command="7">
+                <icon>
+                    <default cache-id="label7" path="skin/feel/%feel%/label7.png"/>
+                </icon>
+                <action id="change-mode" class="com.magicpwd.e.mwiz.ChangeLabelAction" />
+            </item>
+            <!--被禁用(@8)-->
+            <item type="checkbox" text="$P30F7D24" group="label" command="8">
+                <icon>
+                    <default cache-id="label8" path="skin/feel/%feel%/label8.png"/>
+                </icon>
+                <action id="change-mode" class="com.magicpwd.e.mwiz.ChangeLabelAction" />
+            </item>
+            <!--已删除(@9)-->
+            <item type="checkbox" text="$P30F7D25" group="label" command="9">
+                <icon>
+                    <default cache-id="label9" path="skin/feel/%feel%/label9.png"/>
+                </icon>
+                <action id="change-mode" class="com.magicpwd.e.mwiz.ChangeLabelAction" />
+            </item>
+        </menu>
+        <!--重要性：-->
+        <menu text="$P30F7D26">
+            <!--最高-->
+            <item type="checkbox" text="$P30F7D27" group="major" command="2">
+                <icon>
+                    <default cache-id="major2" path="skin/feel/%feel%/major+2.png"/>
+                </icon>
+                <action id="change-note" class="com.magicpwd.e.mwiz.ChangeMajorAction" />
+            </item>
+            <!--高-->
+            <item type="checkbox" text="$P30F7D28" group="major" command="1">
+                <icon>
+                    <default cache-id="major1" path="skin/feel/%feel%/major+1.png"/>
+                </icon>
+                <action id="change-note" class="com.magicpwd.e.mwiz.ChangeMajorAction" />
+            </item>
+            <!--正常-->
+            <item type="checkbox" text="$P30F7D29" group="major" command="0">
+                <icon>
+                    <default cache-id="major0" path="skin/feel/%feel%/major.png"/>
+                </icon>
+                <action id="change-note" class="com.magicpwd.e.mwiz.ChangeMajorAction" />
+            </item>
+            <!--低-->
+            <item type="checkbox" text="$P30F7D2A" group="major" command="-1">
+                <icon>
+                    <default cache-id="major-1" path="skin/feel/%feel%/major-1.png"/>
+                </icon>
+                <action id="change-note" class="com.magicpwd.e.mwiz.ChangeMajorAction" />
+            </item>
+            <!--最低-->
+            <item type="checkbox" text="$P30F7D2B" group="major" command="-2">
+                <icon>
+                    <default cache-id="major-2" path="skin/feel/%feel%/major-2.png"/>
+                </icon>
+                <action id="change-note" class="com.magicpwd.e.mwiz.ChangeMajorAction" />
+            </item>
+        </menu>
+        <!--排序方式-->
+        <menu text="$P30F7D2C">
+            <!--升序-->
+            <item type="checkbox" text="$P30F7D2D" group="order-dir" command="true">
+                <action id="sort-dir" class="com.magicpwd.e.mwiz.SortDirAction" />
+            </item>
+            <!--降序-->
+            <item type="checkbox" text="$P30F7D2E" group="order-dir" command="false">
+                <action id="sort-dir" class="com.magicpwd.e.mwiz.SortDirAction" />
+            </item>
+        </menu>
+        <!--排序依据-->
+        <menu text="$P30F7D2F">
+            <!--使用频率-->
+            <item type="checkbox" text="$P30F7D30" group="order-key" command="01">
+                <action id="sort-key" class="com.magicpwd.e.mwiz.SortKeyAction" />
+            </item>
+            <!--口令名称-->
+            <item type="checkbox" text="$P30F7D31" group="order-key" command="09">
+                <action id="sort-key" class="com.magicpwd.e.mwiz.SortKeyAction" />
+            </item>
+            <!--注册时间-->
+            <item type="checkbox" text="$P30F7D32" group="order-key" command="07">
+                <action id="sort-key" class="com.magicpwd.e.mwiz.SortKeyAction" />
+            </item>
+            <!--到期时间-->
+            <item type="checkbox" text="$P30F7D33" group="order-key" command="0D">
+                <action id="sort-key" class="com.magicpwd.e.mwiz.SortKeyAction" />
+            </item>
+        </menu>
+        <seperator />
+        <!--查看历史-->
+        <item type="normal" text="$P30F7D07">
+            <action class="com.magicpwd.e.mwiz.HistoryAction" />
+        </item>
+    </popmenu>
 </magicpwd>
