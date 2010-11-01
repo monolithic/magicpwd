@@ -22,6 +22,7 @@ public class NormPtn extends AFrame
 
     private MenuPtn menuPtn;
     private MwizMdl mwizMdl;
+    private EditPtn editPtn;
 
     public NormPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
@@ -44,6 +45,14 @@ public class NormPtn extends AFrame
 
         tb_ToolBar.setFloatable(false);
         tb_ToolBar.setRollover(true);
+
+        tb_FindBar = new javax.swing.JToolBar();
+        tb_FindBar.setFloatable(false);
+        tb_FindBar.setRollover(true);
+
+        tf_FindBox = new javax.swing.JTextField();
+        tf_FindBox.setColumns(20);
+        tb_FindBar.add(tf_FindBox);
 
         tb_KeysList = new javax.swing.JTable();
         tb_KeysList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -102,8 +111,12 @@ public class NormPtn extends AFrame
         hsg2.addContainerGap();
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(hsg1).addGroup(hsg2));
 
+        javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        vpg.addComponent(tb_ToolBar);
+        vpg.addComponent(tb_FindBar);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
-        vsg.addComponent(tb_ToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+//        vsg.addComponent(tb_ToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg.addGroup(vpg);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE);
         vsg.addContainerGap();
@@ -131,28 +144,49 @@ public class NormPtn extends AFrame
         return true;
     }
 
+    public void viewKeys()
+    {
+        int row = tb_KeysList.getSelectedRow();
+        if (row < 0)
+        {
+            return;
+        }
+
+        try
+        {
+            EditPtn editDlg = getEditPtn();
+            KeysMdl keysMdl = mwizMdl.getKeysMdl();
+            keysMdl.loadData(mwizMdl.getKeysAt(row));
+            editDlg.showData(keysMdl, false);
+        }
+        catch (Exception ex)
+        {
+            Logs.exception(ex);
+        }
+    }
+
     public void appendKeys()
     {
-        EditPtn editPtn = new EditPtn(this);
-        editPtn.initView();
-        editPtn.initLang();
-        editPtn.initData();
+        EditPtn editDlg = getEditPtn();
         KeysMdl keysMdl = mwizMdl.getKeysMdl();
         keysMdl.clear();
-        editPtn.showData(keysMdl);
+        editDlg.showData(keysMdl, true);
     }
 
     public void updateKeys()
     {
-        EditPtn editPtn = new EditPtn(this);
-        editPtn.initView();
-        editPtn.initLang();
-        editPtn.initData();
-        KeysMdl keysMdl = mwizMdl.getKeysMdl();
+        int row = tb_KeysList.getSelectedRow();
+        if (row < 0)
+        {
+            return;
+        }
+
         try
         {
-            keysMdl.loadData(mwizMdl.getKeysAt(tb_KeysList.getSelectedRow()));
-            editPtn.showData(keysMdl);
+            EditPtn editDlg = getEditPtn();
+            KeysMdl keysMdl = mwizMdl.getKeysMdl();
+            keysMdl.loadData(mwizMdl.getKeysAt(row));
+            editDlg.showData(keysMdl, true);
         }
         catch (Exception ex)
         {
@@ -162,6 +196,19 @@ public class NormPtn extends AFrame
 
     public void deleteKeys()
     {
+    }
+
+    private EditPtn getEditPtn()
+    {
+        if (editPtn == null)
+        {
+            editPtn = new EditPtn(this);
+            editPtn.initView();
+            editPtn.initLang();
+            editPtn.initData();
+        }
+        editPtn.setVisible(true);
+        return editPtn;
     }
 
     public void endKeys()
@@ -191,6 +238,8 @@ public class NormPtn extends AFrame
     {
     }
     private javax.swing.JTable tb_KeysList;
+    private javax.swing.JTextField tf_FindBox;
     private javax.swing.JToolBar tb_ToolBar;
+    private javax.swing.JToolBar tb_FindBar;
     private javax.swing.JPopupMenu pm_MenuPop;
 }

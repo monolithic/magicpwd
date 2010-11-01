@@ -39,6 +39,7 @@ public class EditPtn extends javax.swing.JDialog
 {
 
     private int currStep;
+    private boolean canEdit;
     private KeysMdl keysMdl;
     private NormPtn normPtn;
     private GuidBean guidBean;
@@ -89,12 +90,12 @@ public class EditPtn extends javax.swing.JDialog
 
         bt_Update.setVisible(false);
         bt_PrevStep.setVisible(false);
-        setVisible(true);
     }
 
-    public final void showData(KeysMdl keysMdl)
+    public final void showData(KeysMdl keysMdl, boolean canEdit)
     {
         this.keysMdl = keysMdl;
+        this.canEdit = canEdit;
         initGuidView();
 
         currStep = -2;
@@ -263,7 +264,7 @@ public class EditPtn extends javax.swing.JDialog
         ls_BodyList.get(currStep).showData();
         boolean end = ls_BodyList.size() - 1 <= currStep;
         bt_NextStep.setVisible(!end);
-        bt_Update.setVisible(keysMdl.isUpdate() || end);
+        bt_Update.setVisible(canEdit && (keysMdl.isUpdate() || end));
     }
 
     private void nextBodyView()
@@ -273,7 +274,7 @@ public class EditPtn extends javax.swing.JDialog
         ls_BodyList.get(currStep).showData();
         boolean end = ls_BodyList.size() - 1 <= currStep;
         bt_NextStep.setVisible(!end);
-        bt_Update.setVisible(keysMdl.isUpdate() || end);
+        bt_Update.setVisible(canEdit && (keysMdl.isUpdate() || end));
     }
 
     private void bt_PrevStepActionPerformed(java.awt.event.ActionEvent evt)

@@ -2,24 +2,32 @@
 <magicpwd>
     <!--魔方密码工具栏-->
     <toolbar id="mwiz">
+        <!--查看-->
+        <item type="normal" tips="$P30F7B01">
+            <icon>
+                <default id="view-keys" path="skin/feel/%feel%/mwiz-view.png"/>
+            </icon>
+            <action id="view-keys" class="com.magicpwd.e.mwiz.ViewAction" />
+        </item>
+        <seperator />
         <!--新增-->
         <item type="normal" tips="$P30F7B01">
             <icon>
-                <default id="file-new" path="skin/feel/%feel%/mwiz-add.png"/>
+                <default id="new-keys" path="skin/feel/%feel%/mwiz-add.png"/>
             </icon>
             <action id="new-keys" class="com.magicpwd.e.mwiz.NewAction" />
         </item>
         <!--编辑-->
         <item type="normal" tips="$P30F7B02">
             <icon>
-                <default id="file-edit" path="skin/feel/%feel%/mwiz-edit.png"/>
+                <default id="edit-keys" path="skin/feel/%feel%/mwiz-edit.png"/>
             </icon>
             <action id="edit-keys" class="com.magicpwd.e.mwiz.EditAction" />
         </item>
         <!--删除-->
         <item type="normal" tips="$P30F7B02">
             <icon>
-                <default id="file-delete" path="skin/feel/%feel%/mwiz-delete.png"/>
+                <default id="delete-keys" path="skin/feel/%feel%/mwiz-delete.png"/>
             </icon>
             <action id="delete-keys" class="com.magicpwd.e.mwiz.DeleteAction" />
         </item>
@@ -27,24 +35,9 @@
         <!--查询-->
         <item type="normal" tips="$P30F7B02">
             <icon>
-                <default id="file-save" path="skin/feel/%feel%/mwiz-search.png"/>
+                <default id="search-keys" path="skin/feel/%feel%/mwiz-search.png"/>
             </icon>
-            <action id="save-keys" class="com.magicpwd.e.mwiz.SearchAction" />
-        </item>
-        <seperator />
-        <!--高级模式-->
-        <item type="normal" tips="$P30F7B02">
-            <icon>
-                <default id="file-save" path="skin/feel/%feel%/mwiz-search.png"/>
-            </icon>
-            <action id="save-keys" class="com.magicpwd.e.mwiz.SearchAction" />
-        </item>
-        <!--记事模式-->
-        <item type="normal" tips="$P30F7B02">
-            <icon>
-                <default id="file-save" path="skin/feel/%feel%/mwiz-search.png"/>
-            </icon>
-            <action id="save-keys" class="com.magicpwd.e.mwiz.SearchAction" />
+            <action id="search-keys" class="com.magicpwd.e.mwiz.SearchAction" />
         </item>
     </toolbar>
     <popmenu id="mwiz">
