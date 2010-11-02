@@ -732,4 +732,9 @@
             <item type="checkbox" text="可选输入" command="optional"/>
         </menu>
     </submenu>
+    <strokes id="mpwd">
+        <action id="hide-window" class="com.magicpwd.e.mpwd.file.HideAction">
+            <stroke key="^ Enter" />
+        </action>
+    </strokes>
 </magicpwd>

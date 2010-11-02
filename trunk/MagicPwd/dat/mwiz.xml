@@ -7,7 +7,9 @@
             <icon>
                 <default id="view-keys" path="skin/feel/%feel%/mwiz-view.png"/>
             </icon>
-            <action id="view-keys" class="com.magicpwd.e.mwiz.ViewAction" />
+            <action id="view-keys" class="com.magicpwd.e.mwiz.ViewAction">
+                <stroke key="^ V" />
+            </action>
         </item>
         <seperator />
         <!--新增-->
@@ -15,21 +17,27 @@
             <icon>
                 <default id="new-keys" path="skin/feel/%feel%/mwiz-add.png"/>
             </icon>
-            <action id="new-keys" class="com.magicpwd.e.mwiz.NewAction" />
+            <action id="new-keys" class="com.magicpwd.e.mwiz.NewAction">
+                <stroke key="^ N" />
+            </action>
         </item>
         <!--编辑-->
         <item type="normal" tips="$P30F7B02">
             <icon>
                 <default id="edit-keys" path="skin/feel/%feel%/mwiz-edit.png"/>
             </icon>
-            <action id="edit-keys" class="com.magicpwd.e.mwiz.EditAction" />
+            <action id="edit-keys" class="com.magicpwd.e.mwiz.EditAction">
+                <stroke key="^ E" />
+            </action>
         </item>
         <!--删除-->
         <item type="normal" tips="$P30F7B02">
             <icon>
                 <default id="delete-keys" path="skin/feel/%feel%/mwiz-delete.png"/>
             </icon>
-            <action id="delete-keys" class="com.magicpwd.e.mwiz.DeleteAction" />
+            <action id="delete-keys" class="com.magicpwd.e.mwiz.DeleteAction">
+                <stroke key="^ D" />
+            </action>
         </item>
         <seperator />
         <!--查询-->
@@ -37,7 +45,9 @@
             <icon>
                 <default id="search-keys" path="skin/feel/%feel%/mwiz-search.png"/>
             </icon>
-            <action id="search-keys" class="com.magicpwd.e.mwiz.SearchAction" />
+            <action id="search-keys" class="com.magicpwd.e.mwiz.SearchAction">
+                <stroke key="^ F" />
+            </action>
         </item>
     </toolbar>
     <popmenu id="mwiz">
@@ -202,4 +212,13 @@
             </item>
         </menu>
     </popmenu>
+    <strokes id="mwiz">
+        <action id="lock-window" class="com.magicpwd.e.mwiz.LockAction">
+            <stroke key="^ L" />
+        </action>
+        <action id="hide-window" class="com.magicpwd.e.mwiz.HideAction">
+            <stroke key="^ H" />
+            <stroke key="^ Enter" />
+        </action>
+    </strokes>
 </magicpwd>
