@@ -37,6 +37,7 @@ public class NormPtn extends AFrame
             menuPtn.loadData(new java.io.File("dat/mwiz.xml"));
             tb_ToolBar = menuPtn.getToolBar("mwiz", rootPane);
             pm_MenuPop = menuPtn.getPopMenu("mwiz");
+            menuPtn.getStrokes("mwiz", rootPane);
         }
         catch (Exception e)
         {

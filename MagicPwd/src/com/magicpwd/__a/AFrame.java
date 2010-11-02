@@ -34,7 +34,6 @@ public abstract class AFrame extends javax.swing.JFrame
     {
         this.trayPtn = trayPtn;
         this.userMdl = userMdl;
-        Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ENTER, java.awt.event.InputEvent.CTRL_DOWN_MASK | java.awt.event.InputEvent.SHIFT_DOWN_MASK), null, "safe", javax.swing.JComponent.WHEN_FOCUSED);
     }
 
     public static void loadPre()

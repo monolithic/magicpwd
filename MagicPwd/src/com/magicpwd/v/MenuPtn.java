@@ -314,6 +314,22 @@ public class MenuPtn
         return true;
     }
 
+    public boolean getStrokes(String strokesId, javax.swing.JComponent component)
+    {
+        if (!Char.isValidate(strokesId) || document == null)
+        {
+            return false;
+        }
+
+        Node node = document.getRootElement().selectSingleNode(Char.format("/magicpwd/strokes[@id='{0}']", strokesId));
+        if (node == null || !(node instanceof Element))
+        {
+            return false;
+        }
+        processAction((Element) node, null, component);
+        return true;
+    }
+
     private javax.swing.JMenu createMenu(Element element, javax.swing.JComponent component, IMpwdAction action)
     {
         javax.swing.JMenu menu = new javax.swing.JMenu();
@@ -826,7 +842,7 @@ public class MenuPtn
                 {
                     Bean.registerKeyStrokeAction(component, stroke, action, temp, javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
                 }
-                if (i == 0 && (button instanceof javax.swing.JMenuItem))
+                if (button != null && i == 0 && (button instanceof javax.swing.JMenuItem))
                 {
                     ((javax.swing.JMenuItem) button).setAccelerator(stroke);
                 }
@@ -843,70 +859,80 @@ public class MenuPtn
             return button;
         }
 
-        element = (Element) list.get(0);
-        String name = element.attributeValue("id");
-        boolean validate = Char.isValidate(name);
-        javax.swing.Action action = validate ? actions.get(name) : null;
-        if (action == null)
+        for (int i = 0, j = list.size(); i < j; i += 1)
         {
-            String type = element.attributeValue("class");
-            if (Char.isValidate(type))
+            element = (Element) list.get(i);
+            String name = element.attributeValue("id");
+            boolean validate = Char.isValidate(name);
+            javax.swing.Action action = validate ? actions.get(name) : null;
+            if (action == null)
             {
-                try
+                String type = element.attributeValue("class");
+                if (Char.isValidate(type))
                 {
-                    Object obj = Class.forName(type).newInstance();
-                    if (obj instanceof javax.swing.Action)
+                    try
                     {
-                        action = (javax.swing.Action) obj;
-                        if (action instanceof ITrayAction)
+                        Object obj = Class.forName(type).newInstance();
+                        if (obj instanceof javax.swing.Action)
                         {
-                            ITrayAction trayAction = (ITrayAction) action;
-                            trayAction.setTrayPtn(trayPtn);
-                            trayAction.doInit(null);
-                        }
-                        else if (action instanceof IMpwdAction)
-                        {
-                            IMpwdAction mpwdAction = (IMpwdAction) action;
-                            mpwdAction.setMainPtn(trayPtn.getMainPtn());
-                            mpwdAction.doInit(null);
-                        }
-                        else if (action instanceof IMwizAction)
-                        {
-                            IMwizAction mwizAction = (IMwizAction) action;
-                            mwizAction.setNormPtn(trayPtn.getNormPtn());
-                            mwizAction.doInit(null);
-                        }
-                        else if (action instanceof IMpadAction)
-                        {
-                            IMpadAction mpadAction = (IMpadAction) action;
-                            mpadAction.setMiniPtn(trayPtn.getMiniPtn());
-                            mpadAction.doInit(null);
-                        }
-                        if (validate)
-                        {
-                            actions.put(name, action);
+                            action = (javax.swing.Action) obj;
+                            if (action instanceof ITrayAction)
+                            {
+                                ITrayAction trayAction = (ITrayAction) action;
+                                trayAction.setTrayPtn(trayPtn);
+                                trayAction.doInit(null);
+                            }
+                            else if (action instanceof IMpwdAction)
+                            {
+                                IMpwdAction mpwdAction = (IMpwdAction) action;
+                                mpwdAction.setMainPtn(trayPtn.getMainPtn());
+                                mpwdAction.doInit(null);
+                            }
+                            else if (action instanceof IMwizAction)
+                            {
+                                IMwizAction mwizAction = (IMwizAction) action;
+                                mwizAction.setNormPtn(trayPtn.getNormPtn());
+                                mwizAction.doInit(null);
+                            }
+                            else if (action instanceof IMpadAction)
+                            {
+                                IMpadAction mpadAction = (IMpadAction) action;
+                                mpadAction.setMiniPtn(trayPtn.getMiniPtn());
+                                mpadAction.doInit(null);
+                            }
+                            if (validate)
+                            {
+                                actions.put(name, action);
+                            }
                         }
                     }
-                }
-                catch (Exception ex)
-                {
-                    Logs.exception(ex);
-                    Lang.showMesg(null, null, ex.getLocalizedMessage());
+                    catch (Exception ex)
+                    {
+                        Logs.exception(ex);
+                        Lang.showMesg(null, null, ex.getLocalizedMessage());
+                    }
                 }
             }
+            if (button != null)
+            {
+                button.addActionListener(action);
+                if (action instanceof IAction)
+                {
+                    ((IAction) action).reInit(button);
+                }
+            }
+            processStrokes(element, button, action, component);
+            processReference(element, button, action);
         }
-        button.addActionListener(action);
-        if (action instanceof IAction)
-        {
-            ((IAction) action).reInit(button);
-        }
-        processStrokes(element, button, action, component);
-        processReference(element, button, action);
         return button;
     }
 
     private javax.swing.AbstractButton processReference(Element element, javax.swing.AbstractButton button, javax.swing.Action action)
     {
+        if (button == null)
+        {
+            return button;
+        }
         java.util.List list = element.elements("property");
         if (list == null || list.size() < 1)
         {
