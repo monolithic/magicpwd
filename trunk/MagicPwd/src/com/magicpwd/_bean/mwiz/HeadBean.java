@@ -219,7 +219,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
         ta_MetaData.setText(meta.getData());
 
         IEditItem logo = keysMdl.getItemAt(ConsEnv.PWDS_HEAD_LOGO);
-        ib_KeysIcon.setIcon(Bean.getDataIcon(logo.getSpec(0)));
+        ib_KeysIcon.setIcon(Bean.getDataIcon(logo.getName()));
 
         IEditItem hint = keysMdl.getItemAt(ConsEnv.PWDS_HEAD_HINT);
         tf_HintName.setText(hint.getName());

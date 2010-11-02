@@ -8,7 +8,8 @@ import com.magicpwd._cons.ConsDat;
 import com.magicpwd.m.UserMdl;
 
 /**
- *
+ * name:徽标索引
+ * data:徽标说明
  * @author Amon
  */
 public class LogoItem extends EditItem
