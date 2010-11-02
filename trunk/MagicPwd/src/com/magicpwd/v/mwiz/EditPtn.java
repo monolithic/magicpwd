@@ -80,7 +80,6 @@ public class EditPtn extends javax.swing.JDialog
         bt_Update.setText("保存(S)");
         bt_NextStep.setText("下一步(N)");
         bt_PrevStep.setText("上一步(P)");
-        setTitle("口令编辑");
     }
 
     public void initData()
@@ -342,7 +341,7 @@ public class EditPtn extends javax.swing.JDialog
             Logs.exception(ex);
         }
 
-        normPtn.changeFocus();
+        normPtn.requestFocus();
     }
 
     private void bt_CancelActionPerformed(java.awt.event.ActionEvent evt)
@@ -355,7 +354,7 @@ public class EditPtn extends javax.swing.JDialog
             }
         }
         setVisible(false);
-        normPtn.changeFocus();
+        normPtn.requestFocus();
     }
     private java.awt.CardLayout cl_Layout;
     private javax.swing.JButton bt_Cancel;

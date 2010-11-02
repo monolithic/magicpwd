@@ -157,6 +157,13 @@ public final class MwizMdl implements javax.swing.table.TableModel, java.io.Seri
         this.keysMdl = keysMdl;
     }
 
+    public void wDelete(int index)
+    {
+        DBA3000.deletePwdsData(ls_KeysList.get(index).getP30F0104());
+        ls_KeysList.remove(index);
+        fireTableDataChanged();
+    }
+
     @Override
     public void addTableModelListener(javax.swing.event.TableModelListener l)
     {

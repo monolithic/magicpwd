@@ -263,6 +263,10 @@ public class MiniPtn extends AFrame
         return true;
     }
 
+    public void requestFocus()
+    {
+    }
+
     @Override
     public MenuPtn getMenuPtn()
     {
