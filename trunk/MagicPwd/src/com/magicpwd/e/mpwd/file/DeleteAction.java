@@ -12,10 +12,10 @@ import com.magicpwd._util.Lang;
  *
  * @author Amon
  */
-public class DropAction extends AMpwdAction
+public class DeleteAction extends AMpwdAction
 {
 
-    public DropAction()
+    public DeleteAction()
     {
     }
 

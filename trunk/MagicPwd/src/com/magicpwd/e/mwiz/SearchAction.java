@@ -16,6 +16,11 @@ public class SearchAction extends AMwizAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
+        if (e.getSource() instanceof javax.swing.AbstractButton)
+        {
+            javax.swing.AbstractButton button = (javax.swing.AbstractButton) e.getSource();
+            normPtn.setFindVisible(button.isSelected());
+        }
     }
 
     @Override

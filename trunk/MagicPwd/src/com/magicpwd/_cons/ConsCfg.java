@@ -61,11 +61,13 @@ public interface ConsCfg
     /**
      * 界面配置：是否显示工具栏
      */
-    String CFG_VIEW_TOOL = CFG_VIEW + ".tool";
+    String CFG_VIEW_TOOL = CFG_VIEW + ".tool.{0}";
     /**
      * 界面配置：工具栏显示位置
      */
     String CFG_VIEW_TOOL_LOC = CFG_VIEW_TOOL + ".loc";
+    String CFG_VIEW_TOOL_MOD = CFG_VIEW_TOOL + ".mod";
+    String CFG_VIEW_TOOL_POS = CFG_VIEW_TOOL + ".pos";
     /**
      * 界面配置：是否显示信息栏
      */

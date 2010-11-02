@@ -124,6 +124,7 @@ public class BodyBar extends javax.swing.JPanel
     {
         IEditItem item;
         javax.swing.JLabel label;
+        String name;
         for (int i = 0, j = currStep; i < ConsEnv.MWIZ_MAX_ROW; i += 1)
         {
             label = lb_EditList[i];
@@ -132,7 +133,12 @@ public class BodyBar extends javax.swing.JPanel
                 break;
             }
             item = keysMdl.getItemAt(j++);
-            Bean.setText(label, item.getName() + "(@" + i + ')');
+            name = item.getName();
+            if (com.magicpwd._util.Char.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS))
+            {
+                name = name.substring(1, name.length() - 1);
+            }
+            Bean.setText(label, name + "(@" + i + ')');
             ((IMwizBean) pl_EditList[i]).setLabelFor(label);
         }
     }
