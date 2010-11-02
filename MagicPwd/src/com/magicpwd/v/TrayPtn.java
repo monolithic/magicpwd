@@ -158,6 +158,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
             initLang();
             initData();
             mfCurrForm.toFront();
+            mfCurrForm.requestFocus();
             return true;
         }
 

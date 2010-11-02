@@ -86,6 +86,9 @@ public abstract class AFrame extends javax.swing.JFrame
      */
     public abstract boolean endSave();
 
+    @Override
+    public abstract void requestFocus();
+
     /**
      * 获取用户偏好图片
      * @param favHash

@@ -5,7 +5,10 @@
 package com.magicpwd.v.mwiz;
 
 import com.magicpwd.__a.AFrame;
+import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
+import com.magicpwd._util.Char;
+import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.m.mwiz.KeysMdl;
@@ -23,6 +26,7 @@ public class NormPtn extends AFrame
     private MenuPtn menuPtn;
     private MwizMdl mwizMdl;
     private EditPtn editPtn;
+    private String lastMeta = "";
 
     public NormPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
@@ -46,15 +50,24 @@ public class NormPtn extends AFrame
 
         tb_ToolBar.setFloatable(false);
         tb_ToolBar.setRollover(true);
-        tb_ToolBar.setVisible(false);
 
         tb_FindBar = new javax.swing.JToolBar();
         tb_FindBar.setFloatable(false);
         tb_FindBar.setRollover(true);
+        tb_FindBar.setVisible(false);
 
         tf_FindBox = new javax.swing.JTextField();
         tf_FindBox.setColumns(20);
         tb_FindBar.add(tf_FindBox);
+        tf_FindBox.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+
+            @Override
+            public void keyReleased(java.awt.event.KeyEvent e)
+            {
+                tf_FindBox_KeyReleased(e);
+            }
+        });
 
         tb_KeysList = new javax.swing.JTable();
         tb_KeysList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -131,6 +144,7 @@ public class NormPtn extends AFrame
 
     public void initLang()
     {
+        setTitle(Lang.getLang(LangRes.P30F6201, "向导模式"));
     }
 
     public void initData()
@@ -151,12 +165,14 @@ public class NormPtn extends AFrame
         int row = tb_KeysList.getSelectedRow();
         if (row < 0)
         {
+            Lang.showMesg(this, LangRes.P30F6A01, "请选择您要查看的口令！");
             return;
         }
 
         try
         {
             EditPtn editDlg = getEditPtn();
+            editDlg.setTitle(Lang.getLang(LangRes.P30F6202, "口令查看"));
             KeysMdl keysMdl = mwizMdl.getKeysMdl();
             keysMdl.loadData(mwizMdl.getKeysAt(row));
             editDlg.showData(keysMdl, false);
@@ -170,6 +186,7 @@ public class NormPtn extends AFrame
     public void appendKeys()
     {
         EditPtn editDlg = getEditPtn();
+        editDlg.setTitle(Lang.getLang(LangRes.P30F6203, "口令编辑"));
         KeysMdl keysMdl = mwizMdl.getKeysMdl();
         keysMdl.clear();
         editDlg.showData(keysMdl, true);
@@ -180,12 +197,14 @@ public class NormPtn extends AFrame
         int row = tb_KeysList.getSelectedRow();
         if (row < 0)
         {
+            Lang.showMesg(this, LangRes.P30F6A02, "请选择您要修改的口令！");
             return;
         }
 
         try
         {
             EditPtn editDlg = getEditPtn();
+            editDlg.setTitle(Lang.getLang(LangRes.P30F6203, "口令编辑"));
             KeysMdl keysMdl = mwizMdl.getKeysMdl();
             keysMdl.loadData(mwizMdl.getKeysAt(row));
             editDlg.showData(keysMdl, true);
@@ -198,16 +217,45 @@ public class NormPtn extends AFrame
 
     public void deleteKeys()
     {
+        int row = tb_KeysList.getSelectedRow();
+        if (row < 0)
+        {
+            Lang.showMesg(this, LangRes.P30F6A03, "请选择您要删除的口令！");
+            return;
+        }
+
+        try
+        {
+            mwizMdl.wDelete(row);
+            mwizMdl.getKeysMdl().clear();
+        }
+        catch (Exception ex)
+        {
+            Logs.exception(ex);
+        }
     }
 
-    public void changeFocus()
+    @Override
+    public void requestFocus()
     {
         tb_KeysList.requestFocus();
+        if (tb_KeysList.getSelectedRow() < 0)
+        {
+            tb_KeysList.setRowSelectionInterval(0, 0);
+        }
     }
 
     public void setFindVisible(boolean visible)
     {
         tb_FindBar.setVisible(visible);
+        if (visible)
+        {
+            tf_FindBox.requestFocus();
+        }
+        else
+        {
+            tb_KeysList.requestFocus();
+        }
     }
 
     private EditPtn getEditPtn()
@@ -248,6 +296,25 @@ public class NormPtn extends AFrame
 
     private void tbKeysListMouseClicked(java.awt.event.MouseEvent e)
     {
+    }
+
+    private void tf_FindBox_KeyReleased(java.awt.event.KeyEvent e)
+    {
+        String meta = tf_FindBox.getText();
+        if (lastMeta.equals(meta))
+        {
+            return;
+        }
+        lastMeta = meta;
+
+        if (Char.isValidate(meta))
+        {
+            mwizMdl.listKeysByMeta(meta);
+        }
+        else
+        {
+            mwizMdl.listKeysByKind("0");
+        }
     }
     private javax.swing.JTable tb_KeysList;
     private javax.swing.JTextField tf_FindBox;
