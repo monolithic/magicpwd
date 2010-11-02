@@ -385,7 +385,7 @@
         </item>
         <!--删除记录-->
         <item type="normal" text="$P30F7D06">
-            <action id="drop-keys" class="com.magicpwd.e.mpwd.file.DropAction" />
+            <action id="drop-keys" class="com.magicpwd.e.mpwd.file.DeleteAction" />
         </item>
         <seperator />
         <!--标记为：-->

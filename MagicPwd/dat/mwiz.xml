@@ -3,7 +3,7 @@
     <!--魔方密码工具栏-->
     <toolbar id="mwiz">
         <!--查看-->
-        <item type="normal" tips="$P30F7B01">
+        <item type="normal" text="$P30F6701" tips="$P30F6702">
             <icon>
                 <default id="view-keys" path="skin/feel/%feel%/mwiz-view.png"/>
             </icon>
@@ -13,7 +13,7 @@
         </item>
         <seperator />
         <!--新增-->
-        <item type="normal" tips="$P30F7B01">
+        <item type="normal" text="$P30F6703" tips="$P30F6704">
             <icon>
                 <default id="new-keys" path="skin/feel/%feel%/mwiz-add.png"/>
             </icon>
@@ -22,7 +22,7 @@
             </action>
         </item>
         <!--编辑-->
-        <item type="normal" tips="$P30F7B02">
+        <item type="normal" text="$P30F6705" tips="$P30F6706">
             <icon>
                 <default id="edit-keys" path="skin/feel/%feel%/mwiz-edit.png"/>
             </icon>
@@ -31,7 +31,7 @@
             </action>
         </item>
         <!--删除-->
-        <item type="normal" tips="$P30F7B02">
+        <item type="normal" text="$P30F6707" tips="$P30F6708">
             <icon>
                 <default id="delete-keys" path="skin/feel/%feel%/mwiz-delete.png"/>
             </icon>
@@ -41,7 +41,7 @@
         </item>
         <seperator />
         <!--查询-->
-        <item type="normal" tips="$P30F7B02">
+        <item id="search" type="toggle" text="$P30F6709" tips="$P30F670A">
             <icon>
                 <default id="search-keys" path="skin/feel/%feel%/mwiz-search.png"/>
             </icon>
