@@ -135,7 +135,7 @@ public class MenuPtn
         return menuBar;
     }
 
-    public javax.swing.JToolBar getToolBar(String toolId, javax.swing.JComponent component)
+    public javax.swing.JToolBar getToolBar(String toolId, javax.swing.JComponent component, String viewPtn)
     {
         if (!Char.isValidate(toolId) || document == null)
         {
@@ -164,7 +164,7 @@ public class MenuPtn
                 tmp = (Element) obj;
                 if ("item".equals(tmp.getName()))
                 {
-                    toolBar.add(createButton(tmp, component));
+                    toolBar.add(createButton(tmp, component, viewPtn));
                     continue;
                 }
                 if ("seperator".equals(tmp.getName()))
@@ -1024,7 +1024,7 @@ public class MenuPtn
         return (text != null && java.util.regex.Pattern.matches("^[$]P30F[0123456789ABCDEF]{4}$", text)) ? Lang.getLang(text, text) : text;
     }
 
-    private javax.swing.AbstractButton createButton(Element element, javax.swing.JComponent component)
+    private javax.swing.AbstractButton createButton(Element element, javax.swing.JComponent component, String viewPtn)
     {
         javax.swing.AbstractButton button = null;
         String type = element.attributeValue("type");
@@ -1043,7 +1043,22 @@ public class MenuPtn
             buttons.put(id, button);
         }
 
-        processText(element, button);
+        if (userMdl.getCfg(Char.format(ConsCfg.CFG_VIEW_TOOL_MOD, viewPtn), "icon").toLowerCase().indexOf("text") > -1)
+        {
+            String pos = userMdl.getCfg(Char.format(ConsCfg.CFG_VIEW_TOOL_POS, viewPtn), "").toLowerCase();
+            if (Char.isValidate(pos))
+            {
+                if ("top".equals(pos))
+                {
+                    button.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+                }
+                else if ("bottom".equals(pos))
+                {
+                    button.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+                }
+            }
+            processText(element, button);
+        }
         processTips(element, button);
         processIcon(element, button);
         processEnabled(element, button);

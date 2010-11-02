@@ -35,7 +35,7 @@ public class NormPtn extends AFrame
         try
         {
             menuPtn.loadData(new java.io.File("dat/mwiz.xml"));
-            tb_ToolBar = menuPtn.getToolBar("mwiz", rootPane);
+            tb_ToolBar = menuPtn.getToolBar("mwiz", rootPane, "mwiz");
             pm_MenuPop = menuPtn.getPopMenu("mwiz");
             menuPtn.getStrokes("mwiz", rootPane);
         }
@@ -46,6 +46,7 @@ public class NormPtn extends AFrame
 
         tb_ToolBar.setFloatable(false);
         tb_ToolBar.setRollover(true);
+        tb_ToolBar.setVisible(false);
 
         tb_FindBar = new javax.swing.JToolBar();
         tb_FindBar.setFloatable(false);
@@ -197,6 +198,16 @@ public class NormPtn extends AFrame
 
     public void deleteKeys()
     {
+    }
+
+    public void changeFocus()
+    {
+        tb_KeysList.requestFocus();
+    }
+
+    public void setFindVisible(boolean visible)
+    {
+        tb_FindBar.setVisible(visible);
     }
 
     private EditPtn getEditPtn()

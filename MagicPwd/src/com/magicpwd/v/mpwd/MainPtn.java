@@ -111,8 +111,8 @@ public class MainPtn extends AFrame
         menuBar = menuPtn.getMenuBar("mpwd", rootPane);
         this.setJMenuBar(menuBar);
 
-        toolBar = menuPtn.getToolBar("mpwd", rootPane);
-        this.getContentPane().add(toolBar, userMdl.getToolLoc());
+        toolBar = menuPtn.getToolBar("mpwd", rootPane, "mpwd");
+        this.getContentPane().add(toolBar, userMdl.getToolLoc("mpwd"));
 
         this.setIconImage(Bean.getLogo(16));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -133,7 +133,7 @@ public class MainPtn extends AFrame
         setMenuVisible(userMdl.isMenuVisible());
 
         // 工具栏
-        setToolVisible(userMdl.isToolVisible());
+        setToolVisible(userMdl.isToolVisible("mpwd"));
 
         // 搜索栏
         mainFind.initData();
@@ -354,7 +354,7 @@ public class MainPtn extends AFrame
     public void setToolVisible(boolean visible)
     {
         toolBar.setVisible(visible);
-        userMdl.setToolVisible(visible);
+        userMdl.setToolVisible("mpwd", visible);
     }
 
     public javax.swing.tree.TreePath getSelectedKindValue()

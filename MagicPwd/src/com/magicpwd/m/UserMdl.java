@@ -90,20 +90,7 @@ public class UserMdl
 
     public final void loadDef()
     {
-        userCfg.setProperty(ConsCfg.CFG_VIEW_TOPS, ConsCfg.DEF_FALSE);
-        userCfg.setProperty(ConsCfg.CFG_VIEW_MENU, ConsCfg.DEF_TRUE);
-        userCfg.setProperty(ConsCfg.CFG_VIEW_TOOL, ConsCfg.DEF_FALSE);
-        userCfg.setProperty(ConsCfg.CFG_VIEW_INFO, ConsCfg.DEF_FALSE);
-        userCfg.setProperty(ConsCfg.CFG_VIEW_FIND, ConsCfg.DEF_TRUE);
-        userCfg.setProperty(ConsCfg.CFG_VIEW_TOOL_LOC, "North");
-
-        userCfg.setProperty(ConsCfg.CFG_STAY_TIME, ConsCfg.DEF_STAY_TIME);
-
-        userCfg.setProperty(ConsCfg.CFG_PWDS_SIZE, ConsCfg.DEF_PWDS_SIZE);
-        userCfg.setProperty(ConsCfg.CFG_PWDS_HASH, ConsCfg.DEF_PWDS_HASH);
-
-        userCfg.setProperty(ConsCfg.CFG_BACK_SIZE, "3");
-        userCfg.setProperty(ConsCfg.CFG_BACK_PATH, ConsEnv.DIR_BAK);
+        userCfg.clear();
     }
 
     public final void saveCfg()
@@ -166,18 +153,18 @@ public class UserMdl
     /**
      * @return the toolViw
      */
-    public final boolean isToolVisible()
+    public final boolean isToolVisible(String viewPtn)
     {
-        return ConsCfg.DEF_TRUE.equalsIgnoreCase(userCfg.getProperty(ConsCfg.CFG_VIEW_TOOL));
+        return ConsCfg.DEF_TRUE.equalsIgnoreCase(userCfg.getProperty(Char.format(ConsCfg.CFG_VIEW_TOOL, viewPtn)));
     }
 
     /**
      * @param visible
      *            the toolViw to set
      */
-    public final void setToolVisible(boolean visible)
+    public final void setToolVisible(String viewPtn, boolean visible)
     {
-        userCfg.setProperty(ConsCfg.CFG_VIEW_TOOL, visible ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
+        userCfg.setProperty(Char.format(ConsCfg.CFG_VIEW_TOOL, viewPtn), visible ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
     /**
@@ -217,18 +204,18 @@ public class UserMdl
     /**
      * @return the toolLoc
      */
-    public final String getToolLoc()
+    public final String getToolLoc(String viewPtn)
     {
-        return userCfg.getProperty(ConsCfg.CFG_VIEW_TOOL_LOC, "North");
+        return userCfg.getProperty(Char.format(ConsCfg.CFG_VIEW_TOOL_LOC, viewPtn), "North");
     }
 
     /**
      * @param toolLoc
      *            the toolLoc to set
      */
-    public final void setToolLoc(String toolLoc)
+    public final void setToolLoc(String viewPtn, String toolLoc)
     {
-        userCfg.setProperty(ConsCfg.CFG_VIEW_TOOL_LOC, toolLoc);
+        userCfg.setProperty(Char.format(ConsCfg.CFG_VIEW_TOOL_LOC, viewPtn), toolLoc);
     }
 
     /**

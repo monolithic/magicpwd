@@ -20,7 +20,7 @@ public class ToolVisibleAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !mainPtn.getUserMdl().isToolVisible();
+        boolean b = !mainPtn.getUserMdl().isToolVisible("mpwd");
         mainPtn.setToolVisible(b);
         mainPtn.pack();
     }
@@ -28,7 +28,7 @@ public class ToolVisibleAction extends AMpwdAction
     @Override
     public void doInit(Object object)
     {
-        setSelected(mainPtn.getUserMdl().isToolVisible());
+        setSelected(mainPtn.getUserMdl().isToolVisible("mpwd"));
     }
 
     @Override

@@ -341,11 +341,13 @@ public class EditPtn extends javax.swing.JDialog
         {
             Logs.exception(ex);
         }
+
+        normPtn.changeFocus();
     }
 
     private void bt_CancelActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (currStep > -2)
+        if (canEdit && currStep > -2)
         {
             if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(this, null, null))
             {
@@ -353,6 +355,7 @@ public class EditPtn extends javax.swing.JDialog
             }
         }
         setVisible(false);
+        normPtn.changeFocus();
     }
     private java.awt.CardLayout cl_Layout;
     private javax.swing.JButton bt_Cancel;
