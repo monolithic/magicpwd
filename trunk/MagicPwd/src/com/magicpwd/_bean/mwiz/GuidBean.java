@@ -144,7 +144,7 @@ public class GuidBean extends javax.swing.JPanel
 
         if (keysMdl.getItemSize() < 1)
         {
-            keysMdl.initHead();
+            keysMdl.initGuid();
         }
 
         IEditItem item = keysMdl.getItemAt(ConsEnv.PWDS_HEAD_GUID);
@@ -202,7 +202,7 @@ public class GuidBean extends javax.swing.JPanel
         guidItem.setSpec(IEditItem.SPEC_GUID_TPLT, tplt.getP30F1103());
         if (keysMdl.getItemSize() <= ConsEnv.PWDS_HEAD_SIZE)
         {
-            keysMdl.initBody();
+            keysMdl.initHead();
         }
         return true;
     }
