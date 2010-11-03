@@ -66,6 +66,22 @@ public class KeysMdl extends SafeMdl
         keys.setDefault();
     }
 
+    public void clear(int sIndex)
+    {
+        clear(sIndex, ls_ItemList.size() - 1);
+    }
+
+    public void clear(int sIndex, int eIndex)
+    {
+        if (sIndex >= 0 && eIndex >= sIndex)
+        {
+            while (eIndex >= sIndex)
+            {
+                ls_ItemList.remove(eIndex--);
+            }
+        }
+    }
+
     public boolean isUpdate()
     {
         return Char.isValidateHash(keys.getP30F0104());
