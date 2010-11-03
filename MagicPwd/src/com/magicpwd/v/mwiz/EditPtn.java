@@ -19,6 +19,7 @@ package com.magicpwd.v.mwiz;
 import com.magicpwd._bean.mwiz.GuidBean;
 import com.magicpwd._bean.mwiz.HeadBean;
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -49,6 +50,7 @@ public class EditPtn extends javax.swing.JDialog
     {
         super(normPtn, false);
         this.normPtn = normPtn;
+        ls_BodyList = new java.util.ArrayList<BodyBar>(5);
     }
 
     public void initView()
@@ -76,10 +78,10 @@ public class EditPtn extends javax.swing.JDialog
         guidBean.initLang();
         headBean.initLang();
 
-        bt_Cancel.setText("取消(C)");
-        bt_Update.setText("保存(S)");
-        bt_NextStep.setText("下一步(N)");
-        bt_PrevStep.setText("上一步(P)");
+        Bean.setText(bt_PrevStep, Lang.getLang(LangRes.P30F6501, "上一步(@P)"));
+        Bean.setText(bt_NextStep, Lang.getLang(LangRes.P30F6502, "下一步(@N)"));
+        Bean.setText(bt_Update, Lang.getLang(LangRes.P30F6503, "保存(@S)"));
+        Bean.setText(bt_Cancel, Lang.getLang(LangRes.P30F6504, "取消(@C)"));
     }
 
     public void initData()
@@ -104,17 +106,12 @@ public class EditPtn extends javax.swing.JDialog
     {
         int indx = 0;
         int step = ConsEnv.PWDS_HEAD_SIZE;
-        if (ls_BodyList == null)
-        {
-            ls_BodyList = new java.util.ArrayList<BodyBar>(5);
-        }
-        else
-        {
-            ls_BodyList.clear();
+
+        ls_BodyList.clear();
 //            pl_EditArea.removeAll();
 //            pl_EditArea.add("guid", guidBean);
 //            pl_EditArea.add("head", headBean);
-        }
+
         while (step < keysMdl.getItemSize())
         {
             BodyBar bar = new BodyBar(normPtn, keysMdl);
@@ -241,26 +238,35 @@ public class EditPtn extends javax.swing.JDialog
     private void initGuidView()
     {
         currStep = -2;
+
         cl_Layout.show(pl_EditArea, "guid");
         guidBean.showData(keysMdl);
+
         bt_PrevStep.setVisible(false);
         bt_NextStep.setVisible(true);
+        bt_Update.setVisible(false);
     }
 
     private void initHeadView()
     {
         currStep = -1;
+
         cl_Layout.show(pl_EditArea, "head");
         headBean.showData(keysMdl);
+
+        boolean end = ls_BodyList.size() - 1 <= currStep;
         bt_PrevStep.setVisible(true);
-        bt_NextStep.setVisible(ls_BodyList.size() > 0);
+        bt_NextStep.setVisible(!keysMdl.isUpdate() || !end);
+        bt_Update.setVisible(canEdit && (keysMdl.isUpdate() || end));
     }
 
     private void prevBodyView()
     {
         currStep -= 1;
+
         cl_Layout.show(pl_EditArea, "body" + currStep);
         ls_BodyList.get(currStep).showData();
+
         boolean end = ls_BodyList.size() - 1 <= currStep;
         bt_NextStep.setVisible(!end);
         bt_Update.setVisible(canEdit && (keysMdl.isUpdate() || end));
@@ -269,8 +275,10 @@ public class EditPtn extends javax.swing.JDialog
     private void nextBodyView()
     {
         currStep += 1;
+
         cl_Layout.show(pl_EditArea, "body" + currStep);
         ls_BodyList.get(currStep).showData();
+
         boolean end = ls_BodyList.size() - 1 <= currStep;
         bt_NextStep.setVisible(!end);
         bt_Update.setVisible(canEdit && (keysMdl.isUpdate() || end));
@@ -281,6 +289,10 @@ public class EditPtn extends javax.swing.JDialog
         if (currStep == -1)
         {
             initGuidView();
+            if (!keysMdl.isUpdate())
+            {
+                keysMdl.clear(1);
+            }
             bt_Update.setVisible(false);
             bt_PrevStep.setVisible(false);
             return;
@@ -301,8 +313,6 @@ public class EditPtn extends javax.swing.JDialog
         {
             if (guidBean.saveData())
             {
-                initBody();
-
                 initHeadView();
             }
             return;
@@ -312,6 +322,8 @@ public class EditPtn extends javax.swing.JDialog
         {
             if (headBean.saveData())
             {
+                initBody();
+
                 nextBodyView();
             }
             return;
