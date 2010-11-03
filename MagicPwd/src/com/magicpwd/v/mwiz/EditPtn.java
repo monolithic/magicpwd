@@ -107,6 +107,10 @@ public class EditPtn extends javax.swing.JDialog
         int indx = 0;
         int step = ConsEnv.PWDS_HEAD_SIZE;
 
+        if (keysMdl.getItemSize() <= ConsEnv.PWDS_HEAD_SIZE)
+        {
+            keysMdl.initBody();
+        }
         ls_BodyList.clear();
 //            pl_EditArea.removeAll();
 //            pl_EditArea.add("guid", guidBean);
@@ -257,7 +261,7 @@ public class EditPtn extends javax.swing.JDialog
         boolean end = ls_BodyList.size() - 1 <= currStep;
         bt_PrevStep.setVisible(true);
         bt_NextStep.setVisible(!keysMdl.isUpdate() || !end);
-        bt_Update.setVisible(canEdit && (keysMdl.isUpdate() || end));
+        bt_Update.setVisible(canEdit && (keysMdl.isUpdate() && end));
     }
 
     private void prevBodyView()
@@ -337,9 +341,19 @@ public class EditPtn extends javax.swing.JDialog
 
     private void bt_UpdateActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (!ls_BodyList.get(currStep).saveData())
+        if (currStep == -1)
         {
-            return;
+            if (!headBean.saveData())
+            {
+                return;
+            }
+        }
+        else if (currStep >= 0)
+        {
+            if (!ls_BodyList.get(currStep).saveData())
+            {
+                return;
+            }
         }
 
         try
@@ -358,15 +372,34 @@ public class EditPtn extends javax.swing.JDialog
 
     private void bt_CancelActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (canEdit && currStep > -2)
+        closeWindow();
+    }
+
+    @Override
+    protected void processWindowEvent(java.awt.event.WindowEvent e)
+    {
+        if (e.getID() == java.awt.event.WindowEvent.WINDOW_CLOSING)
         {
-            if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(this, null, null))
+            if (!closeWindow())
             {
                 return;
             }
         }
+        super.processWindowEvent(e);
+    }
+
+    private boolean closeWindow()
+    {
+        if (canEdit && currStep > -2)
+        {
+            if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(this, LangRes.P30F6A04, "您的口令数据尚未保存，确认放弃修改吗？"))
+            {
+                return false;
+            }
+        }
         setVisible(false);
         normPtn.requestFocus();
+        return true;
     }
     private java.awt.CardLayout cl_Layout;
     private javax.swing.JButton bt_Cancel;

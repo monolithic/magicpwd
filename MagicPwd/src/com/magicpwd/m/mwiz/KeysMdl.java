@@ -46,16 +46,14 @@ public class KeysMdl extends SafeMdl
     @Override
     public void initHead()
     {
-        initGuid();
+        initMeta();
+        initLogo();
+        initHint();
     }
 
     @Override
     public void initBody()
     {
-        initMeta();
-        initLogo();
-        initHint();
-
         DBA3000.selectTpltData(userMdl, ls_ItemList.get(ConsEnv.PWDS_HEAD_GUID).getSpec(IEditItem.SPEC_GUID_TPLT), ls_ItemList);
     }
 
