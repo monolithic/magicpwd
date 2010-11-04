@@ -129,7 +129,8 @@ public class MainPtn extends AFrame
     }
 
     public void initData()
-    {        // 菜单栏
+    {
+        // 菜单栏
         setMenuVisible(userMdl.isMenuVisible());
 
         // 工具栏
@@ -150,6 +151,13 @@ public class MainPtn extends AFrame
         {
             bean.initData();
         }
+
+        if (userMdl.isEditVisible())
+        {
+            showPropInfo();
+        }
+        setEditIsolate(userMdl.isEditIsolate());
+        setEditVisible(userMdl.isEditVisible());
 
         // 列表菜单
         WButtonGroup group = menuPtn.getGroup("order-dir");
