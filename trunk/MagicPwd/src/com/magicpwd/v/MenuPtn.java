@@ -4,6 +4,7 @@
  */
 package com.magicpwd.v;
 
+import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IAction;
 import com.magicpwd.__i.mpwd.IMpwdAction;
 import com.magicpwd._comp.WButtonGroup;
@@ -38,16 +39,23 @@ public class MenuPtn
 
     private Document document;
     private TrayPtn trayPtn;
+    private AFrame formPtn;
     private UserMdl userMdl;
     private java.util.regex.Pattern pattern;
     private java.util.HashMap<String, javax.swing.AbstractButton> buttons;
     private java.util.HashMap<String, javax.swing.Action> actions;
     private java.util.HashMap<String, WButtonGroup> groups;
 
+    public MenuPtn(TrayPtn trayPtn, AFrame formPtn)
+    {
+        this(trayPtn, formPtn.getUserMdl());
+        this.formPtn = formPtn;
+    }
+
     public MenuPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
         this.trayPtn = trayPtn;
-        this.userMdl = userMdl;
+        this.userMdl = formPtn.getUserMdl();
         buttons = new java.util.HashMap<String, javax.swing.AbstractButton>();
         actions = new java.util.HashMap<String, javax.swing.Action>();
         groups = new java.util.HashMap<String, WButtonGroup>();
@@ -986,9 +994,9 @@ public class MenuPtn
     {
         String hash = element.attributeValue("cache-id");
         boolean validate = Char.isValidate(hash);
-        if (validate)
+        if (validate && formPtn != null)
         {
-            javax.swing.Icon icon = trayPtn.getCurrForm().getFavIcon(hash);
+            javax.swing.Icon icon = formPtn.getFavIcon(hash);
             if (icon != null)
             {
                 return icon;
@@ -999,9 +1007,9 @@ public class MenuPtn
         if (Char.isValidate(path))
         {
             javax.swing.ImageIcon icon = userMdl.readIcon(path);
-            if (validate)
+            if (validate && formPtn != null)
             {
-                trayPtn.getCurrForm().setFavIcon(hash, icon);
+                formPtn.setFavIcon(hash, icon);
             }
             return icon;
         }
