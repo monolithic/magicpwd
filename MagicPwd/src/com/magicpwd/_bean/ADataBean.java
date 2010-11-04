@@ -41,6 +41,8 @@ public abstract class ADataBean extends AEditBean
 
     protected void initConfView()
     {
+        tf_PropData = new javax.swing.JTextField();
+
         pl_PropConf = new javax.swing.JPanel();
         pl_PropConf.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 

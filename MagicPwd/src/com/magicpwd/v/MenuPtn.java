@@ -893,18 +893,21 @@ public class MenuPtn
                             else if (action instanceof IMpwdAction)
                             {
                                 IMpwdAction mpwdAction = (IMpwdAction) action;
+                                mpwdAction.setTrayPtn(trayPtn);
                                 mpwdAction.setMainPtn(trayPtn.getMainPtn());
                                 mpwdAction.doInit(null);
                             }
                             else if (action instanceof IMwizAction)
                             {
                                 IMwizAction mwizAction = (IMwizAction) action;
+                                mwizAction.setTrayPtn(trayPtn);
                                 mwizAction.setNormPtn(trayPtn.getNormPtn());
                                 mwizAction.doInit(null);
                             }
                             else if (action instanceof IMpadAction)
                             {
                                 IMpadAction mpadAction = (IMpadAction) action;
+                                mpadAction.setTrayPtn(trayPtn);
                                 mpadAction.setMiniPtn(trayPtn.getMiniPtn());
                                 mpadAction.doInit(null);
                             }
