@@ -104,12 +104,18 @@ public class UserMdl
             Bean.closeStream(fis);
         }
 
+        String mode = userCfg.getProperty(ConsCfg.CFG_MODE_APP, "1");
+        if (Char.isValidateInteger(mode))
+        {
+            appMode = Integer.parseInt(mode);
+        }
         safeKey = new SafeKey(this);
     }
 
     public final void loadDef()
     {
         userCfg.clear();
+        appMode = 1;
     }
 
     public final void saveCfg()
@@ -118,6 +124,7 @@ public class UserMdl
         try
         {
             fos = new java.io.FileOutputStream(new java.io.File(ConsEnv.DIR_DAT, ConsEnv.FILE_DATA + ".config"));
+            userCfg.setProperty(ConsCfg.CFG_MODE_APP, Integer.toString(appMode));
             userCfg.store(fos, "MagicPwd User Configure File!");
         }
         catch (Exception exp)

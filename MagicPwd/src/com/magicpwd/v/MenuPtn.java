@@ -55,7 +55,7 @@ public class MenuPtn
     public MenuPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
         this.trayPtn = trayPtn;
-        this.userMdl = formPtn.getUserMdl();
+        this.userMdl = userMdl;
         buttons = new java.util.HashMap<String, javax.swing.AbstractButton>();
         actions = new java.util.HashMap<String, javax.swing.Action>();
         groups = new java.util.HashMap<String, WButtonGroup>();
