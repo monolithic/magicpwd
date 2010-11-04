@@ -1071,6 +1071,11 @@ public class UserPtn extends javax.swing.JPanel
             return;
         }
 
+        Object object = cb_UserType.getSelectedItem();
+        if (object instanceof S1S1)
+        {
+            UserMdl.setAppMode(((S1S1) object).getK());
+        }
         if (backCall != null)
         {
             backCall.callBack(null, null, ConsEnv.STR_SIGN_IN);

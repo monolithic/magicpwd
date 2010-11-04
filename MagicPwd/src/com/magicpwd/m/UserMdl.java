@@ -63,6 +63,25 @@ public class UserMdl
         UserMdl.appMode = appMode;
     }
 
+    public static void setAppMode(String appMode)
+    {
+        if (Char.isValidate(appMode))
+        {
+            if ("mpwd".equalsIgnoreCase(appMode))
+            {
+                UserMdl.appMode = ConsEnv.APP_MODE_MPWD;
+            }
+            else if ("mwiz".equalsIgnoreCase(appMode))
+            {
+                UserMdl.appMode = ConsEnv.APP_MODE_MWIZ;
+            }
+            else if ("mpad".equalsIgnoreCase(appMode))
+            {
+                UserMdl.appMode = ConsEnv.APP_MODE_MPAD;
+            }
+        }
+    }
+
     public final void loadCfg()
     {
         userCfg = new java.util.Properties();
