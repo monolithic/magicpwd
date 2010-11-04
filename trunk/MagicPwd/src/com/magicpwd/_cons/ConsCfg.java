@@ -163,6 +163,9 @@ public interface ConsCfg
      * 界面默认等等时间
      */
     String CFG_STAY_TIME = CFG_PRE + ".safe.time";
+    String CFG_MODE = CFG_PRE + ".mode";
+    String CFG_MODE_APP = CFG_MODE + ".app";
+    String CFG_MODE_RUN = CFG_MODE + ".run";
     /**
      * 默认数据：是
      */

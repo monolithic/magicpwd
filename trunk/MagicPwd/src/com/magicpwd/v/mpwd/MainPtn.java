@@ -92,9 +92,8 @@ public class MainPtn extends AFrame
 
         try
         {
-            java.io.File file = new java.io.File(userMdl.getDataDir(), "mpwd.xml");
             menuPtn = new MenuPtn(trayPtn, this);
-            menuPtn.loadData(file);
+            menuPtn.loadData(new java.io.File(userMdl.getDataDir(), "mpwd.xml"));
         }
         catch (Exception exp)
         {
@@ -131,7 +130,7 @@ public class MainPtn extends AFrame
     public void initData()
     {
         super.setVisible(true);
-        
+
         // 菜单栏
         setMenuVisible(userMdl.isMenuVisible());
 

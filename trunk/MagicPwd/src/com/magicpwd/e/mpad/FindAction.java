@@ -20,7 +20,7 @@ public class FindAction extends AMpadAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        miniPtn.findNote();
+        miniPtn.requestFocus();
     }
 
     @Override

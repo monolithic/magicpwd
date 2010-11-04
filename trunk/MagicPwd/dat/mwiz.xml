@@ -220,5 +220,11 @@
             <stroke key="^ H" />
             <stroke key="^ Enter" />
         </action>
+        <action id="show-mpwd" class="com.magicpwd.e.tray.MpwdAction">
+            <stroke key="^ # P" />
+        </action>
+        <action id="show-mpad" class="com.magicpwd.e.tray.MpadAction">
+            <stroke key="^ # N" />
+        </action>
     </strokes>
 </magicpwd>

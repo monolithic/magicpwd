@@ -34,6 +34,7 @@ public class MiniPtn extends AFrame
     private java.awt.CardLayout infoLayout;
     private java.util.List<S1S2> noteList;
     private MpadMdl mpadMdl;
+    private MenuPtn menuPtn;
     private WTextBox nameBox;
     private WTextBox dataBox;
 
@@ -205,27 +206,16 @@ public class MiniPtn extends AFrame
         nameBox.initData();
         dataBox.initData();
 
-        javax.swing.Action action = new javax.swing.AbstractAction()
+        menuPtn = new MenuPtn(trayPtn, this);
+        try
         {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                setVisible(false);
-                trayPtn.showViewPtn(ConsEnv.APP_MODE_MPWD);
-            }
-        };
-        Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_P, java.awt.event.InputEvent.CTRL_DOWN_MASK | java.awt.event.InputEvent.ALT_DOWN_MASK), action, "showMainPtn", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
-
-        action = new javax.swing.AbstractAction()
+            menuPtn.loadData(new java.io.File(userMdl.getDataDir(), "mpad.xml"));
+            menuPtn.getStrokes("mpad", rootPane);
+        }
+        catch (Exception e)
         {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-            }
-        };
-        Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_DOWN_MASK | java.awt.event.InputEvent.ALT_DOWN_MASK), action, "showNormPtn", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
+            Logs.exception(e);
+        }
     }
 
     private void cb_NoteInfoItemStateChanged(java.awt.event.ItemEvent evt)
@@ -265,8 +255,10 @@ public class MiniPtn extends AFrame
         return true;
     }
 
+    @Override
     public void requestFocus()
     {
+        tf_NoteName.requestFocus();
     }
 
     @Override
