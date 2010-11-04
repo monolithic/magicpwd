@@ -35,7 +35,7 @@ public class NormPtn extends AFrame
 
     public void initView()
     {
-        menuPtn = new MenuPtn(trayPtn, userMdl);
+        menuPtn = new MenuPtn(trayPtn, this);
         try
         {
             menuPtn.loadData(new java.io.File("dat/mwiz.xml"));

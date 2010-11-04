@@ -93,7 +93,7 @@ public class MainPtn extends AFrame
         try
         {
             java.io.File file = new java.io.File(userMdl.getDataDir(), "mpwd.xml");
-            menuPtn = new MenuPtn(trayPtn, userMdl);
+            menuPtn = new MenuPtn(trayPtn, this);
             menuPtn.loadData(file);
         }
         catch (Exception exp)
