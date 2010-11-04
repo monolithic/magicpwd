@@ -5,7 +5,7 @@
         <menu id="file" text="$P30F7601">
             <!--新增-->
             <item type="normal" text="$P30F7602">
-                <action id="new-keys" class="com.magicpwd.e.mpwd.file.NewAction">
+                <action id="new-keys" class="com.magicpwd.e.mpwd.file.AppendAction">
                     <stroke key="^ N" />
                 </action>
             </item>
@@ -153,13 +153,13 @@
             <seperator />
             <!--切换到《迷你账簿》-->
             <item type="normal" text="$P30F7638" visible="false">
-                <action class="com.magicpwd.e.MpayAction">
+                <action class="com.magicpwd.e.tray.MpayAction">
                     <stroke key="^ # F" />
                 </action>
             </item>
             <!--切换到《记事便签》-->
             <item type="normal" text="$P30F7639">
-                <action class="com.magicpwd.e.MpadAction">
+                <action class="com.magicpwd.e.tray.MpadAction">
                     <stroke key="^ # N" />
                 </action>
             </item>
@@ -236,35 +236,35 @@
         <menu id="help" text="$P30F7629">
             <!--帮助-->
             <item type="normal" text="$P30F762A">
-                <action class="com.magicpwd.e.HelpAction">
+                <action class="com.magicpwd.e.tray.HelpAction">
                     <stroke key="F1" />
                 </action>
             </item>
             <seperator />
             <!--软件首页-->
             <item type="normal" text="$P30F762B">
-                <action class="com.magicpwd.e.SiteAction">
+                <action class="com.magicpwd.e.tray.SiteAction">
                     <stroke key="F2" />
                 </action>
             </item>
             <!--博客-->
             <item type="normal" text="$P30F762C">
-                <action class="com.magicpwd.e.BlogAction" />
+                <action class="com.magicpwd.e.tray.BlogAction" />
             </item>
             <!--微博-->
             <item type="normal" text="$P30F762D">
-                <action class="com.magicpwd.e.MlogAction" />
+                <action class="com.magicpwd.e.tray.MlogAction" />
             </item>
             <!--联系作者-->
             <item type="normal" text="$P30F762E">
-                <action class="com.magicpwd.e.MailAction">
+                <action class="com.magicpwd.e.tray.MailAction">
                     <stroke key="F3" />
                 </action>
             </item>
             <seperator />
             <!--检测更新-->
             <item type="normal" text="$P30F762F">
-                <action class="com.magicpwd.e.UpdtAction">
+                <action class="com.magicpwd.e.tray.UpdtAction">
                     <stroke key="F4" />
                 </action>
             </item>
@@ -302,7 +302,7 @@
             <icon>
                 <default id="file-new" path="skin/feel/%feel%/file-new.png"/>
             </icon>
-            <action id="new-keys" class="com.magicpwd.e.mpwd.file.NewAction" />
+            <action id="new-keys" class="com.magicpwd.e.mpwd.file.AppendAction" />
         </item>
         <!--保存-->
         <item type="normal" tips="$P30F7B02">
@@ -354,7 +354,7 @@
             <icon>
                 <default id="file-help" path="skin/feel/%feel%/help.png"/>
             </icon>
-            <action class="com.magicpwd.e.HelpAction" />
+            <action class="com.magicpwd.e.tray.HelpAction" />
         </item>
     </toolbar>
 
@@ -381,7 +381,7 @@
     <popmenu id="list">
         <!--添加记录-->
         <item type="normal" text="$P30F7D05">
-            <action id="new-keys" class="com.magicpwd.e.mpwd.file.NewAction" />
+            <action id="new-keys" class="com.magicpwd.e.mpwd.file.AppendAction" />
         </item>
         <!--删除记录-->
         <item type="normal" text="$P30F7D06">

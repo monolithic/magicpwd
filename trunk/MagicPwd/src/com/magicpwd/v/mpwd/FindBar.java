@@ -5,7 +5,6 @@ package com.magicpwd.v.mpwd;
 
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
-import com.magicpwd.m.mpwd.ListMdl;
 import java.awt.event.FocusEvent;
 
 /**
@@ -16,12 +15,10 @@ public class FindBar extends javax.swing.JPanel
 {
 
     private MainPtn mainPtn;
-    private ListMdl listMdl;
 
-    public FindBar(MainPtn mainPtn, ListMdl listMdl)
+    public FindBar(MainPtn mainPtn)
     {
         this.mainPtn = mainPtn;
-        this.listMdl = listMdl;
     }
 
     public void initView()
@@ -114,7 +111,7 @@ public class FindBar extends javax.swing.JPanel
             return;
         }
 
-        boolean b = listMdl.listKeysByMeta(text);
+        boolean b = mainPtn.getListMdl().listKeysByMeta(text);
         if (!b)
         {
             Lang.showMesg(mainPtn, LangRes.P30F7A19, "查询不到符合您条件的数据，请用空格或加号分隔您的搜索关键字后重试！");

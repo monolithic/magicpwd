@@ -20,7 +20,6 @@ import com.magicpwd.v.mpwd.MainPtn;
 public class DataBean extends ADataBean implements IMpwdBean
 {
 
-    private IEditItem itemData;
     private WEditBox dataEdit;
     private MainPtn mainPtn;
     private WTextBox nameBox;

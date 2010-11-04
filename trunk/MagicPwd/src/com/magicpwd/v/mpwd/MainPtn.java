@@ -18,6 +18,7 @@ import com.magicpwd._bean.mpwd.LinkBean;
 import com.magicpwd._bean.mpwd.MailBean;
 import com.magicpwd._bean.mpwd.MetaBean;
 import com.magicpwd._bean.mpwd.HintBean;
+import com.magicpwd._bean.mpwd.ListBean;
 import com.magicpwd._bean.mpwd.PwdsBean;
 import com.magicpwd._bean.mpwd.TextBean;
 import com.magicpwd._comn.I1S2;
@@ -115,6 +116,8 @@ public class MainPtn extends AFrame
 
         this.setIconImage(Bean.getLogo(16));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        pack();
+        Bean.centerForm(this, null);
     }
 
     public void initLang()
@@ -130,6 +133,19 @@ public class MainPtn extends AFrame
     public void initData()
     {
         super.setVisible(true);
+
+        mpwdMdl = new MpwdMdl(userMdl);
+        mpwdMdl.init();
+
+        safeMdl = mpwdMdl.getGridMdl();
+
+        tr_GuidTree.setModel(mpwdMdl.getTreeMdl());
+        ls_GuidList.setModel(mpwdMdl.getListMdl());
+
+        tb_KeysView.setModel(mpwdMdl.getGridMdl());
+        int w = tb_KeysView.getFontMetrics(tb_KeysView.getFont()).stringWidth("999999");
+        tb_KeysView.getColumnModel().getColumn(0).setPreferredWidth(w);
+        tb_KeysView.getColumnModel().getColumn(1).setPreferredWidth(365 - w);
 
         // 菜单栏
         setMenuVisible(userMdl.isMenuVisible());
@@ -171,11 +187,6 @@ public class MainPtn extends AFrame
         {
             group.setSelected(userMdl.getCfg(ConsCfg.CFG_VIEW_LIST_KEY, "01"), true);
         }
-
-        mpwdMdl = new MpwdMdl(userMdl);
-        safeMdl = mpwdMdl.getGridMdl();
-        pack();
-        Bean.centerForm(this, null);
     }
 
     public boolean newKeys()
@@ -563,6 +574,11 @@ public class MainPtn extends AFrame
         pl_CardProp.add(ConsEnv.BEAN_DATA, beanData);
         mpwdBean[idx++] = beanData;
 
+        ListBean beanList = new ListBean(this);
+        beanList.initView();
+        pl_CardProp.add(ConsEnv.BEAN_LIST, beanList);
+        mpwdBean[idx++] = beanList;
+
         GuidBean beanGuid = new GuidBean(this);
         beanGuid.initView();
         pl_CardProp.add(ConsEnv.BEAN_GUID, beanGuid);
@@ -604,7 +620,6 @@ public class MainPtn extends AFrame
         tr_GuidTree = new javax.swing.JTree();
         tr_GuidTree.setComponentPopupMenu(kindPop);
         tr_GuidTree.setCellRenderer(new TreeCR());
-        tr_GuidTree.setModel(mpwdMdl.getTreeMdl());
         tr_GuidTree.getSelectionModel().setSelectionMode(javax.swing.tree.TreeSelectionModel.SINGLE_TREE_SELECTION);
         javax.swing.ToolTipManager.sharedInstance().registerComponent(tr_GuidTree);
         tr_GuidTree.addTreeSelectionListener(new javax.swing.event.TreeSelectionListener()
@@ -625,7 +640,6 @@ public class MainPtn extends AFrame
 
         ls_GuidList = new javax.swing.JList();
         ls_GuidList.setCellRenderer(new KeysCR(this));
-        ls_GuidList.setModel(mpwdMdl.getListMdl());
         ls_GuidList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         ls_GuidList.addMouseListener(new java.awt.event.MouseAdapter()
         {
@@ -670,13 +684,12 @@ public class MainPtn extends AFrame
     {
         pl_KeysInfo = new javax.swing.JPanel();
 
-        mainFind = new FindBar(this, mpwdMdl.getListMdl());
+        mainFind = new FindBar(this);
         mainFind.initView();
 
         gridPop = menuPtn.getPopMenu("grid");
 
         tb_KeysView = new javax.swing.JTable();
-        tb_KeysView.setModel(mpwdMdl.getGridMdl());
         tb_KeysView.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tb_KeysView.getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         javax.swing.AbstractAction action = new javax.swing.AbstractAction()
@@ -763,9 +776,6 @@ public class MainPtn extends AFrame
             }
         });
 
-        int w = tb_KeysView.getFontMetrics(tb_KeysView.getFont()).stringWidth("999999");
-        tb_KeysView.getColumnModel().getColumn(0).setPreferredWidth(w);
-        tb_KeysView.getColumnModel().getColumn(1).setPreferredWidth(365 - w);
         sp_KeysView = new javax.swing.JScrollPane(tb_KeysView);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_KeysInfo);
