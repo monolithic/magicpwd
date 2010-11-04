@@ -11,7 +11,6 @@ import com.magicpwd._util.Char;
 import com.magicpwd._util.Jpng;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.u.DBU3000;
 import com.magicpwd.v.TrayPtn;
@@ -46,18 +45,16 @@ public class UserPtn extends javax.swing.JPanel
      */
     private static javax.swing.Icon guidIcon;
     private TrayPtn trayPtn;
-    private SafeMdl safeMdl;
     private UserMdl userMdl;
 
     /**
      * 独立窗口
      * @param type
      */
-    public UserPtn(TrayPtn trayPtn, UserMdl userMdl, SafeMdl safeMdl)
+    public UserPtn(UserMdl userMdl, TrayPtn trayPtn)
     {
-        this.trayPtn = trayPtn;
         this.userMdl = userMdl;
-        this.safeMdl = safeMdl;
+        this.trayPtn = trayPtn;
         frame = new javax.swing.JFrame();
         frame.setResizable(false);
         frame.setIconImage(Bean.getLogo(16));
@@ -69,10 +66,9 @@ public class UserPtn extends javax.swing.JPanel
      * @param type
      * @param frame
      */
-    public UserPtn(UserMdl userMdl, SafeMdl safeMdl, javax.swing.JFrame frame)
+    public UserPtn(UserMdl userMdl, javax.swing.JFrame frame)
     {
         this.userMdl = userMdl;
-        this.safeMdl = safeMdl;
         dialog = new javax.swing.JDialog(frame, true);
         dialog.setResizable(false);
         dialog.setIconImage(Bean.getLogo(16));

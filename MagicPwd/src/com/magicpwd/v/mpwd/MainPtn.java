@@ -130,6 +130,8 @@ public class MainPtn extends AFrame
 
     public void initData()
     {
+        super.setVisible(true);
+        
         // 菜单栏
         setMenuVisible(userMdl.isMenuVisible());
 
