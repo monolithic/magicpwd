@@ -45,6 +45,7 @@ public class NormPtn extends AFrame
         }
         catch (Exception e)
         {
+            Logs.exception(e);
             tb_ToolBar = new javax.swing.JToolBar();
         }
 
@@ -149,6 +150,8 @@ public class NormPtn extends AFrame
 
     public void initData()
     {
+        super.setVisible(true);
+
         safeMdl = mwizMdl.getKeysMdl();
 
         mwizMdl.listKeysByKind("0");

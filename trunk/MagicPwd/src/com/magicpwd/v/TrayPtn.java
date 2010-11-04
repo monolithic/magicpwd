@@ -158,12 +158,18 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
             {
                 showMiniPtn();
             }
+
             initView();
             initLang();
             initData();
-            mfCurrForm.setVisible(true);
             mfCurrForm.toFront();
             mfCurrForm.requestFocus();
+            return true;
+        }
+
+        // 屏幕解锁
+        if (ConsEnv.STR_SIGN_LS.equalsIgnoreCase(params[0]))
+        {
             return true;
         }
 
@@ -190,7 +196,6 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         }
 
         currForm.setVisible(false);
-        getCurrForm().setVisible(true);
         if (getCurrForm().getState() != java.awt.Frame.NORMAL)
         {
             getCurrForm().setState(java.awt.Frame.NORMAL);
@@ -214,6 +219,11 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
 
     public MainPtn getMainPtn()
     {
+        return mp_MainPtn;
+    }
+
+    private void showMainPtn()
+    {
         if (mp_MainPtn == null)
         {
             mp_MainPtn = new MainPtn(this, userMdl);
@@ -221,12 +231,6 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
             mp_MainPtn.initLang();
             mp_MainPtn.initData();
         }
-        return mp_MainPtn;
-    }
-
-    private void showMainPtn()
-    {
-        getMainPtn();
 
         mfCurrForm = mp_MainPtn;
         currPtn = ConsEnv.APP_MODE_MPWD;
@@ -234,26 +238,29 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
 
     public NormPtn getNormPtn()
     {
-        if (mp_NormPtn == null)
-        {
-            mp_NormPtn = new NormPtn(this, userMdl);
-            mfCurrForm = mp_NormPtn;
-            mp_NormPtn.initView();
-            mp_NormPtn.initLang();
-            mp_NormPtn.initData();
-        }
         return mp_NormPtn;
     }
 
     private void showNormPtn()
     {
-        getNormPtn().setVisible(true);
+        if (mp_NormPtn == null)
+        {
+            mp_NormPtn = new NormPtn(this, userMdl);
+            mp_NormPtn.initView();
+            mp_NormPtn.initLang();
+            mp_NormPtn.initData();
+        }
 
         mfCurrForm = mp_NormPtn;
         currPtn = ConsEnv.APP_MODE_MWIZ;
     }
 
     public MiniPtn getMiniPtn()
+    {
+        return mp_MiniPtn;
+    }
+
+    private void showMiniPtn()
     {
         if (mp_MiniPtn == null)
         {
@@ -262,12 +269,6 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
             mp_MiniPtn.initLang();
             mp_MiniPtn.initData();
         }
-        return mp_MiniPtn;
-    }
-
-    private void showMiniPtn()
-    {
-        getMiniPtn();
 
         mfCurrForm = mp_MiniPtn;
         currPtn = ConsEnv.APP_MODE_MPAD;
@@ -440,7 +441,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         // 显示登录
         if (getCurrForm() == null)
         {
-            userPtn = new UserPtn(this, userMdl, null);
+            userPtn = new UserPtn(userMdl, this);
             userPtn.setBackCall(this);
             userPtn.initView(userMdl.getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.INT_SIGN_IN : ConsEnv.INT_SIGN_UP);
             userPtn.initLang();
@@ -472,7 +473,6 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
                 default:
                     break;
             }
-            getCurrForm().setVisible(true);
             currPtn = nextPtn;
             return;
         }
@@ -485,9 +485,9 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
     {
         if (userPtn == null)
         {
-            userPtn = new UserPtn(this, userMdl, null);
+            userPtn = new UserPtn(userMdl, this);
         }
-        UserPtn ptn = (getCurrForm() != null && getCurrForm().isVisible()) ? new UserPtn(userMdl, null, getCurrForm()) : userPtn;
+        UserPtn ptn = (getCurrForm() != null && getCurrForm().isVisible()) ? new UserPtn(userMdl, getCurrForm()) : userPtn;
         ptn.setBackCall(call);
         ptn.initView(view);
         ptn.initLang();

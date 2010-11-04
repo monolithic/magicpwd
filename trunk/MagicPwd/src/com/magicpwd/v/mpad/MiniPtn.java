@@ -199,6 +199,8 @@ public class MiniPtn extends AFrame
 
     public void initData()
     {
+        super.setVisible(true);
+
         noteList = new java.util.ArrayList<S1S2>();
         nameBox.initData();
         dataBox.initData();
@@ -223,7 +225,7 @@ public class MiniPtn extends AFrame
             {
             }
         };
-        Bean.registerKeyStrokeAction(getRootPane(), javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_DOWN_MASK | java.awt.event.InputEvent.ALT_DOWN_MASK), action, "showNormPtn", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
+        Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F, java.awt.event.InputEvent.CTRL_DOWN_MASK | java.awt.event.InputEvent.ALT_DOWN_MASK), action, "showNormPtn", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
     }
 
     private void cb_NoteInfoItemStateChanged(java.awt.event.ItemEvent evt)
