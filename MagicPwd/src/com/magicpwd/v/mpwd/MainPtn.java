@@ -187,6 +187,9 @@ public class MainPtn extends AFrame
         {
             group.setSelected(userMdl.getCfg(ConsCfg.CFG_VIEW_LIST_KEY, "01"), true);
         }
+
+        pack();
+        Bean.centerForm(this, null);
     }
 
     public boolean newKeys()
