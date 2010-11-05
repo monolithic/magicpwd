@@ -3,6 +3,9 @@
  */
 package com.magicpwd._util;
 
+import com.magicpwd._cons.ConsEnv;
+import com.magicpwd.m.UserMdl;
+
 /**
  * @author shangwen.yao
  * 
@@ -10,13 +13,51 @@ package com.magicpwd._util;
 public class Logs
 {
 
+    private static java.io.PrintWriter writer;
+
     public static void log(String log)
     {
-        System.out.println(log);
+        if (UserMdl.getRunMode() == ConsEnv.RUN_MODE_DEV)
+        {
+            System.out.println(log);
+        }
     }
 
     public static void exception(Exception exp)
     {
-        exp.printStackTrace();
+        if (UserMdl.getRunMode() == ConsEnv.RUN_MODE_DEV)
+        {
+            getWriter().println(exp.toString());
+        }
+    }
+
+    public static void end()
+    {
+    }
+
+    private static java.io.PrintWriter getWriter()
+    {
+        if (writer == null)
+        {
+            try
+            {
+                java.io.File logs = new java.io.File(ConsEnv.DIR_LOG);
+                if (!logs.exists())
+                {
+                    logs.mkdirs();
+                }
+                logs = new java.io.File(logs, "amon.log");
+                if (!logs.exists())
+                {
+                    logs.createNewFile();
+                }
+                writer = new java.io.PrintWriter(logs);
+            }
+            catch (Exception e)
+            {
+                System.out.println(e.toString());
+            }
+        }
+        return writer;
     }
 }

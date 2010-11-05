@@ -37,6 +37,10 @@ public class MagicPwd
             {
                 UserMdl.setRunMode(ConsEnv.RUN_MODE_CMD);
             }
+            else if ("dev".equalsIgnoreCase(arg))
+            {
+                UserMdl.setRunMode(ConsEnv.RUN_MODE_DEV);
+            }
         }
 
         // 数据完整性处理

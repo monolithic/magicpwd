@@ -60,6 +60,7 @@ public interface ConsEnv
     String DIR_BAK = "bak";
     String DIR_DAT = "dat";
     String DIR_AMA = "ama";
+    String DIR_LOG = "log";
     String DIR_ICO = "ico";
     String DIR_EXT = "ext";
     String DIR_MAIL = "mail";
@@ -189,6 +190,7 @@ public interface ConsEnv
     {
         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
     };
+    int RUN_MODE_DEV = -1;
     /**
      * 程序运行模式：独立程序
      */
