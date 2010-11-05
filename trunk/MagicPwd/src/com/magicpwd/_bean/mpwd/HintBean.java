@@ -76,36 +76,13 @@ public class HintBean extends javax.swing.JPanel implements IMpwdBean
         pl_PropConf.add(bt_DateView);
 
         pm_DateView = new javax.swing.JPopupMenu();
-        AMpwdAction action = new AMpwdAction()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                mi_MenuItemActionPerformed(evt);
-            }
-
-            @Override
-            public void doInit(Object object)
-            {
-            }
-
-            @Override
-            public void reInit(AbstractButton button)
-            {
-            }
-        };
         mi_HalfHour = new javax.swing.JMenuItem();
-        mi_HalfHour.addActionListener(action);
         pm_DateView.add(mi_HalfHour);
 
         mi_FullHour = new javax.swing.JMenuItem();
-        mi_FullHour.addActionListener(action);
         pm_DateView.add(mi_FullHour);
 
         pm_DateView.addSeparator();
-
-        mainPtn.getMenuPtn().getSubMenu("date-interval", pm_DateView, action);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -168,6 +145,29 @@ public class HintBean extends javax.swing.JPanel implements IMpwdBean
     @Override
     public void initData()
     {
+        AMpwdAction action = new AMpwdAction()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                mi_MenuItemActionPerformed(evt);
+            }
+
+            @Override
+            public void doInit(Object object)
+            {
+            }
+
+            @Override
+            public void reInit(AbstractButton button)
+            {
+            }
+        };
+        mi_HalfHour.addActionListener(action);
+        mi_FullHour.addActionListener(action);
+        mainPtn.getMenuPtn().getSubMenu("date-interval", pm_DateView, action);
+
         nameBox.initData();
     }
 

@@ -89,33 +89,15 @@ public class MainPtn extends AFrame
 
     public void initView()
     {
-//        Bean.readIcon(MainPtn.class.getResourceAsStream(ConsEnv.ICON_PATH + "mpwd.png"), iconMap);
-
-        try
-        {
-            menuPtn = new MenuPtn(trayPtn, this);
-            menuPtn.loadData(new java.io.File(userMdl.getDataDir(), "mpwd.xml"));
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-        }
-
         initGuidView();
         initPropView();
         initUserView();
         initBaseView();
 
-        this.getContentPane().add(pl_KeysBase);
+        getContentPane().add(pl_KeysBase);
 
-        menuBar = menuPtn.getMenuBar("mpwd", rootPane);
-        this.setJMenuBar(menuBar);
+        setIconImage(Bean.getLogo(16));
 
-        toolBar = menuPtn.getToolBar("mpwd", rootPane, "mpwd");
-        this.getContentPane().add(toolBar, userMdl.getToolLoc("mpwd"));
-
-        this.setIconImage(Bean.getLogo(16));
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();
         Bean.centerForm(this, null);
     }
@@ -133,6 +115,29 @@ public class MainPtn extends AFrame
     public void initData()
     {
         super.setVisible(true);
+
+        try
+        {
+            menuPtn = new MenuPtn(trayPtn, this);
+            menuPtn.loadData(new java.io.File(userMdl.getDataDir(), "mpwd.xml"));
+
+            menuBar = menuPtn.getMenuBar("mpwd", rootPane);
+            setJMenuBar(menuBar);
+
+            toolBar = menuPtn.getToolBar("mpwd", rootPane, "mpwd");
+            getContentPane().add(toolBar, userMdl.getToolLoc("mpwd"));
+
+            kindPop = menuPtn.getPopMenu("kind");
+            tr_GuidTree.setComponentPopupMenu(kindPop);
+
+            listPop = menuPtn.getPopMenu("list");
+
+            gridPop = menuPtn.getPopMenu("grid");
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
 
         mpwdMdl = new MpwdMdl(userMdl);
         mpwdMdl.init();
@@ -618,10 +623,7 @@ public class MainPtn extends AFrame
         sp.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         sp.setOneTouchExpandable(true);
 
-        kindPop = menuPtn.getPopMenu("kind");
-
         tr_GuidTree = new javax.swing.JTree();
-        tr_GuidTree.setComponentPopupMenu(kindPop);
         tr_GuidTree.setCellRenderer(new TreeCR());
         tr_GuidTree.getSelectionModel().setSelectionMode(javax.swing.tree.TreeSelectionModel.SINGLE_TREE_SELECTION);
         javax.swing.ToolTipManager.sharedInstance().registerComponent(tr_GuidTree);
@@ -638,8 +640,6 @@ public class MainPtn extends AFrame
         javax.swing.JScrollPane sp1 = new javax.swing.JScrollPane();
         sp1.setViewportView(tr_GuidTree);
         sp.setTopComponent(sp1);
-
-        listPop = menuPtn.getPopMenu("list");
 
         ls_GuidList = new javax.swing.JList();
         ls_GuidList.setCellRenderer(new KeysCR(this));
@@ -689,8 +689,6 @@ public class MainPtn extends AFrame
 
         mainFind = new FindBar(this);
         mainFind.initView();
-
-        gridPop = menuPtn.getPopMenu("grid");
 
         tb_KeysView = new javax.swing.JTable();
         tb_KeysView.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);

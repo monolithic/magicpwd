@@ -102,36 +102,13 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
         });
 
         pm_HintDate = new javax.swing.JPopupMenu();
-        AMpwdAction action = new AMpwdAction()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                mi_MenuItemActionPerformed(evt);
-            }
-
-            @Override
-            public void doInit(Object object)
-            {
-            }
-
-            @Override
-            public void reInit(AbstractButton button)
-            {
-            }
-        };
         mi_HalfHour = new javax.swing.JMenuItem();
-        mi_HalfHour.addActionListener(action);
         pm_HintDate.add(mi_HalfHour);
 
         mi_FullHour = new javax.swing.JMenuItem();
-        mi_FullHour.addActionListener(action);
         pm_HintDate.add(mi_FullHour);
 
         pm_HintDate.addSeparator();
-
-        normPtn.getMenuPtn().getSubMenu("date-interval", pm_HintDate, action);
 
         javax.swing.JScrollPane jsp = new javax.swing.JScrollPane(ta_MetaData);
 
@@ -208,6 +185,28 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
 
     public void initData()
     {
+        AMpwdAction action = new AMpwdAction()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                mi_MenuItemActionPerformed(evt);
+            }
+
+            @Override
+            public void doInit(Object object)
+            {
+            }
+
+            @Override
+            public void reInit(AbstractButton button)
+            {
+            }
+        };
+        mi_HalfHour.addActionListener(action);
+        mi_FullHour.addActionListener(action);
+        normPtn.getMenuPtn().getSubMenu("date-interval", pm_HintDate, action);
     }
 
     public final void showData(KeysMdl keysMdl)

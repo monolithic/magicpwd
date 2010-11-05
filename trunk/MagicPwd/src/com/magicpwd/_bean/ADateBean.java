@@ -77,7 +77,31 @@ public abstract class ADateBean extends AEditBean
         });
         pl_PropConf.add(bt_DateConf);
 
+        pm_MenuTime = new javax.swing.JPopupMenu();
+        mi_TimeDef = new javax.swing.JMenuItem();
+        pm_MenuTime.add(mi_TimeDef);
+        pm_MenuTime.addSeparator();
 
+        pm_MenuConf = new javax.swing.JPopupMenu();
+        mi_ConfDef = new javax.swing.JCheckBoxMenuItem();
+        pm_MenuConf.add(mi_ConfDef);
+        pm_MenuConf.addSeparator();
+    }
+
+    protected void initConfLang()
+    {
+        Lang.setWText(bt_DateTime, LangRes.P30F1513, "@T");
+        Lang.setWTips(bt_DateTime, LangRes.P30F1514, "选择时间(Alt + T)");
+
+        Lang.setWText(bt_DateConf, LangRes.P30F151F, "@O");
+        Lang.setWTips(bt_DateConf, LangRes.P30F1520, "当前时间(Alt + O)");
+
+        Bean.setText(mi_TimeDef, "当前时间");
+        Bean.setText(mi_ConfDef, "默认格式");
+    }
+
+    protected void initConfData()
+    {
         AMpwdAction diAction = new AMpwdAction()
         {
 
@@ -97,12 +121,7 @@ public abstract class ADateBean extends AEditBean
             {
             }
         };
-
-        pm_MenuTime = new javax.swing.JPopupMenu();
-        mi_TimeDef = new javax.swing.JMenuItem();
         mi_TimeDef.addActionListener(diAction);
-        pm_MenuTime.add(mi_TimeDef);
-        pm_MenuTime.addSeparator();
         formPtn.getMenuPtn().getSubMenu("date-interval", pm_MenuTime, diAction);
 
         AMpwdAction dtAction = new AMpwdAction()
@@ -124,27 +143,7 @@ public abstract class ADateBean extends AEditBean
             {
             }
         };
-        pm_MenuConf = new javax.swing.JPopupMenu();
-        mi_ConfDef = new javax.swing.JCheckBoxMenuItem();
-        pm_MenuConf.add(mi_ConfDef);
-        pm_MenuConf.addSeparator();
         formPtn.getMenuPtn().getSubMenu("date-template", pm_MenuConf, dtAction);
-    }
-
-    protected void initConfLang()
-    {
-        Lang.setWText(bt_DateTime, LangRes.P30F1513, "@T");
-        Lang.setWTips(bt_DateTime, LangRes.P30F1514, "选择时间(Alt + T)");
-
-        Lang.setWText(bt_DateConf, LangRes.P30F151F, "@O");
-        Lang.setWTips(bt_DateConf, LangRes.P30F1520, "当前时间(Alt + O)");
-
-        Bean.setText(mi_TimeDef, "当前时间");
-        Bean.setText(mi_ConfDef, "默认格式");
-    }
-
-    protected void initConfData()
-    {
     }
 
     private void bt_DateViewActionPerformed(java.awt.event.ActionEvent evt)
