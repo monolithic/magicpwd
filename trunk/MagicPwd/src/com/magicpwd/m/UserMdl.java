@@ -19,12 +19,12 @@ public class UserMdl
 
     private static int runMode = 0;
     private static int appMode = 1;
+    private static java.util.Properties userCfg;
+    static SafeKey safeKey;
     private boolean topMost;
-    private java.util.Properties userCfg;
     private TpltMdl tpltMdl;
     private CharMdl charMdl;
     private HintMdl hintMdl;
-    SafeKey safeKey;
 
     public UserMdl()
     {
@@ -470,17 +470,17 @@ public class UserMdl
 
     public final void setLang(String lang)
     {
-        userCfg.setProperty(ConsCfg.CFG_LANG, lang);
+        setCfg(ConsCfg.CFG_LANG, lang);
     }
 
     public String getCode()
     {
-        return userCfg.getProperty(ConsCfg.CFG_USER_CODE, "");
+        return getCfg(ConsCfg.CFG_USER_CODE, "");
     }
 
     public String getName()
     {
-        return userCfg.getProperty(ConsCfg.CFG_USER_NAME, "");
+        return getCfg(ConsCfg.CFG_USER_NAME, "");
     }
 
     public javax.swing.ImageIcon readIcon(String path)

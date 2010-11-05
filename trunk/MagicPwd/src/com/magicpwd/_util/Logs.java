@@ -27,8 +27,9 @@ public class Logs
     {
         if (UserMdl.getRunMode() == ConsEnv.RUN_MODE_DEV)
         {
-            getWriter().println(exp.toString());
+            exp.printStackTrace();
         }
+        getWriter().println(exp.toString());
     }
 
     public static void end()

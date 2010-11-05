@@ -21,6 +21,7 @@ public class DatDialog extends javax.swing.JDialog
     public DatDialog(MainPtn mainPtn, IBackCall backCall)
     {
         super(mainPtn, true);
+        this.mainPtn = mainPtn;
         this.backCall = backCall;
     }
 

@@ -141,6 +141,28 @@ public class MainPtn extends AFrame
         safeMdl = mpwdMdl.getGridMdl();
 
         tr_GuidTree.setModel(mpwdMdl.getTreeMdl());
+        ls_GuidList.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e)
+            {
+                ls_GuidListMouseClicked(e);
+            }
+
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent e)
+            {
+                ls_GuidListMousePressed(e);
+            }
+
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent e)
+            {
+                ls_GuidListMouseReleased(e);
+            }
+        });
+
         ls_GuidList.setModel(mpwdMdl.getListMdl());
 
         tb_KeysView.setModel(mpwdMdl.getGridMdl());
@@ -633,6 +655,8 @@ public class MainPtn extends AFrame
             }
         });
 
+        kindPop = new javax.swing.JPopupMenu();
+
         javax.swing.JScrollPane sp1 = new javax.swing.JScrollPane();
         sp1.setViewportView(tr_GuidTree);
         sp.setTopComponent(sp1);
@@ -640,27 +664,8 @@ public class MainPtn extends AFrame
         ls_GuidList = new javax.swing.JList();
         ls_GuidList.setCellRenderer(new KeysCR(this));
         ls_GuidList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        ls_GuidList.addMouseListener(new java.awt.event.MouseAdapter()
-        {
 
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent e)
-            {
-                ls_GuidListMouseClicked(e);
-            }
-
-            @Override
-            public void mousePressed(java.awt.event.MouseEvent e)
-            {
-                ls_GuidListMousePressed(e);
-            }
-
-            @Override
-            public void mouseReleased(java.awt.event.MouseEvent e)
-            {
-                ls_GuidListMouseReleased(e);
-            }
-        });
+        listPop = new javax.swing.JPopupMenu();
 
         javax.swing.JScrollPane sp2 = new javax.swing.JScrollPane();
         sp2.setViewportView(ls_GuidList);
@@ -774,6 +779,8 @@ public class MainPtn extends AFrame
         });
 
         sp_KeysView = new javax.swing.JScrollPane(tb_KeysView);
+
+        gridPop = new javax.swing.JPopupMenu();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_KeysInfo);
         pl_KeysInfo.setLayout(layout);

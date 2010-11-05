@@ -11,13 +11,20 @@ import java.awt.Component;
 import javax.swing.JLabel;
 import javax.swing.JTree;
 
-
 /**
  * @author Amon
  * 
  */
 public class TreeCR extends JLabel implements javax.swing.tree.TreeCellRenderer
 {
+
+    // Icons
+    /** Icon used to show non-leaf nodes that aren't expanded. */
+    transient protected javax.swing.Icon closedIcon;
+    /** Icon used to show leaf nodes. */
+    transient protected javax.swing.Icon leafIcon;
+    /** Icon used to show non-leaf nodes that are expanded. */
+    transient protected javax.swing.Icon openIcon;
 
     public TreeCR()
     {
@@ -28,6 +35,9 @@ public class TreeCR extends JLabel implements javax.swing.tree.TreeCellRenderer
     {
         setHorizontalAlignment(horizontalAlignment);
         setOpaque(true);
+        leafIcon = sun.swing.DefaultLookup.getIcon(this, ui, "Tree.leafIcon");
+        closedIcon = sun.swing.DefaultLookup.getIcon(this, ui, "Tree.closedIcon");
+        openIcon = sun.swing.DefaultLookup.getIcon(this, ui, "Tree.openIcon");
     }
 
     /*
@@ -42,14 +52,23 @@ public class TreeCR extends JLabel implements javax.swing.tree.TreeCellRenderer
         setFont(tree.getFont());
         setEnabled(tree.isEnabled());
 
-        if (isSelected)
+        if (leaf)
         {
-            setBackground(Color.GRAY);
+            setIcon(leafIcon);
         }
         else
         {
-            setBackground(tree.getBackground());
-            setForeground(tree.getForeground());
+            if (isSelected)
+            {
+                setBackground(Color.GRAY);
+                setIcon(openIcon);
+            }
+            else
+            {
+                setBackground(tree.getBackground());
+                setForeground(tree.getForeground());
+                setIcon(closedIcon);
+            }
         }
 
         setFocusable(hasFocus);
