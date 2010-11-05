@@ -93,7 +93,7 @@ public class MenuPtn
         return groups.get(id);
     }
 
-    public javax.swing.JMenuBar getMenuBar(String menuId, javax.swing.JComponent component)
+    public javax.swing.JMenuBar getMenuBar(String menuId, javax.swing.JMenuBar menuBar, javax.swing.JComponent component)
     {
         if (!Char.isValidate(menuId) || document == null)
         {
@@ -106,7 +106,6 @@ public class MenuPtn
         }
         Element element = (Element) node;
 
-        javax.swing.JMenuBar menuBar = new javax.swing.JMenuBar();
         menuBar.setName(menuId);
 
         java.util.List elementList = element.elements("menu");
@@ -143,7 +142,7 @@ public class MenuPtn
         return menuBar;
     }
 
-    public javax.swing.JToolBar getToolBar(String toolId, javax.swing.JComponent component, String viewPtn)
+    public javax.swing.JToolBar getToolBar(String toolId, javax.swing.JToolBar toolBar, javax.swing.JComponent component, String viewPtn)
     {
         if (!Char.isValidate(toolId) || document == null)
         {
@@ -156,7 +155,6 @@ public class MenuPtn
         }
         Element element = (Element) node;
 
-        javax.swing.JToolBar toolBar = new javax.swing.JToolBar();
         toolBar.setName(toolId);
 
         java.util.List elementList = element.elements();
@@ -185,7 +183,7 @@ public class MenuPtn
         return toolBar;
     }
 
-    public javax.swing.JPopupMenu getPopMenu(String menuId)
+    public javax.swing.JPopupMenu getPopMenu(String menuId, javax.swing.JPopupMenu menuPop)
     {
         if (!Char.isValidate(menuId) || document == null)
         {
@@ -198,7 +196,6 @@ public class MenuPtn
         }
         Element element = (Element) node;
 
-        javax.swing.JPopupMenu menuPop = new javax.swing.JPopupMenu();
         menuPop.setName(menuId);
 
         java.util.List elementList = element.elements();

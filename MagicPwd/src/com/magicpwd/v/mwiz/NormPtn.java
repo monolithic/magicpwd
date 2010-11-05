@@ -35,20 +35,7 @@ public class NormPtn extends AFrame
 
     public void initView()
     {
-        menuPtn = new MenuPtn(trayPtn, this);
-        try
-        {
-            menuPtn.loadData(new java.io.File(userMdl.getDataDir(), "mwiz.xml"));
-            tb_ToolBar = menuPtn.getToolBar("mwiz", rootPane, "mwiz");
-            pm_MenuPop = menuPtn.getPopMenu("mwiz");
-            menuPtn.getStrokes("mwiz", rootPane);
-        }
-        catch (Exception e)
-        {
-            Logs.exception(e);
-            tb_ToolBar = new javax.swing.JToolBar();
-        }
-
+        tb_ToolBar = new javax.swing.JToolBar();
         tb_ToolBar.setFloatable(false);
         tb_ToolBar.setRollover(true);
 
@@ -79,6 +66,7 @@ public class NormPtn extends AFrame
         tb_KeysList.getColumnModel().getColumn(0).setMaxWidth(w);
         tb_KeysList.getColumnModel().getColumn(1).setMaxWidth(40);
 
+        pm_MenuPop = new javax.swing.JPopupMenu();
         tb_KeysList.addMouseListener(new java.awt.event.MouseAdapter()
         {
 
@@ -151,6 +139,19 @@ public class NormPtn extends AFrame
     public void initData()
     {
         super.setVisible(true);
+
+        try
+        {
+            menuPtn = new MenuPtn(trayPtn, this);
+            menuPtn.loadData(new java.io.File(userMdl.getDataDir(), "mwiz.xml"));
+            menuPtn.getToolBar("mwiz", tb_ToolBar, rootPane, "mwiz");
+            menuPtn.getPopMenu("mwiz", pm_MenuPop);
+            menuPtn.getStrokes("mwiz", rootPane);
+        }
+        catch (Exception e)
+        {
+            Logs.exception(e);
+        }
 
         safeMdl = mwizMdl.getKeysMdl();
 
