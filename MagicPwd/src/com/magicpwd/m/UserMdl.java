@@ -20,7 +20,6 @@ public class UserMdl
     private static int runMode = 0;
     private static int appMode = 1;
     private boolean topMost;
-    private String userName;
     private java.util.Properties userCfg;
     private TpltMdl tpltMdl;
     private CharMdl charMdl;
@@ -148,14 +147,14 @@ public class UserMdl
         {
             return def;
         }
-        return userCfg.getProperty(Char.format(key, userName), def);
+        return userCfg.getProperty(Char.format(key, safeKey.getName()), def);
     }
 
     public final void setCfg(String key, String value)
     {
         if (Char.isValidate(key))
         {
-            userCfg.setProperty(Char.format(key, userName), value);
+            userCfg.setProperty(Char.format(key, safeKey.getName()), value);
         }
     }
 
@@ -550,15 +549,7 @@ public class UserMdl
      */
     public String getUserName()
     {
-        return userName;
-    }
-
-    /**
-     * @param userName the userName to set
-     */
-    public void setUserName(String userName)
-    {
-        this.userName = userName;
+        return safeKey.getName();
     }
 
     /**
