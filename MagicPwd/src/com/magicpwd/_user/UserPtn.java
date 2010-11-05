@@ -197,11 +197,22 @@ public class UserPtn extends javax.swing.JPanel
         if (frame != null)
         {
             frame.getContentPane().add(this);
+            frame.pack();
+            if (!frame.isVisible())
+            {
+                frame.setVisible(true);
+            }
         }
         if (dialog != null)
         {
             dialog.getContentPane().add(this);
+            dialog.pack();
+            if (!dialog.isVisible())
+            {
+                dialog.setVisible(true);
+            }
         }
+
         return true;
     }
 
@@ -703,6 +714,7 @@ public class UserPtn extends javax.swing.JPanel
                 {
                     tf_UserName.setText(name);
                 }
+                pf_UserKey0.requestFocus();
                 break;
             case ConsEnv.INT_SIGN_RS:
                 tf_UserName.setText("");
@@ -754,12 +766,6 @@ public class UserPtn extends javax.swing.JPanel
                 break;
         }
 
-        java.awt.Window window = frame != null ? frame : dialog;
-        if (window == null)
-        {
-            return false;
-        }
-
         if (jpng == null)
         {
             new Thread()
@@ -773,13 +779,15 @@ public class UserPtn extends javax.swing.JPanel
             }.start();
         }
 
-        window.pack();
-        if (!window.isVisible())
+        if (frame != null)
         {
-            java.awt.Dimension windowsize = window.getSize();
-            java.awt.Dimension screensize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-            window.setLocation((screensize.width - windowsize.width) >> 1, (screensize.height - windowsize.height) >> 1);
-            window.setVisible(true);
+            frame.pack();
+            Bean.centerForm(frame, null);
+        }
+        if (dialog != null)
+        {
+            dialog.pack();
+            Bean.centerForm(dialog, null);
         }
 
         return true;
@@ -1041,7 +1049,11 @@ public class UserPtn extends javax.swing.JPanel
         try
         {
             boolean b = userMdl.signIn(name, pwds);
-            if (!b)
+            if (b)
+            {
+                userMdl.setCfg(ConsCfg.CFG_USER_LAST, name);
+            }
+            else
             {
                 errCount += 1;
                 if (errCount > 2)
@@ -1189,7 +1201,11 @@ public class UserPtn extends javax.swing.JPanel
         try
         {
             boolean b = userMdl.signUp(un, p1);
-            if (!b)
+            if (b)
+            {
+                userMdl.setCfg(ConsCfg.CFG_USER_LAST, un);
+            }
+            else
             {
                 Lang.showMesg(this, LangRes.P30FAA06, "注册用户失败，请更换用户名及口令后重试！");
                 tf_UserName.setText("");

@@ -61,7 +61,7 @@ public abstract class SafeMdl
             try
             {
                 dCipher = javax.crypto.Cipher.getInstance(ConsEnv.NAME_CIPHER);
-                dCipher.init(javax.crypto.Cipher.DECRYPT_MODE, userMdl.safeKey);
+                dCipher.init(javax.crypto.Cipher.DECRYPT_MODE, UserMdl.safeKey);
             }
             catch (Exception exp)
             {

@@ -152,7 +152,7 @@
             </item>
             <seperator />
             <!--切换到《迷你账簿》-->
-            <item type="normal" text="$P30F7638" visible="false">
+            <item type="normal" text="$P30F7638">
                 <action class="com.magicpwd.e.tray.MpayAction">
                     <stroke key="^ # F" />
                 </action>

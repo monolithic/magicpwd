@@ -243,10 +243,6 @@ public class NormPtn extends AFrame
     public void requestFocus()
     {
         tb_KeysList.requestFocus();
-        if (tb_KeysList.getSelectedRow() < 0)
-        {
-            tb_KeysList.setRowSelectionInterval(0, 0);
-        }
     }
 
     public void setFindVisible(boolean visible)
