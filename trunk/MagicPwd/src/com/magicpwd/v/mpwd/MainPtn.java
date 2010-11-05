@@ -64,23 +64,15 @@ public class MainPtn extends AFrame
     private HistDlg histDlg;
     private MdiDialog cfgForm;
     private MenuPtn menuPtn;
-    /**
-     * 口令列表上次选择索引
-     */
-    private int ls_LastIndx = -1;
-    /**
-     * 属性列表上次选择索引
-     */
-    private int tb_LastIndx = -1;
-    /**
-     * 用户上一次的操作方式
-     */
-    private boolean isSearch;
-    /**
-     * 用户查找字符串
-     */
-    private String queryKey;
     private MpwdMdl mpwdMdl;
+    /**口令列表上次选择索引*/
+    private int ls_LastIndx = -1;
+    /**属性列表上次选择索引*/
+    private int tb_LastIndx = -1;
+    /**用户最后一次查找内容*/
+    private String queryKey;
+    /**用户上一次的操作方式*/
+    private boolean isSearch;
 
     public MainPtn(TrayPtn trayPtn, UserMdl userMdl)
     {

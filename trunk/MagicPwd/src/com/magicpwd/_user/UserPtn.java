@@ -768,55 +768,7 @@ public class UserPtn extends javax.swing.JPanel
                 @Override
                 public void run()
                 {
-                    jpng = new Jpng();
-                    try
-                    {
-                        java.io.InputStream stream = Jpng.class.getResourceAsStream(ConsEnv.ICON_PATH + "wait.png");
-                        jpng.readIcons(stream, 16, 16);
-                        stream.close();
-                        jpng.setIt(0);
-                        jpng.setButton(bt_Confrm);
-                    }
-                    catch (Exception exp)
-                    {
-                        Logs.exception(exp);
-                    }
-
-                    if (UserMdl.getRunMode() != ConsEnv.RUN_MODE_DEV)
-                    {
-                        javax.swing.Icon icon = null;
-                        try
-                        {
-                            StringBuilder buf = new StringBuilder();
-                            buf.append(ConsEnv.HOMEPAGE);
-                            buf.append("mpwd/mpwd0001.ashx?sid=").append(ConsEnv.VERSIONS);
-                            buf.append("&uri=").append(java.net.InetAddress.getLocalHost().getHostAddress());
-                            buf.append("&opt=").append(Char.escape(System.getProperty("os.name")));
-                            buf.append("_").append(Char.escape(System.getProperty("os.arch")));
-                            buf.append("_").append(Char.escape(System.getProperty("os.version")));
-                            java.net.URL url = new java.net.URL(buf.toString());
-                            java.io.InputStream stream = url.openStream();
-                            icon = new javax.swing.ImageIcon(ImageIO.read(stream));
-                            stream.close();
-                        }
-                        catch (Exception ex)
-                        {
-                            Logs.exception(ex);
-                            icon = null;
-                        }
-                        if (icon != null)
-                        {
-                            guidIcon = icon;
-                            if (lb_GuidIcon != null)
-                            {
-                                final String tgi = "";
-                                synchronized (tgi)
-                                {
-                                    lb_GuidIcon.setIcon(guidIcon);
-                                }
-                            }
-                        }
-                    }
+                    loadRes();
                 }
             }.start();
         }
@@ -842,6 +794,61 @@ public class UserPtn extends javax.swing.JPanel
         if (dialog != null)
         {
             dialog.toFront();
+        }
+    }
+
+    private void loadRes()
+    {
+        jpng = new Jpng();
+        try
+        {
+            java.io.InputStream stream = Jpng.class.getResourceAsStream(ConsEnv.ICON_PATH + "wait.png");
+            jpng.readIcons(stream, 16, 16);
+            stream.close();
+            jpng.setIt(0);
+            jpng.setButton(bt_Confrm);
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+
+        if (UserMdl.getRunMode() == ConsEnv.RUN_MODE_DEV)
+        {
+            return;
+        }
+
+        javax.swing.Icon icon = null;
+        try
+        {
+            StringBuilder buf = new StringBuilder();
+            buf.append(ConsEnv.HOMEPAGE);
+            buf.append("mpwd/mpwd0001.ashx?sid=").append(ConsEnv.VERSIONS);
+            buf.append("&uri=").append(java.net.InetAddress.getLocalHost().getHostAddress());
+            buf.append("&opt=").append(Char.escape(System.getProperty("os.name")));
+            buf.append("_").append(Char.escape(System.getProperty("os.arch")));
+            buf.append("_").append(Char.escape(System.getProperty("os.version")));
+            java.net.URL url = new java.net.URL(buf.toString());
+            java.io.InputStream stream = url.openStream();
+            icon = new javax.swing.ImageIcon(ImageIO.read(stream));
+            stream.close();
+        }
+        catch (Exception ex)
+        {
+            Logs.exception(ex);
+            icon = null;
+        }
+        if (icon != null)
+        {
+            guidIcon = icon;
+            if (lb_GuidIcon != null)
+            {
+                final String tgi = "";
+                synchronized (tgi)
+                {
+                    lb_GuidIcon.setIcon(guidIcon);
+                }
+            }
         }
     }
 

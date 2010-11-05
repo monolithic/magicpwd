@@ -445,7 +445,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         {
             userPtn = new UserPtn(userMdl, this);
             userPtn.setBackCall(this);
-            userPtn.initView(userMdl.getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.INT_SIGN_IN : ConsEnv.INT_SIGN_UP);
+            userPtn.initView(userMdl.getCfg(ConsCfg.CFG_USER_LAST, "").trim().length() > 0 ? ConsEnv.INT_SIGN_IN : ConsEnv.INT_SIGN_UP);
             userPtn.initLang();
             userPtn.initData();
             return;
