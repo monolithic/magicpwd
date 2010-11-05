@@ -782,35 +782,38 @@ public class UserPtn extends javax.swing.JPanel
                         Logs.exception(exp);
                     }
 
-                    javax.swing.Icon icon = null;
-                    try
+                    if (UserMdl.getRunMode() != ConsEnv.RUN_MODE_DEV)
                     {
-                        StringBuilder buf = new StringBuilder();
-                        buf.append(ConsEnv.HOMEPAGE);
-                        buf.append("mpwd/mpwd0001.ashx?sid=").append(ConsEnv.VERSIONS);
-                        buf.append("&uri=").append(java.net.InetAddress.getLocalHost().getHostAddress());
-                        buf.append("&opt=").append(Char.escape(System.getProperty("os.name")));
-                        buf.append("_").append(Char.escape(System.getProperty("os.arch")));
-                        buf.append("_").append(Char.escape(System.getProperty("os.version")));
-                        java.net.URL url = new java.net.URL(buf.toString());
-                        java.io.InputStream stream = url.openStream();
-                        icon = new javax.swing.ImageIcon(ImageIO.read(stream));
-                        stream.close();
-                    }
-                    catch (Exception ex)
-                    {
-                        Logs.exception(ex);
-                        icon = null;
-                    }
-                    if (icon != null)
-                    {
-                        guidIcon = icon;
-                        if (lb_GuidIcon != null)
+                        javax.swing.Icon icon = null;
+                        try
                         {
-                            final String tgi = "";
-                            synchronized (tgi)
+                            StringBuilder buf = new StringBuilder();
+                            buf.append(ConsEnv.HOMEPAGE);
+                            buf.append("mpwd/mpwd0001.ashx?sid=").append(ConsEnv.VERSIONS);
+                            buf.append("&uri=").append(java.net.InetAddress.getLocalHost().getHostAddress());
+                            buf.append("&opt=").append(Char.escape(System.getProperty("os.name")));
+                            buf.append("_").append(Char.escape(System.getProperty("os.arch")));
+                            buf.append("_").append(Char.escape(System.getProperty("os.version")));
+                            java.net.URL url = new java.net.URL(buf.toString());
+                            java.io.InputStream stream = url.openStream();
+                            icon = new javax.swing.ImageIcon(ImageIO.read(stream));
+                            stream.close();
+                        }
+                        catch (Exception ex)
+                        {
+                            Logs.exception(ex);
+                            icon = null;
+                        }
+                        if (icon != null)
+                        {
+                            guidIcon = icon;
+                            if (lb_GuidIcon != null)
                             {
-                                lb_GuidIcon.setIcon(guidIcon);
+                                final String tgi = "";
+                                synchronized (tgi)
+                                {
+                                    lb_GuidIcon.setIcon(guidIcon);
+                                }
                             }
                         }
                     }
