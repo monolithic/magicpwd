@@ -59,6 +59,18 @@ public abstract class ADataBean extends AEditBean
         });
         pl_PropConf.add(bt_DateConf);
 
+        pm_DataConf = new javax.swing.JPopupMenu();
+        mi_DataDef = new javax.swing.JCheckBoxMenuItem();
+        pm_DataConf.add(mi_DataDef);
+        pm_DataConf.addSeparator();
+    }
+
+    protected void initConfLang()
+    {
+    }
+
+    protected void initConfData()
+    {
         AMpwdAction action = new AMpwdAction()
         {
 
@@ -78,20 +90,7 @@ public abstract class ADataBean extends AEditBean
             {
             }
         };
-
-        pm_DataConf = new javax.swing.JPopupMenu();
-        mi_DataDef = new javax.swing.JCheckBoxMenuItem();
-        pm_DataConf.add(mi_DataDef);
-        pm_DataConf.addSeparator();
         formPtn.getMenuPtn().getSubMenu("data-options", pm_DataConf, action);
-    }
-
-    protected void initConfLang()
-    {
-    }
-
-    protected void initConfData()
-    {
     }
 
     private void bt_DateConfActionPerformed(java.awt.event.ActionEvent evt)
