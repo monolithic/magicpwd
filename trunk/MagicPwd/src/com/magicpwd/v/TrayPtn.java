@@ -105,17 +105,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         mwTrayForm.getContentPane().add(iconLbl);
         mwTrayForm.setVisible(true);
 
-        // 右键菜单初始化
-        menuPtn = new MenuPtn(this, userMdl);
-        try
-        {
-            menuPtn.loadData(new java.io.File(ConsEnv.DIR_DAT, "tray.xml"));
-            trayMenu = menuPtn.getPopMenu("tray");
-        }
-        catch (Exception ex)
-        {
-            Logs.exception(ex);
-        }
+        trayMenu = new javax.swing.JPopupMenu();
 
         return true;
     }
@@ -128,6 +118,18 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
 
     public boolean initData()
     {
+        // 右键菜单初始化
+        try
+        {
+            menuPtn = new MenuPtn(this, userMdl);
+            menuPtn.loadData(new java.io.File(ConsEnv.DIR_DAT, "tray.xml"));
+            menuPtn.getPopMenu("tray", trayMenu);
+        }
+        catch (Exception ex)
+        {
+            Logs.exception(ex);
+        }
+
         changeView(userMdl.getCfg(ConsCfg.CFG_TRAY_PTN, "guid"));
         return true;
     }

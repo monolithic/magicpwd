@@ -94,6 +94,12 @@ public class MainPtn extends AFrame
         initUserView();
         initBaseView();
 
+        menuBar = new javax.swing.JMenuBar();
+        setJMenuBar(menuBar);
+
+        toolBar = new javax.swing.JToolBar();
+        getContentPane().add(toolBar, userMdl.getToolLoc("mpwd"));
+
         getContentPane().add(pl_KeysBase);
 
         setIconImage(Bean.getLogo(16));
@@ -121,18 +127,16 @@ public class MainPtn extends AFrame
             menuPtn = new MenuPtn(trayPtn, this);
             menuPtn.loadData(new java.io.File(userMdl.getDataDir(), "mpwd.xml"));
 
-            menuBar = menuPtn.getMenuBar("mpwd", rootPane);
-            setJMenuBar(menuBar);
+            menuPtn.getMenuBar("mpwd", menuBar, rootPane);
 
-            toolBar = menuPtn.getToolBar("mpwd", rootPane, "mpwd");
-            getContentPane().add(toolBar, userMdl.getToolLoc("mpwd"));
+            menuPtn.getToolBar("mpwd", toolBar, rootPane, "mpwd");
 
-            kindPop = menuPtn.getPopMenu("kind");
+            menuPtn.getPopMenu("kind", kindPop);
             tr_GuidTree.setComponentPopupMenu(kindPop);
 
-            listPop = menuPtn.getPopMenu("list");
+            menuPtn.getPopMenu("list", listPop);
 
-            gridPop = menuPtn.getPopMenu("grid");
+            menuPtn.getPopMenu("grid", gridPop);
         }
         catch (Exception exp)
         {

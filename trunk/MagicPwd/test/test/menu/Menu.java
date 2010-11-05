@@ -50,7 +50,7 @@ public class Menu extends javax.swing.AbstractAction
         }
 
         frame = new JFrame();
-        bar = ptn.getMenuBar("mpwd", frame.getRootPane());
+        bar = ptn.getMenuBar("mpwd", null, frame.getRootPane());
         frame.setJMenuBar(bar);
 
         frame.getContentPane().add(ptn.getToolBar("mpwd", null, "mpwd"), BorderLayout.NORTH);
