@@ -15,6 +15,7 @@ import com.magicpwd._comn.item.MetaItem;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
@@ -102,7 +103,7 @@ public abstract class SafeMdl
      */
     public String deCrypt(String text) throws Exception
     {
-        return new String(getDCipher().doFinal(Util.stringToBytes(text, userMdl.safeKey.getMask())), ConsEnv.FILE_ENCODING);
+        return new String(getDCipher().doFinal(Char.stringToBytes(text, userMdl.safeKey.getMask())), ConsEnv.FILE_ENCODING);
     }
 
     /**

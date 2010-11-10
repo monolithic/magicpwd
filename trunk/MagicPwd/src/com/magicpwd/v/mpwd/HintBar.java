@@ -3,18 +3,19 @@
  */
 package com.magicpwd.v.mpwd;
 
+import com.magicpwd.__i.IBackCall;
+import com.magicpwd._comn.TaskInfo;
 import com.magicpwd._util.Char;
-import java.awt.event.ActionEvent;
+import com.magicpwd._util.Task;
+import java.util.EventListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 import com.magicpwd.m.HintMdl;
-import java.awt.event.ActionListener;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.util.Calendar;
-import javax.swing.Timer;
 
 /**
  * 主窗口状态提示工具条
@@ -24,7 +25,6 @@ public class HintBar extends JPanel
 {
 
     private DateFormat dateTplt;
-    private Timer tm_TimeNote;
     private MainPtn mainPtn;
     private HintMdl hintMdl;
 
@@ -79,23 +79,16 @@ public class HintBar extends JPanel
 
     public void initData()
     {
-        if (tm_TimeNote == null)
+        Task.registerAction(new TaskInfo(3, 5, "mpwd-hint", ""), new IBackCall()
         {
-            tm_TimeNote = new Timer(600, new ActionListener()
-            {
 
-                @Override
-                public void actionPerformed(ActionEvent e)
-                {
-                    showNote();
-                }
-            });
-            tm_TimeNote.setInitialDelay(5000);
-        }
-        if (!tm_TimeNote.isRunning())
-        {
-            tm_TimeNote.start();
-        }
+            @Override
+            public boolean callBack(Object sender, EventListener event, String... params)
+            {
+                showNote();
+                return true;
+            }
+        });
     }
 
     private void lb_InfoLabelMouseClicked(java.awt.event.MouseEvent evt)

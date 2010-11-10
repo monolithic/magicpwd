@@ -4,6 +4,7 @@
  */
 package com.magicpwd._util;
 
+import com.magicpwd._cons.ConsEnv;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
@@ -252,5 +253,53 @@ public class Char
     public static String lUpper(String text)
     {
         return "";
+    }
+
+    /**
+     * 按常规规则进行字符串到字节数组的变换
+     *
+     * @param s
+     * @return
+     */
+    public static byte[] stringToBytes(String s, boolean bigCase)
+    {
+        return stringToBytes(s, bigCase ? ConsEnv.UPPER_NUMBER : ConsEnv.LOWER_NUMBER);
+    }
+
+    /**
+     * 按指定变换规则进行字符串到字节数组的变换
+     *
+     * @param s
+     * @param c
+     * @return
+     */
+    public static byte[] stringToBytes(String s, char[] c)
+    {
+        char[] t = s.toCharArray();
+        int i = 0, j = 0, k = t.length;
+        byte[] b = new byte[k >>> 1];
+        byte p;
+        while (i < k)
+        {
+            p = 0;
+            p |= charIndex(t[i++], c) << 4;
+            p |= charIndex(t[i++], c);
+            b[j++] = p;
+        }
+        return b;
+    }
+
+    private static int charIndex(char a, char[] c)
+    {
+        int i = 0;
+        for (char t : c)
+        {
+            if (a == t)
+            {
+                break;
+            }
+            i += 1;
+        }
+        return i;
     }
 }
