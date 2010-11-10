@@ -20,6 +20,7 @@ import javax.crypto.NoSuchPaddingException;
 
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 
@@ -123,7 +124,7 @@ final class SafeKey implements Key
         keys = cipherDigest();
 
         text = userMdl.getCfg(ConsCfg.CFG_USER_PKEY);
-        temp = Util.stringToBytes(text, true);
+        temp = Char.stringToBytes(text, true);
 
         // 解密用户配置密文获得解密数据
         Cipher aes = Cipher.getInstance(ConsEnv.NAME_CIPHER);
@@ -226,7 +227,7 @@ final class SafeKey implements Key
         keys = cipherDigest();
 
         text = text.substring(128);
-        temp = Util.stringToBytes(text, true);
+        temp = Char.stringToBytes(text, true);
 
         // 解密用户配置密文获得解密数据
         Cipher aes = Cipher.getInstance(ConsEnv.NAME_CIPHER);

@@ -96,6 +96,11 @@ public class I1S2
         this.i = i;
     }
 
+    public void addI(int i)
+    {
+        this.i += i;
+    }
+
     /**
      * @return the k
      */

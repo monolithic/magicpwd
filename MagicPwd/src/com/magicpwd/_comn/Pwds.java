@@ -5,6 +5,7 @@
 package com.magicpwd._comn;
 
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Util;
 import javax.crypto.Cipher;
 
@@ -96,7 +97,7 @@ public class Pwds
     public void deCript(Cipher c, char[] m) throws Exception
     {
         String t = P30F0203.toString();
-        P30F0203.delete(0, t.length()).append(new String(c.doFinal(Util.stringToBytes(t, m)), ConsEnv.FILE_ENCODING));
+        P30F0203.delete(0, t.length()).append(new String(c.doFinal(Char.stringToBytes(t, m)), ConsEnv.FILE_ENCODING));
     }
 
     /**
