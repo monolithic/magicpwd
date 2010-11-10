@@ -79,7 +79,7 @@ public class HintBar extends JPanel
 
     public void initData()
     {
-        Task.registerAction(new TaskInfo(3, 5, "mpwd-hint", ""), new IBackCall()
+        Task.registerAction(new TaskInfo(0, 5, "mpwd-hint", ""), new IBackCall()
         {
 
             @Override

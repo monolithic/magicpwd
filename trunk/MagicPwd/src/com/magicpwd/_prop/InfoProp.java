@@ -10,7 +10,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.v.mpwd.MainPtn;
 
 /**
  *
@@ -19,11 +19,11 @@ import com.magicpwd.m.UserMdl;
 public class InfoProp extends javax.swing.JPanel implements IPropBean
 {
 
-    private UserMdl userMdl;
+    private MainPtn mainPtn;
 
-    public InfoProp(UserMdl userMdl)
+    public InfoProp(MainPtn mainPtn)
     {
-        this.userMdl = userMdl;
+        this.mainPtn = mainPtn;
     }
 
     @Override

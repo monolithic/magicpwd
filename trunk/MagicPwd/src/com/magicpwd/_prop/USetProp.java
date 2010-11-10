@@ -10,6 +10,7 @@ import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.UserMdl;
+import com.magicpwd.v.mpwd.MainPtn;
 
 /**
  * @author Amon
@@ -18,12 +19,12 @@ import com.magicpwd.m.UserMdl;
 public class USetProp extends javax.swing.JPanel implements IPropBean
 {
 
-    private UserMdl userMdl;
+    private MainPtn mainPtn;
     private java.io.File backPath;
 
-    public USetProp(UserMdl userMdl)
+    public USetProp(MainPtn mainPtn)
     {
-        this.userMdl = userMdl;
+        this.mainPtn = mainPtn;
     }
 
     @Override
@@ -96,7 +97,7 @@ public class USetProp extends javax.swing.JPanel implements IPropBean
             java.util.Arrays.sort(names);
             cb_UserLang.setModel(new javax.swing.DefaultComboBoxModel(names));
         }
-        cb_UserLang.setSelectedItem(userMdl.getLang());
+        cb_UserLang.setSelectedItem(mainPtn.getUserMdl().getLang());
 
         cb_PwdsChar.removeAllItems();
         Char cher = new Char();
@@ -104,6 +105,7 @@ public class USetProp extends javax.swing.JPanel implements IPropBean
         cher.setP30F2104(Lang.getLang(LangRes.P30F7C06, "默认"));
         cher.setP30F2106(ConsCfg.DEF_PWDS_CHAR);
         cb_PwdsChar.addItem(cher);
+        UserMdl userMdl = mainPtn.getUserMdl();
         for (Char item : userMdl.getCharMdl().getCharSys())
         {
             cb_PwdsChar.addItem(item);
@@ -140,6 +142,7 @@ public class USetProp extends javax.swing.JPanel implements IPropBean
         }
 
         obj = cb_PwdsChar.getSelectedItem();
+        UserMdl userMdl = mainPtn.getUserMdl();
         if (obj != null && obj instanceof Char)
         {
             userMdl.setPwdsKey(((Char) obj).getP30F2103());

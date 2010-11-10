@@ -12,8 +12,8 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.CharMdl;
-import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.ListCR;
+import com.magicpwd.v.mpwd.MainPtn;
 
 /**
  * @author Amon
@@ -27,11 +27,11 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
      */
     private Char charItem;
     private boolean isUpdate;
-    private UserMdl userMdl;
+    private MainPtn mainPtn;
 
-    public CharProp(UserMdl userMdl)
+    public CharProp(MainPtn mainPtn)
     {
-        this.userMdl = userMdl;
+        this.mainPtn = mainPtn;
     }
 
     @Override
@@ -55,7 +55,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
     {
         if (cb_CharTplt.getItemCount() < 1)
         {
-            CharMdl cm = userMdl.getCharMdl();
+            CharMdl cm = mainPtn.getUserMdl().getCharMdl();
             ls_CharList.setModel(cm);
 
             DefaultComboBoxModel cm_CharTplt = new DefaultComboBoxModel();
@@ -167,7 +167,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         pl_ItemSort = new javax.swing.JPanel();
 
         bt_DropData = new IcoLabel();
-        bt_DropData.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "file-delete.png"));
+        bt_DropData.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "file-delete.png"));
         bt_DropData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -179,7 +179,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         });
 
         bt_SaveData = new IcoLabel();
-        bt_SaveData.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "file-save.png"));
+        bt_SaveData.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "file-save.png"));
         bt_SaveData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -191,7 +191,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         });
 
         bt_ApndData = new IcoLabel();
-        bt_ApndData.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "file-new.png"));
+        bt_ApndData.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "file-new.png"));
         bt_ApndData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -202,7 +202,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
             }
         });
         bt_SortU = new IcoLabel();
-        bt_SortU.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "edit-move-up.png"));
+        bt_SortU.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "edit-move-up.png"));
         bt_SortU.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -215,7 +215,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         add(bt_SortU);
 
         bt_SortD = new IcoLabel();
-        bt_SortD.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "edit-move-down.png"));
+        bt_SortD.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "edit-move-down.png"));
         bt_SortD.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -317,24 +317,24 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
     private void sortUActionPerformed(java.awt.event.ActionEvent evt)
     {
         int indx = ls_CharList.getSelectedIndex();
-        if (indx < 1 || indx >= userMdl.getCharMdl().getCharUsr().size())
+        if (indx < 1 || indx >= mainPtn.getUserMdl().getCharMdl().getCharUsr().size())
         {
             return;
         }
 
-        userMdl.getCharMdl().changeItemAt(indx, -1);
+        mainPtn.getUserMdl().getCharMdl().changeItemAt(indx, -1);
         ls_CharList.setSelectedIndex(indx - 1);
     }
 
     private void sortDActionPerformed(java.awt.event.ActionEvent evt)
     {
         int indx = ls_CharList.getSelectedIndex();
-        if (indx < 0 || indx >= userMdl.getCharMdl().getCharUsr().size() - 1)
+        if (indx < 0 || indx >= mainPtn.getUserMdl().getCharMdl().getCharUsr().size() - 1)
         {
             return;
         }
 
-        userMdl.getCharMdl().changeItemAt(indx, 1);
+        mainPtn.getUserMdl().getCharMdl().changeItemAt(indx, 1);
         ls_CharList.setSelectedIndex(indx + 1);
     }
 
@@ -374,11 +374,11 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         charItem.setP30F2106(sets);
         if (isUpdate)
         {
-            userMdl.getCharMdl().updateItemAt(ls_CharList.getSelectedIndex(), charItem);
+            mainPtn.getUserMdl().getCharMdl().updateItemAt(ls_CharList.getSelectedIndex(), charItem);
         }
         else
         {
-            userMdl.getCharMdl().appendItem(charItem);
+            mainPtn.getUserMdl().getCharMdl().appendItem(charItem);
         }
 
         charItem = new Char();
@@ -400,7 +400,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
             return;
         }
 
-        userMdl.getCharMdl().removeItemAt(ls_CharList.getSelectedIndex());
+        mainPtn.getUserMdl().getCharMdl().removeItemAt(ls_CharList.getSelectedIndex());
         charItem = new Char();
         showInfo(charItem);
         isUpdate = false;

@@ -6,7 +6,7 @@ package com.magicpwd._prop;
 
 import com.magicpwd.__i.IPropBean;
 import com.magicpwd._comn.S1S1;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.v.mpwd.MainPtn;
 
 /**
  *
@@ -14,12 +14,13 @@ import com.magicpwd.m.UserMdl;
  */
 public class JavaProp extends javax.swing.JPanel implements IPropBean
 {
-    private UserMdl userMdl;
+
+    private MainPtn mainPtn;
     private java.util.List<S1S1> javaList;
 
-    public JavaProp(UserMdl userMdl)
+    public JavaProp(MainPtn mainPtn)
     {
-        this.userMdl = userMdl;
+        this.mainPtn = mainPtn;
     }
 
     @Override
@@ -31,10 +32,8 @@ public class JavaProp extends javax.swing.JPanel implements IPropBean
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
-        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-                sp_SkeyList, javax.swing.GroupLayout.PREFERRED_SIZE, 300, Short.MAX_VALUE));
-        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(
-                sp_SkeyList, javax.swing.GroupLayout.PREFERRED_SIZE, 200, Short.MAX_VALUE));
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(sp_SkeyList, javax.swing.GroupLayout.PREFERRED_SIZE, 300, Short.MAX_VALUE));
+        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(sp_SkeyList, javax.swing.GroupLayout.PREFERRED_SIZE, 200, Short.MAX_VALUE));
     }
 
     @Override
