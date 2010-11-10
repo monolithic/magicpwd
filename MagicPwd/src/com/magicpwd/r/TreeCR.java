@@ -15,17 +15,8 @@ import javax.swing.JTree;
  * @author Amon
  * 
  */
-public class TreeCR extends JLabel implements javax.swing.tree.TreeCellRenderer
+public class TreeCR extends javax.swing.tree.DefaultTreeCellRenderer
 {
-
-    // Icons
-    /** Icon used to show non-leaf nodes that aren't expanded. */
-    transient protected javax.swing.Icon closedIcon;
-    /** Icon used to show leaf nodes. */
-    transient protected javax.swing.Icon leafIcon;
-    /** Icon used to show non-leaf nodes that are expanded. */
-    transient protected javax.swing.Icon openIcon;
-
     public TreeCR()
     {
         this(JLabel.LEFT);
@@ -35,9 +26,6 @@ public class TreeCR extends JLabel implements javax.swing.tree.TreeCellRenderer
     {
         setHorizontalAlignment(horizontalAlignment);
         setOpaque(true);
-        leafIcon = sun.swing.DefaultLookup.getIcon(this, ui, "Tree.leafIcon");
-        closedIcon = sun.swing.DefaultLookup.getIcon(this, ui, "Tree.closedIcon");
-        openIcon = sun.swing.DefaultLookup.getIcon(this, ui, "Tree.openIcon");
     }
 
     /*

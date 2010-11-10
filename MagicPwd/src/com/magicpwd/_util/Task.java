@@ -35,7 +35,7 @@ public class Task
         if (tasks == null)
         {
             tasks = new java.util.HashMap<TaskInfo, IBackCall>();
-            timer = new javax.swing.Timer(950, new java.awt.event.ActionListener()
+            timer = new javax.swing.Timer(500, new java.awt.event.ActionListener()
             {
 
                 @Override
@@ -44,7 +44,7 @@ public class Task
                     taskActionPerformed(e);
                 }
             });
-            timer.setInitialDelay(5000);
+            timer.setInitialDelay(3000);
         }
 
         if (!tasks.containsKey(item))
@@ -61,6 +61,13 @@ public class Task
     public static void removeAction(TaskInfo info)
     {
         tasks.remove(info);
+        if (tasks.size() < 1)
+        {
+            if (timer.isRunning())
+            {
+                timer.stop();
+            }
+        }
     }
 
     public static IBackCall getAction(String taskName)

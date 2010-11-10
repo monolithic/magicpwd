@@ -4,6 +4,7 @@
  */
 package com.magicpwd.__a;
 
+import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
@@ -15,6 +16,7 @@ import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.TrayPtn;
 import java.io.IOException;
+import java.util.EventListener;
 
 /**
  *
@@ -170,6 +172,19 @@ public abstract class AFrame extends javax.swing.JFrame
      */
     public void lockFrame()
     {
+        trayPtn.getUserPtn(ConsEnv.INT_SIGN_LS, new IBackCall()
+        {
+
+            @Override
+            public boolean callBack(Object sender, EventListener event, String... params)
+            {
+                if (params == null || params.length != 1)
+                {
+                    return false;
+                }
+                return ConsEnv.STR_SIGN_LS.equalsIgnoreCase(params[0]);
+            }
+        });
     }
 
     @Override
@@ -184,6 +199,10 @@ public abstract class AFrame extends javax.swing.JFrame
             setVisible(false);
             trayPtn.endSave();
         }
+//        else if (e.getID() == java.awt.event.WindowEvent.WINDOW_ICONIFIED)
+//        {
+//            hideFrame();
+//        }
         super.processWindowEvent(e);
     }
 

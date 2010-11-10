@@ -165,7 +165,7 @@ public class MdiDialog extends javax.swing.JDialog
 
         t = Lang.getLang(LangRes.P30F1202, "常规设置");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_USET, t, t));
-        USetProp up = new USetProp(mainPtn.getUserMdl());
+        USetProp up = new USetProp(mainPtn);
         up.initView();
         up.initLang();
         pl_CardPanel.add(ConsEnv.PROP_USET, up);
@@ -173,7 +173,7 @@ public class MdiDialog extends javax.swing.JDialog
 
         t = Lang.getLang(LangRes.P30F1203, "口令管理");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_CHAR, t, t));
-        CharProp cp = new CharProp(mainPtn.getUserMdl());
+        CharProp cp = new CharProp(mainPtn);
         cp.initView();
         cp.initLang();
         pl_CardPanel.add(ConsEnv.PROP_CHAR, cp);
@@ -181,7 +181,7 @@ public class MdiDialog extends javax.swing.JDialog
 
         t = Lang.getLang(LangRes.P30F1204, "模板管理");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_TPLT, t, t));
-        TpltProp tp = new TpltProp(mainPtn.getUserMdl());
+        TpltProp tp = new TpltProp(mainPtn);
         tp.initView();
         tp.initLang();
         pl_CardPanel.add(ConsEnv.PROP_TPLT, tp);
@@ -189,7 +189,7 @@ public class MdiDialog extends javax.swing.JDialog
 
         t = Lang.getLang(LangRes.P30F1205, "类别管理");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_KIND, t, t));
-        KindProp kp = new KindProp(null, mainPtn.getUserMdl());
+        KindProp kp = new KindProp(mainPtn);
         kp.initView();
         kp.initLang();
         pl_CardPanel.add(ConsEnv.PROP_KIND, kp);
@@ -197,7 +197,7 @@ public class MdiDialog extends javax.swing.JDialog
 
         t = Lang.getLang(LangRes.P30F1206, "键盘快捷");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_SKEY, t, t));
-        SKeyProp sp = new SKeyProp(mainPtn.getUserMdl());
+        SKeyProp sp = new SKeyProp(mainPtn);
         sp.initView();
         sp.initLang();
         pl_CardPanel.add(ConsEnv.PROP_SKEY, sp);
@@ -205,7 +205,7 @@ public class MdiDialog extends javax.swing.JDialog
 
         t = Lang.getLang(LangRes.P30F1209, "Java环境");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_JAVA, t, t));
-        JavaProp jp = new JavaProp(mainPtn.getUserMdl());
+        JavaProp jp = new JavaProp(mainPtn);
         jp.initView();
         jp.initLang();
         pl_CardPanel.add(ConsEnv.PROP_JAVA, jp);
@@ -213,7 +213,7 @@ public class MdiDialog extends javax.swing.JDialog
 
         t = Lang.getLang(LangRes.P30F1208, "关于软件");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_INFO, t, t));
-        InfoProp ip = new InfoProp(mainPtn.getUserMdl());
+        InfoProp ip = new InfoProp(mainPtn);
         ip.initView();
         ip.initLang();
         pl_CardPanel.add(ConsEnv.PROP_INFO, ip);

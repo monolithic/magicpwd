@@ -11,7 +11,6 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd.d.DBA3000;
-import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.TreeCR;
 import com.magicpwd.v.mpwd.MainPtn;
 
@@ -26,12 +25,10 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
     private Kind kindItem;
     private boolean isUpdate;
     private MainPtn mainPtn;
-    private UserMdl userMdl;
 
-    public KindProp(MainPtn mainPtn, UserMdl userMdl)
+    public KindProp(MainPtn mainPtn)
     {
         this.mainPtn = mainPtn;
-        this.userMdl = userMdl;
     }
 
     @Override
@@ -143,7 +140,7 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
         pl_ItemSort = new javax.swing.JPanel();
 
         bt_DropData = new IcoLabel();
-        bt_DropData.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "file-delete.png"));
+        bt_DropData.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "file-delete.png"));
         bt_DropData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -155,7 +152,7 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
         });
 
         bt_SaveData = new IcoLabel();
-        bt_SaveData.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "file-save.png"));
+        bt_SaveData.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "file-save.png"));
         bt_SaveData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -167,7 +164,7 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
         });
 
         bt_ApndData = new IcoLabel();
-        bt_ApndData.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "file-new.png"));
+        bt_ApndData.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "file-new.png"));
         bt_ApndData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -178,7 +175,7 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
             }
         });
         bt_SortU = new IcoLabel();
-        bt_SortU.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "edit-move-up.png"));
+        bt_SortU.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "edit-move-up.png"));
         bt_SortU.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -191,7 +188,7 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
         add(bt_SortU);
 
         bt_SortD = new IcoLabel();
-        bt_SortD.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "edit-move-down.png"));
+        bt_SortD.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "edit-move-down.png"));
         bt_SortD.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -204,7 +201,7 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
         add(bt_SortD);
 
         bt_SortL = new IcoLabel();
-        bt_SortL.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "edit-move-left.png"));
+        bt_SortL.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "edit-move-left.png"));
         bt_SortL.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -217,7 +214,7 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
         add(bt_SortL);
 
         bt_SortR = new IcoLabel();
-        bt_SortR.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "edit-move-right.png"));
+        bt_SortR.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "edit-move-right.png"));
         bt_SortR.addActionListener(new java.awt.event.ActionListener()
         {
 

@@ -865,27 +865,6 @@ public class MainPtn extends AFrame
     }
 
     @Override
-    protected void processWindowEvent(java.awt.event.WindowEvent e)
-    {
-        if (e.getID() == java.awt.event.WindowEvent.WINDOW_CLOSING)
-        {
-            if (mpwdMdl.getGridMdl().isModified() && javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(this, LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
-            {
-                return;
-            }
-            setVisible(false);
-            trayPtn.endSave();
-        }
-        else if (e.getID() == java.awt.event.WindowEvent.WINDOW_ICONIFIED)
-        {
-            setVisible(false);
-            trayPtn.showTips(Lang.getLang(LangRes.P30F9A01, "友情提示"), Lang.getLang(LangRes.P30F7A43, "魔方密码仍在运行中，您可以通过双击此处显示主窗口！"));
-            endSave();
-        }
-        super.processWindowEvent(e);
-    }
-
-    @Override
     public void requestFocus()
     {
         mainFind.requestFocus();
