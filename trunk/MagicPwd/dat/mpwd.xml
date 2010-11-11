@@ -22,7 +22,7 @@
                 </action>
             </item>
             <!--锁定窗口-->
-            <item type="normal" text="$P30F7604">
+            <item type="normal" text="$P30F7643">
                 <action id="lock-window" class="com.magicpwd.e.mpwd.file.LockAction">
                     <stroke key="^ L" />
                 </action>
@@ -225,7 +225,7 @@
                 <action class="com.magicpwd.e.mpwd.user.ChangePkeyAction" />
             </item>
             <!--设置安全口令-->
-            <item type="normal" text="$P30F7628">
+            <item id="mpwd-skey" type="normal" text="$P30F7628">
                 <action class="com.magicpwd.e.mpwd.user.CreateSkeyAction" />
             </item>
         </menu>
