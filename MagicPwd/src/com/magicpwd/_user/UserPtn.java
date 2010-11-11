@@ -35,6 +35,7 @@ public class UserPtn extends javax.swing.JPanel
      * 窗体对象引用
      */
     private javax.swing.JFrame frame;
+    private javax.swing.JFrame parent;
     private javax.swing.JDialog dialog;
     /**
      * 成功回调函数
@@ -69,6 +70,7 @@ public class UserPtn extends javax.swing.JPanel
     public UserPtn(UserMdl userMdl, javax.swing.JFrame frame)
     {
         this.userMdl = userMdl;
+        this.parent = frame;
         dialog = new javax.swing.JDialog(frame, true)
         {
 
@@ -593,6 +595,8 @@ public class UserPtn extends javax.swing.JPanel
 
                 Lang.setWText(bt_Confrm, LangRes.P30FA501, "登录(@S)");
 
+                setTitle(Lang.getLang(LangRes.P30FA202, "身份验证"));
+
                 lb_UsrLabel.setVisible(false);
                 break;
             case ConsEnv.INT_SIGN_RS:
@@ -788,7 +792,7 @@ public class UserPtn extends javax.swing.JPanel
         if (dialog != null)
         {
             dialog.pack();
-            Bean.centerForm(dialog, null);
+            Bean.centerForm(dialog, parent);
         }
 
         return true;

@@ -35,7 +35,7 @@ public class HideAction extends AMwizAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        javax.swing.JOptionPane.showMessageDialog(normPtn, "Hide");
+        normPtn.hideFrame();
     }
 
     @Override

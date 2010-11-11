@@ -20,7 +20,7 @@ public class HideAction extends AMpadAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        miniPtn.endSave();
+        miniPtn.hideFrame();
     }
 
     @Override
