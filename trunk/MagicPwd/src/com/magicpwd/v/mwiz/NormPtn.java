@@ -51,12 +51,6 @@ public class NormPtn extends AFrame
 
         tb_KeysList = new javax.swing.JTable();
         tb_KeysList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        mwizMdl = new MwizMdl(userMdl);
-        mwizMdl.init();
-        tb_KeysList.setModel(mwizMdl);
-        int w = tb_KeysList.getFontMetrics(tb_KeysList.getFont()).stringWidth("99999");
-        tb_KeysList.getColumnModel().getColumn(0).setMaxWidth(w);
-        tb_KeysList.getColumnModel().getColumn(1).setMaxWidth(40);
 
         hb_HintBar = new HintBar(userMdl);
         hb_HintBar.initView();
@@ -110,6 +104,13 @@ public class NormPtn extends AFrame
         super.setVisible(true);
 
         hb_HintBar.initData();
+
+        mwizMdl = new MwizMdl(userMdl);
+        mwizMdl.init();
+        tb_KeysList.setModel(mwizMdl.getGridMdl());
+        int w = tb_KeysList.getFontMetrics(tb_KeysList.getFont()).stringWidth("99999");
+        tb_KeysList.getColumnModel().getColumn(0).setMaxWidth(w);
+        tb_KeysList.getColumnModel().getColumn(1).setMaxWidth(40);
 
         try
         {
@@ -170,7 +171,7 @@ public class NormPtn extends AFrame
 
         safeMdl = mwizMdl.getKeysMdl();
 
-        mwizMdl.listKeysByKind("0");
+        mwizMdl.getGridMdl().listKeysByKind("0");
     }
 
     @Override
@@ -193,7 +194,7 @@ public class NormPtn extends AFrame
             EditPtn editDlg = getEditPtn();
             editDlg.setTitle(Lang.getLang(LangRes.P30F6202, "口令查看"));
             KeysMdl keysMdl = mwizMdl.getKeysMdl();
-            keysMdl.loadData(mwizMdl.getKeysAt(row));
+            keysMdl.loadData(mwizMdl.getGridMdl().getKeysAt(row));
             editDlg.showData(keysMdl, false);
         }
         catch (Exception ex)
@@ -225,7 +226,7 @@ public class NormPtn extends AFrame
             EditPtn editDlg = getEditPtn();
             editDlg.setTitle(Lang.getLang(LangRes.P30F6203, "口令编辑"));
             KeysMdl keysMdl = mwizMdl.getKeysMdl();
-            keysMdl.loadData(mwizMdl.getKeysAt(row));
+            keysMdl.loadData(mwizMdl.getGridMdl().getKeysAt(row));
             editDlg.showData(keysMdl, true);
         }
         catch (Exception ex)
@@ -245,7 +246,7 @@ public class NormPtn extends AFrame
 
         try
         {
-            mwizMdl.wDelete(row);
+            mwizMdl.getGridMdl().wDelete(row);
             mwizMdl.getKeysMdl().clear();
         }
         catch (Exception ex)
@@ -288,7 +289,7 @@ public class NormPtn extends AFrame
 
     public void endKeys()
     {
-        mwizMdl.listKeysByKind("0");
+        mwizMdl.getGridMdl().listKeysByKind("0");
     }
 
     @Override
@@ -324,11 +325,11 @@ public class NormPtn extends AFrame
 
         if (Char.isValidate(meta))
         {
-            mwizMdl.listKeysByMeta(meta);
+            mwizMdl.getGridMdl().listKeysByMeta(meta);
         }
         else
         {
-            mwizMdl.listKeysByKind("0");
+            mwizMdl.getGridMdl().listKeysByKind("0");
         }
     }
     private HintBar hb_HintBar;

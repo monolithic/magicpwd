@@ -31,9 +31,6 @@ import com.magicpwd._util.Char;
 public abstract class ADataBean extends AEditBean
 {
 
-    protected AFrame formPtn;
-    protected IEditItem itemData;
-
     public ADataBean(AFrame formPtn)
     {
         this.formPtn = formPtn;

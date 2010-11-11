@@ -76,6 +76,7 @@ public class ListBean extends AListBean implements IMwizBean
     @Override
     public boolean saveData()
     {
+        saveName();
         return true;
     }
 }

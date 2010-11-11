@@ -14,39 +14,34 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd._bean;
+package com.magicpwd.e.mpad;
 
-import com.magicpwd.__a.AEditBean;
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.mpad.AMpadAction;
 
 /**
- * Application: MagicPwd
- * Author     : Amon
- * Encoding   : UTF-8
- * Created    : 2010-10-27 20:23:24
- * Website    : http://magicpwd.com/
- * Project    : http://magicpwd.googlecode.com/
- * Contact    : Amon@magicpwd.com
- * CopyRight  : Winshine.biz
- * Description:
+ *
+ * @author Amon
  */
-public abstract class AListBean extends AEditBean
+public class SearchAction extends AMpadAction
 {
 
-    public AListBean(AFrame formPtn)
-    {
-        this.formPtn = formPtn;
-    }
-
-    protected void initConfView()
+    public SearchAction()
     {
     }
 
-    protected void initConfLang()
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent e)
+    {
+        miniPtn.findNote();
+    }
+
+    @Override
+    public void doInit(Object object)
     {
     }
 
-    protected void initConfData()
+    @Override
+    public void reInit(javax.swing.AbstractButton button)
     {
     }
 }

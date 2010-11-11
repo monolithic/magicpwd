@@ -106,13 +106,13 @@ public class MenuPtn
         }
         Element element = (Element) node;
 
-        menuBar.setName(menuId);
-
         java.util.List elementList = element.elements("menu");
         if (elementList == null || elementList.size() < 1)
         {
             return false;
         }
+
+        menuBar.setName(menuId);
 
         Element tmp;
         for (Object obj : elementList)
@@ -144,91 +144,95 @@ public class MenuPtn
         return true;
     }
 
-    public javax.swing.JToolBar getToolBar(String toolId, javax.swing.JToolBar toolBar, javax.swing.JComponent component, String viewPtn)
+    public boolean getToolBar(String toolId, javax.swing.JToolBar toolBar, javax.swing.JComponent component, String viewPtn)
     {
         if (!Char.isValidate(toolId) || document == null)
         {
-            return null;
+            return false;
         }
         Node node = document.getRootElement().selectSingleNode(Char.format("/magicpwd/toolbar[@id='{0}']", toolId));
         if (node == null || !(node instanceof Element))
         {
-            return null;
+            return false;
         }
         Element element = (Element) node;
 
+        java.util.List elementList = element.elements();
+        if (elementList == null || elementList.size() < 1)
+        {
+            return false;
+        }
+
         toolBar.setName(toolId);
 
-        java.util.List elementList = element.elements();
-        if (elementList != null)
+        Element tmp;
+        for (Object obj : elementList)
         {
-            Element tmp;
-            for (Object obj : elementList)
+            if (!(obj instanceof Element))
             {
-                if (!(obj instanceof Element))
-                {
-                    continue;
-                }
-                tmp = (Element) obj;
-                if ("item".equals(tmp.getName()))
-                {
-                    toolBar.add(createButton(tmp, component, viewPtn));
-                    continue;
-                }
-                if ("seperator".equals(tmp.getName()))
-                {
-                    toolBar.addSeparator();
-                    continue;
-                }
+                continue;
+            }
+            tmp = (Element) obj;
+            if ("item".equals(tmp.getName()))
+            {
+                toolBar.add(createButton(tmp, component, viewPtn));
+                continue;
+            }
+            if ("seperator".equals(tmp.getName()))
+            {
+                toolBar.addSeparator();
+                continue;
             }
         }
-        return toolBar;
+        return true;
     }
 
-    public javax.swing.JPopupMenu getPopMenu(String menuId, javax.swing.JPopupMenu menuPop)
+    public boolean getPopMenu(String menuId, javax.swing.JPopupMenu menuPop)
     {
         if (!Char.isValidate(menuId) || document == null)
         {
-            return null;
+            return false;
         }
         Node node = document.getRootElement().selectSingleNode(Char.format("/magicpwd/popmenu[@id='{0}']", menuId));
         if (node == null || !(node instanceof Element))
         {
-            return null;
+            return false;
         }
         Element element = (Element) node;
 
+        java.util.List elementList = element.elements();
+        if (elementList == null || elementList.size() < 1)
+        {
+            return false;
+        }
+
         menuPop.setName(menuId);
 
-        java.util.List elementList = element.elements();
-        if (elementList != null)
+        Element tmp;
+        for (Object obj : elementList)
         {
-            Element tmp;
-            for (Object obj : elementList)
+            if (!(obj instanceof Element))
             {
-                if (!(obj instanceof Element))
-                {
-                    continue;
-                }
-                tmp = (Element) obj;
-                if ("menu".equals(tmp.getName()))
-                {
-                    menuPop.add(createMenu(tmp, null, null));
-                    continue;
-                }
-                if ("item".equals(tmp.getName()))
-                {
-                    menuPop.add(createItem(tmp, null, null));
-                    continue;
-                }
-                if ("seperator".equals(tmp.getName()))
-                {
-                    menuPop.addSeparator();
-                    continue;
-                }
+                continue;
+            }
+            tmp = (Element) obj;
+            if ("menu".equals(tmp.getName()))
+            {
+                menuPop.add(createMenu(tmp, null, null));
+                continue;
+            }
+            if ("item".equals(tmp.getName()))
+            {
+                menuPop.add(createItem(tmp, null, null));
+                continue;
+            }
+            if ("seperator".equals(tmp.getName()))
+            {
+                menuPop.addSeparator();
+                continue;
             }
         }
-        return menuPop;
+        return true;
     }
 
     public boolean getSubMenu(String partId, javax.swing.JPopupMenu menu, IMpwdAction action)

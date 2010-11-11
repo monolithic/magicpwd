@@ -18,7 +18,6 @@ package com.magicpwd._bean;
 
 import com.magicpwd.__a.AEditBean;
 import com.magicpwd.__a.AFrame;
-import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.item.EditItem;
 import com.magicpwd._comn.prop.Char;
 import com.magicpwd._comp.BtnLabel;
@@ -45,8 +44,6 @@ import javax.swing.JOptionPane;
 public abstract class APwdsBean extends AEditBean
 {
 
-    protected AFrame formPtn;
-    protected IEditItem itemData;
     private boolean askOverWrite;
 
     public APwdsBean(AFrame formPtn)

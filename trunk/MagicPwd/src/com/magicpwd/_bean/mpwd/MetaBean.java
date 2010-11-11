@@ -110,6 +110,7 @@ public class MetaBean extends javax.swing.JPanel implements IMpwdBean
     public void showData(IEditItem item)
     {
         itemData = item;
+
         tf_PropName.setText(itemData.getName());
         ta_PropData.setText(itemData.getData());
     }

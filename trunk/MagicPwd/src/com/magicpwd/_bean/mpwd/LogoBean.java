@@ -126,6 +126,7 @@ public class LogoBean extends javax.swing.JPanel implements IMpwdBean, IBackCall
     public void showData(IEditItem item)
     {
         itemData = (LogoItem) item;
+
         ib_PropName.setIcon(Bean.getDataIcon(item.getName()));
         ta_PropData.setText(item.getData());
     }

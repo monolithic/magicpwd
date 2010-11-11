@@ -87,6 +87,7 @@ public class MailBean extends AMailBean implements IMwizBean
     @Override
     public boolean saveData()
     {
+        saveName();
         return processData();
     }
 }

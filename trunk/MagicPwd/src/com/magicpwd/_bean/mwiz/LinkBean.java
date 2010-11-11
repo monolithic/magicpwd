@@ -87,6 +87,7 @@ public class LinkBean extends ALinkBean implements IMwizBean
     @Override
     public boolean saveData()
     {
+        saveName();
         itemData.setData(tf_PropData.getText());
         return true;
     }

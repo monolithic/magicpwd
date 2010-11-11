@@ -73,6 +73,7 @@ public class DataBean extends ADataBean implements IMwizBean
     @Override
     public boolean saveData()
     {
+        saveName();
         return processData();
     }
 }

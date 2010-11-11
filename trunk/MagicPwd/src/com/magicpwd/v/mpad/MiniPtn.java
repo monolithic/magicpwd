@@ -11,10 +11,10 @@ import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.DBA3000;
-import com.magicpwd.e.mpad.FindAction;
 import com.magicpwd.e.mpad.NewAction;
 import com.magicpwd.e.mpad.OpenAction;
 import com.magicpwd.e.mpad.SaveAction;
+import com.magicpwd.e.mpad.SearchAction;
 import com.magicpwd.m.mpad.NoteMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.m.mpad.MpadMdl;
@@ -61,7 +61,7 @@ public class MiniPtn extends AFrame
 
         lb_NoteHead.setLabelFor(tf_NoteName);
 
-        FindAction findAction = new FindAction();
+        SearchAction findAction = new SearchAction();
         findAction.setMiniPtn(this);
         tf_NoteName.addActionListener(findAction);
         nameBox = new WTextBox(tf_NoteName, true);
@@ -203,7 +203,9 @@ public class MiniPtn extends AFrame
         super.setVisible(true);
 
         mpadMdl = new MpadMdl(userMdl);
-        safeMdl = mpadMdl.getKeysMdl();
+        mpadMdl.init();
+
+        safeMdl = mpadMdl.getNoteMdl();
 
         noteList = new java.util.ArrayList<S1S2>();
         nameBox.initData();

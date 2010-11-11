@@ -573,6 +573,8 @@ public class UserPtn extends javax.swing.JPanel
         switch (signType)
         {
             case ConsEnv.INT_SIGN_IN:
+                Lang.setWText(lb_UserType, LangRes.P30FA312, "模式(@M)");
+
                 Lang.setWText(lb_UserName, LangRes.P30FA301, "用户(@U)");
                 Lang.setWText(lb_UserKey0, LangRes.P30FA302, "口令(@P)");
 
@@ -679,7 +681,7 @@ public class UserPtn extends javax.swing.JPanel
                 lb_UsrLabel.setVisible(false);
                 break;
             case ConsEnv.INT_SIGN_CS:
-                Lang.setWText(lb_UserType, LangRes.P30FA301, "服务器(@V)");
+                Lang.setWText(lb_UserType, LangRes.P30FA313, "服务器(@M)");
 
                 Lang.setWText(lb_UserName, LangRes.P30FA301, "用户(@U)");
 

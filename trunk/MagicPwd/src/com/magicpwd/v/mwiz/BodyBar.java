@@ -77,9 +77,14 @@ public class BodyBar extends javax.swing.JPanel
         javax.swing.GroupLayout.ParallelGroup vpg;
         while (true)
         {
+            if (step < 0 || step >= max)
+            {
+                break;
+            }
+
             int type = keysMdl.getItemAt(step++).getType();
             row -= (type == ConsDat.INDX_AREA || type == ConsDat.INDX_LIST) ? 4 : 1;
-            if (row < 0 || step >= max)
+            if (row < 0)
             {
                 break;
             }
@@ -145,6 +150,10 @@ public class BodyBar extends javax.swing.JPanel
 
     public void initData()
     {
+    }
+
+    public void showData()
+    {
         AEditBean panel;
         for (int i = 0, j = currStep; i < ConsEnv.MWIZ_MAX_ROW; i += 1)
         {
@@ -157,12 +166,18 @@ public class BodyBar extends javax.swing.JPanel
         }
     }
 
-    public void showData()
-    {
-    }
-
     public boolean saveData()
     {
+        AEditBean panel;
+        for (int i = 0, j = currStep; i < ConsEnv.MWIZ_MAX_ROW; i += 1)
+        {
+            panel = pl_EditList[i];
+            if (panel == null)
+            {
+                break;
+            }
+            ((IMwizBean) panel).saveData();
+        }
         return true;
     }
 

@@ -87,6 +87,7 @@ public class DateBean extends ADateBean implements IMwizBean
     @Override
     public boolean saveData()
     {
+        saveName();
         itemData.setData(tf_PropData.getText());
         return true;
     }

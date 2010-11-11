@@ -26,6 +26,10 @@ public class ListMdl extends DefaultListModel
     ListMdl(UserMdl userMdl)
     {
         this.userMdl = userMdl;
+    }
+
+    void init()
+    {
         keysList = new ArrayList<Keys>();
     }
 

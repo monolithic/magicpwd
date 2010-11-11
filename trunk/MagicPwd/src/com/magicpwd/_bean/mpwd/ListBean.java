@@ -99,6 +99,7 @@ public class ListBean extends AListBean implements IMpwdBean
     @Override
     public void showData(IEditItem item)
     {
+        itemData = item;
     }
 
     @Override

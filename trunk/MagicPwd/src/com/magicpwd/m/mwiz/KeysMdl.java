@@ -38,9 +38,13 @@ import com.magicpwd.m.UserMdl;
 public class KeysMdl extends SafeMdl
 {
 
-    public KeysMdl(UserMdl userMdl)
+    KeysMdl(UserMdl userMdl)
     {
         super(userMdl);
+    }
+
+    void init()
+    {
     }
 
     @Override

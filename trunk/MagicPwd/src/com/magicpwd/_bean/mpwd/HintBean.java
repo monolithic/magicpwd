@@ -175,6 +175,7 @@ public class HintBean extends javax.swing.JPanel implements IMpwdBean
     public void showData(IEditItem item)
     {
         itemData = item;
+
         tf_PropName.setText(item.getName());
         tf_PropData.setText(item.getData());
     }
