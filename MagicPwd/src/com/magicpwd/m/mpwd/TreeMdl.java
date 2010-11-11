@@ -17,9 +17,14 @@ import com.magicpwd.d.DBA3000;
  */
 public class TreeMdl extends DefaultTreeModel
 {
+
     TreeMdl(KindTN root)
     {
         super(root);
+    }
+
+    void init()
+    {
     }
 
     public void wAppend(TreePath path, Kind kind)

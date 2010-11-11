@@ -42,8 +42,6 @@ import com.magicpwd._util.Logs;
 public abstract class AFileBean extends AEditBean
 {
 
-    protected AFrame formPtn;
-    protected IEditItem itemData;
     protected java.io.File filePath;
     protected java.io.File amaPath;
     private WTextBox dataBox;

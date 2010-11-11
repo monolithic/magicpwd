@@ -89,6 +89,7 @@ public class PwdsBean extends APwdsBean implements IMwizBean
     @Override
     public boolean saveData()
     {
+        saveName();
         itemData.setData(new String(pf_PropData.getPassword()));
         return true;
     }

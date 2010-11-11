@@ -9,7 +9,6 @@ import com.magicpwd._bean.APwdsBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsCfg;
-import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
@@ -115,12 +114,8 @@ public class PwdsBean extends APwdsBean implements IMpwdBean
     public void showData(IEditItem item)
     {
         itemData = item;
-        String name = itemData.getName();
-        if (com.magicpwd._util.Char.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS))
-        {
-            name = name.substring(1, name.length() - 1);
-        }
-        tf_PropName.setText(name);
+        
+        tf_PropName.setText(showName());
         pf_PropData.setText(itemData.getData());
 
         String size = itemData.getSpec(IEditItem.SPEC_PWDS_SIZE, "0");

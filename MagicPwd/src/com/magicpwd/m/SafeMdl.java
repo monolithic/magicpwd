@@ -84,7 +84,7 @@ public abstract class SafeMdl
             try
             {
                 eCipher = javax.crypto.Cipher.getInstance(ConsEnv.NAME_CIPHER);
-                eCipher.init(javax.crypto.Cipher.ENCRYPT_MODE, userMdl.safeKey);
+                eCipher.init(javax.crypto.Cipher.ENCRYPT_MODE, UserMdl.safeKey);
             }
             catch (Exception exp)
             {
@@ -103,7 +103,7 @@ public abstract class SafeMdl
      */
     public String deCrypt(String text) throws Exception
     {
-        return new String(getDCipher().doFinal(Char.stringToBytes(text, userMdl.safeKey.getMask())), ConsEnv.FILE_ENCODING);
+        return new String(getDCipher().doFinal(Char.stringToBytes(text, UserMdl.safeKey.getMask())), ConsEnv.FILE_ENCODING);
     }
 
     /**
@@ -137,7 +137,7 @@ public abstract class SafeMdl
      */
     public String enCrypt(String text) throws Exception
     {
-        return Util.bytesToString(getECipher().doFinal(text.getBytes(ConsEnv.FILE_ENCODING)), userMdl.safeKey.getMask());
+        return Util.bytesToString(getECipher().doFinal(text.getBytes(ConsEnv.FILE_ENCODING)), UserMdl.safeKey.getMask());
     }
 
     /**

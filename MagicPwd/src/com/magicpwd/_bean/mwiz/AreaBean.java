@@ -73,6 +73,7 @@ public class AreaBean extends AAreaBean implements IMwizBean
     @Override
     public boolean saveData()
     {
+        saveName();
         itemData.setData(ta_PropData.getText());
         return true;
     }

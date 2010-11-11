@@ -18,9 +18,13 @@ import com.magicpwd.m.UserMdl;
 public class NoteMdl extends SafeMdl
 {
 
-    public NoteMdl(UserMdl userMdl)
+    NoteMdl(UserMdl userMdl)
     {
         super(userMdl);
+    }
+
+    void init()
+    {
     }
 
     @Override

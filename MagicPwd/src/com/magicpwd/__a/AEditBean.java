@@ -17,6 +17,8 @@
 package com.magicpwd.__a;
 
 import com.magicpwd.__i.IEditBean;
+import com.magicpwd.__i.IEditItem;
+import com.magicpwd._cons.ConsDat;
 
 /**
  * Application: MagicPwd
@@ -31,4 +33,27 @@ import com.magicpwd.__i.IEditBean;
  */
 public abstract class AEditBean extends javax.swing.JPanel implements IEditBean
 {
+
+    protected AFrame formPtn;
+    protected IEditItem itemData;
+
+    protected String showName()
+    {
+        String name = itemData.getName();
+        if (com.magicpwd._util.Char.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS))
+        {
+            name = name.substring(1, name.length() - 1);
+        }
+        return name;
+    }
+
+    protected void saveName()
+    {
+        String name = itemData.getName();
+        if (com.magicpwd._util.Char.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS))
+        {
+            name = name.substring(1, name.length() - 1);
+        }
+        itemData.setName(name);
+    }
 }

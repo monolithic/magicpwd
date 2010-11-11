@@ -38,11 +38,17 @@ public class CreateSkeyAction extends AMpwdAction
             @Override
             public boolean callBack(Object sender, java.util.EventListener event, String... params)
             {
-                if (params != null && params.length > 0)
+                if (params == null || params.length < 1)
                 {
-                    if (ConsEnv.STR_SIGN_SK.equals(params[0]))
+                    return false;
+                }
+
+                if (ConsEnv.STR_SIGN_SK.equals(params[0]))
+                {
+                    javax.swing.AbstractButton button = mainPtn.getMenuPtn().getButton("mpwd-skey");
+                    if (button != null)
                     {
-                        setEnabled(false);
+                        button.setEnabled(false);
                     }
                 }
                 return true;

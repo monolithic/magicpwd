@@ -18,7 +18,6 @@ package com.magicpwd._bean;
 
 import com.magicpwd.__a.AEditBean;
 import com.magicpwd.__a.AFrame;
-import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comp.WTextBox;
 
 /**
@@ -28,8 +27,6 @@ import com.magicpwd._comp.WTextBox;
 public abstract class ATextBean extends AEditBean
 {
 
-    protected AFrame formPtn;
-    protected IEditItem itemData;
     private WTextBox dataBox;
 
     public ATextBean(AFrame formPtn)

@@ -35,8 +35,6 @@ import com.magicpwd._util.Lang;
 public abstract class ADateBean extends AEditBean
 {
 
-    protected AFrame formPtn;
-    protected IEditItem itemData;
     private java.text.DateFormat format;
 
     public ADateBean(AFrame formPtn)

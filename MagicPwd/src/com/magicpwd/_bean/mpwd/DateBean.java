@@ -8,7 +8,6 @@ import com.magicpwd.__i.mpwd.IMpwdBean;
 import com.magicpwd._bean.ADateBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
-import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
@@ -114,13 +113,10 @@ public class DateBean extends ADateBean implements IMpwdBean
     public void showData(IEditItem item)
     {
         itemData = item;
-        String name = itemData.getName();
-        if (com.magicpwd._util.Char.isValidate(name) && name.startsWith(ConsDat.SP_TPL_LS) && name.endsWith(ConsDat.SP_TPL_RS))
-        {
-            name = name.substring(1, name.length() - 1);
-        }
-        tf_PropName.setText(name);
+
+        tf_PropName.setText(showName());
         tf_PropData.setText(itemData.getData());
+
         boolean b = mainPtn.getMenuPtn().getGroup("date-template").setSelected(itemData.getSpec(IEditItem.SPEC_DATE_FORM), true);
         mi_ConfDef.setSelected(!b);
     }

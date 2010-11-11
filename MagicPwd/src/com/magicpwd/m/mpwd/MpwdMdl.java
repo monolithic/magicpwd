@@ -13,7 +13,7 @@ import com.magicpwd.r.KindTN;
  *
  * @author Amon
  */
-public final class MpwdMdl extends UserMdl
+public final class MpwdMdl
 {
 
     private TreeMdl treeMdl;
@@ -28,14 +28,18 @@ public final class MpwdMdl extends UserMdl
 
     public void init()
     {
-        listMdl = new ListMdl(this);
+        listMdl = new ListMdl(userMdl);
+        listMdl.init();
+
         Kind kind = new Kind();
         kind.setC2010103(ConsDat.HASH_ROOT);
         kind.setC2010105("魔方密码");
         kind.setC2010106("魔方密码");
         treeMdl = new TreeMdl(new KindTN(kind));
+        treeMdl.init();
 
         gridMdl = new GridMdl(userMdl);
+        gridMdl.init();
     }
 
     /**

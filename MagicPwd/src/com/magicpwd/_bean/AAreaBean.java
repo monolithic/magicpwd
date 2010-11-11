@@ -18,7 +18,6 @@ package com.magicpwd._bean;
 
 import com.magicpwd.__a.AEditBean;
 import com.magicpwd.__a.AFrame;
-import com.magicpwd.__i.IEditItem;
 
 /**
  *
@@ -26,9 +25,6 @@ import com.magicpwd.__i.IEditItem;
  */
 public abstract class AAreaBean extends AEditBean
 {
-
-    protected AFrame formPtn;
-    protected IEditItem itemData;
 
     public AAreaBean(AFrame formPtn)
     {

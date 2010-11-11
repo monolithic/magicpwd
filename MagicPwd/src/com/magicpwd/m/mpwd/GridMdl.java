@@ -28,9 +28,13 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
 
     private javax.swing.event.EventListenerList listenerList;
 
-    public GridMdl(UserMdl userMdl)
+    GridMdl(UserMdl userMdl)
     {
         super(userMdl);
+    }
+
+    void init()
+    {
         listenerList = new javax.swing.event.EventListenerList();
     }
 
@@ -177,6 +181,13 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     public IEditItem getItemAt(int index)
     {
         return ls_ItemList.get(index);
+    }
+
+    @Override
+    public void loadData(String keysHash) throws Exception
+    {
+        super.loadData(keysHash);
+        this.fireTableDataChanged();
     }
 
     /**
