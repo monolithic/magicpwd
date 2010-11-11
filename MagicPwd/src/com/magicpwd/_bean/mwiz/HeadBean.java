@@ -56,13 +56,13 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
     public void initView()
     {
         lb_MetaName = new javax.swing.JLabel();
-        tf_MetaName = new javax.swing.JTextField(14);
+        tf_MetaName = new javax.swing.JTextField(20);
         lb_MetaData = new javax.swing.JLabel();
         ta_MetaData = new javax.swing.JTextArea();
         lb_HintName = new javax.swing.JLabel();
-        tf_HintName = new javax.swing.JTextField(14);
+        tf_HintName = new javax.swing.JTextField(20);
         lb_HintDate = new javax.swing.JLabel();
-        tf_HintDate = new javax.swing.JTextField(14);
+        tf_HintDate = new javax.swing.JTextField(20);
 
         lb_MetaName.setLabelFor(tf_MetaName);
 

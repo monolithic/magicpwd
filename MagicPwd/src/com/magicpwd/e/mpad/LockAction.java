@@ -39,7 +39,7 @@ public class LockAction extends AMpadAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        miniPtn.endSave();
+        miniPtn.lockFrame();
     }
 
     @Override

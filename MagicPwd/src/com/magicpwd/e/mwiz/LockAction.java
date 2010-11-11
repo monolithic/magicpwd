@@ -35,7 +35,7 @@ public class LockAction extends AMwizAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        javax.swing.JOptionPane.showMessageDialog(normPtn, "Lock");
+        normPtn.lockFrame();
     }
 
     @Override
