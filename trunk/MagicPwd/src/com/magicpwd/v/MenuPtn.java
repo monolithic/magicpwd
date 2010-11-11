@@ -93,53 +93,55 @@ public class MenuPtn
         return groups.get(id);
     }
 
-    public javax.swing.JMenuBar getMenuBar(String menuId, javax.swing.JMenuBar menuBar, javax.swing.JComponent component)
+    public boolean getMenuBar(String menuId, javax.swing.JMenuBar menuBar, javax.swing.JComponent component)
     {
         if (!Char.isValidate(menuId) || document == null)
         {
-            return null;
+            return false;
         }
         Node node = document.getRootElement().selectSingleNode(Char.format("/magicpwd/menubar[@id='{0}']", menuId));
         if (node == null || !(node instanceof Element))
         {
-            return null;
+            return false;
         }
         Element element = (Element) node;
 
         menuBar.setName(menuId);
 
         java.util.List elementList = element.elements("menu");
-        if (elementList != null)
+        if (elementList == null || elementList.size() < 1)
         {
-            Element tmp;
-            for (Object obj : elementList)
-            {
-                if (!(obj instanceof Element))
-                {
-                    continue;
-                }
-                tmp = (Element) obj;
-                javax.swing.JMenu menu = createMenu(tmp, component, null);
-                if (menu == null)
-                {
-                    continue;
-                }
-                menuBar.add(menu);
-            }
-
-            final String KEY_SKIN = "skin";
-            if (buttons.containsKey(KEY_SKIN))
-            {
-                javax.swing.JMenu skin = (javax.swing.JMenu) buttons.get(KEY_SKIN);
-                if (skin == null)
-                {
-                    skin = new javax.swing.JMenu();
-                    menuBar.add(skin);
-                }
-                loadSkin(skin);
-            }
+            return false;
         }
-        return menuBar;
+
+        Element tmp;
+        for (Object obj : elementList)
+        {
+            if (!(obj instanceof Element))
+            {
+                continue;
+            }
+            tmp = (Element) obj;
+            javax.swing.JMenu menu = createMenu(tmp, component, null);
+            if (menu == null)
+            {
+                continue;
+            }
+            menuBar.add(menu);
+        }
+
+        final String KEY_SKIN = "skin";
+        if (buttons.containsKey(KEY_SKIN))
+        {
+            javax.swing.JMenu skin = (javax.swing.JMenu) buttons.get(KEY_SKIN);
+            if (skin == null)
+            {
+                skin = new javax.swing.JMenu();
+                menuBar.add(skin);
+            }
+            loadSkin(skin);
+        }
+        return true;
     }
 
     public javax.swing.JToolBar getToolBar(String toolId, javax.swing.JToolBar toolBar, javax.swing.JComponent component, String viewPtn)

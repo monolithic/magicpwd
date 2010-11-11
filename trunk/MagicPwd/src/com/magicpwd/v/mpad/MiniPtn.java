@@ -202,6 +202,9 @@ public class MiniPtn extends AFrame
     {
         super.setVisible(true);
 
+        mpadMdl = new MpadMdl(userMdl);
+        safeMdl = mpadMdl.getKeysMdl();
+
         noteList = new java.util.ArrayList<S1S2>();
         nameBox.initData();
         dataBox.initData();
@@ -210,6 +213,11 @@ public class MiniPtn extends AFrame
         try
         {
             menuPtn.loadData(new java.io.File(userMdl.getDataDir(), "mpad.xml"));
+            javax.swing.JMenuBar menuBar = new javax.swing.JMenuBar();
+            if (menuPtn.getMenuBar("mpad", menuBar, rootPane))
+            {
+                setJMenuBar(menuBar);
+            }
             menuPtn.getStrokes("mpad", rootPane);
         }
         catch (Exception e)
@@ -264,7 +272,7 @@ public class MiniPtn extends AFrame
     @Override
     public MenuPtn getMenuPtn()
     {
-        return null;
+        return menuPtn;
     }
 
     public void findNote()

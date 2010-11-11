@@ -197,7 +197,6 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
                 break;
         }
 
-        currForm.setVisible(false);
         if (getCurrForm().getState() != java.awt.Frame.NORMAL)
         {
             getCurrForm().setState(java.awt.Frame.NORMAL);
