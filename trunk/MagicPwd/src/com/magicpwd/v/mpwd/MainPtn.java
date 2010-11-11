@@ -3,7 +3,9 @@
  */
 package com.magicpwd.v.mpwd;
 
+import com.magicpwd.v.HintBar;
 import com.magicpwd.__a.AFrame;
+import com.magicpwd.__i.IBackCall;
 import com.magicpwd.__i.IEditBean;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mpwd.IMpwdBean;
@@ -52,6 +54,7 @@ import com.magicpwd.r.TreeCR;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.TrayPtn;
 import com.magicpwd.x.MdiDialog;
+import java.util.EventListener;
 
 public class MainPtn extends AFrame
 {
@@ -182,6 +185,15 @@ public class MainPtn extends AFrame
 
         // 信息栏
         mainInfo.initData();
+        mainInfo.setBackCall(new IBackCall()
+        {
+
+            @Override
+            public boolean callBack(Object sender, EventListener event, String... params)
+            {
+                return hintCallBack();
+            }
+        });
         setInfoVisible(userMdl.isInfoVisible());
 
         // 属性编辑组件
@@ -213,6 +225,16 @@ public class MainPtn extends AFrame
 
         pack();
         Bean.centerForm(this, null);
+    }
+
+    private boolean hintCallBack()
+    {
+        java.util.Calendar c = java.util.Calendar.getInstance();
+        java.util.Date s = c.getTime();
+        c.add(java.util.Calendar.DAY_OF_MONTH, 1);
+        java.util.Date t = c.getTime();
+        getListMdl().listTask(s, t);
+        return true;
     }
 
     public boolean newKeys()
@@ -807,7 +829,7 @@ public class MainPtn extends AFrame
     {
         pl_KeysBase = new javax.swing.JPanel();
 
-        mainInfo = new HintBar(this, userMdl.getHintMdl());
+        mainInfo = new HintBar(userMdl);
         mainInfo.initView();
 
         javax.swing.JSplitPane sp = new javax.swing.JSplitPane();

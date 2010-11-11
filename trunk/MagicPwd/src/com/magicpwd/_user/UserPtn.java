@@ -69,7 +69,19 @@ public class UserPtn extends javax.swing.JPanel
     public UserPtn(UserMdl userMdl, javax.swing.JFrame frame)
     {
         this.userMdl = userMdl;
-        dialog = new javax.swing.JDialog(frame, true);
+        dialog = new javax.swing.JDialog(frame, true)
+        {
+
+            @Override
+            protected void processWindowEvent(java.awt.event.WindowEvent e)
+            {
+                if (e.getID() == java.awt.event.WindowEvent.WINDOW_CLOSING && signType == ConsEnv.INT_SIGN_LS)
+                {
+                    return;
+                }
+                super.processWindowEvent(e);
+            }
+        };
         dialog.setResizable(false);
         dialog.setIconImage(Bean.getLogo(16));
         dialog.setDefaultCloseOperation(javax.swing.JDialog.DISPOSE_ON_CLOSE);
@@ -163,8 +175,11 @@ public class UserPtn extends javax.swing.JPanel
         hsg3.addComponent(lb_KeyLabel);
         hsg3.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE);
         hsg3.addComponent(bt_Confrm);
-        hsg3.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg3.addComponent(bt_Cancel);
+        if (signType != ConsEnv.INT_SIGN_LS)
+        {
+            hsg3.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+            hsg3.addComponent(bt_Cancel);
+        }
         hsg3.addContainerGap();
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg1.addComponent(pl_GuidPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
@@ -178,7 +193,10 @@ public class UserPtn extends javax.swing.JPanel
         layout.setHorizontalGroup(hpg1);
 
         javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
-        vpg1.addComponent(bt_Cancel);
+        if (signType != ConsEnv.INT_SIGN_LS)
+        {
+            vpg1.addComponent(bt_Cancel);
+        }
         vpg1.addComponent(bt_Confrm);
         vpg1.addComponent(lb_KeyLabel);
         vpg1.addComponent(lb_UsrLabel);
@@ -198,19 +216,11 @@ public class UserPtn extends javax.swing.JPanel
         {
             frame.getContentPane().add(this);
             frame.pack();
-            if (!frame.isVisible())
-            {
-                frame.setVisible(true);
-            }
         }
         if (dialog != null)
         {
             dialog.getContentPane().add(this);
             dialog.pack();
-            if (!dialog.isVisible())
-            {
-                dialog.setVisible(true);
-            }
         }
 
         return true;
@@ -577,7 +587,6 @@ public class UserPtn extends javax.swing.JPanel
                 setTitle(Lang.getLang(LangRes.P30FA201, "用户登录"));
 
                 lb_UsrLabel.setVisible(true);
-                bt_Cancel.setVisible(true);
                 break;
             case ConsEnv.INT_SIGN_LS:
                 Lang.setWText(lb_UserKey0, LangRes.P30FA302, "口令(@P)");
@@ -585,7 +594,6 @@ public class UserPtn extends javax.swing.JPanel
                 Lang.setWText(bt_Confrm, LangRes.P30FA501, "登录(@S)");
 
                 lb_UsrLabel.setVisible(false);
-                bt_Cancel.setVisible(false);
                 break;
             case ConsEnv.INT_SIGN_RS:
                 Lang.setWText(lb_UserName, LangRes.P30FA301, "用户(@U)");
@@ -599,7 +607,6 @@ public class UserPtn extends javax.swing.JPanel
                 setTitle(Lang.getLang(LangRes.P30FA202, "身份验证"));
 
                 lb_UsrLabel.setVisible(false);
-                bt_Cancel.setVisible(true);
                 break;
             case ConsEnv.INT_SIGN_UP:
                 Lang.setWText(lb_UserName, LangRes.P30FA301, "用户(@U)");
@@ -618,7 +625,6 @@ public class UserPtn extends javax.swing.JPanel
                 setTitle(Lang.getLang(LangRes.P30FA203, "用户注册"));
 
                 lb_UsrLabel.setVisible(false);
-                bt_Cancel.setVisible(true);
                 break;
             case ConsEnv.INT_SIGN_PK:
                 Lang.setWText(lb_UserKey0, LangRes.P30FA304, "现有口令(@O)");
@@ -634,7 +640,6 @@ public class UserPtn extends javax.swing.JPanel
                 setTitle(Lang.getLang(LangRes.P30FA205, "登录口令修改"));
 
                 lb_UsrLabel.setVisible(false);
-                bt_Cancel.setVisible(true);
                 break;
             case ConsEnv.INT_SIGN_FP:
                 Lang.setWText(lb_UserName, LangRes.P30FA30C, "登录用户(@U)");
@@ -648,7 +653,6 @@ public class UserPtn extends javax.swing.JPanel
                 setTitle(Lang.getLang(LangRes.P30FA204, "口令找回"));
 
                 lb_UsrLabel.setVisible(false);
-                bt_Cancel.setVisible(true);
                 break;
             case ConsEnv.INT_SIGN_SK:
                 Lang.setWText(lb_UserKey0, LangRes.P30FA304, "现有口令(@O)");
@@ -664,13 +668,11 @@ public class UserPtn extends javax.swing.JPanel
                 setTitle(Lang.getLang(LangRes.P30FA206, "安全口令修改"));
 
                 lb_UsrLabel.setVisible(false);
-                bt_Cancel.setVisible(true);
                 break;
             case ConsEnv.INT_SIGN_SU:
                 setTitle(Lang.getLang(LangRes.P30FA207, "添加从属用户"));
 
                 lb_UsrLabel.setVisible(false);
-                bt_Cancel.setVisible(true);
                 break;
             case ConsEnv.INT_SIGN_CS:
                 Lang.setWText(lb_UserType, LangRes.P30FA301, "服务器(@V)");
@@ -686,7 +688,6 @@ public class UserPtn extends javax.swing.JPanel
                 setTitle(Lang.getLang(LangRes.P30FA20B, "配置邮件账户"));
 
                 lb_UsrLabel.setVisible(false);
-                bt_Cancel.setVisible(true);
                 break;
             default:
                 break;
@@ -872,6 +873,19 @@ public class UserPtn extends javax.swing.JPanel
         }
     }
 
+    @Override
+    public void setVisible(boolean visible)
+    {
+        if (frame != null)
+        {
+            frame.setVisible(visible);
+        }
+        if (dialog != null)
+        {
+            dialog.setVisible(visible);
+        }
+    }
+
     private synchronized void dispoze()
     {
         if (frame != null)
@@ -924,10 +938,7 @@ public class UserPtn extends javax.swing.JPanel
         }
     }
 
-    /**
-     * @param evt
-     */
-    private void bt_ConfrmActionPerformed(java.awt.event.ActionEvent evt)
+    private void doSign()
     {
         bt_Confrm.setEnabled(false);
         jpng.start();
@@ -942,6 +953,9 @@ public class UserPtn extends javax.swing.JPanel
                 {
                     case ConsEnv.INT_SIGN_IN:
                         signIn();
+                        break;
+                    case ConsEnv.INT_SIGN_LS:
+                        signLs();
                         break;
                     case ConsEnv.INT_SIGN_RS:
                         signRs();
@@ -974,24 +988,32 @@ public class UserPtn extends javax.swing.JPanel
         }.start();
     }
 
+    /**
+     * @param evt
+     */
+    private void bt_ConfrmActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        doSign();
+    }
+
     private void tf_UserNameActionPerformed(java.awt.event.ActionEvent evt)
     {
-        bt_ConfrmActionPerformed(null);
+        doSign();
     }
 
     private void pf_UserKey0ActionPerformed(java.awt.event.ActionEvent evt)
     {
-        bt_ConfrmActionPerformed(null);
+        doSign();
     }
 
     private void pf_UserKey1ActionPerformed(java.awt.event.ActionEvent evt)
     {
-        bt_ConfrmActionPerformed(null);
+        doSign();
     }
 
     private void pf_UserKey2ActionPerformed(java.awt.event.ActionEvent evt)
     {
-        bt_ConfrmActionPerformed(null);
+        doSign();
     }
 
     private void lb_UsrLabelMouseReleased(java.awt.event.MouseEvent evt)
@@ -1061,25 +1083,14 @@ public class UserPtn extends javax.swing.JPanel
                     Lang.showMesg(this, LangRes.P30FAA1C, "您操作的错误次太多，请确认您是否为合法用户！\n为了保障用户数据安全，软件将自动关闭。");
                     System.exit(0);
                 }
-                Lang.showMesg(this, LangRes.P30FAA03, "身份验证错误，请确认您的用户名及口令是否正确！");
-                pf_UserKey0.setText("");
-                pf_UserKey0.requestFocus();
+                else
+                {
+                    Lang.showMesg(this, LangRes.P30FAA03, "身份验证错误，请确认您的用户名及口令是否正确！");
+                    pf_UserKey0.setText("");
+                    pf_UserKey0.requestFocus();
+                }
                 return;
             }
-        }
-        catch (java.security.NoSuchAlgorithmException exp)
-        {
-            Logs.exception(exp);
-            Lang.showMesg(this, LangRes.P30FAA04, "系统错误：无法加载密码算法，请重新启动应用程序后重试！");
-            System.exit(0);
-            return;
-        }
-        catch (javax.crypto.NoSuchPaddingException exp)
-        {
-            Logs.exception(exp);
-            Lang.showMesg(this, LangRes.P30FAA04, "系统错误：无法加载密码算法，请重新启动应用程序后重试！");
-            System.exit(0);
-            return;
         }
         catch (Exception exp)
         {
@@ -1098,8 +1109,54 @@ public class UserPtn extends javax.swing.JPanel
         {
             backCall.callBack(null, null, ConsEnv.STR_SIGN_IN);
         }
+
         tf_UserName.setText("");
         pf_UserKey0.setText("");
+        dispoze();
+    }
+
+    private void signLs()
+    {
+        String pwds = new String(pf_UserKey0.getPassword());
+        if (!com.magicpwd._util.Char.isValidate(pwds))
+        {
+            Lang.showMesg(this, LangRes.P30FAA02, "请输入登录口令！");
+            pf_UserKey0.requestFocus();
+            return;
+        }
+        pf_UserKey0.setText("");
+
+        try
+        {
+            boolean b = userMdl.signLs(pwds);
+            if (!b)
+            {
+                errCount += 1;
+                if (errCount > 2)
+                {
+                    Lang.showMesg(this, LangRes.P30FAA1C, "您操作的错误次太多，请确认您是否为合法用户！\n为了保障用户数据安全，软件将自动关闭。");
+                    System.exit(0);
+                }
+                else
+                {
+                    Lang.showMesg(this, LangRes.P30FAA03, "身份验证错误，请确认您的用户名及口令是否正确！");
+                    pf_UserKey0.requestFocus();
+                }
+                return;
+            }
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            Lang.showMesg(this, LangRes.P30FAA03, "身份验证错误，请确认您的用户名及口令是否正确！");
+            System.exit(0);
+            return;
+        }
+
+        if (backCall != null)
+        {
+            backCall.callBack(null, null, ConsEnv.STR_SIGN_LS);
+        }
         dispoze();
     }
 
@@ -1123,7 +1180,12 @@ public class UserPtn extends javax.swing.JPanel
         try
         {
             boolean b = userMdl.signIn(name, pwds);
-            if (!b)
+            if (b)
+            {
+                tf_UserName.setText("");
+                pf_UserKey0.setText("");
+            }
+            else
             {
                 errCount += 1;
                 if (errCount > 2)
@@ -1131,25 +1193,14 @@ public class UserPtn extends javax.swing.JPanel
                     Lang.showMesg(this, LangRes.P30FAA1C, "您操作的错误次太多，请确认您是否为合法用户！\n为了保障用户数据安全，软件将自动关闭。");
                     System.exit(0);
                 }
-                Lang.showMesg(this, LangRes.P30FAA03, "身份验证错误，请确认您的用户名及口令是否正确！");
-                pf_UserKey0.setText("");
-                pf_UserKey0.requestFocus();
+                else
+                {
+                    Lang.showMesg(this, LangRes.P30FAA03, "身份验证错误，请确认您的用户名及口令是否正确！");
+                    pf_UserKey0.setText("");
+                    pf_UserKey0.requestFocus();
+                }
                 return;
             }
-        }
-        catch (java.security.NoSuchAlgorithmException exp)
-        {
-            Logs.exception(exp);
-            Lang.showMesg(this, LangRes.P30FAA04, "系统错误：无法加载密码算法，请重新启动应用程序后重试！");
-            System.exit(0);
-            return;
-        }
-        catch (javax.crypto.NoSuchPaddingException exp)
-        {
-            Logs.exception(exp);
-            Lang.showMesg(this, LangRes.P30FAA04, "系统错误：无法加载密码算法，请重新启动应用程序后重试！");
-            System.exit(0);
-            return;
         }
         catch (Exception exp)
         {
@@ -1164,8 +1215,6 @@ public class UserPtn extends javax.swing.JPanel
         {
             backCall.callBack(null, null, ConsEnv.STR_SIGN_RS);
         }
-        tf_UserName.setText("");
-        pf_UserKey0.setText("");
     }
 
     private void signUp()
@@ -1198,6 +1247,10 @@ public class UserPtn extends javax.swing.JPanel
             pf_UserKey0.requestFocus();
             return;
         }
+        tf_UserName.setText("");
+        pf_UserKey0.setText("");
+        pf_UserKey1.setText("");
+
         try
         {
             boolean b = userMdl.signUp(un, p1);
@@ -1208,9 +1261,6 @@ public class UserPtn extends javax.swing.JPanel
             else
             {
                 Lang.showMesg(this, LangRes.P30FAA06, "注册用户失败，请更换用户名及口令后重试！");
-                tf_UserName.setText("");
-                pf_UserKey0.setText("");
-                pf_UserKey1.setText("");
                 tf_UserName.requestFocus();
                 return;
             }

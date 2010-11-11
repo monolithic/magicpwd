@@ -20,16 +20,17 @@ public final class HintMdl
 {
 
     private static List<Keys> hintList = new ArrayList<Keys>();
-    private int counter = 999999999;//TODO:需要修改
+    private int counter;//TODO:需要修改
     private UserMdl userMdl;
 
-    HintMdl(UserMdl userMdl)
+    public HintMdl(UserMdl userMdl)
     {
         this.userMdl = userMdl;
     }
 
-    void initData()
+    public void initData()
     {
+        counter = userMdl.getHintInt();
     }
 
     public void process(Timestamp start, Timestamp end)

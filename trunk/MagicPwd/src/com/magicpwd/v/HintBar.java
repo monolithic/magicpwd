@@ -1,42 +1,35 @@
 /**
  * 
  */
-package com.magicpwd.v.mpwd;
+package com.magicpwd.v;
 
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.TaskInfo;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Task;
-import java.util.EventListener;
-
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
-
 import com.magicpwd.m.HintMdl;
-import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.util.Calendar;
+import com.magicpwd.m.UserMdl;
 
 /**
  * 主窗口状态提示工具条
  * @author Amon
  */
-public class HintBar extends JPanel
+public class HintBar extends javax.swing.JPanel
 {
 
-    private DateFormat dateTplt;
-    private MainPtn mainPtn;
+    private IBackCall backCall;
+    private UserMdl userMdl;
     private HintMdl hintMdl;
+    private java.text.DateFormat dateTplt;
 
-    public HintBar(MainPtn mainPtn, HintMdl hintMdl)
+    public HintBar(UserMdl userMdl)
     {
-        this.mainPtn = mainPtn;
-        this.hintMdl = hintMdl;
+        this.userMdl = userMdl;
     }
 
     public void initView()
     {
-        setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, getBackground().darker()));
+        setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 0, getBackground().darker()));
         lb_DateLabel = new javax.swing.JLabel();
         lb_DateLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lb_InfoLabel = new javax.swing.JLabel();
@@ -72,21 +65,23 @@ public class HintBar extends JPanel
 
     public void initLang()
     {
-        dateTplt = DateFormat.getDateTimeInstance(DateFormat.FULL, DateFormat.SHORT);
+        dateTplt = java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.FULL, java.text.DateFormat.SHORT);
 
         lb_InfoLabel.setText("数据处理中……");
     }
 
     public void initData()
     {
-        Task.registerAction(new TaskInfo(0, 5, "mpwd-hint", ""), new IBackCall()
+        hintMdl = new HintMdl(userMdl);
+        hintMdl.initData();
+
+        Task.registerAction(new TaskInfo(0, 1, "mpwd-hint", ""), new IBackCall()
         {
 
             @Override
-            public boolean callBack(Object sender, EventListener event, String... params)
+            public boolean callBack(Object sender, java.util.EventListener event, String... params)
             {
-                showNote();
-                return true;
+                return showNote();
             }
         });
     }
@@ -95,15 +90,14 @@ public class HintBar extends JPanel
     {
         if (hintMdl.getUnreadCount() > 0)
         {
-            java.util.Calendar c = java.util.Calendar.getInstance();
-            java.util.Date s = c.getTime();
-            c.add(java.util.Calendar.DAY_OF_MONTH, 1);
-            java.util.Date t = c.getTime();
-            mainPtn.getListMdl().listTask(s, t);
+            if (backCall != null)
+            {
+                backCall.callBack(this, null);
+            }
         }
     }
 
-    private void showNote()
+    private boolean showNote()
     {
         java.util.Calendar cal = java.util.Calendar.getInstance();
 
@@ -112,15 +106,10 @@ public class HintBar extends JPanel
         lb_DateLabel.setText(text);
         lb_DateLabel.setToolTipText(text);
 
-        if (hintMdl.getHintData() != null)
-        {
-            //ie_InfoEvent.hintDataActionPerformed(null);
-        }
-
         // 读取数据信息
-        Timestamp s = new Timestamp(cal.getTimeInMillis());
-        cal.add(Calendar.DAY_OF_MONTH, 1);
-        Timestamp e = new Timestamp(cal.getTimeInMillis());
+        java.sql.Timestamp s = new java.sql.Timestamp(cal.getTimeInMillis());
+        cal.add(java.util.Calendar.DAY_OF_MONTH, 1);
+        java.sql.Timestamp e = new java.sql.Timestamp(cal.getTimeInMillis());
         hintMdl.process(s, e);
 
         int size = hintMdl.getUnreadCount();
@@ -136,7 +125,24 @@ public class HintBar extends JPanel
             lb_InfoLabel.setCursor(java.awt.Cursor.getDefaultCursor());
             lb_InfoLabel.setToolTipText(null);
         }
+        return true;
     }
     private javax.swing.JLabel lb_InfoLabel;
     private javax.swing.JLabel lb_DateLabel;
+
+    /**
+     * @return the backCall
+     */
+    public IBackCall getBackCall()
+    {
+        return backCall;
+    }
+
+    /**
+     * @param backCall the backCall to set
+     */
+    public void setBackCall(IBackCall backCall)
+    {
+        this.backCall = backCall;
+    }
 }

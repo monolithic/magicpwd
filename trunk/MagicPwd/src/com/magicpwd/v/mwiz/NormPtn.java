@@ -15,6 +15,7 @@ import com.magicpwd.m.mwiz.KeysMdl;
 import com.magicpwd.m.mwiz.MwizMdl;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.TrayPtn;
+import com.magicpwd.v.HintBar;
 
 /**
  * 向导模式
@@ -47,15 +48,6 @@ public class NormPtn extends AFrame
         tf_FindBox = new javax.swing.JTextField();
         tf_FindBox.setColumns(20);
         tb_FindBar.add(tf_FindBox);
-        tf_FindBox.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-
-            @Override
-            public void keyReleased(java.awt.event.KeyEvent e)
-            {
-                tf_FindBox_KeyReleased(e);
-            }
-        });
 
         tb_KeysList = new javax.swing.JTable();
         tb_KeysList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -66,7 +58,82 @@ public class NormPtn extends AFrame
         tb_KeysList.getColumnModel().getColumn(0).setMaxWidth(w);
         tb_KeysList.getColumnModel().getColumn(1).setMaxWidth(40);
 
+        hb_HintBar = new HintBar(userMdl);
+        hb_HintBar.initView();
+
         pm_MenuPop = new javax.swing.JPopupMenu();
+        javax.swing.JScrollPane jsp = new javax.swing.JScrollPane(tb_KeysList);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
+        hsg1.addContainerGap();
+        hsg1.addComponent(tb_ToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        hsg1.addComponent(tb_FindBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hsg1.addContainerGap();
+        javax.swing.GroupLayout.SequentialGroup hsg2 = layout.createSequentialGroup();
+        hsg2.addContainerGap();
+        hsg2.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE);
+        hsg2.addContainerGap();
+        javax.swing.GroupLayout.SequentialGroup hsg3 = layout.createSequentialGroup();
+        hsg3.addContainerGap();
+        hsg3.addComponent(hb_HintBar, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE);
+        hsg3.addContainerGap();
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(hsg1).addGroup(hsg2).addGroup(hsg3));
+
+        javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        vpg.addComponent(tb_ToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg.addComponent(tb_FindBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
+//        vsg.addComponent(tb_ToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg.addGroup(vpg);
+        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE);
+//        vsg.addContainerGap();
+        vsg.addComponent(hb_HintBar);
+        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(vsg));
+
+        setIconImage(Bean.getLogo(16));
+        pack();
+        Bean.centerForm(this, null);
+    }
+
+    public void initLang()
+    {
+        setTitle(Lang.getLang(LangRes.P30F6201, "向导模式"));
+
+        hb_HintBar.initLang();
+    }
+
+    public void initData()
+    {
+        super.setVisible(true);
+
+        hb_HintBar.initData();
+
+        try
+        {
+            menuPtn = new MenuPtn(trayPtn, this);
+            menuPtn.loadData(new java.io.File(userMdl.getDataDir(), "mwiz.xml"));
+            menuPtn.getToolBar("mwiz", tb_ToolBar, rootPane, "mwiz");
+            menuPtn.getPopMenu("mwiz", pm_MenuPop);
+            menuPtn.getStrokes("mwiz", rootPane);
+        }
+        catch (Exception e)
+        {
+            Logs.exception(e);
+        }
+
+        tf_FindBox.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+
+            @Override
+            public void keyReleased(java.awt.event.KeyEvent e)
+            {
+                tf_FindBox_KeyReleased(e);
+            }
+        });
+
         tb_KeysList.addMouseListener(new java.awt.event.MouseAdapter()
         {
 
@@ -100,58 +167,6 @@ public class NormPtn extends AFrame
                 tbKeysListMouseClicked(evt);
             }
         });
-        javax.swing.JScrollPane jsp = new javax.swing.JScrollPane(tb_KeysList);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
-        hsg1.addContainerGap();
-        hsg1.addComponent(tb_ToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-        hsg1.addComponent(tb_FindBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        hsg1.addContainerGap();
-        javax.swing.GroupLayout.SequentialGroup hsg2 = layout.createSequentialGroup();
-        hsg2.addContainerGap();
-        hsg2.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE);
-        hsg2.addContainerGap();
-        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(hsg1).addGroup(hsg2));
-
-        javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        vpg.addComponent(tb_ToolBar);
-        vpg.addComponent(tb_FindBar);
-        javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
-//        vsg.addComponent(tb_ToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vsg.addGroup(vpg);
-        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        vsg.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE);
-        vsg.addContainerGap();
-        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(vsg));
-
-        setIconImage(Bean.getLogo(16));
-        pack();
-        Bean.centerForm(this, null);
-    }
-
-    public void initLang()
-    {
-        setTitle(Lang.getLang(LangRes.P30F6201, "向导模式"));
-    }
-
-    public void initData()
-    {
-        super.setVisible(true);
-
-        try
-        {
-            menuPtn = new MenuPtn(trayPtn, this);
-            menuPtn.loadData(new java.io.File(userMdl.getDataDir(), "mwiz.xml"));
-            menuPtn.getToolBar("mwiz", tb_ToolBar, rootPane, "mwiz");
-            menuPtn.getPopMenu("mwiz", pm_MenuPop);
-            menuPtn.getStrokes("mwiz", rootPane);
-        }
-        catch (Exception e)
-        {
-            Logs.exception(e);
-        }
 
         safeMdl = mwizMdl.getKeysMdl();
 
@@ -316,6 +331,7 @@ public class NormPtn extends AFrame
             mwizMdl.listKeysByKind("0");
         }
     }
+    private HintBar hb_HintBar;
     private javax.swing.JTable tb_KeysList;
     private javax.swing.JTextField tf_FindBox;
     private javax.swing.JToolBar tb_ToolBar;

@@ -566,6 +566,19 @@ public class UserMdl
         return safeKey.signIn();
     }
 
+    public boolean signLs(String userPwds) throws Exception
+    {
+        safeKey.setPwds(userPwds);
+        return safeKey.signIn();
+    }
+
+    public boolean signRs(String userName, String userPwds) throws Exception
+    {
+        safeKey.setName(userName);
+        safeKey.setPwds(userPwds);
+        return safeKey.signIn();
+    }
+
     public boolean signPb(String userName, String userPwds) throws Exception
     {
         safeKey.setName(userName);
