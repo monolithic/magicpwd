@@ -15,6 +15,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
+import javax.swing.JToolBar;
 
 /**
  *
@@ -50,10 +51,12 @@ public class Menu extends javax.swing.AbstractAction
         }
 
         frame = new JFrame();
-        bar = ptn.getMenuBar("mpwd", null, frame.getRootPane());
+        ptn.getMenuBar("mpwd", null, frame.getRootPane());
         frame.setJMenuBar(bar);
 
-        frame.getContentPane().add(ptn.getToolBar("mpwd", null, null, "mpwd"), BorderLayout.NORTH);
+        JToolBar toolBar = new JToolBar();
+        ptn.getToolBar("mpwd", toolBar, null, "mpwd");
+        frame.getContentPane().add(toolBar, BorderLayout.NORTH);
 
         frame.setSize(new Dimension(400, 300));
         frame.setVisible(true);
