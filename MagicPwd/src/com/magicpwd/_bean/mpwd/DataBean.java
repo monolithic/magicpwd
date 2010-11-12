@@ -123,6 +123,17 @@ public class DataBean extends ADataBean implements IMpwdBean
     }
 
     @Override
+    public void requestFocus()
+    {
+        if (!com.magicpwd._util.Char.isValidate(tf_PropName.getText()))
+        {
+            tf_PropName.requestFocus();
+            return;
+        }
+        tf_PropData.requestFocus();
+    }
+
+    @Override
     public void copyDataActionPerformed(java.awt.event.ActionEvent evt)
     {
     }

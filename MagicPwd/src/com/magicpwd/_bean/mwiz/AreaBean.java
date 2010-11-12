@@ -77,4 +77,10 @@ public class AreaBean extends AAreaBean implements IMwizBean
         itemData.setData(ta_PropData.getText());
         return true;
     }
+
+    @Override
+    public void requestFocus()
+    {
+        ta_PropData.requestFocus();
+    }
 }

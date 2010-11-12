@@ -127,6 +127,24 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     {
     }
 
+    @Override
+    public void initHead()
+    {
+    }
+
+    @Override
+    public void initBody()
+    {
+    }
+
+    @Override
+    public void clear()
+    {
+        ls_ItemList.clear();
+        keys.setDefault();
+        setModified(false);
+    }
+
     public boolean listKeysByKind(String kindHash)
     {
         ls_KeysList.size();
@@ -227,23 +245,5 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     public void fireTableDataChanged()
     {
         fireTableChanged(new javax.swing.event.TableModelEvent(this));
-    }
-
-    @Override
-    public void initHead()
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void initBody()
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public void clear()
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

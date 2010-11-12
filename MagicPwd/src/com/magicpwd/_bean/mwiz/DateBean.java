@@ -91,4 +91,10 @@ public class DateBean extends ADateBean implements IMwizBean
         itemData.setData(tf_PropData.getText());
         return true;
     }
+
+    @Override
+    public void requestFocus()
+    {
+        tf_PropData.requestFocus();
+    }
 }

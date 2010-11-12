@@ -279,6 +279,16 @@ public class WTextBox implements java.awt.datatransfer.ClipboardOwner
         undoItem.setEnabled(undo.canUndo());
         redoItem.setEnabled(undo.canRedo());
     }
+
+    public boolean canUndo()
+    {
+        return undo.canUndo();
+    }
+
+    public boolean canRedo()
+    {
+        return undo.canRedo();
+    }
     private javax.swing.JPopupMenu popMenu;
     private javax.swing.JMenuItem sallItem;
     private javax.swing.JMenuItem dallItem;

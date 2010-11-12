@@ -93,4 +93,10 @@ public class PwdsBean extends APwdsBean implements IMwizBean
         itemData.setData(new String(pf_PropData.getPassword()));
         return true;
     }
+
+    @Override
+    public void requestFocus()
+    {
+        pf_PropData.requestFocus();
+    }
 }

@@ -107,9 +107,10 @@ public abstract class AMailBean extends AEditBean
             data = data.trim();
             if (!Char.isValidateMail(data))
             {
-                Lang.showMesg(formPtn, LangRes.P30F7A31, "邮件格式应为：someone@hostname.com");
+                Lang.showMesg(formPtn, LangRes.P30F7A32, "您输入的不是一个合适的邮件地址！");
                 return false;
             }
+            itemData.setData(data);
         }
         return true;
     }

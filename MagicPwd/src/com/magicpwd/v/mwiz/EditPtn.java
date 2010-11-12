@@ -258,7 +258,7 @@ public class EditPtn extends javax.swing.JDialog
         cl_Layout.show(pl_EditArea, "head");
         headBean.showData(keysMdl);
 
-        boolean end = ls_BodyList.size() - 1 <= currStep;
+        boolean end = keysMdl.getItemSize() <= ConsEnv.PWDS_HEAD_SIZE;
         bt_PrevStep.setVisible(true);
         bt_NextStep.setVisible(!keysMdl.isUpdate() || !end);
         bt_Update.setVisible(canEdit && (keysMdl.isUpdate() && end));

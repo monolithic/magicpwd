@@ -5,6 +5,7 @@ import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
+import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
@@ -93,13 +94,13 @@ public class MiniPtn extends AFrame
         dataBox.initView();
         sp_NoteData.setViewportView(ta_NoteData);
 
-        ck_NoteWrap.addChangeListener(new javax.swing.event.ChangeListener()
+        ck_NoteWrap.addActionListener(new java.awt.event.ActionListener()
         {
 
             @Override
-            public void stateChanged(javax.swing.event.ChangeEvent evt)
+            public void actionPerformed(java.awt.event.ActionEvent e)
             {
-                ta_NoteData.setLineWrap(ck_NoteWrap.isSelected());
+                ck_NoteWrapActionPerformed(e);
             }
         });
 
@@ -207,6 +208,8 @@ public class MiniPtn extends AFrame
 
         safeMdl = mpadMdl.getNoteMdl();
 
+        ck_NoteWrap.setSelected(ConsCfg.DEF_TRUE.equalsIgnoreCase(userMdl.getCfg(ConsCfg.CFG_MPAD_WRAP)));
+
         noteList = new java.util.ArrayList<S1S2>();
         nameBox.initData();
         dataBox.initData();
@@ -240,7 +243,6 @@ public class MiniPtn extends AFrame
         try
         {
             NoteMdl noteMdl = mpadMdl.getNoteMdl();
-            noteMdl.clear();
             noteMdl.loadData(lastHash);
             IEditItem note = noteMdl.getNote();
             if (note != null)
@@ -257,6 +259,13 @@ public class MiniPtn extends AFrame
         }
 
         dataBox.reset();
+    }
+
+    private void ck_NoteWrapActionPerformed(java.awt.event.ActionEvent e)
+    {
+        System.out.println("OK");
+        ta_NoteData.setLineWrap(ck_NoteWrap.isSelected());
+        userMdl.setCfg(ConsCfg.CFG_MPAD_WRAP, ck_NoteWrap.isSelected() ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
     @Override

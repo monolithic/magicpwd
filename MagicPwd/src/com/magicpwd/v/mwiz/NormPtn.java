@@ -70,9 +70,9 @@ public class NormPtn extends AFrame
         hsg2.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE);
         hsg2.addContainerGap();
         javax.swing.GroupLayout.SequentialGroup hsg3 = layout.createSequentialGroup();
-        hsg3.addContainerGap();
+//        hsg3.addContainerGap();
         hsg3.addComponent(hb_HintBar, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE);
-        hsg3.addContainerGap();
+//        hsg3.addContainerGap();
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(hsg1).addGroup(hsg2).addGroup(hsg3));
 
         javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
@@ -84,6 +84,7 @@ public class NormPtn extends AFrame
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE);
 //        vsg.addContainerGap();
+        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addComponent(hb_HintBar);
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(vsg));
 
