@@ -488,6 +488,20 @@ public class UserMdl
         return Bean.readIcon(path.replace(ConsEnv.FEEL_ARGS, getCfg(ConsCfg.CFG_SKIN_FEEL, ConsEnv.SKIN_FEEL_DEFAULT)));
     }
 
+    public java.awt.image.BufferedImage readImage(String path)
+    {
+        java.io.File file = new java.io.File(path.replace(ConsEnv.FEEL_ARGS, getCfg(ConsCfg.CFG_SKIN_FEEL, ConsEnv.SKIN_FEEL_DEFAULT)));
+        try
+        {
+            return javax.imageio.ImageIO.read(file);
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            return null;
+        }
+    }
+
     /**
      * @return the viewTop
      */

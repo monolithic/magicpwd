@@ -27,7 +27,6 @@ public class NormPtn extends AFrame
     private MenuPtn menuPtn;
     private MwizMdl mwizMdl;
     private EditPtn editPtn;
-    private String lastMeta = "";
 
     public NormPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
@@ -40,14 +39,10 @@ public class NormPtn extends AFrame
         tb_ToolBar.setFloatable(false);
         tb_ToolBar.setRollover(true);
 
-        tb_FindBar = new javax.swing.JToolBar();
-        tb_FindBar.setFloatable(false);
-        tb_FindBar.setRollover(true);
-        tb_FindBar.setVisible(false);
-
-        tf_FindBox = new javax.swing.JTextField();
-        tf_FindBox.setColumns(20);
-        tb_FindBar.add(tf_FindBox);
+        fb_FindBar = new FindBar(this);
+        fb_FindBar.initView();
+        fb_FindBar.setVisible(false);
+        getLayeredPane().add(fb_FindBar, javax.swing.JLayeredPane.POPUP_LAYER);
 
         tb_KeysList = new javax.swing.JTable();
         tb_KeysList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -63,7 +58,6 @@ public class NormPtn extends AFrame
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
         hsg1.addContainerGap();
         hsg1.addComponent(tb_ToolBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-        hsg1.addComponent(tb_FindBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg1.addContainerGap();
         javax.swing.GroupLayout.SequentialGroup hsg2 = layout.createSequentialGroup();
         hsg2.addContainerGap();
@@ -75,15 +69,10 @@ public class NormPtn extends AFrame
 //        hsg3.addContainerGap();
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(hsg1).addGroup(hsg2).addGroup(hsg3));
 
-        javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        vpg.addComponent(tb_ToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vpg.addComponent(tb_FindBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
-//        vsg.addComponent(tb_ToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vsg.addGroup(vpg);
+        vsg.addComponent(tb_ToolBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE);
-//        vsg.addContainerGap();
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addComponent(hb_HintBar);
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(vsg));
@@ -126,16 +115,6 @@ public class NormPtn extends AFrame
             Logs.exception(e);
         }
 
-        tf_FindBox.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-
-            @Override
-            public void keyReleased(java.awt.event.KeyEvent e)
-            {
-                tf_FindBox_KeyReleased(e);
-            }
-        });
-
         tb_KeysList.addMouseListener(new java.awt.event.MouseAdapter()
         {
 
@@ -173,12 +152,39 @@ public class NormPtn extends AFrame
         safeMdl = mwizMdl.getKeysMdl();
 
         mwizMdl.getGridMdl().listKeysByKind("0");
+
+        this.addComponentListener(new java.awt.event.ComponentAdapter()
+        {
+
+            @Override
+            public void componentResized(java.awt.event.ComponentEvent e)
+            {
+                if (fb_FindBar.isVisible())
+                {
+                    moveFindBar();
+                }
+            }
+        });
+
+        fb_FindBar.initData();
     }
 
     @Override
     public boolean endSave()
     {
         return true;
+    }
+
+    public void findKeys(String meta)
+    {
+        if (Char.isValidate(meta))
+        {
+            mwizMdl.getGridMdl().listKeysByMeta(meta);
+        }
+        else
+        {
+            mwizMdl.getGridMdl().listKeysByKind("0");
+        }
     }
 
     public void viewKeys()
@@ -236,6 +242,12 @@ public class NormPtn extends AFrame
         }
     }
 
+    private void moveFindBar()
+    {
+        java.awt.Dimension size = fb_FindBar.getPreferredSize();
+        fb_FindBar.setBounds(getSize().width - size.width - 24, 0, size.width, size.height);
+    }
+
     public void deleteKeys()
     {
         int row = tb_KeysList.getSelectedRow();
@@ -264,13 +276,15 @@ public class NormPtn extends AFrame
 
     public void setFindVisible(boolean visible)
     {
-        tb_FindBar.setVisible(visible);
         if (visible)
         {
-            tf_FindBox.requestFocus();
+            fb_FindBar.setVisible(true);
+            moveFindBar();
+            fb_FindBar.requestFocus();
         }
         else
         {
+            fb_FindBar.setVisible(false);
             tb_KeysList.requestFocus();
         }
     }
@@ -314,29 +328,9 @@ public class NormPtn extends AFrame
     private void tbKeysListMouseClicked(java.awt.event.MouseEvent e)
     {
     }
-
-    private void tf_FindBox_KeyReleased(java.awt.event.KeyEvent e)
-    {
-        String meta = tf_FindBox.getText();
-        if (lastMeta.equals(meta))
-        {
-            return;
-        }
-        lastMeta = meta;
-
-        if (Char.isValidate(meta))
-        {
-            mwizMdl.getGridMdl().listKeysByMeta(meta);
-        }
-        else
-        {
-            mwizMdl.getGridMdl().listKeysByKind("0");
-        }
-    }
     private HintBar hb_HintBar;
+    private FindBar fb_FindBar;
     private javax.swing.JTable tb_KeysList;
-    private javax.swing.JTextField tf_FindBox;
     private javax.swing.JToolBar tb_ToolBar;
-    private javax.swing.JToolBar tb_FindBar;
     private javax.swing.JPopupMenu pm_MenuPop;
 }
