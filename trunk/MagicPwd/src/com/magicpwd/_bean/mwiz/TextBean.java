@@ -79,4 +79,10 @@ public class TextBean extends ATextBean implements IMwizBean
         itemData.setData(tf_PropData.getText());
         return true;
     }
+
+    @Override
+    public void requestFocus()
+    {
+        tf_PropData.requestFocus();
+    }
 }

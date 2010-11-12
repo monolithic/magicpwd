@@ -166,6 +166,8 @@ public interface ConsCfg
     String CFG_MODE = CFG_PRE + ".mode";
     String CFG_MODE_APP = CFG_MODE + ".app";
     String CFG_MODE_RUN = CFG_MODE + ".run";
+    String CFG_MPAD = CFG_PRE + ".mpad";
+    String CFG_MPAD_WRAP = CFG_MPAD + ".wrap";
     /**
      * 默认数据：是
      */

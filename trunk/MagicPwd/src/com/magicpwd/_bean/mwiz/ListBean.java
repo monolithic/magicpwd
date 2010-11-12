@@ -79,4 +79,10 @@ public class ListBean extends AListBean implements IMwizBean
         saveName();
         return true;
     }
+
+    @Override
+    public void requestFocus()
+    {
+//        ls_PropData.requestFocus();
+    }
 }

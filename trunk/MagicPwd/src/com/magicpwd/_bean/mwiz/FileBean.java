@@ -97,6 +97,12 @@ public class FileBean extends AFileBean implements IMwizBean
     }
 
     @Override
+    public void requestFocus()
+    {
+        tf_PropData.requestFocus();
+    }
+
+    @Override
     protected void deCrypt(java.io.File src, java.io.File dst) throws Exception
     {
         normPtn.deCrypt(src, dst);

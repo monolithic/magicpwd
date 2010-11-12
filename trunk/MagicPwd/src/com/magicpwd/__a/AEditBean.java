@@ -56,4 +56,7 @@ public abstract class AEditBean extends javax.swing.JPanel implements IEditBean
         }
         itemData.setName(name);
     }
+
+    @Override
+    public abstract void requestFocus();
 }

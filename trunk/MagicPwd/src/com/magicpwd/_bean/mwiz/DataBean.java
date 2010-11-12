@@ -76,4 +76,10 @@ public class DataBean extends ADataBean implements IMwizBean
         saveName();
         return processData();
     }
+
+    @Override
+    public void requestFocus()
+    {
+        tf_PropData.requestFocus();
+    }
 }

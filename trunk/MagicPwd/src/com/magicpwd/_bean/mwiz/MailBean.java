@@ -90,4 +90,10 @@ public class MailBean extends AMailBean implements IMwizBean
         saveName();
         return processData();
     }
+
+    @Override
+    public void requestFocus()
+    {
+        tf_PropData.requestFocus();
+    }
 }
