@@ -105,6 +105,8 @@ public class LinkBean extends ALinkBean implements IMpwdBean
     @Override
     public void initData()
     {
+        initConfData();
+        
         nameBox.initData();
     }
 
@@ -115,6 +117,8 @@ public class LinkBean extends ALinkBean implements IMpwdBean
 
         tf_PropName.setText(showName());
         tf_PropData.setText(itemData.getData());
+
+        showConfData();
     }
 
     @Override

@@ -95,6 +95,8 @@ public class TextBean extends ATextBean implements IMpwdBean
         Lang.setWText(lb_PropName, LangRes.P30F1307, "名称");
         Lang.setWText(lb_PropData, LangRes.P30F1308, "文本");
 
+        initConfLang();
+
         nameBox.initLang();
         dataEdit.initLang();
     }
@@ -103,15 +105,19 @@ public class TextBean extends ATextBean implements IMpwdBean
     public void initData()
     {
         nameBox.initData();
+
+        initConfData();
     }
 
     @Override
     public void showData(IEditItem item)
     {
         itemData = item;
-        
+
         tf_PropName.setText(showName());
         tf_PropData.setText(itemData.getData());
+
+        showConfData();
     }
 
     @Override

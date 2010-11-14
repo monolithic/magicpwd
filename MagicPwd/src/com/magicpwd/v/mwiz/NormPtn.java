@@ -97,6 +97,7 @@ public class NormPtn extends AFrame
 
         mwizMdl = new MwizMdl(userMdl);
         mwizMdl.init();
+
         tb_KeysList.setModel(mwizMdl.getGridMdl());
         int w = tb_KeysList.getFontMetrics(tb_KeysList.getFont()).stringWidth("99999");
         tb_KeysList.getColumnModel().getColumn(0).setMaxWidth(w);
@@ -146,6 +147,18 @@ public class NormPtn extends AFrame
             public void mouseClicked(java.awt.event.MouseEvent evt)
             {
                 tbKeysListMouseClicked(evt);
+            }
+        });
+        tb_KeysList.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt)
+            {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER)
+                {
+                    viewKeys();
+                }
             }
         });
 
@@ -315,18 +328,20 @@ public class NormPtn extends AFrame
 
     public void deCrypt(java.io.File src, java.io.File dst) throws Exception
     {
+        mwizMdl.getGridMdl().deCrypt(src, dst);
     }
 
     public void enCrypt(java.io.File src, java.io.File dst) throws Exception
     {
-    }
-
-    public void editSelected()
-    {
+        mwizMdl.getGridMdl().enCrypt(src, dst);
     }
 
     private void tbKeysListMouseClicked(java.awt.event.MouseEvent e)
     {
+        if (e.getClickCount() > 1)
+        {
+            viewKeys();
+        }
     }
     private HintBar hb_HintBar;
     private FindBar fb_FindBar;

@@ -8,7 +8,6 @@ import com.magicpwd.__i.mpwd.IMpwdBean;
 import com.magicpwd._bean.APwdsBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
-import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
@@ -114,22 +113,11 @@ public class PwdsBean extends APwdsBean implements IMpwdBean
     public void showData(IEditItem item)
     {
         itemData = item;
-        
+
         tf_PropName.setText(showName());
         pf_PropData.setText(itemData.getData());
 
-        String size = itemData.getSpec(IEditItem.SPEC_PWDS_SIZE, "0");
-        if (!com.magicpwd._util.Char.isValidatePositiveInteger(size))
-        {
-            size = "0";
-        }
-        if (!bg_SizeGroup.setSelected(size, true))
-        {
-            mi_SizeMore.setSelected(true);
-            mi_SizeMore.setActionCommand(size);
-        }
-        bg_CharGroup.setSelected(itemData.getSpec(IEditItem.SPEC_PWDS_HASH), true);
-        mi_LoopMenu.setSelected(ConsCfg.DEF_TRUE.equals(itemData.getSpec(IEditItem.SPEC_PWDS_LOOP)));
+        showConfData();
     }
 
     @Override

@@ -21,7 +21,6 @@ public class AreaBean extends AAreaBean implements IMpwdBean
     private MainPtn mainPtn;
     private WEditBox dataEdit;
     private WTextBox nameBox;
-    private WTextBox dataBox;
 
     public AreaBean(MainPtn mainPtn)
     {
@@ -45,9 +44,6 @@ public class AreaBean extends AAreaBean implements IMpwdBean
 
         lb_PropData = new javax.swing.JLabel();
         lb_PropData.setLabelFor(ta_PropData);
-        ta_PropData.setLineWrap(true);
-        dataBox = new WTextBox(ta_PropData);
-        dataBox.initView();
         javax.swing.JScrollPane jsp = new javax.swing.JScrollPane(ta_PropData);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -91,20 +87,18 @@ public class AreaBean extends AAreaBean implements IMpwdBean
         Lang.setWText(lb_PropName, LangRes.P30F1311, "名称");
         Lang.setWText(lb_PropData, LangRes.P30F1312, "附注");
 
-        initConfLang();
-
         nameBox.initLang();
-        dataBox.initLang();
         dataEdit.initLang();
+
+        initConfLang();
     }
 
     @Override
     public void initData()
     {
-        initConfData();
-
         nameBox.initData();
-        dataBox.initData();
+
+        initConfData();
     }
 
     @Override
@@ -114,6 +108,8 @@ public class AreaBean extends AAreaBean implements IMpwdBean
 
         tf_PropName.setText(showName());
         ta_PropData.setText(itemData.getData());
+
+        showConfData();
     }
 
     @Override

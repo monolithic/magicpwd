@@ -52,7 +52,10 @@ public class AreaBean extends AAreaBean implements IMwizBean
     public void showData(IEditItem itemData)
     {
         this.itemData = itemData;
+
         ta_PropData.setText(itemData.getData());
+
+        showConfData();
     }
 
     @Override

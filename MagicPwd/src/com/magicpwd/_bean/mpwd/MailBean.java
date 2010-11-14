@@ -116,6 +116,8 @@ public class MailBean extends AMailBean implements IMpwdBean
         
         tf_PropName.setText(showName());
         tf_PropData.setText(itemData.getData());
+
+        showConfData();
     }
 
     @Override

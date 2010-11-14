@@ -82,6 +82,10 @@ public abstract class ALinkBean extends AEditBean
         dataBox.initData();
     }
 
+    protected void showConfData()
+    {
+    }
+
     private void bt_LinkViewActionPerformed(java.awt.event.ActionEvent evt)
     {
         String link = tf_PropData.getText();

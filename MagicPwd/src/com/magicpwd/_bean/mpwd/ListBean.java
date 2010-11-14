@@ -89,17 +89,21 @@ public class ListBean extends AListBean implements IMpwdBean
     @Override
     public void initLang()
     {
+        initConfLang();
     }
 
     @Override
     public void initData()
     {
+        initConfData();
     }
 
     @Override
     public void showData(IEditItem item)
     {
         itemData = item;
+
+        showConfData();
     }
 
     @Override

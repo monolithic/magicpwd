@@ -18,6 +18,7 @@ package com.magicpwd._bean;
 
 import com.magicpwd.__a.AEditBean;
 import com.magicpwd.__a.AFrame;
+import com.magicpwd._comp.WTextBox;
 
 /**
  *
@@ -25,6 +26,8 @@ import com.magicpwd.__a.AFrame;
  */
 public abstract class AAreaBean extends AEditBean
 {
+
+    private WTextBox dataBox;
 
     public AAreaBean(AFrame formPtn)
     {
@@ -34,13 +37,23 @@ public abstract class AAreaBean extends AEditBean
     protected void initConfView()
     {
         ta_PropData = new javax.swing.JTextArea();
+        ta_PropData.setLineWrap(true);
+
+        dataBox = new WTextBox(ta_PropData);
+        dataBox.initView();
     }
 
     protected void initConfLang()
     {
+        dataBox.initLang();
     }
 
     protected void initConfData()
+    {
+        dataBox.initData();
+    }
+
+    protected void showConfData()
     {
     }
     protected javax.swing.JTextArea ta_PropData;

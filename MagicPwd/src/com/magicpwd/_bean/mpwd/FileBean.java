@@ -119,14 +119,7 @@ public class FileBean extends AFileBean implements IMpwdBean
         tf_PropName.setText(showName());
         tf_PropData.setText(itemData.getData());
 
-        if (amaPath == null)
-        {
-            amaPath = new java.io.File(ConsEnv.DIR_DAT, ConsEnv.DIR_AMA);
-            if (!amaPath.exists())
-            {
-                amaPath.mkdirs();
-            }
-        }
+        showConfData();
     }
 
     @Override

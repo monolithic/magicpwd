@@ -144,6 +144,12 @@ public abstract class ADateBean extends AEditBean
         formPtn.getMenuPtn().getSubMenu("date-template", pm_MenuConf, dtAction);
     }
 
+    protected void showConfData()
+    {
+        boolean b = formPtn.getMenuPtn().getGroup("date-template").setSelected(itemData.getSpec(IEditItem.SPEC_DATE_FORM), true);
+        mi_ConfDef.setSelected(!b);
+    }
+
     private void bt_DateViewActionPerformed(java.awt.event.ActionEvent evt)
     {
         pm_MenuTime.show(bt_DateTime, 0, bt_DateTime.getSize().height);

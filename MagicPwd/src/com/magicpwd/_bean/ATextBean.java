@@ -55,6 +55,10 @@ public abstract class ATextBean extends AEditBean
     {
         dataBox.initData();
     }
+
+    protected void showConfData()
+    {
+    }
     protected javax.swing.JTextField tf_PropData;
     // 配置信息
     protected javax.swing.JPanel pl_PropConf;

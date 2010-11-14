@@ -71,7 +71,7 @@ public class BodyBar extends javax.swing.JPanel
 
         int tmp = 0;
         int max = keysMdl.getItemSize();
-        int row = ConsEnv.MWIZ_MAX_ROW;
+        int row = ConsEnv.MWIZ_ROWS_MAX;
         javax.swing.JLabel label;
         AEditBean panel;
         javax.swing.GroupLayout.ParallelGroup vpg;
@@ -83,7 +83,7 @@ public class BodyBar extends javax.swing.JPanel
             }
 
             int type = keysMdl.getItemAt(step++).getType();
-            row -= (type == ConsDat.INDX_AREA || type == ConsDat.INDX_LIST) ? 4 : 1;
+            row -= (type == ConsDat.INDX_AREA || type == ConsDat.INDX_LIST) ? ConsEnv.MWIZ_AREA_ROW : 1;
             if (row < 0)
             {
                 break;
@@ -130,7 +130,8 @@ public class BodyBar extends javax.swing.JPanel
         IEditItem item;
         javax.swing.JLabel label;
         String name;
-        for (int i = 0, j = currStep; i < ConsEnv.MWIZ_MAX_ROW; i += 1)
+        IMwizBean bean;
+        for (int i = 0, j = currStep; i < ConsEnv.MWIZ_ROWS_MAX; i += 1)
         {
             label = lb_EditList[i];
             if (label == null)
@@ -143,19 +144,32 @@ public class BodyBar extends javax.swing.JPanel
             {
                 name = name.substring(1, name.length() - 1);
             }
-            Bean.setText(label, name + "(@" + i + ')');
-            ((IMwizBean) pl_EditList[i]).setLabelFor(label);
+            Bean.setText(label, name + "(@" + (i + 1) + ')');
+
+            bean = (IMwizBean) pl_EditList[i];
+            bean.setLabelFor(label);
+            bean.initLang();
         }
     }
 
     public void initData()
     {
+        javax.swing.JLabel label;
+        for (int i = 0, j = currStep; i < ConsEnv.MWIZ_ROWS_MAX; i += 1)
+        {
+            label = lb_EditList[i];
+            if (label == null)
+            {
+                break;
+            }
+            ((IMwizBean) pl_EditList[i]).initData();
+        }
     }
 
     public void showData()
     {
         AEditBean panel;
-        for (int i = 0, j = currStep; i < ConsEnv.MWIZ_MAX_ROW; i += 1)
+        for (int i = 0, j = currStep; i < ConsEnv.MWIZ_ROWS_MAX; i += 1)
         {
             panel = pl_EditList[i];
             if (panel == null)
@@ -169,14 +183,14 @@ public class BodyBar extends javax.swing.JPanel
     public boolean saveData()
     {
         AEditBean panel;
-        for (int i = 0, j = currStep; i < ConsEnv.MWIZ_MAX_ROW; i += 1)
+        for (int i = 0, j = currStep; i < ConsEnv.MWIZ_ROWS_MAX; i += 1)
         {
             panel = pl_EditList[i];
             if (panel == null)
             {
                 break;
             }
-            if(!((IMwizBean) panel).saveData())
+            if (!((IMwizBean) panel).saveData())
             {
                 panel.requestFocus();
                 return false;
@@ -189,7 +203,7 @@ public class BodyBar extends javax.swing.JPanel
     {
         if (lb_EditList == null)
         {
-            lb_EditList = new javax.swing.JLabel[ConsEnv.MWIZ_MAX_ROW];
+            lb_EditList = new javax.swing.JLabel[ConsEnv.MWIZ_ROWS_MAX];
         }
         javax.swing.JLabel label = lb_EditList[index];
         if (label == null)
@@ -204,7 +218,7 @@ public class BodyBar extends javax.swing.JPanel
     {
         if (pl_EditList == null)
         {
-            pl_EditList = new AEditBean[ConsEnv.MWIZ_MAX_ROW];
+            pl_EditList = new AEditBean[ConsEnv.MWIZ_ROWS_MAX];
         }
         AEditBean panel = pl_EditList[index];
         if (panel == null)

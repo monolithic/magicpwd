@@ -18,6 +18,7 @@ package com.magicpwd._bean;
 
 import com.magicpwd.__a.AEditBean;
 import com.magicpwd.__a.AFrame;
+import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.item.EditItem;
 import com.magicpwd._comn.prop.Char;
 import com.magicpwd._comp.BtnLabel;
@@ -303,6 +304,22 @@ public abstract class APwdsBean extends AEditBean
     protected void initConfData()
     {
         changeView(true);
+    }
+
+    protected void showConfData()
+    {
+        String size = itemData.getSpec(IEditItem.SPEC_PWDS_SIZE, "0");
+        if (!com.magicpwd._util.Char.isValidatePositiveInteger(size))
+        {
+            size = "0";
+        }
+        if (!bg_SizeGroup.setSelected(size, true))
+        {
+            mi_SizeMore.setSelected(true);
+            mi_SizeMore.setActionCommand(size);
+        }
+        bg_CharGroup.setSelected(itemData.getSpec(IEditItem.SPEC_PWDS_HASH), true);
+        mi_LoopMenu.setSelected(ConsCfg.DEF_TRUE.equals(itemData.getSpec(IEditItem.SPEC_PWDS_LOOP)));
     }
 
     private void bt_PwdsConfActionPerformed(java.awt.event.ActionEvent evt)
