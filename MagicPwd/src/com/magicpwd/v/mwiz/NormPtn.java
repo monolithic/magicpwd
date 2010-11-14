@@ -63,11 +63,11 @@ public class NormPtn extends AFrame
         hsg1.addContainerGap();
         javax.swing.GroupLayout.SequentialGroup hsg2 = layout.createSequentialGroup();
         hsg2.addContainerGap();
-        hsg2.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE);
+        hsg2.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE);
         hsg2.addContainerGap();
         javax.swing.GroupLayout.SequentialGroup hsg3 = layout.createSequentialGroup();
 //        hsg3.addContainerGap();
-        hsg3.addComponent(hb_HintBar, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE);
+        hsg3.addComponent(hb_HintBar, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE);
 //        hsg3.addContainerGap();
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(hsg1).addGroup(hsg2).addGroup(hsg3));
 
@@ -274,7 +274,7 @@ public class NormPtn extends AFrame
     private void moveFindBar()
     {
         java.awt.Dimension size = fb_FindBar.getPreferredSize();
-        fb_FindBar.setBounds(getSize().width - size.width - 24, 0, size.width, size.height);
+        fb_FindBar.setBounds(this.getContentPane().getSize().width - size.width - 10, 0, size.width, size.height);
     }
 
     public void deleteKeys()
