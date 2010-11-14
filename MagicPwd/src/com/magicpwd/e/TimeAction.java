@@ -51,54 +51,54 @@ public class TimeAction implements java.awt.event.ActionListener
         String tmp = cmd.toLowerCase();
         if (tmp.startsWith("time:"))
         {
-            tmp = tmp.substring(5);
-
             java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("\\d+").matcher(tmp);
-            int step = Integer.parseInt(matcher.find() ? matcher.group() : "1");
-
-            tmp = tmp.replaceAll("^\\s*\\d+", "").trim();
+            if (!matcher.find())
+            {
+                return;
+            }
+            int time = Integer.parseInt(matcher.group());
 
             java.util.Calendar cal = java.util.Calendar.getInstance();
             java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(ConsEnv.HINT_DATE);
-            if ("second".equals(tmp))
+            if (tmp.endsWith("second"))
             {
-                cal.add(java.util.Calendar.SECOND, step);
+                cal.add(java.util.Calendar.SECOND, time);
                 component.setText(sdf.format(cal.getTime()));
                 return;
             }
-            if ("minute".equals(tmp))
+            if (tmp.endsWith("minute"))
             {
-                cal.add(java.util.Calendar.MINUTE, step);
+                cal.add(java.util.Calendar.MINUTE, time);
                 component.setText(sdf.format(cal.getTime()));
                 return;
             }
-            if ("hour".equals(tmp))
+            if (tmp.endsWith("hour"))
             {
-                cal.add(java.util.Calendar.HOUR_OF_DAY, step);
+                cal.add(java.util.Calendar.HOUR_OF_DAY, time);
                 component.setText(sdf.format(cal.getTime()));
                 return;
             }
-            if ("day".equals(tmp))
+            if (tmp.endsWith("day"))
             {
-                cal.add(java.util.Calendar.DAY_OF_MONTH, step);
+                cal.add(java.util.Calendar.DAY_OF_MONTH, time);
                 component.setText(sdf.format(cal.getTime()));
                 return;
             }
-            if ("week".equals(tmp))
+            if (tmp.endsWith("week"))
             {
-                cal.add(java.util.Calendar.WEEK_OF_MONTH, step);
+                cal.add(java.util.Calendar.WEEK_OF_MONTH, time);
                 component.setText(sdf.format(cal.getTime()));
                 return;
             }
-            if ("month".equals(tmp))
+            if (tmp.endsWith("month"))
             {
-                cal.add(java.util.Calendar.MONTH, step);
+                cal.add(java.util.Calendar.MONTH, time);
                 component.setText(sdf.format(cal.getTime()));
                 return;
             }
-            if ("year".equals(tmp))
+            if (tmp.endsWith("year"))
             {
-                cal.add(java.util.Calendar.YEAR, step);
+                cal.add(java.util.Calendar.YEAR, time);
                 component.setText(sdf.format(cal.getTime()));
                 return;
             }

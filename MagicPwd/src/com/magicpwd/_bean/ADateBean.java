@@ -236,50 +236,50 @@ public abstract class ADateBean extends AEditBean
             return c;
         }
         interval = interval.toLowerCase();
-        if (!interval.startsWith("time:"))
+        if (interval.startsWith("time:"))
         {
-            return c;
-        }
-        java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("\\d+").matcher(interval);
-        if (!matcher.find())
-        {
-            return c;
-        }
-        int time = Integer.parseInt(matcher.group());
-        if (interval.endsWith("second"))
-        {
-            c.add(java.util.Calendar.SECOND, time);
-            return c;
-        }
-        if (interval.endsWith("minute"))
-        {
-            c.add(java.util.Calendar.MINUTE, time);
-            return c;
-        }
-        if (interval.endsWith("hour"))
-        {
-            c.add(java.util.Calendar.HOUR_OF_DAY, time);
-            return c;
-        }
-        if (interval.endsWith("day"))
-        {
-            c.add(java.util.Calendar.DAY_OF_MONTH, time);
-            return c;
-        }
-        if (interval.endsWith("week"))
-        {
-            c.add(java.util.Calendar.WEEK_OF_YEAR, time);
-            return c;
-        }
-        if (interval.endsWith("month"))
-        {
-            c.add(java.util.Calendar.MONTH, time);
-            return c;
-        }
-        if (interval.endsWith("year"))
-        {
-            c.add(java.util.Calendar.YEAR, time);
-            return c;
+            java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("\\d+").matcher(interval);
+            if (!matcher.find())
+            {
+                return c;
+            }
+
+            int time = Integer.parseInt(matcher.group());
+            if (interval.endsWith("second"))
+            {
+                c.add(java.util.Calendar.SECOND, time);
+                return c;
+            }
+            if (interval.endsWith("minute"))
+            {
+                c.add(java.util.Calendar.MINUTE, time);
+                return c;
+            }
+            if (interval.endsWith("hour"))
+            {
+                c.add(java.util.Calendar.HOUR_OF_DAY, time);
+                return c;
+            }
+            if (interval.endsWith("day"))
+            {
+                c.add(java.util.Calendar.DAY_OF_MONTH, time);
+                return c;
+            }
+            if (interval.endsWith("week"))
+            {
+                c.add(java.util.Calendar.WEEK_OF_YEAR, time);
+                return c;
+            }
+            if (interval.endsWith("month"))
+            {
+                c.add(java.util.Calendar.MONTH, time);
+                return c;
+            }
+            if (interval.endsWith("year"))
+            {
+                c.add(java.util.Calendar.YEAR, time);
+                return c;
+            }
         }
         return c;
     }
