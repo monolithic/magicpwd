@@ -43,10 +43,10 @@
         <!--提醒-->
         <item id="hint" type="toggle" text="$P30F6709" tips="$P30F670A">
             <icon>
-                <default id="search-keys" path="skin/feel/%feel%/mwiz-hint.png"/>
+                <default id="hint-keys" path="skin/feel/%feel%/mwiz-hint.png"/>
             </icon>
-            <action id="search-keys" class="com.magicpwd.e.mwiz.HintAction">
-                <stroke key="^ F" />
+            <action id="hint-keys" class="com.magicpwd.e.mwiz.HintAction">
+                <stroke key="^ R" />
             </action>
         </item>
         <!--查询-->
