@@ -55,18 +55,23 @@ public class DateBean extends ADateBean implements IMwizBean
     @Override
     public void initLang()
     {
+        initConfLang();
     }
 
     @Override
     public void initData()
     {
+        initConfData();
     }
 
     @Override
     public void showData(IEditItem itemData)
     {
         this.itemData = itemData;
+
         tf_PropData.setText(itemData.getData());
+
+        showConfData();
     }
 
     @Override

@@ -69,6 +69,8 @@ public class PwdsBean extends APwdsBean implements IMwizBean
     {
         this.itemData = itemData;
         pf_PropData.setText(itemData.getData());
+
+        showConfData();
     }
 
     @Override

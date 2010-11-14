@@ -49,4 +49,8 @@ public abstract class AListBean extends AEditBean
     protected void initConfData()
     {
     }
+
+    protected void showConfData()
+    {
+    }
 }

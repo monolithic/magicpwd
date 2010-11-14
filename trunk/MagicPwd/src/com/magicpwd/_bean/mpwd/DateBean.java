@@ -117,8 +117,7 @@ public class DateBean extends ADateBean implements IMpwdBean
         tf_PropName.setText(showName());
         tf_PropData.setText(itemData.getData());
 
-        boolean b = mainPtn.getMenuPtn().getGroup("date-template").setSelected(itemData.getSpec(IEditItem.SPEC_DATE_FORM), true);
-        mi_ConfDef.setSelected(!b);
+        showConfData();
     }
 
     @Override

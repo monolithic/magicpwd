@@ -7,7 +7,6 @@ package com.magicpwd._bean.mpwd;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mpwd.IMpwdBean;
 import com.magicpwd._bean.ADataBean;
-import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._util.Bean;
@@ -33,7 +32,7 @@ public class DataBean extends ADataBean implements IMpwdBean
     @Override
     public void initView()
     {
-        dataEdit = new WEditBox(mainPtn.getUserMdl(), this, false);
+        dataEdit = new WEditBox(formPtn.getUserMdl(), this, false);
         dataEdit.initView();
 
         lb_PropConf = new javax.swing.JLabel();
@@ -107,19 +106,11 @@ public class DataBean extends ADataBean implements IMpwdBean
     public void showData(IEditItem item)
     {
         itemData = item;
-        // 数据类型
-        WButtonGroup group = mainPtn.getMenuPtn().getGroup("data-template");
-        if (group != null)
-        {
-            group.setSelected("", true);
-        }
 
-        // 符号位置
-        group = mainPtn.getMenuPtn().getGroup("data-position");
-        if (group != null)
-        {
-            group.setSelected("", true);
-        }
+        tf_PropName.setText(getName());
+        tf_PropData.setText(itemData.getData());
+
+        showConfData();
     }
 
     @Override

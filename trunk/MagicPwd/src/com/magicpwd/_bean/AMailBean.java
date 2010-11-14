@@ -83,6 +83,10 @@ public abstract class AMailBean extends AEditBean
         dataBox.initData();
     }
 
+    protected void showConfData()
+    {
+    }
+
     private void bt_MailViewActionPerformed(java.awt.event.ActionEvent evt)
     {
         String url = tf_PropData.getText();

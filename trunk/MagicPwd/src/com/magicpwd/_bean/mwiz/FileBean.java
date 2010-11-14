@@ -71,7 +71,10 @@ public class FileBean extends AFileBean implements IMwizBean
     public void showData(IEditItem itemData)
     {
         this.itemData = itemData;
+
         tf_PropData.setText(itemData.getData());
+
+        showConfData();
     }
 
     @Override

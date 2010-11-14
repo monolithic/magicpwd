@@ -19,6 +19,7 @@ package com.magicpwd._bean.mwiz;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mwiz.IMwizBean;
 import com.magicpwd._bean.ADataBean;
+import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd.v.mwiz.NormPtn;
 
 /**
@@ -41,18 +42,23 @@ public class DataBean extends ADataBean implements IMwizBean
     @Override
     public void initLang()
     {
+        initConfLang();
     }
 
     @Override
     public void initData()
     {
+        initConfData();
     }
 
     @Override
     public void showData(IEditItem itemData)
     {
         this.itemData = itemData;
+
         tf_PropData.setText(itemData.getData());
+
+        showConfData();
     }
 
     @Override

@@ -21,6 +21,7 @@ import com.magicpwd.__a.AFrame;
 import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comp.BtnLabel;
+import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Char;
 
@@ -88,6 +89,23 @@ public abstract class ADataBean extends AEditBean
             }
         };
         formPtn.getMenuPtn().getSubMenu("data-options", pm_DataConf, action);
+    }
+
+    protected void showConfData()
+    {
+        // 数据类型
+        WButtonGroup group = formPtn.getMenuPtn().getGroup("data-template");
+        if (group != null)
+        {
+            group.setSelected("", true);
+        }
+
+        // 符号位置
+        group = formPtn.getMenuPtn().getGroup("data-position");
+        if (group != null)
+        {
+            group.setSelected("", true);
+        }
     }
 
     private void bt_DateConfActionPerformed(java.awt.event.ActionEvent evt)

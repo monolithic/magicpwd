@@ -887,32 +887,38 @@ public class MenuPtn
                         if (obj instanceof javax.swing.Action)
                         {
                             action = (javax.swing.Action) obj;
-                            if (action instanceof ITrayAction)
+                            if (action instanceof IAction)
                             {
-                                ITrayAction trayAction = (ITrayAction) action;
-                                trayAction.setTrayPtn(trayPtn);
-                                trayAction.doInit(null);
-                            }
-                            else if (action instanceof IMpwdAction)
-                            {
-                                IMpwdAction mpwdAction = (IMpwdAction) action;
-                                mpwdAction.setTrayPtn(trayPtn);
-                                mpwdAction.setMainPtn(trayPtn.getMainPtn());
-                                mpwdAction.doInit(null);
-                            }
-                            else if (action instanceof IMwizAction)
-                            {
-                                IMwizAction mwizAction = (IMwizAction) action;
-                                mwizAction.setTrayPtn(trayPtn);
-                                mwizAction.setNormPtn(trayPtn.getNormPtn());
-                                mwizAction.doInit(null);
-                            }
-                            else if (action instanceof IMpadAction)
-                            {
-                                IMpadAction mpadAction = (IMpadAction) action;
-                                mpadAction.setTrayPtn(trayPtn);
-                                mpadAction.setMiniPtn(trayPtn.getMiniPtn());
-                                mpadAction.doInit(null);
+                                IAction iAction = (IAction) action;
+                                iAction.setTrayPtn(trayPtn);
+
+                                if (action instanceof ITrayAction)
+                                {
+                                    ITrayAction trayAction = (ITrayAction) action;
+                                    trayAction.setTrayPtn(trayPtn);
+                                    trayAction.doInit(null);
+                                }
+                                else if (action instanceof IMpwdAction)
+                                {
+                                    IMpwdAction mpwdAction = (IMpwdAction) action;
+                                    mpwdAction.setTrayPtn(trayPtn);
+                                    mpwdAction.setMainPtn(trayPtn.getMainPtn());
+                                    mpwdAction.doInit(null);
+                                }
+                                else if (action instanceof IMwizAction)
+                                {
+                                    IMwizAction mwizAction = (IMwizAction) action;
+                                    mwizAction.setTrayPtn(trayPtn);
+                                    mwizAction.setNormPtn(trayPtn.getNormPtn());
+                                    mwizAction.doInit(null);
+                                }
+                                else if (action instanceof IMpadAction)
+                                {
+                                    IMpadAction mpadAction = (IMpadAction) action;
+                                    mpadAction.setTrayPtn(trayPtn);
+                                    mpadAction.setMiniPtn(trayPtn.getMiniPtn());
+                                    mpadAction.doInit(null);
+                                }
                             }
                             if (validate)
                             {

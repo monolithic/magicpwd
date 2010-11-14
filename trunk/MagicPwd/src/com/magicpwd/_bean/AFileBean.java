@@ -103,6 +103,18 @@ public abstract class AFileBean extends AEditBean
         dataBox.initData();
     }
 
+    protected void showConfData()
+    {
+        if (amaPath == null)
+        {
+            amaPath = new java.io.File(ConsEnv.DIR_DAT, ConsEnv.DIR_AMA);
+            if (!amaPath.exists())
+            {
+                amaPath.mkdirs();
+            }
+        }
+    }
+
     protected abstract void deCrypt(java.io.File src, java.io.File dst) throws Exception;
 
     protected abstract void enCrypt(java.io.File src, java.io.File dst) throws Exception;
