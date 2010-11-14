@@ -40,32 +40,41 @@
             </action>
         </item>
         <seperator />
+        <!--提醒-->
+        <item id="hint" type="toggle" text="$P30F6709" tips="$P30F670A">
+            <icon>
+                <default id="search-keys" path="skin/feel/%feel%/mwiz-hint.png"/>
+            </icon>
+            <action id="search-keys" class="com.magicpwd.e.mwiz.HintAction">
+                <stroke key="^ F" />
+            </action>
+        </item>
         <!--查询-->
-        <item id="search" type="toggle" text="$P30F6709" tips="$P30F670A">
+        <item id="find" type="toggle" text="$P30F670B" tips="$P30F670C">
             <icon>
                 <default id="search-keys" path="skin/feel/%feel%/mwiz-search.png"/>
             </icon>
-            <action id="search-keys" class="com.magicpwd.e.mwiz.SearchAction">
+            <action id="search-keys" class="com.magicpwd.e.mwiz.FindAction">
                 <stroke key="^ F" />
             </action>
         </item>
     </toolbar>
     <popmenu id="mwiz">
         <!--查看记录-->
-        <item type="normal" text="$P30F7D05">
+        <item type="normal" text="$P30F6D01">
             <action id="view-keys" class="com.magicpwd.e.mwiz.ViewAction" />
         </item>
         <seperator />
         <!--添加记录-->
-        <item type="normal" text="$P30F7D05">
+        <item type="normal" text="$P30F6D02">
             <action id="new-keys" class="com.magicpwd.e.mwiz.NewAction" />
         </item>
         <!--更新记录-->
-        <item type="normal" text="$P30F7D05">
+        <item type="normal" text="$P30F6D03">
             <action id="edit-keys" class="com.magicpwd.e.mwiz.EditAction" />
         </item>
         <!--删除记录-->
-        <item type="normal" text="$P30F7D06">
+        <item type="normal" text="$P30F6D04">
             <action id="delete-keys" class="com.magicpwd.e.mwiz.DeleteAction" />
         </item>
         <seperator />
@@ -212,6 +221,50 @@
             </item>
         </menu>
     </popmenu>
+    <!--日期弹出菜单选项-->
+    <submenu id="date-template">
+        <!--日期及时间-->
+        <menu text="日期时间型">
+            <item type="checkbox" text="完整格式" group="date-template" command="java:0d0t" />
+            <item type="checkbox" text="长格式" group="date-template" command="java:1d1t" />
+            <item type="checkbox" text="标准格式" group="date-template" command="java:2d2t" />
+            <item type="checkbox" text="短格式" group="date-template" command="java:3d3t" />
+            <seperator />
+            <item type="checkbox" text="yyyyMMdd HHmmss 格式" group="date-template" command="user:yyyyMMdd HHmmss" />
+            <item type="checkbox" text="yyyy-MM-dd HH:mm:ss 格式" group="date-template" command="user:yyyy-MM-dd HH:mm:ss" />
+            <item type="checkbox" text="yyyy.MM.dd HH.mm.ss 格式" group="date-template" command="user:yyyy.MM.dd HH.mm.ss" />
+            <item type="checkbox" text="yyyy年MM月dd日 HH时mm分ss秒 格式" group="date-template" command="user:yyyy年MM月dd日 HH时mm分ss秒" />
+        </menu>
+        <!--日期-->
+        <menu text="日期型">
+            <!--系统定义-->
+            <item type="checkbox" text="完整格式" group="date-template" command="java:0d" />
+            <item type="checkbox" text="长格式" group="date-template" command="java:1d" />
+            <item type="checkbox" text="标准格式" group="date-template" command="java:2d" />
+            <item type="checkbox" text="短格式" group="date-template" command="java:3d" />
+            <seperator />
+            <!--用户定义-->
+            <item type="checkbox" text="yyyyMMdd 格式" group="date-template" command="user:yyyyMMdd" />
+            <item type="checkbox" text="yyyy-MM-dd 格式" group="date-template" command="user:yyyy-MM-dd" />
+            <item type="checkbox" text="yyyy/MM/dd 格式" group="date-template" command="user:yyyy/MM/dd" />
+            <item type="checkbox" text="yyyy.MM.dd 格式" group="date-template" command="user:yyyy.MM.dd" />
+            <item type="checkbox" text="yyyy MM dd 格式" group="date-template" command="user:yyyy MM dd" />
+            <item type="checkbox" text="yyyy年MM月dd日 格式" group="date-template" command="user:yyyy年MM月dd日" />
+        </menu>
+        <!--时间-->
+        <menu text="时间型">
+            <item type="checkbox" text="完整格式" group="date-template" command="java:0t" />
+            <item type="checkbox" text="长格式" group="date-template" command="java:1t" />
+            <item type="checkbox" text="标准格式" group="date-template" command="java:2t" />
+            <item type="checkbox" text="短格式" group="date-template" command="java:3t" />
+            <seperator />
+            <item type="checkbox" text="HHmmss 格式" group="date-template" command="user:HHmmss" />
+            <item type="checkbox" text="HH:mm:ss 格式" group="date-template" command="user:HH:mm:ss" />
+            <item type="checkbox" text="HH.mm.ss 格式" group="date-template" command="user:HH.mm.ss" />
+            <item type="checkbox" text="HH mm ss 格式" group="date-template" command="user:HH mm ss" />
+            <item type="checkbox" text="HH时mm分ss秒 格式" group="date-template" command="user:HH时mm分ss秒" />
+        </menu>
+    </submenu>
     <submenu id="date-interval">
         <menu text="秒">
             <item type="normal" text="30秒后" command="time:30second" />
