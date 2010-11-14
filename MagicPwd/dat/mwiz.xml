@@ -212,6 +212,31 @@
             </item>
         </menu>
     </popmenu>
+    <submenu id="date-interval">
+        <menu text="秒">
+            <item type="normal" text="30秒后" command="time:30second" />
+        </menu>
+        <menu text="分">
+            <item type="normal" text="30分后" command="time:30minute" />
+        </menu>
+        <menu text="时">
+            <item type="normal" text="1小时后" command="time:1hour" />
+            <item type="normal" text="2小时后" command="time:2hour" />
+        </menu>
+        <menu text="天">
+            <item type="normal" text="1天后" command="time:1day" />
+            <item type="normal" text="2天后" command="time:2day" />
+        </menu>
+        <menu text="周">
+            <item type="normal" text="1周后" command="time:1week" />
+        </menu>
+        <menu text="月">
+            <item type="normal" text="1月后" command="time:1month" />
+        </menu>
+        <menu text="年">
+            <item type="normal" text="1年后" command="time:1year" />
+        </menu>
+    </submenu>
     <strokes id="mwiz">
         <action id="lock-window" class="com.magicpwd.e.mwiz.LockAction">
             <stroke key="^ L" />
