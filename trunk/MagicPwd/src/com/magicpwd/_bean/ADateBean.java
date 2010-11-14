@@ -21,6 +21,7 @@ import com.magicpwd.__a.AFrame;
 import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comp.BtnLabel;
+import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
@@ -146,7 +147,12 @@ public abstract class ADateBean extends AEditBean
 
     protected void showConfData()
     {
-        boolean b = formPtn.getMenuPtn().getGroup("date-template").setSelected(itemData.getSpec(IEditItem.SPEC_DATE_FORM), true);
+        WButtonGroup group = formPtn.getMenuPtn().getGroup("date-template");
+        boolean b = false;
+        if (group != null)
+        {
+            b = group.setSelected(itemData.getSpec(IEditItem.SPEC_DATE_FORM), true);
+        }
         mi_ConfDef.setSelected(!b);
     }
 

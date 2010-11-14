@@ -75,19 +75,15 @@ public class BodyBar extends javax.swing.JPanel
         javax.swing.JLabel label;
         AEditBean panel;
         javax.swing.GroupLayout.ParallelGroup vpg;
-        while (true)
+        while (step > -1 && step < max)
         {
-            if (step < 0 || step >= max)
-            {
-                break;
-            }
-
-            int type = keysMdl.getItemAt(step++).getType();
+            int type = keysMdl.getItemAt(step).getType();
             row -= (type == ConsDat.INDX_AREA || type == ConsDat.INDX_LIST) ? ConsEnv.MWIZ_AREA_ROW : 1;
             if (row < 0)
             {
                 break;
             }
+            step += 1;
 
             if (tmp == 0)
             {
@@ -197,6 +193,12 @@ public class BodyBar extends javax.swing.JPanel
             }
         }
         return true;
+    }
+
+    @Override
+    public void requestFocus()
+    {
+        pl_EditList[0].requestFocus();
     }
 
     private javax.swing.JLabel getLabel(int index)

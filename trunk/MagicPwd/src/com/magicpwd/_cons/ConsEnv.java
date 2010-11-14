@@ -173,7 +173,7 @@ public interface ConsEnv
     String PROP_USET = "130F_USET";
     String PROP_SKEY = "130F_SKEY";
     String PROP_JAVA = "130F_JAVA";
-    int MWIZ_ROWS_MAX = 5;
+    int MWIZ_ROWS_MAX = 6;
     int MWIZ_AREA_ROW = 3;
     char[] UPPER_DIGEST =
     {

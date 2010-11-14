@@ -119,7 +119,7 @@ public class EditPtn extends javax.swing.JDialog
         while (step < keysMdl.getItemSize())
         {
             BodyBar bar = new BodyBar(normPtn, keysMdl);
-            step = bar.initView(step) + 1;
+            step = bar.initView(step);
             bar.initLang();
             bar.initData();
             pl_EditArea.add("body" + (indx++), bar);
@@ -132,8 +132,11 @@ public class EditPtn extends javax.swing.JDialog
         pl_NoteArea = new javax.swing.JPanel();
         ta_NoteArea = new javax.swing.JTextArea();
 
-        ta_NoteArea.setEditable(false);
+//        ta_NoteArea.setEditable(false);
+        ta_NoteArea.setEnabled(false);
         ta_NoteArea.setRows(3);
+        ta_NoteArea.setLineWrap(true);
+//        ta_NoteArea.setForeground(java.awt.Color.darkGray);
         javax.swing.JScrollPane jsp = new javax.swing.JScrollPane(ta_NoteArea);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_NoteArea);
@@ -145,9 +148,9 @@ public class EditPtn extends javax.swing.JDialog
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(hsg1));
 
         javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
-        vsg1.addContainerGap();
+//        vsg1.addContainerGap();
         vsg1.addComponent(jsp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vsg1.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+//        vsg1.addContainerGap();
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(vsg1));
     }
 
@@ -243,8 +246,10 @@ public class EditPtn extends javax.swing.JDialog
     {
         currStep = -2;
 
+        ta_NoteArea.setText(Lang.getLang(LangRes.P30F6B01, "第一步：选择您要使用的口令模板"));
         cl_Layout.show(pl_EditArea, "guid");
         guidBean.showData(keysMdl);
+        guidBean.requestFocus();
 
         bt_PrevStep.setVisible(false);
         bt_NextStep.setVisible(true);
@@ -255,8 +260,10 @@ public class EditPtn extends javax.swing.JDialog
     {
         currStep = -1;
 
+        ta_NoteArea.setText(Lang.getLang(LangRes.P30F6B02, "第二步：输入口令基本信息及设置提醒"));
         cl_Layout.show(pl_EditArea, "head");
         headBean.showData(keysMdl);
+        headBean.requestFocus();
 
         boolean end = keysMdl.getItemSize() <= ConsEnv.PWDS_HEAD_SIZE;
         bt_PrevStep.setVisible(true);
@@ -280,6 +287,7 @@ public class EditPtn extends javax.swing.JDialog
     {
         currStep += 1;
 
+        ta_NoteArea.setText(Lang.getLang(LangRes.P30F6B03, "第三步：录入口令内容信息"));
         cl_Layout.show(pl_EditArea, "body" + currStep);
         ls_BodyList.get(currStep).showData();
 

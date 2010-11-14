@@ -81,7 +81,7 @@ public class HintBar extends javax.swing.JPanel
             @Override
             public boolean callBack(Object sender, java.util.EventListener event, String... params)
             {
-                return showNote();
+                return showHint();
             }
         });
     }
@@ -97,7 +97,7 @@ public class HintBar extends javax.swing.JPanel
         }
     }
 
-    private boolean showNote()
+    private boolean showHint()
     {
         java.util.Calendar cal = java.util.Calendar.getInstance();
 

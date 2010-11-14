@@ -5,6 +5,7 @@
 package com.magicpwd.v.mwiz;
 
 import com.magicpwd.__a.AFrame;
+import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
@@ -16,6 +17,7 @@ import com.magicpwd.m.mwiz.MwizMdl;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.TrayPtn;
 import com.magicpwd.v.HintBar;
+import java.util.EventListener;
 
 /**
  * 向导模式
@@ -94,6 +96,15 @@ public class NormPtn extends AFrame
         super.setVisible(true);
 
         hb_HintBar.initData();
+        hb_HintBar.setBackCall(new IBackCall()
+        {
+
+            @Override
+            public boolean callBack(Object sender, EventListener event, String... params)
+            {
+                return true;
+            }
+        });
 
         mwizMdl = new MwizMdl(userMdl);
         mwizMdl.init();
@@ -198,6 +209,11 @@ public class NormPtn extends AFrame
         {
             mwizMdl.getGridMdl().listKeysByKind("0");
         }
+    }
+
+    public boolean findHint(java.util.Date s, java.util.Date t)
+    {
+        return mwizMdl.getGridMdl().listTask(s, t);
     }
 
     public void viewKeys()

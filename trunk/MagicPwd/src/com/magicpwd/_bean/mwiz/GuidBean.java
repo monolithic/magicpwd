@@ -207,6 +207,12 @@ public class GuidBean extends javax.swing.JPanel
         return true;
     }
 
+    @Override
+    public void requestFocus()
+    {
+        cb_PropData.requestFocus();
+    }
+
     public void readMailActionPerformed(java.awt.event.ActionEvent evt)
     {
 //        normPtn.showMailPtn();
