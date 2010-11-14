@@ -235,7 +235,7 @@ public class MenuPtn
         return true;
     }
 
-    public boolean getSubMenu(String partId, javax.swing.JPopupMenu menu, IMpwdAction action)
+    public boolean getSubMenu(String partId, javax.swing.JPopupMenu menu, java.awt.event.ActionListener action)
     {
         if (!Char.isValidate(partId) || document == null)
         {
@@ -280,7 +280,7 @@ public class MenuPtn
         return true;
     }
 
-    public boolean getSubMenu(String partId, javax.swing.JMenu menu, IMpwdAction action)
+    public boolean getSubMenu(String partId, javax.swing.JMenu menu, java.awt.event.ActionListener action)
     {
         if (!Char.isValidate(partId) || document == null)
         {
@@ -341,7 +341,7 @@ public class MenuPtn
         return true;
     }
 
-    private javax.swing.JMenu createMenu(Element element, javax.swing.JComponent component, IMpwdAction action)
+    private javax.swing.JMenu createMenu(Element element, javax.swing.JComponent component, java.awt.event.ActionListener action)
     {
         javax.swing.JMenu menu = new javax.swing.JMenu();
         String id = element.attributeValue("id");
@@ -384,7 +384,7 @@ public class MenuPtn
         return menu;
     }
 
-    private javax.swing.JMenuItem createItem(Element element, javax.swing.JComponent component, IMpwdAction action)
+    private javax.swing.JMenuItem createItem(Element element, javax.swing.JComponent component, java.awt.event.ActionListener action)
     {
         javax.swing.JMenuItem item = processType(element);
         String id = element.attributeValue("id");

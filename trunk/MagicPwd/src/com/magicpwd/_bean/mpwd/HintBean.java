@@ -3,7 +3,6 @@
  */
 package com.magicpwd._bean.mpwd;
 
-import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mpwd.IMpwdBean;
 import com.magicpwd._comp.WEditBox;
@@ -13,8 +12,8 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
+import com.magicpwd.e.TimeAction;
 import com.magicpwd.v.mpwd.MainPtn;
-import javax.swing.AbstractButton;
 
 /**
  * 属性：过期提示
@@ -145,25 +144,7 @@ public class HintBean extends javax.swing.JPanel implements IMpwdBean
     @Override
     public void initData()
     {
-        AMpwdAction action = new AMpwdAction()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                mi_MenuItemActionPerformed(evt);
-            }
-
-            @Override
-            public void doInit(Object object)
-            {
-            }
-
-            @Override
-            public void reInit(AbstractButton button)
-            {
-            }
-        };
+        java.awt.event.ActionListener action = new TimeAction(tf_PropData);
         mi_HalfHour.addActionListener(action);
         mi_FullHour.addActionListener(action);
         mainPtn.getMenuPtn().getSubMenu("date-interval", pm_DateView, action);
@@ -267,55 +248,6 @@ public class HintBean extends javax.swing.JPanel implements IMpwdBean
         Bean.setText(mi_FullHour, t2);
         mi_FullHour.setActionCommand(format.format(d2));
         pm_DateView.show(bt_DateView, 0, bt_DateView.getHeight());
-    }
-
-    private void mi_MenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        String cmd = evt.getActionCommand();
-        if (!com.magicpwd._util.Char.isValidate(cmd))
-        {
-            return;
-        }
-
-        java.util.Calendar cal = java.util.Calendar.getInstance();
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(ConsEnv.HINT_DATE);
-        if ("half".equalsIgnoreCase(cmd))
-        {
-            cal.add(java.util.Calendar.MINUTE, 30);
-            tf_PropData.setText(sdf.format(cal.getTime()));
-            return;
-        }
-        if ("hour".equalsIgnoreCase(cmd))
-        {
-            cal.add(java.util.Calendar.HOUR_OF_DAY, 1);
-            tf_PropData.setText(sdf.format(cal.getTime()));
-            return;
-        }
-        if ("day".equalsIgnoreCase(cmd))
-        {
-            cal.add(java.util.Calendar.DAY_OF_MONTH, 1);
-            tf_PropData.setText(sdf.format(cal.getTime()));
-            return;
-        }
-        if ("week".equalsIgnoreCase(cmd))
-        {
-            cal.add(java.util.Calendar.WEEK_OF_MONTH, 1);
-            tf_PropData.setText(sdf.format(cal.getTime()));
-            return;
-        }
-        if ("month".equalsIgnoreCase(cmd))
-        {
-            cal.add(java.util.Calendar.MONTH, 1);
-            tf_PropData.setText(sdf.format(cal.getTime()));
-            return;
-        }
-        if ("year".equalsIgnoreCase(cmd))
-        {
-            cal.add(java.util.Calendar.YEAR, 1);
-            tf_PropData.setText(sdf.format(cal.getTime()));
-            return;
-        }
-        tf_PropData.setText(cmd);
     }
     private javax.swing.JLabel lb_PropName;
     private javax.swing.JLabel lb_PropData;

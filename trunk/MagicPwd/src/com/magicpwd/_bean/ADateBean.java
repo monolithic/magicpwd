@@ -170,7 +170,7 @@ public abstract class ADateBean extends AEditBean
     {
         if (format == null)
         {
-            getDateFormat(itemData.getSpec(IEditItem.SPEC_DATE_FORM));
+            format = getDateFormat(itemData.getSpec(IEditItem.SPEC_DATE_FORM));
         }
         tf_PropData.setText(format.format(Date.parseDate(evt.getActionCommand()).getTime()));
     }

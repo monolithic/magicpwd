@@ -16,7 +16,6 @@
  */
 package com.magicpwd._bean.mwiz;
 
-import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comp.BtnLabel;
@@ -25,11 +24,11 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
+import com.magicpwd.e.TimeAction;
 import com.magicpwd.m.mwiz.KeysMdl;
 import com.magicpwd.v.mwiz.NormPtn;
 import com.magicpwd.x.IcoDialog;
 import java.util.EventListener;
-import javax.swing.AbstractButton;
 
 /**
  * Application: MagicPwd
@@ -185,25 +184,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
 
     public void initData()
     {
-        AMpwdAction action = new AMpwdAction()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                mi_MenuItemActionPerformed(evt);
-            }
-
-            @Override
-            public void doInit(Object object)
-            {
-            }
-
-            @Override
-            public void reInit(AbstractButton button)
-            {
-            }
-        };
+        java.awt.event.ActionListener action = new TimeAction(tf_HintDate);
         mi_HalfHour.addActionListener(action);
         mi_FullHour.addActionListener(action);
         normPtn.getMenuPtn().getSubMenu("date-interval", pm_HintDate, action);
@@ -349,55 +330,6 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
         Bean.setText(mi_FullHour, t2);
         mi_FullHour.setActionCommand(format.format(d2));
         pm_HintDate.show(ib_HintDate, 0, ib_HintDate.getHeight());
-    }
-
-    private void mi_MenuItemActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        String cmd = evt.getActionCommand();
-        if (!com.magicpwd._util.Char.isValidate(cmd))
-        {
-            return;
-        }
-
-        java.util.Calendar cal = java.util.Calendar.getInstance();
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(ConsEnv.HINT_DATE);
-        if ("half".equalsIgnoreCase(cmd))
-        {
-            cal.add(java.util.Calendar.MINUTE, 30);
-            tf_HintDate.setText(sdf.format(cal.getTime()));
-            return;
-        }
-        if ("hour".equalsIgnoreCase(cmd))
-        {
-            cal.add(java.util.Calendar.HOUR_OF_DAY, 1);
-            tf_HintDate.setText(sdf.format(cal.getTime()));
-            return;
-        }
-        if ("day".equalsIgnoreCase(cmd))
-        {
-            cal.add(java.util.Calendar.DAY_OF_MONTH, 1);
-            tf_HintDate.setText(sdf.format(cal.getTime()));
-            return;
-        }
-        if ("week".equalsIgnoreCase(cmd))
-        {
-            cal.add(java.util.Calendar.WEEK_OF_MONTH, 1);
-            tf_HintDate.setText(sdf.format(cal.getTime()));
-            return;
-        }
-        if ("month".equalsIgnoreCase(cmd))
-        {
-            cal.add(java.util.Calendar.MONTH, 1);
-            tf_HintDate.setText(sdf.format(cal.getTime()));
-            return;
-        }
-        if ("year".equalsIgnoreCase(cmd))
-        {
-            cal.add(java.util.Calendar.YEAR, 1);
-            tf_HintDate.setText(sdf.format(cal.getTime()));
-            return;
-        }
-        tf_HintDate.setText(cmd);
     }
     private BtnLabel ib_HintDate;
     private IcoLabel ib_KeysIcon;
