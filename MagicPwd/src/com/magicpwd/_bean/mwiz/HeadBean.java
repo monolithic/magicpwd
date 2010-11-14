@@ -296,6 +296,12 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
         return true;
     }
 
+    @Override
+    public void requestFocus()
+    {
+        tf_MetaName.requestFocus();
+    }
+
     private void ib_KeysIconActionPerformed(java.awt.event.ActionEvent evt)
     {
         IcoDialog ico = new IcoDialog(normPtn, this);

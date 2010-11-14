@@ -10,7 +10,7 @@ import com.magicpwd.__a.mwiz.AMwizAction;
  *
  * @author Amon
  */
-public class SearchAction extends AMwizAction
+public class FindAction extends AMwizAction
 {
 
     @Override
@@ -25,7 +25,7 @@ public class SearchAction extends AMwizAction
         }
         else
         {
-            button = normPtn.getMenuPtn().getButton("search");
+            button = normPtn.getMenuPtn().getButton("find");
             selected = !button.isSelected();
             button.setSelected(selected);
         }
