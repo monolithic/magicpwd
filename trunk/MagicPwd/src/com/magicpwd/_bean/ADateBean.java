@@ -142,6 +142,7 @@ public abstract class ADateBean extends AEditBean
             }
         };
         formPtn.getMenuPtn().getSubMenu("date-template", pm_MenuConf, dtAction);
+        formPtn.getMenuPtn().getGroup("date-template").add(mi_ConfDef);
     }
 
     protected void showConfData()
@@ -182,7 +183,7 @@ public abstract class ADateBean extends AEditBean
             return;
         }
         itemData.setSpec(IEditItem.SPEC_DATE_FORM, cmd);
-        getDateFormat(cmd);
+        format = getDateFormat(cmd);
     }
 
     static java.text.DateFormat getDateFormat(String t)
@@ -210,7 +211,7 @@ public abstract class ADateBean extends AEditBean
             }
             if (time != null)
             {
-                format = java.text.DateFormat.getDateInstance(Integer.parseInt(time));
+                format = java.text.DateFormat.getTimeInstance(Integer.parseInt(time));
                 return format;
             }
 
