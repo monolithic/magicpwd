@@ -102,6 +102,7 @@ public class NormPtn extends AFrame
             @Override
             public boolean callBack(Object sender, EventListener event, String... params)
             {
+                hintCallBack();
                 return true;
             }
         });
@@ -269,6 +270,20 @@ public class NormPtn extends AFrame
         {
             Logs.exception(ex);
         }
+    }
+
+    private void hintCallBack()
+    {
+        javax.swing.AbstractButton button = getMenuPtn().getButton("hint");
+        if (button != null)
+        {
+            button.setSelected(true);
+        }
+        java.util.Calendar cal = java.util.Calendar.getInstance();
+        java.sql.Timestamp s = new java.sql.Timestamp(cal.getTimeInMillis());
+        cal.add(java.util.Calendar.DAY_OF_MONTH, 1);
+        java.sql.Timestamp e = new java.sql.Timestamp(cal.getTimeInMillis());
+        findHint(s, e);
     }
 
     private void moveFindBar()

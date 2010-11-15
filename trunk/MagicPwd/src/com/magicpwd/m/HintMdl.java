@@ -19,8 +19,8 @@ import java.sql.Timestamp;
 public final class HintMdl
 {
 
-    private static List<Keys> hintList = new ArrayList<Keys>();
-    private int counter;//TODO:需要修改
+    private static List<Keys> hintList;
+    private int counter;
     private UserMdl userMdl;
 
     public HintMdl(UserMdl userMdl)
@@ -30,6 +30,7 @@ public final class HintMdl
 
     public void initData()
     {
+        hintList = new ArrayList<Keys>();
         counter = userMdl.getHintInt();
     }
 
