@@ -681,28 +681,38 @@
         </menu>
     </submenu>
     <submenu id="date-interval">
+        <item type="normal" text="09:30:00" command="now:date 09:30:00" />
+        <item type="normal" text="18:00:00" command="now:date 18:00:00" />
+        <seperator />
+        <!--
+        <item type="normal" text="2010-12-31 20:00:00" command="fix:2010-12-31 20:00:00" />
+        <seperator />
+        -->
         <menu text="秒">
-            <item type="normal" text="30秒后" command="time:30second" />
+            <item type="normal" text="30秒后" command="var:+30second" />
         </menu>
         <menu text="分">
-            <item type="normal" text="30分后" command="time:30minute" />
+            <item type="normal" text="30分后" command="var:+30minute" />
         </menu>
         <menu text="时">
-            <item type="normal" text="1小时后" command="time:1hour" />
-            <item type="normal" text="2小时后" command="time:2hour" />
+            <item type="normal" text="1小时后" command="var:+1hour" />
+            <item type="normal" text="2小时后" command="var:+2hour" />
         </menu>
         <menu text="天">
-            <item type="normal" text="1天后" command="time:1day" />
-            <item type="normal" text="2天后" command="time:2day" />
+            <item type="normal" text="1天后" command="var:+1day" />
+            <item type="normal" text="2天后" command="var:+2day" />
         </menu>
         <menu text="周">
-            <item type="normal" text="1周后" command="time:1week" />
+            <item type="normal" text="1周后" command="var:+1week" />
+            <item type="normal" text="2周后" command="var:+2week" />
         </menu>
         <menu text="月">
-            <item type="normal" text="1月后" command="time:1month" />
+            <item type="normal" text="1月后" command="var:+1month" />
+            <item type="normal" text="2月后" command="var:+2month" />
         </menu>
         <menu text="年">
-            <item type="normal" text="1年后" command="time:1year" />
+            <item type="normal" text="1年后" command="var:+1year" />
+            <item type="normal" text="2年后" command="var:+2year" />
         </menu>
     </submenu>
     <!--数值弹出菜单选项-->

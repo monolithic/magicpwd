@@ -269,9 +269,10 @@
         <item type="normal" text="09:30:00" command="now:date 09:30:00" />
         <item type="normal" text="18:00:00" command="now:date 18:00:00" />
         <seperator />
+        <!--
         <item type="normal" text="2010-12-31 20:00:00" command="fix:2010-12-31 20:00:00" />
-        <item type="normal" text="2011-01-01 00:00:00" command="fix:2011-01-01 00:00:00" />
         <seperator />
+        -->
         <menu text="秒">
             <item type="normal" text="30秒后" command="var:+30second" />
         </menu>
