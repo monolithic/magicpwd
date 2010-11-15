@@ -44,7 +44,7 @@ public class HintItem extends EditItem
         }
         try
         {
-            time = new java.sql.Timestamp(com.magicpwd._util.Date.stringToDate(data, '-', ':', ' ').getTimeInMillis());
+            time = new java.sql.Timestamp(com.magicpwd._util.Date.toDate(data, '-', ':', ' ').getTimeInMillis());
             return true;
         }
         catch (Exception ex)

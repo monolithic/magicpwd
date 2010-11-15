@@ -23,8 +23,8 @@ import com.magicpwd._comp.IcoLabel;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
+import com.magicpwd._util.Date;
 import com.magicpwd._util.Lang;
-import com.magicpwd.e.TimeAction;
 import com.magicpwd.m.mwiz.KeysMdl;
 import com.magicpwd.v.mwiz.NormPtn;
 import com.magicpwd.x.IcoDialog;
@@ -46,6 +46,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
 
     private NormPtn normPtn;
     private KeysMdl keysMdl;
+    private java.text.DateFormat format;
 
     public HeadBean(NormPtn normPtn)
     {
@@ -184,9 +185,16 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
 
     public void initData()
     {
-        TimeAction action = new TimeAction(tf_HintDate);
-        action.setFormat(new java.text.SimpleDateFormat(ConsEnv.HINT_DATE));
+        format = new java.text.SimpleDateFormat(ConsEnv.HINT_DATE);
+        java.awt.event.ActionListener action = new java.awt.event.ActionListener()
+        {
 
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                mi_DateTimeActionPerformed(e);
+            }
+        };
         mi_HalfHour.addActionListener(action);
         mi_FullHour.addActionListener(action);
         normPtn.getMenuPtn().getSubMenu("date-interval", pm_HintDate, action);
@@ -326,12 +334,20 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
             t2 = c.get(java.util.Calendar.HOUR_OF_DAY) + ":30";
         }
 
-        java.text.DateFormat format = new java.text.SimpleDateFormat(ConsEnv.HINT_DATE);
         Bean.setText(mi_HalfHour, t1);
-        mi_HalfHour.setActionCommand(format.format(d1));
+        mi_HalfHour.setActionCommand("fix:" + format.format(d1));
         Bean.setText(mi_FullHour, t2);
-        mi_FullHour.setActionCommand(format.format(d2));
+        mi_FullHour.setActionCommand("fix:" + format.format(d2));
         pm_HintDate.show(ib_HintDate, 0, ib_HintDate.getHeight());
+    }
+
+    private void mi_DateTimeActionPerformed(java.awt.event.ActionEvent e)
+    {
+        java.util.Calendar cal = Date.toDate(e.getActionCommand());
+        if (cal != null)
+        {
+            tf_HintDate.setText(format.format(cal.getTime()));
+        }
     }
     private BtnLabel ib_HintDate;
     private IcoLabel ib_KeysIcon;
