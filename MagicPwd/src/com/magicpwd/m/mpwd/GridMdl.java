@@ -315,7 +315,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
 
             // Guid
             GuidItem guid = new GuidItem(userMdl);
-            guid.setTime(new java.sql.Timestamp(com.magicpwd._util.Date.stringToDate(temp.get(indx++), '-', ':', ' ').getTimeInMillis()));
+            guid.setTime(new java.sql.Timestamp(com.magicpwd._util.Date.toDate(temp.get(indx++), '-', ':', ' ').getTimeInMillis()));
             guid.setData(kindHash);
             ls_ItemList.add(guid);
 
@@ -333,7 +333,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
             String text = temp.get(indx++);
             if (com.magicpwd._util.Char.isValidate(text))
             {
-                hint.setTime(new java.sql.Timestamp(com.magicpwd._util.Date.stringToDate(text, '-', ':', ' ').getTimeInMillis()));
+                hint.setTime(new java.sql.Timestamp(com.magicpwd._util.Date.toDate(text, '-', ':', ' ').getTimeInMillis()));
             }
             hint.setName(temp.get(indx++));
             ls_ItemList.add(hint);

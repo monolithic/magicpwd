@@ -32,6 +32,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     private KeysMdl keysMdl;
     private java.util.List<Keys> ls_KeysList;
     private javax.swing.event.EventListenerList listenerList;
+    private java.text.DateFormat format;
 
     GridMdl(UserMdl userMdl)
     {
@@ -43,6 +44,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
         keysMdl = new KeysMdl(userMdl);
         ls_KeysList = new java.util.ArrayList<Keys>();
         listenerList = new javax.swing.event.EventListenerList();
+        format = java.text.DateFormat.getDateTimeInstance();
     }
 
     @Override
@@ -114,7 +116,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
             case 2:
                 return temp.getP30F0109();
             case 3:
-                return temp.getP30F010D();
+                return temp.getP30F010D() != null ? format.format(temp.getP30F010D()) : "";
             case 4:
                 return temp.getP30F010E();
             default:

@@ -13,7 +13,144 @@ import java.util.Calendar;
 public class Date
 {
 
-    public static Calendar stringToDate(String datetime, char datesp, char timesp, char dtsp) throws Exception
+    public static Calendar toDate(String text)
+    {
+        Calendar cal = null;
+        if (com.magicpwd._util.Char.isValidate(text))
+        {
+            String tmp = text.toLowerCase();
+
+            if (tmp.startsWith("fix:"))
+            {
+                cal = processFix(tmp.substring(4));
+            }
+
+            if (tmp.startsWith("now:"))
+            {
+                cal = processNow(tmp.substring(4));
+            }
+
+            if (tmp.startsWith("var:"))
+            {
+                cal = processVar(tmp.substring(4));
+            }
+        }
+        return cal;
+    }
+
+    /**
+     * 固定日期及日期，格式要求：
+     * fix:yyyy-MM-dd HH:mm:ss
+     * @param txt
+     */
+    private static Calendar processFix(String txt)
+    {
+        if (!com.magicpwd._util.Char.isValidateDateTime(txt))
+        {
+            return null;
+        }
+
+        try
+        {
+            return toDate(txt, '-', ':', ' ');
+        }
+        catch (Exception ex)
+        {
+            Logs.exception(ex);
+            return null;
+        }
+    }
+
+    /**
+     * 当前日期及时间，格式要求：
+     * now:date 11:30:00
+     * now:2010-11-15 time
+     * @param txt
+     */
+    private static Calendar processNow(String txt)
+    {
+        Calendar cal = Calendar.getInstance();
+        if (txt != null)
+        {
+            if (txt.indexOf("date") >= 0)
+            {
+                parseTime(cal, txt.replaceAll("\\s*date\\s*", ""), ':');
+                return cal;
+            }
+
+            if (txt.indexOf("time") >= 0)
+            {
+                parseDate(cal, txt.replaceAll("\\s*time\\s*", ""), '-');
+                return cal;
+            }
+        }
+        return cal;
+    }
+
+    /**
+     * 可变日期及时间，格式要求：
+     * var:1minute
+     * var:2hour
+     * var:1day
+     * ...
+     * @param txt
+     */
+    private static Calendar processVar(String txt)
+    {
+        java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("[-+]\\d+").matcher(txt);
+        if (!matcher.find())
+        {
+            return null;
+        }
+
+        String tmp = matcher.group();
+        if (tmp.charAt(0) == '+')
+        {
+            tmp = tmp.substring(1);
+        }
+        int step = Integer.parseInt(tmp);
+
+        java.util.Calendar cal = java.util.Calendar.getInstance();
+        if (txt.endsWith("second"))
+        {
+            cal.add(java.util.Calendar.SECOND, step);
+            return cal;
+        }
+        if (txt.endsWith("minute"))
+        {
+            cal.add(java.util.Calendar.MINUTE, step);
+            return cal;
+        }
+        if (txt.endsWith("hour"))
+        {
+            cal.add(java.util.Calendar.HOUR_OF_DAY, step);
+            return cal;
+        }
+        if (txt.endsWith("day"))
+        {
+            cal.add(java.util.Calendar.DAY_OF_MONTH, step);
+            return cal;
+        }
+        if (txt.endsWith("week"))
+        {
+            cal.add(java.util.Calendar.WEEK_OF_MONTH, step);
+            return cal;
+        }
+        if (txt.endsWith("month"))
+        {
+            cal.add(java.util.Calendar.MONTH, step);
+            return cal;
+        }
+        if (txt.endsWith("year"))
+        {
+            cal.add(java.util.Calendar.YEAR, step);
+            return cal;
+        }
+
+        return cal;
+    }
+
+    public static Calendar toDate(String datetime, char datesp, char timesp, char dtsp) throws Exception
     {
         // 若指定日期时间字符串为空，则直接返回当前时间
         if (!Char.isValidate(datetime))
@@ -34,7 +171,20 @@ public class Date
         // 日期对象
         Calendar cal = Calendar.getInstance();
 
-        // 日期信息解析
+        parseDate(cal, date, datesp);
+        parseTime(cal, time, timesp);
+
+        return cal;
+    }
+
+    /**
+     * 日期信息解析
+     * @param cal
+     * @param date
+     * @param datesp
+     */
+    private static Calendar parseDate(Calendar cal, String date, char datesp)
+    {
         if (Char.isValidate(date))
         {
             // 读取日期分隔符在日期字符串中位置信息
@@ -85,8 +235,17 @@ public class Date
                 cal.set(Calendar.DAY_OF_MONTH, Integer.parseInt(d));
             }
         }
+        return cal;
+    }
 
-        // 时间信息解析
+    /**
+     * 时间信息解析
+     * @param cal
+     * @param time
+     * @param timesp
+     */
+    private static Calendar parseTime(Calendar cal, String time, char timesp)
+    {
         if (Char.isValidate(time))
         {
             // 读取日期分隔符在日期字符串中位置信息
@@ -137,7 +296,6 @@ public class Date
                 cal.set(Calendar.SECOND, Integer.parseInt(s));
             }
         }
-
         return cal;
     }
 

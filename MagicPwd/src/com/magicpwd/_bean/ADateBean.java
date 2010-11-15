@@ -18,7 +18,6 @@ package com.magicpwd._bean;
 
 import com.magicpwd.__a.AEditBean;
 import com.magicpwd.__a.AFrame;
-import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WButtonGroup;
@@ -26,6 +25,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
+import com.magicpwd._util.Date;
 import com.magicpwd._util.Lang;
 
 /**
@@ -77,6 +77,7 @@ public abstract class ADateBean extends AEditBean
 
         pm_MenuTime = new javax.swing.JPopupMenu();
         mi_TimeDef = new javax.swing.JMenuItem();
+        mi_TimeDef.setActionCommand("now:");
         pm_MenuTime.add(mi_TimeDef);
         pm_MenuTime.addSeparator();
 
@@ -100,7 +101,7 @@ public abstract class ADateBean extends AEditBean
 
     protected void initConfData()
     {
-        AMpwdAction diAction = new AMpwdAction()
+        java.awt.event.ActionListener diAction = new java.awt.event.ActionListener()
         {
 
             @Override
@@ -108,37 +109,17 @@ public abstract class ADateBean extends AEditBean
             {
                 mi_DateTimeActionPerformed(e);
             }
-
-            @Override
-            public void doInit(Object object)
-            {
-            }
-
-            @Override
-            public void reInit(javax.swing.AbstractButton button)
-            {
-            }
         };
         mi_TimeDef.addActionListener(diAction);
         formPtn.getMenuPtn().getSubMenu("date-interval", pm_MenuTime, diAction);
 
-        AMpwdAction dtAction = new AMpwdAction()
+        java.awt.event.ActionListener dtAction = new java.awt.event.ActionListener()
         {
 
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e)
             {
                 mi_DateTpltActionPerformed(e);
-            }
-
-            @Override
-            public void doInit(Object object)
-            {
-            }
-
-            @Override
-            public void reInit(javax.swing.AbstractButton button)
-            {
             }
         };
         formPtn.getMenuPtn().getSubMenu("date-template", pm_MenuConf, dtAction);
@@ -172,7 +153,7 @@ public abstract class ADateBean extends AEditBean
         {
             format = getDateFormat(itemData.getSpec(IEditItem.SPEC_DATE_FORM));
         }
-        tf_PropData.setText(format.format(parseDate(evt.getActionCommand()).getTime()));
+        tf_PropData.setText(format.format(Date.toDate(evt.getActionCommand()).getTime()));
     }
 
     private void mi_DateTpltActionPerformed(java.awt.event.ActionEvent evt)
@@ -227,62 +208,6 @@ public abstract class ADateBean extends AEditBean
 
         format = java.text.DateFormat.getDateTimeInstance();
         return format;
-    }
-
-    static java.util.Calendar parseDate(String interval)
-    {
-        java.util.Calendar c = java.util.Calendar.getInstance();
-        if (!Char.isValidate(interval))
-        {
-            return c;
-        }
-        interval = interval.toLowerCase();
-        if (interval.startsWith("time:"))
-        {
-            java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("\\d+").matcher(interval);
-            if (!matcher.find())
-            {
-                return c;
-            }
-
-            int time = Integer.parseInt(matcher.group());
-            if (interval.endsWith("second"))
-            {
-                c.add(java.util.Calendar.SECOND, time);
-                return c;
-            }
-            if (interval.endsWith("minute"))
-            {
-                c.add(java.util.Calendar.MINUTE, time);
-                return c;
-            }
-            if (interval.endsWith("hour"))
-            {
-                c.add(java.util.Calendar.HOUR_OF_DAY, time);
-                return c;
-            }
-            if (interval.endsWith("day"))
-            {
-                c.add(java.util.Calendar.DAY_OF_MONTH, time);
-                return c;
-            }
-            if (interval.endsWith("week"))
-            {
-                c.add(java.util.Calendar.WEEK_OF_YEAR, time);
-                return c;
-            }
-            if (interval.endsWith("month"))
-            {
-                c.add(java.util.Calendar.MONTH, time);
-                return c;
-            }
-            if (interval.endsWith("year"))
-            {
-                c.add(java.util.Calendar.YEAR, time);
-                return c;
-            }
-        }
-        return c;
     }
     protected javax.swing.JTextField tf_PropData;
     protected javax.swing.JPanel pl_PropConf;
