@@ -144,7 +144,9 @@ public class HintBean extends javax.swing.JPanel implements IMpwdBean
     @Override
     public void initData()
     {
-        java.awt.event.ActionListener action = new TimeAction(tf_PropData);
+        TimeAction action = new TimeAction(tf_PropData);
+        action.setFormat(new java.text.SimpleDateFormat(ConsEnv.HINT_DATE));
+
         mi_HalfHour.addActionListener(action);
         mi_FullHour.addActionListener(action);
         mainPtn.getMenuPtn().getSubMenu("date-interval", pm_DateView, action);
