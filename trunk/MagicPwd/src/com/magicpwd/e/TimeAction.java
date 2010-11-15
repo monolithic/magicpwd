@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e;
 
-import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._util.Logs;
 
 /**
  * Application: MagicPwd
@@ -33,6 +33,7 @@ public class TimeAction implements java.awt.event.ActionListener
 {
 
     private javax.swing.text.JTextComponent component;
+    private java.text.DateFormat dtFormat;
 
     public TimeAction(javax.swing.text.JTextComponent component)
     {
@@ -49,60 +50,150 @@ public class TimeAction implements java.awt.event.ActionListener
         }
 
         String tmp = cmd.toLowerCase();
-        if (tmp.startsWith("time:"))
-        {
-            java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("\\d+").matcher(tmp);
-            if (!matcher.find())
-            {
-                return;
-            }
-            int time = Integer.parseInt(matcher.group());
 
-            java.util.Calendar cal = java.util.Calendar.getInstance();
-            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(ConsEnv.HINT_DATE);
-            if (tmp.endsWith("second"))
-            {
-                cal.add(java.util.Calendar.SECOND, time);
-                component.setText(sdf.format(cal.getTime()));
-                return;
-            }
-            if (tmp.endsWith("minute"))
-            {
-                cal.add(java.util.Calendar.MINUTE, time);
-                component.setText(sdf.format(cal.getTime()));
-                return;
-            }
-            if (tmp.endsWith("hour"))
-            {
-                cal.add(java.util.Calendar.HOUR_OF_DAY, time);
-                component.setText(sdf.format(cal.getTime()));
-                return;
-            }
-            if (tmp.endsWith("day"))
-            {
-                cal.add(java.util.Calendar.DAY_OF_MONTH, time);
-                component.setText(sdf.format(cal.getTime()));
-                return;
-            }
-            if (tmp.endsWith("week"))
-            {
-                cal.add(java.util.Calendar.WEEK_OF_MONTH, time);
-                component.setText(sdf.format(cal.getTime()));
-                return;
-            }
-            if (tmp.endsWith("month"))
-            {
-                cal.add(java.util.Calendar.MONTH, time);
-                component.setText(sdf.format(cal.getTime()));
-                return;
-            }
-            if (tmp.endsWith("year"))
-            {
-                cal.add(java.util.Calendar.YEAR, time);
-                component.setText(sdf.format(cal.getTime()));
-                return;
-            }
+        if (tmp.startsWith("fix:"))
+        {
+            processFix(tmp.substring(4));
+            return;
         }
+
+        if (tmp.startsWith("now:"))
+        {
+            processNow(tmp.substring(4));
+            return;
+        }
+
+        if (tmp.startsWith("var:"))
+        {
+            processVar(tmp.substring(4));
+            return;
+        }
+
         component.setText(cmd);
+    }
+
+    /**
+     * 固定日期及日期，格式要求：
+     * fix:yyyy-MM-dd HH:mm:ss
+     * @param txt
+     */
+    private void processFix(String txt)
+    {
+        if (!com.magicpwd._util.Char.isValidateDate(txt, true))
+        {
+            return;
+        }
+
+        try
+        {
+            java.util.Calendar cal = com.magicpwd._util.Date.stringToDate(txt, '-', ':', ' ');
+            component.setText(dtFormat.format(cal.getTime()));
+        }
+        catch (Exception ex)
+        {
+            Logs.exception(ex);
+        }
+    }
+
+    /**
+     * 当前日期及时间，格式要求：
+     * now:date 11:30:00
+     * now:2010-11-15 time
+     * @param txt
+     */
+    private void processNow(String txt)
+    {
+        if (txt.indexOf("date") >= 0)
+        {
+            component.setText(new java.text.SimpleDateFormat("yyyy-MM-dd").format(java.util.Calendar.getInstance().getTime()));
+            return;
+        }
+
+        if (txt.indexOf("time") >= 0)
+        {
+            component.setText(new java.text.SimpleDateFormat("HH:mm:ss").format(java.util.Calendar.getInstance().getTime()));
+            return;
+        }
+
+        component.setText(txt);
+    }
+
+    /**
+     * 可变日期及时间，格式要求：
+     * var:1minute
+     * var:2hour
+     * var:1day
+     * ...
+     * @param txt
+     */
+    private void processVar(String txt)
+    {
+        java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("[-+]\\d+").matcher(txt);
+        if (!matcher.find())
+        {
+            return;
+        }
+
+        int step = Integer.parseInt(matcher.group());
+
+        java.util.Calendar cal = java.util.Calendar.getInstance();
+        if (txt.endsWith("second"))
+        {
+            cal.add(java.util.Calendar.SECOND, step);
+            component.setText(dtFormat.format(cal.getTime()));
+            return;
+        }
+        if (txt.endsWith("minute"))
+        {
+            cal.add(java.util.Calendar.MINUTE, step);
+            component.setText(dtFormat.format(cal.getTime()));
+            return;
+        }
+        if (txt.endsWith("hour"))
+        {
+            cal.add(java.util.Calendar.HOUR_OF_DAY, step);
+            component.setText(dtFormat.format(cal.getTime()));
+            return;
+        }
+        if (txt.endsWith("day"))
+        {
+            cal.add(java.util.Calendar.DAY_OF_MONTH, step);
+            component.setText(dtFormat.format(cal.getTime()));
+            return;
+        }
+        if (txt.endsWith("week"))
+        {
+            cal.add(java.util.Calendar.WEEK_OF_MONTH, step);
+            component.setText(dtFormat.format(cal.getTime()));
+            return;
+        }
+        if (txt.endsWith("month"))
+        {
+            cal.add(java.util.Calendar.MONTH, step);
+            component.setText(dtFormat.format(cal.getTime()));
+            return;
+        }
+        if (txt.endsWith("year"))
+        {
+            cal.add(java.util.Calendar.YEAR, step);
+            component.setText(dtFormat.format(cal.getTime()));
+            return;
+        }
+    }
+
+    /**
+     * @return the dtFormat
+     */
+    public java.text.DateFormat getFormat()
+    {
+        return dtFormat;
+    }
+
+    /**
+     * @param format the dtFormat to set
+     */
+    public void setFormat(java.text.DateFormat format)
+    {
+        this.dtFormat = format;
     }
 }

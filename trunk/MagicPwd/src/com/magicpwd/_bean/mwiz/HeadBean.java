@@ -184,7 +184,9 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
 
     public void initData()
     {
-        java.awt.event.ActionListener action = new TimeAction(tf_HintDate);
+        TimeAction action = new TimeAction(tf_HintDate);
+        action.setFormat(new java.text.SimpleDateFormat(ConsEnv.HINT_DATE));
+
         mi_HalfHour.addActionListener(action);
         mi_FullHour.addActionListener(action);
         normPtn.getMenuPtn().getSubMenu("date-interval", pm_HintDate, action);
