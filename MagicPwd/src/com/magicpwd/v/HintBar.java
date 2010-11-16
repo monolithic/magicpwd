@@ -81,7 +81,7 @@ public class HintBar extends javax.swing.JPanel
             @Override
             public boolean callBack(Object sender, java.util.EventListener event, String... params)
             {
-                return showHint();
+                return showHint(true);
             }
         });
     }
@@ -97,7 +97,7 @@ public class HintBar extends javax.swing.JPanel
         }
     }
 
-    private boolean showHint()
+    public boolean showHint(boolean schedule)
     {
         java.util.Calendar cal = java.util.Calendar.getInstance();
 
@@ -110,7 +110,7 @@ public class HintBar extends javax.swing.JPanel
         java.sql.Timestamp s = new java.sql.Timestamp(cal.getTimeInMillis());
         cal.add(java.util.Calendar.DAY_OF_MONTH, 1);
         java.sql.Timestamp e = new java.sql.Timestamp(cal.getTimeInMillis());
-        hintMdl.process(s, e);
+        hintMdl.process(s, e, schedule);
 
         int size = hintMdl.getUnreadCount();
         if (size > 0)

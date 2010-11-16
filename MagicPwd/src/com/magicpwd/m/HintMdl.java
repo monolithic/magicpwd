@@ -34,14 +34,18 @@ public final class HintMdl
         counter = userMdl.getHintInt();
     }
 
-    public void process(Timestamp start, Timestamp end)
+    public void process(Timestamp start, Timestamp end, boolean schedule)
     {
         // 计数器
-        counter += 1;
-        if (counter < userMdl.getHintInt())
+        if (schedule)
         {
-            return;
+            counter += 1;
+            if (counter < userMdl.getHintInt())
+            {
+                return;
+            }
         }
+
         counter = 0;
         if (TrayPtn.isDbLocked())
         {
