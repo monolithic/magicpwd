@@ -213,7 +213,7 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
         add(bt_SortL);
 
         bt_SortR = new IcoLabel();
-        bt_SortR.setIcon(mainPtn.readFavIcon("edit-move-right.png", false));
+        bt_SortR.setIcon(mainPtn.readFavIcon("edit-move-right", false));
         bt_SortR.addActionListener(new java.awt.event.ActionListener()
         {
 
