@@ -20,6 +20,7 @@ public class FeelAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
+        mainPtn.getUserMdl().setFeel(e.getActionCommand());
     }
 
     @Override

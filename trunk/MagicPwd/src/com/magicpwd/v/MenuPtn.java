@@ -477,6 +477,7 @@ public class MenuPtn
         javax.swing.JCheckBoxMenuItem item;
         String lookName = userMdl.getCfg(ConsCfg.CFG_SKIN_NAME, ConsCfg.DEF_SKIN_SYS);
         LookAction action = new LookAction();
+        action.setMainPtn(trayPtn.getMainPtn());
         WButtonGroup group = new WButtonGroup();
 
         // Java默认风格
@@ -658,6 +659,7 @@ public class MenuPtn
             javax.swing.JCheckBoxMenuItem item;
             String feelName = userMdl.getCfg(ConsCfg.CFG_SKIN_FEEL, ConsCfg.DEF_FEEL_DEF);
             FeelAction action = new FeelAction();
+            action.setMainPtn(trayPtn.getMainPtn());
             WButtonGroup group = new WButtonGroup();
 
             java.util.Properties prop = new java.util.Properties();
