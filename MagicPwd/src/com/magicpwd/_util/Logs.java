@@ -15,6 +15,11 @@ public class Logs
 
     private static java.io.PrintWriter writer;
 
+    public static void dev(String log)
+    {
+        System.out.println(log);
+    }
+
     public static void log(String log)
     {
         if (UserMdl.getRunMode() == ConsEnv.RUN_MODE_DEV)
@@ -34,6 +39,11 @@ public class Logs
 
     public static void end()
     {
+        if (writer != null)
+        {
+            writer.flush();
+        }
+        writer.close();
     }
 
     private static java.io.PrintWriter getWriter()
