@@ -36,7 +36,7 @@ public class FileBean extends AFileBean implements IMpwdBean
     @Override
     public void initView()
     {
-        dataEdit = new WEditBox(mainPtn.getUserMdl(), this, false);
+        dataEdit = new WEditBox(mainPtn, this, false);
         dataEdit.initView();
 
         lb_PropConf = new javax.swing.JLabel();

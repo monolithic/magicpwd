@@ -90,7 +90,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
         lb_HintDate.setLabelFor(tf_HintDate);
 
         ib_HintDate = new BtnLabel();
-        ib_HintDate.setIcon(normPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "hint.png"));
+        ib_HintDate.setIcon(normPtn.readFavIcon("hint-time", false));
         ib_HintDate.addActionListener(new java.awt.event.ActionListener()
         {
 

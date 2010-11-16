@@ -22,7 +22,6 @@ import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WButtonGroup;
-import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Char;
 
 /**
@@ -45,7 +44,7 @@ public abstract class ADataBean extends AEditBean
         pl_PropConf.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_DateConf = new BtnLabel();
-        bt_DateConf.setIcon(formPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "options.png"));
+        bt_DateConf.setIcon(formPtn.readFavIcon("data-options", false));
         bt_DateConf.addActionListener(new java.awt.event.ActionListener()
         {
 

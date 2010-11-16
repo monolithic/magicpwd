@@ -428,29 +428,32 @@ public class UserMdl
 
     public String getSkin()
     {
-        return "";
+        return userCfg.getProperty(ConsCfg.CFG_SKIN, "default");
     }
 
     public void setSkin(String skin)
     {
+        userCfg.setProperty(ConsCfg.CFG_SKIN, skin);
     }
 
     public String getLook()
     {
-        return "";
+        return userCfg.getProperty(ConsCfg.CFG_SKIN_LOOK, ConsEnv.SKIN_LOOK_DEFAULT);
     }
 
     public void setLook(String look)
     {
+        userCfg.setProperty(ConsCfg.CFG_SKIN_LOOK, look);
     }
 
     public String getFeel()
     {
-        return "";
+        return userCfg.getProperty(ConsCfg.CFG_SKIN_FEEL, ConsEnv.SKIN_FEEL_DEFAULT);
     }
 
     public void setFeel(String feel)
     {
+        userCfg.setProperty(ConsCfg.CFG_SKIN_FEEL, feel);
     }
 
     public final String getLang()
@@ -485,12 +488,12 @@ public class UserMdl
 
     public javax.swing.ImageIcon readIcon(String path)
     {
-        return Bean.readIcon(path.replace(ConsEnv.FEEL_ARGS, getCfg(ConsCfg.CFG_SKIN_FEEL, ConsEnv.SKIN_FEEL_DEFAULT)));
+        return Bean.readIcon(path.replace(ConsEnv.FEEL_ARGS, getFeel()));
     }
 
     public java.awt.image.BufferedImage readImage(String path)
     {
-        java.io.File file = new java.io.File(path.replace(ConsEnv.FEEL_ARGS, getCfg(ConsCfg.CFG_SKIN_FEEL, ConsEnv.SKIN_FEEL_DEFAULT)));
+        java.io.File file = new java.io.File(path.replace(ConsEnv.FEEL_ARGS, getFeel()));
         try
         {
             return javax.imageio.ImageIO.read(file);

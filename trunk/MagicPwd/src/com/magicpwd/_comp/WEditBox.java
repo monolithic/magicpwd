@@ -5,10 +5,9 @@
 package com.magicpwd._comp;
 
 import com.magicpwd.__i.mpwd.IMpwdBean;
-import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.v.mpwd.MainPtn;
 
 /**
  *
@@ -18,12 +17,12 @@ public class WEditBox extends javax.swing.JPanel
 {
 
     private IMpwdBean mpwdBean;
-    private UserMdl userCfg;
+    private MainPtn mainPtn;
     private boolean metaData;
 
-    public WEditBox(UserMdl umdl, IMpwdBean bean, boolean meta)
+    public WEditBox(MainPtn mainPtn, IMpwdBean bean, boolean meta)
     {
-        userCfg = umdl;
+        this.mainPtn = mainPtn;
         mpwdBean = bean;
         metaData = meta;
     }
@@ -31,7 +30,7 @@ public class WEditBox extends javax.swing.JPanel
     public void initView()
     {
         bt_DropData = new BtnLabel();
-        bt_DropData.setIcon(userCfg.readIcon(ConsEnv.FEEL_PATH + "prop-drop.png"));
+        bt_DropData.setIcon(mainPtn.readFavIcon("prop-drop", true));
         bt_DropData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -43,7 +42,7 @@ public class WEditBox extends javax.swing.JPanel
         });
 
         bt_SaveData = new BtnLabel();
-        bt_SaveData.setIcon(userCfg.readIcon(ConsEnv.FEEL_PATH + "prop-save.png"));
+        bt_SaveData.setIcon(mainPtn.readFavIcon("prop-save", true));
         bt_SaveData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -55,7 +54,7 @@ public class WEditBox extends javax.swing.JPanel
         });
 
         bt_CopyData = new BtnLabel();
-        bt_CopyData.setIcon(userCfg.readIcon(ConsEnv.FEEL_PATH + "prop-copy.png"));
+        bt_CopyData.setIcon(mainPtn.readFavIcon("prop-copy", true));
         bt_CopyData.addActionListener(new java.awt.event.ActionListener()
         {
 

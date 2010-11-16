@@ -61,7 +61,7 @@ public abstract class AFileBean extends AEditBean
         pl_PropConf.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_FileView = new BtnLabel();
-        bt_FileView.setIcon(formPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "file-preview.png"));
+        bt_FileView.setIcon(formPtn.readFavIcon("file-preview", false));
         bt_FileView.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -74,7 +74,7 @@ public abstract class AFileBean extends AEditBean
         pl_PropConf.add(bt_FileView);
 
         bt_FileApnd = new BtnLabel();
-        bt_FileApnd.setIcon(formPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "file-upload.png"));
+        bt_FileApnd.setIcon(formPtn.readFavIcon("file-append", false));
         bt_FileApnd.addActionListener(new java.awt.event.ActionListener()
         {
 

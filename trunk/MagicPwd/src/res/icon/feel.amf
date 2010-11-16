@@ -125,7 +125,7 @@ link-open=53
 #######################################
 # 邮件图标
 #######################################
-mail-open=54
+mail-receive=54
 mail-attachment=55
 mail-unread=56
 mail-readed=57

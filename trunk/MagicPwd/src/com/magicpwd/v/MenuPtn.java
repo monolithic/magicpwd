@@ -1004,9 +1004,14 @@ public class MenuPtn
 
     private javax.swing.Icon createIcon(Element element)
     {
+        if (formPtn == null)
+        {
+            return null;
+        }
+
         String hash = element.attributeValue("cache-id");
         boolean validate = Char.isValidate(hash);
-        if (validate && formPtn != null)
+        if (validate)
         {
             javax.swing.Icon icon = formPtn.getFavIcon(hash);
             if (icon != null)
@@ -1018,12 +1023,15 @@ public class MenuPtn
         String path = element.attributeValue("path");
         if (Char.isValidate(path))
         {
-            javax.swing.ImageIcon icon = userMdl.readIcon(path);
-            if (validate && formPtn != null)
+            javax.swing.Icon icon = path.toLowerCase().startsWith("var:") ? formPtn.readFavIcon(path.substring(4), false) : userMdl.readIcon(path);
+            if (icon != null)
             {
-                formPtn.setFavIcon(hash, icon);
+                if (validate)
+                {
+                    formPtn.setFavIcon(hash, icon);
+                }
+                return icon;
             }
-            return icon;
         }
 
         return null;

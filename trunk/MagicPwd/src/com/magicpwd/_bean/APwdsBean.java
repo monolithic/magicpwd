@@ -73,7 +73,7 @@ public abstract class APwdsBean extends AEditBean
         pl_PropConf.add(bt_PwdsView);
 
         bt_PwdsGent = new BtnLabel();
-        bt_PwdsGent.setIcon(formPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "pwds-generate.png"));
+        bt_PwdsGent.setIcon(formPtn.readFavIcon("pwds-generate", false));
         bt_PwdsGent.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -86,7 +86,7 @@ public abstract class APwdsBean extends AEditBean
         pl_PropConf.add(bt_PwdsGent);
 
         bt_PwdsConf = new BtnLabel();
-        bt_PwdsConf.setIcon(formPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "options.png"));
+        bt_PwdsConf.setIcon(formPtn.readFavIcon("pwds-options", false));
         bt_PwdsConf.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -413,14 +413,14 @@ public abstract class APwdsBean extends AEditBean
     {
         if (mask)
         {
-            bt_PwdsView.setIcon(formPtn.readFavIcon(ConsEnv.FEEL_PATH + "pwds-mask.png", true));
+            bt_PwdsView.setIcon(formPtn.readFavIcon("pwds-mask", true));
             pf_PropData.setEchoChar(ConsEnv.PWDS_MASK);
             Lang.setWText(bt_PwdsView, LangRes.P30F1507, "&M");
             Lang.setWTips(bt_PwdsView, LangRes.P30F1508, "点击显示口令(Alt + M)");
         }
         else
         {
-            bt_PwdsView.setIcon(formPtn.readFavIcon(ConsEnv.FEEL_PATH + "pwds-view.png", true));
+            bt_PwdsView.setIcon(formPtn.readFavIcon("pwds-view", true));
             pf_PropData.setEchoChar('\0');
             Lang.setWText(bt_PwdsView, LangRes.P30F1509, "&M");
             Lang.setWTips(bt_PwdsView, LangRes.P30F150A, "点击隐藏口令(Alt + M)");

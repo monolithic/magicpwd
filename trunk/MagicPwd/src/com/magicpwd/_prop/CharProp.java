@@ -8,7 +8,6 @@ import javax.swing.DefaultComboBoxModel;
 import com.magicpwd.__i.IPropBean;
 import com.magicpwd._comn.prop.Char;
 import com.magicpwd._comp.IcoLabel;
-import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.CharMdl;
@@ -167,7 +166,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         pl_ItemSort = new javax.swing.JPanel();
 
         bt_DropData = new IcoLabel();
-        bt_DropData.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "file-delete.png"));
+        bt_DropData.setIcon(mainPtn.readFavIcon("edit-delete-cur", false));
         bt_DropData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -179,7 +178,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         });
 
         bt_SaveData = new IcoLabel();
-        bt_SaveData.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "file-save.png"));
+        bt_SaveData.setIcon(mainPtn.readFavIcon("file-save", false));
         bt_SaveData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -191,7 +190,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         });
 
         bt_ApndData = new IcoLabel();
-        bt_ApndData.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "file-new.png"));
+        bt_ApndData.setIcon(mainPtn.readFavIcon("file-new", false));
         bt_ApndData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -202,7 +201,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
             }
         });
         bt_SortU = new IcoLabel();
-        bt_SortU.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "edit-move-up.png"));
+        bt_SortU.setIcon(mainPtn.readFavIcon("edit-move-up", false));
         bt_SortU.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -215,7 +214,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         add(bt_SortU);
 
         bt_SortD = new IcoLabel();
-        bt_SortD.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "edit-move-down.png"));
+        bt_SortD.setIcon(mainPtn.readFavIcon("edit-move-down", false));
         bt_SortD.addActionListener(new java.awt.event.ActionListener()
         {
 

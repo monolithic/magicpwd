@@ -35,7 +35,7 @@ public class LinkBean extends ALinkBean implements IMpwdBean
     @Override
     public void initView()
     {
-        dataEdit = new WEditBox(mainPtn.getUserMdl(), this, false);
+        dataEdit = new WEditBox(mainPtn, this, false);
         dataEdit.initView();
 
         lb_PropConf = new javax.swing.JLabel();
@@ -106,7 +106,7 @@ public class LinkBean extends ALinkBean implements IMpwdBean
     public void initData()
     {
         initConfData();
-        
+
         nameBox.initData();
     }
 
