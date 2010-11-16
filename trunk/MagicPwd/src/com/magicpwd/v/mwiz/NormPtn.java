@@ -240,6 +240,11 @@ public class NormPtn extends AFrame
         }
     }
 
+    public HintBar getHintPtn()
+    {
+        return hb_HintBar;
+    }
+
     public void appendKeys()
     {
         EditPtn editDlg = getEditPtn();

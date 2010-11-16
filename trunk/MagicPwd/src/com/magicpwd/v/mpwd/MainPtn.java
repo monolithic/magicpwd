@@ -334,7 +334,7 @@ public class MainPtn extends AFrame
         }
 
         showPropInfo();
-        mainInfo.initData();
+        mainInfo.showHint(false);
 
         ls_LastIndx = -1;
         tb_LastIndx = -1;

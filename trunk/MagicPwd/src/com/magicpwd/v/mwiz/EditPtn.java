@@ -376,6 +376,7 @@ public class EditPtn extends javax.swing.JDialog
         }
 
         normPtn.requestFocus();
+        normPtn.getHintPtn().showHint(false);
     }
 
     private void bt_CancelActionPerformed(java.awt.event.ActionEvent evt)
