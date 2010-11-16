@@ -300,14 +300,14 @@
         <!--新增-->
         <item type="normal" tips="$P30F7B01">
             <icon>
-                <default id="file-new" path="skin/feel/%feel%/file-new.png"/>
+                <default id="file-new" path="var:file-new"/>
             </icon>
             <action id="new-keys" class="com.magicpwd.e.mpwd.file.AppendAction" />
         </item>
         <!--保存-->
         <item type="normal" tips="$P30F7B02">
             <icon>
-                <default id="file-save" path="skin/feel/%feel%/file-save.png"/>
+                <default id="file-save" path="var:file-save"/>
             </icon>
             <action id="save-keys" class="com.magicpwd.e.mpwd.file.SaveAction" />
         </item>
@@ -315,14 +315,14 @@
         <!--上移-->
         <item type="normal" tips="$P30F7B03">
             <icon>
-                <default id="file-save" path="skin/feel/%feel%/edit-move-up.png"/>
+                <default id="file-save" path="var:edit-move-up"/>
             </icon>
             <action id="edit-prev" class="com.magicpwd.e.mpwd.edit.PrevAction" />
         </item>
         <!--下移-->
         <item type="normal" tips="$P30F7B04">
             <icon>
-                <default id="file-save" path="skin/feel/%feel%/edit-move-down.png"/>
+                <default id="file-save" path="var:edit-move-down"/>
             </icon>
             <action id="edit-next" class="com.magicpwd.e.mpwd.edit.NextAction" />
         </item>
@@ -330,21 +330,21 @@
         <!--历史记录-->
         <item id="tool-edit-history" type="toggle" tips="$P30F7B05">
             <icon>
-                <default id="edit-history" path="skin/feel/%feel%/edit-history.png"/>
+                <default id="edit-history" path="var:edit-history"/>
             </icon>
             <action id="edit-history" class="com.magicpwd.e.mpwd.edit.PrevAction" />
         </item>
         <!--属性编辑-->
         <item id="tool-edit-isolate" type="toggle" tips="$P30F7B06" command="menu-edit-isolate">
             <icon>
-                <default id="edit-isolate" path="skin/feel/%feel%/edit-isolate.png"/>
+                <default id="edit-isolate" path="var:view-prop-isolate"/>
             </icon>
             <action id="edit-isolate" class="com.magicpwd.e.mpwd.view.EditIsolateAction" />
         </item>
         <!--显示菜单-->
         <item id="tool-menu-visible" type="toggle" tips="$P30F7B0B" command="menu-menu-visible">
             <icon>
-                <default id="menu-visible" path="skin/feel/%feel%/view-menu.png"/>
+                <default id="menu-visible" path="var:view-menubar"/>
             </icon>
             <action id="menu-visible" class="com.magicpwd.e.mpwd.view.MenuVisibleAction" />
         </item>
@@ -352,7 +352,7 @@
         <!--帮助-->
         <item type="normal" tips="$P30F7B07">
             <icon>
-                <default id="file-help" path="skin/feel/%feel%/help.png"/>
+                <default id="file-help" path="var:help-topic"/>
             </icon>
             <action class="com.magicpwd.e.tray.HelpAction" />
         </item>
@@ -393,7 +393,7 @@
             <!--默认(@0)-->
             <item type="checkbox" text="$P30F7D1C" group="label" command="0">
                 <icon>
-                    <default cache-id="label0" path="skin/feel/%feel%/label.png"/>
+                    <default cache-id="label0" path="var:keys-label"/>
                 </icon>
                 <action id="change-mode" class="com.magicpwd.e.mpwd.list.ChangeLabelAction" />
             </item>
@@ -401,63 +401,63 @@
             <!--常使用(@1)-->
             <item type="checkbox" text="$P30F7D1D" group="label" command="1">
                 <icon>
-                    <default cache-id="label1" path="skin/feel/%feel%/label1.png"/>
+                    <default cache-id="label1" path="var:keys-label1"/>
                 </icon>
                 <action id="change-mode" class="com.magicpwd.e.mpwd.list.ChangeLabelAction" />
             </item>
             <!--待注册(@2)-->
             <item type="checkbox" text="$P30F7D1E" group="label" command="2">
                 <icon>
-                    <default cache-id="label2" path="skin/feel/%feel%/label2.png"/>
+                    <default cache-id="label2" path="var:keys-label2"/>
                 </icon>
                 <action id="change-mode" class="com.magicpwd.e.mpwd.list.ChangeLabelAction" />
             </item>
             <!--待认证(@3)-->
             <item type="checkbox" text="$P30F7D1F" group="label" command="3">
                 <icon>
-                    <default cache-id="label3" path="skin/feel/%feel%/label3.png"/>
+                    <default cache-id="label3" path="var:keys-label3"/>
                 </icon>
                 <action id="change-mode" class="com.magicpwd.e.mpwd.list.ChangeLabelAction" />
             </item>
             <!--待激活(@4)-->
             <item type="checkbox" text="$P30F7D20" group="label" command="4">
                 <icon>
-                    <default cache-id="label4" path="skin/feel/%feel%/label4.png"/>
+                    <default cache-id="label4" path="var:keys-label4"/>
                 </icon>
                 <action id="change-mode" class="com.magicpwd.e.mpwd.list.ChangeLabelAction" />
             </item>
             <!--仅测试(@5)-->
             <item type="checkbox" text="$P30F7D21" group="label" command="5">
                 <icon>
-                    <default cache-id="label5" path="skin/feel/%feel%/label5.png"/>
+                    <default cache-id="label5" path="var:keys-label5"/>
                 </icon>
                 <action id="change-mode" class="com.magicpwd.e.mpwd.list.ChangeLabelAction" />
             </item>
             <!--已过期(@6)-->
             <item type="checkbox" text="$P30F7D22" group="label" command="6">
                 <icon>
-                    <default cache-id="label6" path="skin/feel/%feel%/label6.png"/>
+                    <default cache-id="label6" path="var:keys-label6"/>
                 </icon>
                 <action id="change-mode" class="com.magicpwd.e.mpwd.list.ChangeLabelAction" />
             </item>
             <!--已丢失(@7)-->
             <item type="checkbox" text="$P30F7D23" group="label" command="7">
                 <icon>
-                    <default cache-id="label7" path="skin/feel/%feel%/label7.png"/>
+                    <default cache-id="label7" path="var:keys-label7"/>
                 </icon>
                 <action id="change-mode" class="com.magicpwd.e.mpwd.list.ChangeLabelAction" />
             </item>
             <!--被禁用(@8)-->
             <item type="checkbox" text="$P30F7D24" group="label" command="8">
                 <icon>
-                    <default cache-id="label8" path="skin/feel/%feel%/label8.png"/>
+                    <default cache-id="label8" path="var:keys-label8"/>
                 </icon>
                 <action id="change-mode" class="com.magicpwd.e.mpwd.list.ChangeLabelAction" />
             </item>
             <!--已删除(@9)-->
             <item type="checkbox" text="$P30F7D25" group="label" command="9">
                 <icon>
-                    <default cache-id="label9" path="skin/feel/%feel%/label9.png"/>
+                    <default cache-id="label9" path="var:keys-label9"/>
                 </icon>
                 <action id="change-mode" class="com.magicpwd.e.mpwd.list.ChangeLabelAction" />
             </item>
@@ -467,35 +467,35 @@
             <!--最高-->
             <item type="checkbox" text="$P30F7D27" group="major" command="2">
                 <icon>
-                    <default cache-id="major2" path="skin/feel/%feel%/major+2.png"/>
+                    <default cache-id="major2" path="var:keys-major+2"/>
                 </icon>
                 <action id="change-note" class="com.magicpwd.e.mpwd.list.ChangeMajorAction" />
             </item>
             <!--高-->
             <item type="checkbox" text="$P30F7D28" group="major" command="1">
                 <icon>
-                    <default cache-id="major1" path="skin/feel/%feel%/major+1.png"/>
+                    <default cache-id="major1" path="var:keys-major+1"/>
                 </icon>
                 <action id="change-note" class="com.magicpwd.e.mpwd.list.ChangeMajorAction" />
             </item>
             <!--正常-->
             <item type="checkbox" text="$P30F7D29" group="major" command="0">
                 <icon>
-                    <default cache-id="major0" path="skin/feel/%feel%/major.png"/>
+                    <default cache-id="major0" path="var:keys-major0"/>
                 </icon>
                 <action id="change-note" class="com.magicpwd.e.mpwd.list.ChangeMajorAction" />
             </item>
             <!--低-->
             <item type="checkbox" text="$P30F7D2A" group="major" command="-1">
                 <icon>
-                    <default cache-id="major-1" path="skin/feel/%feel%/major-1.png"/>
+                    <default cache-id="major-1" path="var:keys-major-1"/>
                 </icon>
                 <action id="change-note" class="com.magicpwd.e.mpwd.list.ChangeMajorAction" />
             </item>
             <!--最低-->
             <item type="checkbox" text="$P30F7D2B" group="major" command="-2">
                 <icon>
-                    <default cache-id="major-2" path="skin/feel/%feel%/major-2.png"/>
+                    <default cache-id="major-2" path="var:keys-major-2"/>
                 </icon>
                 <action id="change-note" class="com.magicpwd.e.mpwd.list.ChangeMajorAction" />
             </item>
