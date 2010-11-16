@@ -259,6 +259,7 @@ public class Bean
         {
             return null;
         }
+        Logs.log("Icon:" + path);
 
         java.io.InputStream stream = null;
         try

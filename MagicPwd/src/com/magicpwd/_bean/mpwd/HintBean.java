@@ -43,7 +43,7 @@ public class HintBean extends javax.swing.JPanel implements IMpwdBean
     @Override
     public void initView()
     {
-        dataEdit = new WEditBox(mainPtn.getUserMdl(), this, true);
+        dataEdit = new WEditBox(mainPtn, this, true);
         dataEdit.initView();
         dataEdit.setCopyButtonVisible(false);
         dataEdit.setDropButtonVisible(false);
@@ -63,7 +63,7 @@ public class HintBean extends javax.swing.JPanel implements IMpwdBean
         pl_PropConf.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_DateView = new BtnLabel();
-        bt_DateView.setIcon(mainPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "hint.png"));
+        bt_DateView.setIcon(mainPtn.readFavIcon("hint-time", false));
         bt_DateView.addActionListener(new java.awt.event.ActionListener()
         {
 

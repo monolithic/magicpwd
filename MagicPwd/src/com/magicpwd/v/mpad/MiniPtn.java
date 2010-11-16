@@ -6,7 +6,6 @@ import com.magicpwd._comn.S1S2;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsCfg;
-import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
@@ -68,25 +67,25 @@ public class MiniPtn extends AFrame
         nameBox = new WTextBox(tf_NoteName, true);
         nameBox.initView();
 
-        bt_CreateNote.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "file-new.png"));
+        bt_CreateNote.setIcon(readFavIcon("file-new", false));
         NewAction newAction = new NewAction();
         newAction.setMiniPtn(this);
         bt_CreateNote.addActionListener(newAction);
         Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK), newAction, "file-new", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
 
-        bt_OpenNote.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "file-open.png"));
+        bt_OpenNote.setIcon(readFavIcon("file-open", false));
         OpenAction openAction = new OpenAction();
         openAction.setMiniPtn(this);
         bt_OpenNote.addActionListener(openAction);
         Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK), openAction, "file-open", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
 
-        bt_SaveNote.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "file-save.png"));
+        bt_SaveNote.setIcon(readFavIcon("file-save", false));
         SaveAction saveAction = new SaveAction();
         saveAction.setMiniPtn(this);
         bt_SaveNote.addActionListener(saveAction);
         Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK), saveAction, "file-save", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
 
-        bt_SearchNote.setIcon(userMdl.readIcon(ConsEnv.FEEL_PATH + "find.png"));
+        bt_SearchNote.setIcon(readFavIcon("data-search", false));
         bt_SearchNote.addActionListener(findAction);
 
         ta_NoteData.setDragEnabled(true);

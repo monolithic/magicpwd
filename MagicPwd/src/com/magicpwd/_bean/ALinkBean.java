@@ -20,7 +20,6 @@ import com.magicpwd.__a.AEditBean;
 import com.magicpwd.__a.AFrame;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
-import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
@@ -56,7 +55,7 @@ public abstract class ALinkBean extends AEditBean
         pl_PropConf.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_LinkView = new BtnLabel();
-        bt_LinkView.setIcon(formPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "link.png"));
+        bt_LinkView.setIcon(formPtn.readFavIcon("link-open", false));
         bt_LinkView.addActionListener(new java.awt.event.ActionListener()
         {
 

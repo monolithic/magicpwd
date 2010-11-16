@@ -107,8 +107,7 @@ public abstract class AFrame extends javax.swing.JFrame
         {
             favHash = defProp.getProperty(favHash);
         }
-        javax.swing.Icon icon = defIcon.get(favHash);
-        return icon != null ? icon : Bean.getNone();
+        return defIcon.get(favHash);
     }
 
     /**
@@ -128,6 +127,36 @@ public abstract class AFrame extends javax.swing.JFrame
         }
     }
 
+    private void loadFav()
+    {
+        favProp = new java.util.Properties();
+
+        java.io.File file = new java.io.File(ConsEnv.DIR_SKIN, ConsEnv.DIR_FEEL);
+        if (!file.exists() || !file.isDirectory() || !file.canRead())
+        {
+            return;
+        }
+        file = new java.io.File(file, userMdl.getFeel() + '/' + ConsEnv.SKIN_FEEL_FILE);
+        if (!file.exists() || !file.isFile() || !file.canRead())
+        {
+            return;
+        }
+        java.io.FileInputStream stream = null;
+        try
+        {
+            stream = new java.io.FileInputStream(file);
+            favProp.load(stream);
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+        finally
+        {
+            Bean.closeStream(stream);
+        }
+    }
+
     public javax.swing.Icon readFavIcon(String favHash, boolean chache)
     {
         if (!Char.isValidate(favHash))
@@ -135,21 +164,22 @@ public abstract class AFrame extends javax.swing.JFrame
             return Bean.getNone();
         }
 
+        if (favProp == null)
+        {
+            loadFav();
+        }
+
         javax.swing.Icon icon;
         if (!chache)
         {
-            icon = favProp.containsKey(favHash) ? userMdl.readIcon(favHash) : getFavIcon(favHash);
-            if (icon == null)
-            {
-                icon = Bean.getNone();
-            }
-            return icon;
+            icon = favProp.containsKey(favHash) ? userMdl.readIcon(ConsEnv.FEEL_PATH + favProp.getProperty(favHash)) : getFavIcon(favHash);
+            return icon != null ? icon : Bean.getNone();
         }
 
         icon = getFavIcon(favHash);
         if (icon == null)
         {
-            icon = favProp.containsKey(favHash) ? userMdl.readIcon(favHash) : Bean.getNone();
+            icon = favProp.containsKey(favHash) ? userMdl.readIcon(ConsEnv.FEEL_PATH + favProp.getProperty(favHash)) : Bean.getNone();
             //favProp.remove(favHash);
             setFavIcon(favHash, icon);
         }

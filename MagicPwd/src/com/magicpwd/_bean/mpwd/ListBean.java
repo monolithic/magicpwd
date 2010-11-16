@@ -30,7 +30,7 @@ public class ListBean extends AListBean implements IMpwdBean
     @Override
     public void initView()
     {
-        dataEdit = new WEditBox(mainPtn.getUserMdl(), this, false);
+        dataEdit = new WEditBox(mainPtn, this, false);
         dataEdit.initView();
 
         lb_PropName = new javax.swing.JLabel();

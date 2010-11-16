@@ -21,7 +21,6 @@ import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WButtonGroup;
-import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
@@ -50,7 +49,7 @@ public abstract class ADateBean extends AEditBean
         pl_PropConf.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_DateTime = new BtnLabel();
-        bt_DateTime.setIcon(formPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "date.png"));
+        bt_DateTime.setIcon(formPtn.readFavIcon("date-time", false));
         bt_DateTime.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -63,7 +62,7 @@ public abstract class ADateBean extends AEditBean
         pl_PropConf.add(bt_DateTime);
 
         bt_DateConf = new BtnLabel();
-        bt_DateConf.setIcon(formPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "options.png"));
+        bt_DateConf.setIcon(formPtn.readFavIcon("date-options", false));
         bt_DateConf.addActionListener(new java.awt.event.ActionListener()
         {
 

@@ -55,7 +55,7 @@ public class GuidBean extends javax.swing.JPanel
         pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_ReadMail = new BtnLabel();
-        bt_ReadMail.setIcon(normPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "mail-receive.png"));
+        bt_ReadMail.setIcon(normPtn.readFavIcon("mail-receive", false));
         bt_ReadMail.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -68,7 +68,7 @@ public class GuidBean extends javax.swing.JPanel
         pl_PropEdit.add(bt_ReadMail);
 
         bt_ExptCard = new BtnLabel();
-        bt_ExptCard.setIcon(normPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "card.png"));
+        bt_ExptCard.setIcon(normPtn.readFavIcon("info-card", false));
         bt_ExptCard.addActionListener(new java.awt.event.ActionListener()
         {
 

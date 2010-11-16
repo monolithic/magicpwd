@@ -20,7 +20,6 @@ import com.magicpwd.__a.AEditBean;
 import com.magicpwd.__a.AFrame;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
-import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Desk;
@@ -57,7 +56,7 @@ public abstract class AMailBean extends AEditBean
         pl_PropConf.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_MailView = new BtnLabel();
-        bt_MailView.setIcon(formPtn.getUserMdl().readIcon(ConsEnv.FEEL_PATH + "mail-send.png"));
+        bt_MailView.setIcon(formPtn.readFavIcon("mail-send", false));
         bt_MailView.addActionListener(new java.awt.event.ActionListener()
         {
 

@@ -34,7 +34,7 @@ public class TextBean extends ATextBean implements IMpwdBean
     @Override
     public void initView()
     {
-        dataEdit = new WEditBox(mainPtn.getUserMdl(), this, false);
+        dataEdit = new WEditBox(mainPtn, this, false);
         dataEdit.initView();
 
         lb_PropConf = new javax.swing.JLabel();

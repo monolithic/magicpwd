@@ -34,7 +34,7 @@ public class MailBean extends AMailBean implements IMpwdBean
     @Override
     public void initView()
     {
-        dataEdit = new WEditBox(mainPtn.getUserMdl(), this, false);
+        dataEdit = new WEditBox(mainPtn, this, false);
         dataEdit.initView();
 
         lb_PropConf = new javax.swing.JLabel();
@@ -113,7 +113,7 @@ public class MailBean extends AMailBean implements IMpwdBean
     public void showData(IEditItem item)
     {
         itemData = item;
-        
+
         tf_PropName.setText(showName());
         tf_PropData.setText(itemData.getData());
 

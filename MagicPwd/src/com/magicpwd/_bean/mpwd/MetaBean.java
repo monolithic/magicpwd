@@ -34,7 +34,7 @@ public class MetaBean extends javax.swing.JPanel implements IMpwdBean
     @Override
     public void initView()
     {
-        dataEdit = new WEditBox(mainPtn.getUserMdl(), this, true);
+        dataEdit = new WEditBox(mainPtn, this, true);
         dataEdit.initView();
         dataEdit.setCopyButtonVisible(false);
         dataEdit.setDropButtonVisible(false);
