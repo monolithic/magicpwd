@@ -523,6 +523,10 @@ public interface LangRes
     String P30F7A48 = "P30F7A48";
     String P30F7A49 = "P30F7A49";
     String P30F7A4A = "P30F7A4A";
+    String P30F7A4B = "P30F7A4B";
+    String P30F7A4C = "P30F7A4C";
+    String P30F7A4D = "P30F7A4D";
+    String P30F7A4E = "P30F7A4E";
     // ----------------------------------------------------
     // B 自定义语言资源
     // ----------------------------------------------------
@@ -548,6 +552,21 @@ public interface LangRes
     String P30F7C05 = "P30F7C05";// 字符空间(@C)
     String P30F7C06 = "P30F7C06";// 默认
     String P30F7C07 = "P30F7C07";// 不可重复(@U)
+    String P30F7C08 = "P30F7C08";// 允许为空(@N)
+    String P30F7C09 = "P30F7C09";// 
+    String P30F7C0A = "P30F7C0A";//
+    String P30F7C0B = "P30F7C0B";//
+    String P30F7C0C = "P30F7C0C";//
+    String P30F7C0D = "P30F7C0D";//
+    String P30F7C0E = "P30F7C0E";//
+    String P30F7C0F = "P30F7C0F";//
+    String P30F7C10 = "P30F7C10";//
+    String P30F7C11 = "P30F7C11";//
+    String P30F7C12 = "P30F7C12";//
+    String P30F7C13 = "P30F7C13";//
+    String P30F7C14 = "P30F7C14";//
+    String P30F7C15 = "P30F7C15";//
+    String P30F7C16 = "P30F7C16";//
     // ----------------------------------------------------
     // D 自定义语言资源
     // ----------------------------------------------------
@@ -603,6 +622,10 @@ public interface LangRes
     String P30F7D31 = "P30F7D31";
     String P30F7D32 = "P30F7D32";
     String P30F7D33 = "P30F7D33";
+    String P30F7D34 = "P30F7D34";
+    String P30F7D35 = "P30F7D35";
+    String P30F7D36 = "P30F7D36";
+    String P30F7D37 = "P30F7D37";
     // ========================================================================
     // 8 设置窗口语言资源
     // ========================================================================

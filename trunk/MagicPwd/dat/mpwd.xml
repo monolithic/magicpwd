@@ -578,7 +578,7 @@
                 <action id="append-file" class="com.magicpwd.e.mpwd.edit.AppendFileAction" />
             </item>
             <!--添加数值-->
-            <item type="normal" text="$P30F7D10">
+            <item type="normal" text="$P30F7D34">
                 <action id="append-data" class="com.magicpwd.e.mpwd.edit.AppendDataAction" />
             </item>
         </menu>
@@ -613,7 +613,7 @@
                 <action id="change-file" class="com.magicpwd.e.mpwd.edit.ChangeFileAction" />
             </item>
             <!--转换为数值-->
-            <item type="normal" text="$P30F7D18">
+            <item type="normal" text="$P30F7D35">
                 <action id="change-data" class="com.magicpwd.e.mpwd.edit.ChangeDataAction" />
             </item>
         </menu>
@@ -717,8 +717,10 @@
     </submenu>
     <!--数值弹出菜单选项-->
     <submenu id="data-options">
-        <item type="checkbox" text="整数" group="data-template" command="dec:0" />
-        <menu text="小数">
+        <!--整数-->
+        <item type="checkbox" text="$P30F7C09" group="data-template" command="dec:0" />
+        <!--小数-->
+        <menu text="$P30F7C0A">
             <item type="checkbox" text="1位" group="data-template" command="dec:1" />
             <item type="checkbox" text="2位" group="data-template" command="dec:2" />
             <item type="checkbox" text="3位" group="data-template" command="dec:3" />
@@ -726,20 +728,31 @@
             <item type="checkbox" text="5位" group="data-template" command="dec:5" />
             <item type="checkbox" text="6位" group="data-template" command="dec:6" />
             <seperator />
-            <item type="checkbox" text="其它……" group="data-template" command="" />
+            <!--其它……-->
+            <item type="checkbox" id="data-precision" text="$P30F7C0B" group="data-template" command="dec:-1" />
         </menu>
-        <menu text="集合">
-            <item type="checkbox" text="正数" command="set:+" />
-            <item type="checkbox" text="0" command="set:0" />
-            <item type="checkbox" text="负数" command="set:-" />
+        <!--集合-->
+        <menu text="$P30F7C0C">
+            <!--正数-->
+            <item type="checkbox" id="data-pos" text="$P30F7C0D" command="set:+" />
+            <!--0-->
+            <item type="checkbox" id="data-0" text="$P30F7C0E" command="set:0" />
+            <!--负数-->
+            <item type="checkbox" id="data-nav" text="$P30F7C0F" command="set:-" />
         </menu>
-        <menu text="符号">
-            <item type="checkbox" text="启用特殊符号" command="notation"/>
+        <!--符号-->
+        <menu text="$P30F7C10">
+            <!--启用特殊符号-->
+            <item type="checkbox" id="data-notation" text="$P30F7C11" command="notation"/>
             <seperator />
-            <item type="checkbox" text="更改特殊符号" command="notation"/>
-            <item type="checkbox" text="符号前置" group="data-position" command="pos:^" />
-            <item type="checkbox" text="符号后置" group="data-position" command="pos:$" />
-            <item type="checkbox" text="可选输入" command="optional"/>
+            <!--更改特殊符号-->
+            <item type="normal" id="data-character" tips="$P30F7C13" command="character"/>
+            <!--符号前置-->
+            <item type="checkbox" id="data-thehead" text="$P30F7C14" group="data-position" command="pos:^" />
+            <!--符号后置-->
+            <item type="checkbox" id="data-thefoot" text="$P30F7C15" group="data-position" command="pos:$" />
+            <!--可选输入-->
+            <item type="checkbox" id="data-optional" text="$P30F7C16" command="optional"/>
         </menu>
     </submenu>
     <strokes id="mpwd">

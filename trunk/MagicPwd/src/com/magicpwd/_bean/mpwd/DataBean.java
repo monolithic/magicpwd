@@ -9,7 +9,9 @@ import com.magicpwd.__i.mpwd.IMpwdBean;
 import com.magicpwd._bean.ADataBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
+import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
+import com.magicpwd._util.Lang;
 import com.magicpwd.v.mpwd.MainPtn;
 
 /**
@@ -93,6 +95,8 @@ public class DataBean extends ADataBean implements IMpwdBean
         Bean.setText(lb_PropName, "属性(@P)");
         Bean.setText(lb_PropData, "数值(@D)");
 
+        dataEdit.initLang();
+
         initConfLang();
     }
 
@@ -107,7 +111,7 @@ public class DataBean extends ADataBean implements IMpwdBean
     {
         itemData = item;
 
-        tf_PropName.setText(getName());
+        tf_PropName.setText(showName());
         tf_PropData.setText(itemData.getData());
 
         showConfData();
@@ -132,6 +136,15 @@ public class DataBean extends ADataBean implements IMpwdBean
     @Override
     public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
     {
+        String name = tf_PropName.getText();
+        if (!com.magicpwd._util.Char.isValidate(name))
+        {
+            Lang.showMesg(mainPtn, LangRes.P30F7A4E, "请输入数值名称！");
+            tf_PropName.requestFocus();
+            return;
+        }
+        itemData.setName(name);
+
         if (!processData())
         {
             return;
