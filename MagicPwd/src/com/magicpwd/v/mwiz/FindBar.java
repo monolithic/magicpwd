@@ -112,6 +112,11 @@ public class FindBar extends javax.swing.JPanel
         return new java.awt.Dimension(bgImage.getWidth(), bgImage.getHeight());
     }
 
+    public String getFindMeta()
+    {
+        return tf_MetaText.getText();
+    }
+
     private void bt_MetaTextActionPerformed(java.awt.event.ActionEvent e)
     {
         normPtn.setFindVisible(false);
