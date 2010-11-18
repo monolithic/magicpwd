@@ -327,6 +327,12 @@ public class NormPtn extends AFrame
     {
         if (visible)
         {
+            javax.swing.AbstractButton button = getMenuPtn().getButton("hint");
+            if (button != null)
+            {
+                button.setSelected(false);
+            }
+
             fb_FindBar.setVisible(true);
             moveFindBar();
             fb_FindBar.requestFocus();
@@ -353,7 +359,7 @@ public class NormPtn extends AFrame
 
     public void endKeys()
     {
-        mwizMdl.getGridMdl().listKeysByKind("0");
+        findKeys(fb_FindBar.getFindMeta());
     }
 
     @Override
