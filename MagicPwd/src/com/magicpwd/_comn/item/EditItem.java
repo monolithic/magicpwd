@@ -220,9 +220,10 @@ public class EditItem implements IEditItem
                 spec.add("");
                 break;
             case ConsDat.INDX_DATA:
-                spec = new ArrayList<String>(6);
+                spec = new ArrayList<String>(7);
                 spec.add(ConsCfg.DEF_TRUE);
                 spec.add("+0-");
+                spec.add("0");
                 spec.add("0");
                 spec.add("");
                 spec.add(ConsCfg.DEF_TRUE);

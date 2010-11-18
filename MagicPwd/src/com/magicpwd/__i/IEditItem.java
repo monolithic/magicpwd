@@ -36,10 +36,11 @@ public interface IEditItem
     int SPEC_DATE_FORM = 0;// 日期显示格式
     int SPEC_DATA_OPT = 0;//可选输入
     int SPEC_DATA_SET = 1;//数据集
-    int SPEC_DATA_DEC = 2;//小数位
-    int SPEC_DATA_CHAR = 3;//特殊符号
-    int SPEC_DATA_CHAR_OPT = 4;//是否可选
-    int SPEC_DATA_CHAR_POS = 5;//符号位置
+    int SPEC_DATA_INT = 2;//整数位
+    int SPEC_DATA_DEC = 3;//小数位
+    int SPEC_DATA_CHAR = 4;//特殊符号
+    int SPEC_DATA_CHAR_OPT = 5;//是否可选
+    int SPEC_DATA_CHAR_POS = 6;//符号位置
 
     /**
      * 

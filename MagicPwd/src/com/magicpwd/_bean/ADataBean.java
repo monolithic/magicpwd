@@ -106,7 +106,7 @@ public abstract class ADataBean extends AEditBean
         boolean isOK = false;
         if (group != null)
         {
-            isOK = group.setSelected("dec:" + itemData.getSpec(IEditItem.SPEC_DATA_DEC, "0"), true);
+            isOK = group.setSelected("dec:" + itemData.getSpec(IEditItem.SPEC_DATA_DEC, "0").replace("f", ""), true);
         }
         if (!isOK)
         {
@@ -115,6 +115,18 @@ public abstract class ADataBean extends AEditBean
             {
                 button.setSelected(true);
             }
+        }
+
+        // 固定长度
+        button = menuPtn.getButton("data-fixed-int");
+        if (button != null)
+        {
+            button.setSelected(itemData.getSpec(IEditItem.SPEC_DATA_INT, "").endsWith("f"));
+        }
+        button = menuPtn.getButton("data-fixed-dec");
+        if (button != null)
+        {
+            button.setSelected(itemData.getSpec(IEditItem.SPEC_DATA_DEC, "").endsWith("f"));
         }
 
         // 数据集合
@@ -224,25 +236,14 @@ public abstract class ADataBean extends AEditBean
         // 小数精度
         if (cmd.startsWith("dec:"))
         {
-            java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("[+-]?\\d+").matcher(cmd);
-            if (!matcher.find())
-            {
-                return;
-            }
-            cmd = matcher.group();
-            if (cmd.charAt(0) == '-')
-            {
-                do
-                {
-                    cmd = javax.swing.JOptionPane.showInputDialog(formPtn, Lang.getLang("", "请输入一个非负数值！"));
-                    if (cmd == null)
-                    {
-                        return;
-                    }
-                }
-                while (!java.util.regex.Pattern.matches("^\\d+$", cmd.trim()));
-            }
-            itemData.setSpec(IEditItem.SPEC_DATA_DEC, cmd);
+            readPrecision(IEditItem.SPEC_DATA_DEC, evt);
+            return;
+        }
+
+        // 整数精度
+        if (cmd.startsWith("int:"))
+        {
+            readPrecision(IEditItem.SPEC_DATA_INT, evt);
             return;
         }
 
@@ -250,7 +251,7 @@ public abstract class ADataBean extends AEditBean
         if (cmd.startsWith("set:"))
         {
             cmd = cmd.substring(4);
-            if (!java.util.regex.Pattern.matches("[-+0]", cmd))
+            if (!java.util.regex.Pattern.matches("^[-+0]$", cmd))
             {
                 return;
             }
@@ -292,7 +293,7 @@ public abstract class ADataBean extends AEditBean
         {
             do
             {
-                cmd = javax.swing.JOptionPane.showInputDialog(formPtn, Lang.getLang("", "请输入特殊符号：\n提示：除加减号（“+”、“-”）及数值以外的字符！"));
+                cmd = javax.swing.JOptionPane.showInputDialog(formPtn, Lang.getLang(LangRes.P30F7A50, "请输入特殊符号：\n提示：除加减号（“+”、“-”）及数值以外的字符！"), itemData.getSpec(IEditItem.SPEC_DATA_CHAR, ""));
                 if (cmd == null)
                 {
                     return;
@@ -322,6 +323,50 @@ public abstract class ADataBean extends AEditBean
             if (button != null)
             {
                 itemData.setSpec(IEditItem.SPEC_DATA_CHAR_OPT, button.isSelected() ? "?" : "");
+            }
+            return;
+        }
+    }
+
+    private void readPrecision(int idx, java.awt.event.ActionEvent evt)
+    {
+        String spc = itemData.getSpec(idx, "");
+        String cmd = evt.getActionCommand().substring(4);
+
+        java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("^[+-]?\\d+$").matcher(cmd);
+        if (matcher.find())
+        {
+            cmd = matcher.group();
+            if (cmd.charAt(0) == '-')
+            {
+                do
+                {
+                    cmd = javax.swing.JOptionPane.showInputDialog(formPtn, Lang.getLang(LangRes.P30F7A4F, "请输入一个非负数值！"), spc.replace("f", ""));
+                    if (cmd == null)
+                    {
+                        return;
+                    }
+                    cmd = cmd.trim();
+                }
+                while (!java.util.regex.Pattern.matches("^\\d+$", cmd));
+            }
+            itemData.setSpec(idx, spc.replaceAll("\\d+", cmd));
+            return;
+        }
+        if ("f".equals(cmd))
+        {
+            javax.swing.AbstractButton button = (javax.swing.AbstractButton) evt.getSource();
+            if (button != null)
+            {
+                if (button.isSelected())
+                {
+                    spc += cmd;
+                }
+                else
+                {
+                    spc = spc.replace(cmd, "");
+                }
+                itemData.setSpec(idx, spc);
             }
             return;
         }
@@ -385,12 +430,18 @@ public abstract class ADataBean extends AEditBean
             }
         }
 
+        java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("\\d+");
+
         // 整数部分
-        regex.append("\\d+");
+        String si = itemData.getSpec(IEditItem.SPEC_DATA_INT, "");
+        java.util.regex.Matcher mi = pattern.matcher(si);
+        int ii = mi.find() ? Integer.parseInt(mi.group()) : 0;
+        regex.append("\\d").append(ii > 0 ? "{1," + ii + "}" : "+");
 
         // 小数部分
         String sd = itemData.getSpec(IEditItem.SPEC_DATA_DEC, "");
-        int id = java.util.regex.Pattern.matches("^\\d+$", sd) ? Integer.parseInt(sd) : 0;
+        java.util.regex.Matcher md = pattern.matcher(sd);
+        int id = md.find() ? Integer.parseInt(md.group()) : 0;
         if (id > 0)
         {
             regex.append("(\\.").append("\\d{1,").append(id).append("})?");
@@ -429,8 +480,72 @@ public abstract class ADataBean extends AEditBean
             return false;
         }
 
+        // 固定长度
+        if (sd.endsWith("f"))
+        {
+            data = fix(data, true, id);
+        }
+        if (si.endsWith("f"))
+        {
+            data = fix(data, false, ii);
+        }
+
         itemData.setData(data);
         return true;
+    }
+
+    private static String fix(String txt, boolean dec, int cnt)
+    {
+        java.util.regex.Matcher matcher;
+        // 小数定长
+        if (dec)
+        {
+            if (cnt < 1)
+            {
+                return txt;
+            }
+
+            matcher = java.util.regex.Pattern.compile("[.]\\d+").matcher(txt);
+            if (!matcher.find())
+            {
+                return txt;
+            }
+
+            String src = matcher.group();
+            int i = src.length() - 1;
+            if (i >= cnt)
+            {
+                return txt;
+            }
+
+            StringBuilder dst = new StringBuilder(src);
+            while (i++ < cnt)
+            {
+                dst.append('0');
+            }
+            return txt.replace(src, dst.toString());
+        }
+
+        // 整数定长
+        matcher = java.util.regex.Pattern.compile("\\d+[.]").matcher(txt);
+        if (!matcher.find())
+        {
+            return txt;
+        }
+
+        String src = matcher.group();
+        int i = src.length() - 1;
+        if (i >= cnt)
+        {
+            return txt;
+        }
+
+        StringBuilder dst = new StringBuilder(src);
+        while (i++ < cnt)
+        {
+            dst.insert(0, '0');
+        }
+        return txt.replace(src, dst.toString());
     }
     protected javax.swing.JTextField tf_PropData;
     // 配置信息
