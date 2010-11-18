@@ -6,9 +6,9 @@ package com.magicpwd._bean.mwiz;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.prop.Tplt;
 import com.magicpwd._comp.BtnLabel;
-import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.m.mwiz.KeysMdl;
@@ -155,8 +155,8 @@ public class GuidBean extends javax.swing.JPanel
         if (!hash)
         {
             cb_PropData.setSelectedIndex(-1);
-            bt_ReadMail.setVisible(false);
-            bt_ExptCard.setVisible(false);
+//            bt_ReadMail.setVisible(false);
+//            bt_ExptCard.setVisible(false);
             return;
         }
 
@@ -177,8 +177,10 @@ public class GuidBean extends javax.swing.JPanel
         }
 
         kind = ' ' + tplt.getP30F1106() + ' ';
-        bt_ReadMail.setVisible(kind.indexOf(ConsDat.TEXT_MAIL) > -1);
-        bt_ExptCard.setVisible(kind.indexOf(ConsDat.TEXT_CARD) > -1);
+//        bt_ReadMail.setVisible(kind.indexOf(ConsDat.TEXT_MAIL) > -1);
+//        bt_ExptCard.setVisible(kind.indexOf(ConsDat.TEXT_CARD) > -1);
+        bt_ReadMail.setVisible(false);
+        bt_ExptCard.setVisible(false);
     }
 
     public boolean saveData()
@@ -198,7 +200,10 @@ public class GuidBean extends javax.swing.JPanel
 
         Tplt tplt = (Tplt) obj;
         IEditItem guidItem = keysMdl.getItemAt(ConsEnv.PWDS_HEAD_GUID);
-        guidItem.setData("0");
+        if (!Char.isValidate(guidItem.getData()))
+        {
+            guidItem.setData("0");
+        }
         guidItem.setSpec(IEditItem.SPEC_GUID_TPLT, tplt.getP30F1103());
         if (keysMdl.getItemSize() <= ConsEnv.PWDS_HEAD_SIZE)
         {
