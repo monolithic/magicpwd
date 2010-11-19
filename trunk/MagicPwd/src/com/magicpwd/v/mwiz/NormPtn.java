@@ -6,6 +6,8 @@ package com.magicpwd.v.mwiz;
 
 import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IBackCall;
+import com.magicpwd._comn.Keys;
+import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
@@ -379,6 +381,21 @@ public class NormPtn extends AFrame
         if (e.getClickCount() > 1)
         {
             viewKeys();
+        }
+    }
+
+    private void showKeysInfo(Keys keys)
+    {
+        WButtonGroup group = menuPtn.getGroup("label");
+        if (group != null)
+        {
+            group.setSelected(Integer.toString(keys.getP30F0102()), true);
+        }
+
+        group = menuPtn.getGroup("major");
+        if (group != null)
+        {
+            group.setSelected(Integer.toString(keys.getP30F0103()), true);
         }
     }
     private HintBar hb_HintBar;
