@@ -368,7 +368,7 @@ public class EditPtn extends javax.swing.JDialog
         {
             keysMdl.saveData(true);
             setVisible(false);
-            normPtn.endKeys();
+            normPtn.findLast();
         }
         catch (Exception ex)
         {

@@ -29,6 +29,7 @@ public class NormPtn extends AFrame
     private MenuPtn menuPtn;
     private MwizMdl mwizMdl;
     private EditPtn editPtn;
+    private String keyMeta;
 
     public NormPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
@@ -202,6 +203,7 @@ public class NormPtn extends AFrame
 
     public void findKeys(String meta)
     {
+        keyMeta = meta;
         if (Char.isValidate(meta))
         {
             mwizMdl.getGridMdl().listKeysByMeta(meta);
@@ -327,12 +329,6 @@ public class NormPtn extends AFrame
     {
         if (visible)
         {
-            javax.swing.AbstractButton button = getMenuPtn().getButton("hint");
-            if (button != null)
-            {
-                button.setSelected(false);
-            }
-
             fb_FindBar.setVisible(true);
             moveFindBar();
             fb_FindBar.requestFocus();
@@ -357,9 +353,9 @@ public class NormPtn extends AFrame
         return editPtn;
     }
 
-    public void endKeys()
+    public void findLast()
     {
-        findKeys(fb_FindBar.getFindMeta());
+        findKeys(keyMeta);
     }
 
     @Override

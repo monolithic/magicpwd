@@ -31,6 +31,15 @@ public class FindAction extends AMwizAction
         }
 
         normPtn.setFindVisible(selected);
+        normPtn.findKeys(null);
+        if (selected)
+        {
+            javax.swing.AbstractButton hintButton = normPtn.getMenuPtn().getButton("hint");
+            if (hintButton != null)
+            {
+                hintButton.setSelected(false);
+            }
+        }
     }
 
     @Override
