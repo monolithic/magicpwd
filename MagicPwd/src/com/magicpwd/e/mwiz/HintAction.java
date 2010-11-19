@@ -48,6 +48,13 @@ public class HintAction extends AMwizAction
                 java.util.Date t = c.getTime();
 
                 normPtn.findHint(s, t);
+
+                button = normPtn.getMenuPtn().getButton("find");
+                if (button != null)
+                {
+                    button.setSelected(false);
+                }
+                normPtn.setFindVisible(false);
             }
             else
             {
