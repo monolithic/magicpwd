@@ -65,6 +65,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
         ls_ItemList.clear();
         keys.setDefault();
         setModified(false);
+        fireTableDataChanged();
     }
 
     /*

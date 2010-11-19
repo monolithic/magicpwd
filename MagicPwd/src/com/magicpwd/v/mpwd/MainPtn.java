@@ -243,6 +243,7 @@ public class MainPtn extends AFrame
         {
             return false;
         }
+
         setEditVisible(true);
         showPropEdit(mpwdMdl.getGridMdl().initGuid(), true);
         return true;
@@ -916,6 +917,7 @@ public class MainPtn extends AFrame
             }
         }
         isSearch = false;
+        ls_LastIndx = -1;
     }
 
     private void listTask(Kind kind)

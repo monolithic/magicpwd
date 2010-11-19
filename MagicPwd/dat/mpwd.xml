@@ -732,7 +732,9 @@
             <item type="checkbox" id="data-precision" text="$P30F7C0B" group="data-template" command="dec:-1" />
             <seperator />
             <item type="checkbox" id="data-fixed-dec" text="$P30F7C17" command="dec:f" />
-            <item type="checkbox" id="data-fixed-int" text="$P30F7C18" command="fix:f" />
+            <!--
+            <item type="checkbox" id="data-fixed-int" text="$P30F7C18" command="int:f" />
+            -->
         </menu>
         <!--集合-->
         <menu text="$P30F7C0C">

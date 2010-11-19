@@ -35,6 +35,25 @@ public class WButtonGroup extends javax.swing.ButtonGroup
         return false;
     }
 
+    public boolean setSelected(String actionCommand, boolean selected, String defaultCommand)
+    {
+        javax.swing.ButtonModel model = buttonModel.get(actionCommand);
+        if (model != null)
+        {
+            setSelected(model, selected);
+            return true;
+        }
+
+        model = buttonModel.get(defaultCommand);
+        if (model != null)
+        {
+            setSelected(model, selected);
+            return true;
+        }
+
+        return false;
+    }
+
     public boolean contains(String actionCommand)
     {
         return buttonModel.containsKey(actionCommand);

@@ -103,19 +103,7 @@ public abstract class ADataBean extends AEditBean
         mi_DataDef.setSelected(ConsCfg.DEF_TRUE.equals(itemData.getSpec(IEditItem.SPEC_DATA_OPT)));
         // 数据类型
         WButtonGroup group = menuPtn.getGroup("data-template");
-        boolean isOK = false;
-        if (group != null)
-        {
-            isOK = group.setSelected("dec:" + itemData.getSpec(IEditItem.SPEC_DATA_DEC, "0").replace("f", ""), true);
-        }
-        if (!isOK)
-        {
-            button = menuPtn.getButton("data-precision");
-            if (button != null)
-            {
-                button.setSelected(true);
-            }
-        }
+        group.setSelected("dec:" + itemData.getSpec(IEditItem.SPEC_DATA_DEC, "0").replace("f", ""), true, "dec:-1");
 
         // 固定长度
         button = menuPtn.getButton("data-fixed-int");
