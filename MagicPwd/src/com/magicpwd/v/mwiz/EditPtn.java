@@ -69,8 +69,6 @@ public class EditPtn extends javax.swing.JDialog
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(Bean.getLogo(16));
         setResizable(false);
-        pack();
-        Bean.centerForm(this, normPtn);
     }
 
     public void initLang()
@@ -98,6 +96,14 @@ public class EditPtn extends javax.swing.JDialog
         this.keysMdl = keysMdl;
         this.canEdit = canEdit;
         initGuidView();
+
+        pl_NoteArea.setVisible(canEdit);
+        pack();
+        if (!isVisible())
+        {
+            Bean.centerForm(this, normPtn);
+            setVisible(true);
+        }
 
         currStep = -2;
     }

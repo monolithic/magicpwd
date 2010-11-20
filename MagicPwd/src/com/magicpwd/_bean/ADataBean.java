@@ -148,7 +148,7 @@ public abstract class ADataBean extends AEditBean
             button.setSelected(specChar);
         }
 
-        chnageCharacter(sc);
+        changeCharacter(sc);
 
         // 符号位置
         group = menuPtn.getGroup("data-position");
@@ -166,7 +166,22 @@ public abstract class ADataBean extends AEditBean
         changeNotation(specChar);
     }
 
-    private void chnageCharacter(String chr)
+    private void requestCharacter(String cmd)
+    {
+        do
+        {
+            cmd = javax.swing.JOptionPane.showInputDialog(formPtn, Lang.getLang(LangRes.P30F7A50, "请输入特殊符号：\n提示：除加减号（“+”、“-”）及数值以外的字符！"), itemData.getSpec(IEditItem.SPEC_DATA_CHAR, ""));
+            if (cmd == null)
+            {
+                return;
+            }
+        }
+        while (!java.util.regex.Pattern.matches("[^-+\\d]", cmd.trim()));
+        changeCharacter(cmd);
+        itemData.setSpec(IEditItem.SPEC_DATA_CHAR, cmd);
+    }
+
+    private void changeCharacter(String chr)
     {
         javax.swing.AbstractButton button = formPtn.getMenuPtn().getButton("data-character");
         if (button != null)
@@ -271,7 +286,17 @@ public abstract class ADataBean extends AEditBean
             javax.swing.AbstractButton button = (javax.swing.AbstractButton) evt.getSource();
             if (button != null)
             {
-                changeNotation(button.isSelected());
+                boolean b = button.isSelected();
+                changeNotation(b);
+                if (b)
+                {
+                    requestCharacter("");
+                }
+                else
+                {
+                    itemData.setSpec(IEditItem.SPEC_DATA_CHAR, "");
+                    changeCharacter("");
+                }
             }
             return;
         }
@@ -279,17 +304,7 @@ public abstract class ADataBean extends AEditBean
         // 符号变更
         if ("character".equals(cmd))
         {
-            do
-            {
-                cmd = javax.swing.JOptionPane.showInputDialog(formPtn, Lang.getLang(LangRes.P30F7A50, "请输入特殊符号：\n提示：除加减号（“+”、“-”）及数值以外的字符！"), itemData.getSpec(IEditItem.SPEC_DATA_CHAR, ""));
-                if (cmd == null)
-                {
-                    return;
-                }
-            }
-            while (!java.util.regex.Pattern.matches("[^-+\\d]", cmd.trim()));
-            chnageCharacter(cmd);
-            itemData.setSpec(IEditItem.SPEC_DATA_CHAR, cmd);
+            requestCharacter("");
             return;
         }
 
@@ -363,7 +378,7 @@ public abstract class ADataBean extends AEditBean
     protected boolean processData()
     {
         // 去除多余空格
-        String data = tf_PropData.getText().trim();
+        String data = tf_PropData.getText().replaceAll("[,\\s]+", "");
         tf_PropData.setText(data);
 
         if (data.length() < 1)
@@ -390,31 +405,43 @@ public abstract class ADataBean extends AEditBean
         StringBuilder regex = new StringBuilder("^");
 
         // 数据集合
+        String sc = itemData.getSpec(IEditItem.SPEC_DATA_CHAR, "");
+        boolean bc = Char.isValidate(sc);
         String ss = itemData.getSpec(IEditItem.SPEC_DATA_SET, "+0-");
+
         if (Char.isValidate(ss))
         {
             // 非0
             if (ss.indexOf("0") < 0)
             {
-                if (java.util.regex.Pattern.matches("^[+-]?0*(\\.0*)?$", data))
+                if (java.util.regex.Pattern.matches("^[+-]?0*(\\.0*)?$", bc ? data.replace(sc, "") : data))
                 {
                     Lang.showMesg(formPtn, LangRes.P30F7A4C, "请输入一个不为0的数值！");
+                    return false;
+                }
+            }
+            // 仅0
+            else if ("0".equals(ss))
+            {
+                if (!java.util.regex.Pattern.matches("^[+-]?0*(\\.0*)?$", bc ? data.replace(sc, "") : data))
+                {
+                    Lang.showMesg(formPtn, LangRes.P30F7A4D, "您输入的数值有误！");
                     return false;
                 }
             }
             else
             {
                 ss = ss.replace("0", "");
-            }
 
-            // 仅负数
-            if ("-".equals(ss))
-            {
-                regex.append("[-]");
-            }
-            else
-            {
-                regex.append("[+-]?");
+                // 仅负数
+                if ("-".equals(ss))
+                {
+                    regex.append("[-]");
+                }
+                else
+                {
+                    regex.append("[+-]?");
+                }
             }
         }
 
@@ -436,8 +463,7 @@ public abstract class ADataBean extends AEditBean
         }
 
         // 特殊符号
-        String sc = itemData.getSpec(IEditItem.SPEC_DATA_CHAR, "");
-        if (Char.isValidate(sc))
+        if (bc)
         {
             sc = '[' + sc + ']';
 

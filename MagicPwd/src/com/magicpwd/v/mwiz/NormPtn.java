@@ -351,7 +351,6 @@ public class NormPtn extends AFrame
             editPtn.initLang();
             editPtn.initData();
         }
-        editPtn.setVisible(true);
         return editPtn;
     }
 

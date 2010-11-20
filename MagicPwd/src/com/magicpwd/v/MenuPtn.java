@@ -1025,13 +1025,21 @@ public class MenuPtn
         String path = element.attributeValue("path");
         if (Char.isValidate(path))
         {
-            javax.swing.Icon icon = path.toLowerCase().startsWith("var:") ? formPtn.readFavIcon(path.substring(4), false) : userMdl.readIcon(path);
-            if (icon != null)
+            javax.swing.Icon icon;
+            if (path.toLowerCase().startsWith("var:"))
             {
+                icon = formPtn.readFavIcon(path.substring(4), validate);
+            }
+            else
+            {
+                icon = userMdl.readIcon(path);
                 if (validate)
                 {
                     formPtn.setFavIcon(hash, icon);
                 }
+            }
+            if (icon != null)
+            {
                 return icon;
             }
         }

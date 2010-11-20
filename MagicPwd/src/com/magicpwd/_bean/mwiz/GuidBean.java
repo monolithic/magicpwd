@@ -125,9 +125,11 @@ public class GuidBean extends javax.swing.JPanel
 
         Lang.setWText(bt_ReadMail, LangRes.P30F1519, "&M");
         Lang.setWTips(bt_ReadMail, LangRes.P30F151A, "检测邮件(Alt + M)");
+        bt_ReadMail.setVisible(false);
 
         Lang.setWText(bt_ExptCard, LangRes.P30F151D, "&C");
         Lang.setWTips(bt_ExptCard, LangRes.P30F151E, "生成卡片(Alt + C)");
+        bt_ExptCard.setVisible(false);
     }
 
     public void initData()
@@ -179,8 +181,6 @@ public class GuidBean extends javax.swing.JPanel
         kind = ' ' + tplt.getP30F1106() + ' ';
 //        bt_ReadMail.setVisible(kind.indexOf(ConsDat.TEXT_MAIL) > -1);
 //        bt_ExptCard.setVisible(kind.indexOf(ConsDat.TEXT_CARD) > -1);
-        bt_ReadMail.setVisible(false);
-        bt_ExptCard.setVisible(false);
     }
 
     public boolean saveData()
