@@ -6,6 +6,7 @@ package com.magicpwd._comp;
 
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import java.awt.datatransfer.Clipboard;
@@ -213,11 +214,13 @@ public class WTextBox implements java.awt.datatransfer.ClipboardOwner
     private void editCopyActionPerformed(ActionEvent evt)
     {
         String copy = textBox.getSelectedText();
-        if (copy != null)
+        if (!Char.isValidate(copy))
         {
-            java.awt.datatransfer.StringSelection sSelection = new java.awt.datatransfer.StringSelection(copy);
-            java.awt.Toolkit.getDefaultToolkit().getSystemClipboard().setContents(sSelection, this);
+            return;
         }
+
+        java.awt.datatransfer.StringSelection sSelection = new java.awt.datatransfer.StringSelection(copy);
+        java.awt.Toolkit.getDefaultToolkit().getSystemClipboard().setContents(sSelection, this);
         changeMenuStatus();
     }
 
