@@ -157,6 +157,7 @@ public class DBA3000
             item.setP30F0105(rest.getString(DBC3000.P30F0105));
             item.setP30F0106(rest.getString(DBC3000.P30F0106));
             item.setP30F0107(rest.getTimestamp(DBC3000.P30F0107));
+            item.setP30F0108(rest.getString(DBC3000.P30F0108));
             item.setP30F0109(rest.getString(DBC3000.P30F0109));
             item.setP30F010A(rest.getString(DBC3000.P30F010A));
             item.setP30F010B(rest.getString(DBC3000.P30F010B));
