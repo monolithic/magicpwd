@@ -90,14 +90,14 @@ public class WEditBox extends javax.swing.JPanel
     {
         if (!metaData)
         {
-            Lang.setWText(bt_CopyData, LangRes.P30F1501, "&C");
+            Lang.setWText(bt_CopyData, LangRes.P30F1501, "@C");
             Lang.setWTips(bt_CopyData, LangRes.P30F1502, "复制属性数据(Alt + C)");
         }
-        Lang.setWText(bt_SaveData, LangRes.P30F1503, "&U");
+        Lang.setWText(bt_SaveData, LangRes.P30F1503, "@U");
         Lang.setWTips(bt_SaveData, LangRes.P30F1504, "应用属性变更(Alt + U)");
         if (!metaData)
         {
-            Lang.setWText(bt_DropData, LangRes.P30F1505, "&D");
+            Lang.setWText(bt_DropData, LangRes.P30F1505, "@D");
             Lang.setWTips(bt_DropData, LangRes.P30F1506, "删除属性数据(Alt + D)");
         }
     }

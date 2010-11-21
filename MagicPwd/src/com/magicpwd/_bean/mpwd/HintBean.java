@@ -135,7 +135,7 @@ public class HintBean extends javax.swing.JPanel implements IMpwdBean
         Lang.setWText(lb_PropName, LangRes.P30F1305, "提示");
         Lang.setWText(lb_PropData, LangRes.P30F1306, "时间");
 
-        Lang.setWText(bt_DateView, LangRes.P30F151B, "&O");
+        Lang.setWText(bt_DateView, LangRes.P30F151B, "@O");
         Lang.setWTips(bt_DateView, LangRes.P30F151C, "提醒时间(Alt + O)");
 
         nameBox.initLang();

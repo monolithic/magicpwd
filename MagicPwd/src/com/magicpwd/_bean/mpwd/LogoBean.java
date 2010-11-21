@@ -113,7 +113,7 @@ public class LogoBean extends javax.swing.JPanel implements IMpwdBean, IBackCall
 
         Lang.setWText(lb_PropData, LangRes.P30F131E, "名称(@N)");
 
-        Lang.setWText(ib_PropName, LangRes.P30F131F, "&O");
+        Lang.setWText(ib_PropName, LangRes.P30F131F, "@O");
         Lang.setWTips(ib_PropName, LangRes.P30F1320, "点击选择徽标(Alt + O)");
     }
 

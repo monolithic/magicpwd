@@ -123,11 +123,11 @@ public class GuidBean extends javax.swing.JPanel
         Lang.setWText(lb_PropName, LangRes.P30F1301, "时间");
         Lang.setWText(lb_PropData, LangRes.P30F1302, "模板");
 
-        Lang.setWText(bt_ReadMail, LangRes.P30F1519, "&M");
+        Lang.setWText(bt_ReadMail, LangRes.P30F1519, "@M");
         Lang.setWTips(bt_ReadMail, LangRes.P30F151A, "检测邮件(Alt + M)");
         bt_ReadMail.setVisible(false);
 
-        Lang.setWText(bt_ExptCard, LangRes.P30F151D, "&C");
+        Lang.setWText(bt_ExptCard, LangRes.P30F151D, "@C");
         Lang.setWTips(bt_ExptCard, LangRes.P30F151E, "生成卡片(Alt + C)");
         bt_ExptCard.setVisible(false);
     }

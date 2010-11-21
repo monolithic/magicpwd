@@ -89,10 +89,10 @@ public abstract class AFileBean extends AEditBean
 
     protected void initConfLang()
     {
-        Lang.setWText(bt_FileView, LangRes.P30F1515, "&V");
+        Lang.setWText(bt_FileView, LangRes.P30F1515, "@V");
         Lang.setWTips(bt_FileView, LangRes.P30F1516, "打开附件(Alt + V)");
 
-        Lang.setWText(bt_FileApnd, LangRes.P30F1517, "&P");
+        Lang.setWText(bt_FileApnd, LangRes.P30F1517, "@P");
         Lang.setWTips(bt_FileApnd, LangRes.P30F1518, "添加附件(Alt + P)");
 
         dataBox.initLang();

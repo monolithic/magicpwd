@@ -182,16 +182,16 @@ public class MiniPtn extends AFrame
 
         Lang.setWText(ck_NoteWrap, LangRes.P30F5302, "自动换行");
 
-        Lang.setWText(bt_SearchNote, LangRes.P30F5501, "&F");
+        Lang.setWText(bt_SearchNote, LangRes.P30F5501, "@F");
         Lang.setWTips(bt_SearchNote, LangRes.P30F5502, "搜索(Alt + F)");
 
-        Lang.setWText(bt_SaveNote, LangRes.P30F5503, "&S");
+        Lang.setWText(bt_SaveNote, LangRes.P30F5503, "@S");
         Lang.setWTips(bt_SaveNote, LangRes.P30F5504, "保存(Alt + S)");
 
-        Lang.setWText(bt_OpenNote, LangRes.P30F5505, "&O");
+        Lang.setWText(bt_OpenNote, LangRes.P30F5505, "@O");
         Lang.setWTips(bt_OpenNote, LangRes.P30F5506, "打开(Alt + O)");
 
-        Lang.setWText(bt_CreateNote, LangRes.P30F5507, "&N");
+        Lang.setWText(bt_CreateNote, LangRes.P30F5507, "@N");
         Lang.setWTips(bt_CreateNote, LangRes.P30F5508, "新建(Alt + N)");
 
         nameBox.initLang();
@@ -360,11 +360,18 @@ public class MiniPtn extends AFrame
         }
         try
         {
-            byte[] buf = new byte[(int) file.length()];
-            java.io.FileInputStream fis = new java.io.FileInputStream(file);
-            int len = fis.read(buf);
-            fis.close();
-            ta_NoteData.setText(new String(buf, 0, len));
+            java.io.BufferedReader reader = new java.io.BufferedReader(new java.io.InputStreamReader(new java.io.FileInputStream(file)));
+            ta_NoteData.setText("");
+
+            String line = reader.readLine();
+            while (line != null)
+            {
+                ta_NoteData.append(line);
+                ta_NoteData.append("\n");
+                line = reader.readLine();
+            }
+            reader.close();
+
             String path = file.getName();
             if (path.length() > 20)
             {
