@@ -176,7 +176,7 @@ public class MiniPtn extends AFrame
 
     public void initLang()
     {
-        setTitle(Lang.getLang(LangRes.P30F5201, "记事便签"));
+        setTitle(Lang.getLang(LangRes.P30F5201, "记事模式"));
 
         Lang.setWText(lb_NoteHead, LangRes.P30F5301, "标题");
 
@@ -262,7 +262,6 @@ public class MiniPtn extends AFrame
 
     private void ck_NoteWrapActionPerformed(java.awt.event.ActionEvent e)
     {
-        System.out.println("OK");
         ta_NoteData.setLineWrap(ck_NoteWrap.isSelected());
         userMdl.setCfg(ConsCfg.CFG_MPAD_WRAP, ck_NoteWrap.isSelected() ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }

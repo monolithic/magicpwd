@@ -42,8 +42,8 @@ public class Logs
         if (writer != null)
         {
             writer.flush();
+            writer.close();
         }
-        writer.close();
     }
 
     private static java.io.PrintWriter getWriter()
