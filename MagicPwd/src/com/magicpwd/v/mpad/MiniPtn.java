@@ -176,7 +176,7 @@ public class MiniPtn extends AFrame
 
     public void initLang()
     {
-        setTitle(Lang.getLang(LangRes.P30F5201, "记事模式"));
+        setTitle(Lang.getLang(LangRes.P30F5201, "魔方密码"));
 
         Lang.setWText(lb_NoteHead, LangRes.P30F5301, "标题");
 
