@@ -393,7 +393,7 @@
             <!--默认(@0)-->
             <item type="checkbox" text="$P30F7D1C" group="label" command="0">
                 <icon>
-                    <default cache-id="label0" path="var:keys-label"/>
+                    <default cache-id="label0" path="var:keys-label0"/>
                 </icon>
                 <action id="change-mode" class="com.magicpwd.e.mpwd.list.ChangeLabelAction" />
             </item>
