@@ -175,13 +175,18 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
             return true;
         }
 
+        // 口令找回
+        if (ConsEnv.STR_SIGN_FP.equalsIgnoreCase(params[0]))
+        {
+            return true;
+        }
+
         // 身份认证
         if (!ConsEnv.STR_SIGN_RS.equalsIgnoreCase(params[0]))
         {
             return false;
         }
 
-        javax.swing.JFrame currForm = getCurrForm();
         switch (nextPtn)
         {
             case ConsEnv.APP_MODE_MPWD:
@@ -197,11 +202,12 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
                 break;
         }
 
-        if (getCurrForm().getState() != java.awt.Frame.NORMAL)
+        javax.swing.JFrame currForm = getCurrForm();
+        if (currForm.getState() != java.awt.Frame.NORMAL)
         {
-            getCurrForm().setState(java.awt.Frame.NORMAL);
+            currForm.setState(java.awt.Frame.NORMAL);
         }
-        getCurrForm().toFront();
+        currForm.toFront();
         return true;
     }
 
@@ -456,7 +462,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         {
             userPtn = new UserPtn(userMdl, this);
             userPtn.setBackCall(this);
-            userPtn.initView(userMdl.getCfg(ConsCfg.CFG_USER_LAST, "").trim().length() > 0 ? ConsEnv.INT_SIGN_IN : ConsEnv.INT_SIGN_UP);
+            userPtn.initView(userMdl.getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.INT_SIGN_IN : ConsEnv.INT_SIGN_UP);
             userPtn.initLang();
             userPtn.initData();
             userPtn.setVisible(true);

@@ -17,6 +17,7 @@
 package com.magicpwd.e.mwiz;
 
 import com.magicpwd.__a.mwiz.AMwizAction;
+import com.magicpwd._cons.ConsCfg;
 
 /**
  *
@@ -28,6 +29,8 @@ public class SortKeyAction extends AMwizAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
+        normPtn.getUserMdl().setCfg(ConsCfg.CFG_VIEW_LIST_KEY, e.getActionCommand());
+        normPtn.findLast();
     }
 
     @Override

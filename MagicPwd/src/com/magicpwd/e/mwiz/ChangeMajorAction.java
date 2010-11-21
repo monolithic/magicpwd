@@ -17,6 +17,7 @@
 package com.magicpwd.e.mwiz;
 
 import com.magicpwd.__a.mwiz.AMwizAction;
+import com.magicpwd._util.Char;
 
 /**
  *
@@ -28,6 +29,10 @@ public class ChangeMajorAction extends AMwizAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
+        String command = e.getActionCommand();
+        int val = Char.isValidateInteger(command) ? Integer.parseInt(command) : 0;
+
+        normPtn.changeMajor(val);
     }
 
     @Override

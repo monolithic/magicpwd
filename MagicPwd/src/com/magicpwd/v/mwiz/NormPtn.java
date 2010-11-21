@@ -8,6 +8,7 @@ import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.Keys;
 import com.magicpwd._comp.WButtonGroup;
+import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
@@ -117,6 +118,8 @@ public class NormPtn extends AFrame
         int w = tb_KeysList.getFontMetrics(tb_KeysList.getFont()).stringWidth("99999");
         tb_KeysList.getColumnModel().getColumn(0).setMaxWidth(w);
         tb_KeysList.getColumnModel().getColumn(1).setMaxWidth(40);
+        tb_KeysList.getColumnModel().getColumn(1).setCellRenderer(new ImageCR(this));
+        tb_KeysList.getColumnModel().getColumn(2).setCellRenderer(new LabelCR(this));
 
         try
         {
@@ -131,6 +134,18 @@ public class NormPtn extends AFrame
             Logs.exception(e);
         }
 
+
+        WButtonGroup group = menuPtn.getGroup("order-dir");
+        if (group != null)
+        {
+            group.setSelected(userMdl.getCfg(ConsCfg.CFG_VIEW_LIST_ASC, ConsCfg.DEF_FALSE), true);
+        }
+        group = menuPtn.getGroup("order-key");
+        if (group != null)
+        {
+            group.setSelected(userMdl.getCfg(ConsCfg.CFG_VIEW_LIST_KEY, "01"), true);
+        }
+
         tb_KeysList.addMouseListener(new java.awt.event.MouseAdapter()
         {
 
@@ -140,9 +155,7 @@ public class NormPtn extends AFrame
                 // 右键事件处理
                 if (evt.isPopupTrigger())
                 {
-                    int row = tb_KeysList.rowAtPoint(evt.getPoint());
-                    tb_KeysList.setRowSelectionInterval(row, row);
-                    pm_MenuPop.show(tb_KeysList, evt.getX(), evt.getY());
+                    showPopupMenu(evt);
                 }
             }
 
@@ -152,9 +165,7 @@ public class NormPtn extends AFrame
                 // 右键事件处理
                 if (evt.isPopupTrigger())
                 {
-                    int row = tb_KeysList.rowAtPoint(evt.getPoint());
-                    tb_KeysList.setRowSelectionInterval(row, row);
-                    pm_MenuPop.show(tb_KeysList, evt.getX(), evt.getY());
+                    showPopupMenu(evt);
                 }
             }
 
@@ -281,6 +292,16 @@ public class NormPtn extends AFrame
         }
     }
 
+    public void changeLabel(int label)
+    {
+        mwizMdl.getGridMdl().setKeysLabel(tb_KeysList.getSelectedRow(), label);
+    }
+
+    public void changeMajor(int major)
+    {
+        mwizMdl.getGridMdl().setKeysMajor(tb_KeysList.getSelectedRow(), major);
+    }
+
     private void hintCallBack()
     {
         javax.swing.AbstractButton button = getMenuPtn().getButton("hint");
@@ -381,6 +402,19 @@ public class NormPtn extends AFrame
         {
             viewKeys();
         }
+    }
+
+    private void showPopupMenu(java.awt.event.MouseEvent evt)
+    {
+        int row = tb_KeysList.rowAtPoint(evt.getPoint());
+        if (row < 0)
+        {
+            return;
+        }
+
+        tb_KeysList.setRowSelectionInterval(row, row);
+        pm_MenuPop.show(tb_KeysList, evt.getX(), evt.getY());
+        showKeysInfo(mwizMdl.getGridMdl().getKeysAt(row));
     }
 
     private void showKeysInfo(Keys keys)

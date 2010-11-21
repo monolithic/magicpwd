@@ -41,6 +41,9 @@ public interface IEditItem
     int SPEC_DATA_CHAR = 4;//特殊符号
     int SPEC_DATA_CHAR_OPT = 5;//是否可选
     int SPEC_DATA_CHAR_POS = 6;//符号位置
+    // 常量
+    String SPEC_VALUE_TRUE = "1";
+    String SPEC_VALUE_FAIL = "0";
 
     /**
      * 

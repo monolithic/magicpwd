@@ -4,7 +4,6 @@
 package com.magicpwd._comn.item;
 
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd.m.UserMdl;
 import java.util.ArrayList;
@@ -196,7 +195,7 @@ public class EditItem implements IEditItem
     }
 
     @Override
-    public void setDefault()
+    public final void setDefault()
     {
         switch (type)
         {
@@ -221,12 +220,12 @@ public class EditItem implements IEditItem
                 break;
             case ConsDat.INDX_DATA:
                 spec = new ArrayList<String>(7);
-                spec.add(ConsCfg.DEF_TRUE);
+                spec.add(SPEC_VALUE_TRUE);
                 spec.add("+0-");
                 spec.add("0");
                 spec.add("0");
                 spec.add("");
-                spec.add(ConsCfg.DEF_TRUE);
+                spec.add(SPEC_VALUE_TRUE);
                 spec.add("^");
                 break;
             default:

@@ -201,8 +201,6 @@ public interface ConsDat
     /**
      * 附加布尔属性
      */
-    String SPEC_VALUE_TRUE = "1";
-    String SPEC_VALUE_FAIL = "0";
     String TOOL_VIEW_MOD1 = "icon";
     String TOOL_VIEW_MOD2 = "text";
     String TOOL_VIEW_MOD3 = "icon,text";
