@@ -105,7 +105,7 @@ public class MainPtn extends AFrame
 
     public void initLang()
     {
-        setTitle(Lang.getLang(LangRes.P30F7201, "高级模式"));
+        setTitle(Lang.getLang(LangRes.P30F7201, "魔方密码"));
 
         initGuidLang();
         initPropLang();

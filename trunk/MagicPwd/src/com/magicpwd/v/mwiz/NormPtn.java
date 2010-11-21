@@ -90,7 +90,7 @@ public class NormPtn extends AFrame
 
     public void initLang()
     {
-        setTitle(Lang.getLang(LangRes.P30F6201, "向导模式"));
+        setTitle(Lang.getLang(LangRes.P30F6201, "魔方密码"));
 
         hb_HintBar.initLang();
     }
