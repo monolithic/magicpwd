@@ -319,7 +319,7 @@ public abstract class APwdsBean extends AEditBean
             mi_SizeMore.setActionCommand(size);
         }
         bg_CharGroup.setSelected(itemData.getSpec(IEditItem.SPEC_PWDS_HASH), true);
-        mi_LoopMenu.setSelected(ConsCfg.DEF_TRUE.equals(itemData.getSpec(IEditItem.SPEC_PWDS_LOOP)));
+        mi_LoopMenu.setSelected(IEditItem.SPEC_VALUE_TRUE.equals(itemData.getSpec(IEditItem.SPEC_PWDS_LOOP)));
     }
 
     private void bt_PwdsConfActionPerformed(java.awt.event.ActionEvent evt)
@@ -406,7 +406,7 @@ public abstract class APwdsBean extends AEditBean
 
     private void mi_UrptMenuActionPerformed(java.awt.event.ActionEvent evt)
     {
-        itemData.setSpec(EditItem.SPEC_PWDS_LOOP, mi_LoopMenu.isSelected() ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
+        itemData.setSpec(EditItem.SPEC_PWDS_LOOP, mi_LoopMenu.isSelected() ? IEditItem.SPEC_VALUE_TRUE : IEditItem.SPEC_VALUE_FAIL);
     }
 
     private void changeView(boolean mask)

@@ -21,7 +21,6 @@ import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WButtonGroup;
-import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
@@ -100,7 +99,7 @@ public abstract class ADataBean extends AEditBean
         javax.swing.AbstractButton button;
 
         // 可否为空
-        mi_DataDef.setSelected(ConsCfg.DEF_TRUE.equals(itemData.getSpec(IEditItem.SPEC_DATA_OPT)));
+        mi_DataDef.setSelected(IEditItem.SPEC_VALUE_TRUE.equals(itemData.getSpec(IEditItem.SPEC_DATA_OPT)));
         // 数据类型
         WButtonGroup group = menuPtn.getGroup("data-template");
         group.setSelected("dec:" + itemData.getSpec(IEditItem.SPEC_DATA_DEC, "0").replace("f", ""), true, "dec:-1");
@@ -225,7 +224,7 @@ public abstract class ADataBean extends AEditBean
 
     private void mi_DataDefActionPerformed(java.awt.event.ActionEvent evt)
     {
-        itemData.setSpec(IEditItem.SPEC_DATA_OPT, mi_DataDef.isSelected() ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
+        itemData.setSpec(IEditItem.SPEC_DATA_OPT, mi_DataDef.isSelected() ? IEditItem.SPEC_VALUE_TRUE : IEditItem.SPEC_VALUE_FAIL);
     }
 
     private void mi_DataConfActionPerformed(java.awt.event.ActionEvent evt)
@@ -383,7 +382,7 @@ public abstract class ADataBean extends AEditBean
 
         if (data.length() < 1)
         {
-            if (ConsCfg.DEF_TRUE.equals(itemData.getSpec(IEditItem.SPEC_DATA_OPT)))
+            if (IEditItem.SPEC_VALUE_TRUE.equals(itemData.getSpec(IEditItem.SPEC_DATA_OPT)))
             {
                 return true;
             }

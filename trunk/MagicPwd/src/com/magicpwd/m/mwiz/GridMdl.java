@@ -16,9 +16,10 @@
  */
 package com.magicpwd.m.mwiz;
 
+import com.magicpwd._comn.I1S2;
 import com.magicpwd._comn.Keys;
+import com.magicpwd._comn.S1S2;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._util.Bean;
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
@@ -86,7 +87,11 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
         }
         if (columnIndex == 1)
         {
-            return javax.swing.Icon.class;
+            return I1S2.class;
+        }
+        if (columnIndex == 2)
+        {
+            return S1S2.class;
         }
         return String.class;
     }
@@ -112,9 +117,9 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
             case 0:
                 return Integer.toString(rowIndex + 1);
             case 1:
-                return Bean.getDataIcon(temp.getP30F010B());
+                return new I1S2(rowIndex, "keys-label" + temp.getP30F0102(), "keys-major" + (temp.getP30F0103() > 0 ? "+" : "") + temp.getP30F0103());
             case 2:
-                return temp.getP30F0109();
+                return new S1S2(temp.getP30F010B(), temp.getP30F0109(), temp.getP30F010A());
             case 3:
                 return temp.getP30F010D() != null ? format.format(temp.getP30F010D()) : "";
             case 4:
@@ -196,6 +201,26 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     public void setKeysMdl(KeysMdl keysMdl)
     {
         this.keysMdl = keysMdl;
+    }
+
+    public void setKeysLabel(int row, int label)
+    {
+        if (row < 0 || row >= ls_KeysList.size())
+        {
+            return;
+        }
+        this.keys = ls_KeysList.get(row);
+        setKeysLabel(label);
+    }
+
+    public void setKeysMajor(int row, int major)
+    {
+        if (row < 0 || row >= ls_KeysList.size())
+        {
+            return;
+        }
+        this.keys = ls_KeysList.get(row);
+        setKeysMajor(major);
     }
 
     public void wDelete(int index)
