@@ -56,13 +56,13 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
     public void initView()
     {
         lb_MetaName = new javax.swing.JLabel();
-        tf_MetaName = new javax.swing.JTextField(20);
+        tf_MetaName = new javax.swing.JTextField(24);
         lb_MetaData = new javax.swing.JLabel();
         ta_MetaData = new javax.swing.JTextArea();
         lb_HintName = new javax.swing.JLabel();
-        tf_HintName = new javax.swing.JTextField(20);
+        tf_HintName = new javax.swing.JTextField(24);
         lb_HintDate = new javax.swing.JLabel();
-        tf_HintDate = new javax.swing.JTextField(20);
+        tf_HintDate = new javax.swing.JTextField(24);
 
         lb_MetaName.setLabelFor(tf_MetaName);
 
@@ -129,7 +129,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
         hpg1.addComponent(lb_HintDate, javax.swing.GroupLayout.Alignment.TRAILING);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg2.addGroup(hsg1);
-        hpg2.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE);
+        hpg2.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE);
         hpg2.addGroup(hsg2);
         hpg2.addComponent(tf_HintName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.SequentialGroup hsg3 = layout.createSequentialGroup();
@@ -137,10 +137,10 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
         hsg3.addGroup(hpg1);
         hsg3.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg3.addGroup(hpg2);
-        hsg3.addContainerGap(14, Short.MAX_VALUE);
+        hsg3.addContainerGap();
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(hsg3));
 
-        javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER);
         vpg1.addComponent(lb_MetaName);
         vpg1.addComponent(tf_MetaName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         vpg1.addComponent(ib_KeysIcon, 22, 22, 22);
@@ -150,7 +150,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
         javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg3.addComponent(lb_HintName);
         vpg3.addComponent(tf_HintName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        javax.swing.GroupLayout.ParallelGroup vpg4 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        javax.swing.GroupLayout.ParallelGroup vpg4 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER);
         vpg4.addComponent(lb_HintDate);
         vpg4.addComponent(tf_HintDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         vpg4.addComponent(ib_HintDate, 20, 20, 20);
