@@ -65,7 +65,7 @@ help-topic=help.png
 #######################################
 # 标记为
 #######################################
-keys-label=label.png
+keys-label0=label.png
 keys-label1=label1.png
 keys-label2=label2.png
 keys-label3=label3.png
