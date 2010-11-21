@@ -171,7 +171,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
     {
         Bean.setText(lb_MetaName, Lang.getLang(LangRes.P30F1303, "标题"));
 
-        Lang.setWText(ib_KeysIcon, LangRes.P30F131F, "&O");
+        Lang.setWText(ib_KeysIcon, LangRes.P30F131F, "@O");
         Lang.setWTips(ib_KeysIcon, LangRes.P30F1320, "点击选择徽标(Alt + L)");
 
         Bean.setText(lb_MetaData, Lang.getLang(LangRes.P30F1304, "搜索"));
@@ -179,7 +179,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
         Lang.setWText(lb_HintName, LangRes.P30F1305, "提示");
         Lang.setWText(lb_HintDate, LangRes.P30F1306, "时间");
 
-        Lang.setWText(ib_HintDate, LangRes.P30F151B, "&O");
+        Lang.setWText(ib_HintDate, LangRes.P30F151B, "@O");
         Lang.setWTips(ib_HintDate, LangRes.P30F151C, "提醒时间(Alt + T)");
     }
 

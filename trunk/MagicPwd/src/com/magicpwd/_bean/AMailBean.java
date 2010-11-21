@@ -71,7 +71,7 @@ public abstract class AMailBean extends AEditBean
 
     protected void initConfLang()
     {
-        Lang.setWText(bt_MailView, LangRes.P30F1511, "&O");
+        Lang.setWText(bt_MailView, LangRes.P30F1511, "@O");
         Lang.setWTips(bt_MailView, LangRes.P30F1512, "发送邮件(Alt + O)");
 
         dataBox.initLang();

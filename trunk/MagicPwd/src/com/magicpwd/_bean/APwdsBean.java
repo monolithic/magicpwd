@@ -223,13 +223,13 @@ public abstract class APwdsBean extends AEditBean
 
     protected void initConfLang()
     {
-        Lang.setWText(bt_PwdsView, LangRes.P30F1507, "&M");
+        Lang.setWText(bt_PwdsView, LangRes.P30F1507, "@M");
         Lang.setWTips(bt_PwdsView, LangRes.P30F1508, "点击显示口令(Alt + M)");
 
-        Lang.setWText(bt_PwdsGent, LangRes.P30F150B, "&G");
+        Lang.setWText(bt_PwdsGent, LangRes.P30F150B, "@G");
         Lang.setWTips(bt_PwdsGent, LangRes.P30F150C, "生成口令(Alt + G)");
 
-        Lang.setWText(bt_PwdsConf, LangRes.P30F150D, "&O");
+        Lang.setWText(bt_PwdsConf, LangRes.P30F150D, "@O");
         Lang.setWTips(bt_PwdsConf, LangRes.P30F150E, "口令设置(Alt + O)");
 
         initSizeLang();
@@ -415,14 +415,14 @@ public abstract class APwdsBean extends AEditBean
         {
             bt_PwdsView.setIcon(formPtn.readFavIcon("pwds-mask", true));
             pf_PropData.setEchoChar(ConsEnv.PWDS_MASK);
-            Lang.setWText(bt_PwdsView, LangRes.P30F1507, "&M");
+            Lang.setWText(bt_PwdsView, LangRes.P30F1507, "@M");
             Lang.setWTips(bt_PwdsView, LangRes.P30F1508, "点击显示口令(Alt + M)");
         }
         else
         {
             bt_PwdsView.setIcon(formPtn.readFavIcon("pwds-view", true));
             pf_PropData.setEchoChar('\0');
-            Lang.setWText(bt_PwdsView, LangRes.P30F1509, "&M");
+            Lang.setWText(bt_PwdsView, LangRes.P30F1509, "@M");
             Lang.setWTips(bt_PwdsView, LangRes.P30F150A, "点击隐藏口令(Alt + M)");
         }
     }

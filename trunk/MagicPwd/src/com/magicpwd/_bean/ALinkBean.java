@@ -70,7 +70,7 @@ public abstract class ALinkBean extends AEditBean
 
     protected void initConfLang()
     {
-        Lang.setWText(bt_LinkView, LangRes.P30F150F, "&O");
+        Lang.setWText(bt_LinkView, LangRes.P30F150F, "@O");
         Lang.setWTips(bt_LinkView, LangRes.P30F1510, "打开链接(Alt + O)");
 
         dataBox.initLang();
