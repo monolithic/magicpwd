@@ -117,7 +117,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
         hsg1.addComponent(tf_MetaName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg1.addComponent(ib_KeysIcon, 22, 22, 22);
+        hsg1.addComponent(ib_KeysIcon, 21, 21, 21);
         javax.swing.GroupLayout.SequentialGroup hsg2 = layout.createSequentialGroup();
         hsg2.addComponent(tf_HintDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -143,7 +143,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
         javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER);
         vpg1.addComponent(lb_MetaName);
         vpg1.addComponent(tf_MetaName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vpg1.addComponent(ib_KeysIcon, 22, 22, 22);
+        vpg1.addComponent(ib_KeysIcon, 21, 21, 21);
         javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         vpg2.addComponent(lb_MetaData);
         vpg2.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE);
