@@ -157,14 +157,14 @@
             <!--最高-->
             <item type="checkbox" text="$P30F7D27" group="major" command="2">
                 <icon>
-                    <default cache-id="major2" path="var:keys-major+2"/>
+                    <default cache-id="major+2" path="var:keys-major+2"/>
                 </icon>
                 <action id="change-note" class="com.magicpwd.e.mwiz.ChangeMajorAction" />
             </item>
             <!--高-->
             <item type="checkbox" text="$P30F7D28" group="major" command="1">
                 <icon>
-                    <default cache-id="major1" path="var:keys-major+1"/>
+                    <default cache-id="major+1" path="var:keys-major+1"/>
                 </icon>
                 <action id="change-note" class="com.magicpwd.e.mwiz.ChangeMajorAction" />
             </item>
