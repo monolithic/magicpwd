@@ -19,6 +19,7 @@ package com.magicpwd._bean.mwiz;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mwiz.IMwizBean;
 import com.magicpwd._bean.ALinkBean;
+import com.magicpwd._util.Util;
 import com.magicpwd.v.mwiz.NormPtn;
 
 /**
@@ -87,6 +88,19 @@ public class LinkBean extends ALinkBean implements IMwizBean
     public javax.swing.JComponent getComponent()
     {
         return this;
+    }
+
+    @Override
+    public boolean copyData()
+    {
+        if (!tf_PropData.hasFocus())
+        {
+            return false;
+        }
+
+        tf_PropData.selectAll();
+        Util.setClipboardContents(tf_PropData.getText());
+        return true;
     }
 
     @Override

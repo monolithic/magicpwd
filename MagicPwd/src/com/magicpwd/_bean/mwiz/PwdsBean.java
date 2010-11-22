@@ -19,6 +19,7 @@ package com.magicpwd._bean.mwiz;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mwiz.IMwizBean;
 import com.magicpwd._bean.APwdsBean;
+import com.magicpwd._util.Util;
 import com.magicpwd.v.mwiz.NormPtn;
 
 /**
@@ -86,6 +87,19 @@ public class PwdsBean extends APwdsBean implements IMwizBean
     public javax.swing.JComponent getComponent()
     {
         return this;
+    }
+
+    @Override
+    public boolean copyData()
+    {
+        if (!pf_PropData.hasFocus())
+        {
+            return false;
+        }
+
+        pf_PropData.selectAll();
+        Util.setClipboardContents(new String(pf_PropData.getPassword()), formPtn.getUserMdl().getStayTime());
+        return true;
     }
 
     @Override
