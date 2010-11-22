@@ -93,6 +93,17 @@ public class FileBean extends AFileBean implements IMwizBean
     }
 
     @Override
+    public boolean copyData()
+    {
+        if (!tf_PropData.hasFocus())
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    @Override
     public boolean saveData()
     {
         saveName();

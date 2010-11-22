@@ -32,5 +32,7 @@ public interface IMwizBean extends IEditBean
 
     javax.swing.JComponent getComponent();
 
+    boolean copyData();
+
     boolean saveData();
 }

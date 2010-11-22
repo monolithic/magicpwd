@@ -182,18 +182,18 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
 
     public void initLang()
     {
-        Bean.setText(lb_MetaName, Lang.getLang(LangRes.P30F1303, "标题"));
+        Bean.setText(lb_MetaName, Lang.getLang(LangRes.P30F6303, "标题"));
 
-        Lang.setWText(ib_KeysIcon, LangRes.P30F131F, "@O");
-        Lang.setWTips(ib_KeysIcon, LangRes.P30F1320, "点击选择徽标(Alt + L)");
+        Lang.setWText(ib_KeysIcon, LangRes.P30F6304, "@L");
+        Lang.setWTips(ib_KeysIcon, LangRes.P30F6305, "点击选择徽标(Alt + L)");
 
-        Bean.setText(lb_MetaData, Lang.getLang(LangRes.P30F1304, "搜索"));
+        Bean.setText(lb_MetaData, Lang.getLang(LangRes.P30F6306, "搜索"));
 
-        Lang.setWText(lb_HintName, LangRes.P30F1305, "提示");
-        Lang.setWText(lb_HintDate, LangRes.P30F1306, "时间");
+        Lang.setWText(lb_HintName, LangRes.P30F6307, "提示");
+        Lang.setWText(lb_HintDate, LangRes.P30F6308, "时间");
 
-        Lang.setWText(ib_HintDate, LangRes.P30F151B, "@O");
-        Lang.setWTips(ib_HintDate, LangRes.P30F151C, "提醒时间(Alt + T)");
+        Lang.setWText(ib_HintDate, LangRes.P30F6309, "@O");
+        Lang.setWTips(ib_HintDate, LangRes.P30F630A, "提醒时间(Alt + O)");
 
         nameBox.initLang();
         metaBox.initLang();

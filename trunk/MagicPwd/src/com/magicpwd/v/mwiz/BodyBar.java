@@ -32,6 +32,7 @@ import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Bean;
 import com.magicpwd.m.mwiz.KeysMdl;
+import java.awt.event.ActionEvent;
 
 /**
  * Application: MagicPwd
@@ -160,6 +161,18 @@ public class BodyBar extends javax.swing.JPanel
             }
             ((IMwizBean) pl_EditList[i]).initData();
         }
+
+        javax.swing.KeyStroke stroke = javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.ALT_MASK);
+        javax.swing.AbstractAction action = new javax.swing.AbstractAction()
+        {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                copyData();
+            }
+        };
+        Bean.registerKeyStrokeAction(this, stroke, action, "alt-c", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
     }
 
     public void showData()
@@ -175,6 +188,24 @@ public class BodyBar extends javax.swing.JPanel
             ((IMwizBean) panel).showData(keysMdl.getItemAt(j++));
         }
         requestFocus();
+    }
+
+    public boolean copyData()
+    {
+        AEditBean panel;
+        for (int i = 0, j = currStep; i < ConsEnv.MWIZ_ROWS_MAX; i += 1)
+        {
+            panel = pl_EditList[i];
+            if (panel == null)
+            {
+                break;
+            }
+            if (((IMwizBean) panel).copyData())
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     public boolean saveData()

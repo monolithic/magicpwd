@@ -79,7 +79,7 @@ public class EditPtn extends javax.swing.JDialog
         Bean.setText(bt_PrevStep, Lang.getLang(LangRes.P30F6501, "上一步(@P)"));
         Bean.setText(bt_NextStep, Lang.getLang(LangRes.P30F6502, "下一步(@N)"));
         Bean.setText(bt_Update, Lang.getLang(LangRes.P30F6503, "保存(@S)"));
-        Bean.setText(bt_Cancel, Lang.getLang(LangRes.P30F6504, "取消(@C)"));
+        Bean.setText(bt_Cancel, Lang.getLang(LangRes.P30F6504, "取消(@D)"));
     }
 
     public void initData()

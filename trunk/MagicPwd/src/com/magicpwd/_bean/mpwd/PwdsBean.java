@@ -134,7 +134,7 @@ public class PwdsBean extends APwdsBean implements IMpwdBean
     @Override
     public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (Lang.showFirm(mainPtn, LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
+        if (Lang.showFirm(formPtn, LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
         {
             mainPtn.removeSelected();
         }
@@ -146,7 +146,7 @@ public class PwdsBean extends APwdsBean implements IMpwdBean
         String name = tf_PropName.getText();
         if (!com.magicpwd._util.Char.isValidate(name))
         {
-            Lang.showMesg(mainPtn, LangRes.P30F7A35, "请输入口令名称！");
+            Lang.showMesg(formPtn, LangRes.P30F7A35, "请输入口令名称！");
             tf_PropName.requestFocus();
             return;
         }
@@ -161,7 +161,7 @@ public class PwdsBean extends APwdsBean implements IMpwdBean
     public void copyDataActionPerformed(java.awt.event.ActionEvent evt)
     {
         pf_PropData.selectAll();
-        Util.setClipboardContents(new String(pf_PropData.getPassword()), mainPtn.getUserMdl().getStayTime());
+        Util.setClipboardContents(new String(pf_PropData.getPassword()), formPtn.getUserMdl().getStayTime());
     }
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JLabel lb_PropName;

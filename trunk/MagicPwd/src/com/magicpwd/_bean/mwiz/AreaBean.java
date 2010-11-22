@@ -7,6 +7,7 @@ package com.magicpwd._bean.mwiz;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mwiz.IMwizBean;
 import com.magicpwd._bean.AAreaBean;
+import com.magicpwd._util.Util;
 import com.magicpwd.v.mwiz.NormPtn;
 
 /**
@@ -71,6 +72,19 @@ public class AreaBean extends AAreaBean implements IMwizBean
     public javax.swing.JComponent getComponent()
     {
         return this;
+    }
+
+    @Override
+    public boolean copyData()
+    {
+        if (!ta_PropData.hasFocus())
+        {
+            return false;
+        }
+
+        ta_PropData.selectAll();
+        Util.setClipboardContents(ta_PropData.getText());
+        return true;
     }
 
     @Override

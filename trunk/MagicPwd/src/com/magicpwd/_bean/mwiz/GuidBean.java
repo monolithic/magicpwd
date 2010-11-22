@@ -120,8 +120,8 @@ public class GuidBean extends javax.swing.JPanel
 
     public void initLang()
     {
-        Lang.setWText(lb_PropName, LangRes.P30F1301, "时间");
-        Lang.setWText(lb_PropData, LangRes.P30F1302, "模板");
+        Lang.setWText(lb_PropName, LangRes.P30F6301, "时间");
+        Lang.setWText(lb_PropData, LangRes.P30F6302, "模板");
 
         Lang.setWText(bt_ReadMail, LangRes.P30F1519, "@M");
         Lang.setWTips(bt_ReadMail, LangRes.P30F151A, "检测邮件(Alt + M)");
