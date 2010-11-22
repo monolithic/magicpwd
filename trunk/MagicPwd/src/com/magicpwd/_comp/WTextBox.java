@@ -135,7 +135,11 @@ public class WTextBox implements java.awt.datatransfer.ClipboardOwner
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                textBox.selectAll();
+                if (textBox.getText().length() > 0)
+                {
+                    textBox.selectAll();
+                    dallItem.setEnabled(true);
+                }
             }
         };
         sallItem.addActionListener(action);
@@ -151,6 +155,7 @@ public class WTextBox implements java.awt.datatransfer.ClipboardOwner
             {
                 int i = textBox.getCaretPosition();
                 textBox.select(i, i);
+                dallItem.setEnabled(false);
             }
         };
         dallItem.addActionListener(action);
@@ -281,6 +286,8 @@ public class WTextBox implements java.awt.datatransfer.ClipboardOwner
     {
         undoItem.setEnabled(undo.canUndo());
         redoItem.setEnabled(undo.canRedo());
+
+        dallItem.setEnabled(false);
     }
 
     public boolean canUndo()

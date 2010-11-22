@@ -181,7 +181,7 @@ public class NormPtn extends AFrame
             @Override
             public void keyPressed(java.awt.event.KeyEvent evt)
             {
-                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER)
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER && !evt.isControlDown())
                 {
                     viewKeys();
                 }

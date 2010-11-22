@@ -20,6 +20,7 @@ import com.magicpwd.__i.IBackCall;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.IcoLabel;
+import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
@@ -46,6 +47,9 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
 
     private NormPtn normPtn;
     private KeysMdl keysMdl;
+    private WTextBox nameBox;
+    private WTextBox metaBox;
+    private WTextBox hintBox;
     private java.text.DateFormat format;
 
     public HeadBean(NormPtn normPtn)
@@ -83,10 +87,19 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
             }
         });
 
+        nameBox = new WTextBox(tf_MetaName, true);
+        nameBox.initView();
+
         lb_MetaData.setLabelFor(ta_MetaData);
+
+        metaBox = new WTextBox(ta_MetaData, true);
+        metaBox.initView();
 
         lb_HintName.setLabelFor(tf_HintName);
 
+        hintBox = new WTextBox(tf_HintName, true);
+        hintBox.initView();
+        
         lb_HintDate.setLabelFor(tf_HintDate);
 
         ib_HintDate = new BtnLabel();
@@ -181,6 +194,10 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
 
         Lang.setWText(ib_HintDate, LangRes.P30F151B, "@O");
         Lang.setWTips(ib_HintDate, LangRes.P30F151C, "提醒时间(Alt + T)");
+
+        nameBox.initLang();
+        metaBox.initLang();
+        hintBox.initLang();
     }
 
     public void initData()
@@ -198,6 +215,10 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
         mi_HalfHour.addActionListener(action);
         mi_FullHour.addActionListener(action);
         normPtn.getMenuPtn().getSubMenu("date-interval", pm_HintDate, action);
+
+        nameBox.initData();
+        metaBox.initData();
+        hintBox.initData();
     }
 
     public final void showData(KeysMdl keysMdl)
