@@ -98,6 +98,7 @@ public class Task
         {
             if (info.getTaskName().equals(key))
             {
+                info.setCounter(0);
                 info.setInterval(interval);
                 return true;
             }
@@ -117,6 +118,7 @@ public class Task
         {
             if (info.getTaskName().equals(key))
             {
+                info.setCounter(0);
                 info.setInitiate(initiate);
                 info.setInterval(interval);
                 return true;
@@ -136,21 +138,24 @@ public class Task
                 continue;
             }
 
-            info.addCounter(1);
             if (info.getCounter() < info.getInterval())
             {
-                continue;
+                info.addCounter(1);
             }
 
-            new Thread()
+            if (info.getCounter() == info.getInterval())
             {
-
-                @Override
-                public void run()
+                new Thread()
                 {
-                    tasks.get(info).callBack(info, null);
-                }
-            }.start();
+
+                    @Override
+                    public void run()
+                    {
+                        tasks.get(info).callBack(info, null);
+                    }
+                }.start();
+                continue;
+            }
         }
     }
 }
