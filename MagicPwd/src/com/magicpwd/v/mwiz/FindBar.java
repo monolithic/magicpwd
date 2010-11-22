@@ -126,6 +126,7 @@ public class FindBar extends javax.swing.JPanel
     private void bt_MetaTextActionPerformed(java.awt.event.ActionEvent e)
     {
         normPtn.setFindVisible(false);
+        normPtn.findLast();
         javax.swing.AbstractButton button = normPtn.getMenuPtn().getButton("find");
         if (button != null)
         {
