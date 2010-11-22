@@ -21,6 +21,7 @@ import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WButtonGroup;
+import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
@@ -34,6 +35,7 @@ import com.magicpwd._util.Lang;
 public abstract class ADateBean extends AEditBean
 {
 
+    private WTextBox dataBox;
     private java.text.DateFormat format;
 
     public ADateBean(AFrame formPtn)
@@ -44,6 +46,9 @@ public abstract class ADateBean extends AEditBean
     protected void initConfView()
     {
         tf_PropData = new javax.swing.JTextField();
+
+        dataBox = new WTextBox(tf_PropData, true);
+        dataBox.initView();
 
         pl_PropConf = new javax.swing.JPanel();
         pl_PropConf.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
@@ -96,6 +101,8 @@ public abstract class ADateBean extends AEditBean
 
         Bean.setText(mi_TimeDef, "当前时间");
         Bean.setText(mi_ConfDef, "默认格式");
+
+        dataBox.initLang();
     }
 
     protected void initConfData()
@@ -123,6 +130,8 @@ public abstract class ADateBean extends AEditBean
         };
         formPtn.getMenuPtn().getSubMenu("date-template", pm_MenuConf, dtAction);
         formPtn.getMenuPtn().getGroup("date-template").add(mi_ConfDef);
+
+        dataBox.initData();
     }
 
     protected void showConfData()

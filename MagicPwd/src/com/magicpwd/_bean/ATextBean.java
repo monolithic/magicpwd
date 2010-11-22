@@ -43,7 +43,6 @@ public abstract class ATextBean extends AEditBean
 
         pl_PropConf = new javax.swing.JPanel();
         pl_PropConf.setLayout(new java.awt.FlowLayout());
-
     }
 
     protected void initConfLang()

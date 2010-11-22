@@ -174,6 +174,7 @@ public class BodyBar extends javax.swing.JPanel
             }
             ((IMwizBean) panel).showData(keysMdl.getItemAt(j++));
         }
+        requestFocus();
     }
 
     public boolean saveData()
