@@ -68,6 +68,7 @@ public abstract class SafeMdl
             {
                 Logs.exception(exp);
                 Lang.showMesg(null, LangRes.P30FAA04, "系统错误：系统无法加载密码算法！");
+                Logs.end();
                 System.exit(0);
             }
         }
@@ -90,6 +91,7 @@ public abstract class SafeMdl
             {
                 Logs.exception(exp);
                 Lang.showMesg(null, LangRes.P30FAA04, "系统错误：系统无法加载密码算法！");
+                Logs.end();
                 System.exit(0);
             }
         }

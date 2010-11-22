@@ -116,6 +116,7 @@ public class CloudResumeAction extends AMpwdAction
                         dialog.setVisible(false);
                         dialog.dispose();
                         Lang.showMesg(mainPtn, LangRes.P30F7A3F, "数据恢复成功，您需要重新启动本程序！");
+                        Logs.end();
                         System.exit(0);
                     }
                 }

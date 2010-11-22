@@ -232,12 +232,14 @@ public abstract class AFrame extends javax.swing.JFrame
     {
         if (e.getID() == java.awt.event.WindowEvent.WINDOW_CLOSING)
         {
-            if (safeMdl.isModified() && javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(this, LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
-            {
-                return;
-            }
-            setVisible(false);
-            trayPtn.endSave();
+            hideFrame();
+//            if (safeMdl.isModified() && javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(this, LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
+//            {
+//                return;
+//            }
+//            setVisible(false);
+//            trayPtn.endSave();
+            return;
         }
 //        else if (e.getID() == java.awt.event.WindowEvent.WINDOW_ICONIFIED)
 //        {

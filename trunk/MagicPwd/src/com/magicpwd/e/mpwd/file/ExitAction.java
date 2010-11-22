@@ -28,8 +28,7 @@ public class ExitAction extends AMpwdAction
         }
 
         mainPtn.setVisible(false);
-        trayPtn.endSave();
-        System.exit(0);
+        trayPtn.endExit(0);
     }
 
     @Override

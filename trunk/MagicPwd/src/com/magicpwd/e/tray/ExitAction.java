@@ -5,7 +5,6 @@
 package com.magicpwd.e.tray;
 
 import com.magicpwd.__a.tray.ATrayAction;
-import com.magicpwd._util.Logs;
 
 /**
  *
@@ -25,9 +24,7 @@ public class ExitAction extends ATrayAction
         {
             trayPtn.getCurrForm().setVisible(false);
         }
-        trayPtn.endSave();
-        Logs.end();
-        System.exit(0);
+        trayPtn.endExit(0);
     }
 
     @Override

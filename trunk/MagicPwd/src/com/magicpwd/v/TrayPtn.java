@@ -412,6 +412,13 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         }
     }
 
+    public void endExit(int status)
+    {
+        endSave();
+        Logs.end();
+        System.exit(status);
+    }
+
     private void showJPopupMenu(java.awt.event.MouseEvent evt)
     {
         if (trayMenu == null)
