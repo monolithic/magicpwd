@@ -250,21 +250,20 @@ public final class Util
 
         if (Task.getAction("clip-mon") != null)
         {
-            Task.reActive("clip-mon", maxDelay, maxDelay);
+            Task.reActive("clip-mon", 0, maxDelay);
+            return;
         }
-        else
-        {
-            Task.registerAction(new TaskInfo(0, maxDelay, "clip-mon", ""), new IBackCall()
-            {
 
-                @Override
-                public boolean callBack(Object sender, EventListener event, String... params)
-                {
-                    Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(null), null);
-                    return true;
-                }
-            });
-        }
+        Task.registerAction(new TaskInfo(0, maxDelay, "clip-mon", ""), new IBackCall()
+        {
+
+            @Override
+            public boolean callBack(Object sender, EventListener event, String... params)
+            {
+                Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(null), null);
+                return true;
+            }
+        });
     }
 
     public static void scrollToVisible(JTable table, int rowIndex, int vColIndex, boolean center)
