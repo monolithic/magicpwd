@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2010 Administrator
+ *  Copyright (C) 2010 Amon
  * 
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -27,7 +27,7 @@ import com.magicpwd.m.mwiz.KeysMdl;
 
 /**
  * Application: MagicPwd
- * Author     : Administrator
+ * Author     : Amon
  * Encoding   : UTF-8
  * Created    : 2010-10-24 22:46:25
  * Website    : http://magicpwd.com/
@@ -48,7 +48,7 @@ public class EditPtn extends javax.swing.JDialog
 
     public EditPtn(NormPtn normPtn)
     {
-        super(normPtn, false);
+        super(normPtn, true);
         this.normPtn = normPtn;
         ls_BodyList = new java.util.ArrayList<BodyBar>(5);
     }
@@ -89,6 +89,18 @@ public class EditPtn extends javax.swing.JDialog
 
         bt_Update.setVisible(false);
         bt_PrevStep.setVisible(false);
+
+        javax.swing.KeyStroke stroke = javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0);
+        javax.swing.AbstractAction action = new javax.swing.AbstractAction()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                closeWindow();
+            }
+        };
+        Bean.registerKeyStrokeAction(rootPane, stroke, action, "esc", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
     }
 
     public final void showData(KeysMdl keysMdl, boolean canEdit)

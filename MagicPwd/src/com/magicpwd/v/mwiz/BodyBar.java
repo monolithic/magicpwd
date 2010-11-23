@@ -32,7 +32,6 @@ import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Bean;
 import com.magicpwd.m.mwiz.KeysMdl;
-import java.awt.event.ActionEvent;
 
 /**
  * Application: MagicPwd
@@ -167,7 +166,7 @@ public class BodyBar extends javax.swing.JPanel
         {
 
             @Override
-            public void actionPerformed(ActionEvent e)
+            public void actionPerformed(java.awt.event.ActionEvent e)
             {
                 copyData();
             }
