@@ -328,7 +328,7 @@ public class MainPtn extends AFrame
             {
                 mpwdMdl.getListMdl().listKeysByMeta(queryKey);
             }
-            else if (com.magicpwd._util.Char.isValidateHash(queryKey))
+            else if ("0".equals(queryKey) || com.magicpwd._util.Char.isValidateHash(queryKey))
             {
                 mpwdMdl.getListMdl().listKeysByHash(queryKey);
             }
