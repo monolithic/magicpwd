@@ -346,6 +346,9 @@
         </menu>
     </submenu>
     <strokes id="mwiz">
+        <action id="exit-window" class="com.magicpwd.e.tray.ExitAction">
+            <stroke key="^ Q" />
+        </action>
         <action id="lock-window" class="com.magicpwd.e.mwiz.LockAction">
             <stroke key="^ L" />
         </action>
