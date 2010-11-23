@@ -107,6 +107,25 @@ public class Task
         return false;
     }
 
+    public static boolean deActive(String key)
+    {
+        if (key == null)
+        {
+            return false;
+        }
+
+        for (TaskInfo info : tasks.keySet())
+        {
+            if (info.getTaskName().equals(key))
+            {
+                info.setCounter(info.getInterval() + 1);
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public static boolean reActive(String key, int initiate, int interval)
     {
         if (key == null)
@@ -138,11 +157,12 @@ public class Task
                 continue;
             }
 
-            if (info.getCounter() < info.getInterval())
+            if (info.getCounter() > info.getInterval())
             {
-                info.addCounter(1);
+                continue;
             }
 
+            info.addCounter(1);
             if (info.getCounter() == info.getInterval())
             {
                 new Thread()
@@ -154,7 +174,6 @@ public class Task
                         tasks.get(info).callBack(info, null);
                     }
                 }.start();
-                continue;
             }
         }
     }
