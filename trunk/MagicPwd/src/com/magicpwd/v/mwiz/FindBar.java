@@ -137,7 +137,7 @@ public class FindBar extends javax.swing.JPanel
     private void tf_MetaText_KeyReleased(java.awt.event.KeyEvent e)
     {
         String meta = tf_MetaText.getText();
-        if (lastMeta.equals(meta))
+        if (e.getKeyCode() != java.awt.event.KeyEvent.VK_ENTER && lastMeta.equals(meta))
         {
             return;
         }
