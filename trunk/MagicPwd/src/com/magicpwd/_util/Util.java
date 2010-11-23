@@ -239,6 +239,17 @@ public final class Util
      */
     public static void setClipboardContents(String text)
     {
+        copy2Clipboard(text);
+
+        if (Task.getAction("clip-mon") != null)
+        {
+            Task.deActive("clip-mon");
+            return;
+        }
+    }
+
+    public static void copy2Clipboard(String text)
+    {
         StringSelection stringSelection = new StringSelection(text);
         Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
         clipboard.setContents(stringSelection, null);
@@ -246,7 +257,7 @@ public final class Util
 
     public static void setClipboardContents(String text, int maxDelay)
     {
-        setClipboardContents(text);
+        copy2Clipboard(text);
 
         if (Task.getAction("clip-mon") != null)
         {
