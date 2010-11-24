@@ -29,6 +29,7 @@ public class Task
 
     private static java.util.HashMap<TaskInfo, IBackCall> tasks;
     private static javax.swing.Timer timer;
+    private static long lastTime;
 
     public static void registerAction(TaskInfo item, IBackCall backCall)
     {
@@ -149,6 +150,12 @@ public class Task
 
     private static void taskActionPerformed(java.awt.event.ActionEvent e)
     {
+        long t = System.currentTimeMillis();
+        if (t - lastTime < 1000)
+        {
+            return;
+        }
+        lastTime = t;
         for (final TaskInfo info : tasks.keySet())
         {
             if (info.getInitiate() > 0)
@@ -163,6 +170,7 @@ public class Task
             }
 
             info.addCounter(1);
+            System.out.println(info.getCounter());
             if (info.getCounter() == info.getInterval())
             {
                 new Thread()
