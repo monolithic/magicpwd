@@ -56,7 +56,7 @@ public class Shape extends javax.swing.JFrame
 
             public void run()
             {
-                Window w = new Test();
+                Window w = new Shape();
                 w.setVisible(true);
                 com.sun.awt.AWTUtilities.setWindowShape(w, new Ellipse2D.Double(0, 0, w.getWidth(), w.getHeight()));
                 com.sun.awt.AWTUtilities.setWindowOpacity(w, 0.93f);
