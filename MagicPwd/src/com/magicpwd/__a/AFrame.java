@@ -44,7 +44,7 @@ public abstract class AFrame extends javax.swing.JFrame
         java.io.InputStream stream = null;
         try
         {
-            stream = AFrame.class.getResourceAsStream(ConsEnv.ICON_PATH + "feel.amf");
+            stream = AFrame.class.getResourceAsStream("/res/feel.amf");
             defProp.load(stream);
         }
         catch (IOException ex)
