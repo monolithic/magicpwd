@@ -31,12 +31,11 @@ import javax.swing.SwingUtilities;
  *
  * @author yaoshangwen
  */
-public class Shape extends javax.swing.JFrame
+public class Shape extends javax.swing.JWindow
 {
 
     public Shape()
     {
-        super("不规则窗体");
         this.setLayout(new FlowLayout());
         this.add(new JButton("按钮"));
         this.add(new JCheckBox("复选按钮"));
@@ -45,12 +44,20 @@ public class Shape extends javax.swing.JFrame
 
         this.setSize(new Dimension(400, 400));
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     public static void main(String[] args)
     {
         JFrame.setDefaultLookAndFeelDecorated(true);
+        try
+        {
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+        }
+        catch (Exception exp)
+        {
+            exp.printStackTrace();
+        }
         SwingUtilities.invokeLater(new Runnable()
         {
 
