@@ -18,6 +18,7 @@ package com.magicpwd.v.mwiz;
 
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._util.Logs;
 
 /**
  *
@@ -79,6 +80,17 @@ public class FindBar extends javax.swing.JPanel
     public void initData()
     {
         bgImage = normPtn.getUserMdl().readImage(ConsEnv.FEEL_PATH + "findbar.png");
+        if (bgImage == null)
+        {
+            try
+            {
+                bgImage = javax.imageio.ImageIO.read(FindBar.class.getResourceAsStream(ConsEnv.ICON_PATH + "find.png"));
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+        }
         tf_MetaText.addKeyListener(new java.awt.event.KeyAdapter()
         {
 

@@ -494,6 +494,11 @@ public class UserMdl
     public java.awt.image.BufferedImage readImage(String path)
     {
         java.io.File file = new java.io.File(path.replace(ConsEnv.FEEL_ARGS, getFeel()));
+        if (!file.exists() || !file.isFile() || !file.canRead())
+        {
+            return null;
+        }
+
         try
         {
             return javax.imageio.ImageIO.read(file);
