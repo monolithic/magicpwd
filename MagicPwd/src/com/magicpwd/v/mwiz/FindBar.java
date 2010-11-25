@@ -109,7 +109,7 @@ public class FindBar extends javax.swing.JPanel
     @Override
     public java.awt.Dimension getPreferredSize()
     {
-        return new java.awt.Dimension(bgImage.getWidth(), bgImage.getHeight());
+        return bgImage != null ? new java.awt.Dimension(bgImage.getWidth(), bgImage.getHeight()) : super.getPreferredSize();
     }
 
     public String getKeyMeta()

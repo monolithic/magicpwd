@@ -4,7 +4,7 @@
         <action id="file-search" class="com.magicpwd.e.mpad.FindAction">
             <stroke key="^ F" />
         </action>
-        <action id="exit-window" class="com.magicpwd.e.tray.ExitAction">
+        <action id="exit-window" class="com.magicpwd.e.mpad.ExitAction">
             <stroke key="^ Q" />
         </action>
         <action id="lock-window" class="com.magicpwd.e.mpad.LockAction">

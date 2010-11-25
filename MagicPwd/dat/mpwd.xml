@@ -761,7 +761,7 @@
         </menu>
     </submenu>
     <strokes id="mpwd">
-        <action id="exit-window" class="com.magicpwd.e.tray.ExitAction">
+        <action id="exit-window" class="com.magicpwd.e.mpwd.file.ExitAction">
             <stroke key="^ Q" />
         </action>
         <action id="hide-window" class="com.magicpwd.e.mpwd.file.HideAction">

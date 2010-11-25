@@ -134,6 +134,7 @@ public class NormPtn extends AFrame
             Logs.exception(e);
         }
 
+        fb_FindBar.initData();
 
         WButtonGroup group = menuPtn.getGroup("order-dir");
         if (group != null)
@@ -204,8 +205,6 @@ public class NormPtn extends AFrame
                 }
             }
         });
-
-        fb_FindBar.initData();
     }
 
     @Override
