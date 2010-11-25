@@ -170,7 +170,6 @@ public class Task
             }
 
             info.addCounter(1);
-            System.out.println(info.getCounter());
             if (info.getCounter() == info.getInterval())
             {
                 new Thread()
