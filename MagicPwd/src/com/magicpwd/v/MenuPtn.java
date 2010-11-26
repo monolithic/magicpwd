@@ -711,28 +711,38 @@ public class MenuPtn
 
     private javax.swing.AbstractButton processText(Element element, javax.swing.AbstractButton button)
     {
-        String text = element.attributeValue("text");
-        if (text != null && pattern.matcher(text).matches())
+        String vText = element.attributeValue("text");
+        String dText = element.attributeValue("text-def");
+        if (dText == null)
         {
-            text = text.substring(1).toUpperCase();
-            text = Lang.getLang(text, text);
+            dText = vText;
         }
-        if (text != null)
+        if (vText != null && pattern.matcher(vText).matches())
         {
-            Bean.setText(button, text.length() > 0 ? text : "...");
+            vText = vText.substring(1).toUpperCase();
+            vText = Lang.getLang(vText, dText);
+        }
+        if (vText != null)
+        {
+            Bean.setText(button, vText.length() > 0 ? vText : "...");
         }
         return button;
     }
 
     private javax.swing.AbstractButton processTips(Element element, javax.swing.AbstractButton button)
     {
-        String tips = element.attributeValue("tips");
-        if (tips != null && pattern.matcher(tips).matches())
+        String vTips = element.attributeValue("tips");
+        String dTips = element.attributeValue("tips-def");
+        if (dTips == null)
         {
-            tips = tips.substring(1).toUpperCase();
-            tips = Lang.getLang(tips, tips);
+            dTips = vTips;
         }
-        Bean.setTips(button, tips);
+        if (vTips != null && pattern.matcher(vTips).matches())
+        {
+            vTips = vTips.substring(1).toUpperCase();
+            vTips = Lang.getLang(vTips, dTips);
+        }
+        Bean.setTips(button, "".equals(vTips) ? null : vTips);
         return button;
     }
 
