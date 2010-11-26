@@ -23,6 +23,7 @@
 		<jar href="lib/jaxen-1.1.1.jar"/>
 		<jar href="lib/dom4j-1.6.1.jar"/>
 		<jar href="lib/javamail-1.4.3.jar"/>
+		<jar href="ext/example.jar"/>
     </resources>
     <application-desc main-class="com.magicpwd.MagicPwd">
         <argument>web</argument>
