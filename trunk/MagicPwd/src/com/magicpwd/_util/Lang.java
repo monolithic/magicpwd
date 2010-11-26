@@ -40,7 +40,7 @@ public class Lang
 
         if (UserMdl.getRunMode() != ConsEnv.RUN_MODE_WEB)
         {
-            java.io.FileInputStream fis = null;
+            java.io.InputStream stream = null;
             try
             {
                 String name = '_' + userMdl.getLang();
@@ -52,13 +52,14 @@ public class Lang
                     {
                         break;
                     }
+                    file = null;
                     name = name.substring(0, name.lastIndexOf("_"));
                 }
 
                 if (file != null)
                 {
-                    fis = new java.io.FileInputStream(file);
-                    lang.load(fis);
+                    stream = new java.io.FileInputStream(file);
+                    lang.load(stream);
                 }
             }
             catch (Exception exp)
@@ -67,9 +68,10 @@ public class Lang
             }
             finally
             {
-                Bean.closeStream(fis);
+                Bean.closeStream(stream);
             }
         }
+
         tips = lang.getProperty(LangRes.P30FA208);
         if (tips == null)
         {
