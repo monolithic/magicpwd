@@ -23,18 +23,8 @@
 		<jar href="lib/jaxen-1.1.1.jar"/>
 		<jar href="lib/dom4j-1.6.1.jar"/>
 		<jar href="lib/javamail-1.4.3.jar"/>
-		<jar href="lib/google-collect-1.0.jar"/>
-		<jar href="lib/gdata-core-1.0.jar"/>
-		<jar href="lib/gdata-media-1.0.jar"/>
-		<jar href="lib/gdata-client-1.0.jar"/>
-		<jar href="lib/gdata-client-meta-1.0.jar"/>
-		<jar href="lib/gdata-docs-3.0.jar"/>
-		<jar href="lib/gdata-docs-meta-3.0.jar"/>
-		<jar href="lib/gdata-spreadsheet-3.0.jar"/>
-		<jar href="lib/gdata-spreadsheet-meta-3.0.jar"/>
-		<jar href="lib/looks-2.3.1.jar"/>
     </resources>
     <application-desc main-class="com.magicpwd.MagicPwd">
-        <argument>webstart</argument>
+        <argument>web</argument>
     </application-desc>
 </jnlp>
