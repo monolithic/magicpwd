@@ -118,7 +118,16 @@ public class MailMdl extends javax.swing.table.AbstractTableModel
 
     public void append(Reader mailInf)
     {
-        messages.add(mailInf);
+        int i = 0;
+        for (Reader tmp : messages)
+        {
+            if (mailInf.getSentDate().after(tmp.getSentDate()))
+            {
+                break;
+            }
+            i += 1;
+        }
+        messages.add(i, mailInf);
         fireTableDataChanged();
     }
 }
