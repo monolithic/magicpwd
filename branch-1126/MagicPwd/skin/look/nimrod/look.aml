@@ -1,0 +1,5 @@
+<magicpwd>
+    <look group="NimROD" type="user">
+        <item text="NimROD" tips="NimROD" class="com.nilo.plaf.nimrod.NimRODLookAndFeel" decorated="true" />
+    </look>
+</magicpwd>

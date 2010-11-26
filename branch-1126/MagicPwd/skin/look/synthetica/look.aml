@@ -1,0 +1,17 @@
+<magicpwd>
+    <look group="Synthetica" type="user">
+        <item text="Synthetica Standard" tips="Synthetica Standard" class="de.javasoft.plaf.synthetica.SyntheticaStandardLookAndFeel" decorated="true" />
+		<item text="Synthetica Black Moon" tips="Synthetica Black Moon" class="de.javasoft.plaf.synthetica.SyntheticaBlackMoonLookAndFeel" decorated="true" />
+		<item text="Synthetica Black Star" tips="Synthetica Black Star" class="de.javasoft.plaf.synthetica.SyntheticaBlackStarLookAndFeel" decorated="true" />
+		<item text="Synthetica Blue Ice" tips="Synthetica Blue Ice" class="de.javasoft.plaf.synthetica.SyntheticaBlueIceLookAndFeel" decorated="true" />
+		<item text="Synthetica Blue Moon" tips="Synthetica Blue Moon" class="de.javasoft.plaf.synthetica.SyntheticaBlueMoonLookAndFeel" decorated="true" />
+		<item text="Synthetica Blue Steel" tips="Synthetica Blue Steel" class="de.javasoft.plaf.synthetica.SyntheticaBlueSteelLookAndFeel" decorated="true" />
+		<item text="Synthetica Green Dream" tips="Synthetica Green Dream" class="de.javasoft.plaf.synthetica.SyntheticaGreenDreamLookAndFeel" decorated="true" />
+		<item text="Synthetica Mauve Metallic" tips="Synthetica Mauve Metallic" class="de.javasoft.plaf.synthetica.SyntheticaMauveMetallicLookAndFeel" decorated="true" />
+		<item text="Synthetica Orange Metallic" tips="Synthetica Orange Metallic" class="de.javasoft.plaf.synthetica.SyntheticaOrangeMetallicLookAndFeel" decorated="true" />
+		<item text="Synthetica Silver Moon" tips="Synthetica Silver Moon" class="de.javasoft.plaf.synthetica.SyntheticaSilverMoonLookAndFeel" decorated="true" />
+        <item text="Synthetica Simple 2D" tips="Synthetica Simple 2D" class="de.javasoft.plaf.synthetica.SyntheticaSimple2DLookAndFeel" decorated="true" />
+		<item text="Synthetica Sky Metallic" tips="Synthetica Sky Metallic" class="de.javasoft.plaf.synthetica.SyntheticaSkyMetallicLookAndFeel" decorated="true" />
+		<item text="Synthetica White Vision" tips="Synthetica White Vision" class="de.javasoft.plaf.synthetica.SyntheticaWhiteVisionLookAndFeel" decorated="true" />
+    </look>
+</magicpwd>

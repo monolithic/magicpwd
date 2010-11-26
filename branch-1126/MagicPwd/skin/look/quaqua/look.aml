@@ -1,0 +1,12 @@
+<magicpwd>
+    <look group="Quaqua" type="java/user">
+        <item text="Quaqua" tips="Quaqua" class="ch.randelshofer.quaqua.QuaquaLookAndFeel" decorated="true" />
+        <item text="Quaqua Basic" tips="Quaqua Basic" class="ch.randelshofer.quaqua.BasicQuaquaLookAndFeel" decorated="true" />
+        <item text="Jaguar" tips="Jaguar" class="ch.randelshofer.quaqua.jaguar.Quaqua15JaguarLookAndFeel" decorated="true" />
+        <item text="Leopard" tips="Leopard" class="ch.randelshofer.quaqua.leopard.Quaqua15LeopardLookAndFeel" decorated="true" />
+        <item text="Leopard Cross Platform" tips="Leopard Cross Platform" class="ch.randelshofer.quaqua.leopard.Quaqua15LeopardCrossPlatformLookAndFeel" decorated="true" />
+        <item text="Snow Leopard" tips="Snow Leopard" class="ch.randelshofer.quaqua.snow_leopard.Quaqua16SnowLeopardLookAndFeel" decorated="true" />
+        <item text="Tiger" tips="Tiger" class="ch.randelshofer.quaqua.tiger.Quaqua15TigerLookAndFeel" decorated="true" />
+        <item text="Tiger Cross Platform" tips="Tiger Cross Platform" class="ch.randelshofer.quaqua.tiger.Quaqua15TigerCrossPlatformLookAndFeel" decorated="true" />
+    </look>
+</magicpwd>

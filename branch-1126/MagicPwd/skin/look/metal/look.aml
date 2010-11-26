@@ -1,0 +1,5 @@
+<magicpwd>
+    <look type="java">
+        <item text="Metal" tips="Metal" class="javax.swing.plaf.metal.MetalLookAndFeel" decorated="true" />
+    </look>
+</magicpwd>

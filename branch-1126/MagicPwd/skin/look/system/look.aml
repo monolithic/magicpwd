@@ -1,0 +1,5 @@
+<magicpwd>
+    <look type="java">
+        <item text="System" tips="System" class="system" decorated="false" />
+    </look>
+</magicpwd>

@@ -1,0 +1,25 @@
+<magicpwd>
+    <look group="Substance" type="user">
+        <item text="Business" tips="Business" class="org.pushingpixels.substance.api.skin.SubstanceBusinessLookAndFeel" decorated="false"/>
+        <item text="Business Black Steel" tips="Business Black Steel" class="org.pushingpixels.substance.api.skin.SubstanceBusinessBlackSteelLookAndFeel" decorated="false"/>
+        <item text="Business Blue Steel" tips="Business Blue Steel" class="org.pushingpixels.substance.api.skin.SubstanceBusinessBlueSteelLookAndFeel" decorated="false"/>
+        <item text="Creme" tips="Creme" class="org.pushingpixels.substance.api.skin.SubstanceCremeLookAndFeel" decorated="false"/>
+        <item text="Creme Coffee" tips="Creme Coffee" class="org.pushingpixels.substance.api.skin.SubstanceCremeCoffeeLookAndFeel" decorated="false"/>
+        <item text="Dust" tips="Dust" class="org.pushingpixels.substance.api.skin.SubstanceDustLookAndFeel" decorated="false"/>
+        <item text="Dust Coffee" tips="Dust Coffee" class="org.pushingpixels.substance.api.skin.SubstanceDustCoffeeLookAndFeel" decorated="false"/>
+        <item text="Gemini" tips="Gemini" class="org.pushingpixels.substance.api.skin.SubstanceGeminiLookAndFeel" decorated="false"/>
+        <item text="Moderate" tips="Moderate" class="org.pushingpixels.substance.api.skin.SubstanceModerateLookAndFeel" decorated="false"/>
+        <item text="Nebula" tips="Nebula" class="org.pushingpixels.substance.api.skin.SubstanceNebulaLookAndFeel" decorated="false"/>
+        <item text="Nebula Brick Wall" tips="Nebula Brick Wall" class="org.pushingpixels.substance.api.skin.SubstanceNebulaBrickWallLookAndFeel" decorated="false"/>
+        <item text="Office Silver 2007" tips="Office Silver 2007" class="org.pushingpixels.substance.api.skin.SubstanceOfficeSilver2007LookAndFeel" decorated="false"/>
+        <item text="Sahara" tips="Sahara" class="org.pushingpixels.substance.api.skin.SubstanceSaharaLookAndFeel" decorated="false"/>
+        <item text="Office Blue 2007" tips="Office Blue 2007" class="org.pushingpixels.substance.api.skin.SubstanceOfficeBlue2007LookAndFeel" decorated="false"/>
+        <item text="Magellan" tips="Magellan" class="org.pushingpixels.substance.api.skin.SubstanceMagellanLookAndFeel" decorated="false"/>
+        <item text="Challenger Deep" tips="Challenger Deep" class="org.pushingpixels.substance.api.skin.SubstanceChallengerDeepLookAndFeel" decorated="false"/>
+        <item text="Emerald Dusk" tips="Emerald Dusk" class="org.pushingpixels.substance.api.skin.SubstanceEmeraldDuskLookAndFeel" decorated="false"/>
+        <item text="Magma" tips="Magma" class="org.pushingpixels.substance.api.skin.SubstanceMagmaLookAndFeel" decorated="false"/>
+        <item text="Raven" tips="Raven" class="org.pushingpixels.substance.api.skin.SubstanceRavenLookAndFeel" decorated="false"/>
+        <item text="Graphite Aqua" tips="Graphite Aqua" class="org.pushingpixels.substance.api.skin.SubstanceGraphiteAquaLookAndFeel" decorated="false"/>
+        <item text="Twilight" tips="Twilight" class="org.pushingpixels.substance.api.skin.SubstanceTwilightLookAndFeel" decorated="false"/>
+    </look>
+</magicpwd>
