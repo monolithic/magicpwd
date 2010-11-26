@@ -9,6 +9,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Logs;
+import java.nio.charset.Charset;
 
 /**
  *
@@ -682,5 +683,20 @@ public class UserMdl
     public boolean hasSkey()
     {
         return safeKey.hasSkey();
+    }
+
+    /**
+     * 默认字符编码
+     * @return
+     */
+    public String getMailDcs()
+    {
+        String dcs = userCfg.getProperty(ConsCfg.CFG_MAIL_DCS);
+        if (!Char.isValidate(dcs))
+        {
+            dcs = Charset.defaultCharset().displayName();
+            userCfg.setProperty(ConsCfg.CFG_MAIL_DCS, dcs);
+        }
+        return dcs;
     }
 }

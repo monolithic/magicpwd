@@ -122,7 +122,7 @@ public class CloudBackupAction extends AMpwdAction
                 Lang.showMesg(mainPtn, null, "查找不到对应的服务信息，如有疑问请与作者联系！");
                 return;
             }
-            Sender sender = new Sender(connect);
+            Sender sender = new Sender(mainPtn.getUserMdl(), connect);
 
             sender.setFrom(data[0]);
             sender.setTo(data[0]);

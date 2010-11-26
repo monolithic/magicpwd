@@ -6,6 +6,8 @@ package com.magicpwd._mail;
 
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Char;
+import com.magicpwd._util.Logs;
+import com.magicpwd.m.UserMdl;
 import javax.mail.Message;
 import javax.mail.Multipart;
 import javax.mail.Part;
@@ -24,9 +26,9 @@ public class Reader extends Mailer
     private boolean needReply;//是否需要回复
     private String attachmentPath;//附件下载目录
 
-    public Reader(Connect connect)
+    public Reader(UserMdl userMdl, Connect connect)
     {
-        super(connect);
+        super(userMdl, connect);
         attachmentPath = ConsEnv.DIR_MAIL;
     }
 
@@ -37,11 +39,53 @@ public class Reader extends Mailer
             return false;
         }
 
+        String[] headers = message.getHeader("charset");
+        if (headers != null && headers.length > 0)
+        {
+            setCharset(headers[0]);
+        }
+
+        String contentType;
+        headers = message.getHeader("content-type");
+        if (headers != null && headers.length > 0)
+        {
+            contentType = headers[0];
+            java.util.regex.Matcher m = java.util.regex.Pattern.compile("charset\\s*=[\\s'\"]?[\\w-]+[\\s'\"]?").matcher(contentType);
+            if (m.find())
+            {
+                setCharset(m.group().replaceAll("charset\\s*=[\\s'\"]?", "").replaceAll("[\\s'\"]?", ""));
+            }
+        }
         setFrom(decodeAddress(message.getFrom()));
-        setTo(decodeAddress(message.getRecipients(Message.RecipientType.TO)));
-        setCc(decodeAddress(message.getRecipients(Message.RecipientType.CC)));
-        setBcc(decodeAddress(message.getRecipients(Message.RecipientType.BCC)));
-        setSubject(decodeMessage(message.getSubject()));
+        try
+        {
+            setTo(decodeAddress(message.getRecipients(Message.RecipientType.TO)));
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+        try
+        {
+            setCc(decodeAddress(message.getRecipients(Message.RecipientType.CC)));
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+        try
+        {
+            setBcc(decodeAddress(message.getRecipients(Message.RecipientType.BCC)));
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+        headers = message.getHeader("subject");
+        if (headers != null && headers.length > 0)
+        {
+            setSubject(decodeMessage(headers[0]));
+        }
         setSentDate(message.getSentDate());
         needReply = message.getHeader("Disposition-Notification-To") != null;
         Object obj = message.getContent();
@@ -52,6 +96,10 @@ public class Reader extends Mailer
             {
                 decodePart(part.getBodyPart(i));
             }
+        }
+        else if (obj instanceof String)
+        {
+            appendContent(decodeContext((String) obj));
         }
 
         if (message instanceof MimeMessage)

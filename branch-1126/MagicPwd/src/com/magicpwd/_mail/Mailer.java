@@ -6,9 +6,10 @@ package com.magicpwd._mail;
 import com.magicpwd._comn.S1S1;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
-import java.io.UnsupportedEncodingException;
+import com.magicpwd.m.UserMdl;
 
 import javax.mail.Address;
 import javax.mail.Flags.Flag;
@@ -25,6 +26,7 @@ import javax.mail.internet.MimeUtility;
 public class Mailer
 {
 
+    private UserMdl userMdl;
     private Connect connect;
     private String from;//发送者
     private String to;//接收者
@@ -33,11 +35,13 @@ public class Mailer
     private String subject;//标题
     private java.util.Date sentDate;//日期
     private StringBuffer content = new StringBuffer();//内容
+    private String charset;
     private String contentType = MailEnv.TEXT_HTML + ';' + MailEnv.CHARSET + "=UTF-8";
     private java.util.ArrayList<S1S1> attachmentList = new java.util.ArrayList<S1S1>();//附件
 
-    public Mailer(Connect connect)
+    public Mailer(UserMdl userMdl, Connect connect)
     {
+        this.userMdl = userMdl;
         this.connect = connect;
     }
 
@@ -83,7 +87,7 @@ public class Mailer
         }
         folder.close(true);
 
-        Reader reader = new Reader(connect);
+        Reader reader = new Reader(userMdl, connect);
         //reader.setAttachmentPath(ConsEnv.DIR_BAK);
         if (reader.read(message))
         {
@@ -100,7 +104,7 @@ public class Mailer
         return false;
     }
 
-    protected String decodeAddress(Address[] addresses) throws UnsupportedEncodingException
+    protected String decodeAddress(Address[] addresses) throws Exception
     {
         if (addresses == null || addresses.length < 1)
         {
@@ -114,7 +118,7 @@ public class Mailer
                 InternetAddress temp = (InternetAddress) addr;
                 String personal = temp.getPersonal();
                 String address = temp.getAddress();
-                buffer.append(personal != null ? MimeUtility.decodeText(personal) : "");
+                buffer.append(personal != null ? decodeAddress(personal) : "");
                 buffer.append('<').append(address != null ? MimeUtility.decodeText(address) : "").append(">,");
                 continue;
             }
@@ -123,7 +127,16 @@ public class Mailer
         return buffer.toString();
     }
 
-    protected static String decodeMessage(String text) throws Exception
+    protected String decodeAddress(String text) throws Exception
+    {
+        if (text == null)
+        {
+            return null;
+        }
+        return MimeUtility.decodeText(text);
+    }
+
+    protected String decodeMessage(String text) throws Exception
     {
         if (text == null)
         {
@@ -135,7 +148,26 @@ public class Mailer
             return MimeUtility.decodeText(text);
         }
 
-        return text;//new String(text.getBytes("ISO8859_1"));
+        return Char.decode(text, MailEnv.CHARSET_DEF, userMdl.getMailDcs());
+    }
+
+    protected String decodeContext(String text) throws Exception
+    {
+        if (text == null)
+        {
+            return null;
+        }
+        if (text.startsWith("=?") && text.endsWith("?="))
+        {
+            //return MimeUtility.decodeWord(text);
+            return MimeUtility.decodeText(text);
+        }
+
+        if (getCharset().equalsIgnoreCase(userMdl.getMailDcs()))
+        {
+            return text;
+        }
+        return Char.decode(text, getCharset(), userMdl.getMailDcs());
     }
 
     /**
@@ -285,5 +317,25 @@ public class Mailer
     public void setContentType(String contentType)
     {
         this.contentType = contentType;
+    }
+
+    /**
+     * @return the charset
+     */
+    public String getCharset()
+    {
+        if (!Char.isValidate(charset))
+        {
+            charset = MailEnv.CHARSET_DEF;
+        }
+        return charset;
+    }
+
+    /**
+     * @param charset the charset to set
+     */
+    public void setCharset(String charset)
+    {
+        this.charset = charset;
     }
 }

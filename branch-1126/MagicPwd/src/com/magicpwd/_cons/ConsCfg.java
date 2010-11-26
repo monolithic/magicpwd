@@ -160,6 +160,16 @@ public interface ConsCfg
      */
     String CFG_DATA_PATH = CFG_PRE + ".data.path";
     /**
+     * 邮件配置
+     */
+    String CFG_MAIL = CFG_PRE + ".mail";
+    /**
+     * 系统默认字符编码
+     */
+    String CFG_MAIL_DCS = CFG_MAIL + ".dcs";
+    String CFG_MAIL_SCS = CFG_MAIL + ".scs";
+    String CFG_MAIL_TCS = CFG_MAIL + ".tcs";
+    /**
      * 界面默认等等时间
      */
     String CFG_STAY_TIME = CFG_PRE + ".safe.time";

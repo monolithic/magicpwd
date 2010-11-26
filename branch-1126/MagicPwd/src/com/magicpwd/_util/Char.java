@@ -30,6 +30,22 @@ public class Char
         return src;
     }
 
+    public static String decode(String txt, String sCode, String eCode)
+    {
+        if (txt != null)
+        {
+            try
+            {
+                return new String(txt.getBytes(sCode), eCode);
+            }
+            catch (Exception ex)
+            {
+                Logs.exception(ex);
+            }
+        }
+        return txt;
+    }
+
     public static String lPad(String s, int length, char c)
     {
         if (length <= s.length())

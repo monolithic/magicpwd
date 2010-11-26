@@ -5,6 +5,7 @@
 package com.magicpwd._mail;
 
 import com.magicpwd._comn.S1S1;
+import com.magicpwd.m.UserMdl;
 import javax.activation.DataHandler;
 import javax.activation.FileDataSource;
 import javax.mail.BodyPart;
@@ -27,9 +28,9 @@ public class Sender extends Mailer
 
     private java.util.HashMap<String, String> headers;
 
-    public Sender(Connect connect)
+    public Sender(UserMdl userMdl, Connect connect)
     {
-        super(connect);
+        super(userMdl, connect);
         headers = new java.util.HashMap<String, String>();
     }
 

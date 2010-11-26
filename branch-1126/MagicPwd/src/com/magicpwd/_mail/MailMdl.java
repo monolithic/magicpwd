@@ -88,7 +88,10 @@ public class MailMdl extends javax.swing.table.AbstractTableModel
                 label.setText(message.getSubject());
                 break;
             case 3:
-                label.setText(format.format(message.getSentDate()));
+                if (message.getSentDate() != null)
+                {
+                    label.setText(format.format(message.getSentDate()));
+                }
                 break;
             default:
                 break;
@@ -118,16 +121,7 @@ public class MailMdl extends javax.swing.table.AbstractTableModel
 
     public void append(Reader mailInf)
     {
-        int i = 0;
-        for (Reader tmp : messages)
-        {
-            if (mailInf.getSentDate().after(tmp.getSentDate()))
-            {
-                break;
-            }
-            i += 1;
-        }
-        messages.add(i, mailInf);
+        messages.add(0, mailInf);
         fireTableDataChanged();
     }
 }

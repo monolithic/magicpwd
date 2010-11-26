@@ -89,7 +89,7 @@ public class CloudResumeAction extends AMpwdAction
                 Lang.showMesg(mainPtn, null, "查找不到对应的服务信息，如有疑问请与作者联系！");
                 return;
             }
-            Reader mail = new Reader(connect);
+            Reader mail = new Reader(mainPtn.getUserMdl(), connect);
 
             // 读取备份文件
             javax.mail.Store store = connect.getStore();

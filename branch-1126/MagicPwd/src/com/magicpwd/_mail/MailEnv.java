@@ -16,4 +16,5 @@ public interface MailEnv
     String MULTIPART = "multipart/*";
     String MESSAGE = "message/rfc822";
     String CHARSET = "charset";
+    String CHARSET_DEF = "ISO-8859-1";
 }

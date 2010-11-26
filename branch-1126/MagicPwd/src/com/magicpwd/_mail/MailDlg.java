@@ -355,7 +355,7 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
                 for (int i = 1, j = msgs.length; i <= j; i += 1)
                 {
                     showNotice("正处理第" + i + "封邮件……");
-                    mail = new Reader(connect);
+                    mail = new Reader(userMdl, connect);
                     mail.read(msgs[i - 1]);
                     tableMode.append(mail);
                 }
@@ -371,6 +371,7 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
         catch (Exception exp)
         {
             Logs.exception(exp);
+            showNotice("邮件列表读取异常:(");
             return false;
         }
     }
