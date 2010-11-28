@@ -85,6 +85,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
             cm_TpltList.addElement("日期");
             cm_TpltList.addElement("附注");
             cm_TpltList.addElement("附件");
+            cm_TpltList.addElement("数值");
             cb_TpltKind.setModel(cm_TpltList);
         }
     }
