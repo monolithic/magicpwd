@@ -201,7 +201,7 @@ public abstract class AFrame extends javax.swing.JFrame
      */
     public void hideFrame()
     {
-        setExtendedState(ICONIFIED);
+//        setExtendedState(ICONIFIED);
         setVisible(false);
         trayPtn.showTips(Lang.getLang(LangRes.P30F9A01, "友情提示"), Lang.getLang(LangRes.P30F7A43, "魔方密码仍在运行中，您可以通过双击此处显示主窗口！"));
         endSave();
@@ -233,18 +233,8 @@ public abstract class AFrame extends javax.swing.JFrame
         if (e.getID() == java.awt.event.WindowEvent.WINDOW_CLOSING)
         {
             hideFrame();
-//            if (safeMdl.isModified() && javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(this, LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
-//            {
-//                return;
-//            }
-//            setVisible(false);
-//            trayPtn.endSave();
             return;
         }
-//        else if (e.getID() == java.awt.event.WindowEvent.WINDOW_ICONIFIED)
-//        {
-//            hideFrame();
-//        }
         super.processWindowEvent(e);
     }
 
