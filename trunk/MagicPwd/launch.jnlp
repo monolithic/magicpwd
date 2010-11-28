@@ -17,7 +17,7 @@
     </security>
     <resources>
         <j2se version="1.6+"/>
-        <jar eager="true" href="MagicPwd.jar" main="true"/>
+        <jar eager="true" href="magicpwd.jar" main="true"/>
 
 		<jar href="lib/hsqldb-1.8.0.jar"/>
 		<jar href="lib/jaxen-1.1.1.jar"/>
