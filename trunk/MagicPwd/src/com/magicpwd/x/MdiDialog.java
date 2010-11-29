@@ -110,8 +110,8 @@ public class MdiDialog extends javax.swing.JDialog
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this.getContentPane());
         this.getContentPane().setLayout(layout);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg1.addComponent(pl_CardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-        hpg1.addComponent(lb_HeadPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE);
+        hpg1.addComponent(pl_CardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE);
+        hpg1.addComponent(lb_HeadPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
         hsg1.addComponent(sp_PropList, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -128,12 +128,12 @@ public class MdiDialog extends javax.swing.JDialog
         layout.setHorizontalGroup(layout.createSequentialGroup().addContainerGap().addGroup(hpg2).addContainerGap());
 
         javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
-        vsg1.addComponent(lb_HeadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, Short.MAX_VALUE);
+        vsg1.addComponent(lb_HeadPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE);
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        vsg1.addComponent(pl_CardPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-        javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
+        vsg1.addComponent(pl_CardPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         vpg1.addComponent(sp_PropList, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE);
-        vpg1.addGroup(javax.swing.GroupLayout.Alignment.LEADING, vsg1);
+        vpg1.addGroup(vsg1);
         javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg2.addComponent(bt_Discard);
         vpg2.addComponent(bt_Confirm);
@@ -146,8 +146,8 @@ public class MdiDialog extends javax.swing.JDialog
         vsg2.addContainerGap();
         layout.setVerticalGroup(vsg2);
 
-        this.setIconImage(Bean.getLogo(16));
-        this.pack();
+        setIconImage(Bean.getLogo(16));
+        setResizable(false);
     }
 
     public void initLang()
@@ -218,6 +218,9 @@ public class MdiDialog extends javax.swing.JDialog
         ip.initLang();
         pl_CardPanel.add(ConsEnv.PROP_INFO, ip);
         hm_PropList.put(ConsEnv.PROP_INFO, ip);
+
+        pack();
+        Bean.centerForm(this, mainPtn);
     }
 
     /**
