@@ -44,8 +44,8 @@ public class WCubeBox extends javax.swing.JPanel implements Runnable
     private Graphics graphics;
     private Image backImg;
     private Image cubeImg;
-    private int width = 250;
-    private int height = 250;
+    private int width = 100;
+    private int height = 100;
     private int J;
     private int K;
     private int L;
@@ -132,7 +132,7 @@ public class WCubeBox extends javax.swing.JPanel implements Runnable
         this.spotLight = false;
         this.showLightButton = false;
         this.sleepTime = 5;
-        this.angleStep = 8.0;
+        this.angleStep = 1.0;
         this.mouseResponse = 6.0;
         this.zoomSpeed = 5.0;
 
@@ -314,13 +314,13 @@ public class WCubeBox extends javax.swing.JPanel implements Runnable
                     D(-this.Ë / d2, this.Ê / d2, 0.0D, this.zoomSpeed, 1.0D);
                     A();
                     this.å = true;
-                    repaint();
+                    update(this.getGraphics());
                     this.å = false;
                 }
                 D(-this.Ë / d2, this.Ê / d2, 0.0D, d1 - (d3 * this.zoomSpeed), 1.0D);
                 A();
                 this.å = true;
-                repaint();
+                update(getGraphics());
                 this.å = false;
                 double d4 = Math.acos(this.Í);
                 if (this.Î > 0.0D)
@@ -334,7 +334,7 @@ public class WCubeBox extends javax.swing.JPanel implements Runnable
                     D(0.0D, 0.0D, -1.0D, -d4 / i3, d5);
                     A();
                     this.å = true;
-                    repaint();
+                    update(getGraphics());
                     this.å = false;
                 }
                 while (!(this.ä))
@@ -354,7 +354,7 @@ public class WCubeBox extends javax.swing.JPanel implements Runnable
                     D(0.0D, 0.0D, -1.0D, d4 / i3, 1.0D / d5);
                     A();
                     this.å = true;
-                    repaint();
+                    update(getGraphics());
                     this.å = false;
                 }
                 this.v = 750.0D;
@@ -364,13 +364,13 @@ public class WCubeBox extends javax.swing.JPanel implements Runnable
                     D(-this.Ë / d2, this.Ê / d2, 0.0D, -this.zoomSpeed, 1.0D);
                     A();
                     this.å = true;
-                    repaint();
+                    update(getGraphics());
                     this.å = false;
                 }
                 D(-this.Ë / d2, this.Ê / d2, 0.0D, -d1 + d3 * this.zoomSpeed, 1.0D);
                 A();
                 this.å = true;
-                repaint();
+                update(getGraphics());
                 this.å = false;
                 this.n = (this.r = this.v = 0.0D);
                 this.Ä = this.w;
@@ -403,7 +403,7 @@ public class WCubeBox extends javax.swing.JPanel implements Runnable
             F();
             A();
             this.å = true;
-            repaint();
+            update(getGraphics());
             this.å = false;
             try
             {
@@ -1208,6 +1208,7 @@ public class WCubeBox extends javax.swing.JPanel implements Runnable
     private void _mouseEntered(MouseEvent e)
     {
         this.mouseEntered = true;
+        System.out.println("OK");
     }
 
     private void _mouseExited(MouseEvent e)
@@ -1218,6 +1219,7 @@ public class WCubeBox extends javax.swing.JPanel implements Runnable
 
     private void _mouseMoved(MouseEvent e)
     {
+        System.out.println("OK@");
         this.mouseEntered = true;
         Point point = e.getPoint();
         this.L = point.x;
@@ -1246,25 +1248,32 @@ public class WCubeBox extends javax.swing.JPanel implements Runnable
             localMediaTracker.waitForID(0);
             return;
         }
-        catch (InterruptedException localInterruptedException)
+        catch (InterruptedException exp)
         {
+            Logs.exception(exp);
         }
     }
 
     @Override
-    protected synchronized void paintComponent(Graphics g)
+    public synchronized void paint(Graphics g)
     {
-        if ((this.backImg == null) || (!(this.å)))
+        if (this.backImg != null && this.å)
         {
-            return;
+            g.drawImage(this.backImg, 0, 0, this);
         }
 //        super.paintComponent(paramGraphics);
-        g.drawImage(this.backImg, 0, 0, this);
+//        g.drawImage(this.backImg, 0, 0, this);
+    }
+
+    @Override
+    public void update(Graphics g)
+    {
+        paint(g);
     }
 
     public void start()
     {
-        running = true;
+//        running = true;
         new Thread(this).start();
     }
 
