@@ -4,13 +4,12 @@
 package com.magicpwd._prop;
 
 import com.magicpwd.__i.IPropBean;
-import javax.swing.JPanel;
 
 /**
  * @author Amon
  * 
  */
-public class ImptProp extends JPanel implements IPropBean
+public class ImptProp extends javax.swing.JPanel implements IPropBean
 {
 
     public ImptProp()
@@ -38,7 +37,7 @@ public class ImptProp extends JPanel implements IPropBean
     }
 
     @Override
-    public JPanel getPanel()
+    public javax.swing.JPanel getPanel()
     {
         return this;
     }
