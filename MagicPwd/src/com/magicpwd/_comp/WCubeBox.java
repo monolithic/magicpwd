@@ -16,36 +16,36 @@
  */
 package com.magicpwd._comp;
 
-import java.applet.Applet;
-import java.applet.AppletContext;
+import com.magicpwd._util.Logs;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Event;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.MediaTracker;
+import java.awt.Point;
 import java.awt.Polygon;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.image.BufferedImage;
 import java.awt.image.MemoryImageSource;
 import java.awt.image.PixelGrabber;
 import java.net.MalformedURLException;
 import java.net.URL;
+import javax.imageio.ImageIO;
 
 /**
  *
  * @author Amon
  */
-public class WCubeBox extends Applet implements Runnable
+public class WCubeBox extends javax.swing.JPanel implements Runnable
 {
-    private AppletContext A;
-    private Graphics B;
-    private Graphics C;
-    private Thread thread;
-    private Image bufImg;
+
+    private Graphics graphics;
+    private Image backImg;
     private Image cubeImg;
-    private Image G;
-    private String target;
-    private Dimension dimension;
+    private int width = 250;
+    private int height = 250;
     private int J;
     private int K;
     private int L;
@@ -54,7 +54,6 @@ public class WCubeBox extends Applet implements Runnable
     private long O;
     private long P;
     private int[] Q;
-    private int[] R;
     private int[] S;
     private int[] T;
     private int[] U;
@@ -62,18 +61,16 @@ public class WCubeBox extends Applet implements Runnable
     private int[] W;
     private int[] X;
     private int[] Y =
-    { 3, 2, 1, 0, -1, 4, 5, 6, 7, -1, 0, 1, 5, 4, -1, 2, 3, 7, 6, -1, 1, 2, 6, 5, -1, 0, 4, 7, 3, -1, -1 };
+    {
+        3, 2, 1, 0, -1, 4, 5, 6, 7, -1, 0, 1, 5, 4, -1, 2, 3, 7, 6, -1, 1, 2, 6, 5, -1, 0, 4, 7, 3, -1, -1
+    };
     private double[] Z;
     private double[] a;
     private int sleepTime;
-    private int c = 6;
     private int d;
     private int e;
     private int f;
     private int g;
-    private int h;
-    private int i;
-    private int j;
     private double k;
     private double l;
     private double m;
@@ -88,9 +85,6 @@ public class WCubeBox extends Applet implements Runnable
     private double v;
     private double w;
     private double x;
-    private double y;
-    private double z;
-    private double À;
     private double mouseResponse;
     private double zoomSpeed;
     private double angleStep;
@@ -102,7 +96,6 @@ public class WCubeBox extends Applet implements Runnable
     private double É;
     private double Ê;
     private double Ë;
-    private double Ì;
     private double Í;
     private double Î;
     private double Ï;
@@ -118,108 +111,172 @@ public class WCubeBox extends Applet implements Runnable
     private int Ú;
     private int Û;
     private int Ü;
-    private int Ý;
     private int[] Þ;
     private int[] ß;
-    private boolean showLightButton = false;
-    private boolean spotLight = false;
-    private boolean â = false;
-    private boolean ã = false;
-    private boolean ä = false;
-    private boolean å = false;
-    private boolean æ = false;
-    private boolean ç = false;
-    private boolean è = false;
-    private boolean é = false;
+    private boolean showLightButton;
+    private boolean spotLight;
+    private boolean â;
+    private boolean ä;
+    private boolean å;
+    private boolean mouseEntered;
+    private boolean ç;
+    private boolean è;
+    private boolean é;
+    private boolean running;
 
-    @Override
-    public void init()
+    public void initData()
     {
-        super.init();
-        super.setLayout(null);
-        readParam();
-        this.dimension = super.getPreferredSize();
-        this.size = ((this.dimension.width < this.dimension.height) ? this.dimension.width : this.dimension.height);
+        this.backGround = 0xFF0099;
+        this.shadowColor = 0xCC99FF;
+        this.textColor = 0x000000;
+        this.spotLight = false;
+        this.showLightButton = false;
+        this.sleepTime = 5;
+        this.angleStep = 8.0;
+        this.mouseResponse = 6.0;
+        this.zoomSpeed = 5.0;
+
+        this.size = this.width < this.height ? this.width : this.height;
         this.cubeLen = (this.size / 2);
-        double d1 = this.cubeLen;
-        double[] arrayOfDouble =
-        { -d1, -d1, -d1, d1, -d1, -d1, d1, d1, -d1, -d1, d1, -d1, -d1, -d1, d1, d1, -d1, d1, d1, d1, d1, -d1, d1, d1 };
-        this.a = arrayOfDouble;
-        this.J = (this.dimension.width / 2);
-        this.K = (this.dimension.height / 2);
-        this.y = 1.0D;
-        this.z = -1.0D;
-        this.S = new int[this.dimension.height];
-        this.T = new int[this.dimension.height];
-        this.Q = new int[this.dimension.width * this.dimension.height];
-        this.W = new int[this.dimension.width * this.dimension.height];
-        this.X = new int[this.dimension.width * this.dimension.height];
-        this.ß = new int[this.dimension.width];
-        for (int i1 = 0; i1 < this.dimension.width; ++i1)
+        this.a = new double[]
+                {
+                    -cubeLen, -cubeLen, -cubeLen, cubeLen, -cubeLen, -cubeLen, cubeLen, cubeLen,
+                    -cubeLen, -cubeLen, cubeLen, -cubeLen, -cubeLen, -cubeLen, cubeLen, cubeLen,
+                    -cubeLen, cubeLen, cubeLen, cubeLen, cubeLen, -cubeLen, cubeLen, cubeLen
+                };
+        this.J = (this.width / 2);
+        this.K = (this.height / 2);
+        this.S = new int[this.height];
+        this.T = new int[this.height];
+        this.Q = new int[this.width * this.height];
+        this.W = new int[this.width * this.height];
+        this.X = new int[this.width * this.height];
+        this.ß = new int[this.width];
+        for (int i1 = 0; i1 < this.width; ++i1)
+        {
             this.ß[i1] = (-16777216 + this.shadowColor);
-        this.V = new int[this.dimension.height];
-        for (int i2 = 0; i2 < this.dimension.height; ++i2)
+        }
+        this.V = new int[this.height];
+        for (int i2 = 0; i2 < this.height; ++i2)
+        {
             this.V[i2] = 0;
-        this.B = super.getGraphics();
+        }
         this.d = 512;
         this.e = 900;
-        this.Ý = 6;
         this.g = 30;
         this.f = (this.a.length / 3);
         this.Z = new double[this.a.length];
-        this.G = super.createImage(this.dimension.width, this.dimension.height);
-        this.C = this.G.getGraphics();
-        this.C.setColor(new Color(this.backGround));
-        this.C.fillRect(0, 0, this.dimension.width, this.dimension.height);
+        backImg = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_ARGB);
+        this.graphics = backImg.getGraphics();
+        this.graphics.setColor(new Color(this.backGround));
+        this.graphics.fillRect(0, 0, this.width, this.height);
         if (this.showLightButton)
         {
-            this.cubeImg = super.getImage(super.getDocumentBase(), "on.gif");
             C(this.cubeImg);
-            this.C.drawImage(this.cubeImg, this.dimension.width - 18, this.dimension.height - 32, this);
+            this.graphics.drawImage(this.cubeImg, this.width - 18, this.height - 32, this);
         }
-        PixelGrabber localPixelGrabber = new PixelGrabber(this.G, 0, 0, this.dimension.width, this.dimension.height, this.W, 0, this.dimension.width);
+        PixelGrabber localPixelGrabber = new PixelGrabber(backImg, 0, 0, this.width, this.height, this.W, 0, this.width);
         try
         {
             localPixelGrabber.grabPixels();
-        } catch (InterruptedException localInterruptedException1)
+        }
+        catch (InterruptedException exp)
         {
+            Logs.exception(exp);
         }
         if (this.showLightButton)
         {
-            this.cubeImg = super.getImage(super.getDocumentBase(), "off.gif");
             C(this.cubeImg);
-            this.C.drawImage(this.cubeImg, this.dimension.width - 18, this.dimension.height - 32, this);
+            this.graphics.drawImage(this.cubeImg, this.width - 18, this.height - 32, this);
         }
-        localPixelGrabber = new PixelGrabber(this.G, 0, 0, this.dimension.width, this.dimension.height, this.X, 0, this.dimension.width);
+        localPixelGrabber = new PixelGrabber(backImg, 0, 0, this.width, this.height, this.X, 0, this.width);
         try
         {
             localPixelGrabber.grabPixels();
             return;
-        } catch (InterruptedException localInterruptedException2)
+        }
+        catch (InterruptedException exp)
         {
+            Logs.exception(exp);
+        }
+
+        this.addMouseListener(new MouseListener()
+        {
+
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+                _mouseClicked(e);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e)
+            {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e)
+            {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e)
+            {
+                _mouseEntered(e);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e)
+            {
+                _mouseExited(e);
+            }
+        });
+        this.addMouseMotionListener(new MouseMotionListener()
+        {
+
+            @Override
+            public void mouseDragged(MouseEvent e)
+            {
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e)
+            {
+                _mouseMoved(e);
+            }
+        });
+    }
+
+    private Image readImg()
+    {
+        try
+        {
+            return ImageIO.read(WCubeBox.class.getResourceAsStream("/res/icon/0030.png"));
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            return null;
         }
     }
 
     @Override
     public void run()
     {
-        this.bufImg = super.createImage(this.dimension.width, this.dimension.height);
-        Graphics graphics = this.bufImg.getGraphics();
+        Graphics graphic = this.backImg.getGraphics();
         String str;
-        FontMetrics metrics = graphics.getFontMetrics();
-        this.Þ = new int[this.dimension.width * this.dimension.height * 6];
+        FontMetrics metrics = graphic.getFontMetrics();
+        this.Þ = new int[this.width * this.height * 6];
         this.å = true;
         for (int i1 = 0; i1 < 6; ++i1)
         {
-            graphics.setColor(new Color(this.backGround));
-            graphics.fillRect(0, 0, this.dimension.width, this.dimension.height);
-            graphics.setColor(new Color(this.textColor));
+            graphic.setColor(new Color(this.backGround));
+            graphic.fillRect(0, 0, this.width, this.height);
+            graphic.setColor(new Color(this.textColor));
             str = "Loading Image " + Integer.toString(i1 + 1);
-            graphics.drawString(str, this.J - (metrics.stringWidth(str) / 2), this.K);
-            update(this.B);
-            if (super.getParameter("image" + Integer.toString(i1)) == null)
-                continue;
-            this.cubeImg = super.getImage(super.getDocumentBase(), super.getParameter("image" + Integer.toString(i1)));
+            graphic.drawString(str, this.J - (metrics.stringWidth(str) / 2), this.K);
+            update(getGraphics());
+            this.cubeImg = readImg();
             C(this.cubeImg);
             this.cubeImg = scale(this.cubeImg, this.size, this.size);
             System.arraycopy(this.U, 0, this.Þ, i1 * this.size * this.size, this.size * this.size);
@@ -228,10 +285,9 @@ public class WCubeBox extends Applet implements Runnable
         this.Ò = 0.0D;
         this.Ð = 50.0D;
         this.Ñ = 50.0D;
-        this.ã = false;
         this.ä = false;
         this.å = false;
-        this.æ = false;
+        this.mouseEntered = false;
         this.ç = false;
         this.è = false;
         this.é = false;
@@ -243,7 +299,7 @@ public class WCubeBox extends Applet implements Runnable
         this.Ä = (this.Å = this.Æ = 0.0D);
         F();
         this.ç = false;
-        while (true)
+        while (running)
         {
             this.â = this.spotLight;
             this.n = (this.r = this.v = 0.0D);
@@ -258,17 +314,19 @@ public class WCubeBox extends Applet implements Runnable
                     D(-this.Ë / d2, this.Ê / d2, 0.0D, this.zoomSpeed, 1.0D);
                     A();
                     this.å = true;
-                    update(this.B);
+                    repaint();
                     this.å = false;
                 }
                 D(-this.Ë / d2, this.Ê / d2, 0.0D, d1 - (d3 * this.zoomSpeed), 1.0D);
                 A();
                 this.å = true;
-                update(this.B);
+                repaint();
                 this.å = false;
                 double d4 = Math.acos(this.Í);
                 if (this.Î > 0.0D)
+                {
                     d4 = -d4;
+                }
                 int i3 = Math.max((int) (Math.abs(d4) / this.zoomSpeed / 3.0D), 5);
                 double d5 = Math.exp(Math.log(1.45D) / i3);
                 for (int i4 = 1; i4 <= i3; ++i4)
@@ -276,7 +334,7 @@ public class WCubeBox extends Applet implements Runnable
                     D(0.0D, 0.0D, -1.0D, -d4 / i3, d5);
                     A();
                     this.å = true;
-                    update(this.B);
+                    repaint();
                     this.å = false;
                 }
                 while (!(this.ä))
@@ -285,8 +343,10 @@ public class WCubeBox extends Applet implements Runnable
                     try
                     {
                         Thread.sleep(100L);
-                    } catch (InterruptedException localInterruptedException1)
+                    }
+                    catch (InterruptedException exp)
                     {
+                        Logs.exception(exp);
                     }
                 }
                 for (int i5 = 1; i5 <= i3; ++i5)
@@ -294,7 +354,7 @@ public class WCubeBox extends Applet implements Runnable
                     D(0.0D, 0.0D, -1.0D, d4 / i3, 1.0D / d5);
                     A();
                     this.å = true;
-                    update(this.B);
+                    repaint();
                     this.å = false;
                 }
                 this.v = 750.0D;
@@ -304,24 +364,25 @@ public class WCubeBox extends Applet implements Runnable
                     D(-this.Ë / d2, this.Ê / d2, 0.0D, -this.zoomSpeed, 1.0D);
                     A();
                     this.å = true;
-                    update(this.B);
+                    repaint();
                     this.å = false;
                 }
                 D(-this.Ë / d2, this.Ê / d2, 0.0D, -d1 + d3 * this.zoomSpeed, 1.0D);
                 A();
                 this.å = true;
-                update(this.B);
+                repaint();
                 this.å = false;
                 this.n = (this.r = this.v = 0.0D);
                 this.Ä = this.w;
                 this.Å = this.x;
                 this.è = false;
-                this.ã = false;
-            } else if (this.æ)
+            }
+            else if (this.mouseEntered)
             {
                 this.Ä = this.w;
                 this.Å = this.x;
-            } else
+            }
+            else
             {
                 if (this.ç)
                 {
@@ -342,25 +403,31 @@ public class WCubeBox extends Applet implements Runnable
             F();
             A();
             this.å = true;
-            update(this.B);
+            repaint();
             this.å = false;
             try
             {
                 Thread.sleep(this.sleepTime);
-            } catch (InterruptedException localInterruptedException2)
+            }
+            catch (InterruptedException exp)
             {
+                Logs.exception(exp);
             }
         }
     }
 
     public void A()
     {
-        this.bufImg.flush();
+        this.backImg.flush();
         this.é = false;
         if (this.â)
-            System.arraycopy(this.W, 0, this.Q, 0, this.dimension.width * this.dimension.height);
+        {
+            System.arraycopy(this.W, 0, this.Q, 0, this.width * this.height);
+        }
         else
-            System.arraycopy(this.X, 0, this.Q, 0, this.dimension.width * this.dimension.height);
+        {
+            System.arraycopy(this.X, 0, this.Q, 0, this.width * this.height);
+        }
         int i1 = 0;
         int[] arrayOfInt1 = new int[this.f];
         int[] arrayOfInt2 = new int[this.f];
@@ -403,41 +470,41 @@ public class WCubeBox extends Applet implements Runnable
                 i12 = 0;
                 switch (i1)
                 {
-                case 0:
-                    i9 = 0;
-                    i10 = 1;
-                    i11 = 3;
-                    i12 = 2;
-                    break;
-                case 1:
-                    i9 = 5;
-                    i10 = 4;
-                    i11 = 6;
-                    i12 = 7;
-                    break;
-                case 2:
-                    i9 = 4;
-                    i10 = 5;
-                    i11 = 0;
-                    i12 = 1;
-                    break;
-                case 3:
-                    i9 = 3;
-                    i10 = 2;
-                    i11 = 7;
-                    i12 = 6;
-                    break;
-                case 4:
-                    i9 = 1;
-                    i10 = 5;
-                    i11 = 2;
-                    i12 = 6;
-                    break;
-                case 5:
-                    i9 = 4;
-                    i10 = 0;
-                    i11 = 7;
-                    i12 = 3;
+                    case 0:
+                        i9 = 0;
+                        i10 = 1;
+                        i11 = 3;
+                        i12 = 2;
+                        break;
+                    case 1:
+                        i9 = 5;
+                        i10 = 4;
+                        i11 = 6;
+                        i12 = 7;
+                        break;
+                    case 2:
+                        i9 = 4;
+                        i10 = 5;
+                        i11 = 0;
+                        i12 = 1;
+                        break;
+                    case 3:
+                        i9 = 3;
+                        i10 = 2;
+                        i11 = 7;
+                        i12 = 6;
+                        break;
+                    case 4:
+                        i9 = 1;
+                        i10 = 5;
+                        i11 = 2;
+                        i12 = 6;
+                        break;
+                    case 5:
+                        i9 = 4;
+                        i10 = 0;
+                        i11 = 7;
+                        i12 = 3;
                 }
                 Polygon localPolygon2 = new Polygon();
                 double d1 = this.e - this.Ò;
@@ -458,16 +525,17 @@ public class WCubeBox extends Applet implements Runnable
                 arrayOfInt4 = N(localPolygon2.xpoints, localPolygon2.ypoints);
                 int i18 = arrayOfInt4[0];
                 int i19 = arrayOfInt4[1];
-                for (int i20 = Math.max(arrayOfInt3[i19], 0); i20 < Math.min(arrayOfInt3[i18], this.dimension.height); ++i20)
+                for (int i20 = Math.max(arrayOfInt3[i19], 0); i20 < Math.min(arrayOfInt3[i18], this.height); ++i20)
                 {
                     int i21 = Math.min(this.S[i20], this.T[i20]);
                     int i22 = Math.max(this.S[i20], this.T[i20]);
-                    System.arraycopy(this.ß, 0, this.Q, i21 + i20 * this.dimension.width, i22 - i21);
+                    System.arraycopy(this.ß, 0, this.Q, i21 + i20 * this.width, i22 - i21);
                 }
                 ++i1;
                 localPolygon1 = new Polygon();
                 i4 = i7 + 1;
-            } else
+            }
+            else
             {
                 localPolygon1.addPoint(arrayOfInt1[i8], arrayOfInt2[i8]);
             }
@@ -489,41 +557,41 @@ public class WCubeBox extends Applet implements Runnable
                 int i13 = 0;
                 switch (i1)
                 {
-                case 0:
-                    i10 = 0;
-                    i11 = 1;
-                    i12 = 3;
-                    i13 = 2;
-                    break;
-                case 1:
-                    i10 = 5;
-                    i11 = 4;
-                    i12 = 6;
-                    i13 = 7;
-                    break;
-                case 2:
-                    i10 = 4;
-                    i11 = 5;
-                    i12 = 0;
-                    i13 = 1;
-                    break;
-                case 3:
-                    i10 = 3;
-                    i11 = 2;
-                    i12 = 7;
-                    i13 = 6;
-                    break;
-                case 4:
-                    i10 = 1;
-                    i11 = 5;
-                    i12 = 2;
-                    i13 = 6;
-                    break;
-                case 5:
-                    i10 = 4;
-                    i11 = 0;
-                    i12 = 7;
-                    i13 = 3;
+                    case 0:
+                        i10 = 0;
+                        i11 = 1;
+                        i12 = 3;
+                        i13 = 2;
+                        break;
+                    case 1:
+                        i10 = 5;
+                        i11 = 4;
+                        i12 = 6;
+                        i13 = 7;
+                        break;
+                    case 2:
+                        i10 = 4;
+                        i11 = 5;
+                        i12 = 0;
+                        i13 = 1;
+                        break;
+                    case 3:
+                        i10 = 3;
+                        i11 = 2;
+                        i12 = 7;
+                        i13 = 6;
+                        break;
+                    case 4:
+                        i10 = 1;
+                        i11 = 5;
+                        i12 = 2;
+                        i13 = 6;
+                        break;
+                    case 5:
+                        i10 = 4;
+                        i11 = 0;
+                        i12 = 7;
+                        i13 = 3;
                 }
                 int i14 = arrayOfInt1[i12] - arrayOfInt1[i10];
                 int i15 = arrayOfInt2[i12] - arrayOfInt2[i10];
@@ -557,12 +625,13 @@ public class WCubeBox extends Applet implements Runnable
                     {
                         localPolygon1.addPoint(arrayOfInt1[i23], arrayOfInt2[i23]);
                         i23 = this.Y[(++i2)];
-                    } while (i23 >= 0);
+                    }
+                    while (i23 >= 0);
                     double d19 = (d16 * d12 + d17 * d13 + d18 * d14) / Math.sqrt(d16 * d16 + d17 * d17 + d18 * d18);
                     int i24 = ((this.â & !(this.è))) ? 255 : Math.max(Math.min((int) (255.0D * d19 * 0.9D + 25.5D), 255), 20);
                     int[] arrayOfInt5 = new int[2];
                     arrayOfInt5 = N(localPolygon1.xpoints, localPolygon1.ypoints);
-                    int i25 = Math.min(localPolygon1.ypoints[arrayOfInt5[0]], this.dimension.height);
+                    int i25 = Math.min(localPolygon1.ypoints[arrayOfInt5[0]], this.height);
                     int i26 = Math.max(localPolygon1.ypoints[arrayOfInt5[1]], 0);
                     double d20 = this.d * (d3 * d11 - (d5 * d9));
                     double d21 = this.d * (d5 * d6 - (d3 * d8));
@@ -576,7 +645,7 @@ public class WCubeBox extends Applet implements Runnable
                     double d29 = this.d * (d7 * d5 - (d8 * d4));
                     double d30 = this.d * this.d * (d7 * d9 - (d6 * d10));
                     double d31 = this.d * this.d * (d6 * d4 - (d7 * d3));
-                    int i27 = this.dimension.width;
+                    int i27 = this.width;
                     int i28 = i1 * this.size * this.size;
                     double d34;
                     double d35;
@@ -629,7 +698,8 @@ public class WCubeBox extends Applet implements Runnable
                                 d41 += d23;
                             }
                         }
-                    } else
+                    }
+                    else
                     {
                         double d47 = Math.sqrt((0.0D - this.Ð) * (0.0D - this.Ð) + (0.0D - this.Ñ) * (0.0D - this.Ñ) + (750.0D - this.Ò) * (750.0D - this.Ò));
                         double d48 = -this.Ð / d47;
@@ -706,7 +776,6 @@ public class WCubeBox extends Applet implements Runnable
                         {
                             this.Ê = d12;
                             this.Ë = d13;
-                            this.Ì = d14;
                             d42 = Math.sqrt(d3 * d3 + d4 * d4 + d5 * d5);
                             this.Í = (d3 / d42);
                             this.Î = (d4 / d42);
@@ -714,7 +783,8 @@ public class WCubeBox extends Applet implements Runnable
                             this.Ö = i1;
                             this.è = true;
                             this.ä = false;
-                        } else
+                        }
+                        else
                         {
                             this.ä = false;
                         }
@@ -723,22 +793,25 @@ public class WCubeBox extends Applet implements Runnable
                 ++i1;
                 localPolygon1 = new Polygon();
                 i4 = i8 + 1;
-            } else
+            }
+            else
             {
                 localPolygon1.addPoint(arrayOfInt1[i9], arrayOfInt2[i9]);
             }
         }
-        this.bufImg = super.createImage(new MemoryImageSource(this.dimension.width, this.dimension.height, this.Q, 0, this.dimension.width));
-        C(this.bufImg);
+        this.backImg = super.createImage(new MemoryImageSource(this.width, this.height, this.Q, 0, this.width));
+        C(this.backImg);
         if (this.é)
+        {
             return;
+        }
         this.Ö = 7;
     }
 
     public int[] N(int[] paramArrayOfInt1, int[] paramArrayOfInt2)
     {
-        System.arraycopy(this.V, 0, this.S, 0, this.dimension.height);
-        System.arraycopy(this.V, 0, this.T, 0, this.dimension.height);
+        System.arraycopy(this.V, 0, this.S, 0, this.height);
+        System.arraycopy(this.V, 0, this.T, 0, this.height);
         int i1 = -16777215;
         int i2 = 16777215;
         int i3 = 5;
@@ -751,7 +824,9 @@ public class WCubeBox extends Applet implements Runnable
                 i4 = i5;
             }
             if (paramArrayOfInt2[i5] <= i1)
+            {
                 continue;
+            }
             i1 = paramArrayOfInt2[i5];
             i3 = i5;
         }
@@ -767,17 +842,20 @@ public class WCubeBox extends Applet implements Runnable
                 i8 = (4 + i4 - 2) % 4;
                 K(paramArrayOfInt1[i7], paramArrayOfInt2[i7], paramArrayOfInt1[i8], paramArrayOfInt2[i8], false);
                 K(paramArrayOfInt1[i8], paramArrayOfInt2[i8], paramArrayOfInt1[i3], paramArrayOfInt2[i3], false);
-            } else if (i7 == i3)
+            }
+            else if (i7 == i3)
             {
                 i8 = (i4 + 2) % 4;
                 K(paramArrayOfInt1[i6], paramArrayOfInt2[i6], paramArrayOfInt1[i8], paramArrayOfInt2[i8], true);
                 K(paramArrayOfInt1[i8], paramArrayOfInt2[i8], paramArrayOfInt1[i3], paramArrayOfInt2[i3], true);
-            } else
+            }
+            else
             {
                 K(paramArrayOfInt1[i6], paramArrayOfInt2[i6], paramArrayOfInt1[i3], paramArrayOfInt2[i3], true);
                 K(paramArrayOfInt1[i7], paramArrayOfInt2[i7], paramArrayOfInt1[i3], paramArrayOfInt2[i3], false);
             }
-        } else
+        }
+        else
         {
             K(paramArrayOfInt1[i6], paramArrayOfInt2[i6], paramArrayOfInt1[i4], paramArrayOfInt2[i4], false);
             K(paramArrayOfInt1[i7], paramArrayOfInt2[i7], paramArrayOfInt1[i4], paramArrayOfInt2[i4], true);
@@ -786,19 +864,23 @@ public class WCubeBox extends Applet implements Runnable
                 i8 = (4 + i4 - 2) % 4;
                 K(paramArrayOfInt1[i7], paramArrayOfInt2[i7], paramArrayOfInt1[i8], paramArrayOfInt2[i8], true);
                 K(paramArrayOfInt1[i8], paramArrayOfInt2[i8], paramArrayOfInt1[i3], paramArrayOfInt2[i3], true);
-            } else if (i7 == i3)
+            }
+            else if (i7 == i3)
             {
                 i8 = (i4 + 2) % 4;
                 K(paramArrayOfInt1[i6], paramArrayOfInt2[i6], paramArrayOfInt1[i8], paramArrayOfInt2[i8], false);
                 K(paramArrayOfInt1[i8], paramArrayOfInt2[i8], paramArrayOfInt1[i3], paramArrayOfInt2[i3], false);
-            } else
+            }
+            else
             {
                 K(paramArrayOfInt1[i6], paramArrayOfInt2[i6], paramArrayOfInt1[i3], paramArrayOfInt2[i3], false);
                 K(paramArrayOfInt1[i7], paramArrayOfInt2[i7], paramArrayOfInt1[i3], paramArrayOfInt2[i3], true);
             }
         }
         int[] arrayOfInt =
-        { i3, i4 };
+        {
+            i3, i4
+        };
         return arrayOfInt;
     }
 
@@ -820,19 +902,29 @@ public class WCubeBox extends Applet implements Runnable
             }
             int i2;
             if (paramInt4 > paramInt2)
+            {
                 i2 = 1;
+            }
             else
+            {
                 i2 = -1;
+            }
             i3 = paramInt3 - paramInt1;
             i4 = Math.abs(paramInt4 - paramInt2);
             i5 = paramInt1;
             int i6 = paramInt2;
             int i7 = -(i3 / 2);
-            if ((i5 >= 0) && (i6 >= 0) && (i6 < this.dimension.height))
+            if ((i5 >= 0) && (i6 >= 0) && (i6 < this.height))
+            {
                 if (paramBoolean)
-                    this.S[i6] = Math.min(i5, this.dimension.width - 1);
+                {
+                    this.S[i6] = Math.min(i5, this.width - 1);
+                }
                 else
-                    this.T[i6] = Math.min(i5, this.dimension.width - 1);
+                {
+                    this.T[i6] = Math.min(i5, this.width - 1);
+                }
+            }
             while (true)
             {
                 int i8 = 0;
@@ -843,13 +935,21 @@ public class WCubeBox extends Applet implements Runnable
                     i7 -= i3;
                     i8 = 1;
                 }
-                if ((++i5 >= 0) && (i6 >= 0) && (i6 < this.dimension.height) && (i8 != 0))
+                if ((++i5 >= 0) && (i6 >= 0) && (i6 < this.height) && (i8 != 0))
+                {
                     if (paramBoolean)
-                        this.S[i6] = Math.min(i5, this.dimension.width - 1);
+                    {
+                        this.S[i6] = Math.min(i5, this.width - 1);
+                    }
                     else
-                        this.T[i6] = Math.min(i5, this.dimension.width - 1);
+                    {
+                        this.T[i6] = Math.min(i5, this.width - 1);
+                    }
+                }
                 if (i5 >= paramInt3)
+                {
                     return;
+                }
             }
         }
         if (i4 < 0)
@@ -863,19 +963,29 @@ public class WCubeBox extends Applet implements Runnable
         }
         int i1;
         if (paramInt3 > paramInt1)
+        {
             i1 = 1;
+        }
         else
+        {
             i1 = -1;
+        }
         i3 = Math.abs(paramInt3 - paramInt1);
         i4 = paramInt4 - paramInt2;
         i5 = paramInt1;
         int i6 = paramInt2;
         int i7 = -(i4 / 2);
-        if ((i5 >= 0) && (i6 >= 0) && (i6 < this.dimension.height))
+        if ((i5 >= 0) && (i6 >= 0) && (i6 < this.height))
+        {
             if (paramBoolean)
-                this.S[i6] = Math.min(i5, this.dimension.width - 1);
+            {
+                this.S[i6] = Math.min(i5, this.width - 1);
+            }
             else
-                this.T[i6] = Math.min(i5, this.dimension.width - 1);
+            {
+                this.T[i6] = Math.min(i5, this.width - 1);
+            }
+        }
         while (i6 < paramInt4)
         {
             i7 += i3;
@@ -885,19 +995,27 @@ public class WCubeBox extends Applet implements Runnable
                 i7 -= i4;
             }
             ++i6;
-            if ((i5 < 0) || (i6 < 0) || (i6 >= this.dimension.height))
+            if ((i5 < 0) || (i6 < 0) || (i6 >= this.height))
+            {
                 continue;
+            }
             if (paramBoolean)
-                this.S[i6] = Math.min(i5, this.dimension.width - 1);
+            {
+                this.S[i6] = Math.min(i5, this.width - 1);
+            }
             else
-                this.T[i6] = Math.min(i5, this.dimension.width - 1);
+            {
+                this.T[i6] = Math.min(i5, this.width - 1);
+            }
         }
     }
 
     public void M()
     {
         if (this.f <= 0)
+        {
             return;
+        }
         double d1 = 0.0D;
         double d2;
         for (int i1 = 0; i1 < this.f * 3; i1 += 3)
@@ -907,39 +1025,18 @@ public class WCubeBox extends Applet implements Runnable
             double d4 = this.a[(i1 + 2)];
             double d5 = Math.sqrt(d2 * d2 + d3 * d3 + d4 * d4) * Math.sqrt(2.0D);
             if (d5 <= d1)
+            {
                 continue;
+            }
             d1 = d5;
         }
-        d2 = ((this.dimension.width > this.dimension.height) ? this.dimension.height : this.dimension.width) / d1;
+        d2 = ((this.width > this.height) ? this.height : this.width) / d1;
         for (int i2 = 0; i2 < this.f * 3; i2 += 3)
         {
             this.a[i2] *= d2;
             this.a[(i2 + 1)] *= d2;
             this.a[(i2 + 2)] *= d2;
         }
-    }
-
-    public void readParam()
-    {
-        this.sleepTime = intVal("sleeptime", 10);
-        this.shadowColor = intVal("shadowcolor", 16);
-        this.textColor = intVal("textcolor", 16);
-        this.backGround = intVal("background", 16);
-        this.pUrls = new String[6];
-        for (int i1 = 0; i1 < 6; ++i1)
-        {
-            this.pUrls[i1] = super.getParameter("url" + Integer.toString(i1));
-            if (this.pUrls[i1] != null)
-                continue;
-            this.pUrls[i1] = "";
-        }
-        if (super.getParameter("showlightbutton") != null)
-            this.showLightButton = super.getParameter("showlightbutton").substring(0, 1).equalsIgnoreCase("y");
-        this.target = super.getParameter("target");
-        this.angleStep = (intVal("anglestep", 10) * 3.141592653589793D / 180.0D);
-        this.mouseResponse = (intVal("mouseresponse", 10) * 3.141592653589793D / 180.0D);
-        this.zoomSpeed = (intVal("zoomspeed", 10) * 3.141592653589793D / 180.0D);
-        this.spotLight = super.getParameter("spotlight").substring(0, 1).equalsIgnoreCase("y");
     }
 
     public void F()
@@ -1055,7 +1152,8 @@ public class WCubeBox extends Applet implements Runnable
         try
         {
             localPixelGrabber.grabPixels();
-        } catch (InterruptedException localInterruptedException)
+        }
+        catch (InterruptedException localInterruptedException)
         {
         }
         this.U = new int[paramInt1 * paramInt2];
@@ -1076,70 +1174,67 @@ public class WCubeBox extends Applet implements Runnable
         return super.createImage(new MemoryImageSource(paramInt1, paramInt2, this.U, 0, paramInt1));
     }
 
-    @Override
-    public boolean mouseDown(Event paramEvent, int paramInt1, int paramInt2)
+    private void _mouseClicked(MouseEvent paramEvent)
     {
-        if ((this.showLightButton) && (this.dimension.height - paramInt2 < 32) && (this.dimension.width - paramInt1 < 18))
+        Point point = paramEvent.getPoint();
+        if ((this.showLightButton) && (this.height - point.y < 32) && (this.width - point.x < 18))
+        {
             this.spotLight = (!(this.spotLight));
+        }
         else if (this.Ö != 7)
+        {
             if (System.currentTimeMillis() - this.P < 500L)
             {
-                this.ã = true;
                 if (this.pUrls[this.Ö] != null)
                 {
-                    URL localURL = null;
                     try
                     {
-                        localURL = new URL(this.pUrls[this.Ö]);
-                    } catch (MalformedURLException localMalformedURLException)
-                    {
-                        System.out.println("Invalid URL");
-                        super.showStatus("Invalid URL");
+                        new URL(this.pUrls[this.Ö]);
                     }
-                    super.getAppletContext().showDocument(localURL, this.target);
+                    catch (MalformedURLException exp)
+                    {
+                        Logs.exception(exp);
+                    }
                 }
-            } else
+            }
+            else
             {
                 this.ä = true;
                 this.P = System.currentTimeMillis();
             }
-        return true;
+        }
     }
 
-    @Override
-    public boolean mouseEnter(Event paramEvent, int paramInt1, int paramInt2)
+    private void _mouseEntered(MouseEvent e)
     {
-        this.æ = true;
-        return true;
+        this.mouseEntered = true;
     }
 
-    @Override
-    public boolean mouseExit(Event paramEvent, int paramInt1, int paramInt2)
+    private void _mouseExited(MouseEvent e)
     {
         this.ç = true;
-        this.æ = false;
-        return true;
+        this.mouseEntered = false;
     }
 
-    @Override
-    public boolean mouseMove(Event paramEvent, int paramInt1, int paramInt2)
+    private void _mouseMoved(MouseEvent e)
     {
-        this.æ = true;
-        this.L = paramInt1;
-        this.M = paramInt2;
+        this.mouseEntered = true;
+        Point point = e.getPoint();
+        this.L = point.x;
+        this.M = point.y;
         if (this.showLightButton)
         {
-            if ((this.dimension.width - paramInt1 >= 18) || (this.dimension.height - paramInt2 >= 32))
+            if ((this.width - point.x >= 18) || (this.height - point.y >= 32))
             {
-                this.w = ((this.dimension.height / 2 - paramInt2) * this.mouseResponse / this.dimension.width * 2.0D);
-                this.x = ((this.dimension.width / 2 - paramInt1) * this.mouseResponse / this.dimension.height * 2.0D);
+                this.w = ((this.height / 2 - point.y) * this.mouseResponse / this.width * 2.0D);
+                this.x = ((this.width / 2 - point.x) * this.mouseResponse / this.height * 2.0D);
             }
-        } else
-        {
-            this.w = ((this.dimension.height / 2 - paramInt2) * this.mouseResponse / this.dimension.width * 2.0D);
-            this.x = ((this.dimension.width / 2 - paramInt1) * this.mouseResponse / this.dimension.height * 2.0D);
         }
-        return true;
+        else
+        {
+            this.w = ((this.height / 2 - point.y) * this.mouseResponse / this.width * 2.0D);
+            this.x = ((this.width / 2 - point.x) * this.mouseResponse / this.height * 2.0D);
+        }
     }
 
     void C(Image paramImage)
@@ -1150,51 +1245,31 @@ public class WCubeBox extends Applet implements Runnable
         {
             localMediaTracker.waitForID(0);
             return;
-        } catch (InterruptedException localInterruptedException)
+        }
+        catch (InterruptedException localInterruptedException)
         {
         }
     }
 
     @Override
-    public synchronized void paint(Graphics paramGraphics)
+    protected synchronized void paintComponent(Graphics g)
     {
-        if ((this.bufImg == null) || (!(this.å)))
+        if ((this.backImg == null) || (!(this.å)))
+        {
             return;
-        paramGraphics.drawImage(this.bufImg, 0, 0, this);
-    }
-
-    @Override
-    public synchronized void update(Graphics paramGraphics)
-    {
-        paint(paramGraphics);
-    }
-
-    public int intVal(String paramString, int paramInt)
-    {
-        try
-        {
-            return Integer.parseInt(super.getParameter(paramString), paramInt);
-        } catch (NumberFormatException localNumberFormatException)
-        {
         }
-        return 0;
+//        super.paintComponent(paramGraphics);
+        g.drawImage(this.backImg, 0, 0, this);
     }
 
-    @Override
     public void start()
     {
-        if (this.thread == null)
-        {
-            this.thread = new Thread(this);
-        }
-        this.thread.start();
+        running = true;
+        new Thread(this).start();
     }
 
-    @Override
     public void stop()
     {
-        if ((this.thread != null) && (this.thread.isAlive()))
-            this.thread.stop();
-        this.thread = null;
+        running = false;
     }
 }
