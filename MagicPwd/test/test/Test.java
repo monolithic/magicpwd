@@ -1,6 +1,6 @@
 package test;
 
-import java.util.Calendar;
+import com.magicpwd._comp.WCubeBox;
 
 /*
  * To change this template, choose Tools | Templates
@@ -10,18 +10,23 @@ import java.util.Calendar;
  *
  * @author aven
  */
-public class Test
+public class Test extends javax.swing.JFrame
 {
+
+    public Test()
+    {
+        WCubeBox cb = new WCubeBox();
+        cb.initData();
+        this.getContentPane().add(cb);
+        cb.start();
+
+        this.setSize(400, 300);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setVisible(true);
+    }
 
     public static void main(String[] args)
     {
-        System.out.println(System.nanoTime());
-        long s = System.currentTimeMillis();
-        Calendar c = Calendar.getInstance();
-        long l = c.getTimeInMillis();
-        System.out.println(s + "\n" + l);
-        System.out.println(l);
-        c.add(Calendar.SECOND, 1);
-        System.out.println(c.getTimeInMillis() - l);
+        new Test();
     }
 }
