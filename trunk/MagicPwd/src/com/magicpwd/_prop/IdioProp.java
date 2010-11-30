@@ -49,17 +49,22 @@ public class IdioProp extends javax.swing.JPanel implements IPropBean
         javax.swing.JLabel lbl;
         LnkLabel lnk;
         java.awt.GridBagConstraints gbc = new java.awt.GridBagConstraints();
+        gbc.insets = new java.awt.Insets(1, 1, 1, 1);
         for (int i = 0; i < USER_CNT; i += 1)
         {
             lbl = new javax.swing.JLabel();
+            lbl.setHorizontalAlignment(javax.swing.JLabel.RIGHT);
             gbc.gridx = 0;
             gbc.gridy = i;
+            gbc.fill = java.awt.GridBagConstraints.HORIZONTAL;
             pl_IdioPanel.add(lbl, gbc);
             lb_UserName[i] = lbl;
 
             lnk = new LnkLabel();
+            lnk.setHorizontalAlignment(javax.swing.JLabel.LEFT);
             gbc.gridx = 1;
             gbc.gridy = i;
+            gbc.fill = java.awt.GridBagConstraints.HORIZONTAL;
             pl_IdioPanel.add(lnk, gbc);
             ll_UserMail[i] = lnk;
         }
@@ -91,20 +96,27 @@ public class IdioProp extends javax.swing.JPanel implements IPropBean
     {
         int i = 0;
         lb_UserName[i].setText("Amon");
-        ll_UserMail[i].setText("a@b.c");
-        ll_UserMail[i].setLinkUrl("a@b.c");
+        ll_UserMail[i].setText("amon@magicpwd.com");
+        ll_UserMail[i].setLinkUrl("amon@magicpwd.com");
+        ll_UserMail[i].setToolTipText("Mail to Amon");
 
         i += 1;
         lb_UserName[i].setText("Aven");
-        ll_UserMail[i].setText("a@b.c");
+        ll_UserMail[i].setText("aven@magicpwd.com");
+        ll_UserMail[i].setLinkUrl("aven@magicpwd.com");
+        ll_UserMail[i].setToolTipText("Mail to Aven");
 
         i += 1;
         lb_UserName[i].setText("Sand");
-        ll_UserMail[i].setText("a@b.c");
+        ll_UserMail[i].setText("sand@magicpwd.com");
+        ll_UserMail[i].setLinkUrl("sand@magicpwd.com");
+        ll_UserMail[i].setToolTipText("Mail to Sand");
 
         i += 1;
         lb_UserName[i].setText("sanjer");
-        ll_UserMail[i].setText("a@b.c");
+        ll_UserMail[i].setText("sanjer@magicpwd.com");
+        ll_UserMail[i].setLinkUrl("sanjer@magicpwd.com");
+        ll_UserMail[i].setToolTipText("Mail to sanjer");
     }
 
     @Override
