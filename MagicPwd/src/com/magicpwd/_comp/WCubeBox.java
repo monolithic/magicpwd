@@ -1259,7 +1259,7 @@ public class WCubeBox extends java.awt.Canvas implements Runnable
     @Override
     public synchronized void paint(Graphics g)
     {
-        if (this.backImg != null && this.needDraw)
+        if (this.backImg != null && this.needDraw && g != null)
         {
             g.drawImage(this.backImg, 0, 0, this);
         }

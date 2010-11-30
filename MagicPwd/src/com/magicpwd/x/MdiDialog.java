@@ -29,7 +29,6 @@ public class MdiDialog extends javax.swing.JDialog
     private javax.swing.DefaultListModel lm_PropList;
     private java.util.HashMap<String, IPropBean> hm_PropList;
     private MainPtn mainPtn;
-    private S1S2 lastItem;
 
     public MdiDialog(MainPtn mainPtn)
     {
@@ -248,35 +247,49 @@ public class MdiDialog extends javax.swing.JDialog
      */
     public void showProp(String panelKey, boolean showList)
     {
-        if (!com.magicpwd._util.Char.isValidate(panelKey))
+        if (!com.magicpwd._util.Char.isValidate(panelKey) || panelKey.equals(lastPanel))
         {
             return;
         }
 
         int idx = 0;
+        S1S2 kvItem = (S1S2) lm_PropList.get(0);
         for (int i = 0, j = lm_PropList.getSize(); i < j; i += 1)
         {
-            if (lm_PropList.get(i).equals(panelKey))
+            kvItem = (S1S2) lm_PropList.get(i);
+            if (kvItem.getK().equals(panelKey))
             {
                 idx = i;
                 break;
             }
         }
 
-        cl_CardLayout.show(pl_CardPanel, panelKey);
         ls_PropList.setSelectedIndex(idx);
-        hm_PropList.get(panelKey).showData();
-
-        if (lastPanel != null)
-        {
-            hm_PropList.get(lastPanel).saveData();
-        }
-        lastPanel = panelKey;
+        showPanel(kvItem);
 
         if (!isVisible())
         {
             setVisible(true);
         }
+    }
+
+    private void showPanel(S1S2 kvItem)
+    {
+        if (kvItem.getK().equals(lastPanel))
+        {
+            return;
+        }
+
+        setTitle(kvItem.getV());
+        cl_CardLayout.show(pl_CardPanel, kvItem.getK());
+        lb_HeadPanel.setText(kvItem.getV());
+        hm_PropList.get(kvItem.getK()).showData();
+
+        if (lastPanel != null)
+        {
+            hm_PropList.get(lastPanel).saveData();
+        }
+        lastPanel = kvItem.getK();
     }
 
     private void ls_PropListValueChanged(javax.swing.event.ListSelectionEvent evt)
@@ -287,22 +300,7 @@ public class MdiDialog extends javax.swing.JDialog
             return;
         }
 
-        S1S2 kvItem = (S1S2) obj;
-        if (lastItem != null && kvItem.getK().equals(lastItem.getK()))
-        {
-            return;
-        }
-        lastItem = kvItem;
-
-        cl_CardLayout.show(pl_CardPanel, kvItem.getK());
-        lb_HeadPanel.setText(kvItem.getV());
-        setTitle(kvItem.getV());
-        hm_PropList.get(kvItem.getK()).showData();
-        if (lastPanel != null)
-        {
-            hm_PropList.get(lastPanel).saveData();
-        }
-        lastPanel = kvItem.getK();
+        showPanel((S1S2) obj);
     }
 
     private void bt_AppliedActionPerformed(java.awt.event.ActionEvent evt)
