@@ -229,6 +229,11 @@
                     <stroke key="F7" />
                 </action>
             </item>
+            <item type="normal" text="$P30F7644" text-def="特别致谢">
+                <action class="com.magicpwd.e.mpwd.help.IdioAction">
+                    <stroke key="F8" />
+                </action>
+            </item>
             <seperator />
             <item type="normal" text="$P30F7630" text-def="关于">
                 <action class="com.magicpwd.e.mpwd.help.InfoAction" />
