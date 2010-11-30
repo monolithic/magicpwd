@@ -16,6 +16,7 @@
  */
 package com.magicpwd._comp;
 
+import com.magicpwd._util.Desk;
 import com.magicpwd._util.Logs;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -31,7 +32,6 @@ import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.PixelGrabber;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Arrays;
 import javax.imageio.ImageIO;
 
@@ -1192,14 +1192,7 @@ public class WCubeBox extends java.awt.Canvas implements Runnable
             {
                 if (this.pUrls[this.Ö] != null)
                 {
-                    try
-                    {
-                        new URL(this.pUrls[this.Ö]);
-                    }
-                    catch (MalformedURLException exp)
-                    {
-                        Logs.exception(exp);
-                    }
+                    Desk.browse(this.pUrls[this.Ö]);
                 }
             }
             else
