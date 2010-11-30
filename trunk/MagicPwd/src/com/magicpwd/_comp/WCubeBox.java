@@ -28,22 +28,22 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
-import java.awt.image.MemoryImageSource;
 import java.awt.image.PixelGrabber;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Arrays;
 import javax.imageio.ImageIO;
 
 /**
  *
  * @author Amon
  */
-public class WCubeBox extends javax.swing.JPanel implements Runnable
+public class WCubeBox extends java.awt.Canvas implements Runnable
 {
 
     private Graphics graphics;
-    private Image backImg;
-    private Image cubeImg;
+    private BufferedImage backImg;
+    private BufferedImage cubeImg;
     private int width = 100;
     private int height = 100;
     private int J;
@@ -117,7 +117,7 @@ public class WCubeBox extends javax.swing.JPanel implements Runnable
     private boolean spotLight;
     private boolean â;
     private boolean ä;
-    private boolean å;
+    private boolean needDraw;
     private boolean mouseEntered;
     private boolean ç;
     private boolean è;
@@ -131,74 +131,12 @@ public class WCubeBox extends javax.swing.JPanel implements Runnable
         this.textColor = 0x000000;
         this.spotLight = false;
         this.showLightButton = false;
-        this.sleepTime = 5;
+        this.sleepTime = 400;
         this.angleStep = 1.0;
         this.mouseResponse = 6.0;
         this.zoomSpeed = 5.0;
+        this.size = 48;
 
-        this.size = this.width < this.height ? this.width : this.height;
-        this.cubeLen = (this.size / 2);
-        this.a = new double[]
-                {
-                    -cubeLen, -cubeLen, -cubeLen, cubeLen, -cubeLen, -cubeLen, cubeLen, cubeLen,
-                    -cubeLen, -cubeLen, cubeLen, -cubeLen, -cubeLen, -cubeLen, cubeLen, cubeLen,
-                    -cubeLen, cubeLen, cubeLen, cubeLen, cubeLen, -cubeLen, cubeLen, cubeLen
-                };
-        this.J = (this.width / 2);
-        this.K = (this.height / 2);
-        this.S = new int[this.height];
-        this.T = new int[this.height];
-        this.Q = new int[this.width * this.height];
-        this.W = new int[this.width * this.height];
-        this.X = new int[this.width * this.height];
-        this.ß = new int[this.width];
-        for (int i1 = 0; i1 < this.width; ++i1)
-        {
-            this.ß[i1] = (-16777216 + this.shadowColor);
-        }
-        this.V = new int[this.height];
-        for (int i2 = 0; i2 < this.height; ++i2)
-        {
-            this.V[i2] = 0;
-        }
-        this.d = 512;
-        this.e = 900;
-        this.g = 30;
-        this.f = (this.a.length / 3);
-        this.Z = new double[this.a.length];
-        backImg = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_ARGB);
-        this.graphics = backImg.getGraphics();
-        this.graphics.setColor(new Color(this.backGround));
-        this.graphics.fillRect(0, 0, this.width, this.height);
-        if (this.showLightButton)
-        {
-            C(this.cubeImg);
-            this.graphics.drawImage(this.cubeImg, this.width - 18, this.height - 32, this);
-        }
-        PixelGrabber localPixelGrabber = new PixelGrabber(backImg, 0, 0, this.width, this.height, this.W, 0, this.width);
-        try
-        {
-            localPixelGrabber.grabPixels();
-        }
-        catch (InterruptedException exp)
-        {
-            Logs.exception(exp);
-        }
-        if (this.showLightButton)
-        {
-            C(this.cubeImg);
-            this.graphics.drawImage(this.cubeImg, this.width - 18, this.height - 32, this);
-        }
-        localPixelGrabber = new PixelGrabber(backImg, 0, 0, this.width, this.height, this.X, 0, this.width);
-        try
-        {
-            localPixelGrabber.grabPixels();
-            return;
-        }
-        catch (InterruptedException exp)
-        {
-            Logs.exception(exp);
-        }
 
         this.addMouseListener(new MouseListener()
         {
@@ -245,9 +183,68 @@ public class WCubeBox extends javax.swing.JPanel implements Runnable
                 _mouseMoved(e);
             }
         });
+
+        this.size = this.width < this.height ? this.width : this.height;
+        this.cubeLen = (this.size / 2);
+        this.a = new double[]
+                {
+                    -cubeLen, -cubeLen, -cubeLen, cubeLen, -cubeLen, -cubeLen, cubeLen, cubeLen,
+                    -cubeLen, -cubeLen, cubeLen, -cubeLen, -cubeLen, -cubeLen, cubeLen, cubeLen,
+                    -cubeLen, cubeLen, cubeLen, cubeLen, cubeLen, -cubeLen, cubeLen, cubeLen
+                };
+        this.J = (this.width / 2);
+        this.K = (this.height / 2);
+        this.S = new int[this.height];
+        this.T = new int[this.height];
+        this.Q = new int[this.width * this.height];
+        this.W = new int[this.width * this.height];
+        this.X = new int[this.width * this.height];
+        this.ß = new int[this.width];
+        Arrays.fill(this.ß, 0xFF000000 + this.shadowColor);
+        this.V = new int[this.height];
+        this.d = 512;
+        this.e = 900;
+        this.g = 30;
+        this.f = (this.a.length / 3);
+        this.Z = new double[this.a.length];
+
+        backImg = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_ARGB);
+        this.graphics = backImg.getGraphics();
+        this.graphics.setColor(new Color(this.backGround));
+        this.graphics.fillRect(0, 0, this.width, this.height);
+
+        if (this.showLightButton)
+        {
+            loadImg(this.cubeImg);
+            this.graphics.drawImage(this.cubeImg, this.width - 18, this.height - 32, this);
+        }
+        PixelGrabber pg1 = new PixelGrabber(backImg, 0, 0, this.width, this.height, this.W, 0, this.width);
+        try
+        {
+            pg1.grabPixels();
+        }
+        catch (InterruptedException exp)
+        {
+            Logs.exception(exp);
+        }
+        if (this.showLightButton)
+        {
+            loadImg(this.cubeImg);
+            this.graphics.drawImage(this.cubeImg, this.width - 18, this.height - 32, this);
+        }
+        PixelGrabber pg2 = new PixelGrabber(backImg, 0, 0, this.width, this.height, this.X, 0, this.width);
+        try
+        {
+            pg2.grabPixels();
+            return;
+        }
+        catch (InterruptedException exp)
+        {
+            Logs.exception(exp);
+        }
     }
 
-    private Image readImg()
+    private BufferedImage readImg()
     {
         try
         {
@@ -263,30 +260,29 @@ public class WCubeBox extends javax.swing.JPanel implements Runnable
     @Override
     public void run()
     {
-        Graphics graphic = this.backImg.getGraphics();
         String str;
-        FontMetrics metrics = graphic.getFontMetrics();
+        FontMetrics metrics = graphics.getFontMetrics();
         this.Þ = new int[this.width * this.height * 6];
-        this.å = true;
+        this.needDraw = true;
         for (int i1 = 0; i1 < 6; ++i1)
         {
-            graphic.setColor(new Color(this.backGround));
-            graphic.fillRect(0, 0, this.width, this.height);
-            graphic.setColor(new Color(this.textColor));
+            graphics.setColor(new Color(this.backGround));
+            graphics.fillRect(0, 0, this.width, this.height);
+            graphics.setColor(new Color(this.textColor));
             str = "Loading Image " + Integer.toString(i1 + 1);
-            graphic.drawString(str, this.J - (metrics.stringWidth(str) / 2), this.K);
-            update(getGraphics());
+            graphics.drawString(str, this.J - (metrics.stringWidth(str) / 2), this.K);
+            update(super.getGraphics());
             this.cubeImg = readImg();
-            C(this.cubeImg);
+            loadImg(this.cubeImg);
             this.cubeImg = scale(this.cubeImg, this.size, this.size);
             System.arraycopy(this.U, 0, this.Þ, i1 * this.size * this.size, this.size * this.size);
         }
-        this.å = false;
+        this.needDraw = false;
+
         this.Ò = 0.0D;
         this.Ð = 50.0D;
         this.Ñ = 50.0D;
         this.ä = false;
-        this.å = false;
         this.mouseEntered = false;
         this.ç = false;
         this.è = false;
@@ -313,15 +309,15 @@ public class WCubeBox extends javax.swing.JPanel implements Runnable
                 {
                     D(-this.Ë / d2, this.Ê / d2, 0.0D, this.zoomSpeed, 1.0D);
                     A();
-                    this.å = true;
+                    this.needDraw = true;
                     update(this.getGraphics());
-                    this.å = false;
+                    this.needDraw = false;
                 }
                 D(-this.Ë / d2, this.Ê / d2, 0.0D, d1 - (d3 * this.zoomSpeed), 1.0D);
                 A();
-                this.å = true;
+                this.needDraw = true;
                 update(getGraphics());
-                this.å = false;
+                this.needDraw = false;
                 double d4 = Math.acos(this.Í);
                 if (this.Î > 0.0D)
                 {
@@ -333,16 +329,16 @@ public class WCubeBox extends javax.swing.JPanel implements Runnable
                 {
                     D(0.0D, 0.0D, -1.0D, -d4 / i3, d5);
                     A();
-                    this.å = true;
+                    this.needDraw = true;
                     update(getGraphics());
-                    this.å = false;
+                    this.needDraw = false;
                 }
                 while (!(this.ä))
                 {
-                    this.å = true;
+                    this.needDraw = true;
                     try
                     {
-                        Thread.sleep(100L);
+                        Thread.sleep(100);
                     }
                     catch (InterruptedException exp)
                     {
@@ -353,9 +349,9 @@ public class WCubeBox extends javax.swing.JPanel implements Runnable
                 {
                     D(0.0D, 0.0D, -1.0D, d4 / i3, 1.0D / d5);
                     A();
-                    this.å = true;
+                    this.needDraw = true;
                     update(getGraphics());
-                    this.å = false;
+                    this.needDraw = false;
                 }
                 this.v = 750.0D;
                 d2 = Math.sqrt(this.Ê * this.Ê + this.Ë * this.Ë);
@@ -363,15 +359,15 @@ public class WCubeBox extends javax.swing.JPanel implements Runnable
                 {
                     D(-this.Ë / d2, this.Ê / d2, 0.0D, -this.zoomSpeed, 1.0D);
                     A();
-                    this.å = true;
+                    this.needDraw = true;
                     update(getGraphics());
-                    this.å = false;
+                    this.needDraw = false;
                 }
                 D(-this.Ë / d2, this.Ê / d2, 0.0D, -d1 + d3 * this.zoomSpeed, 1.0D);
                 A();
-                this.å = true;
+                this.needDraw = true;
                 update(getGraphics());
-                this.å = false;
+                this.needDraw = false;
                 this.n = (this.r = this.v = 0.0D);
                 this.Ä = this.w;
                 this.Å = this.x;
@@ -402,9 +398,9 @@ public class WCubeBox extends javax.swing.JPanel implements Runnable
             J();
             F();
             A();
-            this.å = true;
+            this.needDraw = true;
             update(getGraphics());
-            this.å = false;
+            this.needDraw = false;
             try
             {
                 Thread.sleep(this.sleepTime);
@@ -768,7 +764,7 @@ public class WCubeBox extends javax.swing.JPanel implements Runnable
                             }
                         }
                     }
-                    if (localPolygon1.inside(this.L, this.M))
+                    if (localPolygon1.contains(this.L, this.M))
                     {
                         this.Ö = i1;
                         this.é = true;
@@ -799,8 +795,9 @@ public class WCubeBox extends javax.swing.JPanel implements Runnable
                 localPolygon1.addPoint(arrayOfInt1[i9], arrayOfInt2[i9]);
             }
         }
-        this.backImg = super.createImage(new MemoryImageSource(this.width, this.height, this.Q, 0, this.width));
-        C(this.backImg);
+        backImg.setRGB(0, 0, this.width, this.height, this.Q, 0, this.width);
+//        this.backImg = super.createImage(new MemoryImageSource(this.width, this.height, this.Q, 0, this.width));
+        loadImg(this.backImg);
         if (this.é)
         {
             return;
@@ -1143,35 +1140,40 @@ public class WCubeBox extends javax.swing.JPanel implements Runnable
         this.m = d8;
     }
 
-    public Image scale(Image paramImage, int paramInt1, int paramInt2)
+    public BufferedImage scale(BufferedImage image, int dw, int dh)
     {
-        int i1 = paramImage.getWidth(this);
-        int i2 = paramImage.getHeight(this);
-        int[] arrayOfInt = new int[i1 * i2];
-        PixelGrabber localPixelGrabber = new PixelGrabber(paramImage, 0, 0, i1, i2, arrayOfInt, 0, i1);
+        int sw = image.getWidth();
+        int sh = image.getHeight();
+        int[] arr = new int[sw * sh];
+        PixelGrabber localPixelGrabber = new PixelGrabber(image, 0, 0, sw, sh, arr, 0, sw);
         try
         {
             localPixelGrabber.grabPixels();
         }
-        catch (InterruptedException localInterruptedException)
+        catch (InterruptedException exp)
         {
+            Logs.exception(exp);
         }
-        this.U = new int[paramInt1 * paramInt2];
-        int i3 = 65536 * i2 / paramInt2;
-        int i4 = 65536 * i1 / paramInt1;
+        this.U = new int[dw * dh];
+        int i3 = 65536 * sh / dh;
+        int i4 = 65536 * sw / dw;
         int i5 = 0;
         int i6 = 0;
-        for (int i7 = 0; i7 < paramInt1; ++i7)
+        for (int i7 = 0; i7 < dw; ++i7)
         {
-            for (int i8 = 0; i8 < paramInt2; ++i8)
+            for (int i8 = 0; i8 < dh; ++i8)
             {
-                this.U[(i7 + i8 * paramInt1)] = arrayOfInt[((i5 >> 16) + (i6 >> 16) * i1)];
+                this.U[(i7 + i8 * dw)] = arr[((i5 >> 16) + (i6 >> 16) * sw)];
                 i6 += i3;
             }
             i5 += i4;
             i6 = 0;
         }
-        return super.createImage(new MemoryImageSource(paramInt1, paramInt2, this.U, 0, paramInt1));
+        BufferedImage bufImg = new BufferedImage(dw, dh, BufferedImage.TYPE_INT_ARGB);
+        bufImg.setRGB(0, 0, dw, dh, this.U, 0, dw);
+
+//        bufImg.getGraphics().drawImage(image, 0, 0, dw, dh, this);
+        return bufImg;
     }
 
     private void _mouseClicked(MouseEvent paramEvent)
@@ -1239,13 +1241,13 @@ public class WCubeBox extends javax.swing.JPanel implements Runnable
         }
     }
 
-    void C(Image paramImage)
+    private void loadImg(Image paramImage)
     {
-        MediaTracker localMediaTracker = new MediaTracker(this);
-        localMediaTracker.addImage(paramImage, 0);
+        MediaTracker tracker = new MediaTracker(this);
+        tracker.addImage(paramImage, 0);
         try
         {
-            localMediaTracker.waitForID(0);
+            tracker.waitForID(0);
             return;
         }
         catch (InterruptedException exp)
@@ -1257,12 +1259,10 @@ public class WCubeBox extends javax.swing.JPanel implements Runnable
     @Override
     public synchronized void paint(Graphics g)
     {
-        if (this.backImg != null && this.å)
+        if (this.backImg != null && this.needDraw)
         {
             g.drawImage(this.backImg, 0, 0, this);
         }
-//        super.paintComponent(paramGraphics);
-//        g.drawImage(this.backImg, 0, 0, this);
     }
 
     @Override
@@ -1273,7 +1273,7 @@ public class WCubeBox extends javax.swing.JPanel implements Runnable
 
     public void start()
     {
-//        running = true;
+        running = true;
         new Thread(this).start();
     }
 
