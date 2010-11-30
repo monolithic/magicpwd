@@ -166,13 +166,14 @@ public interface ConsEnv
     String FEEL_ARGS = "%feel%";
     String FEEL_PATH = "skin/feel/" + FEEL_ARGS + "/";
     String PROP_CHAR = "130F_CHAR";
+    String PROP_IDIO = "130F_IDIO";
     String PROP_IMPT = "130F_IMPT";
     String PROP_INFO = "130F_INFO";
+    String PROP_JAVA = "130F_JAVA";
     String PROP_KIND = "130F_KIND";
     String PROP_TPLT = "130F_TPLT";
     String PROP_USET = "130F_USET";
     String PROP_SKEY = "130F_SKEY";
-    String PROP_JAVA = "130F_JAVA";
     int MWIZ_ROWS_MAX = 6;
     int MWIZ_AREA_ROW = 3;
     char[] UPPER_DIGEST =
