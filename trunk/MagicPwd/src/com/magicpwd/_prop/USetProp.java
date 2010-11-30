@@ -133,6 +133,11 @@ public class USetProp extends javax.swing.JPanel implements IPropBean
     }
 
     @Override
+    public void showData()
+    {
+    }
+
+    @Override
     public void saveData()
     {
         Object obj = cb_UserLang.getSelectedItem();

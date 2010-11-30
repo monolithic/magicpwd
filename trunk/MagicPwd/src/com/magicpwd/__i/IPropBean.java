@@ -28,6 +28,11 @@ public interface IPropBean
     void initData();
 
     /**
+     * 显示数据
+     */
+    void showData();
+
+    /**
      * 界面数据保存
      */
     void saveData();

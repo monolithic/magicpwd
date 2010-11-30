@@ -91,6 +91,11 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
     }
 
     @Override
+    public void showData()
+    {
+    }
+
+    @Override
     public void saveData()
     {
     }
