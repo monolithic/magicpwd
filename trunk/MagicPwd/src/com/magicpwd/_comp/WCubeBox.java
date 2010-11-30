@@ -31,7 +31,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.PixelGrabber;
-import java.net.MalformedURLException;
 import java.util.Arrays;
 import javax.imageio.ImageIO;
 
@@ -103,9 +102,9 @@ public class WCubeBox extends java.awt.Canvas implements Runnable
     private double Ð;
     private double Ñ;
     private double Ò;
-    private int backGround;
+    private java.awt.Color backGround;
+    private java.awt.Color shadowColor;
     private int textColor;
-    private int shadowColor;
     private int Ö;
     private int size;
     private int cubeLen;
@@ -116,6 +115,7 @@ public class WCubeBox extends java.awt.Canvas implements Runnable
     private int[] ß;
     private boolean showLightButton;
     private boolean spotLight;
+    private boolean firstRun;
     private boolean â;
     private boolean ä;
     private boolean needDraw;
@@ -127,8 +127,8 @@ public class WCubeBox extends java.awt.Canvas implements Runnable
 
     public void initData()
     {
-        this.backGround = 0xFFFFFF;
-        this.shadowColor = 0xFFFFFF;
+        this.backGround = javax.swing.UIManager.getDefaults().getColor("control");
+        this.shadowColor = backGround;
         this.textColor = 0x000000;
         this.spotLight = false;
         this.showLightButton = false;
@@ -137,6 +137,7 @@ public class WCubeBox extends java.awt.Canvas implements Runnable
         this.mouseResponse = 0.2;
         this.zoomSpeed = 5.0;
         this.size = 48;
+        firstRun = true;
 
         this.addMouseListener(new MouseListener()
         {
@@ -203,7 +204,7 @@ public class WCubeBox extends java.awt.Canvas implements Runnable
         this.W = new int[this.width * this.height];
         this.X = new int[this.width * this.height];
         this.ß = new int[this.width];
-        Arrays.fill(this.ß, 0xFF000000 + this.shadowColor);
+        Arrays.fill(this.ß, 0xFF000000 + this.shadowColor.getRGB());
         this.V = new int[this.height];
         this.d = 512;
         this.e = 900;
@@ -213,7 +214,7 @@ public class WCubeBox extends java.awt.Canvas implements Runnable
 
         backImg = new BufferedImage(this.width, this.height, BufferedImage.TYPE_INT_ARGB);
         this.graphics = backImg.getGraphics();
-        this.graphics.setColor(new Color(this.backGround));
+        this.graphics.setColor(this.backGround);
         this.graphics.fillRect(0, 0, this.width, this.height);
 
         if (this.showLightButton)
@@ -263,41 +264,46 @@ public class WCubeBox extends java.awt.Canvas implements Runnable
     @Override
     public void run()
     {
-        String str;
-        FontMetrics metrics = graphics.getFontMetrics();
-        this.Þ = new int[this.width * this.height * 6];
-        this.needDraw = true;
-        for (int i1 = 0; i1 < 6; ++i1)
+        if (firstRun)
         {
-            graphics.setColor(new Color(this.backGround));
-            graphics.fillRect(0, 0, this.width, this.height);
-            graphics.setColor(new Color(this.textColor));
-            str = "Loading Image " + Integer.toString(i1 + 1);
-            graphics.drawString(str, this.J - (metrics.stringWidth(str) / 2), this.K);
-            update(super.getGraphics());
-            this.cubeImg = readImg();
-            loadImg(this.cubeImg);
-            this.cubeImg = scale(this.cubeImg, this.size, this.size);
-            System.arraycopy(this.U, 0, this.Þ, i1 * this.size * this.size, this.size * this.size);
-        }
-        this.needDraw = false;
+            String str;
+            FontMetrics metrics = graphics.getFontMetrics();
+            this.Þ = new int[this.width * this.height * 6];
+            this.needDraw = true;
+            for (int i1 = 0; i1 < 6; ++i1)
+            {
+                graphics.setColor(this.backGround);
+                graphics.fillRect(0, 0, this.width, this.height);
+                graphics.setColor(new Color(this.textColor));
+                str = "Loading Image " + Integer.toString(i1 + 1);
+                graphics.drawString(str, this.J - (metrics.stringWidth(str) / 2), this.K);
+                update(super.getGraphics());
+                this.cubeImg = readImg();
+                loadImg(this.cubeImg);
+                this.cubeImg = scale(this.cubeImg, this.size, this.size);
+                System.arraycopy(this.U, 0, this.Þ, i1 * this.size * this.size, this.size * this.size);
+            }
+            this.needDraw = false;
 
-        this.Ò = 0.0D;
-        this.Ð = 50.0D;
-        this.Ñ = 50.0D;
-        this.ä = false;
-        this.mouseEntered = false;
-        this.ç = false;
-        this.è = false;
-        this.é = false;
-        M();
-        System.arraycopy(this.a, 0, this.Z, 0, this.a.length);
-        this.n = (this.r = this.v = 0.0D);
-        this.k = (this.p = this.u = 1.0D);
-        this.l = (this.m = this.o = this.q = this.s = this.t = 0.0D);
-        this.Ä = (this.Å = this.Æ = 0.0D);
-        F();
-        this.ç = false;
+            this.Ò = 0.0D;
+            this.Ð = 50.0D;
+            this.Ñ = 50.0D;
+            this.ä = false;
+            this.mouseEntered = false;
+            this.ç = false;
+            this.è = false;
+            this.é = false;
+            M();
+            System.arraycopy(this.a, 0, this.Z, 0, this.a.length);
+            this.n = (this.r = this.v = 0.0D);
+            this.k = (this.p = this.u = 1.0D);
+            this.l = (this.m = this.o = this.q = this.s = this.t = 0.0D);
+            this.Ä = (this.Å = this.Æ = 0.0D);
+            F();
+            this.ç = false;
+            this.firstRun = false;
+        }
+
         while (running)
         {
             this.â = this.spotLight;
@@ -1267,8 +1273,11 @@ public class WCubeBox extends java.awt.Canvas implements Runnable
 
     public void start()
     {
-        running = true;
-        new Thread(this).start();
+        if (!running)
+        {
+            running = true;
+            new Thread(this).start();
+        }
     }
 
     public void stop()

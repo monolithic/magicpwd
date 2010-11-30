@@ -5,6 +5,7 @@ import com.magicpwd._comn.S1S2;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._prop.CharProp;
+import com.magicpwd._prop.IdioProp;
 import com.magicpwd._prop.InfoProp;
 import com.magicpwd._prop.JavaProp;
 import com.magicpwd._prop.KindProp;
@@ -28,6 +29,7 @@ public class MdiDialog extends javax.swing.JDialog
     private javax.swing.DefaultListModel lm_PropList;
     private java.util.HashMap<String, IPropBean> hm_PropList;
     private MainPtn mainPtn;
+    private S1S2 lastItem;
 
     public MdiDialog(MainPtn mainPtn)
     {
@@ -168,6 +170,7 @@ public class MdiDialog extends javax.swing.JDialog
         USetProp up = new USetProp(mainPtn);
         up.initView();
         up.initLang();
+        up.initData();
         pl_CardPanel.add(ConsEnv.PROP_USET, up);
         hm_PropList.put(ConsEnv.PROP_USET, up);
 
@@ -176,6 +179,7 @@ public class MdiDialog extends javax.swing.JDialog
         CharProp cp = new CharProp(mainPtn);
         cp.initView();
         cp.initLang();
+        cp.initData();
         pl_CardPanel.add(ConsEnv.PROP_CHAR, cp);
         hm_PropList.put(ConsEnv.PROP_CHAR, cp);
 
@@ -184,6 +188,7 @@ public class MdiDialog extends javax.swing.JDialog
         TpltProp tp = new TpltProp(mainPtn);
         tp.initView();
         tp.initLang();
+        tp.initData();
         pl_CardPanel.add(ConsEnv.PROP_TPLT, tp);
         hm_PropList.put(ConsEnv.PROP_TPLT, tp);
 
@@ -192,6 +197,7 @@ public class MdiDialog extends javax.swing.JDialog
         KindProp kp = new KindProp(mainPtn);
         kp.initView();
         kp.initLang();
+        kp.initData();
         pl_CardPanel.add(ConsEnv.PROP_KIND, kp);
         hm_PropList.put(ConsEnv.PROP_KIND, kp);
 
@@ -200,24 +206,36 @@ public class MdiDialog extends javax.swing.JDialog
         SKeyProp sp = new SKeyProp(mainPtn);
         sp.initView();
         sp.initLang();
+        sp.initData();
         pl_CardPanel.add(ConsEnv.PROP_SKEY, sp);
         hm_PropList.put(ConsEnv.PROP_SKEY, sp);
 
-        t = Lang.getLang(LangRes.P30F1209, "Java环境");
+        t = Lang.getLang(LangRes.P30F1208, "Java环境");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_JAVA, t, t));
         JavaProp jp = new JavaProp(mainPtn);
         jp.initView();
         jp.initLang();
+        jp.initData();
         pl_CardPanel.add(ConsEnv.PROP_JAVA, jp);
         hm_PropList.put(ConsEnv.PROP_JAVA, jp);
 
-        t = Lang.getLang(LangRes.P30F1208, "关于软件");
+        t = Lang.getLang(LangRes.P30F1209, "关于软件");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_INFO, t, t));
         InfoProp ip = new InfoProp(mainPtn);
         ip.initView();
         ip.initLang();
+        ip.initData();
         pl_CardPanel.add(ConsEnv.PROP_INFO, ip);
         hm_PropList.put(ConsEnv.PROP_INFO, ip);
+
+        t = Lang.getLang(LangRes.P30F120A, "特别致谢");
+        lm_PropList.addElement(new S1S2(ConsEnv.PROP_IDIO, t, t));
+        IdioProp dp = new IdioProp(mainPtn);
+        dp.initView();
+        dp.initLang();
+        dp.initData();
+        pl_CardPanel.add(ConsEnv.PROP_IDIO, dp);
+        hm_PropList.put(ConsEnv.PROP_IDIO, dp);
 
         pack();
         Bean.centerForm(this, mainPtn);
@@ -247,7 +265,7 @@ public class MdiDialog extends javax.swing.JDialog
 
         cl_CardLayout.show(pl_CardPanel, panelKey);
         ls_PropList.setSelectedIndex(idx);
-        hm_PropList.get(panelKey).initData();
+        hm_PropList.get(panelKey).showData();
 
         if (lastPanel != null)
         {
@@ -270,10 +288,16 @@ public class MdiDialog extends javax.swing.JDialog
         }
 
         S1S2 kvItem = (S1S2) obj;
+        if (lastItem != null && kvItem.getK().equals(lastItem.getK()))
+        {
+            return;
+        }
+        lastItem = kvItem;
+
         cl_CardLayout.show(pl_CardPanel, kvItem.getK());
         lb_HeadPanel.setText(kvItem.getV());
         setTitle(kvItem.getV());
-        hm_PropList.get(kvItem.getK()).initData();
+        hm_PropList.get(kvItem.getK()).showData();
         if (lastPanel != null)
         {
             hm_PropList.get(lastPanel).saveData();

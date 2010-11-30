@@ -19,6 +19,7 @@ package com.magicpwd._prop;
 import com.magicpwd.__i.IPropBean;
 import com.magicpwd._comp.LnkLabel;
 import com.magicpwd._comp.WCubeBox;
+import com.magicpwd.v.mpwd.MainPtn;
 
 /**
  *
@@ -29,9 +30,11 @@ public class IdioProp extends javax.swing.JPanel implements IPropBean
 
     private WCubeBox cb_CubeBox;
     private final int USER_CNT = 4;
+    private MainPtn mainPtn;
 
-    public IdioProp()
+    public IdioProp(MainPtn mainPtn)
     {
+        this.mainPtn = mainPtn;
     }
 
     @Override
@@ -84,7 +87,7 @@ public class IdioProp extends javax.swing.JPanel implements IPropBean
         vsg.addContainerGap();
         vsg.addComponent(pl_CubePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        vsg.addComponent(pl_IdioPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE);
+        vsg.addComponent(pl_IdioPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE);
         vsg.addContainerGap();
         javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         vpg.addGroup(vsg);
