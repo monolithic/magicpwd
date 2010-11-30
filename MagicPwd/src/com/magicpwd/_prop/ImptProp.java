@@ -32,6 +32,11 @@ public class ImptProp extends javax.swing.JPanel implements IPropBean
     }
 
     @Override
+    public void showData()
+    {
+    }
+
+    @Override
     public void saveData()
     {
     }

@@ -18,6 +18,7 @@ package com.magicpwd._comp;
 
 import com.magicpwd._util.Logs;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -126,17 +127,16 @@ public class WCubeBox extends java.awt.Canvas implements Runnable
 
     public void initData()
     {
-        this.backGround = 0xFF0099;
-        this.shadowColor = 0xCC99FF;
+        this.backGround = 0xFFFFFF;
+        this.shadowColor = 0xFFFFFF;
         this.textColor = 0x000000;
         this.spotLight = false;
         this.showLightButton = false;
-        this.sleepTime = 400;
-        this.angleStep = 1.0;
-        this.mouseResponse = 6.0;
+        this.sleepTime = 100;
+        this.angleStep = 0.1;
+        this.mouseResponse = 0.2;
         this.zoomSpeed = 5.0;
         this.size = 48;
-
 
         this.addMouseListener(new MouseListener()
         {
@@ -184,6 +184,9 @@ public class WCubeBox extends java.awt.Canvas implements Runnable
             }
         });
 
+        Dimension dim = this.getPreferredSize();
+        this.width = dim.width;
+        this.height = dim.height;
         this.size = this.width < this.height ? this.width : this.height;
         this.cubeLen = (this.size / 2);
         this.a = new double[]
@@ -1210,7 +1213,6 @@ public class WCubeBox extends java.awt.Canvas implements Runnable
     private void _mouseEntered(MouseEvent e)
     {
         this.mouseEntered = true;
-        System.out.println("OK");
     }
 
     private void _mouseExited(MouseEvent e)
@@ -1221,7 +1223,6 @@ public class WCubeBox extends java.awt.Canvas implements Runnable
 
     private void _mouseMoved(MouseEvent e)
     {
-        System.out.println("OK@");
         this.mouseEntered = true;
         Point point = e.getPoint();
         this.L = point.x;

@@ -4,10 +4,9 @@
 package com.magicpwd._comp;
 
 import com.magicpwd._util.Desk;
-import com.magicpwd._util.Util;
 
 /**
- * @author shangwen.yao
+ * @author Amon
  * 
  */
 public class LnkLabel extends javax.swing.JLabel
