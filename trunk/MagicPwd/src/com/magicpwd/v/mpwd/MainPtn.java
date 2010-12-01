@@ -46,7 +46,6 @@ import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.UserMdl;
-import com.magicpwd.m.mpwd.ListMdl;
 import com.magicpwd.m.mpwd.MpwdMdl;
 import com.magicpwd.m.mpwd.TreeMdl;
 import com.magicpwd.r.KeysCR;
@@ -234,7 +233,7 @@ public class MainPtn extends AFrame
         java.util.Date s = c.getTime();
         c.add(java.util.Calendar.DAY_OF_MONTH, 1);
         java.util.Date t = c.getTime();
-        getListMdl().listTask(s, t);
+        mpwdMdl.getListMdl().listTask(s, t);
         return true;
     }
 
@@ -262,11 +261,24 @@ public class MainPtn extends AFrame
         {
             isSearch = true;
             queryKey = meta;
+            tr_GuidTree.setSelectionPath(null);
             return mpwdMdl.getListMdl().listKeysByMeta(meta);
         }
         else
         {
             return mpwdMdl.getListMdl().listKeysByKind(queryKey);
+        }
+    }
+
+    public void findLast()
+    {
+        if (isSearch)
+        {
+            mpwdMdl.getListMdl().listKeysByMeta(queryKey);
+        }
+        else if (com.magicpwd._util.Char.isValidateHash(queryKey))
+        {
+            mpwdMdl.getListMdl().listKeysByKind(queryKey);
         }
     }
 
@@ -572,18 +584,6 @@ public class MainPtn extends AFrame
         tb_LastIndx = t;
         Util.scrollToVisible(tb_KeysView, tb_LastIndx, 0, true);
         tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
-    }
-
-    public void showList()
-    {
-        if (isSearch)
-        {
-            mpwdMdl.getListMdl().listKeysByMeta(queryKey);
-        }
-        else if (com.magicpwd._util.Char.isValidateHash(queryKey))
-        {
-            mpwdMdl.getListMdl().listKeysByKind(queryKey);
-        }
     }
 
     private void initPropView()
@@ -1417,13 +1417,18 @@ public class MainPtn extends AFrame
         return mpwdMdl.getGridMdl().isModified();
     }
 
-    public void removeSelected()
+    public void removeSelectedKeys()
+    {
+        mpwdMdl.getListMdl().wDelete(ls_GuidList.getSelectedIndex());
+    }
+
+    public void removeSelectedItem()
     {
         mpwdMdl.getGridMdl().wRemove(tb_KeysView.getSelectedRow());
         selectNext(0, true);
     }
 
-    public void updateSelected()
+    public void updateSelectedItem()
     {
         mpwdMdl.getGridMdl().setModified(true);
         if (mpwdMdl.getGridMdl().getRowCount() < ConsEnv.PWDS_HEAD_SIZE)
@@ -1589,11 +1594,6 @@ public class MainPtn extends AFrame
     public TreeMdl getTreeMdl()
     {
         return mpwdMdl.getTreeMdl();
-    }
-
-    public ListMdl getListMdl()
-    {
-        return mpwdMdl.getListMdl();
     }
 
     public void showOptions(String propName)

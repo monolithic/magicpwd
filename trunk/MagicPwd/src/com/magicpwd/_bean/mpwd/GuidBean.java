@@ -207,7 +207,7 @@ public class GuidBean extends javax.swing.JPanel implements IMpwdBean
         Tplt tplt = (Tplt) obj;
         itemData.setSpec(IEditItem.SPEC_GUID_TPLT, tplt.getP30F1103());
 
-        mainPtn.updateSelected();
+        mainPtn.updateSelectedItem();
     }
 
     @Override

@@ -36,7 +36,7 @@ public class DeleteAction extends AMpwdAction
         {
             return;
         }
-        mainPtn.getListMdl().wDelete(mainPtn.getSelectedListIndex());
+        mainPtn.removeSelectedKeys();
         mainPtn.clearGrid();
         mainPtn.showPropInfo();
     }

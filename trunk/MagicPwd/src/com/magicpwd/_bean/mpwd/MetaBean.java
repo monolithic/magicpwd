@@ -135,7 +135,7 @@ public class MetaBean extends javax.swing.JPanel implements IMpwdBean
         itemData.setName(name);
         itemData.setData(ta_PropData.getText());
 
-        mainPtn.updateSelected();
+        mainPtn.updateSelectedItem();
     }
 
     @Override
