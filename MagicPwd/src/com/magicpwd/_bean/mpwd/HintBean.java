@@ -208,7 +208,7 @@ public class HintBean extends javax.swing.JPanel implements IMpwdBean
         itemData.setName(name);
         itemData.setData(data);
 
-        mainPtn.updateSelected();
+        mainPtn.updateSelectedItem();
     }
 
     @Override

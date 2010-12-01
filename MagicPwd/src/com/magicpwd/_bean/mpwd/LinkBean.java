@@ -137,7 +137,7 @@ public class LinkBean extends ALinkBean implements IMpwdBean
     {
         if (Lang.showFirm(mainPtn, LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
         {
-            mainPtn.removeSelected();
+            mainPtn.removeSelectedItem();
         }
     }
 
@@ -155,7 +155,7 @@ public class LinkBean extends ALinkBean implements IMpwdBean
         itemData.setName(name);
         itemData.setData(tf_PropData.getText());
 
-        mainPtn.updateSelected();
+        mainPtn.updateSelectedItem();
     }
 
     @Override

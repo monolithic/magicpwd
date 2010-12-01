@@ -151,9 +151,12 @@ public class ListMdl extends DefaultListModel
 
     public void wDelete(int index)
     {
-        DBA3000.deletePwdsData(keysList.get(index).getP30F0104());
-        keysList.remove(index);
-        fireIntervalRemoved(this, 0, index);
+        if (index > -1 && index < keysList.size())
+        {
+            DBA3000.deletePwdsData(keysList.get(index).getP30F0104());
+            keysList.remove(index);
+            fireIntervalRemoved(this, 0, index);
+        }
     }
 
     public Keys getElement(int index)

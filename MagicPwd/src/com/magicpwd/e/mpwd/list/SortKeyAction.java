@@ -22,7 +22,7 @@ public class SortKeyAction extends AMpwdAction
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
         mainPtn.getUserMdl().setCfg(ConsCfg.CFG_VIEW_LIST_KEY, e.getActionCommand());
-        mainPtn.showList();
+        mainPtn.findLast();
     }
 
     @Override

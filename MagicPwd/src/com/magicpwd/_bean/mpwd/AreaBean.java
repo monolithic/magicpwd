@@ -130,7 +130,7 @@ public class AreaBean extends AAreaBean implements IMpwdBean
     {
         if (Lang.showFirm(mainPtn, LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
         {
-            mainPtn.removeSelected();
+            mainPtn.removeSelectedItem();
         }
     }
 
@@ -148,7 +148,7 @@ public class AreaBean extends AAreaBean implements IMpwdBean
         itemData.setName(name);
         itemData.setData(ta_PropData.getText());
 
-        mainPtn.updateSelected();
+        mainPtn.updateSelectedItem();
     }
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JLabel lb_PropName;

@@ -136,7 +136,7 @@ public class PwdsBean extends APwdsBean implements IMpwdBean
     {
         if (Lang.showFirm(formPtn, LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
         {
-            mainPtn.removeSelected();
+            mainPtn.removeSelectedItem();
         }
     }
 
@@ -154,7 +154,7 @@ public class PwdsBean extends APwdsBean implements IMpwdBean
         itemData.setName(name);
         itemData.setData(new String(pf_PropData.getPassword()));
 
-        mainPtn.updateSelected();
+        mainPtn.updateSelectedItem();
     }
 
     @Override

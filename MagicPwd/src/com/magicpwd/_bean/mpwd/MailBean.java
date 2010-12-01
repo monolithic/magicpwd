@@ -136,7 +136,7 @@ public class MailBean extends AMailBean implements IMpwdBean
     {
         if (Lang.showFirm(mainPtn, LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
         {
-            mainPtn.removeSelected();
+            mainPtn.removeSelectedItem();
         }
     }
 
@@ -158,7 +158,7 @@ public class MailBean extends AMailBean implements IMpwdBean
 
         itemData.setName(name);
 
-        mainPtn.updateSelected();
+        mainPtn.updateSelectedItem();
     }
 
     @Override

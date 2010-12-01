@@ -149,7 +149,7 @@ public class FileBean extends AFileBean implements IMpwdBean
                 file.delete();
             }
 
-            mainPtn.removeSelected();
+            mainPtn.removeSelectedItem();
         }
         catch (Exception exp)
         {
@@ -176,7 +176,7 @@ public class FileBean extends AFileBean implements IMpwdBean
 
         itemData.setName(name);
 
-        mainPtn.updateSelected();
+        mainPtn.updateSelectedItem();
     }
 
     @Override

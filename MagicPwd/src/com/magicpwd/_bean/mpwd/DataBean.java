@@ -150,7 +150,7 @@ public class DataBean extends ADataBean implements IMpwdBean
             return;
         }
 
-        mainPtn.updateSelected();
+        mainPtn.updateSelectedItem();
     }
 
     @Override
