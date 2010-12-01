@@ -220,7 +220,7 @@
             </item>
             <seperator />
             <item type="normal" text="$P30F7623" text-def="键盘快捷">
-                <action class="com.magicpwd.e.mpwd.file.ExitAction">
+                <action class="com.magicpwd.e.mpwd.help.KeysAction">
                     <stroke key="F6" />
                 </action>
             </item>

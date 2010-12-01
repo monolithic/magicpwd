@@ -29,7 +29,7 @@ public class IdioProp extends javax.swing.JPanel implements IPropBean
 {
 
     private WCubeBox cb_CubeBox;
-    private final int USER_CNT = 4;
+    private final int USER_CNT = 5;
     private MainPtn mainPtn;
 
     public IdioProp(MainPtn mainPtn)
@@ -65,6 +65,7 @@ public class IdioProp extends javax.swing.JPanel implements IPropBean
 
             lnk = new LnkLabel();
             lnk.setHorizontalAlignment(javax.swing.JLabel.LEFT);
+            lnk.setAutoOpenLink(true);
             gbc.gridx = 1;
             gbc.gridy = i;
             gbc.fill = java.awt.GridBagConstraints.HORIZONTAL;
@@ -100,26 +101,32 @@ public class IdioProp extends javax.swing.JPanel implements IPropBean
         int i = 0;
         lb_UserName[i].setText("Amon");
         ll_UserMail[i].setText("amon@magicpwd.com");
-        ll_UserMail[i].setLinkUrl("amon@magicpwd.com");
+        ll_UserMail[i].setLinkUrl("mailto:amon@magicpwd.com");
         ll_UserMail[i].setToolTipText("Mail to Amon");
 
         i += 1;
         lb_UserName[i].setText("Aven");
-        ll_UserMail[i].setText("aven@magicpwd.com");
-        ll_UserMail[i].setLinkUrl("aven@magicpwd.com");
+        ll_UserMail[i].setText("avenyao@gmail.com");
+        ll_UserMail[i].setLinkUrl("mailto:avenyao@gmail.com");
         ll_UserMail[i].setToolTipText("Mail to Aven");
 
         i += 1;
         lb_UserName[i].setText("Sand");
-        ll_UserMail[i].setText("sand@magicpwd.com");
-        ll_UserMail[i].setLinkUrl("sand@magicpwd.com");
+        ll_UserMail[i].setText("yansand@hotmail.com");
+        ll_UserMail[i].setLinkUrl("mailto:yansand@hotmail.com");
         ll_UserMail[i].setToolTipText("Mail to Sand");
 
         i += 1;
-        lb_UserName[i].setText("sanjer");
-        ll_UserMail[i].setText("sanjer@magicpwd.com");
-        ll_UserMail[i].setLinkUrl("sanjer@magicpwd.com");
-        ll_UserMail[i].setToolTipText("Mail to sanjer");
+        lb_UserName[i].setText("Neo");
+        ll_UserMail[i].setText("neo.alexander@hotmail.com");
+        ll_UserMail[i].setLinkUrl("mailto:neo.alexander@hotmail.com");
+        ll_UserMail[i].setToolTipText("Mail to Neo");
+
+        i += 1;
+        lb_UserName[i].setText("Sanjer");
+        ll_UserMail[i].setText("sanjerpaopao@126.com");
+        ll_UserMail[i].setLinkUrl("mailto:sanjerpaopao@126.com");
+        ll_UserMail[i].setToolTipText("Mail to Sanjer");
     }
 
     @Override

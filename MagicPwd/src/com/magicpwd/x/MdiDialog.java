@@ -218,16 +218,7 @@ public class MdiDialog extends javax.swing.JDialog
         pl_CardPanel.add(ConsEnv.PROP_JAVA, jp);
         hm_PropList.put(ConsEnv.PROP_JAVA, jp);
 
-        t = Lang.getLang(LangRes.P30F1209, "关于软件");
-        lm_PropList.addElement(new S1S2(ConsEnv.PROP_INFO, t, t));
-        InfoProp ip = new InfoProp(mainPtn);
-        ip.initView();
-        ip.initLang();
-        ip.initData();
-        pl_CardPanel.add(ConsEnv.PROP_INFO, ip);
-        hm_PropList.put(ConsEnv.PROP_INFO, ip);
-
-        t = Lang.getLang(LangRes.P30F120A, "特别致谢");
+        t = Lang.getLang(LangRes.P30F1209, "特别致谢");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_IDIO, t, t));
         IdioProp dp = new IdioProp(mainPtn);
         dp.initView();
@@ -235,6 +226,15 @@ public class MdiDialog extends javax.swing.JDialog
         dp.initData();
         pl_CardPanel.add(ConsEnv.PROP_IDIO, dp);
         hm_PropList.put(ConsEnv.PROP_IDIO, dp);
+
+        t = Lang.getLang(LangRes.P30F120A, "关于软件");
+        lm_PropList.addElement(new S1S2(ConsEnv.PROP_INFO, t, t));
+        InfoProp ip = new InfoProp(mainPtn);
+        ip.initView();
+        ip.initLang();
+        ip.initData();
+        pl_CardPanel.add(ConsEnv.PROP_INFO, ip);
+        hm_PropList.put(ConsEnv.PROP_INFO, ip);
 
         pack();
         Bean.centerForm(this, mainPtn);
@@ -247,7 +247,11 @@ public class MdiDialog extends javax.swing.JDialog
      */
     public void showProp(String panelKey, boolean showList)
     {
-        if (!com.magicpwd._util.Char.isValidate(panelKey) || panelKey.equals(lastPanel))
+        if (!com.magicpwd._util.Char.isValidate(panelKey))
+        {
+            return;
+        }
+        if (isVisible() && panelKey.equals(lastPanel))
         {
             return;
         }
