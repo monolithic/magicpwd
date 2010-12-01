@@ -29,7 +29,7 @@ public class IdioProp extends javax.swing.JPanel implements IPropBean
 {
 
     private WCubeBox cb_CubeBox;
-    private final int USER_CNT = 5;
+    private final int USER_CNT = 6;
     private MainPtn mainPtn;
 
     public IdioProp(MainPtn mainPtn)
@@ -52,7 +52,7 @@ public class IdioProp extends javax.swing.JPanel implements IPropBean
         javax.swing.JLabel lbl;
         LnkLabel lnk;
         java.awt.GridBagConstraints gbc = new java.awt.GridBagConstraints();
-        gbc.insets = new java.awt.Insets(1, 1, 1, 1);
+        gbc.insets = new java.awt.Insets(1, 2, 1, 2);
         for (int i = 0; i < USER_CNT; i += 1)
         {
             lbl = new javax.swing.JLabel();
@@ -127,6 +127,12 @@ public class IdioProp extends javax.swing.JPanel implements IPropBean
         ll_UserMail[i].setText("sanjerpaopao@126.com");
         ll_UserMail[i].setLinkUrl("mailto:sanjerpaopao@126.com");
         ll_UserMail[i].setToolTipText("Mail to Sanjer");
+
+        i += 1;
+        lb_UserName[i].setText("Abey");
+        ll_UserMail[i].setText("hahajing319@163.com");
+        ll_UserMail[i].setLinkUrl("mailto:hahajing319@163.com");
+        ll_UserMail[i].setToolTipText("Mail to Abey");
     }
 
     @Override
