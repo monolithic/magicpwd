@@ -111,8 +111,7 @@ public class FindBar extends javax.swing.JPanel
             return;
         }
 
-        boolean b = mainPtn.getListMdl().listKeysByMeta(text);
-        if (!b)
+        if (!mainPtn.findKeys(text))
         {
             Lang.showMesg(mainPtn, LangRes.P30F7A19, "查询不到符合您条件的数据，请用空格或加号分隔您的搜索关键字后重试！");
             requestFocus();

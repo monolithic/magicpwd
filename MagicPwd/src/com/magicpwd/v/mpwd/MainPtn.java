@@ -38,6 +38,7 @@ import com.magicpwd._mail.Connect;
 import com.magicpwd._mail.MailDlg;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Card;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Jcsv;
 import com.magicpwd._util.Lang;
@@ -254,6 +255,21 @@ public class MainPtn extends AFrame
         return kind != null && kind.getC2010107() != null && kind.getC2010107().indexOf("task") >= 0;
     }
 
+    public boolean findKeys(String meta)
+    {
+        ls_LastIndx = -1;
+        if (Char.isValidate(meta))
+        {
+            isSearch = true;
+            queryKey = meta;
+            return mpwdMdl.getListMdl().listKeysByMeta(meta);
+        }
+        else
+        {
+            return mpwdMdl.getListMdl().listKeysByKind(queryKey);
+        }
+    }
+
     public boolean saveKeys()
     {
         // 是否需要保存
@@ -330,7 +346,7 @@ public class MainPtn extends AFrame
             }
             else if ("0".equals(queryKey) || com.magicpwd._util.Char.isValidateHash(queryKey))
             {
-                mpwdMdl.getListMdl().listKeysByHash(queryKey);
+                mpwdMdl.getListMdl().listKeysByKind(queryKey);
             }
         }
 
@@ -566,7 +582,7 @@ public class MainPtn extends AFrame
         }
         else if (com.magicpwd._util.Char.isValidateHash(queryKey))
         {
-            mpwdMdl.getListMdl().listKeysByHash(queryKey);
+            mpwdMdl.getListMdl().listKeysByKind(queryKey);
         }
     }
 
@@ -913,7 +929,7 @@ public class MainPtn extends AFrame
             else
             {
                 queryKey = kind.getC2010103();
-                mpwdMdl.getListMdl().listKeysByHash(queryKey);
+                mpwdMdl.getListMdl().listKeysByKind(queryKey);
             }
         }
         isSearch = false;
@@ -1360,7 +1376,7 @@ public class MainPtn extends AFrame
             Jcsv csv = new Jcsv(file);
             java.util.ArrayList<java.util.ArrayList<String>> data = csv.readFile();
             int size = mpwdMdl.getGridMdl().wImport(data, kind.getC2010103());
-            mpwdMdl.getListMdl().listKeysByHash(kind.getC2010103());
+            mpwdMdl.getListMdl().listKeysByKind(kind.getC2010103());
             Lang.showMesg(this, LangRes.P30F7A07, "成功导入数据个数：{0}", "" + size);
 
         }

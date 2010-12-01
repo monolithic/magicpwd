@@ -65,7 +65,7 @@ public class ListMdl extends DefaultListModel
         fireIntervalAdded(this, 0, c);
     }
 
-    public boolean listKeysByHash(String typeHash)
+    public boolean listKeysByKind(String typeHash)
     {
         int s = keysList.size();
         keysList.clear();
