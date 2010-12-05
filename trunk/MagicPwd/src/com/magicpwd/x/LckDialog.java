@@ -4,6 +4,7 @@
  */
 package com.magicpwd.x;
 
+import com.magicpwd.__a.AFrame;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Jpng;
 import com.magicpwd._util.Logs;
@@ -17,7 +18,7 @@ public class LckDialog extends javax.swing.JDialog
 
     private Jpng jpng;
 
-    public LckDialog(javax.swing.JFrame form)
+    public LckDialog(AFrame form)
     {
         super(form, true);
         setUndecorated(true);

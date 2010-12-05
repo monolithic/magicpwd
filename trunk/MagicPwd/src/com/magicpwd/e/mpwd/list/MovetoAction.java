@@ -10,7 +10,7 @@ import com.magicpwd._comn.Keys;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
-import com.magicpwd.x.DatDialog;
+import com.magicpwd.x.CatDialog;
 
 /**
  *
@@ -26,7 +26,7 @@ public class MovetoAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        DatDialog dat = new DatDialog(mainPtn, new IBackCall()
+        CatDialog dat = new CatDialog(mainPtn, new IBackCall()
         {
 
             @Override
