@@ -11,7 +11,6 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._mail.Connect;
 import com.magicpwd._mail.Reader;
 import com.magicpwd._util.Bean;
-import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.v.TrayPtn;
@@ -112,12 +111,7 @@ public class CloudResumeAction extends AMpwdAction
                 {
                     if (ConsEnv.FILE_SYNC.equals(item.getK()))
                     {
-                        Jzip.unZip(item.getV(), ".");
-                        dialog.setVisible(false);
-                        dialog.dispose();
-                        Lang.showMesg(mainPtn, LangRes.P30F7A3F, "数据恢复成功，您需要重新启动本程序！");
-                        Logs.end();
-                        System.exit(0);
+                        mainPtn.localResume(item.getV());
                     }
                 }
             }

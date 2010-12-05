@@ -7,14 +7,18 @@ package com.magicpwd.__a;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._mail.Connect;
+import com.magicpwd._mail.Reader;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
+import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.TrayPtn;
+import com.magicpwd.x.LckDialog;
 import java.io.IOException;
 import java.util.EventListener;
 
@@ -31,6 +35,7 @@ public abstract class AFrame extends javax.swing.JFrame
     protected static java.util.HashMap<String, javax.swing.Icon> defIcon;
     private static java.util.Properties defProp;
     private java.util.Properties favProp;
+    private LckDialog lckDialog;
 
     public AFrame(TrayPtn trayPtn, UserMdl userMdl)
     {
@@ -91,6 +96,47 @@ public abstract class AFrame extends javax.swing.JFrame
     @Override
     public abstract void requestFocus();
 
+    @Override
+    protected void processWindowEvent(java.awt.event.WindowEvent e)
+    {
+        if (e.getID() == java.awt.event.WindowEvent.WINDOW_CLOSING)
+        {
+            hideFrame();
+            return;
+        }
+        super.processWindowEvent(e);
+    }
+
+    private void loadFav()
+    {
+        favProp = new java.util.Properties();
+
+        java.io.File file = new java.io.File(ConsEnv.DIR_SKIN, ConsEnv.DIR_FEEL);
+        if (!file.exists() || !file.isDirectory() || !file.canRead())
+        {
+            return;
+        }
+        file = new java.io.File(file, userMdl.getFeel() + '/' + ConsEnv.SKIN_FEEL_FILE);
+        if (!file.exists() || !file.isFile() || !file.canRead())
+        {
+            return;
+        }
+        java.io.FileInputStream stream = null;
+        try
+        {
+            stream = new java.io.FileInputStream(file);
+            favProp.load(stream);
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+        finally
+        {
+            Bean.closeStream(stream);
+        }
+    }
+
     /**
      * 获取用户偏好图片
      * @param favHash
@@ -134,36 +180,6 @@ public abstract class AFrame extends javax.swing.JFrame
 //                favHash = defProp.getProperty(favHash);
 //            }
             defIcon.put("fav:" + favHash, favIcon);
-        }
-    }
-
-    private void loadFav()
-    {
-        favProp = new java.util.Properties();
-
-        java.io.File file = new java.io.File(ConsEnv.DIR_SKIN, ConsEnv.DIR_FEEL);
-        if (!file.exists() || !file.isDirectory() || !file.canRead())
-        {
-            return;
-        }
-        file = new java.io.File(file, userMdl.getFeel() + '/' + ConsEnv.SKIN_FEEL_FILE);
-        if (!file.exists() || !file.isFile() || !file.canRead())
-        {
-            return;
-        }
-        java.io.FileInputStream stream = null;
-        try
-        {
-            stream = new java.io.FileInputStream(file);
-            favProp.load(stream);
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-        }
-        finally
-        {
-            Bean.closeStream(stream);
         }
     }
 
@@ -227,17 +243,6 @@ public abstract class AFrame extends javax.swing.JFrame
         });
     }
 
-    @Override
-    protected void processWindowEvent(java.awt.event.WindowEvent e)
-    {
-        if (e.getID() == java.awt.event.WindowEvent.WINDOW_CLOSING)
-        {
-            hideFrame();
-            return;
-        }
-        super.processWindowEvent(e);
-    }
-
     /**
      * @return the userMdl
      */
@@ -252,5 +257,89 @@ public abstract class AFrame extends javax.swing.JFrame
     public void setUserMdl(UserMdl userMdl)
     {
         this.userMdl = userMdl;
+    }
+
+    public String showCloudResumeDialog()
+    {
+        try
+        {
+            String docs = "";//userMdl.readCfg("pop_mail");
+            if (!com.magicpwd._util.Char.isValidate(docs))
+            {
+                lckDialog.setVisible(false);
+                lckDialog.dispose();
+                Lang.showMesg(this, LangRes.P30F7A3A, "您还没有配置您的POP邮箱信息！");
+                return null;
+            }
+
+            String[] data = docs.split("\n");
+
+            trayPtn.endSave();
+            Connect connect = new Connect(data[0], data[2]);
+            connect.setUsername(data[1]);
+            if (!connect.useDefault())
+            {
+                Lang.showMesg(this, null, "查找不到对应的服务信息，如有疑问请与作者联系！");
+                return null;
+            }
+
+            // 读取备份文件
+            Reader reader = new Reader(connect);
+            javax.mail.Store store = connect.getStore();
+            javax.mail.Folder folder = store.getDefaultFolder().getFolder("inbox");
+            if (folder.isOpen())
+            {
+                folder.close(false);
+            }
+            folder.open(javax.mail.Folder.READ_ONLY);
+            java.util.List mesgList = new java.util.ArrayList<String>();
+            javax.mail.Message message = reader.find(folder, null, Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"), null, "http://magicpwd.com/?*" + userMdl.getCfg("mail.date"));
+            if (message == null)
+            {
+                lckDialog.setVisible(false);
+                lckDialog.dispose();
+                Lang.showMesg(this, LangRes.P30F7A3E, "无法从POP邮箱读取备份数据！");
+                return null;
+            }
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+        return "";
+    }
+
+    public boolean localBackup(String filePath)
+    {
+        return true;
+    }
+
+    public boolean localResume(String filePath)
+    {
+        try
+        {
+            Jzip.unZip(filePath, ".");
+            lckDialog.setVisible(false);
+            lckDialog.dispose();
+            Lang.showMesg(this, LangRes.P30F7A3F, "数据恢复成功，您需要重新启动本程序！");
+            Logs.end();
+            System.exit(0);
+            return true;
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            return false;
+        }
+    }
+
+    public boolean cloudBackup()
+    {
+        return true;
+    }
+
+    public boolean cloudResume()
+    {
+        return true;
     }
 }
