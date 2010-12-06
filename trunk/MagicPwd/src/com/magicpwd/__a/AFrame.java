@@ -13,15 +13,16 @@ import com.magicpwd._mail.Reader;
 import com.magicpwd._mail.Sender;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
+import com.magicpwd._util.Jpng;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.DBA3000;
+import com.magicpwd.d.DBAccess;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.TrayPtn;
-import com.magicpwd.x.LckDialog;
 import java.io.IOException;
 import java.util.EventListener;
 
@@ -38,7 +39,6 @@ public abstract class AFrame extends javax.swing.JFrame
     protected static java.util.HashMap<String, javax.swing.Icon> defIcon;
     private static java.util.Properties defProp;
     private java.util.Properties favProp;
-    private LckDialog lckDialog;
 
     public AFrame(TrayPtn trayPtn, UserMdl userMdl)
     {
@@ -294,24 +294,99 @@ public abstract class AFrame extends javax.swing.JFrame
 
     public void showProcessDialog()
     {
-        lckDialog = new LckDialog(this);
-        lckDialog.initView();
-        lckDialog.initLang();
-        lckDialog.initData();
-        Bean.centerForm(lckDialog, this);
-        lckDialog.setVisible(true);
+        if (pl_LckPanel != null && pl_LckPanel.isVisible())
+        {
+            return;
+        }
+
+        if (pl_LckPanel == null)
+        {
+            pl_LckPanel = new javax.swing.JPanel();
+            pl_LckPanel.setLayout(new java.awt.BorderLayout());
+            pl_LckPanel.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.lightGray));
+
+            lb_LckLabel = new javax.swing.JLabel();
+            lb_LckLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            lb_LckLabel.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.gray));
+            pl_LckPanel.add(lb_LckLabel, java.awt.BorderLayout.CENTER);
+
+            getLayeredPane().add(pl_LckPanel, javax.swing.JLayeredPane.MODAL_LAYER);
+        }
+
+        setEnabled(false);
+        java.awt.Dimension size = this.getContentPane().getSize();
+        int w = 600;
+        int h = 80;
+        if (size.width < w)
+        {
+            w = size.width;
+        }
+        if (size.height < h)
+        {
+            h = size.height;
+        }
+        pl_LckPanel.setBounds((size.width - w) >> 1, (size.height - h) >> 1, w, h);
+        pl_LckPanel.setVisible(true);
+
+        if (jpng == null)
+        {
+            jpng = new Jpng();
+            try
+            {
+                java.io.InputStream stream = AFrame.class.getResourceAsStream(ConsEnv.ICON_PATH + "wait.png");
+                jpng.readIcons(stream, 16, 16);
+                stream.close();
+                jpng.setLabel(lb_LckLabel);
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+        }
+        jpng.start();
     }
 
     public void hideProcessDialog()
     {
-        if (lckDialog != null && lckDialog.isVisible())
+        if (pl_LckPanel == null || !pl_LckPanel.isVisible())
         {
-            lckDialog.setVisible(false);
-            lckDialog.dispose();
+            return;
+        }
+        setEnabled(true);
+        pl_LckPanel.setVisible(false);
+        if (jpng != null)
+        {
+            jpng.stop();
         }
     }
 
-    public synchronized boolean checkResume(java.util.List<S1S1> list)
+    @Override
+    public void setEnabled(boolean enabled)
+    {
+        javax.swing.JMenuBar menuBar = this.getJMenuBar();
+        if (menuBar != null)
+        {
+            if (enabled)
+            {
+                Boolean old = (Boolean) menuBar.getClientProperty("old-status");
+                menuBar.setEnabled(enabled & old);
+            }
+            else
+            {
+                menuBar.putClientProperty("old-status", menuBar.isEnabled());
+                menuBar.setEnabled(enabled);
+            }
+        }
+
+//        this.getContentPane().setEnabled(enabled);
+        for (java.awt.Component component : this.getContentPane().getComponents())
+        {
+            System.out.println(component);
+            component.setEnabled(enabled);
+        }
+    }
+
+    public boolean checkResume(java.util.List<S1S1> list)
     {
         try
         {
@@ -388,17 +463,17 @@ public abstract class AFrame extends javax.swing.JFrame
         }
     }
 
-    public synchronized boolean localBackup(String filePath)
+    public boolean localBackup(String filePath)
     {
-        TrayPtn.setDbLocked(true);
+        DBAccess.locked = true;
 
         trayPtn.endSave();
         return true;
     }
 
-    public synchronized boolean localResume(String filePath)
+    public boolean localResume(String filePath)
     {
-        TrayPtn.setDbLocked(true);
+        DBAccess.locked = true;
 
         trayPtn.endSave();
 
@@ -422,7 +497,7 @@ public abstract class AFrame extends javax.swing.JFrame
         }
     }
 
-    public synchronized boolean cloudBackup(IBackCall backCall)
+    public boolean cloudBackup(IBackCall backCall)
     {
         try
         {
@@ -430,7 +505,7 @@ public abstract class AFrame extends javax.swing.JFrame
             if (!com.magicpwd._util.Char.isValidate(docs))
             {
                 hideProcessDialog();
-                Lang.showMesg(this, LangRes.P30F7A3A, "您还没有配置您的POP邮箱信息！");
+                backCall.callBack(null, null, "message", Lang.getLang(LangRes.P30F7A3A, "您还没有配置您的POP邮箱信息！"));
                 return false;
             }
 
@@ -440,7 +515,7 @@ public abstract class AFrame extends javax.swing.JFrame
             if (bakFile == null || !bakFile.exists() || !bakFile.canRead())
             {
                 hideProcessDialog();
-                Lang.showMesg(this, LangRes.P30F7A3B, "压缩用户数据文件出错，请重启软件后重试！");
+                backCall.callBack(null, null, "message", Lang.getLang(LangRes.P30F7A3B, "压缩用户数据文件出错，请重启软件后重试！"));
                 return false;
             }
 
@@ -448,7 +523,7 @@ public abstract class AFrame extends javax.swing.JFrame
             connect.setUsername(data[1]);
             if (!connect.useDefault())
             {
-                Lang.showMesg(this, null, "查找不到对应的服务信息，如有疑问请与作者联系！");
+                backCall.callBack(null, null, "message", Lang.getLang(null, "查找不到对应的服务信息，如有疑问请与作者联系！"));
                 return false;
             }
             Sender sender = new Sender(connect);
@@ -465,7 +540,7 @@ public abstract class AFrame extends javax.swing.JFrame
             if (!sender.send())
             {
                 hideProcessDialog();
-                Lang.showMesg(this, LangRes.P30F7A3C, "系统无法备份您的数据到云端！");
+                backCall.callBack(null, null, "message", Lang.getLang(LangRes.P30F7A3C, "系统无法备份您的数据到云端！"));
                 return false;
             }
 
@@ -477,23 +552,22 @@ public abstract class AFrame extends javax.swing.JFrame
             }
 
             hideProcessDialog();
-            Lang.showMesg(this, LangRes.P30F7A3D, "数据成功备份到云端！");
             return true;
         }
         catch (Exception ex)
         {
             Logs.exception(ex);
-            Lang.showMesg(this, null, ex.getLocalizedMessage());
+            backCall.callBack(null, null, "message", Lang.getLang(null, ex.getLocalizedMessage()));
             return false;
         }
         finally
         {
             hideProcessDialog();
-            TrayPtn.setDbLocked(false);
+            DBAccess.locked = false;
         }
     }
 
-    public synchronized boolean cloudResume(String sign, IBackCall backCall)
+    public boolean cloudResume(String sign, IBackCall backCall)
     {
         if (!Char.isValidate(sign, 16))
         {
@@ -586,9 +660,12 @@ public abstract class AFrame extends javax.swing.JFrame
         finally
         {
             hideProcessDialog();
-            TrayPtn.setDbLocked(false);
+            DBAccess.locked = false;
         }
 
         return true;
     }
+    private Jpng jpng;
+    private javax.swing.JPanel pl_LckPanel;
+    private javax.swing.JLabel lb_LckLabel;
 }

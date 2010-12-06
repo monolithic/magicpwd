@@ -24,7 +24,6 @@ import com.magicpwd.v.mwiz.NormPtn;
 public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.awt.event.MouseMotionListener
 {
 
-    private static boolean dbLocked;
     private static boolean isOsTray;
     private static int currPtn;
     private static int nextPtn;
@@ -381,6 +380,8 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
     {
         try
         {
+            DBAccess.locked = true;
+
             if (mp_MainPtn != null)
             {
 //                mp_MainPtn.setVisible(false);
@@ -409,6 +410,10 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         {
             Logs.exception(exp);
             return null;
+        }
+        finally
+        {
+            DBAccess.locked = false;
         }
     }
 
@@ -656,22 +661,6 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         java.awt.Point cur = evt.getPoint();
         java.awt.Point dlg = mwTrayForm.getLocationOnScreen();
         return new java.awt.Point(dlg.x + cur.x, dlg.y + cur.y);
-    }
-
-    /**
-     * @return the dbLocked
-     */
-    public static boolean isDbLocked()
-    {
-        return dbLocked;
-    }
-
-    /**
-     * @param aDbLocked the dbLocked to set
-     */
-    public static void setDbLocked(boolean aDbLocked)
-    {
-        dbLocked = aDbLocked;
     }
 
     public void showTips(String title, String tips)

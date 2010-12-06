@@ -21,6 +21,8 @@ import com.magicpwd._util.Logs;
 public class DBAccess
 {
 
+    public static boolean locked = false;
+
     /**
      * 默认构造函数，事务默认自动提交
      */
@@ -490,11 +492,20 @@ public class DBAccess
      */
     public void executeBatch() throws SQLException
     {
+        if (locked)
+        {
+            return;
+        }
+
         stat.executeBatch();
     }
 
     public void executeCopy()
     {
+        if (locked)
+        {
+            return;
+        }
     }
 
     /**
@@ -506,6 +517,11 @@ public class DBAccess
      */
     public boolean execute(String sql) throws SQLException
     {
+        if (locked)
+        {
+            return false;
+        }
+
         boolean success = false;
         if (stat != null)
         {
@@ -534,6 +550,11 @@ public class DBAccess
      */
     public ResultSet executeSelect(String sql) throws SQLException
     {
+        if (locked)
+        {
+            return null;
+        }
+
         Logs.log(sql);
 
         ResultSet rest = null;
@@ -564,9 +585,14 @@ public class DBAccess
      */
     public int executeUpdate(String sql) throws SQLException
     {
+        int recSize = -1;
+        if (locked)
+        {
+            return recSize;
+        }
+
         Logs.log(sql);
 
-        int recSize = -1;
         if (stat != null && com.magicpwd._util.Char.isValidate(sql))
         {
             recSize = stat.executeUpdate(sql);
@@ -592,9 +618,14 @@ public class DBAccess
      */
     public int executeInsert(String sql) throws SQLException
     {
+        int recSize = -1;
+        if (locked)
+        {
+            return recSize;
+        }
+
         Logs.log(sql);
 
-        int recSize = -1;
         if (stat != null && com.magicpwd._util.Char.isValidate(sql))
         {
             recSize = stat.executeUpdate(sql);
@@ -620,9 +651,14 @@ public class DBAccess
      */
     public int executeDelete(String sql) throws SQLException
     {
+        int recSize = -1;
+        if (locked)
+        {
+            return recSize;
+        }
+
         Logs.log(sql);
 
-        int recSize = -1;
         if (stat != null && com.magicpwd._util.Char.isValidate(sql))
         {
             recSize = stat.executeUpdate(sql);
@@ -632,7 +668,7 @@ public class DBAccess
 
     private String getCopySQL(String t, String f)
     {
-        StringBuffer sqlBuf = new StringBuffer();
+        StringBuilder sqlBuf = new StringBuilder();
 
         // 插入目标
         sqlBuf.append("INSERT INTO ").append(t).append(" (");
@@ -675,7 +711,7 @@ public class DBAccess
             return "";
         }
 
-        StringBuffer sqlBuf = new StringBuffer();
+        StringBuilder sqlBuf = new StringBuilder();
 
         // 查寻字段拼接
         sqlBuf.append("SELECT ");
@@ -759,7 +795,7 @@ public class DBAccess
             return "";
         }
 
-        StringBuffer sqlBuf = new StringBuffer();
+        StringBuilder sqlBuf = new StringBuilder();
 
         // 数据库表格拼接
         sqlBuf.append(" INSERT INTO ").append(tableList.substring(2));
@@ -802,7 +838,7 @@ public class DBAccess
             return "";
         }
 
-        StringBuffer sqlBuf = new StringBuffer();
+        StringBuilder sqlBuf = new StringBuilder();
 
         // 数据库表格拼接
         sqlBuf.append("DELETE FROM ").append(tableList.substring(2));
