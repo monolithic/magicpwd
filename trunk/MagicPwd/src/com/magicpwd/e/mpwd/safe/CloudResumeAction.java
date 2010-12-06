@@ -5,22 +5,18 @@
 package com.magicpwd.e.mpwd.safe;
 
 import com.magicpwd.__a.mpwd.AMpwdAction;
+import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.S1S1;
-import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd._mail.Connect;
-import com.magicpwd._mail.Reader;
-import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
-import com.magicpwd._util.Logs;
-import com.magicpwd.v.TrayPtn;
-import com.magicpwd.x.LckDialog;
+import com.magicpwd.x.DatDialog;
+import java.util.EventListener;
 
 /**
  *
  * @author Amon
  */
-public class CloudResumeAction extends AMpwdAction
+public class CloudResumeAction extends AMpwdAction implements IBackCall
 {
 
     public CloudResumeAction()
@@ -35,24 +31,27 @@ public class CloudResumeAction extends AMpwdAction
             return;
         }
 
-        TrayPtn.setDbLocked(true);
-        final LckDialog dialog = new LckDialog(mainPtn);
-        dialog.initView();
-        dialog.initLang();
-        dialog.initData();
-
-        new Thread()
+        mainPtn.showProcessDialog();
+        java.util.List<S1S1> list = mainPtn.checkResume();
+        if (list.size() < 1)
         {
+            Lang.showMesg(mainPtn, LangRes.P30F7A3E, "无法从POP邮箱读取备份数据！");
+            return;
+        }
 
-            @Override
-            public void run()
-            {
-                resumeData(dialog);
-            }
-        }.start();
+        if (list.size() == 1)
+        {
+            resume(list.get(0).getK());
+            return;
+        }
 
-        Bean.centerForm(dialog, mainPtn);
-        dialog.setVisible(true);
+        DatDialog datDialog = new DatDialog(mainPtn, this);
+        datDialog.initView();
+        datDialog.initLang();
+        datDialog.initData();
+        datDialog.showData();
+
+        mainPtn.hideProcessDialog();
     }
 
     @Override
@@ -65,72 +64,23 @@ public class CloudResumeAction extends AMpwdAction
     {
     }
 
-    private void resumeData(LckDialog dialog)
+    @Override
+    public boolean callBack(Object sender, EventListener event, String... params)
     {
-        try
-        {
-            String docs = mainPtn.readCfg("pop_mail");
-            if (!com.magicpwd._util.Char.isValidate(docs))
-            {
-                dialog.setVisible(false);
-                dialog.dispose();
-                Lang.showMesg(mainPtn, LangRes.P30F7A3A, "您还没有配置您的POP邮箱信息！");
-                return;
-            }
+        resume(params[0]);
+        return true;
+    }
 
-            String[] data = docs.split("\n");
-
-            trayPtn.endSave();
-            Connect connect = new Connect(data[0], data[2]);
-            connect.setUsername(data[1]);
-            if (!connect.useDefault())
-            {
-                Lang.showMesg(mainPtn, null, "查找不到对应的服务信息，如有疑问请与作者联系！");
-                return;
-            }
-            Reader mail = new Reader(connect);
-
-            // 读取备份文件
-            javax.mail.Store store = connect.getStore();
-            javax.mail.Folder folder = store.getDefaultFolder().getFolder("inbox");
-            if (folder.isOpen())
-            {
-                folder.close(false);
-            }
-            folder.open(javax.mail.Folder.READ_ONLY);
-            javax.mail.Message message = mail.find(folder, null, Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"), null, "http://magicpwd.com/?*" + mainPtn.getUserMdl().getCfg("mail.date"));
-            if (message == null)
-            {
-                dialog.setVisible(false);
-                dialog.dispose();
-                Lang.showMesg(mainPtn, LangRes.P30F7A3E, "无法从POP邮箱读取备份数据！");
-            }
-            else if (mail.read(message))
-            {
-                for (S1S1 item : mail.getAttachmentList())
-                {
-                    if (ConsEnv.FILE_SYNC.equals(item.getK()))
-                    {
-                        mainPtn.localResume(item.getV());
-                    }
-                }
-            }
-            folder.close(false);
-            store.close();
-        }
-        catch (Exception ex)
+    private void resume(final String sign)
+    {
+        new Thread()
         {
-            Logs.exception(ex);
-            Lang.showMesg(mainPtn, null, ex.getLocalizedMessage());
-        }
-        finally
-        {
-            if (dialog.isVisible())
+
+            @Override
+            public void run()
             {
-                dialog.setVisible(false);
-                dialog.dispose();
+                mainPtn.cloudResume(sign);
             }
-            TrayPtn.setDbLocked(false);
-        }
+        }.start();
     }
 }
