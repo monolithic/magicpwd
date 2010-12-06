@@ -66,7 +66,7 @@ public class CloudConfigAction extends AMpwdAction
             {
                 params[1] = params[2] + '@' + params[1];
             }
-            mainPtn.saveCfg("pop_mail", params[1] + '\n' + params[2] + '\n' + params[3]);
+            mainPtn.setCfgText("pop_mail", params[1] + '\n' + params[2] + '\n' + params[3]);
         }
         catch (Exception ex)
         {

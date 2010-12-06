@@ -20,6 +20,7 @@ public class LocalBackupAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
+        mainPtn.localBackup("");
     }
 
     @Override

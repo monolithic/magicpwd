@@ -1438,21 +1438,6 @@ public class MainPtn extends AFrame
         selectNext(com.magicpwd._util.Char.isValidateHash(mpwdMdl.getGridMdl().getKeysHash()) ? 0 : 1, true);
     }
 
-    public void saveCfg(String key, String text) throws Exception
-    {
-        DBA3000.saveConfig(key, mpwdMdl.getGridMdl().enCrypt(text));
-    }
-
-    public String readCfg(String key) throws Exception
-    {
-        String text = DBA3000.readConfig(key);
-        if (com.magicpwd._util.Char.isValidate(text))
-        {
-            text = mpwdMdl.getGridMdl().deCrypt(text);
-        }
-        return text;
-    }
-
     public void enCrypt(java.io.File src, java.io.File dst) throws Exception
     {
         mpwdMdl.getGridMdl().enCrypt(src, dst);
