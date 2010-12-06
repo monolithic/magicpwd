@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.magicpwd.d.DBA3000;
-import com.magicpwd.v.TrayPtn;
+import com.magicpwd.d.DBAccess;
 import java.sql.Timestamp;
 
 /**
@@ -47,7 +47,7 @@ public final class HintMdl
         }
 
         counter = 0;
-        if (TrayPtn.isDbLocked())
+        if (DBAccess.locked)
         {
             return;
         }

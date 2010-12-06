@@ -5,14 +5,16 @@
 package com.magicpwd.e.mpwd.safe;
 
 import com.magicpwd.__a.mpwd.AMpwdAction;
+import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
+import java.util.EventListener;
 
 /**
  *
  * @author Amon
  */
-public class CloudBackupAction extends AMpwdAction
+public class CloudBackupAction extends AMpwdAction implements IBackCall
 {
 
     public CloudBackupAction()
@@ -27,7 +29,16 @@ public class CloudBackupAction extends AMpwdAction
             return;
         }
 
-        backup();
+        mainPtn.showProcessDialog();
+        new Thread()
+        {
+
+            @Override
+            public void run()
+            {
+                backup();
+            }
+        }.start();
     }
 
     @Override
@@ -40,16 +51,18 @@ public class CloudBackupAction extends AMpwdAction
     {
     }
 
+    @Override
+    public boolean callBack(Object sender, EventListener event, String... params)
+    {
+        if (params != null && params.length == 2)
+        {
+            Lang.showMesg(mainPtn, null, params[1]);
+        }
+        return true;
+    }
+
     private void backup()
     {
-        new Thread()
-        {
-
-            @Override
-            public void run()
-            {
-                mainPtn.cloudBackup(null);
-            }
-        }.start();
+        mainPtn.cloudBackup(this);
     }
 }
