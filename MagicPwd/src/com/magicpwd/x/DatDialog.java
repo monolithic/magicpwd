@@ -123,6 +123,10 @@ public class DatDialog extends javax.swing.JDialog
         //        tr_KindList.setModel(mainPtn.getTreeMdl());
     }
 
+    public void showData()
+    {
+    }
+
     void bt_UpdateActionPerformed(java.awt.event.ActionEvent evt)
     {
         javax.swing.tree.TreePath tp = null;//tr_KindList.getSelectionPath();

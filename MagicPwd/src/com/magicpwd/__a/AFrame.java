@@ -5,6 +5,7 @@
 package com.magicpwd.__a;
 
 import com.magicpwd.__i.IBackCall;
+import com.magicpwd._comn.S1S1;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._mail.Connect;
@@ -259,7 +260,26 @@ public abstract class AFrame extends javax.swing.JFrame
         this.userMdl = userMdl;
     }
 
-    public String showCloudResumeDialog()
+    public void showProcessDialog()
+    {
+        lckDialog = new LckDialog(this);
+        lckDialog.initView();
+        lckDialog.initLang();
+        lckDialog.initData();
+        Bean.centerForm(lckDialog, this);
+        lckDialog.setVisible(true);
+    }
+
+    public void hideProcessDialog()
+    {
+        if (lckDialog.isVisible())
+        {
+            lckDialog.setVisible(false);
+            lckDialog.dispose();
+        }
+    }
+
+    public synchronized java.util.List<S1S1> checkResume()
     {
         try
         {
@@ -284,7 +304,6 @@ public abstract class AFrame extends javax.swing.JFrame
             }
 
             // 读取备份文件
-            Reader reader = new Reader(connect);
             javax.mail.Store store = connect.getStore();
             javax.mail.Folder folder = store.getDefaultFolder().getFolder("inbox");
             if (folder.isOpen())
@@ -292,35 +311,67 @@ public abstract class AFrame extends javax.swing.JFrame
                 folder.close(false);
             }
             folder.open(javax.mail.Folder.READ_ONLY);
-            java.util.List mesgList = new java.util.ArrayList<String>();
-            javax.mail.Message message = reader.find(folder, null, Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"), null, "http://magicpwd.com/?*" + userMdl.getCfg("mail.date"));
-            if (message == null)
+            java.util.List<S1S1> mesgList = new java.util.ArrayList<S1S1>();
+
+            String user = userMdl.getCode();
+            String sign = userMdl.getCfg("mail.date");
+            if (!Char.isValidate(sign, 16))
             {
-                lckDialog.setVisible(false);
-                lckDialog.dispose();
-                Lang.showMesg(this, LangRes.P30F7A3E, "无法从POP邮箱读取备份数据！");
-                return null;
+                sign = null;
             }
+            java.text.SimpleDateFormat format = new java.text.SimpleDateFormat(ConsEnv.HINT_DATE);
+            javax.mail.Message[] messages = folder.getMessages();
+            if (messages != null)
+            {
+                String[] headers;
+                for (javax.mail.Message mesg : messages)
+                {
+                    headers = mesg.getHeader("magicpwd-user");
+                    if (headers == null || headers.length != 1 || !user.equalsIgnoreCase(headers[0]))
+                    {
+                        continue;
+                    }
+                    headers = mesg.getHeader("magicpwd-sign");
+                    if (headers == null || headers.length != 1)
+                    {
+                        continue;
+                    }
+                    if (sign == null || sign.compareToIgnoreCase(headers[0]) < 0)
+                    {
+                        mesgList.add(new S1S1(headers[0], format.format(new java.util.Date(Long.parseLong(headers[0], 16)))));
+                    }
+                }
+            }
+            folder.close(false);
+            store.close();
+
+            lckDialog.setVisible(false);
+            lckDialog.dispose();
+
+            return mesgList;
         }
         catch (Exception exp)
         {
             Logs.exception(exp);
+            return null;
         }
-        return "";
     }
 
-    public boolean localBackup(String filePath)
+    public synchronized boolean localBackup(String filePath)
     {
         return true;
     }
 
-    public boolean localResume(String filePath)
+    public synchronized boolean localResume(String filePath)
     {
+        TrayPtn.setDbLocked(true);
+
+        trayPtn.endSave();
+
         try
         {
             Jzip.unZip(filePath, ".");
-            lckDialog.setVisible(false);
-            lckDialog.dispose();
+            hideProcessDialog();
             Lang.showMesg(this, LangRes.P30F7A3F, "数据恢复成功，您需要重新启动本程序！");
             Logs.end();
             System.exit(0);
@@ -333,13 +384,102 @@ public abstract class AFrame extends javax.swing.JFrame
         }
     }
 
-    public boolean cloudBackup()
+    public synchronized boolean cloudBackup()
     {
         return true;
     }
 
-    public boolean cloudResume()
+    public synchronized boolean cloudResume(String sign)
     {
+        if (!Char.isValidate(sign, 16))
+        {
+            return false;
+        }
+
+        try
+        {
+            String docs = "";//mainPtn.readCfg("pop_mail");
+            if (!com.magicpwd._util.Char.isValidate(docs))
+            {
+                hideProcessDialog();
+                Lang.showMesg(this, LangRes.P30F7A3A, "您还没有配置您的POP邮箱信息！");
+                return false;
+            }
+
+            String[] data = docs.split("\n");
+
+            trayPtn.endSave();
+            Connect connect = new Connect(data[0], data[2]);
+            connect.setUsername(data[1]);
+            if (!connect.useDefault())
+            {
+                Lang.showMesg(this, null, "查找不到对应的服务信息，如有疑问请与作者联系！");
+                return false;
+            }
+            Reader mail = new Reader(connect);
+
+            // 读取备份文件
+            javax.mail.Store store = connect.getStore();
+            javax.mail.Folder folder = store.getDefaultFolder().getFolder("inbox");
+            if (folder.isOpen())
+            {
+                folder.close(false);
+            }
+            folder.open(javax.mail.Folder.READ_ONLY);
+            String user = userMdl.getCode();
+            javax.mail.Message message = null;
+            javax.mail.Message[] messages = folder.getMessages();
+            if (messages != null)
+            {
+                String[] headers;
+                for (javax.mail.Message mesg : messages)
+                {
+                    headers = mesg.getHeader("magicpwd-user");
+                    if (headers == null || headers.length != 1 || !user.equalsIgnoreCase(headers[0]))
+                    {
+                        continue;
+                    }
+                    headers = mesg.getHeader("magicpwd-sign");
+                    if (headers == null || headers.length != 1)
+                    {
+                        continue;
+                    }
+                    if (sign.equalsIgnoreCase(headers[0]))
+                    {
+                        message = mesg;
+                        break;
+                    }
+                }
+            }
+            if (message == null)
+            {
+                hideProcessDialog();
+                Lang.showMesg(this, LangRes.P30F7A3E, "无法从POP邮箱读取备份数据！");
+            }
+            else if (mail.read(message))
+            {
+                for (S1S1 item : mail.getAttachmentList())
+                {
+                    if (ConsEnv.FILE_SYNC.equals(item.getK()))
+                    {
+                        localResume(item.getV());
+                    }
+                }
+            }
+            folder.close(false);
+            store.close();
+        }
+        catch (Exception ex)
+        {
+            Logs.exception(ex);
+            Lang.showMesg(this, null, ex.getLocalizedMessage());
+        }
+        finally
+        {
+            hideProcessDialog();
+            TrayPtn.setDbLocked(false);
+        }
+
         return true;
     }
 }
