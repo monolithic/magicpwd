@@ -10,11 +10,13 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._mail.Connect;
 import com.magicpwd._mail.Reader;
+import com.magicpwd._mail.Sender;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
+import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.MenuPtn;
@@ -213,12 +215,42 @@ public abstract class AFrame extends javax.swing.JFrame
         return icon;
     }
 
+    public String getCfgText(String key)
+    {
+        String text = DBA3000.readConfig(key);
+        if (com.magicpwd._util.Char.isValidate(text))
+        {
+            try
+            {
+                text = safeMdl.deCrypt(text);
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+                text = null;
+            }
+        }
+        return text;
+    }
+
+    public void setCfgText(String key, String text)
+    {
+        try
+        {
+            DBA3000.saveConfig(key, safeMdl.enCrypt(text));
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            text = null;
+        }
+    }
+
     /**
      * 隐藏窗口
      */
     public void hideFrame()
     {
-//        setExtendedState(ICONIFIED);
         setVisible(false);
         trayPtn.showTips(Lang.getLang(LangRes.P30F9A01, "友情提示"), Lang.getLang(LangRes.P30F7A43, "魔方密码仍在运行中，您可以通过双击此处显示主窗口！"));
         endSave();
@@ -272,24 +304,23 @@ public abstract class AFrame extends javax.swing.JFrame
 
     public void hideProcessDialog()
     {
-        if (lckDialog.isVisible())
+        if (lckDialog != null && lckDialog.isVisible())
         {
             lckDialog.setVisible(false);
             lckDialog.dispose();
         }
     }
 
-    public synchronized java.util.List<S1S1> checkResume()
+    public synchronized boolean checkResume(java.util.List<S1S1> list)
     {
         try
         {
-            String docs = "";//userMdl.readCfg("pop_mail");
+            String docs = getCfgText("pop_mail");
             if (!com.magicpwd._util.Char.isValidate(docs))
             {
-                lckDialog.setVisible(false);
-                lckDialog.dispose();
+                hideProcessDialog();
                 Lang.showMesg(this, LangRes.P30F7A3A, "您还没有配置您的POP邮箱信息！");
-                return null;
+                return false;
             }
 
             String[] data = docs.split("\n");
@@ -300,7 +331,7 @@ public abstract class AFrame extends javax.swing.JFrame
             if (!connect.useDefault())
             {
                 Lang.showMesg(this, null, "查找不到对应的服务信息，如有疑问请与作者联系！");
-                return null;
+                return false;
             }
 
             // 读取备份文件
@@ -311,7 +342,6 @@ public abstract class AFrame extends javax.swing.JFrame
                 folder.close(false);
             }
             folder.open(javax.mail.Folder.READ_ONLY);
-            java.util.List<S1S1> mesgList = new java.util.ArrayList<S1S1>();
 
             String user = userMdl.getCode();
             String sign = userMdl.getCfg("mail.date");
@@ -338,27 +368,31 @@ public abstract class AFrame extends javax.swing.JFrame
                     }
                     if (sign == null || sign.compareToIgnoreCase(headers[0]) < 0)
                     {
-                        mesgList.add(new S1S1(headers[0], format.format(new java.util.Date(Long.parseLong(headers[0], 16)))));
+                        list.add(new S1S1(headers[0], format.format(new java.util.Date(Long.parseLong(headers[0], 16)))));
                     }
                 }
             }
             folder.close(false);
             store.close();
 
-            lckDialog.setVisible(false);
-            lckDialog.dispose();
-
-            return mesgList;
+            return true;
         }
         catch (Exception exp)
         {
             Logs.exception(exp);
-            return null;
+            return false;
+        }
+        finally
+        {
+            hideProcessDialog();
         }
     }
 
     public synchronized boolean localBackup(String filePath)
     {
+        TrayPtn.setDbLocked(true);
+
+        trayPtn.endSave();
         return true;
     }
 
@@ -374,22 +408,92 @@ public abstract class AFrame extends javax.swing.JFrame
             hideProcessDialog();
             Lang.showMesg(this, LangRes.P30F7A3F, "数据恢复成功，您需要重新启动本程序！");
             Logs.end();
-            System.exit(0);
             return true;
         }
         catch (Exception exp)
         {
             Logs.exception(exp);
+            Lang.showMesg(this, null, exp.getLocalizedMessage());
             return false;
+        }
+        finally
+        {
+            System.exit(0);
         }
     }
 
-    public synchronized boolean cloudBackup()
+    public synchronized boolean cloudBackup(IBackCall backCall)
     {
-        return true;
+        try
+        {
+            String docs = getCfgText("pop_mail");
+            if (!com.magicpwd._util.Char.isValidate(docs))
+            {
+                hideProcessDialog();
+                Lang.showMesg(this, LangRes.P30F7A3A, "您还没有配置您的POP邮箱信息！");
+                return false;
+            }
+
+            String[] data = docs.split("\n");
+
+            java.io.File bakFile = trayPtn.endSave();
+            if (bakFile == null || !bakFile.exists() || !bakFile.canRead())
+            {
+                hideProcessDialog();
+                Lang.showMesg(this, LangRes.P30F7A3B, "压缩用户数据文件出错，请重启软件后重试！");
+                return false;
+            }
+
+            Connect connect = new Connect(data[0], data[2], "smtp");
+            connect.setUsername(data[1]);
+            if (!connect.useDefault())
+            {
+                Lang.showMesg(this, null, "查找不到对应的服务信息，如有疑问请与作者联系！");
+                return false;
+            }
+            Sender sender = new Sender(connect);
+
+            sender.setFrom(data[0]);
+            sender.setTo(data[0]);
+            sender.setSubject(Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"));
+            sender.setContent(Lang.getLang(LangRes.P30F7A49, "此邮件为魔方密码数据备份文件，请勿手动删除！"));
+            String user = userMdl.getCode();
+            String sign = Char.lPad(Long.toHexString(new java.util.Date().getTime()), 16, '0');
+            sender.setHeader("magicpwd-user", user);
+            sender.setHeader("magicpwd-sign", sign);
+            sender.addAttachment(ConsEnv.FILE_SYNC, bakFile.getAbsolutePath());
+            if (!sender.send())
+            {
+                hideProcessDialog();
+                Lang.showMesg(this, LangRes.P30F7A3C, "系统无法备份您的数据到云端！");
+                return false;
+            }
+
+            userMdl.setCfg("mail.date", sign);
+
+            if (backCall != null && !backCall.callBack(null, null))
+            {
+                return false;
+            }
+
+            hideProcessDialog();
+            Lang.showMesg(this, LangRes.P30F7A3D, "数据成功备份到云端！");
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Logs.exception(ex);
+            Lang.showMesg(this, null, ex.getLocalizedMessage());
+            return false;
+        }
+        finally
+        {
+            hideProcessDialog();
+            TrayPtn.setDbLocked(false);
+        }
     }
 
-    public synchronized boolean cloudResume(String sign)
+    public synchronized boolean cloudResume(String sign, IBackCall backCall)
     {
         if (!Char.isValidate(sign, 16))
         {
@@ -398,7 +502,7 @@ public abstract class AFrame extends javax.swing.JFrame
 
         try
         {
-            String docs = "";//mainPtn.readCfg("pop_mail");
+            String docs = getCfgText("pop_mail");
             if (!com.magicpwd._util.Char.isValidate(docs))
             {
                 hideProcessDialog();
@@ -468,6 +572,11 @@ public abstract class AFrame extends javax.swing.JFrame
             }
             folder.close(false);
             store.close();
+
+            if (backCall != null && !backCall.callBack(null, null))
+            {
+                return false;
+            }
         }
         catch (Exception ex)
         {

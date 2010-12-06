@@ -85,8 +85,6 @@ public class DatDialog extends javax.swing.JDialog
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(Bean.getLogo(16));
-        pack();
-        Bean.centerForm(this, formPtn);
     }
 
     public void initLang()
@@ -96,6 +94,8 @@ public class DatDialog extends javax.swing.JDialog
         Lang.setWText(bt_Cancel, LangRes.P30FA50B, "取消(@C)");
 
         setTitle(Lang.getLang(LangRes.P30F4206, "把记录迁移到..."));
+
+        pack();
     }
 
     public void initData()
@@ -121,6 +121,9 @@ public class DatDialog extends javax.swing.JDialog
         });
 
         //        tr_KindList.setModel(mainPtn.getTreeMdl());
+
+        pack();
+        Bean.centerForm(this, formPtn);
     }
 
     public void showData()
