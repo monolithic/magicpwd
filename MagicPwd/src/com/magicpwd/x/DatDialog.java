@@ -18,6 +18,7 @@ package com.magicpwd.x;
 
 import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IBackCall;
+import com.magicpwd._comn.S1S1;
 import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
@@ -126,8 +127,17 @@ public class DatDialog extends javax.swing.JDialog
         Bean.centerForm(this, formPtn);
     }
 
-    public void showData()
+    public void showData(java.util.List<S1S1> list)
     {
+        javax.swing.DefaultListModel model = new javax.swing.DefaultListModel();
+        if (list != null)
+        {
+            for (S1S1 item : list)
+            {
+                model.addElement(item);
+            }
+        }
+        ls_DataList.setModel(model);
     }
 
     void bt_UpdateActionPerformed(java.awt.event.ActionEvent evt)

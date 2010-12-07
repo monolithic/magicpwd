@@ -5,12 +5,16 @@
 package com.magicpwd.e.mpwd.safe;
 
 import com.magicpwd.__a.mpwd.AMpwdAction;
+import com.magicpwd.__i.IBackCall;
+import com.magicpwd._cons.LangRes;
+import com.magicpwd._util.Lang;
+import java.util.EventListener;
 
 /**
  * 备份单条记录
  * @author Amon
  */
-public class LocalBackupAction extends AMpwdAction
+public class LocalBackupAction extends AMpwdAction implements IBackCall
 {
 
     public LocalBackupAction()
@@ -20,7 +24,21 @@ public class LocalBackupAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mainPtn.localBackup("");
+        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mainPtn, LangRes.P30F7A41, "确认要执行从云端数据恢复的操作吗，此操作将需要一定的时间？"))
+        {
+            return;
+        }
+
+        mainPtn.showProcessDialog();
+        new Thread()
+        {
+
+            @Override
+            public void run()
+            {
+                backup();
+            }
+        }.start();
     }
 
     @Override
@@ -31,5 +49,20 @@ public class LocalBackupAction extends AMpwdAction
     @Override
     public void reInit(javax.swing.AbstractButton button)
     {
+    }
+
+    @Override
+    public boolean callBack(Object sender, EventListener event, String... params)
+    {
+        if (params != null && params.length == 2)
+        {
+            Lang.showMesg(mainPtn, null, params[1]);
+        }
+        return true;
+    }
+
+    private void backup()
+    {
+        mainPtn.localBackup("", this);
     }
 }

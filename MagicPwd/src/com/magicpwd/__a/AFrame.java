@@ -13,6 +13,7 @@ import com.magicpwd._mail.Reader;
 import com.magicpwd._mail.Sender;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
+import com.magicpwd._util.File;
 import com.magicpwd._util.Jpng;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
@@ -315,7 +316,7 @@ public abstract class AFrame extends javax.swing.JFrame
 
         setEnabled(false);
         java.awt.Dimension size = this.getContentPane().getSize();
-        int w = 600;
+        int w = 200;
         int h = 80;
         if (size.width < w)
         {
@@ -357,32 +358,6 @@ public abstract class AFrame extends javax.swing.JFrame
         if (jpng != null)
         {
             jpng.stop();
-        }
-    }
-
-    @Override
-    public void setEnabled(boolean enabled)
-    {
-        javax.swing.JMenuBar menuBar = this.getJMenuBar();
-        if (menuBar != null)
-        {
-            if (enabled)
-            {
-                Boolean old = (Boolean) menuBar.getClientProperty("old-status");
-                menuBar.setEnabled(enabled & old);
-            }
-            else
-            {
-                menuBar.putClientProperty("old-status", menuBar.isEnabled());
-                menuBar.setEnabled(enabled);
-            }
-        }
-
-//        this.getContentPane().setEnabled(enabled);
-        for (java.awt.Component component : this.getContentPane().getComponents())
-        {
-            System.out.println(component);
-            component.setEnabled(enabled);
         }
     }
 
@@ -463,23 +438,56 @@ public abstract class AFrame extends javax.swing.JFrame
         }
     }
 
-    public boolean localBackup(String filePath)
+    public boolean localBackup(String filePath, IBackCall backCall)
     {
-        DBAccess.locked = true;
+        if (!Char.isValidate(filePath))
+        {
+            return false;
+        }
 
-        trayPtn.endSave();
+        java.io.File srcFile = trayPtn.endSave();
+
+        java.io.File dstFile = new java.io.File(filePath);
+        if (!dstFile.exists())
+        {
+            if (!dstFile.mkdirs())
+            {
+                return false;
+            }
+        }
+        if (!dstFile.isDirectory() || !dstFile.canWrite())
+        {
+            return false;
+        }
+        dstFile = new java.io.File(dstFile, srcFile.getName().replace("amon", "magicpwd").replace("-", "").replace(".backup", ".amb"));
+        File.copy(srcFile, dstFile, true);
+
+        if (backCall != null && !backCall.callBack(null, null, dstFile.toString()))
+        {
+            return false;
+        }
+
         return true;
     }
 
-    public boolean localResume(String filePath)
+    public boolean localResume(String filePath, IBackCall backCall)
     {
-        DBAccess.locked = true;
+        if (!Char.isValidate(filePath))
+        {
+            return false;
+        }
 
         trayPtn.endSave();
 
+        java.io.File srcFile = new java.io.File(filePath);
+        if (!srcFile.exists() || !srcFile.isFile() || !srcFile.canRead())
+        {
+            return false;
+        }
+
         try
         {
-            Jzip.unZip(filePath, ".");
+            Jzip.unZip(new java.io.FileInputStream(srcFile), new java.io.File("."), true);
             hideProcessDialog();
             Lang.showMesg(this, LangRes.P30F7A3F, "数据恢复成功，您需要重新启动本程序！");
             Logs.end();
@@ -640,7 +648,7 @@ public abstract class AFrame extends javax.swing.JFrame
                 {
                     if (ConsEnv.FILE_SYNC.equals(item.getK()))
                     {
-                        localResume(item.getV());
+                        localResume(item.getV(), null);
                     }
                 }
             }
