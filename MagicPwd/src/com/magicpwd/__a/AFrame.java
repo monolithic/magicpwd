@@ -19,7 +19,6 @@ import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.DBA3000;
-import com.magicpwd.d.DBAccess;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.MenuPtn;
@@ -499,162 +498,138 @@ public abstract class AFrame extends javax.swing.JFrame
         }
     }
 
-    public boolean cloudBackup(IBackCall backCall)
+    public boolean cloudBackup(IBackCall backCall) throws Exception
     {
-        try
+        String user = userMdl.getCode();
+        if (!Char.isValidateCode(user))
         {
-            String docs = getCfgText("pop_mail");
-            if (!com.magicpwd._util.Char.isValidate(docs))
-            {
-                backCall.callBack(null, null, "message", Lang.getLang(LangRes.P30F7A3A, "您还没有配置您的POP邮箱信息！"));
-                return false;
-            }
-
-            String[] data = docs.split("\n");
-
-            java.io.File bakFile = trayPtn.endSave();
-            if (bakFile == null || !bakFile.exists() || !bakFile.canRead())
-            {
-                backCall.callBack(null, null, "message", Lang.getLang(LangRes.P30F7A3B, "压缩用户数据文件出错，请重启软件后重试！"));
-                return false;
-            }
-
-            Connect connect = new Connect(data[0], data[2], "smtp");
-            connect.setUsername(data[1]);
-            if (!connect.useDefault())
-            {
-                backCall.callBack(null, null, "message", Lang.getLang(null, "查找不到对应的服务信息，如有疑问请与作者联系！"));
-                return false;
-            }
-            Sender sender = new Sender(connect);
-
-            sender.setFrom(data[0]);
-            sender.setTo(data[0]);
-            sender.setSubject(Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"));
-            sender.setContent(Lang.getLang(LangRes.P30F7A49, "此邮件为魔方密码数据备份文件，请勿手动删除！"));
-            String user = userMdl.getCode();
-            String sign = Char.lPad(Long.toHexString(new java.util.Date().getTime()), 16, '0');
-            sender.setHeader("magicpwd-user", user);
-            sender.setHeader("magicpwd-sign", sign);
-            sender.addAttachment(ConsEnv.FILE_SYNC, bakFile.getAbsolutePath());
-            if (!sender.send())
-            {
-                backCall.callBack(null, null, "message", Lang.getLang(LangRes.P30F7A3C, "系统无法备份您的数据到云端！"));
-                return false;
-            }
-
-            userMdl.setCfg("mail.date", sign);
-
-            if (backCall != null && !backCall.callBack(null, null))
-            {
-                return false;
-            }
-
-            return true;
-        }
-        catch (Exception ex)
-        {
-            Logs.exception(ex);
-            backCall.callBack(null, null, "message", Lang.getLang(null, ex.getLocalizedMessage()));
             return false;
         }
-        finally
+
+        String docs = getCfgText("pop_mail");
+        if (!com.magicpwd._util.Char.isValidate(docs))
         {
-            DBAccess.locked = false;
+            throw new Exception(Lang.getLang(LangRes.P30F7A3A, "您还没有配置您的POP邮箱信息！"));
         }
+
+        java.io.File bakFile = trayPtn.endSave();
+        if (bakFile == null || !bakFile.exists() || !bakFile.isFile() || !bakFile.canRead())
+        {
+            throw new Exception(Lang.getLang(LangRes.P30F7A3B, "压缩用户数据文件出错，请重启软件后重试！"));
+        }
+
+        String[] data = docs.split("\n");
+        Connect connect = new Connect(data[0], data[2], "smtp");
+        connect.setUsername(data[1]);
+        if (!connect.useDefault())
+        {
+            throw new Exception(Lang.getLang(null, "查找不到对应的服务信息，如有疑问请与作者联系！"));
+        }
+
+        String sign = Char.lPad(Long.toHexString(new java.util.Date().getTime()), 16, '0');
+
+        Sender sender = new Sender(connect);
+        sender.setFrom(data[0]);
+        sender.setTo(data[0]);
+        sender.setSubject(Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"));
+        sender.setContent(Lang.getLang(LangRes.P30F7A49, "此邮件为魔方密码数据备份文件，请勿手动删除！"));
+        sender.setHeader("magicpwd-user", user);
+        sender.setHeader("magicpwd-sign", sign);
+        sender.addAttachment(ConsEnv.FILE_SYNC, bakFile.getAbsolutePath());
+        if (!sender.send())
+        {
+            throw new Exception(Lang.getLang(LangRes.P30F7A3C, "系统无法备份您的数据到云端！"));
+        }
+
+        if (backCall != null && !backCall.callBack(null, null, sign))
+        {
+            return false;
+        }
+
+        userMdl.setCfg("mail.date", sign);
+
+        return true;
     }
 
-    public boolean cloudResume(String sign, IBackCall backCall)
+    public boolean cloudResume(String sign, IBackCall backCall) throws Exception
     {
         if (!Char.isValidate(sign, 16))
         {
             return false;
         }
 
-        try
+        String user = userMdl.getCode();
+        if (!Char.isValidateCode(user))
         {
-            String docs = getCfgText("pop_mail");
-            if (!com.magicpwd._util.Char.isValidate(docs))
-            {
-                Lang.showMesg(this, LangRes.P30F7A3A, "您还没有配置您的POP邮箱信息！");
-                return false;
-            }
+            return false;
+        }
 
-            String[] data = docs.split("\n");
+        String docs = getCfgText("pop_mail");
+        if (!com.magicpwd._util.Char.isValidate(docs))
+        {
+            throw new Exception(Lang.getLang(LangRes.P30F7A3A, "您还没有配置您的POP邮箱信息！"));
+        }
 
-            trayPtn.endSave();
-            Connect connect = new Connect(data[0], data[2]);
-            connect.setUsername(data[1]);
-            if (!connect.useDefault())
-            {
-                Lang.showMesg(this, null, "查找不到对应的服务信息，如有疑问请与作者联系！");
-                return false;
-            }
-            Reader mail = new Reader(connect);
+        trayPtn.endSave();
 
-            // 读取备份文件
-            javax.mail.Store store = connect.getStore();
-            javax.mail.Folder folder = store.getDefaultFolder().getFolder("inbox");
-            if (folder.isOpen())
-            {
-                folder.close(false);
-            }
-            folder.open(javax.mail.Folder.READ_ONLY);
-            String user = userMdl.getCode();
-            javax.mail.Message message = null;
-            javax.mail.Message[] messages = folder.getMessages();
-            if (messages != null)
-            {
-                String[] headers;
-                for (javax.mail.Message mesg : messages)
-                {
-                    headers = mesg.getHeader("magicpwd-user");
-                    if (headers == null || headers.length != 1 || !user.equalsIgnoreCase(headers[0]))
-                    {
-                        continue;
-                    }
-                    headers = mesg.getHeader("magicpwd-sign");
-                    if (headers == null || headers.length != 1)
-                    {
-                        continue;
-                    }
-                    if (sign.equalsIgnoreCase(headers[0]))
-                    {
-                        message = mesg;
-                        break;
-                    }
-                }
-            }
-            if (message == null)
-            {
-                Lang.showMesg(this, LangRes.P30F7A3E, "无法从POP邮箱读取备份数据！");
-            }
-            else if (mail.read(message))
-            {
-                for (S1S1 item : mail.getAttachmentList())
-                {
-                    if (ConsEnv.FILE_SYNC.equals(item.getK()))
-                    {
-                        localResume(item.getV(), null);
-                    }
-                }
-            }
+        String[] data = docs.split("\n");
+        Connect connect = new Connect(data[0], data[2]);
+        connect.setUsername(data[1]);
+        if (!connect.useDefault())
+        {
+            throw new Exception(Lang.getLang(null, "查找不到对应的服务信息，如有疑问请与作者联系！"));
+        }
+
+        Reader reader = new Reader(connect);
+        javax.mail.Store store = connect.getStore();
+        javax.mail.Folder folder = store.getDefaultFolder().getFolder("inbox");
+        if (folder.isOpen())
+        {
             folder.close(false);
-            store.close();
+        }
+        folder.open(javax.mail.Folder.READ_ONLY);
 
-            if (backCall != null && !backCall.callBack(null, null))
+        javax.mail.Message message = null;
+        javax.mail.Message[] messages = folder.getMessages();
+        if (messages != null)
+        {
+            String[] headers;
+            for (javax.mail.Message mesg : messages)
             {
-                return false;
+                headers = mesg.getHeader("magicpwd-user");
+                if (headers == null || headers.length != 1 || !user.equalsIgnoreCase(headers[0]))
+                {
+                    continue;
+                }
+                headers = mesg.getHeader("magicpwd-sign");
+                if (headers == null || headers.length != 1)
+                {
+                    continue;
+                }
+                if (sign.equalsIgnoreCase(headers[0]))
+                {
+                    message = mesg;
+                    break;
+                }
             }
         }
-        catch (Exception ex)
+
+        if (message != null && reader.read(message))
         {
-            Logs.exception(ex);
-            Lang.showMesg(this, null, ex.getLocalizedMessage());
+            for (S1S1 item : reader.getAttachmentList())
+            {
+                if (ConsEnv.FILE_SYNC.equals(item.getK()))
+                {
+                    localResume(item.getV(), null);
+                }
+            }
         }
-        finally
+        folder.close(false);
+        store.close();
+
+        if (backCall != null && !backCall.callBack(null, null))
         {
-            DBAccess.locked = false;
+            return false;
         }
 
         return true;

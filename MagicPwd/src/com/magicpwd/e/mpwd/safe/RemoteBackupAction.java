@@ -8,6 +8,7 @@ import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
+import com.magicpwd._util.Logs;
 import java.util.EventListener;
 
 /**
@@ -54,15 +55,20 @@ public class RemoteBackupAction extends AMpwdAction implements IBackCall
     @Override
     public boolean callBack(Object sender, EventListener event, String... params)
     {
-        if (params != null && params.length == 2)
-        {
-            Lang.showMesg(mainPtn, null, params[1]);
-        }
         return true;
     }
 
     private void doBackup()
     {
-        mainPtn.cloudBackup(this);
+        try
+        {
+            boolean b = mainPtn.cloudBackup(this);
+            Lang.showMesg(mainPtn, "", "");
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            Lang.showMesg(mainPtn, null, exp.getLocalizedMessage());
+        }
     }
 }
