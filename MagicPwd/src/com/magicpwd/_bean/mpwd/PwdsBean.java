@@ -161,7 +161,7 @@ public class PwdsBean extends APwdsBean implements IMpwdBean
     public void copyDataActionPerformed(java.awt.event.ActionEvent evt)
     {
         pf_PropData.selectAll();
-        Util.setClipboardContents(new String(pf_PropData.getPassword()), formPtn.getUserMdl().getStayTime());
+        Util.setClipboardContents(new String(pf_PropData.getPassword()), formPtn.getUserMdl().getClipDlt());
     }
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JLabel lb_PropName;

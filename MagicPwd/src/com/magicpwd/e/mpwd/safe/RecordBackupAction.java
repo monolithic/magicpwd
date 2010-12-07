@@ -7,13 +7,13 @@ package com.magicpwd.e.mpwd.safe;
 import com.magicpwd.__a.mpwd.AMpwdAction;
 
 /**
- * 恢复单条记录
+ * 备份单条记录
  * @author Amon
  */
-public class LocalPickupAction extends AMpwdAction
+public class RecordBackupAction extends AMpwdAction
 {
 
-    public LocalPickupAction()
+    public RecordBackupAction()
     {
     }
 

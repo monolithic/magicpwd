@@ -11,20 +11,20 @@ import com.magicpwd._util.Lang;
 import java.util.EventListener;
 
 /**
- * 备份单条记录
+ *
  * @author Amon
  */
-public class LocalBackupAction extends AMpwdAction implements IBackCall
+public class RemoteBackupAction extends AMpwdAction implements IBackCall
 {
 
-    public LocalBackupAction()
+    public RemoteBackupAction()
     {
     }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mainPtn, LangRes.P30F7A41, "确认要执行从云端数据恢复的操作吗，此操作将需要一定的时间？"))
+        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mainPtn, LangRes.P30F7A40, "确认要执行备份数据到云端的操作吗，此操作将需要一定的时间？"))
         {
             return;
         }
@@ -36,7 +36,7 @@ public class LocalBackupAction extends AMpwdAction implements IBackCall
             @Override
             public void run()
             {
-                backup();
+                doBackup();
             }
         }.start();
     }
@@ -61,8 +61,8 @@ public class LocalBackupAction extends AMpwdAction implements IBackCall
         return true;
     }
 
-    private void backup()
+    private void doBackup()
     {
-        mainPtn.localBackup("", this);
+        mainPtn.cloudBackup(this);
     }
 }

@@ -98,7 +98,7 @@ public class PwdsBean extends APwdsBean implements IMwizBean
         }
 
         pf_PropData.selectAll();
-        Util.setClipboardContents(new String(pf_PropData.getPassword()), formPtn.getUserMdl().getStayTime());
+        Util.setClipboardContents(new String(pf_PropData.getPassword()), formPtn.getUserMdl().getClipDlt());
         return true;
     }
 

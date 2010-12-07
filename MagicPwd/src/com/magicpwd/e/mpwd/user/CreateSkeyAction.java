@@ -65,5 +65,6 @@ public class CreateSkeyAction extends AMpwdAction
     @Override
     public void reInit(javax.swing.AbstractButton button)
     {
+        button.setEnabled(isEnabled());
     }
 }

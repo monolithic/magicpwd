@@ -126,10 +126,10 @@ public class USetProp extends javax.swing.JPanel implements IPropBean
         tf_PwdsSize.setText(userMdl.getPwdsLen());
         ck_PwdsLoop.setSelected(userMdl.isPwdsLoop());
 
-        tf_BackCount.setText("" + userMdl.getBackNum());
-        tf_BackPath.setText(userMdl.getBackDir());
+        tf_BackCount.setText("" + userMdl.getDumpCnt());
+        tf_BackPath.setText(userMdl.getDumpDir());
 
-        tf_StayTime.setText("" + userMdl.getStayTime());
+        tf_StayTime.setText("" + userMdl.getClipDlt());
     }
 
     @Override
@@ -163,20 +163,20 @@ public class USetProp extends javax.swing.JPanel implements IPropBean
         txt = tf_BackCount.getText().trim();
         if (com.magicpwd._util.Char.isValidatePositiveInteger(txt))
         {
-            userMdl.setBackNum(Integer.parseInt(txt));
+            userMdl.setDumpCnt(Integer.parseInt(txt));
         }
 
         txt = tf_BackPath.getText();
         java.io.File file = new java.io.File(txt);
         if (file.exists() && file.isDirectory() && file.canWrite())
         {
-            userMdl.setBackDir(txt);
+            userMdl.setDumpDir(txt);
         }
 
         txt = tf_StayTime.getText().trim();
         if (com.magicpwd._util.Char.isValidatePositiveInteger(txt))
         {
-            userMdl.setStayTime(Integer.parseInt(txt));
+            userMdl.setClipDlt(Integer.parseInt(txt));
         }
     }
 
@@ -196,7 +196,7 @@ public class USetProp extends javax.swing.JPanel implements IPropBean
             }
             else
             {
-                backPath = new java.io.File(ConsCfg.DEF_BACK_PATH);
+                backPath = new java.io.File(ConsCfg.DEF_DUMP_PATH);
             }
         }
         javax.swing.JFileChooser jfc = new javax.swing.JFileChooser();
