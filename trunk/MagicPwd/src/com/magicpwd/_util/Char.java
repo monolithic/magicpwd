@@ -145,6 +145,15 @@ public class Char
         return Pattern.matches("^[1-9][0-9]{0,3}[-\\/\\._](0[1-9]|1[012])[-\\/\\._](0[1-9]|[12][0-9]|3[01]) ([01][0-9]|2[0-3])[:\\.]([0-5][0-9])[:\\.]([0-5][0-9])$", text);
     }
 
+    public static boolean isValidateCode(String text)
+    {
+        if (text == null)
+        {
+            return false;
+        }
+        return Pattern.compile("^[0-9a-zA-Z]{8}$", Pattern.CASE_INSENSITIVE).matcher(text).matches();
+    }
+
     public static boolean isValidateHash(String text)
     {
         if (text == null)
