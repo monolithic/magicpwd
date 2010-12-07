@@ -107,7 +107,7 @@
             </item>
             <item id="menu-find-visible" type="checkbox" text="$P30F7618" text-def="显示搜索栏">
                 <action class="com.magicpwd.e.mpwd.view.FindVisibleAction">
-                    <stroke key="^ F" />
+                    <stroke key="^ J" />
                 </action>
             </item>
             <item id="menu-menu-visible" type="checkbox" text="$P30F7619" text-def="显示菜单栏" command="tool-menu-visible">
@@ -146,28 +146,31 @@
             </item>
             <seperator />
             <item type="normal" text="$P30F7645" text-def="备份到本地">
-                <action class="com.magicpwd.e.mpwd.safe.LocalBackupAction">
+                <action class="com.magicpwd.e.mpwd.safe.NativeBackupAction">
                     <stroke key="^ B" />
                 </action>
             </item>
             <item type="normal" text="$P30F7646" text-def="从本地恢复">
-                <action class="com.magicpwd.e.mpwd.safe.LocalResumeAction">
+                <action class="com.magicpwd.e.mpwd.safe.NativeResumeAction">
                     <stroke key="^ R" />
                 </action>
             </item>
+            <item type="normal" text="$P30F7647" text-def="配置本地路径">
+                <action class="com.magicpwd.e.mpwd.safe.NativeConfigAction" />
+            </item>
             <seperator />
             <item type="normal" text="$P30F7635" text-def="备份到云端">
-                <action class="com.magicpwd.e.mpwd.safe.CloudBackupAction">
+                <action class="com.magicpwd.e.mpwd.safe.RemoteBackupAction">
                     <stroke key="^ ~ B" />
                 </action>
             </item>
             <item type="normal" text="$P30F7636" text-def="从云端恢复">
-                <action class="com.magicpwd.e.mpwd.safe.CloudResumeAction">
+                <action class="com.magicpwd.e.mpwd.safe.RemoteResumeAction">
                     <stroke key="^ ~ R" />
                 </action>
             </item>
             <item type="normal" text="$P30F7637" text-def="配置云端帐户">
-                <action class="com.magicpwd.e.mpwd.safe.CloudConfigAction" />
+                <action class="com.magicpwd.e.mpwd.safe.RemoteConfigAction" />
             </item>
             <seperator />
             <item type="normal" text="$P30F761F" text-def="常规设置">
@@ -289,7 +292,7 @@
             <icon>
                 <default id="edit-history" path="var:edit-history"/>
             </icon>
-            <action id="edit-history" class="com.magicpwd.e.mpwd.edit.PrevAction" />
+            <action id="edit-history" class="com.magicpwd.e.mpwd.safe.RecordConfigAction" />
         </item>
         <item id="tool-edit-isolate" type="toggle" tips="$P30F7B06" tips-def="属性编辑" command="menu-edit-isolate">
             <icon>
