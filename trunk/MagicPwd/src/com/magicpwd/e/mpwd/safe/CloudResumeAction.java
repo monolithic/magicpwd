@@ -31,10 +31,11 @@ public class CloudResumeAction extends AMpwdAction implements IBackCall
             return;
         }
 
-//        mainPtn.showProcessDialog();
+        mainPtn.showProcessDialog();
         java.util.List<S1S1> list = new java.util.ArrayList<S1S1>();
         if (mainPtn.checkResume(list) && list.size() < 1)
         {
+            mainPtn.hideProcessDialog();
             Lang.showMesg(mainPtn, LangRes.P30F7A3E, "无法从POP邮箱读取备份数据！");
             return;
         }
@@ -42,6 +43,7 @@ public class CloudResumeAction extends AMpwdAction implements IBackCall
         if (list.size() == 1)
         {
             resume(list.get(0).getK());
+            mainPtn.hideProcessDialog();
             return;
         }
 
@@ -49,10 +51,8 @@ public class CloudResumeAction extends AMpwdAction implements IBackCall
         datDialog.initView();
         datDialog.initLang();
         datDialog.initData();
-        datDialog.showData();
+        datDialog.showData(list);
         datDialog.setVisible(true);
-
-        mainPtn.hideProcessDialog();
     }
 
     @Override
@@ -69,6 +69,7 @@ public class CloudResumeAction extends AMpwdAction implements IBackCall
     public boolean callBack(Object sender, EventListener event, String... params)
     {
         resume(params[0]);
+        mainPtn.hideProcessDialog();
         return true;
     }
 
