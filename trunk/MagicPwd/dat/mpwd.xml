@@ -145,14 +145,25 @@
                 <action id="export" class="com.magicpwd.e.mpwd.data.ExportAction" />
             </item>
             <seperator />
+            <item type="normal" text="$P30F7645" text-def="备份到本地">
+                <action class="com.magicpwd.e.mpwd.safe.LocalBackupAction">
+                    <stroke key="^ B" />
+                </action>
+            </item>
+            <item type="normal" text="$P30F7646" text-def="从本地恢复">
+                <action class="com.magicpwd.e.mpwd.safe.LocalResumeAction">
+                    <stroke key="^ R" />
+                </action>
+            </item>
+            <seperator />
             <item type="normal" text="$P30F7635" text-def="备份到云端">
                 <action class="com.magicpwd.e.mpwd.safe.CloudBackupAction">
-                    <stroke key="^ B" />
+                    <stroke key="^ ~ B" />
                 </action>
             </item>
             <item type="normal" text="$P30F7636" text-def="从云端恢复">
                 <action class="com.magicpwd.e.mpwd.safe.CloudResumeAction">
-                    <stroke key="^ R" />
+                    <stroke key="^ ~ R" />
                 </action>
             </item>
             <item type="normal" text="$P30F7637" text-def="配置云端帐户">
