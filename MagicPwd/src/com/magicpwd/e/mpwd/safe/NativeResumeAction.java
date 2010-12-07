@@ -25,14 +25,14 @@ public class NativeResumeAction extends AMpwdAction implements IBackCall
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mainPtn, LangRes.P30F7A53, "确认要执行恢复操作吗？"))
-        {
-            return;
-        }
-
         if (!Char.isValidate(mainPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC)))
         {
             Lang.showMesg(mainPtn, LangRes.P30F7A54, "您还没有配置本地备份目录！");
+            return;
+        }
+
+        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mainPtn, LangRes.P30F7A53, "确认要执行恢复操作吗？"))
+        {
             return;
         }
 

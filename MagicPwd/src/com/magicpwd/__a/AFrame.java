@@ -368,7 +368,6 @@ public abstract class AFrame extends javax.swing.JFrame
             String docs = getCfgText("pop_mail");
             if (!com.magicpwd._util.Char.isValidate(docs))
             {
-                hideProcessDialog();
                 Lang.showMesg(this, LangRes.P30F7A3A, "您还没有配置您的POP邮箱信息！");
                 return false;
             }
@@ -432,10 +431,6 @@ public abstract class AFrame extends javax.swing.JFrame
             Logs.exception(exp);
             return false;
         }
-        finally
-        {
-            hideProcessDialog();
-        }
     }
 
     public boolean localBackup(String filePath, IBackCall backCall)
@@ -488,7 +483,6 @@ public abstract class AFrame extends javax.swing.JFrame
         try
         {
             Jzip.unZip(new java.io.FileInputStream(srcFile), new java.io.File("."), true);
-            hideProcessDialog();
             Lang.showMesg(this, LangRes.P30F7A3F, "数据恢复成功，您需要重新启动本程序！");
             Logs.end();
             return true;
@@ -512,7 +506,6 @@ public abstract class AFrame extends javax.swing.JFrame
             String docs = getCfgText("pop_mail");
             if (!com.magicpwd._util.Char.isValidate(docs))
             {
-                hideProcessDialog();
                 backCall.callBack(null, null, "message", Lang.getLang(LangRes.P30F7A3A, "您还没有配置您的POP邮箱信息！"));
                 return false;
             }
@@ -522,7 +515,6 @@ public abstract class AFrame extends javax.swing.JFrame
             java.io.File bakFile = trayPtn.endSave();
             if (bakFile == null || !bakFile.exists() || !bakFile.canRead())
             {
-                hideProcessDialog();
                 backCall.callBack(null, null, "message", Lang.getLang(LangRes.P30F7A3B, "压缩用户数据文件出错，请重启软件后重试！"));
                 return false;
             }
@@ -547,7 +539,6 @@ public abstract class AFrame extends javax.swing.JFrame
             sender.addAttachment(ConsEnv.FILE_SYNC, bakFile.getAbsolutePath());
             if (!sender.send())
             {
-                hideProcessDialog();
                 backCall.callBack(null, null, "message", Lang.getLang(LangRes.P30F7A3C, "系统无法备份您的数据到云端！"));
                 return false;
             }
@@ -559,7 +550,6 @@ public abstract class AFrame extends javax.swing.JFrame
                 return false;
             }
 
-            hideProcessDialog();
             return true;
         }
         catch (Exception ex)
@@ -570,7 +560,6 @@ public abstract class AFrame extends javax.swing.JFrame
         }
         finally
         {
-            hideProcessDialog();
             DBAccess.locked = false;
         }
     }
@@ -587,7 +576,6 @@ public abstract class AFrame extends javax.swing.JFrame
             String docs = getCfgText("pop_mail");
             if (!com.magicpwd._util.Char.isValidate(docs))
             {
-                hideProcessDialog();
                 Lang.showMesg(this, LangRes.P30F7A3A, "您还没有配置您的POP邮箱信息！");
                 return false;
             }
@@ -639,7 +627,6 @@ public abstract class AFrame extends javax.swing.JFrame
             }
             if (message == null)
             {
-                hideProcessDialog();
                 Lang.showMesg(this, LangRes.P30F7A3E, "无法从POP邮箱读取备份数据！");
             }
             else if (mail.read(message))
@@ -667,7 +654,6 @@ public abstract class AFrame extends javax.swing.JFrame
         }
         finally
         {
-            hideProcessDialog();
             DBAccess.locked = false;
         }
 
