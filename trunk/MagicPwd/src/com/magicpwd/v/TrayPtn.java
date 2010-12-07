@@ -402,7 +402,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
 
             DBAccess.exit();
 
-            java.io.File backFile = Util.nextBackupFile(userMdl.getBackDir(), userMdl.getBackNum());
+            java.io.File backFile = Util.nextBackupFile(userMdl.getDumpDir(), userMdl.getDumpCnt());
             Jzip.doZip(backFile, new java.io.File(userMdl.getDataDir()));
             return backFile;
         }

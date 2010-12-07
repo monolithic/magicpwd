@@ -44,7 +44,6 @@ import com.magicpwd._util.Jcsv;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
-import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.m.mpwd.MpwdMdl;
 import com.magicpwd.m.mpwd.TreeMdl;
@@ -150,19 +149,19 @@ public class MainPtn extends AFrame
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e)
             {
-                ls_GuidListMouseClicked(e);
+                ls_GuidListMouseClick(e);
             }
 
             @Override
             public void mousePressed(java.awt.event.MouseEvent e)
             {
-                ls_GuidListMousePressed(e);
+                ls_GuidListMouseEvent(e);
             }
 
             @Override
             public void mouseReleased(java.awt.event.MouseEvent e)
             {
-                ls_GuidListMouseReleased(e);
+                ls_GuidListMouseEvent(e);
             }
         });
 
@@ -246,6 +245,7 @@ public class MainPtn extends AFrame
 
         setEditVisible(true);
         showPropEdit(mpwdMdl.getGridMdl().initGuid(), true);
+        ls_LastIndx = -1;
         return true;
     }
 
@@ -257,6 +257,7 @@ public class MainPtn extends AFrame
     public boolean findKeys(String meta)
     {
         ls_LastIndx = -1;
+
         if (Char.isValidate(meta))
         {
             isSearch = true;
@@ -280,6 +281,8 @@ public class MainPtn extends AFrame
         {
             mpwdMdl.getListMdl().listKeysByKind(queryKey);
         }
+
+        ls_LastIndx = -1;
     }
 
     public boolean saveKeys()
@@ -337,7 +340,7 @@ public class MainPtn extends AFrame
 
         try
         {
-            mpwdMdl.getGridMdl().saveData(true, true);
+            mpwdMdl.getGridMdl().saveData(userMdl.isIncBack(), true);
         }
         catch (Exception exp)
         {
@@ -932,6 +935,7 @@ public class MainPtn extends AFrame
                 mpwdMdl.getListMdl().listKeysByKind(queryKey);
             }
         }
+
         isSearch = false;
         ls_LastIndx = -1;
     }
@@ -1001,7 +1005,7 @@ public class MainPtn extends AFrame
         }
     }
 
-    private void ls_GuidListMouseClicked(java.awt.event.MouseEvent e)
+    private void ls_GuidListMouseClick(java.awt.event.MouseEvent e)
     {
         int i = ls_GuidList.getSelectedIndex();
         // 重复事件判断
@@ -1059,25 +1063,7 @@ public class MainPtn extends AFrame
         showPropInfo();
     }
 
-    private void ls_GuidListMousePressed(java.awt.event.MouseEvent e)
-    {
-        if (e.isPopupTrigger())
-        {
-            int i = ls_GuidList.locationToIndex(e.getPoint());
-            if (i > -1)
-            {
-                if (i != ls_LastIndx)
-                {
-                    ls_LastIndx = i;
-                    ls_GuidList.setSelectedIndex(i);
-                }
-                listPop.show(ls_GuidList, e.getX(), e.getY());
-            }
-            return;
-        }
-    }
-
-    private void ls_GuidListMouseReleased(java.awt.event.MouseEvent e)
+    private void ls_GuidListMouseEvent(java.awt.event.MouseEvent e)
     {
         if (e.isPopupTrigger())
         {

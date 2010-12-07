@@ -20,11 +20,12 @@ public class UserMdl
     private static int runMode = 0;
     private static int appMode = 1;
     private static java.util.Properties userCfg;
-    static SafeKey safeKey;
+    private boolean incBack = true;
     private boolean topMost;
     private TpltMdl tpltMdl;
     private CharMdl charMdl;
     private HintMdl hintMdl;
+    static SafeKey safeKey;
 
     public UserMdl()
     {
@@ -115,6 +116,8 @@ public class UserMdl
     {
         userCfg.clear();
         appMode = 1;
+        incBack = true;
+        topMost = false;
     }
 
     public final void saveCfg()
@@ -244,20 +247,20 @@ public class UserMdl
     }
 
     /**
-     * @return the clnClp
+     * @return the clipDlt
      */
-    public final int getStayTime()
+    public final int getClipDlt()
     {
-        return Integer.parseInt(userCfg.getProperty(ConsCfg.CFG_STAY_TIME, ConsCfg.DEF_STAY_TIME));
+        return Integer.parseInt(userCfg.getProperty(ConsCfg.CFG_SAFE_CLIP_DLT, ConsCfg.DEF_CLIP_DLT));
     }
 
     /**
-     * @param clnClp
-     *            the clnClp to set
+     * @param clipDlt
+     *            the clipDlt to set
      */
-    public final void setStayTime(int clnClp)
+    public final void setClipDlt(int clipDlt)
     {
-        userCfg.setProperty(ConsCfg.CFG_STAY_TIME, Integer.toString(clnClp));
+        userCfg.setProperty(ConsCfg.CFG_SAFE_CLIP_DLT, Integer.toString(clipDlt));
     }
 
     /**
@@ -294,28 +297,6 @@ public class UserMdl
         userCfg.setProperty(ConsCfg.CFG_PWDS_HASH, pwdsKey);
     }
 
-    /**
-     * @return the bakNum
-     */
-    public final int getBackNum()
-    {
-        String txt = userCfg.getProperty(ConsCfg.CFG_BACK_SIZE, "3");
-        if (Char.isValidatePositiveInteger(txt))
-        {
-            return Integer.parseInt(txt);
-        }
-        return 3;
-    }
-
-    /**
-     * @param bakNum
-     *            the bakNum to set
-     */
-    public final void setBackNum(int backNum)
-    {
-        userCfg.setProperty(ConsCfg.CFG_BACK_SIZE, "" + backNum);
-    }
-
     public final int getHintInt()
     {
         String txt = userCfg.getProperty(ConsCfg.CFG_HINT_INT, "60");
@@ -346,31 +327,53 @@ public class UserMdl
         userCfg.setProperty(ConsCfg.CFG_HINT_PRE, "" + hintPre);
     }
 
-    /**
-     * @return the bakDir
-     */
-    public final String getBackDir()
-    {
-        return userCfg.getProperty(ConsCfg.CFG_BACK_PATH, ConsCfg.DEF_BACK_PATH);
-    }
-
-    /**
-     * @param backDir
-     *            the backDir to set
-     */
-    public final void setBackDir(String backDir)
-    {
-        userCfg.setProperty(ConsCfg.CFG_BACK_PATH, backDir);
-    }
-
     public final String getDataDir()
     {
-        return userCfg.getProperty(ConsCfg.CFG_DATA_PATH, ConsCfg.DEF_DATA_PATH);
+        return userCfg.getProperty(ConsCfg.CFG_SAFE_DATA_DIR, ConsCfg.DEF_DATA_PATH);
     }
 
     public final void setDataDir(String dataDir)
     {
-        userCfg.setProperty(ConsCfg.CFG_BACK_PATH, dataDir);
+        userCfg.setProperty(ConsCfg.CFG_SAFE_DATA_DIR, dataDir);
+    }
+
+    /**
+     * @return the bakNum
+     */
+    public final int getDumpCnt()
+    {
+        String txt = userCfg.getProperty(ConsCfg.CFG_SAFE_DUMP_CNT, "3");
+        if (Char.isValidatePositiveInteger(txt))
+        {
+            return Integer.parseInt(txt);
+        }
+        return 3;
+    }
+
+    /**
+     * @param dumpCnt
+     *            the dumpCnt to set
+     */
+    public final void setDumpCnt(int dumpCnt)
+    {
+        userCfg.setProperty(ConsCfg.CFG_SAFE_DUMP_CNT, "" + dumpCnt);
+    }
+
+    /**
+     * @return the bakDir
+     */
+    public final String getDumpDir()
+    {
+        return userCfg.getProperty(ConsCfg.CFG_SAFE_DUMP_DIR, ConsCfg.DEF_DUMP_PATH);
+    }
+
+    /**
+     * @param dumpDir
+     *            the backDir to set
+     */
+    public final void setDumpDir(String dumpDir)
+    {
+        userCfg.setProperty(ConsCfg.CFG_SAFE_DUMP_DIR, dumpDir);
     }
 
     /**
@@ -508,6 +511,22 @@ public class UserMdl
             Logs.exception(exp);
             return null;
         }
+    }
+
+    /**
+     * @return the incBack
+     */
+    public final boolean isIncBack()
+    {
+        return incBack;
+    }
+
+    /**
+     * @param incBack the incBack to set
+     */
+    public final void setIncBack(boolean incBack)
+    {
+        this.incBack = incBack;
     }
 
     /**

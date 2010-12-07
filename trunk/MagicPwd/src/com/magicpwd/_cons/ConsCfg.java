@@ -113,11 +113,11 @@ public interface ConsCfg
      */
     String CFG_HINT_PRE = CFG_HINT + ".pre";
     /**
-     * 
+     * 区域语言：语言设置
      */
     String CFG_LANG = CFG_PRE + ".lang";
     /**
-     * 
+     * 皮肤设置
      */
     String CFG_SKIN = CFG_PRE + ".skin";
     String CFG_SKIN_DECO = CFG_SKIN + ".deco";
@@ -132,37 +132,65 @@ public interface ConsCfg
     String CFG_TRAY_PTN = CFG_TRAY + ".ptn";
     String CFG_TRAY_LOC = CFG_TRAY + ".loc";
     /**
-     * 
+     * 口令选项：
      */
     String CFG_PWDS = CFG_PRE + ".pwds";
     /**
-     * 系统默认口令字符集
+     * 口令选项：系统默认口令字符集
      */
     String CFG_PWDS_HASH = CFG_PWDS + ".hash";
     /**
-     * 系统默认口令长度
+     * 口令选项：系统默认口令长度
      */
     String CFG_PWDS_SIZE = CFG_PWDS + ".size";
     /**
-     * 生成口令时系统默认是否可以生出重复字符
+     * 口令选项：生成口令时系统默认是否可以生出重复字符
      */
     String CFG_PWDS_LOOP = CFG_PWDS + ".loop";
     /**
-     * 数据备份：默认备份文件数量
+     * 数据安全
      */
-    String CFG_BACK_SIZE = CFG_PRE + ".back.size";
+    String CFG_SAFE = CFG_PRE + ".safe";
     /**
-     * 数据备份：默认备份文件路径
+     * 数据安全：用户数据
      */
-    String CFG_BACK_PATH = CFG_PRE + ".back.path";
+    String CFG_SAFE_DATA = CFG_SAFE + ".data";
     /**
-     * 默认数据存放目录
+     * 数据安全：用户数据目录
      */
-    String CFG_DATA_PATH = CFG_PRE + ".data.path";
+    String CFG_SAFE_DATA_DIR = CFG_SAFE_DATA + ".dir";
     /**
-     * 界面默认等等时间
+     * 数据安全：自动备份
      */
-    String CFG_STAY_TIME = CFG_PRE + ".safe.time";
+    String CFG_SAFE_DUMP = CFG_SAFE + ".dump";
+    /**
+     * 数据安全：自动备份文件数量
+     */
+    String CFG_SAFE_DUMP_CNT = CFG_SAFE_DUMP + ".cnt";
+    /**
+     * 数据安全：自动备份文件路径
+     */
+    String CFG_SAFE_DUMP_DIR = CFG_SAFE_DUMP + ".dir";
+    /**
+     * 数据安全：数据备份
+     */
+    String CFG_SAFE_BACK = CFG_SAFE + ".back";
+    /**
+     * 数据安全：本地备份目录
+     */
+    String CFG_SAFE_BACK_LOC = CFG_SAFE_BACK + ".loc";
+    /**
+     * 数据安全：云端存储配置
+     */
+    String CFG_SAFE_BACK_ACS = CFG_SAFE_BACK + ".acs";
+    /**
+     * 数据安全：剪贴板控制
+     */
+    String CFG_SAFE_CLIP = CFG_SAFE + ".clip";
+    /**
+     * 数据安全：剪贴板驻留时间
+     */
+    String CFG_SAFE_CLIP_DLT = CFG_SAFE_CLIP + ".dlt";
     String CFG_MODE = CFG_PRE + ".mode";
     String CFG_MODE_APP = CFG_MODE + ".app";
     String CFG_MODE_RUN = CFG_MODE + ".run";
@@ -186,7 +214,7 @@ public interface ConsCfg
     /**
      * 默认数据：剪贴板数据保留时长
      */
-    String DEF_STAY_TIME = "60";
+    String DEF_CLIP_DLT = "60";
     /**
      * 
      */
@@ -202,7 +230,7 @@ public interface ConsCfg
     /**
      * 默认数据：备份目录
      */
-    String DEF_BACK_PATH = ConsEnv.DIR_BAK;
+    String DEF_DUMP_PATH = ConsEnv.DIR_BAK;
     /**
      * 默认数据：数据目录
      */

@@ -15,10 +15,10 @@ import com.magicpwd._util.Logs;
  *
  * @author Amon
  */
-public class CloudConfigAction extends AMpwdAction
+public class RemoteConfigAction extends AMpwdAction
 {
 
-    public CloudConfigAction()
+    public RemoteConfigAction()
     {
     }
 

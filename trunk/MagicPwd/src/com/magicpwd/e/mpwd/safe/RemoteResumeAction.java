@@ -16,10 +16,10 @@ import java.util.EventListener;
  *
  * @author Amon
  */
-public class CloudResumeAction extends AMpwdAction implements IBackCall
+public class RemoteResumeAction extends AMpwdAction implements IBackCall
 {
 
-    public CloudResumeAction()
+    public RemoteResumeAction()
     {
     }
 
@@ -42,7 +42,7 @@ public class CloudResumeAction extends AMpwdAction implements IBackCall
 
         if (list.size() == 1)
         {
-            resume(list.get(0).getK());
+            doResume(list.get(0).getK());
             mainPtn.hideProcessDialog();
             return;
         }
@@ -68,12 +68,12 @@ public class CloudResumeAction extends AMpwdAction implements IBackCall
     @Override
     public boolean callBack(Object sender, EventListener event, String... params)
     {
-        resume(params[0]);
+        doResume(params[0]);
         mainPtn.hideProcessDialog();
         return true;
     }
 
-    private void resume(final String sign)
+    private void doResume(final String sign)
     {
         new Thread()
         {
