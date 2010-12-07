@@ -25,14 +25,14 @@ public class NativeBackupAction extends AMpwdAction implements IBackCall
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mainPtn, LangRes.P30F7A52, "确认要执行备份操作吗？"))
-        {
-            return;
-        }
-
         if (!Char.isValidate(mainPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC)))
         {
             Lang.showMesg(mainPtn, LangRes.P30F7A54, "您还没有配置本地备份目录！");
+            return;
+        }
+
+        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mainPtn, LangRes.P30F7A52, "确认要执行备份操作吗？"))
+        {
             return;
         }
 
