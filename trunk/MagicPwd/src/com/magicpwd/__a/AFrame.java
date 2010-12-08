@@ -360,79 +360,12 @@ public abstract class AFrame extends javax.swing.JFrame
         }
     }
 
-    public boolean checkResume(java.util.List<S1S1> list)
+    public boolean nativeDetect(java.util.List<S1S1> list) throws Exception
     {
-        try
-        {
-            String docs = getCfgText("pop_mail");
-            if (!com.magicpwd._util.Char.isValidate(docs))
-            {
-                Lang.showMesg(this, LangRes.P30F7A3A, "您还没有配置您的POP邮箱信息！");
-                return false;
-            }
-
-            String[] data = docs.split("\n");
-
-            trayPtn.endSave();
-            Connect connect = new Connect(data[0], data[2]);
-            connect.setUsername(data[1]);
-            if (!connect.useDefault())
-            {
-                Lang.showMesg(this, null, "查找不到对应的服务信息，如有疑问请与作者联系！");
-                return false;
-            }
-
-            // 读取备份文件
-            javax.mail.Store store = connect.getStore();
-            javax.mail.Folder folder = store.getDefaultFolder().getFolder("inbox");
-            if (folder.isOpen())
-            {
-                folder.close(false);
-            }
-            folder.open(javax.mail.Folder.READ_ONLY);
-
-            String user = userMdl.getCode();
-            String sign = userMdl.getCfg("mail.date");
-            if (!Char.isValidate(sign, 16))
-            {
-                sign = null;
-            }
-            java.text.SimpleDateFormat format = new java.text.SimpleDateFormat(ConsEnv.HINT_DATE);
-            javax.mail.Message[] messages = folder.getMessages();
-            if (messages != null)
-            {
-                String[] headers;
-                for (javax.mail.Message mesg : messages)
-                {
-                    headers = mesg.getHeader("magicpwd-user");
-                    if (headers == null || headers.length != 1 || !user.equalsIgnoreCase(headers[0]))
-                    {
-                        continue;
-                    }
-                    headers = mesg.getHeader("magicpwd-sign");
-                    if (headers == null || headers.length != 1)
-                    {
-                        continue;
-                    }
-                    if (sign == null || sign.compareToIgnoreCase(headers[0]) < 0)
-                    {
-                        list.add(new S1S1(headers[0], format.format(new java.util.Date(Long.parseLong(headers[0], 16)))));
-                    }
-                }
-            }
-            folder.close(false);
-            store.close();
-
-            return true;
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-            return false;
-        }
+        return true;
     }
 
-    public boolean localBackup(String filePath, IBackCall backCall)
+    public boolean nativeBackup(String filePath, IBackCall backCall)
     {
         if (!Char.isValidate(filePath))
         {
@@ -464,7 +397,7 @@ public abstract class AFrame extends javax.swing.JFrame
         return true;
     }
 
-    public boolean localResume(String filePath, IBackCall backCall)
+    public boolean nativeResume(String filePath, IBackCall backCall)
     {
         if (!Char.isValidate(filePath))
         {
@@ -498,7 +431,79 @@ public abstract class AFrame extends javax.swing.JFrame
         }
     }
 
-    public boolean cloudBackup(IBackCall backCall) throws Exception
+    public boolean remoteDetect(java.util.List<S1S1> list) throws Exception
+    {
+        String user = userMdl.getCode();
+        if (!Char.isValidateCode(user))
+        {
+            return false;
+        }
+
+        String docs = getCfgText("pop_mail");
+        if (!com.magicpwd._util.Char.isValidate(docs))
+        {
+            throw new Exception(Lang.getLang(LangRes.P30F7A3A, "您还没有配置您的POP邮箱信息！"));
+        }
+
+        trayPtn.endSave();
+
+        String[] data = docs.split("\n");
+        Connect connect = new Connect(data[0], data[2]);
+        connect.setUsername(data[1]);
+        if (!connect.useDefault())
+        {
+            throw new Exception(Lang.getLang(null, "查找不到对应的服务信息，如有疑问请与作者联系！"));
+        }
+
+        javax.mail.Store store = connect.getStore();
+        javax.mail.Folder folder = store.getDefaultFolder().getFolder("inbox");
+        try
+        {
+            if (folder.isOpen())
+            {
+                folder.close(false);
+            }
+            folder.open(javax.mail.Folder.READ_ONLY);
+
+            String sign = userMdl.getCfg("mail.date");
+            if (!Char.isValidate(sign, 16))
+            {
+                sign = null;
+            }
+            java.text.SimpleDateFormat formater = new java.text.SimpleDateFormat(ConsEnv.HINT_DATE);
+            javax.mail.Message[] messages = folder.getMessages();
+            if (messages != null)
+            {
+                String[] headers;
+                for (javax.mail.Message mesg : messages)
+                {
+                    headers = mesg.getHeader("magicpwd-user");
+                    if (headers == null || headers.length != 1 || !user.equalsIgnoreCase(headers[0]))
+                    {
+                        continue;
+                    }
+                    headers = mesg.getHeader("magicpwd-sign");
+                    if (headers == null || headers.length != 1)
+                    {
+                        continue;
+                    }
+                    if (sign == null || sign.compareToIgnoreCase(headers[0]) < 0)
+                    {
+                        list.add(new S1S1(headers[0], formater.format(new java.util.Date(Long.parseLong(headers[0], 16)))));
+                    }
+                }
+            }
+        }
+        finally
+        {
+            folder.close(false);
+            store.close();
+        }
+
+        return true;
+    }
+
+    public boolean remoteBackup(IBackCall backCall) throws Exception
     {
         String user = userMdl.getCode();
         if (!Char.isValidateCode(user))
@@ -551,7 +556,7 @@ public abstract class AFrame extends javax.swing.JFrame
         return true;
     }
 
-    public boolean cloudResume(String sign, IBackCall backCall) throws Exception
+    public boolean remoteResume(String sign, IBackCall backCall) throws Exception
     {
         if (!Char.isValidate(sign, 16))
         {
@@ -583,53 +588,59 @@ public abstract class AFrame extends javax.swing.JFrame
         Reader reader = new Reader(connect);
         javax.mail.Store store = connect.getStore();
         javax.mail.Folder folder = store.getDefaultFolder().getFolder("inbox");
-        if (folder.isOpen())
+        try
+        {
+            if (folder.isOpen())
+            {
+                folder.close(false);
+            }
+            folder.open(javax.mail.Folder.READ_ONLY);
+
+            javax.mail.Message message = null;
+            javax.mail.Message[] messages = folder.getMessages();
+            if (messages != null)
+            {
+                String[] headers;
+                for (javax.mail.Message mesg : messages)
+                {
+                    headers = mesg.getHeader("magicpwd-user");
+                    if (headers == null || headers.length != 1 || !user.equalsIgnoreCase(headers[0]))
+                    {
+                        continue;
+                    }
+                    headers = mesg.getHeader("magicpwd-sign");
+                    if (headers == null || headers.length != 1)
+                    {
+                        continue;
+                    }
+                    if (sign.equalsIgnoreCase(headers[0]))
+                    {
+                        message = mesg;
+                        break;
+                    }
+                }
+            }
+
+            if (message != null && reader.read(message))
+            {
+                for (S1S1 item : reader.getAttachmentList())
+                {
+                    if (ConsEnv.FILE_SYNC.equals(item.getK()))
+                    {
+                        nativeResume(item.getV(), null);
+                    }
+                }
+            }
+
+            if (backCall != null && !backCall.callBack(null, null))
+            {
+                return false;
+            }
+        }
+        finally
         {
             folder.close(false);
-        }
-        folder.open(javax.mail.Folder.READ_ONLY);
-
-        javax.mail.Message message = null;
-        javax.mail.Message[] messages = folder.getMessages();
-        if (messages != null)
-        {
-            String[] headers;
-            for (javax.mail.Message mesg : messages)
-            {
-                headers = mesg.getHeader("magicpwd-user");
-                if (headers == null || headers.length != 1 || !user.equalsIgnoreCase(headers[0]))
-                {
-                    continue;
-                }
-                headers = mesg.getHeader("magicpwd-sign");
-                if (headers == null || headers.length != 1)
-                {
-                    continue;
-                }
-                if (sign.equalsIgnoreCase(headers[0]))
-                {
-                    message = mesg;
-                    break;
-                }
-            }
-        }
-
-        if (message != null && reader.read(message))
-        {
-            for (S1S1 item : reader.getAttachmentList())
-            {
-                if (ConsEnv.FILE_SYNC.equals(item.getK()))
-                {
-                    localResume(item.getV(), null);
-                }
-            }
-        }
-        folder.close(false);
-        store.close();
-
-        if (backCall != null && !backCall.callBack(null, null))
-        {
-            return false;
+            store.close();
         }
 
         return true;

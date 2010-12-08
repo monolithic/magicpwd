@@ -70,6 +70,6 @@ public class NativeBackupAction extends AMpwdAction implements IBackCall
 
     private void doBackup()
     {
-        mainPtn.localBackup(mainPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC), this);
+        mainPtn.nativeBackup(mainPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC), this);
     }
 }
