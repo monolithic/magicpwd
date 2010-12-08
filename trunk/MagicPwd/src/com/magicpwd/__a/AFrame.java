@@ -6,6 +6,7 @@ package com.magicpwd.__a;
 
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.S1S1;
+import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._mail.Connect;
@@ -14,13 +15,14 @@ import com.magicpwd._mail.Sender;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.File;
-import com.magicpwd._util.Jpng;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.DBA3000;
+import com.magicpwd.d.DBAccess;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
+import com.magicpwd.r.AmonFF;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.TrayPtn;
 import java.io.IOException;
@@ -294,6 +296,11 @@ public abstract class AFrame extends javax.swing.JFrame
 
     public void showProcessDialog()
     {
+        showProcessDialog(null);
+    }
+
+    public void showProcessDialog(final String notice)
+    {
         if (pl_LckPanel != null && pl_LckPanel.isVisible())
         {
             return;
@@ -301,19 +308,25 @@ public abstract class AFrame extends javax.swing.JFrame
 
         if (pl_LckPanel == null)
         {
-            pl_LckPanel = new javax.swing.JPanel();
-            pl_LckPanel.setLayout(new java.awt.BorderLayout());
-            pl_LckPanel.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.lightGray));
+            synchronized (notice)
+            {
+                pl_LckPanel = new javax.swing.JPanel();
+                pl_LckPanel.setLayout(new java.awt.BorderLayout());
+                pl_LckPanel.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.lightGray));
 
-            lb_LckLabel = new javax.swing.JLabel();
-            lb_LckLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-            lb_LckLabel.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.gray));
-            pl_LckPanel.add(lb_LckLabel, java.awt.BorderLayout.CENTER);
+                lb_IcoLabel = new javax.swing.JLabel();
+                lb_IcoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                pl_LckPanel.add(lb_IcoLabel, java.awt.BorderLayout.CENTER);
 
-            getLayeredPane().add(pl_LckPanel, javax.swing.JLayeredPane.MODAL_LAYER);
+                lb_TipLabel = new javax.swing.JLabel();
+                lb_TipLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+                pl_LckPanel.add(lb_TipLabel, java.awt.BorderLayout.SOUTH);
+
+                getLayeredPane().add(pl_LckPanel, javax.swing.JLayeredPane.MODAL_LAYER);
+                lb_IcoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConsEnv.ICON_PATH + "loading.gif")));
+            }
         }
 
-        setEnabled(false);
         java.awt.Dimension size = this.getContentPane().getSize();
         int w = 200;
         int h = 80;
@@ -327,23 +340,10 @@ public abstract class AFrame extends javax.swing.JFrame
         }
         pl_LckPanel.setBounds((size.width - w) >> 1, (size.height - h) >> 1, w, h);
         pl_LckPanel.setVisible(true);
-
-        if (jpng == null)
+        if (Char.isValidate(notice))
         {
-            jpng = new Jpng();
-            try
-            {
-                java.io.InputStream stream = AFrame.class.getResourceAsStream(ConsEnv.ICON_PATH + "wait.png");
-                jpng.readIcons(stream, 16, 16);
-                stream.close();
-                jpng.setLabel(lb_LckLabel);
-            }
-            catch (Exception exp)
-            {
-                Logs.exception(exp);
-            }
+            lb_TipLabel.setText(notice);
         }
-        jpng.start();
     }
 
     public void hideProcessDialog()
@@ -352,27 +352,50 @@ public abstract class AFrame extends javax.swing.JFrame
         {
             return;
         }
-        setEnabled(true);
         pl_LckPanel.setVisible(false);
-        if (jpng != null)
-        {
-            jpng.stop();
-        }
     }
 
     public boolean nativeDetect(java.util.List<S1S1> list) throws Exception
     {
+        String user = userMdl.getCode();
+        if (!Char.isValidateCode(user))
+        {
+            return false;
+        }
+
+        String path = userMdl.getCfg(ConsCfg.CFG_SAFE_BACK_LOC);
+        if (!Char.isValidate(path))
+        {
+            return false;
+        }
+
+        java.io.File dir = new java.io.File(path);
+        if (!dir.exists() || !dir.isDirectory() || !dir.canRead())
+        {
+            return false;
+        }
+
+        java.io.File[] files = dir.listFiles(new AmonFF("magicpwd_[\\d]{14}[.]amb", true));
+        StringBuilder buffer = new StringBuilder();
+        for (java.io.File file : files)
+        {
+            if (file.canRead())
+            {
+                buffer.append(file.getName()).delete(23, 27).delete(0, 9).insert(12, ':').insert(10, ':').insert(8, ' ').insert(6, '-').insert(4, '-');
+                list.add(new S1S1(file.getName(), buffer.toString()));
+                buffer.delete(0, buffer.length());
+            }
+        }
+
         return true;
     }
 
-    public boolean nativeBackup(String filePath, IBackCall backCall)
+    public boolean nativeBackup(String filePath, IBackCall backCall) throws Exception
     {
         if (!Char.isValidate(filePath))
         {
             return false;
         }
-
-        java.io.File srcFile = trayPtn.endSave();
 
         java.io.File dstFile = new java.io.File(filePath);
         if (!dstFile.exists())
@@ -386,6 +409,8 @@ public abstract class AFrame extends javax.swing.JFrame
         {
             return false;
         }
+
+        java.io.File srcFile = trayPtn.endSave();
         dstFile = new java.io.File(dstFile, srcFile.getName().replace("amon", "magicpwd").replace("-", "").replace(".backup", ".amb"));
         File.copy(srcFile, dstFile, true);
 
@@ -397,14 +422,12 @@ public abstract class AFrame extends javax.swing.JFrame
         return true;
     }
 
-    public boolean nativeResume(String filePath, IBackCall backCall)
+    public boolean nativeResume(String filePath, IBackCall backCall) throws Exception
     {
         if (!Char.isValidate(filePath))
         {
             return false;
         }
-
-        trayPtn.endSave();
 
         java.io.File srcFile = new java.io.File(filePath);
         if (!srcFile.exists() || !srcFile.isFile() || !srcFile.canRead())
@@ -412,23 +435,13 @@ public abstract class AFrame extends javax.swing.JFrame
             return false;
         }
 
-        try
-        {
-            Jzip.unZip(new java.io.FileInputStream(srcFile), new java.io.File("."), true);
-            Lang.showMesg(this, LangRes.P30F7A3F, "数据恢复成功，您需要重新启动本程序！");
-            Logs.end();
-            return true;
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-            Lang.showMesg(this, null, exp.getLocalizedMessage());
-            return false;
-        }
-        finally
-        {
-            System.exit(0);
-        }
+        trayPtn.endSave();
+
+        DBAccess.locked = true;
+        Jzip.unZip(new java.io.FileInputStream(srcFile), new java.io.File("."), true);
+        DBAccess.locked = false;
+        Logs.end();
+        return true;
     }
 
     public boolean remoteDetect(java.util.List<S1S1> list) throws Exception
@@ -444,8 +457,6 @@ public abstract class AFrame extends javax.swing.JFrame
         {
             throw new Exception(Lang.getLang(LangRes.P30F7A3A, "您还没有配置您的POP邮箱信息！"));
         }
-
-        trayPtn.endSave();
 
         String[] data = docs.split("\n");
         Connect connect = new Connect(data[0], data[2]);
@@ -645,7 +656,7 @@ public abstract class AFrame extends javax.swing.JFrame
 
         return true;
     }
-    private Jpng jpng;
     private javax.swing.JPanel pl_LckPanel;
-    private javax.swing.JLabel lb_LckLabel;
+    private javax.swing.JLabel lb_IcoLabel;
+    private javax.swing.JLabel lb_TipLabel;
 }

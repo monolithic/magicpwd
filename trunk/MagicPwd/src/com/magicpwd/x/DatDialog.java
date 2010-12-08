@@ -19,11 +19,9 @@ package com.magicpwd.x;
 import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.S1S1;
-import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
-import com.magicpwd.r.KindTN;
 
 /**
  * Application: MagicPwd
@@ -121,8 +119,6 @@ public class DatDialog extends javax.swing.JDialog
             }
         });
 
-        //        tr_KindList.setModel(mainPtn.getTreeMdl());
-
         pack();
         Bean.centerForm(this, formPtn);
     }
@@ -142,28 +138,29 @@ public class DatDialog extends javax.swing.JDialog
 
     void bt_UpdateActionPerformed(java.awt.event.ActionEvent evt)
     {
-        javax.swing.tree.TreePath tp = null;//tr_KindList.getSelectionPath();
-        if (tp == null)
+        Object obj = ls_DataList.getSelectedValue();
+        if (obj == null || !(obj instanceof S1S1))
         {
             Lang.showMesg(this, LangRes.P30FAA19, "请选择您要移动的目标类别！");
             return;
         }
 
-        Object obj = tp.getLastPathComponent();
-        if (obj instanceof KindTN)
-        {
-            KindTN item = (KindTN) obj;
-            Kind kind = (Kind) item.getUserObject();
-            backCall.callBack(null, null, kind.getC2010103());
-        }
         this.setVisible(false);
         this.dispose();
+
+        S1S1 item = (S1S1) obj;
+        backCall.callBack(this, null, "select", item.getK());
     }
 
     void bt_CancelActionPerformed(java.awt.event.ActionEvent evt)
     {
         this.setVisible(false);
         this.dispose();
+
+        if (backCall != null)
+        {
+            backCall.callBack(this, null, "cancel");
+        }
     }
     private javax.swing.JList ls_DataList;
     private javax.swing.JButton bt_Update;

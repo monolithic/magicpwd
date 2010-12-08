@@ -15,7 +15,7 @@ import com.magicpwd._util.Logs;
  *
  * @author Amon
  */
-public class RemoteConfigAction extends AMpwdAction
+public class RemoteConfigAction extends AMpwdAction implements IBackCall
 {
 
     public RemoteConfigAction()
@@ -25,22 +25,7 @@ public class RemoteConfigAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        trayPtn.getUserPtn(ConsEnv.INT_SIGN_CS, new IBackCall()
-        {
-
-            @Override
-            public boolean callBack(Object sender, java.util.EventListener event, String... params)
-            {
-                if (params != null && params.length > 0)
-                {
-                    if (ConsEnv.STR_SIGN_CS.equals(params[0]))
-                    {
-                        return configDocs(params);
-                    }
-                }
-                return false;
-            }
-        });
+        trayPtn.getUserPtn(ConsEnv.INT_SIGN_CS, this);
     }
 
     @Override
@@ -53,9 +38,10 @@ public class RemoteConfigAction extends AMpwdAction
     {
     }
 
-    private boolean configDocs(String... params)
+    @Override
+    public boolean callBack(Object sender, java.util.EventListener event, String... params)
     {
-        if (params == null || params.length < 3)
+        if (params == null || params.length < 4 || !ConsEnv.STR_SIGN_CS.equals(params[0]))
         {
             return false;
         }
