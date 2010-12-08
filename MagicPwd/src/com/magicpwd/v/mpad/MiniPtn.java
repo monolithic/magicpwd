@@ -207,7 +207,9 @@ public class MiniPtn extends AFrame
 
         safeMdl = mpadMdl.getNoteMdl();
 
-        ck_NoteWrap.setSelected(ConsCfg.DEF_TRUE.equalsIgnoreCase(userMdl.getCfg(ConsCfg.CFG_MPAD_WRAP)));
+        boolean wrap = ConsCfg.DEF_TRUE.equalsIgnoreCase(userMdl.getCfg(ConsCfg.CFG_MPAD_WRAP));
+        ck_NoteWrap.setSelected(wrap);
+        ta_NoteData.setLineWrap(wrap);
 
         noteList = new java.util.ArrayList<S1S2>();
         nameBox.initData();

@@ -63,7 +63,15 @@ public class RemoteBackupAction extends AMpwdAction implements IBackCall
         try
         {
             boolean b = mainPtn.remoteBackup(this);
-            Lang.showMesg(mainPtn, "", "");
+            mainPtn.hideProcessDialog();
+            if (b)
+            {
+                Lang.showMesg(mainPtn, LangRes.P30F7A3D, "恭喜，数据备份成功！");
+            }
+            else
+            {
+                Lang.showMesg(mainPtn, LangRes.P30F7A3C, "数据备份失败，请重启软件后重试！");
+            }
         }
         catch (Exception exp)
         {

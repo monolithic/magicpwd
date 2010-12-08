@@ -10,10 +10,10 @@ import com.magicpwd.__a.mpwd.AMpwdAction;
  * 恢复单条记录
  * @author Amon
  */
-public class RecordPickupAction extends AMpwdAction
+public class RecordResumeAction extends AMpwdAction
 {
 
-    public RecordPickupAction()
+    public RecordResumeAction()
     {
     }
 

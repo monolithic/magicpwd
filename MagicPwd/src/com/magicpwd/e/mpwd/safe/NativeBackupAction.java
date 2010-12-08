@@ -10,6 +10,7 @@ import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
+import com.magicpwd._util.Logs;
 
 /**
  * 备份到数据文件
@@ -61,15 +62,28 @@ public class NativeBackupAction extends AMpwdAction implements IBackCall
     @Override
     public boolean callBack(Object sender, java.util.EventListener event, String... params)
     {
-        if (params != null && params.length == 2)
-        {
-            Lang.showMesg(mainPtn, null, params[1]);
-        }
         return true;
     }
 
     private void doBackup()
     {
-        mainPtn.nativeBackup(mainPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC), this);
+        try
+        {
+            boolean b = mainPtn.nativeBackup(mainPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC), this);
+            mainPtn.hideProcessDialog();
+            if (b)
+            {
+                Lang.showMesg(mainPtn, LangRes.P30F7A3D, "恭喜，数据备份成功！");
+            }
+            else
+            {
+                Lang.showMesg(mainPtn, LangRes.P30F7A3C, "数据备份失败，请重启软件后重试！");
+            }
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            Lang.showMesg(mainPtn, null, exp.getLocalizedMessage());
+        }
     }
 }
