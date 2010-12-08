@@ -6,6 +6,7 @@ package com.magicpwd.__a;
 
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.S1S1;
+import com.magicpwd._comp.WGlassPane;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
@@ -294,12 +295,22 @@ public abstract class AFrame extends javax.swing.JFrame
         this.userMdl = userMdl;
     }
 
-    public void showProcessDialog()
+    public void setLocked(boolean locked)
     {
-        showProcessDialog(null);
+        if (glassPane == null)
+        {
+            glassPane = new WGlassPane();
+            this.setGlassPane(glassPane);
+        }
+        glassPane.setVisible(locked);
     }
 
-    public void showProcessDialog(final String notice)
+    public void showProgress()
+    {
+        showProgress(null);
+    }
+
+    public void showProgress(String notice)
     {
         if (pl_LckPanel != null && pl_LckPanel.isVisible())
         {
@@ -308,23 +319,7 @@ public abstract class AFrame extends javax.swing.JFrame
 
         if (pl_LckPanel == null)
         {
-            synchronized (notice)
-            {
-                pl_LckPanel = new javax.swing.JPanel();
-                pl_LckPanel.setLayout(new java.awt.BorderLayout());
-                pl_LckPanel.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.lightGray));
-
-                lb_IcoLabel = new javax.swing.JLabel();
-                lb_IcoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                pl_LckPanel.add(lb_IcoLabel, java.awt.BorderLayout.CENTER);
-
-                lb_TipLabel = new javax.swing.JLabel();
-                lb_TipLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-                pl_LckPanel.add(lb_TipLabel, java.awt.BorderLayout.SOUTH);
-
-                getLayeredPane().add(pl_LckPanel, javax.swing.JLayeredPane.MODAL_LAYER);
-                lb_IcoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConsEnv.ICON_PATH + "loading.gif")));
-            }
+            initProgress();
         }
 
         java.awt.Dimension size = this.getContentPane().getSize();
@@ -346,7 +341,25 @@ public abstract class AFrame extends javax.swing.JFrame
         }
     }
 
-    public void hideProcessDialog()
+    private synchronized void initProgress()
+    {
+        pl_LckPanel = new javax.swing.JPanel();
+        pl_LckPanel.setLayout(new java.awt.BorderLayout());
+        pl_LckPanel.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.lightGray));
+
+        lb_IcoLabel = new javax.swing.JLabel();
+        lb_IcoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        pl_LckPanel.add(lb_IcoLabel, java.awt.BorderLayout.CENTER);
+
+        lb_TipLabel = new javax.swing.JLabel();
+        lb_TipLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        pl_LckPanel.add(lb_TipLabel, java.awt.BorderLayout.SOUTH);
+
+        getLayeredPane().add(pl_LckPanel, javax.swing.JLayeredPane.MODAL_LAYER);
+        lb_IcoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConsEnv.ICON_PATH + "wait.gif")));
+    }
+
+    public void hideProgress()
     {
         if (pl_LckPanel == null || !pl_LckPanel.isVisible())
         {
@@ -382,7 +395,7 @@ public abstract class AFrame extends javax.swing.JFrame
             if (file.canRead())
             {
                 buffer.append(file.getName()).delete(23, 27).delete(0, 9).insert(12, ':').insert(10, ':').insert(8, ' ').insert(6, '-').insert(4, '-');
-                list.add(new S1S1(file.getName(), buffer.toString()));
+                list.add(0, new S1S1(file.getAbsolutePath(), buffer.toString()));
                 buffer.delete(0, buffer.length());
             }
         }
@@ -656,6 +669,7 @@ public abstract class AFrame extends javax.swing.JFrame
 
         return true;
     }
+    private WGlassPane glassPane;
     private javax.swing.JPanel pl_LckPanel;
     private javax.swing.JLabel lb_IcoLabel;
     private javax.swing.JLabel lb_TipLabel;

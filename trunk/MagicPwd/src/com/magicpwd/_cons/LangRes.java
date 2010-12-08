@@ -275,6 +275,7 @@ public interface LangRes
     String P30F4204 = "P30F4204";// 类别管理
     String P30F4205 = "P30F4205";// 键盘快捷
     String P30F4206 = "P30F4206";
+    String P30F4207 = "P30F4207";
     // ========================================================================
     // 5 迷你窗口语言资源
     // ========================================================================
@@ -884,4 +885,5 @@ public interface LangRes
     String P30FAA1B = "P30FAA1B";
     String P30FAA1C = "P30FAA1C";
     String P30FAA1D = "P30FAA1D";
+    String P30FAA1E = "P30FAA1E";
 }

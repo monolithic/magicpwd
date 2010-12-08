@@ -53,6 +53,7 @@ public class DatDialog extends javax.swing.JDialog
         bt_Cancel = new javax.swing.JButton();
         bt_Update = new javax.swing.JButton();
 
+        ls_DataList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         javax.swing.JScrollPane sp_DataList = new javax.swing.JScrollPane();
         sp_DataList.setViewportView(ls_DataList);
 
@@ -92,7 +93,7 @@ public class DatDialog extends javax.swing.JDialog
 
         Lang.setWText(bt_Cancel, LangRes.P30FA50B, "取消(@C)");
 
-        setTitle(Lang.getLang(LangRes.P30F4206, "把记录迁移到..."));
+        setTitle(Lang.getLang(LangRes.P30F4207, "选择还原节点"));
 
         pack();
     }
@@ -141,15 +142,16 @@ public class DatDialog extends javax.swing.JDialog
         Object obj = ls_DataList.getSelectedValue();
         if (obj == null || !(obj instanceof S1S1))
         {
-            Lang.showMesg(this, LangRes.P30FAA19, "请选择您要移动的目标类别！");
+            Lang.showMesg(this, LangRes.P30FAA1E, "请选择您要恢复的节点！");
             return;
         }
 
         this.setVisible(false);
-        this.dispose();
 
         S1S1 item = (S1S1) obj;
         backCall.callBack(this, null, "select", item.getK());
+
+        this.dispose();
     }
 
     void bt_CancelActionPerformed(java.awt.event.ActionEvent evt)

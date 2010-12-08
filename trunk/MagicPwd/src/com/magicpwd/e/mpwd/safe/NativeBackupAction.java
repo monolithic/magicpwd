@@ -37,7 +37,6 @@ public class NativeBackupAction extends AMpwdAction implements IBackCall
             return;
         }
 
-        mainPtn.showProcessDialog();
         new Thread()
         {
 
@@ -67,10 +66,15 @@ public class NativeBackupAction extends AMpwdAction implements IBackCall
 
     private void doBackup()
     {
+        mainPtn.setLocked(true);
+        mainPtn.showProgress();
+
         try
         {
             boolean b = mainPtn.nativeBackup(mainPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC), this);
-            mainPtn.hideProcessDialog();
+            mainPtn.hideProgress();
+            mainPtn.setLocked(false);
+
             if (b)
             {
                 Lang.showMesg(mainPtn, LangRes.P30F7A3D, "恭喜，数据备份成功！");
@@ -82,6 +86,9 @@ public class NativeBackupAction extends AMpwdAction implements IBackCall
         }
         catch (Exception exp)
         {
+            mainPtn.hideProgress();
+            mainPtn.setLocked(false);
+
             Logs.exception(exp);
             Lang.showMesg(mainPtn, null, exp.getLocalizedMessage());
         }
