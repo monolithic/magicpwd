@@ -62,7 +62,7 @@ public class RemoteBackupAction extends AMpwdAction implements IBackCall
     {
         try
         {
-            boolean b = mainPtn.cloudBackup(this);
+            boolean b = mainPtn.remoteBackup(this);
             Lang.showMesg(mainPtn, "", "");
         }
         catch (Exception exp)

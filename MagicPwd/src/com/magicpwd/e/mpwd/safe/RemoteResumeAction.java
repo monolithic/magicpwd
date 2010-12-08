@@ -64,7 +64,7 @@ public class RemoteResumeAction extends AMpwdAction implements IBackCall
     private void doResume()
     {
         java.util.List<S1S1> list = new java.util.ArrayList<S1S1>();
-        if (mainPtn.checkResume(list) && list.size() < 1)
+        if (mainPtn.remoteDetect(list) && list.size() < 1)
         {
             mainPtn.hideProcessDialog();
             Lang.showMesg(mainPtn, LangRes.P30F7A3E, "无法从POP邮箱读取备份数据！");
@@ -89,7 +89,7 @@ public class RemoteResumeAction extends AMpwdAction implements IBackCall
     {
         try
         {
-            mainPtn.cloudResume(sign, null);
+            mainPtn.remoteResume(sign, null);
         }
         catch (Exception ex)
         {

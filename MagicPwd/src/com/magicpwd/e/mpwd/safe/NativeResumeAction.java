@@ -70,6 +70,6 @@ public class NativeResumeAction extends AMpwdAction implements IBackCall
 
     private void doResume()
     {
-        mainPtn.localResume(mainPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC), this);
+        mainPtn.nativeResume(mainPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC), this);
     }
 }
