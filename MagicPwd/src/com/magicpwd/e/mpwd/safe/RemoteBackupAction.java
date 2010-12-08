@@ -30,7 +30,6 @@ public class RemoteBackupAction extends AMpwdAction implements IBackCall
             return;
         }
 
-        mainPtn.showProcessDialog();
         new Thread()
         {
 
@@ -60,10 +59,15 @@ public class RemoteBackupAction extends AMpwdAction implements IBackCall
 
     private void doBackup()
     {
+        mainPtn.setLocked(true);
+        mainPtn.showProgress();
+
         try
         {
             boolean b = mainPtn.remoteBackup(this);
-            mainPtn.hideProcessDialog();
+            mainPtn.hideProgress();
+            mainPtn.setLocked(false);
+
             if (b)
             {
                 Lang.showMesg(mainPtn, LangRes.P30F7A3D, "恭喜，数据备份成功！");
@@ -75,6 +79,9 @@ public class RemoteBackupAction extends AMpwdAction implements IBackCall
         }
         catch (Exception exp)
         {
+            mainPtn.hideProgress();
+            mainPtn.setLocked(false);
+
             Logs.exception(exp);
             Lang.showMesg(mainPtn, null, exp.getLocalizedMessage());
         }

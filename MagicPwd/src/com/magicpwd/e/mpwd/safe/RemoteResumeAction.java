@@ -32,7 +32,6 @@ public class RemoteResumeAction extends AMpwdAction implements IBackCall
             return;
         }
 
-        mainPtn.showProcessDialog();
         new Thread()
         {
 
@@ -70,12 +69,17 @@ public class RemoteResumeAction extends AMpwdAction implements IBackCall
             return false;
         }
 
+        mainPtn.setLocked(true);
+        mainPtn.showProgress();
         doResume(params[1]);
         return true;
     }
 
     private void doResume()
     {
+        mainPtn.setLocked(true);
+        mainPtn.showProgress();
+
         java.util.List<S1S1> list = new java.util.ArrayList<S1S1>();
         try
         {
@@ -83,15 +87,19 @@ public class RemoteResumeAction extends AMpwdAction implements IBackCall
         }
         catch (Exception exp)
         {
+            mainPtn.hideProgress();
+            mainPtn.setLocked(false);
+
             Logs.exception(exp);
-            mainPtn.hideProcessDialog();
             Lang.showMesg(mainPtn, null, exp.getLocalizedMessage());
             return;
         }
 
         if (list.size() < 1)
         {
-            mainPtn.hideProcessDialog();
+            mainPtn.hideProgress();
+            mainPtn.setLocked(false);
+
             Lang.showMesg(mainPtn, LangRes.P30F7A55, "没有发现可用的备份数据！");
             return;
         }
@@ -101,6 +109,9 @@ public class RemoteResumeAction extends AMpwdAction implements IBackCall
             doResume(list.get(0).getK());
             return;
         }
+
+        mainPtn.hideProgress();
+        mainPtn.setLocked(false);
 
         DatDialog datDialog = new DatDialog(mainPtn, this);
         datDialog.initView();
@@ -115,7 +126,9 @@ public class RemoteResumeAction extends AMpwdAction implements IBackCall
         try
         {
             boolean b = mainPtn.remoteResume(sign, null);
-            mainPtn.hideProcessDialog();
+            mainPtn.hideProgress();
+            mainPtn.setLocked(false);
+
             if (b)
             {
                 Lang.showMesg(mainPtn, LangRes.P30F7A3F, "恭喜，数据恢复成功，您需要重新启动本程序！");
@@ -127,6 +140,9 @@ public class RemoteResumeAction extends AMpwdAction implements IBackCall
         }
         catch (Exception ex)
         {
+            mainPtn.hideProgress();
+            mainPtn.setLocked(false);
+
             Logs.exception(ex);
             Lang.showMesg(mainPtn, null, ex.getLocalizedMessage());
         }
