@@ -14,6 +14,7 @@ import com.magicpwd._util.Logs;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.u.DBU3000;
 import com.magicpwd.v.TrayPtn;
+import java.awt.Color;
 import javax.imageio.ImageIO;
 
 public class UserPtn extends javax.swing.JPanel
@@ -552,7 +553,7 @@ public class UserPtn extends javax.swing.JPanel
             default:
                 break;
         }
-        vsg.addContainerGap();
+//        vsg.addContainerGap();
         layout.setVerticalGroup(vsg);
 
         pl_InfoPane.removeAll();
