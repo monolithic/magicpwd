@@ -78,12 +78,12 @@
             </item>
             <seperator />
             <item type="normal" text="$P30F760F" text-def="上移">
-                <action id="edit-prev" class="com.magicpwd.e.mpwd.edit.PrevAction">
+                <action id="edit-prev" class="com.magicpwd.e.mpwd.edit.MovetoPrevAction">
                     <stroke key="^ U" />
                 </action>
             </item>
             <item type="normal" text="$P30F7610" text-def="下移">
-                <action id="edit-next" class="com.magicpwd.e.mpwd.edit.NextAction">
+                <action id="edit-next" class="com.magicpwd.e.mpwd.edit.MovetoNextAction">
                     <stroke key="^ D" />
                 </action>
             </item>
@@ -92,6 +92,17 @@
             <item type="checkbox" text="$P30F7615" text-def="总在最上">
                 <action class="com.magicpwd.e.mpwd.view.TopsAction">
                     <stroke key="F5" />
+                </action>
+            </item>
+            <seperator />
+            <item type="normal" text="$P30F7648" text-def="选择上一属性">
+                <action id="view-prev" class="com.magicpwd.e.mpwd.view.SelectPrevAction">
+                    <stroke key="^ up" />
+                </action>
+            </item>
+            <item type="normal" text="$P30F7649" text-def="选择下一属性">
+                <action id="view-next" class="com.magicpwd.e.mpwd.view.SelectNextAction">
+                    <stroke key="^ down" />
                 </action>
             </item>
             <seperator />
