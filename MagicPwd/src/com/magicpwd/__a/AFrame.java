@@ -513,7 +513,7 @@ public abstract class AFrame extends javax.swing.JFrame
                     }
                     if (sign == null || sign.compareToIgnoreCase(headers[0]) < 0)
                     {
-                        list.add(new S1S1(headers[0], formater.format(new java.util.Date(Long.parseLong(headers[0], 16)))));
+                        list.add(0, new S1S1(headers[0], formater.format(new java.util.Date(Long.parseLong(headers[0], 16)))));
                     }
                 }
             }
