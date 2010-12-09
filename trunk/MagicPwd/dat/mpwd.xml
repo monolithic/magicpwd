@@ -71,7 +71,7 @@
                     <stroke key="^ 7" />
                 </action>
             </item>
-            <item type="normal" text="$P30F760E" text-def="添加数值属性">
+            <item type="normal" text="$P30F764A" text-def="添加数值属性">
                 <action id="append-data" class="com.magicpwd.e.mpwd.edit.AppendDataAction">
                     <stroke key="^ 8" />
                 </action>
