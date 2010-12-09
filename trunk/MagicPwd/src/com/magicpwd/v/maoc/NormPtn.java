@@ -1,4 +1,4 @@
-package com.magicpwd.v.mpay;
+package com.magicpwd.v.maoc;
 
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
