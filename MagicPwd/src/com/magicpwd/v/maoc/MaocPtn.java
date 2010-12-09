@@ -5,12 +5,12 @@ import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 
 /**
- * 正常模式：账簿
+ * 代数运算
  * 
  * @author Amon
  * 
  */
-public class NormPtn extends javax.swing.JFrame
+public class MaocPtn extends javax.swing.JFrame
 {
 
     public void initView()
