@@ -22,6 +22,7 @@ public class FindAction extends AMpwdAction
     {
         mainPtn.setFindVisible(true);
         mainPtn.pack();
+        mainPtn.setFindFocused();
     }
 
     @Override

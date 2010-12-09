@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.magicpwd.e.mpwd.view;
+package com.magicpwd.e.mpwd.edit;
 
 import com.magicpwd.__a.mpwd.AMpwdAction;
 
@@ -10,23 +10,17 @@ import com.magicpwd.__a.mpwd.AMpwdAction;
  *
  * @author Amon
  */
-public class FindAction extends AMpwdAction
+public class MovetoNextAction extends AMpwdAction
 {
 
-    public FindAction()
+    public MovetoNextAction()
     {
     }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-//        if (!userMdl.getUserCfg().isFindViw())
-//        {
-//            mainFind.setVisible(true);
-//            mainMenu.setViewFindSelected(true);
-//            userMdl.getUserCfg().setFindViw(true);
-//        }
-//        mainFind.requestFocus();
+        mainPtn.movetoNext();
     }
 
     @Override
