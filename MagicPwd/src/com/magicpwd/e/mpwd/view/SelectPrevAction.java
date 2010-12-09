@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.magicpwd.e.mpwd.edit;
+package com.magicpwd.e.mpwd.view;
 
 import com.magicpwd.__a.mpwd.AMpwdAction;
 
@@ -10,17 +10,17 @@ import com.magicpwd.__a.mpwd.AMpwdAction;
  *
  * @author Amon
  */
-public class NextAction extends AMpwdAction
+public class SelectPrevAction extends AMpwdAction
 {
 
-    public NextAction()
+    public SelectPrevAction()
     {
     }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mainPtn.moveNext();
+        mainPtn.selectNext(-1, false);
     }
 
     @Override

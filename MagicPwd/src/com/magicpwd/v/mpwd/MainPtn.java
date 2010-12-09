@@ -433,6 +433,11 @@ public class MainPtn extends AFrame
         }
     }
 
+    public void setFindFocused()
+    {
+        mainFind.requestFocus();
+    }
+
     public void setFindVisible(boolean visible)
     {
         mainFind.setVisible(visible);
@@ -479,6 +484,11 @@ public class MainPtn extends AFrame
 
     public void selectNext(int step, boolean updt)
     {
+        if (mpwdMdl.getGridMdl().getRowCount() < 1)
+        {
+            return;
+        }
+
         if (updt)
         {
             mpwdMdl.getGridMdl().fireTableDataChanged();
@@ -563,7 +573,7 @@ public class MainPtn extends AFrame
         }
     }
 
-    public void movePrev()
+    public void movetoPrev()
     {
         int t = tb_LastIndx - 1;
         if (t < ConsEnv.PWDS_HEAD_SIZE)
@@ -576,7 +586,7 @@ public class MainPtn extends AFrame
         tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
     }
 
-    public void moveNext()
+    public void movetoNext()
     {
         int t = tb_LastIndx + 1;
         if (t <= ConsEnv.PWDS_HEAD_SIZE || t >= tb_KeysView.getRowCount())

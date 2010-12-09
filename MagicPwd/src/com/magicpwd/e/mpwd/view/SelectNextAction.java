@@ -10,17 +10,17 @@ import com.magicpwd.__a.mpwd.AMpwdAction;
  *
  * @author Amon
  */
-public class PrevAction extends AMpwdAction
+public class SelectNextAction extends AMpwdAction
 {
 
-    public PrevAction()
+    public SelectNextAction()
     {
     }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-//        selectNext(-1, false);
+        mainPtn.selectNext(1, false);
     }
 
     @Override
