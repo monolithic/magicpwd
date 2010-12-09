@@ -157,12 +157,13 @@ public class DatDialog extends javax.swing.JDialog
     void bt_CancelActionPerformed(java.awt.event.ActionEvent evt)
     {
         this.setVisible(false);
-        this.dispose();
 
         if (backCall != null)
         {
             backCall.callBack(this, null, "cancel");
         }
+
+        this.dispose();
     }
     private javax.swing.JList ls_DataList;
     private javax.swing.JButton bt_Update;
