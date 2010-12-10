@@ -223,7 +223,7 @@ public class EditItem implements IEditItem
                 spec.add(SPEC_VALUE_TRUE);
                 spec.add("+0-");
                 spec.add("0");
-                spec.add("0");
+                spec.add("6");
                 spec.add("");
                 spec.add(SPEC_VALUE_TRUE);
                 spec.add("^");

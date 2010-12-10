@@ -9,6 +9,7 @@ import com.magicpwd.__i.IBackCall;
 import com.magicpwd.__i.IEditBean;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mpwd.IMpwdBean;
+import com.magicpwd._bean.LineBean;
 import com.magicpwd._bean.mpwd.AreaBean;
 import com.magicpwd._bean.mpwd.DataBean;
 import com.magicpwd._bean.mpwd.DateBean;
@@ -656,6 +657,11 @@ public class MainPtn extends AFrame
         beanList.initView();
         pl_CardProp.add(ConsEnv.BEAN_LIST, beanList);
         mpwdBean[idx++] = beanList;
+
+        LineBean beanLine = new LineBean(this);
+        beanLine.initView();
+        pl_CardProp.add(ConsEnv.BEAN_LINE, beanLine);
+        mpwdBean[idx++] = beanLine;
 
         GuidBean beanGuid = new GuidBean(this);
         beanGuid.initView();
