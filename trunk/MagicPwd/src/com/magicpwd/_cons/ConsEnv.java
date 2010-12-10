@@ -155,6 +155,7 @@ public interface ConsEnv
     String BEAN_FILE = BEAN_PROP + ConsDat.INDX_FILE;// "filebean";
     String BEAN_DATA = BEAN_PROP + ConsDat.INDX_DATA;// "databean";
     String BEAN_LIST = BEAN_PROP + ConsDat.INDX_LIST;// "listbean";
+    String BEAN_LINE = BEAN_PROP + ConsDat.INDX_LINE;// "linebean";
     String BEAN_GUID = BEAN_PROP + ConsDat.INDX_GUID;// "guidbean";
     String BEAN_META = BEAN_PROP + ConsDat.INDX_META;// "metabean";
     String BEAN_ICON = BEAN_PROP + ConsDat.INDX_LOGO;// "iconbean";
