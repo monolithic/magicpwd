@@ -41,8 +41,8 @@ public interface IEditItem
     int SPEC_DATA_CHAR = 4;//特殊符号
     int SPEC_DATA_CHAR_OPT = 5;//是否可选
     int SPEC_DATA_CHAR_POS = 6;//符号位置
-    int SPEC_LINE_TYPE = 0;//控制类型
-    int SPEC_LINE_TPLT = 1;//显示模板
+    int SPEC_SIGN_TYPE = 0;//控制类型
+    int SPEC_SIGN_TPLT = 1;//显示模板
     // 常量
     String SPEC_VALUE_TRUE = "1";
     String SPEC_VALUE_FAIL = "0";

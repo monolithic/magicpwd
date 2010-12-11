@@ -28,7 +28,6 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
 {
 
     private javax.swing.event.EventListenerList listenerList;
-    private int incStep;
 
     GridMdl(UserMdl userMdl)
     {
@@ -134,7 +133,6 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
             switch (row)
             {
                 case ConsDat.INDX_GUID - ConsDat.INDX_GUID:
-                    incStep = ConsEnv.PWDS_HEAD_SIZE - 1;
                     return Lang.getLang(LangRes.P30F1106, "日期");
                 case ConsDat.INDX_META - ConsDat.INDX_GUID:
                     return Lang.getLang(LangRes.P30F110A, "标题");
@@ -143,19 +141,14 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
                 case ConsDat.INDX_HINT - ConsDat.INDX_GUID:
                     return Lang.getLang(LangRes.P30F110B, "提醒");
                 default:
-                    if (ls_ItemList.get(row).getType() == ConsDat.INDX_SIGN)
-                    {
-                        incStep += 1;
-                        return null;
-                    }
-                    return row - incStep;
+                    return row + 1 - ConsEnv.PWDS_HEAD_SIZE;
             }
         }
 
         IEditItem item = ls_ItemList.get(row);
         if (item.getType() == ConsDat.INDX_SIGN)
         {
-            return Char.format(Lang.getLang(item.getSpec(IEditItem.SPEC_LINE_TPLT), ""), item.getName());
+            return Char.format(Lang.getLang(item.getSpec(IEditItem.SPEC_SIGN_TPLT), ""), item.getName());
         }
         return item;
     }
