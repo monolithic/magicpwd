@@ -23,17 +23,17 @@ import com.magicpwd._cons.ConsDat;
  *
  * @author Amon
  */
-public class AppendLineAction extends AMpwdAction
+public class AppendSignAction extends AMpwdAction
 {
 
-    public AppendLineAction()
+    public AppendSignAction()
     {
     }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mainPtn.appendBean(ConsDat.INDX_LINE);
+        mainPtn.appendBean(ConsDat.INDX_SIGN);
     }
 
     @Override

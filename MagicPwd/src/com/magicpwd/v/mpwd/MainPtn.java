@@ -20,7 +20,7 @@ import com.magicpwd._bean.mpwd.LinkBean;
 import com.magicpwd._bean.mpwd.MailBean;
 import com.magicpwd._bean.mpwd.MetaBean;
 import com.magicpwd._bean.mpwd.HintBean;
-import com.magicpwd._bean.mpwd.LineBean;
+import com.magicpwd._bean.mpwd.SignBean;
 import com.magicpwd._bean.mpwd.ListBean;
 import com.magicpwd._bean.mpwd.PwdsBean;
 import com.magicpwd._bean.mpwd.TextBean;
@@ -658,10 +658,10 @@ public class MainPtn extends AFrame
         pl_CardProp.add(ConsEnv.BEAN_LIST, beanList);
         mpwdBean[idx++] = beanList;
 
-        LineBean beanLine = new LineBean(this);
-        beanLine.initView();
-        pl_CardProp.add(ConsEnv.BEAN_LINE, beanLine);
-        mpwdBean[idx++] = beanLine;
+        SignBean beanSign = new SignBean(this);
+        beanSign.initView();
+        pl_CardProp.add(ConsEnv.BEAN_SIGN, beanSign);
+        mpwdBean[idx++] = beanSign;
 
         GuidBean beanGuid = new GuidBean(this);
         beanGuid.initView();

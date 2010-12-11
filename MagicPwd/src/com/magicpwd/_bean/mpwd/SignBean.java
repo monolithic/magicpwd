@@ -17,7 +17,7 @@
 package com.magicpwd._bean.mpwd;
 
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd._bean.ALineBean;
+import com.magicpwd._bean.ASignBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.LangRes;
@@ -29,14 +29,14 @@ import com.magicpwd.v.mpwd.MainPtn;
  *
  * @author Aven
  */
-public class LineBean extends ALineBean
+public class SignBean extends ASignBean
 {
 
     private MainPtn mainPtn;
     private WEditBox dataEdit;
     private WTextBox nameBox;
 
-    public LineBean(MainPtn mainPtn)
+    public SignBean(MainPtn mainPtn)
     {
         super(mainPtn);
         this.mainPtn = mainPtn;

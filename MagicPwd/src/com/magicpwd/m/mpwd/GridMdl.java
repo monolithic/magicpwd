@@ -14,6 +14,7 @@ import com.magicpwd._comn.item.HintItem;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.DBA3000;
@@ -27,6 +28,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
 {
 
     private javax.swing.event.EventListenerList listenerList;
+    private int incStep;
 
     GridMdl(UserMdl userMdl)
     {
@@ -120,12 +122,19 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     @Override
     public Object getValueAt(int row, int column)
     {
+        // 公共属性
+        if (ls_ItemList == null)
+        {
+            return "";
+        }
+
         // 索引列
         if (column == 0)
         {
             switch (row)
             {
                 case ConsDat.INDX_GUID - ConsDat.INDX_GUID:
+                    incStep = ConsEnv.PWDS_HEAD_SIZE - 1;
                     return Lang.getLang(LangRes.P30F1106, "日期");
                 case ConsDat.INDX_META - ConsDat.INDX_GUID:
                     return Lang.getLang(LangRes.P30F110A, "标题");
@@ -134,16 +143,21 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
                 case ConsDat.INDX_HINT - ConsDat.INDX_GUID:
                     return Lang.getLang(LangRes.P30F110B, "提醒");
                 default:
-                    return row + 1 - ConsEnv.PWDS_HEAD_SIZE;
+                    if (ls_ItemList.get(row).getType() == ConsDat.INDX_SIGN)
+                    {
+                        incStep += 1;
+                        return null;
+                    }
+                    return row - incStep;
             }
         }
 
-        // 公共属性
-        if (ls_ItemList == null)
+        IEditItem item = ls_ItemList.get(row);
+        if (item.getType() == ConsDat.INDX_SIGN)
         {
-            return null;
+            return Char.format(Lang.getLang(item.getSpec(IEditItem.SPEC_LINE_TPLT), ""), item.getName());
         }
-        return ls_ItemList.get(row);
+        return item;
     }
 
     @Override
