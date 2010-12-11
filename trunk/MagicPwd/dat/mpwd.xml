@@ -76,6 +76,16 @@
                     <stroke key="^ 8" />
                 </action>
             </item>
+            <item type="normal" text="$P30F764B" text-def="添加列表属性">
+                <action id="append-list" class="com.magicpwd.e.mpwd.edit.AppendListAction">
+                    <stroke key="^ 9" />
+                </action>
+            </item>
+            <item type="normal" text="$P30F764C" text-def="添加段落属性">
+                <action id="append-line" class="com.magicpwd.e.mpwd.edit.AppendLineAction">
+                    <stroke key="^ 0" />
+                </action>
+            </item>
             <seperator />
             <item type="normal" text="$P30F760F" text-def="上移">
                 <action id="edit-prev" class="com.magicpwd.e.mpwd.edit.MovetoPrevAction">
@@ -505,6 +515,12 @@
             <item type="normal" text="$P30F7D34" text-def="添加数值">
                 <action id="append-data" class="com.magicpwd.e.mpwd.edit.AppendDataAction" />
             </item>
+            <item type="normal" text="$P30F7D36" text-def="添加列表">
+                <action id="append-list" class="com.magicpwd.e.mpwd.edit.AppendListAction" />
+            </item>
+            <item type="normal" text="$P30F7D38" text-def="添加段落">
+                <action id="append-line" class="com.magicpwd.e.mpwd.edit.AppendLineAction" />
+            </item>
         </menu>
         <menu text="$P30F7D11" text-def="转换类型">
             <item type="normal" text="$P30F7D12" text-def="转换为文本">
@@ -530,6 +546,12 @@
             </item>
             <item type="normal" text="$P30F7D35" text-def="转换为数值">
                 <action id="change-data" class="com.magicpwd.e.mpwd.edit.ChangeDataAction" />
+            </item>
+            <item type="normal" text="$P30F7D37" text-def="转换为列表">
+                <action id="change-list" class="com.magicpwd.e.mpwd.edit.ChangeListAction" />
+            </item>
+            <item type="normal" text="$P30F7D39" text-def="转换为段落">
+                <action id="change-line" class="com.magicpwd.e.mpwd.edit.ChangeLineAction" />
             </item>
         </menu>
         <seperator />
@@ -657,6 +679,15 @@
             <item type="checkbox" id="data-thehead" text="$P30F7C14" text-def="符号前置" group="data-position" command="pos:^" />
             <item type="checkbox" id="data-thefoot" text="$P30F7C15" text-def="符号后置" group="data-position" command="pos:$" />
             <item type="checkbox" id="data-optional" text="$P30F7C16" text-def="可选输入" command="optional"/>
+        </menu>
+    </submenu>
+    <submenu id="line-options">
+        <item type="checkbox" id="line-sep" text="$P30F7E03" text-def="分页控制(@S)" group="line-position" command="sep:P30F7E04" />
+        <item type="checkbox" id="line-div" text="$P30F7E05" text-def="标题面板(@P)" group="line-position" command="div:P30F7E06" />
+        <item type="checkbox" id="line-tab" text="$P30F7E07" text-def="选项面板(@T)" group="line-position" command="tab:P30F7E08" />
+        <menu text="$P30F7E09" text-def="其它(@O)">
+            <item type="checkbox" text="$P30F7E0A" text-def="-----" group="line-position" command="tip:P30F7E0B" />
+            <item type="checkbox" text="$P30F7E0C" text-def="--{0}--" group="line-position" command="tip:P30F7E0D" />
         </menu>
     </submenu>
     <strokes id="mpwd">
