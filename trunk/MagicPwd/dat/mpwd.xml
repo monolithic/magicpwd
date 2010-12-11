@@ -81,8 +81,8 @@
                     <stroke key="^ 9" />
                 </action>
             </item>
-            <item type="normal" text="$P30F764C" text-def="添加段落属性">
-                <action id="append-line" class="com.magicpwd.e.mpwd.edit.AppendLineAction">
+            <item type="normal" text="$P30F764C" text-def="添加标记属性">
+                <action id="append-sign" class="com.magicpwd.e.mpwd.edit.AppendSignAction">
                     <stroke key="^ 0" />
                 </action>
             </item>
@@ -518,8 +518,8 @@
             <item type="normal" text="$P30F7D36" text-def="添加列表">
                 <action id="append-list" class="com.magicpwd.e.mpwd.edit.AppendListAction" />
             </item>
-            <item type="normal" text="$P30F7D38" text-def="添加段落">
-                <action id="append-line" class="com.magicpwd.e.mpwd.edit.AppendLineAction" />
+            <item type="normal" text="$P30F7D38" text-def="添加标记">
+                <action id="append-sign" class="com.magicpwd.e.mpwd.edit.AppendSignAction" />
             </item>
         </menu>
         <menu text="$P30F7D11" text-def="转换类型">
@@ -550,8 +550,8 @@
             <item type="normal" text="$P30F7D37" text-def="转换为列表">
                 <action id="change-list" class="com.magicpwd.e.mpwd.edit.ChangeListAction" />
             </item>
-            <item type="normal" text="$P30F7D39" text-def="转换为段落">
-                <action id="change-line" class="com.magicpwd.e.mpwd.edit.ChangeLineAction" />
+            <item type="normal" text="$P30F7D39" text-def="转换为标记">
+                <action id="change-sign" class="com.magicpwd.e.mpwd.edit.ChangeSignAction" />
             </item>
         </menu>
         <seperator />
