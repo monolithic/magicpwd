@@ -1,37 +1,35 @@
 /*
- *  Copyright (C) 2010 Amon
- * 
+ *  Copyright (C) 2010 Aven
+ *
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
- * 
+ *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- * 
+ *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd._bean;
+package com.magicpwd._bean.mpwd;
 
-import com.magicpwd.__a.AEditBean;
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd.__i.mpwd.IMpwdBean;
+import com.magicpwd._bean.ALineBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.v.mpwd.MainPtn;
-import java.awt.event.ActionEvent;
 
 /**
  *
- * @author Amon
+ * @author Aven
  */
-public class LineBean extends AEditBean implements IMpwdBean
+public class LineBean extends ALineBean
 {
 
     private MainPtn mainPtn;
@@ -40,18 +38,8 @@ public class LineBean extends AEditBean implements IMpwdBean
 
     public LineBean(MainPtn mainPtn)
     {
+        super(mainPtn);
         this.mainPtn = mainPtn;
-    }
-
-    @Override
-    public void requestFocus()
-    {
-        if (!com.magicpwd._util.Char.isValidate(tf_PropName.getText()))
-        {
-            tf_PropName.requestFocus();
-            return;
-        }
-        tf_PropData.requestFocus();
     }
 
     @Override
@@ -61,8 +49,7 @@ public class LineBean extends AEditBean implements IMpwdBean
         dataEdit.initView();
 
         lb_PropConf = new javax.swing.JLabel();
-        pl_PropConf = new javax.swing.JPanel();
-//        initConfView();
+        initConfView();
 
         lb_PropName = new javax.swing.JLabel();
         tf_PropName = new javax.swing.JTextField(14);
@@ -71,7 +58,6 @@ public class LineBean extends AEditBean implements IMpwdBean
         nameBox.initView();
 
         lb_PropData = new javax.swing.JLabel();
-        tf_PropData = new javax.swing.JTextField();
         lb_PropData.setLabelFor(tf_PropData);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -120,7 +106,7 @@ public class LineBean extends AEditBean implements IMpwdBean
         Lang.setWText(lb_PropName, LangRes.P30F1307, "名称");
         Lang.setWText(lb_PropData, LangRes.P30F1308, "文本");
 
-//        initConfLang();
+        initConfLang();
 
         nameBox.initLang();
         dataEdit.initLang();
@@ -131,7 +117,7 @@ public class LineBean extends AEditBean implements IMpwdBean
     {
         nameBox.initData();
 
-//        initConfData();
+        initConfData();
     }
 
     @Override
@@ -142,18 +128,31 @@ public class LineBean extends AEditBean implements IMpwdBean
         tf_PropName.setText(showName());
         tf_PropData.setText(itemData.getData());
 
-//        showConfData();
+        showConfData();
     }
 
     @Override
-    public void copyDataActionPerformed(ActionEvent evt)
+    public void requestFocus()
     {
-        tf_PropData.selectAll();
-        Util.setClipboardContents(tf_PropData.getText());
+        if (!com.magicpwd._util.Char.isValidate(tf_PropName.getText()))
+        {
+            tf_PropName.requestFocus();
+            return;
+        }
+        tf_PropData.requestFocus();
     }
 
     @Override
-    public void saveDataActionPerformed(ActionEvent evt)
+    public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        if (Lang.showFirm(mainPtn, LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
+        {
+            mainPtn.removeSelectedItem();
+        }
+    }
+
+    @Override
+    public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
     {
         String name = tf_PropName.getText();
         if (!com.magicpwd._util.Char.isValidate(name))
@@ -170,18 +169,14 @@ public class LineBean extends AEditBean implements IMpwdBean
     }
 
     @Override
-    public void dropDataActionPerformed(ActionEvent evt)
+    public void copyDataActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (Lang.showFirm(mainPtn, LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
-        {
-            mainPtn.removeSelectedItem();
-        }
+        tf_PropData.selectAll();
+        Util.setClipboardContents(tf_PropData.getText());
     }
     private javax.swing.JLabel lb_PropName;
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JTextField tf_PropName;
-    protected javax.swing.JTextField tf_PropData;
     // 配置信息
     private javax.swing.JLabel lb_PropConf;
-    private javax.swing.JPanel pl_PropConf;
 }

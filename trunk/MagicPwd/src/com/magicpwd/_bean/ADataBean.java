@@ -46,9 +46,9 @@ public abstract class ADataBean extends AEditBean
         pl_PropConf = new javax.swing.JPanel();
         pl_PropConf.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
-        bt_DateConf = new BtnLabel();
-        bt_DateConf.setIcon(formPtn.readFavIcon("data-options", false));
-        bt_DateConf.addActionListener(new java.awt.event.ActionListener()
+        bt_DataConf = new BtnLabel();
+        bt_DataConf.setIcon(formPtn.readFavIcon("data-options", false));
+        bt_DataConf.addActionListener(new java.awt.event.ActionListener()
         {
 
             @Override
@@ -57,7 +57,7 @@ public abstract class ADataBean extends AEditBean
                 bt_DateConfActionPerformed(evt);
             }
         });
-        pl_PropConf.add(bt_DateConf);
+        pl_PropConf.add(bt_DataConf);
 
         pm_DataConf = new javax.swing.JPopupMenu();
         mi_DataDef = new javax.swing.JCheckBoxMenuItem();
@@ -67,6 +67,9 @@ public abstract class ADataBean extends AEditBean
 
     protected void initConfLang()
     {
+        Lang.setWText(bt_DataConf, LangRes.P30F1521, "@O");
+        Lang.setWTips(bt_DataConf, LangRes.P30F1522, "数值格式设置(Alt + O)");
+
         Bean.setText(mi_DataDef, Lang.getLang(LangRes.P30F7C08, "允许为空"));
     }
 
@@ -219,7 +222,7 @@ public abstract class ADataBean extends AEditBean
 
     private void bt_DateConfActionPerformed(java.awt.event.ActionEvent evt)
     {
-        pm_DataConf.show(bt_DateConf, 0, bt_DateConf.getSize().height);
+        pm_DataConf.show(bt_DataConf, 0, bt_DataConf.getSize().height);
     }
 
     private void mi_DataDefActionPerformed(java.awt.event.ActionEvent evt)
@@ -563,7 +566,7 @@ public abstract class ADataBean extends AEditBean
     protected javax.swing.JTextField tf_PropData;
     // 配置信息
     protected javax.swing.JPanel pl_PropConf;
-    private BtnLabel bt_DateConf;
+    private BtnLabel bt_DataConf;
     private javax.swing.JPopupMenu pm_DataConf;
     private javax.swing.JCheckBoxMenuItem mi_DataDef;
 }
