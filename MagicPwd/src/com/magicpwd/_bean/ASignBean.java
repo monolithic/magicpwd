@@ -107,7 +107,7 @@ public abstract class ASignBean extends AEditBean implements IMpwdBean
         WButtonGroup group = formPtn.getMenuPtn().getGroup("");
         if (group != null)
         {
-            if (!group.setSelected(itemData.getSpec(IEditItem.SPEC_LINE_TYPE, ""), true))
+            if (!group.setSelected(itemData.getSpec(IEditItem.SPEC_SIGN_TYPE, ""), true))
             {
                 mi_ConfDef.setSelected(true);
             }
