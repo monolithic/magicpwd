@@ -228,6 +228,11 @@ public class EditItem implements IEditItem
                 spec.add(SPEC_VALUE_TRUE);
                 spec.add("^");
                 break;
+            case ConsDat.INDX_SIGN:
+                spec = new ArrayList<String>(2);
+                spec.add("def");
+                spec.add("P30F7E02");
+                break;
             default:
                 spec = null;
                 break;

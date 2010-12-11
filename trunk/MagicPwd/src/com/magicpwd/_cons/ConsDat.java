@@ -155,11 +155,11 @@ public interface ConsDat
     /**
      * 属性：分组
      */
-    int INDX_LINE = INDX_LIST + 1;
+    int INDX_SIGN = INDX_LIST + 1;
     /**
      * 属性：模板向导
      */
-    int INDX_GUID = INDX_LINE + 1;
+    int INDX_GUID = INDX_SIGN + 1;
     /**
      * 属性：关键搜索
      */

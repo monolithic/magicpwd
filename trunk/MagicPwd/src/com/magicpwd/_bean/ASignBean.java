@@ -30,12 +30,12 @@ import com.magicpwd._util.Lang;
  *
  * @author Amon
  */
-public abstract class ALineBean extends AEditBean implements IMpwdBean
+public abstract class ASignBean extends AEditBean implements IMpwdBean
 {
 
     private WTextBox dataBox;
 
-    public ALineBean(AFrame formPtn)
+    public ASignBean(AFrame formPtn)
     {
         this.formPtn = formPtn;
     }
@@ -50,9 +50,9 @@ public abstract class ALineBean extends AEditBean implements IMpwdBean
         pl_PropConf = new javax.swing.JPanel();
         pl_PropConf.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
-        bt_LineConf = new BtnLabel();
-        bt_LineConf.setIcon(formPtn.readFavIcon("pwds-options", false));
-        pl_PropConf.add(bt_LineConf);
+        bt_SignConf = new BtnLabel();
+        bt_SignConf.setIcon(formPtn.readFavIcon("pwds-options", false));
+        pl_PropConf.add(bt_SignConf);
 
         pm_ConfMenu = new javax.swing.JPopupMenu();
         mi_ConfDef = new javax.swing.JCheckBoxMenuItem();
@@ -62,23 +62,23 @@ public abstract class ALineBean extends AEditBean implements IMpwdBean
 
     protected void initConfLang()
     {
-        Lang.setWText(bt_LineConf, LangRes.P30F1525, "@O");
-        Lang.setWTips(bt_LineConf, LangRes.P30F1526, "控制属性设置(Alt + O)");
+        Lang.setWText(bt_SignConf, LangRes.P30F1525, "@O");
+        Lang.setWTips(bt_SignConf, LangRes.P30F1526, "标记属性设置(Alt + O)");
 
-        Lang.setWText(mi_ConfDef, LangRes.P30F7E01, "123");
+        Lang.setWText(mi_ConfDef, LangRes.P30F7E01, "默认标记(@D)");
 
         dataBox.initLang();
     }
 
     protected void initConfData()
     {
-        bt_LineConf.addActionListener(new java.awt.event.ActionListener()
+        bt_SignConf.addActionListener(new java.awt.event.ActionListener()
         {
 
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e)
             {
-                bt_LineConfActionPerformed(e);
+                bt_SignConfActionPerformed(e);
             }
         });
 
@@ -114,9 +114,9 @@ public abstract class ALineBean extends AEditBean implements IMpwdBean
         }
     }
 
-    private void bt_LineConfActionPerformed(java.awt.event.ActionEvent e)
+    private void bt_SignConfActionPerformed(java.awt.event.ActionEvent e)
     {
-        pm_ConfMenu.show(bt_LineConf, 0, bt_LineConf.getSize().height);
+        pm_ConfMenu.show(bt_SignConf, 0, bt_SignConf.getSize().height);
     }
 
     private void mi_MenuItemActionPerformed(java.awt.event.ActionEvent e)
@@ -125,7 +125,7 @@ public abstract class ALineBean extends AEditBean implements IMpwdBean
     protected javax.swing.JTextField tf_PropData;
     // 配置信息
     protected javax.swing.JPanel pl_PropConf;
-    private BtnLabel bt_LineConf;
+    private BtnLabel bt_SignConf;
     protected javax.swing.JPopupMenu pm_ConfMenu;
     private javax.swing.JCheckBoxMenuItem mi_ConfDef;
 }
