@@ -17,6 +17,7 @@
 package com.magicpwd.v.mruc;
 
 import com.magicpwd.__a.AFrame;
+import com.magicpwd._cons.ConsEnv;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.TrayPtn;
@@ -29,6 +30,8 @@ import com.magicpwd.v.TrayPtn;
 public class MrucPtn extends AFrame
 {
 
+    private java.util.ArrayList<BodyPtn> bodyList;
+
     public MrucPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
         super(trayPtn, userMdl);
@@ -36,6 +39,15 @@ public class MrucPtn extends AFrame
 
     public void initView()
     {
+        bodyList = new java.util.ArrayList<BodyPtn>();
+        Integer step = ConsEnv.PWDS_HEAD_SIZE;
+        BodyPtn bodyPtn;
+        while (step < 10)
+        {
+            bodyPtn = new BodyPtn(null);
+            bodyPtn.initView(step);
+            bodyList.add(bodyPtn);
+        }
     }
 
     public void initLang()
