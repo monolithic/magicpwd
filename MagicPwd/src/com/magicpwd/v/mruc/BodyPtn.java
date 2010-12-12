@@ -40,7 +40,7 @@ public class BodyPtn extends javax.swing.JPanel
     public void initView(Integer step)
     {
         IEditItem editItem = keysMdl.getItemAt(step);
-        if (editItem.getType() != ConsDat.INDX_LINE)
+        if (editItem.getType() != ConsDat.INDX_SIGN)
         {
             return;
         }
@@ -62,7 +62,7 @@ public class BodyPtn extends javax.swing.JPanel
         while (true)
         {
             editItem = keysMdl.getItemAt(step);
-            if (editItem.getType() == ConsDat.INDX_LINE)
+            if (editItem.getType() == ConsDat.INDX_SIGN)
             {
                 break;
             }
@@ -136,6 +136,7 @@ public class BodyPtn extends javax.swing.JPanel
             ls_DataList.get(i).addActionListener(new java.awt.event.ActionListener()
             {
 
+                @Override
                 public void actionPerformed(java.awt.event.ActionEvent evt)
                 {
 //                tf_UserNameActionPerformed(evt);
