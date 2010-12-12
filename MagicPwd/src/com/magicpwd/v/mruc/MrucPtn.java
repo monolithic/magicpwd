@@ -34,6 +34,18 @@ public class MrucPtn extends AFrame
         super(trayPtn, userMdl);
     }
 
+    public void initView()
+    {
+    }
+
+    public void initLang()
+    {
+    }
+
+    public void initData()
+    {
+    }
+
     @Override
     public MenuPtn getMenuPtn()
     {

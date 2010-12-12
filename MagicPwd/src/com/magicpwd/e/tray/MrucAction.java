@@ -11,17 +11,17 @@ import com.magicpwd._cons.ConsEnv;
  *
  * @author aven
  */
-public class MpayAction extends ATrayAction
+public class MrucAction extends ATrayAction
 {
 
-    public MpayAction()
+    public MrucAction()
     {
     }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        trayPtn.showViewPtn(ConsEnv.APP_MODE_MWIZ);
+        trayPtn.showViewPtn(ConsEnv.APP_MODE_MRUC);
     }
 
     @Override
