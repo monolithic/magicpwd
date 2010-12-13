@@ -1,9 +1,18 @@
-/**
- * 用户安全信息
- * CopyRight: MagicPwd.com
- * Homepage:http://magicpwd.com/
- * Project:http://magicpwd.dev.java.net/
- * Email:Amon@magicpwd.com
+/*
+ *  Copyright (C) 2010 Amon
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.magicpwd.m;
 
@@ -25,6 +34,7 @@ import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 
 /**
+ * 用户安全信息
  * @author Amon
  */
 final class SafeKey implements Key
