@@ -15,7 +15,7 @@ import com.magicpwd.d.DBAccess;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.mpad.MiniPtn;
 import com.magicpwd.v.mpwd.MainPtn;
-import com.magicpwd.v.mruc.MrucPtn;
+import com.magicpwd.v.mruc.MaocPtn;
 import com.magicpwd.v.mwiz.NormPtn;
 
 /**
@@ -300,7 +300,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
     {
         if (mp_MrucPtn == null)
         {
-            mp_MrucPtn = new MrucPtn(this, userMdl);
+            mp_MrucPtn = new MaocPtn(this, userMdl);
             mp_MrucPtn.initView();
             mp_MrucPtn.initLang();
             mp_MrucPtn.initData();
@@ -695,7 +695,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
             trayIcon.displayMessage(title, tips, java.awt.TrayIcon.MessageType.INFO);
         }
     }
-    private static MrucPtn mp_MrucPtn;
+    private static MaocPtn mp_MrucPtn;
     private static MiniPtn mp_MiniPtn;
     private static NormPtn mp_NormPtn;
     private static MainPtn mp_MainPtn;

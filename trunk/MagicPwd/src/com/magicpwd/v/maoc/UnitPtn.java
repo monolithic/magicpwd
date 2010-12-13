@@ -14,7 +14,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.v.mruc;
+package com.magicpwd.v.maoc;
 
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._cons.ConsDat;
@@ -32,17 +32,17 @@ import java.math.MathContext;
  *
  * @author Amon
  */
-public class BodyPtn extends javax.swing.JPanel
+public class UnitPtn extends javax.swing.JPanel
 {
 
-    private MrucPtn mrucPtn;
+    private MaocPtn mrucPtn;
     private UnitMdl unitMdl;
     private int currStep;
     private int lastStep;
     private String formula;
     private static WComputer computer;
 
-    public BodyPtn(MrucPtn mrucPtn, UnitMdl unitMdl)
+    public UnitPtn(MaocPtn mrucPtn, UnitMdl unitMdl)
     {
         this.mrucPtn = mrucPtn;
         this.unitMdl = unitMdl;
