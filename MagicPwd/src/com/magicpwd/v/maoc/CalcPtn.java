@@ -76,7 +76,7 @@ public class CalcPtn extends javax.swing.JPanel
         pl_NPanel = new javax.swing.JPanel();
         pl_NPanel.setLayout(new java.awt.GridLayout(4, 4, 3, 3));
 
-        bt_ButtonN7 = new javax.swing.JButton("7");
+        bt_ButtonN7 = new javax.swing.JButton();
         bt_ButtonN7.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -88,7 +88,7 @@ public class CalcPtn extends javax.swing.JPanel
         });
         pl_NPanel.add(bt_ButtonN7);
 
-        bt_ButtonN8 = new javax.swing.JButton("8");
+        bt_ButtonN8 = new javax.swing.JButton();
         bt_ButtonN8.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -100,7 +100,7 @@ public class CalcPtn extends javax.swing.JPanel
         });
         pl_NPanel.add(bt_ButtonN8);
 
-        bt_ButtonN9 = new javax.swing.JButton("9");
+        bt_ButtonN9 = new javax.swing.JButton();
         bt_ButtonN9.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -112,7 +112,7 @@ public class CalcPtn extends javax.swing.JPanel
         });
         pl_NPanel.add(bt_ButtonN9);
 
-        bt_ButtonS3 = new javax.swing.JButton("/");
+        bt_ButtonS3 = new javax.swing.JButton();
         bt_ButtonS3.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -124,7 +124,7 @@ public class CalcPtn extends javax.swing.JPanel
         });
         pl_NPanel.add(bt_ButtonS3);
 
-        bt_ButtonN4 = new javax.swing.JButton("4");
+        bt_ButtonN4 = new javax.swing.JButton();
         bt_ButtonN4.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -136,7 +136,7 @@ public class CalcPtn extends javax.swing.JPanel
         });
         pl_NPanel.add(bt_ButtonN4);
 
-        bt_ButtonN5 = new javax.swing.JButton("5");
+        bt_ButtonN5 = new javax.swing.JButton();
         bt_ButtonN5.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -148,7 +148,7 @@ public class CalcPtn extends javax.swing.JPanel
         });
         pl_NPanel.add(bt_ButtonN5);
 
-        bt_ButtonN6 = new javax.swing.JButton("6");
+        bt_ButtonN6 = new javax.swing.JButton();
         bt_ButtonN6.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -160,7 +160,7 @@ public class CalcPtn extends javax.swing.JPanel
         });
         pl_NPanel.add(bt_ButtonN6);
 
-        bt_ButtonS2 = new javax.swing.JButton("*");
+        bt_ButtonS2 = new javax.swing.JButton();
         bt_ButtonS2.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -172,7 +172,7 @@ public class CalcPtn extends javax.swing.JPanel
         });
         pl_NPanel.add(bt_ButtonS2);
 
-        bt_ButtonN1 = new javax.swing.JButton("1");
+        bt_ButtonN1 = new javax.swing.JButton();
         bt_ButtonN1.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -196,7 +196,7 @@ public class CalcPtn extends javax.swing.JPanel
         });
         pl_NPanel.add(bt_ButtonN2);
 
-        bt_ButtonN3 = new javax.swing.JButton("3");
+        bt_ButtonN3 = new javax.swing.JButton();
         bt_ButtonN3.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -208,7 +208,7 @@ public class CalcPtn extends javax.swing.JPanel
         });
         pl_NPanel.add(bt_ButtonN3);
 
-        bt_ButtonS1 = new javax.swing.JButton("-");
+        bt_ButtonS1 = new javax.swing.JButton();
         bt_ButtonS1.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -220,7 +220,7 @@ public class CalcPtn extends javax.swing.JPanel
         });
         pl_NPanel.add(bt_ButtonS1);
 
-        bt_ButtonN0 = new javax.swing.JButton("0");
+        bt_ButtonN0 = new javax.swing.JButton();
         bt_ButtonN0.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -232,8 +232,7 @@ public class CalcPtn extends javax.swing.JPanel
         });
         pl_NPanel.add(bt_ButtonN0);
 
-        // .
-        bt_ButtonS5 = new javax.swing.JButton(".");
+        bt_ButtonS5 = new javax.swing.JButton();
         bt_ButtonS5.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -245,8 +244,7 @@ public class CalcPtn extends javax.swing.JPanel
         });
         pl_NPanel.add(bt_ButtonS5);
 
-        // %
-        bt_ButtonS4 = new javax.swing.JButton("%");
+        bt_ButtonS4 = new javax.swing.JButton();
         bt_ButtonS4.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -258,7 +256,7 @@ public class CalcPtn extends javax.swing.JPanel
         });
         pl_NPanel.add(bt_ButtonS4);
 
-        bt_ButtonS0 = new javax.swing.JButton("+");
+        bt_ButtonS0 = new javax.swing.JButton();
         bt_ButtonS0.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -279,7 +277,7 @@ public class CalcPtn extends javax.swing.JPanel
         pl_PPanel = new javax.swing.JPanel();
         pl_PPanel.setLayout(new java.awt.GridLayout(4, 2, 3, 3));
 
-        bt_ButtonP5 = new javax.swing.JButton("(");
+        bt_ButtonP5 = new javax.swing.JButton();
         bt_ButtonP5.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -291,7 +289,7 @@ public class CalcPtn extends javax.swing.JPanel
         });
         pl_PPanel.add(bt_ButtonP5);
 
-        bt_ButtonP4 = new javax.swing.JButton(")");
+        bt_ButtonP4 = new javax.swing.JButton();
         bt_ButtonP4.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -303,7 +301,7 @@ public class CalcPtn extends javax.swing.JPanel
         });
         pl_PPanel.add(bt_ButtonP4);
 
-        bt_ButtonP3 = new javax.swing.JButton("[");
+        bt_ButtonP3 = new javax.swing.JButton();
         bt_ButtonP3.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -315,7 +313,7 @@ public class CalcPtn extends javax.swing.JPanel
         });
         pl_PPanel.add(bt_ButtonP3);
 
-        bt_ButtonP2 = new javax.swing.JButton("]");
+        bt_ButtonP2 = new javax.swing.JButton();
         bt_ButtonP2.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -327,7 +325,7 @@ public class CalcPtn extends javax.swing.JPanel
         });
         pl_PPanel.add(bt_ButtonP2);
 
-        bt_ButtonP1 = new javax.swing.JButton("{");
+        bt_ButtonP1 = new javax.swing.JButton();
         bt_ButtonP1.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -339,7 +337,7 @@ public class CalcPtn extends javax.swing.JPanel
         });
         pl_PPanel.add(bt_ButtonP1);
 
-        bt_ButtonP0 = new javax.swing.JButton("}");
+        bt_ButtonP0 = new javax.swing.JButton();
         bt_ButtonP0.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -351,7 +349,7 @@ public class CalcPtn extends javax.swing.JPanel
         });
         pl_PPanel.add(bt_ButtonP0);
 
-        bt_ButtonA6 = new javax.swing.JButton("π");
+        bt_ButtonA6 = new javax.swing.JButton();
         bt_ButtonA6.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -363,7 +361,7 @@ public class CalcPtn extends javax.swing.JPanel
         });
         pl_PPanel.add(bt_ButtonA6);
 
-        bt_ButtonA5 = new javax.swing.JButton("e");
+        bt_ButtonA5 = new javax.swing.JButton();
         bt_ButtonA5.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -385,7 +383,7 @@ public class CalcPtn extends javax.swing.JPanel
         pl_TPanel.setLayout(new java.awt.GridLayout(4, 3, 3, 3));
 
         // x^y
-        bt_ButtonA3 = new javax.swing.JButton("x^y");
+        bt_ButtonA3 = new javax.swing.JButton();
         bt_ButtonA3.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -398,7 +396,7 @@ public class CalcPtn extends javax.swing.JPanel
         pl_TPanel.add(bt_ButtonA3);
 
         // sin
-        bt_ButtonT2 = new javax.swing.JButton("sin");
+        bt_ButtonT2 = new javax.swing.JButton();
         bt_ButtonT2.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -411,7 +409,7 @@ public class CalcPtn extends javax.swing.JPanel
         pl_TPanel.add(bt_ButtonT2);
 
         // csc
-        bt_ButtonT5 = new javax.swing.JButton("csc");
+        bt_ButtonT5 = new javax.swing.JButton();
         bt_ButtonT5.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -424,7 +422,7 @@ public class CalcPtn extends javax.swing.JPanel
         pl_TPanel.add(bt_ButtonT5);
 
         // √
-        bt_ButtonA2 = new javax.swing.JButton("√");
+        bt_ButtonA2 = new javax.swing.JButton();
         bt_ButtonA2.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -437,7 +435,7 @@ public class CalcPtn extends javax.swing.JPanel
         pl_TPanel.add(bt_ButtonA2);
 
         // cos
-        bt_ButtonT1 = new javax.swing.JButton("cos");
+        bt_ButtonT1 = new javax.swing.JButton();
         bt_ButtonT1.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -463,7 +461,7 @@ public class CalcPtn extends javax.swing.JPanel
         pl_TPanel.add(bt_ButtonT4);
 
         // log
-        bt_ButtonA1 = new javax.swing.JButton("log");
+        bt_ButtonA1 = new javax.swing.JButton();
         bt_ButtonA1.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -476,7 +474,7 @@ public class CalcPtn extends javax.swing.JPanel
         pl_TPanel.add(bt_ButtonA1);
 
         // tan
-        bt_ButtonT0 = new javax.swing.JButton("tan");
+        bt_ButtonT0 = new javax.swing.JButton();
         bt_ButtonT0.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -502,7 +500,7 @@ public class CalcPtn extends javax.swing.JPanel
         pl_TPanel.add(bt_ButtonT3);
 
         // ln
-        bt_ButtonA0 = new javax.swing.JButton("ln");
+        bt_ButtonA0 = new javax.swing.JButton();
         bt_ButtonA0.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -515,7 +513,7 @@ public class CalcPtn extends javax.swing.JPanel
         pl_TPanel.add(bt_ButtonA0);
 
         // n!
-        bt_ButtonA4 = new javax.swing.JButton("n!");
+        bt_ButtonA4 = new javax.swing.JButton();
         bt_ButtonA4.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -528,7 +526,7 @@ public class CalcPtn extends javax.swing.JPanel
         pl_TPanel.add(bt_ButtonA4);
 
         // =
-        bt_ButtonS6 = new javax.swing.JButton("=");
+        bt_ButtonS6 = new javax.swing.JButton();
         bt_ButtonS6.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -583,7 +581,6 @@ public class CalcPtn extends javax.swing.JPanel
         });
         pl_VPanel.add(tf_Precision);
 
-        bt_ButtonV1.setText("CR");
         bt_ButtonV1.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -626,52 +623,52 @@ public class CalcPtn extends javax.swing.JPanel
      */
     private void ita()
     {
-        Bean.setText(bt_ButtonN7, Lang.getLang(LangRes.P30FB50F, ""));
+        Bean.setText(bt_ButtonN7, Lang.getLang(LangRes.P30FB50F, "7"));
         Bean.setTips(bt_ButtonN7, Lang.getLang(LangRes.P30FB510, ""));
 
-        Bean.setText(bt_ButtonN8, Lang.getLang(LangRes.P30FB511, ""));
+        Bean.setText(bt_ButtonN8, Lang.getLang(LangRes.P30FB511, "8"));
         Bean.setTips(bt_ButtonN8, Lang.getLang(LangRes.P30FB512, ""));
 
-        Bean.setText(bt_ButtonN9, Lang.getLang(LangRes.P30FB513, ""));
+        Bean.setText(bt_ButtonN9, Lang.getLang(LangRes.P30FB513, "9"));
         Bean.setTips(bt_ButtonN9, Lang.getLang(LangRes.P30FB514, ""));
 
-        Bean.setText(bt_ButtonS3, Lang.getLang(LangRes.P30FB51B, ""));
+        Bean.setText(bt_ButtonS3, Lang.getLang(LangRes.P30FB51B, "/"));
         Bean.setTips(bt_ButtonS3, Lang.getLang(LangRes.P30FB51C, ""));
 
-        Bean.setText(bt_ButtonN4, Lang.getLang(LangRes.P30FB509, ""));
+        Bean.setText(bt_ButtonN4, Lang.getLang(LangRes.P30FB509, "4"));
         Bean.setTips(bt_ButtonN4, Lang.getLang(LangRes.P30FB50A, ""));
 
-        Bean.setText(bt_ButtonN5, Lang.getLang(LangRes.P30FB50B, ""));
+        Bean.setText(bt_ButtonN5, Lang.getLang(LangRes.P30FB50B, "5"));
         Bean.setTips(bt_ButtonN5, Lang.getLang(LangRes.P30FB50C, ""));
 
-        Bean.setText(bt_ButtonN6, Lang.getLang(LangRes.P30FB50D, ""));
+        Bean.setText(bt_ButtonN6, Lang.getLang(LangRes.P30FB50D, "6"));
         Bean.setTips(bt_ButtonN6, Lang.getLang(LangRes.P30FB50E, ""));
 
-        Bean.setText(bt_ButtonS2, Lang.getLang(LangRes.P30FB519, ""));
+        Bean.setText(bt_ButtonS2, Lang.getLang(LangRes.P30FB519, "*"));
         Bean.setTips(bt_ButtonS2, Lang.getLang(LangRes.P30FB51A, ""));
 
-        Bean.setText(bt_ButtonN1, Lang.getLang(LangRes.P30FB503, ""));
+        Bean.setText(bt_ButtonN1, Lang.getLang(LangRes.P30FB503, "1"));
         Bean.setTips(bt_ButtonN1, Lang.getLang(LangRes.P30FB504, ""));
 
-        Bean.setText(bt_ButtonN2, Lang.getLang(LangRes.P30FB505, ""));
+        Bean.setText(bt_ButtonN2, Lang.getLang(LangRes.P30FB505, "2"));
         Bean.setTips(bt_ButtonN2, Lang.getLang(LangRes.P30FB506, ""));
 
-        Bean.setText(bt_ButtonN3, Lang.getLang(LangRes.P30FB507, ""));
+        Bean.setText(bt_ButtonN3, Lang.getLang(LangRes.P30FB507, "3"));
         Bean.setTips(bt_ButtonN3, Lang.getLang(LangRes.P30FB508, ""));
 
-        Bean.setText(bt_ButtonS1, Lang.getLang(LangRes.P30FB517, ""));
+        Bean.setText(bt_ButtonS1, Lang.getLang(LangRes.P30FB517, "-"));
         Bean.setTips(bt_ButtonS1, Lang.getLang(LangRes.P30FB518, ""));
 
-        Bean.setText(bt_ButtonN0, Lang.getLang(LangRes.P30FB501, ""));
+        Bean.setText(bt_ButtonN0, Lang.getLang(LangRes.P30FB501, "0"));
         Bean.setTips(bt_ButtonN0, Lang.getLang(LangRes.P30FB502, ""));
 
-        Bean.setText(bt_ButtonS5, Lang.getLang(LangRes.P30FB51F, ""));
+        Bean.setText(bt_ButtonS5, Lang.getLang(LangRes.P30FB51F, "."));
         Bean.setTips(bt_ButtonS5, Lang.getLang(LangRes.P30FB520, ""));
 
-        Bean.setText(bt_ButtonS4, Lang.getLang(LangRes.P30FB51D, ""));
+        Bean.setText(bt_ButtonS4, Lang.getLang(LangRes.P30FB51D, "%"));
         Bean.setTips(bt_ButtonS4, Lang.getLang(LangRes.P30FB51E, ""));
 
-        Bean.setText(bt_ButtonS0, Lang.getLang(LangRes.P30FB515, ""));
+        Bean.setText(bt_ButtonS0, Lang.getLang(LangRes.P30FB515, "+"));
         Bean.setTips(bt_ButtonS0, Lang.getLang(LangRes.P30FB516, ""));
     }
 
@@ -680,28 +677,28 @@ public class CalcPtn extends javax.swing.JPanel
      */
     private void itb()
     {
-        Bean.setText(bt_ButtonP5, Lang.getLang(LangRes.P30FB523, ""));
+        Bean.setText(bt_ButtonP5, Lang.getLang(LangRes.P30FB523, "("));
         Bean.setTips(bt_ButtonP5, Lang.getLang(LangRes.P30FB524, ""));
 
-        Bean.setText(bt_ButtonP4, Lang.getLang(LangRes.P30FB525, ""));
+        Bean.setText(bt_ButtonP4, Lang.getLang(LangRes.P30FB525, ")"));
         Bean.setTips(bt_ButtonP4, Lang.getLang(LangRes.P30FB526, ""));
 
-        Bean.setText(bt_ButtonP3, Lang.getLang(LangRes.P30FB527, ""));
+        Bean.setText(bt_ButtonP3, Lang.getLang(LangRes.P30FB527, "["));
         Bean.setTips(bt_ButtonP3, Lang.getLang(LangRes.P30FB528, ""));
 
-        Bean.setText(bt_ButtonP2, Lang.getLang(LangRes.P30FB529, ""));
+        Bean.setText(bt_ButtonP2, Lang.getLang(LangRes.P30FB529, "]"));
         Bean.setTips(bt_ButtonP2, Lang.getLang(LangRes.P30FB52A, ""));
 
-        Bean.setText(bt_ButtonP1, Lang.getLang(LangRes.P30FB52B, ""));
+        Bean.setText(bt_ButtonP1, Lang.getLang(LangRes.P30FB52B, "{"));
         Bean.setTips(bt_ButtonP1, Lang.getLang(LangRes.P30FB52C, ""));
 
-        Bean.setText(bt_ButtonP0, Lang.getLang(LangRes.P30FB52D, ""));
+        Bean.setText(bt_ButtonP0, Lang.getLang(LangRes.P30FB52D, "}"));
         Bean.setTips(bt_ButtonP0, Lang.getLang(LangRes.P30FB52E, ""));
 
-        Bean.setText(bt_ButtonA6, Lang.getLang(LangRes.P30FB53F, ""));
+        Bean.setText(bt_ButtonA6, Lang.getLang(LangRes.P30FB53F, "π"));
         Bean.setTips(bt_ButtonA6, Lang.getLang(LangRes.P30FB540, ""));
 
-        Bean.setText(bt_ButtonA5, Lang.getLang(LangRes.P30FB53D, ""));
+        Bean.setText(bt_ButtonA5, Lang.getLang(LangRes.P30FB53D, "e"));
         Bean.setTips(bt_ButtonA5, Lang.getLang(LangRes.P30FB53E, ""));
     }
 
@@ -710,40 +707,40 @@ public class CalcPtn extends javax.swing.JPanel
      */
     private void itc()
     {
-        Bean.setText(bt_ButtonA3, Lang.getLang(LangRes.P30FB539, ""));
+        Bean.setText(bt_ButtonA3, Lang.getLang(LangRes.P30FB539, "x^y"));
         Bean.setTips(bt_ButtonA3, Lang.getLang(LangRes.P30FB53A, ""));
 
-        Bean.setText(bt_ButtonT2, Lang.getLang(LangRes.P30FB545, ""));
+        Bean.setText(bt_ButtonT2, Lang.getLang(LangRes.P30FB545, "sin"));
         Bean.setTips(bt_ButtonT2, Lang.getLang(LangRes.P30FB546, ""));
 
-        Bean.setText(bt_ButtonT5, "csc");
-        Bean.setTips(bt_ButtonT5, null);
+        Bean.setText(bt_ButtonT5, Lang.getLang(LangRes.P30FB547, "csc"));
+        Bean.setTips(bt_ButtonT5, Lang.getLang(LangRes.P30FB548, ""));
 
-        Bean.setText(bt_ButtonA2, Lang.getLang(LangRes.P30FB537, ""));
+        Bean.setText(bt_ButtonA2, Lang.getLang(LangRes.P30FB537, "√"));
         Bean.setTips(bt_ButtonA2, Lang.getLang(LangRes.P30FB538, ""));
 
-        Bean.setText(bt_ButtonT1, Lang.getLang(LangRes.P30FB543, ""));
+        Bean.setText(bt_ButtonT1, Lang.getLang(LangRes.P30FB543, "cos"));
         Bean.setTips(bt_ButtonT1, Lang.getLang(LangRes.P30FB544, ""));
 
-        Bean.setText(bt_ButtonT4, "sec");
-        Bean.setTips(bt_ButtonT4, null);
+        Bean.setText(bt_ButtonT4, Lang.getLang(LangRes.P30FB549, "sec"));
+        Bean.setTips(bt_ButtonT4, Lang.getLang(LangRes.P30FB54A, ""));
 
-        Bean.setText(bt_ButtonA1, Lang.getLang(LangRes.P30FB535, ""));
+        Bean.setText(bt_ButtonA1, Lang.getLang(LangRes.P30FB535, "log"));
         Bean.setTips(bt_ButtonA1, Lang.getLang(LangRes.P30FB536, ""));
 
-        Bean.setText(bt_ButtonT0, Lang.getLang(LangRes.P30FB541, ""));
+        Bean.setText(bt_ButtonT0, Lang.getLang(LangRes.P30FB541, "tan"));
         Bean.setTips(bt_ButtonT0, Lang.getLang(LangRes.P30FB542, ""));
 
-        Bean.setText(bt_ButtonT3, "cot");
-        Bean.setTips(bt_ButtonT3, null);
+        Bean.setText(bt_ButtonT3, Lang.getLang(LangRes.P30FB54B, "cot"));
+        Bean.setTips(bt_ButtonT3, Lang.getLang(LangRes.P30FB54C, ""));
 
-        Bean.setText(bt_ButtonA0, Lang.getLang(LangRes.P30FB533, ""));
+        Bean.setText(bt_ButtonA0, Lang.getLang(LangRes.P30FB533, "ln"));
         Bean.setTips(bt_ButtonA0, Lang.getLang(LangRes.P30FB534, ""));
 
-        Bean.setText(bt_ButtonA4, Lang.getLang(LangRes.P30FB53B, ""));
+        Bean.setText(bt_ButtonA4, Lang.getLang(LangRes.P30FB53B, "n!"));
         Bean.setTips(bt_ButtonA4, Lang.getLang(LangRes.P30FB53C, ""));
 
-        Bean.setText(bt_ButtonS6, Lang.getLang(LangRes.P30FB521, ""));
+        Bean.setText(bt_ButtonS6, Lang.getLang(LangRes.P30FB521, "="));
         Bean.setTips(bt_ButtonS6, Lang.getLang(LangRes.P30FB522, ""));
     }
 
@@ -753,15 +750,15 @@ public class CalcPtn extends javax.swing.JPanel
     private void itd()
     {
         tf_Precision.setText(Lang.getLang(LangRes.P30FB401, ""));
-        Bean.setTips(tf_Precision, Lang.getLang(LangRes.P30FB402, ""));
+        Bean.setTips(tf_Precision, Lang.getLang(LangRes.P30FB402, "计算结果显示精度，默认为小数点后保留8位"));
 
-        Bean.setText(bt_ButtonV1, Lang.getLang(LangRes.P30FB548, ""));
-        Bean.setTips(bt_ButtonV1, Lang.getLang(LangRes.P30FB549, ""));
+        Bean.setText(bt_ButtonV1, Lang.getLang(LangRes.P30FB54D, "CR"));
+        Bean.setTips(bt_ButtonV1, Lang.getLang(LangRes.P30FB54E, "清除当前运算结果"));
 
-        Bean.setText(bt_ButtonV0, Lang.getLang(LangRes.P30FB54A, ""));
-        Bean.setTips(bt_ButtonV0, Lang.getLang(LangRes.P30FB54B, ""));
+        Bean.setText(bt_ButtonV0, Lang.getLang(LangRes.P30FB54F, "<-"));
+        Bean.setTips(bt_ButtonV0, Lang.getLang(LangRes.P30FB550, "清除一个字符"));
 
-        Bean.setText(bt_ShowStep, Lang.getLang(LangRes.P30FB54C, ""));
+        Bean.setText(bt_ShowStep, Lang.getLang(LangRes.P30FB551, ""));
 //        Bean.setTips(bt_ShowStep, Lang.getLang(LangRes.P30FB54D, ""));
     }
 

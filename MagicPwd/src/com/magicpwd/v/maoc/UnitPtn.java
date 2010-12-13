@@ -16,18 +16,15 @@
  */
 package com.magicpwd.v.maoc;
 
-import com.magicpwd.__i.IEditItem;
-import com.magicpwd._cons.ConsDat;
+import com.magicpwd._comn.S1S2;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
-import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd.m.maoc.WComputer;
+import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.maoc.KeysMdl;
 import com.magicpwd.m.maoc.UnitMdl;
-import java.math.BigDecimal;
-import java.math.MathContext;
 
 /**
  *
@@ -36,230 +33,145 @@ import java.math.MathContext;
 public class UnitPtn extends javax.swing.JPanel
 {
 
-    private MaocPtn mrucPtn;
+    private MaocPtn maocPtn;
+    private UserMdl userMdl;
     private UnitMdl unitMdl;
-    private int currStep;
-    private int lastStep;
-    private String formula;
-    private static WComputer computer;
+    private KeysMdl keysMdl;
+    private S1S2 lastItem;
+    private java.util.ArrayList<UnitBar> bodyList;
 
-    public UnitPtn(MaocPtn mrucPtn, UnitMdl unitMdl)
+    public UnitPtn(MaocPtn maocPtn, UserMdl userMdl)
     {
-        this.mrucPtn = mrucPtn;
-        this.unitMdl = unitMdl;
-        computer = new WComputer();
+        this.maocPtn = maocPtn;
+        this.userMdl = userMdl;
     }
 
-    public int initView(int step)
+    public void initView()
     {
-        IEditItem editItem = unitMdl.getItemAt(step);
-        if (editItem.getType() != ConsDat.INDX_SIGN)
-        {
-            return step + 1;
-        }
-
-        formula = editItem.getData();
-        currStep = step;
-
-        ls_NameList = new java.util.ArrayList<javax.swing.JLabel>();
-        ls_DataList = new java.util.ArrayList<javax.swing.JTextField>();
+        pl_Panel = new javax.swing.JPanel();
+        cb_Combo = new javax.swing.JComboBox();
+        lb_Label = new javax.swing.JLabel();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
+        javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
+        hsg1.addContainerGap();
+        hsg1.addComponent(pl_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hsg1.addContainerGap();
+        javax.swing.GroupLayout.SequentialGroup hsg2 = layout.createSequentialGroup();
+        hsg2.addContainerGap(1, Short.MAX_VALUE);
+        hsg2.addComponent(lb_Label);
+        hsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg2.addComponent(cb_Combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hsg2.addContainerGap();
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(hsg1).addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hsg2));
 
-        javax.swing.JLabel label;
-        javax.swing.JTextField field;
-
-        javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-
-        step += 1;
-        int size = unitMdl.getItemSize();
-        int cnt = 0;
-        while (step < size)
-        {
-            editItem = unitMdl.getItemAt(step);
-            if (editItem.getType() == ConsDat.INDX_SIGN)
-            {
-                break;
-            }
-            step += 1;
-            if (editItem.getType() != ConsDat.INDX_DATA)
-            {
-                ls_NameList.add(null);
-                ls_DataList.add(null);
-                continue;
-            }
-
-            label = new javax.swing.JLabel();
-            ls_NameList.add(label);
-            hpg1.addComponent(label, javax.swing.GroupLayout.Alignment.TRAILING);
-            field = new javax.swing.JTextField(16);
-            ls_DataList.add(field);
-            hpg2.addComponent(field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-            cnt += 1;
-        }
-        javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
-        hsg.addContainerGap();
-        hsg.addGroup(hpg1);
-        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg.addGroup(hpg2);
-        hsg.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(hsg));
-
+        javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg.addComponent(cb_Combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg.addComponent(lb_Label);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
         vsg.addContainerGap();
-        javax.swing.GroupLayout.ParallelGroup vpg;
-        int i = 0;
-        int j = cnt - 1;
-        while (i < cnt)
-        {
-            if (ls_NameList.get(i) == null)
-            {
-                continue;
-            }
-            vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
-            vpg.addComponent(ls_NameList.get(i));
-            vpg.addComponent(ls_DataList.get(i), javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-            vsg.addGroup(vpg);
-            vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-            i += 1;
-        }
-        vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
-        vpg.addComponent(ls_NameList.get(j));
-        vpg.addComponent(ls_DataList.get(j), javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg.addComponent(pl_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addGroup(vpg);
-        vsg.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        vsg.addContainerGap();
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(vsg));
-
-        return step;
     }
 
     public void initLang()
     {
-        if (ls_NameList.size() < 1 || currStep < ConsEnv.PWDS_HEAD_SIZE)
-        {
-            return;
-        }
-
-        int step = currStep;
-        IEditItem editItem = unitMdl.getItemAt(step++);
-        setBorder(javax.swing.BorderFactory.createTitledBorder(editItem.getName()));
-
-        for (int i = 0, j = ls_NameList.size(); i < j; i += 1)
-        {
-            if (ls_NameList.get(i) == null)
-            {
-                continue;
-            }
-            editItem = unitMdl.getItemAt(step + i);
-            Bean.setText(ls_NameList.get(i), editItem.getName());
-        }
+        Bean.setText(lb_Label, Lang.getLang(LangRes.P30FB301, "单位类型(@T)"));
     }
 
     public void initData()
     {
-        lastStep = -1;
-        if (ls_DataList.size() < 1 || currStep < ConsEnv.PWDS_HEAD_SIZE)
-        {
-            return;
-        }
+        unitMdl = new UnitMdl(userMdl);
+        unitMdl.init();
 
-        java.awt.event.ActionListener listener = new java.awt.event.ActionListener()
+        keysMdl = new KeysMdl(userMdl);
+        keysMdl.init();
+        cb_Combo.setModel(keysMdl);
+        cb_Combo.addActionListener(new java.awt.event.ActionListener()
         {
 
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
+            public void actionPerformed(java.awt.event.ActionEvent e)
             {
-                tf_FieldActionPerformed(evt);
+                cb_ComboActionPerformed(e);
             }
-        };
-        javax.swing.JTextField field;
-        for (int i = 0, j = ls_DataList.size(); i < j; i += 1)
-        {
-            field = ls_DataList.get(i);
-            if (field == null)
-            {
-                continue;
-            }
-            field.setActionCommand(Integer.toString(i));
-            field.addActionListener(listener);
-        }
+        });
+
+        bodyList = new java.util.ArrayList<UnitBar>();
     }
 
-    public void showData(String input)
+    public void compute(String input)
     {
-        if (!Char.isValidate(input))
+        for (UnitBar ptn : bodyList)
         {
-            return;
-        }
-
-        BigDecimal temp;
-        IEditItem item;
-        javax.swing.JTextField field;
-        int step = currStep + 1;
-        for (int i = 0, j = ls_DataList.size(); i < j; i += 1)
-        {
-            field = ls_DataList.get(i);
-            if (field == null)
-            {
-                continue;
-            }
-            if (i == lastStep)
-            {
-                lastStep = -1;
-                continue;
-            }
-            item = unitMdl.getItemAt(step + i);
-            if (item.getType() != ConsDat.INDX_DATA)
-            {
-                continue;
-            }
-
-            try
-            {
-                temp = computer.calculate(input.replace("$ratio", item.getData()), new MathContext(Integer.parseInt(item.getSpec(IEditItem.SPEC_DATA_DEC))));
-                field.setText(temp.toPlainString());
-            }
-            catch (Exception exp)
-            {
-                Logs.exception(exp);
-            }
+            ptn.showData(input);
         }
     }
 
-    private void tf_FieldActionPerformed(java.awt.event.ActionEvent e)
+    private void cb_ComboActionPerformed(java.awt.event.ActionEvent evt)
     {
-        String cmd = e.getActionCommand();
-        if (!Char.isValidateInteger(cmd))
+        Object object = cb_Combo.getSelectedItem();
+        if (object == null || object.equals(lastItem) || !(object instanceof S1S2))
         {
             return;
         }
-        lastStep = Integer.parseInt(cmd);
+        lastItem = (S1S2) object;
 
-        Object object = e.getSource();
-        if (!(object instanceof javax.swing.JTextField))
+        try
         {
+            unitMdl.loadData(lastItem.getK());
+            bodyList.clear();
+
+            int step = ConsEnv.PWDS_HEAD_SIZE;
+            UnitBar bodyPtn;
+            int size = unitMdl.getItemSize();
+            while (step < size)
+            {
+                bodyPtn = new UnitBar(this, unitMdl);
+                step = bodyPtn.initView(step);
+                bodyPtn.initLang();
+                bodyPtn.initData();
+                bodyList.add(bodyPtn);
+            }
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
             return;
         }
 
-        javax.swing.JTextField field = (javax.swing.JTextField) object;
-        String val = field.getText().replaceAll("\\s+", "");
-        if (val.length() < 1 || !Char.isValidatePositiveDecimal(val))
-        {
-            Lang.showMesg(mrucPtn, LangRes.P30FBA010, "请输入一个非负数值！");
-            field.requestFocus();
-            return;
-        }
+        pl_Panel.removeAll();
 
-        IEditItem item = unitMdl.getItemAt(currStep + 1 + lastStep);
-        if (item.getType() != ConsDat.INDX_DATA)
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_Panel);
+        pl_Panel.setLayout(layout);
+        javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
+        hsg.addContainerGap();
+        int j = bodyList.size() - 1;
+        for (int i = 0; i < j; i += 1)
         {
-            return;
+            hsg.addComponent(bodyList.get(i), javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+            hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED);
         }
+        hsg.addComponent(bodyList.get(j), javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hsg.addContainerGap();
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(hsg));
 
-        mrucPtn.compute(formula.replace("$input", val).replace("$value", item.getData()));
+        javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false);
+        while (j >= 0)
+        {
+            vpg.addComponent(bodyList.get(j--), javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        }
+        javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
+        vsg.addContainerGap();
+        vsg.addGroup(vpg);
+        vsg.addContainerGap();
+        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(vsg));
     }
-    private java.util.ArrayList<javax.swing.JLabel> ls_NameList;
-    private java.util.ArrayList<javax.swing.JTextField> ls_DataList;
+    private javax.swing.JComboBox cb_Combo;
+    private javax.swing.JLabel lb_Label;
+    private javax.swing.JPanel pl_Panel;
 }

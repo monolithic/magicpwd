@@ -1008,6 +1008,11 @@ public interface LangRes
     String P30FB54A = "P30FB54A";
     String P30FB54B = "P30FB54B";
     String P30FB54C = "P30FB54C";
+    String P30FB54D = "P30FB54D";
+    String P30FB54E = "P30FB54E";
+    String P30FB54F = "P30FB54F";
+    String P30FB550 = "P30FB550";
+    String P30FB551 = "P30FB551";
     // ----------------------------------------------------
     // A 消息提示语言资源
     // ----------------------------------------------------

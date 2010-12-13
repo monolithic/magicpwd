@@ -14,13 +14,12 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package com.magicpwd.v.maoc;
 
 /**
  *
  * @author Amon
  */
-public class MathPtn {
-
+public class MathPtn
+{
 }
