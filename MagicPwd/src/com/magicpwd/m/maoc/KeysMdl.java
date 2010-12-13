@@ -14,55 +14,42 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.m.mruc;
+package com.magicpwd.m.maoc;
 
+import com.magicpwd._comn.S1S2;
+import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.UserMdl;
 
 /**
- * Application: MagicPwd
- * Author     : Amon
- * Encoding   : UTF-8
- * Created    : 2010-12-12 17:33:27
- * Website    : http://magicpwd.com/
- * Project    : http://magicpwd.googlecode.com/
- * Contact    : Amon@magicpwd.com
- * CopyRight  : Winshine.biz
- * Description:
+ *
+ * @author Amon
  */
-public final class MrucMdl
+public class KeysMdl extends javax.swing.DefaultComboBoxModel
 {
 
     private UserMdl userMdl;
-    private KeysMdl keysMdl;
-    private UnitMdl unitMdl;
+    private java.util.ArrayList<S1S2> unitList;
 
-    public MrucMdl(UserMdl userMdl)
+    public KeysMdl(UserMdl userMdl)
     {
         this.userMdl = userMdl;
     }
 
     public void init()
     {
-        keysMdl = new KeysMdl(userMdl);
-        keysMdl.init();
-
-        unitMdl = new UnitMdl(userMdl);
-        unitMdl.init();
+        unitList = new java.util.ArrayList<S1S2>();
+        DBA3000.findUnitList(userMdl, unitList);
     }
 
-    /**
-     * @return the unitMdl
-     */
-    public UnitMdl getUnitMdl()
+    @Override
+    public int getSize()
     {
-        return unitMdl;
+        return unitList.size();
     }
 
-    /**
-     * @return the keysMdl
-     */
-    public KeysMdl getKeysMdl()
+    @Override
+    public Object getElementAt(int index)
     {
-        return keysMdl;
+        return unitList.get(index);
     }
 }

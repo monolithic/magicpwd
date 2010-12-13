@@ -21,8 +21,8 @@ import com.magicpwd._comn.S1S2;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Logs;
 import com.magicpwd.m.UserMdl;
-import com.magicpwd.m.mruc.MrucMdl;
-import com.magicpwd.m.mruc.UnitMdl;
+import com.magicpwd.m.maoc.MaocMdl;
+import com.magicpwd.m.maoc.UnitMdl;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.tray.TrayPtn;
 
@@ -34,7 +34,7 @@ import com.magicpwd.v.tray.TrayPtn;
 public class MaocPtn extends AFrame
 {
 
-    private MrucMdl mrucMdl;
+    private MaocMdl mrucMdl;
     private S1S2 lastItem;
     private java.util.ArrayList<UnitPtn> bodyList;
 
@@ -85,7 +85,7 @@ public class MaocPtn extends AFrame
 
     public void initData()
     {
-        mrucMdl = new MrucMdl(userMdl);
+        mrucMdl = new MaocMdl(userMdl);
         mrucMdl.init();
 
         cb_Combo.setModel(mrucMdl.getKeysMdl());
