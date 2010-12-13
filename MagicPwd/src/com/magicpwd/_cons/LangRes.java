@@ -913,7 +913,6 @@ public interface LangRes
     String P30FAA1C = "P30FAA1C";
     String P30FAA1D = "P30FAA1D";
     String P30FAA1E = "P30FAA1E";
-
     // ========================================================================
     // B 代数运算语言资源
     // ========================================================================
@@ -922,8 +921,97 @@ public interface LangRes
     // ----------------------------------------------------
     String P30FB300 = "P30FB300";// c
     String P30FB301 = "P30FB301";// 用户(@U)
-    //
-    //
-    //
+    // ----------------------------------------------------
+    // 4 文本语言资源
+    // ----------------------------------------------------
+    String P30FB400 = "P30FB400";// 4
+    String P30FB401 = "P30FB401";// 4
+    String P30FB402 = "P30FB402";// 4
+    String P30FB403 = "P30FB403";// 4
+    String P30FB404 = "P30FB404";// 4
+    // ----------------------------------------------------
+    // 5 按钮语言资源
+    // ----------------------------------------------------String P30FB500="P30FB500";
+    String P30FB501 = "P30FB501";
+    String P30FB502 = "P30FB502";
+    String P30FB503 = "P30FB503";
+    String P30FB504 = "P30FB504";
+    String P30FB505 = "P30FB505";
+    String P30FB506 = "P30FB506";
+    String P30FB507 = "P30FB507";
+    String P30FB508 = "P30FB508";
+    String P30FB509 = "P30FB509";
+    String P30FB50A = "P30FB50A";
+    String P30FB50B = "P30FB50B";
+    String P30FB50C = "P30FB50C";
+    String P30FB50D = "P30FB50D";
+    String P30FB50E = "P30FB50E";
+    String P30FB50F = "P30FB50F";
+    String P30FB510 = "P30FB510";
+    String P30FB511 = "P30FB511";
+    String P30FB512 = "P30FB512";
+    String P30FB513 = "P30FB513";
+    String P30FB514 = "P30FB514";
+    String P30FB515 = "P30FB515";
+    String P30FB516 = "P30FB516";
+    String P30FB517 = "P30FB517";
+    String P30FB518 = "P30FB518";
+    String P30FB519 = "P30FB519";
+    String P30FB51A = "P30FB51A";
+    String P30FB51B = "P30FB51B";
+    String P30FB51C = "P30FB51C";
+    String P30FB51D = "P30FB51D";
+    String P30FB51E = "P30FB51E";
+    String P30FB51F = "P30FB51F";
+    String P30FB520 = "P30FB520";
+    String P30FB521 = "P30FB521";
+    String P30FB522 = "P30FB522";
+    String P30FB523 = "P30FB523";
+    String P30FB524 = "P30FB524";
+    String P30FB525 = "P30FB525";
+    String P30FB526 = "P30FB526";
+    String P30FB527 = "P30FB527";
+    String P30FB528 = "P30FB528";
+    String P30FB529 = "P30FB529";
+    String P30FB52A = "P30FB52A";
+    String P30FB52B = "P30FB52B";
+    String P30FB52C = "P30FB52C";
+    String P30FB52D = "P30FB52D";
+    String P30FB52E = "P30FB52E";
+    String P30FB52F = "P30FB52F";
+    String P30FB530 = "P30FB530";
+    String P30FB531 = "P30FB531";
+    String P30FB532 = "P30FB532";
+    String P30FB533 = "P30FB533";
+    String P30FB534 = "P30FB534";
+    String P30FB535 = "P30FB535";
+    String P30FB536 = "P30FB536";
+    String P30FB537 = "P30FB537";
+    String P30FB538 = "P30FB538";
+    String P30FB539 = "P30FB539";
+    String P30FB53A = "P30FB53A";
+    String P30FB53B = "P30FB53B";
+    String P30FB53C = "P30FB53C";
+    String P30FB53D = "P30FB53D";
+    String P30FB53E = "P30FB53E";
+    String P30FB53F = "P30FB53F";
+    String P30FB540 = "P30FB540";
+    String P30FB541 = "P30FB541";
+    String P30FB542 = "P30FB542";
+    String P30FB543 = "P30FB543";
+    String P30FB544 = "P30FB544";
+    String P30FB545 = "P30FB545";
+    String P30FB546 = "P30FB546";
+    String P30FB547 = "P30FB547";
+    String P30FB548 = "P30FB548";
+    String P30FB549 = "P30FB549";
+    String P30FB54A = "P30FB54A";
+    String P30FB54B = "P30FB54B";
+    String P30FB54C = "P30FB54C";
+    // ----------------------------------------------------
+    // A 消息提示语言资源
+    // ----------------------------------------------------
     String P30FBA01 = "P30FBA01";
+    String P30FBA02 = "P30FBA02";
+    String P30FBA010 = "P30FBA01";
 }
