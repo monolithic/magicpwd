@@ -23,6 +23,6 @@ import com.magicpwd.__i.maoc.IMaocAction;
  *
  * @author Amon
  */
-public abstract class AMpayAction extends AAction implements IMaocAction
+public abstract class AMaocAction extends AAction implements IMaocAction
 {
 }
