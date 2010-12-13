@@ -1,3 +1,19 @@
+/*
+ *  Copyright (C) 2010 Amon
+ *
+ *  This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package com.magicpwd.v.tray;
 
 import com.magicpwd.__a.AFrame;
@@ -158,8 +174,8 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
                 case ConsEnv.APP_MODE_MPAD:
                     showMiniPtn();
                     break;
-                case ConsEnv.APP_MODE_MRUC:
-                    showMrucPtn();
+                case ConsEnv.APP_MODE_MAOC:
+                    showMaocPtn();
                     break;
                 default:
                     return false;
@@ -297,22 +313,22 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         currPtn = ConsEnv.APP_MODE_MPAD;
     }
 
-    private void showMrucPtn()
+    private void showMaocPtn()
     {
-        if (mp_MrucPtn == null)
+        if (mp_MaocPtn == null)
         {
-            mp_MrucPtn = new MaocPtn(this, userMdl);
-            mp_MrucPtn.initView();
-            mp_MrucPtn.initLang();
-            mp_MrucPtn.initData();
+            mp_MaocPtn = new MaocPtn(this, userMdl);
+            mp_MaocPtn.initView();
+            mp_MaocPtn.initLang();
+            mp_MaocPtn.initData();
         }
         else
         {
-            mp_MrucPtn.setVisible(true);
+            mp_MaocPtn.setVisible(true);
         }
 
-        mfCurrForm = mp_MrucPtn;
-        currPtn = ConsEnv.APP_MODE_MRUC;
+        mfCurrForm = mp_MaocPtn;
+        currPtn = ConsEnv.APP_MODE_MAOC;
     }
 
     @Override
@@ -525,8 +541,8 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
                 case ConsEnv.APP_MODE_MPAD:
                     showMiniPtn();
                     break;
-                case ConsEnv.APP_MODE_MRUC:
-                    showMrucPtn();
+                case ConsEnv.APP_MODE_MAOC:
+                    showMaocPtn();
                     break;
                 default:
                     break;
@@ -696,7 +712,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
             trayIcon.displayMessage(title, tips, java.awt.TrayIcon.MessageType.INFO);
         }
     }
-    private static MaocPtn mp_MrucPtn;
+    private static MaocPtn mp_MaocPtn;
     private static MiniPtn mp_MiniPtn;
     private static NormPtn mp_NormPtn;
     private static MainPtn mp_MainPtn;
