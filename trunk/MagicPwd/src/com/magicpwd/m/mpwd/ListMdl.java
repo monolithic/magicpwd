@@ -10,8 +10,6 @@ import javax.swing.DefaultListModel;
 
 import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.UserMdl;
-import java.sql.Timestamp;
-import java.util.Calendar;
 
 /**
  * @author Amon
@@ -55,12 +53,12 @@ public class ListMdl extends DefaultListModel
         return keysList != null ? keysList.size() : 0;
     }
 
-    public void listTask(java.util.Date s, java.util.Date t)
+    public void listHint(java.util.Date s, java.util.Date t)
     {
         int c = keysList.size();
         keysList.clear();
         fireIntervalRemoved(this, 0, c);
-        DBA3000.readTaskList(userMdl, new java.sql.Timestamp(s.getTime()), new java.sql.Timestamp(t.getTime()), keysList);
+        DBA3000.findHintList(userMdl, new java.sql.Timestamp(s.getTime()), new java.sql.Timestamp(t.getTime()), keysList);
         c = keysList.size();
         fireIntervalAdded(this, 0, c);
     }
@@ -90,23 +88,6 @@ public class ListMdl extends DefaultListModel
             fireIntervalAdded(this, 0, s);
         }
         return b;
-    }
-
-    public void listPast()
-    {
-        int n = keysList.size();
-        keysList.clear();
-        fireIntervalRemoved(this, 0, n);
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.HOUR_OF_DAY, 0);
-        c.set(Calendar.MINUTE, 0);
-        c.set(Calendar.SECOND, 0);
-        c.set(Calendar.MILLISECOND, 0);
-        Timestamp s = new Timestamp(c.getTimeInMillis());
-        Timestamp e = new Timestamp(c.getTimeInMillis());
-        DBA3000.findHintList(userMdl, s, e, keysList);
-        n = keysList.size();
-        fireIntervalAdded(this, 0, n);
     }
 
     public boolean updtName(String hash, String name, String icon)

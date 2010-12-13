@@ -22,7 +22,6 @@ import com.magicpwd._util.Util;
 import com.magicpwd.m.UserMdl;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
@@ -187,37 +186,8 @@ public class DBA3000
 
             // 查询语句拼接
             dba.addTable(DBC3000.P30F0100);
-            addUserSort(dba, cfg);
             dba.addWhere(DBC3000.P30F0106, kindHash);
-            addDataSort(dba, cfg);
-
-            getNameData(dba.executeSelect(), list);
-            return true;
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-            return false;
-        }
-        finally
-        {
-            dba.close();
-        }
-    }
-
-    public static boolean readTaskList(UserMdl cfg, java.sql.Timestamp s, java.sql.Timestamp t, List<Keys> list)
-    {
-        // 数据库连接初始化
-        DBAccess dba = new DBAccess();
-
-        try
-        {
-            dba.init();
-
-            // 查询语句拼接
-            dba.addTable(DBC3000.P30F0100);
             addUserSort(dba, cfg);
-            dba.addWhere(DBC3000.P30F010D + " BETWEEN '" + s + "' AND '" + t + '\'');
             addDataSort(dba, cfg);
 
             getNameData(dba.executeSelect(), list);
@@ -262,8 +232,8 @@ public class DBA3000
 
             // 查询语句拼接
             dba.addTable(DBC3000.P30F0100);
-            addUserSort(dba, cfg);
             dba.addWhere(com.magicpwd._util.Char.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC3000.P30F0109, DBC3000.P30F010A, text2Query(text)));
+            addUserSort(dba, cfg);
             addDataSort(dba, cfg);
 
             getNameData(dba.executeSelect(), list);
@@ -280,13 +250,40 @@ public class DBA3000
         }
     }
 
+    public static boolean findUnitList(UserMdl cfg, List<S1S2> list)
+    {
+        DBAccess dba = new DBAccess();
+
+        try
+        {
+            dba.init();
+
+            StringBuilder buf = new StringBuilder();
+            buf.append("SELECT ");
+            buf.append(DBC3000.C2010000);
+
+            dba.addTable(DBC3000.P30F0100);
+            dba.addWhere(DBC3000.P30F0106 + " IN (" + buf.toString() + ')');
+            addUserSort(dba, cfg);
+            addDataSort(dba, cfg);
+
+//            getNameData(dba.executeSelect(), list);
+            return true;
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            return false;
+        }
+    }
+
     /**
      * 查询在当前日期到指定日期之间的口令数据
      * @param time
      * @param list
      * @return
      */
-    public static boolean findHintList(UserMdl cfg, Timestamp s, Timestamp e, List<Keys> list)
+    public static boolean findHintList(UserMdl cfg, java.sql.Timestamp s, java.sql.Timestamp t, List<Keys> list)
     {
         DBAccess dba = new DBAccess();
 
@@ -295,8 +292,8 @@ public class DBA3000
             dba.init();
 
             dba.addTable(DBC3000.P30F0100);
+            dba.addWhere(DBC3000.P30F010D + " BETWEEN '" + s + "' AND '" + t + '\'');
             addUserSort(dba, cfg);
-            dba.addWhere(DBC3000.P30F010D + " BETWEEN '" + s.toString() + "' AND '" + e.toString() + '\'');
             addDataSort(dba, cfg);
 
             getNameData(dba.executeSelect(), list);
@@ -305,6 +302,7 @@ public class DBA3000
         catch (Exception exp)
         {
             Logs.exception(exp);
+            dba.close();
             return false;
         }
     }
