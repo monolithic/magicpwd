@@ -17,22 +17,23 @@
 package com.magicpwd.e.tray;
 
 import com.magicpwd.__a.tray.ATrayAction;
+import com.magicpwd._cons.ConsEnv;
 
 /**
  *
  * @author aven
  */
-public class ViewAction extends ATrayAction
+public class MaocAction extends ATrayAction
 {
 
-    public ViewAction()
+    public MaocAction()
     {
     }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        trayPtn.changeView();
+        trayPtn.showViewPtn(ConsEnv.APP_MODE_MAOC);
     }
 
     @Override
