@@ -24,7 +24,7 @@ import com.magicpwd.m.UserMdl;
 import com.magicpwd.m.mruc.MrucMdl;
 import com.magicpwd.m.mruc.UnitMdl;
 import com.magicpwd.v.MenuPtn;
-import com.magicpwd.v.TrayPtn;
+import com.magicpwd.v.tray.TrayPtn;
 
 /**
  * 单位换算

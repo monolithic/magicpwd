@@ -20,7 +20,7 @@ import com.magicpwd.m.UserMdl;
 import com.magicpwd.m.mpad.MpadMdl;
 import com.magicpwd.r.ListCR;
 import com.magicpwd.v.MenuPtn;
-import com.magicpwd.v.TrayPtn;
+import com.magicpwd.v.tray.TrayPtn;
 
 /**
  * 迷你模式：记事便签

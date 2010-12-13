@@ -52,7 +52,7 @@ import com.magicpwd.r.KeysCR;
 import com.magicpwd.r.KindTN;
 import com.magicpwd.r.TreeCR;
 import com.magicpwd.v.MenuPtn;
-import com.magicpwd.v.TrayPtn;
+import com.magicpwd.v.tray.TrayPtn;
 import com.magicpwd.x.MdiDialog;
 import java.util.EventListener;
 

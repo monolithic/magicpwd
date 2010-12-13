@@ -4,6 +4,7 @@
  */
 package com.magicpwd.v;
 
+import com.magicpwd.v.tray.TrayPtn;
 import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IAction;
 import com.magicpwd.__i.mpwd.IMpwdAction;

@@ -18,7 +18,7 @@ import com.magicpwd.m.UserMdl;
 import com.magicpwd.m.mwiz.KeysMdl;
 import com.magicpwd.m.mwiz.MwizMdl;
 import com.magicpwd.v.MenuPtn;
-import com.magicpwd.v.TrayPtn;
+import com.magicpwd.v.tray.TrayPtn;
 import com.magicpwd.v.HintBar;
 import java.util.EventListener;
 
