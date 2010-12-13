@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2010 yaoshangwen
+ *  Copyright (C) 2010 Aven
  * 
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@ package com.magicpwd.m.maoc;
 
 /**
  *
- * @author yaoshangwen
+ * @author Aven
  */
 public interface IOperator
 {

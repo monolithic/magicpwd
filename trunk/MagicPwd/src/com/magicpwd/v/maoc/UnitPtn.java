@@ -24,7 +24,7 @@ import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.m.maoc.WComputer;
-import com.magicpwd.m.mruc.UnitMdl;
+import com.magicpwd.m.maoc.UnitMdl;
 import java.math.BigDecimal;
 import java.math.MathContext;
 
