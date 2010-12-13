@@ -20,7 +20,13 @@ import com.magicpwd.__i.IEditItem;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Bean;
+import com.magicpwd._util.Char;
+import com.magicpwd._util.Lang;
+import com.magicpwd._util.Logs;
+import com.magicpwd.m.maoc.WComputer;
 import com.magicpwd.m.mruc.UnitMdl;
+import java.math.BigDecimal;
+import java.math.MathContext;
 
 /**
  *
@@ -29,22 +35,29 @@ import com.magicpwd.m.mruc.UnitMdl;
 public class BodyPtn extends javax.swing.JPanel
 {
 
-    private UnitMdl keysMdl;
+    private MrucPtn mrucPtn;
+    private UnitMdl unitMdl;
     private int currStep;
+    private int lastStep;
+    private String formula;
+    private static WComputer computer;
 
-    public BodyPtn(UnitMdl keysMdl)
+    public BodyPtn(MrucPtn mrucPtn, UnitMdl unitMdl)
     {
-        this.keysMdl = keysMdl;
+        this.mrucPtn = mrucPtn;
+        this.unitMdl = unitMdl;
+        computer = new WComputer();
     }
 
     public int initView(int step)
     {
-        IEditItem editItem = keysMdl.getItemAt(step);
+        IEditItem editItem = unitMdl.getItemAt(step);
         if (editItem.getType() != ConsDat.INDX_SIGN)
         {
             return step + 1;
         }
 
+        formula = editItem.getData();
         currStep = step;
 
         ls_NameList = new java.util.ArrayList<javax.swing.JLabel>();
@@ -60,11 +73,11 @@ public class BodyPtn extends javax.swing.JPanel
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
 
         step += 1;
-        int size = keysMdl.getItemSize();
+        int size = unitMdl.getItemSize();
         int cnt = 0;
         while (step < size)
         {
-            editItem = keysMdl.getItemAt(step);
+            editItem = unitMdl.getItemAt(step);
             if (editItem.getType() == ConsDat.INDX_SIGN)
             {
                 break;
@@ -129,7 +142,7 @@ public class BodyPtn extends javax.swing.JPanel
         }
 
         int step = currStep;
-        IEditItem editItem = keysMdl.getItemAt(step++);
+        IEditItem editItem = unitMdl.getItemAt(step++);
         setBorder(javax.swing.BorderFactory.createTitledBorder(editItem.getName()));
 
         for (int i = 0, j = ls_NameList.size(); i < j; i += 1)
@@ -138,34 +151,113 @@ public class BodyPtn extends javax.swing.JPanel
             {
                 continue;
             }
-            editItem = keysMdl.getItemAt(step + i);
+            editItem = unitMdl.getItemAt(step + i);
             Bean.setText(ls_NameList.get(i), editItem.getName());
         }
     }
 
     public void initData()
     {
+        lastStep = -1;
         if (ls_DataList.size() < 1 || currStep < ConsEnv.PWDS_HEAD_SIZE)
         {
             return;
         }
 
-        for (int i = 1, j = ls_DataList.size(); i < j; i += 1)
+        java.awt.event.ActionListener listener = new java.awt.event.ActionListener()
         {
-            if (ls_DataList.get(i) == null)
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                tf_FieldActionPerformed(evt);
+            }
+        };
+        javax.swing.JTextField field;
+        for (int i = 0, j = ls_DataList.size(); i < j; i += 1)
+        {
+            field = ls_DataList.get(i);
+            if (field == null)
             {
                 continue;
             }
-            ls_DataList.get(i).addActionListener(new java.awt.event.ActionListener()
-            {
-
-                @Override
-                public void actionPerformed(java.awt.event.ActionEvent evt)
-                {
-//                tf_UserNameActionPerformed(evt);
-                }
-            });
+            field.setActionCommand(Integer.toString(i));
+            field.addActionListener(listener);
         }
+    }
+
+    public void showData(String input)
+    {
+        if (!Char.isValidate(input))
+        {
+            return;
+        }
+
+        BigDecimal temp;
+        IEditItem item;
+        javax.swing.JTextField field;
+        int step = currStep + 1;
+        for (int i = 0, j = ls_DataList.size(); i < j; i += 1)
+        {
+            field = ls_DataList.get(i);
+            if (field == null)
+            {
+                continue;
+            }
+            if (i == lastStep)
+            {
+                lastStep = -1;
+                continue;
+            }
+            item = unitMdl.getItemAt(step + i);
+            if (item.getType() != ConsDat.INDX_DATA)
+            {
+                continue;
+            }
+
+            try
+            {
+                temp = computer.calculate(input.replace("$ratio", item.getData()), new MathContext(Integer.parseInt(item.getSpec(IEditItem.SPEC_DATA_DEC))));
+                field.setText(temp.toPlainString());
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+        }
+    }
+
+    private void tf_FieldActionPerformed(java.awt.event.ActionEvent e)
+    {
+        String cmd = e.getActionCommand();
+        if (!Char.isValidateInteger(cmd))
+        {
+            return;
+        }
+        lastStep = Integer.parseInt(cmd);
+
+        Object object = e.getSource();
+        if (!(object instanceof javax.swing.JTextField))
+        {
+            return;
+        }
+
+        javax.swing.JTextField field = (javax.swing.JTextField) object;
+        String val = field.getText().replaceAll("\\s+", "");
+        if (val.length() < 1 || !Char.isValidatePositiveDecimal(val))
+        {
+            Lang.showMesg(mrucPtn, "", "请输入一个非负数值！");
+            field.requestFocus();
+            return;
+        }
+
+        IEditItem item = unitMdl.getItemAt(currStep + 1 + lastStep);
+        if (item.getType() != ConsDat.INDX_DATA)
+        {
+            return;
+        }
+
+        mrucPtn.compute(formula.replace("$input", val).replace("$value", item.getData()));
     }
     private java.util.ArrayList<javax.swing.JLabel> ls_NameList;
     private java.util.ArrayList<javax.swing.JTextField> ls_DataList;

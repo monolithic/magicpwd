@@ -103,8 +103,8 @@ public class SignBean extends ASignBean
     @Override
     public void initLang()
     {
-        Lang.setWText(lb_PropName, LangRes.P30F1307, "名称");
-        Lang.setWText(lb_PropData, LangRes.P30F1308, "文本");
+        Lang.setWText(lb_PropName, LangRes.P30F1321, "名称(@N)");
+        Lang.setWText(lb_PropData, LangRes.P30F1322, "公式(@P)");
 
         initConfLang();
 

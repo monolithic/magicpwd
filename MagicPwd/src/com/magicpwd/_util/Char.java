@@ -192,6 +192,11 @@ public class Char
         return t != null ? Pattern.compile("^[+]?[123456789]+\\d*$", Pattern.CASE_INSENSITIVE).matcher(t).matches() : false;
     }
 
+    public static boolean isValidatePositiveDecimal(String t)
+    {
+        return t != null ? Pattern.compile("^[+]?[\\d]*([.]\\d*)?$", Pattern.CASE_INSENSITIVE).matcher(t).matches() : false;
+    }
+
     public static String escape(String src)
     {
         StringBuilder buf = new StringBuilder(src.length() * 6);
