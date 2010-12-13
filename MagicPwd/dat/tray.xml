@@ -23,7 +23,7 @@
             <action class="com.magicpwd.e.tray.MpadAction" />
         </item>
         <item type="normal" text="$P30F9605" text-def="单位换算">
-            <action class="com.magicpwd.e.tray.MrucAction" />
+            <action class="com.magicpwd.e.tray.MaocAction" />
         </item>
         <seperator />
         <item type="normal" text="$P30F9606" text-def="检测更新">
