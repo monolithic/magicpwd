@@ -260,14 +260,30 @@ public class DBA3000
 
             StringBuilder buf = new StringBuilder();
             buf.append("SELECT ");
-            buf.append(DBC3000.C2010000);
+            buf.append(DBC3000.C2010103);
+            buf.append(" FROM ");
+            buf.append(DBC3000.C2010100);
+            buf.append(" WHERE ").append(DBC3000.C2010107).append("='unit'");
 
             dba.addTable(DBC3000.P30F0100);
+            dba.addColumn(DBC3000.P30F0104);
+            dba.addColumn(DBC3000.P30F0109);
+            dba.addColumn(DBC3000.P30F010A);
             dba.addWhere(DBC3000.P30F0106 + " IN (" + buf.toString() + ')');
             addUserSort(dba, cfg);
             addDataSort(dba, cfg);
 
-//            getNameData(dba.executeSelect(), list);
+            ResultSet rest = dba.executeSelect();
+            S1S2 item;
+            while (rest.next())
+            {
+                item = new S1S2();
+                item.setK(rest.getString(DBC3000.P30F0104));
+                item.setV(rest.getString(DBC3000.P30F0109));
+                item.setV2(rest.getString(DBC3000.P30F010A));
+                list.add(item);
+            }
+            rest.close();
             return true;
         }
         catch (Exception exp)

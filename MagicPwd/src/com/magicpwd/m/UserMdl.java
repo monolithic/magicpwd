@@ -79,6 +79,10 @@ public class UserMdl
             {
                 UserMdl.appMode = ConsEnv.APP_MODE_MPAD;
             }
+            else if ("mruc".equalsIgnoreCase(appMode))
+            {
+                UserMdl.appMode = ConsEnv.APP_MODE_MRUC;
+            }
         }
     }
 

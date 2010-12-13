@@ -20,7 +20,7 @@ import com.magicpwd.__i.IEditItem;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Bean;
-import com.magicpwd.m.mwiz.KeysMdl;
+import com.magicpwd.m.mruc.UnitMdl;
 
 /**
  *
@@ -29,24 +29,23 @@ import com.magicpwd.m.mwiz.KeysMdl;
 public class BodyPtn extends javax.swing.JPanel
 {
 
-    private KeysMdl keysMdl;
+    private UnitMdl keysMdl;
     private int currStep;
 
-    public BodyPtn(KeysMdl keysMdl)
+    public BodyPtn(UnitMdl keysMdl)
     {
         this.keysMdl = keysMdl;
     }
 
-    public void initView(Integer step)
+    public int initView(int step)
     {
         IEditItem editItem = keysMdl.getItemAt(step);
         if (editItem.getType() != ConsDat.INDX_SIGN)
         {
-            return;
+            return step + 1;
         }
 
         currStep = step;
-        step += 1;
 
         ls_NameList = new java.util.ArrayList<javax.swing.JLabel>();
         ls_DataList = new java.util.ArrayList<javax.swing.JTextField>();
@@ -59,7 +58,11 @@ public class BodyPtn extends javax.swing.JPanel
 
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        while (true)
+
+        step += 1;
+        int size = keysMdl.getItemSize();
+        int cnt = 0;
+        while (step < size)
         {
             editItem = keysMdl.getItemAt(step);
             if (editItem.getType() == ConsDat.INDX_SIGN)
@@ -67,6 +70,12 @@ public class BodyPtn extends javax.swing.JPanel
                 break;
             }
             step += 1;
+            if (editItem.getType() != ConsDat.INDX_DATA)
+            {
+                ls_NameList.add(null);
+                ls_DataList.add(null);
+                continue;
+            }
 
             label = new javax.swing.JLabel();
             ls_NameList.add(label);
@@ -74,6 +83,7 @@ public class BodyPtn extends javax.swing.JPanel
             field = new javax.swing.JTextField(16);
             ls_DataList.add(field);
             hpg2.addComponent(field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+            cnt += 1;
         }
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addContainerGap();
@@ -81,26 +91,34 @@ public class BodyPtn extends javax.swing.JPanel
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg.addGroup(hpg2);
         hsg.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-        layout.setHorizontalGroup(hsg);
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(hsg));
 
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
         vsg.addContainerGap();
-        int j = step - 1;
         javax.swing.GroupLayout.ParallelGroup vpg;
-        for (int i = currStep + 1; i < j; i += 1)
+        int i = 0;
+        int j = cnt - 1;
+        while (i < cnt)
         {
+            if (ls_NameList.get(i) == null)
+            {
+                continue;
+            }
             vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
             vpg.addComponent(ls_NameList.get(i));
             vpg.addComponent(ls_DataList.get(i), javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
             vsg.addGroup(vpg);
             vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+            i += 1;
         }
         vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg.addComponent(ls_NameList.get(j));
         vpg.addComponent(ls_DataList.get(j), javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         vsg.addGroup(vpg);
         vsg.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-        layout.setVerticalGroup(vsg);
+        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(vsg));
+
+        return step;
     }
 
     public void initLang()
@@ -116,6 +134,10 @@ public class BodyPtn extends javax.swing.JPanel
 
         for (int i = 0, j = ls_NameList.size(); i < j; i += 1)
         {
+            if (ls_NameList.get(i) == null)
+            {
+                continue;
+            }
             editItem = keysMdl.getItemAt(step + i);
             Bean.setText(ls_NameList.get(i), editItem.getName());
         }
@@ -128,11 +150,12 @@ public class BodyPtn extends javax.swing.JPanel
             return;
         }
 
-        IEditItem editItem = keysMdl.getItemAt(currStep);
-        setBorder(javax.swing.BorderFactory.createTitledBorder(editItem.getName()));
-
         for (int i = 1, j = ls_DataList.size(); i < j; i += 1)
         {
+            if (ls_DataList.get(i) == null)
+            {
+                continue;
+            }
             ls_DataList.get(i).addActionListener(new java.awt.event.ActionListener()
             {
 

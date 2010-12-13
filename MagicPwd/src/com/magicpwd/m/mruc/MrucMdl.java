@@ -16,7 +16,6 @@
  */
 package com.magicpwd.m.mruc;
 
-import com.magicpwd._comn.S1S2;
 import com.magicpwd.m.UserMdl;
 
 /**
@@ -34,8 +33,8 @@ public final class MrucMdl
 {
 
     private UserMdl userMdl;
+    private KeysMdl keysMdl;
     private UnitMdl unitMdl;
-    private java.util.ArrayList<S1S2> unitList;
 
     public MrucMdl(UserMdl userMdl)
     {
@@ -44,8 +43,11 @@ public final class MrucMdl
 
     public void init()
     {
-        setUnitMdl(new UnitMdl(userMdl));
-        getUnitMdl().init();
+        keysMdl = new KeysMdl(userMdl);
+        keysMdl.init();
+
+        unitMdl = new UnitMdl(userMdl);
+        unitMdl.init();
     }
 
     /**
@@ -57,10 +59,10 @@ public final class MrucMdl
     }
 
     /**
-     * @param unitMdl the unitMdl to set
+     * @return the keysMdl
      */
-    public void setUnitMdl(UnitMdl unitMdl)
+    public KeysMdl getKeysMdl()
     {
-        this.unitMdl = unitMdl;
+        return keysMdl;
     }
 }
