@@ -19,6 +19,9 @@ package com.magicpwd.v.maoc;
 import com.magicpwd.__a.AFrame;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._cons.LangRes;
+import com.magicpwd._util.Bean;
+import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.m.maoc.MaocMdl;
@@ -75,11 +78,13 @@ public class MaocPtn extends AFrame
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(vsg));
 
         this.pack();
+        Bean.centerForm(this, null);
         this.setVisible(true);
     }
 
     public void initLang()
     {
+        Bean.setText(lb_Label, Lang.getLang(LangRes.P30FB301, "单位类型(@T)"));
         this.pack();
     }
 
@@ -100,6 +105,7 @@ public class MaocPtn extends AFrame
         });
 
         bodyList = new java.util.ArrayList<UnitPtn>();
+        this.pack();
     }
 
     @Override
