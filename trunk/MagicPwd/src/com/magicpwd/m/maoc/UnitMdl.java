@@ -31,7 +31,7 @@ public class UnitMdl extends SafeMdl
         super(userMdl);
     }
 
-    void init()
+    public void init()
     {
     }
 
