@@ -14,17 +14,17 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.__i.mpad;
+package com.magicpwd.__i.maoc;
 
 import com.magicpwd.__i.IAction;
-import com.magicpwd.v.mpad.MiniPtn;
+import com.magicpwd.v.maoc.MaocPtn;
 
 /**
  *
  * @author Amon
  */
-public interface IMpadAction extends IAction
+public interface IMaocAction extends IAction
 {
 
-    void setMiniPtn(MiniPtn miniPtn);
+    void setMaocPtn(MaocPtn miniPtn);
 }
