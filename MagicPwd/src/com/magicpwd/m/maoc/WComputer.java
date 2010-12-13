@@ -16,6 +16,7 @@
  */
 package com.magicpwd.m.maoc;
 
+import com.magicpwd._cons.maoc.MaocEnv;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Logs;
@@ -260,73 +261,73 @@ public final class WComputer
         final String[] LBT_EXP =
         {
             //
-            IOperator.OPR_SLB_EXP,//
-            IOperator.OPR_MLB_EXP,//
-            IOperator.OPR_LLB_EXP,//
+            MaocEnv.OPR_SLB_EXP,//
+            MaocEnv.OPR_MLB_EXP,//
+            MaocEnv.OPR_LLB_EXP,//
         };
         final int[] LBT_INT =
         {
             //
-            IOperator.OPR_SLB_INT,//
-            IOperator.OPR_MLB_INT,//
-            IOperator.OPR_LLB_INT,//
+            MaocEnv.OPR_SLB_INT,//
+            MaocEnv.OPR_MLB_INT,//
+            MaocEnv.OPR_LLB_INT,//
         };
         // 右括号
         final String[] RBT_EXP =
         {
             //
-            IOperator.OPR_SRB_EXP,//
-            IOperator.OPR_MRB_EXP,//
-            IOperator.OPR_LRB_EXP,//
+            MaocEnv.OPR_SRB_EXP,//
+            MaocEnv.OPR_MRB_EXP,//
+            MaocEnv.OPR_LRB_EXP,//
         };
         final int[] RBT_INT =
         {
             //
-            IOperator.OPR_SRB_INT,//
-            IOperator.OPR_MRB_INT,//
-            IOperator.OPR_LRB_INT,//
+            MaocEnv.OPR_SRB_INT,//
+            MaocEnv.OPR_MRB_INT,//
+            MaocEnv.OPR_LRB_INT,//
         };
 
         // 操作符
         final String[] OPR_EXP =
         {
             //
-            IOperator.OPR_ADD_EXP,// 加
-            IOperator.OPR_SUB_EXP,// 减
-            IOperator.OPR_MUL_EXP,// 乘
-            IOperator.OPR_DIV_EXP,// 除
-            IOperator.OPR_MOD_EXP,// 取模
-            IOperator.OPR_POW_EXP,// 次幂
-            IOperator.OPR_ROT_EXP,// 方根
-            IOperator.OPR_LOG_EXP,// 10对数
-            IOperator.OPR_LNE_EXP,// 自然对数
-            IOperator.OPR_FAC_EXP,// 阶乘
-            IOperator.OPR_SIN_EXP,//
-            IOperator.OPR_COS_EXP,//
-            IOperator.OPR_TAN_EXP,//
-            IOperator.OPR_SEC_EXP,//
-            IOperator.OPR_CSC_EXP,//
-            IOperator.OPR_COT_EXP,//
+            MaocEnv.OPR_ADD_EXP,// 加
+            MaocEnv.OPR_SUB_EXP,// 减
+            MaocEnv.OPR_MUL_EXP,// 乘
+            MaocEnv.OPR_DIV_EXP,// 除
+            MaocEnv.OPR_MOD_EXP,// 取模
+            MaocEnv.OPR_POW_EXP,// 次幂
+            MaocEnv.OPR_ROT_EXP,// 方根
+            MaocEnv.OPR_LOG_EXP,// 10对数
+            MaocEnv.OPR_LNE_EXP,// 自然对数
+            MaocEnv.OPR_FAC_EXP,// 阶乘
+            MaocEnv.OPR_SIN_EXP,//
+            MaocEnv.OPR_COS_EXP,//
+            MaocEnv.OPR_TAN_EXP,//
+            MaocEnv.OPR_SEC_EXP,//
+            MaocEnv.OPR_CSC_EXP,//
+            MaocEnv.OPR_COT_EXP,//
         };
         final int[] OPR_INT =
         {
             //
-            IOperator.OPR_ADD_INT,// 加
-            IOperator.OPR_SUB_INT,// 减
-            IOperator.OPR_MUL_INT,// 乘
-            IOperator.OPR_DIV_INT,// 除
-            IOperator.OPR_MOD_INT,// 取模
-            IOperator.OPR_POW_INT,// 次幂
-            IOperator.OPR_ROT_INT,// 方根
-            IOperator.OPR_LOG_INT,// 10对数
-            IOperator.OPR_LNE_INT,// 自然对数
-            IOperator.OPR_FAC_INT,// 阶乘
-            IOperator.OPR_SIN_INT,//
-            IOperator.OPR_COS_INT,//
-            IOperator.OPR_TAN_INT,//
-            IOperator.OPR_SEC_INT,//
-            IOperator.OPR_CSC_INT,//
-            IOperator.OPR_COT_INT,//
+            MaocEnv.OPR_ADD_INT,// 加
+            MaocEnv.OPR_SUB_INT,// 减
+            MaocEnv.OPR_MUL_INT,// 乘
+            MaocEnv.OPR_DIV_INT,// 除
+            MaocEnv.OPR_MOD_INT,// 取模
+            MaocEnv.OPR_POW_INT,// 次幂
+            MaocEnv.OPR_ROT_INT,// 方根
+            MaocEnv.OPR_LOG_INT,// 10对数
+            MaocEnv.OPR_LNE_INT,// 自然对数
+            MaocEnv.OPR_FAC_INT,// 阶乘
+            MaocEnv.OPR_SIN_INT,//
+            MaocEnv.OPR_COS_INT,//
+            MaocEnv.OPR_TAN_INT,//
+            MaocEnv.OPR_SEC_INT,//
+            MaocEnv.OPR_CSC_INT,//
+            MaocEnv.OPR_COT_INT,//
         };
 
         // 循环处理每一个表达式字符
@@ -481,7 +482,7 @@ public final class WComputer
             {
                 if (OPR_EXP[i].equalsIgnoreCase(tmpOpr))
                 {
-                    lastIsOpr = IOperator.OPR_FAC_EXP.equals(tmpOpr) ? false : true;
+                    lastIsOpr = MaocEnv.OPR_FAC_EXP.equals(tmpOpr) ? false : true;
                     // 清除当前操作符
                     oprBuf.delete(0, oprBuf.length());
 
@@ -546,7 +547,7 @@ public final class WComputer
         S1S2 kvItem = new S1S2();
 
         // 加
-        if (IOperator.OPR_ADD_EXP.equals(mOpr))
+        if (MaocEnv.OPR_ADD_EXP.equals(mOpr))
         {
             lOpd = numStack.pop();
             Logs.log("运算：" + lOpd + mOpr + rOpd);
@@ -559,7 +560,7 @@ public final class WComputer
         }
 
         // 减
-        if (IOperator.OPR_SUB_EXP.equals(mOpr))
+        if (MaocEnv.OPR_SUB_EXP.equals(mOpr))
         {
             lOpd = numStack.pop();
             Logs.log("运算：" + lOpd + mOpr + rOpd);
@@ -572,7 +573,7 @@ public final class WComputer
         }
 
         // 乘
-        if (IOperator.OPR_MUL_EXP.equals(mOpr))
+        if (MaocEnv.OPR_MUL_EXP.equals(mOpr))
         {
             lOpd = numStack.pop();
             Logs.log("运算：" + lOpd + mOpr + rOpd);
@@ -585,7 +586,7 @@ public final class WComputer
         }
 
         // 除
-        if (IOperator.OPR_DIV_EXP.equals(mOpr))
+        if (MaocEnv.OPR_DIV_EXP.equals(mOpr))
         {
             BigDecimal t = new BigDecimal(rOpd);
             if (t.compareTo(new BigDecimal(0)) == 0)
@@ -603,7 +604,7 @@ public final class WComputer
         }
 
         // 取模
-        if (IOperator.OPR_MOD_EXP.equals(mOpr))
+        if (MaocEnv.OPR_MOD_EXP.equals(mOpr))
         {
             BigDecimal t = new BigDecimal(rOpd);
             if (t.compareTo(new BigDecimal(0)) == 0)
@@ -621,7 +622,7 @@ public final class WComputer
         }
 
         // 次幂
-        if (IOperator.OPR_POW_EXP.equals(mOpr))
+        if (MaocEnv.OPR_POW_EXP.equals(mOpr))
         {
             try
             {
@@ -642,7 +643,7 @@ public final class WComputer
         }
 
         // 方根
-        if (IOperator.OPR_ROT_EXP.equals(mOpr))
+        if (MaocEnv.OPR_ROT_EXP.equals(mOpr))
         {
             lOpd = numStack.pop();
             BigDecimal tl = new BigDecimal(rOpd);
@@ -656,7 +657,7 @@ public final class WComputer
         }
 
         // 正弦
-        if (IOperator.OPR_SIN_EXP.equalsIgnoreCase(mOpr))
+        if (MaocEnv.OPR_SIN_EXP.equalsIgnoreCase(mOpr))
         {
             BigDecimal t = new BigDecimal(rOpd);
             t = new BigDecimal(Math.sin(t.doubleValue()));
@@ -669,7 +670,7 @@ public final class WComputer
         }
 
         // 余弦
-        if (IOperator.OPR_COS_EXP.equalsIgnoreCase(mOpr))
+        if (MaocEnv.OPR_COS_EXP.equalsIgnoreCase(mOpr))
         {
             BigDecimal t = new BigDecimal(rOpd);
             t = new BigDecimal(Math.cos(t.doubleValue()));
@@ -682,7 +683,7 @@ public final class WComputer
         }
 
         // 正切
-        if (IOperator.OPR_TAN_EXP.equalsIgnoreCase(mOpr))
+        if (MaocEnv.OPR_TAN_EXP.equalsIgnoreCase(mOpr))
         {
             BigDecimal t = new BigDecimal(rOpd);
             t = new BigDecimal(Math.tan(t.doubleValue()));
@@ -695,7 +696,7 @@ public final class WComputer
         }
 
         // 正割
-        if (IOperator.OPR_SEC_EXP.equalsIgnoreCase(mOpr))
+        if (MaocEnv.OPR_SEC_EXP.equalsIgnoreCase(mOpr))
         {
             BigDecimal t = new BigDecimal(rOpd);
             t = new BigDecimal(Math.asin(t.doubleValue()));
@@ -708,7 +709,7 @@ public final class WComputer
         }
 
         // 余割
-        if (IOperator.OPR_CSC_EXP.equalsIgnoreCase(mOpr))
+        if (MaocEnv.OPR_CSC_EXP.equalsIgnoreCase(mOpr))
         {
             BigDecimal t = new BigDecimal(rOpd);
             t = new BigDecimal(Math.acos(t.doubleValue()));
@@ -721,7 +722,7 @@ public final class WComputer
         }
 
         // 反正切
-        if (IOperator.OPR_COT_EXP.equalsIgnoreCase(mOpr))
+        if (MaocEnv.OPR_COT_EXP.equalsIgnoreCase(mOpr))
         {
             BigDecimal t = new BigDecimal(rOpd);
             t = new BigDecimal(Math.atan(t.doubleValue()));
@@ -734,7 +735,7 @@ public final class WComputer
         }
 
         // 阶乘
-        if (IOperator.OPR_FAC_EXP.equals(mOpr))
+        if (MaocEnv.OPR_FAC_EXP.equals(mOpr))
         {
             BigInteger t = null;
             try
@@ -766,7 +767,7 @@ public final class WComputer
         }
 
         // 10的对数
-        if (IOperator.OPR_LOG_EXP.equalsIgnoreCase(mOpr))
+        if (MaocEnv.OPR_LOG_EXP.equalsIgnoreCase(mOpr))
         {
             BigDecimal t = new BigDecimal(rOpd);
             t = new BigDecimal(Math.log10(t.doubleValue()));
@@ -779,7 +780,7 @@ public final class WComputer
         }
 
         // e的对数
-        if (IOperator.OPR_LNE_EXP.equalsIgnoreCase(mOpr))
+        if (MaocEnv.OPR_LNE_EXP.equalsIgnoreCase(mOpr))
         {
             BigDecimal t = new BigDecimal(rOpd);
             t = new BigDecimal(Math.log(t.doubleValue()));

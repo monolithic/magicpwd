@@ -14,10 +14,12 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd._mail;
+package com.magicpwd.m.mail;
 
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Char;
+import com.magicpwd._bean.mail.Connect;
+import com.magicpwd._cons.mail.MailEnv;
 import javax.mail.Message;
 import javax.mail.Multipart;
 import javax.mail.Part;

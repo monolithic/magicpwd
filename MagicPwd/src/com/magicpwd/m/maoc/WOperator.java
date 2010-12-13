@@ -17,6 +17,8 @@
 
 package com.magicpwd.m.maoc;
 
+import com.magicpwd._cons.maoc.MaocEnv;
+
 /**
  * <ul>
  * <li>功能说明：</li>
@@ -40,7 +42,7 @@ public class WOperator
      */
     public WOperator()
     {
-        this(IOperator.OPR_ADD_EXP, IOperator.OPR_ADD_INT);
+        this(MaocEnv.OPR_ADD_EXP, MaocEnv.OPR_ADD_INT);
     }
 
     /**

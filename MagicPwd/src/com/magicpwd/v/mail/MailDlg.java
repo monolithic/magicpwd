@@ -14,8 +14,12 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd._mail;
+package com.magicpwd.v.mail;
 
+import com.magicpwd._bean.mail.Connect;
+import com.magicpwd.m.mail.MailMdl;
+import com.magicpwd.m.mail.NodeMdl;
+import com.magicpwd.m.mail.Reader;
 import com.magicpwd._comn.S1S1;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
