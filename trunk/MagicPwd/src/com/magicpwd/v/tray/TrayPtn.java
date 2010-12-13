@@ -1,4 +1,4 @@
-package com.magicpwd.v;
+package com.magicpwd.v.tray;
 
 import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IBackCall;
@@ -13,9 +13,10 @@ import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.DBAccess;
 import com.magicpwd.m.UserMdl;
+import com.magicpwd.v.MenuPtn;
+import com.magicpwd.v.maoc.MaocPtn;
 import com.magicpwd.v.mpad.MiniPtn;
 import com.magicpwd.v.mpwd.MainPtn;
-import com.magicpwd.v.mruc.MaocPtn;
 import com.magicpwd.v.mwiz.NormPtn;
 
 /**

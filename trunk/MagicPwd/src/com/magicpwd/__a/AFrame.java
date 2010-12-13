@@ -25,7 +25,7 @@ import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
 import com.magicpwd.v.MenuPtn;
-import com.magicpwd.v.TrayPtn;
+import com.magicpwd.v.tray.TrayPtn;
 import java.io.IOException;
 import java.util.EventListener;
 

@@ -5,7 +5,7 @@
 package com.magicpwd.__a;
 
 import com.magicpwd.__i.IAction;
-import com.magicpwd.v.TrayPtn;
+import com.magicpwd.v.tray.TrayPtn;
 import java.beans.PropertyChangeListener;
 
 /**

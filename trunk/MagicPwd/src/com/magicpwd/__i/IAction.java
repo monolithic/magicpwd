@@ -4,7 +4,7 @@
  */
 package com.magicpwd.__i;
 
-import com.magicpwd.v.TrayPtn;
+import com.magicpwd.v.tray.TrayPtn;
 
 /**
  *
