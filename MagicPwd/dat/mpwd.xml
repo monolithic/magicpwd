@@ -681,13 +681,13 @@
             <item type="checkbox" id="data-optional" text="$P30F7C16" text-def="可选输入" command="optional"/>
         </menu>
     </submenu>
-    <submenu id="line-options">
-        <item type="checkbox" id="line-sep" text="$P30F7E03" text-def="分页控制(@S)" group="line-position" command="sep:P30F7E04" />
-        <item type="checkbox" id="line-div" text="$P30F7E05" text-def="标题面板(@P)" group="line-position" command="div:P30F7E06" />
-        <item type="checkbox" id="line-tab" text="$P30F7E07" text-def="选项面板(@T)" group="line-position" command="tab:P30F7E08" />
-        <menu text="$P30F7E09" text-def="其它(@O)">
-            <item type="checkbox" text="$P30F7E0A" text-def="-----" group="line-position" command="tip:P30F7E0B" />
-            <item type="checkbox" text="$P30F7E0C" text-def="--{0}--" group="line-position" command="tip:P30F7E0D" />
+    <submenu id="sign-options">
+        <item type="checkbox" id="sign-sep" text="$P30F7E03" text-def="分页控制(@S)" group="sign-options" command="sep:P30F7E04" />
+        <item type="checkbox" id="sign-div" text="$P30F7E05" text-def="标题面板(@P)" group="sign-options" command="div:P30F7E06" />
+        <item type="checkbox" id="sign-tab" text="$P30F7E07" text-def="选项面板(@T)" group="sign-options" command="tab:P30F7E08" />
+        <menu text="$P30F7E09" text-def="其它标记(@O)">
+            <item type="checkbox" text="$P30F7E0A" text-def="-----" group="sign-options" command="tip:P30F7E0B" />
+            <item type="checkbox" text="$P30F7E0C" text-def="--{0}--" group="sign-options" command="tip:P30F7E0D" />
         </menu>
     </submenu>
     <strokes id="mpwd">
