@@ -17,6 +17,8 @@
 package com.magicpwd.m.mruc;
 
 import com.magicpwd._comn.S1S2;
+import com.magicpwd.d.DBA3000;
+import com.magicpwd.m.UserMdl;
 
 /**
  *
@@ -25,38 +27,29 @@ import com.magicpwd._comn.S1S2;
 public class KeysMdl extends javax.swing.DefaultComboBoxModel
 {
 
+    private UserMdl userMdl;
     private java.util.ArrayList<S1S2> unitList;
 
-    public KeysMdl()
+    public KeysMdl(UserMdl userMdl)
     {
+        this.userMdl = userMdl;
     }
 
     public void init()
     {
         unitList = new java.util.ArrayList<S1S2>();
-    }
-
-    @Override
-    public void setSelectedItem(Object anItem)
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public Object getSelectedItem()
-    {
-        throw new UnsupportedOperationException("Not supported yet.");
+        DBA3000.findUnitList(userMdl, unitList);
     }
 
     @Override
     public int getSize()
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return unitList.size();
     }
 
     @Override
     public Object getElementAt(int index)
     {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return unitList.get(index);
     }
 }
