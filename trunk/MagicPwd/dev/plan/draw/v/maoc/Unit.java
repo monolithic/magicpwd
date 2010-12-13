@@ -21,16 +21,16 @@
  * Created on 2010-12-13, 12:54:43
  */
 
-package plan.draw.v;
+package plan.draw.v.maoc;
 
 /**
  *
  * @author yaoshangwen
  */
-public class mruc extends javax.swing.JFrame {
+public class Unit extends javax.swing.JFrame {
 
     /** Creates new form mruc */
-    public mruc() {
+    public Unit() {
         initComponents();
     }
 
@@ -100,7 +100,7 @@ public class mruc extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new mruc().setVisible(true);
+                new Unit().setVisible(true);
             }
         });
     }
