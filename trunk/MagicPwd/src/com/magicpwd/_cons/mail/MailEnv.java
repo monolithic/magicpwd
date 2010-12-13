@@ -14,33 +14,18 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd._mail;
-
-import javax.swing.JPopupMenu;
+package com.magicpwd._cons.mail;
 
 /**
  *
- * @author amon
+ * @author Amon
  */
-public class MailPop extends JPopupMenu
+public interface MailEnv
 {
 
-    public MailPop()
-    {
-    }
-
-    public boolean initView()
-    {
-        return true;
-    }
-
-    public boolean initLang()
-    {
-        return true;
-    }
-
-    public boolean initData()
-    {
-        return true;
-    }
+    String TEXT_PLAIN = "text/plain";
+    String TEXT_HTML = "text/html";
+    String MULTIPART = "multipart/*";
+    String MESSAGE = "message/rfc822";
+    String CHARSET = "charset";
 }

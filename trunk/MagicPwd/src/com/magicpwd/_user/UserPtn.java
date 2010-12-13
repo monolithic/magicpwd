@@ -21,7 +21,7 @@ import com.magicpwd._comn.S1S1;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd._mail.Connect;
+import com.magicpwd._bean.mail.Connect;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Jpng;
