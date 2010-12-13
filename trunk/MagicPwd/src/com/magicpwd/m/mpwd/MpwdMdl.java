@@ -16,7 +16,7 @@ import com.magicpwd.r.KindTN;
 public final class MpwdMdl
 {
 
-    private TreeMdl treeMdl;
+    private KindMdl kindMdl;
     private ListMdl listMdl;
     private GridMdl gridMdl;
     private UserMdl userMdl;
@@ -35,8 +35,8 @@ public final class MpwdMdl
         kind.setC2010103(ConsDat.HASH_ROOT);
         kind.setC2010105("魔方密码");
         kind.setC2010106("魔方密码");
-        treeMdl = new TreeMdl(new KindTN(kind));
-        treeMdl.init();
+        kindMdl = new KindMdl(new KindTN(kind));
+        kindMdl.init();
 
         gridMdl = new GridMdl(userMdl);
         gridMdl.init();
@@ -53,9 +53,9 @@ public final class MpwdMdl
     /**
      * @return the treeMdl
      */
-    public TreeMdl getTreeMdl()
+    public KindMdl getKindMdl()
     {
-        return treeMdl;
+        return kindMdl;
     }
 
     /**
