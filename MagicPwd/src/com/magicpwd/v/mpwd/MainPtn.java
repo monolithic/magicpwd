@@ -47,7 +47,7 @@ import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.m.mpwd.MpwdMdl;
-import com.magicpwd.m.mpwd.TreeMdl;
+import com.magicpwd.m.mpwd.KindMdl;
 import com.magicpwd.r.KeysCR;
 import com.magicpwd.r.KindTN;
 import com.magicpwd.r.TreeCR;
@@ -143,7 +143,7 @@ public class MainPtn extends AFrame
 
         safeMdl = mpwdMdl.getGridMdl();
 
-        tr_GuidTree.setModel(mpwdMdl.getTreeMdl());
+        tr_GuidTree.setModel(mpwdMdl.getKindMdl());
         ls_GuidList.addMouseListener(new java.awt.event.MouseAdapter()
         {
 
@@ -1578,9 +1578,9 @@ public class MainPtn extends AFrame
         histDlg.setVisible(true);
     }
 
-    public TreeMdl getTreeMdl()
+    public KindMdl getTreeMdl()
     {
-        return mpwdMdl.getTreeMdl();
+        return mpwdMdl.getKindMdl();
     }
 
     public void showOptions(String propName)

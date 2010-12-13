@@ -15,10 +15,10 @@ import com.magicpwd.d.DBA3000;
  * @author Amon
  * 
  */
-public class TreeMdl extends DefaultTreeModel
+public class KindMdl extends DefaultTreeModel
 {
 
-    TreeMdl(KindTN root)
+    KindMdl(KindTN root)
     {
         super(root);
     }
