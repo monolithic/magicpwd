@@ -17,50 +17,46 @@
 package com.magicpwd.m.mruc;
 
 import com.magicpwd._comn.S1S2;
-import com.magicpwd.m.UserMdl;
 
 /**
- * Application: MagicPwd
- * Author     : Amon
- * Encoding   : UTF-8
- * Created    : 2010-12-12 17:33:27
- * Website    : http://magicpwd.com/
- * Project    : http://magicpwd.googlecode.com/
- * Contact    : Amon@magicpwd.com
- * CopyRight  : Winshine.biz
- * Description:
+ *
+ * @author Amon
  */
-public final class MrucMdl
+public class KeysMdl extends javax.swing.DefaultComboBoxModel
 {
 
-    private UserMdl userMdl;
-    private UnitMdl unitMdl;
     private java.util.ArrayList<S1S2> unitList;
 
-    public MrucMdl(UserMdl userMdl)
+    public KeysMdl()
     {
-        this.userMdl = userMdl;
     }
 
     public void init()
     {
-        setUnitMdl(new UnitMdl(userMdl));
-        getUnitMdl().init();
+        unitList = new java.util.ArrayList<S1S2>();
     }
 
-    /**
-     * @return the unitMdl
-     */
-    public UnitMdl getUnitMdl()
+    @Override
+    public void setSelectedItem(Object anItem)
     {
-        return unitMdl;
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
-    /**
-     * @param unitMdl the unitMdl to set
-     */
-    public void setUnitMdl(UnitMdl unitMdl)
+    @Override
+    public Object getSelectedItem()
     {
-        this.unitMdl = unitMdl;
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public int getSize()
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public Object getElementAt(int index)
+    {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

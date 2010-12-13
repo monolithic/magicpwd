@@ -19,6 +19,7 @@ package com.magicpwd.v.mruc;
 import com.magicpwd.__a.AFrame;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.mruc.MrucMdl;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.TrayPtn;
 
@@ -30,6 +31,7 @@ import com.magicpwd.v.TrayPtn;
 public class MrucPtn extends AFrame
 {
 
+    private MrucMdl mrucMdl;
     private java.util.ArrayList<BodyPtn> bodyList;
 
     public MrucPtn(TrayPtn trayPtn, UserMdl userMdl)
@@ -56,6 +58,8 @@ public class MrucPtn extends AFrame
 
     public void initData()
     {
+        mrucMdl = new MrucMdl(userMdl);
+        mrucMdl.init();
     }
 
     @Override

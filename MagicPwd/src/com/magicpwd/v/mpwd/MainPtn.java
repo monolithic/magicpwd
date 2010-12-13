@@ -233,7 +233,7 @@ public class MainPtn extends AFrame
         java.util.Date s = c.getTime();
         c.add(java.util.Calendar.DAY_OF_MONTH, 1);
         java.util.Date t = c.getTime();
-        mpwdMdl.getListMdl().listTask(s, t);
+        mpwdMdl.getListMdl().listHint(s, t);
         return true;
     }
 
@@ -968,7 +968,7 @@ public class MainPtn extends AFrame
             c.set(java.util.Calendar.SECOND, 0);
             c.set(java.util.Calendar.MILLISECOND, 0);
             c.add(java.util.Calendar.DAY_OF_MONTH, 1);
-            mpwdMdl.getListMdl().listTask(s, c.getTime());
+            mpwdMdl.getListMdl().listHint(s, c.getTime());
             return;
         }
         java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("\\d+").matcher(task);
@@ -980,43 +980,43 @@ public class MainPtn extends AFrame
         if (task.endsWith("second"))
         {
             c.add(java.util.Calendar.SECOND, time);
-            mpwdMdl.getListMdl().listTask(s, c.getTime());
+            mpwdMdl.getListMdl().listHint(s, c.getTime());
             return;
         }
         if (task.endsWith("minute"))
         {
             c.add(java.util.Calendar.MINUTE, time);
-            mpwdMdl.getListMdl().listTask(s, c.getTime());
+            mpwdMdl.getListMdl().listHint(s, c.getTime());
             return;
         }
         if (task.endsWith("hour"))
         {
             c.add(java.util.Calendar.HOUR_OF_DAY, time);
-            mpwdMdl.getListMdl().listTask(s, c.getTime());
+            mpwdMdl.getListMdl().listHint(s, c.getTime());
             return;
         }
         if (task.endsWith("day"))
         {
             c.add(java.util.Calendar.DAY_OF_MONTH, time);
-            mpwdMdl.getListMdl().listTask(s, c.getTime());
+            mpwdMdl.getListMdl().listHint(s, c.getTime());
             return;
         }
         if (task.endsWith("week"))
         {
             c.add(java.util.Calendar.WEEK_OF_YEAR, time);
-            mpwdMdl.getListMdl().listTask(s, c.getTime());
+            mpwdMdl.getListMdl().listHint(s, c.getTime());
             return;
         }
         if (task.endsWith("month"))
         {
             c.add(java.util.Calendar.MONTH, time);
-            mpwdMdl.getListMdl().listTask(s, c.getTime());
+            mpwdMdl.getListMdl().listHint(s, c.getTime());
             return;
         }
         if (task.endsWith("year"))
         {
             c.add(java.util.Calendar.YEAR, time);
-            mpwdMdl.getListMdl().listTask(s, c.getTime());
+            mpwdMdl.getListMdl().listHint(s, c.getTime());
             return;
         }
     }
