@@ -60,27 +60,31 @@ public final class WComputer
     /** 操作符堆栈 */
     private static Stack<WOperator> oprStack;
 
+    public WComputer()
+    {
+    }
+
     /**
      * 仅支持小括号及 + - * / % 运算的方法
      *
-     * @param exps
+     * @param exp
      * @return
      */
-    public static int calculate(String exps) throws Exception
+    public BigDecimal calculate(String exp, MathContext ctx) throws Exception
     {
-        if (!Char.isValidate(exps))
+        if (!Char.isValidate(exp))
         {
-            return 0;
+            return BigDecimal.ZERO;
         }
 
-        exps = exps.trim();
-        exps = '(' + exps + ')';
+        exp = exp.trim();
+        exp = '(' + exp + ')';
 
-        Stack<Integer> numStack = new Stack<Integer>();
+        Stack<BigDecimal> numStack = new Stack<BigDecimal>();
         Stack<Character> oprStack = new Stack<Character>();
 
         StringBuilder sb = new StringBuilder();
-        char[] a = exps.toCharArray();
+        char[] a = exp.toCharArray();
         char t;
         boolean b = false;
         for (char c : a)
@@ -95,7 +99,7 @@ public final class WComputer
             {
                 if (sb.length() > 0)
                 {
-                    numStack.push(Integer.parseInt(sb.toString()));
+                    numStack.push(new BigDecimal(sb.toString()));
                     sb.delete(0, sb.length());
                 }
                 while (!oprStack.isEmpty())
@@ -105,7 +109,7 @@ public final class WComputer
                     {
                         break;
                     }
-                    numStack.push(calculate(numStack.pop(), oprStack.pop(), numStack.pop()));
+                    numStack.push(calculate(numStack.pop(), oprStack.pop(), numStack.pop(), ctx));
                 }
                 oprStack.pop();
                 b = false;
@@ -122,7 +126,7 @@ public final class WComputer
 
                 if (sb.length() > 0)
                 {
-                    numStack.push(Integer.parseInt(sb.toString()));
+                    numStack.push(new BigDecimal(sb.toString()));
                     sb.delete(0, sb.length());
                 }
                 oprStack.push(c);
@@ -140,7 +144,7 @@ public final class WComputer
 
                 if (sb.length() > 0)
                 {
-                    numStack.push(Integer.parseInt(sb.toString()));
+                    numStack.push(new BigDecimal(sb.toString()));
                     sb.delete(0, sb.length());
                 }
                 oprStack.push(c);
@@ -151,7 +155,7 @@ public final class WComputer
             {
                 if (sb.length() > 0)
                 {
-                    numStack.push(Integer.parseInt(sb.toString()));
+                    numStack.push(new BigDecimal(sb.toString()));
                     sb.delete(0, sb.length());
                 }
                 while (!oprStack.isEmpty())
@@ -161,13 +165,13 @@ public final class WComputer
                     {
                         break;
                     }
-                    numStack.push(calculate(numStack.pop(), oprStack.pop(), numStack.pop()));
+                    numStack.push(calculate(numStack.pop(), oprStack.pop(), numStack.pop(), ctx));
                 }
                 oprStack.push(c);
                 b = true;
                 continue;
             }
-            if (c >= '0' && c <= '9')
+            if ((c >= '0' && c <= '9') || c == '.')
             {
                 sb.append(c);
                 b = false;
@@ -182,22 +186,22 @@ public final class WComputer
      * @param numStack
      * @param c
      */
-    private static int calculate(int r, char c, int l)
+    private static BigDecimal calculate(BigDecimal r, char c, BigDecimal l, MathContext t)
     {
         switch (c)
         {
             case '+':
-                return (l + r);
+                return l.add(r, t);
             case '-':
-                return (l - r);
+                return l.subtract(r, t);
             case '*':
-                return (l * r);
+                return l.multiply(r, t);
             case '/':
-                return (l / r);
+                return l.divide(r, t);
             case '%':
-                return (l % r);
+                return l.divideToIntegralValue(r, t);
             default:
-                return (0);
+                return BigDecimal.ZERO;
         }
     }
 

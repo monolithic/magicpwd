@@ -51,7 +51,7 @@ public abstract class ASignBean extends AEditBean implements IMpwdBean
         pl_PropConf.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_SignConf = new BtnLabel();
-        bt_SignConf.setIcon(formPtn.readFavIcon("pwds-options", false));
+        bt_SignConf.setIcon(formPtn.readFavIcon("sign-options", false));
         pl_PropConf.add(bt_SignConf);
 
         pm_ConfMenu = new javax.swing.JPopupMenu();
@@ -91,9 +91,10 @@ public abstract class ASignBean extends AEditBean implements IMpwdBean
                 mi_MenuItemActionPerformed(e);
             }
         };
+        mi_ConfDef.setActionCommand("def:P30F7E02");
         mi_ConfDef.addActionListener(action);
-        formPtn.getMenuPtn().getSubMenu("line-options", pm_ConfMenu, action);
-        WButtonGroup group = formPtn.getMenuPtn().getGroup("");
+        formPtn.getMenuPtn().getSubMenu("sign-options", pm_ConfMenu, action);
+        WButtonGroup group = formPtn.getMenuPtn().getGroup("sign-options");
         if (group != null)
         {
             group.add(mi_ConfDef);
@@ -104,10 +105,10 @@ public abstract class ASignBean extends AEditBean implements IMpwdBean
 
     protected void showConfData()
     {
-        WButtonGroup group = formPtn.getMenuPtn().getGroup("");
+        WButtonGroup group = formPtn.getMenuPtn().getGroup("sign-options");
         if (group != null)
         {
-            if (!group.setSelected(itemData.getSpec(IEditItem.SPEC_SIGN_TYPE, ""), true))
+            if (!group.setSelected(itemData.getSpec(IEditItem.SPEC_SIGN_TYPE, "") + ':' + itemData.getSpec(IEditItem.SPEC_SIGN_TPLT, ""), true))
             {
                 mi_ConfDef.setSelected(true);
             }
@@ -121,6 +122,42 @@ public abstract class ASignBean extends AEditBean implements IMpwdBean
 
     private void mi_MenuItemActionPerformed(java.awt.event.ActionEvent e)
     {
+        String cmd = e.getActionCommand();
+        if (!java.util.regex.Pattern.matches("^[A-Za-z]{3}:.+$", cmd))
+        {
+            return;
+        }
+        String tmp = cmd.toUpperCase();
+        if (tmp.startsWith("TIP:"))
+        {
+            itemData.setSpec(IEditItem.SPEC_SIGN_TYPE, "tip");
+            itemData.setSpec(IEditItem.SPEC_SIGN_TPLT, cmd.substring(4));
+            return;
+        }
+        if (tmp.startsWith("SEP:"))
+        {
+            itemData.setSpec(IEditItem.SPEC_SIGN_TYPE, "sep");
+            itemData.setSpec(IEditItem.SPEC_SIGN_TPLT, cmd.substring(4));
+            return;
+        }
+        if (tmp.startsWith("DIV:"))
+        {
+            itemData.setSpec(IEditItem.SPEC_SIGN_TYPE, "div");
+            itemData.setSpec(IEditItem.SPEC_SIGN_TPLT, cmd.substring(4));
+            return;
+        }
+        if (tmp.startsWith("TAB:"))
+        {
+            itemData.setSpec(IEditItem.SPEC_SIGN_TYPE, "tab");
+            itemData.setSpec(IEditItem.SPEC_SIGN_TPLT, cmd.substring(4));
+            return;
+        }
+        if (tmp.startsWith("DEF:"))
+        {
+            itemData.setSpec(IEditItem.SPEC_SIGN_TYPE, "def");
+            itemData.setSpec(IEditItem.SPEC_SIGN_TPLT, cmd.substring(4));
+            return;
+        }
     }
     protected javax.swing.JTextField tf_PropData;
     // 配置信息

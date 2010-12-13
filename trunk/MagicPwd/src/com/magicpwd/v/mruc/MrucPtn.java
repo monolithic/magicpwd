@@ -119,6 +119,14 @@ public class MrucPtn extends AFrame
     {
     }
 
+    public void compute(String input)
+    {
+        for (BodyPtn ptn : bodyList)
+        {
+            ptn.showData(input);
+        }
+    }
+
     private void cb_ComboActionPerformed(java.awt.event.ActionEvent evt)
     {
         Object object = cb_Combo.getSelectedItem();
@@ -139,7 +147,7 @@ public class MrucPtn extends AFrame
             int size = unitMdl.getItemSize();
             while (step < size)
             {
-                bodyPtn = new BodyPtn(unitMdl);
+                bodyPtn = new BodyPtn(this, unitMdl);
                 step = bodyPtn.initView(step);
                 bodyPtn.initLang();
                 bodyPtn.initData();
