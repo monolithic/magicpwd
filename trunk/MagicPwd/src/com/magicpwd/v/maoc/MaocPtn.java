@@ -17,8 +17,13 @@
 package com.magicpwd.v.maoc;
 
 import com.magicpwd.__a.AFrame;
+import com.magicpwd._comn.S1S2;
+import com.magicpwd._util.Bean;
+import com.magicpwd._util.Char;
+import com.magicpwd._util.Lang;
+import com.magicpwd._util.Logs;
 import com.magicpwd.m.UserMdl;
-import com.magicpwd.m.mruc.MrucMdl;
+import com.magicpwd.m.maoc.MaocMdl;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.tray.TrayPtn;
 
@@ -30,7 +35,9 @@ import com.magicpwd.v.tray.TrayPtn;
 public class MaocPtn extends AFrame
 {
 
-    private MrucMdl maocMdl;
+    private MaocMdl maocMdl;
+    private CalcPtn calcPtn;
+    private java.util.ArrayList<S1S2> list;
 
     public MaocPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
@@ -39,6 +46,51 @@ public class MaocPtn extends AFrame
 
     public void initView()
     {
+        javax.swing.JScrollPane jsp = new javax.swing.JScrollPane();
+        ls_StepList = new javax.swing.JList();
+        tf_MathText = new javax.swing.JTextField();
+        bt_KeyBoard = new javax.swing.JButton();
+        bt_MathText = new javax.swing.JButton();
+//        calcPtn = new CalcPtn();
+//        calcPtn.initView();
+
+        jsp.setViewportView(ls_StepList);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this.getContentPane());
+        this.getContentPane().setLayout(layout);
+        javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
+        hsg1.addComponent(tf_MathText, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE);
+        hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg1.addComponent(bt_MathText, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg1.addComponent(bt_KeyBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+//        hpg.addComponent(calcPtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hpg.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hsg1);
+        hpg.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE);
+        javax.swing.GroupLayout.SequentialGroup hsg2 = layout.createSequentialGroup();
+        hsg2.addContainerGap();
+        hsg2.addGroup(hpg);
+        hsg2.addContainerGap();
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(hsg2));
+
+        javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg.addComponent(tf_MathText, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg.addComponent(bt_KeyBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg.addComponent(bt_MathText, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
+        vsg.addContainerGap();
+        vsg.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE);
+        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg.addGroup(vpg);
+//        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+//        vsg.addComponent(calcPtn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg.addContainerGap();
+        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(vsg));
+
+        this.pack();
+        Bean.centerForm(this, null);
+        this.setVisible(true);
     }
 
     public void initLang()
@@ -47,8 +99,22 @@ public class MaocPtn extends AFrame
 
     public void initData()
     {
-        maocMdl = new MrucMdl(userMdl);
+        maocMdl = new MaocMdl(userMdl);
         maocMdl.init();
+
+        java.awt.event.ActionListener listener = new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                bt_MathTextActionPerformed(e);
+            }
+        };
+        tf_MathText.addActionListener(listener);
+        bt_MathText.addActionListener(listener);
+
+        list = new java.util.ArrayList<S1S2>();
     }
 
     @Override
@@ -67,4 +133,29 @@ public class MaocPtn extends AFrame
     public void requestFocus()
     {
     }
+
+    private void bt_MathTextActionPerformed(java.awt.event.ActionEvent e)
+    {
+        String math = tf_MathText.getText().trim();
+        if (!Char.isValidate(math))
+        {
+            return;
+        }
+
+        try
+        {
+            list.clear();
+            maocMdl.getComputer().calculate(math, 8, list);
+            System.out.println(list.get(list.size() - 1).getV2());
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            Lang.showMesg(this, null, exp.getLocalizedMessage());
+        }
+    }
+    private javax.swing.JButton bt_KeyBoard;
+    private javax.swing.JButton bt_MathText;
+    private javax.swing.JList ls_StepList;
+    private javax.swing.JTextField tf_MathText;
 }

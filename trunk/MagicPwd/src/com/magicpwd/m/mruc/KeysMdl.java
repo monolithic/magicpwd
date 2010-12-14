@@ -35,7 +35,7 @@ public class KeysMdl extends javax.swing.DefaultComboBoxModel
         this.userMdl = userMdl;
     }
 
-    public void init()
+    void init()
     {
         unitList = new java.util.ArrayList<S1S2>();
         DBA3000.findUnitList(userMdl, unitList);
