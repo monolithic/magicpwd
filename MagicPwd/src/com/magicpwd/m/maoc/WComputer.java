@@ -57,9 +57,9 @@ public final class WComputer
 {
 
     /** 操作数堆栈 */
-    private static Stack<String> numStack;
+    private Stack<String> numStack;
     /** 操作符堆栈 */
-    private static Stack<WOperator> oprStack;
+    private Stack<WOperator> oprStack;
 
     public WComputer()
     {
@@ -217,7 +217,7 @@ public final class WComputer
      *        v2:单元运算结果；<br />
      * @return
      */
-    public static String calculate(String exps, int scale, List<S1S2> stepList) throws Exception
+    public String calculate(String exps, int scale, List<S1S2> stepList) throws Exception
     {
         if (exps == null)
         {
@@ -537,7 +537,7 @@ public final class WComputer
      * @param opds 操作数
      * @return
      */
-    private static S1S2 calculate(String exps, int scale) throws Exception
+    private S1S2 calculate(String exps, int scale) throws Exception
     {
         String lOpd = null;
         String mOpr = oprStack.pop().getS();

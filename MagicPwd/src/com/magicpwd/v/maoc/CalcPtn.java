@@ -37,11 +37,13 @@ import javax.swing.text.Document;
 public class CalcPtn extends javax.swing.JPanel
 {
 
+    private WComputer computer;
     /** 计算精度 */
     private int precision = 8;
 
-    public CalcPtn()
+    public CalcPtn(WComputer computer)
     {
+        this.computer = computer;
     }
 
     /*
@@ -959,7 +961,7 @@ public class CalcPtn extends javax.swing.JPanel
         try
         {
             List<S1S2> stepList = new ArrayList<S1S2>();
-            ta_UserForm.append(WComputer.calculate(exps, precision, stepList));
+            ta_UserForm.append(computer.calculate(exps, precision, stepList));
         }
         catch (Exception exp)
         {

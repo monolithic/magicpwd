@@ -16,6 +16,8 @@
  */
 package com.magicpwd.m.maoc;
 
+import com.magicpwd.m.UserMdl;
+
 /**
  * Application: MagicPwd
  * Author     : Amon
@@ -29,4 +31,25 @@ package com.magicpwd.m.maoc;
  */
 public class MaocMdl
 {
+
+    private UserMdl userMdl;
+    private WComputer computer;
+
+    public MaocMdl(UserMdl userMdl)
+    {
+        this.userMdl = userMdl;
+    }
+
+    public void init()
+    {
+        computer = new WComputer();
+    }
+
+    /**
+     * @return the computer
+     */
+    public WComputer getComputer()
+    {
+        return computer;
+    }
 }
