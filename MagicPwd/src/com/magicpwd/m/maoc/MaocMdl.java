@@ -16,53 +16,17 @@
  */
 package com.magicpwd.m.maoc;
 
-import com.magicpwd.m.UserMdl;
-
 /**
  * Application: MagicPwd
  * Author     : Amon
  * Encoding   : UTF-8
- * Created    : 2010-12-12 17:33:27
+ * Created    : 2010-12-14 16:13:15
  * Website    : http://magicpwd.com/
  * Project    : http://magicpwd.googlecode.com/
  * Contact    : Amon@magicpwd.com
  * CopyRight  : Winshine.biz
  * Description:
  */
-public final class MaocMdl
+public class MaocMdl
 {
-
-    private UserMdl userMdl;
-    private KeysMdl keysMdl;
-    private UnitMdl unitMdl;
-
-    public MaocMdl(UserMdl userMdl)
-    {
-        this.userMdl = userMdl;
-    }
-
-    public void init()
-    {
-        keysMdl = new KeysMdl(userMdl);
-        keysMdl.init();
-
-        unitMdl = new UnitMdl(userMdl);
-        unitMdl.init();
-    }
-
-    /**
-     * @return the unitMdl
-     */
-    public UnitMdl getUnitMdl()
-    {
-        return unitMdl;
-    }
-
-    /**
-     * @return the keysMdl
-     */
-    public KeysMdl getKeysMdl()
-    {
-        return keysMdl;
-    }
 }

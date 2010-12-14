@@ -223,6 +223,7 @@ public interface ConsEnv
     int APP_MODE_MWIZ = 1;
     int APP_MODE_MPAD = 2;
     int APP_MODE_MAOC = 3;
+    int APP_MODE_MRUC = 4;
     String CHAR_ALT_KEY = "@";
     String SKIN_FEEL_DEFAULT = "default";
     String SKIN_LOOK_DEFAULT = "default";

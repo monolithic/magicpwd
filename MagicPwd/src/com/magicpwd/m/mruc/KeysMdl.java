@@ -14,57 +14,42 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.v.maoc;
+package com.magicpwd.m.mruc;
 
-import com.magicpwd.__a.AFrame;
+import com.magicpwd._comn.S1S2;
+import com.magicpwd.d.DBA3000;
 import com.magicpwd.m.UserMdl;
-import com.magicpwd.m.mruc.MrucMdl;
-import com.magicpwd.v.MenuPtn;
-import com.magicpwd.v.tray.TrayPtn;
 
 /**
- * 单位换算
- * 
+ *
  * @author Amon
  */
-public class MaocPtn extends AFrame
+public class KeysMdl extends javax.swing.DefaultComboBoxModel
 {
 
-    private MrucMdl maocMdl;
+    private UserMdl userMdl;
+    private java.util.ArrayList<S1S2> unitList;
 
-    public MaocPtn(TrayPtn trayPtn, UserMdl userMdl)
+    public KeysMdl(UserMdl userMdl)
     {
-        super(trayPtn, userMdl);
+        this.userMdl = userMdl;
     }
 
-    public void initView()
+    public void init()
     {
-    }
-
-    public void initLang()
-    {
-    }
-
-    public void initData()
-    {
-        maocMdl = new MrucMdl(userMdl);
-        maocMdl.init();
+        unitList = new java.util.ArrayList<S1S2>();
+        DBA3000.findUnitList(userMdl, unitList);
     }
 
     @Override
-    public MenuPtn getMenuPtn()
+    public int getSize()
     {
-        return null;
+        return unitList.size();
     }
 
     @Override
-    public boolean endSave()
+    public Object getElementAt(int index)
     {
-        return true;
-    }
-
-    @Override
-    public void requestFocus()
-    {
+        return unitList.get(index);
     }
 }

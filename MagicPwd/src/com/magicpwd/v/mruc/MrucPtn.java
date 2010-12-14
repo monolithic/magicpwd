@@ -14,8 +14,9 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.v.maoc;
+package com.magicpwd.v.mruc;
 
+import com.magicpwd.__a.AFrame;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
@@ -23,27 +24,32 @@ import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.m.UserMdl;
-import com.magicpwd.m.maoc.KeysMdl;
-import com.magicpwd.m.maoc.UnitMdl;
+import com.magicpwd.m.mruc.MrucMdl;
+import com.magicpwd.m.mruc.UnitMdl;
+import com.magicpwd.v.MenuPtn;
+import com.magicpwd.v.tray.TrayPtn;
 
 /**
- *
- * @author Amon
+ * Application: MagicPwd
+ * Author     : Amon
+ * Encoding   : UTF-8
+ * Created    : 2010-12-14 16:06:39
+ * Website    : http://magicpwd.com/
+ * Project    : http://magicpwd.googlecode.com/
+ * Contact    : Amon@magicpwd.com
+ * CopyRight  : Winshine.biz
+ * Description:
  */
-public class UnitPtn extends javax.swing.JPanel
+public class MrucPtn extends AFrame
 {
 
-    private MaocPtn maocPtn;
-    private UserMdl userMdl;
-    private UnitMdl unitMdl;
-    private KeysMdl keysMdl;
+    private MrucMdl mrucMdl;
     private S1S2 lastItem;
-    private java.util.ArrayList<UnitBar> bodyList;
+    private java.util.ArrayList<BodyPtn> bodyList;
 
-    public UnitPtn(MaocPtn maocPtn, UserMdl userMdl)
+    public MrucPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
-        this.maocPtn = maocPtn;
-        this.userMdl = userMdl;
+        super(trayPtn, userMdl);
     }
 
     public void initView()
@@ -51,9 +57,10 @@ public class UnitPtn extends javax.swing.JPanel
         pl_Panel = new javax.swing.JPanel();
         cb_Combo = new javax.swing.JComboBox();
         lb_Label = new javax.swing.JLabel();
+        lb_Label.setLabelFor(cb_Combo);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this.getContentPane());
+        this.getContentPane().setLayout(layout);
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
         hsg1.addContainerGap();
         hsg1.addComponent(pl_Panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
@@ -76,21 +83,25 @@ public class UnitPtn extends javax.swing.JPanel
         vsg.addGroup(vpg);
         vsg.addContainerGap();
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(vsg));
+
+        this.pack();
+        Bean.centerForm(this, null);
+        this.setVisible(true);
     }
 
     public void initLang()
     {
         Bean.setText(lb_Label, Lang.getLang(LangRes.P30FB301, "单位类型(@T)"));
+        this.pack();
+        Bean.centerForm(this, null);
     }
 
     public void initData()
     {
-        unitMdl = new UnitMdl(userMdl);
-        unitMdl.init();
+        mrucMdl = new MrucMdl(userMdl);
+        mrucMdl.init();
 
-        keysMdl = new KeysMdl(userMdl);
-        keysMdl.init();
-        cb_Combo.setModel(keysMdl);
+        cb_Combo.setModel(mrucMdl.getKeysMdl());
         cb_Combo.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -101,12 +112,32 @@ public class UnitPtn extends javax.swing.JPanel
             }
         });
 
-        bodyList = new java.util.ArrayList<UnitBar>();
+        bodyList = new java.util.ArrayList<BodyPtn>();
+
+        this.pack();
+        Bean.centerForm(this, null);
+    }
+
+    @Override
+    public MenuPtn getMenuPtn()
+    {
+        return null;
+    }
+
+    @Override
+    public boolean endSave()
+    {
+        return true;
+    }
+
+    @Override
+    public void requestFocus()
+    {
     }
 
     public void compute(String input)
     {
-        for (UnitBar ptn : bodyList)
+        for (BodyPtn ptn : bodyList)
         {
             ptn.showData(input);
         }
@@ -123,15 +154,16 @@ public class UnitPtn extends javax.swing.JPanel
 
         try
         {
+            UnitMdl unitMdl = mrucMdl.getUnitMdl();
             unitMdl.loadData(lastItem.getK());
             bodyList.clear();
 
             int step = ConsEnv.PWDS_HEAD_SIZE;
-            UnitBar bodyPtn;
+            BodyPtn bodyPtn;
             int size = unitMdl.getItemSize();
             while (step < size)
             {
-                bodyPtn = new UnitBar(this, unitMdl);
+                bodyPtn = new BodyPtn(null, unitMdl);
                 step = bodyPtn.initView(step);
                 bodyPtn.initLang();
                 bodyPtn.initData();

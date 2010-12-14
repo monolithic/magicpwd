@@ -14,7 +14,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.m.maoc;
+package com.magicpwd.m.mruc;
 
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
