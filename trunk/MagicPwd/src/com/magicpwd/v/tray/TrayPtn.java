@@ -33,6 +33,7 @@ import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.maoc.MaocPtn;
 import com.magicpwd.v.mpad.MiniPtn;
 import com.magicpwd.v.mpwd.MainPtn;
+import com.magicpwd.v.mruc.MrucPtn;
 import com.magicpwd.v.mwiz.NormPtn;
 
 /**
@@ -176,6 +177,9 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
                     break;
                 case ConsEnv.APP_MODE_MAOC:
                     showMaocPtn();
+                    break;
+                case ConsEnv.APP_MODE_MRUC:
+                    showMrucPtn();
                     break;
                 default:
                     return false;
@@ -329,6 +333,24 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
 
         mfCurrForm = mp_MaocPtn;
         currPtn = ConsEnv.APP_MODE_MAOC;
+    }
+
+    private void showMrucPtn()
+    {
+        if (mp_MrucPtn == null)
+        {
+            mp_MrucPtn = new MrucPtn(this, userMdl);
+            mp_MrucPtn.initView();
+            mp_MrucPtn.initLang();
+            mp_MrucPtn.initData();
+        }
+        else
+        {
+            mp_MrucPtn.setVisible(true);
+        }
+
+        mfCurrForm = mp_MrucPtn;
+        currPtn = ConsEnv.APP_MODE_MRUC;
     }
 
     @Override
@@ -544,6 +566,9 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
                 case ConsEnv.APP_MODE_MAOC:
                     showMaocPtn();
                     break;
+                case ConsEnv.APP_MODE_MRUC:
+                    showMrucPtn();
+                    break;
                 default:
                     break;
             }
@@ -713,6 +738,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         }
     }
     private static MaocPtn mp_MaocPtn;
+    private static MrucPtn mp_MrucPtn;
     private static MiniPtn mp_MiniPtn;
     private static NormPtn mp_NormPtn;
     private static MainPtn mp_MainPtn;

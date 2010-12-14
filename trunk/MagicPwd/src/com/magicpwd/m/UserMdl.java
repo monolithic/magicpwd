@@ -91,9 +91,13 @@ public class UserMdl
             {
                 UserMdl.appMode = ConsEnv.APP_MODE_MPAD;
             }
-            else if ("mruc".equalsIgnoreCase(appMode))
+            else if ("maoc".equalsIgnoreCase(appMode))
             {
                 UserMdl.appMode = ConsEnv.APP_MODE_MAOC;
+            }
+            else if ("mruc".equalsIgnoreCase(appMode))
+            {
+                UserMdl.appMode = ConsEnv.APP_MODE_MRUC;
             }
         }
     }

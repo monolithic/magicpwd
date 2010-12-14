@@ -14,7 +14,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.v.maoc;
+package com.magicpwd.v.mruc;
 
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._cons.ConsDat;
@@ -25,7 +25,7 @@ import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.m.maoc.WComputer;
-import com.magicpwd.m.maoc.UnitMdl;
+import com.magicpwd.m.mruc.UnitMdl;
 import java.math.BigDecimal;
 import java.math.MathContext;
 
@@ -33,19 +33,19 @@ import java.math.MathContext;
  *
  * @author Amon
  */
-public class UnitBar extends javax.swing.JPanel
+public class BodyPtn extends javax.swing.JPanel
 {
 
-    private UnitPtn unitPtn;
+    private MrucPtn mrucPtn;
     private UnitMdl unitMdl;
     private int currStep;
     private int lastStep;
     private String formula;
     private static WComputer computer;
 
-    public UnitBar(UnitPtn unitPtn, UnitMdl unitMdl)
+    public BodyPtn(MrucPtn mrucPtn, UnitMdl unitMdl)
     {
-        this.unitPtn = unitPtn;
+        this.mrucPtn = mrucPtn;
         this.unitMdl = unitMdl;
         computer = new WComputer();
     }
@@ -247,7 +247,7 @@ public class UnitBar extends javax.swing.JPanel
         String val = field.getText().replaceAll("\\s+", "");
         if (val.length() < 1 || !Char.isValidatePositiveDecimal(val))
         {
-            Lang.showMesg(unitPtn, LangRes.P30FBA010, "请输入一个非负数值！");
+            Lang.showMesg(mrucPtn, LangRes.P30FBA010, "请输入一个非负数值！");
             field.requestFocus();
             return;
         }
@@ -258,7 +258,7 @@ public class UnitBar extends javax.swing.JPanel
             return;
         }
 
-        unitPtn.compute(formula.replace("$input", val).replace("$value", item.getData()));
+        mrucPtn.compute(formula.replace("$input", val).replace("$value", item.getData()));
     }
     private java.util.ArrayList<javax.swing.JLabel> ls_NameList;
     private java.util.ArrayList<javax.swing.JTextField> ls_DataList;
