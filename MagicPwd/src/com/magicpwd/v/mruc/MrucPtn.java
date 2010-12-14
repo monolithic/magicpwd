@@ -163,7 +163,7 @@ public class MrucPtn extends AFrame
             int size = unitMdl.getItemSize();
             while (step < size)
             {
-                bodyPtn = new BodyPtn(null, unitMdl);
+                bodyPtn = new BodyPtn(this, unitMdl);
                 step = bodyPtn.initView(step);
                 bodyPtn.initLang();
                 bodyPtn.initData();
@@ -202,6 +202,8 @@ public class MrucPtn extends AFrame
         vsg.addGroup(vpg);
         vsg.addContainerGap();
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(vsg));
+
+        this.pack();
     }
     private javax.swing.JComboBox cb_Combo;
     private javax.swing.JLabel lb_Label;
