@@ -23,6 +23,9 @@
             <action class="com.magicpwd.e.tray.MpadAction" />
         </item>
         <item type="normal" text="$P30F9605" text-def="单位换算">
+            <action class="com.magicpwd.e.tray.MrucAction" />
+        </item>
+        <item type="normal" text="$P30F9605" text-def="计算器">
             <action class="com.magicpwd.e.tray.MaocAction" />
         </item>
         <seperator />
