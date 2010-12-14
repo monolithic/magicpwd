@@ -4,9 +4,9 @@
  */
 package test.mail;
 
-import com.magicpwd._mail.Connect;
-import com.magicpwd._mail.MailDlg;
+import com.magicpwd._bean.mail.Connect;
 import com.magicpwd._util.Logs;
+import com.magicpwd.v.mail.MailDlg;
 import javax.swing.UIManager;
 
 /**
