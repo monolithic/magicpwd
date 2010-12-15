@@ -17,7 +17,6 @@
 package com.magicpwd.m.maoc;
 
 import com.magicpwd._cons.maoc.MaocEnv;
-import com.magicpwd._comn.S1S2;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Logs;
 import java.math.BigDecimal;
@@ -212,12 +211,12 @@ public final class WComputer
      * @param exps 表达式
      * @param scale 计算精度
      * @param stepList 计算步骤列表，记录每一步的计算方法，为NULL时表示不记录运算步骤。<br />
-     *        k:当前要进行计算的步骤；<br />
-     *        v1:将进行计算的运算单元；<br />
-     *        v2:单元运算结果；<br />
+     *        s0:当前要进行计算的步骤；<br />
+     *        s1:将进行计算的运算单元；<br />
+     *        s2:单元运算结果；<br />
      * @return
      */
-    public String calculate(String exps, int scale, List<S1S2> stepList) throws Exception
+    public String calculate(String exps, int scale, List<com.magicpwd._comn.Math> stepList) throws Exception
     {
         if (exps == null)
         {
@@ -435,7 +434,7 @@ public final class WComputer
                         numBuf.delete(0, numBuf.length());
                     }
 
-                    S1S2 kvItem;
+                    com.magicpwd._comn.Math kvItem;
                     WOperator o;
 
                     // 循环处理每一个操作符
@@ -455,7 +454,7 @@ public final class WComputer
                                     {
                                         String t = numStack.peek();
                                         String p = LBT_EXP[m] + t + RBT_EXP[m];
-                                        stepList.add(new S1S2(exps, p, t));
+                                        stepList.add(new com.magicpwd._comn.Math(exps, p, t));
                                         exps = exps.replace(p, t);
                                     }
                                     break NEXT_I;
@@ -470,7 +469,7 @@ public final class WComputer
                         if (recSteps)
                         {
                             stepList.add(kvItem);
-                            exps = exps.replace(kvItem.getV(), kvItem.getV2());
+                            exps = exps.replace(kvItem.getS1(), kvItem.getS2());
                         }
                     }
                     continue NEXT_O;
@@ -493,7 +492,7 @@ public final class WComputer
                         numBuf.delete(0, numBuf.length());
                     }
 
-                    S1S2 kvItem = null;
+                    com.magicpwd._comn.Math kvItem = null;
                     // 当前运算符
                     WOperator newOpr = new WOperator(tmpOpr, OPR_INT[i]);
 
@@ -513,7 +512,7 @@ public final class WComputer
                         if (recSteps)
                         {
                             stepList.add(kvItem);
-                            exps = exps.replace(kvItem.getV(), kvItem.getV2());
+                            exps = exps.replace(kvItem.getS1(), kvItem.getS2());
                         }
                     }
                     break;
@@ -537,14 +536,14 @@ public final class WComputer
      * @param opds 操作数
      * @return
      */
-    private S1S2 calculate(String exps, int scale) throws Exception
+    private com.magicpwd._comn.Math calculate(String exps, int scale) throws Exception
     {
         String lOpd = null;
         String mOpr = oprStack.pop().getS();
         String rOpd = numStack.pop();
         String tNum;
 
-        S1S2 kvItem = new S1S2();
+        com.magicpwd._comn.Math kvItem = new com.magicpwd._comn.Math();
 
         // 加
         if (MaocEnv.OPR_ADD_EXP.equals(mOpr))
@@ -553,9 +552,9 @@ public final class WComputer
             Logs.log("运算：" + lOpd + mOpr + rOpd);
             tNum = new BigDecimal(lOpd).add(new BigDecimal(rOpd)).stripTrailingZeros().toPlainString();
             numStack.push(tNum);
-            kvItem.setK(exps);
-            kvItem.setV(lOpd + mOpr + rOpd);
-            kvItem.setV2(tNum);
+            kvItem.setS0(exps);
+            kvItem.setS1(lOpd + mOpr + rOpd);
+            kvItem.setS2(tNum);
             return kvItem;
         }
 
@@ -566,9 +565,9 @@ public final class WComputer
             Logs.log("运算：" + lOpd + mOpr + rOpd);
             tNum = new BigDecimal(lOpd).subtract(new BigDecimal(rOpd)).stripTrailingZeros().toPlainString();
             numStack.push(tNum);
-            kvItem.setK(exps);
-            kvItem.setV(lOpd + mOpr + rOpd);
-            kvItem.setV2(tNum);
+            kvItem.setS0(exps);
+            kvItem.setS1(lOpd + mOpr + rOpd);
+            kvItem.setS2(tNum);
             return kvItem;
         }
 
@@ -579,9 +578,9 @@ public final class WComputer
             Logs.log("运算：" + lOpd + mOpr + rOpd);
             tNum = new BigDecimal(lOpd).multiply(new BigDecimal(rOpd)).stripTrailingZeros().toPlainString();
             numStack.push(tNum);
-            kvItem.setK(exps);
-            kvItem.setV(lOpd + mOpr + rOpd);
-            kvItem.setV2(tNum);
+            kvItem.setS0(exps);
+            kvItem.setS1(lOpd + mOpr + rOpd);
+            kvItem.setS2(tNum);
             return kvItem;
         }
 
@@ -597,9 +596,9 @@ public final class WComputer
             Logs.log("运算：" + lOpd + mOpr + rOpd);
             tNum = new BigDecimal(lOpd).divide(t, scale, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros().toPlainString();
             numStack.push(tNum);
-            kvItem.setK(exps);
-            kvItem.setV(lOpd + mOpr + rOpd);
-            kvItem.setV2(tNum);
+            kvItem.setS0(exps);
+            kvItem.setS1(lOpd + mOpr + rOpd);
+            kvItem.setS2(tNum);
             return kvItem;
         }
 
@@ -615,9 +614,9 @@ public final class WComputer
             Logs.log("运算：" + lOpd + mOpr + rOpd);
             tNum = new BigDecimal(lOpd).remainder(t).stripTrailingZeros().toPlainString();
             numStack.push(tNum);
-            kvItem.setK(exps);
-            kvItem.setV(lOpd + mOpr + rOpd);
-            kvItem.setV2(tNum);
+            kvItem.setS0(exps);
+            kvItem.setS1(lOpd + mOpr + rOpd);
+            kvItem.setS2(tNum);
             return kvItem;
         }
 
@@ -630,9 +629,9 @@ public final class WComputer
                 lOpd = numStack.pop();
                 tNum = new BigDecimal(lOpd).pow(t).stripTrailingZeros().toPlainString();
                 numStack.push(tNum);
-                kvItem.setK(exps);
-                kvItem.setV(lOpd + mOpr + rOpd);
-                kvItem.setV2(tNum);
+                kvItem.setS0(exps);
+                kvItem.setS1(lOpd + mOpr + rOpd);
+                kvItem.setS2(tNum);
                 return kvItem;
             }
             catch (ArithmeticException exp)
@@ -650,9 +649,9 @@ public final class WComputer
             BigInteger tr = new BigInteger(lOpd);
             tNum = root(tl, tr.intValue(), scale).stripTrailingZeros().toPlainString();
             numStack.push(tNum);
-            kvItem.setK(exps);
-            kvItem.setV(lOpd + mOpr + rOpd);
-            kvItem.setV2(tNum);
+            kvItem.setS0(exps);
+            kvItem.setS1(lOpd + mOpr + rOpd);
+            kvItem.setS2(tNum);
             return kvItem;
         }
 
@@ -663,9 +662,9 @@ public final class WComputer
             t = new BigDecimal(Math.sin(t.doubleValue()));
             tNum = t.setScale(scale, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros().toPlainString();
             numStack.push(tNum);
-            kvItem.setK(exps);
-            kvItem.setV(mOpr + rOpd);
-            kvItem.setV2(tNum);
+            kvItem.setS0(exps);
+            kvItem.setS1(mOpr + rOpd);
+            kvItem.setS2(tNum);
             return kvItem;
         }
 
@@ -676,9 +675,9 @@ public final class WComputer
             t = new BigDecimal(Math.cos(t.doubleValue()));
             tNum = t.setScale(scale, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros().toPlainString();
             numStack.push(tNum);
-            kvItem.setK(exps);
-            kvItem.setV(mOpr + rOpd);
-            kvItem.setV2(tNum);
+            kvItem.setS0(exps);
+            kvItem.setS1(mOpr + rOpd);
+            kvItem.setS2(tNum);
             return kvItem;
         }
 
@@ -689,9 +688,9 @@ public final class WComputer
             t = new BigDecimal(Math.tan(t.doubleValue()));
             tNum = t.setScale(scale, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros().toPlainString();
             numStack.push(tNum);
-            kvItem.setK(exps);
-            kvItem.setV(mOpr + rOpd);
-            kvItem.setV2(tNum);
+            kvItem.setS0(exps);
+            kvItem.setS1(mOpr + rOpd);
+            kvItem.setS2(tNum);
             return kvItem;
         }
 
@@ -702,9 +701,9 @@ public final class WComputer
             t = new BigDecimal(Math.asin(t.doubleValue()));
             tNum = t.setScale(scale, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros().toPlainString();
             numStack.push(tNum);
-            kvItem.setK(exps);
-            kvItem.setV(mOpr + rOpd);
-            kvItem.setV2(tNum);
+            kvItem.setS0(exps);
+            kvItem.setS1(mOpr + rOpd);
+            kvItem.setS2(tNum);
             return kvItem;
         }
 
@@ -715,9 +714,9 @@ public final class WComputer
             t = new BigDecimal(Math.acos(t.doubleValue()));
             tNum = t.setScale(scale, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros().toPlainString();
             numStack.push(tNum);
-            kvItem.setK(exps);
-            kvItem.setV(mOpr + rOpd);
-            kvItem.setV2(tNum);
+            kvItem.setS0(exps);
+            kvItem.setS1(mOpr + rOpd);
+            kvItem.setS2(tNum);
             return kvItem;
         }
 
@@ -728,9 +727,9 @@ public final class WComputer
             t = new BigDecimal(Math.atan(t.doubleValue()));
             tNum = t.setScale(scale, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros().toPlainString();
             numStack.push(tNum);
-            kvItem.setK(exps);
-            kvItem.setV(mOpr + rOpd);
-            kvItem.setV2(tNum);
+            kvItem.setS0(exps);
+            kvItem.setS1(mOpr + rOpd);
+            kvItem.setS2(tNum);
             return kvItem;
         }
 
@@ -760,9 +759,9 @@ public final class WComputer
             }
             tNum = t.toString();
             numStack.push(tNum);
-            kvItem.setK(exps);
-            kvItem.setV(rOpd + mOpr);
-            kvItem.setV2(tNum);
+            kvItem.setS0(exps);
+            kvItem.setS1(rOpd + mOpr);
+            kvItem.setS2(tNum);
             return kvItem;
         }
 
@@ -773,9 +772,9 @@ public final class WComputer
             t = new BigDecimal(Math.log10(t.doubleValue()));
             tNum = t.setScale(scale, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros().toPlainString();
             numStack.push(tNum);
-            kvItem.setK(exps);
-            kvItem.setV(mOpr + rOpd);
-            kvItem.setV2(tNum);
+            kvItem.setS0(exps);
+            kvItem.setS1(mOpr + rOpd);
+            kvItem.setS2(tNum);
             return kvItem;
         }
 
@@ -786,9 +785,9 @@ public final class WComputer
             t = new BigDecimal(Math.log(t.doubleValue()));
             tNum = t.setScale(scale, BigDecimal.ROUND_HALF_EVEN).stripTrailingZeros().toPlainString();
             numStack.push(tNum);
-            kvItem.setK(exps);
-            kvItem.setV(mOpr + rOpd);
-            kvItem.setV2(tNum);
+            kvItem.setS0(exps);
+            kvItem.setS1(mOpr + rOpd);
+            kvItem.setS2(tNum);
             return kvItem;
         }
 
