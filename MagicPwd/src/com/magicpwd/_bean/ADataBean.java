@@ -62,6 +62,8 @@ public abstract class ADataBean extends AEditBean
         pm_DataConf = new javax.swing.JPopupMenu();
         mi_DataDef = new javax.swing.JCheckBoxMenuItem();
         pm_DataConf.add(mi_DataDef);
+        mi_DataExp = new javax.swing.JCheckBoxMenuItem();
+        pm_DataConf.add(mi_DataExp);
         pm_DataConf.addSeparator();
     }
 
@@ -70,7 +72,9 @@ public abstract class ADataBean extends AEditBean
         Lang.setWText(bt_DataConf, LangRes.P30F1521, "@O");
         Lang.setWTips(bt_DataConf, LangRes.P30F1522, "数值格式设置(Alt + O)");
 
-        Bean.setText(mi_DataDef, Lang.getLang(LangRes.P30F7C08, "允许为空"));
+        Bean.setText(mi_DataDef, Lang.getLang(LangRes.P30F7C08, "允许为空(@N)"));
+
+        Bean.setText(mi_DataExp, Lang.getLang(LangRes.P30F7C19, "表达式(@F)"));
     }
 
     protected void initConfData()
@@ -82,6 +86,16 @@ public abstract class ADataBean extends AEditBean
             public void actionPerformed(java.awt.event.ActionEvent e)
             {
                 mi_DataDefActionPerformed(e);
+            }
+        });
+
+        mi_DataExp.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                mi_DataExpActionPerformed(e);
             }
         });
 
@@ -103,6 +117,7 @@ public abstract class ADataBean extends AEditBean
 
         // 可否为空
         mi_DataDef.setSelected(IEditItem.SPEC_VALUE_TRUE.equals(itemData.getSpec(IEditItem.SPEC_DATA_OPT)));
+        mi_DataExp.setSelected(IEditItem.SPEC_VALUE_TRUE.equals(itemData.getSpec(IEditItem.SPEC_DATA_EXP)));
         // 数据类型
         WButtonGroup group = menuPtn.getGroup("data-template");
         group.setSelected("dec:" + itemData.getSpec(IEditItem.SPEC_DATA_DEC, "0").replace("f", ""), true, "dec:-1");
@@ -228,6 +243,22 @@ public abstract class ADataBean extends AEditBean
     private void mi_DataDefActionPerformed(java.awt.event.ActionEvent evt)
     {
         itemData.setSpec(IEditItem.SPEC_DATA_OPT, mi_DataDef.isSelected() ? IEditItem.SPEC_VALUE_TRUE : IEditItem.SPEC_VALUE_FAIL);
+    }
+
+    private void mi_DataExpActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        boolean b = mi_DataExp.isSelected();
+        itemData.setSpec(IEditItem.SPEC_DATA_EXP, b ? IEditItem.SPEC_VALUE_TRUE : IEditItem.SPEC_VALUE_FAIL);
+        javax.swing.AbstractButton b1 = formPtn.getMenuPtn().getButton("data-collection");
+        if (b1 != null)
+        {
+            b1.setEnabled(!b);
+        }
+        javax.swing.AbstractButton b2 = formPtn.getMenuPtn().getButton("data-characters");
+        if (b2 != null)
+        {
+            b2.setEnabled(!b);
+        }
     }
 
     private void mi_DataConfActionPerformed(java.awt.event.ActionEvent evt)
@@ -391,6 +422,13 @@ public abstract class ADataBean extends AEditBean
             }
             Lang.showMesg(formPtn, LangRes.P30F7A4B, "数值不能为空！");
             return false;
+        }
+
+        // 表达
+        if (IEditItem.SPEC_VALUE_TRUE.equals(itemData.getSpec(IEditItem.SPEC_DATA_EXP)))
+        {
+            itemData.setData(data);
+            return true;
         }
 
         // 数据格式合法化
@@ -569,4 +607,5 @@ public abstract class ADataBean extends AEditBean
     private BtnLabel bt_DataConf;
     private javax.swing.JPopupMenu pm_DataConf;
     private javax.swing.JCheckBoxMenuItem mi_DataDef;
+    private javax.swing.JCheckBoxMenuItem mi_DataExp;
 }
