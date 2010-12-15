@@ -24,6 +24,7 @@ import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
+import com.magicpwd._util.Util;
 import com.magicpwd.v.mpwd.MainPtn;
 
 /**
@@ -143,6 +144,8 @@ public class DataBean extends ADataBean implements IMpwdBean
     @Override
     public void copyDataActionPerformed(java.awt.event.ActionEvent evt)
     {
+        tf_PropData.selectAll();
+        Util.setClipboardContents(tf_PropData.getText());
     }
 
     @Override
@@ -168,6 +171,10 @@ public class DataBean extends ADataBean implements IMpwdBean
     @Override
     public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
     {
+        if (Lang.showFirm(mainPtn, LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
+        {
+            mainPtn.removeSelectedItem();
+        }
     }
     private javax.swing.JLabel lb_PropName;
     private javax.swing.JLabel lb_PropData;

@@ -155,20 +155,31 @@ public class EditItem implements IEditItem
     @Override
     public String getSpec(int index)
     {
-        return spec.get(index);
+        return (index > -1 && index < spec.size()) ? spec.get(index) : null;
     }
 
     @Override
     public String getSpec(int index, String defValue)
     {
-        String temp = spec.get(index);
-        return temp != null ? temp : defValue;
+        if (index > -1 && index < spec.size())
+        {
+            String temp = spec.get(index);
+            return temp != null ? temp : defValue;
+        }
+        return defValue;
     }
 
     @Override
     public void setSpec(int index, String spec)
     {
-        this.spec.set(index, spec);
+        if (index == this.spec.size())
+        {
+            this.spec.add(spec);
+        }
+        else
+        {
+            this.spec.set(index, spec);
+        }
     }
 
     @Override
@@ -214,8 +225,8 @@ public class EditItem implements IEditItem
         {
             case ConsDat.INDX_GUID:
                 spec = new ArrayList<String>(2);
-                spec.add("");
-                spec.add("");
+                spec.add(SPEC_VALUE_NONE);
+                spec.add(SPEC_VALUE_NONE);
                 break;
             case ConsDat.INDX_PWDS:
                 spec = new ArrayList<String>(3);
@@ -225,21 +236,22 @@ public class EditItem implements IEditItem
                 break;
             case ConsDat.INDX_DATE:
                 spec = new ArrayList<String>(1);
-                spec.add("");
+                spec.add(SPEC_VALUE_NONE);
                 break;
             case ConsDat.INDX_FILE:
                 spec = new ArrayList<String>(1);
-                spec.add("");
+                spec.add(SPEC_VALUE_NONE);
                 break;
             case ConsDat.INDX_DATA:
                 spec = new ArrayList<String>(7);
                 spec.add(SPEC_VALUE_TRUE);
                 spec.add("+0-");
                 spec.add("0");
-                spec.add("6");
-                spec.add("");
+                spec.add("8");
+                spec.add(SPEC_VALUE_NONE);
                 spec.add(SPEC_VALUE_TRUE);
                 spec.add("^");
+                spec.add(SPEC_VALUE_FAIL);
                 break;
             case ConsDat.INDX_SIGN:
                 spec = new ArrayList<String>(2);

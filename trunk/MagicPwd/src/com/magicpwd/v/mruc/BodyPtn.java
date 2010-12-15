@@ -52,6 +52,9 @@ public class BodyPtn extends javax.swing.JPanel
 
     public int initView(int step)
     {
+        ls_NameList = new java.util.ArrayList<javax.swing.JLabel>();
+        ls_DataList = new java.util.ArrayList<javax.swing.JTextField>();
+
         IEditItem editItem = unitMdl.getItemAt(step);
         if (editItem.getType() != ConsDat.INDX_SIGN)
         {
@@ -60,9 +63,6 @@ public class BodyPtn extends javax.swing.JPanel
 
         formula = editItem.getData();
         currStep = step;
-
-        ls_NameList = new java.util.ArrayList<javax.swing.JLabel>();
-        ls_DataList = new java.util.ArrayList<javax.swing.JTextField>();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -272,7 +272,7 @@ public class BodyPtn extends javax.swing.JPanel
             return;
         }
 
-        mrucPtn.compute(formula.replace("$input", val).replace("$value", item.getData()));
+        mrucPtn.compute(formula.replace("$input", val).replace("$scale", item.getData()));
     }
     private java.util.ArrayList<javax.swing.JLabel> ls_NameList;
     private java.util.ArrayList<javax.swing.JTextField> ls_DataList;
