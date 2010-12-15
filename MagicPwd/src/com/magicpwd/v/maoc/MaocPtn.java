@@ -116,8 +116,11 @@ public class MaocPtn extends AFrame
         list = new java.util.ArrayList<com.magicpwd._comn.Math>();
 
         tn_StepRoot = new javax.swing.tree.DefaultMutableTreeNode();
-        tr_StepList.setModel(new javax.swing.tree.DefaultTreeModel(tn_StepRoot));
+        tn_StepModel = new javax.swing.tree.DefaultTreeModel(tn_StepRoot);
+        tr_StepList.setModel(tn_StepModel);
         tr_StepList.setRootVisible(false);
+
+        tf_MathText.requestFocus();
     }
 
     @Override
@@ -168,11 +171,13 @@ public class MaocPtn extends AFrame
             root.add(node);
         }
         tn_StepRoot.add(root);
-        tr_StepList.fireTreeExpanded(new javax.swing.tree.TreePath(root.getPath()));
+        tn_StepModel.nodeStructureChanged(tn_StepRoot);
+        tr_StepList.expandPath(new javax.swing.tree.TreePath(tn_StepModel.getPathToRoot(root)));
     }
     private javax.swing.JButton bt_KeyBoard;
     private javax.swing.JButton bt_MathText;
     private javax.swing.JTree tr_StepList;
+    private javax.swing.tree.DefaultTreeModel tn_StepModel;
     private javax.swing.tree.DefaultMutableTreeNode tn_StepRoot;
     private javax.swing.JTextField tf_MathText;
 }

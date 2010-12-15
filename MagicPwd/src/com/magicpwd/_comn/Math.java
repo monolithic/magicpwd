@@ -96,6 +96,6 @@ public class Math
     @Override
     public String toString()
     {
-        return Char.isValidate(s1) ? s0.replace(s1, "<html><font color=\"#FF0000\">" + s1 + "</font></html>") : s0;
+        return "<html>" + (Char.isValidate(s1) ? s0.replace(s1, "<font color=\"#FF0000\">" + s1 + "</font>") : s0) + "</html>";
     }
 }
