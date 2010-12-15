@@ -17,7 +17,6 @@
 package com.magicpwd.v.maoc;
 
 import com.magicpwd.__a.AFrame;
-import com.magicpwd._comn.S1S2;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
@@ -28,7 +27,7 @@ import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.tray.TrayPtn;
 
 /**
- * 单位换算
+ * 计算器
  * 
  * @author Amon
  */
@@ -37,7 +36,7 @@ public class MaocPtn extends AFrame
 
     private MaocMdl maocMdl;
     private CalcPtn calcPtn;
-    private java.util.ArrayList<S1S2> list;
+    private java.util.ArrayList<com.magicpwd._comn.Math> list;
 
     public MaocPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
@@ -47,14 +46,14 @@ public class MaocPtn extends AFrame
     public void initView()
     {
         javax.swing.JScrollPane jsp = new javax.swing.JScrollPane();
-        ls_StepList = new javax.swing.JList();
+        tr_StepList = new javax.swing.JTree();
         tf_MathText = new javax.swing.JTextField();
         bt_KeyBoard = new javax.swing.JButton();
         bt_MathText = new javax.swing.JButton();
 //        calcPtn = new CalcPtn();
 //        calcPtn.initView();
 
-        jsp.setViewportView(ls_StepList);
+        jsp.setViewportView(tr_StepList);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this.getContentPane());
         this.getContentPane().setLayout(layout);
@@ -114,7 +113,11 @@ public class MaocPtn extends AFrame
         tf_MathText.addActionListener(listener);
         bt_MathText.addActionListener(listener);
 
-        list = new java.util.ArrayList<S1S2>();
+        list = new java.util.ArrayList<com.magicpwd._comn.Math>();
+
+        tn_StepRoot = new javax.swing.tree.DefaultMutableTreeNode();
+        tr_StepList.setModel(new javax.swing.tree.DefaultTreeModel(tn_StepRoot));
+        tr_StepList.setRootVisible(false);
     }
 
     @Override
@@ -146,7 +149,7 @@ public class MaocPtn extends AFrame
         {
             list.clear();
             maocMdl.getComputer().calculate(math, 8, list);
-            System.out.println(list.get(list.size() - 1).getV2());
+            showStep(math, list);
         }
         catch (Exception exp)
         {
@@ -154,8 +157,22 @@ public class MaocPtn extends AFrame
             Lang.showMesg(this, null, exp.getLocalizedMessage());
         }
     }
+
+    private void showStep(String math, java.util.List<com.magicpwd._comn.Math> list)
+    {
+        javax.swing.tree.DefaultMutableTreeNode root = new javax.swing.tree.DefaultMutableTreeNode(new com.magicpwd._comn.Math(math));
+        javax.swing.tree.DefaultMutableTreeNode node;
+        for (com.magicpwd._comn.Math item : list)
+        {
+            node = new javax.swing.tree.DefaultMutableTreeNode(item);
+            root.add(node);
+        }
+        tn_StepRoot.add(root);
+        tr_StepList.fireTreeExpanded(new javax.swing.tree.TreePath(root.getPath()));
+    }
     private javax.swing.JButton bt_KeyBoard;
     private javax.swing.JButton bt_MathText;
-    private javax.swing.JList ls_StepList;
+    private javax.swing.JTree tr_StepList;
+    private javax.swing.tree.DefaultMutableTreeNode tn_StepRoot;
     private javax.swing.JTextField tf_MathText;
 }
