@@ -659,6 +659,8 @@
             <item type="checkbox" text="4位" group="data-template" command="dec:4" />
             <item type="checkbox" text="5位" group="data-template" command="dec:5" />
             <item type="checkbox" text="6位" group="data-template" command="dec:6" />
+            <item type="checkbox" text="7位" group="data-template" command="dec:7" />
+            <item type="checkbox" text="8位" group="data-template" command="dec:8" />
             <seperator />
             <item type="checkbox" id="data-precision" text="$P30F7C0B" text-def="其它……" group="data-template" command="dec:-1" />
             <seperator />
@@ -667,12 +669,13 @@
             <item type="checkbox" id="data-fixed-int" text="$P30F7C18" command="int:f" />
             -->
         </menu>
-        <menu text="$P30F7C0C" text-def="集合">
+        <seperator />
+        <menu text="$P30F7C0C" id="data-collection" text-def="集合">
             <item type="checkbox" id="data-pos" text="$P30F7C0D" text-def="正数" command="set:+" />
             <item type="checkbox" id="data-0" text="$P30F7C0E" text-def="0" command="set:0" />
             <item type="checkbox" id="data-nav" text="$P30F7C0F" text-def="负数" command="set:-" />
         </menu>
-        <menu text="$P30F7C10" text-def="符号">
+        <menu text="$P30F7C10" id="data-characters" text-def="符号">
             <item type="checkbox" id="data-notation" text="$P30F7C11" text-def="启用特殊符号" command="notation"/>
             <seperator />
             <item type="normal" id="data-character" tips="$P30F7C13" tips-def="更改特殊符号" command="character"/>
