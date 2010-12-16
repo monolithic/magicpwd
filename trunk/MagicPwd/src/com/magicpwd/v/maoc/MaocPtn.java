@@ -17,6 +17,7 @@
 package com.magicpwd.v.maoc;
 
 import com.magicpwd.__a.AFrame;
+import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
@@ -35,7 +36,7 @@ public class MaocPtn extends AFrame
 {
 
     private MaocMdl maocMdl;
-    private CalcPtn calcPtn;
+    private MenuPtn menuPtn;
     private java.util.ArrayList<com.magicpwd._comn.Math> list;
 
     public MaocPtn(TrayPtn trayPtn, UserMdl userMdl)
@@ -47,24 +48,26 @@ public class MaocPtn extends AFrame
     {
         javax.swing.JScrollPane jsp = new javax.swing.JScrollPane();
         tr_StepList = new javax.swing.JTree();
+        lb_MathText = new javax.swing.JLabel();
         tf_MathText = new javax.swing.JTextField();
-        bt_KeyBoard = new javax.swing.JButton();
-        bt_MathText = new javax.swing.JButton();
-//        calcPtn = new CalcPtn();
-//        calcPtn.initView();
+        bt_MathHelp = new BtnLabel();
+        bt_MathText = new BtnLabel();
 
         jsp.setViewportView(tr_StepList);
+
+        lb_MathText.setLabelFor(tf_MathText);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this.getContentPane());
         this.getContentPane().setLayout(layout);
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
-        hsg1.addComponent(tf_MathText, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE);
+        hsg1.addComponent(lb_MathText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg1.addComponent(bt_MathText, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hsg1.addComponent(tf_MathText, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE);
         hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg1.addComponent(bt_KeyBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hsg1.addComponent(bt_MathText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg1.addComponent(bt_MathHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-//        hpg.addComponent(calcPtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hpg.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hsg1);
         hpg.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, 430, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg2 = layout.createSequentialGroup();
@@ -74,9 +77,10 @@ public class MaocPtn extends AFrame
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(hsg2));
 
         javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
-        vpg.addComponent(tf_MathText, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vpg.addComponent(bt_KeyBoard, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vpg.addComponent(bt_MathText, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg.addComponent(bt_MathHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg.addComponent(bt_MathText, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg.addComponent(tf_MathText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg.addComponent(lb_MathText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
         vsg.addContainerGap();
         vsg.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE);
@@ -94,6 +98,7 @@ public class MaocPtn extends AFrame
 
     public void initLang()
     {
+        Bean.setText(lb_MathText, Lang.getLang("", "计算式(@F)"));
     }
 
     public void initData()
@@ -111,7 +116,20 @@ public class MaocPtn extends AFrame
             }
         };
         tf_MathText.addActionListener(listener);
+
+        bt_MathText.setIcon(readFavIcon("maoc-calc", false));
         bt_MathText.addActionListener(listener);
+
+        bt_MathHelp.setIcon(readFavIcon("maoc-help", false));
+        bt_MathHelp.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                bt_MathHelpActionPerformed(e);
+            }
+        });
 
         list = new java.util.ArrayList<com.magicpwd._comn.Math>();
 
@@ -119,6 +137,18 @@ public class MaocPtn extends AFrame
         tn_StepModel = new javax.swing.tree.DefaultTreeModel(tn_StepRoot);
         tr_StepList.setModel(tn_StepModel);
         tr_StepList.setRootVisible(false);
+
+        pm_HelpMenu = new javax.swing.JPopupMenu();
+        menuPtn = new MenuPtn(trayPtn, this);
+        try
+        {
+            menuPtn.loadData(new java.io.File(userMdl.getDataDir(), "maoc.xml"));
+            menuPtn.getPopMenu("maoc", pm_HelpMenu);
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
 
         tf_MathText.requestFocus();
     }
@@ -161,6 +191,11 @@ public class MaocPtn extends AFrame
         }
     }
 
+    private void bt_MathHelpActionPerformed(java.awt.event.ActionEvent e)
+    {
+        pm_HelpMenu.show(bt_MathHelp, 0, bt_MathHelp.getHeight());
+    }
+
     private void showStep(String math, java.util.List<com.magicpwd._comn.Math> list)
     {
         javax.swing.tree.DefaultMutableTreeNode root = new javax.swing.tree.DefaultMutableTreeNode(new com.magicpwd._comn.Math(math));
@@ -174,10 +209,12 @@ public class MaocPtn extends AFrame
         tn_StepModel.nodeStructureChanged(tn_StepRoot);
         tr_StepList.expandPath(new javax.swing.tree.TreePath(tn_StepModel.getPathToRoot(root)));
     }
-    private javax.swing.JButton bt_KeyBoard;
-    private javax.swing.JButton bt_MathText;
+    private BtnLabel bt_MathHelp;
+    private BtnLabel bt_MathText;
     private javax.swing.JTree tr_StepList;
     private javax.swing.tree.DefaultTreeModel tn_StepModel;
     private javax.swing.tree.DefaultMutableTreeNode tn_StepRoot;
+    private javax.swing.JLabel lb_MathText;
     private javax.swing.JTextField tf_MathText;
+    private javax.swing.JPopupMenu pm_HelpMenu;
 }
