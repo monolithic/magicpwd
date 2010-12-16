@@ -162,3 +162,8 @@ mwiz-edit=mwiz-edit.png
 mwiz-delete=mwiz-delete.png
 mwiz-hint=mwiz-hint.png
 mwiz-find=mwiz-find.png
+#######################################
+# 运算图标
+#######################################
+maoc-calc=maoc-calc.png
+maoc-help=maoc-help.png
