@@ -4,7 +4,7 @@
         <item type="normal" text="$P30F9601" text-def="关于">
             <action class="com.magicpwd.e.tray.InfoAction" />
         </item>
-        <menu id="plug" text="" text-def="精度">
+        <menu id="plug" text="$P30FB601" text-def="小数精度(@P)">
             <item type="checkbox" text="1位" group="data-template" command="dec:1" />
             <item type="checkbox" text="2位" group="data-template" command="dec:2" />
             <item type="checkbox" text="3位" group="data-template" command="dec:3" />
@@ -13,15 +13,25 @@
             <item type="checkbox" text="6位" group="data-template" command="dec:6" />
             <item type="checkbox" text="7位" group="data-template" command="dec:7" />
             <item type="checkbox" text="8位" group="data-template" command="dec:8" />
+            <seperator />
+            <item type="checkbox" id="data-precision" text="$P30F7C0B" text-def="其它……" group="data-template" command="dec:-1" />
         </menu>
-        <menu id="plug" text="" text-def="三角运算">
+        <menu id="plug" text="$P30FB602" text-def="代数运算">
         </menu>
-        <menu id="plug" text="" text-def="代数运算">
+        <menu id="plug" text="$P30FB603" text-def="三角运算">
         </menu>
-        <menu id="plug" text="" text-def="角度运算">
+        <menu id="plug" text="$P30FB604" text-def="角度运算">
         </menu>
-        <item type="normal" text="$P30F9601" text-def="退出">
+        <item type="normal" text="$P30F960C" text-def="退出">
             <action class="com.magicpwd.e.tray.InfoAction" />
         </item>
     </popmenu>
+    <strokes id="maoc">
+        <action id="exit-window" class="com.magicpwd.e.mpwd.file.ExitAction">
+            <stroke key="^ Q" />
+        </action>
+        <action id="hide-window" class="com.magicpwd.e.mpwd.file.HideAction">
+            <stroke key="^ Enter" />
+        </action>
+    </strokes>
 </magicpwd>
