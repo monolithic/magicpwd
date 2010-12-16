@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<magicpwd>
+    <popmenu id="maoc">
+        <item type="normal" text="$P30F9601" text-def="关于">
+            <action class="com.magicpwd.e.tray.InfoAction" />
+        </item>
+        <menu id="plug" text="" text-def="精度">
+            <item type="checkbox" text="1位" group="data-template" command="dec:1" />
+            <item type="checkbox" text="2位" group="data-template" command="dec:2" />
+            <item type="checkbox" text="3位" group="data-template" command="dec:3" />
+            <item type="checkbox" text="4位" group="data-template" command="dec:4" />
+            <item type="checkbox" text="5位" group="data-template" command="dec:5" />
+            <item type="checkbox" text="6位" group="data-template" command="dec:6" />
+            <item type="checkbox" text="7位" group="data-template" command="dec:7" />
+            <item type="checkbox" text="8位" group="data-template" command="dec:8" />
+        </menu>
+        <menu id="plug" text="" text-def="三角运算">
+        </menu>
+        <menu id="plug" text="" text-def="代数运算">
+        </menu>
+        <menu id="plug" text="" text-def="角度运算">
+        </menu>
+        <item type="normal" text="$P30F9601" text-def="退出">
+            <action class="com.magicpwd.e.tray.InfoAction" />
+        </item>
+    </popmenu>
+</magicpwd>
