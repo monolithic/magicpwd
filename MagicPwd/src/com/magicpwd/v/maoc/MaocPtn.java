@@ -18,6 +18,7 @@ package com.magicpwd.v.maoc;
 
 import com.magicpwd.__a.AFrame;
 import com.magicpwd._comp.BtnLabel;
+import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
@@ -99,6 +100,12 @@ public class MaocPtn extends AFrame
     public void initLang()
     {
         Bean.setText(lb_MathText, Lang.getLang("", "计算式(@F)"));
+
+        Bean.setText(bt_MathText, Lang.getLang(LangRes.P30FB501, "@C"));
+        Bean.setTips(bt_MathText, Lang.getLang(LangRes.P30FB502, "运算(ALT + C)"));
+
+        Bean.setText(bt_MathHelp, Lang.getLang(LangRes.P30FB503, "@O"));
+        Bean.setTips(bt_MathHelp, Lang.getLang(LangRes.P30FB504, "选项(ALT + O)"));
     }
 
     public void initData()
@@ -144,6 +151,7 @@ public class MaocPtn extends AFrame
         {
             menuPtn.loadData(new java.io.File(userMdl.getDataDir(), "maoc.xml"));
             menuPtn.getPopMenu("maoc", pm_HelpMenu);
+            menuPtn.getStrokes("maoc", rootPane);
         }
         catch (Exception exp)
         {
