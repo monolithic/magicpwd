@@ -72,6 +72,7 @@ public class DXA2000 implements DXA
             GuidItem guid = new GuidItem(userMdl);
             guid.setTime(new java.sql.Timestamp(com.magicpwd._util.Date.toDate(temp.get(indx++), '-', ':', ' ').getTimeInMillis()));
             guid.setData(kindHash);
+            guid.setSpec(IEditItem.SPEC_GUID_TPLT, temp.get(indx++));
             tempList.add(guid);
 
             // Meta
@@ -81,7 +82,10 @@ public class DXA2000 implements DXA
             tempList.add(meta);
 
             // Logo
-            tempList.add(new LogoItem(userMdl));
+            LogoItem logo = new LogoItem(userMdl);
+            tempList.add(logo);
+            logo.setName(temp.get(indx++));
+            logo.setData(temp.get(indx++));
 
             // Hint
             HintItem hint = new HintItem(userMdl);
