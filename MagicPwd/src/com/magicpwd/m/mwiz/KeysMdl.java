@@ -20,7 +20,7 @@ import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.Keys;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Char;
-import com.magicpwd.d.DBA3000;
+import com.magicpwd.d.db.DBA3000;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
 

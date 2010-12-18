@@ -14,7 +14,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.d;
+package com.magicpwd.d.db;
 
 import com.magicpwd._cons.ConsEnv;
 import java.sql.Connection;

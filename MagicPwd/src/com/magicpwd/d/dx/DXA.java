@@ -14,42 +14,23 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.m.mruc;
+package com.magicpwd.d.dx;
 
-import com.magicpwd._comn.S1S2;
-import com.magicpwd.d.db.DBA3000;
+import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
 
 /**
  *
  * @author Amon
  */
-public class KeysMdl extends javax.swing.DefaultComboBoxModel
+public interface DXA
 {
 
-    private UserMdl userMdl;
-    private java.util.ArrayList<S1S2> unitList;
+    int importByKind(UserMdl userMdl, SafeMdl safeMdl, java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash) throws Exception;
 
-    public KeysMdl(UserMdl userMdl)
-    {
-        this.userMdl = userMdl;
-    }
+    int importByKeys(java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash) throws Exception;
 
-    void init()
-    {
-        unitList = new java.util.ArrayList<S1S2>();
-        DBA3000.findUnitList(userMdl, unitList);
-    }
+    int exportByKind(UserMdl userMdl, SafeMdl safeMdl, java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash) throws Exception;
 
-    @Override
-    public int getSize()
-    {
-        return unitList.size();
-    }
-
-    @Override
-    public Object getElementAt(int index)
-    {
-        return unitList.get(index);
-    }
+    int exportByKeys(java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash) throws Exception;
 }

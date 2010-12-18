@@ -20,8 +20,8 @@ import com.magicpwd._comn.Keys;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.magicpwd.d.DBA3000;
-import com.magicpwd.d.DBAccess;
+import com.magicpwd.d.db.DBA3000;
+import com.magicpwd.d.db.DBAccess;
 import java.sql.Timestamp;
 
 /**

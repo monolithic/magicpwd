@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 
-import com.magicpwd.d.DBA3000;
+import com.magicpwd.d.db.DBA3000;
 import com.magicpwd.m.UserMdl;
 
 /**

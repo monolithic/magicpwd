@@ -22,7 +22,7 @@ import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
-import com.magicpwd.d.DBA3000;
+import com.magicpwd.d.db.DBA3000;
 import com.magicpwd.r.TreeCR;
 import com.magicpwd.v.mpwd.MainPtn;
 

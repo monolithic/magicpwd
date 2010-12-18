@@ -31,7 +31,7 @@ import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
-import com.magicpwd.d.DBA3000;
+import com.magicpwd.d.db.DBA3000;
 
 /**
  *

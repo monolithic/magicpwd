@@ -58,6 +58,9 @@ import com.magicpwd._util.Jcsv;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
+import com.magicpwd.d.dx.DXA;
+import com.magicpwd.d.dx.DXA1000;
+import com.magicpwd.d.dx.DXA2000;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.m.mpwd.MpwdMdl;
 import com.magicpwd.m.mpwd.KindMdl;
@@ -1336,8 +1339,9 @@ public class MainPtn extends AFrame
         try
         {
             Jcsv csv = new Jcsv(file);
+            csv.setHead("V2");
             java.util.ArrayList<java.util.ArrayList<String>> data = new java.util.ArrayList<java.util.ArrayList<String>>();
-            int size = mpwdMdl.getGridMdl().wExport(data, kind.getC2010103());
+            int size = new DXA2000().exportByKind(userMdl, safeMdl, data, kind.getC2010103());
             csv.saveFile(data);
             Lang.showMesg(this, LangRes.P30F7A25, "成功导出数据个数：{0}", size + "");
         }
@@ -1390,7 +1394,8 @@ public class MainPtn extends AFrame
         {
             Jcsv csv = new Jcsv(file);
             java.util.ArrayList<java.util.ArrayList<String>> data = csv.readFile();
-            int size = mpwdMdl.getGridMdl().wImport(data, kind.getC2010103());
+            DXA dxa = "V2".equalsIgnoreCase(csv.getHead()) ? new DXA2000() : new DXA1000();
+            int size = dxa.importByKind(userMdl, safeMdl, data, kind.getC2010103());
             mpwdMdl.getListMdl().listKeysByKind(kind.getC2010103());
             Lang.showMesg(this, LangRes.P30F7A07, "成功导入数据个数：{0}", "" + size);
 
