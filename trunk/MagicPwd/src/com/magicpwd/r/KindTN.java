@@ -21,7 +21,7 @@ import java.util.List;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import com.magicpwd.d.DBA3000;
+import com.magicpwd.d.db.DBA3000;
 
 /**
  * @author Amon

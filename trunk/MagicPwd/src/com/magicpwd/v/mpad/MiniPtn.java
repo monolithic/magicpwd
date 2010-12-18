@@ -26,7 +26,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd.d.DBA3000;
+import com.magicpwd.d.db.DBA3000;
 import com.magicpwd.e.mpad.NewAction;
 import com.magicpwd.e.mpad.OpenAction;
 import com.magicpwd.e.mpad.SaveAction;

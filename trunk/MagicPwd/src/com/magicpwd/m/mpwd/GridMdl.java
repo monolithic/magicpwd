@@ -30,7 +30,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd.d.DBA3000;
+import com.magicpwd.d.db.DBA3000;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
 
@@ -305,135 +305,6 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
         ls_ItemList.remove(item);
         fireTableDataChanged();
         setModified(true);
-    }
-
-    public int wImport(java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash) throws Exception
-    {
-        int size = 0;
-        int indx = 0;
-        EditItem tplt;
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(ConsEnv.HINT_DATE);
-        for (java.util.ArrayList<String> temp : data)
-        {
-            switch ((temp.size() - 5) % 3)
-            {
-                case 2:
-                    if (com.magicpwd._util.Char.isValidate(temp.get(temp.size() - 1)))
-                    {
-                        temp.add("");
-                        break;
-                    }
-                    temp.remove(temp.size() - 1);
-                case 1:
-                    temp.remove(temp.size() - 1);
-                    break;
-            }
-
-            indx = 0;
-            keys.setDefault();
-            ls_ItemList.clear();
-            keys.setP30F0105(userMdl.getCode());
-
-            // Guid
-            GuidItem guid = new GuidItem(userMdl);
-            guid.setTime(new java.sql.Timestamp(com.magicpwd._util.Date.toDate(temp.get(indx++), '-', ':', ' ').getTimeInMillis()));
-            guid.setData(kindHash);
-            ls_ItemList.add(guid);
-
-            // Meta
-            MetaItem meta = new MetaItem(userMdl);
-            meta.setName(temp.get(indx++));
-            meta.setData(temp.get(indx++));
-            ls_ItemList.add(meta);
-
-            // Logo
-            ls_ItemList.add(new LogoItem(userMdl));
-
-            // Hint
-            HintItem hint = new HintItem(userMdl);
-            String text = temp.get(indx++);
-            if (com.magicpwd._util.Char.isValidate(text))
-            {
-                hint.setTime(new java.sql.Timestamp(com.magicpwd._util.Date.toDate(text, '-', ':', ' ').getTimeInMillis()));
-            }
-            hint.setName(temp.get(indx++));
-            ls_ItemList.add(hint);
-
-            while (indx < temp.size())
-            {
-                tplt = new EditItem(userMdl);
-                tplt.setType(Integer.parseInt(temp.get(indx++)));
-                tplt.setName(temp.get(indx++));
-                tplt.setData(temp.get(indx++));
-                ls_ItemList.add(tplt);
-            }
-
-            enCrypt(keys, ls_ItemList);
-            DBA3000.savePwdsData(keys);
-            size += 1;
-            Thread.sleep(200);
-        }
-        return size;
-    }
-
-    public int wExport(java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash)
-    {
-        java.util.ArrayList<Keys> dataList = new java.util.ArrayList<Keys>();
-        DBA3000.readKeysList(userMdl, kindHash, dataList);
-        if (dataList == null || dataList.size() < 1)
-        {
-            return 0;
-        }
-
-        int size = 0;
-        java.util.ArrayList<String> temp;
-        int indx;
-        IEditItem tplt;
-
-        for (Keys item : dataList)
-        {
-            indx = 0;
-            temp = new java.util.ArrayList<String>();
-            try
-            {
-                clear();
-                loadData(item.getP30F0104());
-            }
-            catch (Exception exp)
-            {
-                Logs.exception(exp);
-                continue;
-            }
-
-            // Guid
-            tplt = ls_ItemList.get(indx++);
-            temp.add(tplt.getName());
-
-            // Meta
-            tplt = ls_ItemList.get(indx++);
-            temp.add(tplt.getName());
-            temp.add(tplt.getData());
-
-            // Logo
-            tplt = ls_ItemList.get(indx++);
-
-            // Hint
-            tplt = ls_ItemList.get(indx++);
-            temp.add(tplt.getData());
-            temp.add(tplt.getName());
-
-            while (indx < ls_ItemList.size())
-            {
-                tplt = ls_ItemList.get(indx++);
-                temp.add("" + tplt.getType());
-                temp.add(tplt.getName());
-                temp.add(tplt.getData());
-            }
-
-            size += 1;
-            data.add(temp);
-        }
-        return size;
     }
 
     /**

@@ -44,6 +44,7 @@ public class Jcsv
     private String sp = ",";
     private String sl = "\n";
     private String fe = ConsEnv.FILE_ENCODING;
+    private String fh;
 
     public Jcsv(java.io.File fileName)
     {
@@ -85,7 +86,7 @@ public class Jcsv
         String line;
         if (hd)
         {
-            line = br.readLine();
+            fh = br.readLine();
         }
         while (true)
         {
@@ -148,6 +149,7 @@ public class Jcsv
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fn), fe));
         if (hd)
         {
+            bw.write(fh);
             bw.newLine();
         }
         for (ArrayList<String> temp : data)
@@ -290,5 +292,15 @@ public class Jcsv
             sb.append(temp).append(sp);
         }
         return sb.toString();
+    }
+
+    public void setHead(String head)
+    {
+        this.fh = head;
+    }
+
+    public String getHead()
+    {
+        return fh;
     }
 }

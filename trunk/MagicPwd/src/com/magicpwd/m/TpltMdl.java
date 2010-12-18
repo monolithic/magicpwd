@@ -17,7 +17,7 @@
 package com.magicpwd.m;
 
 import com.magicpwd._comn.prop.Tplt;
-import com.magicpwd.d.DBA3000;
+import com.magicpwd.d.db.DBA3000;
 
 /**
  * 魔方密码：口令模板下拉列表模型
