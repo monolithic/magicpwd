@@ -85,7 +85,7 @@ public class MainPtn extends AFrame
     private MenuPtn menuPtn;
     private MpwdMdl mpwdMdl;
     /**口令列表上次选择索引*/
-    private int ls_LastIndx = -1;
+    private Keys lastKeys;
     /**属性列表上次选择索引*/
     private int tb_LastIndx = -1;
     /**用户最后一次查找内容*/
@@ -262,7 +262,7 @@ public class MainPtn extends AFrame
 
         setEditVisible(true);
         showPropEdit(mpwdMdl.getGridMdl().initGuid(), true);
-        ls_LastIndx = -1;
+        lastKeys = null;
         return true;
     }
 
@@ -273,7 +273,7 @@ public class MainPtn extends AFrame
 
     public boolean findKeys(String meta)
     {
-        ls_LastIndx = -1;
+        lastKeys = null;
 
         if (Char.isValidate(meta))
         {
@@ -299,7 +299,7 @@ public class MainPtn extends AFrame
             mpwdMdl.getListMdl().listKeysByKind(queryKey);
         }
 
-        ls_LastIndx = -1;
+        lastKeys = null;
     }
 
     public boolean saveKeys()
@@ -385,7 +385,7 @@ public class MainPtn extends AFrame
         showPropInfo();
         mainInfo.showHint(false);
 
-        ls_LastIndx = -1;
+        lastKeys = null;
         tb_LastIndx = -1;
         return true;
     }
@@ -969,7 +969,7 @@ public class MainPtn extends AFrame
         }
 
         isSearch = false;
-        ls_LastIndx = -1;
+        lastKeys = null;
     }
 
     private void listTask(Kind kind)
@@ -1039,33 +1039,27 @@ public class MainPtn extends AFrame
 
     private void ls_GuidListMouseClick(java.awt.event.MouseEvent e)
     {
-        int i = ls_GuidList.getSelectedIndex();
+        Object obj = ls_GuidList.getSelectedValue();
+        if (obj == null || !(obj instanceof Keys))
+        {
+            return;
+        }
         // 重复事件判断
-        if (i == ls_LastIndx)
+        if (lastKeys != null && lastKeys.equals(obj))
         {
             return;
         }
 
         // 记录上次索引
-        ls_LastIndx = i;
-        if (ls_LastIndx < 0)
-        {
-            return;
-        }
+        lastKeys = (Keys) obj;
 
         if (mpwdMdl.getGridMdl().isModified())
         {
             if (Lang.showFirm(this, LangRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", mpwdMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_META).getName()) != javax.swing.JOptionPane.YES_OPTION)
             {
-                ls_GuidList.setSelectedIndex(ls_LastIndx);
+                ls_GuidList.setSelectedValue(lastKeys, true);
                 return;
             }
-        }
-
-        Object obj = ls_GuidList.getSelectedValue();
-        if (!(obj instanceof Keys))
-        {
-            return;
         }
 
         Keys keys = (Keys) obj;
@@ -1102,11 +1096,7 @@ public class MainPtn extends AFrame
             int i = ls_GuidList.locationToIndex(e.getPoint());
             if (i > -1)
             {
-                if (i != ls_LastIndx)
-                {
-                    ls_LastIndx = i;
-                    ls_GuidList.setSelectedIndex(i);
-                }
+                ls_GuidList.setSelectedIndex(i);
                 listPop.show(ls_GuidList, e.getX(), e.getY());
             }
             return;
@@ -1286,7 +1276,7 @@ public class MainPtn extends AFrame
     {
         if (mpwdMdl.getGridMdl().setKeysKind(hash))
         {
-            mpwdMdl.getListMdl().wRemove(ls_LastIndx);
+            findLast();
         }
     }
 
