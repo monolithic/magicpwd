@@ -20,6 +20,8 @@ import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mpwd.IMpwdBean;
 import com.magicpwd._bean.AListBean;
 import com.magicpwd._comp.WEditBox;
+import com.magicpwd._cons.LangRes;
+import com.magicpwd._util.Lang;
 import com.magicpwd.v.mpwd.MainPtn;
 import java.awt.event.ActionEvent;
 
@@ -101,6 +103,9 @@ public class ListBean extends AListBean implements IMpwdBean
     @Override
     public void initLang()
     {
+        Lang.setWText(lb_PropName, LangRes.P30F1323, "属性(@N)");
+        Lang.setWText(lb_PropData, LangRes.P30F1324, "列表(@P)");
+
         initConfLang();
     }
 
