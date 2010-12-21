@@ -22,7 +22,6 @@ import com.magicpwd._bean.ADataBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.v.mpwd.MainPtn;
@@ -105,8 +104,8 @@ public class DataBean extends ADataBean implements IMpwdBean
     @Override
     public void initLang()
     {
-        Bean.setText(lb_PropName, "属性(@P)");
-        Bean.setText(lb_PropData, "数值(@D)");
+        Lang.setWText(lb_PropName, LangRes.P30F1321, "名称(@M)");
+        Lang.setWText(lb_PropData, LangRes.P30F1322, "数值(@P)");
 
         dataEdit.initLang();
 
