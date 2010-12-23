@@ -28,11 +28,15 @@ import com.magicpwd.m.mail.Sender;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.File;
+import com.magicpwd._util.Jcsv;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.db.DBA3000;
 import com.magicpwd.d.db.DBAccess;
+import com.magicpwd.d.dx.DXA;
+import com.magicpwd.d.dx.DXA1000;
+import com.magicpwd.d.dx.DXA2000;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
@@ -679,6 +683,108 @@ public abstract class AFrame extends javax.swing.JFrame
             store.close();
         }
 
+        return true;
+    }
+
+    public boolean exportByKind(String kindHash)
+    {
+        javax.swing.JFileChooser jfc = new javax.swing.JFileChooser();
+        jfc.setMultiSelectionEnabled(false);
+        jfc.setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);
+        int status = jfc.showSaveDialog(this);
+        if (status != javax.swing.JFileChooser.APPROVE_OPTION)
+        {
+            return false;
+        }
+        java.io.File file = jfc.getSelectedFile();
+        if (file.exists())
+        {
+            if (Lang.showFirm(this, LangRes.P30F7A21, "目标文件已存在，确认要覆盖此文件么？") != javax.swing.JOptionPane.YES_OPTION)
+            {
+                return false;
+            }
+        }
+        else
+        {
+            try
+            {
+                file.createNewFile();
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+                Lang.showMesg(this, LangRes.P30F7A22, "数据导出失败，无法在指定文件创建文档！");
+                return false;
+            }
+        }
+        if (!file.isFile())
+        {
+            Lang.showMesg(this, LangRes.P30F7A23, "数据导出失败，您选择的对象不是一个合适的文档！");
+            return false;
+        }
+        if (!file.canWrite())
+        {
+            Lang.showMesg(this, LangRes.P30F7A24, "数据导出失败，请确认您是否拥有合适的读写权限！");
+            return false;
+        }
+
+        try
+        {
+            Jcsv csv = new Jcsv(file);
+            csv.setHead("V2");
+            java.util.ArrayList<java.util.ArrayList<String>> data = new java.util.ArrayList<java.util.ArrayList<String>>();
+            int size = new DXA2000().exportByKind(userMdl, safeMdl, data, kindHash);
+            csv.saveFile(data);
+            Lang.showMesg(this, LangRes.P30F7A25, "成功导出数据个数：{0}", size + "");
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            Lang.showMesg(this, LangRes.P30F7A26, "数据导出失败，请确认您数据的正确性，然后重新尝试！");
+        }
+        return true;
+    }
+
+    public boolean importByKind(String kindHash)
+    {
+        javax.swing.JFileChooser jfc = new javax.swing.JFileChooser();
+        jfc.setMultiSelectionEnabled(false);
+        jfc.setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);
+        int status = jfc.showOpenDialog(this);
+        if (status != javax.swing.JFileChooser.APPROVE_OPTION)
+        {
+            return false;
+        }
+        java.io.File file = jfc.getSelectedFile();
+        if (!file.exists())
+        {
+            Lang.showMesg(this, LangRes.P30F7A03, "您选取的文件不存在！");
+            return false;
+        }
+        if (!file.isFile())
+        {
+            Lang.showMesg(this, LangRes.P30F7A04, "请选取一个合适的文档！");
+            return false;
+        }
+        if (!file.canRead())
+        {
+            Lang.showMesg(this, LangRes.P30F7A05, "无法读取您选择的文件，请确认您是否有足够的权限！");
+            return false;
+        }
+
+        try
+        {
+            Jcsv csv = new Jcsv(file);
+            java.util.ArrayList<java.util.ArrayList<String>> data = csv.readFile();
+            DXA dxa = "V2".equalsIgnoreCase(csv.getHead()) ? new DXA2000() : new DXA1000();
+            int size = dxa.importByKind(userMdl, safeMdl, data, kindHash);
+            Lang.showMesg(this, LangRes.P30F7A07, "成功导入数据个数：{0}", "" + size);
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            Lang.showMesg(this, LangRes.P30F7A08, "TXT文档格式解析出错，数据导入失败！");
+        }
         return true;
     }
     private WGlassPane glassPane;
