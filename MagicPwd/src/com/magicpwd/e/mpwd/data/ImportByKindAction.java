@@ -28,10 +28,10 @@ import com.magicpwd.r.KindTN;
  *
  * @author Amon
  */
-public class ImportAction extends AMpwdAction implements IBackCall
+public class ImportByKindAction extends AMpwdAction implements IBackCall
 {
 
-    public ImportAction()
+    public ImportByKindAction()
     {
     }
 

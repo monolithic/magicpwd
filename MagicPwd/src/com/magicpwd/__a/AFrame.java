@@ -745,6 +745,11 @@ public abstract class AFrame extends javax.swing.JFrame
         return true;
     }
 
+    public boolean exportByKeys(String keysHash)
+    {
+        return true;
+    }
+
     public boolean importByKind(String kindHash)
     {
         javax.swing.JFileChooser jfc = new javax.swing.JFileChooser();
@@ -785,6 +790,11 @@ public abstract class AFrame extends javax.swing.JFrame
             Logs.exception(exp);
             Lang.showMesg(this, LangRes.P30F7A08, "TXT文档格式解析出错，数据导入失败！");
         }
+        return true;
+    }
+
+    public boolean importByKeys(String keysHash)
+    {
         return true;
     }
     private WGlassPane glassPane;
