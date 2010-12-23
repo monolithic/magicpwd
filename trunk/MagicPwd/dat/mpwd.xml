@@ -89,11 +89,13 @@
             <seperator />
             <item type="normal" text="$P30F760F" text-def="上移">
                 <action id="edit-prev" class="com.magicpwd.e.mpwd.edit.MovetoPrevAction">
+                    <stroke key="^ ~ up" />
                     <stroke key="^ U" />
                 </action>
             </item>
             <item type="normal" text="$P30F7610" text-def="下移">
                 <action id="edit-next" class="com.magicpwd.e.mpwd.edit.MovetoNextAction">
+                    <stroke key="^ ~ down" />
                     <stroke key="^ D" />
                 </action>
             </item>
@@ -160,10 +162,10 @@
         </menu>
         <menu id="data" text="$P30F761C" text-def="数据">
             <item type="normal" text="$P30F761D" text-def="导入数据">
-                <action id="import" class="com.magicpwd.e.mpwd.data.ImportAction" />
+                <action id="import" class="com.magicpwd.e.mpwd.data.ImportByKindAction" />
             </item>
             <item type="normal" text="$P30F761E" text-def="导出数据">
-                <action id="export" class="com.magicpwd.e.mpwd.data.ExportAction" />
+                <action id="export" class="com.magicpwd.e.mpwd.data.ExportByKindAction" />
             </item>
             <seperator />
             <item type="normal" text="$P30F7645" text-def="备份到本地">
@@ -556,14 +558,10 @@
         </menu>
         <seperator />
         <item type="normal" text="$P30F760F" text-def="上移">
-            <action id="edit-prev" class="com.magicpwd.e.mpwd.edit.PrevAction">
-                <stroke key="^ U" />
-            </action>
+            <action id="edit-prev" class="com.magicpwd.e.mpwd.edit.PrevAction" />
         </item>
         <item type="normal" text="$P30F7610" text-def="下移">
-            <action id="edit-next" class="com.magicpwd.e.mpwd.edit.NextAction">
-                <stroke key="^ D" />
-            </action>
+            <action id="edit-next" class="com.magicpwd.e.mpwd.edit.NextAction" />
         </item>
         <seperator />
         <item type="normal" text="$P30F7D19" text-def="删除属性">
