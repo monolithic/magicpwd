@@ -30,7 +30,6 @@ import com.magicpwd._util.Logs;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.u.DBU3000;
 import com.magicpwd.v.tray.TrayPtn;
-import javax.imageio.ImageIO;
 
 public class UserPtn extends javax.swing.JPanel
 {
@@ -262,7 +261,7 @@ public class UserPtn extends javax.swing.JPanel
         try
         {
             java.io.InputStream stream = this.getClass().getResourceAsStream("/res/icon/guid.png");
-            guidIcon = new javax.swing.ImageIcon(ImageIO.read(stream));
+            guidIcon = new javax.swing.ImageIcon(javax.imageio.ImageIO.read(stream));
             stream.close();
             lb_GuidIcon.setIcon(guidIcon);
         }
@@ -281,6 +280,15 @@ public class UserPtn extends javax.swing.JPanel
         }
 
         cb_UserType = new javax.swing.JComboBox();
+        cb_UserType.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                //cb_UserTypeActionPerformed(e);
+            }
+        });
 
         lb_UserType = new javax.swing.JLabel();
         lb_UserType.setLabelFor(cb_UserType);
@@ -867,7 +875,7 @@ public class UserPtn extends javax.swing.JPanel
             buf.append("_").append(Char.escape(System.getProperty("os.version")));
             java.net.URL url = new java.net.URL(buf.toString());
             java.io.InputStream stream = url.openStream();
-            icon = new javax.swing.ImageIcon(ImageIO.read(stream));
+            icon = new javax.swing.ImageIcon(javax.imageio.ImageIO.read(stream));
             stream.close();
         }
         catch (Exception ex)
@@ -1020,6 +1028,11 @@ public class UserPtn extends javax.swing.JPanel
      * @param evt
      */
     private void bt_ConfrmActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        doSign();
+    }
+
+    private void cb_UserTypeActionPerformed(java.awt.event.ActionEvent evt)
     {
         doSign();
     }
