@@ -70,6 +70,8 @@ public class ImportByKindAction extends AMpwdAction implements IBackCall
                 Kind kind = (Kind) node.getUserObject();
                 if (mainPtn.isKindValidate(kind))
                 {
+                    Lang.showMesg(mainPtn, LangRes.P30F7A4A, "不能保存到任务列表中去！");
+//                    tr_GuidTree.requestFocus();
                     return false;
                 }
                 if (mainPtn.importByKind(kind.getC2010103()))

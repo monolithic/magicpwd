@@ -106,6 +106,8 @@ public class ListBean extends AListBean implements IMpwdBean
         Lang.setWText(lb_PropName, LangRes.P30F1323, "属性(@N)");
         Lang.setWText(lb_PropData, LangRes.P30F1324, "列表(@P)");
 
+        dataEdit.initLang();
+
         initConfLang();
     }
 
@@ -126,12 +128,12 @@ public class ListBean extends AListBean implements IMpwdBean
     @Override
     public void requestFocus()
     {
-//        if (!com.magicpwd._util.Char.isValidate(tf_PropName.getText()))
-//        {
-//            tf_PropName.requestFocus();
-//            return;
-//        }
-//        tf_PropData.requestFocus();
+        if (!com.magicpwd._util.Char.isValidate(tf_PropName.getText()))
+        {
+            tf_PropName.requestFocus();
+            return;
+        }
+        ls_PropData.requestFocus();
     }
 
     @Override
@@ -147,6 +149,10 @@ public class ListBean extends AListBean implements IMpwdBean
     @Override
     public void dropDataActionPerformed(ActionEvent evt)
     {
+        if (Lang.showFirm(mainPtn, LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
+        {
+            mainPtn.removeSelectedItem();
+        }
     }
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JLabel lb_PropName;

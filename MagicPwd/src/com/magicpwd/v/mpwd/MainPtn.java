@@ -264,15 +264,16 @@ public class MainPtn extends AFrame
 
     public boolean isKindValidate(Kind kind)
     {
-        if (kind == null || kind.getC2010107() == null)
+        if (kind == null)
         {
             return false;
         }
-        if (kind.getC2010107().indexOf("task") >= 0)
+        if (kind.getC2010107() != null)
         {
-            Lang.showMesg(this, LangRes.P30F7A4A, "不能保存到任务列表中去！");
-            tr_GuidTree.requestFocus();
-            return false;
+            if (kind.getC2010107().indexOf("task") >= 0)
+            {
+                return false;
+            }
         }
         return true;
     }
@@ -337,7 +338,7 @@ public class MainPtn extends AFrame
 
             KindTN node = (KindTN) path.getLastPathComponent();
             Kind kind = (Kind) node.getUserObject();
-            if (isKindValidate(kind))
+            if (!isKindValidate(kind))
             {
                 Lang.showMesg(this, LangRes.P30F7A4A, "不能保存到任务列表中去！");
                 tr_GuidTree.requestFocus();
@@ -963,7 +964,7 @@ public class MainPtn extends AFrame
         {
             KindTN item = (KindTN) obj;
             Kind kind = (Kind) item.getUserObject();
-            if (isKindValidate(kind))
+            if (!isKindValidate(kind))
             {
                 listTask(kind);
             }
