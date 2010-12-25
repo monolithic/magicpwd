@@ -144,6 +144,7 @@ public class DXA2000 implements DXA
             {
                 tempList.clear();
                 keys.setP30F0105(userMdl.getCode());
+                keys.getPassword().setDefault();
                 if (DBA3000.readPwdsData(keys))
                 {
                     safeMdl.deCrypt(keys, tempList);

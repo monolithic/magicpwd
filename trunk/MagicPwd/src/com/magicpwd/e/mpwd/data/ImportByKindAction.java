@@ -68,7 +68,7 @@ public class ImportByKindAction extends AMpwdAction implements IBackCall
                 javax.swing.tree.TreePath path = mainPtn.getSelectedKindValue();
                 KindTN node = (KindTN) path.getLastPathComponent();
                 Kind kind = (Kind) node.getUserObject();
-                if (mainPtn.isKindValidate(kind))
+                if (!mainPtn.isKindValidate(kind))
                 {
                     Lang.showMesg(mainPtn, LangRes.P30F7A4A, "不能保存到任务列表中去！");
 //                    tr_GuidTree.requestFocus();
