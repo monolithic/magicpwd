@@ -110,7 +110,7 @@ public class USetProp extends javax.swing.JPanel implements IPropBean
             java.util.Arrays.sort(names);
             cb_UserLang.setModel(new javax.swing.DefaultComboBoxModel(names));
         }
-        cb_UserLang.setSelectedItem(mainPtn.getUserMdl().getLang());
+        cb_UserLang.setSelectedItem(new S1S1(mainPtn.getUserMdl().getLang(), ""));
 
         cb_PwdsChar.removeAllItems();
         Char cher = new Char();
@@ -153,14 +153,14 @@ public class USetProp extends javax.swing.JPanel implements IPropBean
     @Override
     public void saveData()
     {
+        UserMdl userMdl = mainPtn.getUserMdl();
         Object obj = cb_UserLang.getSelectedItem();
         if (obj != null && obj instanceof S1S1)
         {
-            //uc.setUserLang(((S1S1) obj).getK());
+            userMdl.setLang(((S1S1) obj).getK());
         }
 
         obj = cb_PwdsChar.getSelectedItem();
-        UserMdl userMdl = mainPtn.getUserMdl();
         if (obj != null && obj instanceof Char)
         {
             userMdl.setPwdsKey(((Char) obj).getP30F2103());

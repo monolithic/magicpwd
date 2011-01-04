@@ -97,13 +97,20 @@ public class DXA2000 implements DXA
             hint.setName(temp.get(indx++));
             tempList.add(hint);
 
-            while (indx < temp.size())
+            try
             {
-                item = new EditItem(userMdl);
-                item.setType(Integer.parseInt(temp.get(indx++)));
-                item.setName(temp.get(indx++));
-                item.setData(temp.get(indx++));
-                tempList.add(item);
+                while (indx < temp.size())
+                {
+                    item = new EditItem(userMdl);
+                    item.setType(Integer.parseInt(temp.get(indx++)));
+                    item.setName(temp.get(indx++));
+                    item.setData(temp.get(indx++));
+                    tempList.add(item);
+                }
+            }
+            catch (Exception exp)
+            {
+                System.out.println(exp.getLocalizedMessage());
             }
 
             safeMdl.enCrypt(tempKeys, tempList);

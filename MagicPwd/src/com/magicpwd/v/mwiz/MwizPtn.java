@@ -206,8 +206,6 @@ public class MwizPtn extends AFrame
 
         safeMdl = mwizMdl.getKeysMdl();
 
-        mwizMdl.getGridMdl().listKeysByKind("0");
-
         this.addComponentListener(new java.awt.event.ComponentAdapter()
         {
 
@@ -220,13 +218,11 @@ public class MwizPtn extends AFrame
                 }
             }
         });
-
-        this.pack();
-        Bean.centerForm(this, null);
     }
 
     public void showData()
     {
+        mwizMdl.getGridMdl().listKeysByKind("0");
     }
 
     @Override

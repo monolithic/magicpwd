@@ -301,6 +301,6 @@ public class Jcsv
 
     public String getHead()
     {
-        return fh;
+        return fh != null ? fh.trim() : null;
     }
 }
