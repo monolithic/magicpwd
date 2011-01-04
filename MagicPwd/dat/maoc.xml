@@ -37,58 +37,102 @@
         </menu>
         <menu id="arithmetic" text="$P30FB602" text-def="四则运算">
             <item type="normal" text="$P30FB608" text-def="加法" command="+">
-                <action id="precision" class="com.magicpwd.e.maoc.ArithmeticAction" />
+                <action id="arithmetic" class="com.magicpwd.e.maoc.ArithmeticAction" />
             </item>
             <item type="normal" text="$P30FB609" text-def="减法" command="-">
-                <action id="precision" class="com.magicpwd.e.maoc.ArithmeticAction" />
+                <action id="arithmetic" class="com.magicpwd.e.maoc.ArithmeticAction" />
             </item>
             <item type="normal" text="$P30FB60A" text-def="乘法" command="*">
-                <action id="precision" class="com.magicpwd.e.maoc.ArithmeticAction" />
+                <action id="arithmetic" class="com.magicpwd.e.maoc.ArithmeticAction" />
             </item>
             <item type="normal" text="$P30FB60B" text-def="除法" command="/">
-                <action id="precision" class="com.magicpwd.e.maoc.ArithmeticAction" />
+                <action id="arithmetic" class="com.magicpwd.e.maoc.ArithmeticAction" />
             </item>
             <seperator />
             <item type="normal" text="$P30FB60C" text-def="取模" command="%">
-                <action id="precision" class="com.magicpwd.e.maoc.ArithmeticAction" />
+                <action id="arithmetic" class="com.magicpwd.e.maoc.ArithmeticAction" />
             </item>
         </menu>
         <menu id="algebra" text="$P30FB603" text-def="代数运算">
-            <item type="normal" text="$P30FB60D" text-def="平方运算" command="^2" />
-            <item type="normal" text="$P30FB60E" text-def="立方运算" command="^3" />
-            <item type="normal" text="$P30FB60F" text-def="次幂运算" command="^" />
+            <item type="normal" text="$P30FB60D" text-def="平方运算" command="^2">
+                <action id="algebra" class="com.magicpwd.e.maoc.AlgebraAction" />
+            </item>
+            <item type="normal" text="$P30FB60E" text-def="立方运算" command="^3">
+                <action id="algebra" class="com.magicpwd.e.maoc.AlgebraAction" />
+            </item>
+            <item type="normal" text="$P30FB60F" text-def="次幂运算" command="^">
+                <action id="algebra" class="com.magicpwd.e.maoc.AlgebraAction" />
+            </item>
             <seperator />
-            <item type="normal" text="$P30FB610" text-def="二次方根运算" command="2√" />
-            <item type="normal" text="$P30FB611" text-def="三次方根运算" command="3√" />
-            <item type="normal" text="$P30FB612" text-def="方根运算" command="√" />
+            <item type="normal" text="$P30FB610" text-def="二次方根运算" command="2√">
+                <action id="algebra" class="com.magicpwd.e.maoc.AlgebraAction" />
+            </item>
+            <item type="normal" text="$P30FB611" text-def="三次方根运算" command="3√">
+                <action id="algebra" class="com.magicpwd.e.maoc.AlgebraAction" />
+            </item>
+            <item type="normal" text="$P30FB612" text-def="方根运算" command="√">
+                <action id="algebra" class="com.magicpwd.e.maoc.AlgebraAction" />
+            </item>
             <seperator />
-            <item type="normal" text="$P30FB613" text-def="10的对数运算" command="log" />
-            <item type="normal" text="$P30FB614" text-def="自然对数运算" command="ln" />
-            <item type="normal" text="$P30FB615" text-def="对数运算" command="lg" />
+            <item type="normal" text="$P30FB613" text-def="10的对数运算" command="log">
+                <action id="algebra" class="com.magicpwd.e.maoc.AlgebraAction" />
+            </item>
+            <item type="normal" text="$P30FB614" text-def="自然对数运算" command="ln">
+                <action id="algebra" class="com.magicpwd.e.maoc.AlgebraAction" />
+            </item>
+            <item type="normal" text="$P30FB615" text-def="对数运算" command="lg">
+                <action id="algebra" class="com.magicpwd.e.maoc.AlgebraAction" />
+            </item>
             <seperator />
-            <item type="normal" text="$P30FB616" text-def="阶乘运算" command="!" />
-            <item type="normal" text="$P30FB617" text-def="倒数运算" command="1/" />
+            <item type="normal" text="$P30FB616" text-def="阶乘运算" command="!">
+                <action id="algebra" class="com.magicpwd.e.maoc.AlgebraAction" />
+            </item>
+            <item type="normal" text="$P30FB617" text-def="倒数运算" command="1/">
+                <action id="algebra" class="com.magicpwd.e.maoc.AlgebraAction" />
+            </item>
         </menu>
         <menu id="trigonometry" text="$P30FB604" text-def="三角运算">
-            <item type="normal" text="$P30FB618" text-def="正弦函数" command="sin" />
-            <item type="normal" text="$P30FB619" text-def="余弦函数" command="cos" />
+            <item type="normal" text="$P30FB618" text-def="正弦函数" command="sin">
+                <action id="trigonometry" class="com.magicpwd.e.maoc.TrigonometryAction" />
+            </item>
+            <item type="normal" text="$P30FB619" text-def="余弦函数" command="cos">
+                <action id="trigonometry" class="com.magicpwd.e.maoc.TrigonometryAction" />
+            </item>
             <seperator />
-            <item type="normal" text="$P30FB61A" text-def="正切函数" command="tag" />
-            <item type="normal" text="$P30FB61B" text-def="余切函数" command="cot" />
+            <item type="normal" text="$P30FB61A" text-def="正切函数" command="tan">
+                <action id="trigonometry" class="com.magicpwd.e.maoc.TrigonometryAction" />
+            </item>
+            <item type="normal" text="$P30FB61B" text-def="余切函数" command="cot">
+                <action id="trigonometry" class="com.magicpwd.e.maoc.TrigonometryAction" />
+            </item>
             <seperator />
-            <item type="normal" text="$P30FB61C" text-def="正割函数" command="sec" />
-            <item type="normal" text="$P30FB61D" text-def="余割函数" command="csc" />
+            <item type="normal" text="$P30FB61C" text-def="正割函数" command="sec">
+                <action id="trigonometry" class="com.magicpwd.e.maoc.TrigonometryAction" />
+            </item>
+            <item type="normal" text="$P30FB61D" text-def="余割函数" command="csc">
+                <action id="trigonometry" class="com.magicpwd.e.maoc.TrigonometryAction" />
+            </item>
         </menu>
         <menu id="degree" text="$P30FB605" text-def="角度运算">
         </menu>
         <menu id="bracket" text="$P30FB606" text-def="括号运算">
-            <item type="normal" text="$P30FB61E" text-def="小括号" command="()" />
-            <item type="normal" text="$P30FB61F" text-def="中括号" command="[]" />
-            <item type="normal" text="$P30FB620" text-def="大括号" command="{}" />
+            <item type="normal" text="$P30FB61E" text-def="小括号" command="()">
+                <action id="bracket" class="com.magicpwd.e.maoc.BracketAction" />
+            </item>
+            <item type="normal" text="$P30FB61F" text-def="中括号" command="[]">
+                <action id="bracket" class="com.magicpwd.e.maoc.BracketAction" />
+            </item>
+            <item type="normal" text="$P30FB620" text-def="大括号" command="{}">
+                <action id="bracket" class="com.magicpwd.e.maoc.BracketAction" />
+            </item>
         </menu>
         <menu id="constant" text="$P30FB607" text-def="常量运算">
-            <item type="normal" text="$P30FB621" text-def="圆周率" command="π" />
-            <item type="normal" text="$P30FB622" text-def="自然数" command="ê" />
+            <item type="normal" text="$P30FB621" text-def="圆周率" command="π">
+                <action id="constant" class="com.magicpwd.e.maoc.ConstantAction" />
+            </item>
+            <item type="normal" text="$P30FB622" text-def="自然数" command="ê">
+                <action id="constant" class="com.magicpwd.e.maoc.ConstantAction" />
+            </item>
         </menu>
         <seperator />
         <item type="normal" text="$P30F960C" text-def="退出">
