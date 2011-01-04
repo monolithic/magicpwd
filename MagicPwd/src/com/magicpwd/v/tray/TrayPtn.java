@@ -222,6 +222,12 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
             case ConsEnv.APP_MODE_MPAD:
                 showMpadPtn();
                 break;
+            case ConsEnv.APP_MODE_MAOC:
+                showMaocPtn();
+                break;
+            case ConsEnv.APP_MODE_MRUC:
+                showMrucPtn();
+                break;
             default:
                 break;
         }
@@ -354,6 +360,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
             mp_MrucPtn.setVisible(true);
         }
 
+        mp_MrucPtn.showData();
         mfCurrForm = mp_MrucPtn;
         currPtn = ConsEnv.APP_MODE_MRUC;
     }

@@ -71,7 +71,7 @@ public class TrigonometryAction extends AMaocAction
             return;
         }
 
-        maocPtn.appendExpression(cmd);
+        maocPtn.replaceExpression(cmd);
         maocPtn.moveCaretPosition(-1);
     }
 

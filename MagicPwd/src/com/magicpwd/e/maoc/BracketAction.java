@@ -59,7 +59,7 @@ public class BracketAction extends AMaocAction
             return;
         }
 
-        maocPtn.appendExpression(cmd);
+        maocPtn.replaceExpression(cmd);
         maocPtn.moveCaretPosition(-1);
     }
 

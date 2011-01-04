@@ -94,6 +94,7 @@ public class MrucPtn extends AFrame
 
     public void initLang()
     {
+        this.setTitle(Lang.getLang(LangRes.P30FC201, ""));
         Bean.setText(lb_Label, Lang.getLang(LangRes.P30FB301, "单位类型(@T)"));
 
         this.pack();
@@ -124,6 +125,23 @@ public class MrucPtn extends AFrame
 
     public void showData()
     {
+        pl_Panel.removeAll();
+
+        if (lb_Notice == null)
+        {
+            lb_Notice = new javax.swing.JLabel();
+            lb_Notice.setHorizontalAlignment(javax.swing.JLabel.CENTER);
+            lb_Notice.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.lightGray));
+        }
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_Panel);
+        pl_Panel.setLayout(layout);
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_Notice, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE));
+        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_Notice, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE));
+
+        lb_Notice.setText(Lang.getLang(LangRes.P30FC202, "请选择换算单位类型！"));
+
+        this.pack();
     }
 
     @Override
@@ -214,6 +232,7 @@ public class MrucPtn extends AFrame
         this.pack();
     }
     private javax.swing.JComboBox cb_Combo;
+    private javax.swing.JLabel lb_Notice;
     private javax.swing.JLabel lb_Label;
     private javax.swing.JPanel pl_Panel;
 }

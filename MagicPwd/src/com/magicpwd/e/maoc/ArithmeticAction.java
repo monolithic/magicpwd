@@ -66,7 +66,7 @@ public class ArithmeticAction extends AMaocAction
         {
             return;
         }
-        maocPtn.appendExpression(cmd);
+        maocPtn.replaceExpression(cmd);
     }
 
     @Override
