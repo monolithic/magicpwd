@@ -17,7 +17,7 @@
 package com.magicpwd.__i.mpad;
 
 import com.magicpwd.__i.IAction;
-import com.magicpwd.v.mpad.MiniPtn;
+import com.magicpwd.v.mpad.MpadPtn;
 
 /**
  *
@@ -26,5 +26,5 @@ import com.magicpwd.v.mpad.MiniPtn;
 public interface IMpadAction extends IAction
 {
 
-    void setMiniPtn(MiniPtn miniPtn);
+    void setMiniPtn(MpadPtn miniPtn);
 }

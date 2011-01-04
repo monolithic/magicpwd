@@ -321,11 +321,39 @@ public abstract class AFrame extends javax.swing.JFrame
         glassPane.setVisible(locked);
     }
 
+    /**
+     * 构造进度窗口
+     */
+    private synchronized void initProgress()
+    {
+        pl_LckPanel = new javax.swing.JPanel();
+        pl_LckPanel.setLayout(new java.awt.BorderLayout());
+        pl_LckPanel.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.lightGray));
+
+        lb_IcoLabel = new javax.swing.JLabel();
+        lb_IcoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        pl_LckPanel.add(lb_IcoLabel, java.awt.BorderLayout.CENTER);
+
+        lb_TipLabel = new javax.swing.JLabel();
+        lb_TipLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        pl_LckPanel.add(lb_TipLabel, java.awt.BorderLayout.SOUTH);
+
+        getLayeredPane().add(pl_LckPanel, javax.swing.JLayeredPane.MODAL_LAYER);
+        lb_IcoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConsEnv.ICON_PATH + "wait.gif")));
+    }
+
+    /**
+     * 显示进度窗口（无提示信息）
+     */
     public void showProgress()
     {
         showProgress(null);
     }
 
+    /**
+     * 显示进度窗口（有提示信息）
+     * @param notice
+     */
     public void showProgress(String notice)
     {
         if (pl_LckPanel != null && pl_LckPanel.isVisible())
@@ -357,24 +385,9 @@ public abstract class AFrame extends javax.swing.JFrame
         }
     }
 
-    private synchronized void initProgress()
-    {
-        pl_LckPanel = new javax.swing.JPanel();
-        pl_LckPanel.setLayout(new java.awt.BorderLayout());
-        pl_LckPanel.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.lightGray));
-
-        lb_IcoLabel = new javax.swing.JLabel();
-        lb_IcoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        pl_LckPanel.add(lb_IcoLabel, java.awt.BorderLayout.CENTER);
-
-        lb_TipLabel = new javax.swing.JLabel();
-        lb_TipLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        pl_LckPanel.add(lb_TipLabel, java.awt.BorderLayout.SOUTH);
-
-        getLayeredPane().add(pl_LckPanel, javax.swing.JLayeredPane.MODAL_LAYER);
-        lb_IcoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConsEnv.ICON_PATH + "wait.gif")));
-    }
-
+    /**
+     * 隐藏进度窗口
+     */
     public void hideProgress()
     {
         if (pl_LckPanel == null || !pl_LckPanel.isVisible())

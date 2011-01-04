@@ -19,7 +19,7 @@ package com.magicpwd._bean.mwiz;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mwiz.IMwizBean;
 import com.magicpwd._bean.AListBean;
-import com.magicpwd.v.mwiz.NormPtn;
+import com.magicpwd.v.mwiz.MwizPtn;
 
 /**
  * Application: MagicPwd
@@ -35,7 +35,7 @@ import com.magicpwd.v.mwiz.NormPtn;
 public class ListBean extends AListBean implements IMwizBean
 {
 
-    public ListBean(NormPtn normPtn)
+    public ListBean(MwizPtn normPtn)
     {
         super(normPtn);
     }

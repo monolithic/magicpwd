@@ -24,7 +24,7 @@ import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd.d.db.DBA3000;
 import com.magicpwd.r.TreeCR;
-import com.magicpwd.v.mpwd.MainPtn;
+import com.magicpwd.v.mpwd.MpwdPtn;
 
 /**
  * @author Amon
@@ -36,9 +36,9 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
     private javax.swing.tree.DefaultMutableTreeNode treeNode;
     private Kind kindItem;
     private boolean isUpdate;
-    private MainPtn mainPtn;
+    private MpwdPtn mainPtn;
 
-    public KindProp(MainPtn mainPtn)
+    public KindProp(MpwdPtn mainPtn)
     {
         this.mainPtn = mainPtn;
     }

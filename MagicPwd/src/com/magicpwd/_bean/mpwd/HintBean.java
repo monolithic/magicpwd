@@ -26,7 +26,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Date;
 import com.magicpwd._util.Lang;
-import com.magicpwd.v.mpwd.MainPtn;
+import com.magicpwd.v.mpwd.MpwdPtn;
 
 /**
  * 属性：过期提示
@@ -38,12 +38,12 @@ public class HintBean extends javax.swing.JPanel implements IMpwdBean
 
     private WEditBox dataEdit;
     private IEditItem itemData;
-    private MainPtn mainPtn;
+    private MpwdPtn mainPtn;
     private WTextBox nameBox;
     //private WTextBox dataBox;
     private java.text.DateFormat format;
 
-    public HintBean(MainPtn mainPtn)
+    public HintBean(MpwdPtn mainPtn)
     {
         this.mainPtn = mainPtn;
     }

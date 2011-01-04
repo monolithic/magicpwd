@@ -42,11 +42,11 @@ public class EditPtn extends javax.swing.JDialog
     private int currStep;
     private boolean canEdit;
     private KeysMdl keysMdl;
-    private NormPtn normPtn;
+    private MwizPtn normPtn;
     private GuidBean guidBean;
     private HeadBean headBean;
 
-    public EditPtn(NormPtn normPtn)
+    public EditPtn(MwizPtn normPtn)
     {
         super(normPtn, true);
         this.normPtn = normPtn;

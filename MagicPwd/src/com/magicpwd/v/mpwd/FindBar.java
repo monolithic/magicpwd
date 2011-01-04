@@ -27,9 +27,9 @@ import java.awt.event.FocusEvent;
 public class FindBar extends javax.swing.JPanel
 {
 
-    private MainPtn mainPtn;
+    private MpwdPtn mainPtn;
 
-    public FindBar(MainPtn mainPtn)
+    public FindBar(MpwdPtn mainPtn)
     {
         this.mainPtn = mainPtn;
     }

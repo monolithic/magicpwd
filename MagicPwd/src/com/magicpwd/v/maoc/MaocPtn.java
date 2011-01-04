@@ -36,6 +36,7 @@ import com.magicpwd.v.tray.TrayPtn;
 public class MaocPtn extends AFrame
 {
 
+    private int precision;
     private MaocMdl maocMdl;
     private MenuPtn menuPtn;
     private java.util.ArrayList<com.magicpwd._comn.Math> list;
@@ -92,6 +93,8 @@ public class MaocPtn extends AFrame
         vsg.addContainerGap();
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(vsg));
 
+        this.setIconImage(Bean.getLogo(16));
+
         this.pack();
         Bean.centerForm(this, null);
         this.setVisible(true);
@@ -106,6 +109,9 @@ public class MaocPtn extends AFrame
 
         Bean.setText(bt_MathHelp, Lang.getLang(LangRes.P30FB503, "@O"));
         Bean.setTips(bt_MathHelp, Lang.getLang(LangRes.P30FB504, "选项(ALT + O)"));
+
+        this.pack();
+        Bean.centerForm(this, null);
     }
 
     public void initData()
@@ -159,6 +165,13 @@ public class MaocPtn extends AFrame
         }
 
         tf_MathText.requestFocus();
+
+        this.pack();
+        Bean.centerForm(this, null);
+    }
+
+    public void showData()
+    {
     }
 
     @Override
@@ -189,7 +202,7 @@ public class MaocPtn extends AFrame
         try
         {
             list.clear();
-            maocMdl.getComputer().calculate(math, 8, list);
+            maocMdl.getComputer().calculate(math, precision, list);
             showStep(math, list);
         }
         catch (Exception exp)
@@ -216,6 +229,47 @@ public class MaocPtn extends AFrame
         tn_StepRoot.add(root);
         tn_StepModel.nodeStructureChanged(tn_StepRoot);
         tr_StepList.expandPath(new javax.swing.tree.TreePath(tn_StepModel.getPathToRoot(root)));
+    }
+
+    /**
+     * @return the precision
+     */
+    public int getPrecision()
+    {
+        return precision;
+    }
+
+    /**
+     * @param precision the precision to set
+     */
+    public void setPrecision(int precision)
+    {
+        this.precision = precision;
+    }
+
+    public void setExpression(String expression)
+    {
+        tf_MathText.setText(expression);
+    }
+
+    public String getExpression()
+    {
+        return tf_MathText.getText();
+    }
+
+    public void appendExpression(String expression)
+    {
+        tf_MathText.setText(tf_MathText.getText() + expression);
+    }
+
+    public void setCaretPosition(int position)
+    {
+        tf_MathText.setCaretPosition(position);
+    }
+
+    public void moveCaretPosition(int position)
+    {
+        tf_MathText.setCaretPosition(tf_MathText.getCaretPosition() + position);
     }
     private BtnLabel bt_MathHelp;
     private BtnLabel bt_MathText;

@@ -31,10 +31,10 @@ import com.magicpwd.d.db.DBAccess;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.maoc.MaocPtn;
-import com.magicpwd.v.mpad.MiniPtn;
-import com.magicpwd.v.mpwd.MainPtn;
+import com.magicpwd.v.mpad.MpadPtn;
+import com.magicpwd.v.mpwd.MpwdPtn;
 import com.magicpwd.v.mruc.MrucPtn;
-import com.magicpwd.v.mwiz.NormPtn;
+import com.magicpwd.v.mwiz.MwizPtn;
 
 /**
  * 系统托盘
@@ -167,13 +167,13 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
             switch (UserMdl.getAppMode())
             {
                 case ConsEnv.APP_MODE_MPWD:
-                    showMainPtn();
+                    showMpwdPtn();
                     break;
                 case ConsEnv.APP_MODE_MWIZ:
-                    showNormPtn();
+                    showMwizPtn();
                     break;
                 case ConsEnv.APP_MODE_MPAD:
-                    showMiniPtn();
+                    showMpadPtn();
                     break;
                 case ConsEnv.APP_MODE_MAOC:
                     showMaocPtn();
@@ -214,13 +214,13 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         switch (nextPtn)
         {
             case ConsEnv.APP_MODE_MPWD:
-                showMainPtn();
+                showMpwdPtn();
                 break;
             case ConsEnv.APP_MODE_MWIZ:
-                showNormPtn();
+                showMwizPtn();
                 break;
             case ConsEnv.APP_MODE_MPAD:
-                showMiniPtn();
+                showMpadPtn();
                 break;
             default:
                 break;
@@ -248,72 +248,72 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         return mfCurrForm;
     }
 
-    public MainPtn getMainPtn()
+    public MpwdPtn getMpwdPtn()
     {
-        return mp_MainPtn;
+        return mp_MpwdPtn;
     }
 
-    private void showMainPtn()
+    private void showMpwdPtn()
     {
-        if (mp_MainPtn == null)
+        if (mp_MpwdPtn == null)
         {
-            mp_MainPtn = new MainPtn(this, userMdl);
-            mp_MainPtn.initView();
-            mp_MainPtn.initLang();
-            mp_MainPtn.initData();
+            mp_MpwdPtn = new MpwdPtn(this, userMdl);
+            mp_MpwdPtn.initView();
+            mp_MpwdPtn.initLang();
+            mp_MpwdPtn.initData();
         }
         else
         {
-            mp_MainPtn.setVisible(true);
+            mp_MpwdPtn.setVisible(true);
         }
 
-        mfCurrForm = mp_MainPtn;
+        mfCurrForm = mp_MpwdPtn;
         currPtn = ConsEnv.APP_MODE_MPWD;
     }
 
-    public NormPtn getNormPtn()
+    public MwizPtn getMwizPtn()
     {
-        return mp_NormPtn;
+        return mp_MwizPtn;
     }
 
-    private void showNormPtn()
+    private void showMwizPtn()
     {
-        if (mp_NormPtn == null)
+        if (mp_MwizPtn == null)
         {
-            mp_NormPtn = new NormPtn(this, userMdl);
-            mp_NormPtn.initView();
-            mp_NormPtn.initLang();
-            mp_NormPtn.initData();
+            mp_MwizPtn = new MwizPtn(this, userMdl);
+            mp_MwizPtn.initView();
+            mp_MwizPtn.initLang();
+            mp_MwizPtn.initData();
         }
         else
         {
-            mp_NormPtn.setVisible(true);
+            mp_MwizPtn.setVisible(true);
         }
 
-        mfCurrForm = mp_NormPtn;
+        mfCurrForm = mp_MwizPtn;
         currPtn = ConsEnv.APP_MODE_MWIZ;
     }
 
-    public MiniPtn getMiniPtn()
+    public MpadPtn getMpadPtn()
     {
-        return mp_MiniPtn;
+        return mp_MpadPtn;
     }
 
-    private void showMiniPtn()
+    private void showMpadPtn()
     {
-        if (mp_MiniPtn == null)
+        if (mp_MpadPtn == null)
         {
-            mp_MiniPtn = new MiniPtn(this, userMdl);
-            mp_MiniPtn.initView();
-            mp_MiniPtn.initLang();
-            mp_MiniPtn.initData();
+            mp_MpadPtn = new MpadPtn(this, userMdl);
+            mp_MpadPtn.initView();
+            mp_MpadPtn.initLang();
+            mp_MpadPtn.initData();
         }
         else
         {
-            mp_MiniPtn.setVisible(true);
+            mp_MpadPtn.setVisible(true);
         }
 
-        mfCurrForm = mp_MiniPtn;
+        mfCurrForm = mp_MpadPtn;
         currPtn = ConsEnv.APP_MODE_MPAD;
     }
 
@@ -443,20 +443,20 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         {
             DBAccess.locked = true;
 
-            if (mp_MainPtn != null)
+            if (mp_MpwdPtn != null)
             {
 //                mp_MainPtn.setVisible(false);
-                mp_MainPtn.endSave();
+                mp_MpwdPtn.endSave();
             }
-            if (mp_NormPtn != null)
+            if (mp_MwizPtn != null)
             {
 //                mp_NormPtn.setVisible(false);
-                mp_NormPtn.endSave();
+                mp_MwizPtn.endSave();
             }
-            if (mp_MiniPtn != null)
+            if (mp_MpadPtn != null)
             {
 //                mp_MiniPtn.setVisible(false);
-                mp_MiniPtn.endSave();
+                mp_MpadPtn.endSave();
             }
 
             userMdl.saveCfg();
@@ -555,13 +555,13 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
             switch (nextPtn)
             {
                 case ConsEnv.APP_MODE_MPWD:
-                    showMainPtn();
+                    showMpwdPtn();
                     break;
                 case ConsEnv.APP_MODE_MWIZ:
-                    showNormPtn();
+                    showMwizPtn();
                     break;
                 case ConsEnv.APP_MODE_MPAD:
-                    showMiniPtn();
+                    showMpadPtn();
                     break;
                 case ConsEnv.APP_MODE_MAOC:
                     showMaocPtn();
@@ -739,9 +739,9 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
     }
     private static MaocPtn mp_MaocPtn;
     private static MrucPtn mp_MrucPtn;
-    private static MiniPtn mp_MiniPtn;
-    private static NormPtn mp_NormPtn;
-    private static MainPtn mp_MainPtn;
+    private static MpadPtn mp_MpadPtn;
+    private static MwizPtn mp_MwizPtn;
+    private static MpwdPtn mp_MpwdPtn;
     private java.awt.Point dragLoc;
     private java.awt.Point formLoc;
     private java.awt.TrayIcon trayIcon;

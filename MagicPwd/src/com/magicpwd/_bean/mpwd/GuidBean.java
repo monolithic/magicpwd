@@ -28,7 +28,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.r.FileTM;
-import com.magicpwd.v.mpwd.MainPtn;
+import com.magicpwd.v.mpwd.MpwdPtn;
 import java.util.regex.Pattern;
 import org.dom4j.Document;
 import org.dom4j.Node;
@@ -44,12 +44,12 @@ public class GuidBean extends javax.swing.JPanel implements IMpwdBean
 
     private WEditBox dataEdit;
     private GuidItem itemData;
-    private MainPtn mainPtn;
+    private MpwdPtn mainPtn;
     private BtnLabel bt_ReadMail;
     private BtnLabel bt_ExptCard;
     private FileTM fileTM;
 
-    public GuidBean(MainPtn mainPtn)
+    public GuidBean(MpwdPtn mainPtn)
     {
         this.mainPtn = mainPtn;
     }

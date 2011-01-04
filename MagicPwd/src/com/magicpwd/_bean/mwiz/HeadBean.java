@@ -27,7 +27,7 @@ import com.magicpwd._util.Bean;
 import com.magicpwd._util.Date;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.mwiz.KeysMdl;
-import com.magicpwd.v.mwiz.NormPtn;
+import com.magicpwd.v.mwiz.MwizPtn;
 import com.magicpwd.x.IcoDialog;
 import java.util.EventListener;
 
@@ -45,14 +45,14 @@ import java.util.EventListener;
 public class HeadBean extends javax.swing.JPanel implements IBackCall
 {
 
-    private NormPtn normPtn;
+    private MwizPtn normPtn;
     private KeysMdl keysMdl;
     private WTextBox nameBox;
     private WTextBox metaBox;
     private WTextBox hintBox;
     private java.text.DateFormat format;
 
-    public HeadBean(NormPtn normPtn)
+    public HeadBean(MwizPtn normPtn)
     {
         this.normPtn = normPtn;
     }

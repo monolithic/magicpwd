@@ -24,7 +24,7 @@ import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
-import com.magicpwd.v.mpwd.MainPtn;
+import com.magicpwd.v.mpwd.MpwdPtn;
 
 /**
  * 属性：链接
@@ -35,11 +35,11 @@ import com.magicpwd.v.mpwd.MainPtn;
 public class LinkBean extends ALinkBean implements IMpwdBean
 {
 
-    private MainPtn mainPtn;
+    private MpwdPtn mainPtn;
     private WEditBox dataEdit;
     private WTextBox nameBox;
 
-    public LinkBean(MainPtn mainPtn)
+    public LinkBean(MpwdPtn mainPtn)
     {
         super(mainPtn);
         this.mainPtn = mainPtn;

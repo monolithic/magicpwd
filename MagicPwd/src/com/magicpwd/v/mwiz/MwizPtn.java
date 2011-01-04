@@ -38,7 +38,7 @@ import java.util.EventListener;
  * 向导模式
  * @author Amon
  */
-public class NormPtn extends AFrame
+public class MwizPtn extends AFrame
 {
 
     private MenuPtn menuPtn;
@@ -46,7 +46,7 @@ public class NormPtn extends AFrame
     private EditPtn editPtn;
     private String keyMeta;
 
-    public NormPtn(TrayPtn trayPtn, UserMdl userMdl)
+    public MwizPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
         super(trayPtn, userMdl);
     }
@@ -95,9 +95,11 @@ public class NormPtn extends AFrame
         vsg.addComponent(hb_HintBar);
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(vsg));
 
-        setIconImage(Bean.getLogo(16));
-        pack();
+        this.setIconImage(Bean.getLogo(16));
+
+        this.pack();
         Bean.centerForm(this, null);
+        this.setVisible(true);
     }
 
     public void initLang()
@@ -105,12 +107,13 @@ public class NormPtn extends AFrame
         setTitle(Lang.getLang(LangRes.P30F6201, "魔方密码"));
 
         hb_HintBar.initLang();
+
+        this.pack();
+        Bean.centerForm(this, null);
     }
 
     public void initData()
     {
-        super.setVisible(true);
-
         hb_HintBar.initData();
         hb_HintBar.setBackCall(new IBackCall()
         {
@@ -217,6 +220,13 @@ public class NormPtn extends AFrame
                 }
             }
         });
+
+        this.pack();
+        Bean.centerForm(this, null);
+    }
+
+    public void showData()
+    {
     }
 
     @Override

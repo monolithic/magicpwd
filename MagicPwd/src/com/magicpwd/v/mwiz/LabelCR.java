@@ -33,9 +33,9 @@ import com.magicpwd._util.Bean;
 public class LabelCR extends javax.swing.JLabel implements javax.swing.table.TableCellRenderer
 {
 
-    private NormPtn normPtn;
+    private MwizPtn normPtn;
 
-    public LabelCR(NormPtn normPtn)
+    public LabelCR(MwizPtn normPtn)
     {
         this.normPtn = normPtn;
         this.setOpaque(true);
