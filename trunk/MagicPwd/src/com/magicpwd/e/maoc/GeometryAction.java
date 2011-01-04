@@ -17,10 +17,40 @@
 
 package com.magicpwd.e.maoc;
 
+import com.magicpwd.__a.maoc.AMaocAction;
+import com.magicpwd._util.Char;
+import com.magicpwd.v.maoc.MaocPtn;
+
 /**
  *
  * @author yaoshangwen
  */
-public class GeometryAction {
+public class GeometryAction extends AMaocAction
+{
 
+    @Override
+    public void setMaocPtn(MaocPtn maocPtn)
+    {
+        this.maocPtn = maocPtn;
+    }
+
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent e)
+    {
+        String cmd = e.getActionCommand();
+        if (!Char.isValidate(cmd))
+        {
+            return;
+        }
+    }
+
+    @Override
+    public void doInit(Object object)
+    {
+    }
+
+    @Override
+    public void reInit(javax.swing.AbstractButton button)
+    {
+    }
 }

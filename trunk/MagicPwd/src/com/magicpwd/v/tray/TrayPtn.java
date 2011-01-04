@@ -317,6 +317,11 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         currPtn = ConsEnv.APP_MODE_MPAD;
     }
 
+    public MaocPtn getMaocPtn()
+    {
+        return mp_MaocPtn;
+    }
+
     private void showMaocPtn()
     {
         if (mp_MaocPtn == null)

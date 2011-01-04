@@ -14,13 +14,74 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package com.magicpwd.e.maoc;
+
+import com.magicpwd.__a.maoc.AMaocAction;
+import com.magicpwd._util.Char;
+import com.magicpwd.v.maoc.MaocPtn;
 
 /**
  *
  * @author yaoshangwen
  */
-public class TrigonometryAction {
+public class TrigonometryAction extends AMaocAction
+{
 
+    @Override
+    public void setMaocPtn(MaocPtn maocPtn)
+    {
+        this.maocPtn = maocPtn;
+    }
+
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent e)
+    {
+        String cmd = e.getActionCommand();
+        if (!Char.isValidate(cmd))
+        {
+            return;
+        }
+
+        if ("sin".equalsIgnoreCase(cmd))
+        {
+            cmd += "()";
+        }
+        else if ("cos".equalsIgnoreCase(cmd))
+        {
+            cmd += "()";
+        }
+        else if ("tag".equalsIgnoreCase(cmd))
+        {
+            cmd += "()";
+        }
+        else if ("cot".equalsIgnoreCase(cmd))
+        {
+            cmd += "()";
+        }
+        else if ("sec".equalsIgnoreCase(cmd))
+        {
+            cmd += "()";
+        }
+        else if ("csc".equalsIgnoreCase(cmd))
+        {
+            cmd += "()";
+        }
+        else
+        {
+            return;
+        }
+
+        maocPtn.appendExpression(cmd);
+        maocPtn.moveCaretPosition(-1);
+    }
+
+    @Override
+    public void doInit(Object object)
+    {
+    }
+
+    @Override
+    public void reInit(javax.swing.AbstractButton button)
+    {
+    }
 }
