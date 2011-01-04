@@ -14,13 +14,44 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package com.magicpwd.e.maoc;
+
+import com.magicpwd.__a.maoc.AMaocAction;
+import com.magicpwd._util.Char;
+import com.magicpwd.v.maoc.MaocPtn;
 
 /**
  *
  * @author yaoshangwen
  */
-public class AlgebraAction {
+public class AlgebraAction extends AMaocAction
+{
 
+    @Override
+    public void setMaocPtn(MaocPtn maocPtn)
+    {
+        this.maocPtn = maocPtn;
+    }
+
+    @Override
+    public void actionPerformed(java.awt.event.ActionEvent e)
+    {
+        String cmd = e.getActionCommand();
+        if (!Char.isValidate(cmd))
+        {
+            return;
+        }
+
+        maocPtn.appendExpression(cmd);
+    }
+
+    @Override
+    public void doInit(Object object)
+    {
+    }
+
+    @Override
+    public void reInit(javax.swing.AbstractButton button)
+    {
+    }
 }

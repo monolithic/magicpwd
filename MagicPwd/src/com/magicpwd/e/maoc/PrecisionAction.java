@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2011 yaoshangwen
+ *  Copyright (C) 2011 Amon
  * 
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -24,14 +24,15 @@ import com.magicpwd.v.maoc.MaocPtn;
 
 /**
  *
- * @author yaoshangwen
+ * @author Amon
  */
 public class PrecisionAction extends AMaocAction
 {
 
     @Override
-    public void setMaocPtn(MaocPtn miniPtn)
+    public void setMaocPtn(MaocPtn maocPtn)
     {
+        this.maocPtn = maocPtn;
     }
 
     @Override

@@ -19,6 +19,7 @@ package com.magicpwd.v;
 import com.magicpwd.v.tray.TrayPtn;
 import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IAction;
+import com.magicpwd.__i.maoc.IMaocAction;
 import com.magicpwd.__i.mpwd.IMpwdAction;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.ConsCfg;
@@ -943,6 +944,13 @@ public class MenuPtn
                                     mpadAction.setTrayPtn(trayPtn);
                                     mpadAction.setMiniPtn(trayPtn.getMpadPtn());
                                     mpadAction.doInit(null);
+                                }
+                                else if (action instanceof IMaocAction)
+                                {
+                                    IMaocAction maocAction = (IMaocAction) action;
+                                    maocAction.setTrayPtn(trayPtn);
+                                    maocAction.setMaocPtn(trayPtn.getMaocPtn());
+                                    maocAction.doInit(null);
                                 }
                             }
                             if (validate)
