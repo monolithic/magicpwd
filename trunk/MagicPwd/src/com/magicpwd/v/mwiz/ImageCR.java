@@ -32,9 +32,9 @@ import com.magicpwd._comn.I1S2;
 public class ImageCR extends javax.swing.JPanel implements javax.swing.table.TableCellRenderer
 {
 
-    private NormPtn normPtn;
+    private MwizPtn normPtn;
 
-    public ImageCR(NormPtn normPtn)
+    public ImageCR(MwizPtn normPtn)
     {
         this.normPtn = normPtn;
         this.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 2, 0));

@@ -22,7 +22,7 @@ import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
-import com.magicpwd.v.mpwd.MainPtn;
+import com.magicpwd.v.mpwd.MpwdPtn;
 
 /**
  * 属性：关键搜索
@@ -34,12 +34,12 @@ public class MetaBean extends javax.swing.JPanel implements IMpwdBean
 {
 
     private IEditItem itemData;
-    private MainPtn mainPtn;
+    private MpwdPtn mainPtn;
     private WEditBox dataEdit;
     private WTextBox nameBox;
     private WTextBox dataBox;
 
-    public MetaBean(MainPtn mainPtn)
+    public MetaBean(MpwdPtn mainPtn)
     {
         this.mainPtn = mainPtn;
     }

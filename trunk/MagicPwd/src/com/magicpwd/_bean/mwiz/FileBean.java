@@ -19,7 +19,7 @@ package com.magicpwd._bean.mwiz;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mwiz.IMwizBean;
 import com.magicpwd._bean.AFileBean;
-import com.magicpwd.v.mwiz.NormPtn;
+import com.magicpwd.v.mwiz.MwizPtn;
 
 /**
  *
@@ -28,9 +28,9 @@ import com.magicpwd.v.mwiz.NormPtn;
 public class FileBean extends AFileBean implements IMwizBean
 {
 
-    private NormPtn normPtn;
+    private MwizPtn normPtn;
 
-    public FileBean(NormPtn normPtn)
+    public FileBean(MwizPtn normPtn)
     {
         super(normPtn);
         this.normPtn = normPtn;

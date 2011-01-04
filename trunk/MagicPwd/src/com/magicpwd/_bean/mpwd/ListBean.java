@@ -22,7 +22,7 @@ import com.magicpwd._bean.AListBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
-import com.magicpwd.v.mpwd.MainPtn;
+import com.magicpwd.v.mpwd.MpwdPtn;
 import java.awt.event.ActionEvent;
 
 /**
@@ -32,10 +32,10 @@ import java.awt.event.ActionEvent;
 public class ListBean extends AListBean implements IMpwdBean
 {
 
-    private MainPtn mainPtn;
+    private MpwdPtn mainPtn;
     private WEditBox dataEdit;
 
-    public ListBean(MainPtn mainPtn)
+    public ListBean(MpwdPtn mainPtn)
     {
         super(mainPtn);
         this.mainPtn = mainPtn;

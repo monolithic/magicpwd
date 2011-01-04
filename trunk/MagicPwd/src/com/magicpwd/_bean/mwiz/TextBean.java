@@ -20,7 +20,7 @@ import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mwiz.IMwizBean;
 import com.magicpwd._bean.ATextBean;
 import com.magicpwd._util.Util;
-import com.magicpwd.v.mwiz.NormPtn;
+import com.magicpwd.v.mwiz.MwizPtn;
 
 /**
  *
@@ -29,7 +29,7 @@ import com.magicpwd.v.mwiz.NormPtn;
 public class TextBean extends ATextBean implements IMwizBean
 {
 
-    public TextBean(NormPtn normPtn)
+    public TextBean(MwizPtn normPtn)
     {
         super(normPtn);
     }

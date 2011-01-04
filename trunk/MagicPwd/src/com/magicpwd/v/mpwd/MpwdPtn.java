@@ -68,7 +68,7 @@ import com.magicpwd.v.tray.TrayPtn;
 import com.magicpwd.x.MdiDialog;
 import java.util.EventListener;
 
-public class MainPtn extends AFrame
+public class MpwdPtn extends AFrame
 {
 
     private EditDlg ed_KeysEdit;
@@ -89,7 +89,7 @@ public class MainPtn extends AFrame
     /**用户上一次的操作方式*/
     private boolean isSearch;
 
-    public MainPtn(TrayPtn trayPtn, UserMdl userMdl)
+    public MpwdPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
         super(trayPtn, userMdl);
     }
@@ -111,8 +111,9 @@ public class MainPtn extends AFrame
 
         setIconImage(Bean.getLogo(16));
 
-        pack();
+        this.pack();
         Bean.centerForm(this, null);
+        super.setVisible(true);
     }
 
     public void initLang()
@@ -123,12 +124,13 @@ public class MainPtn extends AFrame
         initPropLang();
         initUserLang();
         initBaseLang();
+
+        this.pack();
+        Bean.centerForm(this, null);
     }
 
     public void initData()
     {
-        super.setVisible(true);
-
         try
         {
             menuPtn = new MenuPtn(trayPtn, this);
@@ -235,8 +237,12 @@ public class MainPtn extends AFrame
             group.setSelected(userMdl.getCfg(ConsCfg.CFG_VIEW_LIST_KEY, "01"), true);
         }
 
-        pack();
+        this.pack();
         Bean.centerForm(this, null);
+    }
+
+    public void showData()
+    {
     }
 
     private boolean hintCallBack()

@@ -27,10 +27,10 @@ import com.magicpwd._util.Logs;
 public class FindBar extends javax.swing.JPanel
 {
 
-    private NormPtn normPtn;
+    private MwizPtn normPtn;
     private String lastMeta = "";
 
-    public FindBar(NormPtn normPtn)
+    public FindBar(MwizPtn normPtn)
     {
         this.normPtn = normPtn;
     }

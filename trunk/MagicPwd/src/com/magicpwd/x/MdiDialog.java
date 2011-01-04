@@ -31,7 +31,7 @@ import com.magicpwd._prop.USetProp;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd.r.ListCR;
-import com.magicpwd.v.mpwd.MainPtn;
+import com.magicpwd.v.mpwd.MpwdPtn;
 
 /**
  * 软件设置对话框
@@ -44,9 +44,9 @@ public class MdiDialog extends javax.swing.JDialog
     private java.awt.CardLayout cl_CardLayout;
     private javax.swing.DefaultListModel lm_PropList;
     private java.util.HashMap<String, IPropBean> hm_PropList;
-    private MainPtn mainPtn;
+    private MpwdPtn mainPtn;
 
-    public MdiDialog(MainPtn mainPtn)
+    public MdiDialog(MpwdPtn mainPtn)
     {
         super(mainPtn);
         this.mainPtn = mainPtn;

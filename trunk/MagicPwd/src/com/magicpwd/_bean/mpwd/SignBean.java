@@ -23,7 +23,7 @@ import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
-import com.magicpwd.v.mpwd.MainPtn;
+import com.magicpwd.v.mpwd.MpwdPtn;
 
 /**
  *
@@ -32,11 +32,11 @@ import com.magicpwd.v.mpwd.MainPtn;
 public class SignBean extends ASignBean
 {
 
-    private MainPtn mainPtn;
+    private MpwdPtn mainPtn;
     private WEditBox dataEdit;
     private WTextBox nameBox;
 
-    public SignBean(MainPtn mainPtn)
+    public SignBean(MpwdPtn mainPtn)
     {
         super(mainPtn);
         this.mainPtn = mainPtn;

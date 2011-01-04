@@ -84,6 +84,9 @@ public class MrucPtn extends AFrame
         vsg.addContainerGap();
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(vsg));
 
+        this.setResizable(false);
+        this.setIconImage(Bean.getLogo(16));
+
         this.pack();
         Bean.centerForm(this, null);
         this.setVisible(true);
@@ -92,6 +95,7 @@ public class MrucPtn extends AFrame
     public void initLang()
     {
         Bean.setText(lb_Label, Lang.getLang(LangRes.P30FB301, "单位类型(@T)"));
+
         this.pack();
         Bean.centerForm(this, null);
     }
@@ -116,6 +120,10 @@ public class MrucPtn extends AFrame
 
         this.pack();
         Bean.centerForm(this, null);
+    }
+
+    public void showData()
+    {
     }
 
     @Override

@@ -47,11 +47,11 @@ import com.magicpwd.m.mwiz.KeysMdl;
 public class BodyBar extends javax.swing.JPanel
 {
 
-    private NormPtn normPtn;
+    private MwizPtn normPtn;
     private KeysMdl keysMdl;
     private int currStep;
 
-    public BodyBar(NormPtn normPtn, KeysMdl keysMdl)
+    public BodyBar(MwizPtn normPtn, KeysMdl keysMdl)
     {
         this.normPtn = normPtn;
         this.keysMdl = keysMdl;

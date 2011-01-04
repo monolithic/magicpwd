@@ -14,17 +14,53 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.__i.mpwd;
+package com.magicpwd.v.mcmd;
 
-import com.magicpwd.__i.IAction;
-import com.magicpwd.v.mpwd.MpwdPtn;
+import com.magicpwd.__a.AFrame;
+import com.magicpwd.v.MenuPtn;
 
 /**
- *
- * @author aven
+ * 命令行模式
+ * @author Aven
  */
-public interface IMpwdAction extends IAction
+public class McmdPtn extends AFrame
 {
 
-    void setMainPtn(MpwdPtn mainPtn);
+    public McmdPtn()
+    {
+        super(null, null);
+    }
+
+    public void initView()
+    {
+    }
+
+    public void initLang()
+    {
+    }
+
+    public void initData()
+    {
+    }
+
+    public void showData()
+    {
+    }
+
+    @Override
+    public MenuPtn getMenuPtn()
+    {
+        return null;
+    }
+
+    @Override
+    public boolean endSave()
+    {
+        return true;
+    }
+
+    @Override
+    public void requestFocus()
+    {
+    }
 }

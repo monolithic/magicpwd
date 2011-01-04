@@ -25,7 +25,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.CharMdl;
 import com.magicpwd.r.ListCR;
-import com.magicpwd.v.mpwd.MainPtn;
+import com.magicpwd.v.mpwd.MpwdPtn;
 
 /**
  * @author Amon
@@ -39,9 +39,9 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
      */
     private Char charItem;
     private boolean isUpdate;
-    private MainPtn mainPtn;
+    private MpwdPtn mainPtn;
 
-    public CharProp(MainPtn mainPtn)
+    public CharProp(MpwdPtn mainPtn)
     {
         this.mainPtn = mainPtn;
     }

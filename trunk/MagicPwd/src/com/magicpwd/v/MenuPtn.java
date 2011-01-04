@@ -490,7 +490,7 @@ public class MenuPtn
         javax.swing.JCheckBoxMenuItem item;
         String lookName = userMdl.getCfg(ConsCfg.CFG_SKIN_NAME, ConsCfg.DEF_SKIN_SYS);
         LookAction action = new LookAction();
-        action.setMainPtn(trayPtn.getMainPtn());
+        action.setMainPtn(trayPtn.getMpwdPtn());
         WButtonGroup group = new WButtonGroup();
 
         // Java默认风格
@@ -672,7 +672,7 @@ public class MenuPtn
             javax.swing.JCheckBoxMenuItem item;
             String feelName = userMdl.getCfg(ConsCfg.CFG_SKIN_FEEL, ConsCfg.DEF_FEEL_DEF);
             FeelAction action = new FeelAction();
-            action.setMainPtn(trayPtn.getMainPtn());
+            action.setMainPtn(trayPtn.getMpwdPtn());
             WButtonGroup group = new WButtonGroup();
 
             java.util.Properties prop = new java.util.Properties();
@@ -927,21 +927,21 @@ public class MenuPtn
                                 {
                                     IMpwdAction mpwdAction = (IMpwdAction) action;
                                     mpwdAction.setTrayPtn(trayPtn);
-                                    mpwdAction.setMainPtn(trayPtn.getMainPtn());
+                                    mpwdAction.setMainPtn(trayPtn.getMpwdPtn());
                                     mpwdAction.doInit(null);
                                 }
                                 else if (action instanceof IMwizAction)
                                 {
                                     IMwizAction mwizAction = (IMwizAction) action;
                                     mwizAction.setTrayPtn(trayPtn);
-                                    mwizAction.setNormPtn(trayPtn.getNormPtn());
+                                    mwizAction.setNormPtn(trayPtn.getMwizPtn());
                                     mwizAction.doInit(null);
                                 }
                                 else if (action instanceof IMpadAction)
                                 {
                                     IMpadAction mpadAction = (IMpadAction) action;
                                     mpadAction.setTrayPtn(trayPtn);
-                                    mpadAction.setMiniPtn(trayPtn.getMiniPtn());
+                                    mpadAction.setMiniPtn(trayPtn.getMpadPtn());
                                     mpadAction.doInit(null);
                                 }
                             }

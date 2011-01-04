@@ -18,7 +18,7 @@ package com.magicpwd.__a.mwiz;
 
 import com.magicpwd.__a.AAction;
 import com.magicpwd.__i.mwiz.IMwizAction;
-import com.magicpwd.v.mwiz.NormPtn;
+import com.magicpwd.v.mwiz.MwizPtn;
 
 /**
  *
@@ -27,10 +27,10 @@ import com.magicpwd.v.mwiz.NormPtn;
 public abstract class AMwizAction extends AAction implements IMwizAction
 {
 
-    protected NormPtn normPtn;
+    protected MwizPtn normPtn;
 
     @Override
-    public void setNormPtn(NormPtn normPtn)
+    public void setNormPtn(MwizPtn normPtn)
     {
         this.normPtn = normPtn;
     }

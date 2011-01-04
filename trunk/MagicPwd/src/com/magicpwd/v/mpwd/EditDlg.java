@@ -25,9 +25,9 @@ import com.magicpwd._util.Lang;
  */
 public class EditDlg extends javax.swing.JDialog
 {
-    private MainPtn mainPtn;
+    private MpwdPtn mainPtn;
 
-    public EditDlg(MainPtn mainPtn)
+    public EditDlg(MpwdPtn mainPtn)
     {
         super(mainPtn);
         this.mainPtn = mainPtn;

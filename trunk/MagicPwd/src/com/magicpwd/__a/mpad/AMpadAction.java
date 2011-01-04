@@ -18,7 +18,7 @@ package com.magicpwd.__a.mpad;
 
 import com.magicpwd.__a.AAction;
 import com.magicpwd.__i.mpad.IMpadAction;
-import com.magicpwd.v.mpad.MiniPtn;
+import com.magicpwd.v.mpad.MpadPtn;
 
 /**
  *
@@ -27,10 +27,10 @@ import com.magicpwd.v.mpad.MiniPtn;
 public abstract class AMpadAction extends AAction implements IMpadAction
 {
 
-    protected MiniPtn miniPtn;
+    protected MpadPtn miniPtn;
 
     @Override
-    public void setMiniPtn(MiniPtn miniPtn)
+    public void setMiniPtn(MpadPtn miniPtn)
     {
         this.miniPtn = miniPtn;
     }

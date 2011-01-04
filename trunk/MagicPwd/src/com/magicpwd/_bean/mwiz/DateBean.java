@@ -20,7 +20,7 @@ import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mwiz.IMwizBean;
 import com.magicpwd._bean.ADateBean;
 import com.magicpwd._util.Util;
-import com.magicpwd.v.mwiz.NormPtn;
+import com.magicpwd.v.mwiz.MwizPtn;
 
 /**
  *
@@ -29,7 +29,7 @@ import com.magicpwd.v.mwiz.NormPtn;
 public class DateBean extends ADateBean implements IMwizBean
 {
 
-    public DateBean(NormPtn normPtn)
+    public DateBean(MwizPtn normPtn)
     {
         super(normPtn);
     }

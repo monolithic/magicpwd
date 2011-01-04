@@ -24,7 +24,7 @@ import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
-import com.magicpwd.v.mpwd.MainPtn;
+import com.magicpwd.v.mpwd.MpwdPtn;
 
 /**
  * 属性：附注
@@ -34,11 +34,11 @@ import com.magicpwd.v.mpwd.MainPtn;
 public class AreaBean extends AAreaBean implements IMpwdBean
 {
 
-    private MainPtn mainPtn;
+    private MpwdPtn mainPtn;
     private WEditBox dataEdit;
     private WTextBox nameBox;
 
-    public AreaBean(MainPtn mainPtn)
+    public AreaBean(MpwdPtn mainPtn)
     {
         super(mainPtn);
         this.mainPtn = mainPtn;

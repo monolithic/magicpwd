@@ -18,7 +18,7 @@ package com.magicpwd.__a.mpwd;
 
 import com.magicpwd.__a.AAction;
 import com.magicpwd.__i.mpwd.IMpwdAction;
-import com.magicpwd.v.mpwd.MainPtn;
+import com.magicpwd.v.mpwd.MpwdPtn;
 
 /**
  *
@@ -27,10 +27,10 @@ import com.magicpwd.v.mpwd.MainPtn;
 public abstract class AMpwdAction extends AAction implements IMpwdAction
 {
 
-    protected MainPtn mainPtn;
+    protected MpwdPtn mainPtn;
 
     @Override
-    public void setMainPtn(MainPtn mainPtn)
+    public void setMainPtn(MpwdPtn mainPtn)
     {
         this.mainPtn = mainPtn;
     }

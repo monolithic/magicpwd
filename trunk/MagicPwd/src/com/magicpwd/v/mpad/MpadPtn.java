@@ -43,7 +43,7 @@ import com.magicpwd.v.tray.TrayPtn;
  *
  * @author Amon
  */
-public class MiniPtn extends AFrame
+public class MpadPtn extends AFrame
 {
 
     private String lastHash;
@@ -54,7 +54,7 @@ public class MiniPtn extends AFrame
     private WTextBox nameBox;
     private WTextBox dataBox;
 
-    public MiniPtn(TrayPtn trayPtn, UserMdl userMdl)
+    public MpadPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
         super(trayPtn, userMdl);
     }
@@ -186,8 +186,10 @@ public class MiniPtn extends AFrame
         getContentPane().add(pl_NoteBase);
 
         setIconImage(Bean.getLogo(16));
-        pack();
+
+        this.pack();
         Bean.centerForm(this, null);
+        this.setVisible(true);
     }
 
     public void initLang()
@@ -212,12 +214,13 @@ public class MiniPtn extends AFrame
 
         nameBox.initLang();
         dataBox.initLang();
+
+        this.pack();
+        Bean.centerForm(this, null);
     }
 
     public void initData()
     {
-        super.setVisible(true);
-
         mpadMdl = new MpadMdl(userMdl);
         mpadMdl.init();
 
@@ -246,6 +249,13 @@ public class MiniPtn extends AFrame
         {
             Logs.exception(e);
         }
+
+        this.pack();
+        Bean.centerForm(this, null);
+    }
+
+    public void showData()
+    {
     }
 
     private void cb_NoteInfoItemStateChanged(java.awt.event.ItemEvent evt)
