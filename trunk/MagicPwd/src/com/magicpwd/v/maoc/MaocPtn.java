@@ -102,7 +102,8 @@ public class MaocPtn extends AFrame
 
     public void initLang()
     {
-        Bean.setText(lb_MathText, Lang.getLang("", "计算式(@F)"));
+        this.setTitle(Lang.getLang(LangRes.P30FB201, "计算器"));
+        Bean.setText(lb_MathText, Lang.getLang(LangRes.P30FB301, "计算式(@F)"));
 
         Bean.setText(bt_MathText, Lang.getLang(LangRes.P30FB501, "@C"));
         Bean.setTips(bt_MathText, Lang.getLang(LangRes.P30FB502, "运算(ALT + C)"));

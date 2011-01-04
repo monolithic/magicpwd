@@ -94,8 +94,8 @@ public class MrucPtn extends AFrame
 
     public void initLang()
     {
-        this.setTitle(Lang.getLang(LangRes.P30FC201, ""));
-        Bean.setText(lb_Label, Lang.getLang(LangRes.P30FB301, "单位类型(@T)"));
+        this.setTitle(Lang.getLang(LangRes.P30FC201, "单位换算"));
+        Bean.setText(lb_Label, Lang.getLang(LangRes.P30FC301, "单位类型(@T)"));
 
         this.pack();
         Bean.centerForm(this, null);
