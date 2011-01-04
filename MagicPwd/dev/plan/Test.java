@@ -4,7 +4,7 @@ package plan;
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-import com.magicpwd.v.mwiz.NormPtn;
+import com.magicpwd.v.mwiz.MwizPtn;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -23,7 +23,7 @@ public class Test
         {
             Logger.getLogger(Test.class.getName()).log(Level.SEVERE, null, ex);
         }
-        NormPtn norm = new NormPtn(null, null);
+        MwizPtn norm = new MwizPtn(null, null);
         norm.initView();
         norm.initLang();
         norm.initData();
