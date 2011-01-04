@@ -741,6 +741,8 @@ public abstract class AFrame extends javax.swing.JFrame
             return false;
         }
 
+        setLocked(true);
+        showProgress();
         try
         {
             Jcsv csv = new Jcsv(file);
@@ -755,6 +757,8 @@ public abstract class AFrame extends javax.swing.JFrame
             Logs.exception(exp);
             Lang.showMesg(this, LangRes.P30F7A26, "数据导出失败，请确认您数据的正确性，然后重新尝试！");
         }
+        hideProgress();
+        setLocked(true);
         return true;
     }
 
@@ -790,6 +794,8 @@ public abstract class AFrame extends javax.swing.JFrame
             return false;
         }
 
+        setLocked(true);
+        showProgress();
         try
         {
             Jcsv csv = new Jcsv(file);
@@ -803,6 +809,8 @@ public abstract class AFrame extends javax.swing.JFrame
             Logs.exception(exp);
             Lang.showMesg(this, LangRes.P30F7A08, "TXT文档格式解析出错，数据导入失败！");
         }
+        hideProgress();
+        setLocked(false);
         return true;
     }
 
