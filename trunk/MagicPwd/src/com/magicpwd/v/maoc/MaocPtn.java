@@ -262,6 +262,11 @@ public class MaocPtn extends AFrame
         tf_MathText.setText(tf_MathText.getText() + expression);
     }
 
+    public void replaceExpression(String expression)
+    {
+        tf_MathText.replaceSelection(expression);
+    }
+
     public void setCaretPosition(int position)
     {
         tf_MathText.setCaretPosition(position);
