@@ -94,6 +94,7 @@ INSERT INTO C2010200 VALUES(6,0,'qqqqqazebgyffdbv','sctfxrcwrqygwvxb','Fetion','
 INSERT INTO C2010200 VALUES(19,0,'qqqqqazessaefwaz','sctfxrcwcvzybzxc','Yeah','Yeah','','','2010-10-08 08:58:20.208000000','2010-01-19 16:58:39.250000000')
 INSERT INTO C2010200 VALUES(0,0,'qqqqqazeswxrcztw','sctfxrcwcvzybzxc','126','126','','','2010-01-19 13:53:04.660000000','2010-01-19 13:32:04.675000000')
 INSERT INTO C2010200 VALUES(2,0,'qqqqqazeyvfygcqd','sctfxrczgcywxezs','\u7f51\u5740\u6536\u85cf','\u7f51\u5740\u6536\u85cf','','','2010-10-05 10:36:21.140000000','2010-02-24 08:36:30.359000000')
+INSERT INTO C2010200 VALUES(7,0,'qqqqqazgxzwvezxv','qqqqqaarsdbrzsby','\u516c\u5171\u670d\u52a1','\u516c\u5171\u670d\u52a1','','','2011-01-05 10:12:59.611000000','2011-01-05 10:12:59.611000000')
 INSERT INTO C2010200 VALUES(15,0,'qqqqqazqaeabdede','sctfxrcwcvzybzxc','Sohu','Sohu','','','2010-10-08 08:58:20.818000000','2009-03-18 12:27:56.421000000')
 INSERT INTO C2010200 VALUES(25,0,'qqqqqazqbbdgdbqr','sctfxrcwcecbyarb','\u521b\u4e1a','\u521b\u4e1a','','','2010-05-25 23:01:50.281000000','2009-04-29 12:49:42.937000000')
 INSERT INTO C2010200 VALUES(24,0,'qqqqqazqxwgteqgf','sctfxrcwcecbyarb','\u9910\u996e','\u9910\u996e','','','2010-05-25 23:01:50.093000000','2009-03-30 12:12:12.921000000')
