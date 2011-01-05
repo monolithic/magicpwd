@@ -32,7 +32,7 @@ import com.magicpwd.m.UserMdl;
  *
  * @author Amon
  */
-public class DXA2000 implements DXA
+public class DXA2000 extends DXA
 {
 
     public DXA2000()
