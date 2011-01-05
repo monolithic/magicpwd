@@ -161,35 +161,32 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         }
 
         // 用户登录
-        if (ConsEnv.STR_SIGN_IN.equalsIgnoreCase(params[0]) || ConsEnv.STR_SIGN_UP.equalsIgnoreCase(params[0]))
+        if (ConsEnv.STR_SIGN_IN.equalsIgnoreCase(params[0]))
         {
             // 设置软件界面风格
-            switch (UserMdl.getAppMode())
-            {
-                case ConsEnv.APP_MODE_MPWD:
-                    showMpwdPtn();
-                    break;
-                case ConsEnv.APP_MODE_MWIZ:
-                    showMwizPtn();
-                    break;
-                case ConsEnv.APP_MODE_MPAD:
-                    showMpadPtn();
-                    break;
-                case ConsEnv.APP_MODE_MAOC:
-                    showMaocPtn();
-                    break;
-                case ConsEnv.APP_MODE_MRUC:
-                    showMrucPtn();
-                    break;
-                default:
-                    return false;
-            }
+            showPtn(UserMdl.getAppMode());
 
             initView();
             initLang();
             initData();
             mfCurrForm.toFront();
             mfCurrForm.requestFocus();
+            return true;
+        }
+
+        // 用户注册
+        if (ConsEnv.STR_SIGN_UP.equalsIgnoreCase(params[0]))
+        {
+            // 设置软件界面风格
+            showPtn(UserMdl.getAppMode());
+
+            initView();
+            initLang();
+            initData();
+            mfCurrForm.toFront();
+            mfCurrForm.requestFocus();
+
+            mfCurrForm.initDemo();
             return true;
         }
 
@@ -211,7 +208,20 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
             return false;
         }
 
-        switch (nextPtn)
+        showPtn(nextPtn);
+
+        javax.swing.JFrame currForm = getCurrForm();
+        if (currForm.getState() != java.awt.Frame.NORMAL)
+        {
+            currForm.setState(java.awt.Frame.NORMAL);
+        }
+        currForm.toFront();
+        return true;
+    }
+
+    private void showPtn(int view)
+    {
+        switch (view)
         {
             case ConsEnv.APP_MODE_MPWD:
                 showMpwdPtn();
@@ -231,14 +241,6 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
             default:
                 break;
         }
-
-        javax.swing.JFrame currForm = getCurrForm();
-        if (currForm.getState() != java.awt.Frame.NORMAL)
-        {
-            currForm.setState(java.awt.Frame.NORMAL);
-        }
-        currForm.toFront();
-        return true;
     }
 
     public void setVisible(boolean visible)

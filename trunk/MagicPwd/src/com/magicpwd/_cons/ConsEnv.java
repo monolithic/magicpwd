@@ -72,6 +72,7 @@ public interface ConsEnv
     char PWDS_MASK = '*';
     String DIR_BAK = "bak";
     String DIR_DAT = "dat";
+    String DIR_AMX = "amx";
     String DIR_AMA = "ama";
     String DIR_LOG = "log";
     String DIR_ICO = "ico";
