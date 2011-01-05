@@ -118,6 +118,37 @@ public abstract class AFrame extends javax.swing.JFrame
     @Override
     public abstract void requestFocus();
 
+    public void initDemo()
+    {
+        java.io.File dir = new java.io.File(ConsEnv.DIR_AMX);
+        if (!dir.exists() || !dir.isDirectory() || !dir.canRead())
+        {
+            return;
+        }
+
+        setLocked(true);
+        showProgress(Lang.getLang(LangRes.P30F1A05, "正在初始化资源数据，请稍候……"));
+
+        String tmp;
+        for (java.io.File file : dir.listFiles(new AmonFF("^(0|[A-Za-z]{16})\\.amx$", true)))
+        {
+            try
+            {
+                Jcsv csv = new Jcsv(file);
+                java.util.ArrayList<java.util.ArrayList<String>> data = csv.readFile();
+                tmp = file.getName();
+                DXA.getInstance(csv.getHead()).importByKind(userMdl, safeMdl, data, tmp.substring(0, tmp.length() - ConsEnv.DIR_AMX.length()));
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+        }
+
+        showProgress();
+        setLocked(true);
+    }
+
     @Override
     protected void processWindowEvent(java.awt.event.WindowEvent e)
     {
