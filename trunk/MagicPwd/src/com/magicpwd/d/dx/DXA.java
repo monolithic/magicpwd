@@ -16,6 +16,7 @@
  */
 package com.magicpwd.d.dx;
 
+import com.magicpwd._util.Char;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
 
@@ -23,14 +24,23 @@ import com.magicpwd.m.UserMdl;
  *
  * @author Amon
  */
-public interface DXA
+public abstract class DXA
 {
 
-    int importByKind(UserMdl userMdl, SafeMdl safeMdl, java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash) throws Exception;
+    public static DXA getInstance(String header)
+    {
+        if (Char.isValidate(header) && header.toUpperCase().indexOf("V2") > -1)
+        {
+            return new DXA2000();
+        }
+        return new DXA1000();
+    }
 
-    int importByKeys(java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash) throws Exception;
+    abstract public int importByKind(UserMdl userMdl, SafeMdl safeMdl, java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash) throws Exception;
 
-    int exportByKind(UserMdl userMdl, SafeMdl safeMdl, java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash) throws Exception;
+    abstract public int importByKeys(java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash) throws Exception;
 
-    int exportByKeys(java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash) throws Exception;
+    abstract public int exportByKind(UserMdl userMdl, SafeMdl safeMdl, java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash) throws Exception;
+
+    abstract public int exportByKeys(java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash) throws Exception;
 }

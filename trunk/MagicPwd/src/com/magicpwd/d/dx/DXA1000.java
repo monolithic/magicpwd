@@ -27,13 +27,12 @@ import com.magicpwd._util.Logs;
 import com.magicpwd.d.db.DBA3000;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
-import java.util.ArrayList;
 
 /**
  *
  * @author Amon
  */
-public class DXA1000 implements DXA
+public class DXA1000 extends DXA
 {
 
     public DXA1000()
