@@ -42,7 +42,7 @@ public class WOperator
      */
     public WOperator()
     {
-        this(MaocEnv.OPR_ADD_EXP, MaocEnv.OPR_ADD_INT);
+        this(MaocEnv.OPR_ADD_EXP_EN, MaocEnv.OPR_ADD_INT);
     }
 
     /**

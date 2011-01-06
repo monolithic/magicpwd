@@ -162,14 +162,21 @@ public class MailDlg extends javax.swing.JFrame implements Runnable
     {
         for (Folder sub : folder.list())
         {
-            sub.open(Folder.READ_ONLY);
-            NodeMdl temp = new NodeMdl(connect, sub);
-            node.add(temp);
-            if ((sub.getType() & Folder.HOLDS_FOLDERS) != 0)
+            try
             {
-                listFolders(connect, temp, sub);
+                sub.open(Folder.READ_ONLY);
+                NodeMdl temp = new NodeMdl(connect, sub);
+                node.add(temp);
+                if ((sub.getType() & Folder.HOLDS_FOLDERS) != 0)
+                {
+                    listFolders(connect, temp, sub);
+                }
+                sub.close(false);
             }
-            sub.close(false);
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
         }
     }
 
