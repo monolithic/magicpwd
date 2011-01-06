@@ -43,8 +43,8 @@ public class HintBar extends javax.swing.JPanel
     public void initView()
     {
         setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 0, getBackground().darker()));
-        lb_DateLabel = new javax.swing.JLabel();
-        lb_DateLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lb_HintLabel = new javax.swing.JLabel();
+
         lb_InfoLabel = new javax.swing.JLabel();
         lb_InfoLabel.addMouseListener(new java.awt.event.MouseAdapter()
         {
@@ -56,10 +56,14 @@ public class HintBar extends javax.swing.JPanel
             }
         });
 
+        lb_DateLabel = new javax.swing.JLabel();
+        lb_DateLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addContainerGap();
+        hsg.addComponent(lb_HintLabel);
         hsg.addComponent(lb_InfoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg.addComponent(lb_DateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE);
@@ -69,6 +73,7 @@ public class HintBar extends javax.swing.JPanel
         javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         hpg.addComponent(lb_DateLabel);
         hpg.addComponent(lb_InfoLabel);
+        hpg.addComponent(lb_HintLabel);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
         vsg.addGap(3);
         vsg.addGroup(hpg);
@@ -94,7 +99,7 @@ public class HintBar extends javax.swing.JPanel
             @Override
             public boolean callBack(Object sender, java.util.EventListener event, String... params)
             {
-                return showHint(true);
+                return showInfo(true);
             }
         });
     }
@@ -110,7 +115,12 @@ public class HintBar extends javax.swing.JPanel
         }
     }
 
-    public boolean showHint(boolean schedule)
+    public void showHint(String hint)
+    {
+        lb_HintLabel.setText(hint);
+    }
+
+    public boolean showInfo(boolean schedule)
     {
         java.util.Calendar cal = java.util.Calendar.getInstance();
 
@@ -140,8 +150,6 @@ public class HintBar extends javax.swing.JPanel
         }
         return true;
     }
-    private javax.swing.JLabel lb_InfoLabel;
-    private javax.swing.JLabel lb_DateLabel;
 
     /**
      * @return the backCall
@@ -158,4 +166,7 @@ public class HintBar extends javax.swing.JPanel
     {
         this.backCall = backCall;
     }
+    private javax.swing.JLabel lb_HintLabel;
+    private javax.swing.JLabel lb_InfoLabel;
+    private javax.swing.JLabel lb_DateLabel;
 }

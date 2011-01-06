@@ -396,7 +396,7 @@ public class MpwdPtn extends AFrame
         }
 
         showPropInfo();
-        mainInfo.showHint(false);
+        mainInfo.showInfo(false);
 
         lastKeys = null;
         tb_LastIndx = -1;
@@ -980,6 +980,8 @@ public class MpwdPtn extends AFrame
                 mpwdMdl.getListMdl().listKeysByKind(queryKey);
             }
         }
+
+        mainInfo.showHint("共 " + mpwdMdl.getListMdl().getSize() + " 条数据");
 
         isSearch = false;
         lastKeys = null;

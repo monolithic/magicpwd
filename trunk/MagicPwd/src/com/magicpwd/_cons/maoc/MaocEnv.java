@@ -14,7 +14,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package com.magicpwd._cons.maoc;
 
 /**
@@ -29,6 +28,7 @@ public interface MaocEnv
     // ----------------------------------------------------
     // 0 级运算
     // ----------------------------------------------------
+
     /** 左大括号 */
     String OPR_LLB_EXP = "{";
     int OPR_LLB_INT = 0;
@@ -42,10 +42,12 @@ public interface MaocEnv
     // 1 级运算
     // ----------------------------------------------------
     /** 加 */
-    String OPR_ADD_EXP = "+";
+    String OPR_ADD_EXP_EN = "+";
+    String OPR_ADD_EXP_CN = "＋－×÷／＝εΕπΠ㏒㏑﹢㈠㈡㈢㈣㈤㈥㈦㈧㈨㈩①②③④⑤⑥⑦⑧⑨⑩";
     int OPR_ADD_INT = 3;
     /** 减 */
-    String OPR_SUB_EXP = "-";
+    String OPR_SUB_EXP_EN = "-";
+    String OPR_SUB_EXP_CN = "-";
     int OPR_SUB_INT = 3;
     // ----------------------------------------------------
     // 2 级运算
@@ -110,31 +112,32 @@ public interface MaocEnv
     // 数据输入区域
     // ////////////////////////////////////////////////////////////////////////
     /** 0 */
-    String NUM_0 = "0";
+    String NUM_0_EN = "0";
     /** 1 */
-    String NUM_1 = "1";
+    String NUM_1_EN = "1";
     /** 2 */
-    String NUM_2 = "2";
+    String NUM_2_EN = "2";
     /** 3 */
-    String NUM_3 = "3";
+    String NUM_3_EN = "3";
     /** 4 */
-    String NUM_4 = "4";
+    String NUM_4_EN = "4";
     /** 5 */
-    String NUM_5 = "5";
+    String NUM_5_EN = "5";
     /** 6 */
-    String NUM_6 = "6";
+    String NUM_6_EN = "6";
     /** 7 */
-    String NUM_7 = "7";
+    String NUM_7_EN = "7";
     /** 8 */
-    String NUM_8 = "8";
+    String NUM_8_EN = "8";
     /** 9 */
-    String NUM_9 = "9";
+    String NUM_9_EN = "9";
     /** . */
-    String NUM_D = ".";
+    String NUM_D_EN = ".";
     /** e */
     String NUM_E = "e";
     /** pi */
-    String NUM_P = "π";
+    String NUM_P_LC = "π";
+    String NUM_P_UC = "π";
     // ////////////////////////////////////////////////////////////////////////
     // 结果显示区域
     // ////////////////////////////////////////////////////////////////////////

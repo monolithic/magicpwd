@@ -24,6 +24,7 @@ import java.math.BigInteger;
 import java.math.MathContext;
 import java.util.List;
 import java.util.Stack;
+import java.util.regex.Pattern;
 
 /**
  * <ul>
@@ -218,11 +219,13 @@ public final class WComputer
      */
     public String calculate(String exps, int scale, List<com.magicpwd._comn.Math> stepList) throws Exception
     {
-        if (exps == null)
+        if (!Char.isValidate(exps))
         {
             throw new Exception("表达式为空！");
         }
-        exps = exps.trim();
+
+        // 去除表达式中所有空格
+        exps = exps.replaceAll("\\s+", "").toLowerCase();
         if (exps.endsWith("="))
         {
             exps = exps.substring(0, exps.length() - 1);
@@ -231,9 +234,6 @@ public final class WComputer
         {
             throw new Exception("表达式为空！");
         }
-
-        // 去除表达式中所有空格
-        exps = exps.replace(" ", "").toLowerCase();
 
         // 是否需要记录运算步骤
         boolean recSteps = stepList != null;
@@ -291,8 +291,8 @@ public final class WComputer
         final String[] OPR_EXP =
         {
             //
-            MaocEnv.OPR_ADD_EXP,// 加
-            MaocEnv.OPR_SUB_EXP,// 减
+            MaocEnv.OPR_ADD_EXP_EN,// 加
+            MaocEnv.OPR_SUB_EXP_EN,// 减
             MaocEnv.OPR_MUL_EXP,// 乘
             MaocEnv.OPR_DIV_EXP,// 除
             MaocEnv.OPR_MOD_EXP,// 取模
@@ -329,6 +329,7 @@ public final class WComputer
             MaocEnv.OPR_COT_INT,//
         };
 
+        Pattern numPtn = Pattern.compile("^((\\d*\\.\\d+)|(\\d+(\\.\\d*)?))([*]?[eE][-+]?\\d+)?");
         // 循环处理每一个表达式字符
         NEXT_O:
         for (char c : expBuf)
@@ -546,7 +547,7 @@ public final class WComputer
         com.magicpwd._comn.Math kvItem = new com.magicpwd._comn.Math();
 
         // 加
-        if (MaocEnv.OPR_ADD_EXP.equals(mOpr))
+        if (MaocEnv.OPR_ADD_EXP_EN.equals(mOpr))
         {
             lOpd = numStack.pop();
             Logs.log("运算：" + lOpd + mOpr + rOpd);
@@ -559,7 +560,7 @@ public final class WComputer
         }
 
         // 减
-        if (MaocEnv.OPR_SUB_EXP.equals(mOpr))
+        if (MaocEnv.OPR_SUB_EXP_EN.equals(mOpr))
         {
             lOpd = numStack.pop();
             Logs.log("运算：" + lOpd + mOpr + rOpd);

@@ -19,6 +19,7 @@ package com.magicpwd._bean.mail;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Logs;
+import com.magicpwd.m.UserMdl;
 import java.security.Security;
 import java.util.Properties;
 import javax.mail.Authenticator;
@@ -254,29 +255,61 @@ public class Connect
     public Properties getProperties()
     {
         Properties prop = new Properties();
-        //prop.put("mail.debug", "true");
-        prop.put("username", getUsername());
-        prop.put("password", getPassword());
-        prop.put(com.magicpwd._util.Char.format("mail.{0}.user", getProtocol()), getUsername());
-        prop.put(com.magicpwd._util.Char.format("mail.{0}.host", getProtocol()), getHost());
-        prop.put(com.magicpwd._util.Char.format("mail.{0}.port", getProtocol()), getPort());
-        prop.put(com.magicpwd._util.Char.format("mail.{0}.auth", getProtocol()), isAuth() ? "true" : "false");
-        prop.put(com.magicpwd._util.Char.format("mail.{0}.rsetbeforequit", getProtocol()), "true");
-        prop.put("mail.store.protocol", isJssl() ? getProtocol() + 's' : getProtocol());
-
-        if (isJssl())
+        if (UserMdl.getRunMode() == ConsEnv.RUN_MODE_DEV)
         {
-            prop.put(com.magicpwd._util.Char.format("mail.{0}.starttls.enable", getProtocol()), "true");// 使用SSL验证
-            prop.put(com.magicpwd._util.Char.format("mail.{0}.socketFactory.port", getProtocol()), getPort());//重新设定端口
-            prop.put(com.magicpwd._util.Char.format("mail.{0}.socketFactory.class", getProtocol()), "javax.net.ssl.SSLSocketFactory");
-            prop.put(com.magicpwd._util.Char.format("mail.{0}.socketFactory.fallback", getProtocol()), "false");
+            prop.setProperty("mail.debug", "true");
         }
+        prop.setProperty("username", getUsername());
+        prop.setProperty("password", getPassword());
+        prop.setProperty(com.magicpwd._util.Char.format("mail.{0}.user", getProtocol()), getUsername());
+        prop.setProperty(com.magicpwd._util.Char.format("mail.{0}.host", getProtocol()), getHost());
+        prop.setProperty(com.magicpwd._util.Char.format("mail.{0}.port", getProtocol()), "" + getPort());
+        
+        if (isAuth())
+        {
+            prop.setProperty(com.magicpwd._util.Char.format("mail.{0}.auth", getProtocol()), "true");
+        }
+        if (!"smtp".equalsIgnoreCase(getProtocol()))
+        {
+            prop.setProperty("mail.store.protocol", isJssl() ? getProtocol() + 's' : getProtocol());
+        }
+        else
+        {
+            prop.setProperty("mail.transport.protocol", isJssl() ? "smtps" : "smtp");
+        }
+//        prop.setProperty(com.magicpwd._util.Char.format("mail.{0}.rsetbeforequit", getProtocol()), "true");
+//        if (!"smtp".equalsIgnoreCase(getProtocol()))
+//        {
+//            prop.setProperty("mail.store.protocol", isJssl() ? getProtocol() + 's' : getProtocol());
+//            prop.setProperty(com.magicpwd._util.Char.format("mail.{0}.class", getProtocol()), com.magicpwd._util.Char.format("com.sun.mail.{0}.{1}{2}Store", getProtocol().toLowerCase(), getProtocol().toUpperCase(), isJssl() ? "SSL" : ""));
+//        }
+//        if ("imap".equalsIgnoreCase(getProtocol()))
+//        {
+//            prop.setProperty("mail.imap.auth.plain.disable", "true");
+//            prop.setProperty("mail.imap.connectiontimeout", "5000");
+//            prop.setProperty("mail.imap.timeout", "5000");
+//        }
+
+//        if (isJssl())
+//        {
+//            prop.setProperty("mail.transport.protocol", "smtps");
+//            prop.setProperty("mail.smtp.class", "com.sun.mail.smtp.SMTPSSLTransport");
+//            prop.setProperty(com.magicpwd._util.Char.format("mail.{0}.starttls.enable", getProtocol()), "true");// 使用SSL验证
+//            prop.setProperty(com.magicpwd._util.Char.format("mail.{0}.socketFactory.port", getProtocol()), "" + getPort());//重新设定端口
+//            prop.setProperty(com.magicpwd._util.Char.format("mail.{0}.socketFactory.class", getProtocol()), "javax.net.ssl.SSLSocketFactory");
+//            prop.setProperty(com.magicpwd._util.Char.format("mail.{0}.socketFactory.fallback", getProtocol()), "false");
+//        }
+//        else
+//        {
+//            prop.setProperty("mail.transport.protocol", "smtp");
+//            prop.setProperty("mail.smtp.class", "com.sun.mail.smtp.SMTPTransport");
+//        }
         return prop;
     }
 
     public URLName getURLName()
     {
-        return new URLName(getProtocol(), getHost(), getPort(), null, getUsername(), getPassword());
+        return new URLName(isJssl() ? getProtocol() + 's' : getProtocol(), getHost(), getPort(), null, getUsername(), getPassword());
     }
 
     public Session getSession()
