@@ -1314,6 +1314,7 @@ public class UserPtn extends javax.swing.JPanel
             return;
         }
 
+        this.setVisible(false);
         if (backCall != null)
         {
             if (!backCall.callBack(null, null, ConsEnv.STR_SIGN_UP))
