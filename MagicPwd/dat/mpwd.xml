@@ -349,6 +349,19 @@
             <action class="com.magicpwd.e.mpwd.kind.DeleteAction" />
         </item>
         <seperator />
+        <item type="normal" text="$P30F7D3A" text-def="上移一行">
+            <action class="com.magicpwd.e.mpwd.kind.ForwardAction" />
+        </item>
+        <item type="normal" text="$P30F7D3B" text-def="下移一行">
+            <action class="com.magicpwd.e.mpwd.kind.BackwardAction" />
+        </item>
+        <item type="normal" text="$P30F7D3C" text-def="提升一级">
+            <action class="com.magicpwd.e.mpwd.kind.PromotionAction" />
+        </item>
+        <item type="normal" text="$P30F7D3D" text-def="缩进一级">
+            <action class="com.magicpwd.e.mpwd.kind.DemotionAction" />
+        </item>
+        <seperator />
         <item type="normal" text="$P30F7D04" text-def="导入数据">
             <action id="import" class="com.magicpwd.e.mpwd.data.ImportAction" />
         </item>
