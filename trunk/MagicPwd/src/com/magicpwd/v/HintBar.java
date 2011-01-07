@@ -44,8 +44,10 @@ public class HintBar extends javax.swing.JPanel
     {
         setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 0, getBackground().darker()));
         lb_HintLabel = new javax.swing.JLabel();
+//        lb_HintLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         lb_InfoLabel = new javax.swing.JLabel();
+//        lb_InfoLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         lb_InfoLabel.addMouseListener(new java.awt.event.MouseAdapter()
         {
 
@@ -57,6 +59,7 @@ public class HintBar extends javax.swing.JPanel
         });
 
         lb_DateLabel = new javax.swing.JLabel();
+//        lb_DateLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         lb_DateLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -64,6 +67,7 @@ public class HintBar extends javax.swing.JPanel
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addContainerGap();
         hsg.addComponent(lb_HintLabel);
+        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg.addComponent(lb_InfoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg.addComponent(lb_DateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE);
@@ -85,7 +89,9 @@ public class HintBar extends javax.swing.JPanel
     {
         dateTplt = java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.FULL, java.text.DateFormat.SHORT);
 
+        lb_HintLabel.setText("");
         lb_InfoLabel.setText("数据处理中……");
+        lb_DateLabel.setText("");
     }
 
     public void initData()

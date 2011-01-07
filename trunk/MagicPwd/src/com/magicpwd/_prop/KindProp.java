@@ -380,8 +380,7 @@ public class KindProp extends javax.swing.JPanel implements IPropBean
             return;
         }
 
-        treeNode = (javax.swing.tree.DefaultMutableTreeNode) path.getLastPathComponent();
-        javax.swing.tree.DefaultMutableTreeNode p = treeNode;
+        javax.swing.tree.DefaultMutableTreeNode p = (javax.swing.tree.DefaultMutableTreeNode) path.getLastPathComponent();
         javax.swing.tree.DefaultMutableTreeNode n = p.getPreviousSibling();
         if (n == null)
         {
