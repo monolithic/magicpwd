@@ -57,6 +57,7 @@ import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
+import com.magicpwd.d.db.DBA3000;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.m.mpwd.MpwdMdl;
 import com.magicpwd.m.mpwd.KindMdl;
@@ -293,12 +294,15 @@ public class MpwdPtn extends AFrame
             isSearch = true;
             queryKey = meta;
             tr_GuidTree.setSelectionPath(null);
-            return mpwdMdl.getListMdl().listKeysByMeta(meta);
+            mpwdMdl.getListMdl().listKeysByMeta(meta);
+            mainInfo.showHint("共 " + mpwdMdl.getListMdl().getSize() + " 条数据");
         }
         else
         {
-            return mpwdMdl.getListMdl().listKeysByKind(queryKey);
+            mpwdMdl.getListMdl().listKeysByKind(queryKey);
+            mainInfo.showHint("共 " + mpwdMdl.getListMdl().getSize() + " 条数据");
         }
+        return true;
     }
 
     public void findLast()
@@ -311,6 +315,7 @@ public class MpwdPtn extends AFrame
         {
             mpwdMdl.getListMdl().listKeysByKind(queryKey);
         }
+        mainInfo.showHint("共 " + mpwdMdl.getListMdl().getSize() + " 条数据");
 
         lastKeys = null;
     }
@@ -1490,6 +1495,137 @@ public class MpwdPtn extends AFrame
             cfgForm.initData();
         }
         cfgForm.showProp(propName, true);
+    }
+
+    public void forwardSelectedKind()
+    {
+        javax.swing.tree.TreePath path = tr_GuidTree.getSelectionPath();
+        if (path == null)
+        {
+            return;
+        }
+
+        javax.swing.tree.DefaultMutableTreeNode p = (javax.swing.tree.DefaultMutableTreeNode) path.getLastPathComponent();
+        javax.swing.tree.DefaultMutableTreeNode n = p.getPreviousSibling();
+        if (n == null)
+        {
+            return;
+        }
+        javax.swing.tree.DefaultMutableTreeNode o = (javax.swing.tree.DefaultMutableTreeNode) p.getParent();
+        if (o == null)
+        {
+            return;
+        }
+
+        int i = o.getIndex(p);
+        o.remove(i--);
+        o.insert(p, i);
+        getTreeMdl().nodeStructureChanged(o);
+
+        tr_GuidTree.setSelectionPath(path);
+
+        Kind c = (Kind) p.getUserObject();
+        c.addC2010101(-1);
+        DBA3000.updateKindData(c);
+        c = (Kind) n.getUserObject();
+        c.addC2010101(1);
+        DBA3000.updateKindData(c);
+    }
+
+    public void backwardSelectedKind()
+    {
+        javax.swing.tree.TreePath path = tr_GuidTree.getSelectionPath();
+        if (path == null)
+        {
+            return;
+        }
+
+        javax.swing.tree.DefaultMutableTreeNode p = (javax.swing.tree.DefaultMutableTreeNode) path.getLastPathComponent();
+        javax.swing.tree.DefaultMutableTreeNode n = p.getNextSibling();
+        if (n == null)
+        {
+            return;
+        }
+        javax.swing.tree.DefaultMutableTreeNode o = (javax.swing.tree.DefaultMutableTreeNode) p.getParent();
+        if (o == null)
+        {
+            return;
+        }
+
+        int i = o.getIndex(p);
+        o.remove(i++);
+        o.insert(p, i);
+        getTreeMdl().nodeStructureChanged(o);
+
+        tr_GuidTree.setSelectionPath(path);
+
+        Kind c = (Kind) p.getUserObject();
+        c.addC2010101(1);
+        DBA3000.updateKindData(c);
+        c = (Kind) n.getUserObject();
+        c.addC2010101(-1);
+        DBA3000.updateKindData(c);
+    }
+
+    public void promotionSelectedKind()
+    {
+        javax.swing.tree.TreePath path = tr_GuidTree.getSelectionPath();
+        if (path == null)
+        {
+            return;
+        }
+
+        javax.swing.tree.DefaultMutableTreeNode s = (javax.swing.tree.DefaultMutableTreeNode) path.getLastPathComponent();
+        javax.swing.tree.DefaultMutableTreeNode p1 = (javax.swing.tree.DefaultMutableTreeNode) s.getParent();
+        if (p1 == null)
+        {
+            return;
+        }
+
+        javax.swing.tree.DefaultMutableTreeNode p2 = (javax.swing.tree.DefaultMutableTreeNode) p1.getParent();
+        if (p2 == null)
+        {
+            return;
+        }
+
+        p1.remove(s);
+        p2.add(s);
+        getTreeMdl().nodeStructureChanged(p2);
+        tr_GuidTree.setSelectionPath(new javax.swing.tree.TreePath(s.getPath()));
+
+        Kind u = (Kind) p2.getUserObject();
+        Kind c = (Kind) s.getUserObject();
+        c.setC2010101(p2.getChildCount());
+        c.setC2010104(u.getC2010103());
+        DBA3000.updateKindData(c);
+    }
+
+    public void demotionSelectedKind()
+    {
+        javax.swing.tree.TreePath path = tr_GuidTree.getSelectionPath();
+        if (path == null)
+        {
+            return;
+        }
+
+        javax.swing.tree.DefaultMutableTreeNode s = (javax.swing.tree.DefaultMutableTreeNode) path.getLastPathComponent();
+        javax.swing.tree.DefaultMutableTreeNode p = s.getPreviousSibling();
+        if (p == null)
+        {
+            return;
+        }
+
+        javax.swing.tree.DefaultMutableTreeNode o = (javax.swing.tree.DefaultMutableTreeNode) p.getParent();
+        o.remove(s);
+        p.add(s);
+        getTreeMdl().nodeStructureChanged(o);
+        tr_GuidTree.setSelectionPath(new javax.swing.tree.TreePath(s.getPath()));
+
+        Kind u = (Kind) p.getUserObject();
+        Kind c = (Kind) s.getUserObject();
+        c.setC2010101(p.getChildCount());
+        c.setC2010104(u.getC2010103());
+        DBA3000.updateKindData(c);
     }
     /**
      * 
