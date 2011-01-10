@@ -16,6 +16,7 @@
  */
 package com.magicpwd.v.mwiz;
 
+import com.magicpwd.__a.ADialog;
 import com.magicpwd._bean.mwiz.GuidBean;
 import com.magicpwd._bean.mwiz.HeadBean;
 import com.magicpwd._cons.ConsEnv;
@@ -36,7 +37,7 @@ import com.magicpwd.m.mwiz.KeysMdl;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public class EditPtn extends javax.swing.JDialog
+public class EditPtn extends ADialog
 {
 
     private int currStep;
@@ -90,17 +91,7 @@ public class EditPtn extends javax.swing.JDialog
         bt_Update.setVisible(false);
         bt_PrevStep.setVisible(false);
 
-        javax.swing.KeyStroke stroke = javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0);
-        javax.swing.AbstractAction action = new javax.swing.AbstractAction()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e)
-            {
-                closeWindow();
-            }
-        };
-        Bean.registerKeyStrokeAction(rootPane, stroke, action, "esc", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
+        processEscape();
     }
 
     public final void showData(KeysMdl keysMdl, boolean canEdit)
@@ -399,7 +390,7 @@ public class EditPtn extends javax.swing.JDialog
 
     private void bt_CancelActionPerformed(java.awt.event.ActionEvent evt)
     {
-        closeWindow();
+        hideDialog();
     }
 
     @Override
@@ -407,7 +398,7 @@ public class EditPtn extends javax.swing.JDialog
     {
         if (e.getID() == java.awt.event.WindowEvent.WINDOW_CLOSING)
         {
-            if (!closeWindow())
+            if (!hideDialog())
             {
                 return;
             }
@@ -415,7 +406,8 @@ public class EditPtn extends javax.swing.JDialog
         super.processWindowEvent(e);
     }
 
-    private boolean closeWindow()
+    @Override
+    protected boolean hideDialog()
     {
         if (canEdit && currStep > -2)
         {

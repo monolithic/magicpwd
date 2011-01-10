@@ -24,5 +24,8 @@ import java.util.EventListener;
 public interface IBackCall
 {
 
+    String OPTIONS_ABORT = "abort";
+    String OPTIONS_APPLY = "apply";
+
     boolean callBack(Object sender, EventListener event, String... params);
 }

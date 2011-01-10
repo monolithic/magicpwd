@@ -24,7 +24,6 @@ import com.magicpwd._prop.CharProp;
 import com.magicpwd._prop.IdioProp;
 import com.magicpwd._prop.InfoProp;
 import com.magicpwd._prop.JavaProp;
-import com.magicpwd._prop.KindProp;
 import com.magicpwd._prop.SKeyProp;
 import com.magicpwd._prop.TpltProp;
 import com.magicpwd._prop.USetProp;
@@ -206,15 +205,6 @@ public class MdiDialog extends javax.swing.JDialog
         tp.initData();
         pl_CardPanel.add(ConsEnv.PROP_TPLT, tp);
         hm_PropList.put(ConsEnv.PROP_TPLT, tp);
-
-        t = Lang.getLang(LangRes.P30F1205, "类别管理");
-        lm_PropList.addElement(new S1S2(ConsEnv.PROP_KIND, t, t));
-        KindProp kp = new KindProp(mainPtn);
-        kp.initView();
-        kp.initLang();
-        kp.initData();
-        pl_CardPanel.add(ConsEnv.PROP_KIND, kp);
-        hm_PropList.put(ConsEnv.PROP_KIND, kp);
 
         t = Lang.getLang(LangRes.P30F1206, "键盘快捷");
         lm_PropList.addElement(new S1S2(ConsEnv.PROP_SKEY, t, t));
