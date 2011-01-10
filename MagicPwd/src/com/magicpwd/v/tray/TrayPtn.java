@@ -274,6 +274,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         {
             mp_MpwdPtn.setVisible(true);
         }
+        mp_MpwdPtn.showData();
 
         mfCurrForm = mp_MpwdPtn;
         currPtn = ConsEnv.APP_MODE_MPWD;
@@ -297,6 +298,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         {
             mp_MwizPtn.setVisible(true);
         }
+        mp_MwizPtn.showData();
 
         mfCurrForm = mp_MwizPtn;
         currPtn = ConsEnv.APP_MODE_MWIZ;
@@ -320,6 +322,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         {
             mp_MpadPtn.setVisible(true);
         }
+        mp_MpadPtn.showData();
 
         mfCurrForm = mp_MpadPtn;
         currPtn = ConsEnv.APP_MODE_MPAD;
@@ -343,6 +346,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         {
             mp_MaocPtn.setVisible(true);
         }
+        mp_MaocPtn.showData();
 
         mfCurrForm = mp_MaocPtn;
         currPtn = ConsEnv.APP_MODE_MAOC;
@@ -361,8 +365,8 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         {
             mp_MrucPtn.setVisible(true);
         }
-
         mp_MrucPtn.showData();
+
         mfCurrForm = mp_MrucPtn;
         currPtn = ConsEnv.APP_MODE_MRUC;
     }

@@ -66,7 +66,7 @@ public class HintBar extends javax.swing.JPanel
         this.setLayout(layout);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addContainerGap();
-        hsg.addComponent(lb_HintLabel);
+        hsg.addComponent(lb_HintLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg.addComponent(lb_InfoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -89,7 +89,7 @@ public class HintBar extends javax.swing.JPanel
     {
         dateTplt = java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.FULL, java.text.DateFormat.SHORT);
 
-        lb_HintLabel.setText("");
+        lb_HintLabel.setText("请选择口令类别！");
         lb_InfoLabel.setText("数据处理中……");
         lb_DateLabel.setText("");
     }
