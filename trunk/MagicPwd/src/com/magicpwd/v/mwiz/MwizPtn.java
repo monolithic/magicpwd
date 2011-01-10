@@ -223,6 +223,7 @@ public class MwizPtn extends AFrame
     public void showData()
     {
         mwizMdl.getGridMdl().listKeysByKind("0");
+        hb_HintBar.showHint("共 " + mwizMdl.getGridMdl().getRowCount() + " 条数据");
     }
 
     @Override
@@ -242,6 +243,7 @@ public class MwizPtn extends AFrame
         {
             mwizMdl.getGridMdl().listKeysByKind("0");
         }
+        hb_HintBar.showHint("共 " + mwizMdl.getGridMdl().getRowCount() + " 条数据");
     }
 
     public boolean findHint(java.util.Date s, java.util.Date t)
