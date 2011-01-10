@@ -205,9 +205,6 @@
             <item type="normal" text="$P30F7621" text-def="模板管理">
                 <action class="com.magicpwd.e.mpwd.user.TemplateAction" />
             </item>
-            <item type="normal" text="$P30F7622" text-def="类别管理">
-                <action class="com.magicpwd.e.mpwd.user.KindDataAction" />
-            </item>
         </menu>
         <menu id="user" text="$P30F7624" text-def="用户">
             <item type="normal" text="$P30F7625" text-def="切换用户" enabled="false">
