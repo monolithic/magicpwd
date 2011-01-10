@@ -17,16 +17,17 @@
 package com.magicpwd.e.mpwd.kind;
 
 import com.magicpwd.__a.mpwd.AMpwdAction;
+import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.prop.Kind;
-import com.magicpwd._cons.LangRes;
-import com.magicpwd._util.Lang;
 import com.magicpwd.r.KindTN;
+import com.magicpwd.v.mpwd.KindDlg;
+import java.util.EventListener;
 
 /**
  *
  * @author Amon
  */
-public class AppendAction extends AMpwdAction
+public class AppendAction extends AMpwdAction implements IBackCall
 {
 
     public AppendAction()
@@ -48,23 +49,11 @@ public class AppendAction extends AMpwdAction
             return;
         }
 
-        String kindName = javax.swing.JOptionPane.showInputDialog(Lang.getLang(LangRes.P30F7A15, "请输入类别名称："));
-        if (kindName == null)
-        {
-            return;
-        }
-        if (!com.magicpwd._util.Char.isValidate(kindName))
-        {
-            Lang.showMesg(mainPtn, LangRes.P30F7A16, "");
-            return;
-        }
-
-        KindTN p = (KindTN) obj;
-        Kind c = new Kind();
-        c.setC2010101(p.getChildCount());
-        c.setC2010105(kindName);
-        c.setC2010106(kindName);
-        mainPtn.getTreeMdl().wAppend(path, c);
+        KindDlg kindDlg = new KindDlg(mainPtn, this);
+        kindDlg.initView();
+        kindDlg.initLang();
+        kindDlg.initData(null);
+        kindDlg.setVisible(true);
     }
 
     @Override
@@ -75,5 +64,19 @@ public class AppendAction extends AMpwdAction
     @Override
     public void reInit(javax.swing.AbstractButton button)
     {
+    }
+
+    @Override
+    public boolean callBack(Object sender, EventListener event, String... params)
+    {
+        if (params == null || params.length != 1)
+        {
+            return false;
+        }
+        if (OPTIONS_APPLY.equals(params[0]))
+        {
+            mainPtn.appendKindBySelected((Kind) sender);
+        }
+        return true;
     }
 }

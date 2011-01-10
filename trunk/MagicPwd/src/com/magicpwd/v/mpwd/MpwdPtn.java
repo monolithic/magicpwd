@@ -502,6 +502,34 @@ public class MpwdPtn extends AFrame
         return tr_GuidTree.getSelectionPath();
     }
 
+    public void appendKindBySelected(Kind kind)
+    {
+        if (kind == null)
+        {
+            return;
+        }
+        javax.swing.tree.TreePath path = tr_GuidTree.getSelectionPath();
+        if (path == null)
+        {
+            return;
+        }
+        mpwdMdl.getKindMdl().wAppend(path, kind);
+    }
+
+    public void updateKindBySelected(Kind kind)
+    {
+        if (kind == null)
+        {
+            return;
+        }
+        javax.swing.tree.TreePath path = tr_GuidTree.getSelectionPath();
+        if (path == null)
+        {
+            return;
+        }
+        mpwdMdl.getKindMdl().wUpdate(path, kind);
+    }
+
     public int getSelectedKindIndex()
     {
         return 0;
