@@ -30,7 +30,7 @@ public interface ConsEnv
     /**
      * 软件信息：构建日期
      */
-    String BUILDER = "2011-01-10";
+    String BUILDER = "2011-01-12";
     /**
      * 软件信息：软件代码
      */
