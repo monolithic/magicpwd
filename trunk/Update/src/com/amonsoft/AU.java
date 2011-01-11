@@ -8,15 +8,20 @@ package com.amonsoft;
  *
  * @author Amon
  */
-public class AU extends javax.swing.JFrame {
+public class AU extends javax.swing.JFrame
+{
 
-    public AU() {
+    public AU()
+    {
         bt_Cancel = new javax.swing.JButton();
         bt_Cancel.setMnemonic('X');
         bt_Cancel.setText("退出(X)");
-        bt_Cancel.addActionListener(new java.awt.event.ActionListener() {
+        bt_Cancel.addActionListener(new java.awt.event.ActionListener()
+        {
 
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 bt_CancelActionPerformed(evt);
             }
         });
@@ -24,9 +29,12 @@ public class AU extends javax.swing.JFrame {
         bt_Manage = new javax.swing.JButton();
         bt_Manage.setMnemonic('S');
         bt_Manage.setText("暂停(S)");
-        bt_Manage.addActionListener(new java.awt.event.ActionListener() {
+        bt_Manage.addActionListener(new java.awt.event.ActionListener()
+        {
 
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 bt_ManageActionPerformed(evt);
             }
         });
@@ -76,25 +84,31 @@ public class AU extends javax.swing.JFrame {
         pack();
     }
 
-    private void bt_ManageActionPerformed(java.awt.event.ActionEvent evt) {
+    private void bt_ManageActionPerformed(java.awt.event.ActionEvent evt)
+    {
     }
 
-    private void bt_CancelActionPerformed(java.awt.event.ActionEvent evt) {
+    private void bt_CancelActionPerformed(java.awt.event.ActionEvent evt)
+    {
     }
 
-    private void checkUpdate() {
+    private void checkUpdate()
+    {
     }
 
-    private void downVersion() {
+    private void downVersion()
+    {
     }
 
-    private void downFile() {
+    private void downFile()
+    {
     }
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         new AU().setVisible(true);
     }
     private javax.swing.JButton bt_Cancel;
