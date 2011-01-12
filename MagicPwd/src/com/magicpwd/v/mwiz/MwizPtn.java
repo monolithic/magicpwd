@@ -32,7 +32,6 @@ import com.magicpwd.m.mwiz.MwizMdl;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.tray.TrayPtn;
 import com.magicpwd.v.HintBar;
-import java.util.EventListener;
 
 /**
  * 向导模式
@@ -115,11 +114,11 @@ public class MwizPtn extends AFrame
     public void initData()
     {
         hb_HintBar.initData();
-        hb_HintBar.setBackCall(new IBackCall()
+        hb_HintBar.setBackCall(new IBackCall<String>()
         {
 
             @Override
-            public boolean callBack(Object sender, EventListener event, String... params)
+            public boolean callBack(String options, String object)
             {
                 hintCallBack();
                 return true;

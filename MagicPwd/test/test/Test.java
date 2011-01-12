@@ -15,11 +15,6 @@ public class Test extends javax.swing.JFrame
 
     public Test()
     {
-        WCubeBox cb = new WCubeBox();
-        cb.initData();
-        this.getContentPane().add(cb);
-        cb.start();
-
         this.setSize(400, 300);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);

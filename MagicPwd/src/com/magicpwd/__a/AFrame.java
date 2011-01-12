@@ -23,6 +23,7 @@ import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._bean.mail.Connect;
+import com.magicpwd._user.UserDto;
 import com.magicpwd.m.mail.Reader;
 import com.magicpwd.m.mail.Sender;
 import com.magicpwd._util.Bean;
@@ -43,7 +44,6 @@ import com.magicpwd.r.AmonFF;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.tray.TrayPtn;
 import java.io.IOException;
-import java.util.EventListener;
 
 /**
  *
@@ -311,17 +311,13 @@ public abstract class AFrame extends javax.swing.JFrame
      */
     public void lockFrame()
     {
-        trayPtn.getUserPtn(ConsEnv.INT_SIGN_LS, new IBackCall()
+        trayPtn.getUserPtn(ConsEnv.INT_SIGN_LS, new IBackCall<UserDto>()
         {
 
             @Override
-            public boolean callBack(Object sender, EventListener event, String... params)
+            public boolean callBack(String options, UserDto object)
             {
-                if (params == null || params.length != 1)
-                {
-                    return false;
-                }
-                return ConsEnv.STR_SIGN_LS.equalsIgnoreCase(params[0]);
+                return ConsEnv.STR_SIGN_LS.equalsIgnoreCase(options);
             }
         });
     }
@@ -463,7 +459,7 @@ public abstract class AFrame extends javax.swing.JFrame
         return true;
     }
 
-    public boolean nativeBackup(String filePath, IBackCall backCall) throws Exception
+    public boolean nativeBackup(String filePath, IBackCall<java.io.File> backCall) throws Exception
     {
         if (!Char.isValidate(filePath))
         {
@@ -487,7 +483,7 @@ public abstract class AFrame extends javax.swing.JFrame
         dstFile = new java.io.File(dstFile, srcFile.getName().replace("amon", "magicpwd").replace("-", "").replace(".backup", ".amb"));
         File.copy(srcFile, dstFile, true);
 
-        if (backCall != null && !backCall.callBack(null, null, dstFile.toString()))
+        if (backCall != null && !backCall.callBack(null, dstFile))
         {
             return false;
         }
@@ -587,7 +583,7 @@ public abstract class AFrame extends javax.swing.JFrame
         return true;
     }
 
-    public boolean remoteBackup(IBackCall backCall) throws Exception
+    public boolean remoteBackup(IBackCall<String> backCall) throws Exception
     {
         String user = userMdl.getCode();
         if (!Char.isValidateCode(user))
@@ -630,7 +626,7 @@ public abstract class AFrame extends javax.swing.JFrame
             throw new Exception(Lang.getLang(LangRes.P30F7A3C, "系统无法备份您的数据到云端！"));
         }
 
-        if (backCall != null && !backCall.callBack(null, null, sign))
+        if (backCall != null && !backCall.callBack(null, sign))
         {
             return false;
         }

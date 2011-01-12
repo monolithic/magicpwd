@@ -30,7 +30,7 @@ import com.magicpwd.x.DatDialog;
  * 从数据文件恢复
  * @author Amon
  */
-public class NativeResumeAction extends AMpwdAction implements IBackCall
+public class NativeResumeAction extends AMpwdAction implements IBackCall<String>
 {
 
     public NativeResumeAction()
@@ -73,24 +73,20 @@ public class NativeResumeAction extends AMpwdAction implements IBackCall
     }
 
     @Override
-    public boolean callBack(Object sender, java.util.EventListener event, String... params)
+    public boolean callBack(String options, String object)
     {
-        if (params == null || params.length < 1)
-        {
-            return false;
-        }
-        if ("cancel".equals(params[0]))
+        if (IBackCall.OPTIONS_ABORT.equals(options))
         {
             return true;
         }
-        if (!"select".equals(params[0]))
+        if (!IBackCall.OPTIONS_APPLY.equals(options))
         {
             return false;
         }
 
         mainPtn.setLocked(true);
         mainPtn.showProgress();
-        doResume(params[1]);
+        doResume(object);
         return true;
     }
 

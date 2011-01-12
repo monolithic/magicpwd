@@ -21,13 +21,12 @@ import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.prop.Kind;
 import com.magicpwd.r.KindTN;
 import com.magicpwd.v.mpwd.KindDlg;
-import java.util.EventListener;
 
 /**
  *
  * @author Amon
  */
-public class AppendAction extends AMpwdAction implements IBackCall
+public class AppendAction extends AMpwdAction implements IBackCall<Kind>
 {
 
     public AppendAction()
@@ -67,16 +66,13 @@ public class AppendAction extends AMpwdAction implements IBackCall
     }
 
     @Override
-    public boolean callBack(Object sender, EventListener event, String... params)
+    public boolean callBack(String options, Kind object)
     {
-        if (params == null || params.length != 1)
+        if (OPTIONS_APPLY.equalsIgnoreCase(options))
         {
-            return false;
+            mainPtn.appendKindBySelected(object);
+            return true;
         }
-        if (OPTIONS_APPLY.equals(params[0]))
-        {
-            mainPtn.appendKindBySelected((Kind) sender);
-        }
-        return true;
+        return false;
     }
 }

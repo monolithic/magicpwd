@@ -21,13 +21,12 @@ import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import java.util.EventListener;
 
 /**
  *
  * @author Amon
  */
-public class RemoteBackupAction extends AMpwdAction implements IBackCall
+public class RemoteBackupAction extends AMpwdAction implements IBackCall<String>
 {
 
     public RemoteBackupAction()
@@ -64,7 +63,7 @@ public class RemoteBackupAction extends AMpwdAction implements IBackCall
     }
 
     @Override
-    public boolean callBack(Object sender, EventListener event, String... params)
+    public boolean callBack(String options, String object)
     {
         return true;
     }

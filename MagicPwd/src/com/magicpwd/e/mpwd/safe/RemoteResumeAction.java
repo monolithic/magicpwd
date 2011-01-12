@@ -23,13 +23,12 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.x.DatDialog;
-import java.util.EventListener;
 
 /**
  *
  * @author Amon
  */
-public class RemoteResumeAction extends AMpwdAction implements IBackCall
+public class RemoteResumeAction extends AMpwdAction implements IBackCall<String>
 {
 
     public RemoteResumeAction()
@@ -66,24 +65,20 @@ public class RemoteResumeAction extends AMpwdAction implements IBackCall
     }
 
     @Override
-    public boolean callBack(Object sender, EventListener event, String... params)
+    public boolean callBack(String options, String object)
     {
-        if (params == null || params.length < 1)
-        {
-            return false;
-        }
-        if ("cancel".equals(params[0]))
+        if (IBackCall.OPTIONS_ABORT.equalsIgnoreCase(options))
         {
             return true;
         }
-        if (!"select".equals(params[0]))
+        if (!IBackCall.OPTIONS_APPLY.equalsIgnoreCase(options))
         {
             return false;
         }
 
         mainPtn.setLocked(true);
         mainPtn.showProgress();
-        doResume(params[1]);
+        doResume(object);
         return true;
     }
 

@@ -27,14 +27,13 @@ import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd.v.mpwd.MpwdPtn;
 import com.magicpwd.x.IcoDialog;
-import java.util.EventListener;
 
 /**
  * 属性：图标
  * 键值：ConsEnv.INDX_ICON
  * @author Amon
  */
-public class LogoBean extends javax.swing.JPanel implements IMpwdBean, IBackCall
+public class LogoBean extends javax.swing.JPanel implements IMpwdBean, IBackCall<String>
 {
 
     private IEditItem itemData;
@@ -168,27 +167,26 @@ public class LogoBean extends javax.swing.JPanel implements IMpwdBean, IBackCall
     }
 
     @Override
-    public boolean callBack(Object sender, EventListener event, String... params)
+    public boolean callBack(String options, String object)
     {
-        if (params.length < 1)
+        if (!IBackCall.OPTIONS_APPLY.equalsIgnoreCase(options))
         {
             return false;
         }
 
-        String key = params[0];
-        if ("0".equals(key))
+        if ("0".equals(object))
         {
             ib_PropName.setIcon(Bean.getNone());
-            itemData.setName(key);
+            itemData.setName(object);
             return true;
         }
 
-        if (!com.magicpwd._util.Char.isValidateHash(key))
+        if (!com.magicpwd._util.Char.isValidateHash(object))
         {
             return false;
         }
-        ib_PropName.setIcon(Bean.getDataIcon(key));
-        itemData.setName(key);
+        ib_PropName.setIcon(Bean.getDataIcon(object));
+        itemData.setName(object);
         return true;
     }
 

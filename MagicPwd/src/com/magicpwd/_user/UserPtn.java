@@ -55,7 +55,7 @@ public class UserPtn extends javax.swing.JPanel
     /**
      * 成功回调函数
      */
-    private IBackCall backCall;
+    private IBackCall<UserDto> backCall;
     /**
      * 导航图标
      */
@@ -935,7 +935,7 @@ public class UserPtn extends javax.swing.JPanel
         }
     }
 
-    public void setBackCall(IBackCall backCall)
+    public void setBackCall(IBackCall<UserDto> backCall)
     {
         this.backCall = backCall;
     }
@@ -970,7 +970,7 @@ public class UserPtn extends javax.swing.JPanel
         }
         if (backCall != null)
         {
-            backCall.callBack(null, null, "cancel");
+            backCall.callBack(IBackCall.OPTIONS_ABORT, null);
         }
     }
 
@@ -1148,7 +1148,7 @@ public class UserPtn extends javax.swing.JPanel
         }
         if (backCall != null)
         {
-            backCall.callBack(null, null, ConsEnv.STR_SIGN_IN);
+            backCall.callBack(ConsEnv.STR_SIGN_IN, null);
         }
 
         tf_UserName.setText("");
@@ -1196,7 +1196,7 @@ public class UserPtn extends javax.swing.JPanel
 
         if (backCall != null)
         {
-            backCall.callBack(null, null, ConsEnv.STR_SIGN_LS);
+            backCall.callBack(ConsEnv.STR_SIGN_LS, null);
         }
         dispoze();
     }
@@ -1254,7 +1254,7 @@ public class UserPtn extends javax.swing.JPanel
         dispoze();
         if (backCall != null)
         {
-            backCall.callBack(null, null, ConsEnv.STR_SIGN_RS);
+            backCall.callBack(ConsEnv.STR_SIGN_RS, null);
         }
     }
 
@@ -1317,7 +1317,7 @@ public class UserPtn extends javax.swing.JPanel
         this.setVisible(false);
         if (backCall != null)
         {
-            if (!backCall.callBack(null, null, ConsEnv.STR_SIGN_UP))
+            if (!backCall.callBack(ConsEnv.STR_SIGN_UP, null))
             {
                 System.exit(0);
                 return;
@@ -1369,7 +1369,7 @@ public class UserPtn extends javax.swing.JPanel
         dispoze();
         if (backCall != null)
         {
-            backCall.callBack(null, null, ConsEnv.STR_SIGN_PK);
+            backCall.callBack(ConsEnv.STR_SIGN_PK, null);
         }
         Lang.showMesg(this, LangRes.P30FAA0A, "登录口令修改成功，您可以使用新口令登录了！");
     }
@@ -1439,7 +1439,7 @@ public class UserPtn extends javax.swing.JPanel
 
         if (backCall != null)
         {
-            backCall.callBack(null, null, ConsEnv.STR_SIGN_FP, sb.toString());
+            backCall.callBack(ConsEnv.STR_SIGN_FP, new UserDto(sb.toString()));
         }
         Lang.showMesg(null, LangRes.P30FAA18, "您的新口令是：{0}\n为了您的安全，请登录软件后尽快修改您的口令。", sb.toString());
         this.initView(ConsEnv.INT_SIGN_IN);
@@ -1502,7 +1502,7 @@ public class UserPtn extends javax.swing.JPanel
         dispoze();
         if (backCall != null)
         {
-            backCall.callBack(null, null, ConsEnv.STR_SIGN_SK);
+            backCall.callBack(ConsEnv.STR_SIGN_SK, null);
         }
         pf_UserKey0.setText("");
         pf_UserKey1.setText("");
@@ -1535,7 +1535,7 @@ public class UserPtn extends javax.swing.JPanel
 
         if (backCall != null)
         {
-            backCall.callBack(null, null, ConsEnv.STR_SIGN_SU);
+            backCall.callBack(ConsEnv.STR_SIGN_SU, null);
         }
     }
 
@@ -1575,7 +1575,7 @@ public class UserPtn extends javax.swing.JPanel
         dispoze();
         if (backCall != null)
         {
-            backCall.callBack(null, null, ConsEnv.STR_SIGN_CS, ut, un, new String(uc));
+            backCall.callBack(ConsEnv.STR_SIGN_CS, new UserDto(ut, un, new String(uc)));
         }
     }
     private javax.swing.JLabel lb_GuidIcon;

@@ -21,6 +21,7 @@ import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._user.UserDto;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 
@@ -28,7 +29,7 @@ import com.magicpwd._util.Lang;
  *
  * @author Amon
  */
-public class CreateSkeyAction extends AMpwdAction
+public class CreateSkeyAction extends AMpwdAction implements IBackCall<UserDto>
 {
 
     public CreateSkeyAction()
@@ -44,28 +45,7 @@ public class CreateSkeyAction extends AMpwdAction
             return;
         }
 
-        trayPtn.getUserPtn(ConsEnv.INT_SIGN_SK, new IBackCall()
-        {
-
-            @Override
-            public boolean callBack(Object sender, java.util.EventListener event, String... params)
-            {
-                if (params == null || params.length < 1)
-                {
-                    return false;
-                }
-
-                if (ConsEnv.STR_SIGN_SK.equals(params[0]))
-                {
-                    javax.swing.AbstractButton button = mainPtn.getMenuPtn().getButton("mpwd-skey");
-                    if (button != null)
-                    {
-                        button.setEnabled(false);
-                    }
-                }
-                return true;
-            }
-        });
+        trayPtn.getUserPtn(ConsEnv.INT_SIGN_SK, this);
     }
 
     @Override
@@ -78,5 +58,20 @@ public class CreateSkeyAction extends AMpwdAction
     public void reInit(javax.swing.AbstractButton button)
     {
         button.setEnabled(isEnabled());
+    }
+
+    @Override
+    public boolean callBack(String options, UserDto object)
+    {
+        if (ConsEnv.STR_SIGN_SK.equalsIgnoreCase(options))
+        {
+            javax.swing.AbstractButton button = mainPtn.getMenuPtn().getButton("mpwd-skey");
+            if (button != null)
+            {
+                button.setEnabled(false);
+            }
+            return true;
+        }
+        return false;
     }
 }

@@ -29,7 +29,6 @@ import com.magicpwd._util.Lang;
 import com.magicpwd.m.mwiz.KeysMdl;
 import com.magicpwd.v.mwiz.MwizPtn;
 import com.magicpwd.x.IcoDialog;
-import java.util.EventListener;
 
 /**
  * Application: MagicPwd
@@ -42,7 +41,7 @@ import java.util.EventListener;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public class HeadBean extends javax.swing.JPanel implements IBackCall
+public class HeadBean extends javax.swing.JPanel implements IBackCall<String>
 {
 
     private MwizPtn normPtn;
@@ -99,7 +98,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
 
         hintBox = new WTextBox(tf_HintName, true);
         hintBox.initView();
-        
+
         lb_HintDate.setLabelFor(tf_HintDate);
 
         ib_HintDate = new BtnLabel();
@@ -282,29 +281,28 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall
     }
 
     @Override
-    public boolean callBack(Object sender, EventListener event, String... params)
+    public boolean callBack(String options, String object)
     {
-        if (params.length < 1)
+        if (!IBackCall.OPTIONS_APPLY.equalsIgnoreCase(options))
         {
             return false;
         }
 
         IEditItem logo = keysMdl.getItemAt(ConsEnv.PWDS_HEAD_LOGO);
 
-        String key = params[0];
-        if ("0".equals(key))
+        if ("0".equals(object))
         {
             ib_KeysIcon.setIcon(Bean.getNone());
-            logo.setName(key);
+            logo.setName(object);
             return true;
         }
 
-        if (!com.magicpwd._util.Char.isValidateHash(key))
+        if (!com.magicpwd._util.Char.isValidateHash(object))
         {
             return false;
         }
-        ib_KeysIcon.setIcon(Bean.getDataIcon(key));
-        logo.setName(key);
+        ib_KeysIcon.setIcon(Bean.getDataIcon(object));
+        logo.setName(object);
         return true;
     }
 
