@@ -1,0 +1,19 @@
+ <?xml version="1.0" encoding="utf-8"?>
+<amonsoft>
+    <version>1.0.3</version>
+    <strategy>publish</strategy>
+    <server type="http/ftp/socket">
+        <ip>122.2.14.212</ip>
+        <port>2110</port>
+        <uri>http://magicpwd.com/mpwd/mpwd0002.ashx?opt=u&amp;sid={file}</uri>
+    </server>
+    <files>
+        <file>
+            <name>mftest.jar</name>
+            <version>1.0.0.3</version>
+            <operation>0</operation>
+            <remote-path>.\bin</remote-path>
+            <locale-path>.\bin</locale-path>
+        </file>
+    </files>
+</amonsoft>
