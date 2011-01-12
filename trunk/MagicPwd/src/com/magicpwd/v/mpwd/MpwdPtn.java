@@ -67,7 +67,6 @@ import com.magicpwd.r.TreeCR;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.tray.TrayPtn;
 import com.magicpwd.x.MdiDialog;
-import java.util.EventListener;
 
 public class MpwdPtn extends AFrame
 {
@@ -200,11 +199,11 @@ public class MpwdPtn extends AFrame
 
         // 信息栏
         mainInfo.initData();
-        mainInfo.setBackCall(new IBackCall()
+        mainInfo.setBackCall(new IBackCall<String>()
         {
 
             @Override
-            public boolean callBack(Object sender, EventListener event, String... params)
+            public boolean callBack(String options, String object)
             {
                 return hintCallBack();
             }

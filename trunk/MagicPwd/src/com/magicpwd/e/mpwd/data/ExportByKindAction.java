@@ -21,6 +21,7 @@ import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._user.UserDto;
 import com.magicpwd._util.Lang;
 import com.magicpwd.r.KindTN;
 
@@ -28,7 +29,7 @@ import com.magicpwd.r.KindTN;
  *
  * @author Amon
  */
-public class ExportByKindAction extends AMpwdAction implements IBackCall
+public class ExportByKindAction extends AMpwdAction implements IBackCall<UserDto>
 {
 
     public ExportByKindAction()
@@ -59,17 +60,14 @@ public class ExportByKindAction extends AMpwdAction implements IBackCall
     }
 
     @Override
-    public boolean callBack(Object sender, java.util.EventListener event, String... params)
+    public boolean callBack(String options, UserDto object)
     {
-        if (params != null && params.length > 0)
+        if (ConsEnv.STR_SIGN_RS.equalsIgnoreCase(options))
         {
-            if (ConsEnv.STR_SIGN_RS.equals(params[0]))
-            {
-                javax.swing.tree.TreePath path = mainPtn.getSelectedKindValue();
-                KindTN node = (KindTN) path.getLastPathComponent();
-                Kind kind = (Kind) node.getUserObject();
-                return mainPtn.exportByKind(kind.getC2010103());
-            }
+            javax.swing.tree.TreePath path = mainPtn.getSelectedKindValue();
+            KindTN node = (KindTN) path.getLastPathComponent();
+            Kind kind = (Kind) node.getUserObject();
+            return mainPtn.exportByKind(kind.getC2010103());
         }
         return false;
     }

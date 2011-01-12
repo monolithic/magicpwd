@@ -19,13 +19,13 @@ package com.magicpwd.e.mpwd.user;
 import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsEnv;
-import java.util.EventListener;
+import com.magicpwd._user.UserDto;
 
 /**
  *
  * @author Amon
  */
-public class ChangePkeyAction extends AMpwdAction
+public class ChangePkeyAction extends AMpwdAction implements IBackCall<UserDto>
 {
 
     public ChangePkeyAction()
@@ -35,15 +35,7 @@ public class ChangePkeyAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        trayPtn.getUserPtn(ConsEnv.INT_SIGN_PK, new IBackCall()
-        {
-
-            @Override
-            public boolean callBack(Object sender, EventListener event, String... params)
-            {
-                return true;
-            }
-        });
+        trayPtn.getUserPtn(ConsEnv.INT_SIGN_PK, this);
     }
 
     @Override
@@ -54,5 +46,11 @@ public class ChangePkeyAction extends AMpwdAction
     @Override
     public void reInit(javax.swing.AbstractButton button)
     {
+    }
+
+    @Override
+    public boolean callBack(String options, UserDto object)
+    {
+        return true;
     }
 }

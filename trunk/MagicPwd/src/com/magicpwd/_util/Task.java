@@ -27,15 +27,15 @@ import java.awt.event.ActionEvent;
 public class Task
 {
 
-    private static java.util.HashMap<TaskInfo, IBackCall> tasks;
+    private static java.util.HashMap<TaskInfo, IBackCall<TaskInfo>> tasks;
     private static javax.swing.Timer timer;
     private static long lastTime;
 
-    public static void registerAction(TaskInfo item, IBackCall backCall)
+    public static void registerAction(TaskInfo item, IBackCall<TaskInfo> backCall)
     {
         if (tasks == null)
         {
-            tasks = new java.util.HashMap<TaskInfo, IBackCall>();
+            tasks = new java.util.HashMap<TaskInfo, IBackCall<TaskInfo>>();
             timer = new javax.swing.Timer(500, new java.awt.event.ActionListener()
             {
 
@@ -178,7 +178,7 @@ public class Task
                     @Override
                     public void run()
                     {
-                        tasks.get(info).callBack(info, null);
+                        tasks.get(info).callBack(null, info);
                     }
                 }.start();
             }

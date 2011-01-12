@@ -28,7 +28,7 @@ import com.magicpwd._util.Logs;
  * 备份到数据文件
  * @author Amon
  */
-public class NativeBackupAction extends AMpwdAction implements IBackCall
+public class NativeBackupAction extends AMpwdAction implements IBackCall<String>
 {
 
     public NativeBackupAction()
@@ -71,7 +71,7 @@ public class NativeBackupAction extends AMpwdAction implements IBackCall
     }
 
     @Override
-    public boolean callBack(Object sender, java.util.EventListener event, String... params)
+    public boolean callBack(String options, String object)
     {
         return true;
     }
@@ -83,7 +83,7 @@ public class NativeBackupAction extends AMpwdAction implements IBackCall
 
         try
         {
-            boolean b = mainPtn.nativeBackup(mainPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC), this);
+            boolean b = mainPtn.nativeBackup(mainPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC), null);
             mainPtn.hideProgress();
             mainPtn.setLocked(false);
 

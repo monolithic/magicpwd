@@ -140,36 +140,8 @@ public class File
         }
         finally
         {
-            if (fos != null)
-            {
-                try
-                {
-                    fos.flush();
-                }
-                catch (Exception exp)
-                {
-                    Logs.exception(exp);
-                }
-                try
-                {
-                    fos.close();
-                }
-                catch (Exception exp)
-                {
-                    Logs.exception(exp);
-                }
-            }
-            if (fis != null)
-            {
-                try
-                {
-                    fis.close();
-                }
-                catch (Exception exp)
-                {
-                    Logs.exception(exp);
-                }
-            }
+            Bean.closeStream(fos);
+            Bean.closeStream(fis);
         }
         return true;
     }

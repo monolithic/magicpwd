@@ -32,9 +32,9 @@ public class CatDialog extends javax.swing.JDialog
 {
 
     private MpwdPtn mainPtn;
-    private IBackCall backCall;
+    private IBackCall<String> backCall;
 
-    public CatDialog(MpwdPtn mainPtn, IBackCall backCall)
+    public CatDialog(MpwdPtn mainPtn, IBackCall<String> backCall)
     {
         super(mainPtn, true);
         this.mainPtn = mainPtn;
@@ -130,7 +130,7 @@ public class CatDialog extends javax.swing.JDialog
         {
             KindTN item = (KindTN) obj;
             Kind kind = (Kind) item.getUserObject();
-            backCall.callBack(null, null, kind.getC2010103());
+            backCall.callBack(IBackCall.OPTIONS_APPLY, kind.getC2010103());
         }
         this.setVisible(false);
         this.dispose();

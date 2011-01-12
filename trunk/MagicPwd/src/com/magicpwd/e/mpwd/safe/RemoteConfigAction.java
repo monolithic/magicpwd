@@ -19,6 +19,7 @@ package com.magicpwd.e.mpwd.safe;
 import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._user.UserDto;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -27,7 +28,7 @@ import com.magicpwd._util.Logs;
  *
  * @author Amon
  */
-public class RemoteConfigAction extends AMpwdAction implements IBackCall
+public class RemoteConfigAction extends AMpwdAction implements IBackCall<UserDto>
 {
 
     public RemoteConfigAction()
@@ -51,20 +52,20 @@ public class RemoteConfigAction extends AMpwdAction implements IBackCall
     }
 
     @Override
-    public boolean callBack(Object sender, java.util.EventListener event, String... params)
+    public boolean callBack(String options, UserDto object)
     {
-        if (params == null || params.length < 4 || !ConsEnv.STR_SIGN_CS.equals(params[0]))
+        if (!ConsEnv.STR_SIGN_CS.equalsIgnoreCase(options) || object == null)
         {
             return false;
         }
 
         try
         {
-            if (!Char.isValidateMail(params[1]))
+            if (!Char.isValidateMail(object.getUserType()))
             {
-                params[1] = params[2] + '@' + params[1];
+                object.setUserType(object.getUserName() + '@' + object.getUserType());
             }
-            mainPtn.setCfgText("pop_mail", params[1] + '\n' + params[2] + '\n' + params[3]);
+            mainPtn.setCfgText("pop_mail", object.getUserType() + '\n' + object.getUserName() + '\n' + object.getUserPwds());
         }
         catch (Exception ex)
         {

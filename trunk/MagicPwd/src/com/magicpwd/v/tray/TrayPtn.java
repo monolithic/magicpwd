@@ -21,6 +21,7 @@ import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._user.UserDto;
 import com.magicpwd._user.UserPtn;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Jzip;
@@ -40,7 +41,7 @@ import com.magicpwd.v.mwiz.MwizPtn;
  * 系统托盘
  * @author Amon
  */
-public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.awt.event.MouseMotionListener
+public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener, java.awt.event.MouseMotionListener
 {
 
     private static boolean isOsTray;
@@ -153,15 +154,10 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
     }
 
     @Override
-    public boolean callBack(Object sender, java.util.EventListener event, String... params)
+    public boolean callBack(String options, UserDto object)
     {
-        if (params == null || params.length != 1)
-        {
-            return false;
-        }
-
         // 用户登录
-        if (ConsEnv.STR_SIGN_IN.equalsIgnoreCase(params[0]))
+        if (ConsEnv.STR_SIGN_IN.equalsIgnoreCase(options))
         {
             // 设置软件界面风格
             showPtn(UserMdl.getAppMode());
@@ -175,7 +171,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         }
 
         // 用户注册
-        if (ConsEnv.STR_SIGN_UP.equalsIgnoreCase(params[0]))
+        if (ConsEnv.STR_SIGN_UP.equalsIgnoreCase(options))
         {
             // 设置软件界面风格
             showPtn(UserMdl.getAppMode());
@@ -191,19 +187,19 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         }
 
         // 屏幕解锁
-        if (ConsEnv.STR_SIGN_LS.equalsIgnoreCase(params[0]))
+        if (ConsEnv.STR_SIGN_LS.equalsIgnoreCase(options))
         {
             return true;
         }
 
         // 口令找回
-        if (ConsEnv.STR_SIGN_FP.equalsIgnoreCase(params[0]))
+        if (ConsEnv.STR_SIGN_FP.equalsIgnoreCase(options))
         {
             return true;
         }
 
         // 身份认证
-        if (!ConsEnv.STR_SIGN_RS.equalsIgnoreCase(params[0]))
+        if (!ConsEnv.STR_SIGN_RS.equalsIgnoreCase(options))
         {
             return false;
         }
@@ -598,7 +594,7 @@ public class TrayPtn implements IBackCall, java.awt.event.MouseListener, java.aw
         getUserPtn(ConsEnv.INT_SIGN_RS, this);
     }
 
-    public UserPtn getUserPtn(int view, IBackCall call)
+    public UserPtn getUserPtn(int view, IBackCall<UserDto> call)
     {
         if (userPtn == null)
         {

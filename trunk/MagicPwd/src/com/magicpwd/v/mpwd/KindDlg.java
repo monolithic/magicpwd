@@ -31,10 +31,10 @@ public class KindDlg extends ADialog
 {
 
     private MpwdPtn mpwdPtn;
-    private IBackCall backCall;
+    private IBackCall<Kind> backCall;
     private Kind kind;
 
-    public KindDlg(MpwdPtn mpwdPtn, IBackCall backCall)
+    public KindDlg(MpwdPtn mpwdPtn, IBackCall<Kind> backCall)
     {
         super(mpwdPtn, true);
         this.mpwdPtn = mpwdPtn;
@@ -181,7 +181,7 @@ public class KindDlg extends ADialog
         setVisible(false);
         if (backCall != null)
         {
-            backCall.callBack(null, null, IBackCall.OPTIONS_ABORT);
+            backCall.callBack(IBackCall.OPTIONS_ABORT, null);
         }
         return true;
     }
@@ -212,7 +212,7 @@ public class KindDlg extends ADialog
         kind.setC2010106(tf_KindTips.getText());
         kind.setC2010107(tf_KindKind.getText());
         kind.setC2010108(ta_KindDesp.getText());
-        backCall.callBack(kind, null, IBackCall.OPTIONS_APPLY);
+        backCall.callBack(IBackCall.OPTIONS_APPLY, kind);
     }
     private javax.swing.JTextField tf_KindName;
     private javax.swing.JLabel lb_KindName;

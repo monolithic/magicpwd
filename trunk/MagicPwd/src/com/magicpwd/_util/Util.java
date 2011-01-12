@@ -28,7 +28,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.EventListener;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -273,11 +272,11 @@ public final class Util
             return;
         }
 
-        Task.registerAction(new TaskInfo(0, maxDelay, "clip-mon", ""), new IBackCall()
+        Task.registerAction(new TaskInfo(0, maxDelay, "clip-mon", ""), new IBackCall<TaskInfo>()
         {
 
             @Override
-            public boolean callBack(Object sender, EventListener event, String... params)
+            public boolean callBack(String options, TaskInfo object)
             {
                 Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(null), null);
                 return true;

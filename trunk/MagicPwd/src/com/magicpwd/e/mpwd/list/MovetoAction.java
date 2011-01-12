@@ -19,16 +19,14 @@ package com.magicpwd.e.mpwd.list;
 import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.Keys;
-import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Char;
-import com.magicpwd._util.Lang;
 import com.magicpwd.x.CatDialog;
 
 /**
  *
  * @author Amon
  */
-public class MovetoAction extends AMpwdAction
+public class MovetoAction extends AMpwdAction implements IBackCall<String>
 {
 
     public MovetoAction()
@@ -38,15 +36,7 @@ public class MovetoAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        CatDialog dat = new CatDialog(mainPtn, new IBackCall()
-        {
-
-            @Override
-            public boolean callBack(Object sender, java.util.EventListener event, String... params)
-            {
-                return changeKind(params[0]);
-            }
-        });
+        CatDialog dat = new CatDialog(mainPtn, this);
         dat.initView();
         dat.initLang();
         dat.initData();
@@ -63,7 +53,8 @@ public class MovetoAction extends AMpwdAction
     {
     }
 
-    private boolean changeKind(String hash)
+    @Override
+    public boolean callBack(String options, String hash)
     {
         if (!"0".equals(hash) && !Char.isValidateHash(hash))
         {

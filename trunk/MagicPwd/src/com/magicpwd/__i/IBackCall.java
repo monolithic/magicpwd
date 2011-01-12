@@ -21,11 +21,11 @@ import java.util.EventListener;
 /**
  * @author Amon
  */
-public interface IBackCall
+public interface IBackCall<T>
 {
 
     String OPTIONS_ABORT = "abort";
     String OPTIONS_APPLY = "apply";
 
-    boolean callBack(Object sender, EventListener event, String... params);
+    boolean callBack(String options, T object);
 }

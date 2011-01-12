@@ -38,9 +38,9 @@ public class DatDialog extends javax.swing.JDialog
 {
 
     private AFrame formPtn;
-    private IBackCall backCall;
+    private IBackCall<String> backCall;
 
-    public DatDialog(AFrame formPtn, IBackCall backCall)
+    public DatDialog(AFrame formPtn, IBackCall<String> backCall)
     {
         super(formPtn, true);
         this.formPtn = formPtn;
@@ -149,7 +149,7 @@ public class DatDialog extends javax.swing.JDialog
         this.setVisible(false);
 
         S1S1 item = (S1S1) obj;
-        backCall.callBack(this, null, "select", item.getK());
+        backCall.callBack(IBackCall.OPTIONS_APPLY, item.getK());
 
         this.dispose();
     }
@@ -160,7 +160,7 @@ public class DatDialog extends javax.swing.JDialog
 
         if (backCall != null)
         {
-            backCall.callBack(this, null, "cancel");
+            backCall.callBack(IBackCall.OPTIONS_ABORT, null);
         }
 
         this.dispose();

@@ -38,9 +38,9 @@ public class IcoDialog extends javax.swing.JDialog
     private java.io.File filePath;
     private java.io.File iconPath;
     private AFrame formPtn;
-    private IBackCall backCall;
+    private IBackCall<String> backCall;
 
-    public IcoDialog(AFrame formPtn, IBackCall backCall)
+    public IcoDialog(AFrame formPtn, IBackCall<String> backCall)
     {
         super(formPtn, true);
         this.formPtn = formPtn;
@@ -188,7 +188,7 @@ public class IcoDialog extends javax.swing.JDialog
 
     private void bt_SelectActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (backCall.callBack(null, null, icoModel.getSelectedKey(tb_IconGrid.getSelectedRow(), tb_IconGrid.getSelectedColumn())))
+        if (backCall.callBack(IBackCall.OPTIONS_APPLY, icoModel.getSelectedKey(tb_IconGrid.getSelectedRow(), tb_IconGrid.getSelectedColumn())))
         {
             this.setVisible(false);
             this.dispose();
