@@ -636,7 +636,7 @@ public abstract class AFrame extends javax.swing.JFrame
         return true;
     }
 
-    public boolean remoteResume(String sign, IBackCall backCall) throws Exception
+    public boolean remoteResume(String sign, IBackCall<String> backCall) throws Exception
     {
         if (!Char.isValidate(sign, 16))
         {

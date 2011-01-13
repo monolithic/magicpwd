@@ -309,4 +309,17 @@ public class File
         }
         return new java.net.URI(uri).toURL().openStream();
     }
+
+    public static String getExtension(String fileName)
+    {
+        if (Char.isValidate(fileName))
+        {
+            int di = fileName.lastIndexOf('.') + 1;
+            if (di > 0 && di < fileName.length())
+            {
+                return fileName.substring(di);
+            }
+        }
+        return "";
+    }
 }
