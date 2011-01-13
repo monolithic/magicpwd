@@ -22,11 +22,14 @@ import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.item.EditItem;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
+import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Desk;
+import com.magicpwd._util.File;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
+import com.magicpwd.x.ImgViewer;
 
 /**
  * Application: MagicPwd
@@ -45,6 +48,7 @@ public abstract class AFileBean extends AEditBean
     protected java.io.File filePath;
     protected java.io.File amaPath;
     private WTextBox dataBox;
+    private java.util.HashMap<String, String> extList;
 
     public AFileBean(AFrame formPtn)
     {
@@ -100,6 +104,22 @@ public abstract class AFileBean extends AEditBean
 
     protected void initConfData()
     {
+        extList = new java.util.HashMap<String, String>();
+        String cfg = formPtn.getUserMdl().getCfg(ConsCfg.CFG_FILE_IMG, "png,jpg,jpeg,gif,jfif,bmp");
+        for (String tmp : cfg.split(","))
+        {
+            extList.put(tmp, "img");
+        }
+        cfg = formPtn.getUserMdl().getCfg(ConsCfg.CFG_FILE_TXT, "txt,text");
+        for (String tmp : cfg.split(","))
+        {
+            extList.put(tmp, "txt");
+        }
+        cfg = formPtn.getUserMdl().getCfg(ConsCfg.CFG_FILE_SRC, "java,cs,js,css");
+        for (String tmp : cfg.split(","))
+        {
+            extList.put(tmp, "src");
+        }
         dataBox.initData();
     }
 
@@ -136,6 +156,19 @@ public abstract class AFileBean extends AEditBean
             java.io.File srcFile = new java.io.File(amaPath, itemData.getSpec(IEditItem.SPEC_FILE_NAME) + ConsEnv.FILE_ATTACHMENT);
             java.io.File tmpFile = new java.io.File(tmpPath, itemData.getData());
             deCrypt(srcFile, tmpFile);
+
+            String exts = itemData.getSpec(IEditItem.SPEC_FILE_EXTS, "").toLowerCase();
+            if ("img".equalsIgnoreCase(extList.get(exts)))
+            {
+                ImgViewer iv = new ImgViewer(formPtn);
+                iv.initView();
+                iv.initLang();
+                iv.initData();
+                iv.showData(tmpFile);
+                iv.setVisible(true);
+                return;
+            }
+
             if (!Desk.open(tmpFile))
             {
                 Lang.showMesg(formPtn, LangRes.P30F1A03, "打开文件错误，请尝试手动方式查看！");
@@ -223,6 +256,7 @@ public abstract class AFileBean extends AEditBean
 
         itemData.setData(tf_PropData.getText());
         itemData.setSpec(EditItem.SPEC_FILE_NAME, file);
+        itemData.setSpec(EditItem.SPEC_FILE_EXTS, filePath != null ? File.getExtension(filePath.getName()) : "");
         return true;
     }
     protected javax.swing.JTextField tf_PropData;
