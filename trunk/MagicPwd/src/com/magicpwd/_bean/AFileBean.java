@@ -160,11 +160,10 @@ public abstract class AFileBean extends AEditBean
             String exts = itemData.getSpec(IEditItem.SPEC_FILE_EXTS, "").toLowerCase();
             if ("img".equalsIgnoreCase(extList.get(exts)))
             {
-                ImgViewer iv = new ImgViewer(formPtn);
+                ImgViewer iv = new ImgViewer(formPtn, tmpFile);
                 iv.initView();
                 iv.initLang();
                 iv.initData();
-                iv.showData(tmpFile);
                 iv.setVisible(true);
                 return;
             }

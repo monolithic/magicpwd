@@ -20,7 +20,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Paint;
+import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 
 /**
@@ -30,41 +32,153 @@ import java.awt.image.BufferedImage;
 public class ImgPanel extends java.awt.Canvas
 {
 
+    private boolean showPLine;
+    private boolean showMLine;
+    private Point point;
     private Paint paint;
-    private BufferedImage image;
+    private BufferedImage srcImage;
+    private BufferedImage dstImage;
+
+    public ImgPanel()
+    {
+        this.addMouseListener(new java.awt.event.MouseListener()
+        {
+
+            @Override
+            public void mouseClicked(MouseEvent e)
+            {
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e)
+            {
+                paint(e.getPoint());
+                update();
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e)
+            {
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e)
+            {
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e)
+            {
+            }
+        });
+        this.addMouseMotionListener(new java.awt.event.MouseMotionListener()
+        {
+
+            @Override
+            public void mouseDragged(MouseEvent e)
+            {
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent e)
+            {
+                point = e.getPoint();
+                update();
+            }
+        });
+    }
 
     @Override
     public void paint(Graphics g)
     {
+        if (g == null)
+        {
+            return;
+        }
         Graphics2D g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+
+        if (dstImage != null)
+        {
+            g2d.drawImage(dstImage, 0, 0, this);
+        }
+
+        if (showMLine && point != null)
+        {
+            g2d.setPaint(Color.green);
+            g2d.drawLine(0, point.y, this.getWidth(), point.y);
+            g2d.drawLine(point.x, 0, point.x, this.getHeight());
+        }
+    }
+
+    private void paint(Point point)
+    {
+        if (showPLine)
+        {
+            Graphics2D g2d = dstImage.createGraphics();
+            g2d.setPaint(Color.magenta);
+            g2d.drawLine(0, point.y, this.getWidth(), point.y);
+            g2d.drawLine(point.x, 0, point.x, this.getHeight());
+            g2d.dispose();
+        }
+    }
+
+    public void clearLine()
+    {
+        resize();
+        update();
+    }
+
+    private void update()
+    {
+        paint(getGraphics());
+    }
+
+    public void resize()
+    {
+        if (srcImage == null)
+        {
+            return;
+        }
+
+        // 计算大小
+        int cw = this.getWidth();
+        int ch = this.getHeight();
+        int iw = srcImage.getWidth();
+        int ih = srcImage.getHeight();
+        if (cw < 1 || ch < 1 || iw < 1 || ih < 1)
+        {
+            return;
+        }
+
+        // 缩放处理
+        if (cw < iw || ch < ih)
+        {
+            double dw = (double) cw / iw;
+            double dh = (double) ch / ih;
+            double r = dw < dh ? dw : dh;
+            iw = (int) (iw * r);
+            ih = (int) (ih * r);
+        }
 
         if (paint == null)
         {
             paint = Color.white;
         }
+
+        dstImage = new BufferedImage(iw, ih, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2d = dstImage.createGraphics();
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+
+        // 绘制背景
         g2d.setPaint(paint);
-        int cw = this.getWidth();
-        int ch = this.getHeight();
         g2d.fillRect(0, 0, cw, ch);
 
-        if (image != null)
-        {
-            int iw = image.getWidth();
-            int ih = image.getHeight();
-
-            if (cw < iw || ch < ih)
-            {
-                double dw = (double) cw / iw;
-                double dh = (double) ch / ih;
-                double r = dw < dh ? dw : dh;
-                iw = (int) (iw * r);
-                ih = (int) (ih * r);
-            }
-            System.out.println("[" + cw + ',' + ch + "][" + iw + ',' + ih + ']');
-            g2d.drawImage(image, (cw - iw) >> 1, (ch - ih) >> 1, iw, ih, this);
-        }
+        // 绘制图片
+        g2d.drawImage(srcImage, (cw - iw) >> 1, (ch - ih) >> 1, iw, ih, this);
+        g2d.dispose();
     }
 
     /**
@@ -72,7 +186,7 @@ public class ImgPanel extends java.awt.Canvas
      */
     public BufferedImage getImage()
     {
-        return image;
+        return srcImage;
     }
 
     /**
@@ -80,7 +194,40 @@ public class ImgPanel extends java.awt.Canvas
      */
     public void setImage(BufferedImage image)
     {
-        this.image = image;
-        this.repaint();
+        this.srcImage = image;
+//        resize();
+//        update();
+    }
+
+    /**
+     * @return the showPLine
+     */
+    public boolean isShowPLine()
+    {
+        return showPLine;
+    }
+
+    /**
+     * @param showPLine the showPLine to set
+     */
+    public void setShowPLine(boolean showPLine)
+    {
+        this.showPLine = showPLine;
+    }
+
+    /**
+     * @return the showMLine
+     */
+    public boolean isShowMLine()
+    {
+        return showMLine;
+    }
+
+    /**
+     * @param showMLine the showMLine to set
+     */
+    public void setShowMLine(boolean showMLine)
+    {
+        this.showMLine = showMLine;
     }
 }

@@ -17,6 +17,7 @@
 package com.magicpwd._comp;
 
 import java.awt.event.InputEvent;
+import javax.swing.Icon;
 
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -29,6 +30,7 @@ import javax.swing.KeyStroke;
 public class IcoLabel extends JLabel
 {
 
+    private boolean selected;
     private String actionCommand;
 
     public IcoLabel()
@@ -89,4 +91,45 @@ public class IcoLabel extends JLabel
     {
         this.actionCommand = actionCommand;
     }
+
+    /**
+     * @return the selected
+     */
+    public boolean isSelected()
+    {
+        return selected;
+    }
+
+    /**
+     * @param selected the selected to set
+     */
+    public void setSelected(boolean selected)
+    {
+        this.selected = selected;
+        if (selIcon != null)
+        {
+            if (selected)
+            {
+                setIcon(selIcon);
+            }
+            else
+            {
+                setIcon(defIcon);
+            }
+        }
+    }
+
+    @Override
+    public void setIcon(Icon icon)
+    {
+        this.defIcon = icon;
+        super.setIcon(icon);
+    }
+
+    public void setSelectedIcon(Icon icon)
+    {
+        selIcon = icon;
+    }
+    private Icon defIcon;
+    private Icon selIcon;
 }
