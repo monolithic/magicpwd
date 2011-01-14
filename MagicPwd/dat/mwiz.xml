@@ -68,6 +68,10 @@
             <action id="delete-keys" class="com.magicpwd.e.mwiz.DeleteAction" />
         </item>
         <seperator />
+        <item type="normal" text="" text-def="邮件检测">
+            <action id="delete-keys" class="com.magicpwd.e.mwiz.DeleteAction" />
+        </item>
+        <seperator />
         <menu text="$P30F7D1B" text-def="标记为：">
             <item type="checkbox" text="$P30F7D1C" text-def="默认(@0)" group="label" command="0">
                 <icon>

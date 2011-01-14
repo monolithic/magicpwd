@@ -25,7 +25,7 @@ public class TestAction extends AAction
     }
 
     @Override
-    public void reInit(javax.swing.AbstractButton button)
+    public void reInit(javax.swing.AbstractButton button, String value)
     {
     }
 }

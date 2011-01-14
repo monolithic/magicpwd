@@ -701,6 +701,12 @@
             <item type="checkbox" text="$P30F7E0C" text-def="--{0}--" group="sign-options" command="tip:P30F7E0D" />
         </menu>
     </submenu>
+    <!--文件查看菜单-->
+    <submenu id="file-preview">
+        <item type="normal" text="图像查看器" text-def="图像查看器" init="com.magicpwd.x.docs.ImgViewer:PNG,JPG,JPEG,JFIF,GIF,BMP" />
+        <item type="normal" text="源码查看器" text-def="源码查看器" init="com.magicpwd.x.docs.SrcViewer:http://magicpwd.com/code/code0002.ashx" />
+        <item type="normal" text="文本查看器" text-def="文本查看器" init="com.magicpwd.x.docs.TxtViewer:TXT,TEXT,HTML,HTM,XML" />
+    </submenu>
     <strokes id="mpwd">
         <action id="exit-window" class="com.magicpwd.e.mpwd.file.ExitAction">
             <stroke key="^ Q" />
