@@ -420,10 +420,59 @@ public class MenuPtn
         else
         {
             item.addActionListener(action);
+            if (action instanceof IAction)
+            {
+                ((IAction) action).reInit(item, element.attributeValue("init"));
+            }
         }
         processCommand(element, item);
         processGroup(element, item);
         return item;
+    }
+
+    private javax.swing.AbstractButton createButton(Element element, javax.swing.JComponent component, String viewPtn)
+    {
+        javax.swing.AbstractButton button = null;
+        String type = element.attributeValue("type");
+        if ("toggle".equals(type))
+        {
+            button = new javax.swing.JToggleButton();
+        }
+        else
+        {
+            button = new javax.swing.JButton();
+        }
+
+        String id = element.attributeValue("id");
+        if (Char.isValidate(id))
+        {
+            buttons.put(id, button);
+        }
+
+        if (userMdl.getCfg(Char.format(ConsCfg.CFG_VIEW_TOOL_MOD, viewPtn), "icon").toLowerCase().indexOf("text") > -1)
+        {
+            String pos = userMdl.getCfg(Char.format(ConsCfg.CFG_VIEW_TOOL_POS, viewPtn), "").toLowerCase();
+            if (Char.isValidate(pos))
+            {
+                if ("top".equals(pos))
+                {
+                    button.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+                }
+                else if ("bottom".equals(pos))
+                {
+                    button.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+                }
+            }
+            processText(element, button);
+        }
+        processTips(element, button);
+        processIcon(element, button);
+        processEnabled(element, button);
+        processVisible(element, button);
+        processGroup(element, button);
+        processAction(element, button, component);
+        processCommand(element, button);
+        return button;
     }
 
     public void loadSkin(javax.swing.JMenu skinMenu)
@@ -896,6 +945,7 @@ public class MenuPtn
         {
             return button;
         }
+        String btnInit = element.attributeValue("init");
 
         for (int i = 0, j = list.size(); i < j; i += 1)
         {
@@ -918,48 +968,48 @@ public class MenuPtn
                             {
                                 IAction iAction = (IAction) action;
                                 iAction.setTrayPtn(trayPtn);
-                                String init = element.attributeValue("init");
+                                String actInit = element.attributeValue("init");
 
                                 if (action instanceof ITrayAction)
                                 {
                                     ITrayAction trayAction = (ITrayAction) action;
                                     trayAction.setTrayPtn(trayPtn);
-                                    trayAction.doInit(init);
+                                    trayAction.doInit(actInit);
                                 }
                                 else if (action instanceof IMpwdAction)
                                 {
                                     IMpwdAction mpwdAction = (IMpwdAction) action;
                                     mpwdAction.setTrayPtn(trayPtn);
                                     mpwdAction.setMainPtn(trayPtn.getMpwdPtn());
-                                    mpwdAction.doInit(init);
+                                    mpwdAction.doInit(actInit);
                                 }
                                 else if (action instanceof IMwizAction)
                                 {
                                     IMwizAction mwizAction = (IMwizAction) action;
                                     mwizAction.setTrayPtn(trayPtn);
                                     mwizAction.setNormPtn(trayPtn.getMwizPtn());
-                                    mwizAction.doInit(init);
+                                    mwizAction.doInit(actInit);
                                 }
                                 else if (action instanceof IMpadAction)
                                 {
                                     IMpadAction mpadAction = (IMpadAction) action;
                                     mpadAction.setTrayPtn(trayPtn);
                                     mpadAction.setMiniPtn(trayPtn.getMpadPtn());
-                                    mpadAction.doInit(init);
+                                    mpadAction.doInit(actInit);
                                 }
                                 else if (action instanceof IMaocAction)
                                 {
                                     IMaocAction maocAction = (IMaocAction) action;
                                     maocAction.setTrayPtn(trayPtn);
                                     maocAction.setMaocPtn(trayPtn.getMaocPtn());
-                                    maocAction.doInit(init);
+                                    maocAction.doInit(actInit);
                                 }
                                 else if (action instanceof IMrucAction)
                                 {
                                     IMrucAction mrucAction = (IMrucAction) action;
                                     mrucAction.setTrayPtn(trayPtn);
 //                                    maocAction.setMrucPtn(trayPtn.getMrucPtn());
-                                    mrucAction.doInit(init);
+                                    mrucAction.doInit(actInit);
                                 }
                             }
                             if (validate)
@@ -978,10 +1028,10 @@ public class MenuPtn
             if (button != null)
             {
                 button.addActionListener(action);
-                if (action instanceof IAction)
-                {
-                    ((IAction) action).reInit(button);
-                }
+            }
+            if (action instanceof IAction)
+            {
+                ((IAction) action).reInit(button, btnInit);
             }
             processStrokes(element, button, action, component);
             processReference(element, button, action);
@@ -1100,51 +1150,6 @@ public class MenuPtn
     private static String getLang(String text)
     {
         return (text != null && java.util.regex.Pattern.matches("^[$]P30F[0123456789ABCDEF]{4}$", text)) ? Lang.getLang(text, text) : text;
-    }
-
-    private javax.swing.AbstractButton createButton(Element element, javax.swing.JComponent component, String viewPtn)
-    {
-        javax.swing.AbstractButton button = null;
-        String type = element.attributeValue("type");
-        if ("toggle".equals(type))
-        {
-            button = new javax.swing.JToggleButton();
-        }
-        else
-        {
-            button = new javax.swing.JButton();
-        }
-
-        String id = element.attributeValue("id");
-        if (Char.isValidate(id))
-        {
-            buttons.put(id, button);
-        }
-
-        if (userMdl.getCfg(Char.format(ConsCfg.CFG_VIEW_TOOL_MOD, viewPtn), "icon").toLowerCase().indexOf("text") > -1)
-        {
-            String pos = userMdl.getCfg(Char.format(ConsCfg.CFG_VIEW_TOOL_POS, viewPtn), "").toLowerCase();
-            if (Char.isValidate(pos))
-            {
-                if ("top".equals(pos))
-                {
-                    button.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-                }
-                else if ("bottom".equals(pos))
-                {
-                    button.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-                }
-            }
-            processText(element, button);
-        }
-        processTips(element, button);
-        processIcon(element, button);
-        processEnabled(element, button);
-        processVisible(element, button);
-        processCommand(element, button);
-        processGroup(element, button);
-        processAction(element, button, component);
-        return button;
     }
 
     public boolean isEnabled(String id)

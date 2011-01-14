@@ -57,7 +57,7 @@ public class ExitAction extends ATrayAction
     }
 
     @Override
-    public void reInit(javax.swing.AbstractButton button)
+    public void reInit(javax.swing.AbstractButton button, String value)
     {
     }
 }

@@ -58,7 +58,7 @@ public class RemoteBackupAction extends AMpwdAction implements IBackCall<String>
     }
 
     @Override
-    public void reInit(javax.swing.AbstractButton button)
+    public void reInit(javax.swing.AbstractButton button, String value)
     {
     }
 

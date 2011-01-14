@@ -210,13 +210,6 @@ public interface ConsCfg
     String CFG_MPAD = CFG_PRE + ".mpad";
     String CFG_MPAD_WRAP = CFG_MPAD + ".wrap";
     /**
-     * 文件类型：
-     */
-    String CFG_FILE = CFG_PRE + ".file";
-    String CFG_FILE_IMG = CFG_FILE + ".img";
-    String CFG_FILE_TXT = CFG_FILE + ".txt";
-    String CFG_FILE_SRC = CFG_FILE + ".src";
-    /**
      * 默认数据：是
      */
     String DEF_TRUE = "true";

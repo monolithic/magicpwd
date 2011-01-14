@@ -14,10 +14,11 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.x;
+package com.magicpwd.x.docs;
 
 import com.magicpwd.__a.ADialog;
 import com.magicpwd.__a.AFrame;
+import com.magicpwd.__i.IDocsViewer;
 import com.magicpwd._comp.IcoLabel;
 import com.magicpwd._comp.ImgPanel;
 import com.magicpwd._util.Bean;
@@ -28,17 +29,26 @@ import java.awt.event.ActionEvent;
  * 图片预览
  * @author Amon
  */
-public class ImgViewer extends ADialog
+public class ImgViewer extends ADialog implements IDocsViewer
 {
 
     private AFrame formPtn;
     private java.io.File imgFile;
 
-    public ImgViewer(AFrame formPtn, java.io.File imgFile)
+    public ImgViewer(AFrame formPtn)
     {
         super(formPtn, true);
         this.formPtn = formPtn;
-        this.imgFile = imgFile;
+    }
+
+    @Override
+    public void show(java.io.File file)
+    {
+        imgFile = file;
+        initView();
+        initLang();
+        initData();
+        setVisible(true);
     }
 
     public void initView()
@@ -66,7 +76,7 @@ public class ImgViewer extends ADialog
         }
 
         pl_Control = new javax.swing.JPanel();
-        pl_Control.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 5, 0));
+        pl_Control.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 3, 0));
 
         bt_ClearBtn = new IcoLabel();
         bt_ClearBtn.setIcon(formPtn.readFavIcon("file-close", true));

@@ -67,7 +67,7 @@ public class UpdateAction extends AMpwdAction implements IBackCall<Kind>
     }
 
     @Override
-    public void reInit(javax.swing.AbstractButton button)
+    public void reInit(javax.swing.AbstractButton button, String value)
     {
     }
 

@@ -16,20 +16,23 @@
  */
 package com.magicpwd._bean;
 
+import com.magicpwd.__a.AAction;
 import com.magicpwd.__a.AEditBean;
 import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IEditItem;
+import com.magicpwd.__i.IDocsViewer;
 import com.magicpwd._comn.item.EditItem;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
-import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.File;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd.x.ImgViewer;
+import java.lang.reflect.Constructor;
+import javax.swing.AbstractButton;
 
 /**
  * Application: MagicPwd
@@ -48,11 +51,12 @@ public abstract class AFileBean extends AEditBean
     protected java.io.File filePath;
     protected java.io.File amaPath;
     private WTextBox dataBox;
-    private java.util.HashMap<String, String> extList;
+    private static java.util.HashMap<String, String> extList;
 
     public AFileBean(AFrame formPtn)
     {
         this.formPtn = formPtn;
+        extList = new java.util.HashMap<String, String>();
     }
 
     protected void initConfView()
@@ -89,6 +93,11 @@ public abstract class AFileBean extends AEditBean
             }
         });
         pl_PropConf.add(bt_FileApnd);
+
+        pm_FileView = new javax.swing.JPopupMenu();
+        mi_ViewDef = new javax.swing.JMenuItem();
+        pm_FileView.add(mi_ViewDef);
+        pm_FileView.addSeparator();
     }
 
     protected void initConfLang()
@@ -99,28 +108,45 @@ public abstract class AFileBean extends AEditBean
         Lang.setWText(bt_FileApnd, LangRes.P30F1517, "@P");
         Lang.setWTips(bt_FileApnd, LangRes.P30F1518, "添加附件(Alt + P)");
 
+        Lang.setWText(mi_ViewDef, null, "系统默认程序");
+
         dataBox.initLang();
     }
 
     protected void initConfData()
     {
-        extList = new java.util.HashMap<String, String>();
-        String cfg = formPtn.getUserMdl().getCfg(ConsCfg.CFG_FILE_IMG, "png,jpg,jpeg,gif,jfif,bmp");
-        for (String tmp : cfg.split(","))
+        java.awt.event.ActionListener osAction = new java.awt.event.ActionListener()
         {
-            extList.put(tmp, "img");
-        }
-        cfg = formPtn.getUserMdl().getCfg(ConsCfg.CFG_FILE_TXT, "txt,text");
-        for (String tmp : cfg.split(","))
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                mi_ViewOsActionPerformed(e);
+            }
+        };
+        mi_ViewDef.addActionListener(osAction);
+
+        AAction asAction = new AAction()
         {
-            extList.put(tmp, "txt");
-        }
-        cfg = formPtn.getUserMdl().getCfg(ConsCfg.CFG_FILE_SRC, "java,cs,js,css");
-        for (String tmp : cfg.split(","))
-        {
-            extList.put(tmp, "src");
-        }
-        dataBox.initData();
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                mi_ViewAsActionPerformed(e);
+            }
+
+            @Override
+            public void doInit(String value)
+            {
+            }
+
+            @Override
+            public void reInit(AbstractButton button, String value)
+            {
+                initExts(value);
+            }
+        };
+        formPtn.getMenuPtn().getSubMenu("file-preview", pm_FileView, asAction);
     }
 
     protected void showConfData()
@@ -135,49 +161,32 @@ public abstract class AFileBean extends AEditBean
         }
     }
 
+    private void initExts(String value)
+    {
+        if (!Char.isValidate(value))
+        {
+            return;
+        }
+        int mi = value.indexOf(':');
+        if (mi < 1)
+        {
+            return;
+        }
+        String type = value.substring(0, mi);
+        value = value.substring(mi + 1).replaceAll("\\s+", "").toUpperCase();
+        for (String ext : value.split(","))
+        {
+            extList.put(ext.replaceAll("^\\.|\\.$", ""), type);
+        }
+    }
+
     protected abstract void deCrypt(java.io.File src, java.io.File dst) throws Exception;
 
     protected abstract void enCrypt(java.io.File src, java.io.File dst) throws Exception;
 
     private void bt_FileViewActionPerformed(java.awt.event.ActionEvent evt)
     {
-        try
-        {
-            java.io.File tmpPath = new java.io.File(System.getProperty("java.io.tmpdir"));
-            if (!tmpPath.exists() || !tmpPath.canWrite())
-            {
-                tmpPath = new java.io.File("./tmp/");
-                if (!tmpPath.exists())
-                {
-                    tmpPath.mkdir();
-                }
-            }
-
-            java.io.File srcFile = new java.io.File(amaPath, itemData.getSpec(IEditItem.SPEC_FILE_NAME) + ConsEnv.FILE_ATTACHMENT);
-            java.io.File tmpFile = new java.io.File(tmpPath, itemData.getData());
-            deCrypt(srcFile, tmpFile);
-
-            String exts = itemData.getSpec(IEditItem.SPEC_FILE_EXTS, "").toLowerCase();
-            if ("img".equalsIgnoreCase(extList.get(exts)))
-            {
-                ImgViewer iv = new ImgViewer(formPtn, tmpFile);
-                iv.initView();
-                iv.initLang();
-                iv.initData();
-                iv.setVisible(true);
-                return;
-            }
-
-            if (!Desk.open(tmpFile))
-            {
-                Lang.showMesg(formPtn, LangRes.P30F1A03, "打开文件错误，请尝试手动方式查看！");
-            }
-        }
-        catch (Exception exp)
-        {
-            Lang.showMesg(formPtn, null, exp.getLocalizedMessage());
-            Logs.exception(exp);
-        }
+        pm_FileView.show(bt_FileView, 0, bt_FileView.getSize().height);
     }
 
     private void bt_FileApndActionPerformed(java.awt.event.ActionEvent evt)
@@ -198,7 +207,83 @@ public abstract class AFileBean extends AEditBean
         tf_PropData.setText(filePath.getName());
     }
 
-    protected boolean processData()
+    private void mi_ViewOsActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        java.io.File file = deCryptData();
+        if (file == null)
+        {
+            return;
+        }
+
+        if (!Desk.open(file))
+        {
+            Lang.showMesg(formPtn, LangRes.P30F1A03, "打开文件错误，请尝试手动方式查看！");
+        }
+    }
+
+    private void mi_ViewAsActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        String ext = itemData.getSpec(IEditItem.SPEC_FILE_EXTS, "").toUpperCase();
+        if (!extList.containsKey(ext))
+        {
+            Lang.showMesg(formPtn, null, "查看器无法打开 {0} 类型的文件！", ext);
+            return;
+        }
+
+        java.io.File file = deCryptData();
+        if (file == null)
+        {
+            return;
+        }
+
+        try
+        {
+            Constructor c = Class.forName(extList.get(ext)).getConstructor(AFrame.class);
+            if (c != null)
+            {
+                Object obj = c.newInstance(formPtn);
+                if (obj != null && obj instanceof IDocsViewer)
+                {
+                    IDocsViewer viewer = (IDocsViewer) obj;
+                    viewer.show(file);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Logs.exception(ex);
+        }
+    }
+
+    protected java.io.File deCryptData()
+    {
+        try
+        {
+            java.io.File tmpPath = new java.io.File(System.getProperty("java.io.tmpdir"));
+            if (!tmpPath.exists() || !tmpPath.canWrite())
+            {
+                tmpPath = new java.io.File("./tmp/");
+                if (!tmpPath.exists() || !tmpPath.isDirectory())
+                {
+                    tmpPath.mkdirs();
+                }
+            }
+
+            java.io.File srcFile = new java.io.File(amaPath, itemData.getSpec(IEditItem.SPEC_FILE_NAME) + ConsEnv.FILE_ATTACHMENT);
+            java.io.File tmpFile = new java.io.File(tmpPath, itemData.getData());
+            deCrypt(srcFile, tmpFile);
+
+            return tmpFile;
+        }
+        catch (Exception exp)
+        {
+            Lang.showMesg(formPtn, null, exp.getLocalizedMessage());
+            Logs.exception(exp);
+            return null;
+        }
+    }
+
+    protected boolean enCryptData()
     {
         String file = itemData.getSpec(EditItem.SPEC_FILE_NAME);
         if (filePath != null)
@@ -263,4 +348,6 @@ public abstract class AFileBean extends AEditBean
     protected javax.swing.JPanel pl_PropConf;
     private BtnLabel bt_FileApnd;
     private BtnLabel bt_FileView;
+    private javax.swing.JPopupMenu pm_FileView;
+    private javax.swing.JMenuItem mi_ViewDef;
 }

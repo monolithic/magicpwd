@@ -182,7 +182,7 @@ public class FileBean extends AFileBean implements IMpwdBean
             return;
         }
 
-        if (!processData())
+        if (!enCryptData())
         {
             return;
         }
