@@ -14,21 +14,27 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.x;
+package com.magicpwd.x.docs;
 
 import com.magicpwd.__a.ADialog;
 import com.magicpwd.__a.AFrame;
+import com.magicpwd.__i.IDocsViewer;
 
 /**
- * 源码查看
+ *
  * @author Amon
  */
-public class SrcViewer extends ADialog
+public class TxtViewer extends ADialog implements IDocsViewer
 {
 
-    public SrcViewer(AFrame formPtn)
+    public TxtViewer(AFrame formPtn)
     {
         super(formPtn, true);
+    }
+
+    @Override
+    public void show(java.io.File file)
+    {
     }
 
     @Override

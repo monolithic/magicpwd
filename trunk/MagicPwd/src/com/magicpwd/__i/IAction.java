@@ -27,9 +27,18 @@ public interface IAction extends javax.swing.Action
 
     void setTrayPtn(TrayPtn trayPtn);
 
+    /**
+     * Action自身参数初始化
+     * @param value 配置文件中需要传递给Action的初始化参数
+     */
     public abstract void doInit(String value);
 
-    void reInit(javax.swing.AbstractButton button);
+    /**
+     * Action对抽象按钮的初始化
+     * @param button 需要处理的按钮
+     * @param value 当事件被附加于按钮时，需要处理的初始化参数
+     */
+    public abstract void reInit(javax.swing.AbstractButton button, String value);
 
     boolean isVisible();
 

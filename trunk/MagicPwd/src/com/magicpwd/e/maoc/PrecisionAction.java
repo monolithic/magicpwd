@@ -74,7 +74,7 @@ public class PrecisionAction extends AMaocAction
     }
 
     @Override
-    public void reInit(javax.swing.AbstractButton button)
+    public void reInit(javax.swing.AbstractButton button, String value)
     {
     }
 }

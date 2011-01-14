@@ -107,7 +107,7 @@ public class FileBean extends AFileBean implements IMwizBean
     public boolean saveData()
     {
         saveName();
-        return processData();
+        return enCryptData();
     }
 
     @Override
