@@ -19,8 +19,9 @@ import org.dom4j.io.SAXReader;
 public class AU extends javax.swing.JFrame
 {
 
-    private String ver;
-    private String uri;
+    private boolean ddd;
+    private static String ver = "1.0.0.1";
+    private static String uri;
     private javax.swing.DefaultListModel lm_StepInfo;
 
     public AU()
@@ -44,7 +45,7 @@ public class AU extends javax.swing.JFrame
 
         bt_Manage = new javax.swing.JButton();
         bt_Manage.setMnemonic('S');
-        bt_Manage.setText("暂停(S)");
+        bt_Manage.setText("开始(S)");
         bt_Manage.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -56,7 +57,6 @@ public class AU extends javax.swing.JFrame
         });
 
         ta_NoteInfo = new javax.swing.JTextArea();
-//        ta_NoteInfo.setColumns(20);
         ta_NoteInfo.setEditable(false);
         ta_NoteInfo.setFocusable(false);
         ta_NoteInfo.setOpaque(false);
@@ -99,23 +99,32 @@ public class AU extends javax.swing.JFrame
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vsg1));
 
         setResizable(false);
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         pack();
+        setVisible(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     }
 
     private void bt_ManageActionPerformed(java.awt.event.ActionEvent evt)
     {
-        try
+        if (ddd)
         {
-            downInfo();
+            return;
         }
-        catch (Exception exp)
+
+        new Thread()
         {
-        }
+
+            @Override
+            public void run()
+            {
+                startAU();
+            }
+        }.start();
     }
 
     private void bt_CancelActionPerformed(java.awt.event.ActionEvent evt)
     {
+        System.exit(0);
     }
 
     private boolean parseUri(String arg)
@@ -123,110 +132,165 @@ public class AU extends javax.swing.JFrame
         return true;
     }
 
-    private void downInfo() throws Exception
+    private void startAU()
     {
+        try
+        {
+            ddd = true;
+            java.util.List<FileInfo> infoList = downInfo();
+            if (infoList != null)
+            {
+                overRide(infoList);
+                showStep("系统升级成功！");
+            }
+            showStep("系统升级失败！");
+        }
+        catch (Exception exp)
+        {
+            exp.printStackTrace();
+            javax.swing.JOptionPane.showMessageDialog(this, exp.getLocalizedMessage());
+            showStep("系统升级异常！");
+            ddd = false;
+        }
+    }
+
+    private java.util.List<FileInfo> downInfo() throws Exception
+    {
+        showStep("服务器连接中……");
+
         // 属性读取
         Document document = new SAXReader().read(new URL(uri));
         Node node = document.selectSingleNode("/amonsoft");
         if (node == null)
         {
-            return;
+            showStep("升级信息读取出错！");
+            return null;
         }
 
-        node = node.selectSingleNode("version");
-        if (node == null)
+        Node temp = node.selectSingleNode("version");
+        if (temp == null)
         {
             javax.swing.JOptionPane.showMessageDialog(this, "读取软件版本信息出错！");
-            return;
+            return null;
         }
-        if (!checkVer(ver, node.getText()))
+        if (!checkVer(ver, temp.getText()))
         {
             javax.swing.JOptionPane.showMessageDialog(this, "没有可用的升级信息！");
-            return;
+            return null;
         }
 
-        node = document.selectSingleNode("strategy");
-        if (node != null)
+        // 文件服务器路径
+        temp = node.selectSingleNode("server/url");
+        if (temp == null)
         {
-            String tmp = node.getText().trim().toLowerCase();
+            showStep("无法获取文件下载路径！");
+            return null;
+        }
+        uri = temp.getText();
+
+        temp = node.selectSingleNode("strategy");
+        if (temp != null)
+        {
+            String tmp = temp.getText().trim().toLowerCase();
             if (!"publish".equals(tmp))
             {
                 if (javax.swing.JOptionPane.YES_OPTION != javax.swing.JOptionPane.showConfirmDialog(this, "新版本策略为" + tmp + "，确认要升级吗？"))
                 {
-                    return;
+                    showStep("用户取消升级！");
+                    return null;
                 }
             }
         }
 
         java.util.List nodeList = node.selectNodes("files/file");
-        if (nodeList != null)
+        if (nodeList == null || nodeList.size() < 1)
         {
-            // 获取用户IP地址
-            String inet = null;
-            try
-            {
-                inet = InetAddress.getLocalHost().getHostAddress();
-            }
-            catch (Exception exp)
-            {
-                inet = "0.0.0.0";
-            }
-
-            int size = nodeList.size();
-            java.util.List<FileInfo> infoList = new java.util.ArrayList<FileInfo>(size);
-
-            byte[] buf = new byte[1024];
-            FileInfo info;
-            Node temp;
-            for (int i = 0; i < size; i += 1)
-            {
-                info = new FileInfo();
-                infoList.add(info);
-
-                node = (Node) nodeList.get(i);
-                // 文件名称
-                temp = node.selectSingleNode("name");
-                if (temp != null)
-                {
-                    info.setName(temp.getText());
-                }
-                // 发行版本
-                temp = node.selectSingleNode("version");
-                if (temp != null)
-                {
-                    info.setVersion(temp.getText());
-                }
-                // 升级方式
-                temp = node.selectSingleNode("operation");
-                if (temp != null)
-                {
-                    info.setOperation(readInt(temp.getText(), 0));
-                }
-                // 远程目录
-                temp = node.selectSingleNode("remote-path");
-                if (temp != null)
-                {
-                    info.setRemotePath(temp.getText());
-                }
-                // 本地目录
-                temp = node.selectSingleNode("locale-path");
-                if (temp != null)
-                {
-                    info.setLocalePath(temp.getText());
-                }
-                downFile(buf, info, inet);
-            }
-            return;
+            showStep("没有可用的文件更新！");
+            return null;
         }
+
+        // 获取用户IP地址
+        String inet = null;
+        try
+        {
+            inet = InetAddress.getLocalHost().getHostAddress();
+        }
+        catch (Exception exp)
+        {
+            inet = "0.0.0.0";
+        }
+
+        int size = nodeList.size();
+        java.util.List<FileInfo> infoList = new java.util.ArrayList<FileInfo>(size);
+
+        byte[] buf = new byte[1024];
+        FileInfo info;
+        for (int i = 0; i < size; i += 1)
+        {
+            info = new FileInfo();
+            infoList.add(info);
+
+            node = (Node) nodeList.get(i);
+            // 发行版本
+            temp = node.selectSingleNode("version");
+            if (temp != null)
+            {
+                info.setVersion(temp.getText());
+            }
+            // 发行方案
+            temp = node.selectSingleNode("strategy");
+            if (temp != null)
+            {
+                info.setStrategy(temp.getText());
+            }
+            // 升级方式
+            temp = node.selectSingleNode("operation");
+            if (temp != null)
+            {
+                info.setOperation(readInt(temp.getText(), 0));
+            }
+            // 远程目录
+            temp = node.selectSingleNode("remote-path");
+            if (temp != null)
+            {
+                info.setRemotePath(temp.getText());
+            }
+            // 远程名称
+            temp = node.selectSingleNode("remote-name");
+            if (temp != null)
+            {
+                info.setRemoteName(temp.getText());
+            }
+            // 本地目录
+            temp = node.selectSingleNode("local-path");
+            if (temp != null)
+            {
+                info.setLocalPath(temp.getText());
+            }
+            // 本地名称
+            temp = node.selectSingleNode("local-name");
+            if (temp != null)
+            {
+                info.setLocalName(temp.getText());
+            }
+            // 文件下载
+            if (!downFile(buf, info, inet))
+            {
+                return null;
+            }
+        }
+        return infoList;
     }
 
     private boolean downFile(byte[] buf, FileInfo info, String ip)
     {
         try
         {
-            URL url = new URL(uri.replace("{path}", info.getRemotePath()).replace("{file}", info.getName()).replace("{newVer}", info.getVersion()).replace("{oldVer}", ver).replace("{ip}", ip));//创建URL
+            showStep("正在下载文件：" + info.getRemoteName());
+
+            URL url = new URL(uri.replace("{path}", info.getRemotePath()).replace("{file}", info.getRemoteName()).replace("{newVer}", info.getVersion()).replace("{oldVer}", ver).replace("{ip}", ip));//创建URL
             URLConnection con = url.openConnection();//建立连接
-            java.io.File file = new java.io.File("tmp", info.getName());//根据filename创建一个下载文件，也会是我们最终下载所得的文件
+            java.io.File file = new java.io.File("tmp", info.getLocalName());//根据filename创建一个下载文件，也会是我们最终下载所得的文件
             if (!file.exists() || !file.isFile())
             {
                 file.createNewFile();
@@ -248,6 +312,7 @@ public class AU extends javax.swing.JFrame
         catch (Exception exp)
         {
             javax.swing.JOptionPane.showMessageDialog(this, exp.getLocalizedMessage());
+            showStep("文件 " + info.getRemoteName() + " 下载失败！");
             return false;
         }
     }
@@ -257,9 +322,11 @@ public class AU extends javax.swing.JFrame
         java.io.File file;
         for (FileInfo info : infoList)
         {
+            showStep("正在升级文件：" + info.getLocalName());
+
             if (info.getOperation() == -1)
             {
-                file = new java.io.File(info.getLocalePath(), info.getName());
+                file = new java.io.File(info.getLocalPath(), info.getLocalName());
                 if (file.exists() && file.canWrite())
                 {
                     file.delete();
@@ -269,10 +336,10 @@ public class AU extends javax.swing.JFrame
             }
             if (info.getOperation() == 1)
             {
-                file = new java.io.File("tmp", info.getName());
+                file = new java.io.File("tmp", info.getLocalName());
                 if (file.exists() && file.canWrite())
                 {
-                    copyTo(file, new java.io.File(info.getLocalePath(), info.getName()));
+                    copyTo(file, new java.io.File(info.getLocalPath(), info.getLocalName()));
                     file.delete();
                     info.setOperation(10);
                 }
@@ -335,7 +402,6 @@ public class AU extends javax.swing.JFrame
      */
     public static void main(String[] args)
     {
-        String uri = null;
         if (args != null && args.length == 1)
         {
             uri = args[0];
@@ -349,12 +415,30 @@ public class AU extends javax.swing.JFrame
             }
         }
 
-        new AU().setVisible(true);
+        new AU().init();
     }
 
     private static String readUri()
     {
-        return "";
+        java.io.File file = new java.io.File("tmp", "ver.amu");
+        if (!file.exists() || !file.isFile() || !file.canRead())
+        {
+            return "";
+        }
+
+        java.util.Properties prop = new java.util.Properties();
+        try
+        {
+            java.io.FileInputStream fis = new java.io.FileInputStream(file);
+            prop.load(fis);
+            fis.close();
+        }
+        catch (Exception ex)
+        {
+            javax.swing.JOptionPane.showMessageDialog(null, ex.getLocalizedMessage());
+            return "";
+        }
+        return prop.getProperty("uri");
     }
 
     private static int readInt(String t, int d)

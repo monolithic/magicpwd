@@ -11,28 +11,13 @@ package com.amonsoft.m;
 public class FileInfo
 {
 
-    private String name;
     private String version;
     private String strategy;
     private int operation;
     private String remotePath;
-    private String localePath;
-
-    /**
-     * @return the name
-     */
-    public String getName()
-    {
-        return name;
-    }
-
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name)
-    {
-        this.name = name;
-    }
+    private String remoteName;
+    private String localPath;
+    private String localName;
 
     /**
      * @return the version
@@ -99,18 +84,50 @@ public class FileInfo
     }
 
     /**
-     * @return the localePath
+     * @return the remoteName
      */
-    public String getLocalePath()
+    public String getRemoteName()
     {
-        return localePath;
+        return remoteName;
     }
 
     /**
-     * @param localePath the localePath to set
+     * @param remoteName the remoteName to set
      */
-    public void setLocalePath(String localePath)
+    public void setRemoteName(String remoteName)
     {
-        this.localePath = localePath;
+        this.remoteName = remoteName;
+    }
+
+    /**
+     * @return the localPath
+     */
+    public String getLocalPath()
+    {
+        return localPath;
+    }
+
+    /**
+     * @param localPath the localPath to set
+     */
+    public void setLocalPath(String localPath)
+    {
+        this.localPath = localPath;
+    }
+
+    /**
+     * @return the localName
+     */
+    public String getLocalName()
+    {
+        return localName;
+    }
+
+    /**
+     * @param localName the localName to set
+     */
+    public void setLocalName(String localName)
+    {
+        this.localName = localName;
     }
 }
