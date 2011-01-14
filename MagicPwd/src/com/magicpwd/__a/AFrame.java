@@ -56,6 +56,7 @@ public abstract class AFrame extends javax.swing.JFrame
     protected UserMdl userMdl;
     protected SafeMdl safeMdl;
     protected static java.util.HashMap<String, javax.swing.Icon> defIcon;
+    private static int hintCnt;
     private static java.util.Properties defProp;
     private java.util.Properties favProp;
 
@@ -302,7 +303,12 @@ public abstract class AFrame extends javax.swing.JFrame
     public void hideFrame()
     {
         setVisible(false);
-        trayPtn.showTips(Lang.getLang(LangRes.P30F9A01, "友情提示"), Lang.getLang(LangRes.P30F7A43, "魔方密码仍在运行中，您可以通过双击此处显示主窗口！"));
+        int cnt = userMdl.getTrayHintCnt();
+        if (cnt < 0 || hintCnt < cnt)
+        {
+            trayPtn.showTips(Lang.getLang(LangRes.P30F9A01, "友情提示"), Lang.getLang(LangRes.P30F7A43, "魔方密码仍在运行中，您可以通过双击此处显示主窗口！"));
+            hintCnt += 1;
+        }
         endSave();
     }
 

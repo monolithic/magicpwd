@@ -33,11 +33,11 @@ public class AppendFileAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mainPtn.appendBean(ConsDat.INDX_FILE);
+        mpwdPtn.appendBean(ConsDat.INDX_FILE);
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

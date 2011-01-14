@@ -33,13 +33,13 @@ public class EditVisibleAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !mainPtn.getUserMdl().isEditVisible();
-        mainPtn.setEditVisible(b);
+        boolean b = !mpwdPtn.getUserMdl().isEditVisible();
+        mpwdPtn.setEditVisible(b);
         if (b)
         {
-            mainPtn.showPropInfo();
+            mpwdPtn.showPropInfo();
         }
-        mainPtn.pack();
+        mpwdPtn.pack();
 
         String cmd = e.getActionCommand();
         if (Char.isValidate(cmd))
@@ -47,7 +47,7 @@ public class EditVisibleAction extends AMpwdAction
             javax.swing.AbstractButton button;
             for (String tmp : cmd.split(","))
             {
-                button = mainPtn.getMenuPtn().getButton(tmp);
+                button = mpwdPtn.getMenuPtn().getButton(tmp);
                 if (button != null)
                 {
                     button.setEnabled(b);
@@ -57,9 +57,9 @@ public class EditVisibleAction extends AMpwdAction
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
-        setSelected(mainPtn.getUserMdl().isEditVisible());
+        setSelected(mpwdPtn.getUserMdl().isEditVisible());
     }
 
     @Override

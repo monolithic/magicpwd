@@ -35,7 +35,7 @@ public class PrintAction extends AMpwdAction
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

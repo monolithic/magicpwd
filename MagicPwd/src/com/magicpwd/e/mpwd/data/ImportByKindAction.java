@@ -39,10 +39,10 @@ public class ImportByKindAction extends AMpwdAction implements IBackCall<UserDto
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        javax.swing.tree.TreePath path = mainPtn.getSelectedKindValue();
+        javax.swing.tree.TreePath path = mpwdPtn.getSelectedKindValue();
         if (path == null)
         {
-            Lang.showMesg(mainPtn, LangRes.P30F7A02, "");
+            Lang.showMesg(mpwdPtn, LangRes.P30F7A02, "");
             return;
         }
 
@@ -50,7 +50,7 @@ public class ImportByKindAction extends AMpwdAction implements IBackCall<UserDto
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 
@@ -64,18 +64,18 @@ public class ImportByKindAction extends AMpwdAction implements IBackCall<UserDto
     {
         if (ConsEnv.STR_SIGN_RS.equalsIgnoreCase(options))
         {
-            javax.swing.tree.TreePath path = mainPtn.getSelectedKindValue();
+            javax.swing.tree.TreePath path = mpwdPtn.getSelectedKindValue();
             KindTN node = (KindTN) path.getLastPathComponent();
             Kind kind = (Kind) node.getUserObject();
-            if (!mainPtn.isKindValidate(kind))
+            if (!mpwdPtn.isKindValidate(kind))
             {
-                Lang.showMesg(mainPtn, LangRes.P30F7A4A, "不能保存到任务列表中去！");
+                Lang.showMesg(mpwdPtn, LangRes.P30F7A4A, "不能保存到任务列表中去！");
 //                    tr_GuidTree.requestFocus();
                 return false;
             }
-            if (mainPtn.importByKind(kind.getC2010103()))
+            if (mpwdPtn.importByKind(kind.getC2010103()))
             {
-                mainPtn.findLast();
+                mpwdPtn.findLast();
             }
             return true;
         }

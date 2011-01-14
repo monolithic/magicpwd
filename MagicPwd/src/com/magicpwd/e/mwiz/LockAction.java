@@ -35,11 +35,11 @@ public class LockAction extends AMwizAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        normPtn.lockFrame();
+        mwizPtn.lockFrame();
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

@@ -31,6 +31,7 @@ import com.magicpwd._util.File;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.__i.mpad.IMpadAction;
+import com.magicpwd.__i.mruc.IMrucAction;
 import com.magicpwd.__i.mwiz.IMwizAction;
 import com.magicpwd.__i.tray.ITrayAction;
 import com.magicpwd.e.mpwd.skin.FeelAction;
@@ -917,40 +918,48 @@ public class MenuPtn
                             {
                                 IAction iAction = (IAction) action;
                                 iAction.setTrayPtn(trayPtn);
+                                String init = element.attributeValue("init");
 
                                 if (action instanceof ITrayAction)
                                 {
                                     ITrayAction trayAction = (ITrayAction) action;
                                     trayAction.setTrayPtn(trayPtn);
-                                    trayAction.doInit(null);
+                                    trayAction.doInit(init);
                                 }
                                 else if (action instanceof IMpwdAction)
                                 {
                                     IMpwdAction mpwdAction = (IMpwdAction) action;
                                     mpwdAction.setTrayPtn(trayPtn);
                                     mpwdAction.setMainPtn(trayPtn.getMpwdPtn());
-                                    mpwdAction.doInit(null);
+                                    mpwdAction.doInit(init);
                                 }
                                 else if (action instanceof IMwizAction)
                                 {
                                     IMwizAction mwizAction = (IMwizAction) action;
                                     mwizAction.setTrayPtn(trayPtn);
                                     mwizAction.setNormPtn(trayPtn.getMwizPtn());
-                                    mwizAction.doInit(null);
+                                    mwizAction.doInit(init);
                                 }
                                 else if (action instanceof IMpadAction)
                                 {
                                     IMpadAction mpadAction = (IMpadAction) action;
                                     mpadAction.setTrayPtn(trayPtn);
                                     mpadAction.setMiniPtn(trayPtn.getMpadPtn());
-                                    mpadAction.doInit(null);
+                                    mpadAction.doInit(init);
                                 }
                                 else if (action instanceof IMaocAction)
                                 {
                                     IMaocAction maocAction = (IMaocAction) action;
                                     maocAction.setTrayPtn(trayPtn);
                                     maocAction.setMaocPtn(trayPtn.getMaocPtn());
-                                    maocAction.doInit(null);
+                                    maocAction.doInit(init);
+                                }
+                                else if (action instanceof IMrucAction)
+                                {
+                                    IMrucAction mrucAction = (IMrucAction) action;
+                                    mrucAction.setTrayPtn(trayPtn);
+//                                    maocAction.setMrucPtn(trayPtn.getMrucPtn());
+                                    mrucAction.doInit(init);
                                 }
                             }
                             if (validate)

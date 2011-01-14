@@ -39,9 +39,9 @@ public class CreateSkeyAction extends AMpwdAction implements IBackCall<UserDto>
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (Char.isValidate(mainPtn.getUserMdl().getCfg(ConsCfg.CFG_USER_SKEY), 224))
+        if (Char.isValidate(mpwdPtn.getUserMdl().getCfg(ConsCfg.CFG_USER_SKEY), 224))
         {
-            Lang.showMesg(mainPtn, LangRes.P30F7A28, "您已经设置过安全口令！");
+            Lang.showMesg(mpwdPtn, LangRes.P30F7A28, "您已经设置过安全口令！");
             return;
         }
 
@@ -49,9 +49,9 @@ public class CreateSkeyAction extends AMpwdAction implements IBackCall<UserDto>
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
-        setEnabled(!Char.isValidate(mainPtn.getUserMdl().getCfg(ConsCfg.CFG_USER_SKEY), 224));
+        setEnabled(!Char.isValidate(mpwdPtn.getUserMdl().getCfg(ConsCfg.CFG_USER_SKEY), 224));
     }
 
     @Override
@@ -65,7 +65,7 @@ public class CreateSkeyAction extends AMpwdAction implements IBackCall<UserDto>
     {
         if (ConsEnv.STR_SIGN_SK.equalsIgnoreCase(options))
         {
-            javax.swing.AbstractButton button = mainPtn.getMenuPtn().getButton("mpwd-skey");
+            javax.swing.AbstractButton button = mpwdPtn.getMenuPtn().getButton("mpwd-skey");
             if (button != null)
             {
                 button.setEnabled(false);

@@ -37,16 +37,16 @@ public class FindAction extends AMwizAction
         }
         else
         {
-            button = normPtn.getMenuPtn().getButton("find");
+            button = mwizPtn.getMenuPtn().getButton("find");
             selected = !button.isSelected();
             button.setSelected(selected);
         }
 
-        normPtn.setFindVisible(selected);
-        normPtn.findKeys(null);
+        mwizPtn.setFindVisible(selected);
+        mwizPtn.findKeys(null);
         if (selected)
         {
-            javax.swing.AbstractButton hintButton = normPtn.getMenuPtn().getButton("hint");
+            javax.swing.AbstractButton hintButton = mwizPtn.getMenuPtn().getButton("hint");
             if (hintButton != null)
             {
                 hintButton.setSelected(false);
@@ -55,7 +55,7 @@ public class FindAction extends AMwizAction
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

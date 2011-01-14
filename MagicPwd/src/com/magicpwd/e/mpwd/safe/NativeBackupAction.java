@@ -38,13 +38,13 @@ public class NativeBackupAction extends AMpwdAction implements IBackCall<String>
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (!Char.isValidate(mainPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC)))
+        if (!Char.isValidate(mpwdPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC)))
         {
-            Lang.showMesg(mainPtn, LangRes.P30F7A54, "您还没有配置本地备份目录！");
+            Lang.showMesg(mpwdPtn, LangRes.P30F7A54, "您还没有配置本地备份目录！");
             return;
         }
 
-        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mainPtn, LangRes.P30F7A52, "确认要执行备份操作吗？"))
+        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mpwdPtn, LangRes.P30F7A52, "确认要执行备份操作吗？"))
         {
             return;
         }
@@ -61,7 +61,7 @@ public class NativeBackupAction extends AMpwdAction implements IBackCall<String>
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 
@@ -78,31 +78,31 @@ public class NativeBackupAction extends AMpwdAction implements IBackCall<String>
 
     private void doBackup()
     {
-        mainPtn.setLocked(true);
-        mainPtn.showProgress();
+        mpwdPtn.setLocked(true);
+        mpwdPtn.showProgress();
 
         try
         {
-            boolean b = mainPtn.nativeBackup(mainPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC), null);
-            mainPtn.hideProgress();
-            mainPtn.setLocked(false);
+            boolean b = mpwdPtn.nativeBackup(mpwdPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC), null);
+            mpwdPtn.hideProgress();
+            mpwdPtn.setLocked(false);
 
             if (b)
             {
-                Lang.showMesg(mainPtn, LangRes.P30F7A3D, "恭喜，数据备份成功！");
+                Lang.showMesg(mpwdPtn, LangRes.P30F7A3D, "恭喜，数据备份成功！");
             }
             else
             {
-                Lang.showMesg(mainPtn, LangRes.P30F7A3C, "数据备份失败，请重启软件后重试！");
+                Lang.showMesg(mpwdPtn, LangRes.P30F7A3C, "数据备份失败，请重启软件后重试！");
             }
         }
         catch (Exception exp)
         {
-            mainPtn.hideProgress();
-            mainPtn.setLocked(false);
+            mpwdPtn.hideProgress();
+            mpwdPtn.setLocked(false);
 
             Logs.exception(exp);
-            Lang.showMesg(mainPtn, null, exp.getLocalizedMessage());
+            Lang.showMesg(mpwdPtn, null, exp.getLocalizedMessage());
         }
     }
 }

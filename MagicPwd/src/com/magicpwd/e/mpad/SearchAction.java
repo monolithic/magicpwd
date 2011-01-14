@@ -32,11 +32,11 @@ public class SearchAction extends AMpadAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        miniPtn.findNote();
+        mpadPtn.findNote();
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

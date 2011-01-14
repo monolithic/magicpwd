@@ -32,11 +32,11 @@ public class SaveAction extends AMpadAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        miniPtn.saveNote();
+        mpadPtn.saveNote();
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

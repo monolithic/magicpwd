@@ -34,14 +34,14 @@ public class DropAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (Lang.showFirm(mainPtn, LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
+        if (Lang.showFirm(mpwdPtn, LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
         {
-            mainPtn.removeSelectedItem();
+            mpwdPtn.removeSelectedItem();
         }
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

@@ -29,12 +29,12 @@ public class SortDirAction extends AMwizAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        normPtn.getUserMdl().setCfg(ConsCfg.CFG_VIEW_LIST_ASC, e.getActionCommand());
-        normPtn.findLast();
+        mwizPtn.getUserMdl().setCfg(ConsCfg.CFG_VIEW_LIST_ASC, e.getActionCommand());
+        mwizPtn.findLast();
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

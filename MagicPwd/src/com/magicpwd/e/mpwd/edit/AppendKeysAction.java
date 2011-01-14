@@ -33,11 +33,11 @@ public class AppendKeysAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mainPtn.appendBean(ConsDat.INDX_PWDS);
+        mpwdPtn.appendBean(ConsDat.INDX_PWDS);
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

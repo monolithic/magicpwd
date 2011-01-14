@@ -46,7 +46,7 @@ public class AlgebraAction extends AMaocAction
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

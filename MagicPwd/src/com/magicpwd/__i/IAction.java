@@ -27,7 +27,7 @@ public interface IAction extends javax.swing.Action
 
     void setTrayPtn(TrayPtn trayPtn);
 
-    void doInit(Object object);
+    public abstract void doInit(String value);
 
     void reInit(javax.swing.AbstractButton button);
 

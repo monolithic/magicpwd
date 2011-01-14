@@ -37,16 +37,16 @@ public class ChangeMajorAction extends AMpwdAction
         String command = e.getActionCommand();
         int val = Char.isValidateInteger(command) ? Integer.parseInt(command) : 0;
 
-        Object obj = mainPtn.getSelectedListValue();
+        Object obj = mpwdPtn.getSelectedListValue();
         if (obj instanceof Keys)
         {
             ((Keys) obj).setP30F0103(val);
         }
-        mainPtn.changeMajor(val);
+        mpwdPtn.changeMajor(val);
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

@@ -33,11 +33,11 @@ public class ChangeAreaAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mainPtn.changeBean(ConsDat.INDX_AREA);
+        mpwdPtn.changeBean(ConsDat.INDX_AREA);
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

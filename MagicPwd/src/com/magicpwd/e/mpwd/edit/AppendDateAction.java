@@ -33,11 +33,11 @@ public class AppendDateAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mainPtn.appendBean(ConsDat.INDX_DATE);
+        mpwdPtn.appendBean(ConsDat.INDX_DATE);
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

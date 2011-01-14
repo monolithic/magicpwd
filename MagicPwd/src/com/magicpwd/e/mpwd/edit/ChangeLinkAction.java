@@ -33,11 +33,11 @@ public class ChangeLinkAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mainPtn.changeBean(ConsDat.INDX_LINK);
+        mpwdPtn.changeBean(ConsDat.INDX_LINK);
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

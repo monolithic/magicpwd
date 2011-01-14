@@ -33,11 +33,11 @@ public class ChangeSignAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mainPtn.changeBean(ConsDat.INDX_SIGN);
+        mpwdPtn.changeBean(ConsDat.INDX_SIGN);
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

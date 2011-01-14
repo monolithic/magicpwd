@@ -37,7 +37,7 @@ public class MpadAction extends ATrayAction
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

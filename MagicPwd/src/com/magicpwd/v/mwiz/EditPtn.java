@@ -143,8 +143,9 @@ public class EditPtn extends ADialog
 
 //        ta_NoteArea.setEditable(false);
         ta_NoteArea.setEnabled(false);
-        ta_NoteArea.setRows(3);
+        ta_NoteArea.setFocusable(false);
         ta_NoteArea.setLineWrap(true);
+        ta_NoteArea.setRows(3);
 //        ta_NoteArea.setForeground(java.awt.Color.darkGray);
         javax.swing.JScrollPane jsp = new javax.swing.JScrollPane(ta_NoteArea);
 

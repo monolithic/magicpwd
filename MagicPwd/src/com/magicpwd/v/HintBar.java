@@ -66,7 +66,7 @@ public class HintBar extends javax.swing.JPanel
         this.setLayout(layout);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addContainerGap();
-        hsg.addComponent(lb_HintLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hsg.addComponent(lb_HintLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg.addComponent(lb_InfoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);

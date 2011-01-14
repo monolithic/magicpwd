@@ -27,11 +27,11 @@ import com.magicpwd.v.mpwd.MpwdPtn;
 public abstract class AMpwdAction extends AAction implements IMpwdAction
 {
 
-    protected MpwdPtn mainPtn;
+    protected MpwdPtn mpwdPtn;
 
     @Override
-    public void setMainPtn(MpwdPtn mainPtn)
+    public void setMainPtn(MpwdPtn mpwdPtn)
     {
-        this.mainPtn = mainPtn;
+        this.mpwdPtn = mpwdPtn;
     }
 }

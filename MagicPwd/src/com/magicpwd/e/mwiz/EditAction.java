@@ -28,11 +28,11 @@ public class EditAction extends AMwizAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        normPtn.updateKeys();
+        mwizPtn.updateKeys();
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

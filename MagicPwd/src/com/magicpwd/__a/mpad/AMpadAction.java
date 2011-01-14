@@ -27,11 +27,11 @@ import com.magicpwd.v.mpad.MpadPtn;
 public abstract class AMpadAction extends AAction implements IMpadAction
 {
 
-    protected MpadPtn miniPtn;
+    protected MpadPtn mpadPtn;
 
     @Override
-    public void setMiniPtn(MpadPtn miniPtn)
+    public void setMiniPtn(MpadPtn mpadPtn)
     {
-        this.miniPtn = miniPtn;
+        this.mpadPtn = mpadPtn;
     }
 }

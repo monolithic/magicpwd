@@ -33,11 +33,11 @@ public class ChangeListAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mainPtn.changeBean(ConsDat.INDX_LIST);
+        mpwdPtn.changeBean(ConsDat.INDX_LIST);
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

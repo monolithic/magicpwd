@@ -40,13 +40,13 @@ public class NativeResumeAction extends AMpwdAction implements IBackCall<String>
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (!Char.isValidate(mainPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC)))
+        if (!Char.isValidate(mpwdPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC)))
         {
-            Lang.showMesg(mainPtn, LangRes.P30F7A54, "您还没有配置本地备份目录！");
+            Lang.showMesg(mpwdPtn, LangRes.P30F7A54, "您还没有配置本地备份目录！");
             return;
         }
 
-        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mainPtn, LangRes.P30F7A53, "确认要执行恢复操作吗？"))
+        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mpwdPtn, LangRes.P30F7A53, "确认要执行恢复操作吗？"))
         {
             return;
         }
@@ -63,7 +63,7 @@ public class NativeResumeAction extends AMpwdAction implements IBackCall<String>
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 
@@ -84,38 +84,38 @@ public class NativeResumeAction extends AMpwdAction implements IBackCall<String>
             return false;
         }
 
-        mainPtn.setLocked(true);
-        mainPtn.showProgress();
+        mpwdPtn.setLocked(true);
+        mpwdPtn.showProgress();
         doResume(object);
         return true;
     }
 
     private void doResume()
     {
-        mainPtn.setLocked(true);
-        mainPtn.showProgress();
+        mpwdPtn.setLocked(true);
+        mpwdPtn.showProgress();
 
         java.util.List<S1S1> list = new java.util.ArrayList<S1S1>();
         try
         {
-            mainPtn.nativeDetect(list);
+            mpwdPtn.nativeDetect(list);
         }
         catch (Exception exp)
         {
-            mainPtn.hideProgress();
-            mainPtn.setLocked(false);
+            mpwdPtn.hideProgress();
+            mpwdPtn.setLocked(false);
 
             Logs.exception(exp);
-            Lang.showMesg(mainPtn, null, exp.getLocalizedMessage());
+            Lang.showMesg(mpwdPtn, null, exp.getLocalizedMessage());
             return;
         }
 
         if (list.size() < 1)
         {
-            mainPtn.hideProgress();
-            mainPtn.setLocked(false);
+            mpwdPtn.hideProgress();
+            mpwdPtn.setLocked(false);
 
-            Lang.showMesg(mainPtn, LangRes.P30F7A55, "没有发现可用的备份数据！");
+            Lang.showMesg(mpwdPtn, LangRes.P30F7A55, "没有发现可用的备份数据！");
             return;
         }
 
@@ -125,10 +125,10 @@ public class NativeResumeAction extends AMpwdAction implements IBackCall<String>
             return;
         }
 
-        mainPtn.hideProgress();
-        mainPtn.setLocked(false);
+        mpwdPtn.hideProgress();
+        mpwdPtn.setLocked(false);
 
-        DatDialog datDialog = new DatDialog(mainPtn, this);
+        DatDialog datDialog = new DatDialog(mpwdPtn, this);
         datDialog.initView();
         datDialog.initLang();
         datDialog.initData();
@@ -140,26 +140,26 @@ public class NativeResumeAction extends AMpwdAction implements IBackCall<String>
     {
         try
         {
-            boolean b = mainPtn.nativeResume(file, null);
-            mainPtn.hideProgress();
-            mainPtn.setLocked(false);
+            boolean b = mpwdPtn.nativeResume(file, null);
+            mpwdPtn.hideProgress();
+            mpwdPtn.setLocked(false);
 
             if (b)
             {
-                Lang.showMesg(mainPtn, LangRes.P30F7A3F, "恭喜，数据恢复成功，您需要重新启动本程序！");
+                Lang.showMesg(mpwdPtn, LangRes.P30F7A3F, "恭喜，数据恢复成功，您需要重新启动本程序！");
             }
             else
             {
-                Lang.showMesg(mainPtn, LangRes.P30F7A3E, "数据恢复失败，请重启软件后重试！");
+                Lang.showMesg(mpwdPtn, LangRes.P30F7A3E, "数据恢复失败，请重启软件后重试！");
             }
         }
         catch (Exception exp)
         {
-            mainPtn.hideProgress();
-            mainPtn.setLocked(false);
+            mpwdPtn.hideProgress();
+            mpwdPtn.setLocked(false);
 
             Logs.exception(exp);
-            Lang.showMesg(mainPtn, null, exp.getLocalizedMessage());
+            Lang.showMesg(mpwdPtn, null, exp.getLocalizedMessage());
         }
         System.exit(0);
     }

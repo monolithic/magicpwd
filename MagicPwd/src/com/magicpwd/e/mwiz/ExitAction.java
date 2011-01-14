@@ -34,17 +34,17 @@ public class ExitAction extends AMwizAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(normPtn, LangRes.P30F1A04, "确认要退出吗？"))
+        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mwizPtn, LangRes.P30F1A04, "确认要退出吗？"))
         {
             return;
         }
 
-        normPtn.setVisible(false);
+        mwizPtn.setVisible(false);
         trayPtn.endExit(0);
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

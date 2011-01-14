@@ -36,7 +36,7 @@ public class MovetoAction extends AMpwdAction implements IBackCall<String>
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        CatDialog dat = new CatDialog(mainPtn, this);
+        CatDialog dat = new CatDialog(mpwdPtn, this);
         dat.initView();
         dat.initLang();
         dat.initData();
@@ -44,7 +44,7 @@ public class MovetoAction extends AMpwdAction implements IBackCall<String>
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 
@@ -61,12 +61,12 @@ public class MovetoAction extends AMpwdAction implements IBackCall<String>
             return false;
         }
 
-        Object obj = mainPtn.getSelectedListValue();
+        Object obj = mpwdPtn.getSelectedListValue();
         if (obj instanceof Keys)
         {
             ((Keys) obj).setP30F0106(hash);
         }
-        mainPtn.changeKind(hash);
+        mpwdPtn.changeKind(hash);
 
         return true;
     }

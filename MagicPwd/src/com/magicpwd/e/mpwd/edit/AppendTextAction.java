@@ -33,11 +33,11 @@ public class AppendTextAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mainPtn.appendBean(ConsDat.INDX_TEXT);
+        mpwdPtn.appendBean(ConsDat.INDX_TEXT);
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

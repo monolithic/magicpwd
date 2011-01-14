@@ -32,11 +32,11 @@ public class NewAction extends AMpadAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        miniPtn.newNote();
+        mpadPtn.newNote();
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 
