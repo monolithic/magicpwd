@@ -33,11 +33,11 @@ public class JavaAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mainPtn.showOptions(ConsEnv.PROP_JAVA);
+        mpwdPtn.showOptions(ConsEnv.PROP_JAVA);
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

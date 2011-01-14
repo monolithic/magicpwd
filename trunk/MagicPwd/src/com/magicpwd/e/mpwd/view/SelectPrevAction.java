@@ -32,11 +32,11 @@ public class SelectPrevAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mainPtn.selectNext(-1, false);
+        mpwdPtn.selectNext(-1, false);
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

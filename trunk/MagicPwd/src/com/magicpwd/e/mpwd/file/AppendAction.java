@@ -33,12 +33,12 @@ public class AppendAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (!mainPtn.newKeys())
+        if (!mpwdPtn.newKeys())
         {
             return;
         }
 
-        if (mainPtn.getUserMdl().isEditVisible())
+        if (mpwdPtn.getUserMdl().isEditVisible())
         {
             return;
         }
@@ -49,19 +49,19 @@ public class AppendAction extends AMpwdAction
             String[] arr = cmd.split(",");
             if (arr != null && arr.length == 2)
             {
-                mainPtn.getMenuPtn().getButton(arr[0]).setSelected(true);
-                mainPtn.getMenuPtn().getButton(arr[1]).setSelected(true);
+                mpwdPtn.getMenuPtn().getButton(arr[0]).setSelected(true);
+                mpwdPtn.getMenuPtn().getButton(arr[1]).setSelected(true);
             }
         }
 
-        mainPtn.getUserMdl().setEditVisible(true);
-        mainPtn.getUserMdl().setEditIsolate(true);
+        mpwdPtn.getUserMdl().setEditVisible(true);
+        mpwdPtn.getUserMdl().setEditIsolate(true);
 
-        mainPtn.setEditVisible(true);
+        mpwdPtn.setEditVisible(true);
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

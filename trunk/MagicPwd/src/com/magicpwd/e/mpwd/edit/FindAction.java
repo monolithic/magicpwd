@@ -32,13 +32,13 @@ public class FindAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mainPtn.setFindVisible(true);
-        mainPtn.pack();
-        mainPtn.setFindFocused();
+        mpwdPtn.setFindVisible(true);
+        mpwdPtn.pack();
+        mpwdPtn.setFindFocused();
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

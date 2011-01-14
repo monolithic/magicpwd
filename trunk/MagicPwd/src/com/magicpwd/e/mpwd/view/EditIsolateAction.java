@@ -33,14 +33,14 @@ public class EditIsolateAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !mainPtn.getUserMdl().isEditIsolate();
-        mainPtn.setEditIsolate(b);
-        mainPtn.pack();
+        boolean b = !mpwdPtn.getUserMdl().isEditIsolate();
+        mpwdPtn.setEditIsolate(b);
+        mpwdPtn.pack();
 
         String cmd = e.getActionCommand();
         if (Char.isValidate(cmd))
         {
-            javax.swing.AbstractButton button = mainPtn.getMenuPtn().getButton(cmd);
+            javax.swing.AbstractButton button = mpwdPtn.getMenuPtn().getButton(cmd);
             if (button != null)
             {
                 button.setSelected(b);
@@ -49,10 +49,10 @@ public class EditIsolateAction extends AMpwdAction
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
-        setEnabled(mainPtn.getUserMdl().isEditVisible());
-        setSelected(mainPtn.getUserMdl().isEditIsolate());
+        setEnabled(mpwdPtn.getUserMdl().isEditVisible());
+        setSelected(mpwdPtn.getUserMdl().isEditIsolate());
     }
 
     @Override

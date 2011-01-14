@@ -33,12 +33,12 @@ public class SortDirAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mainPtn.getUserMdl().setCfg(ConsCfg.CFG_VIEW_LIST_ASC, e.getActionCommand());
-        mainPtn.findLast();
+        mpwdPtn.getUserMdl().setCfg(ConsCfg.CFG_VIEW_LIST_ASC, e.getActionCommand());
+        mpwdPtn.findLast();
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

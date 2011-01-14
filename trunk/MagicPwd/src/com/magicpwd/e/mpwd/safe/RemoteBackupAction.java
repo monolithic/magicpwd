@@ -36,7 +36,7 @@ public class RemoteBackupAction extends AMpwdAction implements IBackCall<String>
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mainPtn, LangRes.P30F7A40, "确认要执行备份数据到云端的操作吗，此操作将需要一定的时间？"))
+        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mpwdPtn, LangRes.P30F7A40, "确认要执行备份数据到云端的操作吗，此操作将需要一定的时间？"))
         {
             return;
         }
@@ -53,7 +53,7 @@ public class RemoteBackupAction extends AMpwdAction implements IBackCall<String>
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 
@@ -70,31 +70,31 @@ public class RemoteBackupAction extends AMpwdAction implements IBackCall<String>
 
     private void doBackup()
     {
-        mainPtn.setLocked(true);
-        mainPtn.showProgress();
+        mpwdPtn.setLocked(true);
+        mpwdPtn.showProgress();
 
         try
         {
-            boolean b = mainPtn.remoteBackup(this);
-            mainPtn.hideProgress();
-            mainPtn.setLocked(false);
+            boolean b = mpwdPtn.remoteBackup(this);
+            mpwdPtn.hideProgress();
+            mpwdPtn.setLocked(false);
 
             if (b)
             {
-                Lang.showMesg(mainPtn, LangRes.P30F7A3D, "恭喜，数据备份成功！");
+                Lang.showMesg(mpwdPtn, LangRes.P30F7A3D, "恭喜，数据备份成功！");
             }
             else
             {
-                Lang.showMesg(mainPtn, LangRes.P30F7A3C, "数据备份失败，请重启软件后重试！");
+                Lang.showMesg(mpwdPtn, LangRes.P30F7A3C, "数据备份失败，请重启软件后重试！");
             }
         }
         catch (Exception exp)
         {
-            mainPtn.hideProgress();
-            mainPtn.setLocked(false);
+            mpwdPtn.hideProgress();
+            mpwdPtn.setLocked(false);
 
             Logs.exception(exp);
-            Lang.showMesg(mainPtn, null, exp.getLocalizedMessage());
+            Lang.showMesg(mpwdPtn, null, exp.getLocalizedMessage());
         }
     }
 }

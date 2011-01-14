@@ -47,24 +47,24 @@ public class HintAction extends AMwizAction
                 c.add(java.util.Calendar.DAY_OF_MONTH, 1);
                 java.util.Date t = c.getTime();
 
-                normPtn.findHint(s, t);
+                mwizPtn.findHint(s, t);
 
-                button = normPtn.getMenuPtn().getButton("find");
+                button = mwizPtn.getMenuPtn().getButton("find");
                 if (button != null)
                 {
                     button.setSelected(false);
                 }
-                normPtn.setFindVisible(false);
+                mwizPtn.setFindVisible(false);
             }
             else
             {
-                normPtn.findKeys(null);
+                mwizPtn.findKeys(null);
             }
         }
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

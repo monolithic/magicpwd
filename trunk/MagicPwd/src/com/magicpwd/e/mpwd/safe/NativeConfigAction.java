@@ -46,13 +46,13 @@ public class NativeConfigAction extends AMpwdAction
         javax.swing.JFileChooser jfc = new javax.swing.JFileChooser();
         jfc.setMultiSelectionEnabled(false);
         jfc.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
-        String path = mainPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC);
+        String path = mpwdPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC);
         if (Char.isValidate(path))
         {
             jfc.setSelectedFile(new java.io.File(path));
         }
 
-        if (javax.swing.JFileChooser.APPROVE_OPTION != jfc.showOpenDialog(mainPtn))
+        if (javax.swing.JFileChooser.APPROVE_OPTION != jfc.showOpenDialog(mpwdPtn))
         {
             return;
         }
@@ -60,7 +60,7 @@ public class NativeConfigAction extends AMpwdAction
         java.io.File file = jfc.getSelectedFile();
         if (!file.exists())
         {
-            if (Lang.showFirm(mainPtn, LangRes.P30F7A51, "您选择的目录不存在，要创建此目录吗？") != javax.swing.JOptionPane.YES_OPTION)
+            if (Lang.showFirm(mpwdPtn, LangRes.P30F7A51, "您选择的目录不存在，要创建此目录吗？") != javax.swing.JOptionPane.YES_OPTION)
             {
                 return;
             }
@@ -69,20 +69,20 @@ public class NativeConfigAction extends AMpwdAction
         }
         if (!file.isDirectory())
         {
-            Lang.showMesg(mainPtn, LangRes.P30F7A1C, "请选择一个合适的目录！");
+            Lang.showMesg(mpwdPtn, LangRes.P30F7A1C, "请选择一个合适的目录！");
             return;
         }
         if (!file.canWrite())
         {
-            Lang.showMesg(mainPtn, LangRes.P30F7A1D, "无法保存数据到您选择的目录，请确认您是否有足够的权限！");
+            Lang.showMesg(mpwdPtn, LangRes.P30F7A1D, "无法保存数据到您选择的目录，请确认您是否有足够的权限！");
             return;
         }
 
-        mainPtn.getUserMdl().setCfg(ConsCfg.CFG_SAFE_BACK_LOC, file.getAbsolutePath());
+        mpwdPtn.getUserMdl().setCfg(ConsCfg.CFG_SAFE_BACK_LOC, file.getAbsolutePath());
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

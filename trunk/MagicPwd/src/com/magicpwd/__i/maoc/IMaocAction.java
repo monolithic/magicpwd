@@ -26,5 +26,5 @@ import com.magicpwd.v.maoc.MaocPtn;
 public interface IMaocAction extends IAction
 {
 
-    void setMaocPtn(MaocPtn miniPtn);
+    void setMaocPtn(MaocPtn maocPtn);
 }

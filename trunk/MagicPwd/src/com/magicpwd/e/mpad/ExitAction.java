@@ -34,17 +34,17 @@ public class ExitAction extends AMpadAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(miniPtn, LangRes.P30F1A04, "确认要退出吗？"))
+        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mpadPtn, LangRes.P30F1A04, "确认要退出吗？"))
         {
             return;
         }
 
-        miniPtn.setVisible(false);
+        mpadPtn.setVisible(false);
         trayPtn.endExit(0);
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

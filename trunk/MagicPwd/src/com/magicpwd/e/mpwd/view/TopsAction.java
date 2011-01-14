@@ -32,13 +32,13 @@ public class TopsAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !mainPtn.getUserMdl().isTopMost();
-        mainPtn.setAlwaysOnTop(b);
-        mainPtn.getUserMdl().setTopMost(b);
+        boolean b = !mpwdPtn.getUserMdl().isTopMost();
+        mpwdPtn.setAlwaysOnTop(b);
+        mpwdPtn.getUserMdl().setTopMost(b);
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

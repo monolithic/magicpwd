@@ -32,11 +32,11 @@ public class HideAction extends AMpadAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        miniPtn.hideFrame();
+        mpadPtn.hideFrame();
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

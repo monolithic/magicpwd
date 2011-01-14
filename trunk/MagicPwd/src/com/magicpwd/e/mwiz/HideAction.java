@@ -35,11 +35,11 @@ public class HideAction extends AMwizAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        normPtn.hideFrame();
+        mwizPtn.hideFrame();
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

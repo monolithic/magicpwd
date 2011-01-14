@@ -143,6 +143,7 @@ public interface ConsCfg
     String CFG_TRAY = CFG_PRE + ".tray";
     String CFG_TRAY_PTN = CFG_TRAY + ".ptn";
     String CFG_TRAY_LOC = CFG_TRAY + ".loc";
+    String CFG_TRAY_HINT_CNT = CFG_TRAY + ".cnt";
     /**
      * 口令选项：
      */

@@ -33,11 +33,11 @@ public class OptionsAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mainPtn.showOptions(ConsEnv.PROP_USET);
+        mpwdPtn.showOptions(ConsEnv.PROP_USET);
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

@@ -44,10 +44,10 @@ public class ExportByKeysAction extends AMpwdAction implements IBackCall<UserDto
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        javax.swing.tree.TreePath path = mainPtn.getSelectedKindValue();
+        javax.swing.tree.TreePath path = mpwdPtn.getSelectedKindValue();
         if (path == null)
         {
-            Lang.showMesg(mainPtn, LangRes.P30F7A20, "请选择您要导出数据的类别信息！");
+            Lang.showMesg(mpwdPtn, LangRes.P30F7A20, "请选择您要导出数据的类别信息！");
             return;
         }
 
@@ -55,7 +55,7 @@ public class ExportByKeysAction extends AMpwdAction implements IBackCall<UserDto
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 
@@ -69,7 +69,7 @@ public class ExportByKeysAction extends AMpwdAction implements IBackCall<UserDto
     {
         if (ConsEnv.STR_SIGN_RS.equalsIgnoreCase(options))
         {
-            return mainPtn.exportByKeys("");
+            return mpwdPtn.exportByKeys("");
         }
         return false;
     }

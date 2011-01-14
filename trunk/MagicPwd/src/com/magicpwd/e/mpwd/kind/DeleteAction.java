@@ -35,7 +35,7 @@ public class DeleteAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        javax.swing.tree.TreePath path = mainPtn.getSelectedKindValue();
+        javax.swing.tree.TreePath path = mpwdPtn.getSelectedKindValue();
         if (path == null)
         {
             return;
@@ -53,14 +53,14 @@ public class DeleteAction extends AMpwdAction
             return;
         }
 
-        if (Lang.showFirm(mainPtn, LangRes.P30F7A1A, "执行此操作后，此类别下的其它类别将会移动到根类别下，\n确认要删除“{0}”类别么？", node.toString()) == javax.swing.JOptionPane.YES_OPTION)
+        if (Lang.showFirm(mpwdPtn, LangRes.P30F7A1A, "执行此操作后，此类别下的其它类别将会移动到根类别下，\n确认要删除“{0}”类别么？", node.toString()) == javax.swing.JOptionPane.YES_OPTION)
         {
-            mainPtn.getTreeMdl().wRemove(path);
+            mpwdPtn.getTreeMdl().wRemove(path);
         }
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

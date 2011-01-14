@@ -32,11 +32,11 @@ public class SaveAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mainPtn.saveKeys();
+        mpwdPtn.saveKeys();
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

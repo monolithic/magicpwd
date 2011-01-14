@@ -34,27 +34,27 @@ public class ExitAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (mainPtn.gridModified())
+        if (mpwdPtn.gridModified())
         {
-            if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mainPtn, LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
+            if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mpwdPtn, LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
             {
                 return;
             }
         }
         else
         {
-            if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mainPtn, LangRes.P30F1A04, "确认要退出吗？"))
+            if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mpwdPtn, LangRes.P30F1A04, "确认要退出吗？"))
             {
                 return;
             }
         }
 
-        mainPtn.setVisible(false);
+        mpwdPtn.setVisible(false);
         trayPtn.endExit(0);
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

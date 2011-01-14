@@ -32,11 +32,11 @@ public class ChangeMajorAction extends AMwizAction
         String command = e.getActionCommand();
         int val = Char.isValidateInteger(command) ? Integer.parseInt(command) : 0;
 
-        normPtn.changeMajor(val);
+        mwizPtn.changeMajor(val);
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

@@ -29,12 +29,12 @@ public class SortKeyAction extends AMwizAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        normPtn.getUserMdl().setCfg(ConsCfg.CFG_VIEW_LIST_KEY, e.getActionCommand());
-        normPtn.findLast();
+        mwizPtn.getUserMdl().setCfg(ConsCfg.CFG_VIEW_LIST_KEY, e.getActionCommand());
+        mwizPtn.findLast();
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

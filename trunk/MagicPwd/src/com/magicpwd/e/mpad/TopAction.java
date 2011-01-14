@@ -32,13 +32,13 @@ public class TopAction extends AMpadAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !miniPtn.getUserMdl().isTopMost();
-        miniPtn.setAlwaysOnTop(b);
-        miniPtn.getUserMdl().setTopMost(b);
+        boolean b = !mpadPtn.getUserMdl().isTopMost();
+        mpadPtn.setAlwaysOnTop(b);
+        mpadPtn.getUserMdl().setTopMost(b);
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

@@ -42,7 +42,7 @@ public class RemoteConfigAction extends AMpwdAction implements IBackCall<UserDto
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 
@@ -65,12 +65,12 @@ public class RemoteConfigAction extends AMpwdAction implements IBackCall<UserDto
             {
                 object.setUserType(object.getUserName() + '@' + object.getUserType());
             }
-            mainPtn.setCfgText("pop_mail", object.getUserType() + '\n' + object.getUserName() + '\n' + object.getUserPwds());
+            mpwdPtn.setCfgText("pop_mail", object.getUserType() + '\n' + object.getUserName() + '\n' + object.getUserPwds());
         }
         catch (Exception ex)
         {
             Logs.exception(ex);
-            Lang.showMesg(mainPtn, null, ex.getLocalizedMessage());
+            Lang.showMesg(mpwdPtn, null, ex.getLocalizedMessage());
         }
         return true;
     }

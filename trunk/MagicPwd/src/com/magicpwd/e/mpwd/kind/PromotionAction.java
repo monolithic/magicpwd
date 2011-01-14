@@ -32,11 +32,11 @@ public class PromotionAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mainPtn.promotionSelectedKind();
+        mpwdPtn.promotionSelectedKind();
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

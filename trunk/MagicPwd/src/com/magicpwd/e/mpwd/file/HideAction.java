@@ -32,11 +32,11 @@ public class HideAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mainPtn.hideFrame();
+        mpwdPtn.hideFrame();
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

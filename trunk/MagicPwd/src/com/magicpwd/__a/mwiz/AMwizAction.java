@@ -27,11 +27,11 @@ import com.magicpwd.v.mwiz.MwizPtn;
 public abstract class AMwizAction extends AAction implements IMwizAction
 {
 
-    protected MwizPtn normPtn;
+    protected MwizPtn mwizPtn;
 
     @Override
-    public void setNormPtn(MwizPtn normPtn)
+    public void setNormPtn(MwizPtn mwizPtn)
     {
-        this.normPtn = normPtn;
+        this.mwizPtn = mwizPtn;
     }
 }

@@ -32,11 +32,11 @@ public class ForwardAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mainPtn.forwardSelectedKind();
+        mpwdPtn.forwardSelectedKind();
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

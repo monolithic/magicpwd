@@ -32,11 +32,11 @@ public class DropAction extends AMpadAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        miniPtn.deleteNote();
+        mpadPtn.deleteNote();
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

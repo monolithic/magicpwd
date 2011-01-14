@@ -26,5 +26,5 @@ import com.magicpwd.v.mwiz.MwizPtn;
 public interface IMwizAction extends IAction
 {
 
-    void setNormPtn(MwizPtn normPtn);
+    void setNormPtn(MwizPtn mwizPtn);
 }

@@ -36,7 +36,7 @@ public class UpdateAction extends AMpwdAction implements IBackCall<Kind>
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        javax.swing.tree.TreePath path = mainPtn.getSelectedKindValue();
+        javax.swing.tree.TreePath path = mpwdPtn.getSelectedKindValue();
         if (path == null)
         {
             return;
@@ -54,7 +54,7 @@ public class UpdateAction extends AMpwdAction implements IBackCall<Kind>
             return;
         }
 
-        KindDlg kindDlg = new KindDlg(mainPtn, this);
+        KindDlg kindDlg = new KindDlg(mpwdPtn, this);
         kindDlg.initView();
         kindDlg.initLang();
         kindDlg.initData((Kind) node.getUserObject());
@@ -62,7 +62,7 @@ public class UpdateAction extends AMpwdAction implements IBackCall<Kind>
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 
@@ -76,7 +76,7 @@ public class UpdateAction extends AMpwdAction implements IBackCall<Kind>
     {
         if (OPTIONS_APPLY.equalsIgnoreCase(options))
         {
-            mainPtn.updateKindBySelected(object);
+            mpwdPtn.updateKindBySelected(object);
             return true;
         }
         return false;

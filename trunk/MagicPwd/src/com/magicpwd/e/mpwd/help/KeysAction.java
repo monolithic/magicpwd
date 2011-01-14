@@ -33,11 +33,11 @@ public class KeysAction extends AMpwdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mainPtn.showOptions(ConsEnv.PROP_SKEY);
+        mpwdPtn.showOptions(ConsEnv.PROP_SKEY);
     }
 
     @Override
-    public void doInit(Object object)
+    public void doInit(String value)
     {
     }
 

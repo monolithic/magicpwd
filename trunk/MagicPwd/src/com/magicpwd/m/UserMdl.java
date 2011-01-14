@@ -26,7 +26,7 @@ import com.magicpwd._util.Logs;
  *
  * @author Amon
  */
-public class UserMdl
+public final class UserMdl
 {
 
     private static int runMode = 0;
@@ -721,5 +721,20 @@ public class UserMdl
     public boolean hasSkey()
     {
         return safeKey.hasSkey();
+    }
+
+    public int getTrayHintCnt()
+    {
+        String txt = userCfg.getProperty(ConsCfg.CFG_TRAY_HINT_CNT);
+        if (Char.isValidatePositiveInteger(txt))
+        {
+            return Integer.parseInt(txt);
+        }
+        return -1;
+    }
+
+    public void setTrayHintCnt(int cnt)
+    {
+        userCfg.setProperty(ConsCfg.CFG_TRAY_HINT_CNT, "" + cnt);
     }
 }
