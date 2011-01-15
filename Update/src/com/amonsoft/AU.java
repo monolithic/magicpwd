@@ -19,9 +19,10 @@ import org.dom4j.io.SAXReader;
 public class AU extends javax.swing.JFrame
 {
 
-    private boolean ddd;
-    private static String ver = "1.0.0.1";
-    private static String uri;
+    private boolean updating;
+    private static String currVer = "1.0.0.1";
+    private static String infoUri;
+    private static String fileUri;
     private javax.swing.DefaultListModel lm_StepInfo;
 
     public AU()
@@ -106,7 +107,7 @@ public class AU extends javax.swing.JFrame
 
     private void bt_ManageActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (ddd)
+        if (updating)
         {
             return;
         }
@@ -134,24 +135,32 @@ public class AU extends javax.swing.JFrame
 
     private void startAU()
     {
+        if (updating)
+        {
+            return;
+        }
+
+        updating = true;
+        lm_StepInfo.clear();
+
         try
         {
-            ddd = true;
             java.util.List<FileInfo> infoList = downInfo();
-            if (infoList != null)
+            if (infoList != null && overRide(infoList))
             {
-                overRide(infoList);
                 showStep("系统升级成功！");
             }
-            showStep("系统升级失败！");
+            else
+            {
+                showStep("系统升级失败！");
+            }
         }
         catch (Exception exp)
         {
-            exp.printStackTrace();
             javax.swing.JOptionPane.showMessageDialog(this, exp.getLocalizedMessage());
             showStep("系统升级异常！");
-            ddd = false;
         }
+        updating = false;
     }
 
     private java.util.List<FileInfo> downInfo() throws Exception
@@ -159,7 +168,7 @@ public class AU extends javax.swing.JFrame
         showStep("服务器连接中……");
 
         // 属性读取
-        Document document = new SAXReader().read(new URL(uri));
+        Document document = new SAXReader().read(new URL(infoUri));
         Node node = document.selectSingleNode("/amonsoft");
         if (node == null)
         {
@@ -173,7 +182,7 @@ public class AU extends javax.swing.JFrame
             javax.swing.JOptionPane.showMessageDialog(this, "读取软件版本信息出错！");
             return null;
         }
-        if (!checkVer(ver, temp.getText()))
+        if (!checkVer(currVer, temp.getText()))
         {
             javax.swing.JOptionPane.showMessageDialog(this, "没有可用的升级信息！");
             return null;
@@ -186,7 +195,7 @@ public class AU extends javax.swing.JFrame
             showStep("无法获取文件下载路径！");
             return null;
         }
-        uri = temp.getText();
+        fileUri = temp.getText();
 
         temp = node.selectSingleNode("strategy");
         if (temp != null)
@@ -262,16 +271,28 @@ public class AU extends javax.swing.JFrame
                 info.setRemoteName(temp.getText());
             }
             // 本地目录
-            temp = node.selectSingleNode("local-path");
+            temp = node.selectSingleNode("local-path1");
             if (temp != null)
             {
-                info.setLocalPath(temp.getText());
+                info.setLocalPath1(temp.getText());
             }
             // 本地名称
-            temp = node.selectSingleNode("local-name");
+            temp = node.selectSingleNode("local-name1");
             if (temp != null)
             {
-                info.setLocalName(temp.getText());
+                info.setLocalName1(temp.getText());
+            }
+            // 本地目录
+            temp = node.selectSingleNode("local-path2");
+            if (temp != null)
+            {
+                info.setLocalPath2(temp.getText());
+            }
+            // 本地名称
+            temp = node.selectSingleNode("local-name2");
+            if (temp != null)
+            {
+                info.setLocalName2(temp.getText());
             }
             // 文件下载
             if (!downFile(buf, info, inet))
@@ -279,6 +300,7 @@ public class AU extends javax.swing.JFrame
                 return null;
             }
         }
+        showStep("文件下载完成！");
         return infoList;
     }
 
@@ -288,9 +310,9 @@ public class AU extends javax.swing.JFrame
         {
             showStep("正在下载文件：" + info.getRemoteName());
 
-            URL url = new URL(uri.replace("{path}", info.getRemotePath()).replace("{file}", info.getRemoteName()).replace("{newVer}", info.getVersion()).replace("{oldVer}", ver).replace("{ip}", ip));//创建URL
+            URL url = new URL(fileUri.replace("{path}", info.getRemotePath()).replace("{file}", info.getRemoteName()).replace("{newVer}", info.getVersion()).replace("{oldVer}", currVer).replace("{ip}", ip));
             URLConnection con = url.openConnection();//建立连接
-            java.io.File file = new java.io.File("tmp", info.getLocalName());//根据filename创建一个下载文件，也会是我们最终下载所得的文件
+            java.io.File file = new java.io.File("tmp", info.getLocalName1());
             if (!file.exists() || !file.isFile())
             {
                 file.createNewFile();
@@ -317,34 +339,45 @@ public class AU extends javax.swing.JFrame
         }
     }
 
-    private void overRide(java.util.List<FileInfo> infoList)
+    private boolean overRide(java.util.List<FileInfo> infoList)
     {
         java.io.File file;
         for (FileInfo info : infoList)
         {
-            showStep("正在升级文件：" + info.getLocalName());
+            showStep("正在升级文件：" + info.getLocalName1());
 
             if (info.getOperation() == -1)
             {
-                file = new java.io.File(info.getLocalPath(), info.getLocalName());
-                if (file.exists() && file.canWrite())
+                file = new java.io.File(info.getLocalPath1(), info.getLocalName1());
+                if (file.exists())
                 {
-                    file.delete();
-                    info.setOperation(10);
+                    if (file.canWrite())
+                    {
+                        file.delete();
+                        info.setOperation(10);
+                    }
+                    else
+                    {
+                        showStep("无法移除文件 " + info.getLocalName1() + " ！");
+                        return false;
+                    }
                 }
                 continue;
             }
             if (info.getOperation() == 1)
             {
-                file = new java.io.File("tmp", info.getLocalName());
-                if (file.exists() && file.canWrite())
+                file = new java.io.File("tmp", info.getLocalName1());
+                if (!file.canWrite())
                 {
-                    copyTo(file, new java.io.File(info.getLocalPath(), info.getLocalName()));
-                    file.delete();
-                    info.setOperation(10);
+                    showStep("文件 " + info.getLocalName1() + " 升级失败！");
+                    return false;
                 }
+                copyTo(file, new java.io.File(info.getLocalPath1(), info.getLocalName1()));
+                info.setOperation(10);
+                continue;
             }
         }
+        return true;
     }
 
     private boolean checkVer(String oldVer, String newVer)
@@ -404,12 +437,12 @@ public class AU extends javax.swing.JFrame
     {
         if (args != null && args.length == 1)
         {
-            uri = args[0];
+            infoUri = args[0];
         }
-        if (!isValidate(uri))
+        if (!isValidate(infoUri))
         {
-            uri = readUri();
-            if (!isValidate(uri))
+            infoUri = readUri();
+            if (!isValidate(infoUri))
             {
                 return;
             }
