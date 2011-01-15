@@ -105,7 +105,7 @@ public class AU extends javax.swing.JFrame
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
     }
 
-    private void bt_ManageActionPerformed(java.awt.event.ActionEvent evt)
+    public void doUpdate()
     {
         if (updating)
         {
@@ -121,6 +121,11 @@ public class AU extends javax.swing.JFrame
                 startAU();
             }
         }.start();
+    }
+
+    private void bt_ManageActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        doUpdate();
     }
 
     private void bt_CancelActionPerformed(java.awt.event.ActionEvent evt)
@@ -141,6 +146,7 @@ public class AU extends javax.swing.JFrame
         }
 
         updating = true;
+        bt_Manage.setEnabled(false);
         lm_StepInfo.clear();
 
         try
@@ -161,11 +167,12 @@ public class AU extends javax.swing.JFrame
             showStep("系统升级异常！");
         }
         updating = false;
+        bt_Manage.setEnabled(true);
     }
 
     private java.util.List<FileInfo> downInfo() throws Exception
     {
-        showStep("服务器连接中……");
+        showStep("开始文件下载……");
 
         // 属性读取
         Document document = new SAXReader().read(new URL(infoUri));
@@ -341,13 +348,14 @@ public class AU extends javax.swing.JFrame
 
     private boolean overRide(java.util.List<FileInfo> infoList)
     {
+        showStep("开始文件升级……");
+
         java.io.File file;
         for (FileInfo info : infoList)
         {
-            showStep("正在升级文件：" + info.getLocalName1());
-
             if (info.getOperation() == -1)
             {
+                showStep("正在升级文件：" + info.getLocalName1() + "（删除……）");
                 file = new java.io.File(info.getLocalPath1(), info.getLocalName1());
                 if (file.exists())
                 {
@@ -355,6 +363,7 @@ public class AU extends javax.swing.JFrame
                     {
                         file.delete();
                         info.setOperation(10);
+                        showStep("文件删除成功！");
                     }
                     else
                     {
@@ -366,17 +375,21 @@ public class AU extends javax.swing.JFrame
             }
             if (info.getOperation() == 1)
             {
+                showStep("正在升级文件：" + info.getLocalName1() + "（更新……）");
                 file = new java.io.File("tmp", info.getLocalName1());
                 if (!file.canWrite())
                 {
-                    showStep("文件 " + info.getLocalName1() + " 升级失败！");
+                    showStep("文件 " + info.getLocalName1() + " 更新失败！");
                     return false;
                 }
                 copyTo(file, new java.io.File(info.getLocalPath1(), info.getLocalName1()));
                 info.setOperation(10);
+                showStep("文件更新成功！");
                 continue;
             }
+            showStep("正在升级文件：" + info.getLocalName1() + "（其它……）");
         }
+        showStep("开始文件完毕！");
         return true;
     }
 
@@ -501,6 +514,17 @@ public class AU extends javax.swing.JFrame
         byte[] buf = new byte[4096];
         try
         {
+            if (!dstFile.exists())
+            {
+                if (!dstFile.getParentFile().mkdirs())
+                {
+                    return false;
+                }
+            }
+            if (!dstFile.createNewFile())
+            {
+                return false;
+            }
             fis = new java.io.FileInputStream(srcFile);
             fos = new java.io.FileOutputStream(dstFile);
 
