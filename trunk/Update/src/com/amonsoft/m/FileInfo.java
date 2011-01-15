@@ -16,8 +16,10 @@ public class FileInfo
     private int operation;
     private String remotePath;
     private String remoteName;
-    private String localPath;
-    private String localName;
+    private String localPath1;
+    private String localName1;
+    private String localPath2;
+    private String localName2;
 
     /**
      * @return the version
@@ -100,34 +102,66 @@ public class FileInfo
     }
 
     /**
-     * @return the localPath
+     * @return the localPath1
      */
-    public String getLocalPath()
+    public String getLocalPath1()
     {
-        return localPath;
+        return localPath1;
     }
 
     /**
-     * @param localPath the localPath to set
+     * @param localPath1 the localPath1 to set
      */
-    public void setLocalPath(String localPath)
+    public void setLocalPath1(String localPath1)
     {
-        this.localPath = localPath;
+        this.localPath1 = localPath1;
     }
 
     /**
-     * @return the localName
+     * @return the localName1
      */
-    public String getLocalName()
+    public String getLocalName1()
     {
-        return localName;
+        return localName1;
     }
 
     /**
-     * @param localName the localName to set
+     * @param localName1 the localName1 to set
      */
-    public void setLocalName(String localName)
+    public void setLocalName1(String localName1)
     {
-        this.localName = localName;
+        this.localName1 = localName1;
+    }
+
+    /**
+     * @return the localPath2
+     */
+    public String getLocalPath2()
+    {
+        return localPath2;
+    }
+
+    /**
+     * @param localPath2 the localPath2 to set
+     */
+    public void setLocalPath2(String localPath2)
+    {
+        this.localPath2 = localPath2;
+    }
+
+    /**
+     * @return the localName2
+     */
+    public String getLocalName2()
+    {
+        return localName2;
+    }
+
+    /**
+     * @param localName2 the localName2 to set
+     */
+    public void setLocalName2(String localName2)
+    {
+        this.localName2 = localName2;
     }
 }
