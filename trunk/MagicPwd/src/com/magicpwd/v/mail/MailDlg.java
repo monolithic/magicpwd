@@ -51,26 +51,6 @@ public class MailDlg extends ADialog
         javax.swing.JScrollPane sp_KindList = new javax.swing.JScrollPane();
         sp_KindList.setViewportView(ls_MailList);
 
-        bt_Abort.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                hideDialog();
-            }
-        });
-
-        bt_Apply.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                bt_UpdateActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
@@ -109,6 +89,27 @@ public class MailDlg extends ADialog
 
     public void initData()
     {
+        bt_Abort.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                hideDialog();
+            }
+        });
+
+        bt_Apply.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                bt_UpdateActionPerformed(evt);
+            }
+        });
+
+        processEscape();
     }
 
     @Override

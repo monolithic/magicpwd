@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2010 Amon
+ *  Copyright (C) 2011 Amon
  * 
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,16 +19,26 @@ package com.magicpwd.e.mwiz;
 import com.magicpwd.__a.mwiz.AMwizAction;
 
 /**
- *
- * @author Amon
+ * Application: MagicPwd
+ * Author     : Amon
+ * Encoding   : UTF-8
+ * Created    : 2011-1-16 12:07:40
+ * Website    : http://magicpwd.com/
+ * Project    : http://magicpwd.googlecode.com/
+ * Contact    : Amon@magicpwd.com
+ * CopyRight  : Winshine.biz
+ * Description:
  */
-public class ViewAction extends AMwizAction
+public class CardAction extends AMwizAction
 {
+
+    public CardAction()
+    {
+    }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mwizPtn.showViewPtn();
     }
 
     @Override
