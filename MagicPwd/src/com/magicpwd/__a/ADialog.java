@@ -25,7 +25,7 @@ import com.magicpwd._util.Bean;
 public abstract class ADialog extends javax.swing.JDialog
 {
 
-    public ADialog(java.awt.Frame owner, boolean modal)
+    public ADialog(AFrame owner, boolean modal)
     {
         super(owner, modal);
     }

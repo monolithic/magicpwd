@@ -49,7 +49,7 @@ import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._bean.mail.Connect;
-import com.magicpwd.v.mail.MailDlg;
+import com.magicpwd.v.mail.MailPtn;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Card;
 import com.magicpwd._util.Char;
@@ -75,7 +75,7 @@ public class MpwdPtn extends AFrame
     private IMpwdBean[] mpwdBean;
     private FindBar mainFind;
     private HintBar mainInfo;
-    private MailDlg mailDlg;
+    private MailPtn mailPtn;
     private HistDlg histDlg;
     private MdiDialog cfgForm;
     private MenuPtn menuPtn;
@@ -412,9 +412,9 @@ public class MpwdPtn extends AFrame
     {
         if (!visible)
         {
-            if (mailDlg != null && mailDlg.isVisible())
+            if (mailPtn != null && mailPtn.isVisible())
             {
-                mailDlg.setVisible(false);
+                mailPtn.setVisible(false);
             }
             if (ed_KeysEdit != null && ed_KeysEdit.isVisible())
             {
@@ -1426,47 +1426,47 @@ public class MpwdPtn extends AFrame
 
     public void showMailPtn()
     {
-        if (mailDlg == null)
+        if (mailPtn == null)
         {
-            mailDlg = new MailDlg(userMdl);
-            mailDlg.initView();
-            mailDlg.initLang();
-            mailDlg.initData();
-            Bean.centerForm(mailDlg, this);
+            mailPtn = new MailPtn(userMdl);
+            mailPtn.initView();
+            mailPtn.initLang();
+            mailPtn.initData();
+            Bean.centerForm(mailPtn, this);
         }
 
-        MailPtn mailPtn = new MailPtn();
-        mailPtn.initView();
-        mailPtn.initLang();
+        MailDlg mailDlg = new MailDlg();
+        mailDlg.initView();
+        mailDlg.initLang();
         java.util.List<I1S2> mailList = mpwdMdl.getGridMdl().wSelect(ConsDat.INDX_MAIL);
-        mailPtn.initMail(mailList);
+        mailDlg.initMail(mailList);
         if (mailList.size() < 1)
         {
             Lang.showMesg(this, null, "没有可用的邮件类型数据！");
             return;
         }
         java.util.List<I1S2> userList = mpwdMdl.getGridMdl().wSelect(ConsDat.INDX_TEXT);
-        mailPtn.initUser(userList);
+        mailDlg.initUser(userList);
         if (userList.size() < 1)
         {
             Lang.showMesg(this, null, "没有可用的文本类型数据！");
             return;
         }
         java.util.List<I1S2> pwdsList = mpwdMdl.getGridMdl().wSelect(ConsDat.INDX_PWDS);
-        mailPtn.initPwds(pwdsList);
+        mailDlg.initPwds(pwdsList);
         if (pwdsList.size() < 1)
         {
             Lang.showMesg(this, null, "没有可用的口令类型数据！");
             return;
         }
-        if (javax.swing.JOptionPane.OK_OPTION != javax.swing.JOptionPane.showConfirmDialog(this, mailPtn, "登录确认", javax.swing.JOptionPane.OK_CANCEL_OPTION))
+        if (javax.swing.JOptionPane.OK_OPTION != javax.swing.JOptionPane.showConfirmDialog(this, mailDlg, "登录确认", javax.swing.JOptionPane.OK_CANCEL_OPTION))
         {
             return;
         }
 
-        String mail = mailList.get(mailPtn.getMail()).getK();
-        String user = userList.get(mailPtn.getUser()).getK();
-        String pwds = pwdsList.get(mailPtn.getPwds()).getK();
+        String mail = mailList.get(mailDlg.getMail()).getK();
+        String user = userList.get(mailDlg.getUser()).getK();
+        String pwds = pwdsList.get(mailDlg.getPwds()).getK();
 
         String host = mail.substring(mail.indexOf('@') + 1);
         if (!com.magicpwd._util.Char.isValidate(host))
@@ -1482,14 +1482,14 @@ public class MpwdPtn extends AFrame
             return;
         }
 
-        mailDlg.setVisible(true);
+        mailPtn.setVisible(true);
         new Thread()
         {
 
             @Override
             public void run()
             {
-                mailDlg.append(connect, "");
+                mailPtn.append(connect, "");
             }
         }.start();
     }

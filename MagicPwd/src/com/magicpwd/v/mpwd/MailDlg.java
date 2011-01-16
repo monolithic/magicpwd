@@ -25,10 +25,10 @@ import java.util.List;
  *
  * @author Amon
  */
-public class MailPtn extends javax.swing.JPanel
+public class MailDlg extends javax.swing.JPanel
 {
 
-    public MailPtn()
+    public MailDlg()
     {
     }
 
