@@ -91,6 +91,7 @@ public class HintBar extends javax.swing.JPanel
 
         lb_HintLabel.setText("请选择口令类别！");
         lb_InfoLabel.setText("数据处理中……");
+        lb_HintLabel.setVisible(false);
         lb_DateLabel.setText("");
     }
 

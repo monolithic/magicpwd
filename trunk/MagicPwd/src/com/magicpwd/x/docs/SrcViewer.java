@@ -32,6 +32,7 @@ public class SrcViewer extends ADialog implements IDocsViewer
         super(formPtn, true);
     }
 
+    @Override
     public void show(java.io.File file)
     {
     }
