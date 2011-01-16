@@ -83,8 +83,8 @@ public class MailMdl extends javax.swing.table.AbstractTableModel
         }
 
         javax.swing.JLabel label = new javax.swing.JLabel();
-        Reader message = messages.get(rowIndex);
-        if (!message.isReaded())
+        Reader reader = messages.get(rowIndex);
+        if (!reader.isReaded())
         {
             label.setFont(label.getFont().deriveFont(java.awt.Font.BOLD));
         }
@@ -92,16 +92,16 @@ public class MailMdl extends javax.swing.table.AbstractTableModel
         switch (columnIndex)
         {
             case 0:
-                label.setIcon(message.hasAttachment() ? userMdl.readIcon(ConsEnv.FEEL_PATH + "mail-attach.png") : Bean.getNone());
+                label.setIcon(reader.hasAttachment() ? userMdl.readIcon(ConsEnv.FEEL_PATH + "mail-attach.png") : Bean.getNone());
                 break;
             case 1:
-                label.setText(message.getFrom());
+                label.setText(reader.getFrom());
                 break;
             case 2:
-                label.setText(message.getSubject());
+                label.setText(reader.getSubject());
                 break;
             case 3:
-                label.setText(format.format(message.getSentDate()));
+                label.setText(format.format(reader.getSentDate()));
                 break;
             default:
                 break;

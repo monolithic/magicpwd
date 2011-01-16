@@ -19,10 +19,14 @@ package com.magicpwd.m.mail;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Char;
 import com.magicpwd._bean.mail.Connect;
+import com.magicpwd._comn.S1S1;
 import com.magicpwd._cons.mail.MailEnv;
+import com.magicpwd._util.Logs;
+import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.Multipart;
 import javax.mail.Part;
+import javax.mail.Store;
 import javax.mail.internet.ContentType;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
@@ -196,6 +200,40 @@ public class Reader extends Mailer
             }
         }
         return sType != null ? sType : type;
+    }
+
+    public java.util.List<S1S1> getUnReadMail() throws Exception
+    {
+        java.util.ArrayList<S1S1> mailList = new java.util.ArrayList<S1S1>();
+        Store store = getConnect().getStore();
+        Folder folder = store.getDefaultFolder().getFolder("inbox");
+        if (folder.isOpen())
+        {
+            folder.close(false);
+        }
+
+        folder.open(Folder.READ_ONLY);
+        Message[] messages = folder.getMessages();
+        if (messages != null)
+        {
+            for (Message mesg : messages)
+            {
+                if (mesg instanceof MimeMessage)
+                {
+                    continue;
+                }
+
+                MimeMessage mime = (MimeMessage) mesg;
+                if (getConnect().isMailReaded(mime.getMessageID()))
+                {
+                    continue;
+                }
+                mailList.add(new S1S1(mime.getMessageID(), mime.getSubject()));
+            }
+        }
+        folder.close(false);
+        store.close();
+        return mailList;
     }
 
     public String getMessageId()

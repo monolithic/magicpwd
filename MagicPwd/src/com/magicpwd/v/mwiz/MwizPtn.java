@@ -18,20 +18,26 @@ package com.magicpwd.v.mwiz;
 
 import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IBackCall;
+import com.magicpwd._bean.mail.Connect;
+import com.magicpwd._comn.I1S2;
 import com.magicpwd._comn.Keys;
+import com.magicpwd._comn.S1S1;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.ConsCfg;
+import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.mail.Reader;
 import com.magicpwd.m.mwiz.KeysMdl;
 import com.magicpwd.m.mwiz.MwizMdl;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.tray.TrayPtn;
 import com.magicpwd.v.HintBar;
+import com.magicpwd.v.mpwd.MailDlg;
 
 /**
  * 向导模式
@@ -198,7 +204,7 @@ public class MwizPtn extends AFrame
             {
                 if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER && !evt.isControlDown())
                 {
-                    viewKeys();
+                    showViewPtn();
                 }
             }
         });
@@ -250,32 +256,19 @@ public class MwizPtn extends AFrame
         return mwizMdl.getGridMdl().listTask(s, t);
     }
 
-    public void viewKeys()
-    {
-        int row = tb_KeysList.getSelectedRow();
-        if (row < 0)
-        {
-            Lang.showMesg(this, LangRes.P30F6A01, "请选择您要查看的口令！");
-            return;
-        }
-
-        try
-        {
-            EditPtn editDlg = getEditPtn();
-            editDlg.setTitle(Lang.getLang(LangRes.P30F6202, "口令查看"));
-            KeysMdl keysMdl = mwizMdl.getKeysMdl();
-            keysMdl.loadData(mwizMdl.getGridMdl().getKeysAt(row));
-            editDlg.showData(keysMdl, false);
-        }
-        catch (Exception ex)
-        {
-            Logs.exception(ex);
-        }
-    }
-
     public HintBar getHintPtn()
     {
         return hb_HintBar;
+    }
+
+    public void changeLabel(int label)
+    {
+        mwizMdl.getGridMdl().setKeysLabel(tb_KeysList.getSelectedRow(), label);
+    }
+
+    public void changeMajor(int major)
+    {
+        mwizMdl.getGridMdl().setKeysMajor(tb_KeysList.getSelectedRow(), major);
     }
 
     public void appendKeys()
@@ -287,7 +280,7 @@ public class MwizPtn extends AFrame
         editDlg.showData(keysMdl, true);
     }
 
-    public void updateKeys()
+    public void showEditPtn()
     {
         int row = tb_KeysList.getSelectedRow();
         if (row < 0)
@@ -310,14 +303,97 @@ public class MwizPtn extends AFrame
         }
     }
 
-    public void changeLabel(int label)
+    public void showViewPtn()
     {
-        mwizMdl.getGridMdl().setKeysLabel(tb_KeysList.getSelectedRow(), label);
+        int row = tb_KeysList.getSelectedRow();
+        if (row < 0)
+        {
+            Lang.showMesg(this, LangRes.P30F6A01, "请选择您要查看的口令！");
+            return;
+        }
+
+        try
+        {
+            EditPtn editDlg = getEditPtn();
+            editDlg.setTitle(Lang.getLang(LangRes.P30F6202, "口令查看"));
+            KeysMdl keysMdl = mwizMdl.getKeysMdl();
+            keysMdl.loadData(mwizMdl.getGridMdl().getKeysAt(row));
+            editDlg.showData(keysMdl, false);
+        }
+        catch (Exception ex)
+        {
+            Logs.exception(ex);
+        }
     }
 
-    public void changeMajor(int major)
+    public void showMailPtn() throws Exception
     {
-        mwizMdl.getGridMdl().setKeysMajor(tb_KeysList.getSelectedRow(), major);
+        int row = tb_KeysList.getSelectedRow();
+        if (row < 0)
+        {
+            return;
+        }
+
+        KeysMdl keysMdl = mwizMdl.getKeysMdl();
+        keysMdl.loadData(mwizMdl.getGridMdl().getKeysAt(row));
+
+        MailDlg mailDlg = new MailDlg();
+        mailDlg.initView();
+        mailDlg.initLang();
+        java.util.List<I1S2> mailList = mwizMdl.getGridMdl().wSelect(ConsDat.INDX_MAIL);
+        mailDlg.initMail(mailList);
+        if (mailList.size() < 1)
+        {
+            Lang.showMesg(this, null, "没有可用的邮件类型数据！");
+            return;
+        }
+        java.util.List<I1S2> userList = mwizMdl.getGridMdl().wSelect(ConsDat.INDX_TEXT);
+        mailDlg.initUser(userList);
+        if (userList.size() < 1)
+        {
+            Lang.showMesg(this, null, "没有可用的文本类型数据！");
+            return;
+        }
+        java.util.List<I1S2> pwdsList = mwizMdl.getGridMdl().wSelect(ConsDat.INDX_PWDS);
+        mailDlg.initPwds(pwdsList);
+        if (pwdsList.size() < 1)
+        {
+            Lang.showMesg(this, null, "没有可用的口令类型数据！");
+            return;
+        }
+        if (javax.swing.JOptionPane.OK_OPTION != javax.swing.JOptionPane.showConfirmDialog(this, mailDlg, "登录确认", javax.swing.JOptionPane.OK_CANCEL_OPTION))
+        {
+            return;
+        }
+
+        String mail = mailList.get(mailDlg.getMail()).getK();
+        String user = userList.get(mailDlg.getUser()).getK();
+        String pwds = pwdsList.get(mailDlg.getPwds()).getK();
+
+        String host = mail.substring(mail.indexOf('@') + 1);
+        if (!com.magicpwd._util.Char.isValidate(host))
+        {
+            return;
+        }
+
+        final Connect connect = new Connect(mail, pwds);
+        connect.setUsername(user);
+        if (!connect.useDefault())
+        {
+            Lang.showMesg(this, null, "查找不到对应的服务信息，如有疑问请与作者联系！");
+            return;
+        }
+
+        Reader reader = new Reader(connect);
+        try
+        {
+            java.util.List<S1S1> list = reader.getUnReadMail();
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            Lang.showMesg(this, null, exp.getLocalizedMessage());
+        }
     }
 
     private void hintCallBack()
@@ -418,7 +494,7 @@ public class MwizPtn extends AFrame
     {
         if (e.getClickCount() > 1)
         {
-            viewKeys();
+            showViewPtn();
         }
     }
 

@@ -16,6 +16,7 @@
  */
 package com.magicpwd.m.mwiz;
 
+import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.I1S2;
 import com.magicpwd._comn.Keys;
 import com.magicpwd._comn.S1S2;
@@ -228,6 +229,26 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
         DBA3000.deletePwdsData(ls_KeysList.get(index).getP30F0104());
         ls_KeysList.remove(index);
         fireTableDataChanged();
+    }
+
+    /**
+     *
+     * @param type
+     * @return
+     */
+    public java.util.List<I1S2> wSelect(int type)
+    {
+        java.util.ArrayList<I1S2> list = new java.util.ArrayList<I1S2>();
+        int i = 0;
+        for (IEditItem item : ls_ItemList)
+        {
+            if (item.getType() == type)
+            {
+                list.add(new I1S2(i, item.getData(), item.getName()));
+            }
+            i += 1;
+        }
+        return list;
     }
 
     @Override

@@ -28,7 +28,7 @@ public class EditAction extends AMwizAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mwizPtn.updateKeys();
+        mwizPtn.showEditPtn();
     }
 
     @Override
