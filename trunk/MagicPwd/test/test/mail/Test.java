@@ -6,7 +6,7 @@ package test.mail;
 
 import com.magicpwd._bean.mail.Connect;
 import com.magicpwd._util.Logs;
-import com.magicpwd.v.mail.MailDlg;
+import com.magicpwd.v.mail.MailPtn;
 import javax.swing.UIManager;
 
 /**
@@ -26,7 +26,7 @@ public class Test
         {
             exp.printStackTrace();
         }
-        MailDlg md = new MailDlg(null);
+        MailPtn md = new MailPtn(null);
         md.initView();
         md.initLang();
         md.initData();
