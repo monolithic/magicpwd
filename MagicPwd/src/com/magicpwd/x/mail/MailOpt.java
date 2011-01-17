@@ -14,7 +14,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.v.mpwd;
+package com.magicpwd.x.mail;
 
 import com.magicpwd._comn.I1S2;
 import com.magicpwd._cons.LangRes;
@@ -25,10 +25,10 @@ import java.util.List;
  *
  * @author Amon
  */
-public class MailDlg extends javax.swing.JPanel
+public class MailOpt extends javax.swing.JPanel
 {
 
-    public MailDlg()
+    public MailOpt()
     {
     }
 

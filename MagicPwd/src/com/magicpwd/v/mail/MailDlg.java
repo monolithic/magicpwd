@@ -18,7 +18,9 @@ package com.magicpwd.v.mail;
 
 import com.magicpwd.__a.ADialog;
 import com.magicpwd.__a.AFrame;
+import com.magicpwd._comn.S1S1;
 import com.magicpwd._util.Bean;
+import com.magicpwd._util.Lang;
 
 /**
  * Application: MagicPwd
@@ -35,6 +37,7 @@ public class MailDlg extends ADialog
 {
 
     private AFrame formPtn;
+    private javax.swing.DefaultListModel lm_MailList;
 
     public MailDlg(AFrame formPtn)
     {
@@ -78,17 +81,20 @@ public class MailDlg extends ADialog
         layout.setVerticalGroup(vsg);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setIconImage(Bean.getLogo(16));
-        pack();
-        Bean.centerForm(this, formPtn);
+//        setIconImage(Bean.getLogo(16));
     }
 
     public void initLang()
     {
+        Lang.setWText(bt_Apply, null, "打开(@O)");
+        Lang.setWText(bt_Abort, null, "取消(@C)");
     }
 
     public void initData()
     {
+        lm_MailList = new javax.swing.DefaultListModel();
+        ls_MailList.setModel(lm_MailList);
+
         bt_Abort.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -105,11 +111,28 @@ public class MailDlg extends ADialog
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                bt_UpdateActionPerformed(evt);
+                bt_ApplyActionPerformed(evt);
             }
         });
 
         processEscape();
+    }
+
+    public void showData(java.util.List<S1S1> mailList)
+    {
+        lm_MailList.clear();
+
+        if (mailList != null)
+        {
+            for (S1S1 item : mailList)
+            {
+                lm_MailList.addElement(item);
+            }
+        }
+
+        pack();
+        Bean.centerForm(this, formPtn);
+        setVisible(true);
     }
 
     @Override
@@ -120,7 +143,7 @@ public class MailDlg extends ADialog
         return true;
     }
 
-    private void bt_UpdateActionPerformed(java.awt.event.ActionEvent evt)
+    private void bt_ApplyActionPerformed(java.awt.event.ActionEvent evt)
     {
     }
     private javax.swing.JList ls_MailList;

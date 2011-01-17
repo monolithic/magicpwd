@@ -37,7 +37,8 @@ import com.magicpwd.m.mwiz.MwizMdl;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.tray.TrayPtn;
 import com.magicpwd.v.HintBar;
-import com.magicpwd.v.mpwd.MailDlg;
+import com.magicpwd.v.mail.MailDlg;
+import com.magicpwd.x.mail.MailOpt;
 
 /**
  * 向导模式
@@ -337,38 +338,38 @@ public class MwizPtn extends AFrame
         KeysMdl keysMdl = mwizMdl.getKeysMdl();
         keysMdl.loadData(mwizMdl.getGridMdl().getKeysAt(row));
 
-        MailDlg mailDlg = new MailDlg();
-        mailDlg.initView();
-        mailDlg.initLang();
-        java.util.List<I1S2> mailList = mwizMdl.getGridMdl().wSelect(ConsDat.INDX_MAIL);
-        mailDlg.initMail(mailList);
+        MailOpt mailOpt = new MailOpt();
+        mailOpt.initView();
+        mailOpt.initLang();
+        java.util.List<I1S2> mailList = keysMdl.wSelect(ConsDat.INDX_MAIL);
+        mailOpt.initMail(mailList);
         if (mailList.size() < 1)
         {
             Lang.showMesg(this, null, "没有可用的邮件类型数据！");
             return;
         }
-        java.util.List<I1S2> userList = mwizMdl.getGridMdl().wSelect(ConsDat.INDX_TEXT);
-        mailDlg.initUser(userList);
+        java.util.List<I1S2> userList = keysMdl.wSelect(ConsDat.INDX_TEXT);
+        mailOpt.initUser(userList);
         if (userList.size() < 1)
         {
             Lang.showMesg(this, null, "没有可用的文本类型数据！");
             return;
         }
-        java.util.List<I1S2> pwdsList = mwizMdl.getGridMdl().wSelect(ConsDat.INDX_PWDS);
-        mailDlg.initPwds(pwdsList);
+        java.util.List<I1S2> pwdsList = keysMdl.wSelect(ConsDat.INDX_PWDS);
+        mailOpt.initPwds(pwdsList);
         if (pwdsList.size() < 1)
         {
             Lang.showMesg(this, null, "没有可用的口令类型数据！");
             return;
         }
-        if (javax.swing.JOptionPane.OK_OPTION != javax.swing.JOptionPane.showConfirmDialog(this, mailDlg, "登录确认", javax.swing.JOptionPane.OK_CANCEL_OPTION))
+        if (javax.swing.JOptionPane.OK_OPTION != javax.swing.JOptionPane.showConfirmDialog(this, mailOpt, "登录确认", javax.swing.JOptionPane.OK_CANCEL_OPTION))
         {
             return;
         }
 
-        String mail = mailList.get(mailDlg.getMail()).getK();
-        String user = userList.get(mailDlg.getUser()).getK();
-        String pwds = pwdsList.get(mailDlg.getPwds()).getK();
+        String mail = mailList.get(mailOpt.getMail()).getK();
+        String user = userList.get(mailOpt.getUser()).getK();
+        String pwds = pwdsList.get(mailOpt.getPwds()).getK();
 
         String host = mail.substring(mail.indexOf('@') + 1);
         if (!com.magicpwd._util.Char.isValidate(host))
@@ -376,24 +377,49 @@ public class MwizPtn extends AFrame
             return;
         }
 
+        createDialog(true);
+        showProgress();
+
         final Connect connect = new Connect(mail, pwds);
         connect.setUsername(user);
         if (!connect.useDefault())
         {
             Lang.showMesg(this, null, "查找不到对应的服务信息，如有疑问请与作者联系！");
+            hideProgress();
+            createDialog(false);
             return;
         }
 
         Reader reader = new Reader(connect);
+        java.util.List<S1S1> list = null;
         try
         {
-            java.util.List<S1S1> list = reader.getUnReadMail();
+            list = reader.getUnReadMail();
         }
         catch (Exception exp)
         {
             Logs.exception(exp);
             Lang.showMesg(this, null, exp.getLocalizedMessage());
+            hideProgress();
+            createDialog(false);
+            return;
         }
+
+        connect.saveMailInfo();
+
+        if (list == null || list.size() < 1)
+        {
+            Lang.showMesg(this, null, "没有新邮件信息！");
+            hideProgress();
+            createDialog(false);
+            return;
+        }
+
+        MailDlg mailDlg = new MailDlg(this);
+        mailDlg.initView();
+        mailDlg.initLang();
+        mailDlg.initData();
+        mailDlg.showData(list);
     }
 
     private void hintCallBack()

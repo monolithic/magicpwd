@@ -19,17 +19,11 @@ package com.magicpwd.m.mail;
 import com.magicpwd._cons.mail.MailEnv;
 import com.magicpwd._bean.mail.Connect;
 import com.magicpwd._comn.S1S1;
-import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
-import com.magicpwd._util.Jzip;
-import com.magicpwd._util.Lang;
 import java.io.UnsupportedEncodingException;
 
 import javax.mail.Address;
-import javax.mail.Flags.Flag;
 import javax.mail.Folder;
 import javax.mail.Message;
-import javax.mail.Store;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeUtility;
 
@@ -83,36 +77,6 @@ public class Mailer
             }
         }
         return null;
-    }
-
-    public boolean resume() throws Exception
-    {
-        // 删除已有备份邮件
-        Store store = connect.getStore();
-        Folder folder = store.getDefaultFolder();
-        folder.open(Folder.READ_ONLY);
-        Message message = find(folder, null, Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"), null, null);
-        if (message != null)
-        {
-            message.setFlag(Flag.DELETED, true);
-        }
-        folder.close(true);
-
-        Reader reader = new Reader(connect);
-        //reader.setAttachmentPath(ConsEnv.DIR_BAK);
-        if (reader.read(message))
-        {
-            for (S1S1 item : reader.getAttachmentList())
-            {
-                if (ConsEnv.FILE_SYNC.equals(item.getK()))
-                {
-                    Jzip.unZip(item.getV(), ConsEnv.DIR_DAT);
-                    //Lang.showMesg(TrayPtn.getCurrForm(), LangRes.P30F7A3F, "数据恢复成功，您需要重新启动本程序！");
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
     protected String decodeAddress(Address[] addresses) throws UnsupportedEncodingException

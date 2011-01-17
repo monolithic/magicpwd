@@ -17,6 +17,8 @@
 package com.magicpwd.e.mwiz;
 
 import com.magicpwd.__a.mwiz.AMwizAction;
+import com.magicpwd._util.Lang;
+import com.magicpwd._util.Logs;
 
 /**
  * Application: MagicPwd
@@ -39,6 +41,15 @@ public class MailAction extends AMwizAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
+        try
+        {
+            mwizPtn.showMailPtn();
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            Lang.showMesg(mwizPtn, null, exp.getLocalizedMessage());
+        }
     }
 
     @Override

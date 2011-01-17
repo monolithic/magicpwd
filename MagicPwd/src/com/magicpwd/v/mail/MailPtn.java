@@ -489,7 +489,7 @@ public class MailPtn extends javax.swing.JFrame implements Runnable
             bt_SaveAs.setEnabled(reader.hasAttachment());
             showNotice("邮件内容加载完毕！");
 
-            connect.appendMailInfo(reader.getMessageId(), true);
+            connect.setMailReaded(reader.getMessageId(), true);
             connect.saveMailInfo();
         }
         catch (Exception ex)
