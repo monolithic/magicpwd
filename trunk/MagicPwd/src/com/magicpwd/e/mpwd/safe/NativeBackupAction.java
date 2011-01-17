@@ -78,14 +78,14 @@ public class NativeBackupAction extends AMpwdAction implements IBackCall<String>
 
     private void doBackup()
     {
-        mpwdPtn.setLocked(true);
+        mpwdPtn.createDialog(true);
         mpwdPtn.showProgress();
 
         try
         {
             boolean b = mpwdPtn.nativeBackup(mpwdPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC), null);
             mpwdPtn.hideProgress();
-            mpwdPtn.setLocked(false);
+            mpwdPtn.createDialog(false);
 
             if (b)
             {
@@ -99,7 +99,7 @@ public class NativeBackupAction extends AMpwdAction implements IBackCall<String>
         catch (Exception exp)
         {
             mpwdPtn.hideProgress();
-            mpwdPtn.setLocked(false);
+            mpwdPtn.createDialog(false);
 
             Logs.exception(exp);
             Lang.showMesg(mpwdPtn, null, exp.getLocalizedMessage());

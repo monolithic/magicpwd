@@ -17,6 +17,7 @@
 package com.magicpwd.m.mwiz;
 
 import com.magicpwd.__i.IEditItem;
+import com.magicpwd._comn.I1S2;
 import com.magicpwd._comn.Keys;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Char;
@@ -92,5 +93,25 @@ public class KeysMdl extends SafeMdl
     public void loadData(Keys keys) throws Exception
     {
         loadData(keys.getP30F0104());
+    }
+
+    /**
+     *
+     * @param type
+     * @return
+     */
+    public java.util.List<I1S2> wSelect(int type)
+    {
+        java.util.ArrayList<I1S2> list = new java.util.ArrayList<I1S2>();
+        int i = 0;
+        for (IEditItem item : ls_ItemList)
+        {
+            if (item.getType() == type)
+            {
+                list.add(new I1S2(i, item.getData(), item.getName()));
+            }
+            i += 1;
+        }
+        return list;
     }
 }

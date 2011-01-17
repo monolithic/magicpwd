@@ -18,11 +18,11 @@ package com.magicpwd.__a;
 
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.S1S1;
-import com.magicpwd._comp.WGlassPane;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._bean.mail.Connect;
+import com.magicpwd._comp.WDialog;
 import com.magicpwd._user.UserDto;
 import com.magicpwd.m.mail.Reader;
 import com.magicpwd.m.mail.Sender;
@@ -44,6 +44,7 @@ import com.magicpwd.r.AmonFF;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.tray.TrayPtn;
 import java.io.IOException;
+import javax.swing.JLayeredPane;
 
 /**
  *
@@ -127,7 +128,7 @@ public abstract class AFrame extends javax.swing.JFrame
             return;
         }
 
-        setLocked(true);
+        createDialog(true);
         showProgress(Lang.getLang(LangRes.P30F1A05, "正在初始化资源数据，请稍候……"));
 
         String tmp;
@@ -147,7 +148,7 @@ public abstract class AFrame extends javax.swing.JFrame
         }
 
         showProgress();
-        setLocked(true);
+        createDialog(true);
     }
 
     @Override
@@ -344,14 +345,19 @@ public abstract class AFrame extends javax.swing.JFrame
         this.userMdl = userMdl;
     }
 
-    public void setLocked(boolean locked)
+    protected void createDialog(boolean resizable)
     {
-        if (glassPane == null)
+        createDialog(resizable, false);
+    }
+
+    protected void createDialog(boolean resizable, boolean opaque)
+    {
+        if (wDialog == null)
         {
-            glassPane = new WGlassPane();
-            this.setGlassPane(glassPane);
+            wDialog = new WDialog(this);
+            wDialog.init();
+            getLayeredPane().add(wDialog, JLayeredPane.MODAL_LAYER);
         }
-        glassPane.setVisible(locked);
     }
 
     /**
@@ -774,7 +780,7 @@ public abstract class AFrame extends javax.swing.JFrame
             return false;
         }
 
-        setLocked(true);
+        createDialog(true);
         showProgress();
         try
         {
@@ -791,7 +797,7 @@ public abstract class AFrame extends javax.swing.JFrame
             Lang.showMesg(this, LangRes.P30F7A26, "数据导出失败，请确认您数据的正确性，然后重新尝试！");
         }
         hideProgress();
-        setLocked(true);
+        createDialog(true);
         return true;
     }
 
@@ -827,7 +833,7 @@ public abstract class AFrame extends javax.swing.JFrame
             return false;
         }
 
-        setLocked(true);
+        createDialog(true);
         showProgress();
         try
         {
@@ -843,7 +849,7 @@ public abstract class AFrame extends javax.swing.JFrame
             Lang.showMesg(this, LangRes.P30F7A08, "TXT文档格式解析出错，数据导入失败！");
         }
         hideProgress();
-        setLocked(false);
+        createDialog(false);
         return true;
     }
 
@@ -851,7 +857,7 @@ public abstract class AFrame extends javax.swing.JFrame
     {
         return true;
     }
-    private WGlassPane glassPane;
+    private WDialog wDialog;
     private javax.swing.JPanel pl_LckPanel;
     private javax.swing.JLabel lb_IcoLabel;
     private javax.swing.JLabel lb_TipLabel;

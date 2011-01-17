@@ -17,6 +17,7 @@
 package com.magicpwd;
 
 import com.magicpwd.__a.AFrame;
+import com.magicpwd._comn.KFManager;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Jzip;
@@ -121,6 +122,9 @@ public class MagicPwd
         Bean.getNone();
         Bean.getLogo(16);
         AFrame.loadPre();
+
+        KFManager kfm = new KFManager();
+        java.awt.KeyboardFocusManager.setCurrentKeyboardFocusManager(kfm);
 
         // 扩展库加载
         java.io.File file = new java.io.File(ConsEnv.DIR_EXT);

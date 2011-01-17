@@ -21,7 +21,6 @@ import com.magicpwd._util.Char;
 import com.magicpwd._bean.mail.Connect;
 import com.magicpwd._comn.S1S1;
 import com.magicpwd._cons.mail.MailEnv;
-import com.magicpwd._util.Logs;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.Multipart;
@@ -72,17 +71,24 @@ public class Reader extends Mailer
             }
         }
 
-        if (message instanceof MimeMessage)
-        {
-            messageId = ((MimeMessage) message).getMessageID();
-            if (!com.magicpwd._util.Char.isValidate(messageId))
-            {
-                messageId = Long.toHexString(com.magicpwd._util.Hash.ber(getFrom() + getSubject() + getSentDate()));
-            }
-            getConnect().appendMailInfo(messageId, getConnect().isMailExists(messageId));
-        }
+        messageId = getMessageId(message);
+        getConnect().setMailReaded(messageId, getConnect().isMailExists(messageId));
 
         return true;
+    }
+
+    private String getMessageId(Message message) throws Exception
+    {
+        String msgId = null;
+        if (message instanceof MimeMessage)
+        {
+            msgId = ((MimeMessage) message).getMessageID();
+        }
+        if (!com.magicpwd._util.Char.isValidate(msgId))
+        {
+            msgId = Long.toHexString(com.magicpwd._util.Hash.ber(getFrom() + getSubject() + getSentDate()));
+        }
+        return msgId;
     }
 
     /**
@@ -216,19 +222,16 @@ public class Reader extends Mailer
         Message[] messages = folder.getMessages();
         if (messages != null)
         {
+            String mesgId;
             for (Message mesg : messages)
             {
-                if (mesg instanceof MimeMessage)
+                mesgId = getMessageId(mesg);
+                if (getConnect().isMailReaded(mesgId))
                 {
                     continue;
                 }
-
-                MimeMessage mime = (MimeMessage) mesg;
-                if (getConnect().isMailReaded(mime.getMessageID()))
-                {
-                    continue;
-                }
-                mailList.add(new S1S1(mime.getMessageID(), mime.getSubject()));
+                mailList.add(new S1S1(mesgId, mesg.getSubject()));
+                getConnect().setMailReaded(mesgId, true);
             }
         }
         folder.close(false);

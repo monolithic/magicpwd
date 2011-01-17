@@ -16,12 +16,12 @@
  */
 package com.magicpwd.v.mpwd;
 
-import com.magicpwd.v.HintBar;
 import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd.__i.IEditBean;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mpwd.IMpwdBean;
+import com.magicpwd._bean.mail.Connect;
 import com.magicpwd._bean.mpwd.AreaBean;
 import com.magicpwd._bean.mpwd.DataBean;
 import com.magicpwd._bean.mpwd.DateBean;
@@ -48,8 +48,6 @@ import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
-import com.magicpwd._bean.mail.Connect;
-import com.magicpwd.v.mail.MailPtn;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Card;
 import com.magicpwd._util.Char;
@@ -64,9 +62,12 @@ import com.magicpwd.m.mpwd.KindMdl;
 import com.magicpwd.r.KeysCR;
 import com.magicpwd.r.KindTN;
 import com.magicpwd.r.TreeCR;
+import com.magicpwd.v.HintBar;
 import com.magicpwd.v.MenuPtn;
+import com.magicpwd.v.mail.MailPtn;
 import com.magicpwd.v.tray.TrayPtn;
 import com.magicpwd.x.MdiDialog;
+import com.magicpwd.x.mail.MailOpt;
 
 public class MpwdPtn extends AFrame
 {
@@ -1435,38 +1436,38 @@ public class MpwdPtn extends AFrame
             Bean.centerForm(mailPtn, this);
         }
 
-        MailDlg mailDlg = new MailDlg();
-        mailDlg.initView();
-        mailDlg.initLang();
+        MailOpt mailOpt = new MailOpt();
+        mailOpt.initView();
+        mailOpt.initLang();
         java.util.List<I1S2> mailList = mpwdMdl.getGridMdl().wSelect(ConsDat.INDX_MAIL);
-        mailDlg.initMail(mailList);
+        mailOpt.initMail(mailList);
         if (mailList.size() < 1)
         {
             Lang.showMesg(this, null, "没有可用的邮件类型数据！");
             return;
         }
         java.util.List<I1S2> userList = mpwdMdl.getGridMdl().wSelect(ConsDat.INDX_TEXT);
-        mailDlg.initUser(userList);
+        mailOpt.initUser(userList);
         if (userList.size() < 1)
         {
             Lang.showMesg(this, null, "没有可用的文本类型数据！");
             return;
         }
         java.util.List<I1S2> pwdsList = mpwdMdl.getGridMdl().wSelect(ConsDat.INDX_PWDS);
-        mailDlg.initPwds(pwdsList);
+        mailOpt.initPwds(pwdsList);
         if (pwdsList.size() < 1)
         {
             Lang.showMesg(this, null, "没有可用的口令类型数据！");
             return;
         }
-        if (javax.swing.JOptionPane.OK_OPTION != javax.swing.JOptionPane.showConfirmDialog(this, mailDlg, "登录确认", javax.swing.JOptionPane.OK_CANCEL_OPTION))
+        if (javax.swing.JOptionPane.OK_OPTION != javax.swing.JOptionPane.showConfirmDialog(this, mailOpt, "登录确认", javax.swing.JOptionPane.OK_CANCEL_OPTION))
         {
             return;
         }
 
-        String mail = mailList.get(mailDlg.getMail()).getK();
-        String user = userList.get(mailDlg.getUser()).getK();
-        String pwds = pwdsList.get(mailDlg.getPwds()).getK();
+        String mail = mailList.get(mailOpt.getMail()).getK();
+        String user = userList.get(mailOpt.getUser()).getK();
+        String pwds = pwdsList.get(mailOpt.getPwds()).getK();
 
         String host = mail.substring(mail.indexOf('@') + 1);
         if (!com.magicpwd._util.Char.isValidate(host))

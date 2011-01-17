@@ -264,7 +264,7 @@ public class Connect
         prop.setProperty(com.magicpwd._util.Char.format("mail.{0}.user", getProtocol()), getUsername());
         prop.setProperty(com.magicpwd._util.Char.format("mail.{0}.host", getProtocol()), getHost());
         prop.setProperty(com.magicpwd._util.Char.format("mail.{0}.port", getProtocol()), "" + getPort());
-        
+
         if (isAuth())
         {
             prop.setProperty(com.magicpwd._util.Char.format("mail.{0}.auth", getProtocol()), "true");
@@ -433,16 +433,6 @@ public class Connect
         return true;
     }
 
-    public boolean appendMailInfo(String messageId, boolean readed)
-    {
-        if (com.magicpwd._util.Char.isValidate(messageId))
-        {
-            newProp.setProperty(messageId, readed ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
-            return true;
-        }
-        return false;
-    }
-
     public boolean isMailExists(String messageId)
     {
         if (com.magicpwd._util.Char.isValidate(messageId))
@@ -457,6 +447,16 @@ public class Connect
         if (com.magicpwd._util.Char.isValidate(messageId))
         {
             return ConsCfg.DEF_TRUE.equals(newProp.getProperty(messageId));
+        }
+        return false;
+    }
+
+    public boolean setMailReaded(String messageId, boolean readed)
+    {
+        if (com.magicpwd._util.Char.isValidate(messageId))
+        {
+            newProp.setProperty(messageId, readed ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
+            return true;
         }
         return false;
     }

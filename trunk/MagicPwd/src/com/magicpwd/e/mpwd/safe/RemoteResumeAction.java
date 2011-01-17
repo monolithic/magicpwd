@@ -76,7 +76,7 @@ public class RemoteResumeAction extends AMpwdAction implements IBackCall<String>
             return false;
         }
 
-        mpwdPtn.setLocked(true);
+        mpwdPtn.createDialog(true);
         mpwdPtn.showProgress();
         doResume(object);
         return true;
@@ -84,7 +84,7 @@ public class RemoteResumeAction extends AMpwdAction implements IBackCall<String>
 
     private void doResume()
     {
-        mpwdPtn.setLocked(true);
+        mpwdPtn.createDialog(true);
         mpwdPtn.showProgress();
 
         java.util.List<S1S1> list = new java.util.ArrayList<S1S1>();
@@ -95,7 +95,7 @@ public class RemoteResumeAction extends AMpwdAction implements IBackCall<String>
         catch (Exception exp)
         {
             mpwdPtn.hideProgress();
-            mpwdPtn.setLocked(false);
+            mpwdPtn.createDialog(false);
 
             Logs.exception(exp);
             Lang.showMesg(mpwdPtn, null, exp.getLocalizedMessage());
@@ -105,7 +105,7 @@ public class RemoteResumeAction extends AMpwdAction implements IBackCall<String>
         if (list.size() < 1)
         {
             mpwdPtn.hideProgress();
-            mpwdPtn.setLocked(false);
+            mpwdPtn.createDialog(false);
 
             Lang.showMesg(mpwdPtn, LangRes.P30F7A55, "没有发现可用的备份数据！");
             return;
@@ -118,7 +118,7 @@ public class RemoteResumeAction extends AMpwdAction implements IBackCall<String>
         }
 
         mpwdPtn.hideProgress();
-        mpwdPtn.setLocked(false);
+        mpwdPtn.createDialog(false);
 
         DatDialog datDialog = new DatDialog(mpwdPtn, this);
         datDialog.initView();
@@ -134,7 +134,7 @@ public class RemoteResumeAction extends AMpwdAction implements IBackCall<String>
         {
             boolean b = mpwdPtn.remoteResume(sign, null);
             mpwdPtn.hideProgress();
-            mpwdPtn.setLocked(false);
+            mpwdPtn.createDialog(false);
 
             if (b)
             {
@@ -148,7 +148,7 @@ public class RemoteResumeAction extends AMpwdAction implements IBackCall<String>
         catch (Exception ex)
         {
             mpwdPtn.hideProgress();
-            mpwdPtn.setLocked(false);
+            mpwdPtn.createDialog(false);
 
             Logs.exception(ex);
             Lang.showMesg(mpwdPtn, null, ex.getLocalizedMessage());
