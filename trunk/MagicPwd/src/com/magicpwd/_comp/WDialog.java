@@ -16,6 +16,7 @@
  */
 package com.magicpwd._comp;
 
+import com.magicpwd._cons.ConsEnv;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -41,8 +42,9 @@ public class WDialog extends javax.swing.JComponent
 
     public void init()
     {
-        this.setName("amonPanel");
+        this.setName(ConsEnv.WDIALOG_NAME);
         this.setOpaque(false);
+        this.fixSize();
         this.addMouseListener(new MouseAdapter()
         {
         });
@@ -57,8 +59,11 @@ public class WDialog extends javax.swing.JComponent
         super.setLayout(new FlowLayout(FlowLayout.CENTER));
     }
 
-    public void dispose()
+    @Override
+    public void setVisible(boolean visible)
     {
+        super.setVisible(visible);
+
         owner.setResizable(lastResizable);
 
         if (lastComponent != null && lastComponent.isShowing())
@@ -70,9 +75,7 @@ public class WDialog extends javax.swing.JComponent
     public void pack()
     {
         lastComponent = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
-
-        this.fixSize();
-        this.validate();
+//        this.validate();
         this.requestFocus();
     }
 

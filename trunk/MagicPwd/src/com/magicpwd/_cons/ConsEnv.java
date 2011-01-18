@@ -235,4 +235,5 @@ public interface ConsEnv
     {
         "Winshine.biz", "Amonsoft.com", "Magicpwd.com", "MyIM.im"
     };
+    String WDIALOG_NAME = "__amon__dialog__";
 }

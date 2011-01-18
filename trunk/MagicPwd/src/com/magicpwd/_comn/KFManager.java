@@ -28,23 +28,31 @@ import java.awt.event.KeyEvent;
 public class KFManager extends DefaultKeyboardFocusManager
 {
 
-    private String conName;
+    private String containerName;
 
-    public void setDialogName(String name)
+    public void setContainerName(String name)
     {
-        conName = name;
+        if (name != null)
+        {
+            name = name.trim();
+            if (name.length() < 1)
+            {
+                name = null;
+            }
+        }
+        containerName = name;
     }
 
     @Override
     public void processKeyEvent(Component focusedComponent, KeyEvent e)
     {
-        if (conName != null)
+        if (containerName != null)
         {
             Container c = (focusedComponent instanceof Container) ? (Container) focusedComponent : focusedComponent.getParent();
             while (c != null)
             {
                 System.out.println(c.getName());
-                if (conName.equalsIgnoreCase(c.getName()))
+                if (containerName.equalsIgnoreCase(c.getName()))
                 {
                     e.consume();
                     return;

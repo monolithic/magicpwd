@@ -220,19 +220,26 @@ public class Reader extends Mailer
 
         folder.open(Folder.READ_ONLY);
         Message[] messages = folder.getMessages();
+//        FetchProfile fp = new FetchProfile();
+//        fp.add(FetchProfile.Item.ENVELOPE);
+//        fp.add("X-mailer");
+//        folder.fetch(messages, fp);
+
         if (messages != null)
         {
             String mesgId;
+            getConnect().loadMailInfo();
             for (Message mesg : messages)
             {
                 mesgId = getMessageId(mesg);
-                if (getConnect().isMailReaded(mesgId))
+                if (getConnect().isMailExists(mesgId))
                 {
                     continue;
                 }
                 mailList.add(new S1S1(mesgId, mesg.getSubject()));
                 getConnect().setMailReaded(mesgId, true);
             }
+            getConnect().saveMailInfo();
         }
         folder.close(false);
         store.close();
