@@ -56,6 +56,7 @@ public class GuidBean extends javax.swing.JPanel
         lb_PropName = new javax.swing.JLabel();
         tf_PropName = new javax.swing.JTextField(20);
         tf_PropName.setEditable(false);
+        tf_PropName.setFocusable(false);
         lb_PropName.setLabelFor(tf_PropName);
 
         lb_PropData = new javax.swing.JLabel();

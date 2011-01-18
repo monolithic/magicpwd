@@ -156,7 +156,10 @@ public abstract class AFrame extends javax.swing.JFrame
     {
         if (e.getID() == java.awt.event.WindowEvent.WINDOW_CLOSING)
         {
-            hideFrame();
+            if (wDialog == null || !wDialog.isShowing())
+            {
+                hideFrame();
+            }
             return;
         }
         super.processWindowEvent(e);
@@ -345,18 +348,24 @@ public abstract class AFrame extends javax.swing.JFrame
         this.userMdl = userMdl;
     }
 
-    protected WDialog createDialog(boolean resizable)
+    public WDialog createDialog()
+    {
+        return createDialog(false);
+    }
+
+    public WDialog createDialog(boolean resizable)
     {
         return createDialog(resizable, false);
     }
 
-    protected WDialog createDialog(boolean resizable, boolean opaque)
+    public WDialog createDialog(boolean resizable, boolean opaque)
     {
         if (wDialog == null)
         {
             wDialog = new WDialog(this);
+            wDialog.setOpaque(false);
             wDialog.init();
-            getLayeredPane().add(wDialog, JLayeredPane.MODAL_LAYER);
+            getLayeredPane().add(wDialog, new Integer(JLayeredPane.POPUP_LAYER - 1));
         }
         wDialog.setResizable(resizable);
         wDialog.setOpaque(opaque);
@@ -413,9 +422,7 @@ public abstract class AFrame extends javax.swing.JFrame
 
         if (modal)
         {
-            WDialog dialog = createDialog(false, false);
-            dialog.pack();
-            dialog.setVisible(true);
+            createDialog(false, false).setVisible(true);
         }
 
         java.awt.Dimension size = this.getContentPane().getSize();

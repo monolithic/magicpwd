@@ -46,21 +46,37 @@ public class KFManager extends DefaultKeyboardFocusManager
     @Override
     public void processKeyEvent(Component focusedComponent, KeyEvent e)
     {
-        if (containerName != null)
+        if (containerName == null)
         {
-            Container c = (focusedComponent instanceof Container) ? (Container) focusedComponent : focusedComponent.getParent();
-            while (c != null)
-            {
-                System.out.println(c.getName());
-                if (containerName.equalsIgnoreCase(c.getName()))
-                {
-                    e.consume();
-                    return;
-                }
-                c = c.getParent();
-            }
+            super.processKeyEvent(focusedComponent, e);
+            return;
         }
 
-        super.processKeyEvent(focusedComponent, e);
+        System.out.println("------------------------------------------------KFM:" + containerName);
+        Container c = (focusedComponent instanceof Container) ? (Container) focusedComponent : focusedComponent.getParent();
+        while (c != null)
+        {
+            System.out.println(c.getName());
+            if (c instanceof javax.swing.JDialog)
+            {
+                super.processKeyEvent(focusedComponent, e);
+                return;
+            }
+
+            if (containerName.equalsIgnoreCase(c.getName()))
+            {
+                if (e.isControlDown() || e.isMetaDown())
+                {
+                    e.consume();
+                }
+                else
+                {
+                    super.processKeyEvent(focusedComponent, e);
+                }
+                return;
+            }
+            c = c.getParent();
+        }
+        e.consume();
     }
 }

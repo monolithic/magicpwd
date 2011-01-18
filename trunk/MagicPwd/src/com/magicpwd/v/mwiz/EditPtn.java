@@ -43,14 +43,14 @@ public class EditPtn extends ADialog
     private int currStep;
     private boolean canEdit;
     private KeysMdl keysMdl;
-    private MwizPtn normPtn;
+    private MwizPtn mwizPtn;
     private GuidBean guidBean;
     private HeadBean headBean;
 
-    public EditPtn(MwizPtn normPtn)
+    public EditPtn(MwizPtn mwizPtn)
     {
-        super(normPtn, true);
-        this.normPtn = normPtn;
+        super(mwizPtn, true);
+        this.mwizPtn = mwizPtn;
         ls_BodyList = new java.util.ArrayList<BodyBar>(5);
     }
 
@@ -59,16 +59,16 @@ public class EditPtn extends ADialog
         initNoteView();
         initBaseView();
 
-        guidBean = new GuidBean(normPtn);
+        guidBean = new GuidBean(mwizPtn);
         guidBean.initView();
         pl_EditArea.add("guid", guidBean);
 
-        headBean = new HeadBean(normPtn);
+        headBean = new HeadBean(mwizPtn);
         headBean.initView();
         pl_EditArea.add("head", headBean);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setIconImage(Bean.getLogo(16));
+//        setIconImage(Bean.getLogo(16));
         setResizable(false);
     }
 
@@ -96,6 +96,7 @@ public class EditPtn extends ADialog
 
     public final void showData(KeysMdl keysMdl, boolean canEdit)
     {
+        currStep = -2;
         this.keysMdl = keysMdl;
         this.canEdit = canEdit;
         initGuidView();
@@ -104,11 +105,9 @@ public class EditPtn extends ADialog
         pack();
         if (!isVisible())
         {
-            Bean.centerForm(this, normPtn);
+            Bean.centerForm(this, mwizPtn);
             setVisible(true);
         }
-
-        currStep = -2;
     }
 
     private void initBody()
@@ -127,7 +126,7 @@ public class EditPtn extends ADialog
 
         while (step < keysMdl.getItemSize())
         {
-            BodyBar bar = new BodyBar(normPtn, keysMdl);
+            BodyBar bar = new BodyBar(mwizPtn, keysMdl);
             step = bar.initView(step);
             bar.initLang();
             bar.initData();
@@ -259,7 +258,7 @@ public class EditPtn extends ADialog
         ta_NoteArea.setText(Lang.getLang(LangRes.P30F6B01, "第一步：选择您要使用的口令模板"));
         cl_Layout.show(pl_EditArea, "guid");
         guidBean.showData(keysMdl);
-        guidBean.requestFocus();
+//        guidBean.requestFocus();
 
         bt_PrevStep.setVisible(false);
         bt_NextStep.setVisible(true);
@@ -378,15 +377,15 @@ public class EditPtn extends ADialog
         {
             keysMdl.saveData(true);
             setVisible(false);
-            normPtn.findLast();
+            mwizPtn.findLast();
         }
         catch (Exception ex)
         {
             Logs.exception(ex);
         }
 
-        normPtn.requestFocus();
-        normPtn.getHintPtn().showInfo(false);
+        mwizPtn.requestFocus();
+        mwizPtn.getHintPtn().showInfo(false);
     }
 
     private void bt_CancelActionPerformed(java.awt.event.ActionEvent evt)
@@ -418,7 +417,7 @@ public class EditPtn extends ADialog
             }
         }
         setVisible(false);
-        normPtn.requestFocus();
+        mwizPtn.requestFocus();
         return true;
     }
     private java.awt.CardLayout cl_Layout;
