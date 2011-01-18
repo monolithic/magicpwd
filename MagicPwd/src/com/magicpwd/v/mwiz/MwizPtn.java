@@ -66,7 +66,7 @@ public class MwizPtn extends AFrame
         fb_FindBar = new FindBar(this);
         fb_FindBar.initView();
         fb_FindBar.setVisible(false);
-        getLayeredPane().add(fb_FindBar, javax.swing.JLayeredPane.POPUP_LAYER);
+        getLayeredPane().add(fb_FindBar, new Integer(javax.swing.JLayeredPane.MODAL_LAYER + 1));
 
         tb_KeysList = new javax.swing.JTable();
         tb_KeysList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);

@@ -257,7 +257,7 @@ public class Connect
         Properties prop = new Properties();
         if (UserMdl.getRunMode() == ConsEnv.RUN_MODE_DEV)
         {
-            prop.setProperty("mail.debug", "true");
+//            prop.setProperty("mail.debug", "true");
         }
         prop.setProperty("username", getUsername());
         prop.setProperty("password", getPassword());

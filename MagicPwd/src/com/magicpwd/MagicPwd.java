@@ -60,6 +60,8 @@ public class MagicPwd
             }
         }
 
+        java.awt.KeyboardFocusManager.setCurrentKeyboardFocusManager(new KFManager());
+
         // 数据完整性处理
         zipData();
 
@@ -122,10 +124,6 @@ public class MagicPwd
         Bean.getNone();
         Bean.getLogo(16);
         AFrame.loadPre();
-
-        KFManager kfm = new KFManager();
-        kfm.setContainerName(ConsEnv.WDIALOG_NAME);
-        java.awt.KeyboardFocusManager.setCurrentKeyboardFocusManager(kfm);
 
         // 扩展库加载
         java.io.File file = new java.io.File(ConsEnv.DIR_EXT);

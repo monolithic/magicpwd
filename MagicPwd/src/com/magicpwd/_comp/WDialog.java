@@ -16,11 +16,11 @@
  */
 package com.magicpwd._comp;
 
+import com.magicpwd._comn.KFManager;
 import com.magicpwd._cons.ConsEnv;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.KeyboardFocusManager;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
@@ -42,9 +42,9 @@ public class WDialog extends javax.swing.JComponent
 
     public void init()
     {
-        this.setName(ConsEnv.WDIALOG_NAME);
-        this.setOpaque(false);
-        this.fixSize();
+        super.setVisible(false);
+        super.setName(ConsEnv.WDIALOG_NAME);
+        super.setLayout(new FlowLayout(FlowLayout.CENTER));
         this.addMouseListener(new MouseAdapter()
         {
         });
@@ -56,27 +56,69 @@ public class WDialog extends javax.swing.JComponent
             {
             }
         });
-        super.setLayout(new FlowLayout(FlowLayout.CENTER));
+    }
+
+    public void demo()
+    {
+        javax.swing.JTextField field = new javax.swing.JTextField(20);
+        this.add(field);
+        javax.swing.JButton button = new javax.swing.JButton("Test");
+        button.setMnemonic('T');
+        button.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                demoAactionPerformed();
+            }
+        });
+        this.add(button);
+    }
+
+    private void demoAactionPerformed()
+    {
+        setVisible(false);
     }
 
     @Override
     public void setVisible(boolean visible)
     {
-        super.setVisible(visible);
-
-        owner.setResizable(lastResizable);
-
-        if (lastComponent != null && lastComponent.isShowing())
+        if (visible)
         {
-            lastComponent.requestFocus();
+            if (!super.isVisible())
+            {
+                System.out.println("Visible");
+                KFManager kfm = (KFManager) java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager();
+                kfm.setContainerName(ConsEnv.WDIALOG_NAME);
+                lastComponent = kfm.getFocusOwner();
+                lastResizable = owner.isResizable();
+                owner.setResizable(lastResizable & nextResizable);
+                fixSize();
+                System.out.println((getComponentCount() > 0 ? getComponents()[0] : this));
+                (getComponentCount() > 0 ? getComponents()[0] : this).requestFocus();
+            }
         }
+        else
+        {
+            if (super.isVisible())
+            {
+                System.out.println("unVisible");
+                KFManager kfm = (KFManager) java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager();
+                kfm.setContainerName(null);
+                owner.setResizable(lastResizable);
+                if (lastComponent != null && lastComponent.isShowing())
+                {
+                    lastComponent.requestFocus();
+                }
+            }
+        }
+
+        super.setVisible(visible);
     }
 
     public void pack()
     {
-        lastComponent = KeyboardFocusManager.getCurrentKeyboardFocusManager().getFocusOwner();
-//        this.validate();
-        this.requestFocus();
     }
 
     /**
@@ -84,12 +126,7 @@ public class WDialog extends javax.swing.JComponent
      */
     public void setResizable(boolean resizable)
     {
-        lastResizable = owner.isResizable();
-        if (!lastResizable)
-        {
-            return;
-        }
-        owner.setResizable(resizable);
+        nextResizable = resizable;
     }
 
     private void fixSize()
@@ -98,5 +135,6 @@ public class WDialog extends javax.swing.JComponent
         this.setBounds(0, 0, dim.width, dim.height);
     }
     private boolean lastResizable;
+    private boolean nextResizable;
     private Component lastComponent;
 }
