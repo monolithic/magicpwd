@@ -129,7 +129,7 @@ public abstract class AFrame extends javax.swing.JFrame
         }
 
         createDialog(true);
-        showProgress(Lang.getLang(LangRes.P30F1A05, "正在初始化资源数据，请稍候……"));
+        showProgress(true, Lang.getLang(LangRes.P30F1A05, "正在初始化资源数据，请稍候……"));
 
         String tmp;
         for (java.io.File file : dir.listFiles(new AmonFF("^(0|[A-Za-z]{16})\\.amx$", true)))
@@ -345,12 +345,12 @@ public abstract class AFrame extends javax.swing.JFrame
         this.userMdl = userMdl;
     }
 
-    protected void createDialog(boolean resizable)
+    protected WDialog createDialog(boolean resizable)
     {
-        createDialog(resizable, false);
+        return createDialog(resizable, false);
     }
 
-    protected void createDialog(boolean resizable, boolean opaque)
+    protected WDialog createDialog(boolean resizable, boolean opaque)
     {
         if (wDialog == null)
         {
@@ -358,27 +358,9 @@ public abstract class AFrame extends javax.swing.JFrame
             wDialog.init();
             getLayeredPane().add(wDialog, JLayeredPane.MODAL_LAYER);
         }
-    }
-
-    /**
-     * 构造进度窗口
-     */
-    private synchronized void initProgress()
-    {
-        pl_LckPanel = new javax.swing.JPanel();
-        pl_LckPanel.setLayout(new java.awt.BorderLayout());
-        pl_LckPanel.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.lightGray));
-
-        lb_IcoLabel = new javax.swing.JLabel();
-        lb_IcoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        pl_LckPanel.add(lb_IcoLabel, java.awt.BorderLayout.CENTER);
-
-        lb_TipLabel = new javax.swing.JLabel();
-        lb_TipLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        pl_LckPanel.add(lb_TipLabel, java.awt.BorderLayout.SOUTH);
-
-        getLayeredPane().add(pl_LckPanel, javax.swing.JLayeredPane.MODAL_LAYER);
-        lb_IcoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConsEnv.ICON_PATH + "wait.gif")));
+        wDialog.setResizable(resizable);
+        wDialog.setOpaque(opaque);
+        return wDialog;
     }
 
     /**
@@ -386,23 +368,54 @@ public abstract class AFrame extends javax.swing.JFrame
      */
     public void showProgress()
     {
-        showProgress(null);
+        showProgress(true);
+    }
+
+    public void showProgress(boolean modal)
+    {
+        showProgress(modal, null);
     }
 
     /**
      * 显示进度窗口（有提示信息）
      * @param notice
      */
-    public void showProgress(String notice)
+    public void showProgress(boolean modal, String notice)
     {
-        if (pl_LckPanel != null && pl_LckPanel.isVisible())
+        if (pl_BarPanel == null)
+        {
+            pl_BarPanel = new javax.swing.JPanel();
+            pl_BarPanel.setLayout(new java.awt.BorderLayout());
+            pl_BarPanel.setBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.lightGray));
+            pl_BarPanel.setVisible(false);
+
+            lb_IcoLabel = new javax.swing.JLabel();
+            lb_IcoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            pl_BarPanel.add(lb_IcoLabel, java.awt.BorderLayout.CENTER);
+
+            lb_TipLabel = new javax.swing.JLabel();
+            lb_TipLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+            pl_BarPanel.add(lb_TipLabel, java.awt.BorderLayout.SOUTH);
+
+            getLayeredPane().add(pl_BarPanel, javax.swing.JLayeredPane.MODAL_LAYER);
+            lb_IcoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConsEnv.ICON_PATH + "wait.gif")));
+        }
+
+        if (Char.isValidate(notice))
+        {
+            lb_TipLabel.setText(notice);
+        }
+
+        if (pl_BarPanel.isVisible())
         {
             return;
         }
 
-        if (pl_LckPanel == null)
+        if (modal)
         {
-            initProgress();
+            WDialog dialog = createDialog(false, false);
+            dialog.pack();
+            dialog.setVisible(true);
         }
 
         java.awt.Dimension size = this.getContentPane().getSize();
@@ -416,12 +429,8 @@ public abstract class AFrame extends javax.swing.JFrame
         {
             h = size.height;
         }
-        pl_LckPanel.setBounds((size.width - w) >> 1, (size.height - h) >> 1, w, h);
-        pl_LckPanel.setVisible(true);
-        if (Char.isValidate(notice))
-        {
-            lb_TipLabel.setText(notice);
-        }
+        pl_BarPanel.setBounds((size.width - w) >> 1, (size.height - h) >> 1, w, h);
+        pl_BarPanel.setVisible(true);
     }
 
     /**
@@ -429,11 +438,16 @@ public abstract class AFrame extends javax.swing.JFrame
      */
     public void hideProgress()
     {
-        if (pl_LckPanel == null || !pl_LckPanel.isVisible())
+        if (wDialog.isVisible())
+        {
+            wDialog.setVisible(false);
+        }
+
+        if (pl_BarPanel == null || !pl_BarPanel.isVisible())
         {
             return;
         }
-        pl_LckPanel.setVisible(false);
+        pl_BarPanel.setVisible(false);
     }
 
     public boolean nativeDetect(java.util.List<S1S1> list) throws Exception
@@ -858,7 +872,7 @@ public abstract class AFrame extends javax.swing.JFrame
         return true;
     }
     private WDialog wDialog;
-    private javax.swing.JPanel pl_LckPanel;
+    private javax.swing.JPanel pl_BarPanel;
     private javax.swing.JLabel lb_IcoLabel;
     private javax.swing.JLabel lb_TipLabel;
 }

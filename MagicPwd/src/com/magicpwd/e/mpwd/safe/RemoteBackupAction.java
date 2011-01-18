@@ -70,14 +70,12 @@ public class RemoteBackupAction extends AMpwdAction implements IBackCall<String>
 
     private void doBackup()
     {
-        mpwdPtn.createDialog(true);
         mpwdPtn.showProgress();
 
         try
         {
             boolean b = mpwdPtn.remoteBackup(this);
             mpwdPtn.hideProgress();
-            mpwdPtn.createDialog(false);
 
             if (b)
             {
@@ -91,7 +89,6 @@ public class RemoteBackupAction extends AMpwdAction implements IBackCall<String>
         catch (Exception exp)
         {
             mpwdPtn.hideProgress();
-            mpwdPtn.createDialog(false);
 
             Logs.exception(exp);
             Lang.showMesg(mpwdPtn, null, exp.getLocalizedMessage());

@@ -124,6 +124,7 @@ public class MagicPwd
         AFrame.loadPre();
 
         KFManager kfm = new KFManager();
+        kfm.setContainerName(ConsEnv.WDIALOG_NAME);
         java.awt.KeyboardFocusManager.setCurrentKeyboardFocusManager(kfm);
 
         // 扩展库加载

@@ -377,7 +377,6 @@ public class MwizPtn extends AFrame
             return;
         }
 
-        createDialog(true);
         showProgress();
 
         final Connect connect = new Connect(mail, pwds);
@@ -386,12 +385,25 @@ public class MwizPtn extends AFrame
         {
             Lang.showMesg(this, null, "查找不到对应的服务信息，如有疑问请与作者联系！");
             hideProgress();
-            createDialog(false);
             return;
         }
 
-        Reader reader = new Reader(connect);
+        new Thread()
+        {
+
+            @Override
+            public void run()
+            {
+                readMailList(connect);
+            }
+        }.start();
+    }
+
+    private void readMailList(Connect connect)
+    {
         java.util.List<S1S1> list = null;
+
+        Reader reader = new Reader(connect);
         try
         {
             list = reader.getUnReadMail();
@@ -401,17 +413,13 @@ public class MwizPtn extends AFrame
             Logs.exception(exp);
             Lang.showMesg(this, null, exp.getLocalizedMessage());
             hideProgress();
-            createDialog(false);
             return;
         }
-
-        connect.saveMailInfo();
 
         if (list == null || list.size() < 1)
         {
             Lang.showMesg(this, null, "没有新邮件信息！");
             hideProgress();
-            createDialog(false);
             return;
         }
 
@@ -420,6 +428,8 @@ public class MwizPtn extends AFrame
         mailDlg.initLang();
         mailDlg.initData();
         mailDlg.showData(list);
+
+        hideProgress();
     }
 
     private void hintCallBack()
