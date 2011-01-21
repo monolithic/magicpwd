@@ -44,7 +44,6 @@ import com.magicpwd.r.AmonFF;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.tray.TrayPtn;
 import java.io.IOException;
-import javax.swing.JLayeredPane;
 
 /**
  *
@@ -363,12 +362,12 @@ public abstract class AFrame extends javax.swing.JFrame
         if (wDialog == null)
         {
             wDialog = new WDialog(this);
-            wDialog.setOpaque(false);
             wDialog.init();
-            getLayeredPane().add(wDialog, new Integer(JLayeredPane.POPUP_LAYER - 1));
+            this.setGlassPane(wDialog);
+//            getLayeredPane().add(wDialog, new Integer(JLayeredPane.POPUP_LAYER - 1));
         }
-        wDialog.setResizable(resizable);
         wDialog.setOpaque(opaque);
+        setResizable(resizable);
         return wDialog;
     }
 
@@ -391,6 +390,7 @@ public abstract class AFrame extends javax.swing.JFrame
      */
     public void showProgress(boolean modal, String notice)
     {
+        WDialog dialog = modal ? createDialog(false, false) : null;
         if (pl_BarPanel == null)
         {
             pl_BarPanel = new javax.swing.JPanel();
@@ -406,8 +406,15 @@ public abstract class AFrame extends javax.swing.JFrame
             lb_TipLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
             pl_BarPanel.add(lb_TipLabel, java.awt.BorderLayout.SOUTH);
 
-            getLayeredPane().add(pl_BarPanel, javax.swing.JLayeredPane.MODAL_LAYER);
             lb_IcoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConsEnv.ICON_PATH + "wait.gif")));
+            if (dialog != null)
+            {
+                dialog.add(pl_BarPanel);
+            }
+            else
+            {
+                getLayeredPane().add(pl_BarPanel, javax.swing.JLayeredPane.MODAL_LAYER);
+            }
         }
 
         if (Char.isValidate(notice))
@@ -420,9 +427,9 @@ public abstract class AFrame extends javax.swing.JFrame
             return;
         }
 
-        if (modal)
+        if (dialog != null)
         {
-            createDialog(false, false).setVisible(true);
+            dialog.setVisible(true);
         }
 
         java.awt.Dimension size = this.getContentPane().getSize();

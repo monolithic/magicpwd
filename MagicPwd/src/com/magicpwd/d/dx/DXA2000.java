@@ -110,7 +110,7 @@ public class DXA2000 extends DXA
             }
             catch (Exception exp)
             {
-                System.out.println(exp.getLocalizedMessage());
+                Logs.exception(exp);
             }
 
             safeMdl.enCrypt(tempKeys, tempList);
