@@ -19,6 +19,8 @@ package com.magicpwd.x.docs;
 import com.magicpwd.__a.ADialog;
 import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IDocsViewer;
+import com.magicpwd._util.Bean;
+import com.magicpwd._util.Lang;
 
 /**
  * 源码查看
@@ -27,14 +29,154 @@ import com.magicpwd.__i.IDocsViewer;
 public class SrcViewer extends ADialog implements IDocsViewer
 {
 
+    private AFrame formPtn;
+
     public SrcViewer(AFrame formPtn)
     {
         super(formPtn, true);
+        this.formPtn = formPtn;
+    }
+
+    public void init()
+    {
+    }
+
+    public void initView()
+    {
+        initOptView();
+
+        bt_CodeView = new javax.swing.JButton();
+        ep_CodeView = new javax.swing.JEditorPane();
+
+        javax.swing.JScrollPane sp_CodeView = new javax.swing.JScrollPane(ep_CodeView);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
+        hpg1.addComponent(bt_CodeView);
+        hpg1.addComponent(pl_CodeView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
+        hsg1.addContainerGap();
+        hsg1.addComponent(sp_CodeView, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE);
+        hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg1.addGroup(hpg1);
+        hsg1.addContainerGap();
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hsg1));
+
+        javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
+        vsg1.addComponent(pl_CodeView, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg1.addComponent(bt_CodeView);
+        javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        vpg1.addComponent(sp_CodeView, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE);
+        vpg1.addGroup(vsg1);
+        javax.swing.GroupLayout.SequentialGroup vsg2 = layout.createSequentialGroup();
+        vsg2.addContainerGap();
+        vsg2.addGroup(vpg1);
+        vsg2.addContainerGap();
+        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(vsg2));
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+    }
+
+    private void initOptView()
+    {
+        pl_CodeView = new javax.swing.JPanel();
+
+        lb_LineNbr = new javax.swing.JLabel();
+        ck_LineNbr = new javax.swing.JCheckBox();
+        ck_LinkUri = new javax.swing.JCheckBox();
+        ck_TagStyle = new javax.swing.JComboBox();
+        lb_LinkUri = new javax.swing.JLabel();
+        lb_TagStyle = new javax.swing.JLabel();
+        tf_TagCount = new javax.swing.JTextField();
+        lb_TabCount = new javax.swing.JLabel();
+        tt_TabCount = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_CodeView);
+        pl_CodeView.setLayout(layout);
+        javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        hpg1.addComponent(lb_LineNbr, javax.swing.GroupLayout.Alignment.TRAILING);
+        hpg1.addComponent(lb_LinkUri, javax.swing.GroupLayout.Alignment.TRAILING);
+        hpg1.addComponent(lb_TagStyle, javax.swing.GroupLayout.Alignment.TRAILING);
+        hpg1.addComponent(lb_TabCount, javax.swing.GroupLayout.Alignment.TRAILING);
+        javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
+        hsg1.addComponent(tf_TagCount);
+        hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg1.addComponent(tt_TabCount);
+        javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        hpg2.addGroup(hsg1);
+        hpg2.addComponent(ck_TagStyle);
+        hpg2.addComponent(ck_LinkUri);
+        hpg2.addComponent(ck_LineNbr);
+        javax.swing.GroupLayout.SequentialGroup hsg2 = layout.createSequentialGroup();
+        hsg2.addGroup(hpg1);
+        hsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg2.addGroup(hpg2);
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(hsg2));
+
+        javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_LineNbr).addComponent(ck_LineNbr);
+        javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(ck_LinkUri).addComponent(lb_LinkUri);
+        javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(ck_TagStyle).addComponent(lb_TagStyle);
+        javax.swing.GroupLayout.ParallelGroup vpg4 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(tf_TagCount).addComponent(lb_TabCount).addComponent(tt_TabCount);
+        javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
+        vsg1.addGroup(vpg1);
+        vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg1.addGroup(vpg2);
+        vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg1.addGroup(vpg3);
+        vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg1.addGroup(vpg4);
+        vsg1.addContainerGap(0, Short.MAX_VALUE);
+        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(vsg1));
+    }
+
+    public void initLang()
+    {
+        lb_LineNbr.setText("行号：");
+
+        ck_LineNbr.setText("显示行号");
+
+        ck_LinkUri.setText("显示资源链接");
+
+        lb_LinkUri.setText("资源：");
+
+        lb_TagStyle.setText("格式：");
+
+        tf_TagCount.setColumns(2);
+
+        lb_TabCount.setText("制表符：");
+
+        tt_TabCount.setText("空格");
+
+        Lang.setWText(bt_CodeView, null, "查看(@V)");
+
+        pack();
+        Bean.centerForm(this, formPtn);
+    }
+
+    public void initData()
+    {
+        bt_CodeView.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                bt_CodeViewActionPerformed(evt);
+            }
+        });
+
+        this.processEscape();
     }
 
     @Override
     public void show(java.io.File file)
     {
+        initView();
+        initLang();
+        initData();
+        setVisible(true);
     }
 
     @Override
@@ -44,4 +186,21 @@ public class SrcViewer extends ADialog implements IDocsViewer
         dispose();
         return true;
     }
+
+    private void bt_CodeViewActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    }
+    private javax.swing.JButton bt_CodeView;
+    private javax.swing.JEditorPane ep_CodeView;
+    private javax.swing.JPanel pl_CodeView;
+    //选项
+    private javax.swing.JCheckBox ck_LineNbr;
+    private javax.swing.JCheckBox ck_LinkUri;
+    private javax.swing.JComboBox ck_TagStyle;
+    private javax.swing.JLabel lb_LineNbr;
+    private javax.swing.JLabel lb_LinkUri;
+    private javax.swing.JLabel lb_TabCount;
+    private javax.swing.JLabel lb_TagStyle;
+    private javax.swing.JTextField tf_TagCount;
+    private javax.swing.JLabel tt_TabCount;
 }
