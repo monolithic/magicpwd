@@ -44,39 +44,40 @@ public class KFManager extends DefaultKeyboardFocusManager
     }
 
     @Override
-    public void processKeyEvent(Component focusedComponent, KeyEvent e)
+    public boolean dispatchKeyEvent(KeyEvent e)
     {
         if (containerName == null)
         {
-            super.processKeyEvent(focusedComponent, e);
-            return;
+            return super.dispatchKeyEvent(e);
         }
 
-        System.out.println("------------------------------------------------KFM:" + containerName);
-        Container c = (focusedComponent instanceof Container) ? (Container) focusedComponent : focusedComponent.getParent();
-        while (c != null)
+        Component cmp = e.getComponent();
+        if (isModal(cmp))
         {
-            System.out.println(c.getName());
-            if (c instanceof javax.swing.JDialog)
-            {
-                super.processKeyEvent(focusedComponent, e);
-                return;
-            }
-
-            if (containerName.equalsIgnoreCase(c.getName()))
-            {
-                if (e.isControlDown() || e.isMetaDown())
-                {
-                    e.consume();
-                }
-                else
-                {
-                    super.processKeyEvent(focusedComponent, e);
-                }
-                return;
-            }
-            c = c.getParent();
+            return super.dispatchKeyEvent(e);
         }
+
         e.consume();
+        return false;
+    }
+
+    private boolean isModal(Component cmp)
+    {
+        if (cmp == null)
+        {
+            return false;
+        }
+
+        System.out.println("::" + cmp.getClass());
+        Container con = (cmp instanceof Container) ? (Container) cmp : cmp.getParent();
+        while (con != null)
+        {
+            if (con instanceof javax.swing.JDialog || containerName.equalsIgnoreCase(con.getName()))
+            {
+                return true;
+            }
+            con = con.getParent();
+        }
+        return false;
     }
 }

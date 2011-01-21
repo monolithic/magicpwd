@@ -98,8 +98,6 @@ public class DBU3000
                 buf.append("'").append(toDB(result.getString("P30F010D"))).append("',");
                 buf.append("'").append(toDB(result.getString("P30F010A"))).append("'");
                 buf.append(")");
-                System.out.println("=======================================");
-                System.out.println(buf.toString());
                 statDst.executeUpdate(buf.toString());
             }
 
@@ -109,7 +107,6 @@ public class DBU3000
             buf.append("'").append(hash).append("',");
             buf.append("'").append(result.getString("P30F0109")).append("'");
             buf.append(")");
-            System.out.println(buf.toString());
             statDst.executeUpdate(buf.toString());
 
             statSrc1.executeUpdate("delete from p30f0100 where p30f0104='" + hash + "'");

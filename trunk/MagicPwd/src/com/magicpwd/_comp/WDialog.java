@@ -16,35 +16,38 @@
  */
 package com.magicpwd._comp;
 
-import com.magicpwd._comn.KFManager;
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._util.Logs;
+import java.awt.AWTEvent;
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
+import java.awt.Toolkit;
+import java.awt.Window;
+import java.awt.event.AWTEventListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.MouseAdapter;
+import java.util.EventObject;
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 /**
  *
  * @author Amon
  */
-public class WDialog extends javax.swing.JComponent
+public class WDialog extends javax.swing.JPanel implements AWTEventListener
 {
-
-    private JFrame owner;
 
     public WDialog(JFrame frame)
     {
-        this.owner = frame;
+        this.parentWindow = frame;
+        toolkit = Toolkit.getDefaultToolkit();
     }
 
     public void init()
     {
         super.setVisible(false);
         super.setName(ConsEnv.WDIALOG_NAME);
-        super.setLayout(new FlowLayout(FlowLayout.CENTER));
+        super.setLayout(null);
         this.addMouseListener(new MouseAdapter()
         {
         });
@@ -58,83 +61,102 @@ public class WDialog extends javax.swing.JComponent
         });
     }
 
-    public void demo()
-    {
-        javax.swing.JTextField field = new javax.swing.JTextField(20);
-        this.add(field);
-        javax.swing.JButton button = new javax.swing.JButton("Test");
-        button.setMnemonic('T');
-        button.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e)
-            {
-                demoAactionPerformed();
-            }
-        });
-        this.add(button);
-    }
-
-    private void demoAactionPerformed()
-    {
-        setVisible(false);
-    }
-
+//    @Override
+//    public void setVisible(boolean visible)
+//    {
+//        if (visible)
+//        {
+//            if (!super.isVisible())
+//            {
+//                KFManager kfm = (KFManager) java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager();
+//                kfm.setContainerName(ConsEnv.WDIALOG_NAME);
+//                lastComponent = kfm.getFocusOwner();
+//                lastResizable = owner.isResizable();
+//                owner.setResizable(lastResizable & nextResizable);
+//                fixSize();
+//                (getComponentCount() > 0 ? getComponents()[0] : this).requestFocus();
+//            }
+//        }
+//        else
+//        {
+//            if (super.isVisible())
+//            {
+//                KFManager kfm = (KFManager) java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager();
+//                kfm.setContainerName(null);
+//                owner.setResizable(lastResizable);
+//                if (lastComponent != null && lastComponent.isShowing())
+//                {
+//                    lastComponent.requestFocus();
+//                }
+//            }
+//        }
+//
+//        super.setVisible(visible);
+//    }
     @Override
     public void setVisible(boolean visible)
     {
         if (visible)
         {
-            if (!super.isVisible())
+            if (parentWindow == null)
             {
-                System.out.println("Visible");
-                KFManager kfm = (KFManager) java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager();
-                kfm.setContainerName(ConsEnv.WDIALOG_NAME);
-                lastComponent = kfm.getFocusOwner();
-                lastResizable = owner.isResizable();
-                owner.setResizable(lastResizable & nextResizable);
-                fixSize();
-                System.out.println((getComponentCount() > 0 ? getComponents()[0] : this));
-                (getComponentCount() > 0 ? getComponents()[0] : this).requestFocus();
+                parentWindow = SwingUtilities.windowForComponent(this);
             }
+            Component focusOwner = parentWindow.getFocusOwner();
+            if (focusOwner != this)
+            {
+                lastFocusOwner = focusOwner;
+            }
+            toolkit.addAWTEventListener(this, AWTEvent.KEY_EVENT_MASK);
+            toolkit.addAWTEventListener(this, AWTEvent.MOUSE_EVENT_MASK);
+            requestFocus();
         }
         else
         {
-            if (super.isVisible())
+            toolkit.removeAWTEventListener(this);
+            if (lastFocusOwner != null)
             {
-                System.out.println("unVisible");
-                KFManager kfm = (KFManager) java.awt.KeyboardFocusManager.getCurrentKeyboardFocusManager();
-                kfm.setContainerName(null);
-                owner.setResizable(lastResizable);
-                if (lastComponent != null && lastComponent.isShowing())
-                {
-                    lastComponent.requestFocus();
-                }
+                lastFocusOwner.requestFocus();
+                lastFocusOwner = null;
             }
         }
-
         super.setVisible(visible);
     }
 
-    public void pack()
+    @Override
+    public void eventDispatched(AWTEvent e)
     {
+        if (!(e instanceof EventObject))
+        {
+            return;
+        }
+        Object obj = e.getSource();
+        if (!(obj instanceof Component))
+        {
+            return;
+        }
+
+        if (SwingUtilities.windowForComponent((Component) obj) == parentWindow)
+        {
+            try
+            {
+                Class[] cls =
+                {
+                };
+                Object[] args =
+                {
+                };
+                EventObject evt = (EventObject) e;
+                evt.getClass().getMethod("consume", cls).invoke(evt, args);
+            }
+            catch (Exception ex)
+            {
+                Logs.exception(ex);
+            }
+        }
     }
 
-    /**
-     * @param resizable the resizable to set
-     */
-    public void setResizable(boolean resizable)
-    {
-        nextResizable = resizable;
-    }
-
-    private void fixSize()
-    {
-        Dimension dim = owner.getContentPane().getSize();
-        this.setBounds(0, 0, dim.width, dim.height);
-    }
-    private boolean lastResizable;
-    private boolean nextResizable;
-    private Component lastComponent;
+    private Window parentWindow;
+    private Component lastFocusOwner;
+    private final Toolkit toolkit;
 }
