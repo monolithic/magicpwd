@@ -19,17 +19,25 @@ package com.magicpwd.x.docs;
 import com.magicpwd.__a.ADialog;
 import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IDocsViewer;
+import com.magicpwd._comn.S1S1;
+import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Bean;
+import com.magicpwd._util.Char;
+import com.magicpwd._util.Desk;
+import com.magicpwd._util.File;
+import com.magicpwd._util.Http;
 import com.magicpwd._util.Lang;
+import com.magicpwd._util.Logs;
 
 /**
  * 源码查看
  * @author Amon
  */
-public class SrcViewer extends ADialog implements IDocsViewer
+public class SrcViewer extends ADialog implements IDocsViewer, Runnable
 {
 
     private AFrame formPtn;
+    private java.io.File srcFile;
 
     public SrcViewer(AFrame formPtn)
     {
@@ -39,6 +47,61 @@ public class SrcViewer extends ADialog implements IDocsViewer
 
     public void init()
     {
+    }
+
+    @Override
+    public void show(java.io.File file)
+    {
+        this.srcFile = file;
+        initView();
+        initLang();
+        initData();
+        new Thread(this).start();
+        setVisible(true);
+    }
+
+    @Override
+    public void run()
+    {
+        String src = null;
+        try
+        {
+            src = File.readText(srcFile);
+            if (Char.isValidate(src))
+            {
+                java.net.URL url = new java.net.URL(ConsEnv.HOMEPAGE + "code/code0001.ashx");
+                java.util.HashMap<String, String> params = new java.util.HashMap<String, String>();
+                params.put("l", "SCTGDZGWYZEACCTZ");
+                params.put("i", "1");
+                params.put("n", ck_LineNbr.isSelected() ? "1" : "0");
+                params.put("u", ck_LinkUri.isSelected() ? "1" : "0");
+                params.put("t", cb_TagStyle.getSelectedItem() + "");
+                String tab = tf_TabCount.getText().trim();
+                if (java.util.regex.Pattern.matches("^\\d+$", tab))
+                {
+                    tab = "4";
+                }
+                params.put("s", tab);
+                params.put("o", "html");
+                params.put("c", src);
+                java.net.HttpURLConnection con = (java.net.HttpURLConnection) url.openConnection();
+                java.io.InputStream stream = Http.post(con, params);
+                ep_CodeView.setContentType(con.getContentType());
+                src = File.readText(stream);
+                stream.close();
+                con.disconnect();
+
+                java.io.File tmpFile = java.io.File.createTempFile("src_", ".html");
+                tmpFile.deleteOnExit();
+                File.saveText(tmpFile, src);
+                ep_CodeView.setPage(tmpFile.toURI().toURL());
+                ep_CodeView.setFont(ep_CodeView.getFont().deriveFont(20f));
+            }
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
     }
 
     public void initView()
@@ -86,10 +149,10 @@ public class SrcViewer extends ADialog implements IDocsViewer
         lb_LineNbr = new javax.swing.JLabel();
         ck_LineNbr = new javax.swing.JCheckBox();
         ck_LinkUri = new javax.swing.JCheckBox();
-        ck_TagStyle = new javax.swing.JComboBox();
+        cb_TagStyle = new javax.swing.JComboBox();
         lb_LinkUri = new javax.swing.JLabel();
         lb_TagStyle = new javax.swing.JLabel();
-        tf_TagCount = new javax.swing.JTextField();
+        tf_TabCount = new javax.swing.JTextField();
         lb_TabCount = new javax.swing.JLabel();
         tt_TabCount = new javax.swing.JLabel();
 
@@ -101,12 +164,12 @@ public class SrcViewer extends ADialog implements IDocsViewer
         hpg1.addComponent(lb_TagStyle, javax.swing.GroupLayout.Alignment.TRAILING);
         hpg1.addComponent(lb_TabCount, javax.swing.GroupLayout.Alignment.TRAILING);
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
-        hsg1.addComponent(tf_TagCount);
+        hsg1.addComponent(tf_TabCount);
         hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg1.addComponent(tt_TabCount);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg2.addGroup(hsg1);
-        hpg2.addComponent(ck_TagStyle);
+        hpg2.addComponent(cb_TagStyle);
         hpg2.addComponent(ck_LinkUri);
         hpg2.addComponent(ck_LineNbr);
         javax.swing.GroupLayout.SequentialGroup hsg2 = layout.createSequentialGroup();
@@ -117,8 +180,8 @@ public class SrcViewer extends ADialog implements IDocsViewer
 
         javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(lb_LineNbr).addComponent(ck_LineNbr);
         javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(ck_LinkUri).addComponent(lb_LinkUri);
-        javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(ck_TagStyle).addComponent(lb_TagStyle);
-        javax.swing.GroupLayout.ParallelGroup vpg4 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(tf_TagCount).addComponent(lb_TabCount).addComponent(tt_TabCount);
+        javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(cb_TagStyle).addComponent(lb_TagStyle);
+        javax.swing.GroupLayout.ParallelGroup vpg4 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE).addComponent(tf_TabCount).addComponent(lb_TabCount).addComponent(tt_TabCount);
         javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
         vsg1.addGroup(vpg1);
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -143,7 +206,7 @@ public class SrcViewer extends ADialog implements IDocsViewer
 
         lb_TagStyle.setText("格式：");
 
-        tf_TagCount.setColumns(2);
+        tf_TabCount.setColumns(2);
 
         lb_TabCount.setText("制表符：");
 
@@ -157,6 +220,27 @@ public class SrcViewer extends ADialog implements IDocsViewer
 
     public void initData()
     {
+        ep_CodeView.setEditable(false);
+        ep_CodeView.addHyperlinkListener(new javax.swing.event.HyperlinkListener()
+        {
+
+            @Override
+            public void hyperlinkUpdate(javax.swing.event.HyperlinkEvent e)
+            {
+                if (javax.swing.event.HyperlinkEvent.EventType.ACTIVATED == e.getEventType())
+                {
+                    Desk.browse(e.getURL());
+                }
+            }
+        });
+
+        cb_TagStyle.addItem(new S1S1("pre", "<pre>标签"));
+        cb_TagStyle.addItem(new S1S1("div", "<div>标签"));
+        cb_TagStyle.addItem(new S1S1("table", "<table>标签"));
+        cb_TagStyle.setSelectedIndex(0);
+
+        tf_TabCount.setText("4");
+
         bt_CodeView.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -171,15 +255,6 @@ public class SrcViewer extends ADialog implements IDocsViewer
     }
 
     @Override
-    public void show(java.io.File file)
-    {
-        initView();
-        initLang();
-        initData();
-        setVisible(true);
-    }
-
-    @Override
     protected boolean hideDialog()
     {
         setVisible(false);
@@ -189,6 +264,11 @@ public class SrcViewer extends ADialog implements IDocsViewer
 
     private void bt_CodeViewActionPerformed(java.awt.event.ActionEvent evt)
     {
+        if (java.util.regex.Pattern.matches("^\\d+$", tf_TabCount.getText().trim()))
+        {
+            tf_TabCount.setText("4");
+        }
+        new Thread(this).start();
     }
     private javax.swing.JButton bt_CodeView;
     private javax.swing.JEditorPane ep_CodeView;
@@ -196,11 +276,11 @@ public class SrcViewer extends ADialog implements IDocsViewer
     //选项
     private javax.swing.JCheckBox ck_LineNbr;
     private javax.swing.JCheckBox ck_LinkUri;
-    private javax.swing.JComboBox ck_TagStyle;
+    private javax.swing.JComboBox cb_TagStyle;
     private javax.swing.JLabel lb_LineNbr;
     private javax.swing.JLabel lb_LinkUri;
     private javax.swing.JLabel lb_TabCount;
     private javax.swing.JLabel lb_TagStyle;
-    private javax.swing.JTextField tf_TagCount;
+    private javax.swing.JTextField tf_TabCount;
     private javax.swing.JLabel tt_TabCount;
 }
