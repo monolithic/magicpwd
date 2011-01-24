@@ -16,8 +16,8 @@
  */
 package com.magicpwd._util;
 
+import com.magicpwd._cons.ConsEnv;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.util.HashMap;
 
@@ -31,34 +31,25 @@ public class Http
     public static InputStream post(HttpURLConnection con, HashMap<String, String> map) throws Exception
     {
         con.setDoOutput(true);// 打开写入属性
-        con.setDoInput(true);// 打开读取属性
         con.setRequestMethod("POST");// 设置提交方法
-        con.setConnectTimeout(50000);// 连接超时时间
-        con.setReadTimeout(50000);
-        con.connect();
+//        con.setConnectTimeout(50000);// 连接超时时间
+//        con.setReadTimeout(50000);
 
         StringBuilder buf = new StringBuilder();
         for (String key : map.keySet())
         {
-            buf.append('&').append(key).append('=').append(map.get(key));
+            buf.append('&').append(key).append('=').append(java.net.URLEncoder.encode(map.get(key), ConsEnv.FILE_ENCODING));
         }
+//        con.setRequestProperty("Content-length", Integer.toString(buf.length() - 1));
+//        con.setRequestProperty("Content-Type", "application/x-www- form-urlencoded");
+        con.connect();
 
-        OutputStream out = con.getOutputStream();
-        out.write(buf.replace(0, 1, "?").toString().getBytes());
+        java.io.OutputStream out = con.getOutputStream();
+        out.write(buf.substring(1).getBytes());
         out.flush();
         out.close();
 
+        con.getResponseCode();
         return con.getInputStream();
-        //读取post之后的返回值
-        //BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-        //String line = null;
-        //StringBuilder sb = new StringBuilder();
-        //while ((line = in.readLine()) != null)
-        //{
-        //    sb.append(line);
-        //}
-        //in.close();
-        //
-        //con.disconnect();//断开连接
     }
 }

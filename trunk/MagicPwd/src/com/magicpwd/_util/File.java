@@ -322,4 +322,87 @@ public class File
         }
         return "";
     }
+
+    public static String readText(String file) throws Exception
+    {
+        return readText(new java.io.File(file));
+    }
+
+    public static String readText(java.io.File file) throws Exception
+    {
+        if (file == null || !file.exists() || !file.isFile() || !file.canRead())
+        {
+            return null;
+        }
+        return readText(new java.io.FileInputStream(file));
+    }
+
+    public static String readText(java.io.InputStream stream) throws Exception
+    {
+        java.io.BufferedReader reader = null;
+        try
+        {
+            reader = new java.io.BufferedReader(new java.io.InputStreamReader(stream));
+            StringBuilder buf = new StringBuilder();
+            char[] arr = new char[2048];
+            int len = reader.read(arr, 0, arr.length);
+            while (len >= 0)
+            {
+                buf.append(arr, 0, len);
+                len = reader.read(arr, 0, arr.length);
+            }
+            reader.close();
+            return buf.toString();
+        }
+        finally
+        {
+            Bean.closeReader(reader);
+        }
+    }
+
+    public static boolean saveText(String path, String text) throws Exception
+    {
+        if (!Char.isValidate(path))
+        {
+            return false;
+        }
+        return saveText(new java.io.File(path), text);
+    }
+
+    public static boolean saveText(java.io.File file, String text) throws Exception
+    {
+        if (file == null)
+        {
+            return false;
+        }
+        if (!file.exists())
+        {
+            java.io.File path = file.getParentFile();
+            if (!path.exists())
+            {
+                path.mkdirs();
+            }
+            file.createNewFile();
+        }
+        if (!file.isFile() || !file.canWrite())
+        {
+            return false;
+        }
+        return saveText(new java.io.FileOutputStream(file), text);
+    }
+
+    public static boolean saveText(java.io.OutputStream stream, String text) throws Exception
+    {
+        java.io.BufferedWriter writer = null;
+        try
+        {
+            writer = new java.io.BufferedWriter(new java.io.OutputStreamWriter(stream));
+            writer.write(text);
+            return true;
+        }
+        finally
+        {
+            Bean.closeWriter(writer);
+        }
+    }
 }

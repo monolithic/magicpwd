@@ -161,6 +161,30 @@ public class Bean
         }
     }
 
+    public static void closeWriter(java.io.Writer writer)
+    {
+        if (writer != null)
+        {
+            try
+            {
+                writer.flush();
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+
+            try
+            {
+                writer.close();
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+        }
+    }
+
     public static void closeStream(java.io.InputStream stream)
     {
         if (stream != null)
