@@ -71,7 +71,12 @@ public class SrcViewer extends ADialog implements IDocsViewer, Runnable
             {
                 java.net.URL url = new java.net.URL(ConsEnv.HOMEPAGE + "code/code0001.ashx");
                 java.util.HashMap<String, String> params = new java.util.HashMap<String, String>();
-                params.put("l", "SCTGDZGWYZEACCTZ");
+                String ext = File.getExtension(srcFile.getName());
+                if (Char.isValidate(ext) && ext.charAt(0) == '.')
+                {
+                    ext = ext.substring(1);
+                }
+                params.put("l", ext);
                 params.put("i", "1");
                 params.put("n", ck_LineNbr.isSelected() ? "1" : "0");
                 params.put("u", ck_LinkUri.isSelected() ? "1" : "0");
