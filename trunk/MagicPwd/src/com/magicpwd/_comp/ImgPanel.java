@@ -167,7 +167,7 @@ public class ImgPanel extends java.awt.Canvas
             paint = Color.white;
         }
 
-        dstImage = new BufferedImage(iw, ih, BufferedImage.TYPE_INT_ARGB);
+        dstImage = new BufferedImage(cw, ch, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = dstImage.createGraphics();
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);

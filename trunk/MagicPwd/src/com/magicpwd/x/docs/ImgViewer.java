@@ -79,29 +79,35 @@ public class ImgViewer extends ADialog implements IDocsViewer
         pl_Control.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 3, 0));
 
         bt_ClearBtn = new IcoLabel();
-        bt_ClearBtn.setIcon(formPtn.readFavIcon("file-close", true));
+        bt_ClearBtn.setIcon(formPtn.readFavIcon("file-img-eraser", true));
+        bt_ClearBtn.setPaintBorder(true);
         bt_ClearBtn.setFocusable(false);
         pl_Control.add(bt_ClearBtn);
 
         bt_MLineBtn = new IcoLabel();
-        bt_MLineBtn.setIcon(formPtn.readFavIcon("file-close", true));
+        bt_MLineBtn.setIcon(formPtn.readFavIcon("file-img-cursor-def", true));
+        bt_MLineBtn.setSelectedIcon(formPtn.readFavIcon("file-img-cursor-sel", true));
+        bt_MLineBtn.setPaintBorder(true);
         bt_MLineBtn.setFocusable(false);
         pl_Control.add(bt_MLineBtn);
 
         bt_PLineBtn = new IcoLabel();
-        bt_PLineBtn.setIcon(formPtn.readFavIcon("file-close", true));
+        bt_PLineBtn.setIcon(formPtn.readFavIcon("file-img-shaped-def", true));
+        bt_PLineBtn.setSelectedIcon(formPtn.readFavIcon("file-img-shaped-sel", true));
+        bt_PLineBtn.setPaintBorder(true);
         bt_PLineBtn.setFocusable(false);
         pl_Control.add(bt_PLineBtn);
 
         bt_CloseBtn = new IcoLabel();
         bt_CloseBtn.setIcon(formPtn.readFavIcon("file-close", true));
+        bt_CloseBtn.setPaintBorder(true);
         bt_CloseBtn.setFocusable(false);
         pl_Control.add(bt_CloseBtn);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
-        hpg1.addComponent(ip_ImgView, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, image.getWidth(), Short.MAX_VALUE);
+        hpg1.addComponent(ip_ImgView, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, image.getWidth() < 120 ? 120 : image.getWidth(), Short.MAX_VALUE);
         hpg1.addComponent(pl_Control, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, image.getWidth(), Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
         hsg1.addContainerGap();
@@ -111,7 +117,7 @@ public class ImgViewer extends ADialog implements IDocsViewer
 
         javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
         vsg1.addContainerGap();
-        vsg1.addComponent(ip_ImgView, javax.swing.GroupLayout.PREFERRED_SIZE, image.getHeight(), Short.MAX_VALUE);
+        vsg1.addComponent(ip_ImgView, javax.swing.GroupLayout.PREFERRED_SIZE, image.getHeight() < 60 ? 60 : image.getHeight(), Short.MAX_VALUE);
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg1.addComponent(pl_Control, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         vsg1.addContainerGap();
@@ -147,7 +153,9 @@ public class ImgViewer extends ADialog implements IDocsViewer
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                ip_ImgView.setShowMLine(bt_MLineBtn.isSelected());
+                boolean b = !bt_MLineBtn.isSelected();
+                bt_MLineBtn.setSelected(b);
+                ip_ImgView.setShowMLine(b);
             }
         });
         bt_MLineBtn.setSelected(true);
@@ -159,7 +167,9 @@ public class ImgViewer extends ADialog implements IDocsViewer
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                ip_ImgView.setShowPLine(bt_PLineBtn.isSelected());
+                boolean b = !bt_PLineBtn.isSelected();
+                bt_PLineBtn.setSelected(b);
+                ip_ImgView.setShowPLine(b);
             }
         });
         bt_PLineBtn.setSelected(true);
