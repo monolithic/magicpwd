@@ -301,6 +301,12 @@
             <item type="checkbox" id="data-optional" text="$P30F7C16" text-def="可选输入" command="optional"/>
         </menu>
     </submenu>
+    <!--文件查看菜单-->
+    <submenu id="file-preview">
+        <item type="normal" text="图像查看器" text-def="图像查看器" init="com.magicpwd.x.docs.ImgViewer:PNG,JPG,JPEG,JFIF,GIF,BMP" />
+        <item type="normal" text="源码查看器" text-def="源码查看器" init="com.magicpwd.x.docs.SrcViewer:JAVA,CS,JS,CSS" />
+        <item type="normal" text="文本查看器" text-def="文本查看器" init="com.magicpwd.x.docs.TxtViewer:TXT,RTF,TEXT,HTML,HTM,XML" />
+    </submenu>
     <strokes id="mwiz">
         <action id="exit-window" class="com.magicpwd.e.mwiz.ExitAction">
             <stroke key="^ Q" />
