@@ -142,6 +142,11 @@ date-options=options.png
 #######################################
 file-preview=file-preview.png
 file-append=file-upload.png
+file-img-eraser=file-img-eraser.png
+file-img-cursor-def=file-img-cursor-def.png
+file-img-cursor-sel=file-img-cursor-sel.png
+file-img-shaped-def=file-img-shaped-def.png
+file-img-shaped-sel=file-img-shaped-sel.png
 
 #######################################
 # 数值图标
