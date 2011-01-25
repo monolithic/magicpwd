@@ -1,0 +1,5 @@
+<magicpwd>
+    <look group="Office" type="user">
+        <item text="Alloy" tips="Alloy" class="com.incors.plaf.alloy.AlloyLookAndFeel" decorated="false" />
+    </look>
+</magicpwd>
