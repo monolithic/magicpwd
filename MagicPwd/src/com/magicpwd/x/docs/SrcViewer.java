@@ -145,6 +145,7 @@ public class SrcViewer extends ADialog implements IDocsViewer, Runnable
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(vsg2));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+//        setAlwaysOnTop(true);
     }
 
     private void initOptView()
@@ -201,6 +202,8 @@ public class SrcViewer extends ADialog implements IDocsViewer, Runnable
 
     public void initLang()
     {
+        this.setTitle("源码预览");
+
         lb_LineNbr.setText("行号：");
 
         ck_LineNbr.setText("显示行号");

@@ -87,6 +87,7 @@ public class MailDlg extends ADialog
     public void initLang()
     {
         Lang.setWText(bt_Apply, null, "打开(@O)");
+        bt_Apply.setEnabled(false);
         Lang.setWText(bt_Abort, null, "取消(@C)");
     }
 
