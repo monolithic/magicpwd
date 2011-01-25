@@ -30,6 +30,7 @@ import javax.swing.KeyStroke;
 public class IcoLabel extends JLabel
 {
 
+    private boolean paintBorder;
     private boolean selected;
     private String actionCommand;
 
@@ -106,30 +107,50 @@ public class IcoLabel extends JLabel
     public void setSelected(boolean selected)
     {
         this.selected = selected;
-        if (selIcon != null)
-        {
-            if (selected)
-            {
-                setIcon(selIcon);
-            }
-            else
-            {
-                setIcon(defIcon);
-            }
-        }
+        updateStatus();
     }
 
     @Override
     public void setIcon(Icon icon)
     {
         this.defIcon = icon;
-        super.setIcon(icon);
+        updateStatus();
     }
 
     public void setSelectedIcon(Icon icon)
     {
         selIcon = icon;
     }
+
+    private void updateStatus()
+    {
+        super.setIcon(selected && selIcon != null ? selIcon : defIcon);
+        this.setBorder(selected && paintBorder ? lowerBorder : emptyBorder);
+    }
+
+    /**
+     * @return the paintBorder
+     */
+    public boolean isPaintBorder()
+    {
+        return paintBorder;
+    }
+
+    /**
+     * @param paintBorder the paintBorder to set
+     */
+    public void setPaintBorder(boolean paintBorder)
+    {
+        this.paintBorder = paintBorder;
+        if (emptyBorder == null)
+        {
+            emptyBorder = javax.swing.BorderFactory.createEmptyBorder();
+//            lowerBorder = javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createLineBorder(java.awt.Color.lightGray), javax.swing.BorderFactory.createLineBorder(java.awt.Color.orange));
+            lowerBorder = javax.swing.BorderFactory.createLineBorder(java.awt.Color.lightGray);
+        }
+    }
     private Icon defIcon;
     private Icon selIcon;
+    private static javax.swing.border.Border emptyBorder;
+    private static javax.swing.border.Border lowerBorder;
 }
