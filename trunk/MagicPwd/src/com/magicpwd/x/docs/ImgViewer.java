@@ -124,13 +124,17 @@ public class ImgViewer extends ADialog implements IDocsViewer
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vsg1));
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        setAlwaysOnTop(true);
+//        setAlwaysOnTop(true);
     }
 
     public void initLang()
     {
-        this.setTitle("图片预览");
+        this.setTitle("图像预览");
 
+        Bean.setTips(bt_ClearBtn, "清楚标记线");
+        Bean.setTips(bt_MLineBtn, "启用或停用鼠标位置线");
+        Bean.setTips(bt_PLineBtn, "启用或停用用户标记线");
+        Bean.setTips(bt_CloseBtn, "关闭窗口");
 //        Bean.setText(null, null);
 
         pack();

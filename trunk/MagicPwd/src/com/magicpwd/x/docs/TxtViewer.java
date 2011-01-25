@@ -19,6 +19,9 @@ package com.magicpwd.x.docs;
 import com.magicpwd.__a.ADialog;
 import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IDocsViewer;
+import com.magicpwd._util.Bean;
+import com.magicpwd._util.File;
+import com.magicpwd._util.Logs;
 
 /**
  *
@@ -27,14 +30,33 @@ import com.magicpwd.__i.IDocsViewer;
 public class TxtViewer extends ADialog implements IDocsViewer
 {
 
+    private AFrame formPtn;
+
     public TxtViewer(AFrame formPtn)
     {
         super(formPtn, true);
+        this.formPtn = formPtn;
     }
 
     @Override
     public void show(java.io.File file)
     {
+        initView();
+        initLang();
+        initData();
+        String ext = File.getExtension(file.getName());
+        tp_TextArea.setContentType("text/" + ("rtf".equalsIgnoreCase(ext) ? "rtf" : "plain"));
+        try
+        {
+            tp_TextArea.setPage(file.toURI().toURL());
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            tp_TextArea.setContentType("text/plain");
+            tp_TextArea.setText(exp.getLocalizedMessage());
+        }
+        setVisible(true);
     }
 
     @Override
@@ -44,4 +66,46 @@ public class TxtViewer extends ADialog implements IDocsViewer
         dispose();
         return true;
     }
+
+    public void initView()
+    {
+        sp_TextArea = new javax.swing.JScrollPane();
+        tp_TextArea = new javax.swing.JEditorPane();
+
+        sp_TextArea.setViewportView(tp_TextArea);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
+        hsg.addContainerGap();
+        hsg.addComponent(sp_TextArea, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE);
+        hsg.addContainerGap();
+        layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(hsg));
+
+        javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
+        vsg.addContainerGap();
+        vsg.addComponent(sp_TextArea, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE);
+        vsg.addContainerGap();
+        layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(vsg));
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+//        setAlwaysOnTop(true);
+    }
+
+    public void initLang()
+    {
+        this.setTitle("文本预览");
+
+        pack();
+        Bean.centerForm(this, formPtn);
+    }
+
+    public void initData()
+    {
+        tp_TextArea.setEditable(false);
+
+        this.processEscape();
+    }
+    private javax.swing.JScrollPane sp_TextArea;
+    private javax.swing.JEditorPane tp_TextArea;
 }

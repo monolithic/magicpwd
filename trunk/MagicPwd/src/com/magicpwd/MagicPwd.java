@@ -17,7 +17,6 @@
 package com.magicpwd;
 
 import com.magicpwd.__a.AFrame;
-import com.magicpwd._comn.KFManager;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Jzip;
@@ -64,7 +63,7 @@ public class MagicPwd
         System.setProperty("alloy.licenseCode", "X#aa@aa.com#18higyv#a0zqu8");
         System.setProperty("alloy.theme", "glass");
 
-        java.awt.KeyboardFocusManager.setCurrentKeyboardFocusManager(new KFManager());
+//        java.awt.KeyboardFocusManager.setCurrentKeyboardFocusManager(new KFManager());
 
         // 数据完整性处理
         zipData();
