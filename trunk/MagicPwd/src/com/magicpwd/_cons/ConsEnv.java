@@ -26,11 +26,11 @@ public interface ConsEnv
     /**
      * 软件信息：当前版本
      */
-    String VERSIONS = "V3.5.4.6";
+    String VERSIONS = "V3.5.5.7";
     /**
      * 软件信息：构建日期
      */
-    String BUILDER = "2011-01-12";
+    String BUILDER = "2011-01-28";
     /**
      * 软件信息：软件代码
      */
