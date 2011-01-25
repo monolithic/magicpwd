@@ -131,6 +131,8 @@ public class ImgViewer extends ADialog implements IDocsViewer
     {
         this.setTitle("图片预览");
 
+//        Bean.setText(null, null);
+
         pack();
         Bean.centerForm(this, formPtn);
     }

@@ -126,6 +126,7 @@ link-open=53
 # 邮件图标
 #######################################
 mail-receive=54
+mail-send=54
 mail-attachment=55
 mail-unread=56
 mail-readed=57
@@ -141,6 +142,11 @@ date-options=52
 #######################################
 file-preview=59
 file-append=60
+file-img-eraser=70
+file-img-cursor-def=71
+file-img-cursor-sel=72
+file-img-shaped-def=73
+file-img-shaped-sel=74
 
 #######################################
 # 数值图标
