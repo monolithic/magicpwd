@@ -59,9 +59,9 @@ public class MagicPwd
             }
         }
 
-        setFont(new java.awt.Font("宋体", 0, 12));
-        System.setProperty("alloy.licenseCode", "X#aa@aa.com#18higyv#a0zqu8");
-        System.setProperty("alloy.theme", "glass");
+//        setFont(new java.awt.Font("宋体", 0, 12));
+//        System.setProperty("alloy.licenseCode", "X#aa@aa.com#18higyv#a0zqu8");
+//        System.setProperty("alloy.theme", "glass");
 
 //        java.awt.KeyboardFocusManager.setCurrentKeyboardFocusManager(new KFManager());
 
