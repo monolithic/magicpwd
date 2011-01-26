@@ -21,6 +21,8 @@ import com.magicpwd._util.Char;
 import com.magicpwd._bean.mail.Connect;
 import com.magicpwd._comn.S1S1;
 import com.magicpwd._cons.mail.MailEnv;
+import com.sun.mail.imap.IMAPFolder;
+import com.sun.mail.pop3.POP3Folder;
 import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.Multipart;
@@ -47,7 +49,7 @@ public class Reader extends Mailer
         attachmentPath = ConsEnv.DIR_MAIL;
     }
 
-    public boolean read(Message message) throws Exception
+    public boolean read(Folder folder, Message message) throws Exception
     {
         if (message == null)
         {
@@ -71,14 +73,23 @@ public class Reader extends Mailer
             }
         }
 
-        messageId = getMessageId(message);
+        messageId = getMessageId(folder, message);
         getConnect().setMailReaded(messageId, getConnect().isMailExists(messageId));
 
         return true;
     }
 
-    private String getMessageId(Message message) throws Exception
+    private String getMessageId(Folder folder, Message message) throws Exception
     {
+        if (folder instanceof POP3Folder)
+        {
+            return ((POP3Folder) folder).getUID(message);
+        }
+        if (folder instanceof IMAPFolder)
+        {
+            return Long.toString(((IMAPFolder) folder).getUID(message));
+        }
+
         String msgId = null;
         if (message instanceof MimeMessage)
         {
@@ -231,7 +242,7 @@ public class Reader extends Mailer
             getConnect().loadMailInfo();
             for (Message mesg : messages)
             {
-                mesgId = getMessageId(mesg);
+                mesgId = getMessageId(folder, mesg);
                 if (getConnect().isMailExists(mesgId))
                 {
                     continue;

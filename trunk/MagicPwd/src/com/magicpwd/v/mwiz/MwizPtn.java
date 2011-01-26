@@ -399,7 +399,7 @@ public class MwizPtn extends AFrame
         }.start();
     }
 
-    private void readMailList(Connect connect)
+    private void readMailList(final Connect connect)
     {
         java.util.List<S1S1> list = null;
 
@@ -427,6 +427,15 @@ public class MwizPtn extends AFrame
         mailDlg.initView();
         mailDlg.initLang();
         mailDlg.initData();
+        mailDlg.setBackCall(new IBackCall<String>()
+        {
+
+            @Override
+            public boolean callBack(String options, String object)
+            {
+                return connect.browseMailOnline();
+            }
+        });
         mailDlg.showData(list);
 
         hideProgress();

@@ -18,6 +18,7 @@ package com.magicpwd._bean.mail;
 
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._util.Desk;
 import com.magicpwd._util.Logs;
 import com.magicpwd.m.UserMdl;
 import java.security.Security;
@@ -32,7 +33,7 @@ import javax.mail.URLName;
  * @author Amon
  * 
  */
-public class Connect
+public final class Connect
 {
 
     private String mail;
@@ -459,6 +460,16 @@ public class Connect
             return true;
         }
         return false;
+    }
+
+    public boolean browseMailOnline()
+    {
+        java.util.Calendar cal = java.util.Calendar.getInstance();
+        String t1 = Long.toString(cal.getTimeInMillis());
+        cal.add(java.util.Calendar.SECOND, 5);
+        String t2 = Long.toString(cal.getTimeInMillis());
+        String buf = getMailCfg().getProperty(mail.substring(mail.indexOf('@') + 1) + ".http");
+        return Desk.browse(buf.replace("{u}", username).replace("{p}", password).replace("{t1}", t1).replace("{t2}", t2));
     }
 
     public static java.util.Properties getMailCfg()

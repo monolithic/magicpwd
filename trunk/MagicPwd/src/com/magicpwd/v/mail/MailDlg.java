@@ -18,6 +18,7 @@ package com.magicpwd.v.mail;
 
 import com.magicpwd.__a.ADialog;
 import com.magicpwd.__a.AFrame;
+import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.S1S1;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
@@ -37,6 +38,7 @@ public class MailDlg extends ADialog
 {
 
     private AFrame formPtn;
+    private IBackCall<String> backCall;
     private javax.swing.DefaultListModel lm_MailList;
 
     public MailDlg(AFrame formPtn)
@@ -86,8 +88,10 @@ public class MailDlg extends ADialog
 
     public void initLang()
     {
+        this.setTitle("邮件列表");
+
         Lang.setWText(bt_Apply, null, "打开(@O)");
-        bt_Apply.setEnabled(false);
+
         Lang.setWText(bt_Abort, null, "取消(@C)");
     }
 
@@ -146,8 +150,30 @@ public class MailDlg extends ADialog
 
     private void bt_ApplyActionPerformed(java.awt.event.ActionEvent evt)
     {
+        if (backCall != null)
+        {
+            backCall.callBack(IBackCall.OPTIONS_APPLY, "");
+        }
+        this.setVisible(false);
+        this.dispose();
     }
     private javax.swing.JList ls_MailList;
     private javax.swing.JButton bt_Apply;
     private javax.swing.JButton bt_Abort;
+
+    /**
+     * @return the backCall
+     */
+    public IBackCall<String> getBackCall()
+    {
+        return backCall;
+    }
+
+    /**
+     * @param backCall the backCall to set
+     */
+    public void setBackCall(IBackCall<String> backCall)
+    {
+        this.backCall = backCall;
+    }
 }
