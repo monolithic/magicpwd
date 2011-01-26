@@ -157,7 +157,7 @@ public interface ConsCfg
      */
     String CFG_PWDS_SIZE = CFG_PWDS + ".size";
     /**
-     * 口令选项：生成口令时系统默认是否可以生出重复字符
+     * 口令选项：生成口令时系统默认是否可以生现重复字符
      */
     String CFG_PWDS_LOOP = CFG_PWDS + ".loop";
     /**

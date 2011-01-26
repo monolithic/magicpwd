@@ -379,7 +379,7 @@ public class MailPtn extends javax.swing.JFrame implements Runnable
                 {
                     showNotice("正处理第" + i + "封邮件……");
                     mail = new Reader(connect);
-                    mail.read(msgs[i - 1]);
+                    mail.read(folder, msgs[i - 1]);
                     tableMode.append(mail);
                 }
 

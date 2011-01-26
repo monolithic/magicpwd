@@ -741,7 +741,7 @@ public abstract class AFrame extends javax.swing.JFrame
                 }
             }
 
-            if (message != null && reader.read(message))
+            if (message != null && reader.read(folder, message))
             {
                 for (S1S1 item : reader.getAttachmentList())
                 {
