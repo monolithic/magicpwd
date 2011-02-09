@@ -133,11 +133,7 @@ public interface ConsCfg
      */
     String CFG_SKIN = CFG_PRE + ".skin";
     String CFG_SKIN_FEEL = CFG_SKIN + ".feel";
-    String CFG_SKIN_FEEL_FILE = CFG_SKIN_FEEL + ".file";
-    String CFG_SKIN_FEEL_NAME = CFG_SKIN_FEEL + ".name";
     String CFG_SKIN_LOOK = CFG_SKIN + ".look";//Look显示名称
-    String CFG_SKIN_LOOK_FILE = CFG_SKIN_LOOK + ".file";//Look类名称
-    String CFG_SKIN_LOOK_NAME = CFG_SKIN_LOOK + ".name";//Look类名称
     /**
      * 系统托盘显示方式
      */

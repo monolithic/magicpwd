@@ -539,7 +539,7 @@ public class MenuPtn
         }
 
         javax.swing.JCheckBoxMenuItem item;
-        String lookName = userMdl.getCfg(ConsCfg.CFG_SKIN_LOOK_NAME, ConsCfg.DEF_SKIN_SYS);
+        String lookName = userMdl.getCfg(ConsCfg.CFG_SKIN_LOOK, ConsCfg.DEF_SKIN_SYS);
         LookAction action = new LookAction();
         action.setMainPtn(trayPtn.getMpwdPtn());
         WButtonGroup group = new WButtonGroup();
@@ -606,7 +606,6 @@ public class MenuPtn
                     {
                         continue;
                     }
-                    String type = look.attributeValue("type");
                     if (items.size() == 1)
                     {
                         Element element = look.element("item");
@@ -615,9 +614,9 @@ public class MenuPtn
                         item.addActionListener(action);
                         Bean.setText(item, getLang(element.attributeValue("text")));
                         Bean.setTips(item, getLang(element.attributeValue("tips")));
-                        String clazz = element.attributeValue("class");
-                        item.setSelected(lookName.equals(clazz));
-                        item.setActionCommand(type + ":" + dir.getName() + ',' + clazz + ',' + element.attributeValue("decorated"));
+                        String id = dir.getName() + '.' + element.attributeValue("id");
+                        item.setSelected(lookName.equals(id));
+                        item.setActionCommand(id);
                         lookMenu.add(item);
                         group.add(item.getActionCommand(), item);
                     }
@@ -644,9 +643,9 @@ public class MenuPtn
                             item.addActionListener(action);
                             Bean.setText(item, getLang(element.attributeValue("text")));
                             Bean.setTips(item, getLang(element.attributeValue("tips")));
-                            String clazz = element.attributeValue("class");
-                            item.setSelected(lookName.equals(clazz));
-                            item.setActionCommand(type + ":" + dir.getName() + ',' + clazz + ',' + element.attributeValue("decorated"));
+                            String id = dir.getName() + '.' + element.attributeValue("id");
+                            item.setSelected(lookName.equals(id));
+                            item.setActionCommand(id);
                             subMenu.add(item);
                             group.add(item.getActionCommand(), item);
                         }

@@ -1,5 +1,5 @@
 <magicpwd>
-    <look group="Pgs" type="user">
-        <item text="Pgs" tips="Pgs" class="com.pagosoft.plaf.PgsLookAndFeel" decorated="true" />
+    <look group="Pgs">
+        <item id="Pgs" text="Pgs" tips="Pgs" type="user" class="com.pagosoft.plaf.PgsLookAndFeel" decorated="false" />
     </look>
 </magicpwd>

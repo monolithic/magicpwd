@@ -345,7 +345,14 @@ public class Bean
         {
             return;
         }
-        java.io.File file = new java.io.File(ConsEnv.DIR_SKIN + '/' + ConsEnv.DIR_LOOK + '/' + look + ConsEnv.SKIN_LOOK_FILE);
+        int di = look.indexOf('.');
+        if (di < 1)
+        {
+            return;
+        }
+        String name = look.substring(di + 1);
+        look = look.substring(0, di);
+        java.io.File file = new java.io.File(ConsEnv.DIR_SKIN + '/' + ConsEnv.DIR_LOOK + '/' + look + '/' + ConsEnv.SKIN_LOOK_FILE);
         if (!file.exists() || !file.isFile() || !file.canRead())
         {
             return;
@@ -365,7 +372,7 @@ public class Bean
             {
                 return;
             }
-            Node node = root.selectSingleNode(Char.format("/magicpwd/look/item[@id='{0}']", ""));
+            Node node = root.selectSingleNode(Char.format("/magicpwd/look/item[@id='{0}']", name));
             if (node instanceof Element)
             {
                 item = (Element) node;
@@ -386,10 +393,10 @@ public class Bean
         javax.swing.JDialog.setDefaultLookAndFeelDecorated(deco);
 
         String type = item.attributeValue("type", "").trim();
-        String name = item.attributeValue("class", "").trim();
-        if (!Char.isValidate(name))
+        String clazz = item.attributeValue("class", "").trim();
+        if (!Char.isValidate(clazz))
         {
-            name = ConsCfg.DEF_SKIN_SYS;
+            clazz = ConsCfg.DEF_SKIN_SYS;
             type = "java";
         }
 
@@ -398,8 +405,7 @@ public class Bean
         if (list != null)
         {
             String key;
-            String fontFile;
-            String fontName;
+            String font;
             Element element;
             for (Object obj : list)
             {
@@ -413,11 +419,23 @@ public class Bean
                 {
                     continue;
                 }
-                fontFile = element.attributeValue("font-file");
-                fontName = element.attributeValue("font-name");
-                if (Char.isValidate(fontName))
+                font = element.attributeValue("font-name");
+                if (Char.isValidate(font))
                 {
-                    javax.swing.UIManager.put(key, new javax.swing.plaf.FontUIResource(fontName, getFontStyle(element.attributeValue("font-style"), java.awt.Font.PLAIN), getFontSize(element.attributeValue("font-size"), 12)));
+                    setFont(key, new java.awt.Font(font, getFontStyle(element.attributeValue("font-style"), java.awt.Font.PLAIN), getInt(element.attributeValue("font-size"), 12)));
+                    continue;
+                }
+                font = element.attributeValue("font-file");
+                if (Char.isValidate(font))
+                {
+                    try
+                    {
+                        setFont(key, java.awt.Font.createFont(java.awt.Font.TRUETYPE_FONT, new java.io.File(file, font)).deriveFont(getFontStyle(element.attributeValue("font-style"), java.awt.Font.PLAIN), getInt(element.attributeValue("font-size"), 12)));
+                    }
+                    catch (Exception exp)
+                    {
+                        Logs.exception(exp);
+                    }
                     continue;
                 }
             }
@@ -426,6 +444,7 @@ public class Bean
         if (list != null)
         {
             String key;
+            String color;
             Element element;
             for (Object obj : list)
             {
@@ -439,6 +458,13 @@ public class Bean
                 {
                     continue;
                 }
+                color = element.attributeValue("rgb");
+                if (Char.isValidate(color, 6))
+                {
+                    setColor(key, java.awt.Color.decode(color));
+                    continue;
+                }
+                setColor(key, new java.awt.Color(getInt(element.attributeValue("r"), 0), getInt(element.attributeValue("g"), 0), getInt(element.attributeValue("b"), 0), getInt(element.attributeValue("a"), 0)));
             }
         }
         list = item.selectNodes("property/string");
@@ -465,21 +491,21 @@ public class Bean
         if ("java".equals(type))
         {
             // 系统默认界面
-            if (ConsCfg.DEF_SKIN_DEF.equals(name))
+            if (ConsCfg.DEF_SKIN_DEF.equals(clazz))
             {
                 return;
             }
 
             // 操作系统界面
-            if (ConsCfg.DEF_SKIN_SYS.equalsIgnoreCase(name))
+            if (ConsCfg.DEF_SKIN_SYS.equalsIgnoreCase(clazz))
             {
-                name = javax.swing.UIManager.getSystemLookAndFeelClassName();
+                clazz = javax.swing.UIManager.getSystemLookAndFeelClassName();
             }
 
             // 使用界面
             try
             {
-                javax.swing.UIManager.setLookAndFeel(name);
+                javax.swing.UIManager.setLookAndFeel(clazz);
             }
             catch (Exception exp)
             {
@@ -527,7 +553,7 @@ public class Bean
             loadJar(jars);
 
             // 使用界面
-            javax.swing.UIManager.setLookAndFeel(name);
+            javax.swing.UIManager.setLookAndFeel(clazz);
         }
         catch (Exception exp)
         {
@@ -535,7 +561,7 @@ public class Bean
         }
     }
 
-    private static int getFontSize(String str, int def)
+    private static int getInt(String str, int def)
     {
         if (java.util.regex.Pattern.matches(str, "^\\d+$"))
         {
@@ -544,9 +570,67 @@ public class Bean
         return def;
     }
 
+    private static void setFont(String key, java.awt.Font font)
+    {
+        if (!"*".equals(key))
+        {
+            javax.swing.UIManager.put(key, font);
+            return;
+        }
+
+        java.util.Enumeration keys = javax.swing.UIManager.getDefaults().keys();
+        Object k;
+        Object v;
+        while (keys.hasMoreElements())
+        {
+            k = keys.nextElement();
+            v = javax.swing.UIManager.get(k);
+            if (v instanceof java.awt.Font)
+            {
+                javax.swing.UIManager.put(k, font);
+            }
+        }
+    }
+
+    private static void setColor(String key, java.awt.Color color)
+    {
+        if (!"*".equals(key))
+        {
+            javax.swing.UIManager.put(key, color);
+            return;
+        }
+
+        java.util.Enumeration keys = javax.swing.UIManager.getDefaults().keys();
+        Object k;
+        Object v;
+        while (keys.hasMoreElements())
+        {
+            k = keys.nextElement();
+            v = javax.swing.UIManager.get(k);
+            if (v instanceof java.awt.Color)
+            {
+                javax.swing.UIManager.put(k, color);
+            }
+        }
+    }
+
     private static int getFontStyle(String str, int def)
     {
-        return def;
+        if (!Char.isValidate(str))
+        {
+            return def;
+        }
+        str = ',' + str.toLowerCase() + ',';
+        int tmp = 0;
+        if (str.indexOf("bold") > -1)
+        {
+            tmp &= java.awt.Font.BOLD;
+        }
+        if (str.indexOf("italic") > -1)
+        {
+            tmp &= java.awt.Font.ITALIC;
+        }
+        return tmp;
     }
 
     public static void loadJar(java.io.File... files) throws Exception
