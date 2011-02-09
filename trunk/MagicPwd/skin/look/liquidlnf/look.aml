@@ -1,5 +1,5 @@
 <magicpwd>
-    <look group="Liquid" type="user">
-        <item text="Liquid" tips="Liquid" class="com.birosoft.liquid.LiquidLookAndFeel" decorated="true" />
+    <look group="Liquid">
+        <item id="Liquid" text="Liquid" tips="Liquid" type="user" class="com.birosoft.liquid.LiquidLookAndFeel" decorated="true" />
     </look>
 </magicpwd>

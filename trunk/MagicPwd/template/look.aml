@@ -1,6 +1,6 @@
 <magicpwd>
     <look group="">
-        <item id="" text="" tips="" type="java/user" class="" decorated="true/false" >
+        <item id="item1" text="" tips="" type="java/user" class="" decorated="true/false" >
             <resource>
                 <font for="" font-file="" font-name="" font-size="" font-style="" />
                 <color for="" rgb="" a="" r="" g="" b="" />
@@ -9,6 +9,6 @@
                 <string key="" value=""/>
             </property>
         </item>
-        <item text="" tips="" class="" decorated="true/false" />
+        <item id="item2" text="" tips="" class="" type="java/user" decorated="true/false" />
     </look>
 </magicpwd>

@@ -59,10 +59,6 @@ public class MagicPwd
             }
         }
 
-//        setFont(new java.awt.Font("宋体", 0, 12));
-//        System.setProperty("alloy.licenseCode", "X#aa@aa.com#18higyv#a0zqu8");
-//        System.setProperty("alloy.theme", "glass");
-
 //        java.awt.KeyboardFocusManager.setCurrentKeyboardFocusManager(new KFManager());
 
         // 数据完整性处理
@@ -110,22 +106,6 @@ public class MagicPwd
         {
             Logs.exception(exp);
             Lang.showMesg(null, null, exp.getLocalizedMessage());
-        }
-    }
-
-    private static void setFont(java.awt.Font font)
-    {
-        java.util.Enumeration keys = javax.swing.UIManager.getDefaults().keys();
-        Object k;
-        Object v;
-        while (keys.hasMoreElements())
-        {
-            k = keys.nextElement();
-            v = javax.swing.UIManager.get(k);
-            if (v instanceof javax.swing.plaf.FontUIResource)
-            {
-                javax.swing.UIManager.put(k, font);
-            }
         }
     }
 

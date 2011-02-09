@@ -17,7 +17,6 @@
 package com.magicpwd.e.mpwd.skin;
 
 import com.magicpwd._cons.ConsCfg;
-import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
@@ -43,39 +42,7 @@ public class LookAction extends AMpwdAction
             return;
         }
 
-        String type;
-        String look;
-        String name;
-        String deco;
-
-        if (ConsCfg.DEF_SKIN_DEF.equals(command))
-        {
-            type = "java";
-            look = ConsCfg.DEF_SKIN_DEF;
-            name = ConsCfg.DEF_SKIN_DEF;
-            deco = "false";
-        }
-        else if (ConsEnv.SKIN_LOOK_SYSTEM.equals(command))
-        {
-            type = "java";
-            look = ConsCfg.DEF_SKIN_SYS;
-            name = ConsCfg.DEF_SKIN_SYS;
-            deco = "true";
-        }
-        else
-        {
-            String[] arr = command.split("[:,]");
-            if (arr == null || arr.length != 4)
-            {
-                return;
-            }
-            type = arr[0];
-            look = arr[1];
-            name = arr[2];
-            deco = arr[3];
-        }
-        mpwdPtn.getUserMdl().setCfg(ConsCfg.CFG_SKIN_LOOK, look);
-        mpwdPtn.getUserMdl().setCfg(ConsCfg.CFG_SKIN_LOOK_NAME, name);
+        mpwdPtn.getUserMdl().setCfg(ConsCfg.CFG_SKIN_LOOK, command);
 
         Lang.showMesg(mpwdPtn, LangRes.P30FAA1B, "新外观将在重启后生效！\n注意：一些外观可能造成性能问题，如果您觉得所选择的外观使系统运行变慢，\n　　　请选择使用“默认”或“系统”外观！");
     }
