@@ -86,7 +86,7 @@ public class MagicPwd
                     Lang.loadLang(userMdl);
 
                     // 扩展皮肤加载
-                    Bean.loadLnF(userMdl);
+                    Bean.loadLook(userMdl);
 
                     trayPtn.showViewPtn(ConsEnv.APP_MODE_MPWD);
                 }

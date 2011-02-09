@@ -37,7 +37,7 @@ public class Menu extends javax.swing.AbstractAction
         userMdl = new UserMdl();
         userMdl.loadCfg();
 
-        Bean.loadLnF(userMdl);
+        Bean.loadLook(userMdl);
         Lang.loadLang(userMdl);
 
         MenuPtn ptn = new MenuPtn(null, userMdl);

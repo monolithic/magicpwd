@@ -1,9 +1,9 @@
 <magicpwd>
-    <look group="" type="java/user">
-        <item text="" tips="" class="" decorated="true/false" >
+    <look group="">
+        <item id="" text="" tips="" type="java/user" class="" decorated="true/false" >
             <resource>
-                <font for="" font-name="" font-size="" font-style="" />
-                <color for="" a="" r="" g="" b="" />
+                <font for="" font-file="" font-name="" font-size="" font-style="" />
+                <color for="" rgb="" a="" r="" g="" b="" />
             </resource>
             <property>
                 <string key="" value=""/>
