@@ -38,7 +38,6 @@ public class LabelCR extends javax.swing.JLabel implements javax.swing.table.Tab
     public LabelCR(MwizPtn normPtn)
     {
         this.normPtn = normPtn;
-        this.setOpaque(true);
     }
 
     @Override
