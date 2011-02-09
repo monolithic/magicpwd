@@ -22,6 +22,10 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
 import java.awt.Dimension;
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.Node;
+import org.dom4j.io.SAXReader;
 
 /**
  *
@@ -326,23 +330,136 @@ public class Bean
         return bi;
     }
 
-    public static void loadLnF(UserMdl userMdl)
+    public static void loadLook(UserMdl userMdl)
     {
         if (UserMdl.getRunMode() == ConsEnv.RUN_MODE_CMD)
         {
             return;
         }
 
-        boolean deco = ConsCfg.DEF_TRUE.equalsIgnoreCase(userMdl.getCfg(ConsCfg.CFG_SKIN_DECO, ConsCfg.DEF_FALSE));
+//        String feel = userMdl.getCfg(ConsCfg.CFG_SKIN_FEEL);
+
+        // 查找对应的文件
+        String look = userMdl.getCfg(ConsCfg.CFG_SKIN_LOOK, "");
+        if (!Char.isValidate(look))
+        {
+            return;
+        }
+        java.io.File file = new java.io.File(ConsEnv.DIR_SKIN + '/' + ConsEnv.DIR_LOOK + '/' + look + ConsEnv.SKIN_LOOK_FILE);
+        if (!file.exists() || !file.isFile() || !file.canRead())
+        {
+            return;
+        }
+
+        // 查找对应的ITEM
+        Element item = null;
+        try
+        {
+            Document doc = new SAXReader().read(new java.io.FileInputStream(file));
+            if (doc == null)
+            {
+                return;
+            }
+            Element root = doc.getRootElement();
+            if (root == null)
+            {
+                return;
+            }
+            Node node = root.selectSingleNode(Char.format("/magicpwd/look/item[@id='{0}']", ""));
+            if (node instanceof Element)
+            {
+                item = (Element) node;
+            }
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+        if (item == null)
+        {
+            return;
+        }
+
+        // 窗口装饰
+        boolean deco = ConsCfg.DEF_TRUE.equalsIgnoreCase(item.attributeValue("decorated", "").trim());
         javax.swing.JFrame.setDefaultLookAndFeelDecorated(deco);
         javax.swing.JDialog.setDefaultLookAndFeelDecorated(deco);
 
-        String type = userMdl.getCfg(ConsCfg.CFG_SKIN_TYPE, "user");
-        String name = userMdl.getCfg(ConsCfg.CFG_SKIN_NAME, "").trim();
+        String type = item.attributeValue("type", "").trim();
+        String name = item.attributeValue("class", "").trim();
         if (!Char.isValidate(name))
         {
             name = ConsCfg.DEF_SKIN_SYS;
             type = "java";
+        }
+
+        // 附加属性
+        java.util.List list = item.selectNodes("resource/font");
+        if (list != null)
+        {
+            String key;
+            String fontFile;
+            String fontName;
+            Element element;
+            for (Object obj : list)
+            {
+                if (!(obj instanceof Element))
+                {
+                    continue;
+                }
+                element = (Element) obj;
+                key = element.attributeValue("key");
+                if (!Char.isValidate(key))
+                {
+                    continue;
+                }
+                fontFile = element.attributeValue("font-file");
+                fontName = element.attributeValue("font-name");
+                if (Char.isValidate(fontName))
+                {
+                    javax.swing.UIManager.put(key, new javax.swing.plaf.FontUIResource(fontName, getFontStyle(element.attributeValue("font-style"), java.awt.Font.PLAIN), getFontSize(element.attributeValue("font-size"), 12)));
+                    continue;
+                }
+            }
+        }
+        list = item.selectNodes("resource/color");
+        if (list != null)
+        {
+            String key;
+            Element element;
+            for (Object obj : list)
+            {
+                if (!(obj instanceof Element))
+                {
+                    continue;
+                }
+                element = (Element) obj;
+                key = element.attributeValue("key");
+                if (!Char.isValidate(key))
+                {
+                    continue;
+                }
+            }
+        }
+        list = item.selectNodes("property/string");
+        if (list != null)
+        {
+            String key;
+            Element element;
+            for (Object obj : list)
+            {
+                if (!(obj instanceof Element))
+                {
+                    continue;
+                }
+                element = (Element) obj;
+                key = element.attributeValue("key");
+                if (!Char.isValidate(key))
+                {
+                    continue;
+                }
+                System.setProperty(key, element.attributeValue("value"));
+            }
         }
 
         if ("java".equals(type))
@@ -371,22 +488,9 @@ public class Bean
             return;
         }
 
-        String look = userMdl.getCfg(ConsCfg.CFG_SKIN_LOOK, "");
-        if (!Char.isValidate(look))
-        {
-            return;
-        }
-
         if ("synth".equals(type))
         {
             if (!Char.isValidate(look))
-            {
-                return;
-            }
-
-            // 判断目录是否存在
-            java.io.File file = new java.io.File("skin/look/" + look, name);
-            if (!file.exists() || !file.canRead() || !file.isDirectory())
             {
                 return;
             }
@@ -411,13 +515,7 @@ public class Bean
             return;
         }
 
-        java.io.File file = new java.io.File("skin/look", look);
-        if (!file.exists() || !file.canRead() || !file.isDirectory())
-        {
-            return;
-        }
-
-        java.io.File jars[] = file.listFiles(new AmonFF(".+\\.jar$", true));
+        java.io.File jars[] = file.getParentFile().listFiles(new AmonFF(".+\\.jar$", true));
         if (jars == null || jars.length < 1)
         {
             return;
@@ -435,6 +533,20 @@ public class Bean
         {
             Logs.exception(exp);
         }
+    }
+
+    private static int getFontSize(String str, int def)
+    {
+        if (java.util.regex.Pattern.matches(str, "^\\d+$"))
+        {
+            return Integer.parseInt(str);
+        }
+        return def;
+    }
+
+    private static int getFontStyle(String str, int def)
+    {
+        return def;
     }
 
     public static void loadJar(java.io.File... files) throws Exception

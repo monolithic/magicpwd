@@ -539,7 +539,7 @@ public class MenuPtn
         }
 
         javax.swing.JCheckBoxMenuItem item;
-        String lookName = userMdl.getCfg(ConsCfg.CFG_SKIN_NAME, ConsCfg.DEF_SKIN_SYS);
+        String lookName = userMdl.getCfg(ConsCfg.CFG_SKIN_LOOK_NAME, ConsCfg.DEF_SKIN_SYS);
         LookAction action = new LookAction();
         action.setMainPtn(trayPtn.getMpwdPtn());
         WButtonGroup group = new WButtonGroup();

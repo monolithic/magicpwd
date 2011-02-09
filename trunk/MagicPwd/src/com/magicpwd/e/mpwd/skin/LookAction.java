@@ -74,10 +74,8 @@ public class LookAction extends AMpwdAction
             name = arr[2];
             deco = arr[3];
         }
-        mpwdPtn.getUserMdl().setCfg(ConsCfg.CFG_SKIN_TYPE, type);
         mpwdPtn.getUserMdl().setCfg(ConsCfg.CFG_SKIN_LOOK, look);
-        mpwdPtn.getUserMdl().setCfg(ConsCfg.CFG_SKIN_NAME, name);
-        mpwdPtn.getUserMdl().setCfg(ConsCfg.CFG_SKIN_DECO, deco);
+        mpwdPtn.getUserMdl().setCfg(ConsCfg.CFG_SKIN_LOOK_NAME, name);
 
         Lang.showMesg(mpwdPtn, LangRes.P30FAA1B, "新外观将在重启后生效！\n注意：一些外观可能造成性能问题，如果您觉得所选择的外观使系统运行变慢，\n　　　请选择使用“默认”或“系统”外观！");
     }
