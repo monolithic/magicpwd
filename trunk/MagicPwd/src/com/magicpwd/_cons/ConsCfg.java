@@ -217,9 +217,9 @@ public interface ConsCfg
     /**
      * 默认风格：系统风格
      */
-    String DEF_SKIN_SYS = "system";
-    String DEF_SKIN_DEF = "default";
-    String DEF_FEEL_DEF = "default";
+    String DEF_SKIN_FEEL_DEF = "default";
+    String DEF_SKIN_LOOK_DEF = "default";
+    String DEF_SKIN_LOOK_SYS = "system";
     String DEF_TRAY = "icon";
     /**
      * 默认数据：剪贴板数据保留时长
