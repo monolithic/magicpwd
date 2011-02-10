@@ -697,7 +697,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
         boolean wasDecoratedByOS = !(getCurrForm().isUndecorated());
         try
         {
-            boolean isSystem = !com.magicpwd._util.Char.isValidate(lafClass) || ConsCfg.DEF_SKIN_SYS.equalsIgnoreCase(lafClass);
+            boolean isSystem = !com.magicpwd._util.Char.isValidate(lafClass) || ConsCfg.DEF_SKIN_LOOK_SYS.equalsIgnoreCase(lafClass);
             if (isSystem)
             {
                 lafClass = javax.swing.UIManager.getSystemLookAndFeelClassName();
@@ -729,7 +729,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
 
                 getCurrForm().setVisible(wasVisible);
             }
-            userMdl.setCfg(ConsCfg.CFG_SKIN_LOOK, isSystem ? ConsCfg.DEF_SKIN_SYS : lafClass);
+            userMdl.setCfg(ConsCfg.CFG_SKIN_LOOK, isSystem ? ConsCfg.DEF_SKIN_LOOK_SYS : lafClass);
         }
         catch (Exception exc)
         {

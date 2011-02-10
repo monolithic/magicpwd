@@ -4,8 +4,8 @@
  */
 package test.menu;
 
-import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
+import com.magicpwd._util.Skin;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.MenuPtn;
 import java.awt.BorderLayout;
@@ -37,7 +37,7 @@ public class Menu extends javax.swing.AbstractAction
         userMdl = new UserMdl();
         userMdl.loadCfg();
 
-        Bean.loadLook(userMdl);
+        Skin.loadLook(userMdl);
         Lang.loadLang(userMdl);
 
         MenuPtn ptn = new MenuPtn(null, userMdl);

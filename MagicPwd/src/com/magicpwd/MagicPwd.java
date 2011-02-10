@@ -22,6 +22,7 @@ import com.magicpwd._util.Bean;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
+import com.magicpwd._util.Skin;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
 import com.magicpwd.v.tray.TrayPtn;
@@ -82,7 +83,7 @@ public class MagicPwd
                     Lang.loadLang(userMdl);
 
                     // 扩展皮肤加载
-                    Bean.loadLook(userMdl);
+                    Skin.loadLook(userMdl);
 
                     trayPtn.showViewPtn(ConsEnv.APP_MODE_MPWD);
                 }

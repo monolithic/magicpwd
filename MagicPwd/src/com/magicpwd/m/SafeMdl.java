@@ -117,7 +117,7 @@ public abstract class SafeMdl
      */
     public String deCrypt(String text) throws Exception
     {
-        return new String(getDCipher().doFinal(Char.stringToBytes(text, UserMdl.safeKey.getMask())), ConsEnv.FILE_ENCODING);
+        return new String(getDCipher().doFinal(Char.toBytes(text, UserMdl.safeKey.getMask())), ConsEnv.FILE_ENCODING);
     }
 
     /**

@@ -196,12 +196,17 @@ public class Char
 
     public static boolean isValidateNegativeInteger(String t)
     {
-        return t != null ? Pattern.compile("^[-][123456789]+\\d*$", Pattern.CASE_INSENSITIVE).matcher(t).matches() : false;
+        return t != null ? Pattern.compile("^[-][123456789]\\d*$", Pattern.CASE_INSENSITIVE).matcher(t).matches() : false;
     }
 
     public static boolean isValidatePositiveInteger(String t)
     {
-        return t != null ? Pattern.compile("^[+]?[123456789]+\\d*$", Pattern.CASE_INSENSITIVE).matcher(t).matches() : false;
+        return isValidatePositiveInteger(t, true);
+    }
+
+    public static boolean isValidatePositiveInteger(String t, boolean s)
+    {
+        return t != null ? Pattern.compile(s ? "^[+]?[123456789]\\d*$" : "^[123456789]\\d*$", Pattern.CASE_INSENSITIVE).matcher(t).matches() : false;
     }
 
     public static boolean isValidatePositiveDecimal(String t)
@@ -287,9 +292,9 @@ public class Char
      * @param s
      * @return
      */
-    public static byte[] stringToBytes(String s, boolean bigCase)
+    public static byte[] toBytes(String s, boolean bigCase)
     {
-        return stringToBytes(s, bigCase ? ConsEnv.UPPER_NUMBER : ConsEnv.LOWER_NUMBER);
+        return toBytes(s, bigCase ? ConsEnv.UPPER_NUMBER : ConsEnv.LOWER_NUMBER);
     }
 
     /**
@@ -299,7 +304,7 @@ public class Char
      * @param c
      * @return
      */
-    public static byte[] stringToBytes(String s, char[] c)
+    public static byte[] toBytes(String s, char[] c)
     {
         char[] t = s.toCharArray();
         int i = 0, j = 0, k = t.length;
