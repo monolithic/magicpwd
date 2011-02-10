@@ -1,10 +1,9 @@
 <magicpwd>
-    <look group="Windows">
-        <item id="Windows" text="Windows" tips="Windows" type="java" class="com.sun.java.swing.plaf.windows.WindowsLookAndFeel" decorated="false">
+    <look group="SeaGlass">
+        <item id="SeaGlass" text="SeaGlass" tips="SeaGlass" type="user" class="com.seaglasslookandfeel.SeaGlassLookAndFeel" decorated="false">
             <resource>
                 <font for="*" font-name="宋体" font-size="12" font-style="plain" />
             </resource>
         </item>
-        <item id="WindowsClassic" text="Windows Classic" tips="Windows Classic" type="java" class="com.sun.java.swing.plaf.windows.WindowsClassicLookAndFeel" decorated="false" />
     </look>
 </magicpwd>
