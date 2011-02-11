@@ -30,7 +30,7 @@ import com.magicpwd._util.Bean;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public class LabelCR extends javax.swing.JLabel implements javax.swing.table.TableCellRenderer
+public class LabelCR extends javax.swing.JPanel implements javax.swing.table.TableCellRenderer
 {
 
     private MwizPtn normPtn;
@@ -38,6 +38,10 @@ public class LabelCR extends javax.swing.JLabel implements javax.swing.table.Tab
     public LabelCR(MwizPtn normPtn)
     {
         this.normPtn = normPtn;
+        this.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 2, 0));
+
+        title = new javax.swing.JLabel();
+        add(title);
     }
 
     @Override
@@ -46,26 +50,27 @@ public class LabelCR extends javax.swing.JLabel implements javax.swing.table.Tab
         setFont(table.getFont());
         setEnabled(table.isEnabled());
 
-        if (isSelected)
-        {
-            this.setBackground(table.getSelectionBackground());
-            this.setForeground(table.getSelectionForeground());
-        }
-        else
-        {
-            this.setBackground(table.getBackground());
-            this.setForeground(table.getForeground());
-        }
+//        if (isSelected)
+//        {
+        this.setBackground(isSelected ? table.getSelectionBackground() : table.getBackground());
+//            this.setForeground(table.getSelectionForeground());
+//        }
+//        else
+//        {
+//            this.setBackground(table.getBackground());
+//            this.setForeground(table.getForeground());
+//        }
 
         this.setFocusable(hasFocus);
 
         if (value instanceof S1S2)
         {
             S1S2 item = (S1S2) value;
-            setIcon(Bean.getDataIcon(item.getK()));
-            setText(item.getV());
+            title.setIcon(Bean.getDataIcon(item.getK()));
+            title.setText(item.getV());
             setToolTipText(item.getV2());
         }
         return this;
     }
+    private javax.swing.JLabel title;
 }

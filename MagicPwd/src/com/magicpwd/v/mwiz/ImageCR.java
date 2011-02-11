@@ -51,17 +51,7 @@ public class ImageCR extends javax.swing.JPanel implements javax.swing.table.Tab
         setFont(table.getFont());
         setEnabled(table.isEnabled());
 
-        if (isSelected)
-        {
-            this.setBackground(table.getSelectionBackground());
-            this.setForeground(table.getSelectionForeground());
-        }
-        else
-        {
-            this.setBackground(table.getBackground());
-            this.setForeground(table.getForeground());
-        }
-
+        this.setBackground(isSelected ? table.getSelectionBackground() : table.getBackground());
         this.setFocusable(hasFocus);
 
         if (value instanceof I1S2)
