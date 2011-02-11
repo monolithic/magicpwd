@@ -398,4 +398,24 @@ public final class Util
     {
         return "";
     }
+
+    public static boolean isWin()
+    {
+        String tmp = System.getProperty("os.name");
+        if (Char.isValidate(tmp))
+        {
+            return tmp.toLowerCase().indexOf("windows") >= 0;
+        }
+        return false;
+    }
+
+    public static boolean isMac()
+    {
+        String tmp = System.getProperty("os.name");
+        if (Char.isValidate(tmp))
+        {
+            return tmp.toLowerCase().indexOf("mac") >= 0;
+        }
+        return false;
+    }
 }
