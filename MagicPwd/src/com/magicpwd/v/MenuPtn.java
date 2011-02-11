@@ -576,6 +576,7 @@ public class MenuPtn
         if (dirs != null && dirs.length > 0)
         {
             lookMenu.addSeparator();
+            String os = "win";
 
             for (java.io.File dir : dirs)
             {
@@ -638,6 +639,11 @@ public class MenuPtn
                                 continue;
                             }
                             Element element = (Element) object;
+                            String platform = element.attributeValue("platform");
+                            if (Char.isValidate(platform) && platform.toLowerCase().indexOf(os) < 0)
+                            {
+                                continue;
+                            }
 
                             item = new javax.swing.JCheckBoxMenuItem();
                             item.addActionListener(action);

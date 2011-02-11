@@ -1,6 +1,6 @@
 <magicpwd>
     <look group="">
-        <item id="item1" text="" tips="" type="java/user" class="" decorated="true/false" >
+        <item id="item1" text="" tips="" type="java/user" class="" decorated="true/false" platform="windows/linux/macos" >
             <resource>
                 <font for="" font-file="" font-name="" font-size="" font-style="" />
                 <color for="" rgb="" a="" r="" g="" b="" />
