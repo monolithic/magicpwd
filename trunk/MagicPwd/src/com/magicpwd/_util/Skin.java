@@ -169,7 +169,7 @@ public class Skin
                     continue;
                 }
                 element = (Element) obj;
-                key = element.attributeValue("key");
+                key = element.attributeValue("for");
                 if (!Char.isValidate(key))
                 {
                     continue;
