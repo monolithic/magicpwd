@@ -34,6 +34,7 @@ import com.magicpwd.__i.mpad.IMpadAction;
 import com.magicpwd.__i.mruc.IMrucAction;
 import com.magicpwd.__i.mwiz.IMwizAction;
 import com.magicpwd.__i.tray.ITrayAction;
+import com.magicpwd._util.Util;
 import com.magicpwd.e.mpwd.skin.FeelAction;
 import com.magicpwd.e.mpwd.skin.LookAction;
 import com.magicpwd.e.mpwd.skin.MoreAction;
@@ -576,7 +577,7 @@ public class MenuPtn
         if (dirs != null && dirs.length > 0)
         {
             lookMenu.addSeparator();
-            String os = "win";
+            String os = Util.isWin() ? "win" : (Util.isMac() ? "mac" : "lin");
 
             for (java.io.File dir : dirs)
             {
