@@ -553,7 +553,7 @@ public class MenuPtn
             item.addActionListener(action);
             Bean.setText(item, Lang.getLang(LangRes.P30F7632, "默认界面"));
             Bean.setTips(item, "");
-            item.setActionCommand(ConsCfg.DEF_SKIN_LOOK_DEF);
+            item.setActionCommand(ConsCfg.DEF_SKIN_LOOK_DEF + ".Default");
             item.setSelected(lookName.equals(ConsCfg.DEF_SKIN_LOOK_DEF));
             lookMenu.add(item);
             group.add(item.getActionCommand(), item);
@@ -567,7 +567,7 @@ public class MenuPtn
             item.addActionListener(action);
             Bean.setText(item, Lang.getLang(LangRes.P30F7633, "系统界面"));
             Bean.setTips(item, "");
-            item.setActionCommand(ConsCfg.DEF_SKIN_LOOK_SYS);
+            item.setActionCommand(ConsCfg.DEF_SKIN_LOOK_SYS + ".System");
             item.setSelected(lookName.equals(ConsCfg.DEF_SKIN_LOOK_SYS));
             lookMenu.add(item);
             group.add(item.getActionCommand(), item);
