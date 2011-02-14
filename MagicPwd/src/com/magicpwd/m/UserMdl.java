@@ -462,6 +462,7 @@ public final class UserMdl
     public String getLook()
     {
         return userCfg.getProperty(ConsCfg.CFG_SKIN_LOOK, "jgoodies.Plastic3D");
+        //return userCfg.getProperty(ConsCfg.CFG_SKIN_LOOK, ConsCfg.DEF_SKIN_LOOK_SYS);
     }
 
     public void setLook(String look)
