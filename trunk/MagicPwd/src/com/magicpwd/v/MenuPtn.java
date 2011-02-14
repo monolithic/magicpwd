@@ -505,7 +505,7 @@ public class MenuPtn
                     item = new javax.swing.JCheckBoxMenuItem();
                     Bean.setText(item, getLang(prop, "text"));
                     Bean.setTips(item, getLang(prop, "tips"));
-                    item.setSelected(userMdl.getCfg(ConsCfg.CFG_SKIN, "default").equals(prop.getProperty("name")));
+                    item.setSelected(userMdl.getSkin().equals(prop.getProperty("name")));
                     skinMenu.add(item);
                     group.add(item);
                     prop.clear();
@@ -727,7 +727,7 @@ public class MenuPtn
             feelMenu.addSeparator();
 
             javax.swing.JCheckBoxMenuItem item;
-            String feelName = userMdl.getCfg(ConsCfg.CFG_SKIN_FEEL, ConsCfg.DEF_SKIN_FEEL_DEF);
+            String feelName = userMdl.getFeel();
             FeelAction action = new FeelAction();
             action.setMainPtn(trayPtn.getMpwdPtn());
             WButtonGroup group = new WButtonGroup();
