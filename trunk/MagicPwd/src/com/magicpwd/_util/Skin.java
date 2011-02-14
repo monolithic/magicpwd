@@ -42,7 +42,7 @@ public class Skin
 //        String feel = userMdl.getCfg(ConsCfg.CFG_SKIN_FEEL);
 
         // 查找对应的文件
-        String look = userMdl.getCfg(ConsCfg.CFG_SKIN_LOOK, "");
+        String look = userMdl.getLook();
         String name = "System";
         int di = look.indexOf('.');
         if (di > 0)

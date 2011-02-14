@@ -540,13 +540,13 @@ public class MenuPtn
         }
 
         javax.swing.JCheckBoxMenuItem item;
-        String lookName = userMdl.getCfg(ConsCfg.CFG_SKIN_LOOK, ConsCfg.DEF_SKIN_LOOK_SYS);
+        String lookName = userMdl.getLook();
         LookAction action = new LookAction();
         action.setMainPtn(trayPtn.getMpwdPtn());
         WButtonGroup group = new WButtonGroup();
 
         // Java默认风格
-        java.io.File defaultSkin = new java.io.File(lookFile, ConsEnv.SKIN_LOOK_DEFAULT + '/' + ConsEnv.SKIN_LOOK_FILE);
+        java.io.File defaultSkin = new java.io.File(lookFile, ConsEnv.SKIN_LOOK_DEF_DIR + '/' + ConsEnv.SKIN_LOOK_FILE);
         if (defaultSkin.exists() && defaultSkin.isFile() && defaultSkin.canRead())
         {
             item = new javax.swing.JCheckBoxMenuItem();
@@ -560,7 +560,7 @@ public class MenuPtn
         }
 
         // 系统默认风格
-        java.io.File sytemSkin = new java.io.File(lookFile, ConsEnv.SKIN_LOOK_SYSTEM + '/' + ConsEnv.SKIN_LOOK_FILE);
+        java.io.File sytemSkin = new java.io.File(lookFile, ConsEnv.SKIN_LOOK_SYS_DIR + '/' + ConsEnv.SKIN_LOOK_FILE);
         if (sytemSkin.exists() && sytemSkin.isFile() && sytemSkin.canRead())
         {
             item = new javax.swing.JCheckBoxMenuItem();
@@ -573,7 +573,7 @@ public class MenuPtn
             group.add(item.getActionCommand(), item);
         }
 
-        java.io.File dirs[] = lookFile.listFiles(new AmonFF(true, ConsEnv.SKIN_LOOK_DEFAULT, ConsEnv.SKIN_LOOK_SYSTEM));
+        java.io.File dirs[] = lookFile.listFiles(new AmonFF(true, ConsEnv.SKIN_LOOK_DEF_DIR, ConsEnv.SKIN_LOOK_SYS_DIR));
         if (dirs != null && dirs.length > 0)
         {
             lookMenu.addSeparator();

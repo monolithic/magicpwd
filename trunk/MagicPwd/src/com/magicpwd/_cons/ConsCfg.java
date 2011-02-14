@@ -217,6 +217,7 @@ public interface ConsCfg
     /**
      * 默认风格：系统风格
      */
+    String DEF_SKIN_DEF = "system";
     String DEF_SKIN_FEEL_DEF = "default";
     String DEF_SKIN_LOOK_DEF = "default";
     String DEF_SKIN_LOOK_SYS = "system";

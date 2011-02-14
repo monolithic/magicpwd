@@ -226,9 +226,9 @@ public interface ConsEnv
     int APP_MODE_MAOC = 3;
     int APP_MODE_MRUC = 4;
     String CHAR_ALT_KEY = "@";
-    String SKIN_FEEL_DEFAULT = "default";
-    String SKIN_LOOK_DEFAULT = "default";
-    String SKIN_LOOK_SYSTEM = "system";
+    String SKIN_FEEL_DEF_DIR = "default";
+    String SKIN_LOOK_DEF_DIR = "default";
+    String SKIN_LOOK_SYS_DIR = "system";
     String SKIN_LOOK_FILE = "look.aml";
     String SKIN_FEEL_FILE = "feel.amf";
     String[] USER_SALT =
