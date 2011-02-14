@@ -451,7 +451,7 @@ public final class UserMdl
 
     public String getSkin()
     {
-        return userCfg.getProperty(ConsCfg.CFG_SKIN, "default");
+        return userCfg.getProperty(ConsCfg.CFG_SKIN, ConsCfg.DEF_SKIN_DEF);
     }
 
     public void setSkin(String skin)
@@ -461,7 +461,7 @@ public final class UserMdl
 
     public String getLook()
     {
-        return userCfg.getProperty(ConsCfg.CFG_SKIN_LOOK, ConsEnv.SKIN_LOOK_DEFAULT);
+        return userCfg.getProperty(ConsCfg.CFG_SKIN_LOOK, "jgoodies.Plastic3D");
     }
 
     public void setLook(String look)
@@ -471,7 +471,7 @@ public final class UserMdl
 
     public String getFeel()
     {
-        return userCfg.getProperty(ConsCfg.CFG_SKIN_FEEL, ConsEnv.SKIN_FEEL_DEFAULT);
+        return userCfg.getProperty(ConsCfg.CFG_SKIN_FEEL, ConsCfg.DEF_SKIN_FEEL_DEF);
     }
 
     public void setFeel(String feel)

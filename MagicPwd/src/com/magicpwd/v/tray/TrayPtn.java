@@ -729,7 +729,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
 
                 getCurrForm().setVisible(wasVisible);
             }
-            userMdl.setCfg(ConsCfg.CFG_SKIN_LOOK, isSystem ? ConsCfg.DEF_SKIN_LOOK_SYS : lafClass);
+            userMdl.setLook(isSystem ? ConsCfg.DEF_SKIN_LOOK_SYS : lafClass);
         }
         catch (Exception exc)
         {

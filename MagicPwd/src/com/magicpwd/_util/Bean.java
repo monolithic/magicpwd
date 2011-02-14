@@ -17,15 +17,8 @@
 package com.magicpwd._util;
 
 import com.magicpwd._comp.BtnLabel;
-import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd.m.UserMdl;
-import com.magicpwd.r.AmonFF;
 import java.awt.Dimension;
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.Node;
-import org.dom4j.io.SAXReader;
 
 /**
  *
