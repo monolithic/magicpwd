@@ -4,6 +4,7 @@
             <resource>
                 <font for="" font-file="" font-name="" font-size="" font-style="" />
                 <color for="" rgb="" a="" r="" g="" b="" />
+                <boolean for="" value="" />
             </resource>
             <property>
                 <string key="" value=""/>
