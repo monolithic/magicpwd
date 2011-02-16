@@ -208,7 +208,7 @@ public class Skin
                     continue;
                 }
                 element = (Element) obj;
-                key = element.attributeValue("key");
+                key = element.attributeValue("for");
                 if (!Char.isValidate(key))
                 {
                     continue;
@@ -220,6 +220,31 @@ public class Skin
                     continue;
                 }
                 setColor(key, new java.awt.Color(getInt(element.attributeValue("r"), 0), getInt(element.attributeValue("g"), 0), getInt(element.attributeValue("b"), 0), getInt(element.attributeValue("a"), 0)));
+            }
+        }
+        list = item.selectNodes("resource/boolean");
+        if (list != null)
+        {
+            String key;
+            String bool;
+            Element element;
+            for (Object obj : list)
+            {
+                if (!(obj instanceof Element))
+                {
+                    continue;
+                }
+                element = (Element) obj;
+                key = element.attributeValue("for");
+                if (!Char.isValidate(key))
+                {
+                    continue;
+                }
+                bool = element.attributeValue("value");
+                if (Char.isValidate(bool))
+                {
+                    setBoolean(key, Boolean.parseBoolean(bool));
+                }
             }
         }
     }
@@ -322,6 +347,28 @@ public class Skin
             if (v instanceof java.awt.Color)
             {
                 javax.swing.UIManager.put(k, color);
+            }
+        }
+    }
+
+    private static void setBoolean(String key, Boolean bool)
+    {
+        if (!"*".equals(key))
+        {
+            javax.swing.UIManager.put(key, bool);
+            return;
+        }
+
+        java.util.Enumeration keys = javax.swing.UIManager.getDefaults().keys();
+        Object k;
+        Object v;
+        while (keys.hasMoreElements())
+        {
+            k = keys.nextElement();
+            v = javax.swing.UIManager.get(k);
+            if (v instanceof Boolean)
+            {
+                javax.swing.UIManager.put(k, bool);
             }
         }
     }
