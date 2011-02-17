@@ -33,7 +33,7 @@ public class MaocMdl
 {
 
     private UserMdl userMdl;
-    private GridMdl gridMdl;
+    private MexpMdl gridMdl;
     private boolean distinct;
 
     public MaocMdl(UserMdl userMdl)
@@ -43,13 +43,13 @@ public class MaocMdl
 
     public void init()
     {
-        gridMdl = new GridMdl(this);
+        gridMdl = new MexpMdl(this);
     }
 
     /**
      * @return the gridMdl
      */
-    public GridMdl getGridMdl()
+    public MexpMdl getGridMdl()
     {
         return gridMdl;
     }
