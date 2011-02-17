@@ -128,6 +128,92 @@ public class Bean
         c.setToolTipText(t);
     }
 
+    public static void registerPopupMenuAction(final javax.swing.JList list, final javax.swing.JPopupMenu menu)
+    {
+        if (list == null || menu == null)
+        {
+            return;
+        }
+        list.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e)
+            {
+                listPupupMenu(e, list, menu);
+            }
+
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent e)
+            {
+                listPupupMenu(e, list, menu);
+            }
+
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent e)
+            {
+                listPupupMenu(e, list, menu);
+            }
+        });
+    }
+
+    private static void listPupupMenu(java.awt.event.MouseEvent e, javax.swing.JList list, javax.swing.JPopupMenu menu)
+    {
+        // 右键事件处理
+        if (e.isPopupTrigger())
+        {
+            int row = list.locationToIndex(e.getPoint());
+            if (row > -1)
+            {
+                list.setSelectedIndex(row);
+            }
+            menu.show(list, e.getX(), e.getY());
+        }
+    }
+
+    public static void registerPopupMenuAction(final javax.swing.JTable table, final javax.swing.JPopupMenu menu)
+    {
+        if (table == null || menu == null)
+        {
+            return;
+        }
+        table.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e)
+            {
+                tablePupupMenu(e, table, menu);
+            }
+
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent e)
+            {
+                tablePupupMenu(e, table, menu);
+            }
+
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent e)
+            {
+                tablePupupMenu(e, table, menu);
+            }
+        });
+    }
+
+    private static void tablePupupMenu(java.awt.event.MouseEvent e, javax.swing.JTable table, javax.swing.JPopupMenu menu)
+    {
+        // 右键事件处理
+        if (e.isPopupTrigger())
+        {
+            int row = table.rowAtPoint(e.getPoint());
+            if (row > -1)
+            {
+                table.setRowSelectionInterval(row, row);
+            }
+            menu.show(table, e.getX(), e.getY());
+        }
+    }
+
     public static void registerKeyStrokeAction(javax.swing.JComponent component, javax.swing.KeyStroke stroke, javax.swing.Action action, String command, int condition)
     {
         command = (command != null) ? command : ((action != null) ? action.getValue(javax.swing.Action.NAME) + "" : "");
@@ -322,7 +408,6 @@ public class Bean
         java.awt.image.BufferedImage bi = createNone(size);
         return bi;
     }
-
 
     public static void loadJar(java.io.File... files) throws Exception
     {

@@ -33,7 +33,8 @@ public class MaocMdl
 {
 
     private UserMdl userMdl;
-    private WComputer computer;
+    private GridMdl gridMdl;
+    private boolean distinct;
 
     public MaocMdl(UserMdl userMdl)
     {
@@ -42,14 +43,30 @@ public class MaocMdl
 
     public void init()
     {
-        computer = new WComputer();
+        gridMdl = new GridMdl(this);
     }
 
     /**
-     * @return the computer
+     * @return the gridMdl
      */
-    public WComputer getComputer()
+    public GridMdl getGridMdl()
     {
-        return computer;
+        return gridMdl;
+    }
+
+    /**
+     * @return the distinct
+     */
+    public boolean isDistinct()
+    {
+        return distinct;
+    }
+
+    /**
+     * @param distinct the distinct to set
+     */
+    public void setDistinct(boolean distinct)
+    {
+        this.distinct = distinct;
     }
 }

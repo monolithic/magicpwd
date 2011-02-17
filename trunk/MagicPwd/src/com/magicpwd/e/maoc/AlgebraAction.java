@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2011 yaoshangwen
+ *  Copyright (C) 2011 Amon
  * 
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ import com.magicpwd.v.maoc.MaocPtn;
 
 /**
  *
- * @author yaoshangwen
+ * @author Amon
  */
 public class AlgebraAction extends AMaocAction
 {
@@ -41,8 +41,18 @@ public class AlgebraAction extends AMaocAction
         {
             return;
         }
-
-        maocPtn.replaceExpression(cmd);
+        String[] arr = cmd.split(":");
+        if (arr == null || arr.length != 2)
+        {
+            return;
+        }
+        cmd = arr[0];
+        String tmp = arr[1];
+        if (!Char.isValidate(cmd) || !java.util.regex.Pattern.matches("^[-+]\\d+$", tmp))
+        {
+            return;
+        }
+        maocPtn.replaceExpression(cmd, tmp.charAt(0) == '+', Integer.parseInt(tmp.substring(1)));
     }
 
     @Override
