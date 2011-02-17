@@ -141,90 +141,90 @@
     </popmenu>
     <popmenu id="mnum">
         <item type="normal" text="$P30FB623" text-def="复制常量名">
-            <action class="com.magicpwd.e.tray.InfoAction" />
+            <action class="com.magicpwd.e.maoc.mnum.CopyNameAction" />
         </item>
         <item type="normal" text="$P30FB624" text-def="复制常量值">
-            <action class="com.magicpwd.e.tray.InfoAction" />
+            <action class="com.magicpwd.e.maoc.mnum.CopyValueAction" />
         </item>
         <seperator />
         <item type="normal" text="$P30FB625" text-def="追加常量名到光标处">
-            <action class="com.magicpwd.e.tray.InfoAction" />
+            <action class="com.magicpwd.e.maoc.mnum.ReuseNameAction" />
         </item>
         <item type="normal" text="$P30FB626" text-def="追加常量值到光标处">
-            <action class="com.magicpwd.e.tray.InfoAction" />
+            <action class="com.magicpwd.e.maoc.mnum.ReuseValueAction" />
         </item>
         <seperator />
         <item type="normal" text="$P30FB627" text-def="添加常量">
-            <action class="com.magicpwd.e.tray.InfoAction" />
+            <action class="com.magicpwd.e.maoc.mnum.AppendAction" />
         </item>
         <item type="normal" text="$P30FB628" text-def="更新常量">
-            <action class="com.magicpwd.e.tray.InfoAction" />
+            <action class="com.magicpwd.e.maoc.mnum.UpdateAction" />
         </item>
         <item type="normal" text="$P30FB629" text-def="删除常量">
-            <action class="com.magicpwd.e.tray.InfoAction" />
+            <action class="com.magicpwd.e.maoc.mnum.DeleteAction" />
         </item>
     </popmenu>
     <popmenu id="mfun">
         <item type="normal" text="$P30FB62A" text-def="复制函数名">
-            <action class="com.magicpwd.e.tray.InfoAction" />
+            <action class="com.magicpwd.e.maoc.mfun.CopyNameAction" />
         </item>
         <item type="normal" text="$P30FB62B" text-def="复制函数体">
-            <action class="com.magicpwd.e.tray.InfoAction" />
+            <action class="com.magicpwd.e.maoc.mfun.CopyValueAction" />
         </item>
         <seperator />
         <item type="normal" text="$P30FB62C" text-def="追加函数名到光标处">
-            <action class="com.magicpwd.e.tray.InfoAction" />
+            <action class="com.magicpwd.e.maoc.mfun.ReuseNameAction" />
         </item>
         <item type="normal" text="$P30FB62D" text-def="追加函数名到光标处">
-            <action class="com.magicpwd.e.tray.InfoAction" />
+            <action class="com.magicpwd.e.maoc.mfun.ReuseValueAction" />
         </item>
         <seperator />
         <item type="normal" text="$P30FB62E" text-def="添加函数">
-            <action class="com.magicpwd.e.tray.InfoAction" />
+            <action class="com.magicpwd.e.maoc.mfun.AppendAction" />
         </item>
         <item type="normal" text="$P30FB62F" text-def="更新函数">
-            <action class="com.magicpwd.e.tray.InfoAction" />
+            <action class="com.magicpwd.e.maoc.mfun.UpdateAction" />
         </item>
         <item type="normal" text="$P30FB630" text-def="删除函数">
-            <action class="com.magicpwd.e.tray.InfoAction" />
+            <action class="com.magicpwd.e.maoc.mfun.DeleteAction" />
         </item>
     </popmenu>
     <popmenu id="mexp">
         <item type="normal" text="$P30FB631" text-def="复制算式">
-            <action class="com.magicpwd.e.tray.InfoAction" />
+            <action class="com.magicpwd.e.maoc.mexp.CopyNameAction" />
         </item>
         <item type="normal" text="$P30FB632" text-def="复制结果">
-            <action class="com.magicpwd.e.tray.InfoAction" />
+            <action class="com.magicpwd.e.maoc.mexp.CopyValueAction" />
         </item>
         <seperator />
         <item type="normal" text="$P30FB633" text-def="追加算式到光标处">
-            <action class="com.magicpwd.e.tray.InfoAction" />
+            <action class="com.magicpwd.e.maoc.mexp.ReuseNameAction" />
         </item>
         <item type="normal" text="$P30FB634" text-def="追加结果到光标处">
-            <action class="com.magicpwd.e.tray.InfoAction" />
+            <action class="com.magicpwd.e.maoc.mexp.ReuseValueAction" />
         </item>
         <seperator />
         <item type="normal" text="$P30FB635" text-def="删除当前运算式">
-            <action class="com.magicpwd.e.tray.InfoAction" />
+            <action class="com.magicpwd.e.maoc.mexp.RemoveCurAction" />
         </item>
         <item type="normal" text="$P30FB636" text-def="清除所有运算式">
-            <action class="com.magicpwd.e.tray.InfoAction" />
+            <action class="com.magicpwd.e.maoc.mexp.RemoveAllAction" />
         </item>
         <seperator />
         <menu type="normal" text="$P30FB637" text-def="显示方式">
             <item type="checkbox" id="single-line" text="$P30FB638" text-def="单行" group="distinct">
-                <action class="com.magicpwd.e.tray.InfoAction" />
+                <action id="viewMode" class="com.magicpwd.e.maoc.mexp.ViewModeAction" />
             </item>
             <item type="checkbox" id="multi-line" text="$P30FB639" text-def="多行" group="distinct">
-                <action class="com.magicpwd.e.tray.InfoAction" />
+                <action id="viewMode" class="com.magicpwd.e.maoc.mexp.ViewModeAction" />
             </item>
         </menu>
     </popmenu>
     <strokes id="maoc">
-        <action id="exit-window" class="com.magicpwd.e.mpwd.file.ExitAction">
+        <action id="exit-window" class="com.magicpwd.e.maoc.ExitAction">
             <stroke key="^ Q" />
         </action>
-        <action id="hide-window" class="com.magicpwd.e.mpwd.file.HideAction">
+        <action id="hide-window" class="com.magicpwd.e.maoc.HideAction">
             <stroke key="^ Enter" />
         </action>
     </strokes>
