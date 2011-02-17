@@ -281,6 +281,39 @@ public class Char
         return tmp.toString();
     }
 
+    public static String replace(String res, String src, String dst)
+    {
+        if (res == null)
+        {
+            return res;
+        }
+        return replace(new StringBuilder(res), src, dst).toString();
+    }
+
+    public static StringBuilder replace(StringBuilder res, String src, String dst)
+    {
+        if (res != null && res.length() > 0 && src != null)
+        {
+            if (dst == null)
+            {
+                dst = "null";
+            }
+
+            int s = src.length();
+            if (s > 0 && !src.equals(dst))
+            {
+                int d = dst.length();
+                int i = res.indexOf(src);
+                while (i >= 0)
+                {
+                    res.replace(i, i + s, dst);
+                    i = res.indexOf(src, i + d);
+                }
+            }
+        }
+        return res;
+    }
+
     public static String lUpper(String text)
     {
         return "";

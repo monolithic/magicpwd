@@ -205,6 +205,11 @@ public class WTextBox implements java.awt.datatransfer.ClipboardOwner
         changeMenuStatus();
     }
 
+    public void setTextComponent(javax.swing.text.JTextComponent textBox)
+    {
+        this.textBox = textBox;
+    }
+
     @Override
     public void lostOwnership(Clipboard clipboard, Transferable contents)
     {

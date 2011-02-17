@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <magicpwd>
-    <popmenu id="maoc">
-        <item type="normal" text="$P30F9601" text-def="关于">
+    <popmenu id="help">
+        <item type="normal" text="$P30F9601" text-def="关于软件">
             <action class="com.magicpwd.e.tray.InfoAction" />
         </item>
         <seperator />
@@ -54,40 +54,40 @@
             </item>
         </menu>
         <menu id="algebra" text="$P30FB603" text-def="代数运算">
-            <item type="normal" text="$P30FB60D" text-def="平方运算" command="^2">
+            <item type="normal" text="$P30FB60D" text-def="平方运算" command="^2:+0">
                 <action id="algebra" class="com.magicpwd.e.maoc.AlgebraAction" />
             </item>
-            <item type="normal" text="$P30FB60E" text-def="立方运算" command="^3">
+            <item type="normal" text="$P30FB60E" text-def="立方运算" command="^3:+0">
                 <action id="algebra" class="com.magicpwd.e.maoc.AlgebraAction" />
             </item>
-            <item type="normal" text="$P30FB60F" text-def="次幂运算" command="^">
-                <action id="algebra" class="com.magicpwd.e.maoc.AlgebraAction" />
-            </item>
-            <seperator />
-            <item type="normal" text="$P30FB610" text-def="二次方根运算" command="2√">
-                <action id="algebra" class="com.magicpwd.e.maoc.AlgebraAction" />
-            </item>
-            <item type="normal" text="$P30FB611" text-def="三次方根运算" command="3√">
-                <action id="algebra" class="com.magicpwd.e.maoc.AlgebraAction" />
-            </item>
-            <item type="normal" text="$P30FB612" text-def="方根运算" command="√">
+            <item type="normal" text="$P30FB60F" text-def="次幂运算" command="^:+0">
                 <action id="algebra" class="com.magicpwd.e.maoc.AlgebraAction" />
             </item>
             <seperator />
-            <item type="normal" text="$P30FB613" text-def="10的对数运算" command="log">
+            <item type="normal" text="$P30FB610" text-def="二次方根运算" command="2√:-0">
                 <action id="algebra" class="com.magicpwd.e.maoc.AlgebraAction" />
             </item>
-            <item type="normal" text="$P30FB614" text-def="自然对数运算" command="ln">
+            <item type="normal" text="$P30FB611" text-def="三次方根运算" command="3√:-0">
                 <action id="algebra" class="com.magicpwd.e.maoc.AlgebraAction" />
             </item>
-            <item type="normal" text="$P30FB615" text-def="对数运算" command="lg">
+            <item type="normal" text="$P30FB612" text-def="方根运算" command="√:+0">
                 <action id="algebra" class="com.magicpwd.e.maoc.AlgebraAction" />
             </item>
             <seperator />
-            <item type="normal" text="$P30FB616" text-def="阶乘运算" command="!">
+            <item type="normal" text="$P30FB613" text-def="10的对数运算" command="lg():-1">
                 <action id="algebra" class="com.magicpwd.e.maoc.AlgebraAction" />
             </item>
-            <item type="normal" text="$P30FB617" text-def="倒数运算" command="1/">
+            <item type="normal" text="$P30FB614" text-def="自然对数运算" command="ln():-1">
+                <action id="algebra" class="com.magicpwd.e.maoc.AlgebraAction" />
+            </item>
+            <item type="normal" text="$P30FB615" text-def="对数运算" command="log(,):-2">
+                <action id="algebra" class="com.magicpwd.e.maoc.AlgebraAction" />
+            </item>
+            <seperator />
+            <item type="normal" text="$P30FB616" text-def="阶乘运算" command="!:+0">
+                <action id="algebra" class="com.magicpwd.e.maoc.AlgebraAction" />
+            </item>
+            <item type="normal" text="$P30FB617" text-def="倒数运算" command="1/:-0">
                 <action id="algebra" class="com.magicpwd.e.maoc.AlgebraAction" />
             </item>
         </menu>
@@ -138,6 +138,87 @@
         <item type="normal" text="$P30F960C" text-def="退出">
             <action class="com.magicpwd.e.tray.InfoAction" />
         </item>
+    </popmenu>
+    <popmenu id="mnum">
+        <item type="normal" text="$P30FB623" text-def="复制常量名">
+            <action class="com.magicpwd.e.tray.InfoAction" />
+        </item>
+        <item type="normal" text="$P30FB624" text-def="复制常量值">
+            <action class="com.magicpwd.e.tray.InfoAction" />
+        </item>
+        <seperator />
+        <item type="normal" text="$P30FB625" text-def="追加常量名到光标处">
+            <action class="com.magicpwd.e.tray.InfoAction" />
+        </item>
+        <item type="normal" text="$P30FB626" text-def="追加常量值到光标处">
+            <action class="com.magicpwd.e.tray.InfoAction" />
+        </item>
+        <seperator />
+        <item type="normal" text="$P30FB627" text-def="添加常量">
+            <action class="com.magicpwd.e.tray.InfoAction" />
+        </item>
+        <item type="normal" text="$P30FB628" text-def="更新常量">
+            <action class="com.magicpwd.e.tray.InfoAction" />
+        </item>
+        <item type="normal" text="$P30FB629" text-def="删除常量">
+            <action class="com.magicpwd.e.tray.InfoAction" />
+        </item>
+    </popmenu>
+    <popmenu id="mfun">
+        <item type="normal" text="$P30FB62A" text-def="复制函数名">
+            <action class="com.magicpwd.e.tray.InfoAction" />
+        </item>
+        <item type="normal" text="$P30FB62B" text-def="复制函数体">
+            <action class="com.magicpwd.e.tray.InfoAction" />
+        </item>
+        <seperator />
+        <item type="normal" text="$P30FB62C" text-def="追加函数名到光标处">
+            <action class="com.magicpwd.e.tray.InfoAction" />
+        </item>
+        <item type="normal" text="$P30FB62D" text-def="追加函数名到光标处">
+            <action class="com.magicpwd.e.tray.InfoAction" />
+        </item>
+        <seperator />
+        <item type="normal" text="$P30FB62E" text-def="添加函数">
+            <action class="com.magicpwd.e.tray.InfoAction" />
+        </item>
+        <item type="normal" text="$P30FB62F" text-def="更新函数">
+            <action class="com.magicpwd.e.tray.InfoAction" />
+        </item>
+        <item type="normal" text="$P30FB630" text-def="删除函数">
+            <action class="com.magicpwd.e.tray.InfoAction" />
+        </item>
+    </popmenu>
+    <popmenu id="mexp">
+        <item type="normal" text="$P30FB631" text-def="复制算式">
+            <action class="com.magicpwd.e.tray.InfoAction" />
+        </item>
+        <item type="normal" text="$P30FB632" text-def="复制结果">
+            <action class="com.magicpwd.e.tray.InfoAction" />
+        </item>
+        <seperator />
+        <item type="normal" text="$P30FB633" text-def="追加算式到光标处">
+            <action class="com.magicpwd.e.tray.InfoAction" />
+        </item>
+        <item type="normal" text="$P30FB634" text-def="追加结果到光标处">
+            <action class="com.magicpwd.e.tray.InfoAction" />
+        </item>
+        <seperator />
+        <item type="normal" text="$P30FB635" text-def="删除当前运算式">
+            <action class="com.magicpwd.e.tray.InfoAction" />
+        </item>
+        <item type="normal" text="$P30FB636" text-def="清除所有运算式">
+            <action class="com.magicpwd.e.tray.InfoAction" />
+        </item>
+        <seperator />
+        <menu type="normal" text="$P30FB637" text-def="显示方式">
+            <item type="checkbox" id="single-line" text="$P30FB638" text-def="单行" group="distinct">
+                <action class="com.magicpwd.e.tray.InfoAction" />
+            </item>
+            <item type="checkbox" id="multi-line" text="$P30FB639" text-def="多行" group="distinct">
+                <action class="com.magicpwd.e.tray.InfoAction" />
+            </item>
+        </menu>
     </popmenu>
     <strokes id="maoc">
         <action id="exit-window" class="com.magicpwd.e.mpwd.file.ExitAction">

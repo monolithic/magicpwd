@@ -27,7 +27,7 @@ public class Hash
      */
     static int MASK = 0x8765fed1;
 
-    public static final String hash(boolean bigCase)
+    public static String hash(boolean bigCase)
     {
         return Util.encodeLong(Date.utcDate().getTimeInMillis(), bigCase);
     }

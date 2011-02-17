@@ -17,7 +17,9 @@
 package com.magicpwd.v.maoc;
 
 import com.magicpwd.__a.AFrame;
+import com.magicpwd._comn.S1S2;
 import com.magicpwd._comp.BtnLabel;
+import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
@@ -59,9 +61,9 @@ public class MaocPtn extends AFrame
         sp_ArgBean = new javax.swing.JPanel();
 
         ls_NumList = new javax.swing.JList();
-        sp_NumList = new javax.swing.JScrollPane(ls_NumList);
+        javax.swing.JScrollPane sp_NumList = new javax.swing.JScrollPane(ls_NumList);
         ls_FunList = new javax.swing.JList();
-        sp_FunList = new javax.swing.JScrollPane(ls_FunList);
+        javax.swing.JScrollPane sp_FunList = new javax.swing.JScrollPane(ls_FunList);
 
         javax.swing.JSplitPane sp = new javax.swing.JSplitPane();
         sp.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -90,11 +92,13 @@ public class MaocPtn extends AFrame
         tb_ExpList = new javax.swing.JTable();
         lb_ExpText = new javax.swing.JLabel();
         tf_ExpText = new javax.swing.JTextField();
+        textBox = new WTextBox(tf_ExpText);
         bt_AocHelp = new BtnLabel();
         bt_ExpText = new BtnLabel();
 
         javax.swing.JScrollPane sp_ExpList = new javax.swing.JScrollPane(tb_ExpList);
 
+        textBox.initView();
         lb_ExpText.setLabelFor(tf_ExpText);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(sp_ExpBean);
@@ -104,9 +108,9 @@ public class MaocPtn extends AFrame
         hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg1.addComponent(tf_ExpText, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE);
         hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg1.addComponent(bt_ExpText);
+        hsg1.addComponent(bt_ExpText, 19, 19, 19);
         hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg1.addComponent(bt_AocHelp);
+        hsg1.addComponent(bt_AocHelp, 19, 19, 19);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
         hpg1.addComponent(sp_ExpList, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE);
         hpg1.addGroup(hsg1);
@@ -116,8 +120,8 @@ public class MaocPtn extends AFrame
         javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER);
         vpg1.addComponent(lb_ExpText);
         vpg1.addComponent(tf_ExpText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vpg1.addComponent(bt_AocHelp);
-        vpg1.addComponent(bt_ExpText);
+        vpg1.addComponent(bt_AocHelp, 19, 19, 19);
+        vpg1.addComponent(bt_ExpText, 19, 19, 19);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
 //        vsg.addContainerGap();
         vsg.addComponent(sp_ExpList, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE);
@@ -159,7 +163,7 @@ public class MaocPtn extends AFrame
 
     public void initLang()
     {
-        this.setTitle(Lang.getLang(LangRes.P30FB201, "计算器"));
+        this.setTitle(Lang.getLang(LangRes.P30FB201, "数值运算"));
         Bean.setText(lb_ExpText, Lang.getLang(LangRes.P30FB301, "计算式(@F)"));
 
         Bean.setText(bt_ExpText, Lang.getLang(LangRes.P30FB501, "@C"));
@@ -167,6 +171,8 @@ public class MaocPtn extends AFrame
 
         Bean.setText(bt_AocHelp, Lang.getLang(LangRes.P30FB503, "@O"));
         Bean.setTips(bt_AocHelp, Lang.getLang(LangRes.P30FB504, "选项(ALT + O)"));
+
+        textBox.initLang();
 
         this.pack();
         Bean.centerForm(this, null);
@@ -176,6 +182,11 @@ public class MaocPtn extends AFrame
     {
         maocMdl = new MaocMdl(userMdl);
         maocMdl.init();
+
+        tb_ExpList.setModel(maocMdl.getGridMdl());
+        changeTableStruct();
+
+        symbols = new Symbols();
 
         java.awt.event.ActionListener listener = new java.awt.event.ActionListener()
         {
@@ -202,14 +213,22 @@ public class MaocPtn extends AFrame
             }
         });
 
-        symbols = new Symbols();
+        pm_NumMenu = new javax.swing.JPopupMenu();
+        Bean.registerPopupMenuAction(ls_NumList, pm_NumMenu);
+        pm_FunMenu = new javax.swing.JPopupMenu();
+        Bean.registerPopupMenuAction(ls_FunList, pm_FunMenu);
+        pm_ExpMenu = new javax.swing.JPopupMenu();
+        Bean.registerPopupMenuAction(tb_ExpList, pm_ExpMenu);
 
         pm_AocHelp = new javax.swing.JPopupMenu();
         menuPtn = new MenuPtn(trayPtn, this);
         try
         {
             menuPtn.loadData(new java.io.File(userMdl.getDataDir(), "maoc.xml"));
-            menuPtn.getPopMenu("maoc", pm_AocHelp);
+            menuPtn.getPopMenu("mnum", pm_NumMenu);
+            menuPtn.getPopMenu("mfun", pm_FunMenu);
+            menuPtn.getPopMenu("mexp", pm_ExpMenu);
+            menuPtn.getPopMenu("help", pm_AocHelp);
             menuPtn.getStrokes("maoc", rootPane);
         }
         catch (Exception exp)
@@ -217,6 +236,7 @@ public class MaocPtn extends AFrame
             Logs.exception(exp);
         }
 
+        textBox.initData();
         tf_ExpText.requestFocus();
 
         this.pack();
@@ -244,22 +264,68 @@ public class MaocPtn extends AFrame
     {
     }
 
+    public void changeTableStruct()
+    {
+    }
+
     private void bt_ExpTextActionPerformed(java.awt.event.ActionEvent e)
     {
-        String math = tf_ExpText.getText().trim();
-        if (!Char.isValidate(math))
+        String exp = tf_ExpText.getText().trim();
+        if (!Char.isValidate(exp))
+        {
+            return;
+        }
+
+        StringBuilder buf = new StringBuilder(exp);
+        buf = Char.replace(buf, "０", "0");
+        buf = Char.replace(buf, "１", "1");
+        buf = Char.replace(buf, "２", "2");
+        buf = Char.replace(buf, "３", "3");
+        buf = Char.replace(buf, "４", "4");
+        buf = Char.replace(buf, "５", "5");
+        buf = Char.replace(buf, "６", "6");
+        buf = Char.replace(buf, "７", "7");
+        buf = Char.replace(buf, "８", "8");
+        buf = Char.replace(buf, "９", "9");
+
+//        buf = Char.replace(Char.replace(buf, "｛", "{"), "{", "(");
+//        buf = Char.replace(Char.replace(buf, "｝", "}"), "}", ")");
+//        buf = Char.replace(Char.replace(buf, "［", "["), "[", "(");
+//        buf = Char.replace(Char.replace(buf, "］", "]"), "]", ")");
+        buf = Char.replace(Char.replace(buf, "｛", "("), "{", "(");
+        buf = Char.replace(Char.replace(buf, "｝", ")"), "}", ")");
+        buf = Char.replace(Char.replace(buf, "［", "("), "[", "(");
+        buf = Char.replace(Char.replace(buf, "］", ")"), "]", ")");
+        buf = Char.replace(buf, "（", "(");
+        buf = Char.replace(buf, "）", ")");
+
+        buf = Char.replace(Char.replace(Char.replace(buf, "。", "."), "．", "."), "·", ".");
+        buf = Char.replace(buf, "＋", "+");
+        buf = Char.replace(buf, "－", "-");
+        buf = Char.replace(buf, "×", "*");
+        buf = Char.replace(buf, "÷", "/");
+        buf = Char.replace(buf, "／", "%");
+        buf = Char.replace(buf, "＝", "=");
+        buf = Char.replace(buf, "！", "!");
+
+        buf = Char.replace(buf, "ε", "e");
+        buf = Char.replace(buf, "π", "pi");
+
+        String val = buf.toString().replaceAll("\\s*[=]+\\s*$", "");
+        if (!Char.isValidate(val))
         {
             return;
         }
 
         try
         {
-            System.out.println(symbols.eval(math));
+            val = Double.toString(symbols.eval(buf.toString()));
+            maocMdl.getGridMdl().appendValue(new S1S2("", exp, val));
         }
-        catch (Exception exp)
+        catch (Exception ex)
         {
-            Logs.exception(exp);
-            Lang.showMesg(this, null, exp.getLocalizedMessage());
+            Logs.exception(ex);
+            Lang.showMesg(this, null, ex.getMessage());
         }
     }
 
@@ -304,6 +370,16 @@ public class MaocPtn extends AFrame
         tf_ExpText.replaceSelection(expression);
     }
 
+    public void replaceExpression(String expression, boolean forward, int step)
+    {
+        int s = tf_ExpText.getCaretPosition();
+        tf_ExpText.replaceSelection(expression);
+        if (step > -1)
+        {
+            tf_ExpText.setCaretPosition(forward ? s + step : s + expression.length() - step);
+        }
+    }
+
     public void setCaretPosition(int position)
     {
         tf_ExpText.setCaretPosition(position);
@@ -313,16 +389,18 @@ public class MaocPtn extends AFrame
     {
         tf_ExpText.setCaretPosition(tf_ExpText.getCaretPosition() + position);
     }
+    private WTextBox textBox;
     private BtnLabel bt_AocHelp;
     private BtnLabel bt_ExpText;
-    private javax.swing.JPanel sp_ArgBean;
-    private javax.swing.JPanel sp_ExpBean;
-    private javax.swing.JScrollPane sp_NumList;
-    private javax.swing.JScrollPane sp_FunList;
     private javax.swing.JList ls_FunList;
     private javax.swing.JList ls_NumList;
     private javax.swing.JLabel lb_ExpText;
     private javax.swing.JTable tb_ExpList;
-    private javax.swing.JTextField tf_ExpText;
+    private javax.swing.JPanel sp_ArgBean;
+    private javax.swing.JPanel sp_ExpBean;
     private javax.swing.JPopupMenu pm_AocHelp;
+    private javax.swing.JPopupMenu pm_ExpMenu;
+    private javax.swing.JPopupMenu pm_FunMenu;
+    private javax.swing.JPopupMenu pm_NumMenu;
+    private javax.swing.JTextField tf_ExpText;
 }
