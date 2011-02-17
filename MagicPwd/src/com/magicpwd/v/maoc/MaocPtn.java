@@ -61,8 +61,10 @@ public class MaocPtn extends AFrame
         sp_ArgBean = new javax.swing.JPanel();
 
         ls_NumList = new javax.swing.JList();
+        ls_NumList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         javax.swing.JScrollPane sp_NumList = new javax.swing.JScrollPane(ls_NumList);
         ls_FunList = new javax.swing.JList();
+        ls_FunList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         javax.swing.JScrollPane sp_FunList = new javax.swing.JScrollPane(ls_FunList);
 
         javax.swing.JSplitPane sp = new javax.swing.JSplitPane();
@@ -360,7 +362,35 @@ public class MaocPtn extends AFrame
         return tf_ExpText.getText();
     }
 
-    public void appendExpression(String expression)
+    public void appendNum(String name, String value, String remark)
+    {
+        if (!Char.isValidate(name) || !Char.isValidate(value))
+        {
+            return;
+        }
+    }
+
+    public void updateNum(String name, String value, String remark)
+    {
+    }
+
+    public void deleteNum()
+    {
+    }
+
+    public void appendFun(String name, String value, String remark)
+    {
+    }
+
+    public void updateFun(String name, String value, String remark)
+    {
+    }
+
+    public void deleteFun()
+    {
+    }
+
+    public void appendExp(String expression)
     {
         tf_ExpText.setText(tf_ExpText.getText() + expression);
     }
