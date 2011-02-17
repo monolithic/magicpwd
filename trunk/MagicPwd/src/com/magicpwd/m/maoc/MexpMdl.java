@@ -23,14 +23,14 @@ import javax.swing.event.TableModelListener;
  *
  * @author Amon
  */
-public class GridMdl implements javax.swing.table.TableModel, java.io.Serializable
+public class MexpMdl implements javax.swing.table.TableModel, java.io.Serializable
 {
 
     private java.util.List<S1S2> expList;
     private MaocMdl maocMdl;
     private javax.swing.event.EventListenerList listenerList;
 
-    public GridMdl(MaocMdl maocMdl)
+    public MexpMdl(MaocMdl maocMdl)
     {
         this.maocMdl = maocMdl;
         expList = new java.util.ArrayList<S1S2>();
