@@ -19,7 +19,6 @@ package com.magicpwd.e.maoc.mnum;
 import com.magicpwd.__a.maoc.AMaocAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.S1S3;
-import com.magicpwd.v.maoc.MaocPtn;
 import com.magicpwd.x.maoc.MnumDlg;
 
 /**
@@ -28,11 +27,6 @@ import com.magicpwd.x.maoc.MnumDlg;
  */
 public class UpdateAction extends AMaocAction implements IBackCall<S1S3>
 {
-
-    @Override
-    public void setMaocPtn(MaocPtn maocPtn)
-    {
-    }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
@@ -46,7 +40,7 @@ public class UpdateAction extends AMaocAction implements IBackCall<S1S3>
         MnumDlg dlg = new MnumDlg(maocPtn, this);
         dlg.initView();
         dlg.initLang();
-        dlg.initData(null);
+        dlg.initData(item);
         dlg.setVisible(true);
     }
 

@@ -189,6 +189,11 @@ public class Char
         return Pattern.compile("[\\w\\.\\-]+@([\\w\\-]+\\.)+[\\w\\-]+", Pattern.CASE_INSENSITIVE).matcher(mail).matches();
     }
 
+    public static boolean isValidateDecimal(String t)
+    {
+        return t != null ? Pattern.compile("^[+-]?((\\d*\\.\\d+)|(\\d+(\\.\\d*)?))([*]?[eE][-+]?\\d+)?$", Pattern.CASE_INSENSITIVE).matcher(t).matches() : false;
+    }
+
     public static boolean isValidateInteger(String t)
     {
         return t != null ? Pattern.compile("^[+-]?\\d+$", Pattern.CASE_INSENSITIVE).matcher(t).matches() : false;

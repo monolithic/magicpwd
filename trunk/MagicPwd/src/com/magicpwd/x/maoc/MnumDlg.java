@@ -21,6 +21,7 @@ import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.S1S3;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd.v.maoc.MaocPtn;
 
@@ -176,11 +177,18 @@ public class MnumDlg extends ADialog
 
     private void bt_ApplyActionPerformed(java.awt.event.ActionEvent e)
     {
-        String kindName = tf_Name.getText();
-        if (!com.magicpwd._util.Char.isValidate(kindName))
+        String name = tf_Name.getText();
+        if (!java.util.regex.Pattern.matches("^[A-Za-z][A-Za-z\\d]*$", name))
         {
             Lang.showMesg(this, LangRes.P30F7A15, "请输入类别名称：");
             tf_Name.requestFocus();
+            return;
+        }
+        String value = tf_Value.getText();
+        if (!Char.isValidate(value))
+        {
+            Lang.showMesg(this, LangRes.P30F7A15, "请输入类别名称：");
+            tf_Value.requestFocus();
             return;
         }
 
@@ -196,8 +204,8 @@ public class MnumDlg extends ADialog
             item = new S1S3();
         }
 
-        item.setV(kindName);
-        item.setV2(tf_Value.getText());
+        item.setV(name);
+        item.setV2(value);
         item.setV3(ta_Remark.getText());
         backCall.callBack(IBackCall.OPTIONS_APPLY, item);
     }

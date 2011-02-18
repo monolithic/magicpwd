@@ -28,6 +28,7 @@ public class RemoveAllAction extends AMaocAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
+        maocPtn.removeExpAll();
     }
 
     @Override

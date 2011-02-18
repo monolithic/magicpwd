@@ -28,6 +28,7 @@ public class ReuseValueAction extends AMaocAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
+        maocPtn.reuseExpValue();
     }
 
     @Override
