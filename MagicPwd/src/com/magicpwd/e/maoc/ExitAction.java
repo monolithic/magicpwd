@@ -19,7 +19,6 @@ package com.magicpwd.e.maoc;
 import com.magicpwd.__a.maoc.AMaocAction;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
-import com.magicpwd.v.maoc.MaocPtn;
 
 /**
  *
@@ -27,11 +26,6 @@ import com.magicpwd.v.maoc.MaocPtn;
  */
 public class ExitAction extends AMaocAction
 {
-
-    @Override
-    public void setMaocPtn(MaocPtn maocPtn)
-    {
-    }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)

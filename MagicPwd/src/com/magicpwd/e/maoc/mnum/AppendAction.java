@@ -17,34 +17,25 @@
 package com.magicpwd.e.maoc.mnum;
 
 import com.magicpwd.__a.maoc.AMaocAction;
-import com.magicpwd.v.maoc.MaocPtn;
-import com.magicpwd.x.maoc.EditDlg;
+import com.magicpwd.__i.IBackCall;
+import com.magicpwd._comn.S1S3;
+import com.magicpwd.x.maoc.MnumDlg;
 
 /**
  *
  * @author Aven
  */
-public class AppendAction extends AMaocAction
+public class AppendAction extends AMaocAction implements IBackCall<S1S3>
 {
-
-    @Override
-    public void setMaocPtn(MaocPtn maocPtn)
-    {
-    }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        EditDlg dlg = new EditDlg();
+        MnumDlg dlg = new MnumDlg(maocPtn, this);
         dlg.initView();
         dlg.initLang();
-        dlg.initData();
-        int status = javax.swing.JOptionPane.showConfirmDialog(maocPtn, dlg, "", javax.swing.JOptionPane.OK_CANCEL_OPTION, javax.swing.JOptionPane.INFORMATION_MESSAGE);
-        if (javax.swing.JOptionPane.OK_OPTION != status)
-        {
-            return;
-        }
-        maocPtn.appendNum(dlg.getInputName(), dlg.getInputValue(), dlg.getInputRemark());
+        dlg.initData(null);
+        dlg.setVisible(true);
     }
 
     @Override
@@ -55,5 +46,20 @@ public class AppendAction extends AMaocAction
     @Override
     public void reInit(javax.swing.AbstractButton button, String value)
     {
+    }
+
+    @Override
+    public boolean callBack(String options, S1S3 object)
+    {
+        if (!IBackCall.OPTIONS_APPLY.equals(options))
+        {
+            return true;
+        }
+        if (object == null)
+        {
+            return false;
+        }
+        maocPtn.appendNum(object);
+        return true;
     }
 }

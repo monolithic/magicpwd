@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2011 Aven
+ *  Copyright (C) 2011 Amon
  * 
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -14,29 +14,30 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.e.maoc.mfun;
-
-import com.magicpwd.__a.maoc.AMaocAction;
+package com.magicpwd._comn;
 
 /**
  *
- * @author Aven
+ * @author Amon
  */
-public class DeleteAction extends AMaocAction
+public class D1S2 extends S1S1
 {
 
-    @Override
-    public void actionPerformed(java.awt.event.ActionEvent e)
+    private double _d;
+
+    public D1S2(double d, String k, String v)
     {
+        super(k, v);
+        this._d = d;
     }
 
-    @Override
-    public void doInit(String value)
+    public void setD(double d)
     {
+        this._d = d;
     }
 
-    @Override
-    public void reInit(javax.swing.AbstractButton button, String value)
+    public double getD()
     {
+        return _d;
     }
 }

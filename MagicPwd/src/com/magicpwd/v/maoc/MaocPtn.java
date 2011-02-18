@@ -17,7 +17,8 @@
 package com.magicpwd.v.maoc;
 
 import com.magicpwd.__a.AFrame;
-import com.magicpwd._comn.S1S2;
+import com.magicpwd._comn.D1S2;
+import com.magicpwd._comn.S1S3;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.LangRes;
@@ -39,7 +40,6 @@ import org.javia.arity.Symbols;
 public class MaocPtn extends AFrame
 {
 
-    private int precision;
     private MaocMdl maocMdl;
     private MenuPtn menuPtn;
     private Symbols symbols;
@@ -185,7 +185,10 @@ public class MaocPtn extends AFrame
         maocMdl = new MaocMdl(userMdl);
         maocMdl.init();
 
-        tb_ExpList.setModel(maocMdl.getGridMdl());
+        ls_NumList.setModel(maocMdl.getMnumMdl());
+        ls_FunList.setModel(maocMdl.getMfunMdl());
+        tb_ExpList.setModel(maocMdl.getMexpMdl());
+
         changeTableStruct();
 
         symbols = new Symbols();
@@ -270,14 +273,12 @@ public class MaocPtn extends AFrame
     {
     }
 
-    private void bt_ExpTextActionPerformed(java.awt.event.ActionEvent e)
+    public String trim(String exp)
     {
-        String exp = tf_ExpText.getText().trim();
         if (!Char.isValidate(exp))
         {
-            return;
+            return "";
         }
-
         StringBuilder buf = new StringBuilder(exp);
         buf = Char.replace(buf, "０", "0");
         buf = Char.replace(buf, "１", "1");
@@ -313,16 +314,27 @@ public class MaocPtn extends AFrame
         buf = Char.replace(buf, "ε", "e");
         buf = Char.replace(buf, "π", "pi");
 
-        String val = buf.toString().replaceAll("\\s*[=]+\\s*$", "");
-        if (!Char.isValidate(val))
+        return buf.toString();
+    }
+
+    private void bt_ExpTextActionPerformed(java.awt.event.ActionEvent e)
+    {
+        String exp = tf_ExpText.getText().trim();
+        if (!Char.isValidate(exp))
+        {
+            return;
+        }
+
+        String tmp = trim(exp).replaceAll("\\s*[=]+\\s*$", "");
+        if (!Char.isValidate(tmp))
         {
             return;
         }
 
         try
         {
-            val = Double.toString(symbols.eval(buf.toString()));
-            maocMdl.getGridMdl().appendValue(new S1S2("", exp, val));
+            double d = symbols.eval(tmp);
+            maocMdl.getMexpMdl().appendItem(new D1S2(d, exp, maocMdl.getFormat().format(d)));
         }
         catch (Exception ex)
         {
@@ -341,7 +353,7 @@ public class MaocPtn extends AFrame
      */
     public int getPrecision()
     {
-        return precision;
+        return maocMdl.getFormat().getMaximumFractionDigits();
     }
 
     /**
@@ -349,7 +361,10 @@ public class MaocPtn extends AFrame
      */
     public void setPrecision(int precision)
     {
-        this.precision = precision;
+        if (precision >= 0)
+        {
+            maocMdl.getFormat().setMaximumFractionDigits(precision);
+        }
     }
 
     public void setExpression(String expression)
@@ -362,37 +377,190 @@ public class MaocPtn extends AFrame
         return tf_ExpText.getText();
     }
 
-    public void appendNum(String name, String value, String remark)
+    public S1S3 getSelectedNum()
     {
-        if (!Char.isValidate(name) || !Char.isValidate(value))
-        {
-            return;
-        }
+        return null;
     }
 
-    public void updateNum(String name, String value, String remark)
+    public boolean appendNum(S1S3 item)
     {
+        if (!Char.isValidate(item.getV()) || !Char.isValidate(item.getV2()))
+        {
+            return false;
+        }
+        try
+        {
+            org.javia.arity.FunctionAndName fan = symbols.compileWithName(item.getV() + '=' + item.getV2());
+            symbols.define(fan);
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            Lang.showMesg(this, null, exp.getLocalizedMessage());
+            return false;
+        }
+        maocMdl.getMnumMdl().appendItem(item);
+        return true;
+    }
+
+    public boolean updateNum(S1S3 item)
+    {
+        if (!Char.isValidate(item.getV()) || !Char.isValidate(item.getV2()))
+        {
+            return false;
+        }
+        try
+        {
+            org.javia.arity.FunctionAndName fan = symbols.compileWithName(item.getV() + '=' + item.getV2());
+            symbols.define(fan);
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            Lang.showMesg(this, null, exp.getLocalizedMessage());
+            return false;
+        }
+        return true;
     }
 
     public void deleteNum()
     {
     }
 
-    public void appendFun(String name, String value, String remark)
+    public void reuseNumName()
     {
+        int row = ls_FunList.getSelectedIndex();
+        if (row < 0)
+        {
+            return;
+        }
+        S1S3 item = maocMdl.getMnumMdl().getItemAt(row);
+        if (item != null)
+        {
+            replaceExpression(item.getV());
+        }
     }
 
-    public void updateFun(String name, String value, String remark)
+    public void reuseNumValue()
     {
+        int row = ls_FunList.getSelectedIndex();
+        if (row < 0)
+        {
+            return;
+        }
+        S1S3 item = maocMdl.getMnumMdl().getItemAt(row);
+        if (item != null)
+        {
+            replaceExpression(item.getV2());
+        }
+    }
+
+    public boolean appendFun(S1S3 item)
+    {
+        if (!Char.isValidate(item.getV()) || !Char.isValidate(item.getV2()))
+        {
+            return false;
+        }
+        try
+        {
+            org.javia.arity.FunctionAndName fan = symbols.compileWithName(item.getV() + '=' + item.getV2());
+            symbols.define(fan);
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            Lang.showMesg(this, null, exp.getLocalizedMessage());
+            return false;
+        }
+        maocMdl.getMfunMdl().appendItem(item);
+        return true;
+    }
+
+    public boolean updateFun(S1S3 item)
+    {
+        if (!Char.isValidate(item.getV()) || !Char.isValidate(item.getV2()))
+        {
+            return false;
+        }
+        try
+        {
+            org.javia.arity.FunctionAndName fan = symbols.compileWithName(item.getV() + '=' + item.getV2());
+            symbols.define(fan);
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            Lang.showMesg(this, null, exp.getLocalizedMessage());
+            return false;
+        }
+        return true;
     }
 
     public void deleteFun()
     {
     }
 
+    public void reuseFunName()
+    {
+        int row = ls_FunList.getSelectedIndex();
+        if (row < 0)
+        {
+            return;
+        }
+        S1S3 item = maocMdl.getMfunMdl().getItemAt(row);
+        if (item != null)
+        {
+            replaceExpression(item.getV());
+        }
+    }
+
+    public void reuseFunValue()
+    {
+        int row = ls_FunList.getSelectedIndex();
+        if (row < 0)
+        {
+            return;
+        }
+        S1S3 item = maocMdl.getMfunMdl().getItemAt(row);
+        if (item != null)
+        {
+            replaceExpression(item.getV2());
+        }
+    }
+
     public void appendExp(String expression)
     {
         tf_ExpText.setText(tf_ExpText.getText() + expression);
+    }
+
+    public void reuseExpName()
+    {
+        int row = tb_ExpList.getSelectedRow();
+        if (row < 0)
+        {
+            return;
+        }
+
+        D1S2 item = maocMdl.getMexpMdl().getItemAt(row);
+        if (item != null)
+        {
+            replaceExpression(item.getK());
+        }
+    }
+
+    public void reuseExpValue()
+    {
+        int row = tb_ExpList.getSelectedRow();
+        if (row < 0)
+        {
+            return;
+        }
+
+        D1S2 item = maocMdl.getMexpMdl().getItemAt(row);
+        if (item != null)
+        {
+            replaceExpression(item.getV());
+        }
     }
 
     public void replaceExpression(String expression)

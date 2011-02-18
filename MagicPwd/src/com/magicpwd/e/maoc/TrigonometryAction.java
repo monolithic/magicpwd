@@ -18,7 +18,6 @@ package com.magicpwd.e.maoc;
 
 import com.magicpwd.__a.maoc.AMaocAction;
 import com.magicpwd._util.Char;
-import com.magicpwd.v.maoc.MaocPtn;
 
 /**
  *
@@ -26,12 +25,6 @@ import com.magicpwd.v.maoc.MaocPtn;
  */
 public class TrigonometryAction extends AMaocAction
 {
-
-    @Override
-    public void setMaocPtn(MaocPtn maocPtn)
-    {
-        this.maocPtn = maocPtn;
-    }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
