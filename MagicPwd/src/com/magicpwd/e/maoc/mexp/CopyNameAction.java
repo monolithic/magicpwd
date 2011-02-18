@@ -28,6 +28,7 @@ public class CopyNameAction extends AMaocAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
+        maocPtn.copyExpName();
     }
 
     @Override

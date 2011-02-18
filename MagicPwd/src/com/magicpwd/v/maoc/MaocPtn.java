@@ -26,6 +26,7 @@ import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
+import com.magicpwd._util.Util;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.m.maoc.MaocMdl;
 import com.magicpwd.v.MenuPtn;
@@ -427,6 +428,34 @@ public class MaocPtn extends AFrame
     {
     }
 
+    public void copyNumName()
+    {
+        int row = ls_FunList.getSelectedIndex();
+        if (row < 0)
+        {
+            return;
+        }
+        S1S3 item = maocMdl.getMnumMdl().getItemAt(row);
+        if (item != null)
+        {
+            Util.copy2Clipboard(item.getV());
+        }
+    }
+
+    public void copyNumValue()
+    {
+        int row = ls_FunList.getSelectedIndex();
+        if (row < 0)
+        {
+            return;
+        }
+        S1S3 item = maocMdl.getMnumMdl().getItemAt(row);
+        if (item != null)
+        {
+            Util.copy2Clipboard(item.getV2());
+        }
+    }
+
     public void reuseNumName()
     {
         int row = ls_FunList.getSelectedIndex();
@@ -500,6 +529,34 @@ public class MaocPtn extends AFrame
     {
     }
 
+    public void copyFunName()
+    {
+        int row = ls_FunList.getSelectedIndex();
+        if (row < 0)
+        {
+            return;
+        }
+        S1S3 item = maocMdl.getMfunMdl().getItemAt(row);
+        if (item != null)
+        {
+            Util.copy2Clipboard(item.getV());
+        }
+    }
+
+    public void copyFunValue()
+    {
+        int row = ls_FunList.getSelectedIndex();
+        if (row < 0)
+        {
+            return;
+        }
+        S1S3 item = maocMdl.getMfunMdl().getItemAt(row);
+        if (item != null)
+        {
+            Util.copy2Clipboard(item.getV2());
+        }
+    }
+
     public void reuseFunName()
     {
         int row = ls_FunList.getSelectedIndex();
@@ -531,6 +588,36 @@ public class MaocPtn extends AFrame
     public void appendExp(String expression)
     {
         tf_ExpText.setText(tf_ExpText.getText() + expression);
+    }
+
+    public void copyExpName()
+    {
+        int row = tb_ExpList.getSelectedRow();
+        if (row < 0)
+        {
+            return;
+        }
+
+        D1S2 item = maocMdl.getMexpMdl().getItemAt(row);
+        if (item != null)
+        {
+            Util.copy2Clipboard(item.getK());
+        }
+    }
+
+    public void copyExpValue()
+    {
+        int row = tb_ExpList.getSelectedRow();
+        if (row < 0)
+        {
+            return;
+        }
+
+        D1S2 item = maocMdl.getMexpMdl().getItemAt(row);
+        if (item != null)
+        {
+            Util.copy2Clipboard(item.getV());
+        }
     }
 
     public void reuseExpName()
