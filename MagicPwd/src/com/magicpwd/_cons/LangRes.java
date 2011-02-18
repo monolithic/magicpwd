@@ -934,7 +934,7 @@ public interface LangRes
     // ----------------------------------------------------
     String P30FB300 = "P30FB300";// c
     String P30FB301 = "P30FB301";// 用户(@U)
-    String P30FB302 = "P30FB302";
+    String P30FB302 = "P30FB302";// 用户(@U)
     String P30FB303 = "P30FB303";
     String P30FB304 = "P30FB304";
     String P30FB305 = "P30FB305";
@@ -942,6 +942,7 @@ public interface LangRes
     String P30FB307 = "P30FB307";
     String P30FB308 = "P30FB308";
     String P30FB309 = "P30FB309";
+    String P30FB30A = "P30FB30A";
     // ----------------------------------------------------
     // 5 按钮语言资源
     // ----------------------------------------------------

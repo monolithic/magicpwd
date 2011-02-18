@@ -121,9 +121,9 @@ public class MfunDlg extends ADialog
     {
         this.setTitle(Lang.getLang(LangRes.P30FB203, "函数管理"));
 
-        Lang.setWText(lb_Name, LangRes.P30FB304, "函数名(@N)");
-        Lang.setWText(lb_Value, LangRes.P30FB305, "函数值(@V)");
-        Lang.setWText(lb_Remark, LangRes.P30FB306, "附注(@R)");
+        Lang.setWText(lb_Name, LangRes.P30FB305, "函数名(@N)");
+        Lang.setWText(lb_Value, LangRes.P30FB306, "函数值(@V)");
+        Lang.setWText(lb_Remark, LangRes.P30FB307, "附注(@R)");
 
         Bean.setText(bt_Abort, "取消(@C)");
         Bean.setText(bt_Apply, "确认(@O)");
