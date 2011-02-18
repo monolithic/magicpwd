@@ -5,36 +5,6 @@
             <action class="com.magicpwd.e.tray.InfoAction" />
         </item>
         <seperator />
-        <menu id="precision" text="$P30FB601" text-def="小数精度(@P)">
-            <item type="checkbox" text="1位" group="data-precision" command="dec:1">
-                <action id="precision" class="com.magicpwd.e.maoc.PrecisionAction" />
-            </item>
-            <item type="checkbox" text="2位" group="data-precision" command="dec:2">
-                <action id="precision" class="com.magicpwd.e.maoc.PrecisionAction" />
-            </item>
-            <item type="checkbox" text="3位" group="data-precision" command="dec:3">
-                <action id="precision" class="com.magicpwd.e.maoc.PrecisionAction" />
-            </item>
-            <item type="checkbox" text="4位" group="data-precision" command="dec:4">
-                <action id="precision" class="com.magicpwd.e.maoc.PrecisionAction" />
-            </item>
-            <item type="checkbox" text="5位" group="data-precision" command="dec:5">
-                <action id="precision" class="com.magicpwd.e.maoc.PrecisionAction" />
-            </item>
-            <item type="checkbox" text="6位" group="data-precision" command="dec:6">
-                <action id="precision" class="com.magicpwd.e.maoc.PrecisionAction" />
-            </item>
-            <item type="checkbox" text="7位" group="data-precision" command="dec:7">
-                <action id="precision" class="com.magicpwd.e.maoc.PrecisionAction" />
-            </item>
-            <item type="checkbox" text="8位" group="data-precision" command="dec:8">
-                <action id="precision" class="com.magicpwd.e.maoc.PrecisionAction" />
-            </item>
-            <seperator />
-            <item type="checkbox" id="data-precision" text="$P30F7C0B" text-def="其它……" group="data-precision" command="dec:-1">
-                <action id="precision" class="com.magicpwd.e.maoc.PrecisionAction" />
-            </item>
-        </menu>
         <menu id="arithmetic" text="$P30FB602" text-def="四则运算">
             <item type="normal" text="$P30FB608" text-def="加法" command="+">
                 <action id="arithmetic" class="com.magicpwd.e.maoc.ArithmeticAction" />
@@ -130,10 +100,44 @@
             <item type="normal" text="$P30FB621" text-def="圆周率" command="π">
                 <action id="constant" class="com.magicpwd.e.maoc.ConstantAction" />
             </item>
-            <item type="normal" text="$P30FB622" text-def="自然数" command="ê">
+            <item type="normal" text="$P30FB622" text-def="自然数" command="ε">
                 <action id="constant" class="com.magicpwd.e.maoc.ConstantAction" />
             </item>
         </menu>
+        <seperator />
+        <menu id="precision" text="$P30FB601" text-def="小数精度(@P)">
+            <item type="checkbox" text="1位" group="data-precision" command="dec:1">
+                <action id="precision" class="com.magicpwd.e.maoc.PrecisionAction" />
+            </item>
+            <item type="checkbox" text="2位" group="data-precision" command="dec:2">
+                <action id="precision" class="com.magicpwd.e.maoc.PrecisionAction" />
+            </item>
+            <item type="checkbox" text="3位" group="data-precision" command="dec:3">
+                <action id="precision" class="com.magicpwd.e.maoc.PrecisionAction" />
+            </item>
+            <item type="checkbox" text="4位" group="data-precision" command="dec:4">
+                <action id="precision" class="com.magicpwd.e.maoc.PrecisionAction" />
+            </item>
+            <item type="checkbox" text="5位" group="data-precision" command="dec:5">
+                <action id="precision" class="com.magicpwd.e.maoc.PrecisionAction" />
+            </item>
+            <item type="checkbox" text="6位" group="data-precision" command="dec:6">
+                <action id="precision" class="com.magicpwd.e.maoc.PrecisionAction" />
+            </item>
+            <item type="checkbox" text="7位" group="data-precision" command="dec:7">
+                <action id="precision" class="com.magicpwd.e.maoc.PrecisionAction" />
+            </item>
+            <item type="checkbox" text="8位" group="data-precision" command="dec:8">
+                <action id="precision" class="com.magicpwd.e.maoc.PrecisionAction" />
+            </item>
+            <seperator />
+            <item type="checkbox" id="data-precision" text="$P30F7C0B" text-def="其它……" group="data-precision" command="dec:-1">
+                <action id="precision" class="com.magicpwd.e.maoc.PrecisionAction" />
+            </item>
+        </menu>
+        <item type="checkbox" id="grouping-used" text="$P30FB63A" text-def="使用逗号分隔符" command="1">
+            <action class="com.magicpwd.e.maoc.mexp.GroupingAction" />
+        </item>
         <seperator />
         <item type="normal" text="$P30F960C" text-def="退出">
             <action class="com.magicpwd.e.tray.InfoAction" />
@@ -175,7 +179,7 @@
         <item type="normal" text="$P30FB62C" text-def="追加函数名到光标处">
             <action class="com.magicpwd.e.maoc.mfun.ReuseNameAction" />
         </item>
-        <item type="normal" text="$P30FB62D" text-def="追加函数名到光标处">
+        <item type="normal" text="$P30FB62D" text-def="追加函数体到光标处">
             <action class="com.magicpwd.e.maoc.mfun.ReuseValueAction" />
         </item>
         <seperator />
@@ -212,16 +216,13 @@
         </item>
         <seperator />
         <menu type="normal" text="$P30FB637" text-def="显示方式">
-            <item type="checkbox" id="single-line" text="$P30FB638" text-def="单行" command="1" group="distinct">
-                <action id="viewMode" class="com.magicpwd.e.maoc.mexp.ViewModeAction" />
+            <item type="checkbox" id="single-line" text="$P30FB638" text-def="单列" command="1" group="view-mode">
+                <action id="view-mode" class="com.magicpwd.e.maoc.mexp.ViewModeAction" />
             </item>
-            <item type="checkbox" id="multi-line" text="$P30FB639" text-def="多行" command="2" group="distinct">
-                <action id="viewMode" class="com.magicpwd.e.maoc.mexp.ViewModeAction" />
+            <item type="checkbox" id="multi-line" text="$P30FB639" text-def="多列" command="2" group="view-mode">
+                <action id="view-mode" class="com.magicpwd.e.maoc.mexp.ViewModeAction" />
             </item>
         </menu>
-        <item type="checkbox" id="single-line" text="$P30FB638" text-def="单行" command="1">
-            <action class="com.magicpwd.e.maoc.mexp.GroupingAction" />
-        </item>
     </popmenu>
     <strokes id="maoc">
         <action id="exit-window" class="com.magicpwd.e.maoc.ExitAction">
