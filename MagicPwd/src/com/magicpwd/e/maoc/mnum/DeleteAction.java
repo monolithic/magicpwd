@@ -28,6 +28,7 @@ public class DeleteAction extends AMaocAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
+        maocPtn.deleteNum();
     }
 
     @Override

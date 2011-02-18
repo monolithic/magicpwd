@@ -70,6 +70,29 @@ public class MfunMdl implements javax.swing.ListModel, java.io.Serializable
         this.fireIntervalAdded(item, i, i);
     }
 
+    public boolean deleteItem(int rowIndex)
+    {
+        if (rowIndex > -1 && rowIndex < funList.size())
+        {
+            this.fireIntervalRemoved(funList.remove(rowIndex), rowIndex, rowIndex);
+            return true;
+        }
+        return false;
+    }
+
+    public void updateItem(S1S3 item)
+    {
+        this.fireContentsChanged(item, 0, 0);
+    }
+
+    public void deleteItem(S1S3 item)
+    {
+        if (item != null && funList.remove(item))
+        {
+            this.fireIntervalRemoved(item, 0, funList.size());
+        }
+    }
+
     private void fireContentsChanged(Object source, int index0, int index1)
     {
         Object[] listeners = listenerList.getListenerList();
