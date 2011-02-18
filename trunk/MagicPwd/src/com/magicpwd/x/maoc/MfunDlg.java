@@ -119,11 +119,11 @@ public class MfunDlg extends ADialog
 
     public void initLang()
     {
-        this.setTitle("函数管理");
+        this.setTitle(Lang.getLang(LangRes.P30FB203, "函数管理"));
 
-        Lang.setWText(lb_Name, LangRes.P30F8362, "函数名(@N)");
-        Lang.setWText(lb_Value, LangRes.P30F8363, "函数值(@V)");
-        Lang.setWText(lb_Remark, LangRes.P30F8365, "附注(@R)");
+        Lang.setWText(lb_Name, LangRes.P30FB304, "函数名(@N)");
+        Lang.setWText(lb_Value, LangRes.P30FB305, "函数值(@V)");
+        Lang.setWText(lb_Remark, LangRes.P30FB306, "附注(@R)");
 
         Bean.setText(bt_Abort, "取消(@C)");
         Bean.setText(bt_Apply, "确认(@O)");
@@ -177,17 +177,23 @@ public class MfunDlg extends ADialog
 
     private void bt_ApplyActionPerformed(java.awt.event.ActionEvent e)
     {
-        String name = tf_Name.getText();
-        if (!java.util.regex.Pattern.matches("^[A-Za-z][A-Za-z\\d]*$", name))
+        String name = tf_Name.getText().replaceAll("\\s+", "");
+        if (!Char.isValidate(name))
         {
-            Lang.showMesg(this, LangRes.P30F7A15, "请输入类别名称：");
+            Lang.showMesg(this, LangRes.P30FBA06, "函数名不能为空！");
             tf_Name.requestFocus();
             return;
         }
-        String value = tf_Value.getText();
+        if (!java.util.regex.Pattern.matches("^[A-Za-z][A-Za-z\\d]*(\\([A-Za-z][A-Za-z\\d]*(,[A-Za-z][A-Za-z\\d]*)*\\))?$", name))
+        {
+            Lang.showMesg(this, LangRes.P30FBA07, "函数名只能包含字母及数字，且以字母开始！");
+            tf_Name.requestFocus();
+            return;
+        }
+        String value = tf_Value.getText().replaceAll("\\s+", "");
         if (!Char.isValidate(value))
         {
-            Lang.showMesg(this, LangRes.P30F7A15, "请输入类别名称：");
+            Lang.showMesg(this, LangRes.P30FBA08, "函数体不能为空！");
             tf_Value.requestFocus();
             return;
         }

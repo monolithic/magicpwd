@@ -261,7 +261,7 @@ public class BodyPtn extends javax.swing.JPanel
         String val = field.getText().replaceAll("\\s+", "");
         if (val.length() < 1 || !Char.isValidatePositiveDecimal(val))
         {
-            Lang.showMesg(mrucPtn, LangRes.P30FBA010, "请输入一个非负数值！");
+            Lang.showMesg(mrucPtn, LangRes.P30FBA01, "请输入一个非负数值！");
             field.requestFocus();
             return;
         }

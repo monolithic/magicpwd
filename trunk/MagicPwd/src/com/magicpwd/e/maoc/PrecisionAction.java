@@ -47,14 +47,14 @@ public class PrecisionAction extends AMaocAction
             {
                 do
                 {
-                    cmd = javax.swing.JOptionPane.showInputDialog(maocPtn, Lang.getLang(LangRes.P30F7A4F, "请输入一个非负数值！"));
+                    cmd = javax.swing.JOptionPane.showInputDialog(maocPtn, Lang.getLang(LangRes.P30FBA02, "请输入一个0到16之间的整数！"), "" + maocPtn.getPrecision());
                     if (cmd == null)
                     {
                         return;
                     }
                     cmd = cmd.trim();
                 }
-                while (!java.util.regex.Pattern.matches("^\\d+$", cmd));
+                while (!java.util.regex.Pattern.matches("^0?\\d|1[0-6]$", cmd));
             }
             maocPtn.setPrecision(Integer.parseInt(cmd));
             return;
