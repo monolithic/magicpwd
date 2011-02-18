@@ -34,38 +34,18 @@ public class TrigonometryAction extends AMaocAction
         {
             return;
         }
-
-        if ("sin".equalsIgnoreCase(cmd))
-        {
-            cmd += "()";
-        }
-        else if ("cos".equalsIgnoreCase(cmd))
-        {
-            cmd += "()";
-        }
-        else if ("tag".equalsIgnoreCase(cmd))
-        {
-            cmd += "()";
-        }
-        else if ("cot".equalsIgnoreCase(cmd))
-        {
-            cmd += "()";
-        }
-        else if ("sec".equalsIgnoreCase(cmd))
-        {
-            cmd += "()";
-        }
-        else if ("csc".equalsIgnoreCase(cmd))
-        {
-            cmd += "()";
-        }
-        else
+        String[] arr = cmd.split(":");
+        if (arr == null || arr.length != 2)
         {
             return;
         }
-
-        maocPtn.replaceExpression(cmd);
-        maocPtn.moveCaretPosition(-1);
+        cmd = arr[0];
+        String tmp = arr[1];
+        if (!Char.isValidate(cmd) || !java.util.regex.Pattern.matches("^[-+]\\d+$", tmp))
+        {
+            return;
+        }
+        maocPtn.replaceExpression(cmd, tmp.charAt(0) == '+', Integer.parseInt(tmp.substring(1)));
     }
 
     @Override

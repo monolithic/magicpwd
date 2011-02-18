@@ -121,9 +121,9 @@ public class MnumDlg extends ADialog
     {
         this.setTitle(Lang.getLang(LangRes.P30FB202, "常量管理"));
 
-        Lang.setWText(lb_Name, LangRes.P30FB301, "常量名(@N)");
-        Lang.setWText(lb_Value, LangRes.P30FB302, "常量值(@V)");
-        Lang.setWText(lb_Remark, LangRes.P30FB303, "附注(@R)");
+        Lang.setWText(lb_Name, LangRes.P30FB302, "常量名(@N)");
+        Lang.setWText(lb_Value, LangRes.P30FB303, "常量值(@V)");
+        Lang.setWText(lb_Remark, LangRes.P30FB304, "附注(@R)");
 
         Bean.setText(bt_Abort, "取消(@C)");
         Bean.setText(bt_Apply, "确认(@O)");

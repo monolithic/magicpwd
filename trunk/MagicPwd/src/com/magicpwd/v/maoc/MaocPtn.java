@@ -274,6 +274,11 @@ public class MaocPtn extends AFrame
 
         this.pack();
         Bean.centerForm(this, null);
+
+        appendFun(new S1S3("", "cot(x)", "1/tan(x)", ""));
+        appendFun(new S1S3("", "ctg(x)", "1/tan(x)", ""));
+        appendFun(new S1S3("", "csc(x)", "1/sin(x)", ""));
+        appendFun(new S1S3("", "sec(x)", "1/cos(x)", ""));
     }
 
     public void showData()
