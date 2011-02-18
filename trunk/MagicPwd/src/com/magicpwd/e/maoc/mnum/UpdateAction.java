@@ -17,13 +17,16 @@
 package com.magicpwd.e.maoc.mnum;
 
 import com.magicpwd.__a.maoc.AMaocAction;
+import com.magicpwd.__i.IBackCall;
+import com.magicpwd._comn.S1S3;
 import com.magicpwd.v.maoc.MaocPtn;
+import com.magicpwd.x.maoc.MnumDlg;
 
 /**
  *
  * @author Aven
  */
-public class UpdateAction extends AMaocAction
+public class UpdateAction extends AMaocAction implements IBackCall<S1S3>
 {
 
     @Override
@@ -34,6 +37,17 @@ public class UpdateAction extends AMaocAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
+        S1S3 item = maocPtn.getSelectedNum();
+        if (item == null)
+        {
+            return;
+        }
+
+        MnumDlg dlg = new MnumDlg(maocPtn, this);
+        dlg.initView();
+        dlg.initLang();
+        dlg.initData(null);
+        dlg.setVisible(true);
     }
 
     @Override
@@ -44,5 +58,20 @@ public class UpdateAction extends AMaocAction
     @Override
     public void reInit(javax.swing.AbstractButton button, String value)
     {
+    }
+
+    @Override
+    public boolean callBack(String options, S1S3 object)
+    {
+        if (!IBackCall.OPTIONS_APPLY.equals(options))
+        {
+            return true;
+        }
+        if (object == null)
+        {
+            return false;
+        }
+        maocPtn.updateNum(object);
+        return true;
     }
 }

@@ -16,6 +16,7 @@
  */
 package com.magicpwd.m.maoc;
 
+import com.magicpwd._comn.D1S2;
 import com.magicpwd._comn.S1S2;
 import javax.swing.event.TableModelListener;
 
@@ -26,14 +27,14 @@ import javax.swing.event.TableModelListener;
 public class MexpMdl implements javax.swing.table.TableModel, java.io.Serializable
 {
 
-    private java.util.List<S1S2> expList;
+    private java.util.List<D1S2> expList;
     private MaocMdl maocMdl;
     private javax.swing.event.EventListenerList listenerList;
 
     public MexpMdl(MaocMdl maocMdl)
     {
         this.maocMdl = maocMdl;
-        expList = new java.util.ArrayList<S1S2>();
+        expList = new java.util.ArrayList<D1S2>();
         listenerList = new javax.swing.event.EventListenerList();
     }
 
@@ -75,8 +76,8 @@ public class MexpMdl implements javax.swing.table.TableModel, java.io.Serializab
             return "";
         }
 
-        S1S2 item = expList.get(rowIndex);
-        return maocMdl.isDistinct() ? (columnIndex != 1 ? item.getV() : item.getV2()) : item.getV() + "=" + item.getV2();
+        D1S2 item = expList.get(rowIndex);
+        return maocMdl.isDistinct() ? (columnIndex != 1 ? item.getK() : item.getV()) : item.getK() + "=" + item.getV();
     }
 
     @Override
@@ -96,13 +97,18 @@ public class MexpMdl implements javax.swing.table.TableModel, java.io.Serializab
         listenerList.remove(javax.swing.event.TableModelListener.class, l);
     }
 
-    public void appendValue(S1S2 item)
+    public D1S2 getItemAt(int rowIndex)
+    {
+        return expList.get(rowIndex);
+    }
+
+    public void appendItem(D1S2 item)
     {
         expList.add(item);
         fireTableDataChanged();
     }
 
-    public void removeValue(S1S2 item)
+    public void removeItem(S1S2 item)
     {
     }
 

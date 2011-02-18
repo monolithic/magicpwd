@@ -28,4 +28,10 @@ public abstract class AMaocAction extends AAction implements IMaocAction
 {
 
     protected MaocPtn maocPtn;
+
+    @Override
+    public void setMaocPtn(MaocPtn maocPtn)
+    {
+        this.maocPtn = maocPtn;
+    }
 }

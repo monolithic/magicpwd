@@ -17,7 +17,6 @@
 package com.magicpwd.e.maoc.mfun;
 
 import com.magicpwd.__a.maoc.AMaocAction;
-import com.magicpwd.v.maoc.MaocPtn;
 
 /**
  *
@@ -27,13 +26,9 @@ public class ReuseNameAction extends AMaocAction
 {
 
     @Override
-    public void setMaocPtn(MaocPtn maocPtn)
-    {
-    }
-
-    @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
+        maocPtn.reuseFunName();
     }
 
     @Override

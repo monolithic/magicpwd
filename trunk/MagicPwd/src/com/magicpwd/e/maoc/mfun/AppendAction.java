@@ -17,23 +17,25 @@
 package com.magicpwd.e.maoc.mfun;
 
 import com.magicpwd.__a.maoc.AMaocAction;
-import com.magicpwd.v.maoc.MaocPtn;
+import com.magicpwd.__i.IBackCall;
+import com.magicpwd._comn.S1S3;
+import com.magicpwd.x.maoc.MfunDlg;
 
 /**
  *
  * @author Aven
  */
-public class AppendAction extends AMaocAction
+public class AppendAction extends AMaocAction implements IBackCall<S1S3>
 {
-
-    @Override
-    public void setMaocPtn(MaocPtn maocPtn)
-    {
-    }
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
+        MfunDlg dlg = new MfunDlg(maocPtn, this);
+        dlg.initView();
+        dlg.initLang();
+        dlg.initData(null);
+        dlg.setVisible(true);
     }
 
     @Override
@@ -44,5 +46,20 @@ public class AppendAction extends AMaocAction
     @Override
     public void reInit(javax.swing.AbstractButton button, String value)
     {
+    }
+
+    @Override
+    public boolean callBack(String options, S1S3 object)
+    {
+        if (!IBackCall.OPTIONS_APPLY.equals(options))
+        {
+            return true;
+        }
+        if (object == null)
+        {
+            return false;
+        }
+        maocPtn.appendFun(object);
+        return true;
     }
 }

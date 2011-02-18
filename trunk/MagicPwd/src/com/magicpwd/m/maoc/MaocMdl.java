@@ -17,6 +17,7 @@
 package com.magicpwd.m.maoc;
 
 import com.magicpwd.m.UserMdl;
+import java.text.DecimalFormat;
 
 /**
  * Application: MagicPwd
@@ -33,8 +34,11 @@ public class MaocMdl
 {
 
     private UserMdl userMdl;
-    private MexpMdl gridMdl;
+    private MnumMdl mnumMdl;
+    private MfunMdl mfunMdl;
+    private MexpMdl mexpMdl;
     private boolean distinct;
+    private DecimalFormat format;
 
     public MaocMdl(UserMdl userMdl)
     {
@@ -43,15 +47,34 @@ public class MaocMdl
 
     public void init()
     {
-        gridMdl = new MexpMdl(this);
+        mnumMdl = new MnumMdl(this);
+        mfunMdl = new MfunMdl(this);
+        mexpMdl = new MexpMdl(this);
+        format = new DecimalFormat();
+    }
+
+    /**
+     * @return the mnumMdl
+     */
+    public MnumMdl getMnumMdl()
+    {
+        return mnumMdl;
+    }
+
+    /**
+     * @return the mfunMdl
+     */
+    public MfunMdl getMfunMdl()
+    {
+        return mfunMdl;
     }
 
     /**
      * @return the gridMdl
      */
-    public MexpMdl getGridMdl()
+    public MexpMdl getMexpMdl()
     {
-        return gridMdl;
+        return mexpMdl;
     }
 
     /**
@@ -68,5 +91,15 @@ public class MaocMdl
     public void setDistinct(boolean distinct)
     {
         this.distinct = distinct;
+    }
+
+    public DecimalFormat getFormat()
+    {
+        return format;
+    }
+
+    public void setPrecision(int precision)
+    {
+        format.setMaximumFractionDigits(precision);
     }
 }
