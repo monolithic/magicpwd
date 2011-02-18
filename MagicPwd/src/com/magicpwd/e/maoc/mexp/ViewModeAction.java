@@ -28,7 +28,7 @@ public class ViewModeAction extends AMaocAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        maocPtn.setMultiColumnView(!"1".equals(e.getActionCommand()));
+        maocPtn.setMultiColumnView(e.getActionCommand());
     }
 
     @Override

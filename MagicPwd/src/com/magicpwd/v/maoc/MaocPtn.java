@@ -21,7 +21,9 @@ import com.magicpwd._comn.D1S2;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._comn.S1S3;
 import com.magicpwd._comp.BtnLabel;
+import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._comp.WTextBox;
+import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
@@ -191,8 +193,6 @@ public class MaocPtn extends AFrame
         ls_FunList.setModel(maocMdl.getMfunMdl());
         tb_ExpList.setModel(maocMdl.getMexpMdl());
 
-        changeTableStruct();
-
         symbols = new Symbols();
 
         java.awt.event.ActionListener listener = new java.awt.event.ActionListener()
@@ -243,6 +243,32 @@ public class MaocPtn extends AFrame
             Logs.exception(exp);
         }
 
+        // 初始化：是否使用逗号分隔符
+        boolean b = ConsCfg.DEF_TRUE.equalsIgnoreCase(userMdl.getCfg(ConsCfg.CFG_MAOC_GCU, ConsCfg.DEF_TRUE));
+        maocMdl.getFormat().setGroupingUsed(b);
+        javax.swing.AbstractButton bt = menuPtn.getButton("grouping-used");
+        if (bt != null)
+        {
+            bt.setSelected(b);
+        }
+
+        // 初始化：是否多列显示
+        String t = userMdl.getCfg(ConsCfg.CFG_MAOC_MCV, "1");
+        maocMdl.getMexpMdl().setMultiColumn("2".equals(t));
+        WButtonGroup bg = menuPtn.getGroup("view-mode");
+        if (bg != null)
+        {
+            bg.setSelected(t, true);
+        }
+
+        // 初始化：小数位精度
+        maocMdl.getFormat().setMaximumFractionDigits(8);
+        bg = menuPtn.getGroup("data-precision");
+        if (bg != null)
+        {
+            bg.setSelected("dec:8", true, "dec:-1");
+        }
+
         textBox.initData();
         tf_ExpText.requestFocus();
 
@@ -271,18 +297,16 @@ public class MaocPtn extends AFrame
     {
     }
 
-    public void changeTableStruct()
+    public void setMultiColumnView(String colNum)
     {
-    }
-
-    public void setMultiColumnView(boolean multi)
-    {
-        maocMdl.getMexpMdl().setMultiColumn(multi);
+        maocMdl.getMexpMdl().setMultiColumn("2".equals(colNum));
+        userMdl.setCfg(ConsCfg.CFG_MAOC_MCV, colNum);
     }
 
     public void setGroupingUsed(boolean used)
     {
         maocMdl.getFormat().setGroupingUsed(used);
+        userMdl.setCfg(ConsCfg.CFG_MAOC_GCU, used ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
     public String trim(String exp)
@@ -360,9 +384,6 @@ public class MaocPtn extends AFrame
         pm_AocHelp.show(bt_AocHelp, 0, bt_AocHelp.getHeight());
     }
 
-    /**
-     * @return the precision
-     */
     public int getPrecision()
     {
         return maocMdl.getFormat().getMaximumFractionDigits();
@@ -373,20 +394,10 @@ public class MaocPtn extends AFrame
      */
     public void setPrecision(int precision)
     {
-        if (precision >= 0)
+        if (precision >= 0 && precision <= 16)
         {
             maocMdl.getFormat().setMaximumFractionDigits(precision);
         }
-    }
-
-    public void setExpression(String expression)
-    {
-        tf_ExpText.setText(expression);
-    }
-
-    public String getExpression()
-    {
-        return tf_ExpText.getText();
     }
 
     public S1S3 getSelectedNum()

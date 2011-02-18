@@ -35,25 +35,7 @@ public class BracketAction extends AMaocAction
             return;
         }
 
-        if ("(".equals(cmd))
-        {
-            cmd += ')';
-        }
-        else if ("[".equals(cmd))
-        {
-            cmd += ']';
-        }
-        else if ("{".equals(cmd))
-        {
-            cmd += '}';
-        }
-        else
-        {
-            return;
-        }
-
-        maocPtn.replaceExpression(cmd);
-        maocPtn.moveCaretPosition(-1);
+        maocPtn.replaceExpression(cmd, false, -1);
     }
 
     @Override

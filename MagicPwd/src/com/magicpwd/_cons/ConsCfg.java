@@ -204,8 +204,23 @@ public interface ConsCfg
     String CFG_MODE = CFG_PRE + ".mode";
     String CFG_MODE_APP = CFG_MODE + ".app";
     String CFG_MODE_RUN = CFG_MODE + ".run";
+    /**
+     * 向导模式：
+     */
     String CFG_MPAD = CFG_PRE + ".mpad";
     String CFG_MPAD_WRAP = CFG_MPAD + ".wrap";
+    /**
+     * 数值运算：
+     */
+    String CFG_MAOC = CFG_PRE + ".maoc";
+    /**
+     * 数值运算：是否使用逗号分隔符
+     */
+    String CFG_MAOC_GCU = CFG_MAOC + ".gcu";
+    /**
+     * 数值运算：是否为多列显示
+     */
+    String CFG_MAOC_MCV = CFG_MAOC + ".mcv";
     /**
      * 默认数据：是
      */

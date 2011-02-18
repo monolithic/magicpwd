@@ -119,11 +119,11 @@ public class MnumDlg extends ADialog
 
     public void initLang()
     {
-        this.setTitle("常量管理");
+        this.setTitle(Lang.getLang(LangRes.P30FB202, "常量管理"));
 
-        Lang.setWText(lb_Name, LangRes.P30F8362, "常量名(@N)");
-        Lang.setWText(lb_Value, LangRes.P30F8363, "常量值(@V)");
-        Lang.setWText(lb_Remark, LangRes.P30F8365, "附注(@R)");
+        Lang.setWText(lb_Name, LangRes.P30FB301, "常量名(@N)");
+        Lang.setWText(lb_Value, LangRes.P30FB302, "常量值(@V)");
+        Lang.setWText(lb_Remark, LangRes.P30FB303, "附注(@R)");
 
         Bean.setText(bt_Abort, "取消(@C)");
         Bean.setText(bt_Apply, "确认(@O)");
@@ -177,17 +177,23 @@ public class MnumDlg extends ADialog
 
     private void bt_ApplyActionPerformed(java.awt.event.ActionEvent e)
     {
-        String name = tf_Name.getText();
-        if (!java.util.regex.Pattern.matches("^[A-Za-z][A-Za-z\\d]*$", name))
+        String name = tf_Name.getText().replaceAll("\\s+", "");
+        if (!Char.isValidate(name))
         {
-            Lang.showMesg(this, LangRes.P30F7A15, "请输入类别名称：");
+            Lang.showMesg(this, LangRes.P30FBA03, "常量名不能为空！");
             tf_Name.requestFocus();
             return;
         }
-        String value = tf_Value.getText();
+        if (!java.util.regex.Pattern.matches("^[A-Za-z][A-Za-z\\d]*$", name))
+        {
+            Lang.showMesg(this, LangRes.P30FBA04, "常量名只能包含字母及数字，且以字母开始！");
+            tf_Name.requestFocus();
+            return;
+        }
+        String value = tf_Value.getText().replaceAll("\\s+", "");
         if (!Char.isValidate(value))
         {
-            Lang.showMesg(this, LangRes.P30F7A15, "请输入类别名称：");
+            Lang.showMesg(this, LangRes.P30FBA05, "常量值不能为空！");
             tf_Value.requestFocus();
             return;
         }
