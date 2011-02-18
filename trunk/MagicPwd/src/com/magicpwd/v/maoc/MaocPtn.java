@@ -18,6 +18,7 @@ package com.magicpwd.v.maoc;
 
 import com.magicpwd.__a.AFrame;
 import com.magicpwd._comn.D1S2;
+import com.magicpwd._comn.S1S2;
 import com.magicpwd._comn.S1S3;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
@@ -426,6 +427,25 @@ public class MaocPtn extends AFrame
 
     public void deleteNum()
     {
+        int row = ls_NumList.getSelectedIndex();
+        if (row < 0)
+        {
+            return;
+        }
+        S1S2 item = maocMdl.getMnumMdl().getItemAt(row);
+        if (maocMdl.getMnumMdl().deleteItem(row))
+        {
+            try
+            {
+                org.javia.arity.FunctionAndName fan = symbols.compileWithName(item.getV() + '=' + item.getV2());
+                symbols.remove(fan.name, fan.function);
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+                Lang.showMesg(this, null, exp.getLocalizedMessage());
+            }
+        }
     }
 
     public void copyNumName()
@@ -527,6 +547,25 @@ public class MaocPtn extends AFrame
 
     public void deleteFun()
     {
+        int row = ls_FunList.getSelectedIndex();
+        if (row < 0)
+        {
+            return;
+        }
+        S1S2 item = maocMdl.getMfunMdl().getItemAt(row);
+        if (maocMdl.getMfunMdl().deleteItem(row))
+        {
+            try
+            {
+                org.javia.arity.FunctionAndName fan = symbols.compileWithName(item.getV() + '=' + item.getV2());
+                symbols.remove(fan.name, fan.function);
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+                Lang.showMesg(this, null, exp.getLocalizedMessage());
+            }
+        }
     }
 
     public void copyFunName()
