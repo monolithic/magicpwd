@@ -37,7 +37,6 @@ public class MaocMdl
     private MnumMdl mnumMdl;
     private MfunMdl mfunMdl;
     private MexpMdl mexpMdl;
-    private boolean distinct;
     private DecimalFormat format;
 
     public MaocMdl(UserMdl userMdl)
@@ -75,22 +74,6 @@ public class MaocMdl
     public MexpMdl getMexpMdl()
     {
         return mexpMdl;
-    }
-
-    /**
-     * @return the distinct
-     */
-    public boolean isDistinct()
-    {
-        return distinct;
-    }
-
-    /**
-     * @param distinct the distinct to set
-     */
-    public void setDistinct(boolean distinct)
-    {
-        this.distinct = distinct;
     }
 
     public DecimalFormat getFormat()

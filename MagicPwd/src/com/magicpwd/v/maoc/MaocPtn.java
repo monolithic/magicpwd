@@ -275,6 +275,16 @@ public class MaocPtn extends AFrame
     {
     }
 
+    public void setMultiColumnView(boolean multi)
+    {
+        maocMdl.getMexpMdl().setMultiColumn(multi);
+    }
+
+    public void setGroupingUsed(boolean used)
+    {
+        maocMdl.getFormat().setGroupingUsed(used);
+    }
+
     public String trim(String exp)
     {
         if (!Char.isValidate(exp))
@@ -381,7 +391,8 @@ public class MaocPtn extends AFrame
 
     public S1S3 getSelectedNum()
     {
-        return null;
+        int row = ls_NumList.getSelectedIndex();
+        return row > -1 ? maocMdl.getMnumMdl().getItemAt(row) : null;
     }
 
     public boolean appendNum(S1S3 item)
@@ -502,6 +513,12 @@ public class MaocPtn extends AFrame
         {
             replaceExpression(item.getV2());
         }
+    }
+
+    public S1S3 getSelectedFun()
+    {
+        int row = ls_FunList.getSelectedIndex();
+        return row > -1 ? maocMdl.getMfunMdl().getItemAt(row) : null;
     }
 
     public boolean appendFun(S1S3 item)
@@ -629,6 +646,21 @@ public class MaocPtn extends AFrame
         tf_ExpText.setText(tf_ExpText.getText() + expression);
     }
 
+    public void removeExpCur()
+    {
+        int row = tb_ExpList.getSelectedRow();
+        if (row < 0)
+        {
+            return;
+        }
+        maocMdl.getMexpMdl().removeItemAt(row);
+    }
+
+    public void removeExpAll()
+    {
+        maocMdl.getMexpMdl().removeAll();
+    }
+
     public void copyExpName()
     {
         int row = tb_ExpList.getSelectedRow();
@@ -685,7 +717,7 @@ public class MaocPtn extends AFrame
         D1S2 item = maocMdl.getMexpMdl().getItemAt(row);
         if (item != null)
         {
-            replaceExpression(item.getV());
+            replaceExpression(item.getV().replace(",", ""));
         }
     }
 

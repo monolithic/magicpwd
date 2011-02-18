@@ -28,6 +28,7 @@ public class RemoveCurAction extends AMaocAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
+        maocPtn.removeExpCur();
     }
 
     @Override

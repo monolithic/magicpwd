@@ -17,7 +17,6 @@
 package com.magicpwd.m.maoc;
 
 import com.magicpwd._comn.D1S2;
-import com.magicpwd._comn.S1S2;
 import javax.swing.event.TableModelListener;
 
 /**
@@ -27,6 +26,7 @@ import javax.swing.event.TableModelListener;
 public class MexpMdl implements javax.swing.table.TableModel, java.io.Serializable
 {
 
+    private boolean multiable;
     private java.util.List<D1S2> expList;
     private MaocMdl maocMdl;
     private javax.swing.event.EventListenerList listenerList;
@@ -47,13 +47,13 @@ public class MexpMdl implements javax.swing.table.TableModel, java.io.Serializab
     @Override
     public int getColumnCount()
     {
-        return maocMdl.isDistinct() ? 2 : 1;
+        return multiable ? 2 : 1;
     }
 
     @Override
     public String getColumnName(int columnIndex)
     {
-        return maocMdl.isDistinct() ? (columnIndex == 1 ? "结果" : "表达式") : "计算式";
+        return multiable ? (columnIndex == 1 ? "结果" : "表达式") : "计算式";
     }
 
     @Override
@@ -77,7 +77,7 @@ public class MexpMdl implements javax.swing.table.TableModel, java.io.Serializab
         }
 
         D1S2 item = expList.get(rowIndex);
-        return maocMdl.isDistinct() ? (columnIndex != 1 ? item.getK() : item.getV()) : item.getK() + "=" + item.getV();
+        return multiable ? (columnIndex != 1 ? item.getK() : item.getV()) : item.getK() + "=" + item.getV();
     }
 
     @Override
@@ -97,6 +97,26 @@ public class MexpMdl implements javax.swing.table.TableModel, java.io.Serializab
         listenerList.remove(javax.swing.event.TableModelListener.class, l);
     }
 
+    /**
+     * @return the distinct
+     */
+    public boolean isMultiable()
+    {
+        return multiable;
+    }
+
+    /**
+     * @param multiable the multiable to set
+     */
+    public void setMultiColumn(boolean multiable)
+    {
+        if (this.multiable != multiable)
+        {
+            this.multiable = multiable;
+            this.fireTableStructureChanged();
+        }
+    }
+
     public D1S2 getItemAt(int rowIndex)
     {
         return expList.get(rowIndex);
@@ -108,8 +128,22 @@ public class MexpMdl implements javax.swing.table.TableModel, java.io.Serializab
         fireTableDataChanged();
     }
 
-    public void removeItem(S1S2 item)
+    public void removeAll()
     {
+        expList.clear();
+        fireTableDataChanged();
+    }
+
+    public void removeItem(D1S2 item)
+    {
+        expList.remove(item);
+        fireTableDataChanged();
+    }
+
+    public void removeItemAt(int rowIndex)
+    {
+        expList.remove(rowIndex);
+        fireTableDataChanged();
     }
 
     public void fireTableChanged(javax.swing.event.TableModelEvent e)
