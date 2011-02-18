@@ -212,13 +212,16 @@
         </item>
         <seperator />
         <menu type="normal" text="$P30FB637" text-def="显示方式">
-            <item type="checkbox" id="single-line" text="$P30FB638" text-def="单行" group="distinct">
+            <item type="checkbox" id="single-line" text="$P30FB638" text-def="单行" command="1" group="distinct">
                 <action id="viewMode" class="com.magicpwd.e.maoc.mexp.ViewModeAction" />
             </item>
-            <item type="checkbox" id="multi-line" text="$P30FB639" text-def="多行" group="distinct">
+            <item type="checkbox" id="multi-line" text="$P30FB639" text-def="多行" command="2" group="distinct">
                 <action id="viewMode" class="com.magicpwd.e.maoc.mexp.ViewModeAction" />
             </item>
         </menu>
+        <item type="checkbox" id="single-line" text="$P30FB638" text-def="单行" command="1">
+            <action class="com.magicpwd.e.maoc.mexp.GroupingAction" />
+        </item>
     </popmenu>
     <strokes id="maoc">
         <action id="exit-window" class="com.magicpwd.e.maoc.ExitAction">
