@@ -477,7 +477,7 @@ public class MaocPtn extends AFrame
 
     public void copyNumName()
     {
-        int row = ls_FunList.getSelectedIndex();
+        int row = ls_NumList.getSelectedIndex();
         if (row < 0)
         {
             return;
@@ -491,7 +491,7 @@ public class MaocPtn extends AFrame
 
     public void copyNumValue()
     {
-        int row = ls_FunList.getSelectedIndex();
+        int row = ls_NumList.getSelectedIndex();
         if (row < 0)
         {
             return;
@@ -505,7 +505,7 @@ public class MaocPtn extends AFrame
 
     public void reuseNumName()
     {
-        int row = ls_FunList.getSelectedIndex();
+        int row = ls_NumList.getSelectedIndex();
         if (row < 0)
         {
             return;
@@ -519,7 +519,7 @@ public class MaocPtn extends AFrame
 
     public void reuseNumValue()
     {
-        int row = ls_FunList.getSelectedIndex();
+        int row = ls_NumList.getSelectedIndex();
         if (row < 0)
         {
             return;
