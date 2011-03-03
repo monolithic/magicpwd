@@ -375,7 +375,9 @@ public class MaocPtn extends AFrame
         try
         {
             double d = symbols.eval(tmp);
+            int r = maocMdl.getMexpMdl().getRowCount();
             maocMdl.getMexpMdl().appendItem(new D1S2(d, exp, maocMdl.getFormat().format(d)));
+            Util.scrollToVisible(tb_ExpList, r, 0, false);
         }
         catch (Exception ex)
         {
