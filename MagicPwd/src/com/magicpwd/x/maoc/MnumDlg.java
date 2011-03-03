@@ -184,6 +184,7 @@ public class MnumDlg extends ADialog
             tf_Name.requestFocus();
             return;
         }
+        name = name.replaceAll("\\s+", "");
         if (!java.util.regex.Pattern.matches("^[A-Za-z][A-Za-z\\d]*$", name))
         {
             Lang.showMesg(this, LangRes.P30FBA04, "常量名只能包含字母及数字，且以字母开始！");
@@ -194,6 +195,12 @@ public class MnumDlg extends ADialog
         if (!Char.isValidate(value))
         {
             Lang.showMesg(this, LangRes.P30FBA05, "常量值不能为空！");
+            tf_Value.requestFocus();
+            return;
+        }
+        if (java.util.regex.Pattern.compile("[A-Za-z][A-Za-z\\d]*").matcher(value).find())
+        {
+            Lang.showMesg(this, LangRes.P30FBA09, "您输入的不是一个合法的常量！");
             tf_Value.requestFocus();
             return;
         }

@@ -184,9 +184,10 @@ public class MfunDlg extends ADialog
             tf_Name.requestFocus();
             return;
         }
-        if (!java.util.regex.Pattern.matches("^[A-Za-z][A-Za-z\\d]*(\\([A-Za-z][A-Za-z\\d]*(,[A-Za-z][A-Za-z\\d]*)*\\))?$", name))
+        name = name.replaceAll("\\s+", "");
+        if (!java.util.regex.Pattern.matches("^[A-Za-z][A-Za-z\\d]*(\\([A-Za-z][A-Za-z\\d]*(,[A-Za-z][A-Za-z\\d]*)*\\))$", name))
         {
-            Lang.showMesg(this, LangRes.P30FBA07, "函数名只能包含字母及数字，且以字母开始！");
+            Lang.showMesg(this, LangRes.P30FBA07, "函数名应形如f(x)或f1(x,y)格式，\n且只能包含字母及数字，并以字母开始！");
             tf_Name.requestFocus();
             return;
         }
@@ -194,6 +195,12 @@ public class MfunDlg extends ADialog
         if (!Char.isValidate(value))
         {
             Lang.showMesg(this, LangRes.P30FBA08, "函数体不能为空！");
+            tf_Value.requestFocus();
+            return;
+        }
+        if (java.util.regex.Pattern.compile("[A-Za-z][A-Za-z\\d]*").matcher(value).find())
+        {
+            Lang.showMesg(this, LangRes.P30FBA0A, "您输入的不是一个合法的函数！");
             tf_Value.requestFocus();
             return;
         }
