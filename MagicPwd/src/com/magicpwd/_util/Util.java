@@ -284,7 +284,7 @@ public final class Util
         });
     }
 
-    public static void scrollToVisible(JTable table, int rowIndex, int vColIndex, boolean center)
+    public static void scrollToVisible(JTable table, int rowIndex, int colIndex, boolean center)
     {
         if (!(table.getParent() instanceof JViewport))
         {
@@ -292,7 +292,7 @@ public final class Util
         }
 
         JViewport viewport = (JViewport) table.getParent();
-        Rectangle rect = table.getCellRect(rowIndex, vColIndex, true);
+        Rectangle rect = table.getCellRect(rowIndex, colIndex, true);
         Rectangle viewRect = viewport.getViewRect();
         rect.setLocation(rect.x - viewRect.x, rect.y - viewRect.y);
 
