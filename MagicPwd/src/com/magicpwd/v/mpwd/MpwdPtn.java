@@ -184,9 +184,12 @@ public class MpwdPtn extends AFrame
         ls_GuidList.setModel(mpwdMdl.getListMdl());
 
         tb_KeysView.setModel(mpwdMdl.getGridMdl());
-        int w = tb_KeysView.getFontMetrics(tb_KeysView.getFont()).stringWidth("999999");
-        tb_KeysView.getColumnModel().getColumn(0).setPreferredWidth(w);
-        tb_KeysView.getColumnModel().getColumn(1).setPreferredWidth(365 - w);
+        javax.swing.table.TableColumnModel colModel = tb_KeysView.getColumnModel();
+        colModel.getColumn(0).setMaxWidth(tb_KeysView.getFontMetrics(tb_KeysView.getFont()).stringWidth("999999"));
+//        for (int i = 0, j = colModel.getColumnCount(); i < j; i += 1)
+//        {
+//            colModel.getColumn(i).setCellRenderer(new MpwdCR());
+//        }
 
         // 菜单栏
         setMenuVisible(userMdl.isMenuVisible());

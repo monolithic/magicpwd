@@ -102,6 +102,7 @@ public class MaocPtn extends AFrame
         bt_AocHelp = new BtnLabel();
         bt_ExpText = new BtnLabel();
 
+        tb_ExpList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         javax.swing.JScrollPane sp_ExpList = new javax.swing.JScrollPane(tb_ExpList);
 
         textBox.initView();
@@ -192,6 +193,7 @@ public class MaocPtn extends AFrame
         ls_NumList.setModel(maocMdl.getMnumMdl());
         ls_FunList.setModel(maocMdl.getMfunMdl());
         tb_ExpList.setModel(maocMdl.getMexpMdl());
+        tb_ExpList.getColumnModel().getColumn(0).setMaxWidth(tb_ExpList.getFontMetrics(tb_ExpList.getFont()).stringWidth("99999"));
 
         symbols = new Symbols();
 
@@ -374,15 +376,15 @@ public class MaocPtn extends AFrame
 
         try
         {
-            double d = symbols.eval(tmp);
             int r = maocMdl.getMexpMdl().getRowCount();
-            maocMdl.getMexpMdl().appendItem(new D1S2(d, exp, maocMdl.getFormat().format(d)));
+            double value = symbols.eval(tmp);
+            maocMdl.getMexpMdl().appendItem(new D1S2(value, exp, maocMdl.getFormat().format(value)));
             Util.scrollToVisible(tb_ExpList, r, 0, false);
         }
         catch (Exception ex)
         {
             Logs.exception(ex);
-            Lang.showMesg(this, null, ex.getMessage());
+            Lang.showMesg(this, null, ex.toString());
         }
     }
 
@@ -427,7 +429,7 @@ public class MaocPtn extends AFrame
         catch (Exception exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(this, null, exp.getLocalizedMessage());
+            Lang.showMesg(this, null, exp.toString());
             return false;
         }
         maocMdl.getMnumMdl().appendItem(item);
@@ -448,7 +450,7 @@ public class MaocPtn extends AFrame
         catch (Exception exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(this, null, exp.getLocalizedMessage());
+            Lang.showMesg(this, null, exp.toString());
             return false;
         }
         return true;
@@ -472,7 +474,7 @@ public class MaocPtn extends AFrame
             catch (Exception exp)
             {
                 Logs.exception(exp);
-                Lang.showMesg(this, null, exp.getLocalizedMessage());
+                Lang.showMesg(this, null, exp.toString());
             }
         }
     }
@@ -553,7 +555,7 @@ public class MaocPtn extends AFrame
         catch (Exception exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(this, null, exp.getLocalizedMessage());
+            Lang.showMesg(this, null, exp.toString());
             return false;
         }
         maocMdl.getMfunMdl().appendItem(item);
@@ -574,7 +576,7 @@ public class MaocPtn extends AFrame
         catch (Exception exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(this, null, exp.getLocalizedMessage());
+            Lang.showMesg(this, null, exp.toString());
             return false;
         }
         return true;
@@ -598,7 +600,7 @@ public class MaocPtn extends AFrame
             catch (Exception exp)
             {
                 Logs.exception(exp);
-                Lang.showMesg(this, null, exp.getLocalizedMessage());
+                Lang.showMesg(this, null, exp.toString());
             }
         }
     }
