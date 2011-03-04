@@ -47,19 +47,23 @@ public class MexpMdl implements javax.swing.table.TableModel, java.io.Serializab
     @Override
     public int getColumnCount()
     {
-        return multiable ? 2 : 1;
+        return multiable ? 3 : 2;
     }
 
     @Override
     public String getColumnName(int columnIndex)
     {
-        return multiable ? (columnIndex == 1 ? "结果" : "表达式") : "计算式";
+        if (columnIndex == 0)
+        {
+            return "";
+        }
+        return multiable ? (columnIndex == 2 ? "结果" : "表达式") : "计算式";
     }
 
     @Override
     public Class<?> getColumnClass(int columnIndex)
     {
-        return String.class;
+        return columnIndex == 0 ? Integer.class : String.class;
     }
 
     @Override
@@ -76,8 +80,13 @@ public class MexpMdl implements javax.swing.table.TableModel, java.io.Serializab
             return "";
         }
 
+        if (columnIndex == 0)
+        {
+            return rowIndex + 1;
+        }
+
         D1S2 item = expList.get(rowIndex);
-        return multiable ? (columnIndex != 1 ? item.getK() : item.getV()) : item.getK() + "=" + item.getV();
+        return multiable ? (columnIndex != 2 ? item.getK() : item.getV()) : item.getK() + "=" + item.getV();
     }
 
     @Override

@@ -198,12 +198,12 @@ public class MnumDlg extends ADialog
             tf_Value.requestFocus();
             return;
         }
-        if (java.util.regex.Pattern.compile("[A-Za-z][A-Za-z\\d]*").matcher(value).find())
-        {
-            Lang.showMesg(this, LangRes.P30FBA09, "您输入的不是一个合法的常量！");
-            tf_Value.requestFocus();
-            return;
-        }
+//        if (java.util.regex.Pattern.compile("[A-Za-z][A-Za-z\\d]*").matcher(value).find())
+//        {
+//            Lang.showMesg(this, LangRes.P30FBA09, "您输入的不是一个合法的常量！");
+//            tf_Value.requestFocus();
+//            return;
+//        }
 
         setVisible(false);
 
