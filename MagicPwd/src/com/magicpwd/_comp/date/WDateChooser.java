@@ -27,7 +27,6 @@ public class WDateChooser
 
     public WDateChooser()
     {
-//        txtCmp.setBorder(BorderFactory.createLineBorde
     }
 
     public void setDateFormat(java.text.DateFormat format)
@@ -51,7 +50,7 @@ public class WDateChooser
             @Override
             public boolean callBack(String options, java.util.Calendar object)
             {
-                cmp.setText(format.format(object.getTime()));
+                cmp.setText(getDate(object));
                 return true;
             }
         });
@@ -66,7 +65,7 @@ public class WDateChooser
             @Override
             public boolean callBack(String options, java.util.Calendar object)
             {
-                btn.setText(format.format(object.getTime()));
+                btn.setText(getDate(object));
                 return true;
             }
         });
@@ -81,7 +80,7 @@ public class WDateChooser
             @Override
             public boolean callBack(String options, java.util.Calendar object)
             {
-                lbl.setText(format.format(object.getTime()));
+                lbl.setText(getDate(object));
                 return true;
             }
         });
@@ -108,6 +107,19 @@ public class WDateChooser
         dp_DatePanel.initLang();
         dp_DatePanel.showDate();
         dp_DatePanel.setBackCall(backCall);
+    }
+
+    private String getDate(java.util.Calendar calendar)
+    {
+        if (calendar == null)
+        {
+            return "";
+        }
+        if (format == null)
+        {
+            format = java.text.DateFormat.getDateInstance();
+        }
+        return format.format(calendar.getTime());
     }
     private javax.swing.JPopupMenu pm_DateMenu = new javax.swing.JPopupMenu();
     private DatePanel dp_DatePanel;
