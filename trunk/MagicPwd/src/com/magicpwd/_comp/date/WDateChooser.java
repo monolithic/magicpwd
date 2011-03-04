@@ -30,6 +30,19 @@ public class WDateChooser
 //        txtCmp.setBorder(BorderFactory.createLineBorde
     }
 
+    public void setDateFormat(java.text.DateFormat format)
+    {
+        this.format = format;
+    }
+
+    public void setDateVisible(boolean visible)
+    {
+    }
+
+    public void setTimeVisible(boolean visible)
+    {
+    }
+
     public void show(final javax.swing.text.JTextComponent cmp, int x, int y)
     {
         showMenu(new IBackCall<java.util.Calendar>()
@@ -89,8 +102,8 @@ public class WDateChooser
             dp_DatePanel.initView();
             WPanel panel = new WPanel();
             panel.setLayout(new java.awt.BorderLayout());
-//            panel.add(dp_DatePanel);
-            pm_DateMenu.add(dp_DatePanel);
+            panel.add(dp_DatePanel);
+            pm_DateMenu.add(panel);
         }
         dp_DatePanel.initLang();
         dp_DatePanel.showDate();

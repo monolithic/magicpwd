@@ -330,4 +330,69 @@ public class Date
     {
         return Char.lPad(Long.toHexString(System.currentTimeMillis()), 16, '0');
     }
+
+    public static int getDaysOfMonth(int year, int month)
+    {
+        if (month > 7)
+        {
+            return month % 2 == 0 ? 31 : 30;
+        }
+
+        if (month != 2)
+        {
+            return month % 2 == 0 ? 30 : 31;
+        }
+
+        if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0))
+        {
+            return 29;
+        }
+        return 28;
+    }
+
+    public static int getFirstDayOfMonth(int date, int day)
+    {
+        if (date >= 7)
+        {
+            int mod = date % 7;
+            if (mod == 0)
+            {
+                return day + 1 > 7 ? 1 : day + 1;
+            }
+
+            return day - mod + 1 < 1 ? 8 + day - mod : day - mod + 1;
+        }
+
+        int difference = date - 1;
+        if (day > difference)
+        {
+            return day - difference;
+        }
+
+        return day + 8 - difference;
+    }
+
+    public static int getLastDayOfMonth(int date, int day, int year, int month)
+    {
+        int lastDate = getDaysOfMonth(year, month);
+        int diffencesDate = lastDate - date;
+        if (diffencesDate >= 7)
+        {
+            int mod = diffencesDate % 7;
+            if (mod == 0)
+            {
+                return day;
+            }
+
+            return day + mod > 7 ? (day + mod) - 7 : day + mod;
+        }
+
+        int difference = diffencesDate + day;
+        if (difference > 7)
+        {
+            return 7 - difference;
+        }
+
+        return difference;
+    }
 }
