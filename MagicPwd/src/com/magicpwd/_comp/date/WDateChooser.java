@@ -18,12 +18,14 @@ package com.magicpwd._comp.date;
 
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comp.WPanel;
+import java.util.HashMap;
 
 public class WDateChooser
 {
 
     private javax.swing.text.JTextComponent txtCmp;
     private java.text.DateFormat format = java.text.DateFormat.getDateInstance();
+    private java.util.HashMap<Integer, java.util.HashMap<Integer, java.util.HashMap<Integer, Integer>>> specialDays;
 
     public WDateChooser()
     {
@@ -120,6 +122,29 @@ public class WDateChooser
             format = java.text.DateFormat.getDateInstance();
         }
         return format.format(calendar.getTime());
+    }
+
+    public void appendDisabledDay(int day)
+    {
+        appendDisabledDay(0, day);
+    }
+
+    public void appendDisabledDay(int month, int day)
+    {
+        appendDisabledDay(0, 0, day);
+    }
+
+    public void appendDisabledDay(int year, int month, int day)
+    {
+        if (day < 1 || day > 31)
+        {
+            return;
+        }
+        if (specialDays == null)
+        {
+            specialDays = new java.util.HashMap<Integer, java.util.HashMap<Integer, java.util.HashMap<Integer, Integer>>>();
+        }
+        specialDays.put(year, null);
     }
     private javax.swing.JPopupMenu pm_DateMenu = new javax.swing.JPopupMenu();
     private DatePanel dp_DatePanel;
