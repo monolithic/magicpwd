@@ -36,6 +36,7 @@ class TextLabel extends javax.swing.JLabel
     {
         this.STATE = STATE;
         this.setOpaque(false);
+        this.setHorizontalAlignment(CENTER);
         Dimension d = new Dimension(21, 21);
         this.setPreferredSize(d);
         this.setMaximumSize(d);

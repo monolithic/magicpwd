@@ -741,6 +741,7 @@ public class UserPtn extends javax.swing.JPanel
                 cb_UserType.addItem(new S1S1("mpad", "记事模式"));
                 cb_UserType.addItem(new S1S1("maoc", "数值运算"));
                 cb_UserType.addItem(new S1S1("mruc", "公式换算"));
+                cb_UserType.addItem(new S1S1("mgtd", "计划任务"));
                 cb_UserType.setSelectedIndex(UserMdl.getAppMode());
                 String name = userMdl.getCfg(ConsCfg.CFG_USER_LAST);
                 if (com.magicpwd._util.Char.isValidate(name))

@@ -23,25 +23,38 @@ import java.util.HashMap;
 public class WDateChooser
 {
 
-    private javax.swing.text.JTextComponent txtCmp;
-    private java.text.DateFormat format = java.text.DateFormat.getDateInstance();
+    private boolean dateVisible;
+    private boolean timeVisible;
+    private String format;
     private java.util.HashMap<Integer, java.util.HashMap<Integer, java.util.HashMap<Integer, Integer>>> specialDays;
 
     public WDateChooser()
     {
     }
 
-    public void setDateFormat(java.text.DateFormat format)
+    public void setDateFormat(String format)
     {
         this.format = format;
     }
 
+    public boolean isDateVisible()
+    {
+        return dateVisible;
+    }
+
     public void setDateVisible(boolean visible)
     {
+        this.dateVisible = visible;
+    }
+
+    public boolean isTimeVisible()
+    {
+        return timeVisible;
     }
 
     public void setTimeVisible(boolean visible)
     {
+        this.timeVisible = visible;
     }
 
     public void show(final javax.swing.text.JTextComponent cmp, int x, int y)
@@ -99,7 +112,7 @@ public class WDateChooser
     {
         if (dp_DatePanel == null)
         {
-            dp_DatePanel = new DatePanel();
+            dp_DatePanel = new DatePanel(this);
             dp_DatePanel.initView();
             WPanel panel = new WPanel();
             panel.setLayout(new java.awt.BorderLayout());
@@ -107,11 +120,12 @@ public class WDateChooser
             pm_DateMenu.add(panel);
         }
         dp_DatePanel.initLang();
-        dp_DatePanel.showDate();
+        dp_DatePanel.initData();
+        dp_DatePanel.showData();
         dp_DatePanel.setBackCall(backCall);
     }
 
-    private String getDate(java.util.Calendar calendar)
+    String getDate(java.util.Calendar calendar)
     {
         if (calendar == null)
         {
@@ -119,9 +133,10 @@ public class WDateChooser
         }
         if (format == null)
         {
-            format = java.text.DateFormat.getDateInstance();
+            format = "";
         }
-        return format.format(calendar.getTime());
+//        return format.format(calendar.getTime());
+        return calendar.get(java.util.Calendar.YEAR) + "-" + calendar.get(java.util.Calendar.MONTH) + "-" + calendar.get(java.util.Calendar.DAY_OF_MONTH);
     }
 
     public void appendDisabledDay(int day)
@@ -144,8 +159,32 @@ public class WDateChooser
         {
             specialDays = new java.util.HashMap<Integer, java.util.HashMap<Integer, java.util.HashMap<Integer, Integer>>>();
         }
-        specialDays.put(year, null);
+        java.util.HashMap<Integer, java.util.HashMap<Integer, Integer>> yMap = specialDays.get(year);
+        if (yMap == null)
+        {
+            yMap = new java.util.HashMap<Integer, java.util.HashMap<Integer, Integer>>(14);
+            specialDays.put(year, yMap);
+        }
+        java.util.HashMap<Integer, Integer> mMap = yMap.get(month);
+        if (mMap == null)
+        {
+            mMap = new java.util.HashMap<Integer, Integer>(36);
+            yMap.put(month, mMap);
+        }
+        mMap.put(day, day);
     }
-    private javax.swing.JPopupMenu pm_DateMenu = new javax.swing.JPopupMenu();
+
+    public void setSelectedDate(int year, int month, int day)
+    {
+    }
+
+    public void setSelectedTime(int hour, int minute, int second)
+    {
+    }
+
+    public void setSelectedDateTime(int year, int month, int day, int hour, int minute, int second)
+    {
+    }
     private DatePanel dp_DatePanel;
+    private javax.swing.JPopupMenu pm_DateMenu = new javax.swing.JPopupMenu();
 }
