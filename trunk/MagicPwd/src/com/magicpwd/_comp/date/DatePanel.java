@@ -44,9 +44,11 @@ class DatePanel extends javax.swing.JPanel implements java.awt.event.ActionListe
     private javax.swing.DefaultComboBoxModel cm_DateM;
     private IBackCall<java.util.Calendar> backCall;
     private boolean popup = true;
+    private WDateChooser chooser;
 
-    DatePanel()
+    DatePanel(WDateChooser chooser)
     {
+        this.chooser = chooser;
     }
 
     public void initView()
@@ -100,6 +102,7 @@ class DatePanel extends javax.swing.JPanel implements java.awt.event.ActionListe
         bt_NextY.setBorder(null);
 
         lb_Date = new javax.swing.JLabel();
+        lb_Date.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         sp_DateY = new javax.swing.JSpinner();
 
         cb_DateM = new javax.swing.JComboBox();
@@ -226,6 +229,9 @@ class DatePanel extends javax.swing.JPanel implements java.awt.event.ActionListe
         bt_Now = new javax.swing.JButton();
         bt_Nvl = new javax.swing.JButton();
 
+        bt_Now.setBorder(null);
+        bt_Nvl.setBorder(null);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(pl_Time);
         pl_Time.setLayout(layout);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
@@ -254,15 +260,21 @@ class DatePanel extends javax.swing.JPanel implements java.awt.event.ActionListe
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addGroup(vpg)));
     }
 
-    public void initDate()
+    public void initData()
     {
         sm_TimeH = new javax.swing.SpinnerNumberModel();
+        sm_TimeH.setMinimum(0);
+        sm_TimeH.setMaximum(23);
         sp_TimeH.setModel(sm_TimeH);
 
         sm_TimeM = new javax.swing.SpinnerNumberModel();
+        sm_TimeM.setMinimum(0);
+        sm_TimeM.setMaximum(59);
         sp_TimeM.setModel(sm_TimeM);
 
         sm_TimeS = new javax.swing.SpinnerNumberModel();
+        sm_TimeS.setMinimum(0);
+        sm_TimeS.setMaximum(59);
         sp_TimeS.setModel(sm_TimeS);
     }
 
@@ -281,7 +293,7 @@ class DatePanel extends javax.swing.JPanel implements java.awt.event.ActionListe
         bt_Now.setText("<<");
     }
 
-    public void showDate()
+    public void showData()
     {
         java.util.Calendar cal = java.util.Calendar.getInstance();
         curY = cal.get(java.util.Calendar.YEAR);
@@ -336,6 +348,12 @@ class DatePanel extends javax.swing.JPanel implements java.awt.event.ActionListe
         {
             heads[i].setText(i + 1 + "");
         }
+
+        sm_TimeH.setValue(currentDate.get(java.util.Calendar.HOUR_OF_DAY));
+        sm_TimeM.setValue(currentDate.get(java.util.Calendar.MINUTE));
+        sm_TimeS.setValue(currentDate.get(java.util.Calendar.SECOND));
+
+        showDate();
     }
 
     @Override
@@ -352,7 +370,7 @@ class DatePanel extends javax.swing.JPanel implements java.awt.event.ActionListe
         if ("prevY".equals(cmd))
         {
             currentDate.add(java.util.Calendar.YEAR, -1);
-            showDate0();
+            showDate();
             return;
         }
 
@@ -396,7 +414,7 @@ class DatePanel extends javax.swing.JPanel implements java.awt.event.ActionListe
         this.backCall = backCall;
     }
 
-    private void showDate0()
+    private void showDate()
     {
         int firstDay = Date.getFirstDayOfMonth(currentDate.get(java.util.Calendar.DAY_OF_MONTH), currentDate.get(java.util.Calendar.DAY_OF_WEEK)) - 1;
         int days = Date.getDaysOfMonth(currentDate.get(java.util.Calendar.YEAR), currentDate.get(java.util.Calendar.MONTH));
@@ -416,7 +434,7 @@ class DatePanel extends javax.swing.JPanel implements java.awt.event.ActionListe
             }
         }
 
-        lb_Date.setText(currentDate.toString());
+        lb_Date.setText(chooser.getDate(currentDate));
     }
 
     private void readDate(String day)

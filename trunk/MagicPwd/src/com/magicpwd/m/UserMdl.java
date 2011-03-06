@@ -99,6 +99,10 @@ public final class UserMdl
             {
                 UserMdl.appMode = ConsEnv.APP_MODE_MRUC;
             }
+            else if ("mgtd".equalsIgnoreCase(appMode))
+            {
+                UserMdl.appMode = ConsEnv.APP_MODE_MGTD;
+            }
         }
     }
 

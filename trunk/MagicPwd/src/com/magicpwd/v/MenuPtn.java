@@ -20,6 +20,7 @@ import com.magicpwd.v.tray.TrayPtn;
 import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IAction;
 import com.magicpwd.__i.maoc.IMaocAction;
+import com.magicpwd.__i.mgtd.IMgtdAction;
 import com.magicpwd.__i.mpwd.IMpwdAction;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.ConsCfg;
@@ -1014,8 +1015,15 @@ public class MenuPtn
                                 {
                                     IMrucAction mrucAction = (IMrucAction) action;
                                     mrucAction.setTrayPtn(trayPtn);
-//                                    maocAction.setMrucPtn(trayPtn.getMrucPtn());
+                                    mrucAction.setMrucPtn(trayPtn.getMrucPtn());
                                     mrucAction.doInit(actInit);
+                                }
+                                else if (action instanceof IMgtdAction)
+                                {
+                                    IMgtdAction mgtdAction = (IMgtdAction) action;
+                                    mgtdAction.setTrayPtn(trayPtn);
+                                    mgtdAction.setMgtdPtn(trayPtn.getMgtdPtn());
+                                    mgtdAction.doInit(actInit);
                                 }
                             }
                             if (validate)

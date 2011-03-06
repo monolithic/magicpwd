@@ -32,6 +32,7 @@ import com.magicpwd.d.db.DBAccess;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.maoc.MaocPtn;
+import com.magicpwd.v.mgtd.MgtdPtn;
 import com.magicpwd.v.mpad.MpadPtn;
 import com.magicpwd.v.mpwd.MpwdPtn;
 import com.magicpwd.v.mruc.MrucPtn;
@@ -234,6 +235,9 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
             case ConsEnv.APP_MODE_MRUC:
                 showMrucPtn();
                 break;
+            case ConsEnv.APP_MODE_MGTD:
+                showMgtdPtn();
+                break;
             default:
                 break;
         }
@@ -348,6 +352,11 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
         currPtn = ConsEnv.APP_MODE_MAOC;
     }
 
+    public MrucPtn getMrucPtn()
+    {
+        return mp_MrucPtn;
+    }
+
     private void showMrucPtn()
     {
         if (mp_MrucPtn == null)
@@ -365,6 +374,30 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
 
         mfCurrForm = mp_MrucPtn;
         currPtn = ConsEnv.APP_MODE_MRUC;
+    }
+
+    public MgtdPtn getMgtdPtn()
+    {
+        return mp_MgtdPtn;
+    }
+
+    private void showMgtdPtn()
+    {
+        if (mp_MgtdPtn == null)
+        {
+            mp_MgtdPtn = new MgtdPtn(this, userMdl);
+            mp_MgtdPtn.initView();
+            mp_MgtdPtn.initLang();
+            mp_MgtdPtn.initData();
+        }
+        else
+        {
+            mp_MgtdPtn.setVisible(true);
+        }
+        mp_MgtdPtn.showData();
+
+        mfCurrForm = mp_MgtdPtn;
+        currPtn = ConsEnv.APP_MODE_MGTD;
     }
 
     @Override
@@ -583,6 +616,9 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
                 case ConsEnv.APP_MODE_MRUC:
                     showMrucPtn();
                     break;
+                case ConsEnv.APP_MODE_MGTD:
+                    showMgtdPtn();
+                    break;
                 default:
                     break;
             }
@@ -751,11 +787,12 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
             trayIcon.displayMessage(title, tips, java.awt.TrayIcon.MessageType.INFO);
         }
     }
-    private static MaocPtn mp_MaocPtn;
-    private static MrucPtn mp_MrucPtn;
-    private static MpadPtn mp_MpadPtn;
-    private static MwizPtn mp_MwizPtn;
     private static MpwdPtn mp_MpwdPtn;
+    private static MwizPtn mp_MwizPtn;
+    private static MpadPtn mp_MpadPtn;
+    private static MrucPtn mp_MrucPtn;
+    private static MaocPtn mp_MaocPtn;
+    private static MgtdPtn mp_MgtdPtn;
     private java.awt.Point dragLoc;
     private java.awt.Point formLoc;
     private java.awt.TrayIcon trayIcon;
