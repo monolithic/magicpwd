@@ -4,14 +4,14 @@ import java.awt.AlphaComposite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JComponent;
 import javax.swing.Timer;
 
-public class WPanel extends JComponent implements ActionListener
+public class WPanel extends JComponent
 {
 
-    private int frameIndex;
+    protected boolean animated;
+    private float frameIndex;
     private Timer timer;
 
     public WPanel()
@@ -19,49 +19,63 @@ public class WPanel extends JComponent implements ActionListener
     }
 
     @Override
-    public void actionPerformed(ActionEvent e)
+    public void paint(Graphics g)
     {
-        frameIndex++;
-        if (frameIndex >= ANIMATION_FRAMES)
+        if (!animated)
         {
-            closeTimer();
+            super.paint(g);
             return;
         }
 
-        repaint();
-    }
-
-    @Override
-    public void paint(Graphics g)
-    {
-        if (isAnimating())
+        if (timer != null && timer.isRunning())
         {
-            float alpha = (float) frameIndex / (float) ANIMATION_FRAMES;
             Graphics2D g2d = (Graphics2D) g;
-            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha));
+            g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, frameIndex / ANIMATION_FRAMES));
             super.paint(g2d);
             return;
         }
 
         frameIndex = 0;
-        timer = new Timer(ANIMATION_INTERVAL, this);
+        timer = new Timer(ANIMATION_INTERVAL, new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                doAnimation();
+            }
+        });
         timer.start();
     }
 
-    private boolean isAnimating()
+    private void doAnimation()
     {
-        return timer != null && timer.isRunning();
-    }
-
-    private void closeTimer()
-    {
-        if (isAnimating())
+        frameIndex += 1;
+        if (frameIndex >= ANIMATION_FRAMES)
         {
             timer.stop();
-            frameIndex = 0;
             timer = null;
+            return;
         }
+
+        repaint();
     }
     private static final int ANIMATION_FRAMES = 50;
     private static final int ANIMATION_INTERVAL = 10;
+
+    /**
+     * @return the animated
+     */
+    public boolean isAnimated()
+    {
+        return animated;
+    }
+
+    /**
+     * @param animated the animated to set
+     */
+    public void setAnimated(boolean animated)
+    {
+        this.animated = animated;
+    }
 }

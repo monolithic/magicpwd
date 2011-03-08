@@ -17,7 +17,6 @@
 package com.magicpwd._comp.date;
 
 import com.magicpwd.__i.IBackCall;
-import com.magicpwd._comp.WPanel;
 import java.util.HashMap;
 
 public class WDateChooser
@@ -114,13 +113,12 @@ public class WDateChooser
         {
             dp_DatePanel = new DatePanel(this);
             dp_DatePanel.initView();
-            WPanel panel = new WPanel();
-            panel.setLayout(new java.awt.BorderLayout());
-            panel.add(dp_DatePanel);
-            pm_DateMenu.add(panel);
+            dp_DatePanel.initLang();
+            dp_DatePanel.initData();
+
+            pm_DateMenu = new javax.swing.JPopupMenu();
+            pm_DateMenu.add(dp_DatePanel);
         }
-        dp_DatePanel.initLang();
-        dp_DatePanel.initData();
         dp_DatePanel.showData();
         dp_DatePanel.setBackCall(backCall);
     }
@@ -186,5 +184,5 @@ public class WDateChooser
     {
     }
     private DatePanel dp_DatePanel;
-    private javax.swing.JPopupMenu pm_DateMenu = new javax.swing.JPopupMenu();
+    private javax.swing.JPopupMenu pm_DateMenu;
 }
