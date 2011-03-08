@@ -17,6 +17,7 @@
 package com.magicpwd;
 
 import com.magicpwd.__a.AFrame;
+import com.magicpwd._comn.apps.FileLocker;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Jzip;
@@ -42,6 +43,12 @@ public class MagicPwd
      */
     public static void main(String[] args)
     {
+        FileLocker fl = new FileLocker(new java.io.File("tmp", "amon.lck"));
+        if (!fl.tryLock())
+        {
+            return;
+        }
+
         // 界面启动参数读取
         if (args != null && args.length > 0)
         {
