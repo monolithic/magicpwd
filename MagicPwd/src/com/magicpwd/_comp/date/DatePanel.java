@@ -17,15 +17,13 @@
 package com.magicpwd._comp.date;
 
 import com.magicpwd.__i.IBackCall;
+import com.magicpwd._comp.WPanel;
 import com.magicpwd._util.Date;
-import java.awt.event.MouseEvent;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 
-class DatePanel extends javax.swing.JPanel implements java.awt.event.ActionListener, javax.swing.MenuElement
+class DatePanel extends WPanel implements java.awt.event.ActionListener, javax.swing.MenuElement
 {
 
-    protected static final ImageIcon bgIcon = new ImageIcon("img" + java.io.File.separator + "calendar.png");
+    protected static final javax.swing.ImageIcon bgIcon = new javax.swing.ImageIcon("img" + java.io.File.separator + "calendar.png");
     private int curY;
     private int curM;
     private int curD;
@@ -49,6 +47,7 @@ class DatePanel extends javax.swing.JPanel implements java.awt.event.ActionListe
     DatePanel(WDateChooser chooser)
     {
         this.chooser = chooser;
+        animated = true;
     }
 
     public void initView()
@@ -72,8 +71,8 @@ class DatePanel extends javax.swing.JPanel implements java.awt.event.ActionListe
         bt_PrevY.addActionListener(this);
         bt_PrevY.setBorder(null);
 
-        Icon prevIcon = new ImageIcon("img" + java.io.File.separator + "prev1.png");
-        Icon prevIcon1 = new ImageIcon("img" + java.io.File.separator + "prev.png");
+        javax.swing.Icon prevIcon = new javax.swing.ImageIcon("img" + java.io.File.separator + "prev1.png");
+        javax.swing.Icon prevIcon1 = new javax.swing.ImageIcon("img" + java.io.File.separator + "prev.png");
         bt_PrevM = new javax.swing.JButton(prevIcon);
         bt_PrevM.setActionCommand("prevM");
         bt_PrevM.addActionListener(this);
@@ -84,8 +83,8 @@ class DatePanel extends javax.swing.JPanel implements java.awt.event.ActionListe
         bt_PrevM.setRolloverIcon(prevIcon1);
         bt_PrevM.setPressedIcon(prevIcon1);
 
-        Icon nextIcon = new ImageIcon("img" + java.io.File.separator + "next1.png");
-        Icon nextIcon1 = new ImageIcon("img" + java.io.File.separator + "next.png");
+        javax.swing.Icon nextIcon = new javax.swing.ImageIcon("img" + java.io.File.separator + "next1.png");
+        javax.swing.Icon nextIcon1 = new javax.swing.ImageIcon("img" + java.io.File.separator + "next.png");
         bt_NextM = new javax.swing.JButton(nextIcon);
         bt_NextM.setActionCommand("nextM");
         bt_NextM.addActionListener(this);
@@ -172,24 +171,24 @@ class DatePanel extends javax.swing.JPanel implements java.awt.event.ActionListe
         {
 
             @Override
-            public void mouseClicked(MouseEvent e)
+            public void mouseClicked(java.awt.event.MouseEvent e)
             {
                 TextLabel tl = (TextLabel) e.getSource();
                 readDate(tl.getText());
             }
 
             @Override
-            public void mousePressed(MouseEvent e)
+            public void mousePressed(java.awt.event.MouseEvent e)
             {
             }
 
             @Override
-            public void mouseReleased(MouseEvent e)
+            public void mouseReleased(java.awt.event.MouseEvent e)
             {
             }
 
             @Override
-            public void mouseEntered(MouseEvent e)
+            public void mouseEntered(java.awt.event.MouseEvent e)
             {
 //                STATE = 1;
                 TextLabel tl = (TextLabel) e.getSource();
@@ -198,7 +197,7 @@ class DatePanel extends javax.swing.JPanel implements java.awt.event.ActionListe
             }
 
             @Override
-            public void mouseExited(MouseEvent e)
+            public void mouseExited(java.awt.event.MouseEvent e)
             {
 //                STATE = 0;
                 TextLabel tl = (TextLabel) e.getSource();
@@ -376,35 +375,22 @@ class DatePanel extends javax.swing.JPanel implements java.awt.event.ActionListe
 
         if ("prevM".equals(cmd))
         {
-            int lastDay;
-            if (SESSION_DATE == 0 || SESSION_DAY == 0)
-            {
-                lastDay = Date.getLastDayOfMonth(selD, selW, selY, selM);
-            }
-            else
-            {
-                lastDay = Date.getLastDayOfMonth(SESSION_DATE, SESSION_DAY, selY, selM);
-            }
-            selM++;
-            if (selM > 12)
-            {
-                selM = 1;
-                selY++;
-            }
-            sp_DateY.setValue(selY);
-            SESSION_DATE = 1;
-            SESSION_DAY = lastDay + 1 > 7 ? 1 : lastDay + 1;
-//            loadMainPanel(true, SESSION_DATE, SESSION_DAY);
+            currentDate.add(java.util.Calendar.MONTH, -1);
+            showDate();
             return;
         }
 
         if ("nextM".equals(cmd))
         {
+            currentDate.add(java.util.Calendar.MONTH, 1);
+            showDate();
             return;
         }
 
         if ("nextY".equals(cmd))
         {
+            currentDate.add(java.util.Calendar.YEAR, 1);
+            showDate();
             return;
         }
     }
