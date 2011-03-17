@@ -44,7 +44,7 @@ import java.util.regex.Pattern;
  *
  * @author Amon
  */
-public class DBA3000
+public class DBA4000
 {
 
     public static String readConfig(String key)
