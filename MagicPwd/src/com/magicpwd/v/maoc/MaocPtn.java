@@ -193,7 +193,11 @@ public class MaocPtn extends AFrame
         ls_NumList.setModel(maocMdl.getMnumMdl());
         ls_FunList.setModel(maocMdl.getMfunMdl());
         tb_ExpList.setModel(maocMdl.getMexpMdl());
-        tb_ExpList.getColumnModel().getColumn(0).setMaxWidth(tb_ExpList.getFontMetrics(tb_ExpList.getFont()).stringWidth("99999"));
+        int w = tb_ExpList.getFontMetrics(tb_ExpList.getFont()).stringWidth("99999");
+        javax.swing.table.TableColumn col = tb_ExpList.getColumnModel().getColumn(0);
+        col.setMaxWidth(w);
+        col.setPreferredWidth(w);
+        col.setWidth(w);
 
         symbols = new Symbols();
 
@@ -436,26 +440,6 @@ public class MaocPtn extends AFrame
         return true;
     }
 
-    public boolean updateNum(S1S3 item)
-    {
-        if (!Char.isValidate(item.getV()) || !Char.isValidate(item.getV2()))
-        {
-            return false;
-        }
-        try
-        {
-            org.javia.arity.FunctionAndName fan = symbols.compileWithName(item.getV() + '=' + item.getV2());
-            symbols.define(fan);
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-            Lang.showMesg(this, null, exp.toString());
-            return false;
-        }
-        return true;
-    }
-
     public void deleteNum()
     {
         int row = ls_NumList.getSelectedIndex();
@@ -559,26 +543,6 @@ public class MaocPtn extends AFrame
             return false;
         }
         maocMdl.getMfunMdl().appendItem(item);
-        return true;
-    }
-
-    public boolean updateFun(S1S3 item)
-    {
-        if (!Char.isValidate(item.getV()) || !Char.isValidate(item.getV2()))
-        {
-            return false;
-        }
-        try
-        {
-            org.javia.arity.FunctionAndName fan = symbols.compileWithName(item.getV() + '=' + item.getV2());
-            symbols.define(fan);
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-            Lang.showMesg(this, null, exp.toString());
-            return false;
-        }
         return true;
     }
 
