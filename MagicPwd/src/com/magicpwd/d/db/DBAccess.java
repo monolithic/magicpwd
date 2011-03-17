@@ -107,6 +107,11 @@ public class DBAccess
         }
     }
 
+    public void backup()
+    {
+        // BACKUP DATABASE to '../bak/' BLOCKING
+    }
+
     /**
      * 关闭数据库
      */
