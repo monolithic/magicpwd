@@ -25,6 +25,7 @@ import com.magicpwd._comn.item.HintItem;
 import com.magicpwd._comn.item.LogoItem;
 import com.magicpwd._comn.item.MetaItem;
 import com.magicpwd._util.Logs;
+import com.magicpwd.d.db.DBAccess;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
 
@@ -47,6 +48,8 @@ public class DXA2000 extends DXA
         EditItem item;
         Keys tempKeys = new Keys();
         java.util.ArrayList<IEditItem> tempList = new java.util.ArrayList<IEditItem>();
+        DBAccess dba = new DBAccess();
+        dba.init();
         for (java.util.ArrayList<String> temp : data)
         {
             switch ((temp.size() - 8) % 3)
@@ -107,17 +110,17 @@ public class DXA2000 extends DXA
                     item.setData(temp.get(indx++));
                     tempList.add(item);
                 }
+                safeMdl.enCrypt(tempKeys, tempList);
+                DBA3000.savePwdsData(dba, tempKeys);
+                size += 1;
             }
             catch (Exception exp)
             {
                 Logs.exception(exp);
             }
-
-            safeMdl.enCrypt(tempKeys, tempList);
-            DBA3000.savePwdsData(tempKeys);
-            size += 1;
-            Thread.sleep(200);
         }
+
+        dba.close();
         return size;
     }
 
