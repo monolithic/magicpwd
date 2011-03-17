@@ -109,7 +109,31 @@ public class DBAccess
 
     public void backup()
     {
-        // BACKUP DATABASE to '../bak/' BLOCKING
+        try
+        {
+            if (conn == null || conn.isClosed())
+            {
+                conn = DriverManager.getConnection("jdbc:hsqldb:file:" + ConsEnv.DIR_DAT + "/amon");
+            }
+            Statement s = conn.createStatement();
+            s.execute("BACKUP DATABASE to '../bak/' BLOCKING");
+            s.close();
+        }
+        catch (SQLException exp)
+        {
+            Logs.exception(exp);
+        }
+        finally
+        {
+            try
+            {
+                conn.close();
+            }
+            catch (SQLException ex)
+            {
+                Logs.exception(ex);
+            }
+        }
     }
 
     /**
@@ -123,9 +147,9 @@ public class DBAccess
             {
                 conn = DriverManager.getConnection("jdbc:hsqldb:file:" + ConsEnv.DIR_DAT + "/amon");
             }
-            Statement stat = conn.createStatement();
-            stat.execute("SHUTDOWN");
-            stat.close();
+            Statement s = conn.createStatement();
+            s.execute("SHUTDOWN");
+            s.close();
         }
         catch (SQLException exp)
         {
