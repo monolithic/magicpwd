@@ -65,7 +65,8 @@ public class UpdateAction extends AMaocAction implements IBackCall<S1S3>
         {
             return false;
         }
-        maocPtn.updateNum(object);
+        maocPtn.deleteNum();
+        maocPtn.appendNum(object);
         return true;
     }
 }
