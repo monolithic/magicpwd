@@ -18,7 +18,6 @@ package com.magicpwd._util;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -35,7 +34,7 @@ public class Jzip
 
     public static void doZip(String zipFileName, String... srcFileList) throws IOException
     {
-        File zipFile = new File(zipFileName);
+        java.io.File zipFile = new java.io.File(zipFileName);
 
         // 文件是否存在
         if (!zipFile.exists())
@@ -60,7 +59,7 @@ public class Jzip
         ZipOutputStream zos = new ZipOutputStream(bos);
         for (String name : srcFileList)
         {
-            doZip(zos, new File(name), "");
+            doZip(zos, new java.io.File(name), "");
         }
         zos.flush();
         bos.flush();
@@ -68,7 +67,7 @@ public class Jzip
         bos.close();
     }
 
-    public static void doZip(File zipFilePath, File... srcFileList) throws IOException
+    public static void doZip(java.io.File zipFilePath, java.io.File... srcFileList) throws IOException
     {
         // 文件是否存在
         if (!zipFilePath.exists())
@@ -91,7 +90,7 @@ public class Jzip
 
         BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(zipFilePath));
         ZipOutputStream zos = new ZipOutputStream(bos);
-        for (File file : srcFileList)
+        for (java.io.File file : srcFileList)
         {
             doZip(zos, file, "");
         }
@@ -101,7 +100,7 @@ public class Jzip
         bos.close();
     }
 
-    private static void doZip(ZipOutputStream zos, File file, String base) throws IOException
+    private static void doZip(ZipOutputStream zos, java.io.File file, String base) throws IOException
     {
         byte[] buff = new byte[2048];
 
@@ -116,8 +115,8 @@ public class Jzip
             zos.closeEntry();
 
             // 递归文件压缩
-            File[] list = file.listFiles();
-            for (File temp : list)
+            java.io.File[] list = file.listFiles();
+            for (java.io.File temp : list)
             {
                 doZip(zos, temp, base);
             }
@@ -130,7 +129,7 @@ public class Jzip
         }
     }
 
-    private static void saveEntry(ZipOutputStream zos, File file, byte[] buff) throws IOException
+    private static void saveEntry(ZipOutputStream zos, java.io.File file, byte[] buff) throws IOException
     {
         BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
         int size = bis.read(buff);
@@ -149,15 +148,15 @@ public class Jzip
 
     public static void unZip(String zipFileName, String dstFileName, boolean overWrite) throws IOException
     {
-        unZip(new File(zipFileName), new File(dstFileName));
+        unZip(new java.io.File(zipFileName), new java.io.File(dstFileName));
     }
 
-    public static void unZip(File zipFileName, File dstFilePath) throws IOException
+    public static void unZip(java.io.File zipFileName, java.io.File dstFilePath) throws IOException
     {
         unZip(zipFileName, dstFilePath, true);
     }
 
-    public static void unZip(File zipFileName, File dstFilePath, boolean overWrite) throws IOException
+    public static void unZip(java.io.File zipFileName, java.io.File dstFilePath, boolean overWrite) throws IOException
     {
         // 文件是否存在
         if (!dstFilePath.exists())
@@ -180,7 +179,7 @@ public class Jzip
         unZip(new FileInputStream(zipFileName), dstFilePath, overWrite);
     }
 
-    public static void unZip(InputStream inputStream, File dstFilePath, boolean overWrite) throws IOException
+    public static void unZip(InputStream inputStream, java.io.File dstFilePath, boolean overWrite) throws IOException
     {
         BufferedInputStream bis = new BufferedInputStream(inputStream);
         ZipInputStream zis = new ZipInputStream(bis);
@@ -189,7 +188,7 @@ public class Jzip
         ZipEntry zip = zis.getNextEntry();
         while (zip != null)
         {
-            File file = new File(dstFilePath, zip.getName());
+            java.io.File file = new java.io.File(dstFilePath, zip.getName());
 
             if (zip.isDirectory())
             {
@@ -217,7 +216,7 @@ public class Jzip
         bis.close();
     }
 
-    private static void readEntry(ZipInputStream zis, File file, byte[] buff) throws IOException
+    private static void readEntry(ZipInputStream zis, java.io.File file, byte[] buff) throws IOException
     {
         BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(file));
         int size = zis.read(buff);
