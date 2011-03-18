@@ -281,7 +281,7 @@ public class Symbols {
 		if (function instanceof Constant) {
 			remove(new Symbol(name, function.eval(), 0, false));
 		} else {
-			add(new Symbol(name, function));
+			remove(new Symbol(name, function));
 		}
 	}
 
