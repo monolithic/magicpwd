@@ -20,6 +20,7 @@ import com.magicpwd.__a.AFrame;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._comn.apps.FileLocker;
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._enum.RunMode;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
@@ -45,7 +46,7 @@ public class MagicPwd
      */
     public static void main(String[] args)
     {
-        FileLocker fl = new FileLocker(new java.io.File("tmp", "amon.lck"));
+        FileLocker fl = new FileLocker(new java.io.File("tmp", "mwpd.lck"));
         if (!fl.tryLock())
         {
             return;
@@ -57,13 +58,21 @@ public class MagicPwd
             MpwdMdl.setRunMode(args[0]);
         }
 
-//        java.awt.KeyboardFocusManager.setCurrentKeyboardFocusManager(new KFManager());
+        // 系统配置信息读取
+        MpwdMdl mpwdMdl = new MpwdMdl();
+        mpwdMdl.loadCfg();
 
-        // 数据完整性处理
-        zipData();
+        // 命令模式
+        if (MpwdMdl.getRunMode() == RunMode.cmd)
+        {
+            return;
+        }
+
+//        java.awt.KeyboardFocusManager.setCurrentKeyboardFocusManager(new KFManager());
 
         // 用户配置文件加载
         final UserMdl userMdl = new UserMdl();
+        userMdl.setMpwdMdl(mpwdMdl);
         userMdl.loadCfg();
 
         final TrayPtn trayPtn = new TrayPtn(userMdl);
@@ -82,7 +91,7 @@ public class MagicPwd
                     // 扩展皮肤加载
                     Skin.loadLook(userMdl);
 
-                    trayPtn.showViewPtn(AppView.mpwd);
+                    trayPtn.showViewPtn(AppView.mexp);
                 }
             });
         }

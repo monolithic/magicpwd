@@ -67,14 +67,14 @@ public final class UserMdl
         safeKey = new SafeKey(this);
     }
 
-    public final void loadDef()
+    public void loadDef()
     {
         userCfg.clear();
         incBack = true;
         topMost = false;
     }
 
-    public final void saveCfg()
+    public void saveCfg()
     {
         java.io.FileOutputStream fos = null;
         try
@@ -92,12 +92,12 @@ public final class UserMdl
         }
     }
 
-    public final String getCfg(String key)
+    public String getCfg(String key)
     {
         return getCfg(key, null);
     }
 
-    public final String getCfg(String key, String def)
+    public String getCfg(String key, String def)
     {
         if (!Char.isValidate(key))
         {
@@ -106,7 +106,7 @@ public final class UserMdl
         return userCfg.getProperty(Char.format(key, safeKey.getName()), def);
     }
 
-    public final void setCfg(String key, String value)
+    public void setCfg(String key, String value)
     {
         if (Char.isValidate(key))
         {
@@ -117,7 +117,7 @@ public final class UserMdl
     /**
      * @return the menuViw
      */
-    public final boolean isMenuVisible()
+    public boolean isMenuVisible()
     {
         return ConsCfg.DEF_TRUE.equalsIgnoreCase(userCfg.getProperty(ConsCfg.CFG_VIEW_MENU, ConsCfg.DEF_TRUE));
     }
@@ -126,7 +126,7 @@ public final class UserMdl
      * @param visible
      *            the menuViw to set
      */
-    public final void setMenuVisible(boolean visible)
+    public void setMenuVisible(boolean visible)
     {
         userCfg.setProperty(ConsCfg.CFG_VIEW_MENU, visible ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
@@ -134,7 +134,7 @@ public final class UserMdl
     /**
      * @return the toolViw
      */
-    public final boolean isToolVisible(String viewPtn)
+    public boolean isToolVisible(String viewPtn)
     {
         return ConsCfg.DEF_TRUE.equalsIgnoreCase(userCfg.getProperty(Char.format(ConsCfg.CFG_VIEW_TOOL, viewPtn)));
     }
@@ -143,7 +143,7 @@ public final class UserMdl
      * @param visible
      *            the toolViw to set
      */
-    public final void setToolVisible(String viewPtn, boolean visible)
+    public void setToolVisible(String viewPtn, boolean visible)
     {
         userCfg.setProperty(Char.format(ConsCfg.CFG_VIEW_TOOL, viewPtn), visible ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
@@ -151,7 +151,7 @@ public final class UserMdl
     /**
      * @return the infoViw
      */
-    public final boolean isInfoVisible()
+    public boolean isInfoVisible()
     {
         return ConsCfg.DEF_TRUE.equalsIgnoreCase(userCfg.getProperty(ConsCfg.CFG_VIEW_INFO, ConsCfg.DEF_TRUE));
     }
@@ -160,7 +160,7 @@ public final class UserMdl
      * @param visible
      *            the infoViw to set
      */
-    public final void setInfoVisible(boolean visible)
+    public void setInfoVisible(boolean visible)
     {
         userCfg.setProperty(ConsCfg.CFG_VIEW_INFO, visible ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
@@ -168,7 +168,7 @@ public final class UserMdl
     /**
      * @return the findViw
      */
-    public final boolean isFindVisible()
+    public boolean isFindVisible()
     {
         return ConsCfg.DEF_TRUE.equalsIgnoreCase(userCfg.getProperty(ConsCfg.CFG_VIEW_FIND, ConsCfg.DEF_TRUE));
     }
@@ -177,7 +177,7 @@ public final class UserMdl
      * @param visible
      *            the findViw to set
      */
-    public final void setFindVisible(boolean visible)
+    public void setFindVisible(boolean visible)
     {
         userCfg.setProperty(ConsCfg.CFG_VIEW_FIND, visible ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
@@ -185,7 +185,7 @@ public final class UserMdl
     /**
      * @return the toolLoc
      */
-    public final String getToolLoc(String viewPtn)
+    public String getToolLoc(String viewPtn)
     {
         return userCfg.getProperty(Char.format(ConsCfg.CFG_VIEW_TOOL_LOC, viewPtn), "North");
     }
@@ -194,7 +194,7 @@ public final class UserMdl
      * @param toolLoc
      *            the toolLoc to set
      */
-    public final void setToolLoc(String viewPtn, String toolLoc)
+    public void setToolLoc(String viewPtn, String toolLoc)
     {
         userCfg.setProperty(Char.format(ConsCfg.CFG_VIEW_TOOL_LOC, viewPtn), toolLoc);
     }
@@ -202,7 +202,7 @@ public final class UserMdl
     /**
      * @return the clipDlt
      */
-    public final int getClipDlt()
+    public int getClipDlt()
     {
         return Integer.parseInt(userCfg.getProperty(ConsCfg.CFG_SAFE_CLIP_DLT, ConsCfg.DEF_CLIP_DLT));
     }
@@ -211,7 +211,7 @@ public final class UserMdl
      * @param clipDlt
      *            the clipDlt to set
      */
-    public final void setClipDlt(int clipDlt)
+    public void setClipDlt(int clipDlt)
     {
         userCfg.setProperty(ConsCfg.CFG_SAFE_CLIP_DLT, Integer.toString(clipDlt));
     }
@@ -219,7 +219,7 @@ public final class UserMdl
     /**
      * @return the pwdsLen
      */
-    public final String getPwdsLen()
+    public String getPwdsLen()
     {
         return userCfg.getProperty(ConsCfg.CFG_PWDS_SIZE, ConsCfg.DEF_PWDS_SIZE);
     }
@@ -228,7 +228,7 @@ public final class UserMdl
      * @param pwdsLen
      *            the pwdsLen to set
      */
-    public final void setPwdsLen(int pwdsLen)
+    public void setPwdsLen(int pwdsLen)
     {
         userCfg.setProperty(ConsCfg.CFG_PWDS_SIZE, "" + pwdsLen);
     }
@@ -236,7 +236,7 @@ public final class UserMdl
     /**
      * @return the pwdsKey
      */
-    public final String getPwdsKey()
+    public String getPwdsKey()
     {
         return userCfg.getProperty(ConsCfg.CFG_PWDS_HASH, ConsCfg.DEF_PWDS_HASH);
     }
@@ -245,12 +245,12 @@ public final class UserMdl
      * @param pwdsKey
      *            the pwdsKey to set
      */
-    public final void setPwdsKey(String pwdsKey)
+    public void setPwdsKey(String pwdsKey)
     {
         userCfg.setProperty(ConsCfg.CFG_PWDS_HASH, pwdsKey);
     }
 
-    public final int getHintInt()
+    public int getHintInt()
     {
         String txt = userCfg.getProperty(ConsCfg.CFG_HINT_INT, "60");
         if (Char.isValidatePositiveInteger(txt))
@@ -260,12 +260,12 @@ public final class UserMdl
         return 60;
     }
 
-    public final void setHintInt(int hintInt)
+    public void setHintInt(int hintInt)
     {
         userCfg.setProperty(ConsCfg.CFG_HINT_INT, "" + hintInt);
     }
 
-    public final int getHintPre()
+    public int getHintPre()
     {
         String txt = userCfg.getProperty(ConsCfg.CFG_HINT_PRE, "300");
         if (Char.isValidatePositiveInteger(txt))
@@ -275,17 +275,17 @@ public final class UserMdl
         return 300;
     }
 
-    public final void setHintPre(int hintPre)
+    public void setHintPre(int hintPre)
     {
         userCfg.setProperty(ConsCfg.CFG_HINT_PRE, "" + hintPre);
     }
 
-    public final String getDataDir()
+    public String getDataDir()
     {
         return userCfg.getProperty(ConsCfg.CFG_SAFE_DATA_DIR, ConsCfg.DEF_DATA_PATH);
     }
 
-    public final void setDataDir(String dataDir)
+    public void setDataDir(String dataDir)
     {
         userCfg.setProperty(ConsCfg.CFG_SAFE_DATA_DIR, dataDir);
     }
@@ -293,7 +293,7 @@ public final class UserMdl
     /**
      * @return the bakNum
      */
-    public final int getDumpCnt()
+    public int getDumpCnt()
     {
         String txt = userCfg.getProperty(ConsCfg.CFG_SAFE_DUMP_CNT, "3");
         if (Char.isValidatePositiveInteger(txt))
@@ -307,7 +307,7 @@ public final class UserMdl
      * @param dumpCnt
      *            the dumpCnt to set
      */
-    public final void setDumpCnt(int dumpCnt)
+    public void setDumpCnt(int dumpCnt)
     {
         userCfg.setProperty(ConsCfg.CFG_SAFE_DUMP_CNT, "" + dumpCnt);
     }
@@ -315,7 +315,7 @@ public final class UserMdl
     /**
      * @return the bakDir
      */
-    public final String getDumpDir()
+    public String getDumpDir()
     {
         return userCfg.getProperty(ConsCfg.CFG_SAFE_DUMP_DIR, ConsCfg.DEF_DUMP_PATH);
     }
@@ -324,7 +324,7 @@ public final class UserMdl
      * @param dumpDir
      *            the backDir to set
      */
-    public final void setDumpDir(String dumpDir)
+    public void setDumpDir(String dumpDir)
     {
         userCfg.setProperty(ConsCfg.CFG_SAFE_DUMP_DIR, dumpDir);
     }
@@ -332,7 +332,7 @@ public final class UserMdl
     /**
      * @return the editViw
      */
-    public final boolean isEditVisible()
+    public boolean isEditVisible()
     {
         return ConsCfg.DEF_TRUE.equalsIgnoreCase(userCfg.getProperty(ConsCfg.CFG_VIEW_EDIT_VIW, ConsCfg.DEF_TRUE));
     }
@@ -341,12 +341,12 @@ public final class UserMdl
      * @param editViw
      *            the editViw to set
      */
-    public final void setEditVisible(boolean editViw)
+    public void setEditVisible(boolean editViw)
     {
         userCfg.setProperty(ConsCfg.CFG_VIEW_EDIT_VIW, editViw ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
-    public final boolean isEditIsolate()
+    public boolean isEditIsolate()
     {
         return ConsCfg.DEF_TRUE.equalsIgnoreCase(userCfg.getProperty(ConsCfg.CFG_VIEW_EDIT_WND, ConsCfg.DEF_FALSE));
     }
@@ -355,12 +355,12 @@ public final class UserMdl
      * @param isolate
      *            the editWnd to set
      */
-    public final void setEditIsolate(boolean isolate)
+    public void setEditIsolate(boolean isolate)
     {
         userCfg.setProperty(ConsCfg.CFG_VIEW_EDIT_WND, isolate ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
-    public final String getPwdsLoop()
+    public String getPwdsLoop()
     {
         return userCfg.getProperty(ConsCfg.CFG_PWDS_LOOP, ConsCfg.DEF_TRUE);
     }
@@ -368,7 +368,7 @@ public final class UserMdl
     /**
      * @return the pwdUpt
      */
-    public final boolean isPwdsLoop()
+    public boolean isPwdsLoop()
     {
         return ConsCfg.DEF_TRUE.equalsIgnoreCase(getPwdsLoop());
     }
@@ -377,7 +377,7 @@ public final class UserMdl
      * @param pwdsLoop
      *            the pwdsUpt to set
      */
-    public final void setPwdsLoop(boolean pwdsLoop)
+    public void setPwdsLoop(boolean pwdsLoop)
     {
         userCfg.setProperty(ConsCfg.CFG_PWDS_LOOP, pwdsLoop ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
@@ -413,7 +413,7 @@ public final class UserMdl
         userCfg.setProperty(ConsCfg.CFG_SKIN_FEEL, feel);
     }
 
-    public final String getLang()
+    public String getLang()
     {
         String lang = userCfg.getProperty(ConsCfg.CFG_LANG);
         if (!Char.isValidate(lang))
@@ -428,7 +428,7 @@ public final class UserMdl
         return lang;
     }
 
-    public final void setLang(String lang)
+    public void setLang(String lang)
     {
         setCfg(ConsCfg.CFG_LANG, lang);
     }
@@ -470,7 +470,7 @@ public final class UserMdl
     /**
      * @return the incBack
      */
-    public final boolean isIncBack()
+    public boolean isIncBack()
     {
         return incBack;
     }
@@ -478,7 +478,7 @@ public final class UserMdl
     /**
      * @param incBack the incBack to set
      */
-    public final void setIncBack(boolean incBack)
+    public void setIncBack(boolean incBack)
     {
         this.incBack = incBack;
     }
@@ -486,7 +486,7 @@ public final class UserMdl
     /**
      * @return the viewTop
      */
-    public final boolean isTopMost()
+    public boolean isTopMost()
     {
         return topMost;
     }
@@ -495,7 +495,7 @@ public final class UserMdl
      * @param topMost
      *            the viewTop to set
      */
-    public final void setTopMost(boolean topMost)
+    public void setTopMost(boolean topMost)
     {
         this.topMost = topMost;
     }

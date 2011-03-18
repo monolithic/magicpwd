@@ -14,7 +14,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.r;
+package com.magicpwd.r.mexp;
 
 import com.magicpwd._cons.ConsEnv;
 import java.awt.Color;
@@ -25,10 +25,10 @@ import javax.swing.JTable;
  *
  * @author Amon
  */
-public class MpwdCR extends javax.swing.table.DefaultTableCellRenderer
+public class MexpCR extends javax.swing.table.DefaultTableCellRenderer
 {
 
-    public MpwdCR()
+    public MexpCR()
     {
     }
 

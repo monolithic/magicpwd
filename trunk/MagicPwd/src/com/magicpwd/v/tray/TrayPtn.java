@@ -226,7 +226,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
     {
         switch (view)
         {
-            case mpwd:
+            case mexp:
                 showMpwdPtn();
                 return;
             case mwiz:
@@ -281,7 +281,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
         mp_MpwdPtn.showData();
 
         mfCurrForm = mp_MpwdPtn;
-        currPtn = AppView.mpwd;
+        currPtn = AppView.mexp;
     }
 
     public MwizPtn getMwizPtn()

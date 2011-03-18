@@ -24,9 +24,9 @@ public enum AppView
 {
 
     /**
-     * 高级模式
+     * 专家模式
      */
-    mpwd,
+    mexp,
     /**
      * 向导模式
      */
