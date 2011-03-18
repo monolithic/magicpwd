@@ -18,7 +18,7 @@ package com.magicpwd._util;
 
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._enum.RunMode;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.MpwdMdl;
 
 /**
  * @author Amon
@@ -35,7 +35,7 @@ public class Logs
 
     public static void log(String log)
     {
-        if (UserMdl.getRunMode() == RunMode.dev)
+        if (MpwdMdl.getRunMode() == RunMode.dev)
         {
             System.out.println(log);
         }
@@ -43,7 +43,7 @@ public class Logs
 
     public static void exception(Exception exp)
     {
-        if (UserMdl.getRunMode() == RunMode.dev)
+        if (MpwdMdl.getRunMode() == RunMode.dev)
         {
             exp.printStackTrace();
         }

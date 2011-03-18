@@ -30,10 +30,10 @@ import com.magicpwd._util.Char;
 import com.magicpwd._util.Jpng;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
+import com.magicpwd.m.MpwdMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.u.DBU3000;
 import com.magicpwd.v.tray.TrayPtn;
-import java.util.Properties;
 
 public class UserPtn extends javax.swing.JPanel
 {
@@ -66,7 +66,6 @@ public class UserPtn extends javax.swing.JPanel
     private static javax.swing.Icon guidIcon;
     private TrayPtn trayPtn;
     private UserMdl userMdl;
-    private Properties sysCfg;
 
     /**
      * 独立窗口
@@ -737,19 +736,6 @@ public class UserPtn extends javax.swing.JPanel
     {
         this.errCount = 0;
 
-        sysCfg = new Properties();
-        java.io.File cfgFile = new java.io.File("");
-        try
-        {
-            java.io.FileInputStream fis = new java.io.FileInputStream(cfgFile);
-            sysCfg.load(fis);
-            fis.close();
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-        }
-
         switch (signType)
         {
             case signIn:
@@ -760,7 +746,7 @@ public class UserPtn extends javax.swing.JPanel
                 cb_UserType.addItem(new S1S1("maoc", "数值运算"));
                 cb_UserType.addItem(new S1S1("mruc", "公式换算"));
                 cb_UserType.addItem(new S1S1("mgtd", "计划任务"));
-                cb_UserType.setSelectedIndex(UserMdl.getAppView().ordinal());
+                cb_UserType.setSelectedIndex(MpwdMdl.getAppView().ordinal());
                 String name = userMdl.getCfg(ConsCfg.CFG_USER_LAST);
                 if (com.magicpwd._util.Char.isValidate(name))
                 {
@@ -877,7 +863,7 @@ public class UserPtn extends javax.swing.JPanel
             Logs.exception(exp);
         }
 
-        if (UserMdl.getRunMode() == RunMode.dev)
+        if (MpwdMdl.getRunMode() == RunMode.dev)
         {
             return;
         }
@@ -1163,7 +1149,7 @@ public class UserPtn extends javax.swing.JPanel
         Object object = cb_UserType.getSelectedItem();
         if (object instanceof S1S1)
         {
-            UserMdl.setAppView(AppView.valueOf(((S1S1) object).getK()));
+            MpwdMdl.setAppView(AppView.valueOf(((S1S1) object).getK()));
         }
         if (backCall != null)
         {

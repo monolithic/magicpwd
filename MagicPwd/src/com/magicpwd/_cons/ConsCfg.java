@@ -201,9 +201,6 @@ public interface ConsCfg
      * 数据安全：剪贴板驻留时间
      */
     String CFG_SAFE_CLIP_DLT = CFG_SAFE_CLIP + ".dlt";
-    String CFG_MODE = CFG_PRE + ".mode";
-    String CFG_MODE_APP = CFG_MODE + ".app";
-    String CFG_MODE_RUN = CFG_MODE + ".run";
     /**
      * 向导模式：
      */

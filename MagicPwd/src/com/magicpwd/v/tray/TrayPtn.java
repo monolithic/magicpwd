@@ -31,6 +31,7 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.db.DBAccess;
+import com.magicpwd.m.MpwdMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.maoc.MaocPtn;
@@ -165,7 +166,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
             case signIn:
             {
                 // 设置软件界面风格
-                showPtn(UserMdl.getAppView());
+                showPtn(MpwdMdl.getAppView());
 
                 initView();
                 initLang();
@@ -179,7 +180,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
             case signUp:
             {
                 // 设置软件界面风格
-                showPtn(UserMdl.getAppView());
+                showPtn(MpwdMdl.getAppView());
 
                 initView();
                 initLang();

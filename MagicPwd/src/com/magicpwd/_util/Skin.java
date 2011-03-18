@@ -19,6 +19,7 @@ package com.magicpwd._util;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._enum.RunMode;
+import com.magicpwd.m.MpwdMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
 import org.dom4j.Document;
@@ -35,7 +36,7 @@ public class Skin
 
     public static void loadLook(UserMdl userMdl)
     {
-        if (UserMdl.getRunMode() == RunMode.cmd)
+        if (MpwdMdl.getRunMode() == RunMode.cmd)
         {
             return;
         }
