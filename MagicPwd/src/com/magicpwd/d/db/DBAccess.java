@@ -539,6 +539,7 @@ public class DBAccess
         }
 
         stat.executeBatch();
+        stat.clearBatch();
     }
 
     /**

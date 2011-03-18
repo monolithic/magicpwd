@@ -19,6 +19,7 @@ package com.magicpwd.m;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._enum.RunMode;
 import com.magicpwd._util.Bean;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Logs;
 
 /**
@@ -31,8 +32,8 @@ public final class MpwdMdl
     private static RunMode runMode = RunMode.app;
     private static AppView appView = AppView.mwiz;
     private java.util.Properties mpwdCfg;
-    private String datDir;
-    private String bakDir;
+    private String datPath;
+    private String bakPath;
 
     public void loadCfg()
     {
@@ -57,8 +58,9 @@ public final class MpwdMdl
             Bean.closeStream(fis);
         }
 
-        datDir = mpwdCfg.getProperty("path.dat", "dat");
-        datDir = mpwdCfg.getProperty("path.bak", "bak");
+        setDatPath(mpwdCfg.getProperty("path.dat"));
+        setBakPath(mpwdCfg.getProperty("path.bak"));
+        setAppView(mpwdCfg.getProperty("view.last", "mwiz"));
     }
 
     /**
@@ -109,6 +111,23 @@ public final class MpwdMdl
         MpwdMdl.appView = appView;
     }
 
+    public static void setAppView(String appView)
+    {
+        if (Char.isValidate(appView, 4))
+        {
+            appView = appView.toLowerCase();
+            try
+            {
+                MpwdMdl.appView = AppView.valueOf(appView);
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+                MpwdMdl.appView = AppView.mwiz;
+            }
+        }
+    }
+
     public static void setAppModule(String appModule)
     {
         if (appModule != null)
@@ -118,34 +137,50 @@ public final class MpwdMdl
     }
 
     /**
-     * @return the datDir
+     * @return the datPath
      */
-    public String getDatDir()
+    public String getDatPath()
     {
-        return datDir;
+        return datPath;
     }
 
     /**
-     * @param datDir the datDir to set
+     * @param datPath the datPath to set
      */
-    public void setDatDir(String datDir)
+    public void setDatPath(String datPath)
     {
-        this.datDir = datDir;
+        if (!Char.isValidate(datPath))
+        {
+            datPath = "dat";
+        }
+        if (datPath.endsWith("/"))
+        {
+            datPath = datPath.substring(0, datPath.length() - 1);
+        }
+        this.datPath = datPath;
     }
 
     /**
-     * @return the bakDir
+     * @return the bakPath
      */
-    public String getBakDir()
+    public String getBakPath()
     {
-        return bakDir;
+        return bakPath;
     }
 
     /**
-     * @param bakDir the bakDir to set
+     * @param bakPath the bakPath to set
      */
-    public void setBakDir(String bakDir)
+    public void setBakPath(String bakPath)
     {
-        this.bakDir = bakDir;
+        if (!Char.isValidate(datPath))
+        {
+            datPath = "dat";
+        }
+        if (datPath.endsWith("/"))
+        {
+            datPath = datPath.substring(0, datPath.length() - 1);
+        }
+        this.bakPath = bakPath;
     }
 }

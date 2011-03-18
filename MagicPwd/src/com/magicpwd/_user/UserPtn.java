@@ -743,13 +743,13 @@ public class UserPtn extends javax.swing.JPanel
         {
             case signIn:
                 // 显示上次登录用户
-                cb_UserType.addItem(new S1S1("mpwd", "高级模式"));
+                cb_UserType.addItem(new S1S1("mexp", "高级模式"));
                 cb_UserType.addItem(new S1S1("mwiz", "向导模式"));
                 cb_UserType.addItem(new S1S1("mpad", "记事模式"));
                 cb_UserType.addItem(new S1S1("maoc", "数值运算"));
                 cb_UserType.addItem(new S1S1("mruc", "公式换算"));
                 cb_UserType.addItem(new S1S1("mgtd", "计划任务"));
-                cb_UserType.setSelectedIndex(mpwdMdl.getAppView().ordinal());
+                cb_UserType.setSelectedIndex(MpwdMdl.getAppView().ordinal());
                 String name = userMdl.getCfg(ConsCfg.CFG_USER_LAST);
                 if (com.magicpwd._util.Char.isValidate(name))
                 {
@@ -866,7 +866,7 @@ public class UserPtn extends javax.swing.JPanel
             Logs.exception(exp);
         }
 
-        if (mpwdMdl.getRunMode() == RunMode.dev)
+        if (MpwdMdl.getRunMode() == RunMode.dev)
         {
             return;
         }
@@ -1152,7 +1152,7 @@ public class UserPtn extends javax.swing.JPanel
         Object object = cb_UserType.getSelectedItem();
         if (object instanceof S1S1)
         {
-            mpwdMdl.setAppView(AppView.valueOf(((S1S1) object).getK()));
+            MpwdMdl.setAppView(AppView.valueOf(((S1S1) object).getK()));
         }
         if (backCall != null)
         {

@@ -16,13 +16,13 @@
  */
 package example.mpwd;
 
-import com.magicpwd.__a.mpwd.AMpwdAction;
+import com.magicpwd.__a.mexp.AMexpAction;
 
 /**
  *
  * @author Amon
  */
-public class DemoAction extends AMpwdAction
+public class DemoAction extends AMexpAction
 {
 
     @Override
