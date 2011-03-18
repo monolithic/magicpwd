@@ -67,7 +67,7 @@ public class DBAccess
         orderList = new StringBuffer();
     }
 
-    public void reset()
+    public void reInit()
     {
         this.paramList.clear();
         this.signList.clear();

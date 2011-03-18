@@ -120,7 +120,7 @@ public class DXA2000 extends DXA
             }
         }
 
-        dba.close();
+        dba.dispose();
         return size;
     }
 
