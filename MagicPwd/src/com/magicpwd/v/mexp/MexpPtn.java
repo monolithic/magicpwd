@@ -16,7 +16,7 @@
  */
 package com.magicpwd.v.mexp;
 
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd.__i.IEditBean;
 import com.magicpwd.__i.IEditItem;
@@ -69,7 +69,7 @@ import com.magicpwd.v.tray.TrayPtn;
 import com.magicpwd.x.MdiDialog;
 import com.magicpwd.x.mail.MailOpt;
 
-public class MexpPtn extends AFrame
+public class MexpPtn extends AMpwdPtn
 {
 
     private EditDlg ed_KeysEdit;
@@ -95,7 +95,8 @@ public class MexpPtn extends AFrame
         super(trayPtn, userMdl);
     }
 
-    public void initView()
+    @Override
+    public boolean initView()
     {
         initGuidView();
         initPropView();
@@ -115,9 +116,11 @@ public class MexpPtn extends AFrame
         this.pack();
         Bean.centerForm(this, null);
         super.setVisible(true);
+        return true;
     }
 
-    public void initLang()
+    @Override
+    public boolean initLang()
     {
         setTitle(Lang.getLang(LangRes.P30F7201, "魔方密码"));
 
@@ -128,9 +131,11 @@ public class MexpPtn extends AFrame
 
         this.pack();
         Bean.centerForm(this, null);
+        return true;
     }
 
-    public void initData()
+    @Override
+    public boolean initData()
     {
         try
         {
@@ -243,10 +248,13 @@ public class MexpPtn extends AFrame
 
         this.pack();
         Bean.centerForm(this, null);
+        return true;
     }
 
-    public void showData()
+    @Override
+    public boolean showData()
     {
+        return true;
     }
 
     private boolean hintCallBack()

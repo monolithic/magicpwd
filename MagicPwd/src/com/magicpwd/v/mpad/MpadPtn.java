@@ -16,7 +16,7 @@
  */
 package com.magicpwd.v.mpad;
 
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._comp.BtnLabel;
@@ -43,7 +43,7 @@ import com.magicpwd.v.tray.TrayPtn;
  *
  * @author Amon
  */
-public class MpadPtn extends AFrame
+public class MpadPtn extends AMpwdPtn
 {
 
     private String lastHash;
@@ -59,7 +59,8 @@ public class MpadPtn extends AFrame
         super(trayPtn, userMdl);
     }
 
-    public void initView()
+    @Override
+    public boolean initView()
     {
         pl_NoteBase = new javax.swing.JPanel();
         lb_NoteHead = new javax.swing.JLabel();
@@ -190,9 +191,11 @@ public class MpadPtn extends AFrame
         this.pack();
         Bean.centerForm(this, null);
         this.setVisible(true);
+        return true;
     }
 
-    public void initLang()
+    @Override
+    public boolean initLang()
     {
         setTitle(Lang.getLang(LangRes.P30F5201, "魔方密码"));
 
@@ -217,9 +220,11 @@ public class MpadPtn extends AFrame
 
         this.pack();
         Bean.centerForm(this, null);
+        return true;
     }
 
-    public void initData()
+    @Override
+    public boolean initData()
     {
         mpadMdl = new MpadMdl(userMdl);
         mpadMdl.init();
@@ -252,10 +257,13 @@ public class MpadPtn extends AFrame
 
         this.pack();
         Bean.centerForm(this, null);
+        return true;
     }
 
-    public void showData()
+    @Override
+    public boolean showData()
     {
+        return true;
     }
 
     private void cb_NoteInfoItemStateChanged(java.awt.event.ItemEvent evt)

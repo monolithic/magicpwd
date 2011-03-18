@@ -16,7 +16,7 @@
  */
 package com.magicpwd.x;
 
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.S1S1;
 import com.magicpwd._cons.LangRes;
@@ -37,10 +37,10 @@ import com.magicpwd._util.Lang;
 public class DatDialog extends javax.swing.JDialog
 {
 
-    private AFrame formPtn;
+    private AMpwdPtn formPtn;
     private IBackCall<String> backCall;
 
-    public DatDialog(AFrame formPtn, IBackCall<String> backCall)
+    public DatDialog(AMpwdPtn formPtn, IBackCall<String> backCall)
     {
         super(formPtn, true);
         this.formPtn = formPtn;

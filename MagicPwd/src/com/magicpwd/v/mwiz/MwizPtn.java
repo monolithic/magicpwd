@@ -16,7 +16,7 @@
  */
 package com.magicpwd.v.mwiz;
 
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._bean.mail.Connect;
 import com.magicpwd._comn.I1S2;
@@ -44,7 +44,7 @@ import com.magicpwd.x.mail.MailOpt;
  * 向导模式
  * @author Amon
  */
-public class MwizPtn extends AFrame
+public class MwizPtn extends AMpwdPtn
 {
 
     private MenuPtn menuPtn;
@@ -57,7 +57,8 @@ public class MwizPtn extends AFrame
         super(trayPtn, userMdl);
     }
 
-    public void initView()
+    @Override
+    public boolean initView()
     {
         tb_ToolBar = new javax.swing.JToolBar();
         tb_ToolBar.setFloatable(false);
@@ -106,9 +107,11 @@ public class MwizPtn extends AFrame
         this.pack();
         Bean.centerForm(this, null);
         this.setVisible(true);
+        return true;
     }
 
-    public void initLang()
+    @Override
+    public boolean initLang()
     {
         setTitle(Lang.getLang(LangRes.P30F6201, "魔方密码"));
 
@@ -116,9 +119,11 @@ public class MwizPtn extends AFrame
 
         this.pack();
         Bean.centerForm(this, null);
+        return true;
     }
 
-    public void initData()
+    @Override
+    public boolean initData()
     {
         hb_HintBar.initData();
         hb_HintBar.setBackCall(new IBackCall<String>()
@@ -224,12 +229,15 @@ public class MwizPtn extends AFrame
                 }
             }
         });
+        return true;
     }
 
-    public void showData()
+    @Override
+    public boolean showData()
     {
         mwizMdl.getGridMdl().listKeysByKind("0");
         hb_HintBar.showHint("共 " + mwizMdl.getGridMdl().getRowCount() + " 条数据");
+        return true;
     }
 
     @Override

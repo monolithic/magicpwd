@@ -17,7 +17,7 @@
 package com.magicpwd.v;
 
 import com.magicpwd.v.tray.TrayPtn;
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.IAction;
 import com.magicpwd.__i.maoc.IMaocAction;
 import com.magicpwd.__i.mgtd.IMgtdAction;
@@ -56,14 +56,14 @@ public class MenuPtn
 
     private Document document;
     private TrayPtn trayPtn;
-    private AFrame formPtn;
+    private AMpwdPtn formPtn;
     private UserMdl userMdl;
     private java.util.regex.Pattern pattern;
     private java.util.HashMap<String, javax.swing.AbstractButton> buttons;
     private java.util.HashMap<String, javax.swing.Action> actions;
     private java.util.HashMap<String, WButtonGroup> groups;
 
-    public MenuPtn(TrayPtn trayPtn, AFrame formPtn)
+    public MenuPtn(TrayPtn trayPtn, AMpwdPtn formPtn)
     {
         this(trayPtn, formPtn.getUserMdl());
         this.formPtn = formPtn;
@@ -543,7 +543,7 @@ public class MenuPtn
         javax.swing.JCheckBoxMenuItem item;
         String lookName = userMdl.getLook();
         LookAction action = new LookAction();
-        action.setMainPtn(trayPtn.getMpwdPtn());
+        action.setMainPtn(trayPtn.getMexpPtn());
         WButtonGroup group = new WButtonGroup();
 
         // Java默认风格
@@ -730,7 +730,7 @@ public class MenuPtn
             javax.swing.JCheckBoxMenuItem item;
             String feelName = userMdl.getFeel();
             FeelAction action = new FeelAction();
-            action.setMainPtn(trayPtn.getMpwdPtn());
+            action.setMainPtn(trayPtn.getMexpPtn());
             WButtonGroup group = new WButtonGroup();
 
             java.util.Properties prop = new java.util.Properties();
@@ -987,7 +987,7 @@ public class MenuPtn
                                 {
                                     IMexpAction mpwdAction = (IMexpAction) action;
                                     mpwdAction.setTrayPtn(trayPtn);
-                                    mpwdAction.setMainPtn(trayPtn.getMpwdPtn());
+                                    mpwdAction.setMainPtn(trayPtn.getMexpPtn());
                                     mpwdAction.doInit(actInit);
                                 }
                                 else if (action instanceof IMwizAction)

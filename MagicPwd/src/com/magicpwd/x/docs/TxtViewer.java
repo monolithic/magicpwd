@@ -17,7 +17,7 @@
 package com.magicpwd.x.docs;
 
 import com.magicpwd.__a.ADialog;
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.docs.IDocsViewer;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.File;
@@ -30,9 +30,9 @@ import com.magicpwd._util.Logs;
 public class TxtViewer extends ADialog implements IDocsViewer
 {
 
-    private AFrame formPtn;
+    private AMpwdPtn formPtn;
 
-    public TxtViewer(AFrame formPtn)
+    public TxtViewer(AMpwdPtn formPtn)
     {
         super(formPtn, true);
         this.formPtn = formPtn;

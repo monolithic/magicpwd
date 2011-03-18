@@ -38,7 +38,7 @@ public class SiteAction extends ATrayAction
     {
         if (!java.awt.Desktop.isDesktopSupported())
         {
-            Lang.showMesg(trayPtn.getCurrForm(), LangRes.P30F7A0F, "");
+            Lang.showMesg(trayPtn.getCurrPtn(), LangRes.P30F7A0F, "");
         }
 
         try

@@ -16,7 +16,7 @@
  */
 package com.magicpwd.v.tray;
 
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._cons.ConsCfg;
@@ -53,7 +53,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
     private static AppView nextPtn;
     private UserMdl userMdl;
     private UserPtn userPtn;
-    private AFrame mfCurrForm;
+    private AMpwdPtn mfCurrForm;
     private javax.swing.JWindow mwTrayForm;
     private javax.swing.event.PopupMenuListener listener;
     private MenuPtn menuPtn;
@@ -213,7 +213,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
 
         showPtn(nextPtn);
 
-        javax.swing.JFrame currForm = getCurrForm();
+        javax.swing.JFrame currForm = getCurrPtn();
         if (currForm.getState() != java.awt.Frame.NORMAL)
         {
             currForm.setState(java.awt.Frame.NORMAL);
@@ -255,32 +255,32 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
         }
     }
 
-    public AFrame getCurrForm()
+    public AMpwdPtn getCurrPtn()
     {
         return mfCurrForm;
     }
 
-    public MexpPtn getMpwdPtn()
+    public MexpPtn getMexpPtn()
     {
-        return mp_MpwdPtn;
+        return mp_MexpPtn;
     }
 
     private void showMpwdPtn()
     {
-        if (mp_MpwdPtn == null)
+        if (mp_MexpPtn == null)
         {
-            mp_MpwdPtn = new MexpPtn(this, userMdl);
-            mp_MpwdPtn.initView();
-            mp_MpwdPtn.initLang();
-            mp_MpwdPtn.initData();
+            mp_MexpPtn = new MexpPtn(this, userMdl);
+            mp_MexpPtn.initView();
+            mp_MexpPtn.initLang();
+            mp_MexpPtn.initData();
         }
         else
         {
-            mp_MpwdPtn.setVisible(true);
+            mp_MexpPtn.setVisible(true);
         }
-        mp_MpwdPtn.showData();
+        mp_MexpPtn.showData();
 
-        mfCurrForm = mp_MpwdPtn;
+        mfCurrForm = mp_MexpPtn;
         currPtn = AppView.mexp;
     }
 
@@ -494,10 +494,10 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
         {
             DBAccess.locked = true;
 
-            if (mp_MpwdPtn != null)
+            if (mp_MexpPtn != null)
             {
 //                mp_MainPtn.setVisible(false);
-                mp_MpwdPtn.endSave();
+                mp_MexpPtn.endSave();
             }
             if (mp_MwizPtn != null)
             {
@@ -582,7 +582,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
     public void showViewPtn(AppView nextPtn)
     {
         // 显示登录
-        if (getCurrForm() == null)
+        if (getCurrPtn() == null)
         {
             userPtn = new UserPtn(userMdl, this);
             userPtn.setBackCall(this);
@@ -594,15 +594,15 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
         }
 
         //TrayPtn.setUserCfg(cfg);
-        if (getCurrForm().isVisible())
+        if (getCurrPtn().isVisible())
         {
             if (currPtn == nextPtn)
             {
-                getCurrForm().toFront();
+                getCurrPtn().toFront();
                 return;
             }
 
-            getCurrForm().setVisible(false);
+            getCurrPtn().setVisible(false);
             showViewPtn(nextPtn);
             currPtn = nextPtn;
             return;
@@ -618,7 +618,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
         {
             userPtn = new UserPtn(userMdl, this);
         }
-        UserPtn ptn = (getCurrForm() != null && getCurrForm().isVisible()) ? new UserPtn(userMdl, getCurrForm()) : userPtn;
+        UserPtn ptn = (getCurrPtn() != null && getCurrPtn().isVisible()) ? new UserPtn(userMdl, getCurrPtn()) : userPtn;
         ptn.setBackCall(call);
         ptn.initView(view);
         ptn.initLang();
@@ -712,7 +712,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
 
     public void changeSkin(String lafClass)
     {
-        boolean wasDecoratedByOS = !(getCurrForm().isUndecorated());
+        boolean wasDecoratedByOS = !(getCurrPtn().isUndecorated());
         try
         {
             boolean isSystem = !com.magicpwd._util.Char.isValidate(lafClass) || ConsCfg.DEF_SKIN_LOOK_SYS.equalsIgnoreCase(lafClass);
@@ -730,28 +730,28 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
 
             if (canBeDecoratedByLAF == wasDecoratedByOS)
             {
-                boolean wasVisible = getCurrForm().isVisible();
+                boolean wasVisible = getCurrPtn().isVisible();
 
-                getCurrForm().setVisible(false);
-                getCurrForm().dispose();
+                getCurrPtn().setVisible(false);
+                getCurrPtn().dispose();
                 if (!canBeDecoratedByLAF || wasDecoratedByOS)
                 {
-                    getCurrForm().setUndecorated(false);
-                    getCurrForm().getRootPane().setWindowDecorationStyle(0);
+                    getCurrPtn().setUndecorated(false);
+                    getCurrPtn().getRootPane().setWindowDecorationStyle(0);
                 }
                 else
                 {
-                    getCurrForm().setUndecorated(true);
-                    getCurrForm().getRootPane().setWindowDecorationStyle(1);
+                    getCurrPtn().setUndecorated(true);
+                    getCurrPtn().getRootPane().setWindowDecorationStyle(1);
                 }
 
-                getCurrForm().setVisible(wasVisible);
+                getCurrPtn().setVisible(wasVisible);
             }
             userMdl.setLook(isSystem ? ConsCfg.DEF_SKIN_LOOK_SYS : lafClass);
         }
         catch (Exception exc)
         {
-            Lang.showMesg(getCurrForm(), null, exc.getLocalizedMessage());
+            Lang.showMesg(getCurrPtn(), null, exc.getLocalizedMessage());
         }
     }
 
@@ -769,7 +769,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
             trayIcon.displayMessage(title, tips, java.awt.TrayIcon.MessageType.INFO);
         }
     }
-    private static MexpPtn mp_MpwdPtn;
+    private static MexpPtn mp_MexpPtn;
     private static MwizPtn mp_MwizPtn;
     private static MpadPtn mp_MpadPtn;
     private static MrucPtn mp_MrucPtn;

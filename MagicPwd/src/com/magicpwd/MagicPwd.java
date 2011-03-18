@@ -16,7 +16,7 @@
  */
 package com.magicpwd;
 
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._comn.apps.FileLocker;
 import com.magicpwd._cons.ConsEnv;
@@ -129,7 +129,7 @@ public class MagicPwd
 
         Bean.getNone();
         Bean.getLogo(16);
-        AFrame.loadPre();
+        AMpwdPtn.loadPre();
 
         // 扩展库加载
         java.io.File file = new java.io.File(ConsEnv.DIR_EXT);

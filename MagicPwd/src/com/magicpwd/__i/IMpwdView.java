@@ -19,6 +19,14 @@ package com.magicpwd.__i;
 /**
  * @author Amon
  */
-public interface IGridView
+public interface IMpwdView
 {
+
+    boolean initView();
+
+    boolean initLang();
+
+    boolean initData();
+
+    boolean showData();
 }

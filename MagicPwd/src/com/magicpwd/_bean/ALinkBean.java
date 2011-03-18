@@ -17,7 +17,7 @@
 package com.magicpwd._bean;
 
 import com.magicpwd.__a.AEditBean;
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.LangRes;
@@ -40,7 +40,7 @@ public abstract class ALinkBean extends AEditBean
 
     private WTextBox dataBox;
 
-    public ALinkBean(AFrame formPtn)
+    public ALinkBean(AMpwdPtn formPtn)
     {
         this.formPtn = formPtn;
     }

@@ -38,7 +38,7 @@ public class MailAction extends ATrayAction
     {
         if (!java.awt.Desktop.isDesktopSupported())
         {
-            Lang.showMesg(trayPtn.getCurrForm(), LangRes.P30F7A11, "");
+            Lang.showMesg(trayPtn.getCurrPtn(), LangRes.P30F7A11, "");
         }
 
         try

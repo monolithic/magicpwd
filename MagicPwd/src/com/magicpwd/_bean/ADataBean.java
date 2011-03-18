@@ -17,7 +17,7 @@
 package com.magicpwd._bean;
 
 import com.magicpwd.__a.AEditBean;
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WButtonGroup;
@@ -34,7 +34,7 @@ import com.magicpwd.v.MenuPtn;
 public abstract class ADataBean extends AEditBean
 {
 
-    public ADataBean(AFrame formPtn)
+    public ADataBean(AMpwdPtn formPtn)
     {
         this.formPtn = formPtn;
     }
