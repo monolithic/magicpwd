@@ -19,8 +19,8 @@ package com.magicpwd.e.mpwd.user;
 import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsCfg;
-import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._enum.AuthLog;
 import com.magicpwd._user.UserDto;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
@@ -45,7 +45,7 @@ public class CreateSkeyAction extends AMpwdAction implements IBackCall<UserDto>
             return;
         }
 
-        trayPtn.getUserPtn(ConsEnv.INT_SIGN_SK, this);
+        trayPtn.getUserPtn(AuthLog.signSk, this);
     }
 
     @Override
@@ -63,7 +63,7 @@ public class CreateSkeyAction extends AMpwdAction implements IBackCall<UserDto>
     @Override
     public boolean callBack(String options, UserDto object)
     {
-        if (ConsEnv.STR_SIGN_SK.equalsIgnoreCase(options))
+        if (AuthLog.signSk.name().equalsIgnoreCase(options))
         {
             javax.swing.AbstractButton button = mpwdPtn.getMenuPtn().getButton("mpwd-skey");
             if (button != null)

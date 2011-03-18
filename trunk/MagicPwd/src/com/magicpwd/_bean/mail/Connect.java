@@ -18,6 +18,7 @@ package com.magicpwd._bean.mail;
 
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._enum.RunMode;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Logs;
 import com.magicpwd.m.UserMdl;
@@ -256,7 +257,7 @@ public final class Connect
     public Properties getProperties()
     {
         Properties prop = new Properties();
-        if (UserMdl.getRunMode() == ConsEnv.RUN_MODE_DEV)
+        if (UserMdl.getRunMode() == RunMode.dev)
         {
 //            prop.setProperty("mail.debug", "true");
         }

@@ -22,6 +22,9 @@ import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._bean.mail.Connect;
+import com.magicpwd._enum.AppView;
+import com.magicpwd._enum.AuthLog;
+import com.magicpwd._enum.RunMode;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Jpng;
@@ -30,6 +33,7 @@ import com.magicpwd._util.Logs;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.u.DBU3000;
 import com.magicpwd.v.tray.TrayPtn;
+import java.util.Properties;
 
 public class UserPtn extends javax.swing.JPanel
 {
@@ -37,7 +41,7 @@ public class UserPtn extends javax.swing.JPanel
     /**
      * 登录模式
      */
-    private int signType;
+    private AuthLog signType;
     /**
      * 登录错误次数
      */
@@ -62,6 +66,7 @@ public class UserPtn extends javax.swing.JPanel
     private static javax.swing.Icon guidIcon;
     private TrayPtn trayPtn;
     private UserMdl userMdl;
+    private Properties sysCfg;
 
     /**
      * 独立窗口
@@ -92,7 +97,7 @@ public class UserPtn extends javax.swing.JPanel
             @Override
             protected void processWindowEvent(java.awt.event.WindowEvent e)
             {
-                if (e.getID() == java.awt.event.WindowEvent.WINDOW_CLOSING && signType == ConsEnv.INT_SIGN_LS)
+                if (e.getID() == java.awt.event.WindowEvent.WINDOW_CLOSING && signType == AuthLog.signLs)
                 {
                     return;
                 }
@@ -104,7 +109,7 @@ public class UserPtn extends javax.swing.JPanel
         dialog.setDefaultCloseOperation(javax.swing.JDialog.DISPOSE_ON_CLOSE);
     }
 
-    public boolean initView(int type)
+    public boolean initView(AuthLog type)
     {
         if (type == signType)
         {
@@ -192,7 +197,7 @@ public class UserPtn extends javax.swing.JPanel
         hsg3.addComponent(lb_KeyLabel);
         hsg3.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE);
         hsg3.addComponent(bt_Confrm);
-        if (signType != ConsEnv.INT_SIGN_LS)
+        if (signType != AuthLog.signLs)
         {
             hsg3.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
             hsg3.addComponent(bt_Cancel);
@@ -210,7 +215,7 @@ public class UserPtn extends javax.swing.JPanel
         layout.setHorizontalGroup(hpg1);
 
         javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
-        if (signType != ConsEnv.INT_SIGN_LS)
+        if (signType != AuthLog.signLs)
         {
             vpg1.addComponent(bt_Cancel);
         }
@@ -392,7 +397,7 @@ public class UserPtn extends javax.swing.JPanel
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         switch (signType)
         {
-            case ConsEnv.INT_SIGN_IN:// 用户登录
+            case signIn:
                 hpg1.addComponent(lb_UserType, javax.swing.GroupLayout.Alignment.TRAILING);
                 //hpg2.addComponent(tf_UserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
                 hpg2.addComponent(cb_UserType, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
@@ -405,13 +410,13 @@ public class UserPtn extends javax.swing.JPanel
                 //hpg2.addComponent(pf_UserKey0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
                 hpg2.addComponent(pf_UserKey0, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
                 break;
-            case ConsEnv.INT_SIGN_LS:// 锁定屏幕
+            case signLs:// 锁定屏幕
                 hpg1.addComponent(lb_UserKey0, javax.swing.GroupLayout.Alignment.TRAILING);
                 //hpg2.addComponent(pf_UserKey0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
                 hpg2.addComponent(pf_UserKey0, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
                 break;
-            case ConsEnv.INT_SIGN_RS:// 权限认证
-            case ConsEnv.INT_SIGN_FP:// 口令找回
+            case signRs:// 权限认证
+            case signFp:// 口令找回
                 hpg1.addComponent(lb_UserName, javax.swing.GroupLayout.Alignment.TRAILING);
                 //hpg2.addComponent(tf_UserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
                 hpg2.addComponent(tf_UserName, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
@@ -420,8 +425,8 @@ public class UserPtn extends javax.swing.JPanel
                 //hpg2.addComponent(pf_UserKey0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
                 hpg2.addComponent(pf_UserKey0, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
                 break;
-            case ConsEnv.INT_SIGN_UP:// 用户注册
-            case ConsEnv.INT_SIGN_SU:// 从属用户
+            case signUp:// 用户注册
+            case signSu:// 从属用户
                 hpg1.addComponent(lb_UserName, javax.swing.GroupLayout.Alignment.TRAILING);
                 //hpg2.addComponent(tf_UserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
                 hpg2.addComponent(tf_UserName, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
@@ -434,8 +439,8 @@ public class UserPtn extends javax.swing.JPanel
                 //hpg2.addComponent(pf_UserKey1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
                 hpg2.addComponent(pf_UserKey1, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
                 break;
-            case ConsEnv.INT_SIGN_PK:// 修改登录口令
-            case ConsEnv.INT_SIGN_SK:// 修改安全口令
+            case signPk:// 修改登录口令
+            case signSk:// 修改安全口令
                 hpg1.addComponent(lb_UserKey0, javax.swing.GroupLayout.Alignment.TRAILING);
                 //hpg2.addComponent(pf_UserKey0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
                 hpg2.addComponent(pf_UserKey0, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
@@ -448,7 +453,7 @@ public class UserPtn extends javax.swing.JPanel
                 //hpg2.addComponent(pf_UserKey2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
                 hpg2.addComponent(pf_UserKey2, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
                 break;
-            case ConsEnv.INT_SIGN_CS:// 在线存储
+            case signCs:// 在线存储
                 hpg1.addComponent(lb_UserType, javax.swing.GroupLayout.Alignment.TRAILING);
                 //hpg2.addComponent(pf_UserKey0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
                 hpg2.addComponent(cb_UserType, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
@@ -461,7 +466,7 @@ public class UserPtn extends javax.swing.JPanel
                 //hpg2.addComponent(pf_UserKey2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
                 hpg2.addComponent(pf_UserKey0, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
                 break;
-            case ConsEnv.INT_SIGN_NW:
+            case signNw:
                 break;
             default:
                 break;
@@ -478,7 +483,7 @@ public class UserPtn extends javax.swing.JPanel
         //vsg.addContainerGap();
         switch (signType)
         {
-            case ConsEnv.INT_SIGN_IN:// 用户登录
+            case signIn:// 用户登录
                 javax.swing.GroupLayout.ParallelGroup vpg11 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
                 vpg11.addComponent(lb_UserType);
                 vpg11.addComponent(cb_UserType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
@@ -496,14 +501,14 @@ public class UserPtn extends javax.swing.JPanel
                 vpg13.addComponent(pf_UserKey0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
                 vsg.addGroup(vpg13);
                 break;
-            case ConsEnv.INT_SIGN_LS:// 锁定屏幕
+            case signLs:// 锁定屏幕
                 javax.swing.GroupLayout.ParallelGroup vpg21 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
                 vpg21.addComponent(lb_UserKey0);
                 vpg21.addComponent(pf_UserKey0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
                 vsg.addGroup(vpg21);
                 break;
-            case ConsEnv.INT_SIGN_RS:// 权限认证
-            case ConsEnv.INT_SIGN_FP:// 口令找回
+            case signRs:// 权限认证
+            case signFp:// 口令找回
                 javax.swing.GroupLayout.ParallelGroup vpg31 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
                 vpg31.addComponent(lb_UserName);
                 vpg31.addComponent(tf_UserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
@@ -515,8 +520,8 @@ public class UserPtn extends javax.swing.JPanel
                 vpg32.addComponent(pf_UserKey0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
                 vsg.addGroup(vpg32);
                 break;
-            case ConsEnv.INT_SIGN_UP:// 用户注册
-            case ConsEnv.INT_SIGN_SU:// 从属用户
+            case signUp:// 用户注册
+            case signSu:// 从属用户
                 javax.swing.GroupLayout.ParallelGroup vpg41 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
                 vpg41.addComponent(lb_UserName);
                 vpg41.addComponent(tf_UserName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
@@ -534,8 +539,8 @@ public class UserPtn extends javax.swing.JPanel
                 vpg43.addComponent(pf_UserKey1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
                 vsg.addGroup(vpg43);
                 break;
-            case ConsEnv.INT_SIGN_PK:// 修改登录口令
-            case ConsEnv.INT_SIGN_SK:// 修改安全口令
+            case signPk:// 修改登录口令
+            case signSk:// 修改安全口令
                 javax.swing.GroupLayout.ParallelGroup vpg51 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
                 vpg51.addComponent(lb_UserKey0);
                 vpg51.addComponent(pf_UserKey0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
@@ -553,7 +558,7 @@ public class UserPtn extends javax.swing.JPanel
                 vpg53.addComponent(pf_UserKey2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
                 vsg.addGroup(vpg53);
                 break;
-            case ConsEnv.INT_SIGN_CS:// 在线存储
+            case signCs:// 在线存储
                 javax.swing.GroupLayout.ParallelGroup vpg61 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
                 vpg61.addComponent(lb_UserType);
                 vpg61.addComponent(cb_UserType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
@@ -571,7 +576,7 @@ public class UserPtn extends javax.swing.JPanel
                 vpg63.addComponent(pf_UserKey0, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
                 vsg.addGroup(vpg63);
                 break;
-            case ConsEnv.INT_SIGN_NW:
+            case signNw:
                 break;
             default:
                 break;
@@ -596,7 +601,7 @@ public class UserPtn extends javax.swing.JPanel
     {
         switch (signType)
         {
-            case ConsEnv.INT_SIGN_IN:
+            case signIn:
                 Lang.setWText(lb_UserType, LangRes.P30FA312, "模式(@M)");
 
                 Lang.setWText(lb_UserName, LangRes.P30FA301, "用户(@U)");
@@ -616,7 +621,7 @@ public class UserPtn extends javax.swing.JPanel
 
                 lb_UsrLabel.setVisible(true);
                 break;
-            case ConsEnv.INT_SIGN_LS:
+            case signLs:
                 Lang.setWText(lb_UserKey0, LangRes.P30FA302, "口令(@P)");
 
                 Lang.setWText(bt_Confrm, LangRes.P30FA501, "登录(@S)");
@@ -625,7 +630,7 @@ public class UserPtn extends javax.swing.JPanel
 
                 lb_UsrLabel.setVisible(false);
                 break;
-            case ConsEnv.INT_SIGN_RS:
+            case signRs:
                 Lang.setWText(lb_UserName, LangRes.P30FA301, "用户(@U)");
 
                 Lang.setWText(lb_UserKey0, LangRes.P30FA302, "口令(@P)");
@@ -638,7 +643,7 @@ public class UserPtn extends javax.swing.JPanel
 
                 lb_UsrLabel.setVisible(false);
                 break;
-            case ConsEnv.INT_SIGN_UP:
+            case signUp:
                 Lang.setWText(lb_UserName, LangRes.P30FA301, "用户(@U)");
 
                 Lang.setWText(lb_UserKey0, LangRes.P30FA302, "口令(@P)");
@@ -656,7 +661,7 @@ public class UserPtn extends javax.swing.JPanel
 
                 lb_UsrLabel.setVisible(false);
                 break;
-            case ConsEnv.INT_SIGN_PK:
+            case signPk:
                 Lang.setWText(lb_UserKey0, LangRes.P30FA304, "现有口令(@O)");
 
                 Lang.setWText(lb_UserKey1, LangRes.P30FA305, "修改口令(@N)");
@@ -671,7 +676,7 @@ public class UserPtn extends javax.swing.JPanel
 
                 lb_UsrLabel.setVisible(false);
                 break;
-            case ConsEnv.INT_SIGN_FP:
+            case signFp:
                 Lang.setWText(lb_UserName, LangRes.P30FA30C, "登录用户(@U)");
 
                 Lang.setWText(lb_UserKey0, LangRes.P30FA30D, "安全口令(@P)");
@@ -684,7 +689,7 @@ public class UserPtn extends javax.swing.JPanel
 
                 lb_UsrLabel.setVisible(false);
                 break;
-            case ConsEnv.INT_SIGN_SK:
+            case signSk:
                 Lang.setWText(lb_UserKey0, LangRes.P30FA304, "现有口令(@O)");
 
                 Lang.setWText(lb_UserKey1, LangRes.P30FA30D, "安全口令(@P)");
@@ -699,12 +704,12 @@ public class UserPtn extends javax.swing.JPanel
 
                 lb_UsrLabel.setVisible(false);
                 break;
-            case ConsEnv.INT_SIGN_SU:
+            case signSu:
                 setTitle(Lang.getLang(LangRes.P30FA207, "添加从属用户"));
 
                 lb_UsrLabel.setVisible(false);
                 break;
-            case ConsEnv.INT_SIGN_CS:
+            case signCs:
                 Lang.setWText(lb_UserType, LangRes.P30FA313, "服务器(@M)");
 
                 Lang.setWText(lb_UserName, LangRes.P30FA301, "用户(@U)");
@@ -732,9 +737,22 @@ public class UserPtn extends javax.swing.JPanel
     {
         this.errCount = 0;
 
+        sysCfg = new Properties();
+        java.io.File cfgFile = new java.io.File("");
+        try
+        {
+            java.io.FileInputStream fis = new java.io.FileInputStream(cfgFile);
+            sysCfg.load(fis);
+            fis.close();
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+
         switch (signType)
         {
-            case ConsEnv.INT_SIGN_IN:
+            case signIn:
                 // 显示上次登录用户
                 cb_UserType.addItem(new S1S1("mpwd", "高级模式"));
                 cb_UserType.addItem(new S1S1("mwiz", "向导模式"));
@@ -742,7 +760,7 @@ public class UserPtn extends javax.swing.JPanel
                 cb_UserType.addItem(new S1S1("maoc", "数值运算"));
                 cb_UserType.addItem(new S1S1("mruc", "公式换算"));
                 cb_UserType.addItem(new S1S1("mgtd", "计划任务"));
-                cb_UserType.setSelectedIndex(UserMdl.getAppMode());
+                cb_UserType.setSelectedIndex(UserMdl.getAppView().ordinal());
                 String name = userMdl.getCfg(ConsCfg.CFG_USER_LAST);
                 if (com.magicpwd._util.Char.isValidate(name))
                 {
@@ -754,22 +772,22 @@ public class UserPtn extends javax.swing.JPanel
                     tf_UserName.requestFocus();
                 }
                 break;
-            case ConsEnv.INT_SIGN_RS:
+            case signRs:
                 tf_UserName.setText("");
                 pf_UserKey0.setText("");
                 tf_UserName.requestFocus();
                 break;
-            case ConsEnv.INT_SIGN_UP:
+            case signUp:
                 break;
-            case ConsEnv.INT_SIGN_PK:
+            case signPk:
                 break;
-            case ConsEnv.INT_SIGN_FP:
+            case signFp:
                 break;
-            case ConsEnv.INT_SIGN_SK:
+            case signSk:
                 break;
-            case ConsEnv.INT_SIGN_SU:
+            case signSu:
                 break;
-            case ConsEnv.INT_SIGN_CS:
+            case signCs:
                 java.util.Properties prop = Connect.getMailCfg();
                 cb_UserType.removeAllItems();
                 java.util.Enumeration<?> names = prop.propertyNames();
@@ -859,7 +877,7 @@ public class UserPtn extends javax.swing.JPanel
             Logs.exception(exp);
         }
 
-        if (UserMdl.getRunMode() == ConsEnv.RUN_MODE_DEV)
+        if (UserMdl.getRunMode() == RunMode.dev)
         {
             return;
         }
@@ -948,20 +966,20 @@ public class UserPtn extends javax.swing.JPanel
     {
         switch (signType)
         {
-            case ConsEnv.INT_SIGN_IN:
-            case ConsEnv.INT_SIGN_UP:
+            case signIn:
+            case signUp:
                 System.exit(0);
                 return;
-            case ConsEnv.INT_SIGN_RS:
-            case ConsEnv.INT_SIGN_PK:
-            case ConsEnv.INT_SIGN_SK:
-            case ConsEnv.INT_SIGN_SU:
-            case ConsEnv.INT_SIGN_NW:
-            case ConsEnv.INT_SIGN_CS:
+            case signRs:
+            case signPk:
+            case signSk:
+            case signSu:
+            case signNw:
+            case signCs:
                 dispoze();
                 break;
-            case ConsEnv.INT_SIGN_FP:
-                initView(ConsEnv.INT_SIGN_IN);
+            case signFp:
+                initView(AuthLog.signIn);
                 initLang();
                 initData();
                 tf_UserName.requestFocus();
@@ -988,31 +1006,31 @@ public class UserPtn extends javax.swing.JPanel
             {
                 switch (signType)
                 {
-                    case ConsEnv.INT_SIGN_IN:
+                    case signIn:
                         signIn();
                         break;
-                    case ConsEnv.INT_SIGN_LS:
+                    case signLs:
                         signLs();
                         break;
-                    case ConsEnv.INT_SIGN_RS:
+                    case signRs:
                         signRs();
                         break;
-                    case ConsEnv.INT_SIGN_UP:
+                    case signUp:
                         signUp();
                         break;
-                    case ConsEnv.INT_SIGN_PK:
+                    case signPk:
                         signPk();
                         break;
-                    case ConsEnv.INT_SIGN_FP:
+                    case signFp:
                         signFp();
                         break;
-                    case ConsEnv.INT_SIGN_SK:
+                    case signSk:
                         signSk();
                         break;
-                    case ConsEnv.INT_SIGN_SU:
+                    case signSu:
                         signSu();
                         break;
-                    case ConsEnv.INT_SIGN_CS:
+                    case signCs:
                         signCs();
                         break;
                     default:
@@ -1065,7 +1083,7 @@ public class UserPtn extends javax.swing.JPanel
             return;
         }
 
-        initView(ConsEnv.INT_SIGN_FP);
+        initView(AuthLog.signFp);
         initLang();
         initData();
 
@@ -1079,9 +1097,9 @@ public class UserPtn extends javax.swing.JPanel
             return;
         }
 
-        if (signType == ConsEnv.INT_SIGN_IN)
+        if (signType == AuthLog.signIn)
         {
-            signType = ConsEnv.INT_SIGN_FP;
+            signType = AuthLog.signFp;
             return;
         }
 
@@ -1145,11 +1163,11 @@ public class UserPtn extends javax.swing.JPanel
         Object object = cb_UserType.getSelectedItem();
         if (object instanceof S1S1)
         {
-            UserMdl.setAppMode(((S1S1) object).getK());
+            UserMdl.setAppView(AppView.valueOf(((S1S1) object).getK()));
         }
         if (backCall != null)
         {
-            backCall.callBack(ConsEnv.STR_SIGN_IN, null);
+            backCall.callBack(AuthLog.signIn.name(), null);
         }
 
         tf_UserName.setText("");
@@ -1197,7 +1215,7 @@ public class UserPtn extends javax.swing.JPanel
 
         if (backCall != null)
         {
-            backCall.callBack(ConsEnv.STR_SIGN_LS, null);
+            backCall.callBack(AuthLog.signLs.name(), null);
         }
         dispoze();
     }
@@ -1255,7 +1273,7 @@ public class UserPtn extends javax.swing.JPanel
         dispoze();
         if (backCall != null)
         {
-            backCall.callBack(ConsEnv.STR_SIGN_RS, null);
+            backCall.callBack(AuthLog.signRs.name(), null);
         }
     }
 
@@ -1318,7 +1336,7 @@ public class UserPtn extends javax.swing.JPanel
         this.setVisible(false);
         if (backCall != null)
         {
-            if (!backCall.callBack(ConsEnv.STR_SIGN_UP, null))
+            if (!backCall.callBack(AuthLog.signUp.name(), null))
             {
                 System.exit(0);
                 return;
@@ -1370,7 +1388,7 @@ public class UserPtn extends javax.swing.JPanel
         dispoze();
         if (backCall != null)
         {
-            backCall.callBack(ConsEnv.STR_SIGN_PK, null);
+            backCall.callBack(AuthLog.signPk.name(), null);
         }
         Lang.showMesg(this, LangRes.P30FAA0A, "登录口令修改成功，您可以使用新口令登录了！");
     }
@@ -1440,10 +1458,10 @@ public class UserPtn extends javax.swing.JPanel
 
         if (backCall != null)
         {
-            backCall.callBack(ConsEnv.STR_SIGN_FP, new UserDto(sb.toString()));
+            backCall.callBack(AuthLog.signFp.name(), new UserDto(sb.toString()));
         }
         Lang.showMesg(null, LangRes.P30FAA18, "您的新口令是：{0}\n为了您的安全，请登录软件后尽快修改您的口令。", sb.toString());
-        this.initView(ConsEnv.INT_SIGN_IN);
+        this.initView(AuthLog.signIn);
         this.initLang();
         this.initData();
     }
@@ -1503,7 +1521,7 @@ public class UserPtn extends javax.swing.JPanel
         dispoze();
         if (backCall != null)
         {
-            backCall.callBack(ConsEnv.STR_SIGN_SK, null);
+            backCall.callBack(AuthLog.signSk.name(), null);
         }
         pf_UserKey0.setText("");
         pf_UserKey1.setText("");
@@ -1536,7 +1554,7 @@ public class UserPtn extends javax.swing.JPanel
 
         if (backCall != null)
         {
-            backCall.callBack(ConsEnv.STR_SIGN_SU, null);
+            backCall.callBack(AuthLog.signSu.name(), null);
         }
     }
 
@@ -1576,7 +1594,7 @@ public class UserPtn extends javax.swing.JPanel
         dispoze();
         if (backCall != null)
         {
-            backCall.callBack(ConsEnv.STR_SIGN_CS, new UserDto(ut, un, new String(uc)));
+            backCall.callBack(AuthLog.signCs.name(), new UserDto(ut, un, new String(uc)));
         }
     }
     private javax.swing.JLabel lb_GuidIcon;

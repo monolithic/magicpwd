@@ -18,9 +18,11 @@ package com.magicpwd.v.tray;
 
 import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IBackCall;
+import com.magicpwd._enum.AppView;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._enum.AuthLog;
 import com.magicpwd._user.UserDto;
 import com.magicpwd._user.UserPtn;
 import com.magicpwd._util.Bean;
@@ -46,8 +48,8 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
 {
 
     private static boolean isOsTray;
-    private static int currPtn;
-    private static int nextPtn;
+    private static AppView currPtn;
+    private static AppView nextPtn;
     private UserMdl userMdl;
     private UserPtn userPtn;
     private AFrame mfCurrForm;
@@ -157,52 +159,55 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
     @Override
     public boolean callBack(String options, UserDto object)
     {
-        // 用户登录
-        if (ConsEnv.STR_SIGN_IN.equalsIgnoreCase(options))
+        switch (AuthLog.valueOf(options))
         {
-            // 设置软件界面风格
-            showPtn(UserMdl.getAppMode());
+            // 用户登录
+            case signIn:
+            {
+                // 设置软件界面风格
+                showPtn(UserMdl.getAppView());
 
-            initView();
-            initLang();
-            initData();
-            mfCurrForm.toFront();
-            mfCurrForm.requestFocus();
-            return true;
-        }
+                initView();
+                initLang();
+                initData();
+                mfCurrForm.toFront();
+                mfCurrForm.requestFocus();
+                return true;
+            }
 
-        // 用户注册
-        if (ConsEnv.STR_SIGN_UP.equalsIgnoreCase(options))
-        {
-            // 设置软件界面风格
-            showPtn(UserMdl.getAppMode());
+            // 用户注册
+            case signUp:
+            {
+                // 设置软件界面风格
+                showPtn(UserMdl.getAppView());
 
-            initView();
-            initLang();
-            initData();
-            mfCurrForm.toFront();
-            mfCurrForm.requestFocus();
+                initView();
+                initLang();
+                initData();
+                mfCurrForm.toFront();
+                mfCurrForm.requestFocus();
 
 //            mfCurrForm.initDemo();
-            return true;
-        }
+                return true;
+            }
 
-        // 屏幕解锁
-        if (ConsEnv.STR_SIGN_LS.equalsIgnoreCase(options))
-        {
-            return true;
-        }
+            // 屏幕解锁
+            case signLs:
+            {
+                return true;
+            }
 
-        // 口令找回
-        if (ConsEnv.STR_SIGN_FP.equalsIgnoreCase(options))
-        {
-            return true;
-        }
+            // 口令找回
+            case signFp:
+            {
+                return true;
+            }
 
-        // 身份认证
-        if (!ConsEnv.STR_SIGN_RS.equalsIgnoreCase(options))
-        {
-            return false;
+            // 身份认证
+            case signRs:
+            {
+                return false;
+            }
         }
 
         showPtn(nextPtn);
@@ -216,30 +221,28 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
         return true;
     }
 
-    private void showPtn(int view)
+    private void showPtn(AppView view)
     {
         switch (view)
         {
-            case ConsEnv.APP_MODE_MPWD:
+            case mpwd:
                 showMpwdPtn();
-                break;
-            case ConsEnv.APP_MODE_MWIZ:
+                return;
+            case mwiz:
                 showMwizPtn();
-                break;
-            case ConsEnv.APP_MODE_MPAD:
+                return;
+            case mpad:
                 showMpadPtn();
-                break;
-            case ConsEnv.APP_MODE_MAOC:
+                return;
+            case maoc:
                 showMaocPtn();
-                break;
-            case ConsEnv.APP_MODE_MRUC:
+                return;
+            case mruc:
                 showMrucPtn();
-                break;
-            case ConsEnv.APP_MODE_MGTD:
+                return;
+            case mgtd:
                 showMgtdPtn();
-                break;
-            default:
-                break;
+                return;
         }
     }
 
@@ -277,7 +280,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
         mp_MpwdPtn.showData();
 
         mfCurrForm = mp_MpwdPtn;
-        currPtn = ConsEnv.APP_MODE_MPWD;
+        currPtn = AppView.mpwd;
     }
 
     public MwizPtn getMwizPtn()
@@ -301,7 +304,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
         mp_MwizPtn.showData();
 
         mfCurrForm = mp_MwizPtn;
-        currPtn = ConsEnv.APP_MODE_MWIZ;
+        currPtn = AppView.mwiz;
     }
 
     public MpadPtn getMpadPtn()
@@ -325,7 +328,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
         mp_MpadPtn.showData();
 
         mfCurrForm = mp_MpadPtn;
-        currPtn = ConsEnv.APP_MODE_MPAD;
+        currPtn = AppView.mpad;
     }
 
     public MaocPtn getMaocPtn()
@@ -349,7 +352,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
         mp_MaocPtn.showData();
 
         mfCurrForm = mp_MaocPtn;
-        currPtn = ConsEnv.APP_MODE_MAOC;
+        currPtn = AppView.maoc;
     }
 
     public MrucPtn getMrucPtn()
@@ -373,7 +376,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
         mp_MrucPtn.showData();
 
         mfCurrForm = mp_MrucPtn;
-        currPtn = ConsEnv.APP_MODE_MRUC;
+        currPtn = AppView.mruc;
     }
 
     public MgtdPtn getMgtdPtn()
@@ -397,7 +400,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
         mp_MgtdPtn.showData();
 
         mfCurrForm = mp_MgtdPtn;
-        currPtn = ConsEnv.APP_MODE_MGTD;
+        currPtn = AppView.mgtd;
     }
 
     @Override
@@ -575,14 +578,14 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
         showViewPtn(currPtn);
     }
 
-    public void showViewPtn(int nextPtn)
+    public void showViewPtn(AppView nextPtn)
     {
         // 显示登录
         if (getCurrForm() == null)
         {
             userPtn = new UserPtn(userMdl, this);
             userPtn.setBackCall(this);
-            userPtn.initView(userMdl.getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? ConsEnv.INT_SIGN_IN : ConsEnv.INT_SIGN_UP);
+            userPtn.initView(userMdl.getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? AuthLog.signIn : AuthLog.signUp);
             userPtn.initLang();
             userPtn.initData();
             userPtn.setVisible(true);
@@ -599,38 +602,16 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
             }
 
             getCurrForm().setVisible(false);
-            switch (nextPtn)
-            {
-                case ConsEnv.APP_MODE_MPWD:
-                    showMpwdPtn();
-                    break;
-                case ConsEnv.APP_MODE_MWIZ:
-                    showMwizPtn();
-                    break;
-                case ConsEnv.APP_MODE_MPAD:
-                    showMpadPtn();
-                    break;
-                case ConsEnv.APP_MODE_MAOC:
-                    showMaocPtn();
-                    break;
-                case ConsEnv.APP_MODE_MRUC:
-                    showMrucPtn();
-                    break;
-                case ConsEnv.APP_MODE_MGTD:
-                    showMgtdPtn();
-                    break;
-                default:
-                    break;
-            }
+            showViewPtn(nextPtn);
             currPtn = nextPtn;
             return;
         }
 
         TrayPtn.nextPtn = nextPtn;
-        getUserPtn(ConsEnv.INT_SIGN_RS, this);
+        getUserPtn(AuthLog.signRs, this);
     }
 
-    public UserPtn getUserPtn(int view, IBackCall<UserDto> call)
+    public UserPtn getUserPtn(AuthLog view, IBackCall<UserDto> call)
     {
         if (userPtn == null)
         {
