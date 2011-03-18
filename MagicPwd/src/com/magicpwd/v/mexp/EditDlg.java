@@ -14,7 +14,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.v.mpwd;
+package com.magicpwd.v.mexp;
 
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
@@ -25,9 +25,9 @@ import com.magicpwd._util.Lang;
  */
 public class EditDlg extends javax.swing.JDialog
 {
-    private MpwdPtn mainPtn;
+    private MexpPtn mainPtn;
 
-    public EditDlg(MpwdPtn mainPtn)
+    public EditDlg(MexpPtn mainPtn)
     {
         super(mainPtn);
         this.mainPtn = mainPtn;

@@ -24,7 +24,7 @@ import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
-import com.magicpwd.v.mpwd.MpwdPtn;
+import com.magicpwd.v.mexp.MexpPtn;
 
 /**
  *
@@ -34,10 +34,10 @@ public class DataBean extends ADataBean implements IMpwdBean
 {
 
     private WEditBox dataEdit;
-    private MpwdPtn mainPtn;
+    private MexpPtn mainPtn;
     private WTextBox nameBox;
 
-    public DataBean(MpwdPtn mainPtn)
+    public DataBean(MexpPtn mainPtn)
     {
         super(mainPtn);
         this.mainPtn = mainPtn;

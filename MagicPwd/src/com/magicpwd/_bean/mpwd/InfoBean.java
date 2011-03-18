@@ -20,7 +20,7 @@ import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mpwd.IMpwdBean;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
-import com.magicpwd.v.mpwd.MpwdPtn;
+import com.magicpwd.v.mexp.MexpPtn;
 
 /**
  * 属性：信息
@@ -32,7 +32,7 @@ public class InfoBean extends javax.swing.JPanel implements IMpwdBean
 
     private int tipsSize;
 
-    public InfoBean(MpwdPtn mainPtn)
+    public InfoBean(MexpPtn mainPtn)
     {
     }
 

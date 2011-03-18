@@ -30,7 +30,7 @@ public final class MpwdMdl
 
     private static RunMode runMode;
     private static AppView appView;
-    private static java.util.Properties mpwdCfg;
+    private java.util.Properties mpwdCfg;
     private String datDir;
     private String bakDir;
 

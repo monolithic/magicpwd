@@ -25,7 +25,7 @@ import com.magicpwd._comp.IcoLabel;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
-import com.magicpwd.v.mpwd.MpwdPtn;
+import com.magicpwd.v.mexp.MexpPtn;
 import com.magicpwd.x.IcoDialog;
 
 /**
@@ -37,10 +37,10 @@ public class LogoBean extends javax.swing.JPanel implements IMpwdBean, IBackCall
 {
 
     private IEditItem itemData;
-    private MpwdPtn mainPtn;
+    private MexpPtn mainPtn;
     private WEditBox dataEdit;
 
-    public LogoBean(MpwdPtn mainPtn)
+    public LogoBean(MexpPtn mainPtn)
     {
         this.mainPtn = mainPtn;
     }

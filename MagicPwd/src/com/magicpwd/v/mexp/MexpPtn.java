@@ -14,7 +14,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.v.mpwd;
+package com.magicpwd.v.mexp;
 
 import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IBackCall;
@@ -69,7 +69,7 @@ import com.magicpwd.v.tray.TrayPtn;
 import com.magicpwd.x.MdiDialog;
 import com.magicpwd.x.mail.MailOpt;
 
-public class MpwdPtn extends AFrame
+public class MexpPtn extends AFrame
 {
 
     private EditDlg ed_KeysEdit;
@@ -90,7 +90,7 @@ public class MpwdPtn extends AFrame
     /**用户上一次的操作方式*/
     private boolean isSearch;
 
-    public MpwdPtn(TrayPtn trayPtn, UserMdl userMdl)
+    public MexpPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
         super(trayPtn, userMdl);
     }
