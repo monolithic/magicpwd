@@ -17,8 +17,10 @@
 package com.magicpwd;
 
 import com.magicpwd.__a.AFrame;
+import com.magicpwd._enum.AppView;
 import com.magicpwd._comn.apps.FileLocker;
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._enum.RunMode;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
@@ -55,15 +57,15 @@ public class MagicPwd
             String arg = args[0];
             if ("webstart".equalsIgnoreCase(arg) || "web".equalsIgnoreCase(arg))
             {
-                UserMdl.setRunMode(ConsEnv.RUN_MODE_WEB);
+                UserMdl.setRunMode(RunMode.web);
             }
             else if ("command".equalsIgnoreCase(arg) || "cmd".equalsIgnoreCase(arg))
             {
-                UserMdl.setRunMode(ConsEnv.RUN_MODE_CMD);
+                UserMdl.setRunMode(RunMode.cmd);
             }
             else if ("dev".equalsIgnoreCase(arg))
             {
-                UserMdl.setRunMode(ConsEnv.RUN_MODE_DEV);
+                UserMdl.setRunMode(RunMode.dev);
             }
         }
 
@@ -92,7 +94,7 @@ public class MagicPwd
                     // 扩展皮肤加载
                     Skin.loadLook(userMdl);
 
-                    trayPtn.showViewPtn(ConsEnv.APP_MODE_MPWD);
+                    trayPtn.showViewPtn(AppView.mpwd);
                 }
             });
         }

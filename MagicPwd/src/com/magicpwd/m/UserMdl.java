@@ -16,8 +16,10 @@
  */
 package com.magicpwd.m;
 
+import com.magicpwd._enum.AppView;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._enum.RunMode;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Logs;
@@ -29,8 +31,8 @@ import com.magicpwd._util.Logs;
 public final class UserMdl
 {
 
-    private static int runMode = 0;
-    private static int appMode = 1;
+    private static RunMode runMode;
+    private static AppView appView;
     private static java.util.Properties userCfg;
     private boolean incBack = true;
     private boolean topMost;
@@ -46,7 +48,7 @@ public final class UserMdl
     /**
      * @return the runMode
      */
-    public static int getRunMode()
+    public static RunMode getRunMode()
     {
         return runMode;
     }
@@ -54,55 +56,32 @@ public final class UserMdl
     /**
      * @param runMode the runMode to set
      */
-    public static void setRunMode(int runMode)
+    public static void setRunMode(RunMode runMode)
     {
         UserMdl.runMode = runMode;
     }
 
     /**
-     * @return the appMode
+     * @return the appView
      */
-    public static int getAppMode()
+    public static AppView getAppView()
     {
-        return appMode;
+        return appView;
     }
 
     /**
-     * @param appMode the appMode to set
+     * @param appView the appView to set
      */
-    public static void setAppMode(int appMode)
+    public static void setAppView(AppView appView)
     {
-        UserMdl.appMode = appMode;
+        UserMdl.appView = appView;
     }
 
-    public static void setAppMode(String appMode)
+    public static void setAppModule(String appModule)
     {
-        if (Char.isValidate(appMode))
+        if (appModule != null)
         {
-            if ("mpwd".equalsIgnoreCase(appMode))
-            {
-                UserMdl.appMode = ConsEnv.APP_MODE_MPWD;
-            }
-            else if ("mwiz".equalsIgnoreCase(appMode))
-            {
-                UserMdl.appMode = ConsEnv.APP_MODE_MWIZ;
-            }
-            else if ("mpad".equalsIgnoreCase(appMode))
-            {
-                UserMdl.appMode = ConsEnv.APP_MODE_MPAD;
-            }
-            else if ("maoc".equalsIgnoreCase(appMode))
-            {
-                UserMdl.appMode = ConsEnv.APP_MODE_MAOC;
-            }
-            else if ("mruc".equalsIgnoreCase(appMode))
-            {
-                UserMdl.appMode = ConsEnv.APP_MODE_MRUC;
-            }
-            else if ("mgtd".equalsIgnoreCase(appMode))
-            {
-                UserMdl.appMode = ConsEnv.APP_MODE_MGTD;
-            }
+            UserMdl.appView = AppView.valueOf(appModule.toLowerCase());
         }
     }
 
@@ -131,7 +110,7 @@ public final class UserMdl
         String mode = userCfg.getProperty(ConsCfg.CFG_MODE_APP, "1");
         if (Char.isValidateInteger(mode))
         {
-            appMode = Integer.parseInt(mode);
+            appView = AppView.valueOf(mode);
         }
         safeKey = new SafeKey(this);
     }
@@ -139,7 +118,7 @@ public final class UserMdl
     public final void loadDef()
     {
         userCfg.clear();
-        appMode = 1;
+        appView = AppView.mpwd;
         incBack = true;
         topMost = false;
     }
@@ -150,7 +129,7 @@ public final class UserMdl
         try
         {
             fos = new java.io.FileOutputStream(new java.io.File(ConsEnv.DIR_DAT, ConsEnv.FILE_DATA + ".config"));
-            userCfg.setProperty(ConsCfg.CFG_MODE_APP, Integer.toString(appMode));
+            userCfg.setProperty(ConsCfg.CFG_MODE_APP, Integer.toString(appView.ordinal()));
             userCfg.store(fos, "MagicPwd User Configure File!");
         }
         catch (Exception exp)

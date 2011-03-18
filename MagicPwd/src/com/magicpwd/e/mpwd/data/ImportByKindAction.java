@@ -19,8 +19,8 @@ package com.magicpwd.e.mpwd.data;
 import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.prop.Kind;
-import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._enum.AuthLog;
 import com.magicpwd._user.UserDto;
 import com.magicpwd._util.Lang;
 import com.magicpwd.r.KindTN;
@@ -46,7 +46,7 @@ public class ImportByKindAction extends AMpwdAction implements IBackCall<UserDto
             return;
         }
 
-        trayPtn.getUserPtn(ConsEnv.INT_SIGN_RS, this);
+        trayPtn.getUserPtn(AuthLog.signRs, this);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class ImportByKindAction extends AMpwdAction implements IBackCall<UserDto
     @Override
     public boolean callBack(String options, UserDto object)
     {
-        if (ConsEnv.STR_SIGN_RS.equalsIgnoreCase(options))
+        if (AuthLog.signRs.name().equalsIgnoreCase(options))
         {
             javax.swing.tree.TreePath path = mpwdPtn.getSelectedKindValue();
             KindTN node = (KindTN) path.getLastPathComponent();

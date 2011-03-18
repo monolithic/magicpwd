@@ -18,7 +18,7 @@ package com.magicpwd.e.mpwd.user;
 
 import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IBackCall;
-import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._enum.AuthLog;
 import com.magicpwd._user.UserDto;
 
 /**
@@ -35,7 +35,7 @@ public class ChangePkeyAction extends AMpwdAction implements IBackCall<UserDto>
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        trayPtn.getUserPtn(ConsEnv.INT_SIGN_PK, this);
+        trayPtn.getUserPtn(AuthLog.signPk, this);
     }
 
     @Override

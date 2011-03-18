@@ -23,6 +23,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._bean.mail.Connect;
 import com.magicpwd._comp.WDialog;
+import com.magicpwd._enum.AuthLog;
 import com.magicpwd._user.UserDto;
 import com.magicpwd.m.mail.Reader;
 import com.magicpwd.m.mail.Sender;
@@ -320,13 +321,13 @@ public abstract class AFrame extends javax.swing.JFrame
      */
     public void lockFrame()
     {
-        trayPtn.getUserPtn(ConsEnv.INT_SIGN_LS, new IBackCall<UserDto>()
+        trayPtn.getUserPtn(AuthLog.signLs, new IBackCall<UserDto>()
         {
 
             @Override
             public boolean callBack(String options, UserDto object)
             {
-                return ConsEnv.STR_SIGN_LS.equalsIgnoreCase(options);
+                return AuthLog.signLs.name().equalsIgnoreCase(options);
             }
         });
     }

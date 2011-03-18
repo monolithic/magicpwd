@@ -17,7 +17,7 @@
 package com.magicpwd.e.tray;
 
 import com.magicpwd.__a.tray.ATrayAction;
-import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._enum.AppView;
 
 /**
  * Application: MagicPwd
@@ -40,7 +40,7 @@ public class MrucAction extends ATrayAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        trayPtn.showViewPtn(ConsEnv.APP_MODE_MRUC);
+        trayPtn.showViewPtn(AppView.mruc);
     }
 
     @Override

@@ -101,56 +101,6 @@ public interface ConsEnv
     int BUTN_MINI_HIGH = 22;
     int BUTN_NORM_WIDH = 26;
     int BUTN_NORM_HIGH = 24;
-    /**
-     * 用户登录
-     */
-    int INT_SIGN_IN = 1;
-    String STR_SIGN_IN = "signIn";
-    /**
-     * 锁定用户屏幕
-     */
-    int INT_SIGN_LS = INT_SIGN_IN + 1;
-    String STR_SIGN_LS = "signLs";
-    /**
-     * 权限验证
-     */
-    int INT_SIGN_RS = INT_SIGN_LS + 1;
-    String STR_SIGN_RS = "signRs";
-    /**
-     * 用户注册
-     */
-    int INT_SIGN_UP = INT_SIGN_RS + 1;
-    String STR_SIGN_UP = "signUp";
-    /**
-     * 口令找回
-     */
-    int INT_SIGN_FP = INT_SIGN_UP + 1;
-    String STR_SIGN_FP = "signFp";
-    /**
-     * 更改登录口令
-     */
-    int INT_SIGN_PK = INT_SIGN_FP + 1;
-    String STR_SIGN_PK = "signPk";
-    /**
-     * 更改安全口令
-     */
-    int INT_SIGN_SK = INT_SIGN_PK + 1;
-    String STR_SIGN_SK = "signSk";
-    /**
-     * 添加附属用户
-     */
-    int INT_SIGN_SU = INT_SIGN_SK + 1;
-    String STR_SIGN_SU = "signSu";
-    /**
-     * 在线用户登录
-     */
-    int INT_SIGN_NW = INT_SIGN_SU + 1;
-    String STR_SIGN_NW = "signNw";
-    /**
-     * 设置云存储用户
-     */
-    int INT_SIGN_CS = INT_SIGN_NW + 1;
-    String STR_SIGN_CS = "signCs";
     /////////////////////////////////////////////////////////////////
     String CARD_HTM = "htm";
     String CARD_TXT = "txt";
@@ -207,25 +157,7 @@ public interface ConsEnv
     {
         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
     };
-    int RUN_MODE_DEV = -1;
-    /**
-     * 程序运行模式：独立程序
-     */
-    int RUN_MODE_APP = 0;
-    /**
-     * 程序运行模式：网络加载
-     */
-    int RUN_MODE_WEB = 1;
-    /**
-     * 程序运行模式：命令模式
-     */
-    int RUN_MODE_CMD = 2;
-    int APP_MODE_MPWD = 0;
-    int APP_MODE_MWIZ = 1;
-    int APP_MODE_MPAD = 2;
-    int APP_MODE_MAOC = 3;
-    int APP_MODE_MRUC = 4;
-    int APP_MODE_MGTD = 5;
+    /////////////////////////////////////////////////////////////////
     String CHAR_ALT_KEY = "@";
     String SKIN_FEEL_DEF_DIR = "default";
     String SKIN_LOOK_DEF_DIR = "default";

@@ -18,7 +18,7 @@ package com.magicpwd.e.mpwd.safe;
 
 import com.magicpwd.__a.mpwd.AMpwdAction;
 import com.magicpwd.__i.IBackCall;
-import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._enum.AuthLog;
 import com.magicpwd._user.UserDto;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
@@ -38,7 +38,7 @@ public class RemoteConfigAction extends AMpwdAction implements IBackCall<UserDto
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        trayPtn.getUserPtn(ConsEnv.INT_SIGN_CS, this);
+        trayPtn.getUserPtn(AuthLog.signRs, this);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class RemoteConfigAction extends AMpwdAction implements IBackCall<UserDto
     @Override
     public boolean callBack(String options, UserDto object)
     {
-        if (!ConsEnv.STR_SIGN_CS.equalsIgnoreCase(options) || object == null)
+        if (!AuthLog.signRs.name().equalsIgnoreCase(options) || object == null)
         {
             return false;
         }
