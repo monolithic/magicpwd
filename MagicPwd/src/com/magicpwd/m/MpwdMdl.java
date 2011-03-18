@@ -28,8 +28,8 @@ import com.magicpwd._util.Logs;
 public final class MpwdMdl
 {
 
-    private static RunMode runMode;
-    private static AppView appView;
+    private static RunMode runMode = RunMode.app;
+    private static AppView appView = AppView.mwiz;
     private java.util.Properties mpwdCfg;
     private String datDir;
     private String bakDir;

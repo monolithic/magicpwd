@@ -18,7 +18,7 @@ package com.magicpwd.x.docs;
 
 import com.magicpwd.__a.ADialog;
 import com.magicpwd.__a.AFrame;
-import com.magicpwd.__i.IDocsViewer;
+import com.magicpwd.__i.docs.IDocsViewer;
 import com.magicpwd._comn.S1S1;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Bean;

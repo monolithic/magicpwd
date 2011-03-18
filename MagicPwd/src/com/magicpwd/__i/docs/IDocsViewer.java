@@ -14,13 +14,14 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.__i;
+package com.magicpwd.__i.docs;
 
 /**
  *
  * @author Amon
  */
-public interface ILockClient
+public interface IDocsViewer
 {
-    boolean canRead();
+
+    void show(java.io.File file);
 }

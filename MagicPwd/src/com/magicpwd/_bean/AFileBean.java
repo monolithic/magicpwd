@@ -20,7 +20,7 @@ import com.magicpwd.__a.AAction;
 import com.magicpwd.__a.AEditBean;
 import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd.__i.IDocsViewer;
+import com.magicpwd.__i.docs.IDocsViewer;
 import com.magicpwd._comn.item.EditItem;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;

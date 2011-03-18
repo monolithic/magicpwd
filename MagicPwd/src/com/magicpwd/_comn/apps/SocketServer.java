@@ -16,7 +16,7 @@
  */
 package com.magicpwd._comn.apps;
 
-import com.magicpwd.__i.ILockServer;
+import com.magicpwd.__i.lock.ILockServer;
 
 /**
  *

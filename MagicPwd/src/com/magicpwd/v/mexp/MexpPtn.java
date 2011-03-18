@@ -57,7 +57,7 @@ import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.db.DBA3000;
 import com.magicpwd.m.UserMdl;
-import com.magicpwd.m.mexp.MpwdMdl;
+import com.magicpwd.m.mexp.MexpMdl;
 import com.magicpwd.m.mexp.KindMdl;
 import com.magicpwd.r.KeysCR;
 import com.magicpwd.r.KindTN;
@@ -80,7 +80,7 @@ public class MexpPtn extends AFrame
     private HistDlg histDlg;
     private MdiDialog cfgForm;
     private MenuPtn menuPtn;
-    private MpwdMdl mpwdMdl;
+    private MexpMdl mpwdMdl;
     /**口令列表上次选择索引*/
     private Keys lastKeys;
     /**属性列表上次选择索引*/
@@ -153,7 +153,7 @@ public class MexpPtn extends AFrame
             Logs.exception(exp);
         }
 
-        mpwdMdl = new MpwdMdl(userMdl);
+        mpwdMdl = new MexpMdl(userMdl);
         mpwdMdl.init();
 
         safeMdl = mpwdMdl.getGridMdl();

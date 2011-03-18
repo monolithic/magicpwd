@@ -25,7 +25,7 @@ import com.magicpwd.r.KindTN;
  *
  * @author Amon
  */
-public final class MpwdMdl
+public final class MexpMdl
 {
 
     private KindMdl kindMdl;
@@ -33,7 +33,7 @@ public final class MpwdMdl
     private GridMdl gridMdl;
     private UserMdl userMdl;
 
-    public MpwdMdl(UserMdl userMdl)
+    public MexpMdl(UserMdl userMdl)
     {
         this.userMdl = userMdl;
     }
