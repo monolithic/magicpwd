@@ -73,14 +73,14 @@ public class MexpPtn extends AMpwdPtn
 {
 
     private EditDlg ed_KeysEdit;
-    private IMexpBean[] mpwdBean;
+    private IMexpBean[] mexpBean;
     private FindBar mainFind;
     private HintBar mainInfo;
     private MailPtn mailPtn;
     private HistDlg histDlg;
     private MdiDialog cfgForm;
     private MenuPtn menuPtn;
-    private MexpMdl mpwdMdl;
+    private MexpMdl mexpMdl;
     /**口令列表上次选择索引*/
     private Keys lastKeys;
     /**属性列表上次选择索引*/
@@ -107,7 +107,7 @@ public class MexpPtn extends AMpwdPtn
         setJMenuBar(menuBar);
 
         toolBar = new javax.swing.JToolBar();
-        getContentPane().add(toolBar, userMdl.getToolLoc("mpwd"));
+        getContentPane().add(toolBar, userMdl.getToolLoc("mexp"));
 
         getContentPane().add(pl_KeysBase);
 
@@ -140,11 +140,11 @@ public class MexpPtn extends AMpwdPtn
         try
         {
             menuPtn = new MenuPtn(trayPtn, this);
-            menuPtn.loadData(new java.io.File(userMdl.getDataDir(), "mpwd.xml"));
+            menuPtn.loadData(new java.io.File(userMdl.getDataDir(), "mexp.xml"));
 
-            menuPtn.getMenuBar("mpwd", menuBar, rootPane);
+            menuPtn.getMenuBar("mexp", menuBar, rootPane);
 
-            menuPtn.getToolBar("mpwd", toolBar, rootPane, "mpwd");
+            menuPtn.getToolBar("mexp", toolBar, rootPane, "mexp");
 
             menuPtn.getPopMenu("kind", kindPop);
             tr_GuidTree.setComponentPopupMenu(kindPop);
@@ -158,12 +158,12 @@ public class MexpPtn extends AMpwdPtn
             Logs.exception(exp);
         }
 
-        mpwdMdl = new MexpMdl(userMdl);
-        mpwdMdl.init();
+        mexpMdl = new MexpMdl(userMdl);
+        mexpMdl.init();
 
-        safeMdl = mpwdMdl.getGridMdl();
+        safeMdl = mexpMdl.getGridMdl();
 
-        tr_GuidTree.setModel(mpwdMdl.getKindMdl());
+        tr_GuidTree.setModel(mexpMdl.getKindMdl());
         ls_GuidList.addMouseListener(new java.awt.event.MouseAdapter()
         {
 
@@ -186,9 +186,9 @@ public class MexpPtn extends AMpwdPtn
             }
         });
 
-        ls_GuidList.setModel(mpwdMdl.getListMdl());
+        ls_GuidList.setModel(mexpMdl.getListMdl());
 
-        tb_KeysView.setModel(mpwdMdl.getGridMdl());
+        tb_KeysView.setModel(mexpMdl.getGridMdl());
         javax.swing.table.TableColumnModel colModel = tb_KeysView.getColumnModel();
         colModel.getColumn(0).setMaxWidth(tb_KeysView.getFontMetrics(tb_KeysView.getFont()).stringWidth("999999"));
 //        for (int i = 0, j = colModel.getColumnCount(); i < j; i += 1)
@@ -200,7 +200,7 @@ public class MexpPtn extends AMpwdPtn
         setMenuVisible(userMdl.isMenuVisible());
 
         // 工具栏
-        setToolVisible(userMdl.isToolVisible("mpwd"));
+        setToolVisible(userMdl.isToolVisible("mexp"));
 
         // 搜索栏
         mainFind.initData();
@@ -222,7 +222,7 @@ public class MexpPtn extends AMpwdPtn
         // 属性编辑组件
         eb_KeysEdit.initData();
         ed_KeysEdit.initData();
-        for (IEditBean bean : mpwdBean)
+        for (IEditBean bean : mexpBean)
         {
             bean.initData();
         }
@@ -263,7 +263,7 @@ public class MexpPtn extends AMpwdPtn
         java.util.Date s = c.getTime();
         c.add(java.util.Calendar.DAY_OF_MONTH, 1);
         java.util.Date t = c.getTime();
-        mpwdMdl.getListMdl().listHint(s, t);
+        mexpMdl.getListMdl().listHint(s, t);
         return true;
     }
 
@@ -275,7 +275,7 @@ public class MexpPtn extends AMpwdPtn
         }
 
         setEditVisible(true);
-        showPropEdit(mpwdMdl.getGridMdl().initGuid(), true);
+        showPropEdit(mexpMdl.getGridMdl().initGuid(), true);
         lastKeys = null;
         return true;
     }
@@ -305,13 +305,13 @@ public class MexpPtn extends AMpwdPtn
             isSearch = true;
             queryKey = meta;
             tr_GuidTree.setSelectionPath(null);
-            mpwdMdl.getListMdl().listKeysByMeta(meta);
-            mainInfo.showHint("共 " + mpwdMdl.getListMdl().getSize() + " 条数据");
+            mexpMdl.getListMdl().listKeysByMeta(meta);
+            mainInfo.showHint("共 " + mexpMdl.getListMdl().getSize() + " 条数据");
         }
         else
         {
-            mpwdMdl.getListMdl().listKeysByKind(queryKey);
-            mainInfo.showHint("共 " + mpwdMdl.getListMdl().getSize() + " 条数据");
+            mexpMdl.getListMdl().listKeysByKind(queryKey);
+            mainInfo.showHint("共 " + mexpMdl.getListMdl().getSize() + " 条数据");
         }
         return true;
     }
@@ -320,13 +320,13 @@ public class MexpPtn extends AMpwdPtn
     {
         if (isSearch)
         {
-            mpwdMdl.getListMdl().listKeysByMeta(queryKey);
+            mexpMdl.getListMdl().listKeysByMeta(queryKey);
         }
         else if (com.magicpwd._util.Char.isValidateHash(queryKey))
         {
-            mpwdMdl.getListMdl().listKeysByKind(queryKey);
+            mexpMdl.getListMdl().listKeysByKind(queryKey);
         }
-        mainInfo.showHint("共 " + mpwdMdl.getListMdl().getSize() + " 条数据");
+        mainInfo.showHint("共 " + mexpMdl.getListMdl().getSize() + " 条数据");
 
         lastKeys = null;
     }
@@ -334,20 +334,20 @@ public class MexpPtn extends AMpwdPtn
     public boolean saveKeys()
     {
         // 是否需要保存
-        if (mpwdMdl.getGridMdl().getRowCount() < ConsEnv.PWDS_HEAD_SIZE)
+        if (mexpMdl.getGridMdl().getRowCount() < ConsEnv.PWDS_HEAD_SIZE)
         {
             return false;
         }
 
         // 数据未被修改
-        if (!mpwdMdl.getGridMdl().isModified())
+        if (!mexpMdl.getGridMdl().isModified())
         {
             //Lang.showMesg(this, LangRes.P30F7A27, "您未曾修改过数据，不需要保存！");
             return false;
         }
 
         // 口令类别检测
-        GuidItem guid = (GuidItem) mpwdMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_GUID);
+        GuidItem guid = (GuidItem) mexpMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_GUID);
         if (!com.magicpwd._util.Char.isValidate(guid.getData()))
         {
             javax.swing.tree.TreePath path = tr_GuidTree.getSelectionPath();
@@ -366,11 +366,11 @@ public class MexpPtn extends AMpwdPtn
                 tr_GuidTree.requestFocus();
                 return false;
             }
-            mpwdMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(kind.getC2010103());
+            mexpMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(kind.getC2010103());
         }
 
         // 标题为空检测
-        MetaItem metaItem = (MetaItem) mpwdMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_META);
+        MetaItem metaItem = (MetaItem) mexpMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_META);
         if (!com.magicpwd._util.Char.isValidate(metaItem.getName()))
         {
             Lang.showMesg(this, LangRes.P30F7A0C, "请输入口令标题！");
@@ -380,13 +380,13 @@ public class MexpPtn extends AMpwdPtn
         }
 
         // 徽标
-        LogoItem logoItem = (LogoItem) mpwdMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_LOGO);
+        LogoItem logoItem = (LogoItem) mexpMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_LOGO);
 
-        String keysHash = mpwdMdl.getGridMdl().getKeysHash();
+        String keysHash = mexpMdl.getGridMdl().getKeysHash();
 
         try
         {
-            mpwdMdl.getGridMdl().saveData(userMdl.isIncBack(), true);
+            mexpMdl.getGridMdl().saveData(userMdl.isIncBack(), true);
         }
         catch (Exception exp)
         {
@@ -397,17 +397,17 @@ public class MexpPtn extends AMpwdPtn
         // 数据新增的情况下，需要重新显示列表信息
         if (com.magicpwd._util.Char.isValidateHash(keysHash))
         {
-            mpwdMdl.getListMdl().updtName(keysHash, metaItem.getName(), logoItem.getName());
+            mexpMdl.getListMdl().updtName(keysHash, metaItem.getName(), logoItem.getName());
         }
         else
         {
             if (isSearch)
             {
-                mpwdMdl.getListMdl().listKeysByMeta(queryKey);
+                mexpMdl.getListMdl().listKeysByMeta(queryKey);
             }
             else if ("0".equals(queryKey) || com.magicpwd._util.Char.isValidateHash(queryKey))
             {
-                mpwdMdl.getListMdl().listKeysByKind(queryKey);
+                mexpMdl.getListMdl().listKeysByKind(queryKey);
             }
         }
 
@@ -505,7 +505,7 @@ public class MexpPtn extends AMpwdPtn
     public void setToolVisible(boolean visible)
     {
         toolBar.setVisible(visible);
-        userMdl.setToolVisible("mpwd", visible);
+        userMdl.setToolVisible("mexp", visible);
     }
 
     public javax.swing.tree.TreePath getSelectedKindValue()
@@ -524,7 +524,7 @@ public class MexpPtn extends AMpwdPtn
         {
             return;
         }
-        mpwdMdl.getKindMdl().wAppend(path, kind);
+        mexpMdl.getKindMdl().wAppend(path, kind);
     }
 
     public void updateKindBySelected(Kind kind)
@@ -538,7 +538,7 @@ public class MexpPtn extends AMpwdPtn
         {
             return;
         }
-        mpwdMdl.getKindMdl().wUpdate(path, kind);
+        mexpMdl.getKindMdl().wUpdate(path, kind);
     }
 
     public int getSelectedKindIndex()
@@ -558,14 +558,14 @@ public class MexpPtn extends AMpwdPtn
 
     public void selectNext(int step, boolean updt)
     {
-        if (mpwdMdl.getGridMdl().getRowCount() < 1)
+        if (mexpMdl.getGridMdl().getRowCount() < 1)
         {
             return;
         }
 
         if (updt)
         {
-            mpwdMdl.getGridMdl().fireTableDataChanged();
+            mexpMdl.getGridMdl().fireTableDataChanged();
         }
         else if (step == 0)
         {
@@ -585,7 +585,7 @@ public class MexpPtn extends AMpwdPtn
         tb_LastIndx = n;
         tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
         Util.scrollToVisible(tb_KeysView, tb_LastIndx, 0, true);
-        showPropEdit(mpwdMdl.getGridMdl().getItemAt(tb_LastIndx), true);
+        showPropEdit(mexpMdl.getGridMdl().getItemAt(tb_LastIndx), true);
 
 //        if (updt)
 //        {
@@ -624,7 +624,7 @@ public class MexpPtn extends AMpwdPtn
             {
                 tb_LastIndx = tb_KeysView.getRowCount();
             }
-            showPropEdit(mpwdMdl.getGridMdl().wAppend(tb_LastIndx, type), true);
+            showPropEdit(mexpMdl.getGridMdl().wAppend(tb_LastIndx, type), true);
             tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
         }
     }
@@ -636,12 +636,12 @@ public class MexpPtn extends AMpwdPtn
             int idx = tb_KeysView.getSelectedRow();
             if (idx >= ConsEnv.PWDS_HEAD_SIZE && idx < tb_KeysView.getRowCount())
             {
-                IEditItem tplt = mpwdMdl.getGridMdl().getItemAt(idx);
+                IEditItem tplt = mexpMdl.getGridMdl().getItemAt(idx);
                 if (tplt.getType() != type)
                 {
                     tplt.setType(type);
                     showPropEdit(tplt, true);
-                    mpwdMdl.getGridMdl().setModified(true);
+                    mexpMdl.getGridMdl().setModified(true);
                 }
             }
         }
@@ -654,7 +654,7 @@ public class MexpPtn extends AMpwdPtn
         {
             return;
         }
-        mpwdMdl.getGridMdl().wMoveto(tb_LastIndx, t);
+        mexpMdl.getGridMdl().wMoveto(tb_LastIndx, t);
         tb_LastIndx = t;
         Util.scrollToVisible(tb_KeysView, tb_LastIndx, 0, true);
         tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
@@ -667,7 +667,7 @@ public class MexpPtn extends AMpwdPtn
         {
             return;
         }
-        mpwdMdl.getGridMdl().wMoveto(tb_LastIndx, t);
+        mexpMdl.getGridMdl().wMoveto(tb_LastIndx, t);
         tb_LastIndx = t;
         Util.scrollToVisible(tb_KeysView, tb_LastIndx, 0, true);
         tb_KeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
@@ -678,83 +678,83 @@ public class MexpPtn extends AMpwdPtn
         cl_CardProp = new java.awt.CardLayout();
         pl_CardProp = new javax.swing.JPanel();
         pl_CardProp.setLayout(cl_CardProp);
-        mpwdBean = new IMexpBean[ConsDat.INDX_SIZE];
+        mexpBean = new IMexpBean[ConsDat.INDX_SIZE];
         int idx = 0;
 
         InfoBean beanInfo = new InfoBean(this);
         beanInfo.initView();
         pl_CardProp.add(ConsEnv.BEAN_INFO, beanInfo);
-        mpwdBean[idx++] = beanInfo;
+        mexpBean[idx++] = beanInfo;
 
         TextBean beanText = new TextBean(this);
         beanText.initView();
         pl_CardProp.add(ConsEnv.BEAN_TEXT, beanText);
-        mpwdBean[idx++] = beanText;
+        mexpBean[idx++] = beanText;
 
         PwdsBean beanPwds = new PwdsBean(this);
         beanPwds.initView();
         pl_CardProp.add(ConsEnv.BEAN_PWDS, beanPwds);
-        mpwdBean[idx++] = beanPwds;
+        mexpBean[idx++] = beanPwds;
 
         LinkBean beanLink = new LinkBean(this);
         beanLink.initView();
         pl_CardProp.add(ConsEnv.BEAN_LINK, beanLink);
-        mpwdBean[idx++] = beanLink;
+        mexpBean[idx++] = beanLink;
 
         MailBean beanMail = new MailBean(this);
         beanMail.initView();
         pl_CardProp.add(ConsEnv.BEAN_MAIL, beanMail);
-        mpwdBean[idx++] = beanMail;
+        mexpBean[idx++] = beanMail;
 
         DateBean beanDate = new DateBean(this);
         beanDate.initView();
         pl_CardProp.add(ConsEnv.BEAN_DATE, beanDate);
-        mpwdBean[idx++] = beanDate;
+        mexpBean[idx++] = beanDate;
 
         AreaBean beanArea = new AreaBean(this);
         beanArea.initView();
         pl_CardProp.add(ConsEnv.BEAN_AREA, beanArea);
-        mpwdBean[idx++] = beanArea;
+        mexpBean[idx++] = beanArea;
 
         FileBean beanFile = new FileBean(this);
         beanFile.initView();
         pl_CardProp.add(ConsEnv.BEAN_FILE, beanFile);
-        mpwdBean[idx++] = beanFile;
+        mexpBean[idx++] = beanFile;
 
         DataBean beanData = new DataBean(this);
         beanData.initView();
         pl_CardProp.add(ConsEnv.BEAN_DATA, beanData);
-        mpwdBean[idx++] = beanData;
+        mexpBean[idx++] = beanData;
 
         ListBean beanList = new ListBean(this);
         beanList.initView();
         pl_CardProp.add(ConsEnv.BEAN_LIST, beanList);
-        mpwdBean[idx++] = beanList;
+        mexpBean[idx++] = beanList;
 
         SignBean beanSign = new SignBean(this);
         beanSign.initView();
         pl_CardProp.add(ConsEnv.BEAN_SIGN, beanSign);
-        mpwdBean[idx++] = beanSign;
+        mexpBean[idx++] = beanSign;
 
         GuidBean beanGuid = new GuidBean(this);
         beanGuid.initView();
         pl_CardProp.add(ConsEnv.BEAN_GUID, beanGuid);
-        mpwdBean[idx++] = beanGuid;
+        mexpBean[idx++] = beanGuid;
 
         MetaBean beanMeta = new MetaBean(this);
         beanMeta.initView();
         pl_CardProp.add(ConsEnv.BEAN_META, beanMeta);
-        mpwdBean[idx++] = beanMeta;
+        mexpBean[idx++] = beanMeta;
 
         LogoBean beanIcon = new LogoBean(this);
         beanIcon.initView();
         pl_CardProp.add(ConsEnv.BEAN_ICON, beanIcon);
-        mpwdBean[idx++] = beanIcon;
+        mexpBean[idx++] = beanIcon;
 
         HintBean beanNote = new HintBean(this);
         beanNote.initView();
         pl_CardProp.add(ConsEnv.BEAN_NOTE, beanNote);
-        mpwdBean[idx++] = beanNote;
+        mexpBean[idx++] = beanNote;
 
         eb_KeysEdit = new EditBar();
         eb_KeysEdit.initView();
@@ -979,7 +979,7 @@ public class MexpPtn extends AMpwdPtn
         eb_KeysEdit.initLang();
         ed_KeysEdit.initLang();
 
-        for (IEditBean bean : mpwdBean)
+        for (IEditBean bean : mexpBean)
         {
             bean.initLang();
         }
@@ -1021,11 +1021,11 @@ public class MexpPtn extends AMpwdPtn
             else
             {
                 queryKey = kind.getC2010103();
-                mpwdMdl.getListMdl().listKeysByKind(queryKey);
+                mexpMdl.getListMdl().listKeysByKind(queryKey);
             }
         }
 
-        mainInfo.showHint("共 " + mpwdMdl.getListMdl().getSize() + " 条数据");
+        mainInfo.showHint("共 " + mexpMdl.getListMdl().getSize() + " 条数据");
 
         isSearch = false;
         lastKeys = null;
@@ -1043,7 +1043,7 @@ public class MexpPtn extends AMpwdPtn
             c.set(java.util.Calendar.SECOND, 0);
             c.set(java.util.Calendar.MILLISECOND, 0);
             c.add(java.util.Calendar.DAY_OF_MONTH, 1);
-            mpwdMdl.getListMdl().listHint(s, c.getTime());
+            mexpMdl.getListMdl().listHint(s, c.getTime());
             return;
         }
         java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("\\d+").matcher(task);
@@ -1055,43 +1055,43 @@ public class MexpPtn extends AMpwdPtn
         if (task.endsWith("second"))
         {
             c.add(java.util.Calendar.SECOND, time);
-            mpwdMdl.getListMdl().listHint(s, c.getTime());
+            mexpMdl.getListMdl().listHint(s, c.getTime());
             return;
         }
         if (task.endsWith("minute"))
         {
             c.add(java.util.Calendar.MINUTE, time);
-            mpwdMdl.getListMdl().listHint(s, c.getTime());
+            mexpMdl.getListMdl().listHint(s, c.getTime());
             return;
         }
         if (task.endsWith("hour"))
         {
             c.add(java.util.Calendar.HOUR_OF_DAY, time);
-            mpwdMdl.getListMdl().listHint(s, c.getTime());
+            mexpMdl.getListMdl().listHint(s, c.getTime());
             return;
         }
         if (task.endsWith("day"))
         {
             c.add(java.util.Calendar.DAY_OF_MONTH, time);
-            mpwdMdl.getListMdl().listHint(s, c.getTime());
+            mexpMdl.getListMdl().listHint(s, c.getTime());
             return;
         }
         if (task.endsWith("week"))
         {
             c.add(java.util.Calendar.WEEK_OF_YEAR, time);
-            mpwdMdl.getListMdl().listHint(s, c.getTime());
+            mexpMdl.getListMdl().listHint(s, c.getTime());
             return;
         }
         if (task.endsWith("month"))
         {
             c.add(java.util.Calendar.MONTH, time);
-            mpwdMdl.getListMdl().listHint(s, c.getTime());
+            mexpMdl.getListMdl().listHint(s, c.getTime());
             return;
         }
         if (task.endsWith("year"))
         {
             c.add(java.util.Calendar.YEAR, time);
-            mpwdMdl.getListMdl().listHint(s, c.getTime());
+            mexpMdl.getListMdl().listHint(s, c.getTime());
             return;
         }
     }
@@ -1112,9 +1112,9 @@ public class MexpPtn extends AMpwdPtn
         // 记录上次索引
         lastKeys = (Keys) obj;
 
-        if (mpwdMdl.getGridMdl().isModified())
+        if (mexpMdl.getGridMdl().isModified())
         {
-            if (Lang.showFirm(this, LangRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", mpwdMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_META).getName()) != javax.swing.JOptionPane.YES_OPTION)
+            if (Lang.showFirm(this, LangRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", mexpMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_META).getName()) != javax.swing.JOptionPane.YES_OPTION)
             {
                 ls_GuidList.setSelectedValue(lastKeys, true);
                 return;
@@ -1126,8 +1126,8 @@ public class MexpPtn extends AMpwdPtn
         try
         {
             tb_LastIndx = -1;
-            mpwdMdl.getGridMdl().clear();
-            mpwdMdl.getGridMdl().loadData(keys.getP30F0104());
+            mexpMdl.getGridMdl().clear();
+            mexpMdl.getGridMdl().loadData(keys.getP30F0104());
 
             WButtonGroup group = menuPtn.getGroup("label");
             if (group != null)
@@ -1171,7 +1171,7 @@ public class MexpPtn extends AMpwdPtn
             return;
         }
         tb_LastIndx = row;
-        showPropEdit(mpwdMdl.getGridMdl().getItemAt(row), true);
+        showPropEdit(mexpMdl.getGridMdl().getItemAt(row), true);
     }
 
     private void tb_ItemListKeyReleased(java.awt.event.KeyEvent evt)
@@ -1182,16 +1182,16 @@ public class MexpPtn extends AMpwdPtn
             return;
         }
         tb_LastIndx = row;
-        showPropEdit(mpwdMdl.getGridMdl().getItemAt(row), false);
+        showPropEdit(mexpMdl.getGridMdl().getItemAt(row), false);
     }
 
     public void showPropInfo()
     {
         if (userMdl.isEditVisible())
         {
-            mpwdBean[ConsDat.INDX_INFO].showData(null);
+            mexpBean[ConsDat.INDX_INFO].showData(null);
             cl_CardProp.show(pl_CardProp, ConsEnv.BEAN_INFO);
-            mpwdBean[ConsDat.INDX_INFO].requestFocus();
+            mexpBean[ConsDat.INDX_INFO].requestFocus();
         }
     }
 
@@ -1200,11 +1200,11 @@ public class MexpPtn extends AMpwdPtn
         if (userMdl.isEditVisible())
         {
             cl_CardProp.show(pl_CardProp, ConsEnv.BEAN_PROP + item.getType());
-            mpwdBean[item.getType()].showData(item);
+            mexpBean[item.getType()].showData(item);
 
             if (focus)
             {
-                mpwdBean[item.getType()].requestFocus();
+                mexpBean[item.getType()].requestFocus();
             }
 
             String title = getPropName(item.getType());
@@ -1277,7 +1277,7 @@ public class MexpPtn extends AMpwdPtn
         if (tb_KeysView.getRowCount() == 1)
         {
             Lang.showMesg(this, LangRes.P30F7A01, "");
-            mpwdBean[ConsDat.INDX_GUID].requestFocus();
+            mexpBean[ConsDat.INDX_GUID].requestFocus();
             return false;
         }
         if (tb_KeysView.getRowCount() > 1)
@@ -1292,7 +1292,7 @@ public class MexpPtn extends AMpwdPtn
             setEditVisible(true);
         }
 
-        showPropEdit(mpwdMdl.getGridMdl().initGuid(), true);
+        showPropEdit(mexpMdl.getGridMdl().initGuid(), true);
         return false;
     }
 
@@ -1300,13 +1300,13 @@ public class MexpPtn extends AMpwdPtn
     public boolean endSave()
     {
         // Save Temperary Data
-        if (mpwdMdl.getGridMdl().isModified())
+        if (mexpMdl.getGridMdl().isModified())
         {
-            mpwdMdl.getGridMdl().setInterim(true);
-            mpwdMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(ConsDat.HASH_ROOT);
+            mexpMdl.getGridMdl().setInterim(true);
+            mexpMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(ConsDat.HASH_ROOT);
             try
             {
-                mpwdMdl.getGridMdl().saveData(true, false);
+                mexpMdl.getGridMdl().saveData(true, false);
             }
             catch (Exception exp)
             {
@@ -1318,22 +1318,22 @@ public class MexpPtn extends AMpwdPtn
 
     public IEditItem getMeta()
     {
-        return mpwdMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_META);
+        return mexpMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_META);
     }
 
     public void changeLabel(int mode)
     {
-        mpwdMdl.getGridMdl().setKeysLabel(mode);
+        mexpMdl.getGridMdl().setKeysLabel(mode);
     }
 
     public void changeMajor(int note)
     {
-        mpwdMdl.getGridMdl().setKeysMajor(note);
+        mexpMdl.getGridMdl().setKeysMajor(note);
     }
 
     public void changeKind(String hash)
     {
-        if (mpwdMdl.getGridMdl().setKeysKind(hash))
+        if (mexpMdl.getGridMdl().setKeysKind(hash))
         {
             findLast();
         }
@@ -1349,7 +1349,7 @@ public class MexpPtn extends AMpwdPtn
             }
         }
 
-        mpwdMdl.getGridMdl().clear();
+        mexpMdl.getGridMdl().clear();
         tb_LastIndx = 0;
 
         return true;
@@ -1357,45 +1357,45 @@ public class MexpPtn extends AMpwdPtn
 
     public boolean gridModified()
     {
-        return mpwdMdl.getGridMdl().isModified();
+        return mexpMdl.getGridMdl().isModified();
     }
 
     public void removeSelectedKeys()
     {
-        mpwdMdl.getListMdl().wDelete(ls_GuidList.getSelectedIndex());
+        mexpMdl.getListMdl().wDelete(ls_GuidList.getSelectedIndex());
     }
 
     public void removeSelectedItem()
     {
-        mpwdMdl.getGridMdl().wRemove(tb_KeysView.getSelectedRow());
+        mexpMdl.getGridMdl().wRemove(tb_KeysView.getSelectedRow());
         selectNext(0, true);
     }
 
     public void updateSelectedItem()
     {
-        mpwdMdl.getGridMdl().setModified(true);
-        if (mpwdMdl.getGridMdl().getRowCount() < ConsEnv.PWDS_HEAD_SIZE)
+        mexpMdl.getGridMdl().setModified(true);
+        if (mexpMdl.getGridMdl().getRowCount() < ConsEnv.PWDS_HEAD_SIZE)
         {
-            mpwdMdl.getGridMdl().initBody();
+            mexpMdl.getGridMdl().initBody();
         }
-        selectNext(com.magicpwd._util.Char.isValidateHash(mpwdMdl.getGridMdl().getKeysHash()) ? 0 : 1, true);
+        selectNext(com.magicpwd._util.Char.isValidateHash(mexpMdl.getGridMdl().getKeysHash()) ? 0 : 1, true);
     }
 
     public void enCrypt(java.io.File src, java.io.File dst) throws Exception
     {
-        mpwdMdl.getGridMdl().enCrypt(src, dst);
+        mexpMdl.getGridMdl().enCrypt(src, dst);
     }
 
     public void deCrypt(java.io.File src, java.io.File dst) throws Exception
     {
-        mpwdMdl.getGridMdl().deCrypt(src, dst);
+        mexpMdl.getGridMdl().deCrypt(src, dst);
     }
 
     public void exportCard(java.io.File srcFile, java.io.File dstFile, String fileExt)
     {
         try
         {
-            Card card = new Card(mpwdMdl.getGridMdl());
+            Card card = new Card(mexpMdl.getGridMdl());
             if (ConsEnv.CARD_HTM.equals(fileExt))
             {
                 dstFile = card.exportHtm(srcFile, dstFile);
@@ -1450,21 +1450,21 @@ public class MexpPtn extends AMpwdPtn
         MailOpt mailOpt = new MailOpt();
         mailOpt.initView();
         mailOpt.initLang();
-        java.util.List<I1S2> mailList = mpwdMdl.getGridMdl().wSelect(ConsDat.INDX_MAIL);
+        java.util.List<I1S2> mailList = mexpMdl.getGridMdl().wSelect(ConsDat.INDX_MAIL);
         mailOpt.initMail(mailList);
         if (mailList.size() < 1)
         {
             Lang.showMesg(this, null, "没有可用的邮件类型数据！");
             return;
         }
-        java.util.List<I1S2> userList = mpwdMdl.getGridMdl().wSelect(ConsDat.INDX_TEXT);
+        java.util.List<I1S2> userList = mexpMdl.getGridMdl().wSelect(ConsDat.INDX_TEXT);
         mailOpt.initUser(userList);
         if (userList.size() < 1)
         {
             Lang.showMesg(this, null, "没有可用的文本类型数据！");
             return;
         }
-        java.util.List<I1S2> pwdsList = mpwdMdl.getGridMdl().wSelect(ConsDat.INDX_PWDS);
+        java.util.List<I1S2> pwdsList = mexpMdl.getGridMdl().wSelect(ConsDat.INDX_PWDS);
         mailOpt.initPwds(pwdsList);
         if (pwdsList.size() < 1)
         {
@@ -1510,7 +1510,7 @@ public class MexpPtn extends AMpwdPtn
     {
         if (histDlg == null)
         {
-            histDlg = new HistDlg(mpwdMdl.getGridMdl(), this);
+            histDlg = new HistDlg(mexpMdl.getGridMdl(), this);
             histDlg.initView();
             histDlg.initLang();
             Bean.centerForm(histDlg, this);
@@ -1521,7 +1521,7 @@ public class MexpPtn extends AMpwdPtn
 
     public KindMdl getTreeMdl()
     {
-        return mpwdMdl.getKindMdl();
+        return mexpMdl.getKindMdl();
     }
 
     public void showOptions(String propName)

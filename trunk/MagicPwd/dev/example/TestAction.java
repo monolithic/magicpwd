@@ -16,7 +16,7 @@ public class TestAction extends AAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        javax.swing.JOptionPane.showMessageDialog(trayPtn.getCurrForm(), e.getActionCommand());
+        javax.swing.JOptionPane.showMessageDialog(trayPtn.getCurrPtn(), e.getActionCommand());
     }
 
     @Override
