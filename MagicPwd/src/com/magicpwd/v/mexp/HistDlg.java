@@ -23,7 +23,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.db.DBA3000;
-import com.magicpwd.m.mpwd.GridMdl;
+import com.magicpwd.m.mexp.GridMdl;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultListModel;

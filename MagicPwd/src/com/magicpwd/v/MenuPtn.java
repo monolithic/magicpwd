@@ -21,7 +21,7 @@ import com.magicpwd.__a.AFrame;
 import com.magicpwd.__i.IAction;
 import com.magicpwd.__i.maoc.IMaocAction;
 import com.magicpwd.__i.mgtd.IMgtdAction;
-import com.magicpwd.__i.mpwd.IMpwdAction;
+import com.magicpwd.__i.mexp.IMexpAction;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
@@ -36,10 +36,10 @@ import com.magicpwd.__i.mruc.IMrucAction;
 import com.magicpwd.__i.mwiz.IMwizAction;
 import com.magicpwd.__i.tray.ITrayAction;
 import com.magicpwd._util.Util;
-import com.magicpwd.e.mpwd.skin.FeelAction;
-import com.magicpwd.e.mpwd.skin.LookAction;
-import com.magicpwd.e.mpwd.skin.MoreAction;
-import com.magicpwd.e.mpwd.skin.ThemeAction;
+import com.magicpwd.e.mexp.skin.FeelAction;
+import com.magicpwd.e.mexp.skin.LookAction;
+import com.magicpwd.e.mexp.skin.MoreAction;
+import com.magicpwd.e.mexp.skin.ThemeAction;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
 import org.dom4j.Document;
@@ -983,9 +983,9 @@ public class MenuPtn
                                     trayAction.setTrayPtn(trayPtn);
                                     trayAction.doInit(actInit);
                                 }
-                                else if (action instanceof IMpwdAction)
+                                else if (action instanceof IMexpAction)
                                 {
-                                    IMpwdAction mpwdAction = (IMpwdAction) action;
+                                    IMexpAction mpwdAction = (IMexpAction) action;
                                     mpwdAction.setTrayPtn(trayPtn);
                                     mpwdAction.setMainPtn(trayPtn.getMpwdPtn());
                                     mpwdAction.doInit(actInit);
