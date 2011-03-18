@@ -16,7 +16,7 @@
  */
 package com.magicpwd._comp;
 
-import com.magicpwd.__i.mpwd.IMpwdBean;
+import com.magicpwd.__i.mexp.IMexpBean;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.v.mexp.MexpPtn;
@@ -28,11 +28,11 @@ import com.magicpwd.v.mexp.MexpPtn;
 public class WEditBox extends javax.swing.JPanel
 {
 
-    private IMpwdBean mpwdBean;
+    private IMexpBean mpwdBean;
     private MexpPtn mainPtn;
     private boolean metaData;
 
-    public WEditBox(MexpPtn mainPtn, IMpwdBean bean, boolean meta)
+    public WEditBox(MexpPtn mainPtn, IMexpBean bean, boolean meta)
     {
         this.mainPtn = mainPtn;
         mpwdBean = bean;
