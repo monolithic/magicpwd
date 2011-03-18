@@ -21,6 +21,7 @@ import com.magicpwd._comp.IcoLabel;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._enum.RunMode;
+import com.magicpwd.m.MpwdMdl;
 import com.magicpwd.m.UserMdl;
 import java.awt.Component;
 import java.util.Properties;
@@ -51,7 +52,7 @@ public class Lang
             lang = new Properties();
         }
 
-        if (UserMdl.getRunMode() != RunMode.web)
+        if (MpwdMdl.getRunMode() != RunMode.web)
         {
             java.io.InputStream stream = null;
             try

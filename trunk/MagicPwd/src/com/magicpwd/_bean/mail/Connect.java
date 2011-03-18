@@ -21,7 +21,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._enum.RunMode;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Logs;
-import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.MpwdMdl;
 import java.security.Security;
 import java.util.Properties;
 import javax.mail.Authenticator;
@@ -257,7 +257,7 @@ public final class Connect
     public Properties getProperties()
     {
         Properties prop = new Properties();
-        if (UserMdl.getRunMode() == RunMode.dev)
+        if (MpwdMdl.getRunMode() == RunMode.dev)
         {
 //            prop.setProperty("mail.debug", "true");
         }

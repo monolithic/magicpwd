@@ -16,10 +16,8 @@
  */
 package com.magicpwd.m;
 
-import com.magicpwd._enum.AppView;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._enum.RunMode;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Logs;
@@ -31,9 +29,8 @@ import com.magicpwd._util.Logs;
 public final class UserMdl
 {
 
-    private static RunMode runMode;
-    private static AppView appView;
-    private static java.util.Properties userCfg;
+    private MpwdMdl mpwdMdl;
+    private java.util.Properties userCfg;
     private boolean incBack = true;
     private boolean topMost;
     private TpltMdl tpltMdl;
@@ -45,47 +42,7 @@ public final class UserMdl
     {
     }
 
-    /**
-     * @return the runMode
-     */
-    public static RunMode getRunMode()
-    {
-        return runMode;
-    }
-
-    /**
-     * @param runMode the runMode to set
-     */
-    public static void setRunMode(RunMode runMode)
-    {
-        UserMdl.runMode = runMode;
-    }
-
-    /**
-     * @return the appView
-     */
-    public static AppView getAppView()
-    {
-        return appView;
-    }
-
-    /**
-     * @param appView the appView to set
-     */
-    public static void setAppView(AppView appView)
-    {
-        UserMdl.appView = appView;
-    }
-
-    public static void setAppModule(String appModule)
-    {
-        if (appModule != null)
-        {
-            UserMdl.appView = AppView.valueOf(appModule.toLowerCase());
-        }
-    }
-
-    public final void loadCfg()
+    public void loadCfg()
     {
         userCfg = new java.util.Properties();
         java.io.FileInputStream fis = null;
@@ -107,18 +64,12 @@ public final class UserMdl
             Bean.closeStream(fis);
         }
 
-        String mode = userCfg.getProperty(ConsCfg.CFG_MODE_APP, "1");
-        if (Char.isValidateInteger(mode))
-        {
-            appView = AppView.valueOf(mode);
-        }
         safeKey = new SafeKey(this);
     }
 
     public final void loadDef()
     {
         userCfg.clear();
-        appView = AppView.mpwd;
         incBack = true;
         topMost = false;
     }
@@ -129,7 +80,6 @@ public final class UserMdl
         try
         {
             fos = new java.io.FileOutputStream(new java.io.File(ConsEnv.DIR_DAT, ConsEnv.FILE_DATA + ".config"));
-            userCfg.setProperty(ConsCfg.CFG_MODE_APP, Integer.toString(appView.ordinal()));
             userCfg.store(fos, "MagicPwd User Configure File!");
         }
         catch (Exception exp)
@@ -720,5 +670,21 @@ public final class UserMdl
     public void setTrayHintCnt(int cnt)
     {
         userCfg.setProperty(ConsCfg.CFG_TRAY_HINT_CNT, "" + cnt);
+    }
+
+    /**
+     * @return the mpwdMdl
+     */
+    public MpwdMdl getMpwdMdl()
+    {
+        return mpwdMdl;
+    }
+
+    /**
+     * @param mpwdMdl the mpwdMdl to set
+     */
+    public void setMpwdMdl(MpwdMdl mpwdMdl)
+    {
+        this.mpwdMdl = mpwdMdl;
     }
 }

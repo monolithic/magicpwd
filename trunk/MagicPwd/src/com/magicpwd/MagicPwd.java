@@ -20,12 +20,12 @@ import com.magicpwd.__a.AFrame;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._comn.apps.FileLocker;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._enum.RunMode;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Skin;
+import com.magicpwd.m.MpwdMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
 import com.magicpwd.v.tray.TrayPtn;
@@ -54,19 +54,7 @@ public class MagicPwd
         // 界面启动参数读取
         if (args != null && args.length > 0)
         {
-            String arg = args[0];
-            if ("webstart".equalsIgnoreCase(arg) || "web".equalsIgnoreCase(arg))
-            {
-                UserMdl.setRunMode(RunMode.web);
-            }
-            else if ("command".equalsIgnoreCase(arg) || "cmd".equalsIgnoreCase(arg))
-            {
-                UserMdl.setRunMode(RunMode.cmd);
-            }
-            else if ("dev".equalsIgnoreCase(arg))
-            {
-                UserMdl.setRunMode(RunMode.dev);
-            }
+            MpwdMdl.setRunMode(args[0]);
         }
 
 //        java.awt.KeyboardFocusManager.setCurrentKeyboardFocusManager(new KFManager());
