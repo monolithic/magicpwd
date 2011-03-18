@@ -14,7 +14,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.v.mpwd;
+package com.magicpwd.v.mexp;
 
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.Keys;

@@ -14,7 +14,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.v.mpwd;
+package com.magicpwd.v.mexp;
 
 import com.magicpwd.__a.ADialog;
 import com.magicpwd.__i.IBackCall;
@@ -30,11 +30,11 @@ import com.magicpwd._util.Lang;
 public class KindDlg extends ADialog
 {
 
-    private MpwdPtn mpwdPtn;
+    private MexpPtn mpwdPtn;
     private IBackCall<Kind> backCall;
     private Kind kind;
 
-    public KindDlg(MpwdPtn mpwdPtn, IBackCall<Kind> backCall)
+    public KindDlg(MexpPtn mpwdPtn, IBackCall<Kind> backCall)
     {
         super(mpwdPtn, true);
         this.mpwdPtn = mpwdPtn;

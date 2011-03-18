@@ -24,7 +24,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.d.db.DBA3000;
 import com.magicpwd.r.TreeCR;
-import com.magicpwd.v.mpwd.MpwdPtn;
+import com.magicpwd.v.mexp.MexpPtn;
 
 /**
  * @author Amon
@@ -33,7 +33,7 @@ import com.magicpwd.v.mpwd.MpwdPtn;
 public class TpltProp extends javax.swing.JPanel implements IPropBean
 {
 
-    private MpwdPtn mainPtn;
+    private MexpPtn mainPtn;
     private javax.swing.DefaultComboBoxModel cm_TpltList;
     private javax.swing.tree.DefaultTreeModel tm_TpltList;
     private javax.swing.tree.DefaultMutableTreeNode rootNode;
@@ -41,7 +41,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
     private Tplt currTplt;
     private boolean isUpdate;
 
-    public TpltProp(MpwdPtn mainPtn)
+    public TpltProp(MexpPtn mainPtn)
     {
         this.mainPtn = mainPtn;
     }

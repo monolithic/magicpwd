@@ -24,7 +24,7 @@ import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
-import com.magicpwd.v.mpwd.MpwdPtn;
+import com.magicpwd.v.mexp.MexpPtn;
 
 /**
  * 属性：文本
@@ -34,11 +34,11 @@ import com.magicpwd.v.mpwd.MpwdPtn;
 public class TextBean extends ATextBean implements IMpwdBean
 {
 
-    private MpwdPtn mainPtn;
+    private MexpPtn mainPtn;
     private WEditBox dataEdit;
     private WTextBox nameBox;
 
-    public TextBean(MpwdPtn mainPtn)
+    public TextBean(MexpPtn mainPtn)
     {
         super(mainPtn);
         this.mainPtn = mainPtn;

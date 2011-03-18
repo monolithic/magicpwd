@@ -37,7 +37,7 @@ import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.maoc.MaocPtn;
 import com.magicpwd.v.mgtd.MgtdPtn;
 import com.magicpwd.v.mpad.MpadPtn;
-import com.magicpwd.v.mpwd.MpwdPtn;
+import com.magicpwd.v.mexp.MexpPtn;
 import com.magicpwd.v.mruc.MrucPtn;
 import com.magicpwd.v.mwiz.MwizPtn;
 
@@ -260,7 +260,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
         return mfCurrForm;
     }
 
-    public MpwdPtn getMpwdPtn()
+    public MexpPtn getMpwdPtn()
     {
         return mp_MpwdPtn;
     }
@@ -269,7 +269,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
     {
         if (mp_MpwdPtn == null)
         {
-            mp_MpwdPtn = new MpwdPtn(this, userMdl);
+            mp_MpwdPtn = new MexpPtn(this, userMdl);
             mp_MpwdPtn.initView();
             mp_MpwdPtn.initLang();
             mp_MpwdPtn.initData();
@@ -769,7 +769,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
             trayIcon.displayMessage(title, tips, java.awt.TrayIcon.MessageType.INFO);
         }
     }
-    private static MpwdPtn mp_MpwdPtn;
+    private static MexpPtn mp_MpwdPtn;
     private static MwizPtn mp_MwizPtn;
     private static MpadPtn mp_MpadPtn;
     private static MrucPtn mp_MrucPtn;

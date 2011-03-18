@@ -26,7 +26,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd.v.mpwd.MpwdPtn;
+import com.magicpwd.v.mexp.MexpPtn;
 
 /**
  * 属性：附件
@@ -36,11 +36,11 @@ import com.magicpwd.v.mpwd.MpwdPtn;
 public class FileBean extends AFileBean implements IMpwdBean
 {
 
-    private MpwdPtn mainPtn;
+    private MexpPtn mainPtn;
     private WEditBox dataEdit;
     private WTextBox nameBox;
 
-    public FileBean(MpwdPtn mainPtn)
+    public FileBean(MexpPtn mainPtn)
     {
         super(mainPtn);
         this.mainPtn = mainPtn;

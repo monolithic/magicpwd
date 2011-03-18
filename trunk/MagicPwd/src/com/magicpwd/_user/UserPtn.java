@@ -66,6 +66,7 @@ public class UserPtn extends javax.swing.JPanel
     private static javax.swing.Icon guidIcon;
     private TrayPtn trayPtn;
     private UserMdl userMdl;
+    private MpwdMdl mpwdMdl;
 
     /**
      * 独立窗口
@@ -735,6 +736,8 @@ public class UserPtn extends javax.swing.JPanel
     public boolean initData()
     {
         this.errCount = 0;
+        mpwdMdl = new MpwdMdl();
+        mpwdMdl.loadCfg();
 
         switch (signType)
         {
@@ -746,7 +749,7 @@ public class UserPtn extends javax.swing.JPanel
                 cb_UserType.addItem(new S1S1("maoc", "数值运算"));
                 cb_UserType.addItem(new S1S1("mruc", "公式换算"));
                 cb_UserType.addItem(new S1S1("mgtd", "计划任务"));
-                cb_UserType.setSelectedIndex(MpwdMdl.getAppView().ordinal());
+                cb_UserType.setSelectedIndex(mpwdMdl.getAppView().ordinal());
                 String name = userMdl.getCfg(ConsCfg.CFG_USER_LAST);
                 if (com.magicpwd._util.Char.isValidate(name))
                 {
@@ -863,7 +866,7 @@ public class UserPtn extends javax.swing.JPanel
             Logs.exception(exp);
         }
 
-        if (MpwdMdl.getRunMode() == RunMode.dev)
+        if (mpwdMdl.getRunMode() == RunMode.dev)
         {
             return;
         }
@@ -1149,7 +1152,7 @@ public class UserPtn extends javax.swing.JPanel
         Object object = cb_UserType.getSelectedItem();
         if (object instanceof S1S1)
         {
-            MpwdMdl.setAppView(AppView.valueOf(((S1S1) object).getK()));
+            mpwdMdl.setAppView(AppView.valueOf(((S1S1) object).getK()));
         }
         if (backCall != null)
         {
