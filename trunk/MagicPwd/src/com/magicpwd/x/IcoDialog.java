@@ -16,7 +16,7 @@
  */
 package com.magicpwd.x;
 
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
@@ -37,10 +37,10 @@ public class IcoDialog extends javax.swing.JDialog
     private IcoModel icoModel;
     private java.io.File filePath;
     private java.io.File iconPath;
-    private AFrame formPtn;
+    private AMpwdPtn formPtn;
     private IBackCall<String> backCall;
 
-    public IcoDialog(AFrame formPtn, IBackCall<String> backCall)
+    public IcoDialog(AMpwdPtn formPtn, IBackCall<String> backCall)
     {
         super(formPtn, true);
         this.formPtn = formPtn;

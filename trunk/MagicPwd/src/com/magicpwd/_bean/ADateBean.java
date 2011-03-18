@@ -17,7 +17,7 @@
 package com.magicpwd._bean;
 
 import com.magicpwd.__a.AEditBean;
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WButtonGroup;
@@ -38,7 +38,7 @@ public abstract class ADateBean extends AEditBean
     private WTextBox dataBox;
     private java.text.DateFormat format;
 
-    public ADateBean(AFrame formPtn)
+    public ADateBean(AMpwdPtn formPtn)
     {
         this.formPtn = formPtn;
     }

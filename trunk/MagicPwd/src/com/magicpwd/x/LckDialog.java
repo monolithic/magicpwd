@@ -16,7 +16,7 @@
  */
 package com.magicpwd.x;
 
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.AMpwdPtn;
 
 /**
  * 运行等待对话框
@@ -25,7 +25,7 @@ import com.magicpwd.__a.AFrame;
 public class LckDialog extends javax.swing.JPanel
 {
 
-    public LckDialog(AFrame form)
+    public LckDialog(AMpwdPtn form)
     {
     }
 

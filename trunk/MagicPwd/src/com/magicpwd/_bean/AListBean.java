@@ -17,7 +17,7 @@
 package com.magicpwd._bean;
 
 import com.magicpwd.__a.AEditBean;
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.AMpwdPtn;
 
 /**
  * Application: MagicPwd
@@ -33,7 +33,7 @@ import com.magicpwd.__a.AFrame;
 public abstract class AListBean extends AEditBean
 {
 
-    public AListBean(AFrame formPtn)
+    public AListBean(AMpwdPtn formPtn)
     {
         this.formPtn = formPtn;
     }

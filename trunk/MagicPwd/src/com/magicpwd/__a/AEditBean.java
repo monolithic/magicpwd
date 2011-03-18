@@ -34,7 +34,7 @@ import com.magicpwd._cons.ConsDat;
 public abstract class AEditBean extends javax.swing.JPanel implements IEditBean
 {
 
-    protected AFrame formPtn;
+    protected AMpwdPtn formPtn;
     protected IEditItem itemData;
 
     protected String showName()

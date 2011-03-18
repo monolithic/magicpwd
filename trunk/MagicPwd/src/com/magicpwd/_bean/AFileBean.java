@@ -18,7 +18,7 @@ package com.magicpwd._bean;
 
 import com.magicpwd.__a.AAction;
 import com.magicpwd.__a.AEditBean;
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.docs.IDocsViewer;
 import com.magicpwd._comn.item.EditItem;
@@ -53,7 +53,7 @@ public abstract class AFileBean extends AEditBean
     private WTextBox dataBox;
     private static java.util.HashMap<String, String> extList;
 
-    public AFileBean(AFrame formPtn)
+    public AFileBean(AMpwdPtn formPtn)
     {
         this.formPtn = formPtn;
         extList = new java.util.HashMap<String, String>();
@@ -238,7 +238,7 @@ public abstract class AFileBean extends AEditBean
 
         try
         {
-            Constructor c = Class.forName(extList.get(ext)).getConstructor(AFrame.class);
+            Constructor c = Class.forName(extList.get(ext)).getConstructor(AMpwdPtn.class);
             if (c != null)
             {
                 Object obj = c.newInstance(formPtn);

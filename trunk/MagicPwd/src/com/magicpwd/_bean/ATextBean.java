@@ -17,7 +17,7 @@
 package com.magicpwd._bean;
 
 import com.magicpwd.__a.AEditBean;
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd._comp.WTextBox;
 
 /**
@@ -29,7 +29,7 @@ public abstract class ATextBean extends AEditBean
 
     private WTextBox dataBox;
 
-    public ATextBean(AFrame formPtn)
+    public ATextBean(AMpwdPtn formPtn)
     {
         this.formPtn = formPtn;
     }

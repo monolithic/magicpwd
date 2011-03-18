@@ -17,7 +17,7 @@
 package com.magicpwd.v.mail;
 
 import com.magicpwd.__a.ADialog;
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.S1S1;
 import com.magicpwd._util.Bean;
@@ -37,11 +37,11 @@ import com.magicpwd._util.Lang;
 public class MailDlg extends ADialog
 {
 
-    private AFrame formPtn;
+    private AMpwdPtn formPtn;
     private IBackCall<String> backCall;
     private javax.swing.DefaultListModel lm_MailList;
 
-    public MailDlg(AFrame formPtn)
+    public MailDlg(AMpwdPtn formPtn)
     {
         super(formPtn, true);
         this.formPtn = formPtn;

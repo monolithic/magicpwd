@@ -17,7 +17,7 @@
 package com.magicpwd._bean;
 
 import com.magicpwd.__a.AEditBean;
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.item.EditItem;
 import com.magicpwd._comn.prop.Char;
@@ -47,7 +47,7 @@ public abstract class APwdsBean extends AEditBean
 
     private boolean askOverWrite;
 
-    public APwdsBean(AFrame formPtn)
+    public APwdsBean(AMpwdPtn formPtn)
     {
         this.formPtn = formPtn;
     }

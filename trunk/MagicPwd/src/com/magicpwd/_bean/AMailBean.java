@@ -17,7 +17,7 @@
 package com.magicpwd._bean;
 
 import com.magicpwd.__a.AEditBean;
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.LangRes;
@@ -41,7 +41,7 @@ public abstract class AMailBean extends AEditBean
 
     private WTextBox dataBox;
 
-    public AMailBean(AFrame formPtn)
+    public AMailBean(AMpwdPtn formPtn)
     {
         this.formPtn = formPtn;
     }

@@ -16,7 +16,7 @@
  */
 package com.magicpwd.v.maoc;
 
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd._comn.D1S2;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._comn.S1S3;
@@ -41,7 +41,7 @@ import org.javia.arity.Symbols;
  * 
  * @author Amon
  */
-public class MaocPtn extends AFrame
+public class MaocPtn extends AMpwdPtn
 {
 
     private MaocMdl maocMdl;
@@ -53,11 +53,13 @@ public class MaocPtn extends AFrame
         super(trayPtn, userMdl);
     }
 
-    public void initView()
+    @Override
+    public boolean initView()
     {
         initArgView();
         initExpView();
         initBaseView();
+        return true;
     }
 
     private void initArgView()
@@ -168,7 +170,8 @@ public class MaocPtn extends AFrame
         this.setVisible(true);
     }
 
-    public void initLang()
+    @Override
+    public boolean initLang()
     {
         this.setTitle(Lang.getLang(LangRes.P30FB201, "数值运算"));
         Bean.setText(lb_ExpText, Lang.getLang(LangRes.P30FB301, "计算式(@F)"));
@@ -183,9 +186,11 @@ public class MaocPtn extends AFrame
 
         this.pack();
         Bean.centerForm(this, null);
+        return true;
     }
 
-    public void initData()
+    @Override
+    public boolean initData()
     {
         maocMdl = new MaocMdl(userMdl);
         maocMdl.init();
@@ -285,10 +290,14 @@ public class MaocPtn extends AFrame
         appendFun(new S1S3("", "ctg(x)", "1/tan(x)", ""));
         appendFun(new S1S3("", "csc(x)", "1/sin(x)", ""));
         appendFun(new S1S3("", "sec(x)", "1/cos(x)", ""));
+
+        return true;
     }
 
-    public void showData()
+    @Override
+    public boolean showData()
     {
+        return true;
     }
 
     @Override

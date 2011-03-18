@@ -17,7 +17,7 @@
 package com.magicpwd._bean;
 
 import com.magicpwd.__a.AEditBean;
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mexp.IMexpBean;
 import com.magicpwd._comp.BtnLabel;
@@ -35,7 +35,7 @@ public abstract class ASignBean extends AEditBean implements IMexpBean
 
     private WTextBox dataBox;
 
-    public ASignBean(AFrame formPtn)
+    public ASignBean(AMpwdPtn formPtn)
     {
         this.formPtn = formPtn;
     }

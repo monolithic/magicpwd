@@ -16,7 +16,7 @@
  */
 package com.magicpwd.v.mgtd;
 
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd._comp.date.WDateChooser;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
@@ -30,7 +30,7 @@ import java.awt.event.ActionEvent;
  *
  * @author Amon
  */
-public class MgtdPtn extends AFrame
+public class MgtdPtn extends AMpwdPtn
 {
 
     public MgtdPtn(TrayPtn trayPtn, UserMdl userMdl)
@@ -38,7 +38,8 @@ public class MgtdPtn extends AFrame
         super(trayPtn, userMdl);
     }
 
-    public void initView()
+    @Override
+    public boolean initView()
     {
         this.getContentPane().setLayout(new java.awt.FlowLayout());
         b = new javax.swing.JButton();
@@ -59,19 +60,26 @@ public class MgtdPtn extends AFrame
 //        this.pack();
         Bean.centerForm(this, null);
         this.setVisible(true);
+        return true;
     }
 
-    public void initLang()
+    @Override
+    public boolean initLang()
     {
         setTitle(Lang.getLang(LangRes.P30F6201, "魔方密码"));
+        return true;
     }
 
-    public void initData()
+    @Override
+    public boolean initData()
     {
+        return true;
     }
 
-    public void showData()
+    @Override
+    public boolean showData()
     {
+        return true;
     }
 
     @Override

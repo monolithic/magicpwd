@@ -16,7 +16,7 @@
  */
 package com.magicpwd.v.mruc;
 
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
@@ -40,7 +40,7 @@ import com.magicpwd.v.tray.TrayPtn;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public class MrucPtn extends AFrame
+public class MrucPtn extends AMpwdPtn
 {
 
     private MrucMdl mrucMdl;
@@ -52,7 +52,8 @@ public class MrucPtn extends AFrame
         super(trayPtn, userMdl);
     }
 
-    public void initView()
+    @Override
+    public boolean initView()
     {
         pl_Panel = new javax.swing.JPanel();
         cb_Combo = new javax.swing.JComboBox();
@@ -90,18 +91,22 @@ public class MrucPtn extends AFrame
         this.pack();
         Bean.centerForm(this, null);
         this.setVisible(true);
+        return true;
     }
 
-    public void initLang()
+    @Override
+    public boolean initLang()
     {
         this.setTitle(Lang.getLang(LangRes.P30FC201, "单位换算"));
         Bean.setText(lb_Label, Lang.getLang(LangRes.P30FC301, "单位类型(@T)"));
 
         this.pack();
         Bean.centerForm(this, null);
+        return true;
     }
 
-    public void initData()
+    @Override
+    public boolean initData()
     {
         mrucMdl = new MrucMdl(userMdl);
         mrucMdl.init();
@@ -121,9 +126,11 @@ public class MrucPtn extends AFrame
 
         this.pack();
         Bean.centerForm(this, null);
+        return true;
     }
 
-    public void showData()
+    @Override
+    public boolean showData()
     {
         pl_Panel.removeAll();
 
@@ -142,6 +149,7 @@ public class MrucPtn extends AFrame
         lb_Notice.setText(Lang.getLang(LangRes.P30FC202, "请选择换算单位类型！"));
 
         this.pack();
+        return true;
     }
 
     @Override

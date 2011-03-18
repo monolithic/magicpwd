@@ -17,7 +17,7 @@
 package com.magicpwd.x.docs;
 
 import com.magicpwd.__a.ADialog;
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.docs.IDocsViewer;
 import com.magicpwd._comn.S1S1;
 import com.magicpwd._cons.ConsEnv;
@@ -36,10 +36,10 @@ import com.magicpwd._util.Logs;
 public class SrcViewer extends ADialog implements IDocsViewer, Runnable
 {
 
-    private AFrame formPtn;
+    private AMpwdPtn formPtn;
     private java.io.File srcFile;
 
-    public SrcViewer(AFrame formPtn)
+    public SrcViewer(AMpwdPtn formPtn)
     {
         super(formPtn, true);
         this.formPtn = formPtn;

@@ -17,6 +17,7 @@
 package com.magicpwd.__a;
 
 import com.magicpwd.__i.IBackCall;
+import com.magicpwd.__i.IMpwdView;
 import com.magicpwd._comn.S1S1;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
@@ -50,7 +51,7 @@ import java.io.IOException;
  *
  * @author Amon
  */
-public abstract class AFrame extends javax.swing.JFrame
+public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
 {
 
     protected TrayPtn trayPtn;
@@ -61,7 +62,7 @@ public abstract class AFrame extends javax.swing.JFrame
     private static java.util.Properties defProp;
     private java.util.Properties favProp;
 
-    public AFrame(TrayPtn trayPtn, UserMdl userMdl)
+    public AMpwdPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
         this.trayPtn = trayPtn;
         this.userMdl = userMdl;
@@ -73,7 +74,7 @@ public abstract class AFrame extends javax.swing.JFrame
         java.io.InputStream stream = null;
         try
         {
-            stream = AFrame.class.getResourceAsStream("/res/feel.amf");
+            stream = AMpwdPtn.class.getResourceAsStream("/res/feel.amf");
             defProp.load(stream);
         }
         catch (IOException ex)
@@ -88,7 +89,7 @@ public abstract class AFrame extends javax.swing.JFrame
         defIcon = new java.util.HashMap<String, javax.swing.Icon>();
         try
         {
-            stream = AFrame.class.getResourceAsStream(ConsEnv.ICON_PATH + "icon.png");
+            stream = AMpwdPtn.class.getResourceAsStream(ConsEnv.ICON_PATH + "icon.png");
             java.awt.image.BufferedImage bufImg = javax.imageio.ImageIO.read(stream);
 
             int w = bufImg.getWidth();

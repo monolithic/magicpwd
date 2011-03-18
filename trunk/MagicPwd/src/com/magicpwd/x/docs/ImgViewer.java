@@ -17,7 +17,7 @@
 package com.magicpwd.x.docs;
 
 import com.magicpwd.__a.ADialog;
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.docs.IDocsViewer;
 import com.magicpwd._comp.IcoLabel;
 import com.magicpwd._comp.ImgPanel;
@@ -32,10 +32,10 @@ import java.awt.event.ActionEvent;
 public class ImgViewer extends ADialog implements IDocsViewer
 {
 
-    private AFrame formPtn;
+    private AMpwdPtn formPtn;
     private java.io.File imgFile;
 
-    public ImgViewer(AFrame formPtn)
+    public ImgViewer(AMpwdPtn formPtn)
     {
         super(formPtn, true);
         this.formPtn = formPtn;

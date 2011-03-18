@@ -16,14 +16,14 @@
  */
 package com.magicpwd.v.mcmd;
 
-import com.magicpwd.__a.AFrame;
+import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.v.MenuPtn;
 
 /**
  * 命令行模式
  * @author Aven
  */
-public class McmdPtn extends AFrame
+public class McmdPtn extends AMpwdPtn
 {
 
     public McmdPtn()
@@ -31,20 +31,28 @@ public class McmdPtn extends AFrame
         super(null, null);
     }
 
-    public void initView()
+    @Override
+    public boolean initView()
     {
+        return true;
     }
 
-    public void initLang()
+    @Override
+    public boolean initLang()
     {
+        return true;
     }
 
-    public void initData()
+    @Override
+    public boolean initData()
     {
+        return true;
     }
 
-    public void showData()
+    @Override
+    public boolean showData()
     {
+        return true;
     }
 
     @Override
