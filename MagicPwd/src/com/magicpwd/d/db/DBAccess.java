@@ -48,11 +48,7 @@ public class DBAccess
      */
     public void init() throws SQLException
     {
-        if (conn == null || conn.isClosed())
-        {
-            conn = DriverManager.getConnection("jdbc:hsqldb:file:" + ConsEnv.DIR_DAT + "/amon");
-        }
-        stat = conn.createStatement();
+        connect();
 
         // 参数列表
         paramList = new ArrayList<String>();
@@ -83,12 +79,41 @@ public class DBAccess
         this.orderList.delete(0, orderList.length());
     }
 
+    private Statement connect() throws SQLException
+    {
+        if (conn == null || conn.isClosed())
+        {
+            conn = DriverManager.getConnection("jdbc:hsqldb:file:" + ConsEnv.DIR_DAT + "/amon");
+        }
+        if (stat == null || stat.isClosed())
+        {
+            stat = conn.createStatement();
+        }
+        return stat;
+    }
+
     /**
      * 关闭数据库
      * @throws SQLException
      */
-    public void close()
+    public void dispose()
     {
+        if (stat != null)
+        {
+            try
+            {
+                stat.close();
+            }
+            catch (SQLException exp)
+            {
+                Logs.exception(exp);
+            }
+            finally
+            {
+                stat = null;
+            }
+        }
+
         // Connection 关闭
         if (conn != null)
         {
@@ -111,13 +136,7 @@ public class DBAccess
     {
         try
         {
-            if (conn == null || conn.isClosed())
-            {
-                conn = DriverManager.getConnection("jdbc:hsqldb:file:" + ConsEnv.DIR_DAT + "/amon");
-            }
-            Statement s = conn.createStatement();
-            s.execute("BACKUP DATABASE to '../bak/' BLOCKING");
-            s.close();
+            connect().execute("BACKUP DATABASE to '../bak/' BLOCKING");
         }
         catch (SQLException exp)
         {
@@ -125,31 +144,18 @@ public class DBAccess
         }
         finally
         {
-            try
-            {
-                conn.close();
-            }
-            catch (SQLException ex)
-            {
-                Logs.exception(ex);
-            }
+            dispose();
         }
     }
 
     /**
      * 关闭数据库
      */
-    public static void exit()
+    public void shutdown()
     {
         try
         {
-            if (conn == null || conn.isClosed())
-            {
-                conn = DriverManager.getConnection("jdbc:hsqldb:file:" + ConsEnv.DIR_DAT + "/amon");
-            }
-            Statement s = conn.createStatement();
-            s.execute("SHUTDOWN");
-            s.close();
+            connect().execute("SHUTDOWN");
         }
         catch (SQLException exp)
         {
@@ -157,14 +163,7 @@ public class DBAccess
         }
         finally
         {
-            try
-            {
-                conn.close();
-            }
-            catch (SQLException ex)
-            {
-                Logs.exception(ex);
-            }
+            dispose();
         }
     }
 
@@ -542,14 +541,6 @@ public class DBAccess
         stat.executeBatch();
     }
 
-    public void executeCopy()
-    {
-        if (locked)
-        {
-            return;
-        }
-    }
-
     /**
      * 其它相关的数据库操作，如COMMIT、HSQL专有的SHUTDOWN等。
      * 
@@ -570,6 +561,14 @@ public class DBAccess
             success = stat.execute(sql);
         }
         return success;
+    }
+
+    public void executeCopy()
+    {
+        if (locked)
+        {
+            return;
+        }
     }
 
     /**

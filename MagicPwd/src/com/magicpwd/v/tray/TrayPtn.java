@@ -508,7 +508,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
 
             userMdl.saveCfg();
 
-            DBAccess.exit();
+            new DBAccess().shutdown();
 
             java.io.File backFile = Util.nextBackupFile(userMdl.getDumpDir(), userMdl.getDumpCnt());
             Jzip.doZip(backFile, new java.io.File(userMdl.getDataDir()));

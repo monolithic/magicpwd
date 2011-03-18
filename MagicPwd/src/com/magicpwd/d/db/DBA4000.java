@@ -72,7 +72,7 @@ public class DBA4000
             result = null;
         }
 
-        dba.close();
+        dba.dispose();
         return result;
     }
 
@@ -119,7 +119,7 @@ public class DBA4000
             isOK = false;
         }
 
-        dba.close();
+        dba.dispose();
         return isOK;
     }
 
@@ -212,7 +212,7 @@ public class DBA4000
         }
         finally
         {
-            dba.close();
+            dba.dispose();
         }
     }
 
@@ -258,7 +258,7 @@ public class DBA4000
         }
         finally
         {
-            dba.close();
+            dba.dispose();
         }
     }
 
@@ -330,7 +330,7 @@ public class DBA4000
         catch (Exception exp)
         {
             Logs.exception(exp);
-            dba.close();
+            dba.dispose();
             return false;
         }
     }
@@ -374,7 +374,7 @@ public class DBA4000
         }
         finally
         {
-            dba.close();
+            dba.dispose();
         }
     }
 
@@ -451,7 +451,7 @@ public class DBA4000
         }
         finally
         {
-            dba.close();
+            dba.dispose();
         }
     }
 
@@ -474,7 +474,7 @@ public class DBA4000
         }
         finally
         {
-            dba.close();
+            dba.dispose();
         }
     }
 
@@ -496,7 +496,7 @@ public class DBA4000
         }
         finally
         {
-            dba.close();
+            dba.dispose();
         }
     }
 
@@ -544,7 +544,7 @@ public class DBA4000
         }
         finally
         {
-            dba.close();
+            dba.dispose();
         }
     }
 
@@ -660,7 +660,7 @@ public class DBA4000
         dba.addWhere(DBC3000.P30F0104, k);
         dba.executeUpdate();
 
-        dba.close();
+        dba.dispose();
     }
 
     private static void updatePwds(DBAccess dba, Keys keys) throws SQLException
@@ -725,7 +725,7 @@ public class DBA4000
         }
         finally
         {
-            dba.close();
+            dba.dispose();
         }
     }
 
@@ -767,7 +767,7 @@ public class DBA4000
         }
         finally
         {
-            dba.close();
+            dba.dispose();
         }
     }
 
@@ -807,7 +807,7 @@ public class DBA4000
         }
         finally
         {
-            dba.close();
+            dba.dispose();
         }
         return list;
     }
@@ -857,7 +857,7 @@ public class DBA4000
         }
         finally
         {
-            dba.close();
+            dba.dispose();
         }
         return list;
     }
@@ -892,7 +892,7 @@ public class DBA4000
         }
         finally
         {
-            dba.close();
+            dba.dispose();
         }
     }
 
@@ -921,7 +921,7 @@ public class DBA4000
         }
         finally
         {
-            dba.close();
+            dba.dispose();
         }
     }
 
@@ -973,7 +973,7 @@ public class DBA4000
         }
         finally
         {
-            dba.close();
+            dba.dispose();
         }
         return kindList;
     }
@@ -998,7 +998,7 @@ public class DBA4000
         }
         finally
         {
-            dba.close();
+            dba.dispose();
         }
     }
 
@@ -1040,7 +1040,7 @@ public class DBA4000
         }
         finally
         {
-            dba.close();
+            dba.dispose();
         }
     }
 
@@ -1071,7 +1071,7 @@ public class DBA4000
         }
         finally
         {
-            dba.close();
+            dba.dispose();
         }
         return true;
     }
@@ -1111,7 +1111,7 @@ public class DBA4000
         }
         finally
         {
-            dba.close();
+            dba.dispose();
         }
     }
 
@@ -1137,7 +1137,7 @@ public class DBA4000
         }
         finally
         {
-            dba.close();
+            dba.dispose();
         }
     }
 
@@ -1178,7 +1178,7 @@ public class DBA4000
         }
         finally
         {
-            dba.close();
+            dba.dispose();
         }
     }
 
@@ -1224,7 +1224,7 @@ public class DBA4000
         }
         finally
         {
-            dba.close();
+            dba.dispose();
         }
         return charList;
     }
@@ -1281,7 +1281,7 @@ public class DBA4000
         }
         finally
         {
-            dba.close();
+            dba.dispose();
         }
     }
 
@@ -1322,7 +1322,7 @@ public class DBA4000
         }
         finally
         {
-            dba.close();
+            dba.dispose();
         }
     }
 
@@ -1379,7 +1379,7 @@ public class DBA4000
         }
         finally
         {
-            dba.close();
+            dba.dispose();
         }
     }
 
@@ -1424,7 +1424,7 @@ public class DBA4000
         }
         finally
         {
-            dba.close();
+            dba.dispose();
         }
     }
 }
