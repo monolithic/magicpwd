@@ -97,7 +97,7 @@ public class DBA4000
             boolean isUpdate = resultSet.next();
             resultSet.close();
 
-            dba.reset();
+            dba.reInit();
             dba.addTable(DBC3000.P30F0000);
             dba.addParam(DBC3000.P30F0002, Util.text2DB(value));
             dba.addParam(DBC3000.P30F0003, DBC3000.SQL_NOW, false);
@@ -430,7 +430,7 @@ public class DBA4000
             keys.setP30F010F(rest.getString(DBC3000.P30F010F));
 
             // 口令内容读取
-            dba.reset();
+            dba.reInit();
             dba.addTable(DBC3000.P30F0200);
             dba.addColumn(DBC3000.P30F0203);
             dba.addWhere(DBC3000.P30F0202, keys.getP30F0104());
@@ -575,7 +575,7 @@ public class DBA4000
         dba.addParam(DBC3000.P30F0A0F, DBC3000.P30F010F, false);
         dba.addWhere(DBC3000.P30F0104, keysHash);
         dba.addCopyBatch(DBC3000.P30F0A00, DBC3000.P30F0100);
-        dba.reset();
+        dba.reInit();
 
         dba.addParam(DBC3000.P30F0B01, hash);
         dba.addParam(DBC3000.P30F0B02, DBC3000.P30F0201, false);
@@ -583,7 +583,7 @@ public class DBA4000
         dba.addParam(DBC3000.P30F0B04, DBC3000.P30F0203, false);
         dba.addWhere(DBC3000.P30F0202, keysHash);
         dba.addCopyBatch(DBC3000.P30F0B00, DBC3000.P30F0200);
-        dba.reset();
+        dba.reInit();
     }
 
     /**
@@ -602,7 +602,7 @@ public class DBA4000
         dba.addTable(DBC3000.P30F0200);
         dba.addWhere(DBC3000.P30F0202, pwds.getP30F0104());
         dba.addDeleteBatch();
-        dba.reset();
+        dba.reInit();
     }
 
     /**
@@ -643,7 +643,7 @@ public class DBA4000
             dba.addInsertBatch();
         }
 
-        dba.reset();
+        dba.reInit();
     }
 
     public static void updateKeys(String c, String v, String k) throws SQLException
@@ -679,7 +679,7 @@ public class DBA4000
             dba.addParam(DBC3000.P30F0203, pwd.substring(t1, t2));
 
             dba.addInsertBatch();
-            dba.reset();
+            dba.reInit();
 
             t1 = t2;
             t2 += ConsEnv.PWDS_DATA_SIZE;
@@ -692,7 +692,7 @@ public class DBA4000
         dba.addParam(DBC3000.P30F0203, pwd.substring(t1));
 
         dba.addInsertBatch();
-        dba.reset();
+        dba.reInit();
     }
 
     public static boolean deleteKindData(String root, Kind item, int step)
@@ -709,7 +709,7 @@ public class DBA4000
             dba.addWhere(DBC3000.C2010104, item.getC2010103());
             dba.addUpdateBatch();
 
-            dba.reset();
+            dba.reInit();
 
             dba.addTable(DBC3000.C2010100);
             dba.addWhere(DBC3000.C2010103, item.getC2010103());
@@ -1262,14 +1262,14 @@ public class DBA4000
             dba.addParam(DBC3000.P30F010F, DBC3000.P30F0A0F, false);
             dba.addWhere(DBC3000.P30F0A01, logsHash);
             dba.addCopyBatch(DBC3000.P30F0100, DBC3000.P30F0A00);
-            dba.reset();
+            dba.reInit();
 
             dba.addParam(DBC3000.P30F0201, DBC3000.P30F0B02, false);
             dba.addParam(DBC3000.P30F0202, DBC3000.P30F0B03, false);
             dba.addParam(DBC3000.P30F0203, DBC3000.P30F0B04, false);
             dba.addWhere(DBC3000.P30F0B01, logsHash);
             dba.addCopyBatch(DBC3000.P30F0200, DBC3000.P30F0B00);
-            dba.reset();
+            dba.reInit();
 
             dba.executeBatch();
             return true;
@@ -1303,7 +1303,7 @@ public class DBA4000
             }
             dba.addDeleteBatch();
 
-            dba.reset();
+            dba.reInit();
             dba.addTable(DBC3000.P30F0B00);
             dba.addWhere(DBC3000.P30F0B03, keysHash);
             if (b)
@@ -1356,7 +1356,7 @@ public class DBA4000
             keys.setP30F010E(rest.getString(DBC3000.P30F0A0E));
             keys.setP30F010F(rest.getString(DBC3000.P30F0A0F));
 
-            dba.reset();
+            dba.reInit();
             dba.addTable(DBC3000.P30F0B00);
             dba.addColumn(DBC3000.P30F0B04);
             dba.addWhere(DBC3000.P30F0B01, logsHash);
