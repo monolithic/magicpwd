@@ -166,7 +166,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
             case signIn:
             {
                 // 设置软件界面风格
-                showPtn(MpwdMdl.getAppView());
+                showNextPtn(MpwdMdl.getAppView());
 
                 initView();
                 initLang();
@@ -180,7 +180,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
             case signUp:
             {
                 // 设置软件界面风格
-                showPtn(MpwdMdl.getAppView());
+                showNextPtn(MpwdMdl.getAppView());
 
                 initView();
                 initLang();
@@ -211,7 +211,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
             }
         }
 
-        showPtn(nextPtn);
+        showNextPtn(nextPtn);
 
         javax.swing.JFrame currForm = getCurrPtn();
         if (currForm.getState() != java.awt.Frame.NORMAL)
@@ -222,29 +222,30 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
         return true;
     }
 
-    private void showPtn(AppView view)
+    private void showNextPtn(AppView nextPtn)
     {
-        switch (view)
+        switch (nextPtn)
         {
             case mexp:
                 showMpwdPtn();
-                return;
+                break;
             case mwiz:
                 showMwizPtn();
-                return;
+                break;
             case mpad:
                 showMpadPtn();
-                return;
+                break;
             case maoc:
                 showMaocPtn();
-                return;
+                break;
             case mruc:
                 showMrucPtn();
-                return;
+                break;
             case mgtd:
                 showMgtdPtn();
-                return;
+                break;
         }
+        currPtn = nextPtn;
     }
 
     public void setVisible(boolean visible)
@@ -582,7 +583,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
     public void showViewPtn(AppView nextPtn)
     {
         // 显示登录
-        if (getCurrPtn() == null)
+        if (nextPtn == AppView.user)
         {
             userPtn = new UserPtn(userMdl, this);
             userPtn.setBackCall(this);
@@ -603,12 +604,10 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
             }
 
             getCurrPtn().setVisible(false);
-            showViewPtn(nextPtn);
-            currPtn = nextPtn;
+            showNextPtn(nextPtn);
             return;
         }
 
-        TrayPtn.nextPtn = nextPtn;
         getUserPtn(AuthLog.signRs, this);
     }
 

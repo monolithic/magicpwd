@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2011 Amon
+ *  Copyright (C) 2011 Aven
  * 
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -14,45 +14,12 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd._enum;
+package com.magicpwd._user;
 
 /**
  *
- * @author Amon
+ * @author Aven
  */
-public enum AppView
+public class SignIn extends javax.swing.JPanel
 {
-
-    /**
-     * 用户登录
-     */
-    user,
-    /**
-     * 专家模式
-     */
-    mexp,
-    /**
-     * 向导模式
-     */
-    mwiz,
-    /**
-     * 记事模式
-     */
-    mpad,
-    /**
-     * 命令模式
-     */
-    mcmd,
-    /**
-     * 数值运算
-     */
-    maoc,
-    /**
-     * 单位换算
-     */
-    mruc,
-    /**
-     * 计划任务
-     */
-    mgtd
 }
