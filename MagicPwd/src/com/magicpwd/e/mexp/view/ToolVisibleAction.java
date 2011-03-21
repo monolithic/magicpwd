@@ -17,6 +17,7 @@
 package com.magicpwd.e.mexp.view;
 
 import com.magicpwd.__a.mexp.AMexpAction;
+import com.magicpwd._enum.AppView;
 
 /**
  *
@@ -32,7 +33,7 @@ public class ToolVisibleAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !mpwdPtn.getUserMdl().isToolVisible("mpwd");
+        boolean b = !mpwdPtn.getUserMdl().isToolVisible(AppView.mexp);
         mpwdPtn.setToolVisible(b);
         mpwdPtn.pack();
     }
@@ -40,7 +41,7 @@ public class ToolVisibleAction extends AMexpAction
     @Override
     public void doInit(String value)
     {
-        setSelected(mpwdPtn.getUserMdl().isToolVisible("mpwd"));
+        setSelected(mpwdPtn.getUserMdl().isToolVisible(AppView.mexp));
     }
 
     @Override

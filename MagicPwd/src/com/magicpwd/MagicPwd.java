@@ -91,7 +91,7 @@ public class MagicPwd
                     // 扩展皮肤加载
                     Skin.loadLook(userMdl);
 
-                    trayPtn.showViewPtn(AppView.mexp);
+                    trayPtn.showViewPtn(AppView.user);
                 }
             });
         }

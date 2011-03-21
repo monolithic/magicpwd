@@ -48,6 +48,7 @@ import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Card;
 import com.magicpwd._util.Char;
@@ -107,7 +108,7 @@ public class MexpPtn extends AMpwdPtn
         setJMenuBar(menuBar);
 
         toolBar = new javax.swing.JToolBar();
-        getContentPane().add(toolBar, userMdl.getToolLoc("mexp"));
+        getContentPane().add(toolBar, userMdl.getToolLoc(AppView.mexp));
 
         getContentPane().add(pl_KeysBase);
 
@@ -200,7 +201,7 @@ public class MexpPtn extends AMpwdPtn
         setMenuVisible(userMdl.isMenuVisible());
 
         // 工具栏
-        setToolVisible(userMdl.isToolVisible("mexp"));
+        setToolVisible(userMdl.isToolVisible(AppView.mexp));
 
         // 搜索栏
         mainFind.initData();
@@ -505,7 +506,7 @@ public class MexpPtn extends AMpwdPtn
     public void setToolVisible(boolean visible)
     {
         toolBar.setVisible(visible);
-        userMdl.setToolVisible("mexp", visible);
+        userMdl.setToolVisible(AppView.mexp, visible);
     }
 
     public javax.swing.tree.TreePath getSelectedKindValue()
