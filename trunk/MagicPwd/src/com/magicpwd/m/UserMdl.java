@@ -18,6 +18,7 @@ package com.magicpwd.m;
 
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Logs;
@@ -134,18 +135,18 @@ public final class UserMdl
     /**
      * @return the toolViw
      */
-    public boolean isToolVisible(String viewPtn)
+    public boolean isToolVisible(AppView view)
     {
-        return ConsCfg.DEF_TRUE.equalsIgnoreCase(userCfg.getProperty(Char.format(ConsCfg.CFG_VIEW_TOOL, viewPtn)));
+        return ConsCfg.DEF_TRUE.equalsIgnoreCase(userCfg.getProperty(Char.format(ConsCfg.CFG_VIEW_TOOL, view.name())));
     }
 
     /**
      * @param visible
      *            the toolViw to set
      */
-    public void setToolVisible(String viewPtn, boolean visible)
+    public void setToolVisible(AppView view, boolean visible)
     {
-        userCfg.setProperty(Char.format(ConsCfg.CFG_VIEW_TOOL, viewPtn), visible ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
+        userCfg.setProperty(Char.format(ConsCfg.CFG_VIEW_TOOL, view.name()), visible ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
     /**
@@ -185,18 +186,18 @@ public final class UserMdl
     /**
      * @return the toolLoc
      */
-    public String getToolLoc(String viewPtn)
+    public String getToolLoc(AppView view)
     {
-        return userCfg.getProperty(Char.format(ConsCfg.CFG_VIEW_TOOL_LOC, viewPtn), "North");
+        return userCfg.getProperty(Char.format(ConsCfg.CFG_VIEW_TOOL_LOC, view.name()), "North");
     }
 
     /**
      * @param toolLoc
      *            the toolLoc to set
      */
-    public void setToolLoc(String viewPtn, String toolLoc)
+    public void setToolLoc(AppView view, String toolLoc)
     {
-        userCfg.setProperty(Char.format(ConsCfg.CFG_VIEW_TOOL_LOC, viewPtn), toolLoc);
+        userCfg.setProperty(Char.format(ConsCfg.CFG_VIEW_TOOL_LOC, view.name()), toolLoc);
     }
 
     /**
