@@ -327,6 +327,13 @@
             <action id="menu-visible" class="com.magicpwd.e.mexp.view.MenuVisibleAction" />
         </item>
         <seperator />
+        <item type="normal" tips="$P30F7B07" tips-def="退出">
+            <icon>
+                <default id="file-help" path="var:file-exit"/>
+            </icon>
+            <action id="exit-system" class="com.magicpwd.e.mexp.file.ExitAction" />
+        </item>
+        <seperator />
         <item type="normal" tips="$P30F7B07" tips-def="帮助">
             <icon>
                 <default id="file-help" path="var:help-topic"/>
