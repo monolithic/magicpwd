@@ -53,9 +53,9 @@ public abstract class AFileBean extends AEditBean
     private WTextBox dataBox;
     private static java.util.HashMap<String, String> extList;
 
-    public AFileBean(AMpwdPtn formPtn)
+    public AFileBean(AMpwdPtn mpwdPtn)
     {
-        this.formPtn = formPtn;
+        this.formPtn = mpwdPtn;
         extList = new java.util.HashMap<String, String>();
     }
 

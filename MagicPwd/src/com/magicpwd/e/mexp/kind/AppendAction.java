@@ -36,7 +36,7 @@ public class AppendAction extends AMexpAction implements IBackCall<Kind>
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        javax.swing.tree.TreePath path = mpwdPtn.getSelectedKindValue();
+        javax.swing.tree.TreePath path = mexpPtn.getSelectedKindValue();
         if (path == null)
         {
             return;
@@ -48,7 +48,7 @@ public class AppendAction extends AMexpAction implements IBackCall<Kind>
             return;
         }
 
-        KindDlg kindDlg = new KindDlg(mpwdPtn, this);
+        KindDlg kindDlg = new KindDlg(mexpPtn, this);
         kindDlg.initView();
         kindDlg.initLang();
         kindDlg.initData(null);
@@ -70,7 +70,7 @@ public class AppendAction extends AMexpAction implements IBackCall<Kind>
     {
         if (OPTIONS_APPLY.equalsIgnoreCase(options))
         {
-            mpwdPtn.appendKindBySelected(object);
+            mexpPtn.appendKindBySelected(object);
             return true;
         }
         return false;

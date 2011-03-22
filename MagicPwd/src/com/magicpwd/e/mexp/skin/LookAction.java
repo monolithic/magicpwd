@@ -41,9 +41,9 @@ public class LookAction extends AMexpAction
             return;
         }
 
-        mpwdPtn.getUserMdl().setLook(command);
+        mexpPtn.getUserMdl().setLook(command);
 
-        Lang.showMesg(mpwdPtn, LangRes.P30FAA1B, "新外观将在重启后生效！\n注意：一些外观可能造成性能问题，如果您觉得所选择的外观使系统运行变慢，\n　　　请选择使用“默认”或“系统”外观！");
+        Lang.showMesg(mexpPtn, LangRes.P30FAA1B, "新外观将在重启后生效！\n注意：一些外观可能造成性能问题，如果您觉得所选择的外观使系统运行变慢，\n　　　请选择使用“默认”或“系统”外观！");
     }
 
     @Override

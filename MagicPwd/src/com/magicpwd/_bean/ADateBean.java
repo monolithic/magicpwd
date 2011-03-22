@@ -38,9 +38,9 @@ public abstract class ADateBean extends AEditBean
     private WTextBox dataBox;
     private java.text.DateFormat format;
 
-    public ADateBean(AMpwdPtn formPtn)
+    public ADateBean(AMpwdPtn mpwdPtn)
     {
-        this.formPtn = formPtn;
+        this.formPtn = mpwdPtn;
     }
 
     protected void initConfView()

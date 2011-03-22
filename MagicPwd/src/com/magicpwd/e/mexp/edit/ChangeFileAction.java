@@ -33,7 +33,7 @@ public class ChangeFileAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mpwdPtn.changeBean(ConsDat.INDX_FILE);
+        mexpPtn.changeBean(ConsDat.INDX_FILE);
     }
 
     @Override

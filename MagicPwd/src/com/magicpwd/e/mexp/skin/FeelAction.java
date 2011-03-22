@@ -32,7 +32,7 @@ public class FeelAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mpwdPtn.getUserMdl().setFeel(e.getActionCommand());
+        mexpPtn.getUserMdl().setFeel(e.getActionCommand());
     }
 
     @Override

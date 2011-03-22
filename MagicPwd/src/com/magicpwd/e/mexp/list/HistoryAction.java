@@ -33,12 +33,12 @@ public class HistoryAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        Object obj = mpwdPtn.getSelectedListValue();
+        Object obj = mexpPtn.getSelectedListValue();
         if (obj == null || !(obj instanceof Keys))
         {
             return;
         }
-        mpwdPtn.showHistory();
+        mexpPtn.showHistory();
     }
 
     @Override

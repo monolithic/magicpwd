@@ -32,7 +32,7 @@ public class ForwardAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mpwdPtn.forwardSelectedKind();
+        mexpPtn.forwardSelectedKind();
     }
 
     @Override

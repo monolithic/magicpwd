@@ -39,10 +39,10 @@ public class SrcViewer extends ADialog implements IDocsViewer, Runnable
     private AMpwdPtn formPtn;
     private java.io.File srcFile;
 
-    public SrcViewer(AMpwdPtn formPtn)
+    public SrcViewer(AMpwdPtn mpwdPtn)
     {
-        super(formPtn, true);
-        this.formPtn = formPtn;
+        super(mpwdPtn, true);
+        this.formPtn = mpwdPtn;
     }
 
     public void init()

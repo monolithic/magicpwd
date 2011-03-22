@@ -30,14 +30,14 @@ import com.magicpwd._util.Lang;
 public class KindDlg extends ADialog
 {
 
-    private MexpPtn mpwdPtn;
+    private MexpPtn mexpPtn;
     private IBackCall<Kind> backCall;
     private Kind kind;
 
-    public KindDlg(MexpPtn mpwdPtn, IBackCall<Kind> backCall)
+    public KindDlg(MexpPtn mexpPtn, IBackCall<Kind> backCall)
     {
-        super(mpwdPtn, true);
-        this.mpwdPtn = mpwdPtn;
+        super(mexpPtn, true);
+        this.mexpPtn = mexpPtn;
         this.backCall = backCall;
     }
 
@@ -172,7 +172,7 @@ public class KindDlg extends ADialog
         processEscape();
 
         this.pack();
-        Bean.centerForm(this, mpwdPtn);
+        Bean.centerForm(this, mexpPtn);
     }
 
     @Override

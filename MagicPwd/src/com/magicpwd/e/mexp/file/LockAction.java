@@ -32,7 +32,7 @@ public class LockAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mpwdPtn.lockFrame();
+        mexpPtn.lockFrame();
     }
 
     @Override

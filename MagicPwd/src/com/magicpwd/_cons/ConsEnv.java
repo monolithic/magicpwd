@@ -42,7 +42,7 @@ public interface ConsEnv
     /**
      * 软件信息：软件首页
      */
-    String HOMEPAGE = "http://magicpwd.com/";
+    String HOMEPAGE = "http://magicpwd.com/?am";
     String BLOGSITE = "http://magicpwd.com/wlog/";
     String MLOGSITE = "http://t.sina.com.cn/mpwd";
     /**

@@ -32,7 +32,7 @@ public class SaveAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mpwdPtn.saveKeys();
+        mexpPtn.saveKeys();
     }
 
     @Override

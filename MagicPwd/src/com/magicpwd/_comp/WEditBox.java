@@ -28,14 +28,14 @@ import com.magicpwd.v.mexp.MexpPtn;
 public class WEditBox extends javax.swing.JPanel
 {
 
-    private IMexpBean mpwdBean;
+    private IMexpBean mexpBean;
     private MexpPtn mainPtn;
     private boolean metaData;
 
     public WEditBox(MexpPtn mainPtn, IMexpBean bean, boolean meta)
     {
         this.mainPtn = mainPtn;
-        mpwdBean = bean;
+        mexpBean = bean;
         metaData = meta;
     }
 
@@ -49,7 +49,7 @@ public class WEditBox extends javax.swing.JPanel
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                mpwdBean.dropDataActionPerformed(evt);
+                mexpBean.dropDataActionPerformed(evt);
             }
         });
 
@@ -61,7 +61,7 @@ public class WEditBox extends javax.swing.JPanel
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                mpwdBean.saveDataActionPerformed(evt);
+                mexpBean.saveDataActionPerformed(evt);
             }
         });
 
@@ -73,7 +73,7 @@ public class WEditBox extends javax.swing.JPanel
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                mpwdBean.copyDataActionPerformed(evt);
+                mexpBean.copyDataActionPerformed(evt);
             }
         });
 

@@ -41,9 +41,9 @@ public abstract class AMailBean extends AEditBean
 
     private WTextBox dataBox;
 
-    public AMailBean(AMpwdPtn formPtn)
+    public AMailBean(AMpwdPtn mpwdPtn)
     {
-        this.formPtn = formPtn;
+        this.formPtn = mpwdPtn;
     }
 
     protected void initConfView()

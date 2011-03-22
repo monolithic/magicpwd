@@ -32,15 +32,15 @@ public class InfoVisibleAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !mpwdPtn.getUserMdl().isInfoVisible();
-        mpwdPtn.setInfoVisible(b);
-        mpwdPtn.pack();
+        boolean b = !mexpPtn.getUserMdl().isInfoVisible();
+        mexpPtn.setInfoVisible(b);
+        mexpPtn.pack();
     }
 
     @Override
     public void doInit(String value)
     {
-        setSelected(mpwdPtn.getUserMdl().isInfoVisible());
+        setSelected(mexpPtn.getUserMdl().isInfoVisible());
     }
 
     @Override

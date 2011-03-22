@@ -44,10 +44,10 @@ public class ImportByKeysAction extends AMexpAction implements IBackCall<UserDto
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        javax.swing.tree.TreePath path = mpwdPtn.getSelectedKindValue();
+        javax.swing.tree.TreePath path = mexpPtn.getSelectedKindValue();
         if (path == null)
         {
-            Lang.showMesg(mpwdPtn, LangRes.P30F7A02, "");
+            Lang.showMesg(mexpPtn, LangRes.P30F7A02, "");
             return;
         }
 
@@ -69,7 +69,7 @@ public class ImportByKeysAction extends AMexpAction implements IBackCall<UserDto
     {
         if (AuthLog.signRs.name().equalsIgnoreCase(options))
         {
-            return mpwdPtn.importByKeys("");
+            return mexpPtn.importByKeys("");
         }
         return false;
     }

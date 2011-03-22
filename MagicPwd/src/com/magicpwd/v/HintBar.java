@@ -100,7 +100,7 @@ public class HintBar extends javax.swing.JPanel
         hintMdl = new HintMdl(userMdl);
         hintMdl.initData();
 
-        Task.registerAction(new TaskInfo(0, 1, "mpwd-hint", ""), new IBackCall<TaskInfo>()
+        Task.registerAction(new TaskInfo(0, 1, "mexp-hint", ""), new IBackCall<TaskInfo>()
         {
 
             @Override

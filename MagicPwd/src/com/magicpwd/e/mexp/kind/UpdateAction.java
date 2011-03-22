@@ -36,7 +36,7 @@ public class UpdateAction extends AMexpAction implements IBackCall<Kind>
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        javax.swing.tree.TreePath path = mpwdPtn.getSelectedKindValue();
+        javax.swing.tree.TreePath path = mexpPtn.getSelectedKindValue();
         if (path == null)
         {
             return;
@@ -54,7 +54,7 @@ public class UpdateAction extends AMexpAction implements IBackCall<Kind>
             return;
         }
 
-        KindDlg kindDlg = new KindDlg(mpwdPtn, this);
+        KindDlg kindDlg = new KindDlg(mexpPtn, this);
         kindDlg.initView();
         kindDlg.initLang();
         kindDlg.initData((Kind) node.getUserObject());
@@ -76,7 +76,7 @@ public class UpdateAction extends AMexpAction implements IBackCall<Kind>
     {
         if (OPTIONS_APPLY.equalsIgnoreCase(options))
         {
-            mpwdPtn.updateKindBySelected(object);
+            mexpPtn.updateKindBySelected(object);
             return true;
         }
         return false;

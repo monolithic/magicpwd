@@ -33,7 +33,7 @@ public class InfoAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mpwdPtn.showOptions(ConsEnv.PROP_INFO);
+        mexpPtn.showOptions(ConsEnv.PROP_INFO);
     }
 
     @Override

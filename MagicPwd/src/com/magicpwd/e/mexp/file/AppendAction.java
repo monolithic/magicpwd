@@ -33,12 +33,12 @@ public class AppendAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (!mpwdPtn.newKeys())
+        if (!mexpPtn.newKeys())
         {
             return;
         }
 
-        if (mpwdPtn.getUserMdl().isEditVisible())
+        if (mexpPtn.getUserMdl().isEditVisible())
         {
             return;
         }
@@ -49,15 +49,15 @@ public class AppendAction extends AMexpAction
             String[] arr = cmd.split(",");
             if (arr != null && arr.length == 2)
             {
-                mpwdPtn.getMenuPtn().getButton(arr[0]).setSelected(true);
-                mpwdPtn.getMenuPtn().getButton(arr[1]).setSelected(true);
+                mexpPtn.getMenuPtn().getButton(arr[0]).setSelected(true);
+                mexpPtn.getMenuPtn().getButton(arr[1]).setSelected(true);
             }
         }
 
-        mpwdPtn.getUserMdl().setEditVisible(true);
-        mpwdPtn.getUserMdl().setEditIsolate(true);
+        mexpPtn.getUserMdl().setEditVisible(true);
+        mexpPtn.getUserMdl().setEditIsolate(true);
 
-        mpwdPtn.setEditVisible(true);
+        mexpPtn.setEditVisible(true);
     }
 
     @Override

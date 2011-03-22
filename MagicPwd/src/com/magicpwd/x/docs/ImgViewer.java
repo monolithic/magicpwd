@@ -35,10 +35,10 @@ public class ImgViewer extends ADialog implements IDocsViewer
     private AMpwdPtn formPtn;
     private java.io.File imgFile;
 
-    public ImgViewer(AMpwdPtn formPtn)
+    public ImgViewer(AMpwdPtn mpwdPtn)
     {
-        super(formPtn, true);
-        this.formPtn = formPtn;
+        super(mpwdPtn, true);
+        this.formPtn = mpwdPtn;
     }
 
     @Override

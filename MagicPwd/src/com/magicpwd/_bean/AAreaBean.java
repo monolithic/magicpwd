@@ -29,9 +29,9 @@ public abstract class AAreaBean extends AEditBean
 
     private WTextBox dataBox;
 
-    public AAreaBean(AMpwdPtn formPtn)
+    public AAreaBean(AMpwdPtn mpwdPtn)
     {
-        this.formPtn = formPtn;
+        this.formPtn = mpwdPtn;
     }
 
     protected void initConfView()

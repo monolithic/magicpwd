@@ -47,9 +47,9 @@ public abstract class APwdsBean extends AEditBean
 
     private boolean askOverWrite;
 
-    public APwdsBean(AMpwdPtn formPtn)
+    public APwdsBean(AMpwdPtn mpwdPtn)
     {
-        this.formPtn = formPtn;
+        this.formPtn = mpwdPtn;
     }
 
     protected void initConfView()

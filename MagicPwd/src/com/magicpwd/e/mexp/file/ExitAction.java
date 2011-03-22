@@ -34,22 +34,22 @@ public class ExitAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (mpwdPtn.gridModified())
+        if (mexpPtn.gridModified())
         {
-            if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mpwdPtn, LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
+            if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mexpPtn, LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
             {
                 return;
             }
         }
         else
         {
-            if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mpwdPtn, LangRes.P30F1A04, "确认要退出吗？"))
+            if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mexpPtn, LangRes.P30F1A04, "确认要退出吗？"))
             {
                 return;
             }
         }
 
-        mpwdPtn.setVisible(false);
+        mexpPtn.setVisible(false);
         trayPtn.endExit(0);
     }
 

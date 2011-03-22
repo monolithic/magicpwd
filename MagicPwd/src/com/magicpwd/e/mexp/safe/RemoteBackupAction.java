@@ -36,7 +36,7 @@ public class RemoteBackupAction extends AMexpAction implements IBackCall<String>
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mpwdPtn, LangRes.P30F7A40, "确认要执行备份数据到云端的操作吗，此操作将需要一定的时间？"))
+        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mexpPtn, LangRes.P30F7A40, "确认要执行备份数据到云端的操作吗，此操作将需要一定的时间？"))
         {
             return;
         }
@@ -70,28 +70,28 @@ public class RemoteBackupAction extends AMexpAction implements IBackCall<String>
 
     private void doBackup()
     {
-        mpwdPtn.showProgress();
+        mexpPtn.showProgress();
 
         try
         {
-            boolean b = mpwdPtn.remoteBackup(this);
-            mpwdPtn.hideProgress();
+            boolean b = mexpPtn.remoteBackup(this);
+            mexpPtn.hideProgress();
 
             if (b)
             {
-                Lang.showMesg(mpwdPtn, LangRes.P30F7A3D, "恭喜，数据备份成功！");
+                Lang.showMesg(mexpPtn, LangRes.P30F7A3D, "恭喜，数据备份成功！");
             }
             else
             {
-                Lang.showMesg(mpwdPtn, LangRes.P30F7A3C, "数据备份失败，请重启软件后重试！");
+                Lang.showMesg(mexpPtn, LangRes.P30F7A3C, "数据备份失败，请重启软件后重试！");
             }
         }
         catch (Exception exp)
         {
-            mpwdPtn.hideProgress();
+            mexpPtn.hideProgress();
 
             Logs.exception(exp);
-            Lang.showMesg(mpwdPtn, null, exp.getLocalizedMessage());
+            Lang.showMesg(mexpPtn, null, exp.getLocalizedMessage());
         }
     }
 }

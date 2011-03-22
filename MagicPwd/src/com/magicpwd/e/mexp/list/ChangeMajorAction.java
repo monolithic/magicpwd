@@ -37,12 +37,12 @@ public class ChangeMajorAction extends AMexpAction
         String command = e.getActionCommand();
         int val = Char.isValidateInteger(command) ? Integer.parseInt(command) : 0;
 
-        Object obj = mpwdPtn.getSelectedListValue();
+        Object obj = mexpPtn.getSelectedListValue();
         if (obj instanceof Keys)
         {
             ((Keys) obj).setP30F0103(val);
         }
-        mpwdPtn.changeMajor(val);
+        mexpPtn.changeMajor(val);
     }
 
     @Override

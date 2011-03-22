@@ -33,7 +33,7 @@ public class PasswordAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mpwdPtn.showOptions(ConsEnv.PROP_CHAR);
+        mexpPtn.showOptions(ConsEnv.PROP_CHAR);
     }
 
     @Override

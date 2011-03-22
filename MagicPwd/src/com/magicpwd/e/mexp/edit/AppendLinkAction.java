@@ -33,7 +33,7 @@ public class AppendLinkAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mpwdPtn.appendBean(ConsDat.INDX_LINK);
+        mexpPtn.appendBean(ConsDat.INDX_LINK);
     }
 
     @Override

@@ -34,9 +34,9 @@ public class DropAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (Lang.showFirm(mpwdPtn, LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
+        if (Lang.showFirm(mexpPtn, LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
         {
-            mpwdPtn.removeSelectedItem();
+            mexpPtn.removeSelectedItem();
         }
     }
 

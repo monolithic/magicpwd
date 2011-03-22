@@ -33,7 +33,7 @@ public class ChangeMailAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mpwdPtn.changeBean(ConsDat.INDX_MAIL);
+        mexpPtn.changeBean(ConsDat.INDX_MAIL);
     }
 
     @Override

@@ -33,7 +33,7 @@ public class DemotionAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mpwdPtn.demotionSelectedKind();
+        mexpPtn.demotionSelectedKind();
     }
 
     @Override

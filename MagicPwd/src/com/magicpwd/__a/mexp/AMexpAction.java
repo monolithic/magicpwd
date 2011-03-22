@@ -27,11 +27,11 @@ import com.magicpwd.v.mexp.MexpPtn;
 public abstract class AMexpAction extends AAction implements IMexpAction
 {
 
-    protected MexpPtn mpwdPtn;
+    protected MexpPtn mexpPtn;
 
     @Override
-    public void setMainPtn(MexpPtn mpwdPtn)
+    public void setMainPtn(MexpPtn mexpPtn)
     {
-        this.mpwdPtn = mpwdPtn;
+        this.mexpPtn = mexpPtn;
     }
 }

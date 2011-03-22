@@ -33,9 +33,9 @@ import com.magicpwd.__a.AMpwdPtn;
 public abstract class AListBean extends AEditBean
 {
 
-    public AListBean(AMpwdPtn formPtn)
+    public AListBean(AMpwdPtn mpwdPtn)
     {
-        this.formPtn = formPtn;
+        this.formPtn = mpwdPtn;
     }
 
     protected void initConfView()

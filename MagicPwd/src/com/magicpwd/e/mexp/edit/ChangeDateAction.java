@@ -33,7 +33,7 @@ public class ChangeDateAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mpwdPtn.changeBean(ConsDat.INDX_DATE);
+        mexpPtn.changeBean(ConsDat.INDX_DATE);
     }
 
     @Override

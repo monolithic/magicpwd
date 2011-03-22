@@ -33,9 +33,9 @@ public class MenuVisibleAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !mpwdPtn.getUserMdl().isMenuVisible();
-        mpwdPtn.setMenuVisible(b);
-        mpwdPtn.pack();
+        boolean b = !mexpPtn.getUserMdl().isMenuVisible();
+        mexpPtn.setMenuVisible(b);
+        mexpPtn.pack();
 
         String cmd = e.getActionCommand();
         if (Char.isValidate(cmd))
@@ -43,7 +43,7 @@ public class MenuVisibleAction extends AMexpAction
             javax.swing.AbstractButton button;
             for (String tmp : cmd.split(","))
             {
-                button = mpwdPtn.getMenuPtn().getButton(tmp);
+                button = mexpPtn.getMenuPtn().getButton(tmp);
                 if (button != null)
                 {
                     button.setSelected(b);
@@ -55,7 +55,7 @@ public class MenuVisibleAction extends AMexpAction
     @Override
     public void doInit(String value)
     {
-        setSelected(mpwdPtn.getUserMdl().isMenuVisible());
+        setSelected(mexpPtn.getUserMdl().isMenuVisible());
     }
 
     @Override

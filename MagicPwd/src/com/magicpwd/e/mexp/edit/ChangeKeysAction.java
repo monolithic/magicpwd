@@ -33,7 +33,7 @@ public class ChangeKeysAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mpwdPtn.changeBean(ConsDat.INDX_PWDS);
+        mexpPtn.changeBean(ConsDat.INDX_PWDS);
     }
 
     @Override

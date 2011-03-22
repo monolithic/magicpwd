@@ -33,7 +33,7 @@ public class ChangeListAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mpwdPtn.changeBean(ConsDat.INDX_LIST);
+        mexpPtn.changeBean(ConsDat.INDX_LIST);
     }
 
     @Override

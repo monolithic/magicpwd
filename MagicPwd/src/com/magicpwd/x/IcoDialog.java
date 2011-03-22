@@ -40,10 +40,10 @@ public class IcoDialog extends javax.swing.JDialog
     private AMpwdPtn formPtn;
     private IBackCall<String> backCall;
 
-    public IcoDialog(AMpwdPtn formPtn, IBackCall<String> backCall)
+    public IcoDialog(AMpwdPtn mpwdPtn, IBackCall<String> backCall)
     {
-        super(formPtn, true);
-        this.formPtn = formPtn;
+        super(mpwdPtn, true);
+        this.formPtn = mpwdPtn;
         this.backCall = backCall;
         this.iconPath = Util.icoPath;
     }

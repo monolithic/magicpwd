@@ -40,14 +40,14 @@ public class RecordConfigAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        UserMdl userMdl = mpwdPtn.getUserMdl();
+        UserMdl userMdl = mexpPtn.getUserMdl();
         userMdl.setIncBack(!userMdl.isIncBack());
     }
 
     @Override
     public void doInit(String value)
     {
-        setSelected(mpwdPtn.getUserMdl().isIncBack());
+        setSelected(mexpPtn.getUserMdl().isIncBack());
     }
 
     @Override

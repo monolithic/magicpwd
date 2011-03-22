@@ -37,12 +37,12 @@ public class ChangeLabelAction extends AMexpAction
         String command = e.getActionCommand();
         int val = Char.isValidateInteger(command) ? Integer.parseInt(command) : 0;
 
-        Object obj = mpwdPtn.getSelectedListValue();
+        Object obj = mexpPtn.getSelectedListValue();
         if (obj instanceof Keys)
         {
             ((Keys) obj).setP30F0102(val);
         }
-        mpwdPtn.changeLabel(val);
+        mexpPtn.changeLabel(val);
     }
 
     @Override
