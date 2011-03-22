@@ -183,4 +183,14 @@ public final class MpwdMdl
         }
         this.bakPath = bakPath;
     }
+
+    public String getViewList()
+    {
+        return mpwdCfg.getProperty("view.list", "");
+    }
+
+    public String getViewLast()
+    {
+        return mpwdCfg.getProperty("view.last", "");
+    }
 }

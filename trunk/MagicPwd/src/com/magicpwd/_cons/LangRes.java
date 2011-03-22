@@ -813,6 +813,12 @@ public interface LangRes
     String P30FA104 = "P30FA104";// 关键搜索
     String P30FA105 = "P30FA105";// 过期日期
     String P30FA106 = "P30FA106";// 过期提示
+    String P30FA107 = "P30FA107";// 过期提示
+    String P30FA108 = "P30FA108";// 过期提示
+    String P30FA109 = "P30FA109";// 过期提示
+    String P30FA10A = "P30FA10A";// 过期提示
+    String P30FA10B = "P30FA10B";// 过期提示
+    String P30FA10C = "P30FA10C";// 过期提示
     // ----------------------------------------------------
     // 2 标题语言资源
     // ----------------------------------------------------
