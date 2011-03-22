@@ -33,8 +33,8 @@ public class SortDirAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mpwdPtn.getUserMdl().setCfg(ConsCfg.CFG_VIEW_LIST_ASC, e.getActionCommand());
-        mpwdPtn.findLast();
+        mexpPtn.getUserMdl().setCfg(ConsCfg.CFG_VIEW_LIST_ASC, e.getActionCommand());
+        mexpPtn.findLast();
     }
 
     @Override

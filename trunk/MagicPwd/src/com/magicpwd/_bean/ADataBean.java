@@ -34,9 +34,9 @@ import com.magicpwd.v.MenuPtn;
 public abstract class ADataBean extends AEditBean
 {
 
-    public ADataBean(AMpwdPtn formPtn)
+    public ADataBean(AMpwdPtn mpwdPtn)
     {
-        this.formPtn = formPtn;
+        this.formPtn = mpwdPtn;
     }
 
     protected void initConfView()

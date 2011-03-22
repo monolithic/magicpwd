@@ -33,7 +33,7 @@ public class AppendSignAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mpwdPtn.appendBean(ConsDat.INDX_SIGN);
+        mexpPtn.appendBean(ConsDat.INDX_SIGN);
     }
 
     @Override

@@ -259,7 +259,7 @@ public final class Connect
         Properties prop = new Properties();
         if (MpwdMdl.getRunMode() == RunMode.dev)
         {
-//            prop.setProperty("mail.debug", "true");
+            prop.setProperty("mail.debug", "true");
         }
         prop.setProperty("username", getUsername());
         prop.setProperty("password", getPassword());

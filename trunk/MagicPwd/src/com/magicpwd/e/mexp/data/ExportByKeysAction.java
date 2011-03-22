@@ -44,10 +44,10 @@ public class ExportByKeysAction extends AMexpAction implements IBackCall<UserDto
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        javax.swing.tree.TreePath path = mpwdPtn.getSelectedKindValue();
+        javax.swing.tree.TreePath path = mexpPtn.getSelectedKindValue();
         if (path == null)
         {
-            Lang.showMesg(mpwdPtn, LangRes.P30F7A20, "请选择您要导出数据的类别信息！");
+            Lang.showMesg(mexpPtn, LangRes.P30F7A20, "请选择您要导出数据的类别信息！");
             return;
         }
 
@@ -69,7 +69,7 @@ public class ExportByKeysAction extends AMexpAction implements IBackCall<UserDto
     {
         if (AuthLog.signRs.name().equalsIgnoreCase(options))
         {
-            return mpwdPtn.exportByKeys("");
+            return mexpPtn.exportByKeys("");
         }
         return false;
     }

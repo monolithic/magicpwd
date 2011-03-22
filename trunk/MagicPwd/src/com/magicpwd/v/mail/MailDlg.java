@@ -41,10 +41,10 @@ public class MailDlg extends ADialog
     private IBackCall<String> backCall;
     private javax.swing.DefaultListModel lm_MailList;
 
-    public MailDlg(AMpwdPtn formPtn)
+    public MailDlg(AMpwdPtn mpwdPtn)
     {
-        super(formPtn, true);
-        this.formPtn = formPtn;
+        super(mpwdPtn, true);
+        this.formPtn = mpwdPtn;
     }
 
     public void initView()

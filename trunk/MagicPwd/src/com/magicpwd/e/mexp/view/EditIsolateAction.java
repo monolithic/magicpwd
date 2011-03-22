@@ -33,14 +33,14 @@ public class EditIsolateAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !mpwdPtn.getUserMdl().isEditIsolate();
-        mpwdPtn.setEditIsolate(b);
-        mpwdPtn.pack();
+        boolean b = !mexpPtn.getUserMdl().isEditIsolate();
+        mexpPtn.setEditIsolate(b);
+        mexpPtn.pack();
 
         String cmd = e.getActionCommand();
         if (Char.isValidate(cmd))
         {
-            javax.swing.AbstractButton button = mpwdPtn.getMenuPtn().getButton(cmd);
+            javax.swing.AbstractButton button = mexpPtn.getMenuPtn().getButton(cmd);
             if (button != null)
             {
                 button.setSelected(b);
@@ -51,8 +51,8 @@ public class EditIsolateAction extends AMexpAction
     @Override
     public void doInit(String value)
     {
-        setEnabled(mpwdPtn.getUserMdl().isEditVisible());
-        setSelected(mpwdPtn.getUserMdl().isEditIsolate());
+        setEnabled(mexpPtn.getUserMdl().isEditVisible());
+        setSelected(mexpPtn.getUserMdl().isEditIsolate());
     }
 
     @Override

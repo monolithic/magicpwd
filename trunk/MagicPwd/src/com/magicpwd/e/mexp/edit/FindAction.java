@@ -32,9 +32,9 @@ public class FindAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mpwdPtn.setFindVisible(true);
-        mpwdPtn.pack();
-        mpwdPtn.setFindFocused();
+        mexpPtn.setFindVisible(true);
+        mexpPtn.pack();
+        mexpPtn.setFindFocused();
     }
 
     @Override

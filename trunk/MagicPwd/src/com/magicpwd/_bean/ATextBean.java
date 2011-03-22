@@ -29,9 +29,9 @@ public abstract class ATextBean extends AEditBean
 
     private WTextBox dataBox;
 
-    public ATextBean(AMpwdPtn formPtn)
+    public ATextBean(AMpwdPtn mpwdPtn)
     {
-        this.formPtn = formPtn;
+        this.formPtn = mpwdPtn;
     }
 
     protected void initConfView()

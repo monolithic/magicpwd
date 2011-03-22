@@ -32,10 +32,10 @@ public class TxtViewer extends ADialog implements IDocsViewer
 
     private AMpwdPtn formPtn;
 
-    public TxtViewer(AMpwdPtn formPtn)
+    public TxtViewer(AMpwdPtn mpwdPtn)
     {
-        super(formPtn, true);
-        this.formPtn = formPtn;
+        super(mpwdPtn, true);
+        this.formPtn = mpwdPtn;
     }
 
     @Override

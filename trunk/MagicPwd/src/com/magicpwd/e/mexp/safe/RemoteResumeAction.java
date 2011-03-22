@@ -38,7 +38,7 @@ public class RemoteResumeAction extends AMexpAction implements IBackCall<String>
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mpwdPtn, LangRes.P30F7A41, "确认要执行从云端数据恢复的操作吗，此操作将需要一定的时间？"))
+        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mexpPtn, LangRes.P30F7A41, "确认要执行从云端数据恢复的操作吗，此操作将需要一定的时间？"))
         {
             return;
         }
@@ -76,34 +76,34 @@ public class RemoteResumeAction extends AMexpAction implements IBackCall<String>
             return false;
         }
 
-        mpwdPtn.showProgress();
+        mexpPtn.showProgress();
         doResume(object);
         return true;
     }
 
     private void doResume()
     {
-        mpwdPtn.showProgress();
+        mexpPtn.showProgress();
 
         java.util.List<S1S1> list = new java.util.ArrayList<S1S1>();
         try
         {
-            mpwdPtn.remoteDetect(list);
+            mexpPtn.remoteDetect(list);
         }
         catch (Exception exp)
         {
-            mpwdPtn.hideProgress();
+            mexpPtn.hideProgress();
 
             Logs.exception(exp);
-            Lang.showMesg(mpwdPtn, null, exp.getLocalizedMessage());
+            Lang.showMesg(mexpPtn, null, exp.getLocalizedMessage());
             return;
         }
 
         if (list.size() < 1)
         {
-            mpwdPtn.hideProgress();
+            mexpPtn.hideProgress();
 
-            Lang.showMesg(mpwdPtn, LangRes.P30F7A55, "没有发现可用的备份数据！");
+            Lang.showMesg(mexpPtn, LangRes.P30F7A55, "没有发现可用的备份数据！");
             return;
         }
 
@@ -113,9 +113,9 @@ public class RemoteResumeAction extends AMexpAction implements IBackCall<String>
             return;
         }
 
-        mpwdPtn.hideProgress();
+        mexpPtn.hideProgress();
 
-        DatDialog datDialog = new DatDialog(mpwdPtn, this);
+        DatDialog datDialog = new DatDialog(mexpPtn, this);
         datDialog.initView();
         datDialog.initLang();
         datDialog.initData();
@@ -127,24 +127,24 @@ public class RemoteResumeAction extends AMexpAction implements IBackCall<String>
     {
         try
         {
-            boolean b = mpwdPtn.remoteResume(sign, null);
-            mpwdPtn.hideProgress();
+            boolean b = mexpPtn.remoteResume(sign, null);
+            mexpPtn.hideProgress();
 
             if (b)
             {
-                Lang.showMesg(mpwdPtn, LangRes.P30F7A3F, "恭喜，数据恢复成功，您需要重新启动本程序！");
+                Lang.showMesg(mexpPtn, LangRes.P30F7A3F, "恭喜，数据恢复成功，您需要重新启动本程序！");
             }
             else
             {
-                Lang.showMesg(mpwdPtn, LangRes.P30F7A3E, "数据恢复失败，请重启软件后重试！");
+                Lang.showMesg(mexpPtn, LangRes.P30F7A3E, "数据恢复失败，请重启软件后重试！");
             }
         }
         catch (Exception ex)
         {
-            mpwdPtn.hideProgress();
+            mexpPtn.hideProgress();
 
             Logs.exception(ex);
-            Lang.showMesg(mpwdPtn, null, ex.getLocalizedMessage());
+            Lang.showMesg(mexpPtn, null, ex.getLocalizedMessage());
         }
         System.exit(0);
     }

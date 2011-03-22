@@ -26,5 +26,5 @@ import com.magicpwd.v.mexp.MexpPtn;
 public interface IMexpAction extends IAction
 {
 
-    void setMainPtn(MexpPtn mpwdPtn);
+    void setMainPtn(MexpPtn mexpPtn);
 }

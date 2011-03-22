@@ -33,7 +33,7 @@ public class TemplateAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mpwdPtn.showOptions(ConsEnv.PROP_TPLT);
+        mexpPtn.showOptions(ConsEnv.PROP_TPLT);
     }
 
     @Override

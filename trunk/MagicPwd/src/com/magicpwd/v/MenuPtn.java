@@ -985,10 +985,10 @@ public class MenuPtn
                                 }
                                 else if (action instanceof IMexpAction)
                                 {
-                                    IMexpAction mpwdAction = (IMexpAction) action;
-                                    mpwdAction.setTrayPtn(trayPtn);
-                                    mpwdAction.setMainPtn(trayPtn.getMexpPtn());
-                                    mpwdAction.doInit(actInit);
+                                    IMexpAction mexpAction = (IMexpAction) action;
+                                    mexpAction.setTrayPtn(trayPtn);
+                                    mexpAction.setMainPtn(trayPtn.getMexpPtn());
+                                    mexpAction.doInit(actInit);
                                 }
                                 else if (action instanceof IMwizAction)
                                 {

@@ -32,7 +32,7 @@ public class SelectPrevAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mpwdPtn.selectNext(-1, false);
+        mexpPtn.selectNext(-1, false);
     }
 
     @Override

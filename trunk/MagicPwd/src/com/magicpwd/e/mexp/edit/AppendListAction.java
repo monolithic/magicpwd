@@ -33,7 +33,7 @@ public class AppendListAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mpwdPtn.appendBean(ConsDat.INDX_LIST);
+        mexpPtn.appendBean(ConsDat.INDX_LIST);
     }
 
     @Override

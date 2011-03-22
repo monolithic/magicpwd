@@ -33,7 +33,7 @@ public class ChangeLinkAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mpwdPtn.changeBean(ConsDat.INDX_LINK);
+        mexpPtn.changeBean(ConsDat.INDX_LINK);
     }
 
     @Override

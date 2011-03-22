@@ -34,23 +34,23 @@ public class DeleteAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        Object object = mpwdPtn.getSelectedListValue();
+        Object object = mexpPtn.getSelectedListValue();
         if (object == null)
         {
             return;
         }
 
-        if (Lang.showFirm(mpwdPtn, LangRes.P30F7A0A, "您正在进行的操作是删除记录数据及其所有历史信息，确认继续么？") != javax.swing.JOptionPane.YES_OPTION)
+        if (Lang.showFirm(mexpPtn, LangRes.P30F7A0A, "您正在进行的操作是删除记录数据及其所有历史信息，确认继续么？") != javax.swing.JOptionPane.YES_OPTION)
         {
             return;
         }
-        if (Lang.showFirm(mpwdPtn, LangRes.P30F7A0B, "确认一下您操作的正确性，要返回么？") != javax.swing.JOptionPane.NO_OPTION)
+        if (Lang.showFirm(mexpPtn, LangRes.P30F7A0B, "确认一下您操作的正确性，要返回么？") != javax.swing.JOptionPane.NO_OPTION)
         {
             return;
         }
-        mpwdPtn.removeSelectedKeys();
-        mpwdPtn.clearGrid();
-        mpwdPtn.showPropInfo();
+        mexpPtn.removeSelectedKeys();
+        mexpPtn.clearGrid();
+        mexpPtn.showPropInfo();
     }
 
     @Override

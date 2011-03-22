@@ -33,7 +33,7 @@ public class AppendTextAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mpwdPtn.appendBean(ConsDat.INDX_TEXT);
+        mexpPtn.appendBean(ConsDat.INDX_TEXT);
     }
 
     @Override

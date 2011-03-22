@@ -32,9 +32,9 @@ public class TopsAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !mpwdPtn.getUserMdl().isTopMost();
-        mpwdPtn.setAlwaysOnTop(b);
-        mpwdPtn.getUserMdl().setTopMost(b);
+        boolean b = !mexpPtn.getUserMdl().isTopMost();
+        mexpPtn.setAlwaysOnTop(b);
+        mexpPtn.getUserMdl().setTopMost(b);
     }
 
     @Override

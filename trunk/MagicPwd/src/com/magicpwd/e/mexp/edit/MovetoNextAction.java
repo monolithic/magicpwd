@@ -32,7 +32,7 @@ public class MovetoNextAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mpwdPtn.movetoNext();
+        mexpPtn.movetoNext();
     }
 
     @Override

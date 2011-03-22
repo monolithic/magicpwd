@@ -33,7 +33,7 @@ public class AppendAreaAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mpwdPtn.appendBean(ConsDat.INDX_AREA);
+        mexpPtn.appendBean(ConsDat.INDX_AREA);
     }
 
     @Override

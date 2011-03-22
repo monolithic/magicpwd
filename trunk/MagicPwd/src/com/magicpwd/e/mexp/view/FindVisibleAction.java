@@ -32,15 +32,15 @@ public class FindVisibleAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !mpwdPtn.getUserMdl().isFindVisible();
-        mpwdPtn.setFindVisible(b);
-        mpwdPtn.pack();
+        boolean b = !mexpPtn.getUserMdl().isFindVisible();
+        mexpPtn.setFindVisible(b);
+        mexpPtn.pack();
     }
 
     @Override
     public void doInit(String value)
     {
-        setSelected(mpwdPtn.getUserMdl().isFindVisible());
+        setSelected(mexpPtn.getUserMdl().isFindVisible());
     }
 
     @Override

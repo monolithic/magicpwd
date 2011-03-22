@@ -65,12 +65,12 @@ public class RemoteConfigAction extends AMexpAction implements IBackCall<UserDto
             {
                 object.setUserType(object.getUserName() + '@' + object.getUserType());
             }
-            mpwdPtn.setCfgText("pop_mail", object.getUserType() + '\n' + object.getUserName() + '\n' + object.getUserPwds());
+            mexpPtn.setCfgText("pop_mail", object.getUserType() + '\n' + object.getUserName() + '\n' + object.getUserPwds());
         }
         catch (Exception ex)
         {
             Logs.exception(ex);
-            Lang.showMesg(mpwdPtn, null, ex.getLocalizedMessage());
+            Lang.showMesg(mexpPtn, null, ex.getLocalizedMessage());
         }
         return true;
     }

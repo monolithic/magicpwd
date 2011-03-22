@@ -33,15 +33,15 @@ public class ToolVisibleAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !mpwdPtn.getUserMdl().isToolVisible(AppView.mexp);
-        mpwdPtn.setToolVisible(b);
-        mpwdPtn.pack();
+        boolean b = !mexpPtn.getUserMdl().isToolVisible(AppView.mexp);
+        mexpPtn.setToolVisible(b);
+        mexpPtn.pack();
     }
 
     @Override
     public void doInit(String value)
     {
-        setSelected(mpwdPtn.getUserMdl().isToolVisible(AppView.mexp));
+        setSelected(mexpPtn.getUserMdl().isToolVisible(AppView.mexp));
     }
 
     @Override

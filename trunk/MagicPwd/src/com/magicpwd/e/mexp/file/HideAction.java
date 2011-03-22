@@ -32,7 +32,7 @@ public class HideAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mpwdPtn.hideFrame();
+        mexpPtn.hideFrame();
     }
 
     @Override

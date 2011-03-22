@@ -35,9 +35,9 @@ public abstract class ASignBean extends AEditBean implements IMexpBean
 
     private WTextBox dataBox;
 
-    public ASignBean(AMpwdPtn formPtn)
+    public ASignBean(AMpwdPtn mpwdPtn)
     {
-        this.formPtn = formPtn;
+        this.formPtn = mpwdPtn;
     }
 
     protected void initConfView()

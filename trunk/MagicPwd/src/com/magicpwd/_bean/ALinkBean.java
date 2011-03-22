@@ -40,9 +40,9 @@ public abstract class ALinkBean extends AEditBean
 
     private WTextBox dataBox;
 
-    public ALinkBean(AMpwdPtn formPtn)
+    public ALinkBean(AMpwdPtn mpwdPtn)
     {
-        this.formPtn = formPtn;
+        this.formPtn = mpwdPtn;
     }
 
     protected void initConfView()

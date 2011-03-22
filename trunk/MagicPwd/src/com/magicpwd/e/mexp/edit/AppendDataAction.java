@@ -33,7 +33,7 @@ public class AppendDataAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mpwdPtn.appendBean(ConsDat.INDX_DATA);
+        mexpPtn.appendBean(ConsDat.INDX_DATA);
     }
 
     @Override
