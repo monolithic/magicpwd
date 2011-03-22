@@ -743,13 +743,43 @@ public class UserPtn extends javax.swing.JPanel
         {
             case signIn:
                 // 显示上次登录用户
-                cb_UserType.addItem(new S1S1("mexp", "高级模式"));
-                cb_UserType.addItem(new S1S1("mwiz", "向导模式"));
-                cb_UserType.addItem(new S1S1("mpad", "记事模式"));
-                cb_UserType.addItem(new S1S1("maoc", "数值运算"));
-                cb_UserType.addItem(new S1S1("mruc", "公式换算"));
-                cb_UserType.addItem(new S1S1("mgtd", "计划任务"));
-                cb_UserType.setSelectedIndex(MpwdMdl.getAppView().ordinal());
+                String[] arr = mpwdMdl.getViewList().split(",");
+                String tmp;
+                for (int i = 0, j = arr.length; i < j; i += 1)
+                {
+                    tmp = arr[i].toLowerCase();
+                    if (AppView.mexp.name().equals(tmp))
+                    {
+                        cb_UserType.addItem(new S1S1(tmp, Lang.getLang(LangRes.P30FA107, "专业模式")));
+                        continue;
+                    }
+                    if (AppView.mwiz.name().equals(tmp))
+                    {
+                        cb_UserType.addItem(new S1S1(tmp, Lang.getLang(LangRes.P30FA108, "向导模式")));
+                        continue;
+                    }
+                    if (AppView.mpad.name().equals(tmp))
+                    {
+                        cb_UserType.addItem(new S1S1(tmp, Lang.getLang(LangRes.P30FA109, "记事模式")));
+                        continue;
+                    }
+                    if (AppView.maoc.name().equals(tmp))
+                    {
+                        cb_UserType.addItem(new S1S1(tmp, Lang.getLang(LangRes.P30FA10A, "数值运算")));
+                        continue;
+                    }
+                    if (AppView.mruc.name().equals(tmp))
+                    {
+                        cb_UserType.addItem(new S1S1(tmp, Lang.getLang(LangRes.P30FA10B, "单位换算")));
+                        continue;
+                    }
+                    if (AppView.mgtd.name().equals(tmp))
+                    {
+                        cb_UserType.addItem(new S1S1(tmp, Lang.getLang(LangRes.P30FA10C, "计划任务")));
+                        continue;
+                    }
+                }
+                cb_UserType.setSelectedItem(new S1S1(mpwdMdl.getViewLast(), ""));
                 String name = userMdl.getCfg(ConsCfg.CFG_USER_LAST);
                 if (com.magicpwd._util.Char.isValidate(name))
                 {
