@@ -28,7 +28,7 @@ public class DemoAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mpwdPtn.showProgress();
+        mexpPtn.showProgress();
     }
 
     @Override
