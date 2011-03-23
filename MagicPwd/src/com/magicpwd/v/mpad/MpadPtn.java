@@ -23,6 +23,7 @@ import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -231,7 +232,7 @@ public class MpadPtn extends AMpwdPtn
 
         safeMdl = mpadMdl.getNoteMdl();
 
-        boolean wrap = ConsCfg.DEF_TRUE.equalsIgnoreCase(userMdl.getCfg(ConsCfg.CFG_MPAD_WRAP));
+        boolean wrap = ConsCfg.DEF_TRUE.equalsIgnoreCase(userMdl.getCfg(AppView.mpad, ConsCfg.CFG_MPAD_WRAP, ""));
         ck_NoteWrap.setSelected(wrap);
         ta_NoteData.setLineWrap(wrap);
 
@@ -299,7 +300,7 @@ public class MpadPtn extends AMpwdPtn
     private void ck_NoteWrapActionPerformed(java.awt.event.ActionEvent e)
     {
         ta_NoteData.setLineWrap(ck_NoteWrap.isSelected());
-        userMdl.setCfg(ConsCfg.CFG_MPAD_WRAP, ck_NoteWrap.isSelected() ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
+        userMdl.setCfg(AppView.mpad, ConsCfg.CFG_MPAD_WRAP, ck_NoteWrap.isSelected() ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
     @Override

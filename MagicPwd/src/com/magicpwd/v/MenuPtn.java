@@ -35,6 +35,7 @@ import com.magicpwd.__i.mpad.IMpadAction;
 import com.magicpwd.__i.mruc.IMrucAction;
 import com.magicpwd.__i.mwiz.IMwizAction;
 import com.magicpwd.__i.tray.ITrayAction;
+import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Util;
 import com.magicpwd.e.mexp.skin.FeelAction;
 import com.magicpwd.e.mexp.skin.LookAction;
@@ -161,7 +162,7 @@ public class MenuPtn
         return true;
     }
 
-    public boolean getToolBar(String toolId, javax.swing.JToolBar toolBar, javax.swing.JComponent component, String viewPtn)
+    public boolean getToolBar(String toolId, javax.swing.JToolBar toolBar, javax.swing.JComponent component, AppView viewPtn)
     {
         if (!Char.isValidate(toolId) || document == null)
         {
@@ -432,7 +433,7 @@ public class MenuPtn
         return item;
     }
 
-    private javax.swing.AbstractButton createButton(Element element, javax.swing.JComponent component, String viewPtn)
+    private javax.swing.AbstractButton createButton(Element element, javax.swing.JComponent component, AppView viewPtn)
     {
         javax.swing.AbstractButton button = null;
         String type = element.attributeValue("type");
@@ -451,9 +452,9 @@ public class MenuPtn
             buttons.put(id, button);
         }
 
-        if (userMdl.getCfg(Char.format(ConsCfg.CFG_VIEW_TOOL_MOD, viewPtn), "icon").toLowerCase().indexOf("text") > -1)
+        if (userMdl.getCfg(viewPtn, ConsCfg.CFG_VIEW_TOOL_MOD, "icon").toLowerCase().indexOf("text") > -1)
         {
-            String pos = userMdl.getCfg(Char.format(ConsCfg.CFG_VIEW_TOOL_POS, viewPtn), "").toLowerCase();
+            String pos = userMdl.getCfg(viewPtn, ConsCfg.CFG_VIEW_TOOL_POS, "").toLowerCase();
             if (Char.isValidate(pos))
             {
                 if ("top".equals(pos))

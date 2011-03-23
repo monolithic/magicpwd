@@ -4,6 +4,7 @@
  */
 package test.menu;
 
+import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Skin;
 import com.magicpwd.m.UserMdl;
@@ -51,11 +52,11 @@ public class Menu extends javax.swing.AbstractAction
         }
 
         frame = new JFrame();
-        ptn.getMenuBar("mpwd", null, frame.getRootPane());
+        ptn.getMenuBar("mexp", null, frame.getRootPane());
         frame.setJMenuBar(bar);
 
         JToolBar toolBar = new JToolBar();
-        ptn.getToolBar("mpwd", toolBar, null, "mpwd");
+        ptn.getToolBar("mexp", toolBar, null, AppView.mexp);
         frame.getContentPane().add(toolBar, BorderLayout.NORTH);
 
         frame.setSize(new Dimension(400, 300));

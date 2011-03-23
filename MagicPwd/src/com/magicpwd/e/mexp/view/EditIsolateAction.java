@@ -17,6 +17,7 @@
 package com.magicpwd.e.mexp.view;
 
 import com.magicpwd.__a.mexp.AMexpAction;
+import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Char;
 
 /**
@@ -33,7 +34,7 @@ public class EditIsolateAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !mexpPtn.getUserMdl().isEditIsolate();
+        boolean b = !mexpPtn.getUserMdl().isEditIsolate(AppView.mexp);
         mexpPtn.setEditIsolate(b);
         mexpPtn.pack();
 
@@ -51,8 +52,8 @@ public class EditIsolateAction extends AMexpAction
     @Override
     public void doInit(String value)
     {
-        setEnabled(mexpPtn.getUserMdl().isEditVisible());
-        setSelected(mexpPtn.getUserMdl().isEditIsolate());
+        setEnabled(mexpPtn.getUserMdl().isEditVisible(AppView.mexp));
+        setSelected(mexpPtn.getUserMdl().isEditIsolate(AppView.mexp));
     }
 
     @Override

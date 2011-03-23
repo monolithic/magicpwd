@@ -93,43 +93,48 @@ public final class UserMdl
         }
     }
 
-    public String getCfg(String key)
+    public String getCfg(String key, String def)
     {
-        return getCfg(key, null);
+        return getCfg(AppView.mpwd, key, def);
     }
 
-    public String getCfg(String key, String def)
+    public String getCfg(AppView ptn, String key, String def)
     {
         if (!Char.isValidate(key))
         {
             return def;
         }
-        return userCfg.getProperty(Char.format(key, safeKey.getName()), def);
+        return userCfg.getProperty(Char.format(key, ptn.name(), safeKey.getName()), def);
     }
 
     public void setCfg(String key, String value)
     {
+        setCfg(AppView.mpwd, key, value);
+    }
+
+    public void setCfg(AppView ptn, String key, String value)
+    {
         if (Char.isValidate(key))
         {
-            userCfg.setProperty(Char.format(key, safeKey.getName()), value);
+            userCfg.setProperty(Char.format(key, ptn.name(), safeKey.getName()), value);
         }
     }
 
     /**
      * @return the menuViw
      */
-    public boolean isMenuVisible()
+    public boolean isMenuVisible(AppView ptn)
     {
-        return ConsCfg.DEF_TRUE.equalsIgnoreCase(userCfg.getProperty(ConsCfg.CFG_VIEW_MENU, ConsCfg.DEF_TRUE));
+        return ConsCfg.DEF_TRUE.equalsIgnoreCase(getCfg(ptn, ConsCfg.CFG_VIEW_MENU, ConsCfg.DEF_TRUE));
     }
 
     /**
      * @param visible
      *            the menuViw to set
      */
-    public void setMenuVisible(boolean visible)
+    public void setMenuVisible(AppView ptn, boolean visible)
     {
-        userCfg.setProperty(ConsCfg.CFG_VIEW_MENU, visible ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
+        setCfg(ptn, ConsCfg.CFG_VIEW_MENU, visible ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
     /**
@@ -137,7 +142,7 @@ public final class UserMdl
      */
     public boolean isToolVisible(AppView view)
     {
-        return ConsCfg.DEF_TRUE.equalsIgnoreCase(userCfg.getProperty(Char.format(ConsCfg.CFG_VIEW_TOOL, view.name())));
+        return ConsCfg.DEF_TRUE.equalsIgnoreCase(getCfg(view, ConsCfg.CFG_VIEW_TOOL, ""));
     }
 
     /**
@@ -146,41 +151,41 @@ public final class UserMdl
      */
     public void setToolVisible(AppView view, boolean visible)
     {
-        userCfg.setProperty(Char.format(ConsCfg.CFG_VIEW_TOOL, view.name()), visible ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
+        setCfg(view, ConsCfg.CFG_VIEW_TOOL, visible ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
     /**
      * @return the infoViw
      */
-    public boolean isInfoVisible()
+    public boolean isInfoVisible(AppView view)
     {
-        return ConsCfg.DEF_TRUE.equalsIgnoreCase(userCfg.getProperty(ConsCfg.CFG_VIEW_INFO, ConsCfg.DEF_TRUE));
+        return ConsCfg.DEF_TRUE.equalsIgnoreCase(getCfg(view, ConsCfg.CFG_VIEW_INFO, ConsCfg.DEF_TRUE));
     }
 
     /**
      * @param visible
      *            the infoViw to set
      */
-    public void setInfoVisible(boolean visible)
+    public void setInfoVisible(AppView view, boolean visible)
     {
-        userCfg.setProperty(ConsCfg.CFG_VIEW_INFO, visible ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
+        setCfg(view, ConsCfg.CFG_VIEW_INFO, visible ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
     /**
      * @return the findViw
      */
-    public boolean isFindVisible()
+    public boolean isFindVisible(AppView view)
     {
-        return ConsCfg.DEF_TRUE.equalsIgnoreCase(userCfg.getProperty(ConsCfg.CFG_VIEW_FIND, ConsCfg.DEF_TRUE));
+        return ConsCfg.DEF_TRUE.equalsIgnoreCase(getCfg(view, ConsCfg.CFG_VIEW_FIND, ConsCfg.DEF_TRUE));
     }
 
     /**
      * @param visible
      *            the findViw to set
      */
-    public void setFindVisible(boolean visible)
+    public void setFindVisible(AppView view, boolean visible)
     {
-        userCfg.setProperty(ConsCfg.CFG_VIEW_FIND, visible ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
+        setCfg(view, ConsCfg.CFG_VIEW_FIND, visible ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
     /**
@@ -188,7 +193,7 @@ public final class UserMdl
      */
     public String getToolLoc(AppView view)
     {
-        return userCfg.getProperty(Char.format(ConsCfg.CFG_VIEW_TOOL_LOC, view.name()), "North");
+        return getCfg(view, ConsCfg.CFG_VIEW_TOOL_LOC, "North");
     }
 
     /**
@@ -197,7 +202,7 @@ public final class UserMdl
      */
     public void setToolLoc(AppView view, String toolLoc)
     {
-        userCfg.setProperty(Char.format(ConsCfg.CFG_VIEW_TOOL_LOC, view.name()), toolLoc);
+        setCfg(view, ConsCfg.CFG_VIEW_TOOL_LOC, toolLoc);
     }
 
     /**
@@ -205,7 +210,7 @@ public final class UserMdl
      */
     public int getClipDlt()
     {
-        return Integer.parseInt(userCfg.getProperty(ConsCfg.CFG_SAFE_CLIP_DLT, ConsCfg.DEF_CLIP_DLT));
+        return Integer.parseInt(getCfg(AppView.mpwd, ConsCfg.CFG_SAFE_CLIP_DLT, ConsCfg.DEF_CLIP_DLT));
     }
 
     /**
@@ -214,7 +219,7 @@ public final class UserMdl
      */
     public void setClipDlt(int clipDlt)
     {
-        userCfg.setProperty(ConsCfg.CFG_SAFE_CLIP_DLT, Integer.toString(clipDlt));
+        setCfg(AppView.mpwd, ConsCfg.CFG_SAFE_CLIP_DLT, Integer.toString(clipDlt));
     }
 
     /**
@@ -222,7 +227,7 @@ public final class UserMdl
      */
     public String getPwdsLen()
     {
-        return userCfg.getProperty(ConsCfg.CFG_PWDS_SIZE, ConsCfg.DEF_PWDS_SIZE);
+        return getCfg(AppView.mpwd, ConsCfg.CFG_PWDS_SIZE, ConsCfg.DEF_PWDS_SIZE);
     }
 
     /**
@@ -231,7 +236,7 @@ public final class UserMdl
      */
     public void setPwdsLen(int pwdsLen)
     {
-        userCfg.setProperty(ConsCfg.CFG_PWDS_SIZE, "" + pwdsLen);
+        setCfg(AppView.mpwd, ConsCfg.CFG_PWDS_SIZE, "" + pwdsLen);
     }
 
     /**
@@ -239,7 +244,7 @@ public final class UserMdl
      */
     public String getPwdsKey()
     {
-        return userCfg.getProperty(ConsCfg.CFG_PWDS_HASH, ConsCfg.DEF_PWDS_HASH);
+        return getCfg(AppView.mpwd, ConsCfg.CFG_PWDS_HASH, ConsCfg.DEF_PWDS_HASH);
     }
 
     /**
@@ -248,12 +253,12 @@ public final class UserMdl
      */
     public void setPwdsKey(String pwdsKey)
     {
-        userCfg.setProperty(ConsCfg.CFG_PWDS_HASH, pwdsKey);
+        setCfg(AppView.mpwd, ConsCfg.CFG_PWDS_HASH, pwdsKey);
     }
 
     public int getHintInt()
     {
-        String txt = userCfg.getProperty(ConsCfg.CFG_HINT_INT, "60");
+        String txt = getCfg(AppView.mpwd, ConsCfg.CFG_HINT_INT, "60");
         if (Char.isValidatePositiveInteger(txt))
         {
             return Integer.parseInt(txt);
@@ -263,12 +268,12 @@ public final class UserMdl
 
     public void setHintInt(int hintInt)
     {
-        userCfg.setProperty(ConsCfg.CFG_HINT_INT, "" + hintInt);
+        setCfg(AppView.mpwd, ConsCfg.CFG_HINT_INT, "" + hintInt);
     }
 
     public int getHintPre()
     {
-        String txt = userCfg.getProperty(ConsCfg.CFG_HINT_PRE, "300");
+        String txt = getCfg(AppView.mpwd, ConsCfg.CFG_HINT_PRE, "300");
         if (Char.isValidatePositiveInteger(txt))
         {
             return Integer.parseInt(txt);
@@ -278,17 +283,17 @@ public final class UserMdl
 
     public void setHintPre(int hintPre)
     {
-        userCfg.setProperty(ConsCfg.CFG_HINT_PRE, "" + hintPre);
+        setCfg(AppView.mpwd, ConsCfg.CFG_HINT_PRE, "" + hintPre);
     }
 
     public String getDataDir()
     {
-        return userCfg.getProperty(ConsCfg.CFG_SAFE_DATA_DIR, ConsCfg.DEF_DATA_PATH);
+        return getCfg(AppView.mpwd, ConsCfg.CFG_SAFE_DATA_DIR, ConsCfg.DEF_DATA_PATH);
     }
 
     public void setDataDir(String dataDir)
     {
-        userCfg.setProperty(ConsCfg.CFG_SAFE_DATA_DIR, dataDir);
+        setCfg(AppView.mpwd, ConsCfg.CFG_SAFE_DATA_DIR, dataDir);
     }
 
     /**
@@ -296,7 +301,7 @@ public final class UserMdl
      */
     public int getDumpCnt()
     {
-        String txt = userCfg.getProperty(ConsCfg.CFG_SAFE_DUMP_CNT, "3");
+        String txt = getCfg(AppView.mpwd, ConsCfg.CFG_SAFE_DUMP_CNT, "3");
         if (Char.isValidatePositiveInteger(txt))
         {
             return Integer.parseInt(txt);
@@ -310,7 +315,7 @@ public final class UserMdl
      */
     public void setDumpCnt(int dumpCnt)
     {
-        userCfg.setProperty(ConsCfg.CFG_SAFE_DUMP_CNT, "" + dumpCnt);
+        setCfg(AppView.mpwd, ConsCfg.CFG_SAFE_DUMP_CNT, "" + dumpCnt);
     }
 
     /**
@@ -318,7 +323,7 @@ public final class UserMdl
      */
     public String getDumpDir()
     {
-        return userCfg.getProperty(ConsCfg.CFG_SAFE_DUMP_DIR, ConsCfg.DEF_DUMP_PATH);
+        return getCfg(AppView.mpwd, ConsCfg.CFG_SAFE_DUMP_DIR, ConsCfg.DEF_DUMP_PATH);
     }
 
     /**
@@ -327,43 +332,43 @@ public final class UserMdl
      */
     public void setDumpDir(String dumpDir)
     {
-        userCfg.setProperty(ConsCfg.CFG_SAFE_DUMP_DIR, dumpDir);
+        setCfg(AppView.mpwd, ConsCfg.CFG_SAFE_DUMP_DIR, dumpDir);
     }
 
     /**
      * @return the editViw
      */
-    public boolean isEditVisible()
+    public boolean isEditVisible(AppView view)
     {
-        return ConsCfg.DEF_TRUE.equalsIgnoreCase(userCfg.getProperty(ConsCfg.CFG_VIEW_EDIT_VIW, ConsCfg.DEF_TRUE));
+        return ConsCfg.DEF_TRUE.equalsIgnoreCase(getCfg(view, ConsCfg.CFG_VIEW_EDIT_VIW, ConsCfg.DEF_TRUE));
     }
 
     /**
      * @param editViw
      *            the editViw to set
      */
-    public void setEditVisible(boolean editViw)
+    public void setEditVisible(AppView view, boolean editViw)
     {
-        userCfg.setProperty(ConsCfg.CFG_VIEW_EDIT_VIW, editViw ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
+        setCfg(view, ConsCfg.CFG_VIEW_EDIT_VIW, editViw ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
-    public boolean isEditIsolate()
+    public boolean isEditIsolate(AppView view)
     {
-        return ConsCfg.DEF_TRUE.equalsIgnoreCase(userCfg.getProperty(ConsCfg.CFG_VIEW_EDIT_WND, ConsCfg.DEF_FALSE));
+        return ConsCfg.DEF_TRUE.equalsIgnoreCase(getCfg(view, ConsCfg.CFG_VIEW_EDIT_WND, ConsCfg.DEF_FALSE));
     }
 
     /**
      * @param isolate
      *            the editWnd to set
      */
-    public void setEditIsolate(boolean isolate)
+    public void setEditIsolate(AppView view, boolean isolate)
     {
-        userCfg.setProperty(ConsCfg.CFG_VIEW_EDIT_WND, isolate ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
+        setCfg(view, ConsCfg.CFG_VIEW_EDIT_WND, isolate ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
     public String getPwdsLoop()
     {
-        return userCfg.getProperty(ConsCfg.CFG_PWDS_LOOP, ConsCfg.DEF_TRUE);
+        return getCfg(AppView.mpwd, ConsCfg.CFG_PWDS_LOOP, ConsCfg.DEF_TRUE);
     }
 
     /**
@@ -380,43 +385,43 @@ public final class UserMdl
      */
     public void setPwdsLoop(boolean pwdsLoop)
     {
-        userCfg.setProperty(ConsCfg.CFG_PWDS_LOOP, pwdsLoop ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
+        setCfg(AppView.mpwd, ConsCfg.CFG_PWDS_LOOP, pwdsLoop ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
     public String getSkin()
     {
-        return userCfg.getProperty(ConsCfg.CFG_SKIN, ConsCfg.DEF_SKIN_DEF);
+        return getCfg(AppView.mpwd, ConsCfg.CFG_SKIN, ConsCfg.DEF_SKIN_DEF);
     }
 
     public void setSkin(String skin)
     {
-        userCfg.setProperty(ConsCfg.CFG_SKIN, skin);
+        setCfg(AppView.mpwd, ConsCfg.CFG_SKIN, skin);
     }
 
     public String getLook()
     {
-        return userCfg.getProperty(ConsCfg.CFG_SKIN_LOOK, "jgoodies.Plastic3D");
-        //return userCfg.getProperty(ConsCfg.CFG_SKIN_LOOK, ConsCfg.DEF_SKIN_LOOK_SYS);
+        return getCfg(AppView.mpwd, ConsCfg.CFG_SKIN_LOOK, "jgoodies.Plastic3D");
+        //return getCfg(AppView.mpwd, ConsCfg.CFG_SKIN_LOOK, ConsCfg.DEF_SKIN_LOOK_SYS);
     }
 
     public void setLook(String look)
     {
-        userCfg.setProperty(ConsCfg.CFG_SKIN_LOOK, look);
+        setCfg(AppView.mpwd, ConsCfg.CFG_SKIN_LOOK, look);
     }
 
     public String getFeel()
     {
-        return userCfg.getProperty(ConsCfg.CFG_SKIN_FEEL, ConsCfg.DEF_SKIN_FEEL_DEF);
+        return getCfg(AppView.mpwd, ConsCfg.CFG_SKIN_FEEL, ConsCfg.DEF_SKIN_FEEL_DEF);
     }
 
     public void setFeel(String feel)
     {
-        userCfg.setProperty(ConsCfg.CFG_SKIN_FEEL, feel);
+        setCfg(AppView.mpwd, ConsCfg.CFG_SKIN_FEEL, feel);
     }
 
     public String getLang()
     {
-        String lang = userCfg.getProperty(ConsCfg.CFG_LANG);
+        String lang = getCfg(AppView.mpwd, ConsCfg.CFG_LANG, "");
         if (!Char.isValidate(lang))
         {
             lang = System.getProperty("user.language");//Locale.getDefault().getLanguage();
@@ -431,17 +436,17 @@ public final class UserMdl
 
     public void setLang(String lang)
     {
-        setCfg(ConsCfg.CFG_LANG, lang);
+        setCfg(AppView.mpwd, ConsCfg.CFG_LANG, lang);
     }
 
     public String getCode()
     {
-        return getCfg(ConsCfg.CFG_USER_CODE, "");
+        return getCfg(AppView.mpwd, ConsCfg.CFG_USER_CODE, "");
     }
 
     public String getName()
     {
-        return getCfg(ConsCfg.CFG_USER_NAME, "");
+        return getCfg(AppView.mpwd, ConsCfg.CFG_USER_NAME, "");
     }
 
     public javax.swing.ImageIcon readIcon(String path)

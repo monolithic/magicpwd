@@ -20,6 +20,7 @@ import com.magicpwd.__a.mexp.AMexpAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -38,7 +39,7 @@ public class NativeBackupAction extends AMexpAction implements IBackCall<String>
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (!Char.isValidate(mexpPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC)))
+        if (!Char.isValidate(mexpPtn.getUserMdl().getCfg(AppView.mexp, ConsCfg.CFG_SAFE_BACK_LOC, "")))
         {
             Lang.showMesg(mexpPtn, LangRes.P30F7A54, "您还没有配置本地备份目录！");
             return;
@@ -82,7 +83,7 @@ public class NativeBackupAction extends AMexpAction implements IBackCall<String>
 
         try
         {
-            boolean b = mexpPtn.nativeBackup(mexpPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC), null);
+            boolean b = mexpPtn.nativeBackup(mexpPtn.getUserMdl().getCfg(AppView.mexp, ConsCfg.CFG_SAFE_BACK_LOC, ""), null);
             mexpPtn.hideProgress();
 
             if (b)

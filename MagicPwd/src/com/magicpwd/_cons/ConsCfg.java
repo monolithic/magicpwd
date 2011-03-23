@@ -25,7 +25,7 @@ public interface ConsCfg
     /**
      * 配置数据：区分前缀
      */
-    String CFG_PRE = "magicpwd";
+    String CFG_PRE = "{0}";
     /**
      * 用户信息：注册用户代码列表，以英文逗号分隔
      */
@@ -37,7 +37,7 @@ public interface ConsCfg
     /**
      * 用户信息：用户偏好配置
      */
-    String CFG_USER_NAME = CFG_USER + ".{0}";
+    String CFG_USER_NAME = CFG_USER + ".{1}";
     /**
      * 用户信息：用户网站编码
      */
@@ -73,7 +73,7 @@ public interface ConsCfg
     /**
      * 界面配置：是否显示工具栏
      */
-    String CFG_VIEW_TOOL = CFG_VIEW + ".tool.{0}";
+    String CFG_VIEW_TOOL = CFG_VIEW + ".tool";
     /**
      * 界面配置：工具栏显示位置
      */

@@ -25,6 +25,7 @@ import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
@@ -255,7 +256,7 @@ public class MaocPtn extends AMpwdPtn
         }
 
         // 初始化：是否使用逗号分隔符
-        boolean b = ConsCfg.DEF_TRUE.equalsIgnoreCase(userMdl.getCfg(ConsCfg.CFG_MAOC_GCU, ConsCfg.DEF_TRUE));
+        boolean b = ConsCfg.DEF_TRUE.equalsIgnoreCase(userMdl.getCfg(AppView.maoc, ConsCfg.CFG_MAOC_GCU, ConsCfg.DEF_TRUE));
         maocMdl.getFormat().setGroupingUsed(b);
         javax.swing.AbstractButton bt = menuPtn.getButton("grouping-used");
         if (bt != null)
@@ -264,7 +265,7 @@ public class MaocPtn extends AMpwdPtn
         }
 
         // 初始化：是否多列显示
-        String t = userMdl.getCfg(ConsCfg.CFG_MAOC_MCV, "1");
+        String t = userMdl.getCfg(AppView.maoc, ConsCfg.CFG_MAOC_MCV, "1");
         maocMdl.getMexpMdl().setMultiColumn("2".equals(t));
         WButtonGroup bg = menuPtn.getGroup("view-mode");
         if (bg != null)
@@ -320,13 +321,13 @@ public class MaocPtn extends AMpwdPtn
     public void setMultiColumnView(String colNum)
     {
         maocMdl.getMexpMdl().setMultiColumn("2".equals(colNum));
-        userMdl.setCfg(ConsCfg.CFG_MAOC_MCV, colNum);
+        userMdl.setCfg(AppView.maoc, ConsCfg.CFG_MAOC_MCV, colNum);
     }
 
     public void setGroupingUsed(boolean used)
     {
         maocMdl.getFormat().setGroupingUsed(used);
-        userMdl.setCfg(ConsCfg.CFG_MAOC_GCU, used ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
+        userMdl.setCfg(AppView.maoc, ConsCfg.CFG_MAOC_GCU, used ? ConsCfg.DEF_TRUE : ConsCfg.DEF_FALSE);
     }
 
     public String trim(String exp)

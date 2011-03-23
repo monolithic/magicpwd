@@ -145,7 +145,7 @@ public class MexpPtn extends AMpwdPtn
 
             menuPtn.getMenuBar("mexp", menuBar, rootPane);
 
-            menuPtn.getToolBar("mexp", toolBar, rootPane, "mexp");
+            menuPtn.getToolBar("mexp", toolBar, rootPane, AppView.mexp);
 
             menuPtn.getPopMenu("kind", kindPop);
             tr_GuidTree.setComponentPopupMenu(kindPop);
@@ -198,14 +198,14 @@ public class MexpPtn extends AMpwdPtn
 //        }
 
         // 菜单栏
-        setMenuVisible(userMdl.isMenuVisible());
+        setMenuVisible(userMdl.isMenuVisible(AppView.mexp));
 
         // 工具栏
         setToolVisible(userMdl.isToolVisible(AppView.mexp));
 
         // 搜索栏
         mainFind.initData();
-        setFindVisible(userMdl.isFindVisible());
+        setFindVisible(userMdl.isFindVisible(AppView.mexp));
 
         // 信息栏
         mainInfo.initData();
@@ -218,7 +218,7 @@ public class MexpPtn extends AMpwdPtn
                 return hintCallBack();
             }
         });
-        setInfoVisible(userMdl.isInfoVisible());
+        setInfoVisible(userMdl.isInfoVisible(AppView.mexp));
 
         // 属性编辑组件
         eb_KeysEdit.initData();
@@ -228,23 +228,23 @@ public class MexpPtn extends AMpwdPtn
             bean.initData();
         }
 
-        if (userMdl.isEditVisible())
+        if (userMdl.isEditVisible(AppView.mexp))
         {
             showPropInfo();
         }
-        setEditIsolate(userMdl.isEditIsolate());
-        setEditVisible(userMdl.isEditVisible());
+        setEditIsolate(userMdl.isEditIsolate(AppView.mexp));
+        setEditVisible(userMdl.isEditVisible(AppView.mexp));
 
         // 列表菜单
         WButtonGroup group = menuPtn.getGroup("order-dir");
         if (group != null)
         {
-            group.setSelected(userMdl.getCfg(ConsCfg.CFG_VIEW_LIST_ASC, ConsCfg.DEF_FALSE), true);
+            group.setSelected(userMdl.getCfg(AppView.mexp, ConsCfg.CFG_VIEW_LIST_ASC, ConsCfg.DEF_FALSE), true);
         }
         group = menuPtn.getGroup("order-key");
         if (group != null)
         {
-            group.setSelected(userMdl.getCfg(ConsCfg.CFG_VIEW_LIST_KEY, "01"), true);
+            group.setSelected(userMdl.getCfg(AppView.mexp, ConsCfg.CFG_VIEW_LIST_KEY, "01"), true);
         }
 
         this.pack();
@@ -449,7 +449,7 @@ public class MexpPtn extends AMpwdPtn
 
     public void setEditVisible(boolean visible)
     {
-        if (userMdl.isEditIsolate())
+        if (userMdl.isEditIsolate(AppView.mexp))
         {
             ed_KeysEdit.setVisible(visible);
         }
@@ -457,12 +457,12 @@ public class MexpPtn extends AMpwdPtn
         {
             eb_KeysEdit.setVisible(visible);
         }
-        userMdl.setEditVisible(visible);
+        userMdl.setEditVisible(AppView.mexp, visible);
     }
 
     public void setEditIsolate(boolean isolate)
     {
-        if (userMdl.isEditVisible())
+        if (userMdl.isEditVisible(AppView.mexp))
         {
             if (isolate)
             {
@@ -476,7 +476,7 @@ public class MexpPtn extends AMpwdPtn
                 eb_KeysEdit.setVisible(true);
                 ed_KeysEdit.setVisible(false);
             }
-            userMdl.setEditIsolate(isolate);
+            userMdl.setEditIsolate(AppView.mexp, isolate);
         }
     }
 
@@ -488,19 +488,19 @@ public class MexpPtn extends AMpwdPtn
     public void setFindVisible(boolean visible)
     {
         mainFind.setVisible(visible);
-        userMdl.setFindVisible(visible);
+        userMdl.setFindVisible(AppView.mexp, visible);
     }
 
     public void setInfoVisible(boolean visible)
     {
         mainInfo.setVisible(visible);
-        userMdl.setInfoVisible(visible);
+        userMdl.setInfoVisible(AppView.mexp, visible);
     }
 
     public void setMenuVisible(boolean visible)
     {
         menuBar.setVisible(visible);
-        userMdl.setMenuVisible(visible);
+        userMdl.setMenuVisible(AppView.mexp, visible);
     }
 
     public void setToolVisible(boolean visible)
@@ -1188,7 +1188,7 @@ public class MexpPtn extends AMpwdPtn
 
     public void showPropInfo()
     {
-        if (userMdl.isEditVisible())
+        if (userMdl.isEditVisible(AppView.mexp))
         {
             mexpBean[ConsDat.INDX_INFO].showData(null);
             cl_CardProp.show(pl_CardProp, ConsEnv.BEAN_INFO);
@@ -1198,7 +1198,7 @@ public class MexpPtn extends AMpwdPtn
 
     public void showPropEdit(IEditItem item, boolean focus)
     {
-        if (userMdl.isEditVisible())
+        if (userMdl.isEditVisible(AppView.mexp))
         {
             cl_CardProp.show(pl_CardProp, ConsEnv.BEAN_PROP + item.getType());
             mexpBean[item.getType()].showData(item);
@@ -1286,10 +1286,10 @@ public class MexpPtn extends AMpwdPtn
             return true;
         }
 
-        if (!userMdl.isEditVisible())
+        if (!userMdl.isEditVisible(AppView.mexp))
         {
-            userMdl.setEditVisible(true);
-            userMdl.setEditIsolate(true);
+            userMdl.setEditVisible(AppView.mexp, true);
+            userMdl.setEditIsolate(AppView.mexp, true);
             setEditVisible(true);
         }
 

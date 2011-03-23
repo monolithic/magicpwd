@@ -474,7 +474,7 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
             return false;
         }
 
-        String path = userMdl.getCfg(ConsCfg.CFG_SAFE_BACK_LOC);
+        String path = userMdl.getCfg(ConsCfg.CFG_SAFE_BACK_LOC, "");
         if (!Char.isValidate(path))
         {
             return false;
@@ -587,7 +587,7 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
             }
             folder.open(javax.mail.Folder.READ_ONLY);
 
-            String sign = userMdl.getCfg("mail.date");
+            String sign = userMdl.getCfg("mail.date", "");
             if (!Char.isValidate(sign, 16))
             {
                 sign = null;

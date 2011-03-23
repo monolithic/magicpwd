@@ -17,6 +17,7 @@
 package com.magicpwd.e.mexp.view;
 
 import com.magicpwd.__a.mexp.AMexpAction;
+import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Char;
 
 /**
@@ -33,7 +34,7 @@ public class EditVisibleAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !mexpPtn.getUserMdl().isEditVisible();
+        boolean b = !mexpPtn.getUserMdl().isEditVisible(AppView.mexp);
         mexpPtn.setEditVisible(b);
         if (b)
         {
@@ -59,7 +60,7 @@ public class EditVisibleAction extends AMexpAction
     @Override
     public void doInit(String value)
     {
-        setSelected(mexpPtn.getUserMdl().isEditVisible());
+        setSelected(mexpPtn.getUserMdl().isEditVisible(AppView.mexp));
     }
 
     @Override

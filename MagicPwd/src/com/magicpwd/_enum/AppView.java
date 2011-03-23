@@ -54,5 +54,9 @@ public enum AppView
     /**
      * 计划任务
      */
-    mgtd
+    mgtd,
+    /**
+     * 魔方密码
+     */
+    mpwd
 }
