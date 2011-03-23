@@ -26,6 +26,7 @@ import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
@@ -151,7 +152,7 @@ public class MwizPtn extends AMpwdPtn
         {
             menuPtn = new MenuPtn(trayPtn, this);
             menuPtn.loadData(new java.io.File(userMdl.getDataDir(), "mwiz.xml"));
-            menuPtn.getToolBar("mwiz", tb_ToolBar, rootPane, "mwiz");
+            menuPtn.getToolBar("mwiz", tb_ToolBar, rootPane, AppView.mwiz);
             menuPtn.getPopMenu("mwiz", pm_MenuPop);
             menuPtn.getStrokes("mwiz", rootPane);
         }
@@ -165,12 +166,12 @@ public class MwizPtn extends AMpwdPtn
         WButtonGroup group = menuPtn.getGroup("order-dir");
         if (group != null)
         {
-            group.setSelected(userMdl.getCfg(ConsCfg.CFG_VIEW_LIST_ASC, ConsCfg.DEF_FALSE), true);
+            group.setSelected(userMdl.getCfg(AppView.mwiz, ConsCfg.CFG_VIEW_LIST_ASC, ConsCfg.DEF_FALSE), true);
         }
         group = menuPtn.getGroup("order-key");
         if (group != null)
         {
-            group.setSelected(userMdl.getCfg(ConsCfg.CFG_VIEW_LIST_KEY, "01"), true);
+            group.setSelected(userMdl.getCfg(AppView.mwiz, ConsCfg.CFG_VIEW_LIST_KEY, "01"), true);
         }
 
         tb_KeysList.addMouseListener(new java.awt.event.MouseAdapter()

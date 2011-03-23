@@ -17,6 +17,7 @@
 package com.magicpwd.e.mexp.view;
 
 import com.magicpwd.__a.mexp.AMexpAction;
+import com.magicpwd._enum.AppView;
 
 /**
  *
@@ -32,7 +33,7 @@ public class FindVisibleAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !mexpPtn.getUserMdl().isFindVisible();
+        boolean b = !mexpPtn.getUserMdl().isFindVisible(AppView.mexp);
         mexpPtn.setFindVisible(b);
         mexpPtn.pack();
     }
@@ -40,7 +41,7 @@ public class FindVisibleAction extends AMexpAction
     @Override
     public void doInit(String value)
     {
-        setSelected(mexpPtn.getUserMdl().isFindVisible());
+        setSelected(mexpPtn.getUserMdl().isFindVisible(AppView.mexp));
     }
 
     @Override

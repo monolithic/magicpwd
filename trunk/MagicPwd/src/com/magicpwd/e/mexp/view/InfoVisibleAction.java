@@ -17,6 +17,7 @@
 package com.magicpwd.e.mexp.view;
 
 import com.magicpwd.__a.mexp.AMexpAction;
+import com.magicpwd._enum.AppView;
 
 /**
  *
@@ -32,7 +33,7 @@ public class InfoVisibleAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !mexpPtn.getUserMdl().isInfoVisible();
+        boolean b = !mexpPtn.getUserMdl().isInfoVisible(AppView.mexp);
         mexpPtn.setInfoVisible(b);
         mexpPtn.pack();
     }
@@ -40,7 +41,7 @@ public class InfoVisibleAction extends AMexpAction
     @Override
     public void doInit(String value)
     {
-        setSelected(mexpPtn.getUserMdl().isInfoVisible());
+        setSelected(mexpPtn.getUserMdl().isInfoVisible(AppView.mexp));
     }
 
     @Override

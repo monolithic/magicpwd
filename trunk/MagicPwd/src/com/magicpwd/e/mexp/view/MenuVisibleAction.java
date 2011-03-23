@@ -17,6 +17,7 @@
 package com.magicpwd.e.mexp.view;
 
 import com.magicpwd.__a.mexp.AMexpAction;
+import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Char;
 
 /**
@@ -33,7 +34,7 @@ public class MenuVisibleAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !mexpPtn.getUserMdl().isMenuVisible();
+        boolean b = !mexpPtn.getUserMdl().isMenuVisible(AppView.mexp);
         mexpPtn.setMenuVisible(b);
         mexpPtn.pack();
 
@@ -55,7 +56,7 @@ public class MenuVisibleAction extends AMexpAction
     @Override
     public void doInit(String value)
     {
-        setSelected(mexpPtn.getUserMdl().isMenuVisible());
+        setSelected(mexpPtn.getUserMdl().isMenuVisible(AppView.mexp));
     }
 
     @Override

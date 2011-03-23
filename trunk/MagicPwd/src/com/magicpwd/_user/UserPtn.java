@@ -780,7 +780,7 @@ public class UserPtn extends javax.swing.JPanel
                     }
                 }
                 cb_UserType.setSelectedItem(new S1S1(mpwdMdl.getViewLast(), ""));
-                String name = userMdl.getCfg(ConsCfg.CFG_USER_LAST);
+                String name = userMdl.getCfg(ConsCfg.CFG_USER_LAST, "");
                 if (com.magicpwd._util.Char.isValidate(name))
                 {
                     tf_UserName.setText(name);

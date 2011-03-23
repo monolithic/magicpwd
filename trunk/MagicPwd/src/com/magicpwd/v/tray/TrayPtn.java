@@ -679,7 +679,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
         {
             java.awt.Dimension size = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 
-            String loc = userMdl.getCfg(ConsCfg.CFG_TRAY_LOC);
+            String loc = userMdl.getCfg(ConsCfg.CFG_TRAY_LOC, "");
             if (com.magicpwd._util.Char.isValidate(loc))
             {
                 java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("\\d+").matcher(loc);

@@ -19,6 +19,7 @@ package com.magicpwd.e.mexp.safe;
 import com.magicpwd.__a.mexp.AMexpAction;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 
@@ -46,7 +47,7 @@ public class NativeConfigAction extends AMexpAction
         javax.swing.JFileChooser jfc = new javax.swing.JFileChooser();
         jfc.setMultiSelectionEnabled(false);
         jfc.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
-        String path = mexpPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC);
+        String path = mexpPtn.getUserMdl().getCfg(AppView.mexp, ConsCfg.CFG_SAFE_BACK_LOC, "");
         if (Char.isValidate(path))
         {
             jfc.setSelectedFile(new java.io.File(path));

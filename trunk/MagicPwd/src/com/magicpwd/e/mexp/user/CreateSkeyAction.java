@@ -39,7 +39,7 @@ public class CreateSkeyAction extends AMexpAction implements IBackCall<UserDto>
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (Char.isValidate(mexpPtn.getUserMdl().getCfg(ConsCfg.CFG_USER_SKEY), 224))
+        if (Char.isValidate(mexpPtn.getUserMdl().getCfg(ConsCfg.CFG_USER_SKEY, ""), 224))
         {
             Lang.showMesg(mexpPtn, LangRes.P30F7A28, "您已经设置过安全口令！");
             return;
@@ -51,7 +51,7 @@ public class CreateSkeyAction extends AMexpAction implements IBackCall<UserDto>
     @Override
     public void doInit(String value)
     {
-        setEnabled(!Char.isValidate(mexpPtn.getUserMdl().getCfg(ConsCfg.CFG_USER_SKEY), 224));
+        setEnabled(!Char.isValidate(mexpPtn.getUserMdl().getCfg(ConsCfg.CFG_USER_SKEY, ""), 224));
     }
 
     @Override

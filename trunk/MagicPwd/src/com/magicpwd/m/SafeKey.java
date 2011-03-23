@@ -99,7 +99,7 @@ final class SafeKey implements Key
      */
     public final String getCode()
     {
-        return userMdl.getCfg(ConsCfg.CFG_USER_CODE);
+        return userMdl.getCode();
     }
 
     final char[] getMask()
@@ -119,7 +119,7 @@ final class SafeKey implements Key
     final boolean signIn() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException
     {
         // 用户登录身份认证
-        String text = userMdl.getCfg(ConsCfg.CFG_USER_INFO);
+        String text = userMdl.getCfg(ConsCfg.CFG_USER_INFO, "");
         if (!com.magicpwd._util.Char.isValidate(text))
         {
             return false;
@@ -133,7 +133,7 @@ final class SafeKey implements Key
         // 获取用户配置密文
         keys = cipherDigest();
 
-        text = userMdl.getCfg(ConsCfg.CFG_USER_PKEY);
+        text = userMdl.getCfg(ConsCfg.CFG_USER_PKEY, "");
         temp = Char.toBytes(text, true);
 
         // 解密用户配置密文获得解密数据
@@ -177,7 +177,7 @@ final class SafeKey implements Key
         // 已有口令校验
         pwds = oldPwds;
         byte[] temp = signInDigest();
-        if (!Util.bytesToString(temp, true).equals(userMdl.getCfg(ConsCfg.CFG_USER_INFO)))
+        if (!Util.bytesToString(temp, true).equals(userMdl.getCfg(ConsCfg.CFG_USER_INFO, "")))
         {
             return false;
         }
@@ -220,7 +220,7 @@ final class SafeKey implements Key
         name = usrName;
 
         // 用户登录身份认证
-        String text = userMdl.getCfg(ConsCfg.CFG_USER_SKEY);
+        String text = userMdl.getCfg(ConsCfg.CFG_USER_SKEY, "");
         if (!com.magicpwd._util.Char.isValidate(text))
         {
             return false;
@@ -274,7 +274,7 @@ final class SafeKey implements Key
         // 已有口令校验
         pwds = oldPwds;
         byte[] temp = signInDigest();
-        if (!Util.bytesToString(temp, true).equals(userMdl.getCfg(ConsCfg.CFG_USER_INFO)))
+        if (!Util.bytesToString(temp, true).equals(userMdl.getCfg(ConsCfg.CFG_USER_INFO, "")))
         {
             return false;
         }
@@ -317,7 +317,7 @@ final class SafeKey implements Key
      */
     final boolean signUp() throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException
     {
-        if (com.magicpwd._util.Char.isValidate(userMdl.getCfg(ConsCfg.CFG_USER_INFO)))
+        if (com.magicpwd._util.Char.isValidate(userMdl.getCfg(ConsCfg.CFG_USER_INFO, "")))
         {
             return false;
         }
@@ -504,6 +504,6 @@ final class SafeKey implements Key
 
     public boolean hasSkey()
     {
-        return com.magicpwd._util.Char.isValidate(userMdl.getCfg(ConsCfg.CFG_USER_SKEY), 224);
+        return com.magicpwd._util.Char.isValidate(userMdl.getCfg(ConsCfg.CFG_USER_SKEY, ""), 224);
     }
 }

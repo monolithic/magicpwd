@@ -17,6 +17,7 @@
 package com.magicpwd.e.mexp.file;
 
 import com.magicpwd.__a.mexp.AMexpAction;
+import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Char;
 
 /**
@@ -38,7 +39,7 @@ public class AppendAction extends AMexpAction
             return;
         }
 
-        if (mexpPtn.getUserMdl().isEditVisible())
+        if (mexpPtn.getUserMdl().isEditVisible(AppView.mexp))
         {
             return;
         }
@@ -54,8 +55,8 @@ public class AppendAction extends AMexpAction
             }
         }
 
-        mexpPtn.getUserMdl().setEditVisible(true);
-        mexpPtn.getUserMdl().setEditIsolate(true);
+        mexpPtn.getUserMdl().setEditVisible(AppView.mexp, true);
+        mexpPtn.getUserMdl().setEditIsolate(AppView.mexp, true);
 
         mexpPtn.setEditVisible(true);
     }
