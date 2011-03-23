@@ -131,6 +131,11 @@ public class AreaBean extends AAreaBean implements IMexpBean
     @Override
     public void requestFocus()
     {
+        if (!com.magicpwd._util.Char.isValidate(tf_PropName.getText()))
+        {
+            tf_PropName.requestFocus();
+            return;
+        }
         ta_PropData.requestFocus();
     }
 
