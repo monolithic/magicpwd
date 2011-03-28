@@ -1,0 +1,155 @@
+###############################################################################
+# 标题
+###############################################################################
+text=Demo
+tips=Demo
+
+###############################################################################
+# 专业模式图标
+###############################################################################
+###########################################################
+# 菜单栏图标
+###########################################################
+#######################################
+# 文件菜单图标
+#######################################
+mexp-file-new=mexp/file-new.png
+mexp-file-open=mexp/file-open.png
+mexp-file-save=mexp/file-save.png
+mexp-file-print=mexp/file-print.png
+mexp-file-close=mexp/file-close.png
+mexp-file-exit=mexp/file-exit.png
+
+#######################################
+# 编辑菜单图标
+#######################################
+mexp-edit-undo=mexp/edit-undo.png
+mexp-edit-redo=mexp/edit-redo.png
+mexp-edit-delete-cur=mexp/file-delete.png
+mexp-edit-move-up=mexp/edit-move-up.png
+mexp-edit-move-down=mexp/edit-move-down.png
+mexp-edit-move-left=mexp/edit-move-left.png
+mexp-edit-move-right=mexp/edit-move-right.png
+mexp-edit-history=mexp/edit-history.png
+
+#######################################
+# 导航菜单图标
+#######################################
+
+#######################################
+# 视图菜单图标
+#######################################
+mexp-view-menubar=mexp/view-menu.png
+mexp-view-prop-isolate=mexp/edit-isolate.png
+
+###########################################################
+# 工具栏图标
+###########################################################
+#######################################
+# 工具菜单图标
+#######################################
+mexp-data-search=mexp/find.png
+
+#######################################
+# 工具图标
+#######################################
+mexp-tool-options=mexp/tool-options.png
+
+#######################################
+# 帮助图标
+#######################################
+mexp-help-topic=mexp/tool-help.png
+
+###########################################################
+# 其它图标
+###########################################################
+#######################################
+# 标记为
+#######################################
+
+#######################################
+# 重要性
+#######################################
+
+#######################################
+# 排序方式
+#######################################
+
+#######################################
+# 属性编辑图标
+#######################################
+prop-copy=mexp/prop-copy.png
+prop-save=mexp/prop-save.png
+prop-drop=mexp/prop-drop.png
+
+#######################################
+# 信息图标
+#######################################
+info-card=common/card.png
+
+#######################################
+# 提醒图标
+#######################################
+hint-time=common/hint.png
+
+#######################################
+#口令编辑图标
+#######################################
+pwds-mask=common/pwds-mask.png
+pwds-view=common/pwds-view.png
+pwds-generate=common/pwds-generate.png
+pwds-options=common/options.png
+
+#######################################
+# 链接图标
+#######################################
+link-open=common/link.png
+
+#######################################
+# 邮件图标
+#######################################
+mail-receive=common/mail-receive.png
+mail-send=common/mail-send.png
+mail-attachment=common/mail-attach.png
+
+#######################################
+# 日期图标
+#######################################
+date-time=common/date.png
+date-options=common/options.png
+
+#######################################
+# 附件图标
+#######################################
+file-preview=common/file-preview.png
+file-append=common/file-upload.png
+file-img-eraser=common/file-img-eraser.png
+file-img-cursor-def=common/file-img-cursor-def.png
+file-img-cursor-sel=common/file-img-cursor-sel.png
+file-img-shaped-def=common/file-img-shaped-def.png
+file-img-shaped-sel=common/file-img-shaped-sel.png
+
+#######################################
+# 数值图标
+#######################################
+data-options=common/options.png
+
+#######################################
+# 控制图标
+#######################################
+sign-options=common/options.png
+
+###############################################################################
+# 向导模式图标
+###############################################################################
+mwiz-view=mwiz/view.png
+mwiz-add=mwiz/add.png
+mwiz-edit=mwiz/edit.png
+mwiz-delete=mwiz/delete.png
+mwiz-hint=mwiz/hint.png
+mwiz-find=mwiz/find.png
+###############################################################################
+# 数值运算图标
+###############################################################################
+maoc-calc=maoc/calc.png
+maoc-help=maoc/help.png
