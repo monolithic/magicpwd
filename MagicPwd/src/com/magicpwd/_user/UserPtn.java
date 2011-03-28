@@ -66,7 +66,6 @@ public class UserPtn extends javax.swing.JPanel
     private static javax.swing.Icon guidIcon;
     private TrayPtn trayPtn;
     private UserMdl userMdl;
-    private MpwdMdl mpwdMdl;
 
     /**
      * 独立窗口
@@ -736,14 +735,12 @@ public class UserPtn extends javax.swing.JPanel
     public boolean initData()
     {
         this.errCount = 0;
-        mpwdMdl = new MpwdMdl();
-        mpwdMdl.loadCfg();
 
         switch (signType)
         {
             case signIn:
                 // 显示上次登录用户
-                String[] arr = mpwdMdl.getViewList().split(",");
+                String[] arr = userMdl.getMpwdMdl().getViewList().split(",");
                 String tmp;
                 for (int i = 0, j = arr.length; i < j; i += 1)
                 {
@@ -779,7 +776,7 @@ public class UserPtn extends javax.swing.JPanel
                         continue;
                     }
                 }
-                cb_UserType.setSelectedItem(new S1S1(mpwdMdl.getViewLast(), ""));
+                cb_UserType.setSelectedItem(new S1S1(userMdl.getMpwdMdl().getViewLast(), ""));
                 String name = userMdl.getCfg(ConsCfg.CFG_USER_LAST, "");
                 if (com.magicpwd._util.Char.isValidate(name))
                 {
@@ -1182,7 +1179,7 @@ public class UserPtn extends javax.swing.JPanel
         Object object = cb_UserType.getSelectedItem();
         if (object instanceof S1S1)
         {
-            MpwdMdl.setAppView(AppView.valueOf(((S1S1) object).getK()));
+            MpwdMdl.setAppView(((S1S1) object).getK());
         }
         if (backCall != null)
         {

@@ -43,7 +43,7 @@ public final class MpwdMdl
         try
         {
             java.io.File cfgFile = new java.io.File("magicpwd.cfg");
-            if (cfgFile.exists() && cfgFile.canRead())
+            if (cfgFile.exists() && cfgFile.isFile() && cfgFile.canRead())
             {
                 fis = new java.io.FileInputStream(cfgFile);
                 mpwdCfg.load(fis);
@@ -61,6 +61,33 @@ public final class MpwdMdl
         setDatPath(mpwdCfg.getProperty("path.dat"));
         setBakPath(mpwdCfg.getProperty("path.bak"));
         setAppView(mpwdCfg.getProperty("view.last", "mwiz"));
+    }
+
+    public void saveCfg()
+    {
+        java.io.FileOutputStream fis = null;
+        try
+        {
+            java.io.File cfgFile = new java.io.File("magicpwd.cfg");
+            if (!cfgFile.exists())
+            {
+                cfgFile.createNewFile();
+            }
+            if (cfgFile.isFile() && cfgFile.canWrite())
+            {
+                fis = new java.io.FileOutputStream(cfgFile);
+                mpwdCfg.setProperty("view.last", appView.name());
+                mpwdCfg.store(fis, "");
+            }
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+        finally
+        {
+            Bean.closeStream(fis);
+        }
     }
 
     /**

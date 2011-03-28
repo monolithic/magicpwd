@@ -91,6 +91,8 @@ public final class UserMdl
         {
             Bean.closeStream(fos);
         }
+
+        mpwdMdl.saveCfg();
     }
 
     public String getCfg(String key, String def)
