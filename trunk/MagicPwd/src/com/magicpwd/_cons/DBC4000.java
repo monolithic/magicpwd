@@ -184,6 +184,7 @@ public class DBC4000
      * 注册日期
      */
     String P30F0107 = "P30F0107";
+    int P30F0107_SIZE = 24;
     /**
      * 模板索引
      */
@@ -208,13 +209,13 @@ public class DBC4000
      * 图标说明
      */
     String P30F010C = "P30F010C";
-    int P30F010C_SIZE = 512;
+    int P30F010C_SIZE = 1024;
     /**
-     * 
+     * 提醒索引
      */
     String P30F010D = "P30F010D";
     /**
-     * 过期提示
+     * 提醒备注
      */
     String P30F010E = "P30F010E";
     int P30F010E_SIZE = 16;
@@ -248,92 +249,98 @@ public class DBC4000
      * 图标分类表格
      * ////////////////////////////////////////////////////
      */
-    String P30F0300 = "P30F0300";
+    String P30F0600 = "P30F0600";
+    /**
+     * 显示排序
+     */
+    String P30F0601 = "P30F0601";
     /**
      * 类别索引
      */
-    String P30F0301 = "P30F0301";
-    /**
-     * 类别排序
-     */
-    String P30F0302 = "P30F0302";
+    String P30F0602 = "P30F0602";
+    int P30F0602_SIZE = 16;
     /**
      * 类别名称
      */
-    String P30F0303 = "P30F0303";
+    String P30F0603 = "P30F0603";
+    int P30F0603_SIZE = 32;
     /**
      * 类别提示
      */
-    String P30F0304 = "P30F0304";
+    String P30F0604 = "P30F0604";
+    int P30F0604_SIZE = 256;
     /**
      * 类别目录
      */
-    String P30F0305 = "P30F0305";
+    String P30F0605 = "P30F0605";
+    int P30F0605_SIZE = 64;
     /**
      * 类别备注
      */
-    String P30F0306 = "P30F0306";
+    String P30F0606 = "P30F0606";
+    int P30F0606_SIZE = 2048;
     /**
      * ////////////////////////////////////////////////////
      * 计划任务表格
      * ////////////////////////////////////////////////////
      */
-    String P30F0600 = "P30F0600";
+    String P30F0700 = "P30F0700";
     /**
-     * 任务类型
+     * 定时、周期、公式
+     * 任务类型（日期型、时间型、日期时间型）
      */
-    String P30F0601 = "P30F0601";
+    String P30F0701 = "P30F0701";
     /**
      * 优先级
      */
-    String P30F0602 = "P30F0602";
+    String P30F0702 = "P30F0702";
     /**
      * 任务状态（正常，已过期，已完成）
      */
-    String P30F0603 = "P30F0603";
+    String P30F0703 = "P30F0703";
     /**
      * 任务索引
      */
-    String P30F0604 = "P30F0604";
-    int P30F0604_SIZE = 16;
+    String P30F0704 = "P30F0704";
+    int P30F0704_SIZE = 16;
     /**
      * 上级任务
      */
-    String P30F0605 = "P30F0605";
-    int P30F0605_SIZE = 16;
+    String P30F0705 = "P30F0705";
+    int P30F0705_SIZE = 16;
     /**
      * 任务名称（即提醒标题）
      */
-    String P30F0606 = "P30F0606";
-    int P30F0601_SIZE = 256;
+    String P30F0706 = "P30F0706";
+    int P30F0701_SIZE = 256;
     /**
      * 起始时间
      */
-    String P30F0607 = "P30F0607";
+    String P30F0707 = "P30F0707";
     /**
      * 结束时间
      */
-    String P30F0608 = "P30F0608";
+    String P30F0708 = "P30F0708";
     /**
      * 执行时间（即提醒时间）
      */
-    String P30F0609 = "P30F0609";
-    int P30F0609_SIZE = 256;
+    String P30F0709 = "P30F0709";
+    int P30F0709_SIZE = 256;
     /**
      * tags（即搜索关键字）
      */
-    String P30F060A = "P30F060A";
-    int P30F060A_SIZE = 256;
+    String P30F070A = "P30F070A";
+    int P30F070A_SIZE = 256;
     /**
      * 提示方式
      */
-    String P30F060B = "P30F060B";
-    int P30F060B_SIZE = 16;
+    String P30F070B = "P30F070B";
+    int P30F070B_SIZE = 16;
     /**
      * 提示内容
      */
-    String P30F060C = "P30F060C";
-    int P30F060C_SIZE = 1024;
+    String P30F070C = "P30F070C";
+    int P30F070C_SIZE = 1024;
     /**
      * ////////////////////////////////////////////////////
      * 历史信息表格
