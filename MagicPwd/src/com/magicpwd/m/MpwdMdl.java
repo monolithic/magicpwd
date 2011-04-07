@@ -31,6 +31,7 @@ public final class MpwdMdl
 
     private static RunMode runMode = RunMode.app;
     private static AppView appView = AppView.mwiz;
+    private static boolean firstRun;
     private java.util.Properties mpwdCfg;
     private String datPath;
     private String bakPath;
@@ -61,6 +62,7 @@ public final class MpwdMdl
         setDatPath(mpwdCfg.getProperty("path.dat"));
         setBakPath(mpwdCfg.getProperty("path.bak"));
         setAppView(mpwdCfg.getProperty("view.last", "mwiz"));
+        firstRun = !new java.io.File(datPath, "mpwd.script").exists();
     }
 
     public void saveCfg()
@@ -161,6 +163,14 @@ public final class MpwdMdl
         {
             MpwdMdl.appView = AppView.valueOf(appModule.toLowerCase());
         }
+    }
+
+    /**
+     * @return the firstRun
+     */
+    public static boolean isFirstRun()
+    {
+        return firstRun;
     }
 
     /**

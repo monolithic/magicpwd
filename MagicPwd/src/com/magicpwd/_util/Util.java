@@ -399,23 +399,33 @@ public final class Util
         return "";
     }
 
-    public static boolean isWin()
+    public static boolean isWindows()
     {
-        String tmp = System.getProperty("os.name");
-        if (Char.isValidate(tmp))
-        {
-            return tmp.toLowerCase().indexOf("windows") >= 0;
-        }
-        return false;
+        return isWindows(System.getProperty("os.name"));
+    }
+
+    public static boolean isWindows(String osName)
+    {
+        return Char.isValidate(osName) ? osName.toLowerCase().indexOf("windows") > -1 : false;
     }
 
     public static boolean isMac()
     {
-        String tmp = System.getProperty("os.name");
-        if (Char.isValidate(tmp))
-        {
-            return tmp.toLowerCase().indexOf("mac") >= 0;
-        }
-        return false;
+        return isMac(System.getProperty("os.name"));
+    }
+
+    public static boolean isMac(String osName)
+    {
+        return Char.isValidate(osName) ? osName.toLowerCase().indexOf("mac") > -1 : false;
+    }
+
+    public static boolean isLinux()
+    {
+        return isLinux(System.getProperty("os.name"));
+    }
+
+    public static boolean isLinux(String osName)
+    {
+        return Char.isValidate(osName) ? osName.toLowerCase().indexOf("linux") > -1 : false;
     }
 }

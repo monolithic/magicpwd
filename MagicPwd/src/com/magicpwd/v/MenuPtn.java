@@ -579,7 +579,7 @@ public class MenuPtn
         if (dirs != null && dirs.length > 0)
         {
             lookMenu.addSeparator();
-            String os = Util.isWin() ? "win" : (Util.isMac() ? "mac" : "lin");
+            String os = Util.isWindows() ? "win" : (Util.isMac() ? "mac" : "lin");
 
             for (java.io.File dir : dirs)
             {

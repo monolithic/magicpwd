@@ -586,11 +586,11 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
         if (nextPtn == AppView.user)
         {
             userPtn = new UserPtn(userMdl, this);
-            userPtn.setBackCall(this);
-            userPtn.initView(userMdl.getCfg(ConsCfg.CFG_USER, "").trim().length() > 0 ? AuthLog.signIn : AuthLog.signUp);
+            userPtn.initView(MpwdMdl.isFirstRun() ? AuthLog.signUp : AuthLog.signIn);
             userPtn.initLang();
             userPtn.initData();
             userPtn.setVisible(true);
+            userPtn.setBackCall(this);
             return;
         }
 

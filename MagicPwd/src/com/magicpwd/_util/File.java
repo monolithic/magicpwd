@@ -303,11 +303,11 @@ public class File
             return file.canRead() ? new java.io.FileInputStream(file) : null;
         }
 
-        if (!Pattern.matches("^[a-zA-z]+://[^\\s]+", uri))
+        if (Pattern.matches("^[a-zA-z]+:/{2,3}[^\\s]+", uri))
         {
-            uri = "http://" + uri;
+            return new java.net.URI(uri).toURL().openStream();
         }
-        return new java.net.URI(uri).toURL().openStream();
+        return null;
     }
 
     public static String getExtension(String fileName)
