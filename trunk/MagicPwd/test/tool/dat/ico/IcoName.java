@@ -1,7 +1,5 @@
 package tool.dat.ico;
 
-
-
 /*
  *  Copyright (C) 2011 yaoshangwen
  * 
@@ -18,8 +16,6 @@ package tool.dat.ico;
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
-
 import java.text.SimpleDateFormat;
 
 /**
@@ -43,7 +39,7 @@ public class IcoName
             cal.set(java.util.Calendar.MINUTE, 20);
             cal.set(java.util.Calendar.SECOND, 1);
             format = new SimpleDateFormat("yyyyMMddHHmmss");
-            renameTo(new java.io.File("dat/ico"), cal);
+            renameTo(new java.io.File("dat/ico"), new java.io.File("tmp/ico"), cal);
         }
         catch (Exception exp)
         {
@@ -51,21 +47,26 @@ public class IcoName
         }
     }
 
-    private static void renameTo(java.io.File file, java.util.Calendar cal)
+    private static void renameTo(java.io.File src, java.io.File dst, java.util.Calendar cal)
     {
-        for (java.io.File tmp : file.listFiles())
+        for (java.io.File tmp : src.listFiles())
         {
-            tmp.setLastModified(cal.getTimeInMillis());
             if (tmp.isFile())
             {
                 if (tmp.getName().toUpperCase().endsWith(".PNG"))
                 {
-                    tmp.renameTo(new java.io.File(tmp.getParentFile(), "AD" + format.format(cal.getTime()) + ".PNG"));
+                    tmp.setLastModified(cal.getTimeInMillis());
+                    tmp.renameTo(new java.io.File(dst, "AD" + format.format(cal.getTime()) + ".PNG"));
                     cal.add(java.util.Calendar.SECOND, 1);
                 }
                 continue;
             }
-//            renameTo(tmp, cal);
+            java.io.File dir = new java.io.File(dst, tmp.getName());
+            if (!dir.exists())
+            {
+                dir.mkdirs();
+            }
+            renameTo(tmp, dir, cal);
         }
     }
 }
