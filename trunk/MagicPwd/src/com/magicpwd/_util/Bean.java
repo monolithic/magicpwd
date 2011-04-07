@@ -384,7 +384,7 @@ public class Bean
         try
         {
             stream = File.open4Read(path);
-            return new javax.swing.ImageIcon(javax.imageio.ImageIO.read(stream));
+            return stream != null ? new javax.swing.ImageIcon(javax.imageio.ImageIO.read(stream)) : null;
         }
         catch (Exception exp)
         {

@@ -68,6 +68,12 @@ public class MagicPwd
             return;
         }
 
+        // 网络模式
+        if (MpwdMdl.getRunMode() == RunMode.web || MpwdMdl.isFirstRun())
+        {
+            zipData(mpwdMdl.getDatPath());
+        }
+
 //        java.awt.KeyboardFocusManager.setCurrentKeyboardFocusManager(new KFManager());
 
         // 用户配置文件加载
@@ -103,11 +109,11 @@ public class MagicPwd
         loadPre();
     }
 
-    private static void zipData()
+    private static void zipData(String dir)
     {
         try
         {
-            Jzip.unZip(MagicPwd.class.getResourceAsStream("/res/res.zip"), new java.io.File("."), false);
+            Jzip.unZip(MagicPwd.class.getResourceAsStream("/res/res.zip"), new java.io.File(dir), false);
         }
         catch (Exception exp)
         {
