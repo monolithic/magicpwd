@@ -14,24 +14,20 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd._user;
+package com.magicpwd.__i;
 
 /**
  *
  * @author Aven
  */
-public class SignFp extends javax.swing.JPanel
+public interface IUserView
 {
 
-    public void initView()
-    {
-    }
+    void initView();
 
-    public void initLang()
-    {
-    }
+    void initLang();
 
-    public void initData()
-    {
-    }
+    void initData();
+
+    javax.swing.JPanel getPanel();
 }

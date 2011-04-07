@@ -26,7 +26,7 @@ public interface ConsDat
     /**
      * 数据库版本
      */
-    String VERSIONS = "3";
+    String VERSIONS = "4";
     /**
      * 口令状态：默认
      */
