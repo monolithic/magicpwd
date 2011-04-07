@@ -16,19 +16,21 @@
  */
 package com.magicpwd.d.db;
 
+import com.magicpwd.MagicPwd;
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd._comn.prop.Char;
 import com.magicpwd._comn.Keys;
 import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._comn.S1S3;
 import com.magicpwd._comn.item.EditItem;
+import com.magicpwd._comn.prop.Char;
 import com.magicpwd._comn.prop.Tplt;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.DBC3000;
 import com.magicpwd._enum.AppView;
+import com.magicpwd._util.Bean;
 import com.magicpwd._util.Hash;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
@@ -75,6 +77,69 @@ public class DBA4000
 
         dba.dispose();
         return result;
+    }
+
+    public static boolean initDataBase()
+    {
+        DBAccess dba = new DBAccess();
+        java.io.InputStream stream = null;
+        java.io.BufferedReader reader = null;
+
+        try
+        {
+            dba.init();
+
+            stream = MagicPwd.class.getResourceAsStream("/res/sql/ddl.sql");
+            if (stream == null)
+            {
+                return false;
+            }
+
+            reader = new java.io.BufferedReader(new java.io.InputStreamReader(stream));
+            String line = reader.readLine();
+            while (com.magicpwd._util.Char.isValidate(line))
+            {
+                dba.addBatch(line);
+                line = reader.readLine();
+            }
+            dba.executeBatch();
+            dba.reInit();
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            return false;
+        }
+        finally
+        {
+            Bean.closeStream(stream);
+            Bean.closeReader(reader);
+        }
+
+        try
+        {
+            stream = MagicPwd.class.getResourceAsStream("/res/sql/dml.sql");
+            if (stream == null)
+            {
+                return false;
+            }
+
+            reader = new java.io.BufferedReader(new java.io.InputStreamReader(stream));
+            String line = reader.readLine();
+            while (com.magicpwd._util.Char.isValidate(line))
+            {
+                dba.addBatch(line);
+                line = reader.readLine();
+            }
+            dba.executeBatch();
+            dba.reInit();
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            return false;
+        }
+        return true;
     }
 
     public static boolean saveConfig(String key, String value)
