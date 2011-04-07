@@ -30,6 +30,7 @@ import com.magicpwd._util.Char;
 import com.magicpwd._util.Jpng;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
+import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.m.MpwdMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.u.DBU3000;
@@ -1333,6 +1334,7 @@ public class UserPtn extends javax.swing.JPanel
             if (b)
             {
                 userMdl.setCfg(ConsCfg.CFG_USER_LAST, un);
+                DBA4000.initDataBase();
             }
             else
             {
