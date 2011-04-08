@@ -19,26 +19,15 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lbUserPwds" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbUserName" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="lbUserView" alignment="1" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="pfUserPwds" alignment="0" pref="160" max="32767" attributes="0"/>
-                          <Component id="tfUserName" alignment="0" pref="160" max="32767" attributes="0"/>
-                          <Component id="cbUserView" alignment="0" pref="160" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="26" max="32767" attributes="0"/>
-                      <Component id="btApply" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btAbort" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="lbUserPwds" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbUserName" alignment="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="lbUserView" alignment="1" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="pfUserPwds" alignment="0" pref="160" max="32767" attributes="0"/>
+                  <Component id="tfUserName" alignment="0" pref="160" max="32767" attributes="0"/>
+                  <Component id="cbUserView" alignment="0" pref="160" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -61,12 +50,6 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lbUserPwds" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="pfUserPwds" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btAbort" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btApply" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -109,27 +92,6 @@
     <Component class="javax.swing.JPasswordField" name="pfUserPwds">
       <Properties>
         <Property name="text" type="java.lang.String" value="jPasswordField1"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btAbort">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="&#x53d6;&#x6d88;(C)"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btAbortActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btApply">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="&#x767b;&#x5f55;(S)"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btApplyActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="&#x53e3;&#x4ee4;&#x627e;&#x56de;"/>
       </Properties>
     </Component>
   </SubComponents>

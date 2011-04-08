@@ -402,8 +402,7 @@ public final class UserMdl
 
     public String getLook()
     {
-        return getCfg(AppView.mpwd, ConsCfg.CFG_SKIN_LOOK, "jgoodies.Plastic3D");
-        //return getCfg(AppView.mpwd, ConsCfg.CFG_SKIN_LOOK, ConsCfg.DEF_SKIN_LOOK_SYS);
+        return getCfg(AppView.mpwd, ConsCfg.CFG_SKIN_LOOK, ConsCfg.DEF_SKIN_LOOK_SYS);
     }
 
     public void setLook(String look)

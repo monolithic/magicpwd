@@ -14,15 +14,47 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-
 package com.magicpwd._user;
+
+import com.magicpwd.__i.IUserView;
 
 /**
  *
  * @author Aven
  */
-public class SignSk {
+public class SignSk extends javax.swing.JPanel implements IUserView
+{
 
+    @Override
+    public void initView()
+    {
+    }
+
+    @Override
+    public void initLang()
+    {
+    }
+
+    @Override
+    public void initData()
+    {
+    }
+
+    @Override
+    public javax.swing.JPanel getPanel()
+    {
+        return this;
+    }
+
+    @Override
+    public void btApplyActionPerformed(java.awt.event.ActionEvent e)
+    {
+    }
+
+    @Override
+    public void btAbortActionPerformed(java.awt.event.ActionEvent e)
+    {
+    }
     /**
      *
      */

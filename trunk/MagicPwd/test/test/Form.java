@@ -1,21 +1,17 @@
 package test;
 
-import com.magicpwd._user.SignUp;
-
 public class Form extends javax.swing.JFrame
 {
 
     public Form()
     {
-        SignUp signUp = new SignUp(null);
-        signUp.initView();
-        signUp.initLang();
-        signUp.initData();
+        javax.swing.JPanel p = new javax.swing.JPanel();
 
-        this.getContentPane().add(signUp);
+        this.getContentPane().add(p);
         this.pack();
         this.setTitle("Demo");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        System.out.println(p.getLayout());
     }
 
     public static void main(String args[])

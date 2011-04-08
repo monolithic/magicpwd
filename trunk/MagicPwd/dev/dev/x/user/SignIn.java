@@ -49,9 +49,6 @@ public class SignIn extends javax.swing.JPanel {
         tfUserName = new javax.swing.JTextField();
         lbUserPwds = new javax.swing.JLabel();
         pfUserPwds = new javax.swing.JPasswordField();
-        btAbort = new javax.swing.JButton();
-        btApply = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
 
         lbUserView.setText("四个中文(S)");
 
@@ -65,22 +62,6 @@ public class SignIn extends javax.swing.JPanel {
 
         pfUserPwds.setText("jPasswordField1");
 
-        btAbort.setText("取消(C)");
-        btAbort.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAbortActionPerformed(evt);
-            }
-        });
-
-        btApply.setText("登录(S)");
-        btApply.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btApplyActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("口令找回");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -88,22 +69,14 @@ public class SignIn extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbUserPwds, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbUserName, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lbUserView, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(pfUserPwds, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                            .addComponent(tfUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                            .addComponent(cbUserView, 0, 160, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                        .addComponent(btApply)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btAbort)))
+                    .addComponent(lbUserPwds, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbUserName, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lbUserView, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pfUserPwds, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                    .addComponent(tfUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                    .addComponent(cbUserView, 0, 160, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -121,29 +94,13 @@ public class SignIn extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbUserPwds)
                     .addComponent(pfUserPwds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btAbort)
-                    .addComponent(btApply)
-                    .addComponent(jLabel2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btApplyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btApplyActionPerformed
-
-    private void btAbortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAbortActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btAbortActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btAbort;
-    private javax.swing.JButton btApply;
     private javax.swing.JComboBox cbUserView;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lbUserName;
     private javax.swing.JLabel lbUserPwds;
     private javax.swing.JLabel lbUserView;

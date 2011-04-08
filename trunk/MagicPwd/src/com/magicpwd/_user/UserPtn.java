@@ -18,7 +18,6 @@ package com.magicpwd._user;
 
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd.__i.IUserView;
-import com.magicpwd._comp.ImgPanel;
 import com.magicpwd._enum.AuthLog;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Jpng;
@@ -105,36 +104,52 @@ public class UserPtn extends javax.swing.JPanel
 
         this.signType = type;
 
-        userView = new SignUp(this);
-        userView.initView();
+        switch (signType)
+        {
+            case signIn:
+                userView = new SignIn(this);
+                userView.initView();
+                break;
+            case signLs:
+                break;
+            case signRs:
+                break;
+            case signUp:
+                userView = new SignUp(this);
+                userView.initView();
+                break;
+            case signPk:
+                break;
+            case signFp:
+                break;
+            case signSk:
+                break;
+            case signSu:
+                break;
+            case signCs:
+                break;
+            default:
+                break;
+        }
 
-        plLogo = new ImgPanel();
-        plLogo.setPreferredSize(new java.awt.Dimension(250, 50));
-        plUser = new javax.swing.JPanel();
-        plUser.add(userView.getPanel());
+        initLogoView();
+        initInputView();
+        initActionView();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg.addComponent(plUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         hpg.addComponent(plLogo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        hpg.addComponent(plInput, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        hpg.addComponent(plAction, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         layout.setHorizontalGroup(hpg);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
         vsg.addComponent(plLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        vsg.addComponent(plUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg.addComponent(plInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg.addComponent(plAction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         layout.setVerticalGroup(vsg);
-
-        try
-        {
-            java.io.InputStream stream = this.getClass().getResourceAsStream("/res/icon/guid.png");
-            plLogo.setImage(javax.imageio.ImageIO.read(stream));
-            stream.close();
-        }
-        catch (Exception ex)
-        {
-            Logs.exception(ex);
-        }
 
         if (frame != null)
         {
@@ -148,6 +163,82 @@ public class UserPtn extends javax.swing.JPanel
         }
 
         return true;
+    }
+
+    private void initLogoView()
+    {
+        plLogo = new javax.swing.JPanel();
+        plLogo.setLayout(new java.awt.BorderLayout());
+        lbLogo = new javax.swing.JLabel();
+        plLogo.add(lbLogo);
+        try
+        {
+            java.io.InputStream stream = this.getClass().getResourceAsStream("/res/icon/guid.png");
+            lbLogo.setIcon(new javax.swing.ImageIcon(javax.imageio.ImageIO.read(stream)));
+            stream.close();
+        }
+        catch (Exception ex)
+        {
+            Logs.exception(ex);
+        }
+    }
+
+    private void initInputView()
+    {
+        plInput = new javax.swing.JPanel();
+        plInput.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 0, 0));
+        plInput.add(userView.getPanel());
+    }
+
+    private void initActionView()
+    {
+        plAction = new javax.swing.JPanel();
+        btAbort = new javax.swing.JButton();
+        btAbort.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                userView.btAbortActionPerformed(e);
+            }
+        });
+        btApply = new javax.swing.JButton();
+        btApply.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                userView.btApplyActionPerformed(e);
+            }
+        });
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(plAction);
+        plAction.setLayout(layout);
+        javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
+        hsg.addContainerGap();
+        hsg.addComponent(jLabel1);
+        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg.addComponent(jLabel2);
+        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE);
+        hsg.addComponent(btApply);
+        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg.addComponent(btAbort);
+        hsg.addContainerGap();
+        layout.setHorizontalGroup(hsg);
+        javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg.addComponent(btAbort);
+        vpg.addComponent(btApply);
+        vpg.addComponent(jLabel1);
+        vpg.addComponent(jLabel2);
+        javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
+//        vsg.addContainerGap();
+        vsg.addGroup(vpg);
+        vsg.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        layout.setVerticalGroup(vsg);
     }
 
     public boolean initLang()
@@ -424,6 +515,18 @@ public class UserPtn extends javax.swing.JPanel
         }
     }
 
+    public void setTitle(String title)
+    {
+        if (frame != null)
+        {
+            frame.setTitle(title);
+        }
+        if (dialog != null)
+        {
+            dialog.setTitle(title);
+        }
+    }
+
     public void toFront()
     {
         if (frame != null)
@@ -490,18 +593,6 @@ public class UserPtn extends javax.swing.JPanel
 //            }
 //        }
 //    }
-    private void setTitle(String title)
-    {
-        if (frame != null)
-        {
-            frame.setTitle(title);
-        }
-        if (dialog != null)
-        {
-            dialog.setTitle(title);
-        }
-    }
-
     @Override
     public void setVisible(boolean visible)
     {
@@ -531,6 +622,14 @@ public class UserPtn extends javax.swing.JPanel
     public void setBackCall(IBackCall<UserDto> backCall)
     {
         this.backCall = backCall;
+    }
+
+    /**
+     * @return the backCall
+     */
+    IBackCall<UserDto> getBackCall()
+    {
+        return backCall;
     }
 //    /**
 //     * @param evt
@@ -681,6 +780,36 @@ public class UserPtn extends javax.swing.JPanel
 //
 //        dispoze();
 //    }
-    private ImgPanel plLogo;
-    private javax.swing.JPanel plUser;
+
+    /**
+     * @return the btAbort
+     */
+    public javax.swing.JButton getAbortButton()
+    {
+        return btAbort;
+    }
+
+    /**
+     * @return the btApply
+     */
+    public javax.swing.JButton getApplyButton()
+    {
+        return btApply;
+    }
+
+    /**
+     * @return the userMdl
+     */
+    UserMdl getUserMdl()
+    {
+        return userMdl;
+    }
+    private javax.swing.JPanel plLogo;
+    private javax.swing.JPanel plInput;
+    private javax.swing.JPanel plAction;
+    private javax.swing.JButton btAbort;
+    private javax.swing.JButton btApply;
+    private javax.swing.JLabel lbLogo;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
 }
