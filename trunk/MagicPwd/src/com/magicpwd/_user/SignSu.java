@@ -43,20 +43,7 @@ public class SignSu extends javax.swing.JPanel implements IUserView
         pfUserPwd1 = new javax.swing.JPasswordField();
         lbUserPwd2 = new javax.swing.JLabel();
         pfUserPwd2 = new javax.swing.JPasswordField();
-        lbUserOpts = new javax.swing.JLabel();
         plUserOpts = new javax.swing.JPanel();
-
-        lbUserOpts.setForeground(new java.awt.Color(0, 0, 255));
-        lbUserOpts.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lbUserOpts.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-
-            @Override
-            public void mouseReleased(java.awt.event.MouseEvent e)
-            {
-                lbUserOptsMouseReleased(e);
-            }
-        });
 
         plUserOpts.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         plUserOpts.setVisible(false);
@@ -77,7 +64,6 @@ public class SignSu extends javax.swing.JPanel implements IUserView
         hsg1.addGroup(hpg2);
         javax.swing.GroupLayout.ParallelGroup hpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg3.addGroup(hsg1);
-        hpg3.addComponent(lbUserOpts, javax.swing.GroupLayout.Alignment.TRAILING);
         hpg3.addComponent(plUserOpts, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg2 = layout.createSequentialGroup();
         hsg2.addContainerGap();
@@ -94,18 +80,21 @@ public class SignSu extends javax.swing.JPanel implements IUserView
         vpg3.addComponent(lbUserPwd2);
         vpg3.addComponent(pfUserPwd2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
-        vsg1.addContainerGap();
+//        vsg1.addContainerGap();
         vsg1.addGroup(vpg1);
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg1.addGroup(vpg2);
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg1.addGroup(vpg3);
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        vsg1.addComponent(lbUserOpts);
-        vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg1.addComponent(plUserOpts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         vsg1.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         layout.setVerticalGroup(vsg1);
+    }
+
+    @Override
+    public void initMenu(javax.swing.JPopupMenu menu)
+    {
     }
 
     @Override
@@ -171,6 +160,5 @@ public class SignSu extends javax.swing.JPanel implements IUserView
     private javax.swing.JPasswordField pfUserPwd1;
     private javax.swing.JLabel lbUserPwd2;
     private javax.swing.JPasswordField pfUserPwd2;
-    private javax.swing.JLabel lbUserOpts;
     private javax.swing.JPanel plUserOpts;
 }

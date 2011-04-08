@@ -18,16 +18,20 @@ package com.magicpwd._user;
 
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd.__i.IUserView;
+import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._cons.LangRes;
 import com.magicpwd._enum.AuthLog;
 import com.magicpwd._enum.RunMode;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Jpng;
+import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.m.MpwdMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.tray.TrayPtn;
+import java.awt.event.ActionEvent;
 
 public class UserPtn extends javax.swing.JPanel
 {
@@ -142,6 +146,8 @@ public class UserPtn extends javax.swing.JPanel
         initInputView();
         initActionView();
 
+        userView.initMenu(pmMenu);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
@@ -151,9 +157,9 @@ public class UserPtn extends javax.swing.JPanel
         layout.setHorizontalGroup(hpg);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
         vsg.addComponent(plLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-//        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addComponent(plInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-//        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addComponent(plAction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         layout.setVerticalGroup(vsg);
 
@@ -218,17 +224,26 @@ public class UserPtn extends javax.swing.JPanel
                 userView.btApplyActionPerformed(e);
             }
         });
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lbMenu = new BtnLabel();
+        lbMenu.addActionListener(new java.awt.event.ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                pmMenu.show(lbMenu, 0, lbMenu.getHeight());
+            }
+        });
+
+        pmMenu = new javax.swing.JPopupMenu();
+        miOskb = new javax.swing.JCheckBoxMenuItem();
+        pmMenu.add(miOskb);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(plAction);
         plAction.setLayout(layout);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addContainerGap();
-        hsg.addComponent(jLabel1);
-        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg.addComponent(jLabel2);
-        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE);
+        hsg.addComponent(lbMenu, 21, 21, 21);
+        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 0, Short.MAX_VALUE);
         hsg.addComponent(btApply);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg.addComponent(btAbort);
@@ -237,8 +252,7 @@ public class UserPtn extends javax.swing.JPanel
         javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg.addComponent(btAbort);
         vpg.addComponent(btApply);
-        vpg.addComponent(jLabel1);
-        vpg.addComponent(jLabel2);
+        vpg.addComponent(lbMenu, 21, 21, 21);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
 //        vsg.addContainerGap();
         vsg.addGroup(vpg);
@@ -249,6 +263,10 @@ public class UserPtn extends javax.swing.JPanel
     public boolean initLang()
     {
         userView.initLang();
+
+        Lang.setWText(miOskb, LangRes.P30FA310, "屏幕键盘");
+        Lang.setWTips(miOskb, LangRes.P30FA311, "使用屏幕键盘输入");
+
         pack();
         return true;
     }
@@ -581,6 +599,7 @@ public class UserPtn extends javax.swing.JPanel
     private javax.swing.JButton btAbort;
     private javax.swing.JButton btApply;
     private javax.swing.JLabel lbLogo;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private BtnLabel lbMenu;
+    private javax.swing.JPopupMenu pmMenu;
+    private javax.swing.JCheckBoxMenuItem miOskb;
 }
