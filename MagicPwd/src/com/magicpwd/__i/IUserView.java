@@ -30,4 +30,8 @@ public interface IUserView
     void initData();
 
     javax.swing.JPanel getPanel();
+
+    void btApplyActionPerformed(java.awt.event.ActionEvent e);
+
+    void btAbortActionPerformed(java.awt.event.ActionEvent e);
 }

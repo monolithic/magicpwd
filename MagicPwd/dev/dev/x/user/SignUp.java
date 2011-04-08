@@ -49,27 +49,18 @@ public class SignUp extends javax.swing.JPanel {
         pfUserPwd1 = new javax.swing.JPasswordField();
         lbUserPwd2 = new javax.swing.JLabel();
         pfUserPwd2 = new javax.swing.JPasswordField();
-        lbMoreOpts = new javax.swing.JLabel();
+        lbUserOpts = new javax.swing.JLabel();
         plUserOpts = new javax.swing.JPanel();
-        btAbort = new javax.swing.JButton();
-        btApply = new javax.swing.JButton();
-        lbUpgrade = new javax.swing.JLabel();
 
         lbUserName.setText("登录用户(U)");
 
-        lbUserPwd1.setText("登录口令(P)");
+        lbUserPwd1.setText("jLabel2");
 
-        lbUserPwd2.setText("口令确认(V)");
+        lbUserPwd2.setText("jLabel3");
 
-        lbMoreOpts.setForeground(new java.awt.Color(0, 0, 255));
-        lbMoreOpts.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        lbMoreOpts.setText("jLabel4");
-        lbMoreOpts.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        lbMoreOpts.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                lbMoreOptsMouseReleased(evt);
-            }
-        });
+        lbUserOpts.setForeground(new java.awt.Color(0, 0, 255));
+        lbUserOpts.setText("高级选项");
+        lbUserOpts.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         plUserOpts.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -84,31 +75,15 @@ public class SignUp extends javax.swing.JPanel {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        btAbort.setText("取消(C)");
-        btAbort.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btAbortActionPerformed(evt);
-            }
-        });
-
-        btApply.setText("注册(O)");
-        btApply.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btApplyActionPerformed(evt);
-            }
-        });
-
-        lbUpgrade.setText("升级");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(plUserOpts, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(plUserOpts, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lbUserName, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(lbUserPwd1, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -118,13 +93,7 @@ public class SignUp extends javax.swing.JPanel {
                             .addComponent(tfUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                             .addComponent(pfUserPwd1, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
                             .addComponent(pfUserPwd2, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lbUpgrade)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                        .addComponent(btApply)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btAbort))
-                    .addComponent(lbMoreOpts))
+                    .addComponent(lbUserOpts, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -143,37 +112,17 @@ public class SignUp extends javax.swing.JPanel {
                     .addComponent(lbUserPwd2)
                     .addComponent(pfUserPwd2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbMoreOpts)
+                .addComponent(lbUserOpts)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(plUserOpts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btAbort)
-                    .addComponent(btApply)
-                    .addComponent(lbUpgrade))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btApplyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btApplyActionPerformed
-
-    private void btAbortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAbortActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btAbortActionPerformed
-
-    private void lbMoreOptsMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lbMoreOptsMouseReleased
-        // TODO add your handling code here:
-    }//GEN-LAST:event_lbMoreOptsMouseReleased
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btAbort;
-    private javax.swing.JButton btApply;
-    private javax.swing.JLabel lbMoreOpts;
-    private javax.swing.JLabel lbUpgrade;
     private javax.swing.JLabel lbUserName;
+    private javax.swing.JLabel lbUserOpts;
     private javax.swing.JLabel lbUserPwd1;
     private javax.swing.JLabel lbUserPwd2;
     private javax.swing.JPasswordField pfUserPwd1;

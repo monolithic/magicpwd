@@ -16,22 +16,43 @@
  */
 package com.magicpwd._user;
 
+import com.magicpwd.__i.IUserView;
+
 /**
  *
  * @author Aven
  */
-public class SignLs extends javax.swing.JPanel
+public class SignLs extends javax.swing.JPanel implements IUserView
 {
 
+    @Override
     public void initView()
     {
     }
 
+    @Override
     public void initLang()
     {
     }
 
+    @Override
     public void initData()
+    {
+    }
+
+    @Override
+    public javax.swing.JPanel getPanel()
+    {
+        return this;
+    }
+
+    @Override
+    public void btApplyActionPerformed(java.awt.event.ActionEvent e)
+    {
+    }
+
+    @Override
+    public void btAbortActionPerformed(java.awt.event.ActionEvent e)
     {
     }
 //    private void signLs()
