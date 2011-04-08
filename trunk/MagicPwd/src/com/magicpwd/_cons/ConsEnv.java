@@ -26,7 +26,7 @@ public interface ConsEnv
     /**
      * 软件信息：当前版本
      */
-    String VERSIONS = "V3.5.6.8";
+    String VERSIONS = "V4.0.0.0";
     /**
      * 软件信息：构建日期
      */
@@ -43,7 +43,7 @@ public interface ConsEnv
      * 软件信息：软件首页
      */
     String HOMEPAGE = "http://magicpwd.com/?am";
-    String BLOGSITE = "http://magicpwd.com/wlog/";
+    String BLOGSITE = "http://magicpwd.com/wlog";
     String MLOGSITE = "http://t.sina.com.cn/mpwd";
     /**
      * 软件信息：软件版权

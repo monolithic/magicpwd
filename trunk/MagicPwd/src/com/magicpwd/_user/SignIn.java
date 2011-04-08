@@ -17,8 +17,15 @@
 package com.magicpwd._user;
 
 import com.magicpwd.__i.IUserView;
+import com.magicpwd._comn.S1S1;
+import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._enum.AppView;
+import com.magicpwd._enum.AuthLog;
 import com.magicpwd._util.Lang;
+import com.magicpwd._util.Logs;
+import com.magicpwd.m.MpwdMdl;
+import com.magicpwd.m.UserMdl;
 
 /**
  *
@@ -28,8 +35,12 @@ public class SignIn extends javax.swing.JPanel implements IUserView
 {
 
     private UserPtn userPtn;
+    /**
+     * 登录错误次数
+     */
+    private int errCount;
 
-    public SignIn(UserPtn userPtn)
+    SignIn(UserPtn userPtn)
     {
         this.userPtn = userPtn;
     }
@@ -132,6 +143,56 @@ public class SignIn extends javax.swing.JPanel implements IUserView
     @Override
     public void initData()
     {
+        UserMdl userMdl = userPtn.getUserMdl();
+
+        // 显示上次登录用户
+        String[] arr = userMdl.getMpwdMdl().getViewList().split(",");
+        String tmp;
+        for (int i = 0, j = arr.length; i < j; i += 1)
+        {
+            tmp = arr[i].toLowerCase();
+            if (AppView.mexp.name().equals(tmp))
+            {
+                cbUserView.addItem(new S1S1(tmp, Lang.getLang(LangRes.P30FA107, "专业模式")));
+                continue;
+            }
+            if (AppView.mwiz.name().equals(tmp))
+            {
+                cbUserView.addItem(new S1S1(tmp, Lang.getLang(LangRes.P30FA108, "向导模式")));
+                continue;
+            }
+            if (AppView.mpad.name().equals(tmp))
+            {
+                cbUserView.addItem(new S1S1(tmp, Lang.getLang(LangRes.P30FA109, "记事模式")));
+                continue;
+            }
+            if (AppView.maoc.name().equals(tmp))
+            {
+                cbUserView.addItem(new S1S1(tmp, Lang.getLang(LangRes.P30FA10A, "数值运算")));
+                continue;
+            }
+            if (AppView.mruc.name().equals(tmp))
+            {
+                cbUserView.addItem(new S1S1(tmp, Lang.getLang(LangRes.P30FA10B, "单位换算")));
+                continue;
+            }
+            if (AppView.mgtd.name().equals(tmp))
+            {
+                cbUserView.addItem(new S1S1(tmp, Lang.getLang(LangRes.P30FA10C, "计划任务")));
+                continue;
+            }
+        }
+        cbUserView.setSelectedItem(new S1S1(userMdl.getMpwdMdl().getViewLast(), ""));
+        String name = userMdl.getCfg(ConsCfg.CFG_USER_LAST, "");
+        if (com.magicpwd._util.Char.isValidate(name))
+        {
+            tfUserName.setText(name);
+            pfUserPwds.requestFocus();
+        }
+        else
+        {
+            tfUserName.requestFocus();
+        }
     }
 
     @Override
@@ -143,6 +204,70 @@ public class SignIn extends javax.swing.JPanel implements IUserView
     @Override
     public void btApplyActionPerformed(java.awt.event.ActionEvent e)
     {
+        String name = tfUserName.getText();
+        if (!com.magicpwd._util.Char.isValidate(name))
+        {
+            Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
+            tfUserName.requestFocus();
+            return;
+        }
+        String pwds = new String(pfUserPwds.getPassword());
+        if (!com.magicpwd._util.Char.isValidate(pwds))
+        {
+            Lang.showMesg(this, LangRes.P30FAA02, "请输入登录口令！");
+            pfUserPwds.requestFocus();
+            return;
+        }
+
+        try
+        {
+            boolean b = userPtn.getUserMdl().signIn(name, pwds);
+            if (b)
+            {
+//                if (!ConsDat.VERSIONS.equals(DBA4000.readConfig("")))
+//                {
+//                    return;
+//                }
+                userPtn.getUserMdl().setCfg(ConsCfg.CFG_USER_LAST, name);
+            }
+            else
+            {
+                errCount += 1;
+                if (errCount > 2)
+                {
+                    Lang.showMesg(this, LangRes.P30FAA1C, "您操作的错误次太多，请确认您是否为合法用户！\n为了保障用户数据安全，软件将自动关闭。");
+                    System.exit(0);
+                }
+                else
+                {
+                    Lang.showMesg(this, LangRes.P30FAA03, "身份验证错误，请确认您的用户名及口令是否正确！");
+                    pfUserPwds.setText("");
+                    pfUserPwds.requestFocus();
+                }
+                return;
+            }
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            Lang.showMesg(this, LangRes.P30FAA03, "身份验证错误，请确认您的用户名及口令是否正确！");
+            System.exit(0);
+            return;
+        }
+
+        Object object = cbUserView.getSelectedItem();
+        if (object instanceof S1S1)
+        {
+            MpwdMdl.setAppView(((S1S1) object).getK());
+        }
+        if (userPtn.getBackCall() != null)
+        {
+            userPtn.getBackCall().callBack(AuthLog.signIn.name(), null);
+        }
+
+        tfUserName.setText("");
+        pfUserPwds.setText("");
+//        dispoze();
     }
 
     @Override
@@ -155,79 +280,12 @@ public class SignIn extends javax.swing.JPanel implements IUserView
         plUserOpts.setVisible(!plUserOpts.isVisible());
         userPtn.pack();
     }
-//    private void signIn()
-//    {
-//        String name = tf_UserName.getText();
-//        if (!com.magicpwd._util.Char.isValidate(name))
-//        {
-//            Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
-//            tf_UserName.requestFocus();
-//            return;
-//        }
-//        String pwds = new String(pf_UserKey0.getPassword());
-//        if (!com.magicpwd._util.Char.isValidate(pwds))
-//        {
-//            Lang.showMesg(this, LangRes.P30FAA02, "请输入登录口令！");
-//            pf_UserKey0.requestFocus();
-//            return;
-//        }
-//
-//        try
-//        {
-//            boolean b = userMdl.signIn(name, pwds);
-//            if (b)
-//            {
-////                if (!ConsDat.VERSIONS.equals(DBA4000.readConfig("")))
-////                {
-////                    return;
-////                }
-//                userMdl.setCfg(ConsCfg.CFG_USER_LAST, name);
-//            }
-//            else
-//            {
-//                errCount += 1;
-//                if (errCount > 2)
-//                {
-//                    Lang.showMesg(this, LangRes.P30FAA1C, "您操作的错误次太多，请确认您是否为合法用户！\n为了保障用户数据安全，软件将自动关闭。");
-//                    System.exit(0);
-//                }
-//                else
-//                {
-//                    Lang.showMesg(this, LangRes.P30FAA03, "身份验证错误，请确认您的用户名及口令是否正确！");
-//                    pf_UserKey0.setText("");
-//                    pf_UserKey0.requestFocus();
-//                }
-//                return;
-//            }
-//        }
-//        catch (Exception exp)
-//        {
-//            Logs.exception(exp);
-//            Lang.showMesg(this, LangRes.P30FAA03, "身份验证错误，请确认您的用户名及口令是否正确！");
-//            System.exit(0);
-//            return;
-//        }
-//
-//        Object object = cb_UserType.getSelectedItem();
-//        if (object instanceof S1S1)
-//        {
-//            MpwdMdl.setAppView(((S1S1) object).getK());
-//        }
-//        if (backCall != null)
-//        {
-//            backCall.callBack(AuthLog.signIn.name(), null);
-//        }
-//
-//        tf_UserName.setText("");
-//        pf_UserKey0.setText("");
-//        dispoze();
-//    }
+    private javax.swing.JLabel lbUserView;
     private javax.swing.JComboBox cbUserView;
     private javax.swing.JLabel lbUserName;
-    private javax.swing.JLabel lbUserPwds;
-    private javax.swing.JLabel lbUserView;
-    private javax.swing.JPasswordField pfUserPwds;
     private javax.swing.JTextField tfUserName;
+    private javax.swing.JLabel lbUserPwds;
+    private javax.swing.JPasswordField pfUserPwds;
     private javax.swing.JLabel lbUserOpts;
     private javax.swing.JPanel plUserOpts;
 }

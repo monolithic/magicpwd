@@ -33,7 +33,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
 
     private UserPtn userPtn;
 
-    public SignUp(UserPtn userPtn)
+    SignUp(UserPtn userPtn)
     {
         this.userPtn = userPtn;
     }
@@ -224,12 +224,12 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         plUserOpts.setVisible(!plUserOpts.isVisible());
         userPtn.pack();
     }
-    private javax.swing.JLabel lbUserOpts;
     private javax.swing.JLabel lbUserName;
-    private javax.swing.JLabel lbUserPwd1;
-    private javax.swing.JLabel lbUserPwd2;
-    private javax.swing.JPasswordField pfUserPwd1;
-    private javax.swing.JPasswordField pfUserPwd2;
-    private javax.swing.JPanel plUserOpts;
     private javax.swing.JTextField tfUserName;
+    private javax.swing.JLabel lbUserPwd1;
+    private javax.swing.JPasswordField pfUserPwd1;
+    private javax.swing.JLabel lbUserPwd2;
+    private javax.swing.JPasswordField pfUserPwd2;
+    private javax.swing.JLabel lbUserOpts;
+    private javax.swing.JPanel plUserOpts;
 }
