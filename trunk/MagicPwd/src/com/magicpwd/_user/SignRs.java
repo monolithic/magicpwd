@@ -93,7 +93,7 @@ public class SignRs extends javax.swing.JPanel implements IUserView
         vpg2.addComponent(lbUserPwds);
         vpg2.addComponent(pfUserPwds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
-//        vsg1.addContainerGap();
+        vsg1.addContainerGap();
         vsg1.addGroup(vpg1);
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg1.addGroup(vpg2);
@@ -101,7 +101,7 @@ public class SignRs extends javax.swing.JPanel implements IUserView
         vsg1.addComponent(lbUserOpts);
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg1.addComponent(plUserOpts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-//        vsg1.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        vsg1.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         layout.setVerticalGroup(vsg1);
     }
 
