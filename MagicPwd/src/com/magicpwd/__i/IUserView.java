@@ -25,6 +25,8 @@ public interface IUserView
 
     void initView();
 
+    void initMenu(javax.swing.JPopupMenu menu);
+
     void initLang();
 
     void initData();
