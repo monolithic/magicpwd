@@ -108,29 +108,35 @@ public class UserPtn extends javax.swing.JPanel
         {
             case signIn:
                 userView = new SignIn(this);
-                userView.initView();
                 break;
             case signLs:
+                userView = new SignLs(this);
                 break;
             case signRs:
+                userView = new SignRs(this);
                 break;
             case signUp:
                 userView = new SignUp(this);
-                userView.initView();
                 break;
             case signPk:
+                userView = new SignPk(this);
                 break;
             case signFp:
+                userView = new SignFp(this);
                 break;
             case signSk:
+                userView = new SignSk(this);
                 break;
             case signSu:
+                userView = new SignSu(this);
                 break;
             case signCs:
+                userView = new SignCs(this);
                 break;
             default:
-                break;
+                return false;
         }
+        userView.initView();
 
         initLogoView();
         initInputView();
@@ -145,22 +151,21 @@ public class UserPtn extends javax.swing.JPanel
         layout.setHorizontalGroup(hpg);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
         vsg.addComponent(plLogo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+//        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addComponent(plInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+//        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addComponent(plAction, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         layout.setVerticalGroup(vsg);
 
         if (frame != null)
         {
             frame.getContentPane().add(this);
-            frame.pack();
         }
         if (dialog != null)
         {
             dialog.getContentPane().add(this);
-            dialog.pack();
         }
+        pack();
 
         return true;
     }
@@ -244,6 +249,7 @@ public class UserPtn extends javax.swing.JPanel
     public boolean initLang()
     {
         userView.initLang();
+        pack();
         return true;
     }
 

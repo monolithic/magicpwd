@@ -79,9 +79,9 @@ public class SignIn extends javax.swing.JPanel implements IUserView
         hpg1.addComponent(lbUserName, javax.swing.GroupLayout.Alignment.TRAILING);
         hpg1.addComponent(lbUserPwds, javax.swing.GroupLayout.Alignment.TRAILING);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg2.addComponent(cbUserView, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
-        hpg2.addComponent(tfUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
-        hpg2.addComponent(pfUserPwds, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
+        hpg2.addComponent(cbUserView, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE);
+        hpg2.addComponent(tfUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE);
+        hpg2.addComponent(pfUserPwds, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
         hsg1.addGroup(hpg1);
         hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -105,7 +105,7 @@ public class SignIn extends javax.swing.JPanel implements IUserView
         vpg3.addComponent(lbUserPwds);
         vpg3.addComponent(pfUserPwds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
-//        vsg1.addContainerGap();
+        vsg1.addContainerGap();
         vsg1.addGroup(vpg1);
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg1.addGroup(vpg2);
@@ -115,7 +115,7 @@ public class SignIn extends javax.swing.JPanel implements IUserView
         vsg1.addComponent(lbUserOpts);
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg1.addComponent(plUserOpts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-//        vsg1.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        vsg1.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
         layout.setVerticalGroup(vsg1);
     }
 
