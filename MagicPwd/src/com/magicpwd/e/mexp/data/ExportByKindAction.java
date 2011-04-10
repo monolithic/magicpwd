@@ -67,7 +67,7 @@ public class ExportByKindAction extends AMexpAction implements IBackCall<UserDto
             javax.swing.tree.TreePath path = mexpPtn.getSelectedKindValue();
             KindTN node = (KindTN) path.getLastPathComponent();
             Kind kind = (Kind) node.getUserObject();
-            return mexpPtn.exportByKind(kind.getC2010103());
+            return mexpPtn.exportByKind(kind.getC2010203());
         }
         return false;
     }

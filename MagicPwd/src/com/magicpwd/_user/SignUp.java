@@ -198,13 +198,10 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         }
 
         this.setVisible(false);
-        if (userPtn.getBackCall() != null)
+        if (!userPtn.callBack(AuthLog.signUp.name(), null))
         {
-            if (!userPtn.getBackCall().callBack(AuthLog.signUp.name(), null))
-            {
-                System.exit(0);
-                return;
-            }
+            System.exit(0);
+            return;
         }
 //        dispoze();
     }
@@ -212,6 +209,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
     @Override
     public void btAbortActionPerformed(java.awt.event.ActionEvent evt)
     {
+        userPtn.exitSystem();
     }
 
     private void lbUserOptsMouseReleased(java.awt.event.MouseEvent evt)

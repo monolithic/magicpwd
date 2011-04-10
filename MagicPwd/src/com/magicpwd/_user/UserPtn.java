@@ -148,6 +148,8 @@ public class UserPtn extends javax.swing.JPanel
 
         userView.initMenu(pmMenu);
 
+        this.removeAll();
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
@@ -221,11 +223,12 @@ public class UserPtn extends javax.swing.JPanel
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e)
             {
-                userView.btApplyActionPerformed(e);
+                btApplyActionPerformed(e);
             }
         });
         lbMenu = new BtnLabel();
-        lbMenu.addActionListener(new java.awt.event.ActionListener() {
+        lbMenu.addActionListener(new java.awt.event.ActionListener()
+        {
 
             @Override
             public void actionPerformed(ActionEvent e)
@@ -395,180 +398,27 @@ public class UserPtn extends javax.swing.JPanel
         }
     }
 
-    private synchronized void dispoze()
-    {
-        if (frame != null)
-        {
-            frame.setVisible(false);
-//            frame.dispose();
-        }
-        if (dialog != null)
-        {
-            dialog.setVisible(false);
-        }
-    }
-
     public void setBackCall(IBackCall<UserDto> backCall)
     {
         this.backCall = backCall;
     }
 
-    /**
-     * @return the backCall
-     */
-    IBackCall<UserDto> getBackCall()
+    private void btApplyActionPerformed(final java.awt.event.ActionEvent e)
     {
-        return backCall;
+        btApply.setEnabled(false);
+        jpng.start();
+        new Thread()
+        {
+
+            @Override
+            public void run()
+            {
+                userView.btApplyActionPerformed(e);
+                jpng.stop();
+                btApply.setEnabled(true);
+            }
+        }.start();
     }
-//    /**
-//     * @param evt
-//     */
-//    private void bt_CancelActionPerformed(java.awt.event.ActionEvent evt)
-//    {
-//        switch (signType)
-//        {
-//            case signIn:
-//            case signUp:
-//                System.exit(0);
-//                return;
-//            case signRs:
-//            case signPk:
-//            case signSk:
-//            case signSu:
-//            case signNw:
-//            case signCs:
-//                dispoze();
-//                break;
-//            case signFp:
-//                initView(AuthLog.signIn);
-//                initLang();
-//                initData();
-//                tf_UserName.requestFocus();
-//                break;
-//            default:
-//                break;
-//        }
-//        if (backCall != null)
-//        {
-//            backCall.callBack(IBackCall.OPTIONS_ABORT, null);
-//        }
-//    }
-//    private void doSign()
-//    {
-//        bt_Confrm.setEnabled(false);
-//        jpng.start();
-//        lb_UsrLabel.setEnabled(false);
-//        new Thread()
-//        {
-//
-//            @Override
-//            public void run()
-//            {
-//                switch (signType)
-//                {
-//                    case signIn:
-//                        signIn();
-//                        break;
-//                    case signLs:
-//                        signLs();
-//                        break;
-//                    case signRs:
-//                        signRs();
-//                        break;
-//                    case signUp:
-//                        signUp();
-//                        break;
-//                    case signPk:
-//                        signPk();
-//                        break;
-//                    case signFp:
-//                        signFp();
-//                        break;
-//                    case signSk:
-//                        signSk();
-//                        break;
-//                    case signSu:
-//                        signSu();
-//                        break;
-//                    case signCs:
-//                        signCs();
-//                        break;
-//                    default:
-//                        break;
-//                }
-//                jpng.stop();
-//                bt_Confrm.setEnabled(true);
-//                lb_UsrLabel.setEnabled(true);
-//            }
-//        }.start();
-//    }
-//    /**
-//     * @param evt
-//     */
-//    private void bt_ConfrmActionPerformed(java.awt.event.ActionEvent evt)
-//    {
-//        doSign();
-//    }
-//
-//    private void cb_UserTypeActionPerformed(java.awt.event.ActionEvent evt)
-//    {
-//        doSign();
-//    }
-//
-//    private void tf_UserNameActionPerformed(java.awt.event.ActionEvent evt)
-//    {
-//        doSign();
-//    }
-//
-//    private void pf_UserKey0ActionPerformed(java.awt.event.ActionEvent evt)
-//    {
-//        doSign();
-//    }
-//
-//    private void pf_UserKey1ActionPerformed(java.awt.event.ActionEvent evt)
-//    {
-//        doSign();
-//    }
-//
-//    private void pf_UserKey2ActionPerformed(java.awt.event.ActionEvent evt)
-//    {
-//        doSign();
-//    }
-//
-//    private void lb_UsrLabelMouseReleased(java.awt.event.MouseEvent evt)
-//    {
-//        if (!lb_UsrLabel.isEnabled())
-//        {
-//            return;
-//        }
-//
-//        initView(AuthLog.signFp);
-//        initLang();
-//        initData();
-//
-//        tf_UserName.requestFocus();
-//    }
-//
-//    private void lb_KeyLabelMouseReleased(java.awt.event.MouseEvent evt)
-//    {
-//        if (!lb_KeyLabel.isEnabled())
-//        {
-//            return;
-//        }
-//
-//        if (signType == AuthLog.signIn)
-//        {
-//            signType = AuthLog.signFp;
-//            return;
-//        }
-//
-//        DBU3000 du = new DBU3000();
-//        du.initView();
-//        du.initLang();
-//        du.initData();
-//
-//        dispoze();
-//    }
 
     /**
      * @return the btAbort
@@ -592,6 +442,40 @@ public class UserPtn extends javax.swing.JPanel
     UserMdl getUserMdl()
     {
         return userMdl;
+    }
+
+    /**
+     * 隐藏窗口
+     */
+    void hideWindow()
+    {
+        if (frame != null)
+        {
+            frame.setVisible(false);
+            frame.dispose();
+        }
+        if (dialog != null)
+        {
+            dialog.setVisible(false);
+            dialog.dispose();
+        }
+    }
+
+    /**
+     * 退出系统
+     */
+    void exitSystem()
+    {
+        System.exit(0);
+    }
+
+    boolean callBack(String authLog, UserDto userDto)
+    {
+        if (backCall != null)
+        {
+            return backCall.callBack(authLog, userDto);
+        }
+        return true;
     }
     private javax.swing.JPanel plLogo;
     private javax.swing.JPanel plInput;

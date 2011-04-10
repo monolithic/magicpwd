@@ -183,16 +183,16 @@ public class SignFp extends javax.swing.JPanel implements IUserView
             return;
         }
 
-        if (userPtn.getBackCall() != null)
-        {
-            userPtn.getBackCall().callBack(AuthLog.signFp.name(), new UserDto(sb.toString()));
-        }
+        userPtn.callBack(AuthLog.signFp.name(), new UserDto(sb.toString()));
         Lang.showMesg(null, LangRes.P30FAA18, "您的新口令是：{0}\n为了您的安全，请登录软件后尽快修改您的口令。", sb.toString());
     }
 
     @Override
     public void btAbortActionPerformed(java.awt.event.ActionEvent e)
     {
+        userPtn.initView(AuthLog.signIn);
+        userPtn.initLang();
+        userPtn.initData();
     }
 
     private void lbUserOptsMouseReleased(java.awt.event.MouseEvent evt)

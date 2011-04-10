@@ -287,9 +287,9 @@ public class MexpPtn extends AMpwdPtn
         {
             return false;
         }
-        if (kind.getC2010107() != null)
+        if (kind.getC2010208() != null)
         {
-            if (kind.getC2010107().indexOf("task") >= 0)
+            if (kind.getC2010208().indexOf("task") >= 0)
             {
                 return false;
             }
@@ -367,7 +367,7 @@ public class MexpPtn extends AMpwdPtn
                 tr_GuidTree.requestFocus();
                 return false;
             }
-            mexpMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(kind.getC2010103());
+            mexpMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(kind.getC2010203());
         }
 
         // 标题为空检测
@@ -1021,7 +1021,7 @@ public class MexpPtn extends AMpwdPtn
             }
             else
             {
-                queryKey = kind.getC2010103();
+                queryKey = kind.getC2010203();
                 mexpMdl.getListMdl().listKeysByKind(queryKey);
             }
         }
@@ -1034,7 +1034,7 @@ public class MexpPtn extends AMpwdPtn
 
     private void listTask(Kind kind)
     {
-        String task = kind.getC2010107();
+        String task = kind.getC2010208();
         java.util.Calendar c = java.util.Calendar.getInstance();
         java.util.Date s = c.getTime();
         if ("task".equals(task))
@@ -1565,10 +1565,10 @@ public class MexpPtn extends AMpwdPtn
         tr_GuidTree.setSelectionPath(path);
 
         Kind c = (Kind) p.getUserObject();
-        c.addC2010101(-1);
+        c.addC2010201(-1);
         DBA3000.updateKindData(c);
         c = (Kind) n.getUserObject();
-        c.addC2010101(1);
+        c.addC2010201(1);
         DBA3000.updateKindData(c);
     }
 
@@ -1600,10 +1600,10 @@ public class MexpPtn extends AMpwdPtn
         tr_GuidTree.setSelectionPath(path);
 
         Kind c = (Kind) p.getUserObject();
-        c.addC2010101(1);
+        c.addC2010201(1);
         DBA3000.updateKindData(c);
         c = (Kind) n.getUserObject();
-        c.addC2010101(-1);
+        c.addC2010201(-1);
         DBA3000.updateKindData(c);
     }
 
@@ -1635,8 +1635,8 @@ public class MexpPtn extends AMpwdPtn
 
         Kind u = (Kind) p2.getUserObject();
         Kind c = (Kind) s.getUserObject();
-        c.setC2010101(p2.getChildCount());
-        c.setC2010104(u.getC2010103());
+        c.setC2010201(p2.getChildCount());
+        c.setC2010204(u.getC2010203());
         DBA3000.updateKindData(c);
     }
 
@@ -1663,8 +1663,8 @@ public class MexpPtn extends AMpwdPtn
 
         Kind u = (Kind) p.getUserObject();
         Kind c = (Kind) s.getUserObject();
-        c.setC2010101(p.getChildCount());
-        c.setC2010104(u.getC2010103());
+        c.setC2010201(p.getChildCount());
+        c.setC2010204(u.getC2010203());
         DBA3000.updateKindData(c);
     }
     /**

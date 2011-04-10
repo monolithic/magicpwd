@@ -140,7 +140,7 @@ public class CatDialog extends ADialog
         {
             KindTN item = (KindTN) obj;
             Kind kind = (Kind) item.getUserObject();
-            backCall.callBack(IBackCall.OPTIONS_APPLY, kind.getC2010103());
+            backCall.callBack(IBackCall.OPTIONS_APPLY, kind.getC2010203());
         }
         this.setVisible(false);
         this.dispose();

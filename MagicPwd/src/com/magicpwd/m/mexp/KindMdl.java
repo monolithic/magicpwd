@@ -51,8 +51,8 @@ public class KindMdl extends DefaultTreeModel
         nodeStructureChanged(r);
 
         Kind k = (Kind) r.getUserObject();
-        kind.setC2010101(r.getChildCount());
-        kind.setC2010104(k.getC2010103());
+        kind.setC2010201(r.getChildCount());
+        kind.setC2010204(k.getC2010203());
         DBA3000.updateKindData(kind);
     }
 

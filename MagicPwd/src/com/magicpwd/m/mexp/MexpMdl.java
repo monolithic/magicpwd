@@ -44,9 +44,9 @@ public final class MexpMdl
         listMdl.init();
 
         Kind kind = new Kind();
-        kind.setC2010103(ConsDat.HASH_ROOT);
+        kind.setC2010203(ConsDat.HASH_ROOT);
         kind.setC2010105("魔方密码");
-        kind.setC2010106("魔方密码");
+        kind.setC2010206("魔方密码");
         kindMdl = new KindMdl(new KindTN(kind));
         kindMdl.init();
 

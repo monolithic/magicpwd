@@ -18,6 +18,9 @@ package com.magicpwd.r;
 
 import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._comn.*;
+import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._util.Bean;
+import com.magicpwd._util.Char;
 import java.awt.Component;
 
 import javax.swing.JTree;
@@ -29,12 +32,20 @@ import javax.swing.tree.DefaultTreeCellRenderer;
  */
 public class TreeCR extends DefaultTreeCellRenderer
 {
+
+    private java.util.HashMap<String, javax.swing.ImageIcon> iconMap;
+
+    public TreeCR()
+    {
+        iconMap = new java.util.HashMap<String, javax.swing.ImageIcon>();
+    }
     /*
      * (non-Javadoc)
      * 
      * @see javax.swing.tree.TreeCR#getTreeCellRendererComponent(javax.swing.JTree,
      *      java.lang.Object, boolean, boolean, boolean, int, boolean)
      */
+
     @Override
     public Component getTreeCellRendererComponent(JTree tree, Object value, boolean isSelected, boolean expanded, boolean leaf, int row, boolean hasFocus)
     {
@@ -44,8 +55,17 @@ public class TreeCR extends DefaultTreeCellRenderer
         {
             value = ((KindTN) value).getUserObject();
             Kind kind = (Kind) value;
-            setText(kind.getC2010105());
-            setToolTipText(kind.getC2010106());
+            String icon = kind.getC2010207();
+            if (Char.isValidateHash(icon))
+            {
+                if (!iconMap.containsKey(icon))
+                {
+                    iconMap.put(icon, Bean.readIcon(ConsEnv.DIR_ICO + '/' + icon + ".png"));
+                }
+                setIcon(iconMap.get(icon));
+            }
+            setText(kind.getC2010205());
+            setToolTipText(kind.getC2010206());
             return this;
         }
 

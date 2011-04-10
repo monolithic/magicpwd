@@ -73,7 +73,7 @@ public class ImportByKindAction extends AMexpAction implements IBackCall<UserDto
 //                    tr_GuidTree.requestFocus();
                 return false;
             }
-            if (mexpPtn.importByKind(kind.getC2010103()))
+            if (mexpPtn.importByKind(kind.getC2010203()))
             {
                 mexpPtn.findLast();
             }
