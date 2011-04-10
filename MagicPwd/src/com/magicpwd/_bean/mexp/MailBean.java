@@ -27,9 +27,14 @@ import com.magicpwd._util.Util;
 import com.magicpwd.v.mexp.MexpPtn;
 
 /**
- * 属性：邮件
- * 键值：ConsEnv.INDX_MAIL
- * @author Amon
+ * Application: MagicPwd
+ * Author     : Amon
+ * Encoding   : UTF-8
+ * Website    : http://magicpwd.com/
+ * Project    : http://magicpwd.googlecode.com/
+ * Contact    : Amon@magicpwd.com
+ * CopyRight  : Winshine.biz
+ * Description:
  */
 public class MailBean extends AMailBean implements IMexpBean
 {

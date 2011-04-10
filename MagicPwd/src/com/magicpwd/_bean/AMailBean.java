@@ -29,12 +29,13 @@ import com.magicpwd._util.Lang;
  * Application: MagicPwd
  * Author     : Amon
  * Encoding   : UTF-8
- * Created    : 2010-10-27 20:23:44
  * Website    : http://magicpwd.com/
  * Project    : http://magicpwd.googlecode.com/
  * Contact    : Amon@magicpwd.com
  * CopyRight  : Winshine.biz
  * Description:
+ * 属性：邮件
+ * 键值：ConsEnv.INDX_MAIL
  */
 public abstract class AMailBean extends AEditBean
 {

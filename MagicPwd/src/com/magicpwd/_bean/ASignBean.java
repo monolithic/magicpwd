@@ -27,8 +27,8 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 
 /**
- *
- * @author Amon
+ * 属性：段落
+ * 键值：ConsEnv.INDX_SIGN
  */
 public abstract class ASignBean extends AEditBean implements IMexpBean
 {

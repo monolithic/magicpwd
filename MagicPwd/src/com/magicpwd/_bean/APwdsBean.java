@@ -35,12 +35,13 @@ import javax.swing.JOptionPane;
  * Application: MagicPwd
  * Author     : Amon
  * Encoding   : UTF-8
- * Created    : 2010-10-27 20:24:00
  * Website    : http://magicpwd.com/
  * Project    : http://magicpwd.googlecode.com/
  * Contact    : Amon@magicpwd.com
  * CopyRight  : Winshine.biz
  * Description:
+ * 属性：口令
+ * 键值：ConsEnv.INDX_PWDS
  */
 public abstract class APwdsBean extends AEditBean
 {
