@@ -29,9 +29,14 @@ import com.magicpwd.v.mexp.MexpPtn;
 import com.magicpwd.x.IcoDialog;
 
 /**
- * 属性：图标
- * 键值：ConsEnv.INDX_ICON
- * @author Amon
+ * Application: MagicPwd
+ * Author     : Amon
+ * Encoding   : UTF-8
+ * Website    : http://magicpwd.com/
+ * Project    : http://magicpwd.googlecode.com/
+ * Contact    : Amon@magicpwd.com
+ * CopyRight  : Winshine.biz
+ * Description:
  */
 public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall<String>
 {

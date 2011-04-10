@@ -26,7 +26,6 @@ import com.magicpwd._util.Util;
 import com.magicpwd.v.mexp.MexpPtn;
 
 /**
- *
  * @author Aven
  */
 public class SignBean extends ASignBean

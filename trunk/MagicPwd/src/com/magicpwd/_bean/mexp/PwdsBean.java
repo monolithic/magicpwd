@@ -27,9 +27,14 @@ import com.magicpwd._util.Util;
 import com.magicpwd.v.mexp.MexpPtn;
 
 /**
- * 属性：口令
- * 键值：ConsEnv.INDX_PWDS
- * @author Amon
+ * Application: MagicPwd
+ * Author     : Amon
+ * Encoding   : UTF-8
+ * Website    : http://magicpwd.com/
+ * Project    : http://magicpwd.googlecode.com/
+ * Contact    : Amon@magicpwd.com
+ * CopyRight  : Winshine.biz
+ * Description:
  */
 public class PwdsBean extends APwdsBean implements IMexpBean
 {

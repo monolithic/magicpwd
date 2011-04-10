@@ -21,8 +21,16 @@ import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd._comp.WTextBox;
 
 /**
- *
- * @author Amon
+ * Application: MagicPwd
+ * Author     : Amon
+ * Encoding   : UTF-8
+ * Website    : http://magicpwd.com/
+ * Project    : http://magicpwd.googlecode.com/
+ * Contact    : Amon@magicpwd.com
+ * CopyRight  : Winshine.biz
+ * Description:
+ * 属性：文本
+ * 键值：ConsEnv.INDX_TEXT
  */
 public abstract class ATextBean extends AEditBean
 {
