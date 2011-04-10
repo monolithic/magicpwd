@@ -21,7 +21,6 @@ import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
-import com.magicpwd._util.Hash;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
@@ -360,7 +359,7 @@ class IcoModel extends javax.swing.table.AbstractTableModel
             img.createGraphics().drawImage(tmp, (S - w) >> 1, (S - h) >> 1, w, h, null);
         }
 
-        String hash = Hash.hash(false);
+        String hash = "AU" + new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
         java.io.File pngFile = new java.io.File(icoPath.getAbsolutePath(), hash + '.' + ConsEnv.IMAGE_FORMAT);
         if (!pngFile.exists())
         {
