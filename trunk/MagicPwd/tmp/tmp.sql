@@ -1,0 +1,2 @@
+ INSERT INTO P30F0100 (P30F0101, P30F0102, P30F0103, P30F0105, P30F0106, P30F0107, P30F0108, P30F0109, P30F010A, P30F010B, P30F010C, P30F010D, P30F010E, P30F010F, P30F0104) VALUES (0, 0, 0,  '00000000',  'sctfxrczgcywxezs',  '2011-04-10 15:50:44',  'qqqqqaacbrrtysww',  '123',  '',  '',  '',  '',  '',  '',  'qqqqqazywtftgszg')
+ INSERT INTO P30F0200 (P30F0201, P30F0202, P30F0203) VALUES (0,  'qqqqqazywtftgszg',  '1vy:*Heq51*TeM1qHq5qvMc`17ycvce$5$qvMT$v:1v$5`7cTyveHLMT`L1$5cyHHc`y1qcHc:TT7e*:*Lyy77`v`5`v1`11Hc5*$eve:c`MTe*qL`LH`eqT`M77L5H1:cMTqLHLLyy*::`HLvMq5c*:55yM7HM7')
