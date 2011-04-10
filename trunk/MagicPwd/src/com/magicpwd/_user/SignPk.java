@@ -170,16 +170,14 @@ public class SignPk extends javax.swing.JPanel implements IUserView
         }
 
 //        dispoze();
-        if (userPtn.getBackCall() != null)
-        {
-            userPtn.getBackCall().callBack(AuthLog.signPk.name(), null);
-        }
+        userPtn.callBack(AuthLog.signPk.name(), null);
         Lang.showMesg(this, LangRes.P30FAA0A, "登录口令修改成功，您可以使用新口令登录了！");
     }
 
     @Override
     public void btAbortActionPerformed(ActionEvent e)
     {
+        userPtn.hideWindow();
     }
 
     private void lbUserOptsMouseReleased(java.awt.event.MouseEvent evt)

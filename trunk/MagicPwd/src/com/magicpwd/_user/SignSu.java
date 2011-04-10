@@ -147,6 +147,7 @@ public class SignSu extends javax.swing.JPanel implements IUserView
     @Override
     public void btAbortActionPerformed(java.awt.event.ActionEvent e)
     {
+        userPtn.hideWindow();
     }
 
     private void lbUserOptsMouseReleased(java.awt.event.MouseEvent evt)

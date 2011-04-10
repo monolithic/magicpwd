@@ -22,192 +22,215 @@ package com.magicpwd._comn.prop;
  */
 public class Kind
 {
+
     /**
      * 显示排序
      */
-    private int C2010101;
+    private int C2010201;
     /**
      * 类别级别
      */
-    private int C2010102;
+    private int C2010202;
     /**
      * 类别索引
      */
-    private String C2010103;
+    private String C2010203;
     /**
      * 一级索引
      */
-    private String C2010104;
+    private String C2010204;
     /**
      * 类别名称
      */
-    private String C2010105;
+    private String C2010205;
     /**
      * 类别提示
      */
-    private String C2010106;
+    private String C2010206;
+    /**
+     * 类别图标
+     */
+    private String C2010207;
     /**
      * 类别键值
      */
-    private String C2010107;
+    private String C2010208;
     /**
      * 类别描述
      */
-    private String C2010108;
+    private String C2010209;
 
-    public int addC2010101(int step)
+    public int addC2010201(int step)
     {
-        C2010101 += step;
-        return C2010101;
+        C2010201 += step;
+        return C2010201;
     }
 
     /**
      * 显示排序
-     * @return the C2010101
+     * @return the C2010201
      */
-    public int getC2010101()
+    public int getC2010201()
     {
-        return C2010101;
+        return C2010201;
     }
 
     /**
      * 显示排序
-     * @param C2010101 the C2010101 to set
+     * @param C2010201 the C2010201 to set
      */
-    public void setC2010101(int C2010101)
+    public void setC2010201(int C2010201)
     {
-        this.C2010101 = C2010101;
+        this.C2010201 = C2010201;
     }
 
     /**
      * 类别级别
      * @return the C2010102
      */
-    public int getC2010102()
+    public int getC2010202()
     {
-        return C2010102;
+        return C2010202;
     }
 
     /**
      * 类别级别
-     * @param C2010102 the C2010102 to set
+     * @param C2010202 the C2010202 to set
      */
-    public void setC2010102(int C2010102)
+    public void setC2010202(int C2010202)
     {
-        this.C2010102 = C2010102;
+        this.C2010202 = C2010202;
     }
 
     /**
      * 类别索引
-     * @return the C2010103
+     * @return the C2010203
      */
-    public String getC2010103()
+    public String getC2010203()
     {
-        return C2010103;
+        return C2010203;
     }
 
     /**
      * 类别索引
-     * @param C2010103 the C2010103 to set
+     * @param C2010203 the C2010203 to set
      */
-    public void setC2010103(String C2010103)
+    public void setC2010203(String C2010203)
     {
-        this.C2010103 = C2010103;
+        this.C2010203 = C2010203;
     }
 
     /**
      * 一级索引
-     * @return the C2010104
+     * @return the C2010204
      */
-    public String getC2010104()
+    public String getC2010204()
     {
-        return C2010104;
+        return C2010204;
     }
 
     /**
      * 一级索引
-     * @param C2010104 the C2010104 to set
+     * @param C2010204 the C2010204 to set
      */
-    public void setC2010104(String C2010104)
+    public void setC2010204(String C2010204)
     {
-        this.C2010104 = C2010104;
+        this.C2010204 = C2010204;
     }
 
     /**
      * 类别名称
-     * @return the C2010105
+     * @return the C2010205
      */
-    public String getC2010105()
+    public String getC2010205()
     {
-        return C2010105;
+        return C2010205;
     }
 
     /**
      * 类别名称
-     * @param C2010105 the C2010105 to set
+     * @param C2010205 the C2010205 to set
      */
-    public void setC2010105(String C2010105)
+    public void setC2010105(String C2010205)
     {
-        this.C2010105 = C2010105;
+        this.C2010205 = C2010205;
     }
 
     /**
      * 类别提示
-     * @return the C2010106
+     * @return the C2010206
      */
-    public String getC2010106()
+    public String getC2010206()
     {
-        return C2010106;
+        return C2010206;
     }
 
     /**
      * 类别提示
-     * @param C2010106 the C2010106 to set
+     * @param C2010206 the C2010206 to set
      */
-    public void setC2010106(String C2010106)
+    public void setC2010206(String C2010206)
     {
-        this.C2010106 = C2010106;
+        this.C2010206 = C2010206;
+    }
+
+    /**
+     * 类别图标
+     * @return the C2010207
+     */
+    public String getC2010207()
+    {
+        return C2010207;
+    }
+
+    /**
+     * 类别图标
+     * @param C2010207 the C2010207 to set
+     */
+    public void setC2010207(String C2010207)
+    {
+        this.C2010207 = C2010207;
     }
 
     /**
      * 类别键值
-     * @return the C2010107
+     * @return the C2010208
      */
-    public String getC2010107()
+    public String getC2010208()
     {
-        return C2010107;
+        return C2010208;
     }
 
     /**
      * 类别键值
-     * @param C2010107 the C2010107 to set
+     * @param C2010208 the C2010208 to set
      */
-    public void setC2010107(String C2010107)
+    public void setC2010208(String C2010208)
     {
-        this.C2010107 = C2010107;
+        this.C2010208 = C2010208;
     }
 
     /**
      * 类别描述
-     * @return the C2010108
+     * @return the C2010209
      */
-    public String getC2010108()
+    public String getC2010209()
     {
-        return C2010108;
+        return C2010209;
     }
 
     /**
      * 类别描述
-     * @param C2010108 the C2010108 to set
+     * @param C2010209 the C2010209 to set
      */
-    public void setC2010108(String C2010108)
+    public void setC2010209(String C2010209)
     {
-        this.C2010108 = C2010108;
+        this.C2010209 = C2010209;
     }
 
     @Override
     public String toString()
     {
-        return C2010105;
+        return C2010205;
     }
 }

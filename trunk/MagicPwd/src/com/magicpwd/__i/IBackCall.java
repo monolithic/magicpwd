@@ -16,8 +16,6 @@
  */
 package com.magicpwd.__i;
 
-import java.util.EventListener;
-
 /**
  * @author Amon
  */

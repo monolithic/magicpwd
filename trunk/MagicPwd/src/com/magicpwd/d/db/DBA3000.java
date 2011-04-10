@@ -707,13 +707,13 @@ public class DBA3000
             dba.addTable(DBC3000.C2010100);
             dba.addParam(DBC3000.C2010104, root);
             dba.addParam(DBC3000.C2010101, DBC3000.C2010101 + "+" + step, false);
-            dba.addWhere(DBC3000.C2010104, item.getC2010103());
+            dba.addWhere(DBC3000.C2010104, item.getC2010203());
             dba.addUpdateBatch();
 
             dba.reInit();
 
             dba.addTable(DBC3000.C2010100);
-            dba.addWhere(DBC3000.C2010103, item.getC2010103());
+            dba.addWhere(DBC3000.C2010103, item.getC2010203());
             dba.addDeleteBatch();
 
             dba.executeBatch();
@@ -739,23 +739,23 @@ public class DBA3000
             dba.init();
 
             dba.addTable(DBC3000.C2010100);
-            dba.addParam(DBC3000.C2010101, item.getC2010101());
-            dba.addParam(DBC3000.C2010102, item.getC2010102());
-            dba.addParam(DBC3000.C2010104, item.getC2010104());
-            dba.addParam(DBC3000.C2010105, Util.text2DB(item.getC2010105()));// 类别名称
-            dba.addParam(DBC3000.C2010106, Util.text2DB(item.getC2010106()));// 类别提示
-            dba.addParam(DBC3000.C2010107, Util.text2DB(item.getC2010107()));//
-            dba.addParam(DBC3000.C2010108, Util.text2DB(item.getC2010108()));// 类别描述
+            dba.addParam(DBC3000.C2010101, item.getC2010201());
+            dba.addParam(DBC3000.C2010102, item.getC2010202());
+            dba.addParam(DBC3000.C2010104, item.getC2010204());
+            dba.addParam(DBC3000.C2010105, Util.text2DB(item.getC2010205()));// 类别名称
+            dba.addParam(DBC3000.C2010106, Util.text2DB(item.getC2010206()));// 类别提示
+            dba.addParam(DBC3000.C2010107, Util.text2DB(item.getC2010208()));//
+            dba.addParam(DBC3000.C2010108, Util.text2DB(item.getC2010209()));// 类别描述
             dba.addParam(DBC3000.C2010109, DBC3000.SQL_NOW, false);// 更新时间
-            if (com.magicpwd._util.Char.isValidateHash(item.getC2010103()))
+            if (com.magicpwd._util.Char.isValidateHash(item.getC2010203()))
             {
-                dba.addWhere(DBC3000.C2010103, item.getC2010103());// 类别索引
+                dba.addWhere(DBC3000.C2010103, item.getC2010203());// 类别索引
                 dba.executeUpdate();
             }
             else
             {
-                item.setC2010103(Hash.hash(false));
-                dba.addParam(DBC3000.C2010103, item.getC2010103());// 类别索引
+                item.setC2010203(Hash.hash(false));
+                dba.addParam(DBC3000.C2010103, item.getC2010203());// 类别索引
                 dba.addParam(DBC3000.C201010A, DBC3000.SQL_NOW, false);// 更新时间
                 dba.executeInsert();
             }
@@ -840,14 +840,14 @@ public class DBA3000
             while (rest.next())
             {
                 item = new Kind();
-                item.setC2010101(rest.getInt(DBC3000.C2010101));
-                item.setC2010102(rest.getInt(DBC3000.C2010102));
-                item.setC2010103(rest.getString(DBC3000.C2010103));
-                item.setC2010104(rest.getString(DBC3000.C2010104));
+                item.setC2010201(rest.getInt(DBC3000.C2010101));
+                item.setC2010202(rest.getInt(DBC3000.C2010102));
+                item.setC2010203(rest.getString(DBC3000.C2010103));
+                item.setC2010204(rest.getString(DBC3000.C2010104));
                 item.setC2010105(rest.getString(DBC3000.C2010105));
-                item.setC2010106(rest.getString(DBC3000.C2010106));
-                item.setC2010107(rest.getString(DBC3000.C2010107));
-                item.setC2010108(rest.getString(DBC3000.C2010108));
+                item.setC2010206(rest.getString(DBC3000.C2010106));
+                item.setC2010208(rest.getString(DBC3000.C2010107));
+                item.setC2010209(rest.getString(DBC3000.C2010108));
                 list.add(item);
             }
             rest.close();

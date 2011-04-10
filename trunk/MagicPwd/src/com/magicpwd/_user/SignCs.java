@@ -189,15 +189,13 @@ public class SignCs extends javax.swing.JPanel implements IUserView
             return;
         }
 //        dispoze();
-        if (userPtn.getBackCall() != null)
-        {
-            userPtn.getBackCall().callBack(AuthLog.signCs.name(), new UserDto(ut, un, new String(uc)));
-        }
+        userPtn.callBack(AuthLog.signCs.name(), new UserDto(ut, un, new String(uc)));
     }
 
     @Override
     public void btAbortActionPerformed(java.awt.event.ActionEvent e)
     {
+        userPtn.hideWindow();
     }
 
     private void lbUserOptsMouseReleased(java.awt.event.MouseEvent evt)

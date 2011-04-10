@@ -106,6 +106,16 @@ public class SignIn extends javax.swing.JPanel implements IUserView
     @Override
     public void initMenu(javax.swing.JPopupMenu menu)
     {
+        miFindPwds = new javax.swing.JMenuItem();
+        miFindPwds.addActionListener(new java.awt.event.ActionListener() {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                miFindPwdsMouseReleased(e);
+            }
+        });
+        menu.add(miFindPwds);
     }
 
     @Override
@@ -116,8 +126,8 @@ public class SignIn extends javax.swing.JPanel implements IUserView
         Lang.setWText(lbUserName, LangRes.P30FA301, "用户(@U)");
         Lang.setWText(lbUserPwds, LangRes.P30FA302, "口令(@P)");
 
-//        Lang.setWText(lb_UsrLabel, LangRes.P30FA30E, "口令找回");
-//        Lang.setWTips(lb_UsrLabel, LangRes.P30FA30F, "找回您的登录口令");
+        Lang.setWText(miFindPwds, LangRes.P30FA30E, "口令找回");
+        Lang.setWTips(miFindPwds, LangRes.P30FA30F, "找回您的登录口令");
 
         Lang.setWText(userPtn.getApplyButton(), LangRes.P30FA501, "登录(@S)");
 
@@ -246,10 +256,7 @@ public class SignIn extends javax.swing.JPanel implements IUserView
         {
             MpwdMdl.setAppView(((S1S1) object).getK());
         }
-        if (userPtn.getBackCall() != null)
-        {
-            userPtn.getBackCall().callBack(AuthLog.signIn.name(), null);
-        }
+        userPtn.callBack(AuthLog.signIn.name(), null);
 
         tfUserName.setText("");
         pfUserPwds.setText("");
@@ -259,12 +266,14 @@ public class SignIn extends javax.swing.JPanel implements IUserView
     @Override
     public void btAbortActionPerformed(java.awt.event.ActionEvent e)
     {
+        userPtn.exitSystem();
     }
 
-    private void lbUserOptsMouseReleased(java.awt.event.MouseEvent evt)
+    private void miFindPwdsMouseReleased(java.awt.event.ActionEvent evt)
     {
-        plUserOpts.setVisible(!plUserOpts.isVisible());
-        userPtn.pack();
+        userPtn.initView(AuthLog.signFp);
+        userPtn.initLang();
+        userPtn.initData();
     }
     private javax.swing.JLabel lbUserView;
     private javax.swing.JComboBox cbUserView;
@@ -273,4 +282,5 @@ public class SignIn extends javax.swing.JPanel implements IUserView
     private javax.swing.JLabel lbUserPwds;
     private javax.swing.JPasswordField pfUserPwds;
     private javax.swing.JPanel plUserOpts;
+    private javax.swing.JMenuItem miFindPwds;
 }

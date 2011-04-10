@@ -177,10 +177,7 @@ public class SignSk extends javax.swing.JPanel implements IUserView
         }
 
 //        dispoze();
-        if (userPtn.getBackCall() != null)
-        {
-            userPtn.getBackCall().callBack(AuthLog.signSk.name(), null);
-        }
+        userPtn.callBack(AuthLog.signSk.name(), null);
         pfUserPwd0.setText("");
         pfUserPwd1.setText("");
         pfUserPwd2.setText("");
@@ -190,6 +187,7 @@ public class SignSk extends javax.swing.JPanel implements IUserView
     @Override
     public void btAbortActionPerformed(java.awt.event.ActionEvent e)
     {
+        userPtn.hideWindow();
     }
 
     private void lbUserOptsMouseReleased(java.awt.event.MouseEvent evt)

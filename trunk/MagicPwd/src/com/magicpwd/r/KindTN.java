@@ -71,7 +71,7 @@ public class KindTN extends DefaultMutableTreeNode
         Kind kvItem = (Kind) getUserObject();
         if (kvItem != null)
         {
-            List<Kind> list = DBA3000.selectKindData(kvItem.getC2010103());
+            List<Kind> list = DBA3000.selectKindData(kvItem.getC2010203());
             if (list != null)
             {
                 for (int i = 0, j = list.size(); i < j; i += 1)

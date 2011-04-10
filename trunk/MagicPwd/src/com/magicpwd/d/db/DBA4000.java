@@ -347,7 +347,7 @@ public class DBA4000
             buf.append(DBC4000.C2010203);
             buf.append(" FROM ");
             buf.append(DBC4000.C2010200);
-            buf.append(" WHERE ").append(DBC4000.C2010207).append("='unit'");
+            buf.append(" WHERE ").append(DBC4000.C2010208).append("='unit'");
 
             dba.addTable(DBC4000.P30F0100);
             dba.addColumn(DBC4000.P30F0104);
@@ -778,13 +778,13 @@ public class DBA4000
             dba.addTable(DBC4000.C2010200);
             dba.addParam(DBC4000.C2010204, root);
             dba.addParam(DBC4000.C2010201, DBC4000.C2010201 + "+" + step, false);
-            dba.addWhere(DBC4000.C2010204, item.getC2010103());
+            dba.addWhere(DBC4000.C2010204, item.getC2010203());
             dba.addUpdateBatch();
 
             dba.reInit();
 
             dba.addTable(DBC4000.C2010200);
-            dba.addWhere(DBC4000.C2010203, item.getC2010103());
+            dba.addWhere(DBC4000.C2010203, item.getC2010203());
             dba.addDeleteBatch();
 
             dba.executeBatch();
@@ -810,24 +810,24 @@ public class DBA4000
             dba.init();
 
             dba.addTable(DBC4000.C2010200);
-            dba.addParam(DBC4000.C2010201, item.getC2010101());
-            dba.addParam(DBC4000.C2010202, item.getC2010102());
-            dba.addParam(DBC4000.C2010204, item.getC2010104());
-            dba.addParam(DBC4000.C2010205, Util.text2DB(item.getC2010105()));// 类别名称
-            dba.addParam(DBC4000.C2010206, Util.text2DB(item.getC2010106()));// 类别提示
-            dba.addParam(DBC4000.C2010207, Util.text2DB(item.getC2010107()));//
-            dba.addParam(DBC4000.C2010208, Util.text2DB(item.getC2010108()));// 类别描述
-            dba.addParam(DBC4000.C2010209, DBC4000.SQL_NOW, false);// 更新时间
-            if (com.magicpwd._util.Char.isValidateHash(item.getC2010103()))
+            dba.addParam(DBC4000.C2010201, item.getC2010201());
+            dba.addParam(DBC4000.C2010202, item.getC2010202());
+            dba.addParam(DBC4000.C2010204, item.getC2010204());
+            dba.addParam(DBC4000.C2010205, Util.text2DB(item.getC2010205()));// 类别名称
+            dba.addParam(DBC4000.C2010206, Util.text2DB(item.getC2010206()));// 类别提示
+            dba.addParam(DBC4000.C2010208, Util.text2DB(item.getC2010208()));//
+            dba.addParam(DBC4000.C2010209, Util.text2DB(item.getC2010209()));// 类别描述
+            dba.addParam(DBC4000.C201020A, DBC4000.SQL_NOW, false);// 更新时间
+            if (com.magicpwd._util.Char.isValidateHash(item.getC2010203()))
             {
-                dba.addWhere(DBC4000.C2010203, item.getC2010103());// 类别索引
+                dba.addWhere(DBC4000.C2010203, item.getC2010203());// 类别索引
                 dba.executeUpdate();
             }
             else
             {
-                item.setC2010103(Hash.hash(false));
-                dba.addParam(DBC4000.C2010203, item.getC2010103());// 类别索引
-                dba.addParam(DBC4000.C201020A, DBC4000.SQL_NOW, false);// 更新时间
+                item.setC2010203(Hash.hash(false));
+                dba.addParam(DBC4000.C2010203, item.getC2010203());// 类别索引
+                dba.addParam(DBC4000.C201020B, DBC4000.SQL_NOW, false);// 更新时间
                 dba.executeInsert();
             }
             return true;
@@ -857,7 +857,7 @@ public class DBA4000
             dba.addColumn(DBC4000.C2010203);// 类别索引
             dba.addColumn(DBC4000.C2010205);// 类别名称
             dba.addColumn(DBC4000.C2010206);// 类别提示
-            dba.addColumn(DBC4000.C2010208);// 类别提示
+            dba.addColumn(DBC4000.C2010209);// 类别提示
             dba.addSort(DBC4000.C2010201, true);
 
             ResultSet rest = dba.executeSelect();
@@ -868,7 +868,7 @@ public class DBA4000
                 item.setK(rest.getString(DBC4000.C2010203));
                 item.setV(rest.getString(DBC4000.C2010205));
                 item.setV2(rest.getString(DBC4000.C2010206));
-                item.setV3(rest.getString(DBC4000.C2010208));
+                item.setV3(rest.getString(DBC4000.C2010209));
                 list.add(item);
             }
             rest.close();
@@ -901,8 +901,8 @@ public class DBA4000
             dba.addColumn(DBC4000.C2010204);
             dba.addColumn(DBC4000.C2010205);// 类别名称
             dba.addColumn(DBC4000.C2010206);// 类别提示
-            dba.addColumn(DBC4000.C2010207);
-            dba.addColumn(DBC4000.C2010208);// 类别提示
+            dba.addColumn(DBC4000.C2010208);
+            dba.addColumn(DBC4000.C2010209);// 类别提示
             dba.addWhere(DBC4000.C2010204, typeHash);
             dba.addSort(DBC4000.C2010201, true);
 
@@ -911,14 +911,14 @@ public class DBA4000
             while (rest.next())
             {
                 item = new Kind();
-                item.setC2010101(rest.getInt(DBC4000.C2010201));
-                item.setC2010102(rest.getInt(DBC4000.C2010202));
-                item.setC2010103(rest.getString(DBC4000.C2010203));
-                item.setC2010104(rest.getString(DBC4000.C2010204));
+                item.setC2010201(rest.getInt(DBC4000.C2010201));
+                item.setC2010202(rest.getInt(DBC4000.C2010202));
+                item.setC2010203(rest.getString(DBC4000.C2010203));
+                item.setC2010204(rest.getString(DBC4000.C2010204));
                 item.setC2010105(rest.getString(DBC4000.C2010205));
-                item.setC2010106(rest.getString(DBC4000.C2010206));
-                item.setC2010107(rest.getString(DBC4000.C2010207));
-                item.setC2010108(rest.getString(DBC4000.C2010208));
+                item.setC2010206(rest.getString(DBC4000.C2010206));
+                item.setC2010208(rest.getString(DBC4000.C2010208));
+                item.setC2010209(rest.getString(DBC4000.C2010209));
                 list.add(item);
             }
             rest.close();
