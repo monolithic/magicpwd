@@ -107,7 +107,8 @@ public class SignIn extends javax.swing.JPanel implements IUserView
     public void initMenu(javax.swing.JPopupMenu menu)
     {
         miFindPwds = new javax.swing.JMenuItem();
-        miFindPwds.addActionListener(new java.awt.event.ActionListener() {
+        miFindPwds.addActionListener(new java.awt.event.ActionListener()
+        {
 
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e)
@@ -256,11 +257,11 @@ public class SignIn extends javax.swing.JPanel implements IUserView
         {
             MpwdMdl.setAppView(((S1S1) object).getK());
         }
-        userPtn.callBack(AuthLog.signIn.name(), null);
 
-        tfUserName.setText("");
-        pfUserPwds.setText("");
-//        dispoze();
+        if (userPtn.callBack(AuthLog.signIn.name(), null))
+        {
+            userPtn.hideWindow();
+        }
     }
 
     @Override

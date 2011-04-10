@@ -309,13 +309,13 @@ class IcoModel extends javax.swing.table.AbstractTableModel
             }
         }
 
-        java.io.File[] fileList = icoPath.listFiles(new AmonFF("[0-9a-z]{16}\\.png", false));
+        java.io.File[] fileList = icoPath.listFiles(new AmonFF("[0-9A-Z]{16}\\.PNG", false));
         if (fileList == null || fileList.length < 1)
         {
             return;
         }
 
-        java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("[0-9a-z]{16}");
+        java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("[0-9A-Z]{16}");
         int i = 1;
         for (java.io.File file : fileList)
         {

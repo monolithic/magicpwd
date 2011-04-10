@@ -188,8 +188,8 @@ public class SignCs extends javax.swing.JPanel implements IUserView
             pfUserPwds.requestFocus();
             return;
         }
-//        dispoze();
         userPtn.callBack(AuthLog.signCs.name(), new UserDto(ut, un, new String(uc)));
+        userPtn.hideWindow();
     }
 
     @Override

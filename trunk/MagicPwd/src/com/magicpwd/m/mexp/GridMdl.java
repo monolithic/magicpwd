@@ -24,7 +24,7 @@ import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
-import com.magicpwd.d.db.DBA3000;
+import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
 
@@ -60,7 +60,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
         initLogo();
         initHint();
 
-        DBA3000.selectTpltData(userMdl, ls_ItemList.get(ConsEnv.PWDS_HEAD_GUID).getSpec(IEditItem.SPEC_GUID_TPLT), ls_ItemList);
+        DBA4000.selectTpltData(userMdl, ls_ItemList.get(ConsEnv.PWDS_HEAD_GUID).getSpec(IEditItem.SPEC_GUID_TPLT), ls_ItemList);
         fireTableDataChanged();
     }
 
@@ -321,7 +321,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     {
         boolean b = keys.getP30F0106().equals(hash);
         keys.setP30F0106(hash);
-        DBA3000.saveKeysData(keys);
+        DBA4000.saveKeysData(keys);
         return !b;
     }
 

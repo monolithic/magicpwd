@@ -20,7 +20,7 @@ import com.magicpwd._comn.I1S2;
 import com.magicpwd._comn.mpwd.Keys;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd.d.db.DBA3000;
+import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
 
@@ -156,7 +156,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     {
         ls_KeysList.size();
         ls_KeysList.clear();
-        boolean b = DBA3000.readKeysList(userMdl, kindHash, ls_KeysList);
+        boolean b = DBA4000.readKeysList(userMdl, kindHash, ls_KeysList);
         int s = ls_KeysList.size();
         fireTableDataChanged();
         return b & (s > 0);
@@ -166,7 +166,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     {
         int s = ls_KeysList.size();
         ls_KeysList.clear();
-        boolean b = DBA3000.findUserData(userMdl, keysMeta, ls_KeysList);
+        boolean b = DBA4000.findUserData(userMdl, keysMeta, ls_KeysList);
         s = ls_KeysList.size();
         fireTableDataChanged();
         return b & (s > 0);
@@ -175,7 +175,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     public boolean listTask(java.util.Date s, java.util.Date t)
     {
         ls_KeysList.clear();
-        DBA3000.findHintList(userMdl, new java.sql.Timestamp(s.getTime()), new java.sql.Timestamp(t.getTime()), ls_KeysList);
+        DBA4000.findHintList(userMdl, new java.sql.Timestamp(s.getTime()), new java.sql.Timestamp(t.getTime()), ls_KeysList);
         ls_KeysList.size();
         fireTableDataChanged();
 
@@ -225,7 +225,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
 
     public void wDelete(int index)
     {
-        DBA3000.deletePwdsData(ls_KeysList.get(index).getP30F0104());
+        DBA4000.deletePwdsData(ls_KeysList.get(index).getP30F0104());
         ls_KeysList.remove(index);
         fireTableDataChanged();
     }

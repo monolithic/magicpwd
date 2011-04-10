@@ -31,7 +31,7 @@ import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
-import com.magicpwd.d.db.DBA3000;
+import com.magicpwd.d.db.DBA4000;
 
 /**
  *
@@ -224,7 +224,7 @@ public abstract class SafeMdl
         clear();
         keys.setP30F0104(keysHash);
         keys.setP30F0105(userMdl.getCode());
-        if (DBA3000.readPwdsData(keys))
+        if (DBA4000.readPwdsData(keys))
         {
             deCrypt(keys, ls_ItemList);
         }
@@ -241,7 +241,7 @@ public abstract class SafeMdl
         keys.setP30F0105(userMdl.getCode());
         keys.setHistBack(histBack);
         enCrypt(keys, ls_ItemList);
-        DBA3000.savePwdsData(keys);
+        DBA4000.savePwdsData(keys);
         clear();
     }
 
@@ -262,7 +262,7 @@ public abstract class SafeMdl
     public IEditItem initGuid()
     {
         GuidItem guid = new GuidItem(userMdl);
-        guid.setTime(new java.sql.Timestamp(System.currentTimeMillis()));
+        guid.setName(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
         ls_ItemList.add(guid);
         return guid;
     }
@@ -308,13 +308,13 @@ public abstract class SafeMdl
     public void setKeysLabel(int label)
     {
         keys.setP30F0102(label);
-        DBA3000.saveKeysData(keys);
+        DBA4000.saveKeysData(keys);
     }
 
     public void setKeysMajor(int major)
     {
         keys.setP30F0103(major);
-        DBA3000.saveKeysData(keys);
+        DBA4000.saveKeysData(keys);
     }
 
     private StringBuffer deCrypt(Pwds pwds) throws Exception

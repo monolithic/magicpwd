@@ -20,7 +20,7 @@ import com.magicpwd._comn.mpwd.Keys;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.magicpwd.d.db.DBA3000;
+import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.d.db.DBAccess;
 import java.sql.Timestamp;
 
@@ -69,7 +69,7 @@ public final class HintMdl
         }
 
         hintList.clear();
-        DBA3000.findHintList(userMdl, start, end, hintList);
+        DBA4000.findHintList(userMdl, start, end, hintList);
     }
 
     public List<Keys> getUnread()

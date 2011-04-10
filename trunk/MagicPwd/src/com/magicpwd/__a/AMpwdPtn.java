@@ -35,7 +35,7 @@ import com.magicpwd._util.Jcsv;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd.d.db.DBA3000;
+import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.d.db.DBAccess;
 import com.magicpwd.d.dx.DXA;
 import com.magicpwd.d.dx.DXA1000;
@@ -273,7 +273,7 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
 
     public String getCfgText(String key)
     {
-        String text = DBA3000.readConfig(key);
+        String text = DBA4000.readConfig(key);
         if (com.magicpwd._util.Char.isValidate(text))
         {
             try
@@ -293,7 +293,7 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
     {
         try
         {
-            DBA3000.saveConfig(key, safeMdl.enCrypt(text));
+            DBA4000.saveConfig(key, safeMdl.enCrypt(text));
         }
         catch (Exception exp)
         {

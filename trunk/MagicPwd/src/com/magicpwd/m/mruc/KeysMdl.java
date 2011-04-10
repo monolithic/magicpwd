@@ -17,7 +17,7 @@
 package com.magicpwd.m.mruc;
 
 import com.magicpwd._comn.S1S2;
-import com.magicpwd.d.db.DBA3000;
+import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.m.UserMdl;
 
 /**
@@ -38,7 +38,7 @@ public class KeysMdl extends javax.swing.DefaultComboBoxModel
     void init()
     {
         unitList = new java.util.ArrayList<S1S2>();
-        DBA3000.findUnitList(userMdl, unitList);
+        DBA4000.findUnitList(userMdl, unitList);
     }
 
     @Override
