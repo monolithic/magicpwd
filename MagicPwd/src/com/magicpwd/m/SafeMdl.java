@@ -17,8 +17,8 @@
 package com.magicpwd.m;
 
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd._comn.Keys;
-import com.magicpwd._comn.Pwds;
+import com.magicpwd._comn.mpwd.Keys;
+import com.magicpwd._comn.mpwd.Pwds;
 import com.magicpwd._comn.item.EditItem;
 import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.item.HintItem;
@@ -343,7 +343,7 @@ public abstract class SafeMdl
         // Guid
         GuidItem guid = new GuidItem(userMdl);
         guid.setData(keys.getP30F0106());
-        guid.setTime(keys.getP30F0107());
+        guid.setName(keys.getP30F0107());
         guid.setSpec(IEditItem.SPEC_GUID_TPLT, keys.getP30F0108());
         list.add(guid);
 
@@ -361,7 +361,7 @@ public abstract class SafeMdl
 
         // HintItem
         HintItem hint = new HintItem(userMdl);
-        hint.setTime(keys.getP30F010D());
+        hint.setData(keys.getP30F010D());
         hint.setName(keys.getP30F010E());
         list.add(hint);
 
@@ -419,7 +419,7 @@ public abstract class SafeMdl
         // Guid
         GuidItem guid = (GuidItem) list.get(ConsEnv.PWDS_HEAD_GUID);
         keys.setP30F0106(guid.getData());
-        keys.setP30F0107(guid.getTime());
+        keys.setP30F0107(guid.getName());
         keys.setP30F0108(guid.getSpec(IEditItem.SPEC_GUID_TPLT));
 
         // MetaItem
@@ -435,7 +435,7 @@ public abstract class SafeMdl
 
         // HintItem
         HintItem note = (HintItem) list.get(ConsEnv.PWDS_HEAD_HINT);
-        keys.setP30F010D(note.getTime());
+        keys.setP30F010D(note.getData());
         keys.setP30F010E(note.getName());
 
         // 字符串拼接

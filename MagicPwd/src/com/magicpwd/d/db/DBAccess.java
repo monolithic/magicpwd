@@ -83,7 +83,7 @@ public class DBAccess
     {
         if (conn == null || conn.isClosed())
         {
-            conn = DriverManager.getConnection("jdbc:hsqldb:file:" + ConsEnv.DIR_DAT + "/mpwd");
+            conn = DriverManager.getConnection("jdbc:hsqldb:file:" + ConsEnv.DIR_DAT + "/amon");
         }
         if (stat == null || stat.isClosed())
         {

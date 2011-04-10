@@ -16,7 +16,7 @@
  */
 package com.magicpwd.r;
 
-import com.magicpwd._comn.Keys;
+import com.magicpwd._comn.mpwd.Keys;
 import com.magicpwd._util.Bean;
 import com.magicpwd.v.mexp.MexpPtn;
 

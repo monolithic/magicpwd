@@ -18,7 +18,7 @@ package com.magicpwd.m.mwiz;
 
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.I1S2;
-import com.magicpwd._comn.Keys;
+import com.magicpwd._comn.mpwd.Keys;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Char;
 import com.magicpwd.d.db.DBA3000;

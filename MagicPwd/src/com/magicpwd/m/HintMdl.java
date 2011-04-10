@@ -16,7 +16,7 @@
  */
 package com.magicpwd.m;
 
-import com.magicpwd._comn.Keys;
+import com.magicpwd._comn.mpwd.Keys;
 import java.util.ArrayList;
 import java.util.List;
 

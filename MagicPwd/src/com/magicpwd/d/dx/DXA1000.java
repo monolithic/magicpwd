@@ -17,7 +17,7 @@
 package com.magicpwd.d.dx;
 
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd._comn.Keys;
+import com.magicpwd._comn.mpwd.Keys;
 import com.magicpwd._comn.item.EditItem;
 import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.item.HintItem;

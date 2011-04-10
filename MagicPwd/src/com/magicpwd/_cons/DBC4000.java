@@ -20,7 +20,7 @@ package com.magicpwd._cons;
  *
  * @author Amon
  */
-public class DBC4000
+public interface DBC4000
 {
 
     /**数据库常量：日期*/

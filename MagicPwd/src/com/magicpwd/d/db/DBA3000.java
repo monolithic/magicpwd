@@ -18,7 +18,7 @@ package com.magicpwd.d.db;
 
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.prop.Char;
-import com.magicpwd._comn.Keys;
+import com.magicpwd._comn.mpwd.Keys;
 import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._comn.S1S3;
@@ -168,13 +168,13 @@ public class DBA3000
             item.setP30F0104(rest.getString(DBC3000.P30F0104));
             item.setP30F0105(rest.getString(DBC3000.P30F0105));
             item.setP30F0106(rest.getString(DBC3000.P30F0106));
-            item.setP30F0107(rest.getTimestamp(DBC3000.P30F0107));
+            item.setP30F0107(rest.getString(DBC3000.P30F0107));
             item.setP30F0108(rest.getString(DBC3000.P30F0108));
             item.setP30F0109(rest.getString(DBC3000.P30F0109));
             item.setP30F010A(rest.getString(DBC3000.P30F010A));
             item.setP30F010B(rest.getString(DBC3000.P30F010B));
             item.setP30F010C(rest.getString(DBC3000.P30F010C));
-            item.setP30F010D(rest.getTimestamp(DBC3000.P30F010D));
+            item.setP30F010D(rest.getString(DBC3000.P30F010D));
             item.setP30F010E(rest.getString(DBC3000.P30F010E));
             item.setP30F010F(rest.getString(DBC3000.P30F010F));
             list.add(item);
@@ -420,13 +420,13 @@ public class DBA3000
             keys.setP30F0103(rest.getInt(DBC3000.P30F0103));
             keys.setP30F0104(rest.getString(DBC3000.P30F0104));
             keys.setP30F0106(rest.getString(DBC3000.P30F0106));
-            keys.setP30F0107(rest.getTimestamp(DBC3000.P30F0107));
+            keys.setP30F0107(rest.getString(DBC3000.P30F0107));
             keys.setP30F0108(rest.getString(DBC3000.P30F0108));
             keys.setP30F0109(rest.getString(DBC3000.P30F0109));
             keys.setP30F010A(rest.getString(DBC3000.P30F010A));
             keys.setP30F010B(rest.getString(DBC3000.P30F010B));
             keys.setP30F010C(rest.getString(DBC3000.P30F010C));
-            keys.setP30F010D(rest.getTimestamp(DBC3000.P30F010D));
+            keys.setP30F010D(rest.getString(DBC3000.P30F010D));
             keys.setP30F010E(rest.getString(DBC3000.P30F010E));
             keys.setP30F010F(rest.getString(DBC3000.P30F010F));
 
@@ -1347,13 +1347,13 @@ public class DBA3000
             keys.setP30F0103(rest.getInt(DBC3000.P30F0A03));
             keys.setP30F0104(rest.getString(DBC3000.P30F0A04));
             keys.setP30F0106(rest.getString(DBC3000.P30F0A06));
-            keys.setP30F0107(rest.getTimestamp(DBC3000.P30F0A07));
+            keys.setP30F0107(rest.getString(DBC3000.P30F0A07));
             keys.setP30F0108(rest.getString(DBC3000.P30F0A08));
             keys.setP30F0109(rest.getString(DBC3000.P30F0A09));
             keys.setP30F010A(rest.getString(DBC3000.P30F0A0A));
             keys.setP30F010B(rest.getString(DBC3000.P30F0A0B));
             keys.setP30F010C(rest.getString(DBC3000.P30F0A0C));
-            keys.setP30F010D(rest.getTimestamp(DBC3000.P30F0A0D));
+            keys.setP30F010D(rest.getString(DBC3000.P30F0A0D));
             keys.setP30F010E(rest.getString(DBC3000.P30F0A0E));
             keys.setP30F010F(rest.getString(DBC3000.P30F0A0F));
 
