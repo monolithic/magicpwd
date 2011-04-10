@@ -27,7 +27,7 @@ import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd.d.db.DBA3000;
+import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.e.mpad.NewAction;
 import com.magicpwd.e.mpad.OpenAction;
 import com.magicpwd.e.mpad.SaveAction;
@@ -330,7 +330,7 @@ public class MpadPtn extends AMpwdPtn
         }
 
         noteList.clear();
-        boolean b = DBA3000.findUserNote(userMdl, name, noteList);
+        boolean b = DBA4000.findUserNote(userMdl, name, noteList);
         b &= noteList.size() > 0;
         if (!b || noteList.size() < 1)
         {

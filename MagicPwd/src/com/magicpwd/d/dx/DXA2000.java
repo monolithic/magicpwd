@@ -24,6 +24,7 @@ import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.item.HintItem;
 import com.magicpwd._comn.item.LogoItem;
 import com.magicpwd._comn.item.MetaItem;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.db.DBAccess;
 import com.magicpwd.m.SafeMdl;
@@ -73,7 +74,12 @@ public class DXA2000 extends DXA
 
             // Guid
             GuidItem guid = new GuidItem(userMdl);
-            guid.setTime(new java.sql.Timestamp(com.magicpwd._util.Date.toDate(temp.get(indx++), '-', ':', ' ').getTimeInMillis()));
+            String date = temp.get(indx++);
+            if (!Char.isValidateDate(date, true))
+            {
+                return size;
+            }
+            guid.setName(date);
             guid.setData(kindHash);
             guid.setSpec(IEditItem.SPEC_GUID_TPLT, temp.get(indx++));
             tempList.add(guid);

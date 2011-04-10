@@ -22,7 +22,7 @@ import javax.swing.tree.TreePath;
 
 import com.magicpwd.r.KindTN;
 import com.magicpwd._cons.ConsDat;
-import com.magicpwd.d.db.DBA3000;
+import com.magicpwd.d.db.DBA4000;
 
 /**
  * @author Amon
@@ -53,7 +53,7 @@ public class KindMdl extends DefaultTreeModel
         Kind k = (Kind) r.getUserObject();
         kind.setC2010201(r.getChildCount());
         kind.setC2010204(k.getC2010203());
-        DBA3000.updateKindData(kind);
+        DBA4000.updateKindData(kind);
     }
 
     public void wUpdate(TreePath path, Kind kind)
@@ -65,7 +65,7 @@ public class KindMdl extends DefaultTreeModel
         }
         c.setUserObject(kind);
         nodeChanged(c);
-        DBA3000.updateKindData(kind);
+        DBA4000.updateKindData(kind);
     }
 
     public void wRemove(TreePath path)
@@ -83,7 +83,7 @@ public class KindMdl extends DefaultTreeModel
             r.add((KindTN) c.getChildAt(0));
         }
         Kind item = (Kind) c.getUserObject();
-        DBA3000.deleteKindData(ConsDat.HASH_ROOT, item, r.getChildCount());
+        DBA4000.deleteKindData(ConsDat.HASH_ROOT, item, r.getChildCount());
         nodeStructureChanged(r);
     }
 }

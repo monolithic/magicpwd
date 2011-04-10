@@ -22,7 +22,7 @@ import com.magicpwd._comn.prop.Tplt;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
-import com.magicpwd.d.db.DBA3000;
+import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.r.TreeCR;
 import com.magicpwd.v.mexp.MexpPtn;
 
@@ -75,7 +75,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
             {
                 node = new javax.swing.tree.DefaultMutableTreeNode(kind);
 
-                dataList = DBA3000.selectTpltData(kind.getP30F1103());
+                dataList = DBA4000.selectTpltData(kind.getP30F1103());
                 for (Tplt item : dataList)
                 {
                     node.add(new javax.swing.tree.DefaultMutableTreeNode(item));
@@ -386,12 +386,12 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         // 上移
         Tplt c = (Tplt) p.getUserObject();
         c.addP30F1101(-1);
-        DBA3000.saveTpltData(c);
+        DBA4000.saveTpltData(c);
 
         // 下移
         c = (Tplt) n.getUserObject();
         c.addP30F1101(1);
-        DBA3000.saveTpltData(c);
+        DBA4000.saveTpltData(c);
     }
 
     private void sortDActionPerformed(java.awt.event.ActionEvent evt)
@@ -422,10 +422,10 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
 
         Tplt c = (Tplt) p.getUserObject();
         c.addP30F1101(1);
-        DBA3000.saveTpltData(c);
+        DBA4000.saveTpltData(c);
         c = (Tplt) n.getUserObject();
         c.addP30F1101(-1);
-        DBA3000.saveTpltData(c);
+        DBA4000.saveTpltData(c);
     }
 
     private void apndDataActionPerformed(java.awt.event.ActionEvent evt)
@@ -482,7 +482,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
 
         if (isUpdate)
         {
-            DBA3000.saveTpltData(currTplt);
+            DBA4000.saveTpltData(currTplt);
             tm_TpltList.nodeChanged(currNode);
             mainPtn.getUserMdl().getTpltMdl().wUpdate();
 
@@ -508,7 +508,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
                 currTplt.setP30F1104(((Tplt) node.getUserObject()).getP30F1103());
             }
             currTplt.setP30F1101(node.getChildCount());
-            DBA3000.saveTpltData(currTplt);
+            DBA4000.saveTpltData(currTplt);
             node.add(new javax.swing.tree.DefaultMutableTreeNode(currTplt));
             tm_TpltList.nodeStructureChanged(node);
 
@@ -536,7 +536,7 @@ public class TpltProp extends javax.swing.JPanel implements IPropBean
         if (Lang.showFirm(this, LangRes.P30F8A09, "确认要删除此数据吗，此操作将不可恢复？") == javax.swing.JOptionPane.YES_OPTION)
         {
             javax.swing.tree.DefaultMutableTreeNode node = (javax.swing.tree.DefaultMutableTreeNode) path.getLastPathComponent();
-            DBA3000.deleteTpltData((Tplt) node.getUserObject());
+            DBA4000.deleteTpltData((Tplt) node.getUserObject());
             tm_TpltList.removeNodeFromParent((javax.swing.tree.DefaultMutableTreeNode) path.getLastPathComponent());
         }
     }

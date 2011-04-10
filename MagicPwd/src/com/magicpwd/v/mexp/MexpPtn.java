@@ -56,7 +56,7 @@ import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
-import com.magicpwd.d.db.DBA3000;
+import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.m.mexp.MexpMdl;
 import com.magicpwd.m.mexp.KindMdl;
@@ -1566,10 +1566,10 @@ public class MexpPtn extends AMpwdPtn
 
         Kind c = (Kind) p.getUserObject();
         c.addC2010201(-1);
-        DBA3000.updateKindData(c);
+        DBA4000.updateKindData(c);
         c = (Kind) n.getUserObject();
         c.addC2010201(1);
-        DBA3000.updateKindData(c);
+        DBA4000.updateKindData(c);
     }
 
     public void backwardSelectedKind()
@@ -1601,10 +1601,10 @@ public class MexpPtn extends AMpwdPtn
 
         Kind c = (Kind) p.getUserObject();
         c.addC2010201(1);
-        DBA3000.updateKindData(c);
+        DBA4000.updateKindData(c);
         c = (Kind) n.getUserObject();
         c.addC2010201(-1);
-        DBA3000.updateKindData(c);
+        DBA4000.updateKindData(c);
     }
 
     public void promotionSelectedKind()
@@ -1637,7 +1637,7 @@ public class MexpPtn extends AMpwdPtn
         Kind c = (Kind) s.getUserObject();
         c.setC2010201(p2.getChildCount());
         c.setC2010204(u.getC2010203());
-        DBA3000.updateKindData(c);
+        DBA4000.updateKindData(c);
     }
 
     public void demotionSelectedKind()
@@ -1665,7 +1665,7 @@ public class MexpPtn extends AMpwdPtn
         Kind c = (Kind) s.getUserObject();
         c.setC2010201(p.getChildCount());
         c.setC2010204(u.getC2010203());
-        DBA3000.updateKindData(c);
+        DBA4000.updateKindData(c);
     }
     /**
      * 

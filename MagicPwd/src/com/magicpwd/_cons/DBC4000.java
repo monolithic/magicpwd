@@ -145,9 +145,10 @@ public interface DBC4000
     int P30F010C_SIZE = 1024;
     /**提醒索引*/
     String P30F010D = "P30F010D";
+    int P30F010D_SIZE = 16;
     /**提醒备注*/
     String P30F010E = "P30F010E";
-    int P30F010E_SIZE = 16;
+    int P30F010E_SIZE = 1024;
     /**相关说明*/
     String P30F010F = "P30F010F";
     int P30F010F_SIZE = 2048;

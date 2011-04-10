@@ -21,7 +21,7 @@ import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 
-import com.magicpwd.d.db.DBA3000;
+import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.m.UserMdl;
 
 /**
@@ -71,7 +71,7 @@ public class ListMdl extends DefaultListModel
         int c = keysList.size();
         keysList.clear();
         fireIntervalRemoved(this, 0, c);
-        DBA3000.findHintList(userMdl, new java.sql.Timestamp(s.getTime()), new java.sql.Timestamp(t.getTime()), keysList);
+        DBA4000.findHintList(userMdl, new java.sql.Timestamp(s.getTime()), new java.sql.Timestamp(t.getTime()), keysList);
         c = keysList.size();
         fireIntervalAdded(this, 0, c);
     }
@@ -81,7 +81,7 @@ public class ListMdl extends DefaultListModel
         int s = keysList.size();
         keysList.clear();
         fireIntervalRemoved(this, 0, s);
-        boolean b = DBA3000.readKeysList(userMdl, typeHash, keysList);
+        boolean b = DBA4000.readKeysList(userMdl, typeHash, keysList);
         s = keysList.size();
         b &= s > 0;
         fireIntervalAdded(this, 0, s);
@@ -93,7 +93,7 @@ public class ListMdl extends DefaultListModel
         int s = keysList.size();
         keysList.clear();
         fireIntervalRemoved(this, 0, s);
-        boolean b = DBA3000.findUserData(userMdl, keysMeta, keysList);
+        boolean b = DBA4000.findUserData(userMdl, keysMeta, keysList);
         s = keysList.size();
         b &= s > 0;
         if (b)
@@ -147,7 +147,7 @@ public class ListMdl extends DefaultListModel
     {
         if (index > -1 && index < keysList.size())
         {
-            DBA3000.deletePwdsData(keysList.get(index).getP30F0104());
+            DBA4000.deletePwdsData(keysList.get(index).getP30F0104());
             keysList.remove(index);
             fireIntervalRemoved(this, 0, index);
         }

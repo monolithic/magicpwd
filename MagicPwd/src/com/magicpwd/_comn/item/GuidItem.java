@@ -18,7 +18,6 @@ package com.magicpwd._comn.item;
 
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd.m.UserMdl;
-import java.sql.Timestamp;
 
 /**
  * 使用说明：<br />
@@ -31,33 +30,8 @@ import java.sql.Timestamp;
 public class GuidItem extends EditItem
 {
 
-    private Timestamp time;
-
     public GuidItem(UserMdl userMdl)
     {
         super(userMdl, ConsDat.INDX_GUID);
-    }
-
-    @Override
-    public String getName()
-    {
-        String name = time.toString();
-        int dot = name.indexOf('.');
-        return (dot > 0) ? name = name.substring(0, dot) : name;
-    }
-
-    @Override
-    public void setName(String name)
-    {
-    }
-
-    public Timestamp getTime()
-    {
-        return time;
-    }
-
-    public void setTime(Timestamp time)
-    {
-        this.time = time;
     }
 }

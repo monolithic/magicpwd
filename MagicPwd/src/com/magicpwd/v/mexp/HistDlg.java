@@ -22,7 +22,7 @@ import com.magicpwd._comn.S1S2;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd.d.db.DBA3000;
+import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.m.mexp.GridMdl;
 import java.util.ArrayList;
 import java.util.List;
@@ -176,7 +176,7 @@ public class HistDlg extends javax.swing.JDialog
             ls_HistList.setModel(lm_HistList);
         }
 
-        DBA3000.selectHistData(gridMdl.getKeysHash(), hist);
+        DBA4000.selectHistData(gridMdl.getKeysHash(), hist);
         for (S1S2 temp : hist)
         {
             lm_HistList.addElement(temp);
@@ -207,7 +207,7 @@ public class HistDlg extends javax.swing.JDialog
         try
         {
             keys.setDefault();
-            DBA3000.selectHistData(item.getK(), keys);
+            DBA4000.selectHistData(item.getK(), keys);
             gridMdl.deCrypt(keys, ls_ItemList);
 
             StringBuilder sb = new StringBuilder();
@@ -248,7 +248,7 @@ public class HistDlg extends javax.swing.JDialog
         {
             return;
         }
-        DBA3000.deleteHistData(gridMdl.getKeysHash(), temp.getK());
+        DBA4000.deleteHistData(gridMdl.getKeysHash(), temp.getK());
         lm_HistList.removeElement(temp);
         ta_HistInfo.setText("");
     }
@@ -263,7 +263,7 @@ public class HistDlg extends javax.swing.JDialog
         {
             return;
         }
-        DBA3000.deleteHistData(gridMdl.getKeysHash(), null);
+        DBA4000.deleteHistData(gridMdl.getKeysHash(), null);
         lm_HistList.clear();
         ta_HistInfo.setText("");
     }
@@ -280,11 +280,11 @@ public class HistDlg extends javax.swing.JDialog
         {
             return;
         }
-        DBA3000.pickupHistData(gridMdl.getKeysHash(), temp.getK(), 0);//TODO:数据恢复序列
+        DBA4000.pickupHistData(gridMdl.getKeysHash(), temp.getK(), 0);//TODO:数据恢复序列
         lm_HistList.clear();
         hist.clear();
 
-        DBA3000.selectHistData(gridMdl.getKeysHash(), hist);
+        DBA4000.selectHistData(gridMdl.getKeysHash(), hist);
         for (int i = 0, j = hist.size(); i < j; i += 1)
         {
             lm_HistList.addElement(hist.get(i));

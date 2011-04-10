@@ -17,7 +17,7 @@
 package com.magicpwd.m;
 
 import com.magicpwd._comn.prop.Tplt;
-import com.magicpwd.d.db.DBA3000;
+import com.magicpwd.d.db.DBA4000;
 
 /**
  * 魔方密码：口令模板下拉列表模型
@@ -35,7 +35,7 @@ public class TpltMdl extends javax.swing.AbstractListModel implements javax.swin
 
     void initData()
     {
-        itemList = DBA3000.selectTpltData("0");
+        itemList = DBA4000.selectTpltData("0");
     }
 
     @Override

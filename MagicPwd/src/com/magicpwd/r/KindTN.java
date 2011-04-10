@@ -21,7 +21,7 @@ import java.util.List;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 
-import com.magicpwd.d.db.DBA3000;
+import com.magicpwd.d.db.DBA4000;
 
 /**
  * @author Amon
@@ -71,7 +71,7 @@ public class KindTN extends DefaultMutableTreeNode
         Kind kvItem = (Kind) getUserObject();
         if (kvItem != null)
         {
-            List<Kind> list = DBA3000.selectKindData(kvItem.getC2010203());
+            List<Kind> list = DBA4000.selectKindData(kvItem.getC2010203());
             if (list != null)
             {
                 for (int i = 0, j = list.size(); i < j; i += 1)
