@@ -16,7 +16,7 @@
  */
 package com.magicpwd._util;
 
-import com.magicpwd._comn.Keys;
+import com.magicpwd._comn.mpwd.Keys;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import java.io.File;

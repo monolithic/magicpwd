@@ -14,10 +14,9 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd._comn;
+package com.magicpwd._comn.mpwd;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 
 import com.magicpwd._cons.ConsDat;
 
@@ -56,7 +55,7 @@ public final class Keys implements Serializable
     /**
      * 注册日期
      */
-    private Timestamp P30F0107;
+    private String P30F0107;
     /**
      * 模板索引
      */
@@ -78,11 +77,11 @@ public final class Keys implements Serializable
      */
     private String P30F010C;
     /**
-     * 到期日期
+     * 提醒索引
      */
-    private Timestamp P30F010D;
+    private String P30F010D;
     /**
-     * 到期提示
+     * 提示备注
      */
     private String P30F010E;
     /**
@@ -297,7 +296,7 @@ public final class Keys implements Serializable
      * 注册日期
      * @return the P30F0107
      */
-    public Timestamp getP30F0107()
+    public String getP30F0107()
     {
         return P30F0107;
     }
@@ -306,7 +305,7 @@ public final class Keys implements Serializable
      * 注册日期
      * @param P30F0107 the P30F0107 to set
      */
-    public void setP30F0107(Timestamp P30F0107)
+    public void setP30F0107(String P30F0107)
     {
         this.P30F0107 = P30F0107;
     }
@@ -402,25 +401,25 @@ public final class Keys implements Serializable
     }
 
     /**
-     * 到期日期
+     * 提醒索引
      * @return the P30F010D
      */
-    public Timestamp getP30F010D()
+    public String getP30F010D()
     {
         return P30F010D;
     }
 
     /**
-     * 到期日期
+     * 提醒索引
      * @param P30F010D the P30F010D to set
      */
-    public void setP30F010D(Timestamp P30F010D)
+    public void setP30F010D(String P30F010D)
     {
         this.P30F010D = P30F010D;
     }
 
     /**
-     * 到期提示
+     * 提醒备注
      * @return the P30F010E
      */
     public String getP30F010E()
@@ -429,7 +428,7 @@ public final class Keys implements Serializable
     }
 
     /**
-     * 到期提示
+     * 提醒备注
      * @param P30F010E the P30F010E to set
      */
     public void setP30F010E(String P30F010E)

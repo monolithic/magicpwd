@@ -62,7 +62,7 @@ public final class MpwdMdl
         setDatPath(mpwdCfg.getProperty("path.dat"));
         setBakPath(mpwdCfg.getProperty("path.bak"));
         setAppView(mpwdCfg.getProperty("view.last", "mwiz"));
-        firstRun = !new java.io.File(datPath, "mpwd.script").exists();
+        firstRun = !new java.io.File(datPath, "amon.script").exists();
     }
 
     public void saveCfg()

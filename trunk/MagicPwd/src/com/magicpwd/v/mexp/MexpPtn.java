@@ -38,7 +38,7 @@ import com.magicpwd._bean.mexp.ListBean;
 import com.magicpwd._bean.mexp.PwdsBean;
 import com.magicpwd._bean.mexp.TextBean;
 import com.magicpwd._comn.I1S2;
-import com.magicpwd._comn.Keys;
+import com.magicpwd._comn.mpwd.Keys;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.item.LogoItem;
