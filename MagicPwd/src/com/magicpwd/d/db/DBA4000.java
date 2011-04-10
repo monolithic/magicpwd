@@ -97,9 +97,12 @@ public class DBA4000
 
             reader = new java.io.BufferedReader(new java.io.InputStreamReader(stream));
             String line = reader.readLine();
-            while (com.magicpwd._util.Char.isValidate(line))
+            while (line != null)
             {
-                dba.addBatch(line);
+                if (com.magicpwd._util.Char.isValidate(line))
+                {
+                    dba.addBatch(line);
+                }
                 line = reader.readLine();
             }
             dba.executeBatch();
@@ -126,9 +129,12 @@ public class DBA4000
 
             reader = new java.io.BufferedReader(new java.io.InputStreamReader(stream));
             String line = reader.readLine();
-            while (com.magicpwd._util.Char.isValidate(line))
+            while (line != null)
             {
-                dba.addBatch(line);
+                if (com.magicpwd._util.Char.isValidate(line))
+                {
+                    dba.addBatch(line);
+                }
                 line = reader.readLine();
             }
             dba.executeBatch();
