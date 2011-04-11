@@ -14,35 +14,25 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.e.maoc.mnum;
-
-import com.magicpwd.__a.maoc.AMaocAction;
-import com.magicpwd._cons.LangRes;
-import com.magicpwd._util.Lang;
+package com.magicpwd._enum;
 
 /**
  *
  * @author Aven
  */
-public class DeleteAction extends AMaocAction
+public enum ExpType
 {
 
-    @Override
-    public void actionPerformed(java.awt.event.ActionEvent e)
-    {
-        if (Lang.showFirm(maocPtn, LangRes.P30FBA0B, "确认要删除此常量吗？\n删除后其它依赖于此常量的常量或函数将无法参与运算！") == javax.swing.JOptionPane.YES_OPTION)
-        {
-            maocPtn.deleteNum();
-        }
-    }
-
-    @Override
-    public void doInit(String value)
-    {
-    }
-
-    @Override
-    public void reInit(javax.swing.AbstractButton button, String value)
-    {
-    }
+    /**
+     * 未知
+     */
+    NAN,
+    /**
+     * 常量
+     */
+    NUM,
+    /**
+     * 函数
+     */
+    FUN
 }

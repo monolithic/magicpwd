@@ -16,7 +16,8 @@
  */
 package com.magicpwd.m.maoc;
 
-import com.magicpwd._comn.S1S3;
+import com.magicpwd._comn.mpwd.Mexp;
+import com.magicpwd.d.db.DBA4000;
 
 /**
  *
@@ -25,13 +26,13 @@ import com.magicpwd._comn.S1S3;
 public class MfunMdl implements javax.swing.ListModel, java.io.Serializable
 {
 
-    private java.util.List<S1S3> funList;
+    private java.util.List<Mexp> funList;
     private MaocMdl maocMdl;
 
     public MfunMdl(MaocMdl maocMdl)
     {
         this.maocMdl = maocMdl;
-        funList = new java.util.ArrayList<S1S3>();
+        funList = new java.util.ArrayList<Mexp>();
     }
 
     @Override
@@ -58,38 +59,44 @@ public class MfunMdl implements javax.swing.ListModel, java.io.Serializable
         listenerList.remove(javax.swing.event.ListDataListener.class, l);
     }
 
-    public S1S3 getItemAt(int index)
+    public Mexp getItemAt(int index)
     {
         return funList.get(index);
     }
 
-    public void appendItem(S1S3 item)
+    public void appendItem(Mexp mexp)
     {
         int i = funList.size();
-        funList.add(item);
-        this.fireIntervalAdded(item, i, i);
+        mexp.setP30F0801(i);
+        funList.add(mexp);
+        DBA4000.saveMexpData(mexp);
+        this.fireIntervalAdded(mexp, i, i);
     }
 
     public boolean deleteItem(int rowIndex)
     {
         if (rowIndex > -1 && rowIndex < funList.size())
         {
-            this.fireIntervalRemoved(funList.remove(rowIndex), rowIndex, rowIndex);
+            Mexp mexp = funList.remove(rowIndex);
+            DBA4000.deleteMexpData(mexp);
+            this.fireIntervalRemoved(mexp, rowIndex, rowIndex);
             return true;
         }
         return false;
     }
 
-    public void updateItem(S1S3 item)
+    public void updateItem(Mexp mexp)
     {
-        this.fireContentsChanged(item, 0, 0);
+        DBA4000.saveMexpData(mexp);
+        this.fireContentsChanged(mexp, 0, 0);
     }
 
-    public void deleteItem(S1S3 item)
+    public void deleteItem(Mexp mexp)
     {
-        if (item != null && funList.remove(item))
+        if (mexp != null && funList.remove(mexp))
         {
-            this.fireIntervalRemoved(item, 0, funList.size());
+            DBA4000.deleteMexpData(mexp);
+            this.fireIntervalRemoved(mexp, 0, funList.size());
         }
     }
 

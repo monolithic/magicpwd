@@ -18,7 +18,7 @@ package com.magicpwd.m.mwiz;
 
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.I1S2;
-import com.magicpwd._comn.mpwd.Keys;
+import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Char;
 import com.magicpwd.d.db.DBA4000;
@@ -90,7 +90,7 @@ public class KeysMdl extends SafeMdl
         return Char.isValidateHash(keys.getP30F0104());
     }
 
-    public void loadData(Keys keys) throws Exception
+    public void loadData(Mkey keys) throws Exception
     {
         loadData(keys.getP30F0104());
     }

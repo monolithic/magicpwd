@@ -274,3 +274,7 @@ INSERT INTO P30F1100 VALUES(14,1,'qqqqqaztdyxxewdg','qqqqqaztdyxwztgx','<Company
 INSERT INTO P30F1100 VALUES(15,1,'qqqqqaztdyxxcdwy','qqqqqaztdyxwztgx','<Account Number>','','',NOW,NOW)
 INSERT INTO P30F1100 VALUES(16,1,'qqqqqaztdyxxfvbv','qqqqqaztdyxwztgx','<Tax Number>','','',NOW,NOW)
 INSERT INTO P30F1100 VALUES(17,1,'qqqqqaztdyxxtcwq','qqqqqaztdyxwztgx','<Register Number>','','',NOW,NOW)
+
+INSERT INTO P30F0800 VALUES(0,1,'qqqqqazysztvbqqq','cot(x)','1/tan(x)','余切函数','角θ的邻边比对边')
+INSERT INTO P30F0800 VALUES(1,1,'qqqqqazyszttecxv','sec(x)','1/cos(x)','正割函数','角θ的斜边比邻边')
+INSERT INTO P30F0800 VALUES(2,1,'qqqqqazyszyaccqe','csc(x)','1/sin(x)','余割函数','角θ的斜边比对边')

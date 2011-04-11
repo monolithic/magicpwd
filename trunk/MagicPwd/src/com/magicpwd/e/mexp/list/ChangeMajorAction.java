@@ -17,7 +17,7 @@
 package com.magicpwd.e.mexp.list;
 
 import com.magicpwd.__a.mexp.AMexpAction;
-import com.magicpwd._comn.mpwd.Keys;
+import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd._util.Char;
 
 /**
@@ -38,9 +38,9 @@ public class ChangeMajorAction extends AMexpAction
         int val = Char.isValidateInteger(command) ? Integer.parseInt(command) : 0;
 
         Object obj = mexpPtn.getSelectedListValue();
-        if (obj instanceof Keys)
+        if (obj instanceof Mkey)
         {
-            ((Keys) obj).setP30F0103(val);
+            ((Mkey) obj).setP30F0103(val);
         }
         mexpPtn.changeMajor(val);
     }

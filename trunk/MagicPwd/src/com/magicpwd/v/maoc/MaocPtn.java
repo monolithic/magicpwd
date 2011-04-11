@@ -18,8 +18,6 @@ package com.magicpwd.v.maoc;
 
 import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd._comn.D1S2;
-import com.magicpwd._comn.S1S2;
-import com.magicpwd._comn.S1S3;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._comp.WTextBox;
@@ -31,8 +29,11 @@ import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
+import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.m.maoc.MaocMdl;
+import com.magicpwd._comn.mpwd.Mexp;
+import com.magicpwd._enum.ExpType;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.tray.TrayPtn;
 import org.javia.arity.Symbols;
@@ -287,10 +288,23 @@ public class MaocPtn extends AMpwdPtn
         this.pack();
         Bean.centerForm(this, null);
 
-        appendFun(new S1S3("", "cot(x)", "1/tan(x)", ""));
-        appendFun(new S1S3("", "ctg(x)", "1/tan(x)", ""));
-        appendFun(new S1S3("", "csc(x)", "1/sin(x)", ""));
-        appendFun(new S1S3("", "sec(x)", "1/cos(x)", ""));
+        java.util.List<Mexp> maocList = DBA4000.readMexpData();
+        if (maocList != null)
+        {
+            for (Mexp maoc : maocList)
+            {
+                if (maoc.getP30F0802() == ExpType.FUN.ordinal())
+                {
+                    appendFun(maoc);
+                    continue;
+                }
+                if (maoc.getP30F0802() == ExpType.NUM.ordinal())
+                {
+                    appendNum(maoc);
+                    continue;
+                }
+            }
+        }
 
         return true;
     }
@@ -423,21 +437,21 @@ public class MaocPtn extends AMpwdPtn
         }
     }
 
-    public S1S3 getSelectedNum()
+    public Mexp getSelectedNum()
     {
         int row = ls_NumList.getSelectedIndex();
         return row > -1 ? maocMdl.getMnumMdl().getItemAt(row) : null;
     }
 
-    public boolean appendNum(S1S3 item)
+    public boolean appendNum(Mexp mexp)
     {
-        if (!Char.isValidate(item.getV()) || !Char.isValidate(item.getV2()))
+        if (!Char.isValidate(mexp.getP30F0804()) || !Char.isValidate(mexp.getP30F0805()))
         {
             return false;
         }
         try
         {
-            org.javia.arity.FunctionAndName fan = symbols.compileWithName(item.getV() + '=' + item.getV2());
+            org.javia.arity.FunctionAndName fan = symbols.compileWithName(mexp.getP30F0804() + '=' + mexp.getP30F0805());
             symbols.define(fan);
         }
         catch (Exception exp)
@@ -446,7 +460,7 @@ public class MaocPtn extends AMpwdPtn
             Lang.showMesg(this, null, exp.toString());
             return false;
         }
-        maocMdl.getMnumMdl().appendItem(item);
+        maocMdl.getMnumMdl().appendItem(mexp);
         return true;
     }
 
@@ -457,12 +471,12 @@ public class MaocPtn extends AMpwdPtn
         {
             return;
         }
-        S1S2 item = maocMdl.getMnumMdl().getItemAt(row);
+        Mexp item = maocMdl.getMnumMdl().getItemAt(row);
         if (maocMdl.getMnumMdl().deleteItem(row))
         {
             try
             {
-                org.javia.arity.FunctionAndName fan = symbols.compileWithName(item.getV() + '=' + item.getV2());
+                org.javia.arity.FunctionAndName fan = symbols.compileWithName(item.getP30F0804() + '=' + item.getP30F0805());
                 symbols.remove(fan.name, fan.function);
             }
             catch (Exception exp)
@@ -473,6 +487,38 @@ public class MaocPtn extends AMpwdPtn
         }
     }
 
+    public void updateNum(Mexp mexp)
+    {
+        int row = ls_NumList.getSelectedIndex();
+        if (row < 0)
+        {
+            return;
+        }
+        if (!Char.isValidate(mexp.getP30F0804()) || !Char.isValidate(mexp.getP30F0805()))
+        {
+            return;
+        }
+
+        try
+        {
+            Mexp temp = maocMdl.getMnumMdl().getItemAt(row);
+            org.javia.arity.FunctionAndName oldFan = symbols.compileWithName(temp.getP30F0804() + '=' + temp.getP30F0805());
+            symbols.remove(oldFan.name, oldFan.function);
+            org.javia.arity.FunctionAndName newFan = symbols.compileWithName(mexp.getP30F0804() + '=' + mexp.getP30F0805());
+            symbols.define(newFan);
+            temp.setP30F0804(mexp.getP30F0804());
+            temp.setP30F0805(mexp.getP30F0805());
+            temp.setP30F0806(mexp.getP30F0806());
+            temp.setP30F0807(mexp.getP30F0807());
+            maocMdl.getMnumMdl().updateItem(temp);
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            Lang.showMesg(this, null, exp.toString());
+        }
+    }
+
     public void copyNumName()
     {
         int row = ls_NumList.getSelectedIndex();
@@ -480,10 +526,10 @@ public class MaocPtn extends AMpwdPtn
         {
             return;
         }
-        S1S3 item = maocMdl.getMnumMdl().getItemAt(row);
+        Mexp item = maocMdl.getMnumMdl().getItemAt(row);
         if (item != null)
         {
-            Util.copy2Clipboard(item.getV());
+            Util.copy2Clipboard(item.getP30F0804());
         }
     }
 
@@ -494,10 +540,10 @@ public class MaocPtn extends AMpwdPtn
         {
             return;
         }
-        S1S3 item = maocMdl.getMnumMdl().getItemAt(row);
+        Mexp item = maocMdl.getMnumMdl().getItemAt(row);
         if (item != null)
         {
-            Util.copy2Clipboard(item.getV2());
+            Util.copy2Clipboard(item.getP30F0805());
         }
     }
 
@@ -508,10 +554,10 @@ public class MaocPtn extends AMpwdPtn
         {
             return;
         }
-        S1S3 item = maocMdl.getMnumMdl().getItemAt(row);
+        Mexp item = maocMdl.getMnumMdl().getItemAt(row);
         if (item != null)
         {
-            replaceExpression(item.getV());
+            replaceExpression(item.getP30F0804());
         }
     }
 
@@ -522,28 +568,28 @@ public class MaocPtn extends AMpwdPtn
         {
             return;
         }
-        S1S3 item = maocMdl.getMnumMdl().getItemAt(row);
+        Mexp item = maocMdl.getMnumMdl().getItemAt(row);
         if (item != null)
         {
-            replaceExpression(item.getV2());
+            replaceExpression(item.getP30F0805());
         }
     }
 
-    public S1S3 getSelectedFun()
+    public Mexp getSelectedFun()
     {
         int row = ls_FunList.getSelectedIndex();
         return row > -1 ? maocMdl.getMfunMdl().getItemAt(row) : null;
     }
 
-    public boolean appendFun(S1S3 item)
+    public boolean appendFun(Mexp item)
     {
-        if (!Char.isValidate(item.getV()) || !Char.isValidate(item.getV2()))
+        if (!Char.isValidate(item.getP30F0804()) || !Char.isValidate(item.getP30F0805()))
         {
             return false;
         }
         try
         {
-            org.javia.arity.FunctionAndName fan = symbols.compileWithName(item.getV() + '=' + item.getV2());
+            org.javia.arity.FunctionAndName fan = symbols.compileWithName(item.getP30F0804() + '=' + item.getP30F0805());
             symbols.define(fan);
         }
         catch (Exception exp)
@@ -563,12 +609,12 @@ public class MaocPtn extends AMpwdPtn
         {
             return;
         }
-        S1S2 item = maocMdl.getMfunMdl().getItemAt(row);
+        Mexp item = maocMdl.getMfunMdl().getItemAt(row);
         if (maocMdl.getMfunMdl().deleteItem(row))
         {
             try
             {
-                org.javia.arity.FunctionAndName fan = symbols.compileWithName(item.getV() + '=' + item.getV2());
+                org.javia.arity.FunctionAndName fan = symbols.compileWithName(item.getP30F0804() + '=' + item.getP30F0805());
                 symbols.remove(fan.name, fan.function);
             }
             catch (Exception exp)
@@ -579,6 +625,38 @@ public class MaocPtn extends AMpwdPtn
         }
     }
 
+    public void updateFun(Mexp mexp)
+    {
+        int row = ls_FunList.getSelectedIndex();
+        if (row < 0)
+        {
+            return;
+        }
+        if (!Char.isValidate(mexp.getP30F0804()) || !Char.isValidate(mexp.getP30F0805()))
+        {
+            return;
+        }
+
+        try
+        {
+            Mexp temp = maocMdl.getMfunMdl().getItemAt(row);
+            org.javia.arity.FunctionAndName oldFan = symbols.compileWithName(temp.getP30F0804() + '=' + temp.getP30F0805());
+            symbols.remove(oldFan.name, oldFan.function);
+            org.javia.arity.FunctionAndName newFan = symbols.compileWithName(mexp.getP30F0804() + '=' + mexp.getP30F0805());
+            symbols.define(newFan);
+            temp.setP30F0804(mexp.getP30F0804());
+            temp.setP30F0805(mexp.getP30F0805());
+            temp.setP30F0806(mexp.getP30F0806());
+            temp.setP30F0807(mexp.getP30F0807());
+            maocMdl.getMfunMdl().updateItem(temp);
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            Lang.showMesg(this, null, exp.toString());
+        }
+    }
+
     public void copyFunName()
     {
         int row = ls_FunList.getSelectedIndex();
@@ -586,10 +664,10 @@ public class MaocPtn extends AMpwdPtn
         {
             return;
         }
-        S1S3 item = maocMdl.getMfunMdl().getItemAt(row);
+        Mexp item = maocMdl.getMfunMdl().getItemAt(row);
         if (item != null)
         {
-            Util.copy2Clipboard(item.getV());
+            Util.copy2Clipboard(item.getP30F0804());
         }
     }
 
@@ -600,10 +678,10 @@ public class MaocPtn extends AMpwdPtn
         {
             return;
         }
-        S1S3 item = maocMdl.getMfunMdl().getItemAt(row);
+        Mexp item = maocMdl.getMfunMdl().getItemAt(row);
         if (item != null)
         {
-            Util.copy2Clipboard(item.getV2());
+            Util.copy2Clipboard(item.getP30F0805());
         }
     }
 
@@ -614,10 +692,10 @@ public class MaocPtn extends AMpwdPtn
         {
             return;
         }
-        S1S3 item = maocMdl.getMfunMdl().getItemAt(row);
+        Mexp item = maocMdl.getMfunMdl().getItemAt(row);
         if (item != null)
         {
-            replaceExpression(item.getV());
+            replaceExpression(item.getP30F0804());
         }
     }
 
@@ -628,10 +706,10 @@ public class MaocPtn extends AMpwdPtn
         {
             return;
         }
-        S1S3 item = maocMdl.getMfunMdl().getItemAt(row);
+        Mexp item = maocMdl.getMfunMdl().getItemAt(row);
         if (item != null)
         {
-            replaceExpression(item.getV2());
+            replaceExpression(item.getP30F0805());
         }
     }
 

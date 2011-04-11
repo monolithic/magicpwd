@@ -18,7 +18,7 @@ package com.magicpwd.d.dx;
 
 import com.magicpwd.d.db.DBA3000;
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd._comn.mpwd.Keys;
+import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd._comn.item.EditItem;
 import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.item.HintItem;
@@ -47,7 +47,7 @@ public class DXA2000 extends DXA
         int size = 0;
         int indx = 0;
         EditItem item;
-        Keys tempKeys = new Keys();
+        Mkey tempKeys = new Mkey();
         java.util.ArrayList<IEditItem> tempList = new java.util.ArrayList<IEditItem>();
         DBAccess dba = new DBAccess();
         dba.init();
@@ -139,7 +139,7 @@ public class DXA2000 extends DXA
     @Override
     public int exportByKind(UserMdl userMdl, SafeMdl safeMdl, java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash) throws Exception
     {
-        java.util.ArrayList<Keys> dataList = new java.util.ArrayList<Keys>();
+        java.util.ArrayList<Mkey> dataList = new java.util.ArrayList<Mkey>();
         DBA3000.readKeysList(userMdl, kindHash, dataList);
         if (dataList == null || dataList.size() < 1)
         {
@@ -152,7 +152,7 @@ public class DXA2000 extends DXA
         IEditItem item;
 
         java.util.ArrayList<IEditItem> tempList = new java.util.ArrayList<IEditItem>();
-        for (Keys keys : dataList)
+        for (Mkey keys : dataList)
         {
             indx = 0;
             temp = new java.util.ArrayList<String>();

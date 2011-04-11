@@ -16,7 +16,7 @@
  */
 package com.magicpwd.m.mexp;
 
-import com.magicpwd._comn.mpwd.Keys;
+import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd._util.Bean;
 import java.util.ArrayList;
 
@@ -32,7 +32,7 @@ import com.magicpwd.m.UserMdl;
 public class ListMdl extends DefaultListModel
 {
 
-    private java.util.List<Keys> keysList;
+    private java.util.List<Mkey> keysList;
     private UserMdl userMdl;
 
     ListMdl(UserMdl userMdl)
@@ -42,7 +42,7 @@ public class ListMdl extends DefaultListModel
 
     void init()
     {
-        keysList = new ArrayList<Keys>();
+        keysList = new ArrayList<Mkey>();
     }
 
     /*
@@ -106,7 +106,7 @@ public class ListMdl extends DefaultListModel
 
     public boolean updtName(String hash, String name, String icon)
     {
-        Keys keys;
+        Mkey keys;
         for (int i = 0, j = keysList.size(); i < j; i += 1)
         {
             keys = keysList.get(i);
@@ -122,7 +122,7 @@ public class ListMdl extends DefaultListModel
         return false;
     }
 
-    public void wAppend(Keys keys)
+    public void wAppend(Mkey keys)
     {
         keysList.add(keys);
         this.fireIntervalAdded(this, 0, keysList.size());
@@ -139,7 +139,7 @@ public class ListMdl extends DefaultListModel
         fireIntervalRemoved(this, 0, index);
     }
 
-    public void wRemove(Keys keys)
+    public void wRemove(Mkey keys)
     {
         keysList.remove(keys);
         fireIntervalRemoved(this, 0, keysList.size());
@@ -155,7 +155,7 @@ public class ListMdl extends DefaultListModel
         }
     }
 
-    public Keys getElement(int index)
+    public Mkey getElement(int index)
     {
         return keysList.get(index);
     }

@@ -16,7 +16,7 @@
  */
 package com.magicpwd.r;
 
-import com.magicpwd._comn.mpwd.Keys;
+import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd._util.Bean;
 import com.magicpwd.v.mexp.MexpPtn;
 
@@ -130,9 +130,9 @@ public class KeysCR extends javax.swing.JPanel implements javax.swing.ListCellRe
 //        lb_Icon.setIcon(Util.getNone());
 
         // 口令列表专用
-        if (value instanceof Keys)
+        if (value instanceof Mkey)
         {
-            Keys keys = (Keys) value;
+            Mkey keys = (Mkey) value;
             lb_Text.setText(keys.getP30F0109());
             setToolTipText(com.magicpwd._util.Char.isValidate(keys.getP30F010A()) ? keys.getP30F010A() : keys.getP30F0109());
             lb_Icon.setIcon(keys.getKeysIcon());

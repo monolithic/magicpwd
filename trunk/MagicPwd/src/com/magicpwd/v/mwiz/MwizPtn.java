@@ -20,7 +20,7 @@ import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._bean.mail.Connect;
 import com.magicpwd._comn.I1S2;
-import com.magicpwd._comn.mpwd.Keys;
+import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd._comn.S1S1;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.ConsCfg;
@@ -565,7 +565,7 @@ public class MwizPtn extends AMpwdPtn
         showKeysInfo(mwizMdl.getGridMdl().getKeysAt(row));
     }
 
-    private void showKeysInfo(Keys keys)
+    private void showKeysInfo(Mkey keys)
     {
         WButtonGroup group = menuPtn.getGroup("label");
         if (group != null)
