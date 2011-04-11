@@ -38,7 +38,7 @@ import com.magicpwd._bean.mexp.ListBean;
 import com.magicpwd._bean.mexp.PwdsBean;
 import com.magicpwd._bean.mexp.TextBean;
 import com.magicpwd._comn.I1S2;
-import com.magicpwd._comn.mpwd.Keys;
+import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.item.LogoItem;
@@ -83,7 +83,7 @@ public class MexpPtn extends AMpwdPtn
     private MenuPtn menuPtn;
     private MexpMdl mexpMdl;
     /**口令列表上次选择索引*/
-    private Keys lastKeys;
+    private Mkey lastKeys;
     /**属性列表上次选择索引*/
     private int tb_LastIndx = -1;
     /**用户最后一次查找内容*/
@@ -1100,7 +1100,7 @@ public class MexpPtn extends AMpwdPtn
     private void ls_GuidListMouseClick(java.awt.event.MouseEvent e)
     {
         Object obj = ls_GuidList.getSelectedValue();
-        if (obj == null || !(obj instanceof Keys))
+        if (obj == null || !(obj instanceof Mkey))
         {
             return;
         }
@@ -1111,7 +1111,7 @@ public class MexpPtn extends AMpwdPtn
         }
 
         // 记录上次索引
-        lastKeys = (Keys) obj;
+        lastKeys = (Mkey) obj;
 
         if (mexpMdl.getGridMdl().isModified())
         {
@@ -1122,7 +1122,7 @@ public class MexpPtn extends AMpwdPtn
             }
         }
 
-        Keys keys = (Keys) obj;
+        Mkey keys = (Mkey) obj;
 
         try
         {

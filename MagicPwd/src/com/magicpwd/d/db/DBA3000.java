@@ -18,7 +18,7 @@ package com.magicpwd.d.db;
 
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.prop.Char;
-import com.magicpwd._comn.mpwd.Keys;
+import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._comn.S1S3;
@@ -156,12 +156,12 @@ public class DBA3000
      * @param list
      * @throws SQLException
      */
-    private static void getNameData(ResultSet rest, List<Keys> list) throws SQLException
+    private static void getNameData(ResultSet rest, List<Mkey> list) throws SQLException
     {
-        Keys item;
+        Mkey item;
         while (rest.next())
         {
-            item = new Keys();
+            item = new Mkey();
             item.setP30F0101(rest.getInt(DBC3000.P30F0101));
             item.setP30F0102(rest.getInt(DBC3000.P30F0102));
             item.setP30F0103(rest.getInt(DBC3000.P30F0103));
@@ -188,7 +188,7 @@ public class DBA3000
      * @param list
      * @return
      */
-    public static boolean readKeysList(UserMdl cfg, String kindHash, List<Keys> list)
+    public static boolean readKeysList(UserMdl cfg, String kindHash, List<Mkey> list)
     {
         // 数据库连接初始化
         DBAccess dba = new DBAccess();
@@ -229,7 +229,7 @@ public class DBA3000
      * @param list
      * @return
      */
-    public static boolean findUserData(UserMdl cfg, String text, List<Keys> list)
+    public static boolean findUserData(UserMdl cfg, String text, List<Mkey> list)
     {
         if (!com.magicpwd._util.Char.isValidate(text))
         {
@@ -312,7 +312,7 @@ public class DBA3000
      * @param list
      * @return
      */
-    public static boolean findHintList(UserMdl cfg, java.sql.Timestamp s, java.sql.Timestamp t, List<Keys> list)
+    public static boolean findHintList(UserMdl cfg, java.sql.Timestamp s, java.sql.Timestamp t, List<Mkey> list)
     {
         DBAccess dba = new DBAccess();
 
@@ -379,7 +379,7 @@ public class DBA3000
         }
     }
 
-    public static boolean readPwdsData(Keys keys)
+    public static boolean readPwdsData(Mkey keys)
     {
         // 数据库连接初始化
         DBAccess dba = new DBAccess();
@@ -456,7 +456,7 @@ public class DBA3000
         }
     }
 
-    public static boolean saveKeysData(Keys keys)
+    public static boolean saveKeysData(Mkey keys)
     {
         // 数据库连接初始化
         DBAccess dba = new DBAccess();
@@ -479,7 +479,7 @@ public class DBA3000
         }
     }
 
-    public static boolean savePwdsData(Keys keys)
+    public static boolean savePwdsData(Mkey keys)
     {
         // 数据库连接初始化
         DBAccess dba = new DBAccess();
@@ -501,7 +501,7 @@ public class DBA3000
         }
     }
 
-    public static void savePwdsData(DBAccess dba, Keys keys) throws Exception
+    public static void savePwdsData(DBAccess dba, Mkey keys) throws Exception
     {
         // 数据更新时，首先删除已有数据，再添加数据
         if (com.magicpwd._util.Char.isValidateHash(keys.getP30F0104()))
@@ -593,7 +593,7 @@ public class DBA3000
      * @param pwds
      * @throws SQLException
      */
-    private static void remove(DBAccess dba, Keys pwds) throws SQLException
+    private static void remove(DBAccess dba, Mkey pwds) throws SQLException
     {
         if (!com.magicpwd._util.Char.isValidateHash(pwds.getP30F0104()))
         {
@@ -612,7 +612,7 @@ public class DBA3000
      * @param keys
      * @throws SQLException
      */
-    private static void updateKeys(DBAccess dba, Keys keys) throws SQLException
+    private static void updateKeys(DBAccess dba, Mkey keys) throws SQLException
     {
         dba.addTable(DBC3000.P30F0100);
         dba.addParam(DBC3000.P30F0101, keys.getP30F0101());
@@ -664,7 +664,7 @@ public class DBA3000
         dba.dispose();
     }
 
-    private static void updatePwds(DBAccess dba, Keys keys) throws SQLException
+    private static void updatePwds(DBAccess dba, Mkey keys) throws SQLException
     {
         StringBuffer pwd = keys.getPassword().getP30F0203();
         int len = pwd.length();
@@ -1327,7 +1327,7 @@ public class DBA3000
         }
     }
 
-    public static boolean selectHistData(String logsHash, Keys keys)
+    public static boolean selectHistData(String logsHash, Mkey keys)
     {
         DBAccess dba = new DBAccess();
 

@@ -18,7 +18,7 @@ package com.magicpwd.e.mexp.list;
 
 import com.magicpwd.__a.mexp.AMexpAction;
 import com.magicpwd.__i.IBackCall;
-import com.magicpwd._comn.mpwd.Keys;
+import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd._util.Char;
 import com.magicpwd.x.CatDialog;
 
@@ -62,9 +62,9 @@ public class MovetoAction extends AMexpAction implements IBackCall<String>
         }
 
         Object obj = mexpPtn.getSelectedListValue();
-        if (obj instanceof Keys)
+        if (obj instanceof Mkey)
         {
-            ((Keys) obj).setP30F0106(hash);
+            ((Mkey) obj).setP30F0106(hash);
         }
         mexpPtn.changeKind(hash);
 

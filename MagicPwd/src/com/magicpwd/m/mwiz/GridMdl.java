@@ -17,7 +17,7 @@
 package com.magicpwd.m.mwiz;
 
 import com.magicpwd._comn.I1S2;
-import com.magicpwd._comn.mpwd.Keys;
+import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd.d.db.DBA4000;
@@ -31,7 +31,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
 {
 
     private KeysMdl keysMdl;
-    private java.util.List<Keys> ls_KeysList;
+    private java.util.List<Mkey> ls_KeysList;
     private javax.swing.event.EventListenerList listenerList;
     private java.text.DateFormat format;
 
@@ -43,7 +43,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     void init()
     {
         keysMdl = new KeysMdl(userMdl);
-        ls_KeysList = new java.util.ArrayList<Keys>();
+        ls_KeysList = new java.util.ArrayList<Mkey>();
         listenerList = new javax.swing.event.EventListenerList();
         format = java.text.DateFormat.getDateTimeInstance();
     }
@@ -111,7 +111,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
             return null;
         }
 
-        Keys temp = ls_KeysList.get(rowIndex);
+        Mkey temp = ls_KeysList.get(rowIndex);
         switch (columnIndex)
         {
             case 0:
@@ -182,7 +182,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
         return true;
     }
 
-    public Keys getKeysAt(int index)
+    public Mkey getKeysAt(int index)
     {
         return ls_KeysList.get(index);
     }

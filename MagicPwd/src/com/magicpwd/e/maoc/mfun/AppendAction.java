@@ -18,14 +18,14 @@ package com.magicpwd.e.maoc.mfun;
 
 import com.magicpwd.__a.maoc.AMaocAction;
 import com.magicpwd.__i.IBackCall;
-import com.magicpwd._comn.S1S3;
+import com.magicpwd._comn.mpwd.Mexp;
 import com.magicpwd.x.maoc.MfunDlg;
 
 /**
  *
  * @author Aven
  */
-public class AppendAction extends AMaocAction implements IBackCall<S1S3>
+public class AppendAction extends AMaocAction implements IBackCall<Mexp>
 {
 
     @Override
@@ -49,7 +49,7 @@ public class AppendAction extends AMaocAction implements IBackCall<S1S3>
     }
 
     @Override
-    public boolean callBack(String options, S1S3 object)
+    public boolean callBack(String options, Mexp object)
     {
         if (!IBackCall.OPTIONS_APPLY.equals(options))
         {

@@ -18,20 +18,20 @@ package com.magicpwd.e.maoc.mnum;
 
 import com.magicpwd.__a.maoc.AMaocAction;
 import com.magicpwd.__i.IBackCall;
-import com.magicpwd._comn.S1S3;
+import com.magicpwd._comn.mpwd.Mexp;
 import com.magicpwd.x.maoc.MnumDlg;
 
 /**
  *
  * @author Aven
  */
-public class UpdateAction extends AMaocAction implements IBackCall<S1S3>
+public class UpdateAction extends AMaocAction implements IBackCall<Mexp>
 {
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        S1S3 item = maocPtn.getSelectedNum();
+        Mexp item = maocPtn.getSelectedNum();
         if (item == null)
         {
             return;
@@ -55,7 +55,7 @@ public class UpdateAction extends AMaocAction implements IBackCall<S1S3>
     }
 
     @Override
-    public boolean callBack(String options, S1S3 object)
+    public boolean callBack(String options, Mexp object)
     {
         if (!IBackCall.OPTIONS_APPLY.equals(options))
         {
@@ -65,8 +65,7 @@ public class UpdateAction extends AMaocAction implements IBackCall<S1S3>
         {
             return false;
         }
-        maocPtn.deleteNum();
-        maocPtn.appendNum(object);
+        maocPtn.updateNum(object);
         return true;
     }
 }

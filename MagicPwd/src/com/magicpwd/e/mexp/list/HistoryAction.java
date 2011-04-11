@@ -17,7 +17,7 @@
 package com.magicpwd.e.mexp.list;
 
 import com.magicpwd.__a.mexp.AMexpAction;
-import com.magicpwd._comn.mpwd.Keys;
+import com.magicpwd._comn.mpwd.Mkey;
 
 /**
  *
@@ -34,7 +34,7 @@ public class HistoryAction extends AMexpAction
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
         Object obj = mexpPtn.getSelectedListValue();
-        if (obj == null || !(obj instanceof Keys))
+        if (obj == null || !(obj instanceof Mkey))
         {
             return;
         }

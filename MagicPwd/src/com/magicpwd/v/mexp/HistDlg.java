@@ -17,7 +17,7 @@
 package com.magicpwd.v.mexp;
 
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd._comn.mpwd.Keys;
+import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
@@ -37,7 +37,7 @@ public class HistDlg extends javax.swing.JDialog
 {
 
     private int indx;
-    private Keys keys;
+    private Mkey keys;
     private List<S1S2> hist;
     private List<IEditItem> ls_ItemList;
     private DefaultListModel lm_HistList;
@@ -47,7 +47,7 @@ public class HistDlg extends javax.swing.JDialog
     {
         super(frame, true);
         this.gridMdl = gridMdl;
-        keys = new Keys();
+        keys = new Mkey();
     }
 
     public void initView()
@@ -168,7 +168,7 @@ public class HistDlg extends javax.swing.JDialog
         }
         else
         {
-            keys = new Keys();
+            keys = new Mkey();
             hist = new ArrayList<S1S2>();
             ls_ItemList = new ArrayList<IEditItem>();
 

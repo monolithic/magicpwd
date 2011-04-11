@@ -23,7 +23,7 @@ import java.sql.Timestamp;
  *
  * @author Aven
  */
-public class Task implements Serializable
+public class Mgtd implements Serializable
 {
 
     /**任务类型*/

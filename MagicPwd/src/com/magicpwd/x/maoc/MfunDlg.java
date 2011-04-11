@@ -18,11 +18,12 @@ package com.magicpwd.x.maoc;
 
 import com.magicpwd.__a.ADialog;
 import com.magicpwd.__i.IBackCall;
-import com.magicpwd._comn.S1S3;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
+import com.magicpwd._comn.mpwd.Mexp;
+import com.magicpwd._enum.ExpType;
 import com.magicpwd.v.maoc.MaocPtn;
 
 /**
@@ -33,10 +34,9 @@ public class MfunDlg extends ADialog
 {
 
     private MaocPtn maocPtn;
-    private IBackCall<S1S3> backCall;
-    private S1S3 item;
+    private IBackCall<Mexp> backCall;
 
-    public MfunDlg(MaocPtn maocPtn, IBackCall<S1S3> backCall)
+    public MfunDlg(MaocPtn maocPtn, IBackCall<Mexp> backCall)
     {
         super(maocPtn, true);
         this.maocPtn = maocPtn;
@@ -53,6 +53,10 @@ public class MfunDlg extends ADialog
         tf_Value = new javax.swing.JTextField();
         lb_Value.setLabelFor(tf_Value);
 
+        lb_Title = new javax.swing.JLabel();
+        tf_Title = new javax.swing.JTextField();
+        lb_Title.setLabelFor(tf_Title);
+
         ta_Remark = new javax.swing.JTextArea();
         lb_Remark = new javax.swing.JLabel();
         lb_Remark.setLabelFor(ta_Remark);
@@ -67,10 +71,12 @@ public class MfunDlg extends ADialog
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg1.addComponent(lb_Name, javax.swing.GroupLayout.Alignment.TRAILING);
         hpg1.addComponent(lb_Value, javax.swing.GroupLayout.Alignment.TRAILING);
+        hpg1.addComponent(lb_Title, javax.swing.GroupLayout.Alignment.TRAILING);
         hpg1.addComponent(lb_Remark, javax.swing.GroupLayout.Alignment.TRAILING);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg2.addComponent(tf_Name, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE);
         hpg2.addComponent(tf_Value, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE);
+        hpg2.addComponent(tf_Title, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE);
         hpg2.addComponent(sp_Remark, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
         hsg1.addGroup(hpg1);
@@ -95,12 +101,15 @@ public class MfunDlg extends ADialog
         javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg2.addComponent(lb_Value);
         vpg2.addComponent(tf_Value, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        vpg3.addComponent(lb_Remark);
-        vpg3.addComponent(sp_Remark, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE);
-        javax.swing.GroupLayout.ParallelGroup vpg4 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
-        vpg4.addComponent(bt_Apply);
-        vpg4.addComponent(bt_Abort);
+        javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg3.addComponent(lb_Title);
+        vpg3.addComponent(tf_Title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.ParallelGroup vpg4 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        vpg4.addComponent(lb_Remark);
+        vpg4.addComponent(sp_Remark, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE);
+        javax.swing.GroupLayout.ParallelGroup vpg5 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg5.addComponent(bt_Apply);
+        vpg5.addComponent(bt_Abort);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
         vsg.addContainerGap();
         vsg.addGroup(vpg1);
@@ -110,6 +119,8 @@ public class MfunDlg extends ADialog
         vsg.addGroup(vpg3);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addGroup(vpg4);
+        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg.addGroup(vpg5);
         vsg.addContainerGap();
         layout.setVerticalGroup(vsg);
 
@@ -121,15 +132,16 @@ public class MfunDlg extends ADialog
     {
         this.setTitle(Lang.getLang(LangRes.P30FB203, "函数管理"));
 
-        Lang.setWText(lb_Name, LangRes.P30FB305, "函数名(@N)");
-        Lang.setWText(lb_Value, LangRes.P30FB306, "函数值(@V)");
-        Lang.setWText(lb_Remark, LangRes.P30FB307, "附注(@R)");
+        Lang.setWText(lb_Name, LangRes.P30FB306, "函数名(@N)");
+        Lang.setWText(lb_Value, LangRes.P30FB307, "函数值(@V)");
+        Lang.setWText(lb_Title, LangRes.P30FB308, "标题(@T)");
+        Lang.setWText(lb_Remark, LangRes.P30FB309, "附注(@R)");
 
         Bean.setText(bt_Abort, "取消(@C)");
         Bean.setText(bt_Apply, "确认(@O)");
     }
 
-    public void initData(S1S3 item)
+    public void initData(Mexp item)
     {
         bt_Abort.addActionListener(new java.awt.event.ActionListener()
         {
@@ -152,11 +164,11 @@ public class MfunDlg extends ADialog
 
         if (item != null)
         {
-            tf_Name.setText(item.getV());
-            tf_Value.setText(item.getV2());
-            ta_Remark.setText(item.getV3());
+            tf_Name.setText(item.getP30F0804());
+            tf_Value.setText(item.getP30F0805());
+            tf_Title.setText(item.getP30F0806());
+            ta_Remark.setText(item.getP30F0807());
         }
-        this.item = item;
 
         processEscape();
 
@@ -212,22 +224,21 @@ public class MfunDlg extends ADialog
             return;
         }
 
-        if (item == null)
-        {
-            item = new S1S3();
-        }
-
-        item.setV(name);
-        item.setV2(value);
-        item.setV3(ta_Remark.getText());
+        Mexp item = new Mexp(ExpType.FUN);
+        item.setP30F0804(name);
+        item.setP30F0805(value);
+        item.setP30F0806(tf_Title.getText());
+        item.setP30F0807(ta_Remark.getText());
         backCall.callBack(IBackCall.OPTIONS_APPLY, item);
     }
-    private javax.swing.JTextField tf_Name;
     private javax.swing.JLabel lb_Name;
-    private javax.swing.JTextField tf_Value;
+    private javax.swing.JTextField tf_Name;
     private javax.swing.JLabel lb_Value;
-    private javax.swing.JTextArea ta_Remark;
+    private javax.swing.JTextField tf_Value;
+    private javax.swing.JLabel lb_Title;
+    private javax.swing.JTextField tf_Title;
     private javax.swing.JLabel lb_Remark;
+    private javax.swing.JTextArea ta_Remark;
     private javax.swing.JButton bt_Apply;
     private javax.swing.JButton bt_Abort;
 }

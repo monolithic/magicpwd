@@ -25,7 +25,7 @@ import javax.crypto.Cipher;
  * 口令数据
  * @author Amon
  */
-public class Pwds
+public class Mpwd
 {
 
     /**
@@ -41,7 +41,7 @@ public class Pwds
      */
     private StringBuffer P30F0203 = new StringBuffer();
 
-    public Pwds()
+    public Mpwd()
     {
         setDefault();
     }
