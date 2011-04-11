@@ -244,6 +244,7 @@ public class DBA4000
             item.setP30F0109(rest.getString(DBC4000.P30F0109));
             item.setP30F010A(rest.getString(DBC4000.P30F010A));
             item.setP30F010B(rest.getString(DBC4000.P30F010B));
+            item.setKeysIcon(Bean.getDataIcon(item.getP30F010B()));
             item.setP30F010C(rest.getString(DBC4000.P30F010C));
             item.setP30F010D(rest.getString(DBC4000.P30F010D));
             item.setP30F010E(rest.getString(DBC4000.P30F010E));
@@ -496,6 +497,7 @@ public class DBA4000
             keys.setP30F0109(rest.getString(DBC4000.P30F0109));
             keys.setP30F010A(rest.getString(DBC4000.P30F010A));
             keys.setP30F010B(rest.getString(DBC4000.P30F010B));
+            keys.setKeysIcon(Bean.getDataIcon(keys.getP30F010B()));
             keys.setP30F010C(rest.getString(DBC4000.P30F010C));
             keys.setP30F010D(rest.getString(DBC4000.P30F010D));
             keys.setP30F010E(rest.getString(DBC4000.P30F010E));
@@ -1423,6 +1425,7 @@ public class DBA4000
             keys.setP30F0109(rest.getString(DBC4000.P30F0A09));
             keys.setP30F010A(rest.getString(DBC4000.P30F0A0A));
             keys.setP30F010B(rest.getString(DBC4000.P30F0A0B));
+            keys.setKeysIcon(Bean.getDataIcon(keys.getP30F010B()));
             keys.setP30F010C(rest.getString(DBC4000.P30F0A0C));
             keys.setP30F010D(rest.getString(DBC4000.P30F0A0D));
             keys.setP30F010E(rest.getString(DBC4000.P30F0A0E));
