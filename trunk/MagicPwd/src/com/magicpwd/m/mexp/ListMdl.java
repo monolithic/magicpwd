@@ -17,6 +17,7 @@
 package com.magicpwd.m.mexp;
 
 import com.magicpwd._comn.mpwd.Keys;
+import com.magicpwd._util.Bean;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
@@ -113,6 +114,7 @@ public class ListMdl extends DefaultListModel
             {
                 keys.setP30F0109(name);
                 keys.setP30F010B(icon);
+                keys.setKeysIcon(Bean.getDataIcon(icon));
                 fireContentsChanged(this, i, i);
                 return true;
             }
