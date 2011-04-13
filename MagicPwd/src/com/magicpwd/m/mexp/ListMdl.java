@@ -72,7 +72,7 @@ public class ListMdl extends DefaultListModel
         int c = keysList.size();
         keysList.clear();
         fireIntervalRemoved(this, 0, c);
-        DBA4000.findHintList(userMdl, new java.sql.Timestamp(s.getTime()), new java.sql.Timestamp(t.getTime()), keysList);
+//        DBA4000.findHintList(userMdl, new java.sql.Timestamp(s.getTime()), new java.sql.Timestamp(t.getTime()), keysList);
         c = keysList.size();
         fireIntervalAdded(this, 0, c);
     }

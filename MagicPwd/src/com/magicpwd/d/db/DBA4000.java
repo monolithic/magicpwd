@@ -24,6 +24,7 @@ import com.magicpwd._comn.S1S2;
 import com.magicpwd._comn.S1S3;
 import com.magicpwd._comn.item.EditItem;
 import com.magicpwd._comn.mpwd.Mexp;
+import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._comn.prop.Char;
 import com.magicpwd._comn.prop.Tplt;
 import com.magicpwd._cons.ConsCfg;
@@ -75,8 +76,10 @@ public class DBA4000
             Logs.exception(ex);
             result = null;
         }
-
-        dba.dispose();
+        finally
+        {
+            dba.dispose();
+        }
         return result;
     }
 
@@ -191,8 +194,10 @@ public class DBA4000
             Logs.exception(ex);
             isOK = false;
         }
-
-        dba.dispose();
+        finally
+        {
+            dba.dispose();
+        }
         return isOK;
     }
 
@@ -385,7 +390,7 @@ public class DBA4000
      * @param list
      * @return
      */
-    public static boolean findHintList(UserMdl cfg, java.sql.Timestamp s, java.sql.Timestamp t, List<Mkey> list)
+    public static boolean findHintList(UserMdl cfg, java.sql.Timestamp s, java.sql.Timestamp t, List<Mgtd> list)
     {
         DBAccess dba = new DBAccess();
 
@@ -393,19 +398,87 @@ public class DBA4000
         {
             dba.init();
 
-            dba.addTable(DBC4000.P30F0100);
-            dba.addWhere(DBC4000.P30F010D + " BETWEEN '" + s + "' AND '" + t + '\'');
-            addUserSort(dba, cfg);
-            addDataSort(dba, cfg);
-
-            getNameData(dba.executeSelect(), list);
+            dba.addTable(DBC4000.P30F0700);
+            dba.addWhere(com.magicpwd._util.Char.format("{0} IS NOT NULL AND {0} > {1}", DBC4000.P30F070C, s.toString()));
+            dba.addWhere(com.magicpwd._util.Char.format("{0} IS NOT NULL AND {0} < {1}", DBC4000.P30F070D, s.toString()));
+            dba.addWhere(DBC4000.P30F0703, ">", -1);
+            ResultSet rest = dba.executeSelect();
+            Mgtd mgtd = new Mgtd();
+            while (rest.next())
+            {
+                mgtd.setP30F0701(rest.getInt(DBC4000.P30F0701));
+                mgtd.setP30F0702(rest.getInt(DBC4000.P30F0702));
+                mgtd.setP30F0703(rest.getInt(DBC4000.P30F0703));
+                mgtd.setP30F0704(rest.getInt(DBC4000.P30F0703));
+                mgtd.setP30F0705(rest.getInt(DBC4000.P30F0705));
+                mgtd.setP30F0706(rest.getInt(DBC4000.P30F0706));
+                mgtd.setP30F0707(rest.getInt(DBC4000.P30F0707));
+                mgtd.setP30F0708(rest.getString(DBC4000.P30F0708));
+                mgtd.setP30F0709(rest.getString(DBC4000.P30F0709));
+                mgtd.setP30F070A(rest.getString(DBC4000.P30F070A));
+                mgtd.setP30F070B(rest.getString(DBC4000.P30F070B));
+                mgtd.setP30F070C(rest.getTimestamp(DBC4000.P30F070C));
+                mgtd.setP30F070D(rest.getTimestamp(DBC4000.P30F070D));
+                mgtd.setP30F070E(rest.getTimestamp(DBC4000.P30F070E));
+                mgtd.setP30F070F(rest.getTimestamp(DBC4000.P30F070F));
+                mgtd.setP30F0710(rest.getInt(DBC4000.P30F0710));
+                mgtd.setP30F0711(rest.getString(DBC4000.P30F0711));
+                mgtd.setP30F0712(rest.getString(DBC4000.P30F0712));
+                mgtd.setP30F0713(rest.getString(DBC4000.P30F0713));
+                list.add(mgtd);
+            }
+            rest.close();
             return true;
         }
         catch (Exception exp)
         {
             Logs.exception(exp);
-            dba.dispose();
             return false;
+        }
+        finally
+        {
+            dba.dispose();
+        }
+    }
+
+    public static boolean saveHintData(Mgtd mgtd)
+    {
+        DBAccess dba = new DBAccess();
+
+        try
+        {
+            dba.init();
+
+            dba.addTable(DBC4000.P30F0700);
+            dba.addParam(DBC4000.P30F0701, mgtd.getP30F0701());
+            dba.addParam(DBC4000.P30F0702, mgtd.getP30F0702());
+            dba.addParam(DBC4000.P30F0703, mgtd.getP30F0703());
+            dba.addParam(DBC4000.P30F0704, mgtd.getP30F0704());
+            dba.addParam(DBC4000.P30F0705, mgtd.getP30F0705());
+            dba.addParam(DBC4000.P30F0706, mgtd.getP30F0706());
+            dba.addParam(DBC4000.P30F0707, mgtd.getP30F0707());
+            dba.addParam(DBC4000.P30F0708, mgtd.getP30F0708());
+            dba.addParam(DBC4000.P30F0709, mgtd.getP30F0709());
+            dba.addParam(DBC4000.P30F070A, mgtd.getP30F070A());
+            dba.addParam(DBC4000.P30F070B, mgtd.getP30F070B());
+            dba.addParam(DBC4000.P30F070C, mgtd.getP30F070C() != null ? mgtd.getP30F070C().toString() : "");
+            dba.addParam(DBC4000.P30F070D, mgtd.getP30F070D() != null ? mgtd.getP30F070D().toString() : "");
+            dba.addParam(DBC4000.P30F070E, mgtd.getP30F070E() != null ? mgtd.getP30F070E().toString() : "");
+            dba.addParam(DBC4000.P30F070F, mgtd.getP30F070F() != null ? mgtd.getP30F070F().toString() : "");
+            dba.addParam(DBC4000.P30F0710, mgtd.getP30F0710());
+            dba.addParam(DBC4000.P30F0711, mgtd.getP30F0711());
+            dba.addParam(DBC4000.P30F0712, mgtd.getP30F0712());
+            dba.addParam(DBC4000.P30F0713, mgtd.getP30F0713());
+            return 1 == dba.executeInsert();
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            return false;
+        }
+        finally
+        {
+            dba.dispose();
         }
     }
 
