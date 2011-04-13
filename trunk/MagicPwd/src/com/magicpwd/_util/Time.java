@@ -51,7 +51,7 @@ public class Time implements java.awt.event.ActionListener
         {
             taskTime = new Time();
         }
-        return null;
+        return taskTime;
     }
 
     public void registerAction(Task item, IBackCall<String, Task> backCall)
@@ -79,7 +79,7 @@ public class Time implements java.awt.event.ActionListener
         }
     }
 
-    public IBackCall getAction(String taskName)
+    public IBackCall<String, Task> getAction(String taskName)
     {
         for (Task info : tasks.keySet())
         {
