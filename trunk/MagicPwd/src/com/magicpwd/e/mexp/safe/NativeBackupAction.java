@@ -29,7 +29,7 @@ import com.magicpwd._util.Logs;
  * 备份到数据文件
  * @author Amon
  */
-public class NativeBackupAction extends AMexpAction implements IBackCall<String>
+public class NativeBackupAction extends AMexpAction implements IBackCall<String, String>
 {
 
     public NativeBackupAction()

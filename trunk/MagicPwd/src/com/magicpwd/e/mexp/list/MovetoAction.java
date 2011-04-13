@@ -26,7 +26,7 @@ import com.magicpwd.x.CatDialog;
  *
  * @author Amon
  */
-public class MovetoAction extends AMexpAction implements IBackCall<String>
+public class MovetoAction extends AMexpAction implements IBackCall<String, String>
 {
 
     public MovetoAction()

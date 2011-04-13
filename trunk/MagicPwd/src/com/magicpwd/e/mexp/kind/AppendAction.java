@@ -26,7 +26,7 @@ import com.magicpwd.v.mexp.KindDlg;
  *
  * @author Amon
  */
-public class AppendAction extends AMexpAction implements IBackCall<Kind>
+public class AppendAction extends AMexpAction implements IBackCall<String, Kind>
 {
 
     public AppendAction()

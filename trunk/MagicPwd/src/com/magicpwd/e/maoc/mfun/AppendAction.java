@@ -25,7 +25,7 @@ import com.magicpwd.x.maoc.MfunDlg;
  *
  * @author Aven
  */
-public class AppendAction extends AMaocAction implements IBackCall<Mexp>
+public class AppendAction extends AMaocAction implements IBackCall<String, Mexp>
 {
 
     @Override

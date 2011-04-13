@@ -38,7 +38,7 @@ import com.magicpwd.x.IcoDialog;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall<String>
+public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall<String, String>
 {
 
     private IEditItem itemData;

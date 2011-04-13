@@ -29,7 +29,7 @@ import com.magicpwd._util.Lang;
  *
  * @author Amon
  */
-public class CreateSkeyAction extends AMexpAction implements IBackCall<UserDto>
+public class CreateSkeyAction extends AMexpAction implements IBackCall<AuthLog, UserDto>
 {
 
     public CreateSkeyAction()
@@ -61,9 +61,9 @@ public class CreateSkeyAction extends AMexpAction implements IBackCall<UserDto>
     }
 
     @Override
-    public boolean callBack(String options, UserDto object)
+    public boolean callBack(AuthLog options, UserDto object)
     {
-        if (AuthLog.signSk.name().equalsIgnoreCase(options))
+        if (AuthLog.signSk == options)
         {
             javax.swing.AbstractButton button = mexpPtn.getMenuPtn().getButton("mpwd-skey");
             if (button != null)

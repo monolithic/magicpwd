@@ -37,9 +37,9 @@ public class IcoDialog extends javax.swing.JDialog
     private java.io.File filePath;
     private java.io.File iconPath;
     private AMpwdPtn formPtn;
-    private IBackCall<String> backCall;
+    private IBackCall<String, String> backCall;
 
-    public IcoDialog(AMpwdPtn mpwdPtn, IBackCall<String> backCall)
+    public IcoDialog(AMpwdPtn mpwdPtn, IBackCall<String, String> backCall)
     {
         super(mpwdPtn, true);
         this.formPtn = mpwdPtn;

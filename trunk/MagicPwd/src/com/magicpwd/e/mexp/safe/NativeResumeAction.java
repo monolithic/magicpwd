@@ -30,7 +30,7 @@ import com.magicpwd.x.DatDialog;
  * 从数据文件恢复
  * @author Amon
  */
-public class NativeResumeAction extends AMexpAction implements IBackCall<String>
+public class NativeResumeAction extends AMexpAction implements IBackCall<String, String>
 {
 
     public NativeResumeAction()

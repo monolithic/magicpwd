@@ -17,7 +17,7 @@
 package com.magicpwd._util;
 
 import com.magicpwd.__i.IBackCall;
-import com.magicpwd._comn.TaskInfo;
+import com.magicpwd._comn.Task;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -248,9 +248,9 @@ public final class Util
     {
         copy2Clipboard(text);
 
-        if (Task.getAction("clip-mon") != null)
+        if (Time.getInstance().getAction("clip-mon") != null)
         {
-            Task.deActive("clip-mon");
+            Time.getInstance().deActive("clip-mon");
             return;
         }
     }
@@ -266,17 +266,17 @@ public final class Util
     {
         copy2Clipboard(text);
 
-        if (Task.getAction("clip-mon") != null)
+        if (Time.getInstance().getAction("clip-mon") != null)
         {
-            Task.reActive("clip-mon", 0, maxDelay);
+            Time.getInstance().reActive("clip-mon", 0, maxDelay);
             return;
         }
 
-        Task.registerAction(new TaskInfo(0, maxDelay, "clip-mon", ""), new IBackCall<TaskInfo>()
+        Time.getInstance().registerAction(new Task(0, maxDelay, "clip-mon", ""), new IBackCall<String, Task>()
         {
 
             @Override
-            public boolean callBack(String options, TaskInfo object)
+            public boolean callBack(String options, Task object)
             {
                 Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection(null), null);
                 return true;

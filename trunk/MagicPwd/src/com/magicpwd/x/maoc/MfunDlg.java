@@ -34,9 +34,9 @@ public class MfunDlg extends ADialog
 {
 
     private MaocPtn maocPtn;
-    private IBackCall<Mexp> backCall;
+    private IBackCall<String, Mexp> backCall;
 
-    public MfunDlg(MaocPtn maocPtn, IBackCall<Mexp> backCall)
+    public MfunDlg(MaocPtn maocPtn, IBackCall<String, Mexp> backCall)
     {
         super(maocPtn, true);
         this.maocPtn = maocPtn;

@@ -127,7 +127,7 @@ public class MwizPtn extends AMpwdPtn
     public boolean initData()
     {
         hb_HintBar.initData();
-        hb_HintBar.setBackCall(new IBackCall<String>()
+        hb_HintBar.setBackCall(new IBackCall<String, String>()
         {
 
             @Override
@@ -436,7 +436,7 @@ public class MwizPtn extends AMpwdPtn
         mailDlg.initView();
         mailDlg.initLang();
         mailDlg.initData();
-        mailDlg.setBackCall(new IBackCall<String>()
+        mailDlg.setBackCall(new IBackCall<String, String>()
         {
 
             @Override

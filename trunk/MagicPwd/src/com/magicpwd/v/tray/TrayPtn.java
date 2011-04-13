@@ -45,7 +45,7 @@ import com.magicpwd.v.mwiz.MwizPtn;
  * 系统托盘
  * @author Amon
  */
-public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener, java.awt.event.MouseMotionListener
+public class TrayPtn implements IBackCall<AuthLog, UserDto>, java.awt.event.MouseListener, java.awt.event.MouseMotionListener
 {
 
     private static boolean isOsTray;
@@ -158,9 +158,9 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
     }
 
     @Override
-    public boolean callBack(String options, UserDto object)
+    public boolean callBack(AuthLog options, UserDto object)
     {
-        switch (AuthLog.valueOf(options))
+        switch (options)
         {
             // 用户登录
             case signIn:
@@ -611,7 +611,7 @@ public class TrayPtn implements IBackCall<UserDto>, java.awt.event.MouseListener
         getUserPtn(AuthLog.signRs, this);
     }
 
-    public UserPtn getUserPtn(AuthLog view, IBackCall<UserDto> call)
+    public UserPtn getUserPtn(AuthLog view, IBackCall<AuthLog, UserDto> call)
     {
         if (userPtn == null)
         {

@@ -176,7 +176,7 @@ public class SignSk extends javax.swing.JPanel implements IUserView
             return;
         }
 
-        userPtn.callBack(AuthLog.signSk.name(), null);
+        userPtn.callBack(AuthLog.signSk, null);
         userPtn.hideWindow();
         Lang.showMesg(this, LangRes.P30FAA17, "安全口令设定成功！");
     }

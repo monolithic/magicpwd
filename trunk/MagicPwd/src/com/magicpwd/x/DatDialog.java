@@ -38,9 +38,9 @@ public class DatDialog extends javax.swing.JDialog
 {
 
     private AMpwdPtn formPtn;
-    private IBackCall<String> backCall;
+    private IBackCall<String, String> backCall;
 
-    public DatDialog(AMpwdPtn mpwdPtn, IBackCall<String> backCall)
+    public DatDialog(AMpwdPtn mpwdPtn, IBackCall<String, String> backCall)
     {
         super(mpwdPtn, true);
         this.formPtn = mpwdPtn;

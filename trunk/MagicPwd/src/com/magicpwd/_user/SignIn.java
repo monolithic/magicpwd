@@ -258,7 +258,7 @@ public class SignIn extends javax.swing.JPanel implements IUserView
             MpwdMdl.setAppView(((S1S1) object).getK());
         }
 
-        if (userPtn.callBack(AuthLog.signIn.name(), null))
+        if (userPtn.callBack(AuthLog.signIn, null))
         {
             userPtn.hideWindow();
         }

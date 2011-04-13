@@ -17,9 +17,9 @@
 package com.magicpwd.v;
 
 import com.magicpwd.__i.IBackCall;
-import com.magicpwd._comn.TaskInfo;
+import com.magicpwd._comn.Task;
 import com.magicpwd._util.Char;
-import com.magicpwd._util.Task;
+import com.magicpwd._util.Time;
 import com.magicpwd.m.HintMdl;
 import com.magicpwd.m.UserMdl;
 
@@ -30,7 +30,7 @@ import com.magicpwd.m.UserMdl;
 public class HintBar extends javax.swing.JPanel
 {
 
-    private IBackCall<String> backCall;
+    private IBackCall<String, String> backCall;
     private UserMdl userMdl;
     private HintMdl hintMdl;
     private java.text.DateFormat dateTplt;
@@ -100,11 +100,11 @@ public class HintBar extends javax.swing.JPanel
         hintMdl = new HintMdl(userMdl);
         hintMdl.initData();
 
-        Task.registerAction(new TaskInfo(0, 1, "mexp-hint", ""), new IBackCall<TaskInfo>()
+        Time.getInstance().registerAction(new Task(0, 1, "mexp-hint", ""), new IBackCall<String, Task>()
         {
 
             @Override
-            public boolean callBack(String options, TaskInfo object)
+            public boolean callBack(String options, Task object)
             {
                 return showInfo(true);
             }
@@ -161,7 +161,7 @@ public class HintBar extends javax.swing.JPanel
     /**
      * @return the backCall
      */
-    public IBackCall<String> getBackCall()
+    public IBackCall<String, String> getBackCall()
     {
         return backCall;
     }
@@ -169,7 +169,7 @@ public class HintBar extends javax.swing.JPanel
     /**
      * @param backCall the backCall to set
      */
-    public void setBackCall(IBackCall<String> backCall)
+    public void setBackCall(IBackCall<String, String> backCall)
     {
         this.backCall = backCall;
     }

@@ -53,7 +53,7 @@ public class UserPtn extends javax.swing.JPanel
     /**
      * 成功回调函数
      */
-    private IBackCall<UserDto> backCall;
+    private IBackCall<AuthLog, UserDto> backCall;
     private TrayPtn trayPtn;
     private UserMdl userMdl;
     private IUserView userView;
@@ -398,7 +398,7 @@ public class UserPtn extends javax.swing.JPanel
         }
     }
 
-    public void setBackCall(IBackCall<UserDto> backCall)
+    public void setBackCall(IBackCall<AuthLog, UserDto> backCall)
     {
         this.backCall = backCall;
     }
@@ -469,7 +469,7 @@ public class UserPtn extends javax.swing.JPanel
         System.exit(0);
     }
 
-    boolean callBack(String authLog, UserDto userDto)
+    boolean callBack(AuthLog authLog, UserDto userDto)
     {
         if (backCall != null)
         {

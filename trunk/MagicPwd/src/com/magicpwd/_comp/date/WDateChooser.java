@@ -58,7 +58,7 @@ public class WDateChooser
 
     public void show(final javax.swing.text.JTextComponent cmp, int x, int y)
     {
-        showMenu(new IBackCall<java.util.Calendar>()
+        showMenu(new IBackCall<String, java.util.Calendar>()
         {
 
             @Override
@@ -73,7 +73,7 @@ public class WDateChooser
 
     public void show(final javax.swing.AbstractButton btn, int x, int y)
     {
-        showMenu(new IBackCall<java.util.Calendar>()
+        showMenu(new IBackCall<String, java.util.Calendar>()
         {
 
             @Override
@@ -88,7 +88,7 @@ public class WDateChooser
 
     public void show(final javax.swing.JLabel lbl, int x, int y)
     {
-        showMenu(new IBackCall<java.util.Calendar>()
+        showMenu(new IBackCall<String, java.util.Calendar>()
         {
 
             @Override
@@ -101,13 +101,13 @@ public class WDateChooser
         pm_DateMenu.show(lbl, x, y);
     }
 
-    public void show(int x, int y, IBackCall<java.util.Calendar> backCall)
+    public void show(int x, int y, IBackCall<String, java.util.Calendar> backCall)
     {
         showMenu(backCall);
         pm_DateMenu.show(null, x, y);
     }
 
-    private void showMenu(IBackCall<java.util.Calendar> backCall)
+    private void showMenu(IBackCall<String, java.util.Calendar> backCall)
     {
         if (dp_DatePanel == null)
         {

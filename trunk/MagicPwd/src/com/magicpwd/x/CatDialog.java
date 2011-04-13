@@ -33,9 +33,9 @@ public class CatDialog extends ADialog
 {
 
     private MexpPtn mainPtn;
-    private IBackCall<String> backCall;
+    private IBackCall<String, String> backCall;
 
-    public CatDialog(MexpPtn mainPtn, IBackCall<String> backCall)
+    public CatDialog(MexpPtn mainPtn, IBackCall<String, String> backCall)
     {
         super(mainPtn, true);
         this.mainPtn = mainPtn;
