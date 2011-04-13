@@ -16,6 +16,7 @@
  */
 package com.magicpwd.m;
 
+import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._comn.mpwd.Mkey;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +36,7 @@ import java.sql.Timestamp;
 public final class HintMdl
 {
 
-    private static List<Mkey> hintList;
+    private static List<Mgtd> hintList;
     private int counter;
     private UserMdl userMdl;
 
@@ -46,7 +47,7 @@ public final class HintMdl
 
     public void initData()
     {
-        hintList = new ArrayList<Mkey>();
+        hintList = new ArrayList<Mgtd>();
         counter = userMdl.getHintInt();
     }
 
@@ -72,7 +73,7 @@ public final class HintMdl
         DBA4000.findHintList(userMdl, start, end, hintList);
     }
 
-    public List<Mkey> getUnread()
+    public List<Mgtd> getUnread()
     {
         return hintList;
     }

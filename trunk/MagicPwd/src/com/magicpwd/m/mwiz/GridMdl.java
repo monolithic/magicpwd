@@ -175,7 +175,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     public boolean listTask(java.util.Date s, java.util.Date t)
     {
         ls_KeysList.clear();
-        DBA4000.findHintList(userMdl, new java.sql.Timestamp(s.getTime()), new java.sql.Timestamp(t.getTime()), ls_KeysList);
+//        DBA4000.findHintList(userMdl, new java.sql.Timestamp(s.getTime()), new java.sql.Timestamp(t.getTime()), ls_KeysList);
         ls_KeysList.size();
         fireTableDataChanged();
 
