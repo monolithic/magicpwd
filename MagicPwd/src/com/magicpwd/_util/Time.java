@@ -18,7 +18,9 @@ package com.magicpwd._util;
 
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.Task;
-import java.awt.event.ActionEvent;
+import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._cons.ConsDat;
+import org.javia.arity.Symbols;
 
 /**
  *
@@ -40,7 +42,7 @@ public class Time implements java.awt.event.ActionListener
     }
 
     @Override
-    public void actionPerformed(ActionEvent e)
+    public void actionPerformed(java.awt.event.ActionEvent e)
     {
         taskActionPerformed(e);
     }
@@ -191,5 +193,89 @@ public class Time implements java.awt.event.ActionListener
                 }.start();
             }
         }
+    }
+
+    public static boolean isOnTime(Mgtd mgtd)
+    {
+        java.util.Calendar cal = java.util.Calendar.getInstance();
+        long now = cal.getTimeInMillis();
+
+        if (mgtd.getP30F0701() == ConsDat.MGTD_FIXED)
+        {
+            long dif = (now - mgtd.getP30F070F()) / 1000;
+            return dif < 2;
+        }
+        // 公式
+        if (mgtd.getP30F0701() == ConsDat.MGTD_FORMULA)
+        {
+            String tmp = mgtd.getP30F0711();
+            if (Char.isValidate(tmp))
+            {
+                try
+                {
+                    tmp = tmp.replaceAll("(n|nian|year)", "" + cal.get(java.util.Calendar.YEAR));
+                    tmp = tmp.replaceAll("(y|yue|month)", "" + (cal.get(java.util.Calendar.MONTH) + 1));
+                    tmp = tmp.replaceAll("(r|ri|day)", "" + cal.get(java.util.Calendar.DAY_OF_MONTH));
+                    tmp = tmp.replaceAll("(s|shi|hour)", "" + cal.get(java.util.Calendar.HOUR_OF_DAY));
+                    tmp = tmp.replaceAll("(f|fen|minute)", "" + cal.get(java.util.Calendar.MINUTE));
+                    tmp = tmp.replaceAll("(m|miao|second)", "" + cal.get(java.util.Calendar.SECOND));
+                    tmp = tmp.replaceAll("(z|zhou|date)", "" + (cal.get(java.util.Calendar.DAY_OF_WEEK) - 1));
+                    double d = new Symbols().eval(tmp);
+                    return (d < 0.000001 && d > 0.000001);
+                }
+                catch (Exception exp)
+                {
+                    Logs.exception(exp);
+                }
+            }
+            return false;
+        }
+        // 按秒重复
+        if (mgtd.getP30F0701() == ConsDat.MGTD_CYCLE_BY_SECOND)
+        {
+            // long diff = (now - mgtd.getP30F070F()) / 1000;
+            return (now - mgtd.getP30F070F()) % (mgtd.getP30F0710() * 1000) == 0;
+        }
+        // 按分重复
+        if (mgtd.getP30F0701() == ConsDat.MGTD_CYCLE_BY_MINUTE)
+        {
+            // long diff = (now - mgtd.getP30F070F()) / 1000 / 60;
+            return (now - mgtd.getP30F070F()) % (mgtd.getP30F0710() * 60000) == 0;
+        }
+        // 按时重复
+        if (mgtd.getP30F0701() == ConsDat.MGTD_CYCLE_BY_HOUR)
+        {
+            // long diff = (now - mgtd.getP30F070F()) / 1000 / 60 / 60;
+            return (now - mgtd.getP30F070F()) % (mgtd.getP30F0710() * 3600000) == 0;
+        }
+        // 按天重复
+        if (mgtd.getP30F0701() == ConsDat.MGTD_CYCLE_BY_DAY)
+        {
+            // long diff = (now - mgtd.getP30F070F()) / 1000 / 60 / 60 / 24;
+            return (now - mgtd.getP30F070F()) % (mgtd.getP30F0710() * 86400000) == 0;
+        }
+        // 按周重复
+        if (mgtd.getP30F0701() == ConsDat.MGTD_CYCLE_BY_WEEK)
+        {
+            // long diff = (now - mgtd.getP30F070F()) / 1000 / 60 / 60 / 24 / 7;
+            return (now - mgtd.getP30F070F()) % (mgtd.getP30F0710() * 604800000) == 0;
+        }
+        // 按月重复
+        if (mgtd.getP30F0701() == ConsDat.MGTD_CYCLE_BY_MONTH)
+        {
+            java.util.Calendar tmp = (java.util.Calendar) cal.clone();
+            tmp.setTimeInMillis(mgtd.getP30F070F());
+            int dif = (cal.get(java.util.Calendar.YEAR) - tmp.get(java.util.Calendar.YEAR)) * 12 + cal.get(java.util.Calendar.MONTH) - tmp.get(java.util.Calendar.MONTH);
+            return dif % mgtd.getP30F0710() == 0;
+        }
+        // 按年重复
+        if (mgtd.getP30F0701() == ConsDat.MGTD_CYCLE_BY_YEAR)
+        {
+            java.util.Calendar tmp = (java.util.Calendar) cal.clone();
+            tmp.setTimeInMillis(mgtd.getP30F070F());
+            int dif = cal.get(java.util.Calendar.YEAR) - tmp.get(java.util.Calendar.YEAR);
+            return dif % mgtd.getP30F0710() == 0;
+        }
+        return false;
     }
 }

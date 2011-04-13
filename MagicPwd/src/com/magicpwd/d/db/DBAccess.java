@@ -443,9 +443,9 @@ public class DBAccess
      * @param key 参照数据库表格字段名
      * @param sign 参照运算符，如+、-、=、!=等
      * @param value 参照值
-     * @param isLiteral 是否为纯文本字符串，true为纯文本，false为非文本
+     * @param plainText 是否为纯文本字符串，true为纯文本，false为非文本
      */
-    public void addWhere(String key, String sign, String value, boolean isLiteral)
+    public void addWhere(String key, String sign, String value, boolean plainText)
     {
         if (com.magicpwd._util.Char.isValidate(key) && value != null && com.magicpwd._util.Char.isValidate(sign))
         {
@@ -453,7 +453,7 @@ public class DBAccess
             whereList.append(" ").append(sign);
 
             // 值信息处理
-            if (isLiteral)
+            if (plainText)
             {
                 whereList.append(" '").append(value).append("'");
             }

@@ -197,15 +197,15 @@ public interface DBC4000
     String P30F0700 = "P30F0700";
     /**任务类型*/
     String P30F0701 = "P30F0701";
-    /**任务级别*/
-    String P30F0702 = "P30F0702";
     /**任务状态*/
+    String P30F0702 = "P30F0702";
+    /**任务级别*/
     String P30F0703 = "P30F0703";
-    /**可否共用*/
-    String P30F0704 = "P30F0704";
     /**提醒周期*/
-    String P30F0705 = "P30F0705";
+    String P30F0704 = "P30F0704";
     /**提示方式*/
+    String P30F0705 = "P30F0705";
+    /**可否共用*/
     String P30F0706 = "P30F0706";
     /**完成度*/
     String P30F0707 = "P30F0707";

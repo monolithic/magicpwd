@@ -398,37 +398,109 @@ public class DBA4000
         {
             dba.init();
 
+            long now = System.currentTimeMillis();
+
             dba.addTable(DBC4000.P30F0700);
-            dba.addWhere(com.magicpwd._util.Char.format("{0} IS NOT NULL AND {0} > {1}", DBC4000.P30F070C, s.toString()));
-            dba.addWhere(com.magicpwd._util.Char.format("{0} IS NOT NULL AND {0} < {1}", DBC4000.P30F070D, s.toString()));
-            dba.addWhere(DBC4000.P30F0703, ">", -1);
+            StringBuilder buf = new StringBuilder();
+            buf.append("((");
+            buf.append(DBC4000.P30F0701).append('=').append(ConsDat.MGTD_STARTUP).append(" OR ");
+            buf.append(DBC4000.P30F0701).append('=').append(ConsDat.MGTD_FORMULA).append(")");
+            buf.append(DBC4000.P30F070C).append("<=").append(now).append(" AND ");
+            buf.append(DBC4000.P30F070D).append(">=").append(now);
+            buf.append(") OR (");
+            buf.append(DBC4000.P30F070E).append(">=").append(s.getTime()).append(" AND ");
+            buf.append(DBC4000.P30F070E).append("<=").append(t.getTime());
+            buf.append(")");
+            dba.addWhere(buf.toString());
+
             ResultSet rest = dba.executeSelect();
-            Mgtd mgtd = new Mgtd();
-            while (rest.next())
-            {
-                mgtd.setP30F0701(rest.getInt(DBC4000.P30F0701));
-                mgtd.setP30F0702(rest.getInt(DBC4000.P30F0702));
-                mgtd.setP30F0703(rest.getInt(DBC4000.P30F0703));
-                mgtd.setP30F0704(rest.getInt(DBC4000.P30F0703));
-                mgtd.setP30F0705(rest.getInt(DBC4000.P30F0705));
-                mgtd.setP30F0706(rest.getInt(DBC4000.P30F0706));
-                mgtd.setP30F0707(rest.getInt(DBC4000.P30F0707));
-                mgtd.setP30F0708(rest.getString(DBC4000.P30F0708));
-                mgtd.setP30F0709(rest.getString(DBC4000.P30F0709));
-                mgtd.setP30F070A(rest.getString(DBC4000.P30F070A));
-                mgtd.setP30F070B(rest.getString(DBC4000.P30F070B));
-                mgtd.setP30F070C(rest.getLong(DBC4000.P30F070C));
-                mgtd.setP30F070D(rest.getLong(DBC4000.P30F070D));
-                mgtd.setP30F070E(rest.getLong(DBC4000.P30F070E));
-                mgtd.setP30F070F(rest.getLong(DBC4000.P30F070F));
-                mgtd.setP30F0710(rest.getInt(DBC4000.P30F0710));
-                mgtd.setP30F0711(rest.getString(DBC4000.P30F0711));
-                mgtd.setP30F0712(rest.getString(DBC4000.P30F0712));
-                mgtd.setP30F0713(rest.getString(DBC4000.P30F0713));
-                list.add(mgtd);
-            }
+            readMgtdData(rest, list);
             rest.close();
             return true;
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            return false;
+        }
+        finally
+        {
+            dba.dispose();
+        }
+    }
+
+    public static boolean findHintList(UserMdl cfg, List<Mgtd> list)
+    {
+        DBAccess dba = new DBAccess();
+
+        try
+        {
+            dba.init();
+
+            String now = Long.toString(System.currentTimeMillis(), 10);
+
+            dba.addTable(DBC4000.P30F0700);
+            dba.addWhere(com.magicpwd._util.Char.format("{0} IS NULL OR {0} < {1}", DBC4000.P30F070C, now));
+            dba.addWhere(com.magicpwd._util.Char.format("{0} IS NULL OR {0} > {1}", DBC4000.P30F070D, now));
+            dba.addWhere(DBC4000.P30F0704, ">", ConsDat.MGTD_FIXED);
+            dba.addWhere(DBC4000.P30F0702, ConsDat.MGTD_STATUS_READY);
+
+            ResultSet rest = dba.executeSelect();
+            readMgtdData(rest, list);
+            rest.close();
+            return true;
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            return false;
+        }
+        finally
+        {
+            dba.dispose();
+        }
+    }
+
+    private static void readMgtdData(ResultSet rest, List<Mgtd> list) throws Exception
+    {
+        Mgtd mgtd = new Mgtd();
+        while (rest.next())
+        {
+            mgtd.setP30F0701(rest.getInt(DBC4000.P30F0701));
+            mgtd.setP30F0702(rest.getInt(DBC4000.P30F0702));
+            mgtd.setP30F0703(rest.getInt(DBC4000.P30F0703));
+            mgtd.setP30F0704(rest.getInt(DBC4000.P30F0703));
+            mgtd.setP30F0705(rest.getInt(DBC4000.P30F0705));
+            mgtd.setP30F0706(rest.getInt(DBC4000.P30F0706));
+            mgtd.setP30F0707(rest.getInt(DBC4000.P30F0707));
+            mgtd.setP30F0708(rest.getString(DBC4000.P30F0708));
+            mgtd.setP30F0709(rest.getString(DBC4000.P30F0709));
+            mgtd.setP30F070A(rest.getString(DBC4000.P30F070A));
+            mgtd.setP30F070B(rest.getString(DBC4000.P30F070B));
+            mgtd.setP30F070C(rest.getLong(DBC4000.P30F070C));
+            mgtd.setP30F070D(rest.getLong(DBC4000.P30F070D));
+            mgtd.setP30F070E(rest.getLong(DBC4000.P30F070E));
+            mgtd.setP30F070F(rest.getLong(DBC4000.P30F070F));
+            mgtd.setP30F0710(rest.getInt(DBC4000.P30F0710));
+            mgtd.setP30F0711(rest.getString(DBC4000.P30F0711));
+            mgtd.setP30F0712(rest.getString(DBC4000.P30F0712));
+            mgtd.setP30F0713(rest.getString(DBC4000.P30F0713));
+            list.add(mgtd);
+        }
+    }
+
+    public static boolean saveHintTime(Mgtd mgtd)
+    {
+        DBAccess dba = new DBAccess();
+
+        try
+        {
+            dba.init();
+
+            dba.addTable(DBC4000.P30F0700);
+            dba.addParam(DBC4000.P30F070E, mgtd.getP30F070E());
+            dba.addWhere(DBC4000.P30F0708, mgtd.getP30F0708());
+            return 1 == dba.executeUpdate();
         }
         catch (Exception exp)
         {

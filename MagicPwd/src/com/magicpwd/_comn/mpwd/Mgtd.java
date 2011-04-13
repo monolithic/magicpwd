@@ -27,15 +27,15 @@ public class Mgtd implements Serializable
 
     /**任务类型*/
     private int P30F0701;
-    /**任务级别*/
-    private int P30F0702;
     /**任务状态*/
+    private int P30F0702;
+    /**任务级别*/
     private int P30F0703;
-    /**可否共用*/
-    private int P30F0704;
     /**提醒周期*/
-    private int P30F0705;
+    private int P30F0704;
     /**提示方式*/
+    private int P30F0705;
+    /**可否共用*/
     private int P30F0706;
     /**完成度*/
     private int P30F0707;
@@ -83,7 +83,7 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 任务级别
+     * 任务状态
      * @return the P30F0702
      */
     public int getP30F0702()
@@ -92,7 +92,7 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 任务级别
+     * 任务状态
      * @param P30F0702 the P30F0702 to set
      */
     public void setP30F0702(int P30F0702)
@@ -101,6 +101,7 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 任务级别
      * @return the P30F0703
      */
     public int getP30F0703()
@@ -109,6 +110,7 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 任务级别
      * @param P30F0703 the P30F0703 to set
      */
     public void setP30F0703(int P30F0703)
@@ -117,6 +119,7 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 提醒周期
      * @return the P30F0704
      */
     public int getP30F0704()
@@ -125,6 +128,7 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 提醒周期
      * @param P30F0704 the P30F0704 to set
      */
     public void setP30F0704(int P30F0704)
@@ -133,6 +137,7 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 提示方式
      * @return the P30F0705
      */
     public int getP30F0705()
@@ -141,6 +146,7 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 提示方式
      * @param P30F0705 the P30F0705 to set
      */
     public void setP30F0705(int P30F0705)
@@ -149,6 +155,7 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 可否共用
      * @return the P30F0706
      */
     public int getP30F0706()
@@ -157,6 +164,7 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 可否共用
      * @param P30F0706 the P30F0706 to set
      */
     public void setP30F0706(int P30F0706)
