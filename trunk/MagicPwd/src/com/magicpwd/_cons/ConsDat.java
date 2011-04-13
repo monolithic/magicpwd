@@ -222,6 +222,7 @@ public interface ConsDat
     String TOOL_VIEW_MOD2 = "text";
     String TOOL_VIEW_MOD3 = "icon,text";
     String TOOL_VIEW_POS1 = "icon";
+    int MGTD_STARTUP = -10;
     int MGTD_FIXED = -1;
     int MGTD_FORMULA = 0;
     int MGTD_CYCLE = 1;
@@ -234,4 +235,24 @@ public interface ConsDat
     int MGTD_CYCLE_BY_DAY_OF_MONTH = 61;
     int MGTD_CYCLE_BY_WEEK_OF_MONTH = 62;
     int MGTD_CYCLE_BY_YEAR = 70;
+    /**
+     * 初始化
+     */
+    int MGTD_STATUS_INIT = 1;
+    /**
+     * 进行中
+     */
+    int MGTD_STATUS_READY = 0;
+    /**
+     * 已完成
+     */
+    int MGTD_STATUS_DONE = 2;
+    /**
+     * 已推迟
+     */
+    int MGTD_STATUS_DELAY = -1;
+    /**
+     * 已取消
+     */
+    int MGTD_STATUS_ABORT = -2;
 }
