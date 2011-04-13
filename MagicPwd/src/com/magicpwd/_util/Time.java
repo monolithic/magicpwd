@@ -166,21 +166,21 @@ public class Time implements java.awt.event.ActionListener
             return;
         }
         lastTime = t;
-        for (final Task info : tasks.keySet())
+        for (final Task task : tasks.keySet())
         {
-            if (info.getInitiate() > 0)
+            if (task.getInitiate() > 0)
             {
-                info.addInitiate(-1);
+                task.addInitiate(-1);
                 continue;
             }
 
-            if (info.getCounter() > info.getInterval())
+            if (task.getCounter() > task.getInterval())
             {
                 continue;
             }
 
-            info.addCounter(1);
-            if (info.getCounter() == info.getInterval())
+            task.addCounter(1);
+            if (task.getCounter() == task.getInterval())
             {
                 new Thread()
                 {
@@ -188,44 +188,68 @@ public class Time implements java.awt.event.ActionListener
                     @Override
                     public void run()
                     {
-                        tasks.get(info).callBack(null, info);
+                        tasks.get(task).callBack(null, task);
                     }
                 }.start();
             }
         }
     }
 
-    public static boolean isOnTime(Mgtd mgtd)
+    public static boolean isOnTime(java.util.Calendar time, Mgtd mgtd)
     {
-        java.util.Calendar cal = java.util.Calendar.getInstance();
-        long now = cal.getTimeInMillis();
+        switch (mgtd.getP30F0713())
+        {
+            case ConsDat.MGTD_AHEAD_BY_SECOND:
+                time.add(java.util.Calendar.SECOND, mgtd.getP30F0714());
+                break;
+            case ConsDat.MGTD_AHEAD_BY_MINUTE:
+                time.add(java.util.Calendar.MINUTE, mgtd.getP30F0714());
+                break;
+            case ConsDat.MGTD_AHEAD_BY_HOUR:
+                time.add(java.util.Calendar.HOUR_OF_DAY, mgtd.getP30F0714());
+                break;
+            case ConsDat.MGTD_AHEAD_BY_DAY:
+                time.add(java.util.Calendar.DAY_OF_MONTH, mgtd.getP30F0714());
+                break;
+            case ConsDat.MGTD_AHEAD_BY_WEEK:
+                time.add(java.util.Calendar.DAY_OF_MONTH, 7 * mgtd.getP30F0714());
+                break;
+            case ConsDat.MGTD_AHEAD_BY_MONTH:
+                time.add(java.util.Calendar.MONTH, mgtd.getP30F0714());
+                break;
+            case ConsDat.MGTD_AHEAD_BY_YEAR:
+                time.add(java.util.Calendar.YEAR, mgtd.getP30F0714());
+                break;
+        }
+        long now = time.getTimeInMillis();
 
+        // 定时
         if (mgtd.getP30F0701() == ConsDat.MGTD_FIXED)
         {
-            long dif = (now - mgtd.getP30F070F()) / 1000;
+            long dif = (now - mgtd.getP30F070F()) % (mgtd.getP30F0710() * 1000);
             return dif < 2;
         }
         // 公式
         if (mgtd.getP30F0701() == ConsDat.MGTD_FORMULA)
         {
-            String tmp = mgtd.getP30F0711();
-            if (Char.isValidate(tmp))
+            String exp = mgtd.getP30F0711();
+            if (Char.isValidate(exp))
             {
                 try
                 {
-                    tmp = tmp.replaceAll("(n|nian|year)", "" + cal.get(java.util.Calendar.YEAR));
-                    tmp = tmp.replaceAll("(y|yue|month)", "" + (cal.get(java.util.Calendar.MONTH) + 1));
-                    tmp = tmp.replaceAll("(r|ri|day)", "" + cal.get(java.util.Calendar.DAY_OF_MONTH));
-                    tmp = tmp.replaceAll("(s|shi|hour)", "" + cal.get(java.util.Calendar.HOUR_OF_DAY));
-                    tmp = tmp.replaceAll("(f|fen|minute)", "" + cal.get(java.util.Calendar.MINUTE));
-                    tmp = tmp.replaceAll("(m|miao|second)", "" + cal.get(java.util.Calendar.SECOND));
-                    tmp = tmp.replaceAll("(z|zhou|date)", "" + (cal.get(java.util.Calendar.DAY_OF_WEEK) - 1));
-                    double d = new Symbols().eval(tmp);
+                    exp = exp.replaceAll("(n|nian|year)", "" + time.get(java.util.Calendar.YEAR));
+                    exp = exp.replaceAll("(y|yue|month)", "" + (time.get(java.util.Calendar.MONTH) + 1));
+                    exp = exp.replaceAll("(r|ri|day)", "" + time.get(java.util.Calendar.DAY_OF_MONTH));
+                    exp = exp.replaceAll("(s|shi|hour)", "" + time.get(java.util.Calendar.HOUR_OF_DAY));
+                    exp = exp.replaceAll("(f|fen|minute)", "" + time.get(java.util.Calendar.MINUTE));
+                    exp = exp.replaceAll("(m|miao|second)", "" + time.get(java.util.Calendar.SECOND));
+                    exp = exp.replaceAll("(z|zhou|date)", "" + (time.get(java.util.Calendar.DAY_OF_WEEK) - 1));
+                    double d = new Symbols().eval(exp);
                     return (d < 0.000001 && d > 0.000001);
                 }
-                catch (Exception exp)
+                catch (Exception e)
                 {
-                    Logs.exception(exp);
+                    Logs.exception(e);
                 }
             }
             return false;
@@ -263,17 +287,17 @@ public class Time implements java.awt.event.ActionListener
         // 按月重复
         if (mgtd.getP30F0701() == ConsDat.MGTD_CYCLE_BY_MONTH)
         {
-            java.util.Calendar tmp = (java.util.Calendar) cal.clone();
+            java.util.Calendar tmp = (java.util.Calendar) time.clone();
             tmp.setTimeInMillis(mgtd.getP30F070F());
-            int dif = (cal.get(java.util.Calendar.YEAR) - tmp.get(java.util.Calendar.YEAR)) * 12 + cal.get(java.util.Calendar.MONTH) - tmp.get(java.util.Calendar.MONTH);
+            int dif = (time.get(java.util.Calendar.YEAR) - tmp.get(java.util.Calendar.YEAR)) * 12 + time.get(java.util.Calendar.MONTH) - tmp.get(java.util.Calendar.MONTH);
             return dif % mgtd.getP30F0710() == 0;
         }
         // 按年重复
         if (mgtd.getP30F0701() == ConsDat.MGTD_CYCLE_BY_YEAR)
         {
-            java.util.Calendar tmp = (java.util.Calendar) cal.clone();
+            java.util.Calendar tmp = (java.util.Calendar) time.clone();
             tmp.setTimeInMillis(mgtd.getP30F070F());
-            int dif = cal.get(java.util.Calendar.YEAR) - tmp.get(java.util.Calendar.YEAR);
+            int dif = time.get(java.util.Calendar.YEAR) - tmp.get(java.util.Calendar.YEAR);
             return dif % mgtd.getP30F0710() == 0;
         }
         return false;

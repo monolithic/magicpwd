@@ -61,8 +61,12 @@ public class Mgtd implements Serializable
     private String P30F0711;
     /**执行参数*/
     private String P30F0712;
+    /**是否提前*/
+    private Integer P30F0713;
+    /**提前间隔*/
+    private Integer P30F0714;
     /**相关说明*/
-    private String P30F0713;
+    private String P30F0715;
 
     /**
      * 任务类型
@@ -325,6 +329,7 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 提醒间隔
      * @return the P30F0710
      */
     public Integer getP30F0710()
@@ -333,6 +338,7 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 提醒间隔
      * @param P30F0710 the P30F0710 to set
      */
     public void setP30F0710(Integer P30F0710)
@@ -375,18 +381,56 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 是否提前
      * @return the P30F0713
      */
-    public String getP30F0713()
+    public Integer getP30F0713()
     {
         return P30F0713;
     }
 
     /**
+     * 是否提前
      * @param P30F0713 the P30F0713 to set
      */
-    public void setP30F0713(String P30F0713)
+    public void setP30F0713(Integer P30F0713)
     {
         this.P30F0713 = P30F0713;
+    }
+
+    /**
+     * 提前间隔
+     * @return the P30F0714
+     */
+    public Integer getP30F0714()
+    {
+        return P30F0714;
+    }
+
+    /**
+     * 提前间隔
+     * @param P30F0714 the P30F0714 to set
+     */
+    public void setP30F0714(Integer P30F0714)
+    {
+        this.P30F0714 = P30F0714;
+    }
+
+    /**
+     * 相关说明
+     * @return the P30F0715
+     */
+    public String getP30F0715()
+    {
+        return P30F0715;
+    }
+
+    /**
+     * 相关说明
+     * @param P30F0715 the P30F0715 to set
+     */
+    public void setP30F0715(String P30F0715)
+    {
+        this.P30F0715 = P30F0715;
     }
 }

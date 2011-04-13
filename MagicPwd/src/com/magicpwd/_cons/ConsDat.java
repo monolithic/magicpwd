@@ -235,6 +235,14 @@ public interface ConsDat
     int MGTD_CYCLE_BY_DAY_OF_MONTH = 61;
     int MGTD_CYCLE_BY_WEEK_OF_MONTH = 62;
     int MGTD_CYCLE_BY_YEAR = 70;
+    int MGTD_AHEAD_NONE = 0;
+    int MGTD_AHEAD_BY_SECOND = 1;
+    int MGTD_AHEAD_BY_MINUTE = 2;
+    int MGTD_AHEAD_BY_HOUR = 3;
+    int MGTD_AHEAD_BY_DAY = 4;
+    int MGTD_AHEAD_BY_WEEK = 5;
+    int MGTD_AHEAD_BY_MONTH = 6;
+    int MGTD_AHEAD_BY_YEAR = 7;
     /**
      * 初始化
      */

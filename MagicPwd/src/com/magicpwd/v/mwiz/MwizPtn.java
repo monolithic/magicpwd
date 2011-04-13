@@ -22,6 +22,7 @@ import com.magicpwd._bean.mail.Connect;
 import com.magicpwd._comn.I1S2;
 import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd._comn.S1S1;
+import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
@@ -127,11 +128,11 @@ public class MwizPtn extends AMpwdPtn
     public boolean initData()
     {
         hb_HintBar.initData();
-        hb_HintBar.setBackCall(new IBackCall<String, String>()
+        hb_HintBar.setBackCall(new IBackCall<String, java.util.List<Mgtd>>()
         {
 
             @Override
-            public boolean callBack(String options, String object)
+            public boolean callBack(String options, java.util.List<Mgtd> object)
             {
                 hintCallBack();
                 return true;
@@ -237,7 +238,7 @@ public class MwizPtn extends AMpwdPtn
     public boolean showData()
     {
         mwizMdl.getGridMdl().listKeysByKind("0");
-        hb_HintBar.showHint("共 " + mwizMdl.getGridMdl().getRowCount() + " 条数据");
+        hb_HintBar.showInfo("共 " + mwizMdl.getGridMdl().getRowCount() + " 条数据");
         return true;
     }
 
@@ -258,7 +259,7 @@ public class MwizPtn extends AMpwdPtn
         {
             mwizMdl.getGridMdl().listKeysByKind("0");
         }
-        hb_HintBar.showHint("共 " + mwizMdl.getGridMdl().getRowCount() + " 条数据");
+        hb_HintBar.showInfo("共 " + mwizMdl.getGridMdl().getRowCount() + " 条数据");
     }
 
     public boolean findHint(java.util.Date s, java.util.Date t)

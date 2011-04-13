@@ -43,6 +43,7 @@ import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.item.LogoItem;
 import com.magicpwd._comn.item.MetaItem;
+import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
@@ -209,11 +210,11 @@ public class MexpPtn extends AMpwdPtn
 
         // 信息栏
         mainInfo.initData();
-        mainInfo.setBackCall(new IBackCall<String, String>()
+        mainInfo.setBackCall(new IBackCall<String, java.util.List<Mgtd>>()
         {
 
             @Override
-            public boolean callBack(String options, String object)
+            public boolean callBack(String options, java.util.List<Mgtd> object)
             {
                 return hintCallBack();
             }
@@ -307,12 +308,12 @@ public class MexpPtn extends AMpwdPtn
             queryKey = meta;
             tr_GuidTree.setSelectionPath(null);
             mexpMdl.getListMdl().listKeysByMeta(meta);
-            mainInfo.showHint("共 " + mexpMdl.getListMdl().getSize() + " 条数据");
+            mainInfo.showInfo("共 " + mexpMdl.getListMdl().getSize() + " 条数据");
         }
         else
         {
             mexpMdl.getListMdl().listKeysByKind(queryKey);
-            mainInfo.showHint("共 " + mexpMdl.getListMdl().getSize() + " 条数据");
+            mainInfo.showInfo("共 " + mexpMdl.getListMdl().getSize() + " 条数据");
         }
         return true;
     }
@@ -327,7 +328,7 @@ public class MexpPtn extends AMpwdPtn
         {
             mexpMdl.getListMdl().listKeysByKind(queryKey);
         }
-        mainInfo.showHint("共 " + mexpMdl.getListMdl().getSize() + " 条数据");
+        mainInfo.showInfo("共 " + mexpMdl.getListMdl().getSize() + " 条数据");
 
         lastKeys = null;
     }
@@ -413,7 +414,7 @@ public class MexpPtn extends AMpwdPtn
         }
 
         showPropInfo();
-        mainInfo.showInfo(false);
+        mainInfo.showNote(false);
 
         lastKeys = null;
         tb_LastIndx = -1;
@@ -1026,7 +1027,7 @@ public class MexpPtn extends AMpwdPtn
             }
         }
 
-        mainInfo.showHint("共 " + mexpMdl.getListMdl().getSize() + " 条数据");
+        mainInfo.showInfo("共 " + mexpMdl.getListMdl().getSize() + " 条数据");
 
         isSearch = false;
         lastKeys = null;

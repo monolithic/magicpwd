@@ -484,7 +484,9 @@ public class DBA4000
             mgtd.setP30F0710(rest.getInt(DBC4000.P30F0710));
             mgtd.setP30F0711(rest.getString(DBC4000.P30F0711));
             mgtd.setP30F0712(rest.getString(DBC4000.P30F0712));
-            mgtd.setP30F0713(rest.getString(DBC4000.P30F0713));
+            mgtd.setP30F0713(rest.getInt(DBC4000.P30F0713));
+            mgtd.setP30F0714(rest.getInt(DBC4000.P30F0714));
+            mgtd.setP30F0715(rest.getString(DBC4000.P30F0715));
             list.add(mgtd);
         }
     }
@@ -541,6 +543,8 @@ public class DBA4000
             dba.addParam(DBC4000.P30F0711, mgtd.getP30F0711());
             dba.addParam(DBC4000.P30F0712, mgtd.getP30F0712());
             dba.addParam(DBC4000.P30F0713, mgtd.getP30F0713());
+            dba.addParam(DBC4000.P30F0714, mgtd.getP30F0714());
+            dba.addParam(DBC4000.P30F0715, mgtd.getP30F0715());
             return 1 == dba.executeInsert();
         }
         catch (Exception exp)

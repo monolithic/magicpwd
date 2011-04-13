@@ -385,7 +385,7 @@ public class EditPtn extends ADialog
         }
 
         mwizPtn.requestFocus();
-        mwizPtn.getHintPtn().showInfo(false);
+        mwizPtn.getHintPtn().showNote(false);
     }
 
     private void bt_CancelActionPerformed(java.awt.event.ActionEvent evt)
