@@ -17,7 +17,6 @@
 package com.magicpwd._comn.mpwd;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 
 /**
  *
@@ -49,15 +48,15 @@ public class Mgtd implements Serializable
     /**任务名称*/
     private String P30F070B;
     /**起始时间*/
-    private Timestamp P30F070C;
+    private Long P30F070C;
     /**结束时间*/
-    private Timestamp P30F070D;
+    private Long P30F070D;
     /**执行时间*/
-    private Timestamp P30F070E;
+    private Long P30F070E;
     /**指定时间*/
-    private Timestamp P30F070F;
+    private Long P30F070F;
     /**提醒间隔*/
-    private int P30F0710;
+    private Integer P30F0710;
     /**表达式*/
     private String P30F0711;
     /**执行参数*/
@@ -66,6 +65,7 @@ public class Mgtd implements Serializable
     private String P30F0713;
 
     /**
+     * 任务类型
      * @return the P30F0701
      */
     public int getP30F0701()
@@ -74,6 +74,7 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 任务类型
      * @param P30F0701 the P30F0701 to set
      */
     public void setP30F0701(int P30F0701)
@@ -82,6 +83,7 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 任务级别
      * @return the P30F0702
      */
     public int getP30F0702()
@@ -90,6 +92,7 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 任务级别
      * @param P30F0702 the P30F0702 to set
      */
     public void setP30F0702(int P30F0702)
@@ -242,65 +245,73 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 起始时间
      * @return the P30F070C
      */
-    public Timestamp getP30F070C()
+    public Long getP30F070C()
     {
         return P30F070C;
     }
 
     /**
+     * 起始时间
      * @param P30F070C the P30F070C to set
      */
-    public void setP30F070C(Timestamp P30F070C)
+    public void setP30F070C(Long P30F070C)
     {
         this.P30F070C = P30F070C;
     }
 
     /**
+     * 结束时间
      * @return the P30F070D
      */
-    public Timestamp getP30F070D()
+    public Long getP30F070D()
     {
         return P30F070D;
     }
 
     /**
+     * 结束时间
      * @param P30F070D the P30F070D to set
      */
-    public void setP30F070D(Timestamp P30F070D)
+    public void setP30F070D(Long P30F070D)
     {
         this.P30F070D = P30F070D;
     }
 
     /**
+     * 执行时间
      * @return the P30F070E
      */
-    public Timestamp getP30F070E()
+    public Long getP30F070E()
     {
         return P30F070E;
     }
 
     /**
+     * 执行时间
      * @param P30F070E the P30F070E to set
      */
-    public void setP30F070E(Timestamp P30F070E)
+    public void setP30F070E(Long P30F070E)
     {
         this.P30F070E = P30F070E;
     }
 
     /**
+     * 指定时间
      * @return the P30F070F
      */
-    public Timestamp getP30F070F()
+    public Long getP30F070F()
     {
         return P30F070F;
     }
 
     /**
+     * 指定时间
      * @param P30F070F the P30F070F to set
      */
-    public void setP30F070F(Timestamp P30F070F)
+    public void setP30F070F(Long P30F070F)
     {
         this.P30F070F = P30F070F;
     }
@@ -308,7 +319,7 @@ public class Mgtd implements Serializable
     /**
      * @return the P30F0710
      */
-    public int getP30F0710()
+    public Integer getP30F0710()
     {
         return P30F0710;
     }
@@ -316,12 +327,13 @@ public class Mgtd implements Serializable
     /**
      * @param P30F0710 the P30F0710 to set
      */
-    public void setP30F0710(int P30F0710)
+    public void setP30F0710(Integer P30F0710)
     {
         this.P30F0710 = P30F0710;
     }
 
     /**
+     * 表达式
      * @return the P30F0711
      */
     public String getP30F0711()
@@ -330,6 +342,7 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 表达式
      * @param P30F0711 the P30F0711 to set
      */
     public void setP30F0711(String P30F0711)

@@ -222,4 +222,16 @@ public interface ConsDat
     String TOOL_VIEW_MOD2 = "text";
     String TOOL_VIEW_MOD3 = "icon,text";
     String TOOL_VIEW_POS1 = "icon";
+    int MGTD_FIXED = -1;
+    int MGTD_FORMULA = 0;
+    int MGTD_CYCLE = 1;
+    int MGTD_CYCLE_BY_SECOND = 10;
+    int MGTD_CYCLE_BY_MINUTE = 20;
+    int MGTD_CYCLE_BY_HOUR = 30;
+    int MGTD_CYCLE_BY_DAY = 40;
+    int MGTD_CYCLE_BY_WEEK = 50;
+    int MGTD_CYCLE_BY_MONTH = 60;
+    int MGTD_CYCLE_BY_DAY_OF_MONTH = 61;
+    int MGTD_CYCLE_BY_WEEK_OF_MONTH = 62;
+    int MGTD_CYCLE_BY_YEAR = 70;
 }

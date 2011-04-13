@@ -265,6 +265,11 @@ public class DBAccess
         }
     }
 
+    public void addParam(String key, Integer value)
+    {
+        addParam(key, "=", value);
+    }
+
     /**
      * 数据更新：添加数据库操作的KEY-VALUE对。
      * 
@@ -275,7 +280,7 @@ public class DBAccess
      * @param key 数据库字段名
      * @param value 对应字段的值
      */
-    public void addParam(String key, long value)
+    public void addParam(String key, Long value)
     {
         addParam(key, "=", value);
     }
@@ -354,17 +359,24 @@ public class DBAccess
         }
     }
 
+    public void addParam(String param, String sign, Integer value)
+    {
+        paramList.add(param);
+        signList.add(sign);
+        valueList.add(value == null ? "" : Integer.toString(value, 10));
+    }
+
     /**
      * 
      * @param param
      * @param sign
      * @param value
      */
-    public void addParam(String param, String sign, long value)
+    public void addParam(String param, String sign, Long value)
     {
         paramList.add(param);
         signList.add(sign);
-        valueList.add(Long.toString(value));
+        valueList.add(value == null ? "" : Long.toString(value, 10));
     }
 
     /**
