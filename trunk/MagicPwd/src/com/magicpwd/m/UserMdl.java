@@ -36,7 +36,6 @@ public final class UserMdl
     private boolean topMost;
     private TpltMdl tpltMdl;
     private CharMdl charMdl;
-    private HintMdl hintMdl;
     static SafeKey safeKey;
 
     public UserMdl()
@@ -531,19 +530,6 @@ public final class UserMdl
             charMdl.initData();
         }
         return charMdl;
-    }
-
-    /**
-     * @return the hintMdl
-     */
-    public HintMdl getHintMdl()
-    {
-        if (hintMdl == null)
-        {
-            hintMdl = new HintMdl(this);
-            hintMdl.initData();
-        }
-        return hintMdl;
     }
 
     /**

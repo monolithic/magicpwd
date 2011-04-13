@@ -18,9 +18,11 @@ package com.magicpwd.v;
 
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.Task;
+import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Time;
-import com.magicpwd.m.HintMdl;
+import com.magicpwd.d.db.DBA4000;
+import com.magicpwd.d.db.DBAccess;
 import com.magicpwd.m.UserMdl;
 
 /**
@@ -30,10 +32,12 @@ import com.magicpwd.m.UserMdl;
 public class HintBar extends javax.swing.JPanel
 {
 
-    private IBackCall<String, String> backCall;
     private UserMdl userMdl;
-    private HintMdl hintMdl;
     private java.text.DateFormat dateTplt;
+    private java.util.List<Mgtd> mgtdList;
+    private java.util.List<Mgtd> hintList;
+    private IBackCall<String, java.util.List<Mgtd>> backCall;
+    private int counter;
 
     public HintBar(UserMdl userMdl)
     {
@@ -43,40 +47,39 @@ public class HintBar extends javax.swing.JPanel
     public void initView()
     {
         setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 0, getBackground().darker()));
-        lb_HintLabel = new javax.swing.JLabel();
-//        lb_HintLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lb_InfoLabel = new javax.swing.JLabel();
-//        lb_InfoLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        lb_InfoLabel.addMouseListener(new java.awt.event.MouseAdapter()
+        lb_HintLabel = new javax.swing.JLabel();
+        lb_HintLabel.addMouseListener(new java.awt.event.MouseAdapter()
         {
 
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt)
             {
-                lb_InfoLabelMouseClicked(evt);
+                lb_HintLabelMouseClicked(evt);
             }
         });
 
+//        lb_InfoLabel = new javax.swing.JLabel();
+//        lb_InfoLabel.setVisible(false);
+
         lb_DateLabel = new javax.swing.JLabel();
-//        lb_DateLabel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         lb_DateLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addContainerGap();
-        hsg.addComponent(lb_HintLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hsg.addComponent(lb_HintLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, Short.MAX_VALUE);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg.addComponent(lb_InfoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE);
-        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+//        hsg.addComponent(lb_InfoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 1, Short.MAX_VALUE);
+//        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg.addComponent(lb_DateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg.addContainerGap();
         layout.setHorizontalGroup(hsg);
 
         javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         hpg.addComponent(lb_DateLabel);
-        hpg.addComponent(lb_InfoLabel);
+//        hpg.addComponent(lb_InfoLabel);
         hpg.addComponent(lb_HintLabel);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
         vsg.addGap(3);
@@ -87,18 +90,18 @@ public class HintBar extends javax.swing.JPanel
 
     public void initLang()
     {
-        dateTplt = java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.FULL, java.text.DateFormat.SHORT);
-
-        lb_HintLabel.setText("请选择口令类别！");
-        lb_InfoLabel.setText("数据处理中……");
-        lb_HintLabel.setVisible(false);
+//        lb_InfoLabel.setText("请选择口令类别！");
+        lb_HintLabel.setText("数据处理中……");
         lb_DateLabel.setText("");
     }
 
     public void initData()
     {
-        hintMdl = new HintMdl(userMdl);
-        hintMdl.initData();
+        dateTplt = java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.FULL, java.text.DateFormat.MEDIUM);
+
+        mgtdList = new java.util.ArrayList<Mgtd>();
+        hintList = new java.util.ArrayList<Mgtd>();
+        counter = userMdl.getHintInt();
 
         Time.getInstance().registerAction(new Task(0, 1, "mexp-hint", ""), new IBackCall<String, Task>()
         {
@@ -106,62 +109,91 @@ public class HintBar extends javax.swing.JPanel
             @Override
             public boolean callBack(String options, Task object)
             {
-                return showInfo(true);
+                object.setCounter(0);
+                return showNote(false);
             }
         });
     }
 
-    private void lb_InfoLabelMouseClicked(java.awt.event.MouseEvent evt)
+    private void lb_HintLabelMouseClicked(java.awt.event.MouseEvent evt)
     {
-        if (hintMdl.getUnreadCount() > 0)
+        if (backCall != null)
         {
-            if (backCall != null)
-            {
-                backCall.callBack("", null);
-            }
+            backCall.callBack("hint", hintList);
         }
     }
 
-    public void showHint(String hint)
+    public boolean showNote(boolean forced)
     {
-        lb_HintLabel.setText(hint);
-    }
-
-    public boolean showInfo(boolean schedule)
-    {
-        java.util.Calendar cal = java.util.Calendar.getInstance();
-
-        // 显示日期信息
-        String text = dateTplt.format(cal.getTime());
-        lb_DateLabel.setText(text);
-        lb_DateLabel.setToolTipText(text);
+        showTime();
 
         // 读取数据信息
-        java.sql.Timestamp s = new java.sql.Timestamp(cal.getTimeInMillis());
-        cal.add(java.util.Calendar.DAY_OF_MONTH, 1);
-        java.sql.Timestamp e = new java.sql.Timestamp(cal.getTimeInMillis());
-        hintMdl.process(s, e, schedule);
+        if (counter >= userMdl.getHintInt() || forced)
+        {
+            if (DBAccess.locked)
+            {
+                return false;
+            }
+            mgtdList.clear();
+            DBA4000.findHintList(userMdl, mgtdList);
+            counter = 0;
+        }
 
-        int size = hintMdl.getUnreadCount();
+        // 到期提示判断
+        hintList.clear();
+        java.util.Calendar cal = java.util.Calendar.getInstance();
+        for (Mgtd mgtd : mgtdList)
+        {
+            if (Time.isOnTime(cal, mgtd))
+            {
+                hintList.add(mgtd);
+            }
+        }
+
+        showHint();
+        return true;
+    }
+
+    /**
+     * 显示日期信息
+     */
+    public void showTime()
+    {
+        String text = dateTplt.format(new java.util.Date());
+        lb_DateLabel.setText(text);
+        lb_DateLabel.setToolTipText(text);
+    }
+
+    /**
+     * 显示提示信息
+     * @param hint
+     */
+    public void showInfo(String hint)
+    {
+        lb_InfoLabel.setText(hint);
+    }
+
+    public void showHint()
+    {
+        int size = hintList.size();
         if (size > 0)
         {
-            lb_InfoLabel.setText(Char.format("您有 {0} 条提醒数据！", Integer.toString(size)));
-            lb_InfoLabel.setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
-            lb_InfoLabel.setToolTipText("点击查看详细信息！");
+            lb_HintLabel.setText(Char.format("您有 {0} 条提醒数据！", Integer.toString(size)));
+            lb_HintLabel.setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
+            lb_HintLabel.setToolTipText("点击查看详细信息！");
         }
         else
         {
-            lb_InfoLabel.setText("您目前没有需要提醒的数据！");
-            lb_InfoLabel.setCursor(java.awt.Cursor.getDefaultCursor());
-            lb_InfoLabel.setToolTipText(null);
+            lb_HintLabel.setText("您目前没有需要提醒的数据！");
+            lb_HintLabel.setCursor(java.awt.Cursor.getDefaultCursor());
+            lb_HintLabel.setToolTipText(null);
         }
-        return true;
     }
 
     /**
      * @return the backCall
      */
-    public IBackCall<String, String> getBackCall()
+    public IBackCall<String, java.util.List<Mgtd>> getBackCall()
     {
         return backCall;
     }
@@ -169,11 +201,11 @@ public class HintBar extends javax.swing.JPanel
     /**
      * @param backCall the backCall to set
      */
-    public void setBackCall(IBackCall<String, String> backCall)
+    public void setBackCall(IBackCall<String, java.util.List<Mgtd>> backCall)
     {
         this.backCall = backCall;
     }
-    private javax.swing.JLabel lb_HintLabel;
     private javax.swing.JLabel lb_InfoLabel;
+    private javax.swing.JLabel lb_HintLabel;
     private javax.swing.JLabel lb_DateLabel;
 }
