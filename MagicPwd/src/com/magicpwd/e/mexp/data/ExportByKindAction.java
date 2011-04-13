@@ -29,7 +29,7 @@ import com.magicpwd.r.KindTN;
  *
  * @author Amon
  */
-public class ExportByKindAction extends AMexpAction implements IBackCall<UserDto>
+public class ExportByKindAction extends AMexpAction implements IBackCall<AuthLog, UserDto>
 {
 
     public ExportByKindAction()
@@ -60,9 +60,9 @@ public class ExportByKindAction extends AMexpAction implements IBackCall<UserDto
     }
 
     @Override
-    public boolean callBack(String options, UserDto object)
+    public boolean callBack(AuthLog options, UserDto object)
     {
-        if (AuthLog.signRs.name().equalsIgnoreCase(options))
+        if (AuthLog.signRs == options)
         {
             javax.swing.tree.TreePath path = mexpPtn.getSelectedKindValue();
             KindTN node = (KindTN) path.getLastPathComponent();

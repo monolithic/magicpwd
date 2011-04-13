@@ -38,7 +38,7 @@ public class MailDlg extends ADialog
 {
 
     private AMpwdPtn formPtn;
-    private IBackCall<String> backCall;
+    private IBackCall<String, String> backCall;
     private javax.swing.DefaultListModel lm_MailList;
 
     public MailDlg(AMpwdPtn mpwdPtn)
@@ -164,7 +164,7 @@ public class MailDlg extends ADialog
     /**
      * @return the backCall
      */
-    public IBackCall<String> getBackCall()
+    public IBackCall<String, String> getBackCall()
     {
         return backCall;
     }
@@ -172,7 +172,7 @@ public class MailDlg extends ADialog
     /**
      * @param backCall the backCall to set
      */
-    public void setBackCall(IBackCall<String> backCall)
+    public void setBackCall(IBackCall<String, String> backCall)
     {
         this.backCall = backCall;
     }

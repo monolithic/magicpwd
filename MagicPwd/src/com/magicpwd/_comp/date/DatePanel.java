@@ -40,7 +40,7 @@ class DatePanel extends WPanel implements java.awt.event.ActionListener, javax.s
     private javax.swing.SpinnerNumberModel sm_TimeM;
     private javax.swing.SpinnerNumberModel sm_TimeS;
     private javax.swing.DefaultComboBoxModel cm_DateM;
-    private IBackCall<java.util.Calendar> backCall;
+    private IBackCall<String, java.util.Calendar> backCall;
     private boolean popup = true;
     private WDateChooser chooser;
 
@@ -395,7 +395,7 @@ class DatePanel extends WPanel implements java.awt.event.ActionListener, javax.s
         }
     }
 
-    public void setBackCall(IBackCall<java.util.Calendar> backCall)
+    public void setBackCall(IBackCall<String, java.util.Calendar> backCall)
     {
         this.backCall = backCall;
     }

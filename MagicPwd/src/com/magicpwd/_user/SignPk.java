@@ -169,7 +169,7 @@ public class SignPk extends javax.swing.JPanel implements IUserView
             return;
         }
 
-        userPtn.callBack(AuthLog.signPk.name(), null);
+        userPtn.callBack(AuthLog.signPk, null);
         userPtn.hideWindow();
         Lang.showMesg(this, LangRes.P30FAA0A, "登录口令修改成功，您可以使用新口令登录了！");
     }

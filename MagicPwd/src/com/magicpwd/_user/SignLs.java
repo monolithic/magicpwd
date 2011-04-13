@@ -141,7 +141,7 @@ public class SignLs extends javax.swing.JPanel implements IUserView
             return;
         }
 
-        userPtn.callBack(AuthLog.signLs.name(), null);
+        userPtn.callBack(AuthLog.signLs, null);
         userPtn.hideWindow();
     }
 

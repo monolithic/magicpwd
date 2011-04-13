@@ -25,7 +25,7 @@ import com.magicpwd.x.maoc.MnumDlg;
  *
  * @author Aven
  */
-public class UpdateAction extends AMaocAction implements IBackCall<Mexp>
+public class UpdateAction extends AMaocAction implements IBackCall<String, Mexp>
 {
 
     @Override

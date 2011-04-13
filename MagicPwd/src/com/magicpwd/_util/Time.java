@@ -17,37 +17,45 @@
 package com.magicpwd._util;
 
 import com.magicpwd.__i.IBackCall;
-import com.magicpwd._comn.TaskInfo;
+import com.magicpwd._comn.Task;
 import java.awt.event.ActionEvent;
 
 /**
  *
  * @author Amon
  */
-public class Task
+public class Time implements java.awt.event.ActionListener
 {
 
-    private static java.util.HashMap<TaskInfo, IBackCall<TaskInfo>> tasks;
-    private static javax.swing.Timer timer;
-    private static long lastTime;
+    private static Time taskTime;
+    private java.util.HashMap<Task, IBackCall<String, Task>> tasks;
+    private javax.swing.Timer timer;
+    private long lastTime;
 
-    public static void registerAction(TaskInfo item, IBackCall<TaskInfo> backCall)
+    private Time()
     {
-        if (tasks == null)
+        tasks = new java.util.HashMap<Task, IBackCall<String, Task>>();
+        timer = new javax.swing.Timer(500, this);
+        timer.setInitialDelay(3000);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e)
+    {
+        taskActionPerformed(e);
+    }
+
+    public static Time getInstance()
+    {
+        if (taskTime == null)
         {
-            tasks = new java.util.HashMap<TaskInfo, IBackCall<TaskInfo>>();
-            timer = new javax.swing.Timer(500, new java.awt.event.ActionListener()
-            {
-
-                @Override
-                public void actionPerformed(ActionEvent e)
-                {
-                    taskActionPerformed(e);
-                }
-            });
-            timer.setInitialDelay(3000);
+            taskTime = new Time();
         }
+        return null;
+    }
 
+    public void registerAction(Task item, IBackCall<String, Task> backCall)
+    {
         if (!tasks.containsKey(item))
         {
             tasks.put(item, backCall);
@@ -59,7 +67,7 @@ public class Task
         }
     }
 
-    public static void removeAction(TaskInfo info)
+    public void removeAction(Task info)
     {
         tasks.remove(info);
         if (tasks.size() < 1)
@@ -71,9 +79,9 @@ public class Task
         }
     }
 
-    public static IBackCall getAction(String taskName)
+    public IBackCall getAction(String taskName)
     {
-        for (TaskInfo info : tasks.keySet())
+        for (Task info : tasks.keySet())
         {
             if (info.getTaskName().equals(taskName))
             {
@@ -83,19 +91,19 @@ public class Task
         return null;
     }
 
-    public static IBackCall getAction(TaskInfo info)
+    public IBackCall getAction(Task info)
     {
         return tasks.get(info);
     }
 
-    public static boolean reActive(String key, int interval)
+    public boolean reActive(String key, int interval)
     {
         if (key == null)
         {
             return false;
         }
 
-        for (TaskInfo info : tasks.keySet())
+        for (Task info : tasks.keySet())
         {
             if (info.getTaskName().equals(key))
             {
@@ -108,14 +116,14 @@ public class Task
         return false;
     }
 
-    public static boolean deActive(String key)
+    public boolean deActive(String key)
     {
         if (key == null)
         {
             return false;
         }
 
-        for (TaskInfo info : tasks.keySet())
+        for (Task info : tasks.keySet())
         {
             if (info.getTaskName().equals(key))
             {
@@ -127,14 +135,14 @@ public class Task
         return false;
     }
 
-    public static boolean reActive(String key, int initiate, int interval)
+    public boolean reActive(String key, int initiate, int interval)
     {
         if (key == null)
         {
             return false;
         }
 
-        for (TaskInfo info : tasks.keySet())
+        for (Task info : tasks.keySet())
         {
             if (info.getTaskName().equals(key))
             {
@@ -148,7 +156,7 @@ public class Task
         return false;
     }
 
-    private static void taskActionPerformed(java.awt.event.ActionEvent e)
+    private void taskActionPerformed(java.awt.event.ActionEvent e)
     {
         long t = System.currentTimeMillis();
         if (t - lastTime < 1000)
@@ -156,7 +164,7 @@ public class Task
             return;
         }
         lastTime = t;
-        for (final TaskInfo info : tasks.keySet())
+        for (final Task info : tasks.keySet())
         {
             if (info.getInitiate() > 0)
             {

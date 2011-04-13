@@ -31,10 +31,10 @@ public class KindDlg extends ADialog
 {
 
     private MexpPtn mexpPtn;
-    private IBackCall<Kind> backCall;
+    private IBackCall<String, Kind> backCall;
     private Kind kind;
 
-    public KindDlg(MexpPtn mexpPtn, IBackCall<Kind> backCall)
+    public KindDlg(MexpPtn mexpPtn, IBackCall<String, Kind> backCall)
     {
         super(mexpPtn, true);
         this.mexpPtn = mexpPtn;

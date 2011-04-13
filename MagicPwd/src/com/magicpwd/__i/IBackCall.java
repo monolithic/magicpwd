@@ -19,11 +19,11 @@ package com.magicpwd.__i;
 /**
  * @author Amon
  */
-public interface IBackCall<T>
+public interface IBackCall<T, V>
 {
 
     String OPTIONS_ABORT = "abort";
     String OPTIONS_APPLY = "apply";
 
-    boolean callBack(String options, T object);
+    boolean callBack(T options, V object);
 }

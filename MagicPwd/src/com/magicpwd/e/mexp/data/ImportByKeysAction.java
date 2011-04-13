@@ -34,7 +34,7 @@ import com.magicpwd._util.Lang;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public class ImportByKeysAction extends AMexpAction implements IBackCall<UserDto>
+public class ImportByKeysAction extends AMexpAction implements IBackCall<AuthLog, UserDto>
 {
 
     public ImportByKeysAction()
@@ -65,9 +65,9 @@ public class ImportByKeysAction extends AMexpAction implements IBackCall<UserDto
     }
 
     @Override
-    public boolean callBack(String options, UserDto object)
+    public boolean callBack(AuthLog options, UserDto object)
     {
-        if (AuthLog.signRs.name().equalsIgnoreCase(options))
+        if (AuthLog.signRs == options)
         {
             return mexpPtn.importByKeys("");
         }

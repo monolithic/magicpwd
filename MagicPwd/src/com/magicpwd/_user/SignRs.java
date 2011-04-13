@@ -173,7 +173,7 @@ public class SignRs extends javax.swing.JPanel implements IUserView
             return;
         }
 
-        userPtn.callBack(AuthLog.signRs.name(), null);
+        userPtn.callBack(AuthLog.signRs, null);
         userPtn.hideWindow();
     }
 

@@ -28,7 +28,7 @@ import com.magicpwd.x.DatDialog;
  *
  * @author Amon
  */
-public class RemoteResumeAction extends AMexpAction implements IBackCall<String>
+public class RemoteResumeAction extends AMexpAction implements IBackCall<String, String>
 {
 
     public RemoteResumeAction()

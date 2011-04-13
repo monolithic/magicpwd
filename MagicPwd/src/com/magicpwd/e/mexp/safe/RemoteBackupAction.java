@@ -26,7 +26,7 @@ import com.magicpwd._util.Logs;
  *
  * @author Amon
  */
-public class RemoteBackupAction extends AMexpAction implements IBackCall<String>
+public class RemoteBackupAction extends AMexpAction implements IBackCall<String, String>
 {
 
     public RemoteBackupAction()

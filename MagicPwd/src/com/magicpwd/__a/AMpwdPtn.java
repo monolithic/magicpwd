@@ -322,13 +322,13 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
      */
     public void lockFrame()
     {
-        trayPtn.getUserPtn(AuthLog.signLs, new IBackCall<UserDto>()
+        trayPtn.getUserPtn(AuthLog.signLs, new IBackCall<AuthLog, UserDto>()
         {
 
             @Override
-            public boolean callBack(String options, UserDto object)
+            public boolean callBack(AuthLog options, UserDto object)
             {
-                return AuthLog.signLs.name().equalsIgnoreCase(options);
+                return AuthLog.signLs == options;
             }
         });
     }
@@ -501,7 +501,7 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
         return true;
     }
 
-    public boolean nativeBackup(String filePath, IBackCall<java.io.File> backCall) throws Exception
+    public boolean nativeBackup(String filePath, IBackCall<String, java.io.File> backCall) throws Exception
     {
         if (!Char.isValidate(filePath))
         {
@@ -625,7 +625,7 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
         return true;
     }
 
-    public boolean remoteBackup(IBackCall<String> backCall) throws Exception
+    public boolean remoteBackup(IBackCall<String, String> backCall) throws Exception
     {
         String user = userMdl.getCode();
         if (!Char.isValidateCode(user))
@@ -678,7 +678,7 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
         return true;
     }
 
-    public boolean remoteResume(String sign, IBackCall<String> backCall) throws Exception
+    public boolean remoteResume(String sign, IBackCall<String, String> backCall) throws Exception
     {
         if (!Char.isValidate(sign, 16))
         {

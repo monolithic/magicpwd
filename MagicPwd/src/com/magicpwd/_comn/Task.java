@@ -20,7 +20,7 @@ package com.magicpwd._comn;
  *
  * @author Amon
  */
-public class TaskInfo
+public class Task
 {
 
     private int counter;
@@ -29,16 +29,16 @@ public class TaskInfo
     private String taskName;
     private String taskDesp;
 
-    public TaskInfo()
+    public Task()
     {
     }
 
-    public TaskInfo(int interval, String taskName, String taskDesp)
+    public Task(int interval, String taskName, String taskDesp)
     {
         this(0, interval, taskName, taskDesp);
     }
 
-    public TaskInfo(int initiate, int interval, String taskName, String taskDesp)
+    public Task(int initiate, int interval, String taskName, String taskDesp)
     {
         this.initiate = initiate;
         this.interval = interval;

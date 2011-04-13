@@ -209,7 +209,7 @@ public class MexpPtn extends AMpwdPtn
 
         // 信息栏
         mainInfo.initData();
-        mainInfo.setBackCall(new IBackCall<String>()
+        mainInfo.setBackCall(new IBackCall<String, String>()
         {
 
             @Override

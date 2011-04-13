@@ -41,7 +41,7 @@ import com.magicpwd.x.IcoDialog;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public class HeadBean extends javax.swing.JPanel implements IBackCall<String>
+public class HeadBean extends javax.swing.JPanel implements IBackCall<String, String>
 {
 
     private MwizPtn normPtn;

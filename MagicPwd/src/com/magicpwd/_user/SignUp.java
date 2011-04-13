@@ -197,7 +197,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
             return;
         }
 
-        if (userPtn.callBack(AuthLog.signUp.name(), null))
+        if (userPtn.callBack(AuthLog.signUp, null))
         {
             userPtn.hideWindow();
             return;

@@ -25,7 +25,7 @@ import com.magicpwd._user.UserDto;
  *
  * @author Amon
  */
-public class ChangePkeyAction extends AMexpAction implements IBackCall<UserDto>
+public class ChangePkeyAction extends AMexpAction implements IBackCall<AuthLog, UserDto>
 {
 
     public ChangePkeyAction()
@@ -49,7 +49,7 @@ public class ChangePkeyAction extends AMexpAction implements IBackCall<UserDto>
     }
 
     @Override
-    public boolean callBack(String options, UserDto object)
+    public boolean callBack(AuthLog options, UserDto object)
     {
         return true;
     }
