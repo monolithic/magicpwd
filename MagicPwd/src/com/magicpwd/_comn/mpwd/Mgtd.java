@@ -177,6 +177,7 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 完成度
      * @return the P30F0707
      */
     public int getP30F0707()
@@ -185,6 +186,7 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 完成度
      * @param P30F0707 the P30F0707 to set
      */
     public void setP30F0707(int P30F0707)
@@ -193,6 +195,7 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 任务索引
      * @return the P30F0708
      */
     public String getP30F0708()
@@ -201,6 +204,7 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 任务索引
      * @param P30F0708 the P30F0708 to set
      */
     public void setP30F0708(String P30F0708)
@@ -209,6 +213,7 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 上级任务
      * @return the P30F0709
      */
     public String getP30F0709()
@@ -217,6 +222,7 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 上级任务
      * @param P30F0709 the P30F0709 to set
      */
     public void setP30F0709(String P30F0709)
@@ -225,6 +231,7 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 前置任务
      * @return the P30F070A
      */
     public String getP30F070A()
@@ -233,6 +240,7 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 前置任务
      * @param P30F070A the P30F070A to set
      */
     public void setP30F070A(String P30F070A)
@@ -241,6 +249,7 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 任务名称
      * @return the P30F070B
      */
     public String getP30F070B()
@@ -249,6 +258,7 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 任务名称
      * @param P30F070B the P30F070B to set
      */
     public void setP30F070B(String P30F070B)
@@ -365,6 +375,7 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 执行参数
      * @return the P30F0712
      */
     public String getP30F0712()
@@ -373,6 +384,7 @@ public class Mgtd implements Serializable
     }
 
     /**
+     * 执行参数
      * @param P30F0712 the P30F0712 to set
      */
     public void setP30F0712(String P30F0712)

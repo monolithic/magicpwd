@@ -531,7 +531,6 @@ public class DBA4000
             dba.addParam(DBC4000.P30F0705, mgtd.getP30F0705());
             dba.addParam(DBC4000.P30F0706, mgtd.getP30F0706());
             dba.addParam(DBC4000.P30F0707, mgtd.getP30F0707());
-            dba.addParam(DBC4000.P30F0708, mgtd.getP30F0708());
             dba.addParam(DBC4000.P30F0709, mgtd.getP30F0709());
             dba.addParam(DBC4000.P30F070A, mgtd.getP30F070A());
             dba.addParam(DBC4000.P30F070B, mgtd.getP30F070B());
@@ -545,7 +544,17 @@ public class DBA4000
             dba.addParam(DBC4000.P30F0713, mgtd.getP30F0713());
             dba.addParam(DBC4000.P30F0714, mgtd.getP30F0714());
             dba.addParam(DBC4000.P30F0715, mgtd.getP30F0715());
-            return 1 == dba.executeInsert();
+            if (com.magicpwd._util.Char.isValidateHash(mgtd.getP30F0708()))
+            {
+                dba.addWhere(DBC4000.P30F0708, mgtd.getP30F0708());
+                return 1 == dba.executeUpdate();
+            }
+            else
+            {
+                mgtd.setP30F0708(Hash.hash(false));
+                dba.addParam(DBC4000.P30F0708, mgtd.getP30F0708());
+                return 1 == dba.executeInsert();
+            }
         }
         catch (Exception exp)
         {

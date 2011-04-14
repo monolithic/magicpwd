@@ -222,6 +222,10 @@ public interface ConsDat
     String TOOL_VIEW_MOD2 = "text";
     String TOOL_VIEW_MOD3 = "icon,text";
     String TOOL_VIEW_POS1 = "icon";
+    /**任务类型*/
+    int MGTD_TYPE_DATE = 1;
+    int MGTD_TYPE_DATETIME = 0;
+    int MGTD_TYPE_TIME = -1;
     int MGTD_STARTUP = -10;
     int MGTD_FIXED = -1;
     int MGTD_FORMULA = 0;
@@ -263,4 +267,8 @@ public interface ConsDat
      * 已取消
      */
     int MGTD_STATUS_ABORT = -2;
+    /**提示方式*/
+    int MGTD_NOTE_MSG = 0;
+    int MGTD_NOTE_MAIL = 1;
+    int MGTD_NOTE_RUN = 2;
 }
