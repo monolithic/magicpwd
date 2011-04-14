@@ -18,6 +18,7 @@ package com.magicpwd.x.mgtd;
 
 import com.magicpwd.__a.ADialog;
 import com.magicpwd.__a.AMpwdPtn;
+import com.magicpwd._util.Bean;
 
 /**
  *
@@ -45,10 +46,14 @@ public class MgtdDlg extends ADialog
         lbRemark = new javax.swing.JLabel();
         taRemark = new javax.swing.JTextArea();
 
+        plLayout.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        dd();
+
         javax.swing.JScrollPane spRemark = new javax.swing.JScrollPane(taRemark);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this.getContentPane());
+        this.getContentPane().setLayout(layout);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg1.addComponent(lbCycle, javax.swing.GroupLayout.Alignment.TRAILING);
         hpg1.addComponent(lbLevel, javax.swing.GroupLayout.Alignment.TRAILING);
@@ -66,11 +71,11 @@ public class MgtdDlg extends ADialog
         hsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg2.addComponent(btAbort);
         javax.swing.GroupLayout.ParallelGroup hpg3 = layout.createParallelGroup();
-        hpg3.addComponent(spRemark, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE);
         hpg3.addGroup(hsg1);
-        hpg3.addComponent(lbRemark);
         hpg3.addComponent(plLayout, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-        hpg3.addGroup(hsg2);
+        hpg3.addComponent(lbRemark);
+        hpg3.addComponent(spRemark, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE);
+        hpg3.addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hsg2);
         javax.swing.GroupLayout.SequentialGroup hsg3 = layout.createSequentialGroup();
         hsg3.addContainerGap();
         hsg3.addGroup(hpg3);
@@ -122,7 +127,7 @@ public class MgtdDlg extends ADialog
 
         btApply.setText("确认(O)");
 
-        lbRemark.setText("jLabel1");
+        lbRemark.setText("备注(M)");
     }
 
     public void initData()
@@ -145,12 +150,50 @@ public class MgtdDlg extends ADialog
                 btApplyActionPerformed(evt);
             }
         });
+
+        cbLevel.addItem("无");
+        cbLevel.addItem("低");
+        cbLevel.addItem("中");
+        cbLevel.addItem("高");
+
+        cbCycle.addItem("定时提醒");
+        cbCycle.addItem("间隔提醒");
+        cbCycle.addItem("周期提醒");
+        cbCycle.addItem("特殊提醒");
+        cbCycle.addItem("其它提醒");
+
+        this.pack();
+        this.setVisible(true);
+        Bean.centerForm(this, null);
     }
 
     @Override
     protected boolean hideDialog()
     {
         return true;
+    }
+
+    private void dd()
+    {
+        lbUTime = new javax.swing.JLabel();
+        spUTime = new javax.swing.JSpinner();
+        btUTime = new javax.swing.JButton();
+        lbUTime.setLabelFor(spUTime);
+        lbUTime.setText("指定时间");
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(plLayout);
+        plLayout.setLayout(layout);
+        javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
+        hsg.addComponent(lbUTime);
+        hsg.addComponent(spUTime);
+        hsg.addComponent(btUTime);
+        layout.setHorizontalGroup(hsg);
+
+        javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup();
+        vpg.addComponent(lbUTime);
+        vpg.addComponent(spUTime);
+        vpg.addComponent(btUTime);
+        layout.setVerticalGroup(vpg);
     }
 
     private void btApplyActionPerformed(java.awt.event.ActionEvent evt)
@@ -171,4 +214,16 @@ public class MgtdDlg extends ADialog
     private javax.swing.JPanel plLayout;
     private javax.swing.JTextArea taRemark;
     private javax.swing.JTextField tfTitle;
+    /**指定时间*/
+    private javax.swing.JLabel lbUTime;
+    private javax.swing.JSpinner spUTime;
+    private javax.swing.JButton btUTime;
+    /**起始时间*/
+    private javax.swing.JLabel lbFTime;
+    private javax.swing.JSpinner spFTime;
+    private javax.swing.JButton btFTime;
+    /**结束时间*/
+    private javax.swing.JLabel lbTTime;
+    private javax.swing.JSpinner spTTime;
+    private javax.swing.JButton btTTime;
 }
