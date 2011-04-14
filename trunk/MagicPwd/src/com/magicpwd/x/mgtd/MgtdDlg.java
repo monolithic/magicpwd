@@ -17,8 +17,11 @@
 package com.magicpwd.x.mgtd;
 
 import com.magicpwd.__a.ADialog;
-import com.magicpwd.__a.AMpwdPtn;
+import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._cons.ConsDat;
 import com.magicpwd._util.Bean;
+import com.magicpwd.d.db.DBA4000;
+import com.magicpwd.v.mgtd.MgtdPtn;
 
 /**
  *
@@ -27,9 +30,12 @@ import com.magicpwd._util.Bean;
 public class MgtdDlg extends ADialog
 {
 
-    public MgtdDlg(AMpwdPtn owner, boolean modal)
+    private MgtdPtn mgtdPtn;
+
+    public MgtdDlg(MgtdPtn mgtdPtn, boolean modal)
     {
-        super(owner, modal);
+        super(mgtdPtn, modal);
+        this.mgtdPtn = mgtdPtn;
     }
 
     public void initView()
@@ -163,8 +169,8 @@ public class MgtdDlg extends ADialog
         cbCycle.addItem("其它提醒");
 
         this.pack();
+        Bean.centerForm(this, mgtdPtn);
         this.setVisible(true);
-        Bean.centerForm(this, null);
     }
 
     @Override
@@ -198,10 +204,31 @@ public class MgtdDlg extends ADialog
 
     private void btApplyActionPerformed(java.awt.event.ActionEvent evt)
     {
+        Mgtd mgtd = new Mgtd();
+        mgtd.setP30F0701(ConsDat.MGTD_TYPE_DATETIME);
+        mgtd.setP30F0702(ConsDat.MGTD_STATUS_INIT);
+        mgtd.setP30F0703(cbLevel.getSelectedIndex());
+        mgtd.setP30F0704(cbCycle.getSelectedIndex());
+        mgtd.setP30F0705(ConsDat.MGTD_NOTE_MSG);
+        mgtd.setP30F0706(1);
+        mgtd.setP30F0707(0);
+        mgtd.setP30F070B(tfTitle.getText());
+        mgtd.setP30F070C(0L);
+        mgtd.setP30F070D(0L);
+        mgtd.setP30F070E(0L);
+        mgtd.setP30F070F(0L);
+        mgtd.setP30F0710(0);
+        mgtd.setP30F0711("");
+        mgtd.setP30F0712("");
+        mgtd.setP30F0713(0);
+        mgtd.setP30F0714(0);
+        mgtd.setP30F0715(taRemark.getText());
+        DBA4000.saveHintData(mgtd);
     }
 
     private void btAbortActionPerformed(java.awt.event.ActionEvent evt)
     {
+        this.dispose();
     }
     private javax.swing.JButton btAbort;
     private javax.swing.JButton btApply;

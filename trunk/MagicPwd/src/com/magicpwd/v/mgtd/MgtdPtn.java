@@ -17,13 +17,13 @@
 package com.magicpwd.v.mgtd;
 
 import com.magicpwd.__a.AMpwdPtn;
-import com.magicpwd._comp.date.WDateChooser;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.tray.TrayPtn;
+import com.magicpwd.x.mgtd.MgtdDlg;
 import java.awt.event.ActionEvent;
 
 /**
@@ -67,6 +67,7 @@ public class MgtdPtn extends AMpwdPtn
     public boolean initLang()
     {
         setTitle(Lang.getLang(LangRes.P30F6201, "魔方密码"));
+        b.setText("Test");
         return true;
     }
 
@@ -101,8 +102,12 @@ public class MgtdPtn extends AMpwdPtn
 
     private void test()
     {
-        WDateChooser dc = new WDateChooser();
-        dc.show(b, 0, b.getHeight());
+//        WDateChooser dc = new WDateChooser();
+//        dc.show(b, 0, b.getHeight());
+        MgtdDlg dlg = new MgtdDlg(this, true);
+        dlg.initView();
+        dlg.initLang();
+        dlg.initData();
     }
     private javax.swing.JButton b;
 }
