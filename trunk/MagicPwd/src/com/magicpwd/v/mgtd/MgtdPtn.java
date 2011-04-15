@@ -43,7 +43,7 @@ public class MgtdPtn extends AMpwdPtn
         this.getContentPane().add(tbTaskTool, java.awt.BorderLayout.NORTH);
 
         jButton1 = new javax.swing.JButton();
-        jButton1.setText("jButton1");
+        jButton1.setText("Demo");
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
