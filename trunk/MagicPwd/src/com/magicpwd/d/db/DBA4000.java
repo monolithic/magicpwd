@@ -403,7 +403,7 @@ public class DBA4000
             dba.addTable(DBC4000.P30F0700);
             StringBuilder buf = new StringBuilder();
             buf.append("((");
-            buf.append(DBC4000.P30F0701).append('=').append(ConsDat.MGTD_STARTUP).append(" OR ");
+            buf.append(DBC4000.P30F0701).append('=').append(ConsDat.MGTD_SPECIAL).append(" OR ");
             buf.append(DBC4000.P30F0701).append('=').append(ConsDat.MGTD_FORMULA).append(")");
             buf.append(DBC4000.P30F070C).append("<=").append(now).append(" AND ");
             buf.append(DBC4000.P30F070D).append(">=").append(now);
@@ -442,7 +442,7 @@ public class DBA4000
             dba.addTable(DBC4000.P30F0700);
             dba.addWhere(com.magicpwd._util.Char.format("{0} IS NULL OR {0} < {1}", DBC4000.P30F070C, now));
             dba.addWhere(com.magicpwd._util.Char.format("{0} IS NULL OR {0} > {1}", DBC4000.P30F070D, now));
-            dba.addWhere(DBC4000.P30F0704, ">", ConsDat.MGTD_FIXED);
+            dba.addWhere(DBC4000.P30F0704, ">", ConsDat.MGTD_FIXTIME);
             dba.addWhere(DBC4000.P30F0702, ConsDat.MGTD_STATUS_READY);
 
             ResultSet rest = dba.executeSelect();
@@ -488,6 +488,33 @@ public class DBA4000
             mgtd.setP30F0714(rest.getInt(DBC4000.P30F0714));
             mgtd.setP30F0715(rest.getString(DBC4000.P30F0715));
             list.add(mgtd);
+        }
+    }
+
+    public static boolean listMgtdData(java.util.List<Mgtd> mgtdList)
+    {
+        DBAccess dba = new DBAccess();
+
+        try
+        {
+            dba.init();
+
+            dba.addTable(DBC4000.P30F0700);
+//            dba.addParam(DBC4000.P30F0702, ConsDat.MGTD_STATUS_INIT);
+//            dba.addWhere(DBC4000.P30F0708, mgtd.getP30F0708());
+            ResultSet rest = dba.executeSelect();
+            readMgtdData(rest, mgtdList);
+            rest.close();
+            return true;
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            return false;
+        }
+        finally
+        {
+            dba.dispose();
         }
     }
 

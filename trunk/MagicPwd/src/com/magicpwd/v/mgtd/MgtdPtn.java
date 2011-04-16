@@ -19,6 +19,7 @@ package com.magicpwd.v.mgtd;
 import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd._util.Bean;
 import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.mgtd.MgtdMdl;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.tray.TrayPtn;
 import com.magicpwd.x.mgtd.MgtdDlg;
@@ -29,6 +30,8 @@ import com.magicpwd.x.mgtd.MgtdDlg;
  */
 public class MgtdPtn extends AMpwdPtn
 {
+
+    private MgtdMdl mgtdMdl;
 
     public MgtdPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
@@ -89,12 +92,16 @@ public class MgtdPtn extends AMpwdPtn
     @Override
     public boolean initLang()
     {
+        setTitle("计划任务");
         return true;
     }
 
     @Override
     public boolean initData()
     {
+        mgtdMdl = new MgtdMdl(userMdl);
+        mgtdMdl.init();
+        tbTaskList.setModel(mgtdMdl.getGridMdl());
         return true;
     }
 

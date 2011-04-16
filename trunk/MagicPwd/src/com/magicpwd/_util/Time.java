@@ -224,7 +224,7 @@ public class Time implements java.awt.event.ActionListener
         long now = time.getTimeInMillis();
 
         // 定时
-        if (mgtd.getP30F0701() == ConsDat.MGTD_FIXED)
+        if (mgtd.getP30F0701() == ConsDat.MGTD_FIXTIME)
         {
             long dif = (now - mgtd.getP30F070F()) % (mgtd.getP30F0710() * 1000);
             return dif < 2;
