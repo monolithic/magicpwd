@@ -226,9 +226,11 @@ public interface ConsDat
     int MGTD_TYPE_DATE = 1;
     int MGTD_TYPE_DATETIME = 0;
     int MGTD_TYPE_TIME = -1;
-    int MGTD_STARTUP = -10;
-    int MGTD_FIXED = -1;
+    /**提醒计划*/
+    int MGTD_SPECIAL = -10;
+    int MGTD_FIXTIME = -1;
     int MGTD_FORMULA = 0;
+    /**周期提醒单位*/
     int MGTD_CYCLE = 1;
     int MGTD_CYCLE_BY_SECOND = 10;
     int MGTD_CYCLE_BY_MINUTE = 20;
@@ -239,6 +241,7 @@ public interface ConsDat
     int MGTD_CYCLE_BY_DAY_OF_MONTH = 61;
     int MGTD_CYCLE_BY_WEEK_OF_MONTH = 62;
     int MGTD_CYCLE_BY_YEAR = 70;
+    /**提前提醒方式*/
     int MGTD_AHEAD_NONE = 0;
     int MGTD_AHEAD_BY_SECOND = 1;
     int MGTD_AHEAD_BY_MINUTE = 2;
@@ -268,7 +271,9 @@ public interface ConsDat
      */
     int MGTD_STATUS_ABORT = -2;
     /**提示方式*/
-    int MGTD_NOTE_MSG = 0;
-    int MGTD_NOTE_MAIL = 1;
-    int MGTD_NOTE_RUN = 2;
+    int MGTD_METHOD_NOTE = 0;
+    int MGTD_METHOD_MAIL = 1;
+    int MGTD_METHOD_AUDIO = 1;
+    int MGTD_METHOD_APPS = 2;
+    int MGTD_METHOD_FILE = 2;
 }

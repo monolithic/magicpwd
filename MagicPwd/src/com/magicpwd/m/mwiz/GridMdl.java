@@ -115,7 +115,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
         switch (columnIndex)
         {
             case 0:
-                return Integer.toString(rowIndex + 1);
+                return rowIndex + 1;
             case 1:
                 return new I1S2(rowIndex, "keys-label" + temp.getP30F0102(), "keys-major" + (temp.getP30F0103() > 0 ? "+" : "") + temp.getP30F0103());
             case 2:
