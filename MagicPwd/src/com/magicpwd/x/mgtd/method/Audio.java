@@ -43,8 +43,10 @@ public class Audio extends javax.swing.JPanel implements IMgtdBean
     @Override
     public void initView()
     {
-        lbPath = new javax.swing.JLabel();
+        btPath = new javax.swing.JButton();
         tfPath = new javax.swing.JTextField();
+        lbPath = new javax.swing.JLabel();
+        lbPath.setLabelFor(tfPath);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -52,13 +54,16 @@ public class Audio extends javax.swing.JPanel implements IMgtdBean
 //        hsg.addContainerGap();
         hsg.addComponent(lbPath);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg.addComponent(tfPath, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE);
+        hsg.addComponent(tfPath, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE);
+        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg.addComponent(btPath);
 //        hsg.addContainerGap();
         layout.setHorizontalGroup(hsg);
 
         javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg.addComponent(lbPath);
         vpg.addComponent(tfPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg.addComponent(btPath);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
 //        vsg.addContainerGap();
         vsg.addGroup(vpg);
@@ -69,6 +74,7 @@ public class Audio extends javax.swing.JPanel implements IMgtdBean
     @Override
     public void initLang()
     {
+        lbPath.setText("音频文件(A)");
     }
 
     @Override
@@ -94,6 +100,7 @@ public class Audio extends javax.swing.JPanel implements IMgtdBean
     {
         return true;
     }
-    private javax.swing.JLabel lbPath;
+    private javax.swing.JButton btPath;
     private javax.swing.JTextField tfPath;
+    private javax.swing.JLabel lbPath;
 }

@@ -18,6 +18,8 @@ package com.magicpwd.x.mgtd.schedule;
 
 import com.magicpwd.__i.mgtd.IMgtdBean;
 import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._comn.mpwd.Mtts;
+import com.magicpwd._comp.BtnLabel;
 import com.magicpwd.x.mgtd.MgtdDlg;
 
 /**
@@ -34,6 +36,7 @@ public class FixTime extends javax.swing.JPanel implements IMgtdBean
 {
 
     private MgtdDlg mgtdDlg;
+    private javax.swing.SpinnerDateModel smTime;
 
     public FixTime(MgtdDlg mgtdDlg)
     {
@@ -43,9 +46,11 @@ public class FixTime extends javax.swing.JPanel implements IMgtdBean
     @Override
     public void initView()
     {
-        lbTime = new javax.swing.JLabel();
+        btTime = new BtnLabel();
         spTime = new javax.swing.JSpinner();
-        btTime = new javax.swing.JButton();
+        smTime = new javax.swing.SpinnerDateModel();
+        spTime.setModel(smTime);
+        lbTime = new javax.swing.JLabel();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -53,16 +58,16 @@ public class FixTime extends javax.swing.JPanel implements IMgtdBean
 //        hsg.addContainerGap();
         hsg.addComponent(lbTime);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg.addComponent(spTime, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE);
+        hsg.addComponent(spTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg.addComponent(btTime);
+        hsg.addComponent(btTime, 21, 21, 21);
 //        hsg.addContainerGap();
         layout.setHorizontalGroup(hsg);
 
         javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg.addComponent(lbTime);
         vpg.addComponent(spTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vpg.addComponent(btTime);
+        vpg.addComponent(btTime, 21, 21, 21);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
 //        vsg.addContainerGap();
         vsg.addGroup(vpg);
@@ -91,15 +96,27 @@ public class FixTime extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean showData(Mgtd mgtd)
     {
-        return true;
+        Mtts mtts = mgtd.getMtts(0);
+        if (mtts != null)
+        {
+            spTime.setValue(new java.util.Date(mtts.getP30F0404()));
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean saveData(Mgtd mgtd)
     {
+        Mtts mtts = new Mtts();
+        mtts.setP30F0403(mgtd.getP30F0308());
+        mtts.setP30F0404(smTime.getDate().getTime());
+        mtts.setP30F0405(0);
+        mtts.setP30F0406("");
+        mgtd.addMtts(mtts);
         return true;
     }
-    private javax.swing.JButton btTime;
+    private BtnLabel btTime;
     private javax.swing.JLabel lbTime;
     private javax.swing.JSpinner spTime;
 }

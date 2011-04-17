@@ -88,6 +88,8 @@ public class Apps extends javax.swing.JPanel implements IMgtdBean
     @Override
     public void initLang()
     {
+        lbPath.setText("程序路径(P)");
+        lbArgs.setText("执行参数(A)");
     }
 
     @Override

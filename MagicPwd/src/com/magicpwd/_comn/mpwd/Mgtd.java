@@ -26,423 +26,418 @@ public class Mgtd implements Serializable
 {
 
     /**任务类型*/
-    private int P30F0701;
+    private int P30F0301;
     /**任务状态*/
-    private int P30F0702;
+    private int P30F0302;
     /**任务级别*/
-    private int P30F0703;
+    private int P30F0303;
     /**提醒周期*/
-    private int P30F0704;
+    private int P30F0304;
     /**提示方式*/
-    private int P30F0705;
+    private int P30F0305;
     /**可否共用*/
-    private int P30F0706;
+    private int P30F0306;
     /**完成度*/
-    private int P30F0707;
+    private int P30F0307;
     /**任务索引*/
-    private String P30F0708;
+    private String P30F0308;
     /**上级任务*/
-    private String P30F0709;
+    private String P30F0309;
     /**前置任务*/
-    private String P30F070A;
+    private String P30F030A;
     /**任务名称*/
-    private String P30F070B;
+    private String P30F030B;
     /**起始时间*/
-    private Long P30F070C;
+    private Long P30F030C;
     /**结束时间*/
-    private Long P30F070D;
+    private Long P30F030D;
     /**执行时间*/
-    private Long P30F070E;
-    /**指定时间*/
-    private Long P30F070F;
-    /**提醒间隔*/
-    private Integer P30F0710;
-    /**表达式*/
-    private String P30F0711;
+    private Long P30F030E;
     /**执行参数*/
-    private String P30F0712;
+    private String P30F030F;
+    /**附加参数*/
+    private String P30F0310;
     /**是否提前*/
-    private Integer P30F0713;
+    private Integer P30F0311;
     /**提前间隔*/
-    private Integer P30F0714;
+    private Integer P30F0312;
     /**相关说明*/
-    private String P30F0715;
+    private String P30F0313;
+    private java.util.List<Mtts> mttsList;
 
     /**
      * 任务类型
-     * @return the P30F0701
+     * @return the P30F0301
      */
-    public int getP30F0701()
+    public int getP30F0301()
     {
-        return P30F0701;
+        return P30F0301;
     }
 
     /**
      * 任务类型
-     * @param P30F0701 the P30F0701 to set
+     * @param P30F0301 the P30F0301 to set
      */
-    public void setP30F0701(int P30F0701)
+    public void setP30F0301(int P30F0301)
     {
-        this.P30F0701 = P30F0701;
+        this.P30F0301 = P30F0301;
     }
 
     /**
      * 任务状态
-     * @return the P30F0702
+     * @return the P30F0302
      */
-    public int getP30F0702()
+    public int getP30F0302()
     {
-        return P30F0702;
+        return P30F0302;
     }
 
     /**
      * 任务状态
-     * @param P30F0702 the P30F0702 to set
+     * @param P30F0302 the P30F0302 to set
      */
-    public void setP30F0702(int P30F0702)
+    public void setP30F0302(int P30F0302)
     {
-        this.P30F0702 = P30F0702;
+        this.P30F0302 = P30F0302;
     }
 
     /**
      * 任务级别
-     * @return the P30F0703
+     * @return the P30F0303
      */
     public int getP30F0703()
     {
-        return P30F0703;
+        return P30F0303;
     }
 
     /**
      * 任务级别
-     * @param P30F0703 the P30F0703 to set
+     * @param P30F0303 the P30F0303 to set
      */
-    public void setP30F0703(int P30F0703)
+    public void setP30F0703(int P30F0303)
     {
-        this.P30F0703 = P30F0703;
+        this.P30F0303 = P30F0303;
     }
 
     /**
      * 提醒周期
-     * @return the P30F0704
+     * @return the P30F0304
      */
-    public int getP30F0704()
+    public int getP30F0304()
     {
-        return P30F0704;
+        return P30F0304;
     }
 
     /**
      * 提醒周期
-     * @param P30F0704 the P30F0704 to set
+     * @param P30F0304 the P30F0304 to set
      */
-    public void setP30F0704(int P30F0704)
+    public void setP30F0704(int P30F0304)
     {
-        this.P30F0704 = P30F0704;
+        this.P30F0304 = P30F0304;
     }
 
     /**
      * 提示方式
-     * @return the P30F0705
+     * @return the P30F0305
      */
-    public int getP30F0705()
+    public int getP30F0305()
     {
-        return P30F0705;
+        return P30F0305;
     }
 
     /**
      * 提示方式
-     * @param P30F0705 the P30F0705 to set
+     * @param P30F0305 the P30F0305 to set
      */
-    public void setP30F0705(int P30F0705)
+    public void setP30F0305(int P30F0305)
     {
-        this.P30F0705 = P30F0705;
+        this.P30F0305 = P30F0305;
     }
 
     /**
      * 可否共用
-     * @return the P30F0706
+     * @return the P30F0306
      */
-    public int getP30F0706()
+    public int getP30F0306()
     {
-        return P30F0706;
+        return P30F0306;
     }
 
     /**
      * 可否共用
-     * @param P30F0706 the P30F0706 to set
+     * @param P30F0306 the P30F0306 to set
      */
-    public void setP30F0706(int P30F0706)
+    public void setP30F0306(int P30F0306)
     {
-        this.P30F0706 = P30F0706;
+        this.P30F0306 = P30F0306;
     }
 
     /**
      * 完成度
      * @return the P30F0707
      */
-    public int getP30F0707()
+    public int getP30F0307()
     {
-        return P30F0707;
+        return P30F0307;
     }
 
     /**
      * 完成度
-     * @param P30F0707 the P30F0707 to set
+     * @param P30F0307 the P30F0307 to set
      */
-    public void setP30F0707(int P30F0707)
+    public void setP30F0307(int P30F0307)
     {
-        this.P30F0707 = P30F0707;
+        this.P30F0307 = P30F0307;
     }
 
     /**
      * 任务索引
      * @return the P30F0708
      */
-    public String getP30F0708()
+    public String getP30F0308()
     {
-        return P30F0708;
+        return P30F0308;
     }
 
     /**
      * 任务索引
-     * @param P30F0708 the P30F0708 to set
+     * @param P30F0308 the P30F0708 to set
      */
-    public void setP30F0708(String P30F0708)
+    public void setP30F0308(String P30F0308)
     {
-        this.P30F0708 = P30F0708;
+        this.P30F0308 = P30F0308;
     }
 
     /**
      * 上级任务
-     * @return the P30F0709
+     * @return the P30F0309
      */
-    public String getP30F0709()
+    public String getP30F0309()
     {
-        return P30F0709;
+        return P30F0309;
     }
 
     /**
      * 上级任务
-     * @param P30F0709 the P30F0709 to set
+     * @param P30F0309 the P30F0309 to set
      */
-    public void setP30F0709(String P30F0709)
+    public void setP30F0309(String P30F0309)
     {
-        this.P30F0709 = P30F0709;
+        this.P30F0309 = P30F0309;
     }
 
     /**
      * 前置任务
-     * @return the P30F070A
+     * @return the P30F030A
      */
-    public String getP30F070A()
+    public String getP30F030A()
     {
-        return P30F070A;
+        return P30F030A;
     }
 
     /**
      * 前置任务
-     * @param P30F070A the P30F070A to set
+     * @param P30F030A the P30F030A to set
      */
-    public void setP30F070A(String P30F070A)
+    public void setP30F070A(String P30F030A)
     {
-        this.P30F070A = P30F070A;
+        this.P30F030A = P30F030A;
     }
 
     /**
      * 任务名称
-     * @return the P30F070B
+     * @return the P30F030B
      */
-    public String getP30F070B()
+    public String getP30F030B()
     {
-        return P30F070B;
+        return P30F030B;
     }
 
     /**
      * 任务名称
-     * @param P30F070B the P30F070B to set
+     * @param P30F030B the P30F030B to set
      */
-    public void setP30F070B(String P30F070B)
+    public void setP30F030B(String P30F030B)
     {
-        this.P30F070B = P30F070B;
+        this.P30F030B = P30F030B;
     }
 
     /**
      * 起始时间
-     * @return the P30F070C
+     * @return the P30F030C
      */
-    public Long getP30F070C()
+    public Long getP30F030C()
     {
-        return P30F070C;
+        return P30F030C;
     }
 
     /**
      * 起始时间
-     * @param P30F070C the P30F070C to set
+     * @param P30F030C the P30F030C to set
      */
-    public void setP30F070C(Long P30F070C)
+    public void setP30F030C(Long P30F030C)
     {
-        this.P30F070C = P30F070C;
+        this.P30F030C = P30F030C;
     }
 
     /**
      * 结束时间
-     * @return the P30F070D
+     * @return the P30F030D
      */
-    public Long getP30F070D()
+    public Long getP30F030D()
     {
-        return P30F070D;
+        return P30F030D;
     }
 
     /**
      * 结束时间
-     * @param P30F070D the P30F070D to set
+     * @param P30F030D the P30F030D to set
      */
-    public void setP30F070D(Long P30F070D)
+    public void setP30F030D(Long P30F030D)
     {
-        this.P30F070D = P30F070D;
+        this.P30F030D = P30F030D;
     }
 
     /**
      * 执行时间
-     * @return the P30F070E
+     * @return the P30F030E
      */
-    public Long getP30F070E()
+    public Long getP30F030E()
     {
-        return P30F070E;
+        return P30F030E;
     }
 
     /**
      * 执行时间
-     * @param P30F070E the P30F070E to set
+     * @param P30F030E the P30F030E to set
      */
-    public void setP30F070E(Long P30F070E)
+    public void setP30F030E(Long P30F030E)
     {
-        this.P30F070E = P30F070E;
-    }
-
-    /**
-     * 指定时间
-     * @return the P30F070F
-     */
-    public Long getP30F070F()
-    {
-        return P30F070F;
-    }
-
-    /**
-     * 指定时间
-     * @param P30F070F the P30F070F to set
-     */
-    public void setP30F070F(Long P30F070F)
-    {
-        this.P30F070F = P30F070F;
-    }
-
-    /**
-     * 提醒间隔
-     * @return the P30F0710
-     */
-    public Integer getP30F0710()
-    {
-        return P30F0710;
-    }
-
-    /**
-     * 提醒间隔
-     * @param P30F0710 the P30F0710 to set
-     */
-    public void setP30F0710(Integer P30F0710)
-    {
-        this.P30F0710 = P30F0710;
-    }
-
-    /**
-     * 表达式
-     * @return the P30F0711
-     */
-    public String getP30F0711()
-    {
-        return P30F0711;
-    }
-
-    /**
-     * 表达式
-     * @param P30F0711 the P30F0711 to set
-     */
-    public void setP30F0711(String P30F0711)
-    {
-        this.P30F0711 = P30F0711;
+        this.P30F030E = P30F030E;
     }
 
     /**
      * 执行参数
-     * @return the P30F0712
+     * @return the P30F030F
      */
-    public String getP30F0712()
+    public String getP30F030F()
     {
-        return P30F0712;
+        return P30F030F;
     }
 
     /**
      * 执行参数
-     * @param P30F0712 the P30F0712 to set
+     * @param P30F030F the P30F030F to set
      */
-    public void setP30F0712(String P30F0712)
+    public void setP30F030F(String P30F030F)
     {
-        this.P30F0712 = P30F0712;
+        this.P30F030F = P30F030F;
+    }
+
+    /**
+     * 附加参数
+     * @return the P30F0310
+     */
+    public String getP30F0310()
+    {
+        return P30F0310;
+    }
+
+    /**
+     * 附加参数
+     * @param P30F0310 the P30F0310 to set
+     */
+    public void setP30F0310(String P30F0310)
+    {
+        this.P30F0310 = P30F0310;
     }
 
     /**
      * 是否提前
-     * @return the P30F0713
+     * @return the P30F0311
      */
-    public Integer getP30F0713()
+    public Integer getP30F0311()
     {
-        return P30F0713;
+        return P30F0311;
     }
 
     /**
      * 是否提前
-     * @param P30F0713 the P30F0713 to set
+     * @param P30F0311 the P30F0311 to set
      */
-    public void setP30F0713(Integer P30F0713)
+    public void setP30F0311(Integer P30F0311)
     {
-        this.P30F0713 = P30F0713;
+        this.P30F0311 = P30F0311;
     }
 
     /**
      * 提前间隔
-     * @return the P30F0714
+     * @return the P30F0312
      */
-    public Integer getP30F0714()
+    public Integer getP30F0312()
     {
-        return P30F0714;
+        return P30F0312;
     }
 
     /**
      * 提前间隔
-     * @param P30F0714 the P30F0714 to set
+     * @param P30F0312 the P30F0312 to set
      */
-    public void setP30F0714(Integer P30F0714)
+    public void setP30F0312(Integer P30F0312)
     {
-        this.P30F0714 = P30F0714;
+        this.P30F0312 = P30F0312;
     }
 
     /**
      * 相关说明
-     * @return the P30F0715
+     * @return the P30F0313
      */
-    public String getP30F0715()
+    public String getP30F0313()
     {
-        return P30F0715;
+        return P30F0313;
     }
 
     /**
      * 相关说明
-     * @param P30F0715 the P30F0715 to set
+     * @param P30F0313 the P30F0313 to set
      */
-    public void setP30F0715(String P30F0715)
+    public void setP30F0313(String P30F0313)
     {
-        this.P30F0715 = P30F0715;
+        this.P30F0313 = P30F0313;
+    }
+
+    /**
+     * @return the mttsList
+     */
+    public java.util.List<Mtts> getMttsList()
+    {
+        return mttsList;
+    }
+
+    /**
+     * @param mttsList the mttsList to set
+     */
+    public void setMttsList(java.util.List<Mtts> mttsList)
+    {
+        this.mttsList = mttsList;
+    }
+
+    public Mtts getMtts(int index)
+    {
+        if (mttsList != null && index > -1 && index < mttsList.size())
+        {
+            return mttsList.get(index);
+        }
+        return null;
+    }
+
+    public void addMtts(Mtts mtts)
+    {
+        if (mttsList == null)
+        {
+            mttsList = new java.util.ArrayList<Mtts>();
+        }
+        mttsList.add(mtts);
     }
 }

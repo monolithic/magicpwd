@@ -75,6 +75,7 @@ public class Special extends javax.swing.JPanel implements IMgtdBean
     @Override
     public void initLang()
     {
+        cbStartup.setText("程序启动时");
     }
 
     @Override
