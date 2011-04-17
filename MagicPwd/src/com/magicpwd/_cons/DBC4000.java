@@ -194,56 +194,60 @@ public interface DBC4000
      * 计划任务表格
      * ////////////////////////////////////////////////////
      */
-    String P30F0700 = "P30F0700";
+    String P30F0300 = "P30F0300";
     /**任务类型*/
-    String P30F0701 = "P30F0701";
+    String P30F0301 = "P30F0301";
     /**任务状态*/
-    String P30F0702 = "P30F0702";
+    String P30F0302 = "P30F0302";
     /**任务级别*/
-    String P30F0703 = "P30F0703";
+    String P30F0303 = "P30F0303";
     /**提醒周期*/
-    String P30F0704 = "P30F0704";
+    String P30F0304 = "P30F0304";
     /**提示方式*/
-    String P30F0705 = "P30F0705";
+    String P30F0305 = "P30F0305";
     /**可否共用*/
-    String P30F0706 = "P30F0706";
+    String P30F0306 = "P30F0306";
     /**完成度*/
-    String P30F0707 = "P30F0707";
+    String P30F0307 = "P30F0307";
     /**任务索引*/
-    String P30F0708 = "P30F0708";
-    int P30F0708_SIZE = 16;
+    String P30F0308 = "P30F0308";
+    int P30F0308_SIZE = 16;
     /**上级任务*/
-    String P30F0709 = "P30F0709";
-    int P30F0709_SIZE = 16;
+    String P30F0309 = "P30F0309";
+    int P30F0309_SIZE = 16;
     /**前置任务*/
-    String P30F070A = "P30F070A";
-    int P30F070A_SIZE = 16;
+    String P30F030A = "P30F030A";
+    int P30F030A_SIZE = 16;
     /**任务名称*/
-    String P30F070B = "P30F070B";
-    int P30F070B_SIZE = 256;
+    String P30F030B = "P30F030B";
+    int P30F030B_SIZE = 256;
     /**起始时间*/
-    String P30F070C = "P30F070C";
+    String P30F030C = "P30F030C";
     /**结束时间*/
-    String P30F070D = "P30F070D";
+    String P30F030D = "P30F030D";
     /**执行时间*/
-    String P30F070E = "P30F070E";
-    /**指定时间*/
-    String P30F070F = "P30F070F";
-    /**提醒间隔*/
-    String P30F0710 = "P30F0710";
-    /**表达式*/
-    String P30F0711 = "P30F0711";
-    int P30F0711_SIZE = 512;
+    String P30F030E = "P30F030E";
     /**执行参数*/
-    String P30F0712 = "P30F0712";
-    int P30F0712_SIZE = 1024;
+    String P30F030F = "P30F030F";
+    int P30F030F_SIZE = 1024;
+    /**执行参数*/
+    String P30F0310 = "P30F0310";
+    int P30F0310_SIZE = 1024;
     /**是否提前*/
-    String P30F0713 = "P30F0713";
+    String P30F0311 = "P30F0311";
     /**提前间隔*/
-    String P30F0714 = "P30F0714";
+    String P30F0312 = "P30F0312";
     /**相关说明*/
-    String P30F0715 = "P30F0715";
-    int P30F0715_SIZE = 2048;
+    String P30F0313 = "P30F0313";
+    int P30F0313_SIZE = 2048;
+
+    /**指定时间*/
+    String P30F040F = "P30F070F";
+    /**提醒间隔*/
+    String P30F0410 = "P30F0710";
+    /**表达式*/
+    String P30F0411 = "P30F0711";
+    int P30F0411_SIZE = 512;
     /**
      * ////////////////////////////////////////////////////
      * 数值运算表格

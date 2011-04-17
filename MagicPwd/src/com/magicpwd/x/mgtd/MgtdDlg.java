@@ -409,7 +409,7 @@ public class MgtdDlg extends ADialog
         mgtd.setP30F0703(cbLevel.getSelectedIndex());
         mgtd.setP30F0704(cbMethod.getSelectedIndex());
         mgtd.setP30F0305(ConsDat.MGTD_METHOD_NOTE);
-        mgtd.setP30F0306(1);
+        mgtd.setP30F0306(cbPublic.isSelected() ? 1 : 0);
         mgtd.setP30F0307(0);
         mgtd.setP30F030B(tfTitle.getText());
         mgtd.setP30F030C(0L);
