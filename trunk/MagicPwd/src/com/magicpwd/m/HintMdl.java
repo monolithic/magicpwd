@@ -19,6 +19,7 @@ package com.magicpwd.m;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd.__i.IHintView;
 import com.magicpwd._comn.Task;
+import com.magicpwd._comn.mpwd.Mtts;
 import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Time;
@@ -40,8 +41,8 @@ public final class HintMdl
 
     private UserMdl userMdl;
     private java.text.DateFormat dateTplt;
-    private java.util.List<Mgtd> mgtdList;
-    private java.util.List<Mgtd> hintList;
+    private java.util.List<Mtts> mgtdList;
+    private java.util.List<Mtts> hintList;
     private java.util.List<IHintView> viewList;
     private IBackCall<String, java.util.List<Mgtd>> backCall;
     private int counter;
@@ -56,8 +57,8 @@ public final class HintMdl
         dateTplt = java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.FULL, java.text.DateFormat.MEDIUM);
 
         viewList = new java.util.ArrayList<IHintView>();
-        mgtdList = new java.util.ArrayList<Mgtd>();
-        hintList = new java.util.ArrayList<Mgtd>();
+        mgtdList = new java.util.ArrayList<Mtts>();
+        hintList = new java.util.ArrayList<Mtts>();
         counter = userMdl.getHintInt();
 
         Time.getInstance().registerAction(new Task(0, 1, "mexp-hint", ""), new IBackCall<String, Task>()
@@ -96,11 +97,11 @@ public final class HintMdl
         // 到期提示判断
         hintList.clear();
         java.util.Calendar cal = java.util.Calendar.getInstance();
-        for (Mgtd mgtd : mgtdList)
+        for (Mtts hint : mgtdList)
         {
-            if (Time.isOnTime(cal, mgtd))
+            if (Time.isOnTime(cal, hint))
             {
-                hintList.add(mgtd);
+                hintList.add(hint);
             }
         }
 
@@ -136,7 +137,7 @@ public final class HintMdl
         }
     }
 
-    public java.util.List<Mgtd> getHint()
+    public java.util.List<Mtts> getHint()
     {
         return hintList;
     }

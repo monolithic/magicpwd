@@ -18,7 +18,7 @@ package com.magicpwd.v;
 
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd.__i.IHintView;
-import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._comn.mpwd.Mtts;
 import com.magicpwd.m.HintMdl;
 import com.magicpwd.m.UserMdl;
 
@@ -31,7 +31,7 @@ public class HintBar extends javax.swing.JPanel implements IHintView
 
     private UserMdl userMdl;
     private HintMdl hintMdl;
-    private IBackCall<String, java.util.List<Mgtd>> backCall;
+    private IBackCall<String, java.util.List<Mtts>> backCall;
 
     public HintBar(UserMdl userMdl)
     {
@@ -141,7 +141,7 @@ public class HintBar extends javax.swing.JPanel implements IHintView
     /**
      * @return the backCall
      */
-    public IBackCall<String, java.util.List<Mgtd>> getBackCall()
+    public IBackCall<String, java.util.List<Mtts>> getBackCall()
     {
         return backCall;
     }
@@ -149,7 +149,7 @@ public class HintBar extends javax.swing.JPanel implements IHintView
     /**
      * @param backCall the backCall to set
      */
-    public void setBackCall(IBackCall<String, java.util.List<Mgtd>> backCall)
+    public void setBackCall(IBackCall<String, java.util.List<Mtts>> backCall)
     {
         this.backCall = backCall;
     }

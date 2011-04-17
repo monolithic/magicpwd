@@ -18,6 +18,8 @@ package com.magicpwd.x.mgtd.method;
 
 import com.magicpwd.__i.mgtd.IMgtdBean;
 import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._util.Char;
+import com.magicpwd._util.Lang;
 import com.magicpwd.x.mgtd.MgtdDlg;
 
 /**
@@ -46,22 +48,36 @@ public class Mail extends javax.swing.JPanel implements IMgtdBean
         lbMail = new javax.swing.JLabel();
         tfMail = new javax.swing.JTextField();
 
+        lbBody = new javax.swing.JLabel();
+        tfBody = new javax.swing.JTextField();
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
-        javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
-//        hsg.addContainerGap();
-        hsg.addComponent(lbMail);
-        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg.addComponent(tfMail, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE);
-//        hsg.addContainerGap();
-        layout.setHorizontalGroup(hsg);
+        javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        hpg1.addComponent(lbMail, javax.swing.GroupLayout.Alignment.TRAILING);
+        hpg1.addComponent(lbBody, javax.swing.GroupLayout.Alignment.TRAILING);
+        javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
+        hpg2.addComponent(tfMail, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE);
+        hpg2.addComponent(tfBody, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE);
+        javax.swing.GroupLayout.SequentialGroup hsg2 = layout.createSequentialGroup();
+//        hsg2.addContainerGap();
+        hsg2.addGroup(hpg1);
+        hsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg2.addGroup(hpg2);
+//        hsg2.addContainerGap();
+        layout.setHorizontalGroup(hsg2);
 
-        javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
-        vpg.addComponent(lbMail);
-        vpg.addComponent(tfMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg1.addComponent(lbMail);
+        vpg1.addComponent(tfMail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg2.addComponent(lbBody);
+        vpg2.addComponent(tfBody, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
 //        vsg.addContainerGap();
-        vsg.addGroup(vpg);
+        vsg.addGroup(vpg1);
+        vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        vsg.addGroup(vpg2);
 //        vsg.addContainerGap();
         layout.setVerticalGroup(vsg);
     }
@@ -70,6 +86,7 @@ public class Mail extends javax.swing.JPanel implements IMgtdBean
     public void initLang()
     {
         lbMail.setText("邮件地址(M)");
+        lbBody.setText("邮件内容(M)");
     }
 
     @Override
@@ -87,14 +104,38 @@ public class Mail extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean showData(Mgtd mgtd)
     {
+        tfMail.setText(mgtd.getP30F030F());
+        tfBody.setText(mgtd.getP30F0310());
         return true;
     }
 
     @Override
     public boolean saveData(Mgtd mgtd)
     {
+        String text = tfMail.getText();
+        if (!Char.isValidate(text))
+        {
+            Lang.showMesg(mgtdDlg, null, "请输入邮件地址！");
+            tfMail.requestFocus();
+            return false;
+        }
+        StringBuilder buf = new StringBuilder();
+        for (String tmp : text.split("[,\\s]"))
+        {
+            if (!Char.isValidateMail(tmp))
+            {
+                Lang.showMesg(mgtdDlg, null, tmp + " 不是一个有效的电子邮件地址！");
+                tfMail.requestFocus();
+                return false;
+            }
+        }
+        mgtd.setP30F030F(text);
+
+        mgtd.setP30F0310(tfBody.getText());
         return true;
     }
     private javax.swing.JLabel lbMail;
     private javax.swing.JTextField tfMail;
+    private javax.swing.JLabel lbBody;
+    private javax.swing.JTextField tfBody;
 }

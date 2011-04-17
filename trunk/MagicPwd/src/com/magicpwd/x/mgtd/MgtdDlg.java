@@ -22,6 +22,8 @@ import com.magicpwd._comn.S1S1;
 import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._util.Bean;
+import com.magicpwd._util.Char;
+import com.magicpwd._util.Lang;
 import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.v.mgtd.MgtdPtn;
 import com.magicpwd.x.mgtd.method.Apps;
@@ -403,6 +405,13 @@ public class MgtdDlg extends ADialog
 
     private void btApplyActionPerformed(java.awt.event.ActionEvent evt)
     {
+        String text = tfTitle.getText();
+        if (!Char.isValidate(text))
+        {
+            Lang.showMesg(this, null, "请输入标题信息！");
+            tfTitle.requestFocus();
+            return;
+        }
         Mgtd mgtd = new Mgtd();
         mgtd.setP30F0301(ConsDat.MGTD_TYPE_DATETIME);
         mgtd.setP30F0302(ConsDat.MGTD_STATUS_INIT);
@@ -415,12 +424,30 @@ public class MgtdDlg extends ADialog
         mgtd.setP30F030C(0L);
         mgtd.setP30F030D(0L);
         mgtd.setP30F030E(0L);
-        methodList.get(cbMethod.getSelectedIndex()).saveData(mgtd);
+        int idx = cbMethod.getSelectedIndex();
+        if (idx < 0 || idx >= methodList.size())
+        {
+            return;
+        }
+        IMgtdBean bean = methodList.get(idx);
+        if (!bean.saveData(mgtd))
+        {
+            return;
+        }
         mgtd.setP30F0311(cbAhead.getSelectedIndex());
         mgtd.setP30F0312(smAhead.getNumber().intValue());
-        intvalList.get(cbIntval.getSelectedIndex()).saveData(mgtd);
+        idx = cbIntval.getSelectedIndex();
+        if (idx < 0 || idx >= intvalList.size())
+        {
+            return;
+        }
+        bean = intvalList.get(idx);
+        if (!bean.saveData(mgtd))
+        {
+            return;
+        }
         mgtd.setP30F0313(taRemark.getText());
-        DBA4000.saveHintData(mgtd);
+        DBA4000.saveMgtdData(mgtd);
     }
 
     private void btAbortActionPerformed(java.awt.event.ActionEvent evt)
