@@ -73,6 +73,7 @@ public class File extends javax.swing.JPanel implements IMgtdBean
     @Override
     public void initLang()
     {
+        lbFile.setText("文件路径(F)");
     }
 
     @Override

@@ -69,6 +69,7 @@ public class Note extends javax.swing.JPanel implements IMgtdBean
     @Override
     public void initLang()
     {
+        lbNote.setText("提示信息(I)");
     }
 
     @Override

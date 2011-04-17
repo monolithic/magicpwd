@@ -466,27 +466,24 @@ public class DBA4000
         Mgtd mgtd = new Mgtd();
         while (rest.next())
         {
-            mgtd.setP30F0701(rest.getInt(DBC4000.P30F0701));
-            mgtd.setP30F0702(rest.getInt(DBC4000.P30F0702));
+            mgtd.setP30F0301(rest.getInt(DBC4000.P30F0701));
+            mgtd.setP30F0302(rest.getInt(DBC4000.P30F0702));
             mgtd.setP30F0703(rest.getInt(DBC4000.P30F0703));
             mgtd.setP30F0704(rest.getInt(DBC4000.P30F0703));
-            mgtd.setP30F0705(rest.getInt(DBC4000.P30F0705));
-            mgtd.setP30F0706(rest.getInt(DBC4000.P30F0706));
-            mgtd.setP30F0707(rest.getInt(DBC4000.P30F0707));
-            mgtd.setP30F0708(rest.getString(DBC4000.P30F0708));
-            mgtd.setP30F0709(rest.getString(DBC4000.P30F0709));
+            mgtd.setP30F0305(rest.getInt(DBC4000.P30F0705));
+            mgtd.setP30F0306(rest.getInt(DBC4000.P30F0706));
+            mgtd.setP30F0307(rest.getInt(DBC4000.P30F0707));
+            mgtd.setP30F0308(rest.getString(DBC4000.P30F0708));
+            mgtd.setP30F0309(rest.getString(DBC4000.P30F0709));
             mgtd.setP30F070A(rest.getString(DBC4000.P30F070A));
-            mgtd.setP30F070B(rest.getString(DBC4000.P30F070B));
-            mgtd.setP30F070C(rest.getLong(DBC4000.P30F070C));
-            mgtd.setP30F070D(rest.getLong(DBC4000.P30F070D));
-            mgtd.setP30F070E(rest.getLong(DBC4000.P30F070E));
-            mgtd.setP30F070F(rest.getLong(DBC4000.P30F070F));
-            mgtd.setP30F0710(rest.getInt(DBC4000.P30F0710));
-            mgtd.setP30F0711(rest.getString(DBC4000.P30F0711));
-            mgtd.setP30F0712(rest.getString(DBC4000.P30F0712));
-            mgtd.setP30F0713(rest.getInt(DBC4000.P30F0713));
-            mgtd.setP30F0714(rest.getInt(DBC4000.P30F0714));
-            mgtd.setP30F0715(rest.getString(DBC4000.P30F0715));
+            mgtd.setP30F030B(rest.getString(DBC4000.P30F070B));
+            mgtd.setP30F030C(rest.getLong(DBC4000.P30F070C));
+            mgtd.setP30F030D(rest.getLong(DBC4000.P30F070D));
+            mgtd.setP30F030E(rest.getLong(DBC4000.P30F070E));
+            mgtd.setP30F030F(rest.getString(DBC4000.P30F0712));
+            mgtd.setP30F0311(rest.getInt(DBC4000.P30F0713));
+            mgtd.setP30F0312(rest.getInt(DBC4000.P30F0714));
+            mgtd.setP30F0313(rest.getString(DBC4000.P30F0715));
             list.add(mgtd);
         }
     }
@@ -527,8 +524,8 @@ public class DBA4000
             dba.init();
 
             dba.addTable(DBC4000.P30F0700);
-            dba.addParam(DBC4000.P30F070E, mgtd.getP30F070E());
-            dba.addWhere(DBC4000.P30F0708, mgtd.getP30F0708());
+            dba.addParam(DBC4000.P30F070E, mgtd.getP30F030E());
+            dba.addWhere(DBC4000.P30F0708, mgtd.getP30F0308());
             return 1 == dba.executeUpdate();
         }
         catch (Exception exp)
@@ -551,35 +548,32 @@ public class DBA4000
             dba.init();
 
             dba.addTable(DBC4000.P30F0700);
-            dba.addParam(DBC4000.P30F0701, mgtd.getP30F0701());
-            dba.addParam(DBC4000.P30F0702, mgtd.getP30F0702());
+            dba.addParam(DBC4000.P30F0701, mgtd.getP30F0301());
+            dba.addParam(DBC4000.P30F0702, mgtd.getP30F0302());
             dba.addParam(DBC4000.P30F0703, mgtd.getP30F0703());
-            dba.addParam(DBC4000.P30F0704, mgtd.getP30F0704());
-            dba.addParam(DBC4000.P30F0705, mgtd.getP30F0705());
-            dba.addParam(DBC4000.P30F0706, mgtd.getP30F0706());
-            dba.addParam(DBC4000.P30F0707, mgtd.getP30F0707());
-            dba.addParam(DBC4000.P30F0709, mgtd.getP30F0709());
-            dba.addParam(DBC4000.P30F070A, mgtd.getP30F070A());
-            dba.addParam(DBC4000.P30F070B, mgtd.getP30F070B());
-            dba.addParam(DBC4000.P30F070C, mgtd.getP30F070C());
-            dba.addParam(DBC4000.P30F070D, mgtd.getP30F070D());
-            dba.addParam(DBC4000.P30F070E, mgtd.getP30F070E());
-            dba.addParam(DBC4000.P30F070F, mgtd.getP30F070F());
-            dba.addParam(DBC4000.P30F0710, mgtd.getP30F0710());
-            dba.addParam(DBC4000.P30F0711, mgtd.getP30F0711());
-            dba.addParam(DBC4000.P30F0712, mgtd.getP30F0712());
-            dba.addParam(DBC4000.P30F0713, mgtd.getP30F0713());
-            dba.addParam(DBC4000.P30F0714, mgtd.getP30F0714());
-            dba.addParam(DBC4000.P30F0715, mgtd.getP30F0715());
-            if (com.magicpwd._util.Char.isValidateHash(mgtd.getP30F0708()))
+            dba.addParam(DBC4000.P30F0704, mgtd.getP30F0304());
+            dba.addParam(DBC4000.P30F0705, mgtd.getP30F0305());
+            dba.addParam(DBC4000.P30F0706, mgtd.getP30F0306());
+            dba.addParam(DBC4000.P30F0707, mgtd.getP30F0307());
+            dba.addParam(DBC4000.P30F0709, mgtd.getP30F0309());
+            dba.addParam(DBC4000.P30F070A, mgtd.getP30F030A());
+            dba.addParam(DBC4000.P30F070B, mgtd.getP30F030B());
+            dba.addParam(DBC4000.P30F070C, mgtd.getP30F030C());
+            dba.addParam(DBC4000.P30F070D, mgtd.getP30F030D());
+            dba.addParam(DBC4000.P30F070E, mgtd.getP30F030E());
+            dba.addParam(DBC4000.P30F0712, mgtd.getP30F030F());
+            dba.addParam(DBC4000.P30F0713, mgtd.getP30F0311());
+            dba.addParam(DBC4000.P30F0714, mgtd.getP30F0312());
+            dba.addParam(DBC4000.P30F0715, mgtd.getP30F0313());
+            if (com.magicpwd._util.Char.isValidateHash(mgtd.getP30F0308()))
             {
-                dba.addWhere(DBC4000.P30F0708, mgtd.getP30F0708());
+                dba.addWhere(DBC4000.P30F0708, mgtd.getP30F0308());
                 return 1 == dba.executeUpdate();
             }
             else
             {
-                mgtd.setP30F0708(Hash.hash(false));
-                dba.addParam(DBC4000.P30F0708, mgtd.getP30F0708());
+                mgtd.setP30F0308(Hash.hash(false));
+                dba.addParam(DBC4000.P30F0708, mgtd.getP30F0308());
                 return 1 == dba.executeInsert();
             }
         }

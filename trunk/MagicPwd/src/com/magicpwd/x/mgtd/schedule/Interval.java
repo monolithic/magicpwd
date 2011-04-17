@@ -18,6 +18,7 @@ package com.magicpwd.x.mgtd.schedule;
 
 import com.magicpwd.__i.mgtd.IMgtdBean;
 import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._comp.BtnLabel;
 import com.magicpwd.x.mgtd.MgtdDlg;
 
 /**
@@ -43,19 +44,19 @@ public class Interval extends javax.swing.JPanel implements IMgtdBean
     @Override
     public void initView()
     {
-        btFtime = new javax.swing.JButton();
+        btFtime = new BtnLabel();
         spFtime = new javax.swing.JSpinner();
         spFtime.setModel(new javax.swing.SpinnerDateModel());
         lbFtime = new javax.swing.JLabel();
         lbFtime.setLabelFor(spFtime);
 
-        btTtime = new javax.swing.JButton();
+        btTtime = new BtnLabel();
         spTtime = new javax.swing.JSpinner();
         spTtime.setModel(new javax.swing.SpinnerDateModel());
         lbTtime = new javax.swing.JLabel();
         lbTtime.setLabelFor(spTtime);
 
-        btStime = new javax.swing.JButton();
+        btStime = new BtnLabel();
         spStime = new javax.swing.JSpinner();
         spStime.setModel(new javax.swing.SpinnerDateModel());
         lbStime = new javax.swing.JLabel();
@@ -72,15 +73,15 @@ public class Interval extends javax.swing.JPanel implements IMgtdBean
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
         hsg1.addComponent(spFtime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg1.addComponent(btFtime);
+        hsg1.addComponent(btFtime, 21, 21, 21);
         javax.swing.GroupLayout.SequentialGroup hsg2 = layout.createSequentialGroup();
         hsg2.addComponent(spTtime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg2.addComponent(btTtime);
+        hsg2.addComponent(btTtime, 21, 21, 21);
         javax.swing.GroupLayout.SequentialGroup hsg3 = layout.createSequentialGroup();
         hsg3.addComponent(spStime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg3.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg3.addComponent(btStime);
+        hsg3.addComponent(btStime, 21, 21, 21);
         javax.swing.GroupLayout.SequentialGroup hsg4 = layout.createSequentialGroup();
         hsg4.addComponent(spIntval, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg4.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -106,15 +107,15 @@ public class Interval extends javax.swing.JPanel implements IMgtdBean
         javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg1.addComponent(lbFtime);
         vpg1.addComponent(spFtime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vpg1.addComponent(btFtime);
+        vpg1.addComponent(btFtime, 21, 21, 21);
         javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg2.addComponent(lbTtime);
         vpg2.addComponent(spTtime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vpg2.addComponent(btTtime);
+        vpg2.addComponent(btTtime, 21, 21, 21);
         javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg3.addComponent(lbStime);
         vpg3.addComponent(spStime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vpg3.addComponent(btStime);
+        vpg3.addComponent(btStime, 21, 21, 21);
         javax.swing.GroupLayout.ParallelGroup vpg4 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg4.addComponent(lbIntval);
         vpg4.addComponent(cbIntval, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
@@ -136,6 +137,8 @@ public class Interval extends javax.swing.JPanel implements IMgtdBean
     public void initLang()
     {
         lbFtime.setText("起始时间(T)");
+        lbTtime.setText("结束时间(S)");
+        lbStime.setText("执行时间(S)");
     }
 
     @Override
@@ -161,16 +164,16 @@ public class Interval extends javax.swing.JPanel implements IMgtdBean
     {
         return true;
     }
-    private javax.swing.JButton btFtime;
-    private javax.swing.JButton btStime;
-    private javax.swing.JButton btTtime;
-    private javax.swing.JComboBox cbIntval;
     private javax.swing.JLabel lbFtime;
-    private javax.swing.JLabel lbIntval;
-    private javax.swing.JLabel lbStime;
-    private javax.swing.JLabel lbTtime;
     private javax.swing.JSpinner spFtime;
-    private javax.swing.JSpinner spIntval;
+    private BtnLabel btFtime;
+    private javax.swing.JLabel lbStime;
     private javax.swing.JSpinner spStime;
+    private BtnLabel btStime;
+    private javax.swing.JLabel lbTtime;
     private javax.swing.JSpinner spTtime;
+    private BtnLabel btTtime;
+    private javax.swing.JLabel lbIntval;
+    private javax.swing.JSpinner spIntval;
+    private javax.swing.JComboBox cbIntval;
 }

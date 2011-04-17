@@ -99,13 +99,13 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
             case 0:
                 return rowIndex + 1;
             case 1:
-                return temp.getP30F070B();
+                return temp.getP30F030B();
             case 2:
-                return temp.getP30F0707();
+                return temp.getP30F0307();
             case 3:
                 return temp.getP30F0703();
             case 4:
-                return temp.getP30F0704();
+                return temp.getP30F0304();
             default:
                 return "";
         }
