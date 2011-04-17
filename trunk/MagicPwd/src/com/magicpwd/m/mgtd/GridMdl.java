@@ -88,27 +88,24 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
     public Object getValueAt(int rowIndex, int columnIndex)
     {
         // 公共属性
-        if (lsMgtdList == null || rowIndex < -1 || rowIndex >= lsMgtdList.size())
+        if (lsMgtdList != null && rowIndex > -1 && rowIndex < lsMgtdList.size())
         {
-            return null;
+            Mgtd temp = lsMgtdList.get(rowIndex);
+            switch (columnIndex)
+            {
+                case 0:
+                    return rowIndex + 1;
+                case 1:
+                    return temp.getP30F030B();
+                case 2:
+                    return temp.getP30F0307();
+                case 3:
+                    return temp.getP30F0703();
+                case 4:
+                    return temp.getP30F0304();
+            }
         }
-
-        Mgtd temp = lsMgtdList.get(rowIndex);
-        switch (columnIndex)
-        {
-            case 0:
-                return rowIndex + 1;
-            case 1:
-                return temp.getP30F030B();
-            case 2:
-                return temp.getP30F0307();
-            case 3:
-                return temp.getP30F0703();
-            case 4:
-                return temp.getP30F0304();
-            default:
-                return "";
-        }
+        return "";
     }
 
     @Override
