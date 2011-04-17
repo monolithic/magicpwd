@@ -18,6 +18,8 @@ package com.magicpwd.x.mgtd.method;
 
 import com.magicpwd.__i.mgtd.IMgtdBean;
 import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._util.Char;
+import com.magicpwd._util.Lang;
 import com.magicpwd.x.mgtd.MgtdDlg;
 
 /**
@@ -107,12 +109,37 @@ public class Apps extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean showData(Mgtd mgtd)
     {
+        tfPath.setText(mgtd.getP30F030F());
+        tfArgs.setText(mgtd.getP30F0310());
         return true;
     }
 
     @Override
     public boolean saveData(Mgtd mgtd)
     {
+        String text = tfPath.getText();
+        if (!Char.isValidate(text))
+        {
+            Lang.showMesg(mgtdDlg, null, "请输入或选择您要打开的文件！");
+            tfPath.requestFocus();
+            return false;
+        }
+        java.io.File file = new java.io.File(text);
+        if (!file.exists())
+        {
+            Lang.showMesg(mgtdDlg, null, "您输入或选择的文件不存在！");
+            tfPath.requestFocus();
+            return false;
+        }
+        if (!file.canRead())
+        {
+            Lang.showMesg(mgtdDlg, null, "无法访问您输入或选择的文件！");
+            tfPath.requestFocus();
+            return false;
+        }
+        mgtd.setP30F030F(text);
+
+        mgtd.setP30F0310(tfArgs.getText());
         return true;
     }
     private javax.swing.JButton btPath;

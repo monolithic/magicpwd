@@ -25,6 +25,7 @@ import com.magicpwd._comn.S1S3;
 import com.magicpwd._comn.item.EditItem;
 import com.magicpwd._comn.mpwd.Mexp;
 import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._comn.mpwd.Mtts;
 import com.magicpwd._comn.prop.Char;
 import com.magicpwd._comn.prop.Tplt;
 import com.magicpwd._cons.ConsCfg;
@@ -429,7 +430,7 @@ public class DBA4000
         }
     }
 
-    public static boolean findHintList(UserMdl cfg, List<Mgtd> list)
+    public static boolean findHintList(UserMdl cfg, List<Mtts> list)
     {
         DBAccess dba = new DBAccess();
 
@@ -440,13 +441,32 @@ public class DBA4000
             String now = Long.toString(System.currentTimeMillis(), 10);
 
             dba.addTable(DBC4000.P30F0300);
+            dba.addTable(DBC4000.P30F0400);
+            dba.addColumn(DBC4000.P30F0311);
+            dba.addColumn(DBC4000.P30F0312);
+            dba.addColumn(DBC4000.P30F0403);
+            dba.addColumn(DBC4000.P30F0404);
+            dba.addColumn(DBC4000.P30F0405);
+            dba.addColumn(DBC4000.P30F0406);
+            dba.addWhere(DBC4000.P30F0308, DBC4000.P30F0403, true);
             dba.addWhere(com.magicpwd._util.Char.format("{0} IS NULL OR {0} < {1}", DBC4000.P30F030C, now));
             dba.addWhere(com.magicpwd._util.Char.format("{0} IS NULL OR {0} > {1}", DBC4000.P30F030D, now));
             dba.addWhere(DBC4000.P30F0304, ">", ConsDat.MGTD_FIXTIME);
             dba.addWhere(DBC4000.P30F0302, ConsDat.MGTD_STATUS_READY);
 
+            Mtts hint;
             ResultSet rest = dba.executeSelect();
-            readMgtdData(rest, list);
+            while (rest.next())
+            {
+                hint = new Mtts();
+                hint.setP30F0311(rest.getInt(DBC4000.P30F0311));
+                hint.setP30F0312(rest.getInt(DBC4000.P30F0312));
+                hint.setP30F0403(rest.getString(DBC4000.P30F0403));
+                hint.setP30F0404(rest.getLong(DBC4000.P30F0404));
+                hint.setP30F0405(rest.getInt(DBC4000.P30F0405));
+                hint.setP30F0406(rest.getString(DBC4000.P30F0406));
+                list.add(hint);
+            }
             rest.close();
             return true;
         }
@@ -540,7 +560,7 @@ public class DBA4000
         }
     }
 
-    public static boolean saveHintData(Mgtd mgtd)
+    public static boolean saveMgtdData(Mgtd mgtd)
     {
         DBAccess dba = new DBAccess();
 
@@ -569,14 +589,40 @@ public class DBA4000
             if (com.magicpwd._util.Char.isValidateHash(mgtd.getP30F0308()))
             {
                 dba.addWhere(DBC4000.P30F0308, mgtd.getP30F0308());
-                return 1 == dba.executeUpdate();
+                dba.addUpdateBatch();
             }
             else
             {
                 mgtd.setP30F0308(Hash.hash(false));
                 dba.addParam(DBC4000.P30F0308, mgtd.getP30F0308());
-                return 1 == dba.executeInsert();
+                dba.addInsertBatch();
             }
+            dba.reInit();
+
+            int row = 1;
+            for (Mtts mtts : mgtd.getMttsList())
+            {
+                dba.addTable(DBC4000.P30F0400);
+                dba.addParam(DBC4000.P30F0401, row++);
+                dba.addParam(DBC4000.P30F0403, mgtd.getP30F0308());
+                dba.addParam(DBC4000.P30F0404, mtts.getP30F0404());
+                dba.addParam(DBC4000.P30F0405, mtts.getP30F0405());
+                dba.addParam(DBC4000.P30F0406, mtts.getP30F0406());
+                if (com.magicpwd._util.Char.isValidateHash(mtts.getP30F0402()))
+                {
+                    dba.addWhere(DBC4000.P30F0402, mtts.getP30F0402());
+                    dba.addUpdateBatch();
+                }
+                else
+                {
+                    mtts.setP30F0402(Hash.hash(false));
+                    dba.addParam(DBC4000.P30F0402, mtts.getP30F0402());
+                    dba.addInsertBatch();
+                }
+                dba.reInit();
+            }
+            dba.executeBatch();
+            return true;
         }
         catch (Exception exp)
         {

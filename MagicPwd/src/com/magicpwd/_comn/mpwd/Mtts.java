@@ -29,30 +29,89 @@ package com.magicpwd._comn.mpwd;
 public class Mtts implements java.io.Serializable
 {
 
-    private Integer P30F0401;
+    private Integer P30F0304;
+    private Long P30F030E;
+    private Integer P30F0311;
+    private Integer P30F0312;
     private String P30F0402;
     private String P30F0403;
     private Long P30F0404;
     private Integer P30F0405;
+    /**表达式*/
     private String P30F0406;
 
     /**
-     * @return the P30F0401
+     * 提醒周期
+     * @return the P30F0304
      */
-    public Integer getP30F0401()
+    public Integer getP30F0304()
     {
-        return P30F0401;
+        return P30F0304;
     }
 
     /**
-     * @param P30F0401 the P30F0401 to set
+     * 提醒周期
+     * @param P30F0304 the P30F0304 to set
      */
-    public void setP30F0401(Integer P30F0401)
+    public void setP30F0304(Integer P30F0304)
     {
-        this.P30F0401 = P30F0401;
+        this.P30F0304 = P30F0304;
     }
 
     /**
+     * @return the P30F030E
+     */
+    public Long getP30F030E()
+    {
+        return P30F030E;
+    }
+
+    /**
+     * @param P30F030E the P30F030E to set
+     */
+    public void setP30F030E(Long P30F030E)
+    {
+        this.P30F030E = P30F030E;
+    }
+
+    /**
+     * 是否提前
+     * @return the P30F0311
+     */
+    public Integer getP30F0311()
+    {
+        return P30F0311;
+    }
+
+    /**
+     * 是否提前
+     * @param P30F0311 the P30F0311 to set
+     */
+    public void setP30F0311(Integer P30F0311)
+    {
+        this.P30F0311 = P30F0311;
+    }
+
+    /**
+     * 提前时间
+     * @return the P30F0312
+     */
+    public Integer getP30F0312()
+    {
+        return P30F0312;
+    }
+
+    /**
+     * 提前时间
+     * @param P30F0312 the P30F0312 to set
+     */
+    public void setP30F0312(Integer P30F0312)
+    {
+        this.P30F0312 = P30F0312;
+    }
+
+    /**
+     * 提醒索引
      * @return the P30F0402
      */
     public String getP30F0402()
@@ -61,6 +120,7 @@ public class Mtts implements java.io.Serializable
     }
 
     /**
+     * 提醒索引
      * @param P30F0402 the P30F0402 to set
      */
     public void setP30F0402(String P30F0402)
@@ -69,6 +129,7 @@ public class Mtts implements java.io.Serializable
     }
 
     /**
+     * 计划索引
      * @return the P30F0403
      */
     public String getP30F0403()
@@ -77,6 +138,7 @@ public class Mtts implements java.io.Serializable
     }
 
     /**
+     * 计划索引
      * @param P30F0403 the P30F0403 to set
      */
     public void setP30F0403(String P30F0403)
@@ -85,6 +147,7 @@ public class Mtts implements java.io.Serializable
     }
 
     /**
+     * 指定时间
      * @return the P30F0404
      */
     public Long getP30F0404()
@@ -93,6 +156,7 @@ public class Mtts implements java.io.Serializable
     }
 
     /**
+     * 指定时间
      * @param P30F0404 the P30F0404 to set
      */
     public void setP30F0404(Long P30F0404)
@@ -101,6 +165,7 @@ public class Mtts implements java.io.Serializable
     }
 
     /**
+     * 间隔时间
      * @return the P30F0405
      */
     public Integer getP30F0405()
@@ -109,6 +174,7 @@ public class Mtts implements java.io.Serializable
     }
 
     /**
+     * 间隔时间
      * @param P30F0405 the P30F0405 to set
      */
     public void setP30F0405(Integer P30F0405)
@@ -117,6 +183,7 @@ public class Mtts implements java.io.Serializable
     }
 
     /**
+     * 表达式
      * @return the P30F0406
      */
     public String getP30F0406()
@@ -125,6 +192,7 @@ public class Mtts implements java.io.Serializable
     }
 
     /**
+     * 表达式
      * @param P30F0406 the P30F0406 to set
      */
     public void setP30F0406(String P30F0406)

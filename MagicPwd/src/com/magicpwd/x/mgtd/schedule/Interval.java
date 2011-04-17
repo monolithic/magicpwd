@@ -18,6 +18,7 @@ package com.magicpwd.x.mgtd.schedule;
 
 import com.magicpwd.__i.mgtd.IMgtdBean;
 import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._comn.mpwd.Mtts;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd.x.mgtd.MgtdDlg;
 
@@ -35,6 +36,9 @@ public class Interval extends javax.swing.JPanel implements IMgtdBean
 {
 
     private MgtdDlg mgtdDlg;
+    private javax.swing.SpinnerDateModel smFtime;
+    private javax.swing.SpinnerDateModel smTtime;
+    private javax.swing.SpinnerDateModel smStime;
 
     public Interval(MgtdDlg mgtdDlg)
     {
@@ -46,19 +50,22 @@ public class Interval extends javax.swing.JPanel implements IMgtdBean
     {
         btFtime = new BtnLabel();
         spFtime = new javax.swing.JSpinner();
-        spFtime.setModel(new javax.swing.SpinnerDateModel());
+        smFtime = new javax.swing.SpinnerDateModel();
+        spFtime.setModel(smFtime);
         lbFtime = new javax.swing.JLabel();
         lbFtime.setLabelFor(spFtime);
 
         btTtime = new BtnLabel();
         spTtime = new javax.swing.JSpinner();
-        spTtime.setModel(new javax.swing.SpinnerDateModel());
+        smTtime = new javax.swing.SpinnerDateModel();
+        spTtime.setModel(smTtime);
         lbTtime = new javax.swing.JLabel();
         lbTtime.setLabelFor(spTtime);
 
         btStime = new BtnLabel();
         spStime = new javax.swing.JSpinner();
-        spStime.setModel(new javax.swing.SpinnerDateModel());
+        smStime = new javax.swing.SpinnerDateModel();
+        spStime.setModel(smStime);
         lbStime = new javax.swing.JLabel();
         lbStime.setLabelFor(spStime);
 
@@ -139,6 +146,16 @@ public class Interval extends javax.swing.JPanel implements IMgtdBean
         lbFtime.setText("起始时间(T)");
         lbTtime.setText("结束时间(S)");
         lbStime.setText("执行时间(S)");
+
+        lbIntval.setText("间隔时间(I)");
+        cbIntval.addItem("无");
+        cbIntval.addItem("秒");
+        cbIntval.addItem("分");
+        cbIntval.addItem("时");
+        cbIntval.addItem("周");
+        cbIntval.addItem("日");
+        cbIntval.addItem("月");
+        cbIntval.addItem("年");
     }
 
     @Override
@@ -162,6 +179,13 @@ public class Interval extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean saveData(Mgtd mgtd)
     {
+        mgtd.setP30F030C(smFtime.getDate().getTime());
+        mgtd.setP30F030D(smTtime.getDate().getTime());
+
+        Mtts mtts = new Mtts();
+        mtts.setP30F0404(smStime.getDate().getTime());
+        mtts.setP30F0405(0);
+        mtts.setP30F0406("");
         return true;
     }
     private javax.swing.JLabel lbFtime;

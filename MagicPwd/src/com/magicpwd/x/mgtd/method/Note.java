@@ -18,6 +18,8 @@ package com.magicpwd.x.mgtd.method;
 
 import com.magicpwd.__i.mgtd.IMgtdBean;
 import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._util.Char;
+import com.magicpwd._util.Lang;
 import com.magicpwd.x.mgtd.MgtdDlg;
 
 /**
@@ -87,12 +89,21 @@ public class Note extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean showData(Mgtd mgtd)
     {
+        tfNote.setText(mgtd.getP30F030F());
         return true;
     }
 
     @Override
     public boolean saveData(Mgtd mgtd)
     {
+        String text = tfNote.getText();
+        if (!Char.isValidate(text))
+        {
+            Lang.showMesg(mgtdDlg, null, "请输入有效的提示信息！");
+            tfNote.requestFocus();
+            return false;
+        }
+        mgtd.setP30F030F(text);
         return true;
     }
     private javax.swing.JLabel lbNote;
