@@ -17,7 +17,9 @@
 package com.magicpwd.v.mgtd;
 
 import com.magicpwd.__a.AMpwdPtn;
+import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Bean;
+import com.magicpwd._util.Logs;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.m.mgtd.MgtdMdl;
 import com.magicpwd.v.MenuPtn;
@@ -32,6 +34,7 @@ public class MgtdPtn extends AMpwdPtn
 {
 
     private MgtdMdl mgtdMdl;
+    private MenuPtn menuPtn;
 
     public MgtdPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
@@ -44,22 +47,6 @@ public class MgtdPtn extends AMpwdPtn
         tbTaskTool = new javax.swing.JToolBar();
         tbTaskTool.setRollover(true);
         this.getContentPane().add(tbTaskTool, java.awt.BorderLayout.NORTH);
-
-        jButton1 = new javax.swing.JButton();
-        jButton1.setText("Demo");
-        jButton1.setFocusable(false);
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jButton1.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e)
-            {
-                test();
-            }
-        });
-        tbTaskTool.add(jButton1);
 
         plTaskList = new javax.swing.JPanel();
         this.getContentPane().add(plTaskList, java.awt.BorderLayout.CENTER);
@@ -102,6 +89,18 @@ public class MgtdPtn extends AMpwdPtn
         mgtdMdl = new MgtdMdl(userMdl);
         mgtdMdl.init();
         tbTaskList.setModel(mgtdMdl.getGridMdl());
+
+        menuPtn = new MenuPtn(trayPtn, this);
+        try
+        {
+            menuPtn.loadData(new java.io.File(userMdl.getDataDir(), "mgtd.xml"));
+            menuPtn.getToolBar("mgtd", tbTaskTool, rootPane, AppView.mgtd);
+            menuPtn.getStrokes("mgtd", rootPane);
+        }
+        catch (Exception e)
+        {
+            Logs.exception(e);
+        }
         return true;
     }
 
@@ -114,7 +113,7 @@ public class MgtdPtn extends AMpwdPtn
     @Override
     public MenuPtn getMenuPtn()
     {
-        return null;
+        return menuPtn;
     }
 
     @Override
@@ -128,7 +127,7 @@ public class MgtdPtn extends AMpwdPtn
     {
     }
 
-    private void test()
+    public void appendMgtd()
     {
 //        WDateChooser dc = new WDateChooser();
 //        dc.show(b, 0, b.getHeight());
@@ -137,7 +136,18 @@ public class MgtdPtn extends AMpwdPtn
         dlg.initLang();
         dlg.initData();
     }
-    private javax.swing.JButton jButton1;
+
+    public void updateMgtd()
+    {
+    }
+
+    public void deleteMgtd()
+    {
+    }
+
+    public void previewMgtd()
+    {
+    }
     private javax.swing.JTable tbTaskList;
     private javax.swing.JToolBar tbTaskTool;
     private javax.swing.JPanel plTaskList;

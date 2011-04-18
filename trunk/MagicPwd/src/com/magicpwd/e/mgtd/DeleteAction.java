@@ -17,7 +17,6 @@
 package com.magicpwd.e.mgtd;
 
 import com.magicpwd.__a.AMgtdAction;
-import com.magicpwd.v.mgtd.MgtdPtn;
 
 /**
  *
@@ -26,7 +25,7 @@ import com.magicpwd.v.mgtd.MgtdPtn;
 public class DeleteAction extends AMgtdAction
 {
 
-    public DeleteAction(MgtdPtn mgtdPtn)
+    public DeleteAction()
     {
     }
 
@@ -43,5 +42,6 @@ public class DeleteAction extends AMgtdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
+        mgtdPtn.deleteMgtd();
     }
 }

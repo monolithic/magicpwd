@@ -43,31 +43,31 @@ public class Special extends javax.swing.JPanel implements IMgtdBean
     @Override
     public void initView()
     {
-        lbStartup = new javax.swing.JLabel();
+        lbSpecial = new javax.swing.JLabel();
         cbStartup = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        cbBeforeExit = new javax.swing.JCheckBox();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg1.addComponent(jCheckBox2);
+        hpg1.addComponent(cbBeforeExit);
         hpg1.addComponent(cbStartup);
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
 //        hsg1.addContainerGap();
-        hsg1.addComponent(lbStartup);
+        hsg1.addComponent(lbSpecial);
         hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg1.addGroup(hpg1);
 //        hsg1.addContainerGap();
         layout.setHorizontalGroup(hsg1);
 
         javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
-        vpg1.addComponent(lbStartup);
+        vpg1.addComponent(lbSpecial);
         vpg1.addComponent(cbStartup);
         javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
 //        vsg1.addContainerGap();
         vsg1.addGroup(vpg1);
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        vsg1.addComponent(jCheckBox2);
+        vsg1.addComponent(cbBeforeExit);
 //        vsg1.addContainerGap();
         layout.setVerticalGroup(vsg1);
     }
@@ -75,7 +75,9 @@ public class Special extends javax.swing.JPanel implements IMgtdBean
     @Override
     public void initLang()
     {
+        lbSpecial.setText("特殊功能");
         cbStartup.setText("程序启动时");
+        cbBeforeExit.setText("程序退出时");
     }
 
     @Override
@@ -102,6 +104,6 @@ public class Special extends javax.swing.JPanel implements IMgtdBean
         return true;
     }
     private javax.swing.JCheckBox cbStartup;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JLabel lbStartup;
+    private javax.swing.JCheckBox cbBeforeExit;
+    private javax.swing.JLabel lbSpecial;
 }

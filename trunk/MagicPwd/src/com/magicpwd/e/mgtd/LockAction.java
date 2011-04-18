@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2011 Amon
+ *  Copyright (C) 2011 Aven
  * 
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -19,13 +19,19 @@ package com.magicpwd.e.mgtd;
 import com.magicpwd.__a.AMgtdAction;
 
 /**
- *
- * @author Amon
+ * Application: MagicPwd
+ * Author     : Aven
+ * Encoding   : UTF-8
+ * Website    : http://magicpwd.com/
+ * Project    : http://magicpwd.googlecode.com/
+ * Contact    : Amon@magicpwd.com
+ * CopyRight  : Winshine.biz
+ * Description:
  */
-public class NewAction extends AMgtdAction
+public class LockAction extends AMgtdAction
 {
 
-    public NewAction()
+    public LockAction()
     {
     }
 
@@ -42,6 +48,6 @@ public class NewAction extends AMgtdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mgtdPtn.appendMgtd();
+        mgtdPtn.lockFrame();
     }
 }

@@ -18,6 +18,7 @@ package com.magicpwd.x.mgtd.method;
 
 import com.magicpwd.__i.mgtd.IMgtdBean;
 import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd.x.mgtd.MgtdDlg;
@@ -45,7 +46,7 @@ public class Audio extends javax.swing.JPanel implements IMgtdBean
     @Override
     public void initView()
     {
-        btPath = new javax.swing.JButton();
+        btPath = new BtnLabel();
         tfPath = new javax.swing.JTextField();
         lbPath = new javax.swing.JLabel();
         lbPath.setLabelFor(tfPath);
@@ -58,14 +59,14 @@ public class Audio extends javax.swing.JPanel implements IMgtdBean
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg.addComponent(tfPath, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg.addComponent(btPath);
+        hsg.addComponent(btPath,21,21,21);
 //        hsg.addContainerGap();
         layout.setHorizontalGroup(hsg);
 
         javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg.addComponent(lbPath);
         vpg.addComponent(tfPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vpg.addComponent(btPath);
+        vpg.addComponent(btPath,21,21,21);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
 //        vsg.addContainerGap();
         vsg.addGroup(vpg);
@@ -76,7 +77,7 @@ public class Audio extends javax.swing.JPanel implements IMgtdBean
     @Override
     public void initLang()
     {
-        lbPath.setText("音频文件(A)");
+        lbPath.setText("音频文件");
     }
 
     @Override
@@ -124,7 +125,7 @@ public class Audio extends javax.swing.JPanel implements IMgtdBean
         mgtd.setP30F030F(text);
         return true;
     }
-    private javax.swing.JButton btPath;
+    private BtnLabel btPath;
     private javax.swing.JTextField tfPath;
     private javax.swing.JLabel lbPath;
 }

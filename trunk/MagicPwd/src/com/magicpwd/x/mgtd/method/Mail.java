@@ -85,8 +85,8 @@ public class Mail extends javax.swing.JPanel implements IMgtdBean
     @Override
     public void initLang()
     {
-        lbMail.setText("邮件地址(M)");
-        lbBody.setText("邮件内容(M)");
+        lbMail.setText("邮件地址");
+        lbBody.setText("邮件内容");
     }
 
     @Override

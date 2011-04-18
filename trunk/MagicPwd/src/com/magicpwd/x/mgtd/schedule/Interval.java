@@ -143,11 +143,11 @@ public class Interval extends javax.swing.JPanel implements IMgtdBean
     @Override
     public void initLang()
     {
-        lbFtime.setText("起始时间(T)");
-        lbTtime.setText("结束时间(S)");
-        lbStime.setText("执行时间(S)");
+        lbFtime.setText("起始时间");
+        lbTtime.setText("结束时间");
+        lbStime.setText("执行时间");
 
-        lbIntval.setText("间隔时间(I)");
+        lbIntval.setText("间隔时间");
         cbIntval.addItem("无");
         cbIntval.addItem("秒");
         cbIntval.addItem("分");
