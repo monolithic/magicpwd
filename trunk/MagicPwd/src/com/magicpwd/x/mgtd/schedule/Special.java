@@ -17,7 +17,9 @@
 package com.magicpwd.x.mgtd.schedule;
 
 import com.magicpwd.__i.mgtd.IMgtdBean;
+import com.magicpwd._comn.mpwd.Hint;
 import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._util.Lang;
 import com.magicpwd.x.mgtd.MgtdDlg;
 
 /**
@@ -101,6 +103,30 @@ public class Special extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean saveData(Mgtd mgtd)
     {
+        boolean checked = false;
+        if (cbStartup.isSelected())
+        {
+            Hint hint = new Hint();
+            hint.setP30F0403(-10L);
+            hint.setP30F0404(0);
+            hint.setP30F0405("");
+            mgtd.addHint(hint);
+            checked = true;
+        }
+        if (cbBeforeExit.isSelected())
+        {
+            Hint hint = new Hint();
+            hint.setP30F0403(-20L);
+            hint.setP30F0404(0);
+            hint.setP30F0405("");
+            mgtd.addHint(hint);
+            checked = true;
+        }
+        if (!checked)
+        {
+            Lang.showMesg(mgtdDlg, null, "请选择特殊提醒时间！");
+            return false;
+        }
         return true;
     }
     private javax.swing.JCheckBox cbStartup;

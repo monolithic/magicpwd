@@ -39,6 +39,7 @@ public class Interval extends javax.swing.JPanel implements IMgtdBean
     private javax.swing.SpinnerDateModel smFtime;
     private javax.swing.SpinnerDateModel smTtime;
     private javax.swing.SpinnerDateModel smStime;
+    private javax.swing.SpinnerNumberModel smIntval;
 
     public Interval(MgtdDlg mgtdDlg)
     {
@@ -70,7 +71,8 @@ public class Interval extends javax.swing.JPanel implements IMgtdBean
         lbStime.setLabelFor(spStime);
 
         spIntval = new javax.swing.JSpinner();
-        spIntval.setModel(new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1)));
+        smIntval = new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1));
+        spIntval.setModel(smIntval);
         cbIntval = new javax.swing.JComboBox();
         lbIntval = new javax.swing.JLabel();
         lbIntval.setLabelFor(cbIntval);
@@ -182,10 +184,11 @@ public class Interval extends javax.swing.JPanel implements IMgtdBean
         mgtd.setP30F030C(smFtime.getDate().getTime());
         mgtd.setP30F030D(smTtime.getDate().getTime());
 
-        Hint mtts = new Hint();
-        mtts.setP30F0403(smStime.getDate().getTime());
-        mtts.setP30F0404(0);
-        mtts.setP30F0405("");
+        Hint hint = new Hint();
+        hint.setP30F0403(smStime.getDate().getTime());
+        hint.setP30F0404(smIntval.getNumber().intValue());
+        hint.setP30F0405("");
+        mgtd.addHint(hint);
         return true;
     }
     private javax.swing.JLabel lbFtime;

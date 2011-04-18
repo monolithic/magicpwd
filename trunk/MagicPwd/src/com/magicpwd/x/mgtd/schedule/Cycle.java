@@ -21,6 +21,8 @@ import com.magicpwd._comn.I1S2;
 import com.magicpwd._comn.mpwd.Hint;
 import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._comp.BtnLabel;
+import com.magicpwd._enum.GtdUnit;
+import com.magicpwd._util.Lang;
 import com.magicpwd.x.mgtd.MgtdDlg;
 
 /**
@@ -37,6 +39,7 @@ public class Cycle extends javax.swing.JPanel implements IMgtdBean
 {
 
     private MgtdDlg mgtdDlg;
+    private javax.swing.DefaultListModel lmEnum;
     private javax.swing.SpinnerDateModel smFtime;
     private javax.swing.SpinnerDateModel smTtime;
     private javax.swing.SpinnerDateModel smStime;
@@ -71,10 +74,21 @@ public class Cycle extends javax.swing.JPanel implements IMgtdBean
         lbStime.setLabelFor(spStime);
 
         cbIntval = new javax.swing.JComboBox();
+        cbIntval.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                cbIntvalActionPerformed(e);
+            }
+        });
         lbIntval = new javax.swing.JLabel();
         lbIntval.setLabelFor(cbIntval);
 
         lsEnum = new javax.swing.JList();
+        lmEnum = new javax.swing.DefaultListModel();
+        lsEnum.setModel(lmEnum);
         lsEnum.setVisibleRowCount(5);
         javax.swing.JScrollPane spEnum = new javax.swing.JScrollPane(lsEnum);
         lbEnum = new javax.swing.JLabel();
@@ -157,8 +171,8 @@ public class Cycle extends javax.swing.JPanel implements IMgtdBean
         cbIntval.addItem("秒");
         cbIntval.addItem("分");
         cbIntval.addItem("时");
-        cbIntval.addItem("周");
         cbIntval.addItem("日");
+        cbIntval.addItem("周");
         cbIntval.addItem("月");
         cbIntval.addItem("年");
     }
@@ -187,8 +201,16 @@ public class Cycle extends javax.swing.JPanel implements IMgtdBean
         mgtd.setP30F030C(smFtime.getDate().getTime());
         mgtd.setP30F030D(smTtime.getDate().getTime());
 
+        Object[] objs = lsEnum.getSelectedValues();
+        if (objs == null || objs.length < 1)
+        {
+            Lang.showMesg(mgtdDlg, null, "请选择提醒周期信息！");
+            lsEnum.requestFocus();
+            return false;
+        }
+
         Hint hint;
-        for (Object obj : lsEnum.getSelectedValues())
+        for (Object obj : objs)
         {
             if (!(obj instanceof I1S2))
             {
@@ -202,6 +224,74 @@ public class Cycle extends javax.swing.JPanel implements IMgtdBean
             mgtd.addHint(hint);
         }
         return true;
+    }
+
+    private void cbIntvalActionPerformed(java.awt.event.ActionEvent e)
+    {
+        int idx = cbIntval.getSelectedIndex() + 1;
+        if (idx == GtdUnit.second.ordinal())
+        {
+            lmEnum.clear();
+            for (int i = 0; i <= 59; i += 1)
+            {
+                lmEnum.addElement(i);
+            }
+            return;
+        }
+        if (idx == GtdUnit.minute.ordinal())
+        {
+            lmEnum.clear();
+            for (int i = 0; i <= 59; i += 1)
+            {
+                lmEnum.addElement(i);
+            }
+            return;
+        }
+        if (idx == GtdUnit.hour.ordinal())
+        {
+            lmEnum.clear();
+            for (int i = 0; i <= 23; i += 1)
+            {
+                lmEnum.addElement(i);
+            }
+            return;
+        }
+        if (idx == GtdUnit.day.ordinal())
+        {
+            lmEnum.clear();
+            for (int i = 1; i <= 31; i += 1)
+            {
+                lmEnum.addElement(i);
+            }
+            return;
+        }
+        if (idx == GtdUnit.week.ordinal())
+        {
+            lmEnum.clear();
+            for (int i = 0; i <= 6; i += 1)
+            {
+                lmEnum.addElement(i);
+            }
+            return;
+        }
+        if (idx == GtdUnit.month.ordinal())
+        {
+            lmEnum.clear();
+            for (int i = 1; i <= 12; i += 1)
+            {
+                lmEnum.addElement(i);
+            }
+            return;
+        }
+        if (idx == GtdUnit.year.ordinal())
+        {
+            lmEnum.clear();
+            for (int i = 0; i <= 20; i += 1)
+            {
+                lmEnum.addElement(2010 + i);
+            }
+            return;
+        }
     }
     private BtnLabel btFtime;
     private BtnLabel btStime;
