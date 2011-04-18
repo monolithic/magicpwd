@@ -25,7 +25,7 @@ import com.magicpwd._comn.S1S3;
 import com.magicpwd._comn.item.EditItem;
 import com.magicpwd._comn.mpwd.Mexp;
 import com.magicpwd._comn.mpwd.Mgtd;
-import com.magicpwd._comn.mpwd.Mtts;
+import com.magicpwd._comn.mpwd.Hint;
 import com.magicpwd._comn.prop.Char;
 import com.magicpwd._comn.prop.Tplt;
 import com.magicpwd._cons.ConsCfg;
@@ -430,7 +430,7 @@ public class DBA4000
         }
     }
 
-    public static boolean findHintList(UserMdl cfg, List<Mtts> list)
+    public static boolean findHintList(UserMdl cfg, List<Hint> list)
     {
         DBAccess dba = new DBAccess();
 
@@ -444,27 +444,27 @@ public class DBA4000
             dba.addTable(DBC4000.P30F0400);
             dba.addColumn(DBC4000.P30F0311);
             dba.addColumn(DBC4000.P30F0312);
+            dba.addColumn(DBC4000.P30F0402);
             dba.addColumn(DBC4000.P30F0403);
             dba.addColumn(DBC4000.P30F0404);
             dba.addColumn(DBC4000.P30F0405);
-            dba.addColumn(DBC4000.P30F0406);
-            dba.addWhere(DBC4000.P30F0308, DBC4000.P30F0403, true);
+            dba.addWhere(DBC4000.P30F0308, DBC4000.P30F0402, true);
             dba.addWhere(com.magicpwd._util.Char.format("{0} IS NULL OR {0} < {1}", DBC4000.P30F030C, now));
             dba.addWhere(com.magicpwd._util.Char.format("{0} IS NULL OR {0} > {1}", DBC4000.P30F030D, now));
             dba.addWhere(DBC4000.P30F0304, ">", ConsDat.MGTD_FIXTIME);
             dba.addWhere(DBC4000.P30F0302, ConsDat.MGTD_STATUS_READY);
 
-            Mtts hint;
+            Hint hint;
             ResultSet rest = dba.executeSelect();
             while (rest.next())
             {
-                hint = new Mtts();
+                hint = new Hint();
                 hint.setP30F0311(rest.getInt(DBC4000.P30F0311));
                 hint.setP30F0312(rest.getInt(DBC4000.P30F0312));
-                hint.setP30F0403(rest.getString(DBC4000.P30F0403));
-                hint.setP30F0404(rest.getLong(DBC4000.P30F0404));
-                hint.setP30F0405(rest.getInt(DBC4000.P30F0405));
-                hint.setP30F0406(rest.getString(DBC4000.P30F0406));
+                hint.setP30F0402(rest.getString(DBC4000.P30F0402));
+                hint.setP30F0403(rest.getLong(DBC4000.P30F0403));
+                hint.setP30F0404(rest.getInt(DBC4000.P30F0404));
+                hint.setP30F0405(rest.getString(DBC4000.P30F0405));
                 list.add(hint);
             }
             rest.close();
@@ -590,6 +590,11 @@ public class DBA4000
             {
                 dba.addWhere(DBC4000.P30F0308, mgtd.getP30F0308());
                 dba.addUpdateBatch();
+
+                dba.reInit();
+                dba.addTable(DBC4000.P30F0400);
+                dba.addWhere(DBC4000.P30F0402, mgtd.getP30F0308());
+                dba.addDeleteBatch();
             }
             else
             {
@@ -600,25 +605,15 @@ public class DBA4000
             dba.reInit();
 
             int row = 1;
-            for (Mtts mtts : mgtd.getMttsList())
+            for (Hint mtts : mgtd.getMttsList())
             {
                 dba.addTable(DBC4000.P30F0400);
                 dba.addParam(DBC4000.P30F0401, row++);
-                dba.addParam(DBC4000.P30F0403, mgtd.getP30F0308());
+                dba.addParam(DBC4000.P30F0402, mgtd.getP30F0308());
+                dba.addParam(DBC4000.P30F0403, mtts.getP30F0403());
                 dba.addParam(DBC4000.P30F0404, mtts.getP30F0404());
                 dba.addParam(DBC4000.P30F0405, mtts.getP30F0405());
-                dba.addParam(DBC4000.P30F0406, mtts.getP30F0406());
-                if (com.magicpwd._util.Char.isValidateHash(mtts.getP30F0402()))
-                {
-                    dba.addWhere(DBC4000.P30F0402, mtts.getP30F0402());
-                    dba.addUpdateBatch();
-                }
-                else
-                {
-                    mtts.setP30F0402(Hash.hash(false));
-                    dba.addParam(DBC4000.P30F0402, mtts.getP30F0402());
-                    dba.addInsertBatch();
-                }
+                dba.addInsertBatch();
                 dba.reInit();
             }
             dba.executeBatch();

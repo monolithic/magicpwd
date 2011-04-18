@@ -63,7 +63,7 @@ public class Mgtd implements Serializable
     private Integer P30F0312;
     /**相关说明*/
     private String P30F0313;
-    private java.util.List<Mtts> mttsList;
+    private java.util.List<Hint> mttsList;
 
     /**
      * 任务类型
@@ -410,7 +410,7 @@ public class Mgtd implements Serializable
     /**
      * @return the mttsList
      */
-    public java.util.List<Mtts> getMttsList()
+    public java.util.List<Hint> getMttsList()
     {
         return mttsList;
     }
@@ -418,12 +418,12 @@ public class Mgtd implements Serializable
     /**
      * @param mttsList the mttsList to set
      */
-    public void setMttsList(java.util.List<Mtts> mttsList)
+    public void setMttsList(java.util.List<Hint> mttsList)
     {
         this.mttsList = mttsList;
     }
 
-    public Mtts getMtts(int index)
+    public Hint getMtts(int index)
     {
         if (mttsList != null && index > -1 && index < mttsList.size())
         {
@@ -432,11 +432,11 @@ public class Mgtd implements Serializable
         return null;
     }
 
-    public void addMtts(Mtts mtts)
+    public void addMtts(Hint mtts)
     {
         if (mttsList == null)
         {
-            mttsList = new java.util.ArrayList<Mtts>();
+            mttsList = new java.util.ArrayList<Hint>();
         }
         mttsList.add(mtts);
     }

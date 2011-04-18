@@ -43,7 +43,7 @@ import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.item.LogoItem;
 import com.magicpwd._comn.item.MetaItem;
-import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._comn.mpwd.Hint;
 import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
@@ -210,11 +210,11 @@ public class MexpPtn extends AMpwdPtn
 
         // 信息栏
         mainInfo.initData();
-        mainInfo.setBackCall(new IBackCall<String, java.util.List<Mgtd>>()
+        mainInfo.setBackCall(new IBackCall<String, java.util.List<Hint>>()
         {
 
             @Override
-            public boolean callBack(String options, java.util.List<Mgtd> object)
+            public boolean callBack(String options, java.util.List<Hint> object)
             {
                 return hintCallBack();
             }

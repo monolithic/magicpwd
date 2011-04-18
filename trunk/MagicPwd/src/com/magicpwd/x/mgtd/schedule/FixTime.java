@@ -18,7 +18,7 @@ package com.magicpwd.x.mgtd.schedule;
 
 import com.magicpwd.__i.mgtd.IMgtdBean;
 import com.magicpwd._comn.mpwd.Mgtd;
-import com.magicpwd._comn.mpwd.Mtts;
+import com.magicpwd._comn.mpwd.Hint;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd.x.mgtd.MgtdDlg;
 
@@ -96,10 +96,10 @@ public class FixTime extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean showData(Mgtd mgtd)
     {
-        Mtts mtts = mgtd.getMtts(0);
+        Hint mtts = mgtd.getMtts(0);
         if (mtts != null)
         {
-            spTime.setValue(new java.util.Date(mtts.getP30F0404()));
+            spTime.setValue(new java.util.Date(mtts.getP30F0403()));
             return true;
         }
         return false;
@@ -108,11 +108,11 @@ public class FixTime extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean saveData(Mgtd mgtd)
     {
-        Mtts mtts = new Mtts();
-        mtts.setP30F0403(mgtd.getP30F0308());
-        mtts.setP30F0404(smTime.getDate().getTime());
-        mtts.setP30F0405(0);
-        mtts.setP30F0406("");
+        Hint mtts = new Hint();
+        mtts.setP30F0402(mgtd.getP30F0308());
+        mtts.setP30F0403(smTime.getDate().getTime());
+        mtts.setP30F0404(0);
+        mtts.setP30F0405("");
         mgtd.addMtts(mtts);
         return true;
     }
