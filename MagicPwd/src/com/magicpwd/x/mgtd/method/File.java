@@ -18,6 +18,7 @@ package com.magicpwd.x.mgtd.method;
 
 import com.magicpwd.__i.mgtd.IMgtdBean;
 import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd.x.mgtd.MgtdDlg;
@@ -45,9 +46,9 @@ public class File extends javax.swing.JPanel implements IMgtdBean
     @Override
     public void initView()
     {
-        lbFile = new javax.swing.JLabel();
+        btFile = new BtnLabel();
         tfFile = new javax.swing.JTextField();
-        btFile = new javax.swing.JButton();
+        lbFile = new javax.swing.JLabel();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -57,14 +58,14 @@ public class File extends javax.swing.JPanel implements IMgtdBean
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg.addComponent(tfFile, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg.addComponent(btFile);
+        hsg.addComponent(btFile, 21, 21, 21);
 //        hsg.addContainerGap();
         layout.setHorizontalGroup(hsg);
 
         javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg.addComponent(lbFile);
         vpg.addComponent(tfFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vpg.addComponent(btFile);
+        vpg.addComponent(btFile, 21, 21, 21);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
 //        vsg.addContainerGap();
         vsg.addGroup(vpg);
@@ -75,7 +76,7 @@ public class File extends javax.swing.JPanel implements IMgtdBean
     @Override
     public void initLang()
     {
-        lbFile.setText("文件路径(F)");
+        lbFile.setText("文件路径");
     }
 
     @Override
@@ -123,7 +124,7 @@ public class File extends javax.swing.JPanel implements IMgtdBean
         mgtd.setP30F030F(text);
         return true;
     }
-    private javax.swing.JButton btFile;
+    private BtnLabel btFile;
     private javax.swing.JLabel lbFile;
     private javax.swing.JTextField tfFile;
 }

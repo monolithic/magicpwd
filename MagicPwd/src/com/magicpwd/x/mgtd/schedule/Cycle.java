@@ -17,6 +17,8 @@
 package com.magicpwd.x.mgtd.schedule;
 
 import com.magicpwd.__i.mgtd.IMgtdBean;
+import com.magicpwd._comn.I1S2;
+import com.magicpwd._comn.mpwd.Hint;
 import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd.x.mgtd.MgtdDlg;
@@ -35,6 +37,9 @@ public class Cycle extends javax.swing.JPanel implements IMgtdBean
 {
 
     private MgtdDlg mgtdDlg;
+    private javax.swing.SpinnerDateModel smFtime;
+    private javax.swing.SpinnerDateModel smTtime;
+    private javax.swing.SpinnerDateModel smStime;
 
     public Cycle(MgtdDlg mgtdDlg)
     {
@@ -46,19 +51,22 @@ public class Cycle extends javax.swing.JPanel implements IMgtdBean
     {
         btFtime = new BtnLabel();
         spFtime = new javax.swing.JSpinner();
-        spFtime.setModel(new javax.swing.SpinnerDateModel());
+        smFtime = new javax.swing.SpinnerDateModel();
+        spFtime.setModel(smFtime);
         lbFtime = new javax.swing.JLabel();
         lbFtime.setLabelFor(spFtime);
 
         btTtime = new BtnLabel();
         spTtime = new javax.swing.JSpinner();
-        spTtime.setModel(new javax.swing.SpinnerDateModel());
+        smTtime = new javax.swing.SpinnerDateModel();
+        spTtime.setModel(smTtime);
         lbTtime = new javax.swing.JLabel();
         lbTtime.setLabelFor(spTtime);
 
         btStime = new BtnLabel();
         spStime = new javax.swing.JSpinner();
-        spStime.setModel(new javax.swing.SpinnerDateModel());
+        smStime = new javax.swing.SpinnerDateModel();
+        spStime.setModel(smStime);
         lbStime = new javax.swing.JLabel();
         lbStime.setLabelFor(spStime);
 
@@ -142,9 +150,17 @@ public class Cycle extends javax.swing.JPanel implements IMgtdBean
     @Override
     public void initLang()
     {
-        lbFtime.setText("起始时间(T)");
-        lbTtime.setText("结束时间(S)");
-        lbStime.setText("执行时间(S)");
+        lbFtime.setText("起始时间");
+        lbTtime.setText("结束时间");
+        lbStime.setText("执行时间");
+        lbIntval.setText("间隔周期");
+        cbIntval.addItem("秒");
+        cbIntval.addItem("分");
+        cbIntval.addItem("时");
+        cbIntval.addItem("周");
+        cbIntval.addItem("日");
+        cbIntval.addItem("月");
+        cbIntval.addItem("年");
     }
 
     @Override
@@ -168,13 +184,29 @@ public class Cycle extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean saveData(Mgtd mgtd)
     {
+        mgtd.setP30F030C(smFtime.getDate().getTime());
+        mgtd.setP30F030D(smTtime.getDate().getTime());
+
+        Hint hint;
+        for (Object obj : lsEnum.getSelectedValues())
+        {
+            if (!(obj instanceof I1S2))
+            {
+                continue;
+            }
+            I1S2 item = (I1S2) obj;
+            hint = new Hint();
+            hint.setP30F0403(smStime.getDate().getTime());
+            hint.setP30F0404(item.getI());
+            hint.setP30F0405("");
+            mgtd.addHint(hint);
+        }
         return true;
     }
     private BtnLabel btFtime;
     private BtnLabel btStime;
     private BtnLabel btTtime;
     private javax.swing.JComboBox cbIntval;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbEnum;
     private javax.swing.JLabel lbFtime;
     private javax.swing.JLabel lbIntval;

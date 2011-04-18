@@ -96,7 +96,7 @@ public class FixTime extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean showData(Mgtd mgtd)
     {
-        Hint mtts = mgtd.getMtts(0);
+        Hint mtts = mgtd.getHint(0);
         if (mtts != null)
         {
             spTime.setValue(new java.util.Date(mtts.getP30F0403()));
@@ -108,12 +108,11 @@ public class FixTime extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean saveData(Mgtd mgtd)
     {
-        Hint mtts = new Hint();
-        mtts.setP30F0402(mgtd.getP30F0308());
-        mtts.setP30F0403(smTime.getDate().getTime());
-        mtts.setP30F0404(0);
-        mtts.setP30F0405("");
-        mgtd.addMtts(mtts);
+        Hint hint = new Hint();
+        hint.setP30F0403(smTime.getDate().getTime());
+        hint.setP30F0404(0);
+        hint.setP30F0405("");
+        mgtd.addHint(hint);
         return true;
     }
     private BtnLabel btTime;

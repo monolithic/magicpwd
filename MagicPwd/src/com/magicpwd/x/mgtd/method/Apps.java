@@ -18,6 +18,7 @@ package com.magicpwd.x.mgtd.method;
 
 import com.magicpwd.__i.mgtd.IMgtdBean;
 import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd.x.mgtd.MgtdDlg;
@@ -47,7 +48,7 @@ public class Apps extends javax.swing.JPanel implements IMgtdBean
     {
         lbPath = new javax.swing.JLabel();
         tfPath = new javax.swing.JTextField();
-        btPath = new javax.swing.JButton();
+        btPath = new BtnLabel();
         lbArgs = new javax.swing.JLabel();
         tfArgs = new javax.swing.JTextField();
 
@@ -56,7 +57,7 @@ public class Apps extends javax.swing.JPanel implements IMgtdBean
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
         hsg1.addComponent(tfPath, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE);
         hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg1.addComponent(btPath);
+        hsg1.addComponent(btPath, 21, 21, 21);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg1.addComponent(lbArgs, javax.swing.GroupLayout.Alignment.TRAILING);
         hpg1.addComponent(lbPath, javax.swing.GroupLayout.Alignment.TRAILING);
@@ -74,7 +75,7 @@ public class Apps extends javax.swing.JPanel implements IMgtdBean
         javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg1.addComponent(lbPath);
         vpg1.addComponent(tfPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vpg1.addComponent(btPath);
+        vpg1.addComponent(btPath, 21, 21, 21);
         javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg2.addComponent(lbArgs);
         vpg2.addComponent(tfArgs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
@@ -90,8 +91,8 @@ public class Apps extends javax.swing.JPanel implements IMgtdBean
     @Override
     public void initLang()
     {
-        lbPath.setText("程序路径(P)");
-        lbArgs.setText("执行参数(A)");
+        lbPath.setText("程序路径");
+        lbArgs.setText("执行参数");
     }
 
     @Override
@@ -142,7 +143,7 @@ public class Apps extends javax.swing.JPanel implements IMgtdBean
         mgtd.setP30F0310(tfArgs.getText());
         return true;
     }
-    private javax.swing.JButton btPath;
+    private BtnLabel btPath;
     private javax.swing.JLabel lbArgs;
     private javax.swing.JLabel lbPath;
     private javax.swing.JTextField tfArgs;

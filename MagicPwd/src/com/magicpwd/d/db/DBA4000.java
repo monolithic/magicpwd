@@ -605,7 +605,7 @@ public class DBA4000
             dba.reInit();
 
             int row = 1;
-            for (Hint mtts : mgtd.getMttsList())
+            for (Hint mtts : mgtd.getHintList())
             {
                 dba.addTable(DBC4000.P30F0400);
                 dba.addParam(DBC4000.P30F0401, row++);

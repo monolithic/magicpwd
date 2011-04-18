@@ -18,7 +18,6 @@
 package com.magicpwd.e.mgtd;
 
 import com.magicpwd.__a.AMgtdAction;
-import com.magicpwd.v.mgtd.MgtdPtn;
 
 /**
  *
@@ -27,7 +26,7 @@ import com.magicpwd.v.mgtd.MgtdPtn;
 public class NewSubAction extends AMgtdAction
 {
 
-    public NewSubAction(MgtdPtn mgtdPtn)
+    public NewSubAction()
     {
     }
 

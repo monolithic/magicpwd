@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2011 Amon
+ *  Copyright (C) 2011 Aven
  * 
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -17,15 +17,23 @@
 package com.magicpwd.e.mgtd;
 
 import com.magicpwd.__a.AMgtdAction;
+import com.magicpwd._cons.LangRes;
+import com.magicpwd._util.Lang;
 
 /**
- *
- * @author Amon
+ * Application: MagicPwd
+ * Author     : Aven
+ * Encoding   : UTF-8
+ * Website    : http://magicpwd.com/
+ * Project    : http://magicpwd.googlecode.com/
+ * Contact    : Amon@magicpwd.com
+ * CopyRight  : Winshine.biz
+ * Description:
  */
-public class NewAction extends AMgtdAction
+public class ExitAction extends AMgtdAction
 {
 
-    public NewAction()
+    public ExitAction()
     {
     }
 
@@ -42,6 +50,12 @@ public class NewAction extends AMgtdAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mgtdPtn.appendMgtd();
+        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mgtdPtn, LangRes.P30F1A04, "确认要退出吗？"))
+        {
+            return;
+        }
+
+        mgtdPtn.setVisible(false);
+        trayPtn.endExit(0);
     }
 }
