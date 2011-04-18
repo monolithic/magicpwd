@@ -26,23 +26,20 @@ package com.magicpwd._enum;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public enum GtdUnit
+public enum GtdNote
 {
 
-    /**无*/
-    none,
-    /**秒*/
-    second,
-    /**分*/
-    minute,
-    /**时*/
-    hour,
-    /**日*/
-    day,
-    /**周*/
-    week,
-    /**月*/
-    month,
-    /**年*/
-    year
+    NONE,
+    /**消息提示*/
+    MESG,
+    /**发送邮件*/
+    MAIL,
+    /**执行程序*/
+    APPS,
+    /**打开文件*/
+    FILE,
+    /**浏览网页*/
+    HTTP,
+    /**播放声音*/
+    AUDIO
 }

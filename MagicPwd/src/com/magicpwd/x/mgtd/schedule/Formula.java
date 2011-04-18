@@ -17,8 +17,12 @@
 package com.magicpwd.x.mgtd.schedule;
 
 import com.magicpwd.__i.mgtd.IMgtdBean;
+import com.magicpwd._comn.mpwd.Hint;
 import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._util.Char;
+import com.magicpwd._util.Lang;
 import com.magicpwd.x.mgtd.MgtdDlg;
+import org.javia.arity.Symbols;
 
 /**
  * Application: MagicPwd
@@ -100,6 +104,37 @@ public class Formula extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean saveData(Mgtd mgtd)
     {
+        String text = tfFormula.getText();
+        if (!Char.isValidate(text))
+        {
+            Lang.showMesg(mgtdDlg, null, "请输入计算公式！");
+            tfFormula.requestFocus();
+            return false;
+        }
+        text = text.replaceAll("\\s+", "");
+        String temp = text.replaceAll("nian|n|year|yue|y|month|ri|r|day|zhou|z|week|shi|s|hour|fen|f|minute|miao|m|second", "1");
+        if (!java.util.regex.Pattern.matches("^[-+*/%0-9]+$", temp))
+        {
+            Lang.showMesg(mgtdDlg, null, "您输入的公式含有非法字符！");
+            tfFormula.requestFocus();
+            return false;
+        }
+        try
+        {
+            new Symbols().eval(temp);
+        }
+        catch (Exception exp)
+        {
+            Lang.showMesg(mgtdDlg, null, exp.toString());
+            tfFormula.requestFocus();
+            return false;
+        }
+
+        Hint hint = new Hint();
+        hint.setP30F0403(System.currentTimeMillis());
+        hint.setP30F0404(0);
+        hint.setP30F0405(text);
+        mgtd.addHint(hint);
         return true;
     }
     private javax.swing.JLabel lbFormula;
