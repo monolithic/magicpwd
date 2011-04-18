@@ -22,7 +22,7 @@ import com.magicpwd._bean.mail.Connect;
 import com.magicpwd._comn.I1S2;
 import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd._comn.S1S1;
-import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._comn.mpwd.Hint;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
@@ -128,11 +128,11 @@ public class MwizPtn extends AMpwdPtn
     public boolean initData()
     {
         hb_HintBar.initData();
-        hb_HintBar.setBackCall(new IBackCall<String, java.util.List<Mgtd>>()
+        hb_HintBar.setBackCall(new IBackCall<String, java.util.List<Hint>>()
         {
 
             @Override
-            public boolean callBack(String options, java.util.List<Mgtd> object)
+            public boolean callBack(String options, java.util.List<Hint> object)
             {
                 hintCallBack();
                 return true;

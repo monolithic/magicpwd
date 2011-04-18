@@ -18,7 +18,7 @@ package com.magicpwd.x.mgtd.schedule;
 
 import com.magicpwd.__i.mgtd.IMgtdBean;
 import com.magicpwd._comn.mpwd.Mgtd;
-import com.magicpwd._comn.mpwd.Mtts;
+import com.magicpwd._comn.mpwd.Hint;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd.x.mgtd.MgtdDlg;
 
@@ -182,10 +182,10 @@ public class Interval extends javax.swing.JPanel implements IMgtdBean
         mgtd.setP30F030C(smFtime.getDate().getTime());
         mgtd.setP30F030D(smTtime.getDate().getTime());
 
-        Mtts mtts = new Mtts();
-        mtts.setP30F0404(smStime.getDate().getTime());
-        mtts.setP30F0405(0);
-        mtts.setP30F0406("");
+        Hint mtts = new Hint();
+        mtts.setP30F0403(smStime.getDate().getTime());
+        mtts.setP30F0404(0);
+        mtts.setP30F0405("");
         return true;
     }
     private javax.swing.JLabel lbFtime;
