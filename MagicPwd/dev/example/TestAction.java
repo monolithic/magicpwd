@@ -21,7 +21,7 @@ public class TestAction extends AAction
         MgtdDlg dlg = new MgtdDlg(null, false);
         dlg.initView();
         dlg.initLang();
-        dlg.initData();
+        dlg.initData(null);
     }
 
     @Override
