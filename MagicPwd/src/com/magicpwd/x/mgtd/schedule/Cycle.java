@@ -192,6 +192,17 @@ public class Cycle extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean showData(Mgtd mgtd)
     {
+        smFtime.setValue(new java.util.Date(mgtd.getP30F030C()));
+        smTtime.setValue(new java.util.Date(mgtd.getP30F030D()));
+        smStime.setValue(new java.util.Date(mgtd.getP30F030E()));
+
+        I1S2[] item = new I1S2[mgtd.getHintList().size()];
+        int i = 0;
+        for (Hint hint : mgtd.getHintList())
+        {
+            item[i++] = new I1S2(hint.getP30F0304(), "", "");
+        }
+        lsEnum.setSelectedValue(item, false);
         return true;
     }
 
@@ -200,6 +211,7 @@ public class Cycle extends javax.swing.JPanel implements IMgtdBean
     {
         mgtd.setP30F030C(smFtime.getDate().getTime());
         mgtd.setP30F030D(smTtime.getDate().getTime());
+        mgtd.setP30F030E(smStime.getDate().getTime());
 
         Object[] objs = lsEnum.getSelectedValues();
         if (objs == null || objs.length < 1)
@@ -210,6 +222,7 @@ public class Cycle extends javax.swing.JPanel implements IMgtdBean
         }
 
         Hint hint;
+        java.util.List<Hint> list = new java.util.ArrayList<Hint>();
         for (Object obj : objs)
         {
             if (!(obj instanceof I1S2))
@@ -218,11 +231,12 @@ public class Cycle extends javax.swing.JPanel implements IMgtdBean
             }
             I1S2 item = (I1S2) obj;
             hint = new Hint();
-            hint.setP30F0403(smStime.getDate().getTime());
+            hint.setP30F0403(0L);
             hint.setP30F0404(item.getI());
             hint.setP30F0405("");
-            mgtd.addHint(hint);
+            list.add(hint);
         }
+        mgtd.setHintList(list);
         return true;
     }
 

@@ -98,7 +98,13 @@ public class Formula extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean showData(Mgtd mgtd)
     {
-        return true;
+        Hint hint = mgtd.getHint(0);
+        if (hint != null)
+        {
+            tfFormula.setText(hint.getP30F0405());
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -130,11 +136,15 @@ public class Formula extends javax.swing.JPanel implements IMgtdBean
             return false;
         }
 
+        java.util.List<Hint> list = new java.util.ArrayList<Hint>();
+
         Hint hint = new Hint();
         hint.setP30F0403(System.currentTimeMillis());
         hint.setP30F0404(0);
         hint.setP30F0405(text);
-        mgtd.addHint(hint);
+        list.add(hint);
+
+        mgtd.setHintList(list);
         return true;
     }
     private javax.swing.JLabel lbFormula;

@@ -26,7 +26,6 @@ import com.magicpwd.m.UserMdl;
 public class GridMdl extends javax.swing.table.DefaultTableModel
 {
 
-//    private KeysMdl keysMdl;
     private java.util.List<Mgtd> lsMgtdList;
 
     GridMdl(UserMdl userMdl)
@@ -35,7 +34,6 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
 
     void init()
     {
-//        keysMdl = new KeysMdl(userMdl);
         lsMgtdList = new java.util.ArrayList<Mgtd>();
         DBA4000.listMgtdData(lsMgtdList);
     }
@@ -100,7 +98,7 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
                 case 2:
                     return temp.getP30F0307();
                 case 3:
-                    return temp.getP30F0703();
+                    return temp.getP30F0303();
                 case 4:
                     return temp.getP30F0304();
             }
@@ -113,15 +111,27 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
     {
     }
 
-    public Mgtd getKeysAt(int index)
+    public Mgtd getMgtdAt(int index)
     {
         return lsMgtdList.get(index);
     }
 
     public void wDelete(int index)
     {
-//        DBA4000.deletePwdsData(lsMgtdList.get(index).getP30F0104());
-        lsMgtdList.remove(index);
-        fireTableDataChanged();
+        if (DBA4000.deleteMgtdData(lsMgtdList.get(index)))
+        {
+            lsMgtdList.remove(index);
+            fireTableDataChanged();
+        }
+    }
+
+    public void wAppend(Mgtd mgtd)
+    {
+        if (DBA4000.saveMgtdData(mgtd))
+        {
+            lsMgtdList.clear();
+            DBA4000.listMgtdData(lsMgtdList);
+            fireTableDataChanged();
+        }
     }
 }

@@ -47,6 +47,15 @@ public class File extends javax.swing.JPanel implements IMgtdBean
     public void initView()
     {
         btFile = new BtnLabel();
+        btFile.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                btFileActionPerformed(e);
+            }
+        });
         tfFile = new javax.swing.JTextField();
         lbFile = new javax.swing.JLabel();
 
@@ -123,6 +132,29 @@ public class File extends javax.swing.JPanel implements IMgtdBean
         }
         mgtd.setP30F030F(text);
         return true;
+    }
+
+    private void btFileActionPerformed(java.awt.event.ActionEvent e)
+    {
+        javax.swing.JFileChooser fc = new javax.swing.JFileChooser();
+        fc.setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);
+        fc.setMultiSelectionEnabled(false);
+        java.io.File file = null;
+        if (Char.isValidate(tfFile.getText()))
+        {
+            file = new java.io.File(tfFile.getText().trim());
+            fc.setSelectedFile(file);
+        }
+        int status = fc.showOpenDialog(mgtdDlg);
+        if (status != javax.swing.JFileChooser.APPROVE_OPTION)
+        {
+            return;
+        }
+        file = fc.getSelectedFile();
+        if (file != null)
+        {
+            tfFile.setText(file.getAbsolutePath());
+        }
     }
     private BtnLabel btFile;
     private javax.swing.JLabel lbFile;

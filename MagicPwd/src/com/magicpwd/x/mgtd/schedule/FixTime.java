@@ -20,6 +20,7 @@ import com.magicpwd.__i.mgtd.IMgtdBean;
 import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._comn.mpwd.Hint;
 import com.magicpwd._comp.BtnLabel;
+import com.magicpwd._comp.date.WDateChooser;
 import com.magicpwd.x.mgtd.MgtdDlg;
 
 /**
@@ -47,6 +48,15 @@ public class FixTime extends javax.swing.JPanel implements IMgtdBean
     public void initView()
     {
         btTime = new BtnLabel();
+        btTime.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                btTimeActionPerformed(e);
+            }
+        });
         spTime = new javax.swing.JSpinner();
         smTime = new javax.swing.SpinnerDateModel();
         spTime.setModel(smTime);
@@ -96,10 +106,10 @@ public class FixTime extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean showData(Mgtd mgtd)
     {
-        Hint mtts = mgtd.getHint(0);
-        if (mtts != null)
+        Hint hint = mgtd.getHint(0);
+        if (hint != null)
         {
-            spTime.setValue(new java.util.Date(mtts.getP30F0403()));
+            spTime.setValue(new java.util.Date(hint.getP30F0403()));
             return true;
         }
         return false;
@@ -108,12 +118,22 @@ public class FixTime extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean saveData(Mgtd mgtd)
     {
+        java.util.List<Hint> list = new java.util.ArrayList<Hint>();
+
         Hint hint = new Hint();
         hint.setP30F0403(smTime.getDate().getTime());
         hint.setP30F0404(0);
         hint.setP30F0405("");
-        mgtd.addHint(hint);
+        list.add(hint);
+
+        mgtd.setHintList(list);
         return true;
+    }
+
+    private void btTimeActionPerformed(java.awt.event.ActionEvent e)
+    {
+        WDateChooser dc = new WDateChooser();
+        dc.show(btTime, 0, btTime.getHeight());
     }
     private BtnLabel btTime;
     private javax.swing.JLabel lbTime;

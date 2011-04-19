@@ -46,11 +46,20 @@ public class Apps extends javax.swing.JPanel implements IMgtdBean
     @Override
     public void initView()
     {
-        lbPath = new javax.swing.JLabel();
-        tfPath = new javax.swing.JTextField();
         btPath = new BtnLabel();
-        lbArgs = new javax.swing.JLabel();
+        btPath.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                btPathActionPerformed(e);
+            }
+        });
+        tfPath = new javax.swing.JTextField();
+        lbPath = new javax.swing.JLabel();
         tfArgs = new javax.swing.JTextField();
+        lbArgs = new javax.swing.JLabel();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -142,6 +151,29 @@ public class Apps extends javax.swing.JPanel implements IMgtdBean
 
         mgtd.setP30F0310(tfArgs.getText());
         return true;
+    }
+
+    private void btPathActionPerformed(java.awt.event.ActionEvent e)
+    {
+        javax.swing.JFileChooser fc = new javax.swing.JFileChooser();
+        fc.setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);
+        fc.setMultiSelectionEnabled(false);
+        java.io.File file = null;
+        if (Char.isValidate(tfPath.getText()))
+        {
+            file = new java.io.File(tfPath.getText().trim());
+            fc.setSelectedFile(file);
+        }
+        int status = fc.showOpenDialog(mgtdDlg);
+        if (status != javax.swing.JFileChooser.APPROVE_OPTION)
+        {
+            return;
+        }
+        file = fc.getSelectedFile();
+        if (file != null)
+        {
+            tfPath.setText(file.getAbsolutePath());
+        }
     }
     private BtnLabel btPath;
     private javax.swing.JLabel lbArgs;

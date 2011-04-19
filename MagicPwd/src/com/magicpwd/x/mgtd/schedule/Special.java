@@ -97,36 +97,50 @@ public class Special extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean showData(Mgtd mgtd)
     {
+        for (Hint hint : mgtd.getHintList())
+        {
+            if (-2L == hint.getP30F0403())
+            {
+                cbStartup.setSelected(true);
+                continue;
+            }
+            if (-3L == hint.getP30F0403())
+            {
+                cbBeforeExit.setSelected(true);
+                continue;
+            }
+        }
         return true;
     }
 
     @Override
     public boolean saveData(Mgtd mgtd)
     {
-        boolean checked = false;
+        java.util.List<Hint> list = new java.util.ArrayList<Hint>();
+
         if (cbStartup.isSelected())
         {
             Hint hint = new Hint();
-            hint.setP30F0403(-10L);
+            hint.setP30F0403(-2L);
             hint.setP30F0404(0);
             hint.setP30F0405("");
-            mgtd.addHint(hint);
-            checked = true;
+            list.add(hint);
         }
         if (cbBeforeExit.isSelected())
         {
             Hint hint = new Hint();
-            hint.setP30F0403(-20L);
+            hint.setP30F0403(-3L);
             hint.setP30F0404(0);
             hint.setP30F0405("");
-            mgtd.addHint(hint);
-            checked = true;
+            list.add(hint);
         }
-        if (!checked)
+        if (list.size() < 1)
         {
             Lang.showMesg(mgtdDlg, null, "请选择特殊提醒时间！");
             return false;
         }
+
+        mgtd.setHintList(list);
         return true;
     }
     private javax.swing.JCheckBox cbStartup;
