@@ -147,7 +147,7 @@ public class MgtdDlg extends ADialog
 
         lbRemark = new javax.swing.JLabel();
         taRemark = new javax.swing.JTextArea();
-        taRemark.setRows(3);
+        taRemark.setRows(4);
         javax.swing.JScrollPane spRemark = new javax.swing.JScrollPane(taRemark);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(plPanelA);

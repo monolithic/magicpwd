@@ -89,7 +89,7 @@ public class Cycle extends javax.swing.JPanel implements IMgtdBean
         lsEnum = new javax.swing.JList();
         lmEnum = new javax.swing.DefaultListModel();
         lsEnum.setModel(lmEnum);
-        lsEnum.setVisibleRowCount(5);
+        lsEnum.setVisibleRowCount(4);
         javax.swing.JScrollPane spEnum = new javax.swing.JScrollPane(lsEnum);
         lbEnum = new javax.swing.JLabel();
         lbEnum.setLabelFor(lsEnum);
