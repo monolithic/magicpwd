@@ -17,9 +17,11 @@
 package com.magicpwd.v.mgtd;
 
 import com.magicpwd.__a.AMpwdPtn;
+import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Logs;
+import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.m.mgtd.MgtdMdl;
 import com.magicpwd.v.MenuPtn;
@@ -129,16 +131,32 @@ public class MgtdPtn extends AMpwdPtn
 
     public void appendMgtd()
     {
-//        WDateChooser dc = new WDateChooser();
-//        dc.show(b, 0, b.getHeight());
         MgtdDlg dlg = new MgtdDlg(this, true);
         dlg.initView();
         dlg.initLang();
-        dlg.initData();
+        dlg.initData(null);
+    }
+
+    public void saveMgtd(Mgtd mgtd)
+    {
+        mgtdMdl.getGridMdl().wAppend(mgtd);
     }
 
     public void updateMgtd()
     {
+        int row = tbTaskList.getSelectedRow();
+        if (row < 0)
+        {
+            return;
+        }
+
+        Mgtd mgtd = mgtdMdl.getGridMdl().getMgtdAt(row);
+        mgtd.setHintList(DBA4000.readHintList(mgtd.getP30F0308()));
+
+        MgtdDlg dlg = new MgtdDlg(this, true);
+        dlg.initView();
+        dlg.initLang();
+        dlg.initData(mgtd);
     }
 
     public void deleteMgtd()

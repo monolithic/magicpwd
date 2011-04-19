@@ -24,7 +24,6 @@ import com.magicpwd._cons.ConsDat;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
-import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.v.mgtd.MgtdPtn;
 import com.magicpwd.x.mgtd.method.Apps;
 import com.magicpwd.x.mgtd.method.Audio;
@@ -45,6 +44,7 @@ public class MgtdDlg extends ADialog
 {
 
     private MgtdPtn mgtdPtn;
+    private Mgtd mgtd;
     private javax.swing.SpinnerNumberModel smAhead;
 
     public MgtdDlg(MgtdPtn mgtdPtn, boolean modal)
@@ -324,7 +324,7 @@ public class MgtdDlg extends ADialog
         }
     }
 
-    public void initData()
+    public void initData(Mgtd mgtd)
     {
         btAbort.addActionListener(new java.awt.event.ActionListener()
         {
@@ -370,6 +370,30 @@ public class MgtdDlg extends ADialog
         cbLevel.addItem("中");
         cbLevel.addItem("高");
 
+        if (mgtd != null)
+        {
+            tfTitle.setText(mgtd.getP30F030B());
+            cbLevel.setSelectedIndex(mgtd.getP30F0303());
+            cbIntval.setSelectedIndex(mgtd.getP30F0304());
+            IMgtdBean intvalBean = intvalList.get(mgtd.getP30F0304());
+            if (intvalBean != null)
+            {
+                intvalBean.showData(mgtd);
+            }
+            cbMethod.setSelectedIndex(mgtd.getP30F0305());
+            IMgtdBean methodBean = methodList.get(mgtd.getP30F0305());
+            if (methodBean != null)
+            {
+                methodBean.showData(mgtd);
+            }
+            cbPublic.setSelected(1 == mgtd.getP30F0306());
+            cbAhead.setSelectedIndex(mgtd.getP30F0311());
+            spAhead.setValue(mgtd.getP30F0312());
+            taRemark.setText(mgtd.getP30F0313());
+
+            this.mgtd = mgtd;
+        }
+
         this.pack();
         Bean.centerForm(this, mgtdPtn);
         this.setVisible(true);
@@ -412,42 +436,43 @@ public class MgtdDlg extends ADialog
             tfTitle.requestFocus();
             return;
         }
-        Mgtd mgtd = new Mgtd();
-        mgtd.setP30F0301(ConsDat.MGTD_TYPE_DATETIME);
-        mgtd.setP30F0302(ConsDat.MGTD_STATUS_INIT);
-        mgtd.setP30F0703(cbLevel.getSelectedIndex());
-        mgtd.setP30F0704(cbMethod.getSelectedIndex());
-        mgtd.setP30F0305(ConsDat.MGTD_METHOD_NOTE);
-        mgtd.setP30F0306(cbPublic.isSelected() ? 1 : 0);
-        mgtd.setP30F0307(0);
-        mgtd.setP30F030B(tfTitle.getText());
-        mgtd.setP30F030C(0L);
-        mgtd.setP30F030D(0L);
-        mgtd.setP30F030E(0L);
-        int idx = cbMethod.getSelectedIndex();
-        if (idx < 0 || idx >= methodList.size())
+        int methodIdx = cbMethod.getSelectedIndex();
+        if (methodIdx < 0 || methodIdx >= methodList.size())
         {
             return;
         }
-        IMgtdBean bean = methodList.get(idx);
-        if (!bean.saveData(mgtd))
+        int intvalIdx = cbIntval.getSelectedIndex();
+        if (intvalIdx < 0 || intvalIdx >= intvalList.size())
+        {
+            return;
+        }
+
+        if (mgtd == null)
+        {
+            mgtd = new Mgtd();
+        }
+        mgtd.setP30F0301(ConsDat.MGTD_TYPE_DATETIME);
+        mgtd.setP30F0302(ConsDat.MGTD_STATUS_INIT);
+        mgtd.setP30F0703(cbLevel.getSelectedIndex());
+        mgtd.setP30F0704(intvalIdx);
+        mgtd.setP30F0305(methodIdx);
+        mgtd.setP30F0306(cbPublic.isSelected() ? 1 : 0);
+        mgtd.setP30F0307(0);
+        mgtd.setP30F030B(tfTitle.getText());
+        IMgtdBean methodBean = methodList.get(methodIdx);
+        if (!methodBean.saveData(mgtd))
         {
             return;
         }
         mgtd.setP30F0311(cbAhead.getSelectedIndex());
         mgtd.setP30F0312(smAhead.getNumber().intValue());
-        idx = cbIntval.getSelectedIndex();
-        if (idx < 0 || idx >= intvalList.size())
-        {
-            return;
-        }
-        bean = intvalList.get(idx);
-        if (!bean.saveData(mgtd))
+        IMgtdBean intvalBean = intvalList.get(intvalIdx);
+        if (!intvalBean.saveData(mgtd))
         {
             return;
         }
         mgtd.setP30F0313(taRemark.getText());
-        DBA4000.saveMgtdData(mgtd);
+        mgtdPtn.saveMgtd(mgtd);
     }
 
     private void btAbortActionPerformed(java.awt.event.ActionEvent evt)

@@ -47,6 +47,15 @@ public class Audio extends javax.swing.JPanel implements IMgtdBean
     public void initView()
     {
         btPath = new BtnLabel();
+        btPath.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                btPathActionPerformed(e);
+            }
+        });
         tfPath = new javax.swing.JTextField();
         lbPath = new javax.swing.JLabel();
         lbPath.setLabelFor(tfPath);
@@ -124,6 +133,28 @@ public class Audio extends javax.swing.JPanel implements IMgtdBean
         }
         mgtd.setP30F030F(text);
         return true;
+    }
+    private void btPathActionPerformed(java.awt.event.ActionEvent e)
+    {
+        javax.swing.JFileChooser fc = new javax.swing.JFileChooser();
+        fc.setFileSelectionMode(javax.swing.JFileChooser.FILES_ONLY);
+        fc.setMultiSelectionEnabled(false);
+        java.io.File file = null;
+        if (Char.isValidate(tfPath.getText()))
+        {
+            file = new java.io.File(tfPath.getText().trim());
+            fc.setSelectedFile(file);
+        }
+        int status = fc.showOpenDialog(mgtdDlg);
+        if (status != javax.swing.JFileChooser.APPROVE_OPTION)
+        {
+            return;
+        }
+        file = fc.getSelectedFile();
+        if (file != null)
+        {
+            tfPath.setText(file.getAbsolutePath());
+        }
     }
     private BtnLabel btPath;
     private javax.swing.JTextField tfPath;

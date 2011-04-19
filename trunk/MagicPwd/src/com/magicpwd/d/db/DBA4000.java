@@ -430,6 +430,47 @@ public class DBA4000
         }
     }
 
+    public static java.util.List<Hint> readHintList(String mgtdHash)
+    {
+        java.util.ArrayList<Hint> list = new java.util.ArrayList<Hint>();
+
+        DBAccess dba = new DBAccess();
+
+        try
+        {
+            dba.init();
+
+            dba.addTable(DBC4000.P30F0400);
+            dba.addColumn(DBC4000.P30F0403);
+            dba.addColumn(DBC4000.P30F0404);
+            dba.addColumn(DBC4000.P30F0405);
+            dba.addWhere(DBC4000.P30F0402, mgtdHash);
+            dba.addSort(DBC4000.P30F0401);
+
+            Hint hint;
+            ResultSet rest = dba.executeSelect();
+            while (rest.next())
+            {
+                hint = new Hint();
+                hint.setP30F0403(rest.getLong(DBC4000.P30F0403));
+                hint.setP30F0404(rest.getInt(DBC4000.P30F0404));
+                hint.setP30F0405(rest.getString(DBC4000.P30F0405));
+                list.add(hint);
+            }
+            rest.close();
+            return list;
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            return list;
+        }
+        finally
+        {
+            dba.dispose();
+        }
+    }
+
     public static boolean findHintList(UserMdl cfg, List<Hint> list)
     {
         DBAccess dba = new DBAccess();
@@ -481,6 +522,28 @@ public class DBA4000
         }
     }
 
+    public static boolean deleteMgtdData(Mgtd mgtd)
+    {
+        if (mgtd == null || !com.magicpwd._util.Char.isValidateHash(mgtd.getP30F0308()))
+        {
+            return false;
+        }
+
+        DBAccess dba = new DBAccess();
+        try
+        {
+            dba.init();
+            dba.addTable(DBC4000.P30F0300);
+            dba.addWhere(DBC4000.P30F0308, mgtd.getP30F0308());
+
+            return 1 == dba.executeDelete();
+        }
+        catch (Exception exp)
+        {
+            return false;
+        }
+    }
+
     private static void readMgtdData(ResultSet rest, List<Mgtd> list) throws Exception
     {
         Mgtd mgtd;
@@ -502,6 +565,7 @@ public class DBA4000
             mgtd.setP30F030D(rest.getLong(DBC4000.P30F030D));
             mgtd.setP30F030E(rest.getLong(DBC4000.P30F030E));
             mgtd.setP30F030F(rest.getString(DBC4000.P30F030F));
+            mgtd.setP30F0310(rest.getString(DBC4000.P30F0310));
             mgtd.setP30F0311(rest.getInt(DBC4000.P30F0311));
             mgtd.setP30F0312(rest.getInt(DBC4000.P30F0312));
             mgtd.setP30F0313(rest.getString(DBC4000.P30F0313));
@@ -571,7 +635,7 @@ public class DBA4000
             dba.addTable(DBC4000.P30F0300);
             dba.addParam(DBC4000.P30F0301, mgtd.getP30F0301());
             dba.addParam(DBC4000.P30F0302, mgtd.getP30F0302());
-            dba.addParam(DBC4000.P30F0303, mgtd.getP30F0703());
+            dba.addParam(DBC4000.P30F0303, mgtd.getP30F0303());
             dba.addParam(DBC4000.P30F0304, mgtd.getP30F0304());
             dba.addParam(DBC4000.P30F0305, mgtd.getP30F0305());
             dba.addParam(DBC4000.P30F0306, mgtd.getP30F0306());
@@ -583,6 +647,7 @@ public class DBA4000
             dba.addParam(DBC4000.P30F030D, mgtd.getP30F030D());
             dba.addParam(DBC4000.P30F030E, mgtd.getP30F030E());
             dba.addParam(DBC4000.P30F030F, mgtd.getP30F030F());
+            dba.addParam(DBC4000.P30F0310, mgtd.getP30F0310());
             dba.addParam(DBC4000.P30F0311, mgtd.getP30F0311());
             dba.addParam(DBC4000.P30F0312, mgtd.getP30F0312());
             dba.addParam(DBC4000.P30F0313, mgtd.getP30F0313());

@@ -175,7 +175,14 @@ public class Interval extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean showData(Mgtd mgtd)
     {
-        return true;
+        Hint hint = mgtd.getHint(0);
+        if (hint != null)
+        {
+            spStime.setValue(new java.util.Date(hint.getP30F0403()));
+            spIntval.setValue(hint.getP30F0404());
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -184,11 +191,15 @@ public class Interval extends javax.swing.JPanel implements IMgtdBean
         mgtd.setP30F030C(smFtime.getDate().getTime());
         mgtd.setP30F030D(smTtime.getDate().getTime());
 
+        java.util.List<Hint> list = new java.util.ArrayList<Hint>();
+
         Hint hint = new Hint();
         hint.setP30F0403(smStime.getDate().getTime());
         hint.setP30F0404(smIntval.getNumber().intValue());
         hint.setP30F0405("");
-        mgtd.addHint(hint);
+        list.add(hint);
+
+        mgtd.setHintList(list);
         return true;
     }
     private javax.swing.JLabel lbFtime;

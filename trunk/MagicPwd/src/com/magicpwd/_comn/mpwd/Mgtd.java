@@ -105,7 +105,7 @@ public class Mgtd implements Serializable
      * 任务级别
      * @return the P30F0303
      */
-    public int getP30F0703()
+    public int getP30F0303()
     {
         return P30F0303;
     }
