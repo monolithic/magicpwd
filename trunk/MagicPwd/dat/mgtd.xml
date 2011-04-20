@@ -2,40 +2,42 @@
 <magicpwd>
     <!--魔方密码工具栏-->
     <toolbar id="mgtd">
-        <item type="normal" text="$P30F6701" text-def="查看" tips="$P30F6702" tips-def="查看选择的记录">
+        <item id="append" type="normal" text="$P30F6703" text-def="新增" tips="$P30F6704" tips-def="新增记录">
             <icon>
-                <default id="view-keys" path="var:mwiz-view"/>
+                <default id="append" path="var:mwiz-add"/>
             </icon>
-            <action id="view-keys" class="com.magicpwd.e.mgtd.ViewAction">
-                <stroke key="^ V" />
-            </action>
-        </item>
-        <seperator />
-        <item type="normal" text="$P30F6703" text-def="新增" tips="$P30F6704" tips-def="新增记录">
-            <icon>
-                <default id="new-keys" path="var:mwiz-add"/>
-            </icon>
-            <action id="new-keys" class="com.magicpwd.e.mgtd.NewAction">
+            <action id="append" class="com.magicpwd.e.mgtd.NewAction">
                 <stroke key="^ N" />
             </action>
         </item>
-        <item type="normal" text="$P30F6705" text-def="编辑" tips="$P30F6706" tips-def="编辑选择的记录">
+        <item id="update" type="normal" text="$P30F6705" text-def="编辑" tips="$P30F6706" tips-def="编辑选择的记录">
             <icon>
-                <default id="edit-keys" path="var:mwiz-edit"/>
+                <default id="update" path="var:mwiz-edit"/>
             </icon>
-            <action id="edit-keys" class="com.magicpwd.e.mgtd.UpdateAction">
+            <action id="update" class="com.magicpwd.e.mgtd.UpdateAction">
                 <stroke key="^ E" />
             </action>
         </item>
-        <item type="normal" text="$P30F6707" text-def="删除" tips="$P30F6708" tips-def="删除选择的记录">
+        <item id="delete" type="normal" text="$P30F6707" text-def="删除" tips="$P30F6708" tips-def="删除选择的记录">
             <icon>
-                <default id="delete-keys" path="var:mwiz-delete"/>
+                <default id="delete" path="var:mwiz-delete"/>
             </icon>
-            <action id="delete-keys" class="com.magicpwd.e.mgtd.DeleteAction">
+            <action id="delete" class="com.magicpwd.e.mgtd.DeleteAction">
                 <stroke key="^ D" />
             </action>
         </item>
     </toolbar>
+    <popmenu id="grid">
+        <item id="append" type="normal" text="新增(@N)" text-def="新增(@N)" tips="$P30F6704" tips-def="新增记录">
+            <action id="append" class="com.magicpwd.e.mgtd.NewAction" />
+        </item>
+        <item id="update" type="normal" text="编辑(@E)" text-def="编辑(@E)" tips="$P30F6706" tips-def="编辑选择的记录">
+            <action id="update" class="com.magicpwd.e.mgtd.UpdateAction" />
+        </item>
+        <item id="delete" type="normal" text="删除(@D)" text-def="删除(@D)" tips="$P30F6708" tips-def="删除选择的记录">
+            <action id="delete" class="com.magicpwd.e.mgtd.DeleteAction" />
+        </item>
+    </popmenu>
     <strokes id="mgtd">
         <action id="file-search" class="com.magicpwd.e.mgtd.FindAction">
             <stroke key="^ F" />
