@@ -36,8 +36,9 @@ public class Hint implements java.io.Serializable
     private String P30F0402;
     private Long P30F0403;
     private Integer P30F0404;
+    private Integer P30F0405;
     /**表达式*/
-    private String P30F0405;
+    private String P30F0406;
 
     /**
      * 提醒周期
@@ -146,7 +147,6 @@ public class Hint implements java.io.Serializable
     }
 
     /**
-     * 间隔时间
      * @return the P30F0404
      */
     public Integer getP30F0404()
@@ -155,7 +155,6 @@ public class Hint implements java.io.Serializable
     }
 
     /**
-     * 间隔时间
      * @param P30F0404 the P30F0404 to set
      */
     public void setP30F0404(Integer P30F0404)
@@ -164,20 +163,38 @@ public class Hint implements java.io.Serializable
     }
 
     /**
-     * 表达式
+     * 间隔时间
      * @return the P30F0405
      */
-    public String getP30F0405()
+    public Integer getP30F0405()
     {
         return P30F0405;
     }
 
     /**
-     * 表达式
+     * 间隔时间
      * @param P30F0405 the P30F0405 to set
      */
-    public void setP30F0405(String P30F0405)
+    public void setP30F0405(Integer P30F0405)
     {
         this.P30F0405 = P30F0405;
+    }
+
+    /**
+     * 表达式
+     * @return the P30F0406
+     */
+    public String getP30F0406()
+    {
+        return P30F0406;
+    }
+
+    /**
+     * 表达式
+     * @param P30F0406 the P30F0406 to set
+     */
+    public void setP30F0406(String P30F0406)
+    {
+        this.P30F0406 = P30F0406;
     }
 }

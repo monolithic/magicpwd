@@ -114,7 +114,7 @@ public class Mgtd implements Serializable
      * 任务级别
      * @param P30F0303 the P30F0303 to set
      */
-    public void setP30F0703(int P30F0303)
+    public void setP30F0303(int P30F0303)
     {
         this.P30F0303 = P30F0303;
     }
@@ -132,7 +132,7 @@ public class Mgtd implements Serializable
      * 提醒周期
      * @param P30F0304 the P30F0304 to set
      */
-    public void setP30F0704(int P30F0304)
+    public void setP30F0304(int P30F0304)
     {
         this.P30F0304 = P30F0304;
     }
@@ -175,7 +175,7 @@ public class Mgtd implements Serializable
 
     /**
      * 完成度
-     * @return the P30F0707
+     * @return the P30F0307
      */
     public int getP30F0307()
     {
@@ -193,7 +193,7 @@ public class Mgtd implements Serializable
 
     /**
      * 任务索引
-     * @return the P30F0708
+     * @return the P30F0308
      */
     public String getP30F0308()
     {
@@ -202,7 +202,7 @@ public class Mgtd implements Serializable
 
     /**
      * 任务索引
-     * @param P30F0308 the P30F0708 to set
+     * @param P30F0308 the P30F0308 to set
      */
     public void setP30F0308(String P30F0308)
     {
@@ -240,7 +240,7 @@ public class Mgtd implements Serializable
      * 前置任务
      * @param P30F030A the P30F030A to set
      */
-    public void setP30F070A(String P30F030A)
+    public void setP30F030A(String P30F030A)
     {
         this.P30F030A = P30F030A;
     }

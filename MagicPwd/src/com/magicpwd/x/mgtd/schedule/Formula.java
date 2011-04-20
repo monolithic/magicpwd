@@ -19,6 +19,7 @@ package com.magicpwd.x.mgtd.schedule;
 import com.magicpwd.__i.mgtd.IMgtdBean;
 import com.magicpwd._comn.mpwd.Hint;
 import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._cons.ConsDat;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd.x.mgtd.MgtdDlg;
@@ -101,7 +102,7 @@ public class Formula extends javax.swing.JPanel implements IMgtdBean
         Hint hint = mgtd.getHint(0);
         if (hint != null)
         {
-            tfFormula.setText(hint.getP30F0405());
+            tfFormula.setText(hint.getP30F0406());
             return true;
         }
         return false;
@@ -110,10 +111,11 @@ public class Formula extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean saveData(Mgtd mgtd)
     {
+        mgtd.setP30F0304(ConsDat.MGTD_INTVAL_FORMULA);
         mgtd.setP30F030C(0L);
         mgtd.setP30F030D(0L);
         mgtd.setP30F030E(0L);
-        
+
         String text = tfFormula.getText();
         if (!Char.isValidate(text))
         {
@@ -144,8 +146,8 @@ public class Formula extends javax.swing.JPanel implements IMgtdBean
 
         Hint hint = new Hint();
         hint.setP30F0403(System.currentTimeMillis());
-        hint.setP30F0404(0);
-        hint.setP30F0405(text);
+        hint.setP30F0405(0);
+        hint.setP30F0406(text);
         list.add(hint);
 
         mgtd.setHintList(list);
