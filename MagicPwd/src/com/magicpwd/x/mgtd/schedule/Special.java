@@ -84,6 +84,12 @@ public class Special extends javax.swing.JPanel implements IMgtdBean
     }
 
     @Override
+    public int getKey()
+    {
+        return ConsDat.MGTD_INTVAL_SPECIAL;
+    }
+
+    @Override
     public String getName()
     {
         return "special";
@@ -117,7 +123,6 @@ public class Special extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean saveData(Mgtd mgtd)
     {
-        mgtd.setP30F0304(ConsDat.MGTD_INTVAL_SPECIAL);
         mgtd.setP30F030C(0L);
         mgtd.setP30F030D(0L);
         mgtd.setP30F030E(0L);
@@ -127,7 +132,8 @@ public class Special extends javax.swing.JPanel implements IMgtdBean
         if (cbStartup.isSelected())
         {
             Hint hint = new Hint();
-            hint.setP30F0403(-2L);
+            hint.setP30F0403(0L);
+            hint.setP30F0404(ConsDat.MGTD_INTVAL_STARTUP);
             hint.setP30F0405(0);
             hint.setP30F0406("");
             list.add(hint);
@@ -135,7 +141,8 @@ public class Special extends javax.swing.JPanel implements IMgtdBean
         if (cbBeforeExit.isSelected())
         {
             Hint hint = new Hint();
-            hint.setP30F0403(-3L);
+            hint.setP30F0403(0L);
+            hint.setP30F0404(ConsDat.MGTD_INTVAL_BEFOREND);
             hint.setP30F0405(0);
             hint.setP30F0406("");
             list.add(hint);

@@ -91,6 +91,12 @@ public class Mail extends javax.swing.JPanel implements IMgtdBean
     }
 
     @Override
+    public int getKey()
+    {
+        return ConsDat.MGTD_METHOD_MAIL;
+    }
+
+    @Override
     public String getName()
     {
         return "mail";
@@ -131,7 +137,6 @@ public class Mail extends javax.swing.JPanel implements IMgtdBean
             }
         }
 
-        mgtd.setP30F0305(ConsDat.GTD_METHOD_MAIL);
         mgtd.setP30F030F(text);
         mgtd.setP30F0310(tfBody.getText());
         return true;

@@ -17,7 +17,7 @@
 package com.magicpwd.x.mgtd.schedule;
 
 import com.magicpwd.__i.mgtd.IMgtdBean;
-import com.magicpwd._comn.I1S2;
+import com.magicpwd._comn.I1S1;
 import com.magicpwd._comn.mpwd.Hint;
 import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._comp.BtnLabel;
@@ -170,13 +170,19 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
         lbTtime.setText("结束时间");
         lbStime.setText("执行时间");
         lbIntval.setText("间隔周期");
-        cbIntval.addItem("秒");
-        cbIntval.addItem("分");
-        cbIntval.addItem("时");
-        cbIntval.addItem("日");
-        cbIntval.addItem("周");
-        cbIntval.addItem("月");
-        cbIntval.addItem("年");
+        cbIntval.addItem(new I1S1(ConsDat.MGTD_UNIT_MINUTE, "秒"));
+        cbIntval.addItem(new I1S1(ConsDat.MGTD_UNIT_SECOND, "分"));
+        cbIntval.addItem(new I1S1(ConsDat.MGTD_UNIT_HOUR, "时"));
+        cbIntval.addItem(new I1S1(ConsDat.MGTD_UNIT_DAY, "日"));
+        cbIntval.addItem(new I1S1(ConsDat.MGTD_UNIT_WEEK, "周"));
+        cbIntval.addItem(new I1S1(ConsDat.MGTD_UNIT_MONTH, "月"));
+        cbIntval.addItem(new I1S1(ConsDat.MGTD_UNIT_YEAR, "年"));
+    }
+
+    @Override
+    public int getKey()
+    {
+        return ConsDat.MGTD_INTVAL_PERIOD;
     }
 
     @Override
@@ -198,46 +204,54 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
         smTtime.setValue(new java.util.Date(mgtd.getP30F030D()));
         smStime.setValue(new java.util.Date(mgtd.getP30F030E()));
 
-        cbIntval.setSelectedIndex(0);
+        cbIntval.setSelectedItem(new I1S1(mgtd.getP30F0304()));
 
-        I1S2[] item = new I1S2[mgtd.getHintList().size()];
+        int[] item = new int[mgtd.getHintList().size()];
         int i = 0;
         for (Hint hint : mgtd.getHintList())
         {
-            item[i++] = new I1S2(hint.getP30F0405(), "", "");
+            item[i++] = hint.getP30F0405();
         }
-        lsEnum.setSelectedValue(item, false);
+        lsEnum.setSelectedIndices(item);
         return true;
     }
 
     @Override
     public boolean saveData(Mgtd mgtd)
     {
-        mgtd.setP30F0304(ConsDat.MGTD_INTVAL_PERIOD);
-        mgtd.setP30F030C(smFtime.getDate().getTime());
-        mgtd.setP30F030D(smTtime.getDate().getTime());
-        mgtd.setP30F030E(smStime.getDate().getTime());
+        Object unitObj = cbIntval.getSelectedItem();
+        if (unitObj == null || !(unitObj instanceof I1S1))
+        {
+            return false;
+        }
 
-        Object[] objs = lsEnum.getSelectedValues();
-        if (objs == null || objs.length < 1)
+        Object[] timeObj = lsEnum.getSelectedValues();
+        if (timeObj == null || timeObj.length < 1)
         {
             Lang.showMesg(mgtdDlg, null, "请选择提醒周期信息！");
             lsEnum.requestFocus();
             return false;
         }
 
+        mgtd.setP30F030C(smFtime.getDate().getTime());
+        mgtd.setP30F030D(smTtime.getDate().getTime());
+        mgtd.setP30F030E(smStime.getDate().getTime());
+
         Hint hint;
+        I1S1 time;
+        I1S1 unit = (I1S1) unitObj;
         java.util.List<Hint> list = new java.util.ArrayList<Hint>();
-        for (Object obj : objs)
+        for (Object obj : timeObj)
         {
-            if (!(obj instanceof I1S2))
+            if (!(obj instanceof I1S1))
             {
                 continue;
             }
-            I1S2 item = (I1S2) obj;
+            time = (I1S1) obj;
             hint = new Hint();
             hint.setP30F0403(0L);
-            hint.setP30F0405(item.getK());
+            hint.setP30F0404(unit.getK());
+            hint.setP30F0405(time.getK());
             hint.setP30F0406("");
             list.add(hint);
         }
@@ -254,7 +268,7 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
             String tmp = Lang.getLang(LangRes.P30F110D, "{0}秒");
             for (int i = 0; i <= 59; i += 1)
             {
-                lmEnum.addElement(new I1S2(i, Char.format(tmp, "" + i), null));
+                lmEnum.addElement(new I1S1(i, Char.format(tmp, "" + i)));
             }
             return;
         }
@@ -264,7 +278,7 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
             String tmp = Lang.getLang(LangRes.P30F110F, "{0}分");
             for (int i = 0; i <= 59; i += 1)
             {
-                lmEnum.addElement(new I1S2(i, Char.format(tmp, "" + i), null));
+                lmEnum.addElement(new I1S1(i, Char.format(tmp, "" + i)));
             }
             return;
         }
@@ -274,7 +288,7 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
             String tmp = Lang.getLang(LangRes.P30F1113, "{0}点");
             for (int i = 0; i <= 23; i += 1)
             {
-                lmEnum.addElement(new I1S2(i, Char.format(tmp, "" + i), null));
+                lmEnum.addElement(new I1S1(i, Char.format(tmp, "" + i)));
             }
             return;
         }
@@ -284,7 +298,7 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
             String tmp = Lang.getLang(LangRes.P30F1119, "{0}日");
             for (int i = 1; i <= 31; i += 1)
             {
-                lmEnum.addElement(new I1S2(i, Char.format(tmp, "" + i), null));
+                lmEnum.addElement(new I1S1(i, Char.format(tmp, "" + i)));
             }
             return;
         }
@@ -294,7 +308,7 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
             String[] arr = Lang.getLang(LangRes.P30F111C, "星期日,星期一,星期二,星期三,星期四,星期五,星期六").split(",");
             for (int i = 0; i <= 6; i += 1)
             {
-                lmEnum.addElement(new I1S2(i, arr[i], null));
+                lmEnum.addElement(new I1S1(i, arr[i]));
             }
             return;
         }
@@ -304,7 +318,7 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
             String[] arr = Lang.getLang(LangRes.P30F111F, "一月,二月,三月,四月,五月,六月,七月,八月,九月,十月,十一月,十二月").split(",");
             for (int i = 1; i <= 12; i += 1)
             {
-                lmEnum.addElement(new I1S2(i, arr[i - 1], null));
+                lmEnum.addElement(new I1S1(i, arr[i - 1]));
             }
             return;
         }
@@ -315,7 +329,7 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
             int year = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
             for (int i = year - 5, j = year + 25; i <= j; i += 1)
             {
-                lmEnum.addElement(new I1S2(i, Char.format(tmp, "" + i), null));
+                lmEnum.addElement(new I1S1(i, Char.format(tmp, "" + i)));
             }
             return;
         }

@@ -251,17 +251,21 @@ public interface ConsDat
     /**年*/
     int MGTD_UNIT_YEAR = 7;
     /**消息提示*/
-    int GTD_METHOD_NOTE = 1;
+    int MGTD_METHOD_NOTE = 1;
     /**发送邮件*/
-    int GTD_METHOD_MAIL = 2;
+    int MGTD_METHOD_MAIL = 2;
     /**执行程序*/
-    int GTD_METHOD_APPS = 3;
+    int MGTD_METHOD_APPS = 3;
     /**打开文件*/
-    int GTD_METHOD_FILE = 4;
+    int MGTD_METHOD_FILE = 4;
     /**浏览网页*/
-    int GTD_METHOD_HTTP = 5;
+    int MGTD_METHOD_HTTP = 5;
     /**播放声音*/
-    int GTD_METHOD_AUDIO = 6;
+    int MGTD_METHOD_AUDIO = 6;
+    /**定时提醒*/
+    int MGTD_INTVAL_BEFOREND = -2;
+    /**定时提醒*/
+    int MGTD_INTVAL_STARTUP = -1;
     /**定时提醒*/
     int MGTD_INTVAL_FIXTIME = 1;
     /**周期提醒*/
