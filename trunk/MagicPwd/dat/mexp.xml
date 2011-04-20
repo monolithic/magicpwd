@@ -630,7 +630,7 @@
         </menu>
     </submenu>
     <submenu id="date-interval">
-        <menu id="hint-fixtime" text="定时提醒">
+        <menu id="hint-userfav" text="快捷提醒">
             <!--
             <item type="normal" text="2010-12-31 20:00:00" command="fix:2010-12-31 20:00:00" />
             <seperator />
@@ -662,13 +662,16 @@
                 <item type="normal" text="2年后" command="var:+2year" />
             </menu>
         </menu>
-        <menu id="hint-cycle" text="周期提醒">
+        <seperator />
+        <menu id="hint-fixtime" text="定时提醒">
         </menu>
-        <menu id="hint-interval" text="间隔提醒">
+        <menu id="hint-period" text="周期提醒">
+        </menu>
+        <menu id="hint-intval" text="间隔提醒">
         </menu>
         <menu id="hint-special" text="特殊提醒">
         </menu>
-        <menu id="hint-function" text="其它提醒">
+        <menu id="hint-formula" text="其它提醒">
         </menu>
     </submenu>
     <!--数值弹出菜单选项-->
