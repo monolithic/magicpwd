@@ -80,8 +80,8 @@ public class Formula extends javax.swing.JPanel implements IMgtdBean
     @Override
     public void initLang()
     {
-        lbFormula.setText("公式");
-        ltFormula.setText("<html>年：nian/n/year<br>月：yue/y/month<br>日：ri/r/day<br>时：shi/s/hour<br>分：fen/f/minute<br>秒：miao/m/second<br>周：zhou/z/week</html>");
+        lbFormula.setText("执行公式");
+        ltFormula.setText("<html>【提醒条件】<br>表达式执行结果为0。<br>【可用参数】<br>年：nian/n/year<br>月：yue/y/month<br>日：ri/r/day<br>时：shi/s/hour<br>分：fen/f/minute<br>秒：miao/m/second<br>周：zhou/z/week</html>");
     }
 
     @Override

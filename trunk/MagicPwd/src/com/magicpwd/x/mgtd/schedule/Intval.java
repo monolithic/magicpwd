@@ -94,7 +94,7 @@ public class Intval extends javax.swing.JPanel implements IMgtdBean
         hsg3.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg3.addComponent(btStime, 21, 21, 21);
         javax.swing.GroupLayout.SequentialGroup hsg4 = layout.createSequentialGroup();
-        hsg4.addComponent(spIntval, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hsg4.addComponent(spIntval, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg4.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg4.addComponent(cbIntval, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
