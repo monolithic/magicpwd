@@ -106,12 +106,12 @@ public class Special extends javax.swing.JPanel implements IMgtdBean
     {
         for (Hint hint : mgtd.getHintList())
         {
-            if (-2L == hint.getP30F0403())
+            if (ConsDat.MGTD_INTVAL_STARTUP == hint.getP30F0404())
             {
                 cbStartup.setSelected(true);
                 continue;
             }
-            if (-3L == hint.getP30F0403())
+            if (ConsDat.MGTD_INTVAL_BEFOREND == hint.getP30F0404())
             {
                 cbBeforeExit.setSelected(true);
                 continue;

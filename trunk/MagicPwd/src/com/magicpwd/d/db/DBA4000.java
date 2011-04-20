@@ -534,10 +534,23 @@ public class DBA4000
         try
         {
             dba.init();
+            dba.addTable(DBC4000.P30F0400);
+            dba.addWhere(DBC4000.P30F0402, mgtd.getP30F0308());
+            dba.addDeleteBatch();
+
+            dba.reInit();
             dba.addTable(DBC4000.P30F0300);
             dba.addWhere(DBC4000.P30F0308, mgtd.getP30F0308());
+            dba.addDeleteBatch();
 
-            return 1 == dba.executeDelete();
+            dba.reInit();
+            dba.addTable(DBC4000.P30F0100);
+            dba.addParam(DBC4000.P30F010D, "");
+            dba.addWhere(DBC4000.P30F010D, mgtd.getP30F0308());
+            dba.addUpdateBatch();
+
+            dba.executeBatch();
+            return true;
         }
         catch (Exception exp)
         {

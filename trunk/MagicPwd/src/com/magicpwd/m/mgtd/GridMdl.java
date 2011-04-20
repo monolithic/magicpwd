@@ -17,6 +17,7 @@
 package com.magicpwd.m.mgtd;
 
 import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._cons.ConsDat;
 import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.m.UserMdl;
 
@@ -47,7 +48,7 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
     @Override
     public int getColumnCount()
     {
-        return 5;
+        return 6;
     }
 
     @Override
@@ -60,11 +61,13 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
             case 1:
                 return "标题";
             case 2:
-                return "完成度";
-            case 3:
                 return "优先级";
+            case 3:
+                return "提醒类型";
             case 4:
-                return "提醒周期";
+                return "提示方式";
+            case 5:
+                return "提前时间";
             default:
                 return "";
         }
@@ -96,11 +99,71 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
                 case 1:
                     return temp.getP30F030B();
                 case 2:
-                    return temp.getP30F0307();
+                    switch (temp.getP30F0303())
+                    {
+                        case 1:
+                            return "低";
+                        case 2:
+                            return "中";
+                        case 3:
+                            return "高";
+                        default:
+                            return "无";
+                    }
                 case 3:
-                    return temp.getP30F0303();
+                    switch (temp.getP30F0304())
+                    {
+                        case ConsDat.MGTD_INTVAL_FIXTIME:
+                            return "定时提醒";
+                        case ConsDat.MGTD_INTVAL_PERIOD:
+                            return "周期提醒";
+                        case ConsDat.MGTD_INTVAL_INTVAL:
+                            return "间隔提醒";
+                        case ConsDat.MGTD_INTVAL_SPECIAL:
+                            return "特殊提醒";
+                        case ConsDat.MGTD_INTVAL_FORMULA:
+                            return "公式提醒";
+                        default:
+                            return "未知";
+                    }
                 case 4:
-                    return temp.getP30F0304();
+                    switch (temp.getP30F0305())
+                    {
+                        case ConsDat.MGTD_METHOD_NOTE:
+                            return "提示信息";
+                        case ConsDat.MGTD_METHOD_MAIL:
+                            return "发送邮件";
+                        case ConsDat.MGTD_METHOD_APPS:
+                            return "执行程序";
+                        case ConsDat.MGTD_METHOD_FILE:
+                            return "打开文件";
+                        case ConsDat.MGTD_METHOD_HTTP:
+                            return "访问网页";
+                        case ConsDat.MGTD_METHOD_AUDIO:
+                            return "播放声音";
+                        default:
+                            return "未知";
+                    }
+                case 5:
+                    switch (temp.getP30F0311())
+                    {
+                        case ConsDat.MGTD_UNIT_SECOND:
+                            return "秒";
+                        case ConsDat.MGTD_UNIT_MINUTE:
+                            return "分";
+                        case ConsDat.MGTD_UNIT_HOUR:
+                            return "时";
+                        case ConsDat.MGTD_UNIT_DAY:
+                            return "日";
+                        case ConsDat.MGTD_UNIT_WEEK:
+                            return "周";
+                        case ConsDat.MGTD_UNIT_MONTH:
+                            return "月";
+                        case ConsDat.MGTD_UNIT_YEAR:
+                            return "日";
+                        default:
+                            return "无";
+                    }
             }
         }
         return "";

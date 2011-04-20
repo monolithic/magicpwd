@@ -286,23 +286,23 @@ public class MgtdDlg extends ADialog
 
     public void initLang()
     {
-        lbTitle.setText("标题(T)");
+        lbTitle.setText("标题");
 
-        lbLevel.setText("优先级(L)");
+        lbLevel.setText("优先级");
 
-        lbMethod.setText("提醒方式(P)");
+        lbMethod.setText("提醒方式");
 
-        lbIntval.setText("提醒周期(P)");
+        lbIntval.setText("提醒周期");
 
-        lbRemark.setText("备注(M)");
+        lbRemark.setText("备注");
 
         cbPublic.setText("保存为公用模板");
 
-        btAbort.setText("取消(C)");
+        Bean.setText(btAbort, "取消(@C)");
 
-        btApply.setText("确认(O)");
+        Bean.setText(btApply, "确认(@O)");
 
-        lbAhead.setText("提前提醒(A)");
+        lbAhead.setText("提前提醒");
         cbAhead.addItem(new I1S1(0, "无"));
         cbAhead.addItem(new I1S1(ConsDat.MGTD_UNIT_SECOND, "秒"));
         cbAhead.addItem(new I1S1(ConsDat.MGTD_UNIT_MINUTE, "分"));
@@ -403,6 +403,8 @@ public class MgtdDlg extends ADialog
             this.mgtd = mgtd;
         }
 
+        this.processEscape();
+
         this.pack();
         Bean.centerForm(this, mgtdPtn);
         this.setVisible(true);
@@ -411,6 +413,7 @@ public class MgtdDlg extends ADialog
     @Override
     protected boolean hideDialog()
     {
+        this.dispose();
         return true;
     }
 
@@ -487,6 +490,8 @@ public class MgtdDlg extends ADialog
         mgtd.setP30F0312(smAhead.getNumber().intValue());
         mgtd.setP30F0313(taRemark.getText());
         mgtdPtn.saveMgtd(mgtd);
+
+        this.dispose();
     }
 
     private void btAbortActionPerformed(java.awt.event.ActionEvent evt)
