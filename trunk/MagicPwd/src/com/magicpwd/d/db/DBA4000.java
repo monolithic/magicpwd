@@ -403,9 +403,8 @@ public class DBA4000
 
             dba.addTable(DBC4000.P30F0300);
             StringBuilder buf = new StringBuilder();
-            buf.append("((");
-            buf.append(DBC4000.P30F0301).append('=').append(ConsDat.MGTD_SPECIAL).append(" OR ");
-            buf.append(DBC4000.P30F0301).append('=').append(ConsDat.MGTD_FORMULA).append(")");
+            buf.append("(");
+            buf.append(DBC4000.P30F0301).append('=').append(ConsDat.MGTD_INTVAL_SPECIAL).append(" OR ");
             buf.append(DBC4000.P30F030C).append("<=").append(now).append(" AND ");
             buf.append(DBC4000.P30F030D).append(">=").append(now);
             buf.append(") OR (");
@@ -444,6 +443,7 @@ public class DBA4000
             dba.addColumn(DBC4000.P30F0403);
             dba.addColumn(DBC4000.P30F0404);
             dba.addColumn(DBC4000.P30F0405);
+            dba.addColumn(DBC4000.P30F0406);
             dba.addWhere(DBC4000.P30F0402, mgtdHash);
             dba.addSort(DBC4000.P30F0401);
 
@@ -453,8 +453,9 @@ public class DBA4000
             {
                 hint = new Hint();
                 hint.setP30F0403(rest.getLong(DBC4000.P30F0403));
-                hint.setP30F0404(rest.getInt(DBC4000.P30F0404));
-                hint.setP30F0405(rest.getString(DBC4000.P30F0405));
+                hint.setP30F0405(rest.getInt(DBC4000.P30F0404));
+                hint.setP30F0405(rest.getInt(DBC4000.P30F0405));
+                hint.setP30F0406(rest.getString(DBC4000.P30F0406));
                 list.add(hint);
             }
             rest.close();
@@ -487,12 +488,12 @@ public class DBA4000
             dba.addColumn(DBC4000.P30F0312);
             dba.addColumn(DBC4000.P30F0402);
             dba.addColumn(DBC4000.P30F0403);
-            dba.addColumn(DBC4000.P30F0404);
             dba.addColumn(DBC4000.P30F0405);
+            dba.addColumn(DBC4000.P30F0406);
             dba.addWhere(DBC4000.P30F0308, DBC4000.P30F0402, true);
             dba.addWhere(com.magicpwd._util.Char.format("{0} IS NULL OR {0} < {1}", DBC4000.P30F030C, now));
             dba.addWhere(com.magicpwd._util.Char.format("{0} IS NULL OR {0} > {1}", DBC4000.P30F030D, now));
-            dba.addWhere(DBC4000.P30F0304, ">", ConsDat.MGTD_FIXTIME);
+            dba.addWhere(DBC4000.P30F0304, ">", ConsDat.MGTD_INTVAL_FIXTIME);
             dba.addWhere(DBC4000.P30F0302, ConsDat.MGTD_STATUS_READY);
 
             Hint hint;
@@ -504,8 +505,8 @@ public class DBA4000
                 hint.setP30F0312(rest.getInt(DBC4000.P30F0312));
                 hint.setP30F0402(rest.getString(DBC4000.P30F0402));
                 hint.setP30F0403(rest.getLong(DBC4000.P30F0403));
-                hint.setP30F0404(rest.getInt(DBC4000.P30F0404));
-                hint.setP30F0405(rest.getString(DBC4000.P30F0405));
+                hint.setP30F0405(rest.getInt(DBC4000.P30F0405));
+                hint.setP30F0406(rest.getString(DBC4000.P30F0406));
                 list.add(hint);
             }
             rest.close();
@@ -552,14 +553,14 @@ public class DBA4000
             mgtd = new Mgtd();
             mgtd.setP30F0301(rest.getInt(DBC4000.P30F0301));
             mgtd.setP30F0302(rest.getInt(DBC4000.P30F0302));
-            mgtd.setP30F0703(rest.getInt(DBC4000.P30F0303));
-            mgtd.setP30F0704(rest.getInt(DBC4000.P30F0303));
+            mgtd.setP30F0303(rest.getInt(DBC4000.P30F0303));
+            mgtd.setP30F0304(rest.getInt(DBC4000.P30F0304));
             mgtd.setP30F0305(rest.getInt(DBC4000.P30F0305));
             mgtd.setP30F0306(rest.getInt(DBC4000.P30F0306));
             mgtd.setP30F0307(rest.getInt(DBC4000.P30F0307));
             mgtd.setP30F0308(rest.getString(DBC4000.P30F0308));
             mgtd.setP30F0309(rest.getString(DBC4000.P30F0309));
-            mgtd.setP30F070A(rest.getString(DBC4000.P30F030A));
+            mgtd.setP30F030A(rest.getString(DBC4000.P30F030A));
             mgtd.setP30F030B(rest.getString(DBC4000.P30F030B));
             mgtd.setP30F030C(rest.getLong(DBC4000.P30F030C));
             mgtd.setP30F030D(rest.getLong(DBC4000.P30F030D));
@@ -678,6 +679,7 @@ public class DBA4000
                 dba.addParam(DBC4000.P30F0403, mtts.getP30F0403());
                 dba.addParam(DBC4000.P30F0404, mtts.getP30F0404());
                 dba.addParam(DBC4000.P30F0405, mtts.getP30F0405());
+                dba.addParam(DBC4000.P30F0406, mtts.getP30F0406());
                 dba.addInsertBatch();
                 dba.reInit();
             }

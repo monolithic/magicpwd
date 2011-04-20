@@ -20,6 +20,7 @@ import com.magicpwd.__i.mgtd.IMgtdBean;
 import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._comn.mpwd.Hint;
 import com.magicpwd._comp.BtnLabel;
+import com.magicpwd._cons.ConsDat;
 import com.magicpwd.x.mgtd.MgtdDlg;
 
 /**
@@ -32,7 +33,7 @@ import com.magicpwd.x.mgtd.MgtdDlg;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public class Interval extends javax.swing.JPanel implements IMgtdBean
+public class Intval extends javax.swing.JPanel implements IMgtdBean
 {
 
     private MgtdDlg mgtdDlg;
@@ -41,7 +42,7 @@ public class Interval extends javax.swing.JPanel implements IMgtdBean
     private javax.swing.SpinnerDateModel smStime;
     private javax.swing.SpinnerNumberModel smIntval;
 
-    public Interval(MgtdDlg mgtdDlg)
+    public Intval(MgtdDlg mgtdDlg)
     {
         this.mgtdDlg = mgtdDlg;
     }
@@ -179,7 +180,7 @@ public class Interval extends javax.swing.JPanel implements IMgtdBean
         if (hint != null)
         {
             spStime.setValue(new java.util.Date(hint.getP30F0403()));
-            spIntval.setValue(hint.getP30F0404());
+            spIntval.setValue(hint.getP30F0405());
             return true;
         }
         return false;
@@ -188,6 +189,7 @@ public class Interval extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean saveData(Mgtd mgtd)
     {
+        mgtd.setP30F0304(ConsDat.MGTD_INTVAL_INTVAL);
         mgtd.setP30F030C(smFtime.getDate().getTime());
         mgtd.setP30F030D(smTtime.getDate().getTime());
         mgtd.setP30F030E(0L);
@@ -196,8 +198,8 @@ public class Interval extends javax.swing.JPanel implements IMgtdBean
 
         Hint hint = new Hint();
         hint.setP30F0403(smStime.getDate().getTime());
-        hint.setP30F0404(smIntval.getNumber().intValue());
-        hint.setP30F0405("");
+        hint.setP30F0405(smIntval.getNumber().intValue());
+        hint.setP30F0406("");
         list.add(hint);
 
         mgtd.setHintList(list);

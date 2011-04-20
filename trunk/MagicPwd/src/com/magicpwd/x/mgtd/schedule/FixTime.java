@@ -21,6 +21,7 @@ import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._comn.mpwd.Hint;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.date.WDateChooser;
+import com.magicpwd._cons.ConsDat;
 import com.magicpwd.x.mgtd.MgtdDlg;
 
 /**
@@ -118,6 +119,7 @@ public class FixTime extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean saveData(Mgtd mgtd)
     {
+        mgtd.setP30F0304(ConsDat.MGTD_INTVAL_FIXTIME);
         mgtd.setP30F030C(0L);
         mgtd.setP30F030D(0L);
         mgtd.setP30F030E(0L);
@@ -126,8 +128,8 @@ public class FixTime extends javax.swing.JPanel implements IMgtdBean
 
         Hint hint = new Hint();
         hint.setP30F0403(smTime.getDate().getTime());
-        hint.setP30F0404(0);
-        hint.setP30F0405("");
+        hint.setP30F0405(0);
+        hint.setP30F0406("");
         list.add(hint);
 
         mgtd.setHintList(list);

@@ -19,11 +19,10 @@ package com.magicpwd._comn;
 /**
  * @author Amon
  */
-public class I1S2 extends S1S1
+public class I1S2 extends I1S1
 {
 
-    /** 记录类别 */
-    private int i;
+    private String v2;
 
     /**
      * 
@@ -33,44 +32,37 @@ public class I1S2 extends S1S1
     }
 
     /**
-     * @param i
+     * @param k
      */
-    public I1S2(int i)
+    public I1S2(int k)
     {
-        super("", "");
-        this.i = i;
+        super(k);
     }
 
     /**
-     * @param i
+     * @param k
      * @param k
      * @param v
      */
-    public I1S2(int i, String k, String v)
+    public I1S2(int k, String v1, String v2)
     {
-        super(k, v);
-        this.i = i;
+        super(k, v1);
+        this.v2 = v2;
     }
 
     /**
-     * @return the i
+     * @return the v2
      */
-    public int getI()
+    public String getV2()
     {
-        return i;
+        return v2;
     }
 
     /**
-     * @param i
-     *            the i to set
+     * @param v2 the v2 to set
      */
-    public void setI(int i)
+    public void setV2(String v2)
     {
-        this.i = i;
-    }
-
-    public void addI(int i)
-    {
-        this.i += i;
+        this.v2 = v2;
     }
 }

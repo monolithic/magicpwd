@@ -1478,9 +1478,9 @@ public class MexpPtn extends AMpwdPtn
             return;
         }
 
-        String mail = mailList.get(mailOpt.getMail()).getK();
-        String user = userList.get(mailOpt.getUser()).getK();
-        String pwds = pwdsList.get(mailOpt.getPwds()).getK();
+        String mail = mailList.get(mailOpt.getMail()).getV();
+        String user = userList.get(mailOpt.getUser()).getV();
+        String pwds = pwdsList.get(mailOpt.getPwds()).getV();
 
         String host = mail.substring(mail.indexOf('@') + 1);
         if (!com.magicpwd._util.Char.isValidate(host))

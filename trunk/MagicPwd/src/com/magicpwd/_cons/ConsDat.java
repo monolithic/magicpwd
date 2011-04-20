@@ -226,54 +226,50 @@ public interface ConsDat
     int MGTD_TYPE_DATE = 1;
     int MGTD_TYPE_DATETIME = 0;
     int MGTD_TYPE_TIME = -1;
-    /**提醒计划*/
-    int MGTD_SPECIAL = -10;
-    int MGTD_FIXTIME = -1;
-    int MGTD_FORMULA = 0;
-    /**周期提醒单位*/
-    int MGTD_CYCLE = 1;
-    int MGTD_CYCLE_BY_SECOND = 10;
-    int MGTD_CYCLE_BY_MINUTE = 20;
-    int MGTD_CYCLE_BY_HOUR = 30;
-    int MGTD_CYCLE_BY_DAY = 40;
-    int MGTD_CYCLE_BY_WEEK = 50;
-    int MGTD_CYCLE_BY_MONTH = 60;
-    int MGTD_CYCLE_BY_DAY_OF_MONTH = 61;
-    int MGTD_CYCLE_BY_WEEK_OF_MONTH = 62;
-    int MGTD_CYCLE_BY_YEAR = 70;
-    /**提前提醒方式*/
-    int MGTD_AHEAD_NONE = 0;
-    int MGTD_AHEAD_BY_SECOND = 1;
-    int MGTD_AHEAD_BY_MINUTE = 2;
-    int MGTD_AHEAD_BY_HOUR = 3;
-    int MGTD_AHEAD_BY_DAY = 4;
-    int MGTD_AHEAD_BY_WEEK = 5;
-    int MGTD_AHEAD_BY_MONTH = 6;
-    int MGTD_AHEAD_BY_YEAR = 7;
-    /**
-     * 初始化
-     */
+    /**初始化*/
     int MGTD_STATUS_INIT = 1;
-    /**
-     * 进行中
-     */
+    /**进行中*/
     int MGTD_STATUS_READY = 0;
-    /**
-     * 已完成
-     */
+    /**已完成*/
     int MGTD_STATUS_DONE = 2;
-    /**
-     * 已推迟
-     */
+    /**已推迟*/
     int MGTD_STATUS_DELAY = -1;
-    /**
-     * 已取消
-     */
+    /**已取消*/
     int MGTD_STATUS_ABORT = -2;
-    /**提示方式*/
-    int MGTD_METHOD_NOTE = 0;
-    int MGTD_METHOD_MAIL = 1;
-    int MGTD_METHOD_AUDIO = 1;
-    int MGTD_METHOD_APPS = 2;
-    int MGTD_METHOD_FILE = 2;
+    /**秒*/
+    int MGTD_UNIT_SECOND = 1;
+    /**分*/
+    int MGTD_UNIT_MINUTE = 2;
+    /**时*/
+    int MGTD_UNIT_HOUR = 3;
+    /**日*/
+    int MGTD_UNIT_DAY = 4;
+    /**周*/
+    int MGTD_UNIT_WEEK = 5;
+    /**月*/
+    int MGTD_UNIT_MONTH = 6;
+    /**年*/
+    int MGTD_UNIT_YEAR = 7;
+    /**消息提示*/
+    int GTD_METHOD_NOTE = 1;
+    /**发送邮件*/
+    int GTD_METHOD_MAIL = 2;
+    /**执行程序*/
+    int GTD_METHOD_APPS = 3;
+    /**打开文件*/
+    int GTD_METHOD_FILE = 4;
+    /**浏览网页*/
+    int GTD_METHOD_HTTP = 5;
+    /**播放声音*/
+    int GTD_METHOD_AUDIO = 6;
+    /**定时提醒*/
+    int MGTD_INTVAL_FIXTIME = 1;
+    /**周期提醒*/
+    int MGTD_INTVAL_PERIOD = 2;
+    /**间隔提醒*/
+    int MGTD_INTVAL_INTVAL = 3;
+    /**特殊提醒*/
+    int MGTD_INTVAL_SPECIAL = 4;
+    /**公式提醒*/
+    int MGTD_INTVAL_FORMULA = 5;
 }

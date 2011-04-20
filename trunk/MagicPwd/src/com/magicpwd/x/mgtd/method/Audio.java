@@ -19,6 +19,7 @@ package com.magicpwd.x.mgtd.method;
 import com.magicpwd.__i.mgtd.IMgtdBean;
 import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._comp.BtnLabel;
+import com.magicpwd._cons.ConsDat;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd.x.mgtd.MgtdDlg;
@@ -68,14 +69,14 @@ public class Audio extends javax.swing.JPanel implements IMgtdBean
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg.addComponent(tfPath, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg.addComponent(btPath,21,21,21);
+        hsg.addComponent(btPath, 21, 21, 21);
 //        hsg.addContainerGap();
         layout.setHorizontalGroup(hsg);
 
         javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg.addComponent(lbPath);
         vpg.addComponent(tfPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vpg.addComponent(btPath,21,21,21);
+        vpg.addComponent(btPath, 21, 21, 21);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
 //        vsg.addContainerGap();
         vsg.addGroup(vpg);
@@ -131,9 +132,12 @@ public class Audio extends javax.swing.JPanel implements IMgtdBean
             tfPath.requestFocus();
             return false;
         }
+
+        mgtd.setP30F0305(ConsDat.GTD_METHOD_AUDIO);
         mgtd.setP30F030F(text);
         return true;
     }
+
     private void btPathActionPerformed(java.awt.event.ActionEvent e)
     {
         javax.swing.JFileChooser fc = new javax.swing.JFileChooser();

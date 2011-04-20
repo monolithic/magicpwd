@@ -21,7 +21,9 @@ import com.magicpwd._comn.I1S2;
 import com.magicpwd._comn.mpwd.Hint;
 import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._comp.BtnLabel;
-import com.magicpwd._enum.GtdUnit;
+import com.magicpwd._cons.ConsDat;
+import com.magicpwd._cons.LangRes;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd.x.mgtd.MgtdDlg;
 
@@ -35,7 +37,7 @@ import com.magicpwd.x.mgtd.MgtdDlg;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public class Cycle extends javax.swing.JPanel implements IMgtdBean
+public class Period extends javax.swing.JPanel implements IMgtdBean
 {
 
     private MgtdDlg mgtdDlg;
@@ -44,7 +46,7 @@ public class Cycle extends javax.swing.JPanel implements IMgtdBean
     private javax.swing.SpinnerDateModel smTtime;
     private javax.swing.SpinnerDateModel smStime;
 
-    public Cycle(MgtdDlg mgtdDlg)
+    public Period(MgtdDlg mgtdDlg)
     {
         this.mgtdDlg = mgtdDlg;
     }
@@ -196,11 +198,13 @@ public class Cycle extends javax.swing.JPanel implements IMgtdBean
         smTtime.setValue(new java.util.Date(mgtd.getP30F030D()));
         smStime.setValue(new java.util.Date(mgtd.getP30F030E()));
 
+        cbIntval.setSelectedIndex(0);
+
         I1S2[] item = new I1S2[mgtd.getHintList().size()];
         int i = 0;
         for (Hint hint : mgtd.getHintList())
         {
-            item[i++] = new I1S2(hint.getP30F0304(), "", "");
+            item[i++] = new I1S2(hint.getP30F0405(), "", "");
         }
         lsEnum.setSelectedValue(item, false);
         return true;
@@ -209,6 +213,7 @@ public class Cycle extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean saveData(Mgtd mgtd)
     {
+        mgtd.setP30F0304(ConsDat.MGTD_INTVAL_PERIOD);
         mgtd.setP30F030C(smFtime.getDate().getTime());
         mgtd.setP30F030D(smTtime.getDate().getTime());
         mgtd.setP30F030E(smStime.getDate().getTime());
@@ -232,8 +237,8 @@ public class Cycle extends javax.swing.JPanel implements IMgtdBean
             I1S2 item = (I1S2) obj;
             hint = new Hint();
             hint.setP30F0403(0L);
-            hint.setP30F0404(item.getI());
-            hint.setP30F0405("");
+            hint.setP30F0405(item.getK());
+            hint.setP30F0406("");
             list.add(hint);
         }
         mgtd.setHintList(list);
@@ -243,66 +248,74 @@ public class Cycle extends javax.swing.JPanel implements IMgtdBean
     private void cbIntvalActionPerformed(java.awt.event.ActionEvent e)
     {
         int idx = cbIntval.getSelectedIndex() + 1;
-        if (idx == GtdUnit.second.ordinal())
+        if (idx == ConsDat.MGTD_UNIT_SECOND)
         {
             lmEnum.clear();
+            String tmp = Lang.getLang(LangRes.P30F110D, "{0}秒");
             for (int i = 0; i <= 59; i += 1)
             {
-                lmEnum.addElement(i);
+                lmEnum.addElement(new I1S2(i, Char.format(tmp, "" + i), null));
             }
             return;
         }
-        if (idx == GtdUnit.minute.ordinal())
+        if (idx == ConsDat.MGTD_UNIT_MINUTE)
         {
             lmEnum.clear();
+            String tmp = Lang.getLang(LangRes.P30F110F, "{0}分");
             for (int i = 0; i <= 59; i += 1)
             {
-                lmEnum.addElement(i);
+                lmEnum.addElement(new I1S2(i, Char.format(tmp, "" + i), null));
             }
             return;
         }
-        if (idx == GtdUnit.hour.ordinal())
+        if (idx == ConsDat.MGTD_UNIT_HOUR)
         {
             lmEnum.clear();
+            String tmp = Lang.getLang(LangRes.P30F1113, "{0}点");
             for (int i = 0; i <= 23; i += 1)
             {
-                lmEnum.addElement(i);
+                lmEnum.addElement(new I1S2(i, Char.format(tmp, "" + i), null));
             }
             return;
         }
-        if (idx == GtdUnit.day.ordinal())
+        if (idx == ConsDat.MGTD_UNIT_DAY)
         {
             lmEnum.clear();
+            String tmp = Lang.getLang(LangRes.P30F1119, "{0}日");
             for (int i = 1; i <= 31; i += 1)
             {
-                lmEnum.addElement(i);
+                lmEnum.addElement(new I1S2(i, Char.format(tmp, "" + i), null));
             }
             return;
         }
-        if (idx == GtdUnit.week.ordinal())
+        if (idx == ConsDat.MGTD_UNIT_WEEK)
         {
             lmEnum.clear();
+            String[] arr = Lang.getLang(LangRes.P30F111C, "星期日,星期一,星期二,星期三,星期四,星期五,星期六").split(",");
             for (int i = 0; i <= 6; i += 1)
             {
-                lmEnum.addElement(i);
+                lmEnum.addElement(new I1S2(i, arr[i], null));
             }
             return;
         }
-        if (idx == GtdUnit.month.ordinal())
+        if (idx == ConsDat.MGTD_UNIT_MONTH)
         {
             lmEnum.clear();
+            String[] arr = Lang.getLang(LangRes.P30F111F, "一月,二月,三月,四月,五月,六月,七月,八月,九月,十月,十一月,十二月").split(",");
             for (int i = 1; i <= 12; i += 1)
             {
-                lmEnum.addElement(i);
+                lmEnum.addElement(new I1S2(i, arr[i - 1], null));
             }
             return;
         }
-        if (idx == GtdUnit.year.ordinal())
+        if (idx == ConsDat.MGTD_UNIT_YEAR)
         {
             lmEnum.clear();
-            for (int i = 0; i <= 20; i += 1)
+            String tmp = Lang.getLang(LangRes.P30F1120, "{0}年");
+            int year = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
+            for (int i = year - 5, j = year + 25; i <= j; i += 1)
             {
-                lmEnum.addElement(2010 + i);
+                lmEnum.addElement(new I1S2(i, Char.format(tmp, "" + i), null));
             }
             return;
         }

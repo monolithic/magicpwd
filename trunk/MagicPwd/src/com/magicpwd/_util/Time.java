@@ -199,40 +199,40 @@ public class Time implements java.awt.event.ActionListener
     {
         switch (hint.getP30F0311())
         {
-            case ConsDat.MGTD_AHEAD_BY_SECOND:
+            case ConsDat.MGTD_UNIT_SECOND:
                 time.add(java.util.Calendar.SECOND, hint.getP30F0312());
                 break;
-            case ConsDat.MGTD_AHEAD_BY_MINUTE:
+            case ConsDat.MGTD_UNIT_MINUTE:
                 time.add(java.util.Calendar.MINUTE, hint.getP30F0312());
                 break;
-            case ConsDat.MGTD_AHEAD_BY_HOUR:
+            case ConsDat.MGTD_UNIT_HOUR:
                 time.add(java.util.Calendar.HOUR_OF_DAY, hint.getP30F0312());
                 break;
-            case ConsDat.MGTD_AHEAD_BY_DAY:
+            case ConsDat.MGTD_UNIT_DAY:
                 time.add(java.util.Calendar.DAY_OF_MONTH, hint.getP30F0312());
                 break;
-            case ConsDat.MGTD_AHEAD_BY_WEEK:
+            case ConsDat.MGTD_UNIT_WEEK:
                 time.add(java.util.Calendar.DAY_OF_MONTH, 7 * hint.getP30F0312());
                 break;
-            case ConsDat.MGTD_AHEAD_BY_MONTH:
+            case ConsDat.MGTD_UNIT_MONTH:
                 time.add(java.util.Calendar.MONTH, hint.getP30F0312());
                 break;
-            case ConsDat.MGTD_AHEAD_BY_YEAR:
+            case ConsDat.MGTD_UNIT_YEAR:
                 time.add(java.util.Calendar.YEAR, hint.getP30F0312());
                 break;
         }
         long now = time.getTimeInMillis();
 
         // 定时
-        if (hint.getP30F0304() == ConsDat.MGTD_FIXTIME)
+        if (hint.getP30F0304() == ConsDat.MGTD_INTVAL_FIXTIME)
         {
             long dif = (now - hint.getP30F030E()) % 1000;
             return dif < 1;
         }
         // 公式
-        if (hint.getP30F0304() == ConsDat.MGTD_FORMULA)
+        if (hint.getP30F0304() == ConsDat.MGTD_INTVAL_FORMULA)
         {
-            String exp = hint.getP30F0405();
+            String exp = hint.getP30F0406();
             if (Char.isValidate(exp))
             {
                 try
@@ -255,50 +255,50 @@ public class Time implements java.awt.event.ActionListener
             return false;
         }
         // 按秒重复
-        if (hint.getP30F0304() == ConsDat.MGTD_CYCLE_BY_SECOND)
+        if (hint.getP30F0404() == ConsDat.MGTD_UNIT_SECOND)
         {
             // long diff = (now - mtss.getP30F0404()) / 1000;
-            return (now - hint.getP30F030E()) % (hint.getP30F0404() * 1000) == 0;
+            return (now - hint.getP30F030E()) % (hint.getP30F0405() * 1000) == 0;
         }
         // 按分重复
-        if (hint.getP30F0304() == ConsDat.MGTD_CYCLE_BY_MINUTE)
+        if (hint.getP30F0404() == ConsDat.MGTD_UNIT_MINUTE)
         {
             // long diff = (now - mtss.getP30F0404()) / 1000 / 60;
-            return (now - hint.getP30F030E()) % (hint.getP30F0404() * 60000) == 0;
+            return (now - hint.getP30F030E()) % (hint.getP30F0405() * 60000) == 0;
         }
         // 按时重复
-        if (hint.getP30F0304() == ConsDat.MGTD_CYCLE_BY_HOUR)
+        if (hint.getP30F0404() == ConsDat.MGTD_UNIT_HOUR)
         {
             // long diff = (now - mtss.getP30F0404()) / 1000 / 60 / 60;
-            return (now - hint.getP30F030E()) % (hint.getP30F0404() * 3600000) == 0;
+            return (now - hint.getP30F030E()) % (hint.getP30F0405() * 3600000) == 0;
         }
         // 按天重复
-        if (hint.getP30F0304() == ConsDat.MGTD_CYCLE_BY_DAY)
+        if (hint.getP30F0404() == ConsDat.MGTD_UNIT_DAY)
         {
             // long diff = (now - mtss.getP30F0404()) / 1000 / 60 / 60 / 24;
-            return (now - hint.getP30F030E()) % (hint.getP30F0404() * 86400000) == 0;
+            return (now - hint.getP30F030E()) % (hint.getP30F0405() * 86400000) == 0;
         }
         // 按周重复
-        if (hint.getP30F0304() == ConsDat.MGTD_CYCLE_BY_WEEK)
+        if (hint.getP30F0404() == ConsDat.MGTD_UNIT_WEEK)
         {
             // long diff = (now - mtss.getP30F0404()) / 1000 / 60 / 60 / 24 / 7;
-            return (now - hint.getP30F030E()) % (hint.getP30F0404() * 604800000) == 0;
+            return (now - hint.getP30F030E()) % (hint.getP30F0405() * 604800000) == 0;
         }
         // 按月重复
-        if (hint.getP30F0304() == ConsDat.MGTD_CYCLE_BY_MONTH)
+        if (hint.getP30F0404() == ConsDat.MGTD_UNIT_MONTH)
         {
             java.util.Calendar tmp = (java.util.Calendar) time.clone();
             tmp.setTimeInMillis(hint.getP30F030E());
             int dif = (time.get(java.util.Calendar.YEAR) - tmp.get(java.util.Calendar.YEAR)) * 12 + time.get(java.util.Calendar.MONTH) - tmp.get(java.util.Calendar.MONTH);
-            return dif % hint.getP30F0404() == 0;
+            return dif % hint.getP30F0405() == 0;
         }
         // 按年重复
-        if (hint.getP30F0304() == ConsDat.MGTD_CYCLE_BY_YEAR)
+        if (hint.getP30F0404() == ConsDat.MGTD_UNIT_YEAR)
         {
             java.util.Calendar tmp = (java.util.Calendar) time.clone();
             tmp.setTimeInMillis(hint.getP30F030E());
             int dif = time.get(java.util.Calendar.YEAR) - tmp.get(java.util.Calendar.YEAR);
-            return dif % hint.getP30F0404() == 0;
+            return dif % hint.getP30F0405() == 0;
         }
         return false;
     }

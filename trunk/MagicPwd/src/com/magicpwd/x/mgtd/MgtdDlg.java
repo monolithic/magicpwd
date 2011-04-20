@@ -30,10 +30,10 @@ import com.magicpwd.x.mgtd.method.Audio;
 import com.magicpwd.x.mgtd.method.File;
 import com.magicpwd.x.mgtd.method.Mail;
 import com.magicpwd.x.mgtd.method.Note;
-import com.magicpwd.x.mgtd.schedule.Cycle;
+import com.magicpwd.x.mgtd.schedule.Period;
 import com.magicpwd.x.mgtd.schedule.FixTime;
 import com.magicpwd.x.mgtd.schedule.Formula;
-import com.magicpwd.x.mgtd.schedule.Interval;
+import com.magicpwd.x.mgtd.schedule.Intval;
 import com.magicpwd.x.mgtd.schedule.Special;
 
 /**
@@ -224,12 +224,12 @@ public class MgtdDlg extends ADialog
         plIntval.add(fixTime.getName(), fixTime);
         intvalList.add(fixTime);
 
-        Cycle sycle = new Cycle(this);
+        Period sycle = new Period(this);
         sycle.initView();
         plIntval.add(sycle.getName(), sycle);
         intvalList.add(sycle);
 
-        Interval interval = new Interval(this);
+        Intval interval = new Intval(this);
         interval.initView();
         plIntval.add(interval.getName(), interval);
         intvalList.add(interval);
@@ -453,9 +453,7 @@ public class MgtdDlg extends ADialog
         }
         mgtd.setP30F0301(ConsDat.MGTD_TYPE_DATETIME);
         mgtd.setP30F0302(ConsDat.MGTD_STATUS_INIT);
-        mgtd.setP30F0703(cbLevel.getSelectedIndex());
-        mgtd.setP30F0704(intvalIdx);
-        mgtd.setP30F0305(methodIdx);
+        mgtd.setP30F0303(cbLevel.getSelectedIndex());
         mgtd.setP30F0306(cbPublic.isSelected() ? 1 : 0);
         mgtd.setP30F0307(0);
         mgtd.setP30F030B(tfTitle.getText());
