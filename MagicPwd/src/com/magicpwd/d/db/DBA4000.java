@@ -429,6 +429,37 @@ public class DBA4000
         }
     }
 
+    public static java.util.ArrayList<Mgtd> readMgtdList()
+    {
+        java.util.ArrayList<Mgtd> list = new java.util.ArrayList<Mgtd>();
+
+        DBAccess dba = new DBAccess();
+
+        try
+        {
+            dba.init();
+
+            dba.addTable(DBC4000.P30F0300);
+            dba.addWhere(DBC4000.P30F0306, "1");
+            dba.addSort(DBC4000.P30F0304);
+//            dba.addSort(DBC4000.p30f03);
+
+            ResultSet rest = dba.executeSelect();
+            readMgtdData(rest, list);
+            rest.close();
+            return list;
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            return list;
+        }
+        finally
+        {
+            dba.dispose();
+        }
+    }
+
     public static java.util.List<Hint> readHintList(String mgtdHash)
     {
         java.util.ArrayList<Hint> list = new java.util.ArrayList<Hint>();
