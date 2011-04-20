@@ -18,14 +18,18 @@ package com.magicpwd._bean.mexp;
 
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mexp.IMexpBean;
+import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
+import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Date;
 import com.magicpwd._util.Lang;
+import com.magicpwd.d.db.DBA4000;
+import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.mexp.MexpPtn;
 
 /**
@@ -171,6 +175,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
         mi_HalfHour.addActionListener(action);
         mi_FullHour.addActionListener(action);
         mainPtn.getMenuPtn().getSubMenu("date-interval", pm_DateView, action);
+        initMenu();
 
         nameBox.initData();
     }
@@ -232,6 +237,102 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
     @Override
     public void dropDataActionPerformed(java.awt.event.ActionEvent evt)
     {
+    }
+
+    private void initMenu()
+    {
+        java.util.List<Mgtd> mgtdList = DBA4000.readMgtdList();
+        MenuPtn menuPtn = mainPtn.getMenuPtn();
+        int idx = 0;
+        int max = mgtdList.size();
+        Mgtd mgtd;
+        javax.swing.AbstractButton button;
+
+        button = menuPtn.getButton("hint-fixtime");
+        if (button != null)
+        {
+            button.removeAll();
+            while (idx < max)
+            {
+                mgtd = mgtdList.get(idx);
+                if (mgtd.getP30F0304() != ConsDat.MGTD_INTVAL_FIXTIME)
+                {
+                    break;
+                }
+                javax.swing.JCheckBoxMenuItem item = new javax.swing.JCheckBoxMenuItem();
+                item.setText(mgtd.getP30F030B());
+                button.add(item);
+                idx += 1;
+            }
+        }
+        button = menuPtn.getButton("hint-period");
+        if (button != null)
+        {
+            button.removeAll();
+            while (idx < max)
+            {
+                mgtd = mgtdList.get(idx);
+                if (mgtd.getP30F0304() != ConsDat.MGTD_INTVAL_PERIOD)
+                {
+                    break;
+                }
+                javax.swing.JCheckBoxMenuItem item = new javax.swing.JCheckBoxMenuItem();
+                item.setText(mgtd.getP30F030B());
+                button.add(item);
+                idx += 1;
+            }
+        }
+        button = menuPtn.getButton("hint-intval");
+        if (button != null)
+        {
+            button.removeAll();
+            while (idx < max)
+            {
+                mgtd = mgtdList.get(idx);
+                if (mgtd.getP30F0304() != ConsDat.MGTD_INTVAL_INTVAL)
+                {
+                    break;
+                }
+                javax.swing.JCheckBoxMenuItem item = new javax.swing.JCheckBoxMenuItem();
+                item.setText(mgtd.getP30F030B());
+                button.add(item);
+                idx += 1;
+            }
+        }
+        button = menuPtn.getButton("hint-special");
+        if (button != null)
+        {
+            button.removeAll();
+            while (idx < max)
+            {
+                mgtd = mgtdList.get(idx);
+                if (mgtd.getP30F0304() != ConsDat.MGTD_INTVAL_SPECIAL)
+                {
+                    break;
+                }
+                javax.swing.JCheckBoxMenuItem item = new javax.swing.JCheckBoxMenuItem();
+                item.setText(mgtd.getP30F030B());
+                button.add(item);
+                idx += 1;
+            }
+        }
+        button = menuPtn.getButton("hint-formula");
+        if (button != null)
+        {
+            button.removeAll();
+            while (idx < max)
+            {
+                mgtd = mgtdList.get(idx);
+                if (mgtd.getP30F0304() != ConsDat.MGTD_INTVAL_FORMULA)
+                {
+                    break;
+                }
+                javax.swing.JCheckBoxMenuItem item = new javax.swing.JCheckBoxMenuItem();
+                item.setText(mgtd.getP30F030B());
+                button.add(item);
+                idx += 1;
+            }
+        }
     }
 
     private void bt_DateViewActionPerformed(java.awt.event.ActionEvent evt)
