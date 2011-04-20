@@ -91,6 +91,12 @@ public class Audio extends javax.swing.JPanel implements IMgtdBean
     }
 
     @Override
+    public int getKey()
+    {
+        return ConsDat.MGTD_METHOD_AUDIO;
+    }
+
+    @Override
     public String getName()
     {
         return "audio";
@@ -133,7 +139,6 @@ public class Audio extends javax.swing.JPanel implements IMgtdBean
             return false;
         }
 
-        mgtd.setP30F0305(ConsDat.GTD_METHOD_AUDIO);
         mgtd.setP30F030F(text);
         return true;
     }

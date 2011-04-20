@@ -453,7 +453,7 @@ public class DBA4000
             {
                 hint = new Hint();
                 hint.setP30F0403(rest.getLong(DBC4000.P30F0403));
-                hint.setP30F0405(rest.getInt(DBC4000.P30F0404));
+                hint.setP30F0404(rest.getInt(DBC4000.P30F0404));
                 hint.setP30F0405(rest.getInt(DBC4000.P30F0405));
                 hint.setP30F0406(rest.getString(DBC4000.P30F0406));
                 list.add(hint);

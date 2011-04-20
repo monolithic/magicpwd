@@ -29,6 +29,8 @@ public interface IMgtdBean
 
     void initLang();
 
+    int getKey();
+
     String getName();
 
     String getTitle();

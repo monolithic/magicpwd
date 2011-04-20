@@ -93,6 +93,12 @@ public class FixTime extends javax.swing.JPanel implements IMgtdBean
     }
 
     @Override
+    public int getKey()
+    {
+        return ConsDat.MGTD_INTVAL_FIXTIME;
+    }
+
+    @Override
     public String getName()
     {
         return "fixTime";
@@ -119,7 +125,6 @@ public class FixTime extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean saveData(Mgtd mgtd)
     {
-        mgtd.setP30F0304(ConsDat.MGTD_INTVAL_FIXTIME);
         mgtd.setP30F030C(0L);
         mgtd.setP30F030D(0L);
         mgtd.setP30F030E(0L);
@@ -128,6 +133,7 @@ public class FixTime extends javax.swing.JPanel implements IMgtdBean
 
         Hint hint = new Hint();
         hint.setP30F0403(smTime.getDate().getTime());
+        hint.setP30F0404(0);
         hint.setP30F0405(0);
         hint.setP30F0406("");
         list.add(hint);

@@ -90,6 +90,12 @@ public class File extends javax.swing.JPanel implements IMgtdBean
     }
 
     @Override
+    public int getKey()
+    {
+        return ConsDat.MGTD_METHOD_FILE;
+    }
+
+    @Override
     public String getName()
     {
         return "file";
@@ -132,7 +138,6 @@ public class File extends javax.swing.JPanel implements IMgtdBean
             return false;
         }
 
-        mgtd.setP30F0305(ConsDat.GTD_METHOD_FILE);
         mgtd.setP30F030F(text);
         return true;
     }

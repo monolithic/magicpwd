@@ -17,6 +17,7 @@
 package com.magicpwd.x.mgtd.schedule;
 
 import com.magicpwd.__i.mgtd.IMgtdBean;
+import com.magicpwd._comn.I1S1;
 import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._comn.mpwd.Hint;
 import com.magicpwd._comp.BtnLabel;
@@ -151,14 +152,20 @@ public class Intval extends javax.swing.JPanel implements IMgtdBean
         lbStime.setText("执行时间");
 
         lbIntval.setText("间隔时间");
-        cbIntval.addItem("无");
-        cbIntval.addItem("秒");
-        cbIntval.addItem("分");
-        cbIntval.addItem("时");
-        cbIntval.addItem("周");
-        cbIntval.addItem("日");
-        cbIntval.addItem("月");
-        cbIntval.addItem("年");
+        cbIntval.addItem(new I1S1(0, "无"));
+        cbIntval.addItem(new I1S1(ConsDat.MGTD_UNIT_SECOND, "秒"));
+        cbIntval.addItem(new I1S1(ConsDat.MGTD_UNIT_MINUTE, "分"));
+        cbIntval.addItem(new I1S1(ConsDat.MGTD_UNIT_HOUR, "时"));
+        cbIntval.addItem(new I1S1(ConsDat.MGTD_UNIT_WEEK, "周"));
+        cbIntval.addItem(new I1S1(ConsDat.MGTD_UNIT_DAY, "日"));
+        cbIntval.addItem(new I1S1(ConsDat.MGTD_UNIT_MONTH, "月"));
+        cbIntval.addItem(new I1S1(ConsDat.MGTD_UNIT_YEAR, "年"));
+    }
+
+    @Override
+    public int getKey()
+    {
+        return ConsDat.MGTD_INTVAL_INTVAL;
     }
 
     @Override
@@ -180,6 +187,7 @@ public class Intval extends javax.swing.JPanel implements IMgtdBean
         if (hint != null)
         {
             spStime.setValue(new java.util.Date(hint.getP30F0403()));
+            cbIntval.setSelectedItem(new I1S1(hint.getP30F0404()));
             spIntval.setValue(hint.getP30F0405());
             return true;
         }
@@ -189,7 +197,13 @@ public class Intval extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean saveData(Mgtd mgtd)
     {
-        mgtd.setP30F0304(ConsDat.MGTD_INTVAL_INTVAL);
+        Object unitObj = cbIntval.getSelectedItem();
+        if (unitObj == null || !(unitObj instanceof I1S1))
+        {
+            return false;
+        }
+
+        I1S1 unit = (I1S1) unitObj;
         mgtd.setP30F030C(smFtime.getDate().getTime());
         mgtd.setP30F030D(smTtime.getDate().getTime());
         mgtd.setP30F030E(0L);
@@ -198,6 +212,7 @@ public class Intval extends javax.swing.JPanel implements IMgtdBean
 
         Hint hint = new Hint();
         hint.setP30F0403(smStime.getDate().getTime());
+        hint.setP30F0404(unit.getK());
         hint.setP30F0405(smIntval.getNumber().intValue());
         hint.setP30F0406("");
         list.add(hint);

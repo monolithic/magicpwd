@@ -18,7 +18,8 @@ package com.magicpwd.x.mgtd;
 
 import com.magicpwd.__a.ADialog;
 import com.magicpwd.__i.mgtd.IMgtdBean;
-import com.magicpwd._comn.S1S1;
+import com.magicpwd._comn.I1S1;
+import com.magicpwd._comn.I1S2;
 import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._util.Bean;
@@ -302,25 +303,25 @@ public class MgtdDlg extends ADialog
         btApply.setText("确认(O)");
 
         lbAhead.setText("提前提醒(A)");
-        cbAhead.addItem("无");
-        cbAhead.addItem("秒");
-        cbAhead.addItem("分");
-        cbAhead.addItem("时");
-        cbAhead.addItem("周");
-        cbAhead.addItem("日");
-        cbAhead.addItem("月");
-        cbAhead.addItem("年");
-
-        for (IMgtdBean bean : methodList)
-        {
-            bean.initLang();
-            cbMethod.addItem(new S1S1(bean.getName(), bean.getTitle()));
-        }
+        cbAhead.addItem(new I1S1(0, "无"));
+        cbAhead.addItem(new I1S1(ConsDat.MGTD_UNIT_SECOND, "秒"));
+        cbAhead.addItem(new I1S1(ConsDat.MGTD_UNIT_MINUTE, "分"));
+        cbAhead.addItem(new I1S1(ConsDat.MGTD_UNIT_HOUR, "时"));
+        cbAhead.addItem(new I1S1(ConsDat.MGTD_UNIT_WEEK, "周"));
+        cbAhead.addItem(new I1S1(ConsDat.MGTD_UNIT_DAY, "日"));
+        cbAhead.addItem(new I1S1(ConsDat.MGTD_UNIT_MONTH, "月"));
+        cbAhead.addItem(new I1S1(ConsDat.MGTD_UNIT_YEAR, "年"));
 
         for (IMgtdBean bean : intvalList)
         {
             bean.initLang();
-            cbIntval.addItem(new S1S1(bean.getName(), bean.getTitle()));
+            cbIntval.addItem(new I1S2(bean.getKey(), bean.getTitle(), bean.getName()));
+        }
+
+        for (IMgtdBean bean : methodList)
+        {
+            bean.initLang();
+            cbMethod.addItem(new I1S2(bean.getKey(), bean.getTitle(), bean.getName()));
         }
     }
 
@@ -365,29 +366,37 @@ public class MgtdDlg extends ADialog
             }
         });
 
-        cbLevel.addItem("无");
-        cbLevel.addItem("低");
-        cbLevel.addItem("中");
-        cbLevel.addItem("高");
+        cbLevel.addItem(new I1S1(0, "无"));
+        cbLevel.addItem(new I1S1(1, "低"));
+        cbLevel.addItem(new I1S1(2, "中"));
+        cbLevel.addItem(new I1S1(3, "高"));
 
         if (mgtd != null)
         {
             tfTitle.setText(mgtd.getP30F030B());
             cbLevel.setSelectedIndex(mgtd.getP30F0303());
-            cbIntval.setSelectedIndex(mgtd.getP30F0304());
-            IMgtdBean intvalBean = intvalList.get(mgtd.getP30F0304());
-            if (intvalBean != null)
+            int intvalIdx = mgtd.getP30F0304();
+            cbIntval.setSelectedItem(new I1S2(intvalIdx--));
+            if (intvalIdx > -1)
             {
-                intvalBean.showData(mgtd);
+                IMgtdBean intvalBean = intvalList.get(intvalIdx);
+                if (intvalBean != null)
+                {
+                    intvalBean.showData(mgtd);
+                }
             }
-            cbMethod.setSelectedIndex(mgtd.getP30F0305());
-            IMgtdBean methodBean = methodList.get(mgtd.getP30F0305());
-            if (methodBean != null)
+            int methodIdx = mgtd.getP30F0305();
+            cbMethod.setSelectedItem(new I1S2(methodIdx--));
+            if (methodIdx > -1)
             {
-                methodBean.showData(mgtd);
+                IMgtdBean methodBean = methodList.get(methodIdx);
+                if (methodBean != null)
+                {
+                    methodBean.showData(mgtd);
+                }
             }
             cbPublic.setSelected(1 == mgtd.getP30F0306());
-            cbAhead.setSelectedIndex(mgtd.getP30F0311());
+            cbAhead.setSelectedItem(new I1S1(mgtd.getP30F0311()));
             spAhead.setValue(mgtd.getP30F0312());
             taRemark.setText(mgtd.getP30F0313());
 
@@ -408,23 +417,23 @@ public class MgtdDlg extends ADialog
     private void cbIntvalActionPerformed(java.awt.event.ActionEvent e)
     {
         Object obj = cbIntval.getSelectedItem();
-        if (obj == null || !(obj instanceof S1S1))
+        if (obj == null || !(obj instanceof I1S2))
         {
             return;
         }
-        S1S1 item = (S1S1) obj;
-        intvalLayout.show(plIntval, item.getK());
+        I1S2 item = (I1S2) obj;
+        intvalLayout.show(plIntval, item.getV2());
     }
 
     private void cbMethodActionPerformed(java.awt.event.ActionEvent e)
     {
         Object obj = cbMethod.getSelectedItem();
-        if (obj == null || !(obj instanceof S1S1))
+        if (obj == null || !(obj instanceof I1S2))
         {
             return;
         }
-        S1S1 item = (S1S1) obj;
-        methodLayout.show(plMethod, item.getK());
+        I1S2 item = (I1S2) obj;
+        methodLayout.show(plMethod, item.getV2());
     }
 
     private void btApplyActionPerformed(java.awt.event.ActionEvent evt)
@@ -454,21 +463,28 @@ public class MgtdDlg extends ADialog
         mgtd.setP30F0301(ConsDat.MGTD_TYPE_DATETIME);
         mgtd.setP30F0302(ConsDat.MGTD_STATUS_INIT);
         mgtd.setP30F0303(cbLevel.getSelectedIndex());
-        mgtd.setP30F0306(cbPublic.isSelected() ? 1 : 0);
-        mgtd.setP30F0307(0);
-        mgtd.setP30F030B(tfTitle.getText());
-        IMgtdBean methodBean = methodList.get(methodIdx);
-        if (!methodBean.saveData(mgtd))
-        {
-            return;
-        }
-        mgtd.setP30F0311(cbAhead.getSelectedIndex());
-        mgtd.setP30F0312(smAhead.getNumber().intValue());
         IMgtdBean intvalBean = intvalList.get(intvalIdx);
         if (!intvalBean.saveData(mgtd))
         {
             return;
         }
+        mgtd.setP30F0304(intvalBean.getKey());
+        IMgtdBean methodBean = methodList.get(methodIdx);
+        if (!methodBean.saveData(mgtd))
+        {
+            return;
+        }
+        mgtd.setP30F0305(methodBean.getKey());
+        mgtd.setP30F0306(cbPublic.isSelected() ? 1 : 0);
+        mgtd.setP30F0307(0);
+        mgtd.setP30F030B(tfTitle.getText());
+        Object obj = cbAhead.getSelectedItem();
+        if (obj == null || !(obj instanceof I1S1))
+        {
+            return;
+        }
+        mgtd.setP30F0311(((I1S1) obj).getK());
+        mgtd.setP30F0312(smAhead.getNumber().intValue());
         mgtd.setP30F0313(taRemark.getText());
         mgtdPtn.saveMgtd(mgtd);
     }

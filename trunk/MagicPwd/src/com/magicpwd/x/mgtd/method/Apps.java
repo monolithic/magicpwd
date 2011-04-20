@@ -106,6 +106,12 @@ public class Apps extends javax.swing.JPanel implements IMgtdBean
     }
 
     @Override
+    public int getKey()
+    {
+        return ConsDat.MGTD_METHOD_APPS;
+    }
+
+    @Override
     public String getName()
     {
         return "apps";
@@ -149,7 +155,6 @@ public class Apps extends javax.swing.JPanel implements IMgtdBean
             return false;
         }
 
-        mgtd.setP30F0305(ConsDat.GTD_METHOD_APPS);
         mgtd.setP30F030F(text);
         mgtd.setP30F0310(tfArgs.getText());
         return true;

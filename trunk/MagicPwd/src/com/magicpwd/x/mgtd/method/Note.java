@@ -76,6 +76,12 @@ public class Note extends javax.swing.JPanel implements IMgtdBean
     }
 
     @Override
+    public int getKey()
+    {
+        return ConsDat.MGTD_METHOD_NOTE;
+    }
+
+    @Override
     public String getName()
     {
         return "note";
@@ -105,7 +111,6 @@ public class Note extends javax.swing.JPanel implements IMgtdBean
             return false;
         }
 
-        mgtd.setP30F0305(ConsDat.GTD_METHOD_NOTE);
         mgtd.setP30F030F(text);
         return true;
     }
