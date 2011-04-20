@@ -98,7 +98,10 @@ public class I1S1
             I1S1 t = (I1S1) o;
             return getK() == t.getK();
         }
-
+        if (o instanceof Integer)
+        {
+            return getK() == (Integer) o;
+        }
         return false;
     }
 

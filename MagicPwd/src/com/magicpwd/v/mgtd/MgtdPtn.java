@@ -20,6 +20,7 @@ import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Bean;
+import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.m.UserMdl;
@@ -91,11 +92,47 @@ public class MgtdPtn extends AMpwdPtn
         mgtdMdl = new MgtdMdl(userMdl);
         mgtdMdl.init();
         tbTaskList.setModel(mgtdMdl.getGridMdl());
+        tbTaskList.getColumnModel().getColumn(0).setMaxWidth(tbTaskList.getFontMetrics(tbTaskList.getFont()).stringWidth("6666"));
+
+        tbTaskList.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent evt)
+            {
+                // 右键事件处理
+                if (evt.isPopupTrigger())
+                {
+                    showPopupMenu(evt);
+                }
+            }
+
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                // 右键事件处理
+                if (evt.isPopupTrigger())
+                {
+                    showPopupMenu(evt);
+                }
+            }
+
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                tbKeysListMouseClicked(evt);
+            }
+        });
 
         menuPtn = new MenuPtn(trayPtn, this);
         try
         {
             menuPtn.loadData(new java.io.File(userMdl.getDataDir(), "mgtd.xml"));
+            pmTaskMenu = new javax.swing.JPopupMenu();
+            if (menuPtn.getPopMenu("grid", pmTaskMenu))
+            {
+//                setJMenuBar(pmTaskMenu);
+            }
             menuPtn.getToolBar("mgtd", tbTaskTool, rootPane, AppView.mgtd);
             menuPtn.getStrokes("mgtd", rootPane);
         }
@@ -161,12 +198,40 @@ public class MgtdPtn extends AMpwdPtn
 
     public void deleteMgtd()
     {
+        int row = tbTaskList.getSelectedRow();
+        if (row < 0)
+        {
+            return;
+        }
+
+        if (Lang.showFirm(this, null, "确认要删除吗？此操作可能会影响到其它计划任务！") != javax.swing.JOptionPane.YES_OPTION)
+        {
+            return;
+        }
+        mgtdMdl.getGridMdl().wDelete(row);
     }
 
-    public void previewMgtd()
+    private void showPopupMenu(java.awt.event.MouseEvent evt)
     {
+        int row = tbTaskList.rowAtPoint(evt.getPoint());
+        if (row < 0)
+        {
+            return;
+        }
+
+        tbTaskList.setRowSelectionInterval(row, row);
+        pmTaskMenu.show(tbTaskList, evt.getX(), evt.getY());
+    }
+
+    private void tbKeysListMouseClicked(java.awt.event.MouseEvent e)
+    {
+        if (e.getClickCount() > 1)
+        {
+            updateMgtd();
+        }
     }
     private javax.swing.JTable tbTaskList;
     private javax.swing.JToolBar tbTaskTool;
     private javax.swing.JPanel plTaskList;
+    private javax.swing.JPopupMenu pmTaskMenu;
 }

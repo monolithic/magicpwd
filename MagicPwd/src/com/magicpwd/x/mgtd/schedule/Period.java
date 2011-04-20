@@ -204,13 +204,30 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
         smTtime.setValue(new java.util.Date(mgtd.getP30F030D()));
         smStime.setValue(new java.util.Date(mgtd.getP30F030E()));
 
-        cbIntval.setSelectedItem(new I1S1(mgtd.getP30F0304()));
-
         int[] item = new int[mgtd.getHintList().size()];
         int i = 0;
         for (Hint hint : mgtd.getHintList())
         {
-            item[i++] = hint.getP30F0405();
+            if (i == 0)
+            {
+                cbIntval.setSelectedItem(new I1S1(hint.getP30F0404()));
+            }
+            if (hint.getP30F0404() == ConsDat.MGTD_UNIT_DAY || hint.getP30F0404() == ConsDat.MGTD_UNIT_MONTH)
+            {
+                item[i++] = hint.getP30F0405() - 1;
+                continue;
+            }
+            if (hint.getP30F0404() == ConsDat.MGTD_UNIT_YEAR)
+            {
+                for (int j = 0, k = lsEnum.getModel().getSize(); j < k; j += 1)
+                {
+                    if (lsEnum.getModel().getElementAt(j).equals(hint.getP30F0405()))
+                    {
+                        item[i++] = j;
+                        break;
+                    }
+                }
+            }
         }
         lsEnum.setSelectedIndices(item);
         return true;
@@ -327,7 +344,7 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
             lmEnum.clear();
             String tmp = Lang.getLang(LangRes.P30F1120, "{0}年");
             int year = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
-            for (int i = year - 5, j = year + 25; i <= j; i += 1)
+            for (int i = year - 5, j = year + 24; i <= j; i += 1)
             {
                 lmEnum.addElement(new I1S1(i, Char.format(tmp, "" + i)));
             }
