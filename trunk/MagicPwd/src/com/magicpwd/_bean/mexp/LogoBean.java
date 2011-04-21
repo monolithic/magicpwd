@@ -21,7 +21,6 @@ import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mexp.IMexpBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comn.item.LogoItem;
-import com.magicpwd._comp.IcoLabel;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
@@ -59,23 +58,12 @@ public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall
         dataEdit.setDropButtonVisible(false);
 
         lb_PropName = new javax.swing.JLabel();
-        ib_PropName = new IcoLabel();
-        ib_PropName.setIcon(Bean.getNone());
+        ib_PropName = new javax.swing.JLabel();
+        //ib_PropName.setIcon(Bean.getNone());
         ib_PropName.setOpaque(true);
-        ib_PropName.setPreferredSize(new java.awt.Dimension(21, 21));
         ib_PropName.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        ib_PropName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ib_PropName.setBackground(javax.swing.UIManager.getDefaults().getColor("TextField.background"));
         ib_PropName.setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
-        ib_PropName.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                ib_PropDataActionPerformed(evt);
-            }
-        });
         lb_PropName.setLabelFor(ib_PropName);
 
         lb_PropData = new javax.swing.JLabel();
@@ -92,7 +80,7 @@ public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall
         hpg1.addComponent(lb_PropName);
         hpg1.addComponent(lb_PropData);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg2.addComponent(ib_PropName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hpg2.addComponent(ib_PropName, 21, 21, 21);
         hpg2.addComponent(sp_PropData, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addGroup(hpg1);
@@ -104,7 +92,7 @@ public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall
 
         javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg1.addComponent(lb_PropName);
-        vpg1.addComponent(ib_PropName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg1.addComponent(ib_PropName, 21, 21, 21);
         javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
         vsg1.addComponent(lb_PropData);
         vsg1.addContainerGap(49, Short.MAX_VALUE);
@@ -137,6 +125,15 @@ public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall
     @Override
     public void initData()
     {
+        ib_PropName.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                ib_PropDataActionPerformed(evt);
+            }
+        });
     }
 
     @Override
@@ -201,7 +198,7 @@ public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall
         ta_PropData.requestFocus();
     }
 
-    private void ib_PropDataActionPerformed(java.awt.event.ActionEvent evt)
+    private void ib_PropDataActionPerformed(java.awt.event.MouseEvent evt)
     {
         IcoDialog ico = new IcoDialog(mainPtn, this);
         ico.initView();
@@ -211,7 +208,7 @@ public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall
         ico.setVisible(true);
     }
     private javax.swing.JLabel lb_PropName;
-    private IcoLabel ib_PropName;
+    private javax.swing.JLabel ib_PropName;
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JTextArea ta_PropData;
 }

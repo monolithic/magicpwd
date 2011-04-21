@@ -188,7 +188,7 @@ public class MgtdPtn extends AMpwdPtn
         }
 
         Mgtd mgtd = mgtdMdl.getGridMdl().getMgtdAt(row);
-        mgtd.setHintList(DBA4000.readHintList(mgtd.getP30F0308()));
+        mgtd.setHintList(DBA4000.readHintList(mgtd.getP30F0309()));
 
         MgtdDlg dlg = new MgtdDlg(this, true);
         dlg.initView();

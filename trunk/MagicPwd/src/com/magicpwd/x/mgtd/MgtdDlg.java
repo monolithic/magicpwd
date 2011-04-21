@@ -373,9 +373,9 @@ public class MgtdDlg extends ADialog
 
         if (mgtd != null)
         {
-            tfTitle.setText(mgtd.getP30F030B());
-            cbLevel.setSelectedIndex(mgtd.getP30F0303());
-            int intvalIdx = mgtd.getP30F0304();
+            tfTitle.setText(mgtd.getP30F030C());
+            cbLevel.setSelectedIndex(mgtd.getP30F0304());
+            int intvalIdx = mgtd.getP30F0305();
             cbIntval.setSelectedItem(new I1S2(intvalIdx--));
             if (intvalIdx > -1)
             {
@@ -385,7 +385,7 @@ public class MgtdDlg extends ADialog
                     intvalBean.showData(mgtd);
                 }
             }
-            int methodIdx = mgtd.getP30F0305();
+            int methodIdx = mgtd.getP30F0306();
             cbMethod.setSelectedItem(new I1S2(methodIdx--));
             if (methodIdx > -1)
             {
@@ -395,10 +395,10 @@ public class MgtdDlg extends ADialog
                     methodBean.showData(mgtd);
                 }
             }
-            cbPublic.setSelected(1 == mgtd.getP30F0306());
-            cbAhead.setSelectedItem(new I1S1(mgtd.getP30F0311()));
-            spAhead.setValue(mgtd.getP30F0312());
-            taRemark.setText(mgtd.getP30F0313());
+            cbPublic.setSelected(1 == mgtd.getP30F0307());
+            cbAhead.setSelectedItem(new I1S1(mgtd.getP30F0312()));
+            spAhead.setValue(mgtd.getP30F0313());
+            taRemark.setText(mgtd.getP30F0314());
 
             this.mgtd = mgtd;
         }
@@ -463,32 +463,32 @@ public class MgtdDlg extends ADialog
         {
             mgtd = new Mgtd();
         }
-        mgtd.setP30F0301(ConsDat.MGTD_TYPE_DATETIME);
-        mgtd.setP30F0302(ConsDat.MGTD_STATUS_INIT);
-        mgtd.setP30F0303(cbLevel.getSelectedIndex());
+        mgtd.setP30F0302(ConsDat.MGTD_TYPE_DATETIME);
+        mgtd.setP30F0303(ConsDat.MGTD_STATUS_INIT);
+        mgtd.setP30F0304(cbLevel.getSelectedIndex());
         IMgtdBean intvalBean = intvalList.get(intvalIdx);
         if (!intvalBean.saveData(mgtd))
         {
             return;
         }
-        mgtd.setP30F0304(intvalBean.getKey());
+        mgtd.setP30F0305(intvalBean.getKey());
         IMgtdBean methodBean = methodList.get(methodIdx);
         if (!methodBean.saveData(mgtd))
         {
             return;
         }
-        mgtd.setP30F0305(methodBean.getKey());
-        mgtd.setP30F0306(cbPublic.isSelected() ? 1 : 0);
-        mgtd.setP30F0307(0);
-        mgtd.setP30F030B(tfTitle.getText());
+        mgtd.setP30F0306(methodBean.getKey());
+        mgtd.setP30F0307(cbPublic.isSelected() ? 1 : 0);
+        mgtd.setP30F0308(0);
+        mgtd.setP30F030C(tfTitle.getText());
         Object obj = cbAhead.getSelectedItem();
         if (obj == null || !(obj instanceof I1S1))
         {
             return;
         }
-        mgtd.setP30F0311(((I1S1) obj).getK());
-        mgtd.setP30F0312(smAhead.getNumber().intValue());
-        mgtd.setP30F0313(taRemark.getText());
+        mgtd.setP30F0312(((I1S1) obj).getK());
+        mgtd.setP30F0313(smAhead.getNumber().intValue());
+        mgtd.setP30F0314(taRemark.getText());
         mgtdPtn.saveMgtd(mgtd);
 
         this.dispose();

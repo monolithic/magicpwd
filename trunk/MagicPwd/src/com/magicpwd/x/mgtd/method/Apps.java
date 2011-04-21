@@ -126,8 +126,8 @@ public class Apps extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean showData(Mgtd mgtd)
     {
-        tfPath.setText(mgtd.getP30F030F());
-        tfArgs.setText(mgtd.getP30F0310());
+        tfPath.setText(mgtd.getP30F0310());
+        tfArgs.setText(mgtd.getP30F0311());
         return true;
     }
 
@@ -156,7 +156,7 @@ public class Apps extends javax.swing.JPanel implements IMgtdBean
         }
 
         mgtd.setP30F030F(text);
-        mgtd.setP30F0310(tfArgs.getText());
+        mgtd.setP30F0311(tfArgs.getText());
         return true;
     }
 

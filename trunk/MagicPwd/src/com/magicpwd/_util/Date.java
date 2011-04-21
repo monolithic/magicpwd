@@ -37,14 +37,14 @@ public class Date
                 cal = processFix(tmp.substring(4));
             }
 
-            if (tmp.startsWith("now:"))
-            {
-                cal = processNow(tmp.substring(4));
-            }
-
             if (tmp.startsWith("var:"))
             {
                 cal = processVar(tmp.substring(4));
+            }
+
+            if (tmp.startsWith("key:"))
+            {
+                cal = processNow(tmp.substring(4));
             }
         }
         return cal;

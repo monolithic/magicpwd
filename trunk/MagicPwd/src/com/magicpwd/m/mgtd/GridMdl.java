@@ -97,9 +97,9 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
                 case 0:
                     return rowIndex + 1;
                 case 1:
-                    return temp.getP30F030B();
+                    return temp.getP30F030C();
                 case 2:
-                    switch (temp.getP30F0303())
+                    switch (temp.getP30F0304())
                     {
                         case 1:
                             return "低";
@@ -111,7 +111,7 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
                             return "无";
                     }
                 case 3:
-                    switch (temp.getP30F0304())
+                    switch (temp.getP30F0305())
                     {
                         case ConsDat.MGTD_INTVAL_FIXTIME:
                             return "定时提醒";
@@ -127,7 +127,7 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
                             return "未知";
                     }
                 case 4:
-                    switch (temp.getP30F0305())
+                    switch (temp.getP30F0306())
                     {
                         case ConsDat.MGTD_METHOD_NOTE:
                             return "提示信息";
@@ -145,7 +145,7 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
                             return "未知";
                     }
                 case 5:
-                    switch (temp.getP30F0311())
+                    switch (temp.getP30F0312())
                     {
                         case ConsDat.MGTD_UNIT_SECOND:
                             return "秒";

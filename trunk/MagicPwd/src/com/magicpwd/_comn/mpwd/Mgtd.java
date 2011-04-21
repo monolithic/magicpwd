@@ -25,48 +25,51 @@ import java.io.Serializable;
 public class Mgtd implements Serializable
 {
 
-    /**任务类型*/
+    /**显示排序*/
     private int P30F0301;
-    /**任务状态*/
+    /**任务类型*/
     private int P30F0302;
-    /**任务级别*/
+    /**任务状态*/
     private int P30F0303;
-    /**提醒周期*/
+    /**任务级别*/
     private int P30F0304;
-    /**提示方式*/
+    /**提醒周期*/
     private int P30F0305;
-    /**可否共用*/
+    /**提示方式*/
     private int P30F0306;
-    /**完成度*/
+    /**可否共用*/
     private int P30F0307;
+    /**完成度*/
+    private int P30F0308;
     /**任务索引*/
-    private String P30F0308;
-    /**上级任务*/
     private String P30F0309;
-    /**前置任务*/
+    /**上级任务*/
     private String P30F030A;
-    /**任务名称*/
+    /**前置任务*/
     private String P30F030B;
+    /**任务名称*/
+    private String P30F030C;
     /**起始时间*/
-    private Long P30F030C;
-    /**结束时间*/
     private Long P30F030D;
-    /**执行时间*/
+    /**结束时间*/
     private Long P30F030E;
+    /**执行时间*/
+    private Long P30F030F;
     /**执行参数*/
-    private String P30F030F;
-    /**附加参数*/
     private String P30F0310;
+    /**附加参数*/
+    private String P30F0311;
     /**是否提前*/
-    private Integer P30F0311;
-    /**提前间隔*/
     private Integer P30F0312;
+    /**提前间隔*/
+    private Integer P30F0313;
     /**相关说明*/
-    private String P30F0313;
+    private String P30F0314;
+    /**提示列表*/
     private java.util.List<Hint> hintList;
 
     /**
-     * 任务类型
+     * 显示排序
      * @return the P30F0301
      */
     public int getP30F0301()
@@ -75,7 +78,7 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 任务类型
+     * 显示排序
      * @param P30F0301 the P30F0301 to set
      */
     public void setP30F0301(int P30F0301)
@@ -84,7 +87,7 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 任务状态
+     * 任务类型
      * @return the P30F0302
      */
     public int getP30F0302()
@@ -93,7 +96,7 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 任务状态
+     * 任务类型
      * @param P30F0302 the P30F0302 to set
      */
     public void setP30F0302(int P30F0302)
@@ -102,7 +105,7 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 任务级别
+     * 任务状态
      * @return the P30F0303
      */
     public int getP30F0303()
@@ -111,7 +114,7 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 任务级别
+     * 任务状态
      * @param P30F0303 the P30F0303 to set
      */
     public void setP30F0303(int P30F0303)
@@ -120,7 +123,7 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 提醒周期
+     * 任务级别
      * @return the P30F0304
      */
     public int getP30F0304()
@@ -129,7 +132,7 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 提醒周期
+     * 任务级别
      * @param P30F0304 the P30F0304 to set
      */
     public void setP30F0304(int P30F0304)
@@ -138,7 +141,7 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 提示方式
+     * 提醒周期
      * @return the P30F0305
      */
     public int getP30F0305()
@@ -147,7 +150,7 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 提示方式
+     * 提醒周期
      * @param P30F0305 the P30F0305 to set
      */
     public void setP30F0305(int P30F0305)
@@ -156,7 +159,7 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 可否共用
+     * 提示方式
      * @return the P30F0306
      */
     public int getP30F0306()
@@ -165,7 +168,7 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 可否共用
+     * 提示方式
      * @param P30F0306 the P30F0306 to set
      */
     public void setP30F0306(int P30F0306)
@@ -174,7 +177,7 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 完成度
+     * 可否共用
      * @return the P30F0307
      */
     public int getP30F0307()
@@ -183,7 +186,7 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 完成度
+     * 可否共用
      * @param P30F0307 the P30F0307 to set
      */
     public void setP30F0307(int P30F0307)
@@ -192,25 +195,25 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 任务索引
+     * 完成度
      * @return the P30F0308
      */
-    public String getP30F0308()
+    public int getP30F0308()
     {
         return P30F0308;
     }
 
     /**
-     * 任务索引
+     * 完成度
      * @param P30F0308 the P30F0308 to set
      */
-    public void setP30F0308(String P30F0308)
+    public void setP30F0308(int P30F0308)
     {
         this.P30F0308 = P30F0308;
     }
 
     /**
-     * 上级任务
+     * 任务索引
      * @return the P30F0309
      */
     public String getP30F0309()
@@ -219,7 +222,7 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 上级任务
+     * 任务索引
      * @param P30F0309 the P30F0309 to set
      */
     public void setP30F0309(String P30F0309)
@@ -228,7 +231,7 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 前置任务
+     * 上级任务
      * @return the P30F030A
      */
     public String getP30F030A()
@@ -237,7 +240,7 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 前置任务
+     * 上级任务
      * @param P30F030A the P30F030A to set
      */
     public void setP30F030A(String P30F030A)
@@ -246,7 +249,7 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 任务名称
+     * 前置任务
      * @return the P30F030B
      */
     public String getP30F030B()
@@ -255,7 +258,7 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 任务名称
+     * 前置任务
      * @param P30F030B the P30F030B to set
      */
     public void setP30F030B(String P30F030B)
@@ -264,25 +267,25 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 起始时间
+     * 任务名称
      * @return the P30F030C
      */
-    public Long getP30F030C()
+    public String getP30F030C()
     {
         return P30F030C;
     }
 
     /**
-     * 起始时间
+     * 任务名称
      * @param P30F030C the P30F030C to set
      */
-    public void setP30F030C(Long P30F030C)
+    public void setP30F030C(String P30F030C)
     {
         this.P30F030C = P30F030C;
     }
 
     /**
-     * 结束时间
+     * 起始时间
      * @return the P30F030D
      */
     public Long getP30F030D()
@@ -291,7 +294,7 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 结束时间
+     * 起始时间
      * @param P30F030D the P30F030D to set
      */
     public void setP30F030D(Long P30F030D)
@@ -300,7 +303,7 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 执行时间
+     * 结束时间
      * @return the P30F030E
      */
     public Long getP30F030E()
@@ -309,7 +312,7 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 执行时间
+     * 结束时间
      * @param P30F030E the P30F030E to set
      */
     public void setP30F030E(Long P30F030E)
@@ -318,25 +321,25 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 执行参数
+     * 执行时间
      * @return the P30F030F
      */
-    public String getP30F030F()
+    public Long getP30F030F()
     {
         return P30F030F;
     }
 
     /**
-     * 执行参数
+     * 执行时间
      * @param P30F030F the P30F030F to set
      */
-    public void setP30F030F(String P30F030F)
+    public void setP30F030F(Long P30F030F)
     {
         this.P30F030F = P30F030F;
     }
 
     /**
-     * 附加参数
+     * 执行参数
      * @return the P30F0310
      */
     public String getP30F0310()
@@ -345,34 +348,34 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 附加参数
+     * 执行参数
      * @param P30F0310 the P30F0310 to set
      */
-    public void setP30F0310(String P30F0310)
+    public void setP30F030F(String P30F0310)
     {
         this.P30F0310 = P30F0310;
     }
 
     /**
-     * 是否提前
+     * 附加参数
      * @return the P30F0311
      */
-    public Integer getP30F0311()
+    public String getP30F0311()
     {
         return P30F0311;
     }
 
     /**
-     * 是否提前
+     * 附加参数
      * @param P30F0311 the P30F0311 to set
      */
-    public void setP30F0311(Integer P30F0311)
+    public void setP30F0311(String P30F0311)
     {
         this.P30F0311 = P30F0311;
     }
 
     /**
-     * 提前间隔
+     * 是否提前
      * @return the P30F0312
      */
     public Integer getP30F0312()
@@ -381,7 +384,7 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 提前间隔
+     * 是否提前
      * @param P30F0312 the P30F0312 to set
      */
     public void setP30F0312(Integer P30F0312)
@@ -390,21 +393,39 @@ public class Mgtd implements Serializable
     }
 
     /**
-     * 相关说明
+     * 提前间隔
      * @return the P30F0313
      */
-    public String getP30F0313()
+    public Integer getP30F0313()
     {
         return P30F0313;
     }
 
     /**
-     * 相关说明
+     * 提前间隔
      * @param P30F0313 the P30F0313 to set
      */
-    public void setP30F0313(String P30F0313)
+    public void setP30F0313(Integer P30F0313)
     {
         this.P30F0313 = P30F0313;
+    }
+
+    /**
+     * 相关说明
+     * @return the P30F0314
+     */
+    public String getP30F0314()
+    {
+        return P30F0314;
+    }
+
+    /**
+     * 相关说明
+     * @param P30F0314 the P30F0314 to set
+     */
+    public void setP30F0314(String P30F0314)
+    {
+        this.P30F0314 = P30F0314;
     }
 
     /**
@@ -430,14 +451,5 @@ public class Mgtd implements Serializable
             return hintList.get(index);
         }
         return null;
-    }
-
-    public void addHint(Hint mtts)
-    {
-        if (hintList == null)
-        {
-            hintList = new java.util.ArrayList<Hint>();
-        }
-        hintList.add(mtts);
     }
 }

@@ -200,9 +200,9 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean showData(Mgtd mgtd)
     {
-        smFtime.setValue(new java.util.Date(mgtd.getP30F030C()));
-        smTtime.setValue(new java.util.Date(mgtd.getP30F030D()));
-        smStime.setValue(new java.util.Date(mgtd.getP30F030E()));
+        smFtime.setValue(new java.util.Date(mgtd.getP30F030D()));
+        smTtime.setValue(new java.util.Date(mgtd.getP30F030E()));
+        smStime.setValue(new java.util.Date(mgtd.getP30F030F()));
 
         int[] item = new int[mgtd.getHintList().size()];
         int i = 0;
@@ -250,9 +250,9 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
             return false;
         }
 
-        mgtd.setP30F030C(smFtime.getDate().getTime());
-        mgtd.setP30F030D(smTtime.getDate().getTime());
-        mgtd.setP30F030E(smStime.getDate().getTime());
+        mgtd.setP30F030D(smFtime.getDate().getTime());
+        mgtd.setP30F030E(smTtime.getDate().getTime());
+        mgtd.setP30F030F(smStime.getDate().getTime());
 
         Hint hint;
         I1S1 time;

@@ -96,7 +96,7 @@ public class Note extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean showData(Mgtd mgtd)
     {
-        tfNote.setText(mgtd.getP30F030F());
+        tfNote.setText(mgtd.getP30F0310());
         return true;
     }
 

@@ -111,8 +111,8 @@ public class Mail extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean showData(Mgtd mgtd)
     {
-        tfMail.setText(mgtd.getP30F030F());
-        tfBody.setText(mgtd.getP30F0310());
+        tfMail.setText(mgtd.getP30F0310());
+        tfBody.setText(mgtd.getP30F0311());
         return true;
     }
 
@@ -138,7 +138,7 @@ public class Mail extends javax.swing.JPanel implements IMgtdBean
         }
 
         mgtd.setP30F030F(text);
-        mgtd.setP30F0310(tfBody.getText());
+        mgtd.setP30F0311(tfBody.getText());
         return true;
     }
     private javax.swing.JLabel lbMail;
