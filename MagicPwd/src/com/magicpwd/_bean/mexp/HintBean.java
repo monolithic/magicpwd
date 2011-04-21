@@ -27,6 +27,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
+import com.magicpwd._util.Date;
 import com.magicpwd._util.Lang;
 import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.v.MenuPtn;
@@ -371,17 +372,22 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
         }
         if (cmd.startsWith("fix:"))
         {
-            if (!Char.isValidateDateTime(cmd))
+            java.util.Calendar cal = Date.processFix(cmd.substring(4));
+            if (cal == null)
             {
                 return;
             }
+            itemData.setName(saveMgtd(cal));
             return;
         }
         if (cmd.startsWith("var:"))
         {
-            java.util.Calendar c = java.util.Calendar.getInstance();
-            c.set(java.util.Calendar.SECOND, 0);
-            c.set(java.util.Calendar.MILLISECOND, 0);
+            java.util.Calendar cal = Date.processVar(cmd.substring(4));
+            if (cal == null)
+            {
+                return;
+            }
+            itemData.setName(saveMgtd(cal));
             return;
         }
         if (cmd.startsWith("key:"))
@@ -393,6 +399,11 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
             }
             return;
         }
+    }
+
+    private String saveMgtd(java.util.Calendar cal)
+    {
+        return "";
     }
     private javax.swing.JLabel lb_PropName;
     private javax.swing.JTextField tf_PropName;

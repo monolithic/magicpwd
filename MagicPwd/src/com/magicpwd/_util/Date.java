@@ -41,11 +41,6 @@ public class Date
             {
                 cal = processVar(tmp.substring(4));
             }
-
-            if (tmp.startsWith("key:"))
-            {
-                cal = processNow(tmp.substring(4));
-            }
         }
         return cal;
     }
@@ -55,7 +50,7 @@ public class Date
      * fix:yyyy-MM-dd HH:mm:ss
      * @param txt
      */
-    private static Calendar processFix(String txt)
+    public static Calendar processFix(String txt)
     {
         if (!com.magicpwd._util.Char.isValidateDateTime(txt))
         {
@@ -74,32 +69,6 @@ public class Date
     }
 
     /**
-     * 当前日期及时间，格式要求：
-     * now:date 11:30:00
-     * now:2010-11-15 time
-     * @param txt
-     */
-    private static Calendar processNow(String txt)
-    {
-        Calendar cal = Calendar.getInstance();
-        if (txt != null)
-        {
-            if (txt.indexOf("date") >= 0)
-            {
-                parseTime(cal, txt.replaceAll("\\s*date\\s*", ""), ':');
-                return cal;
-            }
-
-            if (txt.indexOf("time") >= 0)
-            {
-                parseDate(cal, txt.replaceAll("\\s*time\\s*", ""), '-');
-                return cal;
-            }
-        }
-        return cal;
-    }
-
-    /**
      * 可变日期及时间，格式要求：
      * var:1minute
      * var:2hour
@@ -107,7 +76,7 @@ public class Date
      * ...
      * @param txt
      */
-    private static Calendar processVar(String txt)
+    public static Calendar processVar(String txt)
     {
         java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("[-+]\\d+").matcher(txt);
         if (!matcher.find())
