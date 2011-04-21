@@ -123,9 +123,9 @@ public class Special extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean saveData(Mgtd mgtd)
     {
-        mgtd.setP30F030C(0L);
         mgtd.setP30F030D(0L);
         mgtd.setP30F030E(0L);
+        mgtd.setP30F030F(0L);
 
         java.util.List<Hint> list = new java.util.ArrayList<Hint>();
 

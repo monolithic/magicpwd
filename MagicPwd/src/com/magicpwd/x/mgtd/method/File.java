@@ -110,7 +110,7 @@ public class File extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean showData(Mgtd mgtd)
     {
-        tfFile.setText(mgtd.getP30F030F());
+        tfFile.setText(mgtd.getP30F0310());
         return true;
     }
 

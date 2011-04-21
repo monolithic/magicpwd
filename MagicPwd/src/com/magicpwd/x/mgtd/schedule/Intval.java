@@ -204,9 +204,9 @@ public class Intval extends javax.swing.JPanel implements IMgtdBean
         }
 
         I1S1 unit = (I1S1) unitObj;
-        mgtd.setP30F030C(smFtime.getDate().getTime());
-        mgtd.setP30F030D(smTtime.getDate().getTime());
-        mgtd.setP30F030E(0L);
+        mgtd.setP30F030D(smFtime.getDate().getTime());
+        mgtd.setP30F030E(smTtime.getDate().getTime());
+        mgtd.setP30F030F(0L);
 
         java.util.List<Hint> list = new java.util.ArrayList<Hint>();
 
