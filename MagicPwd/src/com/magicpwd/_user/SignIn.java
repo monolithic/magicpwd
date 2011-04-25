@@ -175,7 +175,7 @@ public class SignIn extends javax.swing.JPanel implements IUserView
             }
             if (AppView.mgtd.name().equals(tmp))
             {
-                cbUserView.addItem(new S1S1(tmp, Lang.getLang(LangRes.P30FA10C, "计划任务")));
+                cbUserView.addItem(new S1S1(tmp, Lang.getLang(LangRes.P30FA10C, "任务管理")));
                 continue;
             }
         }

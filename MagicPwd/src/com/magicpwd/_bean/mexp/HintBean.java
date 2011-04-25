@@ -18,6 +18,7 @@ package com.magicpwd._bean.mexp;
 
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mexp.IMexpBean;
+import com.magicpwd._comn.mpwd.Hint;
 import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WEditBox;
@@ -32,6 +33,7 @@ import com.magicpwd._util.Lang;
 import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.mexp.MexpPtn;
+import com.magicpwd.x.mgtd.MgtdDlg;
 
 /**
  * 属性：过期提示
@@ -45,7 +47,10 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
     private IEditItem itemData;
     private MexpPtn mainPtn;
     private WTextBox dataBox;
-    private String mgtdHash;
+    private int mgtdType;
+    private int mgtdData;
+    private int mgtdUnit;
+    private java.util.Calendar mgtdCal;
     private java.text.DateFormat format;
 
     public HintBean(MexpPtn mainPtn)
@@ -66,41 +71,43 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
         dataEdit.setCopyButtonVisible(false);
         dataEdit.setDropButtonVisible(false);
 
-        bl_PropName = new BtnLabel();
+        blPropName = new BtnLabel();
 //        ib_PropName.setIcon(Bean.getNone());
-        tf_PropName = new javax.swing.JTextField(14);
-        tf_PropName.setEditable(false);
-        lb_PropName = new javax.swing.JLabel();
-        lb_PropName.setLabelFor(bl_PropName);
+        tfPropName = new javax.swing.JTextField(14);
+        tfPropName.setEditable(false);
+        lbPropName = new javax.swing.JLabel();
+        lbPropName.setLabelFor(blPropName);
 
-        pm_DateView = new javax.swing.JPopupMenu();
-        mi_HalfHour = new javax.swing.JMenuItem();
-        pm_DateView.add(mi_HalfHour);
+        pmDateView = new javax.swing.JPopupMenu();
+        miHalfHour = new javax.swing.JMenuItem();
+        pmDateView.add(miHalfHour);
 
-        mi_FullHour = new javax.swing.JMenuItem();
-        pm_DateView.add(mi_FullHour);
+        miFullHour = new javax.swing.JMenuItem();
+        pmDateView.add(miFullHour);
 
-        pm_DateView.addSeparator();
+        miEditMgtd = new javax.swing.JMenuItem();
 
-        ta_PropData = new javax.swing.JTextArea();
-        ta_PropData.setLineWrap(true);
-        ta_PropData.setRows(3);
-        dataBox = new WTextBox(ta_PropData);
+        pmDateView.addSeparator();
+
+        taPropData = new javax.swing.JTextArea();
+        taPropData.setLineWrap(true);
+        taPropData.setRows(3);
+        dataBox = new WTextBox(taPropData);
         dataBox.initView();
-        lb_PropData = new javax.swing.JLabel();
-        lb_PropData.setLabelFor(ta_PropData);
+        lbPropData = new javax.swing.JLabel();
+        lbPropData.setLabelFor(taPropData);
 
-        javax.swing.JScrollPane sp_PropData = new javax.swing.JScrollPane(ta_PropData);
+        javax.swing.JScrollPane sp_PropData = new javax.swing.JScrollPane(taPropData);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
-        hsg1.addComponent(tf_PropName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hsg1.addComponent(tfPropName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg1.addComponent(bl_PropName, 21, 21, 21);
+        hsg1.addComponent(blPropName, 21, 21, 21);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg1.addComponent(lb_PropName);
-        hpg1.addComponent(lb_PropData);
+        hpg1.addComponent(lbPropName);
+        hpg1.addComponent(lbPropData);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg2.addGroup(hsg1);
         hpg2.addComponent(sp_PropData, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
@@ -113,11 +120,11 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
         layout.setHorizontalGroup(hsg);
 
         javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
-        vpg1.addComponent(lb_PropName);
-        vpg1.addComponent(tf_PropName);
-        vpg1.addComponent(bl_PropName, 21, 21, 21);
+        vpg1.addComponent(lbPropName);
+        vpg1.addComponent(tfPropName);
+        vpg1.addComponent(blPropName, 21, 21, 21);
         javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
-        vsg1.addComponent(lb_PropData);
+        vsg1.addComponent(lbPropData);
         vsg1.addContainerGap(49, Short.MAX_VALUE);
         javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         vpg2.addGroup(vsg1);
@@ -140,11 +147,14 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
     @Override
     public void initLang()
     {
-        Lang.setWText(lb_PropName, LangRes.P30F1305, "时间");
-        Lang.setWText(lb_PropData, LangRes.P30F1306, "提醒");
+        Lang.setWText(lbPropName, LangRes.P30F1305, "时间");
+        Lang.setWText(lbPropData, LangRes.P30F1306, "提醒");
 
-        Lang.setWText(bl_PropName, LangRes.P30F151B, "@O");
-        Lang.setWTips(bl_PropName, LangRes.P30F151C, "提醒时间(Alt + O)");
+        Lang.setWText(blPropName, LangRes.P30F151B, "@O");
+        Lang.setWTips(blPropName, LangRes.P30F151C, "提醒时间(Alt + O)");
+
+        Lang.setWText(miEditMgtd, null, "高级管理(@M)");
+        Lang.setWTips(miEditMgtd, null, "高级管理");
 
         dataBox.initLang();
         dataEdit.initLang();
@@ -154,13 +164,13 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
     public void initData()
     {
         format = new java.text.SimpleDateFormat(ConsEnv.HINT_DATE);
-        bl_PropName.addActionListener(new java.awt.event.ActionListener()
+        blPropName.addActionListener(new java.awt.event.ActionListener()
         {
 
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                bl_PropNameActionPerformed(evt);
+                blPropNameActionPerformed(evt);
             }
         });
         java.awt.event.ActionListener action = new java.awt.event.ActionListener()
@@ -169,12 +179,12 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e)
             {
-                mi_DateTimeActionPerformed(e);
+                miDateTimeActionPerformed(e);
             }
         };
-        mi_HalfHour.addActionListener(action);
-        mi_FullHour.addActionListener(action);
-        mainPtn.getMenuPtn().getSubMenu("date-interval", pm_DateView, action);
+        miHalfHour.addActionListener(action);
+        miFullHour.addActionListener(action);
+        mainPtn.getMenuPtn().getSubMenu("date-remind", pmDateView, action);
         initMenu();
 
         dataBox.initData();
@@ -185,31 +195,35 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
     {
         itemData = item;
 
-        ta_PropData.setText(item.getData());
+        taPropData.setText(item.getData());
     }
 
     @Override
     public void requestFocus()
     {
-        ta_PropData.requestFocus();
+        taPropData.requestFocus();
     }
 
     @Override
     public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
     {
-        String data = ta_PropData.getText();
-        if (com.magicpwd._util.Char.isValidate(mgtdHash))
+        if (mgtdType > 0)
         {
-            if (!com.magicpwd._util.Char.isValidate(data))
+            String name = saveMgtd(mgtdCal, tfPropName.getText());
+            if (!Char.isValidateHash(name))
             {
-                Lang.showMesg(mainPtn, LangRes.P30F7A36, "请输入过期提示！");
-                ta_PropData.requestFocus();
                 return;
             }
+            itemData.setData(name);
+//            if (!com.magicpwd._util.Char.isValidate(data))
+//            {
+//                Lang.showMesg(mainPtn, LangRes.P30F7A36, "请输入过期提示！");
+//                taPropData.requestFocus();
+//                return;
+//            }
         }
 
-        itemData.setName(mgtdHash);
-        itemData.setData(data);
+        itemData.setName(taPropData.getText());
 
         mainPtn.updateSelectedItem();
     }
@@ -228,6 +242,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
     {
         java.util.List<Mgtd> mgtdList = DBA4000.readMgtdList();
         MenuPtn menuPtn = mainPtn.getMenuPtn();
+        boolean tmp = false;
         int idx = 0;
         int max = mgtdList.size();
         Mgtd mgtd;
@@ -250,6 +265,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
                 button.add(item);
                 idx += 1;
             }
+            tmp = true;
         }
         button = menuPtn.getButton("hint-period");
         if (button != null)
@@ -268,6 +284,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
                 button.add(item);
                 idx += 1;
             }
+            tmp = true;
         }
         button = menuPtn.getButton("hint-intval");
         if (button != null)
@@ -286,6 +303,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
                 button.add(item);
                 idx += 1;
             }
+            tmp = true;
         }
         button = menuPtn.getButton("hint-special");
         if (button != null)
@@ -304,6 +322,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
                 button.add(item);
                 idx += 1;
             }
+            tmp = true;
         }
         button = menuPtn.getButton("hint-formula");
         if (button != null)
@@ -322,10 +341,27 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
                 button.add(item);
                 idx += 1;
             }
+            tmp = true;
         }
+
+        if (tmp)
+        {
+            pmDateView.addSeparator();
+        }
+
+        miEditMgtd.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                miEditMgtdActionPerformed(e);
+            }
+        });
+        pmDateView.add(miEditMgtd);
     }
 
-    private void bl_PropNameActionPerformed(java.awt.event.ActionEvent evt)
+    private void blPropNameActionPerformed(java.awt.event.ActionEvent evt)
     {
         java.util.Calendar c = java.util.Calendar.getInstance();
         c.set(java.util.Calendar.SECOND, 0);
@@ -356,61 +392,204 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
             t2 = c.get(java.util.Calendar.HOUR_OF_DAY) + ":30";
         }
 
-        Bean.setText(mi_HalfHour, t1);
-        mi_HalfHour.setActionCommand("fix:" + format.format(d1));
-        Bean.setText(mi_FullHour, t2);
-        mi_FullHour.setActionCommand("fix:" + format.format(d2));
-        pm_DateView.show(bl_PropName, 0, bl_PropName.getHeight());
+        Bean.setText(miHalfHour, t1);
+        miHalfHour.setActionCommand("fix:" + format.format(d1));
+        Bean.setText(miFullHour, t2);
+        miFullHour.setActionCommand("fix:" + format.format(d2));
+        pmDateView.show(blPropName, 0, blPropName.getHeight());
     }
 
-    private void mi_DateTimeActionPerformed(java.awt.event.ActionEvent e)
+    private void miDateTimeActionPerformed(java.awt.event.ActionEvent e)
     {
         String cmd = e.getActionCommand();
-        if (Char.isValidate(cmd))
+        if (!Char.isValidate(cmd))
         {
             return;
         }
+        // 定时提醒
         if (cmd.startsWith("fix:"))
         {
-            java.util.Calendar cal = Date.processFix(cmd.substring(4));
-            if (cal == null)
+            cmd = cmd.substring(4);
+            mgtdCal = Date.processFix(cmd);
+            if (mgtdCal == null)
             {
                 return;
             }
-            itemData.setName(saveMgtd(cal));
+            tfPropName.setText(cmd);
+            mgtdType = ConsDat.MGTD_INTVAL_FIXTIME;
+            mgtdData = 0;
+            mgtdUnit = 0;
             return;
         }
+        // 延后提醒
         if (cmd.startsWith("var:"))
         {
-            java.util.Calendar cal = Date.processVar(cmd.substring(4));
-            if (cal == null)
+            cmd = cmd.substring(4);
+            mgtdCal = Date.processVar(cmd);
+            if (mgtdCal == null)
             {
                 return;
             }
-            itemData.setName(saveMgtd(cal));
+            tfPropName.setText(format.format(mgtdCal.getTime()));
+            mgtdType = ConsDat.MGTD_INTVAL_FIXTIME;
+            mgtdData = 0;
+            mgtdUnit = 0;
             return;
         }
+        // 周期提醒
+        if (cmd.startsWith("per:"))
+        {
+            cmd = cmd.substring(4);
+            java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("\\d+").matcher(cmd);
+            if (!matcher.find())
+            {
+                return;
+            }
+            mgtdData = Integer.parseInt(matcher.group());
+            mgtdType = ConsDat.MGTD_INTVAL_PERIOD;
+
+            if (cmd.endsWith("second"))
+            {
+                mgtdUnit = ConsDat.MGTD_UNIT_SECOND;
+            }
+            if (cmd.endsWith("minute"))
+            {
+                mgtdUnit = ConsDat.MGTD_UNIT_MINUTE;
+            }
+            if (cmd.endsWith("hour"))
+            {
+                mgtdUnit = ConsDat.MGTD_UNIT_HOUR;
+            }
+            if (cmd.endsWith("day"))
+            {
+                mgtdUnit = ConsDat.MGTD_UNIT_DAY;
+            }
+            if (cmd.endsWith("week"))
+            {
+                mgtdUnit = ConsDat.MGTD_UNIT_WEEK;
+            }
+            if (cmd.endsWith("month"))
+            {
+                mgtdUnit = ConsDat.MGTD_UNIT_MONTH;
+            }
+            if (cmd.endsWith("year"))
+            {
+                mgtdUnit = ConsDat.MGTD_UNIT_YEAR;
+            }
+            return;
+        }
+        // 间隔提醒
+        if (cmd.startsWith("int:"))
+        {
+            cmd = cmd.substring(4);
+            java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("\\d+").matcher(cmd);
+            if (!matcher.find())
+            {
+                return;
+            }
+            mgtdData = Integer.parseInt(matcher.group());
+            mgtdType = ConsDat.MGTD_INTVAL_INTVAL;
+
+            if (cmd.endsWith("second"))
+            {
+                mgtdUnit = ConsDat.MGTD_UNIT_SECOND;
+            }
+            if (cmd.endsWith("minute"))
+            {
+                mgtdUnit = ConsDat.MGTD_UNIT_MINUTE;
+            }
+            if (cmd.endsWith("hour"))
+            {
+                mgtdUnit = ConsDat.MGTD_UNIT_HOUR;
+            }
+            if (cmd.endsWith("day"))
+            {
+                mgtdUnit = ConsDat.MGTD_UNIT_DAY;
+            }
+            if (cmd.endsWith("week"))
+            {
+                mgtdUnit = ConsDat.MGTD_UNIT_WEEK;
+            }
+            if (cmd.endsWith("month"))
+            {
+                mgtdUnit = ConsDat.MGTD_UNIT_MONTH;
+            }
+            if (cmd.endsWith("year"))
+            {
+                mgtdUnit = ConsDat.MGTD_UNIT_YEAR;
+            }
+            return;
+        }
+        // 任务提醒
         if (cmd.startsWith("key:"))
         {
-            if (cmd.length() > 15)
+            cmd = cmd.substring(4);
+            if (cmd.length() < 16)
             {
-                itemData.setData(cmd.substring(0, 15));
-                tf_PropName.setText(cmd.substring(16));
+                return;
             }
+            tfPropName.setText(cmd.substring(16));
+            mgtdType = -1;
             return;
         }
     }
 
-    private String saveMgtd(java.util.Calendar cal)
+    private void miEditMgtdActionPerformed(java.awt.event.ActionEvent e)
     {
-        return "";
+        Mgtd mgtd = DBA4000.readMgtdData(itemData.getData());
+        if (mgtd == null)
+        {
+            return;
+        }
+
+        MgtdDlg mgtdDlg = new MgtdDlg(mainPtn, true);
+        mgtdDlg.setBackCall(null);
+        mgtdDlg.initView();
+        mgtdDlg.initLang();
+        mgtdDlg.initData(mgtd);
     }
-    private javax.swing.JLabel lb_PropName;
-    private javax.swing.JTextField tf_PropName;
-    private BtnLabel bl_PropName;
-    private javax.swing.JLabel lb_PropData;
-    private javax.swing.JTextArea ta_PropData;
-    private javax.swing.JPopupMenu pm_DateView;
-    private javax.swing.JMenuItem mi_HalfHour;
-    private javax.swing.JMenuItem mi_FullHour;
+
+    private String saveMgtd(java.util.Calendar cal, String name)
+    {
+        Mgtd mgtd = new Mgtd();
+        mgtd.setP30F0301(0);
+        mgtd.setP30F0302(ConsDat.MGTD_TYPE_DATETIME);
+        mgtd.setP30F0303(ConsDat.MGTD_STATUS_INIT);
+        mgtd.setP30F0304(0);
+        mgtd.setP30F0305(mgtdType);
+        mgtd.setP30F0306(ConsDat.MGTD_METHOD_NOTE);
+        mgtd.setP30F0307(0);
+        mgtd.setP30F0308(0);
+        mgtd.setP30F030C(name);
+        mgtd.setP30F030D(mgtdCal.getTimeInMillis());
+        mgtd.setP30F030E(0L);
+        mgtd.setP30F030F(0L);
+        mgtd.setP30F0312(ConsDat.MGTD_UNIT_MINUTE);
+        mgtd.setP30F0313(5);
+        mgtd.setP30F0314(itemData.getName());
+
+        java.util.ArrayList<Hint> list = new java.util.ArrayList<Hint>(1);
+        Hint hint = new Hint();
+        hint.setP30F0403(cal.getTimeInMillis());
+        hint.setP30F0404(mgtdUnit);
+        hint.setP30F0405(mgtdData);
+        hint.setP30F0406("");
+        list.add(hint);
+        mgtd.setHintList(list);
+
+        if (DBA4000.saveMgtdData(mgtd))
+        {
+            return mgtd.getP30F0309();
+        }
+        return null;
+    }
+    private javax.swing.JLabel lbPropName;
+    private javax.swing.JTextField tfPropName;
+    private BtnLabel blPropName;
+    private javax.swing.JLabel lbPropData;
+    private javax.swing.JTextArea taPropData;
+    private javax.swing.JPopupMenu pmDateView;
+    private javax.swing.JMenuItem miHalfHour;
+    private javax.swing.JMenuItem miFullHour;
+    private javax.swing.JMenuItem miEditMgtd;
 }
