@@ -17,6 +17,8 @@
 package com.magicpwd.x.mgtd;
 
 import com.magicpwd.__a.ADialog;
+import com.magicpwd.__a.AMpwdPtn;
+import com.magicpwd.__i.IBackCall;
 import com.magicpwd.__i.mgtd.IMgtdBean;
 import com.magicpwd._comn.I1S1;
 import com.magicpwd._comn.I1S2;
@@ -25,7 +27,7 @@ import com.magicpwd._cons.ConsDat;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
-import com.magicpwd.v.mgtd.MgtdPtn;
+import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.x.mgtd.method.Apps;
 import com.magicpwd.x.mgtd.method.Audio;
 import com.magicpwd.x.mgtd.method.File;
@@ -44,14 +46,20 @@ import com.magicpwd.x.mgtd.schedule.Special;
 public class MgtdDlg extends ADialog
 {
 
-    private MgtdPtn mgtdPtn;
+    private AMpwdPtn formPtn;
     private Mgtd mgtd;
     private javax.swing.SpinnerNumberModel smAhead;
+    private IBackCall<String, String> backCall;
 
-    public MgtdDlg(MgtdPtn mgtdPtn, boolean modal)
+    public MgtdDlg(AMpwdPtn formPtn, boolean modal)
     {
-        super(mgtdPtn, modal);
-        this.mgtdPtn = mgtdPtn;
+        super(formPtn, modal);
+        this.formPtn = formPtn;
+    }
+
+    public void setBackCall(IBackCall<String, String> backCall)
+    {
+        this.backCall = backCall;
     }
 
     public void initView()
@@ -406,7 +414,7 @@ public class MgtdDlg extends ADialog
         this.processEscape();
 
         this.pack();
-        Bean.centerForm(this, mgtdPtn);
+        Bean.centerForm(this, formPtn);
         this.setVisible(true);
     }
 
@@ -489,7 +497,13 @@ public class MgtdDlg extends ADialog
         mgtd.setP30F0312(((I1S1) obj).getK());
         mgtd.setP30F0313(smAhead.getNumber().intValue());
         mgtd.setP30F0314(taRemark.getText());
-        mgtdPtn.saveMgtd(mgtd);
+
+        DBA4000.saveMgtdData(mgtd);
+
+        if (backCall != null)
+        {
+            backCall.callBack(mgtd.getP30F0309(), mgtd.getP30F030C());
+        }
 
         this.dispose();
     }

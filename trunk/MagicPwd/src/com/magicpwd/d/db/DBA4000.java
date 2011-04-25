@@ -414,7 +414,10 @@ public class DBA4000
             dba.addWhere(buf.toString());
 
             ResultSet rest = dba.executeSelect();
-            readMgtdData(rest, list);
+            while (rest.next())
+            {
+                list.add(readMgtdData(rest));
+            }
             rest.close();
             return true;
         }
@@ -429,9 +432,9 @@ public class DBA4000
         }
     }
 
-    public static java.util.ArrayList<Mgtd> readMgtdList()
+    public static Mgtd readMgtdData(String mgtdHash)
     {
-        java.util.ArrayList<Mgtd> list = new java.util.ArrayList<Mgtd>();
+        Mgtd mgtd = null;
 
         DBAccess dba = new DBAccess();
 
@@ -445,14 +448,51 @@ public class DBA4000
 //            dba.addSort(DBC4000.p30f03);
 
             ResultSet rest = dba.executeSelect();
-            readMgtdData(rest, list);
+            if (rest.next())
+            {
+                mgtd = readMgtdData(rest);
+            }
             rest.close();
-            return list;
+            return mgtd;
         }
         catch (Exception exp)
         {
             Logs.exception(exp);
-            return list;
+            return mgtd;
+        }
+        finally
+        {
+            dba.dispose();
+        }
+    }
+
+    public static java.util.ArrayList<Mgtd> readMgtdList()
+    {
+        java.util.ArrayList<Mgtd> mgtdList = new java.util.ArrayList<Mgtd>();
+
+        DBAccess dba = new DBAccess();
+
+        try
+        {
+            dba.init();
+
+            dba.addTable(DBC4000.P30F0300);
+            dba.addWhere(DBC4000.P30F0307, "1");
+            dba.addSort(DBC4000.P30F0305);
+//            dba.addSort(DBC4000.p30f03);
+
+            ResultSet rest = dba.executeSelect();
+            while (rest.next())
+            {
+                mgtdList.add(readMgtdData(rest));
+            }
+            rest.close();
+            return mgtdList;
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            return mgtdList;
         }
         finally
         {
@@ -589,34 +629,30 @@ public class DBA4000
         }
     }
 
-    private static void readMgtdData(ResultSet rest, List<Mgtd> list) throws Exception
+    private static Mgtd readMgtdData(ResultSet rest) throws Exception
     {
-        Mgtd mgtd;
-        while (rest.next())
-        {
-            mgtd = new Mgtd();
-            mgtd.setP30F0301(rest.getInt(DBC4000.P30F0301));
-            mgtd.setP30F0302(rest.getInt(DBC4000.P30F0302));
-            mgtd.setP30F0303(rest.getInt(DBC4000.P30F0303));
-            mgtd.setP30F0304(rest.getInt(DBC4000.P30F0304));
-            mgtd.setP30F0305(rest.getInt(DBC4000.P30F0305));
-            mgtd.setP30F0306(rest.getInt(DBC4000.P30F0306));
-            mgtd.setP30F0307(rest.getInt(DBC4000.P30F0307));
-            mgtd.setP30F0308(rest.getInt(DBC4000.P30F0308));
-            mgtd.setP30F0309(rest.getString(DBC4000.P30F0309));
-            mgtd.setP30F030A(rest.getString(DBC4000.P30F030A));
-            mgtd.setP30F030B(rest.getString(DBC4000.P30F030B));
-            mgtd.setP30F030C(rest.getString(DBC4000.P30F030C));
-            mgtd.setP30F030D(rest.getLong(DBC4000.P30F030D));
-            mgtd.setP30F030E(rest.getLong(DBC4000.P30F030E));
-            mgtd.setP30F030F(rest.getLong(DBC4000.P30F030F));
-            mgtd.setP30F030F(rest.getString(DBC4000.P30F0310));
-            mgtd.setP30F0311(rest.getString(DBC4000.P30F0311));
-            mgtd.setP30F0312(rest.getInt(DBC4000.P30F0312));
-            mgtd.setP30F0313(rest.getInt(DBC4000.P30F0313));
-            mgtd.setP30F0314(rest.getString(DBC4000.P30F0314));
-            list.add(mgtd);
-        }
+        Mgtd mgtd = new Mgtd();
+        mgtd.setP30F0301(rest.getInt(DBC4000.P30F0301));
+        mgtd.setP30F0302(rest.getInt(DBC4000.P30F0302));
+        mgtd.setP30F0303(rest.getInt(DBC4000.P30F0303));
+        mgtd.setP30F0304(rest.getInt(DBC4000.P30F0304));
+        mgtd.setP30F0305(rest.getInt(DBC4000.P30F0305));
+        mgtd.setP30F0306(rest.getInt(DBC4000.P30F0306));
+        mgtd.setP30F0307(rest.getInt(DBC4000.P30F0307));
+        mgtd.setP30F0308(rest.getInt(DBC4000.P30F0308));
+        mgtd.setP30F0309(rest.getString(DBC4000.P30F0309));
+        mgtd.setP30F030A(rest.getString(DBC4000.P30F030A));
+        mgtd.setP30F030B(rest.getString(DBC4000.P30F030B));
+        mgtd.setP30F030C(rest.getString(DBC4000.P30F030C));
+        mgtd.setP30F030D(rest.getLong(DBC4000.P30F030D));
+        mgtd.setP30F030E(rest.getLong(DBC4000.P30F030E));
+        mgtd.setP30F030F(rest.getLong(DBC4000.P30F030F));
+        mgtd.setP30F030F(rest.getString(DBC4000.P30F0310));
+        mgtd.setP30F0311(rest.getString(DBC4000.P30F0311));
+        mgtd.setP30F0312(rest.getInt(DBC4000.P30F0312));
+        mgtd.setP30F0313(rest.getInt(DBC4000.P30F0313));
+        mgtd.setP30F0314(rest.getString(DBC4000.P30F0314));
+        return mgtd;
     }
 
     public static boolean listMgtdData(java.util.List<Mgtd> mgtdList)
@@ -631,7 +667,10 @@ public class DBA4000
 //            dba.addParam(DBC4000.P30F0702, ConsDat.MGTD_STATUS_INIT);
 //            dba.addWhere(DBC4000.P30F0708, mgtd.getP30F0708());
             ResultSet rest = dba.executeSelect();
-            readMgtdData(rest, mgtdList);
+            while (rest.next())
+            {
+                mgtdList.add(readMgtdData(rest));
+            }
             rest.close();
             return true;
         }

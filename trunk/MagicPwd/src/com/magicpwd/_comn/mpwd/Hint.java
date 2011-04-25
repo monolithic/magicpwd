@@ -147,6 +147,7 @@ public class Hint implements java.io.Serializable
     }
 
     /**
+     * 间隔单位
      * @return the P30F0404
      */
     public Integer getP30F0404()
@@ -155,6 +156,7 @@ public class Hint implements java.io.Serializable
     }
 
     /**
+     * 间隔单位
      * @param P30F0404 the P30F0404 to set
      */
     public void setP30F0404(Integer P30F0404)
