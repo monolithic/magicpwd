@@ -90,7 +90,7 @@ public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall
         hsg.addComponent(dataEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         layout.setHorizontalGroup(hsg);
 
-        javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER);
         vpg1.addComponent(lb_PropName);
         vpg1.addComponent(ib_PropName, 21, 21, 21);
         javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();

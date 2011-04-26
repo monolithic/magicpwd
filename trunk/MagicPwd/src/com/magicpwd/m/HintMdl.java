@@ -78,7 +78,7 @@ public final class HintMdl
         viewList.add(view);
     }
 
-    public boolean showNote(boolean forced)
+    public synchronized boolean showNote(boolean forced)
     {
         showTime();
 
@@ -93,6 +93,7 @@ public final class HintMdl
             DBA4000.findHintList(userMdl, mgtdList);
             counter = 0;
         }
+        counter += 1;
 
         // 到期提示判断
         hintList.clear();

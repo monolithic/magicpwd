@@ -206,7 +206,7 @@ public interface DBC4000
     String P30F030E = "P30F030E";
     /**执行时间*/
     String P30F030F = "P30F030F";
-    /**执行参数*/
+    /**附加参数*/
     String P30F0310 = "P30F0310";
     int P30F0310_SIZE = 1024;
     /**执行参数*/

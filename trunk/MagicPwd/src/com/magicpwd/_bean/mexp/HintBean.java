@@ -72,11 +72,8 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
         dataEdit.setDropButtonVisible(false);
 
         blPropName = new BtnLabel();
-//        ib_PropName.setIcon(Bean.getNone());
-        tfPropName = new javax.swing.JTextField(14);
-        tfPropName.setEditable(false);
+//        blPropName.setIcon(Bean.getNone());
         lbPropName = new javax.swing.JLabel();
-        lbPropName.setLabelFor(blPropName);
 
         pmDateView = new javax.swing.JPopupMenu();
         miHalfHour = new javax.swing.JMenuItem();
@@ -101,15 +98,11 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
-        javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
-        hsg1.addComponent(tfPropName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg1.addComponent(blPropName, 21, 21, 21);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg1.addComponent(lbPropName);
         hpg1.addComponent(lbPropData);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg2.addGroup(hsg1);
+        hpg2.addComponent(blPropName, 21, 21, 21);
         hpg2.addComponent(sp_PropData, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addGroup(hpg1);
@@ -119,9 +112,8 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
         hsg.addComponent(dataEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         layout.setHorizontalGroup(hsg);
 
-        javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER);
         vpg1.addComponent(lbPropName);
-        vpg1.addComponent(tfPropName);
         vpg1.addComponent(blPropName, 21, 21, 21);
         javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
         vsg1.addComponent(lbPropData);
@@ -195,7 +187,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
     {
         itemData = item;
 
-        taPropData.setText(item.getData());
+        taPropData.setText(item.getName());
     }
 
     @Override
@@ -209,7 +201,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
     {
         if (mgtdType > 0)
         {
-            String name = saveMgtd(mgtdCal, tfPropName.getText());
+            String name = saveMgtd(mgtdCal);
             if (!Char.isValidateHash(name))
             {
                 return;
@@ -415,7 +407,6 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
             {
                 return;
             }
-            tfPropName.setText(cmd);
             mgtdType = ConsDat.MGTD_INTVAL_FIXTIME;
             mgtdData = 0;
             mgtdUnit = 0;
@@ -430,7 +421,6 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
             {
                 return;
             }
-            tfPropName.setText(format.format(mgtdCal.getTime()));
             mgtdType = ConsDat.MGTD_INTVAL_FIXTIME;
             mgtdData = 0;
             mgtdUnit = 0;
@@ -445,8 +435,8 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
             {
                 return;
             }
-            mgtdData = Integer.parseInt(matcher.group());
             mgtdType = ConsDat.MGTD_INTVAL_PERIOD;
+            mgtdData = Integer.parseInt(matcher.group());
 
             if (cmd.endsWith("second"))
             {
@@ -487,8 +477,8 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
             {
                 return;
             }
-            mgtdData = Integer.parseInt(matcher.group());
             mgtdType = ConsDat.MGTD_INTVAL_INTVAL;
+            mgtdData = Integer.parseInt(matcher.group());
 
             if (cmd.endsWith("second"))
             {
@@ -528,7 +518,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
             {
                 return;
             }
-            tfPropName.setText(cmd.substring(16));
+            taPropData.setText(cmd.substring(16));
             mgtdType = -1;
             return;
         }
@@ -549,7 +539,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
         mgtdDlg.initData(mgtd);
     }
 
-    private String saveMgtd(java.util.Calendar cal, String name)
+    private String saveMgtd(java.util.Calendar cal)
     {
         Mgtd mgtd = new Mgtd();
         mgtd.setP30F0301(0);
@@ -560,7 +550,27 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
         mgtd.setP30F0306(ConsDat.MGTD_METHOD_NOTE);
         mgtd.setP30F0307(0);
         mgtd.setP30F0308(0);
-        mgtd.setP30F030C(name);
+        mgtd.setP30F0309(itemData.getData());
+        switch (mgtdType)
+        {
+            case ConsDat.MGTD_INTVAL_FIXTIME:
+                mgtd.setP30F030C("定时提醒");
+                break;
+            case ConsDat.MGTD_INTVAL_PERIOD:
+                mgtd.setP30F030C("周期提醒");
+                break;
+            case ConsDat.MGTD_INTVAL_INTVAL:
+                mgtd.setP30F030C("间隔提醒");
+                break;
+            case ConsDat.MGTD_INTVAL_SPECIAL:
+                mgtd.setP30F030C("特殊提醒");
+                break;
+            case ConsDat.MGTD_INTVAL_FORMULA:
+                mgtd.setP30F030C("公式提醒");
+                break;
+            default:
+                mgtd.setP30F030C("未知");
+        }
         mgtd.setP30F030D(mgtdCal.getTimeInMillis());
         mgtd.setP30F030E(0L);
         mgtd.setP30F030F(0L);
@@ -584,7 +594,6 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
         return null;
     }
     private javax.swing.JLabel lbPropName;
-    private javax.swing.JTextField tfPropName;
     private BtnLabel blPropName;
     private javax.swing.JLabel lbPropData;
     private javax.swing.JTextArea taPropData;
