@@ -555,27 +555,31 @@ public class DBA4000
 
             dba.addTable(DBC4000.P30F0300);
             dba.addTable(DBC4000.P30F0400);
+            dba.addColumn(DBC4000.P30F0305);
             dba.addColumn(DBC4000.P30F0312);
             dba.addColumn(DBC4000.P30F0313);
             dba.addColumn(DBC4000.P30F0402);
             dba.addColumn(DBC4000.P30F0403);
+            dba.addColumn(DBC4000.P30F0404);
             dba.addColumn(DBC4000.P30F0405);
             dba.addColumn(DBC4000.P30F0406);
-            dba.addWhere(DBC4000.P30F0309, DBC4000.P30F0402, true);
-            dba.addWhere(com.magicpwd._util.Char.format("{0} IS NULL OR {0} < {1}", DBC4000.P30F030D, now));
-            dba.addWhere(com.magicpwd._util.Char.format("{0} IS NULL OR {0} > {1}", DBC4000.P30F030E, now));
-            dba.addWhere(DBC4000.P30F0305, ">", ConsDat.MGTD_INTVAL_FIXTIME);
-            dba.addWhere(DBC4000.P30F0303, ConsDat.MGTD_STATUS_READY);
+            dba.addWhere(DBC4000.P30F0309, DBC4000.P30F0402, false);
+            dba.addWhere(com.magicpwd._util.Char.format("{0}=0 OR {0} < {1}", DBC4000.P30F030D, now));
+            dba.addWhere(com.magicpwd._util.Char.format("{0}=0  OR {0} > {1}", DBC4000.P30F030E, now));
+            dba.addWhere(DBC4000.P30F0305, ">", ConsDat.MGTD_INTVAL_BEFOREND);
+            dba.addWhere(DBC4000.P30F0303, ConsDat.MGTD_STATUS_INIT);
 
             Hint hint;
             ResultSet rest = dba.executeSelect();
             while (rest.next())
             {
                 hint = new Hint();
+                hint.setP30F0305(rest.getInt(DBC4000.P30F0305));
                 hint.setP30F0311(rest.getInt(DBC4000.P30F0312));
                 hint.setP30F0312(rest.getInt(DBC4000.P30F0313));
                 hint.setP30F0402(rest.getString(DBC4000.P30F0402));
                 hint.setP30F0403(rest.getLong(DBC4000.P30F0403));
+                hint.setP30F0404(rest.getInt(DBC4000.P30F0404));
                 hint.setP30F0405(rest.getInt(DBC4000.P30F0405));
                 hint.setP30F0406(rest.getString(DBC4000.P30F0406));
                 list.add(hint);

@@ -19,7 +19,6 @@ package com.magicpwd.v;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd.__i.IHintView;
 import com.magicpwd._comn.mpwd.Hint;
-import com.magicpwd.m.HintMdl;
 import com.magicpwd.m.UserMdl;
 
 /**
@@ -30,7 +29,6 @@ public class HintBar extends javax.swing.JPanel implements IHintView
 {
 
     private UserMdl userMdl;
-    private HintMdl hintMdl;
     private IBackCall<String, java.util.List<Hint>> backCall;
 
     public HintBar(UserMdl userMdl)
@@ -43,15 +41,6 @@ public class HintBar extends javax.swing.JPanel implements IHintView
         setBorder(javax.swing.BorderFactory.createMatteBorder(1, 0, 0, 0, getBackground().darker()));
 
         lb_HintLabel = new javax.swing.JLabel();
-        lb_HintLabel.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                lb_HintLabelMouseClicked(evt);
-            }
-        });
 
         lb_TimeLabel = new javax.swing.JLabel();
         lb_TimeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -85,6 +74,15 @@ public class HintBar extends javax.swing.JPanel implements IHintView
 
     public void initData()
     {
+        lb_HintLabel.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                lb_HintLabelMouseClicked(evt);
+            }
+        });
         userMdl.getHintMdl().registerHintView(this);
     }
 
@@ -92,7 +90,7 @@ public class HintBar extends javax.swing.JPanel implements IHintView
     {
         if (backCall != null)
         {
-            backCall.callBack("hint", hintMdl.getHint());
+            backCall.callBack("hint", userMdl.getHintMdl().getHint());
         }
     }
 

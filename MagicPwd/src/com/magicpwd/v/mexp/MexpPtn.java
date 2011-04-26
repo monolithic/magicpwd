@@ -76,8 +76,8 @@ public class MexpPtn extends AMpwdPtn
 
     private EditDlg ed_KeysEdit;
     private IMexpBean[] mexpBean;
-    private FindBar mainFind;
-    private HintBar mainInfo;
+    private FindBar findBar;
+    private HintBar hintBar;
     private MailPtn mailPtn;
     private HistDlg histDlg;
     private MdiDialog cfgForm;
@@ -205,12 +205,12 @@ public class MexpPtn extends AMpwdPtn
         setToolVisible(userMdl.isToolVisible(AppView.mexp));
 
         // 搜索栏
-        mainFind.initData();
+        findBar.initData();
         setFindVisible(userMdl.isFindVisible(AppView.mexp));
 
         // 信息栏
-        mainInfo.initData();
-        mainInfo.setBackCall(new IBackCall<String, java.util.List<Hint>>()
+        hintBar.initData();
+        hintBar.setBackCall(new IBackCall<String, java.util.List<Hint>>()
         {
 
             @Override
@@ -308,12 +308,12 @@ public class MexpPtn extends AMpwdPtn
             queryKey = meta;
             tr_GuidTree.setSelectionPath(null);
             mexpMdl.getListMdl().listKeysByMeta(meta);
-            mainInfo.showInfo("共 " + mexpMdl.getListMdl().getSize() + " 条数据");
+            hintBar.showInfo("共 " + mexpMdl.getListMdl().getSize() + " 条数据");
         }
         else
         {
             mexpMdl.getListMdl().listKeysByKind(queryKey);
-            mainInfo.showInfo("共 " + mexpMdl.getListMdl().getSize() + " 条数据");
+            hintBar.showInfo("共 " + mexpMdl.getListMdl().getSize() + " 条数据");
         }
         return true;
     }
@@ -328,7 +328,7 @@ public class MexpPtn extends AMpwdPtn
         {
             mexpMdl.getListMdl().listKeysByKind(queryKey);
         }
-        mainInfo.showInfo("共 " + mexpMdl.getListMdl().getSize() + " 条数据");
+        hintBar.showInfo("共 " + mexpMdl.getListMdl().getSize() + " 条数据");
 
         lastKeys = null;
     }
@@ -414,7 +414,7 @@ public class MexpPtn extends AMpwdPtn
         }
 
         showPropInfo();
-        mainInfo.showNote(false);
+        hintBar.showNote(false);
 
         lastKeys = null;
         tb_LastIndx = -1;
@@ -483,18 +483,18 @@ public class MexpPtn extends AMpwdPtn
 
     public void setFindFocused()
     {
-        mainFind.requestFocus();
+        findBar.requestFocus();
     }
 
     public void setFindVisible(boolean visible)
     {
-        mainFind.setVisible(visible);
+        findBar.setVisible(visible);
         userMdl.setFindVisible(AppView.mexp, visible);
     }
 
     public void setInfoVisible(boolean visible)
     {
-        mainInfo.setVisible(visible);
+        hintBar.setVisible(visible);
         userMdl.setInfoVisible(AppView.mexp, visible);
     }
 
@@ -821,8 +821,8 @@ public class MexpPtn extends AMpwdPtn
     {
         pl_KeysInfo = new javax.swing.JPanel();
 
-        mainFind = new FindBar(this);
-        mainFind.initView();
+        findBar = new FindBar(this);
+        findBar.initView();
 
         tb_KeysView = new javax.swing.JTable();
         tb_KeysView.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -920,7 +920,7 @@ public class MexpPtn extends AMpwdPtn
         javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg.addComponent(sp_KeysView, javax.swing.GroupLayout.DEFAULT_SIZE, 423, Short.MAX_VALUE);
         hpg.addComponent(eb_KeysEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
-        hpg.addComponent(mainFind, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        hpg.addComponent(findBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
 
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addGap(5);
@@ -928,7 +928,7 @@ public class MexpPtn extends AMpwdPtn
         layout.setHorizontalGroup(hsg);
 
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
-        vsg.addComponent(mainFind, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg.addComponent(findBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg.addComponent(sp_KeysView, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -940,8 +940,8 @@ public class MexpPtn extends AMpwdPtn
     {
         pl_KeysBase = new javax.swing.JPanel();
 
-        mainInfo = new HintBar(userMdl);
-        mainInfo.initView();
+        hintBar = new HintBar(userMdl);
+        hintBar.initView();
 
         javax.swing.JSplitPane sp = new javax.swing.JSplitPane();
         sp.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -958,14 +958,14 @@ public class MexpPtn extends AMpwdPtn
         hsg.addContainerGap();
         javax.swing.GroupLayout.ParallelGroup hpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg.addGroup(hsg);
-        hpg.addComponent(mainInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 560, Short.MAX_VALUE);
+        hpg.addComponent(hintBar, javax.swing.GroupLayout.PREFERRED_SIZE, 560, Short.MAX_VALUE);
         layout.setHorizontalGroup(hpg);
 
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
         vsg.addContainerGap();
         vsg.addComponent(sp, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE);
         vsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 10, 20);
-        vsg.addComponent(mainInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg.addComponent(hintBar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE);
         layout.setVerticalGroup(vsg);
     }
 
@@ -993,14 +993,14 @@ public class MexpPtn extends AMpwdPtn
 
     private void initBaseLang()
     {
-        mainInfo.initLang();
-        mainFind.initLang();
+        hintBar.initLang();
+        findBar.initLang();
     }
 
     @Override
     public void requestFocus()
     {
-        mainFind.requestFocus();
+        findBar.requestFocus();
     }
 
     private void tr_GuidTreeValueChanged(javax.swing.event.TreeSelectionEvent evt)
@@ -1027,7 +1027,7 @@ public class MexpPtn extends AMpwdPtn
             }
         }
 
-        mainInfo.showInfo("共 " + mexpMdl.getListMdl().getSize() + " 条数据");
+        hintBar.showInfo("共 " + mexpMdl.getListMdl().getSize() + " 条数据");
 
         isSearch = false;
         lastKeys = null;

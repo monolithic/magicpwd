@@ -94,7 +94,7 @@ public class DXA1000 extends DXA
             String text = temp.get(indx++);
             if (com.magicpwd._util.Char.isValidate(text))
             {
-                hint.setTime(new java.sql.Timestamp(com.magicpwd._util.Date.toDate(text, '-', ':', ' ').getTimeInMillis()));
+                //hint.setTime(new java.sql.Timestamp(com.magicpwd._util.Date.toDate(text, '-', ':', ' ').getTimeInMillis()));
             }
             hint.setName(temp.get(indx++));
             tempList.add(hint);
