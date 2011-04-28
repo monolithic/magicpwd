@@ -61,13 +61,13 @@ public class LogoItem extends AEditItem
         {
             return false;
         }
-        String[] arr = txt.split(",");
+        String[] arr = txt.replace("\\,", "\f").replace("\\n", "\n").replace("\\\\", "\\").split(",");
         if (arr == null || arr.length < 2)
         {
             return false;
         }
-        setName(arr[0]);
-        setData(arr[1]);
+        setName(arr[0].replace("\f", ","));
+        setData(arr[1].replace("\f", ","));
         return true;
     }
 
