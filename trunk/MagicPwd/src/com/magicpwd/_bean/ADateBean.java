@@ -140,7 +140,7 @@ public abstract class ADateBean extends AEditBean
         boolean b = false;
         if (group != null)
         {
-            b = group.setSelected(itemData.getSpec(DateItem.SPEC_DATE_FORM), true);
+            b = group.setSelected(itemData.getSpec(DateItem.SPEC_FORMAT), true);
         }
         mi_ConfDef.setSelected(!b);
     }
@@ -159,7 +159,7 @@ public abstract class ADateBean extends AEditBean
     {
         if (format == null)
         {
-            format = getDateFormat(itemData.getSpec(DateItem.SPEC_DATE_FORM));
+            format = getDateFormat(itemData.getSpec(DateItem.SPEC_FORMAT));
         }
         tf_PropData.setText(format.format(Date.toDate(evt.getActionCommand()).getTime()));
     }
@@ -171,7 +171,7 @@ public abstract class ADateBean extends AEditBean
         {
             return;
         }
-        itemData.setSpec(DateItem.SPEC_DATE_FORM, cmd);
+        itemData.setSpec(DateItem.SPEC_FORMAT, cmd);
         format = getDateFormat(cmd);
     }
 

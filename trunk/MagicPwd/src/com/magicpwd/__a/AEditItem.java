@@ -22,7 +22,6 @@ import com.magicpwd._comn.item.LogoItem;
 import com.magicpwd._comn.item.MetaItem;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd.m.UserMdl;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,8 +38,8 @@ public abstract class AEditItem implements IEditItem
     /** 记录内容 */
     private String data;
     /** 专有内容 */
-    private List<String> spec;
-    private UserMdl userCfg;
+    protected List<String> spec;
+    protected UserMdl userCfg;
 
     /**
      * 
@@ -268,52 +267,52 @@ public abstract class AEditItem implements IEditItem
             e = text.indexOf(c, s);
         }
     }
-
-    @Override
-    public final void setDefault()
-    {
-        switch (type)
-        {
-            case ConsDat.INDX_GUID:
-                spec = new ArrayList<String>(2);
-                spec.add(SPEC_VALUE_NONE);
-                spec.add(SPEC_VALUE_NONE);
-                break;
-            case ConsDat.INDX_PWDS:
-                spec = new ArrayList<String>(3);
-                spec.add(userCfg.getPwdsKey());
-                spec.add(userCfg.getPwdsLen());
-                spec.add(userCfg.getPwdsLoop());
-                break;
-            case ConsDat.INDX_DATE:
-                spec = new ArrayList<String>(1);
-                spec.add(SPEC_VALUE_NONE);
-                break;
-            case ConsDat.INDX_FILE:
-                spec = new ArrayList<String>(1);
-                spec.add(SPEC_VALUE_NONE);
-                break;
-            case ConsDat.INDX_DATA:
-                spec = new ArrayList<String>(7);
-                spec.add(SPEC_VALUE_TRUE);
-                spec.add("+0-");
-                spec.add("0");
-                spec.add("8");
-                spec.add(SPEC_VALUE_NONE);
-                spec.add(SPEC_VALUE_TRUE);
-                spec.add("^");
-                spec.add(SPEC_VALUE_FAIL);
-                break;
-            case ConsDat.INDX_SIGN:
-                spec = new ArrayList<String>(2);
-                spec.add("def");
-                spec.add("P30F7E02");
-                break;
-            default:
-                spec = null;
-                break;
-        }
-    }
+//
+//    @Override
+//    public final void setDefault()
+//    {
+//        switch (type)
+//        {
+//            case ConsDat.INDX_GUID:
+//                spec = new ArrayList<String>(2);
+//                spec.add(SPEC_VALUE_NONE);
+//                spec.add(SPEC_VALUE_NONE);
+//                break;
+//            case ConsDat.INDX_PWDS:
+//                spec = new ArrayList<String>(3);
+//                spec.add(userCfg.getPwdsKey());
+//                spec.add(userCfg.getPwdsLen());
+//                spec.add(userCfg.getPwdsLoop());
+//                break;
+//            case ConsDat.INDX_DATE:
+//                spec = new ArrayList<String>(1);
+//                spec.add(SPEC_VALUE_NONE);
+//                break;
+//            case ConsDat.INDX_FILE:
+//                spec = new ArrayList<String>(1);
+//                spec.add(SPEC_VALUE_NONE);
+//                break;
+//            case ConsDat.INDX_DATA:
+//                spec = new ArrayList<String>(7);
+//                spec.add(SPEC_VALUE_TRUE);
+//                spec.add("+0-");
+//                spec.add("0");
+//                spec.add("8");
+//                spec.add(SPEC_VALUE_NONE);
+//                spec.add(SPEC_VALUE_TRUE);
+//                spec.add("^");
+//                spec.add(SPEC_VALUE_FAIL);
+//                break;
+//            case ConsDat.INDX_SIGN:
+//                spec = new ArrayList<String>(2);
+//                spec.add("def");
+//                spec.add("P30F7E02");
+//                break;
+//            default:
+//                spec = null;
+//                break;
+//        }
+//    }
 
     public static String doEscape(String txt)
     {

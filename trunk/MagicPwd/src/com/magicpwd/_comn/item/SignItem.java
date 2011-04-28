@@ -18,6 +18,7 @@ package com.magicpwd._comn.item;
 
 import com.magicpwd.__a.AEditItem;
 import com.magicpwd._cons.ConsDat;
+import com.magicpwd._util.Char;
 import com.magicpwd.m.UserMdl;
 import org.dom4j.Element;
 
@@ -39,7 +40,11 @@ public class SignItem extends AEditItem
     @Override
     public boolean exportAsTxt(StringBuilder builder)
     {
-        builder.append(getName()).append(',').append(getData());
+        if (builder == null)
+        {
+            return false;
+        }
+        builder.append(doEscape(getName())).append(',').append(doEscape(getData()));
         return true;
     }
 
@@ -54,6 +59,17 @@ public class SignItem extends AEditItem
     @Override
     public boolean importByTxt(String txt)
     {
+        if (Char.isValidate(txt))
+        {
+            return false;
+        }
+        String[] arr = txt.split(",");
+        if (arr == null || arr.length < 2)
+        {
+            return false;
+        }
+        setName(arr[0]);
+        setData(arr[1]);
         return true;
     }
 
@@ -61,5 +77,13 @@ public class SignItem extends AEditItem
     public boolean importByXml(String xml)
     {
         return true;
+    }
+
+    @Override
+    public final void setDefault()
+    {
+        spec = new java.util.ArrayList<String>(2);
+        spec.add("def");
+        spec.add("P30F7E02");
     }
 }
