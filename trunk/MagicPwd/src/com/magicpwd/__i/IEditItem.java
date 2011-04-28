@@ -34,43 +34,12 @@ public interface IEditItem
     String getData();
 
     boolean setData(String data);
-    ///////////////////////////////////////////////////////
-    // Spec属性
-    ///////////////////////////////////////////////////////
-    /**
-     * 附加属性索引
-     */
-    int SPEC_GUID_TPLT = 0;// 口令模板索引
-    int SPEC_FILE_NAME = 0;// 附件原文件名
-    int SPEC_FILE_EXTS = 1;// 附件原扩展名
-    int SPEC_PWDS_HASH = 0;// 字符空间索引
-    int SPEC_PWDS_SIZE = 1;// 生成口令长度
-    int SPEC_PWDS_LOOP = 2;// 是否允许重复
-    int SPEC_DATE_FORM = 0;// 日期显示格式
-    int SPEC_DATA_OPT = 0;//可选输入
-    int SPEC_DATA_SET = 1;//数据集
-    int SPEC_DATA_INT = 2;//整数位
-    int SPEC_DATA_DEC = 3;//小数位
-    int SPEC_DATA_CHAR = 4;//特殊符号
-    int SPEC_DATA_CHAR_OPT = 5;//是否可选
-    int SPEC_DATA_CHAR_POS = 6;//符号位置
-    int SPEC_DATA_EXP = 7;//表达式
-    int SPEC_SIGN_TYPE = 0;//控制类型
-    int SPEC_SIGN_TPLT = 1;//显示模板
-    // 常量
-    String SPEC_VALUE_TRUE = "1";
-    String SPEC_VALUE_FAIL = "0";
-    String SPEC_VALUE_NONE = "";
 
-    /**
-     * 
-     * @param spec
-     */
     void addSpec(String spec);
 
     String getSpec(int index);
 
-    String getSpec(int index, String defValue);
+    String getSpec(int index, String def);
 
     void setSpec(int index, String spec);
 
@@ -79,4 +48,12 @@ public interface IEditItem
     void deCodeSpec(String text, String c);
 
     void setDefault();
+
+    String exportAsTxt();
+
+    String exportAsXml();
+
+    boolean importByTxt(String txt);
+
+    boolean importByXml(String xml);
 }

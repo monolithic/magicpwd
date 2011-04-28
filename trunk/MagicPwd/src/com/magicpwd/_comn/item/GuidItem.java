@@ -16,6 +16,7 @@
  */
 package com.magicpwd._comn.item;
 
+import com.magicpwd.__a.AEditItem;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd.m.UserMdl;
 
@@ -27,11 +28,37 @@ import com.magicpwd.m.UserMdl;
  *
  * @author Amon
  */
-public class GuidItem extends EditItem
+public class GuidItem extends AEditItem
 {
+
+    public static final int SPEC_GUID_TPLT = 0;// 口令模板索引
 
     public GuidItem(UserMdl userMdl)
     {
         super(userMdl, ConsDat.INDX_GUID);
+    }
+
+    @Override
+    public String exportAsTxt()
+    {
+        return "";
+    }
+
+    @Override
+    public String exportAsXml()
+    {
+        return "";
+    }
+
+    @Override
+    public boolean importByTxt(String txt)
+    {
+        return true;
+    }
+
+    @Override
+    public boolean importByXml(String xml)
+    {
+        return true;
     }
 }

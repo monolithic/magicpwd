@@ -19,7 +19,7 @@ package com.magicpwd.d.dx;
 import com.magicpwd.d.db.DBA3000;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.mpwd.Mkey;
-import com.magicpwd._comn.item.EditItem;
+import com.magicpwd.__a.AEditItem;
 import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.item.HintItem;
 import com.magicpwd._comn.item.LogoItem;
@@ -46,7 +46,7 @@ public class DXA2000 extends DXA
     {
         int size = 0;
         int indx = 0;
-        EditItem item;
+        IEditItem item;
         Mkey tempKeys = new Mkey();
         java.util.ArrayList<IEditItem> tempList = new java.util.ArrayList<IEditItem>();
         DBAccess dba = new DBAccess();
@@ -81,7 +81,7 @@ public class DXA2000 extends DXA
             }
             guid.setName(date);
             guid.setData(kindHash);
-            guid.setSpec(IEditItem.SPEC_GUID_TPLT, temp.get(indx++));
+            guid.setSpec(GuidItem.SPEC_GUID_TPLT, temp.get(indx++));
             tempList.add(guid);
 
             // Meta
@@ -110,8 +110,7 @@ public class DXA2000 extends DXA
             {
                 while (indx < temp.size())
                 {
-                    item = new EditItem(userMdl);
-                    item.setType(Integer.parseInt(temp.get(indx++)));
+                    item = AEditItem.getInstance(userMdl, Integer.parseInt(temp.get(indx++)));
                     item.setName(temp.get(indx++));
                     item.setData(temp.get(indx++));
                     tempList.add(item);
@@ -175,7 +174,7 @@ public class DXA2000 extends DXA
             // Guid
             item = tempList.get(indx++);
             temp.add(item.getName());
-            temp.add(item.getSpec(IEditItem.SPEC_GUID_TPLT));
+            temp.add(item.getSpec(GuidItem.SPEC_GUID_TPLT));
 
             // Meta
             item = tempList.get(indx++);

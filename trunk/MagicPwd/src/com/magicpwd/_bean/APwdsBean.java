@@ -18,8 +18,7 @@ package com.magicpwd._bean;
 
 import com.magicpwd.__a.AEditBean;
 import com.magicpwd.__a.AMpwdPtn;
-import com.magicpwd.__i.IEditItem;
-import com.magicpwd._comn.item.EditItem;
+import com.magicpwd._comn.item.PwdsItem;
 import com.magicpwd._comn.prop.Char;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WButtonGroup;
@@ -309,7 +308,7 @@ public abstract class APwdsBean extends AEditBean
 
     protected void showConfData()
     {
-        String size = itemData.getSpec(IEditItem.SPEC_PWDS_SIZE, "0");
+        String size = itemData.getSpec(PwdsItem.SPEC_PWDS_SIZE, "0");
         if (!com.magicpwd._util.Char.isValidatePositiveInteger(size))
         {
             size = "0";
@@ -319,8 +318,8 @@ public abstract class APwdsBean extends AEditBean
             mi_SizeMore.setSelected(true);
             mi_SizeMore.setActionCommand(size);
         }
-        bg_CharGroup.setSelected(itemData.getSpec(IEditItem.SPEC_PWDS_HASH), true);
-        mi_LoopMenu.setSelected(IEditItem.SPEC_VALUE_TRUE.equals(itemData.getSpec(IEditItem.SPEC_PWDS_LOOP)));
+        bg_CharGroup.setSelected(itemData.getSpec(PwdsItem.SPEC_PWDS_HASH), true);
+        mi_LoopMenu.setSelected(PwdsItem.SPEC_VALUE_TRUE.equals(itemData.getSpec(PwdsItem.SPEC_PWDS_LOOP)));
     }
 
     private void bt_PwdsConfActionPerformed(java.awt.event.ActionEvent evt)
@@ -371,12 +370,12 @@ public abstract class APwdsBean extends AEditBean
             mi_SizeDef.setSelected(true);
         }
 
-        itemData.setSpec(EditItem.SPEC_PWDS_SIZE, t);
+        itemData.setSpec(PwdsItem.SPEC_PWDS_SIZE, t);
     }
 
     private void mi_SizeMoreActionPerformed(java.awt.event.ActionEvent evt)
     {
-        String s = JOptionPane.showInputDialog(formPtn, "", itemData.getSpec(EditItem.SPEC_PWDS_SIZE, ConsCfg.DEF_PWDS_SIZE));
+        String s = JOptionPane.showInputDialog(formPtn, "", itemData.getSpec(PwdsItem.SPEC_PWDS_SIZE, ConsCfg.DEF_PWDS_SIZE));
         if (s == null)
         {
             return;
@@ -391,7 +390,7 @@ public abstract class APwdsBean extends AEditBean
         }
 
         mi_SizeMore.setActionCommand(s);
-        itemData.setSpec(EditItem.SPEC_PWDS_SIZE, s);
+        itemData.setSpec(PwdsItem.SPEC_PWDS_SIZE, s);
     }
 
     private void mi_CharMenuActionPerformed(java.awt.event.ActionEvent evt)
@@ -402,12 +401,12 @@ public abstract class APwdsBean extends AEditBean
             return;
         }
 
-        itemData.setSpec(EditItem.SPEC_PWDS_HASH, t);
+        itemData.setSpec(PwdsItem.SPEC_PWDS_HASH, t);
     }
 
     private void mi_UrptMenuActionPerformed(java.awt.event.ActionEvent evt)
     {
-        itemData.setSpec(EditItem.SPEC_PWDS_LOOP, mi_LoopMenu.isSelected() ? IEditItem.SPEC_VALUE_TRUE : IEditItem.SPEC_VALUE_FAIL);
+        itemData.setSpec(PwdsItem.SPEC_PWDS_LOOP, mi_LoopMenu.isSelected() ? PwdsItem.SPEC_VALUE_TRUE : PwdsItem.SPEC_VALUE_FAIL);
     }
 
     private void changeView(boolean mask)

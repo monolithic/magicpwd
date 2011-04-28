@@ -14,9 +14,10 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd._comn.item;
+package com.magicpwd.__a;
 
 import com.magicpwd.__i.IEditItem;
+import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd.m.UserMdl;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ import java.util.List;
  * 口令属性
  * @author Amon
  */
-public class EditItem implements IEditItem
+public abstract class AEditItem implements IEditItem
 {
 
     /** 记录类别 */
@@ -42,7 +43,7 @@ public class EditItem implements IEditItem
     /**
      * 
      */
-    public EditItem(UserMdl userCfg)
+    protected AEditItem(UserMdl userCfg)
     {
         this(userCfg, 0);
     }
@@ -50,7 +51,7 @@ public class EditItem implements IEditItem
     /**
      * @param type
      */
-    public EditItem(UserMdl userCfg, int type)
+    protected AEditItem(UserMdl userCfg, int type)
     {
         this(userCfg, type, "", "");
     }
@@ -60,13 +61,35 @@ public class EditItem implements IEditItem
      * @param name
      * @param data
      */
-    public EditItem(UserMdl userCfg, int type, String name, String data)
+    protected AEditItem(UserMdl userCfg, int type, String name, String data)
     {
         this.userCfg = userCfg;
         this.type = type;
         this.name = name;
         this.data = data;
         setDefault();
+    }
+
+    public static IEditItem getInstance(UserMdl userMdl, int type)
+    {
+        switch (type)
+        {
+            case ConsDat.INDX_GUID:
+                return new GuidItem(userMdl);
+            default:
+                return null;
+        }
+    }
+
+    public static IEditItem getInstance(UserMdl userMdl, int type, String name, String data)
+    {
+        switch (type)
+        {
+            case ConsDat.INDX_GUID:
+                return new GuidItem(userMdl);
+            default:
+                return null;
+        }
     }
 
     /**
@@ -158,7 +181,6 @@ public class EditItem implements IEditItem
         return (index > -1 && index < spec.size()) ? spec.get(index) : null;
     }
 
-    @Override
     public String getSpec(int index, String defValue)
     {
         if (index > -1 && index < spec.size())
@@ -263,4 +285,10 @@ public class EditItem implements IEditItem
                 break;
         }
     }
+    /**
+     * 附加属性常量
+     */
+    public static final String SPEC_VALUE_TRUE = "1";
+    public static final String SPEC_VALUE_FAIL = "0";
+    public static final String SPEC_VALUE_NONE = "";
 }

@@ -20,7 +20,7 @@ import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mexp.IMexpBean;
 import com.magicpwd._bean.AFileBean;
 import com.magicpwd._comp.WEditBox;
-import com.magicpwd._comn.item.EditItem;
+import com.magicpwd._comn.item.FileItem;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
@@ -156,7 +156,7 @@ public class FileBean extends AFileBean implements IMexpBean
 
         try
         {
-            java.io.File file = new java.io.File(amaPath, itemData.getSpec(EditItem.SPEC_FILE_NAME) + ConsEnv.FILE_ATTACHMENT);
+            java.io.File file = new java.io.File(amaPath, itemData.getSpec(FileItem.SPEC_FILE_NAME) + ConsEnv.FILE_ATTACHMENT);
             if (file.exists())
             {
                 file.delete();
@@ -234,7 +234,7 @@ public class FileBean extends AFileBean implements IMexpBean
         {
             filePath = new java.io.File(filePath, itemData.getData());
         }
-        java.io.File tempFile = new java.io.File(amaPath, itemData.getSpec(EditItem.SPEC_FILE_NAME) + ConsEnv.FILE_ATTACHMENT);
+        java.io.File tempFile = new java.io.File(amaPath, itemData.getSpec(FileItem.SPEC_FILE_NAME) + ConsEnv.FILE_ATTACHMENT);
         try
         {
             mainPtn.deCrypt(tempFile, filePath);

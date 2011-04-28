@@ -18,7 +18,7 @@ package com.magicpwd.d.dx;
 
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.mpwd.Mkey;
-import com.magicpwd._comn.item.EditItem;
+import com.magicpwd.__a.AEditItem;
 import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.item.HintItem;
 import com.magicpwd._comn.item.LogoItem;
@@ -45,7 +45,7 @@ public class DXA1000 extends DXA
     {
         int size = 0;
         int indx = 0;
-        EditItem item;
+        IEditItem item;
         Mkey tempKeys = new Mkey();
         java.util.ArrayList<IEditItem> tempList = new java.util.ArrayList<IEditItem>();
         for (java.util.ArrayList<String> temp : data)
@@ -91,18 +91,13 @@ public class DXA1000 extends DXA
 
             // Hint
             HintItem hint = new HintItem(userMdl);
-            String text = temp.get(indx++);
-            if (com.magicpwd._util.Char.isValidate(text))
-            {
-                //hint.setTime(new java.sql.Timestamp(com.magicpwd._util.Date.toDate(text, '-', ':', ' ').getTimeInMillis()));
-            }
-            hint.setName(temp.get(indx++));
+            temp.get(indx++);
+            temp.get(indx++);
             tempList.add(hint);
 
             while (indx < temp.size())
             {
-                item = new EditItem(userMdl);
-                item.setType(Integer.parseInt(temp.get(indx++)));
+                item = AEditItem.getInstance(userMdl, Integer.parseInt(temp.get(indx++)));
                 item.setName(temp.get(indx++));
                 item.setData(temp.get(indx++));
                 tempList.add(item);

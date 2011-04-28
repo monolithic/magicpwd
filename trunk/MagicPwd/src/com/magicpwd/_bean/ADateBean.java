@@ -18,7 +18,7 @@ package com.magicpwd._bean;
 
 import com.magicpwd.__a.AEditBean;
 import com.magicpwd.__a.AMpwdPtn;
-import com.magicpwd.__i.IEditItem;
+import com.magicpwd._comn.item.DateItem;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._comp.WTextBox;
@@ -140,7 +140,7 @@ public abstract class ADateBean extends AEditBean
         boolean b = false;
         if (group != null)
         {
-            b = group.setSelected(itemData.getSpec(IEditItem.SPEC_DATE_FORM), true);
+            b = group.setSelected(itemData.getSpec(DateItem.SPEC_DATE_FORM), true);
         }
         mi_ConfDef.setSelected(!b);
     }
@@ -159,7 +159,7 @@ public abstract class ADateBean extends AEditBean
     {
         if (format == null)
         {
-            format = getDateFormat(itemData.getSpec(IEditItem.SPEC_DATE_FORM));
+            format = getDateFormat(itemData.getSpec(DateItem.SPEC_DATE_FORM));
         }
         tf_PropData.setText(format.format(Date.toDate(evt.getActionCommand()).getTime()));
     }
@@ -171,7 +171,7 @@ public abstract class ADateBean extends AEditBean
         {
             return;
         }
-        itemData.setSpec(IEditItem.SPEC_DATE_FORM, cmd);
+        itemData.setSpec(DateItem.SPEC_DATE_FORM, cmd);
         format = getDateFormat(cmd);
     }
 

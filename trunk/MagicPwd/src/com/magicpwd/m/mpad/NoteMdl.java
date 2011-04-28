@@ -16,7 +16,7 @@
  */
 package com.magicpwd.m.mpad;
 
-import com.magicpwd._comn.item.EditItem;
+import com.magicpwd.__a.AEditItem;
 
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._cons.ConsDat;
@@ -57,9 +57,7 @@ public class NoteMdl extends SafeMdl
     @Override
     public void initBody()
     {
-        EditItem note = new EditItem(userMdl);
-        note.setType(ConsDat.INDX_AREA);
-        ls_ItemList.add(note);
+        ls_ItemList.add(AEditItem.getInstance(userMdl, ConsDat.INDX_AREA));
     }
 
     @Override

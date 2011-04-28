@@ -17,6 +17,7 @@
 package com.magicpwd._bean.mwiz;
 
 import com.magicpwd.__i.IEditItem;
+import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.prop.Tplt;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsEnv;
@@ -166,7 +167,7 @@ public class GuidBean extends javax.swing.JPanel
         IEditItem item = keysMdl.getItemAt(ConsEnv.PWDS_HEAD_GUID);
         tf_PropName.setText(item.getName());
 
-        String kind = item.getSpec(IEditItem.SPEC_GUID_TPLT);
+        String kind = item.getSpec(GuidItem.SPEC_GUID_TPLT);
         boolean hash = com.magicpwd._util.Char.isValidateHash(kind);
         if (!hash)
         {
@@ -218,7 +219,7 @@ public class GuidBean extends javax.swing.JPanel
         {
             guidItem.setData("0");
         }
-        guidItem.setSpec(IEditItem.SPEC_GUID_TPLT, tplt.getP30F1103());
+        guidItem.setSpec(GuidItem.SPEC_GUID_TPLT, tplt.getP30F1103());
         if (keysMdl.getItemSize() <= ConsEnv.PWDS_HEAD_SIZE)
         {
             keysMdl.initHead();

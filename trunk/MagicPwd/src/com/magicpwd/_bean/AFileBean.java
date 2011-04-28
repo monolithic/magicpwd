@@ -19,9 +19,8 @@ package com.magicpwd._bean;
 import com.magicpwd.__a.AAction;
 import com.magicpwd.__a.AEditBean;
 import com.magicpwd.__a.AMpwdPtn;
-import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.docs.IDocsViewer;
-import com.magicpwd._comn.item.EditItem;
+import com.magicpwd._comn.item.FileItem;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsEnv;
@@ -223,7 +222,7 @@ public abstract class AFileBean extends AEditBean
 
     private void mi_ViewAsActionPerformed(java.awt.event.ActionEvent evt)
     {
-        String ext = itemData.getSpec(IEditItem.SPEC_FILE_EXTS, "").toUpperCase();
+        String ext = itemData.getSpec(FileItem.SPEC_FILE_EXTS, "").toUpperCase();
         if (!extList.containsKey(ext))
         {
             Lang.showMesg(formPtn, null, "查看器无法打开 {0} 类型的文件！", ext);
@@ -269,7 +268,7 @@ public abstract class AFileBean extends AEditBean
                 }
             }
 
-            java.io.File srcFile = new java.io.File(amaPath, itemData.getSpec(IEditItem.SPEC_FILE_NAME) + ConsEnv.FILE_ATTACHMENT);
+            java.io.File srcFile = new java.io.File(amaPath, itemData.getSpec(FileItem.SPEC_FILE_NAME) + ConsEnv.FILE_ATTACHMENT);
             java.io.File tmpFile = new java.io.File(tmpPath, itemData.getData());
             deCrypt(srcFile, tmpFile);
 
@@ -285,7 +284,7 @@ public abstract class AFileBean extends AEditBean
 
     protected boolean enCryptData()
     {
-        String file = itemData.getSpec(EditItem.SPEC_FILE_NAME);
+        String file = itemData.getSpec(FileItem.SPEC_FILE_NAME);
         if (filePath != null)
         {
             if (!filePath.exists())
@@ -339,8 +338,8 @@ public abstract class AFileBean extends AEditBean
         }
 
         itemData.setData(tf_PropData.getText());
-        itemData.setSpec(EditItem.SPEC_FILE_NAME, file);
-        itemData.setSpec(EditItem.SPEC_FILE_EXTS, filePath != null ? File.getExtension(filePath.getName()) : "");
+        itemData.setSpec(FileItem.SPEC_FILE_NAME, file);
+        itemData.setSpec(FileItem.SPEC_FILE_EXTS, filePath != null ? File.getExtension(filePath.getName()) : "");
         return true;
     }
     protected javax.swing.JTextField tf_PropData;

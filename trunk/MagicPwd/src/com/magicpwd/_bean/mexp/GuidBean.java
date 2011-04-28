@@ -168,7 +168,7 @@ public class GuidBean extends javax.swing.JPanel implements IMexpBean
         itemData = (GuidItem) item;
         tf_PropName.setText(item.getName());
 
-        String kind = itemData.getSpec(IEditItem.SPEC_GUID_TPLT);
+        String kind = itemData.getSpec(GuidItem.SPEC_GUID_TPLT);
         boolean hash = com.magicpwd._util.Char.isValidateHash(kind);
 
         bt_ReadMail.setVisible(hash);
@@ -218,7 +218,7 @@ public class GuidBean extends javax.swing.JPanel implements IMexpBean
         }
 
         Tplt tplt = (Tplt) obj;
-        itemData.setSpec(IEditItem.SPEC_GUID_TPLT, tplt.getP30F1103());
+        itemData.setSpec(GuidItem.SPEC_GUID_TPLT, tplt.getP30F1103());
 
         mainPtn.updateSelectedItem();
     }

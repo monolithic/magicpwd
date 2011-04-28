@@ -18,6 +18,7 @@ package com.magicpwd.m.mwiz;
 
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.I1S2;
+import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Char;
@@ -59,7 +60,7 @@ public class KeysMdl extends SafeMdl
     @Override
     public void initBody()
     {
-        DBA4000.selectTpltData(userMdl, ls_ItemList.get(ConsEnv.PWDS_HEAD_GUID).getSpec(IEditItem.SPEC_GUID_TPLT), ls_ItemList);
+        DBA4000.selectTpltData(userMdl, ls_ItemList.get(ConsEnv.PWDS_HEAD_GUID).getSpec(GuidItem.SPEC_GUID_TPLT), ls_ItemList);
     }
 
     @Override

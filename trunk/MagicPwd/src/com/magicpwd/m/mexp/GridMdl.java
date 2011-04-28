@@ -18,7 +18,9 @@ package com.magicpwd.m.mexp;
 
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.I1S2;
-import com.magicpwd._comn.item.EditItem;
+import com.magicpwd.__a.AEditItem;
+import com.magicpwd._comn.item.GuidItem;
+import com.magicpwd._comn.item.SignItem;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.LangRes;
@@ -60,7 +62,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
         initLogo();
         initHint();
 
-        DBA4000.selectTpltData(userMdl, ls_ItemList.get(ConsEnv.PWDS_HEAD_GUID).getSpec(IEditItem.SPEC_GUID_TPLT), ls_ItemList);
+        DBA4000.selectTpltData(userMdl, ls_ItemList.get(ConsEnv.PWDS_HEAD_GUID).getSpec(GuidItem.SPEC_GUID_TPLT), ls_ItemList);
         fireTableDataChanged();
     }
 
@@ -155,7 +157,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
         IEditItem item = ls_ItemList.get(row);
         if (item.getType() == ConsDat.INDX_SIGN)
         {
-            return Char.format(Lang.getLang(item.getSpec(IEditItem.SPEC_SIGN_TPLT), ""), item.getName());
+            return Char.format(Lang.getLang(item.getSpec(SignItem.SPEC_SIGN_TPLT), ""), item.getName());
         }
         return item;
     }
@@ -210,15 +212,15 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
      * 
      * @param type
      */
-    public EditItem wAppend(int indx, int type)
+    public IEditItem wAppend(int indx, int type)
     {
-        return wAppend(indx, new EditItem(userMdl, type));
+        return wAppend(indx, AEditItem.getInstance(userMdl, type));
     }
 
     /**
      * @param pi
      */
-    public EditItem wAppend(int indx, EditItem item)
+    public IEditItem wAppend(int indx, IEditItem item)
     {
         ls_ItemList.add(indx, item);
         fireTableDataChanged();
@@ -228,7 +230,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     /**
      * @param pi
      */
-    public EditItem wAppend(EditItem item)
+    public IEditItem wAppend(IEditItem item)
     {
         ls_ItemList.add(item);
         fireTableDataChanged();
@@ -281,7 +283,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
         fireTableDataChanged();
     }
 
-    public void wUpdate(int indx, EditItem tplt)
+    public void wUpdate(int indx, AEditItem tplt)
     {
         ls_ItemList.set(indx, tplt);
         fireTableDataChanged();

@@ -16,6 +16,7 @@
  */
 package com.magicpwd._comn.item;
 
+import com.magicpwd.__a.AEditItem;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd.m.UserMdl;
 
@@ -23,11 +24,35 @@ import com.magicpwd.m.UserMdl;
  *
  * @author Amon
  */
-public class MetaItem extends EditItem
+public class MetaItem extends AEditItem
 {
 
     public MetaItem(UserMdl userMdl)
     {
         super(userMdl, ConsDat.INDX_META);
+    }
+
+    @Override
+    public String exportAsTxt()
+    {
+        return "";
+    }
+
+    @Override
+    public String exportAsXml()
+    {
+        return "";
+    }
+
+    @Override
+    public boolean importByTxt(String txt)
+    {
+        return true;
+    }
+
+    @Override
+    public boolean importByXml(String xml)
+    {
+        return true;
     }
 }
