@@ -19,6 +19,7 @@ package com.magicpwd._comn.item;
 import com.magicpwd.__a.AEditItem;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd.m.UserMdl;
+import org.dom4j.Element;
 
 /**
  * name:徽标索引
@@ -45,15 +46,18 @@ public class LogoItem extends AEditItem
     }
 
     @Override
-    public String exportAsTxt()
+    public boolean exportAsTxt(StringBuilder builder)
     {
-        return "";
+        builder.append(getName()).append(',').append(getData());
+        return true;
     }
 
     @Override
-    public String exportAsXml()
+    public boolean exportAsXml(Element element)
     {
-        return "";
+        element.addElement("name").setText(getName());
+        element.addElement("data").setText(getData());
+        return true;
     }
 
     @Override

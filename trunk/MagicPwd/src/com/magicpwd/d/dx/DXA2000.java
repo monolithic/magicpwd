@@ -24,6 +24,8 @@ import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.item.HintItem;
 import com.magicpwd._comn.item.LogoItem;
 import com.magicpwd._comn.item.MetaItem;
+import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.db.DBAccess;
@@ -209,5 +211,77 @@ public class DXA2000 extends DXA
     public int exportByKeys(java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash) throws Exception
     {
         return 0;
+    }
+
+    private void exportB()
+    {
+        java.io.BufferedWriter writer = null;
+        java.util.List<java.util.List<IEditItem>> list = null;
+        try
+        {
+            StringBuilder buf = new StringBuilder();
+            for (java.util.List<IEditItem> items : list)
+            {
+                for (IEditItem item : items)
+                {
+                    buf.append(item.getType()).append(',').append(item.exportAsTxt(null)).append(';');
+                }
+                writer.write(buf.append('\n').toString());
+                buf.delete(0, buf.length());
+            }
+        }
+        catch (Exception exp)
+        {
+        }
+        finally
+        {
+            Bean.closeWriter(writer);
+        }
+    }
+
+    private void importB()
+    {
+        java.io.BufferedReader reader = null;
+        try
+        {
+            reader = new java.io.BufferedReader(new java.io.FileReader(""));
+            String line = reader.readLine();
+            String[] arr1;
+            String tmp1;
+            String tmp2;
+            java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("^\\d+");
+            java.util.regex.Matcher matcher;
+            while (line != null)
+            {
+                arr1 = line.replace("\\;", "\b").replace("\\,", "\f").split(";");
+                if (arr1 == null || arr1.length < ConsEnv.PWDS_HEAD_SIZE)
+                {
+                    continue;
+                }
+                for (int i = 0; i < arr1.length; i += 1)
+                {
+                    tmp1 = arr1[i].trim();
+                    matcher = pattern.matcher(tmp1);
+                    if (!matcher.find())
+                    {
+                        continue;
+                    }
+                    tmp2 = matcher.group();
+                    IEditItem item = AEditItem.getInstance(null, Integer.parseInt(tmp2, 10));
+                    if (item != null)
+                    {
+                        item.importByTxt(tmp1.substring(tmp2.length()));
+                    }
+                }
+                line = reader.readLine();
+            }
+        }
+        catch (Exception exp)
+        {
+        }
+        finally
+        {
+            Bean.closeReader(reader);
+        }
     }
 }

@@ -16,12 +16,49 @@
  */
 package com.magicpwd._comn.item;
 
+import com.magicpwd.__a.AEditItem;
+import com.magicpwd._cons.ConsDat;
+import com.magicpwd.m.UserMdl;
+import org.dom4j.Element;
+
 /**
  *
  * @author yaoshangwen
  */
-public class DateItem
+public class DateItem extends AEditItem
 {
 
     public static final int SPEC_DATE_FORM = 0;// 日期显示格式
+
+    public DateItem(UserMdl userMdl)
+    {
+        super(userMdl, ConsDat.INDX_DATE);
+    }
+
+    @Override
+    public boolean exportAsTxt(StringBuilder builder)
+    {
+        builder.append(getName()).append(',').append(getData());
+        return true;
+    }
+
+    @Override
+    public boolean exportAsXml(Element element)
+    {
+        element.addElement("name").setText(getName());
+        element.addElement("data").setText(getData());
+        return true;
+    }
+
+    @Override
+    public boolean importByTxt(String txt)
+    {
+        return true;
+    }
+
+    @Override
+    public boolean importByXml(String xml)
+    {
+        return true;
+    }
 }

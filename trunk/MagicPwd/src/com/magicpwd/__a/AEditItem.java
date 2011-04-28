@@ -18,6 +18,8 @@ package com.magicpwd.__a;
 
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.item.GuidItem;
+import com.magicpwd._comn.item.LogoItem;
+import com.magicpwd._comn.item.MetaItem;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd.m.UserMdl;
 import java.util.ArrayList;
@@ -74,8 +76,34 @@ public abstract class AEditItem implements IEditItem
     {
         switch (type)
         {
+            case ConsDat.INDX_TEXT:
+                return new LogoItem(userMdl);
+            case ConsDat.INDX_PWDS:
+                return new LogoItem(userMdl);
+            case ConsDat.INDX_LINK:
+                return new LogoItem(userMdl);
+            case ConsDat.INDX_MAIL:
+                return new LogoItem(userMdl);
+            case ConsDat.INDX_DATE:
+                return new LogoItem(userMdl);
+            case ConsDat.INDX_AREA:
+                return new LogoItem(userMdl);
+            case ConsDat.INDX_FILE:
+                return new LogoItem(userMdl);
+            case ConsDat.INDX_DATA:
+                return new LogoItem(userMdl);
+            case ConsDat.INDX_LIST:
+                return new LogoItem(userMdl);
+            case ConsDat.INDX_SIGN:
+                return new LogoItem(userMdl);
             case ConsDat.INDX_GUID:
                 return new GuidItem(userMdl);
+            case ConsDat.INDX_META:
+                return new MetaItem(userMdl);
+            case ConsDat.INDX_LOGO:
+                return new LogoItem(userMdl);
+            case ConsDat.INDX_HINT:
+                return new LogoItem(userMdl);
             default:
                 return null;
         }
@@ -83,13 +111,13 @@ public abstract class AEditItem implements IEditItem
 
     public static IEditItem getInstance(UserMdl userMdl, int type, String name, String data)
     {
-        switch (type)
+        IEditItem item = getInstance(userMdl, type);
+        if (item != null)
         {
-            case ConsDat.INDX_GUID:
-                return new GuidItem(userMdl);
-            default:
-                return null;
+            item.setName(name);
+            item.setData(data);
         }
+        return item;
     }
 
     /**
@@ -181,6 +209,7 @@ public abstract class AEditItem implements IEditItem
         return (index > -1 && index < spec.size()) ? spec.get(index) : null;
     }
 
+    @Override
     public String getSpec(int index, String defValue)
     {
         if (index > -1 && index < spec.size())
@@ -284,6 +313,16 @@ public abstract class AEditItem implements IEditItem
                 spec = null;
                 break;
         }
+    }
+
+    public static String doEscape(String txt)
+    {
+        return txt != null ? txt.replace("\\", "\\\\").replace(",", "\\,").replace(";", "\\;").replaceAll("[\r\n]+", "\\n") : txt;
+    }
+
+    public static String unEscape(String txt)
+    {
+        return txt != null ? txt.replace("\\n", "\n").replace("\\;", ";").replace("\\,", ",").replace("\\\\", "\\") : txt;
     }
     /**
      * 附加属性常量
