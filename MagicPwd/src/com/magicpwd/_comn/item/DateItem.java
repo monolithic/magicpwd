@@ -18,6 +18,7 @@ package com.magicpwd._comn.item;
 
 import com.magicpwd.__a.AEditItem;
 import com.magicpwd._cons.ConsDat;
+import com.magicpwd._util.Char;
 import com.magicpwd.m.UserMdl;
 import org.dom4j.Element;
 
@@ -28,7 +29,7 @@ import org.dom4j.Element;
 public class DateItem extends AEditItem
 {
 
-    public static final int SPEC_DATE_FORM = 0;// 日期显示格式
+    public static final int SPEC_FORMAT = 0;// 日期显示格式
 
     public DateItem(UserMdl userMdl)
     {
@@ -38,7 +39,12 @@ public class DateItem extends AEditItem
     @Override
     public boolean exportAsTxt(StringBuilder builder)
     {
-        builder.append(getName()).append(',').append(getData());
+        if (builder == null)
+        {
+            return false;
+        }
+        builder.append(doEscape(getName())).append(',').append(doEscape(getData()));
+        builder.append(',').append(getSpec(SPEC_FORMAT, SPEC_VALUE_NONE));
         return true;
     }
 
@@ -53,6 +59,17 @@ public class DateItem extends AEditItem
     @Override
     public boolean importByTxt(String txt)
     {
+        if (Char.isValidate(txt))
+        {
+            return false;
+        }
+        String[] arr = txt.split(",");
+        if (arr == null || arr.length < 2)
+        {
+            return false;
+        }
+        setName(arr[0]);
+        setData(arr[1]);
         return true;
     }
 
@@ -60,5 +77,12 @@ public class DateItem extends AEditItem
     public boolean importByXml(String xml)
     {
         return true;
+    }
+
+    @Override
+    public final void setDefault()
+    {
+        spec = new java.util.ArrayList<String>(1);
+        spec.add(SPEC_VALUE_NONE);
     }
 }
