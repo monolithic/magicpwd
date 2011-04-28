@@ -22,7 +22,7 @@ import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._comn.S1S3;
-import com.magicpwd._comn.item.EditItem;
+import com.magicpwd.__a.AEditItem;
 import com.magicpwd._comn.mpwd.Mexp;
 import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._comn.mpwd.Hint;
@@ -1544,11 +1544,10 @@ public class DBA4000
             dba.addSort(DBC4000.P30F1101, true);
 
             ResultSet rest = dba.executeSelect();
-            EditItem kv;
+            IEditItem kv;
             while (rest.next())
             {
-                kv = new EditItem(cfg);
-                kv.setType(rest.getInt(DBC4000.P30F1102));
+                kv = AEditItem.getInstance(cfg, rest.getInt(DBC4000.P30F1102));
                 kv.setName(rest.getString(DBC4000.P30F1105));
                 kv.setData(rest.getString(DBC4000.P30F1106));
                 tpltList.add(kv);

@@ -1,16 +1,16 @@
 /*
- *  Copyright (C) 2010 Amon
- *
+ *  Copyright (C) 2011 yaoshangwen
+ * 
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
- *
+ * 
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- *
+ * 
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -22,14 +22,17 @@ import com.magicpwd.m.UserMdl;
 
 /**
  *
- * @author Amon
+ * @author yaoshangwen
  */
-public class HintItem extends AEditItem
+public class SignItem extends AEditItem
 {
 
-    public HintItem(UserMdl userMdl)
+    public static final int SPEC_SIGN_TYPE = 0;//控制类型
+    public static final int SPEC_SIGN_TPLT = 1;//显示模板
+
+    public SignItem(UserMdl userMdl)
     {
-        super(userMdl, ConsDat.INDX_HINT);
+        super(userMdl, ConsDat.INDX_SIGN);
     }
 
     @Override

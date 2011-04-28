@@ -17,6 +17,8 @@
 package com.magicpwd.v.mruc;
 
 import com.magicpwd.__i.IEditItem;
+import com.magicpwd._comn.item.DataItem;
+import com.magicpwd._comn.item.SignItem;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
@@ -155,7 +157,7 @@ public class BodyPtn extends javax.swing.JPanel
 
         int step = currStep;
         IEditItem editItem = unitMdl.getItemAt(step++);
-        if (editItem.getType() == ConsDat.INDX_SIGN && "div".equals(editItem.getSpec(IEditItem.SPEC_SIGN_TYPE)))
+        if (editItem.getType() == ConsDat.INDX_SIGN && "div".equals(editItem.getSpec(SignItem.SPEC_SIGN_TYPE)))
         {
             setBorder(javax.swing.BorderFactory.createTitledBorder(editItem.getName()));
         }
@@ -232,7 +234,7 @@ public class BodyPtn extends javax.swing.JPanel
 
             try
             {
-                temp = computer.calculate(input.replace("$ratio", item.getData()), new MathContext(Integer.parseInt(item.getSpec(IEditItem.SPEC_DATA_DEC))));
+                temp = computer.calculate(input.replace("$ratio", item.getData()), new MathContext(Integer.parseInt(item.getSpec(DataItem.SPEC_DATA_DEC))));
                 field.setText(temp.toPlainString());
             }
             catch (Exception exp)

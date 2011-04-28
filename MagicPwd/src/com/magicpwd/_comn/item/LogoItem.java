@@ -16,6 +16,7 @@
  */
 package com.magicpwd._comn.item;
 
+import com.magicpwd.__a.AEditItem;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd.m.UserMdl;
 
@@ -24,7 +25,7 @@ import com.magicpwd.m.UserMdl;
  * data:徽标说明
  * @author Amon
  */
-public class LogoItem extends EditItem
+public class LogoItem extends AEditItem
 {
 
     public LogoItem(UserMdl userMdl)
@@ -41,5 +42,29 @@ public class LogoItem extends EditItem
     public String toString()
     {
         return getData();
+    }
+
+    @Override
+    public String exportAsTxt()
+    {
+        return "";
+    }
+
+    @Override
+    public String exportAsXml()
+    {
+        return "";
+    }
+
+    @Override
+    public boolean importByTxt(String txt)
+    {
+        return true;
+    }
+
+    @Override
+    public boolean importByXml(String xml)
+    {
+        return true;
     }
 }

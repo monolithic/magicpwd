@@ -18,7 +18,7 @@ package com.magicpwd._bean;
 
 import com.magicpwd.__a.AEditBean;
 import com.magicpwd.__a.AMpwdPtn;
-import com.magicpwd.__i.IEditItem;
+import com.magicpwd._comn.item.DataItem;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.LangRes;
@@ -116,26 +116,26 @@ public abstract class ADataBean extends AEditBean
         javax.swing.AbstractButton button;
 
         // 可否为空
-        mi_DataDef.setSelected(IEditItem.SPEC_VALUE_TRUE.equals(itemData.getSpec(IEditItem.SPEC_DATA_OPT)));
-        mi_DataExp.setSelected(IEditItem.SPEC_VALUE_TRUE.equals(itemData.getSpec(IEditItem.SPEC_DATA_EXP)));
+        mi_DataDef.setSelected(DataItem.SPEC_VALUE_TRUE.equals(itemData.getSpec(DataItem.SPEC_DATA_OPT)));
+        mi_DataExp.setSelected(DataItem.SPEC_VALUE_TRUE.equals(itemData.getSpec(DataItem.SPEC_DATA_EXP)));
         // 数据类型
         WButtonGroup group = menuPtn.getGroup("data-template");
-        group.setSelected("dec:" + itemData.getSpec(IEditItem.SPEC_DATA_DEC, "0").replace("f", ""), true, "dec:-1");
+        group.setSelected("dec:" + itemData.getSpec(DataItem.SPEC_DATA_DEC, "0").replace("f", ""), true, "dec:-1");
 
         // 固定长度
         button = menuPtn.getButton("data-fixed-int");
         if (button != null)
         {
-            button.setSelected(itemData.getSpec(IEditItem.SPEC_DATA_INT, "").endsWith("f"));
+            button.setSelected(itemData.getSpec(DataItem.SPEC_DATA_INT, "").endsWith("f"));
         }
         button = menuPtn.getButton("data-fixed-dec");
         if (button != null)
         {
-            button.setSelected(itemData.getSpec(IEditItem.SPEC_DATA_DEC, "").endsWith("f"));
+            button.setSelected(itemData.getSpec(DataItem.SPEC_DATA_DEC, "").endsWith("f"));
         }
 
         // 数据集合
-        String ss = itemData.getSpec(IEditItem.SPEC_DATA_SET, "+0-");
+        String ss = itemData.getSpec(DataItem.SPEC_DATA_SET, "+0-");
         if (!Char.isValidate(ss))
         {
             ss = "+0-";
@@ -157,7 +157,7 @@ public abstract class ADataBean extends AEditBean
         }
 
         // 是否使用特殊符号
-        String sc = itemData.getSpec(IEditItem.SPEC_DATA_CHAR);
+        String sc = itemData.getSpec(DataItem.SPEC_DATA_CHAR);
         boolean specChar = Char.isValidate(sc);
         button = menuPtn.getButton("data-notation");
         if (button != null)
@@ -171,13 +171,13 @@ public abstract class ADataBean extends AEditBean
         group = menuPtn.getGroup("data-position");
         if (group != null)
         {
-            group.setSelected("pos:" + itemData.getSpec(IEditItem.SPEC_DATA_CHAR_POS, "^"), true);
+            group.setSelected("pos:" + itemData.getSpec(DataItem.SPEC_DATA_CHAR_POS, "^"), true);
         }
 
         button = menuPtn.getButton("data-optional");
         if (button != null)
         {
-            button.setSelected("?".equals(itemData.getSpec(IEditItem.SPEC_DATA_CHAR_OPT)));
+            button.setSelected("?".equals(itemData.getSpec(DataItem.SPEC_DATA_CHAR_OPT)));
         }
 
         changeNotation(specChar);
@@ -187,7 +187,7 @@ public abstract class ADataBean extends AEditBean
     {
         do
         {
-            cmd = javax.swing.JOptionPane.showInputDialog(formPtn, Lang.getLang(LangRes.P30F7A50, "请输入特殊符号：\n提示：除加减号（“+”、“-”）及数值以外的字符！"), itemData.getSpec(IEditItem.SPEC_DATA_CHAR, ""));
+            cmd = javax.swing.JOptionPane.showInputDialog(formPtn, Lang.getLang(LangRes.P30F7A50, "请输入特殊符号：\n提示：除加减号（“+”、“-”）及数值以外的字符！"), itemData.getSpec(DataItem.SPEC_DATA_CHAR, ""));
             if (cmd == null)
             {
                 return;
@@ -195,7 +195,7 @@ public abstract class ADataBean extends AEditBean
         }
         while (!java.util.regex.Pattern.matches("[^-+\\d]", cmd.trim()));
         changeCharacter(cmd);
-        itemData.setSpec(IEditItem.SPEC_DATA_CHAR, cmd);
+        itemData.setSpec(DataItem.SPEC_DATA_CHAR, cmd);
     }
 
     private void changeCharacter(String chr)
@@ -242,13 +242,13 @@ public abstract class ADataBean extends AEditBean
 
     private void mi_DataDefActionPerformed(java.awt.event.ActionEvent evt)
     {
-        itemData.setSpec(IEditItem.SPEC_DATA_OPT, mi_DataDef.isSelected() ? IEditItem.SPEC_VALUE_TRUE : IEditItem.SPEC_VALUE_FAIL);
+        itemData.setSpec(DataItem.SPEC_DATA_OPT, mi_DataDef.isSelected() ? DataItem.SPEC_VALUE_TRUE : DataItem.SPEC_VALUE_FAIL);
     }
 
     private void mi_DataExpActionPerformed(java.awt.event.ActionEvent evt)
     {
         boolean b = mi_DataExp.isSelected();
-        itemData.setSpec(IEditItem.SPEC_DATA_EXP, b ? IEditItem.SPEC_VALUE_TRUE : IEditItem.SPEC_VALUE_FAIL);
+        itemData.setSpec(DataItem.SPEC_DATA_EXP, b ? DataItem.SPEC_VALUE_TRUE : DataItem.SPEC_VALUE_FAIL);
         javax.swing.AbstractButton b1 = formPtn.getMenuPtn().getButton("data-collection");
         if (b1 != null)
         {
@@ -272,14 +272,14 @@ public abstract class ADataBean extends AEditBean
         // 小数精度
         if (cmd.startsWith("dec:"))
         {
-            readPrecision(IEditItem.SPEC_DATA_DEC, evt);
+            readPrecision(DataItem.SPEC_DATA_DEC, evt);
             return;
         }
 
         // 整数精度
         if (cmd.startsWith("int:"))
         {
-            readPrecision(IEditItem.SPEC_DATA_INT, evt);
+            readPrecision(DataItem.SPEC_DATA_INT, evt);
             return;
         }
 
@@ -295,7 +295,7 @@ public abstract class ADataBean extends AEditBean
             javax.swing.AbstractButton button = (javax.swing.AbstractButton) evt.getSource();
             if (button != null)
             {
-                String set = itemData.getSpec(IEditItem.SPEC_DATA_SET, "+0-");
+                String set = itemData.getSpec(DataItem.SPEC_DATA_SET, "+0-");
                 if (button.isSelected())
                 {
                     set += cmd;
@@ -308,7 +308,7 @@ public abstract class ADataBean extends AEditBean
                 {
                     set = "+0-";
                 }
-                itemData.setSpec(IEditItem.SPEC_DATA_SET, set);
+                itemData.setSpec(DataItem.SPEC_DATA_SET, set);
             }
             return;
         }
@@ -327,7 +327,7 @@ public abstract class ADataBean extends AEditBean
                 }
                 else
                 {
-                    itemData.setSpec(IEditItem.SPEC_DATA_CHAR, "");
+                    itemData.setSpec(DataItem.SPEC_DATA_CHAR, "");
                     changeCharacter("");
                 }
             }
@@ -347,7 +347,7 @@ public abstract class ADataBean extends AEditBean
             cmd = cmd.substring(4);
             if ("^".equals(cmd) || "$".equals(cmd))
             {
-                itemData.setSpec(IEditItem.SPEC_DATA_CHAR_POS, cmd);
+                itemData.setSpec(DataItem.SPEC_DATA_CHAR_POS, cmd);
             }
             return;
         }
@@ -358,7 +358,7 @@ public abstract class ADataBean extends AEditBean
             javax.swing.AbstractButton button = (javax.swing.AbstractButton) evt.getSource();
             if (button != null)
             {
-                itemData.setSpec(IEditItem.SPEC_DATA_CHAR_OPT, button.isSelected() ? "?" : "");
+                itemData.setSpec(DataItem.SPEC_DATA_CHAR_OPT, button.isSelected() ? "?" : "");
             }
             return;
         }
@@ -416,7 +416,7 @@ public abstract class ADataBean extends AEditBean
 
         if (data.length() < 1)
         {
-            if (IEditItem.SPEC_VALUE_TRUE.equals(itemData.getSpec(IEditItem.SPEC_DATA_OPT)))
+            if (DataItem.SPEC_VALUE_TRUE.equals(itemData.getSpec(DataItem.SPEC_DATA_OPT)))
             {
                 return true;
             }
@@ -425,7 +425,7 @@ public abstract class ADataBean extends AEditBean
         }
 
         // 表达
-        if (IEditItem.SPEC_VALUE_TRUE.equals(itemData.getSpec(IEditItem.SPEC_DATA_EXP)))
+        if (DataItem.SPEC_VALUE_TRUE.equals(itemData.getSpec(DataItem.SPEC_DATA_EXP)))
         {
             itemData.setData(data);
             return true;
@@ -445,9 +445,9 @@ public abstract class ADataBean extends AEditBean
         StringBuilder regex = new StringBuilder("^");
 
         // 数据集合
-        String sc = itemData.getSpec(IEditItem.SPEC_DATA_CHAR, "");
+        String sc = itemData.getSpec(DataItem.SPEC_DATA_CHAR, "");
         boolean bc = Char.isValidate(sc);
-        String ss = itemData.getSpec(IEditItem.SPEC_DATA_SET, "+0-");
+        String ss = itemData.getSpec(DataItem.SPEC_DATA_SET, "+0-");
 
         if (Char.isValidate(ss))
         {
@@ -488,13 +488,13 @@ public abstract class ADataBean extends AEditBean
         java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("\\d+");
 
         // 整数部分
-        String si = itemData.getSpec(IEditItem.SPEC_DATA_INT, "");
+        String si = itemData.getSpec(DataItem.SPEC_DATA_INT, "");
         java.util.regex.Matcher mi = pattern.matcher(si);
         int ii = mi.find() ? Integer.parseInt(mi.group()) : 0;
         regex.append("\\d").append(ii > 0 ? "{1," + ii + "}" : "+");
 
         // 小数部分
-        String sd = itemData.getSpec(IEditItem.SPEC_DATA_DEC, "");
+        String sd = itemData.getSpec(DataItem.SPEC_DATA_DEC, "");
         java.util.regex.Matcher md = pattern.matcher(sd);
         int id = md.find() ? Integer.parseInt(md.group()) : 0;
         if (id > 0)
@@ -508,13 +508,13 @@ public abstract class ADataBean extends AEditBean
             sc = '[' + sc + ']';
 
             // 是否可选
-            String so = itemData.getSpec(IEditItem.SPEC_DATA_CHAR_OPT, "?");
+            String so = itemData.getSpec(DataItem.SPEC_DATA_CHAR_OPT, "?");
             if ("?".equals(so))
             {
                 sc += so;
             }
             // 符号位置
-            String sp = itemData.getSpec(IEditItem.SPEC_DATA_CHAR_POS, "^");
+            String sp = itemData.getSpec(DataItem.SPEC_DATA_CHAR_POS, "^");
             if ("$".equals(sp))
             {
                 regex.append(sc);

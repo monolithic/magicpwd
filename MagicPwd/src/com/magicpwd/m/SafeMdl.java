@@ -19,7 +19,7 @@ package com.magicpwd.m;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd._comn.mpwd.Mpwd;
-import com.magicpwd._comn.item.EditItem;
+import com.magicpwd.__a.AEditItem;
 import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.item.HintItem;
 import com.magicpwd._comn.item.LogoItem;
@@ -344,7 +344,7 @@ public abstract class SafeMdl
         GuidItem guid = new GuidItem(userMdl);
         guid.setData(keys.getP30F0106());
         guid.setName(keys.getP30F0107());
-        guid.setSpec(IEditItem.SPEC_GUID_TPLT, keys.getP30F0108());
+        guid.setSpec(GuidItem.SPEC_GUID_TPLT, keys.getP30F0108());
         list.add(guid);
 
         // MetaItem
@@ -375,7 +375,7 @@ public abstract class SafeMdl
         int ds;
         int type;
         String t;
-        EditItem item;
+        IEditItem item;
         while (st.hasMoreTokens())
         {
             t = st.nextToken() + ConsDat.SP_SQL_KV;
@@ -387,7 +387,7 @@ public abstract class SafeMdl
             name = t.substring(dn + 1, dd);
             data = t.substring(dd + 1, ds);
             spec = t.substring(ds + 1, t.length());
-            item = new EditItem(userMdl, type, name, data);
+            item = AEditItem.getInstance(userMdl, type, name, data);
             if (spec.length() > 0)
             {
                 item.deCodeSpec(spec, ConsDat.SP_SQL_KV);
@@ -420,7 +420,7 @@ public abstract class SafeMdl
         GuidItem guid = (GuidItem) list.get(ConsEnv.PWDS_HEAD_GUID);
         keys.setP30F0106(guid.getData());
         keys.setP30F0107(guid.getName());
-        keys.setP30F0108(guid.getSpec(IEditItem.SPEC_GUID_TPLT));
+        keys.setP30F0108(guid.getSpec(GuidItem.SPEC_GUID_TPLT));
 
         // MetaItem
         MetaItem meta = (MetaItem) list.get(ConsEnv.PWDS_HEAD_META);

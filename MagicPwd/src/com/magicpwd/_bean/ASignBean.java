@@ -18,8 +18,8 @@ package com.magicpwd._bean;
 
 import com.magicpwd.__a.AEditBean;
 import com.magicpwd.__a.AMpwdPtn;
-import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mexp.IMexpBean;
+import com.magicpwd._comn.item.SignItem;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._comp.WTextBox;
@@ -108,7 +108,7 @@ public abstract class ASignBean extends AEditBean implements IMexpBean
         WButtonGroup group = formPtn.getMenuPtn().getGroup("sign-options");
         if (group != null)
         {
-            if (!group.setSelected(itemData.getSpec(IEditItem.SPEC_SIGN_TYPE, "") + ':' + itemData.getSpec(IEditItem.SPEC_SIGN_TPLT, ""), true))
+            if (!group.setSelected(itemData.getSpec(SignItem.SPEC_SIGN_TYPE, "") + ':' + itemData.getSpec(SignItem.SPEC_SIGN_TPLT, ""), true))
             {
                 mi_ConfDef.setSelected(true);
             }
@@ -130,32 +130,32 @@ public abstract class ASignBean extends AEditBean implements IMexpBean
         String tmp = cmd.toUpperCase();
         if (tmp.startsWith("TIP:"))
         {
-            itemData.setSpec(IEditItem.SPEC_SIGN_TYPE, "tip");
-            itemData.setSpec(IEditItem.SPEC_SIGN_TPLT, cmd.substring(4));
+            itemData.setSpec(SignItem.SPEC_SIGN_TYPE, "tip");
+            itemData.setSpec(SignItem.SPEC_SIGN_TPLT, cmd.substring(4));
             return;
         }
         if (tmp.startsWith("SEP:"))
         {
-            itemData.setSpec(IEditItem.SPEC_SIGN_TYPE, "sep");
-            itemData.setSpec(IEditItem.SPEC_SIGN_TPLT, cmd.substring(4));
+            itemData.setSpec(SignItem.SPEC_SIGN_TYPE, "sep");
+            itemData.setSpec(SignItem.SPEC_SIGN_TPLT, cmd.substring(4));
             return;
         }
         if (tmp.startsWith("DIV:"))
         {
-            itemData.setSpec(IEditItem.SPEC_SIGN_TYPE, "div");
-            itemData.setSpec(IEditItem.SPEC_SIGN_TPLT, cmd.substring(4));
+            itemData.setSpec(SignItem.SPEC_SIGN_TYPE, "div");
+            itemData.setSpec(SignItem.SPEC_SIGN_TPLT, cmd.substring(4));
             return;
         }
         if (tmp.startsWith("TAB:"))
         {
-            itemData.setSpec(IEditItem.SPEC_SIGN_TYPE, "tab");
-            itemData.setSpec(IEditItem.SPEC_SIGN_TPLT, cmd.substring(4));
+            itemData.setSpec(SignItem.SPEC_SIGN_TYPE, "tab");
+            itemData.setSpec(SignItem.SPEC_SIGN_TPLT, cmd.substring(4));
             return;
         }
         if (tmp.startsWith("DEF:"))
         {
-            itemData.setSpec(IEditItem.SPEC_SIGN_TYPE, "def");
-            itemData.setSpec(IEditItem.SPEC_SIGN_TPLT, cmd.substring(4));
+            itemData.setSpec(SignItem.SPEC_SIGN_TYPE, "def");
+            itemData.setSpec(SignItem.SPEC_SIGN_TPLT, cmd.substring(4));
             return;
         }
     }
