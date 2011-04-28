@@ -34,7 +34,7 @@ public class SignItem extends AEditItem
 
     public SignItem(UserMdl userMdl)
     {
-        super(userMdl, ConsDat.INDX_SIGN);
+        super(userMdl, ConsDat.INDX_SIGN, "", "");
     }
 
     @Override
@@ -63,22 +63,22 @@ public class SignItem extends AEditItem
     @Override
     public boolean importByTxt(String txt)
     {
-        if (Char.isValidate(txt))
+        if (!Char.isValidate(txt))
         {
             return false;
         }
-        String[] arr = txt.replace("\\,", "\f").replace("\\n", "\n").replace("\\\\", "\\").split(",");
-        if (arr == null || arr.length < 2)
+        java.util.List<String> list = Char.split(txt.replace("\\,", "\f").replace("\\n", "\n").replace("\\\\", "\\"), ",");
+        if (list == null || list.size() < 2)
         {
             return false;
         }
-        setName(arr[0].replace("\f", ","));
-        setData(arr[1].replace("\f", ","));
+        setName(list.get(0).replace("\f", ","));
+        setData(list.get(1).replace("\f", ","));
 
         spec.clear();
-        for (int i = 2; i < arr.length; i += 1)
+        for (int i = 2, j = list.size(); i < j; i += 1)
         {
-            spec.add(arr[i]);
+            spec.add(list.get(i));
         }
         return true;
     }
@@ -92,7 +92,15 @@ public class SignItem extends AEditItem
     @Override
     public final void setDefault()
     {
-        spec.clear();
+        if (spec == null)
+        {
+            this.spec = new java.util.ArrayList<String>(2);
+        }
+        else
+        {
+            spec.clear();
+        }
+
         spec.add("def");
         spec.add("P30F7E02");
     }

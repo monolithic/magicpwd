@@ -31,14 +31,12 @@ import com.magicpwd.m.mail.Sender;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.File;
-import com.magicpwd._util.Jcsv;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.d.db.DBAccess;
 import com.magicpwd.d.dx.DXA;
-import com.magicpwd.d.dx.DXA1000;
 import com.magicpwd.d.dx.DXA2000;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
@@ -133,14 +131,13 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
         showProgress(true, Lang.getLang(LangRes.P30F1A05, "正在初始化资源数据，请稍候……"));
 
         String tmp;
+        DXA dxa = new DXA2000();
         for (java.io.File file : dir.listFiles(new AmonFF("^(0|[A-Za-z]{16})\\.amx$", true)))
         {
             try
             {
-                Jcsv csv = new Jcsv(file);
-                java.util.ArrayList<java.util.ArrayList<String>> data = csv.readFile();
                 tmp = file.getName();
-                DXA.getInstance(csv.getHead()).importByKind(userMdl, safeMdl, data, tmp.substring(0, tmp.length() - ConsEnv.DIR_AMX.length()));
+                dxa.importByKind(userMdl, safeMdl, file, tmp.substring(0, tmp.length() - ConsEnv.DIR_AMX.length()));
             }
             catch (Exception exp)
             {
@@ -814,11 +811,7 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
         showProgress();
         try
         {
-            Jcsv csv = new Jcsv(file);
-            csv.setHead("V2");
-            java.util.ArrayList<java.util.ArrayList<String>> data = new java.util.ArrayList<java.util.ArrayList<String>>();
-            int size = new DXA2000().exportByKind(userMdl, safeMdl, data, kindHash);
-            csv.saveFile(data);
+            int size = new DXA2000().exportByKind(userMdl, safeMdl, file, kindHash);
             Lang.showMesg(this, LangRes.P30F7A25, "成功导出数据个数：{0}", size + "");
         }
         catch (Exception exp)
@@ -867,10 +860,7 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
         showProgress();
         try
         {
-            Jcsv csv = new Jcsv(file);
-            java.util.ArrayList<java.util.ArrayList<String>> data = csv.readFile();
-            DXA dxa = "V2".equalsIgnoreCase(csv.getHead()) ? new DXA2000() : new DXA1000();
-            int size = dxa.importByKind(userMdl, safeMdl, data, kindHash);
+            int size = new DXA2000().importByKind(userMdl, safeMdl, file, kindHash);
             Lang.showMesg(this, LangRes.P30F7A07, "成功导入数据个数：{0}", "" + size);
         }
         catch (Exception exp)

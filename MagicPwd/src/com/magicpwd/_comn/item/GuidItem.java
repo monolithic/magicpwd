@@ -37,7 +37,7 @@ public class GuidItem extends AEditItem
 
     public GuidItem(UserMdl userMdl)
     {
-        super(userMdl, ConsDat.INDX_GUID);
+        super(userMdl, ConsDat.INDX_GUID, "", "");
     }
 
     @Override
@@ -63,7 +63,7 @@ public class GuidItem extends AEditItem
     @Override
     public boolean importByTxt(String txt)
     {
-        if (Char.isValidateDateTime(txt))
+        if (!Char.isValidateDateTime(txt))
         {
             return false;
         }
@@ -81,7 +81,15 @@ public class GuidItem extends AEditItem
     @Override
     public final void setDefault()
     {
-        spec.clear();
+        if (spec == null)
+        {
+            this.spec = new java.util.ArrayList<String>(2);
+        }
+        else
+        {
+            spec.clear();
+        }
+
         spec.add(SPEC_VALUE_NONE);
         spec.add(SPEC_VALUE_NONE);
     }

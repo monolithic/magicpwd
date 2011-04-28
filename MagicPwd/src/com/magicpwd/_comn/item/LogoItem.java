@@ -32,7 +32,7 @@ public class LogoItem extends AEditItem
 
     public LogoItem(UserMdl userMdl)
     {
-        super(userMdl, ConsDat.INDX_LOGO);
+        super(userMdl, ConsDat.INDX_LOGO, "", "");
     }
 
     @Override
@@ -57,17 +57,17 @@ public class LogoItem extends AEditItem
     @Override
     public boolean importByTxt(String txt)
     {
-        if (Char.isValidate(txt))
+        if (!Char.isValidate(txt))
         {
             return false;
         }
-        String[] arr = txt.replace("\\,", "\f").replace("\\n", "\n").replace("\\\\", "\\").split(",");
-        if (arr == null || arr.length < 2)
+        java.util.List<String> list = Char.split(txt.replace("\\,", "\f").replace("\\n", "\n").replace("\\\\", "\\"), ",");
+        if (list == null || list.size() < 2)
         {
             return false;
         }
-        setName(arr[0].replace("\f", ","));
-        setData(arr[1].replace("\f", ","));
+        setName(list.get(0).replace("\f", ","));
+        setData(list.get(1).replace("\f", ","));
         return true;
     }
 
