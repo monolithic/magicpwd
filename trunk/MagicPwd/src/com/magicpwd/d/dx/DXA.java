@@ -36,11 +36,11 @@ public abstract class DXA
         return new DXA1000();
     }
 
-    abstract public int importByKind(UserMdl userMdl, SafeMdl safeMdl, java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash) throws Exception;
+    abstract public int importByKind(UserMdl userMdl, SafeMdl safeMdl, java.io.File file, String kindHash) throws Exception;
 
     abstract public int importByKeys(java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash) throws Exception;
 
-    abstract public int exportByKind(UserMdl userMdl, SafeMdl safeMdl, java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash) throws Exception;
+    abstract public int exportByKind(UserMdl userMdl, SafeMdl safeMdl, java.io.File file, String kindHash) throws Exception;
 
     abstract public int exportByKeys(java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash) throws Exception;
 }

@@ -17,6 +17,7 @@
 package com.magicpwd._util;
 
 import com.magicpwd._cons.ConsEnv;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
@@ -40,6 +41,28 @@ public class Char
             }
         }
         return src;
+    }
+
+    public static java.util.List<String> split(String src, String txt)
+    {
+        java.util.List<String> list = new java.util.ArrayList<String>();
+
+        if (src == null || txt == null || txt.length() < 1)
+        {
+            return list;
+        }
+        src += txt;
+
+        int len = txt.length();
+        int idx = src.indexOf(txt);
+        int tmp = 0;
+        while (idx > -1)
+        {
+            list.add(src.substring(tmp, idx));
+            tmp = idx + len;
+            idx = src.indexOf(txt, tmp);
+        }
+        return list;
     }
 
     public static String lPad(String s, int length, char c)

@@ -17,9 +17,20 @@
 package com.magicpwd.__a;
 
 import com.magicpwd.__i.IEditItem;
+import com.magicpwd._comn.item.AreaItem;
+import com.magicpwd._comn.item.DataItem;
+import com.magicpwd._comn.item.DateItem;
+import com.magicpwd._comn.item.FileItem;
 import com.magicpwd._comn.item.GuidItem;
+import com.magicpwd._comn.item.HintItem;
+import com.magicpwd._comn.item.LinkItem;
+import com.magicpwd._comn.item.ListItem;
 import com.magicpwd._comn.item.LogoItem;
+import com.magicpwd._comn.item.MailItem;
 import com.magicpwd._comn.item.MetaItem;
+import com.magicpwd._comn.item.PwdsItem;
+import com.magicpwd._comn.item.SignItem;
+import com.magicpwd._comn.item.TextItem;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd.m.UserMdl;
 
@@ -67,7 +78,6 @@ public abstract class AEditItem implements IEditItem
         this.type = type;
         this.name = name;
         this.data = data;
-        this.spec = new java.util.ArrayList<String>(5);
         setDefault();
     }
 
@@ -76,25 +86,25 @@ public abstract class AEditItem implements IEditItem
         switch (type)
         {
             case ConsDat.INDX_TEXT:
-                return new LogoItem(userMdl);
+                return new TextItem(userMdl);
             case ConsDat.INDX_PWDS:
-                return new LogoItem(userMdl);
+                return new PwdsItem(userMdl);
             case ConsDat.INDX_LINK:
-                return new LogoItem(userMdl);
+                return new LinkItem(userMdl);
             case ConsDat.INDX_MAIL:
-                return new LogoItem(userMdl);
+                return new MailItem(userMdl);
             case ConsDat.INDX_DATE:
-                return new LogoItem(userMdl);
+                return new DateItem(userMdl);
             case ConsDat.INDX_AREA:
-                return new LogoItem(userMdl);
+                return new AreaItem(userMdl);
             case ConsDat.INDX_FILE:
-                return new LogoItem(userMdl);
+                return new FileItem(userMdl);
             case ConsDat.INDX_DATA:
-                return new LogoItem(userMdl);
+                return new DataItem(userMdl);
             case ConsDat.INDX_LIST:
-                return new LogoItem(userMdl);
+                return new ListItem(userMdl);
             case ConsDat.INDX_SIGN:
-                return new LogoItem(userMdl);
+                return new SignItem(userMdl);
             case ConsDat.INDX_GUID:
                 return new GuidItem(userMdl);
             case ConsDat.INDX_META:
@@ -102,7 +112,7 @@ public abstract class AEditItem implements IEditItem
             case ConsDat.INDX_LOGO:
                 return new LogoItem(userMdl);
             case ConsDat.INDX_HINT:
-                return new LogoItem(userMdl);
+                return new HintItem(userMdl);
             default:
                 return null;
         }

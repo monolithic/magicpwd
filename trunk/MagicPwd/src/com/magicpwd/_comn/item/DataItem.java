@@ -40,7 +40,7 @@ public class DataItem extends AEditItem
 
     public DataItem(UserMdl userMdl)
     {
-        super(userMdl, ConsDat.INDX_DATA);
+        super(userMdl, ConsDat.INDX_DATA, "", "");
     }
 
     @Override
@@ -51,12 +51,10 @@ public class DataItem extends AEditItem
             return false;
         }
         builder.append(doEscape(getName())).append(',').append(doEscape(getData()));
-        if (spec != null)
+
+        for (String tmp : spec)
         {
-            for (String tmp : spec)
-            {
-                builder.append(',').append(tmp);
-            }
+            builder.append(',').append(tmp);
         }
         return true;
     }
@@ -72,22 +70,22 @@ public class DataItem extends AEditItem
     @Override
     public boolean importByTxt(String txt)
     {
-        if (Char.isValidate(txt))
+        if (!Char.isValidate(txt))
         {
             return false;
         }
-        String[] arr = txt.replace("\\,", "\f").replace("\\n", "\n").replace("\\\\", "\\").split(",");
-        if (arr == null || arr.length < 2)
+        java.util.List<String> list = Char.split(txt.replace("\\,", "\f").replace("\\n", "\n").replace("\\\\", "\\"), ",");
+        if (list == null || list.size() < 2)
         {
             return false;
         }
-        setName(arr[0].replace("\f", ","));
-        setData(arr[1].replace("\f", ","));
+        setName(list.get(0).replace("\f", ","));
+        setData(list.get(1).replace("\f", ","));
 
         spec.clear();
-        for (int i = 2; i < arr.length; i += 1)
+        for (int i = 2, j = list.size(); i < j; i += 1)
         {
-            spec.add(arr[i]);
+            spec.add(list.get(i));
         }
         return true;
     }
@@ -101,6 +99,15 @@ public class DataItem extends AEditItem
     @Override
     public final void setDefault()
     {
+        if (spec == null)
+        {
+            this.spec = new java.util.ArrayList<String>(8);
+        }
+        else
+        {
+            spec.clear();
+        }
+
         spec.add(SPEC_VALUE_TRUE);
         spec.add("+0-");
         spec.add("0");

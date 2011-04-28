@@ -20,14 +20,9 @@ import com.magicpwd.d.db.DBA3000;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd.__a.AEditItem;
-import com.magicpwd._comn.item.GuidItem;
-import com.magicpwd._comn.item.HintItem;
-import com.magicpwd._comn.item.LogoItem;
-import com.magicpwd._comn.item.MetaItem;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
-import com.magicpwd._util.Logs;
 import com.magicpwd.d.db.DBAccess;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
@@ -44,91 +39,68 @@ public class DXA2000 extends DXA
     }
 
     @Override
-    public int importByKind(UserMdl userMdl, SafeMdl safeMdl, java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash) throws Exception
+    public int importByKind(UserMdl userMdl, SafeMdl safeMdl, java.io.File file, String kindHash) throws Exception
     {
-        int size = 0;
-        int indx = 0;
-        IEditItem item;
-        Mkey tempKeys = new Mkey();
-        java.util.ArrayList<IEditItem> tempList = new java.util.ArrayList<IEditItem>();
         DBAccess dba = new DBAccess();
-        dba.init();
-        for (java.util.ArrayList<String> temp : data)
+
+        int cnt = 0;
+        java.io.BufferedReader reader = null;
+        try
         {
-            switch ((temp.size() - 8) % 3)
+            dba.init();
+
+            reader = new java.io.BufferedReader(new java.io.FileReader(file));
+
+            java.util.ArrayList<IEditItem> itemList = new java.util.ArrayList<IEditItem>();
+            java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("^\\d+");
+            Mkey tempKeys = new Mkey();
+
+            String tmp1;
+            String tmp2;
+            IEditItem item;
+            String[] list;
+            java.util.regex.Matcher matcher;
+            String line = reader.readLine();
+            while (line != null)
             {
-                case 2:
-                    if (com.magicpwd._util.Char.isValidate(temp.get(temp.size() - 1)))
-                    {
-                        temp.add("");
-                        break;
-                    }
-                    temp.remove(temp.size() - 1);
-                case 1:
-                    temp.remove(temp.size() - 1);
-                    break;
-            }
-
-            indx = 0;
-            tempKeys.setDefault();
-            tempList.clear();
-            tempKeys.setP30F0105(userMdl.getCode());
-
-            // Guid
-            GuidItem guid = new GuidItem(userMdl);
-            String date = temp.get(indx++);
-            if (!Char.isValidateDate(date, true))
-            {
-                return size;
-            }
-            guid.setName(date);
-            guid.setData(kindHash);
-            guid.setSpec(GuidItem.SPEC_GUID_TPLT, temp.get(indx++));
-            tempList.add(guid);
-
-            // Meta
-            MetaItem meta = new MetaItem(userMdl);
-            meta.setName(temp.get(indx++));
-            meta.setData(temp.get(indx++));
-            tempList.add(meta);
-
-            // Logo
-            LogoItem logo = new LogoItem(userMdl);
-            tempList.add(logo);
-            logo.setName(temp.get(indx++));
-            logo.setData(temp.get(indx++));
-
-            // Hint
-            HintItem hint = new HintItem(userMdl);
-            String text = temp.get(indx++);
-            if (com.magicpwd._util.Char.isValidate(text))
-            {
-                //hint.setTime(new java.sql.Timestamp(com.magicpwd._util.Date.toDate(text, '-', ':', ' ').getTimeInMillis()));
-            }
-            hint.setName(temp.get(indx++));
-            tempList.add(hint);
-
-            try
-            {
-                while (indx < temp.size())
+                list = line.replace("\\;", "\b").split(";");
+                if (list == null || list.length < ConsEnv.PWDS_HEAD_SIZE)
                 {
-                    item = AEditItem.getInstance(userMdl, Integer.parseInt(temp.get(indx++)));
-                    item.setName(temp.get(indx++));
-                    item.setData(temp.get(indx++));
-                    tempList.add(item);
+                    continue;
                 }
-                safeMdl.enCrypt(tempKeys, tempList);
+                for (String tmp : list)
+                {
+                    tmp1 = tmp.trim();
+                    matcher = pattern.matcher(tmp1);
+                    if (!matcher.find())
+                    {
+                        continue;
+                    }
+                    tmp2 = matcher.group();
+                    item = AEditItem.getInstance(userMdl, Integer.parseInt(tmp2, 10));
+                    if (item != null)
+                    {
+                        item.importByTxt(tmp1.substring(tmp2.length() + 1));
+                        itemList.add(item);
+                    }
+                }
+                tempKeys.setP30F0105(userMdl.getCode());
+                itemList.get(0).setData(kindHash);
+                safeMdl.enCrypt(tempKeys, itemList);
                 DBA3000.savePwdsData(dba, tempKeys);
-                size += 1;
-            }
-            catch (Exception exp)
-            {
-                Logs.exception(exp);
+
+                cnt += 1;
+                tempKeys.setDefault();
+                itemList.clear();
+                line = reader.readLine();
             }
         }
-
-        dba.dispose();
-        return size;
+        finally
+        {
+            Bean.closeReader(reader);
+            dba.dispose();
+        }
+        return cnt;
     }
 
     @Override
@@ -138,150 +110,54 @@ public class DXA2000 extends DXA
     }
 
     @Override
-    public int exportByKind(UserMdl userMdl, SafeMdl safeMdl, java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash) throws Exception
+    public int exportByKind(UserMdl userMdl, SafeMdl safeMdl, java.io.File file, String kindHash) throws Exception
     {
+        int cnt = 0;
+
         java.util.ArrayList<Mkey> dataList = new java.util.ArrayList<Mkey>();
         DBA3000.readKeysList(userMdl, kindHash, dataList);
         if (dataList == null || dataList.size() < 1)
         {
-            return 0;
+            return cnt;
         }
 
-        int size = 0;
-        java.util.ArrayList<String> temp;
-        int indx;
-        IEditItem item;
-
+        java.io.BufferedWriter writer = null;
         java.util.ArrayList<IEditItem> tempList = new java.util.ArrayList<IEditItem>();
-        for (Mkey keys : dataList)
+        try
         {
-            indx = 0;
-            temp = new java.util.ArrayList<String>();
-            try
+            writer = new java.io.BufferedWriter(new java.io.FileWriter(file));
+            StringBuilder builder = new StringBuilder();
+
+            for (Mkey keys : dataList)
             {
-                tempList.clear();
                 keys.setP30F0105(userMdl.getCode());
-                keys.getPassword().setDefault();
-                if (DBA3000.readPwdsData(keys))
+                if (!DBA3000.readPwdsData(keys))
                 {
-                    safeMdl.deCrypt(keys, tempList);
+                    continue;
                 }
+
+                safeMdl.deCrypt(keys, tempList);
+                for (IEditItem item : tempList)
+                {
+                    builder.append(item.getType()).append(',');
+                    item.exportAsTxt(builder);
+                    builder.append(';');
+                }
+                writer.write(builder.append('\n').toString());
+                cnt += 1;
+                builder.delete(0, builder.length());
             }
-            catch (Exception exp)
-            {
-                Logs.exception(exp);
-                continue;
-            }
-
-            // Guid
-            item = tempList.get(indx++);
-            temp.add(item.getName());
-            temp.add(item.getSpec(GuidItem.SPEC_GUID_TPLT));
-
-            // Meta
-            item = tempList.get(indx++);
-            temp.add(item.getName());
-            temp.add(item.getData());
-
-            // Logo
-            item = tempList.get(indx++);
-            temp.add(item.getName());
-            temp.add(item.getData());
-
-            // Hint
-            item = tempList.get(indx++);
-            temp.add(item.getData());
-            temp.add(item.getName());
-
-            while (indx < tempList.size())
-            {
-                item = tempList.get(indx++);
-                temp.add("" + item.getType());
-                temp.add(item.getName());
-                temp.add(item.getData());
-            }
-
-            size += 1;
-            data.add(temp);
         }
-        return size;
+        finally
+        {
+            Bean.closeWriter(writer);
+        }
+        return cnt;
     }
 
     @Override
     public int exportByKeys(java.util.ArrayList<java.util.ArrayList<String>> data, String kindHash) throws Exception
     {
         return 0;
-    }
-
-    private void exportB()
-    {
-        java.io.BufferedWriter writer = null;
-        java.util.List<java.util.List<IEditItem>> list = null;
-        try
-        {
-            StringBuilder buf = new StringBuilder();
-            for (java.util.List<IEditItem> items : list)
-            {
-                for (IEditItem item : items)
-                {
-                    buf.append(item.getType()).append(',').append(item.exportAsTxt(null)).append(';');
-                }
-                writer.write(buf.append('\n').toString());
-                buf.delete(0, buf.length());
-            }
-        }
-        catch (Exception exp)
-        {
-        }
-        finally
-        {
-            Bean.closeWriter(writer);
-        }
-    }
-
-    private void importB()
-    {
-        java.io.BufferedReader reader = null;
-        try
-        {
-            reader = new java.io.BufferedReader(new java.io.FileReader(""));
-            String line = reader.readLine();
-            String[] arr1;
-            String tmp1;
-            String tmp2;
-            java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("^\\d+");
-            java.util.regex.Matcher matcher;
-            while (line != null)
-            {
-                arr1 = line.replace("\\;", "\b").replace("\\,", "\f").split(";");
-                if (arr1 == null || arr1.length < ConsEnv.PWDS_HEAD_SIZE)
-                {
-                    continue;
-                }
-                for (int i = 0; i < arr1.length; i += 1)
-                {
-                    tmp1 = arr1[i].trim();
-                    matcher = pattern.matcher(tmp1);
-                    if (!matcher.find())
-                    {
-                        continue;
-                    }
-                    tmp2 = matcher.group();
-                    IEditItem item = AEditItem.getInstance(null, Integer.parseInt(tmp2, 10));
-                    if (item != null)
-                    {
-                        item.importByTxt(tmp1.substring(tmp2.length()));
-                    }
-                }
-                line = reader.readLine();
-            }
-        }
-        catch (Exception exp)
-        {
-        }
-        finally
-        {
-            Bean.closeReader(reader);
-        }
     }
 }
