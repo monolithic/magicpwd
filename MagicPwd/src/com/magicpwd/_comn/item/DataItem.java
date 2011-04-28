@@ -29,14 +29,14 @@ import org.dom4j.Element;
 public class DataItem extends AEditItem
 {
 
-    public static final int SPEC_DATA_OPT = 0;//可选输入
-    public static final int SPEC_DATA_SET = 1;//数据集
-    public static final int SPEC_DATA_INT = 2;//整数位
-    public static final int SPEC_DATA_DEC = 3;//小数位
-    public static final int SPEC_DATA_CHAR = 4;//特殊符号
-    public static final int SPEC_DATA_CHAR_OPT = 5;//是否可选
-    public static final int SPEC_DATA_CHAR_POS = 6;//符号位置
-    public static final int SPEC_DATA_EXP = 7;//表达式
+    public static final int SPEC_OPT = 0;//可选输入
+    public static final int SPEC_SET = 1;//数据集
+    public static final int SPEC_DOT_INT = 2;//整数位
+    public static final int SPEC_DOT_DEC = 3;//小数位
+    public static final int SPEC_CHAR = 4;//特殊符号
+    public static final int SPEC_CHAR_OPT = 5;//是否可选
+    public static final int SPEC_CHAR_POS = 6;//符号位置
+    public static final int SPEC_EXP = 7;//表达式
 
     public DataItem(UserMdl userMdl)
     {
@@ -51,6 +51,13 @@ public class DataItem extends AEditItem
             return false;
         }
         builder.append(doEscape(getName())).append(',').append(doEscape(getData()));
+        if (spec != null)
+        {
+            for (String tmp : spec)
+            {
+                builder.append(',').append(tmp);
+            }
+        }
         return true;
     }
 
@@ -69,13 +76,19 @@ public class DataItem extends AEditItem
         {
             return false;
         }
-        String[] arr = txt.split(",");
+        String[] arr = txt.replace("\\,", "\f").replace("\\n", "\n").replace("\\\\", "\\").split(",");
         if (arr == null || arr.length < 2)
         {
             return false;
         }
-        setName(arr[0]);
-        setData(arr[1]);
+        setName(arr[0].replace("\f", ","));
+        setData(arr[1].replace("\f", ","));
+
+        spec.clear();
+        for (int i = 2; i < arr.length; i += 1)
+        {
+            spec.add(arr[i]);
+        }
         return true;
     }
 

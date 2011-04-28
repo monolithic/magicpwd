@@ -234,7 +234,7 @@ public class BodyPtn extends javax.swing.JPanel
 
             try
             {
-                temp = computer.calculate(input.replace("$ratio", item.getData()), new MathContext(Integer.parseInt(item.getSpec(DataItem.SPEC_DATA_DEC))));
+                temp = computer.calculate(input.replace("$ratio", item.getData()), new MathContext(Integer.parseInt(item.getSpec(DataItem.SPEC_DOT_DEC))));
                 field.setText(temp.toPlainString());
             }
             catch (Exception exp)

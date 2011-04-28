@@ -81,7 +81,7 @@ public class GuidItem extends AEditItem
     @Override
     public final void setDefault()
     {
-        spec = new java.util.ArrayList<String>(2);
+        spec.clear();
         spec.add(SPEC_VALUE_NONE);
         spec.add(SPEC_VALUE_NONE);
     }

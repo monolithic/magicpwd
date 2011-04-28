@@ -22,7 +22,6 @@ import com.magicpwd._comn.item.LogoItem;
 import com.magicpwd._comn.item.MetaItem;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd.m.UserMdl;
-import java.util.List;
 
 /**
  * 口令属性
@@ -38,7 +37,7 @@ public abstract class AEditItem implements IEditItem
     /** 记录内容 */
     private String data;
     /** 专有内容 */
-    protected List<String> spec;
+    protected java.util.List<String> spec;
     protected UserMdl userCfg;
 
     /**
@@ -68,6 +67,7 @@ public abstract class AEditItem implements IEditItem
         this.type = type;
         this.name = name;
         this.data = data;
+        this.spec = new java.util.ArrayList<String>(5);
         setDefault();
     }
 
