@@ -16,6 +16,8 @@
  */
 package com.magicpwd.__i;
 
+import org.dom4j.Element;
+
 /**
  *
  * @author Amon
@@ -49,9 +51,9 @@ public interface IEditItem
 
     void setDefault();
 
-    String exportAsTxt();
+    boolean exportAsTxt(StringBuilder builder);
 
-    String exportAsXml();
+    boolean exportAsXml(Element element);
 
     boolean importByTxt(String txt);
 

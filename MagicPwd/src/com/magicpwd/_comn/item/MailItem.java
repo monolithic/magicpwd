@@ -25,16 +25,12 @@ import org.dom4j.Element;
  *
  * @author yaoshangwen
  */
-public class PwdsItem extends AEditItem
+public class MailItem extends AEditItem
 {
 
-    public static final int SPEC_PWDS_HASH = 0;// 字符空间索引
-    public static final int SPEC_PWDS_SIZE = 1;// 生成口令长度
-    public static final int SPEC_PWDS_LOOP = 2;// 是否允许重复
-
-    public PwdsItem(UserMdl userMdl)
+    public MailItem(UserMdl userMdl)
     {
-        super(userMdl, ConsDat.INDX_PWDS);
+        super(userMdl, ConsDat.INDX_MAIL);
     }
 
     @Override
