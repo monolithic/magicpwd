@@ -29,9 +29,10 @@ import com.magicpwd._util.Logs;
 public final class MpwdMdl
 {
 
+    private static boolean firstRun;
+    private static String appGuid;
     private static RunMode runMode = RunMode.app;
     private static AppView appView = AppView.mwiz;
-    private static boolean firstRun;
     private java.util.Properties mpwdCfg;
     private String datPath;
     private String bakPath;
@@ -63,6 +64,7 @@ public final class MpwdMdl
         setBakPath(mpwdCfg.getProperty("path.bak"));
         setAppView(mpwdCfg.getProperty("view.last", "mwiz"));
         firstRun = !new java.io.File(datPath, "amon.script").exists();
+        setAppGuid(mpwdCfg.getProperty("guid"));
     }
 
     public void saveCfg()
@@ -79,6 +81,7 @@ public final class MpwdMdl
             {
                 fis = new java.io.FileOutputStream(cfgFile);
                 mpwdCfg.setProperty("view.last", appView.name());
+                mpwdCfg.setProperty("guid", appGuid);
                 mpwdCfg.store(fis, "");
             }
         }
@@ -195,6 +198,20 @@ public final class MpwdMdl
             datPath = datPath.substring(0, datPath.length() - 1);
         }
         this.datPath = datPath;
+    }
+
+    public static String getAppGuid()
+    {
+        return appGuid;
+    }
+
+    private static void setAppGuid(String appGuid)
+    {
+        if (!Char.isValidate(appGuid, 16))
+        {
+            appGuid = Char.lPad(Long.toHexString(System.currentTimeMillis()), 16, '0');
+        }
+        MpwdMdl.appGuid = appGuid;
     }
 
     /**
