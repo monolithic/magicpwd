@@ -16,6 +16,7 @@
  */
 package com.magicpwd.m.mexp;
 
+import com.magicpwd._comn.mpwd.Hint;
 import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd._util.Bean;
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ import com.magicpwd.m.UserMdl;
 public class ListMdl extends DefaultListModel
 {
 
-    private java.util.List<Mkey> keysList;
+    private java.util.List<Mkey> mkeyList;
     private UserMdl userMdl;
 
     ListMdl(UserMdl userMdl)
@@ -42,7 +43,7 @@ public class ListMdl extends DefaultListModel
 
     void init()
     {
-        keysList = new ArrayList<Mkey>();
+        mkeyList = new ArrayList<Mkey>();
     }
 
     /*
@@ -53,7 +54,7 @@ public class ListMdl extends DefaultListModel
     @Override
     public Object getElementAt(int index)
     {
-        return keysList.get(index);
+        return mkeyList.get(index);
     }
 
     /*
@@ -64,26 +65,36 @@ public class ListMdl extends DefaultListModel
     @Override
     public int getSize()
     {
-        return keysList != null ? keysList.size() : 0;
+        return mkeyList != null ? mkeyList.size() : 0;
+    }
+
+    public void listHint(java.util.List<Hint> hintList)
+    {
+        int c = mkeyList.size();
+        mkeyList.clear();
+//        fireIntervalRemoved(this, 0, c);
+        DBA4000.findHintList(hintList, mkeyList);
+        c = mkeyList.size();
+        fireIntervalAdded(this, 0, c);
     }
 
     public void listHint(java.util.Date s, java.util.Date t)
     {
-        int c = keysList.size();
-        keysList.clear();
+        int c = mkeyList.size();
+        mkeyList.clear();
         fireIntervalRemoved(this, 0, c);
 //        DBA4000.findHintList(userMdl, new java.sql.Timestamp(s.getTime()), new java.sql.Timestamp(t.getTime()), keysList);
-        c = keysList.size();
+        c = mkeyList.size();
         fireIntervalAdded(this, 0, c);
     }
 
     public boolean listKeysByKind(String typeHash)
     {
-        int s = keysList.size();
-        keysList.clear();
+        int s = mkeyList.size();
+        mkeyList.clear();
         fireIntervalRemoved(this, 0, s);
-        boolean b = DBA4000.readKeysList(userMdl, typeHash, keysList);
-        s = keysList.size();
+        boolean b = DBA4000.readKeysList(userMdl, typeHash, mkeyList);
+        s = mkeyList.size();
         b &= s > 0;
         fireIntervalAdded(this, 0, s);
         return b;
@@ -91,11 +102,11 @@ public class ListMdl extends DefaultListModel
 
     public boolean listKeysByMeta(String keysMeta)
     {
-        int s = keysList.size();
-        keysList.clear();
+        int s = mkeyList.size();
+        mkeyList.clear();
         fireIntervalRemoved(this, 0, s);
-        boolean b = DBA4000.findUserData(userMdl, keysMeta, keysList);
-        s = keysList.size();
+        boolean b = DBA4000.findUserData(userMdl, keysMeta, mkeyList);
+        s = mkeyList.size();
         b &= s > 0;
         if (b)
         {
@@ -107,9 +118,9 @@ public class ListMdl extends DefaultListModel
     public boolean updtName(String hash, String name, String icon)
     {
         Mkey keys;
-        for (int i = 0, j = keysList.size(); i < j; i += 1)
+        for (int i = 0, j = mkeyList.size(); i < j; i += 1)
         {
-            keys = keysList.get(i);
+            keys = mkeyList.get(i);
             if (keys.getP30F0104().equals(hash))
             {
                 keys.setP30F0109(name);
@@ -124,39 +135,39 @@ public class ListMdl extends DefaultListModel
 
     public void wAppend(Mkey keys)
     {
-        keysList.add(keys);
-        this.fireIntervalAdded(this, 0, keysList.size());
+        mkeyList.add(keys);
+        this.fireIntervalAdded(this, 0, mkeyList.size());
     }
 
     public void wUpdate()
     {
-        fireIntervalRemoved(this, 0, keysList.size());
+        fireIntervalRemoved(this, 0, mkeyList.size());
     }
 
     public void wRemove(int index)
     {
-        keysList.remove(index);
+        mkeyList.remove(index);
         fireIntervalRemoved(this, 0, index);
     }
 
     public void wRemove(Mkey keys)
     {
-        keysList.remove(keys);
-        fireIntervalRemoved(this, 0, keysList.size());
+        mkeyList.remove(keys);
+        fireIntervalRemoved(this, 0, mkeyList.size());
     }
 
     public void wDelete(int index)
     {
-        if (index > -1 && index < keysList.size())
+        if (index > -1 && index < mkeyList.size())
         {
-            DBA4000.deletePwdsData(keysList.get(index).getP30F0104());
-            keysList.remove(index);
+            DBA4000.deletePwdsData(mkeyList.get(index).getP30F0104());
+            mkeyList.remove(index);
             fireIntervalRemoved(this, 0, index);
         }
     }
 
     public Mkey getElement(int index)
     {
-        return keysList.get(index);
+        return mkeyList.get(index);
     }
 }

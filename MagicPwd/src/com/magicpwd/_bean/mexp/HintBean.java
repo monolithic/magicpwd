@@ -58,11 +58,6 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
         this.mainPtn = mainPtn;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see com.magicpwd._face.IEditBean#initView()
-     */
     @Override
     public void initView()
     {
