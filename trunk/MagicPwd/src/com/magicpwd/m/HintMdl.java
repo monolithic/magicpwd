@@ -21,6 +21,7 @@ import com.magicpwd.__i.IHintView;
 import com.magicpwd._comn.Task;
 import com.magicpwd._comn.mpwd.Hint;
 import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._cons.ConsDat;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Time;
 import com.magicpwd.d.db.DBA4000;
@@ -43,6 +44,7 @@ public final class HintMdl
     private java.text.DateFormat dateTplt;
     private java.util.List<Hint> mgtdList;
     private java.util.List<Hint> hintList;
+    private java.util.Map<String, Integer> updtList;
     private java.util.List<IHintView> viewList;
     private IBackCall<String, java.util.List<Mgtd>> backCall;
     private int counter;
@@ -59,6 +61,7 @@ public final class HintMdl
         viewList = new java.util.ArrayList<IHintView>();
         mgtdList = new java.util.ArrayList<Hint>();
         hintList = new java.util.ArrayList<Hint>();
+        updtList = new java.util.HashMap<String, Integer>();
         counter = userMdl.getHintInt();
 
         Time.getInstance().registerAction(new Task(0, 1, "mexp-hint", ""), new IBackCall<String, Task>()
@@ -97,13 +100,33 @@ public final class HintMdl
 
         // 到期提示判断
         hintList.clear();
+        updtList.clear();
         java.util.Calendar cal = java.util.Calendar.getInstance();
         for (Hint hint : mgtdList)
         {
             if (Time.isOnTime(cal, hint))
             {
                 hintList.add(hint);
+                if (hint.getP30F0303() == ConsDat.MGTD_STATUS_INIT)
+                {
+                    hint.setP30F0303(ConsDat.MGTD_STATUS_READY);
+                    updtList.put(hint.getP30F0402(), ConsDat.MGTD_STATUS_READY);
+                }
             }
+            else
+            {
+                if (hint.getP30F0303() == ConsDat.MGTD_STATUS_READY)
+                {
+                    hint.setP30F0303(ConsDat.MGTD_STATUS_DELAY);
+                    updtList.put(hint.getP30F0402(), ConsDat.MGTD_STATUS_DELAY);
+                }
+            }
+        }
+
+        // 更新记录的状态
+        if (updtList.size() > 0)
+        {
+            DBA4000.updtMgtdStatus(updtList);
         }
 
         showHint();

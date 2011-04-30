@@ -84,6 +84,35 @@ public class DBA4000
         return result;
     }
 
+    public static void updtMgtdStatus(java.util.Map<String, Integer> mgtdList)
+    {
+        DBAccess dba = new DBAccess();
+
+        try
+        {
+            dba.init();
+
+            for (String key : mgtdList.keySet())
+            {
+                dba.addTable(DBC4000.P30F0300);
+                dba.addParam(DBC4000.P30F0303, mgtdList.get(key));
+                dba.addWhere(DBC4000.P30F0309, key);
+                dba.addUpdateBatch();
+                dba.reInit();
+            }
+
+            dba.executeBatch();
+        }
+        catch (SQLException ex)
+        {
+            Logs.exception(ex);
+        }
+        finally
+        {
+            dba.dispose();
+        }
+    }
+
     public static boolean initDataBase()
     {
         DBAccess dba = new DBAccess();
@@ -385,6 +414,43 @@ public class DBA4000
         }
     }
 
+    public static boolean findHintList(java.util.List<Hint> hintList, java.util.List<Mkey> mkeyList)
+    {
+        if (hintList == null || hintList.size() < 1)
+        {
+            return false;
+        }
+
+        DBAccess dba = new DBAccess();
+
+        try
+        {
+            dba.init();
+
+            StringBuilder buf = new StringBuilder();
+            for (Hint hint : hintList)
+            {
+                buf.append(",'").append(hint.getP30F0402()).append('\'');
+            }
+            dba.addTable(DBC4000.P30F0100);
+            dba.addWhere(DBC4000.P30F010D, "in", '(' + buf.substring(1) + ')', false);
+
+            ResultSet rest = dba.executeSelect();
+            getNameData(rest, mkeyList);
+            rest.close();
+            return true;
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            return false;
+        }
+        finally
+        {
+            dba.dispose();
+        }
+    }
+
     /**
      * 查询在当前日期到指定日期之间的口令数据
      * @param time
@@ -443,7 +509,8 @@ public class DBA4000
             dba.init();
 
             dba.addTable(DBC4000.P30F0300);
-            dba.addWhere(DBC4000.P30F0307, "1");
+//            dba.addWhere(DBC4000.P30F0307, "1");
+            dba.addWhere(DBC4000.P30F0309, mgtdHash);
             dba.addSort(DBC4000.P30F0305);
 //            dba.addSort(DBC4000.p30f03);
 
@@ -453,6 +520,29 @@ public class DBA4000
                 mgtd = readMgtdData(rest);
             }
             rest.close();
+
+            dba.reInit();
+            dba.addTable(DBC4000.P30F0400);
+            dba.addColumn(DBC4000.P30F0403);
+            dba.addColumn(DBC4000.P30F0404);
+            dba.addColumn(DBC4000.P30F0405);
+            dba.addColumn(DBC4000.P30F0406);
+            dba.addWhere(DBC4000.P30F0402, mgtdHash);
+            dba.addSort(DBC4000.P30F0401);
+            rest = dba.executeSelect();
+            java.util.List<Hint> list = new java.util.ArrayList<Hint>();
+            Hint hint;
+            while (rest.next())
+            {
+                hint = new Hint();
+                hint.setP30F0403(rest.getLong(DBC4000.P30F0403));
+                hint.setP30F0404(rest.getInt(DBC4000.P30F0404));
+                hint.setP30F0405(rest.getInt(DBC4000.P30F0405));
+                hint.setP30F0406(rest.getString(DBC4000.P30F0406));
+                list.add(hint);
+            }
+
+            mgtd.setHintList(list);
             return mgtd;
         }
         catch (Exception exp)
@@ -555,6 +645,7 @@ public class DBA4000
 
             dba.addTable(DBC4000.P30F0300);
             dba.addTable(DBC4000.P30F0400);
+            dba.addColumn(DBC4000.P30F0303);
             dba.addColumn(DBC4000.P30F0305);
             dba.addColumn(DBC4000.P30F0312);
             dba.addColumn(DBC4000.P30F0313);
@@ -567,13 +658,14 @@ public class DBA4000
             dba.addWhere(com.magicpwd._util.Char.format("{0}=0 OR {0} < {1}", DBC4000.P30F030D, now));
             dba.addWhere(com.magicpwd._util.Char.format("{0}=0  OR {0} > {1}", DBC4000.P30F030E, now));
             dba.addWhere(DBC4000.P30F0305, ">", ConsDat.MGTD_INTVAL_BEFOREND);
-            dba.addWhere(DBC4000.P30F0303, ConsDat.MGTD_STATUS_INIT);
+            dba.addWhere(DBC4000.P30F0303, "IN", "(" + ConsDat.MGTD_STATUS_READY + "," + ConsDat.MGTD_STATUS_INIT + ")", false);
 
             Hint hint;
             ResultSet rest = dba.executeSelect();
             while (rest.next())
             {
                 hint = new Hint();
+                hint.setP30F0303(rest.getInt(DBC4000.P30F0303));
                 hint.setP30F0305(rest.getInt(DBC4000.P30F0305));
                 hint.setP30F0311(rest.getInt(DBC4000.P30F0312));
                 hint.setP30F0312(rest.getInt(DBC4000.P30F0313));

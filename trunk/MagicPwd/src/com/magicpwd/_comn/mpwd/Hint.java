@@ -29,6 +29,7 @@ package com.magicpwd._comn.mpwd;
 public class Hint implements java.io.Serializable
 {
 
+    private Integer P30F0303;
     private Integer P30F0305;
     private Integer P30F0311;
     private Integer P30F0312;
@@ -38,6 +39,22 @@ public class Hint implements java.io.Serializable
     private Integer P30F0405;
     /**表达式*/
     private String P30F0406;
+
+    /**
+     * @return the P30F0303
+     */
+    public Integer getP30F0303()
+    {
+        return P30F0303;
+    }
+
+    /**
+     * @param P30F0303 the P30F0303 to set
+     */
+    public void setP30F0303(Integer P30F0303)
+    {
+        this.P30F0303 = P30F0303;
+    }
 
     /**
      * 提醒周期

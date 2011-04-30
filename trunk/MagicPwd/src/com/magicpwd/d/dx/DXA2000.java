@@ -92,6 +92,8 @@ public class DXA2000 extends DXA
                 tempKeys.setDefault();
                 itemList.clear();
                 line = reader.readLine();
+
+                Thread.sleep(1);
             }
         }
         finally

@@ -226,15 +226,15 @@ public interface ConsDat
     int MGTD_TYPE_DATE = 1;
     int MGTD_TYPE_DATETIME = 0;
     int MGTD_TYPE_TIME = -1;
+    /**已完成*/
+    int MGTD_STATUS_DONE = 2;
     /**初始化*/
     int MGTD_STATUS_INIT = 1;
     /**进行中*/
     int MGTD_STATUS_READY = 0;
-    /**已完成*/
-    int MGTD_STATUS_DONE = 2;
-    /**已推迟*/
+    /**已过期*/
     int MGTD_STATUS_DELAY = -1;
-    /**已取消*/
+    /**已作废*/
     int MGTD_STATUS_ABORT = -2;
     /**秒*/
     int MGTD_UNIT_SECOND = 1;

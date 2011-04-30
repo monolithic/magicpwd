@@ -216,7 +216,8 @@ public class MexpPtn extends AMpwdPtn
             @Override
             public boolean callBack(String options, java.util.List<Hint> object)
             {
-                return hintCallBack();
+                mexpMdl.getListMdl().listHint(object);
+                return true;
             }
         });
         setInfoVisible(userMdl.isInfoVisible(AppView.mexp));
@@ -256,16 +257,6 @@ public class MexpPtn extends AMpwdPtn
     @Override
     public boolean showData()
     {
-        return true;
-    }
-
-    private boolean hintCallBack()
-    {
-        java.util.Calendar c = java.util.Calendar.getInstance();
-        java.util.Date s = c.getTime();
-        c.add(java.util.Calendar.DAY_OF_MONTH, 1);
-        java.util.Date t = c.getTime();
-        mexpMdl.getListMdl().listHint(s, t);
         return true;
     }
 

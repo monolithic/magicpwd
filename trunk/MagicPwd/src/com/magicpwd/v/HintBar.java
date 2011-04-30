@@ -80,13 +80,13 @@ public class HintBar extends javax.swing.JPanel implements IHintView
             @Override
             public void mouseClicked(java.awt.event.MouseEvent evt)
             {
-                lb_HintLabelMouseClicked(evt);
+                lbHintLabelMouseClicked(evt);
             }
         });
         userMdl.getHintMdl().registerHintView(this);
     }
 
-    private void lb_HintLabelMouseClicked(java.awt.event.MouseEvent evt)
+    private void lbHintLabelMouseClicked(java.awt.event.MouseEvent evt)
     {
         if (backCall != null)
         {
