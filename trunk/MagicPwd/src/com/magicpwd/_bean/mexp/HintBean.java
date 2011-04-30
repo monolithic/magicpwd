@@ -571,7 +571,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
             default:
                 mgtd.setP30F030C("未知");
         }
-        mgtd.setP30F030D(mgtdCal.getTimeInMillis());
+        mgtd.setP30F030D(System.currentTimeMillis());
         mgtd.setP30F030E(0L);
         mgtd.setP30F030F(0L);
         mgtd.setP30F0312(ConsDat.MGTD_UNIT_MINUTE);

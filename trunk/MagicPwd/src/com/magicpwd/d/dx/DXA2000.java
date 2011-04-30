@@ -22,7 +22,6 @@ import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd.__a.AEditItem;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Bean;
-import com.magicpwd._util.Char;
 import com.magicpwd.d.db.DBAccess;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
@@ -70,7 +69,7 @@ public class DXA2000 extends DXA
                 }
                 for (String tmp : list)
                 {
-                    tmp1 = tmp.trim();
+                    tmp1 = tmp.replace("\b", "\\;").trim();
                     matcher = pattern.matcher(tmp1);
                     if (!matcher.find())
                     {

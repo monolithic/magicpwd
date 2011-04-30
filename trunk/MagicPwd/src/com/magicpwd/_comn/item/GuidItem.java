@@ -67,8 +67,8 @@ public class GuidItem extends AEditItem
         {
             return false;
         }
-        setName(txt);
-//        setData(arr[1]);
+        setName(unEscape(txt));
+//        setData(unEscape(arr[1]));
         return true;
     }
 
