@@ -1,7 +1,6 @@
 package example;
 
 import com.magicpwd.__a.AAction;
-import com.magicpwd.x.mgtd.MgtdDlg;
 
 /**
  *
@@ -18,10 +17,6 @@ public class TestAction extends AAction
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
         javax.swing.JOptionPane.showMessageDialog(trayPtn.getCurrPtn(), e.getActionCommand());
-        MgtdDlg dlg = new MgtdDlg(null, false);
-        dlg.initView();
-        dlg.initLang();
-        dlg.initData(null);
     }
 
     @Override

@@ -375,7 +375,12 @@ public final class Util
             {
                 return true;
             }
-            if (oldVer[i].compareTo(newVer[i]) < 0)
+            int x = oldVer[i].compareTo(newVer[i]);
+            if (x > 0)
+            {
+                return false;
+            }
+            if (x < 0)
             {
                 return true;
             }
