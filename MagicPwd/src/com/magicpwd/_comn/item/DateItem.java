@@ -63,13 +63,13 @@ public class DateItem extends AEditItem
         {
             return false;
         }
-        java.util.List<String> list = Char.split(txt.replace("\\,", "\f").replace("\\n", "\n").replace("\\\\", "\\"), ",");
+        java.util.List<String> list = Char.split(txt.replace("\\,", "\f"), ",");
         if (list == null || list.size() < 2)
         {
             return false;
         }
-        setName(list.get(0).replace("\f", ","));
-        setData(list.get(1).replace("\f", ","));
+        setName(unEscape(list.get(0).replace("\f", "\\,")));
+        setData(unEscape(list.get(1).replace("\f", "\\,")));
         return true;
     }
 

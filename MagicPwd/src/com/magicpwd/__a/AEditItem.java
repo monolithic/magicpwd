@@ -326,7 +326,7 @@ public abstract class AEditItem implements IEditItem
 
     public static String doEscape(String txt)
     {
-        return txt != null ? txt.replace("\\", "\\\\").replace(",", "\\,").replace(";", "\\;").replaceAll("[\r\n]+", "\\n") : txt;
+        return txt != null ? txt.replace("\\", "\\\\").replace(",", "\\,").replace(";", "\\;").replace("\r\n", "\\n").replace("\r", "\\n").replace("\n", "\\n") : txt;
     }
 
     public static String unEscape(String txt)
