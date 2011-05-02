@@ -183,6 +183,9 @@ public class Intval extends javax.swing.JPanel implements IMgtdBean
     @Override
     public boolean showData(Mgtd mgtd)
     {
+        spFtime.setValue(new java.util.Date(mgtd.getP30F030D()));
+        spTtime.setValue(new java.util.Date(mgtd.getP30F030E()));
+
         Hint hint = mgtd.getHint(0);
         if (hint != null)
         {

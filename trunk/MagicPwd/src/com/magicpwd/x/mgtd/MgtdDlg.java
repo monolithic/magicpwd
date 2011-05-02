@@ -294,6 +294,8 @@ public class MgtdDlg extends ADialog
 
     public void initLang()
     {
+        setTitle("任务更新");
+
         lbTitle.setText("标题");
 
         lbLevel.setText("优先级");

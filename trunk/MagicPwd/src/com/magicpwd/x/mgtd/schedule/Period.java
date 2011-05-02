@@ -75,8 +75,8 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
         lbStime = new javax.swing.JLabel();
         lbStime.setLabelFor(spStime);
 
-        cbIntval = new javax.swing.JComboBox();
-        cbIntval.addActionListener(new java.awt.event.ActionListener()
+        cbPeriod = new javax.swing.JComboBox();
+        cbPeriod.addActionListener(new java.awt.event.ActionListener()
         {
 
             @Override
@@ -85,16 +85,16 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
                 cbIntvalActionPerformed(e);
             }
         });
-        lbIntval = new javax.swing.JLabel();
-        lbIntval.setLabelFor(cbIntval);
+        lbPeriod = new javax.swing.JLabel();
+        lbPeriod.setLabelFor(cbPeriod);
 
-        lsEnum = new javax.swing.JList();
+        lsPeriod = new javax.swing.JList();
         lmEnum = new javax.swing.DefaultListModel();
-        lsEnum.setModel(lmEnum);
-        lsEnum.setVisibleRowCount(4);
-        javax.swing.JScrollPane spEnum = new javax.swing.JScrollPane(lsEnum);
+        lsPeriod.setModel(lmEnum);
+        lsPeriod.setVisibleRowCount(4);
+        javax.swing.JScrollPane spEnum = new javax.swing.JScrollPane(lsPeriod);
         lbEnum = new javax.swing.JLabel();
-        lbEnum.setLabelFor(lsEnum);
+        lbEnum.setLabelFor(lsPeriod);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -115,12 +115,12 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
         hpg1.addComponent(lbFtime);
         hpg1.addComponent(lbTtime);
         hpg1.addComponent(lbStime);
-        hpg1.addComponent(lbIntval);
+        hpg1.addComponent(lbPeriod);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg2.addGroup(hsg1);
         hpg2.addGroup(hsg2);
         hpg2.addGroup(hsg3);
-        hpg2.addComponent(cbIntval, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hpg2.addComponent(cbPeriod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hpg2.addComponent(spEnum, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg4 = layout.createSequentialGroup();
 //        hsg4.addContainerGap();
@@ -143,8 +143,8 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
         vpg3.addComponent(spStime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         vpg3.addComponent(btStime, 21, 21, 21);
         javax.swing.GroupLayout.ParallelGroup vpg4 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
-        vpg4.addComponent(lbIntval);
-        vpg4.addComponent(cbIntval, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg4.addComponent(lbPeriod);
+        vpg4.addComponent(cbPeriod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.ParallelGroup vpg5 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         vpg5.addComponent(lbEnum);
         vpg5.addComponent(spEnum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
@@ -169,14 +169,14 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
         lbFtime.setText("起始时间");
         lbTtime.setText("结束时间");
         lbStime.setText("执行时间");
-        lbIntval.setText("间隔周期");
-        cbIntval.addItem(new I1S1(ConsDat.MGTD_UNIT_MINUTE, "秒"));
-        cbIntval.addItem(new I1S1(ConsDat.MGTD_UNIT_SECOND, "分"));
-        cbIntval.addItem(new I1S1(ConsDat.MGTD_UNIT_HOUR, "时"));
-        cbIntval.addItem(new I1S1(ConsDat.MGTD_UNIT_DAY, "日"));
-        cbIntval.addItem(new I1S1(ConsDat.MGTD_UNIT_WEEK, "周"));
-        cbIntval.addItem(new I1S1(ConsDat.MGTD_UNIT_MONTH, "月"));
-        cbIntval.addItem(new I1S1(ConsDat.MGTD_UNIT_YEAR, "年"));
+        lbPeriod.setText("间隔周期");
+        cbPeriod.addItem(new I1S1(ConsDat.MGTD_UNIT_MINUTE, "秒"));
+        cbPeriod.addItem(new I1S1(ConsDat.MGTD_UNIT_SECOND, "分"));
+        cbPeriod.addItem(new I1S1(ConsDat.MGTD_UNIT_HOUR, "时"));
+        cbPeriod.addItem(new I1S1(ConsDat.MGTD_UNIT_DAY, "日"));
+        cbPeriod.addItem(new I1S1(ConsDat.MGTD_UNIT_WEEK, "周"));
+        cbPeriod.addItem(new I1S1(ConsDat.MGTD_UNIT_MONTH, "月"));
+        cbPeriod.addItem(new I1S1(ConsDat.MGTD_UNIT_YEAR, "年"));
     }
 
     @Override
@@ -188,7 +188,7 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
     @Override
     public String getName()
     {
-        return "cycle";
+        return "period";
     }
 
     @Override
@@ -210,7 +210,7 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
         {
             if (i == 0)
             {
-                cbIntval.setSelectedItem(new I1S1(hint.getP30F0404()));
+                cbPeriod.setSelectedItem(new I1S1(hint.getP30F0404()));
             }
             if (hint.getP30F0404() == ConsDat.MGTD_UNIT_DAY || hint.getP30F0404() == ConsDat.MGTD_UNIT_MONTH)
             {
@@ -219,34 +219,36 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
             }
             if (hint.getP30F0404() == ConsDat.MGTD_UNIT_YEAR)
             {
-                for (int j = 0, k = lsEnum.getModel().getSize(); j < k; j += 1)
+                for (int j = 0, k = lsPeriod.getModel().getSize(); j < k; j += 1)
                 {
-                    if (lsEnum.getModel().getElementAt(j).equals(hint.getP30F0405()))
+                    if (lsPeriod.getModel().getElementAt(j).equals(hint.getP30F0405()))
                     {
                         item[i++] = j;
                         break;
                     }
                 }
+                continue;
             }
+            item[i++] = hint.getP30F0405();
         }
-        lsEnum.setSelectedIndices(item);
+        lsPeriod.setSelectedIndices(item);
         return true;
     }
 
     @Override
     public boolean saveData(Mgtd mgtd)
     {
-        Object unitObj = cbIntval.getSelectedItem();
+        Object unitObj = cbPeriod.getSelectedItem();
         if (unitObj == null || !(unitObj instanceof I1S1))
         {
             return false;
         }
 
-        Object[] timeObj = lsEnum.getSelectedValues();
+        Object[] timeObj = lsPeriod.getSelectedValues();
         if (timeObj == null || timeObj.length < 1)
         {
             Lang.showMesg(mgtdDlg, null, "请选择提醒周期信息！");
-            lsEnum.requestFocus();
+            lsPeriod.requestFocus();
             return false;
         }
 
@@ -278,7 +280,7 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
 
     private void cbIntvalActionPerformed(java.awt.event.ActionEvent e)
     {
-        int idx = cbIntval.getSelectedIndex() + 1;
+        int idx = cbPeriod.getSelectedIndex() + 1;
         if (idx == ConsDat.MGTD_UNIT_SECOND)
         {
             lmEnum.clear();
@@ -354,14 +356,14 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
     private BtnLabel btFtime;
     private BtnLabel btStime;
     private BtnLabel btTtime;
-    private javax.swing.JComboBox cbIntval;
-    private javax.swing.JLabel lbEnum;
     private javax.swing.JLabel lbFtime;
-    private javax.swing.JLabel lbIntval;
-    private javax.swing.JLabel lbStime;
-    private javax.swing.JLabel lbTtime;
-    private javax.swing.JList lsEnum;
     private javax.swing.JSpinner spFtime;
+    private javax.swing.JLabel lbStime;
     private javax.swing.JSpinner spStime;
+    private javax.swing.JLabel lbTtime;
     private javax.swing.JSpinner spTtime;
+    private javax.swing.JLabel lbPeriod;
+    private javax.swing.JComboBox cbPeriod;
+    private javax.swing.JLabel lbEnum;
+    private javax.swing.JList lsPeriod;
 }

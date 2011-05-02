@@ -83,7 +83,7 @@ public class MgtdPtn extends AMpwdPtn
     @Override
     public boolean initLang()
     {
-        setTitle("计划任务");
+        setTitle("任务管理");
         return true;
     }
 
