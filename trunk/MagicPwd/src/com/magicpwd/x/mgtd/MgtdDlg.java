@@ -499,6 +499,7 @@ public class MgtdDlg extends ADialog
         mgtd.setP30F0314(taRemark.getText());
 
         DBA4000.saveMgtdData(mgtd);
+        formPtn.getUserMdl().setGtdTemplateUpdated(true);
 
         if (backCall != null)
         {

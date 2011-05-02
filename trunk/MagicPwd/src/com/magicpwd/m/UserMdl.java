@@ -30,13 +30,21 @@ import com.magicpwd._util.Logs;
 public final class UserMdl
 {
 
-    private MpwdMdl mpwdMdl;
-    private java.util.Properties userCfg;
     private boolean incBack = true;
     private boolean topMost;
+    /**
+     * 定时任务有更新
+     */
+    private boolean gtdUpdt;
+    /**
+     * 口令空间有更新
+     */
+    private boolean ucsUpdt;
+    private MpwdMdl mpwdMdl;
     private TpltMdl tpltMdl;
     private CharMdl charMdl;
     private HintMdl hintMdl;
+    private java.util.Properties userCfg;
     static SafeKey safeKey;
 
     public UserMdl()
@@ -690,5 +698,25 @@ public final class UserMdl
     public void setMpwdMdl(MpwdMdl mpwdMdl)
     {
         this.mpwdMdl = mpwdMdl;
+    }
+
+    public boolean isGtdTemplateUpdated()
+    {
+        return gtdUpdt;
+    }
+
+    public void setGtdTemplateUpdated(boolean updated)
+    {
+        gtdUpdt = updated;
+    }
+
+    public boolean isUcsTemplateUpdated()
+    {
+        return ucsUpdt;
+    }
+
+    public void setUcsTemplateUpdated(boolean updated)
+    {
+        ucsUpdt = updated;
     }
 }

@@ -42,14 +42,14 @@ public class PwdsBean extends APwdsBean implements IMwizBean
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
-        hsg.addComponent(pf_PropData, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE);
+        hsg.addComponent(pfPropData, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg.addComponent(pl_PropConf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        hsg.addComponent(plPropConf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addGroup(javax.swing.GroupLayout.Alignment.TRAILING, hsg));
 
         javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER);
-        vpg.addComponent(pl_PropConf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vpg.addComponent(pf_PropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg.addComponent(plPropConf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg.addComponent(pfPropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         layout.setVerticalGroup(vpg);
     }
 
@@ -69,7 +69,7 @@ public class PwdsBean extends APwdsBean implements IMwizBean
     public void showData(IEditItem itemData)
     {
         this.itemData = itemData;
-        pf_PropData.setText(itemData.getData());
+        pfPropData.setText(itemData.getData());
 
         showConfData();
     }
@@ -79,7 +79,7 @@ public class PwdsBean extends APwdsBean implements IMwizBean
     {
         if (label != null)
         {
-            label.setLabelFor(pf_PropData);
+            label.setLabelFor(pfPropData);
         }
     }
 
@@ -92,13 +92,13 @@ public class PwdsBean extends APwdsBean implements IMwizBean
     @Override
     public boolean copyData()
     {
-        if (!pf_PropData.hasFocus())
+        if (!pfPropData.hasFocus())
         {
             return false;
         }
 
-        pf_PropData.selectAll();
-        Util.setClipboardContents(new String(pf_PropData.getPassword()), formPtn.getUserMdl().getClipDlt());
+        pfPropData.selectAll();
+        Util.setClipboardContents(new String(pfPropData.getPassword()), formPtn.getUserMdl().getClipDlt());
         return true;
     }
 
@@ -106,13 +106,13 @@ public class PwdsBean extends APwdsBean implements IMwizBean
     public boolean saveData()
     {
         saveName();
-        itemData.setData(new String(pf_PropData.getPassword()));
+        itemData.setData(new String(pfPropData.getPassword()));
         return true;
     }
 
     @Override
     public void requestFocus()
     {
-        pf_PropData.requestFocus();
+        pfPropData.requestFocus();
     }
 }

@@ -172,7 +172,21 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
         miHalfHour.addActionListener(action);
         miFullHour.addActionListener(action);
         mainPtn.getMenuPtn().getSubMenu("date-remind", pmDateView, action);
-        initMenu();
+        if (initMgtdMenu())
+        {
+            pmDateView.addSeparator();
+        }
+
+        miEditMgtd.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                miEditMgtdActionPerformed(e);
+            }
+        });
+        pmDateView.add(miEditMgtd);
 
         dataBox.initData();
     }
@@ -225,7 +239,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
     {
     }
 
-    private void initMenu()
+    private boolean initMgtdMenu()
     {
         java.util.List<Mgtd> mgtdList = DBA4000.readMgtdList();
         MenuPtn menuPtn = mainPtn.getMenuPtn();
@@ -331,21 +345,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
             tmp = true;
         }
 
-        if (tmp)
-        {
-            pmDateView.addSeparator();
-        }
-
-        miEditMgtd.addActionListener(new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent e)
-            {
-                miEditMgtdActionPerformed(e);
-            }
-        });
-        pmDateView.add(miEditMgtd);
+        return tmp;
     }
 
     private void blPropNameActionPerformed(java.awt.event.ActionEvent evt)
@@ -383,6 +383,11 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
         miHalfHour.setActionCommand("fix:" + format.format(d1));
         Bean.setText(miFullHour, t2);
         miFullHour.setActionCommand("fix:" + format.format(d2));
+        if (mainPtn.getUserMdl().isGtdTemplateUpdated())
+        {
+            initMgtdMenu();
+            mainPtn.getUserMdl().setGtdTemplateUpdated(false);
+        }
         pmDateView.show(blPropName, 0, blPropName.getHeight());
     }
 

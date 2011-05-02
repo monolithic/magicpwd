@@ -54,183 +54,134 @@ public abstract class APwdsBean extends AEditBean
 
     protected void initConfView()
     {
-        pf_PropData = new javax.swing.JPasswordField();
-        pf_PropData.setEchoChar(ConsEnv.PWDS_MASK);
+        pfPropData = new javax.swing.JPasswordField();
+        pfPropData.setEchoChar(ConsEnv.PWDS_MASK);
 
-        pl_PropConf = new javax.swing.JPanel();
-        pl_PropConf.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
+        plPropConf = new javax.swing.JPanel();
+        plPropConf.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
-        bt_PwdsView = new BtnLabel();
-        bt_PwdsView.addActionListener(new java.awt.event.ActionListener()
+        btPwdsView = new BtnLabel();
+        btPwdsView.addActionListener(new java.awt.event.ActionListener()
         {
 
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                bt_PwdsViewActionPerformed(evt);
+                btPwdsViewActionPerformed(evt);
             }
         });
-        pl_PropConf.add(bt_PwdsView);
+        plPropConf.add(btPwdsView);
 
-        bt_PwdsGent = new BtnLabel();
-        bt_PwdsGent.setIcon(formPtn.readFavIcon("pwds-generate", false));
-        bt_PwdsGent.addActionListener(new java.awt.event.ActionListener()
+        btPwdsGent = new BtnLabel();
+        btPwdsGent.setIcon(formPtn.readFavIcon("pwds-generate", false));
+        btPwdsGent.addActionListener(new java.awt.event.ActionListener()
         {
 
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                bt_PwdsGentActionPerformed(evt);
+                btPwdsGentActionPerformed(evt);
             }
         });
-        pl_PropConf.add(bt_PwdsGent);
+        plPropConf.add(btPwdsGent);
 
-        bt_PwdsConf = new BtnLabel();
-        bt_PwdsConf.setIcon(formPtn.readFavIcon("pwds-options", false));
-        bt_PwdsConf.addActionListener(new java.awt.event.ActionListener()
+        btPwdsConf = new BtnLabel();
+        btPwdsConf.setIcon(formPtn.readFavIcon("pwds-options", false));
+        btPwdsConf.addActionListener(new java.awt.event.ActionListener()
         {
 
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                bt_PwdsConfActionPerformed(evt);
+                btPwdsConfActionPerformed(evt);
             }
         });
-        pl_PropConf.add(bt_PwdsConf);
+        plPropConf.add(btPwdsConf);
 
-        pm_ConfMenu = new javax.swing.JPopupMenu();
-        mu_SizeMenu = new javax.swing.JMenu();
-        pm_ConfMenu.add(mu_SizeMenu);
-        mu_CharMenu = new javax.swing.JMenu();
-        pm_ConfMenu.add(mu_CharMenu);
+        pmConfMenu = new javax.swing.JPopupMenu();
+        muSizeMenu = new javax.swing.JMenu();
+        pmConfMenu.add(muSizeMenu);
+        muCharMenu = new javax.swing.JMenu();
+        pmConfMenu.add(muCharMenu);
 
         initSizeView();
-        initCharView();
         initUrptView();
+        initCharMenu();
     }
 
     private void initSizeView()
     {
-        bg_SizeGroup = new WButtonGroup();
+        bgSizeGroup = new WButtonGroup();
         java.awt.event.ActionListener al = new java.awt.event.ActionListener()
         {
 
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                mi_SizeMenuActionPerformed(evt);
+                miSizeMenuActionPerformed(evt);
             }
         };
 
         // 默认
-        mi_SizeDef = new javax.swing.JCheckBoxMenuItem();
-        mi_SizeDef.addActionListener(al);
-        mu_SizeMenu.add(mi_SizeDef);
-        bg_SizeGroup.add("0", mi_SizeDef);
+        miSizeDef = new javax.swing.JCheckBoxMenuItem();
+        miSizeDef.addActionListener(al);
+        muSizeMenu.add(miSizeDef);
+        bgSizeGroup.add("0", miSizeDef);
 
-        mu_SizeMenu.addSeparator();
+        muSizeMenu.addSeparator();
 
-        mi_SizeNum = new javax.swing.JCheckBoxMenuItem[6];
+        miSizeNum = new javax.swing.JCheckBoxMenuItem[6];
         javax.swing.JCheckBoxMenuItem menuItem;
-        for (int i = 0, j = mi_SizeNum.length; i < j; i += 1)
+        for (int i = 0, j = miSizeNum.length; i < j; i += 1)
         {
             menuItem = new javax.swing.JCheckBoxMenuItem();
             menuItem.addActionListener(al);
-            mu_SizeMenu.add(menuItem);
-            mi_SizeNum[i] = menuItem;
+            muSizeMenu.add(menuItem);
+            miSizeNum[i] = menuItem;
         }
 
-        mu_SizeMenu.addSeparator();
+        muSizeMenu.addSeparator();
 
         // 其它...
-        mi_SizeMore = new javax.swing.JCheckBoxMenuItem();
-        mi_SizeMore.addActionListener(new java.awt.event.ActionListener()
+        miSizeMore = new javax.swing.JCheckBoxMenuItem();
+        miSizeMore.addActionListener(new java.awt.event.ActionListener()
         {
 
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                mi_SizeMoreActionPerformed(evt);
+                miSizeMoreActionPerformed(evt);
             }
         });
-        mu_SizeMenu.add(mi_SizeMore);
-    }
-
-    private void initCharView()
-    {
-        bg_CharGroup = new WButtonGroup();
-        java.awt.event.ActionListener al = new java.awt.event.ActionListener()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                mi_CharMenuActionPerformed(evt);
-            }
-        };
-
-        mi_CharDef = new javax.swing.JCheckBoxMenuItem();
-        mi_CharDef.addActionListener(al);
-        mu_CharMenu.add(mi_CharDef);
-        bg_CharGroup.add("", mi_CharDef);
-
-        mu_CharMenu.addSeparator();
-
-        int sysSize = formPtn.getUserMdl().getCharMdl().getCharSys().size();
-        int usrSize = formPtn.getUserMdl().getCharMdl().getCharUsr().size();
-        mi_CharPre = new javax.swing.JCheckBoxMenuItem[sysSize + usrSize];
-
-        javax.swing.JCheckBoxMenuItem menuItem;
-        for (int i = 0; i < sysSize; i += 1)
-        {
-            menuItem = new javax.swing.JCheckBoxMenuItem();
-            mu_CharMenu.add(menuItem);
-            menuItem.addActionListener(al);
-            mi_CharPre[i] = menuItem;
-        }
-
-        if (usrSize < 1)
-        {
-            return;
-        }
-
-        mu_CharMenu.addSeparator();
-
-        for (int i = 0; i < usrSize; i += 1)
-        {
-            menuItem = new javax.swing.JCheckBoxMenuItem();
-            mu_CharMenu.add(menuItem);
-            menuItem.addActionListener(al);
-            mi_CharPre[sysSize + i] = menuItem;
-        }
+        muSizeMenu.add(miSizeMore);
     }
 
     private void initUrptView()
     {
-        mi_LoopMenu = new javax.swing.JCheckBoxMenuItem();
-        mi_LoopMenu.addActionListener(new java.awt.event.ActionListener()
+        miLoopMenu = new javax.swing.JCheckBoxMenuItem();
+        miLoopMenu.addActionListener(new java.awt.event.ActionListener()
         {
 
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                mi_UrptMenuActionPerformed(evt);
+                miUrptMenuActionPerformed(evt);
             }
         });
-        pm_ConfMenu.add(mi_LoopMenu);
-        mi_LoopMenu.setSelected(formPtn.getUserMdl().isPwdsLoop());
+        pmConfMenu.add(miLoopMenu);
+        miLoopMenu.setSelected(formPtn.getUserMdl().isPwdsLoop());
     }
 
     protected void initConfLang()
     {
-        Lang.setWText(bt_PwdsView, LangRes.P30F1507, "@M");
-        Lang.setWTips(bt_PwdsView, LangRes.P30F1508, "点击显示口令(Alt + M)");
+        Lang.setWText(btPwdsView, LangRes.P30F1507, "@M");
+        Lang.setWTips(btPwdsView, LangRes.P30F1508, "点击显示口令(Alt + M)");
 
-        Lang.setWText(bt_PwdsGent, LangRes.P30F150B, "@G");
-        Lang.setWTips(bt_PwdsGent, LangRes.P30F150C, "生成口令(Alt + G)");
+        Lang.setWText(btPwdsGent, LangRes.P30F150B, "@G");
+        Lang.setWTips(btPwdsGent, LangRes.P30F150C, "生成口令(Alt + G)");
 
-        Lang.setWText(bt_PwdsConf, LangRes.P30F150D, "@O");
-        Lang.setWTips(bt_PwdsConf, LangRes.P30F150E, "口令设置(Alt + O)");
+        Lang.setWText(btPwdsConf, LangRes.P30F150D, "@O");
+        Lang.setWTips(btPwdsConf, LangRes.P30F150E, "口令设置(Alt + O)");
 
         initSizeLang();
         initCharLang();
@@ -239,10 +190,10 @@ public abstract class APwdsBean extends AEditBean
 
     private void initSizeLang()
     {
-        Lang.setWText(mu_SizeMenu, LangRes.P30F7C01, "口令长度");
+        Lang.setWText(muSizeMenu, LangRes.P30F7C01, "口令长度");
 
-        Lang.setWText(mi_SizeDef, LangRes.P30F7C02, "默认");
-        mi_SizeDef.setActionCommand("0");
+        Lang.setWText(miSizeDef, LangRes.P30F7C02, "默认");
+        miSizeDef.setActionCommand("0");
 
         String t = Lang.getLang(LangRes.P30F7C03, "位");
         String[] text =
@@ -257,48 +208,25 @@ public abstract class APwdsBean extends AEditBean
         javax.swing.JCheckBoxMenuItem menuItem;
         for (int i = 0; i < 6; i += 1)
         {
-            menuItem = mi_SizeNum[i];
+            menuItem = miSizeNum[i];
             menuItem.setText(text[i] + t);
             menuItem.setToolTipText(text[i] + t);
             menuItem.setActionCommand(keys[i]);
-            bg_SizeGroup.add(keys[i], menuItem);
+            bgSizeGroup.add(keys[i], menuItem);
         }
 
-        Lang.setWText(mi_SizeMore, LangRes.P30F7C04, "其它...");
-        bg_SizeGroup.add("-1", mi_SizeMore);
+        Lang.setWText(miSizeMore, LangRes.P30F7C04, "其它...");
+        bgSizeGroup.add("-1", miSizeMore);
     }
 
     private void initCharLang()
     {
-        Lang.setWText(mu_CharMenu, LangRes.P30F7C05, "字符空间");
-
-        Lang.setWText(mi_CharDef, LangRes.P30F7C06, "默认");
-        mi_CharDef.setActionCommand(ConsCfg.DEF_PWDS_HASH);
-
-        javax.swing.JCheckBoxMenuItem menu;
-        int i = 0;
-        for (Char item : formPtn.getUserMdl().getCharMdl().getCharSys())
-        {
-            menu = mi_CharPre[i++];
-            menu.setText(item.getP30F2104());
-            menu.setToolTipText(item.getP30F2105());
-            menu.setActionCommand(item.getP30F2103());
-            bg_CharGroup.add(item.getP30F2103(), menu);
-        }
-
-        for (Char item : formPtn.getUserMdl().getCharMdl().getCharUsr())
-        {
-            menu = mi_CharPre[i++];
-            menu.setText(item.getP30F2104());
-            menu.setToolTipText(item.getP30F2105());
-            menu.setActionCommand(item.getP30F2103());
-            bg_CharGroup.add(item.getP30F2103(), menu);
-        }
+        Lang.setWText(muCharMenu, LangRes.P30F7C05, "字符空间");
     }
 
     private void initNrptLang()
     {
-        Lang.setWText(mi_LoopMenu, LangRes.P30F7C07, "允许重复");
+        Lang.setWText(miLoopMenu, LangRes.P30F7C07, "允许重复");
     }
 
     protected void initConfData()
@@ -313,23 +241,29 @@ public abstract class APwdsBean extends AEditBean
         {
             size = "0";
         }
-        if (!bg_SizeGroup.setSelected(size, true))
+        if (!bgSizeGroup.setSelected(size, true))
         {
-            mi_SizeMore.setSelected(true);
-            mi_SizeMore.setActionCommand(size);
+            miSizeMore.setSelected(true);
+            miSizeMore.setActionCommand(size);
         }
-        bg_CharGroup.setSelected(itemData.getSpec(PwdsItem.SPEC_PWDS_HASH), true);
-        mi_LoopMenu.setSelected(PwdsItem.SPEC_VALUE_TRUE.equals(itemData.getSpec(PwdsItem.SPEC_PWDS_LOOP)));
+        bgCharGroup.setSelected(itemData.getSpec(PwdsItem.SPEC_PWDS_HASH), true);
+        miLoopMenu.setSelected(PwdsItem.SPEC_VALUE_TRUE.equals(itemData.getSpec(PwdsItem.SPEC_PWDS_LOOP)));
     }
 
-    private void bt_PwdsConfActionPerformed(java.awt.event.ActionEvent evt)
+    private void btPwdsConfActionPerformed(java.awt.event.ActionEvent evt)
     {
-        pm_ConfMenu.show(bt_PwdsConf, 0, bt_PwdsConf.getSize().height);
+        if (formPtn.getUserMdl().isUcsTemplateUpdated())
+        {
+            initCharMenu();
+            formPtn.getUserMdl().setUcsTemplateUpdated(false);
+        }
+        showConfData();
+        pmConfMenu.show(btPwdsConf, 0, btPwdsConf.getSize().height);
     }
 
-    private void bt_PwdsGentActionPerformed(java.awt.event.ActionEvent evt)
+    private void btPwdsGentActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (askOverWrite && pf_PropData.getPassword().length > 1)
+        if (askOverWrite && pfPropData.getPassword().length > 1)
         {
             if (Lang.showFirm(formPtn, "", "") != javax.swing.JOptionPane.YES_OPTION)
             {
@@ -340,14 +274,14 @@ public abstract class APwdsBean extends AEditBean
 
         try
         {
-            String c = bg_CharGroup.getSelection().getActionCommand();
+            String c = bgCharGroup.getSelection().getActionCommand();
             c = getPwdsChar(c);
-            String s = bg_SizeGroup.getSelection().getActionCommand();
+            String s = bgSizeGroup.getSelection().getActionCommand();
             if (!com.magicpwd._util.Char.isValidatePositiveInteger(s))
             {
                 s = ConsCfg.DEF_PWDS_SIZE;
             }
-            pf_PropData.setText(new String(Util.nextRandomKey(c, Integer.parseInt(s), mi_LoopMenu.isSelected())));
+            pfPropData.setText(new String(Util.nextRandomKey(c, Integer.parseInt(s), miLoopMenu.isSelected())));
         }
         catch (Exception exp)
         {
@@ -356,24 +290,24 @@ public abstract class APwdsBean extends AEditBean
         }
     }
 
-    private void bt_PwdsViewActionPerformed(java.awt.event.ActionEvent evt)
+    private void btPwdsViewActionPerformed(java.awt.event.ActionEvent evt)
     {
-        changeView(pf_PropData.getEchoChar() == 0);
+        changeView(pfPropData.getEchoChar() == 0);
     }
 
-    private void mi_SizeMenuActionPerformed(java.awt.event.ActionEvent evt)
+    private void miSizeMenuActionPerformed(java.awt.event.ActionEvent evt)
     {
         String t = evt.getActionCommand();
         if (!com.magicpwd._util.Char.isValidatePositiveInteger(t))
         {
             t = "0";
-            mi_SizeDef.setSelected(true);
+            miSizeDef.setSelected(true);
         }
 
         itemData.setSpec(PwdsItem.SPEC_PWDS_SIZE, t);
     }
 
-    private void mi_SizeMoreActionPerformed(java.awt.event.ActionEvent evt)
+    private void miSizeMoreActionPerformed(java.awt.event.ActionEvent evt)
     {
         String s = JOptionPane.showInputDialog(formPtn, "", itemData.getSpec(PwdsItem.SPEC_PWDS_SIZE, ConsCfg.DEF_PWDS_SIZE));
         if (s == null)
@@ -385,15 +319,15 @@ public abstract class APwdsBean extends AEditBean
         {
             Lang.showMesg(formPtn, "", "请输入一个有效的自然数！");
             s = ConsCfg.DEF_PWDS_SIZE;
-            mi_SizeDef.setSelected(true);
+            miSizeDef.setSelected(true);
             return;
         }
 
-        mi_SizeMore.setActionCommand(s);
+        miSizeMore.setActionCommand(s);
         itemData.setSpec(PwdsItem.SPEC_PWDS_SIZE, s);
     }
 
-    private void mi_CharMenuActionPerformed(java.awt.event.ActionEvent evt)
+    private void miCharMenuActionPerformed(java.awt.event.ActionEvent evt)
     {
         String t = evt.getActionCommand();
         if (!com.magicpwd._util.Char.isValidateHash(t))
@@ -404,26 +338,26 @@ public abstract class APwdsBean extends AEditBean
         itemData.setSpec(PwdsItem.SPEC_PWDS_HASH, t);
     }
 
-    private void mi_UrptMenuActionPerformed(java.awt.event.ActionEvent evt)
+    private void miUrptMenuActionPerformed(java.awt.event.ActionEvent evt)
     {
-        itemData.setSpec(PwdsItem.SPEC_PWDS_LOOP, mi_LoopMenu.isSelected() ? PwdsItem.SPEC_VALUE_TRUE : PwdsItem.SPEC_VALUE_FAIL);
+        itemData.setSpec(PwdsItem.SPEC_PWDS_LOOP, miLoopMenu.isSelected() ? PwdsItem.SPEC_VALUE_TRUE : PwdsItem.SPEC_VALUE_FAIL);
     }
 
     private void changeView(boolean mask)
     {
         if (mask)
         {
-            bt_PwdsView.setIcon(formPtn.readFavIcon("pwds-mask", true));
-            pf_PropData.setEchoChar(ConsEnv.PWDS_MASK);
-            Lang.setWText(bt_PwdsView, LangRes.P30F1507, "@M");
-            Lang.setWTips(bt_PwdsView, LangRes.P30F1508, "点击显示口令(Alt + M)");
+            btPwdsView.setIcon(formPtn.readFavIcon("pwds-mask", true));
+            pfPropData.setEchoChar(ConsEnv.PWDS_MASK);
+            Lang.setWText(btPwdsView, LangRes.P30F1507, "@M");
+            Lang.setWTips(btPwdsView, LangRes.P30F1508, "点击显示口令(Alt + M)");
         }
         else
         {
-            bt_PwdsView.setIcon(formPtn.readFavIcon("pwds-view", true));
-            pf_PropData.setEchoChar('\0');
-            Lang.setWText(bt_PwdsView, LangRes.P30F1509, "@M");
-            Lang.setWTips(bt_PwdsView, LangRes.P30F150A, "点击隐藏口令(Alt + M)");
+            btPwdsView.setIcon(formPtn.readFavIcon("pwds-view", true));
+            pfPropData.setEchoChar('\0');
+            Lang.setWText(btPwdsView, LangRes.P30F1509, "@M");
+            Lang.setWTips(btPwdsView, LangRes.P30F150A, "点击隐藏口令(Alt + M)");
         }
     }
 
@@ -450,24 +384,79 @@ public abstract class APwdsBean extends AEditBean
         return ConsCfg.DEF_PWDS_CHAR;
     }
 
-    private void initMenuData()
+    private void initCharMenu()
     {
+        bgCharGroup = new WButtonGroup();
+        java.awt.event.ActionListener al = new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                miCharMenuActionPerformed(evt);
+            }
+        };
+
+        miCharDef = new javax.swing.JCheckBoxMenuItem();
+        miCharDef.setText(Lang.getLang(LangRes.P30F7C06, "默认"));
+        miCharDef.setActionCommand(ConsCfg.DEF_PWDS_HASH);
+        miCharDef.addActionListener(al);
+        muCharMenu.add(miCharDef);
+        bgCharGroup.add("", miCharDef);
+
+        muCharMenu.addSeparator();
+
+        java.util.List<Char> list = formPtn.getUserMdl().getCharMdl().getCharSys();
+        int cnt = list.size();
+
+        Char charItem;
+        javax.swing.JCheckBoxMenuItem menuItem;
+        for (int i = 0; i < cnt; i += 1)
+        {
+            charItem = list.get(i);
+            menuItem = new javax.swing.JCheckBoxMenuItem();
+            menuItem.setText(charItem.getP30F2104());
+            menuItem.setToolTipText(charItem.getP30F2105());
+            menuItem.setActionCommand(charItem.getP30F2103());
+            menuItem.addActionListener(al);
+            muCharMenu.add(menuItem);
+            bgCharGroup.add(charItem.getP30F2103(), menuItem);
+        }
+
+        list = formPtn.getUserMdl().getCharMdl().getCharUsr();
+        cnt = list.size();
+        if (cnt < 1)
+        {
+            return;
+        }
+        muCharMenu.addSeparator();
+
+        for (int i = 0; i < cnt; i += 1)
+        {
+            charItem = list.get(i);
+            menuItem = new javax.swing.JCheckBoxMenuItem();
+            menuItem.setText(charItem.getP30F2104());
+            menuItem.setToolTipText(charItem.getP30F2105());
+            menuItem.setActionCommand(charItem.getP30F2103());
+            menuItem.addActionListener(al);
+            muCharMenu.add(menuItem);
+            bgCharGroup.add(charItem.getP30F2103(), menuItem);
+        }
     }
-    protected javax.swing.JPasswordField pf_PropData;
+    protected javax.swing.JPasswordField pfPropData;
     // 配置信息
-    protected javax.swing.JPanel pl_PropConf;
-    private BtnLabel bt_PwdsConf;
-    private BtnLabel bt_PwdsGent;
-    private BtnLabel bt_PwdsView;
-    private javax.swing.JPopupMenu pm_ConfMenu;
-    private javax.swing.JMenu mu_SizeMenu;
-    private javax.swing.JCheckBoxMenuItem mi_SizeDef;
-    private javax.swing.JCheckBoxMenuItem[] mi_SizeNum;
-    protected javax.swing.JCheckBoxMenuItem mi_SizeMore;
-    protected WButtonGroup bg_SizeGroup;
-    private javax.swing.JMenu mu_CharMenu;
-    private javax.swing.JCheckBoxMenuItem mi_CharDef;
-    private javax.swing.JCheckBoxMenuItem[] mi_CharPre;
-    protected WButtonGroup bg_CharGroup;
-    protected javax.swing.JCheckBoxMenuItem mi_LoopMenu;
+    protected javax.swing.JPanel plPropConf;
+    private BtnLabel btPwdsConf;
+    private BtnLabel btPwdsGent;
+    private BtnLabel btPwdsView;
+    private javax.swing.JPopupMenu pmConfMenu;
+    private javax.swing.JMenu muSizeMenu;
+    private javax.swing.JCheckBoxMenuItem miSizeDef;
+    private javax.swing.JCheckBoxMenuItem[] miSizeNum;
+    private javax.swing.JCheckBoxMenuItem miSizeMore;
+    private WButtonGroup bgSizeGroup;
+    private javax.swing.JMenu muCharMenu;
+    private javax.swing.JCheckBoxMenuItem miCharDef;
+    private WButtonGroup bgCharGroup;
+    private javax.swing.JCheckBoxMenuItem miLoopMenu;
 }

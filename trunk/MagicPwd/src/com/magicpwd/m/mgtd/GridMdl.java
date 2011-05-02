@@ -197,4 +197,11 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
             fireTableDataChanged();
         }
     }
+
+    public void wReload()
+    {
+        lsMgtdList.clear();
+        DBA4000.listMgtdData(lsMgtdList);
+        fireTableDataChanged();
+    }
 }
