@@ -17,6 +17,7 @@
 package com.magicpwd.v.mgtd;
 
 import com.magicpwd.__a.AMpwdPtn;
+import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Bean;
@@ -169,6 +170,16 @@ public class MgtdPtn extends AMpwdPtn
     public void appendMgtd()
     {
         MgtdDlg dlg = new MgtdDlg(this, true);
+        dlg.setBackCall(new IBackCall<String, String>()
+        {
+
+            @Override
+            public boolean callBack(String options, String object)
+            {
+                mgtdMdl.getGridMdl().wReload();
+                return true;
+            }
+        });
         dlg.initView();
         dlg.initLang();
         dlg.initData(null);
@@ -191,6 +202,16 @@ public class MgtdPtn extends AMpwdPtn
         mgtd.setHintList(DBA4000.readHintList(mgtd.getP30F0309()));
 
         MgtdDlg dlg = new MgtdDlg(this, true);
+        dlg.setBackCall(new IBackCall<String, String>()
+        {
+
+            @Override
+            public boolean callBack(String options, String object)
+            {
+                mgtdMdl.getGridMdl().wReload();
+                return true;
+            }
+        });
         dlg.initView();
         dlg.initLang();
         dlg.initData(mgtd);

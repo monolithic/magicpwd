@@ -65,7 +65,7 @@ public class PwdsBean extends APwdsBean implements IMexpBean
         nameBox.initView();
 
         lb_PropData = new javax.swing.JLabel();
-        lb_PropData.setLabelFor(pf_PropData);
+        lb_PropData.setLabelFor(pfPropData);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -75,8 +75,8 @@ public class PwdsBean extends APwdsBean implements IMexpBean
         hpg1.addComponent(lb_PropName);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg2.addComponent(tf_PropName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        hpg2.addComponent(pf_PropData, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
-        hpg2.addComponent(pl_PropConf, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
+        hpg2.addComponent(pfPropData, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
+        hpg2.addComponent(plPropConf, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addGroup(hpg1);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -90,10 +90,10 @@ public class PwdsBean extends APwdsBean implements IMexpBean
         vpg1.addComponent(tf_PropName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg2.addComponent(lb_PropData);
-        vpg2.addComponent(pf_PropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg2.addComponent(pfPropData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         vpg3.addComponent(lb_PropConf);
-        vpg3.addComponent(pl_PropConf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg3.addComponent(plPropConf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
         vsg1.addGroup(vpg1);
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -133,9 +133,7 @@ public class PwdsBean extends APwdsBean implements IMexpBean
         itemData = item;
 
         tf_PropName.setText(showName());
-        pf_PropData.setText(itemData.getData());
-
-        showConfData();
+        pfPropData.setText(itemData.getData());
     }
 
     @Override
@@ -146,7 +144,7 @@ public class PwdsBean extends APwdsBean implements IMexpBean
             tf_PropName.requestFocus();
             return;
         }
-        pf_PropData.requestFocus();
+        pfPropData.requestFocus();
     }
 
     @Override
@@ -170,7 +168,7 @@ public class PwdsBean extends APwdsBean implements IMexpBean
         }
 
         itemData.setName(name);
-        itemData.setData(new String(pf_PropData.getPassword()));
+        itemData.setData(new String(pfPropData.getPassword()));
 
         mainPtn.updateSelectedItem();
     }
@@ -178,8 +176,8 @@ public class PwdsBean extends APwdsBean implements IMexpBean
     @Override
     public void copyDataActionPerformed(java.awt.event.ActionEvent evt)
     {
-        pf_PropData.selectAll();
-        Util.setClipboardContents(new String(pf_PropData.getPassword()), formPtn.getUserMdl().getClipDlt());
+        pfPropData.selectAll();
+        Util.setClipboardContents(new String(pfPropData.getPassword()), formPtn.getUserMdl().getClipDlt());
     }
     private javax.swing.JLabel lb_PropData;
     private javax.swing.JLabel lb_PropName;
