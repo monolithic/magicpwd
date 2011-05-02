@@ -16,17 +16,22 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="lbDatPath" min="-2" max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="cbDbSec" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="cbFileKey" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="spSepLine" alignment="0" pref="210" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="tfDatPath" pref="113" max="32767" attributes="0"/>
+                      <Component id="lbDatPath" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btDatPath" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="cbFileKey" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="tfDatPath" pref="113" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btDatPath" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="ckDbSec" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -37,6 +42,8 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="spSepLine" min="-2" pref="10" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lbDatPath" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="tfDatPath" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -45,13 +52,15 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="cbFileKey" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="cbDbSec" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="8" max="32767" attributes="0"/>
+              <Component id="ckDbSec" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
+    <Component class="javax.swing.JSeparator" name="spSepLine">
+    </Component>
     <Component class="javax.swing.JLabel" name="lbDatPath">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x6570;&#x636e;&#x8def;&#x5f84;(D)"/>
@@ -64,7 +73,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btDatPath">
       <Properties>
-        <Property name="text" type="java.lang.String" value="..."/>
+        <Property name="text" type="java.lang.String" value="jButton1"/>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[21, 21]"/>
         </Property>
@@ -75,7 +84,7 @@
         <Property name="text" type="java.lang.String" value="&#x4f7f;&#x7528;&#x5bc6;&#x7801;&#x6587;&#x4ef6;"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JCheckBox" name="cbDbSec">
+    <Component class="javax.swing.JCheckBox" name="ckDbSec">
       <Properties>
         <Property name="text" type="java.lang.String" value="&#x4f7f;&#x7528;&#x6570;&#x636e;&#x5e93;&#x52a0;&#x5bc6;"/>
       </Properties>
