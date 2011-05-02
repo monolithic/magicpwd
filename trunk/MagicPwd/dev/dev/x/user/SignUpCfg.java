@@ -43,22 +43,23 @@ public class SignUpCfg extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        spSepLine = new javax.swing.JSeparator();
         lbDatPath = new javax.swing.JLabel();
         tfDatPath = new javax.swing.JTextField();
         btDatPath = new javax.swing.JButton();
         cbFileKey = new javax.swing.JCheckBox();
-        cbDbSec = new javax.swing.JCheckBox();
+        ckDbSec = new javax.swing.JCheckBox();
 
         lbDatPath.setText("数据路径(D)");
 
         tfDatPath.setText("jTextField1");
 
-        btDatPath.setText("...");
+        btDatPath.setText("jButton1");
         btDatPath.setPreferredSize(new java.awt.Dimension(21, 21));
 
         cbFileKey.setText("使用密码文件");
 
-        cbDbSec.setText("使用数据库加密");
+        ckDbSec.setText("使用数据库加密");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -66,21 +67,26 @@ public class SignUpCfg extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lbDatPath)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbDbSec)
-                    .addComponent(cbFileKey)
+                    .addComponent(spSepLine, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(tfDatPath, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                        .addComponent(lbDatPath)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btDatPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbFileKey)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(tfDatPath, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btDatPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(ckDbSec))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(spSepLine, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbDatPath)
                     .addComponent(tfDatPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -88,17 +94,18 @@ public class SignUpCfg extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbFileKey)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbDbSec)
-                .addContainerGap(8, Short.MAX_VALUE))
+                .addComponent(ckDbSec)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btDatPath;
-    private javax.swing.JCheckBox cbDbSec;
     private javax.swing.JCheckBox cbFileKey;
+    private javax.swing.JCheckBox ckDbSec;
     private javax.swing.JLabel lbDatPath;
+    private javax.swing.JSeparator spSepLine;
     private javax.swing.JTextField tfDatPath;
     // End of variables declaration//GEN-END:variables
 
