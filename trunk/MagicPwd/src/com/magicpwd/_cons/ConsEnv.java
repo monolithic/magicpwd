@@ -42,14 +42,14 @@ public interface ConsEnv
     /**
      * 软件信息：软件首页
      */
-    String HOMEPAGE = "http://magicpwd.com/";
-    String BLOGSITE = "http://magicpwd.com/wlog";
-    String MLOGSITE = "http://t.sina.com.cn/mpwd";
+    String HOMEPAGE = "http://amon.me/mpwd/";
+    String BLOGSITE = "http://amon.me/wlog/";
+    String MLOGSITE = "http://weibo.com/magicpwd";
     /**
      * 软件信息：软件版权
      */
-    String SOFTCOPY = "© {0} MagicPwd.com";
-    String SOFTMAIL = "Amon@magicpwd.com";
+    String SOFTCOPY = "© {0} Amon.me";
+    String SOFTMAIL = "magicpwd@amon.me";
     /**
      * 安全信息：摘要算法
      */
