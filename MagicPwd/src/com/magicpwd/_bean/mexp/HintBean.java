@@ -242,6 +242,15 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
     private boolean initMgtdMenu()
     {
         java.util.List<Mgtd> mgtdList = DBA4000.readMgtdList();
+        java.awt.event.ActionListener al = new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                miDateTimeActionPerformed(e);
+            }
+        };
         MenuPtn menuPtn = mainPtn.getMenuPtn();
         boolean tmp = false;
         int idx = 0;
@@ -261,8 +270,9 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
                     break;
                 }
                 javax.swing.JCheckBoxMenuItem item = new javax.swing.JCheckBoxMenuItem();
-                item.setActionCommand("key:" + mgtd.getP30F0309() + mgtd.getP30F030C());
                 item.setText(mgtd.getP30F030C());
+                item.setActionCommand("key:" + mgtd.getP30F0309() + mgtd.getP30F030C());
+                item.addActionListener(al);
                 button.add(item);
                 idx += 1;
             }
@@ -280,8 +290,9 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
                     break;
                 }
                 javax.swing.JCheckBoxMenuItem item = new javax.swing.JCheckBoxMenuItem();
-                item.setActionCommand("key:" + mgtd.getP30F0309() + mgtd.getP30F030C());
                 item.setText(mgtd.getP30F030C());
+                item.setActionCommand("key:" + mgtd.getP30F0309() + mgtd.getP30F030C());
+                item.addActionListener(al);
                 button.add(item);
                 idx += 1;
             }
@@ -299,8 +310,9 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
                     break;
                 }
                 javax.swing.JCheckBoxMenuItem item = new javax.swing.JCheckBoxMenuItem();
-                item.setActionCommand("key:" + mgtd.getP30F0309() + mgtd.getP30F030C());
                 item.setText(mgtd.getP30F030C());
+                item.setActionCommand("key:" + mgtd.getP30F0309() + mgtd.getP30F030C());
+                item.addActionListener(al);
                 button.add(item);
                 idx += 1;
             }
@@ -318,8 +330,9 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
                     break;
                 }
                 javax.swing.JCheckBoxMenuItem item = new javax.swing.JCheckBoxMenuItem();
-                item.setActionCommand("key:" + mgtd.getP30F0309() + mgtd.getP30F030C());
                 item.setText(mgtd.getP30F030C());
+                item.setActionCommand("key:" + mgtd.getP30F0309() + mgtd.getP30F030C());
+                item.addActionListener(al);
                 button.add(item);
                 idx += 1;
             }
@@ -337,8 +350,9 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
                     break;
                 }
                 javax.swing.JCheckBoxMenuItem item = new javax.swing.JCheckBoxMenuItem();
-                item.setActionCommand("key:" + mgtd.getP30F0309() + mgtd.getP30F030C());
                 item.setText(mgtd.getP30F030C());
+                item.setActionCommand("key:" + mgtd.getP30F0309() + mgtd.getP30F030C());
+                item.addActionListener(al);
                 button.add(item);
                 idx += 1;
             }
@@ -407,6 +421,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
             {
                 return;
             }
+            taPropData.setText("定时提醒：" + cmd);
             mgtdType = ConsDat.MGTD_INTVAL_FIXTIME;
             mgtdData = 0;
             mgtdUnit = 0;
@@ -421,6 +436,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
             {
                 return;
             }
+            taPropData.setText("定时提醒：" + format.format(mgtdCal.getTime()));
             mgtdType = ConsDat.MGTD_INTVAL_FIXTIME;
             mgtdData = 0;
             mgtdUnit = 0;
@@ -435,6 +451,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
             {
                 return;
             }
+            taPropData.setText("定制的周期提醒！");
             mgtdType = ConsDat.MGTD_INTVAL_PERIOD;
             mgtdData = Integer.parseInt(matcher.group());
 
@@ -477,6 +494,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
             {
                 return;
             }
+            taPropData.setText("定制的间隔提醒！");
             mgtdType = ConsDat.MGTD_INTVAL_INTVAL;
             mgtdData = Integer.parseInt(matcher.group());
 
