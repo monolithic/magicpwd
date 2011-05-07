@@ -56,7 +56,7 @@ public class IcoName
                 if (tmp.getName().toUpperCase().endsWith(".PNG"))
                 {
                     tmp.setLastModified(cal.getTimeInMillis());
-                    tmp.renameTo(new java.io.File(dst, "AM" + format.format(cal.getTime()) + ".png"));
+                    tmp.renameTo(new java.io.File(dst, "AM" + format.format(cal.getTime()) + "_16.PNG"));
                     cal.add(java.util.Calendar.SECOND, 1);
                 }
                 continue;
