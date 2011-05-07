@@ -308,13 +308,13 @@ class IcoModel extends javax.swing.table.AbstractTableModel
             }
         }
 
-        java.io.File[] fileList = icoPath.listFiles(new AmonFF("[0-9A-Z]{16}\\.PNG", false));
+        java.io.File[] fileList = icoPath.listFiles(new AmonFF("(AM|AU)\\d{14}_(16|24)\\.PNG", true));
         if (fileList == null || fileList.length < 1)
         {
             return;
         }
 
-        java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("[0-9A-Z]{16}");
+        java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("(AM|AU)\\d{14}");
         int i = 1;
         for (java.io.File file : fileList)
         {
@@ -338,16 +338,11 @@ class IcoModel extends javax.swing.table.AbstractTableModel
         }
     }
 
-    public synchronized void appendIcon(java.io.File filePath, java.io.File icoPath) throws Exception
+    private static java.awt.image.BufferedImage scaleImage(java.awt.image.BufferedImage img, int dim)
     {
-        java.io.FileInputStream fis = new java.io.FileInputStream(filePath);
-        java.awt.image.BufferedImage img = javax.imageio.ImageIO.read(fis);
-        fis.close();
-
-        final int S = 16;
         int w = img.getWidth();
         int h = img.getHeight();
-        if (w != S || h != S)
+        if (w != dim || h != dim)
         {
             double dw = 16.0 / w;
             double dh = 16.0 / h;
@@ -355,12 +350,15 @@ class IcoModel extends javax.swing.table.AbstractTableModel
             w *= d;
             h *= d;
             java.awt.Image tmp = img.getScaledInstance(w, h, java.awt.Image.SCALE_DEFAULT);
-            img = new java.awt.image.BufferedImage(S, S, java.awt.image.BufferedImage.TYPE_INT_ARGB);
-            img.createGraphics().drawImage(tmp, (S - w) >> 1, (S - h) >> 1, w, h, null);
+            img = new java.awt.image.BufferedImage(dim, dim, java.awt.image.BufferedImage.TYPE_INT_ARGB);
+            img.createGraphics().drawImage(tmp, (dim - w) >> 1, (dim - h) >> 1, w, h, null);
         }
+        return img;
+    }
 
-        String hash = "AU" + new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
-        java.io.File pngFile = new java.io.File(icoPath.getAbsolutePath(), hash + '.' + ConsEnv.IMAGE_FORMAT);
+    private static void writeImage(java.awt.image.BufferedImage img, String path) throws Exception
+    {
+        java.io.File pngFile = new java.io.File(path);
         if (!pngFile.exists())
         {
             pngFile.createNewFile();
@@ -369,6 +367,17 @@ class IcoModel extends javax.swing.table.AbstractTableModel
         javax.imageio.ImageIO.write(img, ConsEnv.IMAGE_FORMAT, fos);
         fos.flush();
         fos.close();
+    }
+
+    public synchronized void appendIcon(java.io.File filePath, java.io.File icoPath) throws Exception
+    {
+        java.io.FileInputStream fis = new java.io.FileInputStream(filePath);
+        java.awt.image.BufferedImage img = javax.imageio.ImageIO.read(fis);
+        fis.close();
+
+        String hash = "AU" + new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
+        writeImage(scaleImage(img, 16), icoPath.getAbsolutePath() + java.io.File.separator + hash + "_16." + ConsEnv.IMAGE_FORMAT);
+        writeImage(scaleImage(img, 24), icoPath.getAbsolutePath() + java.io.File.separator + hash + "_24." + ConsEnv.IMAGE_FORMAT);
 
         int i = iconList.size();
         iconList.add(newLabel(i, new javax.swing.ImageIcon(img), hash));
