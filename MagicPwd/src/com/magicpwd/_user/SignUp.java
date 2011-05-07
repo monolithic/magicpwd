@@ -98,6 +98,76 @@ public class SignUp extends javax.swing.JPanel implements IUserView
     @Override
     public void initData()
     {
+        tfUserName.addFocusListener(new java.awt.event.FocusListener()
+        {
+
+            @Override
+            public void focusGained(java.awt.event.FocusEvent e)
+            {
+                tfUserName.selectAll();
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent e)
+            {
+            }
+        });
+        tfUserName.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                checkUserName();
+            }
+        });
+        pfUserPwd1.addFocusListener(new java.awt.event.FocusListener()
+        {
+
+            @Override
+            public void focusGained(java.awt.event.FocusEvent e)
+            {
+                pfUserPwd1.selectAll();
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent e)
+            {
+            }
+        });
+        pfUserPwd1.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                checkUserPwd1();
+            }
+        });
+        pfUserPwd2.addFocusListener(new java.awt.event.FocusListener()
+        {
+
+            @Override
+            public void focusGained(java.awt.event.FocusEvent e)
+            {
+                pfUserPwd2.selectAll();
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent e)
+            {
+            }
+        });
+        pfUserPwd2.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                checkUserPwd2();
+            }
+        });
+
         tfDatPath.setText('.' + java.io.File.separator + "dat" + java.io.File.separator);
     }
 
@@ -110,8 +180,58 @@ public class SignUp extends javax.swing.JPanel implements IUserView
     @Override
     public void btApplyActionPerformed(java.awt.event.ActionEvent evt)
     {
+        signUp();
+    }
+
+    @Override
+    public void btAbortActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        userPtn.exitSystem();
+    }
+
+    private void checkUserName()
+    {
+        String un = tfUserName.getText().trim().replaceAll("\\s+", "");
+        if (!com.magicpwd._util.Char.isValidate(un))
+        {
+            Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
+            tfUserName.requestFocus();
+            return;
+        }
+        pfUserPwd1.requestFocus();
+    }
+
+    private void checkUserPwd1()
+    {
+        String p1 = new String(pfUserPwd1.getPassword());
+        if (!com.magicpwd._util.Char.isValidate(p1))
+        {
+            Lang.showMesg(this, LangRes.P30FAA02, "请输入登录口令！");
+            pfUserPwd1.requestFocus();
+            return;
+        }
+        pfUserPwd2.requestFocus();
+    }
+
+    private void checkUserPwd2()
+    {
+        String p1 = new String(pfUserPwd1.getPassword());
+        String p2 = new String(pfUserPwd2.getPassword());
+        if (!p1.equals(p2))
+        {
+            Lang.showMesg(this, LangRes.P30FAA05, "您输入的口令不一致，请重新输入！");
+            pfUserPwd1.setText("");
+            pfUserPwd2.setText("");
+            pfUserPwd1.requestFocus();
+            return;
+        }
+        signUp();
+    }
+
+    private void signUp()
+    {
         // 登录名称检测
-        String un = tfUserName.getText();
+        String un = tfUserName.getText().trim().replaceAll("\\s+", "");
         if (!com.magicpwd._util.Char.isValidate(un))
         {
             Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
@@ -148,15 +268,20 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         java.io.File dat = new java.io.File(datDir);
         if (!dat.isDirectory())
         {
-            //请选择一个文件夹！
+            Lang.showMesg(this, LangRes.P30F1A08, "请选择一个目录！");
+            return;
         }
         if (dat.exists())
         {
-            //您选择的目录存在，确认要使用此目录吗？
+            if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(this, LangRes.P30F1A0D, "您选择的文件已存在，确认要继续吗？"))
+            {
+                return;
+            }
         }
         if (!dat.canWrite())
         {
-            //无法写入你选择的文件夹，请确认您是否拥有权限！
+            Lang.showMesg(this, LangRes.P30F1A0F, "无法写入文件 {0} ，请确认您是否有足够的权限！", dat.getPath());
+            return;
         }
         tfUserName.setText("");
         pfUserPwd1.setText("");
@@ -191,12 +316,6 @@ public class SignUp extends javax.swing.JPanel implements IUserView
             userPtn.hideWindow();
             return;
         }
-    }
-
-    @Override
-    public void btAbortActionPerformed(java.awt.event.ActionEvent evt)
-    {
-        userPtn.exitSystem();
     }
 
     private void initBaseView()

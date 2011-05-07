@@ -19,11 +19,13 @@ package com.magicpwd._user;
 import com.magicpwd.__i.IUserView;
 import com.magicpwd._comn.S1S1;
 import com.magicpwd._cons.ConsCfg;
+import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._enum.AuthLog;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
+import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.m.MpwdMdl;
 import com.magicpwd.m.UserMdl;
 
@@ -180,6 +182,7 @@ public class SignIn extends javax.swing.JPanel implements IUserView
             }
         }
         cbUserView.setSelectedItem(new S1S1(userMdl.getMpwdMdl().getViewLast(), ""));
+
         String name = userMdl.getCfg(ConsCfg.CFG_USER_LAST, "");
         if (com.magicpwd._util.Char.isValidate(name))
         {
@@ -190,6 +193,54 @@ public class SignIn extends javax.swing.JPanel implements IUserView
         {
             tfUserName.requestFocus();
         }
+
+        tfUserName.addFocusListener(new java.awt.event.FocusListener()
+        {
+
+            @Override
+            public void focusGained(java.awt.event.FocusEvent e)
+            {
+                tfUserName.selectAll();
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent e)
+            {
+            }
+        });
+        tfUserName.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                checkUserName();
+            }
+        });
+
+        pfUserPwds.addFocusListener(new java.awt.event.FocusListener()
+        {
+
+            @Override
+            public void focusGained(java.awt.event.FocusEvent e)
+            {
+                pfUserPwds.selectAll();
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent e)
+            {
+            }
+        });
+        pfUserPwds.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                checkUserPwds();
+            }
+        });
     }
 
     @Override
@@ -200,6 +251,41 @@ public class SignIn extends javax.swing.JPanel implements IUserView
 
     @Override
     public void btApplyActionPerformed(java.awt.event.ActionEvent e)
+    {
+        signIn();
+    }
+
+    @Override
+    public void btAbortActionPerformed(java.awt.event.ActionEvent e)
+    {
+        userPtn.exitSystem();
+    }
+
+    private void checkUserName()
+    {
+        String name = tfUserName.getText();
+        if (!com.magicpwd._util.Char.isValidate(name))
+        {
+            Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
+            tfUserName.requestFocus();
+            return;
+        }
+        pfUserPwds.requestFocus();
+    }
+
+    private void checkUserPwds()
+    {
+        String pwds = new String(pfUserPwds.getPassword());
+        if (!com.magicpwd._util.Char.isValidate(pwds))
+        {
+            Lang.showMesg(this, LangRes.P30FAA02, "请输入登录口令！");
+            pfUserPwds.requestFocus();
+            return;
+        }
+        signIn();
+    }
+
+    private void signIn()
     {
         String name = tfUserName.getText();
         if (!com.magicpwd._util.Char.isValidate(name))
@@ -221,10 +307,10 @@ public class SignIn extends javax.swing.JPanel implements IUserView
             boolean b = userPtn.getUserMdl().signIn(name, pwds);
             if (b)
             {
-//                if (!ConsDat.VERSIONS.equals(DBA4000.readConfig("")))
-//                {
-//                    return;
-//                }
+                if (!ConsDat.VERSIONS.equals(DBA4000.readConfig("versions")))
+                {
+                    return;
+                }
                 userPtn.getUserMdl().setCfg(ConsCfg.CFG_USER_LAST, name);
             }
             else
@@ -262,12 +348,6 @@ public class SignIn extends javax.swing.JPanel implements IUserView
         {
             userPtn.hideWindow();
         }
-    }
-
-    @Override
-    public void btAbortActionPerformed(java.awt.event.ActionEvent e)
-    {
-        userPtn.exitSystem();
     }
 
     private void miFindPwdsMouseReleased(java.awt.event.ActionEvent evt)

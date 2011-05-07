@@ -180,6 +180,16 @@ public interface LangRes
     String P30F1A03 = "P30F1A03";
     String P30F1A04 = "P30F1A04";
     String P30F1A05 = "P30F1A05";
+    String P30F1A06 = "P30F1A06";
+    String P30F1A07 = "P30F1A07";
+    String P30F1A08 = "P30F1A08";
+    String P30F1A09 = "P30F1A09";
+    String P30F1A0A = "P30F1A0A";
+    String P30F1A0B = "P30F1A0B";
+    String P30F1A0C = "P30F1A0C";
+    String P30F1A0D = "P30F1A0D";
+    String P30F1A0E = "P30F1A0E";
+    String P30F1A0F = "P30F1A0F";
     // ----------------------------------------------------
     // B 自定义语言资源
     // ----------------------------------------------------

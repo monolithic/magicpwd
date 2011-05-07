@@ -114,6 +114,54 @@ public class SignRs extends javax.swing.JPanel implements IUserView
         tfUserName.setText("");
         pfUserPwds.setText("");
         tfUserName.requestFocus();
+
+        tfUserName.addFocusListener(new java.awt.event.FocusListener()
+        {
+
+            @Override
+            public void focusGained(java.awt.event.FocusEvent e)
+            {
+                tfUserName.selectAll();
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent e)
+            {
+            }
+        });
+        tfUserName.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                checkUserName();
+            }
+        });
+
+        pfUserPwds.addFocusListener(new java.awt.event.FocusListener()
+        {
+
+            @Override
+            public void focusGained(java.awt.event.FocusEvent e)
+            {
+                pfUserPwds.selectAll();
+            }
+
+            @Override
+            public void focusLost(java.awt.event.FocusEvent e)
+            {
+            }
+        });
+        pfUserPwds.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                checkUserPwds();
+            }
+        });
     }
 
     @Override
@@ -124,6 +172,39 @@ public class SignRs extends javax.swing.JPanel implements IUserView
 
     @Override
     public void btApplyActionPerformed(java.awt.event.ActionEvent e)
+    {
+        signRs();
+    }
+
+    @Override
+    public void btAbortActionPerformed(java.awt.event.ActionEvent e)
+    {
+    }
+
+    private void checkUserName()
+    {
+        String name = tfUserName.getText();
+        if (!com.magicpwd._util.Char.isValidate(name))
+        {
+            Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
+            tfUserName.requestFocus();
+            return;
+        }
+        pfUserPwds.requestFocus();
+    }
+
+    private void checkUserPwds()
+    {
+        String pwds = new String(pfUserPwds.getPassword());
+        if (!com.magicpwd._util.Char.isValidate(pwds))
+        {
+            Lang.showMesg(this, LangRes.P30FAA02, "请输入登录口令！");
+            pfUserPwds.requestFocus();
+            return;
+        }
+    }
+
+    private void signRs()
     {
         String name = tfUserName.getText();
         if (!com.magicpwd._util.Char.isValidate(name))
@@ -175,11 +256,6 @@ public class SignRs extends javax.swing.JPanel implements IUserView
 
         userPtn.callBack(AuthLog.signRs, null);
         userPtn.hideWindow();
-    }
-
-    @Override
-    public void btAbortActionPerformed(java.awt.event.ActionEvent e)
-    {
     }
 
     private void lbUserOptsMouseReleased(java.awt.event.MouseEvent evt)
