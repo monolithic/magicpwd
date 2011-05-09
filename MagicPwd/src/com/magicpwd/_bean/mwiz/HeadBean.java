@@ -229,7 +229,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
         ta_MetaData.setText(meta.getData());
 
         IEditItem logo = keysMdl.getItemAt(ConsEnv.PWDS_HEAD_LOGO);
-        ib_KeysIcon.setIcon(Bean.getDataIcon(logo.getName()));
+        ib_KeysIcon.setIcon(Bean.getDataIcon(logo.getName(), 16));
 
         IEditItem hint = keysMdl.getItemAt(ConsEnv.PWDS_HEAD_HINT);
         tf_HintName.setText(hint.getName());
@@ -301,7 +301,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
         {
             return false;
         }
-        ib_KeysIcon.setIcon(Bean.getDataIcon(object));
+        ib_KeysIcon.setIcon(Bean.getDataIcon(object, 16));
         logo.setName(object);
         return true;
     }

@@ -141,7 +141,7 @@ public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall
     {
         itemData = (LogoItem) item;
 
-        ib_PropName.setIcon(Bean.getDataIcon(item.getName()));
+        ib_PropName.setIcon(Bean.getDataIcon(item.getName(), 16));
         ta_PropData.setText(item.getData());
     }
 
@@ -187,7 +187,7 @@ public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall
         {
             return false;
         }
-        ib_PropName.setIcon(Bean.getDataIcon(object));
+        ib_PropName.setIcon(Bean.getDataIcon(object, 16));
         itemData.setName(object);
         return true;
     }

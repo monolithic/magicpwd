@@ -72,7 +72,6 @@ public final class Mkey implements Serializable
      * 口令图标
      */
     private String P30F010B;
-    private javax.swing.Icon keysIcon;
     /**
      * 图标说明
      */
@@ -381,22 +380,6 @@ public final class Mkey implements Serializable
     public void setP30F010B(String P30F010B)
     {
         this.P30F010B = P30F010B;
-    }
-
-    /**
-     * @return the keysIcon
-     */
-    public javax.swing.Icon getKeysIcon()
-    {
-        return keysIcon;
-    }
-
-    /**
-     * @param keysIcon the keysIcon to set
-     */
-    public void setKeysIcon(javax.swing.Icon keysIcon)
-    {
-        this.keysIcon = keysIcon;
     }
 
     /**

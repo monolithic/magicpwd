@@ -239,6 +239,7 @@ public class UserPtn extends javax.swing.JPanel
 
         pmMenu = new javax.swing.JPopupMenu();
         miOskb = new javax.swing.JCheckBoxMenuItem();
+        miOskb.setEnabled(false);
         pmMenu.add(miOskb);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(plAction);
@@ -358,8 +359,7 @@ public class UserPtn extends javax.swing.JPanel
             StringBuilder buf = new StringBuilder();
             buf.append(ConsEnv.HOMEPAGE);
             buf.append("mpwd/mpwd0001.ashx?sid=").append(ConsEnv.VERSIONS);
-            buf.append("&key=").append(MpwdMdl.getAppGuid());
-            buf.append("&uri=").append(java.net.InetAddress.getLocalHost().getHostAddress());
+            buf.append("&uri=").append(MpwdMdl.getAppGuid());
             buf.append("&opt=").append(Char.escape(System.getProperty("os.name")));
             buf.append("_").append(Char.escape(System.getProperty("os.arch")));
             buf.append("_").append(Char.escape(System.getProperty("os.version")));
@@ -478,12 +478,12 @@ public class UserPtn extends javax.swing.JPanel
         }
         return true;
     }
+    private javax.swing.JLabel lbLogo;
     private javax.swing.JPanel plLogo;
     private javax.swing.JPanel plInput;
     private javax.swing.JPanel plAction;
     private javax.swing.JButton btAbort;
     private javax.swing.JButton btApply;
-    private javax.swing.JLabel lbLogo;
     private BtnLabel lbMenu;
     private javax.swing.JPopupMenu pmMenu;
     private javax.swing.JCheckBoxMenuItem miOskb;

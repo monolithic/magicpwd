@@ -194,20 +194,10 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
     }
 
     /**
-     * 获取用户偏好图片
+     * 系统默认图片
      * @param favHash
      * @return
      */
-    public javax.swing.Icon getFavIcon(String favHash)
-    {
-        if (!Char.isValidate(favHash))
-        {
-            return Bean.getNone();
-        }
-
-        return defIcon.get("fav:" + favHash);
-    }
-
     public javax.swing.Icon getDefIcon(String favHash)
     {
         if (!Char.isValidate(favHash))
@@ -220,6 +210,21 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
             favHash = defProp.getProperty(favHash);
         }
         return defIcon.get("def:" + favHash);
+    }
+
+    /**
+     * 获取用户偏好图片
+     * @param favHash
+     * @return
+     */
+    public javax.swing.Icon getFavIcon(String favHash)
+    {
+        if (!Char.isValidate(favHash))
+        {
+            return Bean.getNone();
+        }
+
+        return defIcon.get("fav:" + favHash);
     }
 
     /**

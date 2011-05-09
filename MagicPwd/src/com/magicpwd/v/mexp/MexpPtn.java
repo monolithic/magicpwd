@@ -70,6 +70,7 @@ import com.magicpwd.v.mail.MailPtn;
 import com.magicpwd.v.tray.TrayPtn;
 import com.magicpwd.x.MdiDialog;
 import com.magicpwd.x.mail.MailOpt;
+import com.magicpwd.x.mexp.TpltDialog;
 
 public class MexpPtn extends AMpwdPtn
 {
@@ -81,6 +82,7 @@ public class MexpPtn extends AMpwdPtn
     private MailPtn mailPtn;
     private HistDlg histDlg;
     private MdiDialog cfgForm;
+    private TpltDialog tpltDlg;
     private MenuPtn menuPtn;
     private MexpMdl mexpMdl;
     /**口令列表上次选择索引*/
@@ -166,6 +168,7 @@ public class MexpPtn extends AMpwdPtn
         safeMdl = mexpMdl.getGridMdl();
 
         trGuidTree.setModel(mexpMdl.getKindMdl());
+        lsGuidList.setModel(mexpMdl.getListMdl());
         lsGuidList.addMouseListener(new java.awt.event.MouseAdapter()
         {
 
@@ -187,15 +190,21 @@ public class MexpPtn extends AMpwdPtn
                 lsGuidListMouseEvent(e);
             }
         });
-
-        lsGuidList.setModel(mexpMdl.getListMdl());
+        keysCR = new KeysCR(this);
+        String layout = userMdl.getCfg(ConsCfg.CFG_VIEW_LIST_LAY, "16");
+        if (Char.isValidatePositiveInteger(layout))
+        {
+            keysCR.setStyle(Integer.parseInt(layout));
+        }
+        lsGuidList.setCellRenderer(keysCR);
 
         tbKeysView.setModel(mexpMdl.getGridMdl());
         javax.swing.table.TableColumnModel colModel = tbKeysView.getColumnModel();
         colModel.getColumn(0).setMaxWidth(tbKeysView.getFontMetrics(tbKeysView.getFont()).stringWidth("999999"));
+//        MexpCR mexpCR = new MexpCR();
 //        for (int i = 0, j = colModel.getColumnCount(); i < j; i += 1)
 //        {
-//            colModel.getColumn(i).setCellRenderer(new MpwdCR());
+//            colModel.getColumn(i).setCellRenderer(mexpCR);
 //        }
 
         // 菜单栏
@@ -437,6 +446,18 @@ public class MexpPtn extends AMpwdPtn
     public MenuPtn getMenuPtn()
     {
         return menuPtn;
+    }
+
+    public void setKeysLayout(String layout)
+    {
+        if (!Char.isValidatePositiveInteger(layout))
+        {
+            return;
+        }
+        userMdl.setCfg(ConsCfg.CFG_VIEW_LIST_LAY, layout);
+        Bean.clearUserIcon();
+        keysCR.setStyle(Integer.parseInt(layout));
+        mexpMdl.getListMdl().reLayout();
     }
 
     public void setEditVisible(boolean visible)
@@ -786,7 +807,6 @@ public class MexpPtn extends AMpwdPtn
         sp.setTopComponent(sp1);
 
         lsGuidList = new javax.swing.JList();
-        lsGuidList.setCellRenderer(new KeysCR(this));
         lsGuidList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         listPop = new javax.swing.JPopupMenu();
@@ -1429,6 +1449,18 @@ public class MexpPtn extends AMpwdPtn
         }
     }
 
+    public void showTpltDlg()
+    {
+        if (tpltDlg == null)
+        {
+            tpltDlg = new TpltDialog(this);
+            tpltDlg.initView();
+            tpltDlg.initLang();
+            tpltDlg.initData();
+        }
+        tpltDlg.setVisible(true);
+    }
+
     public void showMailPtn()
     {
         if (mailPtn == null)
@@ -1698,4 +1730,5 @@ public class MexpPtn extends AMpwdPtn
     private javax.swing.JPopupMenu kindPop;
     private javax.swing.JPopupMenu listPop;
     private javax.swing.JPopupMenu gridPop;
+    private KeysCR keysCR;
 }

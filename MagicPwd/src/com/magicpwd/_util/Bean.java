@@ -307,7 +307,24 @@ public class Bean
         }
     }
 
-    public static javax.swing.Icon getDataIcon(String hash)
+    public static void clearUserIcon()
+    {
+        if (mp_DataIcon != null)
+        {
+            mp_DataIcon.clear();
+        }
+    }
+
+    public static void clearUserIcon(String hash)
+    {
+        if (mp_DataIcon != null)
+        {
+            mp_DataIcon.clear();
+        }
+        mp_DataIcon.remove(hash);
+    }
+
+    public static javax.swing.Icon getDataIcon(String hash, int size)
     {
         if (!Char.isValidateHash(hash))
         {
@@ -319,7 +336,7 @@ public class Bean
         }
         if (!mp_DataIcon.containsKey(hash))
         {
-            mp_DataIcon.put(hash, new javax.swing.ImageIcon(Char.format("{0}/{1}/{2}.png", ConsEnv.DIR_DAT, ConsEnv.DIR_ICO, hash)));
+            mp_DataIcon.put(hash, new javax.swing.ImageIcon(Char.format("{0}/{1}/{2}_" + size + ".png", ConsEnv.DIR_DAT, ConsEnv.DIR_ICO, hash)));
         }
         return mp_DataIcon.get(hash);
     }
