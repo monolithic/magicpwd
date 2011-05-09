@@ -113,6 +113,10 @@ public interface ConsCfg
      */
     String CFG_VIEW_LIST_ASC = CFG_VIEW_LIST + ".asc";
     /**
+     * 界面配置：口令列表界面布局方式
+     */
+    String CFG_VIEW_LIST_LAY = CFG_VIEW_LIST + ".lay";
+    /**
      * 过期提示
      */
     String CFG_HINT = CFG_PRE + ".hint";

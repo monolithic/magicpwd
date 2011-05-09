@@ -68,6 +68,11 @@ public class ListMdl extends DefaultListModel
         return mkeyList != null ? mkeyList.size() : 0;
     }
 
+    public void reLayout()
+    {
+        this.fireContentsChanged(this, 0, mkeyList.size());
+    }
+
     public void listHint(java.util.List<Hint> hintList)
     {
         int c = mkeyList.size();
@@ -90,6 +95,8 @@ public class ListMdl extends DefaultListModel
 
     public boolean listKeysByKind(String typeHash)
     {
+        Bean.clearUserIcon();
+
         int s = mkeyList.size();
         mkeyList.clear();
         fireIntervalRemoved(this, 0, s);
@@ -125,7 +132,6 @@ public class ListMdl extends DefaultListModel
             {
                 keys.setP30F0109(name);
                 keys.setP30F010B(icon);
-                keys.setKeysIcon(Bean.getDataIcon(icon));
                 fireContentsChanged(this, i, i);
                 return true;
             }

@@ -136,7 +136,6 @@ public interface ConsEnv
     String PROP_INFO = "130F_INFO";
     String PROP_JAVA = "130F_JAVA";
     String PROP_KIND = "130F_KIND";
-    String PROP_TPLT = "130F_TPLT";
     String PROP_USET = "130F_USET";
     String PROP_SKEY = "130F_SKEY";
     int MWIZ_ROWS_MAX = 6;

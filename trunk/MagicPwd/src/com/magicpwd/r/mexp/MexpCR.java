@@ -17,7 +17,6 @@
 package com.magicpwd.r.mexp;
 
 import com.magicpwd._cons.ConsEnv;
-import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JTable;
 
@@ -28,20 +27,29 @@ import javax.swing.JTable;
 public class MexpCR extends javax.swing.table.DefaultTableCellRenderer
 {
 
+    private java.awt.Color rowColor;
+    private java.awt.Color colColor;
+
     public MexpCR()
     {
+        rowColor = new java.awt.Color(240, 240, 240);
+        colColor = new java.awt.Color(224, 224, 224);
     }
 
     @Override
     public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
     {
-        if (row < ConsEnv.PWDS_HEAD_SIZE)
+        if (column == 0)
         {
-            this.setBackground(Color.red);
+            this.setBackground(colColor);
         }
-        else if (column == 0)
+        else if (row < ConsEnv.PWDS_HEAD_SIZE)
         {
-            this.setBackground(Color.cyan);
+            this.setBackground(rowColor);
+        }
+        else
+        {
+            this.setBackground(java.awt.Color.white);
         }
 
         return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);

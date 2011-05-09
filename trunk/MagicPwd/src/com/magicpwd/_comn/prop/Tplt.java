@@ -23,10 +23,11 @@ package com.magicpwd._comn.prop;
 public class Tplt
 {
 
+    private boolean tpltType;
     /**排序依据*/
     private int P30F1101;
     /**属性类别*/
-    private int P30F1102 = -1;
+    private int P30F1102;
     /**属性索引*/
     private String P30F1103;
     /**类别索引*/
@@ -37,6 +38,20 @@ public class Tplt
     private String P30F1106;
     /**属性说明*/
     private String P30F1107;
+
+    public Tplt()
+    {
+    }
+
+    public Tplt(boolean isType)
+    {
+        this.tpltType = isType;
+    }
+
+    public boolean isType()
+    {
+        return tpltType;
+    }
 
     public void addP30F1101(int step)
     {

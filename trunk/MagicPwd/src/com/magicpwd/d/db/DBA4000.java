@@ -23,6 +23,8 @@ import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._comn.S1S3;
 import com.magicpwd.__a.AEditItem;
+import com.magicpwd._comn.I1S2;
+import com.magicpwd._comn.S1S1;
 import com.magicpwd._comn.mpwd.Mexp;
 import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._comn.mpwd.Hint;
@@ -280,7 +282,6 @@ public class DBA4000
             item.setP30F0109(rest.getString(DBC4000.P30F0109));
             item.setP30F010A(rest.getString(DBC4000.P30F010A));
             item.setP30F010B(rest.getString(DBC4000.P30F010B));
-            item.setKeysIcon(Bean.getDataIcon(item.getP30F010B()));
             item.setP30F010C(rest.getString(DBC4000.P30F010C));
             item.setP30F010D(rest.getString(DBC4000.P30F010D));
             item.setP30F010E(rest.getString(DBC4000.P30F010E));
@@ -967,7 +968,6 @@ public class DBA4000
             keys.setP30F0109(rest.getString(DBC4000.P30F0109));
             keys.setP30F010A(rest.getString(DBC4000.P30F010A));
             keys.setP30F010B(rest.getString(DBC4000.P30F010B));
-            keys.setKeysIcon(Bean.getDataIcon(keys.getP30F010B()));
             keys.setP30F010C(rest.getString(DBC4000.P30F010C));
             keys.setP30F010D(rest.getString(DBC4000.P30F010D));
             keys.setP30F010E(rest.getString(DBC4000.P30F010E));
@@ -1467,6 +1467,57 @@ public class DBA4000
         {
             dba.dispose();
         }
+    }
+
+    public static void saveListData(java.util.List<S1S2> list)
+    {
+    }
+
+    /**
+     * 读取列表属性的备选信息
+     * @param hash
+     * @return
+     */
+    public static List<I1S2> selectListData(String hash)
+    {
+        java.util.List<I1S2> list = new java.util.ArrayList<I1S2>();
+
+        DBAccess dba = new DBAccess();
+
+        try
+        {
+            dba.init();
+
+            dba.addTable(DBC4000.P30F1200);
+            dba.addColumn(DBC4000.P30F1201);
+            dba.addColumn(DBC4000.P30F1202);
+            dba.addColumn(DBC4000.P30F1204);
+            dba.addWhere(DBC4000.P30F1203, hash);
+            dba.addSort(DBC4000.P30F1201, true);
+
+            ResultSet rest = dba.executeSelect();
+            I1S2 item;
+            while (rest.next())
+            {
+                item = new I1S2();
+                item.setK(rest.getInt(DBC4000.P30F1201));
+                item.setV(rest.getString(DBC4000.P30F1202));
+                item.setV2(rest.getString(DBC4000.P30F1204));
+
+                list.add(item);
+            }
+
+            rest.close();
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+        finally
+        {
+            dba.dispose();
+        }
+        return list;
     }
 
     public static List<Tplt> selectTpltData(String hash)
@@ -2001,7 +2052,6 @@ public class DBA4000
             keys.setP30F0109(rest.getString(DBC4000.P30F0A09));
             keys.setP30F010A(rest.getString(DBC4000.P30F0A0A));
             keys.setP30F010B(rest.getString(DBC4000.P30F0A0B));
-            keys.setKeysIcon(Bean.getDataIcon(keys.getP30F010B()));
             keys.setP30F010C(rest.getString(DBC4000.P30F0A0C));
             keys.setP30F010D(rest.getString(DBC4000.P30F0A0D));
             keys.setP30F010E(rest.getString(DBC4000.P30F0A0E));

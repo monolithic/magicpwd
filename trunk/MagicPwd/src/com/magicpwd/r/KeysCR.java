@@ -28,6 +28,7 @@ public class KeysCR extends javax.swing.JPanel implements javax.swing.ListCellRe
 {
 
     private MexpPtn mainPtn;
+    private int style;
 
     public KeysCR(MexpPtn mainPtn)
     {
@@ -39,8 +40,26 @@ public class KeysCR extends javax.swing.JPanel implements javax.swing.ListCellRe
         lb_Label = new javax.swing.JLabel();
         lb_Other = new javax.swing.JLabel();
 
-//        style1();
-        style2();
+        setStyle(style);
+    }
+
+    public final void setStyle(int style)
+    {
+        if (24 == style)
+        {
+            style2();
+        }
+        else
+        {
+            style1();
+            style = 16;
+        }
+        this.style = style;
+    }
+
+    public int getStyle()
+    {
+        return style;
     }
 
     private void style1()
@@ -135,7 +154,7 @@ public class KeysCR extends javax.swing.JPanel implements javax.swing.ListCellRe
             Mkey keys = (Mkey) value;
             lb_Text.setText(keys.getP30F0109());
             setToolTipText(com.magicpwd._util.Char.isValidate(keys.getP30F010A()) ? keys.getP30F010A() : keys.getP30F0109());
-            lb_Icon.setIcon(keys.getKeysIcon());
+            lb_Icon.setIcon(Bean.getDataIcon(keys.getP30F010B(), style));
             lb_Major.setIcon(mainPtn.getFavIcon("keys-major" + (keys.getP30F0103() > 0 ? "+" : "") + keys.getP30F0103()));
             lb_Label.setIcon(mainPtn.getFavIcon("keys-label" + keys.getP30F0102()));
         }

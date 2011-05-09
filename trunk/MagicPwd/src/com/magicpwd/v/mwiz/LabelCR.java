@@ -66,7 +66,7 @@ public class LabelCR extends javax.swing.JPanel implements javax.swing.table.Tab
         if (value instanceof S1S2)
         {
             S1S2 item = (S1S2) value;
-            title.setIcon(Bean.getDataIcon(item.getK()));
+            title.setIcon(Bean.getDataIcon(item.getK(), 16));
             title.setText(item.getV());
             setToolTipText(item.getV2());
         }
