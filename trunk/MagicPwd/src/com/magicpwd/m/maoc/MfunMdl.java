@@ -18,6 +18,7 @@ package com.magicpwd.m.maoc;
 
 import com.magicpwd._comn.mpwd.Mexp;
 import com.magicpwd.d.db.DBA4000;
+import com.magicpwd.m.UserMdl;
 
 /**
  *
@@ -27,11 +28,11 @@ public class MfunMdl implements javax.swing.ListModel, java.io.Serializable
 {
 
     private java.util.List<Mexp> funList;
-    private MaocMdl maocMdl;
+    private UserMdl userMdl;
 
-    public MfunMdl(MaocMdl maocMdl)
+    public MfunMdl(UserMdl userMdl)
     {
-        this.maocMdl = maocMdl;
+        this.userMdl = userMdl;
         funList = new java.util.ArrayList<Mexp>();
     }
 
@@ -69,7 +70,7 @@ public class MfunMdl implements javax.swing.ListModel, java.io.Serializable
         int i = funList.size();
         mexp.setP30F0801(i);
         funList.add(mexp);
-        DBA4000.saveMexpData(mexp);
+        DBA4000.saveMexpData(userMdl, mexp);
         this.fireIntervalAdded(mexp, i, i);
     }
 
@@ -78,7 +79,7 @@ public class MfunMdl implements javax.swing.ListModel, java.io.Serializable
         if (rowIndex > -1 && rowIndex < funList.size())
         {
             Mexp mexp = funList.remove(rowIndex);
-            DBA4000.deleteMexpData(mexp);
+            DBA4000.deleteMexpData(userMdl, mexp);
             this.fireIntervalRemoved(mexp, rowIndex, rowIndex);
             return true;
         }
@@ -87,7 +88,7 @@ public class MfunMdl implements javax.swing.ListModel, java.io.Serializable
 
     public void updateItem(Mexp mexp)
     {
-        DBA4000.saveMexpData(mexp);
+        DBA4000.saveMexpData(userMdl, mexp);
         this.fireContentsChanged(mexp, 0, 0);
     }
 
@@ -95,7 +96,7 @@ public class MfunMdl implements javax.swing.ListModel, java.io.Serializable
     {
         if (mexp != null && funList.remove(mexp))
         {
-            DBA4000.deleteMexpData(mexp);
+            DBA4000.deleteMexpData(userMdl, mexp);
             this.fireIntervalRemoved(mexp, 0, funList.size());
         }
     }

@@ -16,7 +16,8 @@
  */
 package com.magicpwd.d.db;
 
-import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._cons.ConsCfg;
+import com.magicpwd._util.Char;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.magicpwd._util.Logs;
+import com.magicpwd.m.UserMdl;
 
 /**
  * @author Amon
@@ -35,6 +37,7 @@ public class DBAccess
 {
 
     public static boolean locked = false;
+    private static String dbPath;
 
     /**
      * 默认构造函数，事务默认自动提交
@@ -46,8 +49,20 @@ public class DBAccess
     /**
      * 在保持同一个连接的基础上，重新设置查寻SQL语句，以进行新的数据库操作
      */
-    public void init() throws SQLException
+    public void init(UserMdl userMdl) throws SQLException
     {
+        if (!Char.isValidate(dbPath))
+        {
+            StringBuilder buf = new StringBuilder();
+            buf.append("jdbc:hsqldb:file:").append(userMdl.getMpwdMdl().getDatPath()).append("amon");
+            String sc = userMdl.getCfg(ConsCfg.CFG_DB_SC, "");
+            String sk = userMdl.getCfg(ConsCfg.CFG_DB_SK, "");
+            if (Char.isValidate(sc) && Char.isValidate(sk))
+            {
+                buf.append(";crypt_type=").append(sc);
+                buf.append(";crypt_key=").append(sk);
+            }
+        }
         connect();
 
         // 参数列表
@@ -83,7 +98,7 @@ public class DBAccess
     {
         if (conn == null || conn.isClosed())
         {
-            conn = DriverManager.getConnection("jdbc:hsqldb:file:" + ConsEnv.DIR_DAT + "/amon");
+            conn = DriverManager.getConnection(dbPath);
         }
         if (stat == null || stat.isClosed())
         {

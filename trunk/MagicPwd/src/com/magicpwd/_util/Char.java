@@ -17,7 +17,6 @@
 package com.magicpwd._util;
 
 import com.magicpwd._cons.ConsEnv;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
@@ -393,5 +392,15 @@ public class Char
             i += 1;
         }
         return i;
+    }
+
+    public static String toHex(byte[] b)
+    {
+        StringBuilder buf = new StringBuilder();
+        for (byte t : b)
+        {
+            buf.append(t & 0xFF);
+        }
+        return buf.toString();
     }
 }

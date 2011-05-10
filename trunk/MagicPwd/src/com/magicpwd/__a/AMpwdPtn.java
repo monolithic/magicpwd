@@ -275,7 +275,7 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
 
     public String getCfgText(String key)
     {
-        String text = DBA4000.readConfig(key);
+        String text = DBA4000.readConfig(userMdl, key);
         if (com.magicpwd._util.Char.isValidate(text))
         {
             try
@@ -295,7 +295,7 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
     {
         try
         {
-            DBA4000.saveConfig(key, safeMdl.enCrypt(text));
+            DBA4000.saveConfig(userMdl, key, safeMdl.enCrypt(text));
         }
         catch (Exception exp)
         {

@@ -21,9 +21,12 @@ import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._enum.AuthLog;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.db.DBA4000;
+import com.magicpwd.m.UserMdl;
+import javax.crypto.KeyGenerator;
 
 /**
  *
@@ -90,7 +93,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
 
         btDatPath.setText("...");
 
-        cbFileKey.setText("使用密码文件");
+        cbSfKey.setText("使用密码文件");
 
         cbDbSec.setText("使用数据库加密");
     }
@@ -169,6 +172,16 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         });
 
         tfDatPath.setText('.' + java.io.File.separator + "dat" + java.io.File.separator);
+
+        cbDbSec.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                cbDbSecActionPerformed(e);
+            }
+        });
     }
 
     @Override
@@ -287,21 +300,11 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         pfUserPwd1.setText("");
         pfUserPwd2.setText("");
 
+        UserMdl userMdl = userPtn.getUserMdl();
+        boolean isOK = false;
         try
         {
-            boolean b = userPtn.getUserMdl().signUp(un, p1);
-            if (b)
-            {
-                userPtn.getUserMdl().setCfg(ConsCfg.CFG_USER_LAST, un);
-                userPtn.getUserMdl().getMpwdMdl().setDatPath(datDir);
-                DBA4000.initDataBase();
-            }
-            else
-            {
-                Lang.showMesg(this, LangRes.P30FAA06, "注册用户失败，请更换用户名及口令后重试！");
-                tfUserName.requestFocus();
-                return;
-            }
+            isOK = userMdl.signUp(un, p1);
         }
         catch (Exception exp)
         {
@@ -310,6 +313,40 @@ public class SignUp extends javax.swing.JPanel implements IUserView
             System.exit(0);
             return;
         }
+
+        if (!isOK)
+        {
+            Lang.showMesg(this, LangRes.P30FAA06, "注册用户失败，请更换用户名及口令后重试！");
+            tfUserName.requestFocus();
+            return;
+        }
+
+        if (cbDbSec.isSelected())
+        {
+            String cipher = "AES";
+            String key = null;
+            try
+            {
+                KeyGenerator kg = KeyGenerator.getInstance(cipher);
+                key = Char.toHex(kg.generateKey().getEncoded());
+            }
+            catch (Exception exp)
+            {
+                Lang.showMesg(this, null, exp.getLocalizedMessage());
+            }
+
+            if (!Char.isValidate(key))
+            {
+                Lang.showMesg(this, null, "尝试使用数据库加密失败，软件将以默认方式运行！");
+            }
+
+            userMdl.setCfg(ConsCfg.CFG_DB_SC, cipher);
+            userMdl.setCfg(ConsCfg.CFG_DB_SK, key);
+        }
+
+        userMdl.getMpwdMdl().setDatPath(datDir);
+        userMdl.setCfg(ConsCfg.CFG_USER_LAST, un);
+        DBA4000.initDataBase(userMdl);
 
         if (userPtn.callBack(AuthLog.signUp, null))
         {
@@ -379,7 +416,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         lbDatPath = new javax.swing.JLabel();
         tfDatPath = new javax.swing.JTextField();
         btDatPath = new BtnLabel();
-        cbFileKey = new javax.swing.JCheckBox();
+        cbSfKey = new javax.swing.JCheckBox();
         cbDbSec = new javax.swing.JCheckBox();
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(plUserOpts);
@@ -390,7 +427,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         hsg1.addComponent(btDatPath, 21, 21, 21);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg1.addComponent(cbDbSec);
-        hpg1.addComponent(cbFileKey);
+        hpg1.addComponent(cbSfKey);
         hpg1.addGroup(hsg1);
         javax.swing.GroupLayout.SequentialGroup hsg2 = layout.createSequentialGroup();
 //        hsg2.addContainerGap();
@@ -413,7 +450,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg1.addGroup(vpg1);
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        vsg1.addComponent(cbFileKey);
+        vsg1.addComponent(cbSfKey);
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg1.addComponent(cbDbSec);
 //        vsg1.addContainerGap();
@@ -424,6 +461,14 @@ public class SignUp extends javax.swing.JPanel implements IUserView
     {
         plUserOpts.setVisible(!plUserOpts.isVisible());
         userPtn.pack();
+    }
+
+    private void cbDbSecActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        if (cbDbSec.isSelected())
+        {
+            Lang.showMesg(userPtn, null, "使用数据库加密在一定程度上能够增强您的数据安全性，\n但当文件比较大时软件运行速度会稍慢，请谨慎使用！");
+        }
     }
     private javax.swing.JLabel lbUserName;
     private javax.swing.JTextField tfUserName;
@@ -437,7 +482,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
     //=============================
     private BtnLabel btDatPath;
     private javax.swing.JCheckBox cbDbSec;
-    private javax.swing.JCheckBox cbFileKey;
+    private javax.swing.JCheckBox cbSfKey;
     private javax.swing.JLabel lbDatPath;
     private javax.swing.JTextField tfDatPath;
     private javax.swing.JSeparator spSepLine;

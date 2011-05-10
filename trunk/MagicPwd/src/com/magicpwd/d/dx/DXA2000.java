@@ -16,7 +16,7 @@
  */
 package com.magicpwd.d.dx;
 
-import com.magicpwd.d.db.DBA3000;
+import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd.__a.AEditItem;
@@ -46,7 +46,7 @@ public class DXA2000 extends DXA
         java.io.BufferedReader reader = null;
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             reader = new java.io.BufferedReader(new java.io.FileReader(file));
 
@@ -86,7 +86,7 @@ public class DXA2000 extends DXA
                 tempKeys.setP30F0105(userMdl.getCode());
                 itemList.get(0).setData(kindHash);
                 safeMdl.enCrypt(tempKeys, itemList);
-                DBA3000.savePwdsData(dba, tempKeys);
+                DBA4000.savePwdsData(dba, tempKeys);
 
                 cnt += 1;
                 tempKeys.setDefault();
@@ -116,7 +116,7 @@ public class DXA2000 extends DXA
         int cnt = 0;
 
         java.util.ArrayList<Mkey> dataList = new java.util.ArrayList<Mkey>();
-        DBA3000.readKeysList(userMdl, kindHash, dataList);
+        DBA4000.readKeysList(userMdl, kindHash, dataList);
         if (dataList == null || dataList.size() < 1)
         {
             return cnt;
@@ -132,7 +132,7 @@ public class DXA2000 extends DXA
             for (Mkey keys : dataList)
             {
                 keys.setP30F0105(userMdl.getCode());
-                if (!DBA3000.readPwdsData(keys))
+                if (!DBA4000.readPwdsData(userMdl, keys))
                 {
                     continue;
                 }

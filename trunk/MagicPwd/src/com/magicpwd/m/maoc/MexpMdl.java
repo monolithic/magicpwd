@@ -17,6 +17,7 @@
 package com.magicpwd.m.maoc;
 
 import com.magicpwd._comn.D1S2;
+import com.magicpwd.m.UserMdl;
 import javax.swing.event.TableModelListener;
 
 /**
@@ -28,12 +29,12 @@ public class MexpMdl implements javax.swing.table.TableModel, java.io.Serializab
 
     private boolean multiable;
     private java.util.List<D1S2> expList;
-    private MaocMdl maocMdl;
+    private UserMdl userMdl;
     private javax.swing.event.EventListenerList listenerList;
 
-    public MexpMdl(MaocMdl maocMdl)
+    public MexpMdl(UserMdl userMdl)
     {
-        this.maocMdl = maocMdl;
+        this.userMdl = userMdl;
         expList = new java.util.ArrayList<D1S2>();
         listenerList = new javax.swing.event.EventListenerList();
     }

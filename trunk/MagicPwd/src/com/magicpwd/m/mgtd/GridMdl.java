@@ -28,15 +28,17 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
 {
 
     private java.util.List<Mgtd> lsMgtdList;
+    private UserMdl userMdl;
 
     GridMdl(UserMdl userMdl)
     {
+        this.userMdl = userMdl;
     }
 
     void init()
     {
         lsMgtdList = new java.util.ArrayList<Mgtd>();
-        DBA4000.listMgtdData(lsMgtdList);
+        DBA4000.listMgtdData(userMdl, lsMgtdList);
     }
 
     @Override
@@ -181,7 +183,7 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
 
     public void wDelete(int index)
     {
-        if (DBA4000.deleteMgtdData(lsMgtdList.get(index)))
+        if (DBA4000.deleteMgtdData(userMdl, lsMgtdList.get(index)))
         {
             lsMgtdList.remove(index);
             fireTableDataChanged();
@@ -190,10 +192,10 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
 
     public void wAppend(Mgtd mgtd)
     {
-        if (DBA4000.saveMgtdData(mgtd))
+        if (DBA4000.saveMgtdData(userMdl, mgtd))
         {
             lsMgtdList.clear();
-            DBA4000.listMgtdData(lsMgtdList);
+            DBA4000.listMgtdData(userMdl, lsMgtdList);
             fireTableDataChanged();
         }
     }
@@ -201,7 +203,7 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
     public void wReload()
     {
         lsMgtdList.clear();
-        DBA4000.listMgtdData(lsMgtdList);
+        DBA4000.listMgtdData(userMdl, lsMgtdList);
         fireTableDataChanged();
     }
 }

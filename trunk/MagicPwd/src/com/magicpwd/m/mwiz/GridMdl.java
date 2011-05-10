@@ -225,7 +225,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
 
     public void wDelete(int index)
     {
-        DBA4000.deletePwdsData(ls_KeysList.get(index).getP30F0104());
+        DBA4000.deletePwdsData(userMdl, ls_KeysList.get(index).getP30F0104());
         ls_KeysList.remove(index);
         fireTableDataChanged();
     }

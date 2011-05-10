@@ -522,7 +522,7 @@ public final class UserMdl
     {
         if (tpltMdl == null)
         {
-            tpltMdl = new TpltMdl();
+            tpltMdl = new TpltMdl(this);
             tpltMdl.initData();
         }
         return tpltMdl;
@@ -535,7 +535,7 @@ public final class UserMdl
     {
         if (charMdl == null)
         {
-            charMdl = new CharMdl();
+            charMdl = new CharMdl(this);
             charMdl.initData();
         }
         return charMdl;

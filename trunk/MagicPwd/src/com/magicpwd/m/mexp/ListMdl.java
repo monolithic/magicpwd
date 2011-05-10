@@ -78,7 +78,7 @@ public class ListMdl extends DefaultListModel
         int c = mkeyList.size();
         mkeyList.clear();
 //        fireIntervalRemoved(this, 0, c);
-        DBA4000.findHintList(hintList, mkeyList);
+        DBA4000.findHintList(userMdl, hintList, mkeyList);
         c = mkeyList.size();
         fireIntervalAdded(this, 0, c);
     }
@@ -166,7 +166,7 @@ public class ListMdl extends DefaultListModel
     {
         if (index > -1 && index < mkeyList.size())
         {
-            DBA4000.deletePwdsData(mkeyList.get(index).getP30F0104());
+            DBA4000.deletePwdsData(userMdl, mkeyList.get(index).getP30F0104());
             mkeyList.remove(index);
             fireIntervalRemoved(this, 0, index);
         }
