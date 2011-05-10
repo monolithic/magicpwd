@@ -126,7 +126,7 @@ public final class HintMdl
         // 更新记录的状态
         if (updtList.size() > 0)
         {
-            DBA4000.updtMgtdStatus(updtList);
+            DBA4000.updtMgtdStatus(userMdl, updtList);
         }
 
         showHint();

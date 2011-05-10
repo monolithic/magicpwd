@@ -33,9 +33,11 @@ public final class CharMdl extends AbstractListModel
     private boolean charUpd;
     private List<Char> charSys;
     private List<Char> charUsr;
+    private UserMdl userMdl;
 
-    CharMdl()
+    CharMdl(UserMdl userMdl)
     {
+        this.userMdl = userMdl;
     }
 
     void initData()
@@ -91,7 +93,7 @@ public final class CharMdl extends AbstractListModel
         c.setP30F2106("!\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~");
         charSys.add(c);
 
-        charUsr = DBA4000.selectCharData();
+        charUsr = DBA4000.selectCharData(userMdl);
     }
 
     @Override
@@ -99,7 +101,7 @@ public final class CharMdl extends AbstractListModel
     {
         if (charUsr == null)
         {
-            charUsr = DBA4000.selectCharData();
+            charUsr = DBA4000.selectCharData(userMdl);
         }
         return (isWithSys() ? charSys.size() : 0) + charUsr.size();
     }
@@ -142,7 +144,7 @@ public final class CharMdl extends AbstractListModel
         int index = charUsr.size();
         data.setP30F2101(index);
         charUsr.add(data);
-        DBA4000.saveCharData(data);
+        DBA4000.saveCharData(userMdl, data);
         fireIntervalAdded(this, index, index);
 
         charUpd = true;
@@ -155,7 +157,7 @@ public final class CharMdl extends AbstractListModel
             index -= charSys.size();
         }
         charUsr.set(index, data);
-        DBA4000.saveCharData(data);
+        DBA4000.saveCharData(userMdl, data);
         fireContentsChanged(this, index, index);
 
         charUpd = true;
@@ -171,7 +173,7 @@ public final class CharMdl extends AbstractListModel
         {
             return;
         }
-        DBA4000.deleteCharData(charUsr.get(index));
+        DBA4000.deleteCharData(userMdl, charUsr.get(index));
         charUsr.remove(index);
         fireIntervalRemoved(this, index, index);
 
@@ -201,9 +203,9 @@ public final class CharMdl extends AbstractListModel
         }
         Char dst = charUsr.get(toward);
         dst.setP30F2101(index);
-        DBA4000.saveCharData(dst);
+        DBA4000.saveCharData(userMdl, dst);
         src.setP30F2101(toward);
-        DBA4000.saveCharData(src);
+        DBA4000.saveCharData(userMdl, src);
         charUsr.set(index, dst);
         charUsr.set(toward, src);
 

@@ -45,7 +45,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
 
     private WEditBox dataEdit;
     private IEditItem itemData;
-    private MexpPtn mainPtn;
+    private MexpPtn mexpPtn;
     private WTextBox dataBox;
     private int mgtdType;
     private int mgtdData;
@@ -53,15 +53,15 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
     private java.util.Calendar mgtdCal;
     private java.text.DateFormat format;
 
-    public HintBean(MexpPtn mainPtn)
+    public HintBean(MexpPtn mexpPtn)
     {
-        this.mainPtn = mainPtn;
+        this.mexpPtn = mexpPtn;
     }
 
     @Override
     public void initView()
     {
-        dataEdit = new WEditBox(mainPtn, this, false);
+        dataEdit = new WEditBox(mexpPtn, this, false);
         dataEdit.initView();
         dataEdit.setCopyButtonVisible(false);
         dataEdit.setDropButtonVisible(false);
@@ -171,7 +171,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
         };
         miHalfHour.addActionListener(action);
         miFullHour.addActionListener(action);
-        mainPtn.getMenuPtn().getSubMenu("date-remind", pmDateView, action);
+        mexpPtn.getMenuPtn().getSubMenu("date-remind", pmDateView, action);
         if (initMgtdMenu())
         {
             pmDateView.addSeparator();
@@ -226,7 +226,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
 
         itemData.setName(taPropData.getText());
 
-        mainPtn.updateSelectedItem();
+        mexpPtn.updateSelectedItem();
     }
 
     @Override
@@ -241,7 +241,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
 
     private boolean initMgtdMenu()
     {
-        java.util.List<Mgtd> mgtdList = DBA4000.readMgtdList();
+        java.util.List<Mgtd> mgtdList = DBA4000.readMgtdList(mexpPtn.getUserMdl());
         java.awt.event.ActionListener al = new java.awt.event.ActionListener()
         {
 
@@ -251,7 +251,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
                 miDateTimeActionPerformed(e);
             }
         };
-        MenuPtn menuPtn = mainPtn.getMenuPtn();
+        MenuPtn menuPtn = mexpPtn.getMenuPtn();
         boolean tmp = false;
         int idx = 0;
         int max = mgtdList.size();
@@ -397,10 +397,10 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
         miHalfHour.setActionCommand("fix:" + format.format(d1));
         Bean.setText(miFullHour, t2);
         miFullHour.setActionCommand("fix:" + format.format(d2));
-        if (mainPtn.getUserMdl().isGtdTemplateUpdated())
+        if (mexpPtn.getUserMdl().isGtdTemplateUpdated())
         {
             initMgtdMenu();
-            mainPtn.getUserMdl().setGtdTemplateUpdated(false);
+            mexpPtn.getUserMdl().setGtdTemplateUpdated(false);
         }
         pmDateView.show(blPropName, 0, blPropName.getHeight());
     }
@@ -544,13 +544,13 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
 
     private void miEditMgtdActionPerformed(java.awt.event.ActionEvent e)
     {
-        Mgtd mgtd = DBA4000.readMgtdData(itemData.getData());
+        Mgtd mgtd = DBA4000.readMgtdData(mexpPtn.getUserMdl(), itemData.getData());
         if (mgtd == null)
         {
             return;
         }
 
-        MgtdDlg mgtdDlg = new MgtdDlg(mainPtn, true);
+        MgtdDlg mgtdDlg = new MgtdDlg(mexpPtn, true);
         mgtdDlg.setBackCall(null);
         mgtdDlg.initView();
         mgtdDlg.initLang();
@@ -605,7 +605,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
         list.add(hint);
         mgtd.setHintList(list);
 
-        if (DBA4000.saveMgtdData(mgtd))
+        if (DBA4000.saveMgtdData(mexpPtn.getUserMdl(), mgtd))
         {
             return mgtd.getP30F0309();
         }

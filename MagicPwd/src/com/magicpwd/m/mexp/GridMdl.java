@@ -323,7 +323,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     {
         boolean b = keys.getP30F0106().equals(hash);
         keys.setP30F0106(hash);
-        DBA4000.saveKeysData(keys);
+        DBA4000.saveKeysData(userMdl, keys);
         return !b;
     }
 

@@ -26,6 +26,19 @@ public interface ConsCfg
      * 配置数据：区分前缀
      */
     String CFG_PRE = "{0}";
+    String CFG_DB = CFG_PRE + ".db";
+    /**
+     * 数据库安全：安全口令
+     */
+    String CFG_DB_SK = CFG_DB + ".sk";
+    /**
+     * 数据库安全：安全算法
+     */
+    String CFG_DB_SC = CFG_DB + ".sc";
+    /**
+     * 数据库安全：提供商
+     */
+    String CFG_DB_SP = CFG_DB + ".sp";
     /**
      * 用户信息：注册用户代码列表，以英文逗号分隔
      */

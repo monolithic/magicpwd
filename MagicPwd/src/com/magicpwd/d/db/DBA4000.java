@@ -24,7 +24,6 @@ import com.magicpwd._comn.S1S2;
 import com.magicpwd._comn.S1S3;
 import com.magicpwd.__a.AEditItem;
 import com.magicpwd._comn.I1S2;
-import com.magicpwd._comn.S1S1;
 import com.magicpwd._comn.mpwd.Mexp;
 import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._comn.mpwd.Hint;
@@ -55,14 +54,14 @@ import java.util.regex.Pattern;
 public class DBA4000
 {
 
-    public static String readConfig(String key)
+    public static String readConfig(UserMdl userMdl, String key)
     {
         DBAccess dba = new DBAccess();
 
         String result = null;
         try
         {
-            dba.init();
+            dba.init(userMdl);
             dba.addTable(DBC4000.P30F0000);
             dba.addColumn(DBC4000.P30F0002);
             dba.addWhere(DBC4000.P30F0001, Util.text2DB(key));
@@ -86,13 +85,13 @@ public class DBA4000
         return result;
     }
 
-    public static void updtMgtdStatus(java.util.Map<String, Integer> mgtdList)
+    public static void updtMgtdStatus(UserMdl userMdl, java.util.Map<String, Integer> mgtdList)
     {
         DBAccess dba = new DBAccess();
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             for (String key : mgtdList.keySet())
             {
@@ -115,7 +114,7 @@ public class DBA4000
         }
     }
 
-    public static boolean initDataBase()
+    public static boolean initDataBase(UserMdl userMdl)
     {
         DBAccess dba = new DBAccess();
         java.io.InputStream stream = null;
@@ -123,7 +122,7 @@ public class DBA4000
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             stream = MagicPwd.class.getResourceAsStream("/res/sql/ddl.sql");
             if (stream == null)
@@ -184,7 +183,7 @@ public class DBA4000
         return true;
     }
 
-    public static boolean saveConfig(String key, String value)
+    public static boolean saveConfig(UserMdl userMdl, String key, String value)
     {
         key = Util.text2DB(key);
         if (!com.magicpwd._util.Char.isValidate(key, 1, DBC4000.P30F0001_SIZE))
@@ -197,7 +196,7 @@ public class DBA4000
         boolean isOK = false;
         try
         {
-            dba.init();
+            dba.init(userMdl);
             dba.addTable(DBC4000.P30F0000);
             dba.addWhere(DBC4000.P30F0001, key);
 
@@ -297,20 +296,20 @@ public class DBA4000
      * @param list
      * @return
      */
-    public static boolean readKeysList(UserMdl cfg, String kindHash, List<Mkey> list)
+    public static boolean readKeysList(UserMdl userMdl, String kindHash, List<Mkey> list)
     {
         // 数据库连接初始化
         DBAccess dba = new DBAccess();
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             // 查询语句拼接
             dba.addTable(DBC4000.P30F0100);
             dba.addWhere(DBC4000.P30F0106, kindHash);
-            addUserSort(dba, cfg);
-            addDataSort(dba, cfg);
+            addUserSort(dba, userMdl);
+            addDataSort(dba, userMdl);
 
             getNameData(dba.executeSelect(), list);
             return true;
@@ -338,7 +337,7 @@ public class DBA4000
      * @param list
      * @return
      */
-    public static boolean findUserData(UserMdl cfg, String text, List<Mkey> list)
+    public static boolean findUserData(UserMdl userMdl, String text, List<Mkey> list)
     {
         if (!com.magicpwd._util.Char.isValidate(text))
         {
@@ -350,13 +349,13 @@ public class DBA4000
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             // 查询语句拼接
             dba.addTable(DBC4000.P30F0100);
             dba.addWhere(com.magicpwd._util.Char.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC4000.P30F0109, DBC4000.P30F010A, text2Query(text)));
-            addUserSort(dba, cfg);
-            addDataSort(dba, cfg);
+            addUserSort(dba, userMdl);
+            addDataSort(dba, userMdl);
 
             getNameData(dba.executeSelect(), list);
             return true;
@@ -372,13 +371,13 @@ public class DBA4000
         }
     }
 
-    public static boolean findUnitList(UserMdl cfg, List<S1S2> list)
+    public static boolean findUnitList(UserMdl userMdl, List<S1S2> list)
     {
         DBAccess dba = new DBAccess();
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             StringBuilder buf = new StringBuilder();
             buf.append("SELECT ");
@@ -392,8 +391,8 @@ public class DBA4000
             dba.addColumn(DBC4000.P30F0109);
             dba.addColumn(DBC4000.P30F010A);
             dba.addWhere(DBC4000.P30F0106 + " IN (" + buf.toString() + ')');
-            addUserSort(dba, cfg);
-            addDataSort(dba, cfg);
+            addUserSort(dba, userMdl);
+            addDataSort(dba, userMdl);
 
             ResultSet rest = dba.executeSelect();
             S1S2 item;
@@ -415,7 +414,7 @@ public class DBA4000
         }
     }
 
-    public static boolean findHintList(java.util.List<Hint> hintList, java.util.List<Mkey> mkeyList)
+    public static boolean findHintList(UserMdl userMdl, java.util.List<Hint> hintList, java.util.List<Mkey> mkeyList)
     {
         if (hintList == null || hintList.size() < 1)
         {
@@ -426,7 +425,7 @@ public class DBA4000
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             StringBuilder buf = new StringBuilder();
             for (Hint hint : hintList)
@@ -458,13 +457,13 @@ public class DBA4000
      * @param list
      * @return
      */
-    public static boolean findHintList(UserMdl cfg, java.sql.Timestamp s, java.sql.Timestamp t, List<Mgtd> list)
+    public static boolean findHintList(UserMdl userMdl, java.sql.Timestamp s, java.sql.Timestamp t, List<Mgtd> list)
     {
         DBAccess dba = new DBAccess();
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             long now = System.currentTimeMillis();
 
@@ -499,7 +498,7 @@ public class DBA4000
         }
     }
 
-    public static Mgtd readMgtdData(String mgtdHash)
+    public static Mgtd readMgtdData(UserMdl userMdl, String mgtdHash)
     {
         Mgtd mgtd = null;
 
@@ -507,7 +506,7 @@ public class DBA4000
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             dba.addTable(DBC4000.P30F0300);
 //            dba.addWhere(DBC4000.P30F0307, "1");
@@ -557,7 +556,7 @@ public class DBA4000
         }
     }
 
-    public static java.util.ArrayList<Mgtd> readMgtdList()
+    public static java.util.ArrayList<Mgtd> readMgtdList(UserMdl userMdl)
     {
         java.util.ArrayList<Mgtd> mgtdList = new java.util.ArrayList<Mgtd>();
 
@@ -565,7 +564,7 @@ public class DBA4000
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             dba.addTable(DBC4000.P30F0300);
             dba.addWhere(DBC4000.P30F0307, "1");
@@ -591,7 +590,7 @@ public class DBA4000
         }
     }
 
-    public static java.util.List<Hint> readHintList(String mgtdHash)
+    public static java.util.List<Hint> readHintList(UserMdl userMdl, String mgtdHash)
     {
         java.util.ArrayList<Hint> list = new java.util.ArrayList<Hint>();
 
@@ -599,7 +598,7 @@ public class DBA4000
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             dba.addTable(DBC4000.P30F0400);
             dba.addColumn(DBC4000.P30F0403);
@@ -634,13 +633,13 @@ public class DBA4000
         }
     }
 
-    public static boolean findHintList(UserMdl cfg, List<Hint> list)
+    public static boolean findHintList(UserMdl userMdl, List<Hint> list)
     {
         DBAccess dba = new DBAccess();
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             String now = Long.toString(System.currentTimeMillis(), 10);
 
@@ -691,7 +690,7 @@ public class DBA4000
         }
     }
 
-    public static boolean deleteMgtdData(Mgtd mgtd)
+    public static boolean deleteMgtdData(UserMdl userMdl, Mgtd mgtd)
     {
         if (mgtd == null || !com.magicpwd._util.Char.isValidateHash(mgtd.getP30F0309()))
         {
@@ -701,7 +700,7 @@ public class DBA4000
         DBAccess dba = new DBAccess();
         try
         {
-            dba.init();
+            dba.init(userMdl);
             dba.addTable(DBC4000.P30F0400);
             dba.addWhere(DBC4000.P30F0402, mgtd.getP30F0309());
             dba.addDeleteBatch();
@@ -752,13 +751,13 @@ public class DBA4000
         return mgtd;
     }
 
-    public static boolean listMgtdData(java.util.List<Mgtd> mgtdList)
+    public static boolean listMgtdData(UserMdl userMdl, java.util.List<Mgtd> mgtdList)
     {
         DBAccess dba = new DBAccess();
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             dba.addTable(DBC4000.P30F0300);
 //            dba.addParam(DBC4000.P30F0702, ConsDat.MGTD_STATUS_INIT);
@@ -782,13 +781,13 @@ public class DBA4000
         }
     }
 
-    public static boolean saveHintTime(Mgtd mgtd)
+    public static boolean saveHintTime(UserMdl userMdl, Mgtd mgtd)
     {
         DBAccess dba = new DBAccess();
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             dba.addTable(DBC4000.P30F0300);
             dba.addParam(DBC4000.P30F030F, mgtd.getP30F030F());
@@ -806,13 +805,13 @@ public class DBA4000
         }
     }
 
-    public static boolean saveMgtdData(Mgtd mgtd)
+    public static boolean saveMgtdData(UserMdl userMdl, Mgtd mgtd)
     {
         DBAccess dba = new DBAccess();
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             dba.addTable(DBC4000.P30F0300);
             dba.addParam(DBC4000.P30F0301, mgtd.getP30F0301());
@@ -879,7 +878,7 @@ public class DBA4000
         }
     }
 
-    public static boolean findUserNote(UserMdl cfg, String text, java.util.List<S1S2> list)
+    public static boolean findUserNote(UserMdl userMdl, String text, java.util.List<S1S2> list)
     {
         if (!com.magicpwd._util.Char.isValidate(text))
         {
@@ -891,14 +890,14 @@ public class DBA4000
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             // 查询语句拼接
             dba.addTable(DBC4000.P30F0100);
             dba.addColumn(DBC4000.P30F0104);
             dba.addColumn(DBC4000.P30F0109);
             dba.addColumn(DBC4000.P30F010A);
-            dba.addWhere(DBC4000.P30F0105, cfg.getCode());
+            dba.addWhere(DBC4000.P30F0105, userMdl.getCode());
             dba.addWhere(com.magicpwd._util.Char.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC4000.P30F0109, DBC4000.P30F010A, text2Query(text)));
             //dba.addWhere(DBC4000.P30F0102, ConsDat.PWDS_MODE_1);
             dba.addWhere(DBC4000.P30F0106, ConsDat.HASH_NOTE);
@@ -922,14 +921,14 @@ public class DBA4000
         }
     }
 
-    public static boolean readPwdsData(Mkey keys)
+    public static boolean readPwdsData(UserMdl userMdl, Mkey keys)
     {
         // 数据库连接初始化
         DBAccess dba = new DBAccess();
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             // 查询语句拼接
             dba.addTable(DBC4000.P30F0100);
@@ -999,14 +998,14 @@ public class DBA4000
         }
     }
 
-    public static boolean saveKeysData(Mkey keys)
+    public static boolean saveKeysData(UserMdl userMdl, Mkey keys)
     {
         // 数据库连接初始化
         DBAccess dba = new DBAccess();
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
             updateKeys(dba, keys);
             dba.executeBatch();
             return true;
@@ -1022,14 +1021,14 @@ public class DBA4000
         }
     }
 
-    public static boolean savePwdsData(Mkey keys)
+    public static boolean savePwdsData(UserMdl userMdl, Mkey keys)
     {
         // 数据库连接初始化
         DBAccess dba = new DBAccess();
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
             savePwdsData(dba, keys);
             return true;
         }
@@ -1061,13 +1060,13 @@ public class DBA4000
         dba.executeBatch();
     }
 
-    public static boolean deletePwdsData(String hash)
+    public static boolean deletePwdsData(UserMdl userMdl, String hash)
     {
         DBAccess dba = new DBAccess();
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             String DELETE = "DELETE FROM {0} WHERE {1}='{2}'";
             // 删除信息数据
@@ -1239,13 +1238,13 @@ public class DBA4000
         dba.reInit();
     }
 
-    public static boolean deleteKindData(String root, Kind item, int step)
+    public static boolean deleteKindData(UserMdl userMdl, String root, Kind item, int step)
     {
         DBAccess dba = new DBAccess();
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             dba.addTable(DBC4000.C2010200);
             dba.addParam(DBC4000.C2010204, root);
@@ -1273,13 +1272,13 @@ public class DBA4000
         }
     }
 
-    public static boolean updateKindData(Kind item)
+    public static boolean updateKindData(UserMdl userMdl, Kind item)
     {
         DBAccess dba = new DBAccess();
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             dba.addTable(DBC4000.C2010200);
             dba.addParam(DBC4000.C2010201, item.getC2010201());
@@ -1315,7 +1314,7 @@ public class DBA4000
         }
     }
 
-    public static List<S1S3> selectKindData()
+    public static List<S1S3> selectKindData(UserMdl userMdl)
     {
         List<S1S3> list = new ArrayList<S1S3>();
 
@@ -1323,7 +1322,7 @@ public class DBA4000
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             dba.addTable(DBC4000.C2010200);
             dba.addColumn(DBC4000.C2010203);// 类别索引
@@ -1356,7 +1355,7 @@ public class DBA4000
         return list;
     }
 
-    public static List<Kind> selectKindData(String typeHash)
+    public static List<Kind> selectKindData(UserMdl userMdl, String typeHash)
     {
         List<Kind> list = new ArrayList<Kind>();
 
@@ -1364,7 +1363,7 @@ public class DBA4000
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             dba.addTable(DBC4000.C2010200);
             dba.addColumn(DBC4000.C2010201);
@@ -1406,14 +1405,14 @@ public class DBA4000
         return list;
     }
 
-    public static boolean insertTpltKind(S1S2 kindItem, String kindDesp)
+    public static boolean insertTpltKind(UserMdl userMdl, S1S2 kindItem, String kindDesp)
     {
         DBAccess dba = new DBAccess();
 
         kindItem.setK(Hash.hash(false));
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             dba.addTable(DBC4000.P30F1100);
             dba.addParam(DBC4000.P30F1101, "0", false);
@@ -1440,13 +1439,13 @@ public class DBA4000
         }
     }
 
-    public static boolean updateTpltKind(S1S2 kindItem, String kindDesp)
+    public static boolean updateTpltKind(UserMdl userMdl, S1S2 kindItem, String kindDesp)
     {
         DBAccess dba = new DBAccess();
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             dba.addTable(DBC4000.P30F1100);
             dba.addParam(DBC4000.P30F1105, Util.text2DB(kindItem.getV()));
@@ -1478,7 +1477,7 @@ public class DBA4000
      * @param hash
      * @return
      */
-    public static List<I1S2> selectListData(String hash)
+    public static List<I1S2> selectListData(UserMdl userMdl, String hash)
     {
         java.util.List<I1S2> list = new java.util.ArrayList<I1S2>();
 
@@ -1486,7 +1485,7 @@ public class DBA4000
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             dba.addTable(DBC4000.P30F1200);
             dba.addColumn(DBC4000.P30F1201);
@@ -1520,7 +1519,7 @@ public class DBA4000
         return list;
     }
 
-    public static List<Tplt> selectTpltData(String hash)
+    public static List<Tplt> selectTpltData(UserMdl userMdl, String hash)
     {
         List<Tplt> kindList = new ArrayList<Tplt>();
 
@@ -1528,7 +1527,7 @@ public class DBA4000
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             dba.addTable(DBC4000.P30F1100);
             dba.addColumn(DBC4000.P30F1101);
@@ -1573,13 +1572,13 @@ public class DBA4000
         return kindList;
     }
 
-    public static boolean deleteTpltData(Tplt tpltItem)
+    public static boolean deleteTpltData(UserMdl userMdl, Tplt tpltItem)
     {
         DBAccess dba = new DBAccess();
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             dba.addTable(DBC4000.P30F1100);
             dba.addWhere(com.magicpwd._util.Char.format("{1}='{0}' OR {2}='{0}'", tpltItem.getP30F1103(), DBC4000.P30F1103, DBC4000.P30F1104));
@@ -1597,13 +1596,13 @@ public class DBA4000
         }
     }
 
-    public static boolean saveTpltData(Tplt tpltItem)
+    public static boolean saveTpltData(UserMdl userMdl, Tplt tpltItem)
     {
         DBAccess dba = new DBAccess();
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             dba.addTable(DBC4000.P30F1100);
             dba.addParam(DBC4000.P30F1101, tpltItem.getP30F1101());
@@ -1639,13 +1638,13 @@ public class DBA4000
         }
     }
 
-    public static boolean updateTpltData(List<S1S2> list)
+    public static boolean updateTpltData(UserMdl userMdl, List<S1S2> list)
     {
         DBAccess dba = new DBAccess();
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             int index = list.size();
             while (index > 0)
@@ -1654,7 +1653,7 @@ public class DBA4000
                 dba.addParam(DBC4000.P30F1101, --index);
                 dba.addWhere(DBC4000.P30F1103, list.get(index).getK());
                 dba.addUpdateBatch();
-                dba.init();
+                dba.reInit();
             }
 
             dba.executeBatch();
@@ -1671,13 +1670,13 @@ public class DBA4000
         return true;
     }
 
-    public static boolean selectTpltData(UserMdl cfg, String kindHash, List<IEditItem> tpltList)
+    public static boolean selectTpltData(UserMdl userMdl, String kindHash, List<IEditItem> tpltList)
     {
         DBAccess dba = new DBAccess();
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             dba.addTable(DBC4000.P30F1100);
             dba.addColumn(DBC4000.P30F1102);
@@ -1690,7 +1689,7 @@ public class DBA4000
             IEditItem kv;
             while (rest.next())
             {
-                kv = AEditItem.getInstance(cfg, rest.getInt(DBC4000.P30F1102));
+                kv = AEditItem.getInstance(userMdl, rest.getInt(DBC4000.P30F1102));
                 kv.setName(rest.getString(DBC4000.P30F1105));
                 kv.setData(rest.getString(DBC4000.P30F1106));
                 tpltList.add(kv);
@@ -1709,13 +1708,13 @@ public class DBA4000
         }
     }
 
-    public static boolean deleteCharData(Char charItem)
+    public static boolean deleteCharData(UserMdl userMdl, Char charItem)
     {
         DBAccess dba = new DBAccess();
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             dba.addTable(DBC4000.P30F2100);
             dba.addParam(DBC4000.P30F2102, ConsDat.PWDS_MODE_3);
@@ -1735,13 +1734,13 @@ public class DBA4000
         }
     }
 
-    public static boolean saveCharData(Char charItem)
+    public static boolean saveCharData(UserMdl userMdl, Char charItem)
     {
         DBAccess dba = new DBAccess();
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             dba.addTable(DBC4000.P30F2100);
             dba.addParam(DBC4000.P30F2101, charItem.getP30F2101());// 显示排序
@@ -1776,7 +1775,7 @@ public class DBA4000
         }
     }
 
-    public static boolean deleteMexpData(Mexp mexp)
+    public static boolean deleteMexpData(UserMdl userMdl, Mexp mexp)
     {
         if (mexp == null || !com.magicpwd._util.Char.isValidateHash(mexp.getP30F0803()))
         {
@@ -1787,7 +1786,7 @@ public class DBA4000
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
             dba.addTable(DBC4000.P30F0800);
             dba.addWhere(DBC4000.P30F0803, mexp.getP30F0803());
             return 1 == dba.executeDelete();
@@ -1803,7 +1802,7 @@ public class DBA4000
         }
     }
 
-    public static List<Mexp> readMexpData()
+    public static List<Mexp> readMexpData(UserMdl userMdl)
     {
         // 数据库连接初始化
         DBAccess dba = new DBAccess();
@@ -1811,7 +1810,7 @@ public class DBA4000
         java.util.List<Mexp> mexpList = new java.util.ArrayList<Mexp>();
         try
         {
-            dba.init();
+            dba.init(userMdl);
             dba.addTable(DBC4000.P30F0800);
             dba.addSort(DBC4000.P30F0801, true);
             ResultSet rest = dba.executeSelect();
@@ -1841,14 +1840,14 @@ public class DBA4000
         return mexpList;
     }
 
-    public static boolean saveMexpData(Mexp mexp)
+    public static boolean saveMexpData(UserMdl userMdl, Mexp mexp)
     {
         // 数据库连接初始化
         DBAccess dba = new DBAccess();
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
             dba.addTable(DBC4000.P30F0800);
             dba.addParam(DBC4000.P30F0801, mexp.getP30F0801());
             dba.addParam(DBC4000.P30F0802, mexp.getP30F0802());
@@ -1887,7 +1886,7 @@ public class DBA4000
      * 读取字符空间列表
      * @return
      */
-    public static List<Char> selectCharData()
+    public static List<Char> selectCharData(UserMdl userMdl)
     {
         List<Char> charList = new LinkedList<Char>();
 
@@ -1895,7 +1894,7 @@ public class DBA4000
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             dba.addTable(DBC4000.P30F2100);
             dba.addColumn(DBC4000.P30F2103);
@@ -1930,13 +1929,13 @@ public class DBA4000
         return charList;
     }
 
-    public static boolean pickupHistData(String keysHash, String logsHash, int sequence)
+    public static boolean pickupHistData(UserMdl userMdl, String keysHash, String logsHash, int sequence)
     {
         DBAccess dba = new DBAccess();
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             backup(dba, keysHash);
 
@@ -1986,13 +1985,13 @@ public class DBA4000
         }
     }
 
-    public static boolean deleteHistData(String keysHash, String logsHash)
+    public static boolean deleteHistData(UserMdl userMdl, String keysHash, String logsHash)
     {
         DBAccess dba = new DBAccess();
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             boolean b = com.magicpwd._util.Char.isValidateHash(logsHash);
 
@@ -2027,13 +2026,13 @@ public class DBA4000
         }
     }
 
-    public static boolean selectHistData(String logsHash, Mkey keys)
+    public static boolean selectHistData(UserMdl userMdl, String logsHash, Mkey keys)
     {
         DBAccess dba = new DBAccess();
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             dba.addTable(DBC4000.P30F0A00);
             dba.addWhere(DBC4000.P30F0A01, logsHash);
@@ -2084,7 +2083,7 @@ public class DBA4000
         }
     }
 
-    public static boolean selectHistData(String hash, List<S1S2> list)
+    public static boolean selectHistData(UserMdl userMdl, String hash, List<S1S2> list)
     {
         if (!com.magicpwd._util.Char.isValidateHash(hash))
         {
@@ -2095,7 +2094,7 @@ public class DBA4000
 
         try
         {
-            dba.init();
+            dba.init(userMdl);
 
             dba.addTable(DBC4000.P30F0A00);
             dba.addColumn(DBC4000.P30F0A01);

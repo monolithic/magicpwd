@@ -224,7 +224,7 @@ public abstract class SafeMdl
         clear();
         keys.setP30F0104(keysHash);
         keys.setP30F0105(userMdl.getCode());
-        if (DBA4000.readPwdsData(keys))
+        if (DBA4000.readPwdsData(userMdl, keys))
         {
             deCrypt(keys, ls_ItemList);
         }
@@ -241,7 +241,7 @@ public abstract class SafeMdl
         keys.setP30F0105(userMdl.getCode());
         keys.setHistBack(histBack);
         enCrypt(keys, ls_ItemList);
-        DBA4000.savePwdsData(keys);
+        DBA4000.savePwdsData(userMdl, keys);
         clear();
     }
 
@@ -308,13 +308,13 @@ public abstract class SafeMdl
     public void setKeysLabel(int label)
     {
         keys.setP30F0102(label);
-        DBA4000.saveKeysData(keys);
+        DBA4000.saveKeysData(userMdl, keys);
     }
 
     public void setKeysMajor(int major)
     {
         keys.setP30F0103(major);
-        DBA4000.saveKeysData(keys);
+        DBA4000.saveKeysData(userMdl, keys);
     }
 
     private StringBuffer deCrypt(Mpwd pwds) throws Exception

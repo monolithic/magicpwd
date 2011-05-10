@@ -18,6 +18,7 @@ package com.magicpwd.m.maoc;
 
 import com.magicpwd._comn.mpwd.Mexp;
 import com.magicpwd.d.db.DBA4000;
+import com.magicpwd.m.UserMdl;
 
 /**
  *
@@ -27,11 +28,11 @@ public class MnumMdl implements javax.swing.ListModel, java.io.Serializable
 {
 
     private java.util.List<Mexp> numList;
-    private MaocMdl maocMdl;
+    private UserMdl userMdl;
 
-    public MnumMdl(MaocMdl maocMdl)
+    public MnumMdl(UserMdl userMdl)
     {
-        this.maocMdl = maocMdl;
+        this.userMdl = userMdl;
         numList = new java.util.ArrayList<Mexp>();
     }
 
@@ -69,13 +70,13 @@ public class MnumMdl implements javax.swing.ListModel, java.io.Serializable
         int i = numList.size();
         mexp.setP30F0801(i);
         numList.add(mexp);
-        DBA4000.saveMexpData(mexp);
+        DBA4000.saveMexpData(userMdl, mexp);
         this.fireIntervalAdded(mexp, i, i);
     }
 
     public void updateItem(Mexp mexp)
     {
-        DBA4000.saveMexpData(mexp);
+        DBA4000.saveMexpData(userMdl, mexp);
         this.fireContentsChanged(mexp, 0, 0);
     }
 
@@ -84,7 +85,7 @@ public class MnumMdl implements javax.swing.ListModel, java.io.Serializable
         if (rowIndex > -1 && rowIndex < numList.size())
         {
             Mexp mexp = numList.remove(rowIndex);
-            DBA4000.deleteMexpData(mexp);
+            DBA4000.deleteMexpData(userMdl, mexp);
             this.fireIntervalRemoved(numList.remove(rowIndex), rowIndex, rowIndex);
             return true;
         }
@@ -95,7 +96,7 @@ public class MnumMdl implements javax.swing.ListModel, java.io.Serializable
     {
         if (mexp != null && numList.remove(mexp))
         {
-            DBA4000.deleteMexpData(mexp);
+            DBA4000.deleteMexpData(userMdl, mexp);
             this.fireIntervalRemoved(mexp, 0, numList.size());
         }
     }

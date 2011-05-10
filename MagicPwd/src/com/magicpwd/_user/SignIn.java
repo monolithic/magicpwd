@@ -302,16 +302,17 @@ public class SignIn extends javax.swing.JPanel implements IUserView
             return;
         }
 
+        UserMdl userMdl = userPtn.getUserMdl();
         try
         {
-            boolean b = userPtn.getUserMdl().signIn(name, pwds);
+            boolean b = userMdl.signIn(name, pwds);
             if (b)
             {
-                if (!ConsDat.VERSIONS.equals(DBA4000.readConfig("versions")))
+                if (!ConsDat.VERSIONS.equals(DBA4000.readConfig(userMdl, "versions")))
                 {
                     return;
                 }
-                userPtn.getUserMdl().setCfg(ConsCfg.CFG_USER_LAST, name);
+                userMdl.setCfg(ConsCfg.CFG_USER_LAST, name);
             }
             else
             {

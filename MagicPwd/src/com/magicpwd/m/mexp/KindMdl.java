@@ -23,6 +23,7 @@ import javax.swing.tree.TreePath;
 import com.magicpwd.r.KindTN;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd.d.db.DBA4000;
+import com.magicpwd.m.UserMdl;
 
 /**
  * @author Amon
@@ -31,9 +32,12 @@ import com.magicpwd.d.db.DBA4000;
 public class KindMdl extends DefaultTreeModel
 {
 
-    KindMdl(KindTN root)
+    private UserMdl userMdl;
+
+    KindMdl(UserMdl userMdl, KindTN root)
     {
         super(root);
+        this.userMdl = userMdl;
     }
 
     void init()
@@ -53,7 +57,7 @@ public class KindMdl extends DefaultTreeModel
         Kind k = (Kind) r.getUserObject();
         kind.setC2010201(r.getChildCount());
         kind.setC2010204(k.getC2010203());
-        DBA4000.updateKindData(kind);
+        DBA4000.updateKindData(userMdl, kind);
     }
 
     public void wUpdate(TreePath path, Kind kind)
@@ -65,7 +69,7 @@ public class KindMdl extends DefaultTreeModel
         }
         c.setUserObject(kind);
         nodeChanged(c);
-        DBA4000.updateKindData(kind);
+        DBA4000.updateKindData(userMdl, kind);
     }
 
     public void wRemove(TreePath path)
@@ -83,7 +87,7 @@ public class KindMdl extends DefaultTreeModel
             r.add((KindTN) c.getChildAt(0));
         }
         Kind item = (Kind) c.getUserObject();
-        DBA4000.deleteKindData(ConsDat.HASH_ROOT, item, r.getChildCount());
+        DBA4000.deleteKindData(userMdl, ConsDat.HASH_ROOT, item, r.getChildCount());
         nodeStructureChanged(r);
     }
 }

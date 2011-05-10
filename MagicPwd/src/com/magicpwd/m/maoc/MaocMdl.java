@@ -46,9 +46,9 @@ public class MaocMdl
 
     public void init()
     {
-        mnumMdl = new MnumMdl(this);
-        mfunMdl = new MfunMdl(this);
-        mexpMdl = new MexpMdl(this);
+        mnumMdl = new MnumMdl(userMdl);
+        mfunMdl = new MfunMdl(userMdl);
+        mexpMdl = new MexpMdl(userMdl);
         format = new DecimalFormat();
     }
 

@@ -28,14 +28,16 @@ public class TpltMdl extends javax.swing.AbstractListModel implements javax.swin
 
     private java.util.List<Tplt> itemList;
     private Object selectedObject;
+    private UserMdl userMdl;
 
-    TpltMdl()
+    TpltMdl(UserMdl userMdl)
     {
+        this.userMdl = userMdl;
     }
 
     void initData()
     {
-        itemList = DBA4000.selectTpltData("0");
+        itemList = DBA4000.selectTpltData(userMdl, "0");
     }
 
     @Override
