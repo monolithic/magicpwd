@@ -162,10 +162,10 @@ public class KindDlg extends ADialog
 
         if (kind != null)
         {
-            tf_KindName.setText(kind.getC2010205());
-            tf_KindTips.setText(kind.getC2010206());
-            tf_KindKind.setText(kind.getC2010208());
-            ta_KindDesp.setText(kind.getC2010209());
+            tf_KindName.setText(kind.getC2010206());
+            tf_KindTips.setText(kind.getC2010207());
+            tf_KindKind.setText(kind.getC2010209());
+            ta_KindDesp.setText(kind.getC201020A());
         }
         this.kind = kind;
 
@@ -208,10 +208,10 @@ public class KindDlg extends ADialog
             kind = new Kind();
         }
 
-        kind.setC2010105(kindName);
-        kind.setC2010206(tf_KindTips.getText());
-        kind.setC2010208(tf_KindKind.getText());
-        kind.setC2010209(ta_KindDesp.getText());
+        kind.setC2010106(kindName);
+        kind.setC2010207(tf_KindTips.getText());
+        kind.setC2010209(tf_KindKind.getText());
+        kind.setC201020A(ta_KindDesp.getText());
         backCall.callBack(IBackCall.OPTIONS_APPLY, kind);
     }
     private javax.swing.JTextField tf_KindName;

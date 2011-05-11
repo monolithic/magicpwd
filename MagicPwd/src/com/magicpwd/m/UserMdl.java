@@ -57,7 +57,7 @@ public final class UserMdl
         java.io.FileInputStream fis = null;
         try
         {
-            java.io.File file = new java.io.File(ConsEnv.DIR_DAT, ConsEnv.FILE_DATA + ".config");
+            java.io.File file = new java.io.File(mpwdMdl.getDatPath(), ConsEnv.FILE_DATA + ".config");
             if (file.exists() && file.canRead())
             {
                 fis = new java.io.FileInputStream(file);
@@ -88,7 +88,7 @@ public final class UserMdl
         java.io.FileOutputStream fos = null;
         try
         {
-            fos = new java.io.FileOutputStream(new java.io.File(ConsEnv.DIR_DAT, ConsEnv.FILE_DATA + ".config"));
+            fos = new java.io.FileOutputStream(new java.io.File(mpwdMdl.getDatPath(), ConsEnv.FILE_DATA + ".config"));
             userCfg.store(fos, "MagicPwd User Configure File!");
         }
         catch (Exception exp)

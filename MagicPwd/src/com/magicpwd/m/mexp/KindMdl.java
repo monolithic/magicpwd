@@ -51,7 +51,7 @@ public class KindMdl extends DefaultTreeModel
         {
             return;
         }
-        r.add(new KindTN(kind));
+        r.add(new KindTN(userMdl, kind));
         nodeStructureChanged(r);
 
         Kind k = (Kind) r.getUserObject();
@@ -89,5 +89,10 @@ public class KindMdl extends DefaultTreeModel
         Kind item = (Kind) c.getUserObject();
         DBA4000.deleteKindData(userMdl, ConsDat.HASH_ROOT, item, r.getChildCount());
         nodeStructureChanged(r);
+    }
+
+    public java.util.List<Kind> getKindByParent(String hash)
+    {
+        return DBA4000.selectKindData(userMdl, hash);
     }
 }
