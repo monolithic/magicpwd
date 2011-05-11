@@ -45,7 +45,7 @@ import com.magicpwd.v.mwiz.MwizPtn;
  * 系统托盘
  * @author Amon
  */
-public class TrayPtn implements IBackCall<AuthLog, UserDto>, java.awt.event.MouseListener, java.awt.event.MouseMotionListener
+public class TrayPtn implements IBackCall<AuthLog, UserDto>
 {
 
     private static boolean isOsTray;
@@ -70,30 +70,13 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>, java.awt.event.Mous
             // 托盘视图初始化
             trayIcon = new java.awt.TrayIcon(Bean.getLogo(java.awt.SystemTray.getSystemTray().getTrayIconSize().height));
             trayIcon.setImageAutoSize(true);
-            trayIcon.addMouseListener(this);
+            //trayIcon.addMouseListener(this);
         }
 
         // 罗盘视图初始化
         if (mwTrayForm == null)
         {
-            mwTrayForm = new javax.swing.JWindow()
-            {
-
-                @Override
-                protected void processWindowEvent(java.awt.event.WindowEvent evt)
-                {
-                    if (evt.getID() == java.awt.event.WindowEvent.WINDOW_CLOSING)
-                    {
-                        return;
-                    }
-                    if (evt.getID() == java.awt.event.WindowEvent.WINDOW_DEACTIVATED)
-                    {
-                        setVisible(false);
-                    }
-                    super.processWindowEvent(evt);
-                }
-            };
-            mwTrayForm.setAlwaysOnTop(true);
+            mwTrayForm = new javax.swing.JWindow();
         }
 
         if (listener == null)
@@ -119,14 +102,6 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>, java.awt.event.Mous
                 }
             };
         }
-
-        javax.swing.JLabel iconLbl = new javax.swing.JLabel();
-        iconLbl.setIcon(new javax.swing.ImageIcon(Bean.getLogo(24)));
-        iconLbl.addMouseListener(this);
-        iconLbl.addMouseMotionListener(this);
-        mwTrayForm.getContentPane().setLayout(new java.awt.BorderLayout());
-        mwTrayForm.getContentPane().add(iconLbl);
-        mwTrayForm.setVisible(true);
 
         trayMenu = new javax.swing.JPopupMenu();
 
@@ -405,90 +380,6 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>, java.awt.event.Mous
         currPtn = AppView.mgtd;
     }
 
-    @Override
-    public void mouseClicked(java.awt.event.MouseEvent evt)
-    {
-        if (evt.isPopupTrigger())
-        {
-            showJPopupMenu(evt);
-        }
-        else
-        {
-            showLastActionPerformed(evt);
-        }
-    }
-
-    @Override
-    public void mousePressed(java.awt.event.MouseEvent evt)
-    {
-        if (evt.isPopupTrigger())
-        {
-            showJPopupMenu(evt);
-        }
-        if (!isOsTray)
-        {
-            dragLoc = getScreenLocation(evt);
-            formLoc = mwTrayForm.getLocation();
-        }
-    }
-
-    @Override
-    public void mouseReleased(java.awt.event.MouseEvent evt)
-    {
-        if (evt.isPopupTrigger())
-        {
-            showJPopupMenu(evt);
-        }
-    }
-
-    @Override
-    public void mouseEntered(java.awt.event.MouseEvent evt)
-    {
-    }
-
-    @Override
-    public void mouseExited(java.awt.event.MouseEvent evt)
-    {
-    }
-
-    @Override
-    public void mouseDragged(java.awt.event.MouseEvent evt)
-    {
-        if (!isOsTray)
-        {
-            java.awt.Point tmp = getScreenLocation(evt);
-            tmp.x += formLoc.x - dragLoc.x;
-            tmp.y += formLoc.y - dragLoc.y;
-            java.awt.Dimension scrSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-            java.awt.Dimension dlgSize = mwTrayForm.getSize();
-            if (tmp.x < 10)
-            {
-                tmp.x = 1;
-            }
-            if (tmp.y < 10)
-            {
-                tmp.y = 1;
-            }
-            int x = scrSize.width - dlgSize.width;
-            if (tmp.x + 10 > x)
-            {
-                tmp.x = x;
-            }
-            int y = scrSize.height - dlgSize.height;
-            if (tmp.y + 10 > y)
-            {
-                tmp.y = y;
-            }
-            mwTrayForm.setLocation(tmp);
-            userMdl.setCfg(ConsCfg.CFG_TRAY_LOC, "[" + tmp.x + "," + tmp.y + "]");
-        }
-    }
-
-    @Override
-    public void mouseMoved(java.awt.event.MouseEvent evt)
-    {
-    }
-
     public java.io.File endSave()
     {
         try
@@ -537,7 +428,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>, java.awt.event.Mous
         System.exit(status);
     }
 
-    private void showJPopupMenu(java.awt.event.MouseEvent evt)
+    public void showJPopupMenu(java.awt.event.MouseEvent evt)
     {
         if (trayMenu == null)
         {
@@ -570,13 +461,8 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>, java.awt.event.Mous
         }
     }
 
-    private void showLastActionPerformed(java.awt.event.MouseEvent evt)
+    public void showLastPtn()
     {
-        if (evt.getClickCount() < 2)
-        {
-            return;
-        }
-
         showViewPtn(currPtn);
     }
 
@@ -675,37 +561,6 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>, java.awt.event.Mous
         }
         userMdl.setCfg(ConsCfg.CFG_TRAY_PTN, "guid");
 
-        if (formLoc == null)
-        {
-            java.awt.Dimension size = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-
-            String loc = userMdl.getCfg(ConsCfg.CFG_TRAY_LOC, "");
-            if (com.magicpwd._util.Char.isValidate(loc))
-            {
-                java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("\\d+").matcher(loc);
-                int x = -1;
-                if (matcher.find())
-                {
-                    x = Integer.parseInt(matcher.group());
-                }
-                int y = -1;
-                if (matcher.find())
-                {
-                    y = Integer.parseInt(matcher.group());
-                }
-                if (x >= 0 && x < size.width && y >= 0 && y < size.height)
-                {
-                    formLoc = new java.awt.Point(x, y);
-                }
-            }
-
-            if (formLoc == null)
-            {
-                formLoc = new java.awt.Point(size.width - 120 - mwTrayForm.getWidth(), 80);
-            }
-        }
-
-        mwTrayForm.setLocation(formLoc);
         isOsTray = false;
     }
 
@@ -754,13 +609,6 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>, java.awt.event.Mous
         }
     }
 
-    private java.awt.Point getScreenLocation(java.awt.event.MouseEvent evt)
-    {
-        java.awt.Point cur = evt.getPoint();
-        java.awt.Point dlg = mwTrayForm.getLocationOnScreen();
-        return new java.awt.Point(dlg.x + cur.x, dlg.y + cur.y);
-    }
-
     public void showTips(String title, String tips)
     {
         if (trayIcon != null)
@@ -774,8 +622,6 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>, java.awt.event.Mous
     private static MrucPtn mp_MrucPtn;
     private static MaocPtn mp_MaocPtn;
     private static MgtdPtn mp_MgtdPtn;
-    private java.awt.Point dragLoc;
-    private java.awt.Point formLoc;
     private java.awt.TrayIcon trayIcon;
     private javax.swing.JPopupMenu trayMenu;
 }
