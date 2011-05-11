@@ -55,7 +55,7 @@ public class TreeCR extends DefaultTreeCellRenderer
         {
             value = ((KindTN) value).getUserObject();
             Kind kind = (Kind) value;
-            String icon = kind.getC2010207();
+            String icon = kind.getC2010208();
             if (Char.isValidateHash(icon))
             {
                 if (!iconMap.containsKey(icon))
@@ -64,8 +64,8 @@ public class TreeCR extends DefaultTreeCellRenderer
                 }
                 setIcon(iconMap.get(icon));
             }
-            setText(kind.getC2010205());
-            setToolTipText(kind.getC2010206());
+            setText(kind.getC2010206());
+            setToolTipText(kind.getC2010207());
             return this;
         }
 

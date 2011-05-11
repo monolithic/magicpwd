@@ -288,7 +288,7 @@ public class MaocPtn extends AMpwdPtn
         this.pack();
         Bean.centerForm(this, null);
 
-        java.util.List<Mexp> maocList = DBA4000.readMexpData();
+        java.util.List<Mexp> maocList = DBA4000.readMexpData(userMdl);
         if (maocList != null)
         {
             for (Mexp maoc : maocList)

@@ -288,9 +288,9 @@ public class MexpPtn extends AMpwdPtn
         {
             return false;
         }
-        if (kind.getC2010208() != null)
+        if (kind.getC2010209() != null)
         {
-            if (kind.getC2010208().indexOf("task") >= 0)
+            if (kind.getC2010209().indexOf("task") >= 0)
             {
                 return false;
             }
@@ -1046,7 +1046,7 @@ public class MexpPtn extends AMpwdPtn
 
     private void listTask(Kind kind)
     {
-        String task = kind.getC2010208();
+        String task = kind.getC2010209();
         java.util.Calendar c = java.util.Calendar.getInstance();
         java.util.Date s = c.getTime();
         if ("task".equals(task))
@@ -1535,7 +1535,7 @@ public class MexpPtn extends AMpwdPtn
     {
         if (histDlg == null)
         {
-            histDlg = new HistDlg(mexpMdl.getGridMdl(), this);
+            histDlg = new HistDlg(this, mexpMdl.getGridMdl());
             histDlg.initView();
             histDlg.initLang();
             Bean.centerForm(histDlg, this);
@@ -1590,10 +1590,10 @@ public class MexpPtn extends AMpwdPtn
 
         Kind c = (Kind) p.getUserObject();
         c.addC2010201(-1);
-        DBA4000.updateKindData(c);
+        DBA4000.updateKindData(userMdl, c);
         c = (Kind) n.getUserObject();
         c.addC2010201(1);
-        DBA4000.updateKindData(c);
+        DBA4000.updateKindData(userMdl, c);
     }
 
     public void backwardSelectedKind()
@@ -1625,10 +1625,10 @@ public class MexpPtn extends AMpwdPtn
 
         Kind c = (Kind) p.getUserObject();
         c.addC2010201(1);
-        DBA4000.updateKindData(c);
+        DBA4000.updateKindData(userMdl, c);
         c = (Kind) n.getUserObject();
         c.addC2010201(-1);
-        DBA4000.updateKindData(c);
+        DBA4000.updateKindData(userMdl, c);
     }
 
     public void promotionSelectedKind()
@@ -1661,7 +1661,7 @@ public class MexpPtn extends AMpwdPtn
         Kind c = (Kind) s.getUserObject();
         c.setC2010201(p2.getChildCount());
         c.setC2010204(u.getC2010203());
-        DBA4000.updateKindData(c);
+        DBA4000.updateKindData(userMdl, c);
     }
 
     public void demotionSelectedKind()
@@ -1689,7 +1689,7 @@ public class MexpPtn extends AMpwdPtn
         Kind c = (Kind) s.getUserObject();
         c.setC2010201(p.getChildCount());
         c.setC2010204(u.getC2010203());
-        DBA4000.updateKindData(c);
+        DBA4000.updateKindData(userMdl, c);
     }
     /**
      * 

@@ -145,7 +145,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>, java.awt.event.Mous
         try
         {
             menuPtn = new MenuPtn(this, userMdl);
-            menuPtn.loadData(new java.io.File(ConsEnv.DIR_DAT, "tray.xml"));
+            menuPtn.loadData(new java.io.File(userMdl.getDataDir(), "tray.xml"));
             menuPtn.getPopMenu("tray", trayMenu);
         }
         catch (Exception ex)

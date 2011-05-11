@@ -22,6 +22,7 @@ import java.util.List;
 import javax.swing.tree.DefaultMutableTreeNode;
 
 import com.magicpwd.d.db.DBA4000;
+import com.magicpwd.m.UserMdl;
 
 /**
  * @author Amon
@@ -29,12 +30,16 @@ import com.magicpwd.d.db.DBA4000;
  */
 public class KindTN extends DefaultMutableTreeNode
 {
+
+    private UserMdl userMdl;
+
     /**
      * @param kvItem
      */
-    public KindTN(Kind kvItem)
+    public KindTN(UserMdl userMdl, Kind kvItem)
     {
         super(kvItem);
+        this.userMdl = userMdl;
     }
 
     /*
@@ -71,12 +76,12 @@ public class KindTN extends DefaultMutableTreeNode
         Kind kvItem = (Kind) getUserObject();
         if (kvItem != null)
         {
-            List<Kind> list = DBA4000.selectKindData(kvItem.getC2010203());
+            List<Kind> list = DBA4000.selectKindData(userMdl, kvItem.getC2010203());
             if (list != null)
             {
                 for (int i = 0, j = list.size(); i < j; i += 1)
                 {
-                    insert(new KindTN(list.get(i)), i);
+                    insert(new KindTN(userMdl, list.get(i)), i);
                 }
             }
         }

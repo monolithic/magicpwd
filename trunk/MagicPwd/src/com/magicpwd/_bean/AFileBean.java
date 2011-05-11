@@ -152,7 +152,7 @@ public abstract class AFileBean extends AEditBean
     {
         if (amaPath == null)
         {
-            amaPath = new java.io.File(ConsEnv.DIR_DAT, ConsEnv.DIR_AMA);
+            amaPath = new java.io.File(formPtn.getUserMdl().getDataDir(), ConsEnv.DIR_AMA);
             if (!amaPath.exists())
             {
                 amaPath.mkdirs();
