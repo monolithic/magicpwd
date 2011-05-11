@@ -16,15 +16,14 @@
  */
 package test;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Window;
-import java.awt.geom.Ellipse2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.geom.RoundRectangle2D;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
-import javax.swing.JProgressBar;
-import javax.swing.JRadioButton;
 import javax.swing.SwingUtilities;
 
 /**
@@ -34,17 +33,95 @@ import javax.swing.SwingUtilities;
 public class Shape extends javax.swing.JWindow
 {
 
+    private static int minWidth = 24;
+    private static int maxWidth = 72;
+    private static int arcWidth = 48;
+    private int aniTime = 100;
+    private int aniStep = 10;
+    private boolean full = true;
+
     public Shape()
     {
-        this.setLayout(new FlowLayout());
-        this.add(new JButton("按钮"));
-        this.add(new JCheckBox("复选按钮"));
-        this.add(new JRadioButton("单选按钮"));
-        this.add(new JProgressBar(0, 100));
+        JButton b = new JButton("Demo");
+        b.addActionListener(new ActionListener()
+        {
 
-        this.setSize(new Dimension(400, 400));
+            @Override
+            public void actionPerformed(ActionEvent e)
+            {
+                if (full)
+                {
+                    stepS();
+                }
+                else
+                {
+                    stepB();
+                }
+            }
+        });
+        this.setLayout(new BorderLayout());
+        this.add(b);
+
+        this.setSize(new Dimension(maxWidth, maxWidth));
         this.setLocationRelativeTo(null);
+        this.setAlwaysOnTop(true);
 //        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+
+    public void stepS()
+    {
+        try
+        {
+            int c1 = (maxWidth - minWidth) / aniStep;
+            int c2 = arcWidth / aniStep;
+            int t = 1000 / aniStep;
+            int w = maxWidth;
+            int r = arcWidth;
+            int p;
+            while (w >= minWidth)
+            {
+                w -= c1;
+                r -= c2;
+                p = (maxWidth - w) >> 1;
+                com.sun.awt.AWTUtilities.setWindowShape(this, new RoundRectangle2D.Double(p, p, w, w, r, r));
+                Thread.sleep(t);
+            }
+        }
+        catch (Exception exp)
+        {
+            exp.printStackTrace();
+        }
+        full = false;
+    }
+
+    public void stepB()
+    {
+        try
+        {
+            // 矩形步增量
+            int c1 = (maxWidth - minWidth) / aniStep;
+            // 圆角步增量
+            int c2 = arcWidth / aniStep;
+            // 线程休息时长
+            int t = aniTime / aniStep;
+
+            int w = minWidth;
+            int r = 0;
+            int p;
+            while (w <= maxWidth)
+            {
+                w += c1;
+                r += c2;
+                p = (maxWidth - w) >> 1;
+                com.sun.awt.AWTUtilities.setWindowShape(this, new RoundRectangle2D.Double(p, p, w, w, r, r));
+                Thread.sleep(t);
+            }
+        }
+        catch (Exception exp)
+        {
+            exp.printStackTrace();
+        }
+        full = true;
     }
 
     public static void main(String[] args)
@@ -65,7 +142,7 @@ public class Shape extends javax.swing.JWindow
             {
                 Window w = new Shape();
                 w.setVisible(true);
-                com.sun.awt.AWTUtilities.setWindowShape(w, new Ellipse2D.Double(0, 0, w.getWidth(), w.getHeight()));
+                com.sun.awt.AWTUtilities.setWindowShape(w, new RoundRectangle2D.Double(0, 0, maxWidth, maxWidth, arcWidth, arcWidth));
                 com.sun.awt.AWTUtilities.setWindowOpacity(w, 0.93f);
             }
         });
