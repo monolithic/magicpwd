@@ -35,22 +35,23 @@ public class TrayWnd extends javax.swing.JWindow implements java.awt.event.Mouse
 {
 
     // 中间变量，用于控制绘制过程
-    private int wndDim;
-    private int wndDdd;
-    private int arcDim;
-    private int arcDdd;
+    private int wndSize;
+    private int wndStep;
+    private int arcSize;
+    private int arcStep;
     /**
      * 窗口最大宽度
      */
-    private int maxWidth = 72;
+    private int maxWndSize = 72;
     /**
      * 窗口最小宽度
      */
-    private int minWidth = 24;
+    private int minWndSize = 24;
+    private int minArcSize = 2;
     /**
      * 圆角最大宽度
      */
-    private int arcWidth = 48;
+    private int maxArcSize = 48;
     /**
      * 动画时长
      */
@@ -64,7 +65,7 @@ public class TrayWnd extends javax.swing.JWindow implements java.awt.event.Mouse
     private TrayPtn trayPtn;
     private UserMdl userMdl;
 
-    TrayWnd(TrayPtn trayPtn, UserMdl userMdl)
+    public TrayWnd(TrayPtn trayPtn, UserMdl userMdl)
     {
         this.trayPtn = trayPtn;
         this.userMdl = userMdl;
@@ -72,10 +73,53 @@ public class TrayWnd extends javax.swing.JWindow implements java.awt.event.Mouse
 
     public void initView()
     {
-        javax.swing.JLabel iconLbl = new javax.swing.JLabel();
-        iconLbl.setIcon(new javax.swing.ImageIcon(Bean.getLogo(24)));
-        getContentPane().setLayout(new java.awt.BorderLayout());
-        getContentPane().add(iconLbl);
+        setLayout(new java.awt.GridLayout(3, 3, 0, 0));
+
+        label1 = new javax.swing.JLabel();
+        label1.setHorizontalAlignment(javax.swing.JLabel.CENTER);
+        label1.setPreferredSize(new java.awt.Dimension(minWndSize, minWndSize));
+        add(label1);
+
+        label2 = new javax.swing.JLabel();
+        label2.setHorizontalAlignment(javax.swing.JLabel.CENTER);
+        label2.setPreferredSize(new java.awt.Dimension(minWndSize, minWndSize));
+        add(label2);
+
+        label3 = new javax.swing.JLabel();
+        label3.setHorizontalAlignment(javax.swing.JLabel.CENTER);
+        label3.setPreferredSize(new java.awt.Dimension(minWndSize, minWndSize));
+        add(label3);
+
+        label4 = new javax.swing.JLabel();
+        label4.setHorizontalAlignment(javax.swing.JLabel.CENTER);
+        label4.setPreferredSize(new java.awt.Dimension(minWndSize, minWndSize));
+        add(label4);
+
+        label5 = new javax.swing.JLabel();
+        label5.setHorizontalAlignment(javax.swing.JLabel.CENTER);
+        label5.setPreferredSize(new java.awt.Dimension(minWndSize, minWndSize));
+        add(label5);
+
+        label6 = new javax.swing.JLabel();
+        label6.setHorizontalAlignment(javax.swing.JLabel.CENTER);
+        label6.setPreferredSize(new java.awt.Dimension(minWndSize, minWndSize));
+        add(label6);
+
+        label7 = new javax.swing.JLabel();
+        label7.setHorizontalAlignment(javax.swing.JLabel.CENTER);
+        label7.setPreferredSize(new java.awt.Dimension(minWndSize, minWndSize));
+        add(label7);
+
+        label8 = new javax.swing.JLabel();
+        label8.setHorizontalAlignment(javax.swing.JLabel.CENTER);
+        label8.setPreferredSize(new java.awt.Dimension(minWndSize, minWndSize));
+        add(label8);
+
+        label9 = new javax.swing.JLabel();
+        label9.setHorizontalAlignment(javax.swing.JLabel.CENTER);
+        label9.setPreferredSize(new java.awt.Dimension(minWndSize, minWndSize));
+        add(label9);
+
         setAlwaysOnTop(true);
     }
 
@@ -85,6 +129,8 @@ public class TrayWnd extends javax.swing.JWindow implements java.awt.event.Mouse
 
     public void initData()
     {
+        label5.setIcon(new javax.swing.ImageIcon(Bean.getLogo(24)));
+
         java.awt.Dimension size = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 
         String loc = userMdl.getCfg(ConsCfg.CFG_TRAY_LOC, "");
@@ -112,14 +158,20 @@ public class TrayWnd extends javax.swing.JWindow implements java.awt.event.Mouse
             formLoc = new java.awt.Point(size.width - 120 - getWidth(), 80);
         }
 
+        pack();
         setLocation(formLoc);
+        wndSize = minWndSize;
+        arcSize = minArcSize;
+        int p = (maxWndSize - wndSize) >> 1;
+        com.sun.awt.AWTUtilities.setWindowShape(this, new RoundRectangle2D.Double(p, p, wndSize, wndSize, arcSize, arcSize));
+
         addMouseListener(this);
         addMouseMotionListener(this);
 
         // 矩形步增量
-        wndDdd = (maxWidth - minWidth) / aniStep;
+        wndStep = (maxWndSize - minWndSize) / aniStep;
         // 圆角步增量
-        arcDdd = arcWidth / aniStep;
+        arcStep = (maxArcSize - minArcSize) / aniStep;
         timer = new javax.swing.Timer(aniTime / aniStep, new java.awt.event.ActionListener()
         {
 
@@ -168,12 +220,20 @@ public class TrayWnd extends javax.swing.JWindow implements java.awt.event.Mouse
     public void mouseEntered(java.awt.event.MouseEvent evt)
     {
         aniDir = true;
+        if (!timer.isRunning())
+        {
+            timer.start();
+        }
     }
 
     @Override
     public void mouseExited(java.awt.event.MouseEvent evt)
     {
         aniDir = false;
+        if (!timer.isRunning())
+        {
+            timer.start();
+        }
     }
 
     @Override
@@ -203,7 +263,7 @@ public class TrayWnd extends javax.swing.JWindow implements java.awt.event.Mouse
             tmp.y = y;
         }
         setLocation(tmp);
-        userMdl.setCfg(ConsCfg.CFG_TRAY_LOC, "[" + tmp.x + "," + tmp.y + "]");
+//        userMdl.setCfg(ConsCfg.CFG_TRAY_LOC, "[" + tmp.x + "," + tmp.y + "]");
     }
 
     @Override
@@ -229,30 +289,33 @@ public class TrayWnd extends javax.swing.JWindow implements java.awt.event.Mouse
     {
         if (aniDir)
         {
-            if (wndDim >= maxWidth)
+            if (wndSize >= maxWndSize)
             {
                 timer.stop();
-                wndDim = maxWidth;
+                wndSize = maxWndSize;
+                arcSize = maxArcSize;
                 return;
             }
 
-            wndDim += wndDdd;
-            arcDim += arcDdd;
-            int p = (maxWidth - wndDim) >> 1;
-            com.sun.awt.AWTUtilities.setWindowShape(this, new RoundRectangle2D.Double(p, p, wndDim, wndDim, arcDim, arcDim));
+            wndSize += wndStep;
+            arcSize += arcStep;
+            int p = (maxWndSize - wndSize) >> 1;
+            com.sun.awt.AWTUtilities.setWindowShape(this, new RoundRectangle2D.Double(p, p, wndSize, wndSize, arcSize, arcSize));
             return;
         }
 
-        if (wndDim <= minWidth)
+        if (wndSize <= minWndSize)
         {
             timer.stop();
-            wndDim = minWidth;
+            wndSize = minWndSize;
+            arcSize = minArcSize;
             return;
         }
-        wndDim -= wndDdd;
-        arcDim -= arcDdd;
-        int p = (maxWidth - wndDim) >> 1;
-        com.sun.awt.AWTUtilities.setWindowShape(this, new RoundRectangle2D.Double(p, p, wndDim, wndDim, arcDim, arcDim));
+
+        wndSize -= wndStep;
+        arcSize -= arcStep;
+        int p = (maxWndSize - wndSize) >> 1;
+        com.sun.awt.AWTUtilities.setWindowShape(this, new RoundRectangle2D.Double(p, p, wndSize, wndSize, arcSize, arcSize));
     }
 
     private java.awt.Point getScreenLocation(java.awt.event.MouseEvent evt)
@@ -263,4 +326,13 @@ public class TrayWnd extends javax.swing.JWindow implements java.awt.event.Mouse
     }
     private java.awt.Point dragLoc;
     private java.awt.Point formLoc;
+    private javax.swing.JLabel label1;
+    private javax.swing.JLabel label2;
+    private javax.swing.JLabel label3;
+    private javax.swing.JLabel label4;
+    private javax.swing.JLabel label5;
+    private javax.swing.JLabel label6;
+    private javax.swing.JLabel label7;
+    private javax.swing.JLabel label8;
+    private javax.swing.JLabel label9;
 }
