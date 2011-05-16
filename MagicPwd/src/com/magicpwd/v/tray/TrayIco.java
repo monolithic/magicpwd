@@ -16,6 +16,10 @@
  */
 package com.magicpwd.v.tray;
 
+import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._util.Logs;
+import java.awt.event.MouseEvent;
+
 /**
  * Application: MagicPwd
  * Author     : Aven
@@ -26,6 +30,74 @@ package com.magicpwd.v.tray;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public class TrayIco
+public class TrayIco extends java.awt.TrayIcon implements java.awt.event.MouseListener
 {
+
+    public TrayIco()
+    {
+        super(null);
+    }
+
+    public boolean initView()
+    {
+        if (!java.awt.SystemTray.isSupported())
+        {
+            return false;
+        }
+        setImageAutoSize(true);
+        return true;
+    }
+
+    public void initLang()
+    {
+        setToolTip(ConsEnv.SOFTNAME + ' ' + ConsEnv.VERSIONS);
+    }
+
+    public void initData()
+    {
+        addMouseListener(this);
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e)
+    {
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e)
+    {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e)
+    {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e)
+    {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e)
+    {
+    }
+
+    public void displayMessage(String title, String message)
+    {
+        super.displayMessage(title, message, java.awt.TrayIcon.MessageType.INFO);
+    }
+
+    public void dd()
+    {
+        try
+        {
+            java.awt.SystemTray.getSystemTray().add(this);
+            java.awt.SystemTray.getSystemTray().remove(this);
+        }
+        catch (java.awt.AWTException ex)
+        {
+            Logs.exception(ex);
+        }
+    }
 }
