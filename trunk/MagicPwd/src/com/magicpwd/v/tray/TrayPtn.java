@@ -20,12 +20,10 @@ import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._cons.ConsCfg;
-import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._enum.AuthLog;
 import com.magicpwd._user.UserDto;
 import com.magicpwd._user.UserPtn;
-import com.magicpwd._util.Bean;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -65,14 +63,6 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
 
     public boolean initView()
     {
-        if (java.awt.SystemTray.isSupported())
-        {
-            // 托盘视图初始化
-            trayIcon = new java.awt.TrayIcon(Bean.getLogo(java.awt.SystemTray.getSystemTray().getTrayIconSize().height));
-            trayIcon.setImageAutoSize(true);
-            //trayIcon.addMouseListener(this);
-        }
-
         // 罗盘视图初始化
         if (mwTrayForm == null)
         {
@@ -110,7 +100,6 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
 
     public boolean initLang()
     {
-        trayIcon.setToolTip(ConsEnv.SOFTNAME + ' ' + ConsEnv.VERSIONS);
         return true;
     }
 
@@ -534,27 +523,18 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         // 下一步：显示为托盘图标
         if (ConsCfg.DEF_TRAY.equalsIgnoreCase(view))
         {
-            try
+            mwTrayForm.setSize(1, 1);
+            if (button != null)
             {
-                java.awt.SystemTray.getSystemTray().add(trayIcon);
-                mwTrayForm.setSize(1, 1);
-                if (button != null)
-                {
-                    Lang.setWText(button, LangRes.P30F960E, "显示为导航罗盘");
-                }
-                userMdl.setCfg(ConsCfg.CFG_TRAY_PTN, "icon");
-                isOsTray = true;
-                return;
+                Lang.setWText(button, LangRes.P30F960E, "显示为导航罗盘");
             }
-            catch (java.awt.AWTException ex)
-            {
-                Logs.exception(ex);
-            }
+            userMdl.setCfg(ConsCfg.CFG_TRAY_PTN, "icon");
+            isOsTray = true;
+            return;
         }
 
         // 下一步：显示为导航罗盘
         mwTrayForm.pack();
-        java.awt.SystemTray.getSystemTray().remove(trayIcon);
         if (button != null)
         {
             Lang.setWText(button, LangRes.P30F960D, "显示为托盘图标");
@@ -562,6 +542,10 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         userMdl.setCfg(ConsCfg.CFG_TRAY_PTN, "guid");
 
         isOsTray = false;
+    }
+
+    public void showTips(String title, String message)
+    {
     }
 
     public void changeSkin(String lafClass)
@@ -608,20 +592,11 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
             Lang.showMesg(getCurrPtn(), null, exc.getLocalizedMessage());
         }
     }
-
-    public void showTips(String title, String tips)
-    {
-        if (trayIcon != null)
-        {
-            trayIcon.displayMessage(title, tips, java.awt.TrayIcon.MessageType.INFO);
-        }
-    }
     private static MexpPtn mp_MexpPtn;
     private static MwizPtn mp_MwizPtn;
     private static MpadPtn mp_MpadPtn;
     private static MrucPtn mp_MrucPtn;
     private static MaocPtn mp_MaocPtn;
     private static MgtdPtn mp_MgtdPtn;
-    private java.awt.TrayIcon trayIcon;
     private javax.swing.JPopupMenu trayMenu;
 }
