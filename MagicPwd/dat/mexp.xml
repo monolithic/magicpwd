@@ -495,6 +495,14 @@
                 <action id="sort-key" class="com.magicpwd.e.mexp.list.SortKeyAction" />
             </item>
         </menu>
+        <menu text="查看方式" text-def="查看方式">
+            <item type="checkbox" text="小图标" text-def="小图标" group="order-key" command="16">
+                <action id="keys-layout" class="com.magicpwd.e.mexp.list.LayoutAction" />
+            </item>
+            <item type="checkbox" text="大图标" text-def="大图标" group="order-key" command="24">
+                <action id="keys-layout" class="com.magicpwd.e.mexp.list.LayoutAction" />
+            </item>
+        </menu>
         <seperator />
         <item type="normal" text="$P30F7D1A" text-def="把数据迁移到...(@M)">
             <action class="com.magicpwd.e.mexp.list.MovetoAction" />
