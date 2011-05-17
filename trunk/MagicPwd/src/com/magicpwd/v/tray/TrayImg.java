@@ -29,28 +29,64 @@ package com.magicpwd.v.tray;
 public class TrayImg extends javax.swing.JPanel
 {
 
-    private int wndDim = 64;
-    private int imageDim = 16;
-    private int offset = 8;
+    /**
+     * 窗口大小
+     */
+    private int wndW = 64;
+    private int wndH = 64;
+    /**
+     * 默认图标大小
+     */
+    private int defImgW = 16;
+    private int defImgH = 16;
+    /**
+     * 选中图标大小
+     */
+    private int selImgW = 28;
+    private int selImgH = 28;
+    private int selPadW = 2;
+    private int selPadH = 2;
+    /**
+     * 背景图像偏移值
+     */
+    private int wndOffX = 8;
+    private int wndOffY = 8;
+    private int imgOffX;
+    private int imgOffY;
     private java.awt.image.BufferedImage bigBg;
     private java.awt.image.BufferedImage curBg;
-    private java.awt.image.BufferedImage[][] bglt;//左上角背景
-    private java.awt.Rectangle rect = new java.awt.Rectangle(0, 0, imageDim, imageDim);
+    private java.awt.image.BufferedImage icoBg;
+    private java.awt.image.BufferedImage[][] bgArr;
+    private java.util.HashMap<String, java.awt.image.BufferedImage> locMap;
 
     public void init()
     {
-        bigBg = readImage("F:\\app\\MagicPwd\\skin\\feel\\default\\guid.png");
-        bglt = new java.awt.image.BufferedImage[3][3];
-        bglt[0][0] = readImage("F:\\app\\MagicPwd\\skin\\feel\\default\\guid-tl.png");
-        bglt[0][1] = readImage("F:\\app\\MagicPwd\\skin\\feel\\default\\guid-ml.png");
-        bglt[0][2] = readImage("F:\\app\\MagicPwd\\skin\\feel\\default\\guid-bl.png");
-        bglt[1][0] = readImage("F:\\app\\MagicPwd\\skin\\feel\\default\\guid-tm.png");
-        bglt[1][1] = readImage("F:\\app\\MagicPwd\\skin\\feel\\default\\guid-mm.png");
-        bglt[1][2] = readImage("F:\\app\\MagicPwd\\skin\\feel\\default\\guid-bm.png");
-        bglt[2][0] = readImage("F:\\app\\MagicPwd\\skin\\feel\\default\\guid-tr.png");
-        bglt[2][1] = readImage("F:\\app\\MagicPwd\\skin\\feel\\default\\guid-mr.png");
-        bglt[2][2] = readImage("F:\\app\\MagicPwd\\skin\\feel\\default\\guid-br.png");
+        imgOffX = (selImgW - defImgW) >> 1;
+        imgOffY = (selImgH - defImgH) >> 1;
+
+        icoBg = readImage("logo\\logo24.png");
+
+        locMap = new java.util.HashMap<String, java.awt.image.BufferedImage>();
+        locMap.put("1,1", readImage("skin\\feel\\default\\mexp.png"));
+        locMap.put("0,0", readImage("skin\\feel\\default\\mwiz.png"));
+        locMap.put("2,0", readImage("skin\\feel\\default\\mpad.png"));
+        locMap.put("0,2", readImage("skin\\feel\\default\\mgtd.png"));
+        locMap.put("2,2", readImage("skin\\feel\\default\\maoc.png"));
+
+        bigBg = readImage("skin\\feel\\default\\guid.png");
+        bgArr = new java.awt.image.BufferedImage[3][3];
+        bgArr[0][0] = readImage("skin\\feel\\default\\guid-tl.png");
+        bgArr[0][1] = readImage("skin\\feel\\default\\guid-ml.png");
+        bgArr[0][2] = readImage("skin\\feel\\default\\guid-bl.png");
+        bgArr[1][0] = readImage("skin\\feel\\default\\guid-tm.png");
+        bgArr[1][1] = readImage("skin\\feel\\default\\guid-mm.png");
+        bgArr[1][2] = readImage("skin\\feel\\default\\guid-bm.png");
+        bgArr[2][0] = readImage("skin\\feel\\default\\guid-tr.png");
+        bgArr[2][1] = readImage("skin\\feel\\default\\guid-mr.png");
+        bgArr[2][2] = readImage("skin\\feel\\default\\guid-br.png");
+
         curBg = new java.awt.image.BufferedImage(bigBg.getWidth(), bigBg.getHeight(), java.awt.image.BufferedImage.TYPE_INT_ARGB);
+        deActive();
     }
 
     private java.awt.image.BufferedImage readImage(String path)
@@ -76,47 +112,91 @@ public class TrayImg extends javax.swing.JPanel
         }
     }
 
-    public void active(java.awt.Point p)
+    public void deActive()
     {
-        int x = getLoc(p.x);
-        int y = getLoc(p.y);
         java.awt.Graphics2D g2d = curBg.createGraphics();
         g2d.drawImage(bigBg, 0, 0, this);
-        java.awt.image.BufferedImage tmpImg = bglt[x][y];
-        x *= 16;
-        y *= 16;
-        if (x > 0)
+        g2d.drawImage(icoBg, (wndW - selImgW) >> 1, (wndH - selImgH) >> 1, this);
+    }
+
+    public void enActive(java.awt.Point p)
+    {
+        java.awt.Graphics2D g2d = curBg.createGraphics();
+        g2d.drawImage(bigBg, 0, 0, this);
+        for (String key : locMap.keySet())
         {
-            x -= 8;
+            String[] arr = key.split(",");
+            g2d.drawImage(locMap.get(key), wndOffX + Integer.parseInt(arr[0]) * defImgW, wndOffY + Integer.parseInt(arr[1]) * defImgW, this);
         }
-        if (y > 0)
+
+        int x = x2GridIndex(p.x);
+        int y = y2GridIndex(p.y);
+        java.awt.image.BufferedImage bi = bgArr[x][y];
+        String xy = x + "," + y;
+
+        x = x2GridPoint(p.x) - selPadW;
+        y = y2GridPoint(p.y) - selPadH;
+        if (x > wndOffX)
         {
-            y -= 8;
+            x -= imgOffX;
         }
-        if (x + 16 >= wndDim)
+        if (y > wndOffY)
         {
-            x -= 16;
+            y -= imgOffY;
         }
-        if (y + 16 >= wndDim)
+        if (x + selImgW > wndW - wndOffX)
         {
-            y -= 16;
+            x -= selPadW;
         }
-        System.out.println(p.x + "," + p.y + ":" + x + "," + y);
-        g2d.drawImage(tmpImg, offset + x, offset + y, this);
+        if (y + selImgH > wndH - wndOffY)
+        {
+            y -= selPadH;
+        }
+        if (locMap.containsKey(xy))
+        {
+            g2d.drawImage(bi, x, y, this);
+            g2d.drawImage(locMap.get(xy), x + imgOffX, y + imgOffY, this);
+        }
         g2d.dispose();
+
         repaint();
     }
 
-    private int getLoc(int p)
+    private int x2GridIndex(int x)
     {
-        if (p - offset < imageDim)
+        if (x - wndOffX < defImgW)
         {
             return 0;
         }
-        if (p + imageDim >= wndDim - offset)
+        if (x + defImgW >= wndW - wndOffX)
         {
             return 2;
         }
         return 1;
+    }
+
+    private int x2GridPoint(int x)
+    {
+        x -= wndOffX;
+        return x - x % defImgW + wndOffX;
+    }
+
+    private int y2GridIndex(int y)
+    {
+        if (y - wndOffY < defImgH)
+        {
+            return 0;
+        }
+        if (y + defImgW >= wndH - wndOffY)
+        {
+            return 2;
+        }
+        return 1;
+    }
+
+    private int y2GridPoint(int y)
+    {
+        y -= wndOffY;
+        return y - y % defImgH + wndOffY;
     }
 }

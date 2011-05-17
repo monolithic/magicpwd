@@ -102,7 +102,7 @@ public class TrayWnd extends javax.swing.JWindow implements java.awt.event.Mouse
     public void initData()
     {
         trayImg.init();
-        
+
         java.awt.Dimension size = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 
 //        String loc = userMdl.getCfg(ConsCfg.CFG_TRAY_LOC, "");
@@ -196,6 +196,8 @@ public class TrayWnd extends javax.swing.JWindow implements java.awt.event.Mouse
         {
             timer.start();
         }
+
+        trayImg.enActive(evt.getPoint());
     }
 
     @Override
@@ -206,6 +208,8 @@ public class TrayWnd extends javax.swing.JWindow implements java.awt.event.Mouse
         {
             timer.start();
         }
+
+        trayImg.deActive();
     }
 
     @Override
@@ -241,7 +245,7 @@ public class TrayWnd extends javax.swing.JWindow implements java.awt.event.Mouse
     @Override
     public void mouseMoved(java.awt.event.MouseEvent evt)
     {
-        trayImg.active(evt.getPoint());
+        trayImg.enActive(evt.getPoint());
     }
 
     @Override
