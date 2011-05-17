@@ -41,11 +41,13 @@ public final class MpwdMdl
     {
         mpwdCfg = new java.util.Properties();
 
+        java.io.File cfgFile = new java.io.File("magicpwd.cfg");
+        firstRun = !cfgFile.exists();
+
         java.io.FileInputStream fis = null;
         try
         {
-            java.io.File cfgFile = new java.io.File("magicpwd.cfg");
-            if (cfgFile.exists() && cfgFile.isFile() && cfgFile.canRead())
+            if (firstRun && cfgFile.isFile() && cfgFile.canRead())
             {
                 fis = new java.io.FileInputStream(cfgFile);
                 mpwdCfg.load(fis);
@@ -62,8 +64,7 @@ public final class MpwdMdl
 
         setDatPath(mpwdCfg.getProperty("path.dat"));
         setBakPath(mpwdCfg.getProperty("path.bak"));
-        setAppView(mpwdCfg.getProperty("view.last", "mwiz"));
-        firstRun = !new java.io.File(datPath, "amon.script").exists();
+        setAppView(mpwdCfg.getProperty("view.last", AppView.mwiz.name()));
         setAppGuid(mpwdCfg.getProperty("guid"));
     }
 

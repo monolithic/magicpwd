@@ -62,6 +62,7 @@ public class DBAccess
                 buf.append(";crypt_type=").append(sc);
                 buf.append(";crypt_key=").append(sk);
             }
+            dbPath = buf.toString();
         }
         connect();
 
