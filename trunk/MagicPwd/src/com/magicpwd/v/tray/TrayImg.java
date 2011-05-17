@@ -26,7 +26,7 @@ package com.magicpwd.v.tray;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public class TrayImg extends javax.swing.JPanel
+public class TrayImg extends java.awt.Canvas
 {
 
     /**
@@ -108,13 +108,18 @@ public class TrayImg extends javax.swing.JPanel
     }
 
     @Override
-    protected void paintComponent(java.awt.Graphics g)
+    public void paint(java.awt.Graphics g)
     {
-        super.paintComponent(g);
         if (curBg != null)
         {
             g.drawImage(curBg, 0, 0, this);
         }
+    }
+
+    @Override
+    public void update(java.awt.Graphics g)
+    {
+        paint(g);
     }
 
     public void deActive()
@@ -123,12 +128,14 @@ public class TrayImg extends javax.swing.JPanel
         g2d.drawImage(bigBg, 0, 0, this);
         g2d.drawImage(icoBg, (wndW - selImgW) >> 1, (wndH - selImgH) >> 1, this);
 
-        repaint();
+        paint(getGraphics());
     }
 
     public void enActive(java.awt.Point p)
     {
         java.awt.Graphics2D g2d = curBg.createGraphics();
+        g2d.setColor(javax.swing.UIManager.getDefaults().getColor("Panel.background"));
+        g2d.fillRect(0, 0, wndW, wndH);
         g2d.drawImage(bigBg, 0, 0, this);
         for (String key : locMap.keySet())
         {
@@ -179,7 +186,7 @@ public class TrayImg extends javax.swing.JPanel
         }
         g2d.dispose();
 
-        repaint();
+        paint(getGraphics());
     }
 
     private int x2GridIndex(int x)

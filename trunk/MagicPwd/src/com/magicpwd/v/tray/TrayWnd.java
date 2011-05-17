@@ -244,7 +244,7 @@ public class TrayWnd extends javax.swing.JWindow implements java.awt.event.Mouse
     @Override
     public void mouseMoved(java.awt.event.MouseEvent evt)
     {
-//        trayImg.enActive(evt.getPoint());
+        trayImg.enActive(evt.getPoint());
     }
 
     @Override
