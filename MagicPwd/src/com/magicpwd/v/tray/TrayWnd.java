@@ -41,13 +41,12 @@ public class TrayWnd extends javax.swing.JWindow implements java.awt.event.Mouse
      * 窗口最大宽度
      */
     private int maxWndSize = 64;
-    private int maxRecSize = 58;
+    private int maxRecSize = 56;
     /**
      * 窗口最小宽度
      */
     private int minWndSize = 24;
     private int minRecSize = 24;
-    private int labelSize = 16;
     private int minArcSize = 2;
     /**
      * 圆角最大宽度
@@ -245,7 +244,7 @@ public class TrayWnd extends javax.swing.JWindow implements java.awt.event.Mouse
     @Override
     public void mouseMoved(java.awt.event.MouseEvent evt)
     {
-        trayImg.enActive(evt.getPoint());
+//        trayImg.enActive(evt.getPoint());
     }
 
     @Override
