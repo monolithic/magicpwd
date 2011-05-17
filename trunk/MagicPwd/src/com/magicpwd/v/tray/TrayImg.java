@@ -42,8 +42,8 @@ public class TrayImg extends javax.swing.JPanel
     /**
      * 选中图标大小
      */
-    private int selImgW = 28;
-    private int selImgH = 28;
+    private int selImgW = 24;
+    private int selImgH = 24;
     private int selPadW = 2;
     private int selPadH = 2;
     /**
@@ -75,18 +75,23 @@ public class TrayImg extends javax.swing.JPanel
 
         bigBg = readImage("skin\\feel\\default\\guid.png");
         bgArr = new java.awt.image.BufferedImage[3][3];
-        bgArr[0][0] = readImage("skin\\feel\\default\\guid-tl.png");
-        bgArr[0][1] = readImage("skin\\feel\\default\\guid-ml.png");
-        bgArr[0][2] = readImage("skin\\feel\\default\\guid-bl.png");
-        bgArr[1][0] = readImage("skin\\feel\\default\\guid-tm.png");
-        bgArr[1][1] = readImage("skin\\feel\\default\\guid-mm.png");
-        bgArr[1][2] = readImage("skin\\feel\\default\\guid-bm.png");
-        bgArr[2][0] = readImage("skin\\feel\\default\\guid-tr.png");
-        bgArr[2][1] = readImage("skin\\feel\\default\\guid-mr.png");
-        bgArr[2][2] = readImage("skin\\feel\\default\\guid-br.png");
+        bgArr[0][0] = readImage("skin\\feel\\default\\guid-otl.png");
+        bgArr[0][1] = readImage("skin\\feel\\default\\guid-oml.png");
+        bgArr[0][2] = readImage("skin\\feel\\default\\guid-obl.png");
+        bgArr[1][0] = readImage("skin\\feel\\default\\guid-otm.png");
+        bgArr[1][1] = readImage("skin\\feel\\default\\guid-omm.png");
+        bgArr[1][2] = readImage("skin\\feel\\default\\guid-obm.png");
+        bgArr[2][0] = readImage("skin\\feel\\default\\guid-otr.png");
+        bgArr[2][1] = readImage("skin\\feel\\default\\guid-omr.png");
+        bgArr[2][2] = readImage("skin\\feel\\default\\guid-obr.png");
 
         curBg = new java.awt.image.BufferedImage(bigBg.getWidth(), bigBg.getHeight(), java.awt.image.BufferedImage.TYPE_INT_ARGB);
-        deActive();
+        java.awt.Graphics2D g2d = curBg.createGraphics();
+        g2d.setColor(new java.awt.Color(0, 0, 0, 0));
+        g2d.fillRect(0, 0, curBg.getWidth(), curBg.getHeight());
+        g2d.drawImage(bigBg, 0, 0, this);
+        g2d.drawImage(icoBg, (wndW - selImgW) >> 1, (wndH - selImgH) >> 1, this);
+        g2d.dispose();
     }
 
     private java.awt.image.BufferedImage readImage(String path)
@@ -117,6 +122,8 @@ public class TrayImg extends javax.swing.JPanel
         java.awt.Graphics2D g2d = curBg.createGraphics();
         g2d.drawImage(bigBg, 0, 0, this);
         g2d.drawImage(icoBg, (wndW - selImgW) >> 1, (wndH - selImgH) >> 1, this);
+
+        repaint();
     }
 
     public void enActive(java.awt.Point p)
@@ -129,33 +136,46 @@ public class TrayImg extends javax.swing.JPanel
             g2d.drawImage(locMap.get(key), wndOffX + Integer.parseInt(arr[0]) * defImgW, wndOffY + Integer.parseInt(arr[1]) * defImgW, this);
         }
 
-        int x = x2GridIndex(p.x);
-        int y = y2GridIndex(p.y);
-        java.awt.image.BufferedImage bi = bgArr[x][y];
-        String xy = x + "," + y;
+        if (p.x > wndOffX && p.x < wndW - wndOffX && p.y > wndOffY && p.y < wndH - wndOffY)
+        {
+            int x = x2GridIndex(p.x);
+            int y = y2GridIndex(p.y);
+            java.awt.image.BufferedImage bi = bgArr[x][y];
+            String k = x + "," + y;
 
-        x = x2GridPoint(p.x) - selPadW;
-        y = y2GridPoint(p.y) - selPadH;
-        if (x > wndOffX)
-        {
-            x -= imgOffX;
-        }
-        if (y > wndOffY)
-        {
-            y -= imgOffY;
-        }
-        if (x + selImgW > wndW - wndOffX)
-        {
-            x -= selPadW;
-        }
-        if (y + selImgH > wndH - wndOffY)
-        {
-            y -= selPadH;
-        }
-        if (locMap.containsKey(xy))
-        {
-            g2d.drawImage(bi, x, y, this);
-            g2d.drawImage(locMap.get(xy), x + imgOffX, y + imgOffY, this);
+            x = x2GridPoint(p.x);
+            y = y2GridPoint(p.y);
+            if (x <= wndOffX)
+            {
+                x -= selPadW;
+            }
+            else
+            {
+                x -= imgOffX;
+                x -= selPadW;
+                if (x + selImgW > wndW - wndOffX)
+                {
+                    x -= imgOffX;
+                }
+            }
+            if (y <= wndOffY)
+            {
+                y -= selPadH;
+            }
+            else
+            {
+                y -= imgOffY;
+                y -= selPadH;
+                if (y + selImgH > wndH - wndOffY)
+                {
+                    y -= imgOffY;
+                }
+            }
+            if (locMap.containsKey(k))
+            {
+                g2d.drawImage(bi, x, y, this);
+                g2d.drawImage(locMap.get(k), x + imgOffX + selPadH, y + imgOffY + selPadH, this);
+            }
         }
         g2d.dispose();
 
