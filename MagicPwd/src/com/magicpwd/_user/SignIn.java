@@ -26,7 +26,6 @@ import com.magicpwd._enum.AuthLog;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.db.DBA4000;
-import com.magicpwd.m.MpwdMdl;
 import com.magicpwd.m.UserMdl;
 
 /**
@@ -181,7 +180,7 @@ public class SignIn extends javax.swing.JPanel implements IUserView
                 continue;
             }
         }
-        cbUserView.setSelectedItem(new S1S1(userMdl.getMpwdMdl().getViewLast(), ""));
+//        cbUserView.setSelectedItem(new S1S1(userMdl.getMpwdMdl().getViewLast(), ""));
 
         String name = userMdl.getCfg(ConsCfg.CFG_USER_LAST, "");
         if (com.magicpwd._util.Char.isValidate(name))
@@ -294,6 +293,10 @@ public class SignIn extends javax.swing.JPanel implements IUserView
             tfUserName.requestFocus();
             return;
         }
+        name = name.trim().replaceAll("\\s+", "").toLowerCase();
+
+        // 获得数据路径
+
         String pwds = new String(pfUserPwds.getPassword());
         if (!com.magicpwd._util.Char.isValidate(pwds))
         {
@@ -303,6 +306,8 @@ public class SignIn extends javax.swing.JPanel implements IUserView
         }
 
         UserMdl userMdl = userPtn.getUserMdl();
+        userMdl.loadCfg(name);
+
         try
         {
             boolean b = userMdl.signIn(name, pwds);
@@ -342,7 +347,7 @@ public class SignIn extends javax.swing.JPanel implements IUserView
         Object object = cbUserView.getSelectedItem();
         if (object instanceof S1S1)
         {
-            MpwdMdl.setAppView(((S1S1) object).getK());
+            userMdl.setAppView(((S1S1) object).getK());
         }
 
         if (userPtn.callBack(AuthLog.signIn, null))
