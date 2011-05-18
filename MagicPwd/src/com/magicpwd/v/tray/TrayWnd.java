@@ -16,6 +16,7 @@
  */
 package com.magicpwd.v.tray;
 
+import com.magicpwd.__i.ITrayView;
 import com.magicpwd.m.UserMdl;
 import java.awt.geom.RoundRectangle2D;
 
@@ -29,7 +30,7 @@ import java.awt.geom.RoundRectangle2D;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public class TrayWnd extends javax.swing.JWindow implements java.awt.event.MouseListener, java.awt.event.MouseMotionListener
+public class TrayWnd extends javax.swing.JWindow implements ITrayView, java.awt.event.MouseListener, java.awt.event.MouseMotionListener
 {
 
     // 中间变量，用于控制绘制过程
@@ -152,6 +153,16 @@ public class TrayWnd extends javax.swing.JWindow implements java.awt.event.Mouse
                 timerActionPerformed(e);
             }
         });
+    }
+
+    @Override
+    public void displayMessage(String title, String message)
+    {
+    }
+
+    @Override
+    public void setVisible(boolean visible)
+    {
     }
 
     @Override

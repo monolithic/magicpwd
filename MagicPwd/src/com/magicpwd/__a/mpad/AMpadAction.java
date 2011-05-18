@@ -30,7 +30,7 @@ public abstract class AMpadAction extends AAction implements IMpadAction
     protected MpadPtn mpadPtn;
 
     @Override
-    public void setMiniPtn(MpadPtn mpadPtn)
+    public void setMpadPtn(MpadPtn mpadPtn)
     {
         this.mpadPtn = mpadPtn;
     }

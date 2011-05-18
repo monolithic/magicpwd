@@ -30,7 +30,7 @@ public abstract class AMexpAction extends AAction implements IMexpAction
     protected MexpPtn mexpPtn;
 
     @Override
-    public void setMainPtn(MexpPtn mexpPtn)
+    public void setMexpPtn(MexpPtn mexpPtn)
     {
         this.mexpPtn = mexpPtn;
     }

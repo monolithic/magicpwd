@@ -30,7 +30,7 @@ public abstract class AMwizAction extends AAction implements IMwizAction
     protected MwizPtn mwizPtn;
 
     @Override
-    public void setNormPtn(MwizPtn mwizPtn)
+    public void setMwizPtn(MwizPtn mwizPtn)
     {
         this.mwizPtn = mwizPtn;
     }

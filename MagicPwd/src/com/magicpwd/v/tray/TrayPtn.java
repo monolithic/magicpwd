@@ -52,9 +52,10 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
     private UserMdl userMdl;
     private UserPtn userPtn;
     private AMpwdPtn mfCurrForm;
-    private javax.swing.JWindow mwTrayForm;
+    private TrayWnd mwTrayForm;
     private javax.swing.event.PopupMenuListener listener;
     private MenuPtn menuPtn;
+    private java.util.Map<AppView, AMpwdPtn> ptnList;
 
     public TrayPtn(UserMdl userMdl)
     {
@@ -66,7 +67,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         // 罗盘视图初始化
         if (mwTrayForm == null)
         {
-            mwTrayForm = new javax.swing.JWindow();
+            mwTrayForm = new TrayWnd(this, userMdl);
         }
 
         if (listener == null)
@@ -105,6 +106,8 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
 
     public boolean initData()
     {
+        ptnList = new java.util.EnumMap<AppView, AMpwdPtn>(AppView.class);
+
         // 右键菜单初始化
         try
         {
@@ -188,27 +191,41 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
 
     private void showNextPtn(AppView nextPtn)
     {
-        switch (nextPtn)
+        AMpwdPtn ptn = ptnList.get(nextPtn);
+        if (ptn == null)
         {
-            case mexp:
-                showMpwdPtn();
-                break;
-            case mwiz:
-                showMwizPtn();
-                break;
-            case mpad:
-                showMpadPtn();
-                break;
-            case maoc:
-                showMaocPtn();
-                break;
-            case mruc:
-                showMrucPtn();
-                break;
-            case mgtd:
-                showMgtdPtn();
-                break;
+            switch (nextPtn)
+            {
+                case mexp:
+                    ptn = new MexpPtn(this, userMdl);
+                    break;
+                case mwiz:
+                    ptn = new MwizPtn(this, userMdl);
+                    break;
+                case mpad:
+                    ptn = new MpadPtn(this, userMdl);
+                    break;
+                case maoc:
+                    ptn = new MaocPtn(this, userMdl);
+                    break;
+                case mruc:
+                    ptn = new MrucPtn(this, userMdl);
+                    break;
+                case mgtd:
+                    ptn = new MgtdPtn(this, userMdl);
+                    break;
+            }
+            ptn.initView();
+            ptn.initLang();
+            ptn.initData();
         }
+        else
+        {
+            ptn.setVisible(true);
+        }
+        ptn.showData();
+
+        mfCurrForm = ptn;
         currPtn = nextPtn;
     }
 
@@ -225,148 +242,9 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         return mfCurrForm;
     }
 
-    public MexpPtn getMexpPtn()
+    public AMpwdPtn getPtn(AppView appView)
     {
-        return mp_MexpPtn;
-    }
-
-    private void showMpwdPtn()
-    {
-        if (mp_MexpPtn == null)
-        {
-            mp_MexpPtn = new MexpPtn(this, userMdl);
-            mp_MexpPtn.initView();
-            mp_MexpPtn.initLang();
-            mp_MexpPtn.initData();
-        }
-        else
-        {
-            mp_MexpPtn.setVisible(true);
-        }
-        mp_MexpPtn.showData();
-
-        mfCurrForm = mp_MexpPtn;
-        currPtn = AppView.mexp;
-    }
-
-    public MwizPtn getMwizPtn()
-    {
-        return mp_MwizPtn;
-    }
-
-    private void showMwizPtn()
-    {
-        if (mp_MwizPtn == null)
-        {
-            mp_MwizPtn = new MwizPtn(this, userMdl);
-            mp_MwizPtn.initView();
-            mp_MwizPtn.initLang();
-            mp_MwizPtn.initData();
-        }
-        else
-        {
-            mp_MwizPtn.setVisible(true);
-        }
-        mp_MwizPtn.showData();
-
-        mfCurrForm = mp_MwizPtn;
-        currPtn = AppView.mwiz;
-    }
-
-    public MpadPtn getMpadPtn()
-    {
-        return mp_MpadPtn;
-    }
-
-    private void showMpadPtn()
-    {
-        if (mp_MpadPtn == null)
-        {
-            mp_MpadPtn = new MpadPtn(this, userMdl);
-            mp_MpadPtn.initView();
-            mp_MpadPtn.initLang();
-            mp_MpadPtn.initData();
-        }
-        else
-        {
-            mp_MpadPtn.setVisible(true);
-        }
-        mp_MpadPtn.showData();
-
-        mfCurrForm = mp_MpadPtn;
-        currPtn = AppView.mpad;
-    }
-
-    public MaocPtn getMaocPtn()
-    {
-        return mp_MaocPtn;
-    }
-
-    private void showMaocPtn()
-    {
-        if (mp_MaocPtn == null)
-        {
-            mp_MaocPtn = new MaocPtn(this, userMdl);
-            mp_MaocPtn.initView();
-            mp_MaocPtn.initLang();
-            mp_MaocPtn.initData();
-        }
-        else
-        {
-            mp_MaocPtn.setVisible(true);
-        }
-        mp_MaocPtn.showData();
-
-        mfCurrForm = mp_MaocPtn;
-        currPtn = AppView.maoc;
-    }
-
-    public MrucPtn getMrucPtn()
-    {
-        return mp_MrucPtn;
-    }
-
-    private void showMrucPtn()
-    {
-        if (mp_MrucPtn == null)
-        {
-            mp_MrucPtn = new MrucPtn(this, userMdl);
-            mp_MrucPtn.initView();
-            mp_MrucPtn.initLang();
-            mp_MrucPtn.initData();
-        }
-        else
-        {
-            mp_MrucPtn.setVisible(true);
-        }
-        mp_MrucPtn.showData();
-
-        mfCurrForm = mp_MrucPtn;
-        currPtn = AppView.mruc;
-    }
-
-    public MgtdPtn getMgtdPtn()
-    {
-        return mp_MgtdPtn;
-    }
-
-    private void showMgtdPtn()
-    {
-        if (mp_MgtdPtn == null)
-        {
-            mp_MgtdPtn = new MgtdPtn(this, userMdl);
-            mp_MgtdPtn.initView();
-            mp_MgtdPtn.initLang();
-            mp_MgtdPtn.initData();
-        }
-        else
-        {
-            mp_MgtdPtn.setVisible(true);
-        }
-        mp_MgtdPtn.showData();
-
-        mfCurrForm = mp_MgtdPtn;
-        currPtn = AppView.mgtd;
+        return ptnList.get(appView);
     }
 
     public java.io.File endSave()
@@ -375,24 +253,17 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         {
             DBAccess.locked = true;
 
-            if (mp_MexpPtn != null)
+            AMpwdPtn ptn;
+            for (AppView appView : ptnList.keySet())
             {
-//                mp_MainPtn.setVisible(false);
-                mp_MexpPtn.endSave();
-            }
-            if (mp_MwizPtn != null)
-            {
-//                mp_NormPtn.setVisible(false);
-                mp_MwizPtn.endSave();
-            }
-            if (mp_MpadPtn != null)
-            {
-//                mp_MiniPtn.setVisible(false);
-                mp_MpadPtn.endSave();
+                ptn = ptnList.get(appView);
+                if (ptn != null)
+                {
+                    ptn.endSave();
+                }
             }
 
             userMdl.saveCfg();
-
             new DBAccess().shutdown();
 
             java.io.File backFile = Util.nextBackupFile(userMdl.getDumpDir(), userMdl.getDumpCnt());
@@ -415,6 +286,11 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         endSave();
         Logs.end();
         System.exit(status);
+    }
+
+    public void hideJPopupMenu()
+    {
+        trayMenu.setVisible(false);
     }
 
     public void showJPopupMenu(java.awt.event.MouseEvent evt)
@@ -461,7 +337,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         if (nextPtn == AppView.user)
         {
             userPtn = new UserPtn(userMdl, this);
-            userPtn.initView(MpwdMdl.isFirstRun() ? AuthLog.signUp : AuthLog.signIn);
+            userPtn.initView(AuthLog.signIn);
             userPtn.initLang();
             userPtn.initData();
             userPtn.setVisible(true);
@@ -470,15 +346,15 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         }
 
         //TrayPtn.setUserCfg(cfg);
-        if (getCurrPtn().isVisible())
+        if (mfCurrForm.isVisible())
         {
             if (currPtn == nextPtn)
             {
-                getCurrPtn().toFront();
+                mfCurrForm.toFront();
                 return;
             }
 
-            getCurrPtn().setVisible(false);
+            mfCurrForm.setVisible(false);
             showNextPtn(nextPtn);
             return;
         }
@@ -592,11 +468,5 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
             Lang.showMesg(getCurrPtn(), null, exc.getLocalizedMessage());
         }
     }
-    private static MexpPtn mp_MexpPtn;
-    private static MwizPtn mp_MwizPtn;
-    private static MpadPtn mp_MpadPtn;
-    private static MrucPtn mp_MrucPtn;
-    private static MaocPtn mp_MaocPtn;
-    private static MgtdPtn mp_MgtdPtn;
     private javax.swing.JPopupMenu trayMenu;
 }

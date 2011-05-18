@@ -146,6 +146,32 @@ public class File
         return true;
     }
 
+    public static void remove(java.io.File file)
+    {
+        for (java.io.File temp : file.listFiles())
+        {
+            if (temp.isFile())
+            {
+                temp.delete();
+                continue;
+            }
+            if (temp.isDirectory())
+            {
+                remove(temp);
+                temp.delete();
+                continue;
+            }
+        }
+    }
+
+    public static void removeSub(java.io.File file)
+    {
+        for (java.io.File temp : file.listFiles())
+        {
+            remove(temp);
+        }
+    }
+
     public static boolean byte2Text(String srcPath, String dstPath)
     {
         return (Char.isValidate(srcPath) && Char.isValidate(dstPath)) ? byte2Text(new java.io.File(srcPath), new java.io.File(dstPath)) : false;

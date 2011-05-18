@@ -20,7 +20,9 @@ import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._comn.apps.FileLocker;
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._enum.AuthLog;
 import com.magicpwd._enum.RunMode;
+import com.magicpwd._user.UserPtn;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
@@ -46,6 +48,7 @@ public class MagicPwd
      */
     public static void main(String[] args)
     {
+        // 启动实例判断
         FileLocker fl = new FileLocker(new java.io.File("tmp", "mwpd.lck"));
         if (!fl.tryLock())
         {
@@ -63,16 +66,17 @@ public class MagicPwd
         MpwdMdl mpwdMdl = new MpwdMdl();
         mpwdMdl.loadCfg();
 
+        // 首次运行
+        if (MpwdMdl.isFirstRun())
+        {
+            firstRun();
+            return;
+        }
+
         // 命令模式
         if (MpwdMdl.getRunMode() == RunMode.cmd)
         {
             return;
-        }
-
-        // 网络模式
-        if (MpwdMdl.getRunMode() == RunMode.web || MpwdMdl.isFirstRun())
-        {
-            zipData(mpwdMdl.getDatPath());
         }
 
 //        java.awt.KeyboardFocusManager.setCurrentKeyboardFocusManager(new KFManager());
@@ -93,12 +97,49 @@ public class MagicPwd
                 public void run()
                 {
                     // 语言资源加载
-                    Lang.loadLang(userMdl);
+                    Lang.loadLang(userMdl.getLang());
 
                     // 扩展皮肤加载
                     Skin.loadLook(userMdl);
 
                     trayPtn.showViewPtn(AppView.user);
+                }
+            });
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+
+        loadPre();
+    }
+
+    private static void firstRun()
+    {
+        try
+        {
+            javax.swing.SwingUtilities.invokeLater(new Runnable()
+            {
+
+                @Override
+                public void run()
+                {
+                    Lang.loadLang("zh_CN");
+
+                    try
+                    {
+                        javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+                    }
+                    catch (Exception exp)
+                    {
+                        Logs.exception(exp);
+                    }
+
+                    UserPtn userPtn = new UserPtn(null, (javax.swing.JFrame) null);
+                    userPtn.initView(AuthLog.signUp);
+                    userPtn.initLang();
+                    userPtn.initData();
+                    userPtn.setBackCall(null);
                 }
             });
         }
@@ -139,21 +180,28 @@ public class MagicPwd
         AMpwdPtn.loadPre();
 
         // 扩展库加载
+        loadExt();
+    }
+
+    private static void loadExt()
+    {
         java.io.File file = new java.io.File(ConsEnv.DIR_EXT);
-        if (file != null && file.exists() && file.isDirectory() && file.canRead())
+        if (file == null || !file.exists() || !file.isDirectory() || !file.canRead())
         {
-            java.io.File jars[] = file.listFiles(new AmonFF(".+\\.jar$", true));
-            if (jars != null && jars.length > 0)
+            return;
+        }
+
+        java.io.File jars[] = file.listFiles(new AmonFF(".+\\.jar$", true));
+        if (jars != null && jars.length > 0)
+        {
+            try
             {
-                try
-                {
-                    // 加载扩展库
-                    Bean.loadJar(jars);
-                }
-                catch (Exception exp)
-                {
-                    Logs.exception(exp);
-                }
+                // 加载扩展库
+                Bean.loadJar(jars);
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
             }
         }
     }

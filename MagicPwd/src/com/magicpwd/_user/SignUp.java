@@ -22,6 +22,7 @@ import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._enum.AuthLog;
 import com.magicpwd._util.Char;
+import com.magicpwd._util.File;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.db.DBA4000;
@@ -284,12 +285,13 @@ public class SignUp extends javax.swing.JPanel implements IUserView
             Lang.showMesg(this, LangRes.P30F1A08, "请选择一个目录！");
             return;
         }
-        if (dat.exists())
+        if (new java.io.File(dat, "amon.script").exists())
         {
             if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(this, LangRes.P30F1A0D, "您选择的文件已存在，确认要继续吗？"))
             {
                 return;
             }
+            File.removeSub(dat);
         }
         if (!dat.canWrite())
         {
