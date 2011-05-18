@@ -16,7 +16,6 @@
  */
 package com.magicpwd.m;
 
-import com.magicpwd._enum.AppView;
 import com.magicpwd._enum.RunMode;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
@@ -29,25 +28,20 @@ import com.magicpwd._util.Logs;
 public final class MpwdMdl
 {
 
-    private static boolean firstRun;
     private static String appGuid;
     private static RunMode runMode = RunMode.app;
-    private static AppView appView = AppView.mwiz;
     private java.util.Properties mpwdCfg;
-    private String datPath;
-    private String bakPath;
 
     public void loadCfg()
     {
         mpwdCfg = new java.util.Properties();
 
         java.io.File cfgFile = new java.io.File("magicpwd.cfg");
-        firstRun = !cfgFile.exists();
 
         java.io.FileInputStream fis = null;
         try
         {
-            if (!firstRun && cfgFile.isFile() && cfgFile.canRead())
+            if (cfgFile.exists() && cfgFile.isFile() && cfgFile.canRead())
             {
                 fis = new java.io.FileInputStream(cfgFile);
                 mpwdCfg.load(fis);
@@ -62,10 +56,11 @@ public final class MpwdMdl
             Bean.closeStream(fis);
         }
 
-        setDatPath(mpwdCfg.getProperty("path.dat"));
-        setBakPath(mpwdCfg.getProperty("path.bak"));
-        setAppView(mpwdCfg.getProperty("view.last", AppView.mwiz.name()));
-        setAppGuid(mpwdCfg.getProperty("guid"));
+        appGuid = mpwdCfg.getProperty("app.guid");
+        if (!Char.isValidate(appGuid, 16))
+        {
+            appGuid = Char.lPad(Long.toHexString(System.currentTimeMillis()), 16, '0');
+        }
     }
 
     public void saveCfg()
@@ -81,8 +76,7 @@ public final class MpwdMdl
             if (cfgFile.isFile() && cfgFile.canWrite())
             {
                 fis = new java.io.FileOutputStream(cfgFile);
-                mpwdCfg.setProperty("view.last", appView.name());
-                mpwdCfg.setProperty("guid", appGuid);
+                mpwdCfg.setProperty("app.guid", appGuid);
                 mpwdCfg.store(fis, "");
             }
         }
@@ -94,6 +88,10 @@ public final class MpwdMdl
         {
             Bean.closeStream(fis);
         }
+    }
+
+    public void setAppView(String user, String appView)
+    {
     }
 
     /**
@@ -129,66 +127,17 @@ public final class MpwdMdl
     }
 
     /**
-     * @return the appView
-     */
-    public static AppView getAppView()
-    {
-        return appView;
-    }
-
-    /**
-     * @param appView the appView to set
-     */
-    public static void setAppView(AppView appView)
-    {
-        MpwdMdl.appView = appView;
-    }
-
-    public static void setAppView(String appView)
-    {
-        if (Char.isValidate(appView, 4))
-        {
-            appView = appView.toLowerCase();
-            try
-            {
-                MpwdMdl.appView = AppView.valueOf(appView);
-            }
-            catch (Exception exp)
-            {
-                Logs.exception(exp);
-                MpwdMdl.appView = AppView.mwiz;
-            }
-        }
-    }
-
-    public static void setAppModule(String appModule)
-    {
-        if (appModule != null)
-        {
-            MpwdMdl.appView = AppView.valueOf(appModule.toLowerCase());
-        }
-    }
-
-    /**
-     * @return the firstRun
-     */
-    public static boolean isFirstRun()
-    {
-        return firstRun;
-    }
-
-    /**
      * @return the datPath
      */
-    public String getDatPath()
+    public String getDatPath(String user)
     {
-        return datPath;
+        return mpwdCfg.getProperty("dat." + user);
     }
 
     /**
      * @param datPath the datPath to set
      */
-    public void setDatPath(String datPath)
+    public void setDatPath(String user, String datPath)
     {
         if (!Char.isValidate(datPath))
         {
@@ -198,7 +147,7 @@ public final class MpwdMdl
         {
             datPath = datPath.substring(0, datPath.length() - 1);
         }
-        this.datPath = datPath;
+        mpwdCfg.setProperty("adt." + user, datPath);
     }
 
     public static String getAppGuid()
@@ -206,46 +155,13 @@ public final class MpwdMdl
         return appGuid;
     }
 
-    private static void setAppGuid(String appGuid)
-    {
-        if (!Char.isValidate(appGuid, 16))
-        {
-            appGuid = Char.lPad(Long.toHexString(System.currentTimeMillis()), 16, '0');
-        }
-        MpwdMdl.appGuid = appGuid;
-    }
-
-    /**
-     * @return the bakPath
-     */
-    public String getBakPath()
-    {
-        return bakPath;
-    }
-
-    /**
-     * @param bakPath the bakPath to set
-     */
-    public void setBakPath(String bakPath)
-    {
-        if (!Char.isValidate(datPath))
-        {
-            datPath = "dat";
-        }
-        if (datPath.endsWith("/"))
-        {
-            datPath = datPath.substring(0, datPath.length() - 1);
-        }
-        this.bakPath = bakPath;
-    }
-
     public String getViewList()
     {
-        return mpwdCfg.getProperty("view.list", "");
+        return mpwdCfg.getProperty("app.view", "");
     }
 
-    public String getViewLast()
+    public String getAppLang()
     {
-        return mpwdCfg.getProperty("view.last", "");
+        return mpwdCfg.getProperty("app.lang", "");
     }
 }

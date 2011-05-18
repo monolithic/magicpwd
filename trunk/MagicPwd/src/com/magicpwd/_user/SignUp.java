@@ -22,7 +22,6 @@ import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._enum.AuthLog;
 import com.magicpwd._util.Char;
-import com.magicpwd._util.File;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.db.DBA4000;
@@ -245,11 +244,17 @@ public class SignUp extends javax.swing.JPanel implements IUserView
     private void signUp()
     {
         // 登录名称检测
-        String un = tfUserName.getText().trim().replaceAll("\\s+", "");
+        String un = tfUserName.getText().trim().replaceAll("\\s+", "").toLowerCase();
         if (!com.magicpwd._util.Char.isValidate(un))
         {
             Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
             tfUserName.requestFocus();
+            return;
+        }
+
+        // 检测是否用户已存在
+        if (Char.isValidate(userPtn.getUserMdl().getDatPath()))
+        {
             return;
         }
 
@@ -291,7 +296,6 @@ public class SignUp extends javax.swing.JPanel implements IUserView
             {
                 return;
             }
-            File.removeSub(dat);
         }
         if (!dat.canWrite())
         {
@@ -303,6 +307,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         pfUserPwd2.setText("");
 
         UserMdl userMdl = userPtn.getUserMdl();
+        userMdl.loadDef();
         boolean isOK = false;
         try
         {
@@ -346,7 +351,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
             userMdl.setCfg(ConsCfg.CFG_DB_SK, key);
         }
 
-        userMdl.getMpwdMdl().setDatPath(datDir);
+        userMdl.setDatPath(datDir);
         userMdl.setCfg(ConsCfg.CFG_USER_LAST, un);
         DBA4000.initDataBase(userMdl);
 

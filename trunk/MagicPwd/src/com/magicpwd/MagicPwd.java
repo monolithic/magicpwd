@@ -20,16 +20,13 @@ import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._comn.apps.FileLocker;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._enum.AuthLog;
 import com.magicpwd._enum.RunMode;
-import com.magicpwd._user.UserPtn;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Skin;
 import com.magicpwd.m.MpwdMdl;
-import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
 import com.magicpwd.v.tray.TrayPtn;
 
@@ -63,15 +60,8 @@ public class MagicPwd
         }
 
         // 系统配置信息读取
-        MpwdMdl mpwdMdl = new MpwdMdl();
+        final MpwdMdl mpwdMdl = new MpwdMdl();
         mpwdMdl.loadCfg();
-
-        // 首次运行
-        if (MpwdMdl.isFirstRun())
-        {
-            firstRun();
-            return;
-        }
 
         // 命令模式
         if (MpwdMdl.getRunMode() == RunMode.cmd)
@@ -81,12 +71,7 @@ public class MagicPwd
 
 //        java.awt.KeyboardFocusManager.setCurrentKeyboardFocusManager(new KFManager());
 
-        // 用户配置文件加载
-        final UserMdl userMdl = new UserMdl();
-        userMdl.setMpwdMdl(mpwdMdl);
-        userMdl.loadCfg();
-
-        final TrayPtn trayPtn = new TrayPtn(userMdl);
+        final TrayPtn trayPtn = new TrayPtn(null);
 
         try
         {
@@ -97,49 +82,12 @@ public class MagicPwd
                 public void run()
                 {
                     // 语言资源加载
-                    Lang.loadLang(userMdl.getLang());
+                    Lang.loadLang(mpwdMdl.getAppLang());
 
                     // 扩展皮肤加载
                     Skin.loadLook(userMdl);
 
                     trayPtn.showViewPtn(AppView.user);
-                }
-            });
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-        }
-
-        loadPre();
-    }
-
-    private static void firstRun()
-    {
-        try
-        {
-            javax.swing.SwingUtilities.invokeLater(new Runnable()
-            {
-
-                @Override
-                public void run()
-                {
-                    Lang.loadLang("zh_CN");
-
-                    try
-                    {
-                        javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-                    }
-                    catch (Exception exp)
-                    {
-                        Logs.exception(exp);
-                    }
-
-                    UserPtn userPtn = new UserPtn(null, (javax.swing.JFrame) null);
-                    userPtn.initView(AuthLog.signUp);
-                    userPtn.initLang();
-                    userPtn.initData();
-                    userPtn.setBackCall(null);
                 }
             });
         }

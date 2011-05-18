@@ -40,10 +40,12 @@ public final class UserMdl
      * 口令空间有更新
      */
     private boolean ucsUpdt;
+    private boolean firstRun;
     private MpwdMdl mpwdMdl;
     private TpltMdl tpltMdl;
     private CharMdl charMdl;
     private HintMdl hintMdl;
+    private AppView appView = AppView.mwiz;
     private java.util.Properties userCfg;
     static SafeKey safeKey;
 
@@ -51,13 +53,13 @@ public final class UserMdl
     {
     }
 
-    public void loadCfg()
+    public void loadCfg(String path)
     {
         userCfg = new java.util.Properties();
         java.io.FileInputStream fis = null;
         try
         {
-            java.io.File file = new java.io.File(mpwdMdl.getDatPath(), ConsEnv.FILE_DATA + ".config");
+            java.io.File file = new java.io.File(path, ConsEnv.FILE_DATA + ".config");
             if (file.exists() && file.canRead())
             {
                 fis = new java.io.FileInputStream(file);
@@ -88,7 +90,7 @@ public final class UserMdl
         java.io.FileOutputStream fos = null;
         try
         {
-            fos = new java.io.FileOutputStream(new java.io.File(mpwdMdl.getDatPath(), ConsEnv.FILE_DATA + ".config"));
+            fos = new java.io.FileOutputStream(new java.io.File(mpwdMdl.getDatPath(safeKey.getName()), ConsEnv.FILE_DATA + ".config"));
             userCfg.store(fos, "MagicPwd User Configure File!");
         }
         catch (Exception exp)
@@ -661,6 +663,7 @@ public final class UserMdl
     {
         safeKey.setName(userName);
         safeKey.setPwds(userPwds);
+        firstRun = true;
         return safeKey.signUp();
     }
 
@@ -718,5 +721,80 @@ public final class UserMdl
     public void setUcsTemplateUpdated(boolean updated)
     {
         ucsUpdt = updated;
+    }
+
+    /**
+     * @return the bakPath
+     */
+    public String getBakPath()
+    {
+        return "bakPath";
+    }
+
+    /**
+     * @param bakPath the bakPath to set
+     */
+    public void setBakPath(String bakPath)
+    {
+        if (!Char.isValidate(bakPath))
+        {
+            bakPath = "bak";
+        }
+        if (bakPath.endsWith("/"))
+        {
+            bakPath = bakPath.substring(0, bakPath.length() - 1);
+        }
+//        this.bakPath = bakPath;
+    }
+
+    public String getDatPath()
+    {
+        return mpwdMdl.getDatPath(safeKey.getName());
+    }
+
+    public void setDatPath(String datPath)
+    {
+        mpwdMdl.setDatPath(safeKey.getName(), datPath);
+    }
+
+    /**
+     * @return the firstRun
+     */
+    public boolean isFirstRun()
+    {
+        return firstRun;
+    }
+
+    /**
+     * @return the appView
+     */
+    public AppView getAppView()
+    {
+        return appView;
+    }
+
+    /**
+     * @param appView the appView to set
+     */
+    public void setAppView(AppView appView)
+    {
+        this.appView = appView;
+    }
+
+    public void setAppView(String appView)
+    {
+        if (Char.isValidate(appView, 4))
+        {
+            appView = appView.toLowerCase();
+            try
+            {
+                this.appView = AppView.valueOf(appView);
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+                this.appView = AppView.mwiz;
+            }
+        }
     }
 }
