@@ -19,10 +19,10 @@ public class Text
 
     public Text()
     {
-        UserMdl cfg = new UserMdl();
-        cfg.loadCfg();
+        UserMdl cfg = new UserMdl(null);
+        cfg.loadCfg("");
 
-        Lang.loadLang(cfg);
+        Lang.loadLang(cfg.getLang());
 
         JFrame frame = new JFrame();
         JTextArea ta = new JTextArea();

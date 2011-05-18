@@ -1,6 +1,7 @@
 package test;
 
-import org.javia.arity.Symbols;
+import com.magicpwd.v.tray.TrayWnd;
+import java.sql.DriverManager;
 
 /*
  * To change this template, choose Tools | Templates
@@ -10,23 +11,30 @@ import org.javia.arity.Symbols;
  *
  * @author aven
  */
-public class Test extends javax.swing.JFrame
+public class Test
 {
-
-    public Test()
-    {
-        this.setSize(400, 300);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setVisible(true);
-    }
 
     public static void main(String[] args)
     {
-        Symbols symbols = new Symbols();
+        TrayWnd tw = new TrayWnd(null, null);
+        tw.initView();
+        tw.initLang();
+        tw.initData();
+        tw.setVisible(true);
+    }
+
+    private static void testDB()
+    {
         try
         {
-            symbols.define(symbols.compileWithName("f (x , y)=1"));
-            System.out.println(symbols.eval("1+1"));
+            StringBuilder buf = new StringBuilder();
+            buf.append("jdbc:hsqldb:file:").append("D:\\").append("amon");
+            java.sql.Connection conn = DriverManager.getConnection(buf.toString());
+            java.sql.Statement stat = conn.createStatement();
+            stat.execute("shutdown");
+            stat.close();
+            conn.close();
+            System.out.println("OK");
         }
         catch (Exception exp)
         {
