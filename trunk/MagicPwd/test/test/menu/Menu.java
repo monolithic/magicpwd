@@ -35,11 +35,11 @@ public class Menu extends javax.swing.AbstractAction
 
     public void init()
     {
-        userMdl = new UserMdl();
-        userMdl.loadCfg();
+        userMdl = new UserMdl(null);
+        userMdl.loadCfg("");
 
         Skin.loadLook(userMdl);
-        Lang.loadLang(userMdl);
+        Lang.loadLang(userMdl.getLang());
 
         MenuPtn ptn = new MenuPtn(null, userMdl);
         try
