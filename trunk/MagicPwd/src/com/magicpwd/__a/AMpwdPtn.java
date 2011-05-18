@@ -68,6 +68,7 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
 
     public static void loadPre()
     {
+        // 读取默认配置文件
         defProp = new java.util.Properties();
         java.io.InputStream stream = null;
         try
@@ -84,6 +85,7 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
             Bean.closeStream(stream);
         }
 
+        // 加载默认图标
         defIcon = new java.util.HashMap<String, javax.swing.Icon>();
         try
         {

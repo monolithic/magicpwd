@@ -22,7 +22,6 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._enum.RunMode;
 import com.magicpwd.m.MpwdMdl;
-import com.magicpwd.m.UserMdl;
 import java.awt.Component;
 import java.util.Properties;
 import javax.swing.AbstractButton;
@@ -45,7 +44,7 @@ public class Lang
     {
     }
 
-    public static boolean loadLang(UserMdl userMdl)
+    public static boolean loadLang(String langRes)
     {
         if (lang == null)
         {
@@ -54,10 +53,15 @@ public class Lang
 
         if (MpwdMdl.getRunMode() != RunMode.web)
         {
+            if (!Char.isValidate(langRes))
+            {
+                langRes = "zh_CN";
+            }
+
             java.io.InputStream stream = null;
             try
             {
-                String name = '_' + userMdl.getLang();
+                String name = '_' + langRes;
                 java.io.File file = null;
                 while (name.length() > 0)
                 {

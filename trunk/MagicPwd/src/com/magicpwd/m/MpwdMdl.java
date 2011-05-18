@@ -47,7 +47,7 @@ public final class MpwdMdl
         java.io.FileInputStream fis = null;
         try
         {
-            if (firstRun && cfgFile.isFile() && cfgFile.canRead())
+            if (!firstRun && cfgFile.isFile() && cfgFile.canRead())
             {
                 fis = new java.io.FileInputStream(cfgFile);
                 mpwdCfg.load(fis);

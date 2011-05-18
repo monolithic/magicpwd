@@ -43,6 +43,12 @@ import com.magicpwd.e.mexp.skin.MoreAction;
 import com.magicpwd.e.mexp.skin.ThemeAction;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
+import com.magicpwd.v.maoc.MaocPtn;
+import com.magicpwd.v.mexp.MexpPtn;
+import com.magicpwd.v.mgtd.MgtdPtn;
+import com.magicpwd.v.mpad.MpadPtn;
+import com.magicpwd.v.mruc.MrucPtn;
+import com.magicpwd.v.mwiz.MwizPtn;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.Node;
@@ -544,7 +550,7 @@ public class MenuPtn
         javax.swing.JCheckBoxMenuItem item;
         String lookName = userMdl.getLook();
         LookAction action = new LookAction();
-        action.setMainPtn(trayPtn.getMexpPtn());
+        action.setMexpPtn((MexpPtn) trayPtn.getPtn(AppView.mexp));
         WButtonGroup group = new WButtonGroup();
 
         // Java默认风格
@@ -731,7 +737,7 @@ public class MenuPtn
             javax.swing.JCheckBoxMenuItem item;
             String feelName = userMdl.getFeel();
             FeelAction action = new FeelAction();
-            action.setMainPtn(trayPtn.getMexpPtn());
+            action.setMexpPtn((MexpPtn) trayPtn.getPtn(AppView.mexp));
             WButtonGroup group = new WButtonGroup();
 
             java.util.Properties prop = new java.util.Properties();
@@ -988,42 +994,42 @@ public class MenuPtn
                                 {
                                     IMexpAction mexpAction = (IMexpAction) action;
                                     mexpAction.setTrayPtn(trayPtn);
-                                    mexpAction.setMainPtn(trayPtn.getMexpPtn());
+                                    mexpAction.setMexpPtn((MexpPtn) trayPtn.getPtn(AppView.mexp));
                                     mexpAction.doInit(actInit);
                                 }
                                 else if (action instanceof IMwizAction)
                                 {
                                     IMwizAction mwizAction = (IMwizAction) action;
                                     mwizAction.setTrayPtn(trayPtn);
-                                    mwizAction.setNormPtn(trayPtn.getMwizPtn());
+                                    mwizAction.setMwizPtn((MwizPtn) trayPtn.getPtn(AppView.mwiz));
                                     mwizAction.doInit(actInit);
                                 }
                                 else if (action instanceof IMpadAction)
                                 {
                                     IMpadAction mpadAction = (IMpadAction) action;
                                     mpadAction.setTrayPtn(trayPtn);
-                                    mpadAction.setMiniPtn(trayPtn.getMpadPtn());
+                                    mpadAction.setMpadPtn((MpadPtn) trayPtn.getPtn(AppView.mpad));
                                     mpadAction.doInit(actInit);
                                 }
                                 else if (action instanceof IMaocAction)
                                 {
                                     IMaocAction maocAction = (IMaocAction) action;
                                     maocAction.setTrayPtn(trayPtn);
-                                    maocAction.setMaocPtn(trayPtn.getMaocPtn());
+                                    maocAction.setMaocPtn((MaocPtn) trayPtn.getPtn(AppView.maoc));
                                     maocAction.doInit(actInit);
                                 }
                                 else if (action instanceof IMrucAction)
                                 {
                                     IMrucAction mrucAction = (IMrucAction) action;
                                     mrucAction.setTrayPtn(trayPtn);
-                                    mrucAction.setMrucPtn(trayPtn.getMrucPtn());
+                                    mrucAction.setMrucPtn((MrucPtn) trayPtn.getPtn(AppView.mruc));
                                     mrucAction.doInit(actInit);
                                 }
                                 else if (action instanceof IMgtdAction)
                                 {
                                     IMgtdAction mgtdAction = (IMgtdAction) action;
                                     mgtdAction.setTrayPtn(trayPtn);
-                                    mgtdAction.setMgtdPtn(trayPtn.getMgtdPtn());
+                                    mgtdAction.setMgtdPtn((MgtdPtn) trayPtn.getPtn(AppView.mgtd));
                                     mgtdAction.doInit(actInit);
                                 }
                             }

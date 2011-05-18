@@ -16,6 +16,7 @@
  */
 package com.magicpwd.v.tray;
 
+import com.magicpwd.__i.ITrayView;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Logs;
 import java.awt.event.MouseEvent;
@@ -30,7 +31,7 @@ import java.awt.event.MouseEvent;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public class TrayIco extends java.awt.TrayIcon implements java.awt.event.MouseListener
+public class TrayIco extends java.awt.TrayIcon implements ITrayView, java.awt.event.MouseListener
 {
 
     public TrayIco()
@@ -59,6 +60,32 @@ public class TrayIco extends java.awt.TrayIcon implements java.awt.event.MouseLi
     }
 
     @Override
+    public void displayMessage(String title, String message)
+    {
+        super.displayMessage(title, message, java.awt.TrayIcon.MessageType.INFO);
+    }
+
+    @Override
+    public void setVisible(boolean visible)
+    {
+        try
+        {
+            if (visible)
+            {
+                java.awt.SystemTray.getSystemTray().add(this);
+            }
+            else
+            {
+                java.awt.SystemTray.getSystemTray().remove(this);
+            }
+        }
+        catch (java.awt.AWTException ex)
+        {
+            Logs.exception(ex);
+        }
+    }
+
+    @Override
     public void mouseClicked(MouseEvent e)
     {
     }
@@ -81,23 +108,5 @@ public class TrayIco extends java.awt.TrayIcon implements java.awt.event.MouseLi
     @Override
     public void mouseExited(MouseEvent e)
     {
-    }
-
-    public void displayMessage(String title, String message)
-    {
-        super.displayMessage(title, message, java.awt.TrayIcon.MessageType.INFO);
-    }
-
-    public void dd()
-    {
-        try
-        {
-            java.awt.SystemTray.getSystemTray().add(this);
-            java.awt.SystemTray.getSystemTray().remove(this);
-        }
-        catch (java.awt.AWTException ex)
-        {
-            Logs.exception(ex);
-        }
     }
 }
