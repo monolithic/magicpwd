@@ -253,7 +253,7 @@ public class UserPtn extends javax.swing.JPanel
         hsg.addComponent(btAbort);
         hsg.addContainerGap();
         layout.setHorizontalGroup(hsg);
-        javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER);
         vpg.addComponent(btAbort);
         vpg.addComponent(btApply);
         vpg.addComponent(lbMenu, 21, 21, 21);

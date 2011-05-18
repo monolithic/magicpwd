@@ -29,7 +29,6 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.db.DBAccess;
-import com.magicpwd.m.MpwdMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.MenuPtn;
 import com.magicpwd.v.maoc.MaocPtn;
@@ -133,7 +132,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
             case signIn:
             {
                 // 设置软件界面风格
-                showNextPtn(MpwdMdl.getAppView());
+                showNextPtn(userMdl.getAppView());
 
                 initView();
                 initLang();
@@ -147,7 +146,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
             case signUp:
             {
                 // 设置软件界面风格
-                showNextPtn(MpwdMdl.getAppView());
+                showNextPtn(userMdl.getAppView());
 
                 initView();
                 initLang();

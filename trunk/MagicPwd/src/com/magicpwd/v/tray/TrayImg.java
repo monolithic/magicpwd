@@ -16,6 +16,8 @@
  */
 package com.magicpwd.v.tray;
 
+import com.magicpwd._util.Logs;
+
 /**
  * Application: MagicPwd
  * Author     : Aven
@@ -58,6 +60,12 @@ public class TrayImg extends java.awt.Canvas
     private java.awt.image.BufferedImage icoBg;
     private java.awt.image.BufferedImage[][] bgArr;
     private java.util.HashMap<String, java.awt.image.BufferedImage> locMap;
+    private TrayWnd trayWnd;
+
+    public TrayImg(TrayWnd trayWnd)
+    {
+        this.trayWnd = trayWnd;
+    }
 
     public void init()
     {
@@ -85,6 +93,14 @@ public class TrayImg extends java.awt.Canvas
         bgArr[2][1] = readImage("skin\\feel\\default\\guid-omr.png");
         bgArr[2][2] = readImage("skin\\feel\\default\\guid-obr.png");
 
+        try
+        {
+            robot = new java.awt.Robot();
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
         curBg = new java.awt.image.BufferedImage(bigBg.getWidth(), bigBg.getHeight(), java.awt.image.BufferedImage.TYPE_INT_ARGB);
         java.awt.Graphics2D g2d = curBg.createGraphics();
         g2d.setColor(new java.awt.Color(0, 0, 0, 0));
@@ -134,8 +150,15 @@ public class TrayImg extends java.awt.Canvas
     public void enActive(java.awt.Point p)
     {
         java.awt.Graphics2D g2d = curBg.createGraphics();
-        g2d.setColor(javax.swing.UIManager.getDefaults().getColor("Panel.background"));
-        g2d.fillRect(0, 0, wndW, wndH);
+        if (robot != null)
+        {
+            g2d.drawImage(robot.createScreenCapture(trayWnd.getBounds()), 0, 0, this);
+        }
+        else
+        {
+            g2d.setColor(javax.swing.UIManager.getDefaults().getColor("Panel.background"));
+            g2d.fillRect(0, 0, wndW, wndH);
+        }
         g2d.drawImage(bigBg, 0, 0, this);
         for (String key : locMap.keySet())
         {
@@ -226,4 +249,5 @@ public class TrayImg extends java.awt.Canvas
         y -= wndOffY;
         return y - y % defImgH + wndOffY;
     }
+    private java.awt.Robot robot;
 }

@@ -352,7 +352,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         }
 
         userMdl.setDatPath(datDir);
-        userMdl.setCfg(ConsCfg.CFG_USER_LAST, un);
+        userMdl.getMpwdMdl().setUserLast(un);
         DBA4000.initDataBase(userMdl);
 
         if (userPtn.callBack(AuthLog.signUp, null))
@@ -447,7 +447,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         hpg2.addGroup(hsg2);
         layout.setHorizontalGroup(hpg2);
 
-        javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER);
         vpg1.addComponent(lbDatPath);
         vpg1.addComponent(tfDatPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         vpg1.addComponent(btDatPath, 21, 21, 21);

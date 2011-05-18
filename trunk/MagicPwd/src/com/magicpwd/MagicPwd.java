@@ -22,11 +22,12 @@ import com.magicpwd._comn.apps.FileLocker;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._enum.RunMode;
 import com.magicpwd._util.Bean;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd._util.Skin;
 import com.magicpwd.m.MpwdMdl;
+import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
 import com.magicpwd.v.tray.TrayPtn;
 
@@ -62,6 +63,11 @@ public class MagicPwd
         // 系统配置信息读取
         final MpwdMdl mpwdMdl = new MpwdMdl();
         mpwdMdl.loadCfg();
+        UserMdl userMdl = new UserMdl(mpwdMdl);
+        if (Char.isValidate(mpwdMdl.getAppLang()))
+        {
+            userMdl.loadCfg("");
+        }
 
         // 命令模式
         if (MpwdMdl.getRunMode() == RunMode.cmd)
@@ -71,7 +77,7 @@ public class MagicPwd
 
 //        java.awt.KeyboardFocusManager.setCurrentKeyboardFocusManager(new KFManager());
 
-        final TrayPtn trayPtn = new TrayPtn(null);
+        final TrayPtn trayPtn = new TrayPtn(userMdl);
 
         try
         {
@@ -85,7 +91,7 @@ public class MagicPwd
                     Lang.loadLang(mpwdMdl.getAppLang());
 
                     // 扩展皮肤加载
-                    Skin.loadLook(userMdl);
+//                    Skin.loadLook(null);
 
                     trayPtn.showViewPtn(AppView.user);
                 }
