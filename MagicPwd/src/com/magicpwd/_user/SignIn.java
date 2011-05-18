@@ -23,6 +23,7 @@ import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._enum.AuthLog;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.db.DBA4000;
@@ -107,6 +108,8 @@ public class SignIn extends javax.swing.JPanel implements IUserView
     @Override
     public void initMenu(javax.swing.JPopupMenu menu)
     {
+        menu.addSeparator();
+
         miFindPwds = new javax.swing.JMenuItem();
         miFindPwds.addActionListener(new java.awt.event.ActionListener()
         {
@@ -114,10 +117,34 @@ public class SignIn extends javax.swing.JPanel implements IUserView
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e)
             {
-                miFindPwdsMouseReleased(e);
+                miFindPwdssActionPerformed(e);
             }
         });
         menu.add(miFindPwds);
+
+        miNewUser = new javax.swing.JMenuItem();
+        miNewUser.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                miNewUserActionPerformed(e);
+            }
+        });
+        menu.add(miNewUser);
+
+        miOpenFile = new javax.swing.JMenuItem();
+        miOpenFile.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                miOpenFileActionPerformed(e);
+            }
+        });
+        menu.add(miOpenFile);
     }
 
     @Override
@@ -130,6 +157,12 @@ public class SignIn extends javax.swing.JPanel implements IUserView
 
         Lang.setWText(miFindPwds, LangRes.P30FA30E, "口令找回");
         Lang.setWTips(miFindPwds, LangRes.P30FA30F, "找回您的登录口令");
+
+        Lang.setWText(miNewUser, null, "用户注册");
+        Lang.setWTips(miNewUser, null, "注册新用户");
+
+        Lang.setWText(miOpenFile, null, "打开文件");
+        Lang.setWTips(miOpenFile, null, "打开已有数据文件");
 
         Lang.setWText(userPtn.getApplyButton(), LangRes.P30FA501, "登录(@S)");
 
@@ -182,7 +215,7 @@ public class SignIn extends javax.swing.JPanel implements IUserView
         }
 //        cbUserView.setSelectedItem(new S1S1(userMdl.getMpwdMdl().getViewLast(), ""));
 
-        String name = userMdl.getCfg(ConsCfg.CFG_USER_LAST, "");
+        String name = userMdl.getMpwdMdl().getUserLast();
         if (com.magicpwd._util.Char.isValidate(name))
         {
             tfUserName.setText(name);
@@ -296,6 +329,12 @@ public class SignIn extends javax.swing.JPanel implements IUserView
         name = name.trim().replaceAll("\\s+", "").toLowerCase();
 
         // 获得数据路径
+        String path = userPtn.getUserMdl().getMpwdMdl().getDatPath(name);
+        if (!Char.isValidate(path))
+        {
+            Lang.showMesg(this, null, "系统无法定位当前用户的数据文件，请尝试以下操作：\n1、打开文件：定位您之前的数据文件；\n2、用户注册：注册名称为 {0} 的用户。", name);
+            return;
+        }
 
         String pwds = new String(pfUserPwds.getPassword());
         if (!com.magicpwd._util.Char.isValidate(pwds))
@@ -306,7 +345,7 @@ public class SignIn extends javax.swing.JPanel implements IUserView
         }
 
         UserMdl userMdl = userPtn.getUserMdl();
-        userMdl.loadCfg(name);
+        userMdl.loadCfg(path);
 
         try
         {
@@ -317,7 +356,7 @@ public class SignIn extends javax.swing.JPanel implements IUserView
                 {
                     return;
                 }
-                userMdl.setCfg(ConsCfg.CFG_USER_LAST, name);
+                userMdl.getMpwdMdl().setUserLast(name);
             }
             else
             {
@@ -356,11 +395,48 @@ public class SignIn extends javax.swing.JPanel implements IUserView
         }
     }
 
-    private void miFindPwdsMouseReleased(java.awt.event.ActionEvent evt)
+    private void miFindPwdssActionPerformed(java.awt.event.ActionEvent evt)
     {
         userPtn.initView(AuthLog.signFp);
         userPtn.initLang();
         userPtn.initData();
+    }
+
+    private void miNewUserActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        userPtn.initView(AuthLog.signUp);
+        userPtn.initLang();
+        userPtn.initData();
+    }
+
+    private void miOpenFileActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        javax.swing.JFileChooser jfc = new javax.swing.JFileChooser();
+        jfc.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
+        jfc.setMultiSelectionEnabled(false);
+        if (javax.swing.JFileChooser.APPROVE_OPTION != jfc.showOpenDialog(userPtn))
+        {
+            return;
+        }
+        java.io.File dir = jfc.getSelectedFile();
+        if (dir == null || !dir.exists() || !dir.isDirectory())
+        {
+            return;
+        }
+        java.io.File dat = new java.io.File(dir, "amon.script");
+        if (!dat.exists() || !dat.isFile())
+        {
+            return;
+        }
+        String path = dir.getPath();
+        userPtn.getUserMdl().loadCfg(path);
+        String user = userPtn.getUserMdl().getCfg(ConsCfg.CFG_USER, "");
+        if (!Char.isValidate(user))
+        {
+            return;
+        }
+        tfUserName.setText(user);
+        userPtn.getUserMdl().getMpwdMdl().setDatPath(user, path);
     }
     private javax.swing.JLabel lbUserView;
     private javax.swing.JComboBox cbUserView;
@@ -370,4 +446,6 @@ public class SignIn extends javax.swing.JPanel implements IUserView
     private javax.swing.JPasswordField pfUserPwds;
     private javax.swing.JPanel plUserOpts;
     private javax.swing.JMenuItem miFindPwds;
+    private javax.swing.JMenuItem miNewUser;
+    private javax.swing.JMenuItem miOpenFile;
 }

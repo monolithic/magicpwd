@@ -40,13 +40,9 @@ public interface ConsCfg
      */
     String CFG_DB_SP = CFG_DB + ".sp";
     /**
-     * 用户信息：注册用户代码列表，以英文逗号分隔
+     * 用户信息：
      */
     String CFG_USER = CFG_PRE + ".user";
-    /**
-     * 用户信息：上次登录用户，不显示则置为空
-     */
-    String CFG_USER_LAST = CFG_USER + ".last";
     /**
      * 用户信息：用户偏好配置
      */

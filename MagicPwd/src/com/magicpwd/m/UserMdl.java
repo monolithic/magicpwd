@@ -49,13 +49,16 @@ public final class UserMdl
     private java.util.Properties userCfg;
     static SafeKey safeKey;
 
-    public UserMdl()
+    public UserMdl(MpwdMdl mpwdMdl)
     {
+        this.mpwdMdl = mpwdMdl;
+        userCfg = new java.util.Properties();
     }
 
     public void loadCfg(String path)
     {
-        userCfg = new java.util.Properties();
+        userCfg.clear();
+
         java.io.FileInputStream fis = null;
         try
         {
@@ -693,14 +696,6 @@ public final class UserMdl
     public MpwdMdl getMpwdMdl()
     {
         return mpwdMdl;
-    }
-
-    /**
-     * @param mpwdMdl the mpwdMdl to set
-     */
-    public void setMpwdMdl(MpwdMdl mpwdMdl)
-    {
-        this.mpwdMdl = mpwdMdl;
     }
 
     public boolean isGtdTemplateUpdated()
