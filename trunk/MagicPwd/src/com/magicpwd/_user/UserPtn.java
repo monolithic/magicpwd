@@ -299,12 +299,18 @@ public class UserPtn extends javax.swing.JPanel
         if (frame != null)
         {
             frame.pack();
-            Bean.centerForm(frame, null);
+            if (!frame.isVisible())
+            {
+                Bean.centerForm(frame, null);
+            }
         }
         if (dialog != null)
         {
             dialog.pack();
-            Bean.centerForm(dialog, parent);
+            if (!dialog.isVisible())
+            {
+                Bean.centerForm(dialog, parent);
+            }
         }
     }
 

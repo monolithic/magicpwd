@@ -102,6 +102,8 @@ public class MagicPwd
             Logs.exception(exp);
         }
 
+        trayPtn.initView();
+
         loadPre();
     }
 

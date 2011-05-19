@@ -51,7 +51,8 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
     private UserMdl userMdl;
     private UserPtn userPtn;
     private AMpwdPtn mfCurrForm;
-    private TrayWnd mwTrayForm;
+    private javax.swing.JWindow trayForm;
+//    private TrayWnd mwTrayForm;
     private javax.swing.event.PopupMenuListener listener;
     private MenuPtn menuPtn;
     private java.util.Map<AppView, AMpwdPtn> ptnList;
@@ -63,11 +64,8 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
 
     public boolean initView()
     {
-        // 罗盘视图初始化
-        if (mwTrayForm == null)
-        {
-            mwTrayForm = new TrayWnd(this, userMdl);
-        }
+        trayForm = new javax.swing.JWindow();
+        trayMenu = new javax.swing.JPopupMenu();
 
         if (listener == null)
         {
@@ -92,8 +90,6 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
                 }
             };
         }
-
-        trayMenu = new javax.swing.JPopupMenu();
 
         return true;
     }
@@ -131,6 +127,9 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
             // 用户登录
             case signIn:
             {
+                initLang();
+                initData();
+
                 // 设置软件界面风格
                 showNextPtn(userMdl.getAppView());
 
@@ -232,7 +231,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
     {
         if (isOsTray)
         {
-            mwTrayForm.setVisible(visible);
+            trayForm.setVisible(visible);
         }
     }
 
@@ -313,15 +312,15 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
             {
                 y -= window.height;
             }
-            mwTrayForm.setLocation(x, y);
+            trayForm.setLocation(x, y);
 
             // trayMenu.setInvoker(trayMenu);
-            trayMenu.show(mwTrayForm.getContentPane(), 0, 0);
-            mwTrayForm.toFront();
+            trayMenu.show(trayForm.getContentPane(), 0, 0);
+            trayForm.toFront();
         }
         else
         {
-            trayMenu.show(mwTrayForm, 0, mwTrayForm.getHeight());
+            trayMenu.show(trayForm, 0, trayForm.getHeight());
         }
     }
 
@@ -398,7 +397,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         // 下一步：显示为托盘图标
         if (ConsCfg.DEF_TRAY.equalsIgnoreCase(view))
         {
-            mwTrayForm.setSize(1, 1);
+            trayForm.setSize(1, 1);
             if (button != null)
             {
                 Lang.setWText(button, LangRes.P30F960E, "显示为导航罗盘");
@@ -409,7 +408,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         }
 
         // 下一步：显示为导航罗盘
-        mwTrayForm.pack();
+        trayForm.pack();
         if (button != null)
         {
             Lang.setWText(button, LangRes.P30F960D, "显示为托盘图标");

@@ -55,9 +55,9 @@ public class SignSu extends javax.swing.JPanel implements IUserView
         hpg1.addComponent(lbUserPwd1, javax.swing.GroupLayout.Alignment.TRAILING);
         hpg1.addComponent(lbUserPwd2, javax.swing.GroupLayout.Alignment.TRAILING);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg2.addComponent(tfUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
-        hpg2.addComponent(pfUserPwd1, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
-        hpg2.addComponent(pfUserPwd2, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
+        hpg2.addComponent(tfUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE);
+        hpg2.addComponent(pfUserPwd1, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE);
+        hpg2.addComponent(pfUserPwd2, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
         hsg1.addGroup(hpg1);
         hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);

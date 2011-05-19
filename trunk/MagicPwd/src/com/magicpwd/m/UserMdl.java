@@ -40,7 +40,6 @@ public final class UserMdl
      * 口令空间有更新
      */
     private boolean ucsUpdt;
-    private boolean firstRun;
     private MpwdMdl mpwdMdl;
     private TpltMdl tpltMdl;
     private CharMdl charMdl;
@@ -666,7 +665,6 @@ public final class UserMdl
     {
         safeKey.setName(userName);
         safeKey.setPwds(userPwds);
-        firstRun = true;
         return safeKey.signUp();
     }
 
@@ -750,14 +748,6 @@ public final class UserMdl
     public void setDatPath(String datPath)
     {
         mpwdMdl.setDatPath(safeKey.getName(), datPath);
-    }
-
-    /**
-     * @return the firstRun
-     */
-    public boolean isFirstRun()
-    {
-        return firstRun;
     }
 
     /**
