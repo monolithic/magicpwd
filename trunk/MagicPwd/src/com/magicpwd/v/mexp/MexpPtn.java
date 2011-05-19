@@ -141,6 +141,14 @@ public class MexpPtn extends AMpwdPtn
     @Override
     public boolean initData()
     {
+        mexpMdl = new MexpMdl(userMdl);
+        mexpMdl.init();
+
+        initGuidData();
+        initPropData();
+        initUserData();
+        initBaseData();
+
         try
         {
             menuPtn = new MenuPtn(trayPtn, this);
@@ -162,41 +170,7 @@ public class MexpPtn extends AMpwdPtn
             Logs.exception(exp);
         }
 
-        mexpMdl = new MexpMdl(userMdl);
-        mexpMdl.init();
-
         safeMdl = mexpMdl.getGridMdl();
-
-        trGuidTree.setModel(mexpMdl.getKindMdl());
-        lsGuidList.setModel(mexpMdl.getListMdl());
-        lsGuidList.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent e)
-            {
-                lsGuidListMouseClick(e);
-            }
-
-            @Override
-            public void mousePressed(java.awt.event.MouseEvent e)
-            {
-                lsGuidListMouseEvent(e);
-            }
-
-            @Override
-            public void mouseReleased(java.awt.event.MouseEvent e)
-            {
-                lsGuidListMouseEvent(e);
-            }
-        });
-        keysCR = new KeysCR(this);
-        String layout = userMdl.getCfg(ConsCfg.CFG_VIEW_LIST_LAY, "16");
-        if (Char.isValidatePositiveInteger(layout))
-        {
-            keysCR.setStyle(Integer.parseInt(layout));
-        }
-        lsGuidList.setCellRenderer(keysCR);
 
         tbKeysView.setModel(mexpMdl.getGridMdl());
         javax.swing.table.TableColumnModel colModel = tbKeysView.getColumnModel();
@@ -230,14 +204,6 @@ public class MexpPtn extends AMpwdPtn
             }
         });
         setInfoVisible(userMdl.isInfoVisible(AppView.mexp));
-
-        // 属性编辑组件
-        ebKeysEdit.initData();
-        ed_KeysEdit.initData();
-        for (IEditBean bean : mexpBean)
-        {
-            bean.initData();
-        }
 
         if (userMdl.isEditVisible(AppView.mexp))
         {
@@ -838,89 +804,6 @@ public class MexpPtn extends AMpwdPtn
         tbKeysView = new javax.swing.JTable();
         tbKeysView.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbKeysView.getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        javax.swing.AbstractAction action = new javax.swing.AbstractAction()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                trGuidTree.requestFocus();
-            }
-        };
-        Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.ALT_MASK), action, "guid-kind", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
-        action = new javax.swing.AbstractAction()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                lsGuidList.requestFocus();
-            }
-        };
-        Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.ALT_MASK), action, "guid-list", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
-        action = new javax.swing.AbstractAction()
-        {
-
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                tbKeysView.requestFocus();
-            }
-        };
-        Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK), action, "guid-grid", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
-
-        tbKeysView.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-
-            @Override
-            public void mousePressed(java.awt.event.MouseEvent evt)
-            {
-                // 右键事件处理
-                if (evt.isPopupTrigger())
-                {
-                    int row = tbKeysView.rowAtPoint(evt.getPoint());
-                    tbKeysView.setRowSelectionInterval(row, row);
-                    gridPop.show(tbKeysView, evt.getX(), evt.getY());
-                }
-            }
-
-            @Override
-            public void mouseReleased(java.awt.event.MouseEvent evt)
-            {
-                // 右键事件处理
-                if (evt.isPopupTrigger())
-                {
-                    int row = tbKeysView.rowAtPoint(evt.getPoint());
-                    tbKeysView.setRowSelectionInterval(row, row);
-                    gridPop.show(tbKeysView, evt.getX(), evt.getY());
-                }
-                else
-                {
-                    tbItemListMouseReleased(evt);
-                }
-            }
-
-            @Override
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                // 右键事件处理
-                if (evt.isPopupTrigger())
-                {
-                    int row = tbKeysView.rowAtPoint(evt.getPoint());
-                    tbKeysView.setRowSelectionInterval(row, row);
-                    gridPop.show(tbKeysView, evt.getX(), evt.getY());
-                }
-            }
-        });
-        tbKeysView.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-
-            @Override
-            public void keyReleased(java.awt.event.KeyEvent evt)
-            {
-                tbItemListKeyReleased(evt);
-            }
-        });
 
         spKeysView = new javax.swing.JScrollPane(tbKeysView);
 
@@ -1006,6 +889,142 @@ public class MexpPtn extends AMpwdPtn
     {
         hintBar.initLang();
         findBar.initLang();
+    }
+
+    private void initGuidData()
+    {
+        trGuidTree.setModel(mexpMdl.getKindMdl());
+        lsGuidList.setModel(mexpMdl.getListMdl());
+        lsGuidList.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent e)
+            {
+                lsGuidListMouseClick(e);
+            }
+
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent e)
+            {
+                lsGuidListMouseEvent(e);
+            }
+
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent e)
+            {
+                lsGuidListMouseEvent(e);
+            }
+        });
+        keysCR = new KeysCR(this);
+        String layout = userMdl.getCfg(ConsCfg.CFG_VIEW_LIST_LAY, "16");
+        if (Char.isValidatePositiveInteger(layout))
+        {
+            keysCR.setStyle(Integer.parseInt(layout));
+        }
+        lsGuidList.setCellRenderer(keysCR);
+    }
+
+    private void initPropData()
+    {
+        // 属性编辑组件
+        ebKeysEdit.initData();
+        ed_KeysEdit.initData();
+        for (IEditBean bean : mexpBean)
+        {
+            bean.initData();
+        }
+    }
+
+    private void initUserData()
+    {
+        javax.swing.AbstractAction action = new javax.swing.AbstractAction()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                trGuidTree.requestFocus();
+            }
+        };
+        Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_G, java.awt.event.InputEvent.ALT_MASK), action, "guid-kind", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
+        action = new javax.swing.AbstractAction()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                lsGuidList.requestFocus();
+            }
+        };
+        Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.ALT_MASK), action, "guid-list", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
+        action = new javax.swing.AbstractAction()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                tbKeysView.requestFocus();
+            }
+        };
+        Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.ALT_MASK), action, "guid-grid", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
+
+        tbKeysView.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+
+            @Override
+            public void mousePressed(java.awt.event.MouseEvent evt)
+            {
+                // 右键事件处理
+                if (evt.isPopupTrigger())
+                {
+                    int row = tbKeysView.rowAtPoint(evt.getPoint());
+                    tbKeysView.setRowSelectionInterval(row, row);
+                    gridPop.show(tbKeysView, evt.getX(), evt.getY());
+                }
+            }
+
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                // 右键事件处理
+                if (evt.isPopupTrigger())
+                {
+                    int row = tbKeysView.rowAtPoint(evt.getPoint());
+                    tbKeysView.setRowSelectionInterval(row, row);
+                    gridPop.show(tbKeysView, evt.getX(), evt.getY());
+                }
+                else
+                {
+                    tbItemListMouseReleased(evt);
+                }
+            }
+
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                // 右键事件处理
+                if (evt.isPopupTrigger())
+                {
+                    int row = tbKeysView.rowAtPoint(evt.getPoint());
+                    tbKeysView.setRowSelectionInterval(row, row);
+                    gridPop.show(tbKeysView, evt.getX(), evt.getY());
+                }
+            }
+        });
+        tbKeysView.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+
+            @Override
+            public void keyReleased(java.awt.event.KeyEvent evt)
+            {
+                tbItemListKeyReleased(evt);
+            }
+        });
+    }
+
+    private void initBaseData()
+    {
     }
 
     @Override
