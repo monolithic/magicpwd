@@ -37,13 +37,13 @@ public class HelpAction extends ATrayAction
     {
         if (!java.awt.Desktop.isDesktopSupported())
         {
-            Lang.showMesg(trayPtn.getCurrPtn(), LangRes.P30F7A0F, "");
+            Lang.showMesg(trayPtn.getMpwdPtn(), LangRes.P30F7A0F, "");
         }
 
         java.io.File help = new java.io.File("help", "index.html");
         if (!help.exists())
         {
-            Lang.showMesg(trayPtn.getCurrPtn(), LangRes.P30F7A10, "");
+            Lang.showMesg(trayPtn.getMpwdPtn(), LangRes.P30F7A10, "");
             return;
         }
         try

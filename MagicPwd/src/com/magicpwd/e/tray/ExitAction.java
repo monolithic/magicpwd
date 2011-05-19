@@ -34,7 +34,7 @@ public class ExitAction extends ATrayAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        javax.swing.JFrame frame = trayPtn.getCurrPtn();
+        javax.swing.JFrame frame = trayPtn.getMpwdPtn();
         if (frame == null || frame.getState() == javax.swing.JFrame.ICONIFIED)
         {
             frame = null;
@@ -44,9 +44,9 @@ public class ExitAction extends ATrayAction
             return;
         }
 
-        if (trayPtn.getCurrPtn() != null)
+        if (trayPtn.getMpwdPtn() != null)
         {
-            trayPtn.getCurrPtn().setVisible(false);
+            trayPtn.getMpwdPtn().setVisible(false);
         }
         trayPtn.endExit(0);
     }

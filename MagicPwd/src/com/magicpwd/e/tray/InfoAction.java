@@ -39,7 +39,7 @@ public class InfoAction extends ATrayAction
         StringBuilder buf = new StringBuilder();
         buf.append(Lang.getLang(LangRes.P30F7201, "魔方密码")).append("\n");
         buf.append(ConsEnv.VERSIONS).append(" Build ").append(ConsEnv.BUILDER);
-        javax.swing.JOptionPane.showMessageDialog(trayPtn.getCurrPtn(), buf.toString(), Lang.getLang(LangRes.P30F1208, "关于软件"), javax.swing.JOptionPane.INFORMATION_MESSAGE, new javax.swing.ImageIcon(Bean.getLogo(32)));
+        javax.swing.JOptionPane.showMessageDialog(trayPtn.getMpwdPtn(), buf.toString(), Lang.getLang(LangRes.P30F1208, "关于软件"), javax.swing.JOptionPane.INFORMATION_MESSAGE, new javax.swing.ImageIcon(Bean.getLogo(32)));
     }
 
     @Override

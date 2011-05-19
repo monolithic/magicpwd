@@ -20,7 +20,6 @@ import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._enum.RunMode;
 import com.magicpwd.m.MpwdMdl;
-import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -34,17 +33,32 @@ import org.dom4j.io.SAXReader;
 public class Skin
 {
 
-    public static void loadLook(UserMdl userMdl)
+    public static void loadFeel(String feel)
     {
         if (MpwdMdl.getRunMode() == RunMode.cmd)
         {
             return;
         }
 
-//        String feel = userMdl.getCfg(ConsCfg.CFG_SKIN_FEEL);
+        if (!Char.isValidate(feel))
+        {
+            feel = ConsCfg.DEF_SKIN_FEEL_DEF;
+        }
+    }
+
+    public static void loadLook(String look)
+    {
+        if (MpwdMdl.getRunMode() == RunMode.cmd)
+        {
+            return;
+        }
+
+        if (!Char.isValidate(look))
+        {
+            look = ConsCfg.DEF_SKIN_LOOK_SYS;
+        }
 
         // 查找对应的文件
-        String look = userMdl.getLook();
         String name = "System";
         int di = look.indexOf('.');
         if (di > 0)

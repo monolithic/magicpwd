@@ -52,6 +52,8 @@ public class SignUp extends javax.swing.JPanel implements IUserView
     @Override
     public void initMenu(javax.swing.JPopupMenu menu)
     {
+        menu.addSeparator();
+
         miUserOpts = new javax.swing.JCheckBoxMenuItem();
         miUserOpts.addActionListener(new java.awt.event.ActionListener()
         {
@@ -85,7 +87,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
 
         Lang.setWText(userPtn.getApplyButton(), LangRes.P30FA502, "注册(@S)");
 
-        Lang.setWText(userPtn.getAbortButton(), LangRes.P30FA504, "取消(@C)");
+        Lang.setWText(userPtn.getAbortButton(), LangRes.P30FA504, "返回(@C)");
 
         userPtn.setTitle(Lang.getLang(LangRes.P30FA203, "用户注册"));
 

@@ -26,6 +26,7 @@ import com.magicpwd._util.Char;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
+import com.magicpwd._util.Skin;
 import com.magicpwd.m.MpwdMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
@@ -91,7 +92,7 @@ public class MagicPwd
                     Lang.loadLang(mpwdMdl.getAppLang());
 
                     // 扩展皮肤加载
-//                    Skin.loadLook(null);
+                    Skin.loadLook("");
 
                     trayPtn.showViewPtn(AppView.user);
                 }

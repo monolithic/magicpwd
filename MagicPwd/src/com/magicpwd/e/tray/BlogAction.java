@@ -38,7 +38,7 @@ public class BlogAction extends ATrayAction
     {
         if (!java.awt.Desktop.isDesktopSupported())
         {
-            Lang.showMesg(trayPtn.getCurrPtn(), LangRes.P30F7A0F, "");
+            Lang.showMesg(trayPtn.getMpwdPtn(), LangRes.P30F7A0F, "");
         }
 
         try

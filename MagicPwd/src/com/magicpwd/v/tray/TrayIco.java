@@ -34,7 +34,7 @@ import java.awt.event.MouseEvent;
 public class TrayIco extends java.awt.TrayIcon implements ITrayView, java.awt.event.MouseListener
 {
 
-    public TrayIco()
+    TrayIco()
     {
         super(null);
     }

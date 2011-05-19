@@ -38,7 +38,7 @@ public class Menu extends javax.swing.AbstractAction
         userMdl = new UserMdl(null);
         userMdl.loadCfg("");
 
-        Skin.loadLook(userMdl);
+        Skin.loadLook("");
         Lang.loadLang(userMdl.getLang());
 
         MenuPtn ptn = new MenuPtn(null, userMdl);
