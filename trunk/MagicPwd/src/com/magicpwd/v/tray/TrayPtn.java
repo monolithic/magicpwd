@@ -18,6 +18,7 @@ package com.magicpwd.v.tray;
 
 import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.IBackCall;
+import com.magicpwd.__i.ITrayView;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;
@@ -50,11 +51,11 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
     private static AppView nextPtn;
     private UserMdl userMdl;
     private UserPtn userPtn;
-    private AMpwdPtn mfCurrForm;
-    private javax.swing.JWindow trayForm;
-//    private TrayWnd mwTrayForm;
-    private javax.swing.event.PopupMenuListener listener;
     private MenuPtn menuPtn;
+    private AMpwdPtn mpwdPtn;
+    private ITrayView trayPtn;
+    private javax.swing.JWindow trayForm;
+    private javax.swing.event.PopupMenuListener listener;
     private java.util.Map<AppView, AMpwdPtn> ptnList;
 
     public TrayPtn(UserMdl userMdl)
@@ -133,27 +134,8 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
                 // 设置软件界面风格
                 showNextPtn(userMdl.getAppView());
 
-                initView();
-                initLang();
-                initData();
-                mfCurrForm.toFront();
-                mfCurrForm.requestFocus();
-                return true;
-            }
-
-            // 用户注册
-            case signUp:
-            {
-                // 设置软件界面风格
-                showNextPtn(userMdl.getAppView());
-
-                initView();
-                initLang();
-                initData();
-                mfCurrForm.toFront();
-                mfCurrForm.requestFocus();
-
-//            mfCurrForm.initDemo();
+                mpwdPtn.toFront();
+                mpwdPtn.requestFocus();
                 return true;
             }
 
@@ -178,12 +160,11 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
 
         showNextPtn(nextPtn);
 
-        javax.swing.JFrame currForm = getCurrPtn();
-        if (currForm.getState() != java.awt.Frame.NORMAL)
+        if (mpwdPtn.getState() != java.awt.Frame.NORMAL)
         {
-            currForm.setState(java.awt.Frame.NORMAL);
+            mpwdPtn.setState(java.awt.Frame.NORMAL);
         }
-        currForm.toFront();
+        mpwdPtn.toFront();
         return true;
     }
 
@@ -223,7 +204,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         }
         ptn.showData();
 
-        mfCurrForm = ptn;
+        mpwdPtn = ptn;
         currPtn = nextPtn;
     }
 
@@ -235,9 +216,9 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         }
     }
 
-    public AMpwdPtn getCurrPtn()
+    public AMpwdPtn getMpwdPtn()
     {
-        return mfCurrForm;
+        return mpwdPtn;
     }
 
     public AMpwdPtn getPtn(AppView appView)
@@ -344,15 +325,15 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         }
 
         //TrayPtn.setUserCfg(cfg);
-        if (mfCurrForm.isVisible())
+        if (mpwdPtn.isVisible())
         {
             if (currPtn == nextPtn)
             {
-                mfCurrForm.toFront();
+                mpwdPtn.toFront();
                 return;
             }
 
-            mfCurrForm.setVisible(false);
+            mpwdPtn.setVisible(false);
             showNextPtn(nextPtn);
             return;
         }
@@ -366,7 +347,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         {
             userPtn = new UserPtn(userMdl, this);
         }
-        UserPtn ptn = (getCurrPtn() != null && getCurrPtn().isVisible()) ? new UserPtn(userMdl, getCurrPtn()) : userPtn;
+        UserPtn ptn = (getMpwdPtn() != null && getMpwdPtn().isVisible()) ? new UserPtn(userMdl, getMpwdPtn()) : userPtn;
         ptn.setBackCall(call);
         ptn.initView(view);
         ptn.initLang();
@@ -397,7 +378,16 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         // 下一步：显示为托盘图标
         if (ConsCfg.DEF_TRAY.equalsIgnoreCase(view))
         {
-            trayForm.setSize(1, 1);
+            if (trayIco == null)
+            {
+                trayIco = new TrayIco();
+                trayIco.initView();
+                trayIco.initLang();
+                trayIco.initData();
+            }
+            trayPtn = trayIco;
+            trayPtn.setVisible(true);
+
             if (button != null)
             {
                 Lang.setWText(button, LangRes.P30F960E, "显示为导航罗盘");
@@ -408,7 +398,16 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         }
 
         // 下一步：显示为导航罗盘
-        trayForm.pack();
+        if (trayWnd == null)
+        {
+            trayWnd = new TrayWnd(this, userMdl);
+            trayWnd.initView();
+            trayWnd.initLang();
+            trayWnd.initData();
+        }
+        trayPtn = trayWnd;
+        trayPtn.setVisible(true);
+
         if (button != null)
         {
             Lang.setWText(button, LangRes.P30F960D, "显示为托盘图标");
@@ -424,7 +423,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
 
     public void changeSkin(String lafClass)
     {
-        boolean wasDecoratedByOS = !(getCurrPtn().isUndecorated());
+        boolean wasDecoratedByOS = !(getMpwdPtn().isUndecorated());
         try
         {
             boolean isSystem = !com.magicpwd._util.Char.isValidate(lafClass) || ConsCfg.DEF_SKIN_LOOK_SYS.equalsIgnoreCase(lafClass);
@@ -442,29 +441,31 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
 
             if (canBeDecoratedByLAF == wasDecoratedByOS)
             {
-                boolean wasVisible = getCurrPtn().isVisible();
+                boolean wasVisible = getMpwdPtn().isVisible();
 
-                getCurrPtn().setVisible(false);
-                getCurrPtn().dispose();
+                getMpwdPtn().setVisible(false);
+                getMpwdPtn().dispose();
                 if (!canBeDecoratedByLAF || wasDecoratedByOS)
                 {
-                    getCurrPtn().setUndecorated(false);
-                    getCurrPtn().getRootPane().setWindowDecorationStyle(0);
+                    getMpwdPtn().setUndecorated(false);
+                    getMpwdPtn().getRootPane().setWindowDecorationStyle(0);
                 }
                 else
                 {
-                    getCurrPtn().setUndecorated(true);
-                    getCurrPtn().getRootPane().setWindowDecorationStyle(1);
+                    getMpwdPtn().setUndecorated(true);
+                    getMpwdPtn().getRootPane().setWindowDecorationStyle(1);
                 }
 
-                getCurrPtn().setVisible(wasVisible);
+                getMpwdPtn().setVisible(wasVisible);
             }
             userMdl.setLook(isSystem ? ConsCfg.DEF_SKIN_LOOK_SYS : lafClass);
         }
         catch (Exception exc)
         {
-            Lang.showMesg(getCurrPtn(), null, exc.getLocalizedMessage());
+            Lang.showMesg(getMpwdPtn(), null, exc.getLocalizedMessage());
         }
     }
+    private TrayIco trayIco;
+    private TrayWnd trayWnd;
     private javax.swing.JPopupMenu trayMenu;
 }
