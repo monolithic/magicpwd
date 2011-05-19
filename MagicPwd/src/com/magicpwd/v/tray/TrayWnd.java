@@ -161,11 +161,6 @@ public class TrayWnd extends javax.swing.JWindow implements ITrayView, java.awt.
     }
 
     @Override
-    public void setVisible(boolean visible)
-    {
-    }
-
-    @Override
     public void mouseClicked(java.awt.event.MouseEvent evt)
     {
         if (evt.isPopupTrigger())

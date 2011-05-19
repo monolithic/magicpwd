@@ -28,6 +28,7 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.m.UserMdl;
+import com.magicpwd.r.AmonFV;
 
 /**
  *
@@ -414,6 +415,7 @@ public class SignIn extends javax.swing.JPanel implements IUserView
         javax.swing.JFileChooser jfc = new javax.swing.JFileChooser();
         jfc.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
         jfc.setMultiSelectionEnabled(false);
+        jfc.setFileView(new AmonFV());
         if (javax.swing.JFileChooser.APPROVE_OPTION != jfc.showOpenDialog(userPtn))
         {
             return;

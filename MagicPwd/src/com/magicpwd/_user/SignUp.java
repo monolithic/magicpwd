@@ -59,7 +59,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e)
             {
-                lbUserOptsMouseReleased(e);
+                lbUserOptsActionPerformed(e);
             }
         });
         menu.add(miUserOpts);
@@ -172,6 +172,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         });
 
         tfDatPath.setText('.' + java.io.File.separator + "dat" + java.io.File.separator);
+        miUserOpts.setSelected(true);
 
         cbDbSec.addActionListener(new java.awt.event.ActionListener()
         {
@@ -199,7 +200,9 @@ public class SignUp extends javax.swing.JPanel implements IUserView
     @Override
     public void btAbortActionPerformed(java.awt.event.ActionEvent evt)
     {
-        userPtn.exitSystem();
+        userPtn.initView(AuthLog.signIn);
+        userPtn.initLang();
+        userPtn.initData();
     }
 
     private void checkUserName()
@@ -378,9 +381,9 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         hpg1.addComponent(lbUserPwd1, javax.swing.GroupLayout.Alignment.TRAILING);
         hpg1.addComponent(lbUserPwd2, javax.swing.GroupLayout.Alignment.TRAILING);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg2.addComponent(tfUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
-        hpg2.addComponent(pfUserPwd1, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
-        hpg2.addComponent(pfUserPwd2, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE);
+        hpg2.addComponent(tfUserName, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE);
+        hpg2.addComponent(pfUserPwd1, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE);
+        hpg2.addComponent(pfUserPwd2, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
         hsg1.addGroup(hpg1);
         hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -429,7 +432,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(plUserOpts);
         plUserOpts.setLayout(layout);
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
-        hsg1.addComponent(tfDatPath, javax.swing.GroupLayout.DEFAULT_SIZE, 113, Short.MAX_VALUE);
+        hsg1.addComponent(tfDatPath, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE);
         hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg1.addComponent(btDatPath, 21, 21, 21);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
@@ -443,7 +446,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         hsg2.addGroup(hpg1);
 //        hsg2.addContainerGap();
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg2.addComponent(spSepLine, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE);
+        hpg2.addComponent(spSepLine, javax.swing.GroupLayout.DEFAULT_SIZE, 10, Short.MAX_VALUE);
         hpg2.addGroup(hsg2);
         layout.setHorizontalGroup(hpg2);
 
@@ -464,7 +467,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         layout.setVerticalGroup(vsg1);
     }
 
-    private void lbUserOptsMouseReleased(java.awt.event.ActionEvent evt)
+    private void lbUserOptsActionPerformed(java.awt.event.ActionEvent evt)
     {
         plUserOpts.setVisible(!plUserOpts.isVisible());
         userPtn.pack();
