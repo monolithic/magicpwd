@@ -17,10 +17,10 @@
 package com.magicpwd;
 
 import com.magicpwd.__a.AMpwdPtn;
-import com.magicpwd._enum.AppView;
 import com.magicpwd._comn.apps.FileLocker;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._enum.RunMode;
+import com.magicpwd._user.UserPtn;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Jzip;
@@ -30,7 +30,6 @@ import com.magicpwd._util.Skin;
 import com.magicpwd.m.MpwdMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
-import com.magicpwd.v.tray.TrayPtn;
 
 /**
  * @author Amon
@@ -78,8 +77,6 @@ public class MagicPwd
 
 //        java.awt.KeyboardFocusManager.setCurrentKeyboardFocusManager(new KFManager());
 
-        final TrayPtn trayPtn = new TrayPtn(userMdl);
-
         try
         {
             javax.swing.SwingUtilities.invokeLater(new Runnable()
@@ -94,7 +91,7 @@ public class MagicPwd
                     // 扩展皮肤加载
                     Skin.loadLook("");
 
-                    trayPtn.showViewPtn(AppView.user);
+                    UserPtn userPtn = new UserPtn(null);
                 }
             });
         }
@@ -102,8 +99,6 @@ public class MagicPwd
         {
             Logs.exception(exp);
         }
-
-        trayPtn.initView();
 
         loadPre();
     }
