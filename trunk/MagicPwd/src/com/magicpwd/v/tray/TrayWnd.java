@@ -17,6 +17,7 @@
 package com.magicpwd.v.tray;
 
 import com.magicpwd.__i.ITrayView;
+import com.magicpwd._util.Logs;
 import com.magicpwd.m.UserMdl;
 import java.awt.geom.RoundRectangle2D;
 
@@ -48,11 +49,11 @@ public class TrayWnd extends javax.swing.JWindow implements ITrayView, java.awt.
      */
     private int minWndSize = 24;
     private int minRecSize = 24;
-    private int minArcSize = 2;
+    private int minArcSize = 1;
     /**
      * 圆角最大宽度
      */
-    private int maxArcSize = 24;
+    private int maxArcSize = 8;
     /**
      * 动画时长
      */
@@ -153,6 +154,15 @@ public class TrayWnd extends javax.swing.JWindow implements ITrayView, java.awt.
                 timerActionPerformed(e);
             }
         });
+
+        try
+        {
+            robot = new java.awt.Robot();
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
     }
 
     @Override
@@ -196,6 +206,8 @@ public class TrayWnd extends javax.swing.JWindow implements ITrayView, java.awt.
     @Override
     public void mouseEntered(java.awt.event.MouseEvent evt)
     {
+        trayImg.setBackgroud(robot.createScreenCapture(this.getBounds()));
+
         aniDir = true;
         if (!timer.isRunning())
         {
@@ -308,4 +320,5 @@ public class TrayWnd extends javax.swing.JWindow implements ITrayView, java.awt.
     }
     private java.awt.Point dragLoc;
     private java.awt.Point formLoc;
+    private java.awt.Robot robot;
 }
