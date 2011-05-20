@@ -30,7 +30,6 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.m.MpwdMdl;
 import com.magicpwd.m.UserMdl;
-import com.magicpwd.v.tray.TrayPtn;
 import java.awt.event.ActionEvent;
 
 public class UserPtn extends javax.swing.JPanel
@@ -54,7 +53,6 @@ public class UserPtn extends javax.swing.JPanel
      * 成功回调函数
      */
     private IBackCall<AuthLog, UserDto> backCall;
-    private TrayPtn trayPtn;
     private UserMdl userMdl;
     private IUserView userView;
 
@@ -62,10 +60,9 @@ public class UserPtn extends javax.swing.JPanel
      * 独立窗口
      * @param type
      */
-    public UserPtn(UserMdl userMdl, TrayPtn trayPtn)
+    public UserPtn(UserMdl userMdl)
     {
         this.userMdl = userMdl;
-        this.trayPtn = trayPtn;
         frame = new javax.swing.JFrame();
         frame.setResizable(false);
         frame.setIconImage(Bean.getLogo(16));
