@@ -16,6 +16,8 @@
  */
 package com.magicpwd.v.tray;
 
+import java.awt.Color;
+
 /**
  * Application: MagicPwd
  * Author     : Aven
@@ -128,6 +130,11 @@ public class TrayImg extends java.awt.Canvas
         paint(g);
     }
 
+    public void setBackgroud(java.awt.image.BufferedImage image)
+    {
+        this.bgImage = image;
+    }
+
     public void deActive()
     {
         java.awt.Graphics2D g2d = curBg.createGraphics();
@@ -140,8 +147,15 @@ public class TrayImg extends java.awt.Canvas
     public void enActive(java.awt.Point p)
     {
         java.awt.Graphics2D g2d = curBg.createGraphics();
-        g2d.setColor(javax.swing.UIManager.getDefaults().getColor("Panel.background"));
-        g2d.fillRect(0, 0, wndW, wndH);
+        if (bgImage != null)
+        {
+            g2d.drawImage(bgImage, 0, 0, this);
+        }
+        else
+        {
+            g2d.setColor(javax.swing.UIManager.getDefaults().getColor("Panel.background"));
+            g2d.fillRect(0, 0, wndW, wndH);
+        }
         g2d.drawImage(bigBg, 0, 0, this);
         for (String key : locMap.keySet())
         {
@@ -232,4 +246,5 @@ public class TrayImg extends java.awt.Canvas
         y -= wndOffY;
         return y - y % defImgH + wndOffY;
     }
+    private java.awt.image.BufferedImage bgImage;
 }
