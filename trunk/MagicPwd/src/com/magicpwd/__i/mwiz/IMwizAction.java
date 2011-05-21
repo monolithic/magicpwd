@@ -17,7 +17,7 @@
 package com.magicpwd.__i.mwiz;
 
 import com.magicpwd.__i.IAction;
-import com.magicpwd.v.mwiz.MwizPtn;
+import com.magicpwd.v.gui.mwiz.MwizPtn;
 
 /**
  *

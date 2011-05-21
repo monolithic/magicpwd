@@ -18,7 +18,7 @@ package com.magicpwd.r;
 
 import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd._util.Bean;
-import com.magicpwd.v.mexp.MexpPtn;
+import com.magicpwd.v.gui.mexp.MexpPtn;
 
 /**
  *

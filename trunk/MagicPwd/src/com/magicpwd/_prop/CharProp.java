@@ -25,7 +25,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.CharMdl;
 import com.magicpwd.r.ListCR;
-import com.magicpwd.v.mexp.MexpPtn;
+import com.magicpwd.v.gui.mexp.MexpPtn;
 
 /**
  * @author Amon

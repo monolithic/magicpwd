@@ -29,7 +29,7 @@ import com.magicpwd._prop.USetProp;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd.r.ListCR;
-import com.magicpwd.v.mexp.MexpPtn;
+import com.magicpwd.v.gui.mexp.MexpPtn;
 
 /**
  * 软件设置对话框

@@ -41,8 +41,8 @@ import com.magicpwd.d.dx.DXA2000;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
-import com.magicpwd.v.MenuPtn;
-import com.magicpwd.v.tray.TrayPtn;
+import com.magicpwd.v.gui.MenuPtn;
+import com.magicpwd.v.gui.tray.TrayPtn;
 import java.io.IOException;
 
 /**

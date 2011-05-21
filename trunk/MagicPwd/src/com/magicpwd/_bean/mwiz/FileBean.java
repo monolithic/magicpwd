@@ -19,7 +19,7 @@ package com.magicpwd._bean.mwiz;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mwiz.IMwizBean;
 import com.magicpwd._bean.AFileBean;
-import com.magicpwd.v.mwiz.MwizPtn;
+import com.magicpwd.v.gui.mwiz.MwizPtn;
 
 /**
  *

@@ -20,7 +20,7 @@ import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mexp.IMexpBean;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
-import com.magicpwd.v.mexp.MexpPtn;
+import com.magicpwd.v.gui.mexp.MexpPtn;
 
 /**
  * 属性：信息
