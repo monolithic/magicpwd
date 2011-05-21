@@ -16,20 +16,13 @@
  */
 package com.magicpwd;
 
-import com.magicpwd.__a.AMpwdPtn;
-import com.magicpwd._comn.apps.FileLocker;
-import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._enum.RunMode;
-import com.magicpwd._user.UserPtn;
-import com.magicpwd._util.Bean;
-import com.magicpwd._util.Char;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd._util.Skin;
 import com.magicpwd.m.MpwdMdl;
-import com.magicpwd.m.UserMdl;
-import com.magicpwd.r.AmonFF;
+import com.magicpwd.v.cmd.mcmd.McmdPtn;
+import com.magicpwd.v.gui.tray.TrayPtn;
 
 /**
  * @author Amon
@@ -37,8 +30,39 @@ import com.magicpwd.r.AmonFF;
 public class MagicPwd
 {
 
+    private MpwdMdl mpwdMdl;
+
     private MagicPwd()
     {
+    }
+
+    private void init()
+    {
+        // 系统配置信息读取
+        mpwdMdl = new MpwdMdl();
+        mpwdMdl.loadCfg();
+
+        // 命令模式
+        if (MpwdMdl.getRunMode() == RunMode.cmd)
+        {
+            McmdPtn mcmdPtn = new McmdPtn();
+            mcmdPtn.init();
+            return;
+        }
+
+        if (MpwdMdl.getRunMode() == RunMode.app)
+        {
+            TrayPtn trayPtn = new TrayPtn(mpwdMdl);
+            trayPtn.init();
+            return;
+        }
+
+        if (MpwdMdl.getRunMode() == RunMode.dev)
+        {
+            TrayPtn trayPtn = new TrayPtn(mpwdMdl);
+            trayPtn.init();
+            return;
+        }
     }
 
     /**
@@ -46,61 +70,13 @@ public class MagicPwd
      */
     public static void main(String[] args)
     {
-        // 启动实例判断
-        FileLocker fl = new FileLocker(new java.io.File("tmp", "mwpd.lck"));
-        if (!fl.tryLock())
-        {
-            javax.swing.JOptionPane.showMessageDialog(null, "已经有一个《魔方密码》实例处于运行状态！", "友情提示", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-
         // 界面启动参数读取
         if (args != null && args.length > 0)
         {
             MpwdMdl.setRunMode(args[0]);
         }
 
-        // 系统配置信息读取
-        final MpwdMdl mpwdMdl = new MpwdMdl();
-        mpwdMdl.loadCfg();
-        UserMdl userMdl = new UserMdl(mpwdMdl);
-        if (Char.isValidate(mpwdMdl.getAppLang()))
-        {
-            userMdl.loadCfg("");
-        }
-
-        // 命令模式
-        if (MpwdMdl.getRunMode() == RunMode.cmd)
-        {
-            return;
-        }
-
-//        java.awt.KeyboardFocusManager.setCurrentKeyboardFocusManager(new KFManager());
-
-        try
-        {
-            javax.swing.SwingUtilities.invokeLater(new Runnable()
-            {
-
-                @Override
-                public void run()
-                {
-                    // 语言资源加载
-                    Lang.loadLang(mpwdMdl.getAppLang());
-
-                    // 扩展皮肤加载
-                    Skin.loadLook("");
-
-                    UserPtn userPtn = new UserPtn(null);
-                }
-            });
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-        }
-
-        loadPre();
+        new MagicPwd().init();
     }
 
     private static void zipData(String dir)
@@ -113,48 +89,6 @@ public class MagicPwd
         {
             Logs.exception(exp);
             Lang.showMesg(null, null, exp.getLocalizedMessage());
-        }
-    }
-
-    private static void loadPre()
-    {
-        try
-        {
-            Class.forName("org.hsqldb.jdbcDriver");
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-        }
-
-        Bean.getNone();
-        Bean.getLogo(16);
-        AMpwdPtn.loadPre();
-
-        // 扩展库加载
-        loadExt();
-    }
-
-    private static void loadExt()
-    {
-        java.io.File file = new java.io.File(ConsEnv.DIR_EXT);
-        if (file == null || !file.exists() || !file.isDirectory() || !file.canRead())
-        {
-            return;
-        }
-
-        java.io.File jars[] = file.listFiles(new AmonFF(".+\\.jar$", true));
-        if (jars != null && jars.length > 0)
-        {
-            try
-            {
-                // 加载扩展库
-                Bean.loadJar(jars);
-            }
-            catch (Exception exp)
-            {
-                Logs.exception(exp);
-            }
         }
     }
 }

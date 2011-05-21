@@ -25,7 +25,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
-import com.magicpwd.v.MenuPtn;
+import com.magicpwd.v.gui.MenuPtn;
 
 /**
  *

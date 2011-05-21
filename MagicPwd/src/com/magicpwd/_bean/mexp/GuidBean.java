@@ -28,7 +28,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.r.FileTM;
-import com.magicpwd.v.mexp.MexpPtn;
+import com.magicpwd.v.gui.mexp.MexpPtn;
 import java.util.regex.Pattern;
 import org.dom4j.Document;
 import org.dom4j.Node;

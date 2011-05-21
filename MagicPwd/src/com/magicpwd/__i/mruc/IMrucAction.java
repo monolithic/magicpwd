@@ -17,7 +17,7 @@
 package com.magicpwd.__i.mruc;
 
 import com.magicpwd.__i.IAction;
-import com.magicpwd.v.mruc.MrucPtn;
+import com.magicpwd.v.gui.mruc.MrucPtn;
 
 /**
  *

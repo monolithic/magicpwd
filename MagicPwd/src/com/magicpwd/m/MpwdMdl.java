@@ -189,4 +189,9 @@ public final class MpwdMdl
     {
         return getCfg("app.lang", "zh_CN");
     }
+
+    public String getAppSkin()
+    {
+        return "";
+    }
 }
