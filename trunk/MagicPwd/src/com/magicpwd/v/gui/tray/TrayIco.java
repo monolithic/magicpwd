@@ -19,7 +19,6 @@ package com.magicpwd.v.gui.tray;
 import com.magicpwd.__i.ITrayView;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Logs;
-import java.awt.event.MouseEvent;
 
 /**
  * Application: MagicPwd
@@ -34,13 +33,18 @@ import java.awt.event.MouseEvent;
 public class TrayIco extends java.awt.TrayIcon implements ITrayView, java.awt.event.MouseListener
 {
 
-    TrayIco()
+    private TrayPtn trayPtn;
+
+    TrayIco(TrayPtn trayPtn)
     {
         super(null);
+        this.trayPtn = trayPtn;
     }
 
     public boolean initView()
     {
+        trayWnd = new javax.swing.JWindow();
+
         if (!java.awt.SystemTray.isSupported())
         {
             return false;
@@ -57,6 +61,11 @@ public class TrayIco extends java.awt.TrayIcon implements ITrayView, java.awt.ev
     public void initData()
     {
         addMouseListener(this);
+    }
+
+    @Override
+    public void deActive()
+    {
     }
 
     @Override
@@ -86,27 +95,61 @@ public class TrayIco extends java.awt.TrayIcon implements ITrayView, java.awt.ev
     }
 
     @Override
-    public void mouseClicked(MouseEvent e)
+    public void mouseClicked(java.awt.event.MouseEvent e)
+    {
+        if (e.isPopupTrigger())
+        {
+            showPopupMenu(e);
+        }
+    }
+
+    @Override
+    public void mousePressed(java.awt.event.MouseEvent e)
+    {
+        if (e.isPopupTrigger())
+        {
+            showPopupMenu(e);
+        }
+    }
+
+    @Override
+    public void mouseReleased(java.awt.event.MouseEvent e)
+    {
+        if (e.isPopupTrigger())
+        {
+            showPopupMenu(e);
+        }
+    }
+
+    @Override
+    public void mouseEntered(java.awt.event.MouseEvent e)
     {
     }
 
     @Override
-    public void mousePressed(MouseEvent e)
+    public void mouseExited(java.awt.event.MouseEvent e)
     {
     }
 
-    @Override
-    public void mouseReleased(MouseEvent e)
+    private void showPopupMenu(java.awt.event.MouseEvent evt)
     {
-    }
+        java.awt.Dimension window = trayPtn.trayMenu.getPreferredSize();
+        java.awt.Dimension screan = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        int x = evt.getX();
+        if (x + window.width > screan.width && x > window.width)
+        {
+            x -= window.width;
+        }
+        int y = evt.getY();
+        if (y + window.height > screan.height && y > window.height)
+        {
+            y -= window.height;
+        }
+        trayWnd.setLocation(x, y);
 
-    @Override
-    public void mouseEntered(MouseEvent e)
-    {
+        // trayMenu.setInvoker(trayMenu);
+        trayPtn.trayMenu.show(trayWnd.getContentPane(), 0, 0);
+        trayWnd.toFront();
     }
-
-    @Override
-    public void mouseExited(MouseEvent e)
-    {
-    }
+    private javax.swing.JWindow trayWnd;
 }

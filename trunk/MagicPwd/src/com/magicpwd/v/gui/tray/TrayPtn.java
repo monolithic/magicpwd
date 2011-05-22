@@ -61,8 +61,6 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
     private MenuPtn menuPtn;
     private AMpwdPtn mpwdPtn;
     private ITrayView trayPtn;
-    private javax.swing.JWindow trayForm;
-    private javax.swing.event.PopupMenuListener listener;
     private java.util.Map<AppView, AMpwdPtn> ptnList;
 
     public TrayPtn(MpwdMdl mpwdMdl)
@@ -213,38 +211,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
             return false;
         }
 
-        trayForm = new javax.swing.JWindow();
         trayMenu = new javax.swing.JPopupMenu();
-
-        if (listener == null)
-        {
-            listener = new javax.swing.event.PopupMenuListener()
-            {
-
-                @Override
-                public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt)
-                {
-                }
-
-                @Override
-                public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt)
-                {
-                    if (isOsTray)
-                    {
-                        trayForm.setVisible(false);
-                    }
-                }
-
-                @Override
-                public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt)
-                {
-                    if (isOsTray)
-                    {
-                        trayForm.setVisible(false);
-                    }
-                }
-            };
-        }
 
         return true;
     }
@@ -269,6 +236,27 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         {
             Logs.exception(ex);
         }
+
+        trayMenu.addPopupMenuListener(new javax.swing.event.PopupMenuListener()
+        {
+
+            @Override
+            public void popupMenuWillBecomeVisible(javax.swing.event.PopupMenuEvent evt)
+            {
+            }
+
+            @Override
+            public void popupMenuWillBecomeInvisible(javax.swing.event.PopupMenuEvent evt)
+            {
+                trayPtn.deActive();
+            }
+
+            @Override
+            public void popupMenuCanceled(javax.swing.event.PopupMenuEvent evt)
+            {
+                trayPtn.deActive();
+            }
+        });
 
         changeView(userMdl.getCfg(ConsCfg.CFG_TRAY_PTN, "guid"));
         return true;
@@ -375,39 +363,6 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         trayMenu.setVisible(false);
     }
 
-    public void showJPopupMenu(java.awt.event.MouseEvent evt)
-    {
-        if (trayMenu == null)
-        {
-            return;
-        }
-
-        if (isOsTray)
-        {
-            java.awt.Dimension window = trayMenu.getPreferredSize();
-            java.awt.Dimension screan = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-            int x = evt.getX();
-            if (x + window.width > screan.width && x > window.width)
-            {
-                x -= window.width;
-            }
-            int y = evt.getY();
-            if (y + window.height > screan.height && y > window.height)
-            {
-                y -= window.height;
-            }
-            trayForm.setLocation(x, y);
-
-            // trayMenu.setInvoker(trayMenu);
-            trayMenu.show(trayForm.getContentPane(), 0, 0);
-            trayForm.toFront();
-        }
-        else
-        {
-            trayMenu.show(trayForm, 0, trayForm.getHeight());
-        }
-    }
-
     public void showLastPtn()
     {
         showViewPtn(currPtn);
@@ -475,7 +430,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         {
             if (trayIco == null)
             {
-                trayIco = new TrayIco();
+                trayIco = new TrayIco(this);
                 trayIco.initView();
                 trayIco.initLang();
                 trayIco.initData();
@@ -562,5 +517,5 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
     }
     private TrayIco trayIco;
     private TrayWnd trayWnd;
-    private javax.swing.JPopupMenu trayMenu;
+    javax.swing.JPopupMenu trayMenu;
 }
