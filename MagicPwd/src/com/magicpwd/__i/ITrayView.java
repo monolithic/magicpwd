@@ -23,6 +23,8 @@ package com.magicpwd.__i;
 public interface ITrayView
 {
 
+    void deActive();
+
     void displayMessage(String title, String message);
 
     void setVisible(boolean visible);

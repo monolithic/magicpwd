@@ -19,6 +19,7 @@ package com.magicpwd.v.gui.tray;
 import com.magicpwd.__i.ITrayView;
 import com.magicpwd._util.Logs;
 import com.magicpwd.m.UserMdl;
+import java.awt.Point;
 import java.awt.geom.RoundRectangle2D;
 
 /**
@@ -166,6 +167,18 @@ public class TrayWnd extends javax.swing.JWindow implements ITrayView, java.awt.
     }
 
     @Override
+    public void deActive()
+    {
+        aniDir = false;
+        if (!timer.isRunning())
+        {
+            timer.start();
+        }
+
+        trayImg.deActive();
+    }
+
+    @Override
     public void displayMessage(String title, String message)
     {
     }
@@ -175,7 +188,8 @@ public class TrayWnd extends javax.swing.JWindow implements ITrayView, java.awt.
     {
         if (evt.isPopupTrigger())
         {
-            trayPtn.showJPopupMenu(evt);
+            Point p = evt.getPoint();
+            trayPtn.trayMenu.show(this, p.x, p.y);
         }
         else if (evt.getClickCount() > 1)
         {
@@ -188,7 +202,8 @@ public class TrayWnd extends javax.swing.JWindow implements ITrayView, java.awt.
     {
         if (evt.isPopupTrigger())
         {
-            trayPtn.showJPopupMenu(evt);
+            Point p = evt.getPoint();
+            trayPtn.trayMenu.show(this, p.x, p.y);
         }
         dragLoc = getScreenLocation(evt);
         formLoc = getLocation();
@@ -199,7 +214,8 @@ public class TrayWnd extends javax.swing.JWindow implements ITrayView, java.awt.
     {
         if (evt.isPopupTrigger())
         {
-            trayPtn.showJPopupMenu(evt);
+            Point p = evt.getPoint();
+            trayPtn.trayMenu.show(this, p.x, p.y);
         }
     }
 
@@ -220,6 +236,11 @@ public class TrayWnd extends javax.swing.JWindow implements ITrayView, java.awt.
     @Override
     public void mouseExited(java.awt.event.MouseEvent evt)
     {
+        if (trayPtn.trayMenu.isVisible())
+        {
+            return;
+        }
+
         aniDir = false;
         if (!timer.isRunning())
         {
