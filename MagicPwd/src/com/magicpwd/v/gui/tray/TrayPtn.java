@@ -52,9 +52,8 @@ import com.magicpwd.v.gui.mwiz.MwizPtn;
 public class TrayPtn implements IBackCall<AuthLog, UserDto>
 {
 
-    private static boolean isOsTray;
     private static AppView currPtn;
-    private static AppView nextPtn;
+    private AppView nextPtn;
     private MpwdMdl mpwdMdl;
     private UserMdl userMdl;
     private UserPtn userPtn;
@@ -100,6 +99,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
             // 身份认证
             case signRs:
             {
+                showNextPtn(nextPtn);
                 break;
             }
 
@@ -388,6 +388,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
             return;
         }
 
+        this.nextPtn = nextPtn;
         getUserPtn(AuthLog.signRs, this);
     }
 
@@ -443,7 +444,6 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
                 Lang.setWText(button, LangRes.P30F960E, "显示为导航罗盘");
             }
             userMdl.setCfg(ConsCfg.CFG_TRAY_PTN, "icon");
-            isOsTray = true;
             return;
         }
 
@@ -463,8 +463,6 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
             Lang.setWText(button, LangRes.P30F960D, "显示为托盘图标");
         }
         userMdl.setCfg(ConsCfg.CFG_TRAY_PTN, "guid");
-
-        isOsTray = false;
     }
 
     public void showTips(String title, String message)
