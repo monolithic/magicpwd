@@ -17,6 +17,7 @@
 package com.magicpwd.v.gui.tray;
 
 import com.magicpwd.__i.ITrayView;
+import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._util.Logs;
 import com.magicpwd.m.UserMdl;
 import java.awt.Point;
@@ -107,25 +108,25 @@ public class TrayWnd extends javax.swing.JWindow implements ITrayView, java.awt.
 
         java.awt.Dimension size = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 
-//        String loc = userMdl.getCfg(ConsCfg.CFG_TRAY_LOC, "");
-//        if (com.magicpwd._util.Char.isValidate(loc))
-//        {
-//            java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("\\d+").matcher(loc);
-//            int x = -1;
-//            if (matcher.find())
-//            {
-//                x = Integer.parseInt(matcher.group());
-//            }
-//            int y = -1;
-//            if (matcher.find())
-//            {
-//                y = Integer.parseInt(matcher.group());
-//            }
-//            if (x >= 0 && x < size.width && y >= 0 && y < size.height)
-//            {
-//                formLoc = new java.awt.Point(x, y);
-//            }
-//        }
+        String loc = userMdl.getCfg(ConsCfg.CFG_TRAY_LOC, "");
+        if (com.magicpwd._util.Char.isValidate(loc))
+        {
+            java.util.regex.Matcher matcher = java.util.regex.Pattern.compile("\\d+").matcher(loc);
+            int x = -1;
+            if (matcher.find())
+            {
+                x = Integer.parseInt(matcher.group());
+            }
+            int y = -1;
+            if (matcher.find())
+            {
+                y = Integer.parseInt(matcher.group());
+            }
+            if (x >= 0 && x < size.width && y >= 0 && y < size.height)
+            {
+                formLoc = new java.awt.Point(x, y);
+            }
+        }
 
         if (formLoc == null)
         {
@@ -277,7 +278,7 @@ public class TrayWnd extends javax.swing.JWindow implements ITrayView, java.awt.
             tmp.y = y;
         }
         setLocation(tmp);
-//        userMdl.setCfg(ConsCfg.CFG_TRAY_LOC, "[" + tmp.x + "," + tmp.y + "]");
+        userMdl.setCfg(ConsCfg.CFG_TRAY_LOC, "[" + tmp.x + "," + tmp.y + "]");
     }
 
     @Override
@@ -304,33 +305,37 @@ public class TrayWnd extends javax.swing.JWindow implements ITrayView, java.awt.
     {
         if (aniDir)
         {
-            if (recSize >= maxRecSize)
+            if (recSize <= maxRecSize)
             {
-                timer.stop();
-                recSize = maxRecSize;
-                arcSize = maxArcSize;
+                recSize += wndStep;
+                arcSize += arcStep;
+                int p = (maxWndSize - recSize) >> 1;
+                com.sun.awt.AWTUtilities.setWindowShape(this, new RoundRectangle2D.Double(p, p, recSize, recSize, arcSize, arcSize));
                 return;
             }
 
-            recSize += wndStep;
-            arcSize += arcStep;
+            recSize = maxRecSize;
+            arcSize = maxArcSize;
+            int p = (maxWndSize - recSize) >> 1;
+            com.sun.awt.AWTUtilities.setWindowShape(this, new RoundRectangle2D.Double(p, p, recSize, recSize, arcSize, arcSize));
+            timer.stop();
+            return;
+        }
+
+        if (recSize >= minRecSize)
+        {
+            recSize -= wndStep;
+            arcSize -= arcStep;
             int p = (maxWndSize - recSize) >> 1;
             com.sun.awt.AWTUtilities.setWindowShape(this, new RoundRectangle2D.Double(p, p, recSize, recSize, arcSize, arcSize));
             return;
         }
 
-        if (recSize <= minRecSize)
-        {
-            timer.stop();
-            recSize = minRecSize;
-            arcSize = minArcSize;
-            return;
-        }
-
-        recSize -= wndStep;
-        arcSize -= arcStep;
+        recSize = minRecSize;
+        arcSize = minArcSize;
         int p = (maxWndSize - recSize) >> 1;
         com.sun.awt.AWTUtilities.setWindowShape(this, new RoundRectangle2D.Double(p, p, recSize, recSize, arcSize, arcSize));
+        timer.stop();
     }
 
     private java.awt.Point getScreenLocation(java.awt.event.MouseEvent evt)
