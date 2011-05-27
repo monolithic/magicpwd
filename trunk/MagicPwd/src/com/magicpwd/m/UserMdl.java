@@ -93,7 +93,7 @@ public final class UserMdl
         try
         {
             fos = new java.io.FileOutputStream(new java.io.File(mpwdMdl.getDatPath(safeKey.getName()), ConsEnv.FILE_DATA + ".config"));
-            userCfg.store(fos, "MagicPwd User Configure File!");
+            userCfg.store(fos, "MagicPwd User Configuration File!");
         }
         catch (Exception exp)
         {
