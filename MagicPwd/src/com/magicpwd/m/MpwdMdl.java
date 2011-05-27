@@ -80,7 +80,7 @@ public final class MpwdMdl
             {
                 fis = new java.io.FileOutputStream(cfgFile);
                 setCfg("app.guid", appGuid);
-                mpwdCfg.store(fis, "");
+                mpwdCfg.store(fis, "MagicPwd System Configuration File!");
             }
         }
         catch (Exception exp)
@@ -180,9 +180,14 @@ public final class MpwdMdl
     {
     }
 
+    public String getViewLast()
+    {
+        return getCfg("app.last", "mwiz");
+    }
+
     public String getViewList()
     {
-        return getCfg("app.view", "mwiz");
+        return getCfg("app.list", "mexp,mwiz,mpad");
     }
 
     public String getAppLang()

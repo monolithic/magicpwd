@@ -145,7 +145,6 @@ public class MexpPtn extends AMpwdPtn
         mexpMdl.init();
 
         initGuidData();
-        initPropData();
         initUserData();
         initBaseData();
 
@@ -169,6 +168,8 @@ public class MexpPtn extends AMpwdPtn
         {
             Logs.exception(exp);
         }
+
+        initPropData();
 
         safeMdl = mexpMdl.getGridMdl();
 

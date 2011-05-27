@@ -29,10 +29,61 @@ public class McmdPtn
 
     public void init()
     {
+        console = System.console();
+        if (console != null)
+        {
+            return;
+        }
+        scanner = new java.util.Scanner(System.in);
     }
 
     public boolean endSave()
     {
         return true;
     }
+
+    public void print(String cmd)
+    {
+        System.out.print(cmd);
+    }
+
+    public void printLine(String cmd)
+    {
+        System.out.println(cmd);
+    }
+
+    public String readLine()
+    {
+        if (console != null)
+        {
+            return console.readLine();
+        }
+        return scanner.next();
+    }
+
+    public String readPassword()
+    {
+        if (console != null)
+        {
+            return new String(console.readPassword());
+        }
+        return scanner.next();
+    }
+
+    public Integer readInt()
+    {
+        return scanner.nextInt();
+    }
+
+    public Long readLong()
+    {
+        return scanner.nextLong();
+    }
+
+    public Double readDouble()
+    {
+        return scanner.nextDouble();
+    }
+    private java.io.Console console;
+    private java.util.Scanner scanner;
 }

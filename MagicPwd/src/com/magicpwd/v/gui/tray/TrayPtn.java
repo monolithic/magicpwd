@@ -288,6 +288,9 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
                     ptn = new MgtdPtn(this, userMdl);
                     break;
             }
+
+            ptnList.put(nextPtn, ptn);
+
             ptn.initView();
             ptn.initLang();
             ptn.initData();

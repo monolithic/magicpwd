@@ -214,7 +214,7 @@ public class SignIn extends javax.swing.JPanel implements IUserView
                 continue;
             }
         }
-//        cbUserView.setSelectedItem(new S1S1(userMdl.getMpwdMdl().getViewLast(), ""));
+        cbUserView.setSelectedItem(new S1S1(userMdl.getMpwdMdl().getViewLast(), ""));
 
         String name = userMdl.getMpwdMdl().getUserLast();
         if (com.magicpwd._util.Char.isValidate(name))
