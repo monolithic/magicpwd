@@ -28,6 +28,7 @@ import com.magicpwd._enum.AuthLog;
 import com.magicpwd._user.UserDto;
 import com.magicpwd._user.UserPtn;
 import com.magicpwd._util.Bean;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -44,6 +45,7 @@ import com.magicpwd.v.gui.mpad.MpadPtn;
 import com.magicpwd.v.gui.mexp.MexpPtn;
 import com.magicpwd.v.gui.mruc.MrucPtn;
 import com.magicpwd.v.gui.mwiz.MwizPtn;
+import java.io.IOException;
 
 /**
  * 系统托盘
@@ -61,6 +63,9 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
     private AMpwdPtn mpwdPtn;
     private ITrayView trayPtn;
     private java.util.Map<AppView, AMpwdPtn> ptnList;
+    protected static java.util.HashMap<String, javax.swing.Icon> defIcon;
+    private static java.util.Properties defProp;
+    private java.util.Properties favProp;
 
     public TrayPtn(MpwdMdl mpwdMdl)
     {
@@ -172,7 +177,48 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
 
         Bean.getNone();
         Bean.getLogo(16);
-        AMpwdPtn.loadPre();
+
+
+        // 读取默认配置文件
+        defProp = new java.util.Properties();
+        java.io.InputStream stream = null;
+        try
+        {
+            stream = AMpwdPtn.class.getResourceAsStream("/res/feel.amf");
+            defProp.load(stream);
+        }
+        catch (IOException ex)
+        {
+            Logs.exception(ex);
+        }
+        finally
+        {
+            Bean.closeStream(stream);
+        }
+
+        // 加载默认图标
+        defIcon = new java.util.HashMap<String, javax.swing.Icon>();
+        try
+        {
+            stream = AMpwdPtn.class.getResourceAsStream(ConsEnv.ICON_PATH + "icon.png");
+            java.awt.image.BufferedImage bufImg = javax.imageio.ImageIO.read(stream);
+
+            int w = bufImg.getWidth();
+            int h = bufImg.getHeight();
+            for (int i = 0, j = 0; j < w; i += 1)
+            {
+                defIcon.put("def:" + i, new javax.swing.ImageIcon(bufImg.getSubimage(j, 0, h, h)));
+                j += h;
+            }
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+        finally
+        {
+            Bean.closeStream(stream);
+        }
 
         // 扩展库加载
         loadExt();
@@ -199,6 +245,101 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
                 Logs.exception(exp);
             }
         }
+    }
+
+    private void loadFav()
+    {
+        favProp = new java.util.Properties();
+
+        java.io.File file = new java.io.File(ConsEnv.DIR_SKIN, ConsEnv.DIR_FEEL);
+        if (!file.exists() || !file.isDirectory() || !file.canRead())
+        {
+            return;
+        }
+        file = new java.io.File(file, userMdl.getFeel() + java.io.File.separator + ConsEnv.SKIN_FEEL_FILE);
+        if (!file.exists() || !file.isFile() || !file.canRead())
+        {
+            return;
+        }
+        java.io.FileInputStream stream = null;
+        try
+        {
+            stream = new java.io.FileInputStream(file);
+            favProp.load(stream);
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+        finally
+        {
+            Bean.closeStream(stream);
+        }
+    }
+
+    /**
+     * 系统默认图片
+     * @param favHash
+     * @return
+     */
+    public javax.swing.Icon getDefIcon(String favHash)
+    {
+        if (!Char.isValidate(favHash))
+        {
+            return Bean.getNone();
+        }
+
+        if (defProp.containsKey(favHash))
+        {
+            favHash = defProp.getProperty(favHash);
+        }
+        return defIcon.get("def:" + favHash);
+    }
+
+    /**
+     * 缓存用户偏好图片
+     * @param favHash
+     * @param favIcon
+     */
+    public void setFavIcon(String favHash, javax.swing.Icon favIcon)
+    {
+        if (Char.isValidate(favHash))
+        {
+//            if (defProp.containsKey(favHash))
+//            {
+//                favHash = defProp.getProperty(favHash);
+//            }
+            defIcon.put("fav:" + favHash, favIcon);
+        }
+    }
+
+    public javax.swing.Icon readFavIcon(String favHash, boolean chache)
+    {
+        if (!Char.isValidate(favHash))
+        {
+            return Bean.getNone();
+        }
+
+        if (favProp == null)
+        {
+            loadFav();
+        }
+
+        javax.swing.Icon icon;
+        if (!chache)
+        {
+            icon = favProp.containsKey(favHash) ? userMdl.readIcon(ConsEnv.FEEL_PATH + favProp.getProperty(favHash)) : getDefIcon(favHash);
+            return icon != null ? icon : Bean.getNone();
+        }
+
+        icon = defIcon.get("fav:" + favHash);
+        if (icon == null)
+        {
+            icon = favProp.containsKey(favHash) ? userMdl.readIcon(ConsEnv.FEEL_PATH + favProp.getProperty(favHash)) : getDefIcon(favHash);
+            //favProp.remove(favHash);
+            setFavIcon(favHash, icon);
+        }
+        return icon;
     }
 
     private boolean initView()

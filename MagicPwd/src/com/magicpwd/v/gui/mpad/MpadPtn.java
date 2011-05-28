@@ -240,7 +240,7 @@ public class MpadPtn extends AMpwdPtn
         nameBox.initData();
         dataBox.initData();
 
-        menuPtn = new MenuPtn(trayPtn, this);
+        menuPtn = new MenuPtn(trayPtn, userMdl);
         try
         {
             menuPtn.loadData(new java.io.File(userMdl.getDataDir(), "mpad.xml"));

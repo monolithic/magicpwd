@@ -18,6 +18,8 @@ package com.magicpwd.x;
 
 import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.IBackCall;
+import com.magicpwd._comp.IcoLabel;
+import com.magicpwd._comp.LnkLabel;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
@@ -49,15 +51,36 @@ public class IcoDialog extends javax.swing.JDialog
 
     public void initView()
     {
-        plCategory = new javax.swing.JPanel();
-        plCategory.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0));
-        spCategory = new javax.swing.JScrollPane(plCategory);
-        spCategory.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        spCategory.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
-        spCategory.setBorder(null);
+        plCatePane = new javax.swing.JPanel();
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(plCatePane);
+        plCatePane.setLayout(layout);
 
+        btScrollL = new IcoLabel();
+        btScrollR = new IcoLabel();
+
+        plCateList = new javax.swing.JPanel();
+        plCateList.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 0));
+        spCateList = new javax.swing.JScrollPane(plCateList);
+        spCateList.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        spCateList.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        spCateList.setBorder(null);
+
+        javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
+        hsg.addComponent(btScrollL, 16, 16, 16);
+        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg.addComponent(spCateList, javax.swing.GroupLayout.DEFAULT_SIZE, 10, Short.MAX_VALUE);
+        hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg.addComponent(btScrollR, 16, 16, 16);
+        layout.setHorizontalGroup(hsg);
+
+        javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false);
+        vpg.addComponent(btScrollL, 16, 16, 16);
+        vpg.addComponent(spCateList, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE);
+        vpg.addComponent(btScrollR, 16, 16, 16);
+        layout.setVerticalGroup(vpg);
+
+        btRemove = new javax.swing.JButton();
         btAppend = new javax.swing.JButton();
-
         btSelect = new javax.swing.JButton();
 
         tbIconGrid = new javax.swing.JTable();
@@ -69,15 +92,17 @@ public class IcoDialog extends javax.swing.JDialog
         javax.swing.JScrollPane spIconGrid = new javax.swing.JScrollPane();
         spIconGrid.setViewportView(tbIconGrid);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this.getContentPane());
+        layout = new javax.swing.GroupLayout(this.getContentPane());
         this.getContentPane().setLayout(layout);
 
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
         hsg1.addComponent(btSelect);
         hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         hsg1.addComponent(btAppend);
+        hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg1.addComponent(btRemove);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
-        hpg1.addComponent(spCategory, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE);
+        hpg1.addComponent(plCatePane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE);
         hpg1.addComponent(spIconGrid, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE);
         hpg1.addGroup(hsg1);
         javax.swing.GroupLayout.SequentialGroup hsg2 = layout.createSequentialGroup();
@@ -87,11 +112,12 @@ public class IcoDialog extends javax.swing.JDialog
         layout.setHorizontalGroup(hsg2);
 
         javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
+        vpg1.addComponent(btRemove);
         vpg1.addComponent(btAppend);
         vpg1.addComponent(btSelect);
         javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
         vsg1.addContainerGap();
-        vsg1.addComponent(spCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg1.addComponent(plCatePane, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE);
         vsg1.addComponent(spIconGrid, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE);
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg1.addGroup(vpg1);
@@ -111,18 +137,84 @@ public class IcoDialog extends javax.swing.JDialog
 
         Lang.setWText(btAppend, LangRes.P30FA50D, "追加(@A)");
 
+        Lang.setWText(btRemove, LangRes.P30FA50D, "追加(@A)");
+
         this.setTitle(Lang.getLang(LangRes.P30FA50F, "徽标"));
     }
 
     public void initData()
     {
+        btScrollL.setIcon(new javax.swing.ImageIcon(Bean.getLogo(16)));
+        btScrollR.setIcon(new javax.swing.ImageIcon(Bean.getLogo(16)));
+
+        icoModel = new IcoModel();
+        tbIconGrid.setModel(icoModel);
+        tbIconGrid.setRowHeight(icoModel.getRowHeight());
+
+        javax.swing.table.TableCellRenderer renderer = new javax.swing.table.TableCellRenderer()
+        {
+
+            @Override
+            public java.awt.Component getTableCellRendererComponent(javax.swing.JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
+            {
+                if (!(value instanceof javax.swing.JLabel))
+                {
+                    return null;
+                }
+
+                javax.swing.JLabel label = (javax.swing.JLabel) value;
+                // 前景及背景颜色设置
+                if (isSelected)
+                {
+                    label.setBackground(table.getSelectionBackground());
+                    label.setForeground(table.getSelectionForeground());
+                }
+                else
+                {
+                    label.setBackground(table.getBackground());
+                    label.setForeground(table.getForeground());
+                }
+
+                // 文字属性设置
+                label.setFont(table.getFont());
+                // 可编辑状态设置
+                label.setEnabled(table.isEnabled());
+                return label;
+            }
+        };
+        java.util.Enumeration<javax.swing.table.TableColumn> columns = tbIconGrid.getColumnModel().getColumns();
+        while (columns.hasMoreElements())
+        {
+            columns.nextElement().setCellRenderer(renderer);
+        }
+
+        btScrollL.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btScrollLActionPerformed(evt);
+            }
+        });
+
+        btScrollR.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                btScrollRActionPerformed(evt);
+            }
+        });
+
         btAppend.addActionListener(new java.awt.event.ActionListener()
         {
 
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                bt_AppendActionPerformed(evt);
+                btAppendActionPerformed(evt);
             }
         });
 
@@ -132,53 +224,19 @@ public class IcoDialog extends javax.swing.JDialog
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                bt_SelectActionPerformed(evt);
+                btSelectActionPerformed(evt);
             }
         });
 
-        if (icoModel == null)
+        btRemove.addActionListener(new java.awt.event.ActionListener()
         {
-            icoModel = new IcoModel();
-            tbIconGrid.setModel(icoModel);
-            tbIconGrid.setRowHeight(icoModel.getRowHeight());
 
-            javax.swing.table.TableCellRenderer renderer = new javax.swing.table.TableCellRenderer()
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-
-                @Override
-                public java.awt.Component getTableCellRendererComponent(javax.swing.JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column)
-                {
-                    if (!(value instanceof javax.swing.JLabel))
-                    {
-                        return null;
-                    }
-
-                    javax.swing.JLabel label = (javax.swing.JLabel) value;
-                    // 前景及背景颜色设置
-                    if (isSelected)
-                    {
-                        label.setBackground(table.getSelectionBackground());
-                        label.setForeground(table.getSelectionForeground());
-                    }
-                    else
-                    {
-                        label.setBackground(table.getBackground());
-                        label.setForeground(table.getForeground());
-                    }
-
-                    // 文字属性设置
-                    label.setFont(table.getFont());
-                    // 可编辑状态设置
-                    label.setEnabled(table.isEnabled());
-                    return label;
-                }
-            };
-            java.util.Enumeration<javax.swing.table.TableColumn> columns = tbIconGrid.getColumnModel().getColumns();
-            while (columns.hasMoreElements())
-            {
-                columns.nextElement().setCellRenderer(renderer);
+                btRemoveActionPerformed(evt);
             }
-        }
+        });
     }
 
     public void showData(final String lastIcon)
@@ -189,6 +247,7 @@ public class IcoDialog extends javax.swing.JDialog
             @Override
             public void run()
             {
+                initCat(iconPath);
                 icoModel.initIcon(iconPath, lastIcon);
                 tbIconGrid.setRowSelectionInterval(icoModel.getSelectedRow(), icoModel.getSelectedRow());
                 tbIconGrid.setColumnSelectionInterval(icoModel.getSelectedColumn(), icoModel.getSelectedColumn());
@@ -196,7 +255,32 @@ public class IcoDialog extends javax.swing.JDialog
         });
     }
 
-    private void bt_SelectActionPerformed(java.awt.event.ActionEvent evt)
+    public synchronized void initCat(java.io.File icoPath)
+    {
+        LnkLabel label;
+        for (java.io.File file : icoPath.listFiles(new AmonFF(true, "^\\w{1,40}$")))
+        {
+            label = new LnkLabel();
+            label.setText(file.getName());
+            plCateList.add(label);
+        }
+    }
+
+    private void btScrollLActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        java.awt.Rectangle rect = spCateList.getVisibleRect();
+        rect.x -= 10;
+        spCateList.getViewport().scrollRectToVisible(rect);
+    }
+
+    private void btScrollRActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        java.awt.Rectangle rect = spCateList.getVisibleRect();
+        rect.x += 10;
+        spCateList.getViewport().scrollRectToVisible(rect);
+    }
+
+    private void btSelectActionPerformed(java.awt.event.ActionEvent evt)
     {
         if (backCall.callBack(IBackCall.OPTIONS_APPLY, icoModel.getSelectedKey(tbIconGrid.getSelectedRow(), tbIconGrid.getSelectedColumn())))
         {
@@ -205,7 +289,7 @@ public class IcoDialog extends javax.swing.JDialog
         }
     }
 
-    private void bt_AppendActionPerformed(java.awt.event.ActionEvent evt)
+    private void btAppendActionPerformed(java.awt.event.ActionEvent evt)
     {
         javax.swing.JFileChooser jfc = new javax.swing.JFileChooser();
         AmonFF ff = new AmonFF("[^\\.]+\\." + ConsEnv.IMAGE_FORMAT + "$", false);
@@ -247,10 +331,18 @@ public class IcoDialog extends javax.swing.JDialog
             return;
         }
     }
+
+    private void btRemoveActionPerformed(java.awt.event.ActionEvent evt)
+    {
+    }
     private javax.swing.JButton btAppend;
     private javax.swing.JButton btSelect;
-    private javax.swing.JPanel plCategory;
-    private javax.swing.JScrollPane spCategory;
+    private javax.swing.JButton btRemove;
+    private IcoLabel btScrollL;
+    private IcoLabel btScrollR;
+    private javax.swing.JPanel plCatePane;
+    private javax.swing.JPanel plCateList;
+    private javax.swing.JScrollPane spCateList;
     private javax.swing.JTable tbIconGrid;
 }
 

@@ -19,6 +19,7 @@ package com.magicpwd.v.gui.tray;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Bean;
+import com.magicpwd.m.MpwdMdl;
 import com.magicpwd.m.UserMdl;
 
 /**
@@ -81,6 +82,16 @@ public class TrayImg extends java.awt.Canvas
 
         locApp = new java.util.HashMap<String, AppView>();
         locMap = new java.util.HashMap<String, java.awt.image.BufferedImage>();
+
+        MpwdMdl mpwdMdl = userMdl.getMpwdMdl();
+        String key;
+        for (int row = 0; row < 2; row += 1)
+        {
+            for (int col = 0; col < 2; col += 1)
+            {
+                key = "cell[" + row + "," + col + "]";
+            }
+        }
         locApp.put("1,1", AppView.mexp);
         locMap.put("1,1", userMdl.readImage(ConsEnv.FEEL_PATH + "mexp.png"));
         locApp.put("0,0", AppView.mwiz);

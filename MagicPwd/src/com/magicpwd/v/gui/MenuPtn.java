@@ -17,7 +17,6 @@
 package com.magicpwd.v.gui;
 
 import com.magicpwd.v.gui.tray.TrayPtn;
-import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.IAction;
 import com.magicpwd.__i.maoc.IMaocAction;
 import com.magicpwd.__i.mgtd.IMgtdAction;
@@ -63,18 +62,11 @@ public class MenuPtn
 
     private Document document;
     private TrayPtn trayPtn;
-    private AMpwdPtn formPtn;
     private UserMdl userMdl;
     private java.util.regex.Pattern pattern;
     private java.util.HashMap<String, javax.swing.AbstractButton> buttons;
     private java.util.HashMap<String, javax.swing.Action> actions;
     private java.util.HashMap<String, WButtonGroup> groups;
-
-    public MenuPtn(TrayPtn trayPtn, AMpwdPtn formPtn)
-    {
-        this(trayPtn, formPtn.getUserMdl());
-        this.formPtn = formPtn;
-    }
 
     public MenuPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
@@ -1117,7 +1109,7 @@ public class MenuPtn
 
     private javax.swing.Icon createIcon(Element element)
     {
-        if (formPtn == null)
+        if (trayPtn == null)
         {
             return null;
         }
@@ -1126,11 +1118,7 @@ public class MenuPtn
         boolean validate = Char.isValidate(hash);
         if (validate)
         {
-            javax.swing.Icon icon = formPtn.getFavIcon(hash);
-            if (icon != null)
-            {
-                return icon;
-            }
+            return trayPtn.readFavIcon(hash, true);
         }
 
         String path = element.attributeValue("path");
@@ -1139,20 +1127,17 @@ public class MenuPtn
             javax.swing.Icon icon;
             if (path.toLowerCase().startsWith("var:"))
             {
-                icon = formPtn.readFavIcon(path.substring(4), validate);
+                icon = trayPtn.readFavIcon(path.substring(4), validate);
             }
             else
             {
                 icon = userMdl.readIcon(path);
                 if (validate)
                 {
-                    formPtn.setFavIcon(hash, icon);
+                    trayPtn.setFavIcon(hash, icon);
                 }
             }
-            if (icon != null)
-            {
-                return icon;
-            }
+            return icon;
         }
 
         return null;
