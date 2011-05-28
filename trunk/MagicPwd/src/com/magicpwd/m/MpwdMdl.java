@@ -93,15 +93,12 @@ public final class MpwdMdl
         }
     }
 
-    private String getCfg(String key, String def)
+    public String getCfg(String key, String def)
     {
-        if (mpwdCfg == null)
-        {
-        }
         return mpwdCfg.getProperty(key, def);
     }
 
-    private void setCfg(String key, String value)
+    public void setCfg(String key, String value)
     {
         mpwdCfg.setProperty(key, value);
     }

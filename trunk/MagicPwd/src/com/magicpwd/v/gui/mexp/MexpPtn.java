@@ -150,7 +150,7 @@ public class MexpPtn extends AMpwdPtn
 
         try
         {
-            menuPtn = new MenuPtn(trayPtn, this);
+            menuPtn = new MenuPtn(trayPtn, userMdl);
             menuPtn.loadData(new java.io.File(userMdl.getDataDir(), "mexp.xml"));
 
             menuPtn.getMenuBar("mexp", menuBar, rootPane);

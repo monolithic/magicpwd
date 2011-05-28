@@ -151,7 +151,7 @@ public class MwizPtn extends AMpwdPtn
 
         try
         {
-            menuPtn = new MenuPtn(trayPtn, this);
+            menuPtn = new MenuPtn(trayPtn, userMdl);
             menuPtn.loadData(new java.io.File(userMdl.getDataDir(), "mwiz.xml"));
             menuPtn.getToolBar("mwiz", tb_ToolBar, rootPane, AppView.mwiz);
             menuPtn.getPopMenu("mwiz", pm_MenuPop);

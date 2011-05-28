@@ -241,7 +241,7 @@ public class MaocPtn extends AMpwdPtn
         Bean.registerPopupMenuAction(tb_ExpList, pm_ExpMenu);
 
         pm_AocHelp = new javax.swing.JPopupMenu();
-        menuPtn = new MenuPtn(trayPtn, this);
+        menuPtn = new MenuPtn(trayPtn, userMdl);
         try
         {
             menuPtn.loadData(new java.io.File(userMdl.getDataDir(), "maoc.xml"));
