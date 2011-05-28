@@ -26,7 +26,7 @@ import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.r.TreeCR;
-import com.magicpwd.v.gui.mexp.MexpPtn;
+import com.magicpwd.v.app.mexp.MexpPtn;
 import java.awt.event.MouseEvent;
 
 /**

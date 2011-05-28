@@ -27,7 +27,7 @@ import com.magicpwd._util.Bean;
 import com.magicpwd._util.Date;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.mwiz.KeysMdl;
-import com.magicpwd.v.gui.mwiz.MwizPtn;
+import com.magicpwd.v.app.mwiz.MwizPtn;
 import com.magicpwd.x.IcoDialog;
 
 /**

@@ -18,7 +18,7 @@ package com.magicpwd.__a.mpad;
 
 import com.magicpwd.__a.AAction;
 import com.magicpwd.__i.mpad.IMpadAction;
-import com.magicpwd.v.gui.mpad.MpadPtn;
+import com.magicpwd.v.app.mpad.MpadPtn;
 
 /**
  *

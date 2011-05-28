@@ -17,7 +17,7 @@
 package com.magicpwd.__i.mgtd;
 
 import com.magicpwd.__i.IAction;
-import com.magicpwd.v.gui.mgtd.MgtdPtn;
+import com.magicpwd.v.app.mgtd.MgtdPtn;
 
 /**
  *

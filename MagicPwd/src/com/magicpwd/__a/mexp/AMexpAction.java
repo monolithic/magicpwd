@@ -18,7 +18,7 @@ package com.magicpwd.__a.mexp;
 
 import com.magicpwd.__a.AAction;
 import com.magicpwd.__i.mexp.IMexpAction;
-import com.magicpwd.v.gui.mexp.MexpPtn;
+import com.magicpwd.v.app.mexp.MexpPtn;
 
 /**
  *

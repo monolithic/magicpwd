@@ -18,7 +18,7 @@ package com.magicpwd.__a.maoc;
 
 import com.magicpwd.__a.AAction;
 import com.magicpwd.__i.maoc.IMaocAction;
-import com.magicpwd.v.gui.maoc.MaocPtn;
+import com.magicpwd.v.app.maoc.MaocPtn;
 
 /**
  *

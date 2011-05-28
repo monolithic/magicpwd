@@ -31,8 +31,8 @@ import com.magicpwd._util.Char;
 import com.magicpwd._util.Date;
 import com.magicpwd._util.Lang;
 import com.magicpwd.d.db.DBA4000;
-import com.magicpwd.v.gui.MenuPtn;
-import com.magicpwd.v.gui.mexp.MexpPtn;
+import com.magicpwd.v.app.MenuPtn;
+import com.magicpwd.v.app.mexp.MexpPtn;
 import com.magicpwd.x.mgtd.MgtdDlg;
 
 /**

@@ -22,7 +22,7 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.m.MpwdMdl;
 import com.magicpwd.v.cmd.mcmd.McmdPtn;
-import com.magicpwd.v.gui.tray.TrayPtn;
+import com.magicpwd.v.app.tray.TrayPtn;
 
 /**
  * @author Amon

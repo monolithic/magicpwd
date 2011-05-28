@@ -20,7 +20,7 @@ import com.magicpwd.__a.mexp.AMexpAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.prop.Kind;
 import com.magicpwd.r.KindTN;
-import com.magicpwd.v.gui.mexp.KindDlg;
+import com.magicpwd.v.app.mexp.KindDlg;
 
 /**
  *
