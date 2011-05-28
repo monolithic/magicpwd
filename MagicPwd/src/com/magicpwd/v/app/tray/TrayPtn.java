@@ -66,6 +66,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
     private static java.util.HashMap<String, javax.swing.Icon> defIcon;
     private static java.util.Properties defProp;
     private java.util.Properties favProp;
+    private java.util.Properties favTray;
 
     public TrayPtn(MpwdMdl mpwdMdl)
     {
@@ -247,7 +248,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         }
     }
 
-    private void loadFav()
+    private void loadFormFav()
     {
         favProp = new java.util.Properties();
 
@@ -256,7 +257,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         {
             return;
         }
-        file = new java.io.File(file, userMdl.getFeel() + java.io.File.separator + ConsEnv.SKIN_FEEL_FILE);
+        file = new java.io.File(file, userMdl.getFeel() + java.io.File.separator + ConsEnv.SKIN_FEEL_FORM);
         if (!file.exists() || !file.isFile() || !file.canRead())
         {
             return;
@@ -277,6 +278,45 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         }
     }
 
+    private void loadTrayFav()
+    {
+        favTray = new java.util.Properties();
+
+        java.io.File file = new java.io.File(ConsEnv.DIR_SKIN, ConsEnv.DIR_FEEL);
+        if (!file.exists() || !file.isDirectory() || !file.canRead())
+        {
+            return;
+        }
+        file = new java.io.File(file, userMdl.getFeel() + java.io.File.separator + ConsEnv.SKIN_FEEL_TRAY);
+        if (!file.exists() || !file.isFile() || !file.canRead())
+        {
+            return;
+        }
+        java.io.FileInputStream stream = null;
+        try
+        {
+            stream = new java.io.FileInputStream(file);
+            favTray.load(stream);
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+        finally
+        {
+            Bean.closeStream(stream);
+        }
+    }
+
+    public java.util.Properties getTrayFav()
+    {
+        if (favTray == null)
+        {
+            loadTrayFav();
+        }
+        return favTray;
+    }
+
     /**
      * 系统默认图片
      * @param favHash
@@ -294,19 +334,6 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
             favHash = defProp.getProperty(favHash);
         }
         return defIcon.get("def:" + favHash);
-    }
-
-    public AppView getFavView(String favView)
-    {
-        if (Char.isValidate(favView, 4))
-        {
-            favView = favProp.getProperty(favView);
-            if (Char.isValidate(favView, 4))
-            {
-                return AppView.valueOf(favView);
-            }
-        }
-        return null;
     }
 
     /**
@@ -335,7 +362,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
 
         if (favProp == null)
         {
-            loadFav();
+            loadFormFav();
         }
 
         javax.swing.Icon icon;

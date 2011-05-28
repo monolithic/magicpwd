@@ -736,7 +736,7 @@ public class MenuPtn
             java.io.InputStreamReader reader = null;
             for (java.io.File dir : dirs)
             {
-                java.io.File amf = new java.io.File(dir, ConsEnv.SKIN_FEEL_FILE);
+                java.io.File amf = new java.io.File(dir, ConsEnv.SKIN_FEEL_FORM);
                 if (!amf.exists() || !amf.isFile() || !amf.canRead())
                 {
                     continue;

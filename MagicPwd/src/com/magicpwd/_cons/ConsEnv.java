@@ -162,7 +162,8 @@ public interface ConsEnv
     String SKIN_LOOK_DEF_DIR = "default";
     String SKIN_LOOK_SYS_DIR = "system";
     String SKIN_LOOK_FILE = "look.aml";
-    String SKIN_FEEL_FILE = "feel.amf";
+    String SKIN_FEEL_FORM = "form.amf";
+    String SKIN_FEEL_TRAY = "tray.amf";
     String[] USER_SALT =
     {
         "Winshine.biz", "Amonsoft.com", "Magicpwd.com", "MyIM.im"
