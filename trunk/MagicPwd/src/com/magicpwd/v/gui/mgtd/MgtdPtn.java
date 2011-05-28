@@ -58,6 +58,8 @@ public class MgtdPtn extends AMpwdPtn
         tbTaskList = new javax.swing.JTable();
         javax.swing.JScrollPane spTaskList = new javax.swing.JScrollPane(tbTaskList);
 
+        pmTaskMenu = new javax.swing.JPopupMenu();
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(plTaskList);
         plTaskList.setLayout(layout);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
@@ -92,6 +94,7 @@ public class MgtdPtn extends AMpwdPtn
     {
         mgtdMdl = new MgtdMdl(userMdl);
         mgtdMdl.init();
+
         tbTaskList.setModel(mgtdMdl.getGridMdl());
         tbTaskList.getColumnModel().getColumn(0).setMaxWidth(tbTaskList.getFontMetrics(tbTaskList.getFont()).stringWidth("6666"));
 
@@ -125,15 +128,12 @@ public class MgtdPtn extends AMpwdPtn
             }
         });
 
-        menuPtn = new MenuPtn(trayPtn, this);
         try
         {
+            menuPtn = new MenuPtn(trayPtn, this);
             menuPtn.loadData(new java.io.File(userMdl.getDataDir(), "mgtd.xml"));
-            pmTaskMenu = new javax.swing.JPopupMenu();
-            if (menuPtn.getPopMenu("grid", pmTaskMenu))
-            {
-//                setJMenuBar(pmTaskMenu);
-            }
+
+            menuPtn.getPopMenu("grid", pmTaskMenu);
             menuPtn.getToolBar("mgtd", tbTaskTool, rootPane, AppView.mgtd);
             menuPtn.getStrokes("mgtd", rootPane);
         }

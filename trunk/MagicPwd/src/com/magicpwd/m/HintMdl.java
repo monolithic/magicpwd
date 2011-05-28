@@ -20,7 +20,6 @@ import com.magicpwd.__i.IBackCall;
 import com.magicpwd.__i.IHintView;
 import com.magicpwd._comn.Task;
 import com.magicpwd._comn.mpwd.Hint;
-import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Time;
@@ -44,9 +43,8 @@ public final class HintMdl
     private java.text.DateFormat dateTplt;
     private java.util.List<Hint> mgtdList;
     private java.util.List<Hint> hintList;
-    private java.util.Map<String, Integer> updtList;
     private java.util.List<IHintView> viewList;
-    private IBackCall<String, java.util.List<Mgtd>> backCall;
+    private java.util.Map<String, Integer> updtList;
     private int counter;
 
     HintMdl(UserMdl userMdl)
@@ -56,15 +54,12 @@ public final class HintMdl
 
     public void init()
     {
-        dateTplt = java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.FULL, java.text.DateFormat.MEDIUM);
-
-        viewList = new java.util.ArrayList<IHintView>();
         mgtdList = new java.util.ArrayList<Hint>();
         hintList = new java.util.ArrayList<Hint>();
         updtList = new java.util.HashMap<String, Integer>();
         counter = userMdl.getHintInt();
 
-        Time.getInstance().registerAction(new Task(0, 1, "mexp-hint", ""), new IBackCall<String, Task>()
+        Time.getInstance().registerAction(new Task(0, 1, "mpwd-hint", ""), new IBackCall<String, Task>()
         {
 
             @Override
@@ -78,6 +73,10 @@ public final class HintMdl
 
     public void registerHintView(IHintView view)
     {
+        if (viewList == null)
+        {
+            viewList = new java.util.ArrayList<IHintView>();
+        }
         viewList.add(view);
     }
 
@@ -138,6 +137,14 @@ public final class HintMdl
      */
     public void showTime()
     {
+        if (viewList == null)
+        {
+            return;
+        }
+        if (dateTplt == null)
+        {
+            dateTplt = java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.FULL, java.text.DateFormat.MEDIUM);
+        }
         String text = dateTplt.format(new java.util.Date());
         for (IHintView view : viewList)
         {
@@ -147,6 +154,10 @@ public final class HintMdl
 
     public void showHint()
     {
+        if (viewList == null)
+        {
+            return;
+        }
         int size = hintList.size();
         for (IHintView view : viewList)
         {
