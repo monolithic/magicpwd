@@ -79,7 +79,7 @@ public class TrayWnd extends javax.swing.JWindow implements ITrayView, java.awt.
 
     public void initView()
     {
-        trayImg = new TrayImg(userMdl);
+        trayImg = new TrayImg(trayPtn, userMdl);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this.getContentPane());
         this.getContentPane().setLayout(layout);

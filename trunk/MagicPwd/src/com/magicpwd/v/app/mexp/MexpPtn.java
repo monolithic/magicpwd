@@ -68,9 +68,9 @@ import com.magicpwd.v.app.HintBar;
 import com.magicpwd.v.app.MenuPtn;
 import com.magicpwd.v.app.mail.MailPtn;
 import com.magicpwd.v.app.tray.TrayPtn;
-import com.magicpwd.x.MdiDialog;
-import com.magicpwd.x.mail.MailOpt;
-import com.magicpwd.x.mexp.TpltDialog;
+import com.magicpwd.x.app.MdiDialog;
+import com.magicpwd.x.app.mail.MailOpt;
+import com.magicpwd.x.app.mexp.TpltDialog;
 
 public class MexpPtn extends AMpwdPtn
 {

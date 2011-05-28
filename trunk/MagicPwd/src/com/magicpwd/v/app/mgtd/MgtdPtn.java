@@ -28,7 +28,7 @@ import com.magicpwd.m.UserMdl;
 import com.magicpwd.m.mgtd.MgtdMdl;
 import com.magicpwd.v.app.MenuPtn;
 import com.magicpwd.v.app.tray.TrayPtn;
-import com.magicpwd.x.mgtd.MgtdDlg;
+import com.magicpwd.x.app.mgtd.MgtdDlg;
 
 /**
  *
