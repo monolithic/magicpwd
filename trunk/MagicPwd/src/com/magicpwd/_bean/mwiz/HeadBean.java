@@ -28,7 +28,7 @@ import com.magicpwd._util.Date;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.mwiz.KeysMdl;
 import com.magicpwd.v.app.mwiz.MwizPtn;
-import com.magicpwd.x.IcoDialog;
+import com.magicpwd.x.app.IcoDialog;
 
 /**
  * Application: MagicPwd
