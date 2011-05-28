@@ -14,7 +14,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.x.docs;
+package com.magicpwd.x.app.docs;
 
 import com.magicpwd.__a.ADialog;
 import com.magicpwd.__a.AMpwdPtn;

@@ -14,7 +14,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.x;
+package com.magicpwd.x.app;
 
 import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.IBackCall;
