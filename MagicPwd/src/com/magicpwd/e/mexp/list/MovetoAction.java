@@ -20,7 +20,7 @@ import com.magicpwd.__a.mexp.AMexpAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd._util.Char;
-import com.magicpwd.x.CatDialog;
+import com.magicpwd.x.app.CatDialog;
 
 /**
  *

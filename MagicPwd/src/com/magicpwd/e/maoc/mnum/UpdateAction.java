@@ -19,7 +19,7 @@ package com.magicpwd.e.maoc.mnum;
 import com.magicpwd.__a.maoc.AMaocAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.mpwd.Mexp;
-import com.magicpwd.x.maoc.MnumDlg;
+import com.magicpwd.x.app.maoc.MnumDlg;
 
 /**
  *

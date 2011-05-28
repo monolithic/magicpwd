@@ -33,7 +33,7 @@ import com.magicpwd._util.Lang;
 import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.v.app.MenuPtn;
 import com.magicpwd.v.app.mexp.MexpPtn;
-import com.magicpwd.x.mgtd.MgtdDlg;
+import com.magicpwd.x.app.mgtd.MgtdDlg;
 
 /**
  * 属性：过期提示

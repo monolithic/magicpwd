@@ -24,7 +24,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd.x.DatDialog;
+import com.magicpwd.x.app.DatDialog;
 
 /**
  * 从数据文件恢复
