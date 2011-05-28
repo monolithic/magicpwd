@@ -373,7 +373,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
 
     public void showViewPtn(AppView nextPtn)
     {
-        if (mpwdPtn == null)
+        if (mpwdPtn == null || nextPtn == null)
         {
             return;
         }

@@ -16,7 +16,10 @@
  */
 package com.magicpwd.v.gui.tray;
 
-import java.awt.Color;
+import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._enum.AppView;
+import com.magicpwd._util.Bean;
+import com.magicpwd.m.UserMdl;
 
 /**
  * Application: MagicPwd
@@ -59,12 +62,14 @@ public class TrayImg extends java.awt.Canvas
     private java.awt.image.BufferedImage curBg;
     private java.awt.image.BufferedImage icoBg;
     private java.awt.image.BufferedImage[][] bgArr;
+    private String loc;
+    private java.util.HashMap<String, AppView> locApp;
     private java.util.HashMap<String, java.awt.image.BufferedImage> locMap;
-    private TrayWnd trayWnd;
+    private UserMdl userMdl;
 
-    public TrayImg(TrayWnd trayWnd)
+    public TrayImg(UserMdl userMdl)
     {
-        this.trayWnd = trayWnd;
+        this.userMdl = userMdl;
     }
 
     public void init()
@@ -72,26 +77,32 @@ public class TrayImg extends java.awt.Canvas
         imgOffX = (selImgW - defImgW) >> 1;
         imgOffY = (selImgH - defImgH) >> 1;
 
-        icoBg = readImage("logo\\logo24.png");
+        icoBg = Bean.getLogo(24);
 
+        locApp = new java.util.HashMap<String, AppView>();
         locMap = new java.util.HashMap<String, java.awt.image.BufferedImage>();
-        locMap.put("1,1", readImage("skin\\feel\\default\\mexp.png"));
-        locMap.put("0,0", readImage("skin\\feel\\default\\mwiz.png"));
-        locMap.put("2,0", readImage("skin\\feel\\default\\mpad.png"));
-        locMap.put("0,2", readImage("skin\\feel\\default\\mgtd.png"));
-        locMap.put("2,2", readImage("skin\\feel\\default\\maoc.png"));
+        locApp.put("1,1", AppView.mexp);
+        locMap.put("1,1", userMdl.readImage(ConsEnv.FEEL_PATH + "mexp.png"));
+        locApp.put("0,0", AppView.mwiz);
+        locMap.put("0,0", userMdl.readImage(ConsEnv.FEEL_PATH + "mwiz.png"));
+        locApp.put("2,0", AppView.mpad);
+        locMap.put("2,0", userMdl.readImage(ConsEnv.FEEL_PATH + "mpad.png"));
+        locApp.put("0,2", AppView.mgtd);
+        locMap.put("0,2", userMdl.readImage(ConsEnv.FEEL_PATH + "mgtd.png"));
+        locApp.put("2,2", AppView.maoc);
+        locMap.put("2,2", userMdl.readImage(ConsEnv.FEEL_PATH + "maoc.png"));
 
-        bigBg = readImage("skin\\feel\\default\\guid.png");
+        bigBg = userMdl.readImage(ConsEnv.FEEL_PATH + "guid.png");
         bgArr = new java.awt.image.BufferedImage[3][3];
-        bgArr[0][0] = readImage("skin\\feel\\default\\guid-otl.png");
-        bgArr[0][1] = readImage("skin\\feel\\default\\guid-oml.png");
-        bgArr[0][2] = readImage("skin\\feel\\default\\guid-obl.png");
-        bgArr[1][0] = readImage("skin\\feel\\default\\guid-otm.png");
-        bgArr[1][1] = readImage("skin\\feel\\default\\guid-omm.png");
-        bgArr[1][2] = readImage("skin\\feel\\default\\guid-obm.png");
-        bgArr[2][0] = readImage("skin\\feel\\default\\guid-otr.png");
-        bgArr[2][1] = readImage("skin\\feel\\default\\guid-omr.png");
-        bgArr[2][2] = readImage("skin\\feel\\default\\guid-obr.png");
+        bgArr[0][0] = userMdl.readImage(ConsEnv.FEEL_PATH + "guid-otl.png");
+        bgArr[0][1] = userMdl.readImage(ConsEnv.FEEL_PATH + "guid-oml.png");
+        bgArr[0][2] = userMdl.readImage(ConsEnv.FEEL_PATH + "guid-obl.png");
+        bgArr[1][0] = userMdl.readImage(ConsEnv.FEEL_PATH + "guid-otm.png");
+        bgArr[1][1] = userMdl.readImage(ConsEnv.FEEL_PATH + "guid-omm.png");
+        bgArr[1][2] = userMdl.readImage(ConsEnv.FEEL_PATH + "guid-obm.png");
+        bgArr[2][0] = userMdl.readImage(ConsEnv.FEEL_PATH + "guid-otr.png");
+        bgArr[2][1] = userMdl.readImage(ConsEnv.FEEL_PATH + "guid-omr.png");
+        bgArr[2][2] = userMdl.readImage(ConsEnv.FEEL_PATH + "guid-obr.png");
 
         curBg = new java.awt.image.BufferedImage(bigBg.getWidth(), bigBg.getHeight(), java.awt.image.BufferedImage.TYPE_INT_ARGB);
         java.awt.Graphics2D g2d = curBg.createGraphics();
@@ -100,19 +111,6 @@ public class TrayImg extends java.awt.Canvas
         g2d.drawImage(bigBg, 0, 0, this);
         g2d.drawImage(icoBg, (wndW - selImgW) >> 1, (wndH - selImgH) >> 1, this);
         g2d.dispose();
-    }
-
-    private java.awt.image.BufferedImage readImage(String path)
-    {
-        try
-        {
-            return javax.imageio.ImageIO.read(new java.io.File(path));
-        }
-        catch (Exception exp)
-        {
-            exp.printStackTrace();
-            return null;
-        }
     }
 
     @Override
@@ -133,6 +131,11 @@ public class TrayImg extends java.awt.Canvas
     public void setBackgroud(java.awt.image.BufferedImage image)
     {
         this.bgImage = image;
+    }
+
+    public AppView getAppView()
+    {
+        return locApp.get(loc);
     }
 
     public void deActive()
@@ -168,7 +171,7 @@ public class TrayImg extends java.awt.Canvas
             int x = x2GridIndex(p.x);
             int y = y2GridIndex(p.y);
             java.awt.image.BufferedImage bi = bgArr[x][y];
-            String k = x + "," + y;
+            loc = x + "," + y;
 
             x = x2GridPoint(p.x);
             y = y2GridPoint(p.y);
@@ -198,10 +201,10 @@ public class TrayImg extends java.awt.Canvas
                     y -= imgOffY;
                 }
             }
-            if (locMap.containsKey(k))
+            if (locMap.containsKey(loc))
             {
                 g2d.drawImage(bi, x, y, this);
-                g2d.drawImage(locMap.get(k), x + imgOffX + selPadH, y + imgOffY + selPadH, this);
+                g2d.drawImage(locMap.get(loc), x + imgOffX + selPadH, y + imgOffY + selPadH, this);
             }
         }
         g2d.dispose();

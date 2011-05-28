@@ -49,46 +49,36 @@ public class IcoDialog extends javax.swing.JDialog
 
     public void initView()
     {
-        bt_Append = new javax.swing.JButton();
-        bt_Append.addActionListener(new java.awt.event.ActionListener()
-        {
+        plCategory = new javax.swing.JPanel();
+        plCategory.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 0, 0));
+        spCategory = new javax.swing.JScrollPane(plCategory);
+        spCategory.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        spCategory.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        spCategory.setBorder(null);
 
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                bt_AppendActionPerformed(evt);
-            }
-        });
+        btAppend = new javax.swing.JButton();
 
-        bt_Select = new javax.swing.JButton();
-        bt_Select.addActionListener(new java.awt.event.ActionListener()
-        {
+        btSelect = new javax.swing.JButton();
 
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                bt_SelectActionPerformed(evt);
-            }
-        });
-
-        javax.swing.JScrollPane sp_IconGrid = new javax.swing.JScrollPane();
-        tb_IconGrid = new javax.swing.JTable();
-        tb_IconGrid.setTableHeader(null);
-        tb_IconGrid.setCellSelectionEnabled(true);
-        tb_IconGrid.setShowHorizontalLines(false);
-        tb_IconGrid.setShowVerticalLines(false);
-        tb_IconGrid.getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        sp_IconGrid.setViewportView(tb_IconGrid);
+        tbIconGrid = new javax.swing.JTable();
+        tbIconGrid.setTableHeader(null);
+        tbIconGrid.setCellSelectionEnabled(true);
+        tbIconGrid.setShowHorizontalLines(false);
+        tbIconGrid.setShowVerticalLines(false);
+        tbIconGrid.getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        javax.swing.JScrollPane spIconGrid = new javax.swing.JScrollPane();
+        spIconGrid.setViewportView(tbIconGrid);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this.getContentPane());
         this.getContentPane().setLayout(layout);
 
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
-        hsg1.addComponent(bt_Select);
+        hsg1.addComponent(btSelect);
         hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg1.addComponent(bt_Append);
+        hsg1.addComponent(btAppend);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
-        hpg1.addComponent(sp_IconGrid, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE);
+        hpg1.addComponent(spCategory, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE);
+        hpg1.addComponent(spIconGrid, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE);
         hpg1.addGroup(hsg1);
         javax.swing.GroupLayout.SequentialGroup hsg2 = layout.createSequentialGroup();
         hsg2.addContainerGap();
@@ -97,11 +87,12 @@ public class IcoDialog extends javax.swing.JDialog
         layout.setHorizontalGroup(hsg2);
 
         javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
-        vpg1.addComponent(bt_Append);
-        vpg1.addComponent(bt_Select);
+        vpg1.addComponent(btAppend);
+        vpg1.addComponent(btSelect);
         javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
         vsg1.addContainerGap();
-        vsg1.addComponent(sp_IconGrid, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE);
+        vsg1.addComponent(spCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vsg1.addComponent(spIconGrid, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE);
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg1.addGroup(vpg1);
         vsg1.addContainerGap();
@@ -116,20 +107,40 @@ public class IcoDialog extends javax.swing.JDialog
 
     public void initLang()
     {
-        Lang.setWText(bt_Select, LangRes.P30FA50C, "选择(@C)");
+        Lang.setWText(btSelect, LangRes.P30FA50C, "选择(@C)");
 
-        Lang.setWText(bt_Append, LangRes.P30FA50D, "追加(@A)");
+        Lang.setWText(btAppend, LangRes.P30FA50D, "追加(@A)");
 
         this.setTitle(Lang.getLang(LangRes.P30FA50F, "徽标"));
     }
 
     public void initData()
     {
+        btAppend.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                bt_AppendActionPerformed(evt);
+            }
+        });
+
+        btSelect.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                bt_SelectActionPerformed(evt);
+            }
+        });
+
         if (icoModel == null)
         {
             icoModel = new IcoModel();
-            tb_IconGrid.setModel(icoModel);
-            tb_IconGrid.setRowHeight(icoModel.getRowHeight());
+            tbIconGrid.setModel(icoModel);
+            tbIconGrid.setRowHeight(icoModel.getRowHeight());
 
             javax.swing.table.TableCellRenderer renderer = new javax.swing.table.TableCellRenderer()
             {
@@ -162,7 +173,7 @@ public class IcoDialog extends javax.swing.JDialog
                     return label;
                 }
             };
-            java.util.Enumeration<javax.swing.table.TableColumn> columns = tb_IconGrid.getColumnModel().getColumns();
+            java.util.Enumeration<javax.swing.table.TableColumn> columns = tbIconGrid.getColumnModel().getColumns();
             while (columns.hasMoreElements())
             {
                 columns.nextElement().setCellRenderer(renderer);
@@ -179,15 +190,15 @@ public class IcoDialog extends javax.swing.JDialog
             public void run()
             {
                 icoModel.initIcon(iconPath, lastIcon);
-                tb_IconGrid.setRowSelectionInterval(icoModel.getSelectedRow(), icoModel.getSelectedRow());
-                tb_IconGrid.setColumnSelectionInterval(icoModel.getSelectedColumn(), icoModel.getSelectedColumn());
+                tbIconGrid.setRowSelectionInterval(icoModel.getSelectedRow(), icoModel.getSelectedRow());
+                tbIconGrid.setColumnSelectionInterval(icoModel.getSelectedColumn(), icoModel.getSelectedColumn());
             }
         });
     }
 
     private void bt_SelectActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (backCall.callBack(IBackCall.OPTIONS_APPLY, icoModel.getSelectedKey(tb_IconGrid.getSelectedRow(), tb_IconGrid.getSelectedColumn())))
+        if (backCall.callBack(IBackCall.OPTIONS_APPLY, icoModel.getSelectedKey(tbIconGrid.getSelectedRow(), tbIconGrid.getSelectedColumn())))
         {
             this.setVisible(false);
             this.dispose();
@@ -226,8 +237,8 @@ public class IcoDialog extends javax.swing.JDialog
         try
         {
             icoModel.appendIcon(filePath, iconPath);
-            tb_IconGrid.setRowSelectionInterval(icoModel.getSelectedRow(), icoModel.getSelectedRow());
-            tb_IconGrid.setColumnSelectionInterval(icoModel.getSelectedColumn(), icoModel.getSelectedColumn());
+            tbIconGrid.setRowSelectionInterval(icoModel.getSelectedRow(), icoModel.getSelectedRow());
+            tbIconGrid.setColumnSelectionInterval(icoModel.getSelectedColumn(), icoModel.getSelectedColumn());
         }
         catch (Exception exp)
         {
@@ -236,9 +247,11 @@ public class IcoDialog extends javax.swing.JDialog
             return;
         }
     }
-    private javax.swing.JButton bt_Append;
-    private javax.swing.JButton bt_Select;
-    private javax.swing.JTable tb_IconGrid;
+    private javax.swing.JButton btAppend;
+    private javax.swing.JButton btSelect;
+    private javax.swing.JPanel plCategory;
+    private javax.swing.JScrollPane spCategory;
+    private javax.swing.JTable tbIconGrid;
 }
 
 class IcoModel extends javax.swing.table.AbstractTableModel

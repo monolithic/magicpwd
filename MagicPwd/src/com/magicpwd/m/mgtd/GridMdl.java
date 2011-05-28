@@ -16,8 +16,10 @@
  */
 package com.magicpwd.m.mgtd;
 
+import com.magicpwd._comn.mpwd.Hint;
 import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._cons.ConsDat;
+import com.magicpwd._util.Time;
 import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.m.UserMdl;
 
@@ -28,6 +30,7 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
 {
 
     private java.util.List<Mgtd> lsMgtdList;
+    private java.util.Map<String, Integer> updtList;
     private UserMdl userMdl;
 
     GridMdl(UserMdl userMdl)
@@ -38,6 +41,7 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
     void init()
     {
         lsMgtdList = new java.util.ArrayList<Mgtd>();
+        updtList = new java.util.HashMap<String, Integer>();
         DBA4000.listMgtdData(userMdl, lsMgtdList);
     }
 
