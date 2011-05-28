@@ -63,7 +63,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
     private AMpwdPtn mpwdPtn;
     private ITrayView trayPtn;
     private java.util.Map<AppView, AMpwdPtn> ptnList;
-    protected static java.util.HashMap<String, javax.swing.Icon> defIcon;
+    private static java.util.HashMap<String, javax.swing.Icon> defIcon;
     private static java.util.Properties defProp;
     private java.util.Properties favProp;
 
@@ -294,6 +294,19 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
             favHash = defProp.getProperty(favHash);
         }
         return defIcon.get("def:" + favHash);
+    }
+
+    public AppView getFavView(String favView)
+    {
+        if (Char.isValidate(favView, 4))
+        {
+            favView = favProp.getProperty(favView);
+            if (Char.isValidate(favView, 4))
+            {
+                return AppView.valueOf(favView);
+            }
+        }
+        return null;
     }
 
     /**

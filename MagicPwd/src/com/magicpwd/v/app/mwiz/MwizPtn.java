@@ -40,7 +40,7 @@ import com.magicpwd.v.app.MenuPtn;
 import com.magicpwd.v.app.tray.TrayPtn;
 import com.magicpwd.v.app.HintBar;
 import com.magicpwd.v.app.mail.MailDlg;
-import com.magicpwd.x.mail.MailOpt;
+import com.magicpwd.x.app.mail.MailOpt;
 
 /**
  * 向导模式

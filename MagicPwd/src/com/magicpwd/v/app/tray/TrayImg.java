@@ -19,7 +19,6 @@ package com.magicpwd.v.app.tray;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Bean;
-import com.magicpwd.m.MpwdMdl;
 import com.magicpwd.m.UserMdl;
 
 /**
@@ -66,10 +65,12 @@ public class TrayImg extends java.awt.Canvas
     private String loc;
     private java.util.HashMap<String, AppView> locApp;
     private java.util.HashMap<String, java.awt.image.BufferedImage> locMap;
+    private TrayPtn trayPtn;
     private UserMdl userMdl;
 
-    public TrayImg(UserMdl userMdl)
+    public TrayImg(TrayPtn trayPtn, UserMdl userMdl)
     {
+        this.trayPtn = trayPtn;
         this.userMdl = userMdl;
     }
 
@@ -83,13 +84,21 @@ public class TrayImg extends java.awt.Canvas
         locApp = new java.util.HashMap<String, AppView>();
         locMap = new java.util.HashMap<String, java.awt.image.BufferedImage>();
 
-        MpwdMdl mpwdMdl = userMdl.getMpwdMdl();
         String key;
+        AppView view;
         for (int row = 0; row < 2; row += 1)
         {
             for (int col = 0; col < 2; col += 1)
             {
                 key = "cell[" + row + "," + col + "]";
+                view = trayPtn.getFavView(key + ".view");
+                if (view == null)
+                {
+                    continue;
+                }
+                locApp.put("", view);
+                trayPtn.readFavIcon("cell[" + "]", true);
+                locMap.put("1,1", userMdl.readImage(ConsEnv.FEEL_PATH + "mexp.png"));
             }
         }
         locApp.put("1,1", AppView.mexp);
@@ -212,10 +221,10 @@ public class TrayImg extends java.awt.Canvas
                     y -= imgOffY;
                 }
             }
-            if (locMap.containsKey(loc))
+            if (locApp.containsKey(loc))
             {
                 g2d.drawImage(bi, x, y, this);
-                g2d.drawImage(locMap.get(loc), x + imgOffX + selPadH, y + imgOffY + selPadH, this);
+                g2d.drawImage(trayPtn.readFavIcon("", true), x + imgOffX + selPadH, y + imgOffY + selPadH, this);
             }
         }
         g2d.dispose();
