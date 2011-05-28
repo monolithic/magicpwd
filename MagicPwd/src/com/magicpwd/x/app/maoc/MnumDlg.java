@@ -1,5 +1,5 @@
 /*
- *  Copyright (C) 2011 Amon
+ *  Copyright (C) 2011 Aven
  * 
  *  This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -14,7 +14,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.x.maoc;
+package com.magicpwd.x.app.maoc;
 
 import com.magicpwd.__a.ADialog;
 import com.magicpwd.__i.IBackCall;
@@ -28,15 +28,15 @@ import com.magicpwd.v.app.maoc.MaocPtn;
 
 /**
  *
- * @author Amon
+ * @author Aven
  */
-public class MfunDlg extends ADialog
+public class MnumDlg extends ADialog
 {
 
     private MaocPtn maocPtn;
     private IBackCall<String, Mexp> backCall;
 
-    public MfunDlg(MaocPtn maocPtn, IBackCall<String, Mexp> backCall)
+    public MnumDlg(MaocPtn maocPtn, IBackCall<String, Mexp> backCall)
     {
         super(maocPtn, true);
         this.maocPtn = maocPtn;
@@ -102,11 +102,11 @@ public class MfunDlg extends ADialog
         vpg2.addComponent(lb_Value);
         vpg2.addComponent(tf_Value, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
-        vpg3.addComponent(lb_Title);
-        vpg3.addComponent(tf_Title, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
+        vpg3.addComponent(lb_Value);
+        vpg3.addComponent(tf_Value, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.ParallelGroup vpg4 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         vpg4.addComponent(lb_Remark);
-        vpg4.addComponent(sp_Remark, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE);
+        vpg4.addComponent(sp_Remark, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE);
         javax.swing.GroupLayout.ParallelGroup vpg5 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg5.addComponent(bt_Apply);
         vpg5.addComponent(bt_Abort);
@@ -130,12 +130,12 @@ public class MfunDlg extends ADialog
 
     public void initLang()
     {
-        this.setTitle(Lang.getLang(LangRes.P30FB203, "函数管理"));
+        this.setTitle(Lang.getLang(LangRes.P30FB202, "常量管理"));
 
-        Lang.setWText(lb_Name, LangRes.P30FB306, "函数名(@N)");
-        Lang.setWText(lb_Value, LangRes.P30FB307, "函数值(@V)");
-        Lang.setWText(lb_Title, LangRes.P30FB308, "标题(@T)");
-        Lang.setWText(lb_Remark, LangRes.P30FB309, "附注(@R)");
+        Lang.setWText(lb_Name, LangRes.P30FB302, "常量名(@N)");
+        Lang.setWText(lb_Value, LangRes.P30FB303, "常量值(@V)");
+        Lang.setWText(lb_Title, LangRes.P30FB304, "标题(@T)");
+        Lang.setWText(lb_Remark, LangRes.P30FB305, "附注(@R)");
 
         Bean.setText(bt_Abort, "取消(@C)");
         Bean.setText(bt_Apply, "确认(@O)");
@@ -192,27 +192,27 @@ public class MfunDlg extends ADialog
         String name = tf_Name.getText().replaceAll("\\s+", "");
         if (!Char.isValidate(name))
         {
-            Lang.showMesg(this, LangRes.P30FBA06, "函数名不能为空！");
+            Lang.showMesg(this, LangRes.P30FBA03, "常量名不能为空！");
             tf_Name.requestFocus();
             return;
         }
         name = name.replaceAll("\\s+", "");
-        if (!java.util.regex.Pattern.matches("^[A-Za-z][A-Za-z\\d]*(\\([A-Za-z][A-Za-z\\d]*(,[A-Za-z][A-Za-z\\d]*)*\\))$", name))
+        if (!java.util.regex.Pattern.matches("^[A-Za-z][A-Za-z\\d]*$", name))
         {
-            Lang.showMesg(this, LangRes.P30FBA07, "函数名应形如f(x)或f1(x,y)格式，\n且只能包含字母及数字，并以字母开始！");
+            Lang.showMesg(this, LangRes.P30FBA04, "常量名只能包含字母及数字，且以字母开始！");
             tf_Name.requestFocus();
             return;
         }
         String value = tf_Value.getText().replaceAll("\\s+", "");
         if (!Char.isValidate(value))
         {
-            Lang.showMesg(this, LangRes.P30FBA08, "函数体不能为空！");
+            Lang.showMesg(this, LangRes.P30FBA05, "常量值不能为空！");
             tf_Value.requestFocus();
             return;
         }
 //        if (java.util.regex.Pattern.compile("[A-Za-z][A-Za-z\\d]*").matcher(value).find())
 //        {
-//            Lang.showMesg(this, LangRes.P30FBA0A, "您输入的不是一个合法的函数！");
+//            Lang.showMesg(this, LangRes.P30FBA09, "您输入的不是一个合法的常量！");
 //            tf_Value.requestFocus();
 //            return;
 //        }
@@ -224,7 +224,7 @@ public class MfunDlg extends ADialog
             return;
         }
 
-        Mexp item = new Mexp(ExpType.FUN);
+        Mexp item = new Mexp(ExpType.NUM);
         item.setP30F0804(name);
         item.setP30F0805(value);
         item.setP30F0806(tf_Title.getText());

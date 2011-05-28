@@ -14,7 +14,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.x.mgtd;
+package com.magicpwd.x.app.mgtd;
 
 import com.magicpwd.__a.ADialog;
 import com.magicpwd.__a.AMpwdPtn;
@@ -28,16 +28,16 @@ import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd.d.db.DBA4000;
-import com.magicpwd.x.mgtd.method.Apps;
-import com.magicpwd.x.mgtd.method.Audio;
-import com.magicpwd.x.mgtd.method.File;
-import com.magicpwd.x.mgtd.method.Mail;
-import com.magicpwd.x.mgtd.method.Note;
-import com.magicpwd.x.mgtd.schedule.Period;
-import com.magicpwd.x.mgtd.schedule.FixTime;
-import com.magicpwd.x.mgtd.schedule.Formula;
-import com.magicpwd.x.mgtd.schedule.Intval;
-import com.magicpwd.x.mgtd.schedule.Special;
+import com.magicpwd.x.app.mgtd.method.Apps;
+import com.magicpwd.x.app.mgtd.method.Audio;
+import com.magicpwd.x.app.mgtd.method.File;
+import com.magicpwd.x.app.mgtd.method.Mail;
+import com.magicpwd.x.app.mgtd.method.Note;
+import com.magicpwd.x.app.mgtd.schedule.Period;
+import com.magicpwd.x.app.mgtd.schedule.FixTime;
+import com.magicpwd.x.app.mgtd.schedule.Formula;
+import com.magicpwd.x.app.mgtd.schedule.Intval;
+import com.magicpwd.x.app.mgtd.schedule.Special;
 
 /**
  *

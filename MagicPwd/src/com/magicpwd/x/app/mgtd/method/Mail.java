@@ -14,14 +14,14 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.x.mgtd.method;
+package com.magicpwd.x.app.mgtd.method;
 
 import com.magicpwd.__i.mgtd.IMgtdBean;
 import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
-import com.magicpwd.x.mgtd.MgtdDlg;
+import com.magicpwd.x.app.mgtd.MgtdDlg;
 
 /**
  * Application: MagicPwd

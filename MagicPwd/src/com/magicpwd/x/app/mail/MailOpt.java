@@ -14,7 +14,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.x.mail;
+package com.magicpwd.x.app.mail;
 
 import com.magicpwd._comn.I1S2;
 import com.magicpwd._cons.LangRes;
