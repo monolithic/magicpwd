@@ -24,7 +24,7 @@ import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._comn.mpwd.Mexp;
 import com.magicpwd._enum.ExpType;
-import com.magicpwd.v.gui.maoc.MaocPtn;
+import com.magicpwd.v.app.maoc.MaocPtn;
 
 /**
  *

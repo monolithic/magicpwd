@@ -22,7 +22,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
-import com.magicpwd.v.gui.mexp.MexpPtn;
+import com.magicpwd.v.app.mexp.MexpPtn;
 
 /**
  *

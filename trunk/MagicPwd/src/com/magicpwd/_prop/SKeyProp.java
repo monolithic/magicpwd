@@ -20,7 +20,7 @@ import com.magicpwd.__i.IPropBean;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
-import com.magicpwd.v.gui.mexp.MexpPtn;
+import com.magicpwd.v.app.mexp.MexpPtn;
 
 /**
  * @author Amon

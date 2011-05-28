@@ -40,8 +40,8 @@ import com.magicpwd.d.dx.DXA2000;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
-import com.magicpwd.v.gui.MenuPtn;
-import com.magicpwd.v.gui.tray.TrayPtn;
+import com.magicpwd.v.app.MenuPtn;
+import com.magicpwd.v.app.tray.TrayPtn;
 
 /**
  *

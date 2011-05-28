@@ -19,7 +19,7 @@ package com.magicpwd._comp;
 import com.magicpwd.__i.mexp.IMexpBean;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
-import com.magicpwd.v.gui.mexp.MexpPtn;
+import com.magicpwd.v.app.mexp.MexpPtn;
 
 /**
  *

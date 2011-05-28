@@ -20,7 +20,7 @@ import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mwiz.IMwizBean;
 import com.magicpwd._bean.APwdsBean;
 import com.magicpwd._util.Util;
-import com.magicpwd.v.gui.mwiz.MwizPtn;
+import com.magicpwd.v.app.mwiz.MwizPtn;
 
 /**
  *
