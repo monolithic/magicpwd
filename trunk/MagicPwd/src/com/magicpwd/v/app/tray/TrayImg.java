@@ -19,6 +19,7 @@ package com.magicpwd.v.app.tray;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Bean;
+import com.magicpwd._util.Char;
 import com.magicpwd.m.UserMdl;
 
 /**
@@ -37,20 +38,19 @@ public class TrayImg extends java.awt.Canvas
     /**
      * 窗口大小
      */
-    private int wndW = 64;
-    private int wndH = 64;
+    private int wndMaxW;
+    private int wndMaxH;
     /**
      * 默认图标大小
      */
-    private int defImgW = 16;
-    private int defImgH = 16;
+    private int imgDefW;
+    private int imgDefH;
     /**
      * 选中图标大小
      */
-    private int selImgW = 24;
-    private int selImgH = 24;
-    private int selPadW = 2;
-    private int selPadH = 2;
+    private int imgSelW;
+    private int imgSelH;
+    private int imgSelP;
     /**
      * 背景图像偏移值
      */
@@ -58,13 +58,13 @@ public class TrayImg extends java.awt.Canvas
     private int wndOffY = 8;
     private int imgOffX;
     private int imgOffY;
-    private java.awt.image.BufferedImage bigBg;
-    private java.awt.image.BufferedImage curBg;
-    private java.awt.image.BufferedImage icoBg;
-    private java.awt.image.BufferedImage[][] bgArr;
+    private java.awt.image.BufferedImage minBg;//默认背景
+    private java.awt.image.BufferedImage maxBg;//导航背景
+    private java.awt.image.BufferedImage bufBg;//缓冲背景
+    private java.util.HashMap<String, java.awt.image.BufferedImage> imgBg;
     private String loc;
     private java.util.HashMap<String, AppView> locApp;
-    private java.util.HashMap<String, java.awt.image.BufferedImage> locMap;
+    private java.util.HashMap<String, java.awt.image.BufferedImage> locImg;
     private TrayPtn trayPtn;
     private UserMdl userMdl;
 
@@ -76,69 +76,90 @@ public class TrayImg extends java.awt.Canvas
 
     public void init()
     {
-        imgOffX = (selImgW - defImgW) >> 1;
-        imgOffY = (selImgH - defImgH) >> 1;
+        java.util.Properties prop = trayPtn.getTrayFav();
 
-        icoBg = Bean.getLogo(24);
+        // 窗口大小
+        wndMaxW = getInt(prop.getProperty("wnd.max.width"), 64);
+        wndMaxH = getInt(prop.getProperty("wnd.max.height"), 64);
 
+        // 导航窗口背景
+        maxBg = userMdl.readImage(ConsEnv.FEEL_PATH + prop.getProperty("bg.image", "guid.png"));
+        minBg = Bean.getLogo(24);
+
+        wndOffX = getInt(prop.getProperty("bg.offset.x"), 0);
+        wndOffY = getInt(prop.getProperty("bg.offset.y"), 0);
+
+        // 默认图像大小
+        imgDefW = getInt(prop.getProperty("img.default.width"), 16);
+        imgDefH = getInt(prop.getProperty("img.default.width"), 16);
+
+        // 鼠标经过特效
+        imgSelW = getInt(prop.getProperty("img.selected.width"), 24);
+        imgSelH = getInt(prop.getProperty("img.selected.height"), 24);
+        imgSelP = getInt(prop.getProperty("img.selected.padding"), 24);
+
+        imgOffX = (imgSelW - imgDefW) >> 1;
+        imgOffY = (imgSelH - imgDefH) >> 1;
+
+        imgBg = new java.util.HashMap<String, java.awt.image.BufferedImage>();
         locApp = new java.util.HashMap<String, AppView>();
-        locMap = new java.util.HashMap<String, java.awt.image.BufferedImage>();
+        locImg = new java.util.HashMap<String, java.awt.image.BufferedImage>();
 
+        String tmp;
         String key;
         AppView view;
-        for (int row = 0; row < 2; row += 1)
+        for (int y = 0; y < 3; y += 1)
         {
-            for (int col = 0; col < 2; col += 1)
+            for (int x = 0; x < 3; x += 1)
             {
-                key = "cell[" + row + "," + col + "]";
-                view = trayPtn.getFavView(key + ".view");
+                key = x + "," + y;
+
+                // 背景
+                tmp = prop.getProperty("cell[" + key + "].clip");
+                if (!Char.isValidate(tmp))
+                {
+                    continue;
+                }
+                imgBg.put(key, userMdl.readImage(ConsEnv.FEEL_PATH + tmp));
+
+                // 功能
+                tmp = prop.getProperty("cell[" + key + "].view");
+                if (!Char.isValidate(tmp))
+                {
+                    continue;
+                }
+                view = AppView.valueOf(tmp);
                 if (view == null)
                 {
                     continue;
                 }
-                locApp.put("", view);
-                trayPtn.readFavIcon("cell[" + "]", true);
-                locMap.put("1,1", userMdl.readImage(ConsEnv.FEEL_PATH + "mexp.png"));
+                locApp.put(key, view);
+
+                // 图标
+                tmp = prop.getProperty("cell[" + key + "].icon");
+                if (!Char.isValidate(tmp))
+                {
+                    continue;
+                }
+                locImg.put(key, userMdl.readImage(ConsEnv.FEEL_PATH + tmp));
             }
         }
-        locApp.put("1,1", AppView.mexp);
-        locMap.put("1,1", userMdl.readImage(ConsEnv.FEEL_PATH + "mexp.png"));
-        locApp.put("0,0", AppView.mwiz);
-        locMap.put("0,0", userMdl.readImage(ConsEnv.FEEL_PATH + "mwiz.png"));
-        locApp.put("2,0", AppView.mpad);
-        locMap.put("2,0", userMdl.readImage(ConsEnv.FEEL_PATH + "mpad.png"));
-        locApp.put("0,2", AppView.mgtd);
-        locMap.put("0,2", userMdl.readImage(ConsEnv.FEEL_PATH + "mgtd.png"));
-        locApp.put("2,2", AppView.maoc);
-        locMap.put("2,2", userMdl.readImage(ConsEnv.FEEL_PATH + "maoc.png"));
 
-        bigBg = userMdl.readImage(ConsEnv.FEEL_PATH + "guid.png");
-        bgArr = new java.awt.image.BufferedImage[3][3];
-        bgArr[0][0] = userMdl.readImage(ConsEnv.FEEL_PATH + "guid-otl.png");
-        bgArr[0][1] = userMdl.readImage(ConsEnv.FEEL_PATH + "guid-oml.png");
-        bgArr[0][2] = userMdl.readImage(ConsEnv.FEEL_PATH + "guid-obl.png");
-        bgArr[1][0] = userMdl.readImage(ConsEnv.FEEL_PATH + "guid-otm.png");
-        bgArr[1][1] = userMdl.readImage(ConsEnv.FEEL_PATH + "guid-omm.png");
-        bgArr[1][2] = userMdl.readImage(ConsEnv.FEEL_PATH + "guid-obm.png");
-        bgArr[2][0] = userMdl.readImage(ConsEnv.FEEL_PATH + "guid-otr.png");
-        bgArr[2][1] = userMdl.readImage(ConsEnv.FEEL_PATH + "guid-omr.png");
-        bgArr[2][2] = userMdl.readImage(ConsEnv.FEEL_PATH + "guid-obr.png");
-
-        curBg = new java.awt.image.BufferedImage(bigBg.getWidth(), bigBg.getHeight(), java.awt.image.BufferedImage.TYPE_INT_ARGB);
-        java.awt.Graphics2D g2d = curBg.createGraphics();
+        bufBg = new java.awt.image.BufferedImage(maxBg.getWidth(), maxBg.getHeight(), java.awt.image.BufferedImage.TYPE_INT_ARGB);
+        java.awt.Graphics2D g2d = bufBg.createGraphics();
         g2d.setColor(new java.awt.Color(0, 0, 0, 0));
-        g2d.fillRect(0, 0, curBg.getWidth(), curBg.getHeight());
-        g2d.drawImage(bigBg, 0, 0, this);
-        g2d.drawImage(icoBg, (wndW - selImgW) >> 1, (wndH - selImgH) >> 1, this);
+        g2d.fillRect(0, 0, bufBg.getWidth(), bufBg.getHeight());
+        g2d.drawImage(maxBg, 0, 0, this);
+        g2d.drawImage(minBg, (wndMaxW - imgSelW) >> 1, (wndMaxH - imgSelH) >> 1, this);
         g2d.dispose();
     }
 
     @Override
     public void paint(java.awt.Graphics g)
     {
-        if (curBg != null)
+        if (bufBg != null)
         {
-            g.drawImage(curBg, 0, 0, this);
+            g.drawImage(bufBg, 0, 0, this);
         }
     }
 
@@ -160,16 +181,16 @@ public class TrayImg extends java.awt.Canvas
 
     public void deActive()
     {
-        java.awt.Graphics2D g2d = curBg.createGraphics();
-        g2d.drawImage(bigBg, 0, 0, this);
-        g2d.drawImage(icoBg, (wndW - selImgW) >> 1, (wndH - selImgH) >> 1, this);
+        java.awt.Graphics2D g2d = bufBg.createGraphics();
+        g2d.drawImage(maxBg, 0, 0, this);
+        g2d.drawImage(minBg, (wndMaxW - imgSelW) >> 1, (wndMaxH - imgSelH) >> 1, this);
 
         paint(getGraphics());
     }
 
     public void enActive(java.awt.Point p)
     {
-        java.awt.Graphics2D g2d = curBg.createGraphics();
+        java.awt.Graphics2D g2d = bufBg.createGraphics();
         if (bgImage != null)
         {
             g2d.drawImage(bgImage, 0, 0, this);
@@ -177,54 +198,54 @@ public class TrayImg extends java.awt.Canvas
         else
         {
             g2d.setColor(javax.swing.UIManager.getDefaults().getColor("Panel.background"));
-            g2d.fillRect(0, 0, wndW, wndH);
+            g2d.fillRect(0, 0, wndMaxW, wndMaxH);
         }
-        g2d.drawImage(bigBg, 0, 0, this);
-        for (String key : locMap.keySet())
+        g2d.drawImage(maxBg, 0, 0, this);
+        for (String key : locImg.keySet())
         {
             String[] arr = key.split(",");
-            g2d.drawImage(locMap.get(key), wndOffX + Integer.parseInt(arr[0]) * defImgW, wndOffY + Integer.parseInt(arr[1]) * defImgW, this);
+            g2d.drawImage(locImg.get(key), wndOffX + Integer.parseInt(arr[0]) * imgDefW, wndOffY + Integer.parseInt(arr[1]) * imgDefW, this);
         }
 
-        if (p.x > wndOffX && p.x < wndW - wndOffX && p.y > wndOffY && p.y < wndH - wndOffY)
+        if (p.x > wndOffX && p.x < wndMaxW - wndOffX && p.y > wndOffY && p.y < wndMaxH - wndOffY)
         {
             int x = x2GridIndex(p.x);
             int y = y2GridIndex(p.y);
-            java.awt.image.BufferedImage bi = bgArr[x][y];
             loc = x + "," + y;
+            java.awt.image.BufferedImage bi = imgBg.get(loc);
 
             x = x2GridPoint(p.x);
             y = y2GridPoint(p.y);
             if (x <= wndOffX)
             {
-                x -= selPadW;
+                x -= imgSelP;
             }
             else
             {
                 x -= imgOffX;
-                x -= selPadW;
-                if (x + selImgW > wndW - wndOffX)
+                x -= imgSelP;
+                if (x + imgSelW > wndMaxW - wndOffX)
                 {
                     x -= imgOffX;
                 }
             }
             if (y <= wndOffY)
             {
-                y -= selPadH;
+                y -= imgSelP;
             }
             else
             {
                 y -= imgOffY;
-                y -= selPadH;
-                if (y + selImgH > wndH - wndOffY)
+                y -= imgSelP;
+                if (y + imgSelH > wndMaxH - wndOffY)
                 {
                     y -= imgOffY;
                 }
             }
-            if (locApp.containsKey(loc))
+            if (locImg.containsKey(loc))
             {
                 g2d.drawImage(bi, x, y, this);
-                g2d.drawImage(trayPtn.readFavIcon("", true), x + imgOffX + selPadH, y + imgOffY + selPadH, this);
+                g2d.drawImage(locImg.get(loc), x + imgOffX + imgSelP, y + imgOffY + imgSelP, this);
             }
         }
         g2d.dispose();
@@ -232,13 +253,22 @@ public class TrayImg extends java.awt.Canvas
         paint(getGraphics());
     }
 
+    private int getInt(String txt, int def)
+    {
+        if (Char.isValidateInteger(txt))
+        {
+            return Integer.parseInt(txt, 10);
+        }
+        return def;
+    }
+
     private int x2GridIndex(int x)
     {
-        if (x - wndOffX < defImgW)
+        if (x - wndOffX < imgDefW)
         {
             return 0;
         }
-        if (x + defImgW >= wndW - wndOffX)
+        if (x + imgDefW >= wndMaxW - wndOffX)
         {
             return 2;
         }
@@ -248,16 +278,16 @@ public class TrayImg extends java.awt.Canvas
     private int x2GridPoint(int x)
     {
         x -= wndOffX;
-        return x - x % defImgW + wndOffX;
+        return x - x % imgDefW + wndOffX;
     }
 
     private int y2GridIndex(int y)
     {
-        if (y - wndOffY < defImgH)
+        if (y - wndOffY < imgDefH)
         {
             return 0;
         }
-        if (y + defImgW >= wndH - wndOffY)
+        if (y + imgDefW >= wndMaxH - wndOffY)
         {
             return 2;
         }
@@ -267,7 +297,7 @@ public class TrayImg extends java.awt.Canvas
     private int y2GridPoint(int y)
     {
         y -= wndOffY;
-        return y - y % defImgH + wndOffY;
+        return y - y % imgDefH + wndOffY;
     }
     private java.awt.image.BufferedImage bgImage;
 }
