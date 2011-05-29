@@ -18,7 +18,6 @@ package com.magicpwd.m.mexp;
 
 import com.magicpwd._comn.mpwd.Hint;
 import com.magicpwd._comn.mpwd.Mkey;
-import com.magicpwd._util.Bean;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
@@ -109,6 +108,8 @@ public class ListMdl extends DefaultListModel
 
     public boolean listKeysByMeta(String keysMeta)
     {
+        userMdl.clearDataIcon();
+
         int s = mkeyList.size();
         mkeyList.clear();
         fireIntervalRemoved(this, 0, s);
@@ -122,16 +123,17 @@ public class ListMdl extends DefaultListModel
         return b;
     }
 
-    public boolean updtName(String hash, String name, String icon)
+    public boolean updtName(String mkeyHash, String mkeyName, String iconPath, String iconHash)
     {
         Mkey keys;
         for (int i = 0, j = mkeyList.size(); i < j; i += 1)
         {
             keys = mkeyList.get(i);
-            if (keys.getP30F0104().equals(hash))
+            if (keys.getP30F0104().equals(mkeyHash))
             {
-                keys.setP30F0109(name);
-                keys.setP30F010B(icon);
+                keys.setP30F0109(mkeyName);
+                keys.setP30F010B(iconHash);
+                keys.setP30F010C(iconPath);
                 fireContentsChanged(this, i, i);
                 return true;
             }

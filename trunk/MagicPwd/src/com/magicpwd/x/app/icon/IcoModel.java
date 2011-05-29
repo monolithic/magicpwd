@@ -17,7 +17,7 @@
 package com.magicpwd.x.app.icon;
 
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._util.Bean;
+import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
 
 /**
@@ -37,10 +37,11 @@ class IcoModel extends javax.swing.table.AbstractTableModel
     private int columnCount;
     private int rowHeight;
     private int selIcon;
-    private String selPath;
+    private UserMdl userMdl;
 
-    IcoModel()
+    IcoModel(UserMdl userMdl)
     {
+        this.userMdl = userMdl;
         iconList = new java.util.ArrayList<javax.swing.JLabel>();
         columnCount = 5;
         rowHeight = 36;
@@ -120,7 +121,6 @@ class IcoModel extends javax.swing.table.AbstractTableModel
             }
         }
 
-        selPath = icoPath.getName();
         this.fireTableDataChanged();
     }
 
@@ -222,16 +222,11 @@ class IcoModel extends javax.swing.table.AbstractTableModel
         return selIcon % columnCount;
     }
 
-    public String getSelectedPath()
-    {
-        return selPath;
-    }
-
     public String getSelectedIcon()
     {
         javax.swing.JLabel label = iconList.get(selIcon);
         String hash = (String) label.getClientProperty("hash");
-//        Bean.setDataIcon(hash, label.getIcon());
+        userMdl.setDataIcon(hash, label.getIcon());
         return hash;
     }
 }

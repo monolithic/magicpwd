@@ -53,6 +53,7 @@ public final class UserMdl
     {
         this.mpwdMdl = mpwdMdl;
         userCfg = new java.util.Properties();
+        safeKey = new SafeKey(this);
     }
 
     public void loadCfg(String path)
@@ -77,8 +78,6 @@ public final class UserMdl
         {
             Bean.closeStream(fis);
         }
-
-        safeKey = new SafeKey(this);
     }
 
     public void loadDef()

@@ -19,7 +19,12 @@ package com.magicpwd.v.app.mexp;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd._comn.S1S2;
+import com.magicpwd._comn.item.GuidItem;
+import com.magicpwd._comn.item.HintItem;
+import com.magicpwd._comn.item.LogoItem;
+import com.magicpwd._comn.item.MetaItem;
 import com.magicpwd._cons.LangRes;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.db.DBA4000;
@@ -215,14 +220,20 @@ public class HistDlg extends javax.swing.JDialog
             StringBuilder sb = new StringBuilder();
             idx = 0;
             String t = Lang.getLang(LangRes.P30FA101, "：");
-            IEditItem temp = ls_ItemList.get(idx++);
-            sb.append(Lang.getLang(LangRes.P30FA102, "创建时间")).append(t).append(temp.getName()).append('\n');
-            temp = ls_ItemList.get(idx++);
-            sb.append(Lang.getLang(LangRes.P30FA103, "口令名称")).append(t).append(temp.getName()).append('\n');
-            sb.append(Lang.getLang(LangRes.P30FA104, "关键搜索")).append(t).append(temp.getData()).append('\n');
-            temp = ls_ItemList.get(idx++);
-            sb.append(Lang.getLang(LangRes.P30FA105, "过期日期")).append(t).append(temp.getData()).append('\n');
-            sb.append(Lang.getLang(LangRes.P30FA106, "过期提示")).append(t).append(temp.getName()).append('\n');
+            GuidItem guid = (GuidItem) ls_ItemList.get(idx++);
+            sb.append(Lang.getLang(LangRes.P30FA102, "时间")).append(t).append(guid.getName()).append('\n');
+            MetaItem meta = (MetaItem) ls_ItemList.get(idx++);
+            sb.append(Lang.getLang(LangRes.P30FA103, "标题")).append(t).append(meta.getName()).append('\n');
+            LogoItem logo = (LogoItem) ls_ItemList.get(idx++);
+            sb.append(Lang.getLang(LangRes.P30FA104, "徽标")).append(t);
+            if (Char.isValidate(logo.getPath()))
+            {
+                sb.append(logo.getPath()).append(java.io.File.separator);
+            }
+            sb.append(logo.getName()).append('\n');
+            HintItem hint = (HintItem) ls_ItemList.get(idx++);
+            sb.append(Lang.getLang(LangRes.P30FA105, "提醒")).append(t).append(hint.getData()).append('\n');
+            IEditItem temp;
             for (int j = ls_ItemList.size(); idx < j; idx += 1)
             {
                 temp = ls_ItemList.get(idx);

@@ -1115,7 +1115,7 @@ public class DBA4000
         dba.addParam(DBC4000.P30F0A09, DBC4000.P30F0109, false);
         dba.addParam(DBC4000.P30F0A0A, DBC4000.P30F010A, false);
         dba.addParam(DBC4000.P30F0A0B, DBC4000.P30F010B, false);
-//        dba.addParam(DBC4000.P30F0A0C, DBC4000.P30F010C, false);
+        dba.addParam(DBC4000.P30F0A0C, DBC4000.P30F010C, false);
         dba.addParam(DBC4000.P30F0A0D, DBC4000.P30F010D, false);
         dba.addParam(DBC4000.P30F0A0E, DBC4000.P30F010E, false);
         dba.addParam(DBC4000.P30F0A0F, DBC4000.P30F010F, false);
@@ -2057,6 +2057,7 @@ public class DBA4000
             keys.setP30F0109(rest.getString(DBC4000.P30F0A09));
             keys.setP30F010A(rest.getString(DBC4000.P30F0A0A));
             keys.setP30F010B(rest.getString(DBC4000.P30F0A0B));
+            keys.setP30F010C(rest.getString(DBC4000.P30F0A0C));
             keys.setP30F010D(rest.getString(DBC4000.P30F0A0D));
             keys.setP30F010E(rest.getString(DBC4000.P30F0A0E));
             keys.setP30F010F(rest.getString(DBC4000.P30F0A0F));
