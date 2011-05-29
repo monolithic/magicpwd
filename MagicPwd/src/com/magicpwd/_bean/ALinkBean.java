@@ -55,7 +55,7 @@ public abstract class ALinkBean extends AEditBean
         pl_PropConf.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_LinkView = new BtnLabel();
-        bt_LinkView.setIcon(formPtn.readFavIcon("link-open", false));
+        bt_LinkView.setIcon(formPtn.getFeelIcon("link-open", false));
         bt_LinkView.addActionListener(new java.awt.event.ActionListener()
         {
 

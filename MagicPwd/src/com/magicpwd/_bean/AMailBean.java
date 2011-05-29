@@ -57,7 +57,7 @@ public abstract class AMailBean extends AEditBean
         pl_PropConf.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_MailView = new BtnLabel();
-        bt_MailView.setIcon(formPtn.readFavIcon("mail-send", false));
+        bt_MailView.setIcon(formPtn.getFeelIcon("mail-send", false));
         bt_MailView.addActionListener(new java.awt.event.ActionListener()
         {
 

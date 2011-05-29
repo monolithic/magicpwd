@@ -42,7 +42,7 @@ public class WEditBox extends javax.swing.JPanel
     public void initView()
     {
         bt_DropData = new BtnLabel();
-        bt_DropData.setIcon(mainPtn.readFavIcon("prop-drop", true));
+        bt_DropData.setIcon(mainPtn.getFeelIcon("prop-drop", true));
         bt_DropData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -54,7 +54,7 @@ public class WEditBox extends javax.swing.JPanel
         });
 
         bt_SaveData = new BtnLabel();
-        bt_SaveData.setIcon(mainPtn.readFavIcon("prop-save", true));
+        bt_SaveData.setIcon(mainPtn.getFeelIcon("prop-save", true));
         bt_SaveData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -66,7 +66,7 @@ public class WEditBox extends javax.swing.JPanel
         });
 
         bt_CopyData = new BtnLabel();
-        bt_CopyData.setIcon(mainPtn.readFavIcon("prop-copy", true));
+        bt_CopyData.setIcon(mainPtn.getFeelIcon("prop-copy", true));
         bt_CopyData.addActionListener(new java.awt.event.ActionListener()
         {
 

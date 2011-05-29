@@ -184,7 +184,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         plItemSort = new javax.swing.JPanel();
 
         btDropData = new IcoLabel();
-        btDropData.setIcon(mainPtn.readFavIcon("edit-delete-cur", false));
+        btDropData.setIcon(mainPtn.getFeelIcon("edit-delete-cur", false));
         btDropData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -196,7 +196,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         });
 
         btSaveData = new IcoLabel();
-        btSaveData.setIcon(mainPtn.readFavIcon("file-save", false));
+        btSaveData.setIcon(mainPtn.getFeelIcon("file-save", false));
         btSaveData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -208,7 +208,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         });
 
         btApndData = new IcoLabel();
-        btApndData.setIcon(mainPtn.readFavIcon("file-new", false));
+        btApndData.setIcon(mainPtn.getFeelIcon("file-new", false));
         btApndData.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -219,7 +219,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
             }
         });
         btSortU = new IcoLabel();
-        btSortU.setIcon(mainPtn.readFavIcon("edit-move-up", false));
+        btSortU.setIcon(mainPtn.getFeelIcon("edit-move-up", false));
         btSortU.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -232,7 +232,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         add(btSortU);
 
         btSortD = new IcoLabel();
-        btSortD.setIcon(mainPtn.readFavIcon("edit-move-down", false));
+        btSortD.setIcon(mainPtn.getFeelIcon("edit-move-down", false));
         btSortD.addActionListener(new java.awt.event.ActionListener()
         {
 

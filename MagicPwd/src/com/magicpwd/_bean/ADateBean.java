@@ -54,7 +54,7 @@ public abstract class ADateBean extends AEditBean
         pl_PropConf.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_DateTime = new BtnLabel();
-        bt_DateTime.setIcon(formPtn.readFavIcon("date-time", false));
+        bt_DateTime.setIcon(formPtn.getFeelIcon("date-time", false));
         bt_DateTime.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -67,7 +67,7 @@ public abstract class ADateBean extends AEditBean
         pl_PropConf.add(bt_DateTime);
 
         bt_DateConf = new BtnLabel();
-        bt_DateConf.setIcon(formPtn.readFavIcon("date-options", false));
+        bt_DateConf.setIcon(formPtn.getFeelIcon("date-options", false));
         bt_DateConf.addActionListener(new java.awt.event.ActionListener()
         {
 

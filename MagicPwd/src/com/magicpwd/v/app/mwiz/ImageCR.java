@@ -57,8 +57,8 @@ public class ImageCR extends javax.swing.JPanel implements javax.swing.table.Tab
         if (value instanceof I1S2)
         {
             I1S2 item = (I1S2) value;
-            label.setIcon(normPtn.readFavIcon(item.getV(), true));
-            major.setIcon(normPtn.readFavIcon(item.getV2(), true));
+            label.setIcon(normPtn.getFeelIcon(item.getV(), true));
+            major.setIcon(normPtn.getFeelIcon(item.getV2(), true));
         }
         return this;
     }

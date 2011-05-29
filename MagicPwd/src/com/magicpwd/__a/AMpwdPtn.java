@@ -116,12 +116,12 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
         super.processWindowEvent(e);
     }
 
-    public javax.swing.Icon readDatIcon(String path, String hash, int size)
+    public javax.swing.Icon getDataIcon(String path, String hash, int size)
     {
         return userMdl.getDataIcon(path, hash, size);
     }
 
-    public javax.swing.Icon readFavIcon(String favHash, boolean chache)
+    public javax.swing.Icon getFeelIcon(String favHash, boolean chache)
     {
         return trayPtn.readFavIcon(favHash, chache);
     }

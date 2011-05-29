@@ -143,8 +143,8 @@ public class IcoDialog extends ADialog
 
     public void initData()
     {
-        btScrollL.setIcon(formPtn.readFavIcon("mexp-edit-move-left", false));
-        btScrollR.setIcon(formPtn.readFavIcon("mexp-edit-move-right", false));
+        btScrollL.setIcon(formPtn.getFeelIcon("mexp-edit-move-left", false));
+        btScrollR.setIcon(formPtn.getFeelIcon("mexp-edit-move-right", false));
 
         iconHome = new java.io.File(formPtn.getUserMdl().getDatPath(), ConsEnv.DIR_ICO);
 
