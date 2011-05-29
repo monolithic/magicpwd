@@ -29,7 +29,6 @@ public class Bean
 
     private static javax.swing.ImageIcon bi_NoneIcon;
     private static java.util.Map<Integer, java.awt.image.BufferedImage> mp_LogoIcon;
-    private static java.util.Map<String, javax.swing.Icon> mp_DataIcon;
 
     public static void setText(BtnLabel c, String t)
     {
@@ -307,53 +306,6 @@ public class Bean
         }
     }
 
-    public static void clearUserIcon()
-    {
-        if (mp_DataIcon != null)
-        {
-            mp_DataIcon.clear();
-        }
-    }
-
-    public static void clearUserIcon(String hash)
-    {
-        if (mp_DataIcon != null)
-        {
-            mp_DataIcon.clear();
-        }
-        mp_DataIcon.remove(hash);
-    }
-
-    public static javax.swing.Icon getDataIcon(String hash, int size)
-    {
-        if (!Char.isValidateHash(hash))
-        {
-            return getNone();
-        }
-        if (mp_DataIcon == null)
-        {
-            mp_DataIcon = new java.util.HashMap<String, javax.swing.Icon>();
-        }
-        if (!mp_DataIcon.containsKey(hash))
-        {
-            mp_DataIcon.put(hash, new javax.swing.ImageIcon(Char.format("{0}/{1}/{2}_" + size + ".png", ConsEnv.DIR_DAT, ConsEnv.DIR_ICO, hash)));
-        }
-        return mp_DataIcon.get(hash);
-    }
-
-    public static void setDataIcon(String hash, javax.swing.Icon icon)
-    {
-        if (!Char.isValidateHash(hash))
-        {
-            return;
-        }
-        if (mp_DataIcon == null)
-        {
-            mp_DataIcon = new java.util.HashMap<String, javax.swing.Icon>();
-        }
-        mp_DataIcon.put(hash, icon);
-    }
-
     public static synchronized javax.swing.ImageIcon getNone()
     {
         if (bi_NoneIcon == null)
@@ -375,7 +327,7 @@ public class Bean
         {
             try
             {
-                java.io.InputStream stream = Util.class.getResourceAsStream(ConsEnv.ICON_PATH + Char.lPad(Integer.toHexString(size), 4, '0') + ".png");
+                java.io.InputStream stream = Util.class.getResourceAsStream(ConsEnv.RES_ICON + Char.lPad(Integer.toHexString(size), 4, '0') + ".png");
                 logo = javax.imageio.ImageIO.read(stream);
                 stream.close();
             }

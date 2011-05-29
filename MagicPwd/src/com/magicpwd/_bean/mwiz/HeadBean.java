@@ -18,6 +18,9 @@ package com.magicpwd._bean.mwiz;
 
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd.__i.IEditItem;
+import com.magicpwd._comn.item.HintItem;
+import com.magicpwd._comn.item.LogoItem;
+import com.magicpwd._comn.item.MetaItem;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.IcoLabel;
 import com.magicpwd._comp.WTextBox;
@@ -44,7 +47,7 @@ import com.magicpwd.x.app.icon.IcoDialog;
 public class HeadBean extends javax.swing.JPanel implements IBackCall<String, String>
 {
 
-    private MwizPtn normPtn;
+    private MwizPtn mwizPtn;
     private KeysMdl keysMdl;
     private WTextBox nameBox;
     private WTextBox metaBox;
@@ -53,7 +56,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
 
     public HeadBean(MwizPtn normPtn)
     {
-        this.normPtn = normPtn;
+        this.mwizPtn = normPtn;
     }
 
     public void initView()
@@ -102,7 +105,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
         lb_HintDate.setLabelFor(tf_HintDate);
 
         ib_HintDate = new BtnLabel();
-        ib_HintDate.setIcon(normPtn.readFavIcon("hint-time", false));
+        ib_HintDate.setIcon(mwizPtn.readFavIcon("hint-time", false));
         ib_HintDate.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -213,7 +216,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
         };
         mi_HalfHour.addActionListener(action);
         mi_FullHour.addActionListener(action);
-        normPtn.getMenuPtn().getSubMenu("date-interval", pm_HintDate, action);
+        mwizPtn.getMenuPtn().getSubMenu("date-interval", pm_HintDate, action);
 
         nameBox.initData();
         metaBox.initData();
@@ -224,14 +227,14 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
     {
         this.keysMdl = keysMdl;
 
-        IEditItem meta = keysMdl.getItemAt(ConsEnv.PWDS_HEAD_META);
+        MetaItem meta = (MetaItem) keysMdl.getItemAt(ConsEnv.PWDS_HEAD_META);
         tf_MetaName.setText(meta.getName());
         ta_MetaData.setText(meta.getData());
 
-        IEditItem logo = keysMdl.getItemAt(ConsEnv.PWDS_HEAD_LOGO);
-        ib_KeysIcon.setIcon(Bean.getDataIcon(logo.getName(), 16));
+        LogoItem logo = (LogoItem) keysMdl.getItemAt(ConsEnv.PWDS_HEAD_LOGO);
+        ib_KeysIcon.setIcon(mwizPtn.readDatIcon(logo.getPath(), logo.getName(), 16));
 
-        IEditItem hint = keysMdl.getItemAt(ConsEnv.PWDS_HEAD_HINT);
+        HintItem hint = (HintItem) keysMdl.getItemAt(ConsEnv.PWDS_HEAD_HINT);
         tf_HintName.setText(hint.getName());
         tf_HintDate.setText(hint.getData());
     }
@@ -241,7 +244,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
         String metaName = tf_MetaName.getText();
         if (!com.magicpwd._util.Char.isValidate(metaName))
         {
-            Lang.showMesg(normPtn, LangRes.P30FAA1A, "记录标题不能为空!");
+            Lang.showMesg(mwizPtn, LangRes.P30FAA1A, "记录标题不能为空!");
             tf_MetaName.requestFocus();
             return false;
         }
@@ -261,7 +264,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
         {
             if (!hint.setData(hintDate))
             {
-                Lang.showMesg(normPtn, LangRes.P30F7A37, "您输入的日期格式无效，请重新输入！");
+                Lang.showMesg(mwizPtn, LangRes.P30F7A37, "您输入的日期格式无效，请重新输入！");
                 tf_HintDate.requestFocus();
                 return false;
             }
@@ -269,7 +272,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
 
             if (!com.magicpwd._util.Char.isValidate(hintName))
             {
-                Lang.showMesg(normPtn, LangRes.P30F7A36, "请输入过期提示！");
+                Lang.showMesg(mwizPtn, LangRes.P30F7A36, "请输入过期提示！");
                 tf_HintName.requestFocus();
                 return false;
             }
@@ -283,26 +286,28 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
     @Override
     public boolean callBack(String options, String object)
     {
-        if (!IBackCall.OPTIONS_APPLY.equalsIgnoreCase(options))
+        if (IBackCall.OPTIONS_ABORT.equalsIgnoreCase(options))
         {
             return false;
         }
 
-        IEditItem logo = keysMdl.getItemAt(ConsEnv.PWDS_HEAD_LOGO);
+        LogoItem logo = (LogoItem) keysMdl.getItemAt(ConsEnv.PWDS_HEAD_LOGO);
 
-        if ("0".equals(object))
+        if ("0".equals(options))
         {
             ib_KeysIcon.setIcon(Bean.getNone());
-            logo.setName(object);
+            logo.setName(options);
+            logo.setPath("");
             return true;
         }
 
-        if (!com.magicpwd._util.Char.isValidateHash(object))
+        if (!com.magicpwd._util.Char.isValidateHash(options))
         {
             return false;
         }
-        ib_KeysIcon.setIcon(Bean.getDataIcon(object, 16));
-        logo.setName(object);
+        ib_KeysIcon.setIcon(mwizPtn.readDatIcon(object, options, 16));
+        logo.setName(options);
+        logo.setPath(object);
         return true;
     }
 
@@ -314,7 +319,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
 
     private void ib_KeysIconActionPerformed(java.awt.event.ActionEvent evt)
     {
-        IcoDialog ico = new IcoDialog(normPtn, this);
+        IcoDialog ico = new IcoDialog(mwizPtn, this);
         ico.initView();
         ico.initLang();
         ico.initData();

@@ -46,6 +46,7 @@ public final class UserMdl
     private HintMdl hintMdl;
     private AppView appView = AppView.mwiz;
     private java.util.Properties userCfg;
+    private java.util.Map<String, javax.swing.Icon> iconMap;
     static SafeKey safeKey;
 
     public UserMdl(MpwdMdl mpwdMdl)
@@ -462,12 +463,17 @@ public final class UserMdl
         return getCfg(AppView.mpwd, ConsCfg.CFG_USER_NAME, "");
     }
 
-    public javax.swing.ImageIcon readIcon(String path)
+    public javax.swing.ImageIcon readDataIcon(String path)
     {
         return Bean.readIcon(path.replace(ConsEnv.FEEL_ARGS, getFeel()));
     }
 
-    public java.awt.image.BufferedImage readImage(String path)
+    public javax.swing.ImageIcon readFeelIcon(String path)
+    {
+        return Bean.readIcon(path.replace(ConsEnv.FEEL_ARGS, getFeel()));
+    }
+
+    public java.awt.image.BufferedImage readFeelImage(String path)
     {
         java.io.File file = new java.io.File(path.replace(ConsEnv.FEEL_ARGS, getFeel()));
         if (!file.exists() || !file.isFile() || !file.canRead())
@@ -781,5 +787,55 @@ public final class UserMdl
                 this.appView = AppView.mwiz;
             }
         }
+    }
+
+    public void clearUserIcon()
+    {
+        if (iconMap != null)
+        {
+            iconMap.clear();
+        }
+    }
+
+    public void clearUserIcon(String hash)
+    {
+        if (iconMap != null)
+        {
+            iconMap.remove(hash);
+        }
+    }
+
+    public javax.swing.Icon getDataIcon(String path, String hash, int size)
+    {
+        if (!Char.isValidateHash(hash))
+        {
+            return Bean.getNone();
+        }
+        if (iconMap == null)
+        {
+            iconMap = new java.util.HashMap<String, javax.swing.Icon>();
+        }
+        if (Char.isValidate(path))
+        {
+            hash = path + '/' + hash;
+        }
+        if (!iconMap.containsKey(hash))
+        {
+            iconMap.put(hash, new javax.swing.ImageIcon(Char.format("{0}/{1}/{2}_" + size + ".png", getDataDir(), ConsEnv.DIR_ICO, hash)));
+        }
+        return iconMap.get(hash);
+    }
+
+    public void setDataIcon(String hash, javax.swing.Icon icon)
+    {
+        if (!Char.isValidateHash(hash))
+        {
+            return;
+        }
+        if (iconMap == null)
+        {
+            iconMap = new java.util.HashMap<String, javax.swing.Icon>();
+        }
+        iconMap.put(hash, icon);
     }
 }

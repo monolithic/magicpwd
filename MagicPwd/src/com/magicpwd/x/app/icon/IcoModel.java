@@ -231,7 +231,7 @@ class IcoModel extends javax.swing.table.AbstractTableModel
     {
         javax.swing.JLabel label = iconList.get(selIcon);
         String hash = (String) label.getClientProperty("hash");
-        Bean.setDataIcon(hash, label.getIcon());
+//        Bean.setDataIcon(hash, label.getIcon());
         return hash;
     }
 }

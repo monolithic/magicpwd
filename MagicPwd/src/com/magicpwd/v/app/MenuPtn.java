@@ -1131,7 +1131,7 @@ public class MenuPtn
             }
             else
             {
-                icon = userMdl.readIcon(path);
+                icon = userMdl.readFeelIcon(path);
                 if (validate)
                 {
                     trayPtn.setFavIcon(hash, icon);

@@ -116,6 +116,11 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
         super.processWindowEvent(e);
     }
 
+    public javax.swing.Icon readDatIcon(String path, String hash, int size)
+    {
+        return userMdl.getDataIcon(path, hash, size);
+    }
+
     public javax.swing.Icon readFavIcon(String favHash, boolean chache)
     {
         return trayPtn.readFavIcon(favHash, chache);
@@ -258,7 +263,7 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
             lb_TipLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
             pl_BarPanel.add(lb_TipLabel, java.awt.BorderLayout.SOUTH);
 
-            lb_IcoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConsEnv.ICON_PATH + "wait.gif")));
+            lb_IcoLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConsEnv.RES_ICON + "wait.gif")));
             if (dialog != null)
             {
                 dialog.add(pl_BarPanel);

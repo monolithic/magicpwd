@@ -17,7 +17,6 @@
 package com.magicpwd.v.app.mwiz;
 
 import com.magicpwd._comn.S1S2;
-import com.magicpwd._util.Bean;
 
 /**
  * Application: MagicPwd
@@ -33,11 +32,11 @@ import com.magicpwd._util.Bean;
 public class LabelCR extends javax.swing.JPanel implements javax.swing.table.TableCellRenderer
 {
 
-    private MwizPtn normPtn;
+    private MwizPtn mwizPtn;
 
     public LabelCR(MwizPtn normPtn)
     {
-        this.normPtn = normPtn;
+        this.mwizPtn = normPtn;
         this.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 2, 0));
 
         title = new javax.swing.JLabel();
@@ -66,7 +65,7 @@ public class LabelCR extends javax.swing.JPanel implements javax.swing.table.Tab
         if (value instanceof S1S2)
         {
             S1S2 item = (S1S2) value;
-            title.setIcon(Bean.getDataIcon(item.getK(), 16));
+            title.setIcon(mwizPtn.readDatIcon("", item.getK(), 16));
             title.setText(item.getV());
             setToolTipText(item.getV2());
         }

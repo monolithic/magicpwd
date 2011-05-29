@@ -27,12 +27,12 @@ import com.magicpwd.v.app.mexp.MexpPtn;
 public class KeysCR extends javax.swing.JPanel implements javax.swing.ListCellRenderer
 {
 
-    private MexpPtn mainPtn;
+    private MexpPtn mexpPtn;
     private int style;
 
-    public KeysCR(MexpPtn mainPtn)
+    public KeysCR(MexpPtn mexpPtn)
     {
-        this.mainPtn = mainPtn;
+        this.mexpPtn = mexpPtn;
 
         lb_Icon = new javax.swing.JLabel();
         lb_Text = new javax.swing.JLabel();
@@ -154,9 +154,9 @@ public class KeysCR extends javax.swing.JPanel implements javax.swing.ListCellRe
             Mkey keys = (Mkey) value;
             lb_Text.setText(keys.getP30F0109());
             setToolTipText(com.magicpwd._util.Char.isValidate(keys.getP30F010A()) ? keys.getP30F010A() : keys.getP30F0109());
-            lb_Icon.setIcon(Bean.getDataIcon(keys.getP30F010B(), style));
-            lb_Major.setIcon(mainPtn.readFavIcon("keys-major" + (keys.getP30F0103() > 0 ? "+" : "") + keys.getP30F0103(), true));
-            lb_Label.setIcon(mainPtn.readFavIcon("keys-label" + keys.getP30F0102(), true));
+            lb_Icon.setIcon(mexpPtn.readDatIcon(keys.getP30F010C(), keys.getP30F010B(), style));
+            lb_Major.setIcon(mexpPtn.readFavIcon("keys-major" + (keys.getP30F0103() > 0 ? "+" : "") + keys.getP30F0103(), true));
+            lb_Label.setIcon(mexpPtn.readFavIcon("keys-label" + keys.getP30F0102(), true));
         }
         // 其它
         else if (value != null)

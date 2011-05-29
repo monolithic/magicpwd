@@ -30,6 +30,8 @@ import org.dom4j.Element;
 public class LogoItem extends AEditItem
 {
 
+    private String path;
+
     public LogoItem(UserMdl userMdl)
     {
         super(userMdl, ConsDat.INDX_LOGO, "", "");
@@ -86,5 +88,21 @@ public class LogoItem extends AEditItem
     public String toString()
     {
         return getData();
+    }
+
+    /**
+     * @return the path
+     */
+    public String getPath()
+    {
+        return path;
+    }
+
+    /**
+     * @param path the path to set
+     */
+    public void setPath(String path)
+    {
+        this.path = path;
     }
 }
