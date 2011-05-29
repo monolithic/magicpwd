@@ -79,6 +79,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         switch (options)
         {
             // 用户登录
+            case signUp:
             case signIn:
             {
                 initView();

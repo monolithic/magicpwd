@@ -31,6 +31,7 @@ class IcoLabel extends javax.swing.JLabel
 
     private static java.awt.Font selFont;
     private static java.awt.Font defFont;
+    private boolean selected;
 
     IcoLabel(String text)
     {
@@ -45,10 +46,19 @@ class IcoLabel extends javax.swing.JLabel
         if (rollover)
         {
             setForeground(java.awt.Color.blue);
+            setFont(selFont);
         }
         else
         {
-            setForeground(java.awt.Color.darkGray);
+            if (selected)
+            {
+                setForeground(java.awt.Color.red);
+            }
+            else
+            {
+                setForeground(java.awt.Color.darkGray);
+            }
+            setFont(defFont);
         }
     }
 
@@ -72,5 +82,6 @@ class IcoLabel extends javax.swing.JLabel
             setForeground(java.awt.Color.darkGray);
             setBackground(null);
         }
+        this.selected = selected;
     }
 }

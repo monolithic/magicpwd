@@ -357,6 +357,7 @@ public abstract class SafeMdl
         LogoItem logo = new LogoItem(userMdl);
         logo.setName(keys.getP30F010B());
         logo.setData(keys.getP30F010D());
+        logo.setPath(keys.getP30F010C());
         list.add(logo);
 
         // HintItem
@@ -432,6 +433,7 @@ public abstract class SafeMdl
         LogoItem logo = (LogoItem) list.get(ConsEnv.PWDS_HEAD_LOGO);
         keys.setP30F010B(logo.getName());
         keys.setP30F010D(logo.getData());
+        keys.setP30F010C(logo.getPath());
 
         // HintItem
         HintItem note = (HintItem) list.get(ConsEnv.PWDS_HEAD_HINT);

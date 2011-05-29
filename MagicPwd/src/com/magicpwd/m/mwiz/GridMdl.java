@@ -19,6 +19,7 @@ package com.magicpwd.m.mwiz;
 import com.magicpwd._comn.I1S2;
 import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd._comn.S1S2;
+import com.magicpwd._comn.S1S3;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.m.SafeMdl;
@@ -117,7 +118,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
             case 1:
                 return new I1S2(rowIndex, "keys-label" + temp.getP30F0102(), "keys-major" + (temp.getP30F0103() > 0 ? "+" : "") + temp.getP30F0103());
             case 2:
-                return new S1S2(temp.getP30F010B(), temp.getP30F0109(), temp.getP30F010A());
+                return new S1S3(temp.getP30F010B(), temp.getP30F0109(), temp.getP30F010A(), temp.getP30F010C());
             case 3:
                 return temp.getP30F010E();
             case 4:

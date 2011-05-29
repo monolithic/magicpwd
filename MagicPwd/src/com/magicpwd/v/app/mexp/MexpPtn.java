@@ -366,7 +366,7 @@ public class MexpPtn extends AMpwdPtn
         // 数据新增的情况下，需要重新显示列表信息
         if (com.magicpwd._util.Char.isValidateHash(keysHash))
         {
-            mexpMdl.getListMdl().updtName(keysHash, metaItem.getName(), logoItem.getName());
+            mexpMdl.getListMdl().updtName(keysHash, metaItem.getName(), logoItem.getPath(), logoItem.getName());
         }
         else
         {

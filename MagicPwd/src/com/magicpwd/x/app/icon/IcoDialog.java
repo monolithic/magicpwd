@@ -37,6 +37,7 @@ public class IcoDialog extends ADialog
     private IcoModel icoModel;
     private java.io.File filePath;
     private java.io.File iconHome;
+    private String iconPath;
     private String iconHash;
     private AMpwdPtn formPtn;
     private IBackCall<String, String> backCall;
@@ -148,7 +149,7 @@ public class IcoDialog extends ADialog
 
         iconHome = new java.io.File(formPtn.getUserMdl().getDatPath(), ConsEnv.DIR_ICO);
 
-        icoModel = new IcoModel();
+        icoModel = new IcoModel(formPtn.getUserMdl());
         tbIconGrid.setModel(icoModel);
         tbIconGrid.setRowHeight(icoModel.getRowHeight());
 
@@ -272,11 +273,6 @@ public class IcoDialog extends ADialog
 
     public synchronized void listCat(String iconPath)
     {
-        if (!Char.isValidate(iconPath))
-        {
-            return;
-        }
-
         java.awt.event.MouseAdapter listener = new java.awt.event.MouseAdapter()
         {
 
@@ -301,7 +297,15 @@ public class IcoDialog extends ADialog
             }
         };
 
-        IcoLabel label;
+        IcoLabel label = new IcoLabel("默认");
+        if (!Char.isValidate(iconPath))
+        {
+            label.setSelected(true);
+            lbCateLast = label;
+        }
+        label.addMouseListener(listener);
+        plCateList.add(label);
+
         for (java.io.File file : iconHome.listFiles())
         {
             if (file == null || !file.exists() || !file.isDirectory() || !file.canRead() || !Char.isValidate(file.getName(), 1, 64))
@@ -312,6 +316,7 @@ public class IcoDialog extends ADialog
             if (iconPath.equals(file.getName()))
             {
                 label.setSelected(true);
+                lbCateLast = label;
             }
             label.addMouseListener(listener);
             plCateList.add(label);
@@ -352,7 +357,7 @@ public class IcoDialog extends ADialog
 
     private void btSelectActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (backCall.callBack(icoModel.getSelectedIcon(), icoModel.getSelectedPath()))
+        if (backCall.callBack(icoModel.getSelectedIcon(), iconPath))
         {
             this.setVisible(false);
             this.dispose();

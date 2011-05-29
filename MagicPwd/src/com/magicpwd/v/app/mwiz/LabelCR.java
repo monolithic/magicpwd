@@ -16,7 +16,7 @@
  */
 package com.magicpwd.v.app.mwiz;
 
-import com.magicpwd._comn.S1S2;
+import com.magicpwd._comn.S1S3;
 
 /**
  * Application: MagicPwd
@@ -62,10 +62,10 @@ public class LabelCR extends javax.swing.JPanel implements javax.swing.table.Tab
 
         this.setFocusable(hasFocus);
 
-        if (value instanceof S1S2)
+        if (value instanceof S1S3)
         {
-            S1S2 item = (S1S2) value;
-            title.setIcon(mwizPtn.getDataIcon("", item.getK(), 16));
+            S1S3 item = (S1S3) value;
+            title.setIcon(mwizPtn.getDataIcon(item.getV3(), item.getK(), 16));
             title.setText(item.getV());
             setToolTipText(item.getV2());
         }
