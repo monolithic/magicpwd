@@ -395,7 +395,7 @@ public class IcoDialog extends ADialog
 
         try
         {
-            icoModel.appendIcon(filePath, iconHome);
+            icoModel.appendIcon(filePath, Char.isValidate(iconPath) ? new java.io.File(iconHome, iconPath) : iconHome);
             tbIconGrid.setRowSelectionInterval(icoModel.getSelectedRow(), icoModel.getSelectedRow());
             tbIconGrid.setColumnSelectionInterval(icoModel.getSelectedColumn(), icoModel.getSelectedColumn());
         }
