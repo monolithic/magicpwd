@@ -46,8 +46,6 @@ import org.dom4j.io.SAXReader;
 public final class Util
 {
 
-    public static final File icoPath = new File(ConsEnv.DIR_DAT, ConsEnv.DIR_ICO);
-
     /**
      * 长整形数据加密
      * @param l

@@ -14,30 +14,30 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.x.app;
+package com.magicpwd.x.app.icon;
 
+import com.magicpwd.__a.ADialog;
 import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.IBackCall;
-import com.magicpwd._comp.IcoLabel;
-import com.magicpwd._comp.LnkLabel;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
-import com.magicpwd._util.Util;
 import com.magicpwd.r.AmonFF;
 
 /**
  * 图标管理对话窗口
  * @author Amon
  */
-public class IcoDialog extends javax.swing.JDialog
+public class IcoDialog extends ADialog
 {
 
     private IcoModel icoModel;
     private java.io.File filePath;
-    private java.io.File iconPath;
+    private java.io.File iconHome;
+    private String iconHash;
     private AMpwdPtn formPtn;
     private IBackCall<String, String> backCall;
 
@@ -46,7 +46,6 @@ public class IcoDialog extends javax.swing.JDialog
         super(mpwdPtn, true);
         this.formPtn = mpwdPtn;
         this.backCall = backCall;
-        this.iconPath = Util.icoPath;
     }
 
     public void initView()
@@ -55,8 +54,8 @@ public class IcoDialog extends javax.swing.JDialog
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(plCatePane);
         plCatePane.setLayout(layout);
 
-        btScrollL = new IcoLabel();
-        btScrollR = new IcoLabel();
+        btScrollL = new javax.swing.JLabel();
+        btScrollR = new javax.swing.JLabel();
 
         plCateList = new javax.swing.JPanel();
         plCateList.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 0));
@@ -144,8 +143,10 @@ public class IcoDialog extends javax.swing.JDialog
 
     public void initData()
     {
-        btScrollL.setIcon(new javax.swing.ImageIcon(Bean.getLogo(16)));
-        btScrollR.setIcon(new javax.swing.ImageIcon(Bean.getLogo(16)));
+        btScrollL.setIcon(formPtn.readFavIcon("mexp-edit-move-left", false));
+        btScrollR.setIcon(formPtn.readFavIcon("mexp-edit-move-right", false));
+
+        iconHome = new java.io.File(formPtn.getUserMdl().getDatPath(), ConsEnv.DIR_ICO);
 
         icoModel = new IcoModel();
         tbIconGrid.setModel(icoModel);
@@ -188,21 +189,21 @@ public class IcoDialog extends javax.swing.JDialog
             columns.nextElement().setCellRenderer(renderer);
         }
 
-        btScrollL.addActionListener(new java.awt.event.ActionListener()
+        btScrollL.addMouseListener(new java.awt.event.MouseAdapter()
         {
 
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
+            public void mouseReleased(java.awt.event.MouseEvent evt)
             {
                 btScrollLActionPerformed(evt);
             }
         });
 
-        btScrollR.addActionListener(new java.awt.event.ActionListener()
+        btScrollR.addMouseListener(new java.awt.event.MouseAdapter()
         {
 
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
+            public void mouseReleased(java.awt.event.MouseEvent evt)
             {
                 btScrollRActionPerformed(evt);
             }
@@ -239,41 +240,110 @@ public class IcoDialog extends javax.swing.JDialog
         });
     }
 
-    public void showData(final String lastIcon)
+    @Override
+    protected boolean hideDialog()
     {
+        setVisible(false);
+        dispose();
+        return true;
+    }
+
+    public void showData(final String iconPath, String iconHash)
+    {
+        this.iconHash = iconHash;
         javax.swing.SwingUtilities.invokeLater(new Runnable()
         {
 
             @Override
             public void run()
             {
-                initCat(iconPath);
-                icoModel.initIcon(iconPath, lastIcon);
-                tbIconGrid.setRowSelectionInterval(icoModel.getSelectedRow(), icoModel.getSelectedRow());
-                tbIconGrid.setColumnSelectionInterval(icoModel.getSelectedColumn(), icoModel.getSelectedColumn());
+                listCat(iconPath);
+                listIco(iconPath);
             }
         });
     }
 
-    public synchronized void initCat(java.io.File icoPath)
+    public synchronized void listIco(String iconPath)
     {
-        LnkLabel label;
-        for (java.io.File file : icoPath.listFiles(new AmonFF(true, "^\\w{1,40}$")))
+        icoModel.loadIco(new java.io.File(iconHome, iconPath), iconHash);
+        tbIconGrid.setRowSelectionInterval(icoModel.getSelectedRow(), icoModel.getSelectedRow());
+        tbIconGrid.setColumnSelectionInterval(icoModel.getSelectedColumn(), icoModel.getSelectedColumn());
+    }
+
+    public synchronized void listCat(String iconPath)
+    {
+        if (!Char.isValidate(iconPath))
         {
-            label = new LnkLabel();
-            label.setText(file.getName());
+            return;
+        }
+
+        java.awt.event.MouseAdapter listener = new java.awt.event.MouseAdapter()
+        {
+
+            @Override
+            public void mouseEntered(java.awt.event.MouseEvent evt)
+            {
+                IcoLabel label = (IcoLabel) evt.getSource();
+                label.setRollover(true);
+            }
+
+            @Override
+            public void mouseExited(java.awt.event.MouseEvent evt)
+            {
+                IcoLabel label = (IcoLabel) evt.getSource();
+                label.setRollover(false);
+            }
+
+            @Override
+            public void mouseReleased(java.awt.event.MouseEvent evt)
+            {
+                changeCategory(evt);
+            }
+        };
+
+        IcoLabel label;
+        for (java.io.File file : iconHome.listFiles())
+        {
+            if (file == null || !file.exists() || !file.isDirectory() || !file.canRead() || !Char.isValidate(file.getName(), 1, 64))
+            {
+                continue;
+            }
+            label = new IcoLabel(file.getName());
+            if (iconPath.equals(file.getName()))
+            {
+                label.setSelected(true);
+            }
+            label.addMouseListener(listener);
             plCateList.add(label);
         }
     }
 
-    private void btScrollLActionPerformed(java.awt.event.ActionEvent evt)
+    private void changeCategory(java.awt.event.MouseEvent evt)
+    {
+        IcoLabel label = (IcoLabel) evt.getSource();
+        if (label == null)
+        {
+            return;
+        }
+
+        label.setSelected(true);
+        listIco(label.getText());
+
+        if (lbCateLast != null)
+        {
+            lbCateLast.setSelected(false);
+        }
+        lbCateLast = label;
+    }
+
+    private void btScrollLActionPerformed(java.awt.event.MouseEvent evt)
     {
         java.awt.Rectangle rect = spCateList.getVisibleRect();
         rect.x -= 10;
         spCateList.getViewport().scrollRectToVisible(rect);
     }
 
-    private void btScrollRActionPerformed(java.awt.event.ActionEvent evt)
+    private void btScrollRActionPerformed(java.awt.event.MouseEvent evt)
     {
         java.awt.Rectangle rect = spCateList.getVisibleRect();
         rect.x += 10;
@@ -282,7 +352,7 @@ public class IcoDialog extends javax.swing.JDialog
 
     private void btSelectActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (backCall.callBack(IBackCall.OPTIONS_APPLY, icoModel.getSelectedKey(tbIconGrid.getSelectedRow(), tbIconGrid.getSelectedColumn())))
+        if (backCall.callBack(icoModel.getSelectedIcon(), icoModel.getSelectedPath()))
         {
             this.setVisible(false);
             this.dispose();
@@ -320,7 +390,7 @@ public class IcoDialog extends javax.swing.JDialog
 
         try
         {
-            icoModel.appendIcon(filePath, iconPath);
+            icoModel.appendIcon(filePath, iconHome);
             tbIconGrid.setRowSelectionInterval(icoModel.getSelectedRow(), icoModel.getSelectedRow());
             tbIconGrid.setColumnSelectionInterval(icoModel.getSelectedColumn(), icoModel.getSelectedColumn());
         }
@@ -338,220 +408,11 @@ public class IcoDialog extends javax.swing.JDialog
     private javax.swing.JButton btAppend;
     private javax.swing.JButton btSelect;
     private javax.swing.JButton btRemove;
-    private IcoLabel btScrollL;
-    private IcoLabel btScrollR;
+    private javax.swing.JLabel btScrollL;
+    private javax.swing.JLabel btScrollR;
     private javax.swing.JPanel plCatePane;
+    private IcoLabel lbCateLast;
     private javax.swing.JPanel plCateList;
     private javax.swing.JScrollPane spCateList;
     private javax.swing.JTable tbIconGrid;
-}
-
-class IcoModel extends javax.swing.table.AbstractTableModel
-{
-
-    private java.util.List<javax.swing.JLabel> iconList;
-    private int columnCount;
-    private int rowHeight;
-    private int selected;
-
-    IcoModel()
-    {
-        iconList = new java.util.ArrayList<javax.swing.JLabel>();
-        javax.swing.JLabel label = newLabel(0, Bean.getNone(), "0");
-        iconList.add(label);
-        columnCount = 5;
-        rowHeight = label.getPreferredSize().height + 6;
-    }
-
-    @Override
-    public int getRowCount()
-    {
-        return iconList.size() / columnCount + 1;
-    }
-
-    @Override
-    public int getColumnCount()
-    {
-        return columnCount;
-    }
-
-    @Override
-    public Object getValueAt(int rowIndex, int columnIndex)
-    {
-        if (iconList.size() < 1)
-        {
-            return null;
-        }
-        int index = rowIndex * columnCount + columnIndex;
-        if (index >= iconList.size())
-        {
-            return null;
-        }
-        return iconList.get(index);
-    }
-
-    @Override
-    public Class<?> getColumnClass(int columnIndex)
-    {
-        return javax.swing.JLabel.class;
-    }
-
-    @Override
-    public boolean isCellEditable(int rowIndex, int columnIndex)
-    {
-        return false;
-    }
-
-    public synchronized void initIcon(java.io.File icoPath, String lastIcon)
-    {
-        if (icoPath == null)
-        {
-            icoPath = Util.icoPath;
-            if (!icoPath.exists())
-            {
-                icoPath.mkdirs();
-            }
-        }
-
-        java.io.File[] fileList = icoPath.listFiles(new AmonFF("(AM|AU)\\d{14}_(16|24)\\.PNG", true));
-        if (fileList == null || fileList.length < 1)
-        {
-            return;
-        }
-
-        java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("(AM|AU)\\d{14}");
-        int i = 1;
-        for (java.io.File file : fileList)
-        {
-            if (!file.isFile())
-            {
-                continue;
-            }
-            java.util.regex.Matcher matcher = pattern.matcher(file.getName());
-            if (!matcher.find())
-            {
-                continue;
-            }
-
-            String key = matcher.group();
-            iconList.add(newLabel(i, new javax.swing.ImageIcon(file.getAbsolutePath()), key));
-            if (key.equalsIgnoreCase(lastIcon))
-            {
-                selected = i;
-            }
-            i += 1;
-        }
-    }
-
-    private static java.awt.image.BufferedImage scaleImage(java.awt.image.BufferedImage img, int dim)
-    {
-        int w = img.getWidth();
-        int h = img.getHeight();
-        if (w != dim || h != dim)
-        {
-            double dw = 16.0 / w;
-            double dh = 16.0 / h;
-            double d = dw <= dh ? dw : dh;
-            w *= d;
-            h *= d;
-            java.awt.Image tmp = img.getScaledInstance(w, h, java.awt.Image.SCALE_DEFAULT);
-            img = new java.awt.image.BufferedImage(dim, dim, java.awt.image.BufferedImage.TYPE_INT_ARGB);
-            img.createGraphics().drawImage(tmp, (dim - w) >> 1, (dim - h) >> 1, w, h, null);
-        }
-        return img;
-    }
-
-    private static void writeImage(java.awt.image.BufferedImage img, String path) throws Exception
-    {
-        java.io.File pngFile = new java.io.File(path);
-        if (!pngFile.exists())
-        {
-            pngFile.createNewFile();
-        }
-        java.io.FileOutputStream fos = new java.io.FileOutputStream(pngFile);
-        javax.imageio.ImageIO.write(img, ConsEnv.IMAGE_FORMAT, fos);
-        fos.flush();
-        fos.close();
-    }
-
-    public synchronized void appendIcon(java.io.File filePath, java.io.File icoPath) throws Exception
-    {
-        java.io.FileInputStream fis = new java.io.FileInputStream(filePath);
-        java.awt.image.BufferedImage img = javax.imageio.ImageIO.read(fis);
-        fis.close();
-
-        String hash = "AU" + new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
-        writeImage(scaleImage(img, 16), icoPath.getAbsolutePath() + java.io.File.separator + hash + "_16." + ConsEnv.IMAGE_FORMAT);
-        writeImage(scaleImage(img, 24), icoPath.getAbsolutePath() + java.io.File.separator + hash + "_24." + ConsEnv.IMAGE_FORMAT);
-
-        int i = iconList.size();
-        iconList.add(newLabel(i, new javax.swing.ImageIcon(img), hash));
-
-        selected = i;
-        fireTableDataChanged();
-    }
-
-    /**
-     * @param columnCount the columnCount to set
-     */
-    public void setColumnCount(int columnCount)
-    {
-        if (columnCount > 0)
-        {
-            this.columnCount = columnCount;
-        }
-    }
-
-    private javax.swing.JLabel newLabel(int num, javax.swing.Icon ico, String key)
-    {
-        javax.swing.JLabel label = new javax.swing.JLabel();
-        label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        label.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        label.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        label.putClientProperty("hash", key);
-        label.setText(Integer.toString(num));
-        label.setOpaque(true);
-        label.setIcon(ico);
-        return label;
-    }
-
-    /**
-     * @return the rowHeight
-     */
-    public int getRowHeight()
-    {
-        return rowHeight;
-    }
-
-    /**
-     * @param rowHeight the rowHeight to set
-     */
-    public void setRowHeight(int rowHeight)
-    {
-        this.rowHeight = rowHeight;
-    }
-
-    public int getSelectedRow()
-    {
-        return selected / columnCount;
-    }
-
-    public int getSelectedColumn()
-    {
-        return selected % columnCount;
-    }
-
-    public String getSelectedKey(int row, int column)
-    {
-        int index = row * columnCount + column;
-        if (index < 0 || index >= iconList.size())
-        {
-            return "";
-        }
-
-        javax.swing.JLabel label = iconList.get(index);
-        String hash = (String) label.getClientProperty("hash");
-        Bean.setDataIcon(hash, label.getIcon());
-        return hash;
-    }
 }

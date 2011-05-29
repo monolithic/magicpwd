@@ -18,6 +18,7 @@ package com.magicpwd.v.app.tray;
 
 import com.magicpwd.__i.ITrayView;
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._util.Bean;
 import com.magicpwd._util.Logs;
 
 /**
@@ -37,13 +38,14 @@ public class TrayIco extends java.awt.TrayIcon implements ITrayView, java.awt.ev
 
     TrayIco(TrayPtn trayPtn)
     {
-        super(null);
+        super(Bean.getLogo(16));
         this.trayPtn = trayPtn;
     }
 
     public boolean initView()
     {
         trayWnd = new javax.swing.JWindow();
+        trayWnd.setAlwaysOnTop(true);
 
         if (!java.awt.SystemTray.isSupported())
         {
@@ -101,6 +103,10 @@ public class TrayIco extends java.awt.TrayIcon implements ITrayView, java.awt.ev
         {
             showPopupMenu(e);
         }
+        else if (e.getClickCount() > 1)
+        {
+            trayPtn.showLastPtn();
+        }
     }
 
     @Override
@@ -146,6 +152,7 @@ public class TrayIco extends java.awt.TrayIcon implements ITrayView, java.awt.ev
             y -= window.height;
         }
         trayWnd.setLocation(x, y);
+        trayWnd.setVisible(true);
 
         // trayMenu.setInvoker(trayMenu);
         trayPtn.trayMenu.show(trayWnd.getContentPane(), 0, 0);

@@ -25,7 +25,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd.v.app.mexp.MexpPtn;
-import com.magicpwd.x.app.IcoDialog;
+import com.magicpwd.x.app.icon.IcoDialog;
 
 /**
  * Application: MagicPwd
@@ -204,7 +204,7 @@ public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall
         ico.initView();
         ico.initLang();
         ico.initData();
-        ico.showData(itemData.getName());
+        ico.showData("", itemData.getName());
         ico.setVisible(true);
     }
     private javax.swing.JLabel lb_PropName;
