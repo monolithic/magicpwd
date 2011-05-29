@@ -119,9 +119,9 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
             case 2:
                 return new S1S2(temp.getP30F010B(), temp.getP30F0109(), temp.getP30F010A());
             case 3:
-                return temp.getP30F010D();
-            case 4:
                 return temp.getP30F010E();
+            case 4:
+                return temp.getP30F010F();
             default:
                 return "";
         }

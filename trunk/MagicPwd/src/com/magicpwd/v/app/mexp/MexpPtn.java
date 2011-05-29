@@ -422,7 +422,7 @@ public class MexpPtn extends AMpwdPtn
             return;
         }
         userMdl.setCfg(ConsCfg.CFG_VIEW_LIST_LAY, layout);
-        Bean.clearUserIcon();
+        userMdl.clearUserIcon();
         keysCR.setStyle(Integer.parseInt(layout));
         mexpMdl.getListMdl().reLayout();
     }

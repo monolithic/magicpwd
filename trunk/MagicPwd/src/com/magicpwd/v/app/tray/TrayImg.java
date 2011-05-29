@@ -83,7 +83,7 @@ public class TrayImg extends java.awt.Canvas
         wndMaxH = getInt(prop.getProperty("wnd.max.height"), 64);
 
         // 导航窗口背景
-        maxBg = userMdl.readImage(ConsEnv.FEEL_PATH + prop.getProperty("bg.image", "guid.png"));
+        maxBg = userMdl.readFeelImage(ConsEnv.FEEL_PATH + prop.getProperty("bg.image", "guid.png"));
         minBg = Bean.getLogo(24);
 
         wndOffX = getInt(prop.getProperty("bg.offset.x"), 0);
@@ -120,7 +120,7 @@ public class TrayImg extends java.awt.Canvas
                 {
                     continue;
                 }
-                imgBg.put(key, userMdl.readImage(ConsEnv.FEEL_PATH + tmp));
+                imgBg.put(key, userMdl.readFeelImage(ConsEnv.FEEL_PATH + tmp));
 
                 // 功能
                 tmp = prop.getProperty("cell[" + key + "].view");
@@ -141,7 +141,7 @@ public class TrayImg extends java.awt.Canvas
                 {
                     continue;
                 }
-                locImg.put(key, userMdl.readImage(ConsEnv.FEEL_PATH + tmp));
+                locImg.put(key, userMdl.readFeelImage(ConsEnv.FEEL_PATH + tmp));
             }
         }
 

@@ -266,26 +266,27 @@ public class DBA4000
      */
     private static void getNameData(ResultSet rest, List<Mkey> list) throws SQLException
     {
-        Mkey item;
+        Mkey mkey;
         while (rest.next())
         {
-            item = new Mkey();
-            item.setP30F0101(rest.getInt(DBC4000.P30F0101));
-            item.setP30F0102(rest.getInt(DBC4000.P30F0102));
-            item.setP30F0103(rest.getInt(DBC4000.P30F0103));
-            item.setP30F0104(rest.getString(DBC4000.P30F0104));
-            item.setP30F0105(rest.getString(DBC4000.P30F0105));
-            item.setP30F0106(rest.getString(DBC4000.P30F0106));
-            item.setP30F0107(rest.getString(DBC4000.P30F0107));
-            item.setP30F0108(rest.getString(DBC4000.P30F0108));
-            item.setP30F0109(rest.getString(DBC4000.P30F0109));
-            item.setP30F010A(rest.getString(DBC4000.P30F010A));
-            item.setP30F010B(rest.getString(DBC4000.P30F010B));
-            item.setP30F010C(rest.getString(DBC4000.P30F010C));
-            item.setP30F010D(rest.getString(DBC4000.P30F010D));
-            item.setP30F010E(rest.getString(DBC4000.P30F010E));
-            item.setP30F010F(rest.getString(DBC4000.P30F010F));
-            list.add(item);
+            mkey = new Mkey();
+            mkey.setP30F0101(rest.getInt(DBC4000.P30F0101));
+            mkey.setP30F0102(rest.getInt(DBC4000.P30F0102));
+            mkey.setP30F0103(rest.getInt(DBC4000.P30F0103));
+            mkey.setP30F0104(rest.getString(DBC4000.P30F0104));
+            mkey.setP30F0105(rest.getString(DBC4000.P30F0105));
+            mkey.setP30F0106(rest.getString(DBC4000.P30F0106));
+            mkey.setP30F0107(rest.getString(DBC4000.P30F0107));
+            mkey.setP30F0108(rest.getString(DBC4000.P30F0108));
+            mkey.setP30F0109(rest.getString(DBC4000.P30F0109));
+            mkey.setP30F010A(rest.getString(DBC4000.P30F010A));
+            mkey.setP30F010B(rest.getString(DBC4000.P30F010B));
+            mkey.setP30F010C(rest.getString(DBC4000.P30F010C));
+            mkey.setP30F010D(rest.getString(DBC4000.P30F010D));
+            mkey.setP30F010E(rest.getString(DBC4000.P30F010E));
+            mkey.setP30F010F(rest.getString(DBC4000.P30F010F));
+            mkey.setP30F0110(rest.getString(DBC4000.P30F0110));
+            list.add(mkey);
         }
         rest.close();
     }
@@ -433,7 +434,7 @@ public class DBA4000
                 buf.append(",'").append(hint.getP30F0402()).append('\'');
             }
             dba.addTable(DBC4000.P30F0100);
-            dba.addWhere(DBC4000.P30F010D, "in", '(' + buf.substring(1) + ')', false);
+            dba.addWhere(DBC4000.P30F010E, "in", '(' + buf.substring(1) + ')', false);
 
             ResultSet rest = dba.executeSelect();
             getNameData(rest, mkeyList);
@@ -712,8 +713,8 @@ public class DBA4000
 
             dba.reInit();
             dba.addTable(DBC4000.P30F0100);
-            dba.addParam(DBC4000.P30F010D, "");
-            dba.addWhere(DBC4000.P30F010D, mgtd.getP30F0309());
+            dba.addParam(DBC4000.P30F010E, "");
+            dba.addWhere(DBC4000.P30F010E, mgtd.getP30F0309());
             dba.addUpdateBatch();
 
             dba.executeBatch();
@@ -921,7 +922,7 @@ public class DBA4000
         }
     }
 
-    public static boolean readPwdsData(UserMdl userMdl, Mkey keys)
+    public static boolean readPwdsData(UserMdl userMdl, Mkey mkey)
     {
         // 数据库连接初始化
         DBAccess dba = new DBAccess();
@@ -947,9 +948,10 @@ public class DBA4000
             dba.addColumn(DBC4000.P30F010D);
             dba.addColumn(DBC4000.P30F010E);
             dba.addColumn(DBC4000.P30F010F);
+            dba.addColumn(DBC4000.P30F0110);
             //dba.addWhere(DBC4000.P30F0102, keys.getP30F0102());
-            dba.addWhere(DBC4000.P30F0104, keys.getP30F0104());
-            dba.addWhere(DBC4000.P30F0105, keys.getP30F0105());
+            dba.addWhere(DBC4000.P30F0104, mkey.getP30F0104());
+            dba.addWhere(DBC4000.P30F0105, mkey.getP30F0105());
 
             ResultSet rest = dba.executeSelect();
             if (!rest.next())
@@ -957,34 +959,35 @@ public class DBA4000
                 return false;
             }
 
-            keys.setP30F0101(rest.getInt(DBC4000.P30F0101));
-            keys.setP30F0102(rest.getInt(DBC4000.P30F0102));
-            keys.setP30F0103(rest.getInt(DBC4000.P30F0103));
-            keys.setP30F0104(rest.getString(DBC4000.P30F0104));
-            keys.setP30F0106(rest.getString(DBC4000.P30F0106));
-            keys.setP30F0107(rest.getString(DBC4000.P30F0107));
-            keys.setP30F0108(rest.getString(DBC4000.P30F0108));
-            keys.setP30F0109(rest.getString(DBC4000.P30F0109));
-            keys.setP30F010A(rest.getString(DBC4000.P30F010A));
-            keys.setP30F010B(rest.getString(DBC4000.P30F010B));
-            keys.setP30F010C(rest.getString(DBC4000.P30F010C));
-            keys.setP30F010D(rest.getString(DBC4000.P30F010D));
-            keys.setP30F010E(rest.getString(DBC4000.P30F010E));
-            keys.setP30F010F(rest.getString(DBC4000.P30F010F));
+            mkey.setP30F0101(rest.getInt(DBC4000.P30F0101));
+            mkey.setP30F0102(rest.getInt(DBC4000.P30F0102));
+            mkey.setP30F0103(rest.getInt(DBC4000.P30F0103));
+            mkey.setP30F0104(rest.getString(DBC4000.P30F0104));
+            mkey.setP30F0106(rest.getString(DBC4000.P30F0106));
+            mkey.setP30F0107(rest.getString(DBC4000.P30F0107));
+            mkey.setP30F0108(rest.getString(DBC4000.P30F0108));
+            mkey.setP30F0109(rest.getString(DBC4000.P30F0109));
+            mkey.setP30F010A(rest.getString(DBC4000.P30F010A));
+            mkey.setP30F010B(rest.getString(DBC4000.P30F010B));
+            mkey.setP30F010C(rest.getString(DBC4000.P30F010C));
+            mkey.setP30F010D(rest.getString(DBC4000.P30F010D));
+            mkey.setP30F010E(rest.getString(DBC4000.P30F010E));
+            mkey.setP30F010F(rest.getString(DBC4000.P30F010F));
+            mkey.setP30F0110(rest.getString(DBC4000.P30F0110));
 
             // 口令内容读取
             dba.reInit();
             dba.addTable(DBC4000.P30F0200);
             dba.addColumn(DBC4000.P30F0203);
-            dba.addWhere(DBC4000.P30F0202, keys.getP30F0104());
+            dba.addWhere(DBC4000.P30F0202, mkey.getP30F0104());
             dba.addSort(DBC4000.P30F0201);
             rest = dba.executeSelect();
-            StringBuffer sb = keys.getPassword().getP30F0203();
+            StringBuffer sb = mkey.getPassword().getP30F0203();
             while (rest.next())
             {
                 sb.append(rest.getString(DBC4000.P30F0203));
             }
-            keys.getPassword().setP30F0202(keys.getP30F0104());
+            mkey.getPassword().setP30F0202(mkey.getP30F0104());
             return true;
         }
         catch (Exception exp)
@@ -1112,10 +1115,11 @@ public class DBA4000
         dba.addParam(DBC4000.P30F0A09, DBC4000.P30F0109, false);
         dba.addParam(DBC4000.P30F0A0A, DBC4000.P30F010A, false);
         dba.addParam(DBC4000.P30F0A0B, DBC4000.P30F010B, false);
-        dba.addParam(DBC4000.P30F0A0C, DBC4000.P30F010C, false);
+//        dba.addParam(DBC4000.P30F0A0C, DBC4000.P30F010C, false);
         dba.addParam(DBC4000.P30F0A0D, DBC4000.P30F010D, false);
         dba.addParam(DBC4000.P30F0A0E, DBC4000.P30F010E, false);
         dba.addParam(DBC4000.P30F0A0F, DBC4000.P30F010F, false);
+        dba.addParam(DBC4000.P30F0A10, DBC4000.P30F0110, false);
         dba.addWhere(DBC4000.P30F0104, keysHash);
         dba.addCopyBatch(DBC4000.P30F0A00, DBC4000.P30F0100);
         dba.reInit();
@@ -1168,9 +1172,10 @@ public class DBA4000
         dba.addParam(DBC4000.P30F010A, Util.text2DB(keys.getP30F010A()));
         dba.addParam(DBC4000.P30F010B, Util.text2DB(keys.getP30F010B()));
         dba.addParam(DBC4000.P30F010C, Util.text2DB(keys.getP30F010C()));
-        dba.addParam(DBC4000.P30F010D, keys.getP30F010D() != null ? keys.getP30F010D().toString() : null);
-        dba.addParam(DBC4000.P30F010E, Util.text2DB(keys.getP30F010E()));
+        dba.addParam(DBC4000.P30F010D, Util.text2DB(keys.getP30F010D()));
+        dba.addParam(DBC4000.P30F010E, keys.getP30F010E() != null ? keys.getP30F010E().toString() : null);
         dba.addParam(DBC4000.P30F010F, Util.text2DB(keys.getP30F010F()));
+        dba.addParam(DBC4000.P30F0110, Util.text2DB(keys.getP30F0110()));
 
         if (com.magicpwd._util.Char.isValidateHash(keys.getP30F0104()))
         {
@@ -1960,6 +1965,7 @@ public class DBA4000
             dba.addParam(DBC4000.P30F010D, DBC4000.P30F0A0D, false);
             dba.addParam(DBC4000.P30F010E, DBC4000.P30F0A0E, false);
             dba.addParam(DBC4000.P30F010F, DBC4000.P30F0A0F, false);
+            dba.addParam(DBC4000.P30F0110, DBC4000.P30F0A10, false);
             dba.addWhere(DBC4000.P30F0A01, logsHash);
             dba.addCopyBatch(DBC4000.P30F0100, DBC4000.P30F0A00);
             dba.reInit();
@@ -2051,10 +2057,10 @@ public class DBA4000
             keys.setP30F0109(rest.getString(DBC4000.P30F0A09));
             keys.setP30F010A(rest.getString(DBC4000.P30F0A0A));
             keys.setP30F010B(rest.getString(DBC4000.P30F0A0B));
-            keys.setP30F010C(rest.getString(DBC4000.P30F0A0C));
             keys.setP30F010D(rest.getString(DBC4000.P30F0A0D));
             keys.setP30F010E(rest.getString(DBC4000.P30F0A0E));
             keys.setP30F010F(rest.getString(DBC4000.P30F0A0F));
+            keys.setP30F0110(rest.getString(DBC4000.P30F0A10));
 
             dba.reInit();
             dba.addTable(DBC4000.P30F0B00);

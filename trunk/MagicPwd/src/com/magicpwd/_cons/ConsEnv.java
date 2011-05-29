@@ -127,7 +127,7 @@ public interface ConsEnv
     /**
      * 图标路径
      */
-    String ICON_PATH = "/res/icon/";
+    String RES_ICON = "/res/icon/";
     String FEEL_ARGS = "%feel%";
     String FEEL_PATH = "skin/feel/" + FEEL_ARGS + "/";
     String PROP_CHAR = "130F_CHAR";

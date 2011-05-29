@@ -356,13 +356,13 @@ public abstract class SafeMdl
         // LogoItem
         LogoItem logo = new LogoItem(userMdl);
         logo.setName(keys.getP30F010B());
-        logo.setData(keys.getP30F010C());
+        logo.setData(keys.getP30F010D());
         list.add(logo);
 
         // HintItem
         HintItem hint = new HintItem(userMdl);
-        hint.setData(keys.getP30F010D());
-        hint.setName(keys.getP30F010E());
+        hint.setData(keys.getP30F010E());
+        hint.setName(keys.getP30F010F());
         list.add(hint);
 
         // 处理每一个数据
@@ -431,12 +431,12 @@ public abstract class SafeMdl
         // LogoItem
         LogoItem logo = (LogoItem) list.get(ConsEnv.PWDS_HEAD_LOGO);
         keys.setP30F010B(logo.getName());
-        keys.setP30F010C(logo.getData());
+        keys.setP30F010D(logo.getData());
 
         // HintItem
         HintItem note = (HintItem) list.get(ConsEnv.PWDS_HEAD_HINT);
-        keys.setP30F010D(note.getData());
-        keys.setP30F010E(note.getName());
+        keys.setP30F010E(note.getData());
+        keys.setP30F010F(note.getName());
 
         // 字符串拼接
         IEditItem item;

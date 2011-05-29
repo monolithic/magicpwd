@@ -47,7 +47,7 @@ public class BtnLabel extends JLabel
     {
         try
         {
-            java.io.InputStream fis = BtnLabel.class.getResourceAsStream(ConsEnv.ICON_PATH + "button_d.png");
+            java.io.InputStream fis = BtnLabel.class.getResourceAsStream(ConsEnv.RES_ICON + "button_d.png");
             defImage = ImageIO.read(fis);
             fis.close();
         }
@@ -123,7 +123,7 @@ public class BtnLabel extends JLabel
         {
             try
             {
-                java.io.InputStream fis = BtnLabel.class.getResourceAsStream(ConsEnv.ICON_PATH + "button_x.png");
+                java.io.InputStream fis = BtnLabel.class.getResourceAsStream(ConsEnv.RES_ICON + "button_x.png");
                 disImage = ImageIO.read(fis);
                 fis.close();
             }
@@ -226,7 +226,7 @@ public class BtnLabel extends JLabel
         {
             try
             {
-                java.io.InputStream fis = BtnLabel.class.getResourceAsStream(ConsEnv.ICON_PATH + "button_e.png");
+                java.io.InputStream fis = BtnLabel.class.getResourceAsStream(ConsEnv.RES_ICON + "button_e.png");
                 ovrImage = ImageIO.read(fis);
                 fis.close();
             }
@@ -245,7 +245,7 @@ public class BtnLabel extends JLabel
         {
             try
             {
-                java.io.InputStream fis = BtnLabel.class.getResourceAsStream(ConsEnv.ICON_PATH + "button_p.png");
+                java.io.InputStream fis = BtnLabel.class.getResourceAsStream(ConsEnv.RES_ICON + "button_p.png");
                 prsImage = ImageIO.read(fis);
                 fis.close();
             }

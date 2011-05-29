@@ -73,21 +73,25 @@ public final class Mkey implements Serializable
      */
     private String P30F010B;
     /**
-     * 图标说明
+     * 图标路径
      */
     private String P30F010C;
     /**
-     * 提醒索引
+     * 图标说明
      */
     private String P30F010D;
     /**
-     * 提示备注
+     * 提醒索引
      */
     private String P30F010E;
     /**
-     * 相关说明
+     * 提示备注
      */
     private String P30F010F;
+    /**
+     * 相关说明
+     */
+    private String P30F0110;
     /**
      * 加密口令
      */
@@ -115,8 +119,8 @@ public final class Mkey implements Serializable
         setP30F0109(null);
         setP30F010A(null);
         setP30F010B(null);
-        setP30F010D(null);
         setP30F010E(null);
+        setP30F010F(null);
         password.setDefault();
     }
 
@@ -383,7 +387,7 @@ public final class Mkey implements Serializable
     }
 
     /**
-     * 图标说明
+     * 图标路径
      * @return the P30F010C
      */
     public String getP30F010C()
@@ -392,7 +396,7 @@ public final class Mkey implements Serializable
     }
 
     /**
-     * 图标说明
+     * 图标路径
      * @param P30F010C the P30F010C to set
      */
     public void setP30F010C(String P30F010C)
@@ -401,7 +405,7 @@ public final class Mkey implements Serializable
     }
 
     /**
-     * 提醒索引
+     * 图标说明
      * @return the P30F010D
      */
     public String getP30F010D()
@@ -410,7 +414,7 @@ public final class Mkey implements Serializable
     }
 
     /**
-     * 提醒索引
+     * 图标说明
      * @param P30F010D the P30F010D to set
      */
     public void setP30F010D(String P30F010D)
@@ -419,7 +423,7 @@ public final class Mkey implements Serializable
     }
 
     /**
-     * 提醒备注
+     * 提醒索引
      * @return the P30F010E
      */
     public String getP30F010E()
@@ -428,7 +432,7 @@ public final class Mkey implements Serializable
     }
 
     /**
-     * 提醒备注
+     * 提醒索引
      * @param P30F010E the P30F010E to set
      */
     public void setP30F010E(String P30F010E)
@@ -437,7 +441,7 @@ public final class Mkey implements Serializable
     }
 
     /**
-     * 相关说明
+     * 提醒备注
      * @return the P30F010F
      */
     public String getP30F010F()
@@ -446,11 +450,29 @@ public final class Mkey implements Serializable
     }
 
     /**
-     * 相关说明
+     * 提醒备注
      * @param P30F010F the P30F010F to set
      */
     public void setP30F010F(String P30F010F)
     {
         this.P30F010F = P30F010F;
+    }
+
+    /**
+     * 相关说明
+     * @return the P30F0110
+     */
+    public String getP30F0110()
+    {
+        return P30F0110;
+    }
+
+    /**
+     * 相关说明
+     * @param P30F0110 the P30F0110 to set
+     */
+    public void setP30F0110(String P30F0110)
+    {
+        this.P30F0110 = P30F0110;
     }
 }

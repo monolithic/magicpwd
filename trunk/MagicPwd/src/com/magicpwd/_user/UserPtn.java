@@ -340,7 +340,7 @@ public class UserPtn extends javax.swing.JPanel
         jpng = new Jpng();
         try
         {
-            java.io.InputStream stream = Jpng.class.getResourceAsStream(ConsEnv.ICON_PATH + "wait.png");
+            java.io.InputStream stream = Jpng.class.getResourceAsStream(ConsEnv.RES_ICON + "wait.png");
             jpng.readIcons(stream, 16, 16);
             stream.close();
             jpng.setIt(0);

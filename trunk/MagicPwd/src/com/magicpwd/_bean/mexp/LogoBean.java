@@ -40,19 +40,19 @@ import com.magicpwd.x.app.icon.IcoDialog;
 public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall<String, String>
 {
 
-    private IEditItem itemData;
-    private MexpPtn mainPtn;
+    private MexpPtn mexpPtn;
+    private LogoItem itemData;
     private WEditBox dataEdit;
 
     public LogoBean(MexpPtn mainPtn)
     {
-        this.mainPtn = mainPtn;
+        this.mexpPtn = mainPtn;
     }
 
     @Override
     public void initView()
     {
-        dataEdit = new WEditBox(mainPtn, this, false);
+        dataEdit = new WEditBox(mexpPtn, this, false);
         dataEdit.initView();
         dataEdit.setCopyButtonVisible(false);
         dataEdit.setDropButtonVisible(false);
@@ -141,7 +141,10 @@ public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall
     {
         itemData = (LogoItem) item;
 
-        ib_PropName.setIcon(Bean.getDataIcon(item.getName(), 16));
+        if (itemData.getPath() != null && itemData.getPath().length() > 0)
+        {
+            ib_PropName.setIcon(mexpPtn.readDatIcon(itemData.getPath(), item.getName(), 16));
+        }
         ta_PropData.setText(item.getData());
     }
 
@@ -155,7 +158,7 @@ public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall
 //            return;
 //        }
         itemData.setData(ta_PropData.getText());
-        mainPtn.updateSelectedItem();
+        mexpPtn.updateSelectedItem();
     }
 
     @Override
@@ -171,24 +174,26 @@ public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall
     @Override
     public boolean callBack(String options, String object)
     {
-        if (!IBackCall.OPTIONS_APPLY.equalsIgnoreCase(options))
+        if (IBackCall.OPTIONS_ABORT.equalsIgnoreCase(options))
         {
             return false;
         }
 
-        if ("0".equals(object))
+        if ("0".equals(options))
         {
             ib_PropName.setIcon(Bean.getNone());
-            itemData.setName(object);
+            itemData.setName(options);
+            itemData.setPath("");
             return true;
         }
 
-        if (!com.magicpwd._util.Char.isValidateHash(object))
+        if (!com.magicpwd._util.Char.isValidateHash(options))
         {
             return false;
         }
-        ib_PropName.setIcon(Bean.getDataIcon(object, 16));
-        itemData.setName(object);
+        ib_PropName.setIcon(mexpPtn.readDatIcon(object, options, 16));
+        itemData.setName(options);
+        itemData.setPath(object);
         return true;
     }
 
@@ -200,7 +205,7 @@ public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall
 
     private void ib_PropDataActionPerformed(java.awt.event.MouseEvent evt)
     {
-        IcoDialog ico = new IcoDialog(mainPtn, this);
+        IcoDialog ico = new IcoDialog(mexpPtn, this);
         ico.initView();
         ico.initLang();
         ico.initData();

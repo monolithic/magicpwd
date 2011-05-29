@@ -201,7 +201,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         defIcon = new java.util.HashMap<String, javax.swing.Icon>();
         try
         {
-            stream = AMpwdPtn.class.getResourceAsStream(ConsEnv.ICON_PATH + "icon.png");
+            stream = AMpwdPtn.class.getResourceAsStream(ConsEnv.RES_ICON + "icon.png");
             java.awt.image.BufferedImage bufImg = javax.imageio.ImageIO.read(stream);
 
             int w = bufImg.getWidth();
@@ -368,14 +368,14 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         javax.swing.Icon icon;
         if (!chache)
         {
-            icon = favProp.containsKey(favHash) ? userMdl.readIcon(ConsEnv.FEEL_PATH + favProp.getProperty(favHash)) : getDefIcon(favHash);
+            icon = favProp.containsKey(favHash) ? userMdl.readFeelIcon(ConsEnv.FEEL_PATH + favProp.getProperty(favHash)) : getDefIcon(favHash);
             return icon != null ? icon : Bean.getNone();
         }
 
         icon = defIcon.get("fav:" + favHash);
         if (icon == null)
         {
-            icon = favProp.containsKey(favHash) ? userMdl.readIcon(ConsEnv.FEEL_PATH + favProp.getProperty(favHash)) : getDefIcon(favHash);
+            icon = favProp.containsKey(favHash) ? userMdl.readFeelIcon(ConsEnv.FEEL_PATH + favProp.getProperty(favHash)) : getDefIcon(favHash);
             //favProp.remove(favHash);
             setFavIcon(favHash, icon);
         }

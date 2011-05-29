@@ -79,12 +79,12 @@ public class FindBar extends javax.swing.JPanel
 
     public void initData()
     {
-        bgImage = normPtn.getUserMdl().readImage(ConsEnv.FEEL_PATH + "findbar.png");
+        bgImage = normPtn.getUserMdl().readFeelImage(ConsEnv.FEEL_PATH + "findbar.png");
         if (bgImage == null)
         {
             try
             {
-                bgImage = javax.imageio.ImageIO.read(FindBar.class.getResourceAsStream(ConsEnv.ICON_PATH + "find.png"));
+                bgImage = javax.imageio.ImageIO.read(FindBar.class.getResourceAsStream(ConsEnv.RES_ICON + "find.png"));
             }
             catch (Exception exp)
             {
