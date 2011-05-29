@@ -789,7 +789,7 @@ public final class UserMdl
         }
     }
 
-    public void clearUserIcon()
+    public void clearDataIcon()
     {
         if (iconMap != null)
         {
@@ -797,9 +797,9 @@ public final class UserMdl
         }
     }
 
-    public void clearUserIcon(String hash)
+    public void clearDataIcon(String hash)
     {
-        if (iconMap != null)
+        if (iconMap != null && hash != null)
         {
             iconMap.remove(hash);
         }

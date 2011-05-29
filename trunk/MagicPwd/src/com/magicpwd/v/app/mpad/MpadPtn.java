@@ -85,25 +85,25 @@ public class MpadPtn extends AMpwdPtn
         nameBox = new WTextBox(tf_NoteName, true);
         nameBox.initView();
 
-        bt_CreateNote.setIcon(readFavIcon("file-new", false));
+        bt_CreateNote.setIcon(getFeelIcon("file-new", false));
         NewAction newAction = new NewAction();
         newAction.setMpadPtn(this);
         bt_CreateNote.addActionListener(newAction);
         Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK), newAction, "file-new", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
 
-        bt_OpenNote.setIcon(readFavIcon("file-open", false));
+        bt_OpenNote.setIcon(getFeelIcon("file-open", false));
         OpenAction openAction = new OpenAction();
         openAction.setMpadPtn(this);
         bt_OpenNote.addActionListener(openAction);
         Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_O, java.awt.event.InputEvent.CTRL_DOWN_MASK), openAction, "file-open", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
 
-        bt_SaveNote.setIcon(readFavIcon("file-save", false));
+        bt_SaveNote.setIcon(getFeelIcon("file-save", false));
         SaveAction saveAction = new SaveAction();
         saveAction.setMpadPtn(this);
         bt_SaveNote.addActionListener(saveAction);
         Bean.registerKeyStrokeAction(rootPane, javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.CTRL_DOWN_MASK), saveAction, "file-save", javax.swing.JComponent.WHEN_IN_FOCUSED_WINDOW);
 
-        bt_SearchNote.setIcon(readFavIcon("data-search", false));
+        bt_SearchNote.setIcon(getFeelIcon("data-search", false));
         bt_SearchNote.addActionListener(findAction);
 
         ta_NoteData.setDragEnabled(true);

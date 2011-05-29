@@ -95,7 +95,7 @@ public class ListMdl extends DefaultListModel
 
     public boolean listKeysByKind(String typeHash)
     {
-        userMdl.clearUserIcon();
+        userMdl.clearDataIcon();
 
         int s = mkeyList.size();
         mkeyList.clear();

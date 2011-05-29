@@ -105,7 +105,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
         lb_HintDate.setLabelFor(tf_HintDate);
 
         ib_HintDate = new BtnLabel();
-        ib_HintDate.setIcon(mwizPtn.readFavIcon("hint-time", false));
+        ib_HintDate.setIcon(mwizPtn.getFeelIcon("hint-time", false));
         ib_HintDate.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -232,7 +232,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
         ta_MetaData.setText(meta.getData());
 
         LogoItem logo = (LogoItem) keysMdl.getItemAt(ConsEnv.PWDS_HEAD_LOGO);
-        ib_KeysIcon.setIcon(mwizPtn.readDatIcon(logo.getPath(), logo.getName(), 16));
+        ib_KeysIcon.setIcon(mwizPtn.getDataIcon(logo.getPath(), logo.getName(), 16));
 
         HintItem hint = (HintItem) keysMdl.getItemAt(ConsEnv.PWDS_HEAD_HINT);
         tf_HintName.setText(hint.getName());
@@ -305,7 +305,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
         {
             return false;
         }
-        ib_KeysIcon.setIcon(mwizPtn.readDatIcon(object, options, 16));
+        ib_KeysIcon.setIcon(mwizPtn.getDataIcon(object, options, 16));
         logo.setName(options);
         logo.setPath(object);
         return true;

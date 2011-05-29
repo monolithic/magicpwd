@@ -143,7 +143,7 @@ public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall
 
         if (itemData.getPath() != null && itemData.getPath().length() > 0)
         {
-            ib_PropName.setIcon(mexpPtn.readDatIcon(itemData.getPath(), item.getName(), 16));
+            ib_PropName.setIcon(mexpPtn.getDataIcon(itemData.getPath(), item.getName(), 16));
         }
         ta_PropData.setText(item.getData());
     }
@@ -191,7 +191,7 @@ public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall
         {
             return false;
         }
-        ib_PropName.setIcon(mexpPtn.readDatIcon(object, options, 16));
+        ib_PropName.setIcon(mexpPtn.getDataIcon(object, options, 16));
         itemData.setName(options);
         itemData.setPath(object);
         return true;
