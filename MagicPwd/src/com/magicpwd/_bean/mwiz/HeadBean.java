@@ -28,7 +28,7 @@ import com.magicpwd._util.Date;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.mwiz.KeysMdl;
 import com.magicpwd.v.app.mwiz.MwizPtn;
-import com.magicpwd.x.app.IcoDialog;
+import com.magicpwd.x.app.icon.IcoDialog;
 
 /**
  * Application: MagicPwd
@@ -318,7 +318,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
         ico.initView();
         ico.initLang();
         ico.initData();
-        ico.showData(keysMdl.getItemAt(ConsEnv.PWDS_HEAD_LOGO).getName());
+        ico.showData("", keysMdl.getItemAt(ConsEnv.PWDS_HEAD_LOGO).getName());
         ico.setVisible(true);
     }
 

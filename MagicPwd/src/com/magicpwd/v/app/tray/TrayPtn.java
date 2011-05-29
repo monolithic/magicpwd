@@ -622,6 +622,10 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
             }
             trayPtn = trayIco;
             trayPtn.setVisible(true);
+            if (trayWnd != null)
+            {
+                trayWnd.setVisible(false);
+            }
 
             if (button != null)
             {
@@ -641,6 +645,10 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         }
         trayPtn = trayWnd;
         trayPtn.setVisible(true);
+        if (trayIco != null)
+        {
+            trayIco.setVisible(false);
+        }
 
         if (button != null)
         {
