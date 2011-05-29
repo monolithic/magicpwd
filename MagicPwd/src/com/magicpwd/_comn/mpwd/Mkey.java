@@ -401,7 +401,7 @@ public final class Mkey implements Serializable
      */
     public void setP30F010C(String P30F010C)
     {
-        this.P30F010C = P30F010C;
+        this.P30F010C = P30F010C != null ? P30F010C : "";
     }
 
     /**
