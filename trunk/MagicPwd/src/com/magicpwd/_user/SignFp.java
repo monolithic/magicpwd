@@ -103,7 +103,7 @@ public class SignFp extends javax.swing.JPanel implements IUserView
 
         Lang.setWText(userPtn.getApplyButton(), LangRes.P30FA509, "找回(@F)");
 
-        Lang.setWText(userPtn.getAbortButton(), LangRes.P30FA504, "取消(@C)");
+        Lang.setWText(userPtn.getAbortButton(), LangRes.P30FA505, "返回(@C)");
 
         userPtn.setTitle(Lang.getLang(LangRes.P30FA204, "口令找回"));
     }

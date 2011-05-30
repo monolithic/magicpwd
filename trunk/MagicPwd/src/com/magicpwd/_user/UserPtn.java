@@ -275,6 +275,8 @@ public class UserPtn extends javax.swing.JPanel
     public boolean initData()
     {
         userView.initData();
+        lbMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConsEnv.RES_ICON + "more.png")));
+
         if (jpng == null)
         {
             new Thread()
