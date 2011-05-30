@@ -332,7 +332,8 @@ public class IcoDialog extends ADialog
         }
 
         label.setSelected(true);
-        listIco(label.getText());
+        iconPath = label.getText();
+        listIco(iconPath);
 
         if (lbCateLast != null)
         {

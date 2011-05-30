@@ -814,18 +814,19 @@ public final class UserMdl
         {
             iconMap = new java.util.HashMap<String, javax.swing.Icon>();
         }
+        String key = hash + size;
         if (Char.isValidate(path))
         {
             hash = path + '/' + hash;
         }
-        if (!iconMap.containsKey(hash))
+        if (!iconMap.containsKey(key))
         {
-            iconMap.put(hash, new javax.swing.ImageIcon(Char.format("{0}/{1}/{2}_" + size + ".png", getDataDir(), ConsEnv.DIR_ICO, hash)));
+            iconMap.put(key, new javax.swing.ImageIcon(Char.format("{0}/{1}/{2}_" + size + ".png", getDataDir(), ConsEnv.DIR_ICO, hash)));
         }
-        return iconMap.get(hash);
+        return iconMap.get(key);
     }
 
-    public void setDataIcon(String hash, javax.swing.Icon icon)
+    public void setDataIcon(String hash, int size, javax.swing.Icon icon)
     {
         if (!Char.isValidateHash(hash))
         {
@@ -835,6 +836,6 @@ public final class UserMdl
         {
             iconMap = new java.util.HashMap<String, javax.swing.Icon>();
         }
-        iconMap.put(hash, icon);
+        iconMap.put(hash + size, icon);
     }
 }
