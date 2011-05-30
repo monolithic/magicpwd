@@ -87,7 +87,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
 
         Lang.setWText(userPtn.getApplyButton(), LangRes.P30FA502, "注册(@S)");
 
-        Lang.setWText(userPtn.getAbortButton(), LangRes.P30FA504, "返回(@C)");
+        Lang.setWText(userPtn.getAbortButton(), LangRes.P30FA505, "返回(@C)");
 
         userPtn.setTitle(Lang.getLang(LangRes.P30FA203, "用户注册"));
 

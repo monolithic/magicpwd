@@ -150,22 +150,6 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         return true;
     }
 
-    private void signIn()
-    {
-        // 语言资源加载
-        Lang.loadLang(mpwdMdl.getAppLang());
-
-        // 扩展皮肤加载
-        Skin.loadLook(mpwdMdl.getAppSkin());
-
-        userPtn = new UserPtn(userMdl);
-        userPtn.setBackCall(this);
-        userPtn.initView(AuthLog.signIn);
-        userPtn.initLang();
-        userPtn.initData();
-        userPtn.setVisible(true);
-    }
-
     private static void loadPre()
     {
         try
@@ -247,6 +231,22 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
                 Logs.exception(exp);
             }
         }
+    }
+
+    private void signIn()
+    {
+        // 语言资源加载
+        Lang.loadLang(mpwdMdl.getAppLang());
+
+        // 扩展皮肤加载
+        Skin.loadLook(mpwdMdl.getAppSkin());
+
+        userPtn = new UserPtn(userMdl);
+        userPtn.setBackCall(this);
+        userPtn.initView(AuthLog.signIn);
+        userPtn.initLang();
+        userPtn.initData();
+        userPtn.setVisible(true);
     }
 
     private void loadFormFav()
