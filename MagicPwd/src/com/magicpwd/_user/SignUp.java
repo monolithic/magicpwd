@@ -264,6 +264,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         // 检测是否用户已存在
         if (Char.isValidate(userPtn.getUserMdl().getMpwdMdl().getCfg("dat." + un, null)))
         {
+            Lang.showMesg(this, null, Char.format("用户{0}已存在，请选择其它用户名！", un));
             return;
         }
 
