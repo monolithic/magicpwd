@@ -1176,6 +1176,11 @@ public class DBA4000
         dba.addParam(DBC4000.P30F010E, keys.getP30F010E() != null ? keys.getP30F010E().toString() : null);
         dba.addParam(DBC4000.P30F010F, Util.text2DB(keys.getP30F010F()));
         dba.addParam(DBC4000.P30F0110, Util.text2DB(keys.getP30F0110()));
+        dba.addParam(DBC4000.P30F0111, DBC4000.SQL_NOW, false);
+
+
+
+
 
         if (com.magicpwd._util.Char.isValidateHash(keys.getP30F0104()))
         {
