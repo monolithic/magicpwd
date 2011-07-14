@@ -16,6 +16,7 @@
  */
 package com.magicpwd.m;
 
+import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._enum.RunMode;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
@@ -159,7 +160,7 @@ public final class MpwdMdl
     {
         if (!Char.isValidate(datPath))
         {
-            datPath = "dat/";
+            datPath = ConsCfg.DEF_DATA_PATH;
         }
         if (!datPath.endsWith(java.io.File.separator))
         {
