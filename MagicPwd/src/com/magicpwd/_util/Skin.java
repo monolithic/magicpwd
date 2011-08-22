@@ -21,10 +21,17 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._enum.RunMode;
 import com.magicpwd.m.MpwdMdl;
 import com.magicpwd.r.AmonFF;
+import java.io.InputStream;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
+import org.jvnet.substance.SubstanceLookAndFeel;
+import org.jvnet.substance.api.SubstanceConstants.ImageWatermarkKind;
+import org.jvnet.substance.api.SubstanceSkin;
+import org.jvnet.substance.watermark.SubstanceImageWatermark;
 
 /**
  *
@@ -75,6 +82,8 @@ public class Skin
 
         String type = "java";
         String clazz = ConsCfg.DEF_SKIN_LOOK_SYS;
+        String theme = "";
+        String image = "";
         java.io.File file = new java.io.File(ConsEnv.DIR_SKIN + '/' + ConsEnv.DIR_LOOK + '/' + look + '/' + ConsEnv.SKIN_LOOK_FILE);
         if (file.exists() && file.isFile() && file.canRead())
         {
@@ -94,6 +103,8 @@ public class Skin
 
                 type = item.attributeValue("type", "").trim();
                 clazz = item.attributeValue("class", "").trim();
+                theme = item.attributeValue("theme", "").trim();
+                image = item.attributeValue("image", "").trim();
             }
         }
 
@@ -143,6 +154,41 @@ public class Skin
             {
                 Logs.exception(exp);
             }
+            return;
+        }
+
+        if ("substance".equals(type))
+        {
+            try
+            {
+                UIManager.setLookAndFeel(clazz);
+
+                if (Char.isValidate(theme))
+                {
+                    SubstanceSkin skin = (SubstanceSkin) Class.forName(theme).newInstance();
+                    if (Char.isValidate(image))
+                    {
+                        InputStream stream = File.open4Read(theme);
+                        SubstanceImageWatermark watermark = new SubstanceImageWatermark(stream);
+                        stream.close();
+
+                        watermark.setKind(ImageWatermarkKind.APP_CENTER);
+                        watermark.setOpacity((float) 0.7);
+                        skin.withWatermark(watermark);
+                    }
+                    SubstanceLookAndFeel.setSkin(clazz);
+                }
+                //SwingUtilities.updateComponentTreeUI(null);
+            }
+            catch (Exception ex)
+            {
+                Logs.exception(ex);
+            }
+            return;
+        }
+
+        if ("jgoodies".equals(type))
+        {
             return;
         }
 
