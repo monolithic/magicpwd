@@ -17,6 +17,7 @@
 package com.magicpwd.m;
 
 import com.magicpwd._cons.ConsCfg;
+import com.magicpwd._enum.AppView;
 import com.magicpwd._enum.RunMode;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
@@ -171,16 +172,27 @@ public final class MpwdMdl
 
     public String getUserLast()
     {
-        return "";
+        return getCfg("user.last", "");
     }
 
     public void setUserLast(String user)
     {
+        setCfg("user.last", user != null ? user : "");
     }
 
     public String getViewLast()
     {
         return getCfg("app.last", "mwiz");
+    }
+
+    public void setViewLast(String view)
+    {
+        setCfg("app.last", view != null ? view : "");
+    }
+
+    public void setViewLast(AppView view)
+    {
+        setCfg("app.last", view.name());
     }
 
     public String getViewList()

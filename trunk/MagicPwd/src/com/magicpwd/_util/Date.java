@@ -16,6 +16,7 @@
  */
 package com.magicpwd._util;
 
+import java.text.DateFormat;
 import java.util.Calendar;
 
 /**
@@ -24,6 +25,34 @@ import java.util.Calendar;
  */
 public class Date
 {
+
+    private static DateFormat locFormat;
+    /**
+     * 本地格式日期
+     * @return
+     */
+    public static DateFormat getLocaleDateFormat()
+    {
+        if (locFormat == null)
+        {
+            locFormat = java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.FULL, java.text.DateFormat.MEDIUM);
+        }
+        return locFormat;
+    }
+
+    private static DateFormat uniFormat;
+    /**
+     * 统一格式日期
+     * @return
+     */
+    public static DateFormat getFieldDateFormat()
+    {
+        if (uniFormat == null)
+        {
+            uniFormat = java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.FULL, java.text.DateFormat.MEDIUM);
+        }
+        return uniFormat;
+    }
 
     public static Calendar toDate(String text)
     {

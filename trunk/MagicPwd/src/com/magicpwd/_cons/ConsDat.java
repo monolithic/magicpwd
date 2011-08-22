@@ -262,9 +262,9 @@ public interface ConsDat
     int MGTD_METHOD_HTTP = 5;
     /**播放声音*/
     int MGTD_METHOD_AUDIO = 6;
-    /**定时提醒*/
+    /**退出提醒*/
     int MGTD_INTVAL_BEFOREND = -2;
-    /**定时提醒*/
+    /**启动提醒*/
     int MGTD_INTVAL_STARTUP = -1;
     /**定时提醒*/
     int MGTD_INTVAL_FIXTIME = 1;

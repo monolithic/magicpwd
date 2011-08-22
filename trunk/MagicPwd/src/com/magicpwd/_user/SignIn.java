@@ -27,6 +27,7 @@ import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.db.DBA4000;
+import com.magicpwd.m.MpwdMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFV;
 
@@ -176,9 +177,10 @@ public class SignIn extends javax.swing.JPanel implements IUserView
     public void initData()
     {
         UserMdl userMdl = userPtn.getUserMdl();
+        MpwdMdl mpwdMdl = userMdl.getMpwdMdl();
 
         // 显示上次登录用户
-        String[] arr = userMdl.getMpwdMdl().getViewList().split(",");
+        String[] arr = mpwdMdl.getViewList().split(",");
         String tmp;
         for (int i = 0, j = arr.length; i < j; i += 1)
         {
@@ -214,9 +216,9 @@ public class SignIn extends javax.swing.JPanel implements IUserView
                 continue;
             }
         }
-        cbUserView.setSelectedItem(new S1S1(userMdl.getMpwdMdl().getViewLast(), ""));
+        cbUserView.setSelectedItem(new S1S1(mpwdMdl.getViewLast(), ""));
 
-        String name = userMdl.getMpwdMdl().getUserLast();
+        String name = mpwdMdl.getUserLast();
         if (com.magicpwd._util.Char.isValidate(name))
         {
             tfUserName.setText(name);
@@ -329,8 +331,10 @@ public class SignIn extends javax.swing.JPanel implements IUserView
         }
         name = name.trim().replaceAll("\\s+", "").toLowerCase();
 
+        UserMdl userMdl = userPtn.getUserMdl();
+        MpwdMdl mpwdMdl = userMdl.getMpwdMdl();
         // 获得数据路径
-        String path = userPtn.getUserMdl().getMpwdMdl().getDatPath(name);
+        String path = mpwdMdl.getDatPath(name);
         if (!Char.isValidate(path))
         {
             Lang.showMesg(this, null, "系统无法定位当前用户的数据文件，请尝试以下操作：\n1、打开文件：定位您之前的数据文件；\n2、用户注册：注册名称为 {0} 的用户。", name);
@@ -345,7 +349,6 @@ public class SignIn extends javax.swing.JPanel implements IUserView
             return;
         }
 
-        UserMdl userMdl = userPtn.getUserMdl();
         userMdl.loadCfg(path);
 
         try
@@ -357,7 +360,7 @@ public class SignIn extends javax.swing.JPanel implements IUserView
                 {
                     return;
                 }
-                userMdl.getMpwdMdl().setUserLast(name);
+                mpwdMdl.setUserLast(name);
             }
             else
             {

@@ -25,9 +25,9 @@ import com.magicpwd._cons.ConsDat;
  * Author     : Amon
  * Encoding   : UTF-8
  * Created    : 2010-10-30 11:24:38
- * Website    : http://magicpwd.com/
+ * Website    : http://amon.me/mpwd
  * Project    : http://magicpwd.googlecode.com/
- * Contact    : Amon@magicpwd.com
+ * Contact    : chat@amon.me
  * CopyRight  : Winshine.biz
  * Description:
  */

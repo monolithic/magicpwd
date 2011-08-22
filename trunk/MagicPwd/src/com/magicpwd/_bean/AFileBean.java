@@ -38,9 +38,9 @@ import javax.swing.AbstractButton;
  * Author     : Amon
  * Encoding   : UTF-8
  * Created    : 2010-10-27 20:22:02
- * Website    : http://magicpwd.com/
+ * Website    : http://amon.me/mpwd
  * Project    : http://magicpwd.googlecode.com/
- * Contact    : Amon@magicpwd.com
+ * Contact    : chat@amon.me
  * CopyRight  : Winshine.biz
  * Description:
  */

@@ -34,9 +34,9 @@ import com.magicpwd.v.app.tray.TrayPtn;
  * Author     : Amon
  * Encoding   : UTF-8
  * Created    : 2010-12-14 16:06:39
- * Website    : http://magicpwd.com/
+ * Website    : http://amon.me/mpwd
  * Project    : http://magicpwd.googlecode.com/
- * Contact    : Amon@magicpwd.com
+ * Contact    : chat@amon.me
  * CopyRight  : Winshine.biz
  * Description:
  */

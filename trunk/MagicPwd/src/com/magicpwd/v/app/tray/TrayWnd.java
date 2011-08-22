@@ -27,9 +27,9 @@ import java.awt.geom.RoundRectangle2D;
  * Application: MagicPwd
  * Author     : Aven
  * Encoding   : UTF-8
- * Website    : http://magicpwd.com/
+ * Website    : http://amon.me/mpwd
  * Project    : http://magicpwd.googlecode.com/
- * Contact    : Amon@magicpwd.com
+ * Contact    : chat@amon.me
  * CopyRight  : Winshine.biz
  * Description:
  */
@@ -66,6 +66,7 @@ public class TrayWnd extends javax.swing.JWindow implements ITrayView, java.awt.
     private int aniStep = 10;
     private int gap = 0;
     private boolean aniDir = true;
+    private boolean hasAni = false;
     private javax.swing.Timer timer;
     private TrayPtn trayPtn;
     private UserMdl userMdl;
@@ -223,6 +224,11 @@ public class TrayWnd extends javax.swing.JWindow implements ITrayView, java.awt.
     @Override
     public void mouseEntered(java.awt.event.MouseEvent evt)
     {
+        if (!hasAni)
+        {
+            return;
+        }
+
         trayImg.setBackgroud(robot.createScreenCapture(this.getBounds()));
 
         aniDir = true;
@@ -238,6 +244,11 @@ public class TrayWnd extends javax.swing.JWindow implements ITrayView, java.awt.
     public void mouseExited(java.awt.event.MouseEvent evt)
     {
         if (trayPtn.trayMenu.isVisible())
+        {
+            return;
+        }
+
+        if (!hasAni)
         {
             return;
         }
@@ -284,6 +295,11 @@ public class TrayWnd extends javax.swing.JWindow implements ITrayView, java.awt.
     @Override
     public void mouseMoved(java.awt.event.MouseEvent evt)
     {
+        if (!hasAni)
+        {
+            return;
+        }
+
         trayImg.enActive(evt.getPoint());
     }
 

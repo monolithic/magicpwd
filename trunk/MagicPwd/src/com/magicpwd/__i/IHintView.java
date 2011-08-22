@@ -16,24 +16,30 @@
  */
 package com.magicpwd.__i;
 
+import java.util.Date;
+
 /**
  * Application: MagicPwd
  * Author     : Aven
  * Encoding   : UTF-8
- * Website    : http://magicpwd.com/
+ * Website    : http://amon.me/mpwd
  * Project    : http://magicpwd.googlecode.com/
- * Contact    : Amon@magicpwd.com
+ * Contact    : chat@amon.me
  * CopyRight  : Winshine.biz
  * Description:
  */
 public interface IHintView
 {
 
-    void showHint(String text, String tips);
+    //void showHint(String text, String tips);
 
-    void showHint(String text, String tips, java.awt.Cursor cursor);
+    void showHint(int todoCnt, int histCnt);
 
-    void showTime(String text, String tips);
+    //void showHint(String text, String tips, java.awt.Cursor cursor);
 
-    void showTime(String text, String tips, java.awt.Cursor cursor);
+    //void showTime(String text, String tips);
+
+    void showTime(Date date);
+
+    //void showTime(String text, String tips, java.awt.Cursor cursor);
 }

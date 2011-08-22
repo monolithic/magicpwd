@@ -23,9 +23,9 @@ import com.magicpwd._comn.S1S3;
  * Author     : Amon
  * Encoding   : UTF-8
  * Created    : 2010-11-21 10:04:43
- * Website    : http://magicpwd.com/
+ * Website    : http://amon.me/mpwd
  * Project    : http://magicpwd.googlecode.com/
- * Contact    : Amon@magicpwd.com
+ * Contact    : chat@amon.me
  * CopyRight  : Winshine.biz
  * Description:
  */
