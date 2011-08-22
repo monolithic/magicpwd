@@ -82,6 +82,8 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
             case signUp:
             case signIn:
             {
+                Skin.loadLook(userMdl.getLook());
+
                 initView();
                 initLang();
                 initData();
@@ -239,7 +241,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         Lang.loadLang(mpwdMdl.getAppLang());
 
         // 扩展皮肤加载
-        Skin.loadLook(mpwdMdl.getAppSkin());
+        //Skin.loadLook(mpwdMdl.getAppSkin());
 
         userPtn = new UserPtn(userMdl);
         userPtn.setBackCall(this);

@@ -387,15 +387,15 @@ public class SignIn extends javax.swing.JPanel implements IUserView
             return;
         }
 
+        if (userPtn.callBack(AuthLog.signIn, null))
+        {
+            userPtn.hideWindow();
+        }
+
         Object object = cbUserView.getSelectedItem();
         if (object instanceof S1S1)
         {
             userMdl.setAppView(((S1S1) object).getK());
-        }
-
-        if (userPtn.callBack(AuthLog.signIn, null))
-        {
-            userPtn.hideWindow();
         }
     }
 

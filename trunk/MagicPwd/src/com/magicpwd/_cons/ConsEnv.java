@@ -43,13 +43,13 @@ public interface ConsEnv
      * 软件信息：软件首页
      */
     String HOMEPAGE = "http://amon.me/";
-    String BLOGSITE = "http://amon.me/wlog/";
+    String BLOGSITE = "http://amon.me/blog/";
     String MLOGSITE = "http://weibo.com/magicpwd";
     /**
      * 软件信息：软件版权
      */
     String SOFTCOPY = "© {0} Amon.me";
-    String SOFTMAIL = "magicpwd@amon.me";
+    String SOFTMAIL = "mpwd@amon.me";
     /**
      * 安全信息：摘要算法
      */
