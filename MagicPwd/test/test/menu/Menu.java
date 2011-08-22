@@ -8,7 +8,7 @@ import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Skin;
 import com.magicpwd.m.UserMdl;
-import com.magicpwd.v.MenuPtn;
+import com.magicpwd.v.app.MenuPtn;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
