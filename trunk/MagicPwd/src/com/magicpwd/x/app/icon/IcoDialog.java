@@ -306,20 +306,23 @@ public class IcoDialog extends ADialog
         label.addMouseListener(listener);
         plCateList.add(label);
 
-        for (java.io.File file : iconHome.listFiles())
+        if (iconHome.exists())
         {
-            if (file == null || !file.exists() || !file.isDirectory() || !file.canRead() || !Char.isValidate(file.getName(), 1, 64))
+            for (java.io.File file : iconHome.listFiles())
             {
-                continue;
+                if (file == null || !file.exists() || !file.isDirectory() || !file.canRead() || !Char.isValidate(file.getName(), 1, 64))
+                {
+                    continue;
+                }
+                label = new IcoLabel(file.getName());
+                if (iconPath.equals(file.getName()))
+                {
+                    label.setSelected(true);
+                    lbCateLast = label;
+                }
+                label.addMouseListener(listener);
+                plCateList.add(label);
             }
-            label = new IcoLabel(file.getName());
-            if (iconPath.equals(file.getName()))
-            {
-                label.setSelected(true);
-                lbCateLast = label;
-            }
-            label.addMouseListener(listener);
-            plCateList.add(label);
         }
     }
 

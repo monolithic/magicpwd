@@ -1,6 +1,6 @@
 package test;
 
-import com.magicpwd.v.tray.TrayWnd;
+import com.magicpwd.v.app.tray.TrayWnd;
 import java.sql.DriverManager;
 
 /*
