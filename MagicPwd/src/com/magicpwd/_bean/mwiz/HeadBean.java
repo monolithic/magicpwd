@@ -38,9 +38,9 @@ import com.magicpwd.x.app.icon.IcoDialog;
  * Author     : Amon
  * Encoding   : UTF-8
  * Created    : 2010-10-24 23:52:16
- * Website    : http://magicpwd.com/
+ * Website    : http://amon.me/mpwd
  * Project    : http://magicpwd.googlecode.com/
- * Contact    : Amon@magicpwd.com
+ * Contact    : chat@amon.me
  * CopyRight  : Winshine.biz
  * Description:
  */

@@ -45,7 +45,7 @@ public class Jxml
         // ProcessingInstruction
         // Map<String, String> pi = new HashMap<String, String>();
         // pi.put("type", "text/xsl");
-        // pi.put("href", "http://magicpwd.com/mpwd/MagicPwd.xsl");
+        // pi.put("href", "http://amon.me/mpwd/MagicPwd.xsl");
         // document.addProcessingInstruction("xml-stylesheet", pi);
 
         return doc;

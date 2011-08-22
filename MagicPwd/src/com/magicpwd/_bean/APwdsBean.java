@@ -34,9 +34,9 @@ import javax.swing.JOptionPane;
  * Application: MagicPwd
  * Author     : Amon
  * Encoding   : UTF-8
- * Website    : http://magicpwd.com/
+ * Website    : http://amon.me/mpwd
  * Project    : http://magicpwd.googlecode.com/
- * Contact    : Amon@magicpwd.com
+ * Contact    : chat@amon.me
  * CopyRight  : Winshine.biz
  * Description:
  * 属性：口令

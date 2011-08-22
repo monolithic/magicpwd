@@ -19,6 +19,7 @@ package com.magicpwd.e.mexp.kind;
 import com.magicpwd.__a.mexp.AMexpAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.prop.Kind;
+import com.magicpwd._util.Lang;
 import com.magicpwd.r.KindTN;
 import com.magicpwd.v.app.mexp.KindDlg;
 
@@ -54,10 +55,17 @@ public class UpdateAction extends AMexpAction implements IBackCall<String, Kind>
             return;
         }
 
+        Kind kind = (Kind) node.getUserObject();
+        if ("0".equals(kind.getC2010203()))
+        {
+            Lang.showMesg(mexpPtn, null, "无法更新默认类别！");
+            return;
+        }
+
         KindDlg kindDlg = new KindDlg(mexpPtn, this);
         kindDlg.initView();
         kindDlg.initLang();
-        kindDlg.initData((Kind) node.getUserObject());
+        kindDlg.initData(kind);
         kindDlg.setVisible(true);
     }
 

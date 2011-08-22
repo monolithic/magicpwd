@@ -23,9 +23,9 @@ import com.magicpwd.__a.mwiz.AMwizAction;
  * Author     : Amon
  * Encoding   : UTF-8
  * Created    : 2011-1-16 12:07:40
- * Website    : http://magicpwd.com/
+ * Website    : http://amon.me/mpwd
  * Project    : http://magicpwd.googlecode.com/
- * Contact    : Amon@magicpwd.com
+ * Contact    : chat@amon.me
  * CopyRight  : Winshine.biz
  * Description:
  */

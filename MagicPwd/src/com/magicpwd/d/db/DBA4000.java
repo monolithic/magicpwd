@@ -656,10 +656,15 @@ public class DBA4000
             dba.addColumn(DBC4000.P30F0405);
             dba.addColumn(DBC4000.P30F0406);
             dba.addWhere(DBC4000.P30F0309, DBC4000.P30F0402, false);
-            dba.addWhere(com.magicpwd._util.Char.format("{0}=0 OR {0} < {1}", DBC4000.P30F030D, now));
-            dba.addWhere(com.magicpwd._util.Char.format("{0}=0  OR {0} > {1}", DBC4000.P30F030E, now));
-            dba.addWhere(DBC4000.P30F0305, ">", ConsDat.MGTD_INTVAL_BEFOREND);
-            dba.addWhere(DBC4000.P30F0303, "IN", "(" + ConsDat.MGTD_STATUS_READY + "," + ConsDat.MGTD_STATUS_INIT + ")", false);
+            StringBuilder buf = new StringBuilder();
+            buf.append(DBC4000.P30F0305).append('=').append(ConsDat.MGTD_INTVAL_STARTUP);
+            buf.append(" OR (");
+            buf.append(com.magicpwd._util.Char.format("({0}=0 OR {0} < {1})", DBC4000.P30F030D, now));
+            buf.append(" AND ");
+            buf.append(com.magicpwd._util.Char.format("({0}=0 OR {0} > {1})", DBC4000.P30F030E, now));
+            buf.append(") OR ");
+            buf.append(DBC4000.P30F0303).append(" IN (").append(ConsDat.MGTD_STATUS_READY).append(',').append(ConsDat.MGTD_STATUS_INIT).append(")");
+            dba.addWhere(buf.toString());
 
             Hint hint;
             ResultSet rest = dba.executeSelect();

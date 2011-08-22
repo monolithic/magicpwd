@@ -21,7 +21,6 @@ import com.magicpwd.__i.IHintView;
 import com.magicpwd._comn.Task;
 import com.magicpwd._comn.mpwd.Hint;
 import com.magicpwd._cons.ConsDat;
-import com.magicpwd._util.Char;
 import com.magicpwd._util.Time;
 import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.d.db.DBAccess;
@@ -30,9 +29,9 @@ import com.magicpwd.d.db.DBAccess;
  * Application: MagicPwd
  * Author     : Aven
  * Encoding   : UTF-8
- * Website    : http://magicpwd.com/
+ * Website    : http://amon.me/mpwd
  * Project    : http://magicpwd.googlecode.com/
- * Contact    : Amon@magicpwd.com
+ * Contact    : chat@amon.me
  * CopyRight  : Winshine.biz
  * Description:
  */
@@ -40,11 +39,23 @@ public final class HintMdl
 {
 
     private UserMdl userMdl;
-    private java.text.DateFormat dateTplt;
+    /**
+     * 计划任务列表
+     */
     private java.util.List<Hint> mgtdList;
-    private java.util.List<Hint> hintList;
+    /**
+     * 待办事项列表
+     */
+    private java.util.List<Hint> todoList;
+    /**
+     * 过期事项列表
+     */
+    private java.util.List<Hint> histList;
+    /**
+     * 提醒视图列表
+     */
     private java.util.List<IHintView> viewList;
-    private java.util.Map<String, Integer> updtList;
+    private java.util.Calendar calendar;
     private int counter;
 
     HintMdl(UserMdl userMdl)
@@ -55,9 +66,9 @@ public final class HintMdl
     public void init()
     {
         mgtdList = new java.util.ArrayList<Hint>();
-        hintList = new java.util.ArrayList<Hint>();
-        updtList = new java.util.HashMap<String, Integer>();
-        counter = userMdl.getHintInt();
+        todoList = new java.util.ArrayList<Hint>();
+        histList = new java.util.ArrayList<Hint>();
+        //counter = userMdl.getHintInt();
 
         Time.getInstance().registerAction(new Task(0, 1, "mpwd-hint", ""), new IBackCall<String, Task>()
         {
@@ -66,7 +77,7 @@ public final class HintMdl
             public boolean callBack(String options, Task object)
             {
                 object.setCounter(0);
-                return showNote(false);
+                return reload(false);
             }
         });
     }
@@ -80,8 +91,10 @@ public final class HintMdl
         viewList.add(view);
     }
 
-    public synchronized boolean showNote(boolean forced)
+    public synchronized boolean reload(boolean forced)
     {
+        calendar = java.util.Calendar.getInstance();
+        
         showTime();
 
         // 读取数据信息
@@ -95,26 +108,33 @@ public final class HintMdl
             DBA4000.findHintList(userMdl, mgtdList);
             counter = 0;
         }
-        counter += 1;
+        else
+        {
+            counter += 1;
+        }
 
         // 到期提示判断
-        hintList.clear();
-        updtList.clear();
-        java.util.Calendar cal = java.util.Calendar.getInstance();
+        todoList.clear();
+        histList.clear();
+        java.util.HashMap<String, Integer> updtList = new java.util.HashMap<String, Integer>();
         for (Hint hint : mgtdList)
         {
-            if (Time.isOnTime(cal, hint))
+            // 等提醒
+            if (Time.isOnTime(calendar, hint))
             {
-                hintList.add(hint);
+                todoList.add(hint);
                 if (hint.getP30F0303() == ConsDat.MGTD_STATUS_INIT)
                 {
                     hint.setP30F0303(ConsDat.MGTD_STATUS_READY);
                     updtList.put(hint.getP30F0402(), ConsDat.MGTD_STATUS_READY);
                 }
             }
+            // 已过期
             else
             {
-                if (hint.getP30F0303() == ConsDat.MGTD_STATUS_READY)
+                histList.add(hint);
+                // 初始化或进行中的任务，修改为已过期
+                if (hint.getP30F0303() == ConsDat.MGTD_STATUS_READY || hint.getP30F0303() == ConsDat.MGTD_STATUS_INIT)
                 {
                     hint.setP30F0303(ConsDat.MGTD_STATUS_DELAY);
                     updtList.put(hint.getP30F0402(), ConsDat.MGTD_STATUS_DELAY);
@@ -137,43 +157,46 @@ public final class HintMdl
      */
     public void showTime()
     {
-        if (viewList == null)
+        // 没有观察者的情况
+        if (viewList == null || viewList.size() < 1)
         {
             return;
         }
-        if (dateTplt == null)
-        {
-            dateTplt = java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.FULL, java.text.DateFormat.MEDIUM);
-        }
-        String text = dateTplt.format(new java.util.Date());
+
+        java.util.Date date = calendar.getTime();
         for (IHintView view : viewList)
         {
-            view.showTime(text, text);
+            view.showTime(date);
         }
     }
 
+    /**
+     * 显示待办信息
+     */
     public void showHint()
     {
-        if (viewList == null)
+        // 没有观察者的情况
+        if (viewList == null || viewList.size() < 1)
         {
             return;
         }
-        int size = hintList.size();
+
+        int todo = todoList.size();
+        int hist = histList.size();
+
         for (IHintView view : viewList)
         {
-            if (size > 0)
-            {
-                view.showHint(Char.format("您有 {0} 条提醒数据！", Integer.toString(size)), "点击查看详细信息！", java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
-            }
-            else
-            {
-                view.showHint("您目前没有需要提醒的数据！", null, java.awt.Cursor.getDefaultCursor());
-            }
+            view.showHint(todo, hist);
         }
     }
 
-    public java.util.List<Hint> getHint()
+    public java.util.List<Hint> getTodoList()
     {
-        return hintList;
+        return todoList;
+    }
+
+    public java.util.List<Hint> getHistList()
+    {
+        return histList;
     }
 }

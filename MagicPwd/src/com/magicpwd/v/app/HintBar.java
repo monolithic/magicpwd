@@ -19,6 +19,8 @@ package com.magicpwd.v.app;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd.__i.IHintView;
 import com.magicpwd._comn.mpwd.Hint;
+import com.magicpwd._util.Char;
+import com.magicpwd._util.Date;
 import com.magicpwd.m.UserMdl;
 
 /**
@@ -90,31 +92,24 @@ public class HintBar extends javax.swing.JPanel implements IHintView
     {
         if (backCall != null)
         {
-            backCall.callBack("hint", userMdl.getHintMdl().getHint());
+            backCall.callBack("hint", userMdl.getHintMdl().getTodoList());
         }
     }
 
     public void showNote(boolean forced)
     {
-        userMdl.getHintMdl().showNote(forced);
+        userMdl.getHintMdl().reload(forced);
     }
 
     /**
      * 显示日期信息
      */
     @Override
-    public void showTime(String text, String tips)
+    public void showTime(java.util.Date date)
     {
+        String text = Date.getLocaleDateFormat().format(date);
         lb_TimeLabel.setText(text);
-        lb_TimeLabel.setToolTipText(tips);
-    }
-
-    @Override
-    public void showTime(String text, String tips, java.awt.Cursor cursor)
-    {
-        lb_TimeLabel.setText(text);
-        lb_TimeLabel.setToolTipText(tips);
-        lb_TimeLabel.setCursor(cursor);
+        lb_TimeLabel.setToolTipText(text);
     }
 
     public void showInfo(String text)
@@ -122,18 +117,34 @@ public class HintBar extends javax.swing.JPanel implements IHintView
     }
 
     @Override
-    public void showHint(String text, String tips)
+    public void showHint(int todoCnt, int histCnt)
     {
-        lb_HintLabel.setText(text);
-        lb_HintLabel.setToolTipText(tips);
-    }
+        StringBuilder buf = new StringBuilder();
+        if (todoCnt > 0)
+        {
+            buf.append(Char.format("待办：{0}", Integer.toString(todoCnt)));
+        }
 
-    @Override
-    public void showHint(String text, String tips, java.awt.Cursor cursor)
-    {
-        lb_HintLabel.setText(text);
-        lb_HintLabel.setToolTipText(tips);
-        lb_HintLabel.setCursor(cursor);
+        if (histCnt > 0)
+        {
+            buf.append(Char.format("过期：{0}", Integer.toString(histCnt)));
+        }
+        if (buf.length() < 1)
+        {
+            buf.append("");
+        }
+        if (buf.length() > 0)
+        {
+            lb_HintLabel.setText(buf.toString());
+            lb_HintLabel.setToolTipText("点击查看详细信息！");
+            lb_HintLabel.setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
+        }
+        else
+        {
+            lb_HintLabel.setText("您目前没有需要提醒的数据！");
+            lb_HintLabel.setToolTipText(null);
+            lb_HintLabel.setCursor(java.awt.Cursor.getDefaultCursor());
+        }
     }
 
     /**

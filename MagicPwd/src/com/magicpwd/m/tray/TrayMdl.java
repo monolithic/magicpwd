@@ -20,9 +20,9 @@ package com.magicpwd.m.tray;
  * Application: MagicPwd
  * Author     : Aven
  * Encoding   : UTF-8
- * Website    : http://magicpwd.com/
+ * Website    : http://amon.me/mpwd
  * Project    : http://magicpwd.googlecode.com/
- * Contact    : Amon@magicpwd.com
+ * Contact    : chat@amon.me
  * CopyRight  : Winshine.biz
  * Description:
  */

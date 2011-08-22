@@ -361,6 +361,7 @@ public class MexpPtn extends AMpwdPtn
         {
             Logs.exception(exp);
             Lang.showMesg(this, LangRes.P30F7A0E, "口令数据保存失败，请重新启动本程序后再次尝试！");
+            return false;
         }
 
         // 数据新增的情况下，需要重新显示列表信息

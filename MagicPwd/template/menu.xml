@@ -56,7 +56,7 @@
     </menubar>
     <!--工具栏配置模板-->
     <toolbar id="toolbar1">
-        <item type="normal" text="" tips="普通菜单项" text-def="" init="" command="哈哈！！" tips-def="" icon="http://magicpwd.com/logo/logo10.png" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true">
+        <item type="normal" text="" tips="普通菜单项" text-def="" init="" command="哈哈！！" tips-def="" icon="http://amon.me/logo/logo10.png" icon-rollover="" icon-pressed="" icon-disabled="" enabled="true" visible="true">
             <action id="" class="" init="">
                 <stroke key="^ N" />
             </action>

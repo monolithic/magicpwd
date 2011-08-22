@@ -3,8 +3,8 @@
 发行方式：免费传播及使用
 环境需求：JRE 6.0 （http://www.java.com/）
 软件作者：Amon
-电子邮件：Amon@magicpwd.com
-网站地址：http://magicpwd.com/
+电子邮件：chat@amon.me
+网站地址：http://amon.me/mpwd
 
 软件说明：
 

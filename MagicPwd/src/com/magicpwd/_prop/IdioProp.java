@@ -100,8 +100,8 @@ public class IdioProp extends javax.swing.JPanel implements IPropBean
     {
         int i = 0;
         lb_UserName[i].setText("Amon");
-        ll_UserMail[i].setText("amon@magicpwd.com");
-        ll_UserMail[i].setLinkUrl("mailto:amon@magicpwd.com");
+        ll_UserMail[i].setText("chat@amon.me");
+        ll_UserMail[i].setLinkUrl("mailto:chat@amon.me");
         ll_UserMail[i].setToolTipText("Mail to Amon");
 
         i += 1;

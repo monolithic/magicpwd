@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<jnlp codebase="http://magicpwd.com/jnlp/mpwd/" href="launch.jnlp" spec="1.0+">
+<jnlp codebase="http://amon.me/jnlp/mpwd/" href="launch.jnlp" spec="1.0+">
     <information>
         <title>MagicPwd</title>
         <vendor>Amon</vendor>
-        <homepage href="http://magicpwd.com/"/>
+        <homepage href="http://amon.me/mpwd"/>
         <description>魔方密码是一款开放源代码的跨平台密码管理软件，100%纯Java语言开发，其主要目标是在充分保障用户数据安全的基础上，做到同一数据能够方便的在多种操作平台上使用。软件采用目前国际上通用的标准商用加密算法保证您的数据机密性，支持用户自定义数据、支持随机密码生成、支持基于云存储的数据备份与恢复、支持邮件检测及记事提醒等功能。</description>
         <description kind="short">魔方密码，开源的跨平台密码管理软件！</description>
 		<icon href="logo/logo64.png" width="64" height="64"/>

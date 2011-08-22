@@ -31,11 +31,12 @@ import com.magicpwd.x.app.icon.IcoDialog;
  * Application: MagicPwd
  * Author     : Amon
  * Encoding   : UTF-8
- * Website    : http://magicpwd.com/
+ * Website    : http://amon.me/mpwd
  * Project    : http://magicpwd.googlecode.com/
- * Contact    : Amon@magicpwd.com
+ * Contact    : chat@amon.me
  * CopyRight  : Winshine.biz
  * Description:
+ * 在用户指定徽标的情况下，显示用户徽标，否则显示所属类别徽标。
  */
 public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall<String, String>
 {
