@@ -161,7 +161,10 @@ public class Skin
         {
             try
             {
+                SubstanceLookAndFeel.setToUseConstantThemesOnDialogs(true);
                 UIManager.setLookAndFeel(clazz);
+                UIManager.put(SubstanceLookAndFeel.TABBED_PANE_CLOSE_BUTTONS_PROPERTY, Boolean.TRUE);
+                UIManager.put(SubstanceLookAndFeel.SHOW_EXTRA_WIDGETS, Boolean.TRUE);
 
                 if (Char.isValidate(theme))
                 {

@@ -206,7 +206,7 @@ public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall
 
     private void ib_PropDataActionPerformed(java.awt.event.MouseEvent evt)
     {
-        IcoDialog ico = new IcoDialog(mexpPtn, this);
+        IcoDialog ico = new IcoDialog(mexpPtn, mexpPtn.getUserMdl(), this);
         ico.initView();
         ico.initLang();
         ico.initData();

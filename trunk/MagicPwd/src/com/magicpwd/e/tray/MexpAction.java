@@ -33,7 +33,7 @@ public class MexpAction extends ATrayAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        trayPtn.showViewPtn(AppView.mexp);
+        trayPtn.showView(AppView.mexp);
     }
 
     @Override

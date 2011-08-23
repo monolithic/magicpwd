@@ -46,7 +46,10 @@ public final class UserMdl
     private HintMdl hintMdl;
     private AppView appView = AppView.mwiz;
     private java.util.Properties userCfg;
-    private java.util.Map<String, javax.swing.Icon> iconMap;
+    private static java.util.Properties defProp;
+    private static java.util.Properties favProp;
+    private static java.util.HashMap<String, javax.swing.Icon> defIcon;
+    private static java.util.HashMap<String, javax.swing.Icon> favIcon;
     static SafeKey safeKey;
 
     public UserMdl(MpwdMdl mpwdMdl)
@@ -491,6 +494,152 @@ public final class UserMdl
         }
     }
 
+    public static void loadFeelDef()
+    {
+        // 读取默认配置文件
+        defProp = new java.util.Properties();
+        java.io.InputStream stream = null;
+        try
+        {
+            stream = UserMdl.class.getResourceAsStream("/res/feel.amf");
+            defProp.load(stream);
+        }
+        catch (Exception ex)
+        {
+            Logs.exception(ex);
+        }
+        finally
+        {
+            Bean.closeStream(stream);
+        }
+
+        // 加载默认图标
+        defIcon = new java.util.HashMap<String, javax.swing.Icon>();
+        try
+        {
+            stream = UserMdl.class.getResourceAsStream(ConsEnv.RES_ICON + "icon.png");
+            java.awt.image.BufferedImage bufImg = javax.imageio.ImageIO.read(stream);
+
+            int w = bufImg.getWidth();
+            int h = bufImg.getHeight();
+            for (int i = 0, j = 0; j < w; i += 1)
+            {
+                defIcon.put("def:" + i, new javax.swing.ImageIcon(bufImg.getSubimage(j, 0, h, h)));
+                j += h;
+            }
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+        finally
+        {
+            Bean.closeStream(stream);
+        }
+    }
+
+    public void loadFeelFav()
+    {
+        // 读取用户配置文件
+        favProp = new java.util.Properties();
+        java.io.File file = new java.io.File(ConsEnv.DIR_SKIN, ConsEnv.DIR_FEEL);
+        if (!file.exists() || !file.isDirectory() || !file.canRead())
+        {
+            return;
+        }
+        file = new java.io.File(file, getFeel() + java.io.File.separator + ConsEnv.SKIN_FEEL_FORM);
+        if (!file.exists() || !file.isFile() || !file.canRead())
+        {
+            return;
+        }
+
+        java.io.InputStream stream = null;
+        try
+        {
+            stream = new java.io.FileInputStream(file);
+            favProp.load(stream);
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+        finally
+        {
+            Bean.closeStream(stream);
+        }
+    }
+
+    /**
+     * 系统默认图片
+     * @param favHash
+     * @return
+     */
+    public javax.swing.Icon getFeelDef(String favHash)
+    {
+        if (!Char.isValidate(favHash))
+        {
+            return Bean.getNone();
+        }
+
+        if (defProp.containsKey(favHash))
+        {
+            favHash = defProp.getProperty(favHash);
+        }
+        return defIcon.get("def:" + favHash);
+    }
+
+    /**
+     * 缓存用户偏好图片
+     * @param favHash
+     * @param favIcon
+     */
+    public void setFeelFav(String favHash, javax.swing.Icon favIcon)
+    {
+        if (Char.isValidate(favHash))
+        {
+//            if (defProp.containsKey(favHash))
+//            {
+//                favHash = defProp.getProperty(favHash);
+//            }
+            defIcon.put("fav:" + favHash, favIcon);
+        }
+    }
+
+    /**
+     * 加载用户配置界面图标
+     * @param favHash
+     * @param chache
+     * @return
+     */
+    public javax.swing.Icon readFeelFav(String favHash, boolean chache)
+    {
+        if (!Char.isValidate(favHash))
+        {
+            return Bean.getNone();
+        }
+
+        if (favProp == null)
+        {
+            loadFeelFav();
+        }
+
+        javax.swing.Icon icon;
+        if (!chache)
+        {
+            icon = favProp.containsKey(favHash) ? readFeelIcon(ConsEnv.FEEL_PATH + favProp.getProperty(favHash)) : getFeelDef(favHash);
+            return icon != null ? icon : Bean.getNone();
+        }
+
+        icon = defIcon.get("fav:" + favHash);
+        if (icon == null)
+        {
+            icon = favProp.containsKey(favHash) ? readFeelIcon(ConsEnv.FEEL_PATH + favProp.getProperty(favHash)) : getFeelDef(favHash);
+            //favProp.remove(favHash);
+            setFeelFav(favHash, icon);
+        }
+        return icon;
+    }
+
     /**
      * @return the incBack
      */
@@ -771,36 +920,19 @@ public final class UserMdl
         this.appView = appView;
     }
 
-    public void setAppView(String appView)
-    {
-        if (Char.isValidate(appView, 4))
-        {
-            appView = appView.toLowerCase();
-            try
-            {
-                this.appView = AppView.valueOf(appView);
-            }
-            catch (Exception exp)
-            {
-                Logs.exception(exp);
-                this.appView = AppView.mwiz;
-            }
-        }
-    }
-
     public void clearDataIcon()
     {
-        if (iconMap != null)
+        if (favIcon != null)
         {
-            iconMap.clear();
+            favIcon.clear();
         }
     }
 
     public void clearDataIcon(String hash)
     {
-        if (iconMap != null && hash != null)
+        if (favIcon != null && hash != null)
         {
-            iconMap.remove(hash);
+            favIcon.remove(hash);
         }
     }
 
@@ -810,20 +942,20 @@ public final class UserMdl
         {
             return Bean.getNone();
         }
-        if (iconMap == null)
+        if (favIcon == null)
         {
-            iconMap = new java.util.HashMap<String, javax.swing.Icon>();
+            favIcon = new java.util.HashMap<String, javax.swing.Icon>();
         }
         String key = hash + size;
         if (Char.isValidate(path))
         {
             hash = path + '/' + hash;
         }
-        if (!iconMap.containsKey(key))
+        if (!favIcon.containsKey(key))
         {
-            iconMap.put(key, new javax.swing.ImageIcon(Char.format("{0}/{1}/{2}_" + size + ".png", getDataDir(), ConsEnv.DIR_ICO, hash)));
+            favIcon.put(key, new javax.swing.ImageIcon(Char.format("{0}/{1}/{2}_" + size + ".png", getDataDir(), ConsEnv.DIR_ICO, hash)));
         }
-        return iconMap.get(key);
+        return favIcon.get(key);
     }
 
     public void setDataIcon(String hash, int size, javax.swing.Icon icon)
@@ -832,10 +964,10 @@ public final class UserMdl
         {
             return;
         }
-        if (iconMap == null)
+        if (favIcon == null)
         {
-            iconMap = new java.util.HashMap<String, javax.swing.Icon>();
+            favIcon = new java.util.HashMap<String, javax.swing.Icon>();
         }
-        iconMap.put(hash + size, icon);
+        favIcon.put(hash + size, icon);
     }
 }

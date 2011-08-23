@@ -40,7 +40,7 @@ public class MwizAction extends ATrayAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        trayPtn.showViewPtn(AppView.mwiz);
+        trayPtn.showView(AppView.mwiz);
     }
 
     @Override

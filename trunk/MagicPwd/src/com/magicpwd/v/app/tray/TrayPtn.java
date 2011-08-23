@@ -39,13 +39,6 @@ import com.magicpwd.m.MpwdMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
 import com.magicpwd.v.app.MenuPtn;
-import com.magicpwd.v.app.maoc.MaocPtn;
-import com.magicpwd.v.app.mgtd.MgtdPtn;
-import com.magicpwd.v.app.mpad.MpadPtn;
-import com.magicpwd.v.app.mexp.MexpPtn;
-import com.magicpwd.v.app.mruc.MrucPtn;
-import com.magicpwd.v.app.mwiz.MwizPtn;
-import java.io.IOException;
 
 /**
  * 系统托盘
@@ -54,7 +47,7 @@ import java.io.IOException;
 public class TrayPtn implements IBackCall<AuthLog, UserDto>
 {
 
-    private static AppView currPtn;
+    private static AppView appView;
     private AppView nextPtn;
     private MpwdMdl mpwdMdl;
     private UserMdl userMdl;
@@ -63,9 +56,6 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
     private AMpwdPtn mpwdPtn;
     private ITrayView trayPtn;
     private java.util.Map<AppView, AMpwdPtn> ptnList;
-    private static java.util.HashMap<String, javax.swing.Icon> defIcon;
-    private static java.util.Properties defProp;
-    private java.util.Properties favProp;
     private java.util.Properties favTray;
 
     public TrayPtn(MpwdMdl mpwdMdl)
@@ -89,7 +79,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
                 initData();
 
                 // 设置软件界面风格
-                showNextPtn(userMdl.getAppView());
+                nextView(Char.parseAppView(object.getUserType()));
                 break;
             }
 
@@ -108,7 +98,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
             // 身份认证
             case signRs:
             {
-                showNextPtn(nextPtn);
+                nextView(nextPtn);
                 break;
             }
 
@@ -166,47 +156,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         Bean.getNone();
         Bean.getLogo(16);
 
-
-        // 读取默认配置文件
-        defProp = new java.util.Properties();
-        java.io.InputStream stream = null;
-        try
-        {
-            stream = AMpwdPtn.class.getResourceAsStream("/res/feel.amf");
-            defProp.load(stream);
-        }
-        catch (IOException ex)
-        {
-            Logs.exception(ex);
-        }
-        finally
-        {
-            Bean.closeStream(stream);
-        }
-
-        // 加载默认图标
-        defIcon = new java.util.HashMap<String, javax.swing.Icon>();
-        try
-        {
-            stream = AMpwdPtn.class.getResourceAsStream(ConsEnv.RES_ICON + "icon.png");
-            java.awt.image.BufferedImage bufImg = javax.imageio.ImageIO.read(stream);
-
-            int w = bufImg.getWidth();
-            int h = bufImg.getHeight();
-            for (int i = 0, j = 0; j < w; i += 1)
-            {
-                defIcon.put("def:" + i, new javax.swing.ImageIcon(bufImg.getSubimage(j, 0, h, h)));
-                j += h;
-            }
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-        }
-        finally
-        {
-            Bean.closeStream(stream);
-        }
+        UserMdl.loadFeelDef();
 
         // 扩展库加载
         loadExt();
@@ -251,36 +201,6 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         userPtn.setVisible(true);
     }
 
-    private void loadFormFav()
-    {
-        favProp = new java.util.Properties();
-
-        java.io.File file = new java.io.File(ConsEnv.DIR_SKIN, ConsEnv.DIR_FEEL);
-        if (!file.exists() || !file.isDirectory() || !file.canRead())
-        {
-            return;
-        }
-        file = new java.io.File(file, userMdl.getFeel() + java.io.File.separator + ConsEnv.SKIN_FEEL_FORM);
-        if (!file.exists() || !file.isFile() || !file.canRead())
-        {
-            return;
-        }
-        java.io.FileInputStream stream = null;
-        try
-        {
-            stream = new java.io.FileInputStream(file);
-            favProp.load(stream);
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-        }
-        finally
-        {
-            Bean.closeStream(stream);
-        }
-    }
-
     private void loadTrayFav()
     {
         favTray = new java.util.Properties();
@@ -318,71 +238,6 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
             loadTrayFav();
         }
         return favTray;
-    }
-
-    /**
-     * 系统默认图片
-     * @param favHash
-     * @return
-     */
-    public javax.swing.Icon getDefIcon(String favHash)
-    {
-        if (!Char.isValidate(favHash))
-        {
-            return Bean.getNone();
-        }
-
-        if (defProp.containsKey(favHash))
-        {
-            favHash = defProp.getProperty(favHash);
-        }
-        return defIcon.get("def:" + favHash);
-    }
-
-    /**
-     * 缓存用户偏好图片
-     * @param favHash
-     * @param favIcon
-     */
-    public void setFavIcon(String favHash, javax.swing.Icon favIcon)
-    {
-        if (Char.isValidate(favHash))
-        {
-//            if (defProp.containsKey(favHash))
-//            {
-//                favHash = defProp.getProperty(favHash);
-//            }
-            defIcon.put("fav:" + favHash, favIcon);
-        }
-    }
-
-    public javax.swing.Icon readFavIcon(String favHash, boolean chache)
-    {
-        if (!Char.isValidate(favHash))
-        {
-            return Bean.getNone();
-        }
-
-        if (favProp == null)
-        {
-            loadFormFav();
-        }
-
-        javax.swing.Icon icon;
-        if (!chache)
-        {
-            icon = favProp.containsKey(favHash) ? userMdl.readFeelIcon(ConsEnv.FEEL_PATH + favProp.getProperty(favHash)) : getDefIcon(favHash);
-            return icon != null ? icon : Bean.getNone();
-        }
-
-        icon = defIcon.get("fav:" + favHash);
-        if (icon == null)
-        {
-            icon = favProp.containsKey(favHash) ? userMdl.readFeelIcon(ConsEnv.FEEL_PATH + favProp.getProperty(favHash)) : getDefIcon(favHash);
-            //favProp.remove(favHash);
-            setFavIcon(favHash, icon);
-        }
-        return icon;
     }
 
     private boolean initView()
@@ -442,51 +297,8 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
             }
         });
 
-        changeView(userMdl.getCfg(ConsCfg.CFG_TRAY_PTN, "guid"));
+        changeMode(userMdl.getCfg(ConsCfg.CFG_TRAY_PTN, "guid"));
         return true;
-    }
-
-    private void showNextPtn(AppView nextPtn)
-    {
-        AMpwdPtn ptn = ptnList.get(nextPtn);
-        if (ptn == null)
-        {
-            switch (nextPtn)
-            {
-                case mexp:
-                    ptn = new MexpPtn(this, userMdl);
-                    break;
-                case mwiz:
-                    ptn = new MwizPtn(this, userMdl);
-                    break;
-                case mpad:
-                    ptn = new MpadPtn(this, userMdl);
-                    break;
-                case maoc:
-                    ptn = new MaocPtn(this, userMdl);
-                    break;
-                case mruc:
-                    ptn = new MrucPtn(this, userMdl);
-                    break;
-                case mgtd:
-                    ptn = new MgtdPtn(this, userMdl);
-                    break;
-            }
-
-            ptnList.put(nextPtn, ptn);
-
-            ptn.initView();
-            ptn.initLang();
-            ptn.initData();
-        }
-        else
-        {
-            ptn.setVisible(true);
-        }
-        ptn.showData();
-
-        mpwdPtn = ptn;
-        currPtn = nextPtn;
     }
 
     public AMpwdPtn getMpwdPtn()
@@ -545,17 +357,17 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         System.exit(status);
     }
 
-    public void hideJPopupMenu()
+    public void hidePopupMenu()
     {
         trayMenu.setVisible(false);
     }
 
-    public void showLastPtn()
+    public void showLast()
     {
-        showViewPtn(currPtn);
+        showView(appView);
     }
 
-    public void showViewPtn(AppView nextPtn)
+    public void showView(AppView nextPtn)
     {
         if (mpwdPtn == null || nextPtn == null)
         {
@@ -564,19 +376,41 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
 
         if (mpwdPtn.isVisible())
         {
-            if (currPtn == nextPtn)
+            if (appView == nextPtn)
             {
                 mpwdPtn.toFront();
                 return;
             }
 
             mpwdPtn.setVisible(false);
-            showNextPtn(nextPtn);
+            nextView(nextPtn);
             return;
         }
 
         this.nextPtn = nextPtn;
         getUserPtn(AuthLog.signRs, this);
+    }
+
+    private void nextView(AppView nextView)
+    {
+        AMpwdPtn ptn = ptnList.get(nextView);
+        if (ptn == null)
+        {
+            ptn = AMpwdPtn.createMpwdPtn(nextView, this, userMdl);
+            ptnList.put(nextView, ptn);
+        }
+        else
+        {
+            ptn.setVisible(true);
+        }
+        ptn.showData();
+
+        mpwdPtn = ptn;
+        appView = nextView;
+    }
+
+    public void showTips(String title, String message)
+    {
     }
 
     public UserPtn getUserPtn(AuthLog view, IBackCall<AuthLog, UserDto> call)
@@ -595,13 +429,13 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         return ptn;
     }
 
-    public void changeView()
+    public void changeMode()
     {
         String view = userMdl.getCfg(ConsCfg.CFG_TRAY_PTN, "guid");
-        changeView(ConsCfg.DEF_TRAY.equals(view) ? "guid" : ConsCfg.DEF_TRAY);
+        changeMode(ConsCfg.DEF_TRAY.equals(view) ? "guid" : ConsCfg.DEF_TRAY);
     }
 
-    public void changeView(String view)
+    public void changeMode(String view)
     {
         javax.swing.AbstractButton button = menuPtn.getButton("viewPtn");
         if (!java.awt.SystemTray.isSupported())
@@ -660,10 +494,10 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         userMdl.setCfg(ConsCfg.CFG_TRAY_PTN, "guid");
     }
 
-    public void showTips(String title, String message)
-    {
-    }
-
+    /**
+     * 动态切换界面皮肤
+     * @param lafClass
+     */
     public void changeSkin(String lafClass)
     {
         boolean wasDecoratedByOS = !(mpwdPtn.isUndecorated());

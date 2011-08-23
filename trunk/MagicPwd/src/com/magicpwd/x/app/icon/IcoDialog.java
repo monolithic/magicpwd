@@ -17,7 +17,6 @@
 package com.magicpwd.x.app.icon;
 
 import com.magicpwd.__a.ADialog;
-import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
@@ -25,6 +24,7 @@ import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
+import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
 
 /**
@@ -39,13 +39,15 @@ public class IcoDialog extends ADialog
     private java.io.File iconHome;
     private String iconPath;
     private String iconHash;
-    private AMpwdPtn formPtn;
+    private java.awt.Window window;
+    private UserMdl userMdl;
     private IBackCall<String, String> backCall;
 
-    public IcoDialog(AMpwdPtn mpwdPtn, IBackCall<String, String> backCall)
+    public IcoDialog(java.awt.Window window, UserMdl userMdl, IBackCall<String, String> backCall)
     {
-        super(mpwdPtn, true);
-        this.formPtn = mpwdPtn;
+        super(window, true);
+        this.window = window;
+        this.userMdl = userMdl;
         this.backCall = backCall;
     }
 
@@ -128,7 +130,7 @@ public class IcoDialog extends ADialog
         setIconImage(Bean.getLogo(16));
         setResizable(false);
         pack();
-        Bean.centerForm(this, formPtn);
+        Bean.centerForm(this, window);
     }
 
     public void initLang()
@@ -144,12 +146,12 @@ public class IcoDialog extends ADialog
 
     public void initData()
     {
-        btScrollL.setIcon(formPtn.getFeelIcon("mexp-edit-move-left", false));
-        btScrollR.setIcon(formPtn.getFeelIcon("mexp-edit-move-right", false));
+        btScrollL.setIcon(userMdl.readFeelIcon("mexp-edit-move-left"));
+        btScrollR.setIcon(userMdl.readFeelIcon("mexp-edit-move-right"));
 
-        iconHome = new java.io.File(formPtn.getUserMdl().getDatPath(), ConsEnv.DIR_ICO);
+        iconHome = new java.io.File(userMdl.getDatPath(), ConsEnv.DIR_ICO);
 
-        icoModel = new IcoModel(formPtn.getUserMdl());
+        icoModel = new IcoModel(userMdl);
         tbIconGrid.setModel(icoModel);
         tbIconGrid.setRowHeight(icoModel.getRowHeight());
 
