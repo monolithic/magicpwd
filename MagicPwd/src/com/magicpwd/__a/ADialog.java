@@ -25,9 +25,9 @@ import com.magicpwd._util.Bean;
 public abstract class ADialog extends javax.swing.JDialog
 {
 
-    public ADialog(AMpwdPtn owner, boolean modal)
+    public ADialog(java.awt.Window owner, boolean modal)
     {
-        super(owner, modal);
+        super(owner, modal ? ModalityType.APPLICATION_MODAL : ModalityType.MODELESS);
     }
 
     abstract protected boolean hideDialog();

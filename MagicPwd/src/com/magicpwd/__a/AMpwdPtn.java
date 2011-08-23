@@ -24,6 +24,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._bean.mail.Connect;
 import com.magicpwd._comp.WDialog;
+import com.magicpwd._enum.AppView;
 import com.magicpwd._enum.AuthLog;
 import com.magicpwd._user.UserDto;
 import com.magicpwd.m.mail.Reader;
@@ -41,6 +42,12 @@ import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
 import com.magicpwd.v.app.MenuPtn;
+import com.magicpwd.v.app.maoc.MaocPtn;
+import com.magicpwd.v.app.mexp.MexpPtn;
+import com.magicpwd.v.app.mgtd.MgtdPtn;
+import com.magicpwd.v.app.mpad.MpadPtn;
+import com.magicpwd.v.app.mruc.MrucPtn;
+import com.magicpwd.v.app.mwiz.MwizPtn;
 import com.magicpwd.v.app.tray.TrayPtn;
 
 /**
@@ -59,6 +66,54 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
     {
         this.trayPtn = trayPtn;
         this.userMdl = userMdl;
+    }
+
+    public static AMpwdPtn createMpwdPtn(AppView appView, TrayPtn trayPtn, UserMdl userMdl)
+    {
+        AMpwdPtn ptn;
+        switch (appView)
+        {
+            case mexp:
+                ptn = new MexpPtn(trayPtn, userMdl);
+                ptn.initView();
+                ptn.initLang();
+                ptn.initData();
+                break;
+            case mwiz:
+                ptn = new MwizPtn(trayPtn, userMdl);
+                ptn.initView();
+                ptn.initLang();
+                ptn.initData();
+                break;
+            case mpad:
+                ptn = new MpadPtn(trayPtn, userMdl);
+                ptn.initView();
+                ptn.initLang();
+                ptn.initData();
+                break;
+            case maoc:
+                ptn = new MaocPtn(trayPtn, userMdl);
+                ptn.initView();
+                ptn.initLang();
+                ptn.initData();
+                break;
+            case mruc:
+                ptn = new MrucPtn(trayPtn, userMdl);
+                ptn.initView();
+                ptn.initLang();
+                ptn.initData();
+                break;
+            case mgtd:
+                ptn = new MgtdPtn(trayPtn, userMdl);
+                ptn.initView();
+                ptn.initLang();
+                ptn.initData();
+                break;
+            default:
+                ptn = null;
+                break;
+        }
+        return ptn;
     }
 
     public abstract MenuPtn getMenuPtn();
@@ -123,7 +178,7 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
 
     public javax.swing.Icon getFeelIcon(String favHash, boolean chache)
     {
-        return trayPtn.readFavIcon(favHash, chache);
+        return userMdl.readFeelFav(favHash, chache);
     }
 
     public String getCfgText(String key)

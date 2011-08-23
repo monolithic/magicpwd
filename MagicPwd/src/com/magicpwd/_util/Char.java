@@ -17,6 +17,7 @@
 package com.magicpwd._util;
 
 import com.magicpwd._cons.ConsEnv;
+import com.magicpwd._enum.AppView;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
@@ -40,6 +41,23 @@ public class Char
             }
         }
         return src;
+    }
+
+    public static AppView parseAppView(String appView)
+    {
+        if (Char.isValidate(appView, 4))
+        {
+            appView = appView.toLowerCase();
+            try
+            {
+                return AppView.valueOf(appView);
+            }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+            }
+        }
+        return AppView.mwiz;
     }
 
     public static java.util.List<String> split(String src, String txt)

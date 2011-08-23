@@ -1118,7 +1118,7 @@ public class MenuPtn
         boolean validate = Char.isValidate(hash);
         if (validate)
         {
-            return trayPtn.readFavIcon(hash, true);
+            return userMdl.readFeelFav(hash, true);
         }
 
         String path = element.attributeValue("path");
@@ -1127,14 +1127,14 @@ public class MenuPtn
             javax.swing.Icon icon;
             if (path.toLowerCase().startsWith("var:"))
             {
-                icon = trayPtn.readFavIcon(path.substring(4), validate);
+                icon = userMdl.readFeelFav(path.substring(4), validate);
             }
             else
             {
                 icon = userMdl.readFeelIcon(path);
                 if (validate)
                 {
-                    trayPtn.setFavIcon(hash, icon);
+                    userMdl.setFeelFav(hash, icon);
                 }
             }
             return icon;

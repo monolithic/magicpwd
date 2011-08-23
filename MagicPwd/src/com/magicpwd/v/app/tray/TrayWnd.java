@@ -195,7 +195,7 @@ public class TrayWnd extends javax.swing.JWindow implements ITrayView, java.awt.
         }
         else if (evt.getClickCount() > 1)
         {
-            trayPtn.showViewPtn(trayImg.getAppView());
+            trayPtn.showView(trayImg.getAppView());
         }
     }
 

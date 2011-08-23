@@ -30,6 +30,7 @@ import com.magicpwd._util.Bean;
 import com.magicpwd._util.Date;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.mwiz.KeysMdl;
+import com.magicpwd.v.app.mwiz.EditPtn;
 import com.magicpwd.v.app.mwiz.MwizPtn;
 import com.magicpwd.x.app.icon.IcoDialog;
 
@@ -48,15 +49,17 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
 {
 
     private MwizPtn mwizPtn;
+    private EditPtn editPtn;
     private KeysMdl keysMdl;
     private WTextBox nameBox;
     private WTextBox metaBox;
     private WTextBox hintBox;
     private java.text.DateFormat format;
 
-    public HeadBean(MwizPtn normPtn)
+    public HeadBean(MwizPtn mwizPtn, EditPtn editPtn)
     {
-        this.mwizPtn = normPtn;
+        this.mwizPtn = mwizPtn;
+        this.editPtn = editPtn;
     }
 
     public void initView()
@@ -319,7 +322,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
 
     private void ib_KeysIconActionPerformed(java.awt.event.ActionEvent evt)
     {
-        IcoDialog ico = new IcoDialog(mwizPtn, this);
+        IcoDialog ico = new IcoDialog(editPtn, mwizPtn.getUserMdl(), this);
         ico.initView();
         ico.initLang();
         ico.initData();

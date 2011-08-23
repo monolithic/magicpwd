@@ -39,7 +39,7 @@ public class MgtdAction extends ATrayAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        trayPtn.showViewPtn(AppView.mgtd);
+        trayPtn.showView(AppView.mgtd);
     }
 
     @Override

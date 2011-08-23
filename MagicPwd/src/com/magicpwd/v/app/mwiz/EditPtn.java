@@ -63,7 +63,7 @@ public class EditPtn extends ADialog
         guidBean.initView();
         pl_EditArea.add("guid", guidBean);
 
-        headBean = new HeadBean(mwizPtn);
+        headBean = new HeadBean(mwizPtn, this);
         headBean.initView();
         pl_EditArea.add("head", headBean);
 

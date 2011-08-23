@@ -32,7 +32,7 @@ public class ViewAction extends ATrayAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        trayPtn.changeView();
+        trayPtn.changeMode();
     }
 
     @Override

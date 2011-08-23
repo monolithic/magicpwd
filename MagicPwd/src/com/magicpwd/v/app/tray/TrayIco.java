@@ -105,7 +105,7 @@ public class TrayIco extends java.awt.TrayIcon implements ITrayView, java.awt.ev
         }
         else if (e.getClickCount() > 1)
         {
-            trayPtn.showLastPtn();
+            trayPtn.showLast();
         }
     }
 
