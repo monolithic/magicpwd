@@ -323,9 +323,9 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
             DBAccess.locked = true;
 
             AMpwdPtn ptn;
-            for (AppView appView : ptnList.keySet())
+            for (AppView view : ptnList.keySet())
             {
-                ptn = ptnList.get(appView);
+                ptn = ptnList.get(view);
                 if (ptn != null)
                 {
                     ptn.endSave();
@@ -398,6 +398,12 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
         {
             ptn = AMpwdPtn.createMpwdPtn(nextView, this, userMdl);
             ptnList.put(nextView, ptn);
+            if (ptn != null)
+            {
+                ptn.initView();
+                ptn.initLang();
+                ptn.initData();
+            }
         }
         else
         {

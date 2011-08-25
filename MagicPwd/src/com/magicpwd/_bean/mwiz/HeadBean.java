@@ -247,7 +247,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
         String metaName = tf_MetaName.getText();
         if (!com.magicpwd._util.Char.isValidate(metaName))
         {
-            Lang.showMesg(mwizPtn, LangRes.P30FAA1A, "记录标题不能为空!");
+            Lang.showMesg(editPtn, LangRes.P30FAA1A, "记录标题不能为空!");
             tf_MetaName.requestFocus();
             return false;
         }
@@ -267,7 +267,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
         {
             if (!hint.setData(hintDate))
             {
-                Lang.showMesg(mwizPtn, LangRes.P30F7A37, "您输入的日期格式无效，请重新输入！");
+                Lang.showMesg(editPtn, LangRes.P30F7A37, "您输入的日期格式无效，请重新输入！");
                 tf_HintDate.requestFocus();
                 return false;
             }
@@ -275,7 +275,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
 
             if (!com.magicpwd._util.Char.isValidate(hintName))
             {
-                Lang.showMesg(mwizPtn, LangRes.P30F7A36, "请输入过期提示！");
+                Lang.showMesg(editPtn, LangRes.P30F7A36, "请输入过期提示！");
                 tf_HintName.requestFocus();
                 return false;
             }

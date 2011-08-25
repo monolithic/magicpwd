@@ -21,6 +21,7 @@ import com.magicpwd.__i.IHintView;
 import com.magicpwd._comn.mpwd.Hint;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Date;
+import com.magicpwd.m.HintMdl;
 import com.magicpwd.m.UserMdl;
 
 /**
@@ -92,7 +93,11 @@ public class HintBar extends javax.swing.JPanel implements IHintView
     {
         if (backCall != null)
         {
-            backCall.callBack("hint", userMdl.getHintMdl().getTodoList());
+            HintMdl hintMdl = userMdl.getHintMdl();
+            java.util.List<Hint> hintList = new java.util.ArrayList<Hint>();
+            hintList.addAll(hintMdl.getTodoList());
+            hintList.addAll(hintMdl.getHistList());
+            backCall.callBack("hint", hintList);
         }
     }
 

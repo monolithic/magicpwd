@@ -18,6 +18,7 @@ package com.magicpwd._bean.mexp;
 
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mexp.IMexpBean;
+import com.magicpwd._comn.item.HintItem;
 import com.magicpwd._comn.mpwd.Hint;
 import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._comp.BtnLabel;
@@ -44,12 +45,13 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
 {
 
     private WEditBox dataEdit;
-    private IEditItem itemData;
+    private HintItem itemData;
     private MexpPtn mexpPtn;
     private WTextBox dataBox;
     private int mgtdType;
     private int mgtdData;
     private int mgtdUnit;
+    private String mgtdHash;
     private java.util.Calendar mgtdCal;
     private java.text.DateFormat format;
 
@@ -194,7 +196,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
     @Override
     public void showData(IEditItem item)
     {
-        itemData = item;
+        itemData = (HintItem) item;
 
         taPropData.setText(item.getName());
     }
@@ -210,18 +212,57 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
     {
         if (mgtdType > 0)
         {
-            String name = saveMgtd(mgtdCal);
-            if (!Char.isValidateHash(name))
+            Mgtd mgtd = itemData.getMgtd();
+            if (mgtd == null)
             {
-                return;
+                mgtd = new Mgtd();
+                mgtd.setP30F0301(0);
+                mgtd.setP30F0302(ConsDat.MGTD_TYPE_DATETIME);
+                mgtd.setP30F0303(ConsDat.MGTD_STATUS_INIT);
+                mgtd.setP30F0304(0);
+                mgtd.setP30F0305(mgtdType);
+                mgtd.setP30F0306(ConsDat.MGTD_METHOD_NOTE);
+                mgtd.setP30F0307(0);
+                mgtd.setP30F0308(0);
+                switch (mgtdType)
+                {
+                    case ConsDat.MGTD_INTVAL_FIXTIME:
+                        mgtd.setP30F030C("定时提醒");
+                        break;
+                    case ConsDat.MGTD_INTVAL_PERIOD:
+                        mgtd.setP30F030C("周期提醒");
+                        break;
+                    case ConsDat.MGTD_INTVAL_INTVAL:
+                        mgtd.setP30F030C("间隔提醒");
+                        break;
+                    case ConsDat.MGTD_INTVAL_SPECIAL:
+                        mgtd.setP30F030C("特殊提醒");
+                        break;
+                    case ConsDat.MGTD_INTVAL_FORMULA:
+                        mgtd.setP30F030C("公式提醒");
+                        break;
+                    default:
+                        mgtd.setP30F030C("未知");
+                }
+                mgtd.setP30F030D(System.currentTimeMillis());
+                mgtd.setP30F030E(0L);
+                mgtd.setP30F030F(0L);
+                mgtd.setP30F0312(ConsDat.MGTD_UNIT_MINUTE);
+                mgtd.setP30F0313(5);
+                mgtd.setP30F0314(itemData.getName());
+                itemData.setMgtd(mgtd);
             }
-            itemData.setData(name);
-//            if (!com.magicpwd._util.Char.isValidate(data))
-//            {
-//                Lang.showMesg(mainPtn, LangRes.P30F7A36, "请输入过期提示！");
-//                taPropData.requestFocus();
-//                return;
-//            }
+
+            java.util.ArrayList<Hint> list = new java.util.ArrayList<Hint>(1);
+            Hint hint = new Hint();
+            hint.setP30F0403(mgtdCal.getTimeInMillis());
+            hint.setP30F0404(mgtdUnit);
+            hint.setP30F0405(mgtdData);
+            hint.setP30F0406("");
+            list.add(hint);
+            mgtd.setHintList(list);
+
+            itemData.setMgtd(mgtd);
         }
 
         itemData.setName(taPropData.getText());
@@ -422,6 +463,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
                 return;
             }
             taPropData.setText("定时提醒：" + cmd);
+            mgtdHash = null;
             mgtdType = ConsDat.MGTD_INTVAL_FIXTIME;
             mgtdData = 0;
             mgtdUnit = 0;
@@ -437,6 +479,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
                 return;
             }
             taPropData.setText("定时提醒：" + format.format(mgtdCal.getTime()));
+            mgtdHash = null;
             mgtdType = ConsDat.MGTD_INTVAL_FIXTIME;
             mgtdData = 0;
             mgtdUnit = 0;
@@ -452,6 +495,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
                 return;
             }
             taPropData.setText("定制的周期提醒！");
+            mgtdHash = null;
             mgtdType = ConsDat.MGTD_INTVAL_PERIOD;
             mgtdData = Integer.parseInt(matcher.group());
 
@@ -495,6 +539,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
                 return;
             }
             taPropData.setText("定制的间隔提醒！");
+            mgtdHash = null;
             mgtdType = ConsDat.MGTD_INTVAL_INTVAL;
             mgtdData = Integer.parseInt(matcher.group());
 
@@ -537,14 +582,15 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
                 return;
             }
             taPropData.setText(cmd.substring(16));
-            mgtdType = -1;
+            mgtdHash = cmd.substring(0, 16);
+            mgtdType = 0;
             return;
         }
     }
 
     private void miEditMgtdActionPerformed(java.awt.event.ActionEvent e)
     {
-        Mgtd mgtd = DBA4000.readMgtdData(mexpPtn.getUserMdl(), itemData.getData());
+        Mgtd mgtd = DBA4000.readMgtd(mexpPtn.getUserMdl(), itemData.getData());
         if (mgtd == null)
         {
             return;
@@ -555,61 +601,6 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
         mgtdDlg.initView();
         mgtdDlg.initLang();
         mgtdDlg.initData(mgtd);
-    }
-
-    private String saveMgtd(java.util.Calendar cal)
-    {
-        Mgtd mgtd = new Mgtd();
-        mgtd.setP30F0301(0);
-        mgtd.setP30F0302(ConsDat.MGTD_TYPE_DATETIME);
-        mgtd.setP30F0303(ConsDat.MGTD_STATUS_INIT);
-        mgtd.setP30F0304(0);
-        mgtd.setP30F0305(mgtdType);
-        mgtd.setP30F0306(ConsDat.MGTD_METHOD_NOTE);
-        mgtd.setP30F0307(0);
-        mgtd.setP30F0308(0);
-        mgtd.setP30F0309(itemData.getData());
-        switch (mgtdType)
-        {
-            case ConsDat.MGTD_INTVAL_FIXTIME:
-                mgtd.setP30F030C("定时提醒");
-                break;
-            case ConsDat.MGTD_INTVAL_PERIOD:
-                mgtd.setP30F030C("周期提醒");
-                break;
-            case ConsDat.MGTD_INTVAL_INTVAL:
-                mgtd.setP30F030C("间隔提醒");
-                break;
-            case ConsDat.MGTD_INTVAL_SPECIAL:
-                mgtd.setP30F030C("特殊提醒");
-                break;
-            case ConsDat.MGTD_INTVAL_FORMULA:
-                mgtd.setP30F030C("公式提醒");
-                break;
-            default:
-                mgtd.setP30F030C("未知");
-        }
-        mgtd.setP30F030D(System.currentTimeMillis());
-        mgtd.setP30F030E(0L);
-        mgtd.setP30F030F(0L);
-        mgtd.setP30F0312(ConsDat.MGTD_UNIT_MINUTE);
-        mgtd.setP30F0313(5);
-        mgtd.setP30F0314(itemData.getName());
-
-        java.util.ArrayList<Hint> list = new java.util.ArrayList<Hint>(1);
-        Hint hint = new Hint();
-        hint.setP30F0403(cal.getTimeInMillis());
-        hint.setP30F0404(mgtdUnit);
-        hint.setP30F0405(mgtdData);
-        hint.setP30F0406("");
-        list.add(hint);
-        mgtd.setHintList(list);
-
-        if (DBA4000.saveMgtdData(mexpPtn.getUserMdl(), mgtd))
-        {
-            return mgtd.getP30F0309();
-        }
-        return null;
     }
     private javax.swing.JLabel lbPropName;
     private BtnLabel blPropName;

@@ -19,7 +19,7 @@ package com.magicpwd._comn.mpwd;
 import java.io.Serializable;
 
 /**
- *
+ * 计划任务
  * @author Aven
  */
 public class Mgtd implements Serializable

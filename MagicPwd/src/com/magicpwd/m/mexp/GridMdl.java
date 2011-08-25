@@ -73,7 +73,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     public void clear()
     {
         ls_ItemList.clear();
-        keys.setDefault();
+        mkey.setDefault();
         setModified(false);
         fireTableDataChanged();
     }
@@ -321,9 +321,9 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
 
     public boolean setKeysKind(String hash)
     {
-        boolean b = keys.getP30F0106().equals(hash);
-        keys.setP30F0106(hash);
-        DBA4000.saveKeysData(userMdl, keys);
+        boolean b = mkey.getP30F0106().equals(hash);
+        mkey.setP30F0106(hash);
+        DBA4000.saveKeysData(userMdl, mkey);
         return !b;
     }
 
@@ -338,7 +338,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
 
     public int getSequence()
     {
-        return keys.getP30F0101();
+        return mkey.getP30F0101();
     }
 
     public void fireTableChanged(javax.swing.event.TableModelEvent e)

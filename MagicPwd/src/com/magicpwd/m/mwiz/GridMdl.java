@@ -147,7 +147,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     public void clear()
     {
         ls_ItemList.clear();
-        keys.setDefault();
+        mkey.setDefault();
         setModified(false);
     }
 
@@ -208,7 +208,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
         {
             return;
         }
-        this.keys = ls_KeysList.get(row);
+        this.mkey = ls_KeysList.get(row);
         setKeysLabel(label);
     }
 
@@ -218,7 +218,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
         {
             return;
         }
-        this.keys = ls_KeysList.get(row);
+        this.mkey = ls_KeysList.get(row);
         setKeysMajor(major);
     }
 
