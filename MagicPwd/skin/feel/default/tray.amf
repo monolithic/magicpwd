@@ -38,8 +38,8 @@ cell[0,0].icon=mwiz.png
 cell[0,2].view=mgtd
 cell[0,2].icon=mgtd.png
 
-cell[1,1].view=mexp
-cell[1,1].icon=mexp.png
+cell[1,1].view=mpro
+cell[1,1].icon=mpro.png
 
 cell[2,0].view=mpad
 cell[2,0].icon=mpad.png
