@@ -94,7 +94,7 @@ public final class HintMdl
     public synchronized boolean reload(boolean forced)
     {
         calendar = java.util.Calendar.getInstance();
-        
+
         showTime();
 
         // 读取数据信息
@@ -117,10 +117,12 @@ public final class HintMdl
         todoList.clear();
         histList.clear();
         java.util.HashMap<String, Integer> updtList = new java.util.HashMap<String, Integer>();
+        int x;
         for (Hint hint : mgtdList)
         {
             // 等提醒
-            if (Time.isOnTime(calendar, hint))
+            x = Time.isOnTime(calendar, 1800000, hint);
+            if (x == 0)
             {
                 System.out.println(com.magicpwd._util.Date.getFieldDateFormat().format(new java.util.Date(hint.getP30F0403().longValue())));
                 todoList.add(hint);
@@ -131,7 +133,7 @@ public final class HintMdl
                 }
             }
             // 已过期
-            else
+            else if (x == -1)
             {
                 histList.add(hint);
                 // 初始化或进行中的任务，修改为已过期
