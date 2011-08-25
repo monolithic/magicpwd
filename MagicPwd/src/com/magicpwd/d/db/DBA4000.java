@@ -297,7 +297,7 @@ public class DBA4000
      * @param list
      * @return
      */
-    public static boolean readKeysList(UserMdl userMdl, String kindHash, List<Mkey> list)
+    public static boolean listRecHeaderByCat(UserMdl userMdl, String kindHash, List<Mkey> list)
     {
         // 数据库连接初始化
         DBAccess dba = new DBAccess();
@@ -326,7 +326,65 @@ public class DBA4000
         }
     }
 
-    private static String text2Query(String text)
+    public static boolean listRecHeaderByLabel(UserMdl userMdl, int label, List<Mkey> list)
+    {
+        // 数据库连接初始化
+        DBAccess dba = new DBAccess();
+
+        try
+        {
+            dba.init(userMdl);
+
+            // 查询语句拼接
+            dba.addTable(DBC4000.P30F0100);
+            dba.addWhere(DBC4000.P30F0102, label);
+            addUserSort(dba, userMdl);
+            addDataSort(dba, userMdl);
+
+            getNameData(dba.executeSelect(), list);
+            return true;
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            return false;
+        }
+        finally
+        {
+            dba.dispose();
+        }
+    }
+
+    public static boolean listRecHeaderByMajor(UserMdl userMdl, int major, List<Mkey> list)
+    {
+        // 数据库连接初始化
+        DBAccess dba = new DBAccess();
+
+        try
+        {
+            dba.init(userMdl);
+
+            // 查询语句拼接
+            dba.addTable(DBC4000.P30F0100);
+            dba.addWhere(DBC4000.P30F0103, major);
+            addUserSort(dba, userMdl);
+            addDataSort(dba, userMdl);
+
+            getNameData(dba.executeSelect(), list);
+            return true;
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            return false;
+        }
+        finally
+        {
+            dba.dispose();
+        }
+    }
+
+    private static String text2Like(String text)
     {
         text = Util.text2DB(text.toLowerCase().replace('　', ' ').replace('＋', '+'));
         return text.replaceFirst("^[+\\s]*", "%").replaceFirst("[+\\s]*$", "%").replaceAll("[+%\\s]+", "%");
@@ -354,11 +412,48 @@ public class DBA4000
 
             // 查询语句拼接
             dba.addTable(DBC4000.P30F0100);
-            dba.addWhere(com.magicpwd._util.Char.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC4000.P30F0109, DBC4000.P30F010A, text2Query(text)));
+            dba.addWhere(com.magicpwd._util.Char.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC4000.P30F0109, DBC4000.P30F010A, text2Like(text)));
             addUserSort(dba, userMdl);
             addDataSort(dba, userMdl);
 
             getNameData(dba.executeSelect(), list);
+            return true;
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            return false;
+        }
+        finally
+        {
+            dba.dispose();
+        }
+    }
+
+    public static boolean findHintList(UserMdl userMdl, java.util.List<Hint> hintList, java.util.List<Mkey> mkeyList)
+    {
+        if (hintList == null || hintList.size() < 1)
+        {
+            return false;
+        }
+
+        DBAccess dba = new DBAccess();
+
+        try
+        {
+            dba.init(userMdl);
+
+            StringBuilder buf = new StringBuilder();
+            for (Hint hint : hintList)
+            {
+                buf.append(",'").append(hint.getP30F0402()).append('\'');
+            }
+            dba.addTable(DBC4000.P30F0100);
+            dba.addWhere(DBC4000.P30F010E, "in", '(' + buf.substring(1) + ')', false);
+
+            ResultSet rest = dba.executeSelect();
+            getNameData(rest, mkeyList);
+            rest.close();
             return true;
         }
         catch (Exception exp)
@@ -415,50 +510,13 @@ public class DBA4000
         }
     }
 
-    public static boolean findHintList(UserMdl userMdl, java.util.List<Hint> hintList, java.util.List<Mkey> mkeyList)
-    {
-        if (hintList == null || hintList.size() < 1)
-        {
-            return false;
-        }
-
-        DBAccess dba = new DBAccess();
-
-        try
-        {
-            dba.init(userMdl);
-
-            StringBuilder buf = new StringBuilder();
-            for (Hint hint : hintList)
-            {
-                buf.append(",'").append(hint.getP30F0402()).append('\'');
-            }
-            dba.addTable(DBC4000.P30F0100);
-            dba.addWhere(DBC4000.P30F010E, "in", '(' + buf.substring(1) + ')', false);
-
-            ResultSet rest = dba.executeSelect();
-            getNameData(rest, mkeyList);
-            rest.close();
-            return true;
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-            return false;
-        }
-        finally
-        {
-            dba.dispose();
-        }
-    }
-
     /**
      * 查询在当前日期到指定日期之间的口令数据
      * @param time
      * @param list
      * @return
      */
-    public static boolean findHintList(UserMdl userMdl, java.sql.Timestamp s, java.sql.Timestamp t, List<Mgtd> list)
+    public static boolean listRecHeaderByTime(UserMdl userMdl, long s, long t, List<Mkey> list)
     {
         DBAccess dba = new DBAccess();
 
@@ -466,26 +524,48 @@ public class DBA4000
         {
             dba.init(userMdl);
 
-            long now = System.currentTimeMillis();
-
+            dba.addTable(DBC4000.P30F0100);
             dba.addTable(DBC4000.P30F0300);
+            dba.addColumn(DBC4000.P30F0101);
+            dba.addColumn(DBC4000.P30F0102);
+            dba.addColumn(DBC4000.P30F0103);
+            dba.addColumn(DBC4000.P30F0104);
+            dba.addColumn(DBC4000.P30F0105);
+            dba.addColumn(DBC4000.P30F0106);
+            dba.addColumn(DBC4000.P30F0107);
+            dba.addColumn(DBC4000.P30F0108);
+            dba.addColumn(DBC4000.P30F0109);
+            dba.addColumn(DBC4000.P30F010A);
+            dba.addColumn(DBC4000.P30F010B);
+            dba.addColumn(DBC4000.P30F010C);
+            dba.addColumn(DBC4000.P30F010D);
+            dba.addColumn(DBC4000.P30F010E);
+            dba.addColumn(DBC4000.P30F010F);
+            dba.addColumn(DBC4000.P30F0110);
+            dba.addColumn(DBC4000.P30F0111);
+            dba.addWhere(DBC4000.P30F010E, DBC4000.P30F0309, false);
+
             StringBuilder buf = new StringBuilder();
-            buf.append("(");
-            buf.append(DBC4000.P30F0302).append('=').append(ConsDat.MGTD_INTVAL_SPECIAL).append(" OR ");
-            buf.append(DBC4000.P30F030D).append("<=").append(now).append(" AND ");
-            buf.append(DBC4000.P30F030E).append(">=").append(now);
-            buf.append(") OR (");
-            buf.append(DBC4000.P30F030F).append(">=").append(s.getTime()).append(" AND ");
-            buf.append(DBC4000.P30F030F).append("<=").append(t.getTime());
-            buf.append(")");
+            buf.append(DBC4000.P30F0302).append('=').append(ConsDat.MGTD_INTVAL_SPECIAL);
+            buf.append(" OR ((");
+            buf.append(DBC4000.P30F030D).append("=0 OR ");
+            buf.append(DBC4000.P30F030D).append("<=").append(s).append(") AND (");
+            buf.append(DBC4000.P30F030E).append("=0 OR ");
+            buf.append(DBC4000.P30F030E).append(">=").append(s);
+            buf.append(")) OR ((");
+            buf.append(DBC4000.P30F030D).append("=0 OR ");
+            buf.append(DBC4000.P30F030D).append("<=").append(t).append(") AND (");
+            buf.append(DBC4000.P30F030E).append("=0 OR ");
+            buf.append(DBC4000.P30F030E).append(">=").append(t);
+            buf.append("))");
             dba.addWhere(buf.toString());
 
-            ResultSet rest = dba.executeSelect();
-            while (rest.next())
+            ResultSet rset = dba.executeSelect();
+            while (rset.next())
             {
-                list.add(loadMgtd(rest));
+                getNameData(dba.executeSelect(), list);
             }
-            rest.close();
+            rset.close();
             return true;
         }
         catch (Exception exp)
@@ -619,9 +699,9 @@ public class DBA4000
             StringBuilder buf = new StringBuilder();
             buf.append(DBC4000.P30F0305).append('=').append(ConsDat.MGTD_INTVAL_STARTUP);
             buf.append(" OR (");
-            buf.append(com.magicpwd._util.Char.format("({0}=0 OR {0} < {1})", DBC4000.P30F030D, now));
+            buf.append(com.magicpwd._util.Char.format("({0}=0 OR {0} < {1})", DBC4000.P30F030D, now));//已经开始了的
             buf.append(" AND ");
-            buf.append(com.magicpwd._util.Char.format("({0}=0 OR {0} > {1})", DBC4000.P30F030E, now));
+            buf.append(com.magicpwd._util.Char.format("({0}=0 OR {0} > {1})", DBC4000.P30F030E, now));//还末结束了的
             buf.append(") OR ");
             buf.append(DBC4000.P30F0303).append(" IN (").append(ConsDat.MGTD_STATUS_READY).append(',').append(ConsDat.MGTD_STATUS_INIT).append(")");
             dba.addWhere(buf.toString());
@@ -788,7 +868,7 @@ public class DBA4000
             dba.addColumn(DBC4000.P30F0109);
             dba.addColumn(DBC4000.P30F010A);
             dba.addWhere(DBC4000.P30F0105, userMdl.getCode());
-            dba.addWhere(com.magicpwd._util.Char.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC4000.P30F0109, DBC4000.P30F010A, text2Query(text)));
+            dba.addWhere(com.magicpwd._util.Char.format("LOWER({0}) LIKE '{2}' OR LOWER({1}) LIKE '{2}'", DBC4000.P30F0109, DBC4000.P30F010A, text2Like(text)));
             //dba.addWhere(DBC4000.P30F0102, ConsDat.PWDS_MODE_1);
             dba.addWhere(DBC4000.P30F0106, ConsDat.HASH_NOTE);
 
