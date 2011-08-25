@@ -16,14 +16,14 @@
  */
 package com.magicpwd.e.mpro.edit;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._cons.ConsDat;
 
 /**
  *
  * @author Aven
  */
-public class ChangeListAction extends AMexpAction
+public class ChangeListAction extends AMproAction
 {
 
     public ChangeListAction()
@@ -33,7 +33,7 @@ public class ChangeListAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mexpPtn.changeBean(ConsDat.INDX_LIST);
+        mproPtn.changeBean(ConsDat.INDX_LIST);
     }
 
     @Override

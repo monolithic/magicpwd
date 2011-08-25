@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.kind;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
@@ -26,7 +26,7 @@ import com.magicpwd.r.KindTN;
  *
  * @author Amon
  */
-public class DeleteAction extends AMexpAction
+public class DeleteAction extends AMproAction
 {
 
     public DeleteAction()
@@ -36,7 +36,7 @@ public class DeleteAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        javax.swing.tree.TreePath path = mexpPtn.getSelectedKindValue();
+        javax.swing.tree.TreePath path = mproPtn.getSelectedKindValue();
         if (path == null)
         {
             return;
@@ -57,13 +57,13 @@ public class DeleteAction extends AMexpAction
         Kind kind = (Kind) node.getUserObject();
         if ("0".equals(kind.getC2010203()))
         {
-            Lang.showMesg(mexpPtn, null, "无法删除默认类别！");
+            Lang.showMesg(mproPtn, null, "无法删除默认类别！");
             return;
         }
 
-        if (Lang.showFirm(mexpPtn, LangRes.P30F7A1A, "执行此操作后，此类别下的其它类别将会移动到根类别下，\n确认要删除“{0}”类别么？", kind.getC2010206()) == javax.swing.JOptionPane.YES_OPTION)
+        if (Lang.showFirm(mproPtn, LangRes.P30F7A1A, "执行此操作后，此类别下的其它类别将会移动到根类别下，\n确认要删除“{0}”类别么？", kind.getC2010206()) == javax.swing.JOptionPane.YES_OPTION)
         {
-            mexpPtn.getTreeMdl().wRemove(path);
+            mproPtn.getTreeMdl().wRemove(path);
         }
     }
 

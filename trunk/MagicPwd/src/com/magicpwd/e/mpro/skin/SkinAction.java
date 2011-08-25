@@ -16,13 +16,13 @@
  */
 package com.magicpwd.e.mpro.skin;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 
 /**
  *
  * @author aven
  */
-public class SkinAction extends AMexpAction
+public class SkinAction extends AMproAction
 {
 
     public SkinAction()

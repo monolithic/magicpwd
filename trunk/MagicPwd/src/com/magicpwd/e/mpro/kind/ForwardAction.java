@@ -16,13 +16,13 @@
  */
 package com.magicpwd.e.mpro.kind;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 
 /**
  *
  * @author Amon
  */
-public class ForwardAction extends AMexpAction
+public class ForwardAction extends AMproAction
 {
 
     public ForwardAction()
@@ -32,7 +32,7 @@ public class ForwardAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mexpPtn.forwardSelectedKind();
+        mproPtn.forwardSelectedKind();
     }
 
     @Override

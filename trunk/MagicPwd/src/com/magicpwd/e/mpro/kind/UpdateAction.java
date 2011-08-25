@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.kind;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._util.Lang;
@@ -27,7 +27,7 @@ import com.magicpwd.v.app.mpro.KindDlg;
  *
  * @author Amon
  */
-public class UpdateAction extends AMexpAction implements IBackCall<String, Kind>
+public class UpdateAction extends AMproAction implements IBackCall<String, Kind>
 {
 
     public UpdateAction()
@@ -37,7 +37,7 @@ public class UpdateAction extends AMexpAction implements IBackCall<String, Kind>
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        javax.swing.tree.TreePath path = mexpPtn.getSelectedKindValue();
+        javax.swing.tree.TreePath path = mproPtn.getSelectedKindValue();
         if (path == null)
         {
             return;
@@ -58,11 +58,11 @@ public class UpdateAction extends AMexpAction implements IBackCall<String, Kind>
         Kind kind = (Kind) node.getUserObject();
         if ("0".equals(kind.getC2010203()))
         {
-            Lang.showMesg(mexpPtn, null, "无法更新默认类别！");
+            Lang.showMesg(mproPtn, null, "无法更新默认类别！");
             return;
         }
 
-        KindDlg kindDlg = new KindDlg(mexpPtn, this);
+        KindDlg kindDlg = new KindDlg(mproPtn, this);
         kindDlg.initView();
         kindDlg.initLang();
         kindDlg.initData(kind);
@@ -84,7 +84,7 @@ public class UpdateAction extends AMexpAction implements IBackCall<String, Kind>
     {
         if (OPTIONS_APPLY.equalsIgnoreCase(options))
         {
-            mexpPtn.updateKindBySelected(object);
+            mproPtn.updateKindBySelected(object);
             return true;
         }
         return false;

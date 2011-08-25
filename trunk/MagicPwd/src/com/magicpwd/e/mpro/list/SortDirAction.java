@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.list;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._enum.AppView;
 
@@ -24,7 +24,7 @@ import com.magicpwd._enum.AppView;
  *
  * @author Amon
  */
-public class SortDirAction extends AMexpAction
+public class SortDirAction extends AMproAction
 {
 
     public SortDirAction()
@@ -34,8 +34,8 @@ public class SortDirAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mexpPtn.getUserMdl().setCfg(AppView.mexp, ConsCfg.CFG_VIEW_LIST_ASC, e.getActionCommand());
-        mexpPtn.findLast();
+        mproPtn.getUserMdl().setCfg(AppView.mpro, ConsCfg.CFG_VIEW_LIST_ASC, e.getActionCommand());
+        mproPtn.findLast();
     }
 
     @Override

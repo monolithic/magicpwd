@@ -17,7 +17,7 @@
 package com.magicpwd._bean.mpro;
 
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd.__i.mpro.IMexpBean;
+import com.magicpwd.__i.mpro.IMproBean;
 import com.magicpwd._bean.ALinkBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
@@ -32,7 +32,7 @@ import com.magicpwd.v.app.mpro.MproPtn;
  * @author Amon
  * 
  */
-public class LinkBean extends ALinkBean implements IMexpBean
+public class LinkBean extends ALinkBean implements IMproBean
 {
 
     private MproPtn mainPtn;

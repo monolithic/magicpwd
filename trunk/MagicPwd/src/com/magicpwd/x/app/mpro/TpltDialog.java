@@ -42,7 +42,7 @@ import java.awt.event.MouseEvent;
 public class TpltDialog extends ADialog
 {
 
-    private MproPtn mexpPtn;
+    private MproPtn mproPtn;
     private boolean isUpdate;
     private boolean relayout;
     private Tplt currTplt = new Tplt();
@@ -50,10 +50,10 @@ public class TpltDialog extends ADialog
     private javax.swing.tree.DefaultMutableTreeNode rootNode;
     private javax.swing.tree.DefaultMutableTreeNode currNode;
 
-    public TpltDialog(MproPtn mexpPtn)
+    public TpltDialog(MproPtn mproPtn)
     {
-        super(mexpPtn, true);
-        this.mexpPtn = mexpPtn;
+        super(mproPtn, true);
+        this.mproPtn = mproPtn;
     }
 
     public void initView()
@@ -205,11 +205,11 @@ public class TpltDialog extends ADialog
         rootNode = new javax.swing.tree.DefaultMutableTreeNode("Root");
         java.util.List<Tplt> propList;
         javax.swing.tree.DefaultMutableTreeNode node;
-        for (Tplt tplt : mexpPtn.getUserMdl().getTpltMdl().getAllItems())
+        for (Tplt tplt : mproPtn.getUserMdl().getTpltMdl().getAllItems())
         {
             node = new javax.swing.tree.DefaultMutableTreeNode(tplt);
 
-            propList = DBA4000.selectTpltData(mexpPtn.getUserMdl(), tplt.getP30F1103());
+            propList = DBA4000.selectTpltData(mproPtn.getUserMdl(), tplt.getP30F1103());
             for (Tplt prop : propList)
             {
                 node.add(new javax.swing.tree.DefaultMutableTreeNode(prop));
@@ -296,7 +296,7 @@ public class TpltDialog extends ADialog
         });
 
         pack();
-        Bean.centerForm(this, mexpPtn);
+        Bean.centerForm(this, mproPtn);
     }
 
     @Override
@@ -389,9 +389,9 @@ public class TpltDialog extends ADialog
 
         if (isUpdate)
         {
-            DBA4000.saveTpltData(mexpPtn.getUserMdl(), currTplt);
+            DBA4000.saveTpltData(mproPtn.getUserMdl(), currTplt);
             tmTpltList.nodeChanged(currNode);
-            mexpPtn.getUserMdl().getTpltMdl().wUpdate();
+            mproPtn.getUserMdl().getTpltMdl().wUpdate();
 
             isUpdate = false;
         }
@@ -415,13 +415,13 @@ public class TpltDialog extends ADialog
                 currTplt.setP30F1104(((Tplt) node.getUserObject()).getP30F1103());
             }
             currTplt.setP30F1101(node.getChildCount());
-            DBA4000.saveTpltData(mexpPtn.getUserMdl(), currTplt);
+            DBA4000.saveTpltData(mproPtn.getUserMdl(), currTplt);
             node.add(new javax.swing.tree.DefaultMutableTreeNode(currTplt));
             tmTpltList.nodeStructureChanged(node);
 
             if (indx == 0)
             {
-                mexpPtn.getUserMdl().getTpltMdl().wAppend(currTplt);
+                mproPtn.getUserMdl().getTpltMdl().wAppend(currTplt);
             }
         }
 
@@ -451,7 +451,7 @@ public class TpltDialog extends ADialog
             plTpltData.repaint();
             relayout = true;
 
-            java.util.List<I1S2> list = DBA4000.selectListData(mexpPtn.getUserMdl(), currTplt.getP30F1103());
+            java.util.List<I1S2> list = DBA4000.selectListData(mproPtn.getUserMdl(), currTplt.getP30F1103());
             cbTpltData.removeAllItems();
             for (I1S2 temp : list)
             {
@@ -529,12 +529,12 @@ public class TpltDialog extends ADialog
         // 上移
         Tplt c = (Tplt) p.getUserObject();
         c.addP30F1101(-1);
-        DBA4000.saveTpltData(mexpPtn.getUserMdl(), c);
+        DBA4000.saveTpltData(mproPtn.getUserMdl(), c);
 
         // 下移
         c = (Tplt) n.getUserObject();
         c.addP30F1101(1);
-        DBA4000.saveTpltData(mexpPtn.getUserMdl(), c);
+        DBA4000.saveTpltData(mproPtn.getUserMdl(), c);
     }
 
     private void miSortDnActionPerformed(java.awt.event.ActionEvent evt)
@@ -565,10 +565,10 @@ public class TpltDialog extends ADialog
 
         Tplt c = (Tplt) p.getUserObject();
         c.addP30F1101(1);
-        DBA4000.saveTpltData(mexpPtn.getUserMdl(), c);
+        DBA4000.saveTpltData(mproPtn.getUserMdl(), c);
         c = (Tplt) n.getUserObject();
         c.addP30F1101(-1);
-        DBA4000.saveTpltData(mexpPtn.getUserMdl(), c);
+        DBA4000.saveTpltData(mproPtn.getUserMdl(), c);
     }
     private javax.swing.JButton btNewProp;
     private javax.swing.JButton btNewType;

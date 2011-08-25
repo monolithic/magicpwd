@@ -13,47 +13,47 @@ tips=默认风格
 #######################################
 # 文件图标
 #######################################
-mexp-file-new=0
-mexp-file-open=1
-mexp-file-save=2
-mexp-file-saveas=3
-mexp-file-print=4
-mexp-file-close=5
-mexp-file-exit=6
+mpro-file-new=0
+mpro-file-open=1
+mpro-file-save=2
+mpro-file-saveas=3
+mpro-file-print=4
+mpro-file-close=5
+mpro-file-exit=6
 
 #######################################
 # 编辑图标
 #######################################
-mexp-edit-undo=7
-mexp-edit-redo=8
-mexp-edit-delete-cur=9
-mexp-edit-delete-all=10
-mexp-edit-move-up=11
-mexp-edit-move-down=12
-mexp-edit-move-left=13
-mexp-edit-move-right=14
-mexp-edit-history=15
+mpro-edit-undo=7
+mpro-edit-redo=8
+mpro-edit-delete-cur=9
+mpro-edit-delete-all=10
+mpro-edit-move-up=11
+mpro-edit-move-down=12
+mpro-edit-move-left=13
+mpro-edit-move-right=14
+mpro-edit-history=15
 
 #######################################
 # 导航图标
 #######################################
-mexp-guid-select-prev=16
-mexp-guid-select-next=17
+mpro-guid-select-prev=16
+mpro-guid-select-next=17
 
 #######################################
 # 视图图标
 #######################################
-mexp-view-menubar=18
-mexp-view-toolbar=19
-mexp-view-infobar=20
-mexp-view-findbar=21
-mexp-view-prop-isolate=22
-mexp-view-prop-visable=23
+mpro-view-menubar=18
+mpro-view-toolbar=19
+mpro-view-infobar=20
+mpro-view-findbar=21
+mpro-view-prop-isolate=22
+mpro-view-prop-visable=23
 
 #######################################
 # 工具图标
 #######################################
-mexp-data-search=61
+mpro-data-search=61
 
 ###########################################################
 # 工具栏图标
@@ -61,12 +61,12 @@ mexp-data-search=61
 #######################################
 # 工具图标
 #######################################
-mexp-tool-options=24
+mpro-tool-options=24
 
 #######################################
 # 帮助图标
 #######################################
-mexp-help-topic=25
+mpro-help-topic=25
 
 #######################################
 # 标记为

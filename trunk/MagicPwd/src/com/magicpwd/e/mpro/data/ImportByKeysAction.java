@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.data;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._enum.AuthLog;
@@ -34,7 +34,7 @@ import com.magicpwd._util.Lang;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public class ImportByKeysAction extends AMexpAction implements IBackCall<AuthLog, UserDto>
+public class ImportByKeysAction extends AMproAction implements IBackCall<AuthLog, UserDto>
 {
 
     public ImportByKeysAction()
@@ -44,10 +44,10 @@ public class ImportByKeysAction extends AMexpAction implements IBackCall<AuthLog
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        javax.swing.tree.TreePath path = mexpPtn.getSelectedKindValue();
+        javax.swing.tree.TreePath path = mproPtn.getSelectedKindValue();
         if (path == null)
         {
-            Lang.showMesg(mexpPtn, LangRes.P30F7A02, "");
+            Lang.showMesg(mproPtn, LangRes.P30F7A02, "");
             return;
         }
 
@@ -69,7 +69,7 @@ public class ImportByKeysAction extends AMexpAction implements IBackCall<AuthLog
     {
         if (AuthLog.signRs == options)
         {
-            return mexpPtn.importByKeys("");
+            return mproPtn.importByKeys("");
         }
         return false;
     }

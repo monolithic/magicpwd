@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.view;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Char;
 
@@ -24,7 +24,7 @@ import com.magicpwd._util.Char;
  *
  * @author Amon
  */
-public class MenuVisibleAction extends AMexpAction
+public class MenuVisibleAction extends AMproAction
 {
 
     public MenuVisibleAction()
@@ -34,9 +34,9 @@ public class MenuVisibleAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !mexpPtn.getUserMdl().isMenuVisible(AppView.mexp);
-        mexpPtn.setMenuVisible(b);
-        mexpPtn.pack();
+        boolean b = !mproPtn.getUserMdl().isMenuVisible(AppView.mpro);
+        mproPtn.setMenuVisible(b);
+        mproPtn.pack();
 
         String cmd = e.getActionCommand();
         if (Char.isValidate(cmd))
@@ -44,7 +44,7 @@ public class MenuVisibleAction extends AMexpAction
             javax.swing.AbstractButton button;
             for (String tmp : cmd.split(","))
             {
-                button = mexpPtn.getMenuPtn().getButton(tmp);
+                button = mproPtn.getMenuPtn().getButton(tmp);
                 if (button != null)
                 {
                     button.setSelected(b);
@@ -56,7 +56,7 @@ public class MenuVisibleAction extends AMexpAction
     @Override
     public void doInit(String value)
     {
-        setSelected(mexpPtn.getUserMdl().isMenuVisible(AppView.mexp));
+        setSelected(mproPtn.getUserMdl().isMenuVisible(AppView.mpro));
     }
 
     @Override

@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.help;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._cons.ConsEnv;
 
 /**
@@ -30,7 +30,7 @@ import com.magicpwd._cons.ConsEnv;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public class IdioAction extends AMexpAction
+public class IdioAction extends AMproAction
 {
 
     public IdioAction()
@@ -40,7 +40,7 @@ public class IdioAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mexpPtn.showOptions(ConsEnv.PROP_IDIO);
+        mproPtn.showOptions(ConsEnv.PROP_IDIO);
     }
 
     @Override

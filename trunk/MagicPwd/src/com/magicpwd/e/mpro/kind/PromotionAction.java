@@ -16,13 +16,13 @@
  */
 package com.magicpwd.e.mpro.kind;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 
 /**
  *
  * @author Amon
  */
-public class PromotionAction extends AMexpAction
+public class PromotionAction extends AMproAction
 {
 
     public PromotionAction()
@@ -32,7 +32,7 @@ public class PromotionAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mexpPtn.promotionSelectedKind();
+        mproPtn.promotionSelectedKind();
     }
 
     @Override

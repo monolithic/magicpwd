@@ -17,7 +17,7 @@
 package com.magicpwd._bean.mpro;
 
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd.__i.mpro.IMexpBean;
+import com.magicpwd.__i.mpro.IMproBean;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.v.app.mpro.MproPtn;
@@ -27,7 +27,7 @@ import com.magicpwd.v.app.mpro.MproPtn;
  * 键值：ConsEnv.INDX_INFO
  * @author Amon
  */
-public class InfoBean extends javax.swing.JPanel implements IMexpBean
+public class InfoBean extends javax.swing.JPanel implements IMproBean
 {
 
     private int tipsSize;

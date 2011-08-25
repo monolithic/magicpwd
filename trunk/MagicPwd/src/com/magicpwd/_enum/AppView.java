@@ -30,7 +30,7 @@ public enum AppView
     /**
      * 专家模式
      */
-    mexp,
+    mpro,
     /**
      * 向导模式
      */

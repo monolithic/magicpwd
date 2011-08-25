@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.safe;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd.m.UserMdl;
 
 /**
@@ -30,7 +30,7 @@ import com.magicpwd.m.UserMdl;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public class RecordConfigAction extends AMexpAction
+public class RecordConfigAction extends AMproAction
 {
 
     public RecordConfigAction()
@@ -40,14 +40,14 @@ public class RecordConfigAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        UserMdl userMdl = mexpPtn.getUserMdl();
+        UserMdl userMdl = mproPtn.getUserMdl();
         userMdl.setIncBack(!userMdl.isIncBack());
     }
 
     @Override
     public void doInit(String value)
     {
-        setSelected(mexpPtn.getUserMdl().isIncBack());
+        setSelected(mproPtn.getUserMdl().isIncBack());
     }
 
     @Override

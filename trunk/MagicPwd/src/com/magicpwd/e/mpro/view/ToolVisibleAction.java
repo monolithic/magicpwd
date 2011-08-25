@@ -16,14 +16,14 @@
  */
 package com.magicpwd.e.mpro.view;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._enum.AppView;
 
 /**
  *
  * @author Amon
  */
-public class ToolVisibleAction extends AMexpAction
+public class ToolVisibleAction extends AMproAction
 {
 
     public ToolVisibleAction()
@@ -33,15 +33,15 @@ public class ToolVisibleAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !mexpPtn.getUserMdl().isToolVisible(AppView.mexp);
-        mexpPtn.setToolVisible(b);
-        mexpPtn.pack();
+        boolean b = !mproPtn.getUserMdl().isToolVisible(AppView.mpro);
+        mproPtn.setToolVisible(b);
+        mproPtn.pack();
     }
 
     @Override
     public void doInit(String value)
     {
-        setSelected(mexpPtn.getUserMdl().isToolVisible(AppView.mexp));
+        setSelected(mproPtn.getUserMdl().isToolVisible(AppView.mpro));
     }
 
     @Override

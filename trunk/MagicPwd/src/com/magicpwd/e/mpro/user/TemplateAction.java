@@ -16,13 +16,13 @@
  */
 package com.magicpwd.e.mpro.user;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 
 /**
  *
  * @author aven
  */
-public class TemplateAction extends AMexpAction
+public class TemplateAction extends AMproAction
 {
 
     public TemplateAction()
@@ -32,7 +32,7 @@ public class TemplateAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mexpPtn.showTpltDlg();
+        mproPtn.showTpltDlg();
     }
 
     @Override

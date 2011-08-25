@@ -33,7 +33,7 @@ public class MproAction extends ATrayAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        trayPtn.showView(AppView.mexp);
+        trayPtn.showView(AppView.mpro);
     }
 
     @Override

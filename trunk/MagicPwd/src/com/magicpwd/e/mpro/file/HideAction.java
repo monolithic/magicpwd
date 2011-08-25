@@ -16,13 +16,13 @@
  */
 package com.magicpwd.e.mpro.file;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 
 /**
  *
  * @author Amon
  */
-public class HideAction extends AMexpAction
+public class HideAction extends AMproAction
 {
 
     public HideAction()
@@ -32,7 +32,7 @@ public class HideAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mexpPtn.hideFrame();
+        mproPtn.hideFrame();
     }
 
     @Override

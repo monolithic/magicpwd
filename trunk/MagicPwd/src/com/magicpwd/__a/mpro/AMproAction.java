@@ -17,21 +17,21 @@
 package com.magicpwd.__a.mpro;
 
 import com.magicpwd.__a.AAction;
-import com.magicpwd.__i.mpro.IMexpAction;
+import com.magicpwd.__i.mpro.IMproAction;
 import com.magicpwd.v.app.mpro.MproPtn;
 
 /**
  *
  * @author Amon
  */
-public abstract class AMexpAction extends AAction implements IMexpAction
+public abstract class AMproAction extends AAction implements IMproAction
 {
 
-    protected MproPtn mexpPtn;
+    protected MproPtn mproPtn;
 
     @Override
-    public void setMexpPtn(MproPtn mexpPtn)
+    public void setMproPtn(MproPtn mproPtn)
     {
-        this.mexpPtn = mexpPtn;
+        this.mproPtn = mproPtn;
     }
 }

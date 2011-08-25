@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.list;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd._util.Char;
@@ -26,7 +26,7 @@ import com.magicpwd.x.app.CatDialog;
  *
  * @author Amon
  */
-public class MovetoAction extends AMexpAction implements IBackCall<String, String>
+public class MovetoAction extends AMproAction implements IBackCall<String, String>
 {
 
     public MovetoAction()
@@ -36,7 +36,7 @@ public class MovetoAction extends AMexpAction implements IBackCall<String, Strin
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        CatDialog dat = new CatDialog(mexpPtn, this);
+        CatDialog dat = new CatDialog(mproPtn, this);
         dat.initView();
         dat.initLang();
         dat.initData();
@@ -61,12 +61,12 @@ public class MovetoAction extends AMexpAction implements IBackCall<String, Strin
             return false;
         }
 
-        Object obj = mexpPtn.getSelectedListValue();
+        Object obj = mproPtn.getSelectedListValue();
         if (obj instanceof Mkey)
         {
             ((Mkey) obj).setP30F0106(hash);
         }
-        mexpPtn.changeKind(hash);
+        mproPtn.changeKind(hash);
 
         return true;
     }

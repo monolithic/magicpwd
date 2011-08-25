@@ -16,14 +16,14 @@
  */
 package com.magicpwd.e.mpro.edit;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._cons.ConsDat;
 
 /**
  *
  * @author Amon
  */
-public class AppendFileAction extends AMexpAction
+public class AppendFileAction extends AMproAction
 {
 
     public AppendFileAction()
@@ -33,7 +33,7 @@ public class AppendFileAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mexpPtn.appendBean(ConsDat.INDX_FILE);
+        mproPtn.appendBean(ConsDat.INDX_FILE);
     }
 
     @Override

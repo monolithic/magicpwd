@@ -16,14 +16,14 @@
  */
 package com.magicpwd.e.mpro.list;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._comn.mpwd.Mkey;
 
 /**
  *
  * @author Amon
  */
-public class HistoryAction extends AMexpAction
+public class HistoryAction extends AMproAction
 {
 
     public HistoryAction()
@@ -33,12 +33,12 @@ public class HistoryAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        Object obj = mexpPtn.getSelectedListValue();
+        Object obj = mproPtn.getSelectedListValue();
         if (obj == null || !(obj instanceof Mkey))
         {
             return;
         }
-        mexpPtn.showHistory();
+        mproPtn.showHistory();
     }
 
     @Override

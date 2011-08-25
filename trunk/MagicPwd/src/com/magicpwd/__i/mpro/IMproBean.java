@@ -23,7 +23,7 @@ import com.magicpwd.__i.IEditItem;
  *
  * @author Amon
  */
-public interface IMexpBean extends IEditBean
+public interface IMproBean extends IEditBean
 {
 
     /**

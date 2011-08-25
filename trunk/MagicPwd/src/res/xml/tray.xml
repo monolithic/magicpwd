@@ -14,7 +14,7 @@
         </item>
         <seperator />
         <item type="normal" text="$P30F9603" text-def="高级模式(@1)">
-            <action class="com.magicpwd.e.tray.MexpAction" />
+            <action class="com.magicpwd.e.tray.MproAction" />
         </item>
         <item type="normal" text="$P30F9604" text-def="向导模式(@2)">
             <action class="com.magicpwd.e.tray.MwizAction" />

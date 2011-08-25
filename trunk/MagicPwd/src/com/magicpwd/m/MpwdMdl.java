@@ -197,7 +197,7 @@ public final class MpwdMdl
 
     public String getViewList()
     {
-        return getCfg("app.list", "mexp,mwiz,mpad");
+        return getCfg("app.list", "mpro,mwiz,mpad");
     }
 
     public String getAppLang()

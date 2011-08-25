@@ -23,8 +23,8 @@ import com.magicpwd.v.app.mpro.MproPtn;
  *
  * @author aven
  */
-public interface IMexpAction extends IAction
+public interface IMproAction extends IAction
 {
 
-    void setMexpPtn(MproPtn mexpPtn);
+    void setMproPtn(MproPtn mproPtn);
 }

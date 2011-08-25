@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.list;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._enum.AppView;
 
@@ -24,7 +24,7 @@ import com.magicpwd._enum.AppView;
  *
  * @author Amon
  */
-public class SortKeyAction extends AMexpAction
+public class SortKeyAction extends AMproAction
 {
 
     public SortKeyAction()
@@ -34,8 +34,8 @@ public class SortKeyAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mexpPtn.getUserMdl().setCfg(AppView.mexp, ConsCfg.CFG_VIEW_LIST_KEY, e.getActionCommand());
-        mexpPtn.findLast();
+        mproPtn.getUserMdl().setCfg(AppView.mpro, ConsCfg.CFG_VIEW_LIST_KEY, e.getActionCommand());
+        mproPtn.findLast();
     }
 
     @Override

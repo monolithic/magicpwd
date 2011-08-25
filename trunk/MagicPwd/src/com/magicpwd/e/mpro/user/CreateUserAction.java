@@ -16,13 +16,13 @@
  */
 package com.magicpwd.e.mpro.user;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 
 /**
  *
  * @author Amon
  */
-public class CreateUserAction extends AMexpAction
+public class CreateUserAction extends AMproAction
 {
 
     public CreateUserAction()

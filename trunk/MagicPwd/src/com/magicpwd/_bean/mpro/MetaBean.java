@@ -17,7 +17,7 @@
 package com.magicpwd._bean.mpro;
 
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd.__i.mpro.IMexpBean;
+import com.magicpwd.__i.mpro.IMproBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.LangRes;
@@ -30,7 +30,7 @@ import com.magicpwd.v.app.mpro.MproPtn;
  * @author Amon
  * 
  */
-public class MetaBean extends javax.swing.JPanel implements IMexpBean
+public class MetaBean extends javax.swing.JPanel implements IMproBean
 {
 
     private IEditItem itemData;

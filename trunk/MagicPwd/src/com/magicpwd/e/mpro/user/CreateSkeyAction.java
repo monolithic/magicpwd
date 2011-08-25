@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.user;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;
@@ -29,7 +29,7 @@ import com.magicpwd._util.Lang;
  *
  * @author Amon
  */
-public class CreateSkeyAction extends AMexpAction implements IBackCall<AuthLog, UserDto>
+public class CreateSkeyAction extends AMproAction implements IBackCall<AuthLog, UserDto>
 {
 
     public CreateSkeyAction()
@@ -39,9 +39,9 @@ public class CreateSkeyAction extends AMexpAction implements IBackCall<AuthLog, 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (Char.isValidate(mexpPtn.getUserMdl().getCfg(ConsCfg.CFG_USER_SKEY, ""), 224))
+        if (Char.isValidate(mproPtn.getUserMdl().getCfg(ConsCfg.CFG_USER_SKEY, ""), 224))
         {
-            Lang.showMesg(mexpPtn, LangRes.P30F7A28, "您已经设置过安全口令！");
+            Lang.showMesg(mproPtn, LangRes.P30F7A28, "您已经设置过安全口令！");
             return;
         }
 
@@ -51,7 +51,7 @@ public class CreateSkeyAction extends AMexpAction implements IBackCall<AuthLog, 
     @Override
     public void doInit(String value)
     {
-        setEnabled(!Char.isValidate(mexpPtn.getUserMdl().getCfg(ConsCfg.CFG_USER_SKEY, ""), 224));
+        setEnabled(!Char.isValidate(mproPtn.getUserMdl().getCfg(ConsCfg.CFG_USER_SKEY, ""), 224));
     }
 
     @Override
@@ -65,7 +65,7 @@ public class CreateSkeyAction extends AMexpAction implements IBackCall<AuthLog, 
     {
         if (AuthLog.signSk == options)
         {
-            javax.swing.AbstractButton button = mexpPtn.getMenuPtn().getButton("mpwd-skey");
+            javax.swing.AbstractButton button = mproPtn.getMenuPtn().getButton("mpwd-skey");
             if (button != null)
             {
                 button.setEnabled(false);

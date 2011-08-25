@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.safe;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._enum.AuthLog;
 import com.magicpwd._user.UserDto;
@@ -28,7 +28,7 @@ import com.magicpwd._util.Logs;
  *
  * @author Amon
  */
-public class RemoteConfigAction extends AMexpAction implements IBackCall<AuthLog, UserDto>
+public class RemoteConfigAction extends AMproAction implements IBackCall<AuthLog, UserDto>
 {
 
     public RemoteConfigAction()
@@ -65,12 +65,12 @@ public class RemoteConfigAction extends AMexpAction implements IBackCall<AuthLog
             {
                 object.setUserType(object.getUserName() + '@' + object.getUserType());
             }
-            mexpPtn.setCfgText("pop_mail", object.getUserType() + '\n' + object.getUserName() + '\n' + object.getUserPwds());
+            mproPtn.setCfgText("pop_mail", object.getUserType() + '\n' + object.getUserName() + '\n' + object.getUserPwds());
         }
         catch (Exception ex)
         {
             Logs.exception(ex);
-            Lang.showMesg(mexpPtn, null, ex.getLocalizedMessage());
+            Lang.showMesg(mproPtn, null, ex.getLocalizedMessage());
         }
         return true;
     }

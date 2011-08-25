@@ -16,13 +16,13 @@
  */
 package com.magicpwd.e.mpro.edit;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 
 /**
  *
  * @author Amon
  */
-public class MovetoPrevAction extends AMexpAction
+public class MovetoPrevAction extends AMproAction
 {
 
     public MovetoPrevAction()
@@ -32,7 +32,7 @@ public class MovetoPrevAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mexpPtn.movetoPrev();
+        mproPtn.movetoPrev();
     }
 
     @Override

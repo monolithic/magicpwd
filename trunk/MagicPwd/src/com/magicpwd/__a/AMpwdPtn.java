@@ -73,7 +73,7 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
         AMpwdPtn ptn;
         switch (appView)
         {
-            case mexp:
+            case mpro:
                 ptn = new MproPtn(trayPtn, userMdl);
                 break;
             case mwiz:

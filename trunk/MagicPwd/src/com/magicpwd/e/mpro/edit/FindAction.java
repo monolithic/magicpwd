@@ -16,13 +16,13 @@
  */
 package com.magicpwd.e.mpro.edit;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 
 /**
  *
  * @author aven
  */
-public class FindAction extends AMexpAction
+public class FindAction extends AMproAction
 {
 
     public FindAction()
@@ -32,9 +32,9 @@ public class FindAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mexpPtn.setFindVisible(true);
-        mexpPtn.pack();
-        mexpPtn.setFindFocused();
+        mproPtn.setFindVisible(true);
+        mproPtn.pack();
+        mproPtn.setFindFocused();
     }
 
     @Override

@@ -16,14 +16,14 @@
  */
 package com.magicpwd.e.mpro.skin;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._util.Desk;
 
 /**
  *
  * @author Administrator
  */
-public class MoreAction extends AMexpAction
+public class MoreAction extends AMproAction
 {
 
     public MoreAction()
