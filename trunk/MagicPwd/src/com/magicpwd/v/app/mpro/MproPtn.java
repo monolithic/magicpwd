@@ -301,6 +301,15 @@ public class MproPtn extends AMpwdPtn
         lastKeys = null;
     }
 
+    public void listMajor(int major)
+    {
+        mproMdl.getListMdl().listHint(null);
+    }
+
+    public void listLabel(int label)
+    {
+    }
+
     public boolean saveKeys()
     {
         GridMdl gridMdl = mproMdl.getGridMdl();

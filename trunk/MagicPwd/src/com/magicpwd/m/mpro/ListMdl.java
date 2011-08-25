@@ -72,11 +72,47 @@ public class ListMdl extends DefaultListModel
         this.fireContentsChanged(this, 0, mkeyList.size());
     }
 
+    /**
+     * 重要程序
+     */
+    public void listMajor(int major)
+    {
+        if (major < -2 || major > 2)
+        {
+            return;
+        }
+
+        int c = mkeyList.size();
+        mkeyList.clear();
+        fireIntervalRemoved(this, 0, c);
+        DBA4000.listRecHeaderByMajor(userMdl, major, mkeyList);
+        c = mkeyList.size();
+        fireIntervalAdded(this, 0, c);
+    }
+
+    /**
+     * 用户标签
+     */
+    public void listLabel(int label)
+    {
+        if (label < 0 || label > 9)
+        {
+            return;
+        }
+
+        int c = mkeyList.size();
+        mkeyList.clear();
+        fireIntervalRemoved(this, 0, c);
+        DBA4000.listRecHeaderByLabel(userMdl, label, mkeyList);
+        c = mkeyList.size();
+        fireIntervalAdded(this, 0, c);
+    }
+
     public void listHint(java.util.List<Hint> hintList)
     {
         int c = mkeyList.size();
         mkeyList.clear();
-//        fireIntervalRemoved(this, 0, c);
+        fireIntervalRemoved(this, 0, c);
         DBA4000.findHintList(userMdl, hintList, mkeyList);
         c = mkeyList.size();
         fireIntervalAdded(this, 0, c);
@@ -87,7 +123,7 @@ public class ListMdl extends DefaultListModel
         int c = mkeyList.size();
         mkeyList.clear();
         fireIntervalRemoved(this, 0, c);
-        //DBA4000.findHintList(userMdl, new java.sql.Timestamp(s.getTime()), new java.sql.Timestamp(t.getTime()), keysList);
+        DBA4000.listRecHeaderByTime(userMdl, s.getTime(), t.getTime(), mkeyList);
         c = mkeyList.size();
         fireIntervalAdded(this, 0, c);
     }
@@ -99,7 +135,7 @@ public class ListMdl extends DefaultListModel
         int s = mkeyList.size();
         mkeyList.clear();
         fireIntervalRemoved(this, 0, s);
-        boolean b = DBA4000.readKeysList(userMdl, typeHash, mkeyList);
+        boolean b = DBA4000.listRecHeaderByCat(userMdl, typeHash, mkeyList);
         s = mkeyList.size();
         b &= s > 0;
         fireIntervalAdded(this, 0, s);
