@@ -18,7 +18,7 @@ package com.magicpwd._prop;
 
 import com.magicpwd.__i.IPropBean;
 import com.magicpwd._comn.S1S1;
-import com.magicpwd.v.app.mexp.MexpPtn;
+import com.magicpwd.v.app.mpro.MproPtn;
 
 /**
  *
@@ -27,10 +27,10 @@ import com.magicpwd.v.app.mexp.MexpPtn;
 public class JavaProp extends javax.swing.JPanel implements IPropBean
 {
 
-    private MexpPtn mainPtn;
+    private MproPtn mainPtn;
     private java.util.List<S1S1> javaList;
 
-    public JavaProp(MexpPtn mainPtn)
+    public JavaProp(MproPtn mainPtn)
     {
         this.mainPtn = mainPtn;
     }

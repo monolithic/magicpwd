@@ -20,7 +20,7 @@ import com.magicpwd.__i.IPropBean;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
-import com.magicpwd.v.app.mexp.MexpPtn;
+import com.magicpwd.v.app.mpro.MproPtn;
 
 /**
  * @author Amon
@@ -29,10 +29,10 @@ import com.magicpwd.v.app.mexp.MexpPtn;
 public class SKeyProp extends javax.swing.JPanel implements IPropBean
 {
 
-    private MexpPtn mainPtn;
+    private MproPtn mainPtn;
     private java.util.List<S1S2> skeyList;
 
-    public SKeyProp(MexpPtn mainPtn)
+    public SKeyProp(MproPtn mainPtn)
     {
         this.mainPtn = mainPtn;
     }

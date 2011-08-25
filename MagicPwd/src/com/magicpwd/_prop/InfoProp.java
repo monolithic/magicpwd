@@ -22,7 +22,7 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
-import com.magicpwd.v.app.mexp.MexpPtn;
+import com.magicpwd.v.app.mpro.MproPtn;
 
 /**
  *
@@ -31,9 +31,9 @@ import com.magicpwd.v.app.mexp.MexpPtn;
 public class InfoProp extends javax.swing.JPanel implements IPropBean
 {
 
-    private MexpPtn mainPtn;
+    private MproPtn mainPtn;
 
-    public InfoProp(MexpPtn mainPtn)
+    public InfoProp(MproPtn mainPtn)
     {
         this.mainPtn = mainPtn;
     }

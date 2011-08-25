@@ -23,7 +23,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd.r.KindTN;
-import com.magicpwd.v.app.mexp.MexpPtn;
+import com.magicpwd.v.app.mpro.MproPtn;
 
 /**
  * 数据迁移对话窗口
@@ -32,10 +32,10 @@ import com.magicpwd.v.app.mexp.MexpPtn;
 public class CatDialog extends ADialog
 {
 
-    private MexpPtn mainPtn;
+    private MproPtn mainPtn;
     private IBackCall<String, String> backCall;
 
-    public CatDialog(MexpPtn mainPtn, IBackCall<String, String> backCall)
+    public CatDialog(MproPtn mainPtn, IBackCall<String, String> backCall)
     {
         super(mainPtn, true);
         this.mainPtn = mainPtn;

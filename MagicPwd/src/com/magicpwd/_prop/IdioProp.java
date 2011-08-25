@@ -19,7 +19,7 @@ package com.magicpwd._prop;
 import com.magicpwd.__i.IPropBean;
 import com.magicpwd._comp.LnkLabel;
 import com.magicpwd._comp.WCubeBox;
-import com.magicpwd.v.app.mexp.MexpPtn;
+import com.magicpwd.v.app.mpro.MproPtn;
 
 /**
  *
@@ -30,9 +30,9 @@ public class IdioProp extends javax.swing.JPanel implements IPropBean
 
     private WCubeBox cb_CubeBox;
     private final int USER_CNT = 7;
-    private MexpPtn mainPtn;
+    private MproPtn mainPtn;
 
-    public IdioProp(MexpPtn mainPtn)
+    public IdioProp(MproPtn mainPtn)
     {
         this.mainPtn = mainPtn;
     }

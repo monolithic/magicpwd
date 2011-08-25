@@ -23,7 +23,7 @@ import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.UserMdl;
-import com.magicpwd.v.app.mexp.MexpPtn;
+import com.magicpwd.v.app.mpro.MproPtn;
 
 /**
  * @author Amon
@@ -32,10 +32,10 @@ import com.magicpwd.v.app.mexp.MexpPtn;
 public class USetProp extends javax.swing.JPanel implements IPropBean
 {
 
-    private MexpPtn mainPtn;
+    private MproPtn mainPtn;
     private java.io.File backPath;
 
-    public USetProp(MexpPtn mainPtn)
+    public USetProp(MproPtn mainPtn)
     {
         this.mainPtn = mainPtn;
     }

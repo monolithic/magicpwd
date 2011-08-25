@@ -18,7 +18,7 @@ package com.magicpwd.r;
 
 import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd._util.Bean;
-import com.magicpwd.v.app.mexp.MexpPtn;
+import com.magicpwd.v.app.mpro.MproPtn;
 
 /**
  *
@@ -27,10 +27,10 @@ import com.magicpwd.v.app.mexp.MexpPtn;
 public class KeysCR extends javax.swing.JPanel implements javax.swing.ListCellRenderer
 {
 
-    private MexpPtn mexpPtn;
+    private MproPtn mexpPtn;
     private int style;
 
-    public KeysCR(MexpPtn mexpPtn)
+    public KeysCR(MproPtn mexpPtn)
     {
         this.mexpPtn = mexpPtn;
 
