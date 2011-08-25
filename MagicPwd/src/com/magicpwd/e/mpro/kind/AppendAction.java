@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.kind;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.prop.Kind;
 import com.magicpwd.r.KindTN;
@@ -26,7 +26,7 @@ import com.magicpwd.v.app.mpro.KindDlg;
  *
  * @author Amon
  */
-public class AppendAction extends AMexpAction implements IBackCall<String, Kind>
+public class AppendAction extends AMproAction implements IBackCall<String, Kind>
 {
 
     public AppendAction()
@@ -36,7 +36,7 @@ public class AppendAction extends AMexpAction implements IBackCall<String, Kind>
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        javax.swing.tree.TreePath path = mexpPtn.getSelectedKindValue();
+        javax.swing.tree.TreePath path = mproPtn.getSelectedKindValue();
         if (path == null)
         {
             return;
@@ -48,7 +48,7 @@ public class AppendAction extends AMexpAction implements IBackCall<String, Kind>
             return;
         }
 
-        KindDlg kindDlg = new KindDlg(mexpPtn, this);
+        KindDlg kindDlg = new KindDlg(mproPtn, this);
         kindDlg.initView();
         kindDlg.initLang();
         kindDlg.initData(null);
@@ -70,7 +70,7 @@ public class AppendAction extends AMexpAction implements IBackCall<String, Kind>
     {
         if (OPTIONS_APPLY.equalsIgnoreCase(options))
         {
-            mexpPtn.appendKindBySelected(object);
+            mproPtn.appendKindBySelected(object);
             return true;
         }
         return false;

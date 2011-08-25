@@ -16,13 +16,13 @@
  */
 package com.magicpwd.e.mpro.data;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 
 /**
  *
  * @author Amon
  */
-public class SearchAction extends AMexpAction
+public class SearchAction extends AMproAction
 {
 
     public SearchAction()

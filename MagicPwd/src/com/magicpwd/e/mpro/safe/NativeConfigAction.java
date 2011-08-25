@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.safe;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._enum.AppView;
@@ -34,7 +34,7 @@ import com.magicpwd._util.Lang;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public class NativeConfigAction extends AMexpAction
+public class NativeConfigAction extends AMproAction
 {
 
     public NativeConfigAction()
@@ -47,13 +47,13 @@ public class NativeConfigAction extends AMexpAction
         javax.swing.JFileChooser jfc = new javax.swing.JFileChooser();
         jfc.setMultiSelectionEnabled(false);
         jfc.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
-        String path = mexpPtn.getUserMdl().getCfg(AppView.mexp, ConsCfg.CFG_SAFE_BACK_LOC, "");
+        String path = mproPtn.getUserMdl().getCfg(AppView.mpro, ConsCfg.CFG_SAFE_BACK_LOC, "");
         if (Char.isValidate(path))
         {
             jfc.setSelectedFile(new java.io.File(path));
         }
 
-        if (javax.swing.JFileChooser.APPROVE_OPTION != jfc.showOpenDialog(mexpPtn))
+        if (javax.swing.JFileChooser.APPROVE_OPTION != jfc.showOpenDialog(mproPtn))
         {
             return;
         }
@@ -61,7 +61,7 @@ public class NativeConfigAction extends AMexpAction
         java.io.File file = jfc.getSelectedFile();
         if (!file.exists())
         {
-            if (Lang.showFirm(mexpPtn, LangRes.P30F7A51, "您选择的目录不存在，要创建此目录吗？") != javax.swing.JOptionPane.YES_OPTION)
+            if (Lang.showFirm(mproPtn, LangRes.P30F7A51, "您选择的目录不存在，要创建此目录吗？") != javax.swing.JOptionPane.YES_OPTION)
             {
                 return;
             }
@@ -70,16 +70,16 @@ public class NativeConfigAction extends AMexpAction
         }
         if (!file.isDirectory())
         {
-            Lang.showMesg(mexpPtn, LangRes.P30F7A1C, "请选择一个合适的目录！");
+            Lang.showMesg(mproPtn, LangRes.P30F7A1C, "请选择一个合适的目录！");
             return;
         }
         if (!file.canWrite())
         {
-            Lang.showMesg(mexpPtn, LangRes.P30F7A1D, "无法保存数据到您选择的目录，请确认您是否有足够的权限！");
+            Lang.showMesg(mproPtn, LangRes.P30F7A1D, "无法保存数据到您选择的目录，请确认您是否有足够的权限！");
             return;
         }
 
-        mexpPtn.getUserMdl().setCfg(ConsCfg.CFG_SAFE_BACK_LOC, file.getAbsolutePath());
+        mproPtn.getUserMdl().setCfg(ConsCfg.CFG_SAFE_BACK_LOC, file.getAbsolutePath());
     }
 
     @Override

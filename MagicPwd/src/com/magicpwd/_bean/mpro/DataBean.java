@@ -17,7 +17,7 @@
 package com.magicpwd._bean.mpro;
 
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd.__i.mpro.IMexpBean;
+import com.magicpwd.__i.mpro.IMproBean;
 import com.magicpwd._bean.ADataBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
@@ -30,7 +30,7 @@ import com.magicpwd.v.app.mpro.MproPtn;
  *
  * @author Amon
  */
-public class DataBean extends ADataBean implements IMexpBean
+public class DataBean extends ADataBean implements IMproBean
 {
 
     private WEditBox dataEdit;

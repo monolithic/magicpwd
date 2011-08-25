@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.view;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Char;
 
@@ -24,7 +24,7 @@ import com.magicpwd._util.Char;
  *
  * @author Amon
  */
-public class EditIsolateAction extends AMexpAction
+public class EditIsolateAction extends AMproAction
 {
 
     public EditIsolateAction()
@@ -34,14 +34,14 @@ public class EditIsolateAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !mexpPtn.getUserMdl().isEditIsolate(AppView.mexp);
-        mexpPtn.setEditIsolate(b);
-        mexpPtn.pack();
+        boolean b = !mproPtn.getUserMdl().isEditIsolate(AppView.mpro);
+        mproPtn.setEditIsolate(b);
+        mproPtn.pack();
 
         String cmd = e.getActionCommand();
         if (Char.isValidate(cmd))
         {
-            javax.swing.AbstractButton button = mexpPtn.getMenuPtn().getButton(cmd);
+            javax.swing.AbstractButton button = mproPtn.getMenuPtn().getButton(cmd);
             if (button != null)
             {
                 button.setSelected(b);
@@ -52,8 +52,8 @@ public class EditIsolateAction extends AMexpAction
     @Override
     public void doInit(String value)
     {
-        setEnabled(mexpPtn.getUserMdl().isEditVisible(AppView.mexp));
-        setSelected(mexpPtn.getUserMdl().isEditIsolate(AppView.mexp));
+        setEnabled(mproPtn.getUserMdl().isEditVisible(AppView.mpro));
+        setSelected(mproPtn.getUserMdl().isEditIsolate(AppView.mpro));
     }
 
     @Override

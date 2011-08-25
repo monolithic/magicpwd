@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.data;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._cons.LangRes;
@@ -29,7 +29,7 @@ import com.magicpwd.r.KindTN;
  *
  * @author Amon
  */
-public class ImportByKindAction extends AMexpAction implements IBackCall<AuthLog, UserDto>
+public class ImportByKindAction extends AMproAction implements IBackCall<AuthLog, UserDto>
 {
 
     public ImportByKindAction()
@@ -39,10 +39,10 @@ public class ImportByKindAction extends AMexpAction implements IBackCall<AuthLog
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        javax.swing.tree.TreePath path = mexpPtn.getSelectedKindValue();
+        javax.swing.tree.TreePath path = mproPtn.getSelectedKindValue();
         if (path == null)
         {
-            Lang.showMesg(mexpPtn, LangRes.P30F7A02, "");
+            Lang.showMesg(mproPtn, LangRes.P30F7A02, "");
             return;
         }
 
@@ -64,18 +64,18 @@ public class ImportByKindAction extends AMexpAction implements IBackCall<AuthLog
     {
         if (AuthLog.signRs == options)
         {
-            javax.swing.tree.TreePath path = mexpPtn.getSelectedKindValue();
+            javax.swing.tree.TreePath path = mproPtn.getSelectedKindValue();
             KindTN node = (KindTN) path.getLastPathComponent();
             Kind kind = (Kind) node.getUserObject();
-            if (!mexpPtn.isKindValidate(kind))
+            if (!mproPtn.isKindValidate(kind))
             {
-                Lang.showMesg(mexpPtn, LangRes.P30F7A4A, "不能保存到任务列表中去！");
+                Lang.showMesg(mproPtn, LangRes.P30F7A4A, "不能保存到任务列表中去！");
 //                    tr_GuidTree.requestFocus();
                 return false;
             }
-            if (mexpPtn.importByKind(kind.getC2010203()))
+            if (mproPtn.importByKind(kind.getC2010203()))
             {
-                mexpPtn.findLast();
+                mproPtn.findLast();
             }
             return true;
         }

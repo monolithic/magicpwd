@@ -18,7 +18,7 @@ package com.magicpwd._bean;
 
 import com.magicpwd.__a.AEditBean;
 import com.magicpwd.__a.AMpwdPtn;
-import com.magicpwd.__i.mpro.IMexpBean;
+import com.magicpwd.__i.mpro.IMproBean;
 import com.magicpwd._comn.item.SignItem;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WButtonGroup;
@@ -30,7 +30,7 @@ import com.magicpwd._util.Lang;
  * 属性：段落
  * 键值：ConsEnv.INDX_SIGN
  */
-public abstract class ASignBean extends AEditBean implements IMexpBean
+public abstract class ASignBean extends AEditBean implements IMproBean
 {
 
     private WTextBox dataBox;

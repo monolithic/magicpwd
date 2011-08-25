@@ -16,13 +16,13 @@
  */
 package com.magicpwd.e.mpro.view;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 
 /**
  *
  * @author Amon
  */
-public class TopsAction extends AMexpAction
+public class TopsAction extends AMproAction
 {
 
     public TopsAction()
@@ -32,9 +32,9 @@ public class TopsAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !mexpPtn.getUserMdl().isTopMost();
-        mexpPtn.setAlwaysOnTop(b);
-        mexpPtn.getUserMdl().setTopMost(b);
+        boolean b = !mproPtn.getUserMdl().isTopMost();
+        mproPtn.setAlwaysOnTop(b);
+        mproPtn.getUserMdl().setTopMost(b);
     }
 
     @Override

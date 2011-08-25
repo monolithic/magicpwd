@@ -16,14 +16,14 @@
  */
 package com.magicpwd.e.mpro.view;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._enum.AppView;
 
 /**
  *
  * @author Amon
  */
-public class InfoVisibleAction extends AMexpAction
+public class InfoVisibleAction extends AMproAction
 {
 
     public InfoVisibleAction()
@@ -33,15 +33,15 @@ public class InfoVisibleAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !mexpPtn.getUserMdl().isInfoVisible(AppView.mexp);
-        mexpPtn.setInfoVisible(b);
-        mexpPtn.pack();
+        boolean b = !mproPtn.getUserMdl().isInfoVisible(AppView.mpro);
+        mproPtn.setInfoVisible(b);
+        mproPtn.pack();
     }
 
     @Override
     public void doInit(String value)
     {
-        setSelected(mexpPtn.getUserMdl().isInfoVisible(AppView.mexp));
+        setSelected(mproPtn.getUserMdl().isInfoVisible(AppView.mpro));
     }
 
     @Override

@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.list;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd._util.Char;
 
@@ -24,7 +24,7 @@ import com.magicpwd._util.Char;
  *
  * @author Amon
  */
-public class ChangeMajorAction extends AMexpAction
+public class ChangeMajorAction extends AMproAction
 {
 
     public ChangeMajorAction()
@@ -37,12 +37,12 @@ public class ChangeMajorAction extends AMexpAction
         String command = e.getActionCommand();
         int val = Char.isValidateInteger(command) ? Integer.parseInt(command) : 0;
 
-        Object obj = mexpPtn.getSelectedListValue();
+        Object obj = mproPtn.getSelectedListValue();
         if (obj instanceof Mkey)
         {
             ((Mkey) obj).setP30F0103(val);
         }
-        mexpPtn.changeMajor(val);
+        mproPtn.changeMajor(val);
     }
 
     @Override

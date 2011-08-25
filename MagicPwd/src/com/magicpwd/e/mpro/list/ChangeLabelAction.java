@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.list;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._comn.mpwd.Mkey;
 import com.magicpwd._util.Char;
 
@@ -24,7 +24,7 @@ import com.magicpwd._util.Char;
  *
  * @author Amon
  */
-public class ChangeLabelAction extends AMexpAction
+public class ChangeLabelAction extends AMproAction
 {
 
     public ChangeLabelAction()
@@ -37,12 +37,12 @@ public class ChangeLabelAction extends AMexpAction
         String command = e.getActionCommand();
         int val = Char.isValidateInteger(command) ? Integer.parseInt(command) : 0;
 
-        Object obj = mexpPtn.getSelectedListValue();
+        Object obj = mproPtn.getSelectedListValue();
         if (obj instanceof Mkey)
         {
             ((Mkey) obj).setP30F0102(val);
         }
-        mexpPtn.changeLabel(val);
+        mproPtn.changeLabel(val);
     }
 
     @Override

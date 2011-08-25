@@ -17,7 +17,7 @@
 package com.magicpwd._bean.mpro;
 
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd.__i.mpro.IMexpBean;
+import com.magicpwd.__i.mpro.IMproBean;
 import com.magicpwd._comn.item.HintItem;
 import com.magicpwd._comn.mpwd.Hint;
 import com.magicpwd._comn.mpwd.Mgtd;
@@ -41,12 +41,12 @@ import com.magicpwd.x.app.mgtd.MgtdDlg;
  * 键值：ConsEnv.INDX_TIME
  * @author Amon
  */
-public class HintBean extends javax.swing.JPanel implements IMexpBean
+public class HintBean extends javax.swing.JPanel implements IMproBean
 {
 
     private WEditBox dataEdit;
     private HintItem itemData;
-    private MproPtn mexpPtn;
+    private MproPtn mproPtn;
     private WTextBox dataBox;
     private int mgtdType;
     private int mgtdData;
@@ -55,15 +55,15 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
     private java.util.Calendar mgtdCal;
     private java.text.DateFormat format;
 
-    public HintBean(MproPtn mexpPtn)
+    public HintBean(MproPtn mproPtn)
     {
-        this.mexpPtn = mexpPtn;
+        this.mproPtn = mproPtn;
     }
 
     @Override
     public void initView()
     {
-        dataEdit = new WEditBox(mexpPtn, this, false);
+        dataEdit = new WEditBox(mproPtn, this, false);
         dataEdit.initView();
         dataEdit.setCopyButtonVisible(false);
         dataEdit.setDropButtonVisible(false);
@@ -173,7 +173,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
         };
         miHalfHour.addActionListener(action);
         miFullHour.addActionListener(action);
-        mexpPtn.getMenuPtn().getSubMenu("date-remind", pmDateView, action);
+        mproPtn.getMenuPtn().getSubMenu("date-remind", pmDateView, action);
         if (initMgtdMenu())
         {
             pmDateView.addSeparator();
@@ -267,7 +267,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
 
         itemData.setName(taPropData.getText());
 
-        mexpPtn.updateSelectedItem();
+        mproPtn.updateSelectedItem();
     }
 
     @Override
@@ -282,7 +282,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
 
     private boolean initMgtdMenu()
     {
-        java.util.List<Mgtd> mgtdList = DBA4000.readMgtdList(mexpPtn.getUserMdl());
+        java.util.List<Mgtd> mgtdList = DBA4000.readMgtdList(mproPtn.getUserMdl());
         java.awt.event.ActionListener al = new java.awt.event.ActionListener()
         {
 
@@ -292,7 +292,7 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
                 miDateTimeActionPerformed(e);
             }
         };
-        MenuPtn menuPtn = mexpPtn.getMenuPtn();
+        MenuPtn menuPtn = mproPtn.getMenuPtn();
         boolean tmp = false;
         int idx = 0;
         int max = mgtdList.size();
@@ -438,10 +438,10 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
         miHalfHour.setActionCommand("fix:" + format.format(d1));
         Bean.setText(miFullHour, t2);
         miFullHour.setActionCommand("fix:" + format.format(d2));
-        if (mexpPtn.getUserMdl().isGtdTemplateUpdated())
+        if (mproPtn.getUserMdl().isGtdTemplateUpdated())
         {
             initMgtdMenu();
-            mexpPtn.getUserMdl().setGtdTemplateUpdated(false);
+            mproPtn.getUserMdl().setGtdTemplateUpdated(false);
         }
         pmDateView.show(blPropName, 0, blPropName.getHeight());
     }
@@ -590,13 +590,13 @@ public class HintBean extends javax.swing.JPanel implements IMexpBean
 
     private void miEditMgtdActionPerformed(java.awt.event.ActionEvent e)
     {
-        Mgtd mgtd = DBA4000.readMgtd(mexpPtn.getUserMdl(), itemData.getData());
+        Mgtd mgtd = DBA4000.readMgtd(mproPtn.getUserMdl(), itemData.getData());
         if (mgtd == null)
         {
             return;
         }
 
-        MgtdDlg mgtdDlg = new MgtdDlg(mexpPtn, true);
+        MgtdDlg mgtdDlg = new MgtdDlg(mproPtn, true);
         mgtdDlg.setBackCall(null);
         mgtdDlg.initView();
         mgtdDlg.initLang();

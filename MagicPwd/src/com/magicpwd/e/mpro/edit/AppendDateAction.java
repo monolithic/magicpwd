@@ -16,14 +16,14 @@
  */
 package com.magicpwd.e.mpro.edit;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._cons.ConsDat;
 
 /**
  *
  * @author Amon
  */
-public class AppendDateAction extends AMexpAction
+public class AppendDateAction extends AMproAction
 {
 
     public AppendDateAction()
@@ -33,7 +33,7 @@ public class AppendDateAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mexpPtn.appendBean(ConsDat.INDX_DATE);
+        mproPtn.appendBean(ConsDat.INDX_DATE);
     }
 
     @Override

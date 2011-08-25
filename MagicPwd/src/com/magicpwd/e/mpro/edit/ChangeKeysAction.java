@@ -16,14 +16,14 @@
  */
 package com.magicpwd.e.mpro.edit;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._cons.ConsDat;
 
 /**
  *
  * @author Amon
  */
-public class ChangeKeysAction extends AMexpAction
+public class ChangeKeysAction extends AMproAction
 {
 
     public ChangeKeysAction()
@@ -33,7 +33,7 @@ public class ChangeKeysAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mexpPtn.changeBean(ConsDat.INDX_PWDS);
+        mproPtn.changeBean(ConsDat.INDX_PWDS);
     }
 
     @Override

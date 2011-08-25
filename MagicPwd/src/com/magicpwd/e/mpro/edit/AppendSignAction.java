@@ -16,14 +16,14 @@
  */
 package com.magicpwd.e.mpro.edit;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._cons.ConsDat;
 
 /**
  *
  * @author Amon
  */
-public class AppendSignAction extends AMexpAction
+public class AppendSignAction extends AMproAction
 {
 
     public AppendSignAction()
@@ -33,7 +33,7 @@ public class AppendSignAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mexpPtn.appendBean(ConsDat.INDX_SIGN);
+        mproPtn.appendBean(ConsDat.INDX_SIGN);
     }
 
     @Override

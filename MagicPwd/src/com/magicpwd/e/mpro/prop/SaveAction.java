@@ -16,13 +16,13 @@
  */
 package com.magicpwd.e.mpro.prop;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 
 /**
  *
  * @author Amon
  */
-public class SaveAction extends AMexpAction
+public class SaveAction extends AMproAction
 {
 
     public SaveAction()

@@ -19,13 +19,13 @@ package com.magicpwd.e.mpro.skin;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 
 /**
  *
  * @author aven
  */
-public class LookAction extends AMexpAction
+public class LookAction extends AMproAction
 {
 
     public LookAction()
@@ -41,9 +41,9 @@ public class LookAction extends AMexpAction
             return;
         }
 
-        mexpPtn.getUserMdl().setLook(command);
+        mproPtn.getUserMdl().setLook(command);
 
-        Lang.showMesg(mexpPtn, LangRes.P30FAA1B, "新外观将在重启后生效！\n注意：一些外观可能造成性能问题，如果您觉得所选择的外观使系统运行变慢，\n　　　请选择使用“默认”或“系统”外观！");
+        Lang.showMesg(mproPtn, LangRes.P30FAA1B, "新外观将在重启后生效！\n注意：一些外观可能造成性能问题，如果您觉得所选择的外观使系统运行变慢，\n　　　请选择使用“默认”或“系统”外观！");
     }
 
     @Override

@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.grid;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 
@@ -24,7 +24,7 @@ import com.magicpwd._util.Lang;
  *
  * @author aven
  */
-public class DropAction extends AMexpAction
+public class DropAction extends AMproAction
 {
 
     public DropAction()
@@ -34,9 +34,9 @@ public class DropAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (Lang.showFirm(mexpPtn, LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
+        if (Lang.showFirm(mproPtn, LangRes.P30F1A01, "确认要删除此属性数据么？") == javax.swing.JOptionPane.YES_OPTION)
         {
-            mexpPtn.removeSelectedItem();
+            mproPtn.removeSelectedItem();
         }
     }
 

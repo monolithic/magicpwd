@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.user;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._enum.AuthLog;
 import com.magicpwd._user.UserDto;
@@ -25,7 +25,7 @@ import com.magicpwd._user.UserDto;
  *
  * @author Amon
  */
-public class ChangePkeyAction extends AMexpAction implements IBackCall<AuthLog, UserDto>
+public class ChangePkeyAction extends AMproAction implements IBackCall<AuthLog, UserDto>
 {
 
     public ChangePkeyAction()

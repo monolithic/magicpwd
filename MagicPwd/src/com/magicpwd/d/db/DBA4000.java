@@ -248,8 +248,8 @@ public class DBA4000
      */
     private static void addDataSort(DBAccess dba, UserMdl cfg)
     {
-        boolean asc = ConsCfg.DEF_TRUE.equals(cfg.getCfg(AppView.mexp, ConsCfg.CFG_VIEW_LIST_ASC, ConsCfg.DEF_FALSE));
-        String key = cfg.getCfg(AppView.mexp, ConsCfg.CFG_VIEW_LIST_KEY, "09");
+        boolean asc = ConsCfg.DEF_TRUE.equals(cfg.getCfg(AppView.mpro, ConsCfg.CFG_VIEW_LIST_ASC, ConsCfg.DEF_FALSE));
+        String key = cfg.getCfg(AppView.mpro, ConsCfg.CFG_VIEW_LIST_KEY, "09");
 
         if (!Pattern.matches("^[0-9A-Z]{2}$", key))
         {

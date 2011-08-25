@@ -17,7 +17,7 @@
 package com.magicpwd._bean.mpro;
 
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd.__i.mpro.IMexpBean;
+import com.magicpwd.__i.mpro.IMproBean;
 import com.magicpwd._bean.AMailBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
@@ -36,7 +36,7 @@ import com.magicpwd.v.app.mpro.MproPtn;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public class MailBean extends AMailBean implements IMexpBean
+public class MailBean extends AMailBean implements IMproBean
 {
 
     private MproPtn mainPtn;

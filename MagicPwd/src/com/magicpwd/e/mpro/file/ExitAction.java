@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.file;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 
@@ -24,7 +24,7 @@ import com.magicpwd._util.Lang;
  *
  * @author Amon
  */
-public class ExitAction extends AMexpAction
+public class ExitAction extends AMproAction
 {
 
     public ExitAction()
@@ -34,22 +34,22 @@ public class ExitAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (mexpPtn.gridModified())
+        if (mproPtn.gridModified())
         {
-            if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mexpPtn, LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
+            if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mproPtn, LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
             {
                 return;
             }
         }
         else
         {
-            if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mexpPtn, LangRes.P30F1A04, "确认要退出吗？"))
+            if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mproPtn, LangRes.P30F1A04, "确认要退出吗？"))
             {
                 return;
             }
         }
 
-        mexpPtn.setVisible(false);
+        mproPtn.setVisible(false);
         trayPtn.endExit(0);
     }
 

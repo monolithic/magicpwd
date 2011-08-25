@@ -16,7 +16,7 @@
  */
 package com.magicpwd._comp;
 
-import com.magicpwd.__i.mpro.IMexpBean;
+import com.magicpwd.__i.mpro.IMproBean;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.v.app.mpro.MproPtn;
@@ -28,14 +28,14 @@ import com.magicpwd.v.app.mpro.MproPtn;
 public class WEditBox extends javax.swing.JPanel
 {
 
-    private IMexpBean mexpBean;
+    private IMproBean mproBean;
     private MproPtn mainPtn;
     private boolean metaData;
 
-    public WEditBox(MproPtn mainPtn, IMexpBean bean, boolean meta)
+    public WEditBox(MproPtn mainPtn, IMproBean bean, boolean meta)
     {
         this.mainPtn = mainPtn;
-        mexpBean = bean;
+        mproBean = bean;
         metaData = meta;
     }
 
@@ -49,7 +49,7 @@ public class WEditBox extends javax.swing.JPanel
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                mexpBean.dropDataActionPerformed(evt);
+                mproBean.dropDataActionPerformed(evt);
             }
         });
 
@@ -61,7 +61,7 @@ public class WEditBox extends javax.swing.JPanel
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                mexpBean.saveDataActionPerformed(evt);
+                mproBean.saveDataActionPerformed(evt);
             }
         });
 
@@ -73,7 +73,7 @@ public class WEditBox extends javax.swing.JPanel
             @Override
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                mexpBean.copyDataActionPerformed(evt);
+                mproBean.copyDataActionPerformed(evt);
             }
         });
 

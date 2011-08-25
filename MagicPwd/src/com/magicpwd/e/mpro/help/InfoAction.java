@@ -16,14 +16,14 @@
  */
 package com.magicpwd.e.mpro.help;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._cons.ConsEnv;
 
 /**
  *
  * @author Amon
  */
-public class InfoAction extends AMexpAction
+public class InfoAction extends AMproAction
 {
 
     public InfoAction()
@@ -33,7 +33,7 @@ public class InfoAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mexpPtn.showOptions(ConsEnv.PROP_INFO);
+        mproPtn.showOptions(ConsEnv.PROP_INFO);
     }
 
     @Override

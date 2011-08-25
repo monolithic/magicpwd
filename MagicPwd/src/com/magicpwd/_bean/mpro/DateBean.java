@@ -17,7 +17,7 @@
 package com.magicpwd._bean.mpro;
 
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd.__i.mpro.IMexpBean;
+import com.magicpwd.__i.mpro.IMproBean;
 import com.magicpwd._bean.ADateBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
@@ -31,7 +31,7 @@ import com.magicpwd.v.app.mpro.MproPtn;
  * 键值：ConsEnv.INDX_DATE
  * @author Amon
  */
-public class DateBean extends ADateBean implements IMexpBean
+public class DateBean extends ADateBean implements IMproBean
 {
 
     private WEditBox dataEdit;

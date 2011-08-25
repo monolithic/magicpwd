@@ -16,13 +16,13 @@
  */
 package com.magicpwd.e.mpro.file;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 
 /**
  *
  * @author Amon
  */
-public class LockAction extends AMexpAction
+public class LockAction extends AMproAction
 {
 
     public LockAction()
@@ -32,7 +32,7 @@ public class LockAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mexpPtn.lockFrame();
+        mproPtn.lockFrame();
     }
 
     @Override

@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.file;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Char;
 
@@ -24,7 +24,7 @@ import com.magicpwd._util.Char;
  *
  * @author Amon
  */
-public class AppendAction extends AMexpAction
+public class AppendAction extends AMproAction
 {
 
     public AppendAction()
@@ -34,12 +34,12 @@ public class AppendAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (!mexpPtn.newKeys())
+        if (!mproPtn.newKeys())
         {
             return;
         }
 
-        if (mexpPtn.getUserMdl().isEditVisible(AppView.mexp))
+        if (mproPtn.getUserMdl().isEditVisible(AppView.mpro))
         {
             return;
         }
@@ -50,15 +50,15 @@ public class AppendAction extends AMexpAction
             String[] arr = cmd.split(",");
             if (arr != null && arr.length == 2)
             {
-                mexpPtn.getMenuPtn().getButton(arr[0]).setSelected(true);
-                mexpPtn.getMenuPtn().getButton(arr[1]).setSelected(true);
+                mproPtn.getMenuPtn().getButton(arr[0]).setSelected(true);
+                mproPtn.getMenuPtn().getButton(arr[1]).setSelected(true);
             }
         }
 
-        mexpPtn.getUserMdl().setEditVisible(AppView.mexp, true);
-        mexpPtn.getUserMdl().setEditIsolate(AppView.mexp, true);
+        mproPtn.getUserMdl().setEditVisible(AppView.mpro, true);
+        mproPtn.getUserMdl().setEditIsolate(AppView.mpro, true);
 
-        mexpPtn.setEditVisible(true);
+        mproPtn.setEditVisible(true);
     }
 
     @Override

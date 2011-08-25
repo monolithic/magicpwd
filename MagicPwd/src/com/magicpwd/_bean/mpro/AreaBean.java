@@ -17,7 +17,7 @@
 package com.magicpwd._bean.mpro;
 
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd.__i.mpro.IMexpBean;
+import com.magicpwd.__i.mpro.IMproBean;
 import com.magicpwd._bean.AAreaBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
@@ -31,7 +31,7 @@ import com.magicpwd.v.app.mpro.MproPtn;
  * 键值：ConsEnv.INDX_AREA
  * @author Amon
  */
-public class AreaBean extends AAreaBean implements IMexpBean
+public class AreaBean extends AAreaBean implements IMproBean
 {
 
     private MproPtn mainPtn;

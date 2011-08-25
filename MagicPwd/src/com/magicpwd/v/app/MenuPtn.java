@@ -20,7 +20,7 @@ import com.magicpwd.v.app.tray.TrayPtn;
 import com.magicpwd.__i.IAction;
 import com.magicpwd.__i.maoc.IMaocAction;
 import com.magicpwd.__i.mgtd.IMgtdAction;
-import com.magicpwd.__i.mpro.IMexpAction;
+import com.magicpwd.__i.mpro.IMproAction;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
@@ -542,7 +542,7 @@ public class MenuPtn
         javax.swing.JCheckBoxMenuItem item;
         String lookName = userMdl.getLook();
         LookAction action = new LookAction();
-        action.setMexpPtn((MproPtn) trayPtn.getMpwdPtn(AppView.mexp));
+        action.setMproPtn((MproPtn) trayPtn.getMpwdPtn(AppView.mpro));
         WButtonGroup group = new WButtonGroup();
 
         // Java默认风格
@@ -729,7 +729,7 @@ public class MenuPtn
             javax.swing.JCheckBoxMenuItem item;
             String feelName = userMdl.getFeel();
             FeelAction action = new FeelAction();
-            action.setMexpPtn((MproPtn) trayPtn.getMpwdPtn(AppView.mexp));
+            action.setMproPtn((MproPtn) trayPtn.getMpwdPtn(AppView.mpro));
             WButtonGroup group = new WButtonGroup();
 
             java.util.Properties prop = new java.util.Properties();
@@ -982,12 +982,12 @@ public class MenuPtn
                                     trayAction.setTrayPtn(trayPtn);
                                     trayAction.doInit(actInit);
                                 }
-                                else if (action instanceof IMexpAction)
+                                else if (action instanceof IMproAction)
                                 {
-                                    IMexpAction mexpAction = (IMexpAction) action;
-                                    mexpAction.setTrayPtn(trayPtn);
-                                    mexpAction.setMexpPtn((MproPtn) trayPtn.getMpwdPtn(AppView.mexp));
-                                    mexpAction.doInit(actInit);
+                                    IMproAction mproAction = (IMproAction) action;
+                                    mproAction.setTrayPtn(trayPtn);
+                                    mproAction.setMproPtn((MproPtn) trayPtn.getMpwdPtn(AppView.mpro));
+                                    mproAction.doInit(actInit);
                                 }
                                 else if (action instanceof IMwizAction)
                                 {

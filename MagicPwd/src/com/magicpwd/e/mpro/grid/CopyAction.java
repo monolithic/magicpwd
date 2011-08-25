@@ -16,13 +16,13 @@
  */
 package com.magicpwd.e.mpro.grid;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 
 /**
  *
  * @author aven
  */
-public class CopyAction extends AMexpAction
+public class CopyAction extends AMproAction
 {
 
     public CopyAction()

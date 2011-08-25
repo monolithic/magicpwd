@@ -16,13 +16,13 @@
  */
 package com.magicpwd.e.mpro.skin;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 
 /**
  *
  * @author aven
  */
-public class FeelAction extends AMexpAction
+public class FeelAction extends AMproAction
 {
 
     public FeelAction()
@@ -32,7 +32,7 @@ public class FeelAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mexpPtn.getUserMdl().setFeel(e.getActionCommand());
+        mproPtn.getUserMdl().setFeel(e.getActionCommand());
     }
 
     @Override

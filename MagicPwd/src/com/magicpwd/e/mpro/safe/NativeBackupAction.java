@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.safe;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;
@@ -29,7 +29,7 @@ import com.magicpwd._util.Logs;
  * 备份到数据文件
  * @author Amon
  */
-public class NativeBackupAction extends AMexpAction implements IBackCall<String, String>
+public class NativeBackupAction extends AMproAction implements IBackCall<String, String>
 {
 
     public NativeBackupAction()
@@ -39,13 +39,13 @@ public class NativeBackupAction extends AMexpAction implements IBackCall<String,
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (!Char.isValidate(mexpPtn.getUserMdl().getCfg(AppView.mexp, ConsCfg.CFG_SAFE_BACK_LOC, "")))
+        if (!Char.isValidate(mproPtn.getUserMdl().getCfg(AppView.mpro, ConsCfg.CFG_SAFE_BACK_LOC, "")))
         {
-            Lang.showMesg(mexpPtn, LangRes.P30F7A54, "您还没有配置本地备份目录！");
+            Lang.showMesg(mproPtn, LangRes.P30F7A54, "您还没有配置本地备份目录！");
             return;
         }
 
-        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mexpPtn, LangRes.P30F7A52, "确认要执行备份操作吗？"))
+        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mproPtn, LangRes.P30F7A52, "确认要执行备份操作吗？"))
         {
             return;
         }
@@ -79,28 +79,28 @@ public class NativeBackupAction extends AMexpAction implements IBackCall<String,
 
     private void doBackup()
     {
-        mexpPtn.showProgress();
+        mproPtn.showProgress();
 
         try
         {
-            boolean b = mexpPtn.nativeBackup(mexpPtn.getUserMdl().getCfg(AppView.mexp, ConsCfg.CFG_SAFE_BACK_LOC, ""), null);
-            mexpPtn.hideProgress();
+            boolean b = mproPtn.nativeBackup(mproPtn.getUserMdl().getCfg(AppView.mpro, ConsCfg.CFG_SAFE_BACK_LOC, ""), null);
+            mproPtn.hideProgress();
 
             if (b)
             {
-                Lang.showMesg(mexpPtn, LangRes.P30F7A3D, "恭喜，数据备份成功！");
+                Lang.showMesg(mproPtn, LangRes.P30F7A3D, "恭喜，数据备份成功！");
             }
             else
             {
-                Lang.showMesg(mexpPtn, LangRes.P30F7A3C, "数据备份失败，请重启软件后重试！");
+                Lang.showMesg(mproPtn, LangRes.P30F7A3C, "数据备份失败，请重启软件后重试！");
             }
         }
         catch (Exception exp)
         {
-            mexpPtn.hideProgress();
+            mproPtn.hideProgress();
 
             Logs.exception(exp);
-            Lang.showMesg(mexpPtn, null, exp.getLocalizedMessage());
+            Lang.showMesg(mproPtn, null, exp.getLocalizedMessage());
         }
     }
 }

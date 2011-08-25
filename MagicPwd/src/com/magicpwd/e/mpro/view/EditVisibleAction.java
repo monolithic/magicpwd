@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.view;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Char;
 
@@ -24,7 +24,7 @@ import com.magicpwd._util.Char;
  *
  * @author Amon
  */
-public class EditVisibleAction extends AMexpAction
+public class EditVisibleAction extends AMproAction
 {
 
     public EditVisibleAction()
@@ -34,13 +34,13 @@ public class EditVisibleAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        boolean b = !mexpPtn.getUserMdl().isEditVisible(AppView.mexp);
-        mexpPtn.setEditVisible(b);
+        boolean b = !mproPtn.getUserMdl().isEditVisible(AppView.mpro);
+        mproPtn.setEditVisible(b);
         if (b)
         {
-            mexpPtn.showPropInfo();
+            mproPtn.showPropInfo();
         }
-        mexpPtn.pack();
+        mproPtn.pack();
 
         String cmd = e.getActionCommand();
         if (Char.isValidate(cmd))
@@ -48,7 +48,7 @@ public class EditVisibleAction extends AMexpAction
             javax.swing.AbstractButton button;
             for (String tmp : cmd.split(","))
             {
-                button = mexpPtn.getMenuPtn().getButton(tmp);
+                button = mproPtn.getMenuPtn().getButton(tmp);
                 if (button != null)
                 {
                     button.setEnabled(b);
@@ -60,7 +60,7 @@ public class EditVisibleAction extends AMexpAction
     @Override
     public void doInit(String value)
     {
-        setSelected(mexpPtn.getUserMdl().isEditVisible(AppView.mexp));
+        setSelected(mproPtn.getUserMdl().isEditVisible(AppView.mpro));
     }
 
     @Override

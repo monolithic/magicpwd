@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.data;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._cons.LangRes;
@@ -29,7 +29,7 @@ import com.magicpwd.r.KindTN;
  *
  * @author Amon
  */
-public class ExportByKindAction extends AMexpAction implements IBackCall<AuthLog, UserDto>
+public class ExportByKindAction extends AMproAction implements IBackCall<AuthLog, UserDto>
 {
 
     public ExportByKindAction()
@@ -39,10 +39,10 @@ public class ExportByKindAction extends AMexpAction implements IBackCall<AuthLog
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        javax.swing.tree.TreePath path = mexpPtn.getSelectedKindValue();
+        javax.swing.tree.TreePath path = mproPtn.getSelectedKindValue();
         if (path == null)
         {
-            Lang.showMesg(mexpPtn, LangRes.P30F7A20, "请选择您要导出数据的类别信息！");
+            Lang.showMesg(mproPtn, LangRes.P30F7A20, "请选择您要导出数据的类别信息！");
             return;
         }
 
@@ -64,10 +64,10 @@ public class ExportByKindAction extends AMexpAction implements IBackCall<AuthLog
     {
         if (AuthLog.signRs == options)
         {
-            javax.swing.tree.TreePath path = mexpPtn.getSelectedKindValue();
+            javax.swing.tree.TreePath path = mproPtn.getSelectedKindValue();
             KindTN node = (KindTN) path.getLastPathComponent();
             Kind kind = (Kind) node.getUserObject();
-            return mexpPtn.exportByKind(kind.getC2010203());
+            return mproPtn.exportByKind(kind.getC2010203());
         }
         return false;
     }

@@ -16,14 +16,14 @@
  */
 package com.magicpwd.e.mpro.edit;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._cons.ConsDat;
 
 /**
  *
  * @author Amon
  */
-public class ChangeAreaAction extends AMexpAction
+public class ChangeAreaAction extends AMproAction
 {
 
     public ChangeAreaAction()
@@ -33,7 +33,7 @@ public class ChangeAreaAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mexpPtn.changeBean(ConsDat.INDX_AREA);
+        mproPtn.changeBean(ConsDat.INDX_AREA);
     }
 
     @Override

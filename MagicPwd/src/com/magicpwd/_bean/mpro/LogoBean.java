@@ -18,7 +18,7 @@ package com.magicpwd._bean.mpro;
 
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd.__i.mpro.IMexpBean;
+import com.magicpwd.__i.mpro.IMproBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comn.item.LogoItem;
 import com.magicpwd._cons.LangRes;
@@ -38,22 +38,22 @@ import com.magicpwd.x.app.icon.IcoDialog;
  * Description:
  * 在用户指定徽标的情况下，显示用户徽标，否则显示所属类别徽标。
  */
-public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall<String, String>
+public class LogoBean extends javax.swing.JPanel implements IMproBean, IBackCall<String, String>
 {
 
-    private MproPtn mexpPtn;
+    private MproPtn mproPtn;
     private LogoItem itemData;
     private WEditBox dataEdit;
 
-    public LogoBean(MproPtn mainPtn)
+    public LogoBean(MproPtn mproPtn)
     {
-        this.mexpPtn = mainPtn;
+        this.mproPtn = mproPtn;
     }
 
     @Override
     public void initView()
     {
-        dataEdit = new WEditBox(mexpPtn, this, false);
+        dataEdit = new WEditBox(mproPtn, this, false);
         dataEdit.initView();
         dataEdit.setCopyButtonVisible(false);
         dataEdit.setDropButtonVisible(false);
@@ -144,7 +144,7 @@ public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall
 
         if (itemData.getPath() != null && itemData.getPath().length() > 0)
         {
-            ib_PropName.setIcon(mexpPtn.getDataIcon(itemData.getPath(), item.getName(), 16));
+            ib_PropName.setIcon(mproPtn.getDataIcon(itemData.getPath(), item.getName(), 16));
         }
         ta_PropData.setText(item.getData());
     }
@@ -159,7 +159,7 @@ public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall
 //            return;
 //        }
         itemData.setData(ta_PropData.getText());
-        mexpPtn.updateSelectedItem();
+        mproPtn.updateSelectedItem();
     }
 
     @Override
@@ -192,7 +192,7 @@ public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall
         {
             return false;
         }
-        ib_PropName.setIcon(mexpPtn.getDataIcon(object, options, 16));
+        ib_PropName.setIcon(mproPtn.getDataIcon(object, options, 16));
         itemData.setName(options);
         itemData.setPath(object);
         return true;
@@ -206,7 +206,7 @@ public class LogoBean extends javax.swing.JPanel implements IMexpBean, IBackCall
 
     private void ib_PropDataActionPerformed(java.awt.event.MouseEvent evt)
     {
-        IcoDialog ico = new IcoDialog(mexpPtn, mexpPtn.getUserMdl(), this);
+        IcoDialog ico = new IcoDialog(mproPtn, mproPtn.getUserMdl(), this);
         ico.initView();
         ico.initLang();
         ico.initData();

@@ -16,13 +16,13 @@
  */
 package com.magicpwd.e.mpro.kind;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 
 /**
  *
  * @author Amon
  */
-public class BackwardAction extends AMexpAction
+public class BackwardAction extends AMproAction
 {
 
     public BackwardAction()
@@ -32,7 +32,7 @@ public class BackwardAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mexpPtn.backwardSelectedKind();
+        mproPtn.backwardSelectedKind();
     }
 
     @Override

@@ -16,13 +16,13 @@
  */
 package com.magicpwd.e.mpro.safe;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 
 /**
  * 恢复单条记录
  * @author Amon
  */
-public class RecordResumeAction extends AMexpAction
+public class RecordResumeAction extends AMproAction
 {
 
     public RecordResumeAction()

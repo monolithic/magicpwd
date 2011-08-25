@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.list;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 
 /**
  * Application: MagicPwd
@@ -28,7 +28,7 @@ import com.magicpwd.__a.mpro.AMexpAction;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public class LayoutAction extends AMexpAction
+public class LayoutAction extends AMproAction
 {
 
     public LayoutAction()
@@ -38,7 +38,7 @@ public class LayoutAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mexpPtn.setKeysLayout(e.getActionCommand());
+        mproPtn.setKeysLayout(e.getActionCommand());
     }
 
     @Override

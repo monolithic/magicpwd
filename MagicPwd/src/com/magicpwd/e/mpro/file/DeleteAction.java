@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.file;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
 
@@ -24,7 +24,7 @@ import com.magicpwd._util.Lang;
  *
  * @author Amon
  */
-public class DeleteAction extends AMexpAction
+public class DeleteAction extends AMproAction
 {
 
     public DeleteAction()
@@ -34,23 +34,23 @@ public class DeleteAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        Object object = mexpPtn.getSelectedListValue();
+        Object object = mproPtn.getSelectedListValue();
         if (object == null)
         {
             return;
         }
 
-        if (Lang.showFirm(mexpPtn, LangRes.P30F7A0A, "您正在进行的操作是删除记录数据及其所有历史信息，确认继续么？") != javax.swing.JOptionPane.YES_OPTION)
+        if (Lang.showFirm(mproPtn, LangRes.P30F7A0A, "您正在进行的操作是删除记录数据及其所有历史信息，确认继续么？") != javax.swing.JOptionPane.YES_OPTION)
         {
             return;
         }
-        if (Lang.showFirm(mexpPtn, LangRes.P30F7A0B, "确认一下您操作的正确性，要返回么？") != javax.swing.JOptionPane.NO_OPTION)
+        if (Lang.showFirm(mproPtn, LangRes.P30F7A0B, "确认一下您操作的正确性，要返回么？") != javax.swing.JOptionPane.NO_OPTION)
         {
             return;
         }
-        mexpPtn.removeSelectedKeys();
-        mexpPtn.clearGrid();
-        mexpPtn.showPropInfo();
+        mproPtn.removeSelectedKeys();
+        mproPtn.clearGrid();
+        mproPtn.showPropInfo();
     }
 
     @Override

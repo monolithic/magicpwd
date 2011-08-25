@@ -17,7 +17,7 @@
 package com.magicpwd._bean.mpro;
 
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd.__i.mpro.IMexpBean;
+import com.magicpwd.__i.mpro.IMproBean;
 import com.magicpwd._bean.AListBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._cons.LangRes;
@@ -29,7 +29,7 @@ import java.awt.event.ActionEvent;
  *
  * @author Amon
  */
-public class ListBean extends AListBean implements IMexpBean
+public class ListBean extends AListBean implements IMproBean
 {
 
     private MproPtn mainPtn;

@@ -16,7 +16,7 @@
  */
 package com.magicpwd.e.mpro.safe;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.S1S1;
 import com.magicpwd._cons.ConsCfg;
@@ -30,7 +30,7 @@ import com.magicpwd.x.app.DatDialog;
  * 从数据文件恢复
  * @author Amon
  */
-public class NativeResumeAction extends AMexpAction implements IBackCall<String, String>
+public class NativeResumeAction extends AMproAction implements IBackCall<String, String>
 {
 
     public NativeResumeAction()
@@ -40,13 +40,13 @@ public class NativeResumeAction extends AMexpAction implements IBackCall<String,
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (!Char.isValidate(mexpPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC, "")))
+        if (!Char.isValidate(mproPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC, "")))
         {
-            Lang.showMesg(mexpPtn, LangRes.P30F7A54, "您还没有配置本地备份目录！");
+            Lang.showMesg(mproPtn, LangRes.P30F7A54, "您还没有配置本地备份目录！");
             return;
         }
 
-        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mexpPtn, LangRes.P30F7A53, "确认要执行恢复操作吗？"))
+        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mproPtn, LangRes.P30F7A53, "确认要执行恢复操作吗？"))
         {
             return;
         }
@@ -84,34 +84,34 @@ public class NativeResumeAction extends AMexpAction implements IBackCall<String,
             return false;
         }
 
-        mexpPtn.showProgress();
+        mproPtn.showProgress();
         doResume(object);
         return true;
     }
 
     private void doResume()
     {
-        mexpPtn.showProgress();
+        mproPtn.showProgress();
 
         java.util.List<S1S1> list = new java.util.ArrayList<S1S1>();
         try
         {
-            mexpPtn.nativeDetect(list);
+            mproPtn.nativeDetect(list);
         }
         catch (Exception exp)
         {
-            mexpPtn.hideProgress();
+            mproPtn.hideProgress();
 
             Logs.exception(exp);
-            Lang.showMesg(mexpPtn, null, exp.getLocalizedMessage());
+            Lang.showMesg(mproPtn, null, exp.getLocalizedMessage());
             return;
         }
 
         if (list.size() < 1)
         {
-            mexpPtn.hideProgress();
+            mproPtn.hideProgress();
 
-            Lang.showMesg(mexpPtn, LangRes.P30F7A55, "没有发现可用的备份数据！");
+            Lang.showMesg(mproPtn, LangRes.P30F7A55, "没有发现可用的备份数据！");
             return;
         }
 
@@ -121,9 +121,9 @@ public class NativeResumeAction extends AMexpAction implements IBackCall<String,
             return;
         }
 
-        mexpPtn.hideProgress();
+        mproPtn.hideProgress();
 
-        DatDialog datDialog = new DatDialog(mexpPtn, this);
+        DatDialog datDialog = new DatDialog(mproPtn, this);
         datDialog.initView();
         datDialog.initLang();
         datDialog.initData();
@@ -135,24 +135,24 @@ public class NativeResumeAction extends AMexpAction implements IBackCall<String,
     {
         try
         {
-            boolean b = mexpPtn.nativeResume(file, null);
-            mexpPtn.hideProgress();
+            boolean b = mproPtn.nativeResume(file, null);
+            mproPtn.hideProgress();
 
             if (b)
             {
-                Lang.showMesg(mexpPtn, LangRes.P30F7A3F, "恭喜，数据恢复成功，您需要重新启动本程序！");
+                Lang.showMesg(mproPtn, LangRes.P30F7A3F, "恭喜，数据恢复成功，您需要重新启动本程序！");
             }
             else
             {
-                Lang.showMesg(mexpPtn, LangRes.P30F7A3E, "数据恢复失败，请重启软件后重试！");
+                Lang.showMesg(mproPtn, LangRes.P30F7A3E, "数据恢复失败，请重启软件后重试！");
             }
         }
         catch (Exception exp)
         {
-            mexpPtn.hideProgress();
+            mproPtn.hideProgress();
 
             Logs.exception(exp);
-            Lang.showMesg(mexpPtn, null, exp.getLocalizedMessage());
+            Lang.showMesg(mproPtn, null, exp.getLocalizedMessage());
         }
         System.exit(0);
     }

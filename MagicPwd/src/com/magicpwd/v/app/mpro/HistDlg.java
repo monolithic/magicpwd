@@ -47,12 +47,12 @@ public class HistDlg extends javax.swing.JDialog
     private List<IEditItem> ls_ItemList;
     private DefaultListModel lm_HistList;
     private GridMdl gridMdl;
-    private MproPtn mexpPtn;
+    private MproPtn mproPtn;
 
-    public HistDlg(MproPtn mexpPtn, GridMdl gridMdl)
+    public HistDlg(MproPtn mproPtn, GridMdl gridMdl)
     {
-        super(mexpPtn, true);
-        this.mexpPtn = mexpPtn;
+        super(mproPtn, true);
+        this.mproPtn = mproPtn;
         this.gridMdl = gridMdl;
         keys = new Mkey();
     }
@@ -183,7 +183,7 @@ public class HistDlg extends javax.swing.JDialog
             ls_HistList.setModel(lm_HistList);
         }
 
-        DBA4000.selectHistData(mexpPtn.getUserMdl(), gridMdl.getKeysHash(), hist);
+        DBA4000.selectHistData(mproPtn.getUserMdl(), gridMdl.getKeysHash(), hist);
         for (S1S2 temp : hist)
         {
             lm_HistList.addElement(temp);
@@ -214,7 +214,7 @@ public class HistDlg extends javax.swing.JDialog
         try
         {
             keys.setDefault();
-            DBA4000.selectHistData(mexpPtn.getUserMdl(), item.getK(), keys);
+            DBA4000.selectHistData(mproPtn.getUserMdl(), item.getK(), keys);
             gridMdl.deCrypt(keys, ls_ItemList);
 
             StringBuilder sb = new StringBuilder();
@@ -261,7 +261,7 @@ public class HistDlg extends javax.swing.JDialog
         {
             return;
         }
-        DBA4000.deleteHistData(mexpPtn.getUserMdl(), gridMdl.getKeysHash(), temp.getK());
+        DBA4000.deleteHistData(mproPtn.getUserMdl(), gridMdl.getKeysHash(), temp.getK());
         lm_HistList.removeElement(temp);
         ta_HistInfo.setText("");
     }
@@ -276,7 +276,7 @@ public class HistDlg extends javax.swing.JDialog
         {
             return;
         }
-        DBA4000.deleteHistData(mexpPtn.getUserMdl(), gridMdl.getKeysHash(), null);
+        DBA4000.deleteHistData(mproPtn.getUserMdl(), gridMdl.getKeysHash(), null);
         lm_HistList.clear();
         ta_HistInfo.setText("");
     }
@@ -293,11 +293,11 @@ public class HistDlg extends javax.swing.JDialog
         {
             return;
         }
-        DBA4000.pickupHistData(mexpPtn.getUserMdl(), gridMdl.getKeysHash(), temp.getK(), 0);//TODO:数据恢复序列
+        DBA4000.pickupHistData(mproPtn.getUserMdl(), gridMdl.getKeysHash(), temp.getK(), 0);//TODO:数据恢复序列
         lm_HistList.clear();
         hist.clear();
 
-        DBA4000.selectHistData(mexpPtn.getUserMdl(), gridMdl.getKeysHash(), hist);
+        DBA4000.selectHistData(mproPtn.getUserMdl(), gridMdl.getKeysHash(), hist);
         for (int i = 0, j = hist.size(); i < j; i += 1)
         {
             lm_HistList.addElement(hist.get(i));

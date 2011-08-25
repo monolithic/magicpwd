@@ -16,14 +16,14 @@
  */
 package com.magicpwd.e.mpro.edit;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._cons.ConsDat;
 
 /**
  *
  * @author Amon
  */
-public class AppendTextAction extends AMexpAction
+public class AppendTextAction extends AMproAction
 {
 
     public AppendTextAction()
@@ -33,7 +33,7 @@ public class AppendTextAction extends AMexpAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mexpPtn.appendBean(ConsDat.INDX_TEXT);
+        mproPtn.appendBean(ConsDat.INDX_TEXT);
     }
 
     @Override
