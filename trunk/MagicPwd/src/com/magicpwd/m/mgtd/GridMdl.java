@@ -16,10 +16,8 @@
  */
 package com.magicpwd.m.mgtd;
 
-import com.magicpwd._comn.mpwd.Hint;
 import com.magicpwd._comn.mpwd.Mgtd;
 import com.magicpwd._cons.ConsDat;
-import com.magicpwd._util.Time;
 import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.m.UserMdl;
 

@@ -67,7 +67,7 @@ public class KeysMdl extends SafeMdl
     public void clear()
     {
         ls_ItemList.clear();
-        keys.setDefault();
+        mkey.setDefault();
     }
 
     public void clear(int sIndex)
@@ -88,7 +88,7 @@ public class KeysMdl extends SafeMdl
 
     public boolean isUpdate()
     {
-        return Char.isValidateHash(keys.getP30F0104());
+        return Char.isValidateHash(mkey.getP30F0104());
     }
 
     public void loadData(Mkey keys) throws Exception

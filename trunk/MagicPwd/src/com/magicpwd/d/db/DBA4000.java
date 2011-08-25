@@ -483,7 +483,7 @@ public class DBA4000
             ResultSet rest = dba.executeSelect();
             while (rest.next())
             {
-                list.add(readMgtdData(rest));
+                list.add(loadMgtd(rest));
             }
             rest.close();
             return true;
@@ -499,62 +499,65 @@ public class DBA4000
         }
     }
 
-    public static Mgtd readMgtdData(UserMdl userMdl, String mgtdHash)
+    public static Mgtd readMgtd(UserMdl userMdl, String mgtdHash)
     {
-        Mgtd mgtd = null;
-
         DBAccess dba = new DBAccess();
 
         try
         {
             dba.init(userMdl);
-
-            dba.addTable(DBC4000.P30F0300);
-//            dba.addWhere(DBC4000.P30F0307, "1");
-            dba.addWhere(DBC4000.P30F0309, mgtdHash);
-            dba.addSort(DBC4000.P30F0305);
-//            dba.addSort(DBC4000.p30f03);
-
-            ResultSet rest = dba.executeSelect();
-            if (rest.next())
-            {
-                mgtd = readMgtdData(rest);
-            }
-            rest.close();
-
-            dba.reInit();
-            dba.addTable(DBC4000.P30F0400);
-            dba.addColumn(DBC4000.P30F0403);
-            dba.addColumn(DBC4000.P30F0404);
-            dba.addColumn(DBC4000.P30F0405);
-            dba.addColumn(DBC4000.P30F0406);
-            dba.addWhere(DBC4000.P30F0402, mgtdHash);
-            dba.addSort(DBC4000.P30F0401);
-            rest = dba.executeSelect();
-            java.util.List<Hint> list = new java.util.ArrayList<Hint>();
-            Hint hint;
-            while (rest.next())
-            {
-                hint = new Hint();
-                hint.setP30F0403(rest.getLong(DBC4000.P30F0403));
-                hint.setP30F0404(rest.getInt(DBC4000.P30F0404));
-                hint.setP30F0405(rest.getInt(DBC4000.P30F0405));
-                hint.setP30F0406(rest.getString(DBC4000.P30F0406));
-                list.add(hint);
-            }
-
-            mgtd.setHintList(list);
-            return mgtd;
+            return readMgtd(dba, mgtdHash);
         }
         catch (Exception exp)
         {
             Logs.exception(exp);
-            return mgtd;
+            return null;
         }
         finally
         {
             dba.dispose();
         }
+    }
+
+    private static Mgtd readMgtd(DBAccess dba, String mgtdHash) throws Exception
+    {
+        Mgtd mgtd = null;
+        dba.addTable(DBC4000.P30F0300);
+//            dba.addWhere(DBC4000.P30F0307, "1");
+        dba.addWhere(DBC4000.P30F0309, mgtdHash);
+        dba.addSort(DBC4000.P30F0305);
+//            dba.addSort(DBC4000.p30f03);
+
+        ResultSet rest = dba.executeSelect();
+        if (rest.next())
+        {
+            mgtd = loadMgtd(rest);
+        }
+        rest.close();
+
+        dba.reInit();
+        dba.addTable(DBC4000.P30F0400);
+        dba.addColumn(DBC4000.P30F0403);
+        dba.addColumn(DBC4000.P30F0404);
+        dba.addColumn(DBC4000.P30F0405);
+        dba.addColumn(DBC4000.P30F0406);
+        dba.addWhere(DBC4000.P30F0402, mgtdHash);
+        dba.addSort(DBC4000.P30F0401);
+        rest = dba.executeSelect();
+        java.util.List<Hint> list = new java.util.ArrayList<Hint>();
+        Hint hint;
+        while (rest.next())
+        {
+            hint = new Hint();
+            hint.setP30F0403(rest.getLong(DBC4000.P30F0403));
+            hint.setP30F0404(rest.getInt(DBC4000.P30F0404));
+            hint.setP30F0405(rest.getInt(DBC4000.P30F0405));
+            hint.setP30F0406(rest.getString(DBC4000.P30F0406));
+            list.add(hint);
+        }
+
+        mgtd.setHintList(list);
+        return mgtd;
     }
 
     public static java.util.ArrayList<Mgtd> readMgtdList(UserMdl userMdl)
@@ -575,7 +578,7 @@ public class DBA4000
             ResultSet rest = dba.executeSelect();
             while (rest.next())
             {
-                mgtdList.add(readMgtdData(rest));
+                mgtdList.add(loadMgtd(rest));
             }
             rest.close();
             return mgtdList;
@@ -584,49 +587,6 @@ public class DBA4000
         {
             Logs.exception(exp);
             return mgtdList;
-        }
-        finally
-        {
-            dba.dispose();
-        }
-    }
-
-    public static java.util.List<Hint> readHintList(UserMdl userMdl, String mgtdHash)
-    {
-        java.util.ArrayList<Hint> list = new java.util.ArrayList<Hint>();
-
-        DBAccess dba = new DBAccess();
-
-        try
-        {
-            dba.init(userMdl);
-
-            dba.addTable(DBC4000.P30F0400);
-            dba.addColumn(DBC4000.P30F0403);
-            dba.addColumn(DBC4000.P30F0404);
-            dba.addColumn(DBC4000.P30F0405);
-            dba.addColumn(DBC4000.P30F0406);
-            dba.addWhere(DBC4000.P30F0402, mgtdHash);
-            dba.addSort(DBC4000.P30F0401);
-
-            Hint hint;
-            ResultSet rest = dba.executeSelect();
-            while (rest.next())
-            {
-                hint = new Hint();
-                hint.setP30F0403(rest.getLong(DBC4000.P30F0403));
-                hint.setP30F0404(rest.getInt(DBC4000.P30F0404));
-                hint.setP30F0405(rest.getInt(DBC4000.P30F0405));
-                hint.setP30F0406(rest.getString(DBC4000.P30F0406));
-                list.add(hint);
-            }
-            rest.close();
-            return list;
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-            return list;
         }
         finally
         {
@@ -731,32 +691,6 @@ public class DBA4000
         }
     }
 
-    private static Mgtd readMgtdData(ResultSet rest) throws Exception
-    {
-        Mgtd mgtd = new Mgtd();
-        mgtd.setP30F0301(rest.getInt(DBC4000.P30F0301));
-        mgtd.setP30F0302(rest.getInt(DBC4000.P30F0302));
-        mgtd.setP30F0303(rest.getInt(DBC4000.P30F0303));
-        mgtd.setP30F0304(rest.getInt(DBC4000.P30F0304));
-        mgtd.setP30F0305(rest.getInt(DBC4000.P30F0305));
-        mgtd.setP30F0306(rest.getInt(DBC4000.P30F0306));
-        mgtd.setP30F0307(rest.getInt(DBC4000.P30F0307));
-        mgtd.setP30F0308(rest.getInt(DBC4000.P30F0308));
-        mgtd.setP30F0309(rest.getString(DBC4000.P30F0309));
-        mgtd.setP30F030A(rest.getString(DBC4000.P30F030A));
-        mgtd.setP30F030B(rest.getString(DBC4000.P30F030B));
-        mgtd.setP30F030C(rest.getString(DBC4000.P30F030C));
-        mgtd.setP30F030D(rest.getLong(DBC4000.P30F030D));
-        mgtd.setP30F030E(rest.getLong(DBC4000.P30F030E));
-        mgtd.setP30F030F(rest.getLong(DBC4000.P30F030F));
-        mgtd.setP30F030F(rest.getString(DBC4000.P30F0310));
-        mgtd.setP30F0311(rest.getString(DBC4000.P30F0311));
-        mgtd.setP30F0312(rest.getInt(DBC4000.P30F0312));
-        mgtd.setP30F0313(rest.getInt(DBC4000.P30F0313));
-        mgtd.setP30F0314(rest.getString(DBC4000.P30F0314));
-        return mgtd;
-    }
-
     public static boolean listMgtdData(UserMdl userMdl, java.util.List<Mgtd> mgtdList)
     {
         DBAccess dba = new DBAccess();
@@ -771,7 +705,7 @@ public class DBA4000
             ResultSet rest = dba.executeSelect();
             while (rest.next())
             {
-                mgtdList.add(readMgtdData(rest));
+                mgtdList.add(loadMgtd(rest));
             }
             rest.close();
             return true;
@@ -818,58 +752,8 @@ public class DBA4000
         try
         {
             dba.init(userMdl);
-
-            dba.addTable(DBC4000.P30F0300);
-            dba.addParam(DBC4000.P30F0301, mgtd.getP30F0301());
-            dba.addParam(DBC4000.P30F0302, mgtd.getP30F0302());
-            dba.addParam(DBC4000.P30F0303, mgtd.getP30F0303());
-            dba.addParam(DBC4000.P30F0304, mgtd.getP30F0304());
-            dba.addParam(DBC4000.P30F0305, mgtd.getP30F0305());
-            dba.addParam(DBC4000.P30F0306, mgtd.getP30F0306());
-            dba.addParam(DBC4000.P30F0307, mgtd.getP30F0307());
-            dba.addParam(DBC4000.P30F0308, mgtd.getP30F0308());
-            dba.addParam(DBC4000.P30F030A, mgtd.getP30F030A());
-            dba.addParam(DBC4000.P30F030B, mgtd.getP30F030B());
-            dba.addParam(DBC4000.P30F030C, mgtd.getP30F030C());
-            dba.addParam(DBC4000.P30F030D, mgtd.getP30F030D());
-            dba.addParam(DBC4000.P30F030E, mgtd.getP30F030E());
-            dba.addParam(DBC4000.P30F030F, mgtd.getP30F030F());
-            dba.addParam(DBC4000.P30F0310, mgtd.getP30F0310());
-            dba.addParam(DBC4000.P30F0311, mgtd.getP30F0311());
-            dba.addParam(DBC4000.P30F0312, mgtd.getP30F0312());
-            dba.addParam(DBC4000.P30F0313, mgtd.getP30F0313());
-            dba.addParam(DBC4000.P30F0314, mgtd.getP30F0314());
-            if (com.magicpwd._util.Char.isValidateHash(mgtd.getP30F0309()))
-            {
-                dba.addWhere(DBC4000.P30F0309, mgtd.getP30F0309());
-                dba.addUpdateBatch();
-
-                dba.reInit();
-                dba.addTable(DBC4000.P30F0400);
-                dba.addWhere(DBC4000.P30F0402, mgtd.getP30F0309());
-                dba.addDeleteBatch();
-            }
-            else
-            {
-                mgtd.setP30F0309(Hash.hash(false));
-                dba.addParam(DBC4000.P30F0309, mgtd.getP30F0309());
-                dba.addInsertBatch();
-            }
-            dba.reInit();
-
-            int row = 1;
-            for (Hint mtts : mgtd.getHintList())
-            {
-                dba.addTable(DBC4000.P30F0400);
-                dba.addParam(DBC4000.P30F0401, row++);
-                dba.addParam(DBC4000.P30F0402, mgtd.getP30F0309());
-                dba.addParam(DBC4000.P30F0403, mtts.getP30F0403());
-                dba.addParam(DBC4000.P30F0404, mtts.getP30F0404());
-                dba.addParam(DBC4000.P30F0405, mtts.getP30F0405());
-                dba.addParam(DBC4000.P30F0406, mtts.getP30F0406());
-                dba.addInsertBatch();
-                dba.reInit();
-            }
+            updateGtdHeader(dba, mgtd);
+            updateGtdDetail(dba, mgtd);
             dba.executeBatch();
             return true;
         }
@@ -927,7 +811,7 @@ public class DBA4000
         }
     }
 
-    public static boolean readPwdsData(UserMdl userMdl, Mkey mkey)
+    public static boolean readMpwdData(UserMdl userMdl, Mkey mkey)
     {
         // 数据库连接初始化
         DBAccess dba = new DBAccess();
@@ -936,63 +820,17 @@ public class DBA4000
         {
             dba.init(userMdl);
 
-            // 查询语句拼接
-            dba.addTable(DBC4000.P30F0100);
-            dba.addColumn(DBC4000.P30F0101);
-            dba.addColumn(DBC4000.P30F0102);
-            dba.addColumn(DBC4000.P30F0103);
-            dba.addColumn(DBC4000.P30F0104);
-            dba.addColumn(DBC4000.P30F0105);
-            dba.addColumn(DBC4000.P30F0106);
-            dba.addColumn(DBC4000.P30F0107);
-            dba.addColumn(DBC4000.P30F0108);
-            dba.addColumn(DBC4000.P30F0109);
-            dba.addColumn(DBC4000.P30F010A);
-            dba.addColumn(DBC4000.P30F010B);
-            dba.addColumn(DBC4000.P30F010C);
-            dba.addColumn(DBC4000.P30F010D);
-            dba.addColumn(DBC4000.P30F010E);
-            dba.addColumn(DBC4000.P30F010F);
-            dba.addColumn(DBC4000.P30F0110);
-            //dba.addWhere(DBC4000.P30F0102, keys.getP30F0102());
-            dba.addWhere(DBC4000.P30F0104, mkey.getP30F0104());
-            dba.addWhere(DBC4000.P30F0105, mkey.getP30F0105());
+            loadMkey(dba, mkey);
 
-            ResultSet rest = dba.executeSelect();
-            if (!rest.next())
+            loadMpwd(dba, mkey);
+
+            if (com.magicpwd._util.Char.isValidateHash(mkey.getP30F010E()))
             {
-                return false;
+                loadMgtd(dba, mkey);
+
+                loadHint(dba, mkey);
             }
 
-            mkey.setP30F0101(rest.getInt(DBC4000.P30F0101));
-            mkey.setP30F0102(rest.getInt(DBC4000.P30F0102));
-            mkey.setP30F0103(rest.getInt(DBC4000.P30F0103));
-            mkey.setP30F0104(rest.getString(DBC4000.P30F0104));
-            mkey.setP30F0106(rest.getString(DBC4000.P30F0106));
-            mkey.setP30F0107(rest.getString(DBC4000.P30F0107));
-            mkey.setP30F0108(rest.getString(DBC4000.P30F0108));
-            mkey.setP30F0109(rest.getString(DBC4000.P30F0109));
-            mkey.setP30F010A(rest.getString(DBC4000.P30F010A));
-            mkey.setP30F010B(rest.getString(DBC4000.P30F010B));
-            mkey.setP30F010C(rest.getString(DBC4000.P30F010C));
-            mkey.setP30F010D(rest.getString(DBC4000.P30F010D));
-            mkey.setP30F010E(rest.getString(DBC4000.P30F010E));
-            mkey.setP30F010F(rest.getString(DBC4000.P30F010F));
-            mkey.setP30F0110(rest.getString(DBC4000.P30F0110));
-
-            // 口令内容读取
-            dba.reInit();
-            dba.addTable(DBC4000.P30F0200);
-            dba.addColumn(DBC4000.P30F0203);
-            dba.addWhere(DBC4000.P30F0202, mkey.getP30F0104());
-            dba.addSort(DBC4000.P30F0201);
-            rest = dba.executeSelect();
-            StringBuffer sb = mkey.getPassword().getP30F0203();
-            while (rest.next())
-            {
-                sb.append(rest.getString(DBC4000.P30F0203));
-            }
-            mkey.getPassword().setP30F0202(mkey.getP30F0104());
             return true;
         }
         catch (Exception exp)
@@ -1006,6 +844,149 @@ public class DBA4000
         }
     }
 
+    public static boolean loadMkey(DBAccess dba, Mkey mkey) throws Exception
+    {
+        // 查询语句拼接
+        dba.addTable(DBC4000.P30F0100);
+        dba.addColumn(DBC4000.P30F0101);
+        dba.addColumn(DBC4000.P30F0102);
+        dba.addColumn(DBC4000.P30F0103);
+        dba.addColumn(DBC4000.P30F0104);
+        dba.addColumn(DBC4000.P30F0105);
+        dba.addColumn(DBC4000.P30F0106);
+        dba.addColumn(DBC4000.P30F0107);
+        dba.addColumn(DBC4000.P30F0108);
+        dba.addColumn(DBC4000.P30F0109);
+        dba.addColumn(DBC4000.P30F010A);
+        dba.addColumn(DBC4000.P30F010B);
+        dba.addColumn(DBC4000.P30F010C);
+        dba.addColumn(DBC4000.P30F010D);
+        dba.addColumn(DBC4000.P30F010E);
+        dba.addColumn(DBC4000.P30F010F);
+        dba.addColumn(DBC4000.P30F0110);
+        //dba.addWhere(DBC4000.P30F0102, keys.getP30F0102());
+        dba.addWhere(DBC4000.P30F0104, mkey.getP30F0104());
+        dba.addWhere(DBC4000.P30F0105, mkey.getP30F0105());
+
+        ResultSet rset = dba.executeSelect();
+        boolean ok = rset.next();
+        if (ok)
+        {
+            mkey.setP30F0101(rset.getInt(DBC4000.P30F0101));
+            mkey.setP30F0102(rset.getInt(DBC4000.P30F0102));
+            mkey.setP30F0103(rset.getInt(DBC4000.P30F0103));
+            mkey.setP30F0104(rset.getString(DBC4000.P30F0104));
+            mkey.setP30F0106(rset.getString(DBC4000.P30F0106));
+            mkey.setP30F0107(rset.getString(DBC4000.P30F0107));
+            mkey.setP30F0108(rset.getString(DBC4000.P30F0108));
+            mkey.setP30F0109(rset.getString(DBC4000.P30F0109));
+            mkey.setP30F010A(rset.getString(DBC4000.P30F010A));
+            mkey.setP30F010B(rset.getString(DBC4000.P30F010B));
+            mkey.setP30F010C(rset.getString(DBC4000.P30F010C));
+            mkey.setP30F010D(rset.getString(DBC4000.P30F010D));
+            mkey.setP30F010E(rset.getString(DBC4000.P30F010E));
+            mkey.setP30F010F(rset.getString(DBC4000.P30F010F));
+            mkey.setP30F0110(rset.getString(DBC4000.P30F0110));
+        }
+        rset.close();
+        return ok;
+    }
+
+    private static boolean loadMpwd(DBAccess dba, Mkey mkey) throws Exception
+    {
+        // 口令内容读取
+        dba.reInit();
+        dba.addTable(DBC4000.P30F0200);
+        dba.addColumn(DBC4000.P30F0203);
+        dba.addWhere(DBC4000.P30F0202, mkey.getP30F0104());
+        dba.addSort(DBC4000.P30F0201);
+
+        ResultSet rset = dba.executeSelect();
+        StringBuffer sb = mkey.getMpwd().getP30F0203();
+        while (rset.next())
+        {
+            sb.append(rset.getString(DBC4000.P30F0203));
+        }
+        mkey.getMpwd().setP30F0202(mkey.getP30F0104());
+        rset.close();
+        return true;
+    }
+
+    private static void loadMgtd(DBAccess dba, Mkey mkey) throws Exception
+    {
+        dba.reInit();
+        dba.addTable(DBC4000.P30F0300);
+//      dba.addWhere(DBC4000.P30F0307, "1");
+        dba.addWhere(DBC4000.P30F0309, mkey.getP30F010E());
+        dba.addSort(DBC4000.P30F0305);
+//      dba.addSort(DBC4000.p30f03);
+
+        ResultSet rest = dba.executeSelect();
+        if (rest.next())
+        {
+            mkey.setMgtd(loadMgtd(rest));
+        }
+        rest.close();
+    }
+
+    private static Mgtd loadMgtd(ResultSet rest) throws Exception
+    {
+        Mgtd mgtd = new Mgtd();
+        mgtd.setP30F0301(rest.getInt(DBC4000.P30F0301));
+        mgtd.setP30F0302(rest.getInt(DBC4000.P30F0302));
+        mgtd.setP30F0303(rest.getInt(DBC4000.P30F0303));
+        mgtd.setP30F0304(rest.getInt(DBC4000.P30F0304));
+        mgtd.setP30F0305(rest.getInt(DBC4000.P30F0305));
+        mgtd.setP30F0306(rest.getInt(DBC4000.P30F0306));
+        mgtd.setP30F0307(rest.getInt(DBC4000.P30F0307));
+        mgtd.setP30F0308(rest.getInt(DBC4000.P30F0308));
+        mgtd.setP30F0309(rest.getString(DBC4000.P30F0309));
+        mgtd.setP30F030A(rest.getString(DBC4000.P30F030A));
+        mgtd.setP30F030B(rest.getString(DBC4000.P30F030B));
+        mgtd.setP30F030C(rest.getString(DBC4000.P30F030C));
+        mgtd.setP30F030D(rest.getLong(DBC4000.P30F030D));
+        mgtd.setP30F030E(rest.getLong(DBC4000.P30F030E));
+        mgtd.setP30F030F(rest.getLong(DBC4000.P30F030F));
+        mgtd.setP30F030F(rest.getString(DBC4000.P30F0310));
+        mgtd.setP30F0311(rest.getString(DBC4000.P30F0311));
+        mgtd.setP30F0312(rest.getInt(DBC4000.P30F0312));
+        mgtd.setP30F0313(rest.getInt(DBC4000.P30F0313));
+        mgtd.setP30F0314(rest.getString(DBC4000.P30F0314));
+        return mgtd;
+    }
+
+    private static void loadHint(DBAccess dba, Mkey mkey) throws Exception
+    {
+        java.util.ArrayList<Hint> list = new java.util.ArrayList<Hint>();
+
+        dba.reInit();
+        dba.addTable(DBC4000.P30F0400);
+        dba.addColumn(DBC4000.P30F0403);
+        dba.addColumn(DBC4000.P30F0404);
+        dba.addColumn(DBC4000.P30F0405);
+        dba.addColumn(DBC4000.P30F0406);
+        dba.addWhere(DBC4000.P30F0402, mkey.getP30F010E());
+        dba.addSort(DBC4000.P30F0401);
+
+        ResultSet rset = dba.executeSelect();
+        while (rset.next())
+        {
+            list.add(loadHint(rset));
+        }
+        rset.close();
+        mkey.getMgtd().setHintList(list);
+    }
+
+    private static Hint loadHint(ResultSet rset) throws Exception
+    {
+        Hint hint = new Hint();
+        hint.setP30F0403(rset.getLong(DBC4000.P30F0403));
+        hint.setP30F0404(rset.getInt(DBC4000.P30F0404));
+        hint.setP30F0405(rset.getInt(DBC4000.P30F0405));
+        hint.setP30F0406(rset.getString(DBC4000.P30F0406));
+        return hint;
+    }
+
     public static boolean saveKeysData(UserMdl userMdl, Mkey keys)
     {
         // 数据库连接初始化
@@ -1014,7 +995,7 @@ public class DBA4000
         try
         {
             dba.init(userMdl);
-            updateKeys(dba, keys);
+            updateRecHeader(dba, keys);
             dba.executeBatch();
             return true;
         }
@@ -1029,7 +1010,7 @@ public class DBA4000
         }
     }
 
-    public static boolean savePwdsData(UserMdl userMdl, Mkey keys)
+    public static boolean saveMpwdData(UserMdl userMdl, Mkey keys)
     {
         // 数据库连接初始化
         DBAccess dba = new DBAccess();
@@ -1037,7 +1018,7 @@ public class DBA4000
         try
         {
             dba.init(userMdl);
-            savePwdsData(dba, keys);
+            saveMpwdData(dba, keys);
             return true;
         }
         catch (Exception exp)
@@ -1051,20 +1032,53 @@ public class DBA4000
         }
     }
 
-    public static void savePwdsData(DBAccess dba, Mkey keys) throws Exception
+    public static void saveMpwdData(DBAccess dba, Mkey mkey) throws Exception
     {
         // 数据更新时，首先删除已有数据，再添加数据
-        if (com.magicpwd._util.Char.isValidateHash(keys.getP30F0104()))
+        if (com.magicpwd._util.Char.isValidateHash(mkey.getP30F0104()))
         {
-            if (keys.isHistBack())
+            if (mkey.isHistBack())
             {
-                backup(dba, keys.getP30F0104());
+                backup(dba, mkey.getP30F0104());
             }
-            remove(dba, keys);
+            remove(dba, mkey);
         }
 
-        updateKeys(dba, keys);
-        updatePwds(dba, keys);
+        Mgtd mgtd = mkey.getMgtd();
+        if (!com.magicpwd._util.Char.isValidateHash(mkey.getP30F010E()))
+        {
+            // 新增
+            if (mgtd != null)
+            {
+                updateGtdHeader(dba, mgtd);
+                updateGtdDetail(dba, mgtd);
+                mkey.setP30F010E(mgtd.getP30F0309());
+            }
+            // 删除
+//            else
+//            {
+//                removeGtdHeader(dba, mgtd);
+//                removeGtdDetail(dba, mgtd);
+//            }
+        }
+        else if (mgtd != null)
+        {
+            // 变更
+            if (mkey.getP30F010E().equals(mgtd.getP30F0309()))
+            {
+                updateGtdHeader(dba, mgtd);
+                updateGtdDetail(dba, mgtd);
+            }
+            // 切换
+            else
+            {
+                removeGtdHeader(dba, mgtd);
+                removeGtdDetail(dba, mgtd);
+            }
+        }
+
+        updateRecHeader(dba, mkey);
+        updateRecDetail(dba, mkey);
         dba.executeBatch();
     }
 
@@ -1163,7 +1177,7 @@ public class DBA4000
      * @param keys
      * @throws SQLException
      */
-    private static void updateKeys(DBAccess dba, Mkey keys) throws SQLException
+    private static void updateRecHeader(DBAccess dba, Mkey keys) throws SQLException
     {
         dba.addTable(DBC4000.P30F0100);
         dba.addParam(DBC4000.P30F0101, keys.getP30F0101());
@@ -1178,14 +1192,12 @@ public class DBA4000
         dba.addParam(DBC4000.P30F010B, Util.text2DB(keys.getP30F010B()));
         dba.addParam(DBC4000.P30F010C, Util.text2DB(keys.getP30F010C()));
         dba.addParam(DBC4000.P30F010D, Util.text2DB(keys.getP30F010D()));
-        dba.addParam(DBC4000.P30F010E, keys.getP30F010E() != null ? keys.getP30F010E().toString() : null);
+        Mgtd mgtd = keys.getMgtd();
+        keys.setP30F010E(mgtd != null ? mgtd.getP30F0309() : null);
+        dba.addParam(DBC4000.P30F010E, keys.getP30F010E());
         dba.addParam(DBC4000.P30F010F, Util.text2DB(keys.getP30F010F()));
         dba.addParam(DBC4000.P30F0110, Util.text2DB(keys.getP30F0110()));
         dba.addParam(DBC4000.P30F0111, DBC4000.SQL_NOW, false);
-
-
-
-
 
         if (com.magicpwd._util.Char.isValidateHash(keys.getP30F0104()))
         {
@@ -1204,7 +1216,14 @@ public class DBA4000
         dba.reInit();
     }
 
-    public static void updateKeys(String c, String v, String k) throws SQLException
+    /**
+     * 更新记录头信息
+     * @param c
+     * @param v
+     * @param k
+     * @throws SQLException
+     */
+    public static void updateInfo(String c, String v, String k) throws SQLException
     {
         // 数据库连接初始化
         DBAccess dba = new DBAccess();
@@ -1221,9 +1240,15 @@ public class DBA4000
         dba.dispose();
     }
 
-    private static void updatePwds(DBAccess dba, Mkey keys) throws SQLException
+    /**
+     * 更新记录体信息
+     * @param dba
+     * @param keys
+     * @throws SQLException
+     */
+    private static void updateRecDetail(DBAccess dba, Mkey keys) throws SQLException
     {
-        StringBuffer pwd = keys.getPassword().getP30F0203();
+        StringBuffer pwd = keys.getMpwd().getP30F0203();
         int len = pwd.length();
         int idx = 0;
         int t1 = 0;
@@ -1251,6 +1276,88 @@ public class DBA4000
 
         dba.addInsertBatch();
         dba.reInit();
+    }
+
+    /**
+     * 更新任务头信息
+     * @param dba
+     * @param mkey
+     * @throws SQLException
+     */
+    private static void updateGtdHeader(DBAccess dba, Mgtd mgtd) throws Exception
+    {
+        dba.addTable(DBC4000.P30F0300);
+        dba.addParam(DBC4000.P30F0301, mgtd.getP30F0301());
+        dba.addParam(DBC4000.P30F0302, mgtd.getP30F0302());
+        dba.addParam(DBC4000.P30F0303, mgtd.getP30F0303());
+        dba.addParam(DBC4000.P30F0304, mgtd.getP30F0304());
+        dba.addParam(DBC4000.P30F0305, mgtd.getP30F0305());
+        dba.addParam(DBC4000.P30F0306, mgtd.getP30F0306());
+        dba.addParam(DBC4000.P30F0307, mgtd.getP30F0307());
+        dba.addParam(DBC4000.P30F0308, mgtd.getP30F0308());
+        dba.addParam(DBC4000.P30F030A, mgtd.getP30F030A());
+        dba.addParam(DBC4000.P30F030B, mgtd.getP30F030B());
+        dba.addParam(DBC4000.P30F030C, mgtd.getP30F030C());
+        dba.addParam(DBC4000.P30F030D, mgtd.getP30F030D());
+        dba.addParam(DBC4000.P30F030E, mgtd.getP30F030E());
+        dba.addParam(DBC4000.P30F030F, mgtd.getP30F030F());
+        dba.addParam(DBC4000.P30F0310, mgtd.getP30F0310());
+        dba.addParam(DBC4000.P30F0311, mgtd.getP30F0311());
+        dba.addParam(DBC4000.P30F0312, mgtd.getP30F0312());
+        dba.addParam(DBC4000.P30F0313, mgtd.getP30F0313());
+        dba.addParam(DBC4000.P30F0314, mgtd.getP30F0314());
+        if (com.magicpwd._util.Char.isValidateHash(mgtd.getP30F0309()))
+        {
+            dba.addWhere(DBC4000.P30F0309, mgtd.getP30F0309());
+            dba.addUpdateBatch();
+
+            dba.reInit();
+            dba.addTable(DBC4000.P30F0400);
+            dba.addWhere(DBC4000.P30F0402, mgtd.getP30F0309());
+            dba.addDeleteBatch();
+        }
+        else
+        {
+            mgtd.setP30F0309(Hash.hash(false));
+            dba.addParam(DBC4000.P30F0309, mgtd.getP30F0309());
+            dba.addInsertBatch();
+        }
+        dba.reInit();
+    }
+
+    private static void removeGtdHeader(DBAccess dba, Mgtd mgtd) throws Exception
+    {
+        dba.addTable(DBC4000.P30F0300);
+        dba.addWhere(DBC4000.P30F0309, mgtd.getP30F0309());
+        dba.addDeleteBatch();
+        dba.reInit();
+    }
+
+    /**
+     * 更新任务体信息
+     * @param dba
+     * @param keys
+     * @throws SQLException
+     */
+    private static void updateGtdDetail(DBAccess dba, Mgtd mgtd) throws Exception
+    {
+        int row = 1;
+        for (Hint mtts : mgtd.getHintList())
+        {
+            dba.addTable(DBC4000.P30F0400);
+            dba.addParam(DBC4000.P30F0401, row++);
+            dba.addParam(DBC4000.P30F0402, mgtd.getP30F0309());
+            dba.addParam(DBC4000.P30F0403, mtts.getP30F0403());
+            dba.addParam(DBC4000.P30F0404, mtts.getP30F0404());
+            dba.addParam(DBC4000.P30F0405, mtts.getP30F0405());
+            dba.addParam(DBC4000.P30F0406, mtts.getP30F0406());
+            dba.addInsertBatch();
+            dba.reInit();
+        }
+    }
+
+    private static void removeGtdDetail(DBAccess dba, Mgtd mgtd) throws Exception
+    {
     }
 
     public static boolean deleteKindData(UserMdl userMdl, String root, Kind item, int step)
@@ -1855,6 +1962,12 @@ public class DBA4000
         return mexpList;
     }
 
+    /**
+     * 表达式
+     * @param userMdl
+     * @param mexp
+     * @return
+     */
     public static boolean saveMexpData(UserMdl userMdl, Mexp mexp)
     {
         // 数据库连接初始化
@@ -2079,12 +2192,12 @@ public class DBA4000
             dba.addWhere(DBC4000.P30F0B01, logsHash);
             dba.addSort(DBC4000.P30F0B02);
             rest = dba.executeSelect();
-            StringBuffer sb = keys.getPassword().getP30F0203();
+            StringBuffer sb = keys.getMpwd().getP30F0203();
             while (rest.next())
             {
                 sb.append(rest.getString(DBC4000.P30F0B04));
             }
-            keys.getPassword().setP30F0202(keys.getP30F0104());
+            keys.getMpwd().setP30F0202(keys.getP30F0104());
 
             rest.close();
             return true;

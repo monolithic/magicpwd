@@ -365,7 +365,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         userMdl.getMpwdMdl().setUserLast(un);
         DBA4000.initDataBase(userMdl);
 
-        if (userPtn.callBack(AuthLog.signUp, null))
+        if (userPtn.callBack(AuthLog.signUp, new UserDto("mwiz", un, p1)))
         {
             userPtn.hideWindow();
             return;

@@ -75,39 +75,21 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
         {
             case mexp:
                 ptn = new MexpPtn(trayPtn, userMdl);
-                ptn.initView();
-                ptn.initLang();
-                ptn.initData();
                 break;
             case mwiz:
                 ptn = new MwizPtn(trayPtn, userMdl);
-                ptn.initView();
-                ptn.initLang();
-                ptn.initData();
                 break;
             case mpad:
                 ptn = new MpadPtn(trayPtn, userMdl);
-                ptn.initView();
-                ptn.initLang();
-                ptn.initData();
                 break;
             case maoc:
                 ptn = new MaocPtn(trayPtn, userMdl);
-                ptn.initView();
-                ptn.initLang();
-                ptn.initData();
                 break;
             case mruc:
                 ptn = new MrucPtn(trayPtn, userMdl);
-                ptn.initView();
-                ptn.initLang();
-                ptn.initData();
                 break;
             case mgtd:
                 ptn = new MgtdPtn(trayPtn, userMdl);
-                ptn.initView();
-                ptn.initLang();
-                ptn.initData();
                 break;
             default:
                 ptn = null;

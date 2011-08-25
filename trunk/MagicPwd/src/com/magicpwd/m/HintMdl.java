@@ -68,9 +68,9 @@ public final class HintMdl
         mgtdList = new java.util.ArrayList<Hint>();
         todoList = new java.util.ArrayList<Hint>();
         histList = new java.util.ArrayList<Hint>();
-        //counter = userMdl.getHintInt();
+        counter = userMdl.getHintInt();
 
-        Time.getInstance().registerAction(new Task(0, 1, "mpwd-hint", ""), new IBackCall<String, Task>()
+        Time.getInstance().registerAction(new Task(3, 1, "mpwd-hint", ""), new IBackCall<String, Task>()
         {
 
             @Override
@@ -122,6 +122,7 @@ public final class HintMdl
             // 等提醒
             if (Time.isOnTime(calendar, hint))
             {
+                System.out.println(com.magicpwd._util.Date.getFieldDateFormat().format(new java.util.Date(hint.getP30F0403().longValue())));
                 todoList.add(hint);
                 if (hint.getP30F0303() == ConsDat.MGTD_STATUS_INIT)
                 {

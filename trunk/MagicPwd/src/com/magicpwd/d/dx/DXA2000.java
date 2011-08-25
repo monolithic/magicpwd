@@ -86,7 +86,7 @@ public class DXA2000 extends DXA
                 tempKeys.setP30F0105(userMdl.getCode());
                 itemList.get(0).setData(kindHash);
                 safeMdl.enCrypt(tempKeys, itemList);
-                DBA4000.savePwdsData(dba, tempKeys);
+                DBA4000.saveMpwdData(dba, tempKeys);
 
                 cnt += 1;
                 tempKeys.setDefault();
@@ -132,7 +132,7 @@ public class DXA2000 extends DXA
             for (Mkey keys : dataList)
             {
                 keys.setP30F0105(userMdl.getCode());
-                if (!DBA4000.readPwdsData(userMdl, keys))
+                if (!DBA4000.readMpwdData(userMdl, keys))
                 {
                     continue;
                 }

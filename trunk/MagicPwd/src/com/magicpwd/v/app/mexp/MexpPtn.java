@@ -59,6 +59,7 @@ import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.mexp.GridMdl;
 import com.magicpwd.m.mexp.MexpMdl;
 import com.magicpwd.m.mexp.KindMdl;
 import com.magicpwd.r.KeysCR;
@@ -302,21 +303,22 @@ public class MexpPtn extends AMpwdPtn
 
     public boolean saveKeys()
     {
+        GridMdl gridMdl = mexpMdl.getGridMdl();
         // 是否需要保存
-        if (mexpMdl.getGridMdl().getRowCount() < ConsEnv.PWDS_HEAD_SIZE)
+        if (gridMdl.getRowCount() < ConsEnv.PWDS_HEAD_SIZE)
         {
             return false;
         }
 
         // 数据未被修改
-        if (!mexpMdl.getGridMdl().isModified())
+        if (!gridMdl.isModified())
         {
             //Lang.showMesg(this, LangRes.P30F7A27, "您未曾修改过数据，不需要保存！");
             return false;
         }
 
         // 口令类别检测
-        GuidItem guid = (GuidItem) mexpMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_GUID);
+        GuidItem guid = (GuidItem) gridMdl.getItemAt(ConsEnv.PWDS_HEAD_GUID);
         if (!com.magicpwd._util.Char.isValidate(guid.getData()))
         {
             javax.swing.tree.TreePath path = trGuidTree.getSelectionPath();
@@ -335,11 +337,11 @@ public class MexpPtn extends AMpwdPtn
                 trGuidTree.requestFocus();
                 return false;
             }
-            mexpMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(kind.getC2010203());
+            gridMdl.getItemAt(ConsEnv.PWDS_HEAD_GUID).setData(kind.getC2010203());
         }
 
         // 标题为空检测
-        MetaItem metaItem = (MetaItem) mexpMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_META);
+        MetaItem metaItem = (MetaItem) gridMdl.getItemAt(ConsEnv.PWDS_HEAD_META);
         if (!com.magicpwd._util.Char.isValidate(metaItem.getName()))
         {
             Lang.showMesg(this, LangRes.P30F7A0C, "请输入口令标题！");
@@ -349,13 +351,13 @@ public class MexpPtn extends AMpwdPtn
         }
 
         // 徽标
-        LogoItem logoItem = (LogoItem) mexpMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_LOGO);
+        LogoItem logoItem = (LogoItem) gridMdl.getItemAt(ConsEnv.PWDS_HEAD_LOGO);
 
-        String keysHash = mexpMdl.getGridMdl().getKeysHash();
+        String keysHash = gridMdl.getKeysHash();
 
         try
         {
-            mexpMdl.getGridMdl().saveData(userMdl.isIncBack(), true);
+            gridMdl.saveData(userMdl.isIncBack(), true);
         }
         catch (Exception exp)
         {
@@ -382,7 +384,7 @@ public class MexpPtn extends AMpwdPtn
         }
 
         showPropInfo();
-        hintBar.showNote(true);
+        userMdl.getHintMdl().reload(true);
 
         lastKeys = null;
         tb_LastIndx = -1;

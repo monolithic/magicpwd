@@ -32,6 +32,7 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.db.DBA4000;
+import com.magicpwd.d.db.DBAccess;
 
 /**
  *
@@ -40,7 +41,7 @@ import com.magicpwd.d.db.DBA4000;
 public abstract class SafeMdl
 {
 
-    protected Mkey keys;
+    protected Mkey mkey;
     protected UserMdl userMdl;
     protected java.util.ArrayList<IEditItem> ls_ItemList;
     /**
@@ -54,7 +55,7 @@ public abstract class SafeMdl
     public SafeMdl(UserMdl userMdl)
     {
         this.userMdl = userMdl;
-        keys = new Mkey();
+        mkey = new Mkey();
         ls_ItemList = new java.util.ArrayList<IEditItem>();
     }
 
@@ -217,17 +218,14 @@ public abstract class SafeMdl
     /**
      * 读取指定索引的密码数据
      *
-     * @param keysHash
+     * @param mkeyHash
      */
-    public void loadData(String keysHash) throws Exception
+    public void loadData(String mkeyHash) throws Exception
     {
         clear();
-        keys.setP30F0104(keysHash);
-        keys.setP30F0105(userMdl.getCode());
-        if (DBA4000.readPwdsData(userMdl, keys))
-        {
-            deCrypt(keys, ls_ItemList);
-        }
+        mkey.setP30F0104(mkeyHash);
+        DBA4000.readMpwdData(userMdl, mkey);
+        deCrypt(mkey, ls_ItemList);
     }
 
     /**
@@ -238,10 +236,23 @@ public abstract class SafeMdl
      */
     public void saveData(boolean histBack) throws Exception
     {
-        keys.setP30F0105(userMdl.getCode());
-        keys.setHistBack(histBack);
-        enCrypt(keys, ls_ItemList);
-        DBA4000.savePwdsData(userMdl, keys);
+        mkey.setP30F0105(userMdl.getCode());
+        mkey.setHistBack(histBack);
+        enCrypt(mkey, ls_ItemList);
+        DBAccess dba = new DBAccess();
+        dba.init(userMdl);
+        try
+        {
+            DBA4000.saveMpwdData(dba, mkey);
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+        finally
+        {
+            dba.dispose();
+        }
         clear();
     }
 
@@ -252,7 +263,7 @@ public abstract class SafeMdl
 
     public String getKeysHash()
     {
-        return keys.getP30F0104();
+        return mkey.getP30F0104();
     }
 
     /**
@@ -307,14 +318,14 @@ public abstract class SafeMdl
 
     public void setKeysLabel(int label)
     {
-        keys.setP30F0102(label);
-        DBA4000.saveKeysData(userMdl, keys);
+        mkey.setP30F0102(label);
+        DBA4000.saveKeysData(userMdl, mkey);
     }
 
     public void setKeysMajor(int major)
     {
-        keys.setP30F0103(major);
-        DBA4000.saveKeysData(userMdl, keys);
+        mkey.setP30F0103(major);
+        DBA4000.saveKeysData(userMdl, mkey);
     }
 
     private StringBuffer deCrypt(Mpwd pwds) throws Exception
@@ -334,7 +345,7 @@ public abstract class SafeMdl
     public final void deCrypt(Mkey keys, java.util.List<IEditItem> list) throws Exception
     {
         // 查询数据是否为空
-        StringBuffer text = deCrypt(keys.getPassword());
+        StringBuffer text = deCrypt(keys.getMpwd());
         if (text.length() < 1)
         {
             return;
@@ -364,6 +375,7 @@ public abstract class SafeMdl
         HintItem hint = new HintItem(userMdl);
         hint.setData(keys.getP30F010E());
         hint.setName(keys.getP30F010F());
+        hint.setMgtd(mkey.getMgtd());
         list.add(hint);
 
         // 处理每一个数据
@@ -413,7 +425,7 @@ public abstract class SafeMdl
      */
     public final void enCrypt(Mkey keys, java.util.List<IEditItem> list) throws Exception
     {
-        Mpwd pwds = keys.getPassword();
+        Mpwd pwds = keys.getMpwd();
         StringBuffer text = pwds.getP30F0203();
         text.delete(0, text.length());
 
@@ -436,9 +448,10 @@ public abstract class SafeMdl
         keys.setP30F010C(logo.getPath());
 
         // HintItem
-        HintItem note = (HintItem) list.get(ConsEnv.PWDS_HEAD_HINT);
-        keys.setP30F010E(note.getData());
-        keys.setP30F010F(note.getName());
+        HintItem hint = (HintItem) list.get(ConsEnv.PWDS_HEAD_HINT);
+        keys.setP30F010E(hint.getData());
+        keys.setP30F010F(hint.getName());
+        keys.setMgtd(hint.getMgtd());
 
         // 字符串拼接
         IEditItem item;

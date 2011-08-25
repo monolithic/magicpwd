@@ -83,7 +83,7 @@ public class Jxml
         node.addElement(Lang.getLang(LangRes.P30F1C09, "meta")).addAttribute("name", Lang.getLang(LangRes.P30F1C0A, "关键搜索")).setText(keys.getP30F010A());
         node.addElement(Lang.getLang(LangRes.P30F1C0B, "logo")).addAttribute("name", Lang.getLang(LangRes.P30F1C0C, "口令徽标")).setText(keys.getP30F010B());
         node.addElement(Lang.getLang(LangRes.P30F1C11, "memo")).addAttribute("name", Lang.getLang(LangRes.P30F1C12, "相关说明")).setText(keys.getP30F0110());
-        node.addElement(Lang.getLang(LangRes.P30F1C11, "content")).addAttribute("name", Lang.getLang(LangRes.P30F1C12, "记事内容")).setText(keys.getPassword().getP30F0203().toString());
+        node.addElement(Lang.getLang(LangRes.P30F1C11, "content")).addAttribute("name", Lang.getLang(LangRes.P30F1C12, "记事内容")).setText(keys.getMpwd().getP30F0203().toString());
     }
 
     public static void save(Document document, File file) throws IOException

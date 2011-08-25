@@ -64,7 +64,7 @@ public class NoteMdl extends SafeMdl
     public void clear()
     {
         ls_ItemList.clear();
-        keys.setDefault();
+        mkey.setDefault();
         setModified(false);
     }
 

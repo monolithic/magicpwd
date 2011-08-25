@@ -95,11 +95,12 @@ public final class Mkey implements Serializable
     /**
      * 加密口令
      */
-    private static Mpwd password;
+    private static Mpwd mpwd;
+    private static Mgtd mgtd;
 
     public Mkey()
     {
-        password = new Mpwd();
+        mpwd = new Mpwd();
         setDefault();
     }
 
@@ -121,7 +122,8 @@ public final class Mkey implements Serializable
         setP30F010B(null);
         setP30F010E(null);
         setP30F010F(null);
-        password.setDefault();
+        mpwd.setDefault();
+        mgtd = null;
     }
 
     /**
@@ -174,18 +176,36 @@ public final class Mkey implements Serializable
      * 口令数据
      * @return the Password
      */
-    public Mpwd getPassword()
+    public Mpwd getMpwd()
     {
-        return password;
+        return mpwd;
     }
 
     /**
      * 口令数据
-     * @param Password the Password to set
+     * @param mpwd the Password to set
      */
-    public void setPassword(Mpwd Password)
+    public void setMpwd(Mpwd mpwd)
     {
-        Mkey.password = Password;
+        Mkey.mpwd = mpwd;
+    }
+
+    /**
+     * 口令数据
+     * @return the Password
+     */
+    public Mgtd getMgtd()
+    {
+        return mgtd;
+    }
+
+    /**
+     * 口令数据
+     * @param mpwd the Password to set
+     */
+    public void setMgtd(Mgtd mgtd)
+    {
+        Mkey.mgtd = mgtd;
     }
 
     /**
