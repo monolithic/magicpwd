@@ -318,7 +318,7 @@
             <stroke key="^ H" />
             <stroke key="^ Enter" />
         </action>
-        <action id="show-mexp" class="com.magicpwd.e.tray.MexpAction">
+        <action id="show-mpro" class="com.magicpwd.e.tray.MproAction">
             <stroke key="^ # P" />
         </action>
         <action id="show-mpad" class="com.magicpwd.e.tray.MpadAction">

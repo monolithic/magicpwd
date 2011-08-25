@@ -16,19 +16,19 @@
  */
 package example.mpwd;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 
 /**
  *
  * @author Amon
  */
-public class DemoAction extends AMexpAction
+public class DemoAction extends AMproAction
 {
 
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        mexpPtn.showProgress();
+        mproPtn.showProgress();
     }
 
     @Override

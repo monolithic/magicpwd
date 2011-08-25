@@ -56,7 +56,7 @@ public class Menu extends javax.swing.AbstractAction
         frame.setJMenuBar(bar);
 
         JToolBar toolBar = new JToolBar();
-        ptn.getToolBar("mexp", toolBar, null, AppView.mexp);
+        ptn.getToolBar("mexp", toolBar, null, AppView.mpro);
         frame.getContentPane().add(toolBar, BorderLayout.NORTH);
 
         frame.setSize(new Dimension(400, 300));
