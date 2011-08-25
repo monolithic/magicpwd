@@ -18,7 +18,7 @@ package com.magicpwd._bean;
 
 import com.magicpwd.__a.AEditBean;
 import com.magicpwd.__a.AMpwdPtn;
-import com.magicpwd.__i.mexp.IMexpBean;
+import com.magicpwd.__i.mpro.IMexpBean;
 import com.magicpwd._comn.item.SignItem;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WButtonGroup;

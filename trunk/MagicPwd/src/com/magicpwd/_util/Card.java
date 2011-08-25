@@ -18,7 +18,7 @@ package com.magicpwd._util;
 
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd.m.mexp.GridMdl;
+import com.magicpwd.m.mpro.GridMdl;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;

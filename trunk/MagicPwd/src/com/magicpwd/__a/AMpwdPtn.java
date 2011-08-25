@@ -43,7 +43,7 @@ import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
 import com.magicpwd.v.app.MenuPtn;
 import com.magicpwd.v.app.maoc.MaocPtn;
-import com.magicpwd.v.app.mexp.MexpPtn;
+import com.magicpwd.v.app.mpro.MproPtn;
 import com.magicpwd.v.app.mgtd.MgtdPtn;
 import com.magicpwd.v.app.mpad.MpadPtn;
 import com.magicpwd.v.app.mruc.MrucPtn;
@@ -74,7 +74,7 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
         switch (appView)
         {
             case mexp:
-                ptn = new MexpPtn(trayPtn, userMdl);
+                ptn = new MproPtn(trayPtn, userMdl);
                 break;
             case mwiz:
                 ptn = new MwizPtn(trayPtn, userMdl);

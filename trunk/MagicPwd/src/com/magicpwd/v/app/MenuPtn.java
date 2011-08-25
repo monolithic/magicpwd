@@ -20,7 +20,7 @@ import com.magicpwd.v.app.tray.TrayPtn;
 import com.magicpwd.__i.IAction;
 import com.magicpwd.__i.maoc.IMaocAction;
 import com.magicpwd.__i.mgtd.IMgtdAction;
-import com.magicpwd.__i.mexp.IMexpAction;
+import com.magicpwd.__i.mpro.IMexpAction;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
@@ -36,14 +36,14 @@ import com.magicpwd.__i.mwiz.IMwizAction;
 import com.magicpwd.__i.tray.ITrayAction;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Util;
-import com.magicpwd.e.mexp.skin.FeelAction;
-import com.magicpwd.e.mexp.skin.LookAction;
-import com.magicpwd.e.mexp.skin.MoreAction;
-import com.magicpwd.e.mexp.skin.ThemeAction;
+import com.magicpwd.e.mpro.skin.FeelAction;
+import com.magicpwd.e.mpro.skin.LookAction;
+import com.magicpwd.e.mpro.skin.MoreAction;
+import com.magicpwd.e.mpro.skin.ThemeAction;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
 import com.magicpwd.v.app.maoc.MaocPtn;
-import com.magicpwd.v.app.mexp.MexpPtn;
+import com.magicpwd.v.app.mpro.MproPtn;
 import com.magicpwd.v.app.mgtd.MgtdPtn;
 import com.magicpwd.v.app.mpad.MpadPtn;
 import com.magicpwd.v.app.mruc.MrucPtn;
@@ -542,7 +542,7 @@ public class MenuPtn
         javax.swing.JCheckBoxMenuItem item;
         String lookName = userMdl.getLook();
         LookAction action = new LookAction();
-        action.setMexpPtn((MexpPtn) trayPtn.getMpwdPtn(AppView.mexp));
+        action.setMexpPtn((MproPtn) trayPtn.getMpwdPtn(AppView.mexp));
         WButtonGroup group = new WButtonGroup();
 
         // Java默认风格
@@ -729,7 +729,7 @@ public class MenuPtn
             javax.swing.JCheckBoxMenuItem item;
             String feelName = userMdl.getFeel();
             FeelAction action = new FeelAction();
-            action.setMexpPtn((MexpPtn) trayPtn.getMpwdPtn(AppView.mexp));
+            action.setMexpPtn((MproPtn) trayPtn.getMpwdPtn(AppView.mexp));
             WButtonGroup group = new WButtonGroup();
 
             java.util.Properties prop = new java.util.Properties();
@@ -986,7 +986,7 @@ public class MenuPtn
                                 {
                                     IMexpAction mexpAction = (IMexpAction) action;
                                     mexpAction.setTrayPtn(trayPtn);
-                                    mexpAction.setMexpPtn((MexpPtn) trayPtn.getMpwdPtn(AppView.mexp));
+                                    mexpAction.setMexpPtn((MproPtn) trayPtn.getMpwdPtn(AppView.mexp));
                                     mexpAction.doInit(actInit);
                                 }
                                 else if (action instanceof IMwizAction)
