@@ -16,7 +16,7 @@
  */
 package example.mpwd;
 
-import com.magicpwd.__a.mexp.AMexpAction;
+import com.magicpwd.__a.mpro.AMexpAction;
 
 /**
  *

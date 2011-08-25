@@ -16,7 +16,7 @@
  */
 package example.mpad;
 
-import com.magicpwd.__a.mexp.AMexpAction;
+import com.magicpwd.__a.mpro.AMexpAction;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractButton;
 

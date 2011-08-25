@@ -343,6 +343,10 @@
     </toolbar>
     <!--魔方密码弹出菜单-->
     <popmenu id="kind">
+        <item type="normal" text="$P30F7D05" text-def="添加记录">
+            <action id="new-keys" class="com.magicpwd.e.mexp.file.AppendAction" />
+        </item>
+        <seperator />
         <item type="normal" text="$P30F7D01" text-def="添加类别">
             <action class="com.magicpwd.e.mexp.kind.AppendAction" />
         </item>
@@ -371,9 +375,6 @@
         </item>
     </popmenu>
     <popmenu id="list">
-        <item type="normal" text="$P30F7D05" text-def="添加记录">
-            <action id="new-keys" class="com.magicpwd.e.mexp.file.AppendAction" />
-        </item>
         <item type="normal" text="$P30F7D06" text-def="删除记录">
             <action id="drop-keys" class="com.magicpwd.e.mexp.file.DeleteAction" />
         </item>
