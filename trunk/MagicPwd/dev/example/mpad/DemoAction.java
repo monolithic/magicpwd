@@ -16,7 +16,7 @@
  */
 package example.mpad;
 
-import com.magicpwd.__a.mpro.AMexpAction;
+import com.magicpwd.__a.mpro.AMproAction;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractButton;
 
@@ -24,7 +24,7 @@ import javax.swing.AbstractButton;
  *
  * @author Amon
  */
-public class DemoAction extends AMexpAction
+public class DemoAction extends AMproAction
 {
 
     @Override
