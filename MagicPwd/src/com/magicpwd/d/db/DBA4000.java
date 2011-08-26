@@ -579,14 +579,14 @@ public class DBA4000
         }
     }
 
-    public static MgtdHeader readMgtd(UserMdl userMdl, String mgtdHash)
+    public static MgtdHeader readGtdHeader(UserMdl userMdl, String mgtdHash)
     {
         DBAccess dba = new DBAccess();
 
         try
         {
             dba.init(userMdl);
-            return readMgtd(dba, mgtdHash);
+            return readGtdHeader(dba, mgtdHash);
         }
         catch (Exception exp)
         {
@@ -599,7 +599,29 @@ public class DBA4000
         }
     }
 
-    private static MgtdHeader readMgtd(DBAccess dba, String mgtdHash) throws Exception
+    public static MgtdHeader readMgtd(UserMdl userMdl, String mgtdHash)
+    {
+        DBAccess dba = new DBAccess();
+
+        try
+        {
+            dba.init(userMdl);
+            MgtdHeader mgtd = readGtdHeader(dba, mgtdHash);
+            mgtd.setHintList(readGtdDetail(dba, mgtdHash));
+            return mgtd;
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            return null;
+        }
+        finally
+        {
+            dba.dispose();
+        }
+    }
+
+    private static MgtdHeader readGtdHeader(DBAccess dba, String mgtdHash) throws Exception
     {
         MgtdHeader mgtd = null;
         dba.addTable(DBC4000.P30F0300);
@@ -614,7 +636,11 @@ public class DBA4000
             mgtd = loadGtdHeader(rest);
         }
         rest.close();
+        return mgtd;
+    }
 
+    private static java.util.List<MgtdDetail> readGtdDetail(DBAccess dba, String mgtdHash) throws Exception
+    {
         dba.reInit();
         dba.addTable(DBC4000.P30F0400);
         dba.addColumn(DBC4000.P30F0403);
@@ -623,21 +649,20 @@ public class DBA4000
         dba.addColumn(DBC4000.P30F0406);
         dba.addWhere(DBC4000.P30F0402, mgtdHash);
         dba.addSort(DBC4000.P30F0401);
-        rest = dba.executeSelect();
+        ResultSet rset = dba.executeSelect();
         java.util.List<MgtdDetail> list = new java.util.ArrayList<MgtdDetail>();
         MgtdDetail hint;
-        while (rest.next())
+        while (rset.next())
         {
             hint = new MgtdDetail();
-            hint.setP30F0403(rest.getLong(DBC4000.P30F0403));
-            hint.setP30F0404(rest.getInt(DBC4000.P30F0404));
-            hint.setP30F0405(rest.getInt(DBC4000.P30F0405));
-            hint.setP30F0406(rest.getString(DBC4000.P30F0406));
+            hint.setP30F0403(rset.getLong(DBC4000.P30F0403));
+            hint.setP30F0404(rset.getInt(DBC4000.P30F0404));
+            hint.setP30F0405(rset.getInt(DBC4000.P30F0405));
+            hint.setP30F0406(rset.getString(DBC4000.P30F0406));
             list.add(hint);
         }
 
-        mgtd.setHintList(list);
-        return mgtd;
+        return list;
     }
 
     public static java.util.ArrayList<MgtdHeader> readMgtdList(UserMdl userMdl)
@@ -674,7 +699,7 @@ public class DBA4000
         }
     }
 
-    public static boolean findHintList(UserMdl userMdl, List<MgtdDetail> list)
+    public static boolean findHintList(UserMdl userMdl, List<MgtdHeader> list)
     {
         DBAccess dba = new DBAccess();
 
@@ -685,17 +710,10 @@ public class DBA4000
             String now = Long.toString(System.currentTimeMillis(), 10);
 
             dba.addTable(DBC4000.P30F0300);
-            dba.addTable(DBC4000.P30F0400);
             dba.addColumn(DBC4000.P30F0303);
             dba.addColumn(DBC4000.P30F0305);
             dba.addColumn(DBC4000.P30F0312);
             dba.addColumn(DBC4000.P30F0313);
-            dba.addColumn(DBC4000.P30F0402);
-            dba.addColumn(DBC4000.P30F0403);
-            dba.addColumn(DBC4000.P30F0404);
-            dba.addColumn(DBC4000.P30F0405);
-            dba.addColumn(DBC4000.P30F0406);
-            dba.addWhere(DBC4000.P30F0309, DBC4000.P30F0402, false);
             StringBuilder buf = new StringBuilder();
             buf.append(DBC4000.P30F0305).append('=').append(ConsDat.MGTD_INTVAL_STARTUP);
             buf.append(" OR (");
@@ -706,23 +724,17 @@ public class DBA4000
             buf.append(DBC4000.P30F0303).append(" IN (").append(ConsDat.MGTD_STATUS_READY).append(',').append(ConsDat.MGTD_STATUS_INIT).append(")");
             dba.addWhere(buf.toString());
 
-            MgtdDetail hint;
             ResultSet rest = dba.executeSelect();
             while (rest.next())
             {
-                hint = new MgtdDetail();
-                hint.setP30F0303(rest.getInt(DBC4000.P30F0303));
-                hint.setP30F0305(rest.getInt(DBC4000.P30F0305));
-                hint.setP30F0311(rest.getInt(DBC4000.P30F0312));
-                hint.setP30F0312(rest.getInt(DBC4000.P30F0313));
-                hint.setP30F0402(rest.getString(DBC4000.P30F0402));
-                hint.setP30F0403(rest.getLong(DBC4000.P30F0403));
-                hint.setP30F0404(rest.getInt(DBC4000.P30F0404));
-                hint.setP30F0405(rest.getInt(DBC4000.P30F0405));
-                hint.setP30F0406(rest.getString(DBC4000.P30F0406));
-                list.add(hint);
+                list.add(loadGtdHeader(rest));
             }
             rest.close();
+
+            for (MgtdHeader header : list)
+            {
+                //header.setHintList(loadGtdDetail(dba, header));
+            }
             return true;
         }
         catch (Exception exp)
@@ -780,8 +792,7 @@ public class DBA4000
             dba.init(userMdl);
 
             dba.addTable(DBC4000.P30F0300);
-//            dba.addParam(DBC4000.P30F0702, ConsDat.MGTD_STATUS_INIT);
-//            dba.addWhere(DBC4000.P30F0708, mgtd.getP30F0708());
+            dba.addSort(DBC4000.P30F0301);
             ResultSet rest = dba.executeSelect();
             while (rest.next())
             {
@@ -799,6 +810,18 @@ public class DBA4000
         {
             dba.dispose();
         }
+    }
+
+    public static void listGtdHeader(DBAccess dba, java.util.List<MgtdHeader> mgtdList) throws Exception
+    {
+        dba.addTable(DBC4000.P30F0300);
+        dba.addSort(DBC4000.P30F0301);
+        ResultSet rest = dba.executeSelect();
+        while (rest.next())
+        {
+            mgtdList.add(loadGtdHeader(rest));
+        }
+        rest.close();
     }
 
     public static boolean listGtdDetail(UserMdl userMdl, MgtdHeader mgtd)

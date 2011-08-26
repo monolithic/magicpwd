@@ -29,86 +29,13 @@ package com.magicpwd._comn.mpwd;
 public class MgtdDetail implements java.io.Serializable
 {
 
-    private Integer P30F0303;
-    private Integer P30F0305;
-    private Integer P30F0311;
-    private Integer P30F0312;
+    private int P30F0401;
     private String P30F0402;
     private Long P30F0403;
     private Integer P30F0404;
     private Integer P30F0405;
     /**表达式*/
     private String P30F0406;
-
-    /**
-     * @return the P30F0303
-     */
-    public Integer getP30F0303()
-    {
-        return P30F0303;
-    }
-
-    /**
-     * @param P30F0303 the P30F0303 to set
-     */
-    public void setP30F0303(Integer P30F0303)
-    {
-        this.P30F0303 = P30F0303;
-    }
-
-    /**
-     * 提醒周期
-     * @return the P30F0305
-     */
-    public Integer getP30F0305()
-    {
-        return P30F0305;
-    }
-
-    /**
-     * 提醒周期
-     * @param P30F0305 the P30F0305 to set
-     */
-    public void setP30F0305(Integer P30F0305)
-    {
-        this.P30F0305 = P30F0305;
-    }
-
-    /**
-     * 是否提前
-     * @return the P30F0311
-     */
-    public Integer getP30F0311()
-    {
-        return P30F0311;
-    }
-
-    /**
-     * 是否提前
-     * @param P30F0311 the P30F0311 to set
-     */
-    public void setP30F0311(Integer P30F0311)
-    {
-        this.P30F0311 = P30F0311;
-    }
-
-    /**
-     * 提前时间
-     * @return the P30F0312
-     */
-    public Integer getP30F0312()
-    {
-        return P30F0312;
-    }
-
-    /**
-     * 提前时间
-     * @param P30F0312 the P30F0312 to set
-     */
-    public void setP30F0312(Integer P30F0312)
-    {
-        this.P30F0312 = P30F0312;
-    }
 
     /**
      * 计划索引

@@ -19,6 +19,7 @@ package com.magicpwd._util;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.Task;
 import com.magicpwd._comn.mpwd.MgtdDetail;
+import com.magicpwd._comn.mpwd.MgtdHeader;
 import com.magicpwd._cons.ConsDat;
 import org.javia.arity.Symbols;
 
@@ -202,46 +203,54 @@ public class Time implements java.awt.event.ActionListener
      * @param hint 计划任务
      * @return -2:异常、-1:过期、0满足、1未到
      */
-    public static int isOnTime(java.util.Calendar time, long length, MgtdDetail hint)
+    public static int isOnTime(java.util.Calendar time, long length, MgtdHeader mgtd)
     {
-        switch (hint.getP30F0311())
+        switch (mgtd.getP30F0312())
         {
             case ConsDat.MGTD_UNIT_SECOND:
-                time.add(java.util.Calendar.SECOND, hint.getP30F0312());
+                time.add(java.util.Calendar.SECOND, mgtd.getP30F0313());
                 break;
             case ConsDat.MGTD_UNIT_MINUTE:
-                time.add(java.util.Calendar.MINUTE, hint.getP30F0312());
+                time.add(java.util.Calendar.MINUTE, mgtd.getP30F0313());
                 break;
             case ConsDat.MGTD_UNIT_HOUR:
-                time.add(java.util.Calendar.HOUR_OF_DAY, hint.getP30F0312());
+                time.add(java.util.Calendar.HOUR_OF_DAY, mgtd.getP30F0313());
                 break;
             case ConsDat.MGTD_UNIT_DAY:
-                time.add(java.util.Calendar.DAY_OF_MONTH, hint.getP30F0312());
+                time.add(java.util.Calendar.DAY_OF_MONTH, mgtd.getP30F0313());
                 break;
             case ConsDat.MGTD_UNIT_WEEK:
-                time.add(java.util.Calendar.DAY_OF_MONTH, 7 * hint.getP30F0312());
+                time.add(java.util.Calendar.DAY_OF_MONTH, 7 * mgtd.getP30F0313());
                 break;
             case ConsDat.MGTD_UNIT_MONTH:
-                time.add(java.util.Calendar.MONTH, hint.getP30F0312());
+                time.add(java.util.Calendar.MONTH, mgtd.getP30F0313());
                 break;
             case ConsDat.MGTD_UNIT_YEAR:
-                time.add(java.util.Calendar.YEAR, hint.getP30F0312());
+                time.add(java.util.Calendar.YEAR, mgtd.getP30F0313());
                 break;
         }
         long now = time.getTimeInMillis();
 
         // 定时
-        if (hint.getP30F0305() == ConsDat.MGTD_INTVAL_FIXTIME)
+        if (mgtd.getP30F0305() == ConsDat.MGTD_INTVAL_FIXTIME)
         {
-            long dif = hint.getP30F0403() - now;
-            return dif < 0 ? -1 : (dif <= length ? 0 : 1);
+            for (MgtdDetail detail : mgtd.getHintList())
+            {
+                long dif = detail.getP30F0403() - now;
+                return dif < 0 ? -1 : (dif <= length ? 0 : 1);
+            }
         }
         // 公式
-        if (hint.getP30F0305() == ConsDat.MGTD_INTVAL_FORMULA)
+        if (mgtd.getP30F0305() == ConsDat.MGTD_INTVAL_FORMULA)
         {
-            String exp = hint.getP30F0406();
-            if (Char.isValidate(exp))
+            for (MgtdDetail detail : mgtd.getHintList())
             {
+                String exp = detail.getP30F0406();
+                if (!Char.isValidate(exp))
+                {
+                    continue;
+                }
+
                 try
                 {
                     exp = exp.replaceAll("(n|nian|year)", "" + time.get(java.util.Calendar.YEAR));
@@ -261,126 +270,132 @@ public class Time implements java.awt.event.ActionListener
             }
             return -2;
         }
-        if (hint.getP30F0305() == ConsDat.MGTD_INTVAL_PERIOD)
+        if (mgtd.getP30F0305() == ConsDat.MGTD_INTVAL_PERIOD)
         {
-            // 按秒重复
-            if (hint.getP30F0404() == ConsDat.MGTD_UNIT_SECOND)
+            for (MgtdDetail detail : mgtd.getHintList())
             {
-                long dif = hint.getP30F0403() - now;
-                dif %= (hint.getP30F0405() * 1000);
-                return dif < 0 ? -1 : (dif <= length ? 0 : 1);
-            }
-            // 按分重复
-            if (hint.getP30F0404() == ConsDat.MGTD_UNIT_MINUTE)
-            {
-                // long diff = (now - mtss.getP30F0404()) / 1000 / 60;
-                long dif = hint.getP30F0403() - now;
-                dif %= (hint.getP30F0405() * 60000);
-                return dif < 0 ? -1 : (dif <= length ? 0 : 1);
-            }
-            // 按时重复
-            if (hint.getP30F0404() == ConsDat.MGTD_UNIT_HOUR)
-            {
-                // long diff = (now - mtss.getP30F0404()) / 1000 / 60 / 60;
-                long dif = hint.getP30F0403() - now;
-                dif %= (hint.getP30F0405() * 3600000);
-                return dif < 0 ? -1 : (dif <= length ? 0 : 1);
-            }
-            // 按天重复
-            if (hint.getP30F0404() == ConsDat.MGTD_UNIT_DAY)
-            {
-                // long diff = (now - mtss.getP30F0404()) / 1000 / 60 / 60 / 24;
-                long dif = hint.getP30F0403() - now;
-                dif %= (hint.getP30F0405() * 86400000);
-                return dif < 0 ? -1 : (dif <= length ? 0 : 1);
-            }
-            // 按周重复
-            if (hint.getP30F0404() == ConsDat.MGTD_UNIT_WEEK)
-            {
-                // long diff = (now - mtss.getP30F0404()) / 1000 / 60 / 60 / 24 / 7;
-                long dif = hint.getP30F0403() - now;
-                dif %= (hint.getP30F0405() * 604800000);
-                return dif < 0 ? -1 : (dif <= length ? 0 : 1);
-            }
-            // 按月重复
-            if (hint.getP30F0404() == ConsDat.MGTD_UNIT_MONTH)
-            {
-                java.util.Calendar tmp = (java.util.Calendar) time.clone();
-                tmp.setTimeInMillis(hint.getP30F0403());
-                int dif = (time.get(java.util.Calendar.YEAR) - tmp.get(java.util.Calendar.YEAR)) * 12 + time.get(java.util.Calendar.MONTH) - tmp.get(java.util.Calendar.MONTH);
-                dif %= hint.getP30F0405();
-                return dif < 0 ? -1 : (dif <= length ? 0 : 1);
-            }
-            // 按年重复
-            if (hint.getP30F0404() == ConsDat.MGTD_UNIT_YEAR)
-            {
-                java.util.Calendar tmp = (java.util.Calendar) time.clone();
-                tmp.setTimeInMillis(hint.getP30F0403());
-                int dif = time.get(java.util.Calendar.YEAR) - tmp.get(java.util.Calendar.YEAR);
-                dif %= hint.getP30F0405();
-                return dif < 0 ? -1 : (dif <= length ? 0 : 1);
+                // 按秒重复
+                if (detail.getP30F0404() == ConsDat.MGTD_UNIT_SECOND)
+                {
+                    long dif = detail.getP30F0403() - now;
+                    dif %= (detail.getP30F0405() * 1000);
+                    return dif < 0 ? -1 : (dif <= length ? 0 : 1);
+                }
+                // 按分重复
+                if (detail.getP30F0404() == ConsDat.MGTD_UNIT_MINUTE)
+                {
+                    // long diff = (now - mtss.getP30F0404()) / 1000 / 60;
+                    long dif = detail.getP30F0403() - now;
+                    dif %= (detail.getP30F0405() * 60000);
+                    return dif < 0 ? -1 : (dif <= length ? 0 : 1);
+                }
+                // 按时重复
+                if (detail.getP30F0404() == ConsDat.MGTD_UNIT_HOUR)
+                {
+                    // long diff = (now - mtss.getP30F0404()) / 1000 / 60 / 60;
+                    long dif = detail.getP30F0403() - now;
+                    dif %= (detail.getP30F0405() * 3600000);
+                    return dif < 0 ? -1 : (dif <= length ? 0 : 1);
+                }
+                // 按天重复
+                if (detail.getP30F0404() == ConsDat.MGTD_UNIT_DAY)
+                {
+                    // long diff = (now - mtss.getP30F0404()) / 1000 / 60 / 60 / 24;
+                    long dif = detail.getP30F0403() - now;
+                    dif %= (detail.getP30F0405() * 86400000);
+                    return dif < 0 ? -1 : (dif <= length ? 0 : 1);
+                }
+                // 按周重复
+                if (detail.getP30F0404() == ConsDat.MGTD_UNIT_WEEK)
+                {
+                    // long diff = (now - mtss.getP30F0404()) / 1000 / 60 / 60 / 24 / 7;
+                    long dif = detail.getP30F0403() - now;
+                    dif %= (detail.getP30F0405() * 604800000);
+                    return dif < 0 ? -1 : (dif <= length ? 0 : 1);
+                }
+                // 按月重复
+                if (detail.getP30F0404() == ConsDat.MGTD_UNIT_MONTH)
+                {
+                    java.util.Calendar tmp = (java.util.Calendar) time.clone();
+                    tmp.setTimeInMillis(detail.getP30F0403());
+                    int dif = (time.get(java.util.Calendar.YEAR) - tmp.get(java.util.Calendar.YEAR)) * 12 + time.get(java.util.Calendar.MONTH) - tmp.get(java.util.Calendar.MONTH);
+                    dif %= detail.getP30F0405();
+                    return dif < 0 ? -1 : (dif <= length ? 0 : 1);
+                }
+                // 按年重复
+                if (detail.getP30F0404() == ConsDat.MGTD_UNIT_YEAR)
+                {
+                    java.util.Calendar tmp = (java.util.Calendar) time.clone();
+                    tmp.setTimeInMillis(detail.getP30F0403());
+                    int dif = time.get(java.util.Calendar.YEAR) - tmp.get(java.util.Calendar.YEAR);
+                    dif %= detail.getP30F0405();
+                    return dif < 0 ? -1 : (dif <= length ? 0 : 1);
+                }
             }
             return -2;
         }
-        if (hint.getP30F0305() == ConsDat.MGTD_INTVAL_INTVAL)
+        if (mgtd.getP30F0305() == ConsDat.MGTD_INTVAL_INTVAL)
         {
-            // 按秒重复
-            if (hint.getP30F0404() == ConsDat.MGTD_UNIT_SECOND)
+            for (MgtdDetail detail : mgtd.getHintList())
             {
-                // long diff = (now - mtss.getP30F0404()) / 1000;
-                long dif = hint.getP30F0403() - now;
-                dif %= (hint.getP30F0405() * 1000);
-                return dif < 0 ? -1 : (dif <= length ? 0 : 1);
-            }
-            // 按分重复
-            if (hint.getP30F0404() == ConsDat.MGTD_UNIT_MINUTE)
-            {
-                // long diff = (now - mtss.getP30F0404()) / 1000 / 60;
-                long dif = hint.getP30F0403() - now;
-                dif %= (hint.getP30F0405() * 60000);
-                return dif < 0 ? -1 : (dif <= length ? 0 : 1);
-            }
-            // 按时重复
-            if (hint.getP30F0404() == ConsDat.MGTD_UNIT_HOUR)
-            {
-                // long diff = (now - mtss.getP30F0404()) / 1000 / 60 / 60;
-                long dif = hint.getP30F0403() - now;
-                dif %= (hint.getP30F0405() * 3600000);
-                return dif < 0 ? -1 : (dif <= length ? 0 : 1);
-            }
-            // 按天重复
-            if (hint.getP30F0404() == ConsDat.MGTD_UNIT_DAY)
-            {
-                // long diff = (now - mtss.getP30F0404()) / 1000 / 60 / 60 / 24;
-                long dif = hint.getP30F0403() - now;
-                dif %= (hint.getP30F0405() * 86400000);
-                return dif < 0 ? -1 : (dif <= length ? 0 : 1);
-            }
-            // 按周重复
-            if (hint.getP30F0404() == ConsDat.MGTD_UNIT_WEEK)
-            {
-                // long diff = (now - mtss.getP30F0404()) / 1000 / 60 / 60 / 24 / 7;
-                long dif = hint.getP30F0403() - now;
-                dif %= (hint.getP30F0405() * 604800000);
-                return dif < 0 ? -1 : (dif <= length ? 0 : 1);
-            }
-            // 按月重复
-            if (hint.getP30F0404() == ConsDat.MGTD_UNIT_MONTH)
-            {
-                java.util.Calendar tmp = (java.util.Calendar) time.clone();
-                tmp.setTimeInMillis(hint.getP30F0403());
-                int dif = (time.get(java.util.Calendar.YEAR) - tmp.get(java.util.Calendar.YEAR)) * 12 + time.get(java.util.Calendar.MONTH) - tmp.get(java.util.Calendar.MONTH);
-                dif %= hint.getP30F0405();
-                return dif < 0 ? -1 : (dif <= length ? 0 : 1);
-            }
-            // 按年重复
-            if (hint.getP30F0404() == ConsDat.MGTD_UNIT_YEAR)
-            {
-                java.util.Calendar tmp = (java.util.Calendar) time.clone();
-                tmp.setTimeInMillis(hint.getP30F0403());
-                int dif = time.get(java.util.Calendar.YEAR) - tmp.get(java.util.Calendar.YEAR);
-                dif %= hint.getP30F0405();
-                return dif < 0 ? -1 : (dif <= length ? 0 : 1);
+                // 按秒重复
+                if (detail.getP30F0404() == ConsDat.MGTD_UNIT_SECOND)
+                {
+                    // long diff = (now - mtss.getP30F0404()) / 1000;
+                    long dif = detail.getP30F0403() - now;
+                    dif %= (detail.getP30F0405() * 1000);
+                    return dif < 0 ? -1 : (dif <= length ? 0 : 1);
+                }
+                // 按分重复
+                if (detail.getP30F0404() == ConsDat.MGTD_UNIT_MINUTE)
+                {
+                    // long diff = (now - mtss.getP30F0404()) / 1000 / 60;
+                    long dif = detail.getP30F0403() - now;
+                    dif %= (detail.getP30F0405() * 60000);
+                    return dif < 0 ? -1 : (dif <= length ? 0 : 1);
+                }
+                // 按时重复
+                if (detail.getP30F0404() == ConsDat.MGTD_UNIT_HOUR)
+                {
+                    // long diff = (now - mtss.getP30F0404()) / 1000 / 60 / 60;
+                    long dif = detail.getP30F0403() - now;
+                    dif %= (detail.getP30F0405() * 3600000);
+                    return dif < 0 ? -1 : (dif <= length ? 0 : 1);
+                }
+                // 按天重复
+                if (detail.getP30F0404() == ConsDat.MGTD_UNIT_DAY)
+                {
+                    // long diff = (now - mtss.getP30F0404()) / 1000 / 60 / 60 / 24;
+                    long dif = detail.getP30F0403() - now;
+                    dif %= (detail.getP30F0405() * 86400000);
+                    return dif < 0 ? -1 : (dif <= length ? 0 : 1);
+                }
+                // 按周重复
+                if (detail.getP30F0404() == ConsDat.MGTD_UNIT_WEEK)
+                {
+                    // long diff = (now - mtss.getP30F0404()) / 1000 / 60 / 60 / 24 / 7;
+                    long dif = detail.getP30F0403() - now;
+                    dif %= (detail.getP30F0405() * 604800000);
+                    return dif < 0 ? -1 : (dif <= length ? 0 : 1);
+                }
+                // 按月重复
+                if (detail.getP30F0404() == ConsDat.MGTD_UNIT_MONTH)
+                {
+                    java.util.Calendar tmp = (java.util.Calendar) time.clone();
+                    tmp.setTimeInMillis(detail.getP30F0403());
+                    int dif = (time.get(java.util.Calendar.YEAR) - tmp.get(java.util.Calendar.YEAR)) * 12 + time.get(java.util.Calendar.MONTH) - tmp.get(java.util.Calendar.MONTH);
+                    dif %= detail.getP30F0405();
+                    return dif < 0 ? -1 : (dif <= length ? 0 : 1);
+                }
+                // 按年重复
+                if (detail.getP30F0404() == ConsDat.MGTD_UNIT_YEAR)
+                {
+                    java.util.Calendar tmp = (java.util.Calendar) time.clone();
+                    tmp.setTimeInMillis(detail.getP30F0403());
+                    int dif = time.get(java.util.Calendar.YEAR) - tmp.get(java.util.Calendar.YEAR);
+                    dif %= detail.getP30F0405();
+                    return dif < 0 ? -1 : (dif <= length ? 0 : 1);
+                }
             }
             return -2;
         }
