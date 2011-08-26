@@ -18,7 +18,7 @@ package com.magicpwd.d.dx;
 
 import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd._comn.mpwd.Mkey;
+import com.magicpwd._comn.mpwd.MpwdHeader;
 import com.magicpwd.__a.AEditItem;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Bean;
@@ -52,7 +52,7 @@ public class DXA2000 extends DXA
 
             java.util.ArrayList<IEditItem> itemList = new java.util.ArrayList<IEditItem>();
             java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("^\\d+");
-            Mkey tempKeys = new Mkey();
+            MpwdHeader tempKeys = new MpwdHeader();
 
             String tmp1;
             String tmp2;
@@ -115,7 +115,7 @@ public class DXA2000 extends DXA
     {
         int cnt = 0;
 
-        java.util.ArrayList<Mkey> dataList = new java.util.ArrayList<Mkey>();
+        java.util.ArrayList<MpwdHeader> dataList = new java.util.ArrayList<MpwdHeader>();
         DBA4000.listRecHeaderByCat(userMdl, kindHash, dataList);
         if (dataList == null || dataList.size() < 1)
         {
@@ -129,7 +129,7 @@ public class DXA2000 extends DXA
             writer = new java.io.BufferedWriter(new java.io.FileWriter(file));
             StringBuilder builder = new StringBuilder();
 
-            for (Mkey keys : dataList)
+            for (MpwdHeader keys : dataList)
             {
                 keys.setP30F0105(userMdl.getCode());
                 if (!DBA4000.readMpwdData(userMdl, keys))

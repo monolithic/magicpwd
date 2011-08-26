@@ -18,8 +18,8 @@ package com.magicpwd.x.app.mgtd.schedule;
 
 import com.magicpwd.__i.mgtd.IMgtdBean;
 import com.magicpwd._comn.I1S1;
-import com.magicpwd._comn.mpwd.Mgtd;
-import com.magicpwd._comn.mpwd.Hint;
+import com.magicpwd._comn.mpwd.MgtdHeader;
+import com.magicpwd._comn.mpwd.MgtdDetail;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd.x.app.mgtd.MgtdDlg;
@@ -181,12 +181,12 @@ public class Intval extends javax.swing.JPanel implements IMgtdBean
     }
 
     @Override
-    public boolean showData(Mgtd mgtd)
+    public boolean showData(MgtdHeader mgtd)
     {
         spFtime.setValue(new java.util.Date(mgtd.getP30F030D()));
         spTtime.setValue(new java.util.Date(mgtd.getP30F030E()));
 
-        Hint hint = mgtd.getHint(0);
+        MgtdDetail hint = mgtd.getHint(0);
         if (hint != null)
         {
             spStime.setValue(new java.util.Date(hint.getP30F0403()));
@@ -198,7 +198,7 @@ public class Intval extends javax.swing.JPanel implements IMgtdBean
     }
 
     @Override
-    public boolean saveData(Mgtd mgtd)
+    public boolean saveData(MgtdHeader mgtd)
     {
         Object unitObj = cbIntval.getSelectedItem();
         if (unitObj == null || !(unitObj instanceof I1S1))
@@ -211,9 +211,9 @@ public class Intval extends javax.swing.JPanel implements IMgtdBean
         mgtd.setP30F030E(smTtime.getDate().getTime());
         mgtd.setP30F030F(0L);
 
-        java.util.List<Hint> list = new java.util.ArrayList<Hint>();
+        java.util.List<MgtdDetail> list = new java.util.ArrayList<MgtdDetail>();
 
-        Hint hint = new Hint();
+        MgtdDetail hint = new MgtdDetail();
         hint.setP30F0403(smStime.getDate().getTime());
         hint.setP30F0404(unit.getK());
         hint.setP30F0405(smIntval.getNumber().intValue());

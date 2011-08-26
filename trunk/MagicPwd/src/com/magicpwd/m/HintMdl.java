@@ -19,7 +19,7 @@ package com.magicpwd.m;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd.__i.IHintView;
 import com.magicpwd._comn.Task;
-import com.magicpwd._comn.mpwd.Hint;
+import com.magicpwd._comn.mpwd.MgtdDetail;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._util.Time;
 import com.magicpwd.d.db.DBA4000;
@@ -42,15 +42,15 @@ public final class HintMdl
     /**
      * 计划任务列表
      */
-    private java.util.List<Hint> mgtdList;
+    private java.util.List<MgtdDetail> mgtdList;
     /**
      * 待办事项列表
      */
-    private java.util.List<Hint> todoList;
+    private java.util.List<MgtdDetail> todoList;
     /**
      * 过期事项列表
      */
-    private java.util.List<Hint> histList;
+    private java.util.List<MgtdDetail> histList;
     /**
      * 提醒视图列表
      */
@@ -65,9 +65,9 @@ public final class HintMdl
 
     public void init()
     {
-        mgtdList = new java.util.ArrayList<Hint>();
-        todoList = new java.util.ArrayList<Hint>();
-        histList = new java.util.ArrayList<Hint>();
+        mgtdList = new java.util.ArrayList<MgtdDetail>();
+        todoList = new java.util.ArrayList<MgtdDetail>();
+        histList = new java.util.ArrayList<MgtdDetail>();
         counter = userMdl.getHintInt();
 
         Time.getInstance().registerAction(new Task(3, 1, "mpwd-hint", ""), new IBackCall<String, Task>()
@@ -118,7 +118,7 @@ public final class HintMdl
         histList.clear();
         java.util.HashMap<String, Integer> updtList = new java.util.HashMap<String, Integer>();
         int x;
-        for (Hint hint : mgtdList)
+        for (MgtdDetail hint : mgtdList)
         {
             // 等提醒
             x = Time.isOnTime(calendar, 1800000, hint);
@@ -193,12 +193,12 @@ public final class HintMdl
         }
     }
 
-    public java.util.List<Hint> getTodoList()
+    public java.util.List<MgtdDetail> getTodoList()
     {
         return todoList;
     }
 
-    public java.util.List<Hint> getHistList()
+    public java.util.List<MgtdDetail> getHistList()
     {
         return histList;
     }

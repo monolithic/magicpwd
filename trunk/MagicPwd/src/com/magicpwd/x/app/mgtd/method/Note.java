@@ -17,7 +17,7 @@
 package com.magicpwd.x.app.mgtd.method;
 
 import com.magicpwd.__i.mgtd.IMgtdBean;
-import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._comn.mpwd.MgtdHeader;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
@@ -94,14 +94,14 @@ public class Note extends javax.swing.JPanel implements IMgtdBean
     }
 
     @Override
-    public boolean showData(Mgtd mgtd)
+    public boolean showData(MgtdHeader mgtd)
     {
         tfNote.setText(mgtd.getP30F0310());
         return true;
     }
 
     @Override
-    public boolean saveData(Mgtd mgtd)
+    public boolean saveData(MgtdHeader mgtd)
     {
         String text = tfNote.getText();
         if (!Char.isValidate(text))

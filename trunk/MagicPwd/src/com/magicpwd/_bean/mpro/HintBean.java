@@ -19,8 +19,8 @@ package com.magicpwd._bean.mpro;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mpro.IMproBean;
 import com.magicpwd._comn.item.HintItem;
-import com.magicpwd._comn.mpwd.Hint;
-import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._comn.mpwd.MgtdDetail;
+import com.magicpwd._comn.mpwd.MgtdHeader;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
@@ -212,10 +212,10 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
     {
         if (mgtdType > 0)
         {
-            Mgtd mgtd = itemData.getMgtd();
+            MgtdHeader mgtd = itemData.getMgtd();
             if (mgtd == null)
             {
-                mgtd = new Mgtd();
+                mgtd = new MgtdHeader();
                 itemData.setMgtd(mgtd);
             }
 
@@ -254,8 +254,8 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
             mgtd.setP30F0313(5);
             mgtd.setP30F0314(itemData.getName());
 
-            java.util.ArrayList<Hint> list = new java.util.ArrayList<Hint>(1);
-            Hint hint = new Hint();
+            java.util.ArrayList<MgtdDetail> list = new java.util.ArrayList<MgtdDetail>(1);
+            MgtdDetail hint = new MgtdDetail();
             hint.setP30F0403(mgtdCal.getTimeInMillis());
             hint.setP30F0404(mgtdUnit);
             hint.setP30F0405(mgtdData);
@@ -281,7 +281,7 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
 
     private boolean initMgtdMenu()
     {
-        java.util.List<Mgtd> mgtdList = DBA4000.readMgtdList(mproPtn.getUserMdl());
+        java.util.List<MgtdHeader> mgtdList = DBA4000.readMgtdList(mproPtn.getUserMdl());
         java.awt.event.ActionListener al = new java.awt.event.ActionListener()
         {
 
@@ -295,7 +295,7 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
         boolean tmp = false;
         int idx = 0;
         int max = mgtdList.size();
-        Mgtd mgtd;
+        MgtdHeader mgtd;
         javax.swing.AbstractButton button;
 
         button = menuPtn.getButton("hint-fixtime");
@@ -589,7 +589,7 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
 
     private void miEditMgtdActionPerformed(java.awt.event.ActionEvent e)
     {
-        Mgtd mgtd = DBA4000.readMgtd(mproPtn.getUserMdl(), itemData.getData());
+        MgtdHeader mgtd = DBA4000.readMgtd(mproPtn.getUserMdl(), itemData.getData());
         if (mgtd == null)
         {
             return;

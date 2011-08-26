@@ -22,7 +22,7 @@ import com.magicpwd.__i.IBackCall;
 import com.magicpwd.__i.mgtd.IMgtdBean;
 import com.magicpwd._comn.I1S1;
 import com.magicpwd._comn.I1S2;
-import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._comn.mpwd.MgtdHeader;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
@@ -47,7 +47,7 @@ public class MgtdDlg extends ADialog
 {
 
     private AMpwdPtn formPtn;
-    private Mgtd mgtd;
+    private MgtdHeader mgtd;
     private javax.swing.SpinnerNumberModel smAhead;
     private IBackCall<String, String> backCall;
 
@@ -335,7 +335,7 @@ public class MgtdDlg extends ADialog
         }
     }
 
-    public void initData(Mgtd mgtd)
+    public void initData(MgtdHeader mgtd)
     {
         btAbort.addActionListener(new java.awt.event.ActionListener()
         {
@@ -471,7 +471,7 @@ public class MgtdDlg extends ADialog
 
         if (mgtd == null)
         {
-            mgtd = new Mgtd();
+            mgtd = new MgtdHeader();
         }
         mgtd.setP30F0302(ConsDat.MGTD_TYPE_DATETIME);
         mgtd.setP30F0303(ConsDat.MGTD_STATUS_INIT);

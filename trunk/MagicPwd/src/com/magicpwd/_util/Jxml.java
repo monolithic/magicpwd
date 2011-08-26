@@ -16,7 +16,7 @@
  */
 package com.magicpwd._util;
 
-import com.magicpwd._comn.mpwd.Mkey;
+import com.magicpwd._comn.mpwd.MpwdHeader;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import java.io.File;
@@ -51,7 +51,7 @@ public class Jxml
         return doc;
     }
 
-    public static void save(String file, Mkey keys, List pwds)
+    public static void save(String file, MpwdHeader keys, List pwds)
     {
         Document doc = create();
 
@@ -70,7 +70,7 @@ public class Jxml
         node.addElement(Lang.getLang(LangRes.P30F1C11, "memo")).addAttribute("name", Lang.getLang(LangRes.P30F1C12, "相关说明")).setText(keys.getP30F0110());
     }
 
-    public static void save(String file, Mkey keys)
+    public static void save(String file, MpwdHeader keys)
     {
         Document doc = create();
 

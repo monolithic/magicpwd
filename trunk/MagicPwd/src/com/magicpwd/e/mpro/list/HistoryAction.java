@@ -17,7 +17,7 @@
 package com.magicpwd.e.mpro.list;
 
 import com.magicpwd.__a.mpro.AMproAction;
-import com.magicpwd._comn.mpwd.Mkey;
+import com.magicpwd._comn.mpwd.MpwdHeader;
 
 /**
  *
@@ -34,7 +34,7 @@ public class HistoryAction extends AMproAction
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
         Object obj = mproPtn.getSelectedListValue();
-        if (obj == null || !(obj instanceof Mkey))
+        if (obj == null || !(obj instanceof MpwdHeader))
         {
             return;
         }

@@ -18,8 +18,8 @@ package com.magicpwd.x.app.mgtd.schedule;
 
 import com.magicpwd.__i.mgtd.IMgtdBean;
 import com.magicpwd._comn.I1S1;
-import com.magicpwd._comn.mpwd.Hint;
-import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._comn.mpwd.MgtdDetail;
+import com.magicpwd._comn.mpwd.MgtdHeader;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.LangRes;
@@ -198,7 +198,7 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
     }
 
     @Override
-    public boolean showData(Mgtd mgtd)
+    public boolean showData(MgtdHeader mgtd)
     {
         smFtime.setValue(new java.util.Date(mgtd.getP30F030D()));
         smTtime.setValue(new java.util.Date(mgtd.getP30F030E()));
@@ -206,7 +206,7 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
 
         int[] item = new int[mgtd.getHintList().size()];
         int i = 0;
-        for (Hint hint : mgtd.getHintList())
+        for (MgtdDetail hint : mgtd.getHintList())
         {
             if (i == 0)
             {
@@ -236,7 +236,7 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
     }
 
     @Override
-    public boolean saveData(Mgtd mgtd)
+    public boolean saveData(MgtdHeader mgtd)
     {
         Object unitObj = cbPeriod.getSelectedItem();
         if (unitObj == null || !(unitObj instanceof I1S1))
@@ -256,10 +256,10 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
         mgtd.setP30F030E(smTtime.getDate().getTime());
         mgtd.setP30F030F(smStime.getDate().getTime());
 
-        Hint hint;
+        MgtdDetail hint;
         I1S1 time;
         I1S1 unit = (I1S1) unitObj;
-        java.util.List<Hint> list = new java.util.ArrayList<Hint>();
+        java.util.List<MgtdDetail> list = new java.util.ArrayList<MgtdDetail>();
         for (Object obj : timeObj)
         {
             if (!(obj instanceof I1S1))
@@ -267,7 +267,7 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
                 continue;
             }
             time = (I1S1) obj;
-            hint = new Hint();
+            hint = new MgtdDetail();
             hint.setP30F0403(0L);
             hint.setP30F0404(unit.getK());
             hint.setP30F0405(time.getK());

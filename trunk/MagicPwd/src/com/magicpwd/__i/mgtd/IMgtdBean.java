@@ -16,7 +16,7 @@
  */
 package com.magicpwd.__i.mgtd;
 
-import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._comn.mpwd.MgtdHeader;
 
 /**
  *
@@ -35,7 +35,7 @@ public interface IMgtdBean
 
     String getTitle();
 
-    boolean showData(Mgtd mgtd);
+    boolean showData(MgtdHeader mgtd);
 
-    boolean saveData(Mgtd mgtd);
+    boolean saveData(MgtdHeader mgtd);
 }

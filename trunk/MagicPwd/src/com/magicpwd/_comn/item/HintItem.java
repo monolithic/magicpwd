@@ -17,7 +17,7 @@
 package com.magicpwd._comn.item;
 
 import com.magicpwd.__a.AEditItem;
-import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._comn.mpwd.MgtdHeader;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd.m.UserMdl;
 import org.dom4j.Element;
@@ -29,7 +29,7 @@ import org.dom4j.Element;
 public class HintItem extends AEditItem
 {
 
-    private Mgtd mgtd;
+    private MgtdHeader mgtd;
 
     public HintItem(UserMdl userMdl)
     {
@@ -70,7 +70,7 @@ public class HintItem extends AEditItem
     /**
      * @return the mgtd
      */
-    public Mgtd getMgtd()
+    public MgtdHeader getMgtd()
     {
         return mgtd;
     }
@@ -78,7 +78,7 @@ public class HintItem extends AEditItem
     /**
      * @param mgtd the mgtd to set
      */
-    public void setMgtd(Mgtd mgtd)
+    public void setMgtd(MgtdHeader mgtd)
     {
         this.mgtd = mgtd;
     }

@@ -24,7 +24,7 @@ import com.magicpwd._cons.ConsDat;
  * 口令信息
  * @author Amon
  */
-public final class Mkey implements Serializable
+public final class MpwdHeader implements Serializable
 {
 
     private boolean histBack;
@@ -95,12 +95,12 @@ public final class Mkey implements Serializable
     /**
      * 加密口令
      */
-    private static Mpwd mpwd;
-    private static Mgtd mgtd;
+    private static MpwdDetail mpwd;
+    private static MgtdHeader mgtd;
 
-    public Mkey()
+    public MpwdHeader()
     {
-        mpwd = new Mpwd();
+        mpwd = new MpwdDetail();
         setDefault();
     }
 
@@ -176,7 +176,7 @@ public final class Mkey implements Serializable
      * 口令数据
      * @return the Password
      */
-    public Mpwd getMpwd()
+    public MpwdDetail getMpwd()
     {
         return mpwd;
     }
@@ -185,16 +185,16 @@ public final class Mkey implements Serializable
      * 口令数据
      * @param mpwd the Password to set
      */
-    public void setMpwd(Mpwd mpwd)
+    public void setMpwd(MpwdDetail mpwd)
     {
-        Mkey.mpwd = mpwd;
+        MpwdHeader.mpwd = mpwd;
     }
 
     /**
      * 口令数据
      * @return the Password
      */
-    public Mgtd getMgtd()
+    public MgtdHeader getMgtd()
     {
         return mgtd;
     }
@@ -203,9 +203,9 @@ public final class Mkey implements Serializable
      * 口令数据
      * @param mpwd the Password to set
      */
-    public void setMgtd(Mgtd mgtd)
+    public void setMgtd(MgtdHeader mgtd)
     {
-        Mkey.mgtd = mgtd;
+        MpwdHeader.mgtd = mgtd;
     }
 
     /**
