@@ -18,7 +18,7 @@ package com.magicpwd.e.mpro.list;
 
 import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd.__i.IBackCall;
-import com.magicpwd._comn.mpwd.Mkey;
+import com.magicpwd._comn.mpwd.MpwdHeader;
 import com.magicpwd._util.Char;
 import com.magicpwd.x.app.CatDialog;
 
@@ -62,9 +62,9 @@ public class MovetoAction extends AMproAction implements IBackCall<String, Strin
         }
 
         Object obj = mproPtn.getSelectedListValue();
-        if (obj instanceof Mkey)
+        if (obj instanceof MpwdHeader)
         {
-            ((Mkey) obj).setP30F0106(hash);
+            ((MpwdHeader) obj).setP30F0106(hash);
         }
         mproPtn.changeKind(hash);
 

@@ -17,7 +17,7 @@
 package com.magicpwd.v.app.mpro;
 
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd._comn.mpwd.Mkey;
+import com.magicpwd._comn.mpwd.MpwdHeader;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.item.HintItem;
@@ -42,7 +42,7 @@ public class HistDlg extends javax.swing.JDialog
 {
 
     private int indx;
-    private Mkey keys;
+    private MpwdHeader keys;
     private List<S1S2> hist;
     private List<IEditItem> ls_ItemList;
     private DefaultListModel lm_HistList;
@@ -54,7 +54,7 @@ public class HistDlg extends javax.swing.JDialog
         super(mproPtn, true);
         this.mproPtn = mproPtn;
         this.gridMdl = gridMdl;
-        keys = new Mkey();
+        keys = new MpwdHeader();
     }
 
     public void initView()
@@ -175,7 +175,7 @@ public class HistDlg extends javax.swing.JDialog
         }
         else
         {
-            keys = new Mkey();
+            keys = new MpwdHeader();
             hist = new ArrayList<S1S2>();
             ls_ItemList = new ArrayList<IEditItem>();
 

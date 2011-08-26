@@ -18,7 +18,7 @@ package com.magicpwd._util;
 
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.Task;
-import com.magicpwd._comn.mpwd.Hint;
+import com.magicpwd._comn.mpwd.MgtdDetail;
 import com.magicpwd._cons.ConsDat;
 import org.javia.arity.Symbols;
 
@@ -202,7 +202,7 @@ public class Time implements java.awt.event.ActionListener
      * @param hint 计划任务
      * @return -2:异常、-1:过期、0满足、1未到
      */
-    public static int isOnTime(java.util.Calendar time, long length, Hint hint)
+    public static int isOnTime(java.util.Calendar time, long length, MgtdDetail hint)
     {
         switch (hint.getP30F0311())
         {

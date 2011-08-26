@@ -26,7 +26,7 @@ package com.magicpwd._comn.mpwd;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public class Hint implements java.io.Serializable
+public class MgtdDetail implements java.io.Serializable
 {
 
     private Integer P30F0303;

@@ -17,8 +17,8 @@
 package com.magicpwd.m;
 
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd._comn.mpwd.Mkey;
-import com.magicpwd._comn.mpwd.Mpwd;
+import com.magicpwd._comn.mpwd.MpwdHeader;
+import com.magicpwd._comn.mpwd.MpwdDetail;
 import com.magicpwd.__a.AEditItem;
 import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.item.HintItem;
@@ -41,7 +41,7 @@ import com.magicpwd.d.db.DBAccess;
 public abstract class SafeMdl
 {
 
-    protected Mkey mkey;
+    protected MpwdHeader mkey;
     protected UserMdl userMdl;
     protected java.util.ArrayList<IEditItem> ls_ItemList;
     /**
@@ -55,7 +55,7 @@ public abstract class SafeMdl
     public SafeMdl(UserMdl userMdl)
     {
         this.userMdl = userMdl;
-        mkey = new Mkey();
+        mkey = new MpwdHeader();
         ls_ItemList = new java.util.ArrayList<IEditItem>();
     }
 
@@ -328,7 +328,7 @@ public abstract class SafeMdl
         DBA4000.saveKeysData(userMdl, mkey);
     }
 
-    private StringBuffer deCrypt(Mpwd pwds) throws Exception
+    private StringBuffer deCrypt(MpwdDetail pwds) throws Exception
     {
 //        pwds.deCript(userMdl.getDCipher(), userMdl.getSec().getMask());
 //        return pwds.getP30F0203();
@@ -342,7 +342,7 @@ public abstract class SafeMdl
      *
      * @param dba
      */
-    public final void deCrypt(Mkey keys, java.util.List<IEditItem> list) throws Exception
+    public final void deCrypt(MpwdHeader keys, java.util.List<IEditItem> list) throws Exception
     {
         // 查询数据是否为空
         StringBuffer text = deCrypt(keys.getMpwd());
@@ -409,7 +409,7 @@ public abstract class SafeMdl
         }
     }
 
-    private StringBuffer enCrypt(Mpwd pwds) throws Exception
+    private StringBuffer enCrypt(MpwdDetail pwds) throws Exception
     {
 //        pwds.enCrypt(userMdl.getECipher(), userMdl.getSec().getMask());
 //        return pwds.getP30F0203();
@@ -423,9 +423,9 @@ public abstract class SafeMdl
      *
      * @param dba
      */
-    public final void enCrypt(Mkey keys, java.util.List<IEditItem> list) throws Exception
+    public final void enCrypt(MpwdHeader keys, java.util.List<IEditItem> list) throws Exception
     {
-        Mpwd pwds = keys.getMpwd();
+        MpwdDetail pwds = keys.getMpwd();
         StringBuffer text = pwds.getP30F0203();
         text.delete(0, text.length());
 

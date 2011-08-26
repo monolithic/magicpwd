@@ -17,7 +17,7 @@
 package com.magicpwd.x.app.mgtd.method;
 
 import com.magicpwd.__i.mgtd.IMgtdBean;
-import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._comn.mpwd.MgtdHeader;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._util.Char;
@@ -124,7 +124,7 @@ public class Apps extends javax.swing.JPanel implements IMgtdBean
     }
 
     @Override
-    public boolean showData(Mgtd mgtd)
+    public boolean showData(MgtdHeader mgtd)
     {
         tfPath.setText(mgtd.getP30F0310());
         tfArgs.setText(mgtd.getP30F0311());
@@ -132,7 +132,7 @@ public class Apps extends javax.swing.JPanel implements IMgtdBean
     }
 
     @Override
-    public boolean saveData(Mgtd mgtd)
+    public boolean saveData(MgtdHeader mgtd)
     {
         String text = tfPath.getText();
         if (!Char.isValidate(text))

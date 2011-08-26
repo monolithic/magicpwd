@@ -22,7 +22,7 @@ import java.io.Serializable;
  * 计划任务
  * @author Aven
  */
-public class Mgtd implements Serializable
+public class MgtdHeader implements Serializable
 {
 
     /**显示排序*/
@@ -66,7 +66,7 @@ public class Mgtd implements Serializable
     /**相关说明*/
     private String P30F0314;
     /**提示列表*/
-    private java.util.List<Hint> hintList;
+    private java.util.List<MgtdDetail> hintList;
 
     /**
      * 显示排序
@@ -431,7 +431,7 @@ public class Mgtd implements Serializable
     /**
      * @return the hintList
      */
-    public java.util.List<Hint> getHintList()
+    public java.util.List<MgtdDetail> getHintList()
     {
         return hintList;
     }
@@ -439,12 +439,12 @@ public class Mgtd implements Serializable
     /**
      * @param hintList the hintList to set
      */
-    public void setHintList(java.util.List<Hint> hintList)
+    public void setHintList(java.util.List<MgtdDetail> hintList)
     {
         this.hintList = hintList;
     }
 
-    public Hint getHint(int index)
+    public MgtdDetail getHint(int index)
     {
         if (hintList != null && index > -1 && index < hintList.size())
         {

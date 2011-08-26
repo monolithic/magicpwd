@@ -17,7 +17,7 @@
 package com.magicpwd.d.dx;
 
 import com.magicpwd.__i.IEditItem;
-import com.magicpwd._comn.mpwd.Mkey;
+import com.magicpwd._comn.mpwd.MpwdHeader;
 import com.magicpwd.m.SafeMdl;
 import com.magicpwd.m.UserMdl;
 
@@ -38,7 +38,7 @@ public class DXA1000 extends DXA
         int size = 0;
         int indx = 0;
         IEditItem item;
-        Mkey tempKeys = new Mkey();
+        MpwdHeader tempKeys = new MpwdHeader();
         java.util.ArrayList<IEditItem> tempList = new java.util.ArrayList<IEditItem>();
 //        for (java.util.ArrayList<String> temp : data)
 //        {

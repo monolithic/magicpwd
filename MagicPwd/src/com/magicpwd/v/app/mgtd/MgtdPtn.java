@@ -18,7 +18,7 @@ package com.magicpwd.v.app.mgtd;
 
 import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.IBackCall;
-import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._comn.mpwd.MgtdHeader;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
@@ -185,7 +185,7 @@ public class MgtdPtn extends AMpwdPtn
         dlg.initData(null);
     }
 
-    public void saveMgtd(Mgtd mgtd)
+    public void saveMgtd(MgtdHeader mgtd)
     {
         mgtdMdl.getGridMdl().wAppend(mgtd);
     }
@@ -198,7 +198,9 @@ public class MgtdPtn extends AMpwdPtn
             return;
         }
 
-        Mgtd mgtd = mgtdMdl.getGridMdl().getMgtdAt(row);
+        MgtdHeader mgtd = mgtdMdl.getGridMdl().getMgtdAt(row);
+
+        DBA4000.listGtdDetail(userMdl, mgtd);
 
         MgtdDlg dlg = new MgtdDlg(this, true);
         dlg.setBackCall(new IBackCall<String, String>()

@@ -17,8 +17,8 @@
 package com.magicpwd.x.app.mgtd.schedule;
 
 import com.magicpwd.__i.mgtd.IMgtdBean;
-import com.magicpwd._comn.mpwd.Mgtd;
-import com.magicpwd._comn.mpwd.Hint;
+import com.magicpwd._comn.mpwd.MgtdHeader;
+import com.magicpwd._comn.mpwd.MgtdDetail;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.date.WDateChooser;
 import com.magicpwd._cons.ConsDat;
@@ -111,27 +111,27 @@ public class FixTime extends javax.swing.JPanel implements IMgtdBean
     }
 
     @Override
-    public boolean showData(Mgtd mgtd)
+    public boolean showData(MgtdHeader mgtd)
     {
-        Hint hint = mgtd.getHint(0);
-        if (hint != null)
+        MgtdDetail detail = mgtd.getHint(0);
+        if (detail != null)
         {
-            spTime.setValue(new java.util.Date(hint.getP30F0403()));
+            spTime.setValue(new java.util.Date(detail.getP30F0403()));
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean saveData(Mgtd mgtd)
+    public boolean saveData(MgtdHeader mgtd)
     {
         mgtd.setP30F030D(0L);
         mgtd.setP30F030E(0L);
         mgtd.setP30F030F(0L);
 
-        java.util.List<Hint> list = new java.util.ArrayList<Hint>();
+        java.util.List<MgtdDetail> list = new java.util.ArrayList<MgtdDetail>();
 
-        Hint hint = new Hint();
+        MgtdDetail hint = new MgtdDetail();
         hint.setP30F0403(smTime.getDate().getTime());
         hint.setP30F0404(0);
         hint.setP30F0405(0);

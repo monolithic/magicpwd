@@ -16,7 +16,7 @@
  */
 package com.magicpwd.m.mgtd;
 
-import com.magicpwd._comn.mpwd.Mgtd;
+import com.magicpwd._comn.mpwd.MgtdHeader;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.m.UserMdl;
@@ -27,7 +27,7 @@ import com.magicpwd.m.UserMdl;
 public class GridMdl extends javax.swing.table.DefaultTableModel
 {
 
-    private java.util.List<Mgtd> lsMgtdList;
+    private java.util.List<MgtdHeader> lsMgtdList;
     private java.util.Map<String, Integer> updtList;
     private UserMdl userMdl;
 
@@ -38,9 +38,9 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
 
     void init()
     {
-        lsMgtdList = new java.util.ArrayList<Mgtd>();
+        lsMgtdList = new java.util.ArrayList<MgtdHeader>();
         updtList = new java.util.HashMap<String, Integer>();
-        DBA4000.listMgtdData(userMdl, lsMgtdList);
+        DBA4000.listGtdHeader(userMdl, lsMgtdList);
     }
 
     @Override
@@ -95,7 +95,7 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
         // 公共属性
         if (lsMgtdList != null && rowIndex > -1 && rowIndex < lsMgtdList.size())
         {
-            Mgtd temp = lsMgtdList.get(rowIndex);
+            MgtdHeader temp = lsMgtdList.get(rowIndex);
             switch (columnIndex)
             {
                 case 0:
@@ -178,7 +178,7 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
     {
     }
 
-    public Mgtd getMgtdAt(int index)
+    public MgtdHeader getMgtdAt(int index)
     {
         return lsMgtdList.get(index);
     }
@@ -192,12 +192,12 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
         }
     }
 
-    public void wAppend(Mgtd mgtd)
+    public void wAppend(MgtdHeader mgtd)
     {
         if (DBA4000.saveMgtdData(userMdl, mgtd))
         {
             lsMgtdList.clear();
-            DBA4000.listMgtdData(userMdl, lsMgtdList);
+            DBA4000.listGtdHeader(userMdl, lsMgtdList);
             fireTableDataChanged();
         }
     }
@@ -205,7 +205,7 @@ public class GridMdl extends javax.swing.table.DefaultTableModel
     public void wReload()
     {
         lsMgtdList.clear();
-        DBA4000.listMgtdData(userMdl, lsMgtdList);
+        DBA4000.listGtdHeader(userMdl, lsMgtdList);
         fireTableDataChanged();
     }
 }

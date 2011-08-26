@@ -38,12 +38,12 @@ import com.magicpwd._bean.mpro.ListBean;
 import com.magicpwd._bean.mpro.PwdsBean;
 import com.magicpwd._bean.mpro.TextBean;
 import com.magicpwd._comn.I1S2;
-import com.magicpwd._comn.mpwd.Mkey;
+import com.magicpwd._comn.mpwd.MpwdHeader;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.item.LogoItem;
 import com.magicpwd._comn.item.MetaItem;
-import com.magicpwd._comn.mpwd.Hint;
+import com.magicpwd._comn.mpwd.MgtdDetail;
 import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
@@ -87,7 +87,7 @@ public class MproPtn extends AMpwdPtn
     private MenuPtn menuPtn;
     private MproMdl mproMdl;
     /**口令列表上次选择索引*/
-    private Mkey lastKeys;
+    private MpwdHeader lastKeys;
     /**属性列表上次选择索引*/
     private int tb_LastIndx = -1;
     /**用户最后一次查找内容*/
@@ -195,11 +195,11 @@ public class MproPtn extends AMpwdPtn
 
         // 信息栏
         hintBar.initData();
-        hintBar.setBackCall(new IBackCall<String, java.util.List<Hint>>()
+        hintBar.setBackCall(new IBackCall<String, java.util.List<MgtdDetail>>()
         {
 
             @Override
-            public boolean callBack(String options, java.util.List<Hint> object)
+            public boolean callBack(String options, java.util.List<MgtdDetail> object)
             {
                 mproMdl.getListMdl().listHint(object);
                 return true;
@@ -1144,7 +1144,7 @@ public class MproPtn extends AMpwdPtn
     private void lsGuidListMouseClick(java.awt.event.MouseEvent e)
     {
         Object obj = lsGuidList.getSelectedValue();
-        if (obj == null || !(obj instanceof Mkey))
+        if (obj == null || !(obj instanceof MpwdHeader))
         {
             return;
         }
@@ -1155,7 +1155,7 @@ public class MproPtn extends AMpwdPtn
         }
 
         // 记录上次索引
-        lastKeys = (Mkey) obj;
+        lastKeys = (MpwdHeader) obj;
 
         if (mproMdl.getGridMdl().isModified())
         {
@@ -1166,7 +1166,7 @@ public class MproPtn extends AMpwdPtn
             }
         }
 
-        Mkey keys = (Mkey) obj;
+        MpwdHeader keys = (MpwdHeader) obj;
 
         try
         {

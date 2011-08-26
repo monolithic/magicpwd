@@ -20,9 +20,9 @@ import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._bean.mail.Connect;
 import com.magicpwd._comn.I1S2;
-import com.magicpwd._comn.mpwd.Mkey;
+import com.magicpwd._comn.mpwd.MpwdHeader;
 import com.magicpwd._comn.S1S1;
-import com.magicpwd._comn.mpwd.Hint;
+import com.magicpwd._comn.mpwd.MgtdDetail;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
@@ -128,11 +128,11 @@ public class MwizPtn extends AMpwdPtn
     public boolean initData()
     {
         hb_HintBar.initData();
-        hb_HintBar.setBackCall(new IBackCall<String, java.util.List<Hint>>()
+        hb_HintBar.setBackCall(new IBackCall<String, java.util.List<MgtdDetail>>()
         {
 
             @Override
-            public boolean callBack(String options, java.util.List<Hint> object)
+            public boolean callBack(String options, java.util.List<MgtdDetail> object)
             {
                 hintCallBack();
                 return true;
@@ -566,7 +566,7 @@ public class MwizPtn extends AMpwdPtn
         showKeysInfo(mwizMdl.getGridMdl().getKeysAt(row));
     }
 
-    private void showKeysInfo(Mkey keys)
+    private void showKeysInfo(MpwdHeader keys)
     {
         WButtonGroup group = menuPtn.getGroup("label");
         if (group != null)

@@ -16,8 +16,8 @@
  */
 package com.magicpwd.m.mpro;
 
-import com.magicpwd._comn.mpwd.Hint;
-import com.magicpwd._comn.mpwd.Mkey;
+import com.magicpwd._comn.mpwd.MgtdDetail;
+import com.magicpwd._comn.mpwd.MpwdHeader;
 import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
@@ -32,7 +32,7 @@ import com.magicpwd.m.UserMdl;
 public class ListMdl extends DefaultListModel
 {
 
-    private java.util.List<Mkey> mkeyList;
+    private java.util.List<MpwdHeader> mkeyList;
     private UserMdl userMdl;
 
     ListMdl(UserMdl userMdl)
@@ -42,7 +42,7 @@ public class ListMdl extends DefaultListModel
 
     void init()
     {
-        mkeyList = new ArrayList<Mkey>();
+        mkeyList = new ArrayList<MpwdHeader>();
     }
 
     /*
@@ -108,7 +108,7 @@ public class ListMdl extends DefaultListModel
         fireIntervalAdded(this, 0, c);
     }
 
-    public void listHint(java.util.List<Hint> hintList)
+    public void listHint(java.util.List<MgtdDetail> hintList)
     {
         int c = mkeyList.size();
         mkeyList.clear();
@@ -161,7 +161,7 @@ public class ListMdl extends DefaultListModel
 
     public boolean updtName(String mkeyHash, String mkeyName, String iconPath, String iconHash)
     {
-        Mkey keys;
+        MpwdHeader keys;
         for (int i = 0, j = mkeyList.size(); i < j; i += 1)
         {
             keys = mkeyList.get(i);
@@ -177,7 +177,7 @@ public class ListMdl extends DefaultListModel
         return false;
     }
 
-    public void wAppend(Mkey keys)
+    public void wAppend(MpwdHeader keys)
     {
         mkeyList.add(keys);
         this.fireIntervalAdded(this, 0, mkeyList.size());
@@ -194,7 +194,7 @@ public class ListMdl extends DefaultListModel
         fireIntervalRemoved(this, 0, index);
     }
 
-    public void wRemove(Mkey keys)
+    public void wRemove(MpwdHeader keys)
     {
         mkeyList.remove(keys);
         fireIntervalRemoved(this, 0, mkeyList.size());
@@ -210,7 +210,7 @@ public class ListMdl extends DefaultListModel
         }
     }
 
-    public Mkey getElement(int index)
+    public MpwdHeader getElement(int index)
     {
         return mkeyList.get(index);
     }

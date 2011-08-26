@@ -17,7 +17,7 @@
 package com.magicpwd.e.mpro.list;
 
 import com.magicpwd.__a.mpro.AMproAction;
-import com.magicpwd._comn.mpwd.Mkey;
+import com.magicpwd._comn.mpwd.MpwdHeader;
 import com.magicpwd._util.Char;
 
 /**
@@ -38,9 +38,9 @@ public class ChangeLabelAction extends AMproAction
         int val = Char.isValidateInteger(command) ? Integer.parseInt(command) : 0;
 
         Object obj = mproPtn.getSelectedListValue();
-        if (obj instanceof Mkey)
+        if (obj instanceof MpwdHeader)
         {
-            ((Mkey) obj).setP30F0102(val);
+            ((MpwdHeader) obj).setP30F0102(val);
         }
         mproPtn.changeLabel(val);
     }
