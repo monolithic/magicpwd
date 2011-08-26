@@ -589,7 +589,7 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
 
     private void miEditMgtdActionPerformed(java.awt.event.ActionEvent e)
     {
-        MgtdHeader mgtd = DBA4000.readMgtd(mproPtn.getUserMdl(), itemData.getData());
+        MgtdHeader mgtd = DBA4000.readGtdHeader(mproPtn.getUserMdl(), itemData.getData());
         if (mgtd == null)
         {
             return;

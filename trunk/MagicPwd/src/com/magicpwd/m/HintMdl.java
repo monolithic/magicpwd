@@ -19,7 +19,7 @@ package com.magicpwd.m;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd.__i.IHintView;
 import com.magicpwd._comn.Task;
-import com.magicpwd._comn.mpwd.MgtdDetail;
+import com.magicpwd._comn.mpwd.MgtdHeader;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._util.Time;
 import com.magicpwd.d.db.DBA4000;
@@ -42,15 +42,15 @@ public final class HintMdl
     /**
      * 计划任务列表
      */
-    private java.util.List<MgtdDetail> mgtdList;
+    private java.util.List<MgtdHeader> mgtdList;
     /**
      * 待办事项列表
      */
-    private java.util.List<MgtdDetail> todoList;
+    private java.util.List<MgtdHeader> todoList;
     /**
      * 过期事项列表
      */
-    private java.util.List<MgtdDetail> histList;
+    private java.util.List<MgtdHeader> histList;
     /**
      * 提醒视图列表
      */
@@ -65,9 +65,9 @@ public final class HintMdl
 
     public void init()
     {
-        mgtdList = new java.util.ArrayList<MgtdDetail>();
-        todoList = new java.util.ArrayList<MgtdDetail>();
-        histList = new java.util.ArrayList<MgtdDetail>();
+        mgtdList = new java.util.ArrayList<MgtdHeader>();
+        todoList = new java.util.ArrayList<MgtdHeader>();
+        histList = new java.util.ArrayList<MgtdHeader>();
         counter = userMdl.getHintInt();
 
         Time.getInstance().registerAction(new Task(3, 1, "mpwd-hint", ""), new IBackCall<String, Task>()
@@ -118,29 +118,28 @@ public final class HintMdl
         histList.clear();
         java.util.HashMap<String, Integer> updtList = new java.util.HashMap<String, Integer>();
         int x;
-        for (MgtdDetail hint : mgtdList)
+        for (MgtdHeader header : mgtdList)
         {
             // 等提醒
-            x = Time.isOnTime(calendar, 1800000, hint);
+            x = Time.isOnTime(calendar, 1800000, header);
             if (x == 0)
             {
-                System.out.println(com.magicpwd._util.Date.getFieldDateFormat().format(new java.util.Date(hint.getP30F0403().longValue())));
-                todoList.add(hint);
-                if (hint.getP30F0303() == ConsDat.MGTD_STATUS_INIT)
+                todoList.add(header);
+                if (header.getP30F0303() == ConsDat.MGTD_STATUS_INIT)
                 {
-                    hint.setP30F0303(ConsDat.MGTD_STATUS_READY);
-                    updtList.put(hint.getP30F0402(), ConsDat.MGTD_STATUS_READY);
+                    header.setP30F0303(ConsDat.MGTD_STATUS_READY);
+                    updtList.put(header.getP30F0309(), ConsDat.MGTD_STATUS_READY);
                 }
             }
             // 已过期
             else if (x == -1)
             {
-                histList.add(hint);
+                histList.add(header);
                 // 初始化或进行中的任务，修改为已过期
-                if (hint.getP30F0303() == ConsDat.MGTD_STATUS_READY || hint.getP30F0303() == ConsDat.MGTD_STATUS_INIT)
+                if (header.getP30F0303() == ConsDat.MGTD_STATUS_READY || header.getP30F0303() == ConsDat.MGTD_STATUS_INIT)
                 {
-                    hint.setP30F0303(ConsDat.MGTD_STATUS_DELAY);
-                    updtList.put(hint.getP30F0402(), ConsDat.MGTD_STATUS_DELAY);
+                    header.setP30F0303(ConsDat.MGTD_STATUS_DELAY);
+                    updtList.put(header.getP30F0309(), ConsDat.MGTD_STATUS_DELAY);
                 }
             }
         }
@@ -193,12 +192,12 @@ public final class HintMdl
         }
     }
 
-    public java.util.List<MgtdDetail> getTodoList()
+    public java.util.List<MgtdHeader> getTodoList()
     {
         return todoList;
     }
 
-    public java.util.List<MgtdDetail> getHistList()
+    public java.util.List<MgtdHeader> getHistList()
     {
         return histList;
     }
