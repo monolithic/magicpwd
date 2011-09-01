@@ -48,6 +48,7 @@ public class MailAction extends ATrayAction
         catch (Exception exp)
         {
             Logs.exception(exp);
+            Lang.showMesg(trayPtn.getMpwdPtn(), null, exp.getLocalizedMessage());
         }
     }
 
