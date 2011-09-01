@@ -1109,38 +1109,7 @@ public class MenuPtn
 
     private javax.swing.Icon createIcon(Element element)
     {
-        if (trayPtn == null)
-        {
-            return null;
-        }
-
-        String hash = element.attributeValue("cache-id");
-        boolean validate = Char.isValidate(hash);
-        if (validate)
-        {
-            return userMdl.readFeelFav(hash, true);
-        }
-
-        String path = element.attributeValue("path");
-        if (Char.isValidate(path))
-        {
-            javax.swing.Icon icon;
-            if (path.toLowerCase().startsWith("var:"))
-            {
-                icon = userMdl.readFeelFav(path.substring(4), validate);
-            }
-            else
-            {
-                icon = userMdl.readFeelIcon(path);
-                if (validate)
-                {
-                    userMdl.setFeelFav(hash, icon);
-                }
-            }
-            return icon;
-        }
-
-        return null;
+        return userMdl.getFeelFav(element.attributeValue("cache-id"), element.attributeValue("path"));
     }
 
     private static String getLang(java.util.Properties prop, String text)

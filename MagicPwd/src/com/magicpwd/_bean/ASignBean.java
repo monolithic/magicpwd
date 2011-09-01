@@ -51,7 +51,7 @@ public abstract class ASignBean extends AEditBean implements IMproBean
         pl_PropConf.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_SignConf = new BtnLabel();
-        bt_SignConf.setIcon(formPtn.getFeelIcon("sign-options", false));
+        bt_SignConf.setIcon(formPtn.getFeelIcon(null, "var:sign-options"));
         pl_PropConf.add(bt_SignConf);
 
         pm_ConfMenu = new javax.swing.JPopupMenu();

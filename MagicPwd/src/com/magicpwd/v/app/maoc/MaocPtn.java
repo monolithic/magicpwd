@@ -219,10 +219,10 @@ public class MaocPtn extends AMpwdPtn
         };
         tf_ExpText.addActionListener(listener);
 
-        bt_ExpText.setIcon(getFeelIcon("maoc-calc", false));
+        bt_ExpText.setIcon(getFeelIcon(null, "var:maoc-calc"));
         bt_ExpText.addActionListener(listener);
 
-        bt_AocHelp.setIcon(getFeelIcon("maoc-help", false));
+        bt_AocHelp.setIcon(getFeelIcon(null, "var:maoc-help"));
         bt_AocHelp.addActionListener(new java.awt.event.ActionListener()
         {
 
