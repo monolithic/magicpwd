@@ -710,10 +710,6 @@ public class DBA4000
             String now = Long.toString(System.currentTimeMillis(), 10);
 
             dba.addTable(DBC4000.P30F0300);
-            dba.addColumn(DBC4000.P30F0303);
-            dba.addColumn(DBC4000.P30F0305);
-            dba.addColumn(DBC4000.P30F0312);
-            dba.addColumn(DBC4000.P30F0313);
             StringBuilder buf = new StringBuilder();
             buf.append(DBC4000.P30F0305).append('=').append(ConsDat.MGTD_INTVAL_STARTUP);
             buf.append(" OR (");
@@ -733,7 +729,7 @@ public class DBA4000
 
             for (MgtdHeader header : list)
             {
-                //header.setHintList(loadGtdDetail(dba, header));
+                loadGtdDetail(dba, header);
             }
             return true;
         }
@@ -961,9 +957,9 @@ public class DBA4000
 
             if (com.magicpwd._util.Char.isValidateHash(mkey.getP30F010E()))
             {
-                loadMgtd(dba, mkey);
+                loadGtdHeader(dba, mkey);
 
-                loadHint(dba, mkey);
+                loadGtdDetail(dba, mkey.getMgtd());
             }
 
             return true;
@@ -1047,7 +1043,7 @@ public class DBA4000
         return true;
     }
 
-    private static void loadMgtd(DBAccess dba, MpwdHeader mkey) throws Exception
+    private static void loadGtdHeader(DBAccess dba, MpwdHeader mkey) throws Exception
     {
         dba.reInit();
         dba.addTable(DBC4000.P30F0300);
@@ -1090,7 +1086,7 @@ public class DBA4000
         return mgtd;
     }
 
-    private static void loadHint(DBAccess dba, MpwdHeader mkey) throws Exception
+    private static void loadGtdDetail(DBAccess dba, MgtdHeader header) throws Exception
     {
         java.util.ArrayList<MgtdDetail> list = new java.util.ArrayList<MgtdDetail>();
 
@@ -1100,7 +1096,7 @@ public class DBA4000
         dba.addColumn(DBC4000.P30F0404);
         dba.addColumn(DBC4000.P30F0405);
         dba.addColumn(DBC4000.P30F0406);
-        dba.addWhere(DBC4000.P30F0402, mkey.getP30F010E());
+        dba.addWhere(DBC4000.P30F0402, header.getP30F0309());
         dba.addSort(DBC4000.P30F0401);
 
         ResultSet rset = dba.executeSelect();
@@ -1109,7 +1105,7 @@ public class DBA4000
             list.add(loadGtdDetail(rset));
         }
         rset.close();
-        mkey.getMgtd().setHintList(list);
+        header.setHintList(list);
     }
 
     private static MgtdDetail loadGtdDetail(ResultSet rset) throws Exception
