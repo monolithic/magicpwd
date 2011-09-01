@@ -16,7 +16,7 @@
  */
 package com.magicpwd.m.mpro;
 
-import com.magicpwd._comn.mpwd.MgtdDetail;
+import com.magicpwd._comn.mpwd.MgtdHeader;
 import com.magicpwd._comn.mpwd.MpwdHeader;
 import java.util.ArrayList;
 
@@ -108,7 +108,7 @@ public class ListMdl extends DefaultListModel
         fireIntervalAdded(this, 0, c);
     }
 
-    public void listHint(java.util.List<MgtdDetail> hintList)
+    public void listHint(java.util.List<MgtdHeader> hintList)
     {
         int c = mkeyList.size();
         mkeyList.clear();
