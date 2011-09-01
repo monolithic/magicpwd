@@ -382,62 +382,62 @@
         <menu text="$P30F7D1B" text-def="标记为：">
             <item type="checkbox" text="$P30F7D1C" text-def="默认(@0)" group="label" command="0">
                 <icon>
-                    <default cache-id="label0" path="var:keys-label0"/>
+                    <default cache-id="keys-label0" path="var:keys-label0"/>
                 </icon>
                 <action id="change-mode" class="com.magicpwd.e.mpro.list.ChangeLabelAction" />
             </item>
             <seperator />
             <item type="checkbox" text="$P30F7D1D" text-def="常使用(@1)" group="label" command="1">
                 <icon>
-                    <default cache-id="label1" path="var:keys-label1"/>
+                    <default cache-id="keys-label1" path="var:keys-label1"/>
                 </icon>
                 <action id="change-mode" class="com.magicpwd.e.mpro.list.ChangeLabelAction" />
             </item>
             <item type="checkbox" text="$P30F7D1E" text-def="待注册(@2)" group="label" command="2">
                 <icon>
-                    <default cache-id="label2" path="var:keys-label2"/>
+                    <default cache-id="keys-label2" path="var:keys-label2"/>
                 </icon>
                 <action id="change-mode" class="com.magicpwd.e.mpro.list.ChangeLabelAction" />
             </item>
             <item type="checkbox" text="$P30F7D1F" text-def="待认证(@3)" group="label" command="3">
                 <icon>
-                    <default cache-id="label3" path="var:keys-label3"/>
+                    <default cache-id="keys-label3" path="var:keys-label3"/>
                 </icon>
                 <action id="change-mode" class="com.magicpwd.e.mpro.list.ChangeLabelAction" />
             </item>
             <item type="checkbox" text="$P30F7D20" text-def="待激活(@4)" group="label" command="4">
                 <icon>
-                    <default cache-id="label4" path="var:keys-label4"/>
+                    <default cache-id="keys-label4" path="var:keys-label4"/>
                 </icon>
                 <action id="change-mode" class="com.magicpwd.e.mpro.list.ChangeLabelAction" />
             </item>
             <item type="checkbox" text="$P30F7D21" text-def="仅测试(@5)" group="label" command="5">
                 <icon>
-                    <default cache-id="label5" path="var:keys-label5"/>
+                    <default cache-id="keys-label5" path="var:keys-label5"/>
                 </icon>
                 <action id="change-mode" class="com.magicpwd.e.mpro.list.ChangeLabelAction" />
             </item>
             <item type="checkbox" text="$P30F7D22" text-def="已过期(@6)" group="label" command="6">
                 <icon>
-                    <default cache-id="label6" path="var:keys-label6"/>
+                    <default cache-id="keys-label6" path="var:keys-label6"/>
                 </icon>
                 <action id="change-mode" class="com.magicpwd.e.mpro.list.ChangeLabelAction" />
             </item>
             <item type="checkbox" text="$P30F7D23" text-def="已丢失(@7)" group="label" command="7">
                 <icon>
-                    <default cache-id="label7" path="var:keys-label7"/>
+                    <default cache-id="keys-label7" path="var:keys-label7"/>
                 </icon>
                 <action id="change-mode" class="com.magicpwd.e.mpro.list.ChangeLabelAction" />
             </item>
             <item type="checkbox" text="$P30F7D24" text-def="被禁用(@8)" group="label" command="8">
                 <icon>
-                    <default cache-id="label8" path="var:keys-label8"/>
+                    <default cache-id="keys-label8" path="var:keys-label8"/>
                 </icon>
                 <action id="change-mode" class="com.magicpwd.e.mpro.list.ChangeLabelAction" />
             </item>
             <item type="checkbox" text="$P30F7D25" text-def="已删除(@9)" group="label" command="9">
                 <icon>
-                    <default cache-id="label9" path="var:keys-label9"/>
+                    <default cache-id="keys-label9" path="var:keys-label9"/>
                 </icon>
                 <action id="change-mode" class="com.magicpwd.e.mpro.list.ChangeLabelAction" />
             </item>
@@ -445,31 +445,31 @@
         <menu text="$P30F7D26" text-def="重要性：">
             <item type="checkbox" text="$P30F7D27" text-def="最高" group="major" command="2">
                 <icon>
-                    <default cache-id="major2" path="var:keys-major+2"/>
+                    <default cache-id="keys-major+2" path="var:keys-major+2"/>
                 </icon>
                 <action id="change-note" class="com.magicpwd.e.mpro.list.ChangeMajorAction" />
             </item>
             <item type="checkbox" text="$P30F7D28" text-def="高" group="major" command="1">
                 <icon>
-                    <default cache-id="major1" path="var:keys-major+1"/>
+                    <default cache-id="keys-major+1" path="var:keys-major+1"/>
                 </icon>
                 <action id="change-note" class="com.magicpwd.e.mpro.list.ChangeMajorAction" />
             </item>
             <item type="checkbox" text="$P30F7D29" text-def="正常" group="major" command="0">
                 <icon>
-                    <default cache-id="major0" path="var:keys-major0"/>
+                    <default cache-id="keys-major0" path="var:keys-major0"/>
                 </icon>
                 <action id="change-note" class="com.magicpwd.e.mpro.list.ChangeMajorAction" />
             </item>
             <item type="checkbox" text="$P30F7D2A" text-def="低" group="major" command="-1">
                 <icon>
-                    <default cache-id="major-1" path="var:keys-major-1"/>
+                    <default cache-id="keys-major-1" path="var:keys-major-1"/>
                 </icon>
                 <action id="change-note" class="com.magicpwd.e.mpro.list.ChangeMajorAction" />
             </item>
             <item type="checkbox" text="$P30F7D2B" text-def="最低" group="major" command="-2">
                 <icon>
-                    <default cache-id="major-2" path="var:keys-major-2"/>
+                    <default cache-id="keys-major-2" path="var:keys-major-2"/>
                 </icon>
                 <action id="change-note" class="com.magicpwd.e.mpro.list.ChangeMajorAction" />
             </item>
