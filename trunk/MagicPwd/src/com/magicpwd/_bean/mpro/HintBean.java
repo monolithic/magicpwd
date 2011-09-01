@@ -51,7 +51,6 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
     private int mgtdType;
     private int mgtdData;
     private int mgtdUnit;
-    private String mgtdHash;
     private java.util.Calendar mgtdCal;
     private java.text.DateFormat format;
 
@@ -69,7 +68,7 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
         dataEdit.setDropButtonVisible(false);
 
         blPropName = new BtnLabel();
-//        blPropName.setIcon(Bean.getNone());
+        blPropName.setIcon(mproPtn.getFeelIcon("hint-time", false));
         lbPropName = new javax.swing.JLabel();
 
         pmDateView = new javax.swing.JPopupMenu();
@@ -99,7 +98,7 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
         hpg1.addComponent(lbPropName);
         hpg1.addComponent(lbPropData);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg2.addComponent(blPropName, 21, 21, 21);
+        hpg2.addComponent(blPropName, 20, 20, 20);
         hpg2.addComponent(sp_PropData, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addGroup(hpg1);
@@ -111,7 +110,7 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
 
         javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER);
         vpg1.addComponent(lbPropName);
-        vpg1.addComponent(blPropName, 21, 21, 21);
+        vpg1.addComponent(blPropName, 20, 20, 20);
         javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
         vsg1.addComponent(lbPropData);
         vsg1.addContainerGap(49, Short.MAX_VALUE);
@@ -462,7 +461,6 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
                 return;
             }
             taPropData.setText("定时提醒：" + cmd);
-            mgtdHash = null;
             mgtdType = ConsDat.MGTD_INTVAL_FIXTIME;
             mgtdData = 0;
             mgtdUnit = 0;
@@ -478,7 +476,6 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
                 return;
             }
             taPropData.setText("定时提醒：" + format.format(mgtdCal.getTime()));
-            mgtdHash = null;
             mgtdType = ConsDat.MGTD_INTVAL_FIXTIME;
             mgtdData = 0;
             mgtdUnit = 0;
@@ -494,7 +491,6 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
                 return;
             }
             taPropData.setText("定制的周期提醒！");
-            mgtdHash = null;
             mgtdType = ConsDat.MGTD_INTVAL_PERIOD;
             mgtdData = Integer.parseInt(matcher.group());
 
@@ -538,7 +534,6 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
                 return;
             }
             taPropData.setText("定制的间隔提醒！");
-            mgtdHash = null;
             mgtdType = ConsDat.MGTD_INTVAL_INTVAL;
             mgtdData = Integer.parseInt(matcher.group());
 
@@ -581,7 +576,6 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
                 return;
             }
             taPropData.setText(cmd.substring(16));
-            mgtdHash = cmd.substring(0, 16);
             mgtdType = 0;
             return;
         }
