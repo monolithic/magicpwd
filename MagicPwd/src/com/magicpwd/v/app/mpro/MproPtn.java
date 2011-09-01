@@ -43,7 +43,7 @@ import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.item.LogoItem;
 import com.magicpwd._comn.item.MetaItem;
-import com.magicpwd._comn.mpwd.MgtdDetail;
+import com.magicpwd._comn.mpwd.MgtdHeader;
 import com.magicpwd._comn.prop.Kind;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
@@ -195,11 +195,11 @@ public class MproPtn extends AMpwdPtn
 
         // 信息栏
         hintBar.initData();
-        hintBar.setBackCall(new IBackCall<String, java.util.List<MgtdDetail>>()
+        hintBar.setBackCall(new IBackCall<String, java.util.List<MgtdHeader>>()
         {
 
             @Override
-            public boolean callBack(String options, java.util.List<MgtdDetail> object)
+            public boolean callBack(String options, java.util.List<MgtdHeader> object)
             {
                 mproMdl.getListMdl().listHint(object);
                 return true;
