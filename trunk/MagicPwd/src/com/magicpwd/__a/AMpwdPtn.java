@@ -158,9 +158,9 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
         return userMdl.getDataIcon(path, hash, size);
     }
 
-    public javax.swing.Icon getFeelIcon(String favHash, boolean chache)
+    public javax.swing.Icon getFeelIcon(String key, String uri)
     {
-        return userMdl.readFeelFav(favHash, chache);
+        return userMdl.getFeelFav(key, uri);
     }
 
     public String getCfgText(String key)

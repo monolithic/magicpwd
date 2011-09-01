@@ -77,7 +77,7 @@ public class GuidBean extends javax.swing.JPanel implements IMproBean
         pl_PropEdit.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_ReadMail = new BtnLabel();
-        bt_ReadMail.setIcon(mainPtn.getFeelIcon("mail-receive", false));
+        bt_ReadMail.setIcon(mainPtn.getFeelIcon(null, "var:mail-receive"));
         bt_ReadMail.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -90,7 +90,7 @@ public class GuidBean extends javax.swing.JPanel implements IMproBean
         pl_PropEdit.add(bt_ReadMail);
 
         bt_ExptCard = new BtnLabel();
-        bt_ExptCard.setIcon(mainPtn.getFeelIcon("info-card", false));
+        bt_ExptCard.setIcon(mainPtn.getFeelIcon(null, "var:info-card"));
         bt_ExptCard.addActionListener(new java.awt.event.ActionListener()
         {
 

@@ -465,11 +465,10 @@ public final class UserMdl
         return getCfg(AppView.mpwd, ConsCfg.CFG_USER_NAME, "");
     }
 
-    public javax.swing.ImageIcon readDataIcon(String path)
-    {
-        return Bean.readIcon(path.replace(ConsEnv.FEEL_ARGS, getFeel()));
-    }
-
+//    public javax.swing.ImageIcon readDataIcon(String path)
+//    {
+//        return Bean.readIcon(path.replace(ConsEnv.FEEL_ARGS, getFeel()));
+//    }
     public javax.swing.ImageIcon readFeelIcon(String path)
     {
         return Bean.readIcon(path.replace(ConsEnv.FEEL_ARGS, getFeel()));
@@ -607,35 +606,57 @@ public final class UserMdl
 
     /**
      * 加载用户配置界面图标
-     * @param favHash
+     * @param key
      * @param chache
      * @return
      */
-    public javax.swing.Icon readFeelFav(String favHash, boolean chache)
+    public javax.swing.Icon getFeelFav(String key, String uri)
     {
-        if (!Char.isValidate(favHash))
-        {
-            return Bean.getNone();
-        }
-
         if (favProp == null)
         {
             loadFeelFav();
         }
 
-        javax.swing.Icon icon;
-        if (!chache)
+        boolean keep = Char.isValidate(key);
+
+        javax.swing.Icon icon = null;
+        // 读取缓存数据
+        if (keep)
         {
-            icon = favProp.containsKey(favHash) ? readFeelIcon(ConsEnv.FEEL_PATH + favProp.getProperty(favHash)) : getFeelDef(favHash);
-            return icon != null ? icon : Bean.getNone();
+            icon = defIcon.get("fav:" + key);
+            if (icon != null)
+            {
+                return icon;
+            }
         }
 
-        icon = defIcon.get("fav:" + favHash);
+        if (Char.isValidate(uri))
+        {
+            if (uri.toLowerCase().startsWith("var:"))
+            {
+                uri = uri.substring(4);
+                if (favProp.containsKey(uri))
+                {
+                    icon = readFeelIcon(ConsEnv.FEEL_PATH + favProp.getProperty(uri));
+                }
+                else
+                {
+                    icon = getFeelDef(uri);
+                }
+            }
+            else
+            {
+                icon = Bean.readIcon(uri);
+            }
+        }
+
         if (icon == null)
         {
-            icon = favProp.containsKey(favHash) ? readFeelIcon(ConsEnv.FEEL_PATH + favProp.getProperty(favHash)) : getFeelDef(favHash);
-            //favProp.remove(favHash);
-            setFeelFav(favHash, icon);
+            icon = Bean.getNone();
+        }
+        if (keep)
+        {
+            setFeelFav(key, icon);
         }
         return icon;
     }

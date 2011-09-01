@@ -79,27 +79,27 @@ public class ImgViewer extends ADialog implements IDocsViewer
         pl_Control.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 3, 0));
 
         bt_ClearBtn = new IcoLabel();
-        bt_ClearBtn.setIcon(formPtn.getFeelIcon("file-img-eraser", true));
+        bt_ClearBtn.setIcon(formPtn.getFeelIcon("file-img-eraser", "var:file-img-eraser"));
         bt_ClearBtn.setPaintBorder(true);
         bt_ClearBtn.setFocusable(false);
         pl_Control.add(bt_ClearBtn);
 
         bt_MLineBtn = new IcoLabel();
-        bt_MLineBtn.setIcon(formPtn.getFeelIcon("file-img-cursor-def", true));
-        bt_MLineBtn.setSelectedIcon(formPtn.getFeelIcon("file-img-cursor-sel", true));
+        bt_MLineBtn.setIcon(formPtn.getFeelIcon("file-img-cursor-def", "var:file-img-cursor-def"));
+        bt_MLineBtn.setSelectedIcon(formPtn.getFeelIcon("file-img-cursor-sel", "var:file-img-cursor-sel"));
         bt_MLineBtn.setPaintBorder(true);
         bt_MLineBtn.setFocusable(false);
         pl_Control.add(bt_MLineBtn);
 
         bt_PLineBtn = new IcoLabel();
-        bt_PLineBtn.setIcon(formPtn.getFeelIcon("file-img-shaped-def", true));
-        bt_PLineBtn.setSelectedIcon(formPtn.getFeelIcon("file-img-shaped-sel", true));
+        bt_PLineBtn.setIcon(formPtn.getFeelIcon("file-img-shaped-def", "var:file-img-shaped-def"));
+        bt_PLineBtn.setSelectedIcon(formPtn.getFeelIcon("file-img-shaped-sel", "var:file-img-shaped-sel"));
         bt_PLineBtn.setPaintBorder(true);
         bt_PLineBtn.setFocusable(false);
         pl_Control.add(bt_PLineBtn);
 
         bt_CloseBtn = new IcoLabel();
-        bt_CloseBtn.setIcon(formPtn.getFeelIcon("file-close", true));
+        bt_CloseBtn.setIcon(formPtn.getFeelIcon("file-close", "var:file-close"));
         bt_CloseBtn.setPaintBorder(true);
         bt_CloseBtn.setFocusable(false);
         pl_Control.add(bt_CloseBtn);

@@ -108,7 +108,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
         lb_HintDate.setLabelFor(tf_HintDate);
 
         ib_HintDate = new BtnLabel();
-        ib_HintDate.setIcon(mwizPtn.getFeelIcon("hint-time", false));
+        ib_HintDate.setIcon(mwizPtn.getFeelIcon(null, "var:hint-time"));
         ib_HintDate.addActionListener(new java.awt.event.ActionListener()
         {
 

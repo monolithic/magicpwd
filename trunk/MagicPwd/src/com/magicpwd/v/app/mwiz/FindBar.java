@@ -42,7 +42,7 @@ public class FindBar extends javax.swing.JPanel
         tf_MetaText.setBorder(null);
 
         bt_MetaText = new BtnLabel();
-        bt_MetaText.setIcon(normPtn.getFeelIcon("file-close", false));
+        bt_MetaText.setIcon(normPtn.getFeelIcon(null, "var:file-close"));
         bt_MetaText.addActionListener(new java.awt.event.ActionListener()
         {
 

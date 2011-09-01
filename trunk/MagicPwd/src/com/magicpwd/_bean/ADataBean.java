@@ -47,7 +47,7 @@ public abstract class ADataBean extends AEditBean
         pl_PropConf.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 3, 0));
 
         bt_DataConf = new BtnLabel();
-        bt_DataConf.setIcon(formPtn.getFeelIcon("data-options", false));
+        bt_DataConf.setIcon(formPtn.getFeelIcon(null, "var:data-options"));
         bt_DataConf.addActionListener(new java.awt.event.ActionListener()
         {
 
