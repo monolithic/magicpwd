@@ -638,7 +638,7 @@
             <item type="checkbox" text="HH时mm分ss秒 格式" group="date-template" command="user:HH时mm分ss秒" />
         </menu>
     </submenu>
-    <submenu id="date-remind">
+    <submenu id="date-interval">
         <menu id="hint-userfav" text="定制提醒">
             <!--
             <item type="normal" text="2010-12-31 20:00:00" command="fix:2010-12-31 20:00:00" />
