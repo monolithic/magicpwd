@@ -73,7 +73,7 @@ public abstract class APwdsBean extends AEditBean
         plPropConf.add(btPwdsView);
 
         btPwdsGent = new BtnLabel();
-        btPwdsGent.setIcon(formPtn.getFeelIcon(null, "var:pwds-generate"));
+        btPwdsGent.setIcon(formPtn.getFeelIcon("pwds-generate", "var:pwds-generate"));
         btPwdsGent.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -86,7 +86,7 @@ public abstract class APwdsBean extends AEditBean
         plPropConf.add(btPwdsGent);
 
         btPwdsConf = new BtnLabel();
-        btPwdsConf.setIcon(formPtn.getFeelIcon(null, "var:pwds-options"));
+        btPwdsConf.setIcon(formPtn.getFeelIcon("pwds-options", "var:pwds-options"));
         btPwdsConf.addActionListener(new java.awt.event.ActionListener()
         {
 

@@ -21,12 +21,16 @@ import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.item.HintItem;
 import com.magicpwd._comn.item.LogoItem;
 import com.magicpwd._comn.item.MetaItem;
+import com.magicpwd._comn.mpwd.MgtdDetail;
+import com.magicpwd._comn.mpwd.MgtdHeader;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.IcoLabel;
 import com.magicpwd._comp.WTextBox;
+import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
+import com.magicpwd._util.Char;
 import com.magicpwd._util.Date;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.mwiz.KeysMdl;
@@ -53,8 +57,10 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
     private KeysMdl keysMdl;
     private WTextBox nameBox;
     private WTextBox metaBox;
-    private WTextBox hintBox;
-    private java.text.DateFormat format;
+    private int mgtdType;
+    private int mgtdData;
+    private int mgtdUnit;
+    private java.util.Calendar mgtdCal;
 
     public HeadBean(MwizPtn mwizPtn, EditPtn editPtn)
     {
@@ -68,8 +74,6 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
         tf_MetaName = new javax.swing.JTextField(24);
         lb_MetaData = new javax.swing.JLabel();
         ta_MetaData = new javax.swing.JTextArea();
-        lb_HintName = new javax.swing.JLabel();
-        tf_HintName = new javax.swing.JTextField(24);
         lb_HintDate = new javax.swing.JLabel();
         tf_HintDate = new javax.swing.JTextField(24);
 
@@ -99,11 +103,6 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
 
         metaBox = new WTextBox(ta_MetaData, true);
         metaBox.initView();
-
-        lb_HintName.setLabelFor(tf_HintName);
-
-        hintBox = new WTextBox(tf_HintName, true);
-        hintBox.initView();
 
         lb_HintDate.setLabelFor(tf_HintDate);
 
@@ -143,13 +142,11 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg1.addComponent(lb_MetaName, javax.swing.GroupLayout.Alignment.TRAILING);
         hpg1.addComponent(lb_MetaData, javax.swing.GroupLayout.Alignment.TRAILING);
-        hpg1.addComponent(lb_HintName, javax.swing.GroupLayout.Alignment.TRAILING);
         hpg1.addComponent(lb_HintDate, javax.swing.GroupLayout.Alignment.TRAILING);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg2.addGroup(hsg1);
         hpg2.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE);
         hpg2.addGroup(hsg2);
-        hpg2.addComponent(tf_HintName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.SequentialGroup hsg3 = layout.createSequentialGroup();
         hsg3.addContainerGap();
         hsg3.addGroup(hpg1);
@@ -165,9 +162,6 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
         javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         vpg2.addComponent(lb_MetaData);
         vpg2.addComponent(jsp, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE);
-        javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
-        vpg3.addComponent(lb_HintName);
-        vpg3.addComponent(tf_HintName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         javax.swing.GroupLayout.ParallelGroup vpg4 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER);
         vpg4.addComponent(lb_HintDate);
         vpg4.addComponent(tf_HintDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
@@ -177,8 +171,6 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
         vsg1.addGroup(vpg1);
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg1.addGroup(vpg2);
-        vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        vsg1.addGroup(vpg3);
         vsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
         vsg1.addGroup(vpg4);
         vsg1.addContainerGap(14, Short.MAX_VALUE);
@@ -194,20 +186,17 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
 
         Bean.setText(lb_MetaData, Lang.getLang(LangRes.P30F6306, "搜索"));
 
-        Lang.setWText(lb_HintName, LangRes.P30F6307, "提示");
-        Lang.setWText(lb_HintDate, LangRes.P30F6308, "时间");
+        Lang.setWText(lb_HintDate, LangRes.P30F6307, "提示");
 
         Lang.setWText(ib_HintDate, LangRes.P30F6309, "@O");
         Lang.setWTips(ib_HintDate, LangRes.P30F630A, "提醒时间(Alt + O)");
 
         nameBox.initLang();
         metaBox.initLang();
-        hintBox.initLang();
     }
 
     public void initData()
     {
-        format = new java.text.SimpleDateFormat(ConsEnv.HINT_DATE);
         java.awt.event.ActionListener action = new java.awt.event.ActionListener()
         {
 
@@ -223,7 +212,6 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
 
         nameBox.initData();
         metaBox.initData();
-        hintBox.initData();
     }
 
     public final void showData(KeysMdl keysMdl)
@@ -238,8 +226,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
         ib_KeysIcon.setIcon(mwizPtn.getDataIcon(logo.getPath(), logo.getName(), 16));
 
         HintItem hint = (HintItem) keysMdl.getItemAt(ConsEnv.PWDS_HEAD_HINT);
-        tf_HintName.setText(hint.getName());
-        tf_HintDate.setText(hint.getData());
+        tf_HintDate.setText(hint.getName());
     }
 
     public boolean saveData()
@@ -260,28 +247,61 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
         meta.setName(metaName);
         meta.setData(ta_MetaData.getText());
 
-        IEditItem hint = keysMdl.getItemAt(ConsEnv.PWDS_HEAD_HINT);
-        String hintName = tf_HintName.getText();
-        String hintDate = tf_HintDate.getText();
-        if (com.magicpwd._util.Char.isValidate(hintDate))
+        HintItem hint = (HintItem) keysMdl.getItemAt(ConsEnv.PWDS_HEAD_HINT);
+        hint.setName(tf_HintDate.getText());
+        if (mgtdType > 0)
         {
-            if (!hint.setData(hintDate))
+            MgtdHeader header = hint.getMgtd();
+            if (header == null)
             {
-                Lang.showMesg(editPtn, LangRes.P30F7A37, "您输入的日期格式无效，请重新输入！");
-                tf_HintDate.requestFocus();
-                return false;
+                header = new MgtdHeader();
+                hint.setMgtd(header);
             }
-            tf_HintDate.setText(hintDate);
 
-            if (!com.magicpwd._util.Char.isValidate(hintName))
+            header.setP30F0301(0);
+            header.setP30F0302(ConsDat.MGTD_TYPE_DATETIME);
+            header.setP30F0303(ConsDat.MGTD_STATUS_INIT);
+            header.setP30F0304(0);
+            header.setP30F0305(mgtdType);
+            header.setP30F0306(ConsDat.MGTD_METHOD_NOTE);
+            header.setP30F0307(0);
+            header.setP30F0308(0);
+            switch (mgtdType)
             {
-                Lang.showMesg(editPtn, LangRes.P30F7A36, "请输入过期提示！");
-                tf_HintName.requestFocus();
-                return false;
+                case ConsDat.MGTD_INTVAL_FIXTIME:
+                    header.setP30F030C("定时提醒");
+                    break;
+                case ConsDat.MGTD_INTVAL_PERIOD:
+                    header.setP30F030C("周期提醒");
+                    break;
+                case ConsDat.MGTD_INTVAL_INTVAL:
+                    header.setP30F030C("间隔提醒");
+                    break;
+                case ConsDat.MGTD_INTVAL_SPECIAL:
+                    header.setP30F030C("特殊提醒");
+                    break;
+                case ConsDat.MGTD_INTVAL_FORMULA:
+                    header.setP30F030C("公式提醒");
+                    break;
+                default:
+                    header.setP30F030C("未知");
             }
+            header.setP30F030D(System.currentTimeMillis());
+            header.setP30F030E(0L);
+            header.setP30F030F(0L);
+            header.setP30F0312(ConsDat.MGTD_UNIT_MINUTE);
+            header.setP30F0313(5);
+            header.setP30F0314(hint.getName());
+
+            java.util.ArrayList<MgtdDetail> list = new java.util.ArrayList<MgtdDetail>(1);
+            MgtdDetail detail = new MgtdDetail();
+            detail.setP30F0403(mgtdCal.getTimeInMillis());
+            detail.setP30F0404(mgtdUnit);
+            detail.setP30F0405(mgtdData);
+            detail.setP30F0406("");
+            list.add(detail);
+            header.setHintList(list);
         }
-        hint.setName(hintName);
-        hint.setData(hintDate);
 
         return true;
     }
@@ -362,29 +382,57 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
         }
 
         Bean.setText(mi_HalfHour, t1);
-        mi_HalfHour.setActionCommand("fix:" + format.format(d1));
+        mi_HalfHour.setActionCommand("fix:" + Date.getFieldDateFormat().format(d1));
         Bean.setText(mi_FullHour, t2);
-        mi_FullHour.setActionCommand("fix:" + format.format(d2));
+        mi_FullHour.setActionCommand("fix:" + Date.getFieldDateFormat().format(d2));
         pm_HintDate.show(ib_HintDate, 0, ib_HintDate.getHeight());
     }
 
     private void mi_DateTimeActionPerformed(java.awt.event.ActionEvent e)
     {
-        java.util.Calendar cal = Date.toDate(e.getActionCommand());
-        if (cal != null)
+        String cmd = e.getActionCommand();
+        if (!Char.isValidate(cmd))
         {
-            tf_HintDate.setText(format.format(cal.getTime()));
+            return;
+        }
+        // 定时提醒
+        if (cmd.startsWith("fix:"))
+        {
+            cmd = cmd.substring(4);
+            mgtdCal = Date.processFix(cmd);
+            if (mgtdCal == null)
+            {
+                return;
+            }
+            tf_HintDate.setText("定时提醒：" + cmd);
+            mgtdType = ConsDat.MGTD_INTVAL_FIXTIME;
+            mgtdData = 0;
+            mgtdUnit = 0;
+            return;
+        }
+        // 延后提醒
+        if (cmd.startsWith("var:"))
+        {
+            cmd = cmd.substring(4);
+            mgtdCal = Date.processVar(cmd);
+            if (mgtdCal == null)
+            {
+                return;
+            }
+            tf_HintDate.setText("定时提醒：" + Date.getFieldDateFormat().format(mgtdCal.getTime()));
+            mgtdType = ConsDat.MGTD_INTVAL_FIXTIME;
+            mgtdData = 0;
+            mgtdUnit = 0;
+            return;
         }
     }
     private BtnLabel ib_HintDate;
     private IcoLabel ib_KeysIcon;
     private javax.swing.JLabel lb_HintDate;
-    private javax.swing.JLabel lb_HintName;
     private javax.swing.JLabel lb_MetaData;
     private javax.swing.JLabel lb_MetaName;
     private javax.swing.JTextArea ta_MetaData;
     private javax.swing.JTextField tf_HintDate;
-    private javax.swing.JTextField tf_HintName;
     private javax.swing.JTextField tf_MetaName;
     private javax.swing.JPopupMenu pm_HintDate;
     private javax.swing.JMenuItem mi_HalfHour;

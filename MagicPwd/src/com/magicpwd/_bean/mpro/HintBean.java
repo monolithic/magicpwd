@@ -25,7 +25,6 @@ import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsDat;
-import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
@@ -52,7 +51,6 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
     private int mgtdData;
     private int mgtdUnit;
     private java.util.Calendar mgtdCal;
-    private java.text.DateFormat format;
 
     public HintBean(MproPtn mproPtn)
     {
@@ -151,7 +149,6 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
     @Override
     public void initData()
     {
-        format = new java.text.SimpleDateFormat(ConsEnv.HINT_DATE);
         blPropName.addActionListener(new java.awt.event.ActionListener()
         {
 
@@ -172,7 +169,7 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
         };
         miHalfHour.addActionListener(action);
         miFullHour.addActionListener(action);
-        mproPtn.getMenuPtn().getSubMenu("date-remind", pmDateView, action);
+        mproPtn.getMenuPtn().getSubMenu("date-interval", pmDateView, action);
         if (initMgtdMenu())
         {
             pmDateView.addSeparator();
@@ -209,61 +206,61 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
     @Override
     public void saveDataActionPerformed(java.awt.event.ActionEvent evt)
     {
+        itemData.setName(taPropData.getText());
+
         if (mgtdType > 0)
         {
-            MgtdHeader mgtd = itemData.getMgtd();
-            if (mgtd == null)
+            MgtdHeader header = itemData.getMgtd();
+            if (header == null)
             {
-                mgtd = new MgtdHeader();
-                itemData.setMgtd(mgtd);
+                header = new MgtdHeader();
+                itemData.setMgtd(header);
             }
 
-            mgtd.setP30F0301(0);
-            mgtd.setP30F0302(ConsDat.MGTD_TYPE_DATETIME);
-            mgtd.setP30F0303(ConsDat.MGTD_STATUS_INIT);
-            mgtd.setP30F0304(0);
-            mgtd.setP30F0305(mgtdType);
-            mgtd.setP30F0306(ConsDat.MGTD_METHOD_NOTE);
-            mgtd.setP30F0307(0);
-            mgtd.setP30F0308(0);
+            header.setP30F0301(0);
+            header.setP30F0302(ConsDat.MGTD_TYPE_DATETIME);
+            header.setP30F0303(ConsDat.MGTD_STATUS_INIT);
+            header.setP30F0304(0);
+            header.setP30F0305(mgtdType);
+            header.setP30F0306(ConsDat.MGTD_METHOD_NOTE);
+            header.setP30F0307(0);
+            header.setP30F0308(0);
             switch (mgtdType)
             {
                 case ConsDat.MGTD_INTVAL_FIXTIME:
-                    mgtd.setP30F030C("定时提醒");
+                    header.setP30F030C("定时提醒");
                     break;
                 case ConsDat.MGTD_INTVAL_PERIOD:
-                    mgtd.setP30F030C("周期提醒");
+                    header.setP30F030C("周期提醒");
                     break;
                 case ConsDat.MGTD_INTVAL_INTVAL:
-                    mgtd.setP30F030C("间隔提醒");
+                    header.setP30F030C("间隔提醒");
                     break;
                 case ConsDat.MGTD_INTVAL_SPECIAL:
-                    mgtd.setP30F030C("特殊提醒");
+                    header.setP30F030C("特殊提醒");
                     break;
                 case ConsDat.MGTD_INTVAL_FORMULA:
-                    mgtd.setP30F030C("公式提醒");
+                    header.setP30F030C("公式提醒");
                     break;
                 default:
-                    mgtd.setP30F030C("未知");
+                    header.setP30F030C("未知");
             }
-            mgtd.setP30F030D(System.currentTimeMillis());
-            mgtd.setP30F030E(0L);
-            mgtd.setP30F030F(0L);
-            mgtd.setP30F0312(ConsDat.MGTD_UNIT_MINUTE);
-            mgtd.setP30F0313(5);
-            mgtd.setP30F0314(itemData.getName());
+            header.setP30F030D(System.currentTimeMillis());
+            header.setP30F030E(0L);
+            header.setP30F030F(0L);
+            header.setP30F0312(ConsDat.MGTD_UNIT_MINUTE);
+            header.setP30F0313(5);
+            header.setP30F0314(itemData.getName());
 
             java.util.ArrayList<MgtdDetail> list = new java.util.ArrayList<MgtdDetail>(1);
-            MgtdDetail hint = new MgtdDetail();
-            hint.setP30F0403(mgtdCal.getTimeInMillis());
-            hint.setP30F0404(mgtdUnit);
-            hint.setP30F0405(mgtdData);
-            hint.setP30F0406("");
-            list.add(hint);
-            mgtd.setHintList(list);
+            MgtdDetail detail = new MgtdDetail();
+            detail.setP30F0403(mgtdCal.getTimeInMillis());
+            detail.setP30F0404(mgtdUnit);
+            detail.setP30F0405(mgtdData);
+            detail.setP30F0406("");
+            list.add(detail);
+            header.setHintList(list);
         }
-
-        itemData.setName(taPropData.getText());
 
         mproPtn.updateSelectedItem();
     }
@@ -433,9 +430,9 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
         }
 
         Bean.setText(miHalfHour, t1);
-        miHalfHour.setActionCommand("fix:" + format.format(d1));
+        miHalfHour.setActionCommand("fix:" + Date.getFieldDateFormat().format(d1));
         Bean.setText(miFullHour, t2);
-        miFullHour.setActionCommand("fix:" + format.format(d2));
+        miFullHour.setActionCommand("fix:" + Date.getFieldDateFormat().format(d2));
         if (mproPtn.getUserMdl().isGtdTemplateUpdated())
         {
             initMgtdMenu();
@@ -475,7 +472,7 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
             {
                 return;
             }
-            taPropData.setText("定时提醒：" + format.format(mgtdCal.getTime()));
+            taPropData.setText("定时提醒：" + Date.getFieldDateFormat().format(mgtdCal.getTime()));
             mgtdType = ConsDat.MGTD_INTVAL_FIXTIME;
             mgtdData = 0;
             mgtdUnit = 0;

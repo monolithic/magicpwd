@@ -127,12 +127,12 @@ public class HintBar extends javax.swing.JPanel implements IHintView
         StringBuilder buf = new StringBuilder();
         if (todoCnt > 0)
         {
-            buf.append(Char.format("待处理：{0}", Integer.toString(todoCnt)));
+            buf.append(Char.format("待处理：{0} ", Integer.toString(todoCnt)));
         }
 
         if (histCnt > 0)
         {
-            buf.append(Char.format("已过期：{0}", Integer.toString(histCnt)));
+            buf.append(Char.format("已过期：{0} ", Integer.toString(histCnt)));
         }
         if (buf.length() < 1)
         {
