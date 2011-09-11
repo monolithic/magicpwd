@@ -58,6 +58,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
     private WTextBox nameBox;
     private WTextBox metaBox;
     private int mgtdType;
+    private int mgtdStat;
     private int mgtdData;
     private int mgtdUnit;
     private java.util.Calendar mgtdCal;
@@ -127,6 +128,9 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
 
         pm_HintDate.addSeparator();
 
+        miNaMgtd = new javax.swing.JMenuItem();
+        miOkMgtd = new javax.swing.JMenuItem();
+
         javax.swing.JScrollPane jsp = new javax.swing.JScrollPane(ta_MetaData);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -191,6 +195,12 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
         Lang.setWText(ib_HintDate, LangRes.P30F6309, "@O");
         Lang.setWTips(ib_HintDate, LangRes.P30F630A, "提醒时间(Alt + O)");
 
+        Lang.setWText(miNaMgtd, null, "已作废(@C)");
+        Lang.setWTips(miNaMgtd, null, "标记当前提醒为已作废");
+
+        Lang.setWText(miOkMgtd, null, "已完成(@V)");
+        Lang.setWTips(miOkMgtd, null, "标记当前提醒为已完成");
+
         nameBox.initLang();
         metaBox.initLang();
     }
@@ -209,6 +219,27 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
         mi_HalfHour.addActionListener(action);
         mi_FullHour.addActionListener(action);
         mwizPtn.getMenuPtn().getSubMenu("date-interval", pm_HintDate, action);
+
+        miNaMgtd.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                //miNaMgtdActionPerformed(e);
+            }
+        });
+        pm_HintDate.add(miNaMgtd);
+        miOkMgtd.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                //miOkMgtdActionPerformed(e);
+            }
+        });
+        pm_HintDate.add(miOkMgtd);
 
         nameBox.initData();
         metaBox.initData();
@@ -249,7 +280,15 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
 
         HintItem hint = (HintItem) keysMdl.getItemAt(ConsEnv.PWDS_HEAD_HINT);
         hint.setName(tf_HintDate.getText());
-        if (mgtdType > 0)
+        if (mgtdStat == ConsDat.MGTD_STATUS_DONE || mgtdStat == ConsDat.MGTD_STATUS_ABORT)
+        {
+            MgtdHeader header = hint.getMgtd();
+            if (header != null)
+            {
+                header.setP30F0303(mgtdStat);
+            }
+        }
+        else if (mgtdType > 0)
         {
             MgtdHeader header = hint.getMgtd();
             if (header == null)
@@ -406,6 +445,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
             }
             tf_HintDate.setText("定时提醒：" + cmd);
             mgtdType = ConsDat.MGTD_INTVAL_FIXTIME;
+            mgtdStat = ConsDat.MGTD_STATUS_INIT;
             mgtdData = 0;
             mgtdUnit = 0;
             return;
@@ -421,6 +461,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
             }
             tf_HintDate.setText("定时提醒：" + Date.getFieldDateFormat().format(mgtdCal.getTime()));
             mgtdType = ConsDat.MGTD_INTVAL_FIXTIME;
+            mgtdStat = ConsDat.MGTD_STATUS_INIT;
             mgtdData = 0;
             mgtdUnit = 0;
             return;
@@ -437,4 +478,6 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
     private javax.swing.JPopupMenu pm_HintDate;
     private javax.swing.JMenuItem mi_HalfHour;
     private javax.swing.JMenuItem mi_FullHour;
+    private javax.swing.JMenuItem miNaMgtd;
+    private javax.swing.JMenuItem miOkMgtd;
 }

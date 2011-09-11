@@ -48,9 +48,9 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
     private MproPtn mproPtn;
     private WTextBox dataBox;
     private int mgtdType;
+    private int mgtdStat;
     private int mgtdData;
     private int mgtdUnit;
-    private int mgtdStat;
     private java.util.Calendar mgtdCal;
 
     public HintBean(MproPtn mproPtn)
