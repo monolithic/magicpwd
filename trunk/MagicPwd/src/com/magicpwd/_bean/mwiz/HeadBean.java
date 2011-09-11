@@ -226,7 +226,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e)
             {
-                //miNaMgtdActionPerformed(e);
+                miNaMgtdActionPerformed(e);
             }
         });
         pm_HintDate.add(miNaMgtd);
@@ -236,7 +236,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e)
             {
-                //miOkMgtdActionPerformed(e);
+                miOkMgtdActionPerformed(e);
             }
         });
         pm_HintDate.add(miOkMgtd);
@@ -466,6 +466,16 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
             mgtdUnit = 0;
             return;
         }
+    }
+
+    private void miNaMgtdActionPerformed(java.awt.event.ActionEvent e)
+    {
+        mgtdStat = ConsDat.MGTD_STATUS_ABORT;
+    }
+
+    private void miOkMgtdActionPerformed(java.awt.event.ActionEvent e)
+    {
+        mgtdStat = ConsDat.MGTD_STATUS_DONE;
     }
     private BtnLabel ib_HintDate;
     private IcoLabel ib_KeysIcon;
