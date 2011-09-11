@@ -50,6 +50,7 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
     private int mgtdType;
     private int mgtdData;
     private int mgtdUnit;
+    private int mgtdStat;
     private java.util.Calendar mgtdCal;
 
     public HintBean(MproPtn mproPtn)
@@ -75,10 +76,11 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
 
         miFullHour = new javax.swing.JMenuItem();
         pmDateView.add(miFullHour);
+        pmDateView.addSeparator();
 
         miEditMgtd = new javax.swing.JMenuItem();
-
-        pmDateView.addSeparator();
+        miNaMgtd = new javax.swing.JMenuItem();
+        miOkMgtd = new javax.swing.JMenuItem();
 
         taPropData = new javax.swing.JTextArea();
         taPropData.setLineWrap(true);
@@ -142,6 +144,12 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
         Lang.setWText(miEditMgtd, null, "高级管理(@M)");
         Lang.setWTips(miEditMgtd, null, "高级管理");
 
+        Lang.setWText(miNaMgtd, null, "已作废(@C)");
+        Lang.setWTips(miNaMgtd, null, "标记当前提醒为已作废");
+
+        Lang.setWText(miOkMgtd, null, "已完成(@V)");
+        Lang.setWTips(miOkMgtd, null, "标记当前提醒为已完成");
+
         dataBox.initLang();
         dataEdit.initLang();
     }
@@ -186,6 +194,27 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
         });
         pmDateView.add(miEditMgtd);
 
+        miNaMgtd.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                miNaMgtdActionPerformed(e);
+            }
+        });
+        pmDateView.add(miNaMgtd);
+        miOkMgtd.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                miOkMgtdActionPerformed(e);
+            }
+        });
+        pmDateView.add(miOkMgtd);
+
         dataBox.initData();
     }
 
@@ -208,7 +237,15 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
     {
         itemData.setName(taPropData.getText());
 
-        if (mgtdType > 0)
+        if (mgtdStat == ConsDat.MGTD_STATUS_DONE || mgtdStat == ConsDat.MGTD_STATUS_ABORT)
+        {
+            MgtdHeader header = itemData.getMgtd();
+            if (header != null)
+            {
+                header.setP30F0303(mgtdStat);
+            }
+        }
+        else if (mgtdType > 0)
         {
             MgtdHeader header = itemData.getMgtd();
             if (header == null)
@@ -459,6 +496,7 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
             }
             taPropData.setText("定时提醒：" + cmd);
             mgtdType = ConsDat.MGTD_INTVAL_FIXTIME;
+            mgtdStat = ConsDat.MGTD_STATUS_INIT;
             mgtdData = 0;
             mgtdUnit = 0;
             return;
@@ -474,6 +512,7 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
             }
             taPropData.setText("定时提醒：" + Date.getFieldDateFormat().format(mgtdCal.getTime()));
             mgtdType = ConsDat.MGTD_INTVAL_FIXTIME;
+            mgtdStat = ConsDat.MGTD_STATUS_INIT;
             mgtdData = 0;
             mgtdUnit = 0;
             return;
@@ -489,6 +528,7 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
             }
             taPropData.setText("定制的周期提醒！");
             mgtdType = ConsDat.MGTD_INTVAL_PERIOD;
+            mgtdStat = ConsDat.MGTD_STATUS_INIT;
             mgtdData = Integer.parseInt(matcher.group());
 
             if (cmd.endsWith("second"))
@@ -532,6 +572,7 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
             }
             taPropData.setText("定制的间隔提醒！");
             mgtdType = ConsDat.MGTD_INTVAL_INTVAL;
+            mgtdStat = ConsDat.MGTD_STATUS_INIT;
             mgtdData = Integer.parseInt(matcher.group());
 
             if (cmd.endsWith("second"))
@@ -578,6 +619,16 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
         }
     }
 
+    private void miNaMgtdActionPerformed(java.awt.event.ActionEvent e)
+    {
+        mgtdStat = ConsDat.MGTD_STATUS_ABORT;
+    }
+
+    private void miOkMgtdActionPerformed(java.awt.event.ActionEvent e)
+    {
+        mgtdStat = ConsDat.MGTD_STATUS_DONE;
+    }
+
     private void miEditMgtdActionPerformed(java.awt.event.ActionEvent e)
     {
         MgtdHeader mgtd = DBA4000.readGtdHeader(mproPtn.getUserMdl(), itemData.getData());
@@ -600,4 +651,6 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
     private javax.swing.JMenuItem miHalfHour;
     private javax.swing.JMenuItem miFullHour;
     private javax.swing.JMenuItem miEditMgtd;
+    private javax.swing.JMenuItem miNaMgtd;
+    private javax.swing.JMenuItem miOkMgtd;
 }

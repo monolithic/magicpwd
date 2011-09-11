@@ -713,11 +713,14 @@ public class DBA4000
             StringBuilder buf = new StringBuilder();
             buf.append(DBC4000.P30F0305).append('=').append(ConsDat.MGTD_INTVAL_STARTUP);
             buf.append(" OR (");
+            buf.append(DBC4000.P30F0303).append(">=").append(ConsDat.MGTD_STATUS_DELAY);
+            buf.append(" AND ");
+            buf.append(DBC4000.P30F0303).append("<=").append(ConsDat.MGTD_STATUS_INIT);
+            buf.append(" AND ");
             buf.append(com.magicpwd._util.Char.format("({0}=0 OR {0} < {1})", DBC4000.P30F030D, now));//已经开始了的
             buf.append(" AND ");
             buf.append(com.magicpwd._util.Char.format("({0}=0 OR {0} > {1})", DBC4000.P30F030E, now));//还末结束了的
-            buf.append(") OR ");
-            buf.append(DBC4000.P30F0303).append(" IN (").append(ConsDat.MGTD_STATUS_READY).append(',').append(ConsDat.MGTD_STATUS_INIT).append(")");
+            buf.append(")");
             dba.addWhere(buf.toString());
 
             ResultSet rest = dba.executeSelect();

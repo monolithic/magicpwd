@@ -134,10 +134,6 @@ public class HintBar extends javax.swing.JPanel implements IHintView
         {
             buf.append(Char.format("已过期：{0} ", Integer.toString(histCnt)));
         }
-        if (buf.length() < 1)
-        {
-            buf.append("");
-        }
         if (buf.length() > 0)
         {
             lb_HintLabel.setText(buf.toString());
