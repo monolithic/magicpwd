@@ -42,12 +42,7 @@ public class HintAction extends AMwizAction
             button = (javax.swing.AbstractButton) object;
             if (button.isSelected())
             {
-                java.util.Calendar c = java.util.Calendar.getInstance();
-                java.util.Date s = c.getTime();
-                c.add(java.util.Calendar.DAY_OF_MONTH, 1);
-                java.util.Date t = c.getTime();
-
-                mwizPtn.findHint(s, t);
+                mwizPtn.findHint();
 
                 button = mwizPtn.getMenuPtn().getButton("find");
                 if (button != null)

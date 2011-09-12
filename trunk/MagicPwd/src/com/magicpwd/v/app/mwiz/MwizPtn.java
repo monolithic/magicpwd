@@ -134,7 +134,7 @@ public class MwizPtn extends AMpwdPtn
             @Override
             public boolean callBack(String options, java.util.List<MgtdHeader> object)
             {
-                hintCallBack();
+                hintCallBack(object);
                 return true;
             }
         });
@@ -262,9 +262,9 @@ public class MwizPtn extends AMpwdPtn
         hb_HintBar.showInfo("共 " + mwizMdl.getGridMdl().getRowCount() + " 条数据");
     }
 
-    public boolean findHint(java.util.Date s, java.util.Date t)
+    public void findHint()
     {
-        return mwizMdl.getGridMdl().listTask(s, t);
+        mwizMdl.getGridMdl().listHint(userMdl.getHintMdl().getTodoList());
     }
 
     public HintBar getHintPtn()
@@ -451,18 +451,14 @@ public class MwizPtn extends AMpwdPtn
         hideProgress();
     }
 
-    private void hintCallBack()
+    private void hintCallBack(java.util.List<MgtdHeader> object)
     {
         javax.swing.AbstractButton button = getMenuPtn().getButton("hint");
         if (button != null)
         {
             button.setSelected(true);
         }
-        java.util.Calendar cal = java.util.Calendar.getInstance();
-        java.sql.Timestamp s = new java.sql.Timestamp(cal.getTimeInMillis());
-        cal.add(java.util.Calendar.DAY_OF_MONTH, 1);
-        java.sql.Timestamp e = new java.sql.Timestamp(cal.getTimeInMillis());
-        findHint(s, e);
+        mwizMdl.getGridMdl().listHint(object);
     }
 
     private void moveFindBar()
