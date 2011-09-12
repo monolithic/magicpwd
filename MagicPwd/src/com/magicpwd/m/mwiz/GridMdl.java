@@ -20,6 +20,7 @@ import com.magicpwd._comn.I1S2;
 import com.magicpwd._comn.mpwd.MpwdHeader;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._comn.S1S3;
+import com.magicpwd._comn.mpwd.MgtdHeader;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.m.SafeMdl;
@@ -168,15 +169,12 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
         fireTableDataChanged();
         return b & (s > 0);
     }
-
-    public boolean listTask(java.util.Date s, java.util.Date t)
+    
+    public void listHint(java.util.List<MgtdHeader> hintList)
     {
         ls_KeysList.clear();
-//        DBA4000.findHintList(userMdl, new java.sql.Timestamp(s.getTime()), new java.sql.Timestamp(t.getTime()), ls_KeysList);
-        ls_KeysList.size();
+        DBA4000.findHintList(userMdl, hintList, ls_KeysList);
         fireTableDataChanged();
-
-        return true;
     }
 
     public MpwdHeader getKeysAt(int index)
