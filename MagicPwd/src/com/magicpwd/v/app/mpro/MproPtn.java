@@ -41,7 +41,6 @@ import com.magicpwd._comn.I1S2;
 import com.magicpwd._comn.mpwd.MpwdHeader;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._comn.item.GuidItem;
-import com.magicpwd._comn.item.LogoItem;
 import com.magicpwd._comn.item.MetaItem;
 import com.magicpwd._comn.mpwd.MgtdHeader;
 import com.magicpwd._comn.prop.Kind;
@@ -58,6 +57,7 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.db.DBA4000;
+import com.magicpwd.m.HintMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.m.mpro.GridMdl;
 import com.magicpwd.m.mpro.MproMdl;
@@ -87,13 +87,13 @@ public class MproPtn extends AMpwdPtn
     private MenuPtn menuPtn;
     private MproMdl mproMdl;
     /**口令列表上次选择索引*/
-    private MpwdHeader lastKeys;
-    /**属性列表上次选择索引*/
-    private int tb_LastIndx = -1;
+    private MpwdHeader lastPwd;
     /**用户最后一次查找内容*/
-    private String queryKey;
+    private String lastQry;
+    /**属性列表上次选择索引*/
+    private int lastIdx = -1;
     /**用户上一次的操作方式*/
-    private boolean isSearch;
+    private int lastOpt;
 
     public MproPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
@@ -201,7 +201,7 @@ public class MproPtn extends AMpwdPtn
             @Override
             public boolean callBack(String options, java.util.List<MgtdHeader> object)
             {
-                mproMdl.getListMdl().listHint(object);
+                hintCallBack(object);
                 return true;
             }
         });
@@ -246,7 +246,7 @@ public class MproPtn extends AMpwdPtn
 
         setEditVisible(true);
         showPropEdit(mproMdl.getGridMdl().initGuid(), true);
-        lastKeys = null;
+        lastPwd = null;
         return true;
     }
 
@@ -266,21 +266,34 @@ public class MproPtn extends AMpwdPtn
         return true;
     }
 
+    private void hintCallBack(java.util.List<MgtdHeader> hintList)
+    {
+        lastOpt = ConsEnv.QUERY_HINT;
+        mproMdl.getListMdl().listHint(hintList);
+    }
+
+    public void findHint()
+    {
+        lastOpt = ConsEnv.QUERY_HINT;
+        HintMdl hintMdl = userMdl.getHintMdl();
+        mproMdl.getListMdl().listHint(hintMdl.getTodoList(), hintMdl.getHistList());
+    }
+
     public boolean findKeys(String meta)
     {
-        lastKeys = null;
+        lastPwd = null;
 
         if (Char.isValidate(meta))
         {
-            isSearch = true;
-            queryKey = meta;
+            lastOpt = ConsEnv.QUERY_FIND;
+            lastQry = meta;
             trGuidTree.setSelectionPath(null);
             mproMdl.getListMdl().listKeysByMeta(meta);
             hintBar.showInfo("共 " + mproMdl.getListMdl().getSize() + " 条数据");
         }
         else
         {
-            mproMdl.getListMdl().listKeysByKind(queryKey);
+            mproMdl.getListMdl().listKeysByKind(lastQry);
             hintBar.showInfo("共 " + mproMdl.getListMdl().getSize() + " 条数据");
         }
         return true;
@@ -288,26 +301,32 @@ public class MproPtn extends AMpwdPtn
 
     public void findLast()
     {
-        if (isSearch)
+        if (lastOpt == ConsEnv.QUERY_FIND)
         {
-            mproMdl.getListMdl().listKeysByMeta(queryKey);
+            mproMdl.getListMdl().listKeysByMeta(lastQry);
         }
-        else if (com.magicpwd._util.Char.isValidateHash(queryKey))
+        else if (lastOpt == ConsEnv.QUERY_HINT)
         {
-            mproMdl.getListMdl().listKeysByKind(queryKey);
+            HintMdl hintMdl = userMdl.getHintMdl();
+            mproMdl.getListMdl().listHint(hintMdl.getTodoList(), hintMdl.getHistList());
+        }
+        else if ("0".equals(lastQry) || com.magicpwd._util.Char.isValidateHash(lastQry))
+        {
+            mproMdl.getListMdl().listKeysByKind(lastQry);
         }
         hintBar.showInfo("共 " + mproMdl.getListMdl().getSize() + " 条数据");
 
-        lastKeys = null;
+        lastPwd = null;
     }
 
     public void listMajor(int major)
     {
-        mproMdl.getListMdl().listHint(null);
+        mproMdl.getListMdl().listMajor(major);
     }
 
     public void listLabel(int label)
     {
+        mproMdl.getListMdl().listLabel(label);
     }
 
     public boolean saveKeys()
@@ -359,11 +378,6 @@ public class MproPtn extends AMpwdPtn
             return false;
         }
 
-        // 徽标
-        LogoItem logoItem = (LogoItem) gridMdl.getItemAt(ConsEnv.PWDS_HEAD_LOGO);
-
-        String keysHash = gridMdl.getKeysHash();
-
         try
         {
             gridMdl.saveData(userMdl.isIncBack(), true);
@@ -375,28 +389,12 @@ public class MproPtn extends AMpwdPtn
             return false;
         }
 
-        // 数据新增的情况下，需要重新显示列表信息
-        if (com.magicpwd._util.Char.isValidateHash(keysHash))
-        {
-            mproMdl.getListMdl().updtName(keysHash, metaItem.getName(), logoItem.getPath(), logoItem.getName());
-        }
-        else
-        {
-            if (isSearch)
-            {
-                mproMdl.getListMdl().listKeysByMeta(queryKey);
-            }
-            else if ("0".equals(queryKey) || com.magicpwd._util.Char.isValidateHash(queryKey))
-            {
-                mproMdl.getListMdl().listKeysByKind(queryKey);
-            }
-        }
-
         showPropInfo();
         userMdl.getHintMdl().reload(true);
+        findLast();
 
-        lastKeys = null;
-        tb_LastIndx = -1;
+        lastPwd = null;
+        lastIdx = -1;
         return true;
     }
 
@@ -566,7 +564,7 @@ public class MproPtn extends AMpwdPtn
         }
 
         int c = tbKeysView.getRowCount() - 1;
-        int n = tb_LastIndx + step;
+        int n = lastIdx + step;
         if (n < 0)
         {
             n = 0;
@@ -575,10 +573,10 @@ public class MproPtn extends AMpwdPtn
         {
             n = c;
         }
-        tb_LastIndx = n;
-        tbKeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
-        Util.scrollToVisible(tbKeysView, tb_LastIndx, 0, true);
-        showPropEdit(mproMdl.getGridMdl().getItemAt(tb_LastIndx), true);
+        lastIdx = n;
+        tbKeysView.setRowSelectionInterval(lastIdx, lastIdx);
+        Util.scrollToVisible(tbKeysView, lastIdx, 0, true);
+        showPropEdit(mproMdl.getGridMdl().getItemAt(lastIdx), true);
 
 //        if (updt)
 //        {
@@ -612,13 +610,13 @@ public class MproPtn extends AMpwdPtn
     {
         if (checkData())
         {
-            tb_LastIndx = tbKeysView.getSelectedRow();
-            if (tb_LastIndx < ConsEnv.PWDS_HEAD_SIZE)
+            lastIdx = tbKeysView.getSelectedRow();
+            if (lastIdx < ConsEnv.PWDS_HEAD_SIZE)
             {
-                tb_LastIndx = tbKeysView.getRowCount();
+                lastIdx = tbKeysView.getRowCount();
             }
-            showPropEdit(mproMdl.getGridMdl().wAppend(tb_LastIndx, type), true);
-            tbKeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
+            showPropEdit(mproMdl.getGridMdl().wAppend(lastIdx, type), true);
+            tbKeysView.setRowSelectionInterval(lastIdx, lastIdx);
         }
     }
 
@@ -642,28 +640,28 @@ public class MproPtn extends AMpwdPtn
 
     public void movetoPrev()
     {
-        int t = tb_LastIndx - 1;
+        int t = lastIdx - 1;
         if (t < ConsEnv.PWDS_HEAD_SIZE)
         {
             return;
         }
-        mproMdl.getGridMdl().wMoveto(tb_LastIndx, t);
-        tb_LastIndx = t;
-        Util.scrollToVisible(tbKeysView, tb_LastIndx, 0, true);
-        tbKeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
+        mproMdl.getGridMdl().wMoveto(lastIdx, t);
+        lastIdx = t;
+        Util.scrollToVisible(tbKeysView, lastIdx, 0, true);
+        tbKeysView.setRowSelectionInterval(lastIdx, lastIdx);
     }
 
     public void movetoNext()
     {
-        int t = tb_LastIndx + 1;
+        int t = lastIdx + 1;
         if (t <= ConsEnv.PWDS_HEAD_SIZE || t >= tbKeysView.getRowCount())
         {
             return;
         }
-        mproMdl.getGridMdl().wMoveto(tb_LastIndx, t);
-        tb_LastIndx = t;
-        Util.scrollToVisible(tbKeysView, tb_LastIndx, 0, true);
-        tbKeysView.setRowSelectionInterval(tb_LastIndx, tb_LastIndx);
+        mproMdl.getGridMdl().wMoveto(lastIdx, t);
+        lastIdx = t;
+        Util.scrollToVisible(tbKeysView, lastIdx, 0, true);
+        tbKeysView.setRowSelectionInterval(lastIdx, lastIdx);
     }
 
     private void initPropView()
@@ -1065,15 +1063,15 @@ public class MproPtn extends AMpwdPtn
             }
             else
             {
-                queryKey = kind.getC2010203();
-                mproMdl.getListMdl().listKeysByKind(queryKey);
+                lastQry = kind.getC2010203();
+                mproMdl.getListMdl().listKeysByKind(lastQry);
             }
         }
 
         hintBar.showInfo("共 " + mproMdl.getListMdl().getSize() + " 条数据");
 
-        isSearch = false;
-        lastKeys = null;
+        lastOpt = ConsEnv.QUERY_NORM;
+        lastPwd = null;
     }
 
     private void listTask(Kind kind)
@@ -1149,19 +1147,19 @@ public class MproPtn extends AMpwdPtn
             return;
         }
         // 重复事件判断
-        if (lastKeys != null && lastKeys.equals(obj))
+        if (lastPwd != null && lastPwd.equals(obj))
         {
             return;
         }
 
         // 记录上次索引
-        lastKeys = (MpwdHeader) obj;
+        lastPwd = (MpwdHeader) obj;
 
         if (mproMdl.getGridMdl().isModified())
         {
             if (Lang.showFirm(this, LangRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", mproMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_META).getName()) != javax.swing.JOptionPane.YES_OPTION)
             {
-                lsGuidList.setSelectedValue(lastKeys, true);
+                lsGuidList.setSelectedValue(lastPwd, true);
                 return;
             }
         }
@@ -1170,7 +1168,7 @@ public class MproPtn extends AMpwdPtn
 
         try
         {
-            tb_LastIndx = -1;
+            lastIdx = -1;
             mproMdl.getGridMdl().clear();
             mproMdl.getGridMdl().loadData(keys.getP30F0104());
 
@@ -1211,22 +1209,22 @@ public class MproPtn extends AMpwdPtn
     {
         // 左键事件处理
         int row = tbKeysView.getSelectedRow();
-        if (row < 0 || row > tbKeysView.getRowCount() || row == tb_LastIndx)
+        if (row < 0 || row > tbKeysView.getRowCount() || row == lastIdx)
         {
             return;
         }
-        tb_LastIndx = row;
+        lastIdx = row;
         showPropEdit(mproMdl.getGridMdl().getItemAt(row), true);
     }
 
     private void tbItemListKeyReleased(java.awt.event.KeyEvent evt)
     {
         int row = tbKeysView.getSelectedRow();
-        if (row < 0 || row > tbKeysView.getRowCount() || row == tb_LastIndx)
+        if (row < 0 || row > tbKeysView.getRowCount() || row == lastIdx)
         {
             return;
         }
-        tb_LastIndx = row;
+        lastIdx = row;
         showPropEdit(mproMdl.getGridMdl().getItemAt(row), false);
     }
 
@@ -1395,7 +1393,7 @@ public class MproPtn extends AMpwdPtn
         }
 
         mproMdl.getGridMdl().clear();
-        tb_LastIndx = 0;
+        lastIdx = 0;
 
         return true;
     }

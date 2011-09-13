@@ -169,11 +169,11 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
         fireTableDataChanged();
         return b & (s > 0);
     }
-    
-    public void listHint(java.util.List<MgtdHeader> hintList)
+
+    public void listHint(java.util.List<MgtdHeader>... hintList)
     {
         ls_KeysList.clear();
-        DBA4000.findHintList(userMdl, hintList, ls_KeysList);
+        DBA4000.findHintList(userMdl, ls_KeysList, hintList);
         fireTableDataChanged();
     }
 
