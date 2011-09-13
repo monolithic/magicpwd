@@ -26,6 +26,7 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.m.UserMdl;
+import java.util.regex.Pattern;
 import javax.crypto.KeyGenerator;
 
 /**
@@ -290,27 +291,38 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         String datDir = tfDatPath.getText();
         if (!com.magicpwd._util.Char.isValidate(datDir))
         {
-            Lang.showMesg(this, LangRes.P30FAA05, "您输入的口令不一致，请重新输入！");
+            Lang.showMesg(this, null, "请输入或选择您要存放的数据目录！");
+            tfDatPath.requestFocus();
+            return;
+        }
+        if (Pattern.matches("^[a-zA-z]{2,}:/{2,3}[^\\s]+", datDir))
+        {
+            Lang.showMesg(this, null, "当前版本暂不支持基于网络的文件访问！");
             tfDatPath.requestFocus();
             return;
         }
         java.io.File dat = new java.io.File(datDir);
+        if (!dat.exists())
+        {
+            dat.mkdirs();
+        }
         if (!dat.isDirectory())
         {
             Lang.showMesg(this, LangRes.P30F1A08, "请选择一个目录！");
             return;
         }
-        if (new java.io.File(dat, "amon.script").exists())
+        if (!dat.canWrite())
+        {
+            Lang.showMesg(this, LangRes.P30F1A0F, "无法写入文件 {0} ，请确认您是否有足够的权限！", dat.getPath());
+            return;
+        }
+        dat = new java.io.File(dat, "amon.script");
+        if (dat.exists() && dat.isFile())
         {
             if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(this, LangRes.P30F1A0D, "您选择的文件已存在，确认要继续吗？"))
             {
                 return;
             }
-        }
-        if (!dat.canWrite())
-        {
-            Lang.showMesg(this, LangRes.P30F1A0F, "无法写入文件 {0} ，请确认您是否有足够的权限！", dat.getPath());
-            return;
         }
         tfUserName.setText("");
         pfUserPwd1.setText("");
