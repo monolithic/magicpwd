@@ -108,12 +108,12 @@ public class ListMdl extends DefaultListModel
         fireIntervalAdded(this, 0, c);
     }
 
-    public void listHint(java.util.List<MgtdHeader> hintList)
+    public void listHint(java.util.List<MgtdHeader>... hintList)
     {
         int c = mkeyList.size();
         mkeyList.clear();
         fireIntervalRemoved(this, 0, c);
-        DBA4000.findHintList(userMdl, hintList, mkeyList);
+        DBA4000.findHintList(userMdl, mkeyList, hintList);
         c = mkeyList.size();
         fireIntervalAdded(this, 0, c);
     }
@@ -157,24 +157,6 @@ public class ListMdl extends DefaultListModel
             fireIntervalAdded(this, 0, s);
         }
         return b;
-    }
-
-    public boolean updtName(String mkeyHash, String mkeyName, String iconPath, String iconHash)
-    {
-        MpwdHeader keys;
-        for (int i = 0, j = mkeyList.size(); i < j; i += 1)
-        {
-            keys = mkeyList.get(i);
-            if (keys.getP30F0104().equals(mkeyHash))
-            {
-                keys.setP30F0109(mkeyName);
-                keys.setP30F010B(iconHash);
-                keys.setP30F010C(iconPath);
-                fireContentsChanged(this, i, i);
-                return true;
-            }
-        }
-        return false;
     }
 
     public void wAppend(MpwdHeader keys)

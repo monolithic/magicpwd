@@ -26,12 +26,14 @@ import com.magicpwd._comn.mpwd.MgtdHeader;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
+import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
+import com.magicpwd.m.HintMdl;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.m.mail.Reader;
 import com.magicpwd.m.mwiz.KeysMdl;
@@ -52,7 +54,8 @@ public class MwizPtn extends AMpwdPtn
     private MenuPtn menuPtn;
     private MwizMdl mwizMdl;
     private EditPtn editPtn;
-    private String keyMeta;
+    private String lastQry;
+    private int lastOpt;
 
     public MwizPtn(TrayPtn trayPtn, UserMdl userMdl)
     {
@@ -250,13 +253,15 @@ public class MwizPtn extends AMpwdPtn
 
     public void findKeys(String meta)
     {
-        keyMeta = meta;
+        lastQry = meta;
         if (Char.isValidate(meta))
         {
+            lastOpt = ConsEnv.QUERY_FIND;
             mwizMdl.getGridMdl().listKeysByMeta(meta);
         }
         else
         {
+            lastOpt = ConsEnv.QUERY_NORM;
             mwizMdl.getGridMdl().listKeysByKind("0");
         }
         hb_HintBar.showInfo("共 " + mwizMdl.getGridMdl().getRowCount() + " 条数据");
@@ -264,7 +269,9 @@ public class MwizPtn extends AMpwdPtn
 
     public void findHint()
     {
-        mwizMdl.getGridMdl().listHint(userMdl.getHintMdl().getTodoList());
+        lastOpt = ConsEnv.QUERY_HINT;
+        HintMdl hintMdl = userMdl.getHintMdl();
+        mwizMdl.getGridMdl().listHint(hintMdl.getTodoList(), hintMdl.getHistList());
     }
 
     public HintBar getHintPtn()
@@ -458,6 +465,7 @@ public class MwizPtn extends AMpwdPtn
         {
             button.setSelected(true);
         }
+        lastOpt = ConsEnv.QUERY_HINT;
         mwizMdl.getGridMdl().listHint(object);
     }
 
@@ -522,7 +530,18 @@ public class MwizPtn extends AMpwdPtn
 
     public void findLast()
     {
-        findKeys(keyMeta);
+        if (lastOpt == ConsEnv.QUERY_HINT)
+        {
+            findHint();
+        }
+        else if (lastOpt == ConsEnv.QUERY_FIND)
+        {
+            findKeys(lastQry);
+        }
+        else
+        {
+            showData();
+        }
     }
 
     @Override

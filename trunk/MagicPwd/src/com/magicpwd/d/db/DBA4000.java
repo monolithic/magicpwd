@@ -430,9 +430,9 @@ public class DBA4000
         }
     }
 
-    public static boolean findHintList(UserMdl userMdl, java.util.List<MgtdHeader> hintList, java.util.List<MpwdHeader> mkeyList)
+    public static boolean findHintList(UserMdl userMdl, java.util.List<MpwdHeader> mkeyList, java.util.List<MgtdHeader>... hintList)
     {
-        if (hintList == null || hintList.size() < 1)
+        if (hintList == null || hintList.length < 1)
         {
             return false;
         }
@@ -444,9 +444,12 @@ public class DBA4000
             dba.init(userMdl);
 
             StringBuilder buf = new StringBuilder();
-            for (MgtdHeader hint : hintList)
+            for (java.util.List<MgtdHeader> list : hintList)
             {
-                buf.append(",'").append(hint.getP30F0309()).append('\'');
+                for (MgtdHeader hint : list)
+                {
+                    buf.append(",'").append(hint.getP30F0309()).append('\'');
+                }
             }
             dba.addTable(DBC4000.P30F0100);
             dba.addWhere(DBC4000.P30F010E, "in", '(' + buf.substring(1) + ')', false);

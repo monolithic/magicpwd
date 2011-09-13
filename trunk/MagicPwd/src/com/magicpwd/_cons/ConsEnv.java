@@ -169,4 +169,16 @@ public interface ConsEnv
         "Winshine.biz", "Amonsoft.com", "Magicpwd.com", "MyIM.im"
     };
     String WDIALOG_NAME = "__amon__dialog__";
+    /**
+     * 操作方式：默认
+     */
+    int QUERY_NORM = 0;
+    /**
+     * 操作方式：查询
+     */
+    int QUERY_FIND = 1;
+    /**
+     * 操作方式：提醒
+     */
+    int QUERY_HINT = 2;
 }

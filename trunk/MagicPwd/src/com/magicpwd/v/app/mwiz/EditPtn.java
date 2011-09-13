@@ -376,16 +376,17 @@ public class EditPtn extends ADialog
         try
         {
             keysMdl.saveData(true);
-            setVisible(false);
-            mwizPtn.findLast();
         }
         catch (Exception ex)
         {
             Logs.exception(ex);
+            return;
         }
 
-        mwizPtn.requestFocus();
+        setVisible(false);
         mwizPtn.getHintPtn().showNote(true);
+        mwizPtn.findLast();
+        mwizPtn.requestFocus();
     }
 
     private void bt_CancelActionPerformed(java.awt.event.ActionEvent evt)
