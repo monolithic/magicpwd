@@ -17,9 +17,6 @@
 package com.magicpwd;
 
 import com.magicpwd._enum.RunMode;
-import com.magicpwd._util.Jzip;
-import com.magicpwd._util.Lang;
-import com.magicpwd._util.Logs;
 import com.magicpwd.m.MpwdMdl;
 import com.magicpwd.v.cmd.mcmd.McmdPtn;
 import com.magicpwd.v.app.tray.TrayPtn;
@@ -77,18 +74,5 @@ public class MagicPwd
         }
 
         new MagicPwd().init();
-    }
-
-    private static void zipData(String dir)
-    {
-        try
-        {
-            Jzip.unZip(MagicPwd.class.getResourceAsStream("/res/res.zip"), new java.io.File(dir), false);
-        }
-        catch (Exception exp)
-        {
-            Logs.exception(exp);
-            Lang.showMesg(null, null, exp.getLocalizedMessage());
-        }
     }
 }

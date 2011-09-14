@@ -22,6 +22,7 @@ import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._enum.AuthLog;
 import com.magicpwd._util.Char;
+import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.d.db.DBA4000;
@@ -288,36 +289,36 @@ public class SignUp extends javax.swing.JPanel implements IUserView
             pfUserPwd1.requestFocus();
             return;
         }
-        String datDir = tfDatPath.getText();
-        if (!com.magicpwd._util.Char.isValidate(datDir))
+        String path = tfDatPath.getText();
+        if (!com.magicpwd._util.Char.isValidate(path))
         {
             Lang.showMesg(this, null, "请输入或选择您要存放的数据目录！");
             tfDatPath.requestFocus();
             return;
         }
-        if (Pattern.matches("^[a-zA-z]{2,}:/{2,3}[^\\s]+", datDir))
+        if (Pattern.matches("^[a-zA-z]{2,}:/{2,3}[^\\s]+", path))
         {
             Lang.showMesg(this, null, "当前版本暂不支持基于网络的文件访问！");
             tfDatPath.requestFocus();
             return;
         }
-        java.io.File dat = new java.io.File(datDir);
-        if (!dat.exists())
+        java.io.File datPath = new java.io.File(path);
+        if (!datPath.exists())
         {
-            dat.mkdirs();
+            datPath.mkdirs();
         }
-        if (!dat.isDirectory())
+        if (!datPath.isDirectory())
         {
             Lang.showMesg(this, LangRes.P30F1A08, "请选择一个目录！");
             return;
         }
-        if (!dat.canWrite())
+        if (!datPath.canWrite())
         {
-            Lang.showMesg(this, LangRes.P30F1A0F, "无法写入文件 {0} ，请确认您是否有足够的权限！", dat.getPath());
+            Lang.showMesg(this, LangRes.P30F1A0F, "无法写入文件 {0} ，请确认您是否有足够的权限！", datPath.getPath());
             return;
         }
-        dat = new java.io.File(dat, "amon.script");
-        if (dat.exists() && dat.isFile())
+        java.io.File datFile = new java.io.File(datPath, "amon.script");
+        if (datFile.exists() && datFile.isFile())
         {
             if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(this, LangRes.P30F1A0D, "您选择的文件已存在，确认要继续吗？"))
             {
@@ -350,6 +351,16 @@ public class SignUp extends javax.swing.JPanel implements IUserView
             return;
         }
 
+        try
+        {
+            Jzip.unZip(Jzip.class.getResourceAsStream("/res/res.zip"), datPath, true);
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            Lang.showMesg(null, null, exp.getLocalizedMessage());
+        }
+
         if (cbDbSec.isSelected())
         {
             String cipher = "AES";
@@ -373,7 +384,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
             userMdl.setCfg(ConsCfg.CFG_DB_SK, key);
         }
 
-        userMdl.setDatPath(datDir);
+        userMdl.setDatPath(path);
         userMdl.getMpwdMdl().setUserLast(un);
         DBA4000.initDataBase(userMdl);
 
