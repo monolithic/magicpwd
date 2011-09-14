@@ -43,7 +43,7 @@ public class SiteAction extends ATrayAction
 
         try
         {
-            java.awt.Desktop.getDesktop().browse(new java.net.URI(ConsEnv.HOMEPAGE + "?am"));
+            java.awt.Desktop.getDesktop().browse(new java.net.URI(ConsEnv.HOMEPAGE + "?ap"));
         }
         catch (Exception exp)
         {
