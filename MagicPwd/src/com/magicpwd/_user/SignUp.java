@@ -353,7 +353,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
 
         try
         {
-            Jzip.unZip(Jzip.class.getResourceAsStream("/res/res.zip"), datPath, true);
+            Jzip.unZip(Jzip.class.getResourceAsStream("/res/dat.zip"), datPath, true);
         }
         catch (Exception exp)
         {

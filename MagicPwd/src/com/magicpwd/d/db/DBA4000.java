@@ -437,20 +437,25 @@ public class DBA4000
             return false;
         }
 
+        StringBuilder buf = new StringBuilder();
+        for (java.util.List<MgtdHeader> list : hintList)
+        {
+            for (MgtdHeader hint : list)
+            {
+                buf.append(",'").append(hint.getP30F0309()).append('\'');
+            }
+        }
+        if (buf.length() < 1)
+        {
+            return false;
+        }
+
         DBAccess dba = new DBAccess();
 
         try
         {
             dba.init(userMdl);
 
-            StringBuilder buf = new StringBuilder();
-            for (java.util.List<MgtdHeader> list : hintList)
-            {
-                for (MgtdHeader hint : list)
-                {
-                    buf.append(",'").append(hint.getP30F0309()).append('\'');
-                }
-            }
             dba.addTable(DBC4000.P30F0100);
             dba.addWhere(DBC4000.P30F010E, "in", '(' + buf.substring(1) + ')', false);
 
