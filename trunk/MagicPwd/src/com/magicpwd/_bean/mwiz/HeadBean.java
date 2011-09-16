@@ -385,7 +385,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
         ico.initView();
         ico.initLang();
         ico.initData();
-        ico.showData("", keysMdl.getItemAt(ConsEnv.PWDS_HEAD_LOGO).getName());
+        ico.showData("", keysMdl.getItemAt(ConsEnv.PWDS_HEAD_LOGO).getName(), 16);
         ico.setVisible(true);
     }
 

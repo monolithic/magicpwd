@@ -47,19 +47,8 @@ public class MagicPwd
             return;
         }
 
-        if (MpwdMdl.getRunMode() == RunMode.app)
-        {
-            TrayPtn trayPtn = new TrayPtn(mpwdMdl);
-            trayPtn.init();
-            return;
-        }
-
-        if (MpwdMdl.getRunMode() == RunMode.dev)
-        {
-            TrayPtn trayPtn = new TrayPtn(mpwdMdl);
-            trayPtn.init();
-            return;
-        }
+        TrayPtn trayPtn = new TrayPtn(mpwdMdl);
+        trayPtn.init();
     }
 
     /**
