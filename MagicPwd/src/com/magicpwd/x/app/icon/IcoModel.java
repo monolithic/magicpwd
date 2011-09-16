@@ -86,14 +86,14 @@ class IcoModel extends javax.swing.table.AbstractTableModel
         return false;
     }
 
-    public void loadIco(java.io.File icoPath, String lastIcon)
+    public void loadIco(java.io.File icoPath, String lastIcon, int iconSize)
     {
         iconList.clear();
         selIcon = 0;
 
         if (icoPath != null && icoPath.exists() && icoPath.isDirectory() && icoPath.canRead())
         {
-            java.io.File[] fileList = icoPath.listFiles(new AmonFF("(AM|AU)\\d{14}_(16|24)\\.PNG", true));
+            java.io.File[] fileList = icoPath.listFiles(new AmonFF("(AM|AU)\\d{14}_" + iconSize + "\\.PNG", true));
             if (fileList != null && fileList.length > 0)
             {
                 java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("(AM|AU)\\d{14}");

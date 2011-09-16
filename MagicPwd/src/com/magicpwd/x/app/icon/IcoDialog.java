@@ -26,6 +26,7 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.AmonFF;
+import java.util.Properties;
 
 /**
  * 图标管理对话窗口
@@ -39,8 +40,9 @@ public class IcoDialog extends ADialog
     private java.io.File iconHome;
     private String iconPath;
     private String iconHash;
-    private java.awt.Window window;
     private UserMdl userMdl;
+    private int iconSize;
+    private java.awt.Window window;
     private IBackCall<String, String> backCall;
 
     public IcoDialog(java.awt.Window window, UserMdl userMdl, IBackCall<String, String> backCall)
@@ -146,8 +148,8 @@ public class IcoDialog extends ADialog
 
     public void initData()
     {
-        btScrollL.setIcon(userMdl.readFeelIcon("mpro-edit-move-left"));
-        btScrollR.setIcon(userMdl.readFeelIcon("mpro-edit-move-right"));
+        btScrollL.setIcon(userMdl.getFeelFav("edit-move-left", "var:edit-move-left"));
+        btScrollR.setIcon(userMdl.getFeelFav("edit-move-right", "var:edit-move-right"));
 
         iconHome = new java.io.File(userMdl.getDatPath(), ConsEnv.DIR_ICO);
 
@@ -251,9 +253,10 @@ public class IcoDialog extends ADialog
         return true;
     }
 
-    public void showData(final String iconPath, String iconHash)
+    public void showData(final String iconPath, String hash, int size)
     {
-        this.iconHash = iconHash;
+        this.iconHash = hash;
+        this.iconSize = size;
         javax.swing.SwingUtilities.invokeLater(new Runnable()
         {
 
@@ -261,14 +264,14 @@ public class IcoDialog extends ADialog
             public void run()
             {
                 listCat(iconPath);
-                listIco(iconPath);
+                listIco(iconPath, iconSize);
             }
         });
     }
 
-    public synchronized void listIco(String iconPath)
+    public synchronized void listIco(String iconPath, int iconSize)
     {
-        icoModel.loadIco(new java.io.File(iconHome, iconPath), iconHash);
+        icoModel.loadIco(new java.io.File(iconHome, iconPath), iconHash, iconSize);
         tbIconGrid.setRowSelectionInterval(icoModel.getSelectedRow(), icoModel.getSelectedRow());
         tbIconGrid.setColumnSelectionInterval(icoModel.getSelectedColumn(), icoModel.getSelectedColumn());
     }
@@ -281,14 +284,14 @@ public class IcoDialog extends ADialog
             @Override
             public void mouseEntered(java.awt.event.MouseEvent evt)
             {
-                IcoLabel label = (IcoLabel) evt.getSource();
+                TabLabel label = (TabLabel) evt.getSource();
                 label.setRollover(true);
             }
 
             @Override
             public void mouseExited(java.awt.event.MouseEvent evt)
             {
-                IcoLabel label = (IcoLabel) evt.getSource();
+                TabLabel label = (TabLabel) evt.getSource();
                 label.setRollover(false);
             }
 
@@ -299,7 +302,19 @@ public class IcoDialog extends ADialog
             }
         };
 
-        IcoLabel label = new IcoLabel("默认");
+        Properties prop = new Properties();
+        try
+        {
+            java.io.FileReader reader = new java.io.FileReader(new java.io.File(iconHome, "ico.properties"));
+            prop.load(reader);
+            reader.close();
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+        }
+
+        TabLabel label = new TabLabel("", prop.getProperty(".", "默认"));
         if (!Char.isValidate(iconPath))
         {
             label.setSelected(true);
@@ -308,37 +323,45 @@ public class IcoDialog extends ADialog
         label.addMouseListener(listener);
         plCateList.add(label);
 
-        if (iconHome.exists())
+        if (!iconHome.exists())
         {
-            for (java.io.File file : iconHome.listFiles())
+            return;
+        }
+
+        String tmp;
+        for (java.io.File file : iconHome.listFiles())
+        {
+            if (file == null || !file.exists() || !file.isDirectory() || !file.canRead())
             {
-                if (file == null || !file.exists() || !file.isDirectory() || !file.canRead() || !Char.isValidate(file.getName(), 1, 64))
-                {
-                    continue;
-                }
-                label = new IcoLabel(file.getName());
-                if (iconPath.equals(file.getName()))
-                {
-                    label.setSelected(true);
-                    lbCateLast = label;
-                }
-                label.addMouseListener(listener);
-                plCateList.add(label);
+                continue;
             }
+            tmp = file.getName();
+            if (!Char.isValidate(file.getName(), 1, 64))
+            {
+                continue;
+            }
+            label = new TabLabel(tmp, prop.getProperty(tmp, tmp));
+            if (iconPath.equals(tmp))
+            {
+                label.setSelected(true);
+                lbCateLast = label;
+            }
+            label.addMouseListener(listener);
+            plCateList.add(label);
         }
     }
 
     private void changeCategory(java.awt.event.MouseEvent evt)
     {
-        IcoLabel label = (IcoLabel) evt.getSource();
+        TabLabel label = (TabLabel) evt.getSource();
         if (label == null)
         {
             return;
         }
 
         label.setSelected(true);
-        iconPath = label.getText();
-        listIco(iconPath);
+        iconPath = label.getKey();
+        listIco(iconPath, iconSize);
 
         if (lbCateLast != null)
         {
@@ -422,7 +445,7 @@ public class IcoDialog extends ADialog
     private javax.swing.JLabel btScrollL;
     private javax.swing.JLabel btScrollR;
     private javax.swing.JPanel plCatePane;
-    private IcoLabel lbCateLast;
+    private TabLabel lbCateLast;
     private javax.swing.JPanel plCateList;
     private javax.swing.JScrollPane spCateList;
     private javax.swing.JTable tbIconGrid;

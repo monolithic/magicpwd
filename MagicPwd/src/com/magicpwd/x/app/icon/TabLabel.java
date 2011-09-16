@@ -26,16 +26,18 @@ package com.magicpwd.x.app.icon;
  * CopyRight  : Winshine.biz
  * Description:
  */
-class IcoLabel extends javax.swing.JLabel
+class TabLabel extends javax.swing.JLabel
 {
 
     private static java.awt.Font selFont;
     private static java.awt.Font defFont;
+    private String key;
     private boolean selected;
 
-    IcoLabel(String text)
+    TabLabel(String key, String text)
     {
         super(text);
+        this.key = key;
         setForeground(java.awt.Color.darkGray);
         setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
         setOpaque(true);
@@ -83,5 +85,13 @@ class IcoLabel extends javax.swing.JLabel
             setBackground(null);
         }
         this.selected = selected;
+    }
+
+    /**
+     * @return the key
+     */
+    public String getKey()
+    {
+        return key;
     }
 }

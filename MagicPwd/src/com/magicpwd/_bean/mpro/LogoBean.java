@@ -210,7 +210,7 @@ public class LogoBean extends javax.swing.JPanel implements IMproBean, IBackCall
         ico.initView();
         ico.initLang();
         ico.initData();
-        ico.showData("", itemData.getName());
+        ico.showData("", itemData.getName(), 16);
         ico.setVisible(true);
     }
     private javax.swing.JLabel lb_PropName;
