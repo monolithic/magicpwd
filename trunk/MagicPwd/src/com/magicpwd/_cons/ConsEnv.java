@@ -30,7 +30,7 @@ public interface ConsEnv
     /**
      * 软件信息：构建日期
      */
-    String BUILDER = "2011-02-14";
+    String BUILDER = "2011-09-18";
     /**
      * 软件信息：软件代码
      */
@@ -44,7 +44,7 @@ public interface ConsEnv
      */
     String HOMEPAGE = "http://amon.me/mpwd/";
     String BLOGSITE = "http://amon.me/blog/";
-    String MLOGSITE = "http://weibo.com/magicpwd";
+    String MLOGSITE = "http://amon.me/mlog/";
     /**
      * 软件信息：软件版权
      */
