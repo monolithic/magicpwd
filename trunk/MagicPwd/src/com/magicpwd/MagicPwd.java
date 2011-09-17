@@ -47,6 +47,13 @@ public class MagicPwd
             return;
         }
 
+        try
+        {
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+        }
+        catch (Exception exp)
+        {
+        }
         TrayPtn trayPtn = new TrayPtn(mpwdMdl);
         trayPtn.init();
     }
