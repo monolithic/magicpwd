@@ -458,12 +458,12 @@ public class MpadPtn extends AMpwdPtn
         {
             noteMdl.saveData(true);
             infoLayout.show(pl_NoteInfo, "info");
-            Lang.setWText(lb_NoteInfo, LangRes.P30F5A03, "");
+            Lang.setWText(lb_NoteInfo, LangRes.P30F5A03, "数据保存成功！");
         }
         catch (Exception exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(this, LangRes.P30F5A04, "");
+            Lang.showMesg(this, LangRes.P30F5A04, "记事本数据保存失败，请重新登录尝试！");
         }
     }
 
