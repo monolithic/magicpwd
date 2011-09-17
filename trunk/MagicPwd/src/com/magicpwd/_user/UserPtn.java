@@ -18,7 +18,6 @@ package com.magicpwd._user;
 
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd.__i.IUserView;
-import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._enum.AuthLog;
@@ -30,7 +29,6 @@ import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.m.MpwdMdl;
 import com.magicpwd.m.UserMdl;
-import java.awt.event.ActionEvent;
 
 public class UserPtn extends javax.swing.JPanel
 {
@@ -223,12 +221,13 @@ public class UserPtn extends javax.swing.JPanel
                 btApplyActionPerformed(e);
             }
         });
-        lbMenu = new BtnLabel();
-        lbMenu.addActionListener(new java.awt.event.ActionListener()
+        lbMenu = new javax.swing.JLabel();
+        lbMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConsEnv.RES_ICON + "menu.png")));
+        lbMenu.addMouseListener(new java.awt.event.MouseAdapter()
         {
 
             @Override
-            public void actionPerformed(ActionEvent e)
+            public void mouseClicked(java.awt.event.MouseEvent e)
             {
                 pmMenu.show(lbMenu, 0, lbMenu.getHeight());
             }
@@ -243,7 +242,7 @@ public class UserPtn extends javax.swing.JPanel
         plAction.setLayout(layout);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addContainerGap();
-        hsg.addComponent(lbMenu, 21, 21, 21);
+        hsg.addComponent(lbMenu, 18, 18, 18);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 0, Short.MAX_VALUE);
         hsg.addComponent(btApply);
         hsg.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -253,7 +252,7 @@ public class UserPtn extends javax.swing.JPanel
         javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER);
         vpg.addComponent(btAbort);
         vpg.addComponent(btApply);
-        vpg.addComponent(lbMenu, 21, 21, 21);
+        vpg.addComponent(lbMenu, 18, 18, 18);
         javax.swing.GroupLayout.SequentialGroup vsg = layout.createSequentialGroup();
 //        vsg.addContainerGap();
         vsg.addGroup(vpg);
@@ -275,7 +274,6 @@ public class UserPtn extends javax.swing.JPanel
     public boolean initData()
     {
         userView.initData();
-        lbMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConsEnv.RES_ICON + "more.png")));
 
         if (jpng == null)
         {
@@ -489,7 +487,7 @@ public class UserPtn extends javax.swing.JPanel
     private javax.swing.JPanel plAction;
     private javax.swing.JButton btAbort;
     private javax.swing.JButton btApply;
-    private BtnLabel lbMenu;
+    private javax.swing.JLabel lbMenu;
     private javax.swing.JPopupMenu pmMenu;
     private javax.swing.JCheckBoxMenuItem miOskb;
 }
