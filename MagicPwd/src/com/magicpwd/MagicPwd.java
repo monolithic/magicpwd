@@ -17,6 +17,8 @@
 package com.magicpwd;
 
 import com.magicpwd._enum.RunMode;
+import com.magicpwd._util.Jzip;
+import com.magicpwd._util.Logs;
 import com.magicpwd.m.MpwdMdl;
 import com.magicpwd.v.cmd.mcmd.McmdPtn;
 import com.magicpwd.v.app.tray.TrayPtn;
@@ -50,10 +52,18 @@ public class MagicPwd
         try
         {
             javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+            java.io.File skin = new java.io.File("skin");
+            if (!skin.exists() || !skin.isDirectory() || !skin.canRead())
+            {
+                Jzip.unZip(MagicPwd.class.getResourceAsStream("/res/skin.zip"), skin, true);
+            }
         }
         catch (Exception exp)
         {
+            Logs.exception(exp);
+            return;
         }
+
         TrayPtn trayPtn = new TrayPtn(mpwdMdl);
         trayPtn.init();
     }
