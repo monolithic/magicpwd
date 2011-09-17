@@ -16,6 +16,7 @@
  */
 package com.magicpwd;
 
+import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._enum.RunMode;
 import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Logs;
@@ -52,7 +53,7 @@ public class MagicPwd
         try
         {
             javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
-            java.io.File skin = new java.io.File("skin");
+            java.io.File skin = new java.io.File(ConsEnv.DIR_SKIN);
             if (!skin.exists() || !skin.isDirectory() || !skin.canRead())
             {
                 skin.mkdir();

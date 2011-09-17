@@ -368,6 +368,7 @@ public class SignIn extends javax.swing.JPanel implements IUserView
                     return;
                 }
                 mpwdMdl.setUserLast(name);
+                mpwdMdl.setViewLast(view);
             }
             else
             {
