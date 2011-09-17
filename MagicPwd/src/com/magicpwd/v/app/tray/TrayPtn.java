@@ -243,7 +243,12 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
     private boolean initView()
     {
         // 启动实例判断
-        FileLocker fl = new FileLocker(new java.io.File("tmp", "mwpd.lck"));
+        java.io.File tmp = new java.io.File("tmp");
+        if (!tmp.exists() || !tmp.isDirectory())
+        {
+            tmp.mkdir();
+        }
+        FileLocker fl = new FileLocker(new java.io.File(tmp, "mwpd.lck"));
         if (!fl.tryLock())
         {
             javax.swing.JOptionPane.showMessageDialog(null, "已经有一个《魔方密码》实例处于运行状态！", "友情提示", javax.swing.JOptionPane.INFORMATION_MESSAGE);
