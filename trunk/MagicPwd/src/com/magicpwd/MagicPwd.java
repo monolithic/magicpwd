@@ -55,6 +55,7 @@ public class MagicPwd
             java.io.File skin = new java.io.File("skin");
             if (!skin.exists() || !skin.isDirectory() || !skin.canRead())
             {
+                skin.mkdir();
                 Jzip.unZip(MagicPwd.class.getResourceAsStream("/res/skin.zip"), skin, true);
             }
         }
