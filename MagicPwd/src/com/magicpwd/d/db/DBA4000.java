@@ -130,7 +130,7 @@ public class DBA4000
                 return false;
             }
 
-            reader = new java.io.BufferedReader(new java.io.InputStreamReader(stream));
+            reader = new java.io.BufferedReader(new java.io.InputStreamReader(stream, ConsEnv.FILE_ENCODING));
             String line = reader.readLine();
             while (line != null)
             {
@@ -162,7 +162,7 @@ public class DBA4000
                 return false;
             }
 
-            reader = new java.io.BufferedReader(new java.io.InputStreamReader(stream));
+            reader = new java.io.BufferedReader(new java.io.InputStreamReader(stream, ConsEnv.FILE_ENCODING));
             String line = reader.readLine();
             while (line != null)
             {
