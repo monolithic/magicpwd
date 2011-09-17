@@ -33,7 +33,7 @@ import com.magicpwd.r.AmonFF;
 class IcoModel extends javax.swing.table.AbstractTableModel
 {
 
-    private java.util.List<javax.swing.JLabel> iconList;
+    private java.util.List<IcoLabel> iconList;
     private int columnCount;
     private int rowHeight;
     private int selIcon;
@@ -42,7 +42,7 @@ class IcoModel extends javax.swing.table.AbstractTableModel
     IcoModel(UserMdl userMdl)
     {
         this.userMdl = userMdl;
-        iconList = new java.util.ArrayList<javax.swing.JLabel>();
+        iconList = new java.util.ArrayList<IcoLabel>();
         columnCount = 5;
         rowHeight = 36;
     }
@@ -97,7 +97,7 @@ class IcoModel extends javax.swing.table.AbstractTableModel
             if (fileList != null && fileList.length > 0)
             {
                 java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("(AM|AU)\\d{14}");
-                int i = 1;
+                int i = 0;
                 for (java.io.File file : fileList)
                 {
                     if (!file.isFile())
@@ -111,12 +111,12 @@ class IcoModel extends javax.swing.table.AbstractTableModel
                     }
 
                     String key = matcher.group();
-                    iconList.add(newLabel(i, new javax.swing.ImageIcon(file.getAbsolutePath()), key));
                     if (key.equalsIgnoreCase(lastIcon))
                     {
                         selIcon = i;
                     }
                     i += 1;
+                    iconList.add(new IcoLabel(i, key, new javax.swing.ImageIcon(file.getAbsolutePath())));
                 }
             }
         }
@@ -161,12 +161,12 @@ class IcoModel extends javax.swing.table.AbstractTableModel
         java.awt.image.BufferedImage img = javax.imageio.ImageIO.read(fis);
         fis.close();
 
-        String hash = "AU" + new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
-        writeImage(scaleImage(img, 16), icoPath.getAbsolutePath() + java.io.File.separator + hash + "_16." + ConsEnv.IMAGE_FORMAT);
-        writeImage(scaleImage(img, 24), icoPath.getAbsolutePath() + java.io.File.separator + hash + "_24." + ConsEnv.IMAGE_FORMAT);
+        String key = "AU" + new java.text.SimpleDateFormat("yyyyMMddHHmmss").format(new java.util.Date());
+        writeImage(scaleImage(img, 16), icoPath.getAbsolutePath() + java.io.File.separator + key + "_16." + ConsEnv.IMAGE_FORMAT);
+        writeImage(scaleImage(img, 24), icoPath.getAbsolutePath() + java.io.File.separator + key + "_24." + ConsEnv.IMAGE_FORMAT);
 
         int i = iconList.size();
-        iconList.add(newLabel(i, new javax.swing.ImageIcon(img), hash));
+        iconList.add(new IcoLabel(i, key, new javax.swing.ImageIcon(img)));
 
         selIcon = i;
         fireTableDataChanged();
@@ -181,19 +181,6 @@ class IcoModel extends javax.swing.table.AbstractTableModel
         {
             this.columnCount = columnCount;
         }
-    }
-
-    private javax.swing.JLabel newLabel(int num, javax.swing.Icon ico, String key)
-    {
-        javax.swing.JLabel label = new javax.swing.JLabel();
-        label.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        label.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        label.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        label.putClientProperty("hash", key);
-        label.setText(Integer.toString(num));
-        label.setOpaque(true);
-        label.setIcon(ico);
-        return label;
     }
 
     /**
@@ -222,11 +209,11 @@ class IcoModel extends javax.swing.table.AbstractTableModel
         return selIcon % columnCount;
     }
 
-    public String getSelectedIcon()
+    public String getSelectedIcon(int row, int col)
     {
-        javax.swing.JLabel label = iconList.get(selIcon);
-        String hash = (String) label.getClientProperty("hash");
-        userMdl.setDataIcon(hash, 16, label.getIcon());
-        return hash;
+        IcoLabel label = iconList.get(row * columnCount + col);
+        String key = label.getKey();
+        userMdl.setDataIcon(key, 16, label.getIcon());
+        return key;
     }
 }

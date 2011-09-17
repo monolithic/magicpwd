@@ -141,7 +141,7 @@ public class IcoDialog extends ADialog
 
         Lang.setWText(btAppend, LangRes.P30FA50D, "追加(@A)");
 
-        Lang.setWText(btRemove, LangRes.P30FA50D, "追加(@A)");
+        Lang.setWText(btRemove, null, "删除(@D)");
 
         this.setTitle(Lang.getLang(LangRes.P30FA50F, "徽标"));
     }
@@ -386,7 +386,7 @@ public class IcoDialog extends ADialog
 
     private void btSelectActionPerformed(java.awt.event.ActionEvent evt)
     {
-        if (backCall.callBack(icoModel.getSelectedIcon(), iconPath))
+        if (backCall.callBack(icoModel.getSelectedIcon(tbIconGrid.getSelectedRow(), tbIconGrid.getSelectedColumn()), iconPath))
         {
             this.setVisible(false);
             this.dispose();
