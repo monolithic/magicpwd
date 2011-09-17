@@ -329,7 +329,7 @@ public class SignIn extends javax.swing.JPanel implements IUserView
             tfUserName.requestFocus();
             return;
         }
-        name = name.trim().replaceAll("\\s+", "").toLowerCase();
+        name = name.trim();
 
         UserMdl userMdl = userPtn.getUserMdl();
         MpwdMdl mpwdMdl = userMdl.getMpwdMdl();
