@@ -147,6 +147,18 @@ public class SignIn extends javax.swing.JPanel implements IUserView
             }
         });
         menu.add(miOpenFile);
+
+        miUpgrade = new javax.swing.JMenuItem();
+        miUpgrade.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e)
+            {
+                miUpgradeActionPerformed(e);
+            }
+        });
+        menu.add(miUpgrade);
     }
 
     @Override
@@ -165,6 +177,9 @@ public class SignIn extends javax.swing.JPanel implements IUserView
 
         Lang.setWText(miOpenFile, null, "打开文件");
         Lang.setWTips(miOpenFile, null, "打开已有数据文件");
+
+        Lang.setWText(miUpgrade, LangRes.P30FA307, "数据升级");
+        Lang.setWTips(miUpgrade, LangRes.P30FA308, "从旧版本软件升级数据");
 
         Lang.setWText(userPtn.getApplyButton(), LangRes.P30FA501, "登录(@S)");
 
@@ -446,6 +461,13 @@ public class SignIn extends javax.swing.JPanel implements IUserView
         tfUserName.setText(user);
         userPtn.getUserMdl().getMpwdMdl().setDatPath(user, path);
     }
+
+    private void miUpgradeActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        userPtn.initView(AuthLog.signDu);
+        userPtn.initLang();
+        userPtn.initData();
+    }
     private javax.swing.JLabel lbUserView;
     private javax.swing.JComboBox cbUserView;
     private javax.swing.JLabel lbUserName;
@@ -456,4 +478,5 @@ public class SignIn extends javax.swing.JPanel implements IUserView
     private javax.swing.JMenuItem miFindPwds;
     private javax.swing.JMenuItem miNewUser;
     private javax.swing.JMenuItem miOpenFile;
+    private javax.swing.JMenuItem miUpgrade;
 }

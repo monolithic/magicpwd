@@ -17,8 +17,8 @@
 package com.magicpwd._user;
 
 import com.magicpwd.__i.IUserView;
-import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsCfg;
+import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._enum.AuthLog;
 import com.magicpwd._util.Char;
@@ -63,13 +63,10 @@ public class SignUp extends javax.swing.JPanel implements IUserView
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e)
             {
-                lbUserOptsActionPerformed(e);
+                miUserOptsActionPerformed(e);
             }
         });
         menu.add(miUserOpts);
-
-        miUpgrade = new javax.swing.JMenuItem();
-        menu.add(miUpgrade);
     }
 
     @Override
@@ -84,9 +81,6 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         Lang.setWText(miUserOpts, null, "高级选项");
         Lang.setWTips(miUserOpts, null, "");
 
-        Lang.setWText(miUpgrade, LangRes.P30FA307, "数据升级");
-        Lang.setWTips(miUpgrade, LangRes.P30FA308, "从旧版本软件升级数据");
-
         Lang.setWText(userPtn.getApplyButton(), LangRes.P30FA502, "注册(@S)");
 
         Lang.setWText(userPtn.getAbortButton(), LangRes.P30FA505, "返回(@C)");
@@ -95,7 +89,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
 
         lbDatPath.setText("数据路径(D)");
 
-        btDatPath.setText("...");
+        btDatPath.setToolTipText("选择文件路径");
 
         cbSfKey.setText("使用密码文件");
 
@@ -117,6 +111,12 @@ public class SignUp extends javax.swing.JPanel implements IUserView
             @Override
             public void focusLost(java.awt.event.FocusEvent e)
             {
+                String path = tfUserName.getText();
+                if (!Char.isValidate(path))
+                {
+                    path = "dat";
+                }
+                tfDatPath.setText(Char.format(".{0}{1}{0}", java.io.File.separator, path));
             }
         });
         tfUserName.addActionListener(new java.awt.event.ActionListener()
@@ -175,8 +175,16 @@ public class SignUp extends javax.swing.JPanel implements IUserView
             }
         });
 
-        tfDatPath.setText('.' + java.io.File.separator + "dat" + java.io.File.separator);
-        miUserOpts.setSelected(true);
+        tfDatPath.setText(Char.format(".{0}{1}{0}", java.io.File.separator, "dat"));
+        btDatPath.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                chooseDatPath();
+            }
+        });
 
         cbDbSec.addActionListener(new java.awt.event.ActionListener()
         {
@@ -187,6 +195,8 @@ public class SignUp extends javax.swing.JPanel implements IUserView
                 cbDbSecActionPerformed(e);
             }
         });
+
+        tfUserName.requestFocus();
     }
 
     @Override
@@ -207,6 +217,18 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         userPtn.initView(AuthLog.signIn);
         userPtn.initLang();
         userPtn.initData();
+    }
+
+    private void chooseDatPath()
+    {
+        javax.swing.JFileChooser fc = new javax.swing.JFileChooser(tfDatPath.getText());
+        fc.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
+        if (javax.swing.JFileChooser.APPROVE_OPTION != fc.showOpenDialog(userPtn))
+        {
+            return;
+        }
+        java.io.File file = fc.getSelectedFile();
+        tfDatPath.setText(file.getPath());
     }
 
     private void checkUserName()
@@ -455,16 +477,18 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         spSepLine = new javax.swing.JSeparator();
         lbDatPath = new javax.swing.JLabel();
         tfDatPath = new javax.swing.JTextField();
-        btDatPath = new BtnLabel();
+        btDatPath = new javax.swing.JLabel();
         cbSfKey = new javax.swing.JCheckBox();
         cbDbSec = new javax.swing.JCheckBox();
+
+        btDatPath.setIcon(new javax.swing.ImageIcon(getClass().getResource(ConsEnv.RES_ICON + "open.png")));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(plUserOpts);
         plUserOpts.setLayout(layout);
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
         hsg1.addComponent(tfDatPath, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE);
         hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg1.addComponent(btDatPath, 21, 21, 21);
+        hsg1.addComponent(btDatPath, 18, 18, 18);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg1.addComponent(cbDbSec);
         hpg1.addComponent(cbSfKey);
@@ -483,7 +507,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER);
         vpg1.addComponent(lbDatPath);
         vpg1.addComponent(tfDatPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vpg1.addComponent(btDatPath, 21, 21, 21);
+        vpg1.addComponent(btDatPath, 18, 18, 18);
         javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
 //        vsg1.addContainerGap();
         vsg1.addComponent(spSepLine, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE);
@@ -495,9 +519,11 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         vsg1.addComponent(cbDbSec);
 //        vsg1.addContainerGap();
         layout.setVerticalGroup(vsg1);
+
+        plUserOpts.setVisible(false);
     }
 
-    private void lbUserOptsActionPerformed(java.awt.event.ActionEvent evt)
+    private void miUserOptsActionPerformed(java.awt.event.ActionEvent evt)
     {
         plUserOpts.setVisible(!plUserOpts.isVisible());
         userPtn.pack();
@@ -518,9 +544,8 @@ public class SignUp extends javax.swing.JPanel implements IUserView
     private javax.swing.JPasswordField pfUserPwd2;
     private javax.swing.JCheckBoxMenuItem miUserOpts;
     private javax.swing.JPanel plUserOpts;
-    private javax.swing.JMenuItem miUpgrade;
     //=============================
-    private BtnLabel btDatPath;
+    private javax.swing.JLabel btDatPath;
     private javax.swing.JCheckBox cbDbSec;
     private javax.swing.JCheckBox cbSfKey;
     private javax.swing.JLabel lbDatPath;

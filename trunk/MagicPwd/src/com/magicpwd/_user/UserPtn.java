@@ -132,6 +132,9 @@ public class UserPtn extends javax.swing.JPanel
             case signCs:
                 userView = new SignCs(this);
                 break;
+            case signDu:
+                userView = new SignDu(this);
+                break;
             default:
                 return false;
         }
@@ -181,7 +184,7 @@ public class UserPtn extends javax.swing.JPanel
         plLogo.add(lbLogo);
         try
         {
-            java.io.InputStream stream = this.getClass().getResourceAsStream("/res/icon/guid.png");
+            java.io.InputStream stream = getClass().getResourceAsStream(ConsEnv.RES_ICON + "guid.png");
             lbLogo.setIcon(new javax.swing.ImageIcon(javax.imageio.ImageIO.read(stream)));
             stream.close();
         }
@@ -263,6 +266,8 @@ public class UserPtn extends javax.swing.JPanel
     public boolean initLang()
     {
         userView.initLang();
+
+        Lang.setWTips(lbMenu, null, "更多选项");
 
         Lang.setWText(miOskb, LangRes.P30FA310, "屏幕键盘");
         Lang.setWTips(miOskb, LangRes.P30FA311, "使用屏幕键盘输入");
