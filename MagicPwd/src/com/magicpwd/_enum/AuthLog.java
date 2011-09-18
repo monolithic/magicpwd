@@ -63,5 +63,9 @@ public enum AuthLog
     /**
      * 设置云存储用户
      */
-    signCs
+    signCs,
+    /**
+     * 数据升级
+     */
+    signDu
 }
