@@ -21,9 +21,6 @@ import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._enum.RunMode;
 import com.magicpwd.m.MpwdMdl;
 import com.magicpwd.r.AmonFF;
-import java.io.InputStream;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.Node;
@@ -163,15 +160,15 @@ public class Skin
             try
             {
                 SubstanceLookAndFeel.setToUseConstantThemesOnDialogs(true);
-                UIManager.put(SubstanceLookAndFeel.TABBED_PANE_CLOSE_BUTTONS_PROPERTY, Boolean.TRUE);
-                UIManager.put(SubstanceLookAndFeel.SHOW_EXTRA_WIDGETS, Boolean.TRUE);
+                javax.swing.UIManager.put(SubstanceLookAndFeel.TABBED_PANE_CLOSE_BUTTONS_PROPERTY, Boolean.TRUE);
+                javax.swing.UIManager.put(SubstanceLookAndFeel.SHOW_EXTRA_WIDGETS, Boolean.TRUE);
 
                 if (Char.isValidate(theme))
                 {
                     SubstanceSkin skin = (SubstanceSkin) Class.forName(theme).newInstance();
                     if (Char.isValidate(image))
                     {
-                        InputStream stream = File.open4Read(theme);
+                        java.io.InputStream stream = File.open4Read(theme);
                         SubstanceImageWatermark watermark = new SubstanceImageWatermark(stream);
                         stream.close();
 
