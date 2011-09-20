@@ -131,7 +131,9 @@ public class Skin
             // 使用界面
             try
             {
-                javax.swing.UIManager.setLookAndFeel(clazz);
+                Class obj = Class.forName(clazz);
+                javax.swing.LookAndFeel laf = (javax.swing.LookAndFeel) (obj.newInstance());
+                loadLook(laf);
             }
             catch (Exception exp)
             {
@@ -147,8 +149,7 @@ public class Skin
                 // 加载界面
                 javax.swing.plaf.synth.SynthLookAndFeel synth = new javax.swing.plaf.synth.SynthLookAndFeel();
                 synth.load(new java.io.File(file, clazz).toURI().toURL());
-                // 使用界面
-                javax.swing.UIManager.setLookAndFeel(synth);
+                loadLook(synth);
             }
             catch (Exception exp)
             {
@@ -162,7 +163,6 @@ public class Skin
             try
             {
                 SubstanceLookAndFeel.setToUseConstantThemesOnDialogs(true);
-                UIManager.setLookAndFeel(clazz);
                 UIManager.put(SubstanceLookAndFeel.TABBED_PANE_CLOSE_BUTTONS_PROPERTY, Boolean.TRUE);
                 UIManager.put(SubstanceLookAndFeel.SHOW_EXTRA_WIDGETS, Boolean.TRUE);
 
@@ -179,8 +179,11 @@ public class Skin
                         watermark.setOpacity((float) 0.7);
                         skin.withWatermark(watermark);
                     }
-                    SubstanceLookAndFeel.setSkin(clazz);
+                    SubstanceLookAndFeel.setSkin(skin);
                 }
+                Class obj = Class.forName(clazz);
+                javax.swing.LookAndFeel laf = (javax.swing.LookAndFeel) (obj.newInstance());
+                loadLook(laf);
                 //SwingUtilities.updateComponentTreeUI(null);
             }
             catch (Exception ex)
@@ -208,14 +211,31 @@ public class Skin
                 // 加载扩展库
                 Bean.loadJar(jars);
 
-                // 使用界面
-                javax.swing.UIManager.setLookAndFeel(clazz);
+                Class obj = Class.forName(clazz);
+                javax.swing.LookAndFeel laf = (javax.swing.LookAndFeel) (obj.newInstance());
+                loadLook(laf);
             }
             catch (Exception exp)
             {
                 Logs.exception(exp);
             }
         }
+    }
+
+    private static void loadLook(javax.swing.LookAndFeel laf) throws Exception
+    {
+        //改变全局设置
+        javax.swing.JFrame.setDefaultLookAndFeelDecorated(laf.getSupportsWindowDecorations());
+        javax.swing.JDialog.setDefaultLookAndFeelDecorated(laf.getSupportsWindowDecorations());
+        javax.swing.UIManager.setLookAndFeel(laf);
+
+        //改变当前frame的窗口,边框,标题
+//        frame.dispose();
+//        frame.setUndecorated(lnf.getSupportsWindowDecorations());
+//        frame.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
+//        frame.show();
+//
+//        SwingUtilities.updateComponentTreeUI(frame);
     }
 
     private static void loadResource(Element item, java.io.File file)
