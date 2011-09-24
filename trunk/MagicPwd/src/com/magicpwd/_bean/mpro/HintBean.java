@@ -67,7 +67,7 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
         dataEdit.setDropButtonVisible(false);
 
         blPropName = new BtnLabel();
-        blPropName.setIcon(mproPtn.getFeelIcon(null, "var:hint-time"));
+        blPropName.setIcon(mproPtn.getFeelIcon("hint-time", "var:hint-time"));
         lbPropName = new javax.swing.JLabel();
 
         pmDateView = new javax.swing.JPopupMenu();

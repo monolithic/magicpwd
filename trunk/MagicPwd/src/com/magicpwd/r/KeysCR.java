@@ -18,6 +18,7 @@ package com.magicpwd.r;
 
 import com.magicpwd._comn.mpwd.MpwdHeader;
 import com.magicpwd._util.Bean;
+import com.magicpwd._util.Char;
 import com.magicpwd.v.app.mpro.MproPtn;
 
 /**
@@ -69,17 +70,17 @@ public class KeysCR extends javax.swing.JPanel implements javax.swing.ListCellRe
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addComponent(lb_Icon);
         hsg.addComponent(lb_Text, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE);
+        hsg.addComponent(lb_Other);
         hsg.addComponent(lb_Label);
         hsg.addComponent(lb_Major);
-        hsg.addComponent(lb_Other);
         layout.setHorizontalGroup(hsg);
 
         javax.swing.GroupLayout.ParallelGroup vpg = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg.addComponent(lb_Icon);
         vpg.addComponent(lb_Text);
+        vpg.addComponent(lb_Other);
         vpg.addComponent(lb_Label);
         vpg.addComponent(lb_Major);
-        vpg.addComponent(lb_Other);
         layout.setVerticalGroup(vpg);
     }
 
@@ -159,6 +160,7 @@ public class KeysCR extends javax.swing.JPanel implements javax.swing.ListCellRe
             lb_Major.setIcon(mproPtn.getFeelIcon(t, "var:" + t));
             t = "keys-label" + keys.getP30F0102();
             lb_Label.setIcon(mproPtn.getFeelIcon(t, "var:" + t));
+            lb_Other.setIcon(Char.isValidateHash(keys.getP30F010E()) ? mproPtn.getFeelIcon("hint-time", "var:hint-time") : Bean.getNone());
         }
         // 其它
         else if (value != null)
@@ -166,6 +168,7 @@ public class KeysCR extends javax.swing.JPanel implements javax.swing.ListCellRe
             lb_Text.setText(value.toString());
             lb_Label.setIcon(Bean.getNone());
             lb_Major.setIcon(Bean.getNone());
+            lb_Other.setIcon(Bean.getNone());
         }
 
 //        lb_Rest.setIcon(Util.getNone());
