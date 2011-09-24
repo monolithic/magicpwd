@@ -312,8 +312,8 @@
             <stroke key="^ L" />
         </action>
         <action id="hide-window" class="com.magicpwd.e.mwiz.HideAction">
-            <stroke key="^ H" />
             <stroke key="^ Enter" />
+            <stroke key="^ H" />
         </action>
         <action id="show-mpro" class="com.magicpwd.e.tray.MproAction">
             <stroke key="^ # P" />

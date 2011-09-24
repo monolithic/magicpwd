@@ -245,6 +245,7 @@
         </action>
         <action id="hide-window" class="com.magicpwd.e.maoc.HideAction">
             <stroke key="^ Enter" />
+            <stroke key="^ H" />
         </action>
     </strokes>
 </magicpwd>
