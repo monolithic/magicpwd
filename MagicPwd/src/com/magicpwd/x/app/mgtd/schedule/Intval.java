@@ -51,19 +51,39 @@ public class Intval extends javax.swing.JPanel implements IMgtdBean
     @Override
     public void initView()
     {
-        btFtime = new BtnLabel();
+        cbFtime = new javax.swing.JCheckBox();
         spFtime = new javax.swing.JSpinner();
         smFtime = new javax.swing.SpinnerDateModel();
         spFtime.setModel(smFtime);
         lbFtime = new javax.swing.JLabel();
         lbFtime.setLabelFor(spFtime);
+        cbFtime.setSelected(true);
+        cbFtime.addActionListener(new java.awt.event.ActionListener()
+        {
 
-        btTtime = new BtnLabel();
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cbFtimeActionPerformed(evt);
+            }
+        });
+
+        cbTtime = new javax.swing.JCheckBox();
         spTtime = new javax.swing.JSpinner();
         smTtime = new javax.swing.SpinnerDateModel();
         spTtime.setModel(smTtime);
         lbTtime = new javax.swing.JLabel();
         lbTtime.setLabelFor(spTtime);
+        cbTtime.setSelected(true);
+        cbTtime.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cbTtimeActionPerformed(evt);
+            }
+        });
 
         btStime = new BtnLabel();
         spStime = new javax.swing.JSpinner();
@@ -71,6 +91,15 @@ public class Intval extends javax.swing.JPanel implements IMgtdBean
         spStime.setModel(smStime);
         lbStime = new javax.swing.JLabel();
         lbStime.setLabelFor(spStime);
+        btStime.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cbStimeActionPerformed(evt);
+            }
+        });
 
         spIntval = new javax.swing.JSpinner();
         smIntval = new javax.swing.SpinnerNumberModel(Integer.valueOf(1), Integer.valueOf(1), null, Integer.valueOf(1));
@@ -84,11 +113,11 @@ public class Intval extends javax.swing.JPanel implements IMgtdBean
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
         hsg1.addComponent(spFtime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg1.addComponent(btFtime, 21, 21, 21);
+        hsg1.addComponent(cbFtime);
         javax.swing.GroupLayout.SequentialGroup hsg2 = layout.createSequentialGroup();
         hsg2.addComponent(spTtime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg2.addComponent(btTtime, 21, 21, 21);
+        hsg2.addComponent(cbTtime);
         javax.swing.GroupLayout.SequentialGroup hsg3 = layout.createSequentialGroup();
         hsg3.addComponent(spStime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg3.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -118,11 +147,11 @@ public class Intval extends javax.swing.JPanel implements IMgtdBean
         javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg1.addComponent(lbFtime);
         vpg1.addComponent(spFtime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vpg1.addComponent(btFtime, 21, 21, 21);
+        vpg1.addComponent(cbFtime);
         javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg2.addComponent(lbTtime);
         vpg2.addComponent(spTtime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vpg2.addComponent(btTtime, 21, 21, 21);
+        vpg2.addComponent(cbTtime);
         javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg3.addComponent(lbStime);
         vpg3.addComponent(spStime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
@@ -148,8 +177,11 @@ public class Intval extends javax.swing.JPanel implements IMgtdBean
     public void initLang()
     {
         lbFtime.setText("起始时间");
+        cbFtime.setToolTipText("启用或禁用起始时间");
         lbTtime.setText("结束时间");
+        cbTtime.setToolTipText("启用或禁用结束时间");
         lbStime.setText("执行时间");
+        btStime.setToolTipText("当前时间");
 
         lbIntval.setText("间隔时间");
         cbIntval.addItem(new I1S1(0, "无"));
@@ -181,24 +213,38 @@ public class Intval extends javax.swing.JPanel implements IMgtdBean
     }
 
     @Override
-    public boolean showData(MgtdHeader mgtd)
+    public boolean showData(MgtdHeader header)
     {
-        spFtime.setValue(new java.util.Date(mgtd.getP30F030D()));
-        spTtime.setValue(new java.util.Date(mgtd.getP30F030E()));
-
-        MgtdDetail hint = mgtd.getHint(0);
-        if (hint != null)
+        boolean b = header.getP30F030D() != 0;
+        if (b)
         {
-            spStime.setValue(new java.util.Date(hint.getP30F0403()));
-            cbIntval.setSelectedItem(new I1S1(hint.getP30F0404()));
-            spIntval.setValue(hint.getP30F0405());
+            spFtime.setValue(new java.util.Date(header.getP30F030D()));
+        }
+        spFtime.setEnabled(b);
+        cbFtime.setSelected(b);
+
+        b = header.getP30F030E() != 0;
+        if (b)
+        {
+            spTtime.setValue(new java.util.Date(header.getP30F030E()));
+        }
+        spTtime.setEnabled(b);
+        cbTtime.setSelected(b);
+
+        MgtdDetail detail = header.getHint(0);
+        if (detail != null)
+        {
+            spStime.setValue(new java.util.Date(detail.getP30F0403()));
+
+            cbIntval.setSelectedItem(new I1S1(detail.getP30F0404()));
+            spIntval.setValue(detail.getP30F0405());
             return true;
         }
         return false;
     }
 
     @Override
-    public boolean saveData(MgtdHeader mgtd)
+    public boolean saveData(MgtdHeader header)
     {
         Object unitObj = cbIntval.getSelectedItem();
         if (unitObj == null || !(unitObj instanceof I1S1))
@@ -207,31 +253,46 @@ public class Intval extends javax.swing.JPanel implements IMgtdBean
         }
 
         I1S1 unit = (I1S1) unitObj;
-        mgtd.setP30F030D(smFtime.getDate().getTime());
-        mgtd.setP30F030E(smTtime.getDate().getTime());
-        mgtd.setP30F030F(0L);
+        header.setP30F030D(cbFtime.isSelected() ? smFtime.getDate().getTime() : 0);
+        header.setP30F030E(cbTtime.isSelected() ? smTtime.getDate().getTime() : 0);
+        header.setP30F030F(0L);
 
         java.util.List<MgtdDetail> list = new java.util.ArrayList<MgtdDetail>();
 
-        MgtdDetail hint = new MgtdDetail();
-        hint.setP30F0403(smStime.getDate().getTime());
-        hint.setP30F0404(unit.getK());
-        hint.setP30F0405(smIntval.getNumber().intValue());
-        hint.setP30F0406("");
-        list.add(hint);
+        MgtdDetail detail = new MgtdDetail();
+        detail.setP30F0403(smStime.getDate().getTime());
+        detail.setP30F0404(unit.getK());
+        detail.setP30F0405(smIntval.getNumber().intValue());
+        detail.setP30F0406("");
+        list.add(detail);
 
-        mgtd.setHintList(list);
+        header.setHintList(list);
         return true;
+    }
+
+    private void cbFtimeActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        spFtime.setEnabled(cbFtime.isSelected());
+    }
+
+    private void cbTtimeActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        spTtime.setEnabled(cbTtime.isSelected());
+    }
+
+    private void cbStimeActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        spStime.setValue(new java.util.Date());
     }
     private javax.swing.JLabel lbFtime;
     private javax.swing.JSpinner spFtime;
-    private BtnLabel btFtime;
+    private javax.swing.JCheckBox cbFtime;
     private javax.swing.JLabel lbStime;
     private javax.swing.JSpinner spStime;
     private BtnLabel btStime;
     private javax.swing.JLabel lbTtime;
     private javax.swing.JSpinner spTtime;
-    private BtnLabel btTtime;
+    private javax.swing.JCheckBox cbTtime;
     private javax.swing.JLabel lbIntval;
     private javax.swing.JSpinner spIntval;
     private javax.swing.JComboBox cbIntval;
