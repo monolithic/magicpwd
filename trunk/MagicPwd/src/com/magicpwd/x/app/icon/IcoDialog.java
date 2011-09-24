@@ -198,7 +198,7 @@ public class IcoDialog extends ADialog
         {
 
             @Override
-            public void mouseReleased(java.awt.event.MouseEvent evt)
+            public void mouseClicked(java.awt.event.MouseEvent evt)
             {
                 btScrollLActionPerformed(evt);
             }
@@ -208,7 +208,7 @@ public class IcoDialog extends ADialog
         {
 
             @Override
-            public void mouseReleased(java.awt.event.MouseEvent evt)
+            public void mouseClicked(java.awt.event.MouseEvent evt)
             {
                 btScrollRActionPerformed(evt);
             }
@@ -305,7 +305,7 @@ public class IcoDialog extends ADialog
         Properties prop = new Properties();
         try
         {
-            java.io.FileReader reader = new java.io.FileReader(new java.io.File(iconHome, "ico.properties"));
+            java.io.InputStreamReader reader = new java.io.InputStreamReader(new java.io.FileInputStream(new java.io.File(iconHome, "ico.properties")), ConsEnv.FILE_ENCODING);
             prop.load(reader);
             reader.close();
         }
