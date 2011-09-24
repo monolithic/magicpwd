@@ -75,7 +75,7 @@ public class MagicPwd
      */
     public static void main(String[] args)
     {
-        //System.setProperty("file.encoding", "UTF-8");
+        System.setProperty("file.encoding", "UTF-8");
 
         // 界面启动参数读取
         if (args != null && args.length > 0)
