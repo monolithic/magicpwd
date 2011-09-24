@@ -22,15 +22,17 @@
         <item type="normal" text="$P30F9605" text-def="记事模式(@3)">
             <action class="com.magicpwd.e.tray.MpadAction" />
         </item>
-        <item type="normal" text="$P30F960F" text-def="定时任务(@4)">
-            <action class="com.magicpwd.e.tray.MgtdAction" />
-        </item>
-        <item type="normal" text="$P30F9610" text-def="数值运算(@5)">
+        <item type="normal" text="$P30F9610" text-def="数值运算(@4)">
             <action class="com.magicpwd.e.tray.MaocAction" />
+        </item>
+        <!--
+        <item type="normal" text="$P30F960F" text-def="定时任务(@5)">
+            <action class="com.magicpwd.e.tray.MgtdAction" />
         </item>
         <item type="normal" text="$P30F9611" text-def="单位换算(@6)">
             <action class="com.magicpwd.e.tray.MrucAction" />
         </item>
+        -->
         <seperator />
         <item type="normal" text="$P30F9606" text-def="检测更新">
             <action class="com.magicpwd.e.tray.UpdtAction" />
