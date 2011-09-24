@@ -158,7 +158,7 @@ public class SignIn extends javax.swing.JPanel implements IUserView
                 miUpgradeActionPerformed(e);
             }
         });
-        menu.add(miUpgrade);
+        //menu.add(miUpgrade);
     }
 
     @Override
