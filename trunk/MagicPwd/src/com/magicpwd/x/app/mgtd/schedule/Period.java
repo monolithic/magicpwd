@@ -54,19 +54,39 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
     @Override
     public void initView()
     {
-        btFtime = new BtnLabel();
+        cbFtime = new javax.swing.JCheckBox();
         spFtime = new javax.swing.JSpinner();
         smFtime = new javax.swing.SpinnerDateModel();
         spFtime.setModel(smFtime);
         lbFtime = new javax.swing.JLabel();
         lbFtime.setLabelFor(spFtime);
+        cbFtime.setSelected(true);
+        cbFtime.addActionListener(new java.awt.event.ActionListener()
+        {
 
-        btTtime = new BtnLabel();
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cbFtimeActionPerformed(evt);
+            }
+        });
+
+        cbTtime = new javax.swing.JCheckBox();
         spTtime = new javax.swing.JSpinner();
         smTtime = new javax.swing.SpinnerDateModel();
         spTtime.setModel(smTtime);
         lbTtime = new javax.swing.JLabel();
         lbTtime.setLabelFor(spTtime);
+        cbTtime.setSelected(true);
+        cbTtime.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cbTtimeActionPerformed(evt);
+            }
+        });
 
         btStime = new BtnLabel();
         spStime = new javax.swing.JSpinner();
@@ -74,6 +94,15 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
         spStime.setModel(smStime);
         lbStime = new javax.swing.JLabel();
         lbStime.setLabelFor(spStime);
+        btStime.addActionListener(new java.awt.event.ActionListener()
+        {
+
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cbStimeActionPerformed(evt);
+            }
+        });
 
         cbPeriod = new javax.swing.JComboBox();
         cbPeriod.addActionListener(new java.awt.event.ActionListener()
@@ -101,11 +130,11 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
         javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
         hsg1.addComponent(spFtime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg1.addComponent(btFtime, 21, 21, 21);
+        hsg1.addComponent(cbFtime);
         javax.swing.GroupLayout.SequentialGroup hsg2 = layout.createSequentialGroup();
         hsg2.addComponent(spTtime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg2.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg2.addComponent(btTtime, 21, 21, 21);
+        hsg2.addComponent(cbTtime);
         javax.swing.GroupLayout.SequentialGroup hsg3 = layout.createSequentialGroup();
         hsg3.addComponent(spStime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg3.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
@@ -133,11 +162,11 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
         javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg1.addComponent(lbFtime);
         vpg1.addComponent(spFtime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vpg1.addComponent(btFtime, 21, 21, 21);
+        vpg1.addComponent(cbFtime);
         javax.swing.GroupLayout.ParallelGroup vpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg2.addComponent(lbTtime);
         vpg2.addComponent(spTtime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vpg2.addComponent(btTtime, 21, 21, 21);
+        vpg2.addComponent(cbTtime);
         javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg3.addComponent(lbStime);
         vpg3.addComponent(spStime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
@@ -167,8 +196,12 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
     public void initLang()
     {
         lbFtime.setText("起始时间");
+        cbFtime.setToolTipText("启用或禁用起始时间");
         lbTtime.setText("结束时间");
+        cbTtime.setToolTipText("启用或禁用结束时间");
         lbStime.setText("执行时间");
+        btStime.setToolTipText("当前时间");
+
         lbPeriod.setText("间隔周期");
         cbPeriod.addItem(new I1S1(ConsDat.MGTD_UNIT_MINUTE, "秒"));
         cbPeriod.addItem(new I1S1(ConsDat.MGTD_UNIT_SECOND, "分"));
@@ -198,15 +231,29 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
     }
 
     @Override
-    public boolean showData(MgtdHeader mgtd)
+    public boolean showData(MgtdHeader header)
     {
-        smFtime.setValue(new java.util.Date(mgtd.getP30F030D()));
-        smTtime.setValue(new java.util.Date(mgtd.getP30F030E()));
-        smStime.setValue(new java.util.Date(mgtd.getP30F030F()));
+        boolean b = header.getP30F030D() != 0;
+        if (b)
+        {
+            smFtime.setValue(new java.util.Date(header.getP30F030D()));
+        }
+        spFtime.setEnabled(b);
+        cbFtime.setSelected(b);
 
-        int[] item = new int[mgtd.getHintList().size()];
+        b = header.getP30F030E() != 0;
+        if (b)
+        {
+            smTtime.setValue(new java.util.Date(header.getP30F030E()));
+        }
+        spTtime.setEnabled(b);
+        cbTtime.setSelected(b);
+
+        smStime.setValue(new java.util.Date(header.getP30F030F()));
+
+        int[] item = new int[header.getHintList().size()];
         int i = 0;
-        for (MgtdDetail hint : mgtd.getHintList())
+        for (MgtdDetail hint : header.getHintList())
         {
             if (i == 0)
             {
@@ -252,8 +299,8 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
             return false;
         }
 
-        mgtd.setP30F030D(smFtime.getDate().getTime());
-        mgtd.setP30F030E(smTtime.getDate().getTime());
+        mgtd.setP30F030D(cbFtime.isSelected() ? smFtime.getDate().getTime() : 0);
+        mgtd.setP30F030E(cbTtime.isSelected() ? smTtime.getDate().getTime() : 0);
         mgtd.setP30F030F(smStime.getDate().getTime());
 
         MgtdDetail hint;
@@ -353,15 +400,30 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
             return;
         }
     }
-    private BtnLabel btFtime;
-    private BtnLabel btStime;
-    private BtnLabel btTtime;
+
+    private void cbFtimeActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        spFtime.setEnabled(cbFtime.isSelected());
+    }
+
+    private void cbTtimeActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        spTtime.setEnabled(cbTtime.isSelected());
+    }
+
+    private void cbStimeActionPerformed(java.awt.event.ActionEvent evt)
+    {
+        spStime.setValue(new java.util.Date());
+    }
     private javax.swing.JLabel lbFtime;
     private javax.swing.JSpinner spFtime;
-    private javax.swing.JLabel lbStime;
-    private javax.swing.JSpinner spStime;
+    private javax.swing.JCheckBox cbFtime;
     private javax.swing.JLabel lbTtime;
     private javax.swing.JSpinner spTtime;
+    private javax.swing.JCheckBox cbTtime;
+    private javax.swing.JLabel lbStime;
+    private javax.swing.JSpinner spStime;
+    private BtnLabel btStime;
     private javax.swing.JLabel lbPeriod;
     private javax.swing.JComboBox cbPeriod;
     private javax.swing.JLabel lbEnum;
