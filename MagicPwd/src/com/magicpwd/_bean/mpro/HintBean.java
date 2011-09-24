@@ -141,14 +141,14 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
         Lang.setWText(blPropName, LangRes.P30F151B, "@O");
         Lang.setWTips(blPropName, LangRes.P30F151C, "提醒时间(Alt + O)");
 
-        Lang.setWText(miEditMgtd, null, "高级管理(@M)");
-        Lang.setWTips(miEditMgtd, null, "高级管理");
-
-        Lang.setWText(miNaMgtd, null, "已作废(@C)");
-        Lang.setWTips(miNaMgtd, null, "标记当前提醒为已作废");
-
         Lang.setWText(miOkMgtd, null, "已完成(@V)");
         Lang.setWTips(miOkMgtd, null, "标记当前提醒为已完成");
+
+        Lang.setWText(miNaMgtd, null, "清除提醒(@C)");
+        Lang.setWTips(miNaMgtd, null, "清除当前提醒");
+
+        Lang.setWText(miEditMgtd, null, "高级管理(@M)");
+        Lang.setWTips(miEditMgtd, null, "显示高级管理选项");
 
         dataBox.initLang();
         dataEdit.initLang();
@@ -183,16 +183,16 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
             pmDateView.addSeparator();
         }
 
-        miEditMgtd.addActionListener(new java.awt.event.ActionListener()
+        miOkMgtd.addActionListener(new java.awt.event.ActionListener()
         {
 
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e)
             {
-                miEditMgtdActionPerformed(e);
+                miOkMgtdActionPerformed(e);
             }
         });
-        pmDateView.add(miEditMgtd);
+        pmDateView.add(miOkMgtd);
 
         miNaMgtd.addActionListener(new java.awt.event.ActionListener()
         {
@@ -204,16 +204,17 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
             }
         });
         pmDateView.add(miNaMgtd);
-        miOkMgtd.addActionListener(new java.awt.event.ActionListener()
+
+        miEditMgtd.addActionListener(new java.awt.event.ActionListener()
         {
 
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e)
             {
-                miOkMgtdActionPerformed(e);
+                miEditMgtdActionPerformed(e);
             }
         });
-        pmDateView.add(miOkMgtd);
+        pmDateView.add(miEditMgtd);
 
         dataBox.initData();
     }
