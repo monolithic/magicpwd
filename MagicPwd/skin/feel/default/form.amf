@@ -134,6 +134,7 @@ mail-readed=57
 #######################################
 # 日期图标
 #######################################
+date-now=now.png
 date-time=date.png
 date-options=options.png
 
