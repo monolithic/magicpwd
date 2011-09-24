@@ -21,6 +21,8 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._enum.AuthLog;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
+import com.magicpwd.m.MpwdMdl;
+import com.magicpwd.m.UserMdl;
 
 /**
  *
@@ -122,6 +124,19 @@ public class SignFp extends javax.swing.JPanel implements IUserView
     @Override
     public void btApplyActionPerformed(java.awt.event.ActionEvent e)
     {
+        signFp();
+    }
+
+    @Override
+    public void btAbortActionPerformed(java.awt.event.ActionEvent e)
+    {
+        userPtn.initView(AuthLog.signIn);
+        userPtn.initLang();
+        userPtn.initData();
+    }
+
+    private void signFp()
+    {
         String name = tfUserName.getText();
         if (!com.magicpwd._util.Char.isValidate(name))
         {
@@ -137,10 +152,16 @@ public class SignFp extends javax.swing.JPanel implements IUserView
             return;
         }
 
+        UserMdl userMdl = userPtn.getUserMdl();
+        MpwdMdl mpwdMdl = userMdl.getMpwdMdl();
+        // 获得数据路径
+        String path = mpwdMdl.getDatPath(name);
+        userMdl.loadCfg(path);
+
         StringBuffer sb = new StringBuffer(pwds);
         try
         {
-            boolean b = userPtn.getUserMdl().signFp(name, sb);
+            boolean b = userMdl.signFp(name, sb);
             if (!b)
             {
                 Lang.showMesg(this, LangRes.P30FAA03, "身份验证错误，请确认您的用户名及口令是否正确！");
@@ -184,15 +205,6 @@ public class SignFp extends javax.swing.JPanel implements IUserView
         }
 
         userPtn.callBack(AuthLog.signFp, new UserDto(sb.toString()));
-        Lang.showMesg(null, LangRes.P30FAA18, "您的新口令是：{0}\n为了您的安全，请登录软件后尽快修改您的口令。", sb.toString());
-    }
-
-    @Override
-    public void btAbortActionPerformed(java.awt.event.ActionEvent e)
-    {
-        userPtn.initView(AuthLog.signIn);
-        userPtn.initLang();
-        userPtn.initData();
     }
 
     private void lbUserOptsMouseReleased(java.awt.event.MouseEvent evt)
