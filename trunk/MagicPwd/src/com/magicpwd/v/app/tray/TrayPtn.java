@@ -92,6 +92,15 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
             // 口令找回
             case signFp:
             {
+                Skin.loadLook(userMdl.getLook());
+
+                initView();
+                initLang();
+                initData();
+
+                // 设置软件界面风格
+                nextView(userMdl.getAppView());
+                Lang.showMesg(mpwdPtn, LangRes.P30FAA18, "您的新口令是：{0}\n为了您的安全，请登录软件后尽快修改您的口令。", object.getUserPwds());
                 break;
             }
 
