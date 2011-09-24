@@ -54,7 +54,7 @@ public class DBAccess
         if (!Char.isValidate(dbPath))
         {
             StringBuilder buf = new StringBuilder();
-            buf.append("jdbc:hsqldb:file:").append(userMdl.getDatPath()).append("amon");
+            buf.append("jdbc:hsqldb:file:").append(userMdl.getDataDir()).append("amon");
             String sc = userMdl.getCfg(ConsCfg.CFG_DB_SC, "");
             String sk = userMdl.getCfg(ConsCfg.CFG_DB_SK, "");
             if (Char.isValidate(sc) && Char.isValidate(sk))

@@ -151,7 +151,7 @@ public final class MpwdMdl
      */
     public String getDatPath(String user)
     {
-        return getCfg("dat." + user, "");
+        return getCfg("dat." + user, ConsCfg.DEF_DATA_PATH);
     }
 
     /**

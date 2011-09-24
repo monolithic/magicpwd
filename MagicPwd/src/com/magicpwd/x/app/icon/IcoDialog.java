@@ -151,7 +151,7 @@ public class IcoDialog extends ADialog
         btScrollL.setIcon(userMdl.getFeelFav("edit-move-left", "var:edit-move-left"));
         btScrollR.setIcon(userMdl.getFeelFav("edit-move-right", "var:edit-move-right"));
 
-        iconHome = new java.io.File(userMdl.getDatPath(), ConsEnv.DIR_ICO);
+        iconHome = new java.io.File(userMdl.getDataDir(), ConsEnv.DIR_ICO);
 
         icoModel = new IcoModel(userMdl);
         tbIconGrid.setModel(icoModel);

@@ -95,7 +95,7 @@ public final class UserMdl
         java.io.FileOutputStream fos = null;
         try
         {
-            fos = new java.io.FileOutputStream(new java.io.File(mpwdMdl.getDatPath(safeKey.getName()), ConsEnv.FILE_DATA + ".config"));
+            fos = new java.io.FileOutputStream(new java.io.File(getDataDir(), ConsEnv.FILE_DATA + ".config"));
             userCfg.store(fos, "MagicPwd User Configuration File!");
         }
         catch (Exception exp)
@@ -305,12 +305,12 @@ public final class UserMdl
 
     public String getDataDir()
     {
-        return getCfg(AppView.mpwd, ConsCfg.CFG_SAFE_DATA_DIR, ConsCfg.DEF_DATA_PATH);
+        return mpwdMdl.getDatPath(safeKey.getName());
     }
 
     public void setDataDir(String dataDir)
     {
-        setCfg(AppView.mpwd, ConsCfg.CFG_SAFE_DATA_DIR, dataDir);
+        mpwdMdl.setDatPath(safeKey.getName(), dataDir);
     }
 
     /**
@@ -913,16 +913,6 @@ public final class UserMdl
             bakPath = bakPath.substring(0, bakPath.length() - 1);
         }
 //        this.bakPath = bakPath;
-    }
-
-    public String getDatPath()
-    {
-        return mpwdMdl.getDatPath(safeKey.getName());
-    }
-
-    public void setDatPath(String datPath)
-    {
-        mpwdMdl.setDatPath(safeKey.getName(), datPath);
     }
 
     /**

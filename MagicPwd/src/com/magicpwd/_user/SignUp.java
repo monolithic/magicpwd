@@ -406,7 +406,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
             userMdl.setCfg(ConsCfg.CFG_DB_SK, key);
         }
 
-        userMdl.setDatPath(path);
+        userMdl.setDataDir(path);
         userMdl.getMpwdMdl().setUserLast(un);
         DBA4000.initDataBase(userMdl);
 
