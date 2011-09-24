@@ -47,7 +47,7 @@ public class MgtdDlg extends ADialog
 {
 
     private AMpwdPtn formPtn;
-    private MgtdHeader mgtd;
+    private MgtdHeader gtdHeader;
     private javax.swing.SpinnerNumberModel smAhead;
     private IBackCall<String, String> backCall;
 
@@ -410,7 +410,7 @@ public class MgtdDlg extends ADialog
             spAhead.setValue(mgtd.getP30F0313());
             taRemark.setText(mgtd.getP30F0314());
 
-            this.mgtd = mgtd;
+            this.gtdHeader = mgtd;
         }
 
         this.processEscape();
@@ -425,6 +425,11 @@ public class MgtdDlg extends ADialog
     {
         this.dispose();
         return true;
+    }
+
+    public javax.swing.Icon getFeelIcon(String key, String uri)
+    {
+        return formPtn.getFeelIcon(key, uri);
     }
 
     private void cbIntvalActionPerformed(java.awt.event.ActionEvent e)
@@ -469,43 +474,43 @@ public class MgtdDlg extends ADialog
             return;
         }
 
-        if (mgtd == null)
+        if (gtdHeader == null)
         {
-            mgtd = new MgtdHeader();
+            gtdHeader = new MgtdHeader();
         }
-        mgtd.setP30F0302(ConsDat.MGTD_TYPE_DATETIME);
-        mgtd.setP30F0303(ConsDat.MGTD_STATUS_INIT);
-        mgtd.setP30F0304(cbLevel.getSelectedIndex());
+        gtdHeader.setP30F0302(ConsDat.MGTD_TYPE_DATETIME);
+        gtdHeader.setP30F0303(ConsDat.MGTD_STATUS_INIT);
+        gtdHeader.setP30F0304(cbLevel.getSelectedIndex());
         IMgtdBean intvalBean = intvalList.get(intvalIdx);
-        if (!intvalBean.saveData(mgtd))
+        if (!intvalBean.saveData(gtdHeader))
         {
             return;
         }
-        mgtd.setP30F0305(intvalBean.getKey());
+        gtdHeader.setP30F0305(intvalBean.getKey());
         IMgtdBean methodBean = methodList.get(methodIdx);
-        if (!methodBean.saveData(mgtd))
+        if (!methodBean.saveData(gtdHeader))
         {
             return;
         }
-        mgtd.setP30F0306(methodBean.getKey());
-        mgtd.setP30F0307(cbPublic.isSelected() ? 1 : 0);
-        mgtd.setP30F0308(0);
-        mgtd.setP30F030C(tfTitle.getText());
+        gtdHeader.setP30F0306(methodBean.getKey());
+        gtdHeader.setP30F0307(cbPublic.isSelected() ? 1 : 0);
+        gtdHeader.setP30F0308(0);
+        gtdHeader.setP30F030C(tfTitle.getText());
         Object obj = cbAhead.getSelectedItem();
         if (obj == null || !(obj instanceof I1S1))
         {
             return;
         }
-        mgtd.setP30F0312(((I1S1) obj).getK());
-        mgtd.setP30F0313(smAhead.getNumber().intValue());
-        mgtd.setP30F0314(taRemark.getText());
+        gtdHeader.setP30F0312(((I1S1) obj).getK());
+        gtdHeader.setP30F0313(smAhead.getNumber().intValue());
+        gtdHeader.setP30F0314(taRemark.getText());
 
-        DBA4000.saveMgtdData(formPtn.getUserMdl(), mgtd);
+        DBA4000.saveMgtdData(formPtn.getUserMdl(), gtdHeader);
         formPtn.getUserMdl().setGtdTemplateUpdated(true);
 
         if (backCall != null)
         {
-            backCall.callBack(mgtd.getP30F0309(), mgtd.getP30F030C());
+            backCall.callBack(gtdHeader.getP30F0309(), gtdHeader.getP30F030C());
         }
 
         this.dispose();

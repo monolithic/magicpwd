@@ -20,7 +20,6 @@ import com.magicpwd.__i.mgtd.IMgtdBean;
 import com.magicpwd._comn.I1S1;
 import com.magicpwd._comn.mpwd.MgtdDetail;
 import com.magicpwd._comn.mpwd.MgtdHeader;
-import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Char;
@@ -88,17 +87,18 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
             }
         });
 
-        btStime = new BtnLabel();
+        btStime = new javax.swing.JLabel();
         spStime = new javax.swing.JSpinner();
         smStime = new javax.swing.SpinnerDateModel();
         spStime.setModel(smStime);
         lbStime = new javax.swing.JLabel();
         lbStime.setLabelFor(spStime);
-        btStime.addActionListener(new java.awt.event.ActionListener()
+        btStime.setIcon(mgtdDlg.getFeelIcon("date-now", "var:date-now"));
+        btStime.addMouseListener(new java.awt.event.MouseAdapter()
         {
 
             @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt)
+            public void mouseClicked(java.awt.event.MouseEvent evt)
             {
                 cbStimeActionPerformed(evt);
             }
@@ -138,7 +138,7 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
         javax.swing.GroupLayout.SequentialGroup hsg3 = layout.createSequentialGroup();
         hsg3.addComponent(spStime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         hsg3.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
-        hsg3.addComponent(btStime, 21, 21, 21);
+        hsg3.addComponent(btStime);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING);
         hpg1.addComponent(lbEnum);
         hpg1.addComponent(lbFtime);
@@ -170,7 +170,7 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
         javax.swing.GroupLayout.ParallelGroup vpg3 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg3.addComponent(lbStime);
         vpg3.addComponent(spStime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
-        vpg3.addComponent(btStime, 21, 21, 21);
+        vpg3.addComponent(btStime);
         javax.swing.GroupLayout.ParallelGroup vpg4 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE);
         vpg4.addComponent(lbPeriod);
         vpg4.addComponent(cbPeriod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
@@ -411,7 +411,7 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
         spTtime.setEnabled(cbTtime.isSelected());
     }
 
-    private void cbStimeActionPerformed(java.awt.event.ActionEvent evt)
+    private void cbStimeActionPerformed(java.awt.event.MouseEvent evt)
     {
         spStime.setValue(new java.util.Date());
     }
@@ -423,7 +423,7 @@ public class Period extends javax.swing.JPanel implements IMgtdBean
     private javax.swing.JCheckBox cbTtime;
     private javax.swing.JLabel lbStime;
     private javax.swing.JSpinner spStime;
-    private BtnLabel btStime;
+    private javax.swing.JLabel btStime;
     private javax.swing.JLabel lbPeriod;
     private javax.swing.JComboBox cbPeriod;
     private javax.swing.JLabel lbEnum;
