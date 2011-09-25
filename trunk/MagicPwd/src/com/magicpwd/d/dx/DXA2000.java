@@ -132,11 +132,13 @@ public class DXA2000 extends DXA
             for (MpwdHeader keys : dataList)
             {
                 keys.setP30F0105(userMdl.getCode());
+                keys.getMpwd().setDefault();
                 if (!DBA4000.readMpwdData(userMdl, keys))
                 {
                     continue;
                 }
 
+                tempList.clear();
                 safeMdl.deCrypt(keys, tempList);
                 for (IEditItem item : tempList)
                 {
