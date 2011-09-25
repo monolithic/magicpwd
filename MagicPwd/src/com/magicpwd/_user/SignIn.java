@@ -444,11 +444,13 @@ public class SignIn extends javax.swing.JPanel implements IUserView
         java.io.File dir = jfc.getSelectedFile();
         if (dir == null || !dir.exists() || !dir.isDirectory())
         {
+            Lang.showMesg(userPtn, null, "请选择一个有效的目录！");
             return;
         }
         java.io.File dat = new java.io.File(dir, "amon.script");
         if (!dat.exists() || !dat.isFile())
         {
+            Lang.showMesg(userPtn, null, "您选择的目录中没有合适的《魔方密码》数据文件！");
             return;
         }
         String path = dir.getPath();
@@ -456,6 +458,7 @@ public class SignIn extends javax.swing.JPanel implements IUserView
         String user = userPtn.getUserMdl().getCfg(ConsCfg.CFG_USER, "");
         if (!Char.isValidate(user))
         {
+            Lang.showMesg(userPtn, null, "您选择的目录中不存在有效的用户信息！");
             return;
         }
         tfUserName.setText(user);

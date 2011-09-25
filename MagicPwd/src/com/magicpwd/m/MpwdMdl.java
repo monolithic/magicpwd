@@ -155,6 +155,14 @@ public final class MpwdMdl
     }
 
     /**
+     * @return the datPath
+     */
+    public String getDatPath(String user, String defPath)
+    {
+        return getCfg("dat." + user, defPath);
+    }
+
+    /**
      * @param datPath the datPath to set
      */
     public void setDatPath(String user, String datPath)
