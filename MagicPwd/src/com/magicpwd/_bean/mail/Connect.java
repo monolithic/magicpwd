@@ -480,7 +480,7 @@ public final class Connect
             mailCfg = new Properties();
             try
             {
-                java.io.File file = new java.io.File(ConsEnv.DIR_DAT, "mail.config");
+                java.io.File file = new java.io.File(ConsEnv.DIR_MAIL, "mail.config");
                 if (!file.exists() || !file.isFile() || !file.canRead())
                 {
                     return null;
