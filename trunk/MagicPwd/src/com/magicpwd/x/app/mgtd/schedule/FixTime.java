@@ -19,7 +19,6 @@ package com.magicpwd.x.app.mgtd.schedule;
 import com.magicpwd.__i.mgtd.IMgtdBean;
 import com.magicpwd._comn.mpwd.MgtdHeader;
 import com.magicpwd._comn.mpwd.MgtdDetail;
-import com.magicpwd._comp.date.WDateChooser;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd.x.app.mgtd.MgtdDlg;
 
@@ -145,8 +144,9 @@ public class FixTime extends javax.swing.JPanel implements IMgtdBean
 
     private void btTimeActionPerformed(java.awt.event.MouseEvent e)
     {
-        WDateChooser dc = new WDateChooser();
-        dc.show(btTime, 0, btTime.getHeight());
+        spTime.setValue(new java.util.Date());
+//        WDateChooser dc = new WDateChooser();
+//        dc.show(btTime, 0, btTime.getHeight());
     }
     private javax.swing.JLabel lbTime;
     private javax.swing.JSpinner spTime;

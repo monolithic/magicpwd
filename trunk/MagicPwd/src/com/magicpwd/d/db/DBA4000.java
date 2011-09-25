@@ -839,17 +839,7 @@ public class DBA4000
         {
             dba.init(userMdl);
 
-            dba.addTable(DBC4000.P30F0400);
-            dba.addParam(DBC4000.P30F0402, mgtd.getP30F0309());
-            dba.addSort(DBC4000.P30F0401);
-            ResultSet rest = dba.executeSelect();
-            java.util.List<MgtdDetail> list = new java.util.ArrayList<MgtdDetail>();
-            while (rest.next())
-            {
-                list.add(loadGtdDetail(rest));
-            }
-            rest.close();
-            mgtd.setHintList(list);
+            listGtdDetail(dba, mgtd);
             return true;
         }
         catch (Exception exp)
@@ -861,6 +851,21 @@ public class DBA4000
         {
             dba.dispose();
         }
+    }
+
+    public static void listGtdDetail(DBAccess dba, MgtdHeader mgtd) throws Exception
+    {
+        dba.addTable(DBC4000.P30F0400);
+        dba.addWhere(DBC4000.P30F0402, mgtd.getP30F0309());
+        dba.addSort(DBC4000.P30F0401);
+        ResultSet rest = dba.executeSelect();
+        java.util.List<MgtdDetail> list = new java.util.ArrayList<MgtdDetail>();
+        while (rest.next())
+        {
+            list.add(loadGtdDetail(rest));
+        }
+        rest.close();
+        mgtd.setHintList(list);
     }
 
     public static boolean saveHintTime(UserMdl userMdl, MgtdHeader mgtd)
@@ -1334,8 +1339,6 @@ public class DBA4000
         dba.addParam(DBC4000.P30F010B, Util.text2DB(keys.getP30F010B()));
         dba.addParam(DBC4000.P30F010C, Util.text2DB(keys.getP30F010C()));
         dba.addParam(DBC4000.P30F010D, Util.text2DB(keys.getP30F010D()));
-        MgtdHeader mgtd = keys.getMgtd();
-        keys.setP30F010E(mgtd != null ? mgtd.getP30F0309() : null);
         dba.addParam(DBC4000.P30F010E, keys.getP30F010E());
         dba.addParam(DBC4000.P30F010F, Util.text2DB(keys.getP30F010F()));
         dba.addParam(DBC4000.P30F0110, Util.text2DB(keys.getP30F0110()));

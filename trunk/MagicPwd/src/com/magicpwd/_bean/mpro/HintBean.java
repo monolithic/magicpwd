@@ -238,13 +238,18 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
     {
         itemData.setName(taPropData.getText());
 
-        if (mgtdStat == ConsDat.MGTD_STATUS_DONE || mgtdStat == ConsDat.MGTD_STATUS_ABORT)
+        if (mgtdStat == ConsDat.MGTD_STATUS_DONE)
         {
             MgtdHeader header = itemData.getMgtd();
             if (header != null)
             {
                 header.setP30F0303(mgtdStat);
             }
+        }
+        else if (mgtdStat == ConsDat.MGTD_STATUS_ABORT)
+        {
+            itemData.setData(null);
+            itemData.setMgtd(null);
         }
         else if (mgtdType > 0)
         {
@@ -298,6 +303,10 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
             detail.setP30F0406("");
             list.add(detail);
             header.setHintList(list);
+        }
+        else
+        {
+            itemData.setMgtd(null);
         }
 
         mproPtn.updateSelectedItem();
@@ -496,6 +505,8 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
                 return;
             }
             taPropData.setText("定时提醒：" + cmd);
+
+            itemData.setData(null);
             mgtdType = ConsDat.MGTD_INTVAL_FIXTIME;
             mgtdStat = ConsDat.MGTD_STATUS_INIT;
             mgtdData = 0;
@@ -512,6 +523,8 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
                 return;
             }
             taPropData.setText("定时提醒：" + Date.getFieldDateFormat().format(mgtdCal.getTime()));
+
+            itemData.setData(null);
             mgtdType = ConsDat.MGTD_INTVAL_FIXTIME;
             mgtdStat = ConsDat.MGTD_STATUS_INIT;
             mgtdData = 0;
@@ -528,6 +541,8 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
                 return;
             }
             taPropData.setText("定制的周期提醒！");
+
+            itemData.setData(null);
             mgtdType = ConsDat.MGTD_INTVAL_PERIOD;
             mgtdStat = ConsDat.MGTD_STATUS_INIT;
             mgtdData = Integer.parseInt(matcher.group());
@@ -572,6 +587,8 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
                 return;
             }
             taPropData.setText("定制的间隔提醒！");
+
+            itemData.setData(null);
             mgtdType = ConsDat.MGTD_INTVAL_INTVAL;
             mgtdStat = ConsDat.MGTD_STATUS_INIT;
             mgtdData = Integer.parseInt(matcher.group());
@@ -615,6 +632,8 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
                 return;
             }
             taPropData.setText(cmd.substring(16));
+
+            itemData.setData(cmd.substring(0, 16));
             mgtdType = 0;
             return;
         }
@@ -623,6 +642,7 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
     private void miNaMgtdActionPerformed(java.awt.event.ActionEvent e)
     {
         mgtdStat = ConsDat.MGTD_STATUS_ABORT;
+        taPropData.setText("");
     }
 
     private void miOkMgtdActionPerformed(java.awt.event.ActionEvent e)
@@ -632,6 +652,10 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
 
     private void miEditMgtdActionPerformed(java.awt.event.ActionEvent e)
     {
+        if (!Char.isValidateHash(itemData.getData()))
+        {
+            return;
+        }
         MgtdHeader mgtd = DBA4000.readGtdHeader(mproPtn.getUserMdl(), itemData.getData());
         if (mgtd == null)
         {
