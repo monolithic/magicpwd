@@ -59,6 +59,12 @@ public class MagicPwd
                 skin.mkdir();
                 Jzip.unZip(MagicPwd.class.getResourceAsStream("/res/skin.zip"), skin, true);
             }
+            java.io.File lang = new java.io.File(ConsEnv.DIR_LANG);
+            if (!lang.exists() || !lang.isDirectory() || !lang.canRead())
+            {
+                lang.mkdir();
+                Jzip.unZip(MagicPwd.class.getResourceAsStream("/res/lang.zip"), lang, true);
+            }
         }
         catch (Exception exp)
         {

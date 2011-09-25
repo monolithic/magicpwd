@@ -20,6 +20,7 @@ import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mpro.IMproBean;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Lang;
+import com.magicpwd._util.Logs;
 import com.magicpwd.v.app.mpro.MproPtn;
 
 /**
@@ -109,7 +110,7 @@ public class InfoBean extends javax.swing.JPanel implements IMproBean
         }
         tipsSize -= 1;
 
-        Lang.setWText(ta_PropData, LangRes.P30F1B01, "");
+        Lang.setWText(ta_PropData, LangRes.P30F1B01, "您可以使用快捷键 Ctrl+N 快速开始添加一个新的密码记录！");
 
         nextTips();
     }
@@ -126,6 +127,7 @@ public class InfoBean extends javax.swing.JPanel implements IMproBean
 
     private void nextTips()
     {
+        Logs.log("提示数量：" + tipsSize);
         if (tipsSize <= 0)
         {
             return;
