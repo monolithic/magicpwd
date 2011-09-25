@@ -365,10 +365,10 @@ public class UserPtn extends javax.swing.JPanel
         try
         {
             StringBuilder buf = new StringBuilder();
-            buf.append(ConsEnv.HOMEPAGE);
-            buf.append("mpwd/mpwd0001.ashx?sid=").append(ConsEnv.VERSIONS);
-            buf.append("&uri=").append(MpwdMdl.getAppGuid());
-            buf.append("&opt=").append(Char.escape(System.getProperty("os.name")));
+            buf.append("http://mpwd.sinaapp.com/bar.php?v=").append(ConsEnv.VERSIONS);
+            buf.append("&k=").append(MpwdMdl.getAppGuid());
+            buf.append("&v=").append(MpwdMdl.getRunMode());
+            buf.append("&o=").append(Char.escape(System.getProperty("os.name")));
             buf.append("_").append(Char.escape(System.getProperty("os.arch")));
             buf.append("_").append(Char.escape(System.getProperty("os.version")));
             java.net.URL url = new java.net.URL(buf.toString());
