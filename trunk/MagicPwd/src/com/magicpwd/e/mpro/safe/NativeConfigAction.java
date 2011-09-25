@@ -22,6 +22,7 @@ import com.magicpwd._cons.LangRes;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
+import com.magicpwd.m.UserMdl;
 
 /**
  * Application: MagicPwd
@@ -44,10 +45,12 @@ public class NativeConfigAction extends AMproAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
+        UserMdl userMdl = mproPtn.getUserMdl();
+
         javax.swing.JFileChooser jfc = new javax.swing.JFileChooser();
         jfc.setMultiSelectionEnabled(false);
         jfc.setFileSelectionMode(javax.swing.JFileChooser.DIRECTORIES_ONLY);
-        String path = mproPtn.getUserMdl().getCfg(AppView.mpro, ConsCfg.CFG_SAFE_BACK_LOC, "");
+        String path = userMdl.getCfg(AppView.mpro, ConsCfg.CFG_SAFE_BACK_LOC, "");
         if (Char.isValidate(path))
         {
             jfc.setSelectedFile(new java.io.File(path));
@@ -79,7 +82,14 @@ public class NativeConfigAction extends AMproAction
             return;
         }
 
-        mproPtn.getUserMdl().setCfg(ConsCfg.CFG_SAFE_BACK_LOC, file.getAbsolutePath());
+        java.io.File temp = new java.io.File(userMdl.getDataDir());
+        if (file.getAbsolutePath().indexOf(temp.getAbsolutePath()) >= 0)
+        {
+            Lang.showMesg(mproPtn, LangRes.P30F7A1D, "备份目录不能为数据目录或其子目录！");
+            return;
+        }
+
+        userMdl.setCfg(ConsCfg.CFG_SAFE_BACK_LOC, file.getAbsolutePath());
     }
 
     @Override

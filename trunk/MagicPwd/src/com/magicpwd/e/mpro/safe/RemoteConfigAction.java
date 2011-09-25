@@ -38,7 +38,7 @@ public class RemoteConfigAction extends AMproAction implements IBackCall<AuthLog
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        trayPtn.getUserPtn(AuthLog.signRs, this);
+        trayPtn.getUserPtn(AuthLog.signCs, this);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class RemoteConfigAction extends AMproAction implements IBackCall<AuthLog
     @Override
     public boolean callBack(AuthLog options, UserDto object)
     {
-        if (AuthLog.signRs != options || object == null)
+        if (AuthLog.signCs != options || object == null)
         {
             return false;
         }

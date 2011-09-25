@@ -39,7 +39,7 @@ public class NativeBackupAction extends AMproAction implements IBackCall<String,
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (!Char.isValidate(mproPtn.getUserMdl().getCfg(AppView.mpro, ConsCfg.CFG_SAFE_BACK_LOC, "")))
+        if (!Char.isValidate(mproPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC, "")))
         {
             Lang.showMesg(mproPtn, LangRes.P30F7A54, "您还没有配置本地备份目录！");
             return;
@@ -83,7 +83,7 @@ public class NativeBackupAction extends AMproAction implements IBackCall<String,
 
         try
         {
-            boolean b = mproPtn.nativeBackup(mproPtn.getUserMdl().getCfg(AppView.mpro, ConsCfg.CFG_SAFE_BACK_LOC, ""), null);
+            boolean b = mproPtn.nativeBackup(mproPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC, ""), null);
             mproPtn.hideProgress();
 
             if (b)
