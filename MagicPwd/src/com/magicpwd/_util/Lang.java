@@ -65,7 +65,8 @@ public class Lang
                 java.io.File file = null;
                 while (name.length() > 0)
                 {
-                    file = new java.io.File(ConsEnv.DIR_LANG, MpwdMdl.getRunMode().name() + name + ".properties");
+                    //file = new java.io.File(ConsEnv.DIR_LANG, MpwdMdl.getRunMode().name() + name + ".properties");
+                    file = new java.io.File(ConsEnv.DIR_LANG, "lang" + name + ".properties");
                     if (file.exists() && file.isFile() && file.canRead())
                     {
                         break;
