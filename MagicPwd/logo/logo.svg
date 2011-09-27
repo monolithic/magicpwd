@@ -14,8 +14,8 @@
    height="48px"
    id="svg3624"
    version="1.1"
-   inkscape:version="0.47 r22583"
-   sodipodi:docname="logo5.svg"
+   inkscape:version="0.48.1 r9760"
+   sodipodi:docname="logo.svg"
    inkscape:export-filename="C:\Documents and Settings\Amon\桌面\logo16.png"
    inkscape:export-xdpi="30"
    inkscape:export-ydpi="30">
@@ -80,17 +80,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="9.8994948"
-     inkscape:cx="34.188767"
-     inkscape:cy="23.764235"
+     inkscape:zoom="6.9999999"
+     inkscape:cx="-15.894208"
+     inkscape:cy="15.705862"
      inkscape:current-layer="layer1"
      showgrid="true"
      inkscape:grid-bbox="true"
      inkscape:document-units="px"
-     inkscape:window-width="1440"
-     inkscape:window-height="844"
-     inkscape:window-x="-4"
-     inkscape:window-y="-4"
+     inkscape:window-width="1538"
+     inkscape:window-height="878"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata3629">
@@ -120,13 +120,13 @@
     <text
        xml:space="preserve"
        style="font-size:16px;font-style:normal;font-weight:normal;fill:#000000;fill-opacity:1;stroke:none;font-family:Arial Black;-inkscape-font-specification:Arial Black"
-       x="10.585812"
+       x="11.985375"
        y="30.157"
        id="text3609"><tspan
          sodipodi:role="line"
          id="tspan3611"
-         x="10.585812"
+         x="11.985375"
          y="30.157"
-         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;fill:#ffffff;font-family:Arial Black;-inkscape-font-specification:Arial Black Heavy">AM</tspan></text>
+         style="font-size:16px;font-style:normal;font-variant:normal;font-weight:900;font-stretch:normal;fill:#ffffff;font-family:Arial Black;-inkscape-font-specification:Arial Black Heavy">AP</tspan></text>
   </g>
 </svg>
