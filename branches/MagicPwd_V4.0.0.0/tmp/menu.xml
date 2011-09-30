@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<magicpwd>
+    <!--魔方密码菜单栏-->
+    <menubar id="mpwd">
+        <menu id="file" text="文件" text-def="文件">
+            <item type="normal" text="新增" text-def="新增">
+                <action id="test" class="example.TestAction">
+                    <stroke key="^ N" />
+                </action>
+            </item>
+            <item type="normal" text="保存" text-def="保存">
+                <action id="test" class="example.TestAction">
+                    <stroke key="^ S" />
+                </action>
+            </item>
+            <item type="normal" text="隐藏窗口" text-def="隐藏窗口">
+                <action id="test" class="example.TestAction">
+                    <stroke key="^ H" />
+                </action>
+            </item>
+            <item type="normal" text="锁定窗口" text-def="锁定窗口">
+                <action id="test" class="example.TestAction">
+                    <stroke key="^ L" />
+                </action>
+            </item>
+            <item type="normal" text="退出" text-def="退出">
+                <action id="test" class="example.TestAction">
+                    <stroke key="^ Q" />
+                </action>
+            </item>
+        </menu>
+        <menu id="help" text="帮助" text-def="帮助">
+            <item type="normal" text="帮助" text-def="帮助">
+                <action id="test" class="example.TestAction">
+                    <stroke key="F1" />
+                </action>
+            </item>
+            <seperator />
+            <item type="normal" text="首页" text-def="首页">
+                <action id="test" class="example.TestAction">
+                    <stroke key="F2" />
+                </action>
+            </item>
+            <item type="normal" text="博客" text-def="博客">
+                <action id="test" class="example.TestAction" />
+            </item>
+            <item type="normal" text="微博" text-def="微博">
+                <action id="test" class="example.TestAction" />
+            </item>
+            <item type="normal" text="联系作者" text-def="联系作者">
+                <action id="test" class="example.TestAction">
+                    <stroke key="F3" />
+                </action>
+            </item>
+            <seperator />
+            <item type="normal" text="检测更新" text-def="检测更新">
+                <action id="test" class="example.TestAction">
+                    <stroke key="F4" />
+                </action>
+            </item>
+            <seperator />
+            <item type="normal" text="键盘快捷" text-def="键盘快捷">
+                <action id="test" class="example.TestAction">
+                    <stroke key="F6" />
+                </action>
+            </item>
+            <item type="normal" text="Java环境" text-def="Java环境">
+                <action id="test" class="example.TestAction">
+                    <stroke key="F7" />
+                </action>
+            </item>
+            <item type="normal" text="特别致谢" text-def="特别致谢">
+                <action id="test" class="example.TestAction">
+                    <stroke key="F8" />
+                </action>
+            </item>
+            <seperator />
+            <item type="normal" text="关于" text-def="关于">
+                <action id="test" class="example.TestAction" />
+            </item>
+        </menu>
+        <menu id="plug" text="扩展" text-def="扩展">
+            <item type="normal" text="测试(@T)" command="这是一个扩展测试！">
+                <action class="example.TestAction" />
+            </item>
+        </menu>
+    </menubar>
+
+    <!--魔方密码工具栏-->
+    <toolbar id="mpwd">
+        <item type="normal" tips="新增" tips-def="新增">
+            <icon>
+                <default id="file-new" path="var:file-new"/>
+            </icon>
+            <action id="test" class="example.TestAction" />
+        </item>
+        <item type="normal" tips="保存" tips-def="保存">
+            <icon>
+                <default id="file-save" path="var:file-save"/>
+            </icon>
+            <action id="test" class="example.TestAction" />
+        </item>
+        <seperator />
+        <item type="normal" tips="帮助" tips-def="帮助">
+            <icon>
+                <default id="file-help" path="var:help-topic"/>
+            </icon>
+            <action id="test" class="example.TestAction" />
+        </item>
+    </toolbar>
+</magicpwd>
