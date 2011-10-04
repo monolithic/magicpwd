@@ -29,7 +29,6 @@ import com.magicpwd.v.app.tray.TrayPtn;
  */
 public class MagicPwd
 {
-
     private MpwdMdl mpwdMdl;
 
     private MagicPwd()
@@ -45,7 +44,7 @@ public class MagicPwd
         // 命令模式
         if (MpwdMdl.getRunMode() == RunMode.cmd)
         {
-            McmdPtn mcmdPtn = new McmdPtn();
+            McmdPtn mcmdPtn = new McmdPtn(mpwdMdl);
             mcmdPtn.init();
             return;
         }

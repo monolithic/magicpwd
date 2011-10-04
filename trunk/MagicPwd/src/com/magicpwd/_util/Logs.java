@@ -43,7 +43,7 @@ public class Logs
 
     public static void exception(Exception exp)
     {
-        if (MpwdMdl.getRunMode() == RunMode.dev)
+        if (MpwdMdl.getRunMode() == RunMode.cmd)
         {
             exp.printStackTrace();
         }

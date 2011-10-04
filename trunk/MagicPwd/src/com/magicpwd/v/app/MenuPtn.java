@@ -59,7 +59,6 @@ import org.dom4j.io.SAXReader;
  */
 public class MenuPtn
 {
-
     private Document document;
     private TrayPtn trayPtn;
     private UserMdl userMdl;
@@ -1034,7 +1033,7 @@ public class MenuPtn
                     catch (Exception ex)
                     {
                         Logs.exception(ex);
-                        Lang.showMesg(null, null, ex.getLocalizedMessage());
+                        Lang.showMesg(trayPtn.getMpwdPtn(), null, ex.getLocalizedMessage());
                     }
                 }
             }

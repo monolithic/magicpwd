@@ -36,7 +36,6 @@ import javax.swing.text.JTextComponent;
  */
 public class Lang
 {
-
     private static Properties lang;
     private static String tips;
 
@@ -184,6 +183,14 @@ public class Lang
     public static void setWTips(JComponent c, String sid, String tip)
     {
         c.setToolTipText(getLang(sid, tip));
+    }
+
+    public static void showMesg(java.io.Console c, String t, String d, Object... z)
+    {
+        if (c != null)
+        {
+            c.format(getLang(t, d) + "\n", z);
+        }
     }
 
     public static void showMesg(Component c, String t, String d, String... z)
