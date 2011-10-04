@@ -380,7 +380,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         catch (Exception exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(null, null, exp.getLocalizedMessage());
+            Lang.showMesg(userPtn, null, exp.getLocalizedMessage());
         }
 
         if (cbDbSec.isSelected())

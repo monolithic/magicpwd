@@ -29,7 +29,6 @@ import com.magicpwd._util.Logs;
  */
 public final class UserMdl
 {
-
     private boolean incBack = true;
     private boolean topMost;
     /**
@@ -59,7 +58,7 @@ public final class UserMdl
         safeKey = new SafeKey(this);
     }
 
-    public void loadCfg(String path)
+    public boolean loadCfg(String path)
     {
         userCfg.clear();
 
@@ -67,15 +66,19 @@ public final class UserMdl
         try
         {
             java.io.File file = new java.io.File(path, ConsEnv.FILE_DATA + ".config");
-            if (file.exists() && file.canRead())
+            if (!file.exists() || !file.canRead())
             {
-                fis = new java.io.FileInputStream(file);
-                userCfg.load(fis);
+                return false;
             }
+
+            fis = new java.io.FileInputStream(file);
+            userCfg.load(fis);
+            return true;
         }
         catch (Exception exp)
         {
             Logs.exception(exp);
+            return false;
         }
         finally
         {
