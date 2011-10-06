@@ -60,19 +60,19 @@ public class KeysMdl extends SafeMdl
     @Override
     public void initBody()
     {
-        DBA4000.selectTpltData(userMdl, ls_ItemList.get(ConsEnv.PWDS_HEAD_GUID).getSpec(GuidItem.SPEC_GUID_TPLT), ls_ItemList);
+        DBA4000.selectTpltData(userMdl, itemList.get(ConsEnv.PWDS_HEAD_GUID).getSpec(GuidItem.SPEC_GUID_TPLT), itemList);
     }
 
     @Override
     public void clear()
     {
-        ls_ItemList.clear();
+        itemList.clear();
         mkey.setDefault();
     }
 
     public void clear(int sIndex)
     {
-        clear(sIndex, ls_ItemList.size() - 1);
+        clear(sIndex, itemList.size() - 1);
     }
 
     public void clear(int sIndex, int eIndex)
@@ -81,7 +81,7 @@ public class KeysMdl extends SafeMdl
         {
             while (eIndex >= sIndex)
             {
-                ls_ItemList.remove(eIndex--);
+                itemList.remove(eIndex--);
             }
         }
     }
@@ -105,7 +105,7 @@ public class KeysMdl extends SafeMdl
     {
         java.util.ArrayList<I1S2> list = new java.util.ArrayList<I1S2>();
         int i = 0;
-        for (IEditItem item : ls_ItemList)
+        for (IEditItem item : itemList)
         {
             if (item.getType() == type)
             {

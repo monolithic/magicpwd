@@ -62,7 +62,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
         initLogo();
         initHint();
 
-        DBA4000.selectTpltData(userMdl, ls_ItemList.get(ConsEnv.PWDS_HEAD_GUID).getSpec(GuidItem.SPEC_GUID_TPLT), ls_ItemList);
+        DBA4000.selectTpltData(userMdl, itemList.get(ConsEnv.PWDS_HEAD_GUID).getSpec(GuidItem.SPEC_GUID_TPLT), itemList);
         fireTableDataChanged();
     }
 
@@ -72,7 +72,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     @Override
     public void clear()
     {
-        ls_ItemList.clear();
+        itemList.clear();
         mkey.setDefault();
         setModified(false);
         fireTableDataChanged();
@@ -119,7 +119,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     @Override
     public int getRowCount()
     {
-        return ls_ItemList != null ? ls_ItemList.size() : 0;
+        return itemList != null ? itemList.size() : 0;
     }
 
     /*
@@ -131,7 +131,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     public Object getValueAt(int row, int column)
     {
         // 公共属性
-        if (ls_ItemList == null)
+        if (itemList == null)
         {
             return "";
         }
@@ -154,7 +154,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
             }
         }
 
-        IEditItem item = ls_ItemList.get(row);
+        IEditItem item = itemList.get(row);
         if (item.getType() == ConsDat.INDX_SIGN)
         {
             return Char.format(Lang.getLang(item.getSpec(SignItem.SPEC_SIGN_TPLT), ""), item.getName());
@@ -197,7 +197,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     @Override
     public IEditItem getItemAt(int index)
     {
-        return ls_ItemList.get(index);
+        return itemList.get(index);
     }
 
     @Override
@@ -222,7 +222,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
      */
     public IEditItem wAppend(int indx, IEditItem item)
     {
-        ls_ItemList.add(indx, item);
+        itemList.add(indx, item);
         fireTableDataChanged();
         return item;
     }
@@ -232,7 +232,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
      */
     public IEditItem wAppend(IEditItem item)
     {
-        ls_ItemList.add(item);
+        itemList.add(item);
         fireTableDataChanged();
         return item;
     }
@@ -247,9 +247,9 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
         int t = (type | args);
         int n = 0;
         int l = 0;
-        for (int i = 0, j = ls_ItemList.size(); i < j; i += 1)
+        for (int i = 0, j = itemList.size(); i < j; i += 1)
         {
-            if (ls_ItemList.get(i).getType() == t)
+            if (itemList.get(i).getType() == t)
             {
                 l = i;
                 n += 1;
@@ -267,7 +267,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     {
         java.util.ArrayList<I1S2> list = new java.util.ArrayList<I1S2>();
         int i = 0;
-        for (IEditItem item : ls_ItemList)
+        for (IEditItem item : itemList)
         {
             if (item.getType() == type)
             {
@@ -285,20 +285,20 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
 
     public void wUpdate(int indx, AEditItem tplt)
     {
-        ls_ItemList.set(indx, tplt);
+        itemList.set(indx, tplt);
         fireTableDataChanged();
     }
 
     public void wRemove(int indx)
     {
-        ls_ItemList.remove(indx);
+        itemList.remove(indx);
         fireTableDataChanged();
         setModified(true);
     }
 
     public void wRemove(IEditItem item)
     {
-        ls_ItemList.remove(item);
+        itemList.remove(item);
         fireTableDataChanged();
         setModified(true);
     }
@@ -314,8 +314,8 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
             return;
         }
 
-        IEditItem p = ls_ItemList.remove(row);
-        ls_ItemList.add(to, p);
+        IEditItem p = itemList.remove(row);
+        itemList.add(to, p);
         setModified(true);
     }
 

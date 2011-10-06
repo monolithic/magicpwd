@@ -26,9 +26,7 @@ import com.magicpwd._comn.item.LogoItem;
 import com.magicpwd._comn.item.MetaItem;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Char;
-import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
 import com.magicpwd.d.db.DBA4000;
@@ -43,7 +41,7 @@ public abstract class SafeMdl
 
     protected MpwdHeader mkey;
     protected UserMdl userMdl;
-    protected java.util.ArrayList<IEditItem> ls_ItemList;
+    protected java.util.ArrayList<IEditItem> itemList;
     /**
      * 临时数据保存
      */
@@ -56,7 +54,7 @@ public abstract class SafeMdl
     {
         this.userMdl = userMdl;
         mkey = new MpwdHeader();
-        ls_ItemList = new java.util.ArrayList<IEditItem>();
+        itemList = new java.util.ArrayList<IEditItem>();
     }
 
     public abstract void initHead();
@@ -225,7 +223,7 @@ public abstract class SafeMdl
         clear();
         mkey.setP30F0104(mkeyHash);
         DBA4000.readMpwdData(userMdl, mkey);
-        deCrypt(mkey, ls_ItemList);
+        deCrypt(mkey, itemList);
     }
 
     /**
@@ -238,7 +236,7 @@ public abstract class SafeMdl
     {
         mkey.setP30F0105(userMdl.getCode());
         mkey.setHistBack(histBack);
-        enCrypt(mkey, ls_ItemList);
+        enCrypt(mkey, itemList);
         DBAccess dba = new DBAccess();
         dba.init(userMdl);
         try
@@ -258,7 +256,7 @@ public abstract class SafeMdl
 
     public int getItemSize()
     {
-        return ls_ItemList.size();
+        return itemList.size();
     }
 
     public String getKeysHash()
@@ -274,7 +272,7 @@ public abstract class SafeMdl
     {
         GuidItem guid = new GuidItem(userMdl);
         guid.setName(new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new java.util.Date()));
-        ls_ItemList.add(guid);
+        itemList.add(guid);
         return guid;
     }
 
@@ -285,7 +283,7 @@ public abstract class SafeMdl
     public IEditItem initMeta()
     {
         MetaItem meta = new MetaItem(userMdl);
-        ls_ItemList.add(meta);
+        itemList.add(meta);
         return meta;
     }
 
@@ -296,7 +294,7 @@ public abstract class SafeMdl
     public IEditItem initLogo()
     {
         LogoItem logo = new LogoItem(userMdl);
-        ls_ItemList.add(logo);
+        itemList.add(logo);
         return logo;
     }
 
@@ -307,13 +305,13 @@ public abstract class SafeMdl
     public IEditItem initHint()
     {
         HintItem hint = new HintItem(userMdl);
-        ls_ItemList.add(hint);
+        itemList.add(hint);
         return hint;
     }
 
     public IEditItem getItemAt(int index)
     {
-        return ls_ItemList.get(index);
+        return itemList.get(index);
     }
 
     public void setKeysLabel(int label)

@@ -48,12 +48,12 @@ public class UnitMdl extends SafeMdl
     @Override
     public void clear()
     {
-        ls_ItemList.clear();
+        itemList.clear();
         mkey.setDefault();
     }
 
     public int getSize()
     {
-        return ls_ItemList.size();
+        return itemList.size();
     }
 }

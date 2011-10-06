@@ -16,13 +16,18 @@
  */
 package com.magicpwd.v.cmd.mcmd;
 
+import com.magicpwd._comn.mpwd.MpwdHeader;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._util.Char;
+import com.magicpwd._util.Jzip;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
+import com.magicpwd._util.Util;
 import com.magicpwd.d.db.DBA4000;
+import com.magicpwd.d.db.DBAccess;
 import com.magicpwd.m.MpwdMdl;
 import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.mcmd.MkeyMdl;
 
 /**
  * 命令行模式
@@ -32,9 +37,7 @@ public class McmdPtn
 {
     private MpwdMdl mpwdMdl;
     private UserMdl userMdl;
-    private String currKind;
-    private String currKeys;
-    private int currPage;
+    private MkeyMdl mcmdMdl;
 
     public McmdPtn(MpwdMdl mpwdMdl)
     {
@@ -43,32 +46,27 @@ public class McmdPtn
 
     public void init()
     {
+        userMdl = new UserMdl(mpwdMdl);
+
         console = System.console();
         if (console == null)
         {
             scanner = new java.util.Scanner(System.in);
         }
-        userMdl = new UserMdl(mpwdMdl);
 
-        int errCnt = 0;
-        while (errCnt < 3)
+        if (!signIn())
         {
-            if (signIn())
-            {
-                break;
-            }
-            errCnt += 1;
-            if (errCnt > 2)
-            {
-                Lang.showMesg(console, null, "您操作的错误次太多，请确认您是否为合法用户！\n为了保障用户数据安全，软件将自动关闭。");
-            }
-            else
-            {
-                Lang.showMesg(console, null, "身份验证错误，请确认您的用户名及口令是否正确！");
-            }
+            return;
         }
 
+        Lang.showMesg(console, null, "用户登录成功！\n");
+
+        Lang.loadLang(mpwdMdl.getAppLang());
+
         showHelp();
+
+        mcmdMdl = new MkeyMdl(userMdl);
+        mcmdMdl.init();
 
         String cmd;
         String tmp;
@@ -89,9 +87,37 @@ public class McmdPtn
                 tmp = tmp.substring(0, idx);
             }
 
+            if ("&".equals(tmp))
+            {
+                copyData(cmd);
+                continue;
+            }
+            if ("@".equals(tmp))
+            {
+                copyName(cmd);
+                continue;
+            }
+            if (">".equals(tmp))
+            {
+                nextPage();
+                continue;
+            }
+            if (">>".equals(tmp))
+            {
+                continue;
+            }
+            if ("<".equals(tmp))
+            {
+                prevPage();
+                continue;
+            }
+            if ("<<".equals(tmp))
+            {
+                continue;
+            }
             if ("ls".equals(tmp))
             {
-                listKeys();
+                listKeys("");
                 continue;
             }
             if ("pwd".equals(tmp))
@@ -100,7 +126,7 @@ public class McmdPtn
             }
             if ("cat".equals(tmp))
             {
-                viewKeys();
+                viewKeys(cmd);
                 continue;
             }
             if ("help".equals(tmp))
@@ -110,95 +136,177 @@ public class McmdPtn
             }
             if ("exit".equals(tmp))
             {
+                endSave();
+                Logs.end();
                 break;
             }
+            Lang.showMesg(console, null, "未知的命令：{0}！\n", tmp);
         }
     }
 
     private boolean signIn()
     {
-        print("用户：");
-        String name = readText();
-        if (!com.magicpwd._util.Char.isValidate(name))
-        {
-            Lang.showMesg(console, null, "请输入用户名称！");
-            return false;
-        }
-        name = name.trim();
+        int errCnt = 0;
 
-        // 获得数据路径
-        String path = mpwdMdl.getDatPath(name);
-        if (!Char.isValidate(path))
+        String name;
+        String pwds;
+        String path;
+        while (errCnt < 3)
         {
-            Lang.showMesg(console, null, "系统无法定位当前用户的数据文件，请尝试以下操作：\n1、打开文件：定位您之前的数据文件；\n2、用户注册：注册名称为 {0} 的用户。", name);
-            return false;
-        }
-
-        print("口令：");
-        String pwds = readPass();
-        if (!com.magicpwd._util.Char.isValidate(pwds))
-        {
-            Lang.showMesg(console, null, "请输入登录口令！");
-            return false;
-        }
-
-        if (!userMdl.loadCfg(path))
-        {
-            Lang.showMesg(console, null, "用户数据加载异常！");
-            return false;
-        }
-
-        try
-        {
-            boolean b = userMdl.signIn(name, pwds);
-            if (b)
+            name = readText("用户：");
+            if (!Char.isValidate(name))
             {
+                Lang.showMesg(console, null, "请输入用户名称！");
+                continue;
+            }
+            name = name.trim();
+
+            // 获得数据路径
+            path = mpwdMdl.getDatPath(name);
+            if (!Char.isValidate(path))
+            {
+                Lang.showMesg(console, null, "系统无法定位当前用户的数据文件，请尝试以下操作：\n1、打开文件：定位您之前的数据文件；\n2、用户注册：注册名称为 {0} 的用户。", name);
+                return false;
+            }
+
+            pwds = readPass("口令：");
+            if (!Char.isValidate(pwds))
+            {
+                Lang.showMesg(console, null, "请输入登录口令！");
+                continue;
+            }
+
+            if (!userMdl.loadCfg(path))
+            {
+                Lang.showMesg(console, null, "用户数据加载异常！");
+                return false;
+            }
+
+            try
+            {
+                if (!userMdl.signIn(name, pwds))
+                {
+                    errCnt += 1;
+                    Lang.showMesg(console, null, "身份验证错误，请确认您的登录用户及登录口令是否正确！");
+                    continue;
+                }
+
                 if (!ConsDat.VERSIONS.equals(DBA4000.readConfig(userMdl, "versions")))
                 {
+                    Lang.showMesg(console, null, "不支持的数据库！");
                     return false;
                 }
                 mpwdMdl.setUserLast(name);
                 mpwdMdl.setViewLast("mcmd");
+                return true;
             }
+            catch (Exception exp)
+            {
+                Logs.exception(exp);
+                Lang.showMesg(console, null, exp.getLocalizedMessage());
+                return false;
+            }
+        }
+
+        Lang.showMesg(console, null, "您操作的错误次太多，请确认您是否为合法用户！\n为了保障用户数据安全，软件将自动关闭。");
+        return false;
+    }
+
+    private void listKeys(String cmd)
+    {
+    }
+
+    private void viewKeys(String cmd)
+    {
+        MpwdHeader header = null;
+
+        try
+        {
+            mcmdMdl.loadData(header.getP30F0104());
         }
         catch (Exception exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(console, null, "身份验证错误，请确认您的用户名及口令是否正确！");
-            return false;
+            return;
         }
 
-        return true;
+        Lang.showMesg(console, null, mcmdMdl.display());
     }
 
-    private void listKeys()
+    private void copyName(String cmd)
     {
+        if (mcmdMdl.copyName(cmd))
+        {
+            Lang.showMesg(console, null, "数据已复制到系统剪贴板！\n");
+        }
+        else
+        {
+            Lang.showMesg(console, null, "复制数据到系统剪贴板异常！\n");
+        }
     }
 
-    private void viewKeys()
+    private void copyData(String cmd)
     {
+        if (mcmdMdl.copyData(cmd))
+        {
+            Lang.showMesg(console, null, "数据已复制到系统剪贴板！\n");
+        }
+        else
+        {
+            Lang.showMesg(console, null, "复制数据到系统剪贴板异常！\n");
+        }
+    }
+
+    private void nextPage()
+    {
+        mcmdMdl.nextPage();
+    }
+
+    private void prevPage()
+    {
+        mcmdMdl.prevPage();
     }
 
     private void showHelp()
     {
         StringBuilder buf = new StringBuilder();
+        buf.append("使用说明：\n");
         buf.append("cd 数字\t- 切换目录\n");
         buf.append("ls \t- 查看当前目录下数据信息\n");
         buf.append("pwd \t- 查看当前所处目录路径\n");
         buf.append("cat \t- 查看指定记录的口令\n");
+        buf.append("& 数字 \t- 复制当前属性的值到剪贴板\n");
+        buf.append("@ 数字 \t- 复制当前属性的键到剪贴板\n");
         buf.append("<< \t- 转到首屏\n");
         buf.append("< \t- 转到上一屏\n");
         buf.append("> \t- 转到下一屏\n");
         buf.append(">> \t- 转到未屏\n");
-        buf.append("& 数字 \t- 复制当前属性的值到剪贴板\n");
-        buf.append("@ 数字 \t- 复制当前属性的键到剪贴板\n");
 
         Lang.showMesg(console, null, buf.toString());
     }
 
-    public boolean endSave()
+    public java.io.File endSave()
     {
-        return true;
+        try
+        {
+            DBAccess.locked = true;
+
+            userMdl.saveCfg();
+            new DBAccess().shutdown();
+
+            java.io.File backFile = Util.nextBackupFile(userMdl.getDumpDir(), userMdl.getDumpCnt());
+            Jzip.doZip(backFile, new java.io.File(userMdl.getDataDir()));
+            return backFile;
+        }
+        catch (Exception exp)
+        {
+            Logs.exception(exp);
+            return null;
+        }
+        finally
+        {
+            DBAccess.locked = false;
+        }
     }
 
     public void print(String cmd)
@@ -225,8 +333,15 @@ public class McmdPtn
         return scanner.next();
     }
 
-    public String readPass()
+    public String readText(String msg)
     {
+        System.out.print(msg);
+        return readText();
+    }
+
+    public String readPass(String msg)
+    {
+        System.out.print(msg);
         if (console != null)
         {
             return new String(console.readPassword());
