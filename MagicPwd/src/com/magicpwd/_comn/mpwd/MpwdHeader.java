@@ -26,7 +26,7 @@ import com.magicpwd._cons.ConsDat;
  */
 public final class MpwdHeader implements Serializable
 {
-
+    private int index;
     private boolean histBack;
     /**
      * 显示排序
@@ -206,6 +206,22 @@ public final class MpwdHeader implements Serializable
     public void setMgtd(MgtdHeader mgtd)
     {
         MpwdHeader.mgtd = mgtd;
+    }
+
+    /**
+     * @return the index
+     */
+    public int getIndex()
+    {
+        return index;
+    }
+
+    /**
+     * @param index the index to set
+     */
+    public void setIndex(int index)
+    {
+        this.index = index;
     }
 
     /**

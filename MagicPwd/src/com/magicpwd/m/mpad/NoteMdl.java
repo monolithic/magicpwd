@@ -57,31 +57,31 @@ public class NoteMdl extends SafeMdl
     @Override
     public void initBody()
     {
-        ls_ItemList.add(AEditItem.getInstance(userMdl, ConsDat.INDX_AREA));
+        itemList.add(AEditItem.getInstance(userMdl, ConsDat.INDX_AREA));
     }
 
     @Override
     public void clear()
     {
-        ls_ItemList.clear();
+        itemList.clear();
         mkey.setDefault();
         setModified(false);
     }
 
     public void setNote(String name, String note)
     {
-        ls_ItemList.get(ConsEnv.PWDS_HEAD_META).setName(name);
-        ls_ItemList.get(ConsEnv.PWDS_HEAD_SIZE).setName(name);
-        ls_ItemList.get(ConsEnv.PWDS_HEAD_SIZE).setData(note);
+        itemList.get(ConsEnv.PWDS_HEAD_META).setName(name);
+        itemList.get(ConsEnv.PWDS_HEAD_SIZE).setName(name);
+        itemList.get(ConsEnv.PWDS_HEAD_SIZE).setData(note);
     }
 
     public IEditItem getNote()
     {
-        return ls_ItemList.get(ConsEnv.PWDS_HEAD_SIZE);
+        return itemList.get(ConsEnv.PWDS_HEAD_SIZE);
     }
 
     public int getSize()
     {
-        return ls_ItemList.size();
+        return itemList.size();
     }
 }

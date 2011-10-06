@@ -185,11 +185,11 @@ public class Lang
         c.setToolTipText(getLang(sid, tip));
     }
 
-    public static void showMesg(java.io.Console c, String t, String d, Object... z)
+    public static void showMesg(java.io.Console c, String t, String d, String... z)
     {
         if (c != null)
         {
-            c.format(getLang(t, d) + "\n", z);
+            c.format(Char.format(getLang(t, d) + "\n", z));
         }
     }
 

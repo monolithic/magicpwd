@@ -22,7 +22,7 @@ package com.magicpwd._comn.prop;
  */
 public class Kind
 {
-
+    private int index;
     /**
      * 显示排序
      */
@@ -63,6 +63,22 @@ public class Kind
      * 类别描述
      */
     private String C201020A;
+
+    /**
+     * @return the index
+     */
+    public int getIndex()
+    {
+        return index;
+    }
+
+    /**
+     * @param index the index to set
+     */
+    public void setIndex(int index)
+    {
+        this.index = index;
+    }
 
     public int addC2010201(int step)
     {
