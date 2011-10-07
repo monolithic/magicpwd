@@ -20,7 +20,7 @@ public class MkeyMdl implements IPageMdl
     private UserMdl userMdl;
     private int curPage;
     private int maxPage;
-    private boolean allPage;
+    private boolean onePage;
     private java.util.List<MpwdHeader> mpwdList;
     private java.util.Map<String, MpwdHeader> mpwdMaps;
 
@@ -56,11 +56,21 @@ public class MkeyMdl implements IPageMdl
     public String print()
     {
         int tmp = mpwdList.size();
-        int s = curPage * McmdEnv.KEY_PAGE_SIZE;
-        int e = s + McmdEnv.KEY_PAGE_SIZE;
-        if (e > tmp)
+        int s;
+        int e;
+        if (onePage)
         {
+            s = 0;
             e = tmp;
+        }
+        else
+        {
+            s = curPage * McmdEnv.KEY_PAGE_SIZE;
+            e = s + McmdEnv.KEY_PAGE_SIZE;
+            if (e > tmp)
+            {
+                e = tmp;
+            }
         }
 
         char c = 'a';
@@ -123,6 +133,22 @@ public class MkeyMdl implements IPageMdl
 
     private String genKey(char c)
     {
-        return (allPage ? "" + curPage : "") + c;
+        return (isOnePage() ? "" + curPage : "") + c;
+    }
+
+    /**
+     * @return the onePage
+     */
+    public boolean isOnePage()
+    {
+        return onePage;
+    }
+
+    /**
+     * @param onePage the onePage to set
+     */
+    public void setOnePage(boolean onePage)
+    {
+        this.onePage = onePage;
     }
 }
