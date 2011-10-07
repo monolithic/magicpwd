@@ -5,6 +5,7 @@
 package com.magicpwd.m.mcmd;
 
 import com.magicpwd.__i.IEditItem;
+import com.magicpwd.__i.mcmd.IPageMdl;
 import com.magicpwd._comn.item.SignItem;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.LangRes;
@@ -19,7 +20,7 @@ import com.magicpwd.m.UserMdl;
  *
  * @author Aven
  */
-public class MattMdl extends SafeMdl
+public class MattMdl extends SafeMdl implements IPageMdl
 {
     private int curPage;
     private int maxPage;
@@ -111,7 +112,8 @@ public class MattMdl extends SafeMdl
         return true;
     }
 
-    public String display()
+    @Override
+    public String print()
     {
         StringBuilder buf = new StringBuilder();
 
@@ -124,6 +126,7 @@ public class MattMdl extends SafeMdl
         }
 
         char c = 'a';
+        itemMaps.clear();
         IEditItem item;
 
         if (curPage == 0)
@@ -166,12 +169,14 @@ public class MattMdl extends SafeMdl
         return buf.toString();
     }
 
+    @Override
     public String firstPage()
     {
         curPage = 0;
-        return "";
+        return print();
     }
 
+    @Override
     public String prevPage()
     {
         if (curPage <= 0)
@@ -180,9 +185,10 @@ public class MattMdl extends SafeMdl
         }
 
         curPage -= 1;
-        return "";
+        return print();
     }
 
+    @Override
     public String nextPage()
     {
         if (curPage >= maxPage)
@@ -191,13 +197,14 @@ public class MattMdl extends SafeMdl
         }
 
         curPage += 1;
-        return "";
+        return print();
     }
 
+    @Override
     public String lastPage()
     {
         curPage = maxPage;
-        return "";
+        return print();
     }
 
     private String genKey(char c)
