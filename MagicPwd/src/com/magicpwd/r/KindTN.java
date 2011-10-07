@@ -16,7 +16,7 @@
  */
 package com.magicpwd.r;
 
-import com.magicpwd._comn.prop.Kind;
+import com.magicpwd._comn.mpwd.Mcat;
 import java.util.List;
 
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -36,7 +36,7 @@ public class KindTN extends DefaultMutableTreeNode
     /**
      * @param kvItem
      */
-    public KindTN(UserMdl userMdl, Kind kvItem)
+    public KindTN(UserMdl userMdl, Mcat kvItem)
     {
         super(kvItem);
         this.userMdl = userMdl;
@@ -73,10 +73,10 @@ public class KindTN extends DefaultMutableTreeNode
      */
     private void loadChildren()
     {
-        Kind kvItem = (Kind) getUserObject();
+        Mcat kvItem = (Mcat) getUserObject();
         if (kvItem != null)
         {
-            List<Kind> list = DBA4000.selectKindData(userMdl, kvItem.getC2010203());
+            List<Mcat> list = DBA4000.listCatByHash(userMdl, kvItem.getC2010203());
             if (list != null)
             {
                 for (int i = 0, j = list.size(); i < j; i += 1)

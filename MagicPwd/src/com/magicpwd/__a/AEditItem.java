@@ -48,7 +48,7 @@ public abstract class AEditItem implements IEditItem
     /** 记录内容 */
     private String data;
     /** 专有内容 */
-    protected java.util.List<String> spec;
+    protected java.util.List<String> ext;
     protected UserMdl userCfg;
 
     /**
@@ -205,7 +205,7 @@ public abstract class AEditItem implements IEditItem
     @Override
     public void addSpec(String spec)
     {
-        this.spec.add(spec);
+        this.ext.add(spec);
     }
 
     /**
@@ -215,15 +215,15 @@ public abstract class AEditItem implements IEditItem
     @Override
     public String getSpec(int index)
     {
-        return (index > -1 && index < spec.size()) ? spec.get(index) : null;
+        return (index > -1 && index < ext.size()) ? ext.get(index) : null;
     }
 
     @Override
     public String getSpec(int index, String defValue)
     {
-        if (index > -1 && index < spec.size())
+        if (index > -1 && index < ext.size())
         {
-            String temp = spec.get(index);
+            String temp = ext.get(index);
             return temp != null ? temp : defValue;
         }
         return defValue;
@@ -232,28 +232,28 @@ public abstract class AEditItem implements IEditItem
     @Override
     public void setSpec(int index, String spec)
     {
-        if (index == this.spec.size())
+        if (index == this.ext.size())
         {
-            this.spec.add(spec);
+            this.ext.add(spec);
         }
         else
         {
-            this.spec.set(index, spec);
+            this.ext.set(index, spec);
         }
     }
 
     @Override
     public String enCodeSpec(String c)
     {
-        if (spec == null || spec.size() < 1)
+        if (ext == null || ext.size() < 1)
         {
             return "";
         }
 
         StringBuilder text = new StringBuilder();
-        for (int i = 0, j = spec.size(); i < j; i += 1)
+        for (int i = 0, j = ext.size(); i < j; i += 1)
         {
-            text.append(c).append(spec.get(i));
+            text.append(c).append(ext.get(i));
         }
         return text.toString();
     }
@@ -266,13 +266,13 @@ public abstract class AEditItem implements IEditItem
             return;
         }
 
-        spec.clear();
+        ext.clear();
 
         int s = 0;
         int e = text.indexOf(c, s);
         while (e >= s)
         {
-            spec.add(text.substring(s, e));
+            ext.add(text.substring(s, e));
             s = e + 1;
             e = text.indexOf(c, s);
         }

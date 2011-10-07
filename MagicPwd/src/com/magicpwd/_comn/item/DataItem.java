@@ -52,7 +52,7 @@ public class DataItem extends AEditItem
         }
         builder.append(doEscape(getName())).append(',').append(doEscape(getData()));
 
-        for (String tmp : spec)
+        for (String tmp : ext)
         {
             builder.append(',').append(tmp);
         }
@@ -82,10 +82,10 @@ public class DataItem extends AEditItem
         setName(unEscape(list.get(0).replace("\f", "\\,")));
         setData(unEscape(list.get(1).replace("\f", "\\,")));
 
-        spec.clear();
+        ext.clear();
         for (int i = 2, j = list.size(); i < j; i += 1)
         {
-            spec.add(list.get(i));
+            ext.add(list.get(i));
         }
         return true;
     }
@@ -99,22 +99,22 @@ public class DataItem extends AEditItem
     @Override
     public final void setDefault()
     {
-        if (spec == null)
+        if (ext == null)
         {
-            this.spec = new java.util.ArrayList<String>(8);
+            this.ext = new java.util.ArrayList<String>(8);
         }
         else
         {
-            spec.clear();
+            ext.clear();
         }
 
-        spec.add(SPEC_VALUE_TRUE);
-        spec.add("+0-");
-        spec.add("0");
-        spec.add("8");
-        spec.add(SPEC_VALUE_NONE);
-        spec.add(SPEC_VALUE_TRUE);
-        spec.add("^");
-        spec.add(SPEC_VALUE_FAIL);
+        ext.add(SPEC_VALUE_TRUE);
+        ext.add("+0-");
+        ext.add("0");
+        ext.add("8");
+        ext.add(SPEC_VALUE_NONE);
+        ext.add(SPEC_VALUE_TRUE);
+        ext.add("^");
+        ext.add(SPEC_VALUE_FAIL);
     }
 }

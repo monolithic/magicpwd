@@ -43,7 +43,7 @@ import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.item.MetaItem;
 import com.magicpwd._comn.mpwd.MgtdHeader;
-import com.magicpwd._comn.prop.Kind;
+import com.magicpwd._comn.mpwd.Mcat;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
@@ -250,7 +250,7 @@ public class MproPtn extends AMpwdPtn
         return true;
     }
 
-    public boolean isKindValidate(Kind kind)
+    public boolean isKindValidate(Mcat kind)
     {
         if (kind == null)
         {
@@ -288,12 +288,12 @@ public class MproPtn extends AMpwdPtn
             lastOpt = ConsEnv.QUERY_FIND;
             lastQry = meta;
             trGuidTree.setSelectionPath(null);
-            mproMdl.getListMdl().listKeysByMeta(meta);
+            mproMdl.getListMdl().listKeyByMeta(meta);
             hintBar.showInfo("共 " + mproMdl.getListMdl().getSize() + " 条数据");
         }
         else
         {
-            mproMdl.getListMdl().listKeysByKind(lastQry);
+            mproMdl.getListMdl().listKeyByCat(lastQry);
             hintBar.showInfo("共 " + mproMdl.getListMdl().getSize() + " 条数据");
         }
         return true;
@@ -303,7 +303,7 @@ public class MproPtn extends AMpwdPtn
     {
         if (lastOpt == ConsEnv.QUERY_FIND)
         {
-            mproMdl.getListMdl().listKeysByMeta(lastQry);
+            mproMdl.getListMdl().listKeyByMeta(lastQry);
         }
         else if (lastOpt == ConsEnv.QUERY_HINT)
         {
@@ -312,7 +312,7 @@ public class MproPtn extends AMpwdPtn
         }
         else if ("0".equals(lastQry) || com.magicpwd._util.Char.isValidateHash(lastQry))
         {
-            mproMdl.getListMdl().listKeysByKind(lastQry);
+            mproMdl.getListMdl().listKeyByCat(lastQry);
         }
         hintBar.showInfo("共 " + mproMdl.getListMdl().getSize() + " 条数据");
 
@@ -358,7 +358,7 @@ public class MproPtn extends AMpwdPtn
             }
 
             KindTN node = (KindTN) path.getLastPathComponent();
-            Kind kind = (Kind) node.getUserObject();
+            Mcat kind = (Mcat) node.getUserObject();
             if (!isKindValidate(kind))
             {
                 Lang.showMesg(this, LangRes.P30F7A4A, "不能保存到任务列表中去！");
@@ -504,7 +504,7 @@ public class MproPtn extends AMpwdPtn
         return trGuidTree.getSelectionPath();
     }
 
-    public void appendKindBySelected(Kind kind)
+    public void appendKindBySelected(Mcat kind)
     {
         if (kind == null)
         {
@@ -518,7 +518,7 @@ public class MproPtn extends AMpwdPtn
         mproMdl.getKindMdl().wAppend(path, kind);
     }
 
-    public void updateKindBySelected(Kind kind)
+    public void updateKindBySelected(Mcat kind)
     {
         if (kind == null)
         {
@@ -1056,7 +1056,7 @@ public class MproPtn extends AMpwdPtn
         if (obj instanceof KindTN)
         {
             KindTN item = (KindTN) obj;
-            Kind kind = (Kind) item.getUserObject();
+            Mcat kind = (Mcat) item.getUserObject();
             if (!isKindValidate(kind))
             {
                 listTask(kind);
@@ -1064,7 +1064,7 @@ public class MproPtn extends AMpwdPtn
             else
             {
                 lastQry = kind.getC2010203();
-                mproMdl.getListMdl().listKeysByKind(lastQry);
+                mproMdl.getListMdl().listKeyByCat(lastQry);
             }
         }
 
@@ -1074,7 +1074,7 @@ public class MproPtn extends AMpwdPtn
         lastPwd = null;
     }
 
-    private void listTask(Kind kind)
+    private void listTask(Mcat kind)
     {
         String task = kind.getC2010209();
         java.util.Calendar c = java.util.Calendar.getInstance();
@@ -1618,10 +1618,10 @@ public class MproPtn extends AMpwdPtn
 
         trGuidTree.setSelectionPath(path);
 
-        Kind c = (Kind) p.getUserObject();
+        Mcat c = (Mcat) p.getUserObject();
         c.addC2010201(-1);
         DBA4000.updateKindData(userMdl, c);
-        c = (Kind) n.getUserObject();
+        c = (Mcat) n.getUserObject();
         c.addC2010201(1);
         DBA4000.updateKindData(userMdl, c);
     }
@@ -1653,10 +1653,10 @@ public class MproPtn extends AMpwdPtn
 
         trGuidTree.setSelectionPath(path);
 
-        Kind c = (Kind) p.getUserObject();
+        Mcat c = (Mcat) p.getUserObject();
         c.addC2010201(1);
         DBA4000.updateKindData(userMdl, c);
-        c = (Kind) n.getUserObject();
+        c = (Mcat) n.getUserObject();
         c.addC2010201(-1);
         DBA4000.updateKindData(userMdl, c);
     }
@@ -1687,8 +1687,8 @@ public class MproPtn extends AMpwdPtn
         getTreeMdl().nodeStructureChanged(p2);
         trGuidTree.setSelectionPath(new javax.swing.tree.TreePath(s.getPath()));
 
-        Kind u = (Kind) p2.getUserObject();
-        Kind c = (Kind) s.getUserObject();
+        Mcat u = (Mcat) p2.getUserObject();
+        Mcat c = (Mcat) s.getUserObject();
         c.setC2010201(p2.getChildCount());
         c.setC2010204(u.getC2010203());
         DBA4000.updateKindData(userMdl, c);
@@ -1715,8 +1715,8 @@ public class MproPtn extends AMpwdPtn
         getTreeMdl().nodeStructureChanged(o);
         trGuidTree.setSelectionPath(new javax.swing.tree.TreePath(s.getPath()));
 
-        Kind u = (Kind) p.getUserObject();
-        Kind c = (Kind) s.getUserObject();
+        Mcat u = (Mcat) p.getUserObject();
+        Mcat c = (Mcat) s.getUserObject();
         c.setC2010201(p.getChildCount());
         c.setC2010204(u.getC2010203());
         DBA4000.updateKindData(userMdl, c);

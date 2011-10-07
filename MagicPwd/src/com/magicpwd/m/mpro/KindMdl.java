@@ -16,7 +16,7 @@
  */
 package com.magicpwd.m.mpro;
 
-import com.magicpwd._comn.prop.Kind;
+import com.magicpwd._comn.mpwd.Mcat;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 
@@ -44,7 +44,7 @@ public class KindMdl extends DefaultTreeModel
     {
     }
 
-    public void wAppend(TreePath path, Kind kind)
+    public void wAppend(TreePath path, Mcat kind)
     {
         KindTN r = (KindTN) path.getLastPathComponent();
         if (r == null)
@@ -54,13 +54,13 @@ public class KindMdl extends DefaultTreeModel
         r.add(new KindTN(userMdl, kind));
         nodeStructureChanged(r);
 
-        Kind k = (Kind) r.getUserObject();
+        Mcat k = (Mcat) r.getUserObject();
         kind.setC2010201(r.getChildCount());
         kind.setC2010204(k.getC2010203());
         DBA4000.updateKindData(userMdl, kind);
     }
 
-    public void wUpdate(TreePath path, Kind kind)
+    public void wUpdate(TreePath path, Mcat kind)
     {
         KindTN c = (KindTN) path.getLastPathComponent();
         if (c == null)
@@ -86,13 +86,13 @@ public class KindMdl extends DefaultTreeModel
         {
             r.add((KindTN) c.getChildAt(0));
         }
-        Kind item = (Kind) c.getUserObject();
+        Mcat item = (Mcat) c.getUserObject();
         DBA4000.deleteKindData(userMdl, ConsDat.HASH_ROOT, item, r.getChildCount());
         nodeStructureChanged(r);
     }
 
-    public java.util.List<Kind> getKindByParent(String hash)
+    public java.util.List<Mcat> getKindByParent(String hash)
     {
-        return DBA4000.selectKindData(userMdl, hash);
+        return DBA4000.listCatByHash(userMdl, hash);
     }
 }

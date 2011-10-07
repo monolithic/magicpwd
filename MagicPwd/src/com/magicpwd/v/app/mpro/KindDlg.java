@@ -18,7 +18,7 @@ package com.magicpwd.v.app.mpro;
 
 import com.magicpwd.__a.ADialog;
 import com.magicpwd.__i.IBackCall;
-import com.magicpwd._comn.prop.Kind;
+import com.magicpwd._comn.mpwd.Mcat;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
@@ -31,10 +31,10 @@ public class KindDlg extends ADialog
 {
 
     private MproPtn mproPtn;
-    private IBackCall<String, Kind> backCall;
-    private Kind kind;
+    private IBackCall<String, Mcat> backCall;
+    private Mcat kind;
 
-    public KindDlg(MproPtn mproPtn, IBackCall<String, Kind> backCall)
+    public KindDlg(MproPtn mproPtn, IBackCall<String, Mcat> backCall)
     {
         super(mproPtn, true);
         this.mproPtn = mproPtn;
@@ -139,7 +139,7 @@ public class KindDlg extends ADialog
         Bean.setText(bt_Apply, "确认(@O)");
     }
 
-    public void initData(Kind kind)
+    public void initData(Mcat kind)
     {
         bt_Abort.addActionListener(new java.awt.event.ActionListener()
         {
@@ -205,7 +205,7 @@ public class KindDlg extends ADialog
 
         if (kind == null)
         {
-            kind = new Kind();
+            kind = new Mcat();
         }
 
         kind.setC2010106(kindName);

@@ -116,7 +116,7 @@ public class DXA2000 extends DXA
         int cnt = 0;
 
         java.util.ArrayList<MpwdHeader> dataList = new java.util.ArrayList<MpwdHeader>();
-        DBA4000.listRecHeaderByCat(userMdl, kindHash, dataList);
+        DBA4000.listKeyHeaderByCat(userMdl, kindHash, dataList);
         if (dataList == null || dataList.size() < 1)
         {
             return cnt;

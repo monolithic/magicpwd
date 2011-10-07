@@ -191,6 +191,10 @@ public class Lang
         {
             c.format(Char.format(getLang(t, d) + "\n", z));
         }
+        else
+        {
+            System.out.println(Char.format(getLang(t, d) + "\n", z));
+        }
     }
 
     public static void showMesg(Component c, String t, String d, String... z)
