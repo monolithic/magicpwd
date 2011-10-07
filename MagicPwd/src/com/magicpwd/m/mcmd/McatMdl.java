@@ -4,9 +4,11 @@
  */
 package com.magicpwd.m.mcmd;
 
+import com.magicpwd.__i.mcmd.IPageMdl;
 import com.magicpwd._comn.mpwd.Mcat;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.mcmd.McmdEnv;
+import com.magicpwd._util.Char;
 import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.m.UserMdl;
 
@@ -14,14 +16,16 @@ import com.magicpwd.m.UserMdl;
  *
  * @author Aven
  */
-public class McatMdl
+public class McatMdl implements IPageMdl
 {
     private UserMdl userMdl;
-    private java.util.List<Mcat> mcatList;
-    private int curIndex;
-    private java.util.Map<String, Mcat> mcatMaps;
     private int curPage;
+    private int maxPage;
     private boolean allPage;
+    private java.util.List<Mcat> mcatList;
+    private java.util.Map<String, Mcat> mcatMaps;
+    private java.util.List<Mcat> mcatPath;
+    private int curPath;
 
     public McatMdl(UserMdl userMdl)
     {
@@ -30,21 +34,28 @@ public class McatMdl
 
     public void init()
     {
-        mcatList = new java.util.ArrayList<Mcat>(5);
+        mcatList = new java.util.ArrayList<Mcat>();
         mcatMaps = new java.util.HashMap<String, Mcat>();
 
+        mcatPath = new java.util.ArrayList<Mcat>(5);
         Mcat mcat = new Mcat();
         mcat.setC2010203(ConsDat.HASH_ROOT);
         mcat.setC2010106("魔方密码");
         mcat.setC2010207("魔方密码");
-        mcatList.add(mcat);
+        mcatPath.add(mcat);
     }
 
-    public String listCat()
+    @Override
+    public void clear()
     {
-        java.util.List<Mcat> list = DBA4000.listCatByHash(userMdl, mcatList.get(curIndex).getC2010203());
+        mcatList.clear();
+        mcatMaps.clear();
+    }
 
-        int tmp = list.size();
+    @Override
+    public String print()
+    {
+        int tmp = mcatList.size();
         int s = curPage * McmdEnv.CAT_PAGE_SIZE;
         int e = s + McmdEnv.CAT_PAGE_SIZE;
         if (e > tmp)
@@ -58,7 +69,7 @@ public class McatMdl
         String t;
         while (s < e)
         {
-            mcat = list.get(s++);
+            mcat = mcatList.get(s++);
             t = genKey(i++);
             buf.append(t).append(' ').append(mcat.getC2010206()).append('\n');
             mcatMaps.put(t, mcat);
@@ -66,29 +77,102 @@ public class McatMdl
         return buf.toString();
     }
 
+    @Override
     public String firstPage()
     {
-        return "";
+        curPage = 0;
+        return print();
     }
 
+    @Override
     public String prevPage()
     {
-        return "";
+        if (curPage <= 0)
+        {
+            return "";
+        }
+
+        curPage -= 1;
+        return print();
     }
 
+    @Override
     public String nextPage()
     {
-        return "";
+        if (curPage >= maxPage)
+        {
+            return "";
+        }
+
+        curPage += 1;
+        return print();
     }
 
+    @Override
     public String lastPage()
     {
-        return "";
+        curPage = maxPage;
+        return print();
+    }
+
+    public void listCat()
+    {
+        mcatList = DBA4000.listCatByHash(userMdl, mcatPath.get(curPath).getC2010203());
+    }
+
+    public String showPath()
+    {
+        StringBuilder buf = new StringBuilder();
+        for (int i = 0; i <= curPath; i += 1)
+        {
+            buf.append('/').append(mcatPath.get(i).getC2010206());
+        }
+        buf.append('\n');
+        return buf.toString();
+    }
+
+    public boolean changeCat(String cmd)
+    {
+        if (!Char.isValidate(cmd))
+        {
+            return false;
+        }
+        cmd = cmd.trim().toLowerCase();
+        if (".".equals(cmd))
+        {
+            return true;
+        }
+        if ("..".equals(cmd))
+        {
+            if (curPath > 0)
+            {
+                mcatPath.remove(curPath);
+                curPath -= 1;
+            }
+            return true;
+        }
+        if ("~".equals(cmd))
+        {
+            curPath = 0;
+            return true;
+        }
+        if (!java.util.regex.Pattern.matches("^\\d+$", cmd))
+        {
+            return false;
+        }
+        Mcat cat = mcatMaps.get(cmd);
+        if (cat == null)
+        {
+            return false;
+        }
+        mcatPath.add(cat);
+        curPath += 1;
+        return true;
     }
 
     public Mcat getCat()
     {
-        return mcatList.get(curIndex);
+        return mcatPath.get(curPath);
     }
 
     private String genKey(int i)

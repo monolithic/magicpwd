@@ -16,6 +16,7 @@
  */
 package com.magicpwd.v.cmd.mcmd;
 
+import com.magicpwd.__i.mcmd.IPageMdl;
 import com.magicpwd._comn.mpwd.Mcat;
 import com.magicpwd._comn.mpwd.MpwdHeader;
 import com.magicpwd._cons.ConsDat;
@@ -43,6 +44,7 @@ public class McmdPtn
     private McatMdl mcatMdl;
     private MkeyMdl mkeyMdl;
     private MattMdl mattMdl;
+    private IPageMdl pageMdl;
 
     public McmdPtn(MpwdMdl mpwdMdl)
     {
@@ -82,7 +84,7 @@ public class McmdPtn
         while (true)
         {
             cmd = readText();
-            if (cmd == null)
+            if (!Char.isValidate(cmd))
             {
                 continue;
             }
@@ -91,7 +93,7 @@ public class McmdPtn
             int idx = tmp.indexOf(sep);
             if (idx > 0)
             {
-                cmd = cmd.substring(idx);
+                cmd = cmd.substring(idx).trim();
                 tmp = tmp.substring(0, idx);
             }
 
@@ -107,48 +109,87 @@ public class McmdPtn
             }
             if (">".equals(tmp))
             {
-                nextPage();
+                if (pageMdl != null)
+                {
+                    Lang.showMesg(console, null, pageMdl.nextPage());
+                }
                 continue;
             }
             if (">>".equals(tmp))
             {
+                if (pageMdl != null)
+                {
+                    Lang.showMesg(console, null, pageMdl.lastPage());
+                }
                 continue;
             }
             if ("<".equals(tmp))
             {
-                prevPage();
+                if (pageMdl != null)
+                {
+                    Lang.showMesg(console, null, pageMdl.prevPage());
+                }
                 continue;
             }
             if ("<<".equals(tmp))
             {
+                if (pageMdl != null)
+                {
+                    Lang.showMesg(console, null, pageMdl.firstPage());
+                }
                 continue;
             }
             if ("cd".equals(tmp))
             {
+                if (mcatMdl.changeCat(cmd))
+                {
+                    Lang.showMesg(console, null, "目录已成功切换！\n", cmd);
+                }
+                else
+                {
+                    Lang.showMesg(console, null, "无效的页码参数 {0}！\n", cmd);
+                }
+                pageMdl = null;
+                mkeyMdl.clear();
+                mattMdl.clear();
                 continue;
             }
             if ("lc".equals(tmp))
             {
                 listCat("");
+                pageMdl = mcatMdl;
+                mattMdl.clear();
                 continue;
             }
             if ("lk".equals(tmp))
             {
                 listKey("");
+                pageMdl = mkeyMdl;
+                mattMdl.clear();
                 continue;
             }
             if ("pwd".equals(tmp))
             {
+                Lang.showMesg(console, null, mcatMdl.showPath());
+                pageMdl = null;
+                mcatMdl.clear();
+                mkeyMdl.clear();
+                mattMdl.clear();
                 continue;
             }
             if ("cat".equals(tmp))
             {
                 viewKeys(cmd);
+                pageMdl = mattMdl;
                 continue;
             }
             if ("help".equals(tmp))
             {
                 showHelp();
+                pageMdl = null;
+                mcatMdl.clear();
+                mkeyMdl.clear();
+                mattMdl.clear();
                 continue;
             }
             if ("exit".equals(tmp))
@@ -231,7 +272,8 @@ public class McmdPtn
 
     private void listCat(String cmd)
     {
-        Lang.showMesg(console, null, mcatMdl.listCat());
+        mcatMdl.listCat();
+        Lang.showMesg(console, null, mcatMdl.print());
     }
 
     private void listKey(String cmd)
@@ -241,7 +283,8 @@ public class McmdPtn
         {
             return;
         }
-        Lang.showMesg(console, null, mkeyMdl.listKey(cat.getC2010203()));
+        mkeyMdl.listKey(cat.getC2010203());
+        Lang.showMesg(console, null, mkeyMdl.print());
     }
 
     private void viewKeys(String cmd)
@@ -249,6 +292,7 @@ public class McmdPtn
         MpwdHeader header = mkeyMdl.getKey(cmd);
         if (header == null)
         {
+            Lang.showMesg(console, null, "无效的页码 {0}！\n", cmd);
             return;
         }
 
@@ -262,7 +306,7 @@ public class McmdPtn
             return;
         }
 
-        Lang.showMesg(console, null, mattMdl.display());
+        Lang.showMesg(console, null, mattMdl.print());
     }
 
     private void copyName(String cmd)
@@ -287,16 +331,6 @@ public class McmdPtn
         {
             Lang.showMesg(console, null, "复制数据到系统剪贴板异常！\n");
         }
-    }
-
-    private void nextPage()
-    {
-        mkeyMdl.nextPage();
-    }
-
-    private void prevPage()
-    {
-        mkeyMdl.prevPage();
     }
 
     private void showHelp()
@@ -363,7 +397,7 @@ public class McmdPtn
         {
             return console.readLine();
         }
-        return scanner.next();
+        return scanner.nextLine();
     }
 
     public String readText(String msg)

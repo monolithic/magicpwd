@@ -4,6 +4,7 @@
  */
 package com.magicpwd.m.mcmd;
 
+import com.magicpwd.__i.mcmd.IPageMdl;
 import com.magicpwd._comn.mpwd.MpwdHeader;
 import com.magicpwd._cons.mcmd.McmdEnv;
 import com.magicpwd._util.Char;
@@ -14,14 +15,14 @@ import com.magicpwd.m.UserMdl;
  *
  * @author Aven
  */
-public class MkeyMdl
+public class MkeyMdl implements IPageMdl
 {
     private UserMdl userMdl;
-    private java.util.List<MpwdHeader> mpwdList;
-    private java.util.Map<String, MpwdHeader> mpwdMaps;
     private int curPage;
     private int maxPage;
     private boolean allPage;
+    private java.util.List<MpwdHeader> mpwdList;
+    private java.util.Map<String, MpwdHeader> mpwdMaps;
 
     public MkeyMdl(UserMdl userMdl)
     {
@@ -34,7 +35,14 @@ public class MkeyMdl
         mpwdMaps = new java.util.HashMap<String, MpwdHeader>();
     }
 
-    public String listKey(String catHash)
+    @Override
+    public void clear()
+    {
+        mpwdList.clear();
+        mpwdMaps.clear();
+    }
+
+    public void listKey(String catHash)
     {
         mpwdList.clear();
         if (!Char.isValidate(catHash))
@@ -42,7 +50,11 @@ public class MkeyMdl
             catHash = "0";
         }
         DBA4000.listKeyHeaderByCat(userMdl, catHash, mpwdList);
+    }
 
+    @Override
+    public String print()
+    {
         int tmp = mpwdList.size();
         int s = curPage * McmdEnv.KEY_PAGE_SIZE;
         int e = s + McmdEnv.KEY_PAGE_SIZE;
@@ -65,24 +77,42 @@ public class MkeyMdl
         return buf.toString();
     }
 
+    @Override
     public String firstPage()
     {
-        return "";
+        curPage = 0;
+        return print();
     }
 
+    @Override
     public String prevPage()
     {
-        return "";
+        if (curPage <= 0)
+        {
+            return "";
+        }
+
+        curPage -= 1;
+        return print();
     }
 
+    @Override
     public String nextPage()
     {
-        return "";
+        if (curPage >= maxPage)
+        {
+            return "";
+        }
+
+        curPage += 1;
+        return print();
     }
 
+    @Override
     public String lastPage()
     {
-        return "";
+        curPage = maxPage;
+        return print();
     }
 
     public MpwdHeader getKey(String cmd)
