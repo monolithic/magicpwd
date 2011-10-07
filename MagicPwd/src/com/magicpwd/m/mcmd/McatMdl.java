@@ -21,7 +21,7 @@ public class McatMdl implements IPageMdl
     private UserMdl userMdl;
     private int curPage;
     private int maxPage;
-    private boolean allPage;
+    private boolean onePage;
     private java.util.List<Mcat> mcatList;
     private java.util.Map<String, Mcat> mcatMaps;
     private java.util.List<Mcat> mcatPath;
@@ -56,11 +56,21 @@ public class McatMdl implements IPageMdl
     public String print()
     {
         int tmp = mcatList.size();
-        int s = curPage * McmdEnv.CAT_PAGE_SIZE;
-        int e = s + McmdEnv.CAT_PAGE_SIZE;
-        if (e > tmp)
+        int s;
+        int e;
+        if (onePage)
         {
+            s = 0;
             e = tmp;
+        }
+        else
+        {
+            s = curPage * McmdEnv.CAT_PAGE_SIZE;
+            e = s + McmdEnv.CAT_PAGE_SIZE;
+            if (e > tmp)
+            {
+                e = tmp;
+            }
         }
 
         StringBuilder buf = new StringBuilder();
@@ -177,6 +187,22 @@ public class McatMdl implements IPageMdl
 
     private String genKey(int i)
     {
-        return (allPage ? "" + curPage : "") + i;
+        return (isOnePage() ? "" + curPage : "") + i;
+    }
+
+    /**
+     * @return the onePage
+     */
+    public boolean isOnePage()
+    {
+        return onePage;
+    }
+
+    /**
+     * @param onePage the onePage to set
+     */
+    public void setOnePage(boolean onePage)
+    {
+        this.onePage = onePage;
     }
 }

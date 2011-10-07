@@ -24,7 +24,7 @@ public class MattMdl extends SafeMdl implements IPageMdl
 {
     private int curPage;
     private int maxPage;
-    private boolean allPage;
+    private boolean onePage;
     private java.util.Map<String, IEditItem> itemMaps;
 
     public MattMdl(UserMdl userMdl)
@@ -63,19 +63,19 @@ public class MattMdl extends SafeMdl implements IPageMdl
     }
 
     /**
-     * @return the allPage
+     * @return the onePage
      */
-    public boolean isAllPage()
+    public boolean isOnePage()
     {
-        return allPage;
+        return onePage;
     }
 
     /**
-     * @param allPage the allPage to set
+     * @param onePage the onePage to set
      */
-    public void setAllPage(boolean allPage)
+    public void setOnePage(boolean onePage)
     {
-        this.allPage = allPage;
+        this.onePage = onePage;
     }
 
     public boolean copyName(String key)
@@ -115,20 +115,29 @@ public class MattMdl extends SafeMdl implements IPageMdl
     @Override
     public String print()
     {
-        StringBuilder buf = new StringBuilder();
-
         int tmp = itemList.size();
-        int s = curPage * McmdEnv.ATT_PAGE_SIZE;
-        int e = s + McmdEnv.ATT_PAGE_SIZE;
-        if (e > tmp)
+        int s;
+        int e;
+        if (onePage)
         {
+            s = 0;
             e = tmp;
+        }
+        else
+        {
+            s = curPage * McmdEnv.ATT_PAGE_SIZE;
+            e = s + McmdEnv.ATT_PAGE_SIZE;
+            if (e > tmp)
+            {
+                e = tmp;
+            }
         }
 
         char c = 'a';
         itemMaps.clear();
         IEditItem item;
 
+        StringBuilder buf = new StringBuilder();
         if (curPage == 0)
         {
             item = itemList.get(s++);
@@ -209,6 +218,6 @@ public class MattMdl extends SafeMdl implements IPageMdl
 
     private String genKey(char c)
     {
-        return (allPage ? "" + curPage : "") + c;
+        return (onePage ? "" + curPage : "") + c;
     }
 }

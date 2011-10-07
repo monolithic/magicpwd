@@ -156,14 +156,14 @@ public class McmdPtn
             }
             if ("lc".equals(tmp))
             {
-                listCat("");
+                listCat(cmd);
                 pageMdl = mcatMdl;
                 mattMdl.clear();
                 continue;
             }
             if ("lk".equals(tmp))
             {
-                listKey("");
+                listKey(cmd);
                 pageMdl = mkeyMdl;
                 mattMdl.clear();
                 continue;
@@ -272,6 +272,7 @@ public class McmdPtn
 
     private void listCat(String cmd)
     {
+        mcatMdl.setOnePage("all".equalsIgnoreCase(cmd));
         mcatMdl.listCat();
         Lang.showMesg(console, null, mcatMdl.print());
     }
@@ -283,6 +284,7 @@ public class McmdPtn
         {
             return;
         }
+        mkeyMdl.setOnePage("all".equalsIgnoreCase(cmd));
         mkeyMdl.listKey(cat.getC2010203());
         Lang.showMesg(console, null, mkeyMdl.print());
     }
@@ -306,6 +308,7 @@ public class McmdPtn
             return;
         }
 
+        mattMdl.setOnePage("all".equalsIgnoreCase(cmd));
         Lang.showMesg(console, null, mattMdl.print());
     }
 
@@ -337,17 +340,23 @@ public class McmdPtn
     {
         StringBuilder buf = new StringBuilder();
         buf.append("使用说明：\n");
-        buf.append("cd 数字\t- 切换目录\n");
-        buf.append("lc \t- 查看当前目录下数据信息\n");
-        buf.append("lk \t- 查看当前目录下数据信息\n");
-        buf.append("cat \t- 查看指定记录的口令\n");
-        buf.append("pwd \t- 查看当前所处目录路径\n");
-        buf.append("& 数字 \t- 复制当前属性的值到剪贴板\n");
-        buf.append("@ 数字 \t- 复制当前属性的键到剪贴板\n");
-        buf.append("<< \t- 转到首屏\n");
-        buf.append("< \t- 转到上一屏\n");
-        buf.append("> \t- 转到下一屏\n");
-        buf.append(">> \t- 转到未屏\n");
+        buf.append("cd\t\t切换分类\n");
+        buf.append("\t..\t上级分类\n");
+        buf.append("\t~\t根分类\n");
+        buf.append("\t数字\t指定页码的分类\n");
+        buf.append("lc\t\t分页方式查看当前分类下数据信息\n");
+        buf.append("\tall\t不分页方式查看当前分类下数据信息\n");
+        buf.append("lk\t\t分页方式查看当前分类下数据信息\n");
+        buf.append("\tall\t不分页方式查看当前分类下数据信息\n");
+        buf.append("cat\t\t分页方式查看指定记录的口令\n");
+        buf.append("\tall\t不分页方式查看指定记录的口令\n");
+        buf.append("pwd\t\t查看当前所处分类路径信息\n");
+        buf.append("&\t数字\t复制当前属性的值到剪贴板\n");
+        buf.append("@\t数字\t复制当前属性的键到剪贴板\n");
+        buf.append("<<\t\t转到首屏\n");
+        buf.append("<\t\t转到上一屏\n");
+        buf.append(">\t\t转到下一屏\n");
+        buf.append(">>\t\t转到未屏\n");
 
         Lang.showMesg(console, null, buf.toString());
     }
