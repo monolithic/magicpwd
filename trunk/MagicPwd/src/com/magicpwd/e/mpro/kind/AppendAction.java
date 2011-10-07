@@ -18,7 +18,7 @@ package com.magicpwd.e.mpro.kind;
 
 import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd.__i.IBackCall;
-import com.magicpwd._comn.prop.Kind;
+import com.magicpwd._comn.mpwd.Mcat;
 import com.magicpwd.r.KindTN;
 import com.magicpwd.v.app.mpro.KindDlg;
 
@@ -26,7 +26,7 @@ import com.magicpwd.v.app.mpro.KindDlg;
  *
  * @author Amon
  */
-public class AppendAction extends AMproAction implements IBackCall<String, Kind>
+public class AppendAction extends AMproAction implements IBackCall<String, Mcat>
 {
 
     public AppendAction()
@@ -66,7 +66,7 @@ public class AppendAction extends AMproAction implements IBackCall<String, Kind>
     }
 
     @Override
-    public boolean callBack(String options, Kind object)
+    public boolean callBack(String options, Mcat object)
     {
         if (OPTIONS_APPLY.equalsIgnoreCase(options))
         {

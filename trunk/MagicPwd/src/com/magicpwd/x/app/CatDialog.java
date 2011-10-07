@@ -18,7 +18,7 @@ package com.magicpwd.x.app;
 
 import com.magicpwd.__a.ADialog;
 import com.magicpwd.__i.IBackCall;
-import com.magicpwd._comn.prop.Kind;
+import com.magicpwd._comn.mpwd.Mcat;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
@@ -139,7 +139,7 @@ public class CatDialog extends ADialog
         if (obj instanceof KindTN)
         {
             KindTN item = (KindTN) obj;
-            Kind kind = (Kind) item.getUserObject();
+            Mcat kind = (Mcat) item.getUserObject();
             backCall.callBack(IBackCall.OPTIONS_APPLY, kind.getC2010203());
         }
         this.setVisible(false);

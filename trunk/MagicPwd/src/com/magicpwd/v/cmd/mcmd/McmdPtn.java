@@ -16,6 +16,7 @@
  */
 package com.magicpwd.v.cmd.mcmd;
 
+import com.magicpwd._comn.mpwd.Mcat;
 import com.magicpwd._comn.mpwd.MpwdHeader;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._util.Char;
@@ -27,6 +28,8 @@ import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.d.db.DBAccess;
 import com.magicpwd.m.MpwdMdl;
 import com.magicpwd.m.UserMdl;
+import com.magicpwd.m.mcmd.MattMdl;
+import com.magicpwd.m.mcmd.McatMdl;
 import com.magicpwd.m.mcmd.MkeyMdl;
 
 /**
@@ -37,7 +40,9 @@ public class McmdPtn
 {
     private MpwdMdl mpwdMdl;
     private UserMdl userMdl;
-    private MkeyMdl mcmdMdl;
+    private McatMdl mcatMdl;
+    private MkeyMdl mkeyMdl;
+    private MattMdl mattMdl;
 
     public McmdPtn(MpwdMdl mpwdMdl)
     {
@@ -59,14 +64,17 @@ public class McmdPtn
             return;
         }
 
-        Lang.showMesg(console, null, "用户登录成功！\n");
-
         Lang.loadLang(mpwdMdl.getAppLang());
+        Lang.showMesg(console, null, "用户登录成功！\n");
 
         showHelp();
 
-        mcmdMdl = new MkeyMdl(userMdl);
-        mcmdMdl.init();
+        mcatMdl = new McatMdl(userMdl);
+        mcatMdl.init();
+        mkeyMdl = new MkeyMdl(userMdl);
+        mkeyMdl.init();
+        mattMdl = new MattMdl(userMdl);
+        mattMdl.init();
 
         String cmd;
         String tmp;
@@ -115,9 +123,18 @@ public class McmdPtn
             {
                 continue;
             }
-            if ("ls".equals(tmp))
+            if ("cd".equals(tmp))
             {
-                listKeys("");
+                continue;
+            }
+            if ("lc".equals(tmp))
+            {
+                listCat("");
+                continue;
+            }
+            if ("lk".equals(tmp))
+            {
+                listKey("");
                 continue;
             }
             if ("pwd".equals(tmp))
@@ -212,17 +229,32 @@ public class McmdPtn
         return false;
     }
 
-    private void listKeys(String cmd)
+    private void listCat(String cmd)
     {
+        Lang.showMesg(console, null, mcatMdl.listCat());
+    }
+
+    private void listKey(String cmd)
+    {
+        Mcat cat = mcatMdl.getCat();
+        if (cat == null)
+        {
+            return;
+        }
+        Lang.showMesg(console, null, mkeyMdl.listKey(cat.getC2010203()));
     }
 
     private void viewKeys(String cmd)
     {
-        MpwdHeader header = null;
+        MpwdHeader header = mkeyMdl.getKey(cmd);
+        if (header == null)
+        {
+            return;
+        }
 
         try
         {
-            mcmdMdl.loadData(header.getP30F0104());
+            mattMdl.loadData(header.getP30F0104());
         }
         catch (Exception exp)
         {
@@ -230,12 +262,12 @@ public class McmdPtn
             return;
         }
 
-        Lang.showMesg(console, null, mcmdMdl.display());
+        Lang.showMesg(console, null, mattMdl.display());
     }
 
     private void copyName(String cmd)
     {
-        if (mcmdMdl.copyName(cmd))
+        if (mattMdl.copyName(cmd))
         {
             Lang.showMesg(console, null, "数据已复制到系统剪贴板！\n");
         }
@@ -247,7 +279,7 @@ public class McmdPtn
 
     private void copyData(String cmd)
     {
-        if (mcmdMdl.copyData(cmd))
+        if (mattMdl.copyData(cmd))
         {
             Lang.showMesg(console, null, "数据已复制到系统剪贴板！\n");
         }
@@ -259,12 +291,12 @@ public class McmdPtn
 
     private void nextPage()
     {
-        mcmdMdl.nextPage();
+        mkeyMdl.nextPage();
     }
 
     private void prevPage()
     {
-        mcmdMdl.prevPage();
+        mkeyMdl.prevPage();
     }
 
     private void showHelp()
@@ -272,9 +304,10 @@ public class McmdPtn
         StringBuilder buf = new StringBuilder();
         buf.append("使用说明：\n");
         buf.append("cd 数字\t- 切换目录\n");
-        buf.append("ls \t- 查看当前目录下数据信息\n");
-        buf.append("pwd \t- 查看当前所处目录路径\n");
+        buf.append("lc \t- 查看当前目录下数据信息\n");
+        buf.append("lk \t- 查看当前目录下数据信息\n");
         buf.append("cat \t- 查看指定记录的口令\n");
+        buf.append("pwd \t- 查看当前所处目录路径\n");
         buf.append("& 数字 \t- 复制当前属性的值到剪贴板\n");
         buf.append("@ 数字 \t- 复制当前属性的键到剪贴板\n");
         buf.append("<< \t- 转到首屏\n");

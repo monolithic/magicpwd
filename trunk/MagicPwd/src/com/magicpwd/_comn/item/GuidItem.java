@@ -81,16 +81,16 @@ public class GuidItem extends AEditItem
     @Override
     public final void setDefault()
     {
-        if (spec == null)
+        if (ext == null)
         {
-            this.spec = new java.util.ArrayList<String>(2);
+            this.ext = new java.util.ArrayList<String>(2);
         }
         else
         {
-            spec.clear();
+            ext.clear();
         }
 
-        spec.add(SPEC_VALUE_NONE);
-        spec.add(SPEC_VALUE_NONE);
+        ext.add(SPEC_VALUE_NONE);
+        ext.add(SPEC_VALUE_NONE);
     }
 }

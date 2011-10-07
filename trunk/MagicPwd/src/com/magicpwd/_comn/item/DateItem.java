@@ -82,15 +82,15 @@ public class DateItem extends AEditItem
     @Override
     public final void setDefault()
     {
-        if (spec == null)
+        if (ext == null)
         {
-            this.spec = new java.util.ArrayList<String>(1);
+            this.ext = new java.util.ArrayList<String>(1);
         }
         else
         {
-            spec.clear();
+            ext.clear();
         }
 
-        spec.add(SPEC_VALUE_NONE);
+        ext.add(SPEC_VALUE_NONE);
     }
 }

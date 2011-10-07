@@ -19,7 +19,7 @@ package com.magicpwd.d.db;
 import com.magicpwd.MagicPwd;
 import com.magicpwd.__i.IEditItem;
 import com.magicpwd._comn.mpwd.MpwdHeader;
-import com.magicpwd._comn.prop.Kind;
+import com.magicpwd._comn.mpwd.Mcat;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._comn.S1S3;
 import com.magicpwd.__a.AEditItem;
@@ -297,7 +297,7 @@ public class DBA4000
      * @param list
      * @return
      */
-    public static boolean listRecHeaderByCat(UserMdl userMdl, String kindHash, List<MpwdHeader> list)
+    public static boolean listKeyHeaderByCat(UserMdl userMdl, String kindHash, List<MpwdHeader> list)
     {
         // 数据库连接初始化
         DBAccess dba = new DBAccess();
@@ -1505,7 +1505,7 @@ public class DBA4000
     {
     }
 
-    public static boolean deleteKindData(UserMdl userMdl, String root, Kind item, int step)
+    public static boolean deleteKindData(UserMdl userMdl, String root, Mcat item, int step)
     {
         DBAccess dba = new DBAccess();
 
@@ -1539,7 +1539,7 @@ public class DBA4000
         }
     }
 
-    public static boolean updateKindData(UserMdl userMdl, Kind item)
+    public static boolean updateKindData(UserMdl userMdl, Mcat item)
     {
         DBAccess dba = new DBAccess();
 
@@ -1622,9 +1622,9 @@ public class DBA4000
         return list;
     }
 
-    public static List<Kind> selectKindData(UserMdl userMdl, String typeHash)
+    public static List<Mcat> listCatByHash(UserMdl userMdl, String catHash)
     {
-        List<Kind> list = new ArrayList<Kind>();
+        List<Mcat> list = new ArrayList<Mcat>();
 
         DBAccess dba = new DBAccess();
 
@@ -1641,14 +1641,14 @@ public class DBA4000
             dba.addColumn(DBC4000.C2010206);// 类别提示
             dba.addColumn(DBC4000.C2010208);
             dba.addColumn(DBC4000.C2010209);// 类别提示
-            dba.addWhere(DBC4000.C2010204, typeHash);
+            dba.addWhere(DBC4000.C2010204, catHash);
             dba.addSort(DBC4000.C2010201, true);
 
             ResultSet rest = dba.executeSelect();
-            Kind item;
+            Mcat item;
             while (rest.next())
             {
-                item = new Kind();
+                item = new Mcat();
                 item.setC2010201(rest.getInt(DBC4000.C2010201));
                 item.setC2010202(rest.getInt(DBC4000.C2010202));
                 item.setC2010203(rest.getString(DBC4000.C2010203));

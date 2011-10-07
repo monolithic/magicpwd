@@ -154,7 +154,7 @@ public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, ja
     {
         ls_KeysList.size();
         ls_KeysList.clear();
-        boolean b = DBA4000.listRecHeaderByCat(userMdl, kindHash, ls_KeysList);
+        boolean b = DBA4000.listKeyHeaderByCat(userMdl, kindHash, ls_KeysList);
         int s = ls_KeysList.size();
         fireTableDataChanged();
         return b & (s > 0);

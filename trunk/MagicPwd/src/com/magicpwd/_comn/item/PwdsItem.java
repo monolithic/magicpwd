@@ -46,7 +46,7 @@ public class PwdsItem extends AEditItem
             return false;
         }
         builder.append(doEscape(getName())).append(',').append(doEscape(getData()));
-        for (String tmp : spec)
+        for (String tmp : ext)
         {
             builder.append(',').append(tmp);
         }
@@ -76,10 +76,10 @@ public class PwdsItem extends AEditItem
         setName(unEscape(list.get(0).replace("\f", "\\,")));
         setData(unEscape(list.get(1).replace("\f", "\\,")));
 
-        spec.clear();
+        ext.clear();
         for (int i = 2, j = list.size(); i < j; i += 1)
         {
-            spec.add(list.get(i));
+            ext.add(list.get(i));
         }
         return true;
     }
@@ -93,17 +93,17 @@ public class PwdsItem extends AEditItem
     @Override
     public final void setDefault()
     {
-        if (spec == null)
+        if (ext == null)
         {
-            this.spec = new java.util.ArrayList<String>(3);
+            this.ext = new java.util.ArrayList<String>(3);
         }
         else
         {
-            spec.clear();
+            ext.clear();
         }
 
-        spec.add(userCfg.getPwdsKey());
-        spec.add(userCfg.getPwdsLen());
-        spec.add(userCfg.getPwdsLoop());
+        ext.add(userCfg.getPwdsKey());
+        ext.add(userCfg.getPwdsLen());
+        ext.add(userCfg.getPwdsLoop());
     }
 }

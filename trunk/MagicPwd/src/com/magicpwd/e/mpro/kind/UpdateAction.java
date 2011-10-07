@@ -18,7 +18,7 @@ package com.magicpwd.e.mpro.kind;
 
 import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd.__i.IBackCall;
-import com.magicpwd._comn.prop.Kind;
+import com.magicpwd._comn.mpwd.Mcat;
 import com.magicpwd._util.Lang;
 import com.magicpwd.r.KindTN;
 import com.magicpwd.v.app.mpro.KindDlg;
@@ -27,7 +27,7 @@ import com.magicpwd.v.app.mpro.KindDlg;
  *
  * @author Amon
  */
-public class UpdateAction extends AMproAction implements IBackCall<String, Kind>
+public class UpdateAction extends AMproAction implements IBackCall<String, Mcat>
 {
 
     public UpdateAction()
@@ -55,7 +55,7 @@ public class UpdateAction extends AMproAction implements IBackCall<String, Kind>
             return;
         }
 
-        Kind kind = (Kind) node.getUserObject();
+        Mcat kind = (Mcat) node.getUserObject();
         if ("0".equals(kind.getC2010203()))
         {
             Lang.showMesg(mproPtn, null, "无法更新默认类别！");
@@ -80,7 +80,7 @@ public class UpdateAction extends AMproAction implements IBackCall<String, Kind>
     }
 
     @Override
-    public boolean callBack(String options, Kind object)
+    public boolean callBack(String options, Mcat object)
     {
         if (OPTIONS_APPLY.equalsIgnoreCase(options))
         {

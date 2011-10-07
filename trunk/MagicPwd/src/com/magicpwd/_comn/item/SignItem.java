@@ -45,7 +45,7 @@ public class SignItem extends AEditItem
             return false;
         }
         builder.append(doEscape(getName())).append(',').append(doEscape(getData()));
-        for (String tmp : spec)
+        for (String tmp : ext)
         {
             builder.append(',').append(tmp);
         }
@@ -75,10 +75,10 @@ public class SignItem extends AEditItem
         setName(unEscape(list.get(0).replace("\f", "\\,")));
         setData(unEscape(list.get(1).replace("\f", "\\,")));
 
-        spec.clear();
+        ext.clear();
         for (int i = 2, j = list.size(); i < j; i += 1)
         {
-            spec.add(list.get(i));
+            ext.add(list.get(i));
         }
         return true;
     }
@@ -92,16 +92,16 @@ public class SignItem extends AEditItem
     @Override
     public final void setDefault()
     {
-        if (spec == null)
+        if (ext == null)
         {
-            this.spec = new java.util.ArrayList<String>(2);
+            this.ext = new java.util.ArrayList<String>(2);
         }
         else
         {
-            spec.clear();
+            ext.clear();
         }
 
-        spec.add("def");
-        spec.add("P30F7E02");
+        ext.add("def");
+        ext.add("P30F7E02");
     }
 }

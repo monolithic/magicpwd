@@ -35,7 +35,7 @@ public class Logs
 
     public static void log(String log)
     {
-        if (MpwdMdl.getRunMode() == RunMode.dev)
+        if (MpwdMdl.getRunMode() == RunMode.cmd)
         {
             System.out.println(log);
         }

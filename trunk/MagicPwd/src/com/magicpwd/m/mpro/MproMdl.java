@@ -16,7 +16,7 @@
  */
 package com.magicpwd.m.mpro;
 
-import com.magicpwd._comn.prop.Kind;
+import com.magicpwd._comn.mpwd.Mcat;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.r.KindTN;
@@ -43,7 +43,7 @@ public final class MproMdl
         listMdl = new ListMdl(userMdl);
         listMdl.init();
 
-        Kind kind = new Kind();
+        Mcat kind = new Mcat();
         kind.setC2010203(ConsDat.HASH_ROOT);
         kind.setC2010106("魔方密码");
         kind.setC2010207("魔方密码");

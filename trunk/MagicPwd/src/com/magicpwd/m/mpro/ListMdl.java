@@ -128,21 +128,21 @@ public class ListMdl extends DefaultListModel
         fireIntervalAdded(this, 0, c);
     }
 
-    public boolean listKeysByKind(String typeHash)
+    public boolean listKeyByCat(String typeHash)
     {
         userMdl.clearDataIcon();
 
         int s = mkeyList.size();
         mkeyList.clear();
         fireIntervalRemoved(this, 0, s);
-        boolean b = DBA4000.listRecHeaderByCat(userMdl, typeHash, mkeyList);
+        boolean b = DBA4000.listKeyHeaderByCat(userMdl, typeHash, mkeyList);
         s = mkeyList.size();
         b &= s > 0;
         fireIntervalAdded(this, 0, s);
         return b;
     }
 
-    public boolean listKeysByMeta(String keysMeta)
+    public boolean listKeyByMeta(String keysMeta)
     {
         userMdl.clearDataIcon();
 

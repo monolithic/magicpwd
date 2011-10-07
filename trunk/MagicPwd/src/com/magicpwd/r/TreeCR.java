@@ -16,7 +16,7 @@
  */
 package com.magicpwd.r;
 
-import com.magicpwd._comn.prop.Kind;
+import com.magicpwd._comn.mpwd.Mcat;
 import com.magicpwd._comn.*;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._util.Bean;
@@ -54,7 +54,7 @@ public class TreeCR extends DefaultTreeCellRenderer
         if (value instanceof KindTN)
         {
             value = ((KindTN) value).getUserObject();
-            Kind kind = (Kind) value;
+            Mcat kind = (Mcat) value;
             String icon = kind.getC2010208();
             if (Char.isValidateHash(icon))
             {

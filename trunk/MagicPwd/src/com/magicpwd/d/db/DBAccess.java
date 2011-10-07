@@ -35,7 +35,6 @@ import com.magicpwd.m.UserMdl;
  */
 public class DBAccess
 {
-
     public static boolean locked = false;
     private static String dbPath;
 
@@ -85,6 +84,8 @@ public class DBAccess
 
     public void reInit()
     {
+        limit = null;
+
         this.paramList.clear();
         this.signList.clear();
         this.valueList.clear();
@@ -509,6 +510,11 @@ public class DBAccess
         }
     }
 
+    public void addLimit(int begin, int offset)
+    {
+        limit = "limit " + begin + ' ' + offset;
+    }
+
     /**
      * 
      * @param sql
@@ -785,6 +791,10 @@ public class DBAccess
 
         // 查寻字段拼接
         sqlBuf.append("SELECT ");
+        if (limit != null)
+        {
+            sqlBuf.append(' ').append(limit).append(' ');
+        }
         if (columList.length() > 0)
         {
             sqlBuf.append(columList.substring(2));
@@ -939,4 +949,5 @@ public class DBAccess
     private StringBuffer whereList;
     /** 数据库查寻时的排序依据（列表（以逗号“,”分隔符区分）） */
     private StringBuffer orderList;
+    private String limit;
 }

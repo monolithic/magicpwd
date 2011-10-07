@@ -4,7 +4,9 @@
  */
 package com.magicpwd.m.mcmd;
 
-import com.magicpwd._comn.mpwd.MpwdHeader;
+import com.magicpwd._comn.mpwd.Mcat;
+import com.magicpwd._cons.ConsDat;
+import com.magicpwd._cons.mcmd.McmdEnv;
 import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.m.UserMdl;
 
@@ -15,8 +17,9 @@ import com.magicpwd.m.UserMdl;
 public class McatMdl
 {
     private UserMdl userMdl;
-    private java.util.List<MpwdHeader> mpwdList;
-    private java.util.Map<String, MpwdHeader> mpwdMaps;
+    private java.util.List<Mcat> mcatList;
+    private int curIndex;
+    private java.util.Map<String, Mcat> mcatMaps;
     private int curPage;
     private boolean allPage;
 
@@ -27,48 +30,69 @@ public class McatMdl
 
     public void init()
     {
-        mpwdList = new java.util.ArrayList<MpwdHeader>();
-        mpwdMaps = new java.util.HashMap<String, MpwdHeader>();
+        mcatList = new java.util.ArrayList<Mcat>(5);
+        mcatMaps = new java.util.HashMap<String, Mcat>();
+
+        Mcat mcat = new Mcat();
+        mcat.setC2010203(ConsDat.HASH_ROOT);
+        mcat.setC2010106("魔方密码");
+        mcat.setC2010207("魔方密码");
+        mcatList.add(mcat);
     }
 
-    private void listKeys(String hash)
+    public String listCat()
     {
-        mpwdList.clear();
-        DBA4000.listRecHeaderByCat(userMdl, hash, mpwdList);
+        java.util.List<Mcat> list = DBA4000.listCatByHash(userMdl, mcatList.get(curIndex).getC2010203());
 
-        int cnt = mpwdList.size();
-        if (cnt > 26)
+        int tmp = list.size();
+        int s = curPage * McmdEnv.CAT_PAGE_SIZE;
+        int e = s + McmdEnv.CAT_PAGE_SIZE;
+        if (e > tmp)
         {
-            cnt = 26;
+            e = tmp;
         }
 
-        char c = 'a';
-        String t;
-        MpwdHeader header;
         StringBuilder buf = new StringBuilder();
-        for (int i = 0; i < cnt; i += 1)
+        int i = 0;
+        Mcat mcat;
+        String t;
+        while (s < e)
         {
-            header = mpwdList.get(i);
-            t = genKey(c++);
-            mpwdMaps.put(t, header);
-            buf.append(t).append(' ').append(header.getP30F0109()).append('\n');
+            mcat = list.get(s++);
+            t = genKey(i++);
+            buf.append(t).append(' ').append(mcat.getC2010206()).append('\n');
+            mcatMaps.put(t, mcat);
         }
-        //Lang.showMesg(console, null, buf.toString());
+        return buf.toString();
     }
 
-    public MpwdHeader viewKeys(String cmd)
+    public String firstPage()
     {
-        cmd = cmd.trim().toLowerCase();
-        if (!java.util.regex.Pattern.matches("^\\d*[a-z]$", cmd))
-        {
-            return null;
-        }
-
-        return mpwdMaps.get(cmd);
+        return "";
     }
 
-    private String genKey(char c)
+    public String prevPage()
     {
-        return (allPage ? "" + curPage : "") + c;
+        return "";
+    }
+
+    public String nextPage()
+    {
+        return "";
+    }
+
+    public String lastPage()
+    {
+        return "";
+    }
+
+    public Mcat getCat()
+    {
+        return mcatList.get(curIndex);
+    }
+
+    private String genKey(int i)
+    {
+        return (allPage ? "" + curPage : "") + i;
     }
 }
