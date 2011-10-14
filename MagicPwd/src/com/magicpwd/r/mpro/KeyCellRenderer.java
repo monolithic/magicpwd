@@ -14,7 +14,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.r;
+package com.magicpwd.r.mpro;
 
 import com.magicpwd._comn.mpwd.MpwdHeader;
 import com.magicpwd._util.Bean;
@@ -25,13 +25,13 @@ import com.magicpwd.v.app.mpro.MproPtn;
  *
  * @author Amon
  */
-public class KeysCR extends javax.swing.JPanel implements javax.swing.ListCellRenderer
+public class KeyCellRenderer extends javax.swing.JPanel implements javax.swing.ListCellRenderer
 {
 
     private MproPtn mproPtn;
     private int style;
 
-    public KeysCR(MproPtn mproPtn)
+    public KeyCellRenderer(MproPtn mproPtn)
     {
         this.mproPtn = mproPtn;
 

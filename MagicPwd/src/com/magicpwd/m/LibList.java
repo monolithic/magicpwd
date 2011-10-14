@@ -16,21 +16,21 @@
  */
 package com.magicpwd.m;
 
-import com.magicpwd._comn.prop.Tplt;
+import com.magicpwd._comn.prop.Mlib;
 import com.magicpwd.d.db.DBA4000;
 
 /**
  * 魔方密码：口令模板下拉列表模型
  * @author Amon
  */
-public class TpltMdl extends javax.swing.AbstractListModel implements javax.swing.MutableComboBoxModel, java.io.Serializable
+public class LibList extends javax.swing.AbstractListModel implements javax.swing.MutableComboBoxModel, java.io.Serializable
 {
 
-    private java.util.List<Tplt> itemList;
+    private java.util.List<Mlib> itemList;
     private Object selectedObject;
     private UserMdl userMdl;
 
-    TpltMdl(UserMdl userMdl)
+    LibList(UserMdl userMdl)
     {
         this.userMdl = userMdl;
     }
@@ -63,7 +63,7 @@ public class TpltMdl extends javax.swing.AbstractListModel implements javax.swin
     }
 
     @Override
-    public Tplt getElementAt(int index)
+    public Mlib getElementAt(int index)
     {
         if (index >= 0 && index < itemList.size())
         {
@@ -78,9 +78,9 @@ public class TpltMdl extends javax.swing.AbstractListModel implements javax.swin
     @Override
     public void addElement(Object anObject)
     {
-        if (anObject instanceof Tplt)
+        if (anObject instanceof Mlib)
         {
-            itemList.add((Tplt) anObject);
+            itemList.add((Mlib) anObject);
             fireIntervalAdded(this, itemList.size() - 1, itemList.size() - 1);
             if (itemList.size() == 1 && selectedObject == null && anObject != null)
             {
@@ -92,9 +92,9 @@ public class TpltMdl extends javax.swing.AbstractListModel implements javax.swin
     @Override
     public void insertElementAt(Object anObject, int index)
     {
-        if (anObject instanceof Tplt)
+        if (anObject instanceof Mlib)
         {
-            itemList.add(index, (Tplt) anObject);
+            itemList.add(index, (Mlib) anObject);
             fireIntervalAdded(this, index, index);
         }
     }
@@ -146,7 +146,7 @@ public class TpltMdl extends javax.swing.AbstractListModel implements javax.swin
         selectedObject = null;
     }
 
-    public java.util.List<Tplt> getAllItems()
+    public java.util.List<Mlib> getAllItems()
     {
         return itemList;
     }
@@ -155,7 +155,7 @@ public class TpltMdl extends javax.swing.AbstractListModel implements javax.swin
     {
     }
 
-    public void wAppend(Tplt item)
+    public void wAppend(Mlib item)
     {
         itemList.add(item);
         fireIntervalAdded(this, itemList.size() - 1, itemList.size() - 1);

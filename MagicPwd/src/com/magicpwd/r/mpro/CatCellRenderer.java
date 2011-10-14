@@ -14,8 +14,9 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.r;
+package com.magicpwd.r.mpro;
 
+import com.magicpwd.r.mpro.CatNode;
 import com.magicpwd._comn.mpwd.Mcat;
 import com.magicpwd._comn.*;
 import com.magicpwd._cons.ConsEnv;
@@ -30,12 +31,12 @@ import javax.swing.tree.DefaultTreeCellRenderer;
  * @author Amon
  * 
  */
-public class TreeCR extends DefaultTreeCellRenderer
+public class CatCellRenderer extends DefaultTreeCellRenderer
 {
 
     private java.util.HashMap<String, javax.swing.ImageIcon> iconMap;
 
-    public TreeCR()
+    public CatCellRenderer()
     {
         iconMap = new java.util.HashMap<String, javax.swing.ImageIcon>();
     }
@@ -51,9 +52,9 @@ public class TreeCR extends DefaultTreeCellRenderer
     {
         super.getTreeCellRendererComponent(tree, null, isSelected, expanded, leaf, row, hasFocus);
 
-        if (value instanceof KindTN)
+        if (value instanceof CatNode)
         {
-            value = ((KindTN) value).getUserObject();
+            value = ((CatNode) value).getUserObject();
             Mcat kind = (Mcat) value;
             String icon = kind.getC2010208();
             if (Char.isValidateHash(icon))

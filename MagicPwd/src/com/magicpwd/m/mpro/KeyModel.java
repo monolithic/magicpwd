@@ -29,13 +29,13 @@ import com.magicpwd.m.UserMdl;
  * @author Amon
  * 
  */
-public class ListMdl extends DefaultListModel
+public class KeyModel extends DefaultListModel
 {
 
     private java.util.List<MpwdHeader> mkeyList;
     private UserMdl userMdl;
 
-    ListMdl(UserMdl userMdl)
+    KeyModel(UserMdl userMdl)
     {
         this.userMdl = userMdl;
     }

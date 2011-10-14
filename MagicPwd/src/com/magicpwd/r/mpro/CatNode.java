@@ -14,7 +14,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.magicpwd.r;
+package com.magicpwd.r.mpro;
 
 import com.magicpwd._comn.mpwd.Mcat;
 import java.util.List;
@@ -28,7 +28,7 @@ import com.magicpwd.m.UserMdl;
  * @author Amon
  * 
  */
-public class KindTN extends DefaultMutableTreeNode
+public class CatNode extends DefaultMutableTreeNode
 {
 
     private UserMdl userMdl;
@@ -36,7 +36,7 @@ public class KindTN extends DefaultMutableTreeNode
     /**
      * @param kvItem
      */
-    public KindTN(UserMdl userMdl, Mcat kvItem)
+    public CatNode(UserMdl userMdl, Mcat kvItem)
     {
         super(kvItem);
         this.userMdl = userMdl;
@@ -81,7 +81,7 @@ public class KindTN extends DefaultMutableTreeNode
             {
                 for (int i = 0, j = list.size(); i < j; i += 1)
                 {
-                    insert(new KindTN(userMdl, list.get(i)), i);
+                    insert(new CatNode(userMdl, list.get(i)), i);
                 }
             }
         }
