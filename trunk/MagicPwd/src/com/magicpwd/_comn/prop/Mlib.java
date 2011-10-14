@@ -20,7 +20,7 @@ package com.magicpwd._comn.prop;
  * 属性：模板
  * @author Amon
  */
-public class Tplt
+public class Mlib
 {
 
     private boolean tpltType;
@@ -39,11 +39,11 @@ public class Tplt
     /**属性说明*/
     private String P30F1107;
 
-    public Tplt()
+    public Mlib()
     {
     }
 
-    public Tplt(boolean isType)
+    public Mlib(boolean isType)
     {
         this.tpltType = isType;
     }

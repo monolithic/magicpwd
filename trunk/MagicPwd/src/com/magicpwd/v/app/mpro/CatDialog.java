@@ -27,14 +27,14 @@ import com.magicpwd._util.Lang;
  *
  * @author Amon
  */
-public class KindDlg extends ADialog
+public class CatDialog extends ADialog
 {
 
     private MproPtn mproPtn;
     private IBackCall<String, Mcat> backCall;
     private Mcat kind;
 
-    public KindDlg(MproPtn mproPtn, IBackCall<String, Mcat> backCall)
+    public CatDialog(MproPtn mproPtn, IBackCall<String, Mcat> backCall)
     {
         super(mproPtn, true);
         this.mproPtn = mproPtn;

@@ -19,13 +19,13 @@ package com.magicpwd.x.app.mpro;
 import com.magicpwd.__a.ADialog;
 import com.magicpwd._comn.I1S1;
 import com.magicpwd._comn.I1S2;
-import com.magicpwd._comn.prop.Tplt;
+import com.magicpwd._comn.prop.Mlib;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd.d.db.DBA4000;
-import com.magicpwd.r.TreeCR;
+import com.magicpwd.r.mpro.CatCellRenderer;
 import com.magicpwd.v.app.mpro.MproPtn;
 import java.awt.event.MouseEvent;
 
@@ -39,18 +39,18 @@ import java.awt.event.MouseEvent;
  * CopyRight  : Winshine.biz
  * Description:
  */
-public class TpltDialog extends ADialog
+public class LibDialog extends ADialog
 {
 
     private MproPtn mproPtn;
     private boolean isUpdate;
     private boolean relayout;
-    private Tplt currTplt = new Tplt();
+    private Mlib currTplt = new Mlib();
     private javax.swing.tree.DefaultTreeModel tmTpltList;
     private javax.swing.tree.DefaultMutableTreeNode rootNode;
     private javax.swing.tree.DefaultMutableTreeNode currNode;
 
-    public TpltDialog(MproPtn mproPtn)
+    public LibDialog(MproPtn mproPtn)
     {
         super(mproPtn, true);
         this.mproPtn = mproPtn;
@@ -60,7 +60,7 @@ public class TpltDialog extends ADialog
     {
         trTpltList = new javax.swing.JTree();
         trTpltList.setRootVisible(false);
-        trTpltList.setCellRenderer(new TreeCR());
+        trTpltList.setCellRenderer(new CatCellRenderer());
         trTpltList.getSelectionModel().setSelectionMode(javax.swing.tree.TreeSelectionModel.SINGLE_TREE_SELECTION);
         javax.swing.JScrollPane sp1 = new javax.swing.JScrollPane(trTpltList);
 
@@ -203,14 +203,14 @@ public class TpltDialog extends ADialog
         cbTpltKind.addItem(new I1S1(ConsDat.INDX_SIGN, "分组"));
 
         rootNode = new javax.swing.tree.DefaultMutableTreeNode("Root");
-        java.util.List<Tplt> propList;
+        java.util.List<Mlib> propList;
         javax.swing.tree.DefaultMutableTreeNode node;
-        for (Tplt tplt : mproPtn.getUserMdl().getTpltMdl().getAllItems())
+        for (Mlib tplt : mproPtn.getUserMdl().getTpltMdl().getAllItems())
         {
             node = new javax.swing.tree.DefaultMutableTreeNode(tplt);
 
             propList = DBA4000.selectTpltData(mproPtn.getUserMdl(), tplt.getP30F1103());
-            for (Tplt prop : propList)
+            for (Mlib prop : propList)
             {
                 node.add(new javax.swing.tree.DefaultMutableTreeNode(prop));
             }
@@ -318,25 +318,25 @@ public class TpltDialog extends ADialog
             return;
         }
         Object obj = currNode.getUserObject();
-        if (!(obj instanceof Tplt))
+        if (!(obj instanceof Mlib))
         {
             return;
         }
-        currTplt = (Tplt) currNode.getUserObject();
+        currTplt = (Mlib) currNode.getUserObject();
         viewInfo(currTplt);
         isUpdate = true;
     }
 
     private void btNewPropActionPerformed(java.awt.event.ActionEvent evt)
     {
-        currTplt = new Tplt(false);
+        currTplt = new Mlib(false);
         viewInfo(currTplt);
         isUpdate = false;
     }
 
     private void btNewTypeActionPerformed(java.awt.event.ActionEvent evt)
     {
-        currTplt = new Tplt(true);
+        currTplt = new Mlib(true);
         viewInfo(currTplt);
         isUpdate = false;
     }
@@ -378,7 +378,7 @@ public class TpltDialog extends ADialog
 
         if (currTplt == null)
         {
-            currTplt = new Tplt();
+            currTplt = new Mlib();
             isUpdate = false;
         }
 
@@ -412,7 +412,7 @@ public class TpltDialog extends ADialog
                     return;
                 }
                 node = (javax.swing.tree.DefaultMutableTreeNode) trTpltList.getSelectionPath().getPath()[1];
-                currTplt.setP30F1104(((Tplt) node.getUserObject()).getP30F1103());
+                currTplt.setP30F1104(((Mlib) node.getUserObject()).getP30F1103());
             }
             currTplt.setP30F1101(node.getChildCount());
             DBA4000.saveTpltData(mproPtn.getUserMdl(), currTplt);
@@ -425,7 +425,7 @@ public class TpltDialog extends ADialog
             }
         }
 
-        currTplt = new Tplt();
+        currTplt = new Mlib();
         viewInfo(currTplt);
         isUpdate = false;
     }
@@ -469,7 +469,7 @@ public class TpltDialog extends ADialog
         }
     }
 
-    private void viewInfo(Tplt item)
+    private void viewInfo(Mlib item)
     {
         cbTpltKind.setSelectedItem(new I1S1(item.getP30F1102(), ""));
         if (item.isType())
@@ -527,12 +527,12 @@ public class TpltDialog extends ADialog
         trTpltList.setSelectionPath(new javax.swing.tree.TreePath(p.getPath()));
 
         // 上移
-        Tplt c = (Tplt) p.getUserObject();
+        Mlib c = (Mlib) p.getUserObject();
         c.addP30F1101(-1);
         DBA4000.saveTpltData(mproPtn.getUserMdl(), c);
 
         // 下移
-        c = (Tplt) n.getUserObject();
+        c = (Mlib) n.getUserObject();
         c.addP30F1101(1);
         DBA4000.saveTpltData(mproPtn.getUserMdl(), c);
     }
@@ -563,10 +563,10 @@ public class TpltDialog extends ADialog
 
         trTpltList.setSelectionPath(new javax.swing.tree.TreePath(p.getPath()));
 
-        Tplt c = (Tplt) p.getUserObject();
+        Mlib c = (Mlib) p.getUserObject();
         c.addP30F1101(1);
         DBA4000.saveTpltData(mproPtn.getUserMdl(), c);
-        c = (Tplt) n.getUserObject();
+        c = (Mlib) n.getUserObject();
         c.addP30F1101(-1);
         DBA4000.saveTpltData(mproPtn.getUserMdl(), c);
     }

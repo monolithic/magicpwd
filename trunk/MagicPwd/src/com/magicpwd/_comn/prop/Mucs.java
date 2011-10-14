@@ -20,7 +20,7 @@ package com.magicpwd._comn.prop;
  * 口令字符空间
  * @author Amon
  */
-public class Char
+public class Mucs
 {
 
     /**

@@ -16,7 +16,7 @@
  */
 package com.magicpwd.m;
 
-import com.magicpwd._comn.prop.Char;
+import com.magicpwd._comn.prop.Mucs;
 import com.magicpwd.d.db.DBA4000;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,67 +26,67 @@ import javax.swing.AbstractListModel;
  * 口令字符究竟模型
  * @author Amon
  */
-public final class CharMdl extends AbstractListModel
+public final class UcsList extends AbstractListModel
 {
 
     private static boolean withSys;
     private boolean charUpd;
-    private List<Char> charSys;
-    private List<Char> charUsr;
+    private List<Mucs> charSys;
+    private List<Mucs> charUsr;
     private UserMdl userMdl;
 
-    CharMdl(UserMdl userMdl)
+    UcsList(UserMdl userMdl)
     {
         this.userMdl = userMdl;
     }
 
     void initData()
     {
-        charSys = new ArrayList<Char>(7);
+        charSys = new ArrayList<Mucs>(7);
 
-        Char c = new Char();
+        Mucs c = new Mucs();
         c.setP30F2103("1000000000000001");
         c.setP30F2104("数字");
         c.setP30F2105("数字");
         c.setP30F2106("0123456789");
         charSys.add(c);
 
-        c = new Char();
+        c = new Mucs();
         c.setP30F2103("1000000000000002");
         c.setP30F2104("小写字母");
         c.setP30F2105("小写字母");
         c.setP30F2106("abcdefghijklmnopqrstuvwxyz");
         charSys.add(c);
 
-        c = new Char();
+        c = new Mucs();
         c.setP30F2103("1000000000000003");
         c.setP30F2104("大写字母");
         c.setP30F2105("大写字母");
         c.setP30F2106("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
         charSys.add(c);
 
-        c = new Char();
+        c = new Mucs();
         c.setP30F2103("1000000000000004");
         c.setP30F2104("特殊字符");
         c.setP30F2105("特殊字符");
         c.setP30F2106("!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~");
         charSys.add(c);
 
-        c = new Char();
+        c = new Mucs();
         c.setP30F2103("1000000000000005");
         c.setP30F2104("大小写字母");
         c.setP30F2105("大小写字母");
         c.setP30F2106("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
         charSys.add(c);
 
-        c = new Char();
+        c = new Mucs();
         c.setP30F2103("1000000000000006");
         c.setP30F2104("字母及数字");
         c.setP30F2105("字母及数字");
         c.setP30F2106("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
         charSys.add(c);
 
-        c = new Char();
+        c = new Mucs();
         c.setP30F2103("1000000000000007");
         c.setP30F2104("可输入字符");
         c.setP30F2105("可输入字符");
@@ -139,7 +139,7 @@ public final class CharMdl extends AbstractListModel
         this.charUpd = charUpd;
     }
 
-    public void appendItem(Char data)
+    public void appendItem(Mucs data)
     {
         int index = charUsr.size();
         data.setP30F2101(index);
@@ -150,7 +150,7 @@ public final class CharMdl extends AbstractListModel
         charUpd = true;
     }
 
-    public void updateItemAt(int index, Char data)
+    public void updateItemAt(int index, Mucs data)
     {
         if (withSys)
         {
@@ -190,7 +190,7 @@ public final class CharMdl extends AbstractListModel
         {
             return;
         }
-        Char src = charUsr.get(index);
+        Mucs src = charUsr.get(index);
 
         toward += index;
         if (toward < 0)
@@ -201,7 +201,7 @@ public final class CharMdl extends AbstractListModel
         {
             toward = charUsr.size() - 1;
         }
-        Char dst = charUsr.get(toward);
+        Mucs dst = charUsr.get(toward);
         dst.setP30F2101(index);
         DBA4000.saveCharData(userMdl, dst);
         src.setP30F2101(toward);
@@ -212,12 +212,12 @@ public final class CharMdl extends AbstractListModel
         charUpd = true;
     }
 
-    public List<Char> getCharSys()
+    public List<Mucs> getCharSys()
     {
         return charSys;
     }
 
-    public List<Char> getCharUsr()
+    public List<Mucs> getCharUsr()
     {
         return charUsr;
     }

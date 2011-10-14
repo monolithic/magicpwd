@@ -33,12 +33,12 @@ import com.magicpwd.m.UserMdl;
 /**
  * @author Amon
  */
-public class GridMdl extends SafeMdl implements javax.swing.table.TableModel, java.io.Serializable
+public class AttModel extends SafeMdl implements javax.swing.table.TableModel, java.io.Serializable
 {
 
     private javax.swing.event.EventListenerList listenerList;
 
-    GridMdl(UserMdl userMdl)
+    AttModel(UserMdl userMdl)
     {
         super(userMdl);
     }
