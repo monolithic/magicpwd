@@ -19,7 +19,7 @@ package com.magicpwd.x.app;
 import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.S1S1;
-import com.magicpwd._cons.lang.McmdRes;
+import com.magicpwd._cons.lang.MproRes;
 import com.magicpwd._cons.lang.NoneRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
@@ -94,7 +94,7 @@ public class DatDialog extends javax.swing.JDialog
 
         Lang.setWText(bt_Cancel, NoneRes.P30FA50B, "取消(@C)");
 
-        setTitle(Lang.getLang(McmdRes.P30F4207, "选择还原节点"));
+        setTitle(Lang.getLang(MproRes.P30F7204, "选择还原节点"));
 
         pack();
     }
