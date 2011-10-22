@@ -22,7 +22,6 @@ import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsCfg;
-import com.magicpwd._cons.LangRes;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
@@ -33,6 +32,7 @@ import com.magicpwd.d.db.DBA4000;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.m.maoc.MaocMdl;
 import com.magicpwd._comn.mpwd.Mexp;
+import com.magicpwd._cons.lang.MaocRes;
 import com.magicpwd._enum.ExpType;
 import com.magicpwd.v.app.MenuPtn;
 import com.magicpwd.v.app.tray.TrayPtn;
@@ -175,14 +175,14 @@ public class MaocPtn extends AMpwdPtn
     @Override
     public boolean initLang()
     {
-        this.setTitle(Lang.getLang(LangRes.P30FB201, "数值运算"));
-        Bean.setText(lb_ExpText, Lang.getLang(LangRes.P30FB301, "计算式(@F)"));
+        this.setTitle(Lang.getLang(MaocRes.P30FB201, "数值运算"));
+        Bean.setText(lb_ExpText, Lang.getLang(MaocRes.P30FB301, "计算式(@F)"));
 
-        Bean.setText(bt_ExpText, Lang.getLang(LangRes.P30FB501, "@C"));
-        Bean.setTips(bt_ExpText, Lang.getLang(LangRes.P30FB502, "运算(ALT + C)"));
+        Bean.setText(bt_ExpText, Lang.getLang(MaocRes.P30FB501, "@C"));
+        Bean.setTips(bt_ExpText, Lang.getLang(MaocRes.P30FB502, "运算(ALT + C)"));
 
-        Bean.setText(bt_AocHelp, Lang.getLang(LangRes.P30FB503, "@O"));
-        Bean.setTips(bt_AocHelp, Lang.getLang(LangRes.P30FB504, "选项(ALT + O)"));
+        Bean.setText(bt_AocHelp, Lang.getLang(MaocRes.P30FB503, "@O"));
+        Bean.setTips(bt_AocHelp, Lang.getLang(MaocRes.P30FB504, "选项(ALT + O)"));
 
         textBox.initLang();
 

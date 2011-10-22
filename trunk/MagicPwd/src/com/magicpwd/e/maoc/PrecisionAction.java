@@ -17,7 +17,7 @@
 package com.magicpwd.e.maoc;
 
 import com.magicpwd.__a.maoc.AMaocAction;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MaocRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 
@@ -47,7 +47,7 @@ public class PrecisionAction extends AMaocAction
             {
                 do
                 {
-                    cmd = javax.swing.JOptionPane.showInputDialog(maocPtn, Lang.getLang(LangRes.P30FBA02, "请输入一个0到16之间的整数！"), "" + maocPtn.getPrecision());
+                    cmd = javax.swing.JOptionPane.showInputDialog(maocPtn, Lang.getLang(MaocRes.P30FBA02, "请输入一个0到16之间的整数！"), "" + maocPtn.getPrecision());
                     if (cmd == null)
                     {
                         return;

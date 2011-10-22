@@ -18,7 +18,7 @@ package com.magicpwd._util;
 
 import com.magicpwd._comn.mpwd.MpwdHeader;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.LangRes;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;

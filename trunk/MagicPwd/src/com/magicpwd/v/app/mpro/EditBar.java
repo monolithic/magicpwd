@@ -16,7 +16,7 @@
  */
 package com.magicpwd.v.app.mpro;
 
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MproRes;
 import com.magicpwd._util.Lang;
 
 /**
@@ -35,7 +35,7 @@ public class EditBar extends javax.swing.JPanel
     public void initView()
     {
         setLayout(new java.awt.BorderLayout());
-        border = javax.swing.BorderFactory.createTitledBorder(Lang.getLang(LangRes.P30F7305, ""));
+        border = javax.swing.BorderFactory.createTitledBorder(Lang.getLang(MproRes.P30F7305, ""));
         setBorder(border);
     }
 

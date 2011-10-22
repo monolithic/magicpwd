@@ -20,7 +20,8 @@ import com.magicpwd.__i.IPropBean;
 import com.magicpwd._comn.prop.Mucs;
 import com.magicpwd._comn.S1S1;
 import com.magicpwd._cons.ConsCfg;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.McfgRes;
+import com.magicpwd._cons.lang.MproRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.UserMdl;
 import com.magicpwd.v.app.mpro.MproPtn;
@@ -79,19 +80,19 @@ public class USetProp extends javax.swing.JPanel implements IPropBean
     @Override
     public void initLang()
     {
-        Lang.setWText(lb_PwdsChar, LangRes.P30F8301, "字符空间");
-        Lang.setWText(lb_PwdsSize, LangRes.P30F8302, "口令长度");
-        Lang.setWText(ck_PwdsLoop, LangRes.P30F8303, "允许重复");
+        Lang.setWText(lb_PwdsChar, McfgRes.P30F8301, "字符空间");
+        Lang.setWText(lb_PwdsSize, McfgRes.P30F8302, "口令长度");
+        Lang.setWText(ck_PwdsLoop, McfgRes.P30F8303, "允许重复");
 
-        Lang.setWText(lb_BackCount, LangRes.P30F8304, "备份数量");
-        Lang.setWText(lb_BackPath, LangRes.P30F8305, "备份路径");
-        Lang.setWText(bt_BackPath, LangRes.P30F8501, ">>");
+        Lang.setWText(lb_BackCount, McfgRes.P30F8304, "备份数量");
+        Lang.setWText(lb_BackPath, McfgRes.P30F8305, "备份路径");
+        Lang.setWText(bt_BackPath, McfgRes.P30F8501, ">>");
 
-        Lang.setWText(lb_StayTime, LangRes.P30F8306, "剪贴板口令驻留时间（秒）");
+        Lang.setWText(lb_StayTime, McfgRes.P30F8306, "剪贴板口令驻留时间（秒）");
 
-        Lang.setWText(lb_UserLang, LangRes.P30F8307, "语言区域");
-//        Lang.setWText(bt_Update, LangRes.P30F8503, "保存");
-//        Lang.setWText(bt_Default, LangRes.P30F8505, "默认");
+        Lang.setWText(lb_UserLang, McfgRes.P30F8307, "语言区域");
+//        Lang.setWText(bt_Update, McfgRes.P30F8503, "保存");
+//        Lang.setWText(bt_Default, McfgRes.P30F8505, "默认");
     }
 
     @Override
@@ -115,7 +116,7 @@ public class USetProp extends javax.swing.JPanel implements IPropBean
         cb_PwdsChar.removeAllItems();
         Mucs cher = new Mucs();
         cher.setP30F2103(ConsCfg.DEF_PWDS_HASH);
-        cher.setP30F2104(Lang.getLang(LangRes.P30F7C06, "默认"));
+        cher.setP30F2104(Lang.getLang(MproRes.P30F7C06, "默认"));
         cher.setP30F2106(ConsCfg.DEF_PWDS_CHAR);
         cb_PwdsChar.addItem(cher);
         UserMdl userMdl = mainPtn.getUserMdl();
@@ -224,17 +225,17 @@ public class USetProp extends javax.swing.JPanel implements IPropBean
         backPath = jfc.getSelectedFile();
         if (!backPath.exists())
         {
-            Lang.showMesg(this, LangRes.P30F7A1B, "您选择的目录不存在！");
+            Lang.showMesg(this, MproRes.P30F7A1B, "您选择的目录不存在！");
             return;
         }
         if (!backPath.isDirectory())
         {
-            Lang.showMesg(this, LangRes.P30F7A1C, "请选择一个合适的目录！");
+            Lang.showMesg(this, MproRes.P30F7A1C, "请选择一个合适的目录！");
             return;
         }
         if (!backPath.canWrite())
         {
-            Lang.showMesg(this, LangRes.P30F7A1D, "无法保存数据到您选择的目录，请确认您是否有足够的权限！");
+            Lang.showMesg(this, MproRes.P30F7A1D, "无法保存数据到您选择的目录，请确认您是否有足够的权限！");
             return;
         }
 

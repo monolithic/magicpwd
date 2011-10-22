@@ -17,7 +17,7 @@
 package com.magicpwd.e.mpro.grid;
 
 import com.magicpwd.__a.mpro.AMproAction;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._util.Lang;
 
 /**

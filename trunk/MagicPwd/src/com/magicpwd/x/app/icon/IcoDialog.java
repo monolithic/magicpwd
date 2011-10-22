@@ -19,7 +19,8 @@ package com.magicpwd.x.app.icon;
 import com.magicpwd.__a.ADialog;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MproRes;
+import com.magicpwd._cons.lang.NoneRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
@@ -137,13 +138,13 @@ public class IcoDialog extends ADialog
 
     public void initLang()
     {
-        Lang.setWText(btSelect, LangRes.P30FA50C, "选择(@C)");
+        Lang.setWText(btSelect, NoneRes.P30FA50C, "选择(@C)");
 
-        Lang.setWText(btAppend, LangRes.P30FA50D, "追加(@A)");
+        Lang.setWText(btAppend, NoneRes.P30FA50D, "追加(@A)");
 
         Lang.setWText(btRemove, null, "删除(@D)");
 
-        this.setTitle(Lang.getLang(LangRes.P30FA50F, "徽标"));
+        this.setTitle(Lang.getLang(NoneRes.P30FA50F, "徽标"));
     }
 
     public void initData()
@@ -413,12 +414,12 @@ public class IcoDialog extends ADialog
         filePath = jfc.getSelectedFile();
         if (!filePath.exists())
         {
-            Lang.showMesg(this, LangRes.P30F7A03, "您选取的文件不存在！");
+            Lang.showMesg(this, MproRes.P30F7A03, "您选取的文件不存在！");
             return;
         }
         if (!filePath.isFile() || !filePath.canRead())
         {
-            Lang.showMesg(this, LangRes.P30F7A05, "无法读取您选择的文件，请确认您是否有足够的权限！");
+            Lang.showMesg(this, MproRes.P30F7A05, "无法读取您选择的文件，请确认您是否有足够的权限！");
             return;
         }
 

@@ -19,7 +19,7 @@ package com.magicpwd.v.app.mruc;
 import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MrucRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -97,8 +97,8 @@ public class MrucPtn extends AMpwdPtn
     @Override
     public boolean initLang()
     {
-        this.setTitle(Lang.getLang(LangRes.P30FC201, "单位换算"));
-        Bean.setText(lb_Label, Lang.getLang(LangRes.P30FC301, "单位类型(@T)"));
+        this.setTitle(Lang.getLang(MrucRes.P30FC201, "单位换算"));
+        Bean.setText(lb_Label, Lang.getLang(MrucRes.P30FC301, "单位类型(@T)"));
 
         this.pack();
         Bean.centerForm(this, null);
@@ -146,7 +146,7 @@ public class MrucPtn extends AMpwdPtn
         layout.setHorizontalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_Notice, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE));
         layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(lb_Notice, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE));
 
-        lb_Notice.setText(Lang.getLang(LangRes.P30FC202, "请选择换算单位类型！"));
+        lb_Notice.setText(Lang.getLang(MrucRes.P30FC202, "请选择换算单位类型！"));
 
         this.pack();
         return true;

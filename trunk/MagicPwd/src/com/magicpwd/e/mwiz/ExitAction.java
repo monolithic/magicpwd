@@ -17,7 +17,7 @@
 package com.magicpwd.e.mwiz;
 
 import com.magicpwd.__a.mwiz.AMwizAction;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._util.Lang;
 
 /**

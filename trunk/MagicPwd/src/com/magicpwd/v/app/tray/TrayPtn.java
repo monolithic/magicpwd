@@ -23,7 +23,8 @@ import com.magicpwd._comn.apps.FileLocker;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.NoneRes;
+import com.magicpwd._cons.lang.TrayRes;
 import com.magicpwd._enum.AuthLog;
 import com.magicpwd._user.UserDto;
 import com.magicpwd._user.UserPtn;
@@ -100,7 +101,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
 
                 // 设置软件界面风格
                 nextView(userMdl.getAppView());
-                Lang.showMesg(mpwdPtn, LangRes.P30FAA18, "您的新口令是：{0}\n为了您的安全，请登录软件后尽快修改您的口令。", object.getUserPwds());
+                Lang.showMesg(mpwdPtn, NoneRes.P30FAA18, "您的新口令是：{0}\n为了您的安全，请登录软件后尽快修改您的口令。", object.getUserPwds());
                 break;
             }
 
@@ -486,7 +487,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
 
             if (button != null)
             {
-                Lang.setWText(button, LangRes.P30F960E, "显示为导航罗盘");
+                Lang.setWText(button, TrayRes.P30F960E, "显示为导航罗盘");
             }
             userMdl.setCfg(ConsCfg.CFG_TRAY_PTN, "icon");
             return;
@@ -509,7 +510,7 @@ public class TrayPtn implements IBackCall<AuthLog, UserDto>
 
         if (button != null)
         {
-            Lang.setWText(button, LangRes.P30F960D, "显示为托盘图标");
+            Lang.setWText(button, TrayRes.P30F960D, "显示为托盘图标");
         }
         userMdl.setCfg(ConsCfg.CFG_TRAY_PTN, "guid");
     }

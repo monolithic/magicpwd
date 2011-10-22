@@ -17,7 +17,7 @@
 package com.magicpwd.e.maoc;
 
 import com.magicpwd.__a.maoc.AMaocAction;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._util.Lang;
 
 /**

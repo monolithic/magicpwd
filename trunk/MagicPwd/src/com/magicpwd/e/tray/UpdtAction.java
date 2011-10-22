@@ -18,7 +18,7 @@ package com.magicpwd.e.tray;
 
 import com.magicpwd.__a.tray.ATrayAction;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MproRes;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -43,20 +43,20 @@ public class UpdtAction extends ATrayAction
             boolean b = Util.checkUpdate(ConsEnv.SOFTCODE, ConsEnv.VERSIONS);
             if (b)
             {
-                if (Lang.showFirm(trayPtn.getMpwdPtn(), LangRes.P30F7A12, "检测到新版本，现在要下载吗？") == javax.swing.JOptionPane.YES_OPTION)
+                if (Lang.showFirm(trayPtn.getMpwdPtn(), MproRes.P30F7A12, "检测到新版本，现在要下载吗？") == javax.swing.JOptionPane.YES_OPTION)
                 {
                     Desk.browse(ConsEnv.HOMEPAGE);
                 }
             }
             else
             {
-                Lang.showMesg(trayPtn.getMpwdPtn(), LangRes.P30F7A13, "您使用的已是最新版本。");
+                Lang.showMesg(trayPtn.getMpwdPtn(), MproRes.P30F7A13, "您使用的已是最新版本。");
             }
         }
         catch (Exception exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(trayPtn.getMpwdPtn(), LangRes.P30F7A14, "");
+            Lang.showMesg(trayPtn.getMpwdPtn(), MproRes.P30F7A14, "");
         }
     }
 

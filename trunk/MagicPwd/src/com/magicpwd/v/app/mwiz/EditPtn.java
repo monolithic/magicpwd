@@ -20,7 +20,7 @@ import com.magicpwd.__a.ADialog;
 import com.magicpwd._bean.mwiz.GuidBean;
 import com.magicpwd._bean.mwiz.HeadBean;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MwizRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -77,10 +77,10 @@ public class EditPtn extends ADialog
         guidBean.initLang();
         headBean.initLang();
 
-        Bean.setText(bt_PrevStep, Lang.getLang(LangRes.P30F6501, "上一步(@P)"));
-        Bean.setText(bt_NextStep, Lang.getLang(LangRes.P30F6502, "下一步(@N)"));
-        Bean.setText(bt_Update, Lang.getLang(LangRes.P30F6503, "保存(@S)"));
-        Bean.setText(bt_Cancel, Lang.getLang(LangRes.P30F6504, "取消(@D)"));
+        Bean.setText(bt_PrevStep, Lang.getLang(MwizRes.P30F6501, "上一步(@P)"));
+        Bean.setText(bt_NextStep, Lang.getLang(MwizRes.P30F6502, "下一步(@N)"));
+        Bean.setText(bt_Update, Lang.getLang(MwizRes.P30F6503, "保存(@S)"));
+        Bean.setText(bt_Cancel, Lang.getLang(MwizRes.P30F6504, "取消(@D)"));
     }
 
     public void initData()
@@ -255,7 +255,7 @@ public class EditPtn extends ADialog
     {
         currStep = -2;
 
-        ta_NoteArea.setText(Lang.getLang(LangRes.P30F6B01, "第一步：选择您要使用的口令模板"));
+        ta_NoteArea.setText(Lang.getLang(MwizRes.P30F6B01, "第一步：选择您要使用的口令模板"));
         cl_Layout.show(pl_EditArea, "guid");
         guidBean.showData(keysMdl);
 //        guidBean.requestFocus();
@@ -269,7 +269,7 @@ public class EditPtn extends ADialog
     {
         currStep = -1;
 
-        ta_NoteArea.setText(Lang.getLang(LangRes.P30F6B02, "第二步：输入口令基本信息及设置提醒"));
+        ta_NoteArea.setText(Lang.getLang(MwizRes.P30F6B02, "第二步：输入口令基本信息及设置提醒"));
         cl_Layout.show(pl_EditArea, "head");
         headBean.showData(keysMdl);
         headBean.requestFocus();
@@ -296,7 +296,7 @@ public class EditPtn extends ADialog
     {
         currStep += 1;
 
-        ta_NoteArea.setText(Lang.getLang(LangRes.P30F6B03, "第三步：录入口令内容信息"));
+        ta_NoteArea.setText(Lang.getLang(MwizRes.P30F6B03, "第三步：录入口令内容信息"));
         cl_Layout.show(pl_EditArea, "body" + currStep);
         ls_BodyList.get(currStep).showData();
 
@@ -412,7 +412,7 @@ public class EditPtn extends ADialog
     {
         if (canEdit && currStep > -2)
         {
-            if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(this, LangRes.P30F6A04, "您的口令数据尚未保存，确认放弃修改吗？"))
+            if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(this, MwizRes.P30F6A04, "您的口令数据尚未保存，确认放弃修改吗？"))
             {
                 return false;
             }

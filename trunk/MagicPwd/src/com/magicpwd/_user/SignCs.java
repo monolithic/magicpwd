@@ -18,7 +18,7 @@ package com.magicpwd._user;
 
 import com.magicpwd.__i.IUserView;
 import com.magicpwd._bean.mail.Connect;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.NoneRes;
 import com.magicpwd._enum.AuthLog;
 import com.magicpwd._util.Lang;
 
@@ -102,17 +102,17 @@ public class SignCs extends javax.swing.JPanel implements IUserView
     @Override
     public void initLang()
     {
-        Lang.setWText(lbMailList, LangRes.P30FA313, "服务器(@M)");
+        Lang.setWText(lbMailList, NoneRes.P30FA313, "服务器(@M)");
 
-        Lang.setWText(lbUserName, LangRes.P30FA301, "用户(@U)");
+        Lang.setWText(lbUserName, NoneRes.P30FA301, "用户(@U)");
 
-        Lang.setWText(lbUserPwds, LangRes.P30FA302, "口令(@P)");
+        Lang.setWText(lbUserPwds, NoneRes.P30FA302, "口令(@P)");
 
-        Lang.setWText(userPtn.getApplyButton(), LangRes.P30FA508, "设定(@S)");
+        Lang.setWText(userPtn.getApplyButton(), NoneRes.P30FA508, "设定(@S)");
 
-        Lang.setWText(userPtn.getAbortButton(), LangRes.P30FA504, "取消(@C)");
+        Lang.setWText(userPtn.getAbortButton(), NoneRes.P30FA504, "取消(@C)");
 
-        userPtn.setTitle(Lang.getLang(LangRes.P30FA20B, "配置邮件账户"));
+        userPtn.setTitle(Lang.getLang(NoneRes.P30FA20B, "配置邮件账户"));
     }
 
     @Override
@@ -161,7 +161,7 @@ public class SignCs extends javax.swing.JPanel implements IUserView
         String ut = (cbMailList.getSelectedItem() + "").trim();
         if (ut.length() < 1)
         {
-            Lang.showMesg(this, LangRes.P30FAA1D, "请选择邮件服务器！");
+            Lang.showMesg(this, NoneRes.P30FAA1D, "请选择邮件服务器！");
             cbMailList.requestFocus();
             return;
         }
@@ -169,14 +169,14 @@ public class SignCs extends javax.swing.JPanel implements IUserView
         String un = tfUserName.getText();
         if (un == null)
         {
-            Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
+            Lang.showMesg(this, NoneRes.P30FAA01, "请输入用户名称！");
             tfUserName.requestFocus();
             return;
         }
         un = un.trim();
         if (un.length() < 1)
         {
-            Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
+            Lang.showMesg(this, NoneRes.P30FAA01, "请输入用户名称！");
             tfUserName.requestFocus();
             return;
         }
@@ -184,7 +184,7 @@ public class SignCs extends javax.swing.JPanel implements IUserView
         char[] uc = pfUserPwds.getPassword();
         if (uc == null || uc.length < 1)
         {
-            Lang.showMesg(this, LangRes.P30FAA02, "请输入登录口令！");
+            Lang.showMesg(this, NoneRes.P30FAA02, "请输入登录口令！");
             pfUserPwds.requestFocus();
             return;
         }

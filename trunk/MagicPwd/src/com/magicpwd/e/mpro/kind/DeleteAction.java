@@ -18,7 +18,7 @@ package com.magicpwd.e.mpro.kind;
 
 import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd._comn.mpwd.Mcat;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MproRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.r.mpro.CatNode;
 
@@ -61,7 +61,7 @@ public class DeleteAction extends AMproAction
             return;
         }
 
-        if (Lang.showFirm(mproPtn, LangRes.P30F7A1A, "执行此操作后，此类别下的其它类别将会移动到根类别下，\n确认要删除“{0}”类别么？", kind.getC2010206()) == javax.swing.JOptionPane.YES_OPTION)
+        if (Lang.showFirm(mproPtn, MproRes.P30F7A1A, "执行此操作后，此类别下的其它类别将会移动到根类别下，\n确认要删除“{0}”类别么？", kind.getC2010206()) == javax.swing.JOptionPane.YES_OPTION)
         {
             mproPtn.getTreeMdl().wRemove(path);
         }

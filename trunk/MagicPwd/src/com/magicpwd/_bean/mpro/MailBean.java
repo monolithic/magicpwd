@@ -21,7 +21,8 @@ import com.magicpwd.__i.mpro.IMproBean;
 import com.magicpwd._bean.AMailBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MproRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.v.app.mpro.MproPtn;
@@ -164,7 +165,7 @@ public class MailBean extends AMailBean implements IMproBean
         String name = tf_PropName.getText();
         if (!com.magicpwd._util.Char.isValidate(name))
         {
-            Lang.showMesg(mainPtn, LangRes.P30F7A31, "请输入邮件名称！");
+            Lang.showMesg(mainPtn, MproRes.P30F7A31, "请输入邮件名称！");
             tf_PropName.requestFocus();
             return;
         }

@@ -21,7 +21,7 @@ import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mpro.IMproBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comn.item.LogoItem;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd.v.app.mpro.MproPtn;
@@ -40,7 +40,6 @@ import com.magicpwd.x.app.icon.IcoDialog;
  */
 public class LogoBean extends javax.swing.JPanel implements IMproBean, IBackCall<String, String>
 {
-
     private MproPtn mproPtn;
     private LogoItem itemData;
     private WEditBox dataEdit;
@@ -128,7 +127,6 @@ public class LogoBean extends javax.swing.JPanel implements IMproBean, IBackCall
     {
         ib_PropName.addMouseListener(new java.awt.event.MouseAdapter()
         {
-
             @Override
             public void mouseReleased(java.awt.event.MouseEvent evt)
             {
@@ -145,6 +143,10 @@ public class LogoBean extends javax.swing.JPanel implements IMproBean, IBackCall
         if (itemData.getPath() != null && itemData.getPath().length() > 0)
         {
             ib_PropName.setIcon(mproPtn.getDataIcon(itemData.getPath(), item.getName(), 16));
+        }
+        else
+        {
+            ib_PropName.setIcon(Bean.getNone());
         }
         ta_PropData.setText(item.getData());
     }

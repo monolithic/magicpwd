@@ -21,7 +21,7 @@ import com.magicpwd.m.mail.MailMdl;
 import com.magicpwd.m.mail.NodeMdl;
 import com.magicpwd.m.mail.Reader;
 import com.magicpwd._comn.S1S1;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MproRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
@@ -545,7 +545,7 @@ public class MailPtn extends javax.swing.JFrame implements Runnable
         }
         if (!filePath.isDirectory() || !filePath.canWrite())
         {
-            Lang.showMesg(this, LangRes.P30F7A2F, "无法保存数据到您指定的路径，请确认您是否有足够的权限！");
+            Lang.showMesg(this, MproRes.P30F7A2F, "无法保存数据到您指定的路径，请确认您是否有足够的权限！");
             return;
         }
 
@@ -565,7 +565,7 @@ public class MailPtn extends javax.swing.JFrame implements Runnable
         catch (Exception exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(this, LangRes.P30F7A2D, "文件下载保存出错，请重试！");
+            Lang.showMesg(this, MproRes.P30F7A2D, "文件下载保存出错，请重试！");
         }
     }
 

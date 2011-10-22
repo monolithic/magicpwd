@@ -16,7 +16,7 @@
  */
 package com.magicpwd.v.app.mpro;
 
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.NoneRes;
 import com.magicpwd._util.Lang;
 
 /**
@@ -66,7 +66,7 @@ public class EditDlg extends javax.swing.JDialog
 
     public void initLang()
     {
-        setTitle(Lang.getLang(LangRes.P30FA208, "友情提示"));
+        setTitle(Lang.getLang(NoneRes.P30FA208, "友情提示"));
     }
 
     public void initData()

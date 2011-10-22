@@ -19,7 +19,8 @@ package com.magicpwd.v.app.mpro;
 import com.magicpwd.__a.ADialog;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.mpwd.Mcat;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.McfgRes;
+import com.magicpwd._cons.lang.MproRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 
@@ -130,10 +131,10 @@ public class CatDialog extends ADialog
     {
         this.setTitle("类别管理");
 
-        Lang.setWText(lb_KindKind, LangRes.P30F8361, "默认键值");
-        Lang.setWText(lb_KindName, LangRes.P30F8362, "显示名称");
-        Lang.setWText(lb_KindTips, LangRes.P30F8363, "提示信息");
-        Lang.setWText(lb_KindDesp, LangRes.P30F8365, "相关说明");
+        Lang.setWText(lb_KindKind, McfgRes.P30F8361, "默认键值");
+        Lang.setWText(lb_KindName, McfgRes.P30F8362, "显示名称");
+        Lang.setWText(lb_KindTips, McfgRes.P30F8363, "提示信息");
+        Lang.setWText(lb_KindDesp, McfgRes.P30F8365, "相关说明");
 
         Bean.setText(bt_Abort, "取消(@C)");
         Bean.setText(bt_Apply, "确认(@O)");
@@ -191,7 +192,7 @@ public class CatDialog extends ADialog
         String kindName = tf_KindName.getText();
         if (!com.magicpwd._util.Char.isValidate(kindName))
         {
-            Lang.showMesg(this, LangRes.P30F7A15, "请输入类别名称：");
+            Lang.showMesg(this, MproRes.P30F7A15, "请输入类别名称：");
             tf_KindName.requestFocus();
             return;
         }

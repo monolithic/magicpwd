@@ -20,7 +20,8 @@ import com.magicpwd.__a.AEditBean;
 import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MproRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
@@ -92,7 +93,7 @@ public abstract class AMailBean extends AEditBean
         String url = tf_PropData.getText();
         if (!com.magicpwd._util.Char.isValidateMail(url))
         {
-            Lang.showMesg(formPtn, LangRes.P30F7A32, "您输入的不是一个合适的邮件地址！");
+            Lang.showMesg(formPtn, MproRes.P30F7A32, "您输入的不是一个合适的邮件地址！");
             return;
         }
 
@@ -111,7 +112,7 @@ public abstract class AMailBean extends AEditBean
             data = data.trim();
             if (!Char.isValidateMail(data))
             {
-                Lang.showMesg(formPtn, LangRes.P30F7A32, "您输入的不是一个合适的邮件地址！");
+                Lang.showMesg(formPtn, MproRes.P30F7A32, "您输入的不是一个合适的邮件地址！");
                 return false;
             }
             itemData.setData(data);

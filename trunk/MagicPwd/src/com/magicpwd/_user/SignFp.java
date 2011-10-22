@@ -17,7 +17,7 @@
 package com.magicpwd._user;
 
 import com.magicpwd.__i.IUserView;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.NoneRes;
 import com.magicpwd._enum.AuthLog;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -99,15 +99,15 @@ public class SignFp extends javax.swing.JPanel implements IUserView
     @Override
     public void initLang()
     {
-        Lang.setWText(lbUserName, LangRes.P30FA30C, "登录用户(@U)");
+        Lang.setWText(lbUserName, NoneRes.P30FA30C, "登录用户(@U)");
 
-        Lang.setWText(lbUserPwds, LangRes.P30FA30D, "安全口令(@P)");
+        Lang.setWText(lbUserPwds, NoneRes.P30FA30D, "安全口令(@P)");
 
-        Lang.setWText(userPtn.getApplyButton(), LangRes.P30FA509, "找回(@F)");
+        Lang.setWText(userPtn.getApplyButton(), NoneRes.P30FA509, "找回(@F)");
 
-        Lang.setWText(userPtn.getAbortButton(), LangRes.P30FA505, "返回(@C)");
+        Lang.setWText(userPtn.getAbortButton(), NoneRes.P30FA505, "返回(@C)");
 
-        userPtn.setTitle(Lang.getLang(LangRes.P30FA204, "口令找回"));
+        userPtn.setTitle(Lang.getLang(NoneRes.P30FA204, "口令找回"));
     }
 
     @Override
@@ -140,14 +140,14 @@ public class SignFp extends javax.swing.JPanel implements IUserView
         String name = tfUserName.getText();
         if (!com.magicpwd._util.Char.isValidate(name))
         {
-            Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
+            Lang.showMesg(this, NoneRes.P30FAA01, "请输入用户名称！");
             tfUserName.requestFocus();
             return;
         }
         String pwds = new String(pfUserPwds.getPassword());
         if (!com.magicpwd._util.Char.isValidate(pwds))
         {
-            Lang.showMesg(this, LangRes.P30FAA14, "请输入安全口令！");
+            Lang.showMesg(this, NoneRes.P30FAA14, "请输入安全口令！");
             pfUserPwds.requestFocus();
             return;
         }
@@ -164,7 +164,7 @@ public class SignFp extends javax.swing.JPanel implements IUserView
             boolean b = userMdl.signFp(name, sb);
             if (!b)
             {
-                Lang.showMesg(this, LangRes.P30FAA03, "身份验证错误，请确认您的用户名及口令是否正确！");
+                Lang.showMesg(this, NoneRes.P30FAA03, "身份验证错误，请确认您的用户名及口令是否正确！");
                 tfUserName.setText("");
                 pfUserPwds.setText("");
                 tfUserName.requestFocus();
@@ -179,21 +179,21 @@ public class SignFp extends javax.swing.JPanel implements IUserView
         catch (java.security.NoSuchAlgorithmException exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(this, LangRes.P30FAA04, "系统错误：无法加载密码算法，请重新启动应用程序后重试！");
+            Lang.showMesg(this, NoneRes.P30FAA04, "系统错误：无法加载密码算法，请重新启动应用程序后重试！");
             System.exit(0);
             return;
         }
         catch (javax.crypto.NoSuchPaddingException exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(this, LangRes.P30FAA04, "系统错误：无法加载密码算法，请重新启动应用程序后重试！");
+            Lang.showMesg(this, NoneRes.P30FAA04, "系统错误：无法加载密码算法，请重新启动应用程序后重试！");
             System.exit(0);
             return;
         }
         catch (Exception exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(this, LangRes.P30FAA03, "身份验证错误，请确认您的用户名及口令是否正确！");
+            Lang.showMesg(this, NoneRes.P30FAA03, "身份验证错误，请确认您的用户名及口令是否正确！");
             tfUserName.setText("");
             pfUserPwds.setText("");
             errCount += 1;

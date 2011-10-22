@@ -21,7 +21,8 @@ import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd._comn.item.DataItem;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WButtonGroup;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MproRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
@@ -72,9 +73,9 @@ public abstract class ADataBean extends AEditBean
         Lang.setWText(bt_DataConf, LangRes.P30F1521, "@O");
         Lang.setWTips(bt_DataConf, LangRes.P30F1522, "数值格式设置(Alt + O)");
 
-        Bean.setText(mi_DataDef, Lang.getLang(LangRes.P30F7C08, "允许为空(@N)"));
+        Bean.setText(mi_DataDef, Lang.getLang(MproRes.P30F7C08, "允许为空(@N)"));
 
-        Bean.setText(mi_DataExp, Lang.getLang(LangRes.P30F7C19, "表达式(@F)"));
+        Bean.setText(mi_DataExp, Lang.getLang(MproRes.P30F7C19, "表达式(@F)"));
     }
 
     protected void initConfData()
@@ -187,7 +188,7 @@ public abstract class ADataBean extends AEditBean
     {
         do
         {
-            cmd = javax.swing.JOptionPane.showInputDialog(formPtn, Lang.getLang(LangRes.P30F7A50, "请输入特殊符号：\n提示：除加减号（“+”、“-”）及数值以外的字符！"), itemData.getSpec(DataItem.SPEC_CHAR, ""));
+            cmd = javax.swing.JOptionPane.showInputDialog(formPtn, Lang.getLang(MproRes.P30F7A50, "请输入特殊符号：\n提示：除加减号（“+”、“-”）及数值以外的字符！"), itemData.getSpec(DataItem.SPEC_CHAR, ""));
             if (cmd == null)
             {
                 return;
@@ -203,7 +204,7 @@ public abstract class ADataBean extends AEditBean
         javax.swing.AbstractButton button = formPtn.getMenuPtn().getButton("data-character");
         if (button != null)
         {
-            button.setText(Char.format(Lang.getLang(LangRes.P30F7C12, "特殊符号：{0}"), Char.isValidate(chr) ? chr : "N/A"));
+            button.setText(Char.format(Lang.getLang(MproRes.P30F7C12, "特殊符号：{0}"), Char.isValidate(chr) ? chr : "N/A"));
         }
     }
 
@@ -377,7 +378,7 @@ public abstract class ADataBean extends AEditBean
             {
                 do
                 {
-                    cmd = javax.swing.JOptionPane.showInputDialog(formPtn, Lang.getLang(LangRes.P30F7A4F, "请输入一个非负数值！"), spc.replace("f", ""));
+                    cmd = javax.swing.JOptionPane.showInputDialog(formPtn, Lang.getLang(MproRes.P30F7A4F, "请输入一个非负数值！"), spc.replace("f", ""));
                     if (cmd == null)
                     {
                         return;
@@ -420,7 +421,7 @@ public abstract class ADataBean extends AEditBean
             {
                 return true;
             }
-            Lang.showMesg(formPtn, LangRes.P30F7A4B, "数值不能为空！");
+            Lang.showMesg(formPtn, MproRes.P30F7A4B, "数值不能为空！");
             return false;
         }
 
@@ -456,7 +457,7 @@ public abstract class ADataBean extends AEditBean
             {
                 if (java.util.regex.Pattern.matches("^[+-]?0*(\\.0*)?$", bc ? data.replace(sc, "") : data))
                 {
-                    Lang.showMesg(formPtn, LangRes.P30F7A4C, "请输入一个不为0的数值！");
+                    Lang.showMesg(formPtn, MproRes.P30F7A4C, "请输入一个不为0的数值！");
                     return false;
                 }
             }
@@ -465,7 +466,7 @@ public abstract class ADataBean extends AEditBean
             {
                 if (!java.util.regex.Pattern.matches("^[+-]?0*(\\.0*)?$", bc ? data.replace(sc, "") : data))
                 {
-                    Lang.showMesg(formPtn, LangRes.P30F7A4D, "您输入的数值有误！");
+                    Lang.showMesg(formPtn, MproRes.P30F7A4D, "您输入的数值有误！");
                     return false;
                 }
             }
@@ -530,7 +531,7 @@ public abstract class ADataBean extends AEditBean
 
         if (!java.util.regex.Pattern.matches(regex.toString(), data))
         {
-            Lang.showMesg(formPtn, LangRes.P30F7A4D, "您输入的数值有误！");
+            Lang.showMesg(formPtn, MproRes.P30F7A4D, "您输入的数值有误！");
             return false;
         }
 

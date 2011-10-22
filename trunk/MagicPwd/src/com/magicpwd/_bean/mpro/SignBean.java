@@ -20,7 +20,8 @@ import com.magicpwd.__i.IEditItem;
 import com.magicpwd._bean.ASignBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MproRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.v.app.mpro.MproPtn;
@@ -156,7 +157,7 @@ public class SignBean extends ASignBean
         String name = tf_PropName.getText();
         if (!com.magicpwd._util.Char.isValidate(name))
         {
-            Lang.showMesg(mainPtn, LangRes.P30F7A34, "请输入文本名称！");
+            Lang.showMesg(mainPtn, MproRes.P30F7A34, "请输入文本名称！");
             tf_PropName.requestFocus();
             return;
         }

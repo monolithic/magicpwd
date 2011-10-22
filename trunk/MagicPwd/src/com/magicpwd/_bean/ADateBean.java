@@ -22,7 +22,7 @@ import com.magicpwd._comn.item.DateItem;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._comp.WTextBox;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Date;

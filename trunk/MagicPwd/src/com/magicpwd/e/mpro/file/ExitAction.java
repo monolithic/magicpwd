@@ -17,7 +17,8 @@
 package com.magicpwd.e.mpro.file;
 
 import com.magicpwd.__a.mpro.AMproAction;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MproRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._util.Lang;
 
 /**
@@ -36,7 +37,7 @@ public class ExitAction extends AMproAction
     {
         if (mproPtn.gridModified())
         {
-            if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mproPtn, LangRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
+            if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mproPtn, MproRes.P30F7A42, "您的数据尚未保存，确认要退出吗？"))
             {
                 return;
             }

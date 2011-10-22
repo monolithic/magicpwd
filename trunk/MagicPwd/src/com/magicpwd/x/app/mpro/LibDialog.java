@@ -21,7 +21,8 @@ import com.magicpwd._comn.I1S1;
 import com.magicpwd._comn.I1S2;
 import com.magicpwd._comn.prop.Mlib;
 import com.magicpwd._cons.ConsDat;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.LangRes;
+import com.magicpwd._cons.lang.McfgRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd.d.db.DBA4000;
@@ -346,7 +347,7 @@ public class LibDialog extends ADialog
         int indx = cbTpltKind.getSelectedIndex();
         if (indx < 0)
         {
-            Lang.showMesg(this, LangRes.P30F8A05, "请选择属性类别！");
+            Lang.showMesg(this, McfgRes.P30F8A05, "请选择属性类别！");
             cbTpltKind.requestFocus();
             return;
         }
@@ -354,7 +355,7 @@ public class LibDialog extends ADialog
         String name = tfTpltName.getText();
         if (!com.magicpwd._util.Char.isValidate(name))
         {
-            Lang.showMesg(this, LangRes.P30F8A06, "类别名称不能为空！");
+            Lang.showMesg(this, McfgRes.P30F8A06, "类别名称不能为空！");
             tfTpltName.requestFocus();
             return;
         }
@@ -407,7 +408,7 @@ public class LibDialog extends ADialog
             {
                 if (currNode == null)
                 {
-                    Lang.showMesg(this, LangRes.P30F8A07, "请选择属性对应的模板！");
+                    Lang.showMesg(this, McfgRes.P30F8A07, "请选择属性对应的模板！");
                     trTpltList.requestFocus();
                     return;
                 }
@@ -474,12 +475,12 @@ public class LibDialog extends ADialog
         cbTpltKind.setSelectedItem(new I1S1(item.getP30F1102(), ""));
         if (item.isType())
         {
-            Lang.setWText(lbTpltData, LangRes.P30F8343, "类别键值");
+            Lang.setWText(lbTpltData, McfgRes.P30F8343, "类别键值");
             cbTpltKind.setEnabled(false);
         }
         else
         {
-            Lang.setWText(lbTpltData, LangRes.P30F8344, "默认数据");
+            Lang.setWText(lbTpltData, McfgRes.P30F8344, "默认数据");
             cbTpltKind.setEnabled(true);
         }
 

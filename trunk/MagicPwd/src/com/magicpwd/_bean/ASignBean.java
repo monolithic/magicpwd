@@ -23,7 +23,8 @@ import com.magicpwd._comn.item.SignItem;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._comp.WTextBox;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MproRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._util.Lang;
 
 /**
@@ -65,7 +66,7 @@ public abstract class ASignBean extends AEditBean implements IMproBean
         Lang.setWText(bt_SignConf, LangRes.P30F1525, "@O");
         Lang.setWTips(bt_SignConf, LangRes.P30F1526, "标记属性设置(Alt + O)");
 
-        Lang.setWText(mi_ConfDef, LangRes.P30F7E01, "默认标记(@D)");
+        Lang.setWText(mi_ConfDef, MproRes.P30F7E01, "默认标记(@D)");
 
         dataBox.initLang();
     }

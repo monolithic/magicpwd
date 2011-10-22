@@ -28,7 +28,8 @@ import com.magicpwd._comp.IcoLabel;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MwizRes;
+import com.magicpwd._cons.lang.NoneRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Date;
@@ -183,17 +184,17 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
 
     public void initLang()
     {
-        Bean.setText(lb_MetaName, Lang.getLang(LangRes.P30F6303, "标题"));
+        Bean.setText(lb_MetaName, Lang.getLang(MwizRes.P30F6303, "标题"));
 
-        Lang.setWText(ib_KeysIcon, LangRes.P30F6304, "@L");
-        Lang.setWTips(ib_KeysIcon, LangRes.P30F6305, "点击选择徽标(Alt + L)");
+        Lang.setWText(ib_KeysIcon, MwizRes.P30F6304, "@L");
+        Lang.setWTips(ib_KeysIcon, MwizRes.P30F6305, "点击选择徽标(Alt + L)");
 
-        Bean.setText(lb_MetaData, Lang.getLang(LangRes.P30F6306, "搜索"));
+        Bean.setText(lb_MetaData, Lang.getLang(MwizRes.P30F6306, "搜索"));
 
-        Lang.setWText(lb_HintDate, LangRes.P30F6307, "提示");
+        Lang.setWText(lb_HintDate, MwizRes.P30F6307, "提示");
 
-        Lang.setWText(ib_HintDate, LangRes.P30F6309, "@O");
-        Lang.setWTips(ib_HintDate, LangRes.P30F630A, "提醒时间(Alt + O)");
+        Lang.setWText(ib_HintDate, MwizRes.P30F6309, "@O");
+        Lang.setWTips(ib_HintDate, MwizRes.P30F630A, "提醒时间(Alt + O)");
 
         Lang.setWText(miNaMgtd, null, "已作废(@C)");
         Lang.setWTips(miNaMgtd, null, "标记当前提醒为已作废");
@@ -265,7 +266,7 @@ public class HeadBean extends javax.swing.JPanel implements IBackCall<String, St
         String metaName = tf_MetaName.getText();
         if (!com.magicpwd._util.Char.isValidate(metaName))
         {
-            Lang.showMesg(editPtn, LangRes.P30FAA1A, "记录标题不能为空!");
+            Lang.showMesg(editPtn, NoneRes.P30FAA1A, "记录标题不能为空!");
             tf_MetaName.requestFocus();
             return false;
         }

@@ -21,7 +21,8 @@ import com.magicpwd.__i.mpro.IMproBean;
 import com.magicpwd._bean.AAreaBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MproRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Util;
 import com.magicpwd.v.app.mpro.MproPtn;
@@ -161,7 +162,7 @@ public class AreaBean extends AAreaBean implements IMproBean
         String name = tfPropName.getText();
         if (!com.magicpwd._util.Char.isValidate(name))
         {
-            Lang.showMesg(mainPtn, LangRes.P30F7A38, "请输入附注名称！");
+            Lang.showMesg(mainPtn, MproRes.P30F7A38, "请输入附注名称！");
             tfPropName.requestFocus();
             return;
         }

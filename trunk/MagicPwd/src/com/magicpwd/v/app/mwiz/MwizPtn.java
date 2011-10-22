@@ -27,7 +27,7 @@ import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MwizRes;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
@@ -118,7 +118,7 @@ public class MwizPtn extends AMpwdPtn
     @Override
     public boolean initLang()
     {
-        setTitle(Lang.getLang(LangRes.P30F6201, "魔方密码"));
+        setTitle(Lang.getLang(MwizRes.P30F6201, "魔方密码"));
 
         hb_HintBar.initLang();
 
@@ -292,7 +292,7 @@ public class MwizPtn extends AMpwdPtn
     public void appendKeys()
     {
         EditPtn editDlg = getEditPtn();
-        editDlg.setTitle(Lang.getLang(LangRes.P30F6203, "口令编辑"));
+        editDlg.setTitle(Lang.getLang(MwizRes.P30F6203, "口令编辑"));
         KeysMdl keysMdl = mwizMdl.getKeysMdl();
         keysMdl.clear();
         editDlg.showData(keysMdl, true);
@@ -303,14 +303,14 @@ public class MwizPtn extends AMpwdPtn
         int row = tb_KeysList.getSelectedRow();
         if (row < 0)
         {
-            Lang.showMesg(this, LangRes.P30F6A02, "请选择您要修改的口令！");
+            Lang.showMesg(this, MwizRes.P30F6A02, "请选择您要修改的口令！");
             return;
         }
 
         try
         {
             EditPtn editDlg = getEditPtn();
-            editDlg.setTitle(Lang.getLang(LangRes.P30F6203, "口令编辑"));
+            editDlg.setTitle(Lang.getLang(MwizRes.P30F6203, "口令编辑"));
             KeysMdl keysMdl = mwizMdl.getKeysMdl();
             keysMdl.loadData(mwizMdl.getGridMdl().getKeysAt(row));
             editDlg.showData(keysMdl, true);
@@ -326,14 +326,14 @@ public class MwizPtn extends AMpwdPtn
         int row = tb_KeysList.getSelectedRow();
         if (row < 0)
         {
-            Lang.showMesg(this, LangRes.P30F6A01, "请选择您要查看的口令！");
+            Lang.showMesg(this, MwizRes.P30F6A01, "请选择您要查看的口令！");
             return;
         }
 
         try
         {
             EditPtn editDlg = getEditPtn();
-            editDlg.setTitle(Lang.getLang(LangRes.P30F6202, "口令查看"));
+            editDlg.setTitle(Lang.getLang(MwizRes.P30F6202, "口令查看"));
             KeysMdl keysMdl = mwizMdl.getKeysMdl();
             keysMdl.loadData(mwizMdl.getGridMdl().getKeysAt(row));
             editDlg.showData(keysMdl, false);
@@ -480,7 +480,7 @@ public class MwizPtn extends AMpwdPtn
         int row = tb_KeysList.getSelectedRow();
         if (row < 0)
         {
-            Lang.showMesg(this, LangRes.P30F6A03, "请选择您要删除的口令！");
+            Lang.showMesg(this, MwizRes.P30F6A03, "请选择您要删除的口令！");
             return;
         }
 

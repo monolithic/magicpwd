@@ -18,7 +18,7 @@ package com.magicpwd._prop;
 
 import com.magicpwd.__i.IPropBean;
 import com.magicpwd._comn.S1S2;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.HelpRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.v.app.mpro.MproPtn;
 
@@ -61,7 +61,7 @@ public class SKeyProp extends javax.swing.JPanel implements IPropBean
         if (skeyList == null)
         {
             skeyList = new java.util.ArrayList<S1S2>();
-            int size = Integer.parseInt(Lang.getLang(LangRes.P30F2B00, "0"), 16);
+            int size = Integer.parseInt(Lang.getLang(HelpRes.P30F2B00, "0"), 16);
             int indx = 3;
             S1S2 item;
             String[] value =
@@ -150,7 +150,7 @@ public class SKeyProp extends javax.swing.JPanel implements IPropBean
         @Override
         public String getColumnName(int columnIndex)
         {
-            return columnIndex == 0 ? Lang.getLang(LangRes.P30F2B01, "Key") : Lang.getLang(LangRes.P30F2B02, "Desp");
+            return columnIndex == 0 ? Lang.getLang(HelpRes.P30F2B01, "Key") : Lang.getLang(HelpRes.P30F2B02, "Desp");
         }
 
         @Override

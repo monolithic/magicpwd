@@ -16,7 +16,7 @@
  */
 package com.magicpwd.v.app.mpro;
 
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MproRes;
 import com.magicpwd._util.Lang;
 import java.awt.event.FocusEvent;
 
@@ -88,9 +88,9 @@ public class FindBar extends javax.swing.JPanel
 
     public void initLang()
     {
-        Lang.setWText(lb_ItemFind, LangRes.P30F7301, "查找(@X)");
+        Lang.setWText(lb_ItemFind, MproRes.P30F7301, "查找(@X)");
 
-        Lang.setWText(bt_ItemFind, LangRes.P30F7302, "查询(@Q)");
+        Lang.setWText(bt_ItemFind, MproRes.P30F7302, "查询(@Q)");
     }
 
     public void initData()
@@ -119,14 +119,14 @@ public class FindBar extends javax.swing.JPanel
         String text = getSearchText();
         if (!com.magicpwd._util.Char.isValidate(text))
         {
-            Lang.showMesg(mainPtn, LangRes.P30F7A18, "请输入您要查询的关键字，多个关键字可以使用空格或加号进行分隔！");
+            Lang.showMesg(mainPtn, MproRes.P30F7A18, "请输入您要查询的关键字，多个关键字可以使用空格或加号进行分隔！");
             requestFocus();
             return;
         }
 
         if (!mainPtn.findKeys(text))
         {
-            Lang.showMesg(mainPtn, LangRes.P30F7A19, "查询不到符合您条件的数据，请用空格或加号分隔您的搜索关键字后重试！");
+            Lang.showMesg(mainPtn, MproRes.P30F7A19, "查询不到符合您条件的数据，请用空格或加号分隔您的搜索关键字后重试！");
             requestFocus();
         }
     }

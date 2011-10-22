@@ -20,7 +20,7 @@ import com.magicpwd.__i.IUserView;
 import com.magicpwd._comn.S1S1;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.NoneRes;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._enum.AuthLog;
 import com.magicpwd._util.Char;
@@ -164,13 +164,13 @@ public class SignIn extends javax.swing.JPanel implements IUserView
     @Override
     public void initLang()
     {
-        Lang.setWText(lbUserView, LangRes.P30FA312, "模式(@M)");
+        Lang.setWText(lbUserView, NoneRes.P30FA312, "模式(@M)");
 
-        Lang.setWText(lbUserName, LangRes.P30FA301, "用户(@U)");
-        Lang.setWText(lbUserPwds, LangRes.P30FA302, "口令(@P)");
+        Lang.setWText(lbUserName, NoneRes.P30FA301, "用户(@U)");
+        Lang.setWText(lbUserPwds, NoneRes.P30FA302, "口令(@P)");
 
-        Lang.setWText(miFindPwds, LangRes.P30FA30E, "口令找回");
-        Lang.setWTips(miFindPwds, LangRes.P30FA30F, "找回您的登录口令");
+        Lang.setWText(miFindPwds, NoneRes.P30FA30E, "口令找回");
+        Lang.setWTips(miFindPwds, NoneRes.P30FA30F, "找回您的登录口令");
 
         Lang.setWText(miNewUser, null, "用户注册");
         Lang.setWTips(miNewUser, null, "注册新用户");
@@ -178,14 +178,14 @@ public class SignIn extends javax.swing.JPanel implements IUserView
         Lang.setWText(miOpenFile, null, "打开文件");
         Lang.setWTips(miOpenFile, null, "打开已有数据文件");
 
-        Lang.setWText(miUpgrade, LangRes.P30FA307, "数据升级");
-        Lang.setWTips(miUpgrade, LangRes.P30FA308, "从旧版本软件升级数据");
+        Lang.setWText(miUpgrade, NoneRes.P30FA307, "数据升级");
+        Lang.setWTips(miUpgrade, NoneRes.P30FA308, "从旧版本软件升级数据");
 
-        Lang.setWText(userPtn.getApplyButton(), LangRes.P30FA501, "登录(@S)");
+        Lang.setWText(userPtn.getApplyButton(), NoneRes.P30FA501, "登录(@S)");
 
-        Lang.setWText(userPtn.getAbortButton(), LangRes.P30FA504, "取消(@C)");
+        Lang.setWText(userPtn.getAbortButton(), NoneRes.P30FA504, "取消(@C)");
 
-        userPtn.setTitle(Lang.getLang(LangRes.P30FA201, "用户登录"));
+        userPtn.setTitle(Lang.getLang(NoneRes.P30FA201, "用户登录"));
     }
 
     @Override
@@ -202,32 +202,32 @@ public class SignIn extends javax.swing.JPanel implements IUserView
             tmp = arr[i].toLowerCase();
             if (AppView.mpro.name().equals(tmp))
             {
-                cbUserView.addItem(new S1S1(tmp, Lang.getLang(LangRes.P30FA107, "专业模式")));
+                cbUserView.addItem(new S1S1(tmp, Lang.getLang(NoneRes.P30FA107, "专业模式")));
                 continue;
             }
             if (AppView.mwiz.name().equals(tmp))
             {
-                cbUserView.addItem(new S1S1(tmp, Lang.getLang(LangRes.P30FA108, "向导模式")));
+                cbUserView.addItem(new S1S1(tmp, Lang.getLang(NoneRes.P30FA108, "向导模式")));
                 continue;
             }
             if (AppView.mpad.name().equals(tmp))
             {
-                cbUserView.addItem(new S1S1(tmp, Lang.getLang(LangRes.P30FA109, "记事模式")));
+                cbUserView.addItem(new S1S1(tmp, Lang.getLang(NoneRes.P30FA109, "记事模式")));
                 continue;
             }
             if (AppView.maoc.name().equals(tmp))
             {
-                cbUserView.addItem(new S1S1(tmp, Lang.getLang(LangRes.P30FA10A, "数值运算")));
+                cbUserView.addItem(new S1S1(tmp, Lang.getLang(NoneRes.P30FA10A, "数值运算")));
                 continue;
             }
             if (AppView.mruc.name().equals(tmp))
             {
-                cbUserView.addItem(new S1S1(tmp, Lang.getLang(LangRes.P30FA10B, "单位换算")));
+                cbUserView.addItem(new S1S1(tmp, Lang.getLang(NoneRes.P30FA10B, "单位换算")));
                 continue;
             }
             if (AppView.mgtd.name().equals(tmp))
             {
-                cbUserView.addItem(new S1S1(tmp, Lang.getLang(LangRes.P30FA10C, "任务管理")));
+                cbUserView.addItem(new S1S1(tmp, Lang.getLang(NoneRes.P30FA10C, "任务管理")));
                 continue;
             }
         }
@@ -316,7 +316,7 @@ public class SignIn extends javax.swing.JPanel implements IUserView
         String name = tfUserName.getText();
         if (!com.magicpwd._util.Char.isValidate(name))
         {
-            Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
+            Lang.showMesg(this, NoneRes.P30FAA01, "请输入用户名称！");
             tfUserName.requestFocus();
             return;
         }
@@ -328,7 +328,7 @@ public class SignIn extends javax.swing.JPanel implements IUserView
         String pwds = new String(pfUserPwds.getPassword());
         if (!com.magicpwd._util.Char.isValidate(pwds))
         {
-            Lang.showMesg(this, LangRes.P30FAA02, "请输入登录口令！");
+            Lang.showMesg(this, NoneRes.P30FAA02, "请输入登录口令！");
             pfUserPwds.requestFocus();
             return;
         }
@@ -340,7 +340,7 @@ public class SignIn extends javax.swing.JPanel implements IUserView
         String name = tfUserName.getText();
         if (!com.magicpwd._util.Char.isValidate(name))
         {
-            Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
+            Lang.showMesg(this, NoneRes.P30FAA01, "请输入用户名称！");
             tfUserName.requestFocus();
             return;
         }
@@ -359,7 +359,7 @@ public class SignIn extends javax.swing.JPanel implements IUserView
         String pwds = new String(pfUserPwds.getPassword());
         if (!com.magicpwd._util.Char.isValidate(pwds))
         {
-            Lang.showMesg(this, LangRes.P30FAA02, "请输入登录口令！");
+            Lang.showMesg(this, NoneRes.P30FAA02, "请输入登录口令！");
             pfUserPwds.requestFocus();
             return;
         }
@@ -390,12 +390,12 @@ public class SignIn extends javax.swing.JPanel implements IUserView
                 errCount += 1;
                 if (errCount > 2)
                 {
-                    Lang.showMesg(this, LangRes.P30FAA1C, "您操作的错误次太多，请确认您是否为合法用户！\n为了保障用户数据安全，软件将自动关闭。");
+                    Lang.showMesg(this, NoneRes.P30FAA1C, "您操作的错误次太多，请确认您是否为合法用户！\n为了保障用户数据安全，软件将自动关闭。");
                     System.exit(0);
                 }
                 else
                 {
-                    Lang.showMesg(this, LangRes.P30FAA03, "身份验证错误，请确认您的用户名及口令是否正确！");
+                    Lang.showMesg(this, NoneRes.P30FAA03, "身份验证错误，请确认您的用户名及口令是否正确！");
                     pfUserPwds.setText("");
                     pfUserPwds.requestFocus();
                 }
@@ -405,7 +405,7 @@ public class SignIn extends javax.swing.JPanel implements IUserView
         catch (Exception exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(this, LangRes.P30FAA03, "身份验证错误，请确认您的用户名及口令是否正确！");
+            Lang.showMesg(this, NoneRes.P30FAA03, "身份验证错误，请确认您的用户名及口令是否正确！");
             System.exit(0);
             return;
         }

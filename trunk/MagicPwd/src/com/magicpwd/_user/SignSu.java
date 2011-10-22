@@ -17,7 +17,7 @@
 package com.magicpwd._user;
 
 import com.magicpwd.__i.IUserView;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.NoneRes;
 import com.magicpwd._util.Lang;
 
 /**
@@ -100,7 +100,7 @@ public class SignSu extends javax.swing.JPanel implements IUserView
     @Override
     public void initLang()
     {
-        userPtn.setTitle(Lang.getLang(LangRes.P30FA207, "添加从属用户"));
+        userPtn.setTitle(Lang.getLang(NoneRes.P30FA207, "添加从属用户"));
     }
 
     @Override
@@ -121,21 +121,21 @@ public class SignSu extends javax.swing.JPanel implements IUserView
 //        String un = tf_UserName.getText();
 //        if (un == null)
 //        {
-//            Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
+//            Lang.showMesg(this, NoneRes.P30FAA01, "请输入用户名称！");
 //            tf_UserName.requestFocus();
 //            return;
 //        }
 //        un = un.trim();
 //        if (un.length() < 1)
 //        {
-//            Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
+//            Lang.showMesg(this, NoneRes.P30FAA01, "请输入用户名称！");
 //            tf_UserName.requestFocus();
 //            return;
 //        }
 //        String ul = userMdl.getCfg(ConsCfg.CFG_USER, "");
 //        if (ul.indexOf(un + ',') >= 0)
 //        {
-//            Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
+//            Lang.showMesg(this, NoneRes.P30FAA01, "请输入用户名称！");
 //        }
 //
 //        if (backCall != null)

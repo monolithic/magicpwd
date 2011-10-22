@@ -19,7 +19,8 @@ package com.magicpwd._prop;
 import com.magicpwd.__i.IPropBean;
 import com.magicpwd._comp.LnkLabel;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.HelpRes;
+import com.magicpwd._cons.lang.McfgRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd.v.app.mpro.MproPtn;
@@ -112,15 +113,15 @@ public class InfoProp extends javax.swing.JPanel implements IPropBean
     @Override
     public void initLang()
     {
-        Lang.setWText(lt_Soft, LangRes.P30F83D1, "软件：");
+        Lang.setWText(lt_Soft, McfgRes.P30F83D1, "软件：");
 
-        Lang.setWText(lt_Vers, LangRes.P30F83D2, "版本：");
+        Lang.setWText(lt_Vers, McfgRes.P30F83D2, "版本：");
 
-        Lang.setWText(lt_Plat, LangRes.P30F83D3, "平台：");
+        Lang.setWText(lt_Plat, McfgRes.P30F83D3, "平台：");
 
-        Lang.setWText(lt_Site, LangRes.P30F83D4, "首页：");
+        Lang.setWText(lt_Site, McfgRes.P30F83D4, "首页：");
 
-        Lang.setWText(lt_Copy, LangRes.P30F83D5, "版权：");
+        Lang.setWText(lt_Copy, McfgRes.P30F83D5, "版权：");
     }
 
     @Override
@@ -136,7 +137,7 @@ public class InfoProp extends javax.swing.JPanel implements IPropBean
 
         lc_Copy.setText(Char.format(ConsEnv.SOFTCOPY, "" + java.util.Calendar.getInstance().get(java.util.Calendar.YEAR)));
 
-        ta_Note.setText(Lang.getLang(LangRes.P30F2F01, ""));
+        ta_Note.setText(Lang.getLang(HelpRes.P30F2F01, ""));
     }
 
     @Override

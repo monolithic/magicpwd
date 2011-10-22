@@ -18,7 +18,7 @@ package com.magicpwd.e.tray;
 
 import com.magicpwd.__a.tray.ATrayAction;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MproRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 
@@ -38,7 +38,7 @@ public class MailAction extends ATrayAction
     {
         if (!java.awt.Desktop.isDesktopSupported())
         {
-            Lang.showMesg(trayPtn.getMpwdPtn(), LangRes.P30F7A11, "");
+            Lang.showMesg(trayPtn.getMpwdPtn(), MproRes.P30F7A11, "");
         }
 
         try

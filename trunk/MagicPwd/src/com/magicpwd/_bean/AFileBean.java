@@ -24,7 +24,8 @@ import com.magicpwd._comn.item.FileItem;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MproRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.File;
@@ -289,25 +290,25 @@ public abstract class AFileBean extends AEditBean
         {
             if (!filePath.exists())
             {
-                Lang.showMesg(formPtn, LangRes.P30F7A03, "");
+                Lang.showMesg(formPtn, MproRes.P30F7A03, "");
                 tf_PropData.requestFocus();
                 return false;
             }
             if (!filePath.isFile())
             {
-                Lang.showMesg(formPtn, LangRes.P30F7A04, "");
+                Lang.showMesg(formPtn, MproRes.P30F7A04, "");
                 tf_PropData.requestFocus();
                 return false;
             }
             if (!filePath.canRead())
             {
-                Lang.showMesg(formPtn, LangRes.P30F7A05, "");
+                Lang.showMesg(formPtn, MproRes.P30F7A05, "");
                 tf_PropData.requestFocus();
                 return false;
             }
             if (filePath.length() > 1048576)
             {
-                Lang.showMesg(formPtn, LangRes.P30F7A06, "");
+                Lang.showMesg(formPtn, MproRes.P30F7A06, "");
                 tf_PropData.requestFocus();
                 return false;
             }
@@ -323,7 +324,7 @@ public abstract class AFileBean extends AEditBean
                 {
                     if (!amaFile.createNewFile())
                     {
-                        Lang.showMesg(formPtn, LangRes.P30F7A2C, "文件上传保存出错，请重试！");
+                        Lang.showMesg(formPtn, MproRes.P30F7A2C, "文件上传保存出错，请重试！");
                         return false;
                     }
                 }
@@ -332,7 +333,7 @@ public abstract class AFileBean extends AEditBean
             catch (Exception exp)
             {
                 Logs.exception(exp);
-                Lang.showMesg(formPtn, LangRes.P30F7A2C, "文件上传保存出错，请重试！");
+                Lang.showMesg(formPtn, MproRes.P30F7A2C, "文件上传保存出错，请重试！");
                 return false;
             }
         }

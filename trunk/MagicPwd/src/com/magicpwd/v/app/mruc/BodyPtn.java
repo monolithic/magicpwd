@@ -21,7 +21,7 @@ import com.magicpwd._comn.item.DataItem;
 import com.magicpwd._comn.item.SignItem;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MaocRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
@@ -263,7 +263,7 @@ public class BodyPtn extends javax.swing.JPanel
         String val = field.getText().replaceAll("\\s+", "");
         if (val.length() < 1 || !Char.isValidatePositiveDecimal(val))
         {
-            Lang.showMesg(mrucPtn, LangRes.P30FBA01, "请输入一个非负数值！");
+            Lang.showMesg(mrucPtn, MaocRes.P30FBA01, "请输入一个非负数值！");
             field.requestFocus();
             return;
         }

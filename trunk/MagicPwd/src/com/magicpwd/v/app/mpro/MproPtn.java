@@ -47,7 +47,8 @@ import com.magicpwd._comn.mpwd.Mcat;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MproRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Card;
@@ -127,7 +128,7 @@ public class MproPtn extends AMpwdPtn
     @Override
     public boolean initLang()
     {
-        setTitle(Lang.getLang(LangRes.P30F7201, "魔方密码"));
+        setTitle(Lang.getLang(MproRes.P30F7201, "魔方密码"));
 
         initGuidLang();
         initPropLang();
@@ -341,7 +342,7 @@ public class MproPtn extends AMpwdPtn
         // 数据未被修改
         if (!gridMdl.isModified())
         {
-            //Lang.showMesg(this, LangRes.P30F7A27, "您未曾修改过数据，不需要保存！");
+            //Lang.showMesg(this, LangPro.P30F7A27, "您未曾修改过数据，不需要保存！");
             return false;
         }
 
@@ -352,7 +353,7 @@ public class MproPtn extends AMpwdPtn
             javax.swing.tree.TreePath path = trGuidTree.getSelectionPath();
             if (path == null)
             {
-                Lang.showMesg(this, LangRes.P30F7A0D, "请选择口令类别信息！");
+                Lang.showMesg(this, MproRes.P30F7A0D, "请选择口令类别信息！");
                 trGuidTree.requestFocus();
                 return false;
             }
@@ -361,7 +362,7 @@ public class MproPtn extends AMpwdPtn
             Mcat kind = (Mcat) node.getUserObject();
             if (!isKindValidate(kind))
             {
-                Lang.showMesg(this, LangRes.P30F7A4A, "不能保存到任务列表中去！");
+                Lang.showMesg(this, MproRes.P30F7A4A, "不能保存到任务列表中去！");
                 trGuidTree.requestFocus();
                 return false;
             }
@@ -372,7 +373,7 @@ public class MproPtn extends AMpwdPtn
         MetaItem metaItem = (MetaItem) gridMdl.getItemAt(ConsEnv.PWDS_HEAD_META);
         if (!com.magicpwd._util.Char.isValidate(metaItem.getName()))
         {
-            Lang.showMesg(this, LangRes.P30F7A0C, "请输入口令标题！");
+            Lang.showMesg(this, MproRes.P30F7A0C, "请输入口令标题！");
             tbKeysView.setRowSelectionInterval(1, 1);
             showPropEdit(metaItem, true);
             return false;
@@ -385,7 +386,7 @@ public class MproPtn extends AMpwdPtn
         catch (Exception exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(this, LangRes.P30F7A0E, "口令数据保存失败，请重新启动本程序后再次尝试！");
+            Lang.showMesg(this, MproRes.P30F7A0E, "口令数据保存失败，请重新启动本程序后再次尝试！");
             return false;
         }
 
@@ -876,9 +877,9 @@ public class MproPtn extends AMpwdPtn
 
     private void initGuidLang()
     {
-        Lang.setWTips(trGuidTree, LangRes.P30F7B08, "类别列表(Alt + G)");
-        Lang.setWTips(lsGuidList, LangRes.P30F7B09, "口令列表(Alt + K)");
-        Lang.setWTips(spKeysView, LangRes.P30F7B0A, "属性列表(Alt + T)");
+        Lang.setWTips(trGuidTree, MproRes.P30F7B08, "类别列表(Alt + G)");
+        Lang.setWTips(lsGuidList, MproRes.P30F7B09, "口令列表(Alt + K)");
+        Lang.setWTips(spKeysView, MproRes.P30F7B0A, "属性列表(Alt + T)");
     }
 
     private void initPropLang()
@@ -1157,7 +1158,7 @@ public class MproPtn extends AMpwdPtn
 
         if (mproMdl.getGridMdl().isModified())
         {
-            if (Lang.showFirm(this, LangRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", mproMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_META).getName()) != javax.swing.JOptionPane.YES_OPTION)
+            if (Lang.showFirm(this, MproRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", mproMdl.getGridMdl().getItemAt(ConsEnv.PWDS_HEAD_META).getName()) != javax.swing.JOptionPane.YES_OPTION)
             {
                 lsGuidList.setSelectedValue(lastPwd, true);
                 return;
@@ -1319,7 +1320,7 @@ public class MproPtn extends AMpwdPtn
     {
         if (tbKeysView.getRowCount() == 1)
         {
-            Lang.showMesg(this, LangRes.P30F7A01, "");
+            Lang.showMesg(this, MproRes.P30F7A01, "");
             mproBean[ConsDat.INDX_GUID].requestFocus();
             return false;
         }
@@ -1386,7 +1387,7 @@ public class MproPtn extends AMpwdPtn
     {
         if (gridModified())
         {
-            if (Lang.showFirm(this, LangRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", getMeta().getName()) != javax.swing.JOptionPane.YES_OPTION)
+            if (Lang.showFirm(this, MproRes.P30F7A09, "记录数据 {0} 已修改，要放弃修改吗？", getMeta().getName()) != javax.swing.JOptionPane.YES_OPTION)
             {
                 return false;
             }
@@ -1462,9 +1463,9 @@ public class MproPtn extends AMpwdPtn
 
             if (dstFile == null || !dstFile.exists())
             {
-                Lang.showMesg(this, LangRes.P30F7A46, "生成卡片文件失败，请稍后重试！");
+                Lang.showMesg(this, MproRes.P30F7A46, "生成卡片文件失败，请稍后重试！");
             }
-            else if (javax.swing.JOptionPane.YES_OPTION == Lang.showFirm(this, LangRes.P30F7A47, "生成卡片文件成功，要打开卡片文件吗？"))
+            else if (javax.swing.JOptionPane.YES_OPTION == Lang.showFirm(this, MproRes.P30F7A47, "生成卡片文件成功，要打开卡片文件吗？"))
             {
                 if (!Desk.open(dstFile))
                 {
