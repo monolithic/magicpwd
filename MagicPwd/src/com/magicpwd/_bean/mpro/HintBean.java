@@ -25,7 +25,7 @@ import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsDat;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Date;
@@ -69,6 +69,7 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
         blPropName = new BtnLabel();
         blPropName.setIcon(mproPtn.getFeelIcon("hint-time", "var:hint-time"));
         lbPropName = new javax.swing.JLabel();
+        ltPropName = new javax.swing.JLabel("Demo0000000000000000000");
 
         pmDateView = new javax.swing.JPopupMenu();
         miHalfHour = new javax.swing.JMenuItem();
@@ -94,11 +95,15 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
+        javax.swing.GroupLayout.SequentialGroup hsg1 = layout.createSequentialGroup();
+        hsg1.addComponent(blPropName, 20, 20, 20);
+        hsg1.addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED);
+        hsg1.addComponent(ltPropName);
         javax.swing.GroupLayout.ParallelGroup hpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
         hpg1.addComponent(lbPropName);
         hpg1.addComponent(lbPropData);
         javax.swing.GroupLayout.ParallelGroup hpg2 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING);
-        hpg2.addComponent(blPropName, 20, 20, 20);
+        hpg2.addGroup(hsg1);
         hpg2.addComponent(sp_PropData, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE);
         javax.swing.GroupLayout.SequentialGroup hsg = layout.createSequentialGroup();
         hsg.addGroup(hpg1);
@@ -111,6 +116,7 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
         javax.swing.GroupLayout.ParallelGroup vpg1 = layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER);
         vpg1.addComponent(lbPropName);
         vpg1.addComponent(blPropName, 20, 20, 20);
+        vpg1.addComponent(ltPropName);
         javax.swing.GroupLayout.SequentialGroup vsg1 = layout.createSequentialGroup();
         vsg1.addComponent(lbPropData);
         vsg1.addContainerGap(49, Short.MAX_VALUE);
@@ -670,6 +676,7 @@ public class HintBean extends javax.swing.JPanel implements IMproBean
     }
     private javax.swing.JLabel lbPropName;
     private BtnLabel blPropName;
+    private javax.swing.JLabel ltPropName;
     private javax.swing.JLabel lbPropData;
     private javax.swing.JTextArea taPropData;
     private javax.swing.JPopupMenu pmDateView;

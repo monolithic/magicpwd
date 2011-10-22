@@ -23,7 +23,9 @@ import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.item.HintItem;
 import com.magicpwd._comn.item.LogoItem;
 import com.magicpwd._comn.item.MetaItem;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.LangRes;
+import com.magicpwd._cons.lang.McfgRes;
+import com.magicpwd._cons.lang.NoneRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -156,14 +158,14 @@ public class HistDlg extends javax.swing.JDialog
     {
         setTitle(Lang.getLang(LangRes.P30F1207, "历史记录"));
 
-        Lang.setWText(bt_PickCur, LangRes.P30F850D, "@R");
-        Lang.setWTips(bt_PickCur, LangRes.P30F850E, "恢复(Alt + R)");
+        Lang.setWText(bt_PickCur, McfgRes.P30F850D, "@R");
+        Lang.setWTips(bt_PickCur, McfgRes.P30F850E, "恢复(Alt + R)");
 
-        Lang.setWText(bt_DropCur, LangRes.P30F850F, "@C");
-        Lang.setWTips(bt_DropCur, LangRes.P30F8510, "删除当前(Alt + C)");
+        Lang.setWText(bt_DropCur, McfgRes.P30F850F, "@C");
+        Lang.setWTips(bt_DropCur, McfgRes.P30F8510, "删除当前(Alt + C)");
 
-        Lang.setWText(bt_DropAll, LangRes.P30F8511, "@D");
-        Lang.setWTips(bt_DropAll, LangRes.P30F8512, "删除所有(Alt + D)");
+        Lang.setWText(bt_DropAll, McfgRes.P30F8511, "@D");
+        Lang.setWTips(bt_DropAll, McfgRes.P30F8512, "删除所有(Alt + D)");
     }
 
     public void initData()
@@ -219,20 +221,20 @@ public class HistDlg extends javax.swing.JDialog
 
             StringBuilder sb = new StringBuilder();
             idx = 0;
-            String t = Lang.getLang(LangRes.P30FA101, "：");
+            String t = Lang.getLang(NoneRes.P30FA101, "：");
             GuidItem guid = (GuidItem) ls_ItemList.get(idx++);
-            sb.append(Lang.getLang(LangRes.P30FA102, "时间")).append(t).append(guid.getName()).append('\n');
+            sb.append(Lang.getLang(NoneRes.P30FA102, "时间")).append(t).append(guid.getName()).append('\n');
             MetaItem meta = (MetaItem) ls_ItemList.get(idx++);
-            sb.append(Lang.getLang(LangRes.P30FA103, "标题")).append(t).append(meta.getName()).append('\n');
+            sb.append(Lang.getLang(NoneRes.P30FA103, "标题")).append(t).append(meta.getName()).append('\n');
             LogoItem logo = (LogoItem) ls_ItemList.get(idx++);
-            sb.append(Lang.getLang(LangRes.P30FA104, "徽标")).append(t);
+            sb.append(Lang.getLang(NoneRes.P30FA104, "徽标")).append(t);
             if (Char.isValidate(logo.getPath()))
             {
                 sb.append(logo.getPath()).append(java.io.File.separator);
             }
             sb.append(logo.getName()).append('\n');
             HintItem hint = (HintItem) ls_ItemList.get(idx++);
-            sb.append(Lang.getLang(LangRes.P30FA105, "提醒")).append(t).append(hint.getData()).append('\n');
+            sb.append(Lang.getLang(NoneRes.P30FA105, "提醒")).append(t).append(hint.getData()).append('\n');
             IEditItem temp;
             for (int j = ls_ItemList.size(); idx < j; idx += 1)
             {
@@ -245,7 +247,7 @@ public class HistDlg extends javax.swing.JDialog
         catch (Exception exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(this, LangRes.P30FAA0F, "");
+            Lang.showMesg(this, NoneRes.P30FAA0F, "");
         }
     }
 
@@ -257,7 +259,7 @@ public class HistDlg extends javax.swing.JDialog
             return;
         }
 
-        if (Lang.showFirm(this, LangRes.P30FAA11, "确认要删除选中的历史信息么，此操作不可恢复？") != JOptionPane.YES_OPTION)
+        if (Lang.showFirm(this, NoneRes.P30FAA11, "确认要删除选中的历史信息么，此操作不可恢复？") != JOptionPane.YES_OPTION)
         {
             return;
         }
@@ -272,7 +274,7 @@ public class HistDlg extends javax.swing.JDialog
         {
             return;
         }
-        if (Lang.showFirm(this, LangRes.P30FAA12, "确认要删除此记录的所有历史信息吗，此操作将不可恢复？") != JOptionPane.YES_OPTION)
+        if (Lang.showFirm(this, NoneRes.P30FAA12, "确认要删除此记录的所有历史信息吗，此操作将不可恢复？") != JOptionPane.YES_OPTION)
         {
             return;
         }
@@ -289,7 +291,7 @@ public class HistDlg extends javax.swing.JDialog
             return;
         }
 
-        if (Lang.showFirm(this, LangRes.P30FAA13, "为了确保您的数据安全，此操作仅复制一份选中的数据为最新数据，\n确认要执行此操作么？") != JOptionPane.YES_OPTION)
+        if (Lang.showFirm(this, NoneRes.P30FAA13, "为了确保您的数据安全，此操作仅复制一份选中的数据为最新数据，\n确认要执行此操作么？") != JOptionPane.YES_OPTION)
         {
             return;
         }

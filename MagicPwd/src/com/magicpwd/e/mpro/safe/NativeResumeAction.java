@@ -20,7 +20,7 @@ import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.S1S1;
 import com.magicpwd._cons.ConsCfg;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MproRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -42,11 +42,11 @@ public class NativeResumeAction extends AMproAction implements IBackCall<String,
     {
         if (!Char.isValidate(mproPtn.getUserMdl().getCfg(ConsCfg.CFG_SAFE_BACK_LOC, "")))
         {
-            Lang.showMesg(mproPtn, LangRes.P30F7A54, "您还没有配置本地备份目录！");
+            Lang.showMesg(mproPtn, MproRes.P30F7A54, "您还没有配置本地备份目录！");
             return;
         }
 
-        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mproPtn, LangRes.P30F7A53, "确认要执行恢复操作吗？"))
+        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mproPtn, MproRes.P30F7A53, "确认要执行恢复操作吗？"))
         {
             return;
         }
@@ -111,7 +111,7 @@ public class NativeResumeAction extends AMproAction implements IBackCall<String,
         {
             mproPtn.hideProgress();
 
-            Lang.showMesg(mproPtn, LangRes.P30F7A55, "没有发现可用的备份数据！");
+            Lang.showMesg(mproPtn, MproRes.P30F7A55, "没有发现可用的备份数据！");
             return;
         }
 
@@ -140,11 +140,11 @@ public class NativeResumeAction extends AMproAction implements IBackCall<String,
 
             if (b)
             {
-                Lang.showMesg(mproPtn, LangRes.P30F7A3F, "恭喜，数据恢复成功，您需要重新启动本程序！");
+                Lang.showMesg(mproPtn, MproRes.P30F7A3F, "恭喜，数据恢复成功，您需要重新启动本程序！");
             }
             else
             {
-                Lang.showMesg(mproPtn, LangRes.P30F7A3E, "数据恢复失败，请重启软件后重试！");
+                Lang.showMesg(mproPtn, MproRes.P30F7A3E, "数据恢复失败，请重启软件后重试！");
             }
         }
         catch (Exception exp)

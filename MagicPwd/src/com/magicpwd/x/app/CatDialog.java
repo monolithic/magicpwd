@@ -19,7 +19,8 @@ package com.magicpwd.x.app;
 import com.magicpwd.__a.ADialog;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.mpwd.Mcat;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.McmdRes;
+import com.magicpwd._cons.lang.NoneRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 import com.magicpwd.r.mpro.CatNode;
@@ -86,11 +87,11 @@ public class CatDialog extends ADialog
 
     public void initLang()
     {
-        Lang.setWText(bt_Apply, LangRes.P30FA50A, "确定(@O)");
+        Lang.setWText(bt_Apply, NoneRes.P30FA50A, "确定(@O)");
 
-        Lang.setWText(bt_Abort, LangRes.P30FA50B, "取消(@C)");
+        Lang.setWText(bt_Abort, NoneRes.P30FA50B, "取消(@C)");
 
-        setTitle(Lang.getLang(LangRes.P30F4206, "把记录迁移到..."));
+        setTitle(Lang.getLang(McmdRes.P30F4206, "把记录迁移到..."));
     }
 
     public void initData()
@@ -131,7 +132,7 @@ public class CatDialog extends ADialog
         javax.swing.tree.TreePath tp = tr_KindList.getSelectionPath();
         if (tp == null)
         {
-            Lang.showMesg(this, LangRes.P30FAA19, "请选择您要移动的目标类别！");
+            Lang.showMesg(this, NoneRes.P30FAA19, "请选择您要移动的目标类别！");
             return;
         }
 

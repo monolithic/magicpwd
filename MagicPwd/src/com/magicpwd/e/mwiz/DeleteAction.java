@@ -17,7 +17,7 @@
 package com.magicpwd.e.mwiz;
 
 import com.magicpwd.__a.mwiz.AMwizAction;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MproRes;
 import com.magicpwd._util.Lang;
 
 /**
@@ -36,11 +36,11 @@ public class DeleteAction extends AMwizAction
 //            return;
 //        }
 
-        if (Lang.showFirm(mwizPtn, LangRes.P30F7A0A, "您正在进行的操作是删除记录数据及其所有历史信息，确认继续么？") != javax.swing.JOptionPane.YES_OPTION)
+        if (Lang.showFirm(mwizPtn, MproRes.P30F7A0A, "您正在进行的操作是删除记录数据及其所有历史信息，确认继续么？") != javax.swing.JOptionPane.YES_OPTION)
         {
             return;
         }
-        if (Lang.showFirm(mwizPtn, LangRes.P30F7A0B, "确认一下您操作的正确性，要返回么？") != javax.swing.JOptionPane.NO_OPTION)
+        if (Lang.showFirm(mwizPtn, MproRes.P30F7A0B, "确认一下您操作的正确性，要返回么？") != javax.swing.JOptionPane.NO_OPTION)
         {
             return;
         }

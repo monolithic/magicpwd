@@ -17,7 +17,7 @@
 package com.magicpwd._user;
 
 import com.magicpwd.__i.IUserView;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.NoneRes;
 import com.magicpwd._enum.AuthLog;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -104,17 +104,17 @@ public class SignPk extends javax.swing.JPanel implements IUserView
     @Override
     public void initLang()
     {
-        Lang.setWText(lbUserPwd0, LangRes.P30FA304, "现有口令(@O)");
+        Lang.setWText(lbUserPwd0, NoneRes.P30FA304, "现有口令(@O)");
 
-        Lang.setWText(lbUserPwd1, LangRes.P30FA305, "修改口令(@N)");
+        Lang.setWText(lbUserPwd1, NoneRes.P30FA305, "修改口令(@N)");
 
-        Lang.setWText(lbUserPwd2, LangRes.P30FA306, "口令确认(@R)");
+        Lang.setWText(lbUserPwd2, NoneRes.P30FA306, "口令确认(@R)");
 
-        Lang.setWText(userPtn.getApplyButton(), LangRes.P30FA503, "修改(@S)");
+        Lang.setWText(userPtn.getApplyButton(), NoneRes.P30FA503, "修改(@S)");
 
-        Lang.setWText(userPtn.getAbortButton(), LangRes.P30FA504, "取消(@C)");
+        Lang.setWText(userPtn.getAbortButton(), NoneRes.P30FA504, "取消(@C)");
 
-        userPtn.setTitle(Lang.getLang(LangRes.P30FA205, "登录口令修改"));
+        userPtn.setTitle(Lang.getLang(NoneRes.P30FA205, "登录口令修改"));
     }
 
     @Override
@@ -135,7 +135,7 @@ public class SignPk extends javax.swing.JPanel implements IUserView
         String p2 = new String(pfUserPwd2.getPassword());
         if (!p1.equals(p2))
         {
-            Lang.showMesg(this, LangRes.P30FAA08, "新输入的两次口令不匹配，请重新输入！");
+            Lang.showMesg(this, NoneRes.P30FAA08, "新输入的两次口令不匹配，请重新输入！");
             pfUserPwd1.setText("");
             pfUserPwd2.setText("");
             pfUserPwd1.requestFocus();
@@ -145,7 +145,7 @@ public class SignPk extends javax.swing.JPanel implements IUserView
         String p0 = new String(pfUserPwd0.getPassword());
         if (!com.magicpwd._util.Char.isValidate(p0))
         {
-            Lang.showMesg(this, LangRes.P30FAA02, "请输入登录口令！");
+            Lang.showMesg(this, NoneRes.P30FAA02, "请输入登录口令！");
             pfUserPwd0.requestFocus();
             return;
         }
@@ -154,7 +154,7 @@ public class SignPk extends javax.swing.JPanel implements IUserView
             boolean b = userPtn.getUserMdl().signPk(p0, p1);
             if (!b)
             {
-                Lang.showMesg(this, LangRes.P30FAA09, "口令更改失败，请检查您输入的口令是否与原口令相同！");
+                Lang.showMesg(this, NoneRes.P30FAA09, "口令更改失败，请检查您输入的口令是否与原口令相同！");
                 pfUserPwd0.setText("");
                 pfUserPwd1.setText("");
                 pfUserPwd2.setText("");
@@ -165,13 +165,13 @@ public class SignPk extends javax.swing.JPanel implements IUserView
         catch (Exception exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(this, LangRes.P30FAA09, "口令更改失败，请检查您输入的口令是否与原口令相同！");
+            Lang.showMesg(this, NoneRes.P30FAA09, "口令更改失败，请检查您输入的口令是否与原口令相同！");
             return;
         }
 
         userPtn.callBack(AuthLog.signPk, null);
         userPtn.hideWindow();
-        Lang.showMesg(this, LangRes.P30FAA0A, "登录口令修改成功，您可以使用新口令登录了！");
+        Lang.showMesg(this, NoneRes.P30FAA0A, "登录口令修改成功，您可以使用新口令登录了！");
     }
 
     @Override

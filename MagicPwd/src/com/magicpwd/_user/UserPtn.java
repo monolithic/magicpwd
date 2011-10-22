@@ -19,7 +19,7 @@ package com.magicpwd._user;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd.__i.IUserView;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.NoneRes;
 import com.magicpwd._enum.AuthLog;
 import com.magicpwd._enum.RunMode;
 import com.magicpwd._util.Bean;
@@ -269,8 +269,8 @@ public class UserPtn extends javax.swing.JPanel
 
         Lang.setWTips(lbMenu, null, "更多选项");
 
-        Lang.setWText(miOskb, LangRes.P30FA310, "屏幕键盘");
-        Lang.setWTips(miOskb, LangRes.P30FA311, "使用屏幕键盘输入");
+        Lang.setWText(miOskb, NoneRes.P30FA310, "屏幕键盘");
+        Lang.setWTips(miOskb, NoneRes.P30FA311, "使用屏幕键盘输入");
 
         pack();
         return true;

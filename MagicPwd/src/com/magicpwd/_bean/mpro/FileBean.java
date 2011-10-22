@@ -23,7 +23,8 @@ import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comn.item.FileItem;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MproRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.v.app.mpro.MproPtn;
@@ -177,7 +178,7 @@ public class FileBean extends AFileBean implements IMproBean
         String name = tf_PropName.getText();
         if (!com.magicpwd._util.Char.isValidate(name))
         {
-            Lang.showMesg(mainPtn, LangRes.P30F7A2B, "请输入文件名称！");
+            Lang.showMesg(mainPtn, MproRes.P30F7A2B, "请输入文件名称！");
             tf_PropName.requestFocus();
             return;
         }
@@ -221,13 +222,13 @@ public class FileBean extends AFileBean implements IMproBean
             catch (java.io.IOException exp)
             {
                 Logs.exception(exp);
-                Lang.showMesg(mainPtn, LangRes.P30F7A2E, "无法创建文件 {0}, 请确认您是否有足够的访问权限！", filePath.getPath());
+                Lang.showMesg(mainPtn, MproRes.P30F7A2E, "无法创建文件 {0}, 请确认您是否有足够的访问权限！", filePath.getPath());
                 return;
             }
         }
         if (!filePath.canWrite())
         {
-            Lang.showMesg(mainPtn, LangRes.P30F7A2F, "无法保存数据到您指定的路径，请确认您是否有足够的权限！");
+            Lang.showMesg(mainPtn, MproRes.P30F7A2F, "无法保存数据到您指定的路径，请确认您是否有足够的权限！");
             return;
         }
         if (filePath.isDirectory())
@@ -243,7 +244,7 @@ public class FileBean extends AFileBean implements IMproBean
         catch (Exception exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(mainPtn, LangRes.P30F7A2D, "文件下载保存出错，请重试！");
+            Lang.showMesg(mainPtn, MproRes.P30F7A2D, "文件下载保存出错，请重试！");
         }
     }
 

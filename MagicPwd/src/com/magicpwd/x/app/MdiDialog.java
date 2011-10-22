@@ -19,7 +19,8 @@ package com.magicpwd.x.app;
 import com.magicpwd.__i.IPropBean;
 import com.magicpwd._comn.S1S2;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.LangRes;
+import com.magicpwd._cons.lang.NoneRes;
 import com.magicpwd._prop.CharProp;
 import com.magicpwd._prop.IdioProp;
 import com.magicpwd._prop.InfoProp;
@@ -167,9 +168,9 @@ public class MdiDialog extends javax.swing.JDialog
 
     public void initLang()
     {
-        Lang.setWText(bt_Applied, LangRes.P30FA50E, "应用(@A)");
-        Lang.setWText(bt_Confirm, LangRes.P30FA50A, "确定(@O)");
-        Lang.setWText(bt_Discard, LangRes.P30FA50B, "取消(@C)");
+        Lang.setWText(bt_Applied, NoneRes.P30FA50E, "应用(@A)");
+        Lang.setWText(bt_Confirm, NoneRes.P30FA50A, "确定(@O)");
+        Lang.setWText(bt_Discard, NoneRes.P30FA50B, "取消(@C)");
     }
 
     public void initData()

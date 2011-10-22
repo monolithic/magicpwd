@@ -18,7 +18,7 @@ package com.magicpwd.e.mpro.safe;
 
 import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd.__i.IBackCall;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MproRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 
@@ -36,7 +36,7 @@ public class RemoteBackupAction extends AMproAction implements IBackCall<String,
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mproPtn, LangRes.P30F7A40, "确认要执行备份数据到云端的操作吗，此操作将需要一定的时间？"))
+        if (javax.swing.JOptionPane.YES_OPTION != Lang.showFirm(mproPtn, MproRes.P30F7A40, "确认要执行备份数据到云端的操作吗，此操作将需要一定的时间？"))
         {
             return;
         }
@@ -79,11 +79,11 @@ public class RemoteBackupAction extends AMproAction implements IBackCall<String,
 
             if (b)
             {
-                Lang.showMesg(mproPtn, LangRes.P30F7A3D, "恭喜，数据备份成功！");
+                Lang.showMesg(mproPtn, MproRes.P30F7A3D, "恭喜，数据备份成功！");
             }
             else
             {
-                Lang.showMesg(mproPtn, LangRes.P30F7A3C, "数据备份失败，请重启软件后重试！");
+                Lang.showMesg(mproPtn, MproRes.P30F7A3C, "数据备份失败，请重启软件后重试！");
             }
         }
         catch (Exception exp)

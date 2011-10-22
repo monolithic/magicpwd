@@ -17,7 +17,7 @@
 package com.magicpwd._user;
 
 import com.magicpwd.__i.IUserView;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.NoneRes;
 import com.magicpwd._enum.AuthLog;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -97,15 +97,15 @@ public class SignRs extends javax.swing.JPanel implements IUserView
     @Override
     public void initLang()
     {
-        Lang.setWText(lbUserName, LangRes.P30FA301, "用户(@U)");
+        Lang.setWText(lbUserName, NoneRes.P30FA301, "用户(@U)");
 
-        Lang.setWText(lbUserPwds, LangRes.P30FA302, "口令(@P)");
+        Lang.setWText(lbUserPwds, NoneRes.P30FA302, "口令(@P)");
 
-        Lang.setWText(userPtn.getApplyButton(), LangRes.P30FA501, "登录(@S)");
+        Lang.setWText(userPtn.getApplyButton(), NoneRes.P30FA501, "登录(@S)");
 
-        Lang.setWText(userPtn.getAbortButton(), LangRes.P30FA504, "取消(@C)");
+        Lang.setWText(userPtn.getAbortButton(), NoneRes.P30FA504, "取消(@C)");
 
-        userPtn.setTitle(Lang.getLang(LangRes.P30FA202, "身份验证"));
+        userPtn.setTitle(Lang.getLang(NoneRes.P30FA202, "身份验证"));
     }
 
     @Override
@@ -186,7 +186,7 @@ public class SignRs extends javax.swing.JPanel implements IUserView
         String name = tfUserName.getText();
         if (!com.magicpwd._util.Char.isValidate(name))
         {
-            Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
+            Lang.showMesg(this, NoneRes.P30FAA01, "请输入用户名称！");
             tfUserName.requestFocus();
             return;
         }
@@ -198,7 +198,7 @@ public class SignRs extends javax.swing.JPanel implements IUserView
         String pwds = new String(pfUserPwds.getPassword());
         if (!com.magicpwd._util.Char.isValidate(pwds))
         {
-            Lang.showMesg(this, LangRes.P30FAA02, "请输入登录口令！");
+            Lang.showMesg(this, NoneRes.P30FAA02, "请输入登录口令！");
             pfUserPwds.requestFocus();
             return;
         }
@@ -209,14 +209,14 @@ public class SignRs extends javax.swing.JPanel implements IUserView
         String name = tfUserName.getText();
         if (!com.magicpwd._util.Char.isValidate(name))
         {
-            Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
+            Lang.showMesg(this, NoneRes.P30FAA01, "请输入用户名称！");
             tfUserName.requestFocus();
             return;
         }
         String pwds = new String(pfUserPwds.getPassword());
         if (!com.magicpwd._util.Char.isValidate(pwds))
         {
-            Lang.showMesg(this, LangRes.P30FAA02, "请输入登录口令！");
+            Lang.showMesg(this, NoneRes.P30FAA02, "请输入登录口令！");
             pfUserPwds.requestFocus();
             return;
         }
@@ -234,12 +234,12 @@ public class SignRs extends javax.swing.JPanel implements IUserView
                 errCount += 1;
                 if (errCount > 2)
                 {
-                    Lang.showMesg(this, LangRes.P30FAA1C, "您操作的错误次太多，请确认您是否为合法用户！\n为了保障用户数据安全，软件将自动关闭。");
+                    Lang.showMesg(this, NoneRes.P30FAA1C, "您操作的错误次太多，请确认您是否为合法用户！\n为了保障用户数据安全，软件将自动关闭。");
                     System.exit(0);
                 }
                 else
                 {
-                    Lang.showMesg(this, LangRes.P30FAA03, "身份验证错误，请确认您的用户名及口令是否正确！");
+                    Lang.showMesg(this, NoneRes.P30FAA03, "身份验证错误，请确认您的用户名及口令是否正确！");
                     pfUserPwds.setText("");
                     pfUserPwds.requestFocus();
                 }
@@ -249,7 +249,7 @@ public class SignRs extends javax.swing.JPanel implements IUserView
         catch (Exception exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(this, LangRes.P30FAA03, "身份验证错误，请确认您的用户名及口令是否正确！");
+            Lang.showMesg(this, NoneRes.P30FAA03, "身份验证错误，请确认您的用户名及口令是否正确！");
             System.exit(0);
             return;
         }

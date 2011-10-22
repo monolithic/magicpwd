@@ -19,7 +19,8 @@ package com.magicpwd.x.app;
 import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._comn.S1S1;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.McmdRes;
+import com.magicpwd._cons.lang.NoneRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
 
@@ -89,11 +90,11 @@ public class DatDialog extends javax.swing.JDialog
 
     public void initLang()
     {
-        Lang.setWText(bt_Update, LangRes.P30FA50A, "确定(@O)");
+        Lang.setWText(bt_Update, NoneRes.P30FA50A, "确定(@O)");
 
-        Lang.setWText(bt_Cancel, LangRes.P30FA50B, "取消(@C)");
+        Lang.setWText(bt_Cancel, NoneRes.P30FA50B, "取消(@C)");
 
-        setTitle(Lang.getLang(LangRes.P30F4207, "选择还原节点"));
+        setTitle(Lang.getLang(McmdRes.P30F4207, "选择还原节点"));
 
         pack();
     }
@@ -142,7 +143,7 @@ public class DatDialog extends javax.swing.JDialog
         Object obj = ls_DataList.getSelectedValue();
         if (obj == null || !(obj instanceof S1S1))
         {
-            Lang.showMesg(this, LangRes.P30FAA1E, "请选择您要恢复的节点！");
+            Lang.showMesg(this, NoneRes.P30FAA1E, "请选择您要恢复的节点！");
             return;
         }
 

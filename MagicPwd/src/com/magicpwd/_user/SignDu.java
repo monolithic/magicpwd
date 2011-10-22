@@ -18,7 +18,7 @@ package com.magicpwd._user;
 
 import com.magicpwd.__i.IUserView;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.NoneRes;
 import com.magicpwd._enum.AuthLog;
 import com.magicpwd._util.Lang;
 
@@ -113,7 +113,7 @@ public class SignDu extends javax.swing.JPanel implements IUserView
 
         Lang.setWText(userPtn.getAbortButton(), null, "返回(@C)");
 
-        //userPtn.setTitle(Lang.getLang(LangRes.P30FA204, "口令找回"));
+        //userPtn.setTitle(Lang.getLang(NoneRes.P30FA204, "口令找回"));
         userPtn.setTitle("数据升级");
     }
 
@@ -154,14 +154,14 @@ public class SignDu extends javax.swing.JPanel implements IUserView
         String name = tfSrcPath.getText();
         if (!com.magicpwd._util.Char.isValidate(name))
         {
-            Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
+            Lang.showMesg(this, NoneRes.P30FAA01, "请输入用户名称！");
             tfSrcPath.requestFocus();
             return;
         }
         String pwds = tfDstPath.getText();
         if (!com.magicpwd._util.Char.isValidate(pwds))
         {
-            Lang.showMesg(this, LangRes.P30FAA14, "请输入安全口令！");
+            Lang.showMesg(this, NoneRes.P30FAA14, "请输入安全口令！");
             tfDstPath.requestFocus();
             return;
         }

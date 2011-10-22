@@ -20,7 +20,7 @@ import com.magicpwd.__a.AEditBean;
 import com.magicpwd.__a.AMpwdPtn;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._util.Desk;
 import com.magicpwd._util.Lang;
 

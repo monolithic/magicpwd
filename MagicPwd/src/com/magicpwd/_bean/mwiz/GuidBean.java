@@ -21,7 +21,9 @@ import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.prop.Mlib;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MproRes;
+import com.magicpwd._cons.lang.LangRes;
+import com.magicpwd._cons.lang.MwizRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
@@ -135,8 +137,8 @@ public class GuidBean extends javax.swing.JPanel
 
     public void initLang()
     {
-        Lang.setWText(lb_PropName, LangRes.P30F6301, "时间");
-        Lang.setWText(lb_PropData, LangRes.P30F6302, "模板");
+        Lang.setWText(lb_PropName, MwizRes.P30F6301, "时间");
+        Lang.setWText(lb_PropData, MwizRes.P30F6302, "模板");
 
         Lang.setWText(bt_ReadMail, LangRes.P30F1519, "@M");
         Lang.setWTips(bt_ReadMail, LangRes.P30F151A, "检测邮件(Alt + M)");
@@ -203,7 +205,7 @@ public class GuidBean extends javax.swing.JPanel
         Object obj = cb_PropData.getSelectedItem();
         if (obj == null)
         {
-            Lang.showMesg(normPtn, LangRes.P30F7A29, "请选择口令模板!");
+            Lang.showMesg(normPtn, MproRes.P30F7A29, "请选择口令模板!");
             cb_PropData.requestFocus();
             return false;
         }
@@ -370,7 +372,7 @@ public class GuidBean extends javax.swing.JPanel
         java.io.File srcFile = new java.io.File(src).getAbsoluteFile();
         if (!srcFile.exists() || !srcFile.isFile() || !srcFile.canRead())
         {
-            Lang.showMesg(normPtn, LangRes.P30F7A44, "无法读取卡片模板文件：{0}", src);
+            Lang.showMesg(normPtn, MproRes.P30F7A44, "无法读取卡片模板文件：{0}", src);
             return;
         }
 
@@ -385,7 +387,7 @@ public class GuidBean extends javax.swing.JPanel
         java.io.File dstFile = fc.getSelectedFile();
         if (dstFile == null)
         {
-            Lang.showMesg(normPtn, LangRes.P30F7A1B, "您选择的目录不存在！");
+            Lang.showMesg(normPtn, MproRes.P30F7A1B, "您选择的目录不存在！");
             return;
         }
         if (!dstFile.exists())
@@ -394,7 +396,7 @@ public class GuidBean extends javax.swing.JPanel
         }
         if (!dstFile.canWrite())
         {
-            Lang.showMesg(normPtn, LangRes.P30F7A45, "您不具有保存文件到{0}的权限！", dstFile.getPath());
+            Lang.showMesg(normPtn, MproRes.P30F7A45, "您不具有保存文件到{0}的权限！", dstFile.getPath());
             return;
         }
 

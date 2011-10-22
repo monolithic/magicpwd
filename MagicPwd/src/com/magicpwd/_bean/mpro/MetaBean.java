@@ -20,7 +20,8 @@ import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mpro.IMproBean;
 import com.magicpwd._comp.WEditBox;
 import com.magicpwd._comp.WTextBox;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.LangRes;
+import com.magicpwd._cons.lang.NoneRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.v.app.mpro.MproPtn;
 
@@ -140,7 +141,7 @@ public class MetaBean extends javax.swing.JPanel implements IMproBean
         String name = tf_PropName.getText();
         if (!com.magicpwd._util.Char.isValidate(name))
         {
-            Lang.showMesg(mainPtn, LangRes.P30FAA1A, "记录标题不能为空!");
+            Lang.showMesg(mainPtn, NoneRes.P30FAA1A, "记录标题不能为空!");
             tf_PropName.requestFocus();
             return;
         }

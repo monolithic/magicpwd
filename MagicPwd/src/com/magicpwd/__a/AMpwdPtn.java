@@ -21,9 +21,11 @@ import com.magicpwd.__i.IMpwdView;
 import com.magicpwd._comn.S1S1;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._bean.mail.Connect;
 import com.magicpwd._comp.WDialog;
+import com.magicpwd._cons.lang.MproRes;
+import com.magicpwd._cons.lang.TrayRes;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._enum.AuthLog;
 import com.magicpwd._user.UserDto;
@@ -203,7 +205,7 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
         int cnt = userMdl.getTrayHintCnt();
         if (cnt < 0 || hintCnt < cnt)
         {
-            trayPtn.showTips(Lang.getLang(LangRes.P30F9A01, "友情提示"), Lang.getLang(LangRes.P30F7A43, "魔方密码仍在运行中，您可以通过双击此处显示主窗口！"));
+            trayPtn.showTips(Lang.getLang(TrayRes.P30F9A01, "友情提示"), Lang.getLang(MproRes.P30F7A43, "魔方密码仍在运行中，您可以通过双击此处显示主窗口！"));
             hintCnt += 1;
         }
         endSave();
@@ -458,7 +460,7 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
         String docs = getCfgText("pop_mail");
         if (!com.magicpwd._util.Char.isValidate(docs))
         {
-            throw new Exception(Lang.getLang(LangRes.P30F7A3A, "您还没有配置您的POP邮箱信息！"));
+            throw new Exception(Lang.getLang(MproRes.P30F7A3A, "您还没有配置您的POP邮箱信息！"));
         }
 
         String[] data = docs.split("\n");
@@ -528,13 +530,13 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
         String docs = getCfgText("pop_mail");
         if (!com.magicpwd._util.Char.isValidate(docs))
         {
-            throw new Exception(Lang.getLang(LangRes.P30F7A3A, "您还没有配置您的POP邮箱信息！"));
+            throw new Exception(Lang.getLang(MproRes.P30F7A3A, "您还没有配置您的POP邮箱信息！"));
         }
 
         java.io.File bakFile = trayPtn.endSave();
         if (bakFile == null || !bakFile.exists() || !bakFile.isFile() || !bakFile.canRead())
         {
-            throw new Exception(Lang.getLang(LangRes.P30F7A3B, "压缩用户数据文件出错，请重启软件后重试！"));
+            throw new Exception(Lang.getLang(MproRes.P30F7A3B, "压缩用户数据文件出错，请重启软件后重试！"));
         }
 
         String[] data = docs.split("\n");
@@ -550,14 +552,14 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
         Sender sender = new Sender(connect);
         sender.setFrom(data[0]);
         sender.setTo(data[0]);
-        sender.setSubject(Lang.getLang(LangRes.P30F7A48, "魔方密码备份文件！"));
-        sender.setContent(Lang.getLang(LangRes.P30F7A49, "此邮件为魔方密码数据备份文件，请勿手动删除！"));
+        sender.setSubject(Lang.getLang(MproRes.P30F7A48, "魔方密码备份文件！"));
+        sender.setContent(Lang.getLang(MproRes.P30F7A49, "此邮件为魔方密码数据备份文件，请勿手动删除！"));
         sender.setHeader("magicpwd-user", user);
         sender.setHeader("magicpwd-sign", sign);
         sender.addAttachment(ConsEnv.FILE_SYNC, bakFile.getAbsolutePath());
         if (!sender.send())
         {
-            throw new Exception(Lang.getLang(LangRes.P30F7A3C, "系统无法备份您的数据到云端！"));
+            throw new Exception(Lang.getLang(MproRes.P30F7A3C, "系统无法备份您的数据到云端！"));
         }
 
         if (backCall != null && !backCall.callBack(null, sign))
@@ -586,7 +588,7 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
         String docs = getCfgText("pop_mail");
         if (!com.magicpwd._util.Char.isValidate(docs))
         {
-            throw new Exception(Lang.getLang(LangRes.P30F7A3A, "您还没有配置您的POP邮箱信息！"));
+            throw new Exception(Lang.getLang(MproRes.P30F7A3A, "您还没有配置您的POP邮箱信息！"));
         }
 
         trayPtn.endSave();
@@ -673,7 +675,7 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
         java.io.File file = jfc.getSelectedFile();
         if (file.exists())
         {
-            if (Lang.showFirm(this, LangRes.P30F7A21, "目标文件已存在，确认要覆盖此文件么？") != javax.swing.JOptionPane.YES_OPTION)
+            if (Lang.showFirm(this, MproRes.P30F7A21, "目标文件已存在，确认要覆盖此文件么？") != javax.swing.JOptionPane.YES_OPTION)
             {
                 return false;
             }
@@ -687,18 +689,18 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
             catch (Exception exp)
             {
                 Logs.exception(exp);
-                Lang.showMesg(this, LangRes.P30F7A22, "数据导出失败，无法在指定文件创建文档！");
+                Lang.showMesg(this, MproRes.P30F7A22, "数据导出失败，无法在指定文件创建文档！");
                 return false;
             }
         }
         if (!file.isFile())
         {
-            Lang.showMesg(this, LangRes.P30F7A23, "数据导出失败，您选择的对象不是一个合适的文档！");
+            Lang.showMesg(this, MproRes.P30F7A23, "数据导出失败，您选择的对象不是一个合适的文档！");
             return false;
         }
         if (!file.canWrite())
         {
-            Lang.showMesg(this, LangRes.P30F7A24, "数据导出失败，请确认您是否拥有合适的读写权限！");
+            Lang.showMesg(this, MproRes.P30F7A24, "数据导出失败，请确认您是否拥有合适的读写权限！");
             return false;
         }
 
@@ -707,12 +709,12 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
         try
         {
             int size = new DXA2000().exportByKind(userMdl, safeMdl, file, kindHash);
-            Lang.showMesg(this, LangRes.P30F7A25, "成功导出数据个数：{0}", size + "");
+            Lang.showMesg(this, MproRes.P30F7A25, "成功导出数据个数：{0}", size + "");
         }
         catch (Exception exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(this, LangRes.P30F7A26, "数据导出失败，请确认您数据的正确性，然后重新尝试！");
+            Lang.showMesg(this, MproRes.P30F7A26, "数据导出失败，请确认您数据的正确性，然后重新尝试！");
         }
         hideProgress();
         createDialog(true);
@@ -737,17 +739,17 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
         java.io.File file = jfc.getSelectedFile();
         if (!file.exists())
         {
-            Lang.showMesg(this, LangRes.P30F7A03, "您选取的文件不存在！");
+            Lang.showMesg(this, MproRes.P30F7A03, "您选取的文件不存在！");
             return false;
         }
         if (!file.isFile())
         {
-            Lang.showMesg(this, LangRes.P30F7A04, "请选取一个合适的文档！");
+            Lang.showMesg(this, MproRes.P30F7A04, "请选取一个合适的文档！");
             return false;
         }
         if (!file.canRead())
         {
-            Lang.showMesg(this, LangRes.P30F7A05, "无法读取您选择的文件，请确认您是否有足够的权限！");
+            Lang.showMesg(this, MproRes.P30F7A05, "无法读取您选择的文件，请确认您是否有足够的权限！");
             return false;
         }
 
@@ -756,12 +758,12 @@ public abstract class AMpwdPtn extends javax.swing.JFrame implements IMpwdView
         try
         {
             int size = new DXA2000().importByKind(userMdl, safeMdl, file, kindHash);
-            Lang.showMesg(this, LangRes.P30F7A07, "成功导入数据个数：{0}", "" + size);
+            Lang.showMesg(this, MproRes.P30F7A07, "成功导入数据个数：{0}", "" + size);
         }
         catch (Exception exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(this, LangRes.P30F7A08, "TXT文档格式解析出错，数据导入失败！");
+            Lang.showMesg(this, MproRes.P30F7A08, "TXT文档格式解析出错，数据导入失败！");
         }
         hideProgress();
         createDialog(false);

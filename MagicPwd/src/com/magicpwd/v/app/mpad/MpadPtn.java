@@ -22,7 +22,8 @@ import com.magicpwd._comn.S1S2;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WTextBox;
 import com.magicpwd._cons.ConsCfg;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MpadRes;
+import com.magicpwd._cons.lang.MproRes;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Lang;
@@ -198,23 +199,23 @@ public class MpadPtn extends AMpwdPtn
     @Override
     public boolean initLang()
     {
-        setTitle(Lang.getLang(LangRes.P30F5201, "魔方密码"));
+        setTitle(Lang.getLang(MpadRes.P30F5201, "魔方密码"));
 
-        Lang.setWText(lb_NoteHead, LangRes.P30F5301, "标题");
+        Lang.setWText(lb_NoteHead, MpadRes.P30F5301, "标题");
 
-        Lang.setWText(ck_NoteWrap, LangRes.P30F5302, "自动换行");
+        Lang.setWText(ck_NoteWrap, MpadRes.P30F5302, "自动换行");
 
-        Lang.setWText(bt_SearchNote, LangRes.P30F5501, "@F");
-        Lang.setWTips(bt_SearchNote, LangRes.P30F5502, "搜索(Alt + F)");
+        Lang.setWText(bt_SearchNote, MpadRes.P30F5501, "@F");
+        Lang.setWTips(bt_SearchNote, MpadRes.P30F5502, "搜索(Alt + F)");
 
-        Lang.setWText(bt_SaveNote, LangRes.P30F5503, "@S");
-        Lang.setWTips(bt_SaveNote, LangRes.P30F5504, "保存(Alt + S)");
+        Lang.setWText(bt_SaveNote, MpadRes.P30F5503, "@S");
+        Lang.setWTips(bt_SaveNote, MpadRes.P30F5504, "保存(Alt + S)");
 
-        Lang.setWText(bt_OpenNote, LangRes.P30F5505, "@O");
-        Lang.setWTips(bt_OpenNote, LangRes.P30F5506, "打开(Alt + O)");
+        Lang.setWText(bt_OpenNote, MpadRes.P30F5505, "@O");
+        Lang.setWTips(bt_OpenNote, MpadRes.P30F5506, "打开(Alt + O)");
 
-        Lang.setWText(bt_CreateNote, LangRes.P30F5507, "@N");
-        Lang.setWTips(bt_CreateNote, LangRes.P30F5508, "新建(Alt + N)");
+        Lang.setWText(bt_CreateNote, MpadRes.P30F5507, "@N");
+        Lang.setWTips(bt_CreateNote, MpadRes.P30F5508, "新建(Alt + N)");
 
         nameBox.initLang();
         dataBox.initLang();
@@ -334,7 +335,7 @@ public class MpadPtn extends AMpwdPtn
         b &= noteList.size() > 0;
         if (!b || noteList.size() < 1)
         {
-            Lang.showMesg(this, LangRes.P30F7A1F, "搜索不到与标题相匹配的记事内容，请修改查询条件后重试！");
+            Lang.showMesg(this, MproRes.P30F7A1F, "搜索不到与标题相匹配的记事内容，请修改查询条件后重试！");
             tf_NoteName.requestFocus();
             return;
         }
@@ -377,22 +378,22 @@ public class MpadPtn extends AMpwdPtn
         java.io.File file = jfc.getSelectedFile();
         if (!file.exists())
         {
-            Lang.showMesg(this, LangRes.P30F7A03, "", "");
+            Lang.showMesg(this, MproRes.P30F7A03, "", "");
             return;
         }
         if (!file.isFile())
         {
-            Lang.showMesg(this, LangRes.P30F7A04, "", "");
+            Lang.showMesg(this, MproRes.P30F7A04, "", "");
             return;
         }
         if (!file.canRead())
         {
-            Lang.showMesg(this, LangRes.P30F7A05, "");
+            Lang.showMesg(this, MproRes.P30F7A05, "");
             return;
         }
         if (file.length() > 1048576)
         {
-            Lang.showMesg(this, LangRes.P30F7A06, "");
+            Lang.showMesg(this, MproRes.P30F7A06, "");
             return;
         }
         try
@@ -431,7 +432,7 @@ public class MpadPtn extends AMpwdPtn
         String name = tf_NoteName.getText();
         if (!com.magicpwd._util.Char.isValidate(name))
         {
-            Lang.showMesg(this, LangRes.P30F5A01, "请输入记事标题！");
+            Lang.showMesg(this, MpadRes.P30F5A01, "请输入记事标题！");
             tf_NoteName.requestFocus();
             return;
         }
@@ -439,7 +440,7 @@ public class MpadPtn extends AMpwdPtn
         String data = ta_NoteData.getText();
         if (!com.magicpwd._util.Char.isValidate(data))
         {
-            if (Lang.showFirm(this, LangRes.P30F5A02, "记事内容并没有实际意义的文字，确认要保存么？") != javax.swing.JOptionPane.NO_OPTION)
+            if (Lang.showFirm(this, MpadRes.P30F5A02, "记事内容并没有实际意义的文字，确认要保存么？") != javax.swing.JOptionPane.NO_OPTION)
             {
                 return;
             }
@@ -458,12 +459,12 @@ public class MpadPtn extends AMpwdPtn
         {
             noteMdl.saveData(true);
             infoLayout.show(pl_NoteInfo, "info");
-            Lang.setWText(lb_NoteInfo, LangRes.P30F5A03, "数据保存成功！");
+            Lang.setWText(lb_NoteInfo, MpadRes.P30F5A03, "数据保存成功！");
         }
         catch (Exception exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(this, LangRes.P30F5A04, "记事本数据保存失败，请重新登录尝试！");
+            Lang.showMesg(this, MpadRes.P30F5A04, "记事本数据保存失败，请重新登录尝试！");
         }
     }
 

@@ -19,7 +19,8 @@ package com.magicpwd._user;
 import com.magicpwd.__i.IUserView;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.LangRes;
+import com.magicpwd._cons.lang.NoneRes;
 import com.magicpwd._enum.AuthLog;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Jzip;
@@ -72,20 +73,20 @@ public class SignUp extends javax.swing.JPanel implements IUserView
     @Override
     public void initLang()
     {
-        Lang.setWText(lbUserName, LangRes.P30FA301, "用户(@U)");
+        Lang.setWText(lbUserName, NoneRes.P30FA301, "用户(@U)");
 
-        Lang.setWText(lbUserPwd1, LangRes.P30FA302, "口令(@P)");
+        Lang.setWText(lbUserPwd1, NoneRes.P30FA302, "口令(@P)");
 
-        Lang.setWText(lbUserPwd2, LangRes.P30FA303, "确认(@R)");
+        Lang.setWText(lbUserPwd2, NoneRes.P30FA303, "确认(@R)");
 
         Lang.setWText(miUserOpts, null, "高级选项");
         Lang.setWTips(miUserOpts, null, "");
 
-        Lang.setWText(userPtn.getApplyButton(), LangRes.P30FA502, "注册(@S)");
+        Lang.setWText(userPtn.getApplyButton(), NoneRes.P30FA502, "注册(@S)");
 
-        Lang.setWText(userPtn.getAbortButton(), LangRes.P30FA505, "返回(@C)");
+        Lang.setWText(userPtn.getAbortButton(), NoneRes.P30FA505, "返回(@C)");
 
-        userPtn.setTitle(Lang.getLang(LangRes.P30FA203, "用户注册"));
+        userPtn.setTitle(Lang.getLang(NoneRes.P30FA203, "用户注册"));
 
         lbDatPath.setText("数据路径(D)");
 
@@ -236,7 +237,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         String un = tfUserName.getText().trim().replaceAll("\\s+", "");
         if (!com.magicpwd._util.Char.isValidate(un))
         {
-            Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
+            Lang.showMesg(this, NoneRes.P30FAA01, "请输入用户名称！");
             tfUserName.requestFocus();
             return;
         }
@@ -248,7 +249,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         String p1 = new String(pfUserPwd1.getPassword());
         if (!com.magicpwd._util.Char.isValidate(p1))
         {
-            Lang.showMesg(this, LangRes.P30FAA02, "请输入登录口令！");
+            Lang.showMesg(this, NoneRes.P30FAA02, "请输入登录口令！");
             pfUserPwd1.requestFocus();
             return;
         }
@@ -261,7 +262,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         String p2 = new String(pfUserPwd2.getPassword());
         if (!p1.equals(p2))
         {
-            Lang.showMesg(this, LangRes.P30FAA05, "您输入的口令不一致，请重新输入！");
+            Lang.showMesg(this, NoneRes.P30FAA05, "您输入的口令不一致，请重新输入！");
             pfUserPwd1.setText("");
             pfUserPwd2.setText("");
             pfUserPwd1.requestFocus();
@@ -276,7 +277,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         String un = tfUserName.getText().trim().replaceAll("\\s+", "").toLowerCase();
         if (!com.magicpwd._util.Char.isValidate(un))
         {
-            Lang.showMesg(this, LangRes.P30FAA01, "请输入用户名称！");
+            Lang.showMesg(this, NoneRes.P30FAA01, "请输入用户名称！");
             tfUserName.requestFocus();
             return;
         }
@@ -296,7 +297,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         String p1 = new String(pfUserPwd1.getPassword());
         if (!com.magicpwd._util.Char.isValidate(p1))
         {
-            Lang.showMesg(this, LangRes.P30FAA02, "请输入登录口令！");
+            Lang.showMesg(this, NoneRes.P30FAA02, "请输入登录口令！");
             pfUserPwd1.requestFocus();
             return;
         }
@@ -305,7 +306,7 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         String p2 = new String(pfUserPwd2.getPassword());
         if (!p1.equals(p2))
         {
-            Lang.showMesg(this, LangRes.P30FAA05, "您输入的口令不一致，请重新输入！");
+            Lang.showMesg(this, NoneRes.P30FAA05, "您输入的口令不一致，请重新输入！");
             pfUserPwd1.setText("");
             pfUserPwd2.setText("");
             pfUserPwd1.requestFocus();
@@ -361,14 +362,14 @@ public class SignUp extends javax.swing.JPanel implements IUserView
         catch (Exception exp)
         {
             Logs.exception(exp);
-            Lang.showMesg(this, LangRes.P30FAA07, "创建用户失败，请重新启动本程序尝试！");
+            Lang.showMesg(this, NoneRes.P30FAA07, "创建用户失败，请重新启动本程序尝试！");
             System.exit(0);
             return;
         }
 
         if (!isOK)
         {
-            Lang.showMesg(this, LangRes.P30FAA06, "注册用户失败，请更换用户名及口令后重试！");
+            Lang.showMesg(this, NoneRes.P30FAA06, "注册用户失败，请更换用户名及口令后重试！");
             tfUserName.requestFocus();
             return;
         }

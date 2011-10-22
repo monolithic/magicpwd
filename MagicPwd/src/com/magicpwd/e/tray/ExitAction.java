@@ -17,7 +17,7 @@
 package com.magicpwd.e.tray;
 
 import com.magicpwd.__a.tray.ATrayAction;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._util.Lang;
 
 /**

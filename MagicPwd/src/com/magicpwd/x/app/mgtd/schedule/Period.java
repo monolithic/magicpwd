@@ -21,7 +21,7 @@ import com.magicpwd._comn.I1S1;
 import com.magicpwd._comn.mpwd.MgtdDetail;
 import com.magicpwd._comn.mpwd.MgtdHeader;
 import com.magicpwd._cons.ConsDat;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd.x.app.mgtd.MgtdDlg;

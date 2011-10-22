@@ -18,11 +18,11 @@ package com.magicpwd.x.app.maoc;
 
 import com.magicpwd.__a.ADialog;
 import com.magicpwd.__i.IBackCall;
-import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd._comn.mpwd.Mexp;
+import com.magicpwd._cons.lang.MaocRes;
 import com.magicpwd._enum.ExpType;
 import com.magicpwd.v.app.maoc.MaocPtn;
 
@@ -130,12 +130,12 @@ public class MnumDlg extends ADialog
 
     public void initLang()
     {
-        this.setTitle(Lang.getLang(LangRes.P30FB202, "常量管理"));
+        this.setTitle(Lang.getLang(MaocRes.P30FB202, "常量管理"));
 
-        Lang.setWText(lb_Name, LangRes.P30FB302, "常量名(@N)");
-        Lang.setWText(lb_Value, LangRes.P30FB303, "常量值(@V)");
-        Lang.setWText(lb_Title, LangRes.P30FB304, "标题(@T)");
-        Lang.setWText(lb_Remark, LangRes.P30FB305, "附注(@R)");
+        Lang.setWText(lb_Name, MaocRes.P30FB302, "常量名(@N)");
+        Lang.setWText(lb_Value, MaocRes.P30FB303, "常量值(@V)");
+        Lang.setWText(lb_Title, MaocRes.P30FB304, "标题(@T)");
+        Lang.setWText(lb_Remark, MaocRes.P30FB305, "附注(@R)");
 
         Bean.setText(bt_Abort, "取消(@C)");
         Bean.setText(bt_Apply, "确认(@O)");
@@ -192,27 +192,27 @@ public class MnumDlg extends ADialog
         String name = tf_Name.getText().replaceAll("\\s+", "");
         if (!Char.isValidate(name))
         {
-            Lang.showMesg(this, LangRes.P30FBA03, "常量名不能为空！");
+            Lang.showMesg(this, MaocRes.P30FBA03, "常量名不能为空！");
             tf_Name.requestFocus();
             return;
         }
         name = name.replaceAll("\\s+", "");
         if (!java.util.regex.Pattern.matches("^[A-Za-z][A-Za-z\\d]*$", name))
         {
-            Lang.showMesg(this, LangRes.P30FBA04, "常量名只能包含字母及数字，且以字母开始！");
+            Lang.showMesg(this, MaocRes.P30FBA04, "常量名只能包含字母及数字，且以字母开始！");
             tf_Name.requestFocus();
             return;
         }
         String value = tf_Value.getText().replaceAll("\\s+", "");
         if (!Char.isValidate(value))
         {
-            Lang.showMesg(this, LangRes.P30FBA05, "常量值不能为空！");
+            Lang.showMesg(this, MaocRes.P30FBA05, "常量值不能为空！");
             tf_Value.requestFocus();
             return;
         }
 //        if (java.util.regex.Pattern.compile("[A-Za-z][A-Za-z\\d]*").matcher(value).find())
 //        {
-//            Lang.showMesg(this, LangRes.P30FBA09, "您输入的不是一个合法的常量！");
+//            Lang.showMesg(this, MaocRes.P30FBA09, "您输入的不是一个合法的常量！");
 //            tf_Value.requestFocus();
 //            return;
 //        }

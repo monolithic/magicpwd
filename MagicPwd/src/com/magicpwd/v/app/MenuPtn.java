@@ -24,7 +24,6 @@ import com.magicpwd.__i.mpro.IMproAction;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
 import com.magicpwd._util.Bean;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.File;
@@ -34,6 +33,7 @@ import com.magicpwd.__i.mpad.IMpadAction;
 import com.magicpwd.__i.mruc.IMrucAction;
 import com.magicpwd.__i.mwiz.IMwizAction;
 import com.magicpwd.__i.tray.ITrayAction;
+import com.magicpwd._cons.lang.MproRes;
 import com.magicpwd._enum.AppView;
 import com.magicpwd._util.Util;
 import com.magicpwd.e.mpro.skin.FeelAction;
@@ -519,7 +519,7 @@ public class MenuPtn
         skinMenu.addSeparator();
 
         javax.swing.JMenuItem moreSkin = new javax.swing.JMenuItem();
-        Bean.setText(moreSkin, Lang.getLang(LangRes.P30F7642, "更多皮肤"));
+        Bean.setText(moreSkin, Lang.getLang(MproRes.P30F7642, "更多皮肤"));
 //        Bean.setTips(moreSkin, Lang.getLang("", "tips"));
         moreSkin.setActionCommand(ConsEnv.HOMEPAGE + "mpwd/mpwd0100.aspx?sid=" + ConsEnv.VERSIONS);
         moreSkin.addActionListener(new MoreAction());
@@ -529,7 +529,7 @@ public class MenuPtn
     private void loadLook(javax.swing.JMenu skinMenu)
     {
         javax.swing.JMenu lookMenu = new javax.swing.JMenu();
-        Bean.setText(lookMenu, Lang.getLang(LangRes.P30F763B, "外观"));
+        Bean.setText(lookMenu, Lang.getLang(MproRes.P30F763B, "外观"));
         skinMenu.add(lookMenu);
 
         java.io.File lookFile = new java.io.File(ConsEnv.DIR_SKIN, ConsEnv.DIR_LOOK);
@@ -550,7 +550,7 @@ public class MenuPtn
         {
             item = new javax.swing.JCheckBoxMenuItem();
             item.addActionListener(action);
-            Bean.setText(item, Lang.getLang(LangRes.P30F7632, "默认界面"));
+            Bean.setText(item, Lang.getLang(MproRes.P30F7632, "默认界面"));
             Bean.setTips(item, "");
             item.setActionCommand(ConsCfg.DEF_SKIN_LOOK_DEF + ".Default");
             item.setSelected(lookName.equals(ConsCfg.DEF_SKIN_LOOK_DEF));
@@ -564,7 +564,7 @@ public class MenuPtn
         {
             item = new javax.swing.JCheckBoxMenuItem();
             item.addActionListener(action);
-            Bean.setText(item, Lang.getLang(LangRes.P30F7633, "系统界面"));
+            Bean.setText(item, Lang.getLang(MproRes.P30F7633, "系统界面"));
             Bean.setTips(item, "");
             item.setActionCommand(ConsCfg.DEF_SKIN_LOOK_SYS + ".System");
             item.setSelected(lookName.equals(ConsCfg.DEF_SKIN_LOOK_SYS));
@@ -667,7 +667,7 @@ public class MenuPtn
         lookMenu.addSeparator();
 
         javax.swing.JMenuItem moreLook = new javax.swing.JMenuItem();
-        Bean.setText(moreLook, Lang.getLang(LangRes.P30F763C, "更多外观"));
+        Bean.setText(moreLook, Lang.getLang(MproRes.P30F763C, "更多外观"));
 //        Bean.setTips(moreSkin, Lang.getLang("", "tips"));
         moreLook.setActionCommand(ConsEnv.HOMEPAGE + "mpwd/mpwd0101.aspx?sid=" + ConsEnv.VERSIONS);
         moreLook.addActionListener(new MoreAction());
@@ -677,7 +677,7 @@ public class MenuPtn
     private void loadTheme(javax.swing.JMenu skinMenu)
     {
         javax.swing.JMenu themeMenu = new javax.swing.JMenu();
-        Bean.setText(themeMenu, Lang.getLang(LangRes.P30F763D, "主题"));
+        Bean.setText(themeMenu, Lang.getLang(MproRes.P30F763D, "主题"));
         skinMenu.add(themeMenu);
 
         javax.swing.JCheckBoxMenuItem item;
@@ -690,7 +690,7 @@ public class MenuPtn
 //        {
         item = new javax.swing.JCheckBoxMenuItem();
         item.addActionListener(action);
-        Bean.setText(item, Lang.getLang(LangRes.P30F7641, "默认主题"));
+        Bean.setText(item, Lang.getLang(MproRes.P30F7641, "默认主题"));
         Bean.setTips(item, "");
         item.setActionCommand(ConsCfg.DEF_SKIN_LOOK_DEF);
         item.setSelected(true);
@@ -701,7 +701,7 @@ public class MenuPtn
         themeMenu.addSeparator();
 
         javax.swing.JMenuItem moreTheme = new javax.swing.JMenuItem();
-        Bean.setText(moreTheme, Lang.getLang(LangRes.P30F763E, "更多主题"));
+        Bean.setText(moreTheme, Lang.getLang(MproRes.P30F763E, "更多主题"));
 //        Bean.setTips(moreSkin, Lang.getLang("", "tips"));
         moreTheme.setActionCommand(ConsEnv.HOMEPAGE + "mpwd/mpwd0102.aspx?sid=" + ConsEnv.VERSIONS);
         moreTheme.addActionListener(new MoreAction());
@@ -711,7 +711,7 @@ public class MenuPtn
     private void loadFeel(javax.swing.JMenu skinMenu)
     {
         javax.swing.JMenu feelMenu = new javax.swing.JMenu();
-        Bean.setText(feelMenu, Lang.getLang(LangRes.P30F763F, "图标"));
+        Bean.setText(feelMenu, Lang.getLang(MproRes.P30F763F, "图标"));
         skinMenu.add(feelMenu);
 
         java.io.File feelFile = new java.io.File(ConsEnv.DIR_SKIN, ConsEnv.DIR_FEEL);
@@ -771,7 +771,7 @@ public class MenuPtn
         feelMenu.addSeparator();
 
         javax.swing.JMenuItem morefeel = new javax.swing.JMenuItem();
-        Bean.setText(morefeel, Lang.getLang(LangRes.P30F7640, "更多风格"));
+        Bean.setText(morefeel, Lang.getLang(MproRes.P30F7640, "更多风格"));
 //        Bean.setTips(moreSkin, Lang.getLang("", "tips"));
         morefeel.setActionCommand(ConsEnv.HOMEPAGE + "mpwd/mpwd0103.aspx?sid=" + ConsEnv.VERSIONS);
         morefeel.addActionListener(new MoreAction());

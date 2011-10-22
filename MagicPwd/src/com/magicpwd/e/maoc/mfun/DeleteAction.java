@@ -17,7 +17,7 @@
 package com.magicpwd.e.maoc.mfun;
 
 import com.magicpwd.__a.maoc.AMaocAction;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MaocRes;
 import com.magicpwd._util.Lang;
 
 /**
@@ -30,7 +30,7 @@ public class DeleteAction extends AMaocAction
     @Override
     public void actionPerformed(java.awt.event.ActionEvent e)
     {
-        if (Lang.showFirm(maocPtn, LangRes.P30FBA0C, "确认要删除此函数吗？\n删除后其它依赖于此函数的常量或函数将无法参与运算！") == javax.swing.JOptionPane.YES_OPTION)
+        if (Lang.showFirm(maocPtn, MaocRes.P30FBA0C, "确认要删除此函数吗？\n删除后其它依赖于此函数的常量或函数将无法参与运算！") == javax.swing.JOptionPane.YES_OPTION)
         {
             maocPtn.deleteFun();
         }

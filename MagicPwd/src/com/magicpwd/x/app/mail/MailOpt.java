@@ -17,7 +17,7 @@
 package com.magicpwd.x.app.mail;
 
 import com.magicpwd._comn.I1S2;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._util.Lang;
 import java.util.List;
 

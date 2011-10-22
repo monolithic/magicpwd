@@ -18,7 +18,7 @@ package com.magicpwd.e.mpro.data;
 
 import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd.__i.IBackCall;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MproRes;
 import com.magicpwd._enum.AuthLog;
 import com.magicpwd._user.UserDto;
 import com.magicpwd._util.Lang;
@@ -47,7 +47,7 @@ public class ImportByKeysAction extends AMproAction implements IBackCall<AuthLog
         javax.swing.tree.TreePath path = mproPtn.getSelectedKindValue();
         if (path == null)
         {
-            Lang.showMesg(mproPtn, LangRes.P30F7A02, "");
+            Lang.showMesg(mproPtn, MproRes.P30F7A02, "");
             return;
         }
 

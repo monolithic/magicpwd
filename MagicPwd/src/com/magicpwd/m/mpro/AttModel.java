@@ -23,7 +23,8 @@ import com.magicpwd._comn.item.GuidItem;
 import com.magicpwd._comn.item.SignItem;
 import com.magicpwd._cons.ConsEnv;
 import com.magicpwd._cons.ConsDat;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MproRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;
 import com.magicpwd.d.db.DBA4000;
@@ -108,7 +109,7 @@ public class AttModel extends SafeMdl implements javax.swing.table.TableModel, j
     @Override
     public String getColumnName(int columnIndex)
     {
-        return columnIndex == 1 ? Lang.getLang(LangRes.P30F7304, "属性(T)") : Lang.getLang(LangRes.P30F7303, "");
+        return columnIndex == 1 ? Lang.getLang(MproRes.P30F7304, "属性(T)") : Lang.getLang(MproRes.P30F7303, "");
     }
 
     /*

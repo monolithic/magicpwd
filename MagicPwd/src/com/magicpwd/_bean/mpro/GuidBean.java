@@ -24,7 +24,8 @@ import com.magicpwd._comn.prop.Mlib;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._cons.ConsDat;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MproRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd.r.FileTM;
@@ -212,7 +213,7 @@ public class GuidBean extends javax.swing.JPanel implements IMproBean
         Object obj = cb_PropData.getSelectedItem();
         if (obj == null)
         {
-            Lang.showMesg(mainPtn, LangRes.P30F7A29, "请选择口令模板!");
+            Lang.showMesg(mainPtn, MproRes.P30F7A29, "请选择口令模板!");
             cb_PropData.requestFocus();
             return;
         }
@@ -370,7 +371,7 @@ public class GuidBean extends javax.swing.JPanel implements IMproBean
         java.io.File srcFile = new java.io.File(src).getAbsoluteFile();
         if (!srcFile.exists() || !srcFile.isFile() || !srcFile.canRead())
         {
-            Lang.showMesg(mainPtn, LangRes.P30F7A44, "无法读取卡片模板文件：{0}", src);
+            Lang.showMesg(mainPtn, MproRes.P30F7A44, "无法读取卡片模板文件：{0}", src);
             return;
         }
 
@@ -385,7 +386,7 @@ public class GuidBean extends javax.swing.JPanel implements IMproBean
         java.io.File dstFile = fc.getSelectedFile();
         if (dstFile == null)
         {
-            Lang.showMesg(mainPtn, LangRes.P30F7A1B, "您选择的目录不存在！");
+            Lang.showMesg(mainPtn, MproRes.P30F7A1B, "您选择的目录不存在！");
             return;
         }
         if (!dstFile.exists())
@@ -394,7 +395,7 @@ public class GuidBean extends javax.swing.JPanel implements IMproBean
         }
         if (!dstFile.canWrite())
         {
-            Lang.showMesg(mainPtn, LangRes.P30F7A45, "您不具有保存文件到{0}的权限！", dstFile.getPath());
+            Lang.showMesg(mainPtn, MproRes.P30F7A45, "您不具有保存文件到{0}的权限！", dstFile.getPath());
             return;
         }
 

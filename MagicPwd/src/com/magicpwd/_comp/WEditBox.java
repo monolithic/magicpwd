@@ -17,7 +17,7 @@
 package com.magicpwd._comp;
 
 import com.magicpwd.__i.mpro.IMproBean;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.v.app.mpro.MproPtn;
 

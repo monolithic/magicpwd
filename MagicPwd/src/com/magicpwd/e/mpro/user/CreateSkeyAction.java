@@ -19,7 +19,7 @@ package com.magicpwd.e.mpro.user;
 import com.magicpwd.__a.mpro.AMproAction;
 import com.magicpwd.__i.IBackCall;
 import com.magicpwd._cons.ConsCfg;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MproRes;
 import com.magicpwd._enum.AuthLog;
 import com.magicpwd._user.UserDto;
 import com.magicpwd._util.Char;
@@ -41,7 +41,7 @@ public class CreateSkeyAction extends AMproAction implements IBackCall<AuthLog, 
     {
         if (Char.isValidate(mproPtn.getUserMdl().getCfg(ConsCfg.CFG_USER_SKEY, ""), 224))
         {
-            Lang.showMesg(mproPtn, LangRes.P30F7A28, "您已经设置过安全口令！");
+            Lang.showMesg(mproPtn, MproRes.P30F7A28, "您已经设置过安全口令！");
             return;
         }
 

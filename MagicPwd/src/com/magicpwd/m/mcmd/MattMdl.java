@@ -8,7 +8,7 @@ import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mcmd.IPageMdl;
 import com.magicpwd._comn.item.SignItem;
 import com.magicpwd._cons.ConsDat;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._cons.mcmd.McmdEnv;
 import com.magicpwd._util.Char;
 import com.magicpwd._util.Lang;

@@ -24,7 +24,8 @@ import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.WButtonGroup;
 import com.magicpwd._cons.ConsCfg;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.MproRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd._util.Logs;
 import com.magicpwd._util.Util;
@@ -190,12 +191,12 @@ public abstract class APwdsBean extends AEditBean
 
     private void initSizeLang()
     {
-        Lang.setWText(muSizeMenu, LangRes.P30F7C01, "口令长度");
+        Lang.setWText(muSizeMenu, MproRes.P30F7C01, "口令长度");
 
-        Lang.setWText(miSizeDef, LangRes.P30F7C02, "默认");
+        Lang.setWText(miSizeDef, MproRes.P30F7C02, "默认");
         miSizeDef.setActionCommand("0");
 
-        String t = Lang.getLang(LangRes.P30F7C03, "位");
+        String t = Lang.getLang(MproRes.P30F7C03, "位");
         String[] text =
         {
             "6", "8", "12", "16", "24", "32"
@@ -215,18 +216,18 @@ public abstract class APwdsBean extends AEditBean
             bgSizeGroup.add(keys[i], menuItem);
         }
 
-        Lang.setWText(miSizeMore, LangRes.P30F7C04, "其它...");
+        Lang.setWText(miSizeMore, MproRes.P30F7C04, "其它...");
         bgSizeGroup.add("-1", miSizeMore);
     }
 
     private void initCharLang()
     {
-        Lang.setWText(muCharMenu, LangRes.P30F7C05, "字符空间");
+        Lang.setWText(muCharMenu, MproRes.P30F7C05, "字符空间");
     }
 
     private void initNrptLang()
     {
-        Lang.setWText(miLoopMenu, LangRes.P30F7C07, "允许重复");
+        Lang.setWText(miLoopMenu, MproRes.P30F7C07, "允许重复");
     }
 
     protected void initConfData()
@@ -398,7 +399,7 @@ public abstract class APwdsBean extends AEditBean
         };
 
         miCharDef = new javax.swing.JCheckBoxMenuItem();
-        miCharDef.setText(Lang.getLang(LangRes.P30F7C06, "默认"));
+        miCharDef.setText(Lang.getLang(MproRes.P30F7C06, "默认"));
         miCharDef.setActionCommand(ConsCfg.DEF_PWDS_HASH);
         miCharDef.addActionListener(al);
         muCharMenu.add(miCharDef);

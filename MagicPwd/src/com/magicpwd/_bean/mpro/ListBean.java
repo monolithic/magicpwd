@@ -20,7 +20,7 @@ import com.magicpwd.__i.IEditItem;
 import com.magicpwd.__i.mpro.IMproBean;
 import com.magicpwd._bean.AListBean;
 import com.magicpwd._comp.WEditBox;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.LangRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.v.app.mpro.MproPtn;
 import java.awt.event.ActionEvent;

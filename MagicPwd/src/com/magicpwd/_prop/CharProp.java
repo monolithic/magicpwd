@@ -21,7 +21,8 @@ import javax.swing.DefaultComboBoxModel;
 import com.magicpwd.__i.IPropBean;
 import com.magicpwd._comn.prop.Mucs;
 import com.magicpwd._comp.IcoLabel;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.LangRes;
+import com.magicpwd._cons.lang.McfgRes;
 import com.magicpwd._util.Lang;
 import com.magicpwd.m.UcsList;
 import com.magicpwd.r.ListCR;
@@ -309,22 +310,22 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
 
     private void initInfoLang()
     {
-        Lang.setWText(lbCharTplt, LangRes.P30F8321, "基本字符");
-        Lang.setWText(lbCharName, LangRes.P30F8322, "显示名称");
-        Lang.setWText(lbCharTips, LangRes.P30F8323, "提示信息");
-        Lang.setWText(lbCharSets, LangRes.P30F8324, "字符空间");
+        Lang.setWText(lbCharTplt, McfgRes.P30F8321, "基本字符");
+        Lang.setWText(lbCharName, McfgRes.P30F8322, "显示名称");
+        Lang.setWText(lbCharTips, McfgRes.P30F8323, "提示信息");
+        Lang.setWText(lbCharSets, McfgRes.P30F8324, "字符空间");
     }
 
     public void initSortLang()
     {
-        Lang.setWText(btApndData, LangRes.P30F8509, "@N");
-        Lang.setWTips(btApndData, LangRes.P30F850A, "新增(Alt + N)");
+        Lang.setWText(btApndData, McfgRes.P30F8509, "@N");
+        Lang.setWTips(btApndData, McfgRes.P30F850A, "新增(Alt + N)");
 
-        Lang.setWText(btSaveData, LangRes.P30F8507, "@S");
-        Lang.setWTips(btSaveData, LangRes.P30F8508, "保存(Alt + S)");
+        Lang.setWText(btSaveData, McfgRes.P30F8507, "@S");
+        Lang.setWTips(btSaveData, McfgRes.P30F8508, "保存(Alt + S)");
 
-        Lang.setWText(btDropData, LangRes.P30F850B, "@D");
-        Lang.setWTips(btDropData, LangRes.P30F850C, "删除(Alt + D)");
+        Lang.setWText(btDropData, McfgRes.P30F850B, "@D");
+        Lang.setWTips(btDropData, McfgRes.P30F850C, "删除(Alt + D)");
     }
 
     private void initBaseLang()
@@ -371,7 +372,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         String name = tfCharName.getText();
         if (!com.magicpwd._util.Char.isValidate(name))
         {
-            Lang.showMesg(this, LangRes.P30F8A02, "空间名称不能为空！");
+            Lang.showMesg(this, McfgRes.P30F8A02, "空间名称不能为空！");
             tfCharName.requestFocus();
             return;
         }
@@ -379,7 +380,7 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
         String sets = taCharSets.getText();
         if (!com.magicpwd._util.Char.isValidate(sets))
         {
-            Lang.showMesg(this, LangRes.P30F8A03, "空间内容不能为空！");
+            Lang.showMesg(this, McfgRes.P30F8A03, "空间内容不能为空！");
             taCharSets.requestFocus();
             return;
         }
@@ -411,11 +412,11 @@ public class CharProp extends javax.swing.JPanel implements IPropBean
     {
         if (charItem == null)
         {
-            Lang.showMesg(this, LangRes.P30F8A04, "请选择您要删除的类别数据！");
+            Lang.showMesg(this, McfgRes.P30F8A04, "请选择您要删除的类别数据！");
             lsCharList.requestFocus();
             return;
         }
-        if (Lang.showFirm(this, LangRes.P30F8A09, "确认要删除此数据吗，此操作将不可恢复？") != javax.swing.JOptionPane.YES_OPTION)
+        if (Lang.showFirm(this, McfgRes.P30F8A09, "确认要删除此数据吗，此操作将不可恢复？") != javax.swing.JOptionPane.YES_OPTION)
         {
             return;
         }

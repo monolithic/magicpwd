@@ -19,7 +19,7 @@ package com.magicpwd._util;
 import com.magicpwd._comp.BtnLabel;
 import com.magicpwd._comp.IcoLabel;
 import com.magicpwd._cons.ConsEnv;
-import com.magicpwd._cons.LangRes;
+import com.magicpwd._cons.lang.NoneRes;
 import com.magicpwd._enum.RunMode;
 import com.magicpwd.m.MpwdMdl;
 import java.awt.Component;
@@ -90,7 +90,7 @@ public class Lang
             }
         }
 
-        tips = lang.getProperty(LangRes.P30FA208);
+        tips = lang.getProperty(NoneRes.P30FA208);
         if (tips == null)
         {
             tips = "友情提示";
