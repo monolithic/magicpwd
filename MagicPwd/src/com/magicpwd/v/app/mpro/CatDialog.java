@@ -30,7 +30,6 @@ import com.magicpwd._util.Lang;
  */
 public class CatDialog extends ADialog
 {
-
     private MproPtn mproPtn;
     private IBackCall<String, Mcat> backCall;
     private Mcat kind;
@@ -129,7 +128,7 @@ public class CatDialog extends ADialog
 
     public void initLang()
     {
-        this.setTitle("类别管理");
+        this.setTitle(Lang.getLang(MproRes.P30F7202, "类别管理"));
 
         Lang.setWText(lb_KindKind, McfgRes.P30F8361, "默认键值");
         Lang.setWText(lb_KindName, McfgRes.P30F8362, "显示名称");
@@ -144,7 +143,6 @@ public class CatDialog extends ADialog
     {
         bt_Abort.addActionListener(new java.awt.event.ActionListener()
         {
-
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e)
             {
@@ -153,7 +151,6 @@ public class CatDialog extends ADialog
         });
         bt_Apply.addActionListener(new java.awt.event.ActionListener()
         {
-
             @Override
             public void actionPerformed(java.awt.event.ActionEvent e)
             {
